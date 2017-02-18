@@ -1,0 +1,44 @@
+{
+    "name": "nystudio107/seomatic",
+    "description": "REPLACE_ME",
+    "type": "craft-plugin",
+    "version": "2.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "plugin",
+        "seomatic"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+          "name": "nystudio107",
+          "homepage": "https://nystudio107.com/"
+        }
+    ],
+    "require": {
+        "composer/installers": "~1.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "nystudio107\\seomatic\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "SEOmatic",
+        "handle": "seomatic",
+        "version": "2.0.0",
+        "schemaVersion": "2.0.0",
+        "developer": "nystudio107",
+        "developerUrl": "https://nystudio107.com",
+        "description": "REPLACE_ME",
+        "documentationUrl": "https://github.com/nystudio107/minify/blob/craft3/README.md",
+        "releaseFeedUrl": "https://raw.githubusercontent.com/nystudio107/minify/craft3/releases.json",
+        "class": "nystudio107\\seomatic\\Seomatic",
+        "components": {
+            "meta": "nystudio107\\seomatic\\services\\Meta",
+            "sitemaps": "nystudio107\\seomatic\\services\\Sitemaps"
+        }
+    }
+}
