@@ -1,20 +1,24 @@
 {
-    "name": "nystudio107/seomatic",
-    "description": "REPLACE_ME",
+    "name": "nystudio107/craft3-seomatic",
+    "description": "A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible",
     "type": "craft-plugin",
-    "version": "2.0.0",
+    "version": "1.0.0",
     "keywords": [
         "craft",
         "cms",
         "craftcms",
-        "plugin",
+        "craft-plugin",
         "seomatic"
     ],
-    "license": "MIT",
+    "support": {
+        "docs": "https://github.com/nystudio107/craft3-seomatic/blob/master/README.md",
+        "issues": "https://github.com/nystudio107/craft3-seomatic/issues"
+    },
+    "license": "proprietary",
     "authors": [
         {
           "name": "nystudio107",
-          "homepage": "https://nystudio107.com/"
+          "homepage": "https://nystudio107.com"
         }
     ],
     "require": {
@@ -28,13 +32,10 @@
     "extra": {
         "name": "SEOmatic",
         "handle": "seomatic",
-        "version": "2.0.0",
-        "schemaVersion": "2.0.0",
-        "developer": "nystudio107",
-        "developerUrl": "https://nystudio107.com",
-        "description": "REPLACE_ME",
-        "documentationUrl": "https://github.com/nystudio107/minify/blob/craft3/README.md",
-        "releaseFeedUrl": "https://raw.githubusercontent.com/nystudio107/minify/craft3/releases.json",
+        "schemaVersion": "1.0.0",
+        "hasSettings": true,
+        "hasCpSection": true,
+        "changelogUrl": "https://raw.githubusercontent.com/nystudio107/craft3-seomatic/master/CHANGELOG.md",
         "class": "nystudio107\\seomatic\\Seomatic",
         "components": {
             "meta": "nystudio107\\seomatic\\services\\Meta",
