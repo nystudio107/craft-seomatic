@@ -8,75 +8,85 @@ use nystudio107\seomatic\models\jsonld\InformAction;
  * ConfirmAction - The act of notifying someone that a future event/action is
  * going to happen as expected. Related actions: CancelAction: The antonym of
  * ConfirmAction.
+ *
  * Extends: InformAction
  * @see    http://schema.org/ConfirmAction
  */
 class ConfirmAction extends InformAction
 {
-
-    // Static
+    // Static Properties
     // =========================================================================
 
     /**
      * The Schema.org Type Name
+     *
      * @var string
      */
-    static $schemaTypeName = 'ConfirmAction';
+    static public $schemaTypeName = 'ConfirmAction';
 
     /**
      * The Schema.org Type Scope
+     *
      * @var string
      */
-    static $schemaTypeScope = 'https://schema.org/ConfirmAction';
+    static public $schemaTypeScope = 'https://schema.org/ConfirmAction';
 
     /**
      * The Schema.org Type Description
+     *
      * @var string
      */
-    static $schemaTypeDescription = 'The act of notifying someone that a future event/action is going to happen as expected. Related actions: CancelAction: The antonym of ConfirmAction.';
+    static public $schemaTypeDescription = 'The act of notifying someone that a future event/action is going to happen as expected. Related actions: CancelAction: The antonym of ConfirmAction.';
 
     /**
      * The Schema.org Type Extends
+     *
      * @var string
      */
-    static $schemaTypeExtends = 'InformAction';
+    static public $schemaTypeExtends = 'InformAction';
 
     /**
      * The Schema.org Property Names
+     *
      * @var array
      */
-    static $schemaPropertyNames = [];
+    static public $schemaPropertyNames = [];
 
     /**
      * The Schema.org Property Expected Types
+     *
      * @var array
      */
-    static $schemaPropertyExpectedTypes = [];
+    static public $schemaPropertyExpectedTypes = [];
 
     /**
      * The Schema.org Property Descriptions
+     *
      * @var array
      */
-    static $schemaPropertyDescriptions = [];
+    static public $schemaPropertyDescriptions = [];
 
     /**
      * The Schema.org Google Required Schema for this type
+     *
      * @var array
      */
-    static $googleRequiredSchema = [];
+    static public $googleRequiredSchema = [];
 
     /**
      * The Schema.org Google Recommended Schema for this type
+     *
      * @var array
      */
-    static $googleRecommendedSchema = [];
+    static public $googleRecommendedSchema = [];
 
-    // Properties
+    // Public Properties
     // =========================================================================
 
     /**
      * Upcoming or past event associated with this place, organization, or action.
      * Supersedes events.
+     *
      * @var Event [schema.org types: Event]
      */
     public $event;
@@ -84,41 +94,41 @@ class ConfirmAction extends InformAction
     // Public Methods
     // =========================================================================
 
+    /**
+    * @inheritdoc
+    */
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames,
-            [
-                'event',
-            ]);
+        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
+            'event',
+        ]);
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes,
-            [
-                'event' => ['Event'],
-            ]);
+        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
+            'event' => ['Event'],
+        ]);
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions,
-            [
-                'event' => 'Upcoming or past event associated with this place, organization, or action. Supersedes events.',
-            ]);
+        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
+            'event' => 'Upcoming or past event associated with this place, organization, or action. Supersedes events.',
+        ]);
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema,
-            [
-            ]);
+        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
+        ]);
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema,
-            [
-            ]);
-    } /* -- init */
+        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
+        ]);
+    }
 
+    /**
+    * @inheritdoc
+    */
     public function rules()
     {
         $rules = parent::rules();
-        $rules = array_merge($rules,
-            [
-                [['event',], 'validateJsonSchema'],
-            ]);
-        return $rules;
-    } /* -- rules */
+        $rules = array_merge($rules, [
+            [['event',], 'validateJsonSchema'],
+        ]);
 
-} /* -- class ConfirmAction*/
+        return $rules;
+    }
+}

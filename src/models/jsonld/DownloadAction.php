@@ -6,75 +6,85 @@ use nystudio107\seomatic\models\jsonld\TransferAction;
 
 /**
  * DownloadAction - The act of downloading an object.
+ *
  * Extends: TransferAction
  * @see    http://schema.org/DownloadAction
  */
 class DownloadAction extends TransferAction
 {
-
-    // Static
+    // Static Properties
     // =========================================================================
 
     /**
      * The Schema.org Type Name
+     *
      * @var string
      */
-    static $schemaTypeName = 'DownloadAction';
+    static public $schemaTypeName = 'DownloadAction';
 
     /**
      * The Schema.org Type Scope
+     *
      * @var string
      */
-    static $schemaTypeScope = 'https://schema.org/DownloadAction';
+    static public $schemaTypeScope = 'https://schema.org/DownloadAction';
 
     /**
      * The Schema.org Type Description
+     *
      * @var string
      */
-    static $schemaTypeDescription = 'The act of downloading an object.';
+    static public $schemaTypeDescription = 'The act of downloading an object.';
 
     /**
      * The Schema.org Type Extends
+     *
      * @var string
      */
-    static $schemaTypeExtends = 'TransferAction';
+    static public $schemaTypeExtends = 'TransferAction';
 
     /**
      * The Schema.org Property Names
+     *
      * @var array
      */
-    static $schemaPropertyNames = [];
+    static public $schemaPropertyNames = [];
 
     /**
      * The Schema.org Property Expected Types
+     *
      * @var array
      */
-    static $schemaPropertyExpectedTypes = [];
+    static public $schemaPropertyExpectedTypes = [];
 
     /**
      * The Schema.org Property Descriptions
+     *
      * @var array
      */
-    static $schemaPropertyDescriptions = [];
+    static public $schemaPropertyDescriptions = [];
 
     /**
      * The Schema.org Google Required Schema for this type
+     *
      * @var array
      */
-    static $googleRequiredSchema = [];
+    static public $googleRequiredSchema = [];
 
     /**
      * The Schema.org Google Recommended Schema for this type
+     *
      * @var array
      */
-    static $googleRecommendedSchema = [];
+    static public $googleRecommendedSchema = [];
 
-    // Properties
+    // Public Properties
     // =========================================================================
 
     /**
      * A sub property of location. The original location of the object or the
      * agent before the action.
+     *
      * @var Place [schema.org types: Place]
      */
     public $fromLocation;
@@ -82,6 +92,7 @@ class DownloadAction extends TransferAction
     /**
      * A sub property of location. The final location of the object or the agent
      * after the action.
+     *
      * @var Place [schema.org types: Place]
      */
     public $toLocation;
@@ -89,44 +100,44 @@ class DownloadAction extends TransferAction
     // Public Methods
     // =========================================================================
 
+    /**
+    * @inheritdoc
+    */
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames,
-            [
-                'fromLocation',
-                'toLocation',
-            ]);
+        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
+            'fromLocation',
+            'toLocation',
+        ]);
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes,
-            [
-                'fromLocation' => ['Place'],
-                'toLocation' => ['Place'],
-            ]);
+        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
+            'fromLocation' => ['Place'],
+            'toLocation' => ['Place'],
+        ]);
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions,
-            [
-                'fromLocation' => 'A sub property of location. The original location of the object or the agent before the action.',
-                'toLocation' => 'A sub property of location. The final location of the object or the agent after the action.',
-            ]);
+        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
+            'fromLocation' => 'A sub property of location. The original location of the object or the agent before the action.',
+            'toLocation' => 'A sub property of location. The final location of the object or the agent after the action.',
+        ]);
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema,
-            [
-            ]);
+        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
+        ]);
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema,
-            [
-            ]);
-    } /* -- init */
+        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
+        ]);
+    }
 
+    /**
+    * @inheritdoc
+    */
     public function rules()
     {
         $rules = parent::rules();
-        $rules = array_merge($rules,
-            [
-                [['fromLocation','toLocation',], 'validateJsonSchema'],
-            ]);
-        return $rules;
-    } /* -- rules */
+        $rules = array_merge($rules, [
+            [['fromLocation','toLocation',], 'validateJsonSchema'],
+        ]);
 
-} /* -- class DownloadAction*/
+        return $rules;
+    }
+}

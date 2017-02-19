@@ -6,74 +6,84 @@ use nystudio107\seomatic\models\jsonld\EducationalOrganization;
 
 /**
  * Preschool - A preschool.
+ *
  * Extends: EducationalOrganization
  * @see    http://schema.org/Preschool
  */
 class Preschool extends EducationalOrganization
 {
-
-    // Static
+    // Static Properties
     // =========================================================================
 
     /**
      * The Schema.org Type Name
+     *
      * @var string
      */
-    static $schemaTypeName = 'Preschool';
+    static public $schemaTypeName = 'Preschool';
 
     /**
      * The Schema.org Type Scope
+     *
      * @var string
      */
-    static $schemaTypeScope = 'https://schema.org/Preschool';
+    static public $schemaTypeScope = 'https://schema.org/Preschool';
 
     /**
      * The Schema.org Type Description
+     *
      * @var string
      */
-    static $schemaTypeDescription = 'A preschool.';
+    static public $schemaTypeDescription = 'A preschool.';
 
     /**
      * The Schema.org Type Extends
+     *
      * @var string
      */
-    static $schemaTypeExtends = 'EducationalOrganization';
+    static public $schemaTypeExtends = 'EducationalOrganization';
 
     /**
      * The Schema.org Property Names
+     *
      * @var array
      */
-    static $schemaPropertyNames = [];
+    static public $schemaPropertyNames = [];
 
     /**
      * The Schema.org Property Expected Types
+     *
      * @var array
      */
-    static $schemaPropertyExpectedTypes = [];
+    static public $schemaPropertyExpectedTypes = [];
 
     /**
      * The Schema.org Property Descriptions
+     *
      * @var array
      */
-    static $schemaPropertyDescriptions = [];
+    static public $schemaPropertyDescriptions = [];
 
     /**
      * The Schema.org Google Required Schema for this type
+     *
      * @var array
      */
-    static $googleRequiredSchema = [];
+    static public $googleRequiredSchema = [];
 
     /**
      * The Schema.org Google Recommended Schema for this type
+     *
      * @var array
      */
-    static $googleRecommendedSchema = [];
+    static public $googleRecommendedSchema = [];
 
-    // Properties
+    // Public Properties
     // =========================================================================
 
     /**
      * Alumni of an organization. Inverse property: alumniOf.
+     *
      * @var Person [schema.org types: Person]
      */
     public $alumni;
@@ -81,41 +91,41 @@ class Preschool extends EducationalOrganization
     // Public Methods
     // =========================================================================
 
+    /**
+    * @inheritdoc
+    */
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames,
-            [
-                'alumni',
-            ]);
+        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
+            'alumni',
+        ]);
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes,
-            [
-                'alumni' => ['Person'],
-            ]);
+        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
+            'alumni' => ['Person'],
+        ]);
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions,
-            [
-                'alumni' => 'Alumni of an organization. Inverse property: alumniOf.',
-            ]);
+        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
+            'alumni' => 'Alumni of an organization. Inverse property: alumniOf.',
+        ]);
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema,
-            [
-            ]);
+        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
+        ]);
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema,
-            [
-            ]);
-    } /* -- init */
+        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
+        ]);
+    }
 
+    /**
+    * @inheritdoc
+    */
     public function rules()
     {
         $rules = parent::rules();
-        $rules = array_merge($rules,
-            [
-                [['alumni',], 'validateJsonSchema'],
-            ]);
-        return $rules;
-    } /* -- rules */
+        $rules = array_merge($rules, [
+            [['alumni',], 'validateJsonSchema'],
+        ]);
 
-} /* -- class Preschool*/
+        return $rules;
+    }
+}

@@ -6,75 +6,85 @@ use nystudio107\seomatic\models\jsonld\MediaObject;
 
 /**
  * AudioObject - An audio file.
+ *
  * Extends: MediaObject
  * @see    http://schema.org/AudioObject
  */
 class AudioObject extends MediaObject
 {
-
-    // Static
+    // Static Properties
     // =========================================================================
 
     /**
      * The Schema.org Type Name
+     *
      * @var string
      */
-    static $schemaTypeName = 'AudioObject';
+    static public $schemaTypeName = 'AudioObject';
 
     /**
      * The Schema.org Type Scope
+     *
      * @var string
      */
-    static $schemaTypeScope = 'https://schema.org/AudioObject';
+    static public $schemaTypeScope = 'https://schema.org/AudioObject';
 
     /**
      * The Schema.org Type Description
+     *
      * @var string
      */
-    static $schemaTypeDescription = 'An audio file.';
+    static public $schemaTypeDescription = 'An audio file.';
 
     /**
      * The Schema.org Type Extends
+     *
      * @var string
      */
-    static $schemaTypeExtends = 'MediaObject';
+    static public $schemaTypeExtends = 'MediaObject';
 
     /**
      * The Schema.org Property Names
+     *
      * @var array
      */
-    static $schemaPropertyNames = [];
+    static public $schemaPropertyNames = [];
 
     /**
      * The Schema.org Property Expected Types
+     *
      * @var array
      */
-    static $schemaPropertyExpectedTypes = [];
+    static public $schemaPropertyExpectedTypes = [];
 
     /**
      * The Schema.org Property Descriptions
+     *
      * @var array
      */
-    static $schemaPropertyDescriptions = [];
+    static public $schemaPropertyDescriptions = [];
 
     /**
      * The Schema.org Google Required Schema for this type
+     *
      * @var array
      */
-    static $googleRequiredSchema = [];
+    static public $googleRequiredSchema = [];
 
     /**
      * The Schema.org Google Recommended Schema for this type
+     *
      * @var array
      */
-    static $googleRecommendedSchema = [];
+    static public $googleRecommendedSchema = [];
 
-    // Properties
+    // Public Properties
     // =========================================================================
 
     /**
      * If this MediaObject is an AudioObject or VideoObject, the transcript of
      * that object.
+     *
      * @var string [schema.org types: Text]
      */
     public $transcript;
@@ -82,41 +92,41 @@ class AudioObject extends MediaObject
     // Public Methods
     // =========================================================================
 
+    /**
+    * @inheritdoc
+    */
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames,
-            [
-                'transcript',
-            ]);
+        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
+            'transcript',
+        ]);
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes,
-            [
-                'transcript' => ['Text'],
-            ]);
+        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
+            'transcript' => ['Text'],
+        ]);
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions,
-            [
-                'transcript' => 'If this MediaObject is an AudioObject or VideoObject, the transcript of that object.',
-            ]);
+        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
+            'transcript' => 'If this MediaObject is an AudioObject or VideoObject, the transcript of that object.',
+        ]);
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema,
-            [
-            ]);
+        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
+        ]);
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema,
-            [
-            ]);
-    } /* -- init */
+        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
+        ]);
+    }
 
+    /**
+    * @inheritdoc
+    */
     public function rules()
     {
         $rules = parent::rules();
-        $rules = array_merge($rules,
-            [
-                [['transcript',], 'validateJsonSchema'],
-            ]);
-        return $rules;
-    } /* -- rules */
+        $rules = array_merge($rules, [
+            [['transcript',], 'validateJsonSchema'],
+        ]);
 
-} /* -- class AudioObject*/
+        return $rules;
+    }
+}

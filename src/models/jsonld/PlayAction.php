@@ -12,75 +12,85 @@ use nystudio107\seomatic\models\jsonld\Action;
  * consuming music. WatchAction: Unlike WatchAction (which is under
  * ConsumeAction), PlayAction refers to showing/displaying for an audience or
  * at an event, rather than consuming visual content.
+ *
  * Extends: Action
  * @see    http://schema.org/PlayAction
  */
 class PlayAction extends Action
 {
-
-    // Static
+    // Static Properties
     // =========================================================================
 
     /**
      * The Schema.org Type Name
+     *
      * @var string
      */
-    static $schemaTypeName = 'PlayAction';
+    static public $schemaTypeName = 'PlayAction';
 
     /**
      * The Schema.org Type Scope
+     *
      * @var string
      */
-    static $schemaTypeScope = 'https://schema.org/PlayAction';
+    static public $schemaTypeScope = 'https://schema.org/PlayAction';
 
     /**
      * The Schema.org Type Description
+     *
      * @var string
      */
-    static $schemaTypeDescription = 'The act of playing/exercising/training/performing for enjoyment, leisure, recreation, Competition or exercise. Related actions: ListenAction: Unlike ListenAction (which is under ConsumeAction), PlayAction refers to performing for an audience or at an event, rather than consuming music. WatchAction: Unlike WatchAction (which is under ConsumeAction), PlayAction refers to showing/displaying for an audience or at an event, rather than consuming visual content.';
+    static public $schemaTypeDescription = 'The act of playing/exercising/training/performing for enjoyment, leisure, recreation, Competition or exercise. Related actions: ListenAction: Unlike ListenAction (which is under ConsumeAction), PlayAction refers to performing for an audience or at an event, rather than consuming music. WatchAction: Unlike WatchAction (which is under ConsumeAction), PlayAction refers to showing/displaying for an audience or at an event, rather than consuming visual content.';
 
     /**
      * The Schema.org Type Extends
+     *
      * @var string
      */
-    static $schemaTypeExtends = 'Action';
+    static public $schemaTypeExtends = 'Action';
 
     /**
      * The Schema.org Property Names
+     *
      * @var array
      */
-    static $schemaPropertyNames = [];
+    static public $schemaPropertyNames = [];
 
     /**
      * The Schema.org Property Expected Types
+     *
      * @var array
      */
-    static $schemaPropertyExpectedTypes = [];
+    static public $schemaPropertyExpectedTypes = [];
 
     /**
      * The Schema.org Property Descriptions
+     *
      * @var array
      */
-    static $schemaPropertyDescriptions = [];
+    static public $schemaPropertyDescriptions = [];
 
     /**
      * The Schema.org Google Required Schema for this type
+     *
      * @var array
      */
-    static $googleRequiredSchema = [];
+    static public $googleRequiredSchema = [];
 
     /**
      * The Schema.org Google Recommended Schema for this type
+     *
      * @var array
      */
-    static $googleRecommendedSchema = [];
+    static public $googleRecommendedSchema = [];
 
-    // Properties
+    // Public Properties
     // =========================================================================
 
     /**
      * An intended audience, i.e. a group for whom something was created.
      * Supersedes serviceAudience.
+     *
      * @var Audience [schema.org types: Audience]
      */
     public $audience;
@@ -88,6 +98,7 @@ class PlayAction extends Action
     /**
      * Upcoming or past event associated with this place, organization, or action.
      * Supersedes events.
+     *
      * @var Event [schema.org types: Event]
      */
     public $event;
@@ -95,44 +106,44 @@ class PlayAction extends Action
     // Public Methods
     // =========================================================================
 
+    /**
+    * @inheritdoc
+    */
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames,
-            [
-                'audience',
-                'event',
-            ]);
+        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
+            'audience',
+            'event',
+        ]);
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes,
-            [
-                'audience' => ['Audience'],
-                'event' => ['Event'],
-            ]);
+        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
+            'audience' => ['Audience'],
+            'event' => ['Event'],
+        ]);
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions,
-            [
-                'audience' => 'An intended audience, i.e. a group for whom something was created. Supersedes serviceAudience.',
-                'event' => 'Upcoming or past event associated with this place, organization, or action. Supersedes events.',
-            ]);
+        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
+            'audience' => 'An intended audience, i.e. a group for whom something was created. Supersedes serviceAudience.',
+            'event' => 'Upcoming or past event associated with this place, organization, or action. Supersedes events.',
+        ]);
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema,
-            [
-            ]);
+        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
+        ]);
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema,
-            [
-            ]);
-    } /* -- init */
+        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
+        ]);
+    }
 
+    /**
+    * @inheritdoc
+    */
     public function rules()
     {
         $rules = parent::rules();
-        $rules = array_merge($rules,
-            [
-                [['audience','event',], 'validateJsonSchema'],
-            ]);
-        return $rules;
-    } /* -- rules */
+        $rules = array_merge($rules, [
+            [['audience','event',], 'validateJsonSchema'],
+        ]);
 
-} /* -- class PlayAction*/
+        return $rules;
+    }
+}

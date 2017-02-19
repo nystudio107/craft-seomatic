@@ -20,7 +20,7 @@ use craft\base\Model;
  * @since     2.0.0
  */
 
-class JsonLd extends Model
+class SiteMaps extends Model
 {
     // Static Properties
     // =========================================================================

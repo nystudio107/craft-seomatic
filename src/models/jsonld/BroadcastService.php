@@ -7,74 +7,84 @@ use nystudio107\seomatic\models\jsonld\Service;
 /**
  * BroadcastService - A delivery service through which content is provided via
  * broadcast over the air or online.
+ *
  * Extends: Service
  * @see    http://schema.org/BroadcastService
  */
 class BroadcastService extends Service
 {
-
-    // Static
+    // Static Properties
     // =========================================================================
 
     /**
      * The Schema.org Type Name
+     *
      * @var string
      */
-    static $schemaTypeName = 'BroadcastService';
+    static public $schemaTypeName = 'BroadcastService';
 
     /**
      * The Schema.org Type Scope
+     *
      * @var string
      */
-    static $schemaTypeScope = 'https://schema.org/BroadcastService';
+    static public $schemaTypeScope = 'https://schema.org/BroadcastService';
 
     /**
      * The Schema.org Type Description
+     *
      * @var string
      */
-    static $schemaTypeDescription = 'A delivery service through which content is provided via broadcast over the air or online.';
+    static public $schemaTypeDescription = 'A delivery service through which content is provided via broadcast over the air or online.';
 
     /**
      * The Schema.org Type Extends
+     *
      * @var string
      */
-    static $schemaTypeExtends = 'Service';
+    static public $schemaTypeExtends = 'Service';
 
     /**
      * The Schema.org Property Names
+     *
      * @var array
      */
-    static $schemaPropertyNames = [];
+    static public $schemaPropertyNames = [];
 
     /**
      * The Schema.org Property Expected Types
+     *
      * @var array
      */
-    static $schemaPropertyExpectedTypes = [];
+    static public $schemaPropertyExpectedTypes = [];
 
     /**
      * The Schema.org Property Descriptions
+     *
      * @var array
      */
-    static $schemaPropertyDescriptions = [];
+    static public $schemaPropertyDescriptions = [];
 
     /**
      * The Schema.org Google Required Schema for this type
+     *
      * @var array
      */
-    static $googleRequiredSchema = [];
+    static public $googleRequiredSchema = [];
 
     /**
      * The Schema.org Google Recommended Schema for this type
+     *
      * @var array
      */
-    static $googleRecommendedSchema = [];
+    static public $googleRecommendedSchema = [];
 
-    // Properties
+    // Public Properties
     // =========================================================================
 
     /**
      * The media network(s) whose content is broadcast on this station.
+     *
      * @var Organization [schema.org types: Organization]
      */
     public $broadcastAffiliateOf;
@@ -82,18 +92,21 @@ class BroadcastService extends Service
     /**
      * The name displayed in the channel guide. For many US affiliates, it is the
      * network name.
+     *
      * @var string [schema.org types: Text]
      */
     public $broadcastDisplayName;
 
     /**
      * The timezone in ISO 8601 format for which the service bases its broadcasts
+     *
      * @var string [schema.org types: Text]
      */
     public $broadcastTimezone;
 
     /**
      * The organization owning or operating the broadcast service.
+     *
      * @var Organization [schema.org types: Organization]
      */
     public $broadcaster;
@@ -101,6 +114,7 @@ class BroadcastService extends Service
     /**
      * A broadcast service to which the broadcast service may belong to such as
      * regional variations of a national channel.
+     *
      * @var BroadcastService [schema.org types: BroadcastService]
      */
     public $parentService;
@@ -108,6 +122,7 @@ class BroadcastService extends Service
     /**
      * The type of screening or video broadcast used (e.g. IMAX, 3D, SD, HD,
      * etc.).
+     *
      * @var string [schema.org types: Text]
      */
     public $videoFormat;
@@ -115,56 +130,56 @@ class BroadcastService extends Service
     // Public Methods
     // =========================================================================
 
+    /**
+    * @inheritdoc
+    */
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames,
-            [
-                'broadcastAffiliateOf',
-                'broadcastDisplayName',
-                'broadcastTimezone',
-                'broadcaster',
-                'parentService',
-                'videoFormat',
-            ]);
+        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
+            'broadcastAffiliateOf',
+            'broadcastDisplayName',
+            'broadcastTimezone',
+            'broadcaster',
+            'parentService',
+            'videoFormat',
+        ]);
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes,
-            [
-                'broadcastAffiliateOf' => ['Organization'],
-                'broadcastDisplayName' => ['Text'],
-                'broadcastTimezone' => ['Text'],
-                'broadcaster' => ['Organization'],
-                'parentService' => ['BroadcastService'],
-                'videoFormat' => ['Text'],
-            ]);
+        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
+            'broadcastAffiliateOf' => ['Organization'],
+            'broadcastDisplayName' => ['Text'],
+            'broadcastTimezone' => ['Text'],
+            'broadcaster' => ['Organization'],
+            'parentService' => ['BroadcastService'],
+            'videoFormat' => ['Text'],
+        ]);
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions,
-            [
-                'broadcastAffiliateOf' => 'The media network(s) whose content is broadcast on this station.',
-                'broadcastDisplayName' => 'The name displayed in the channel guide. For many US affiliates, it is the network name.',
-                'broadcastTimezone' => 'The timezone in ISO 8601 format for which the service bases its broadcasts',
-                'broadcaster' => 'The organization owning or operating the broadcast service.',
-                'parentService' => 'A broadcast service to which the broadcast service may belong to such as regional variations of a national channel.',
-                'videoFormat' => 'The type of screening or video broadcast used (e.g. IMAX, 3D, SD, HD, etc.).',
-            ]);
+        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
+            'broadcastAffiliateOf' => 'The media network(s) whose content is broadcast on this station.',
+            'broadcastDisplayName' => 'The name displayed in the channel guide. For many US affiliates, it is the network name.',
+            'broadcastTimezone' => 'The timezone in ISO 8601 format for which the service bases its broadcasts',
+            'broadcaster' => 'The organization owning or operating the broadcast service.',
+            'parentService' => 'A broadcast service to which the broadcast service may belong to such as regional variations of a national channel.',
+            'videoFormat' => 'The type of screening or video broadcast used (e.g. IMAX, 3D, SD, HD, etc.).',
+        ]);
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema,
-            [
-            ]);
+        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
+        ]);
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema,
-            [
-            ]);
-    } /* -- init */
+        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
+        ]);
+    }
 
+    /**
+    * @inheritdoc
+    */
     public function rules()
     {
         $rules = parent::rules();
-        $rules = array_merge($rules,
-            [
-                [['broadcastAffiliateOf','broadcastDisplayName','broadcastTimezone','broadcaster','parentService','videoFormat',], 'validateJsonSchema'],
-            ]);
-        return $rules;
-    } /* -- rules */
+        $rules = array_merge($rules, [
+            [['broadcastAffiliateOf','broadcastDisplayName','broadcastTimezone','broadcaster','parentService','videoFormat',], 'validateJsonSchema'],
+        ]);
 
-} /* -- class BroadcastService*/
+        return $rules;
+    }
+}

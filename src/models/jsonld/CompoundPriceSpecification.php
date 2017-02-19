@@ -10,75 +10,85 @@ use nystudio107\seomatic\models\jsonld\PriceSpecification;
  * dimensions of consumption. Use the name property of the attached unit price
  * specification for indicating the dimension of a price component (e.g.
  * "electricity" or "final cleaning").
+ *
  * Extends: PriceSpecification
  * @see    http://schema.org/CompoundPriceSpecification
  */
 class CompoundPriceSpecification extends PriceSpecification
 {
-
-    // Static
+    // Static Properties
     // =========================================================================
 
     /**
      * The Schema.org Type Name
+     *
      * @var string
      */
-    static $schemaTypeName = 'CompoundPriceSpecification';
+    static public $schemaTypeName = 'CompoundPriceSpecification';
 
     /**
      * The Schema.org Type Scope
+     *
      * @var string
      */
-    static $schemaTypeScope = 'https://schema.org/CompoundPriceSpecification';
+    static public $schemaTypeScope = 'https://schema.org/CompoundPriceSpecification';
 
     /**
      * The Schema.org Type Description
+     *
      * @var string
      */
-    static $schemaTypeDescription = 'A compound price specification is one that bundles multiple prices that all apply in combination for different dimensions of consumption. Use the name property of the attached unit price specification for indicating the dimension of a price component (e.g. "electricity" or "final cleaning").';
+    static public $schemaTypeDescription = 'A compound price specification is one that bundles multiple prices that all apply in combination for different dimensions of consumption. Use the name property of the attached unit price specification for indicating the dimension of a price component (e.g. "electricity" or "final cleaning").';
 
     /**
      * The Schema.org Type Extends
+     *
      * @var string
      */
-    static $schemaTypeExtends = 'PriceSpecification';
+    static public $schemaTypeExtends = 'PriceSpecification';
 
     /**
      * The Schema.org Property Names
+     *
      * @var array
      */
-    static $schemaPropertyNames = [];
+    static public $schemaPropertyNames = [];
 
     /**
      * The Schema.org Property Expected Types
+     *
      * @var array
      */
-    static $schemaPropertyExpectedTypes = [];
+    static public $schemaPropertyExpectedTypes = [];
 
     /**
      * The Schema.org Property Descriptions
+     *
      * @var array
      */
-    static $schemaPropertyDescriptions = [];
+    static public $schemaPropertyDescriptions = [];
 
     /**
      * The Schema.org Google Required Schema for this type
+     *
      * @var array
      */
-    static $googleRequiredSchema = [];
+    static public $googleRequiredSchema = [];
 
     /**
      * The Schema.org Google Recommended Schema for this type
+     *
      * @var array
      */
-    static $googleRecommendedSchema = [];
+    static public $googleRecommendedSchema = [];
 
-    // Properties
+    // Public Properties
     // =========================================================================
 
     /**
      * This property links to all UnitPriceSpecification nodes that apply in
      * parallel for the CompoundPriceSpecification node.
+     *
      * @var UnitPriceSpecification [schema.org types: UnitPriceSpecification]
      */
     public $priceComponent;
@@ -86,41 +96,41 @@ class CompoundPriceSpecification extends PriceSpecification
     // Public Methods
     // =========================================================================
 
+    /**
+    * @inheritdoc
+    */
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames,
-            [
-                'priceComponent',
-            ]);
+        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
+            'priceComponent',
+        ]);
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes,
-            [
-                'priceComponent' => ['UnitPriceSpecification'],
-            ]);
+        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
+            'priceComponent' => ['UnitPriceSpecification'],
+        ]);
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions,
-            [
-                'priceComponent' => 'This property links to all UnitPriceSpecification nodes that apply in parallel for the CompoundPriceSpecification node.',
-            ]);
+        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
+            'priceComponent' => 'This property links to all UnitPriceSpecification nodes that apply in parallel for the CompoundPriceSpecification node.',
+        ]);
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema,
-            [
-            ]);
+        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
+        ]);
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema,
-            [
-            ]);
-    } /* -- init */
+        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
+        ]);
+    }
 
+    /**
+    * @inheritdoc
+    */
     public function rules()
     {
         $rules = parent::rules();
-        $rules = array_merge($rules,
-            [
-                [['priceComponent',], 'validateJsonSchema'],
-            ]);
-        return $rules;
-    } /* -- rules */
+        $rules = array_merge($rules, [
+            [['priceComponent',], 'validateJsonSchema'],
+        ]);
 
-} /* -- class CompoundPriceSpecification*/
+        return $rules;
+    }
+}

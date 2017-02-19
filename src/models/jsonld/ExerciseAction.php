@@ -7,74 +7,84 @@ use nystudio107\seomatic\models\jsonld\PlayAction;
 /**
  * ExerciseAction - The act of participating in exertive activity for the
  * purposes of improving health and fitness.
+ *
  * Extends: PlayAction
  * @see    http://schema.org/ExerciseAction
  */
 class ExerciseAction extends PlayAction
 {
-
-    // Static
+    // Static Properties
     // =========================================================================
 
     /**
      * The Schema.org Type Name
+     *
      * @var string
      */
-    static $schemaTypeName = 'ExerciseAction';
+    static public $schemaTypeName = 'ExerciseAction';
 
     /**
      * The Schema.org Type Scope
+     *
      * @var string
      */
-    static $schemaTypeScope = 'https://schema.org/ExerciseAction';
+    static public $schemaTypeScope = 'https://schema.org/ExerciseAction';
 
     /**
      * The Schema.org Type Description
+     *
      * @var string
      */
-    static $schemaTypeDescription = 'The act of participating in exertive activity for the purposes of improving health and fitness.';
+    static public $schemaTypeDescription = 'The act of participating in exertive activity for the purposes of improving health and fitness.';
 
     /**
      * The Schema.org Type Extends
+     *
      * @var string
      */
-    static $schemaTypeExtends = 'PlayAction';
+    static public $schemaTypeExtends = 'PlayAction';
 
     /**
      * The Schema.org Property Names
+     *
      * @var array
      */
-    static $schemaPropertyNames = [];
+    static public $schemaPropertyNames = [];
 
     /**
      * The Schema.org Property Expected Types
+     *
      * @var array
      */
-    static $schemaPropertyExpectedTypes = [];
+    static public $schemaPropertyExpectedTypes = [];
 
     /**
      * The Schema.org Property Descriptions
+     *
      * @var array
      */
-    static $schemaPropertyDescriptions = [];
+    static public $schemaPropertyDescriptions = [];
 
     /**
      * The Schema.org Google Required Schema for this type
+     *
      * @var array
      */
-    static $googleRequiredSchema = [];
+    static public $googleRequiredSchema = [];
 
     /**
      * The Schema.org Google Recommended Schema for this type
+     *
      * @var array
      */
-    static $googleRecommendedSchema = [];
+    static public $googleRecommendedSchema = [];
 
-    // Properties
+    // Public Properties
     // =========================================================================
 
     /**
      * The distance travelled, e.g. exercising or travelling.
+     *
      * @var Distance [schema.org types: Distance]
      */
     public $distance;
@@ -82,6 +92,7 @@ class ExerciseAction extends PlayAction
     /**
      * A sub property of location. The course where this action was taken.
      * Supersedes course.
+     *
      * @var Place [schema.org types: Place]
      */
     public $exerciseCourse;
@@ -89,12 +100,14 @@ class ExerciseAction extends PlayAction
     /**
      * A sub property of location. The original location of the object or the
      * agent before the action.
+     *
      * @var Place [schema.org types: Place]
      */
     public $fromLocation;
 
     /**
      * A sub property of participant. The opponent on this action.
+     *
      * @var Person [schema.org types: Person]
      */
     public $opponent;
@@ -102,12 +115,14 @@ class ExerciseAction extends PlayAction
     /**
      * A sub property of location. The sports activity location where this action
      * occurred.
+     *
      * @var SportsActivityLocation [schema.org types: SportsActivityLocation]
      */
     public $sportsActivityLocation;
 
     /**
      * A sub property of location. The sports event where this action occurred.
+     *
      * @var SportsEvent [schema.org types: SportsEvent]
      */
     public $sportsEvent;
@@ -115,6 +130,7 @@ class ExerciseAction extends PlayAction
     /**
      * A sub property of participant. The sports team that participated on this
      * action.
+     *
      * @var SportsTeam [schema.org types: SportsTeam]
      */
     public $sportsTeam;
@@ -122,6 +138,7 @@ class ExerciseAction extends PlayAction
     /**
      * A sub property of location. The final location of the object or the agent
      * after the action.
+     *
      * @var Place [schema.org types: Place]
      */
     public $toLocation;
@@ -129,62 +146,62 @@ class ExerciseAction extends PlayAction
     // Public Methods
     // =========================================================================
 
+    /**
+    * @inheritdoc
+    */
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames,
-            [
-                'distance',
-                'exerciseCourse',
-                'fromLocation',
-                'opponent',
-                'sportsActivityLocation',
-                'sportsEvent',
-                'sportsTeam',
-                'toLocation',
-            ]);
+        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
+            'distance',
+            'exerciseCourse',
+            'fromLocation',
+            'opponent',
+            'sportsActivityLocation',
+            'sportsEvent',
+            'sportsTeam',
+            'toLocation',
+        ]);
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes,
-            [
-                'distance' => ['Distance'],
-                'exerciseCourse' => ['Place'],
-                'fromLocation' => ['Place'],
-                'opponent' => ['Person'],
-                'sportsActivityLocation' => ['SportsActivityLocation'],
-                'sportsEvent' => ['SportsEvent'],
-                'sportsTeam' => ['SportsTeam'],
-                'toLocation' => ['Place'],
-            ]);
+        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
+            'distance' => ['Distance'],
+            'exerciseCourse' => ['Place'],
+            'fromLocation' => ['Place'],
+            'opponent' => ['Person'],
+            'sportsActivityLocation' => ['SportsActivityLocation'],
+            'sportsEvent' => ['SportsEvent'],
+            'sportsTeam' => ['SportsTeam'],
+            'toLocation' => ['Place'],
+        ]);
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions,
-            [
-                'distance' => 'The distance travelled, e.g. exercising or travelling.',
-                'exerciseCourse' => 'A sub property of location. The course where this action was taken. Supersedes course.',
-                'fromLocation' => 'A sub property of location. The original location of the object or the agent before the action.',
-                'opponent' => 'A sub property of participant. The opponent on this action.',
-                'sportsActivityLocation' => 'A sub property of location. The sports activity location where this action occurred.',
-                'sportsEvent' => 'A sub property of location. The sports event where this action occurred.',
-                'sportsTeam' => 'A sub property of participant. The sports team that participated on this action.',
-                'toLocation' => 'A sub property of location. The final location of the object or the agent after the action.',
-            ]);
+        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
+            'distance' => 'The distance travelled, e.g. exercising or travelling.',
+            'exerciseCourse' => 'A sub property of location. The course where this action was taken. Supersedes course.',
+            'fromLocation' => 'A sub property of location. The original location of the object or the agent before the action.',
+            'opponent' => 'A sub property of participant. The opponent on this action.',
+            'sportsActivityLocation' => 'A sub property of location. The sports activity location where this action occurred.',
+            'sportsEvent' => 'A sub property of location. The sports event where this action occurred.',
+            'sportsTeam' => 'A sub property of participant. The sports team that participated on this action.',
+            'toLocation' => 'A sub property of location. The final location of the object or the agent after the action.',
+        ]);
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema,
-            [
-            ]);
+        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
+        ]);
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema,
-            [
-            ]);
-    } /* -- init */
+        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
+        ]);
+    }
 
+    /**
+    * @inheritdoc
+    */
     public function rules()
     {
         $rules = parent::rules();
-        $rules = array_merge($rules,
-            [
-                [['distance','exerciseCourse','fromLocation','opponent','sportsActivityLocation','sportsEvent','sportsTeam','toLocation',], 'validateJsonSchema'],
-            ]);
-        return $rules;
-    } /* -- rules */
+        $rules = array_merge($rules, [
+            [['distance','exerciseCourse','fromLocation','opponent','sportsActivityLocation','sportsEvent','sportsTeam','toLocation',], 'validateJsonSchema'],
+        ]);
 
-} /* -- class ExerciseAction*/
+        return $rules;
+    }
+}

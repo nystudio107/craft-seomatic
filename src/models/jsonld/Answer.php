@@ -7,81 +7,92 @@ use nystudio107\seomatic\models\jsonld\Comment;
 /**
  * Answer - An answer offered to a question; perhaps correct, perhaps
  * opinionated or wrong.
+ *
  * Extends: Comment
  * @see    http://schema.org/Answer
  */
 class Answer extends Comment
 {
-
-    // Static
+    // Static Properties
     // =========================================================================
 
     /**
      * The Schema.org Type Name
+     *
      * @var string
      */
-    static $schemaTypeName = 'Answer';
+    static public $schemaTypeName = 'Answer';
 
     /**
      * The Schema.org Type Scope
+     *
      * @var string
      */
-    static $schemaTypeScope = 'https://schema.org/Answer';
+    static public $schemaTypeScope = 'https://schema.org/Answer';
 
     /**
      * The Schema.org Type Description
+     *
      * @var string
      */
-    static $schemaTypeDescription = 'An answer offered to a question; perhaps correct, perhaps opinionated or wrong.';
+    static public $schemaTypeDescription = 'An answer offered to a question; perhaps correct, perhaps opinionated or wrong.';
 
     /**
      * The Schema.org Type Extends
+     *
      * @var string
      */
-    static $schemaTypeExtends = 'Comment';
+    static public $schemaTypeExtends = 'Comment';
 
     /**
      * The Schema.org Property Names
+     *
      * @var array
      */
-    static $schemaPropertyNames = [];
+    static public $schemaPropertyNames = [];
 
     /**
      * The Schema.org Property Expected Types
+     *
      * @var array
      */
-    static $schemaPropertyExpectedTypes = [];
+    static public $schemaPropertyExpectedTypes = [];
 
     /**
      * The Schema.org Property Descriptions
+     *
      * @var array
      */
-    static $schemaPropertyDescriptions = [];
+    static public $schemaPropertyDescriptions = [];
 
     /**
      * The Schema.org Google Required Schema for this type
+     *
      * @var array
      */
-    static $googleRequiredSchema = [];
+    static public $googleRequiredSchema = [];
 
     /**
      * The Schema.org Google Recommended Schema for this type
+     *
      * @var array
      */
-    static $googleRecommendedSchema = [];
+    static public $googleRecommendedSchema = [];
 
-    // Properties
+    // Public Properties
     // =========================================================================
 
     /**
      * The number of downvotes this question, answer or comment has received from
      * the community.
+     *
      * @var int [schema.org types: Integer]
      */
     public $downvoteCount;
 
     /**
      * The parent of a question, answer or item in general.
+     *
      * @var Question [schema.org types: Question]
      */
     public $parentItem;
@@ -89,6 +100,7 @@ class Answer extends Comment
     /**
      * The number of upvotes this question, answer or comment has received from
      * the community.
+     *
      * @var int [schema.org types: Integer]
      */
     public $upvoteCount;
@@ -96,47 +108,47 @@ class Answer extends Comment
     // Public Methods
     // =========================================================================
 
+    /**
+    * @inheritdoc
+    */
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames,
-            [
-                'downvoteCount',
-                'parentItem',
-                'upvoteCount',
-            ]);
+        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
+            'downvoteCount',
+            'parentItem',
+            'upvoteCount',
+        ]);
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes,
-            [
-                'downvoteCount' => ['Integer'],
-                'parentItem' => ['Question'],
-                'upvoteCount' => ['Integer'],
-            ]);
+        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
+            'downvoteCount' => ['Integer'],
+            'parentItem' => ['Question'],
+            'upvoteCount' => ['Integer'],
+        ]);
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions,
-            [
-                'downvoteCount' => 'The number of downvotes this question, answer or comment has received from the community.',
-                'parentItem' => 'The parent of a question, answer or item in general.',
-                'upvoteCount' => 'The number of upvotes this question, answer or comment has received from the community.',
-            ]);
+        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
+            'downvoteCount' => 'The number of downvotes this question, answer or comment has received from the community.',
+            'parentItem' => 'The parent of a question, answer or item in general.',
+            'upvoteCount' => 'The number of upvotes this question, answer or comment has received from the community.',
+        ]);
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema,
-            [
-            ]);
+        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
+        ]);
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema,
-            [
-            ]);
-    } /* -- init */
+        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
+        ]);
+    }
 
+    /**
+    * @inheritdoc
+    */
     public function rules()
     {
         $rules = parent::rules();
-        $rules = array_merge($rules,
-            [
-                [['downvoteCount','parentItem','upvoteCount',], 'validateJsonSchema'],
-            ]);
-        return $rules;
-    } /* -- rules */
+        $rules = array_merge($rules, [
+            [['downvoteCount','parentItem','upvoteCount',], 'validateJsonSchema'],
+        ]);
 
-} /* -- class Answer*/
+        return $rules;
+    }
+}

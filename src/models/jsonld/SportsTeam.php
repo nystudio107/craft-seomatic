@@ -6,81 +6,92 @@ use nystudio107\seomatic\models\jsonld\SportsOrganization;
 
 /**
  * SportsTeam - Organization: Sports team.
+ *
  * Extends: SportsOrganization
  * @see    http://schema.org/SportsTeam
  */
 class SportsTeam extends SportsOrganization
 {
-
-    // Static
+    // Static Properties
     // =========================================================================
 
     /**
      * The Schema.org Type Name
+     *
      * @var string
      */
-    static $schemaTypeName = 'SportsTeam';
+    static public $schemaTypeName = 'SportsTeam';
 
     /**
      * The Schema.org Type Scope
+     *
      * @var string
      */
-    static $schemaTypeScope = 'https://schema.org/SportsTeam';
+    static public $schemaTypeScope = 'https://schema.org/SportsTeam';
 
     /**
      * The Schema.org Type Description
+     *
      * @var string
      */
-    static $schemaTypeDescription = 'Organization: Sports team.';
+    static public $schemaTypeDescription = 'Organization: Sports team.';
 
     /**
      * The Schema.org Type Extends
+     *
      * @var string
      */
-    static $schemaTypeExtends = 'SportsOrganization';
+    static public $schemaTypeExtends = 'SportsOrganization';
 
     /**
      * The Schema.org Property Names
+     *
      * @var array
      */
-    static $schemaPropertyNames = [];
+    static public $schemaPropertyNames = [];
 
     /**
      * The Schema.org Property Expected Types
+     *
      * @var array
      */
-    static $schemaPropertyExpectedTypes = [];
+    static public $schemaPropertyExpectedTypes = [];
 
     /**
      * The Schema.org Property Descriptions
+     *
      * @var array
      */
-    static $schemaPropertyDescriptions = [];
+    static public $schemaPropertyDescriptions = [];
 
     /**
      * The Schema.org Google Required Schema for this type
+     *
      * @var array
      */
-    static $googleRequiredSchema = [];
+    static public $googleRequiredSchema = [];
 
     /**
      * The Schema.org Google Recommended Schema for this type
+     *
      * @var array
      */
-    static $googleRecommendedSchema = [];
+    static public $googleRecommendedSchema = [];
 
-    // Properties
+    // Public Properties
     // =========================================================================
 
     /**
      * A person that acts as performing member of a sports team; a player as
      * opposed to a coach.
+     *
      * @var Person [schema.org types: Person]
      */
     public $athlete;
 
     /**
      * A person that acts in a coaching role for a sports team.
+     *
      * @var Person [schema.org types: Person]
      */
     public $coach;
@@ -88,44 +99,44 @@ class SportsTeam extends SportsOrganization
     // Public Methods
     // =========================================================================
 
+    /**
+    * @inheritdoc
+    */
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames,
-            [
-                'athlete',
-                'coach',
-            ]);
+        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
+            'athlete',
+            'coach',
+        ]);
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes,
-            [
-                'athlete' => ['Person'],
-                'coach' => ['Person'],
-            ]);
+        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
+            'athlete' => ['Person'],
+            'coach' => ['Person'],
+        ]);
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions,
-            [
-                'athlete' => 'A person that acts as performing member of a sports team; a player as opposed to a coach.',
-                'coach' => 'A person that acts in a coaching role for a sports team.',
-            ]);
+        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
+            'athlete' => 'A person that acts as performing member of a sports team; a player as opposed to a coach.',
+            'coach' => 'A person that acts in a coaching role for a sports team.',
+        ]);
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema,
-            [
-            ]);
+        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
+        ]);
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema,
-            [
-            ]);
-    } /* -- init */
+        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
+        ]);
+    }
 
+    /**
+    * @inheritdoc
+    */
     public function rules()
     {
         $rules = parent::rules();
-        $rules = array_merge($rules,
-            [
-                [['athlete','coach',], 'validateJsonSchema'],
-            ]);
-        return $rules;
-    } /* -- rules */
+        $rules = array_merge($rules, [
+            [['athlete','coach',], 'validateJsonSchema'],
+        ]);
 
-} /* -- class SportsTeam*/
+        return $rules;
+    }
+}

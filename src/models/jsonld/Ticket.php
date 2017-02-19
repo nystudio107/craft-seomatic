@@ -6,80 +6,91 @@ use nystudio107\seomatic\models\jsonld\Intangible;
 
 /**
  * Ticket - Used to describe a ticket to an event, a flight, a bus ride, etc.
+ *
  * Extends: Intangible
  * @see    http://schema.org/Ticket
  */
 class Ticket extends Intangible
 {
-
-    // Static
+    // Static Properties
     // =========================================================================
 
     /**
      * The Schema.org Type Name
+     *
      * @var string
      */
-    static $schemaTypeName = 'Ticket';
+    static public $schemaTypeName = 'Ticket';
 
     /**
      * The Schema.org Type Scope
+     *
      * @var string
      */
-    static $schemaTypeScope = 'https://schema.org/Ticket';
+    static public $schemaTypeScope = 'https://schema.org/Ticket';
 
     /**
      * The Schema.org Type Description
+     *
      * @var string
      */
-    static $schemaTypeDescription = 'Used to describe a ticket to an event, a flight, a bus ride, etc.';
+    static public $schemaTypeDescription = 'Used to describe a ticket to an event, a flight, a bus ride, etc.';
 
     /**
      * The Schema.org Type Extends
+     *
      * @var string
      */
-    static $schemaTypeExtends = 'Intangible';
+    static public $schemaTypeExtends = 'Intangible';
 
     /**
      * The Schema.org Property Names
+     *
      * @var array
      */
-    static $schemaPropertyNames = [];
+    static public $schemaPropertyNames = [];
 
     /**
      * The Schema.org Property Expected Types
+     *
      * @var array
      */
-    static $schemaPropertyExpectedTypes = [];
+    static public $schemaPropertyExpectedTypes = [];
 
     /**
      * The Schema.org Property Descriptions
+     *
      * @var array
      */
-    static $schemaPropertyDescriptions = [];
+    static public $schemaPropertyDescriptions = [];
 
     /**
      * The Schema.org Google Required Schema for this type
+     *
      * @var array
      */
-    static $googleRequiredSchema = [];
+    static public $googleRequiredSchema = [];
 
     /**
      * The Schema.org Google Recommended Schema for this type
+     *
      * @var array
      */
-    static $googleRecommendedSchema = [];
+    static public $googleRecommendedSchema = [];
 
-    // Properties
+    // Public Properties
     // =========================================================================
 
     /**
      * The date the ticket was issued.
+     *
      * @var DateTime [schema.org types: DateTime]
      */
     public $dateIssued;
 
     /**
      * The organization issuing the ticket or permit.
+     *
      * @var Organization [schema.org types: Organization]
      */
     public $issuedBy;
@@ -87,12 +98,14 @@ class Ticket extends Intangible
     /**
      * The currency (in 3-letter ISO 4217 format) of the price or a price
      * component, when attached to PriceSpecification and its subtypes.
+     *
      * @var string [schema.org types: Text]
      */
     public $priceCurrency;
 
     /**
      * The unique identifier for the ticket.
+     *
      * @var string [schema.org types: Text]
      */
     public $ticketNumber;
@@ -100,88 +113,92 @@ class Ticket extends Intangible
     /**
      * Reference to an asset (e.g., Barcode, QR code image or PDF) usable for
      * entrance.
-     * @var mixed string, string [schema.org types: Text, URL]
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
      */
     public $ticketToken;
 
     /**
      * The seat associated with the ticket.
-     * @var mixed Seat [schema.org types: Seat]
+     *
+     * @var mixed|Seat [schema.org types: Seat]
      */
     public $ticketedSeat;
 
     /**
      * The total price for the reservation or ticket, including applicable taxes,
      * shipping, etc.
-     * @var mixed float, PriceSpecification, string [schema.org types: Number, PriceSpecification, Text]
+     *
+     * @var mixed|float|PriceSpecification|string [schema.org types: Number, PriceSpecification, Text]
      */
     public $totalPrice;
 
     /**
      * The person or organization the reservation or ticket is for.
-     * @var mixed Organization, Person [schema.org types: Organization, Person]
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
      */
     public $underName;
 
     // Public Methods
     // =========================================================================
 
+    /**
+    * @inheritdoc
+    */
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames,
-            [
-                'dateIssued',
-                'issuedBy',
-                'priceCurrency',
-                'ticketNumber',
-                'ticketToken',
-                'ticketedSeat',
-                'totalPrice',
-                'underName',
-            ]);
+        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
+            'dateIssued',
+            'issuedBy',
+            'priceCurrency',
+            'ticketNumber',
+            'ticketToken',
+            'ticketedSeat',
+            'totalPrice',
+            'underName',
+        ]);
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes,
-            [
-                'dateIssued' => ['DateTime'],
-                'issuedBy' => ['Organization'],
-                'priceCurrency' => ['Text'],
-                'ticketNumber' => ['Text'],
-                'ticketToken' => ['Text','URL'],
-                'ticketedSeat' => ['Seat'],
-                'totalPrice' => ['Number','PriceSpecification','Text'],
-                'underName' => ['Organization','Person'],
-            ]);
+        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
+            'dateIssued' => ['DateTime'],
+            'issuedBy' => ['Organization'],
+            'priceCurrency' => ['Text'],
+            'ticketNumber' => ['Text'],
+            'ticketToken' => ['Text','URL'],
+            'ticketedSeat' => ['Seat'],
+            'totalPrice' => ['Number','PriceSpecification','Text'],
+            'underName' => ['Organization','Person'],
+        ]);
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions,
-            [
-                'dateIssued' => 'The date the ticket was issued.',
-                'issuedBy' => 'The organization issuing the ticket or permit.',
-                'priceCurrency' => 'The currency (in 3-letter ISO 4217 format) of the price or a price component, when attached to PriceSpecification and its subtypes.',
-                'ticketNumber' => 'The unique identifier for the ticket.',
-                'ticketToken' => 'Reference to an asset (e.g., Barcode, QR code image or PDF) usable for entrance.',
-                'ticketedSeat' => 'The seat associated with the ticket.',
-                'totalPrice' => 'The total price for the reservation or ticket, including applicable taxes, shipping, etc.',
-                'underName' => 'The person or organization the reservation or ticket is for.',
-            ]);
+        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
+            'dateIssued' => 'The date the ticket was issued.',
+            'issuedBy' => 'The organization issuing the ticket or permit.',
+            'priceCurrency' => 'The currency (in 3-letter ISO 4217 format) of the price or a price component, when attached to PriceSpecification and its subtypes.',
+            'ticketNumber' => 'The unique identifier for the ticket.',
+            'ticketToken' => 'Reference to an asset (e.g., Barcode, QR code image or PDF) usable for entrance.',
+            'ticketedSeat' => 'The seat associated with the ticket.',
+            'totalPrice' => 'The total price for the reservation or ticket, including applicable taxes, shipping, etc.',
+            'underName' => 'The person or organization the reservation or ticket is for.',
+        ]);
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema,
-            [
-            ]);
+        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
+        ]);
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema,
-            [
-            ]);
-    } /* -- init */
+        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
+        ]);
+    }
 
+    /**
+    * @inheritdoc
+    */
     public function rules()
     {
         $rules = parent::rules();
-        $rules = array_merge($rules,
-            [
-                [['dateIssued','issuedBy','priceCurrency','ticketNumber','ticketToken','ticketedSeat','totalPrice','underName',], 'validateJsonSchema'],
-            ]);
-        return $rules;
-    } /* -- rules */
+        $rules = array_merge($rules, [
+            [['dateIssued','issuedBy','priceCurrency','ticketNumber','ticketToken','ticketedSeat','totalPrice','underName',], 'validateJsonSchema'],
+        ]);
 
-} /* -- class Ticket*/
+        return $rules;
+    }
+}
