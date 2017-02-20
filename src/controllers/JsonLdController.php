@@ -73,7 +73,6 @@ class JsonLdController extends Controller
                 }
             }
         }
-Craft::dd($result);
         return $this->asJson($result);
     }
 
