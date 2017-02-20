@@ -1,4 +1,13 @@
 <?php
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
 
 namespace nystudio107\seomatic\models\jsonld;
 
@@ -7,12 +16,14 @@ use nystudio107\seomatic\models\jsonld\MediaObject;
 /**
  * VideoObject - A video file.
  *
- * Extends: MediaObject
- * @see    http://schema.org/VideoObject
+ * @author    nystudio107
+ * @package   Seomatic
+ * @since     1.0.0
+ * @see       http://schema.org/VideoObject
  */
 class VideoObject extends MediaObject
 {
-    // Static Properties
+    // Static Public Properties
     // =========================================================================
 
     /**
@@ -44,35 +55,35 @@ class VideoObject extends MediaObject
     static public $schemaTypeExtends = 'MediaObject';
 
     /**
-     * The Schema.org Property Names
+     * The Schema.org composed Property Names
      *
      * @var array
      */
     static public $schemaPropertyNames = [];
 
     /**
-     * The Schema.org Property Expected Types
+     * The Schema.org composed Property Expected Types
      *
      * @var array
      */
     static public $schemaPropertyExpectedTypes = [];
 
     /**
-     * The Schema.org Property Descriptions
+     * The Schema.org composed Property Descriptions
      *
      * @var array
      */
     static public $schemaPropertyDescriptions = [];
 
     /**
-     * The Schema.org Google Required Schema for this type
+     * The Schema.org composed Google Required Schema for this type
      *
      * @var array
      */
     static public $googleRequiredSchema = [];
 
     /**
-     * The Schema.org Google Recommended Schema for this type
+     * The Schema.org composed Google Recommended Schema for this type
      *
      * @var array
      */
@@ -142,6 +153,73 @@ class VideoObject extends MediaObject
      */
     public $videoQuality;
 
+    // Static Protected Properties
+    // =========================================================================
+
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'actor',
+        'caption',
+        'director',
+        'musicBy',
+        'thumbnail',
+        'transcript',
+        'videoFrameSize',
+        'videoQuality'
+    ];
+
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'actor' => ['Person'],
+        'caption' => ['Text'],
+        'director' => ['Person'],
+        'musicBy' => ['MusicGroup','Person'],
+        'thumbnail' => ['ImageObject'],
+        'transcript' => ['Text'],
+        'videoFrameSize' => ['Text'],
+        'videoQuality' => ['Text']
+    ];
+
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'actor' => 'An actor, e.g. in tv, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip. Supersedes actors.',
+        'caption' => 'The caption for this object.',
+        'director' => 'A director of e.g. tv, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip. Supersedes directors.',
+        'musicBy' => 'The composer of the soundtrack.',
+        'thumbnail' => 'Thumbnail image for an image or video.',
+        'transcript' => 'If this MediaObject is an AudioObject or VideoObject, the transcript of that object.',
+        'videoFrameSize' => 'The frame size of the video.',
+        'videoQuality' => 'The quality of the video.'
+    ];
+
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -151,44 +229,30 @@ class VideoObject extends MediaObject
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
-            'actor',
-            'caption',
-            'director',
-            'musicBy',
-            'thumbnail',
-            'transcript',
-            'videoFrameSize',
-            'videoQuality',
-        ]);
+        self::$schemaPropertyNames = array_merge(
+            parent::$_schemaPropertyNames,
+            self::$_schemaPropertyNames
+        );
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
-            'actor' => ['Person'],
-            'caption' => ['Text'],
-            'director' => ['Person'],
-            'musicBy' => ['MusicGroup','Person'],
-            'thumbnail' => ['ImageObject'],
-            'transcript' => ['Text'],
-            'videoFrameSize' => ['Text'],
-            'videoQuality' => ['Text'],
-        ]);
+        self::$schemaPropertyExpectedTypes = array_merge(
+            parent::$_schemaPropertyExpectedTypes,
+            self::$_schemaPropertyExpectedTypes
+        );
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
-            'actor' => 'An actor, e.g. in tv, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip. Supersedes actors.',
-            'caption' => 'The caption for this object.',
-            'director' => 'A director of e.g. tv, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip. Supersedes directors.',
-            'musicBy' => 'The composer of the soundtrack.',
-            'thumbnail' => 'Thumbnail image for an image or video.',
-            'transcript' => 'If this MediaObject is an AudioObject or VideoObject, the transcript of that object.',
-            'videoFrameSize' => 'The frame size of the video.',
-            'videoQuality' => 'The quality of the video.',
-        ]);
+        self::$schemaPropertyDescriptions = array_merge(
+            parent::$_schemaPropertyDescriptions,
+            self::$_schemaPropertyDescriptions
+        );
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
-        ]);
+        self::$googleRequiredSchema = array_merge(
+            parent::$_googleRequiredSchema,
+            self::$_googleRequiredSchema
+        );
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
-        ]);
+        self::$googleRecommendedSchema = array_merge(
+            parent::$_googleRecommendedSchema,
+            self::$_googleRecommendedSchema
+        );
     }
 
     /**
@@ -198,7 +262,9 @@ class VideoObject extends MediaObject
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['actor','caption','director','musicBy','thumbnail','transcript','videoFrameSize','videoQuality',], 'validateJsonSchema'],
+            [['actor','caption','director','musicBy','thumbnail','transcript','videoFrameSize','videoQuality'], 'validateJsonSchema'],
+            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

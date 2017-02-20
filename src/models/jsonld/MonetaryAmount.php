@@ -1,4 +1,13 @@
 <?php
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
 
 namespace nystudio107\seomatic\models\jsonld;
 
@@ -11,12 +20,14 @@ use nystudio107\seomatic\models\jsonld\StructuredValue;
  * GBP, or the value of a salary, etc. It is recommended to use
  * PriceSpecification Types to describe the price of an Offer, Invoice, etc.
  *
- * Extends: StructuredValue
- * @see    http://schema.org/MonetaryAmount
+ * @author    nystudio107
+ * @package   Seomatic
+ * @since     1.0.0
+ * @see       http://schema.org/MonetaryAmount
  */
 class MonetaryAmount extends StructuredValue
 {
-    // Static Properties
+    // Static Public Properties
     // =========================================================================
 
     /**
@@ -48,35 +59,35 @@ class MonetaryAmount extends StructuredValue
     static public $schemaTypeExtends = 'StructuredValue';
 
     /**
-     * The Schema.org Property Names
+     * The Schema.org composed Property Names
      *
      * @var array
      */
     static public $schemaPropertyNames = [];
 
     /**
-     * The Schema.org Property Expected Types
+     * The Schema.org composed Property Expected Types
      *
      * @var array
      */
     static public $schemaPropertyExpectedTypes = [];
 
     /**
-     * The Schema.org Property Descriptions
+     * The Schema.org composed Property Descriptions
      *
      * @var array
      */
     static public $schemaPropertyDescriptions = [];
 
     /**
-     * The Schema.org Google Required Schema for this type
+     * The Schema.org composed Google Required Schema for this type
      *
      * @var array
      */
     static public $googleRequiredSchema = [];
 
     /**
-     * The Schema.org Google Recommended Schema for this type
+     * The Schema.org composed Google Recommended Schema for this type
      *
      * @var array
      */
@@ -132,6 +143,67 @@ class MonetaryAmount extends StructuredValue
      */
     public $value;
 
+    // Static Protected Properties
+    // =========================================================================
+
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'currency',
+        'maxValue',
+        'minValue',
+        'validFrom',
+        'validThrough',
+        'value'
+    ];
+
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'currency' => ['Text'],
+        'maxValue' => ['Number'],
+        'minValue' => ['Number'],
+        'validFrom' => ['DateTime'],
+        'validThrough' => ['DateTime'],
+        'value' => ['Boolean','Number','StructuredValue','Text']
+    ];
+
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'currency' => 'The currency in which the monetary amount is expressed (in 3-letter ISO 4217 format).',
+        'maxValue' => 'The upper value of some characteristic or property.',
+        'minValue' => 'The lower value of some characteristic or property.',
+        'validFrom' => 'The date when the item becomes valid.',
+        'validThrough' => 'The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.',
+        'value' => 'The value of the quantitative value or property value node. For QuantitativeValue and MonetaryAmount, the recommended type for values is \'Number\'. For PropertyValue, it can be \'Text;\', \'Number\', \'Boolean\', or \'StructuredValue\'.'
+    ];
+
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -141,38 +213,30 @@ class MonetaryAmount extends StructuredValue
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
-            'currency',
-            'maxValue',
-            'minValue',
-            'validFrom',
-            'validThrough',
-            'value',
-        ]);
+        self::$schemaPropertyNames = array_merge(
+            parent::$_schemaPropertyNames,
+            self::$_schemaPropertyNames
+        );
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
-            'currency' => ['Text'],
-            'maxValue' => ['Number'],
-            'minValue' => ['Number'],
-            'validFrom' => ['DateTime'],
-            'validThrough' => ['DateTime'],
-            'value' => ['Boolean','Number','StructuredValue','Text'],
-        ]);
+        self::$schemaPropertyExpectedTypes = array_merge(
+            parent::$_schemaPropertyExpectedTypes,
+            self::$_schemaPropertyExpectedTypes
+        );
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
-            'currency' => 'The currency in which the monetary amount is expressed (in 3-letter ISO 4217 format).',
-            'maxValue' => 'The upper value of some characteristic or property.',
-            'minValue' => 'The lower value of some characteristic or property.',
-            'validFrom' => 'The date when the item becomes valid.',
-            'validThrough' => 'The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.',
-            'value' => 'The value of the quantitative value or property value node. For QuantitativeValue and MonetaryAmount, the recommended type for values is \'Number\'. For PropertyValue, it can be \'Text;\', \'Number\', \'Boolean\', or \'StructuredValue\'.',
-        ]);
+        self::$schemaPropertyDescriptions = array_merge(
+            parent::$_schemaPropertyDescriptions,
+            self::$_schemaPropertyDescriptions
+        );
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
-        ]);
+        self::$googleRequiredSchema = array_merge(
+            parent::$_googleRequiredSchema,
+            self::$_googleRequiredSchema
+        );
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
-        ]);
+        self::$googleRecommendedSchema = array_merge(
+            parent::$_googleRecommendedSchema,
+            self::$_googleRecommendedSchema
+        );
     }
 
     /**
@@ -182,7 +246,9 @@ class MonetaryAmount extends StructuredValue
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['currency','maxValue','minValue','validFrom','validThrough','value',], 'validateJsonSchema'],
+            [['currency','maxValue','minValue','validFrom','validThrough','value'], 'validateJsonSchema'],
+            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

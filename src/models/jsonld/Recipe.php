@@ -1,4 +1,13 @@
 <?php
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
 
 namespace nystudio107\seomatic\models\jsonld;
 
@@ -9,12 +18,14 @@ use nystudio107\seomatic\models\jsonld\CreativeWork;
  * common restrictions are enumerated via suitableForDiet. The keywords
  * property can also be used to add more detail.
  *
- * Extends: CreativeWork
- * @see    http://schema.org/Recipe
+ * @author    nystudio107
+ * @package   Seomatic
+ * @since     1.0.0
+ * @see       http://schema.org/Recipe
  */
 class Recipe extends CreativeWork
 {
-    // Static Properties
+    // Static Public Properties
     // =========================================================================
 
     /**
@@ -46,35 +57,35 @@ class Recipe extends CreativeWork
     static public $schemaTypeExtends = 'CreativeWork';
 
     /**
-     * The Schema.org Property Names
+     * The Schema.org composed Property Names
      *
      * @var array
      */
     static public $schemaPropertyNames = [];
 
     /**
-     * The Schema.org Property Expected Types
+     * The Schema.org composed Property Expected Types
      *
      * @var array
      */
     static public $schemaPropertyExpectedTypes = [];
 
     /**
-     * The Schema.org Property Descriptions
+     * The Schema.org composed Property Descriptions
      *
      * @var array
      */
     static public $schemaPropertyDescriptions = [];
 
     /**
-     * The Schema.org Google Required Schema for this type
+     * The Schema.org composed Google Required Schema for this type
      *
      * @var array
      */
     static public $googleRequiredSchema = [];
 
     /**
-     * The Schema.org Google Recommended Schema for this type
+     * The Schema.org composed Google Recommended Schema for this type
      *
      * @var array
      */
@@ -165,6 +176,82 @@ class Recipe extends CreativeWork
      */
     public $totalTime;
 
+    // Static Protected Properties
+    // =========================================================================
+
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'cookTime',
+        'cookingMethod',
+        'nutrition',
+        'prepTime',
+        'recipeCategory',
+        'recipeCuisine',
+        'recipeIngredient',
+        'recipeInstructions',
+        'recipeYield',
+        'suitableForDiet',
+        'totalTime'
+    ];
+
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'cookTime' => ['Duration'],
+        'cookingMethod' => ['Text'],
+        'nutrition' => ['NutritionInformation'],
+        'prepTime' => ['Duration'],
+        'recipeCategory' => ['Text'],
+        'recipeCuisine' => ['Text'],
+        'recipeIngredient' => ['Text'],
+        'recipeInstructions' => ['ItemList','Text'],
+        'recipeYield' => ['Text'],
+        'suitableForDiet' => ['RestrictedDiet'],
+        'totalTime' => ['Duration']
+    ];
+
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'cookTime' => 'The time it takes to actually cook the dish, in ISO 8601 duration format.',
+        'cookingMethod' => 'The method of cooking, such as Frying, Steaming, ...',
+        'nutrition' => 'Nutrition information about the recipe.',
+        'prepTime' => 'The length of time it takes to prepare the recipe, in ISO 8601 duration format.',
+        'recipeCategory' => 'The category of the recipe—for example, appetizer, entree, etc.',
+        'recipeCuisine' => 'The cuisine of the recipe (for example, French or Ethiopian).',
+        'recipeIngredient' => 'A single ingredient used in the recipe, e.g. sugar, flour or garlic. Supersedes ingredients.',
+        'recipeInstructions' => 'A step or instruction involved in making the recipe.',
+        'recipeYield' => 'The quantity produced by the recipe (for example, number of people served, number of servings, etc).',
+        'suitableForDiet' => 'Indicates a dietary restriction or guideline for which this recipe is suitable, e.g. diabetic, halal etc.',
+        'totalTime' => 'The total time it takes to prepare and cook the recipe, in ISO 8601 duration format.'
+    ];
+
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -174,53 +261,30 @@ class Recipe extends CreativeWork
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
-            'cookTime',
-            'cookingMethod',
-            'nutrition',
-            'prepTime',
-            'recipeCategory',
-            'recipeCuisine',
-            'recipeIngredient',
-            'recipeInstructions',
-            'recipeYield',
-            'suitableForDiet',
-            'totalTime',
-        ]);
+        self::$schemaPropertyNames = array_merge(
+            parent::$_schemaPropertyNames,
+            self::$_schemaPropertyNames
+        );
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
-            'cookTime' => ['Duration'],
-            'cookingMethod' => ['Text'],
-            'nutrition' => ['NutritionInformation'],
-            'prepTime' => ['Duration'],
-            'recipeCategory' => ['Text'],
-            'recipeCuisine' => ['Text'],
-            'recipeIngredient' => ['Text'],
-            'recipeInstructions' => ['ItemList','Text'],
-            'recipeYield' => ['Text'],
-            'suitableForDiet' => ['RestrictedDiet'],
-            'totalTime' => ['Duration'],
-        ]);
+        self::$schemaPropertyExpectedTypes = array_merge(
+            parent::$_schemaPropertyExpectedTypes,
+            self::$_schemaPropertyExpectedTypes
+        );
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
-            'cookTime' => 'The time it takes to actually cook the dish, in ISO 8601 duration format.',
-            'cookingMethod' => 'The method of cooking, such as Frying, Steaming, ...',
-            'nutrition' => 'Nutrition information about the recipe.',
-            'prepTime' => 'The length of time it takes to prepare the recipe, in ISO 8601 duration format.',
-            'recipeCategory' => 'The category of the recipe—for example, appetizer, entree, etc.',
-            'recipeCuisine' => 'The cuisine of the recipe (for example, French or Ethiopian).',
-            'recipeIngredient' => 'A single ingredient used in the recipe, e.g. sugar, flour or garlic. Supersedes ingredients.',
-            'recipeInstructions' => 'A step or instruction involved in making the recipe.',
-            'recipeYield' => 'The quantity produced by the recipe (for example, number of people served, number of servings, etc).',
-            'suitableForDiet' => 'Indicates a dietary restriction or guideline for which this recipe is suitable, e.g. diabetic, halal etc.',
-            'totalTime' => 'The total time it takes to prepare and cook the recipe, in ISO 8601 duration format.',
-        ]);
+        self::$schemaPropertyDescriptions = array_merge(
+            parent::$_schemaPropertyDescriptions,
+            self::$_schemaPropertyDescriptions
+        );
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
-        ]);
+        self::$googleRequiredSchema = array_merge(
+            parent::$_googleRequiredSchema,
+            self::$_googleRequiredSchema
+        );
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
-        ]);
+        self::$googleRecommendedSchema = array_merge(
+            parent::$_googleRecommendedSchema,
+            self::$_googleRecommendedSchema
+        );
     }
 
     /**
@@ -230,7 +294,9 @@ class Recipe extends CreativeWork
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['cookTime','cookingMethod','nutrition','prepTime','recipeCategory','recipeCuisine','recipeIngredient','recipeInstructions','recipeYield','suitableForDiet','totalTime',], 'validateJsonSchema'],
+            [['cookTime','cookingMethod','nutrition','prepTime','recipeCategory','recipeCuisine','recipeIngredient','recipeInstructions','recipeYield','suitableForDiet','totalTime'], 'validateJsonSchema'],
+            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

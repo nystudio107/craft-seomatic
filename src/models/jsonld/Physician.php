@@ -1,4 +1,13 @@
 <?php
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
 
 namespace nystudio107\seomatic\models\jsonld;
 
@@ -7,12 +16,14 @@ use nystudio107\seomatic\models\jsonld\MedicalOrganization;
 /**
  * Physician - A doctor's office.
  *
- * Extends: MedicalOrganization
- * @see    http://schema.org/Physician
+ * @author    nystudio107
+ * @package   Seomatic
+ * @since     1.0.0
+ * @see       http://schema.org/Physician
  */
 class Physician extends MedicalOrganization
 {
-    // Static Properties
+    // Static Public Properties
     // =========================================================================
 
     /**
@@ -44,35 +55,35 @@ class Physician extends MedicalOrganization
     static public $schemaTypeExtends = 'MedicalOrganization';
 
     /**
-     * The Schema.org Property Names
+     * The Schema.org composed Property Names
      *
      * @var array
      */
     static public $schemaPropertyNames = [];
 
     /**
-     * The Schema.org Property Expected Types
+     * The Schema.org composed Property Expected Types
      *
      * @var array
      */
     static public $schemaPropertyExpectedTypes = [];
 
     /**
-     * The Schema.org Property Descriptions
+     * The Schema.org composed Property Descriptions
      *
      * @var array
      */
     static public $schemaPropertyDescriptions = [];
 
     /**
-     * The Schema.org Google Required Schema for this type
+     * The Schema.org composed Google Required Schema for this type
      *
      * @var array
      */
     static public $googleRequiredSchema = [];
 
     /**
-     * The Schema.org Google Recommended Schema for this type
+     * The Schema.org composed Google Recommended Schema for this type
      *
      * @var array
      */
@@ -390,6 +401,169 @@ class Physician extends MedicalOrganization
      */
     public $vatID;
 
+    // Static Protected Properties
+    // =========================================================================
+
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'address',
+        'aggregateRating',
+        'alumni',
+        'areaServed',
+        'award',
+        'brand',
+        'contactPoint',
+        'department',
+        'dissolutionDate',
+        'duns',
+        'email',
+        'employee',
+        'event',
+        'faxNumber',
+        'founder',
+        'foundingDate',
+        'foundingLocation',
+        'funder',
+        'globalLocationNumber',
+        'hasOfferCatalog',
+        'hasPOS',
+        'isicV4',
+        'legalName',
+        'leiCode',
+        'location',
+        'logo',
+        'makesOffer',
+        'member',
+        'memberOf',
+        'naics',
+        'numberOfEmployees',
+        'owns',
+        'parentOrganization',
+        'review',
+        'seeks',
+        'sponsor',
+        'subOrganization',
+        'taxID',
+        'telephone',
+        'vatID'
+    ];
+
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'address' => ['PostalAddress','Text'],
+        'aggregateRating' => ['AggregateRating'],
+        'alumni' => ['Person'],
+        'areaServed' => ['AdministrativeArea','GeoShape','Place','Text'],
+        'award' => ['Text'],
+        'brand' => ['Brand','Organization'],
+        'contactPoint' => ['ContactPoint'],
+        'department' => ['Organization'],
+        'dissolutionDate' => ['Date'],
+        'duns' => ['Text'],
+        'email' => ['Text'],
+        'employee' => ['Person'],
+        'event' => ['Event'],
+        'faxNumber' => ['Text'],
+        'founder' => ['Person'],
+        'foundingDate' => ['Date'],
+        'foundingLocation' => ['Place'],
+        'funder' => ['Organization','Person'],
+        'globalLocationNumber' => ['Text'],
+        'hasOfferCatalog' => ['OfferCatalog'],
+        'hasPOS' => ['Place'],
+        'isicV4' => ['Text'],
+        'legalName' => ['Text'],
+        'leiCode' => ['Text'],
+        'location' => ['Place','PostalAddress','Text'],
+        'logo' => ['ImageObject','URL'],
+        'makesOffer' => ['Offer'],
+        'member' => ['Organization','Person'],
+        'memberOf' => ['Organization','ProgramMembership'],
+        'naics' => ['Text'],
+        'numberOfEmployees' => ['QuantitativeValue'],
+        'owns' => ['OwnershipInfo','Product'],
+        'parentOrganization' => ['Organization'],
+        'review' => ['Review'],
+        'seeks' => ['Demand'],
+        'sponsor' => ['Organization','Person'],
+        'subOrganization' => ['Organization'],
+        'taxID' => ['Text'],
+        'telephone' => ['Text'],
+        'vatID' => ['Text']
+    ];
+
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'address' => 'Physical address of the item.',
+        'aggregateRating' => 'The overall rating, based on a collection of reviews or ratings, of the item.',
+        'alumni' => 'Alumni of an organization. Inverse property: alumniOf.',
+        'areaServed' => 'The geographic area where a service or offered item is provided. Supersedes serviceArea.',
+        'award' => 'An award won by or for this item. Supersedes awards.',
+        'brand' => 'The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.',
+        'contactPoint' => 'A contact point for a person or organization. Supersedes contactPoints.',
+        'department' => 'A relationship between an organization and a department of that organization, also described as an organization (allowing different urls, logos, opening hours). For example: a store with a pharmacy, or a bakery with a cafe.',
+        'dissolutionDate' => 'The date that this organization was dissolved.',
+        'duns' => 'The Dun & Bradstreet DUNS number for identifying an organization or business person.',
+        'email' => 'Email address.',
+        'employee' => 'Someone working for this organization. Supersedes employees.',
+        'event' => 'Upcoming or past event associated with this place, organization, or action. Supersedes events.',
+        'faxNumber' => 'The fax number.',
+        'founder' => 'A person who founded this organization. Supersedes founders.',
+        'foundingDate' => 'The date that this organization was founded.',
+        'foundingLocation' => 'The place where the Organization was founded.',
+        'funder' => 'A person or organization that supports (sponsors) something through some kind of financial contribution.',
+        'globalLocationNumber' => 'The Global Location Number (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations.',
+        'hasOfferCatalog' => 'Indicates an OfferCatalog listing for this Organization, Person, or Service.',
+        'hasPOS' => 'Points-of-Sales operated by the organization or person.',
+        'isicV4' => 'The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code for a particular organization, business person, or place.',
+        'legalName' => 'The official name of the organization, e.g. the registered company name.',
+        'leiCode' => 'An organization identifier that uniquely identifies a legal entity as defined in ISO 17442.',
+        'location' => 'The location of for example where the event is happening, an organization is located, or where an action takes place.',
+        'logo' => 'An associated logo.',
+        'makesOffer' => 'A pointer to products or services offered by the organization or person. Inverse property: offeredBy.',
+        'member' => 'A member of an Organization or a ProgramMembership. Organizations can be members of organizations; ProgramMembership is typically for individuals. Supersedes members, musicGroupMember. Inverse property: memberOf.',
+        'memberOf' => 'An Organization (or ProgramMembership) to which this Person or Organization belongs. Inverse property: member.',
+        'naics' => 'The North American Industry Classification System (NAICS) code for a particular organization or business person.',
+        'numberOfEmployees' => 'The number of employees in an organization e.g. business.',
+        'owns' => 'Products owned by the organization or person.',
+        'parentOrganization' => 'The larger organization that this local business is a branch of, if any. Supersedes branchOf. Inverse property: subOrganization.',
+        'review' => 'A review of the item. Supersedes reviews.',
+        'seeks' => 'A pointer to products or services sought by the organization or person (demand).',
+        'sponsor' => 'A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.',
+        'subOrganization' => 'A relationship between two organizations where the first includes the second, e.g., as a subsidiary. See also: the more specific \'department\' property. Inverse property: parentOrganization.',
+        'taxID' => 'The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US or the CIF/NIF in Spain.',
+        'telephone' => 'The telephone number.',
+        'vatID' => 'The Value-added Tax ID of the organization or person.'
+    ];
+
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -399,140 +573,30 @@ class Physician extends MedicalOrganization
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
-            'address',
-            'aggregateRating',
-            'alumni',
-            'areaServed',
-            'award',
-            'brand',
-            'contactPoint',
-            'department',
-            'dissolutionDate',
-            'duns',
-            'email',
-            'employee',
-            'event',
-            'faxNumber',
-            'founder',
-            'foundingDate',
-            'foundingLocation',
-            'funder',
-            'globalLocationNumber',
-            'hasOfferCatalog',
-            'hasPOS',
-            'isicV4',
-            'legalName',
-            'leiCode',
-            'location',
-            'logo',
-            'makesOffer',
-            'member',
-            'memberOf',
-            'naics',
-            'numberOfEmployees',
-            'owns',
-            'parentOrganization',
-            'review',
-            'seeks',
-            'sponsor',
-            'subOrganization',
-            'taxID',
-            'telephone',
-            'vatID',
-        ]);
+        self::$schemaPropertyNames = array_merge(
+            parent::$_schemaPropertyNames,
+            self::$_schemaPropertyNames
+        );
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
-            'address' => ['PostalAddress','Text'],
-            'aggregateRating' => ['AggregateRating'],
-            'alumni' => ['Person'],
-            'areaServed' => ['AdministrativeArea','GeoShape','Place','Text'],
-            'award' => ['Text'],
-            'brand' => ['Brand','Organization'],
-            'contactPoint' => ['ContactPoint'],
-            'department' => ['Organization'],
-            'dissolutionDate' => ['Date'],
-            'duns' => ['Text'],
-            'email' => ['Text'],
-            'employee' => ['Person'],
-            'event' => ['Event'],
-            'faxNumber' => ['Text'],
-            'founder' => ['Person'],
-            'foundingDate' => ['Date'],
-            'foundingLocation' => ['Place'],
-            'funder' => ['Organization','Person'],
-            'globalLocationNumber' => ['Text'],
-            'hasOfferCatalog' => ['OfferCatalog'],
-            'hasPOS' => ['Place'],
-            'isicV4' => ['Text'],
-            'legalName' => ['Text'],
-            'leiCode' => ['Text'],
-            'location' => ['Place','PostalAddress','Text'],
-            'logo' => ['ImageObject','URL'],
-            'makesOffer' => ['Offer'],
-            'member' => ['Organization','Person'],
-            'memberOf' => ['Organization','ProgramMembership'],
-            'naics' => ['Text'],
-            'numberOfEmployees' => ['QuantitativeValue'],
-            'owns' => ['OwnershipInfo','Product'],
-            'parentOrganization' => ['Organization'],
-            'review' => ['Review'],
-            'seeks' => ['Demand'],
-            'sponsor' => ['Organization','Person'],
-            'subOrganization' => ['Organization'],
-            'taxID' => ['Text'],
-            'telephone' => ['Text'],
-            'vatID' => ['Text'],
-        ]);
+        self::$schemaPropertyExpectedTypes = array_merge(
+            parent::$_schemaPropertyExpectedTypes,
+            self::$_schemaPropertyExpectedTypes
+        );
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
-            'address' => 'Physical address of the item.',
-            'aggregateRating' => 'The overall rating, based on a collection of reviews or ratings, of the item.',
-            'alumni' => 'Alumni of an organization. Inverse property: alumniOf.',
-            'areaServed' => 'The geographic area where a service or offered item is provided. Supersedes serviceArea.',
-            'award' => 'An award won by or for this item. Supersedes awards.',
-            'brand' => 'The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.',
-            'contactPoint' => 'A contact point for a person or organization. Supersedes contactPoints.',
-            'department' => 'A relationship between an organization and a department of that organization, also described as an organization (allowing different urls, logos, opening hours). For example: a store with a pharmacy, or a bakery with a cafe.',
-            'dissolutionDate' => 'The date that this organization was dissolved.',
-            'duns' => 'The Dun & Bradstreet DUNS number for identifying an organization or business person.',
-            'email' => 'Email address.',
-            'employee' => 'Someone working for this organization. Supersedes employees.',
-            'event' => 'Upcoming or past event associated with this place, organization, or action. Supersedes events.',
-            'faxNumber' => 'The fax number.',
-            'founder' => 'A person who founded this organization. Supersedes founders.',
-            'foundingDate' => 'The date that this organization was founded.',
-            'foundingLocation' => 'The place where the Organization was founded.',
-            'funder' => 'A person or organization that supports (sponsors) something through some kind of financial contribution.',
-            'globalLocationNumber' => 'The Global Location Number (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations.',
-            'hasOfferCatalog' => 'Indicates an OfferCatalog listing for this Organization, Person, or Service.',
-            'hasPOS' => 'Points-of-Sales operated by the organization or person.',
-            'isicV4' => 'The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code for a particular organization, business person, or place.',
-            'legalName' => 'The official name of the organization, e.g. the registered company name.',
-            'leiCode' => 'An organization identifier that uniquely identifies a legal entity as defined in ISO 17442.',
-            'location' => 'The location of for example where the event is happening, an organization is located, or where an action takes place.',
-            'logo' => 'An associated logo.',
-            'makesOffer' => 'A pointer to products or services offered by the organization or person. Inverse property: offeredBy.',
-            'member' => 'A member of an Organization or a ProgramMembership. Organizations can be members of organizations; ProgramMembership is typically for individuals. Supersedes members, musicGroupMember. Inverse property: memberOf.',
-            'memberOf' => 'An Organization (or ProgramMembership) to which this Person or Organization belongs. Inverse property: member.',
-            'naics' => 'The North American Industry Classification System (NAICS) code for a particular organization or business person.',
-            'numberOfEmployees' => 'The number of employees in an organization e.g. business.',
-            'owns' => 'Products owned by the organization or person.',
-            'parentOrganization' => 'The larger organization that this local business is a branch of, if any. Supersedes branchOf. Inverse property: subOrganization.',
-            'review' => 'A review of the item. Supersedes reviews.',
-            'seeks' => 'A pointer to products or services sought by the organization or person (demand).',
-            'sponsor' => 'A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.',
-            'subOrganization' => 'A relationship between two organizations where the first includes the second, e.g., as a subsidiary. See also: the more specific \'department\' property. Inverse property: parentOrganization.',
-            'taxID' => 'The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US or the CIF/NIF in Spain.',
-            'telephone' => 'The telephone number.',
-            'vatID' => 'The Value-added Tax ID of the organization or person.',
-        ]);
+        self::$schemaPropertyDescriptions = array_merge(
+            parent::$_schemaPropertyDescriptions,
+            self::$_schemaPropertyDescriptions
+        );
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
-        ]);
+        self::$googleRequiredSchema = array_merge(
+            parent::$_googleRequiredSchema,
+            self::$_googleRequiredSchema
+        );
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
-        ]);
+        self::$googleRecommendedSchema = array_merge(
+            parent::$_googleRecommendedSchema,
+            self::$_googleRecommendedSchema
+        );
     }
 
     /**
@@ -542,7 +606,9 @@ class Physician extends MedicalOrganization
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['address','aggregateRating','alumni','areaServed','award','brand','contactPoint','department','dissolutionDate','duns','email','employee','event','faxNumber','founder','foundingDate','foundingLocation','funder','globalLocationNumber','hasOfferCatalog','hasPOS','isicV4','legalName','leiCode','location','logo','makesOffer','member','memberOf','naics','numberOfEmployees','owns','parentOrganization','review','seeks','sponsor','subOrganization','taxID','telephone','vatID',], 'validateJsonSchema'],
+            [['address','aggregateRating','alumni','areaServed','award','brand','contactPoint','department','dissolutionDate','duns','email','employee','event','faxNumber','founder','foundingDate','foundingLocation','funder','globalLocationNumber','hasOfferCatalog','hasPOS','isicV4','legalName','leiCode','location','logo','makesOffer','member','memberOf','naics','numberOfEmployees','owns','parentOrganization','review','seeks','sponsor','subOrganization','taxID','telephone','vatID'], 'validateJsonSchema'],
+            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

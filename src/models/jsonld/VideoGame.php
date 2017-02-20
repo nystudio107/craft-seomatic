@@ -1,4 +1,13 @@
 <?php
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
 
 namespace nystudio107\seomatic\models\jsonld;
 
@@ -9,12 +18,14 @@ use nystudio107\seomatic\models\jsonld\SoftwareApplication;
  * interaction with a user interface to generate visual feedback on a video
  * device.
  *
- * Extends: SoftwareApplication
- * @see    http://schema.org/VideoGame
+ * @author    nystudio107
+ * @package   Seomatic
+ * @since     1.0.0
+ * @see       http://schema.org/VideoGame
  */
 class VideoGame extends SoftwareApplication
 {
-    // Static Properties
+    // Static Public Properties
     // =========================================================================
 
     /**
@@ -46,35 +57,35 @@ class VideoGame extends SoftwareApplication
     static public $schemaTypeExtends = 'SoftwareApplication';
 
     /**
-     * The Schema.org Property Names
+     * The Schema.org composed Property Names
      *
      * @var array
      */
     static public $schemaPropertyNames = [];
 
     /**
-     * The Schema.org Property Expected Types
+     * The Schema.org composed Property Expected Types
      *
      * @var array
      */
     static public $schemaPropertyExpectedTypes = [];
 
     /**
-     * The Schema.org Property Descriptions
+     * The Schema.org composed Property Descriptions
      *
      * @var array
      */
     static public $schemaPropertyDescriptions = [];
 
     /**
-     * The Schema.org Google Required Schema for this type
+     * The Schema.org composed Google Required Schema for this type
      *
      * @var array
      */
     static public $googleRequiredSchema = [];
 
     /**
-     * The Schema.org Google Recommended Schema for this type
+     * The Schema.org composed Google Recommended Schema for this type
      *
      * @var array
      */
@@ -153,6 +164,76 @@ class VideoGame extends SoftwareApplication
      */
     public $trailer;
 
+    // Static Protected Properties
+    // =========================================================================
+
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'actor',
+        'cheatCode',
+        'director',
+        'gamePlatform',
+        'gameServer',
+        'gameTip',
+        'musicBy',
+        'playMode',
+        'trailer'
+    ];
+
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'actor' => ['Person'],
+        'cheatCode' => ['CreativeWork'],
+        'director' => ['Person'],
+        'gamePlatform' => ['Text','Thing','URL'],
+        'gameServer' => ['GameServer'],
+        'gameTip' => ['CreativeWork'],
+        'musicBy' => ['MusicGroup','Person'],
+        'playMode' => ['GamePlayMode'],
+        'trailer' => ['VideoObject']
+    ];
+
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'actor' => 'An actor, e.g. in tv, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip. Supersedes actors.',
+        'cheatCode' => 'Cheat codes to the game.',
+        'director' => 'A director of e.g. tv, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip. Supersedes directors.',
+        'gamePlatform' => 'The electronic systems used to play video games.',
+        'gameServer' => 'The server on which it is possible to play the game. Inverse property: game.',
+        'gameTip' => 'Links to tips, tactics, etc.',
+        'musicBy' => 'The composer of the soundtrack.',
+        'playMode' => 'Indicates whether this game is multi-player, co-op or single-player. The game can be marked as multi-player, co-op and single-player at the same time.',
+        'trailer' => 'The trailer of a movie or tv/radio series, season, episode, etc.'
+    ];
+
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -162,47 +243,30 @@ class VideoGame extends SoftwareApplication
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
-            'actor',
-            'cheatCode',
-            'director',
-            'gamePlatform',
-            'gameServer',
-            'gameTip',
-            'musicBy',
-            'playMode',
-            'trailer',
-        ]);
+        self::$schemaPropertyNames = array_merge(
+            parent::$_schemaPropertyNames,
+            self::$_schemaPropertyNames
+        );
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
-            'actor' => ['Person'],
-            'cheatCode' => ['CreativeWork'],
-            'director' => ['Person'],
-            'gamePlatform' => ['Text','Thing','URL'],
-            'gameServer' => ['GameServer'],
-            'gameTip' => ['CreativeWork'],
-            'musicBy' => ['MusicGroup','Person'],
-            'playMode' => ['GamePlayMode'],
-            'trailer' => ['VideoObject'],
-        ]);
+        self::$schemaPropertyExpectedTypes = array_merge(
+            parent::$_schemaPropertyExpectedTypes,
+            self::$_schemaPropertyExpectedTypes
+        );
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
-            'actor' => 'An actor, e.g. in tv, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip. Supersedes actors.',
-            'cheatCode' => 'Cheat codes to the game.',
-            'director' => 'A director of e.g. tv, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip. Supersedes directors.',
-            'gamePlatform' => 'The electronic systems used to play video games.',
-            'gameServer' => 'The server on which it is possible to play the game. Inverse property: game.',
-            'gameTip' => 'Links to tips, tactics, etc.',
-            'musicBy' => 'The composer of the soundtrack.',
-            'playMode' => 'Indicates whether this game is multi-player, co-op or single-player. The game can be marked as multi-player, co-op and single-player at the same time.',
-            'trailer' => 'The trailer of a movie or tv/radio series, season, episode, etc.',
-        ]);
+        self::$schemaPropertyDescriptions = array_merge(
+            parent::$_schemaPropertyDescriptions,
+            self::$_schemaPropertyDescriptions
+        );
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
-        ]);
+        self::$googleRequiredSchema = array_merge(
+            parent::$_googleRequiredSchema,
+            self::$_googleRequiredSchema
+        );
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
-        ]);
+        self::$googleRecommendedSchema = array_merge(
+            parent::$_googleRecommendedSchema,
+            self::$_googleRecommendedSchema
+        );
     }
 
     /**
@@ -212,7 +276,9 @@ class VideoGame extends SoftwareApplication
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['actor','cheatCode','director','gamePlatform','gameServer','gameTip','musicBy','playMode','trailer',], 'validateJsonSchema'],
+            [['actor','cheatCode','director','gamePlatform','gameServer','gameTip','musicBy','playMode','trailer'], 'validateJsonSchema'],
+            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

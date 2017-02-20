@@ -1,4 +1,13 @@
 <?php
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
 
 namespace nystudio107\seomatic\models\jsonld;
 
@@ -7,12 +16,14 @@ use nystudio107\seomatic\models\jsonld\Clip;
 /**
  * VideoGameClip - A short segment/part of a video game.
  *
- * Extends: Clip
- * @see    http://schema.org/VideoGameClip
+ * @author    nystudio107
+ * @package   Seomatic
+ * @since     1.0.0
+ * @see       http://schema.org/VideoGameClip
  */
 class VideoGameClip extends Clip
 {
-    // Static Properties
+    // Static Public Properties
     // =========================================================================
 
     /**
@@ -44,35 +55,35 @@ class VideoGameClip extends Clip
     static public $schemaTypeExtends = 'Clip';
 
     /**
-     * The Schema.org Property Names
+     * The Schema.org composed Property Names
      *
      * @var array
      */
     static public $schemaPropertyNames = [];
 
     /**
-     * The Schema.org Property Expected Types
+     * The Schema.org composed Property Expected Types
      *
      * @var array
      */
     static public $schemaPropertyExpectedTypes = [];
 
     /**
-     * The Schema.org Property Descriptions
+     * The Schema.org composed Property Descriptions
      *
      * @var array
      */
     static public $schemaPropertyDescriptions = [];
 
     /**
-     * The Schema.org Google Required Schema for this type
+     * The Schema.org composed Google Required Schema for this type
      *
      * @var array
      */
     static public $googleRequiredSchema = [];
 
     /**
-     * The Schema.org Google Recommended Schema for this type
+     * The Schema.org composed Google Recommended Schema for this type
      *
      * @var array
      */
@@ -135,6 +146,70 @@ class VideoGameClip extends Clip
      */
     public $partOfSeries;
 
+    // Static Protected Properties
+    // =========================================================================
+
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'actor',
+        'clipNumber',
+        'director',
+        'musicBy',
+        'partOfEpisode',
+        'partOfSeason',
+        'partOfSeries'
+    ];
+
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'actor' => ['Person'],
+        'clipNumber' => ['Integer','Text'],
+        'director' => ['Person'],
+        'musicBy' => ['MusicGroup','Person'],
+        'partOfEpisode' => ['Episode'],
+        'partOfSeason' => ['CreativeWorkSeason'],
+        'partOfSeries' => ['CreativeWorkSeries']
+    ];
+
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'actor' => 'An actor, e.g. in tv, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip. Supersedes actors.',
+        'clipNumber' => 'Position of the clip within an ordered group of clips.',
+        'director' => 'A director of e.g. tv, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip. Supersedes directors.',
+        'musicBy' => 'The composer of the soundtrack.',
+        'partOfEpisode' => 'The episode to which this clip belongs.',
+        'partOfSeason' => 'The season to which this episode belongs.',
+        'partOfSeries' => 'The series to which this episode or season belongs. Supersedes partOfTVSeries.'
+    ];
+
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -144,41 +219,30 @@ class VideoGameClip extends Clip
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
-            'actor',
-            'clipNumber',
-            'director',
-            'musicBy',
-            'partOfEpisode',
-            'partOfSeason',
-            'partOfSeries',
-        ]);
+        self::$schemaPropertyNames = array_merge(
+            parent::$_schemaPropertyNames,
+            self::$_schemaPropertyNames
+        );
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
-            'actor' => ['Person'],
-            'clipNumber' => ['Integer','Text'],
-            'director' => ['Person'],
-            'musicBy' => ['MusicGroup','Person'],
-            'partOfEpisode' => ['Episode'],
-            'partOfSeason' => ['CreativeWorkSeason'],
-            'partOfSeries' => ['CreativeWorkSeries'],
-        ]);
+        self::$schemaPropertyExpectedTypes = array_merge(
+            parent::$_schemaPropertyExpectedTypes,
+            self::$_schemaPropertyExpectedTypes
+        );
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
-            'actor' => 'An actor, e.g. in tv, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip. Supersedes actors.',
-            'clipNumber' => 'Position of the clip within an ordered group of clips.',
-            'director' => 'A director of e.g. tv, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip. Supersedes directors.',
-            'musicBy' => 'The composer of the soundtrack.',
-            'partOfEpisode' => 'The episode to which this clip belongs.',
-            'partOfSeason' => 'The season to which this episode belongs.',
-            'partOfSeries' => 'The series to which this episode or season belongs. Supersedes partOfTVSeries.',
-        ]);
+        self::$schemaPropertyDescriptions = array_merge(
+            parent::$_schemaPropertyDescriptions,
+            self::$_schemaPropertyDescriptions
+        );
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
-        ]);
+        self::$googleRequiredSchema = array_merge(
+            parent::$_googleRequiredSchema,
+            self::$_googleRequiredSchema
+        );
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
-        ]);
+        self::$googleRecommendedSchema = array_merge(
+            parent::$_googleRecommendedSchema,
+            self::$_googleRecommendedSchema
+        );
     }
 
     /**
@@ -188,7 +252,9 @@ class VideoGameClip extends Clip
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['actor','clipNumber','director','musicBy','partOfEpisode','partOfSeason','partOfSeries',], 'validateJsonSchema'],
+            [['actor','clipNumber','director','musicBy','partOfEpisode','partOfSeason','partOfSeries'], 'validateJsonSchema'],
+            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

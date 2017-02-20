@@ -1,4 +1,13 @@
 <?php
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
 
 namespace nystudio107\seomatic\models\jsonld;
 
@@ -10,12 +19,14 @@ use nystudio107\seomatic\models\jsonld\Reservation;
  * pages with individual confirmations of reservations. For offers of tickets,
  * use Offer.
  *
- * Extends: Reservation
- * @see    http://schema.org/FlightReservation
+ * @author    nystudio107
+ * @package   Seomatic
+ * @since     1.0.0
+ * @see       http://schema.org/FlightReservation
  */
 class FlightReservation extends Reservation
 {
-    // Static Properties
+    // Static Public Properties
     // =========================================================================
 
     /**
@@ -47,35 +58,35 @@ class FlightReservation extends Reservation
     static public $schemaTypeExtends = 'Reservation';
 
     /**
-     * The Schema.org Property Names
+     * The Schema.org composed Property Names
      *
      * @var array
      */
     static public $schemaPropertyNames = [];
 
     /**
-     * The Schema.org Property Expected Types
+     * The Schema.org composed Property Expected Types
      *
      * @var array
      */
     static public $schemaPropertyExpectedTypes = [];
 
     /**
-     * The Schema.org Property Descriptions
+     * The Schema.org composed Property Descriptions
      *
      * @var array
      */
     static public $schemaPropertyDescriptions = [];
 
     /**
-     * The Schema.org Google Required Schema for this type
+     * The Schema.org composed Google Required Schema for this type
      *
      * @var array
      */
     static public $googleRequiredSchema = [];
 
     /**
-     * The Schema.org Google Recommended Schema for this type
+     * The Schema.org composed Google Recommended Schema for this type
      *
      * @var array
      */
@@ -113,6 +124,61 @@ class FlightReservation extends Reservation
      */
     public $securityScreening;
 
+    // Static Protected Properties
+    // =========================================================================
+
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'boardingGroup',
+        'passengerPriorityStatus',
+        'passengerSequenceNumber',
+        'securityScreening'
+    ];
+
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'boardingGroup' => ['Text'],
+        'passengerPriorityStatus' => ['QualitativeValue','Text'],
+        'passengerSequenceNumber' => ['Text'],
+        'securityScreening' => ['Text']
+    ];
+
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'boardingGroup' => 'The airline-specific indicator of boarding order / preference.',
+        'passengerPriorityStatus' => 'The priority status assigned to a passenger for security or boarding (e.g. FastTrack or Priority).',
+        'passengerSequenceNumber' => 'The passenger\'s sequence number as assigned by the airline.',
+        'securityScreening' => 'The type of security screening the passenger is subject to.'
+    ];
+
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -122,32 +188,30 @@ class FlightReservation extends Reservation
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
-            'boardingGroup',
-            'passengerPriorityStatus',
-            'passengerSequenceNumber',
-            'securityScreening',
-        ]);
+        self::$schemaPropertyNames = array_merge(
+            parent::$_schemaPropertyNames,
+            self::$_schemaPropertyNames
+        );
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
-            'boardingGroup' => ['Text'],
-            'passengerPriorityStatus' => ['QualitativeValue','Text'],
-            'passengerSequenceNumber' => ['Text'],
-            'securityScreening' => ['Text'],
-        ]);
+        self::$schemaPropertyExpectedTypes = array_merge(
+            parent::$_schemaPropertyExpectedTypes,
+            self::$_schemaPropertyExpectedTypes
+        );
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
-            'boardingGroup' => 'The airline-specific indicator of boarding order / preference.',
-            'passengerPriorityStatus' => 'The priority status assigned to a passenger for security or boarding (e.g. FastTrack or Priority).',
-            'passengerSequenceNumber' => 'The passenger\'s sequence number as assigned by the airline.',
-            'securityScreening' => 'The type of security screening the passenger is subject to.',
-        ]);
+        self::$schemaPropertyDescriptions = array_merge(
+            parent::$_schemaPropertyDescriptions,
+            self::$_schemaPropertyDescriptions
+        );
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
-        ]);
+        self::$googleRequiredSchema = array_merge(
+            parent::$_googleRequiredSchema,
+            self::$_googleRequiredSchema
+        );
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
-        ]);
+        self::$googleRecommendedSchema = array_merge(
+            parent::$_googleRecommendedSchema,
+            self::$_googleRecommendedSchema
+        );
     }
 
     /**
@@ -157,7 +221,9 @@ class FlightReservation extends Reservation
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['boardingGroup','passengerPriorityStatus','passengerSequenceNumber','securityScreening',], 'validateJsonSchema'],
+            [['boardingGroup','passengerPriorityStatus','passengerSequenceNumber','securityScreening'], 'validateJsonSchema'],
+            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

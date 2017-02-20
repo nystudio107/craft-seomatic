@@ -1,4 +1,13 @@
 <?php
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
 
 namespace nystudio107\seomatic\models\jsonld;
 
@@ -10,12 +19,14 @@ use nystudio107\seomatic\models\jsonld\Reservation;
  * reservations, e.g. in confirmation emails or HTML pages with individual
  * confirmations of reservations. For offers of tickets, use Offer.
  *
- * Extends: Reservation
- * @see    http://schema.org/EventReservation
+ * @author    nystudio107
+ * @package   Seomatic
+ * @since     1.0.0
+ * @see       http://schema.org/EventReservation
  */
 class EventReservation extends Reservation
 {
-    // Static Properties
+    // Static Public Properties
     // =========================================================================
 
     /**
@@ -47,35 +58,35 @@ class EventReservation extends Reservation
     static public $schemaTypeExtends = 'Reservation';
 
     /**
-     * The Schema.org Property Names
+     * The Schema.org composed Property Names
      *
      * @var array
      */
     static public $schemaPropertyNames = [];
 
     /**
-     * The Schema.org Property Expected Types
+     * The Schema.org composed Property Expected Types
      *
      * @var array
      */
     static public $schemaPropertyExpectedTypes = [];
 
     /**
-     * The Schema.org Property Descriptions
+     * The Schema.org composed Property Descriptions
      *
      * @var array
      */
     static public $schemaPropertyDescriptions = [];
 
     /**
-     * The Schema.org Google Required Schema for this type
+     * The Schema.org composed Google Required Schema for this type
      *
      * @var array
      */
     static public $googleRequiredSchema = [];
 
     /**
-     * The Schema.org Google Recommended Schema for this type
+     * The Schema.org composed Google Recommended Schema for this type
      *
      * @var array
      */
@@ -178,6 +189,85 @@ class EventReservation extends Reservation
      */
     public $underName;
 
+    // Static Protected Properties
+    // =========================================================================
+
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'bookingTime',
+        'broker',
+        'modifiedTime',
+        'priceCurrency',
+        'programMembershipUsed',
+        'provider',
+        'reservationFor',
+        'reservationId',
+        'reservationStatus',
+        'reservedTicket',
+        'totalPrice',
+        'underName'
+    ];
+
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'bookingTime' => ['DateTime'],
+        'broker' => ['Organization','Person'],
+        'modifiedTime' => ['DateTime'],
+        'priceCurrency' => ['Text'],
+        'programMembershipUsed' => ['ProgramMembership'],
+        'provider' => ['Organization','Person'],
+        'reservationFor' => ['Thing'],
+        'reservationId' => ['Text'],
+        'reservationStatus' => ['ReservationStatusType'],
+        'reservedTicket' => ['Ticket'],
+        'totalPrice' => ['Number','PriceSpecification','Text'],
+        'underName' => ['Organization','Person']
+    ];
+
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'bookingTime' => 'The date and time the reservation was booked.',
+        'broker' => 'An entity that arranges for an exchange between a buyer and a seller. In most cases a broker never acquires or releases ownership of a product or service involved in an exchange. If it is not clear whether an entity is a broker, seller, or buyer, the latter two terms are preferred. Supersedes bookingAgent.',
+        'modifiedTime' => 'The date and time the reservation was modified.',
+        'priceCurrency' => 'The currency (in 3-letter ISO 4217 format) of the price or a price component, when attached to PriceSpecification and its subtypes.',
+        'programMembershipUsed' => 'Any membership in a frequent flyer, hotel loyalty program, etc. being applied to the reservation.',
+        'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller. Supersedes carrier.',
+        'reservationFor' => 'The thing -- flight, event, restaurant,etc. being reserved.',
+        'reservationId' => 'A unique identifier for the reservation.',
+        'reservationStatus' => 'The current status of the reservation.',
+        'reservedTicket' => 'A ticket associated with the reservation.',
+        'totalPrice' => 'The total price for the reservation or ticket, including applicable taxes, shipping, etc.',
+        'underName' => 'The person or organization the reservation or ticket is for.'
+    ];
+
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -187,56 +277,30 @@ class EventReservation extends Reservation
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
-            'bookingTime',
-            'broker',
-            'modifiedTime',
-            'priceCurrency',
-            'programMembershipUsed',
-            'provider',
-            'reservationFor',
-            'reservationId',
-            'reservationStatus',
-            'reservedTicket',
-            'totalPrice',
-            'underName',
-        ]);
+        self::$schemaPropertyNames = array_merge(
+            parent::$_schemaPropertyNames,
+            self::$_schemaPropertyNames
+        );
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
-            'bookingTime' => ['DateTime'],
-            'broker' => ['Organization','Person'],
-            'modifiedTime' => ['DateTime'],
-            'priceCurrency' => ['Text'],
-            'programMembershipUsed' => ['ProgramMembership'],
-            'provider' => ['Organization','Person'],
-            'reservationFor' => ['Thing'],
-            'reservationId' => ['Text'],
-            'reservationStatus' => ['ReservationStatusType'],
-            'reservedTicket' => ['Ticket'],
-            'totalPrice' => ['Number','PriceSpecification','Text'],
-            'underName' => ['Organization','Person'],
-        ]);
+        self::$schemaPropertyExpectedTypes = array_merge(
+            parent::$_schemaPropertyExpectedTypes,
+            self::$_schemaPropertyExpectedTypes
+        );
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
-            'bookingTime' => 'The date and time the reservation was booked.',
-            'broker' => 'An entity that arranges for an exchange between a buyer and a seller. In most cases a broker never acquires or releases ownership of a product or service involved in an exchange. If it is not clear whether an entity is a broker, seller, or buyer, the latter two terms are preferred. Supersedes bookingAgent.',
-            'modifiedTime' => 'The date and time the reservation was modified.',
-            'priceCurrency' => 'The currency (in 3-letter ISO 4217 format) of the price or a price component, when attached to PriceSpecification and its subtypes.',
-            'programMembershipUsed' => 'Any membership in a frequent flyer, hotel loyalty program, etc. being applied to the reservation.',
-            'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller. Supersedes carrier.',
-            'reservationFor' => 'The thing -- flight, event, restaurant,etc. being reserved.',
-            'reservationId' => 'A unique identifier for the reservation.',
-            'reservationStatus' => 'The current status of the reservation.',
-            'reservedTicket' => 'A ticket associated with the reservation.',
-            'totalPrice' => 'The total price for the reservation or ticket, including applicable taxes, shipping, etc.',
-            'underName' => 'The person or organization the reservation or ticket is for.',
-        ]);
+        self::$schemaPropertyDescriptions = array_merge(
+            parent::$_schemaPropertyDescriptions,
+            self::$_schemaPropertyDescriptions
+        );
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
-        ]);
+        self::$googleRequiredSchema = array_merge(
+            parent::$_googleRequiredSchema,
+            self::$_googleRequiredSchema
+        );
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
-        ]);
+        self::$googleRecommendedSchema = array_merge(
+            parent::$_googleRecommendedSchema,
+            self::$_googleRecommendedSchema
+        );
     }
 
     /**
@@ -246,7 +310,9 @@ class EventReservation extends Reservation
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['bookingTime','broker','modifiedTime','priceCurrency','programMembershipUsed','provider','reservationFor','reservationId','reservationStatus','reservedTicket','totalPrice','underName',], 'validateJsonSchema'],
+            [['bookingTime','broker','modifiedTime','priceCurrency','programMembershipUsed','provider','reservationFor','reservationId','reservationStatus','reservedTicket','totalPrice','underName'], 'validateJsonSchema'],
+            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

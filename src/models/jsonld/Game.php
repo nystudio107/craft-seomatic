@@ -1,4 +1,13 @@
 <?php
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
 
 namespace nystudio107\seomatic\models\jsonld;
 
@@ -9,12 +18,14 @@ use nystudio107\seomatic\models\jsonld\CreativeWork;
  * rule-governed recreational activities, e.g. role-playing games in which
  * players assume the role of characters in a fictional setting.
  *
- * Extends: CreativeWork
- * @see    http://schema.org/Game
+ * @author    nystudio107
+ * @package   Seomatic
+ * @since     1.0.0
+ * @see       http://schema.org/Game
  */
 class Game extends CreativeWork
 {
-    // Static Properties
+    // Static Public Properties
     // =========================================================================
 
     /**
@@ -46,35 +57,35 @@ class Game extends CreativeWork
     static public $schemaTypeExtends = 'CreativeWork';
 
     /**
-     * The Schema.org Property Names
+     * The Schema.org composed Property Names
      *
      * @var array
      */
     static public $schemaPropertyNames = [];
 
     /**
-     * The Schema.org Property Expected Types
+     * The Schema.org composed Property Expected Types
      *
      * @var array
      */
     static public $schemaPropertyExpectedTypes = [];
 
     /**
-     * The Schema.org Property Descriptions
+     * The Schema.org composed Property Descriptions
      *
      * @var array
      */
     static public $schemaPropertyDescriptions = [];
 
     /**
-     * The Schema.org Google Required Schema for this type
+     * The Schema.org composed Google Required Schema for this type
      *
      * @var array
      */
     static public $googleRequiredSchema = [];
 
     /**
-     * The Schema.org Google Recommended Schema for this type
+     * The Schema.org composed Google Recommended Schema for this type
      *
      * @var array
      */
@@ -121,6 +132,64 @@ class Game extends CreativeWork
      */
     public $quest;
 
+    // Static Protected Properties
+    // =========================================================================
+
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'characterAttribute',
+        'gameItem',
+        'gameLocation',
+        'numberOfPlayers',
+        'quest'
+    ];
+
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'characterAttribute' => ['Thing'],
+        'gameItem' => ['Thing'],
+        'gameLocation' => ['Place','PostalAddress','URL'],
+        'numberOfPlayers' => ['QuantitativeValue'],
+        'quest' => ['Thing']
+    ];
+
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'characterAttribute' => 'A piece of data that represents a particular aspect of a fictional character (skill, power, character points, advantage, disadvantage).',
+        'gameItem' => 'An item is an object within the game world that can be collected by a player or, occasionally, a non-player character.',
+        'gameLocation' => 'Real or fictional location of the game (or part of game).',
+        'numberOfPlayers' => 'Indicate how many people can play this game (minimum, maximum, or range).',
+        'quest' => 'The task that a player-controlled character, or group of characters may complete in order to gain a reward.'
+    ];
+
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -130,35 +199,30 @@ class Game extends CreativeWork
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
-            'characterAttribute',
-            'gameItem',
-            'gameLocation',
-            'numberOfPlayers',
-            'quest',
-        ]);
+        self::$schemaPropertyNames = array_merge(
+            parent::$_schemaPropertyNames,
+            self::$_schemaPropertyNames
+        );
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
-            'characterAttribute' => ['Thing'],
-            'gameItem' => ['Thing'],
-            'gameLocation' => ['Place','PostalAddress','URL'],
-            'numberOfPlayers' => ['QuantitativeValue'],
-            'quest' => ['Thing'],
-        ]);
+        self::$schemaPropertyExpectedTypes = array_merge(
+            parent::$_schemaPropertyExpectedTypes,
+            self::$_schemaPropertyExpectedTypes
+        );
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
-            'characterAttribute' => 'A piece of data that represents a particular aspect of a fictional character (skill, power, character points, advantage, disadvantage).',
-            'gameItem' => 'An item is an object within the game world that can be collected by a player or, occasionally, a non-player character.',
-            'gameLocation' => 'Real or fictional location of the game (or part of game).',
-            'numberOfPlayers' => 'Indicate how many people can play this game (minimum, maximum, or range).',
-            'quest' => 'The task that a player-controlled character, or group of characters may complete in order to gain a reward.',
-        ]);
+        self::$schemaPropertyDescriptions = array_merge(
+            parent::$_schemaPropertyDescriptions,
+            self::$_schemaPropertyDescriptions
+        );
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
-        ]);
+        self::$googleRequiredSchema = array_merge(
+            parent::$_googleRequiredSchema,
+            self::$_googleRequiredSchema
+        );
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
-        ]);
+        self::$googleRecommendedSchema = array_merge(
+            parent::$_googleRecommendedSchema,
+            self::$_googleRecommendedSchema
+        );
     }
 
     /**
@@ -168,7 +232,9 @@ class Game extends CreativeWork
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['characterAttribute','gameItem','gameLocation','numberOfPlayers','quest',], 'validateJsonSchema'],
+            [['characterAttribute','gameItem','gameLocation','numberOfPlayers','quest'], 'validateJsonSchema'],
+            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

@@ -1,4 +1,13 @@
 <?php
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
 
 namespace nystudio107\seomatic\models\jsonld;
 
@@ -8,12 +17,14 @@ use nystudio107\seomatic\models\jsonld\Intangible;
  * ServiceChannel - A means for accessing a service, e.g. a government office
  * location, web site, or phone number.
  *
- * Extends: Intangible
- * @see    http://schema.org/ServiceChannel
+ * @author    nystudio107
+ * @package   Seomatic
+ * @since     1.0.0
+ * @see       http://schema.org/ServiceChannel
  */
 class ServiceChannel extends Intangible
 {
-    // Static Properties
+    // Static Public Properties
     // =========================================================================
 
     /**
@@ -45,35 +56,35 @@ class ServiceChannel extends Intangible
     static public $schemaTypeExtends = 'Intangible';
 
     /**
-     * The Schema.org Property Names
+     * The Schema.org composed Property Names
      *
      * @var array
      */
     static public $schemaPropertyNames = [];
 
     /**
-     * The Schema.org Property Expected Types
+     * The Schema.org composed Property Expected Types
      *
      * @var array
      */
     static public $schemaPropertyExpectedTypes = [];
 
     /**
-     * The Schema.org Property Descriptions
+     * The Schema.org composed Property Descriptions
      *
      * @var array
      */
     static public $schemaPropertyDescriptions = [];
 
     /**
-     * The Schema.org Google Required Schema for this type
+     * The Schema.org composed Google Required Schema for this type
      *
      * @var array
      */
     static public $googleRequiredSchema = [];
 
     /**
-     * The Schema.org Google Recommended Schema for this type
+     * The Schema.org composed Google Recommended Schema for this type
      *
      * @var array
      */
@@ -140,6 +151,73 @@ class ServiceChannel extends Intangible
      */
     public $serviceUrl;
 
+    // Static Protected Properties
+    // =========================================================================
+
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'availableLanguage',
+        'processingTime',
+        'providesService',
+        'serviceLocation',
+        'servicePhone',
+        'servicePostalAddress',
+        'serviceSmsNumber',
+        'serviceUrl'
+    ];
+
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'availableLanguage' => ['Language','Text'],
+        'processingTime' => ['Duration'],
+        'providesService' => ['Service'],
+        'serviceLocation' => ['Place'],
+        'servicePhone' => ['ContactPoint'],
+        'servicePostalAddress' => ['PostalAddress'],
+        'serviceSmsNumber' => ['ContactPoint'],
+        'serviceUrl' => ['URL']
+    ];
+
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'availableLanguage' => 'A language someone may use with the item. Please use one of the language codes from the IETF BCP 47 standard. See also inLanguage',
+        'processingTime' => 'Estimated processing time for the service using this channel.',
+        'providesService' => 'The service provided by this channel.',
+        'serviceLocation' => 'The location (e.g. civic structure, local business, etc.) where a person can go to access the service.',
+        'servicePhone' => 'The phone number to use to access the service.',
+        'servicePostalAddress' => 'The address for accessing the service by mail.',
+        'serviceSmsNumber' => 'The number to access the service by text message.',
+        'serviceUrl' => 'The website to access the service.'
+    ];
+
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -149,44 +227,30 @@ class ServiceChannel extends Intangible
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
-            'availableLanguage',
-            'processingTime',
-            'providesService',
-            'serviceLocation',
-            'servicePhone',
-            'servicePostalAddress',
-            'serviceSmsNumber',
-            'serviceUrl',
-        ]);
+        self::$schemaPropertyNames = array_merge(
+            parent::$_schemaPropertyNames,
+            self::$_schemaPropertyNames
+        );
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
-            'availableLanguage' => ['Language','Text'],
-            'processingTime' => ['Duration'],
-            'providesService' => ['Service'],
-            'serviceLocation' => ['Place'],
-            'servicePhone' => ['ContactPoint'],
-            'servicePostalAddress' => ['PostalAddress'],
-            'serviceSmsNumber' => ['ContactPoint'],
-            'serviceUrl' => ['URL'],
-        ]);
+        self::$schemaPropertyExpectedTypes = array_merge(
+            parent::$_schemaPropertyExpectedTypes,
+            self::$_schemaPropertyExpectedTypes
+        );
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
-            'availableLanguage' => 'A language someone may use with the item. Please use one of the language codes from the IETF BCP 47 standard. See also inLanguage',
-            'processingTime' => 'Estimated processing time for the service using this channel.',
-            'providesService' => 'The service provided by this channel.',
-            'serviceLocation' => 'The location (e.g. civic structure, local business, etc.) where a person can go to access the service.',
-            'servicePhone' => 'The phone number to use to access the service.',
-            'servicePostalAddress' => 'The address for accessing the service by mail.',
-            'serviceSmsNumber' => 'The number to access the service by text message.',
-            'serviceUrl' => 'The website to access the service.',
-        ]);
+        self::$schemaPropertyDescriptions = array_merge(
+            parent::$_schemaPropertyDescriptions,
+            self::$_schemaPropertyDescriptions
+        );
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
-        ]);
+        self::$googleRequiredSchema = array_merge(
+            parent::$_googleRequiredSchema,
+            self::$_googleRequiredSchema
+        );
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
-        ]);
+        self::$googleRecommendedSchema = array_merge(
+            parent::$_googleRecommendedSchema,
+            self::$_googleRecommendedSchema
+        );
     }
 
     /**
@@ -196,7 +260,9 @@ class ServiceChannel extends Intangible
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['availableLanguage','processingTime','providesService','serviceLocation','servicePhone','servicePostalAddress','serviceSmsNumber','serviceUrl',], 'validateJsonSchema'],
+            [['availableLanguage','processingTime','providesService','serviceLocation','servicePhone','servicePostalAddress','serviceSmsNumber','serviceUrl'], 'validateJsonSchema'],
+            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

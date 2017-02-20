@@ -2,9 +2,11 @@
 /**
  * SEOmatic plugin for Craft CMS 3.x
  *
- * @link      https://nystudio107.com/
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
  * @copyright Copyright (c) 2017 nystudio107
- * @license   https://nystudio107.com/license
  */
 
 namespace nystudio107\seomatic;
@@ -16,21 +18,20 @@ use Craft;
 use craft\web\UrlManager;
 use craft\helpers\UrlHelper;
 use craft\events\RegisterUrlRulesEvent;
+use nystudio107\seomatic\variables\SeomaticVariable;
 use yii\base\Event;
 
 /**
- * SEOmatic plugin base class
- *
  * @author    nystudio107
- * @package   SEOmatic
- * @since     2.0.0
+ * @package   Seomatic
+ * @since     1.0.0
  */
 class Seomatic extends \craft\base\Plugin
 {
     /**
      * Static property that is an instance of this plugin class so that it can be accessed via
      * SEOmatic::$plugin
-     * @var \nystudio107\seomatic\SEOmatic
+     * @var static
      */
     public static $plugin;
 
@@ -98,67 +99,21 @@ class Seomatic extends \craft\base\Plugin
     }
 
     /**
-     * Returns the component definition that should be registered on the
-     * [[\craft\app\web\twig\variables\CraftVariable]] instance for this plugin’s handle.
-     *
-     * @return mixed|null The component definition to be registered.
-     * It can be any of the formats supported by [[\yii\di\ServiceLocator::set()]].
+     * @inheritdoc
      */
     public function defineTemplateComponent()
     {
-        return 'nystudio107\seomatic\variables\SeomaticVariable';
+        return SeomaticVariable::class;
     }
 
     /**
      * Returns the user-facing name of the plugin, which can override the name in
-     * plugin.json
+     * composer.json
      *
      * @return mixed
      */
     public function getName(): string
     {
          return Craft::t('seomatic', 'SEOmatic');
-    }
-
-    /**
-     * Returns whether the plugin should get its own tab in the CP header.
-     *
-     * @return bool
-     */
-    public static function hasCpSection(): bool
-    {
-        return false;
-    }
-
-    /**
-     * Called right before your plugin’s row gets stored in the plugins database table, and tables have been created
-     * for it based on its records.
-     */
-    protected function onBeforeInstall()
-    {
-    }
-
-    /**
-     * Called right after your plugin’s row has been stored in the plugins database table, and tables have been
-     * created for it based on its records.
-     */
-    protected function onAfterInstall()
-    {
-    }
-
-    /**
-     * Called right before your plugin’s record-based tables have been deleted, and its row in the plugins table
-     * has been deleted.
-     */
-    protected function onBeforeUninstall()
-    {
-    }
-
-    /**
-     * Called right after your plugin’s record-based tables have been deleted, and its row in the plugins table
-     * has been deleted.
-     */
-    protected function onAfterUninstall()
-    {
     }
 }

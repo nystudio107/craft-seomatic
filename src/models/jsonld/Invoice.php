@@ -1,4 +1,13 @@
 <?php
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
 
 namespace nystudio107\seomatic\models\jsonld;
 
@@ -7,12 +16,14 @@ use nystudio107\seomatic\models\jsonld\Intangible;
 /**
  * Invoice - A statement of the money due for goods or services; a bill.
  *
- * Extends: Intangible
- * @see    http://schema.org/Invoice
+ * @author    nystudio107
+ * @package   Seomatic
+ * @since     1.0.0
+ * @see       http://schema.org/Invoice
  */
 class Invoice extends Intangible
 {
-    // Static Properties
+    // Static Public Properties
     // =========================================================================
 
     /**
@@ -44,35 +55,35 @@ class Invoice extends Intangible
     static public $schemaTypeExtends = 'Intangible';
 
     /**
-     * The Schema.org Property Names
+     * The Schema.org composed Property Names
      *
      * @var array
      */
     static public $schemaPropertyNames = [];
 
     /**
-     * The Schema.org Property Expected Types
+     * The Schema.org composed Property Expected Types
      *
      * @var array
      */
     static public $schemaPropertyExpectedTypes = [];
 
     /**
-     * The Schema.org Property Descriptions
+     * The Schema.org composed Property Descriptions
      *
      * @var array
      */
     static public $schemaPropertyDescriptions = [];
 
     /**
-     * The Schema.org Google Required Schema for this type
+     * The Schema.org composed Google Required Schema for this type
      *
      * @var array
      */
     static public $googleRequiredSchema = [];
 
     /**
-     * The Schema.org Google Recommended Schema for this type
+     * The Schema.org composed Google Recommended Schema for this type
      *
      * @var array
      */
@@ -196,6 +207,94 @@ class Invoice extends Intangible
      */
     public $totalPaymentDue;
 
+    // Static Protected Properties
+    // =========================================================================
+
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'accountId',
+        'billingPeriod',
+        'broker',
+        'category',
+        'confirmationNumber',
+        'customer',
+        'minimumPaymentDue',
+        'paymentDueDate',
+        'paymentMethod',
+        'paymentMethodId',
+        'paymentStatus',
+        'provider',
+        'referencesOrder',
+        'scheduledPaymentDate',
+        'totalPaymentDue'
+    ];
+
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'accountId' => ['Text'],
+        'billingPeriod' => ['Duration'],
+        'broker' => ['Organization','Person'],
+        'category' => ['Text','Thing'],
+        'confirmationNumber' => ['Text'],
+        'customer' => ['Organization','Person'],
+        'minimumPaymentDue' => ['MonetaryAmount','PriceSpecification'],
+        'paymentDueDate' => ['DateTime'],
+        'paymentMethod' => ['PaymentMethod'],
+        'paymentMethodId' => ['Text'],
+        'paymentStatus' => ['PaymentStatusType','Text'],
+        'provider' => ['Organization','Person'],
+        'referencesOrder' => ['Order'],
+        'scheduledPaymentDate' => ['Date'],
+        'totalPaymentDue' => ['MonetaryAmount','PriceSpecification']
+    ];
+
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'accountId' => 'The identifier for the account the payment will be applied to.',
+        'billingPeriod' => 'The time interval used to compute the invoice.',
+        'broker' => 'An entity that arranges for an exchange between a buyer and a seller. In most cases a broker never acquires or releases ownership of a product or service involved in an exchange. If it is not clear whether an entity is a broker, seller, or buyer, the latter two terms are preferred. Supersedes bookingAgent.',
+        'category' => 'A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.',
+        'confirmationNumber' => 'A number that confirms the given order or payment has been received.',
+        'customer' => 'Party placing the order or paying the invoice.',
+        'minimumPaymentDue' => 'The minimum payment required at this time.',
+        'paymentDueDate' => 'The date that payment is due. Supersedes paymentDue.',
+        'paymentMethod' => 'The name of the credit card or other method of payment for the order.',
+        'paymentMethodId' => 'An identifier for the method of payment used (e.g. the last 4 digits of the credit card).',
+        'paymentStatus' => 'The status of payment; whether the invoice has been paid or not.',
+        'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller. Supersedes carrier.',
+        'referencesOrder' => 'The Order(s) related to this Invoice. One or more Orders may be combined into a single Invoice.',
+        'scheduledPaymentDate' => 'The date the invoice is scheduled to be paid.',
+        'totalPaymentDue' => 'The total amount due.'
+    ];
+
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -205,65 +304,30 @@ class Invoice extends Intangible
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
-            'accountId',
-            'billingPeriod',
-            'broker',
-            'category',
-            'confirmationNumber',
-            'customer',
-            'minimumPaymentDue',
-            'paymentDueDate',
-            'paymentMethod',
-            'paymentMethodId',
-            'paymentStatus',
-            'provider',
-            'referencesOrder',
-            'scheduledPaymentDate',
-            'totalPaymentDue',
-        ]);
+        self::$schemaPropertyNames = array_merge(
+            parent::$_schemaPropertyNames,
+            self::$_schemaPropertyNames
+        );
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
-            'accountId' => ['Text'],
-            'billingPeriod' => ['Duration'],
-            'broker' => ['Organization','Person'],
-            'category' => ['Text','Thing'],
-            'confirmationNumber' => ['Text'],
-            'customer' => ['Organization','Person'],
-            'minimumPaymentDue' => ['MonetaryAmount','PriceSpecification'],
-            'paymentDueDate' => ['DateTime'],
-            'paymentMethod' => ['PaymentMethod'],
-            'paymentMethodId' => ['Text'],
-            'paymentStatus' => ['PaymentStatusType','Text'],
-            'provider' => ['Organization','Person'],
-            'referencesOrder' => ['Order'],
-            'scheduledPaymentDate' => ['Date'],
-            'totalPaymentDue' => ['MonetaryAmount','PriceSpecification'],
-        ]);
+        self::$schemaPropertyExpectedTypes = array_merge(
+            parent::$_schemaPropertyExpectedTypes,
+            self::$_schemaPropertyExpectedTypes
+        );
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
-            'accountId' => 'The identifier for the account the payment will be applied to.',
-            'billingPeriod' => 'The time interval used to compute the invoice.',
-            'broker' => 'An entity that arranges for an exchange between a buyer and a seller. In most cases a broker never acquires or releases ownership of a product or service involved in an exchange. If it is not clear whether an entity is a broker, seller, or buyer, the latter two terms are preferred. Supersedes bookingAgent.',
-            'category' => 'A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.',
-            'confirmationNumber' => 'A number that confirms the given order or payment has been received.',
-            'customer' => 'Party placing the order or paying the invoice.',
-            'minimumPaymentDue' => 'The minimum payment required at this time.',
-            'paymentDueDate' => 'The date that payment is due. Supersedes paymentDue.',
-            'paymentMethod' => 'The name of the credit card or other method of payment for the order.',
-            'paymentMethodId' => 'An identifier for the method of payment used (e.g. the last 4 digits of the credit card).',
-            'paymentStatus' => 'The status of payment; whether the invoice has been paid or not.',
-            'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller. Supersedes carrier.',
-            'referencesOrder' => 'The Order(s) related to this Invoice. One or more Orders may be combined into a single Invoice.',
-            'scheduledPaymentDate' => 'The date the invoice is scheduled to be paid.',
-            'totalPaymentDue' => 'The total amount due.',
-        ]);
+        self::$schemaPropertyDescriptions = array_merge(
+            parent::$_schemaPropertyDescriptions,
+            self::$_schemaPropertyDescriptions
+        );
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
-        ]);
+        self::$googleRequiredSchema = array_merge(
+            parent::$_googleRequiredSchema,
+            self::$_googleRequiredSchema
+        );
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
-        ]);
+        self::$googleRecommendedSchema = array_merge(
+            parent::$_googleRecommendedSchema,
+            self::$_googleRecommendedSchema
+        );
     }
 
     /**
@@ -273,7 +337,9 @@ class Invoice extends Intangible
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['accountId','billingPeriod','broker','category','confirmationNumber','customer','minimumPaymentDue','paymentDueDate','paymentMethod','paymentMethodId','paymentStatus','provider','referencesOrder','scheduledPaymentDate','totalPaymentDue',], 'validateJsonSchema'],
+            [['accountId','billingPeriod','broker','category','confirmationNumber','customer','minimumPaymentDue','paymentDueDate','paymentMethod','paymentMethodId','paymentStatus','provider','referencesOrder','scheduledPaymentDate','totalPaymentDue'], 'validateJsonSchema'],
+            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

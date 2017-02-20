@@ -1,4 +1,13 @@
 <?php
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
 
 namespace nystudio107\seomatic\models\jsonld;
 
@@ -7,12 +16,14 @@ use nystudio107\seomatic\models\jsonld\Intangible;
 /**
  * Flight - An airline flight.
  *
- * Extends: Intangible
- * @see    http://schema.org/Flight
+ * @author    nystudio107
+ * @package   Seomatic
+ * @since     1.0.0
+ * @see       http://schema.org/Flight
  */
 class Flight extends Intangible
 {
-    // Static Properties
+    // Static Public Properties
     // =========================================================================
 
     /**
@@ -44,35 +55,35 @@ class Flight extends Intangible
     static public $schemaTypeExtends = 'Intangible';
 
     /**
-     * The Schema.org Property Names
+     * The Schema.org composed Property Names
      *
      * @var array
      */
     static public $schemaPropertyNames = [];
 
     /**
-     * The Schema.org Property Expected Types
+     * The Schema.org composed Property Expected Types
      *
      * @var array
      */
     static public $schemaPropertyExpectedTypes = [];
 
     /**
-     * The Schema.org Property Descriptions
+     * The Schema.org composed Property Descriptions
      *
      * @var array
      */
     static public $schemaPropertyDescriptions = [];
 
     /**
-     * The Schema.org Google Required Schema for this type
+     * The Schema.org composed Google Required Schema for this type
      *
      * @var array
      */
     static public $googleRequiredSchema = [];
 
     /**
-     * The Schema.org Google Recommended Schema for this type
+     * The Schema.org composed Google Recommended Schema for this type
      *
      * @var array
      */
@@ -207,6 +218,100 @@ class Flight extends Intangible
      */
     public $webCheckinTime;
 
+    // Static Protected Properties
+    // =========================================================================
+
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'aircraft',
+        'arrivalAirport',
+        'arrivalGate',
+        'arrivalTerminal',
+        'arrivalTime',
+        'boardingPolicy',
+        'departureAirport',
+        'departureGate',
+        'departureTerminal',
+        'departureTime',
+        'estimatedFlightDuration',
+        'flightDistance',
+        'flightNumber',
+        'mealService',
+        'provider',
+        'seller',
+        'webCheckinTime'
+    ];
+
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'aircraft' => ['Text','Vehicle'],
+        'arrivalAirport' => ['Airport'],
+        'arrivalGate' => ['Text'],
+        'arrivalTerminal' => ['Text'],
+        'arrivalTime' => ['DateTime'],
+        'boardingPolicy' => ['BoardingPolicyType'],
+        'departureAirport' => ['Airport'],
+        'departureGate' => ['Text'],
+        'departureTerminal' => ['Text'],
+        'departureTime' => ['DateTime'],
+        'estimatedFlightDuration' => ['Duration','Text'],
+        'flightDistance' => ['Distance','Text'],
+        'flightNumber' => ['Text'],
+        'mealService' => ['Text'],
+        'provider' => ['Organization','Person'],
+        'seller' => ['Organization','Person'],
+        'webCheckinTime' => ['DateTime']
+    ];
+
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'aircraft' => 'The kind of aircraft (e.g., "Boeing 747").',
+        'arrivalAirport' => 'The airport where the flight terminates.',
+        'arrivalGate' => 'Identifier of the flight\'s arrival gate.',
+        'arrivalTerminal' => 'Identifier of the flight\'s arrival terminal.',
+        'arrivalTime' => 'The expected arrival time.',
+        'boardingPolicy' => 'The type of boarding policy used by the airline (e.g. zone-based or group-based).',
+        'departureAirport' => 'The airport where the flight originates.',
+        'departureGate' => 'Identifier of the flight\'s departure gate.',
+        'departureTerminal' => 'Identifier of the flight\'s departure terminal.',
+        'departureTime' => 'The expected departure time.',
+        'estimatedFlightDuration' => 'The estimated time the flight will take.',
+        'flightDistance' => 'The distance of the flight.',
+        'flightNumber' => 'The unique identifier for a flight including the airline IATA code. For example, if describing United flight 110, where the IATA code for United is \'UA\', the flightNumber is \'UA110\'.',
+        'mealService' => 'Description of the meals that will be provided or available for purchase.',
+        'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller. Supersedes carrier.',
+        'seller' => 'An entity which offers (sells / leases / lends / loans) the services / goods. A seller may also be a provider. Supersedes merchant, vendor.',
+        'webCheckinTime' => 'The time when a passenger can check into the flight online.'
+    ];
+
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -216,71 +321,30 @@ class Flight extends Intangible
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
-            'aircraft',
-            'arrivalAirport',
-            'arrivalGate',
-            'arrivalTerminal',
-            'arrivalTime',
-            'boardingPolicy',
-            'departureAirport',
-            'departureGate',
-            'departureTerminal',
-            'departureTime',
-            'estimatedFlightDuration',
-            'flightDistance',
-            'flightNumber',
-            'mealService',
-            'provider',
-            'seller',
-            'webCheckinTime',
-        ]);
+        self::$schemaPropertyNames = array_merge(
+            parent::$_schemaPropertyNames,
+            self::$_schemaPropertyNames
+        );
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
-            'aircraft' => ['Text','Vehicle'],
-            'arrivalAirport' => ['Airport'],
-            'arrivalGate' => ['Text'],
-            'arrivalTerminal' => ['Text'],
-            'arrivalTime' => ['DateTime'],
-            'boardingPolicy' => ['BoardingPolicyType'],
-            'departureAirport' => ['Airport'],
-            'departureGate' => ['Text'],
-            'departureTerminal' => ['Text'],
-            'departureTime' => ['DateTime'],
-            'estimatedFlightDuration' => ['Duration','Text'],
-            'flightDistance' => ['Distance','Text'],
-            'flightNumber' => ['Text'],
-            'mealService' => ['Text'],
-            'provider' => ['Organization','Person'],
-            'seller' => ['Organization','Person'],
-            'webCheckinTime' => ['DateTime'],
-        ]);
+        self::$schemaPropertyExpectedTypes = array_merge(
+            parent::$_schemaPropertyExpectedTypes,
+            self::$_schemaPropertyExpectedTypes
+        );
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
-            'aircraft' => 'The kind of aircraft (e.g., "Boeing 747").',
-            'arrivalAirport' => 'The airport where the flight terminates.',
-            'arrivalGate' => 'Identifier of the flight\'s arrival gate.',
-            'arrivalTerminal' => 'Identifier of the flight\'s arrival terminal.',
-            'arrivalTime' => 'The expected arrival time.',
-            'boardingPolicy' => 'The type of boarding policy used by the airline (e.g. zone-based or group-based).',
-            'departureAirport' => 'The airport where the flight originates.',
-            'departureGate' => 'Identifier of the flight\'s departure gate.',
-            'departureTerminal' => 'Identifier of the flight\'s departure terminal.',
-            'departureTime' => 'The expected departure time.',
-            'estimatedFlightDuration' => 'The estimated time the flight will take.',
-            'flightDistance' => 'The distance of the flight.',
-            'flightNumber' => 'The unique identifier for a flight including the airline IATA code. For example, if describing United flight 110, where the IATA code for United is \'UA\', the flightNumber is \'UA110\'.',
-            'mealService' => 'Description of the meals that will be provided or available for purchase.',
-            'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller. Supersedes carrier.',
-            'seller' => 'An entity which offers (sells / leases / lends / loans) the services / goods. A seller may also be a provider. Supersedes merchant, vendor.',
-            'webCheckinTime' => 'The time when a passenger can check into the flight online.',
-        ]);
+        self::$schemaPropertyDescriptions = array_merge(
+            parent::$_schemaPropertyDescriptions,
+            self::$_schemaPropertyDescriptions
+        );
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
-        ]);
+        self::$googleRequiredSchema = array_merge(
+            parent::$_googleRequiredSchema,
+            self::$_googleRequiredSchema
+        );
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
-        ]);
+        self::$googleRecommendedSchema = array_merge(
+            parent::$_googleRecommendedSchema,
+            self::$_googleRecommendedSchema
+        );
     }
 
     /**
@@ -290,7 +354,9 @@ class Flight extends Intangible
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['aircraft','arrivalAirport','arrivalGate','arrivalTerminal','arrivalTime','boardingPolicy','departureAirport','departureGate','departureTerminal','departureTime','estimatedFlightDuration','flightDistance','flightNumber','mealService','provider','seller','webCheckinTime',], 'validateJsonSchema'],
+            [['aircraft','arrivalAirport','arrivalGate','arrivalTerminal','arrivalTime','boardingPolicy','departureAirport','departureGate','departureTerminal','departureTime','estimatedFlightDuration','flightDistance','flightNumber','mealService','provider','seller','webCheckinTime'], 'validateJsonSchema'],
+            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

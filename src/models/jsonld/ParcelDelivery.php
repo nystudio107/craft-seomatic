@@ -1,4 +1,13 @@
 <?php
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
 
 namespace nystudio107\seomatic\models\jsonld;
 
@@ -8,12 +17,14 @@ use nystudio107\seomatic\models\jsonld\Intangible;
  * ParcelDelivery - The delivery of a parcel either via the postal service or
  * a commercial service.
  *
- * Extends: Intangible
- * @see    http://schema.org/ParcelDelivery
+ * @author    nystudio107
+ * @package   Seomatic
+ * @since     1.0.0
+ * @see       http://schema.org/ParcelDelivery
  */
 class ParcelDelivery extends Intangible
 {
-    // Static Properties
+    // Static Public Properties
     // =========================================================================
 
     /**
@@ -45,35 +56,35 @@ class ParcelDelivery extends Intangible
     static public $schemaTypeExtends = 'Intangible';
 
     /**
-     * The Schema.org Property Names
+     * The Schema.org composed Property Names
      *
      * @var array
      */
     static public $schemaPropertyNames = [];
 
     /**
-     * The Schema.org Property Expected Types
+     * The Schema.org composed Property Expected Types
      *
      * @var array
      */
     static public $schemaPropertyExpectedTypes = [];
 
     /**
-     * The Schema.org Property Descriptions
+     * The Schema.org composed Property Descriptions
      *
      * @var array
      */
     static public $schemaPropertyDescriptions = [];
 
     /**
-     * The Schema.org Google Required Schema for this type
+     * The Schema.org composed Google Required Schema for this type
      *
      * @var array
      */
     static public $googleRequiredSchema = [];
 
     /**
-     * The Schema.org Google Recommended Schema for this type
+     * The Schema.org composed Google Recommended Schema for this type
      *
      * @var array
      */
@@ -163,6 +174,82 @@ class ParcelDelivery extends Intangible
      */
     public $trackingUrl;
 
+    // Static Protected Properties
+    // =========================================================================
+
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'deliveryAddress',
+        'deliveryStatus',
+        'expectedArrivalFrom',
+        'expectedArrivalUntil',
+        'hasDeliveryMethod',
+        'itemShipped',
+        'originAddress',
+        'partOfOrder',
+        'provider',
+        'trackingNumber',
+        'trackingUrl'
+    ];
+
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'deliveryAddress' => ['PostalAddress'],
+        'deliveryStatus' => ['DeliveryEvent'],
+        'expectedArrivalFrom' => ['DateTime'],
+        'expectedArrivalUntil' => ['DateTime'],
+        'hasDeliveryMethod' => ['DeliveryMethod'],
+        'itemShipped' => ['Product'],
+        'originAddress' => ['PostalAddress'],
+        'partOfOrder' => ['Order'],
+        'provider' => ['Organization','Person'],
+        'trackingNumber' => ['Text'],
+        'trackingUrl' => ['URL']
+    ];
+
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'deliveryAddress' => 'Destination address.',
+        'deliveryStatus' => 'New entry added as the package passes through each leg of its journey (from shipment to final delivery).',
+        'expectedArrivalFrom' => 'The earliest date the package may arrive.',
+        'expectedArrivalUntil' => 'The latest date the package may arrive.',
+        'hasDeliveryMethod' => 'Method used for delivery or shipping.',
+        'itemShipped' => 'Item(s) being shipped.',
+        'originAddress' => 'Shipper\'s address.',
+        'partOfOrder' => 'The overall order the items in this delivery were included in.',
+        'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller. Supersedes carrier.',
+        'trackingNumber' => 'Shipper tracking number.',
+        'trackingUrl' => 'Tracking url for the parcel delivery.'
+    ];
+
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -172,53 +259,30 @@ class ParcelDelivery extends Intangible
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
-            'deliveryAddress',
-            'deliveryStatus',
-            'expectedArrivalFrom',
-            'expectedArrivalUntil',
-            'hasDeliveryMethod',
-            'itemShipped',
-            'originAddress',
-            'partOfOrder',
-            'provider',
-            'trackingNumber',
-            'trackingUrl',
-        ]);
+        self::$schemaPropertyNames = array_merge(
+            parent::$_schemaPropertyNames,
+            self::$_schemaPropertyNames
+        );
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
-            'deliveryAddress' => ['PostalAddress'],
-            'deliveryStatus' => ['DeliveryEvent'],
-            'expectedArrivalFrom' => ['DateTime'],
-            'expectedArrivalUntil' => ['DateTime'],
-            'hasDeliveryMethod' => ['DeliveryMethod'],
-            'itemShipped' => ['Product'],
-            'originAddress' => ['PostalAddress'],
-            'partOfOrder' => ['Order'],
-            'provider' => ['Organization','Person'],
-            'trackingNumber' => ['Text'],
-            'trackingUrl' => ['URL'],
-        ]);
+        self::$schemaPropertyExpectedTypes = array_merge(
+            parent::$_schemaPropertyExpectedTypes,
+            self::$_schemaPropertyExpectedTypes
+        );
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
-            'deliveryAddress' => 'Destination address.',
-            'deliveryStatus' => 'New entry added as the package passes through each leg of its journey (from shipment to final delivery).',
-            'expectedArrivalFrom' => 'The earliest date the package may arrive.',
-            'expectedArrivalUntil' => 'The latest date the package may arrive.',
-            'hasDeliveryMethod' => 'Method used for delivery or shipping.',
-            'itemShipped' => 'Item(s) being shipped.',
-            'originAddress' => 'Shipper\'s address.',
-            'partOfOrder' => 'The overall order the items in this delivery were included in.',
-            'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller. Supersedes carrier.',
-            'trackingNumber' => 'Shipper tracking number.',
-            'trackingUrl' => 'Tracking url for the parcel delivery.',
-        ]);
+        self::$schemaPropertyDescriptions = array_merge(
+            parent::$_schemaPropertyDescriptions,
+            self::$_schemaPropertyDescriptions
+        );
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
-        ]);
+        self::$googleRequiredSchema = array_merge(
+            parent::$_googleRequiredSchema,
+            self::$_googleRequiredSchema
+        );
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
-        ]);
+        self::$googleRecommendedSchema = array_merge(
+            parent::$_googleRecommendedSchema,
+            self::$_googleRecommendedSchema
+        );
     }
 
     /**
@@ -228,7 +292,9 @@ class ParcelDelivery extends Intangible
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['deliveryAddress','deliveryStatus','expectedArrivalFrom','expectedArrivalUntil','hasDeliveryMethod','itemShipped','originAddress','partOfOrder','provider','trackingNumber','trackingUrl',], 'validateJsonSchema'],
+            [['deliveryAddress','deliveryStatus','expectedArrivalFrom','expectedArrivalUntil','hasDeliveryMethod','itemShipped','originAddress','partOfOrder','provider','trackingNumber','trackingUrl'], 'validateJsonSchema'],
+            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

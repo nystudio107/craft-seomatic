@@ -1,4 +1,13 @@
 <?php
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
 
 namespace nystudio107\seomatic\models\jsonld;
 
@@ -9,12 +18,14 @@ use nystudio107\seomatic\models\jsonld\CreativeWork;
  * report. Newspapers and magazines have articles of many different types and
  * this is intended to cover them all. See also blog post.
  *
- * Extends: CreativeWork
- * @see    http://schema.org/Article
+ * @author    nystudio107
+ * @package   Seomatic
+ * @since     1.0.0
+ * @see       http://schema.org/Article
  */
 class Article extends CreativeWork
 {
-    // Static Properties
+    // Static Public Properties
     // =========================================================================
 
     /**
@@ -46,35 +57,35 @@ class Article extends CreativeWork
     static public $schemaTypeExtends = 'CreativeWork';
 
     /**
-     * The Schema.org Property Names
+     * The Schema.org composed Property Names
      *
      * @var array
      */
     static public $schemaPropertyNames = [];
 
     /**
-     * The Schema.org Property Expected Types
+     * The Schema.org composed Property Expected Types
      *
      * @var array
      */
     static public $schemaPropertyExpectedTypes = [];
 
     /**
-     * The Schema.org Property Descriptions
+     * The Schema.org composed Property Descriptions
      *
      * @var array
      */
     static public $schemaPropertyDescriptions = [];
 
     /**
-     * The Schema.org Google Required Schema for this type
+     * The Schema.org composed Google Required Schema for this type
      *
      * @var array
      */
     static public $googleRequiredSchema = [];
 
     /**
-     * The Schema.org Google Recommended Schema for this type
+     * The Schema.org composed Google Recommended Schema for this type
      *
      * @var array
      */
@@ -127,6 +138,74 @@ class Article extends CreativeWork
      */
     public $wordCount;
 
+    // Static Protected Properties
+    // =========================================================================
+
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'articleBody',
+        'articleSection',
+        'pageEnd',
+        'pageStart',
+        'pagination',
+        'wordCount'
+    ];
+
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'articleBody' => ['Text'],
+        'articleSection' => ['Text'],
+        'pageEnd' => ['Integer','Text'],
+        'pageStart' => ['Integer','Text'],
+        'pagination' => ['Text'],
+        'wordCount' => ['Integer']
+    ];
+
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'articleBody' => 'The actual body of the article.',
+        'articleSection' => 'Articles may belong to one or more \'sections\' in a magazine or newspaper, such as Sports, Lifestyle, etc.',
+        'pageEnd' => 'The page on which the work ends; for example "138" or "xvi".',
+        'pageStart' => 'The page on which the work starts; for example "135" or "xiii".',
+        'pagination' => 'Any description of pages that is not separated into pageStart and pageEnd; for example, "1-6, 9, 55" or "10-12, 46-49".',
+        'wordCount' => 'The number of words in the text of the Article.'
+    ];
+
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+        'author',
+        'datePublished',
+        'headline',
+        'image',
+        'publisher'
+    ];
+
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+        'dateModified',
+        'mainEntityOfPage'
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -136,45 +215,30 @@ class Article extends CreativeWork
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
-            'articleBody',
-            'articleSection',
-            'pageEnd',
-            'pageStart',
-            'pagination',
-            'wordCount',
-        ]);
+        self::$schemaPropertyNames = array_merge(
+            parent::$_schemaPropertyNames,
+            self::$_schemaPropertyNames
+        );
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
-            'articleBody' => ['Text'],
-            'articleSection' => ['Text'],
-            'pageEnd' => ['Integer','Text'],
-            'pageStart' => ['Integer','Text'],
-            'pagination' => ['Text'],
-            'wordCount' => ['Integer'],
-        ]);
+        self::$schemaPropertyExpectedTypes = array_merge(
+            parent::$_schemaPropertyExpectedTypes,
+            self::$_schemaPropertyExpectedTypes
+        );
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
-            'articleBody' => 'The actual body of the article.',
-            'articleSection' => 'Articles may belong to one or more \'sections\' in a magazine or newspaper, such as Sports, Lifestyle, etc.',
-            'pageEnd' => 'The page on which the work ends; for example "138" or "xvi".',
-            'pageStart' => 'The page on which the work starts; for example "135" or "xiii".',
-            'pagination' => 'Any description of pages that is not separated into pageStart and pageEnd; for example, "1-6, 9, 55" or "10-12, 46-49".',
-            'wordCount' => 'The number of words in the text of the Article.',
-        ]);
+        self::$schemaPropertyDescriptions = array_merge(
+            parent::$_schemaPropertyDescriptions,
+            self::$_schemaPropertyDescriptions
+        );
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
-            'author',
-            'datePublished',
-            'headline',
-            'image',
-            'publisher'
-        ]);
+        self::$googleRequiredSchema = array_merge(
+            parent::$_googleRequiredSchema,
+            self::$_googleRequiredSchema
+        );
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
-            'dateModified',
-            'mainEntityOfPage'
-        ]);
+        self::$googleRecommendedSchema = array_merge(
+            parent::$_googleRecommendedSchema,
+            self::$_googleRecommendedSchema
+        );
     }
 
     /**
@@ -184,9 +248,9 @@ class Article extends CreativeWork
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['articleBody','articleSection','pageEnd','pageStart','pagination','wordCount',], 'validateJsonSchema'],
-            [['author','datePublished','headline','image','publisher'], 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
-            [['dateModified','mainEntityOfPage'], 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.'],
+            [['articleBody','articleSection','pageEnd','pageStart','pagination','wordCount'], 'validateJsonSchema'],
+            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

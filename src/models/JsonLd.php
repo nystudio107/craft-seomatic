@@ -2,9 +2,11 @@
 /**
  * SEOmatic plugin for Craft CMS 3.x
  *
- * @link      https://nystudio107.com/
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
  * @copyright Copyright (c) 2017 nystudio107
- * @license   https://nystudio107.com/license
  */
 
 namespace nystudio107\seomatic\models;
@@ -22,11 +24,9 @@ use yii\validators\DateValidator;
 use yii\base\InvalidParamException;
 
 /**
- * JsonLd Model
- *
  * @author    nystudio107
- * @package   SEOmatic
- * @since     2.0.0
+ * @package   Seomatic
+ * @since     1.0.0
  */
 class JsonLd extends Model
 {
@@ -96,8 +96,9 @@ class JsonLd extends Model
      */
     static public $googleRecommendedSchema = [];
 
-    // Static Methods
+    // Public Properties
     // =========================================================================
+
     /**
      * The schema context.
      *
@@ -105,8 +106,6 @@ class JsonLd extends Model
      */
     public $context;
 
-    // Properties
-    // =========================================================================
     /**
      * The item's type.
      *
@@ -114,28 +113,78 @@ class JsonLd extends Model
      */
     public $type;
 
+
+    // Static Protected Properties
+    // =========================================================================
+
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+    ];
+
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+    ];
+
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+    ];
+
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
+
+    // Static Methods
+    // =========================================================================
+
     /**
      * Create a new JSON-LD schema type object
      *
-     * @param string $jsonLdType
+     * @param string $schemaType
      * @param array  $config
      *
      * @return mixed
      */
-    public static function create($jsonLdType, $config = [])
+    public static function create($schemaType, $config = [])
     {
-        $className = 'nystudio107\\seomatic\\models\\jsonld\\'.$jsonLdType;
-        $model = new $className();
-        $model->attributes = $config;
+        $model = null;
+        $className = 'nystudio107\\seomatic\\models\\jsonld\\'.$schemaType;
+        if (class_exists($className)) {
+            $model = new $className($config);
+        }
+        //$model->attributes = $config;
 
         return $model;
     }
 
-    // Methods
+    // Public Methods
     // =========================================================================
 
     /**
-     * Set the $type property
+     * Set the $type & $context properties
      *
      * @inheritdoc
      */
@@ -203,7 +252,7 @@ class JsonLd extends Model
                     case 'get':
                         return $property->getValue();
                     case 'set':
-                        $property->setValue($args[0]);
+                        $property->setValue($this, $args[0]);
                 }
             } else {
                 throw new InvalidParamException("Property {$property} doesn't exist");
@@ -234,7 +283,7 @@ class JsonLd extends Model
     public function validateJsonSchema($attribute, $params)
     {
         if (!in_array($attribute, static::$schemaPropertyNames)) {
-            $this->addError($attribute, 'The attribute does not exists.');
+            $this->addError($attribute, 'The attribute does not exist.');
         } else {
             $expectedTypes = static::$schemaPropertyExpectedTypes[$attribute];
             $validated = false;

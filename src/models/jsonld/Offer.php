@@ -1,4 +1,13 @@
 <?php
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
 
 namespace nystudio107\seomatic\models\jsonld;
 
@@ -11,12 +20,14 @@ use nystudio107\seomatic\models\jsonld\Intangible;
  * loan a book. For GTIN-related fields, see Check Digit calculator and
  * validation guide from GS1.
  *
- * Extends: Intangible
- * @see    http://schema.org/Offer
+ * @author    nystudio107
+ * @package   Seomatic
+ * @since     1.0.0
+ * @see       http://schema.org/Offer
  */
 class Offer extends Intangible
 {
-    // Static Properties
+    // Static Public Properties
     // =========================================================================
 
     /**
@@ -48,35 +59,35 @@ class Offer extends Intangible
     static public $schemaTypeExtends = 'Intangible';
 
     /**
-     * The Schema.org Property Names
+     * The Schema.org composed Property Names
      *
      * @var array
      */
     static public $schemaPropertyNames = [];
 
     /**
-     * The Schema.org Property Expected Types
+     * The Schema.org composed Property Expected Types
      *
      * @var array
      */
     static public $schemaPropertyExpectedTypes = [];
 
     /**
-     * The Schema.org Property Descriptions
+     * The Schema.org composed Property Descriptions
      *
      * @var array
      */
     static public $schemaPropertyDescriptions = [];
 
     /**
-     * The Schema.org Google Required Schema for this type
+     * The Schema.org composed Google Required Schema for this type
      *
      * @var array
      */
     static public $googleRequiredSchema = [];
 
     /**
-     * The Schema.org Google Recommended Schema for this type
+     * The Schema.org composed Google Recommended Schema for this type
      *
      * @var array
      */
@@ -418,6 +429,169 @@ class Offer extends Intangible
      */
     public $warranty;
 
+    // Static Protected Properties
+    // =========================================================================
+
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'acceptedPaymentMethod',
+        'addOn',
+        'advanceBookingRequirement',
+        'aggregateRating',
+        'areaServed',
+        'availability',
+        'availabilityEnds',
+        'availabilityStarts',
+        'availableAtOrFrom',
+        'availableDeliveryMethod',
+        'businessFunction',
+        'category',
+        'deliveryLeadTime',
+        'eligibleCustomerType',
+        'eligibleDuration',
+        'eligibleQuantity',
+        'eligibleRegion',
+        'eligibleTransactionVolume',
+        'gtin12',
+        'gtin13',
+        'gtin14',
+        'gtin8',
+        'includesObject',
+        'ineligibleRegion',
+        'inventoryLevel',
+        'itemCondition',
+        'itemOffered',
+        'mpn',
+        'offeredBy',
+        'price',
+        'priceCurrency',
+        'priceSpecification',
+        'priceValidUntil',
+        'review',
+        'seller',
+        'serialNumber',
+        'sku',
+        'validFrom',
+        'validThrough',
+        'warranty'
+    ];
+
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'acceptedPaymentMethod' => ['LoanOrCredit','PaymentMethod'],
+        'addOn' => ['Offer'],
+        'advanceBookingRequirement' => ['QuantitativeValue'],
+        'aggregateRating' => ['AggregateRating'],
+        'areaServed' => ['AdministrativeArea','GeoShape','Place','Text'],
+        'availability' => ['ItemAvailability'],
+        'availabilityEnds' => ['DateTime'],
+        'availabilityStarts' => ['DateTime'],
+        'availableAtOrFrom' => ['Place'],
+        'availableDeliveryMethod' => ['DeliveryMethod'],
+        'businessFunction' => ['BusinessFunction'],
+        'category' => ['Text','Thing'],
+        'deliveryLeadTime' => ['QuantitativeValue'],
+        'eligibleCustomerType' => ['BusinessEntityType'],
+        'eligibleDuration' => ['QuantitativeValue'],
+        'eligibleQuantity' => ['QuantitativeValue'],
+        'eligibleRegion' => ['GeoShape','Place','Text'],
+        'eligibleTransactionVolume' => ['PriceSpecification'],
+        'gtin12' => ['Text'],
+        'gtin13' => ['Text'],
+        'gtin14' => ['Text'],
+        'gtin8' => ['Text'],
+        'includesObject' => ['TypeAndQuantityNode'],
+        'ineligibleRegion' => ['GeoShape','Place','Text'],
+        'inventoryLevel' => ['QuantitativeValue'],
+        'itemCondition' => ['OfferItemCondition'],
+        'itemOffered' => ['Product','Service'],
+        'mpn' => ['Text'],
+        'offeredBy' => ['Organization','Person'],
+        'price' => ['Number','Text'],
+        'priceCurrency' => ['Text'],
+        'priceSpecification' => ['PriceSpecification'],
+        'priceValidUntil' => ['Date'],
+        'review' => ['Review'],
+        'seller' => ['Organization','Person'],
+        'serialNumber' => ['Text'],
+        'sku' => ['Text'],
+        'validFrom' => ['DateTime'],
+        'validThrough' => ['DateTime'],
+        'warranty' => ['WarrantyPromise']
+    ];
+
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'acceptedPaymentMethod' => 'The payment method(s) accepted by seller for this offer.',
+        'addOn' => 'An additional offer that can only be obtained in combination with the first base offer (e.g. supplements and extensions that are available for a surcharge).',
+        'advanceBookingRequirement' => 'The amount of time that is required between accepting the offer and the actual usage of the resource or service.',
+        'aggregateRating' => 'The overall rating, based on a collection of reviews or ratings, of the item.',
+        'areaServed' => 'The geographic area where a service or offered item is provided. Supersedes serviceArea.',
+        'availability' => 'The availability of this item—for example In stock, Out of stock, Pre-order, etc.',
+        'availabilityEnds' => 'The end of the availability of the product or service included in the offer.',
+        'availabilityStarts' => 'The beginning of the availability of the product or service included in the offer.',
+        'availableAtOrFrom' => 'The place(s) from which the offer can be obtained (e.g. store locations).',
+        'availableDeliveryMethod' => 'The delivery method(s) available for this offer.',
+        'businessFunction' => 'The business function (e.g. sell, lease, repair, dispose) of the offer or component of a bundle (TypeAndQuantityNode). The default is http://purl.org/goodrelations/v1#Sell.',
+        'category' => 'A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.',
+        'deliveryLeadTime' => 'The typical delay between the receipt of the order and the goods either leaving the warehouse or being prepared for pickup, in case the delivery method is on site pickup.',
+        'eligibleCustomerType' => 'The type(s) of customers for which the given offer is valid.',
+        'eligibleDuration' => 'The duration for which the given offer is valid.',
+        'eligibleQuantity' => 'The interval and unit of measurement of ordering quantities for which the offer or price specification is valid. This allows e.g. specifying that a certain freight charge is valid only for a certain quantity.',
+        'eligibleRegion' => 'The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the GeoShape for the geo-political region(s) for which the offer or delivery charge specification is valid. See also ineligibleRegion.',
+        'eligibleTransactionVolume' => 'The transaction volume, in a monetary unit, for which the offer or price specification is valid, e.g. for indicating a minimal purchasing volume, to express free shipping above a certain order volume, or to limit the acceptance of credit cards to purchases to a certain minimal amount.',
+        'gtin12' => 'The GTIN-12 code of the product, or the product to which the offer refers. The GTIN-12 is the 12-digit GS1 Identification Key composed of a U.P.C. Company Prefix, Item Reference, and Check Digit used to identify trade items. See GS1 GTIN Summary for more details.',
+        'gtin13' => 'The GTIN-13 code of the product, or the product to which the offer refers. This is equivalent to 13-digit ISBN codes and EAN UCC-13. Former 12-digit UPC codes can be converted into a GTIN-13 code by simply adding a preceeding zero. See GS1 GTIN Summary for more details.',
+        'gtin14' => 'The GTIN-14 code of the product, or the product to which the offer refers. See GS1 GTIN Summary for more details.',
+        'gtin8' => 'The GTIN-8 code of the product, or the product to which the offer refers. This code is also known as EAN/UCC-8 or 8-digit EAN. See GS1 GTIN Summary for more details.',
+        'includesObject' => 'This links to a node or nodes indicating the exact quantity of the products included in the offer.',
+        'ineligibleRegion' => 'The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the GeoShape for the geo-political region(s) for which the offer or delivery charge specification is not valid, e.g. a region where the transaction is not allowed. See also eligibleRegion.',
+        'inventoryLevel' => 'The current approximate inventory level for the item or items.',
+        'itemCondition' => 'A predefined value from OfferItemCondition or a textual description of the condition of the product or service, or the products or services included in the offer.',
+        'itemOffered' => 'The item being offered.',
+        'mpn' => 'The Manufacturer Part Number (MPN) of the product, or the product to which the offer refers.',
+        'offeredBy' => 'A pointer to the organization or person making the offer. Inverse property: makesOffer.',
+        'price' => 'The offer price of a product, or of a price component when attached to PriceSpecification and its subtypes. Usage guidelines: Use the priceCurrency property (with ISO 4217 codes e.g. "USD") instead of including ambiguous symbols such as \'$\' in the value. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator. Note that both RDFa and Microdata syntax allow the use of a "content=" attribute for publishing simple machine-readable values alongside more human-friendly formatting. Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols.',
+        'priceCurrency' => 'The currency (in 3-letter ISO 4217 format) of the price or a price component, when attached to PriceSpecification and its subtypes.',
+        'priceSpecification' => 'One or more detailed price specifications, indicating the unit price and delivery or payment charges.',
+        'priceValidUntil' => 'The date after which the price is no longer available.',
+        'review' => 'A review of the item. Supersedes reviews.',
+        'seller' => 'An entity which offers (sells / leases / lends / loans) the services / goods. A seller may also be a provider. Supersedes merchant, vendor.',
+        'serialNumber' => 'The serial number or any alphanumeric identifier of a particular product. When attached to an offer, it is a shortcut for the serial number of the product included in the offer.',
+        'sku' => 'The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a product or service, or the product to which the offer refers.',
+        'validFrom' => 'The date when the item becomes valid.',
+        'validThrough' => 'The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.',
+        'warranty' => 'The warranty promise(s) included in the offer. Supersedes warrantyPromise.'
+    ];
+
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -427,140 +601,30 @@ class Offer extends Intangible
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
-            'acceptedPaymentMethod',
-            'addOn',
-            'advanceBookingRequirement',
-            'aggregateRating',
-            'areaServed',
-            'availability',
-            'availabilityEnds',
-            'availabilityStarts',
-            'availableAtOrFrom',
-            'availableDeliveryMethod',
-            'businessFunction',
-            'category',
-            'deliveryLeadTime',
-            'eligibleCustomerType',
-            'eligibleDuration',
-            'eligibleQuantity',
-            'eligibleRegion',
-            'eligibleTransactionVolume',
-            'gtin12',
-            'gtin13',
-            'gtin14',
-            'gtin8',
-            'includesObject',
-            'ineligibleRegion',
-            'inventoryLevel',
-            'itemCondition',
-            'itemOffered',
-            'mpn',
-            'offeredBy',
-            'price',
-            'priceCurrency',
-            'priceSpecification',
-            'priceValidUntil',
-            'review',
-            'seller',
-            'serialNumber',
-            'sku',
-            'validFrom',
-            'validThrough',
-            'warranty',
-        ]);
+        self::$schemaPropertyNames = array_merge(
+            parent::$_schemaPropertyNames,
+            self::$_schemaPropertyNames
+        );
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
-            'acceptedPaymentMethod' => ['LoanOrCredit','PaymentMethod'],
-            'addOn' => ['Offer'],
-            'advanceBookingRequirement' => ['QuantitativeValue'],
-            'aggregateRating' => ['AggregateRating'],
-            'areaServed' => ['AdministrativeArea','GeoShape','Place','Text'],
-            'availability' => ['ItemAvailability'],
-            'availabilityEnds' => ['DateTime'],
-            'availabilityStarts' => ['DateTime'],
-            'availableAtOrFrom' => ['Place'],
-            'availableDeliveryMethod' => ['DeliveryMethod'],
-            'businessFunction' => ['BusinessFunction'],
-            'category' => ['Text','Thing'],
-            'deliveryLeadTime' => ['QuantitativeValue'],
-            'eligibleCustomerType' => ['BusinessEntityType'],
-            'eligibleDuration' => ['QuantitativeValue'],
-            'eligibleQuantity' => ['QuantitativeValue'],
-            'eligibleRegion' => ['GeoShape','Place','Text'],
-            'eligibleTransactionVolume' => ['PriceSpecification'],
-            'gtin12' => ['Text'],
-            'gtin13' => ['Text'],
-            'gtin14' => ['Text'],
-            'gtin8' => ['Text'],
-            'includesObject' => ['TypeAndQuantityNode'],
-            'ineligibleRegion' => ['GeoShape','Place','Text'],
-            'inventoryLevel' => ['QuantitativeValue'],
-            'itemCondition' => ['OfferItemCondition'],
-            'itemOffered' => ['Product','Service'],
-            'mpn' => ['Text'],
-            'offeredBy' => ['Organization','Person'],
-            'price' => ['Number','Text'],
-            'priceCurrency' => ['Text'],
-            'priceSpecification' => ['PriceSpecification'],
-            'priceValidUntil' => ['Date'],
-            'review' => ['Review'],
-            'seller' => ['Organization','Person'],
-            'serialNumber' => ['Text'],
-            'sku' => ['Text'],
-            'validFrom' => ['DateTime'],
-            'validThrough' => ['DateTime'],
-            'warranty' => ['WarrantyPromise'],
-        ]);
+        self::$schemaPropertyExpectedTypes = array_merge(
+            parent::$_schemaPropertyExpectedTypes,
+            self::$_schemaPropertyExpectedTypes
+        );
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
-            'acceptedPaymentMethod' => 'The payment method(s) accepted by seller for this offer.',
-            'addOn' => 'An additional offer that can only be obtained in combination with the first base offer (e.g. supplements and extensions that are available for a surcharge).',
-            'advanceBookingRequirement' => 'The amount of time that is required between accepting the offer and the actual usage of the resource or service.',
-            'aggregateRating' => 'The overall rating, based on a collection of reviews or ratings, of the item.',
-            'areaServed' => 'The geographic area where a service or offered item is provided. Supersedes serviceArea.',
-            'availability' => 'The availability of this item—for example In stock, Out of stock, Pre-order, etc.',
-            'availabilityEnds' => 'The end of the availability of the product or service included in the offer.',
-            'availabilityStarts' => 'The beginning of the availability of the product or service included in the offer.',
-            'availableAtOrFrom' => 'The place(s) from which the offer can be obtained (e.g. store locations).',
-            'availableDeliveryMethod' => 'The delivery method(s) available for this offer.',
-            'businessFunction' => 'The business function (e.g. sell, lease, repair, dispose) of the offer or component of a bundle (TypeAndQuantityNode). The default is http://purl.org/goodrelations/v1#Sell.',
-            'category' => 'A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.',
-            'deliveryLeadTime' => 'The typical delay between the receipt of the order and the goods either leaving the warehouse or being prepared for pickup, in case the delivery method is on site pickup.',
-            'eligibleCustomerType' => 'The type(s) of customers for which the given offer is valid.',
-            'eligibleDuration' => 'The duration for which the given offer is valid.',
-            'eligibleQuantity' => 'The interval and unit of measurement of ordering quantities for which the offer or price specification is valid. This allows e.g. specifying that a certain freight charge is valid only for a certain quantity.',
-            'eligibleRegion' => 'The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the GeoShape for the geo-political region(s) for which the offer or delivery charge specification is valid. See also ineligibleRegion.',
-            'eligibleTransactionVolume' => 'The transaction volume, in a monetary unit, for which the offer or price specification is valid, e.g. for indicating a minimal purchasing volume, to express free shipping above a certain order volume, or to limit the acceptance of credit cards to purchases to a certain minimal amount.',
-            'gtin12' => 'The GTIN-12 code of the product, or the product to which the offer refers. The GTIN-12 is the 12-digit GS1 Identification Key composed of a U.P.C. Company Prefix, Item Reference, and Check Digit used to identify trade items. See GS1 GTIN Summary for more details.',
-            'gtin13' => 'The GTIN-13 code of the product, or the product to which the offer refers. This is equivalent to 13-digit ISBN codes and EAN UCC-13. Former 12-digit UPC codes can be converted into a GTIN-13 code by simply adding a preceeding zero. See GS1 GTIN Summary for more details.',
-            'gtin14' => 'The GTIN-14 code of the product, or the product to which the offer refers. See GS1 GTIN Summary for more details.',
-            'gtin8' => 'The GTIN-8 code of the product, or the product to which the offer refers. This code is also known as EAN/UCC-8 or 8-digit EAN. See GS1 GTIN Summary for more details.',
-            'includesObject' => 'This links to a node or nodes indicating the exact quantity of the products included in the offer.',
-            'ineligibleRegion' => 'The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the GeoShape for the geo-political region(s) for which the offer or delivery charge specification is not valid, e.g. a region where the transaction is not allowed. See also eligibleRegion.',
-            'inventoryLevel' => 'The current approximate inventory level for the item or items.',
-            'itemCondition' => 'A predefined value from OfferItemCondition or a textual description of the condition of the product or service, or the products or services included in the offer.',
-            'itemOffered' => 'The item being offered.',
-            'mpn' => 'The Manufacturer Part Number (MPN) of the product, or the product to which the offer refers.',
-            'offeredBy' => 'A pointer to the organization or person making the offer. Inverse property: makesOffer.',
-            'price' => 'The offer price of a product, or of a price component when attached to PriceSpecification and its subtypes. Usage guidelines: Use the priceCurrency property (with ISO 4217 codes e.g. "USD") instead of including ambiguous symbols such as \'$\' in the value. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator. Note that both RDFa and Microdata syntax allow the use of a "content=" attribute for publishing simple machine-readable values alongside more human-friendly formatting. Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols.',
-            'priceCurrency' => 'The currency (in 3-letter ISO 4217 format) of the price or a price component, when attached to PriceSpecification and its subtypes.',
-            'priceSpecification' => 'One or more detailed price specifications, indicating the unit price and delivery or payment charges.',
-            'priceValidUntil' => 'The date after which the price is no longer available.',
-            'review' => 'A review of the item. Supersedes reviews.',
-            'seller' => 'An entity which offers (sells / leases / lends / loans) the services / goods. A seller may also be a provider. Supersedes merchant, vendor.',
-            'serialNumber' => 'The serial number or any alphanumeric identifier of a particular product. When attached to an offer, it is a shortcut for the serial number of the product included in the offer.',
-            'sku' => 'The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a product or service, or the product to which the offer refers.',
-            'validFrom' => 'The date when the item becomes valid.',
-            'validThrough' => 'The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.',
-            'warranty' => 'The warranty promise(s) included in the offer. Supersedes warrantyPromise.',
-        ]);
+        self::$schemaPropertyDescriptions = array_merge(
+            parent::$_schemaPropertyDescriptions,
+            self::$_schemaPropertyDescriptions
+        );
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
-        ]);
+        self::$googleRequiredSchema = array_merge(
+            parent::$_googleRequiredSchema,
+            self::$_googleRequiredSchema
+        );
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
-        ]);
+        self::$googleRecommendedSchema = array_merge(
+            parent::$_googleRecommendedSchema,
+            self::$_googleRecommendedSchema
+        );
     }
 
     /**
@@ -570,7 +634,9 @@ class Offer extends Intangible
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['acceptedPaymentMethod','addOn','advanceBookingRequirement','aggregateRating','areaServed','availability','availabilityEnds','availabilityStarts','availableAtOrFrom','availableDeliveryMethod','businessFunction','category','deliveryLeadTime','eligibleCustomerType','eligibleDuration','eligibleQuantity','eligibleRegion','eligibleTransactionVolume','gtin12','gtin13','gtin14','gtin8','includesObject','ineligibleRegion','inventoryLevel','itemCondition','itemOffered','mpn','offeredBy','price','priceCurrency','priceSpecification','priceValidUntil','review','seller','serialNumber','sku','validFrom','validThrough','warranty',], 'validateJsonSchema'],
+            [['acceptedPaymentMethod','addOn','advanceBookingRequirement','aggregateRating','areaServed','availability','availabilityEnds','availabilityStarts','availableAtOrFrom','availableDeliveryMethod','businessFunction','category','deliveryLeadTime','eligibleCustomerType','eligibleDuration','eligibleQuantity','eligibleRegion','eligibleTransactionVolume','gtin12','gtin13','gtin14','gtin8','includesObject','ineligibleRegion','inventoryLevel','itemCondition','itemOffered','mpn','offeredBy','price','priceCurrency','priceSpecification','priceValidUntil','review','seller','serialNumber','sku','validFrom','validThrough','warranty'], 'validateJsonSchema'],
+            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

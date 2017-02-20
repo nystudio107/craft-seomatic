@@ -1,4 +1,13 @@
 <?php
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
 
 namespace nystudio107\seomatic\models\jsonld;
 
@@ -9,12 +18,14 @@ use nystudio107\seomatic\models\jsonld\Thing;
  * concert ticket; the rental of a car; a haircut; or an episode of a TV show
  * streamed online.
  *
- * Extends: Thing
- * @see    http://schema.org/Product
+ * @author    nystudio107
+ * @package   Seomatic
+ * @since     1.0.0
+ * @see       http://schema.org/Product
  */
 class Product extends Thing
 {
-    // Static Properties
+    // Static Public Properties
     // =========================================================================
 
     /**
@@ -46,35 +57,35 @@ class Product extends Thing
     static public $schemaTypeExtends = 'Thing';
 
     /**
-     * The Schema.org Property Names
+     * The Schema.org composed Property Names
      *
      * @var array
      */
     static public $schemaPropertyNames = [];
 
     /**
-     * The Schema.org Property Expected Types
+     * The Schema.org composed Property Expected Types
      *
      * @var array
      */
     static public $schemaPropertyExpectedTypes = [];
 
     /**
-     * The Schema.org Property Descriptions
+     * The Schema.org composed Property Descriptions
      *
      * @var array
      */
     static public $schemaPropertyDescriptions = [];
 
     /**
-     * The Schema.org Google Required Schema for this type
+     * The Schema.org composed Google Required Schema for this type
      *
      * @var array
      */
     static public $googleRequiredSchema = [];
 
     /**
-     * The Schema.org Google Recommended Schema for this type
+     * The Schema.org composed Google Recommended Schema for this type
      *
      * @var array
      */
@@ -332,6 +343,142 @@ class Product extends Thing
      */
     public $width;
 
+    // Static Protected Properties
+    // =========================================================================
+
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'additionalProperty',
+        'aggregateRating',
+        'audience',
+        'award',
+        'brand',
+        'category',
+        'color',
+        'depth',
+        'gtin12',
+        'gtin13',
+        'gtin14',
+        'gtin8',
+        'height',
+        'isAccessoryOrSparePartFor',
+        'isConsumableFor',
+        'isRelatedTo',
+        'isSimilarTo',
+        'itemCondition',
+        'logo',
+        'manufacturer',
+        'model',
+        'mpn',
+        'offers',
+        'productID',
+        'productionDate',
+        'purchaseDate',
+        'releaseDate',
+        'review',
+        'sku',
+        'weight',
+        'width'
+    ];
+
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'additionalProperty' => ['PropertyValue'],
+        'aggregateRating' => ['AggregateRating'],
+        'audience' => ['Audience'],
+        'award' => ['Text'],
+        'brand' => ['Brand','Organization'],
+        'category' => ['Text','Thing'],
+        'color' => ['Text'],
+        'depth' => ['Distance','QuantitativeValue'],
+        'gtin12' => ['Text'],
+        'gtin13' => ['Text'],
+        'gtin14' => ['Text'],
+        'gtin8' => ['Text'],
+        'height' => ['Distance','QuantitativeValue'],
+        'isAccessoryOrSparePartFor' => ['Product'],
+        'isConsumableFor' => ['Product'],
+        'isRelatedTo' => ['Product','Service'],
+        'isSimilarTo' => ['Product','Service'],
+        'itemCondition' => ['OfferItemCondition'],
+        'logo' => ['ImageObject','URL'],
+        'manufacturer' => ['Organization'],
+        'model' => ['ProductModel','Text'],
+        'mpn' => ['Text'],
+        'offers' => ['Offer'],
+        'productID' => ['Text'],
+        'productionDate' => ['Date'],
+        'purchaseDate' => ['Date'],
+        'releaseDate' => ['Date'],
+        'review' => ['Review'],
+        'sku' => ['Text'],
+        'weight' => ['QuantitativeValue'],
+        'width' => ['Distance','QuantitativeValue']
+    ];
+
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'additionalProperty' => 'A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org. Note: Publishers should be aware that applications designed to use specific schema.org properties (e.g. http://schema.org/width, http://schema.org/color, http://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.',
+        'aggregateRating' => 'The overall rating, based on a collection of reviews or ratings, of the item.',
+        'audience' => 'An intended audience, i.e. a group for whom something was created. Supersedes serviceAudience.',
+        'award' => 'An award won by or for this item. Supersedes awards.',
+        'brand' => 'The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.',
+        'category' => 'A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.',
+        'color' => 'The color of the product.',
+        'depth' => 'The depth of the item.',
+        'gtin12' => 'The GTIN-12 code of the product, or the product to which the offer refers. The GTIN-12 is the 12-digit GS1 Identification Key composed of a U.P.C. Company Prefix, Item Reference, and Check Digit used to identify trade items. See GS1 GTIN Summary for more details.',
+        'gtin13' => 'The GTIN-13 code of the product, or the product to which the offer refers. This is equivalent to 13-digit ISBN codes and EAN UCC-13. Former 12-digit UPC codes can be converted into a GTIN-13 code by simply adding a preceeding zero. See GS1 GTIN Summary for more details.',
+        'gtin14' => 'The GTIN-14 code of the product, or the product to which the offer refers. See GS1 GTIN Summary for more details.',
+        'gtin8' => 'The GTIN-8 code of the product, or the product to which the offer refers. This code is also known as EAN/UCC-8 or 8-digit EAN. See GS1 GTIN Summary for more details.',
+        'height' => 'The height of the item.',
+        'isAccessoryOrSparePartFor' => 'A pointer to another product (or multiple products) for which this product is an accessory or spare part.',
+        'isConsumableFor' => 'A pointer to another product (or multiple products) for which this product is a consumable.',
+        'isRelatedTo' => 'A pointer to another, somehow related product (or multiple products).',
+        'isSimilarTo' => 'A pointer to another, functionally similar product (or multiple products).',
+        'itemCondition' => 'A predefined value from OfferItemCondition or a textual description of the condition of the product or service, or the products or services included in the offer.',
+        'logo' => 'An associated logo.',
+        'manufacturer' => 'The manufacturer of the product.',
+        'model' => 'The model of the product. Use with the URL of a ProductModel or a textual representation of the model identifier. The URL of the ProductModel can be from an external source. It is recommended to additionally provide strong product identifiers via the gtin8/gtin13/gtin14 and mpn properties.',
+        'mpn' => 'The Manufacturer Part Number (MPN) of the product, or the product to which the offer refers.',
+        'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event.',
+        'productID' => 'The product identifier, such as ISBN. For example: meta itemprop="productID" content="isbn:123-456-789".',
+        'productionDate' => 'The date of production of the item, e.g. vehicle.',
+        'purchaseDate' => 'The date the item e.g. vehicle was purchased by the current owner.',
+        'releaseDate' => 'The release date of a product or product model. This can be used to distinguish the exact variant of a product.',
+        'review' => 'A review of the item. Supersedes reviews.',
+        'sku' => 'The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a product or service, or the product to which the offer refers.',
+        'weight' => 'The weight of the product or person.',
+        'width' => 'The width of the item.'
+    ];
+
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -341,113 +488,30 @@ class Product extends Thing
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
-            'additionalProperty',
-            'aggregateRating',
-            'audience',
-            'award',
-            'brand',
-            'category',
-            'color',
-            'depth',
-            'gtin12',
-            'gtin13',
-            'gtin14',
-            'gtin8',
-            'height',
-            'isAccessoryOrSparePartFor',
-            'isConsumableFor',
-            'isRelatedTo',
-            'isSimilarTo',
-            'itemCondition',
-            'logo',
-            'manufacturer',
-            'model',
-            'mpn',
-            'offers',
-            'productID',
-            'productionDate',
-            'purchaseDate',
-            'releaseDate',
-            'review',
-            'sku',
-            'weight',
-            'width',
-        ]);
+        self::$schemaPropertyNames = array_merge(
+            parent::$_schemaPropertyNames,
+            self::$_schemaPropertyNames
+        );
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
-            'additionalProperty' => ['PropertyValue'],
-            'aggregateRating' => ['AggregateRating'],
-            'audience' => ['Audience'],
-            'award' => ['Text'],
-            'brand' => ['Brand','Organization'],
-            'category' => ['Text','Thing'],
-            'color' => ['Text'],
-            'depth' => ['Distance','QuantitativeValue'],
-            'gtin12' => ['Text'],
-            'gtin13' => ['Text'],
-            'gtin14' => ['Text'],
-            'gtin8' => ['Text'],
-            'height' => ['Distance','QuantitativeValue'],
-            'isAccessoryOrSparePartFor' => ['Product'],
-            'isConsumableFor' => ['Product'],
-            'isRelatedTo' => ['Product','Service'],
-            'isSimilarTo' => ['Product','Service'],
-            'itemCondition' => ['OfferItemCondition'],
-            'logo' => ['ImageObject','URL'],
-            'manufacturer' => ['Organization'],
-            'model' => ['ProductModel','Text'],
-            'mpn' => ['Text'],
-            'offers' => ['Offer'],
-            'productID' => ['Text'],
-            'productionDate' => ['Date'],
-            'purchaseDate' => ['Date'],
-            'releaseDate' => ['Date'],
-            'review' => ['Review'],
-            'sku' => ['Text'],
-            'weight' => ['QuantitativeValue'],
-            'width' => ['Distance','QuantitativeValue'],
-        ]);
+        self::$schemaPropertyExpectedTypes = array_merge(
+            parent::$_schemaPropertyExpectedTypes,
+            self::$_schemaPropertyExpectedTypes
+        );
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
-            'additionalProperty' => 'A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org. Note: Publishers should be aware that applications designed to use specific schema.org properties (e.g. http://schema.org/width, http://schema.org/color, http://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.',
-            'aggregateRating' => 'The overall rating, based on a collection of reviews or ratings, of the item.',
-            'audience' => 'An intended audience, i.e. a group for whom something was created. Supersedes serviceAudience.',
-            'award' => 'An award won by or for this item. Supersedes awards.',
-            'brand' => 'The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.',
-            'category' => 'A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.',
-            'color' => 'The color of the product.',
-            'depth' => 'The depth of the item.',
-            'gtin12' => 'The GTIN-12 code of the product, or the product to which the offer refers. The GTIN-12 is the 12-digit GS1 Identification Key composed of a U.P.C. Company Prefix, Item Reference, and Check Digit used to identify trade items. See GS1 GTIN Summary for more details.',
-            'gtin13' => 'The GTIN-13 code of the product, or the product to which the offer refers. This is equivalent to 13-digit ISBN codes and EAN UCC-13. Former 12-digit UPC codes can be converted into a GTIN-13 code by simply adding a preceeding zero. See GS1 GTIN Summary for more details.',
-            'gtin14' => 'The GTIN-14 code of the product, or the product to which the offer refers. See GS1 GTIN Summary for more details.',
-            'gtin8' => 'The GTIN-8 code of the product, or the product to which the offer refers. This code is also known as EAN/UCC-8 or 8-digit EAN. See GS1 GTIN Summary for more details.',
-            'height' => 'The height of the item.',
-            'isAccessoryOrSparePartFor' => 'A pointer to another product (or multiple products) for which this product is an accessory or spare part.',
-            'isConsumableFor' => 'A pointer to another product (or multiple products) for which this product is a consumable.',
-            'isRelatedTo' => 'A pointer to another, somehow related product (or multiple products).',
-            'isSimilarTo' => 'A pointer to another, functionally similar product (or multiple products).',
-            'itemCondition' => 'A predefined value from OfferItemCondition or a textual description of the condition of the product or service, or the products or services included in the offer.',
-            'logo' => 'An associated logo.',
-            'manufacturer' => 'The manufacturer of the product.',
-            'model' => 'The model of the product. Use with the URL of a ProductModel or a textual representation of the model identifier. The URL of the ProductModel can be from an external source. It is recommended to additionally provide strong product identifiers via the gtin8/gtin13/gtin14 and mpn properties.',
-            'mpn' => 'The Manufacturer Part Number (MPN) of the product, or the product to which the offer refers.',
-            'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event.',
-            'productID' => 'The product identifier, such as ISBN. For example: meta itemprop="productID" content="isbn:123-456-789".',
-            'productionDate' => 'The date of production of the item, e.g. vehicle.',
-            'purchaseDate' => 'The date the item e.g. vehicle was purchased by the current owner.',
-            'releaseDate' => 'The release date of a product or product model. This can be used to distinguish the exact variant of a product.',
-            'review' => 'A review of the item. Supersedes reviews.',
-            'sku' => 'The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a product or service, or the product to which the offer refers.',
-            'weight' => 'The weight of the product or person.',
-            'width' => 'The width of the item.',
-        ]);
+        self::$schemaPropertyDescriptions = array_merge(
+            parent::$_schemaPropertyDescriptions,
+            self::$_schemaPropertyDescriptions
+        );
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
-        ]);
+        self::$googleRequiredSchema = array_merge(
+            parent::$_googleRequiredSchema,
+            self::$_googleRequiredSchema
+        );
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
-        ]);
+        self::$googleRecommendedSchema = array_merge(
+            parent::$_googleRecommendedSchema,
+            self::$_googleRecommendedSchema
+        );
     }
 
     /**
@@ -457,7 +521,9 @@ class Product extends Thing
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['additionalProperty','aggregateRating','audience','award','brand','category','color','depth','gtin12','gtin13','gtin14','gtin8','height','isAccessoryOrSparePartFor','isConsumableFor','isRelatedTo','isSimilarTo','itemCondition','logo','manufacturer','model','mpn','offers','productID','productionDate','purchaseDate','releaseDate','review','sku','weight','width',], 'validateJsonSchema'],
+            [['additionalProperty','aggregateRating','audience','award','brand','category','color','depth','gtin12','gtin13','gtin14','gtin8','height','isAccessoryOrSparePartFor','isConsumableFor','isRelatedTo','isSimilarTo','itemCondition','logo','manufacturer','model','mpn','offers','productID','productionDate','purchaseDate','releaseDate','review','sku','weight','width'], 'validateJsonSchema'],
+            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

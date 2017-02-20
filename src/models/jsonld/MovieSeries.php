@@ -1,4 +1,13 @@
 <?php
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
 
 namespace nystudio107\seomatic\models\jsonld;
 
@@ -8,12 +17,14 @@ use nystudio107\seomatic\models\jsonld\CreativeWorkSeries;
  * MovieSeries - A series of movies. Included movies can be indicated with the
  * hasPart property.
  *
- * Extends: CreativeWorkSeries
- * @see    http://schema.org/MovieSeries
+ * @author    nystudio107
+ * @package   Seomatic
+ * @since     1.0.0
+ * @see       http://schema.org/MovieSeries
  */
 class MovieSeries extends CreativeWorkSeries
 {
-    // Static Properties
+    // Static Public Properties
     // =========================================================================
 
     /**
@@ -45,35 +56,35 @@ class MovieSeries extends CreativeWorkSeries
     static public $schemaTypeExtends = 'CreativeWorkSeries';
 
     /**
-     * The Schema.org Property Names
+     * The Schema.org composed Property Names
      *
      * @var array
      */
     static public $schemaPropertyNames = [];
 
     /**
-     * The Schema.org Property Expected Types
+     * The Schema.org composed Property Expected Types
      *
      * @var array
      */
     static public $schemaPropertyExpectedTypes = [];
 
     /**
-     * The Schema.org Property Descriptions
+     * The Schema.org composed Property Descriptions
      *
      * @var array
      */
     static public $schemaPropertyDescriptions = [];
 
     /**
-     * The Schema.org Google Required Schema for this type
+     * The Schema.org composed Google Required Schema for this type
      *
      * @var array
      */
     static public $googleRequiredSchema = [];
 
     /**
-     * The Schema.org Google Recommended Schema for this type
+     * The Schema.org composed Google Recommended Schema for this type
      *
      * @var array
      */
@@ -122,6 +133,64 @@ class MovieSeries extends CreativeWorkSeries
      */
     public $trailer;
 
+    // Static Protected Properties
+    // =========================================================================
+
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'actor',
+        'director',
+        'musicBy',
+        'productionCompany',
+        'trailer'
+    ];
+
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'actor' => ['Person'],
+        'director' => ['Person'],
+        'musicBy' => ['MusicGroup','Person'],
+        'productionCompany' => ['Organization'],
+        'trailer' => ['VideoObject']
+    ];
+
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'actor' => 'An actor, e.g. in tv, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip. Supersedes actors.',
+        'director' => 'A director of e.g. tv, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip. Supersedes directors.',
+        'musicBy' => 'The composer of the soundtrack.',
+        'productionCompany' => 'The production company or studio responsible for the item e.g. series, video game, episode etc.',
+        'trailer' => 'The trailer of a movie or tv/radio series, season, episode, etc.'
+    ];
+
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -131,35 +200,30 @@ class MovieSeries extends CreativeWorkSeries
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
-            'actor',
-            'director',
-            'musicBy',
-            'productionCompany',
-            'trailer',
-        ]);
+        self::$schemaPropertyNames = array_merge(
+            parent::$_schemaPropertyNames,
+            self::$_schemaPropertyNames
+        );
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
-            'actor' => ['Person'],
-            'director' => ['Person'],
-            'musicBy' => ['MusicGroup','Person'],
-            'productionCompany' => ['Organization'],
-            'trailer' => ['VideoObject'],
-        ]);
+        self::$schemaPropertyExpectedTypes = array_merge(
+            parent::$_schemaPropertyExpectedTypes,
+            self::$_schemaPropertyExpectedTypes
+        );
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
-            'actor' => 'An actor, e.g. in tv, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip. Supersedes actors.',
-            'director' => 'A director of e.g. tv, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip. Supersedes directors.',
-            'musicBy' => 'The composer of the soundtrack.',
-            'productionCompany' => 'The production company or studio responsible for the item e.g. series, video game, episode etc.',
-            'trailer' => 'The trailer of a movie or tv/radio series, season, episode, etc.',
-        ]);
+        self::$schemaPropertyDescriptions = array_merge(
+            parent::$_schemaPropertyDescriptions,
+            self::$_schemaPropertyDescriptions
+        );
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
-        ]);
+        self::$googleRequiredSchema = array_merge(
+            parent::$_googleRequiredSchema,
+            self::$_googleRequiredSchema
+        );
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
-        ]);
+        self::$googleRecommendedSchema = array_merge(
+            parent::$_googleRecommendedSchema,
+            self::$_googleRecommendedSchema
+        );
     }
 
     /**
@@ -169,7 +233,9 @@ class MovieSeries extends CreativeWorkSeries
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['actor','director','musicBy','productionCompany','trailer',], 'validateJsonSchema'],
+            [['actor','director','musicBy','productionCompany','trailer'], 'validateJsonSchema'],
+            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

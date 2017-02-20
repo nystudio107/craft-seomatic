@@ -1,4 +1,13 @@
 <?php
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
 
 namespace nystudio107\seomatic\models\jsonld;
 
@@ -15,12 +24,14 @@ use nystudio107\seomatic\models\jsonld\PaymentCard;
  * http://purl.org/goodrelations/v1#MasterCard
  * http://purl.org/goodrelations/v1#VISA
  *
- * Extends: PaymentCard
- * @see    http://schema.org/CreditCard
+ * @author    nystudio107
+ * @package   Seomatic
+ * @since     1.0.0
+ * @see       http://schema.org/CreditCard
  */
 class CreditCard extends PaymentCard
 {
-    // Static Properties
+    // Static Public Properties
     // =========================================================================
 
     /**
@@ -52,35 +63,35 @@ class CreditCard extends PaymentCard
     static public $schemaTypeExtends = 'PaymentCard';
 
     /**
-     * The Schema.org Property Names
+     * The Schema.org composed Property Names
      *
      * @var array
      */
     static public $schemaPropertyNames = [];
 
     /**
-     * The Schema.org Property Expected Types
+     * The Schema.org composed Property Expected Types
      *
      * @var array
      */
     static public $schemaPropertyExpectedTypes = [];
 
     /**
-     * The Schema.org Property Descriptions
+     * The Schema.org composed Property Descriptions
      *
      * @var array
      */
     static public $schemaPropertyDescriptions = [];
 
     /**
-     * The Schema.org Google Required Schema for this type
+     * The Schema.org composed Google Required Schema for this type
      *
      * @var array
      */
     static public $googleRequiredSchema = [];
 
     /**
-     * The Schema.org Google Recommended Schema for this type
+     * The Schema.org composed Google Recommended Schema for this type
      *
      * @var array
      */
@@ -90,30 +101,78 @@ class CreditCard extends PaymentCard
     // =========================================================================
 
     /**
-     * The annual rate that is charged for borrowing (or made by investing),
-     * expressed as a single percentage number that represents the actual yearly
-     * cost of funds over the term of a loan. This includes any fees or additional
-     * costs associated with the transaction.
+     * The amount of money.
      *
-     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
+     * @var mixed|MonetaryAmount|float [schema.org types: MonetaryAmount, Number]
      */
-    public $annualPercentageRate;
+    public $amount;
 
     /**
-     * Description of fees, commissions, and other terms applied either to a class
-     * of financial product, or by a financial service organization.
+     * The duration of the loan or credit agreement.
      *
-     * @var mixed|string|string [schema.org types: Text, URL]
+     * @var mixed|QuantitativeValue [schema.org types: QuantitativeValue]
      */
-    public $feesAndCommissionsSpecification;
+    public $loanTerm;
 
     /**
-     * The interest rate, charged or paid, applicable to the financial product.
-     * Note: This is different from the calculated annualPercentageRate.
+     * Assets required to secure loan or credit repayments. It may take form of
+     * third party pledge, goods, financial instruments (cash, securities, etc.)
      *
-     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
+     * @var mixed|string|Thing [schema.org types: Text, Thing]
      */
-    public $interestRate;
+    public $requiredCollateral;
+
+    // Static Protected Properties
+    // =========================================================================
+
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'amount',
+        'loanTerm',
+        'requiredCollateral'
+    ];
+
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'amount' => ['MonetaryAmount','Number'],
+        'loanTerm' => ['QuantitativeValue'],
+        'requiredCollateral' => ['Text','Thing']
+    ];
+
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'amount' => 'The amount of money.',
+        'loanTerm' => 'The duration of the loan or credit agreement.',
+        'requiredCollateral' => 'Assets required to secure loan or credit repayments. It may take form of third party pledge, goods, financial instruments (cash, securities, etc.)'
+    ];
+
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
 
     // Public Methods
     // =========================================================================
@@ -124,29 +183,30 @@ class CreditCard extends PaymentCard
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
-            'annualPercentageRate',
-            'feesAndCommissionsSpecification',
-            'interestRate',
-        ]);
+        self::$schemaPropertyNames = array_merge(
+            parent::$_schemaPropertyNames,
+            self::$_schemaPropertyNames
+        );
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
-            'annualPercentageRate' => ['Number','QuantitativeValue'],
-            'feesAndCommissionsSpecification' => ['Text','URL'],
-            'interestRate' => ['Number','QuantitativeValue'],
-        ]);
+        self::$schemaPropertyExpectedTypes = array_merge(
+            parent::$_schemaPropertyExpectedTypes,
+            self::$_schemaPropertyExpectedTypes
+        );
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
-            'annualPercentageRate' => 'The annual rate that is charged for borrowing (or made by investing), expressed as a single percentage number that represents the actual yearly cost of funds over the term of a loan. This includes any fees or additional costs associated with the transaction.',
-            'feesAndCommissionsSpecification' => 'Description of fees, commissions, and other terms applied either to a class of financial product, or by a financial service organization.',
-            'interestRate' => 'The interest rate, charged or paid, applicable to the financial product. Note: This is different from the calculated annualPercentageRate.',
-        ]);
+        self::$schemaPropertyDescriptions = array_merge(
+            parent::$_schemaPropertyDescriptions,
+            self::$_schemaPropertyDescriptions
+        );
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
-        ]);
+        self::$googleRequiredSchema = array_merge(
+            parent::$_googleRequiredSchema,
+            self::$_googleRequiredSchema
+        );
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
-        ]);
+        self::$googleRecommendedSchema = array_merge(
+            parent::$_googleRecommendedSchema,
+            self::$_googleRecommendedSchema
+        );
     }
 
     /**
@@ -156,7 +216,9 @@ class CreditCard extends PaymentCard
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['annualPercentageRate','feesAndCommissionsSpecification','interestRate',], 'validateJsonSchema'],
+            [['amount','loanTerm','requiredCollateral'], 'validateJsonSchema'],
+            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

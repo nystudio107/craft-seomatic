@@ -1,4 +1,13 @@
 <?php
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
 
 namespace nystudio107\seomatic\models\jsonld;
 
@@ -7,12 +16,14 @@ use nystudio107\seomatic\models\jsonld\CreativeWork;
 /**
  * MusicRecording - A music recording (track), usually a single song.
  *
- * Extends: CreativeWork
- * @see    http://schema.org/MusicRecording
+ * @author    nystudio107
+ * @package   Seomatic
+ * @since     1.0.0
+ * @see       http://schema.org/MusicRecording
  */
 class MusicRecording extends CreativeWork
 {
-    // Static Properties
+    // Static Public Properties
     // =========================================================================
 
     /**
@@ -44,35 +55,35 @@ class MusicRecording extends CreativeWork
     static public $schemaTypeExtends = 'CreativeWork';
 
     /**
-     * The Schema.org Property Names
+     * The Schema.org composed Property Names
      *
      * @var array
      */
     static public $schemaPropertyNames = [];
 
     /**
-     * The Schema.org Property Expected Types
+     * The Schema.org composed Property Expected Types
      *
      * @var array
      */
     static public $schemaPropertyExpectedTypes = [];
 
     /**
-     * The Schema.org Property Descriptions
+     * The Schema.org composed Property Descriptions
      *
      * @var array
      */
     static public $schemaPropertyDescriptions = [];
 
     /**
-     * The Schema.org Google Required Schema for this type
+     * The Schema.org composed Google Required Schema for this type
      *
      * @var array
      */
     static public $googleRequiredSchema = [];
 
     /**
-     * The Schema.org Google Recommended Schema for this type
+     * The Schema.org composed Google Recommended Schema for this type
      *
      * @var array
      */
@@ -124,6 +135,67 @@ class MusicRecording extends CreativeWork
      */
     public $recordingOf;
 
+    // Static Protected Properties
+    // =========================================================================
+
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'byArtist',
+        'duration',
+        'inAlbum',
+        'inPlaylist',
+        'isrcCode',
+        'recordingOf'
+    ];
+
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'byArtist' => ['MusicGroup'],
+        'duration' => ['Duration'],
+        'inAlbum' => ['MusicAlbum'],
+        'inPlaylist' => ['MusicPlaylist'],
+        'isrcCode' => ['Text'],
+        'recordingOf' => ['MusicComposition']
+    ];
+
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'byArtist' => 'The artist that performed this album or recording.',
+        'duration' => 'The duration of the item (movie, audio recording, event, etc.) in ISO 8601 date format.',
+        'inAlbum' => 'The album to which this recording belongs.',
+        'inPlaylist' => 'The playlist to which this recording belongs.',
+        'isrcCode' => 'The International Standard Recording Code for the recording.',
+        'recordingOf' => 'The composition this track is a recording of. Inverse property: recordedAs.'
+    ];
+
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -133,38 +205,30 @@ class MusicRecording extends CreativeWork
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
-            'byArtist',
-            'duration',
-            'inAlbum',
-            'inPlaylist',
-            'isrcCode',
-            'recordingOf',
-        ]);
+        self::$schemaPropertyNames = array_merge(
+            parent::$_schemaPropertyNames,
+            self::$_schemaPropertyNames
+        );
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
-            'byArtist' => ['MusicGroup'],
-            'duration' => ['Duration'],
-            'inAlbum' => ['MusicAlbum'],
-            'inPlaylist' => ['MusicPlaylist'],
-            'isrcCode' => ['Text'],
-            'recordingOf' => ['MusicComposition'],
-        ]);
+        self::$schemaPropertyExpectedTypes = array_merge(
+            parent::$_schemaPropertyExpectedTypes,
+            self::$_schemaPropertyExpectedTypes
+        );
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
-            'byArtist' => 'The artist that performed this album or recording.',
-            'duration' => 'The duration of the item (movie, audio recording, event, etc.) in ISO 8601 date format.',
-            'inAlbum' => 'The album to which this recording belongs.',
-            'inPlaylist' => 'The playlist to which this recording belongs.',
-            'isrcCode' => 'The International Standard Recording Code for the recording.',
-            'recordingOf' => 'The composition this track is a recording of. Inverse property: recordedAs.',
-        ]);
+        self::$schemaPropertyDescriptions = array_merge(
+            parent::$_schemaPropertyDescriptions,
+            self::$_schemaPropertyDescriptions
+        );
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
-        ]);
+        self::$googleRequiredSchema = array_merge(
+            parent::$_googleRequiredSchema,
+            self::$_googleRequiredSchema
+        );
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
-        ]);
+        self::$googleRecommendedSchema = array_merge(
+            parent::$_googleRecommendedSchema,
+            self::$_googleRecommendedSchema
+        );
     }
 
     /**
@@ -174,7 +238,9 @@ class MusicRecording extends CreativeWork
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['byArtist','duration','inAlbum','inPlaylist','isrcCode','recordingOf',], 'validateJsonSchema'],
+            [['byArtist','duration','inAlbum','inPlaylist','isrcCode','recordingOf'], 'validateJsonSchema'],
+            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

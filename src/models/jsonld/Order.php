@@ -1,4 +1,13 @@
 <?php
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
 
 namespace nystudio107\seomatic\models\jsonld;
 
@@ -9,12 +18,14 @@ use nystudio107\seomatic\models\jsonld\Intangible;
  * contain multiple line items, each represented by an Offer that has been
  * accepted by the customer.
  *
- * Extends: Intangible
- * @see    http://schema.org/Order
+ * @author    nystudio107
+ * @package   Seomatic
+ * @since     1.0.0
+ * @see       http://schema.org/Order
  */
 class Order extends Intangible
 {
-    // Static Properties
+    // Static Public Properties
     // =========================================================================
 
     /**
@@ -46,35 +57,35 @@ class Order extends Intangible
     static public $schemaTypeExtends = 'Intangible';
 
     /**
-     * The Schema.org Property Names
+     * The Schema.org composed Property Names
      *
      * @var array
      */
     static public $schemaPropertyNames = [];
 
     /**
-     * The Schema.org Property Expected Types
+     * The Schema.org composed Property Expected Types
      *
      * @var array
      */
     static public $schemaPropertyExpectedTypes = [];
 
     /**
-     * The Schema.org Property Descriptions
+     * The Schema.org composed Property Descriptions
      *
      * @var array
      */
     static public $schemaPropertyDescriptions = [];
 
     /**
-     * The Schema.org Google Required Schema for this type
+     * The Schema.org composed Google Required Schema for this type
      *
      * @var array
      */
     static public $googleRequiredSchema = [];
 
     /**
-     * The Schema.org Google Recommended Schema for this type
+     * The Schema.org composed Google Recommended Schema for this type
      *
      * @var array
      */
@@ -230,6 +241,109 @@ class Order extends Intangible
      */
     public $seller;
 
+    // Static Protected Properties
+    // =========================================================================
+
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'acceptedOffer',
+        'billingAddress',
+        'broker',
+        'confirmationNumber',
+        'customer',
+        'discount',
+        'discountCode',
+        'discountCurrency',
+        'isGift',
+        'orderDate',
+        'orderDelivery',
+        'orderNumber',
+        'orderStatus',
+        'orderedItem',
+        'partOfInvoice',
+        'paymentDueDate',
+        'paymentMethod',
+        'paymentMethodId',
+        'paymentUrl',
+        'seller'
+    ];
+
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'acceptedOffer' => ['Offer'],
+        'billingAddress' => ['PostalAddress'],
+        'broker' => ['Organization','Person'],
+        'confirmationNumber' => ['Text'],
+        'customer' => ['Organization','Person'],
+        'discount' => ['Number','Text'],
+        'discountCode' => ['Text'],
+        'discountCurrency' => ['Text'],
+        'isGift' => ['Boolean'],
+        'orderDate' => ['DateTime'],
+        'orderDelivery' => ['ParcelDelivery'],
+        'orderNumber' => ['Text'],
+        'orderStatus' => ['OrderStatus'],
+        'orderedItem' => ['OrderItem','Product'],
+        'partOfInvoice' => ['Invoice'],
+        'paymentDueDate' => ['DateTime'],
+        'paymentMethod' => ['PaymentMethod'],
+        'paymentMethodId' => ['Text'],
+        'paymentUrl' => ['URL'],
+        'seller' => ['Organization','Person']
+    ];
+
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'acceptedOffer' => 'The offer(s) -- e.g., product, quantity and price combinations -- included in the order.',
+        'billingAddress' => 'The billing address for the order.',
+        'broker' => 'An entity that arranges for an exchange between a buyer and a seller. In most cases a broker never acquires or releases ownership of a product or service involved in an exchange. If it is not clear whether an entity is a broker, seller, or buyer, the latter two terms are preferred. Supersedes bookingAgent.',
+        'confirmationNumber' => 'A number that confirms the given order or payment has been received.',
+        'customer' => 'Party placing the order or paying the invoice.',
+        'discount' => 'Any discount applied (to an Order).',
+        'discountCode' => 'Code used to redeem a discount.',
+        'discountCurrency' => 'The currency (in 3-letter ISO 4217 format) of the discount.',
+        'isGift' => 'Was the offer accepted as a gift for someone other than the buyer.',
+        'orderDate' => 'Date order was placed.',
+        'orderDelivery' => 'The delivery of the parcel related to this order or order item.',
+        'orderNumber' => 'The identifier of the transaction.',
+        'orderStatus' => 'The current status of the order.',
+        'orderedItem' => 'The item ordered.',
+        'partOfInvoice' => 'The order is being paid as part of the referenced Invoice.',
+        'paymentDueDate' => 'The date that payment is due. Supersedes paymentDue.',
+        'paymentMethod' => 'The name of the credit card or other method of payment for the order.',
+        'paymentMethodId' => 'An identifier for the method of payment used (e.g. the last 4 digits of the credit card).',
+        'paymentUrl' => 'The URL for sending a payment.',
+        'seller' => 'An entity which offers (sells / leases / lends / loans) the services / goods. A seller may also be a provider. Supersedes merchant, vendor.'
+    ];
+
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -239,80 +353,30 @@ class Order extends Intangible
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
-            'acceptedOffer',
-            'billingAddress',
-            'broker',
-            'confirmationNumber',
-            'customer',
-            'discount',
-            'discountCode',
-            'discountCurrency',
-            'isGift',
-            'orderDate',
-            'orderDelivery',
-            'orderNumber',
-            'orderStatus',
-            'orderedItem',
-            'partOfInvoice',
-            'paymentDueDate',
-            'paymentMethod',
-            'paymentMethodId',
-            'paymentUrl',
-            'seller',
-        ]);
+        self::$schemaPropertyNames = array_merge(
+            parent::$_schemaPropertyNames,
+            self::$_schemaPropertyNames
+        );
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
-            'acceptedOffer' => ['Offer'],
-            'billingAddress' => ['PostalAddress'],
-            'broker' => ['Organization','Person'],
-            'confirmationNumber' => ['Text'],
-            'customer' => ['Organization','Person'],
-            'discount' => ['Number','Text'],
-            'discountCode' => ['Text'],
-            'discountCurrency' => ['Text'],
-            'isGift' => ['Boolean'],
-            'orderDate' => ['DateTime'],
-            'orderDelivery' => ['ParcelDelivery'],
-            'orderNumber' => ['Text'],
-            'orderStatus' => ['OrderStatus'],
-            'orderedItem' => ['OrderItem','Product'],
-            'partOfInvoice' => ['Invoice'],
-            'paymentDueDate' => ['DateTime'],
-            'paymentMethod' => ['PaymentMethod'],
-            'paymentMethodId' => ['Text'],
-            'paymentUrl' => ['URL'],
-            'seller' => ['Organization','Person'],
-        ]);
+        self::$schemaPropertyExpectedTypes = array_merge(
+            parent::$_schemaPropertyExpectedTypes,
+            self::$_schemaPropertyExpectedTypes
+        );
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
-            'acceptedOffer' => 'The offer(s) -- e.g., product, quantity and price combinations -- included in the order.',
-            'billingAddress' => 'The billing address for the order.',
-            'broker' => 'An entity that arranges for an exchange between a buyer and a seller. In most cases a broker never acquires or releases ownership of a product or service involved in an exchange. If it is not clear whether an entity is a broker, seller, or buyer, the latter two terms are preferred. Supersedes bookingAgent.',
-            'confirmationNumber' => 'A number that confirms the given order or payment has been received.',
-            'customer' => 'Party placing the order or paying the invoice.',
-            'discount' => 'Any discount applied (to an Order).',
-            'discountCode' => 'Code used to redeem a discount.',
-            'discountCurrency' => 'The currency (in 3-letter ISO 4217 format) of the discount.',
-            'isGift' => 'Was the offer accepted as a gift for someone other than the buyer.',
-            'orderDate' => 'Date order was placed.',
-            'orderDelivery' => 'The delivery of the parcel related to this order or order item.',
-            'orderNumber' => 'The identifier of the transaction.',
-            'orderStatus' => 'The current status of the order.',
-            'orderedItem' => 'The item ordered.',
-            'partOfInvoice' => 'The order is being paid as part of the referenced Invoice.',
-            'paymentDueDate' => 'The date that payment is due. Supersedes paymentDue.',
-            'paymentMethod' => 'The name of the credit card or other method of payment for the order.',
-            'paymentMethodId' => 'An identifier for the method of payment used (e.g. the last 4 digits of the credit card).',
-            'paymentUrl' => 'The URL for sending a payment.',
-            'seller' => 'An entity which offers (sells / leases / lends / loans) the services / goods. A seller may also be a provider. Supersedes merchant, vendor.',
-        ]);
+        self::$schemaPropertyDescriptions = array_merge(
+            parent::$_schemaPropertyDescriptions,
+            self::$_schemaPropertyDescriptions
+        );
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
-        ]);
+        self::$googleRequiredSchema = array_merge(
+            parent::$_googleRequiredSchema,
+            self::$_googleRequiredSchema
+        );
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
-        ]);
+        self::$googleRecommendedSchema = array_merge(
+            parent::$_googleRecommendedSchema,
+            self::$_googleRecommendedSchema
+        );
     }
 
     /**
@@ -322,7 +386,9 @@ class Order extends Intangible
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['acceptedOffer','billingAddress','broker','confirmationNumber','customer','discount','discountCode','discountCurrency','isGift','orderDate','orderDelivery','orderNumber','orderStatus','orderedItem','partOfInvoice','paymentDueDate','paymentMethod','paymentMethodId','paymentUrl','seller',], 'validateJsonSchema'],
+            [['acceptedOffer','billingAddress','broker','confirmationNumber','customer','discount','discountCode','discountCurrency','isGift','orderDate','orderDelivery','orderNumber','orderStatus','orderedItem','partOfInvoice','paymentDueDate','paymentMethod','paymentMethodId','paymentUrl','seller'], 'validateJsonSchema'],
+            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

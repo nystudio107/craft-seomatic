@@ -1,4 +1,13 @@
 <?php
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
 
 namespace nystudio107\seomatic\models\jsonld;
 
@@ -7,12 +16,14 @@ use nystudio107\seomatic\models\jsonld\Message;
 /**
  * EmailMessage - An email message.
  *
- * Extends: Message
- * @see    http://schema.org/EmailMessage
+ * @author    nystudio107
+ * @package   Seomatic
+ * @since     1.0.0
+ * @see       http://schema.org/EmailMessage
  */
 class EmailMessage extends Message
 {
-    // Static Properties
+    // Static Public Properties
     // =========================================================================
 
     /**
@@ -44,35 +55,35 @@ class EmailMessage extends Message
     static public $schemaTypeExtends = 'Message';
 
     /**
-     * The Schema.org Property Names
+     * The Schema.org composed Property Names
      *
      * @var array
      */
     static public $schemaPropertyNames = [];
 
     /**
-     * The Schema.org Property Expected Types
+     * The Schema.org composed Property Expected Types
      *
      * @var array
      */
     static public $schemaPropertyExpectedTypes = [];
 
     /**
-     * The Schema.org Property Descriptions
+     * The Schema.org composed Property Descriptions
      *
      * @var array
      */
     static public $schemaPropertyDescriptions = [];
 
     /**
-     * The Schema.org Google Required Schema for this type
+     * The Schema.org composed Google Required Schema for this type
      *
      * @var array
      */
     static public $googleRequiredSchema = [];
 
     /**
-     * The Schema.org Google Recommended Schema for this type
+     * The Schema.org composed Google Recommended Schema for this type
      *
      * @var array
      */
@@ -126,6 +137,67 @@ class EmailMessage extends Message
      */
     public $sender;
 
+    // Static Protected Properties
+    // =========================================================================
+
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'dateRead',
+        'dateReceived',
+        'dateSent',
+        'messageAttachment',
+        'recipient',
+        'sender'
+    ];
+
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'dateRead' => ['DateTime'],
+        'dateReceived' => ['DateTime'],
+        'dateSent' => ['DateTime'],
+        'messageAttachment' => ['CreativeWork'],
+        'recipient' => ['Audience','Organization','Person'],
+        'sender' => ['Audience','Organization','Person']
+    ];
+
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'dateRead' => 'The date/time at which the message has been read by the recipient if a single recipient exists.',
+        'dateReceived' => 'The date/time the message was received if a single recipient exists.',
+        'dateSent' => 'The date/time at which the message was sent.',
+        'messageAttachment' => 'A CreativeWork attached to the message.',
+        'recipient' => 'A sub property of participant. The participant who is at the receiving end of the action.',
+        'sender' => 'A sub property of participant. The participant who is at the sending end of the action.'
+    ];
+
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -135,38 +207,30 @@ class EmailMessage extends Message
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
-            'dateRead',
-            'dateReceived',
-            'dateSent',
-            'messageAttachment',
-            'recipient',
-            'sender',
-        ]);
+        self::$schemaPropertyNames = array_merge(
+            parent::$_schemaPropertyNames,
+            self::$_schemaPropertyNames
+        );
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
-            'dateRead' => ['DateTime'],
-            'dateReceived' => ['DateTime'],
-            'dateSent' => ['DateTime'],
-            'messageAttachment' => ['CreativeWork'],
-            'recipient' => ['Audience','Organization','Person'],
-            'sender' => ['Audience','Organization','Person'],
-        ]);
+        self::$schemaPropertyExpectedTypes = array_merge(
+            parent::$_schemaPropertyExpectedTypes,
+            self::$_schemaPropertyExpectedTypes
+        );
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
-            'dateRead' => 'The date/time at which the message has been read by the recipient if a single recipient exists.',
-            'dateReceived' => 'The date/time the message was received if a single recipient exists.',
-            'dateSent' => 'The date/time at which the message was sent.',
-            'messageAttachment' => 'A CreativeWork attached to the message.',
-            'recipient' => 'A sub property of participant. The participant who is at the receiving end of the action.',
-            'sender' => 'A sub property of participant. The participant who is at the sending end of the action.',
-        ]);
+        self::$schemaPropertyDescriptions = array_merge(
+            parent::$_schemaPropertyDescriptions,
+            self::$_schemaPropertyDescriptions
+        );
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
-        ]);
+        self::$googleRequiredSchema = array_merge(
+            parent::$_googleRequiredSchema,
+            self::$_googleRequiredSchema
+        );
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
-        ]);
+        self::$googleRecommendedSchema = array_merge(
+            parent::$_googleRecommendedSchema,
+            self::$_googleRecommendedSchema
+        );
     }
 
     /**
@@ -176,7 +240,9 @@ class EmailMessage extends Message
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['dateRead','dateReceived','dateSent','messageAttachment','recipient','sender',], 'validateJsonSchema'],
+            [['dateRead','dateReceived','dateSent','messageAttachment','recipient','sender'], 'validateJsonSchema'],
+            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

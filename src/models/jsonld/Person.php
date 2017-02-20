@@ -1,4 +1,13 @@
 <?php
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
 
 namespace nystudio107\seomatic\models\jsonld;
 
@@ -7,12 +16,14 @@ use nystudio107\seomatic\models\jsonld\Thing;
 /**
  * Person - A person (alive, dead, undead, or fictional).
  *
- * Extends: Thing
- * @see    http://schema.org/Person
+ * @author    nystudio107
+ * @package   Seomatic
+ * @since     1.0.0
+ * @see       http://schema.org/Person
  */
 class Person extends Thing
 {
-    // Static Properties
+    // Static Public Properties
     // =========================================================================
 
     /**
@@ -44,35 +55,35 @@ class Person extends Thing
     static public $schemaTypeExtends = 'Thing';
 
     /**
-     * The Schema.org Property Names
+     * The Schema.org composed Property Names
      *
      * @var array
      */
     static public $schemaPropertyNames = [];
 
     /**
-     * The Schema.org Property Expected Types
+     * The Schema.org composed Property Expected Types
      *
      * @var array
      */
     static public $schemaPropertyExpectedTypes = [];
 
     /**
-     * The Schema.org Property Descriptions
+     * The Schema.org composed Property Descriptions
      *
      * @var array
      */
     static public $schemaPropertyDescriptions = [];
 
     /**
-     * The Schema.org Google Required Schema for this type
+     * The Schema.org composed Google Required Schema for this type
      *
      * @var array
      */
     static public $googleRequiredSchema = [];
 
     /**
-     * The Schema.org Google Recommended Schema for this type
+     * The Schema.org composed Google Recommended Schema for this type
      *
      * @var array
      */
@@ -453,6 +464,199 @@ class Person extends Thing
      */
     public $worksFor;
 
+    // Static Protected Properties
+    // =========================================================================
+
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'additionalName',
+        'address',
+        'affiliation',
+        'alumniOf',
+        'award',
+        'birthDate',
+        'birthPlace',
+        'brand',
+        'children',
+        'colleague',
+        'contactPoint',
+        'deathDate',
+        'deathPlace',
+        'duns',
+        'email',
+        'familyName',
+        'faxNumber',
+        'follows',
+        'funder',
+        'gender',
+        'givenName',
+        'globalLocationNumber',
+        'hasOfferCatalog',
+        'hasPOS',
+        'height',
+        'homeLocation',
+        'honorificPrefix',
+        'honorificSuffix',
+        'isicV4',
+        'jobTitle',
+        'knows',
+        'makesOffer',
+        'memberOf',
+        'naics',
+        'nationality',
+        'netWorth',
+        'owns',
+        'parent',
+        'performerIn',
+        'relatedTo',
+        'seeks',
+        'sibling',
+        'sponsor',
+        'spouse',
+        'taxID',
+        'telephone',
+        'vatID',
+        'weight',
+        'workLocation',
+        'worksFor'
+    ];
+
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'additionalName' => ['Text'],
+        'address' => ['PostalAddress','Text'],
+        'affiliation' => ['Organization'],
+        'alumniOf' => ['EducationalOrganization','Organization'],
+        'award' => ['Text'],
+        'birthDate' => ['Date'],
+        'birthPlace' => ['Place'],
+        'brand' => ['Brand','Organization'],
+        'children' => ['Person'],
+        'colleague' => ['Person','URL'],
+        'contactPoint' => ['ContactPoint'],
+        'deathDate' => ['Date'],
+        'deathPlace' => ['Place'],
+        'duns' => ['Text'],
+        'email' => ['Text'],
+        'familyName' => ['Text'],
+        'faxNumber' => ['Text'],
+        'follows' => ['Person'],
+        'funder' => ['Organization','Person'],
+        'gender' => ['GenderType','Text'],
+        'givenName' => ['Text'],
+        'globalLocationNumber' => ['Text'],
+        'hasOfferCatalog' => ['OfferCatalog'],
+        'hasPOS' => ['Place'],
+        'height' => ['Distance','QuantitativeValue'],
+        'homeLocation' => ['ContactPoint','Place'],
+        'honorificPrefix' => ['Text'],
+        'honorificSuffix' => ['Text'],
+        'isicV4' => ['Text'],
+        'jobTitle' => ['Text'],
+        'knows' => ['Person'],
+        'makesOffer' => ['Offer'],
+        'memberOf' => ['Organization','ProgramMembership'],
+        'naics' => ['Text'],
+        'nationality' => ['Country'],
+        'netWorth' => ['MonetaryAmount','PriceSpecification'],
+        'owns' => ['OwnershipInfo','Product'],
+        'parent' => ['Person'],
+        'performerIn' => ['Event'],
+        'relatedTo' => ['Person'],
+        'seeks' => ['Demand'],
+        'sibling' => ['Person'],
+        'sponsor' => ['Organization','Person'],
+        'spouse' => ['Person'],
+        'taxID' => ['Text'],
+        'telephone' => ['Text'],
+        'vatID' => ['Text'],
+        'weight' => ['QuantitativeValue'],
+        'workLocation' => ['ContactPoint','Place'],
+        'worksFor' => ['Organization']
+    ];
+
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'additionalName' => 'An additional name for a Person, can be used for a middle name.',
+        'address' => 'Physical address of the item.',
+        'affiliation' => 'An organization that this person is affiliated with. For example, a school/university, a club, or a team.',
+        'alumniOf' => 'An organization that the person is an alumni of. Inverse property: alumni.',
+        'award' => 'An award won by or for this item. Supersedes awards.',
+        'birthDate' => 'Date of birth.',
+        'birthPlace' => 'The place where the person was born.',
+        'brand' => 'The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.',
+        'children' => 'A child of the person.',
+        'colleague' => 'A colleague of the person. Supersedes colleagues.',
+        'contactPoint' => 'A contact point for a person or organization. Supersedes contactPoints.',
+        'deathDate' => 'Date of death.',
+        'deathPlace' => 'The place where the person died.',
+        'duns' => 'The Dun & Bradstreet DUNS number for identifying an organization or business person.',
+        'email' => 'Email address.',
+        'familyName' => 'Family name. In the U.S., the last name of an Person. This can be used along with givenName instead of the name property.',
+        'faxNumber' => 'The fax number.',
+        'follows' => 'The most generic uni-directional social relation.',
+        'funder' => 'A person or organization that supports (sponsors) something through some kind of financial contribution.',
+        'gender' => 'Gender of the person. While http://schema.org/Male and http://schema.org/Female may be used, text strings are also acceptable for people who do not identify as a binary gender.',
+        'givenName' => 'Given name. In the U.S., the first name of a Person. This can be used along with familyName instead of the name property.',
+        'globalLocationNumber' => 'The Global Location Number (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations.',
+        'hasOfferCatalog' => 'Indicates an OfferCatalog listing for this Organization, Person, or Service.',
+        'hasPOS' => 'Points-of-Sales operated by the organization or person.',
+        'height' => 'The height of the item.',
+        'homeLocation' => 'A contact location for a person\'s residence.',
+        'honorificPrefix' => 'An honorific prefix preceding a Person\'s name such as Dr/Mrs/Mr.',
+        'honorificSuffix' => 'An honorific suffix preceding a Person\'s name such as M.D. /PhD/MSCSW.',
+        'isicV4' => 'The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code for a particular organization, business person, or place.',
+        'jobTitle' => 'The job title of the person (for example, Financial Manager).',
+        'knows' => 'The most generic bi-directional social/work relation.',
+        'makesOffer' => 'A pointer to products or services offered by the organization or person. Inverse property: offeredBy.',
+        'memberOf' => 'An Organization (or ProgramMembership) to which this Person or Organization belongs. Inverse property: member.',
+        'naics' => 'The North American Industry Classification System (NAICS) code for a particular organization or business person.',
+        'nationality' => 'Nationality of the person.',
+        'netWorth' => 'The total financial value of the person as calculated by subtracting assets from liabilities.',
+        'owns' => 'Products owned by the organization or person.',
+        'parent' => 'A parent of this person. Supersedes parents.',
+        'performerIn' => 'Event that this person is a performer or participant in.',
+        'relatedTo' => 'The most generic familial relation.',
+        'seeks' => 'A pointer to products or services sought by the organization or person (demand).',
+        'sibling' => 'A sibling of the person. Supersedes siblings.',
+        'sponsor' => 'A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.',
+        'spouse' => 'The person\'s spouse.',
+        'taxID' => 'The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US or the CIF/NIF in Spain.',
+        'telephone' => 'The telephone number.',
+        'vatID' => 'The Value-added Tax ID of the organization or person.',
+        'weight' => 'The weight of the product or person.',
+        'workLocation' => 'A contact location for a person\'s place of work.',
+        'worksFor' => 'Organizations that the person works for.'
+    ];
+
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -462,170 +666,30 @@ class Person extends Thing
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
-            'additionalName',
-            'address',
-            'affiliation',
-            'alumniOf',
-            'award',
-            'birthDate',
-            'birthPlace',
-            'brand',
-            'children',
-            'colleague',
-            'contactPoint',
-            'deathDate',
-            'deathPlace',
-            'duns',
-            'email',
-            'familyName',
-            'faxNumber',
-            'follows',
-            'funder',
-            'gender',
-            'givenName',
-            'globalLocationNumber',
-            'hasOfferCatalog',
-            'hasPOS',
-            'height',
-            'homeLocation',
-            'honorificPrefix',
-            'honorificSuffix',
-            'isicV4',
-            'jobTitle',
-            'knows',
-            'makesOffer',
-            'memberOf',
-            'naics',
-            'nationality',
-            'netWorth',
-            'owns',
-            'parent',
-            'performerIn',
-            'relatedTo',
-            'seeks',
-            'sibling',
-            'sponsor',
-            'spouse',
-            'taxID',
-            'telephone',
-            'vatID',
-            'weight',
-            'workLocation',
-            'worksFor',
-        ]);
+        self::$schemaPropertyNames = array_merge(
+            parent::$_schemaPropertyNames,
+            self::$_schemaPropertyNames
+        );
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
-            'additionalName' => ['Text'],
-            'address' => ['PostalAddress','Text'],
-            'affiliation' => ['Organization'],
-            'alumniOf' => ['EducationalOrganization','Organization'],
-            'award' => ['Text'],
-            'birthDate' => ['Date'],
-            'birthPlace' => ['Place'],
-            'brand' => ['Brand','Organization'],
-            'children' => ['Person'],
-            'colleague' => ['Person','URL'],
-            'contactPoint' => ['ContactPoint'],
-            'deathDate' => ['Date'],
-            'deathPlace' => ['Place'],
-            'duns' => ['Text'],
-            'email' => ['Text'],
-            'familyName' => ['Text'],
-            'faxNumber' => ['Text'],
-            'follows' => ['Person'],
-            'funder' => ['Organization','Person'],
-            'gender' => ['GenderType','Text'],
-            'givenName' => ['Text'],
-            'globalLocationNumber' => ['Text'],
-            'hasOfferCatalog' => ['OfferCatalog'],
-            'hasPOS' => ['Place'],
-            'height' => ['Distance','QuantitativeValue'],
-            'homeLocation' => ['ContactPoint','Place'],
-            'honorificPrefix' => ['Text'],
-            'honorificSuffix' => ['Text'],
-            'isicV4' => ['Text'],
-            'jobTitle' => ['Text'],
-            'knows' => ['Person'],
-            'makesOffer' => ['Offer'],
-            'memberOf' => ['Organization','ProgramMembership'],
-            'naics' => ['Text'],
-            'nationality' => ['Country'],
-            'netWorth' => ['MonetaryAmount','PriceSpecification'],
-            'owns' => ['OwnershipInfo','Product'],
-            'parent' => ['Person'],
-            'performerIn' => ['Event'],
-            'relatedTo' => ['Person'],
-            'seeks' => ['Demand'],
-            'sibling' => ['Person'],
-            'sponsor' => ['Organization','Person'],
-            'spouse' => ['Person'],
-            'taxID' => ['Text'],
-            'telephone' => ['Text'],
-            'vatID' => ['Text'],
-            'weight' => ['QuantitativeValue'],
-            'workLocation' => ['ContactPoint','Place'],
-            'worksFor' => ['Organization'],
-        ]);
+        self::$schemaPropertyExpectedTypes = array_merge(
+            parent::$_schemaPropertyExpectedTypes,
+            self::$_schemaPropertyExpectedTypes
+        );
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
-            'additionalName' => 'An additional name for a Person, can be used for a middle name.',
-            'address' => 'Physical address of the item.',
-            'affiliation' => 'An organization that this person is affiliated with. For example, a school/university, a club, or a team.',
-            'alumniOf' => 'An organization that the person is an alumni of. Inverse property: alumni.',
-            'award' => 'An award won by or for this item. Supersedes awards.',
-            'birthDate' => 'Date of birth.',
-            'birthPlace' => 'The place where the person was born.',
-            'brand' => 'The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.',
-            'children' => 'A child of the person.',
-            'colleague' => 'A colleague of the person. Supersedes colleagues.',
-            'contactPoint' => 'A contact point for a person or organization. Supersedes contactPoints.',
-            'deathDate' => 'Date of death.',
-            'deathPlace' => 'The place where the person died.',
-            'duns' => 'The Dun & Bradstreet DUNS number for identifying an organization or business person.',
-            'email' => 'Email address.',
-            'familyName' => 'Family name. In the U.S., the last name of an Person. This can be used along with givenName instead of the name property.',
-            'faxNumber' => 'The fax number.',
-            'follows' => 'The most generic uni-directional social relation.',
-            'funder' => 'A person or organization that supports (sponsors) something through some kind of financial contribution.',
-            'gender' => 'Gender of the person. While http://schema.org/Male and http://schema.org/Female may be used, text strings are also acceptable for people who do not identify as a binary gender.',
-            'givenName' => 'Given name. In the U.S., the first name of a Person. This can be used along with familyName instead of the name property.',
-            'globalLocationNumber' => 'The Global Location Number (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations.',
-            'hasOfferCatalog' => 'Indicates an OfferCatalog listing for this Organization, Person, or Service.',
-            'hasPOS' => 'Points-of-Sales operated by the organization or person.',
-            'height' => 'The height of the item.',
-            'homeLocation' => 'A contact location for a person\'s residence.',
-            'honorificPrefix' => 'An honorific prefix preceding a Person\'s name such as Dr/Mrs/Mr.',
-            'honorificSuffix' => 'An honorific suffix preceding a Person\'s name such as M.D. /PhD/MSCSW.',
-            'isicV4' => 'The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code for a particular organization, business person, or place.',
-            'jobTitle' => 'The job title of the person (for example, Financial Manager).',
-            'knows' => 'The most generic bi-directional social/work relation.',
-            'makesOffer' => 'A pointer to products or services offered by the organization or person. Inverse property: offeredBy.',
-            'memberOf' => 'An Organization (or ProgramMembership) to which this Person or Organization belongs. Inverse property: member.',
-            'naics' => 'The North American Industry Classification System (NAICS) code for a particular organization or business person.',
-            'nationality' => 'Nationality of the person.',
-            'netWorth' => 'The total financial value of the person as calculated by subtracting assets from liabilities.',
-            'owns' => 'Products owned by the organization or person.',
-            'parent' => 'A parent of this person. Supersedes parents.',
-            'performerIn' => 'Event that this person is a performer or participant in.',
-            'relatedTo' => 'The most generic familial relation.',
-            'seeks' => 'A pointer to products or services sought by the organization or person (demand).',
-            'sibling' => 'A sibling of the person. Supersedes siblings.',
-            'sponsor' => 'A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.',
-            'spouse' => 'The person\'s spouse.',
-            'taxID' => 'The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US or the CIF/NIF in Spain.',
-            'telephone' => 'The telephone number.',
-            'vatID' => 'The Value-added Tax ID of the organization or person.',
-            'weight' => 'The weight of the product or person.',
-            'workLocation' => 'A contact location for a person\'s place of work.',
-            'worksFor' => 'Organizations that the person works for.',
-        ]);
+        self::$schemaPropertyDescriptions = array_merge(
+            parent::$_schemaPropertyDescriptions,
+            self::$_schemaPropertyDescriptions
+        );
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
-        ]);
+        self::$googleRequiredSchema = array_merge(
+            parent::$_googleRequiredSchema,
+            self::$_googleRequiredSchema
+        );
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
-        ]);
+        self::$googleRecommendedSchema = array_merge(
+            parent::$_googleRecommendedSchema,
+            self::$_googleRecommendedSchema
+        );
     }
 
     /**
@@ -635,7 +699,9 @@ class Person extends Thing
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['additionalName','address','affiliation','alumniOf','award','birthDate','birthPlace','brand','children','colleague','contactPoint','deathDate','deathPlace','duns','email','familyName','faxNumber','follows','funder','gender','givenName','globalLocationNumber','hasOfferCatalog','hasPOS','height','homeLocation','honorificPrefix','honorificSuffix','isicV4','jobTitle','knows','makesOffer','memberOf','naics','nationality','netWorth','owns','parent','performerIn','relatedTo','seeks','sibling','sponsor','spouse','taxID','telephone','vatID','weight','workLocation','worksFor',], 'validateJsonSchema'],
+            [['additionalName','address','affiliation','alumniOf','award','birthDate','birthPlace','brand','children','colleague','contactPoint','deathDate','deathPlace','duns','email','familyName','faxNumber','follows','funder','gender','givenName','globalLocationNumber','hasOfferCatalog','hasPOS','height','homeLocation','honorificPrefix','honorificSuffix','isicV4','jobTitle','knows','makesOffer','memberOf','naics','nationality','netWorth','owns','parent','performerIn','relatedTo','seeks','sibling','sponsor','spouse','taxID','telephone','vatID','weight','workLocation','worksFor'], 'validateJsonSchema'],
+            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

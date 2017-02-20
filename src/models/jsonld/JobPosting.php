@@ -1,4 +1,13 @@
 <?php
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
 
 namespace nystudio107\seomatic\models\jsonld;
 
@@ -8,12 +17,14 @@ use nystudio107\seomatic\models\jsonld\Intangible;
  * JobPosting - A listing that describes a job opening in a certain
  * organization.
  *
- * Extends: Intangible
- * @see    http://schema.org/JobPosting
+ * @author    nystudio107
+ * @package   Seomatic
+ * @since     1.0.0
+ * @see       http://schema.org/JobPosting
  */
 class JobPosting extends Intangible
 {
-    // Static Properties
+    // Static Public Properties
     // =========================================================================
 
     /**
@@ -45,35 +56,35 @@ class JobPosting extends Intangible
     static public $schemaTypeExtends = 'Intangible';
 
     /**
-     * The Schema.org Property Names
+     * The Schema.org composed Property Names
      *
      * @var array
      */
     static public $schemaPropertyNames = [];
 
     /**
-     * The Schema.org Property Expected Types
+     * The Schema.org composed Property Expected Types
      *
      * @var array
      */
     static public $schemaPropertyExpectedTypes = [];
 
     /**
-     * The Schema.org Property Descriptions
+     * The Schema.org composed Property Descriptions
      *
      * @var array
      */
     static public $schemaPropertyDescriptions = [];
 
     /**
-     * The Schema.org Google Required Schema for this type
+     * The Schema.org composed Google Required Schema for this type
      *
      * @var array
      */
     static public $googleRequiredSchema = [];
 
     /**
-     * The Schema.org Google Recommended Schema for this type
+     * The Schema.org composed Google Recommended Schema for this type
      *
      * @var array
      */
@@ -223,6 +234,106 @@ class JobPosting extends Intangible
      */
     public $workHours;
 
+    // Static Protected Properties
+    // =========================================================================
+
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'baseSalary',
+        'datePosted',
+        'educationRequirements',
+        'employmentType',
+        'experienceRequirements',
+        'hiringOrganization',
+        'incentiveCompensation',
+        'industry',
+        'jobBenefits',
+        'jobLocation',
+        'occupationalCategory',
+        'qualifications',
+        'responsibilities',
+        'salaryCurrency',
+        'skills',
+        'specialCommitments',
+        'title',
+        'validThrough',
+        'workHours'
+    ];
+
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'baseSalary' => ['MonetaryAmount','Number','PriceSpecification'],
+        'datePosted' => ['Date'],
+        'educationRequirements' => ['Text'],
+        'employmentType' => ['Text'],
+        'experienceRequirements' => ['Text'],
+        'hiringOrganization' => ['Organization'],
+        'incentiveCompensation' => ['Text'],
+        'industry' => ['Text'],
+        'jobBenefits' => ['Text'],
+        'jobLocation' => ['Place'],
+        'occupationalCategory' => ['Text'],
+        'qualifications' => ['Text'],
+        'responsibilities' => ['Text'],
+        'salaryCurrency' => ['Text'],
+        'skills' => ['Text'],
+        'specialCommitments' => ['Text'],
+        'title' => ['Text'],
+        'validThrough' => ['DateTime'],
+        'workHours' => ['Text']
+    ];
+
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'baseSalary' => 'The base salary of the job or of an employee in an EmployeeRole.',
+        'datePosted' => 'Publication date for the job posting.',
+        'educationRequirements' => 'Educational background needed for the position.',
+        'employmentType' => 'Type of employment (e.g. full-time, part-time, contract, temporary, seasonal, internship).',
+        'experienceRequirements' => 'Description of skills and experience needed for the position.',
+        'hiringOrganization' => 'Organization offering the job position.',
+        'incentiveCompensation' => 'Description of bonus and commission compensation aspects of the job. Supersedes incentives.',
+        'industry' => 'The industry associated with the job position.',
+        'jobBenefits' => 'Description of benefits associated with the job. Supersedes benefits.',
+        'jobLocation' => 'A (typically single) geographic location associated with the job position.',
+        'occupationalCategory' => 'Category or categories describing the job. Use BLS O*NET-SOC taxonomy: http://www.onetcenter.org/taxonomy.html. Ideally includes textual label and formal code, with the property repeated for each applicable value.',
+        'qualifications' => 'Specific qualifications required for this role.',
+        'responsibilities' => 'Responsibilities associated with this role.',
+        'salaryCurrency' => 'The currency (coded using ISO 4217 ) used for the main salary information in this job posting or for this employee.',
+        'skills' => 'Skills required to fulfill this role.',
+        'specialCommitments' => 'Any special commitments associated with this job posting. Valid entries include VeteranCommit, MilitarySpouseCommit, etc.',
+        'title' => 'The title of the job.',
+        'validThrough' => 'The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.',
+        'workHours' => 'The typical working hours for this job (e.g. 1st shift, night shift, 8am-5pm).'
+    ];
+
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -232,77 +343,30 @@ class JobPosting extends Intangible
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
-            'baseSalary',
-            'datePosted',
-            'educationRequirements',
-            'employmentType',
-            'experienceRequirements',
-            'hiringOrganization',
-            'incentiveCompensation',
-            'industry',
-            'jobBenefits',
-            'jobLocation',
-            'occupationalCategory',
-            'qualifications',
-            'responsibilities',
-            'salaryCurrency',
-            'skills',
-            'specialCommitments',
-            'title',
-            'validThrough',
-            'workHours',
-        ]);
+        self::$schemaPropertyNames = array_merge(
+            parent::$_schemaPropertyNames,
+            self::$_schemaPropertyNames
+        );
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
-            'baseSalary' => ['MonetaryAmount','Number','PriceSpecification'],
-            'datePosted' => ['Date'],
-            'educationRequirements' => ['Text'],
-            'employmentType' => ['Text'],
-            'experienceRequirements' => ['Text'],
-            'hiringOrganization' => ['Organization'],
-            'incentiveCompensation' => ['Text'],
-            'industry' => ['Text'],
-            'jobBenefits' => ['Text'],
-            'jobLocation' => ['Place'],
-            'occupationalCategory' => ['Text'],
-            'qualifications' => ['Text'],
-            'responsibilities' => ['Text'],
-            'salaryCurrency' => ['Text'],
-            'skills' => ['Text'],
-            'specialCommitments' => ['Text'],
-            'title' => ['Text'],
-            'validThrough' => ['DateTime'],
-            'workHours' => ['Text'],
-        ]);
+        self::$schemaPropertyExpectedTypes = array_merge(
+            parent::$_schemaPropertyExpectedTypes,
+            self::$_schemaPropertyExpectedTypes
+        );
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
-            'baseSalary' => 'The base salary of the job or of an employee in an EmployeeRole.',
-            'datePosted' => 'Publication date for the job posting.',
-            'educationRequirements' => 'Educational background needed for the position.',
-            'employmentType' => 'Type of employment (e.g. full-time, part-time, contract, temporary, seasonal, internship).',
-            'experienceRequirements' => 'Description of skills and experience needed for the position.',
-            'hiringOrganization' => 'Organization offering the job position.',
-            'incentiveCompensation' => 'Description of bonus and commission compensation aspects of the job. Supersedes incentives.',
-            'industry' => 'The industry associated with the job position.',
-            'jobBenefits' => 'Description of benefits associated with the job. Supersedes benefits.',
-            'jobLocation' => 'A (typically single) geographic location associated with the job position.',
-            'occupationalCategory' => 'Category or categories describing the job. Use BLS O*NET-SOC taxonomy: http://www.onetcenter.org/taxonomy.html. Ideally includes textual label and formal code, with the property repeated for each applicable value.',
-            'qualifications' => 'Specific qualifications required for this role.',
-            'responsibilities' => 'Responsibilities associated with this role.',
-            'salaryCurrency' => 'The currency (coded using ISO 4217 ) used for the main salary information in this job posting or for this employee.',
-            'skills' => 'Skills required to fulfill this role.',
-            'specialCommitments' => 'Any special commitments associated with this job posting. Valid entries include VeteranCommit, MilitarySpouseCommit, etc.',
-            'title' => 'The title of the job.',
-            'validThrough' => 'The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.',
-            'workHours' => 'The typical working hours for this job (e.g. 1st shift, night shift, 8am-5pm).',
-        ]);
+        self::$schemaPropertyDescriptions = array_merge(
+            parent::$_schemaPropertyDescriptions,
+            self::$_schemaPropertyDescriptions
+        );
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
-        ]);
+        self::$googleRequiredSchema = array_merge(
+            parent::$_googleRequiredSchema,
+            self::$_googleRequiredSchema
+        );
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
-        ]);
+        self::$googleRecommendedSchema = array_merge(
+            parent::$_googleRecommendedSchema,
+            self::$_googleRecommendedSchema
+        );
     }
 
     /**
@@ -312,7 +376,9 @@ class JobPosting extends Intangible
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['baseSalary','datePosted','educationRequirements','employmentType','experienceRequirements','hiringOrganization','incentiveCompensation','industry','jobBenefits','jobLocation','occupationalCategory','qualifications','responsibilities','salaryCurrency','skills','specialCommitments','title','validThrough','workHours',], 'validateJsonSchema'],
+            [['baseSalary','datePosted','educationRequirements','employmentType','experienceRequirements','hiringOrganization','incentiveCompensation','industry','jobBenefits','jobLocation','occupationalCategory','qualifications','responsibilities','salaryCurrency','skills','specialCommitments','title','validThrough','workHours'], 'validateJsonSchema'],
+            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

@@ -1,4 +1,13 @@
 <?php
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
 
 namespace nystudio107\seomatic\models\jsonld;
 
@@ -8,12 +17,14 @@ use nystudio107\seomatic\models\jsonld\Intangible;
  * OrderItem - An order item is a line of an order. It includes the quantity
  * and shipping details of a bought offer.
  *
- * Extends: Intangible
- * @see    http://schema.org/OrderItem
+ * @author    nystudio107
+ * @package   Seomatic
+ * @since     1.0.0
+ * @see       http://schema.org/OrderItem
  */
 class OrderItem extends Intangible
 {
-    // Static Properties
+    // Static Public Properties
     // =========================================================================
 
     /**
@@ -45,35 +56,35 @@ class OrderItem extends Intangible
     static public $schemaTypeExtends = 'Intangible';
 
     /**
-     * The Schema.org Property Names
+     * The Schema.org composed Property Names
      *
      * @var array
      */
     static public $schemaPropertyNames = [];
 
     /**
-     * The Schema.org Property Expected Types
+     * The Schema.org composed Property Expected Types
      *
      * @var array
      */
     static public $schemaPropertyExpectedTypes = [];
 
     /**
-     * The Schema.org Property Descriptions
+     * The Schema.org composed Property Descriptions
      *
      * @var array
      */
     static public $schemaPropertyDescriptions = [];
 
     /**
-     * The Schema.org Google Required Schema for this type
+     * The Schema.org composed Google Required Schema for this type
      *
      * @var array
      */
     static public $googleRequiredSchema = [];
 
     /**
-     * The Schema.org Google Recommended Schema for this type
+     * The Schema.org composed Google Recommended Schema for this type
      *
      * @var array
      */
@@ -118,6 +129,64 @@ class OrderItem extends Intangible
      */
     public $orderedItem;
 
+    // Static Protected Properties
+    // =========================================================================
+
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'orderDelivery',
+        'orderItemNumber',
+        'orderItemStatus',
+        'orderQuantity',
+        'orderedItem'
+    ];
+
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'orderDelivery' => ['ParcelDelivery'],
+        'orderItemNumber' => ['Text'],
+        'orderItemStatus' => ['OrderStatus'],
+        'orderQuantity' => ['Number'],
+        'orderedItem' => ['OrderItem','Product']
+    ];
+
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'orderDelivery' => 'The delivery of the parcel related to this order or order item.',
+        'orderItemNumber' => 'The identifier of the order item.',
+        'orderItemStatus' => 'The current status of the order item.',
+        'orderQuantity' => 'The number of the item ordered. If the property is not set, assume the quantity is one.',
+        'orderedItem' => 'The item ordered.'
+    ];
+
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -127,35 +196,30 @@ class OrderItem extends Intangible
     public function init()
     {
         parent::init();
-        self::$schemaPropertyNames = array_merge(parent::$schemaPropertyNames, [
-            'orderDelivery',
-            'orderItemNumber',
-            'orderItemStatus',
-            'orderQuantity',
-            'orderedItem',
-        ]);
+        self::$schemaPropertyNames = array_merge(
+            parent::$_schemaPropertyNames,
+            self::$_schemaPropertyNames
+        );
 
-        self::$schemaPropertyExpectedTypes = array_merge(parent::$schemaPropertyExpectedTypes, [
-            'orderDelivery' => ['ParcelDelivery'],
-            'orderItemNumber' => ['Text'],
-            'orderItemStatus' => ['OrderStatus'],
-            'orderQuantity' => ['Number'],
-            'orderedItem' => ['OrderItem','Product'],
-        ]);
+        self::$schemaPropertyExpectedTypes = array_merge(
+            parent::$_schemaPropertyExpectedTypes,
+            self::$_schemaPropertyExpectedTypes
+        );
 
-        self::$schemaPropertyDescriptions = array_merge(parent::$schemaPropertyDescriptions, [
-            'orderDelivery' => 'The delivery of the parcel related to this order or order item.',
-            'orderItemNumber' => 'The identifier of the order item.',
-            'orderItemStatus' => 'The current status of the order item.',
-            'orderQuantity' => 'The number of the item ordered. If the property is not set, assume the quantity is one.',
-            'orderedItem' => 'The item ordered.',
-        ]);
+        self::$schemaPropertyDescriptions = array_merge(
+            parent::$_schemaPropertyDescriptions,
+            self::$_schemaPropertyDescriptions
+        );
 
-        self::$googleRequiredSchema = array_merge(parent::$googleRequiredSchema, [
-        ]);
+        self::$googleRequiredSchema = array_merge(
+            parent::$_googleRequiredSchema,
+            self::$_googleRequiredSchema
+        );
 
-        self::$googleRecommendedSchema = array_merge(parent::$googleRecommendedSchema, [
-        ]);
+        self::$googleRecommendedSchema = array_merge(
+            parent::$_googleRecommendedSchema,
+            self::$_googleRecommendedSchema
+        );
     }
 
     /**
@@ -165,7 +229,9 @@ class OrderItem extends Intangible
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['orderDelivery','orderItemNumber','orderItemStatus','orderQuantity','orderedItem',], 'validateJsonSchema'],
+            [['orderDelivery','orderItemNumber','orderItemStatus','orderQuantity','orderedItem'], 'validateJsonSchema'],
+            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;
