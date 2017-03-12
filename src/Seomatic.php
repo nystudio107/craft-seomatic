@@ -93,6 +93,8 @@ class Seomatic extends \craft\base\Plugin
         Craft::dump($someSchema->getSchemaTypeDescription());
         Craft::dd($someJson);
         */
+
+        Craft::info('SEOmatic ' . Craft::t('seomatic', 'plugin loaded'), __METHOD__);
     }
 
     /**

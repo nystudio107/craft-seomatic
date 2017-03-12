@@ -16,5 +16,6 @@
  */
 
 return array(
-    'Translate me' => 'To this',
+    'SEOmatic' => 'SEOmatic',
+    'plugin loaded' => 'plugin loaded',
 );
