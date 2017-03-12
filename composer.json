@@ -22,7 +22,7 @@
         }
     ],
     "require": {
-        "composer/installers": "~1.0"
+        "craftcms/cms": "~3.0.0-beta.1"
     },
     "autoload": {
         "psr-4": {

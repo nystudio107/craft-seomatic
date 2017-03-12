@@ -11,39 +11,36 @@
 
 namespace nystudio107\seomatic;
 
+use nystudio107\seomatic\services\Meta as MetaService;
+use nystudio107\seomatic\services\Sitemaps as SitemapsService;
 use nystudio107\seomatic\twigextensions\JsonLdTwigExtension;
-use nystudio107\seomatic\models\JsonLd;
+use nystudio107\seomatic\variables\SeomaticVariable;
 
 use Craft;
 use craft\web\UrlManager;
-use craft\helpers\UrlHelper;
 use craft\events\RegisterUrlRulesEvent;
-use nystudio107\seomatic\variables\SeomaticVariable;
+
 use yii\base\Event;
 
 /**
+ * Class Seomatic
+ *
  * @author    nystudio107
  * @package   Seomatic
  * @since     1.0.0
+ *
+ * @property  MetaService       meta
+ * @property  SitemapsService   sitemaps
  */
 class Seomatic extends \craft\base\Plugin
 {
     /**
-     * Static property that is an instance of this plugin class so that it can be accessed via
-     * SEOmatic::$plugin
-     * @var static
+     * @var Seomatic
      */
     public static $plugin;
 
     /**
-     * Set our $plugin static property to this class so that it can be accessed via
-     * Seomatic::$plugin
-     *
-     * Called after the plugin class is instantiated; do any one-time initialization
-     * here such as hooks and events.
-     *
-     * If you have a '/vendor/autoload.php' file, it will be loaded for you automatically;
-     * you do not need to load it in your init() method.
+     * @inheritdoc
      */
     public function init()
     {
