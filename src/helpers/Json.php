@@ -38,7 +38,7 @@ class Json extends \craft\helpers\Json
         | JSON_UNESCAPED_SLASHES
     ) {
         // If `devMode` is enabled, make the JSON-LD human-readable
-        if (Craft::$app->config->get('devMode')) {
+        if (Craft::$app->getConfig()->getGeneral()->devMode) {
             $options |= JSON_PRETTY_PRINT;
         }
         self::$recursionLevel = 0;
