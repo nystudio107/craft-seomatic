@@ -17,5 +17,5 @@
 
 return array(
     'SEOmatic' => 'SEOmatic',
-    'plugin loaded' => 'plugin loaded',
+    'SEOmatic plugin loaded' => 'SEOmatic plugin loaded',
 );
