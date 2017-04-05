@@ -21,6 +21,7 @@ use craft\web\UrlManager;
 use craft\events\RegisterUrlRulesEvent;
 
 use yii\base\Event;
+use yii\web\View;
 
 /**
  * Class Seomatic
@@ -94,6 +95,21 @@ class Seomatic extends \craft\base\Plugin
         Craft::dd($someJson);
         */
 
+        // Listen for the page rendering event
+        Event::on(
+            View::className(),
+            View::EVENT_END_PAGE,
+            function (Event $event) {
+                $request = Craft::$app->getRequest();
+                if (!$request->getIsConsoleRequest()) {
+                    $view = Craft::$app->view;
+                    $view->registerMetaTag([
+                        'name' => 'description',
+                        'content' => 'This website is about funny raccoons.'
+                    ]);
+                }
+            }
+        );
         Craft::info(
             Craft::t(
                 'seomatic',
