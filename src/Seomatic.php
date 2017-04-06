@@ -102,11 +102,6 @@ class Seomatic extends \craft\base\Plugin
             function (Event $event) {
                 $request = Craft::$app->getRequest();
                 if (!$request->getIsConsoleRequest()) {
-                    $view = Craft::$app->view;
-                    $view->registerMetaTag([
-                        'name' => 'description',
-                        'content' => 'This website is about funny raccoons.'
-                    ]);
                 }
             }
         );

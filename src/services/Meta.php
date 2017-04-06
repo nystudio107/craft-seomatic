@@ -9,10 +9,12 @@
 
 namespace nystudio107\seomatic\services;
 
-use nystudio107\seomatic\SEOmatic;
+use nystudio107\seomatic\Seomatic;
 
 use Craft;
 use craft\base\Component;
+
+use yii\web\View;
 
 /**
  * Meta Service
@@ -24,11 +26,49 @@ use craft\base\Component;
 
 class Meta extends Component
 {
+
     /**
      *
      */
-    public function exampleService()
+    public function registerMeta()
     {
+        $this->includeMetaTags();
+        $this->includeScripts();
+        $this->includeStructuredData();
     }
 
+    /**
+     *
+     */
+    public function includeMetaTags()
+    {
+        $view = Craft::$app->getView();
+        $view->registerMetaTag([
+            'name' => 'description',
+            'content' => 'This website is about funny raccoons.'
+        ]);
+    }
+
+    /**
+     *
+     */
+    public function includeScripts()
+    {
+        $js = "<script></script>"
+        $view = Craft::$app->getView();
+        $view->registerJs(
+            $js,
+            View::POS_HEAD,
+            $key,
+            $options
+        );
+    }
+
+    /**
+     *
+     */
+    public function includeStructuredData()
+    {
+        $view = Craft::$app->getView();
+    }
 }
