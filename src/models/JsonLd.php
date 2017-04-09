@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\helpers\Json;
+use nystudio107\seomatic\helpers\JsonLd as JsonLdHelper;
 
 use Craft;
 use craft\base\Model;
@@ -222,9 +222,12 @@ class JsonLd extends Model
         }
 
         // Render the resulting JSON-LD
-        $result = '<script type="application/ld+json">'.$linebreak.
-            Json::encode($this).
-            $linebreak.'</script>';
+        $result =
+            '<script type="application/ld+json">'
+            . $linebreak
+            . JsonLdHelper::encode($this)
+            . $linebreak
+            . '</script>';
 
         if ($raw === true) {
             $result = Template::raw($result);

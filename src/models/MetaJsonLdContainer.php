@@ -22,16 +22,21 @@ use Craft;
  */
 class MetaJsonLdContainer extends MetaContainer
 {
+    // Constants
+    // =========================================================================
+
+    const CONTAINER_TYPE = 'MetaJsonLd';
+
     // Static Properties
     // =========================================================================
 
     // Static Methods
     // =========================================================================
 
-    // Properties
+    // Public Properties
     // =========================================================================
 
-    // Methods
+    // Public Methods
     // =========================================================================
 
     /**
@@ -39,7 +44,13 @@ class MetaJsonLdContainer extends MetaContainer
      */
     public function init()
     {
-        $this->type = 'metaJsonLd';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function normalizeContainerData()
+    {
     }
 
     // Private Methods

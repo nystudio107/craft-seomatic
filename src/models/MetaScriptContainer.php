@@ -22,16 +22,21 @@ use Craft;
  */
 class MetaScriptContainer extends MetaContainer
 {
+    // Constants
+    // =========================================================================
+
+    const CONTAINER_TYPE = 'MetaScript';
+
     // Static Properties
     // =========================================================================
 
     // Static Methods
     // =========================================================================
 
-    // Properties
+    // Public Properties
     // =========================================================================
 
-    // Methods
+    // Public Methods
     // =========================================================================
 
     /**
@@ -39,7 +44,13 @@ class MetaScriptContainer extends MetaContainer
      */
     public function init()
     {
-        $this->type = 'metaScript';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function normalizeContainerData()
+    {
     }
 
     // Private Methods

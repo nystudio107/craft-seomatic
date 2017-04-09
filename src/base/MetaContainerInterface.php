@@ -18,17 +18,33 @@ namespace nystudio107\seomatic\base;
  */
 interface MetaContainerInterface
 {
+
+    // Constants
+    // =========================================================================
+
+    const CONTAINER_TYPE = 'Generic';
+
     // Static Properties
     // =========================================================================
 
     // Static Methods
     // =========================================================================
 
-    // Properties
+    public static function create($config = []);
+
+    // Public Properties
     // =========================================================================
 
-    // Methods
+    // Public Methods
     // =========================================================================
+
+    /**
+     * Normalizes the containers’s data for use.
+     *
+     * This is called after container data is loaded, to allow it to be parsed,
+     * models instantiated, etc.
+     */
+    public function normalizeContainerData();
 
     // Private Methods
     // =========================================================================

@@ -31,11 +31,32 @@ abstract class MetaContainer extends Model implements MetaContainerInterface
     // Static Methods
     // =========================================================================
 
-    // Properties
+    /**
+     * Create a new Meta Container
+     *
+     * @param array $config
+     *
+     * @return null|MetaContainer
+     */
+    public static function create($config = [])
+    {
+        $model = null;
+        $className = self::className();
+        $model = new $className($config);
+        $model->normalizeContainerData();
+
+        return $model;
+    }
+
+    // Public Properties
     // =========================================================================
 
-    // Methods
+    // Public Methods
     // =========================================================================
+
+    public function normalizeContainerData()
+    {
+    }
 
     // Private Methods
     // =========================================================================

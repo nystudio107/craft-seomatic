@@ -22,16 +22,21 @@ use Craft;
  */
 class MetaTagsContainer extends MetaContainer
 {
+    // Constants
+    // =========================================================================
+
+    const CONTAINER_TYPE = 'MetaTags';
+
     // Static Properties
     // =========================================================================
 
     // Static Methods
     // =========================================================================
 
-    // Properties
+    // Public Properties
     // =========================================================================
 
-    // Methods
+    // Public Methods
     // =========================================================================
 
     /**
@@ -39,7 +44,13 @@ class MetaTagsContainer extends MetaContainer
      */
     public function init()
     {
-        $this->type = 'metaTags';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function normalizeContainerData()
+    {
     }
 
     // Private Methods

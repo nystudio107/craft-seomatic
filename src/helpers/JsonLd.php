@@ -2,9 +2,11 @@
 /**
  * SEOmatic plugin for Craft CMS 3.x
  *
- * @link      https://nystudio107.com/
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
  * @copyright Copyright (c) 2017 nystudio107
- * @license   https://nystudio107.com/license
  */
 
 namespace nystudio107\seomatic\helpers;
@@ -12,13 +14,11 @@ namespace nystudio107\seomatic\helpers;
 use Craft;
 
 /**
- * Json helper Class
- *
  * @author    nystudio107
- * @package   SEOmatic
- * @since     2.0.0
+ * @package   Seomatic
+ * @since     3.0.0
  */
-class Json extends \craft\helpers\Json
+class JsonLd extends \craft\helpers\Json
 {
     // Static Properties
     // =========================================================================

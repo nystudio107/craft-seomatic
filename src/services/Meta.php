@@ -2,9 +2,11 @@
 /**
  * SEOmatic plugin for Craft CMS 3.x
  *
- * @link      https://nystudio107.com/
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
  * @copyright Copyright (c) 2017 nystudio107
- * @license   https://nystudio107.com/license
  */
 
 namespace nystudio107\seomatic\services;
@@ -20,28 +22,68 @@ use craft\base\Component;
 use yii\web\View;
 
 /**
- * Meta Service
- *
  * @author    nystudio107
- * @package   SEOmatic
- * @since     2.0.0
+ * @package   Seomatic
+ * @since     3.0.0
  */
-
 class Meta extends Component
 {
+    // Constants
+    // =========================================================================
+
+    // Static Properties
+    // =========================================================================
+
+    // Static Methods
+    // =========================================================================
+
+    // Public Properties
+    // =========================================================================
+
     /**
      * @var array
      */
     protected $metaContainers = [];
+
+    // Public Methods
+    // =========================================================================
 
     /**
      *
      */
     public function loadMetaContainers()
     {
-        $this->metaContainers[] = new MetaTagsContainer();
-        $this->metaContainers[] = new MetaScriptContainer();
-        $this->metaContainers[] = new MetaJsonLdContainer();
+        $this->loadGlobalMetaContainers();
+        $this->loadSectionMetaContainers();
+    }
+
+    /**
+     * @param $type
+     * @param $data
+     */
+    public function addMetaContainer($type, $data)
+    {
+        $container = null;
+        switch ($type) {
+            case MetaTagsContainer::CONTAINER_TYPE:
+                $container = new MetaTagsContainer([
+                    'data' => $data,
+                ]);
+                break;
+            case MetaScriptContainer::CONTAINER_TYPE:
+                $container = new MetaScriptContainer([
+                    'data' => $data,
+                ]);
+                break;
+            case MetaJsonLdContainer::CONTAINER_TYPE:
+                $container = new MetaJsonLdContainer([
+                    'data' => $data,
+                ]);
+                break;
+        }
+        if ($container) {
+            $this->metaContainers[] = $container;
+        }
     }
 
     /**
@@ -51,23 +93,43 @@ class Meta extends Component
     {
         foreach ($this->metaContainers as $metaContainer) {
             switch ($metaContainer->type) {
-                case "metaTags":
+                case MetaTagsContainer::CONTAINER_TYPE:
                     $this->includeMetaTags($metaContainer);
                     break;
-                case "metaScript":
+                case MetaScriptContainer::CONTAINER_TYPE:
                     $this->includeMetaScript($metaContainer);
                     break;
-                case "metaJsonLd":
+                case MetaJsonLdContainer::CONTAINER_TYPE:
                     $this->includeMetaJsonLd($metaContainer);
                     break;
             }
         }
     }
 
+    // Protected Methods
+    // =========================================================================
+
     /**
      *
      */
-    public function includeMetaTags($metaContainer)
+    protected function loadGlobalMetaContainers()
+    {
+        $this->metaContainers[] = MetaTagsContainer::create();
+        $this->metaContainers[] = MetaScriptContainer::create();
+        $this->metaContainers[] = MetaJsonLdContainer::create();
+    }
+
+    /**
+     *
+     */
+    protected function loadSectionMetaContainers()
+    {
+    }
+
+    /**
+     *
+     */
+    protected function includeMetaTags($metaContainer)
     {
         $view = Craft::$app->getView();
         $view->registerMetaTag([
@@ -79,7 +141,7 @@ class Meta extends Component
     /**
      *
      */
-    public function includeMetaScript($metaContainer)
+    protected function includeMetaScript($metaContainer)
     {
         $js = "echo 'woof';";
         $view = Craft::$app->getView();
@@ -92,8 +154,11 @@ class Meta extends Component
     /**
      *
      */
-    public function includeMetaJsonLd($metaContainer)
+    protected function includeMetaJsonLd($metaContainer)
     {
         $view = Craft::$app->getView();
     }
+
+    // Private Methods
+    // =========================================================================
 }

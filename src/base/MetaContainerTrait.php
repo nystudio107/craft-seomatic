@@ -23,7 +23,15 @@ trait MetaContainerTrait
 
     /**
      * The type of container that this is
+     *
      * @var string
      */
     public $type;
+
+    /**
+     * The data in this container
+     *
+     * @var array
+     */
+    public $data = [];
 }
