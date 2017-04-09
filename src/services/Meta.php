@@ -10,6 +10,9 @@
 namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\models\MetaTagsContainer;
+use nystudio107\seomatic\models\MetaScriptContainer;
+use nystudio107\seomatic\models\MetaJsonLdContainer;
 
 use Craft;
 use craft\base\Component;
@@ -26,21 +29,45 @@ use yii\web\View;
 
 class Meta extends Component
 {
+    /**
+     * @var array
+     */
+    protected $metaContainers = [];
 
     /**
      *
      */
-    public function registerMeta()
+    public function loadMetaContainers()
     {
-        $this->includeMetaTags();
-        $this->includeScripts();
-        $this->includeStructuredData();
+        $this->metaContainers[] = new MetaTagsContainer();
+        $this->metaContainers[] = new MetaScriptContainer();
+        $this->metaContainers[] = new MetaJsonLdContainer();
     }
 
     /**
      *
      */
-    public function includeMetaTags()
+    public function includeMetaContainers()
+    {
+        foreach ($this->metaContainers as $metaContainer) {
+            switch ($metaContainer->type) {
+                case "metaTags":
+                    $this->includeMetaTags($metaContainer);
+                    break;
+                case "metaScript":
+                    $this->includeMetaScript($metaContainer);
+                    break;
+                case "metaJsonLd":
+                    $this->includeMetaJsonLd($metaContainer);
+                    break;
+            }
+        }
+    }
+
+    /**
+     *
+     */
+    public function includeMetaTags($metaContainer)
     {
         $view = Craft::$app->getView();
         $view->registerMetaTag([
@@ -52,22 +79,20 @@ class Meta extends Component
     /**
      *
      */
-    public function includeScripts()
+    public function includeMetaScript($metaContainer)
     {
-        $js = "<script></script>"
+        $js = "echo 'woof';";
         $view = Craft::$app->getView();
         $view->registerJs(
             $js,
-            View::POS_HEAD,
-            $key,
-            $options
+            View::POS_HEAD
         );
     }
 
     /**
      *
      */
-    public function includeStructuredData()
+    public function includeMetaJsonLd($metaContainer)
     {
         $view = Craft::$app->getView();
     }

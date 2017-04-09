@@ -17,6 +17,7 @@ use nystudio107\seomatic\twigextensions\JsonLdTwigExtension;
 use nystudio107\seomatic\variables\SeomaticVariable;
 
 use Craft;
+use craft\base\Plugin;
 use craft\web\UrlManager;
 use craft\events\RegisterUrlRulesEvent;
 
@@ -28,12 +29,12 @@ use yii\web\View;
  *
  * @author    nystudio107
  * @package   Seomatic
- * @since     1.0.0
+ * @since     3.0.0
  *
  * @property  MetaService       meta
  * @property  SitemapsService   sitemaps
  */
-class Seomatic extends \craft\base\Plugin
+class Seomatic extends Plugin
 {
     /**
      * @var Seomatic
@@ -49,17 +50,66 @@ class Seomatic extends \craft\base\Plugin
         self::$plugin = $this;
         $this->name = $this->getName();
 
+        $request = Craft::$app->getRequest();
+
         // Add in our Twig extensions
         Craft::$app->view->twig->addExtension(new JsonLdTwigExtension());
 
-        // Register our site routes
-        Event::on(
-            UrlManager::className(),
-            UrlManager::EVENT_REGISTER_SITE_URL_RULES,
-            function (RegisterUrlRulesEvent $event) {
-                $event->rules['sitemap.xml'] = 'seomatic/sitemap/get-index';
-            }
+        // Only respond to non-console site requests
+        if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
+            // Load the meta containers for this page
+            Seomatic::$plugin->meta->loadMetaContainers();
+
+            // Register our site routes
+            Event::on(
+                UrlManager::className(),
+                UrlManager::EVENT_REGISTER_SITE_URL_RULES,
+                function (RegisterUrlRulesEvent $event) {
+                    $event->rules['sitemap.xml'] = 'seomatic/sitemap/get-index';
+                }
+            );
+
+            // Listen for the page rendering event
+            Event::on(
+                View::className(),
+                View::EVENT_END_PAGE,
+                function (Event $event) {
+                    Seomatic::$plugin->meta->includeMetaContainers();
+                }
+            );
+        }
+
+        // We're loaded
+        Craft::info(
+            Craft::t(
+                'seomatic',
+                '{name} plugin loaded',
+                ['name' => $this->name]
+            ),
+            __METHOD__
         );
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function defineTemplateComponent()
+    {
+        return SeomaticVariable::class;
+    }
+
+    /**
+     * Returns the user-facing name of the plugin, which can override the name in
+     * composer.json
+     *
+     * @return mixed
+     */
+    public function getName(): string
+    {
+         return Craft::t('seomatic', 'SEOmatic');
+    }
+}
+
 /*
         $someSchema = JsonLd::create("Article");
         $someSchema->name = "Andrew";
@@ -94,43 +144,3 @@ class Seomatic extends \craft\base\Plugin
         Craft::dump($someSchema->getSchemaTypeDescription());
         Craft::dd($someJson);
         */
-
-        // Listen for the page rendering event
-        Event::on(
-            View::className(),
-            View::EVENT_END_PAGE,
-            function (Event $event) {
-                $request = Craft::$app->getRequest();
-                if (!$request->getIsConsoleRequest()) {
-                }
-            }
-        );
-        Craft::info(
-            Craft::t(
-                'seomatic',
-                '{name} plugin loaded',
-                ['name' => $this->name]
-            ),
-            __METHOD__
-        );
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function defineTemplateComponent()
-    {
-        return SeomaticVariable::class;
-    }
-
-    /**
-     * Returns the user-facing name of the plugin, which can override the name in
-     * composer.json
-     *
-     * @return mixed
-     */
-    public function getName(): string
-    {
-         return Craft::t('seomatic', 'SEOmatic');
-    }
-}

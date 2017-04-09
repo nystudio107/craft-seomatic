@@ -2,7 +2,7 @@
     "name": "nystudio107/craft3-seomatic",
     "description": "A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible",
     "type": "craft-plugin",
-    "version": "1.0.0",
+    "version": "3.0.0",
     "keywords": [
         "craft",
         "cms",
@@ -32,7 +32,7 @@
     "extra": {
         "name": "SEOmatic",
         "handle": "seomatic",
-        "schemaVersion": "1.0.0",
+        "schemaVersion": "3.0.0",
         "hasCpSettings": true,
         "hasCpSection": true,
         "changelogUrl": "https://raw.githubusercontent.com/nystudio107/craft3-seomatic/master/CHANGELOG.md",
