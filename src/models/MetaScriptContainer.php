@@ -15,6 +15,8 @@ use nystudio107\seomatic\base\MetaContainer;
 
 use Craft;
 
+use yii\web\View;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -36,15 +38,13 @@ class MetaScriptContainer extends MetaContainer
     // Public Properties
     // =========================================================================
 
+    /**
+     * @var int
+     */
+    public $position = View::POS_HEAD;
+
     // Public Methods
     // =========================================================================
-
-    /**
-     * @inheritdoc
-     */
-    public function init()
-    {
-    }
 
     /**
      * @inheritdoc

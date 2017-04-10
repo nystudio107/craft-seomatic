@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\models\JsonLd;
 use nystudio107\seomatic\models\MetaTagsContainer;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
@@ -92,7 +93,7 @@ class Meta extends Component
     public function includeMetaContainers()
     {
         foreach ($this->metaContainers as $metaContainer) {
-            switch ($metaContainer->type) {
+            switch ($metaContainer::CONTAINER_TYPE) {
                 case MetaTagsContainer::CONTAINER_TYPE:
                     $this->includeMetaTags($metaContainer);
                     break;
@@ -114,9 +115,6 @@ class Meta extends Component
      */
     protected function loadGlobalMetaContainers()
     {
-        $this->metaContainers[] = MetaTagsContainer::create();
-        $this->metaContainers[] = MetaScriptContainer::create();
-        $this->metaContainers[] = MetaJsonLdContainer::create();
     }
 
     /**
@@ -143,11 +141,12 @@ class Meta extends Component
      */
     protected function includeMetaScript($metaContainer)
     {
-        $js = "echo 'woof';";
+        $metaScriptModel = $metaContainer->data;
+        $js = $metaScriptModel->render();
         $view = Craft::$app->getView();
         $view->registerJs(
             $js,
-            View::POS_HEAD
+            $metaContainer->position
         );
     }
 
@@ -156,7 +155,12 @@ class Meta extends Component
      */
     protected function includeMetaJsonLd($metaContainer)
     {
+        $jsonLdModel = $metaContainer->data;
+        $jsonLd = $jsonLdModel->render(true, false);
         $view = Craft::$app->getView();
+        $view->registerJsonLD(
+            $jsonLd
+        );
     }
 
     // Private Methods

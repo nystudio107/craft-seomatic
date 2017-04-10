@@ -26,7 +26,7 @@ use yii\base\InvalidParamException;
 /**
  * @author    nystudio107
  * @package   Seomatic
- * @since     1.0.0
+ * @since     3.0.0
  */
 class JsonLd extends Model
 {
@@ -209,10 +209,11 @@ class JsonLd extends Model
      * Renders a JSON-LD representation of the schema
      *
      * @param bool $raw
+     * @param bool $tags
      *
      * @return string|\Twig_Markup
      */
-    public function render($raw = true)
+    public function render($raw = true, $tags = true)
     {
         $linebreak = "";
 
@@ -222,13 +223,15 @@ class JsonLd extends Model
         }
 
         // Render the resulting JSON-LD
-        $result =
-            '<script type="application/ld+json">'
-            . $linebreak
-            . JsonLdHelper::encode($this)
-            . $linebreak
-            . '</script>';
-
+        $result = JsonLdHelper::encode($this);
+        if ($tags) {
+            $result =
+                '<script type="application/ld+json">'
+                . $linebreak
+                . $result
+                . $linebreak
+                . '</script>';
+        }
         if ($raw === true) {
             $result = Template::raw($result);
         }

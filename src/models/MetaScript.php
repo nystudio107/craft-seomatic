@@ -11,21 +11,21 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\base\MetaContainer;
+use nystudio107\seomatic\helpers\PluginTemplate as PluginTemplateHelper;
 
 use Craft;
+use craft\base\Model;
+use craft\helpers\Template;
 
 /**
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaTagsContainer extends MetaContainer
+class MetaScript extends Model
 {
     // Constants
     // =========================================================================
-
-    const CONTAINER_TYPE = 'MetaTags';
 
     // Static Properties
     // =========================================================================
@@ -33,17 +33,36 @@ class MetaTagsContainer extends MetaContainer
     // Static Methods
     // =========================================================================
 
+    public static function create(array $config = [])
+    {
+        $model = null;
+        $model = new MetaScript($config);
+
+        return $model;
+    }
+
     // Public Properties
     // =========================================================================
+
+    /**
+     * @var string
+     */
+    public $templatePath;
+
+    /**
+     * @var array
+     */
+    public $vars;
 
     // Public Methods
     // =========================================================================
 
     /**
-     * @inheritdoc
+     * @return string
      */
-    public function normalizeContainerData()
+    public function render()
     {
+        return PluginTemplateHelper::renderPluginTemplate($this->templatePath, $this->vars);
     }
 
     // Private Methods
