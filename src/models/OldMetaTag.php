@@ -2,63 +2,72 @@
 /**
  * SEOmatic plugin for Craft CMS 3.x
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
- *
  * @link      https://nystudio107.com
  * @copyright Copyright (c) 2017 nystudio107
  */
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\base\MetaContainer;
-
 use Craft;
-
-use yii\web\View;
+use craft\base\Model;
 
 /**
  * @author    nystudio107
- * @package   Seomatic
- * @since     3.0.0
+ * @package   Recipe
+ * @since     1.0.0
  */
-class MetaScriptContainer extends MetaContainer
+class OldMetaTag extends Model
 {
-    // Constants
-    // =========================================================================
-
-    const CONTAINER_TYPE = 'MetaScript';
-
     // Static Properties
     // =========================================================================
 
     // Static Methods
     // =========================================================================
 
-    // Public Properties
+    // Properties
     // =========================================================================
 
     /**
-     * The data in this container
-     *
-     * @var MetaScript
+     * @var string
      */
-    public $data = [];
+    public $tagName;
 
     /**
-     * @var int
+     * @var string
      */
-    public $position = View::POS_HEAD;
+    public $tagDescription;
 
-    // Public Methods
+    /**
+     * @var string
+     */
+    public $tagAttributes = [];
+
+    // Methods
     // =========================================================================
 
     /**
      * @inheritdoc
      */
-    public function normalizeContainerData()
+    public function fields()
     {
+        $fields = parent::fields();
+        $fields = array_diff_key($fields, array_flip([
+            ]));
+        return $fields;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        $rules = [
+            [['tagName', 'tagDescription', 'tagAttributes'], 'required'],
+            [['tagName'], 'string', 'max' => 50],
+            [['tagDescription'], 'string', 'max' => 255],
+        ];
+        return $rules;
+    } /* -- rules */
 
     // Private Methods
     // =========================================================================

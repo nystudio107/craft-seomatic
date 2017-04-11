@@ -13,7 +13,7 @@ namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\models\JsonLd;
-use nystudio107\seomatic\models\MetaTagsContainer;
+use nystudio107\seomatic\models\MetaTagContainer;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 
@@ -61,29 +61,38 @@ class Meta extends Component
     /**
      * @param $type
      * @param $data
+     * @param $key
      */
-    public function addMetaContainer($type, $data)
+    public function addMetaContainer($type, $data, $key = null)
     {
         $container = null;
-        switch ($type) {
-            case MetaTagsContainer::CONTAINER_TYPE:
-                $container = new MetaTagsContainer([
-                    'data' => $data,
+        $className = null;
+        $key = $key ?: $this->getHash($data);
+        // If a container already exists with this $key, just add to it
+        if (!empty($this->metaContainers[$key])) {
+            $container = $this->metaContainers[$key];
+            $container->data[] = $data;
+        } else {
+            // Create a new container based on the type passed in
+            switch ($type) {
+                case MetaTagContainer::CONTAINER_TYPE:
+                    $className = MetaTagContainer::className();
+                    break;
+                case MetaScriptContainer::CONTAINER_TYPE:
+                    $className = MetaScriptContainer::className();
+                    break;
+                case MetaJsonLdContainer::CONTAINER_TYPE:
+                    $className = MetaJsonLdContainer::className();
+                    break;
+            }
+            if ($className) {
+                $container = new $className([
+                    'data' => [$data],
                 ]);
-                break;
-            case MetaScriptContainer::CONTAINER_TYPE:
-                $container = new MetaScriptContainer([
-                    'data' => $data,
-                ]);
-                break;
-            case MetaJsonLdContainer::CONTAINER_TYPE:
-                $container = new MetaJsonLdContainer([
-                    'data' => $data,
-                ]);
-                break;
-        }
-        if ($container) {
-            $this->metaContainers[] = $container;
+                if ($container) {
+                    $this->metaContainers[$key] = $container;
+                }
+            }
         }
     }
 
@@ -94,7 +103,7 @@ class Meta extends Component
     {
         foreach ($this->metaContainers as $metaContainer) {
             switch ($metaContainer::CONTAINER_TYPE) {
-                case MetaTagsContainer::CONTAINER_TYPE:
+                case MetaTagContainer::CONTAINER_TYPE:
                     $this->includeMetaTags($metaContainer);
                     break;
                 case MetaScriptContainer::CONTAINER_TYPE:
@@ -125,42 +134,58 @@ class Meta extends Component
     }
 
     /**
-     *
+     * @param MetaTagContainer $metaContainer
      */
-    protected function includeMetaTags($metaContainer)
+    protected function includeMetaTags(MetaTagContainer $metaContainer)
     {
         $view = Craft::$app->getView();
-        $view->registerMetaTag([
-            'name' => 'description',
-            'content' => 'This website is about funny raccoons.'
-        ]);
+        foreach ($metaContainer->data as $metaTagModel) {
+            $view->registerMetaTag($metaTagModel->options);
+        }
     }
 
     /**
-     *
+     * @param MetaScriptContainer $metaContainer
      */
-    protected function includeMetaScript($metaContainer)
+    protected function includeMetaScript(MetaScriptContainer $metaContainer)
     {
-        $metaScriptModel = $metaContainer->data;
-        $js = $metaScriptModel->render();
         $view = Craft::$app->getView();
-        $view->registerJs(
-            $js,
-            $metaContainer->position
-        );
+        foreach ($metaContainer->data as $metaScriptModel) {
+            $js = $metaScriptModel->render();
+            $view->registerJs(
+                $js,
+                $metaContainer->position
+            );
+        }
     }
 
     /**
-     *
+     * @param MetaJsonLdContainer $metaContainer
      */
-    protected function includeMetaJsonLd($metaContainer)
+    protected function includeMetaJsonLd(MetaJsonLdContainer $metaContainer)
     {
-        $jsonLdModel = $metaContainer->data;
-        $jsonLd = $jsonLdModel->render(true, false);
         $view = Craft::$app->getView();
-        $view->registerJsonLD(
-            $jsonLd
-        );
+        foreach ($metaContainer->data as $jsonLdModel) {
+            $jsonLd = $jsonLdModel->render(true, false);
+            $view->registerJsonLD(
+                $jsonLd
+            );
+        }
+    }
+
+    // Protected Methods
+    // =========================================================================
+
+    protected function getHash($data)
+    {
+        if (is_object($data)) {
+            $data = $data->toArray();
+        }
+        if (is_array($data)) {
+            $data = serialize($data);
+        }
+
+        return md5($data);
     }
 
     // Private Methods

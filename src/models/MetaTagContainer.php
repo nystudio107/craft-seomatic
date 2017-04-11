@@ -20,7 +20,7 @@ use Craft;
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaTagsContainer extends MetaContainer
+class MetaTagContainer extends MetaContainer
 {
     // Constants
     // =========================================================================
@@ -35,6 +35,13 @@ class MetaTagsContainer extends MetaContainer
 
     // Public Properties
     // =========================================================================
+
+    /**
+     * The data in this container
+     *
+     * @var MetaTag
+     */
+    public $data = [];
 
     // Public Methods
     // =========================================================================

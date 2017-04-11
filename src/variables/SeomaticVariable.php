@@ -12,9 +12,10 @@
 namespace nystudio107\seomatic\variables;
 
 use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\models\MetaTag;
 use nystudio107\seomatic\models\JsonLd;
 use nystudio107\seomatic\models\MetaScript;
-use nystudio107\seomatic\models\MetaTagsContainer;
+use nystudio107\seomatic\models\MetaTagContainer;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 
@@ -31,6 +32,37 @@ use Craft;
 class SeomaticVariable
 {
     /**
+     * Create a meta script from a template
+     *
+     * @param string $name        The meta tag name
+     * @param array  $attributes  The meta tag attributes
+     *
+     * @return mixed              The model object
+     */
+    public function createMetaTag(string $name, array $attributes = [])
+    {
+        $attributes = array_merge(
+            [
+                'name' => $name
+            ],
+            $attributes
+        );
+        $config = [
+            'options' => $attributes,
+        ];
+        return MetaTag::create($config);
+    }
+
+    /**
+     * @param MetaTag $metaTag
+     * @param null    $key
+     */
+    public function includeMetaTag(MetaTag $metaTag, $key = null)
+    {
+        Seomatic::$plugin->meta->addMetaContainer(MetaTagContainer::CONTAINER_TYPE, $metaTag, $key);
+    }
+
+    /**
      * Create a new JSON-LD schema type object
      *
      * @param string $jsonLdType  The schema.org type to create
@@ -45,10 +77,11 @@ class SeomaticVariable
 
     /**
      * @param JsonLd $jsonLdModel
+     * @param string $key
      */
-    public function includeJsonLd(JsonLd $jsonLdModel)
+    public function includeJsonLd(JsonLd $jsonLdModel, $key = null)
     {
-        Seomatic::$plugin->meta->addMetaContainer(MetaJsonLdContainer::CONTAINER_TYPE, $jsonLdModel);
+        Seomatic::$plugin->meta->addMetaContainer(MetaJsonLdContainer::CONTAINER_TYPE, $jsonLdModel, $key);
     }
 
     /**
@@ -70,10 +103,10 @@ class SeomaticVariable
 
     /**
      * @param MetaScript $metaScript
+     * @param string $key
      */
-    public function includeMetaScript(MetaScript $metaScript)
+    public function includeMetaScript(MetaScript $metaScript, $key = null)
     {
-        Seomatic::$plugin->meta->addMetaContainer(MetaScriptContainer::CONTAINER_TYPE, $metaScript);
+        Seomatic::$plugin->meta->addMetaContainer(MetaScriptContainer::CONTAINER_TYPE, $metaScript, $key);
     }
-
 }

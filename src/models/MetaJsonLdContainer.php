@@ -38,6 +38,13 @@ class MetaJsonLdContainer extends MetaContainer
     // Public Properties
     // =========================================================================
 
+    /**
+     * The data in this container
+     *
+     * @var JsonLd
+     */
+    public $data = [];
+
     // Public Methods
     // =========================================================================
 

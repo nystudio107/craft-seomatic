@@ -2,72 +2,65 @@
 /**
  * SEOmatic plugin for Craft CMS 3.x
  *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
  * @link      https://nystudio107.com
  * @copyright Copyright (c) 2017 nystudio107
  */
 
 namespace nystudio107\seomatic\models;
 
+use nystudio107\seomatic\helpers\PluginTemplate as PluginTemplateHelper;
+
 use Craft;
 use craft\base\Model;
+use craft\helpers\Template;
+
+use yii\helpers\Html;
 
 /**
  * @author    nystudio107
- * @package   Recipe
- * @since     1.0.0
+ * @package   Seomatic
+ * @since     3.0.0
  */
 class MetaTag extends Model
 {
+    // Constants
+    // =========================================================================
+
     // Static Properties
     // =========================================================================
 
     // Static Methods
     // =========================================================================
 
-    // Properties
-    // =========================================================================
-
-    /**
-     * @var string
-     */
-    public $tagName;
-
-    /**
-     * @var string
-     */
-    public $tagDescription;
-
-    /**
-     * @var string
-     */
-    public $tagAttributes = [];
-
-    // Methods
-    // =========================================================================
-
-    /**
-     * @inheritdoc
-     */
-    public function fields()
+    public static function create(array $config = [])
     {
-        $fields = parent::fields();
-        $fields = array_diff_key($fields, array_flip([
-            ]));
-        return $fields;
+        $model = null;
+        $model = new MetaTag($config);
+
+        return $model;
     }
 
+    // Public Properties
+    // =========================================================================
+
     /**
-     * @inheritdoc
+     * @var array
      */
-    public function rules()
+    public $options;
+
+    // Public Methods
+    // =========================================================================
+
+    /**
+     * @return string
+     */
+    public function render()
     {
-        $rules = [
-            [['tagName', 'tagDescription', 'tagAttributes'], 'required'],
-            [['tagName'], 'string', 'max' => 50],
-            [['tagDescription'], 'string', 'max' => 255],
-        ];
-        return $rules;
-    } /* -- rules */
+        return Html::tag('meta', '', $this->options);
+    }
 
     // Private Methods
     // =========================================================================
