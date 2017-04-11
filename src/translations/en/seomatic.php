@@ -17,5 +17,6 @@
 
 return array(
     'SEOmatic' => 'SEOmatic',
-    'SEOmatic plugin loaded' => 'SEOmatic plugin loaded',
+    '{name} plugin loaded' => '{name} plugin loaded',
+    'JSON-LD property: ' => 'JSON-LD property: ',
 );

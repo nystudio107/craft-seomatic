@@ -170,6 +170,10 @@ class Meta extends Component
             $view->registerJsonLD(
                 $jsonLd
             );
+            // If `devMode` is enabled, validate the JSON-LD and output any model errors
+            if (Craft::$app->getConfig()->getGeneral()->devMode) {
+                $this->debugJsonLd($jsonLdModel);
+            }
         }
     }
 
@@ -186,6 +190,43 @@ class Meta extends Component
         }
 
         return md5($data);
+    }
+
+    /**
+     * Validate the JSON-LD and output any model errors
+     *
+     * @param $jsonLdModel
+     */
+    protected function debugJsonLd($jsonLdModel)
+    {
+        $scenarios = ['default', 'google'];
+        foreach ($scenarios as $scenario) {
+            $jsonLdModel->setScenario($scenario);
+            if (!$jsonLdModel->validate()) {
+                $errorMsg =
+                    Craft::t('seomatic', 'Scenario: "')
+                    . $scenario
+                    . '"'
+                    . PHP_EOL
+                    . print_r($jsonLdModel->render(false, false), true);
+                if ($scenario == 'default') {
+                    Craft::error($errorMsg, __METHOD__);
+                } else {
+                    Craft::warning($errorMsg, __METHOD__);
+                }
+                foreach ($jsonLdModel->errors as $param => $errors) {
+                    $errorMsg = Craft::t('seomatic', 'JSON-LD property: ') . $param;
+                    foreach ($errors as $error) {
+                        $errorMsg .= ' -> ' . $error;
+                    }
+                    if ($scenario == 'default') {
+                        Craft::error($errorMsg, __METHOD__);
+                    } else {
+                        Craft::warning($errorMsg, __METHOD__);
+                    }
+                }
+            }
+        }
     }
 
     // Private Methods
