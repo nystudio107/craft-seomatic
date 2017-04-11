@@ -104,7 +104,7 @@ class VisualArtwork extends CreativeWork
     /**
      * The material used. (e.g. Oil, Watercolour, Acrylic, Linoprint, Marble,
      * Cyanotype, Digital, Lithograph, DryPoint, Intaglio, Pastel, Woodcut,
-     * Pencil, Mixed Media, etc.) Supersedes material.
+     * Pencil, Mixed Media, etc.)
      *
      * @var mixed|string|string [schema.org types: Text, URL]
      */
@@ -187,7 +187,7 @@ class VisualArtwork extends CreativeWork
      */
     static protected $_schemaPropertyDescriptions = [
         'artEdition' => 'The number of copies when multiple copies of a piece of artwork are produced - e.g. for a limited edition of 20 prints, \'artEdition\' refers to the total number of copies (in this example "20").',
-        'artMedium' => 'The material used. (e.g. Oil, Watercolour, Acrylic, Linoprint, Marble, Cyanotype, Digital, Lithograph, DryPoint, Intaglio, Pastel, Woodcut, Pencil, Mixed Media, etc.) Supersedes material.',
+        'artMedium' => 'The material used. (e.g. Oil, Watercolour, Acrylic, Linoprint, Marble, Cyanotype, Digital, Lithograph, DryPoint, Intaglio, Pastel, Woodcut, Pencil, Mixed Media, etc.)',
         'artform' => 'e.g. Painting, Drawing, Sculpture, Print, Photograph, Assemblage, Collage, etc.',
         'artworkSurface' => 'The supporting materials for the artwork, e.g. Canvas, Paper, Wood, Board, etc. Supersedes surface.',
         'depth' => 'The depth of the item.',
@@ -221,27 +221,27 @@ class VisualArtwork extends CreativeWork
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
-            parent::$_schemaPropertyNames,
+            parent::$schemaPropertyNames,
             self::$_schemaPropertyNames
         );
 
         self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$_schemaPropertyExpectedTypes,
+            parent::$schemaPropertyExpectedTypes,
             self::$_schemaPropertyExpectedTypes
         );
 
         self::$schemaPropertyDescriptions = array_merge(
-            parent::$_schemaPropertyDescriptions,
+            parent::$schemaPropertyDescriptions,
             self::$_schemaPropertyDescriptions
         );
 
         self::$googleRequiredSchema = array_merge(
-            parent::$_googleRequiredSchema,
+            parent::$googleRequiredSchema,
             self::$_googleRequiredSchema
         );
 
         self::$googleRecommendedSchema = array_merge(
-            parent::$_googleRecommendedSchema,
+            parent::$googleRecommendedSchema,
             self::$_googleRecommendedSchema
         );
     }

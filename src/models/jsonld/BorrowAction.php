@@ -98,7 +98,7 @@ class BorrowAction extends TransferAction
      * A sub property of participant. The person that lends the object being
      * borrowed.
      *
-     * @var Person [schema.org types: Person]
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
      */
     public $lender;
 
@@ -120,7 +120,7 @@ class BorrowAction extends TransferAction
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'lender' => ['Person']
+        'lender' => ['Organization','Person']
     ];
 
     /**
@@ -158,27 +158,27 @@ class BorrowAction extends TransferAction
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
-            parent::$_schemaPropertyNames,
+            parent::$schemaPropertyNames,
             self::$_schemaPropertyNames
         );
 
         self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$_schemaPropertyExpectedTypes,
+            parent::$schemaPropertyExpectedTypes,
             self::$_schemaPropertyExpectedTypes
         );
 
         self::$schemaPropertyDescriptions = array_merge(
-            parent::$_schemaPropertyDescriptions,
+            parent::$schemaPropertyDescriptions,
             self::$_schemaPropertyDescriptions
         );
 
         self::$googleRequiredSchema = array_merge(
-            parent::$_googleRequiredSchema,
+            parent::$googleRequiredSchema,
             self::$_googleRequiredSchema
         );
 
         self::$googleRecommendedSchema = array_merge(
-            parent::$_googleRecommendedSchema,
+            parent::$googleRecommendedSchema,
             self::$_googleRecommendedSchema
         );
     }

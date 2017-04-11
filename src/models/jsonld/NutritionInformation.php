@@ -265,27 +265,27 @@ class NutritionInformation extends StructuredValue
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
-            parent::$_schemaPropertyNames,
+            parent::$schemaPropertyNames,
             self::$_schemaPropertyNames
         );
 
         self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$_schemaPropertyExpectedTypes,
+            parent::$schemaPropertyExpectedTypes,
             self::$_schemaPropertyExpectedTypes
         );
 
         self::$schemaPropertyDescriptions = array_merge(
-            parent::$_schemaPropertyDescriptions,
+            parent::$schemaPropertyDescriptions,
             self::$_schemaPropertyDescriptions
         );
 
         self::$googleRequiredSchema = array_merge(
-            parent::$_googleRequiredSchema,
+            parent::$googleRequiredSchema,
             self::$_googleRequiredSchema
         );
 
         self::$googleRecommendedSchema = array_merge(
-            parent::$_googleRecommendedSchema,
+            parent::$googleRecommendedSchema,
             self::$_googleRecommendedSchema
         );
     }

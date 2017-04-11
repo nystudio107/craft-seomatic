@@ -101,7 +101,7 @@ class MusicGroup extends PerformingGroup
     public $album;
 
     /**
-     * Genre of the creative work or group.
+     * Genre of the creative work, broadcast channel or group.
      *
      * @var mixed|string|string [schema.org types: Text, URL]
      */
@@ -147,7 +147,7 @@ class MusicGroup extends PerformingGroup
      */
     static protected $_schemaPropertyDescriptions = [
         'album' => 'A music album. Supersedes albums.',
-        'genre' => 'Genre of the creative work or group.',
+        'genre' => 'Genre of the creative work, broadcast channel or group.',
         'track' => 'A music recording (track)—usually a single song. If an ItemList is given, the list should contain items of type MusicRecording. Supersedes tracks.'
     ];
 
@@ -177,27 +177,27 @@ class MusicGroup extends PerformingGroup
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
-            parent::$_schemaPropertyNames,
+            parent::$schemaPropertyNames,
             self::$_schemaPropertyNames
         );
 
         self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$_schemaPropertyExpectedTypes,
+            parent::$schemaPropertyExpectedTypes,
             self::$_schemaPropertyExpectedTypes
         );
 
         self::$schemaPropertyDescriptions = array_merge(
-            parent::$_schemaPropertyDescriptions,
+            parent::$schemaPropertyDescriptions,
             self::$_schemaPropertyDescriptions
         );
 
         self::$googleRequiredSchema = array_merge(
-            parent::$_googleRequiredSchema,
+            parent::$googleRequiredSchema,
             self::$_googleRequiredSchema
         );
 
         self::$googleRecommendedSchema = array_merge(
-            parent::$_googleRecommendedSchema,
+            parent::$googleRecommendedSchema,
             self::$_googleRecommendedSchema
         );
     }

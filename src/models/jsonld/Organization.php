@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\Thing;
+use nystudio107\seomatic\models\jsonld\JsonLdType;
 
 /**
  * Organization - An organization such as a school, NGO, corporation, club,
@@ -22,7 +22,7 @@ use nystudio107\seomatic\models\jsonld\Thing;
  * @since     1.0.0
  * @see       http://schema.org/Organization
  */
-class Organization extends Thing
+class Organization extends JsonLdType
 {
     // Static Public Properties
     // =========================================================================
@@ -53,7 +53,7 @@ class Organization extends Thing
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'Thing';
+    static public $schemaTypeExtends = 'JsonLdType';
 
     /**
      * The Schema.org composed Property Names
@@ -340,8 +340,8 @@ class Organization extends Thing
     public $owns;
 
     /**
-     * The larger organization that this local business is a branch of, if any.
-     * Supersedes branchOf. Inverse property: subOrganization.
+     * The larger organization that this organization is a subOrganization of, if
+     * any. Supersedes branchOf. Inverse property: subOrganization.
      *
      * @var mixed|Organization [schema.org types: Organization]
      */
@@ -539,7 +539,7 @@ class Organization extends Thing
         'naics' => 'The North American Industry Classification System (NAICS) code for a particular organization or business person.',
         'numberOfEmployees' => 'The number of employees in an organization e.g. business.',
         'owns' => 'Products owned by the organization or person.',
-        'parentOrganization' => 'The larger organization that this local business is a branch of, if any. Supersedes branchOf. Inverse property: subOrganization.',
+        'parentOrganization' => 'The larger organization that this organization is a subOrganization of, if any. Supersedes branchOf. Inverse property: subOrganization.',
         'review' => 'A review of the item. Supersedes reviews.',
         'seeks' => 'A pointer to products or services sought by the organization or person (demand).',
         'sponsor' => 'A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.',
@@ -575,27 +575,27 @@ class Organization extends Thing
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
-            parent::$_schemaPropertyNames,
+            parent::$schemaPropertyNames,
             self::$_schemaPropertyNames
         );
 
         self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$_schemaPropertyExpectedTypes,
+            parent::$schemaPropertyExpectedTypes,
             self::$_schemaPropertyExpectedTypes
         );
 
         self::$schemaPropertyDescriptions = array_merge(
-            parent::$_schemaPropertyDescriptions,
+            parent::$schemaPropertyDescriptions,
             self::$_schemaPropertyDescriptions
         );
 
         self::$googleRequiredSchema = array_merge(
-            parent::$_googleRequiredSchema,
+            parent::$googleRequiredSchema,
             self::$_googleRequiredSchema
         );
 
         self::$googleRecommendedSchema = array_merge(
-            parent::$_googleRecommendedSchema,
+            parent::$googleRecommendedSchema,
             self::$_googleRecommendedSchema
         );
     }

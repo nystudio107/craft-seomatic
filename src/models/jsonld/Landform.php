@@ -217,6 +217,13 @@ class Landform extends Place
     public $logo;
 
     /**
+     * The total number of individuals that may attend an event or venue.
+     *
+     * @var mixed|int [schema.org types: Integer]
+     */
+    public $maximumAttendeeCapacity;
+
+    /**
      * The opening hours of a certain place.
      *
      * @var mixed|OpeningHoursSpecification [schema.org types: OpeningHoursSpecification]
@@ -284,6 +291,7 @@ class Landform extends Place
         'hasMap',
         'isicV4',
         'logo',
+        'maximumAttendeeCapacity',
         'openingHoursSpecification',
         'photo',
         'review',
@@ -312,6 +320,7 @@ class Landform extends Place
         'hasMap' => ['Map','URL'],
         'isicV4' => ['Text'],
         'logo' => ['ImageObject','URL'],
+        'maximumAttendeeCapacity' => ['Integer'],
         'openingHoursSpecification' => ['OpeningHoursSpecification'],
         'photo' => ['ImageObject','Photograph'],
         'review' => ['Review'],
@@ -340,6 +349,7 @@ class Landform extends Place
         'hasMap' => 'A URL to a map of the place. Supersedes map, maps.',
         'isicV4' => 'The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code for a particular organization, business person, or place.',
         'logo' => 'An associated logo.',
+        'maximumAttendeeCapacity' => 'The total number of individuals that may attend an event or venue.',
         'openingHoursSpecification' => 'The opening hours of a certain place.',
         'photo' => 'A photograph of this place. Supersedes photos.',
         'review' => 'A review of the item. Supersedes reviews.',
@@ -374,27 +384,27 @@ class Landform extends Place
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
-            parent::$_schemaPropertyNames,
+            parent::$schemaPropertyNames,
             self::$_schemaPropertyNames
         );
 
         self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$_schemaPropertyExpectedTypes,
+            parent::$schemaPropertyExpectedTypes,
             self::$_schemaPropertyExpectedTypes
         );
 
         self::$schemaPropertyDescriptions = array_merge(
-            parent::$_schemaPropertyDescriptions,
+            parent::$schemaPropertyDescriptions,
             self::$_schemaPropertyDescriptions
         );
 
         self::$googleRequiredSchema = array_merge(
-            parent::$_googleRequiredSchema,
+            parent::$googleRequiredSchema,
             self::$_googleRequiredSchema
         );
 
         self::$googleRecommendedSchema = array_merge(
-            parent::$_googleRecommendedSchema,
+            parent::$googleRecommendedSchema,
             self::$_googleRecommendedSchema
         );
     }
@@ -406,7 +416,7 @@ class Landform extends Place
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['additionalProperty','address','aggregateRating','amenityFeature','branchCode','containedInPlace','containsPlace','event','faxNumber','geo','globalLocationNumber','hasMap','isicV4','logo','openingHoursSpecification','photo','review','smokingAllowed','specialOpeningHoursSpecification','telephone'], 'validateJsonSchema'],
+            [['additionalProperty','address','aggregateRating','amenityFeature','branchCode','containedInPlace','containsPlace','event','faxNumber','geo','globalLocationNumber','hasMap','isicV4','logo','maximumAttendeeCapacity','openingHoursSpecification','photo','review','smokingAllowed','specialOpeningHoursSpecification','telephone'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -106,6 +106,40 @@ class Room extends Accommodation
      */
     public $amenityFeature;
 
+    /**
+     * The size of the accommodation, e.g. in square meter or squarefoot. Typical
+     * unit code(s): MTK for square meter, FTK for square foot, or YDK for square
+     * yard
+     *
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
+     */
+    public $floorSize;
+
+    /**
+     * The number of rooms (excluding bathrooms and closets) of the acccommodation
+     * or lodging business. Typical unit code(s): ROM for room or C62 for no unit.
+     * The type of room can be put in the unitText property of the
+     * QuantitativeValue.
+     *
+     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
+     */
+    public $numberOfRooms;
+
+    /**
+     * Indications regarding the permitted usage of the accommodation.
+     *
+     * @var mixed|string [schema.org types: Text]
+     */
+    public $permittedUsage;
+
+    /**
+     * Indicates whether pets are allowed to enter the accommodation or lodging
+     * business. More detailed information can be put in a text value.
+     *
+     * @var mixed|bool|string [schema.org types: Boolean, Text]
+     */
+    public $petsAllowed;
+
     // Static Protected Properties
     // =========================================================================
 
@@ -115,7 +149,11 @@ class Room extends Accommodation
      * @var array
      */
     static protected $_schemaPropertyNames = [
-        'amenityFeature'
+        'amenityFeature',
+        'floorSize',
+        'numberOfRooms',
+        'permittedUsage',
+        'petsAllowed'
     ];
 
     /**
@@ -124,7 +162,11 @@ class Room extends Accommodation
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'amenityFeature' => ['LocationFeatureSpecification']
+        'amenityFeature' => ['LocationFeatureSpecification'],
+        'floorSize' => ['QuantitativeValue'],
+        'numberOfRooms' => ['Number','QuantitativeValue'],
+        'permittedUsage' => ['Text'],
+        'petsAllowed' => ['Boolean','Text']
     ];
 
     /**
@@ -133,7 +175,11 @@ class Room extends Accommodation
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'amenityFeature' => 'An amenity feature (e.g. a characteristic or service) of the Accommodation. This generic property does not make a statement about whether the feature is included in an offer for the main accommodation or available at extra costs.'
+        'amenityFeature' => 'An amenity feature (e.g. a characteristic or service) of the Accommodation. This generic property does not make a statement about whether the feature is included in an offer for the main accommodation or available at extra costs.',
+        'floorSize' => 'The size of the accommodation, e.g. in square meter or squarefoot. Typical unit code(s): MTK for square meter, FTK for square foot, or YDK for square yard',
+        'numberOfRooms' => 'The number of rooms (excluding bathrooms and closets) of the acccommodation or lodging business. Typical unit code(s): ROM for room or C62 for no unit. The type of room can be put in the unitText property of the QuantitativeValue.',
+        'permittedUsage' => 'Indications regarding the permitted usage of the accommodation.',
+        'petsAllowed' => 'Indicates whether pets are allowed to enter the accommodation or lodging business. More detailed information can be put in a text value.'
     ];
 
     /**
@@ -162,27 +208,27 @@ class Room extends Accommodation
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
-            parent::$_schemaPropertyNames,
+            parent::$schemaPropertyNames,
             self::$_schemaPropertyNames
         );
 
         self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$_schemaPropertyExpectedTypes,
+            parent::$schemaPropertyExpectedTypes,
             self::$_schemaPropertyExpectedTypes
         );
 
         self::$schemaPropertyDescriptions = array_merge(
-            parent::$_schemaPropertyDescriptions,
+            parent::$schemaPropertyDescriptions,
             self::$_schemaPropertyDescriptions
         );
 
         self::$googleRequiredSchema = array_merge(
-            parent::$_googleRequiredSchema,
+            parent::$googleRequiredSchema,
             self::$_googleRequiredSchema
         );
 
         self::$googleRecommendedSchema = array_merge(
-            parent::$_googleRecommendedSchema,
+            parent::$googleRecommendedSchema,
             self::$_googleRecommendedSchema
         );
     }
@@ -194,7 +240,7 @@ class Room extends Accommodation
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['amenityFeature'], 'validateJsonSchema'],
+            [['amenityFeature','floorSize','numberOfRooms','permittedUsage','petsAllowed'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

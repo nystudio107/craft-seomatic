@@ -93,6 +93,13 @@ class ChildrensEvent extends Event
     // =========================================================================
 
     /**
+     * The subject matter of the content.
+     *
+     * @var Thing [schema.org types: Thing]
+     */
+    public $about;
+
+    /**
      * An actor, e.g. in tv, radio, movie, video games etc., or in an event.
      * Actors can be associated with individual items or with a series, episode,
      * clip. Supersedes actors.
@@ -115,6 +122,14 @@ class ChildrensEvent extends Event
      * @var mixed|Organization|Person [schema.org types: Organization, Person]
      */
     public $attendee;
+
+    /**
+     * An intended audience, i.e. a group for whom something was created.
+     * Supersedes serviceAudience.
+     *
+     * @var mixed|Audience [schema.org types: Audience]
+     */
+    public $audience;
 
     /**
      * The person or organization who wrote a composition, or who is the composer
@@ -204,6 +219,13 @@ class ChildrensEvent extends Event
     public $location;
 
     /**
+     * The total number of individuals that may attend an event or venue.
+     *
+     * @var mixed|int [schema.org types: Integer]
+     */
+    public $maximumAttendeeCapacity;
+
+    /**
      * An offer to provide this item—for example, an offer to sell a product,
      * rent the DVD of a movie, perform a service, or give away tickets to an
      * event.
@@ -245,6 +267,13 @@ class ChildrensEvent extends Event
      * @var mixed|CreativeWork [schema.org types: CreativeWork]
      */
     public $recordedIn;
+
+    /**
+     * The number of attendee places for an event that remain unallocated.
+     *
+     * @var mixed|int [schema.org types: Integer]
+     */
+    public $remainingAttendeeCapacity;
 
     /**
      * A review of the item. Supersedes reviews.
@@ -329,9 +358,11 @@ class ChildrensEvent extends Event
      * @var array
      */
     static protected $_schemaPropertyNames = [
+        'about',
         'actor',
         'aggregateRating',
         'attendee',
+        'audience',
         'composer',
         'contributor',
         'director',
@@ -343,11 +374,13 @@ class ChildrensEvent extends Event
         'inLanguage',
         'isAccessibleForFree',
         'location',
+        'maximumAttendeeCapacity',
         'offers',
         'organizer',
         'performer',
         'previousStartDate',
         'recordedIn',
+        'remainingAttendeeCapacity',
         'review',
         'sponsor',
         'startDate',
@@ -365,9 +398,11 @@ class ChildrensEvent extends Event
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
+        'about' => ['Thing'],
         'actor' => ['Person'],
         'aggregateRating' => ['AggregateRating'],
         'attendee' => ['Organization','Person'],
+        'audience' => ['Audience'],
         'composer' => ['Organization','Person'],
         'contributor' => ['Organization','Person'],
         'director' => ['Person'],
@@ -379,11 +414,13 @@ class ChildrensEvent extends Event
         'inLanguage' => ['Language','Text'],
         'isAccessibleForFree' => ['Boolean'],
         'location' => ['Place','PostalAddress','Text'],
+        'maximumAttendeeCapacity' => ['Integer'],
         'offers' => ['Offer'],
         'organizer' => ['Organization','Person'],
         'performer' => ['Organization','Person'],
         'previousStartDate' => ['Date'],
         'recordedIn' => ['CreativeWork'],
+        'remainingAttendeeCapacity' => ['Integer'],
         'review' => ['Review'],
         'sponsor' => ['Organization','Person'],
         'startDate' => ['Date','DateTime'],
@@ -401,9 +438,11 @@ class ChildrensEvent extends Event
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
+        'about' => 'The subject matter of the content.',
         'actor' => 'An actor, e.g. in tv, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip. Supersedes actors.',
         'aggregateRating' => 'The overall rating, based on a collection of reviews or ratings, of the item.',
         'attendee' => 'A person or organization attending the event. Supersedes attendees.',
+        'audience' => 'An intended audience, i.e. a group for whom something was created. Supersedes serviceAudience.',
         'composer' => 'The person or organization who wrote a composition, or who is the composer of a work performed at some event.',
         'contributor' => 'A secondary contributor to the CreativeWork or Event.',
         'director' => 'A director of e.g. tv, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip. Supersedes directors.',
@@ -415,11 +454,13 @@ class ChildrensEvent extends Event
         'inLanguage' => 'The language of the content or performance or used in an action. Please use one of the language codes from the IETF BCP 47 standard. See also availableLanguage. Supersedes language.',
         'isAccessibleForFree' => 'A flag to signal that the publication is accessible for free. Supersedes free.',
         'location' => 'The location of for example where the event is happening, an organization is located, or where an action takes place.',
+        'maximumAttendeeCapacity' => 'The total number of individuals that may attend an event or venue.',
         'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event.',
         'organizer' => 'An organizer of an Event.',
         'performer' => 'A performer at the event—for example, a presenter, musician, musical group or actor. Supersedes performers.',
         'previousStartDate' => 'Used in conjunction with eventStatus for rescheduled or cancelled events. This property contains the previously scheduled start date. For rescheduled events, the startDate property should be used for the newly scheduled start date. In the (rare) case of an event that has been postponed and rescheduled multiple times, this field may be repeated.',
         'recordedIn' => 'The CreativeWork that captured all or part of this Event. Inverse property: recordedAt.',
+        'remainingAttendeeCapacity' => 'The number of attendee places for an event that remain unallocated.',
         'review' => 'A review of the item. Supersedes reviews.',
         'sponsor' => 'A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.',
         'startDate' => 'The start date and time of the item (in ISO 8601 date format).',
@@ -457,27 +498,27 @@ class ChildrensEvent extends Event
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
-            parent::$_schemaPropertyNames,
+            parent::$schemaPropertyNames,
             self::$_schemaPropertyNames
         );
 
         self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$_schemaPropertyExpectedTypes,
+            parent::$schemaPropertyExpectedTypes,
             self::$_schemaPropertyExpectedTypes
         );
 
         self::$schemaPropertyDescriptions = array_merge(
-            parent::$_schemaPropertyDescriptions,
+            parent::$schemaPropertyDescriptions,
             self::$_schemaPropertyDescriptions
         );
 
         self::$googleRequiredSchema = array_merge(
-            parent::$_googleRequiredSchema,
+            parent::$googleRequiredSchema,
             self::$_googleRequiredSchema
         );
 
         self::$googleRecommendedSchema = array_merge(
-            parent::$_googleRecommendedSchema,
+            parent::$googleRecommendedSchema,
             self::$_googleRecommendedSchema
         );
     }
@@ -489,7 +530,7 @@ class ChildrensEvent extends Event
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['actor','aggregateRating','attendee','composer','contributor','director','doorTime','duration','endDate','eventStatus','funder','inLanguage','isAccessibleForFree','location','offers','organizer','performer','previousStartDate','recordedIn','review','sponsor','startDate','subEvent','superEvent','translator','typicalAgeRange','workFeatured','workPerformed'], 'validateJsonSchema'],
+            [['about','actor','aggregateRating','attendee','audience','composer','contributor','director','doorTime','duration','endDate','eventStatus','funder','inLanguage','isAccessibleForFree','location','maximumAttendeeCapacity','offers','organizer','performer','previousStartDate','recordedIn','remainingAttendeeCapacity','review','sponsor','startDate','subEvent','superEvent','translator','typicalAgeRange','workFeatured','workPerformed'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

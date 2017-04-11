@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\WebPage;
+use nystudio107\seomatic\models\jsonld\JsonLdType;
 
 /**
  * QAPage - A QAPage is a WebPage focussed on a specific Question and its
@@ -23,7 +23,7 @@ use nystudio107\seomatic\models\jsonld\WebPage;
  * @since     1.0.0
  * @see       http://schema.org/QAPage
  */
-class QAPage extends WebPage
+class QAPage extends JsonLdType
 {
     // Static Public Properties
     // =========================================================================
@@ -54,7 +54,7 @@ class QAPage extends WebPage
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'WebPage';
+    static public $schemaTypeExtends = 'JsonLdType';
 
     /**
      * The Schema.org composed Property Names
@@ -94,67 +94,6 @@ class QAPage extends WebPage
     // Public Properties
     // =========================================================================
 
-    /**
-     * A set of links that can help a user understand and navigate a website
-     * hierarchy.
-     *
-     * @var mixed|BreadcrumbList|string [schema.org types: BreadcrumbList, Text]
-     */
-    public $breadcrumb;
-
-    /**
-     * Date on which the content on this web page was last reviewed for accuracy
-     * and/or completeness.
-     *
-     * @var mixed|Date [schema.org types: Date]
-     */
-    public $lastReviewed;
-
-    /**
-     * Indicates if this web page element is the main subject of the page.
-     *
-     * @var mixed|WebPageElement [schema.org types: WebPageElement]
-     */
-    public $mainContentOfPage;
-
-    /**
-     * Indicates the main image on the page.
-     *
-     * @var mixed|ImageObject [schema.org types: ImageObject]
-     */
-    public $primaryImageOfPage;
-
-    /**
-     * A link related to this web page, for example to other related web pages.
-     *
-     * @var mixed|string [schema.org types: URL]
-     */
-    public $relatedLink;
-
-    /**
-     * People or organizations that have reviewed the content on this web page for
-     * accuracy and/or completeness.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $reviewedBy;
-
-    /**
-     * One of the more significant URLs on the page. Typically, these are the
-     * non-navigation links that are clicked on the most. Supersedes
-     * significantLinks.
-     *
-     * @var mixed|string [schema.org types: URL]
-     */
-    public $significantLink;
-
-    /**
-     * One of the domain specialities to which this web page's content applies.
-     *
-     * @var mixed|Specialty [schema.org types: Specialty]
-     */
-    public $specialty;
-
     // Static Protected Properties
     // =========================================================================
 
@@ -164,14 +103,7 @@ class QAPage extends WebPage
      * @var array
      */
     static protected $_schemaPropertyNames = [
-        'breadcrumb',
-        'lastReviewed',
-        'mainContentOfPage',
-        'primaryImageOfPage',
-        'relatedLink',
-        'reviewedBy',
-        'significantLink',
-        'specialty'
+
     ];
 
     /**
@@ -180,14 +112,7 @@ class QAPage extends WebPage
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'breadcrumb' => ['BreadcrumbList','Text'],
-        'lastReviewed' => ['Date'],
-        'mainContentOfPage' => ['WebPageElement'],
-        'primaryImageOfPage' => ['ImageObject'],
-        'relatedLink' => ['URL'],
-        'reviewedBy' => ['Organization','Person'],
-        'significantLink' => ['URL'],
-        'specialty' => ['Specialty']
+
     ];
 
     /**
@@ -196,14 +121,7 @@ class QAPage extends WebPage
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'breadcrumb' => 'A set of links that can help a user understand and navigate a website hierarchy.',
-        'lastReviewed' => 'Date on which the content on this web page was last reviewed for accuracy and/or completeness.',
-        'mainContentOfPage' => 'Indicates if this web page element is the main subject of the page.',
-        'primaryImageOfPage' => 'Indicates the main image on the page.',
-        'relatedLink' => 'A link related to this web page, for example to other related web pages.',
-        'reviewedBy' => 'People or organizations that have reviewed the content on this web page for accuracy and/or completeness.',
-        'significantLink' => 'One of the more significant URLs on the page. Typically, these are the non-navigation links that are clicked on the most. Supersedes significantLinks.',
-        'specialty' => 'One of the domain specialities to which this web page\'s content applies.'
+
     ];
 
     /**
@@ -232,27 +150,27 @@ class QAPage extends WebPage
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
-            parent::$_schemaPropertyNames,
+            parent::$schemaPropertyNames,
             self::$_schemaPropertyNames
         );
 
         self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$_schemaPropertyExpectedTypes,
+            parent::$schemaPropertyExpectedTypes,
             self::$_schemaPropertyExpectedTypes
         );
 
         self::$schemaPropertyDescriptions = array_merge(
-            parent::$_schemaPropertyDescriptions,
+            parent::$schemaPropertyDescriptions,
             self::$_schemaPropertyDescriptions
         );
 
         self::$googleRequiredSchema = array_merge(
-            parent::$_googleRequiredSchema,
+            parent::$googleRequiredSchema,
             self::$_googleRequiredSchema
         );
 
         self::$googleRecommendedSchema = array_merge(
-            parent::$_googleRecommendedSchema,
+            parent::$googleRecommendedSchema,
             self::$_googleRecommendedSchema
         );
     }
@@ -264,7 +182,7 @@ class QAPage extends WebPage
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['breadcrumb','lastReviewed','mainContentOfPage','primaryImageOfPage','relatedLink','reviewedBy','significantLink','specialty'], 'validateJsonSchema'],
+            [[], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

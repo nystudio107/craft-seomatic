@@ -102,11 +102,12 @@ class IceCreamShop extends FoodEstablishment
     public $acceptsReservations;
 
     /**
-     * Either the actual menu or a URL of the menu.
+     * Either the actual menu as a structured representation, as text, or a URL of
+     * the menu. Supersedes menu.
      *
-     * @var mixed|string|string [schema.org types: Text, URL]
+     * @var mixed|Menu|string|string [schema.org types: Menu, Text, URL]
      */
-    public $menu;
+    public $hasMenu;
 
     /**
      * The cuisine of the restaurant.
@@ -135,7 +136,7 @@ class IceCreamShop extends FoodEstablishment
      */
     static protected $_schemaPropertyNames = [
         'acceptsReservations',
-        'menu',
+        'hasMenu',
         'servesCuisine',
         'starRating'
     ];
@@ -147,7 +148,7 @@ class IceCreamShop extends FoodEstablishment
      */
     static protected $_schemaPropertyExpectedTypes = [
         'acceptsReservations' => ['Boolean','Text','URL'],
-        'menu' => ['Text','URL'],
+        'hasMenu' => ['Menu','Text','URL'],
         'servesCuisine' => ['Text'],
         'starRating' => ['Rating']
     ];
@@ -159,7 +160,7 @@ class IceCreamShop extends FoodEstablishment
      */
     static protected $_schemaPropertyDescriptions = [
         'acceptsReservations' => 'Indicates whether a FoodEstablishment accepts reservations. Values can be Boolean, an URL at which reservations can be made or (for backwards compatibility) the strings Yes or No.',
-        'menu' => 'Either the actual menu or a URL of the menu.',
+        'hasMenu' => 'Either the actual menu as a structured representation, as text, or a URL of the menu. Supersedes menu.',
         'servesCuisine' => 'The cuisine of the restaurant.',
         'starRating' => 'An official rating for a lodging business or food establishment, e.g. from national associations or standards bodies. Use the author property to indicate the rating organization, e.g. as an Organization with name such as (e.g. HOTREC, DEHOGA, WHR, or Hotelstars).'
     ];
@@ -190,27 +191,27 @@ class IceCreamShop extends FoodEstablishment
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
-            parent::$_schemaPropertyNames,
+            parent::$schemaPropertyNames,
             self::$_schemaPropertyNames
         );
 
         self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$_schemaPropertyExpectedTypes,
+            parent::$schemaPropertyExpectedTypes,
             self::$_schemaPropertyExpectedTypes
         );
 
         self::$schemaPropertyDescriptions = array_merge(
-            parent::$_schemaPropertyDescriptions,
+            parent::$schemaPropertyDescriptions,
             self::$_schemaPropertyDescriptions
         );
 
         self::$googleRequiredSchema = array_merge(
-            parent::$_googleRequiredSchema,
+            parent::$googleRequiredSchema,
             self::$_googleRequiredSchema
         );
 
         self::$googleRecommendedSchema = array_merge(
-            parent::$_googleRecommendedSchema,
+            parent::$googleRecommendedSchema,
             self::$_googleRecommendedSchema
         );
     }
@@ -222,7 +223,7 @@ class IceCreamShop extends FoodEstablishment
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['acceptsReservations','menu','servesCuisine','starRating'], 'validateJsonSchema'],
+            [['acceptsReservations','hasMenu','servesCuisine','starRating'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

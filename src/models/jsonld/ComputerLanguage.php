@@ -131,6 +131,16 @@ class ComputerLanguage extends Intangible
     public $disambiguatingDescription;
 
     /**
+     * The identifier property represents any kind of identifier for any kind of
+     * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated
+     * properties for representing many of these, either as textual strings or as
+     * URL (URI) links. See background notes for more details.
+     *
+     * @var mixed|PropertyValue|string|string [schema.org types: PropertyValue, Text, URL]
+     */
+    public $identifier;
+
+    /**
      * An image of the item. This can be a URL or a fully described ImageObject.
      *
      * @var mixed|ImageObject|string [schema.org types: ImageObject, URL]
@@ -163,7 +173,7 @@ class ComputerLanguage extends Intangible
 
     /**
      * URL of a reference Web page that unambiguously indicates the item's
-     * identity. E.g. the URL of the item's Wikipedia page, Freebase page, or
+     * identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or
      * official website.
      *
      * @var mixed|string [schema.org types: URL]
@@ -190,6 +200,7 @@ class ComputerLanguage extends Intangible
         'alternateName',
         'description',
         'disambiguatingDescription',
+        'identifier',
         'image',
         'mainEntityOfPage',
         'name',
@@ -208,6 +219,7 @@ class ComputerLanguage extends Intangible
         'alternateName' => ['Text'],
         'description' => ['Text'],
         'disambiguatingDescription' => ['Text'],
+        'identifier' => ['PropertyValue','Text','URL'],
         'image' => ['ImageObject','URL'],
         'mainEntityOfPage' => ['CreativeWork','URL'],
         'name' => ['Text'],
@@ -226,11 +238,12 @@ class ComputerLanguage extends Intangible
         'alternateName' => 'An alias for the item.',
         'description' => 'A description of the item.',
         'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
+        'identifier' => 'The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See background notes for more details.',
         'image' => 'An image of the item. This can be a URL or a fully described ImageObject.',
         'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See background notes for details. Inverse property: mainEntity.',
         'name' => 'The name of the item.',
         'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
-        'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Freebase page, or official website.',
+        'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
         'url' => 'URL of the item.'
     ];
 
@@ -260,27 +273,27 @@ class ComputerLanguage extends Intangible
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
-            parent::$_schemaPropertyNames,
+            parent::$schemaPropertyNames,
             self::$_schemaPropertyNames
         );
 
         self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$_schemaPropertyExpectedTypes,
+            parent::$schemaPropertyExpectedTypes,
             self::$_schemaPropertyExpectedTypes
         );
 
         self::$schemaPropertyDescriptions = array_merge(
-            parent::$_schemaPropertyDescriptions,
+            parent::$schemaPropertyDescriptions,
             self::$_schemaPropertyDescriptions
         );
 
         self::$googleRequiredSchema = array_merge(
-            parent::$_googleRequiredSchema,
+            parent::$googleRequiredSchema,
             self::$_googleRequiredSchema
         );
 
         self::$googleRecommendedSchema = array_merge(
-            parent::$_googleRecommendedSchema,
+            parent::$googleRecommendedSchema,
             self::$_googleRecommendedSchema
         );
     }
@@ -292,7 +305,7 @@ class ComputerLanguage extends Intangible
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['additionalType','alternateName','description','disambiguatingDescription','image','mainEntityOfPage','name','potentialAction','sameAs','url'], 'validateJsonSchema'],
+            [['additionalType','alternateName','description','disambiguatingDescription','identifier','image','mainEntityOfPage','name','potentialAction','sameAs','url'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

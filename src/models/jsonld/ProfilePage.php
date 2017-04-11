@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\WebPage;
+use nystudio107\seomatic\models\jsonld\JsonLdType;
 
 /**
  * ProfilePage - Web page type: Profile page.
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\WebPage;
  * @since     1.0.0
  * @see       http://schema.org/ProfilePage
  */
-class ProfilePage extends WebPage
+class ProfilePage extends JsonLdType
 {
     // Static Public Properties
     // =========================================================================
@@ -52,7 +52,7 @@ class ProfilePage extends WebPage
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'WebPage';
+    static public $schemaTypeExtends = 'JsonLdType';
 
     /**
      * The Schema.org composed Property Names
@@ -230,27 +230,27 @@ class ProfilePage extends WebPage
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
-            parent::$_schemaPropertyNames,
+            parent::$schemaPropertyNames,
             self::$_schemaPropertyNames
         );
 
         self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$_schemaPropertyExpectedTypes,
+            parent::$schemaPropertyExpectedTypes,
             self::$_schemaPropertyExpectedTypes
         );
 
         self::$schemaPropertyDescriptions = array_merge(
-            parent::$_schemaPropertyDescriptions,
+            parent::$schemaPropertyDescriptions,
             self::$_schemaPropertyDescriptions
         );
 
         self::$googleRequiredSchema = array_merge(
-            parent::$_googleRequiredSchema,
+            parent::$googleRequiredSchema,
             self::$_googleRequiredSchema
         );
 
         self::$googleRecommendedSchema = array_merge(
-            parent::$_googleRecommendedSchema,
+            parent::$googleRecommendedSchema,
             self::$_googleRecommendedSchema
         );
     }

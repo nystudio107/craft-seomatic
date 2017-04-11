@@ -97,7 +97,7 @@ class AlignmentObject extends Intangible
      * A category of alignment between the learning resource and the framework
      * node. Recommended values include: 'assesses', 'teaches', 'requires',
      * 'textComplexity', 'readingLevel', 'educationalSubject', and
-     * 'educationLevel'.
+     * 'educationalLevel'.
      *
      * @var string [schema.org types: Text]
      */
@@ -166,7 +166,7 @@ class AlignmentObject extends Intangible
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'alignmentType' => 'A category of alignment between the learning resource and the framework node. Recommended values include: \'assesses\', \'teaches\', \'requires\', \'textComplexity\', \'readingLevel\', \'educationalSubject\', and \'educationLevel\'.',
+        'alignmentType' => 'A category of alignment between the learning resource and the framework node. Recommended values include: \'assesses\', \'teaches\', \'requires\', \'textComplexity\', \'readingLevel\', \'educationalSubject\', and \'educationalLevel\'.',
         'educationalFramework' => 'The framework to which the resource being described is aligned.',
         'targetDescription' => 'The description of a node in an established educational framework.',
         'targetName' => 'The name of a node in an established educational framework.',
@@ -199,27 +199,27 @@ class AlignmentObject extends Intangible
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
-            parent::$_schemaPropertyNames,
+            parent::$schemaPropertyNames,
             self::$_schemaPropertyNames
         );
 
         self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$_schemaPropertyExpectedTypes,
+            parent::$schemaPropertyExpectedTypes,
             self::$_schemaPropertyExpectedTypes
         );
 
         self::$schemaPropertyDescriptions = array_merge(
-            parent::$_schemaPropertyDescriptions,
+            parent::$schemaPropertyDescriptions,
             self::$_schemaPropertyDescriptions
         );
 
         self::$googleRequiredSchema = array_merge(
-            parent::$_googleRequiredSchema,
+            parent::$googleRequiredSchema,
             self::$_googleRequiredSchema
         );
 
         self::$googleRecommendedSchema = array_merge(
-            parent::$_googleRecommendedSchema,
+            parent::$googleRecommendedSchema,
             self::$_googleRecommendedSchema
         );
     }

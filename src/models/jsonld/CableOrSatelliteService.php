@@ -141,6 +141,17 @@ class CableOrSatelliteService extends Service
     public $brand;
 
     /**
+     * An entity that arranges for an exchange between a buyer and a seller. In
+     * most cases a broker never acquires or releases ownership of a product or
+     * service involved in an exchange. If it is not clear whether an entity is a
+     * broker, seller, or buyer, the latter two terms are preferred. Supersedes
+     * bookingAgent.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $broker;
+
+    /**
      * A category for the item. Greater signs or slashes can be used to informally
      * indicate a category hierarchy.
      *
@@ -248,6 +259,7 @@ class CableOrSatelliteService extends Service
         'availableChannel',
         'award',
         'brand',
+        'broker',
         'category',
         'hasOfferCatalog',
         'hoursAvailable',
@@ -274,6 +286,7 @@ class CableOrSatelliteService extends Service
         'availableChannel' => ['ServiceChannel'],
         'award' => ['Text'],
         'brand' => ['Brand','Organization'],
+        'broker' => ['Organization','Person'],
         'category' => ['Text','Thing'],
         'hasOfferCatalog' => ['OfferCatalog'],
         'hoursAvailable' => ['OpeningHoursSpecification'],
@@ -300,6 +313,7 @@ class CableOrSatelliteService extends Service
         'availableChannel' => 'A means of accessing the service (e.g. a phone bank, a web site, a location, etc.).',
         'award' => 'An award won by or for this item. Supersedes awards.',
         'brand' => 'The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.',
+        'broker' => 'An entity that arranges for an exchange between a buyer and a seller. In most cases a broker never acquires or releases ownership of a product or service involved in an exchange. If it is not clear whether an entity is a broker, seller, or buyer, the latter two terms are preferred. Supersedes bookingAgent.',
         'category' => 'A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.',
         'hasOfferCatalog' => 'Indicates an OfferCatalog listing for this Organization, Person, or Service.',
         'hoursAvailable' => 'The hours during which this service or contact is available.',
@@ -340,27 +354,27 @@ class CableOrSatelliteService extends Service
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
-            parent::$_schemaPropertyNames,
+            parent::$schemaPropertyNames,
             self::$_schemaPropertyNames
         );
 
         self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$_schemaPropertyExpectedTypes,
+            parent::$schemaPropertyExpectedTypes,
             self::$_schemaPropertyExpectedTypes
         );
 
         self::$schemaPropertyDescriptions = array_merge(
-            parent::$_schemaPropertyDescriptions,
+            parent::$schemaPropertyDescriptions,
             self::$_schemaPropertyDescriptions
         );
 
         self::$googleRequiredSchema = array_merge(
-            parent::$_googleRequiredSchema,
+            parent::$googleRequiredSchema,
             self::$_googleRequiredSchema
         );
 
         self::$googleRecommendedSchema = array_merge(
-            parent::$_googleRecommendedSchema,
+            parent::$googleRecommendedSchema,
             self::$_googleRecommendedSchema
         );
     }
@@ -372,7 +386,7 @@ class CableOrSatelliteService extends Service
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['aggregateRating','areaServed','audience','availableChannel','award','brand','category','hasOfferCatalog','hoursAvailable','isRelatedTo','isSimilarTo','logo','offers','provider','providerMobility','review','serviceOutput','serviceType'], 'validateJsonSchema'],
+            [['aggregateRating','areaServed','audience','availableChannel','award','brand','broker','category','hasOfferCatalog','hoursAvailable','isRelatedTo','isSimilarTo','logo','offers','provider','providerMobility','review','serviceOutput','serviceType'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

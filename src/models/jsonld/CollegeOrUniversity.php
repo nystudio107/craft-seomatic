@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\EducationalOrganization;
+use nystudio107\seomatic\models\jsonld\JsonLdType;
 
 /**
  * CollegeOrUniversity - A college, university, or other third-level
@@ -22,7 +22,7 @@ use nystudio107\seomatic\models\jsonld\EducationalOrganization;
  * @since     1.0.0
  * @see       http://schema.org/CollegeOrUniversity
  */
-class CollegeOrUniversity extends EducationalOrganization
+class CollegeOrUniversity extends JsonLdType
 {
     // Static Public Properties
     // =========================================================================
@@ -53,7 +53,7 @@ class CollegeOrUniversity extends EducationalOrganization
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'EducationalOrganization';
+    static public $schemaTypeExtends = 'JsonLdType';
 
     /**
      * The Schema.org composed Property Names
@@ -156,27 +156,27 @@ class CollegeOrUniversity extends EducationalOrganization
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
-            parent::$_schemaPropertyNames,
+            parent::$schemaPropertyNames,
             self::$_schemaPropertyNames
         );
 
         self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$_schemaPropertyExpectedTypes,
+            parent::$schemaPropertyExpectedTypes,
             self::$_schemaPropertyExpectedTypes
         );
 
         self::$schemaPropertyDescriptions = array_merge(
-            parent::$_schemaPropertyDescriptions,
+            parent::$schemaPropertyDescriptions,
             self::$_schemaPropertyDescriptions
         );
 
         self::$googleRequiredSchema = array_merge(
-            parent::$_googleRequiredSchema,
+            parent::$googleRequiredSchema,
             self::$_googleRequiredSchema
         );
 
         self::$googleRecommendedSchema = array_merge(
-            parent::$_googleRecommendedSchema,
+            parent::$googleRecommendedSchema,
             self::$_googleRecommendedSchema
         );
     }

@@ -110,16 +110,23 @@ class RadioChannel extends BroadcastChannel
     public $broadcastServiceTier;
 
     /**
+     * Genre of the creative work, broadcast channel or group.
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $genre;
+
+    /**
      * The CableOrSatelliteService offering the channel.
      *
-     * @var CableOrSatelliteService [schema.org types: CableOrSatelliteService]
+     * @var mixed|CableOrSatelliteService [schema.org types: CableOrSatelliteService]
      */
     public $inBroadcastLineup;
 
     /**
      * The BroadcastService offered on this channel.
      *
-     * @var BroadcastService [schema.org types: BroadcastService]
+     * @var mixed|BroadcastService [schema.org types: BroadcastService]
      */
     public $providesBroadcastService;
 
@@ -134,6 +141,7 @@ class RadioChannel extends BroadcastChannel
     static protected $_schemaPropertyNames = [
         'broadcastChannelId',
         'broadcastServiceTier',
+        'genre',
         'inBroadcastLineup',
         'providesBroadcastService'
     ];
@@ -146,6 +154,7 @@ class RadioChannel extends BroadcastChannel
     static protected $_schemaPropertyExpectedTypes = [
         'broadcastChannelId' => ['Text'],
         'broadcastServiceTier' => ['Text'],
+        'genre' => ['Text','URL'],
         'inBroadcastLineup' => ['CableOrSatelliteService'],
         'providesBroadcastService' => ['BroadcastService']
     ];
@@ -158,6 +167,7 @@ class RadioChannel extends BroadcastChannel
     static protected $_schemaPropertyDescriptions = [
         'broadcastChannelId' => 'The unique address by which the BroadcastService can be identified in a provider lineup. In US, this is typically a number.',
         'broadcastServiceTier' => 'The type of service required to have access to the channel (e.g. Standard or Premium).',
+        'genre' => 'Genre of the creative work, broadcast channel or group.',
         'inBroadcastLineup' => 'The CableOrSatelliteService offering the channel.',
         'providesBroadcastService' => 'The BroadcastService offered on this channel.'
     ];
@@ -188,27 +198,27 @@ class RadioChannel extends BroadcastChannel
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
-            parent::$_schemaPropertyNames,
+            parent::$schemaPropertyNames,
             self::$_schemaPropertyNames
         );
 
         self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$_schemaPropertyExpectedTypes,
+            parent::$schemaPropertyExpectedTypes,
             self::$_schemaPropertyExpectedTypes
         );
 
         self::$schemaPropertyDescriptions = array_merge(
-            parent::$_schemaPropertyDescriptions,
+            parent::$schemaPropertyDescriptions,
             self::$_schemaPropertyDescriptions
         );
 
         self::$googleRequiredSchema = array_merge(
-            parent::$_googleRequiredSchema,
+            parent::$googleRequiredSchema,
             self::$_googleRequiredSchema
         );
 
         self::$googleRecommendedSchema = array_merge(
-            parent::$_googleRecommendedSchema,
+            parent::$googleRecommendedSchema,
             self::$_googleRecommendedSchema
         );
     }
@@ -220,7 +230,7 @@ class RadioChannel extends BroadcastChannel
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['broadcastChannelId','broadcastServiceTier','inBroadcastLineup','providesBroadcastService'], 'validateJsonSchema'],
+            [['broadcastChannelId','broadcastServiceTier','genre','inBroadcastLineup','providesBroadcastService'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

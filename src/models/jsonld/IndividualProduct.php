@@ -14,8 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\jsonld\Product;
 
 /**
- * IndividualProduct - A single, identifiable product instance (e.g. a laptop
- * with a particular serial number).
+ * IndividualProduct - No comment
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -46,7 +45,7 @@ class IndividualProduct extends Product
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'A single, identifiable product instance (e.g. a laptop with a particular serial number).';
+    static public $schemaTypeDescription = 'No comment';
 
     /**
      * The Schema.org Type Extends
@@ -158,27 +157,27 @@ class IndividualProduct extends Product
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
-            parent::$_schemaPropertyNames,
+            parent::$schemaPropertyNames,
             self::$_schemaPropertyNames
         );
 
         self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$_schemaPropertyExpectedTypes,
+            parent::$schemaPropertyExpectedTypes,
             self::$_schemaPropertyExpectedTypes
         );
 
         self::$schemaPropertyDescriptions = array_merge(
-            parent::$_schemaPropertyDescriptions,
+            parent::$schemaPropertyDescriptions,
             self::$_schemaPropertyDescriptions
         );
 
         self::$googleRequiredSchema = array_merge(
-            parent::$_googleRequiredSchema,
+            parent::$googleRequiredSchema,
             self::$_googleRequiredSchema
         );
 
         self::$googleRecommendedSchema = array_merge(
-            parent::$_googleRecommendedSchema,
+            parent::$googleRecommendedSchema,
             self::$_googleRecommendedSchema
         );
     }

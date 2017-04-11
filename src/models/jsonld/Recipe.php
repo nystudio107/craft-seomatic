@@ -109,7 +109,7 @@ class Recipe extends CreativeWork
     public $cookingMethod;
 
     /**
-     * Nutrition information about the recipe.
+     * Nutrition information about the recipe or menu item.
      *
      * @var NutritionInformation [schema.org types: NutritionInformation]
      */
@@ -161,8 +161,8 @@ class Recipe extends CreativeWork
     public $recipeYield;
 
     /**
-     * Indicates a dietary restriction or guideline for which this recipe is
-     * suitable, e.g. diabetic, halal etc.
+     * Indicates a dietary restriction or guideline for which this recipe or menu
+     * item is suitable, e.g. diabetic, halal etc.
      *
      * @var mixed|RestrictedDiet [schema.org types: RestrictedDiet]
      */
@@ -225,14 +225,14 @@ class Recipe extends CreativeWork
     static protected $_schemaPropertyDescriptions = [
         'cookTime' => 'The time it takes to actually cook the dish, in ISO 8601 duration format.',
         'cookingMethod' => 'The method of cooking, such as Frying, Steaming, ...',
-        'nutrition' => 'Nutrition information about the recipe.',
+        'nutrition' => 'Nutrition information about the recipe or menu item.',
         'prepTime' => 'The length of time it takes to prepare the recipe, in ISO 8601 duration format.',
         'recipeCategory' => 'The category of the recipe—for example, appetizer, entree, etc.',
         'recipeCuisine' => 'The cuisine of the recipe (for example, French or Ethiopian).',
         'recipeIngredient' => 'A single ingredient used in the recipe, e.g. sugar, flour or garlic. Supersedes ingredients.',
         'recipeInstructions' => 'A step or instruction involved in making the recipe.',
         'recipeYield' => 'The quantity produced by the recipe (for example, number of people served, number of servings, etc).',
-        'suitableForDiet' => 'Indicates a dietary restriction or guideline for which this recipe is suitable, e.g. diabetic, halal etc.',
+        'suitableForDiet' => 'Indicates a dietary restriction or guideline for which this recipe or menu item is suitable, e.g. diabetic, halal etc.',
         'totalTime' => 'The total time it takes to prepare and cook the recipe, in ISO 8601 duration format.'
     ];
 
@@ -262,27 +262,27 @@ class Recipe extends CreativeWork
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
-            parent::$_schemaPropertyNames,
+            parent::$schemaPropertyNames,
             self::$_schemaPropertyNames
         );
 
         self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$_schemaPropertyExpectedTypes,
+            parent::$schemaPropertyExpectedTypes,
             self::$_schemaPropertyExpectedTypes
         );
 
         self::$schemaPropertyDescriptions = array_merge(
-            parent::$_schemaPropertyDescriptions,
+            parent::$schemaPropertyDescriptions,
             self::$_schemaPropertyDescriptions
         );
 
         self::$googleRequiredSchema = array_merge(
-            parent::$_googleRequiredSchema,
+            parent::$googleRequiredSchema,
             self::$_googleRequiredSchema
         );
 
         self::$googleRecommendedSchema = array_merge(
-            parent::$_googleRecommendedSchema,
+            parent::$googleRecommendedSchema,
             self::$_googleRecommendedSchema
         );
     }

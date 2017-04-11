@@ -94,30 +94,11 @@ class DepositAccount extends InvestmentOrDeposit
     // =========================================================================
 
     /**
-     * The annual rate that is charged for borrowing (or made by investing),
-     * expressed as a single percentage number that represents the actual yearly
-     * cost of funds over the term of a loan. This includes any fees or additional
-     * costs associated with the transaction.
+     * The amount of money.
      *
-     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
+     * @var mixed|MonetaryAmount|float [schema.org types: MonetaryAmount, Number]
      */
-    public $annualPercentageRate;
-
-    /**
-     * Description of fees, commissions, and other terms applied either to a class
-     * of financial product, or by a financial service organization.
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $feesAndCommissionsSpecification;
-
-    /**
-     * The interest rate, charged or paid, applicable to the financial product.
-     * Note: This is different from the calculated annualPercentageRate.
-     *
-     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
-     */
-    public $interestRate;
+    public $amount;
 
     // Static Protected Properties
     // =========================================================================
@@ -128,9 +109,7 @@ class DepositAccount extends InvestmentOrDeposit
      * @var array
      */
     static protected $_schemaPropertyNames = [
-        'annualPercentageRate',
-        'feesAndCommissionsSpecification',
-        'interestRate'
+        'amount'
     ];
 
     /**
@@ -139,9 +118,7 @@ class DepositAccount extends InvestmentOrDeposit
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'annualPercentageRate' => ['Number','QuantitativeValue'],
-        'feesAndCommissionsSpecification' => ['Text','URL'],
-        'interestRate' => ['Number','QuantitativeValue']
+        'amount' => ['MonetaryAmount','Number']
     ];
 
     /**
@@ -150,9 +127,7 @@ class DepositAccount extends InvestmentOrDeposit
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'annualPercentageRate' => 'The annual rate that is charged for borrowing (or made by investing), expressed as a single percentage number that represents the actual yearly cost of funds over the term of a loan. This includes any fees or additional costs associated with the transaction.',
-        'feesAndCommissionsSpecification' => 'Description of fees, commissions, and other terms applied either to a class of financial product, or by a financial service organization.',
-        'interestRate' => 'The interest rate, charged or paid, applicable to the financial product. Note: This is different from the calculated annualPercentageRate.'
+        'amount' => 'The amount of money.'
     ];
 
     /**
@@ -181,27 +156,27 @@ class DepositAccount extends InvestmentOrDeposit
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
-            parent::$_schemaPropertyNames,
+            parent::$schemaPropertyNames,
             self::$_schemaPropertyNames
         );
 
         self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$_schemaPropertyExpectedTypes,
+            parent::$schemaPropertyExpectedTypes,
             self::$_schemaPropertyExpectedTypes
         );
 
         self::$schemaPropertyDescriptions = array_merge(
-            parent::$_schemaPropertyDescriptions,
+            parent::$schemaPropertyDescriptions,
             self::$_schemaPropertyDescriptions
         );
 
         self::$googleRequiredSchema = array_merge(
-            parent::$_googleRequiredSchema,
+            parent::$googleRequiredSchema,
             self::$_googleRequiredSchema
         );
 
         self::$googleRecommendedSchema = array_merge(
-            parent::$_googleRecommendedSchema,
+            parent::$googleRecommendedSchema,
             self::$_googleRecommendedSchema
         );
     }
@@ -213,7 +188,7 @@ class DepositAccount extends InvestmentOrDeposit
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['annualPercentageRate','feesAndCommissionsSpecification','interestRate'], 'validateJsonSchema'],
+            [['amount'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

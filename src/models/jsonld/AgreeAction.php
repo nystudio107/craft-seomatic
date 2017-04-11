@@ -145,8 +145,8 @@ class AgreeAction extends ReactAction
     public $location;
 
     /**
-     * The object upon the action is carried out, whose state is kept intact or
-     * changed. Also known as the semantic roles patient, affected or undergoer
+     * The object upon which the action is carried out, whose state is kept intact
+     * or changed. Also known as the semantic roles patient, affected or undergoer
      * (which change their state) or theme (which doesn't). e.g. John read a book.
      *
      * @var mixed|Thing [schema.org types: Thing]
@@ -240,7 +240,7 @@ class AgreeAction extends ReactAction
         'error' => 'For failed actions, more information on the cause of the failure.',
         'instrument' => 'The object that helped the agent perform the action. e.g. John wrote a book with a pen.',
         'location' => 'The location of for example where the event is happening, an organization is located, or where an action takes place.',
-        'object' => 'The object upon the action is carried out, whose state is kept intact or changed. Also known as the semantic roles patient, affected or undergoer (which change their state) or theme (which doesn\'t). e.g. John read a book.',
+        'object' => 'The object upon which the action is carried out, whose state is kept intact or changed. Also known as the semantic roles patient, affected or undergoer (which change their state) or theme (which doesn\'t). e.g. John read a book.',
         'participant' => 'Other co-agents that participated in the action indirectly. e.g. John wrote a book with Steve.',
         'result' => 'The result produced in the action. e.g. John wrote a book.',
         'startTime' => 'The startTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to start. For actions that span a period of time, when the action was performed. e.g. John wrote a book from January to December. Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.',
@@ -273,27 +273,27 @@ class AgreeAction extends ReactAction
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
-            parent::$_schemaPropertyNames,
+            parent::$schemaPropertyNames,
             self::$_schemaPropertyNames
         );
 
         self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$_schemaPropertyExpectedTypes,
+            parent::$schemaPropertyExpectedTypes,
             self::$_schemaPropertyExpectedTypes
         );
 
         self::$schemaPropertyDescriptions = array_merge(
-            parent::$_schemaPropertyDescriptions,
+            parent::$schemaPropertyDescriptions,
             self::$_schemaPropertyDescriptions
         );
 
         self::$googleRequiredSchema = array_merge(
-            parent::$_googleRequiredSchema,
+            parent::$googleRequiredSchema,
             self::$_googleRequiredSchema
         );
 
         self::$googleRecommendedSchema = array_merge(
-            parent::$_googleRecommendedSchema,
+            parent::$googleRecommendedSchema,
             self::$_googleRecommendedSchema
         );
     }

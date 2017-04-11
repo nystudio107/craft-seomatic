@@ -100,6 +100,25 @@ class WPAdBlock extends WebPageElement
     public $about;
 
     /**
+     * The human sensory perceptual system or cognitive faculty through which a
+     * person may process or perceive information. Expected values include:
+     * auditory, tactile, textual, visual, colorDependent, chartOnVisual,
+     * chemOnVisual, diagramOnVisual, mathOnVisual, musicOnVisual, textOnVisual.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $accessMode;
+
+    /**
+     * A list of single or combined accessModes that are sufficient to understand
+     * all the intellectual content of a resource. Expected values include:
+     * auditory, tactile, textual, visual.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $accessModeSufficient;
+
+    /**
      * Indicates that the resource is compatible with the referenced accessibility
      * API (WebSchemas wiki lists possible values).
      *
@@ -132,6 +151,17 @@ class WPAdBlock extends WebPageElement
      * @var string [schema.org types: Text]
      */
     public $accessibilityHazard;
+
+    /**
+     * A human-readable summary of specific accessibility features or
+     * deficiencies, consistent with the other accessibility metadata but
+     * expressing subtleties such as "short descriptions are present but long
+     * descriptions will be needed for non-visual users" or "short descriptions
+     * are present and no long descriptions are needed."
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $accessibilitySummary;
 
     /**
      * Specifies the Person that is legally accountable for the CreativeWork.
@@ -359,7 +389,7 @@ class WPAdBlock extends WebPageElement
     public $funder;
 
     /**
-     * Genre of the creative work or group.
+     * Genre of the creative work, broadcast channel or group.
      *
      * @var mixed|string|string [schema.org types: Text, URL]
      */
@@ -478,6 +508,13 @@ class WPAdBlock extends WebPageElement
      * @var mixed|Thing [schema.org types: Thing]
      */
     public $mainEntity;
+
+    /**
+     * A material that something is made from, e.g. leather, wool, cotton, paper.
+     *
+     * @var mixed|Product|string|string [schema.org types: Product, Text, URL]
+     */
+    public $material;
 
     /**
      * Indicates that the CreativeWork contains a reference to, but is not
@@ -691,10 +728,13 @@ class WPAdBlock extends WebPageElement
      */
     static protected $_schemaPropertyNames = [
         'about',
+        'accessMode',
+        'accessModeSufficient',
         'accessibilityAPI',
         'accessibilityControl',
         'accessibilityFeature',
         'accessibilityHazard',
+        'accessibilitySummary',
         'accountablePerson',
         'aggregateRating',
         'alternativeHeadline',
@@ -739,6 +779,7 @@ class WPAdBlock extends WebPageElement
         'license',
         'locationCreated',
         'mainEntity',
+        'material',
         'mentions',
         'offers',
         'position',
@@ -772,10 +813,13 @@ class WPAdBlock extends WebPageElement
      */
     static protected $_schemaPropertyExpectedTypes = [
         'about' => ['Thing'],
+        'accessMode' => ['Text'],
+        'accessModeSufficient' => ['Text'],
         'accessibilityAPI' => ['Text'],
         'accessibilityControl' => ['Text'],
         'accessibilityFeature' => ['Text'],
         'accessibilityHazard' => ['Text'],
+        'accessibilitySummary' => ['Text'],
         'accountablePerson' => ['Person'],
         'aggregateRating' => ['AggregateRating'],
         'alternativeHeadline' => ['Text'],
@@ -820,6 +864,7 @@ class WPAdBlock extends WebPageElement
         'license' => ['CreativeWork','URL'],
         'locationCreated' => ['Place'],
         'mainEntity' => ['Thing'],
+        'material' => ['Product','Text','URL'],
         'mentions' => ['Thing'],
         'offers' => ['Offer'],
         'position' => ['Integer','Text'],
@@ -853,10 +898,13 @@ class WPAdBlock extends WebPageElement
      */
     static protected $_schemaPropertyDescriptions = [
         'about' => 'The subject matter of the content.',
+        'accessMode' => 'The human sensory perceptual system or cognitive faculty through which a person may process or perceive information. Expected values include: auditory, tactile, textual, visual, colorDependent, chartOnVisual, chemOnVisual, diagramOnVisual, mathOnVisual, musicOnVisual, textOnVisual.',
+        'accessModeSufficient' => 'A list of single or combined accessModes that are sufficient to understand all the intellectual content of a resource. Expected values include: auditory, tactile, textual, visual.',
         'accessibilityAPI' => 'Indicates that the resource is compatible with the referenced accessibility API (WebSchemas wiki lists possible values).',
         'accessibilityControl' => 'Identifies input methods that are sufficient to fully control the described resource (WebSchemas wiki lists possible values).',
         'accessibilityFeature' => 'Content features of the resource, such as accessible media, alternatives and supported enhancements for accessibility (WebSchemas wiki lists possible values).',
         'accessibilityHazard' => 'A characteristic of the described resource that is physiologically dangerous to some users. Related to WCAG 2.0 guideline 2.3 (WebSchemas wiki lists possible values).',
+        'accessibilitySummary' => 'A human-readable summary of specific accessibility features or deficiencies, consistent with the other accessibility metadata but expressing subtleties such as "short descriptions are present but long descriptions will be needed for non-visual users" or "short descriptions are present and no long descriptions are needed."',
         'accountablePerson' => 'Specifies the Person that is legally accountable for the CreativeWork.',
         'aggregateRating' => 'The overall rating, based on a collection of reviews or ratings, of the item.',
         'alternativeHeadline' => 'A secondary title of the CreativeWork.',
@@ -886,7 +934,7 @@ class WPAdBlock extends WebPageElement
         'exampleOfWork' => 'A creative work that this work is an example/instance/realization/derivation of. Inverse property: workExample.',
         'fileFormat' => 'Media type, typically MIME format (see IANA site) of the content e.g. application/zip of a SoftwareApplication binary. In cases where a CreativeWork has several media type representations, \'encoding\' can be used to indicate each MediaObject alongside particular fileFormat information. Unregistered or niche file formats can be indicated instead via the most appropriate URL, e.g. defining Web page or a Wikipedia entry.',
         'funder' => 'A person or organization that supports (sponsors) something through some kind of financial contribution.',
-        'genre' => 'Genre of the creative work or group.',
+        'genre' => 'Genre of the creative work, broadcast channel or group.',
         'hasPart' => 'Indicates a CreativeWork that is (in some sense) a part of this CreativeWork. Inverse property: isPartOf.',
         'headline' => 'Headline of the article.',
         'inLanguage' => 'The language of the content or performance or used in an action. Please use one of the language codes from the IETF BCP 47 standard. See also availableLanguage. Supersedes language.',
@@ -901,6 +949,7 @@ class WPAdBlock extends WebPageElement
         'license' => 'A license document that applies to this content, typically indicated by URL.',
         'locationCreated' => 'The location where the CreativeWork was created, which may not be the same as the location depicted in the CreativeWork.',
         'mainEntity' => 'Indicates the primary entity described in some page or other CreativeWork. Inverse property: mainEntityOfPage.',
+        'material' => 'A material that something is made from, e.g. leather, wool, cotton, paper.',
         'mentions' => 'Indicates that the CreativeWork contains a reference to, but is not necessarily about a concept.',
         'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event.',
         'position' => 'The position of an item in a series or sequence of items.',
@@ -953,27 +1002,27 @@ class WPAdBlock extends WebPageElement
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
-            parent::$_schemaPropertyNames,
+            parent::$schemaPropertyNames,
             self::$_schemaPropertyNames
         );
 
         self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$_schemaPropertyExpectedTypes,
+            parent::$schemaPropertyExpectedTypes,
             self::$_schemaPropertyExpectedTypes
         );
 
         self::$schemaPropertyDescriptions = array_merge(
-            parent::$_schemaPropertyDescriptions,
+            parent::$schemaPropertyDescriptions,
             self::$_schemaPropertyDescriptions
         );
 
         self::$googleRequiredSchema = array_merge(
-            parent::$_googleRequiredSchema,
+            parent::$googleRequiredSchema,
             self::$_googleRequiredSchema
         );
 
         self::$googleRecommendedSchema = array_merge(
-            parent::$_googleRecommendedSchema,
+            parent::$googleRecommendedSchema,
             self::$_googleRecommendedSchema
         );
     }
@@ -985,7 +1034,7 @@ class WPAdBlock extends WebPageElement
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['about','accessibilityAPI','accessibilityControl','accessibilityFeature','accessibilityHazard','accountablePerson','aggregateRating','alternativeHeadline','associatedMedia','audience','audio','author','award','character','citation','comment','commentCount','contentLocation','contentRating','contributor','copyrightHolder','copyrightYear','creator','dateCreated','dateModified','datePublished','discussionUrl','editor','educationalAlignment','educationalUse','encoding','exampleOfWork','fileFormat','funder','genre','hasPart','headline','inLanguage','interactionStatistic','interactivityType','isAccessibleForFree','isBasedOn','isFamilyFriendly','isPartOf','keywords','learningResourceType','license','locationCreated','mainEntity','mentions','offers','position','producer','provider','publication','publisher','publishingPrinciples','recordedAt','releasedEvent','review','schemaVersion','sourceOrganization','spatialCoverage','sponsor','temporalCoverage','text','thumbnailUrl','timeRequired','translator','typicalAgeRange','version','video','workExample'], 'validateJsonSchema'],
+            [['about','accessMode','accessModeSufficient','accessibilityAPI','accessibilityControl','accessibilityFeature','accessibilityHazard','accessibilitySummary','accountablePerson','aggregateRating','alternativeHeadline','associatedMedia','audience','audio','author','award','character','citation','comment','commentCount','contentLocation','contentRating','contributor','copyrightHolder','copyrightYear','creator','dateCreated','dateModified','datePublished','discussionUrl','editor','educationalAlignment','educationalUse','encoding','exampleOfWork','fileFormat','funder','genre','hasPart','headline','inLanguage','interactionStatistic','interactivityType','isAccessibleForFree','isBasedOn','isFamilyFriendly','isPartOf','keywords','learningResourceType','license','locationCreated','mainEntity','material','mentions','offers','position','producer','provider','publication','publisher','publishingPrinciples','recordedAt','releasedEvent','review','schemaVersion','sourceOrganization','spatialCoverage','sponsor','temporalCoverage','text','thumbnailUrl','timeRequired','translator','typicalAgeRange','version','video','workExample'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

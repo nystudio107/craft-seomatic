@@ -258,6 +258,13 @@ class Product extends Thing
     public $manufacturer;
 
     /**
+     * A material that something is made from, e.g. leather, wool, cotton, paper.
+     *
+     * @var mixed|Product|string|string [schema.org types: Product, Text, URL]
+     */
+    public $material;
+
+    /**
      * The model of the product. Use with the URL of a ProductModel or a textual
      * representation of the model identifier. The URL of the ProductModel can be
      * from an external source. It is recommended to additionally provide strong
@@ -372,6 +379,7 @@ class Product extends Thing
         'itemCondition',
         'logo',
         'manufacturer',
+        'material',
         'model',
         'mpn',
         'offers',
@@ -411,6 +419,7 @@ class Product extends Thing
         'itemCondition' => ['OfferItemCondition'],
         'logo' => ['ImageObject','URL'],
         'manufacturer' => ['Organization'],
+        'material' => ['Product','Text','URL'],
         'model' => ['ProductModel','Text'],
         'mpn' => ['Text'],
         'offers' => ['Offer'],
@@ -450,6 +459,7 @@ class Product extends Thing
         'itemCondition' => 'A predefined value from OfferItemCondition or a textual description of the condition of the product or service, or the products or services included in the offer.',
         'logo' => 'An associated logo.',
         'manufacturer' => 'The manufacturer of the product.',
+        'material' => 'A material that something is made from, e.g. leather, wool, cotton, paper.',
         'model' => 'The model of the product. Use with the URL of a ProductModel or a textual representation of the model identifier. The URL of the ProductModel can be from an external source. It is recommended to additionally provide strong product identifiers via the gtin8/gtin13/gtin14 and mpn properties.',
         'mpn' => 'The Manufacturer Part Number (MPN) of the product, or the product to which the offer refers.',
         'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event.',
@@ -489,27 +499,27 @@ class Product extends Thing
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
-            parent::$_schemaPropertyNames,
+            parent::$schemaPropertyNames,
             self::$_schemaPropertyNames
         );
 
         self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$_schemaPropertyExpectedTypes,
+            parent::$schemaPropertyExpectedTypes,
             self::$_schemaPropertyExpectedTypes
         );
 
         self::$schemaPropertyDescriptions = array_merge(
-            parent::$_schemaPropertyDescriptions,
+            parent::$schemaPropertyDescriptions,
             self::$_schemaPropertyDescriptions
         );
 
         self::$googleRequiredSchema = array_merge(
-            parent::$_googleRequiredSchema,
+            parent::$googleRequiredSchema,
             self::$_googleRequiredSchema
         );
 
         self::$googleRecommendedSchema = array_merge(
-            parent::$_googleRecommendedSchema,
+            parent::$googleRecommendedSchema,
             self::$_googleRecommendedSchema
         );
     }
@@ -521,7 +531,7 @@ class Product extends Thing
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['additionalProperty','aggregateRating','audience','award','brand','category','color','depth','gtin12','gtin13','gtin14','gtin8','height','isAccessoryOrSparePartFor','isConsumableFor','isRelatedTo','isSimilarTo','itemCondition','logo','manufacturer','model','mpn','offers','productID','productionDate','purchaseDate','releaseDate','review','sku','weight','width'], 'validateJsonSchema'],
+            [['additionalProperty','aggregateRating','audience','award','brand','category','color','depth','gtin12','gtin13','gtin14','gtin8','height','isAccessoryOrSparePartFor','isConsumableFor','isRelatedTo','isSimilarTo','itemCondition','logo','manufacturer','material','model','mpn','offers','productID','productionDate','purchaseDate','releaseDate','review','sku','weight','width'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
