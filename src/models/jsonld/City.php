@@ -18,7 +18,7 @@ use nystudio107\seomatic\models\jsonld\AdministrativeArea;
  *
  * @author    nystudio107
  * @package   Seomatic
- * @since     1.0.0
+ * @since     3.0.0
  * @see       http://schema.org/City
  */
 class City extends AdministrativeArea

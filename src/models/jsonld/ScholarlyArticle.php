@@ -18,7 +18,7 @@ use nystudio107\seomatic\models\jsonld\Article;
  *
  * @author    nystudio107
  * @package   Seomatic
- * @since     1.0.0
+ * @since     3.0.0
  * @see       http://schema.org/ScholarlyArticle
  */
 class ScholarlyArticle extends Article

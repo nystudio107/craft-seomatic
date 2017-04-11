@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\Enumeration;
  *
  * @author    nystudio107
  * @package   Seomatic
- * @since     1.0.0
+ * @since     3.0.0
  * @see       http://schema.org/EventStatusType
  */
 class EventStatusType extends Enumeration

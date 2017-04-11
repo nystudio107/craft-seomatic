@@ -18,7 +18,7 @@ use nystudio107\seomatic\models\jsonld\InsertAction;
  *
  * @author    nystudio107
  * @package   Seomatic
- * @since     1.0.0
+ * @since     3.0.0
  * @see       http://schema.org/AppendAction
  */
 class AppendAction extends InsertAction

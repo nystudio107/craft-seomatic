@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\ChooseAction;
  *
  * @author    nystudio107
  * @package   Seomatic
- * @since     1.0.0
+ * @since     3.0.0
  * @see       http://schema.org/VoteAction
  */
 class VoteAction extends ChooseAction

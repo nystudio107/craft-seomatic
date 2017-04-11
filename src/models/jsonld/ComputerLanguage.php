@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\Intangible;
  *
  * @author    nystudio107
  * @package   Seomatic
- * @since     1.0.0
+ * @since     3.0.0
  * @see       http://schema.org/ComputerLanguage
  */
 class ComputerLanguage extends Intangible

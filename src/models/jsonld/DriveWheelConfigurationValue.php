@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\QualitativeValue;
  *
  * @author    nystudio107
  * @package   Seomatic
- * @since     1.0.0
+ * @since     3.0.0
  * @see       http://schema.org/DriveWheelConfigurationValue
  */
 class DriveWheelConfigurationValue extends QualitativeValue

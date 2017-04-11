@@ -18,7 +18,7 @@ use nystudio107\seomatic\models\jsonld\HomeAndConstructionBusiness;
  *
  * @author    nystudio107
  * @package   Seomatic
- * @since     1.0.0
+ * @since     3.0.0
  * @see       http://schema.org/RoofingContractor
  */
 class RoofingContractor extends HomeAndConstructionBusiness
