@@ -54,6 +54,8 @@ class Meta extends Component
      */
     public function loadMetaContainers()
     {
+        $view = Craft::$app->getView();
+        $view->title = "woof!";
         $this->loadGlobalMetaContainers();
         $this->loadSectionMetaContainers();
     }
@@ -167,8 +169,10 @@ class Meta extends Component
         $view = Craft::$app->getView();
         foreach ($metaContainer->data as $jsonLdModel) {
             $jsonLd = $jsonLdModel->render(true, false);
-            $view->registerJsonLD(
-                $jsonLd
+            $view->registerScript(
+                $jsonLd,
+                View::POS_BEGIN,
+                ['type' => 'application/ld+json']
             );
             // If `devMode` is enabled, validate the JSON-LD and output any model errors
             if (Craft::$app->getConfig()->getGeneral()->devMode) {
