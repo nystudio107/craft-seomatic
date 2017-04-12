@@ -54,10 +54,17 @@ class Meta extends Component
      */
     public function loadMetaContainers()
     {
-        $view = Craft::$app->getView();
-        $view->title = "woof!";
         $this->loadGlobalMetaContainers();
         $this->loadSectionMetaContainers();
+    }
+
+    /**
+     * @param string $title
+     */
+    public function titleTag(string $title)
+    {
+        $view = Craft::$app->getView();
+        $view->title = $title;
     }
 
     /**
@@ -171,7 +178,7 @@ class Meta extends Component
             $jsonLd = $jsonLdModel->render(true, false);
             $view->registerScript(
                 $jsonLd,
-                View::POS_BEGIN,
+                View::POS_END,
                 ['type' => 'application/ld+json']
             );
             // If `devMode` is enabled, validate the JSON-LD and output any model errors

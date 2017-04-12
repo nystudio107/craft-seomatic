@@ -32,6 +32,16 @@ use Craft;
 class SeomaticVariable
 {
     /**
+     * Set the page's <title> tag
+     *
+     * @param string $title  The page <title> tag text
+     */
+    public function titleTag(string $title)
+    {
+        Seomatic::$plugin->meta->titleTag($title);
+    }
+
+    /**
      * Create a meta script from a template
      *
      * @param string $name        The meta tag name
