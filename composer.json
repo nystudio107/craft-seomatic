@@ -22,7 +22,8 @@
         }
     ],
     "require": {
-        "craftcms/cms": "~3.0.0-beta.1"
+        "craftcms/cms": "~3.0.0-beta.1",
+        "craftcms/vue-asset": "^1.0"
     },
     "repositories": [
         {
