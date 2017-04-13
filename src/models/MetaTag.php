@@ -11,11 +11,9 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\helpers\PluginTemplate as PluginTemplateHelper;
+use nystudio107\seomatic\base\MetaItem;
 
 use Craft;
-use craft\base\Model;
-use craft\helpers\Template;
 
 use yii\helpers\Html;
 
@@ -24,8 +22,13 @@ use yii\helpers\Html;
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaTag extends Model
+class MetaTag extends MetaItem
 {
+    // Constants
+    // =========================================================================
+
+    const ITEM_TYPE = 'Tag';
+
     // Constants
     // =========================================================================
 

@@ -9,27 +9,21 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-namespace nystudio107\seomatic\models;
+namespace nystudio107\seomatic\base;
 
-use nystudio107\seomatic\helpers\PluginTemplate as PluginTemplateHelper;
-use nystudio107\seomatic\base\MetaItem;
-
-use Craft;
+use craft\base\Model;
 
 /**
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaScript extends MetaItem
+abstract class MetaItem extends Model implements MetaItemInterface
 {
-    // Constants
+    // Traits
     // =========================================================================
 
-    const ITEM_TYPE = 'Script';
-
-    // Constants
-    // =========================================================================
+    use MetaItemTrait;
 
     // Static Properties
     // =========================================================================
@@ -37,41 +31,15 @@ class MetaScript extends MetaItem
     // Static Methods
     // =========================================================================
 
-    /**
-     * @param array $config
-     *
-     * @return null|MetaScript
-     */
-    public static function create(array $config = [])
-    {
-        $model = null;
-        $model = new MetaScript($config);
-
-        return $model;
-    }
-
     // Public Properties
     // =========================================================================
-
-    /**
-     * @var string
-     */
-    public $templatePath;
-
-    /**
-     * @var array
-     */
-    public $vars;
 
     // Public Methods
     // =========================================================================
 
-    /**
-     * @return string
-     */
-    public function render()
+    public function render(): string
     {
-        return PluginTemplateHelper::renderPluginTemplate($this->templatePath, $this->vars);
+        return '';
     }
 
     // Private Methods

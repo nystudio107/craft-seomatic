@@ -27,7 +27,7 @@ class MetaScriptContainer extends MetaContainer
     // Constants
     // =========================================================================
 
-    const CONTAINER_TYPE = 'MetaScript';
+    const CONTAINER_TYPE = 'ScriptContainer';
 
     // Static Properties
     // =========================================================================

@@ -12,9 +12,9 @@
 namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\helpers\JsonLd as JsonLdHelper;
+use nystudio107\seomatic\base\MetaItem;
 
 use Craft;
-use craft\base\Model;
 use craft\helpers\Template;
 
 use yii\validators\UrlValidator;
@@ -28,8 +28,13 @@ use yii\base\InvalidParamException;
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaJsonLd extends Model
+class MetaJsonLd extends MetaItem
 {
+    // Constants
+    // =========================================================================
+
+    const ITEM_TYPE = 'JsonLd';
+
     // Static Properties
     // =========================================================================
 
@@ -113,6 +118,20 @@ class MetaJsonLd extends Model
      */
     public $type;
 
+    /**
+     * Should the rendered JSON-LD be wrapped in \Twig_Markup for raw rendering
+     *
+     * @var bool
+     */
+    public $renderRaw = true;
+
+    /**
+     * Should the <script type="application/ld+json"> </script> tags be rendered
+     *
+     * @var bool
+     */
+    public $renderScriptTags = true;
+
 
     // Static Protected Properties
     // =========================================================================
@@ -180,6 +199,7 @@ class MetaJsonLd extends Model
         return $model;
     }
 
+
     // Public Methods
     // =========================================================================
 
@@ -208,12 +228,9 @@ class MetaJsonLd extends Model
     /**
      * Renders a JSON-LD representation of the schema
      *
-     * @param bool $raw
-     * @param bool $tags
-     *
      * @return string|\Twig_Markup
      */
-    public function render($raw = true, $tags = true)
+    public function render(): string
     {
         $linebreak = "";
 
@@ -224,7 +241,7 @@ class MetaJsonLd extends Model
 
         // Render the resulting JSON-LD
         $result = JsonLdHelper::encode($this);
-        if ($tags) {
+        if ($this->renderScriptTags) {
             $result =
                 '<script type="application/ld+json">'
                 . $linebreak
@@ -232,7 +249,7 @@ class MetaJsonLd extends Model
                 . $linebreak
                 . '</script>';
         }
-        if ($raw === true) {
+        if ($this->renderRaw === true) {
             $result = Template::raw($result);
         }
 
@@ -276,8 +293,14 @@ class MetaJsonLd extends Model
     public function fields()
     {
         $fields = $this->attributes();
+        $fields = array_combine($fields, $fields);
+        unset(
+            $fields['key'],
+            $fields['renderRaw'],
+            $fields['renderScriptTags']
+        );
 
-        return array_combine($fields, $fields);
+        return $fields;
     }
 
     /**

@@ -40,6 +40,7 @@ abstract class MetaContainer extends Model implements MetaContainerInterface
      */
     public static function create($config = [])
     {
+        /** @var $model MetaContainer */
         $model = null;
         $className = self::className();
         $model = new $className($config);

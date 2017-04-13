@@ -27,7 +27,7 @@ class MetaJsonLdContainer extends MetaContainer
     // Constants
     // =========================================================================
 
-    const CONTAINER_TYPE = 'MetaJsonLd';
+    const CONTAINER_TYPE = 'JsonLdContainer';
 
     // Static Properties
     // =========================================================================

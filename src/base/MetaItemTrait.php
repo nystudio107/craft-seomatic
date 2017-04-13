@@ -16,15 +16,15 @@ namespace nystudio107\seomatic\base;
  * @package   Seomatic
  * @since     3.0.0
  */
-trait MetaContainerTrait
+trait MetaItemTrait
 {
     // Properties
     // =========================================================================
 
     /**
-     * The data in this container
+     * The key for this MetaItem
      *
-     * @var array
+     * @var string
      */
-    public $data = [];
+    public $key;
 }

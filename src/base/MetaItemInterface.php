@@ -9,27 +9,20 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-namespace nystudio107\seomatic\models;
-
-use nystudio107\seomatic\helpers\PluginTemplate as PluginTemplateHelper;
-use nystudio107\seomatic\base\MetaItem;
-
-use Craft;
+namespace nystudio107\seomatic\base;
 
 /**
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaScript extends MetaItem
+interface MetaItemInterface
 {
-    // Constants
-    // =========================================================================
-
-    const ITEM_TYPE = 'Script';
 
     // Constants
     // =========================================================================
+
+    const ITEM_TYPE = 'Generic';
 
     // Static Properties
     // =========================================================================
@@ -37,42 +30,18 @@ class MetaScript extends MetaItem
     // Static Methods
     // =========================================================================
 
-    /**
-     * @param array $config
-     *
-     * @return null|MetaScript
-     */
-    public static function create(array $config = [])
-    {
-        $model = null;
-        $model = new MetaScript($config);
-
-        return $model;
-    }
-
     // Public Properties
     // =========================================================================
-
-    /**
-     * @var string
-     */
-    public $templatePath;
-
-    /**
-     * @var array
-     */
-    public $vars;
 
     // Public Methods
     // =========================================================================
 
     /**
+     * Render the meta item as HTML-safe text
+     *
      * @return string
      */
-    public function render()
-    {
-        return PluginTemplateHelper::renderPluginTemplate($this->templatePath, $this->vars);
-    }
+    public function render(): string;
 
     // Private Methods
     // =========================================================================

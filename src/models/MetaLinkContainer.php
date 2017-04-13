@@ -25,7 +25,7 @@ class MetaLinkContainer extends MetaContainer
     // Constants
     // =========================================================================
 
-    const CONTAINER_TYPE = 'MetaLink';
+    const CONTAINER_TYPE = 'LinkContainer';
 
     // Static Properties
     // =========================================================================
