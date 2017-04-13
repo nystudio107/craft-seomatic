@@ -35,6 +35,11 @@ class MetaTag extends Model
     // Static Methods
     // =========================================================================
 
+    /**
+     * @param array $config
+     *
+     * @return null|MetaTag
+     */
     public static function create(array $config = [])
     {
         $model = null;

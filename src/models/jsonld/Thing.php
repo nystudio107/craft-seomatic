@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\JsonLd;
+use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
  * Thing - The most generic type of item.
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\JsonLd;
  * @since     3.0.0
  * @see       http://schema.org/Thing
  */
-class Thing extends JsonLd
+class Thing extends MetaJsonLd
 {
     // Static Public Properties
     // =========================================================================

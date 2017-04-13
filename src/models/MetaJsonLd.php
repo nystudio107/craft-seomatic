@@ -28,7 +28,7 @@ use yii\base\InvalidParamException;
  * @package   Seomatic
  * @since     3.0.0
  */
-class JsonLd extends Model
+class MetaJsonLd extends Model
 {
     // Static Properties
     // =========================================================================

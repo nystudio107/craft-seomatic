@@ -12,8 +12,8 @@
 namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\models\JsonLd;
 use nystudio107\seomatic\models\MetaTagContainer;
+use nystudio107\seomatic\models\MetaLinkContainer;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 
@@ -61,7 +61,7 @@ class Meta extends Component
     /**
      * @param string $title
      */
-    public function titleTag(string $title)
+    public function includeMetaTitle(string $title)
     {
         $view = Craft::$app->getView();
         $view->title = $title;
@@ -76,7 +76,7 @@ class Meta extends Component
     {
         $container = null;
         $className = null;
-        $key = $key ?: $this->getHash($data);
+        $key = $key . $type ?: $this->getHash($data . $type);
         // If a container already exists with this $key, just add to it
         if (!empty($this->metaContainers[$key])) {
             $container = $this->metaContainers[$key];
@@ -86,6 +86,9 @@ class Meta extends Component
             switch ($type) {
                 case MetaTagContainer::CONTAINER_TYPE:
                     $className = MetaTagContainer::className();
+                    break;
+                case MetaLinkContainer::CONTAINER_TYPE:
+                    $className = MetaLinkContainer::className();
                     break;
                 case MetaScriptContainer::CONTAINER_TYPE:
                     $className = MetaScriptContainer::className();
@@ -114,6 +117,9 @@ class Meta extends Component
             switch ($metaContainer::CONTAINER_TYPE) {
                 case MetaTagContainer::CONTAINER_TYPE:
                     $this->includeMetaTags($metaContainer);
+                    break;
+                case MetaLinkContainer::CONTAINER_TYPE:
+                    $this->includeMetaLinks($metaContainer);
                     break;
                 case MetaScriptContainer::CONTAINER_TYPE:
                     $this->includeMetaScript($metaContainer);
@@ -150,6 +156,17 @@ class Meta extends Component
         $view = Craft::$app->getView();
         foreach ($metaContainer->data as $metaTagModel) {
             $view->registerMetaTag($metaTagModel->options);
+        }
+    }
+
+    /**
+     * @param MetaLinkContainer $metaContainer
+     */
+    protected function includeMetaLinks(MetaLinkContainer $metaContainer)
+    {
+        $view = Craft::$app->getView();
+        foreach ($metaContainer->data as $metaLinkModel) {
+            $view->registerLinkTag($metaLinkModel->options);
         }
     }
 

@@ -25,7 +25,7 @@ class MetaTagContainer extends MetaContainer
     // Constants
     // =========================================================================
 
-    const CONTAINER_TYPE = 'MetaTags';
+    const CONTAINER_TYPE = 'MetaTag';
 
     // Static Properties
     // =========================================================================

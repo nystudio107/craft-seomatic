@@ -33,6 +33,11 @@ class MetaScript extends Model
     // Static Methods
     // =========================================================================
 
+    /**
+     * @param array $config
+     *
+     * @return null|MetaScript
+     */
     public static function create(array $config = [])
     {
         $model = null;

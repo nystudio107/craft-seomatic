@@ -13,22 +13,21 @@ namespace nystudio107\seomatic\variables;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\models\MetaTag;
-use nystudio107\seomatic\models\JsonLd;
+use nystudio107\seomatic\models\MetaLink;
+use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\models\MetaScript;
 use nystudio107\seomatic\models\MetaTagContainer;
+use nystudio107\seomatic\models\MetaLinkContainer;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 
 use Craft;
 
 /**
- * Template variables
- *
  * @author    nystudio107
- * @package   SEOmatic
- * @since     2.0.0
+ * @package   Seomatic
+ * @since     3.0.0
  */
-
 class SeomaticVariable
 {
     /**
@@ -36,13 +35,13 @@ class SeomaticVariable
      *
      * @param string $title  The page <title> tag text
      */
-    public function titleTag(string $title)
+    public function includeMetaTitle(string $title)
     {
-        Seomatic::$plugin->meta->titleTag($title);
+        Seomatic::$plugin->meta->includeMetaTitle($title);
     }
 
     /**
-     * Create a meta script from a template
+     * Create a meta tag
      *
      * @param string $name        The meta tag name
      * @param array  $attributes  The meta tag attributes
@@ -73,6 +72,30 @@ class SeomaticVariable
     }
 
     /**
+     * Create a link tag
+     *
+     * @param array  $attributes  The link tag attributes
+     *
+     * @return mixed              The model object
+     */
+    public function createMetaLink(array $attributes = [])
+    {
+        $config = [
+            'options' => $attributes,
+        ];
+        return MetaLink::create($config);
+    }
+
+    /**
+     * @param MetaLink $metaLink
+     * @param null     $key
+     */
+    public function includeMetaLink(MetaLink $metaLink, $key = null)
+    {
+        Seomatic::$plugin->meta->addMetaContainer(MetaLinkContainer::CONTAINER_TYPE, $metaLink, $key);
+    }
+
+    /**
      * Create a new JSON-LD schema type object
      *
      * @param string $jsonLdType  The schema.org type to create
@@ -80,16 +103,16 @@ class SeomaticVariable
      *
      * @return mixed              The model object
      */
-    public function createJsonLd(string $jsonLdType, $config = [])
+    public function createMetaJsonLd(string $jsonLdType, $config = [])
     {
-        return JsonLd::create($jsonLdType, $config);
+        return MetaJsonLd::create($jsonLdType, $config);
     }
 
     /**
-     * @param JsonLd $jsonLdModel
+     * @param MetaJsonLd $jsonLdModel
      * @param string $key
      */
-    public function includeJsonLd(JsonLd $jsonLdModel, $key = null)
+    public function includeMetaJsonLd(MetaJsonLd $jsonLdModel, $key = null)
     {
         Seomatic::$plugin->meta->addMetaContainer(MetaJsonLdContainer::CONTAINER_TYPE, $jsonLdModel, $key);
     }

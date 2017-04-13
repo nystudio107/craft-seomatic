@@ -11,23 +11,23 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\base\MetaContainer;
+use nystudio107\seomatic\helpers\PluginTemplate as PluginTemplateHelper;
 
 use Craft;
+use craft\base\Model;
+use craft\helpers\Template;
 
-use yii\web\View;
+use yii\helpers\Html;
 
 /**
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaJsonLdContainer extends MetaContainer
+class MetaLink extends Model
 {
     // Constants
     // =========================================================================
-
-    const CONTAINER_TYPE = 'MetaJsonLd';
 
     // Static Properties
     // =========================================================================
@@ -35,24 +35,36 @@ class MetaJsonLdContainer extends MetaContainer
     // Static Methods
     // =========================================================================
 
+    /**
+     * @param array $config
+     *
+     * @return null|MetaLink
+     */
+    public static function create(array $config = [])
+    {
+        $model = null;
+        $model = new MetaLink($config);
+
+        return $model;
+    }
+
     // Public Properties
     // =========================================================================
 
     /**
-     * The data in this container
-     *
-     * @var MetaJsonLd
+     * @var array
      */
-    public $data = [];
+    public $options;
 
     // Public Methods
     // =========================================================================
 
     /**
-     * @inheritdoc
+     * @return string
      */
-    public function normalizeContainerData()
+    public function render()
     {
+        return Html::tag('link', '', $this->options);
     }
 
     // Private Methods

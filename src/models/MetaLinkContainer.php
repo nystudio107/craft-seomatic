@@ -15,19 +15,17 @@ use nystudio107\seomatic\base\MetaContainer;
 
 use Craft;
 
-use yii\web\View;
-
 /**
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaJsonLdContainer extends MetaContainer
+class MetaLinkContainer extends MetaContainer
 {
     // Constants
     // =========================================================================
 
-    const CONTAINER_TYPE = 'MetaJsonLd';
+    const CONTAINER_TYPE = 'MetaLink';
 
     // Static Properties
     // =========================================================================
@@ -41,7 +39,7 @@ class MetaJsonLdContainer extends MetaContainer
     /**
      * The data in this container
      *
-     * @var MetaJsonLd
+     * @var MetaLink
      */
     public $data = [];
 
