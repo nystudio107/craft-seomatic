@@ -47,6 +47,7 @@ class MetaLink extends MetaItem
     {
         $model = null;
         $model = new MetaLink($config);
+        $model->key = $model->options['rel'];
 
         return $model;
     }

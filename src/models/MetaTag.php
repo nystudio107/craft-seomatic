@@ -47,6 +47,7 @@ class MetaTag extends MetaItem
     {
         $model = null;
         $model = new MetaTag($config);
+        $model->key = $model->options['name'];
 
         return $model;
     }

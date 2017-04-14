@@ -191,10 +191,11 @@ class MetaJsonLd extends MetaItem
     {
         $model = null;
         $className = 'nystudio107\\seomatic\\models\\jsonld\\'.$schemaType;
+        /** @var $model MetaJsonLd */
         if (class_exists($className)) {
             $model = new $className($config);
         }
-        //$model->attributes = $config;
+        $model->key = $model->type;
 
         return $model;
     }

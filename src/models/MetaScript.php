@@ -46,6 +46,7 @@ class MetaScript extends MetaItem
     {
         $model = null;
         $model = new MetaScript($config);
+        $model->key = $model->templatePath;
 
         return $model;
     }

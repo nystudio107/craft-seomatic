@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\services;
 
+use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\models\MetaTagContainer;
 use nystudio107\seomatic\models\MetaLinkContainer;
@@ -68,9 +69,9 @@ class Meta extends Component
     }
 
     /**
-     * @param $type
-     * @param $data
-     * @param $key
+     * @param $type string
+     * @param $data MetaItem
+     * @param $key  string
      */
     public function addMetaContainer($type, $data, $key = null)
     {
@@ -80,7 +81,7 @@ class Meta extends Component
         // If a container already exists with this $key, just add to it
         if (!empty($this->metaContainers[$key])) {
             $container = $this->metaContainers[$key];
-            $container->data[] = $data;
+            $container->data[$data->key] = $data;
         } else {
             // Create a new container based on the type passed in
             switch ($type) {
@@ -98,8 +99,10 @@ class Meta extends Component
                     break;
             }
             if ($className) {
+                $metaItem = [];
+                $metaItem[$data->key] = $data;
                 $container = new $className([
-                    'data' => [$data],
+                    'data' => $metaItem,
                 ]);
                 if ($container) {
                     $this->metaContainers[$key] = $container;
