@@ -12,13 +12,15 @@
 namespace nystudio107\seomatic\helpers;
 
 use Craft;
+use craft\helpers\Json;
+use craft\helpers\ArrayHelper;
 
 /**
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-class JsonLd extends \craft\helpers\Json
+class JsonLd extends Json
 {
     // Static Properties
     // =========================================================================
@@ -74,8 +76,8 @@ class JsonLd extends \craft\helpers\Json
     protected static function normalizeJsonLdArray(&$array, $depth)
     {
         $array = array_filter($array);
-        $array = self::changeKey($array, 'context', '@context');
-        $array = self::changeKey($array, 'type', '@type');
+        ArrayHelper::rename($array, 'context', '@context');
+        ArrayHelper::rename($array, 'type', '@type');
         ksort($array);
     }
 

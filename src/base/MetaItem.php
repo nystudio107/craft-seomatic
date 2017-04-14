@@ -12,6 +12,9 @@
 namespace nystudio107\seomatic\base;
 
 use craft\base\Model;
+use craft\helpers\ArrayHelper;
+
+use yii\helpers\Inflector;
 
 /**
  * @author    nystudio107
@@ -51,9 +54,41 @@ abstract class MetaItem extends Model implements MetaItemInterface
         return $rules;
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function fields()
+    {
+        $fields = parent::fields();
+        if ($this->scenario === 'default') {
+            unset(
+                $fields['key']
+            );
+        }
+        return $fields;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function render(): string
     {
         return '';
+    }
+
+    /**
+     * @return array
+     */
+    public function tagAttributes(): array
+    {
+        $tagAttributes = $this->toArray();
+        $tagAttributes = array_filter($tagAttributes);
+        foreach ($tagAttributes as $key => $value) {
+            ArrayHelper::rename($tagAttributes, $key, Inflector::slug(Inflector::titleize($key)));
+        }
+        ksort($tagAttributes);
+
+        return $tagAttributes;
     }
 
     // Private Methods

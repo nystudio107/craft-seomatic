@@ -14,8 +14,10 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\base\MetaItem;
 
 use Craft;
+use craft\helpers\ArrayHelper;
 
 use yii\helpers\Html;
+use yii\helpers\Inflector;
 
 /**
  * @author    nystudio107
@@ -46,8 +48,11 @@ class MetaLink extends MetaItem
     public static function create(array $config = [])
     {
         $model = null;
+        foreach ($config as $key => $value) {
+            ArrayHelper::rename($config, $key, Inflector::variablize($key));
+        }
         $model = new MetaLink($config);
-        $model->key = $model->options['rel'];
+        $model->key = $model->rel;
 
         return $model;
     }
@@ -56,9 +61,39 @@ class MetaLink extends MetaItem
     // =========================================================================
 
     /**
-     * @var array
+     * @var string
      */
-    public $options;
+    public $crossorigin;
+
+    /**
+     * @var string
+     */
+    public $href;
+
+    /**
+     * @var string
+     */
+    public $hreflang;
+
+    /**
+     * @var string
+     */
+    public $media;
+
+    /**
+     * @var string
+     */
+    public $rel;
+
+    /**
+     * @var string
+     */
+    public $sizes;
+
+    /**
+     * @var string
+     */
+    public $type;
 
     // Public Methods
     // =========================================================================
@@ -70,10 +105,47 @@ class MetaLink extends MetaItem
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['options'], 'required'],
+            [['crossorigin', 'href', 'hreflang', 'media', 'rel', 'sizes', 'type'], 'string'],
+            ['crossorigin', 'in', 'range' => [
+                'anonymous',
+                'use-credentials'
+            ]],
+            ['href', 'url'],
+            ['hreflang', 'url'],
+            ['rel', 'required'],
+            ['rel', 'in', 'range' => [
+                'alternate',
+                'author',
+                'canonical',
+                'dns-prefetch',
+                'help',
+                'icon',
+                'license',
+                'next',
+                'pingback',
+                'preconnect',
+                'prefetch',
+                'preload',
+                'prerender',
+                'prev',
+                'search',
+                'stylesheet',
+            ]],
         ]);
 
         return $rules;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function fields()
+    {
+        $fields = parent::fields();
+        if ($this->scenario === 'default') {
+        }
+
+        return $fields;
     }
 
     /**
@@ -81,7 +153,8 @@ class MetaLink extends MetaItem
      */
     public function render():string
     {
-        return Html::tag('link', '', $this->options);
+        $options = $this->tagAttributes();
+        return Html::tag('link', '', $options);
     }
 
     // Private Methods

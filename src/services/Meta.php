@@ -163,7 +163,7 @@ class Meta extends Component
         $view = Craft::$app->getView();
         /** @var $metaTagModel MetaTag */
         foreach ($metaContainer->data as $metaTagModel) {
-            $view->registerMetaTag($metaTagModel->options);
+            $view->registerMetaTag($metaTagModel->tagAttributes());
             // If `devMode` is enabled, validate the Meta Tag and output any model errors
             if (Craft::$app->getConfig()->getGeneral()->devMode) {
                 $this->debugMetaItem(
@@ -182,7 +182,7 @@ class Meta extends Component
         $view = Craft::$app->getView();
         /** @var $metaLinkModel MetaLink */
         foreach ($metaContainer->data as $metaLinkModel) {
-            $view->registerLinkTag($metaLinkModel->options);
+            $view->registerLinkTag($metaLinkModel->tagAttributes());
             // If `devMode` is enabled, validate the Meta Link and output any model errors
             if (Craft::$app->getConfig()->getGeneral()->devMode) {
                 $this->debugMetaItem(

@@ -43,23 +43,13 @@ class SeomaticVariable
     /**
      * Create a meta tag
      *
-     * @param string $name        The meta tag name
      * @param array  $attributes  The meta tag attributes
      *
      * @return mixed              The model object
      */
-    public function createMetaTag(string $name, array $attributes = [])
+    public function createMetaTag(array $attributes = [])
     {
-        $attributes = array_merge(
-            [
-                'name' => $name
-            ],
-            $attributes
-        );
-        $config = [
-            'options' => $attributes,
-        ];
-        return MetaTag::create($config);
+        return MetaTag::create($attributes);
     }
 
     /**
@@ -80,10 +70,7 @@ class SeomaticVariable
      */
     public function createMetaLink(array $attributes = [])
     {
-        $config = [
-            'options' => $attributes,
-        ];
-        return MetaLink::create($config);
+        return MetaLink::create($attributes);
     }
 
     /**

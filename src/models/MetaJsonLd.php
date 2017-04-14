@@ -291,14 +291,13 @@ class MetaJsonLd extends MetaItem
      */
     public function fields()
     {
-        $fields = $this->attributes();
-        $fields = array_combine($fields, $fields);
-        unset(
-            $fields['key'],
-            $fields['renderRaw'],
-            $fields['renderScriptTags']
-        );
-
+        $fields = parent::fields();
+        if ($this->scenario === 'default') {
+            unset(
+                $fields['renderRaw'],
+                $fields['renderScriptTags']
+            );
+        }
         return $fields;
     }
 

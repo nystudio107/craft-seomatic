@@ -14,8 +14,10 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\base\MetaItem;
 
 use Craft;
+use craft\helpers\ArrayHelper;
 
 use yii\helpers\Html;
+use yii\helpers\Inflector;
 
 /**
  * @author    nystudio107
@@ -46,8 +48,11 @@ class MetaTag extends MetaItem
     public static function create(array $config = [])
     {
         $model = null;
+        foreach ($config as $key => $value) {
+            ArrayHelper::rename($config, $key, Inflector::variablize($key));
+        }
         $model = new MetaTag($config);
-        $model->key = $model->options['name'] ?? $model->options['charset'] ?? $model->options['http-equiv'];
+        $model->key = $model->name ?? $model->charset ?? $model->httpEquiv;
 
         return $model;
     }
@@ -56,9 +61,24 @@ class MetaTag extends MetaItem
     // =========================================================================
 
     /**
-     * @var array
+     * @var string
      */
-    public $options;
+    public $charset;
+
+    /**
+     * @var string
+     */
+    public $content;
+
+    /**
+     * @var string
+     */
+    public $httpEquiv;
+
+    /**
+     * @var string
+     */
+    public $name;
 
     // Public Methods
     // =========================================================================
@@ -70,18 +90,31 @@ class MetaTag extends MetaItem
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['options'], 'required'],
+            [['charset', 'content', 'httpEquiv', 'name'], 'string'],
         ]);
 
         return $rules;
     }
 
     /**
-     * @return string
+     * @inheritdoc
+     */
+    public function fields()
+    {
+        $fields = parent::fields();
+        if ($this->scenario === 'default') {
+        }
+
+        return $fields;
+    }
+
+    /**
+     * @inheritdoc
      */
     public function render():string
     {
-        return Html::tag('meta', '', $this->options);
+        $options = $this->tagAttributes();
+        return Html::tag('meta', '', $options);
     }
 
     // Private Methods
