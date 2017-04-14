@@ -37,6 +37,20 @@ abstract class MetaItem extends Model implements MetaItemInterface
     // Public Methods
     // =========================================================================
 
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        $rules = parent::rules();
+        $rules = array_merge($rules, [
+            [['key'], 'required'],
+            [['key'], 'string'],
+        ]);
+
+        return $rules;
+    }
+
     public function render(): string
     {
         return '';

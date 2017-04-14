@@ -287,9 +287,7 @@ class MetaJsonLd extends MetaItem
     }
 
     /**
-     * Return the fields that ::toArray() should process
-     *
-     * @return array the fields
+     * @inheritdoc
      */
     public function fields()
     {
@@ -302,6 +300,18 @@ class MetaJsonLd extends MetaItem
         );
 
         return $fields;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        $rules = parent::rules();
+        $rules = array_merge($rules, [
+        ]);
+
+        return $rules;
     }
 
     /**

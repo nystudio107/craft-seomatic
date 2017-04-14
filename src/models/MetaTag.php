@@ -47,7 +47,7 @@ class MetaTag extends MetaItem
     {
         $model = null;
         $model = new MetaTag($config);
-        $model->key = $model->options['name'];
+        $model->key = $model->options['name'] ?? $model->options['charset'] ?? $model->options['http-equiv'];
 
         return $model;
     }
@@ -62,6 +62,19 @@ class MetaTag extends MetaItem
 
     // Public Methods
     // =========================================================================
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        $rules = parent::rules();
+        $rules = array_merge($rules, [
+            [['options'], 'required'],
+        ]);
+
+        return $rules;
+    }
 
     /**
      * @return string

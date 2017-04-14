@@ -64,6 +64,19 @@ class MetaLink extends MetaItem
     // =========================================================================
 
     /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        $rules = parent::rules();
+        $rules = array_merge($rules, [
+            [['options'], 'required'],
+        ]);
+
+        return $rules;
+    }
+
+    /**
      * @return string
      */
     public function render():string

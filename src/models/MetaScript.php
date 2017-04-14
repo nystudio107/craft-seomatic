@@ -68,6 +68,21 @@ class MetaScript extends MetaItem
     // =========================================================================
 
     /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        $rules = parent::rules();
+        $rules = array_merge($rules, [
+            [['templatePath'], 'required'],
+            [['templatePath'], 'string'],
+            [['vars'], 'safe'],
+        ]);
+
+        return $rules;
+    }
+
+    /**
      * @return string
      */
     public function render():string

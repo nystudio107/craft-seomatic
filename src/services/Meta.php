@@ -164,6 +164,13 @@ class Meta extends Component
         /** @var $metaTagModel MetaTag */
         foreach ($metaContainer->data as $metaTagModel) {
             $view->registerMetaTag($metaTagModel->options);
+            // If `devMode` is enabled, validate the Meta Tag and output any model errors
+            if (Craft::$app->getConfig()->getGeneral()->devMode) {
+                $this->debugMetaItem(
+                    $metaTagModel,
+                    "Tag attribute: "
+                );
+            }
         }
     }
 
@@ -176,6 +183,13 @@ class Meta extends Component
         /** @var $metaLinkModel MetaLink */
         foreach ($metaContainer->data as $metaLinkModel) {
             $view->registerLinkTag($metaLinkModel->options);
+            // If `devMode` is enabled, validate the Meta Link and output any model errors
+            if (Craft::$app->getConfig()->getGeneral()->devMode) {
+                $this->debugMetaItem(
+                    $metaLinkModel,
+                    "Link attribute: "
+                );
+            }
         }
     }
 
@@ -192,6 +206,13 @@ class Meta extends Component
                 $js,
                 $metaContainer->position
             );
+            // If `devMode` is enabled, validate the Meta Script and output any model errors
+            if (Craft::$app->getConfig()->getGeneral()->devMode) {
+                $this->debugMetaItem(
+                    $metaScriptModel,
+                    "Script attribute: "
+                );
+            }
         }
     }
 
@@ -201,11 +222,11 @@ class Meta extends Component
     protected function includeMetaJsonLd(MetaJsonLdContainer $metaContainer)
     {
         $view = Craft::$app->getView();
-        /** @var $jsonLdModel MetaJsonLd */
-        foreach ($metaContainer->data as $jsonLdModel) {
-            $jsonLdModel->renderRaw = true;
-            $jsonLdModel->renderScriptTags = false;
-            $jsonLd = $jsonLdModel->render(true, false);
+        /** @var $metaJsonLdModel MetaJsonLd */
+        foreach ($metaContainer->data as $metaJsonLdModel) {
+            $metaJsonLdModel->renderRaw = true;
+            $metaJsonLdModel->renderScriptTags = false;
+            $jsonLd = $metaJsonLdModel->render(true, false);
             $view->registerScript(
                 $jsonLd,
                 View::POS_END,
@@ -213,7 +234,14 @@ class Meta extends Component
             );
             // If `devMode` is enabled, validate the JSON-LD and output any model errors
             if (Craft::$app->getConfig()->getGeneral()->devMode) {
-                $this->debugJsonLd($jsonLdModel);
+                $this->debugMetaItem(
+                    $metaJsonLdModel,
+                    'JSON-LD property: ',
+                    [
+                        'default' => 'error',
+                        'google' => 'warning'
+                    ]
+                );
             }
         }
     }
@@ -234,37 +262,31 @@ class Meta extends Component
     }
 
     /**
-     * Validate the JSON-LD and output any model errors
-     *
-     * @param $jsonLdModel
+     * @param MetaItem $metaItemModel
+     * @param string   $errorLabel
+     * @param array    $scenarios
      */
-    protected function debugJsonLd($jsonLdModel)
-    {
-        $scenarios = ['default', 'google'];
-        foreach ($scenarios as $scenario) {
-            $jsonLdModel->setScenario($scenario);
-            if (!$jsonLdModel->validate()) {
+    protected function debugMetaItem(
+        MetaItem $metaItemModel,
+        $errorLabel = "Error: ",
+        $scenarios = ['default' => 'error']
+    ) {
+        foreach ($scenarios as $scenario => $logLevel) {
+            $metaItemModel->setScenario($scenario);
+            if (!$metaItemModel->validate()) {
                 $errorMsg =
                     Craft::t('seomatic', 'Scenario: "')
                     . $scenario
                     . '"'
                     . PHP_EOL
-                    . print_r($jsonLdModel->render(false, false), true);
-                if ($scenario == 'default') {
-                    Craft::error($errorMsg, __METHOD__);
-                } else {
-                    Craft::warning($errorMsg, __METHOD__);
-                }
-                foreach ($jsonLdModel->errors as $param => $errors) {
-                    $errorMsg = Craft::t('seomatic', 'JSON-LD property: ') . $param;
+                    . print_r($metaItemModel->render(), true);
+                    Craft::$logLevel($errorMsg, __METHOD__);
+                foreach ($metaItemModel->errors as $param => $errors) {
+                    $errorMsg = Craft::t('seomatic', $errorLabel) . $param;
                     foreach ($errors as $error) {
                         $errorMsg .= ' -> ' . $error;
                     }
-                    if ($scenario == 'default') {
-                        Craft::error($errorMsg, __METHOD__);
-                    } else {
-                        Craft::warning($errorMsg, __METHOD__);
-                    }
+                    Craft::$logLevel($errorMsg, __METHOD__);
                 }
             }
         }
