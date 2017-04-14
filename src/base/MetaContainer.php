@@ -65,7 +65,7 @@ abstract class MetaContainer extends Model implements MetaContainerInterface
         foreach ($this->data as $metaItemModel) {
             $html .= $metaItemModel->render();
         }
-        
+
         return $html;
     }
 

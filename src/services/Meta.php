@@ -13,6 +13,10 @@ namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\models\MetaTag;
+use nystudio107\seomatic\models\MetaLink;
+use nystudio107\seomatic\models\MetaScript;
+use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\models\MetaTagContainer;
 use nystudio107\seomatic\models\MetaLinkContainer;
 use nystudio107\seomatic\models\MetaScriptContainer;
@@ -157,6 +161,7 @@ class Meta extends Component
     protected function includeMetaTags(MetaTagContainer $metaContainer)
     {
         $view = Craft::$app->getView();
+        /** @var $metaTagModel MetaTag */
         foreach ($metaContainer->data as $metaTagModel) {
             $view->registerMetaTag($metaTagModel->options);
         }
@@ -168,6 +173,7 @@ class Meta extends Component
     protected function includeMetaLinks(MetaLinkContainer $metaContainer)
     {
         $view = Craft::$app->getView();
+        /** @var $metaLinkModel MetaLink */
         foreach ($metaContainer->data as $metaLinkModel) {
             $view->registerLinkTag($metaLinkModel->options);
         }
@@ -179,6 +185,7 @@ class Meta extends Component
     protected function includeMetaScript(MetaScriptContainer $metaContainer)
     {
         $view = Craft::$app->getView();
+        /** @var $metaScriptModel MetaScript */
         foreach ($metaContainer->data as $metaScriptModel) {
             $js = $metaScriptModel->render();
             $view->registerJs(
@@ -194,7 +201,10 @@ class Meta extends Component
     protected function includeMetaJsonLd(MetaJsonLdContainer $metaContainer)
     {
         $view = Craft::$app->getView();
+        /** @var $jsonLdModel MetaJsonLd */
         foreach ($metaContainer->data as $jsonLdModel) {
+            $jsonLdModel->renderRaw = true;
+            $jsonLdModel->renderScriptTags = false;
             $jsonLd = $jsonLdModel->render(true, false);
             $view->registerScript(
                 $jsonLd,
