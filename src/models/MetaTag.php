@@ -66,7 +66,7 @@ class MetaTag extends MetaItem
     /**
      * @return string
      */
-    public function render()
+    public function render():string
     {
         return Html::tag('meta', '', $this->options);
     }

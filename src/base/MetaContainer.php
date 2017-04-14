@@ -55,6 +55,23 @@ abstract class MetaContainer extends Model implements MetaContainerInterface
     // Public Methods
     // =========================================================================
 
+    /**
+     * @inheritdoc
+     */
+    public function render(): string
+    {
+        $html = '';
+
+        foreach ($this->data as $metaItemModel) {
+            $html .= $metaItemModel->render();
+        }
+        
+        return $html;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function normalizeContainerData()
     {
     }

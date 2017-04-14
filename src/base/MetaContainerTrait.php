@@ -24,7 +24,7 @@ trait MetaContainerTrait
     /**
      * The data in this container
      *
-     * @var array
+     * @var MetaItem
      */
     public $data = [];
 }

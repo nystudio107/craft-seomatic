@@ -70,7 +70,7 @@ class MetaScript extends MetaItem
     /**
      * @return string
      */
-    public function render()
+    public function render():string
     {
         return PluginTemplateHelper::renderPluginTemplate($this->templatePath, $this->vars);
     }

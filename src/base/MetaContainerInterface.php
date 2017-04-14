@@ -39,6 +39,13 @@ interface MetaContainerInterface
     // =========================================================================
 
     /**
+     * Render the container's content
+     *
+     * @return string
+     */
+    public function render():string;
+
+    /**
      * Normalizes the containers’s data for use.
      *
      * This is called after container data is loaded, to allow it to be parsed,
