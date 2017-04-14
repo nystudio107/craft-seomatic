@@ -14,8 +14,6 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\helpers\PluginTemplate as PluginTemplateHelper;
 use nystudio107\seomatic\base\MetaItem;
 
-use Craft;
-
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -92,5 +90,4 @@ class MetaScript extends MetaItem
 
     // Private Methods
     // =========================================================================
-
 }

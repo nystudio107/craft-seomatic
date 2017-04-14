@@ -21,8 +21,6 @@ use nystudio107\seomatic\models\MetaLinkContainer;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 
-use Craft;
-
 /**
  * @author    nystudio107
  * @package   Seomatic

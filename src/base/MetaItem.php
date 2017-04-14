@@ -60,11 +60,15 @@ abstract class MetaItem extends Model implements MetaItemInterface
     public function fields()
     {
         $fields = parent::fields();
-        if ($this->scenario === 'default') {
-            unset(
-                $fields['key']
-            );
+        switch ($this->scenario) {
+            case 'google':
+            case 'default':
+                unset(
+                    $fields['key']
+                );
+                break;
         }
+
         return $fields;
     }
 
@@ -93,5 +97,4 @@ abstract class MetaItem extends Model implements MetaItemInterface
 
     // Private Methods
     // =========================================================================
-
 }

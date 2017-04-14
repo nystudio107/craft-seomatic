@@ -13,8 +13,6 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\base\MetaContainer;
 
-use Craft;
-
 use yii\web\View;
 
 /**
@@ -62,5 +60,4 @@ class MetaScriptContainer extends MetaContainer
 
     // Private Methods
     // =========================================================================
-
 }

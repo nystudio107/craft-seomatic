@@ -13,7 +13,6 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\base\MetaItem;
 
-use Craft;
 use craft\helpers\ArrayHelper;
 
 use yii\helpers\Html;
@@ -159,5 +158,4 @@ class MetaLink extends MetaItem
 
     // Private Methods
     // =========================================================================
-
 }

@@ -223,7 +223,9 @@ class MetaJsonLd extends MetaItem
      */
     public function __toString()
     {
-        return $this->render(false);
+        $this->renderRaw = false;
+        $this->renderScriptTags = true;
+        return $this->render();
     }
 
     /**
@@ -292,12 +294,16 @@ class MetaJsonLd extends MetaItem
     public function fields()
     {
         $fields = parent::fields();
-        if ($this->scenario === 'default') {
-            unset(
-                $fields['renderRaw'],
-                $fields['renderScriptTags']
-            );
+        switch ($this->scenario) {
+            case 'google':
+            case 'default':
+                unset(
+                    $fields['renderRaw'],
+                    $fields['renderScriptTags']
+                );
+                break;
         }
+
         return $fields;
     }
 
@@ -417,5 +423,4 @@ class MetaJsonLd extends MetaItem
 
     // Private Methods
     // =========================================================================
-
 }

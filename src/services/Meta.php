@@ -12,7 +12,6 @@
 namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\base\MetaItem;
-use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\models\MetaTag;
 use nystudio107\seomatic\models\MetaLink;
 use nystudio107\seomatic\models\MetaScript;
@@ -77,11 +76,10 @@ class Meta extends Component
      * @param $data MetaItem
      * @param $key  string
      */
-    public function addMetaContainer($type, $data, $key = null)
+    public function addMetaContainer(string $type, MetaItem $data, string $key = null)
     {
-        $container = null;
         $className = null;
-        $key = $key . $type ?: $this->getHash($data . $type);
+        $key = $key . $type ?: $this->getHash($data);
         // If a container already exists with this $key, just add to it
         if (!empty($this->metaContainers[$key])) {
             $container = $this->metaContainers[$key];
@@ -226,7 +224,7 @@ class Meta extends Component
         foreach ($metaContainer->data as $metaJsonLdModel) {
             $metaJsonLdModel->renderRaw = true;
             $metaJsonLdModel->renderScriptTags = false;
-            $jsonLd = $metaJsonLdModel->render(true, false);
+            $jsonLd = $metaJsonLdModel->render();
             $view->registerScript(
                 $jsonLd,
                 View::POS_END,
@@ -249,7 +247,14 @@ class Meta extends Component
     // Protected Methods
     // =========================================================================
 
-    protected function getHash($data)
+    /**
+     * Generate an md5 hash from an object or array
+     *
+     * @param MetaItem $data
+     *
+     * @return string
+     */
+    protected function getHash(MetaItem $data): string
     {
         if (is_object($data)) {
             $data = $data->toArray();
@@ -271,22 +276,52 @@ class Meta extends Component
         $errorLabel = "Error: ",
         $scenarios = ['default' => 'error']
     ) {
+        $isMetaJsonLdModel = false;
+        if (is_subclass_of($metaItemModel, MetaJsonLd::className())) {
+            $isMetaJsonLdModel = true;
+        }
         foreach ($scenarios as $scenario => $logLevel) {
             $metaItemModel->setScenario($scenario);
             if (!$metaItemModel->validate()) {
+                $extraInfo = '';
+                // Add a URL to the schema.org type if this is a MetaJsonLD object
+                if ($isMetaJsonLdModel) {
+                    /** @var  $metaItemModel MetaJsonLd */
+                    $extraInfo = ' for http://schema.org/' . $metaItemModel->type;
+                }
                 $errorMsg =
                     Craft::t('seomatic', 'Scenario: "')
                     . $scenario
                     . '"'
+                    . $extraInfo
                     . PHP_EOL
                     . print_r($metaItemModel->render(), true);
-                    Craft::$logLevel($errorMsg, __METHOD__);
+                    Craft::info($errorMsg, __METHOD__);
                 foreach ($metaItemModel->errors as $param => $errors) {
                     $errorMsg = Craft::t('seomatic', $errorLabel) . $param;
                     foreach ($errors as $error) {
                         $errorMsg .= ' -> ' . $error;
                     }
+                    // Change the error level depending on the error message if this is a MetaJsonLD object
+                    if ($isMetaJsonLdModel) {
+                        if (strpos($error, 'recommended') !== false) {
+                            $logLevel = 'warning';
+                        }
+                        if (strpos($error, 'required') !== false
+                            || strpos($error, 'Must be') !== false
+                        ) {
+                            $logLevel = 'error';
+                        }
+                    }
                     Craft::$logLevel($errorMsg, __METHOD__);
+                    // Extra debugging info for MetaJsonLd objects
+                    if ($isMetaJsonLdModel) {
+                        $className = get_class($metaItemModel);
+                        /** @var  $className MetaJsonLd */
+                        $errorMsg = Craft::t('seomatic', $errorLabel) . $param;
+                        $errorMsg .= ' -> ' . $className::$schemaPropertyDescriptions[$param];
+                        Craft::info($errorMsg, __METHOD__);
+                    }
                 }
             }
         }

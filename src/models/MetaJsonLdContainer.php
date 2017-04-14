@@ -13,10 +13,6 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\base\MetaContainer;
 
-use Craft;
-
-use yii\web\View;
-
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -57,5 +53,4 @@ class MetaJsonLdContainer extends MetaContainer
 
     // Private Methods
     // =========================================================================
-
 }
