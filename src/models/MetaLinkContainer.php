@@ -13,6 +13,8 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\base\MetaContainer;
 
+use Craft;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -23,7 +25,7 @@ class MetaLinkContainer extends MetaContainer
     // Constants
     // =========================================================================
 
-    const CONTAINER_TYPE = 'LinkContainer';
+    const CONTAINER_TYPE = 'MetaLinkContainer';
 
     // Static Properties
     // =========================================================================
@@ -43,6 +45,24 @@ class MetaLinkContainer extends MetaContainer
 
     // Public Methods
     // =========================================================================
+
+    /**
+     * @inheritdoc
+     */
+    public function includeMetaData(): void
+    {
+        $view = Craft::$app->getView();
+        /** @var $metaLinkModel MetaLink */
+        foreach ($this->data as $metaLinkModel) {
+            $view->registerLinkTag($metaLinkModel->tagAttributes());
+            // If `devMode` is enabled, validate the Meta Link and output any model errors
+            if (Craft::$app->getConfig()->getGeneral()->devMode) {
+                $metaLinkModel->debugMetaItem(
+                    "Link attribute: "
+                );
+            }
+        }
+    }
 
     /**
      * @inheritdoc

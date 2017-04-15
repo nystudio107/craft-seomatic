@@ -13,7 +13,10 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\base\MetaContainer;
 
+use Craft;
+
 use yii\web\View;
+
 
 /**
  * @author    nystudio107
@@ -25,7 +28,7 @@ class MetaScriptContainer extends MetaContainer
     // Constants
     // =========================================================================
 
-    const CONTAINER_TYPE = 'ScriptContainer';
+    const CONTAINER_TYPE = 'MetaScriptContainer';
 
     // Static Properties
     // =========================================================================
@@ -50,6 +53,28 @@ class MetaScriptContainer extends MetaContainer
 
     // Public Methods
     // =========================================================================
+
+    /**
+     * @inheritdoc
+     */
+    public function includeMetaData(): void
+    {
+        $view = Craft::$app->getView();
+        /** @var $metaScriptModel MetaScript */
+        foreach ($this->data as $metaScriptModel) {
+            $js = $metaScriptModel->render();
+            $view->registerJs(
+                $js,
+                $this->position
+            );
+            // If `devMode` is enabled, validate the Meta Script and output any model errors
+            if (Craft::$app->getConfig()->getGeneral()->devMode) {
+                $metaScriptModel->debugMetaItem(
+                    "Script attribute: "
+                );
+            }
+        }
+    }
 
     /**
      * @inheritdoc

@@ -13,6 +13,10 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\base\MetaContainer;
 
+use Craft;
+
+use yii\web\View;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -23,7 +27,7 @@ class MetaJsonLdContainer extends MetaContainer
     // Constants
     // =========================================================================
 
-    const CONTAINER_TYPE = 'JsonLdContainer';
+    const CONTAINER_TYPE = 'MetaJsonLdContainer';
 
     // Static Properties
     // =========================================================================
@@ -43,6 +47,35 @@ class MetaJsonLdContainer extends MetaContainer
 
     // Public Methods
     // =========================================================================
+
+    /**
+     * @inheritdoc
+     */
+    public function includeMetaData(): void
+    {
+        $view = Craft::$app->getView();
+        /** @var $metaJsonLdModel MetaJsonLd */
+        foreach ($this->data as $metaJsonLdModel) {
+            $metaJsonLdModel->renderRaw = true;
+            $metaJsonLdModel->renderScriptTags = false;
+            $jsonLd = $metaJsonLdModel->render();
+            $view->registerScript(
+                $jsonLd,
+                View::POS_END,
+                ['type' => 'application/ld+json']
+            );
+            // If `devMode` is enabled, validate the JSON-LD and output any model errors
+            if (Craft::$app->getConfig()->getGeneral()->devMode) {
+                $metaJsonLdModel->debugMetaItem(
+                    'JSON-LD property: ',
+                    [
+                        'default' => 'error',
+                        'google' => 'warning'
+                    ]
+                );
+            }
+        }
+    }
 
     /**
      * @inheritdoc

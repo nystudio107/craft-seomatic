@@ -22,7 +22,7 @@ interface ContainerInterface
     // Constants
     // =========================================================================
 
-    const CONTAINER_TYPE = 'Generic';
+    const CONTAINER_TYPE = 'GenericContainer';
 
     // Static Properties
     // =========================================================================

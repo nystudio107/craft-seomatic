@@ -11,6 +11,9 @@
 
 namespace nystudio107\seomatic\base;
 
+use nystudio107\seomatic\models\MetaJsonLd;
+
+use Craft;
 use craft\base\Model;
 use craft\helpers\ArrayHelper;
 
@@ -93,6 +96,67 @@ abstract class MetaItem extends Model implements MetaItemInterface
         ksort($tagAttributes);
 
         return $tagAttributes;
+    }
+
+    /**
+     * Add debug logging for the MetaItem
+     *
+     * @param string   $errorLabel
+     * @param array    $scenarios
+     */
+    public function debugMetaItem(
+        $errorLabel = "Error: ",
+        $scenarios = ['default' => 'error']
+    ) {
+        $isMetaJsonLdModel = false;
+        if (is_subclass_of($this, MetaJsonLd::className())) {
+            $isMetaJsonLdModel = true;
+        }
+        foreach ($scenarios as $scenario => $logLevel) {
+            $this->setScenario($scenario);
+            if (!$this->validate()) {
+                $extraInfo = '';
+                // Add a URL to the schema.org type if this is a MetaJsonLD object
+                if ($isMetaJsonLdModel) {
+                    /** @var  $this MetaJsonLd */
+                    $extraInfo = ' for http://schema.org/' . $this->type;
+                }
+                $errorMsg =
+                    Craft::t('seomatic', 'Scenario: "')
+                    . $scenario
+                    . '"'
+                    . $extraInfo
+                    . PHP_EOL
+                    . print_r($this->render(), true);
+                Craft::info($errorMsg, __METHOD__);
+                foreach ($this->errors as $param => $errors) {
+                    $errorMsg = Craft::t('seomatic', $errorLabel) . $param;
+                    foreach ($errors as $error) {
+                        $errorMsg .= ' -> ' . $error;
+                        // Change the error level depending on the error message if this is a MetaJsonLD object
+                        if ($isMetaJsonLdModel) {
+                            if (strpos($error, 'recommended') !== false) {
+                                $logLevel = 'warning';
+                            }
+                            if (strpos($error, 'required') !== false
+                                || strpos($error, 'Must be') !== false
+                            ) {
+                                $logLevel = 'error';
+                            }
+                        }
+                    }
+                    Craft::$logLevel($errorMsg, __METHOD__);
+                    // Extra debugging info for MetaJsonLd objects
+                    if ($isMetaJsonLdModel) {
+                        $className = get_class($this);
+                        /** @var  $className MetaJsonLd */
+                        $errorMsg = Craft::t('seomatic', $errorLabel) . $param;
+                        $errorMsg .= ' -> ' . $className::$schemaPropertyDescriptions[$param];
+                        Craft::info($errorMsg, __METHOD__);
+                    }
+                }
+            }
+        }
     }
 
     // Private Methods

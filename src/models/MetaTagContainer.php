@@ -13,6 +13,11 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\base\MetaContainer;
 
+use Craft;
+
+use yii\web\View;
+
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -23,7 +28,7 @@ class MetaTagContainer extends MetaContainer
     // Constants
     // =========================================================================
 
-    const CONTAINER_TYPE = 'TagContainer';
+    const CONTAINER_TYPE = 'MetaTagContainer';
 
     // Static Properties
     // =========================================================================
@@ -43,6 +48,24 @@ class MetaTagContainer extends MetaContainer
 
     // Public Methods
     // =========================================================================
+
+    /**
+     * @inheritdoc
+     */
+    public function includeMetaData(): void
+    {
+        $view = Craft::$app->getView();
+        /** @var $metaTagModel MetaTag */
+        foreach ($this->data as $metaTagModel) {
+            $view->registerMetaTag($metaTagModel->tagAttributes());
+            // If `devMode` is enabled, validate the Meta Tag and output any model errors
+            if (Craft::$app->getConfig()->getGeneral()->devMode) {
+                $metaTagModel->debugMetaItem(
+                    "Tag attribute: "
+                );
+            }
+        }
+    }
 
     /**
      * @inheritdoc

@@ -11,20 +11,17 @@
 
 namespace nystudio107\seomatic\base;
 
-use nystudio107\seomatic\base\Container as SeomaticContainer;
-
 /**
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-abstract class MetaContainer extends SeomaticContainer implements MetaContainerInterface
+interface MetaContainerInterface
 {
-    // Traits
+
+    // Constants
     // =========================================================================
-
-    use MetaContainerTrait;
-
+    
     // Static Properties
     // =========================================================================
 
@@ -34,44 +31,10 @@ abstract class MetaContainer extends SeomaticContainer implements MetaContainerI
     // Public Properties
     // =========================================================================
 
-    /**
-     * The MetaItems in this container
-     *
-     * @var MetaItem
-     */
-    public $data = [];
-
     // Public Methods
     // =========================================================================
 
-    /**
-     * @inheritdoc
-     */
-    public function render(): string
-    {
-        $html = '';
-
-        /** @var  $metaItemModel MetaItem*/
-        foreach ($this->data as $metaItemModel) {
-            $html .= $metaItemModel->render();
-        }
-
-        return $html;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function includeMetaData(): void
-    {
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function normalizeContainerData(): void
-    {
-    }
+    public function includeMetaData(): void;
 
     // Private Methods
     // =========================================================================
