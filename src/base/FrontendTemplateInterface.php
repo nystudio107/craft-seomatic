@@ -9,21 +9,20 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-namespace nystudio107\seomatic\models;
-
-use nystudio107\seomatic\base\MetaContainer;
+namespace nystudio107\seomatic\base;
 
 /**
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaTagContainer extends MetaContainer
+interface FrontendTemplateInterface
 {
+
     // Constants
     // =========================================================================
 
-    const CONTAINER_TYPE = 'TagContainer';
+    const TEMPLATE_TYPE = 'Generic';
 
     // Static Properties
     // =========================================================================
@@ -34,22 +33,15 @@ class MetaTagContainer extends MetaContainer
     // Public Properties
     // =========================================================================
 
-    /**
-     * The data in this container
-     *
-     * @var MetaTag
-     */
-    public $data = [];
-
     // Public Methods
     // =========================================================================
 
     /**
-     * @inheritdoc
+     * Render the template as HTML-safe text
+     *
+     * @return string
      */
-    public function normalizeContainerData(): void
-    {
-    }
+    public function render(): string;
 
     // Private Methods
     // =========================================================================

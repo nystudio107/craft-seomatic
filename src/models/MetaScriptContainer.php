@@ -54,7 +54,7 @@ class MetaScriptContainer extends MetaContainer
     /**
      * @inheritdoc
      */
-    public function normalizeContainerData()
+    public function normalizeContainerData(): void
     {
     }
 

@@ -11,28 +11,51 @@
 
 namespace nystudio107\seomatic\base;
 
-use nystudio107\seomatic\base\Container as SeomaticContainer;
+use craft\base\Model;
 
 /**
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-abstract class MetaContainer extends SeomaticContainer
+abstract class FrontendTemplateContainer extends Model implements ContainerInterface
 {
+    // Traits
+    // =========================================================================
+
+    use ContainerTrait;
+
     // Static Properties
     // =========================================================================
 
     // Static Methods
     // =========================================================================
 
+    /**
+     * Create a new Frontend Template Container
+     *
+     * @param array $config
+     *
+     * @return null|MetaContainer
+     */
+    public static function create($config = [])
+    {
+        /** @var $model MetaContainer */
+        $model = null;
+        $className = self::className();
+        $model = new $className($config);
+        $model->normalizeContainerData();
+
+        return $model;
+    }
+
     // Public Properties
     // =========================================================================
 
     /**
-     * The MetaItems in this container
+     * The FrontendTemplates in this container
      *
-     * @var MetaItem
+     * @var FrontendTemplate
      */
     public $data = [];
 
@@ -46,9 +69,9 @@ abstract class MetaContainer extends SeomaticContainer
     {
         $html = '';
 
-        /** @var  $metaItemModel MetaItem*/
-        foreach ($this->data as $metaItemModel) {
-            $html .= $metaItemModel->render();
+        /** @var  $frontendTemplateModel FrontendTemplate */
+        foreach ($this->data as $frontendTemplateModel) {
+            $html .= $frontendTemplateModel->render();
         }
 
         return $html;
@@ -57,7 +80,7 @@ abstract class MetaContainer extends SeomaticContainer
     /**
      * @inheritdoc
      */
-    public function normalizeContainerData(): void
+    public function normalizeContainerData()
     {
     }
 

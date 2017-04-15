@@ -9,21 +9,24 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-namespace nystudio107\seomatic\models;
+namespace nystudio107\seomatic\base;
 
-use nystudio107\seomatic\base\MetaContainer;
+use craft\base\Model;
+use craft\helpers\ArrayHelper;
+
+use yii\helpers\Inflector;
 
 /**
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaTagContainer extends MetaContainer
+abstract class FrontendTemplate extends Model implements FrontendTemplateInterface
 {
-    // Constants
+    // Traits
     // =========================================================================
 
-    const CONTAINER_TYPE = 'TagContainer';
+    use FrontendTemplateTrait;
 
     // Static Properties
     // =========================================================================
@@ -34,21 +37,29 @@ class MetaTagContainer extends MetaContainer
     // Public Properties
     // =========================================================================
 
-    /**
-     * The data in this container
-     *
-     * @var MetaTag
-     */
-    public $data = [];
-
     // Public Methods
     // =========================================================================
 
     /**
      * @inheritdoc
      */
-    public function normalizeContainerData(): void
+    public function rules()
     {
+        $rules = parent::rules();
+        $rules = array_merge($rules, [
+            [['route'], 'required'],
+            [['route'], 'string'],
+        ]);
+
+        return $rules;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function render(): string
+    {
+        return '';
     }
 
     // Private Methods

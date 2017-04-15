@@ -16,15 +16,15 @@ namespace nystudio107\seomatic\base;
  * @package   Seomatic
  * @since     3.0.0
  */
-trait MetaContainerTrait
+trait FrontendTemplateTrait
 {
     // Properties
     // =========================================================================
 
     /**
-     * The data in this container
+     * The rout for this FrontendTemplate
      *
-     * @var MetaItem
+     * @var string
      */
-    public $data = [];
+    public $route;
 }

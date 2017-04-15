@@ -11,18 +11,19 @@
 
 namespace nystudio107\seomatic\base;
 
+use craft\base\Model;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-interface MetaContainerInterface
+abstract class Container extends Model implements ContainerInterface
 {
-
-    // Constants
+    // Traits
     // =========================================================================
 
-    const CONTAINER_TYPE = 'Generic';
+    use ContainerTrait;
 
     // Static Properties
     // =========================================================================
@@ -30,28 +31,59 @@ interface MetaContainerInterface
     // Static Methods
     // =========================================================================
 
-    public static function create($config = []);
+    /**
+     * Create a new Meta Container
+     *
+     * @param array $config
+     *
+     * @return null|Container
+     */
+    public static function create($config = [])
+    {
+        /** @var $model Container */
+        $model = null;
+        $className = self::className();
+        $model = new $className($config);
+        $model->normalizeContainerData();
+
+        return $model;
+    }
 
     // Public Properties
     // =========================================================================
+
+    /**
+     * The data in this container
+     *
+     * @var array
+     */
+    public $data = [];
 
     // Public Methods
     // =========================================================================
 
     /**
-     * Render the container's content
-     *
-     * @return string
+     * @inheritdoc
      */
-    public function render():string;
+    public function addData($data, string $key): void
+    {
+        $this->data[$key] = $data;
+    }
 
     /**
-     * Normalizes the containers’s data for use.
-     *
-     * This is called after container data is loaded, to allow it to be parsed,
-     * models instantiated, etc.
+     * @inheritdoc
      */
-    public function normalizeContainerData();
+    public function render(): string
+    {
+        return '';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function normalizeContainerData(): void
+    {
+    }
 
     // Private Methods
     // =========================================================================

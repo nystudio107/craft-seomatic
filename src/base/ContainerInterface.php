@@ -9,21 +9,20 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-namespace nystudio107\seomatic\models;
-
-use nystudio107\seomatic\base\MetaContainer;
+namespace nystudio107\seomatic\base;
 
 /**
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaTagContainer extends MetaContainer
+interface ContainerInterface
 {
+
     // Constants
     // =========================================================================
 
-    const CONTAINER_TYPE = 'TagContainer';
+    const CONTAINER_TYPE = 'Generic';
 
     // Static Properties
     // =========================================================================
@@ -31,26 +30,38 @@ class MetaTagContainer extends MetaContainer
     // Static Methods
     // =========================================================================
 
+    public static function create($config = []);
+
     // Public Properties
     // =========================================================================
-
-    /**
-     * The data in this container
-     *
-     * @var MetaTag
-     */
-    public $data = [];
 
     // Public Methods
     // =========================================================================
 
     /**
-     * @inheritdoc
+     * Add data to the container
+     *
+     * @param        $data
+     * @param string $key
      */
-    public function normalizeContainerData(): void
-    {
-    }
+    public function addData($data, string $key): void;
+
+    /**
+     * Render the container's content
+     *
+     * @return string
+     */
+    public function render():string;
+
+    /**
+     * Normalizes the containers’s data for use.
+     *
+     * This is called after container data is loaded, to allow it to be parsed,
+     * models instantiated, etc.
+     */
+    public function normalizeContainerData(): void;
 
     // Private Methods
     // =========================================================================
+
 }

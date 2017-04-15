@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\services;
 
+use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\models\MetaTag;
 use nystudio107\seomatic\models\MetaLink;
@@ -72,19 +73,41 @@ class Meta extends Component
     }
 
     /**
-     * @param $type string
+     * Add the passed in MetaItem to the MetaContainer of the $type and $key
+     *
      * @param $data MetaItem
+     * @param $type string
      * @param $key  string
      */
-    public function addMetaContainer(string $type, MetaItem $data, string $key = null)
+    public function addToMetaContainer(MetaItem $data, string $type, string $key = null)
     {
-        $className = null;
-        $key = $key . $type ?: $this->getHash($data);
-        // If a container already exists with this $key, just add to it
-        if (!empty($this->metaContainers[$key])) {
-            $container = $this->metaContainers[$key];
-            $container->data[$data->key] = $data;
+        /** @var  $container MetaContainer */
+        $key = $key . $type;
+        // If the MetaContainer doesn't exist, create it
+        if (empty($this->metaContainers[$key])) {
+            $container = $this->createMetaContainer($type, $key);
         } else {
+            $container = $this->metaContainers[$key];
+        }
+
+        $container->addData($data, $data->key);
+    }
+
+    /**
+     * Create a MetaContainer of the given $type with the $key
+     *
+     * @param string $type
+     * @param string $key
+     *
+     * @return MetaContainer
+     */
+    public function createMetaContainer(string $type, string $key): MetaContainer
+    {
+        /** @var  $container MetaContainer */
+        $container = null;
+        if (empty($this->metaContainers[$key])) {
+            /** @var  $className MetaContainer */
+            $className = null;
             // Create a new container based on the type passed in
             switch ($type) {
                 case MetaTagContainer::CONTAINER_TYPE:
@@ -101,16 +124,14 @@ class Meta extends Component
                     break;
             }
             if ($className) {
-                $metaItem = [];
-                $metaItem[$data->key] = $data;
-                $container = new $className([
-                    'data' => $metaItem,
-                ]);
+                $container = $className::create();
                 if ($container) {
                     $this->metaContainers[$key] = $container;
                 }
             }
         }
+
+        return $container;
     }
 
     /**
