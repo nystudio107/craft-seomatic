@@ -24,13 +24,7 @@ class MetaScript extends MetaItem
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'Script';
-
-    // Constants
-    // =========================================================================
-
-    // Static Properties
-    // =========================================================================
+    const ITEM_TYPE = 'MetaScript';
 
     // Static Methods
     // =========================================================================
@@ -87,7 +81,4 @@ class MetaScript extends MetaItem
     {
         return PluginTemplateHelper::renderPluginTemplate($this->templatePath, $this->vars);
     }
-
-    // Private Methods
-    // =========================================================================
 }

@@ -21,8 +21,6 @@ use nystudio107\seomatic\models\MetaJsonLdContainer;
 use Craft;
 use craft\base\Component;
 
-use yii\web\View;
-
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -30,15 +28,6 @@ use yii\web\View;
  */
 class Meta extends Component
 {
-    // Constants
-    // =========================================================================
-
-    // Static Properties
-    // =========================================================================
-
-    // Static Methods
-    // =========================================================================
-
     // Public Properties
     // =========================================================================
 

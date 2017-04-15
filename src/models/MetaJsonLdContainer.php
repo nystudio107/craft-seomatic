@@ -29,12 +29,6 @@ class MetaJsonLdContainer extends MetaContainer
 
     const CONTAINER_TYPE = 'MetaJsonLdContainer';
 
-    // Static Properties
-    // =========================================================================
-
-    // Static Methods
-    // =========================================================================
-
     // Public Properties
     // =========================================================================
 
@@ -83,7 +77,4 @@ class MetaJsonLdContainer extends MetaContainer
     public function normalizeContainerData(): void
     {
     }
-
-    // Private Methods
-    // =========================================================================
 }

@@ -23,9 +23,6 @@ use craft\web\View;
  */
 class PluginTemplate extends Component
 {
-    // Static Properties
-    // =========================================================================
-
     // Static Methods
     // =========================================================================
 
@@ -56,7 +53,4 @@ class PluginTemplate extends Component
 
         return Template::raw($htmlText);
     }
-
-    // Private Methods
-    // =========================================================================
 }

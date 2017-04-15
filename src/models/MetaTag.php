@@ -28,13 +28,7 @@ class MetaTag extends MetaItem
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'Tag';
-
-    // Constants
-    // =========================================================================
-
-    // Static Properties
-    // =========================================================================
+    const ITEM_TYPE = 'MetaTag';
 
     // Static Methods
     // =========================================================================
@@ -115,7 +109,4 @@ class MetaTag extends MetaItem
         $options = $this->tagAttributes();
         return Html::tag('meta', '', $options);
     }
-
-    // Private Methods
-    // =========================================================================
 }

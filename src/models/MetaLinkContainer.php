@@ -27,12 +27,6 @@ class MetaLinkContainer extends MetaContainer
 
     const CONTAINER_TYPE = 'MetaLinkContainer';
 
-    // Static Properties
-    // =========================================================================
-
-    // Static Methods
-    // =========================================================================
-
     // Public Properties
     // =========================================================================
 
@@ -70,7 +64,4 @@ class MetaLinkContainer extends MetaContainer
     public function normalizeContainerData(): void
     {
     }
-
-    // Private Methods
-    // =========================================================================
 }

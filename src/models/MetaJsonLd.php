@@ -33,7 +33,7 @@ class MetaJsonLd extends MetaItem
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'JsonLd';
+    const ITEM_TYPE = 'MetaJsonLd';
 
     // Static Properties
     // =========================================================================

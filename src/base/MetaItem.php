@@ -31,15 +31,6 @@ abstract class MetaItem extends Model implements MetaItemInterface
 
     use MetaItemTrait;
 
-    // Static Properties
-    // =========================================================================
-
-    // Static Methods
-    // =========================================================================
-
-    // Public Properties
-    // =========================================================================
-
     // Public Methods
     // =========================================================================
 
@@ -149,8 +140,8 @@ abstract class MetaItem extends Model implements MetaItemInterface
                     // Extra debugging info for MetaJsonLd objects
                     if ($isMetaJsonLdModel) {
                         $className = get_class($this);
-                        /** @var  $className MetaJsonLd */
                         $errorMsg = Craft::t('seomatic', $errorLabel) . $param;
+                        /** @var $className MetaJsonLd */
                         $errorMsg .= ' -> ' . $className::$schemaPropertyDescriptions[$param];
                         Craft::info($errorMsg, __METHOD__);
                     }
@@ -158,7 +149,4 @@ abstract class MetaItem extends Model implements MetaItemInterface
             }
         }
     }
-
-    // Private Methods
-    // =========================================================================
 }

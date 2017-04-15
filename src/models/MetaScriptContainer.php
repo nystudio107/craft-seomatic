@@ -17,7 +17,6 @@ use Craft;
 
 use yii\web\View;
 
-
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -29,12 +28,6 @@ class MetaScriptContainer extends MetaContainer
     // =========================================================================
 
     const CONTAINER_TYPE = 'MetaScriptContainer';
-
-    // Static Properties
-    // =========================================================================
-
-    // Static Methods
-    // =========================================================================
 
     // Public Properties
     // =========================================================================
@@ -82,7 +75,4 @@ class MetaScriptContainer extends MetaContainer
     public function normalizeContainerData(): void
     {
     }
-
-    // Private Methods
-    // =========================================================================
 }

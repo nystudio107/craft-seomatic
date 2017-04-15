@@ -24,16 +24,10 @@ interface ContainerInterface
 
     const CONTAINER_TYPE = 'GenericContainer';
 
-    // Static Properties
-    // =========================================================================
-
     // Static Methods
     // =========================================================================
 
     public static function create($config = []);
-
-    // Public Properties
-    // =========================================================================
 
     // Public Methods
     // =========================================================================
@@ -60,8 +54,4 @@ interface ContainerInterface
      * models instantiated, etc.
      */
     public function normalizeContainerData(): void;
-
-    // Private Methods
-    // =========================================================================
-
 }

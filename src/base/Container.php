@@ -25,9 +25,6 @@ abstract class Container extends Model implements ContainerInterface
 
     use ContainerTrait;
 
-    // Static Properties
-    // =========================================================================
-
     // Static Methods
     // =========================================================================
 
@@ -84,8 +81,4 @@ abstract class Container extends Model implements ContainerInterface
     public function normalizeContainerData(): void
     {
     }
-
-    // Private Methods
-    // =========================================================================
-
 }

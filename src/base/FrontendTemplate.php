@@ -12,9 +12,6 @@
 namespace nystudio107\seomatic\base;
 
 use craft\base\Model;
-use craft\helpers\ArrayHelper;
-
-use yii\helpers\Inflector;
 
 /**
  * @author    nystudio107
@@ -27,15 +24,6 @@ abstract class FrontendTemplate extends Model implements FrontendTemplateInterfa
     // =========================================================================
 
     use FrontendTemplateTrait;
-
-    // Static Properties
-    // =========================================================================
-
-    // Static Methods
-    // =========================================================================
-
-    // Public Properties
-    // =========================================================================
 
     // Public Methods
     // =========================================================================
@@ -61,7 +49,4 @@ abstract class FrontendTemplate extends Model implements FrontendTemplateInterfa
     {
         return '';
     }
-
-    // Private Methods
-    // =========================================================================
 }

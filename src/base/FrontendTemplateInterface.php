@@ -24,15 +24,6 @@ interface FrontendTemplateInterface
 
     const TEMPLATE_TYPE = 'Generic';
 
-    // Static Properties
-    // =========================================================================
-
-    // Static Methods
-    // =========================================================================
-
-    // Public Properties
-    // =========================================================================
-
     // Public Methods
     // =========================================================================
 
@@ -42,7 +33,4 @@ interface FrontendTemplateInterface
      * @return string
      */
     public function render(): string;
-
-    // Private Methods
-    // =========================================================================
 }

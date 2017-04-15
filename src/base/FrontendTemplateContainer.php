@@ -25,9 +25,6 @@ abstract class FrontendTemplateContainer extends Model implements ContainerInter
 
     use ContainerTrait;
 
-    // Static Properties
-    // =========================================================================
-
     // Static Methods
     // =========================================================================
 
@@ -80,11 +77,7 @@ abstract class FrontendTemplateContainer extends Model implements ContainerInter
     /**
      * @inheritdoc
      */
-    public function normalizeContainerData()
+    public function normalizeContainerData(): void
     {
     }
-
-    // Private Methods
-    // =========================================================================
-
 }

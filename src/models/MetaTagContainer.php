@@ -15,9 +15,6 @@ use nystudio107\seomatic\base\MetaContainer;
 
 use Craft;
 
-use yii\web\View;
-
-
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -29,12 +26,6 @@ class MetaTagContainer extends MetaContainer
     // =========================================================================
 
     const CONTAINER_TYPE = 'MetaTagContainer';
-
-    // Static Properties
-    // =========================================================================
-
-    // Static Methods
-    // =========================================================================
 
     // Public Properties
     // =========================================================================
@@ -73,7 +64,4 @@ class MetaTagContainer extends MetaContainer
     public function normalizeContainerData(): void
     {
     }
-
-    // Private Methods
-    // =========================================================================
 }

@@ -28,13 +28,7 @@ class MetaLink extends MetaItem
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'Link';
-
-    // Constants
-    // =========================================================================
-
-    // Static Properties
-    // =========================================================================
+    const ITEM_TYPE = 'MetaLink';
 
     // Static Methods
     // =========================================================================
@@ -155,7 +149,4 @@ class MetaLink extends MetaItem
         $options = $this->tagAttributes();
         return Html::tag('link', '', $options);
     }
-
-    // Private Methods
-    // =========================================================================
 }

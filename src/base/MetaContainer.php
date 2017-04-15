@@ -25,12 +25,6 @@ abstract class MetaContainer extends SeomaticContainer implements MetaContainerI
 
     use MetaContainerTrait;
 
-    // Static Properties
-    // =========================================================================
-
-    // Static Methods
-    // =========================================================================
-
     // Public Properties
     // =========================================================================
 
@@ -72,8 +66,4 @@ abstract class MetaContainer extends SeomaticContainer implements MetaContainerI
     public function normalizeContainerData(): void
     {
     }
-
-    // Private Methods
-    // =========================================================================
-
 }
