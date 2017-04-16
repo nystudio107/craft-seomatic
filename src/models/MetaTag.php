@@ -104,7 +104,7 @@ class MetaTag extends MetaItem
     /**
      * @inheritdoc
      */
-    public function render():string
+    public function render($params = []):string
     {
         $options = $this->tagAttributes();
         return Html::tag('meta', '', $options);

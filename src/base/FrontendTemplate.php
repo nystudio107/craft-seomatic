@@ -11,7 +11,11 @@
 
 namespace nystudio107\seomatic\base;
 
+use nystudio107\seomatic\Seomatic;
+
+use Craft;
 use craft\base\Model;
+use craft\helpers\UrlHelper;
 
 /**
  * @author    nystudio107
@@ -35,8 +39,8 @@ abstract class FrontendTemplate extends Model implements FrontendTemplateInterfa
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['route'], 'required'],
-            [['route'], 'string'],
+            [['path', 'controller', 'action'], 'required'],
+            [['path', 'controller', 'action'], 'string'],
         ]);
 
         return $rules;
@@ -45,7 +49,24 @@ abstract class FrontendTemplate extends Model implements FrontendTemplateInterfa
     /**
      * @inheritdoc
      */
-    public function render(): string
+    public function routeRules(): array
+    {
+        $rules = [];
+        $route =
+            Seomatic::$plugin->handle
+            . '/'
+            . $this->controller
+            . '/'
+            . $this->action;
+        $rules[$this->path] = ['route' => $route];
+
+        return $rules;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function render($params = []): string
     {
         return '';
     }

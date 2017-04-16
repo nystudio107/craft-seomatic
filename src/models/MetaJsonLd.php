@@ -118,21 +118,6 @@ class MetaJsonLd extends MetaItem
      */
     public $type;
 
-    /**
-     * Should the rendered JSON-LD be wrapped in \Twig_Markup for raw rendering
-     *
-     * @var bool
-     */
-    public $renderRaw = true;
-
-    /**
-     * Should the <script type="application/ld+json"> </script> tags be rendered
-     *
-     * @var bool
-     */
-    public $renderScriptTags = true;
-
-
     // Static Protected Properties
     // =========================================================================
 
@@ -223,17 +208,20 @@ class MetaJsonLd extends MetaItem
      */
     public function __toString()
     {
-        $this->renderRaw = false;
-        $this->renderScriptTags = true;
-        return $this->render();
+        return $this->render([
+            'renderRaw' => false,
+            'renderScriptTags' => true
+        ]);
     }
 
     /**
      * Renders a JSON-LD representation of the schema
      *
-     * @return string|\Twig_Markup
+     * @param array $params
+     *
+     * @return string
      */
-    public function render(): string
+    public function render($params = ['renderRaw' => true, 'renderScriptTags' => true]): string
     {
         $linebreak = "";
 
@@ -244,7 +232,7 @@ class MetaJsonLd extends MetaItem
 
         // Render the resulting JSON-LD
         $result = JsonLdHelper::encode($this);
-        if ($this->renderScriptTags) {
+        if ($params['renderScriptTags']) {
             $result =
                 '<script type="application/ld+json">'
                 . $linebreak
@@ -252,7 +240,7 @@ class MetaJsonLd extends MetaItem
                 . $linebreak
                 . '</script>';
         }
-        if ($this->renderRaw === true) {
+        if ($params['renderRaw'] === true) {
             $result = Template::raw($result);
         }
 
@@ -297,10 +285,6 @@ class MetaJsonLd extends MetaItem
         switch ($this->scenario) {
             case 'google':
             case 'default':
-                unset(
-                    $fields['renderRaw'],
-                    $fields['renderScriptTags']
-                );
                 break;
         }
 

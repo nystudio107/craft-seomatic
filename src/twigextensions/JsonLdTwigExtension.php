@@ -1,10 +1,23 @@
 <?php
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
+
 namespace nystudio107\seomatic\twigextensions;
 
-use nystudio107\seomatic\models\JsonLd;
+use nystudio107\seomatic\models\MetaJsonLd;
 
-use Craft;
-
+/**
+ * @author    nystudio107
+ * @package   Seomatic
+ * @since     3.0.0
+ */
 class JsonLdTwigExtension extends \Twig_Extension
 {
 
@@ -41,13 +54,15 @@ class JsonLdTwigExtension extends \Twig_Extension
 
     /**
      * Create a new JSON-LD schema type object
+     *
      * @param  string $jsonLdType The schema.org type to create
      * @param  array  $config     The default attributes for the model
+     *
      * @return mixed              The model object
      */
     public function createJsonLd($jsonLdType, $config = [])
     {
-		return $someSchema = JsonLd::create($jsonLdType, $config);
-    } /* -- createJsonLd */
+        return $someSchema = MetaJsonLd::create($jsonLdType, $config);
+    }
 
-} /* -- JsonLdTwigExtension */
+}

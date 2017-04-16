@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\controllers;
 
-use nystudio107\seomatic\models\JsonLd;
+use nystudio107\seomatic\models\MetaJsonLd;
 
 use Craft;
 use craft\web\Controller;
@@ -29,12 +29,14 @@ class JsonLdController extends Controller
     /**
      * Get the fully composed schema type
      *
+     * @param $schemaType
+     *
      * @return \yii\web\Response
      */
     public function actionGetType($schemaType)
     {
         $result = null;
-        $jsonLdType = JsonLd::create($schemaType);
+        $jsonLdType = MetaJsonLd::create($schemaType);
 
         if ($jsonLdType) {
             // Get the static properties
@@ -49,6 +51,8 @@ class JsonLdController extends Controller
 
     /**
      * Get the decomposed schema type
+     *
+     * @param $schemaType
      *
      * @return \yii\web\Response
      */
@@ -75,5 +79,4 @@ class JsonLdController extends Controller
         }
         return $this->asJson($result);
     }
-
 }

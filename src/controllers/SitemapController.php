@@ -15,11 +15,9 @@ use Craft;
 use craft\web\Controller;
 
 /**
- * Sitemap controller for SEOmatic
- *
  * @author    nystudio107
- * @package   SEOmatic
- * @since     2.0.0
+ * @package   Seomatic
+ * @since     3.0.0
  */
 class SitemapController extends Controller
 {
@@ -29,7 +27,9 @@ class SitemapController extends Controller
     /**
      * @inheritdoc
      */
-    protected $allowAnonymous = ['get-index'];
+    protected $allowAnonymous = [
+        'sitemap-index'
+    ];
 
     // Public Methods
     // =========================================================================
@@ -39,11 +39,11 @@ class SitemapController extends Controller
      *
      * @return string
      */
-    public function actionGetIndex()
+    public function actionSitemapIndex()
     {
-        $view = Craft::$app->getView();
-        $view->setTemplatesPath(Seomatic::$plugin->getBasePath());
-        return $this->renderTemplate('templates/sitemap-index', array(
-        ));
+        $result = Seomatic::$plugin->sitemap->renderTemplate('sitemap-index');
+
+        //return $this->asRaw($result);
+        return $this->asXml($result);
     }
 }

@@ -41,7 +41,7 @@ abstract class MetaContainer extends SeomaticContainer implements MetaContainerI
     /**
      * @inheritdoc
      */
-    public function render(): string
+    public function render($params = []): string
     {
         $html = '';
 

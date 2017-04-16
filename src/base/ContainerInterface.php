@@ -33,7 +33,7 @@ interface ContainerInterface
     // =========================================================================
 
     /**
-     * Add data to the container
+     * Add data to the container. If the $key already exists, it is overwritten
      *
      * @param        $data
      * @param string $key
@@ -43,9 +43,11 @@ interface ContainerInterface
     /**
      * Render the container's content
      *
+     * @param array $params
+     *
      * @return string
      */
-    public function render():string;
+    public function render($params = []):string;
 
     /**
      * Normalizes the containers’s data for use.

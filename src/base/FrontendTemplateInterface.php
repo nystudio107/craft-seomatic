@@ -22,15 +22,24 @@ interface FrontendTemplateInterface
     // Constants
     // =========================================================================
 
-    const TEMPLATE_TYPE = 'Generic';
+    const TEMPLATE_TYPE = 'GenericTemplate';
 
     // Public Methods
     // =========================================================================
 
     /**
+     * Return the route for this frontend template as an array of key => value pairs
+     *
+     * @return array
+     */
+    public function routeRules(): array;
+
+    /**
      * Render the template as HTML-safe text
+     *
+     * @param array $params
      *
      * @return string
      */
-    public function render(): string;
+    public function render($params = []): string;
 }

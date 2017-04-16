@@ -50,9 +50,10 @@ class MetaJsonLdContainer extends MetaContainer
         $view = Craft::$app->getView();
         /** @var $metaJsonLdModel MetaJsonLd */
         foreach ($this->data as $metaJsonLdModel) {
-            $metaJsonLdModel->renderRaw = true;
-            $metaJsonLdModel->renderScriptTags = false;
-            $jsonLd = $metaJsonLdModel->render();
+            $jsonLd = $metaJsonLdModel->render([
+                'renderRaw' => true,
+                'renderScriptTags' => false
+            ]);
             $view->registerScript(
                 $jsonLd,
                 View::POS_END,

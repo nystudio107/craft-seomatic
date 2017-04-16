@@ -22,9 +22,23 @@ trait FrontendTemplateTrait
     // =========================================================================
 
     /**
-     * The rout for this FrontendTemplate
+     * The path for this FrontendTemplate
      *
      * @var string
      */
-    public $route;
+    public $path;
+
+    /**
+     * The controller for this FrontendTemplate
+     *
+     * @var string
+     */
+    public $controller;
+
+    /**
+     * The action for this FrontendTemplate
+     *
+     * @var string
+     */
+    public $action;
 }

@@ -12,17 +12,12 @@
 namespace nystudio107\seomatic;
 
 use nystudio107\seomatic\services\Meta as MetaService;
-use nystudio107\seomatic\services\Sitemaps as SitemapsService;
+use nystudio107\seomatic\services\Sitemap as SitemapService;
 use nystudio107\seomatic\twigextensions\JsonLdTwigExtension;
 use nystudio107\seomatic\variables\SeomaticVariable;
 
 use Craft;
 use craft\base\Plugin;
-use craft\web\UrlManager;
-use craft\events\RegisterUrlRulesEvent;
-
-use yii\base\Event;
-use yii\web\View;
 
 /**
  * Class Seomatic
@@ -31,8 +26,8 @@ use yii\web\View;
  * @package   Seomatic
  * @since     3.0.0
  *
- * @property  MetaService       meta
- * @property  SitemapsService   sitemaps
+ * @property  MetaService      meta
+ * @property  SitemapService   sitemap
  */
 class Seomatic extends Plugin
 {
@@ -50,33 +45,16 @@ class Seomatic extends Plugin
         self::$plugin = $this;
         $this->name = $this->getName();
 
-        $request = Craft::$app->getRequest();
-
         // Add in our Twig extensions
         Craft::$app->view->twig->addExtension(new JsonLdTwigExtension());
 
+        $request = Craft::$app->getRequest();
         // Only respond to non-console site requests
         if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
             // Load the meta containers for this page
             Seomatic::$plugin->meta->loadMetaContainers();
-
-            // Register our site routes
-            Event::on(
-                UrlManager::className(),
-                UrlManager::EVENT_REGISTER_SITE_URL_RULES,
-                function (RegisterUrlRulesEvent $event) {
-                    $event->rules['sitemap.xml'] = 'seomatic/sitemap/get-index';
-                }
-            );
-
-            // Listen for the page rendering event
-            Event::on(
-                View::className(),
-                View::EVENT_END_PAGE,
-                function (Event $event) {
-                    Seomatic::$plugin->meta->includeMetaContainers();
-                }
-            );
+            // Load the sitemap containers
+            Seomatic::$plugin->sitemap->loadSitemapContainers();
         }
 
         // We're loaded

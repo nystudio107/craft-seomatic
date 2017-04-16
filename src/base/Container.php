@@ -37,11 +37,12 @@ abstract class Container extends Model implements ContainerInterface
      */
     public static function create($config = [])
     {
-        /** @var $model Container */
-        $model = null;
         $className = self::className();
+        /** @var $model Container */
         $model = new $className($config);
-        $model->normalizeContainerData();
+        if ($model) {
+            $model->normalizeContainerData();
+        }
 
         return $model;
     }
@@ -70,7 +71,7 @@ abstract class Container extends Model implements ContainerInterface
     /**
      * @inheritdoc
      */
-    public function render(): string
+    public function render($params = []): string
     {
         return '';
     }

@@ -69,7 +69,7 @@ abstract class MetaItem extends Model implements MetaItemInterface
     /**
      * @inheritdoc
      */
-    public function render(): string
+    public function render($params = []): string
     {
         return '';
     }

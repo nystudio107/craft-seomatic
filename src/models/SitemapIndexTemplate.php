@@ -11,20 +11,19 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\helpers\PluginTemplate as PluginTemplateHelper;
-use nystudio107\seomatic\base\MetaItem;
+use nystudio107\seomatic\base\FrontendTemplate;
 
 /**
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaScript extends MetaItem
+class SitemapIndexTemplate extends FrontendTemplate
 {
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'MetaScript';
+    const TEMPLATE_TYPE = 'SitemapIndexTemplate';
 
     // Static Methods
     // =========================================================================
@@ -32,29 +31,23 @@ class MetaScript extends MetaItem
     /**
      * @param array $config
      *
-     * @return null|MetaScript
+     * @return null|SitemapIndexTemplate
      */
     public static function create(array $config = [])
     {
-        $model = null;
-        $model = new MetaScript($config);
-        $model->key = $model->templatePath;
+        $defaults = [
+            'path' => 'sitemap.xml',
+            'controller' => 'sitemap',
+            'action' => 'sitemap-index'
+        ];
+        $config = array_merge($config, $defaults);
+        $model = new SitemapIndexTemplate($config);
 
         return $model;
     }
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * @var string
-     */
-    public $templatePath;
-
-    /**
-     * @var array
-     */
-    public $vars;
 
     // Public Methods
     // =========================================================================
@@ -66,9 +59,6 @@ class MetaScript extends MetaItem
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['templatePath'], 'required'],
-            [['templatePath'], 'string'],
-            [['vars'], 'safe'],
         ]);
 
         return $rules;
@@ -77,8 +67,24 @@ class MetaScript extends MetaItem
     /**
      * @inheritdoc
      */
-    public function render($params = []):string
+    public function fields()
     {
-        return PluginTemplateHelper::renderPluginTemplate($this->templatePath, $this->vars);
+        $fields = parent::fields();
+        if ($this->scenario === 'default') {
+        }
+
+        return $fields;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function render($params = []): string
+    {
+        $lines = [];
+        $lines[] = '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        $lines[] = '</sitemapindex>';
+
+        return implode("\r", $lines);
     }
 }

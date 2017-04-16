@@ -46,7 +46,7 @@
         "class": "nystudio107\\seomatic\\Seomatic",
         "components": {
             "meta": "nystudio107\\seomatic\\services\\Meta",
-            "sitemaps": "nystudio107\\seomatic\\services\\Sitemaps"
+            "sitemap": "nystudio107\\seomatic\\services\\Sitemap"
         }
     }
 }

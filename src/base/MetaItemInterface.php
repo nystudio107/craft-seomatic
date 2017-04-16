@@ -30,7 +30,9 @@ interface MetaItemInterface
     /**
      * Render the meta item as HTML-safe text
      *
+     * @param array $params
+     *
      * @return string
      */
-    public function render(): string;
+    public function render($params = []): string;
 }

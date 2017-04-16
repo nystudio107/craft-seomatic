@@ -9,42 +9,18 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-namespace nystudio107\seomatic\base;
+namespace nystudio107\seomatic\models;
 
-use craft\base\Model;
+use nystudio107\seomatic\base\Container as SeomaticContainer;
+use nystudio107\seomatic\base\FrontendTemplate;
 
 /**
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-abstract class FrontendTemplateContainer extends Model implements ContainerInterface
+class FrontendTemplateContainer extends SeomaticContainer
 {
-    // Traits
-    // =========================================================================
-
-    use ContainerTrait;
-
-    // Static Methods
-    // =========================================================================
-
-    /**
-     * Create a new Frontend Template Container
-     *
-     * @param array $config
-     *
-     * @return null|MetaContainer
-     */
-    public static function create($config = [])
-    {
-        /** @var $model MetaContainer */
-        $model = null;
-        $className = self::className();
-        $model = new $className($config);
-        $model->normalizeContainerData();
-
-        return $model;
-    }
 
     // Public Properties
     // =========================================================================
@@ -62,7 +38,7 @@ abstract class FrontendTemplateContainer extends Model implements ContainerInter
     /**
      * @inheritdoc
      */
-    public function render(): string
+    public function render($params = []): string
     {
         $html = '';
 

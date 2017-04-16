@@ -20,6 +20,9 @@ use nystudio107\seomatic\models\MetaJsonLdContainer;
 
 use Craft;
 use craft\base\Component;
+use craft\web\View;
+
+use yii\base\Event;
 
 /**
  * @author    nystudio107
@@ -28,11 +31,11 @@ use craft\base\Component;
  */
 class Meta extends Component
 {
-    // Public Properties
+    // Protected Properties
     // =========================================================================
 
     /**
-     * @var array
+     * @var MetaContainer
      */
     protected $metaContainers = [];
 
@@ -46,6 +49,15 @@ class Meta extends Component
     {
         $this->loadGlobalMetaContainers();
         $this->loadSectionMetaContainers();
+
+        // Listen for the page rendering event
+        Event::on(
+            View::className(),
+            View::EVENT_END_PAGE,
+            function (Event $event) {
+                $this->includeMetaContainers();
+            }
+        );
     }
 
     /**
