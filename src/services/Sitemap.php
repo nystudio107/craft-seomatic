@@ -18,8 +18,9 @@ use nystudio107\seomatic\models\SitemapTemplate;
 
 use Craft;
 use craft\base\Component;
-use craft\web\UrlManager;
 use craft\events\RegisterUrlRulesEvent;
+use craft\helpers\UrlHelper;
+use craft\web\UrlManager;
 
 use yii\base\Event;
 
@@ -94,5 +95,29 @@ class Sitemap extends Component
         }
 
         return $html;
+    }
+
+    /**
+     * Submit the sitemap index to the search engine services
+     */
+    public function submitSitemapIndex(): void
+    {
+        // Services URLs to submit the sitemaps to
+        $serviceUrls = [
+            'google' => 'http://www.google.com/webmasters/sitemaps/ping?sitemap=',
+            'bing'   => 'http://www.bing.com/webmaster/ping.aspx?siteMap=',
+        ];
+
+        // Submit the sitemap to each service
+        foreach ($serviceUrls as &$url) {
+            // create new guzzle client
+            $guzzleClient = Craft::createGuzzleClient(['timeout' => 120, 'connect_timeout' => 120]);
+
+            try {
+                $guzzleClient->post($url . UrlHelper::siteUrl('sitemap.xml'));
+            } catch (\Exception $e) {
+                Craft::error("Error submitting sitemap: " . $e->getMessage(), 'seomatic');
+            }
+        }
     }
 }
