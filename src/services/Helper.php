@@ -95,8 +95,6 @@ class Helper extends Component
             // Get a MetaBundle for each site
             foreach ($siteSettings as $siteSetting) {
                 if ($siteSetting->hasUrls) {
-                    $filteredSiteSettingsArray = $siteSettingsArray;
-                    ArrayHelper::remove($filteredSiteSettingsArray, $siteSetting->siteId);
                     $metaBundle = new MetaBundle([
                         'sourceElementType'  => Entry::class,
                         'sourceId'           => $section->id,
@@ -105,7 +103,7 @@ class Helper extends Component
                         'sourceType'         => $section->type,
                         'sourceTemplate'     => $siteSetting->template,
                         'sourceSiteId'       => $siteSetting->siteId,
-                        'sourceAltSiteSettings' => $filteredSiteSettingsArray,
+                        'sourceAltSiteSettings' => $siteSettingsArray,
                     ]);
                     $metaBundles[] = $metaBundle;
                 }

@@ -113,7 +113,7 @@ class SitemapTemplate extends FrontendTemplate
             $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
             // One sitemap entry for each element
             $metaBundle = Seomatic::$plugin->helper->metaBundleByHandle($handle, $siteId);
-            $multiSite = count($metaBundle->sourceAltSiteSettings) > 0;
+            $multiSite = count($metaBundle->sourceAltSiteSettings) > 1;
             $elements = null;
             if ($metaBundle && $metaBundle->sitemapUrls) {
                 $urlsetLine = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"';
