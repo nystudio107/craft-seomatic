@@ -43,7 +43,9 @@ class SitemapTemplate extends FrontendTemplate
 
     const CACHE_KEY = 'seomatic_sitemap_';
 
-    const CACHE_TAGS = 'seomatic_sitemap_';
+    const GLOBAL_SITEMAP_CACHE_TAG = 'seomatic_sitemap';
+
+    const SITEMAP_CACHE_TAG = 'seomatic_sitemap_';
 
     const FILE_TYPES = [
         'excel',
@@ -115,7 +117,15 @@ class SitemapTemplate extends FrontendTemplate
         $handle = $params['handle'];
         $siteId = $params['siteId'];
         $duration = Craft::$app->getConfig()->getGeneral()->devMode ? 1 : null;
-        $dependency = new TagDependency(['tags' => $this::CACHE_TAGS . $handle]);
+        $dependency = new TagDependency(
+            [
+                'tags' =>
+                    [
+                        $this::GLOBAL_SITEMAP_CACHE_TAG,
+                        $this::SITEMAP_CACHE_TAG . $handle,
+                    ],
+            ]
+        );
 
         return $cache->getOrSet($this::CACHE_KEY . $handle, function () use ($handle, $siteId) {
             $lines = [];

@@ -34,7 +34,9 @@ class SitemapIndexTemplate extends FrontendTemplate
 
     const CACHE_KEY = 'seomatic_sitemap_index';
 
-    const CACHE_TAGS = 'seomatic_sitemap';
+    const GLOBAL_SITEMAP_CACHE_TAG = 'seomatic_sitemap';
+
+    const SITEMAP_INDEX_CACHE_TAG = 'seomatic_sitemap_index';
 
     // Static Methods
     // =========================================================================
@@ -47,9 +49,9 @@ class SitemapIndexTemplate extends FrontendTemplate
     public static function create(array $config = [])
     {
         $defaults = [
-            'path' => 'sitemap.xml',
+            'path'       => 'sitemap.xml',
             'controller' => 'sitemap',
-            'action' => 'sitemap-index',
+            'action'     => 'sitemap-index',
         ];
         $config = array_merge($config, $defaults);
         $model = new SitemapIndexTemplate($config);
@@ -94,7 +96,15 @@ class SitemapIndexTemplate extends FrontendTemplate
     {
         $cache = Craft::$app->getCache();
         $duration = Craft::$app->getConfig()->getGeneral()->devMode ? 1 : null;
-        $dependency = new TagDependency(['tags' => $this::CACHE_TAGS]);
+        $dependency = new TagDependency(
+            [
+                'tags' =>
+                    [
+                        $this::GLOBAL_SITEMAP_CACHE_TAG,
+                        $this::SITEMAP_INDEX_CACHE_TAG,
+                    ],
+            ]
+        );
 
         return $cache->getOrSet($this::CACHE_KEY, function () {
             $lines = [];
