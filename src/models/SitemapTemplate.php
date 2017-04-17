@@ -17,8 +17,10 @@ use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 
 use Craft;
-use craft\helpers\UrlHelper;
 use craft\elements\Entry;
+use craft\fields\Assets;
+use craft\fields\Matrix;
+use craft\helpers\UrlHelper;
 
 use yii\caching\TagDependency;
 
@@ -135,7 +137,8 @@ class SitemapTemplate extends FrontendTemplate
                     $lines[] = '    </changefreq>';
                     // Handle any images
                     if ($metaBundle->sitemapImages) {
-                        $assetFields = FieldHelper::assetFields($element);
+                        // Regular Assets fields
+                        $assetFields = FieldHelper::fieldsOfType($element, Assets::className());
                         foreach ($assetFields as $assetField) {
                             foreach ($element[$assetField] as $asset) {
                                 if ($asset->kind === 'image') {
@@ -147,6 +150,27 @@ class SitemapTemplate extends FrontendTemplate
                                     $lines[] = '        ' . $asset->title;
                                     $lines[] = '      </image:title>';
                                     $lines[] = '    </image:image>';
+                                }
+                            }
+                        }
+                        // Assets embeded in Matrix fields
+                        $matrixFields = FieldHelper::fieldsOfType($element, Matrix::className());
+                        foreach ($matrixFields as $matrixField) {
+                            foreach ($element[$matrixField] as $matrixBlock) {
+                                $assetFields = FieldHelper::matrixFieldsOfType($matrixBlock, Assets::className());
+                                foreach ($assetFields as $assetField) {
+                                    foreach ($matrixBlock[$assetField] as $asset) {
+                                        if ($asset->kind === 'image') {
+                                            $lines[] = '    <image:image>';
+                                            $lines[] = '      <image:loc>';
+                                            $lines[] = '        ' . $asset->url;
+                                            $lines[] = '      </image:loc>';
+                                            $lines[] = '      <image:title>';
+                                            $lines[] = '        ' . $asset->title;
+                                            $lines[] = '      </image:title>';
+                                            $lines[] = '    </image:image>';
+                                        }
+                                    }
                                 }
                             }
                         }

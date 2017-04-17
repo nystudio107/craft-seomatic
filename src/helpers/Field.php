@@ -14,8 +14,7 @@ namespace nystudio107\seomatic\helpers;
 use Craft;
 use craft\base\Component;
 use craft\base\Element;
-use craft\fields\Assets;
-use craft\models\FieldLayout;
+use craft\elements\MatrixBlock;
 
 /**
  * @author    nystudio107
@@ -27,19 +26,40 @@ class Field extends Component
     // Static Methods
     // =========================================================================
 
-    public static function assetFields(Element $element)
+    /**
+     * @param Element $element
+     * @param string  $fieldType
+     *
+     * @return array
+     */
+    public static function fieldsOfType(Element $element, string $fieldType)
     {
-        $assetFields = [];
+        $foundFields = [];
 
-        /** @var  $layout FieldLayout */
         $layout = $element->getFieldLayout();
         $fields = $layout->getFields();
         foreach ($fields as $field) {
-            if (($field instanceof Assets) || (is_subclass_of($field, Assets::class))) {
-                $assetFields[] = $field->handle;
+            if (($field instanceof $fieldType) || (is_subclass_of($field, $fieldType))) {
+                $foundFields[] = $field->handle;
             }
         }
 
-        return $assetFields;
+        return $foundFields;
     }
+
+    public static function matrixFieldsOfType(MatrixBlock $matrixBlock, string $fieldType)
+    {
+        $foundFields = [];
+
+        $matrixBlockTypeModel = $matrixBlock->getType();
+        $fields = $matrixBlockTypeModel->getFields();
+        foreach ($fields as $field) {
+            if (($field instanceof $fieldType) || (is_subclass_of($field, $fieldType))) {
+                $foundFields[] = $field->handle;
+            }
+        }
+
+        return $foundFields;
+    }
+
 }
