@@ -38,9 +38,9 @@ class SitemapController extends Controller
     // =========================================================================
 
     /**
-     * Returns the sitemap index.
+     * Returns the rendered sitemap index.
      *
-     * @return string
+     * @return Response
      */
     public function actionSitemapIndex()
     {
@@ -53,15 +53,22 @@ class SitemapController extends Controller
     }
 
     /**
-     * Returns a sitemap.
+     * Returns a rendered sitemap.
      *
-     * @return string
+     * @param string      $handle
+     * @param int         $siteId
+     * @param string|null $file
+     *
+     * @return Response
      */
-    public function actionSitemap($handle, $file = null)
+    public function actionSitemap(string $handle, int $siteId, string $file = null)
     {
         $xml = Seomatic::$plugin->sitemap->renderTemplate(
             'sitemap',
-            ['handle' => $handle]
+            [
+                'handle' => $handle,
+                'siteId' => $siteId
+            ]
         );
 
         $headers = Craft::$app->response->headers;

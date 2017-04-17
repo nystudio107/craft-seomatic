@@ -59,6 +59,11 @@ class MetaBundle extends Model
     public $sourceSiteId;
 
     /**
+     * @var array
+     */
+    public $sourceAltSiteSettings = [];
+
+    /**
      * @var string
      */
     public $sourceDateUpdated;
@@ -77,6 +82,11 @@ class MetaBundle extends Model
      * @var string
      */
     public $sitemapChangeFreq = 'weekly';
+
+    /**
+     * @var float
+     */
+    public $sitemapPriority = 0.5;
 
     // Methods
     // =========================================================================
@@ -110,6 +120,7 @@ class MetaBundle extends Model
                     'sourceSiteId',
                     'sourceDateUpdated',
                     'sitemapChangeFreq',
+                    'sitemapPriority',
                 ],
                 'required'
             ],
@@ -126,6 +137,8 @@ class MetaBundle extends Model
             ],
             [['sourceId', 'sourceSiteId'], 'number', 'min' => 1],
             [['sourceDateUpdated'], 'datetime'],
+            [['sourceAltSiteSettings'], 'safe'],
+            [['sitemapPriority'], 'number'],
         ];
         return $rules;
     }

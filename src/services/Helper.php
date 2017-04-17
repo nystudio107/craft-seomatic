@@ -16,6 +16,7 @@ use nystudio107\seomatic\models\MetaBundle;
 use Craft;
 use craft\base\Component;
 use craft\elements\Entry;
+use craft\helpers\ArrayHelper;
 use craft\models\Section;
 use craft\models\Section_SiteSettings;
 use craft\services\Categories;
@@ -40,16 +41,17 @@ class Helper extends Component
 
     /**
      * @param string $handle
+     * @param int    $siteId
      *
-     * @return null|MetaBundle
+     * @return MetaBundle
      */
-    public function metaBundleByHandle(string $handle): MetaBundle
+    public function metaBundleByHandle(string $handle, int $siteId = 1): MetaBundle
     {
         // @todo this should look in the seomatic_meta_bundles db table
         $metaBundles = $this->metaBundles();
         /** @var  $metaBundle MetaBundle */
         foreach ($metaBundles as $metaBundle) {
-            if ($handle === $metaBundle->sourceHandle) {
+            if ($handle === $metaBundle->sourceHandle && $siteId == $metaBundle->sourceSiteId) {
                 return $metaBundle;
             }
         }
@@ -72,20 +74,38 @@ class Helper extends Component
 
         // Get all of the sections with URLs
         $sections = Craft::$app->getSections()->getAllSections();
-        /** @var  $section Section */
         foreach ($sections as $section) {
+            // Get the site settings and turn them into arrays
             $siteSettings = $section->getSiteSettings();
+            $siteSettingsArray = [];
             /** @var  $siteSetting Section_SiteSettings */
             foreach ($siteSettings as $siteSetting) {
                 if ($siteSetting->hasUrls) {
+                    $siteSettingArray = $siteSetting->toArray();
+                    // Get the site language
+                    $site = Craft::$app->getSites()->getSiteById($siteSetting->siteId);
+                    $language = $site->language;
+                    $language = strtolower($language);
+                    $language = str_replace('_', '-', $language);
+                    $siteSettingArray['language'] = $language;
+                    $siteSettingsArray[] = $siteSettingArray;
+                }
+            }
+            $siteSettingsArray = ArrayHelper::index($siteSettingsArray, 'siteId');
+            // Get a MetaBundle for each site
+            foreach ($siteSettings as $siteSetting) {
+                if ($siteSetting->hasUrls) {
+                    $filteredSiteSettingsArray = $siteSettingsArray;
+                    ArrayHelper::remove($filteredSiteSettingsArray, $siteSetting->siteId);
                     $metaBundle = new MetaBundle([
-                        'sourceElementType' => Entry::class,
-                        'sourceId' => $section->id,
-                        'sourceName' => $section->name,
-                        'sourceHandle' => $section->handle,
-                        'sourceType' => $section->type,
-                        'sourceTemplate' => $siteSetting->template,
-                        'sourceSiteId' => $siteSetting->siteId,
+                        'sourceElementType'  => Entry::class,
+                        'sourceId'           => $section->id,
+                        'sourceName'         => $section->name,
+                        'sourceHandle'       => $section->handle,
+                        'sourceType'         => $section->type,
+                        'sourceTemplate'     => $siteSetting->template,
+                        'sourceSiteId'       => $siteSetting->siteId,
+                        'sourceAltSiteSettings' => $filteredSiteSettingsArray,
                     ]);
                     $metaBundles[] = $metaBundle;
                 }

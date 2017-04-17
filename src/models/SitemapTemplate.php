@@ -11,6 +11,8 @@
 
 namespace nystudio107\seomatic\models;
 
+use craft\models\Section;
+use craft\models\Section_SiteSettings;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\models\MetaBundle;
@@ -21,7 +23,9 @@ use craft\elements\Entry;
 use craft\elements\Asset;
 use craft\fields\Assets as AssetsField;
 use craft\fields\Matrix as MatrixField;
+use craft\models\Site;
 use craft\helpers\UrlHelper;
+use craft\services\Sites;
 
 use yii\caching\TagDependency;
 
@@ -52,7 +56,7 @@ class SitemapTemplate extends FrontendTemplate
     public static function create(array $config = [])
     {
         $defaults = [
-            'path' => 'sitemaps/<handle:[-\w\.*]+>/<file:[-\w\.*]+>',
+            'path' => 'sitemaps/<handle:[-\w\.*]+>/<siteId:\d+>/<file:[-\w\.*]+>',
             'controller' => 'sitemap',
             'action' => 'sitemap',
         ];
@@ -99,24 +103,29 @@ class SitemapTemplate extends FrontendTemplate
     {
         $cache = Craft::$app->getCache();
         $handle = $params['handle'];
+        $siteId = $params['siteId'];
         $duration = Craft::$app->getConfig()->getGeneral()->devMode ? 1 : null;
         $dependency = new TagDependency(['tags' => $this::CACHE_TAGS . $handle]);
 
-        return $cache->getOrSet($this::CACHE_KEY . $handle, function () use ($handle) {
+        return $cache->getOrSet($this::CACHE_KEY . $handle, function () use ($handle, $siteId) {
             $lines = [];
             // Sitemap index XML header and opening tag
             $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
             // One sitemap entry for each element
-            $metaBundle = Seomatic::$plugin->helper->metaBundleByHandle($handle);
+            $metaBundle = Seomatic::$plugin->helper->metaBundleByHandle($handle, $siteId);
+            $multiSite = count($metaBundle->sourceAltSiteSettings) > 0;
             $elements = null;
             if ($metaBundle && $metaBundle->sitemapUrls) {
+                $urlsetLine = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"';
                 if ($metaBundle->sitemapImages) {
-                    $lines[] = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"';
-                    $lines[] = '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"';
-                    $lines[] = '        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">';
-                } else {
-                    $lines[] = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+                    $urlsetLine .= ' xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"';
+                    $urlsetLine .= ' xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"';
                 }
+                if ($multiSite) {
+                    $urlsetLine .= ' xmlns:xhtml="http://www.w3.org/1999/xhtml"';
+                }
+                $urlsetLine .= '>';
+                $lines[] = $urlsetLine;
                 // Handle each element type separately
                 switch ($metaBundle->sourceElementType) {
                     case Entry::class:
@@ -131,12 +140,40 @@ class SitemapTemplate extends FrontendTemplate
                     $path = ($element->uri === '__home__') ? '' : $element->uri;
                     $url = UrlHelper::siteUrl($path);
                     $lines[] = '  <url>';
+                    // Standard sitemap key/values
                     $lines[] = '    <loc>';
                     $lines[] = '      ' . $url;
                     $lines[] = '    </loc>';
                     $lines[] = '    <changefreq>';
                     $lines[] = '      ' . $metaBundle->sitemapChangeFreq;
                     $lines[] = '    </changefreq>';
+                    $lines[] = '    <priority>';
+                    $lines[] = '      ' . $metaBundle->sitemapPriority;
+                    $lines[] = '    </priority>';
+                    // Handle alternate URLs if this is multi-site
+                    if ($multiSite) {
+                        /** @var  $altSiteSettings */
+                        foreach ($metaBundle->sourceAltSiteSettings as $altSiteSettings) {
+                            $altElement = null;
+                            // Handle each element type separately
+                            switch ($metaBundle->sourceElementType) {
+                                case Entry::class:
+                                    $altElement = Entry::find()
+                                        ->section($metaBundle->sourceHandle)
+                                        ->id($element->id)
+                                        ->siteId($altSiteSettings['siteId'])
+                                        ->limit(1)
+                                        ->one();
+                                    break;
+                            }
+                            if ($altElement) {
+                                $lines[] = '    <xhtml:link rel="alternate"'
+                                    . ' hreflang="' . $altSiteSettings['language'] . '"'
+                                    . ' href="' . $altElement->url . '"'
+                                    . ' />';
+                            }
+                        }
+                    }
                     // Handle any images
                     if ($metaBundle->sitemapImages) {
                         // Regular Assets fields

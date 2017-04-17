@@ -105,7 +105,13 @@ class SitemapIndexTemplate extends FrontendTemplate
             $metaBundles = Seomatic::$plugin->helper->metaBundles();
             /** @var  $metaBundle MetaBundle */
             foreach ($metaBundles as $metaBundle) {
-                $sitemapUrl = UrlHelper::siteUrl('/sitemaps/' . $metaBundle->sourceHandle . '/sitemap.xml');
+                $sitemapUrl = UrlHelper::siteUrl(
+                    '/sitemaps/'
+                    . $metaBundle->sourceHandle
+                    . '/'
+                    . $metaBundle->sourceSiteId
+                    . '/sitemap.xml'
+                );
                 $lines[] = '  <sitemap>';
                 $lines[] = '    <loc>';
                 $lines[] = '      ' . $sitemapUrl;
