@@ -1,0 +1,272 @@
+{% extends "_layouts/cp" %}
+{% import '_includes/forms' as forms %}
+
+{% includeCssResource "css/entry.css" %}
+{% includeCssResource "seomatic/css/style.css" %}
+{% includeCssResource "seomatic/css/css-reset.css" %}
+{% includeCssResource "seomatic/css/prism.min.css" %}
+{% includeJsResource "seomatic/js/seomatic.js" %}
+{% includeJsResource "seomatic/js/jquery.bpopup.min.js" %}
+{% includeJsResource "seomatic/js/prism.min.js" %}
+
+{% set title = craft.seomatic.getPluginName() %}
+
+{% set fullPageForm = true %}
+{% set hasCustomLayout = true %}
+
+{% set docsUrl = "https://github.com/nystudio107/seomatic/wiki" %}
+
+{% set localeUrlSuffix = "" %}
+{% if craft.isLocalized %}
+    {% set localeUrlSuffix = "/" ~ social.locale %}
+{% endif %}
+{% set seomaticSections = {
+    seometrics: { label: "SEOmetrics"|t, url: url('seomatic/seometrics') },
+    meta:       { label: "Template Meta"|t, url: url('seomatic/meta') },
+    site:       { label: "Site Meta"|t, url: url('seomatic/site' ~ localeUrlSuffix ) },
+    identity:   { label: "Site Identity"|t, url: url('seomatic/identity' ~ localeUrlSuffix ) },
+    social:     { label: "Social Media"|t, url: url('seomatic/social' ~ localeUrlSuffix ) },
+    creator:    { label: "Site Creator"|t, url: url('seomatic/creator' ~ localeUrlSuffix ) },
+    settings:   { label: "Settings"|t, url: url('seomatic/settings') },
+} %}
+
+{% set crumbs = [
+    { label: craft.seomatic.getPluginName(), url: url('seomatic') },
+    { label: "Social Media"|t, url: url('seomatic/social') },
+] %}
+
+{% if craft.app.version < 2.5 %}
+    {% set tabs = seomaticSections %}
+    {% set selectedTab = 'social' %}
+{% else %}
+    {% set subnav = seomaticSections %}
+    {% set selectedSubnavItem = 'social' %}
+{% endif %}
+
+{% block main %}
+
+    {% include "seomatic/_preview_display_modal" with {'previewMetaPath': '', 'elementId': 0, 'locale': social.locale } %}
+    {% include "seomatic/_preview_tags_modal" with {'previewMetaPath': '', 'elementId': 0, 'locale': social.locale } %}
+
+<!-- Needed for for Craft < 2.5 -->
+
+    {% if craft.app.version < 2.5 %}
+    <form id="social-form" method="post" accept-charset="UTF-8" data-saveshortcut="1" data-saveshortcut-redirect="{{ continueEditingUrl }}">
+    {% endif %}
+
+        <input type="hidden" name="action" value="seomatic/saveSocial" />
+        <input type="hidden" name="redirect" value="seomatic/social{% if craft.isLocalized %}/{{ social.locale }}{% endif %}" />
+        <input type="hidden" name="locale" value="{{ social.locale }}">
+
+        {{ getCsrfInput() }}
+
+        <div class="grid first">
+            <div class="item" data-position="left" data-min-colspan="2">
+                <div id="fields" class="pane">
+                {% if tabs is defined and tabs|length %}
+                    {% include "_includes/tabs" %}
+                {% endif %}
+
+                <h2>{{ "Social Media" |t }}</h2>
+
+                {{ forms.textField({
+                    label: "Twitter Handle"|t,
+                    instructions: ("Your Twitter Handle, without the preceding <code>@</code>    This <strong>must</strong> be set for Twitter Card tags to be generated.") |t |raw,
+                    id: "twitterHandle",
+                    class: 'nicetext',
+                    name: "twitterHandle",
+                    value: social.twitterHandle,
+                    required: false,
+                    locale:  social.locale,
+                }) }}
+
+                {{ forms.textField({
+                    label: "Facebook Handle"|t,
+                    instructions: ("Your Facebook company/fan page handle (the part after <code>https://www.facebook.com/</code>)") |t |raw,
+                    id: "facebookHandle",
+                    class: 'nicetext',
+                    name: "facebookHandle",
+                    value: social.facebookHandle,
+                    required: false,
+                    locale:  social.locale,
+                }) }}
+
+                {{ forms.textField({
+                    label: "Facebook Profile ID"|t,
+                    instructions: ("Your Facebook Profile/Page ID.  Click on the 'About' tab on your Facebook company/fan page, click on 'Page Info', then scroll to the bottom to find your 'Facebook Page ID'") |t |raw,
+                    id: "facebookProfileId",
+                    class: 'nicetext',
+                    name: "facebookProfileId",
+                    value: social.facebookProfileId,
+                    required: false,
+                    locale:  social.locale,
+                }) }}
+
+                {{ forms.textField({
+                    label: "Facebook App ID"|t,
+                    instructions: ("Your Facebook App ID.  Providing a Facebook Application ID for use with the Social Media Sharing feature is recommended, but optional.  <a href='https://developers.facebook.com/docs/apps/register' target='_blank'>Learn More</a>") |t |raw,
+                    id: "facebookAppId",
+                    class: 'nicetext',
+                    name: "facebookAppId",
+                    value: social.facebookAppId,
+                    required: false,
+                    locale:  social.locale,
+                }) }}
+
+                {{ forms.textField({
+                    label: "Wikipedia URL"|t,
+                    instructions: ("The full URL to the Wikipedia.com entry that is about this entity.  <a href='http://searchengineland.com/leveraging-wikidata-gain-google-knowledge-graph-result-219706' target='_blank'>Learn More</a>") |t |raw,
+                    id: "wikipediaUrl",
+                    class: 'nicetext',
+                    name: "wikipediaUrl",
+                    value: social.wikipediaUrl,
+                    required: false,
+                    locale:  social.locale,
+                }) }}
+
+                {{ forms.textField({
+                    label: "LinkedIn Handle"|t,
+                    instructions: ("Your LinkedIn page handle (the part after <code>https://www.linkedin.com/in/</code> or <code>https://www.linkedin.com/company/</code>)") |t |raw,
+                    id: "linkedInHandle",
+                    class: 'nicetext',
+                    name: "linkedInHandle",
+                    value: social.linkedInHandle,
+                    required: false,
+                    locale:  social.locale,
+                }) }}
+
+                {{ forms.textField({
+                    label: "Google+ Handle"|t,
+                    instructions: ("Your Google+ page handle, without the preceding <code>+</code>.  If you have a numeric Google+ account still, just enter that.") |t |raw,
+                    id: "googlePlusHandle",
+                    class: 'nicetext',
+                    name: "googlePlusHandle",
+                    value: social.googlePlusHandle,
+                    required: false,
+                    locale:  social.locale,
+                }) }}
+
+                {{ forms.textField({
+                    label: "YouTube User Handle"|t,
+                    instructions: ("Your YouTube user handle (the part after <code>https://www.youtube.com/user/</code>)") |t |raw,
+                    id: "youtubeHandle",
+                    class: 'nicetext',
+                    name: "youtubeHandle",
+                    value: social.youtubeHandle,
+                    required: false,
+                    locale:  social.locale,
+                }) }}
+
+                {{ forms.textField({
+                    label: "YouTube Channel Handle"|t,
+                    instructions: ("Your YouTube channel handle (the part after <code>https://www.youtube.com/c/</code>)") |t |raw,
+                    id: "youtubeChannelHandle",
+                    class: 'nicetext',
+                    name: "youtubeChannelHandle",
+                    value: social.youtubeChannelHandle,
+                    required: false,
+                    locale:  social.locale,
+                }) }}
+
+                {{ forms.textField({
+                    label: "Instagram Handle"|t,
+                    instructions: ("Your Instagram handle") |t |raw,
+                    id: "instagramHandle",
+                    class: 'nicetext',
+                    name: "instagramHandle",
+                    value: social.instagramHandle,
+                    required: false,
+                    locale:  social.locale,
+                }) }}
+
+                {{ forms.textField({
+                    label: "Pinterest Handle"|t,
+                    instructions: ("Your Pinterest page handle (the part after <code>https://www.pinterest.com/</code>)") |t |raw,
+                    id: "pinterestHandle",
+                    class: 'nicetext',
+                    name: "pinterestHandle",
+                    value: social.pinterestHandle,
+                    required: false,
+                    locale:  social.locale,
+                }) }}
+
+                {{ forms.textField({
+                    label: "Github Handle"|t,
+                    instructions: ("Your Github page handle (the part after <code>https://github.com/</code>)") |t |raw,
+                    id: "githubHandle",
+                    class: 'nicetext',
+                    name: "githubHandle",
+                    value: social.githubHandle,
+                    required: false,
+                    locale:  social.locale,
+                }) }}
+
+                {{ forms.textField({
+                    label: "Vimeo Handle"|t,
+                    instructions: ("Your Vimeo page handle (the part after <code>https://vimeo.com/</code>)") |t |raw,
+                    id: "vimeoHandle",
+                    class: 'nicetext',
+                    name: "vimeoHandle",
+                    value: social.vimeoHandle,
+                    required: false,
+                    locale:  social.locale,
+                }) }}
+
+                <p>&nbsp;</p>
+                    <p>{{ "<p>You can use any Craft <code>environmentVariables</code> in these fields in addition to static text, e.g.:<br /> <code>This is my {baseUrl}</code></p>" |t |raw }}</p>
+                </div>
+            </div>
+
+            <div class="item" data-position="right" data-colspan="1">
+
+                <div id="preview-display" class="btn big livepreviewbtn secondbtn">
+                    {{ "Preview SEO Meta Display" |t }}
+                </div>
+
+                <div id="preview-tags" class="btn big livepreviewbtn secondbtn">
+                    {{ "Preview SEO Meta Tags" |t }}
+                </div>
+
+                {% if craft.isLocalized %}
+                    <ul id="locales" class="pane">
+                        {% for locale in craft.i18n.getSiteLocales() %}
+                            {% if locale == social.locale %}
+                                <li class="sel">{{ locale.name }}</li>
+                            {% else %}
+                                <li><a href="{{ url('seomatic/social') ~ '/' ~ locale.id }}">{{ locale.name }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        <li><p class="instructions">{{ "If any field is left blank for a setting in a particular locale, it will fall back on the primary locale." |t |raw }}</p></li>
+                    </ul>
+                {% endif %}
+
+                <div class="pane">
+                    <div style="text-align:center; margin:0 auto;">
+                        <img src="{{ resourceUrl('seomatic/images/social_media.svg') }}" width="64px" height="auto" />
+                    </div>
+                    {{ "<p>These Social Media settings are used to globally define the social media accounts associated with the website.</p><p>They are used in combination with the SEO Meta settings to generate <a href='https://developers.google.com/schemas/formats/json-ld?hl=en' target='_blank'>JSON-LD</a> microdata, <a href='http://dublincore.org' target='_blank'>Dublin Core</a> core metadata, <a href='https://dev.twitter.com/cards/overview' target='_blank'>Twitter Cards</a>, <a href='https://developers.facebook.com/docs/sharing/opengraph' target='_blank'>Facebook OpenGraph</a>, and as well as HTML meta tags.<p>None of these fields are mandatory; if you don't have a given social media account, just leave it blank.</p>" |t |raw }}
+                </div>
+
+            </div>
+
+<!-- Needed for for Craft < 2.5 -->
+
+            {% if craft.app.version < 2.5 %}
+            <div class="item" data-position="left" data-colspan="1">
+                <div class="buttons">
+                    <div class="btngroup submit first">
+                        <input type="submit" class="btn submit" value="{{ 'Save'|t }}">
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+        </div>
+
+<!-- Needed for for Craft < 2.5 -->
+
+    {% if craft.app.version < 2.5 %}
+    </form>
+    {% endif %}
+
+{% endblock %}

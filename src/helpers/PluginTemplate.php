@@ -34,7 +34,7 @@ class PluginTemplate extends Component
      *
      * @return string
      */
-    public static function renderPluginTemplate($templatePath, $vars)
+    public static function renderPluginTemplate(string $templatePath, array $vars = []): string
     {
         // Stash the old template mode, and set it AdminCP template mode
         $oldMode = Craft::$app->view->getTemplateMode();

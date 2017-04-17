@@ -127,4 +127,24 @@ class SeomaticVariable
     {
         Seomatic::$plugin->meta->addToMetaContainer($metaScript, MetaScriptContainer::CONTAINER_TYPE, $key);
     }
+
+    /**
+     * Get the plugin's name
+     *
+     * @return null|string
+     */
+    public function getPluginName()
+    {
+        return Seomatic::$plugin->name;
+    }
+
+    /**
+     * Get all of the meta bundles
+     *
+     * @return array
+     */
+    public function getMetaBundles()
+    {
+        return Seomatic::$plugin->helper->metaBundles();
+    }
 }

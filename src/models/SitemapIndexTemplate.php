@@ -11,7 +11,14 @@
 
 namespace nystudio107\seomatic\models;
 
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
+use nystudio107\seomatic\models\MetaBundle;
+
+use Craft;
+use craft\helpers\UrlHelper;
+
+use yii\caching\TagDependency;
 
 /**
  * @author    nystudio107
@@ -24,6 +31,10 @@ class SitemapIndexTemplate extends FrontendTemplate
     // =========================================================================
 
     const TEMPLATE_TYPE = 'SitemapIndexTemplate';
+
+    const CACHE_KEY = 'seomatic_sitemap_index';
+
+    const CACHE_TAGS = 'seomatic_sitemap';
 
     // Static Methods
     // =========================================================================
@@ -38,7 +49,7 @@ class SitemapIndexTemplate extends FrontendTemplate
         $defaults = [
             'path' => 'sitemap.xml',
             'controller' => 'sitemap',
-            'action' => 'sitemap-index'
+            'action' => 'sitemap-index',
         ];
         $config = array_merge($config, $defaults);
         $model = new SitemapIndexTemplate($config);
@@ -81,10 +92,30 @@ class SitemapIndexTemplate extends FrontendTemplate
      */
     public function render($params = []): string
     {
-        $lines = [];
-        $lines[] = '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-        $lines[] = '</sitemapindex>';
+        $cache = Craft::$app->getCache();
+        $duration = Craft::$app->getConfig()->getGeneral()->devMode ? 1 : null;
+        $dependency = new TagDependency(['tags' => $this::CACHE_TAGS]);
 
-        return implode("\r", $lines);
+        return $cache->getOrSet($this::CACHE_KEY, function () {
+            $lines = [];
+            // Sitemap index XML header and opening tag
+            $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
+            $lines[] = '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+            // One sitemap entry for each MeteBundle
+            $metaBundles = Seomatic::$plugin->helper->metaBundles();
+            /** @var  $metaBundle MetaBundle */
+            foreach ($metaBundles as $metaBundle) {
+                $sitemapUrl = UrlHelper::siteUrl('/sitemaps/' . $metaBundle->sourceHandle . '/sitemap.xml');
+                $lines[] = '  <sitemap>';
+                $lines[] = '    <loc>';
+                $lines[] = '      ' . $sitemapUrl;
+                $lines[] = '    </loc>';
+                $lines[] = '  </sitemap>';
+            }
+            // Sitemap index closing tag
+            $lines[] = '</sitemapindex>';
+
+            return implode("\r\n", $lines);
+        }, $duration, $dependency);
     }
 }

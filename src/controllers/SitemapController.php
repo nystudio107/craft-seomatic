@@ -14,6 +14,8 @@ use nystudio107\seomatic\Seomatic;
 use Craft;
 use craft\web\Controller;
 
+use yii\web\Response;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -28,7 +30,8 @@ class SitemapController extends Controller
      * @inheritdoc
      */
     protected $allowAnonymous = [
-        'sitemap-index'
+        'sitemap-index',
+        'sitemap'
     ];
 
     // Public Methods
@@ -41,9 +44,29 @@ class SitemapController extends Controller
      */
     public function actionSitemapIndex()
     {
-        $result = Seomatic::$plugin->sitemap->renderTemplate('sitemap-index');
+        $xml = Seomatic::$plugin->sitemap->renderTemplate('sitemap-index');
 
-        //return $this->asRaw($result);
-        return $this->asXml($result);
+        $headers = Craft::$app->response->headers;
+        $headers->add('Content-Type', 'text/xml; charset=utf-8');
+
+        return $this->asRaw($xml);
+    }
+
+    /**
+     * Returns a sitemap.
+     *
+     * @return string
+     */
+    public function actionSitemap($handle, $file = null)
+    {
+        $xml = Seomatic::$plugin->sitemap->renderTemplate(
+            'sitemap',
+            ['handle' => $handle]
+        );
+
+        $headers = Craft::$app->response->headers;
+        $headers->add('Content-Type', 'text/xml; charset=utf-8');
+
+        return $this->asRaw($xml);
     }
 }

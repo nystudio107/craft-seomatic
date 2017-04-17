@@ -1,0 +1,264 @@
+{% extends "_layouts/cp" %}
+
+{% includeCssResource "sitemap/css/style.css" %}
+{% includeJsResource "sitemap/js/script.js" %}
+
+{% set sections = craft.sitemap.sections %}
+{% set categoryGroups = craft.sitemap.categoryGroups %}
+{% set urls = craft.sitemap.urls %}
+
+{% set title = "Sitemap"|t %}
+
+{% set content %}
+
+    <p class="textline">
+      {{ "Select which Sections, Category Groups and URLs to include"|t }}
+      <br/>
+      {{ "(note that only sections and category groups with their own URLs can be selected)"|t }}
+    </p>
+
+    <form method="post" action="" accept-charset="UTF-8" data-saveshortcut>
+        <input type="hidden" name="action" value="sitemap/saveSitemap" />
+        <input type="hidden" name="redirect" value="sitemap" />
+        {{ getCsrfInput() }}
+
+        <table class="data sitemap">
+            <thead class="sections first">
+                <tr>
+                    <th colspan="6">
+                        <h1>{{ "Sections"|t }}</h1>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="thin">{{ "Include"|t }}</th>
+                    <th>{{ "Section"|t }}</th>
+                    <th class="thin">{{ "Entries"|t }}</th>
+                    <th>{{ "URL Format"|t }}</th>
+                    <th>{{ "Change Frequency"|t }}</th>
+                    <th class="thin">{{ "Priority"|t }}</th>
+                    <td class="thin"></td>
+                </tr>
+            </thead>
+
+            <tbody class="sections">
+            {% for section in sections %}
+                {% set num_entries = craft.entries.total({ sectionId: section.id }) %}
+                <tr>
+                    <td>
+                        <input type="hidden" name="sections[{{ loop.index }}][id]" value="{{ section.id }}" />
+                        <input type="checkbox" name="sections[{{ loop.index }}][include]" value="1" {% if section.hasUrls and section.include %}checked{% endif %} {% if not section.hasUrls %}disabled{% endif %} />
+                    </td>
+                    <td>
+                        <a href="{{ url('settings/sections/' ~ section.id) }}" target="_blank">{{ section.name }}</a>
+                    </td>
+                    <td>
+                        {{ num_entries }}
+                    </td>
+                    <td>
+                        <code>
+                          {% if section.urlFormat == '__home__' %}
+                            <div data-icon="home" title="Homepage"></div>
+                          {% else %}
+                            {{ section.urlFormat }}
+                          {% endif %}
+                        </code>
+                    </td>
+                    <td>
+                        <div class="select">
+                            <select name="sections[{{ loop.index }}][changeFrequency]">
+                                <option value="always" {% if section.changeFrequency == 'always' %}selected{% endif %}>{{ "Always"|t }}</option>
+                                <option value="hourly" {% if section.changeFrequency == 'hourly' %}selected{% endif %}>{{ "Hourly"|t }}</option>
+                                <option value="daily" {% if section.changeFrequency == 'daily' %}selected{% endif %}>{{ "Daily"|t }}</option>
+                                <option value="weekly" {% if (section.changeFrequency == 'weekly' or section.changeFrequency == '') %}selected{% endif %}>{{ "Weekly"|t }}</option>
+                                <option value="monthly" {% if section.changeFrequency == 'monthly' %}selected{% endif %}>Monthly</option>
+                                <option value="yearly" {% if section.changeFrequency == 'yearly' %}selected{% endif %}>{{ "Yearly"|t }}</option>
+                                <option value="never" {% if section.changeFrequency == 'never' %}selected{% endif %}>{{ "Never"|t }}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="select">
+                            <select name="sections[{{ loop.index }}][priority]">
+                                {% for i in 1..9 %}
+                                    <option value="0.{{ i }}" {% if (section.priority == ('0.' ~ i) or (section.priority == '' and i == 5)) %}selected{% endif %}>0.{{ i }}</option>
+                                {% endfor %}
+                                <option value="1.0" {% if section.priority == '1.0' %}selected{% endif %}>1.0</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+            <thead class="categoryGroups">
+                <tr>
+                    <th colspan="6">
+                        <h1>{{ "Category Groups"|t }}</h1>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="thin">{{ "Include"|t }}</th>
+                    <th>{{ "Category Group"|t }}</th>
+                    <th class="thin">{{ "Categories"|t }}</th>
+                    <th>{{ "URL Format"|t }}</th>
+                    <th>{{ "Change Frequency"|t }}</th>
+                    <th class="thin">{{ "Priority"|t }}</th>
+                    <td class="thin"></td>
+                </tr>
+            </thead>
+
+            <tbody class="categoryGroups">
+            {% for categoryGroup in categoryGroups %}
+                {% set num_categories = craft.categories.total({ groupId: categoryGroup.id }) %}
+                <tr>
+                    <td>
+                        <input type="hidden" name="categoryGroups[{{ loop.index }}][id]" value="{{ categoryGroup.id }}" />
+                        <input type="checkbox" name="categoryGroups[{{ loop.index }}][include]" value="1" {% if categoryGroup.hasUrls and categoryGroup.include %}checked{% endif %} {% if not categoryGroup.hasUrls %}disabled{% endif %} />
+                    </td>
+                    <td>
+                        <a href="{{ url('settings/categories/' ~ categoryGroup.id) }}" target="_blank">{{ categoryGroup.name }}</a>
+                    </td>
+                    <td>
+                        {{ num_categories }}
+                    </td>
+                    <td>
+                        <code>
+                          {% set locale = craft.i18n.getPrimarySiteLocale() %}
+                          {{ categoryGroup.locales[locale.id] is defined ? categoryGroup.locales[locale.id].urlFormat }}
+                        </code>
+                    </td>
+                    <td>
+                        <div class="select">
+                            <select name="categoryGroups[{{ loop.index }}][changeFrequency]">
+                                <option value="always" {% if categoryGroup.changeFrequency == 'always' %}selected{% endif %}>{{ "Always"|t }}</option>
+                                <option value="hourly" {% if categoryGroup.changeFrequency == 'hourly' %}selected{% endif %}>{{ "Hourly"|t }}</option>
+                                <option value="daily" {% if categoryGroup.changeFrequency == 'daily' %}selected{% endif %}>{{ "Daily"|t }}</option>
+                                <option value="weekly" {% if (categoryGroup.changeFrequency == 'weekly' or categoryGroup.changeFrequency == '') %}selected{% endif %}>{{ "Weekly"|t }}</option>
+                                <option value="monthly" {% if categoryGroup.changeFrequency == 'monthly' %}selected{% endif %}>Monthly</option>
+                                <option value="yearly" {% if categoryGroup.changeFrequency == 'yearly' %}selected{% endif %}>{{ "Yearly"|t }}</option>
+                                <option value="never" {% if categoryGroup.changeFrequency == 'never' %}selected{% endif %}>{{ "Never"|t }}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="select">
+                            <select name="categoryGroups[{{ loop.index }}][priority]">
+                                {% for i in 1..9 %}
+                                    <option value="0.{{ i }}" {% if (categoryGroup.priority == ('0.' ~ i) or (categoryGroup.priority == '' and i == 5)) %}selected{% endif %}>0.{{ i }}</option>
+                                {% endfor %}
+                                <option value="1.0" {% if categoryGroup.priority == '1.0' %}selected{% endif %}>1.0</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+            <thead class="urls">
+                <tr>
+                    <th colspan="6">
+                        <h1>{{ "URL's"|t }}</h1>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="thin">{{ "Include"|t }}</th>
+                    <th colspan="3">{{ "URL"|t }}</th>
+                    <th>{{ "Change Frequency"|t }}</th>
+                    <th class="thin">{{ "Priority"|t }}</th>
+                    <td class="thin"></td>
+                </tr>
+            </thead>
+
+            <tbody class="urls">
+                <tr class="clone">
+                    <td>
+                        <input type="checkbox" name="include" value="1" checked />
+                    </td>
+                    <td colspan="3">
+                        <input type="text" class="text code" name="url" value="{{ siteUrl }}" />
+                    </td>
+                    <td>
+                        <div class="select">
+                            <select name="changeFrequency">
+                                <option value="always">{{ "Always"|t }}</option>
+                                <option value="hourly">{{ "Hourly"|t }}</option>
+                                <option value="daily">{{ "Daily"|t }}</option>
+                                <option value="weekly" selected>{{ "Weekly"|t }}</option>
+                                <option value="monthly">Monthly</option>
+                                <option value="yearly">{{ "Yearly"|t }}</option>
+                                <option value="never">{{ "Never"|t }}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="select">
+                            <select name="priority">
+                                {% for i in 1..9 %}
+                                    <option value="0.{{ i }}" {% if i == 5 %}selected{% endif %}>0.{{ i }}</option>
+                                {% endfor %}
+                                <option value="1.0">1.0</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td><a class="delete icon" title="{{ 'Delete'|t }}"></a></td>
+                </tr>
+
+            {% for url in urls %}
+                <tr>
+                    <td>
+                        <input type="checkbox" name="urls[{{ loop.index }}][include]" value="1" {% if url.include %}checked{% endif %} />
+                    </td>
+                    <td colspan="3">
+                        <input type="text" class="text code" name="urls[{{ loop.index }}][url]" value="{{ url.url }}" />
+                    </td>
+                    <td>
+                        <div class="select">
+                            <select name="urls[{{ loop.index }}][changeFrequency]">
+                                <option value="always" {% if url.changeFrequency == 'always' %}selected{% endif %}>{{ "Always"|t }}</option>
+                                <option value="hourly" {% if url.changeFrequency == 'hourly' %}selected{% endif %}>{{ "Hourly"|t }}</option>
+                                <option value="daily" {% if url.changeFrequency == 'daily' %}selected{% endif %}>{{ "Daily"|t }}</option>
+                                <option value="weekly" {% if (url.changeFrequency == 'weekly' or url.changeFrequency == '') %}selected{% endif %}>{{ "Weekly"|t }}</option>
+                                <option value="monthly" {% if url.changeFrequency == 'monthly' %}selected{% endif %}>Monthly</option>
+                                <option value="yearly" {% if url.changeFrequency == 'yearly' %}selected{% endif %}>{{ "Yearly"|t }}</option>
+                                <option value="never" {% if url.changeFrequency == 'never' %}selected{% endif %}>{{ "Never"|t }}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="select">
+                            <select name="urls[{{ loop.index }}][priority]">
+                                {% for i in 1..9 %}
+                                    <option value="0.{{ i }}" {% if (url.priority == ('0.' ~ i) or (url.priority == '' and i == 5)) %}selected{% endif %}>0.{{ i }}</option>
+                                {% endfor %}
+                                <option value="1.0" {% if url.priority == '1.0' %}selected{% endif %}>1.0</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td><a class="delete icon" title="{{ 'Delete'|t }}"></a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+
+        <div class="buttons">
+            <a href="#" id="add_url" class="btn add icon">{{ "Add URL"|t }}</a>
+        </div>
+
+        <div class="buttons">
+            <p>&nbsp;</p>
+            <p class="light">
+                {% if craft.sitemap.lastPing %}
+                    {{ "Sitemap last pinged to search engines on"|t }} {{ craft.sitemap.lastPing|datetime }}
+                {% else %}
+                    {{ "Sitemap not yet pinged to search engines"|t }}
+                {% endif %}
+            </p>
+            <input type="submit" class="btn submit" value="{{ 'Save'|t }}">
+            <input type="submit" name="ping" class="btn submit" value="{{ 'Save and Ping'|t }}">
+        </div>
+    </form>
+
+{% endset %}

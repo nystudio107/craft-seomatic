@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic;
 
+use nystudio107\seomatic\services\Helper as HelperService;
 use nystudio107\seomatic\services\Meta as MetaService;
 use nystudio107\seomatic\services\Sitemap as SitemapService;
 use nystudio107\seomatic\twigextensions\JsonLdTwigExtension;
@@ -26,6 +27,7 @@ use craft\base\Plugin;
  * @package   Seomatic
  * @since     3.0.0
  *
+ * @property  HelperService    helper
  * @property  MetaService      meta
  * @property  SitemapService   sitemap
  */
