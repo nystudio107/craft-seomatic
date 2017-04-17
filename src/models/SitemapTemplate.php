@@ -45,6 +45,16 @@ class SitemapTemplate extends FrontendTemplate
 
     const CACHE_TAGS = 'seomatic_sitemap_';
 
+    const FILE_TYPES = [
+        'excel',
+        'pdf',
+        'illustrator',
+        'powerpoint',
+        'text',
+        'word',
+        'xml'
+    ];
+
     // Static Methods
     // =========================================================================
 
@@ -174,8 +184,8 @@ class SitemapTemplate extends FrontendTemplate
                             }
                         }
                     }
-                    // Handle any images
-                    if ($metaBundle->sitemapImages) {
+                    // Handle any Assets
+                    if ($metaBundle->sitemapAssets) {
                         // Regular Assets fields
                         $assetFields = FieldHelper::fieldsOfType($element, AssetsField::className());
                         foreach ($assetFields as $assetField) {
@@ -197,6 +207,28 @@ class SitemapTemplate extends FrontendTemplate
                         }
                     }
                     $lines[] = '  </url>';
+                    // Include links to any known file types in the assets fields
+                    if ($metaBundle->sitemapFiles) {
+                        // Regular Assets fields
+                        $assetFields = FieldHelper::fieldsOfType($element, AssetsField::className());
+                        foreach ($assetFields as $assetField) {
+                            foreach ($element[$assetField] as $asset) {
+                                $this->assetFilesSitemapLink($asset, $metaBundle, $lines);
+                            }
+                        }
+                        // Assets embeded in Matrix fields
+                        $matrixFields = FieldHelper::fieldsOfType($element, MatrixField::className());
+                        foreach ($matrixFields as $matrixField) {
+                            foreach ($element[$matrixField] as $matrixBlock) {
+                                $assetFields = FieldHelper::matrixFieldsOfType($matrixBlock, AssetsField::className());
+                                foreach ($assetFields as $assetField) {
+                                    foreach ($matrixBlock[$assetField] as $asset) {
+                                        $this->assetFilesSitemapLink($asset, $metaBundle, $lines);
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
                 // Sitemap index closing tag
                 $lines[] = '</urlset>';
@@ -206,6 +238,10 @@ class SitemapTemplate extends FrontendTemplate
         }, $duration, $dependency);
     }
 
+    /**
+     * @param Asset $asset
+     * @param array $lines
+     */
     protected function assetSitemapItem(Asset $asset, array &$lines)
     {
         switch ($asset->kind) {
@@ -235,4 +271,27 @@ class SitemapTemplate extends FrontendTemplate
                 break;
         }
     }
+
+    /**
+     * @param Asset      $asset
+     * @param MetaBundle $metaBundle
+     * @param array      $lines
+     */
+    protected function assetFilesSitemapLink(Asset $asset, MetaBundle $metaBundle, array &$lines)
+    {
+        if (in_array($asset->kind, $this::FILE_TYPES)) {
+            $lines[] = '  <url>';
+            $lines[] = '    <loc>';
+            $lines[] = '      ' . $asset->url;
+            $lines[] = '    </loc>';
+            $lines[] = '    <changefreq>';
+            $lines[] = '      ' . $metaBundle->sitemapChangeFreq;
+            $lines[] = '    </changefreq>';
+            $lines[] = '    <priority>';
+            $lines[] = '      ' . $metaBundle->sitemapPriority;
+            $lines[] = '    </priority>';
+            $lines[] = '  </url>';
+        }
+    }
+
 }
