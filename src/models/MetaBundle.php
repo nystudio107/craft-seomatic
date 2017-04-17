@@ -76,7 +76,12 @@ class MetaBundle extends Model
     /**
      * @var bool
      */
-    public $sitemapImages = true;
+    public $sitemapAssets = true;
+
+    /**
+     * @var bool
+     */
+    public $sitemapAltLinks = true;
 
     /**
      * @var string
@@ -119,6 +124,9 @@ class MetaBundle extends Model
                     'sourceTemplate',
                     'sourceSiteId',
                     'sourceDateUpdated',
+                    'sitemapUrls',
+                    'sitemapAssets',
+                    'sitemapAltLinks'
                     'sitemapChangeFreq',
                     'sitemapPriority',
                 ],
@@ -139,6 +147,7 @@ class MetaBundle extends Model
             [['sourceDateUpdated'], 'datetime'],
             [['sourceAltSiteSettings'], 'safe'],
             [['sitemapPriority'], 'number'],
+            [['sitemapUrls', 'sitemapAssets', 'sitemapAltLinks'], 'boolean'],
         ];
         return $rules;
     }

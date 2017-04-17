@@ -117,7 +117,7 @@ class SitemapTemplate extends FrontendTemplate
             $elements = null;
             if ($metaBundle && $metaBundle->sitemapUrls) {
                 $urlsetLine = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"';
-                if ($metaBundle->sitemapImages) {
+                if ($metaBundle->sitemapAssets) {
                     $urlsetLine .= ' xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"';
                     $urlsetLine .= ' xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"';
                 }
@@ -151,7 +151,7 @@ class SitemapTemplate extends FrontendTemplate
                     $lines[] = '      ' . $metaBundle->sitemapPriority;
                     $lines[] = '    </priority>';
                     // Handle alternate URLs if this is multi-site
-                    if ($multiSite) {
+                    if ($multiSite && $metaBundle->sitemapAltLinks) {
                         /** @var  $altSiteSettings */
                         foreach ($metaBundle->sourceAltSiteSettings as $altSiteSettings) {
                             $altElement = null;
