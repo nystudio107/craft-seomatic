@@ -18,8 +18,9 @@ use nystudio107\seomatic\helpers\Field as FieldHelper;
 
 use Craft;
 use craft\elements\Entry;
-use craft\fields\Assets;
-use craft\fields\Matrix;
+use craft\elements\Asset;
+use craft\fields\Assets as AssetsField;
+use craft\fields\Matrix as MatrixField;
 use craft\helpers\UrlHelper;
 
 use yii\caching\TagDependency;
@@ -111,7 +112,8 @@ class SitemapTemplate extends FrontendTemplate
             if ($metaBundle && $metaBundle->sitemapUrls) {
                 if ($metaBundle->sitemapImages) {
                     $lines[] = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"';
-                    $lines[] = '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">';
+                    $lines[] = '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"';
+                    $lines[] = '        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">';
                 } else {
                     $lines[] = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
                 }
@@ -138,38 +140,20 @@ class SitemapTemplate extends FrontendTemplate
                     // Handle any images
                     if ($metaBundle->sitemapImages) {
                         // Regular Assets fields
-                        $assetFields = FieldHelper::fieldsOfType($element, Assets::className());
+                        $assetFields = FieldHelper::fieldsOfType($element, AssetsField::className());
                         foreach ($assetFields as $assetField) {
                             foreach ($element[$assetField] as $asset) {
-                                if ($asset->kind === 'image') {
-                                    $lines[] = '    <image:image>';
-                                    $lines[] = '      <image:loc>';
-                                    $lines[] = '        ' . $asset->url;
-                                    $lines[] = '      </image:loc>';
-                                    $lines[] = '      <image:title>';
-                                    $lines[] = '        ' . $asset->title;
-                                    $lines[] = '      </image:title>';
-                                    $lines[] = '    </image:image>';
-                                }
+                                $this->assetSitemapItem($asset, $lines);
                             }
                         }
                         // Assets embeded in Matrix fields
-                        $matrixFields = FieldHelper::fieldsOfType($element, Matrix::className());
+                        $matrixFields = FieldHelper::fieldsOfType($element, MatrixField::className());
                         foreach ($matrixFields as $matrixField) {
                             foreach ($element[$matrixField] as $matrixBlock) {
-                                $assetFields = FieldHelper::matrixFieldsOfType($matrixBlock, Assets::className());
+                                $assetFields = FieldHelper::matrixFieldsOfType($matrixBlock, AssetsField::className());
                                 foreach ($assetFields as $assetField) {
                                     foreach ($matrixBlock[$assetField] as $asset) {
-                                        if ($asset->kind === 'image') {
-                                            $lines[] = '    <image:image>';
-                                            $lines[] = '      <image:loc>';
-                                            $lines[] = '        ' . $asset->url;
-                                            $lines[] = '      </image:loc>';
-                                            $lines[] = '      <image:title>';
-                                            $lines[] = '        ' . $asset->title;
-                                            $lines[] = '      </image:title>';
-                                            $lines[] = '    </image:image>';
-                                        }
+                                        $this->assetSitemapItem($asset, $lines);
                                     }
                                 }
                             }
@@ -183,5 +167,35 @@ class SitemapTemplate extends FrontendTemplate
 
             return implode("\r\n", $lines);
         }, $duration, $dependency);
+    }
+
+    protected function assetSitemapItem(Asset $asset, array &$lines)
+    {
+        switch ($asset->kind) {
+            case 'image':
+                $lines[] = '    <image:image>';
+                $lines[] = '      <image:loc>';
+                $lines[] = '        ' . $asset->url;
+                $lines[] = '      </image:loc>';
+                $lines[] = '      <image:title>';
+                $lines[] = '        ' . $asset->title;
+                $lines[] = '      </image:title>';
+                $lines[] = '    </image:image>';
+                break;
+
+            case 'video':
+                $lines[] = '    <video:video>';
+                $lines[] = '      <video:content_loc>';
+                $lines[] = '        ' . $asset->url;
+                $lines[] = '      </video:content_loc>';
+                $lines[] = '      <video:title>';
+                $lines[] = '        ' . $asset->title;
+                $lines[] = '      </video:title>';
+                $lines[] = '      <video:thumbnail_loc>';
+                $lines[] = '        ' . $asset->getThumbUrl(320);
+                $lines[] = '      </video:thumbnail_loc>';
+                $lines[] = '    </video:video>';
+                break;
+        }
     }
 }
