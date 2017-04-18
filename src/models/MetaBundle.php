@@ -64,9 +64,9 @@ class MetaBundle extends Model
     public $sourceAltSiteSettings = [];
 
     /**
-     * @var string
+     * @var \DateTime
      */
-    public $sourceDateUpdated;
+    public $sourceDateUpdated = '2017-04-18';
 
     /**
      * @var bool

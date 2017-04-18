@@ -153,6 +153,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                         break;
                 }
                 // Output the sitemap entry
+                /** @var  $element Entry */
                 foreach ($elements as $element) {
                     $path = ($element->uri === '__home__') ? '' : $element->uri;
                     $url = UrlHelper::siteUrl($path);
@@ -161,6 +162,9 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                     $lines[] = '    <loc>';
                     $lines[] = '      ' . $url;
                     $lines[] = '    </loc>';
+                    $lines[] = '    <lastmod>';
+                    $lines[] = '      ' . $element->dateUpdated->format(\DateTime::W3C);
+                    $lines[] = '    </lastmod>';
                     $lines[] = '    <changefreq>';
                     $lines[] = '      ' . $metaBundle->sitemapChangeFreq;
                     $lines[] = '    </changefreq>';
@@ -299,6 +303,9 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             $lines[] = '    <loc>';
             $lines[] = '      ' . $asset->url;
             $lines[] = '    </loc>';
+            $lines[] = '    <lastmod>';
+            $lines[] = '      ' . $asset->dateUpdated->format(\DateTime::W3C);
+            $lines[] = '    </lastmod>';
             $lines[] = '    <changefreq>';
             $lines[] = '      ' . $metaBundle->sitemapChangeFreq;
             $lines[] = '    </changefreq>';
