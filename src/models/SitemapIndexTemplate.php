@@ -96,15 +96,12 @@ class SitemapIndexTemplate extends FrontendTemplate
     {
         $cache = Craft::$app->getCache();
         $duration = Craft::$app->getConfig()->getGeneral()->devMode ? 1 : null;
-        $dependency = new TagDependency(
-            [
-                'tags' =>
-                    [
-                        $this::GLOBAL_SITEMAP_CACHE_TAG,
-                        $this::SITEMAP_INDEX_CACHE_TAG,
-                    ],
-            ]
-        );
+        $dependency = new TagDependency([
+            'tags' => [
+                $this::GLOBAL_SITEMAP_CACHE_TAG,
+                $this::SITEMAP_INDEX_CACHE_TAG,
+            ],
+        ]);
 
         return $cache->getOrSet($this::CACHE_KEY, function () {
             $lines = [];

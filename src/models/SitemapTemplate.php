@@ -11,11 +11,8 @@
 
 namespace nystudio107\seomatic\models;
 
-use craft\models\Section;
-use craft\models\Section_SiteSettings;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
-use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 
 use Craft;
@@ -23,9 +20,7 @@ use craft\elements\Entry;
 use craft\elements\Asset;
 use craft\fields\Assets as AssetsField;
 use craft\fields\Matrix as MatrixField;
-use craft\models\Site;
 use craft\helpers\UrlHelper;
-use craft\services\Sites;
 
 use yii\caching\TagDependency;
 
@@ -54,7 +49,7 @@ class SitemapTemplate extends FrontendTemplate
         'powerpoint',
         'text',
         'word',
-        'xml'
+        'xml',
     ];
 
     // Static Methods
@@ -63,14 +58,14 @@ class SitemapTemplate extends FrontendTemplate
     /**
      * @param array $config
      *
-     * @return null|SitemapIndexTemplate
+     * @return null|SitemapTemplate
      */
     public static function create(array $config = [])
     {
         $defaults = [
-            'path' => 'sitemaps/<handle:[-\w\.*]+>/<siteId:\d+>/<file:[-\w\.*]+>',
+            'path'       => 'sitemaps/<handle:[-\w\.*]+>/<siteId:\d+>/<file:[-\w\.*]+>',
             'controller' => 'sitemap',
-            'action' => 'sitemap',
+            'action'     => 'sitemap',
         ];
         $config = array_merge($config, $defaults);
         $model = new SitemapTemplate($config);
@@ -117,15 +112,12 @@ class SitemapTemplate extends FrontendTemplate
         $handle = $params['handle'];
         $siteId = $params['siteId'];
         $duration = Craft::$app->getConfig()->getGeneral()->devMode ? 1 : null;
-        $dependency = new TagDependency(
-            [
-                'tags' =>
-                    [
-                        $this::GLOBAL_SITEMAP_CACHE_TAG,
-                        $this::SITEMAP_CACHE_TAG . $handle,
-                    ],
-            ]
-        );
+        $dependency = new TagDependency([
+            'tags' => [
+                $this::GLOBAL_SITEMAP_CACHE_TAG,
+                $this::SITEMAP_CACHE_TAG . $handle,
+            ],
+        ]);
 
         return $cache->getOrSet($this::CACHE_KEY . $handle, function () use ($handle, $siteId) {
             $lines = [];
@@ -303,5 +295,4 @@ class SitemapTemplate extends FrontendTemplate
             $lines[] = '  </url>';
         }
     }
-
 }
