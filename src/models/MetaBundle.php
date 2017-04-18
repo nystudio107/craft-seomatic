@@ -66,7 +66,7 @@ class MetaBundle extends Model
     /**
      * @var \DateTime
      */
-    public $sourceDateUpdated = '2017-04-18';
+    public $sourceDateUpdated;
 
     /**
      * @var bool

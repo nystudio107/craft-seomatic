@@ -122,9 +122,11 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
                 $lines[] = '    <loc>';
                 $lines[] = '      ' . $sitemapUrl;
                 $lines[] = '    </loc>';
-                $lines[] = '    <lastmod>';
-                $lines[] = '      ' . $metaBundle->sourceDateUpdated->format(\DateTime::W3C);
-                $lines[] = '    </lastmod>';
+                if (!empty($metaBundle->sourceDateUpdated)) {
+                    $lines[] = '    <lastmod>';
+                    $lines[] = '      ' . $metaBundle->sourceDateUpdated->format(\DateTime::W3C);
+                    $lines[] = '    </lastmod>';
+                }
                 $lines[] = '  </sitemap>';
             }
             // Sitemap index closing tag

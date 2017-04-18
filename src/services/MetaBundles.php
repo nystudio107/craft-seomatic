@@ -143,17 +143,29 @@ class MetaBundles extends Component
             // Get a MetaBundle for each site
             foreach ($siteSettings as $siteSetting) {
                 if ($siteSetting->hasUrls) {
-                    $metaBundle = new MetaBundle([
-                        'sourceElementType'     => Entry::class,
-                        'sourceId'              => $section->id,
-                        'sourceName'            => $section->name,
-                        'sourceHandle'          => $section->handle,
-                        'sourceType'            => $section->type,
-                        'sourceTemplate'        => $siteSetting->template,
-                        'sourceSiteId'          => $siteSetting->siteId,
-                        'sourceAltSiteSettings' => $siteSettingsArray,
-                    ]);
-                    $metaBundles[] = $metaBundle;
+                    // Get the most recent dateUpdated
+                    $element = Entry::find()
+                        ->section($section->handle)
+                        ->siteId($siteSetting->siteId)
+                        ->limit(1)
+                        ->orderBy(['elements.dateUpdated' => SORT_DESC])
+                        ->one();
+                    if ($element) {
+                        $dateUpdated = $element->dateUpdated ?? $element->dateCreated;
+                        // Create the meta bundle
+                        $metaBundle = new MetaBundle([
+                            'sourceElementType'     => Entry::class,
+                            'sourceId'              => $section->id,
+                            'sourceName'            => $section->name,
+                            'sourceHandle'          => $section->handle,
+                            'sourceType'            => $section->type,
+                            'sourceTemplate'        => $siteSetting->template,
+                            'sourceSiteId'          => $siteSetting->siteId,
+                            'sourceAltSiteSettings' => $siteSettingsArray,
+                            'sourceDateUpdated'     => $dateUpdated,
+                        ]);
+                        $metaBundles[] = $metaBundle;
+                    }
                 }
             }
         }
@@ -177,17 +189,28 @@ class MetaBundles extends Component
             // Get a MetaBundle for each site
             foreach ($siteSettings as $siteSetting) {
                 if ($siteSetting->hasUrls) {
-                    $metaBundle = new MetaBundle([
-                        'sourceElementType'     => Category::class,
-                        'sourceId'              => $category->id,
-                        'sourceName'            => $category->name,
-                        'sourceHandle'          => $category->handle,
-                        'sourceType'            => 'category',
-                        'sourceTemplate'        => $siteSetting->template,
-                        'sourceSiteId'          => $siteSetting->siteId,
-                        'sourceAltSiteSettings' => $siteSettingsArray,
-                    ]);
-                    $metaBundles[] = $metaBundle;
+                    // Get the most recent dateUpdated
+                    $element = Category::find()
+                        ->group($category->handle)
+                        ->siteId($siteSetting->siteId)
+                        ->limit(1)
+                        ->orderBy(['elements.dateUpdated' => SORT_DESC])
+                        ->one();
+                    if ($element) {
+                        $dateUpdated = $element->dateUpdated ?? $element->dateCreated;
+                        $metaBundle = new MetaBundle([
+                            'sourceElementType'     => Category::class,
+                            'sourceId'              => $category->id,
+                            'sourceName'            => $category->name,
+                            'sourceHandle'          => $category->handle,
+                            'sourceType'            => 'category',
+                            'sourceTemplate'        => $siteSetting->template,
+                            'sourceSiteId'          => $siteSetting->siteId,
+                            'sourceAltSiteSettings' => $siteSettingsArray,
+                            'sourceDateUpdated'     => $dateUpdated,
+                        ]);
+                        $metaBundles[] = $metaBundle;
+                    }
                 }
             }
         }
