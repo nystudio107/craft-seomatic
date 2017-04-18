@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
+use nystudio107\seomatic\base\SitemapInterface;
 use nystudio107\seomatic\models\MetaBundle;
 
 use Craft;
@@ -25,7 +26,7 @@ use yii\caching\TagDependency;
  * @package   Seomatic
  * @since     3.0.0
  */
-class SitemapIndexTemplate extends FrontendTemplate
+class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
 {
     // Constants
     // =========================================================================
@@ -33,8 +34,6 @@ class SitemapIndexTemplate extends FrontendTemplate
     const TEMPLATE_TYPE = 'SitemapIndexTemplate';
 
     const CACHE_KEY = 'seomatic_sitemap_index';
-
-    const GLOBAL_SITEMAP_CACHE_TAG = 'seomatic_sitemap';
 
     const SITEMAP_INDEX_CACHE_TAG = 'seomatic_sitemap_index';
 
@@ -130,5 +129,18 @@ class SitemapIndexTemplate extends FrontendTemplate
 
             return implode("\r\n", $lines);
         }, $duration, $dependency);
+    }
+
+    /**
+     * Invalidate the sitemap index cache
+     */
+    public function invalidateCache()
+    {
+        $cache = Craft::$app->getCache();
+        TagDependency::invalidate($cache, $this::SITEMAP_INDEX_CACHE_TAG);
+        Craft::info(
+            'Sitemap index cache cleared',
+            'seomatic'
+        );
     }
 }

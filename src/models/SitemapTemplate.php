@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
+use nystudio107\seomatic\base\SitemapInterface;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 
 use Craft;
@@ -29,7 +30,7 @@ use yii\caching\TagDependency;
  * @package   Seomatic
  * @since     3.0.0
  */
-class SitemapTemplate extends FrontendTemplate
+class SitemapTemplate extends FrontendTemplate implements SitemapInterface
 {
     // Constants
     // =========================================================================
@@ -37,8 +38,6 @@ class SitemapTemplate extends FrontendTemplate
     const TEMPLATE_TYPE = 'SitemapTemplate';
 
     const CACHE_KEY = 'seomatic_sitemap_';
-
-    const GLOBAL_SITEMAP_CACHE_TAG = 'seomatic_sitemap';
 
     const SITEMAP_CACHE_TAG = 'seomatic_sitemap_';
 
@@ -119,7 +118,7 @@ class SitemapTemplate extends FrontendTemplate
             ],
         ]);
 
-        return $cache->getOrSet($this::CACHE_KEY . $handle, function () use ($handle, $siteId) {
+        return $cache->getOrSet($this::CACHE_KEY . $handle . $siteId, function () use ($handle, $siteId) {
             $lines = [];
             // Sitemap index XML header and opening tag
             $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
@@ -294,5 +293,20 @@ class SitemapTemplate extends FrontendTemplate
             $lines[] = '    </priority>';
             $lines[] = '  </url>';
         }
+    }
+
+    /**
+     * Invalidate a sitemap cache
+     *
+     * @param string $handle
+     */
+    public function invalidateCache(string $handle)
+    {
+        $cache = Craft::$app->getCache();
+        TagDependency::invalidate($cache, $this::SITEMAP_CACHE_TAG . $handle);
+        Craft::info(
+            'Sitemap cache cleared: ' . $handle,
+            'seomatic'
+        );
     }
 }

@@ -21,7 +21,6 @@ use nystudio107\seomatic\base\FrontendTemplate;
  */
 class FrontendTemplateContainer extends SeomaticContainer
 {
-
     // Public Properties
     // =========================================================================
 

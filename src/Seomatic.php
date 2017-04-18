@@ -46,6 +46,10 @@ class Seomatic extends Plugin
         parent::init();
         self::$plugin = $this;
         $this->name = $this->getName();
+        // Temp hack to call our component's init() methods
+        Seomatic::$plugin->helper->init();
+        Seomatic::$plugin->meta->init();
+        Seomatic::$plugin->sitemap->init();
         // We're loaded
         Craft::info(
             Craft::t(

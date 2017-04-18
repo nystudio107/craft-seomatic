@@ -43,6 +43,14 @@ class Meta extends Component
     // =========================================================================
 
     /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+    }
+
+    /**
      * Load the meta containers
      */
     public function loadMetaContainers(): void
