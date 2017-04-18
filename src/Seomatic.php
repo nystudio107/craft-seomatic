@@ -46,19 +46,6 @@ class Seomatic extends Plugin
         parent::init();
         self::$plugin = $this;
         $this->name = $this->getName();
-
-        // Add in our Twig extensions
-        Craft::$app->view->twig->addExtension(new JsonLdTwigExtension());
-
-        $request = Craft::$app->getRequest();
-        // Only respond to non-console site requests
-        if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
-            // Load the meta containers for this page
-            Seomatic::$plugin->meta->loadMetaContainers();
-            // Load the sitemap containers
-            Seomatic::$plugin->sitemap->loadSitemapContainers();
-        }
-
         // We're loaded
         Craft::info(
             Craft::t(
@@ -68,6 +55,16 @@ class Seomatic extends Plugin
             ),
             __METHOD__
         );
+        // Add in our Twig extensions
+        Craft::$app->view->twig->addExtension(new JsonLdTwigExtension());
+        // Only respond to non-console site requests
+        $request = Craft::$app->getRequest();
+        if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
+            // Load the meta containers for this page
+            Seomatic::$plugin->meta->loadMetaContainers();
+            // Load the sitemap containers
+            Seomatic::$plugin->sitemap->loadSitemapContainers();
+        }
     }
 
     /**

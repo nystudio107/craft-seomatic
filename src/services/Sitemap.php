@@ -31,6 +31,14 @@ use yii\base\Event;
  */
 class Sitemap extends Component
 {
+    // Constants
+    // =========================================================================
+
+    const SEARCH_ENGINE_SUBMISSION_URLS = [
+        'google' => 'http://www.google.com/webmasters/sitemaps/ping?sitemap=',
+        'bing'   => 'http://www.bing.com/webmaster/ping.aspx?siteMap=',
+    ];
+
     // Protected Properties
     // =========================================================================
 
@@ -47,6 +55,7 @@ class Sitemap extends Component
      */
     public function loadSitemapContainers()
     {
+        $this->submitSitemapIndex();
         $this->sitemapTemplateContainer = FrontendTemplateContainer::create();
         // The Sitemap Index
         $sitemapIndexTemplate = SitemapIndexTemplate::create();
@@ -102,21 +111,23 @@ class Sitemap extends Component
      */
     public function submitSitemapIndex(): void
     {
-        // Services URLs to submit the sitemaps to
-        $serviceUrls = [
-            'google' => 'http://www.google.com/webmasters/sitemaps/ping?sitemap=',
-            'bing'   => 'http://www.bing.com/webmaster/ping.aspx?siteMap=',
-        ];
-
-        // Submit the sitemap to each service
-        foreach ($serviceUrls as &$url) {
+        // Submit the sitemap to each search engine
+        foreach ($this::SEARCH_ENGINE_SUBMISSION_URLS as &$url) {
+            $submissionUrl = $url . UrlHelper::siteUrl('sitemap.xml');
             // create new guzzle client
             $guzzleClient = Craft::createGuzzleClient(['timeout' => 120, 'connect_timeout' => 120]);
-
+            // Submit the sitemap index to each search engine
             try {
-                $guzzleClient->post($url . UrlHelper::siteUrl('sitemap.xml'));
+                $guzzleClient->post($submissionUrl);
+                Craft::info(
+                    "Sitemap index submitted to: " . $submissionUrl,
+                    'seomatic'
+                );
             } catch (\Exception $e) {
-                Craft::error("Error submitting sitemap: " . $e->getMessage(), 'seomatic');
+                Craft::error(
+                    "Error submitting sitemap index to: " . $submissionUrl . ' - ' . $e->getMessage(),
+                    'seomatic'
+                );
             }
         }
     }
