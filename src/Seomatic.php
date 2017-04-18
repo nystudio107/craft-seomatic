@@ -11,7 +11,8 @@
 
 namespace nystudio107\seomatic;
 
-use nystudio107\seomatic\services\Helper as HelperService;
+use craft\base\Element;
+use nystudio107\seomatic\services\MetaBundles as MetaBundlesService;
 use nystudio107\seomatic\services\Meta as MetaService;
 use nystudio107\seomatic\services\Sitemap as SitemapService;
 use nystudio107\seomatic\twigextensions\JsonLdTwigExtension;
@@ -19,6 +20,13 @@ use nystudio107\seomatic\variables\SeomaticVariable;
 
 use Craft;
 use craft\base\Plugin;
+use craft\elements\Entry;
+use craft\events\ElementEvent;
+use craft\events\SectionEvent;
+use craft\services\Elements;
+use craft\services\Sections;
+
+use yii\base\Event;
 
 /**
  * Class Seomatic
@@ -27,9 +35,9 @@ use craft\base\Plugin;
  * @package   Seomatic
  * @since     3.0.0
  *
- * @property  HelperService    helper
- * @property  MetaService      meta
- * @property  SitemapService   sitemap
+ * @property  MetaBundlesService  metaBundles
+ * @property  MetaService         meta
+ * @property  SitemapService      sitemap
  */
 class Seomatic extends Plugin
 {
@@ -46,10 +54,6 @@ class Seomatic extends Plugin
         parent::init();
         self::$plugin = $this;
         $this->name = $this->getName();
-        // Temp hack to call our component's init() methods
-        Seomatic::$plugin->helper->init();
-        Seomatic::$plugin->meta->init();
-        Seomatic::$plugin->sitemap->init();
         // We're loaded
         Craft::info(
             Craft::t(
@@ -59,6 +63,8 @@ class Seomatic extends Plugin
             ),
             __METHOD__
         );
+        // Add in our event listeners that are needed for every request
+        $this->installEventListeners();
         // Add in our Twig extensions
         Craft::$app->view->twig->addExtension(new JsonLdTwigExtension());
         // Only respond to non-console site requests
@@ -80,14 +86,97 @@ class Seomatic extends Plugin
     }
 
     /**
-     * Returns the user-facing name of the plugin, which can override the name in
-     * composer.json
+     * Returns the user-facing name of the plugin, which can override the name
+     * in composer.json
      *
      * @return mixed
      */
     public function getName(): string
     {
-         return Craft::t('seomatic', 'SEOmatic');
+        return Craft::t('seomatic', 'SEOmatic');
+    }
+
+    /**
+     * Install global event listeners
+     */
+    protected function installEventListeners()
+    {
+        // Handler: Sections::EVENT_AFTER_SAVE_SECTION
+        Event::on(
+            Sections::className(),
+            Sections::EVENT_AFTER_SAVE_SECTION,
+            function (SectionEvent $event) {
+                Seomatic::$plugin->metaBundles->invalidateMetaBundle(
+                    $event->section->handle,
+                    $event->isNew
+                );
+            }
+        );
+        // Handler: Sections::EVENT_AFTER_DELETE_SECTION
+        Event::on(
+            Sections::className(),
+            Sections::EVENT_AFTER_DELETE_SECTION,
+            function (SectionEvent $event) {
+                Seomatic::$plugin->metaBundles->invalidateMetaBundle(
+                    $event->section->handle,
+                    false
+                );
+            }
+        );
+        // Invalidate caches after an element is saved
+        Event::on(
+            Elements::className(),
+            Elements::EVENT_AFTER_SAVE_ELEMENT,
+            function (ElementEvent $event) {
+                /** @var  $element Element */
+                $element = $event->element;
+                $handle = $this->getMetaHandleFromElement($element);
+                // See if this is a section we are tracking
+                if ($handle) {
+                    Seomatic::$plugin->metaBundles->invalidateMetaBundle(
+                        $handle,
+                        $event->isNew
+                    );
+                }
+            }
+        );
+        // Invalidate caches after an element is deleted
+        Event::on(
+            Elements::className(),
+            Elements::EVENT_AFTER_DELETE_ELEMENT,
+            function (ElementEvent $event) {
+                /** @var  $element Element */
+                $element = $event->element;
+                $handle = $this->getMetaHandleFromElement($element);
+                // See if this is a section we are tracking
+                if ($handle) {
+                    Seomatic::$plugin->metaBundles->invalidateMetaBundle(
+                        $handle,
+                        false
+                    );
+                }
+            }
+        );
+    }
+
+    /**
+     * @param Element $element
+     *
+     * @return string
+     */
+    protected function getMetaHandleFromElement(Element $element): string
+    {
+        $handle = null;
+        // See if this is a section we are tracking
+        switch ($element::className()) {
+            case Entry::class:
+                /** @var  $element Entry */
+                $section = Craft::$app->getSections()->getSectionById($element->sectionId);
+                $handle = $section->handle;
+                break;
+        }
+
+        return $handle;
     }
 }
 

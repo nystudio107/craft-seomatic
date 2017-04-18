@@ -21,11 +21,7 @@ use nystudio107\seomatic\models\SitemapTemplate;
 use Craft;
 use craft\base\Component;
 use craft\events\RegisterUrlRulesEvent;
-use craft\events\ElementEvent;
-use craft\events\SectionEvent;
 use craft\helpers\UrlHelper;
-use craft\services\Elements;
-use craft\services\Sections;
 use craft\web\UrlManager;
 
 use yii\base\Event;
@@ -63,55 +59,6 @@ class Sitemap extends Component implements SitemapInterface
     public function init()
     {
         parent::init();
-
-        // Invalidate caches after a section is saved
-        Event::on(
-            Sections::className(),
-            Sections::EVENT_AFTER_SAVE_SECTION,
-            function (SectionEvent $event) {
-                if (!$event->isNew) {
-                    if (Seomatic::$plugin->helper->metaBundleByHandle($event->section->handle)) {
-                        Seomatic::$plugin->sitemap->invalidateSitemapCache($event->section->handle);
-                        Seomatic::$plugin->sitemap->invalidateSitemapIndexCache();
-                    }
-                }
-            }
-        );
-        // Invalidate caches after a section is deleted
-        Event::on(
-            Sections::className(),
-            Sections::EVENT_AFTER_DELETE_SECTION,
-            function (SectionEvent $event) {
-                if (Seomatic::$plugin->helper->metaBundleByHandle($event->section->handle)) {
-                    Seomatic::$plugin->sitemap->invalidateSitemapCache($event->section->handle);
-                    Seomatic::$plugin->sitemap->invalidateSitemapIndexCache();
-                }
-            }
-        );
-        // Invalidate caches after an element is saved
-        Event::on(
-            Elements::className(),
-            Elements::EVENT_AFTER_SAVE_ELEMENT,
-            function (ElementEvent $event) {
-                if (!$event->isNew) {
-                    if (Seomatic::$plugin->helper->metaBundleByHandle($event->section->handle)) {
-                        Seomatic::$plugin->sitemap->invalidateSitemapCache($event->section->handle);
-                        Seomatic::$plugin->sitemap->invalidateSitemapIndexCache();
-                    }
-                }
-            }
-        );
-        // Invalidate caches after an element is deleted
-        Event::on(
-            Elements::className(),
-            Elements::EVENT_AFTER_DELETE_ELEMENT,
-            function (ElementEvent $event) {
-                if (Seomatic::$plugin->helper->metaBundleByHandle($event->section->handle)) {
-                    Seomatic::$plugin->sitemap->invalidateSitemapCache($event->section->handle);
-                    Seomatic::$plugin->sitemap->invalidateSitemapIndexCache();
-                }
-            }
-        );
     }
 
     /**

@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\services;
 
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\models\MetaBundle;
 
 use Craft;
@@ -24,7 +25,7 @@ use craft\models\Section_SiteSettings;
  * @package   Seomatic
  * @since     3.0.0
  */
-class Helper extends Component
+class MetaBundles extends Component
 {
     // Protected Properties
     // =========================================================================
@@ -43,6 +44,24 @@ class Helper extends Component
     public function init()
     {
         parent::init();
+    }
+
+    /**
+     * Invalidate the caches and data structures associated with this MetaBundle
+     *
+     * @param string $handle
+     * @param bool   $isNew
+     */
+    public function invalidateMetaBundle(string $handle, bool $isNew)
+    {
+        // See if this is a section we are tracking
+        if ($this->metaBundleByHandle($handle)) {
+            // Invalidate sitemap caches after an existing section is saved
+            if (!$isNew) {
+                Seomatic::$plugin->sitemap->invalidateSitemapCache($event->section->handle);
+                Seomatic::$plugin->sitemap->invalidateSitemapIndexCache();
+            }
+        }
     }
 
     /**
