@@ -94,7 +94,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
     public function render($params = []): string
     {
         $cache = Craft::$app->getCache();
-        $duration = Craft::$app->getConfig()->getGeneral()->devMode ? 1 : null;
+        $duration = Craft::$app->getConfig()->getGeneral()->devMode ? $this::DEVMODE_CACHE_DURATION : null;
         $dependency = new TagDependency([
             'tags' => [
                 $this::GLOBAL_SITEMAP_CACHE_TAG,
@@ -103,6 +103,10 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
         ]);
 
         return $cache->getOrSet($this::CACHE_KEY, function () {
+            Craft::info(
+                'Sitemap index cache miss',
+                'seomatic'
+            );
             $lines = [];
             // Sitemap index XML header and opening tag
             $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';

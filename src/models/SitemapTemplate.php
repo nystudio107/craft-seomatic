@@ -111,7 +111,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         $cache = Craft::$app->getCache();
         $handle = $params['handle'];
         $siteId = $params['siteId'];
-        $duration = Craft::$app->getConfig()->getGeneral()->devMode ? 1 : null;
+        $duration = Craft::$app->getConfig()->getGeneral()->devMode ? $this::DEVMODE_CACHE_DURATION : null;
         $dependency = new TagDependency([
             'tags' => [
                 $this::GLOBAL_SITEMAP_CACHE_TAG,
@@ -120,6 +120,10 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         ]);
 
         return $cache->getOrSet($this::CACHE_KEY . $handle . $siteId, function () use ($handle, $siteId) {
+            Craft::info(
+                'Sitemap cache miss: ' . $handle . '/' . $siteId,
+                'seomatic'
+            );
             $lines = [];
             // Sitemap index XML header and opening tag
             $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
