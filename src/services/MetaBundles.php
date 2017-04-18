@@ -59,6 +59,10 @@ class MetaBundles extends Component
         // See if this is a section we are tracking
         $metaBundle = $this->metaBundleBySourceId($sourceId);
         if ($metaBundle) {
+            Craft::info(
+                'Invalidating meta bundle: ' . $metaBundle->sourceHandle,
+                'seomatic'
+            );
             // Invalidate sitemap caches after an existing section is saved
             if (!$isNew) {
                 Seomatic::$plugin->sitemap->invalidateSitemapCache($metaBundle->sourceHandle);

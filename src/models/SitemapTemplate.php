@@ -111,7 +111,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         $cache = Craft::$app->getCache();
         $handle = $params['handle'];
         $siteId = $params['siteId'];
-        $duration = Craft::$app->getConfig()->getGeneral()->devMode ? $this::DEVMODE_CACHE_DURATION : null;
+        $duration = Seomatic::$devMode ? $this::DEVMODE_SITEMAP_CACHE_DURATION : $this::SITEMAP_CACHE_DURATION;
         $dependency = new TagDependency([
             'tags' => [
                 $this::GLOBAL_SITEMAP_CACHE_TAG,

@@ -24,5 +24,7 @@ interface SitemapInterface
 
     const GLOBAL_SITEMAP_CACHE_TAG = 'seomatic_sitemap';
 
-    const DEVMODE_CACHE_DURATION = 30;
+    const SITEMAP_CACHE_DURATION = null;
+
+    const DEVMODE_SITEMAP_CACHE_DURATION = 30;
 }

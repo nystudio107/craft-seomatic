@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\models;
 
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 
 use Craft;
@@ -50,7 +51,7 @@ class MetaTagContainer extends MetaContainer
         foreach ($this->data as $metaTagModel) {
             $view->registerMetaTag($metaTagModel->tagAttributes());
             // If `devMode` is enabled, validate the Meta Tag and output any model errors
-            if (Craft::$app->getConfig()->getGeneral()->devMode) {
+            if (Seomatic::$devMode) {
                 $metaTagModel->debugMetaItem(
                     "Tag attribute: "
                 );

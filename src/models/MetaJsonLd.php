@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\models;
 
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\JsonLd as JsonLdHelper;
 use nystudio107\seomatic\base\MetaItem;
 
@@ -226,7 +227,7 @@ class MetaJsonLd extends MetaItem
         $linebreak = "";
 
         // If `devMode` is enabled, make the JSON-LD human-readable
-        if (Craft::$app->getConfig()->getGeneral()->devMode) {
+        if (Seomatic::$devMode) {
             $linebreak = PHP_EOL;
         }
 

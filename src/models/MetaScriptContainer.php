@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\models;
 
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 
 use Craft;
@@ -61,7 +62,7 @@ class MetaScriptContainer extends MetaContainer
                 $this->position
             );
             // If `devMode` is enabled, validate the Meta Script and output any model errors
-            if (Craft::$app->getConfig()->getGeneral()->devMode) {
+            if (Seomatic::$devMode) {
                 $metaScriptModel->debugMetaItem(
                     "Script attribute: "
                 );

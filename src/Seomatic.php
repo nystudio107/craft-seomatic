@@ -52,12 +52,18 @@ class Seomatic extends Plugin
     public static $plugin;
 
     /**
+     * @var bool
+     */
+    public static $devMode;
+
+    /**
      * @inheritdoc
      */
     public function init()
     {
         parent::init();
         self::$plugin = $this;
+        self::$devMode = Craft::$app->getConfig()->getGeneral()->devMode;
         $this->name = $this->getName();
         // We're loaded
         Craft::info(
@@ -106,11 +112,15 @@ class Seomatic extends Plugin
      */
     protected function installEventListeners()
     {
-        // Add SEOmatic cache data to the Clear Caches utility
+        // Handler: ClearCaches::EVENT_REGISTER_CACHE_OPTIONS
         Event::on(
             ClearCaches::className(),
             ClearCaches::EVENT_REGISTER_CACHE_OPTIONS,
             function (RegisterCacheOptionsEvent $event) {
+                Craft::trace(
+                    'ClearCaches::EVENT_REGISTER_CACHE_OPTIONS',
+                    'seomatic'
+                );
                 // Sitemap caches
                 $event->options[] = [
                     'key' => 'seomatic-sitemap-caches',
@@ -126,6 +136,10 @@ class Seomatic extends Plugin
             Sections::class,
             Sections::EVENT_AFTER_SAVE_SECTION,
             function (SectionEvent $event) {
+                Craft::trace(
+                    'Sections::EVENT_AFTER_SAVE_SECTION',
+                    'seomatic'
+                );
                 Seomatic::$plugin->metaBundles->invalidateMetaBundle(
                     $event->section->id,
                     $event->isNew
@@ -137,6 +151,10 @@ class Seomatic extends Plugin
             Sections::class,
             Sections::EVENT_AFTER_DELETE_SECTION,
             function (SectionEvent $event) {
+                Craft::trace(
+                    'Sections::EVENT_AFTER_DELETE_SECTION',
+                    'seomatic'
+                );
                 Seomatic::$plugin->metaBundles->invalidateMetaBundle(
                     $event->section->id,
                     false
@@ -148,6 +166,10 @@ class Seomatic extends Plugin
             Categories::class,
             Categories::EVENT_AFTER_SAVE_GROUP,
             function (CategoryGroupEvent $event) {
+                Craft::trace(
+                    'Categories::EVENT_AFTER_SAVE_GROUP',
+                    'seomatic'
+                );
                 Seomatic::$plugin->metaBundles->invalidateMetaBundle(
                     $event->categoryGroup->id,
                     $event->isNew
@@ -159,6 +181,10 @@ class Seomatic extends Plugin
             Categories::class,
             Categories::EVENT_AFTER_DELETE_GROUP,
             function (CategoryGroupEvent $event) {
+                Craft::trace(
+                    'Categories::EVENT_AFTER_DELETE_GROUP',
+                    'seomatic'
+                );
                 Seomatic::$plugin->metaBundles->invalidateMetaBundle(
                     $event->categoryGroup->id,
                     false
@@ -170,6 +196,10 @@ class Seomatic extends Plugin
             Elements::class,
             Elements::EVENT_AFTER_SAVE_ELEMENT,
             function (ElementEvent $event) {
+                Craft::trace(
+                    'Elements::EVENT_AFTER_SAVE_ELEMENT',
+                    'seomatic'
+                );
                 /** @var  $element Element */
                 $element = $event->element;
                 // See if this is a section we are tracking
@@ -187,6 +217,10 @@ class Seomatic extends Plugin
             Elements::class,
             Elements::EVENT_AFTER_DELETE_ELEMENT,
             function (ElementEvent $event) {
+                Craft::trace(
+                    'Elements::EVENT_AFTER_DELETE_ELEMENT',
+                    'seomatic'
+                );
                 /** @var  $element Element */
                 $element = $event->element;
                 // See if this is a section we are tracking

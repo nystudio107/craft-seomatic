@@ -11,6 +11,8 @@
 
 namespace nystudio107\seomatic\helpers;
 
+use nystudio107\seomatic\Seomatic;
+
 use Craft;
 use craft\helpers\Json;
 use craft\helpers\ArrayHelper;
@@ -40,7 +42,7 @@ class JsonLd extends Json
         | JSON_UNESCAPED_SLASHES
     ) {
         // If `devMode` is enabled, make the JSON-LD human-readable
-        if (Craft::$app->getConfig()->getGeneral()->devMode) {
+        if (Seomatic::$devMode) {
             $options |= JSON_PRETTY_PRINT;
         }
         self::$recursionLevel = 0;
