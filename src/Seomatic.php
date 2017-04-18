@@ -24,10 +24,12 @@ use craft\elements\Category;
 use craft\elements\Entry;
 use craft\events\CategoryGroupEvent;
 use craft\events\ElementEvent;
+use craft\events\RegisterCacheOptionsEvent;
 use craft\events\SectionEvent;
 use craft\services\Categories;
 use craft\services\Elements;
 use craft\services\Sections;
+use craft\utilities\ClearCaches;
 
 use yii\base\Event;
 
@@ -104,6 +106,21 @@ class Seomatic extends Plugin
      */
     protected function installEventListeners()
     {
+        // Add SEOmatic cache data to the Clear Caches utility
+        Event::on(
+            ClearCaches::className(),
+            ClearCaches::EVENT_REGISTER_CACHE_OPTIONS,
+            function (RegisterCacheOptionsEvent $event) {
+                // Sitemap caches
+                $event->options[] = [
+                    'key' => 'seomatic-sitemap-caches',
+                    'label' => Craft::t('seomatic', 'SEOmatic sitemap caches'),
+                    'action' => function () {
+                        Seomatic::$plugin->sitemap->invalidateCaches();
+                    }
+                ];
+            }
+        );
         // Handler: Sections::EVENT_AFTER_SAVE_SECTION
         Event::on(
             Sections::class,
