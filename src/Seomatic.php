@@ -20,9 +20,12 @@ use nystudio107\seomatic\variables\SeomaticVariable;
 
 use Craft;
 use craft\base\Plugin;
+use craft\elements\Category;
 use craft\elements\Entry;
+use craft\events\CategoryGroupEvent;
 use craft\events\ElementEvent;
 use craft\events\SectionEvent;
+use craft\services\Categories;
 use craft\services\Elements;
 use craft\services\Sections;
 
@@ -103,55 +106,77 @@ class Seomatic extends Plugin
     {
         // Handler: Sections::EVENT_AFTER_SAVE_SECTION
         Event::on(
-            Sections::className(),
+            Sections::class,
             Sections::EVENT_AFTER_SAVE_SECTION,
             function (SectionEvent $event) {
                 Seomatic::$plugin->metaBundles->invalidateMetaBundle(
-                    $event->section->handle,
+                    $event->section->id,
                     $event->isNew
                 );
             }
         );
         // Handler: Sections::EVENT_AFTER_DELETE_SECTION
         Event::on(
-            Sections::className(),
+            Sections::class,
             Sections::EVENT_AFTER_DELETE_SECTION,
             function (SectionEvent $event) {
                 Seomatic::$plugin->metaBundles->invalidateMetaBundle(
-                    $event->section->handle,
+                    $event->section->id,
                     false
                 );
             }
         );
-        // Invalidate caches after an element is saved
+        // Handler: Categories::EVENT_AFTER_SAVE_GROUP
         Event::on(
-            Elements::className(),
+            Categories::class,
+            Categories::EVENT_AFTER_SAVE_GROUP,
+            function (CategoryGroupEvent $event) {
+                Seomatic::$plugin->metaBundles->invalidateMetaBundle(
+                    $event->categoryGroup->id,
+                    $event->isNew
+                );
+            }
+        );
+        // Handler: Categories::EVENT_AFTER_DELETE_GROUP
+        Event::on(
+            Categories::class,
+            Categories::EVENT_AFTER_DELETE_GROUP,
+            function (CategoryGroupEvent $event) {
+                Seomatic::$plugin->metaBundles->invalidateMetaBundle(
+                    $event->categoryGroup->id,
+                    false
+                );
+            }
+        );
+        // Handler: Elements::EVENT_AFTER_SAVE_ELEMENT
+        Event::on(
+            Elements::class,
             Elements::EVENT_AFTER_SAVE_ELEMENT,
             function (ElementEvent $event) {
                 /** @var  $element Element */
                 $element = $event->element;
-                $handle = $this->getMetaHandleFromElement($element);
                 // See if this is a section we are tracking
-                if ($handle) {
+                $id = $this->getMetaSourceIdFromElement($element);
+                if ($id) {
                     Seomatic::$plugin->metaBundles->invalidateMetaBundle(
-                        $handle,
+                        $id,
                         $event->isNew
                     );
                 }
             }
         );
-        // Invalidate caches after an element is deleted
+        // Handler: Elements::EVENT_AFTER_DELETE_ELEMENT
         Event::on(
-            Elements::className(),
+            Elements::class,
             Elements::EVENT_AFTER_DELETE_ELEMENT,
             function (ElementEvent $event) {
                 /** @var  $element Element */
                 $element = $event->element;
-                $handle = $this->getMetaHandleFromElement($element);
                 // See if this is a section we are tracking
-                if ($handle) {
+                $id = $this->getMetaSourceIdFromElement($element);
+                if ($id) {
                     Seomatic::$plugin->metaBundles->invalidateMetaBundle(
-                        $handle,
+                        $id,
                         false
                     );
                 }
@@ -162,21 +187,25 @@ class Seomatic extends Plugin
     /**
      * @param Element $element
      *
-     * @return string
+     * @return int
      */
-    protected function getMetaHandleFromElement(Element $element): string
+    protected function getMetaSourceIdFromElement(Element $element): int
     {
-        $handle = null;
+        $sourceId = 0;
         // See if this is a section we are tracking
         switch ($element::className()) {
             case Entry::class:
                 /** @var  $element Entry */
-                $section = Craft::$app->getSections()->getSectionById($element->sectionId);
-                $handle = $section->handle;
+                $sourceId = $element->sectionId;
+                break;
+
+            case Category::class:
+                /** @var  $element Category */
+                $sourceId = $element->groupId;
                 break;
         }
 
-        return $handle;
+        return $sourceId;
     }
 }
 

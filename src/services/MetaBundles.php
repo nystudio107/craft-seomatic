@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\services;
 
+use craft\elements\Category;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\models\MetaBundle;
 
@@ -19,6 +20,7 @@ use craft\base\Component;
 use craft\elements\Entry;
 use craft\helpers\ArrayHelper;
 use craft\models\Section_SiteSettings;
+use craft\models\CategoryGroup_SiteSettings;
 
 /**
  * @author    nystudio107
@@ -49,26 +51,49 @@ class MetaBundles extends Component
     /**
      * Invalidate the caches and data structures associated with this MetaBundle
      *
-     * @param string $handle
-     * @param bool   $isNew
+     * @param int  $sourceId
+     * @param bool $isNew
      */
-    public function invalidateMetaBundle(string $handle, bool $isNew)
+    public function invalidateMetaBundle(int $sourceId, bool $isNew)
     {
         // See if this is a section we are tracking
-        if ($this->metaBundleByHandle($handle)) {
+        $metaBundle = $this->metaBundleBySourceId($sourceId);
+        if ($metaBundle) {
             // Invalidate sitemap caches after an existing section is saved
             if (!$isNew) {
-                Seomatic::$plugin->sitemap->invalidateSitemapCache($event->section->handle);
+                Seomatic::$plugin->sitemap->invalidateSitemapCache($metaBundle->sourceHandle);
                 Seomatic::$plugin->sitemap->invalidateSitemapIndexCache();
             }
         }
     }
 
     /**
+     * @param int      $sourceId
+     * @param int|null $siteId
+     *
+     * @return MetaBundle
+     */
+    public function metaBundleBySourceId(int $sourceId, int $siteId = null): MetaBundle
+    {
+        // @todo this should look in the seomatic_meta_bundles db table
+        $metaBundles = $this->metaBundles();
+        /** @var  $metaBundle MetaBundle */
+        foreach ($metaBundles as $metaBundle) {
+            if ($sourceId == $metaBundle->sourceId) {
+                if ($siteId == null || $siteId == $metaBundle->sourceSiteId) {
+                    return $metaBundle;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * @param string $handle
      * @param int    $siteId
      *
-     * @return MetaBundle
+     * @return null|MetaBundle
      */
     public function metaBundleByHandle(string $handle, int $siteId = null): MetaBundle
     {
@@ -110,11 +135,7 @@ class MetaBundles extends Component
                 if ($siteSetting->hasUrls) {
                     $siteSettingArray = $siteSetting->toArray();
                     // Get the site language
-                    $site = Craft::$app->getSites()->getSiteById($siteSetting->siteId);
-                    $language = $site->language;
-                    $language = strtolower($language);
-                    $language = str_replace('_', '-', $language);
-                    $siteSettingArray['language'] = $language;
+                    $siteSettingArray['language'] = $this->getSiteLanguage($siteSetting->siteId);
                     $siteSettingsArray[] = $siteSettingArray;
                 }
             }
@@ -137,12 +158,61 @@ class MetaBundles extends Component
             }
         }
 
-        // @todo Get all of the categories with URLs
+        // Get all of the category groups with URLs
+        $categories = Craft::$app->getCategories()->getAllGroups();
+        foreach ($categories as $category) {
+            // Get the site settings and turn them into arrays
+            $siteSettings = $category->getSiteSettings();
+            $siteSettingsArray = [];
+            /** @var  $siteSetting CategoryGroup_SiteSettings */
+            foreach ($siteSettings as $siteSetting) {
+                if ($siteSetting->hasUrls) {
+                    $siteSettingArray = $siteSetting->toArray();
+                    // Get the site language
+                    $siteSettingArray['language'] = $this->getSiteLanguage($siteSetting->siteId);
+                    $siteSettingsArray[] = $siteSettingArray;
+                }
+            }
+            $siteSettingsArray = ArrayHelper::index($siteSettingsArray, 'siteId');
+            // Get a MetaBundle for each site
+            foreach ($siteSettings as $siteSetting) {
+                if ($siteSetting->hasUrls) {
+                    $metaBundle = new MetaBundle([
+                        'sourceElementType'     => Category::class,
+                        'sourceId'              => $category->id,
+                        'sourceName'            => $category->name,
+                        'sourceHandle'          => $category->handle,
+                        'sourceType'            => 'category',
+                        'sourceTemplate'        => $siteSetting->template,
+                        'sourceSiteId'          => $siteSetting->siteId,
+                        'sourceAltSiteSettings' => $siteSettingsArray,
+                    ]);
+                    $metaBundles[] = $metaBundle;
+                }
+            }
+        }
 
         // @todo Get all of the Commerce Products with URLs
 
         $this->_metaBundles = $metaBundles;
 
         return $metaBundles;
+    }
+
+    /**
+     * Get the language from a siteId
+     *
+     * @param int $siteId
+     *
+     * @return string
+     */
+    protected function getSiteLanguage(int $siteId): string
+    {
+        $site = Craft::$app->getSites()->getSiteById($siteId);
+        $language = $site->language;
+        $language = strtolower($language);
+        $language = str_replace('_', '-', $language);
+
+        return $language;
     }
 }

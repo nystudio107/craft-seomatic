@@ -17,8 +17,9 @@ use nystudio107\seomatic\base\SitemapInterface;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 
 use Craft;
-use craft\elements\Entry;
 use craft\elements\Asset;
+use craft\elements\Entry;
+use craft\elements\Category;
 use craft\fields\Assets as AssetsField;
 use craft\fields\Matrix as MatrixField;
 use craft\helpers\UrlHelper;
@@ -145,6 +146,11 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                             ->siteId($metaBundle->sourceSiteId)
                             ->limit(null);
                         break;
+                    case Category::class:
+                        $elements = Category::find()
+                            ->siteId($metaBundle->sourceSiteId)
+                            ->limit(null);
+                        break;
                 }
                 // Output the sitemap entry
                 foreach ($elements as $element) {
@@ -171,6 +177,14 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                                 case Entry::class:
                                     $altElement = Entry::find()
                                         ->section($metaBundle->sourceHandle)
+                                        ->id($element->id)
+                                        ->siteId($altSiteSettings['siteId'])
+                                        ->limit(1)
+                                        ->one();
+                                    break;
+
+                                case Category::class:
+                                    $altElement = Category::find()
                                         ->id($element->id)
                                         ->siteId($altSiteSettings['siteId'])
                                         ->limit(1)
