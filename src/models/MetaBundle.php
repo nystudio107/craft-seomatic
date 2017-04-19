@@ -98,6 +98,31 @@ class MetaBundle extends Model
      */
     public $sitemapPriority = 0.5;
 
+    /**
+     * @var array
+     */
+    public $metaTagContainer;
+
+    /**
+     * @var array
+     */
+    public $metaLinkContainer;
+
+    /**
+     * @var array
+     */
+    public $metaScriptContainer;
+
+    /**
+     * @var array
+     */
+    public $metaJsonLdContainer;
+
+    /**
+     * @var array
+     */
+    public $redirectsContainer;
+
     // Methods
     // =========================================================================
 
