@@ -188,5 +188,4 @@ class Sitemap extends Component implements SitemapInterface
             'seomatic'
         );
     }
-
 }
