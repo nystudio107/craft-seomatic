@@ -65,8 +65,8 @@ class MetaBundles extends Component
             );
             // Invalidate sitemap caches after an existing section is saved
             if (!$isNew) {
-                Seomatic::$plugin->sitemap->invalidateSitemapCache($metaBundle->sourceHandle);
-                Seomatic::$plugin->sitemap->invalidateSitemapIndexCache();
+                Seomatic::$plugin->sitemaps->invalidateSitemapCache($metaBundle->sourceHandle);
+                Seomatic::$plugin->sitemaps->invalidateSitemapIndexCache();
             }
         }
     }
