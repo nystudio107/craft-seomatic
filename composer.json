@@ -45,9 +45,10 @@
         "changelogUrl": "https://raw.githubusercontent.com/nystudio107/craft3-seomatic/master/CHANGELOG.md",
         "class": "nystudio107\\seomatic\\Seomatic",
         "components": {
-            "metaBundles": "nystudio107\\seomatic\\services\\MetaBundles",
             "meta": "nystudio107\\seomatic\\services\\Meta",
-            "sitemap": "nystudio107\\seomatic\\services\\Sitemap"
+            "metaBundles": "nystudio107\\seomatic\\services\\MetaBundles",
+            "sitemaps": "nystudio107\\seomatic\\services\\Sitemaps",
+            "redirects": "nystudio107\\seomatic\\services\\Redirects"
         }
     }
 }

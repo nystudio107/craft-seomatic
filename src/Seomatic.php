@@ -14,7 +14,7 @@ namespace nystudio107\seomatic;
 use nystudio107\seomatic\web\ErrorHandler as SeomaticErrorHandler;
 use nystudio107\seomatic\services\MetaBundles as MetaBundlesService;
 use nystudio107\seomatic\services\Meta as MetaService;
-use nystudio107\seomatic\services\Sitemap as SitemapService;
+use nystudio107\seomatic\services\Sitemaps as SitemapsService;
 use nystudio107\seomatic\twigextensions\JsonLdTwigExtension;
 use nystudio107\seomatic\variables\SeomaticVariable;
 
@@ -43,7 +43,7 @@ use yii\base\Event;
  *
  * @property  MetaBundlesService  metaBundles
  * @property  MetaService         meta
- * @property  SitemapService      sitemap
+ * @property  SitemapsService     sitemaps
  */
 class Seomatic extends Plugin
 {
@@ -85,7 +85,7 @@ class Seomatic extends Plugin
             // Load the meta containers for this page
             Seomatic::$plugin->meta->loadMetaContainers();
             // Load the sitemap containers
-            Seomatic::$plugin->sitemap->loadSitemapContainers();
+            Seomatic::$plugin->sitemaps->loadSitemapContainers();
             // Register our error handler
             $handler = new SeomaticErrorHandler;
             Craft::$app->set('errorHandler', $handler);
@@ -132,7 +132,7 @@ class Seomatic extends Plugin
                     'key' => 'seomatic-sitemap-caches',
                     'label' => Craft::t('seomatic', 'SEOmatic sitemap caches'),
                     'action' => function () {
-                        Seomatic::$plugin->sitemap->invalidateCaches();
+                        Seomatic::$plugin->sitemaps->invalidateCaches();
                     }
                 ];
             }

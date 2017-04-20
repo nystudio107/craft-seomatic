@@ -32,7 +32,7 @@ use yii\caching\TagDependency;
  * @package   Seomatic
  * @since     3.0.0
  */
-class Sitemap extends Component implements SitemapInterface
+class Sitemaps extends Component implements SitemapInterface
 {
     // Constants
     // =========================================================================

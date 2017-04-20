@@ -11,7 +11,10 @@
 
 namespace nystudio107\seomatic\web;
 
+use nystudio107\seomatic\Seomatic;
+
 use Craft;
+
 use yii\base\Exception;
 use yii\web\HttpException;
 
@@ -37,7 +40,7 @@ class ErrorHandler extends \craft\web\ErrorHandler
 
         // If this is a 404 error, see if we can handle it
         if ($exception instanceof HttpException && $exception->statusCode === 404) {
-            Craft::dd('Hello, world');
+            Seomatic::$plugin->redirects->handle404();
         }
 
         parent::handleException($exception);
