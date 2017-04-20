@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic;
 
-use craft\base\Element;
+use nystudio107\seomatic\web\ErrorHandler as SeomaticErrorHandler;
 use nystudio107\seomatic\services\MetaBundles as MetaBundlesService;
 use nystudio107\seomatic\services\Meta as MetaService;
 use nystudio107\seomatic\services\Sitemap as SitemapService;
@@ -19,6 +19,7 @@ use nystudio107\seomatic\twigextensions\JsonLdTwigExtension;
 use nystudio107\seomatic\variables\SeomaticVariable;
 
 use Craft;
+use craft\base\Element;
 use craft\base\Plugin;
 use craft\elements\Category;
 use craft\elements\Entry;
@@ -85,6 +86,11 @@ class Seomatic extends Plugin
             Seomatic::$plugin->meta->loadMetaContainers();
             // Load the sitemap containers
             Seomatic::$plugin->sitemap->loadSitemapContainers();
+            // Register our error handler
+            $handler = new SeomaticErrorHandler;
+            Craft::$app->set('errorHandler', $handler);
+            $handler->register();
+
         }
     }
 
