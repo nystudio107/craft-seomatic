@@ -91,7 +91,7 @@ class Install extends Migration
                     'sourceSiteId' => $this->integer()->notNull(),
                     'sourceAltSiteSettings' => $this->text(),
                     'sourceDateUpdated' => $this->dateTime()->notNull(),
-                    
+
                     'sitemapUrls' => $this->boolean()->notNull(),
                     'sitemapAssets' => $this->boolean()->notNull(),
                     'sitemapFiles' => $this->boolean()->notNull(),
