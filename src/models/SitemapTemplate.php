@@ -128,7 +128,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             // Sitemap index XML header and opening tag
             $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
             // One sitemap entry for each element
-            $metaBundle = Seomatic::$plugin->metaBundles->metaBundleByHandle($handle, $siteId);
+            $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleByHandle($handle, $siteId);
             $multiSite = count($metaBundle->sourceAltSiteSettings) > 1;
             $elements = null;
             if ($metaBundle && $metaBundle->sitemapUrls) {

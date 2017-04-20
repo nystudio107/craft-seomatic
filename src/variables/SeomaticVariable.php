@@ -145,6 +145,6 @@ class SeomaticVariable
      */
     public function getMetaBundles()
     {
-        return Seomatic::$plugin->metaBundles->metaBundles();
+        return Seomatic::$plugin->metaBundles->getAllMetaBundles();
     }
 }

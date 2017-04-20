@@ -41,9 +41,9 @@ use yii\base\Event;
  * @package   Seomatic
  * @since     3.0.0
  *
- * @property  MetaBundlesService  metaBundles
- * @property  MetaService         meta
- * @property  SitemapsService     sitemaps
+ * @property  MetaBundlesService metaBundles
+ * @property  MetaService        meta
+ * @property  SitemapsService    sitemaps
  */
 class Seomatic extends Plugin
 {

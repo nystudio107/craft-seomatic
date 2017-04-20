@@ -57,7 +57,7 @@ class MetaBundles extends Component
     public function invalidateMetaBundle(int $sourceId, bool $isNew)
     {
         // See if this is a section we are tracking
-        $metaBundle = $this->metaBundleBySourceId($sourceId);
+        $metaBundle = $this->getMetaBundleBySourceId($sourceId);
         if ($metaBundle) {
             Craft::info(
                 'Invalidating meta bundle: ' . $metaBundle->sourceHandle,
@@ -77,10 +77,10 @@ class MetaBundles extends Component
      *
      * @return MetaBundle
      */
-    public function metaBundleBySourceId(int $sourceId, int $siteId = null): MetaBundle
+    public function getMetaBundleBySourceId(int $sourceId, int $siteId = null): MetaBundle
     {
         // @todo this should look in the seomatic_meta_bundles db table
-        $metaBundles = $this->metaBundles();
+        $metaBundles = $this->getAllMetaBundles();
         /** @var  $metaBundle MetaBundle */
         foreach ($metaBundles as $metaBundle) {
             if ($sourceId == $metaBundle->sourceId) {
@@ -99,10 +99,10 @@ class MetaBundles extends Component
      *
      * @return null|MetaBundle
      */
-    public function metaBundleByHandle(string $handle, int $siteId = null): MetaBundle
+    public function getMetaBundleByHandle(string $handle, int $siteId = null): MetaBundle
     {
-        // @todo this should look in the seomatic_meta_bundles db table
-        $metaBundles = $this->metaBundles();
+        // @todo this should look in the seomatic_metabundles db table
+        $metaBundles = $this->getAllMetaBundles();
         /** @var  $metaBundle MetaBundle */
         foreach ($metaBundles as $metaBundle) {
             if ($handle === $metaBundle->sourceHandle) {
@@ -120,12 +120,12 @@ class MetaBundles extends Component
      *
      * @return MetaBundle[]
      */
-    public function metaBundles(): array
+    public function getAllMetaBundles(): array
     {
         if ($this->_metaBundles) {
             return $this->_metaBundles;
         }
-        // @todo this should look in the seomatic_meta_bundles db table
+        // @todo this should look in the seomatic_metabundles db table
         $metaBundles = [];
 
         // Get all of the sections with URLs
