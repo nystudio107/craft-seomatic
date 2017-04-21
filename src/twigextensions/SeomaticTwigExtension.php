@@ -31,8 +31,11 @@ class SeomaticTwigExtension extends \Twig_Extension implements \Twig_Extension_G
     {
         $result = [];
 
-        // Load the meta containers for this page
-        Seomatic::$plugin->metaContainers->loadMetaContainers();
+        $view = Craft::$app->getView();
+        if ($view->getIsRenderingPageTemplate()) {
+            // Load the meta containers for this page
+            Seomatic::$plugin->metaContainers->loadMetaContainers();
+        }
 
         return $result;
     }

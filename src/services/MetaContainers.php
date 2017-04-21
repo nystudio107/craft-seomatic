@@ -45,6 +45,11 @@ class MetaContainers extends Component
      */
     protected $loadingContainers = false;
 
+    /**
+     * @var bool
+     */
+    protected $containersLoaded = false;
+
     // Public Methods
     // =========================================================================
 
@@ -62,7 +67,7 @@ class MetaContainers extends Component
     public function loadMetaContainers(): void
     {
         // Avoid recursion
-        if (!$this->loadingContainers) {
+        if (!$this->loadingContainers && !$this->containersLoaded) {
             $this->loadingContainers = true;
 
             $this->loadGlobalMetaContainers();
@@ -82,6 +87,7 @@ class MetaContainers extends Component
                 }
             );
             $this->loadingContainers = false;
+            $this->containersLoaded = true;
         }
     }
 
