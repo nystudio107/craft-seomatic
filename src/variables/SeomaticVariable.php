@@ -35,7 +35,7 @@ class SeomaticVariable
      */
     public function includeMetaTitle(string $title)
     {
-        Seomatic::$plugin->meta->includeMetaTitle($title);
+        Seomatic::$plugin->metaContainers->includeMetaTitle($title);
     }
 
     /**
@@ -56,7 +56,7 @@ class SeomaticVariable
      */
     public function includeMetaTag(MetaTag $metaTag, $key = null)
     {
-        Seomatic::$plugin->meta->addToMetaContainer($metaTag, MetaTagContainer::CONTAINER_TYPE, $key);
+        Seomatic::$plugin->metaContainers->addToMetaContainer($metaTag, MetaTagContainer::CONTAINER_TYPE, $key);
     }
 
     /**
@@ -77,7 +77,7 @@ class SeomaticVariable
      */
     public function includeMetaLink(MetaLink $metaLink, $key = null)
     {
-        Seomatic::$plugin->meta->addToMetaContainer($metaLink, MetaLinkContainer::CONTAINER_TYPE, $key);
+        Seomatic::$plugin->metaContainers->addToMetaContainer($metaLink, MetaLinkContainer::CONTAINER_TYPE, $key);
     }
 
     /**
@@ -99,7 +99,7 @@ class SeomaticVariable
      */
     public function includeMetaJsonLd(MetaJsonLd $jsonLdModel, $key = null)
     {
-        Seomatic::$plugin->meta->addToMetaContainer($jsonLdModel, MetaJsonLdContainer::CONTAINER_TYPE, $key);
+        Seomatic::$plugin->metaContainers->addToMetaContainer($jsonLdModel, MetaJsonLdContainer::CONTAINER_TYPE, $key);
     }
 
     /**
@@ -125,7 +125,7 @@ class SeomaticVariable
      */
     public function includeMetaScript(MetaScript $metaScript, $key = null)
     {
-        Seomatic::$plugin->meta->addToMetaContainer($metaScript, MetaScriptContainer::CONTAINER_TYPE, $key);
+        Seomatic::$plugin->metaContainers->addToMetaContainer($metaScript, MetaScriptContainer::CONTAINER_TYPE, $key);
     }
 
     /**

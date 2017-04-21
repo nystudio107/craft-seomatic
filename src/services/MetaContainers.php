@@ -21,7 +21,6 @@ use nystudio107\seomatic\models\MetaJsonLdContainer;
 
 use Craft;
 use craft\base\Component;
-use craft\services\Sites;
 use craft\web\View;
 
 use yii\base\Event;
@@ -31,7 +30,7 @@ use yii\base\Event;
  * @package   Seomatic
  * @since     3.0.0
  */
-class Meta extends Component
+class MetaContainers extends Component
 {
     // Protected Properties
     // =========================================================================

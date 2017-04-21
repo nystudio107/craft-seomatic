@@ -13,7 +13,7 @@ namespace nystudio107\seomatic;
 
 use nystudio107\seomatic\web\ErrorHandler as SeomaticErrorHandler;
 use nystudio107\seomatic\services\MetaBundles as MetaBundlesService;
-use nystudio107\seomatic\services\Meta as MetaService;
+use nystudio107\seomatic\services\MetaContainers as MetaContainersService;
 use nystudio107\seomatic\services\Sitemaps as SitemapsService;
 use nystudio107\seomatic\twigextensions\SeomaticTwigExtension;
 use nystudio107\seomatic\variables\SeomaticVariable;
@@ -41,9 +41,9 @@ use yii\base\Event;
  * @package   Seomatic
  * @since     3.0.0
  *
- * @property  MetaBundlesService metaBundles
- * @property  MetaService        meta
- * @property  SitemapsService    sitemaps
+ * @property  MetaBundlesService    metaBundles
+ * @property  MetaContainersService metaContainers
+ * @property  SitemapsService       sitemaps
  */
 class Seomatic extends Plugin
 {

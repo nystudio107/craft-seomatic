@@ -32,7 +32,7 @@ class SeomaticTwigExtension extends \Twig_Extension implements \Twig_Extension_G
         $result = [];
 
         // Load the meta containers for this page
-        Seomatic::$plugin->meta->loadMetaContainers();
+        Seomatic::$plugin->metaContainers->loadMetaContainers();
 
         return $result;
     }
