@@ -11,15 +11,31 @@
 
 namespace nystudio107\seomatic\twigextensions;
 
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\models\MetaJsonLd;
+
+use Craft;
 
 /**
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-class JsonLdTwigExtension extends \Twig_Extension
+class SeomaticTwigExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
 {
+
+    /**
+     * @inheritdoc
+     */
+    public function getGlobals(): array
+    {
+        $result = [];
+
+        // Load the meta containers for this page
+        Seomatic::$plugin->meta->loadMetaContainers();
+
+        return $result;
+    }
 
     /**
      * Return our Twig Extension name
@@ -27,7 +43,7 @@ class JsonLdTwigExtension extends \Twig_Extension
      */
     public function getName()
     {
-        return 'JsonLD';
+        return 'Seomatic';
     }
 
     /**

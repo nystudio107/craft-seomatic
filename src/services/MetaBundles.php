@@ -30,6 +30,17 @@ use craft\models\CategoryGroup_SiteSettings;
  */
 class MetaBundles extends Component
 {
+    // Constants
+    // =========================================================================
+
+    const GLOBAL_META_BUNDLE = '__GLOBAL_BUNDLE__';
+    const IGNORE_DB_ATTRIBUTES = [
+        'id',
+        'dateCreated',
+        'dateUpdated',
+        'uid',
+    ];
+
     // Protected Properties
     // =========================================================================
 
@@ -100,7 +111,7 @@ class MetaBundles extends Component
      *
      * @return null|MetaBundle
      */
-    public function getMetaBundleBySourceHandle(string $sourceHandle, int $siteId = null): MetaBundle
+    public function getMetaBundleBySourceHandle(string $sourceHandle, int $siteId = null): ?MetaBundle
     {
         // @todo this should look in the seomatic_metabundles db table
         $metaBundles = $this->getAllMetaBundles();
@@ -122,7 +133,7 @@ class MetaBundles extends Component
      *
      * @return null|MetaBundle
      */
-    public function getMetaBundleBySourceTemplate(string $sourceTemplate, int $siteId = null): MetaBundle
+    public function getMetaBundleBySourceTemplate(string $sourceTemplate, int $siteId = null)
     {
         // @todo this should look in the seomatic_metabundles db table
         $metaBundles = $this->getAllMetaBundles();
@@ -247,6 +258,55 @@ class MetaBundles extends Component
         $this->metaBundles = $metaBundles;
 
         return $metaBundles;
+    }
+
+    /**
+     * Get the global meta bundle for the site
+     *
+     * @param int $sourceSiteId
+     *
+     * @return MetaBundle
+     */
+    public function getGlobalMetaBundle(int $sourceSiteId): MetaBundle
+    {
+        $metaBundleRecord = MetaBundleRecord::findOne([
+            'sourceHandle' => self::GLOBAL_META_BUNDLE,
+            'sourceSiteId' => $sourceSiteId,
+        ]);
+        if (!$metaBundleRecord) {
+            $metaBundleRecord = $this->createGlobalMetaBundle($sourceSiteId);
+        }
+        $metaBundle = new MetaBundle($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
+
+        return $metaBundle;
+    }
+
+    // Protected Methods
+    // =========================================================================
+
+    /**
+     * Create the default global meta bundle
+     *
+     * @param int $sourceSiteId
+     *
+     * @return MetaBundleRecord
+     */
+    protected function createGlobalMetaBundle(int $sourceSiteId): MetaBundleRecord
+    {
+        $metaBundle = new MetaBundle([
+            'sourceHandle' => self::GLOBAL_META_BUNDLE,
+            'sourceSiteId' => $sourceSiteId,
+            'sourceElementType' => 'global',
+            'sourceName' => 'Global',
+            'sourceType' => 'global',
+            'sourceTemplate' => '',
+            'sourceDateUpdated' => new \DateTime(),
+
+        ]);
+        $metaBundleRecord = new MetaBundleRecord($metaBundle->getAttributes());
+        $metaBundleRecord->save();
+
+        return $metaBundleRecord;
     }
 
     /**

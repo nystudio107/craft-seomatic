@@ -102,7 +102,7 @@ class Install extends Migration
                     'metaTagContainer' => $this->text(),
                     'metaLinkContainer' => $this->text(),
                     'metaScriptContainer' => $this->text(),
-                    'metaJsonLDContainer' => $this->text(),
+                    'metaJsonLdContainer' => $this->text(),
                     'redirectsContainer' => $this->text(),
                 ]
             );

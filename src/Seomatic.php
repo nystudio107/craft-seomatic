@@ -15,7 +15,7 @@ use nystudio107\seomatic\web\ErrorHandler as SeomaticErrorHandler;
 use nystudio107\seomatic\services\MetaBundles as MetaBundlesService;
 use nystudio107\seomatic\services\Meta as MetaService;
 use nystudio107\seomatic\services\Sitemaps as SitemapsService;
-use nystudio107\seomatic\twigextensions\JsonLdTwigExtension;
+use nystudio107\seomatic\twigextensions\SeomaticTwigExtension;
 use nystudio107\seomatic\variables\SeomaticVariable;
 
 use Craft;
@@ -77,13 +77,11 @@ class Seomatic extends Plugin
         );
         // Add in our event listeners that are needed for every request
         $this->installEventListeners();
-        // Add in our Twig extensions
-        Craft::$app->view->twig->addExtension(new JsonLdTwigExtension());
         // Only respond to non-console site requests
         $request = Craft::$app->getRequest();
         if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
-            // Load the meta containers for this page
-            Seomatic::$plugin->meta->loadMetaContainers();
+            // Add in our Twig extensions
+            Craft::$app->view->twig->addExtension(new SeomaticTwigExtension);
             // Load the sitemap containers
             Seomatic::$plugin->sitemaps->loadSitemapContainers();
             // Register our error handler

@@ -21,9 +21,9 @@ use nystudio107\seomatic\models\MetaJsonLdContainer;
 
 use Craft;
 use craft\base\Component;
+use craft\services\Sites;
 use craft\web\View;
 
-use nystudio107\seomatic\variables\SeomaticVariable;
 use yii\base\Event;
 
 /**
@@ -176,7 +176,8 @@ class Meta extends Component
      */
     protected function loadGlobalMetaContainers()
     {
-        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle();
+        $siteId = Craft::$app->getSites()->currentSite->id;
+        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle) {
         }
     }
@@ -186,8 +187,28 @@ class Meta extends Component
      */
     protected function loadSectionMetaContainers()
     {
+        $metaBundle = null;
+        $siteId = Craft::$app->getSites()->currentSite->id;
         $view = Craft::$app->getView();
-        $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceTemplate($view->getRenderingTemplate());
+        $template = $view->getRenderingTemplate();
+        if ($template) {
+            $templatePath = $view->getTemplatesPath() . DIRECTORY_SEPARATOR;
+            $template = str_replace($templatePath, '', $template);
+            // Try an exact match first
+            $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceTemplate(
+                $template,
+                $siteId
+            );
+            // Try without the file extension
+            if (!$metaBundle) {
+                $pathParts = pathinfo($template);
+                $template = ($pathParts['dirname'] == '.' ? '' : $pathParts['dirname']) . $pathParts['filename'];
+                $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceTemplate(
+                    $template,
+                    $siteId
+                );
+            }
+        }
         if ($metaBundle) {
         }
     }
