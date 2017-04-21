@@ -14,6 +14,7 @@ namespace nystudio107\seomatic\services;
 use craft\elements\Category;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\models\MetaBundle;
+use nystudio107\seomatic\records\MetaBundle as MetaBundleRecord;
 
 use Craft;
 use craft\base\Component;
@@ -35,7 +36,7 @@ class MetaBundles extends Component
     /**
      * @var MetaBundle[]
      */
-    protected $_metaBundles;
+    protected $metaBundles;
 
     // Public Methods
     // =========================================================================
@@ -94,18 +95,40 @@ class MetaBundles extends Component
     }
 
     /**
-     * @param string $handle
+     * @param string $sourceHandle
      * @param int    $siteId
      *
      * @return null|MetaBundle
      */
-    public function getMetaBundleByHandle(string $handle, int $siteId = null): MetaBundle
+    public function getMetaBundleBySourceHandle(string $sourceHandle, int $siteId = null): MetaBundle
     {
         // @todo this should look in the seomatic_metabundles db table
         $metaBundles = $this->getAllMetaBundles();
         /** @var  $metaBundle MetaBundle */
         foreach ($metaBundles as $metaBundle) {
-            if ($handle === $metaBundle->sourceHandle) {
+            if ($sourceHandle === $metaBundle->sourceHandle) {
+                if ($siteId == null || $siteId == $metaBundle->sourceSiteId) {
+                    return $metaBundle;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param string $sourceTemplate
+     * @param int    $siteId
+     *
+     * @return null|MetaBundle
+     */
+    public function getMetaBundleBySourceTemplate(string $sourceTemplate, int $siteId = null): MetaBundle
+    {
+        // @todo this should look in the seomatic_metabundles db table
+        $metaBundles = $this->getAllMetaBundles();
+        /** @var  $metaBundle MetaBundle */
+        foreach ($metaBundles as $metaBundle) {
+            if ($sourceTemplate === $metaBundle->sourceTemplate) {
                 if ($siteId == null || $siteId == $metaBundle->sourceSiteId) {
                     return $metaBundle;
                 }
@@ -122,8 +145,8 @@ class MetaBundles extends Component
      */
     public function getAllMetaBundles(): array
     {
-        if ($this->_metaBundles) {
-            return $this->_metaBundles;
+        if ($this->metaBundles) {
+            return $this->metaBundles;
         }
         // @todo this should look in the seomatic_metabundles db table
         $metaBundles = [];
@@ -221,7 +244,7 @@ class MetaBundles extends Component
 
         // @todo Get all of the Commerce Products with URLs
 
-        $this->_metaBundles = $metaBundles;
+        $this->metaBundles = $metaBundles;
 
         return $metaBundles;
     }

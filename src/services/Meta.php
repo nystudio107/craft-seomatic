@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\services;
 
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\models\MetaTagContainer;
@@ -22,6 +23,7 @@ use Craft;
 use craft\base\Component;
 use craft\web\View;
 
+use nystudio107\seomatic\variables\SeomaticVariable;
 use yii\base\Event;
 
 /**
@@ -39,6 +41,11 @@ class Meta extends Component
      */
     protected $metaContainers = [];
 
+    /**
+     * @var bool
+     */
+    protected $loadingContainers = false;
+
     // Public Methods
     // =========================================================================
 
@@ -55,17 +62,28 @@ class Meta extends Component
      */
     public function loadMetaContainers(): void
     {
-        $this->loadGlobalMetaContainers();
-        $this->loadSectionMetaContainers();
+        // Avoid recursion
+        if (!$this->loadingContainers) {
+            $this->loadingContainers = true;
 
-        // Listen for the page rendering event
-        Event::on(
-            View::className(),
-            View::EVENT_END_PAGE,
-            function (Event $event) {
-                $this->includeMetaContainers();
-            }
-        );
+            $this->loadGlobalMetaContainers();
+            $this->loadSectionMetaContainers();
+
+            // Handler: View::EVENT_END_PAGE
+            Event::on(
+                View::className(),
+                View::EVENT_END_PAGE,
+                function (Event $event) {
+                    Craft::trace(
+                        'View::EVENT_END_PAGE',
+                        'seomatic'
+                    );
+                    // The page is done rendering, include our meta containers
+                    $this->includeMetaContainers();
+                }
+            );
+            $this->loadingContainers = false;
+        }
     }
 
     /**
@@ -158,6 +176,9 @@ class Meta extends Component
      */
     protected function loadGlobalMetaContainers()
     {
+        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle();
+        if ($metaBundle) {
+        }
     }
 
     /**
@@ -165,6 +186,10 @@ class Meta extends Component
      */
     protected function loadSectionMetaContainers()
     {
+        $view = Craft::$app->getView();
+        $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceTemplate($view->getRenderingTemplate());
+        if ($metaBundle) {
+        }
     }
 
     // Protected Methods

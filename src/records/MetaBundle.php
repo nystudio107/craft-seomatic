@@ -21,7 +21,7 @@ use craft\db\ActiveRecord;
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaBundles extends ActiveRecord
+class MetaBundle extends ActiveRecord
 {
     // Public Static Methods
     // =========================================================================

@@ -83,12 +83,12 @@ class Install extends Migration
                     'uid' => $this->uid(),
 
                     'sourceElementType' => $this->string()->notNull()->defaultValue(''),
-                    'sourceId' => $this->integer()->notNull(),
+                    'sourceId' => $this->integer()->null(),
                     'sourceName' => $this->string()->notNull()->defaultValue(''),
                     'sourceHandle' => $this->string(64)->notNull()->defaultValue(''),
                     'sourceType' => $this->string(64)->notNull()->defaultValue(''),
                     'sourceTemplate' => $this->string(500)->notNull()->defaultValue(''),
-                    'sourceSiteId' => $this->integer()->notNull(),
+                    'sourceSiteId' => $this->integer()->null(),
                     'sourceAltSiteSettings' => $this->text(),
                     'sourceDateUpdated' => $this->dateTime()->notNull(),
 
