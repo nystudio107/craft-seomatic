@@ -9,11 +9,7 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-use nystudio107\seomatic\models\MetaTagContainer;
-use nystudio107\seomatic\models\MetaLinkContainer;
-use nystudio107\seomatic\models\MetaScriptContainer;
-use nystudio107\seomatic\models\MetaJsonLdContainer;
-use nystudio107\seomatic\models\FrontendTemplateContainer;
+use nystudio107\seomatic\helpers\Config as ConfigHelper;
 
 use craft\elements\Entry;
 
@@ -42,11 +38,10 @@ return [
     'sitemapChangeFreq' => 'weekly',
     'sitemapPriority' => 0.5,
 
-    'metaTagContainer' => MetaTagContainer::create(),
-    'metaLinkContainer' => MetaLinkContainer::create(),
-    'metaScriptContainer' => MetaScriptContainer::create(),
-    'metaJsonLdContainer' => MetaJsonLdContainer::create(),
-    'redirectsContainer' => [
-    ],
-    'frontendTemplatesContainer' => FrontendTemplateContainer::create(),
+    'metaTagContainer' => ConfigHelper::getConfigFromFile('EntryMetaTagContainer', 'defaults'),
+    'metaLinkContainer' => ConfigHelper::getConfigFromFile('EntryMetaLinkContainer', 'defaults'),
+    'metaScriptContainer' => ConfigHelper::getConfigFromFile('EntryMetaScriptContainer', 'defaults'),
+    'metaJsonLdContainer' => ConfigHelper::getConfigFromFile('EntryMetaJsonLdContainer', 'defaults'),
+    'redirectsContainer' => ConfigHelper::getConfigFromFile('EntryRedirectsContainer', 'defaults'),
+    'frontendTemplatesContainer' => ConfigHelper::getConfigFromFile('EntryFrontendTemplatesContainer', 'defaults'),
 ];

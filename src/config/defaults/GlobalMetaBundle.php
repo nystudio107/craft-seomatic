@@ -9,12 +9,7 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-use nystudio107\seomatic\services\MetaBundles;
-use nystudio107\seomatic\models\MetaTagContainer;
-use nystudio107\seomatic\models\MetaLinkContainer;
-use nystudio107\seomatic\models\MetaScriptContainer;
-use nystudio107\seomatic\models\MetaJsonLdContainer;
-use nystudio107\seomatic\models\FrontendTemplateContainer;
+use nystudio107\seomatic\helpers\Config as ConfigHelper;
 
 /**
  * @author    nystudio107
@@ -41,11 +36,10 @@ return [
     'sitemapChangeFreq' => 'weekly',
     'sitemapPriority' => 0.5,
 
-    'metaTagContainer' => MetaTagContainer::create(),
-    'metaLinkContainer' => MetaLinkContainer::create(),
-    'metaScriptContainer' => MetaScriptContainer::create(),
-    'metaJsonLdContainer' => MetaJsonLdContainer::create(),
-    'redirectsContainer' => [
-    ],
-    'frontendTemplatesContainer' => FrontendTemplateContainer::create(),
+    'metaTagContainer' => ConfigHelper::getConfigFromFile('GlobalMetaTagContainer', 'defaults'),
+    'metaLinkContainer' => ConfigHelper::getConfigFromFile('GlobalMetaLinkContainer', 'defaults'),
+    'metaScriptContainer' => ConfigHelper::getConfigFromFile('GlobalMetaScriptContainer', 'defaults'),
+    'metaJsonLdContainer' => ConfigHelper::getConfigFromFile('GlobalMetaJsonLdContainer', 'defaults'),
+    'redirectsContainer' => ConfigHelper::getConfigFromFile('GlobalRedirectsContainer', 'defaults'),
+    'frontendTemplatesContainer' => ConfigHelper::getConfigFromFile('GlobalFrontendTemplatesContainer', 'defaults'),
 ];

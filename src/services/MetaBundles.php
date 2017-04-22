@@ -220,7 +220,7 @@ class MetaBundles extends Component
             ->where(['!=', 'sourceHandle', self::GLOBAL_META_BUNDLE])
             ->all();
         foreach ($metaBundleRecords as $metaBundleRecord) {
-            $metaBundle = new MetaBundle($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
+            $metaBundle = MetaBundle::create($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
             if ($metaBundle) {
                 $metaBundles[] = $metaBundle;
             }
@@ -244,7 +244,7 @@ class MetaBundles extends Component
             'sourceSiteId' => $sourceSiteId,
         ]);
         if ($metaBundleRecord) {
-            $metaBundle = new MetaBundle($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
+            $metaBundle = MetaBundle::create($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
         }
 
         return $metaBundle;

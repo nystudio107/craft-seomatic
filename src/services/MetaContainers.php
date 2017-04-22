@@ -11,6 +11,9 @@
 
 namespace nystudio107\seomatic\services;
 
+use nystudio107\seomatic\models\MetaJsonLd;
+use nystudio107\seomatic\models\MetaScript;
+use nystudio107\seomatic\models\MetaTag;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\base\MetaItem;
@@ -32,6 +35,17 @@ use yii\base\Event;
  */
 class MetaContainers extends Component
 {
+    // Constants
+    // =========================================================================
+
+    const SEOMATIC_METATAG_CONTAINER = Seomatic::SEOMATIC_HANDLE . MetaTag::ITEM_TYPE;
+
+    const SEOMATIC_METALINK_CONTAINER = Seomatic::SEOMATIC_HANDLE . MetaLink::ITEM_TYPE;
+
+    const SEOMATIC_METASCRIPT_CONTAINER = Seomatic::SEOMATIC_HANDLE . MetaScript::ITEM_TYPE;
+
+    const SEOMATIC_METAJSONLD_CONTAINER = Seomatic::SEOMATIC_HANDLE . MetaJsonLd::ITEM_TYPE;
+
     // Protected Properties
     // =========================================================================
 
@@ -184,6 +198,10 @@ class MetaContainers extends Component
         $siteId = Craft::$app->getSites()->currentSite->id;
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle) {
+            $this->metaContainers->addData($metaBundle->metaTagContainer, self::SEOMATIC_METATAG_CONTAINER);
+            $this->metaContainers->addData($metaBundle->metaLinkContainer, self::SEOMATIC_METALINK_CONTAINER);
+            $this->metaContainers->addData($metaBundle->metaScriptContainer, self::SEOMATIC_METASCRIPT_CONTAINER);
+            $this->metaContainers->addData($metaBundle->metaJsonLdContainer, self::SEOMATIC_METAJSONLD_CONTAINER);
         }
     }
 

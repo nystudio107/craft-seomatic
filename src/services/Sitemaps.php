@@ -37,6 +37,10 @@ class Sitemaps extends Component implements SitemapInterface
     // Constants
     // =========================================================================
 
+    const SEOMATIC_SITEMAPINDEX_CONTAINER = Seomatic::SEOMATIC_HANDLE . SitemapIndexTemplate::TEMPLATE_TYPE;
+
+    const SEOMATIC_SITEMAP_CONTAINER = Seomatic::SEOMATIC_HANDLE . SitemapTemplate::TEMPLATE_TYPE;
+
     const SEARCH_ENGINE_SUBMISSION_URLS = [
         'google' => 'http://www.google.com/webmasters/sitemaps/ping?sitemap=',
         'bing'   => 'http://www.bing.com/webmaster/ping.aspx?siteMap=',
@@ -69,10 +73,10 @@ class Sitemaps extends Component implements SitemapInterface
         $this->sitemapTemplateContainer = FrontendTemplateContainer::create();
         // The Sitemap Index
         $sitemapIndexTemplate = SitemapIndexTemplate::create();
-        $this->sitemapTemplateContainer->addData($sitemapIndexTemplate, SitemapIndexTemplate::TEMPLATE_TYPE);
+        $this->sitemapTemplateContainer->addData($sitemapIndexTemplate, self::SEOMATIC_SITEMAPINDEX_CONTAINER);
         // A generic sitemap
         $sitemapTemplate = SitemapTemplate::create();
-        $this->sitemapTemplateContainer->addData($sitemapTemplate, SitemapTemplate::TEMPLATE_TYPE);
+        $this->sitemapTemplateContainer->addData($sitemapTemplate, self::SEOMATIC_SITEMAP_CONTAINER);
 
         // Register our site routes
         Event::on(
@@ -165,6 +169,7 @@ class Sitemaps extends Component implements SitemapInterface
      * Invalidate the sitemap cache passed in $handle
      *
      * @param string $handle
+     * @param int    $siteId
      */
     public function invalidateSitemapCache(string $handle, int $siteId)
     {

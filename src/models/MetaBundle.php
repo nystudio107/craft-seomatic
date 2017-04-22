@@ -11,6 +11,12 @@
 
 namespace nystudio107\seomatic\models;
 
+use nystudio107\seomatic\models\MetaTagContainer;
+use nystudio107\seomatic\models\MetaLinkContainer;
+use nystudio107\seomatic\models\MetaScriptContainer;
+use nystudio107\seomatic\models\MetaJsonLdContainer;
+use nystudio107\seomatic\models\FrontendTemplateContainer;
+
 use craft\base\Model;
 
 /**
@@ -99,22 +105,22 @@ class MetaBundle extends Model
     public $sitemapPriority;
 
     /**
-     * @var array
+     * @var MetaTagContainer
      */
     public $metaTagContainer;
 
     /**
-     * @var array
+     * @var MetaLinkContainer
      */
     public $metaLinkContainer;
 
     /**
-     * @var array
+     * @var MetaScriptContainer
      */
     public $metaScriptContainer;
 
     /**
-     * @var array
+     * @var MetaJsonLdContainer
      */
     public $metaJsonLdContainer;
 
@@ -130,6 +136,38 @@ class MetaBundle extends Model
 
     // Methods
     // =========================================================================
+
+    /**
+     * Create a new meta bundle
+     *
+     * @param array $config
+     *
+     * @return null|MetaBundle
+     */
+    public static function create($config = [])
+    {
+        $model = new MetaBundle($config);
+        if ($model) {
+            $model->normalizeMetaBundleData();
+        }
+
+        return $model;
+    }
+
+    /**
+     * Normalizes the meta bundles’s data for use.
+     *
+     * This is called after meta bundle data is loaded, to allow it to be
+     * parsed, models instantiated, etc.
+     */
+    public function normalizeMetaBundleData()
+    {
+        $this->metaTagContainer = MetaTagContainer::create($this->metaTagContainer->data);
+        $this->metaLinkContainer = MetaLinkContainer::create($this->metaLinkContainer->data);
+        $this->metaScriptContainer = MetaScriptContainer::create($this->metaScriptContainer->data);
+        $this->metaJsonLdContainer = MetaJsonLdContainer::create($this->metaJsonLdContainer->data);
+        $this->frontendTemplatesContainer = FrontendTemplateContainer::create($this->frontendTemplatesContainer->data);
+    }
 
     /**
      * @inheritdoc
@@ -166,7 +204,7 @@ class MetaBundle extends Model
                     'sitemapChangeFreq',
                     'sitemapPriority',
                 ],
-                'required'
+                'required',
             ],
             [
                 [
@@ -177,7 +215,7 @@ class MetaBundle extends Model
                     'sourceType',
                     'sitemapChangeFreq',
                 ],
-                'string'
+                'string',
             ],
             [['sourceId', 'sourceSiteId'], 'number', 'min' => 1],
             [['sourceDateUpdated'], 'datetime'],

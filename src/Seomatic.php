@@ -49,6 +49,14 @@ use yii\base\Event;
  */
 class Seomatic extends Plugin
 {
+    // Constants
+    // =========================================================================
+
+    const SEOMATIC_HANDLE = 'Seomatic';
+
+    // Static Properties
+    // =========================================================================
+
     /**
      * @var Seomatic
      */
@@ -58,6 +66,9 @@ class Seomatic extends Plugin
      * @var bool
      */
     public static $devMode;
+
+    // Public Methods
+    // =========================================================================
 
     /**
      * @inheritdoc
@@ -111,6 +122,9 @@ class Seomatic extends Plugin
     {
         return Craft::t('seomatic', 'SEOmatic');
     }
+
+    // Protected Methods
+    // =========================================================================
 
     /**
      * Install global event listeners
