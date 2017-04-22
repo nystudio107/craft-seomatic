@@ -11,8 +11,6 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use nystudio107\seomatic\Seomatic;
-
 use Craft;
 use craft\base\Component;
 

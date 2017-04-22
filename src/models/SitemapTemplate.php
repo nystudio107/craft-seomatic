@@ -115,7 +115,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         $dependency = new TagDependency([
             'tags' => [
                 $this::GLOBAL_SITEMAP_CACHE_TAG,
-                $this::SITEMAP_CACHE_TAG . $handle,
+                $this::SITEMAP_CACHE_TAG . $handle . $siteId,
             ],
         ]);
 
@@ -324,11 +324,12 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
      * Invalidate a sitemap cache
      *
      * @param string $handle
+     * @param int    $siteId
      */
-    public function invalidateCache(string $handle)
+    public function invalidateCache(string $handle, int $siteId)
     {
         $cache = Craft::$app->getCache();
-        TagDependency::invalidate($cache, $this::SITEMAP_CACHE_TAG . $handle);
+        TagDependency::invalidate($cache, $this::SITEMAP_CACHE_TAG . $handle . $siteId);
         Craft::info(
             'Sitemap cache cleared: ' . $handle,
             'seomatic'

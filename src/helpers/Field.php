@@ -14,6 +14,7 @@ namespace nystudio107\seomatic\helpers;
 use Craft;
 use craft\base\Component;
 use craft\base\Element;
+use craft\base\Field as BaseField;
 use craft\elements\MatrixBlock;
 
 /**
@@ -27,6 +28,8 @@ class Field extends Component
     // =========================================================================
 
     /**
+     * Return all of the fields in the $element of the type $fieldType class
+     *
      * @param Element $element
      * @param string  $fieldType
      *
@@ -38,6 +41,7 @@ class Field extends Component
 
         $layout = $element->getFieldLayout();
         $fields = $layout->getFields();
+        /** @var  $field BaseField */
         foreach ($fields as $field) {
             if (($field instanceof $fieldType) || (is_subclass_of($field, $fieldType))) {
                 $foundFields[] = $field->handle;
@@ -47,12 +51,21 @@ class Field extends Component
         return $foundFields;
     }
 
+    /**
+     * Return all of the fields in the $matrixBlock of the type $fieldType class
+     *
+     * @param MatrixBlock $matrixBlock
+     * @param string      $fieldType
+     *
+     * @return array
+     */
     public static function matrixFieldsOfType(MatrixBlock $matrixBlock, string $fieldType)
     {
         $foundFields = [];
 
         $matrixBlockTypeModel = $matrixBlock->getType();
         $fields = $matrixBlockTypeModel->getFields();
+        /** @var  $field BaseField */
         foreach ($fields as $field) {
             if (($field instanceof $fieldType) || (is_subclass_of($field, $fieldType))) {
                 $foundFields[] = $field->handle;
@@ -61,5 +74,4 @@ class Field extends Component
 
         return $foundFields;
     }
-
 }

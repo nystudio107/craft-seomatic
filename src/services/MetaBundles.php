@@ -23,6 +23,8 @@ use craft\elements\Entry;
 use craft\helpers\ArrayHelper;
 use craft\models\Section_SiteSettings;
 use craft\models\CategoryGroup_SiteSettings;
+use craft\models\CategoryGroup;
+use craft\models\Section;
 
 /**
  * @author    nystudio107
@@ -46,9 +48,24 @@ class MetaBundles extends Component
     // =========================================================================
 
     /**
-     * @var MetaBundle[]
+     * @var MetaBundle[] indexed by [id]
      */
-    protected $metaBundles;
+    protected $metaBundles = [];
+
+    /**
+     * @var array indexed by [sourceId][siteId] = id
+     */
+    protected $metaBundlesBySourceId = [];
+
+    /**
+     * @var array indexed by [sourceHandle][siteId] = id
+     */
+    protected $metaBundlesBySourceHandle = [];
+
+    /**
+     * @var array indexed by [sourceTemplate][siteId] = id
+     */
+    protected $metaBundlesBySourceTemplate = [];
 
     // Public Methods
     // =========================================================================
@@ -69,18 +86,32 @@ class MetaBundles extends Component
      */
     public function invalidateMetaBundle(int $sourceId, bool $isNew)
     {
-        // See if this is a section we are tracking
-        $metaBundle = $this->getMetaBundleBySourceId($sourceId);
-        if ($metaBundle) {
-            Craft::info(
-                'Invalidating meta bundle: ' . $metaBundle->sourceHandle,
-                'seomatic'
-            );
-            // Invalidate sitemap caches after an existing section is saved
-            if (!$isNew) {
-                Seomatic::$plugin->sitemaps->invalidateSitemapCache($metaBundle->sourceHandle);
-                Seomatic::$plugin->sitemaps->invalidateSitemapIndexCache();
+        $metaBundleInvalidated = false;
+        $sites = Craft::$app->getSites()->getAllSites();
+        foreach ($sites as $site) {
+            // See if this is a section we are tracking
+            $metaBundle = $this->getMetaBundleBySourceId($sourceId, $site->id);
+            if ($metaBundle) {
+                Craft::info(
+                    'Invalidating meta bundle: '
+                        . $metaBundle->sourceHandle
+                        . ' from siteId: '
+                        . $site->id,
+                    'seomatic'
+                );
+                // Invalidate sitemap caches after an existing section is saved
+                if (!$isNew) {
+                    $metaBundleInvalidated = true;
+                    Seomatic::$plugin->sitemaps->invalidateSitemapCache(
+                        $metaBundle->sourceHandle,
+                        $metaBundle->sourceSiteId
+                    );
+                }
             }
+        }
+        // If we've invalidated a meta bundle, we need to invalidate the sitemap index, too
+        if ($metaBundleInvalidated) {
+            Seomatic::$plugin->sitemaps->invalidateSitemapIndexCache();
         }
     }
 
@@ -88,22 +119,31 @@ class MetaBundles extends Component
      * @param int      $sourceId
      * @param int|null $siteId
      *
-     * @return MetaBundle
+     * @return null|MetaBundle
      */
-    public function getMetaBundleBySourceId(int $sourceId, int $siteId = null): MetaBundle
+    public function getMetaBundleBySourceId(int $sourceId, int $siteId)
     {
-        // @todo this should look in the seomatic_meta_bundles db table
-        $metaBundles = $this->getAllMetaBundles();
-        /** @var  $metaBundle MetaBundle */
-        foreach ($metaBundles as $metaBundle) {
-            if ($sourceId == $metaBundle->sourceId) {
-                if ($siteId == null || $siteId == $metaBundle->sourceSiteId) {
-                    return $metaBundle;
-                }
+        $metaBundle = null;
+        // See if we have the meta bundle cached
+        if (!empty($this->metaBundlesBySourceId[$sourceId][$siteId])) {
+            $id = $this->metaBundlesBySourceId[$sourceId][$siteId];
+            if (!empty($this->metaBundles[$id])) {
+                return $this->metaBundles[$id];
             }
         }
+        // Look for a matching meta bundle in the db
+        $metaBundleRecord = MetaBundleRecord::findOne([
+            'sourceId' => $sourceId,
+            'siteId' => $siteId,
+        ]);
+        if ($metaBundleRecord) {
+            $metaBundle = new MetaBundle($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
+            $id = count($this->metaBundles);
+            $this->metaBundles[$id];
+            $this->metaBundlesBySourceId[$sourceId][$siteId] = $id;
+        }
 
-        return null;
+        return $metaBundle;
     }
 
     /**
@@ -112,20 +152,29 @@ class MetaBundles extends Component
      *
      * @return null|MetaBundle
      */
-    public function getMetaBundleBySourceHandle(string $sourceHandle, int $siteId = null): ?MetaBundle
+    public function getMetaBundleBySourceHandle(string $sourceHandle, int $siteId)
     {
-        // @todo this should look in the seomatic_metabundles db table
-        $metaBundles = $this->getAllMetaBundles();
-        /** @var  $metaBundle MetaBundle */
-        foreach ($metaBundles as $metaBundle) {
-            if ($sourceHandle === $metaBundle->sourceHandle) {
-                if ($siteId == null || $siteId == $metaBundle->sourceSiteId) {
-                    return $metaBundle;
-                }
+        $metaBundle = null;
+        // See if we have the meta bundle cached
+        if (!empty($this->metaBundlesBySourceHandle[$sourceHandle][$siteId])) {
+            $id = $this->metaBundlesBySourceHandle[$sourceHandle][$siteId];
+            if (!empty($this->metaBundles[$id])) {
+                return $this->metaBundles[$id];
             }
         }
+        // Look for a matching meta bundle in the db
+        $metaBundleRecord = MetaBundleRecord::findOne([
+            'sourceHandle' => $sourceHandle,
+            'siteId' => $siteId,
+        ]);
+        if ($metaBundleRecord) {
+            $metaBundle = new MetaBundle($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
+            $id = count($this->metaBundles);
+            $this->metaBundles[$id];
+            $this->metaBundlesBySourceHandle[$sourceHandle][$siteId] = $id;
+        }
 
-        return null;
+        return $metaBundle;
     }
 
     /**
@@ -136,18 +185,27 @@ class MetaBundles extends Component
      */
     public function getMetaBundleBySourceTemplate(string $sourceTemplate, int $siteId = null)
     {
-        // @todo this should look in the seomatic_metabundles db table
-        $metaBundles = $this->getAllMetaBundles();
-        /** @var  $metaBundle MetaBundle */
-        foreach ($metaBundles as $metaBundle) {
-            if ($sourceTemplate === $metaBundle->sourceTemplate) {
-                if ($siteId == null || $siteId == $metaBundle->sourceSiteId) {
-                    return $metaBundle;
-                }
+        $metaBundle = null;
+        // See if we have the meta bundle cached
+        if (!empty($this->metaBundlesBySourceTemplate[$sourceTemplate][$siteId])) {
+            $id = $this->metaBundlesBySourceTemplate[$sourceTemplate][$siteId];
+            if (!empty($this->metaBundles[$id])) {
+                return $this->metaBundles[$id];
             }
         }
+        // Look for a matching meta bundle in the db
+        $metaBundleRecord = MetaBundleRecord::findOne([
+            'sourceTemplate' => $sourceTemplate,
+            'siteId' => $siteId,
+        ]);
+        if ($metaBundleRecord) {
+            $metaBundle = new MetaBundle($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
+            $id = count($this->metaBundles);
+            $this->metaBundles[$id];
+            $this->metaBundlesBySourceTemplate[$sourceTemplate][$siteId] = $id;
+        }
 
-        return null;
+        return $metaBundle;
     }
 
     /**
@@ -157,57 +215,16 @@ class MetaBundles extends Component
      */
     public function getAllMetaBundles(): array
     {
-        if ($this->metaBundles) {
-            return $this->metaBundles;
-        }
-        // @todo this should look in the seomatic_metabundles db table
         $metaBundles = [];
 
         // Get all of the sections with URLs
         $sections = Craft::$app->getSections()->getAllSections();
         foreach ($sections as $section) {
-            // Get the site settings and turn them into arrays
-            $siteSettings = $section->getSiteSettings();
-            $siteSettingsArray = [];
-            /** @var  $siteSetting Section_SiteSettings */
-            foreach ($siteSettings as $siteSetting) {
-                if ($siteSetting->hasUrls) {
-                    $siteSettingArray = $siteSetting->toArray();
-                    // Get the site language
-                    $siteSettingArray['language'] = $this->getSiteLanguage($siteSetting->siteId);
-                    $siteSettingsArray[] = $siteSettingArray;
-                }
-            }
-            $siteSettingsArray = ArrayHelper::index($siteSettingsArray, 'siteId');
-            // Get a MetaBundle for each site
-            foreach ($siteSettings as $siteSetting) {
-                if ($siteSetting->hasUrls) {
-                    // Get the most recent dateUpdated
-                    $element = Entry::find()
-                        ->section($section->handle)
-                        ->siteId($siteSetting->siteId)
-                        ->limit(1)
-                        ->orderBy(['elements.dateUpdated' => SORT_DESC])
-                        ->one();
-                    if ($element) {
-                        $dateUpdated = $element->dateUpdated ?? $element->dateCreated;
-                        // Create a new meta bundle with propagated defaults
-                        $metaBundleDefaults = array_merge(
-                            ConfigHelper::getConfigFromFile('EntryMetaBundle', 'defaults'),
-                            [
-                                'sourceId'              => $section->id,
-                                'sourceName'            => $section->name,
-                                'sourceHandle'          => $section->handle,
-                                'sourceType'            => $section->type,
-                                'sourceTemplate'        => $siteSetting->template,
-                                'sourceSiteId'          => $siteSetting->siteId,
-                                'sourceAltSiteSettings' => $siteSettingsArray,
-                                'sourceDateUpdated'     => $dateUpdated,
-                            ]
-                        );
-                        $metaBundle = new MetaBundle($metaBundleDefaults);
-                        $metaBundles[] = $metaBundle;
-                    }
+            $sites = Craft::$app->getSites()->getAllSites();
+            foreach ($sites as $site) {
+                $metaBundle = $this->createMetaBundleFromEntry($section, $site->id);
+                if ($metaBundle) {
+                    $metaBundles[] = $metaBundle;
                 }
             }
         }
@@ -215,54 +232,16 @@ class MetaBundles extends Component
         // Get all of the category groups with URLs
         $categories = Craft::$app->getCategories()->getAllGroups();
         foreach ($categories as $category) {
-            // Get the site settings and turn them into arrays
-            $siteSettings = $category->getSiteSettings();
-            $siteSettingsArray = [];
-            /** @var  $siteSetting CategoryGroup_SiteSettings */
-            foreach ($siteSettings as $siteSetting) {
-                if ($siteSetting->hasUrls) {
-                    $siteSettingArray = $siteSetting->toArray();
-                    // Get the site language
-                    $siteSettingArray['language'] = $this->getSiteLanguage($siteSetting->siteId);
-                    $siteSettingsArray[] = $siteSettingArray;
-                }
-            }
-            $siteSettingsArray = ArrayHelper::index($siteSettingsArray, 'siteId');
-            // Get a MetaBundle for each site
-            foreach ($siteSettings as $siteSetting) {
-                if ($siteSetting->hasUrls) {
-                    // Get the most recent dateUpdated
-                    $element = Category::find()
-                        ->group($category->handle)
-                        ->siteId($siteSetting->siteId)
-                        ->limit(1)
-                        ->orderBy(['elements.dateUpdated' => SORT_DESC])
-                        ->one();
-                    if ($element) {
-                        $dateUpdated = $element->dateUpdated ?? $element->dateCreated;
-                        // Create a new meta bundle with propagated defaults
-                        $metaBundleDefaults = array_merge(
-                            ConfigHelper::getConfigFromFile('CategoryMetaBundle', 'defaults'),
-                            [
-                                'sourceId'              => $category->id,
-                                'sourceName'            => $category->name,
-                                'sourceHandle'          => $category->handle,
-                                'sourceTemplate'        => $siteSetting->template,
-                                'sourceSiteId'          => $siteSetting->siteId,
-                                'sourceAltSiteSettings' => $siteSettingsArray,
-                                'sourceDateUpdated'     => $dateUpdated,
-                            ]
-                        );
-                        $metaBundle = new MetaBundle($metaBundleDefaults);
-                        $metaBundles[] = $metaBundle;
-                    }
+            $sites = Craft::$app->getSites()->getAllSites();
+            foreach ($sites as $site) {
+                $metaBundle = $this->createMetaBundleFromCategory($category, $site->id);
+                if ($metaBundle) {
+                    $metaBundles[] = $metaBundle;
                 }
             }
         }
 
         // @todo Get all of the Commerce Products with URLs
-
-        $this->metaBundles = $metaBundles;
 
         return $metaBundles;
     }
@@ -330,5 +309,118 @@ class MetaBundles extends Component
         $language = str_replace('_', '-', $language);
 
         return $language;
+    }
+
+    /**
+     * @param CategoryGroup $category
+     * @param int           $siteId
+     *
+     * @return null|MetaBundle
+     */
+    protected function createMetaBundleFromCategory(CategoryGroup $category, int $siteId)
+    {
+        $metaBundle = null;
+    // Get the site settings and turn them into arrays
+        $siteSettings = $category->getSiteSettings();
+        if (!empty($siteSettings[$siteId])) {
+            $siteSettingsArray = [];
+            /** @var  $siteSetting CategoryGroup_SiteSettings */
+            foreach ($siteSettings as $siteSetting) {
+                if ($siteSetting->hasUrls) {
+                    $siteSettingArray = $siteSetting->toArray();
+                    // Get the site language
+                    $siteSettingArray['language'] = $this->getSiteLanguage($siteSetting->siteId);
+                    $siteSettingsArray[] = $siteSettingArray;
+                }
+            }
+            $siteSettingsArray = ArrayHelper::index($siteSettingsArray, 'siteId');
+            // Create a MetaBundle for this site
+            $siteSetting = $siteSettings[$siteId];
+            if ($siteSetting->hasUrls) {
+                // Get the most recent dateUpdated
+                $element = Category::find()
+                    ->group($category->handle)
+                    ->siteId($siteSetting->siteId)
+                    ->limit(1)
+                    ->orderBy(['elements.dateUpdated' => SORT_DESC])
+                    ->one();
+                if ($element) {
+                    $dateUpdated = $element->dateUpdated ?? $element->dateCreated;
+                    // Create a new meta bundle with propagated defaults
+                    $metaBundleDefaults = array_merge(
+                        ConfigHelper::getConfigFromFile('CategoryMetaBundle', 'defaults'),
+                        [
+                            'sourceId' => $category->id,
+                            'sourceName' => $category->name,
+                            'sourceHandle' => $category->handle,
+                            'sourceTemplate' => $siteSetting->template,
+                            'sourceSiteId' => $siteSetting->siteId,
+                            'sourceAltSiteSettings' => $siteSettingsArray,
+                            'sourceDateUpdated' => $dateUpdated,
+                        ]
+                    );
+                    $metaBundle = new MetaBundle($metaBundleDefaults);
+                }
+            }
+        }
+
+        return $metaBundle;
+    }
+
+    /**
+     * @param Section $section
+     * @param int     $siteId
+     *
+     * @return null|MetaBundle
+     */
+    protected function createMetaBundleFromEntry(Section $section, int $siteId)
+    {
+        $metaBundle = null;
+        // Get the site settings and turn them into arrays
+        $siteSettings = $section->getSiteSettings();
+        if (!empty($siteSettings[$siteId])) {
+            $siteSettingsArray = [];
+            /** @var  $siteSetting Section_SiteSettings */
+            foreach ($siteSettings as $siteSetting) {
+                if ($siteSetting->hasUrls) {
+                    $siteSettingArray = $siteSetting->toArray();
+                    // Get the site language
+                    $siteSettingArray['language'] = $this->getSiteLanguage($siteSetting->siteId);
+                    $siteSettingsArray[] = $siteSettingArray;
+                }
+            }
+            $siteSettingsArray = ArrayHelper::index($siteSettingsArray, 'siteId');
+            // Create a MetaBundle for this site
+            $siteSetting = $siteSettings[$siteId];
+            if ($siteSetting->hasUrls) {
+                // Get the most recent dateUpdated
+                $element = Entry::find()
+                    ->section($section->handle)
+                    ->siteId($siteSetting->siteId)
+                    ->limit(1)
+                    ->orderBy(['elements.dateUpdated' => SORT_DESC])
+                    ->one();
+                if ($element) {
+                    $dateUpdated = $element->dateUpdated ?? $element->dateCreated;
+                    // Create a new meta bundle with propagated defaults
+                    $metaBundleDefaults = array_merge(
+                        ConfigHelper::getConfigFromFile('EntryMetaBundle', 'defaults'),
+                        [
+                            'sourceId' => $section->id,
+                            'sourceName' => $section->name,
+                            'sourceHandle' => $section->handle,
+                            'sourceType' => $section->type,
+                            'sourceTemplate' => $siteSetting->template,
+                            'sourceSiteId' => $siteSetting->siteId,
+                            'sourceAltSiteSettings' => $siteSettingsArray,
+                            'sourceDateUpdated' => $dateUpdated,
+                        ]
+                    );
+                    $metaBundle = new MetaBundle($metaBundleDefaults);
+                }
+            }
+        }
+
+        return $metaBundle;
     }
 }

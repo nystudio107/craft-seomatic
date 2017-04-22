@@ -88,7 +88,6 @@ class Seomatic extends Plugin
             $handler = new SeomaticErrorHandler;
             Craft::$app->set('errorHandler', $handler);
             $handler->register();
-
         }
     }
 

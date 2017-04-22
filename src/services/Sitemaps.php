@@ -166,10 +166,10 @@ class Sitemaps extends Component implements SitemapInterface
      *
      * @param string $handle
      */
-    public function invalidateSitemapCache(string $handle)
+    public function invalidateSitemapCache(string $handle, int $siteId)
     {
         $cache = Craft::$app->getCache();
-        TagDependency::invalidate($cache, SitemapTemplate::SITEMAP_CACHE_TAG . $handle);
+        TagDependency::invalidate($cache, SitemapTemplate::SITEMAP_CACHE_TAG . $handle . $siteId);
         Craft::info(
             'Sitemap cache cleared: ' . $handle,
             'seomatic'
