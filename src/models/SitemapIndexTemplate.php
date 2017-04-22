@@ -112,7 +112,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
             $lines[] = '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
             // One sitemap entry for each MeteBundle
-            $metaBundles = Seomatic::$plugin->metaBundles->getAllMetaBundles();
+            $metaBundles = Seomatic::$plugin->metaBundles->getContentMetaBundles();
             /** @var  $metaBundle MetaBundle */
             foreach ($metaBundles as $metaBundle) {
                 $sitemapUrl = UrlHelper::siteUrl(

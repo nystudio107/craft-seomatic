@@ -139,7 +139,7 @@ class MetaBundles extends Component
         if ($metaBundleRecord) {
             $metaBundle = new MetaBundle($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
             $id = count($this->metaBundles);
-            $this->metaBundles[$id];
+            $this->metaBundles[$id] = $metaBundle;
             $this->metaBundlesBySourceId[$sourceId][$siteId] = $id;
         }
 
@@ -170,7 +170,7 @@ class MetaBundles extends Component
         if ($metaBundleRecord) {
             $metaBundle = new MetaBundle($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
             $id = count($this->metaBundles);
-            $this->metaBundles[$id];
+            $this->metaBundles[$id] = $metaBundle;
             $this->metaBundlesBySourceHandle[$sourceHandle][$siteId] = $id;
         }
 
@@ -201,7 +201,7 @@ class MetaBundles extends Component
         if ($metaBundleRecord) {
             $metaBundle = new MetaBundle($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
             $id = count($this->metaBundles);
-            $this->metaBundles[$id];
+            $this->metaBundles[$id] = $metaBundle;
             $this->metaBundlesBySourceTemplate[$sourceTemplate][$siteId] = $id;
         }
 
@@ -216,9 +216,9 @@ class MetaBundles extends Component
     public function getContentMetaBundles(): array
     {
         $metaBundles = [];
-        $metaBundleRecords = MetaBundleRecord::findAll([
-            ['!=', 'sourceHandle', self::GLOBAL_META_BUNDLE],
-        ]);
+        $metaBundleRecords = MetaBundleRecord::find()
+            ->where(['!=', 'sourceHandle', self::GLOBAL_META_BUNDLE])
+            ->all();
         foreach ($metaBundleRecords as $metaBundleRecord) {
             $metaBundle = new MetaBundle($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
             if ($metaBundle) {
@@ -234,9 +234,9 @@ class MetaBundles extends Component
      *
      * @param int $sourceSiteId
      *
-     * @return MetaBundle
+     * @return null|MetaBundle
      */
-    public function getGlobalMetaBundle(int $sourceSiteId): MetaBundle
+    public function getGlobalMetaBundle(int $sourceSiteId)
     {
         $metaBundle = null;
         $metaBundleRecord = MetaBundleRecord::findOne([

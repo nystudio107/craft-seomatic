@@ -46,6 +46,7 @@ class Install extends Migration
             $this->addForeignKeys();
             $this->insertDefaultData();
         }
+
         return true;
     }
 
