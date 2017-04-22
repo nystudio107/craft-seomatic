@@ -191,18 +191,21 @@ class MetaBundles extends Component
                         ->one();
                     if ($element) {
                         $dateUpdated = $element->dateUpdated ?? $element->dateCreated;
-                        // Create the meta bundle
-                        $metaBundle = new MetaBundle([
-                            'sourceElementType'     => Entry::class,
-                            'sourceId'              => $section->id,
-                            'sourceName'            => $section->name,
-                            'sourceHandle'          => $section->handle,
-                            'sourceType'            => $section->type,
-                            'sourceTemplate'        => $siteSetting->template,
-                            'sourceSiteId'          => $siteSetting->siteId,
-                            'sourceAltSiteSettings' => $siteSettingsArray,
-                            'sourceDateUpdated'     => $dateUpdated,
-                        ]);
+                        // Create a new meta bundle with propagated defaults
+                        $metaBundleDefaults = array_merge(
+                            ConfigHelper::getConfigFromFile('EntryMetaBundle', 'defaults'),
+                            [
+                                'sourceId'              => $section->id,
+                                'sourceName'            => $section->name,
+                                'sourceHandle'          => $section->handle,
+                                'sourceType'            => $section->type,
+                                'sourceTemplate'        => $siteSetting->template,
+                                'sourceSiteId'          => $siteSetting->siteId,
+                                'sourceAltSiteSettings' => $siteSettingsArray,
+                                'sourceDateUpdated'     => $dateUpdated,
+                            ]
+                        );
+                        $metaBundle = new MetaBundle($metaBundleDefaults);
                         $metaBundles[] = $metaBundle;
                     }
                 }
@@ -237,17 +240,20 @@ class MetaBundles extends Component
                         ->one();
                     if ($element) {
                         $dateUpdated = $element->dateUpdated ?? $element->dateCreated;
-                        $metaBundle = new MetaBundle([
-                            'sourceElementType'     => Category::class,
-                            'sourceId'              => $category->id,
-                            'sourceName'            => $category->name,
-                            'sourceHandle'          => $category->handle,
-                            'sourceType'            => 'category',
-                            'sourceTemplate'        => $siteSetting->template,
-                            'sourceSiteId'          => $siteSetting->siteId,
-                            'sourceAltSiteSettings' => $siteSettingsArray,
-                            'sourceDateUpdated'     => $dateUpdated,
-                        ]);
+                        // Create a new meta bundle with propagated defaults
+                        $metaBundleDefaults = array_merge(
+                            ConfigHelper::getConfigFromFile('CategoryMetaBundle', 'defaults'),
+                            [
+                                'sourceId'              => $category->id,
+                                'sourceName'            => $category->name,
+                                'sourceHandle'          => $category->handle,
+                                'sourceTemplate'        => $siteSetting->template,
+                                'sourceSiteId'          => $siteSetting->siteId,
+                                'sourceAltSiteSettings' => $siteSettingsArray,
+                                'sourceDateUpdated'     => $dateUpdated,
+                            ]
+                        );
+                        $metaBundle = new MetaBundle($metaBundleDefaults);
                         $metaBundles[] = $metaBundle;
                     }
                 }
@@ -294,9 +300,15 @@ class MetaBundles extends Component
      */
     protected function createGlobalMetaBundle(int $sourceSiteId): MetaBundleRecord
     {
-        $metaBundle = new MetaBundle(ConfigHelper::getConfigFromFile('GlobalMetaBundle', 'defaults'));
-        Craft::dd($metaBundle);
-        $metaBundle->sourceSiteId = $sourceSiteId;
+        // Create a new meta bundle with propagated defaults
+        $metaBundleDefaults = array_merge(
+            ConfigHelper::getConfigFromFile('GlobalMetaBundle', 'defaults'),
+            [
+                'sourceSiteId' => $sourceSiteId,
+            ]
+        );
+        $metaBundle = new MetaBundle($metaBundleDefaults);
+        // Save it out to a record
         $metaBundleRecord = new MetaBundleRecord($metaBundle->getAttributes());
         $metaBundleRecord->save();
 

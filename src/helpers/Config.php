@@ -39,8 +39,7 @@ class Config extends Component
         if (!empty($directory)) {
             $directory = DIRECTORY_SEPARATOR . $directory;
         }
-        $path = Craft::getAlias('@nystudio107/seomatic');
-        $path = Seomatic::$plugin->getBasePath()
+        $path = Craft::getAlias('@nystudio107/seomatic')
             . DIRECTORY_SEPARATOR
             . 'config'
             . $directory

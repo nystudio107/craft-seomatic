@@ -9,12 +9,13 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-use nystudio107\seomatic\services\MetaBundles;
 use nystudio107\seomatic\models\MetaTagContainer;
 use nystudio107\seomatic\models\MetaLinkContainer;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 use nystudio107\seomatic\models\FrontendTemplateContainer;
+
+use craft\elements\Entry;
 
 /**
  * @author    nystudio107
@@ -23,11 +24,11 @@ use nystudio107\seomatic\models\FrontendTemplateContainer;
  */
 
 return [
-    'sourceElementType' => MetaBundles::GLOBAL_META_BUNDLE,
+    'sourceElementType' => Entry::class,
     'sourceId' => null,
-    'sourceName' => MetaBundles::GLOBAL_META_BUNDLE,
-    'sourceHandle' => MetaBundles::GLOBAL_META_BUNDLE,
-    'sourceType' => MetaBundles::GLOBAL_META_BUNDLE,
+    'sourceName' => null,
+    'sourceHandle' => null,
+    'sourceType' => null,
     'sourceTemplate' => '',
     'sourceSiteId' => null,
     'sourceAltSiteSettings' => [
