@@ -134,7 +134,7 @@ class MetaBundles extends Component
         // Look for a matching meta bundle in the db
         $metaBundleRecord = MetaBundleRecord::findOne([
             'sourceId' => $sourceId,
-            'siteId' => $siteId,
+            'sourceSiteId' => $siteId,
         ]);
         if ($metaBundleRecord) {
             $metaBundle = new MetaBundle($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
@@ -165,7 +165,7 @@ class MetaBundles extends Component
         // Look for a matching meta bundle in the db
         $metaBundleRecord = MetaBundleRecord::findOne([
             'sourceHandle' => $sourceHandle,
-            'siteId' => $siteId,
+            'sourceSiteId' => $siteId,
         ]);
         if ($metaBundleRecord) {
             $metaBundle = new MetaBundle($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
@@ -196,7 +196,7 @@ class MetaBundles extends Component
         // Look for a matching meta bundle in the db
         $metaBundleRecord = MetaBundleRecord::findOne([
             'sourceTemplate' => $sourceTemplate,
-            'siteId' => $siteId,
+            'sourceSiteId' => $siteId,
         ]);
         if ($metaBundleRecord) {
             $metaBundle = new MetaBundle($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
