@@ -11,13 +11,14 @@
 
 namespace nystudio107\seomatic\services;
 
-use craft\elements\Category;
 use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\helpers\Config as ConfigHelper;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\records\MetaBundle as MetaBundleRecord;
 
 use Craft;
 use craft\base\Component;
+use craft\elements\Category;
 use craft\elements\Entry;
 use craft\helpers\ArrayHelper;
 use craft\models\Section_SiteSettings;
@@ -293,16 +294,9 @@ class MetaBundles extends Component
      */
     protected function createGlobalMetaBundle(int $sourceSiteId): MetaBundleRecord
     {
-        $metaBundle = new MetaBundle([
-            'sourceHandle' => self::GLOBAL_META_BUNDLE,
-            'sourceSiteId' => $sourceSiteId,
-            'sourceElementType' => 'global',
-            'sourceName' => 'Global',
-            'sourceType' => 'global',
-            'sourceTemplate' => '',
-            'sourceDateUpdated' => new \DateTime(),
-
-        ]);
+        $metaBundle = new MetaBundle(ConfigHelper::getConfigFromFile('GlobalMetaBundle', 'defaults'));
+        Craft::dd($metaBundle);
+        $metaBundle->sourceSiteId = $sourceSiteId;
         $metaBundleRecord = new MetaBundleRecord($metaBundle->getAttributes());
         $metaBundleRecord->save();
 

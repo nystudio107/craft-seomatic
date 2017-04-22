@@ -104,6 +104,7 @@ class Install extends Migration
                     'metaScriptContainer' => $this->text(),
                     'metaJsonLdContainer' => $this->text(),
                     'redirectsContainer' => $this->text(),
+                    'frontendTemplatesContainer' => $this->text(),
                 ]
             );
         }

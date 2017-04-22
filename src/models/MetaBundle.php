@@ -71,32 +71,32 @@ class MetaBundle extends Model
     /**
      * @var bool
      */
-    public $sitemapUrls = true;
+    public $sitemapUrls;
 
     /**
      * @var bool
      */
-    public $sitemapAssets = true;
+    public $sitemapAssets;
 
     /**
      * @var bool
      */
-    public $sitemapFiles = true;
+    public $sitemapFiles;
 
     /**
      * @var bool
      */
-    public $sitemapAltLinks = true;
+    public $sitemapAltLinks;
 
     /**
      * @var string
      */
-    public $sitemapChangeFreq = 'weekly';
+    public $sitemapChangeFreq;
 
     /**
      * @var float
      */
-    public $sitemapPriority = 0.5;
+    public $sitemapPriority;
 
     /**
      * @var array
@@ -122,6 +122,11 @@ class MetaBundle extends Model
      * @var array
      */
     public $redirectsContainer;
+
+    /**
+     * @var array
+     */
+    public $frontendTemplatesContainer;
 
     // Methods
     // =========================================================================
