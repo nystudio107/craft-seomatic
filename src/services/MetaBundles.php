@@ -209,39 +209,22 @@ class MetaBundles extends Component
     }
 
     /**
-     * Return all of the Meta Bundles
+     * Return all of the content meta bundles
      *
-     * @return MetaBundle[]
+     * @return array
      */
-    public function getAllMetaBundles(): array
+    public function getContentMetaBundles(): array
     {
         $metaBundles = [];
-
-        // Get all of the sections with URLs
-        $sections = Craft::$app->getSections()->getAllSections();
-        foreach ($sections as $section) {
-            $sites = Craft::$app->getSites()->getAllSites();
-            foreach ($sites as $site) {
-                $metaBundle = $this->createMetaBundleFromEntry($section, $site->id);
-                if ($metaBundle) {
-                    $metaBundles[] = $metaBundle;
-                }
+        $metaBundleRecords = MetaBundleRecord::findAll([
+            ['!=', 'sourceHandle', self::GLOBAL_META_BUNDLE],
+        ]);
+        foreach ($metaBundleRecords as $metaBundleRecord) {
+            $metaBundle = new MetaBundle($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
+            if ($metaBundle) {
+                $metaBundles[] = $metaBundle;
             }
         }
-
-        // Get all of the category groups with URLs
-        $categories = Craft::$app->getCategories()->getAllGroups();
-        foreach ($categories as $category) {
-            $sites = Craft::$app->getSites()->getAllSites();
-            foreach ($sites as $site) {
-                $metaBundle = $this->createMetaBundleFromCategory($category, $site->id);
-                if ($metaBundle) {
-                    $metaBundles[] = $metaBundle;
-                }
-            }
-        }
-
-        // @todo Get all of the Commerce Products with URLs
 
         return $metaBundles;
     }
@@ -255,44 +238,74 @@ class MetaBundles extends Component
      */
     public function getGlobalMetaBundle(int $sourceSiteId): MetaBundle
     {
+        $metaBundle = null;
         $metaBundleRecord = MetaBundleRecord::findOne([
             'sourceHandle' => self::GLOBAL_META_BUNDLE,
             'sourceSiteId' => $sourceSiteId,
         ]);
-        if (!$metaBundleRecord) {
-            $metaBundleRecord = $this->createGlobalMetaBundle($sourceSiteId);
+        if ($metaBundleRecord) {
+            $metaBundle = new MetaBundle($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
         }
-        $metaBundle = new MetaBundle($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
 
         return $metaBundle;
     }
 
-    // Protected Methods
-    // =========================================================================
+    /**
+     * Create all of the content meta bundles
+     */
+    public function createContentMetaBundles()
+    {
+        // Get all of the sections with URLs
+        $sections = Craft::$app->getSections()->getAllSections();
+        foreach ($sections as $section) {
+            $sites = Craft::$app->getSites()->getAllSites();
+            foreach ($sites as $site) {
+                $metaBundle = $this->createMetaBundleFromEntry($section, $site->id);
+                if ($metaBundle) {
+                    $metaBundleRecord = new MetaBundleRecord($metaBundle->getAttributes());
+                    $metaBundleRecord->save();
+                }
+            }
+        }
+
+        // Get all of the category groups with URLs
+        $categories = Craft::$app->getCategories()->getAllGroups();
+        foreach ($categories as $category) {
+            $sites = Craft::$app->getSites()->getAllSites();
+            foreach ($sites as $site) {
+                $metaBundle = $this->createMetaBundleFromCategory($category, $site->id);
+                if ($metaBundle) {
+                    $metaBundleRecord = new MetaBundleRecord($metaBundle->getAttributes());
+                    $metaBundleRecord->save();
+                }
+            }
+        }
+        // @todo Get all of the Commerce Products with URLs
+    }
 
     /**
-     * Create the default global meta bundle
-     *
-     * @param int $sourceSiteId
-     *
-     * @return MetaBundleRecord
+     * Create the default global meta bundles
      */
-    protected function createGlobalMetaBundle(int $sourceSiteId): MetaBundleRecord
+    public function createGlobalMetaBundles()
     {
-        // Create a new meta bundle with propagated defaults
-        $metaBundleDefaults = array_merge(
-            ConfigHelper::getConfigFromFile('GlobalMetaBundle', 'defaults'),
-            [
-                'sourceSiteId' => $sourceSiteId,
-            ]
-        );
-        $metaBundle = new MetaBundle($metaBundleDefaults);
-        // Save it out to a record
-        $metaBundleRecord = new MetaBundleRecord($metaBundle->getAttributes());
-        $metaBundleRecord->save();
-
-        return $metaBundleRecord;
+        $sites = Craft::$app->getSites()->getAllSites();
+        foreach ($sites as $site) {
+            // Create a new meta bundle with propagated defaults
+            $metaBundleDefaults = array_merge(
+                ConfigHelper::getConfigFromFile('GlobalMetaBundle', 'defaults'),
+                [
+                    'sourceSiteId' => $site->id,
+                ]
+            );
+            $metaBundle = new MetaBundle($metaBundleDefaults);
+            // Save it out to a record
+            $metaBundleRecord = new MetaBundleRecord($metaBundle->getAttributes());
+            $metaBundleRecord->save();
+        }
     }
+
+    // Protected Methods
+    // =========================================================================
 
     /**
      * Get the language from a siteId

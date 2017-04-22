@@ -25,10 +25,12 @@ use craft\elements\Category;
 use craft\elements\Entry;
 use craft\events\CategoryGroupEvent;
 use craft\events\ElementEvent;
+use craft\events\PluginEvent;
 use craft\events\RegisterCacheOptionsEvent;
 use craft\events\SectionEvent;
 use craft\services\Categories;
 use craft\services\Elements;
+use craft\services\Plugins;
 use craft\services\Sections;
 use craft\utilities\ClearCaches;
 
@@ -233,6 +235,22 @@ class Seomatic extends Plugin
                         $id,
                         false
                     );
+                }
+            }
+        );
+        // Handler: Plugins::EVENT_AFTER_INSTALL_PLUGIN
+        Event::on(
+            Plugins::className(),
+            Plugins::EVENT_AFTER_INSTALL_PLUGIN,
+            function (PluginEvent $event) {
+                Craft::trace(
+                    'Plugins::EVENT_AFTER_INSTALL_PLUGIN',
+                    'seomatic'
+                );
+                // Create our default data
+                if ($event->plugin === $this) {
+                    Seomatic::$plugin->metaBundles->createGlobalMetaBundles();
+                    Seomatic::$plugin->metaBundles->createContentMetaBundles();
                 }
             }
         );
