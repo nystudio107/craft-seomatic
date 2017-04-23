@@ -51,7 +51,10 @@ class MetaTagContainer extends MetaContainer
         $view = Craft::$app->getView();
         /** @var $metaTagModel MetaTag */
         foreach ($this->data as $metaTagModel) {
+            $scenario = $metaTagModel->scenario;
+            $metaTagModel->setScenario('render');
             $options = $metaTagModel->tagAttributes();
+            $this->setScenario($scenario);
             MetaValueHelper::parseArray($options);
             $view->registerMetaTag($options);
             // If `devMode` is enabled, validate the Meta Tag and output any model errors

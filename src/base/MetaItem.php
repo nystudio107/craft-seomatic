@@ -55,10 +55,14 @@ abstract class MetaItem extends Model implements MetaItemInterface
     {
         $fields = parent::fields();
         switch ($this->scenario) {
-            case 'google':
-            case 'default':
-                unset(
-                    $fields['key']
+            case 'render':
+                $fields = array_diff_key(
+                    $fields,
+                    array_flip([
+                        'include',
+                        'uniqueKeys',
+                        'key',
+                    ])
                 );
                 break;
         }
@@ -92,8 +96,8 @@ abstract class MetaItem extends Model implements MetaItemInterface
     /**
      * Add debug logging for the MetaItem
      *
-     * @param string   $errorLabel
-     * @param array    $scenarios
+     * @param string $errorLabel
+     * @param array  $scenarios
      */
     public function debugMetaItem(
         $errorLabel = "Error: ",

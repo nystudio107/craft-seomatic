@@ -10,6 +10,7 @@
  */
 
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
+use nystudio107\seomatic\services\MetaContainers;
 
 /**
  * @author    nystudio107
@@ -21,7 +22,7 @@ return [
     [
         'name'        => 'General',
         'description' => 'Link Tags',
-        'handle'      => 'general',
+        'handle'      => MetaContainers::METALINK_GENERAL_HANDLE,
         'include'     => 'true',
         'data'        => [
             'canonical' => [

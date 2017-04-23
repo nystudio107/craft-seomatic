@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\services;
 
+use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\base\MetaItem;
@@ -41,12 +42,21 @@ class MetaContainers extends Component
     // =========================================================================
 
     const SEOMATIC_METATAG_CONTAINER = Seomatic::SEOMATIC_HANDLE . MetaTag::ITEM_TYPE;
-
     const SEOMATIC_METALINK_CONTAINER = Seomatic::SEOMATIC_HANDLE . MetaLink::ITEM_TYPE;
-
     const SEOMATIC_METASCRIPT_CONTAINER = Seomatic::SEOMATIC_HANDLE . MetaScript::ITEM_TYPE;
-
     const SEOMATIC_METAJSONLD_CONTAINER = Seomatic::SEOMATIC_HANDLE . MetaJsonLd::ITEM_TYPE;
+
+    const METATAG_GENERAL_HANDLE = 'general';
+    const METATAG_STANDARD_HANDLE = 'standard';
+    const METATAG_OPENGRAPH_HANDLE = 'opengraph';
+    const METATAG_TWITTER_HANDLE = 'twitter';
+    const METATAG_MISCELLANEOUS_HANDLE = 'misc';
+
+    const METALINK_GENERAL_HANDLE = 'general';
+
+    const METASCRIPT_GENERAL_HANDLE = 'general';
+
+    const METAJSONLD_GENERAL_HANDLE = 'general';
 
     // Protected Properties
     // =========================================================================
@@ -138,16 +148,22 @@ class MetaContainers extends Component
      */
     public function addToMetaContainer(MetaItem $data, string $type, string $key = null)
     {
+        if (!$key) {
+            $key = $key . $type;
+        }
         /** @var  $container MetaContainer */
-        $key = $key . $type;
-        // If the MetaContainer doesn't exist, create it
         if (empty($this->metaContainers[$key])) {
+            // If the MetaContainer doesn't exist, create it
             $container = $this->createMetaContainer($type, $key);
         } else {
             $container = $this->metaContainers[$key];
         }
-
-        $container->addData($data, $data->key);
+        // If $uniqueKeys is set, generate a hash of the data for the key
+        $dataKey = $data->key;
+        if ($data->uniqueKeys) {
+            $dataKey = $this->getHash($data);
+        }
+        $container->addData($data, $dataKey);
     }
 
     /**
@@ -203,16 +219,20 @@ class MetaContainers extends Component
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle) {
             foreach ($metaBundle->metaTagContainer as $metaTagContainer) {
-                $this->metaContainers[self::SEOMATIC_METATAG_CONTAINER . $metaTagContainer->handle] = $metaTagContainer;
+                $key = self::SEOMATIC_METATAG_CONTAINER . $metaTagContainer->handle;
+                $this->metaContainers[$key] = $metaTagContainer;
             }
             foreach ($metaBundle->metaLinkContainer as $metaLinkContainer) {
-                $this->metaContainers[self::SEOMATIC_METALINK_CONTAINER . $metaLinkContainer->handle] = $metaLinkContainer;
+                $key = self::SEOMATIC_METALINK_CONTAINER . $metaLinkContainer->handle;
+                $this->metaContainers[$key] = $metaLinkContainer;
             }
             foreach ($metaBundle->metaScriptContainer as $metaScriptContainer) {
-                $this->metaContainers[self::SEOMATIC_METASCRIPT_CONTAINER . $metaScriptContainer->handle] = $metaScriptContainer;
+                $key = self::SEOMATIC_METASCRIPT_CONTAINER . $metaScriptContainer->handle;
+                $this->metaContainers[$key] = $metaScriptContainer;
             }
             foreach ($metaBundle->metaJsonLdContainer as $metaJsonLdContainer) {
-                $this->metaContainers[self::SEOMATIC_METAJSONLD_CONTAINER . $metaJsonLdContainer->handle] = $metaJsonLdContainer;
+                $key = self::SEOMATIC_METAJSONLD_CONTAINER . $metaJsonLdContainer->handle;
+                $this->metaContainers[$key] = $metaJsonLdContainer;
             }
         }
     }
@@ -246,39 +266,58 @@ class MetaContainers extends Component
             }
         }
         if ($metaBundle) {
-            /* @todo: array-ize the meta containers
-            foreach ($metaBundle->metaTagContainer->data as $metaTag) {
-                $this->addToMetaContainer(
-                    $metaTag,
-                    MetaTagContainer::CONTAINER_TYPE,
-                    self::SEOMATIC_METATAG_CONTAINER
-                );
-            }
-            foreach ($metaBundle->metaLinkContainer->data as $metaLink) {
-                $this->addToMetaContainer(
-                    $metaLink,
-                    MetaLinkContainer::CONTAINER_TYPE,
-                    self::SEOMATIC_METALINK_CONTAINER
-                );
-            }
-            foreach ($metaBundle->metaScriptContainer->data as $metaScript) {
-                $this->addToMetaContainer(
-                    $metaScript,
-                    MetaScriptContainer::CONTAINER_TYPE,
-                    self::SEOMATIC_METASCRIPT_CONTAINER
-                );
-            }
-            foreach ($metaBundle->metaJsonLdContainer->data as $metaJsonLd) {
-                $this->addToMetaContainer(
-                    $metaJsonLd,
-                    MetaJsonLdContainer::CONTAINER_TYPE,
-                    self::SEOMATIC_METAJSONLD_CONTAINER
-                );
-            }
-            */
         }
     }
 
+    /**
+     * Add the meta bundle to our existing meta containers, overwriting meta items
+     * with the same key
+     *
+     * @param MetaBundle $metaBundle
+     */
+    public function addMetaBundleToContainers(MetaBundle $metaBundle)
+    {
+        foreach ($metaBundle->metaTagContainer as $metaTagContainer) {
+            $key = self::SEOMATIC_METATAG_CONTAINER . $metaTagContainer->handle;
+            foreach ($metaTagContainer->data as $metaTag) {
+                $this->addToMetaContainer(
+                    $metaTag,
+                    MetaTagContainer::CONTAINER_TYPE,
+                    $key
+                );
+            }
+        }
+        foreach ($metaBundle->metaLinkContainer as $metaLinkContainer) {
+            $key = self::SEOMATIC_METALINK_CONTAINER . $metaLinkContainer->handle;
+            foreach ($metaLinkContainer->data as $metaLink) {
+                $this->addToMetaContainer(
+                    $metaLink,
+                    MetaLinkContainer::CONTAINER_TYPE,
+                    $key
+                );
+            }
+        }
+        foreach ($metaBundle->metaScriptContainer as $metaScriptContainer) {
+            $key = self::SEOMATIC_METASCRIPT_CONTAINER . $metaScriptContainer->handle;
+            foreach ($metaScriptContainer->data as $metaScript) {
+                $this->addToMetaContainer(
+                    $metaScript,
+                    MetaScriptContainer::CONTAINER_TYPE,
+                    $key
+                );
+            }
+        }
+        foreach ($metaBundle->metaJsonLdContainer as $metaJsonLdContainer) {
+            $key = self::SEOMATIC_METAJSONLD_CONTAINER . $metaJsonLdContainer->handle;
+            foreach ($metaJsonLdContainer->data as $metaJsonLd) {
+                $this->addToMetaContainer(
+                    $metaJsonLd,
+                    MetaJsonLdContainer::CONTAINER_TYPE,
+                    $key
+                );
+            }
+        }
+    }
     // Protected Methods
     // =========================================================================
 

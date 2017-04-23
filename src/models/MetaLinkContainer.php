@@ -51,7 +51,10 @@ class MetaLinkContainer extends MetaContainer
         $view = Craft::$app->getView();
         /** @var $metaLinkModel MetaLink */
         foreach ($this->data as $metaLinkModel) {
+            $scenario = $metaLinkModel->scenario;
+            $metaLinkModel->setScenario('render');
             $options = $metaLinkModel->tagAttributes();
+            $this->setScenario($scenario);
             MetaValueHelper::parseArray($options);
             $view->registerLinkTag($options);
             // If `devMode` is enabled, validate the Meta Link and output any model errors

@@ -230,9 +230,11 @@ class MetaJsonLd extends MetaItem
         if (Seomatic::$devMode) {
             $linebreak = PHP_EOL;
         }
-
         // Render the resulting JSON-LD
+        $scenario = $this->scenario;
+        $this->setScenario('render');
         $result = JsonLdHelper::encode($this);
+        $this->setScenario($scenario);
         if ($params['renderScriptTags']) {
             $result =
                 '<script type="application/ld+json">'

@@ -22,6 +22,16 @@ trait MetaItemTrait
     // =========================================================================
 
     /**
+     * @var bool
+     */
+    public $include = true;
+
+    /**
+     * @var bool
+     */
+    public $uniqueKeys = false;
+
+    /**
      * The key for this MetaItem
      *
      * @var string

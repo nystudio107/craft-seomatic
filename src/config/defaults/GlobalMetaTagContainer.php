@@ -10,6 +10,7 @@
  */
 
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
+use nystudio107\seomatic\services\MetaContainers;
 
 /**
  * @author    nystudio107
@@ -21,35 +22,35 @@ return [
     [
         'name'        => 'General',
         'description' => 'General Meta Tags',
-        'handle'      => 'general',
+        'handle'      => MetaContainers::METATAG_GENERAL_HANDLE,
         'include'     => 'true',
         'data'        => ConfigHelper::getConfigFromFile('GlobalGeneral', 'defaults/metatags'),
     ],
     [
         'name'        => 'Standard SEO',
         'description' => 'Standard SEO Meta Tags',
-        'handle'      => 'standard',
+        'handle'      => MetaContainers::METATAG_STANDARD_HANDLE,
         'include'     => 'true',
         'data'        => ConfigHelper::getConfigFromFile('GlobalStandard', 'defaults/metatags'),
     ],
     [
         'name'        => 'Facebook',
         'description' => 'FaceBook OpenGraph Meta Tags',
-        'handle'      => 'opengraph',
+        'handle'      => MetaContainers::METATAG_OPENGRAPH_HANDLE,
         'include'     => 'true',
         'data'        => ConfigHelper::getConfigFromFile('GlobalOpenGraph', 'defaults/metatags'),
     ],
     [
         'name'        => 'Twitter',
         'description' => 'Twitter Meta Tags',
-        'handle'      => 'twitter',
+        'handle'      => MetaContainers::METATAG_TWITTER_HANDLE,
         'include'     => 'true',
         'data'        => ConfigHelper::getConfigFromFile('GlobalTwitter', 'defaults/metatags'),
     ],
     [
         'name'        => 'Miscellaneous',
         'description' => 'Miscellaneous Meta Tags',
-        'handle'      => 'misc',
+        'handle'      => MetaContainers::METATAG_MISCELLANEOUS_HANDLE,
         'include'     => 'true',
         'data'        => ConfigHelper::getConfigFromFile('GlobalMisc', 'defaults/metatags'),
     ],

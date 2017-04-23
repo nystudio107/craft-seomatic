@@ -107,7 +107,10 @@ class MetaTag extends MetaItem
      */
     public function render($params = []):string
     {
+        $scenario = $this->scenario;
+        $this->setScenario('render');
         $options = $this->tagAttributes();
+        $this->setScenario($scenario);
         MetaValueHelper::parseArray($options);
         return Html::tag('meta', '', $options);
     }
