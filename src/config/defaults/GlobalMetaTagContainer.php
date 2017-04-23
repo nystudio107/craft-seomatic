@@ -18,20 +18,16 @@ use nystudio107\seomatic\helpers\Config as ConfigHelper;
  */
 
 return [
-    'data' => ConfigHelper::combineConfigFiles(
-        [
-            [
-                'filename' => 'General',
-                'directory' => 'metatags'
-            ],
-            [
-                'filename' => 'OpenGraph',
-                'directory' => 'metatags'
-            ],
-        ],
-        [
-            'tagSetName',
-            'tagSetDescription'
-        ]
-    )
+    [
+        'name' => 'General',
+        'description' => 'General Meta Tags',
+        'handle' => 'general',
+        'data' => ConfigHelper::getConfigFromFile('GlobalGeneral', 'defaults/metatags'),
+    ],
+    [
+        'name' => 'OpenGraph',
+        'description' => 'FaceBook OpenGraph Meta Tags',
+        'handle' => 'opengraph',
+        'data' => ConfigHelper::getConfigFromFile('GlobalOpenGraph', 'defaults/metatags'),
+    ],
 ];

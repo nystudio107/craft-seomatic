@@ -16,9 +16,6 @@
  */
 
 return [
-    'tagSetName' => 'FaceBook OpenGraph Meta Tags',
-    'tagSetDescription' => 'FaceBook OpenGraph Tags',
-
     'og:type' => [
         'charset'   => '',
         'content'   => 'website',

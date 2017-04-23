@@ -106,22 +106,22 @@ class MetaBundle extends Model
     public $sitemapPriority;
 
     /**
-     * @var MetaTagContainer
+     * @var MetaTagContainer[]
      */
     public $metaTagContainer;
 
     /**
-     * @var MetaLinkContainer
+     * @var MetaLinkContainer[]
      */
     public $metaLinkContainer;
 
     /**
-     * @var MetaScriptContainer
+     * @var MetaScriptContainer[]
      */
     public $metaScriptContainer;
 
     /**
-     * @var MetaJsonLdContainer
+     * @var MetaJsonLdContainer[]
      */
     public $metaJsonLdContainer;
 
@@ -131,7 +131,7 @@ class MetaBundle extends Model
     public $redirectsContainer;
 
     /**
-     * @var array
+     * @var FrontendTemplateContainer[]
      */
     public $frontendTemplatesContainer;
 
@@ -164,24 +164,39 @@ class MetaBundle extends Model
     public function normalizeMetaBundleData()
     {
         if (!empty($this->metaTagContainer)) {
-            $data = json_decode($this->metaTagContainer, true);
-            $this->metaTagContainer = MetaTagContainer::create($data);
+            $metaTagContainers = json_decode($this->metaTagContainer, true);
+            $this->metaTagContainer = [];
+            foreach ($metaTagContainers as $metaTagContainer) {
+                $this->metaTagContainer[] = MetaTagContainer::create($metaTagContainer);
+            }
         }
         if (!empty($this->metaLinkContainer)) {
-            $data = json_decode($this->metaLinkContainer, true);
-            $this->metaLinkContainer = MetaLinkContainer::create($data);
+            $metaLinkContainers = json_decode($this->metaLinkContainer, true);
+            $this->metaLinkContainer = [];
+            foreach ($metaLinkContainers as $metaLinkContainer) {
+                $this->metaLinkContainer[] = MetaLinkContainer::create($metaLinkContainer);
+            }
         }
         if (!empty($this->metaScriptContainer)) {
-            $data = json_decode($this->metaScriptContainer, true);
-            $this->metaScriptContainer = MetaScriptContainer::create($data);
+            $metaScriptContainers = json_decode($this->metaScriptContainer, true);
+            $this->metaScriptContainer = [];
+            foreach ($metaScriptContainers as $metaScriptContainer) {
+                $this->metaScriptContainer = MetaScriptContainer::create($metaScriptContainer);
+            }
         }
         if (!empty($this->metaJsonLdContainer)) {
-            $data = json_decode($this->metaJsonLdContainer, true);
-            $this->metaJsonLdContainer = MetaJsonLdContainer::create($data);
+            $metaJsonLdContainers = json_decode($this->metaJsonLdContainer, true);
+            $this->metaJsonLdContainer = [];
+            foreach ($metaJsonLdContainers as $metaJsonLdContainer) {
+                $this->metaJsonLdContainer = MetaJsonLdContainer::create($metaJsonLdContainer);
+            }
         }
         if (!empty($this->frontendTemplatesContainer)) {
-            $data = json_decode($this->frontendTemplatesContainer, true);
-            $this->frontendTemplatesContainer = FrontendTemplateContainer::create($data);
+            $frontendTemplatesContainers = json_decode($this->frontendTemplatesContainer, true);
+            $this->frontendTemplatesContainer = [];
+            foreach ($frontendTemplatesContainers as $frontendTemplatesContainer) {
+                $this->frontendTemplatesContainer = FrontendTemplateContainer::create($frontendTemplatesContainer);
+            }
         }
     }
 

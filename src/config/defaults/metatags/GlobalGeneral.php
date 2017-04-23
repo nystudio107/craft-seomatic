@@ -16,9 +16,6 @@
  */
 
 return [
-    'tagSetName' => 'General Meta Tags',
-    'tagSetDescription' => 'General Meta Tags',
-
     'description' => [
         'charset'   => '',
         'content'   => 'Woof',

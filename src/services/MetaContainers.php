@@ -199,10 +199,18 @@ class MetaContainers extends Component
         $siteId = Craft::$app->getSites()->currentSite->id;
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle) {
-            $this->metaContainers[self::SEOMATIC_METATAG_CONTAINER] = $metaBundle->metaTagContainer;
-            $this->metaContainers[self::SEOMATIC_METALINK_CONTAINER] = $metaBundle->metaLinkContainer;
-            $this->metaContainers[self::SEOMATIC_METASCRIPT_CONTAINER] = $metaBundle->metaScriptContainer;
-            $this->metaContainers[self::SEOMATIC_METAJSONLD_CONTAINER] = $metaBundle->metaJsonLdContainer;
+            foreach ($metaBundle->metaTagContainer as $metaTagContainer) {
+                $this->metaContainers[self::SEOMATIC_METATAG_CONTAINER . $metaTagContainer->handle] = $metaTagContainer;
+            }
+            foreach ($metaBundle->metaLinkContainer as $metaLinkContainer) {
+                $this->metaContainers[self::SEOMATIC_METALINK_CONTAINER . $metaLinkContainer->handle] = $metaLinkContainer;
+            }
+            foreach ($metaBundle->metaScriptContainer as $metaScriptContainer) {
+                $this->metaContainers[self::SEOMATIC_METASCRIPT_CONTAINER . $metaScriptContainer->handle] = $metaScriptContainer;
+            }
+            foreach ($metaBundle->metaJsonLdContainer as $metaJsonLdContainer) {
+                $this->metaContainers[self::SEOMATIC_METAJSONLD_CONTAINER . $metaJsonLdContainer->handle] = $metaJsonLdContainer;
+            }
         }
     }
 
@@ -235,7 +243,7 @@ class MetaContainers extends Component
             }
         }
         if ($metaBundle) {
-            Craft::dd($metaBundle);
+            /* @todo: array-ize the meta containers
             foreach ($metaBundle->metaTagContainer->data as $metaTag) {
                 $this->addToMetaContainer(
                     $metaTag,
@@ -264,6 +272,7 @@ class MetaContainers extends Component
                     self::SEOMATIC_METAJSONLD_CONTAINER
                 );
             }
+            */
         }
     }
 
