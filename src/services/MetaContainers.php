@@ -11,13 +11,14 @@
 
 namespace nystudio107\seomatic\services;
 
+use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\base\MetaContainer;
+use nystudio107\seomatic\base\MetaItem;
+use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\models\MetaLink;
 use nystudio107\seomatic\models\MetaScript;
 use nystudio107\seomatic\models\MetaTag;
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\base\MetaContainer;
-use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\models\MetaTagContainer;
 use nystudio107\seomatic\models\MetaLinkContainer;
 use nystudio107\seomatic\models\MetaScriptContainer;
@@ -113,7 +114,9 @@ class MetaContainers extends Component
     {
         foreach ($this->metaContainers as $metaContainer) {
             /** @var $metaContainer MetaContainer */
-            $metaContainer->includeMetaData();
+            if ($metaContainer->include) {
+                $metaContainer->includeMetaData();
+            }
         }
     }
 
@@ -123,7 +126,7 @@ class MetaContainers extends Component
     public function includeMetaTitle(string $title)
     {
         $view = Craft::$app->getView();
-        $view->title = $title;
+        $view->title = MetaValueHelper::parseString($title);
     }
 
     /**

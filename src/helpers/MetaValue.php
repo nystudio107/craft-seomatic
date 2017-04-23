@@ -61,8 +61,8 @@ class MetaValue extends Component
         } catch (\Exception $e) {
             $metaValue = Craft::t(
                 'seomatic',
-                'Template rendering error in `{template}`',
-                ['template' => $metaValue]
+                'Error rendering `{template}` -> {error}',
+                ['template' => $metaValue, 'error' => $e->getMessage()]
             );
             Craft::error($metaValue, __METHOD__);
         }

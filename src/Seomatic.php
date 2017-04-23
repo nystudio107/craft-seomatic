@@ -21,6 +21,7 @@ use nystudio107\seomatic\web\ErrorHandler as SeomaticErrorHandler;
 
 use Craft;
 use craft\base\Element;
+use craft\base\ElementInterface;
 use craft\base\Plugin;
 use craft\elements\Category;
 use craft\elements\Entry;
@@ -64,7 +65,7 @@ class Seomatic extends Plugin
     public static $plugin;
 
     /**
-     * @var Element
+     * @var ElementInterface
      */
     public static $matchedElement;
 
@@ -79,11 +80,12 @@ class Seomatic extends Plugin
     /**
      * Set the matched element
      *
-     * @param $element null|Element
+     * @param $element null|ElementInterface
      */
     public static function setMatchedElement($element)
     {
         self::$matchedElement = $element;
+        MetaValueHelper::cache();
     }
 
     // Public Methods
@@ -99,8 +101,7 @@ class Seomatic extends Plugin
         $this->name = $this->getName();
         // Initialize properties
         self::$devMode = Craft::$app->getConfig()->getGeneral()->devMode;
-        self::$matchedElement = Craft::$app->getUrlManager()->getMatchedElement();
-        MetaValueHelper::cache();
+        self::setMatchedElement(Craft::$app->getUrlManager()->getMatchedElement());
         // We're loaded
         Craft::info(
             Craft::t(

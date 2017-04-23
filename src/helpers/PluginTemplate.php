@@ -44,8 +44,12 @@ class PluginTemplate extends Component
         try {
             $htmlText = Craft::$app->view->renderTemplate('seomatic/' . $templatePath, $vars);
         } catch (\Exception $e) {
-            $htmlText = 'Error rendering template ' . $templatePath . ' -> ' . $e->getMessage();
-            Craft::error(Craft::t('seomatic', $htmlText), __METHOD__);
+            $htmlText = Craft::t(
+                'seomatic',
+                'Error rendering `{template}` -> {error}',
+                ['template' => $templatePath, 'error' => $e->getMessage()]
+            );
+            Craft::error($htmlText, __METHOD__);
         }
 
         // Restore the old template mode
