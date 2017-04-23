@@ -19,15 +19,38 @@ use nystudio107\seomatic\helpers\Config as ConfigHelper;
 
 return [
     [
-        'name' => 'General',
+        'name'        => 'General',
         'description' => 'General Meta Tags',
-        'handle' => 'general',
-        'data' => ConfigHelper::getConfigFromFile('GlobalGeneral', 'defaults/metatags'),
+        'handle'      => 'general',
+        'include'     => 'true',
+        'data'        => ConfigHelper::getConfigFromFile('GlobalGeneral', 'defaults/metatags'),
     ],
     [
-        'name' => 'OpenGraph',
+        'name'        => 'Standard SEO',
+        'description' => 'Standard SEO Meta Tags',
+        'handle'      => 'standard',
+        'include'     => 'true',
+        'data'        => ConfigHelper::getConfigFromFile('GlobalStandard', 'defaults/metatags'),
+    ],
+    [
+        'name'        => 'Facebook',
         'description' => 'FaceBook OpenGraph Meta Tags',
-        'handle' => 'opengraph',
-        'data' => ConfigHelper::getConfigFromFile('GlobalOpenGraph', 'defaults/metatags'),
+        'handle'      => 'opengraph',
+        'include'     => 'true',
+        'data'        => ConfigHelper::getConfigFromFile('GlobalOpenGraph', 'defaults/metatags'),
+    ],
+    [
+        'name'        => 'Twitter',
+        'description' => 'Twitter Meta Tags',
+        'handle'      => 'twitter',
+        'include'     => 'true',
+        'data'        => ConfigHelper::getConfigFromFile('GlobalTwitter', 'defaults/metatags'),
+    ],
+    [
+        'name'        => 'Miscellaneous',
+        'description' => 'Miscellaneous Meta Tags',
+        'handle'      => 'misc',
+        'include'     => 'true',
+        'data'        => ConfigHelper::getConfigFromFile('GlobalMisc', 'defaults/metatags'),
     ],
 ];

@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
+use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\models\MetaTag;
 
 use Craft;
@@ -50,7 +51,9 @@ class MetaTagContainer extends MetaContainer
         $view = Craft::$app->getView();
         /** @var $metaTagModel MetaTag */
         foreach ($this->data as $metaTagModel) {
-            $view->registerMetaTag($metaTagModel->tagAttributes());
+            $options = $metaTagModel->tagAttributes();
+            MetaValueHelper::parseArray($options);
+            $view->registerMetaTag($options);
             // If `devMode` is enabled, validate the Meta Tag and output any model errors
             if (Seomatic::$devMode) {
                 $metaTagModel->debugMetaItem(

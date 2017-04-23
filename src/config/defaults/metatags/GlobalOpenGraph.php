@@ -24,7 +24,7 @@ return [
     ],
     'og:title' => [
         'charset'   => '',
-        'content'   => 'Some OG title',
+        'content'   => '{seomatic.seo.title}',
         'httpEquiv' => '',
         'name'      => 'og:title',
     ],

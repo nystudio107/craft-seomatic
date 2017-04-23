@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\helpers;
 
 use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
 use craft\helpers\Json;
 use craft\helpers\ArrayHelper;
@@ -28,7 +29,7 @@ class JsonLd extends Json
 
     protected static $recursionLevel;
 
-    // Static Methods
+    // Public Static Methods
     // =========================================================================
 
     /**
@@ -50,6 +51,9 @@ class JsonLd extends Json
         return $result;
     }
 
+    // Protected Static Methods
+    // =========================================================================
+
     /**
      * @inheritdoc
      */
@@ -63,10 +67,6 @@ class JsonLd extends Json
         return $result;
     }
 
-
-    // Private Methods
-    // =========================================================================
-
     /**
      * Normalize the JSON-LD array recursively to remove empty values, change
      * 'type' to '@type' and have it be the first item in the array
@@ -79,27 +79,7 @@ class JsonLd extends Json
         $array = array_filter($array);
         ArrayHelper::rename($array, 'context', '@context');
         ArrayHelper::rename($array, 'type', '@type');
+        MetaValueHelper::parseArray($array);
         ksort($array);
-    }
-
-    /**
-     * Replace key values without reordering the array or converting numeric
-     * keys to associative keys (which unset() does)
-     *
-     * @param $array
-     * @param $oldKey
-     * @param $newKey
-     *
-     * @return array
-     */
-    protected static function changeKey($array, $oldKey, $newKey)
-    {
-        if (!array_key_exists($oldKey, $array)) {
-            return $array;
-        }
-        $keys = array_keys($array);
-        $keys[array_search($oldKey, $keys)] = $newKey;
-
-        return array_combine($keys, $array);
     }
 }

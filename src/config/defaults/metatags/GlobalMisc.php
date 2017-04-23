@@ -16,19 +16,10 @@
  */
 
 return [
-    'tagSetName' => 'General Meta Tags',
-    'tagSetDescription' => 'General Meta Tags',
-
-    'description' => [
+    'google-site-verification' => [
         'charset'   => '',
-        'content'   => 'Woof',
+        'content'   => '{seomatic.identity.googleSiteVerification}',
         'httpEquiv' => '',
-        'name'      => 'description',
-    ],
-    'keywords' => [
-        'charset'   => '',
-        'content'   => 'some,keywords,here',
-        'httpEquiv' => '',
-        'name'      => 'keywords',
+        'name'      => 'google-site-verification',
     ],
 ];

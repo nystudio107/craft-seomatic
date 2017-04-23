@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
+use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\models\MetaLink;
 
 use Craft;
@@ -50,7 +51,9 @@ class MetaLinkContainer extends MetaContainer
         $view = Craft::$app->getView();
         /** @var $metaLinkModel MetaLink */
         foreach ($this->data as $metaLinkModel) {
-            $view->registerLinkTag($metaLinkModel->tagAttributes());
+            $options = $metaLinkModel->tagAttributes();
+            MetaValueHelper::parseArray($options);
+            $view->registerLinkTag($options);
             // If `devMode` is enabled, validate the Meta Link and output any model errors
             if (Seomatic::$devMode) {
                 $metaLinkModel->debugMetaItem(

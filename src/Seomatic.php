@@ -11,12 +11,13 @@
 
 namespace nystudio107\seomatic;
 
-use nystudio107\seomatic\web\ErrorHandler as SeomaticErrorHandler;
+use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\services\MetaBundles as MetaBundlesService;
 use nystudio107\seomatic\services\MetaContainers as MetaContainersService;
 use nystudio107\seomatic\services\Sitemaps as SitemapsService;
 use nystudio107\seomatic\twigextensions\SeomaticTwigExtension;
 use nystudio107\seomatic\variables\SeomaticVariable;
+use nystudio107\seomatic\web\ErrorHandler as SeomaticErrorHandler;
 
 use Craft;
 use craft\base\Element;
@@ -63,9 +64,27 @@ class Seomatic extends Plugin
     public static $plugin;
 
     /**
+     * @var Element
+     */
+    public static $matchedElement;
+
+    /**
      * @var bool
      */
     public static $devMode;
+
+    // Static Methods
+    // =========================================================================
+
+    /**
+     * Set the matched element
+     *
+     * @param $element null|Element
+     */
+    public static function setMatchedElement($element)
+    {
+        self::$matchedElement = $element;
+    }
 
     // Public Methods
     // =========================================================================
@@ -77,8 +96,11 @@ class Seomatic extends Plugin
     {
         parent::init();
         self::$plugin = $this;
-        self::$devMode = Craft::$app->getConfig()->getGeneral()->devMode;
         $this->name = $this->getName();
+        // Initialize properties
+        self::$devMode = Craft::$app->getConfig()->getGeneral()->devMode;
+        self::$matchedElement = Craft::$app->getUrlManager()->getMatchedElement();
+        MetaValueHelper::cache();
         // We're loaded
         Craft::info(
             Craft::t(

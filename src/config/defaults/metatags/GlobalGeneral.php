@@ -16,16 +16,22 @@
  */
 
 return [
-    'description' => [
+    'Content-Type' => [
         'charset'   => '',
-        'content'   => 'Woof',
-        'httpEquiv' => '',
-        'name'      => 'description',
+        'content'   => 'text/html; charset=utf-8',
+        'httpEquiv' => 'Content-Type',
+        'name'      => '',
     ],
-    'keywords' => [
+    'generator'    => [
         'charset'   => '',
-        'content'   => 'some,keywords,here',
+        'content'   => 'SEOmatic',
         'httpEquiv' => '',
-        'name'      => 'keywords',
+        'name'      => 'generator',
+    ],
+    'viewport'     => [
+        'charset'   => '',
+        'content'   => 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no',
+        'httpEquiv' => '',
+        'name'      => 'viewport',
     ],
 ];

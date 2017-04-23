@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\base\MetaItem;
+use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
 use craft\helpers\ArrayHelper;
 
@@ -107,6 +108,7 @@ class MetaTag extends MetaItem
     public function render($params = []):string
     {
         $options = $this->tagAttributes();
+        MetaValueHelper::parseArray($options);
         return Html::tag('meta', '', $options);
     }
 }

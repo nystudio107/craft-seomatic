@@ -37,6 +37,11 @@ trait MetaContainerTrait
     public $handle;
 
     /**
+     * @var bool
+     */
+    public $include = true;
+
+    /**
      * The data in this container
      *
      * @var MetaItem
