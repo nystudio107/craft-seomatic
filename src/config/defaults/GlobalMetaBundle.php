@@ -10,6 +10,7 @@
  */
 
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
+use nystudio107\seomatic\services\MetaBundles;
 
 /**
  * @author    nystudio107

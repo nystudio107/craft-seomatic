@@ -17,6 +17,7 @@ use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 use nystudio107\seomatic\models\FrontendTemplateContainer;
 
+use Craft;
 use craft\base\Model;
 
 /**
@@ -162,11 +163,26 @@ class MetaBundle extends Model
      */
     public function normalizeMetaBundleData()
     {
-        $this->metaTagContainer = MetaTagContainer::create($this->metaTagContainer->data);
-        $this->metaLinkContainer = MetaLinkContainer::create($this->metaLinkContainer->data);
-        $this->metaScriptContainer = MetaScriptContainer::create($this->metaScriptContainer->data);
-        $this->metaJsonLdContainer = MetaJsonLdContainer::create($this->metaJsonLdContainer->data);
-        $this->frontendTemplatesContainer = FrontendTemplateContainer::create($this->frontendTemplatesContainer->data);
+        if (!empty($this->metaTagContainer)) {
+            $data = json_decode($this->metaTagContainer, true);
+            $this->metaTagContainer = MetaTagContainer::create($data);
+        }
+        if (!empty($this->metaLinkContainer)) {
+            $data = json_decode($this->metaLinkContainer, true);
+            $this->metaLinkContainer = MetaLinkContainer::create($data);
+        }
+        if (!empty($this->metaScriptContainer)) {
+            $data = json_decode($this->metaScriptContainer, true);
+            $this->metaScriptContainer = MetaScriptContainer::create($data);
+        }
+        if (!empty($this->metaJsonLdContainer)) {
+            $data = json_decode($this->metaJsonLdContainer, true);
+            $this->metaJsonLdContainer = MetaJsonLdContainer::create($data);
+        }
+        if (!empty($this->frontendTemplatesContainer)) {
+            $data = json_decode($this->frontendTemplatesContainer, true);
+            $this->frontendTemplatesContainer = FrontendTemplateContainer::create($data);
+        }
     }
 
     /**

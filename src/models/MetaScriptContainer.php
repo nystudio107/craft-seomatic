@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
+use nystudio107\seomatic\models\MetaScript;
 
 use Craft;
 
@@ -75,5 +76,8 @@ class MetaScriptContainer extends MetaContainer
      */
     public function normalizeContainerData(): void
     {
+        foreach ($this->data as $key => $config) {
+            $this->data[$key] = MetaScript::create($config);
+        }
     }
 }

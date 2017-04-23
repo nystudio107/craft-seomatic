@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
+use nystudio107\seomatic\models\MetaLink;
 
 use Craft;
 
@@ -64,5 +65,8 @@ class MetaLinkContainer extends MetaContainer
      */
     public function normalizeContainerData(): void
     {
+        foreach ($this->data as $key => $config) {
+            $this->data[$key] = MetaLink::create($config);
+        }
     }
 }

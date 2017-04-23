@@ -263,8 +263,9 @@ class Seomatic extends Plugin
                 );
                 // Create our default data
                 if ($event->plugin === $this) {
-                    Seomatic::$plugin->metaBundles->createGlobalMetaBundles();
-                    Seomatic::$plugin->metaBundles->createContentMetaBundles();
+                    // @todo: this is broken in Craft 3 beta 12
+                    //Seomatic::$plugin->metaBundles->createGlobalMetaBundles();
+                    //Seomatic::$plugin->metaBundles->createContentMetaBundles();
                 }
             }
         );

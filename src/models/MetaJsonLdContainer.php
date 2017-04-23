@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
+use nystudio107\seomatic\models\MetaJsonLd;
 
 use Craft;
 
@@ -78,5 +79,8 @@ class MetaJsonLdContainer extends MetaContainer
      */
     public function normalizeContainerData(): void
     {
+        foreach ($this->data as $key => $config) {
+            $this->data[$key] = MetaJsonLd::create($config);
+        }
     }
 }

@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\helpers;
 
 use Craft;
 use craft\base\Component;
+use craft\helpers\ArrayHelper;
 
 /**
  * @author    nystudio107
@@ -50,6 +51,35 @@ class Config extends Component
 
         if (!is_array($config = @include $path)) {
             return [];
+        }
+
+        return $config;
+    }
+
+    /**
+     * Combined multiple config files together, removing the $unsetKeys
+     *
+     * @param array      $configFiles
+     * @param array|null $unsetKeys
+     *
+     * @return array
+     */
+    public static function combineConfigFiles(array $configFiles, array $unsetKeys = null)
+    {
+        $config = [];
+        // Coalesce the passed in config files
+        foreach ($configFiles as $configFile) {
+            $config = array_merge(
+                $config,
+                self::getConfigFromFile(
+                    $configFile['filename'],
+                    $configFile['directory']
+                )
+            );
+        }
+        // Filter out the $unsetKeys
+        if ($unsetKeys) {
+            $config = array_diff_key($config, array_flip($unsetKeys));
         }
 
         return $config;

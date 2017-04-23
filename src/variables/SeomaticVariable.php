@@ -20,6 +20,7 @@ use nystudio107\seomatic\models\MetaTagContainer;
 use nystudio107\seomatic\models\MetaLinkContainer;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
+use nystudio107\seomatic\services\MetaContainers;
 
 /**
  * @author    nystudio107
@@ -54,7 +55,7 @@ class SeomaticVariable
      * @param MetaTag $metaTag
      * @param null    $key
      */
-    public function includeMetaTag(MetaTag $metaTag, $key = null)
+    public function includeMetaTag(MetaTag $metaTag, $key = MetaContainers::SEOMATIC_METATAG_CONTAINER)
     {
         Seomatic::$plugin->metaContainers->addToMetaContainer($metaTag, MetaTagContainer::CONTAINER_TYPE, $key);
     }
@@ -75,7 +76,7 @@ class SeomaticVariable
      * @param MetaLink $metaLink
      * @param null     $key
      */
-    public function includeMetaLink(MetaLink $metaLink, $key = null)
+    public function includeMetaLink(MetaLink $metaLink, $key = MetaContainers::SEOMATIC_METALINK_CONTAINER)
     {
         Seomatic::$plugin->metaContainers->addToMetaContainer($metaLink, MetaLinkContainer::CONTAINER_TYPE, $key);
     }
@@ -97,7 +98,7 @@ class SeomaticVariable
      * @param MetaJsonLd $jsonLdModel
      * @param string $key
      */
-    public function includeMetaJsonLd(MetaJsonLd $jsonLdModel, $key = null)
+    public function includeMetaJsonLd(MetaJsonLd $jsonLdModel, $key = MetaContainers::SEOMATIC_METAJSONLD_CONTAINER)
     {
         Seomatic::$plugin->metaContainers->addToMetaContainer($jsonLdModel, MetaJsonLdContainer::CONTAINER_TYPE, $key);
     }
@@ -123,7 +124,7 @@ class SeomaticVariable
      * @param MetaScript $metaScript
      * @param string $key
      */
-    public function includeMetaScript(MetaScript $metaScript, $key = null)
+    public function includeMetaScript(MetaScript $metaScript, $key = MetaContainers::SEOMATIC_METASCRIPT_CONTAINER)
     {
         Seomatic::$plugin->metaContainers->addToMetaContainer($metaScript, MetaScriptContainer::CONTAINER_TYPE, $key);
     }

@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\models\MetaJsonLd;
+use nystudio107\seomatic\models\MetaLink;
 use nystudio107\seomatic\models\MetaScript;
 use nystudio107\seomatic\models\MetaTag;
 use nystudio107\seomatic\Seomatic;
@@ -85,7 +86,7 @@ class MetaContainers extends Component
             $this->loadingContainers = true;
 
             $this->loadGlobalMetaContainers();
-            $this->loadSectionMetaContainers();
+            $this->loadContentMetaContainers();
 
             // Handler: View::EVENT_END_PAGE
             Event::on(
@@ -191,24 +192,25 @@ class MetaContainers extends Component
     // =========================================================================
 
     /**
-     *
+     * Load the global site meta containers
      */
     protected function loadGlobalMetaContainers()
     {
         $siteId = Craft::$app->getSites()->currentSite->id;
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle) {
-            $this->metaContainers->addData($metaBundle->metaTagContainer, self::SEOMATIC_METATAG_CONTAINER);
-            $this->metaContainers->addData($metaBundle->metaLinkContainer, self::SEOMATIC_METALINK_CONTAINER);
-            $this->metaContainers->addData($metaBundle->metaScriptContainer, self::SEOMATIC_METASCRIPT_CONTAINER);
-            $this->metaContainers->addData($metaBundle->metaJsonLdContainer, self::SEOMATIC_METAJSONLD_CONTAINER);
+            $this->metaContainers[self::SEOMATIC_METATAG_CONTAINER] = $metaBundle->metaTagContainer;
+            $this->metaContainers[self::SEOMATIC_METALINK_CONTAINER] = $metaBundle->metaLinkContainer;
+            $this->metaContainers[self::SEOMATIC_METASCRIPT_CONTAINER] = $metaBundle->metaScriptContainer;
+            $this->metaContainers[self::SEOMATIC_METAJSONLD_CONTAINER] = $metaBundle->metaJsonLdContainer;
         }
     }
 
     /**
-     *
+     * Load the meta containers specific to the currently rendering template, and
+     * combine it with the global meta containers
      */
-    protected function loadSectionMetaContainers()
+    protected function loadContentMetaContainers()
     {
         $metaBundle = null;
         $siteId = Craft::$app->getSites()->currentSite->id;
@@ -233,6 +235,35 @@ class MetaContainers extends Component
             }
         }
         if ($metaBundle) {
+            Craft::dd($metaBundle);
+            foreach ($metaBundle->metaTagContainer->data as $metaTag) {
+                $this->addToMetaContainer(
+                    $metaTag,
+                    MetaTagContainer::CONTAINER_TYPE,
+                    self::SEOMATIC_METATAG_CONTAINER
+                );
+            }
+            foreach ($metaBundle->metaLinkContainer->data as $metaLink) {
+                $this->addToMetaContainer(
+                    $metaLink,
+                    MetaLinkContainer::CONTAINER_TYPE,
+                    self::SEOMATIC_METALINK_CONTAINER
+                );
+            }
+            foreach ($metaBundle->metaScriptContainer->data as $metaScript) {
+                $this->addToMetaContainer(
+                    $metaScript,
+                    MetaScriptContainer::CONTAINER_TYPE,
+                    self::SEOMATIC_METASCRIPT_CONTAINER
+                );
+            }
+            foreach ($metaBundle->metaJsonLdContainer->data as $metaJsonLd) {
+                $this->addToMetaContainer(
+                    $metaJsonLd,
+                    MetaJsonLdContainer::CONTAINER_TYPE,
+                    self::SEOMATIC_METAJSONLD_CONTAINER
+                );
+            }
         }
     }
 

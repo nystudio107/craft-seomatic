@@ -372,7 +372,7 @@ class MetaBundles extends Component
                             'sourceDateUpdated' => $dateUpdated,
                         ]
                     );
-                    $metaBundle = new MetaBundle($metaBundleDefaults);
+                    $metaBundle = MetaBundle::create($metaBundleDefaults);
                 }
             }
         }
@@ -429,7 +429,7 @@ class MetaBundles extends Component
                             'sourceDateUpdated' => $dateUpdated,
                         ]
                     );
-                    $metaBundle = new MetaBundle($metaBundleDefaults);
+                    $metaBundle = MetaBundle::create($metaBundleDefaults);
                 }
             }
         }

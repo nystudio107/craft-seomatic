@@ -33,6 +33,11 @@ class SeomaticTwigExtension extends \Twig_Extension implements \Twig_Extension_G
 
         $view = Craft::$app->getView();
         if ($view->getIsRenderingPageTemplate()) {
+            // @todo: this is a hack to get it to work with Craft 3 beta 12
+            if (!Seomatic::$plugin->metaBundles->getGlobalMetaBundle(1)) {
+                Seomatic::$plugin->metaBundles->createGlobalMetaBundles();
+                Seomatic::$plugin->metaBundles->createContentMetaBundles();
+            }
             // Load the meta containers for this page
             Seomatic::$plugin->metaContainers->loadMetaContainers();
         }
