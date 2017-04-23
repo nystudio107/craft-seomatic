@@ -137,7 +137,7 @@ class MetaBundles extends Component
             'sourceSiteId' => $siteId,
         ]);
         if ($metaBundleRecord) {
-            $metaBundle = new MetaBundle($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
+            $metaBundle = MetaBundle::create($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
             $id = count($this->metaBundles);
             $this->metaBundles[$id] = $metaBundle;
             $this->metaBundlesBySourceId[$sourceId][$siteId] = $id;
@@ -168,7 +168,7 @@ class MetaBundles extends Component
             'sourceSiteId' => $siteId,
         ]);
         if ($metaBundleRecord) {
-            $metaBundle = new MetaBundle($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
+            $metaBundle = MetaBundle::create($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
             $id = count($this->metaBundles);
             $this->metaBundles[$id] = $metaBundle;
             $this->metaBundlesBySourceHandle[$sourceHandle][$siteId] = $id;
@@ -199,7 +199,7 @@ class MetaBundles extends Component
             'sourceSiteId' => $siteId,
         ]);
         if ($metaBundleRecord) {
-            $metaBundle = new MetaBundle($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
+            $metaBundle = MetaBundle::create($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
             $id = count($this->metaBundles);
             $this->metaBundles[$id] = $metaBundle;
             $this->metaBundlesBySourceTemplate[$sourceTemplate][$siteId] = $id;
@@ -372,7 +372,7 @@ class MetaBundles extends Component
                             'sourceDateUpdated' => $dateUpdated,
                         ]
                     );
-                    $metaBundle = MetaBundle::create($metaBundleDefaults);
+                    $metaBundle = new MetaBundle($metaBundleDefaults);
                 }
             }
         }
@@ -429,7 +429,7 @@ class MetaBundles extends Component
                             'sourceDateUpdated' => $dateUpdated,
                         ]
                     );
-                    $metaBundle = MetaBundle::create($metaBundleDefaults);
+                    $metaBundle = new MetaBundle($metaBundleDefaults);
                 }
             }
         }

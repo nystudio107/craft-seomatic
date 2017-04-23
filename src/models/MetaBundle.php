@@ -181,21 +181,21 @@ class MetaBundle extends Model
             $metaScriptContainers = json_decode($this->metaScriptContainer, true);
             $this->metaScriptContainer = [];
             foreach ($metaScriptContainers as $metaScriptContainer) {
-                $this->metaScriptContainer = MetaScriptContainer::create($metaScriptContainer);
+                $this->metaScriptContainer[] = MetaScriptContainer::create($metaScriptContainer);
             }
         }
         if (!empty($this->metaJsonLdContainer)) {
             $metaJsonLdContainers = json_decode($this->metaJsonLdContainer, true);
             $this->metaJsonLdContainer = [];
             foreach ($metaJsonLdContainers as $metaJsonLdContainer) {
-                $this->metaJsonLdContainer = MetaJsonLdContainer::create($metaJsonLdContainer);
+                $this->metaJsonLdContainer[] = MetaJsonLdContainer::create($metaJsonLdContainer);
             }
         }
         if (!empty($this->frontendTemplatesContainer)) {
             $frontendTemplatesContainers = json_decode($this->frontendTemplatesContainer, true);
             $this->frontendTemplatesContainer = [];
             foreach ($frontendTemplatesContainers as $frontendTemplatesContainer) {
-                $this->frontendTemplatesContainer = FrontendTemplateContainer::create($frontendTemplatesContainer);
+                $this->frontendTemplatesContainer[] = FrontendTemplateContainer::create($frontendTemplatesContainer);
             }
         }
     }
