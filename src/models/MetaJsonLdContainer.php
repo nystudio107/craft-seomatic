@@ -52,24 +52,26 @@ class MetaJsonLdContainer extends MetaContainer
         $view = Craft::$app->getView();
         /** @var $metaJsonLdModel MetaJsonLd */
         foreach ($this->data as $metaJsonLdModel) {
-            $jsonLd = $metaJsonLdModel->render([
-                'renderRaw' => true,
-                'renderScriptTags' => false
-            ]);
-            $view->registerScript(
-                $jsonLd,
-                View::POS_END,
-                ['type' => 'application/ld+json']
-            );
-            // If `devMode` is enabled, validate the JSON-LD and output any model errors
-            if (Seomatic::$devMode) {
-                $metaJsonLdModel->debugMetaItem(
-                    'JSON-LD property: ',
-                    [
-                        'default' => 'error',
-                        'google' => 'warning'
-                    ]
+            if ($metaJsonLdModel->include) {
+                $jsonLd = $metaJsonLdModel->render([
+                    'renderRaw'        => true,
+                    'renderScriptTags' => false
+                ]);
+                $view->registerScript(
+                    $jsonLd,
+                    View::POS_END,
+                    ['type' => 'application/ld+json']
                 );
+                // If `devMode` is enabled, validate the JSON-LD and output any model errors
+                if (Seomatic::$devMode) {
+                    $metaJsonLdModel->debugMetaItem(
+                        'JSON-LD property: ',
+                        [
+                            'default' => 'error',
+                            'google'  => 'warning'
+                        ]
+                    );
+                }
             }
         }
     }

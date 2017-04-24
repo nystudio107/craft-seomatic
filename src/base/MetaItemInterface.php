@@ -35,4 +35,13 @@ interface MetaItemInterface
      * @return string
      */
     public function render($params = []): string;
+
+    /**
+     * Prepare the MetaItem's data for rendering
+     *
+     * @param mixed $data
+     *
+     * @return mixed
+     */
+    public function prepForRender(&$data);
 }

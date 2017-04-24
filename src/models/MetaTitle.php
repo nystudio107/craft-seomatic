@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\models;
 
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
@@ -40,7 +41,7 @@ class MetaTitle extends MetaItem
     {
         $model = null;
         $model = new MetaTitle($config);
-        $model->key = $model->title;
+        $model->key = 'title';
 
         return $model;
     }
@@ -73,12 +74,35 @@ class MetaTitle extends MetaItem
     /**
      * @inheritdoc
      */
-    public function render($params = []):string
+    public function prepForRender(&$data)
     {
         $scenario = $this->scenario;
         $this->setScenario('render');
-        $title = MetaValueHelper::parseString($this->title);
+        $data = MetaValueHelper::parseString($data);
         $this->setScenario($scenario);
+        /** @var  $settings Settings */
+        $settings = Seomatic::$plugin->getSettings();
+        // Special-case scenarios
+        if (Seomatic::$devMode) {
+            $data = $settings->devModeTitlePrefix . $data;
+        }
+        switch ($settings->environment) {
+            case 'live':
+                break;
+            case 'staging':
+                break;
+            case 'local':
+                break;
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function render($params = []):string
+    {
+        $title = $this->title;
+        $this->prepForRender($title);
         return Html::tag('title', $title, []);
     }
 }

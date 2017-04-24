@@ -1,0 +1,69 @@
+<?php
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
+
+namespace nystudio107\seomatic\models;
+
+use craft\base\Model;
+
+/**
+ * @author    nystudio107
+ * @package   Seomatic
+ * @since     3.0.0
+ */
+class Settings extends Model
+{
+    // Public Properties
+    // =========================================================================
+
+    /**
+     * The public-facing name of the plugin
+     *
+     * @var string
+     */
+    public $pluginName = 'SEOmatic';
+
+    /**
+     * The server environment, either `live`, `staging`, or `local`
+     *
+     * @var string
+     */
+    public $environment = 'live';
+
+    /**
+     * If `devMode` is on, prefix the <title> with this string
+     *
+     * @var string
+     */
+    public $devModeTitlePrefix = '[devMode] ';
+
+    // Public Methods
+    // =========================================================================
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            ['pluginName', 'string'],
+            ['pluginName', 'default', 'value' => 'SEOmatic'],
+            ['environment', 'string'],
+            ['environment', 'default', 'value' => 'live'],
+            ['environment', 'in', 'range' => [
+                'live',
+                'staging',
+                'production',
+            ]],
+            ['devModeTitlePrefix', 'string'],
+            ['devModeTitlePrefix', 'default', 'value' => '[devMode] '],
+        ];
+    }
+}

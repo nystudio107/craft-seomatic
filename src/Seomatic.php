@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic;
 
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
+use nystudio107\seomatic\models\Settings;
 use nystudio107\seomatic\services\MetaBundles as MetaBundlesService;
 use nystudio107\seomatic\services\MetaContainers as MetaContainersService;
 use nystudio107\seomatic\services\Sitemaps as SitemapsService;
@@ -98,7 +99,9 @@ class Seomatic extends Plugin
     {
         parent::init();
         self::$plugin = $this;
-        $this->name = $this->getName();
+        /** @var  $settings Settings */
+        $settings = Seomatic::$plugin->getSettings();
+        $this->name = $settings->pluginName;
         // Initialize properties
         self::$devMode = Craft::$app->getConfig()->getGeneral()->devMode;
         // We're loaded
@@ -140,19 +143,30 @@ class Seomatic extends Plugin
         return SeomaticVariable::class;
     }
 
-    /**
-     * Returns the user-facing name of the plugin, which can override the name
-     * in composer.json
-     *
-     * @return mixed
-     */
-    public function getName(): string
-    {
-        return Craft::t('seomatic', 'SEOmatic');
-    }
-
     // Protected Methods
     // =========================================================================
+
+    /**
+     * @inheritdoc
+     */
+    protected function createSettingsModel()
+    {
+        return new Settings();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function settingsHtml(): string
+    {
+        // Render our settings template
+        return Craft::$app->view->renderTemplate(
+            'seomatic/settings',
+            [
+                'settings' => $this->getSettings(),
+            ]
+        );
+    }
 
     /**
      * Install global event listeners

@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\models;
 
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
@@ -111,6 +112,7 @@ class MetaLink extends MetaItem
                 'alternate',
                 'author',
                 'canonical',
+                'creator',
                 'dns-prefetch',
                 'help',
                 'icon',
@@ -122,6 +124,7 @@ class MetaLink extends MetaItem
                 'preload',
                 'prerender',
                 'prev',
+                'publisher',
                 'search',
                 'stylesheet',
             ]],
@@ -145,13 +148,35 @@ class MetaLink extends MetaItem
     /**
      * @inheritdoc
      */
-    public function render($params = []):string
+    public function prepForRender(&$data)
     {
         $scenario = $this->scenario;
         $this->setScenario('render');
-        $options = $this->tagAttributes();
+        $data = $this->tagAttributes();
         $this->setScenario($scenario);
-        MetaValueHelper::parseArray($options);
+        MetaValueHelper::parseArray($data);
+        /** @var  $settings Settings */
+        $settings = Seomatic::$plugin->getSettings();
+        // Special-case scenarios
+        if (Seomatic::$devMode) {
+        }
+        switch ($settings->environment) {
+            case 'live':
+                break;
+            case 'staging':
+                break;
+            case 'local':
+                break;
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function render($params = []):string
+    {
+        $options = $this->tagAttributes();
+        $this->prepForRender($options);
         return Html::tag('link', '', $options);
     }
 }

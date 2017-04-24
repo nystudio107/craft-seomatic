@@ -55,8 +55,10 @@ class SeomaticVariable
      * @param MetaTag $metaTag
      * @param string  $key
      */
-    public function includeMetaTag(MetaTag $metaTag, $key = MetaContainers::SEOMATIC_METATAG_CONTAINER)
-    {
+    public function includeMetaTag(
+        MetaTag $metaTag,
+        $key = MetaContainers::SEOMATIC_METATAG_CONTAINER . MetaContainers::METATAG_GENERAL_HANDLE
+    ) {
         Seomatic::$plugin->metaContainers->addToMetaContainer($metaTag, $key);
     }
 
@@ -76,8 +78,10 @@ class SeomaticVariable
      * @param MetaLink $metaLink
      * @param string   $key
      */
-    public function includeMetaLink(MetaLink $metaLink, $key = MetaContainers::SEOMATIC_METALINK_CONTAINER)
-    {
+    public function includeMetaLink(
+        MetaLink $metaLink,
+        $key = MetaContainers::SEOMATIC_METALINK_CONTAINER . MetaContainers::METALINK_GENERAL_HANDLE
+    ) {
         Seomatic::$plugin->metaContainers->addToMetaContainer($metaLink, $key);
     }
 
@@ -98,8 +102,10 @@ class SeomaticVariable
      * @param MetaJsonLd $jsonLdModel
      * @param string     $key
      */
-    public function includeMetaJsonLd(MetaJsonLd $jsonLdModel, $key = MetaContainers::SEOMATIC_METAJSONLD_CONTAINER)
-    {
+    public function includeMetaJsonLd(
+        MetaJsonLd $jsonLdModel,
+        $key = MetaContainers::SEOMATIC_METAJSONLD_CONTAINER . MetaContainers::METAJSONLD_GENERAL_HANDLE
+    ) {
         Seomatic::$plugin->metaContainers->addToMetaContainer($jsonLdModel, $key);
     }
 
@@ -125,8 +131,10 @@ class SeomaticVariable
      * @param MetaScript $metaScript
      * @param string     $key
      */
-    public function includeMetaScript(MetaScript $metaScript, $key = MetaContainers::SEOMATIC_METASCRIPT_CONTAINER)
-    {
+    public function includeMetaScript(
+        MetaScript $metaScript,
+        $key = MetaContainers::SEOMATIC_METASCRIPT_CONTAINER . MetaContainers::METASCRIPT_GENERAL_HANDLE
+    ) {
         Seomatic::$plugin->metaContainers->addToMetaContainer($metaScript, $key);
     }
 

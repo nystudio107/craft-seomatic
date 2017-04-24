@@ -15,10 +15,11 @@
  * @since     3.0.0
  */
 return [
-    'SEOmatic'                                => 'SEOmatic',
-    '{name} plugin loaded'                    => '{name} plugin loaded',
-    'JSON-LD property: '                      => 'JSON-LD property: ',
-    'SEOmatic sitemap caches'                 => 'SEOmatic sitemap caches',
-    'Scenario: "'                             => 'Scenario: "',
-    'Error rendering `{template}` -> {error}' => 'Error rendering `{template}` -> {error}',
+    'SEOmatic'                                        => 'SEOmatic',
+    '{name} plugin loaded'                            => '{name} plugin loaded',
+    'JSON-LD property: '                              => 'JSON-LD property: ',
+    'SEOmatic sitemap caches'                         => 'SEOmatic sitemap caches',
+    'Scenario: "'                                     => 'Scenario: "',
+    'Error rendering `{template}` -> {error}'         => 'Error rendering `{template}` -> {error}',
+    'Meta container with key `{key}` does not exist.' => 'Meta container with key `{key}` does not exist.',
 ];

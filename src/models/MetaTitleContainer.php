@@ -53,16 +53,16 @@ class MetaTitleContainer extends MetaContainer
         $view = Craft::$app->getView();
         /** @var $metaTitleModel MetaTitle */
         foreach ($this->data as $metaTitleModel) {
-            $scenario = $metaTitleModel->scenario;
-            $metaTitleModel->setScenario('render');
-            $title = MetaValueHelper::parseString($metaTitleModel->title);
-            $this->setScenario($scenario);
-            $view->title = $title;
-            // If `devMode` is enabled, validate the Meta Tag and output any model errors
-            if (Seomatic::$devMode) {
-                $metaTitleModel->debugMetaItem(
-                    "Tag attribute: "
-                );
+            if ($metaTitleModel->include) {
+                $title = $metaTitleModel->title;
+                $metaTitleModel->prepForRender($title);
+                $view->title = $title;
+                // If `devMode` is enabled, validate the Meta Tag and output any model errors
+                if (Seomatic::$devMode) {
+                    $metaTitleModel->debugMetaItem(
+                        "Tag attribute: "
+                    );
+                }
             }
         }
     }

@@ -32,6 +32,8 @@ use craft\base\Component;
 use craft\web\View;
 
 use yii\base\Event;
+use yii\base\Exception;
+
 
 /**
  * @author    nystudio107
@@ -147,16 +149,21 @@ class MetaContainers extends Component
     /**
      * Add the passed in MetaItem to the MetaContainer indexed as $key
      *
-     * @param $data MetaItem
+     * @param $data MetaItem The MetaItem to add to the container
      * @param $key  string   The key to the container to add the data to
+     *
+     * @throws Exception     If the container $key doesn't exist
      */
     public function addToMetaContainer(MetaItem $data, string $key = null)
     {
-        if (!$key) {
-            return;
-        }
-        if (empty($this->metaContainers[$key])) {
-            return;
+        if (!$key || empty($this->metaContainers[$key])) {
+            $error = Craft::t(
+                'seomatic',
+                'Meta container with key `{key}` does not exist.',
+                ['key' => $key]
+            );
+            Craft::error($error, __METHOD__);
+            throw new Exception($error);
         }
         /** @var  $container MetaContainer */
             $container = $this->metaContainers[$key];

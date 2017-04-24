@@ -216,6 +216,13 @@ class MetaJsonLd extends MetaItem
     }
 
     /**
+     * @inheritdoc
+     */
+    public function prepForRender(&$data)
+    {
+    }
+
+    /**
      * Renders a JSON-LD representation of the schema
      *
      * @param array $params

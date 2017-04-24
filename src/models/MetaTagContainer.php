@@ -57,26 +57,25 @@ class MetaTagContainer extends MetaContainer
         $view = Craft::$app->getView();
         /** @var $metaTagModel MetaTag */
         foreach ($this->data as $metaTagModel) {
-            $scenario = $metaTagModel->scenario;
-            $metaTagModel->setScenario('render');
-            $options = $metaTagModel->tagAttributes();
-            $this->setScenario($scenario);
-            MetaValueHelper::parseArray($options);
-            $view->registerMetaTag($options);
-            // If `devMode` is enabled, validate the Meta Tag and output any model errors
-            if (Seomatic::$devMode) {
-                $scenario = [];
-                $scenario['default'] = 'error';
-                // Special validation for certain meta tags
-                if (!empty($options['name'])) {
-                    if (in_array($options['name'], self::TAGS_WITH_VALIDATION)) {
-                        $scenario[$options['name']] = 'warning';
+            if ($metaTagModel->include) {
+                $options = $metaTagModel->tagAttributes();
+                $metaTagModel->prepForRender($options);
+                $view->registerMetaTag($options);
+                // If `devMode` is enabled, validate the Meta Tag and output any model errors
+                if (Seomatic::$devMode) {
+                    $scenario = [];
+                    $scenario['default'] = 'error';
+                    // Special validation for certain meta tags
+                    if (!empty($options['name'])) {
+                        if (in_array($options['name'], self::TAGS_WITH_VALIDATION)) {
+                            $scenario[$options['name']] = 'warning';
+                        }
                     }
+                    $metaTagModel->debugMetaItem(
+                        "Tag attribute: ",
+                        $scenario
+                    );
                 }
-                $metaTagModel->debugMetaItem(
-                    "Tag attribute: ",
-                    $scenario
-                );
             }
         }
     }

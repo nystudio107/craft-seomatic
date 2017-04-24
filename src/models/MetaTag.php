@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\models;
 
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
@@ -35,6 +36,14 @@ class MetaTag extends MetaItem
     const REFERRER_TAG = 'referrer';
     const ROBOTS_TAG = 'robots';
 
+    const UNIQUEKEYS_TAGS = [
+        'og:see_also',
+        'og:image',
+        'og:image:type',
+        'og:image:height',
+        'og:image:width',
+    ];
+
     // Static Methods
     // =========================================================================
 
@@ -52,6 +61,10 @@ class MetaTag extends MetaItem
         $model = new MetaTag($config);
         $model->key = $model->name ?? $model->charset ?? $model->httpEquiv;
 
+        // Unique keys for specific tags
+        if (in_array($model->name, self::UNIQUEKEYS_TAGS)) {
+            $model->uniqueKeys = true;
+        }
         return $model;
     }
 
@@ -130,13 +143,35 @@ class MetaTag extends MetaItem
     /**
      * @inheritdoc
      */
-    public function render($params = []):string
+    public function prepForRender(&$data)
     {
         $scenario = $this->scenario;
         $this->setScenario('render');
-        $options = $this->tagAttributes();
+        $data = $this->tagAttributes();
         $this->setScenario($scenario);
-        MetaValueHelper::parseArray($options);
+        MetaValueHelper::parseArray($data);
+        /** @var  $settings Settings */
+        $settings = Seomatic::$plugin->getSettings();
+        // Special-case scenarios
+        if (Seomatic::$devMode) {
+        }
+        switch ($settings->environment) {
+            case 'live':
+                break;
+            case 'staging':
+                break;
+            case 'local':
+                break;
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function render($params = []):string
+    {
+        $options = $this->tagAttributes();
+        $this->prepForRender($options);
         return Html::tag('meta', '', $options);
     }
 }

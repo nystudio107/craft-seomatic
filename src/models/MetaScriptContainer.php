@@ -57,16 +57,18 @@ class MetaScriptContainer extends MetaContainer
         $view = Craft::$app->getView();
         /** @var $metaScriptModel MetaScript */
         foreach ($this->data as $metaScriptModel) {
-            $js = $metaScriptModel->render();
-            $view->registerJs(
-                $js,
-                $this->position
-            );
-            // If `devMode` is enabled, validate the Meta Script and output any model errors
-            if (Seomatic::$devMode) {
-                $metaScriptModel->debugMetaItem(
-                    "Script attribute: "
+            if ($metaScriptModel->include) {
+                $js = $metaScriptModel->render();
+                $view->registerJs(
+                    $js,
+                    $this->position
                 );
+                // If `devMode` is enabled, validate the Meta Script and output any model errors
+                if (Seomatic::$devMode) {
+                    $metaScriptModel->debugMetaItem(
+                        "Script attribute: "
+                    );
+                }
             }
         }
     }

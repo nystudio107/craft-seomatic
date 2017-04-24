@@ -77,6 +77,13 @@ class MetaScript extends MetaItem
     /**
      * @inheritdoc
      */
+    public function prepForRender(&$data)
+    {
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function render($params = []):string
     {
         return PluginTemplateHelper::renderPluginTemplate($this->templatePath, $this->vars);
