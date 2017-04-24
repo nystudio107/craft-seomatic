@@ -137,30 +137,29 @@ class MetaContainers extends Component
      */
     public function includeMetaTitle(string $title)
     {
-        $view = Craft::$app->getView();
-        $title = MetaValueHelper::parseString($title);
-        $view->title = $title;
+        $metaTitle = MetaTitle::create([
+            'title' => $title,
+        ]);
+        $key = self::SEOMATIC_METATITLE_CONTAINER . self::METATITLE_GENERAL_HANDLE;
+        $this->addToMetaContainer($metaTitle, $key);
     }
 
     /**
-     * Add the passed in MetaItem to the MetaContainer of the $type and $key
+     * Add the passed in MetaItem to the MetaContainer indexed as $key
      *
      * @param $data MetaItem
-     * @param $type string
-     * @param $key  string
+     * @param $key  string   The key to the container to add the data to
      */
-    public function addToMetaContainer(MetaItem $data, string $type, string $key = null)
+    public function addToMetaContainer(MetaItem $data, string $key = null)
     {
         if (!$key) {
-            $key = $key . $type;
+            return;
+        }
+        if (empty($this->metaContainers[$key])) {
+            return;
         }
         /** @var  $container MetaContainer */
-        if (empty($this->metaContainers[$key])) {
-            // If the MetaContainer doesn't exist, create it
-            $container = $this->createMetaContainer($type, $key);
-        } else {
             $container = $this->metaContainers[$key];
-        }
         // If $uniqueKeys is set, generate a hash of the data for the key
         $dataKey = $data->key;
         if ($data->uniqueKeys) {
@@ -197,6 +196,9 @@ class MetaContainers extends Component
                     break;
                 case MetaJsonLdContainer::CONTAINER_TYPE:
                     $className = MetaJsonLdContainer::className();
+                    break;
+                case MetaTitleContainer::CONTAINER_TYPE:
+                    $className = MetaTitleContainer::className();
                     break;
             }
             if ($className) {
@@ -287,51 +289,31 @@ class MetaContainers extends Component
         foreach ($metaBundle->metaTagContainer as $metaTagContainer) {
             $key = self::SEOMATIC_METATAG_CONTAINER . $metaTagContainer->handle;
             foreach ($metaTagContainer->data as $metaTag) {
-                $this->addToMetaContainer(
-                    $metaTag,
-                    MetaTagContainer::CONTAINER_TYPE,
-                    $key
-                );
+                $this->addToMetaContainer($metaTag, $key);
             }
         }
         foreach ($metaBundle->metaLinkContainer as $metaLinkContainer) {
             $key = self::SEOMATIC_METALINK_CONTAINER . $metaLinkContainer->handle;
             foreach ($metaLinkContainer->data as $metaLink) {
-                $this->addToMetaContainer(
-                    $metaLink,
-                    MetaLinkContainer::CONTAINER_TYPE,
-                    $key
-                );
+                $this->addToMetaContainer($metaLink, $key);
             }
         }
         foreach ($metaBundle->metaScriptContainer as $metaScriptContainer) {
             $key = self::SEOMATIC_METASCRIPT_CONTAINER . $metaScriptContainer->handle;
             foreach ($metaScriptContainer->data as $metaScript) {
-                $this->addToMetaContainer(
-                    $metaScript,
-                    MetaScriptContainer::CONTAINER_TYPE,
-                    $key
-                );
+                $this->addToMetaContainer($metaScript, $key);
             }
         }
         foreach ($metaBundle->metaJsonLdContainer as $metaJsonLdContainer) {
             $key = self::SEOMATIC_METAJSONLD_CONTAINER . $metaJsonLdContainer->handle;
             foreach ($metaJsonLdContainer->data as $metaJsonLd) {
-                $this->addToMetaContainer(
-                    $metaJsonLd,
-                    MetaJsonLdContainer::CONTAINER_TYPE,
-                    $key
-                );
+                $this->addToMetaContainer($metaJsonLd, $key);
             }
         }
         foreach ($metaBundle->metaTitleContainer as $metaTitleContainer) {
             $key = self::SEOMATIC_METATITLE_CONTAINER . $metaTitleContainer->handle;
             foreach ($metaTitleContainer->data as $metaTitle) {
-                $this->addToMetaContainer(
-                    $metaTitle,
-                    MetaTitleContainer::CONTAINER_TYPE,
-                    $key
-                );
+                $this->addToMetaContainer($metaTitle, $key);
             }
         }
     }

@@ -30,6 +30,12 @@ class MetaTagContainer extends MetaContainer
 
     const CONTAINER_TYPE = 'MetaTagContainer';
 
+    const TAGS_WITH_VALIDATION = [
+        'description',
+        'referrer',
+        'robots',
+    ];
+
     // Public Properties
     // =========================================================================
 
@@ -63,10 +69,8 @@ class MetaTagContainer extends MetaContainer
                 $scenario['default'] = 'error';
                 // Special validation for certain meta tags
                 if (!empty($options['name'])) {
-                    switch ($options['name']) {
-                        case MetaTag::DESCRIPTION_TAG:
-                            $scenario[MetaTag::DESCRIPTION_TAG] = 'warning';
-                            break;
+                    if (in_array($options['name'], self::TAGS_WITH_VALIDATION)) {
+                        $scenario[$options['name']] = 'warning';
                     }
                 }
                 $metaTagModel->debugMetaItem(

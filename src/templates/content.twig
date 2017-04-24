@@ -1,7 +1,7 @@
 {% extends "_layouts/cp" %}
 {% import '_includes/forms' as forms %}
 
-{% set metaBundles = craft.seomatic.getMetaBundles %}
+{% set metaBundles = craft.seomatic.getContentMetaBundles(false) %}
 
 {% set title = craft.seomatic.getPluginName() %}
 

@@ -12,6 +12,7 @@ namespace nystudio107\seomatic\controllers;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\models\SitemapIndexTemplate;
 use nystudio107\seomatic\models\SitemapTemplate;
+use nystudio107\seomatic\services\Sitemaps;
 
 use Craft;
 use craft\web\Controller;
@@ -46,7 +47,7 @@ class SitemapController extends Controller
      */
     public function actionSitemapIndex()
     {
-        $xml = Seomatic::$plugin->sitemaps->renderTemplate(SitemapIndexTemplate::TEMPLATE_TYPE);
+        $xml = Seomatic::$plugin->sitemaps->renderTemplate(Sitemaps::SEOMATIC_SITEMAPINDEX_CONTAINER);
 
         $headers = Craft::$app->response->headers;
         $headers->add('Content-Type', 'text/xml; charset=utf-8');
@@ -66,7 +67,7 @@ class SitemapController extends Controller
     public function actionSitemap(string $handle, int $siteId, string $file = null)
     {
         $xml = Seomatic::$plugin->sitemaps->renderTemplate(
-            SitemapTemplate::TEMPLATE_TYPE,
+            Sitemaps::SEOMATIC_SITEMAP_CONTAINER,
             [
                 'handle' => $handle,
                 'siteId' => $siteId

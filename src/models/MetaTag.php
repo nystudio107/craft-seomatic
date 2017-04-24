@@ -32,6 +32,8 @@ class MetaTag extends MetaItem
     const ITEM_TYPE = 'MetaTag';
 
     const DESCRIPTION_TAG = 'description';
+    const REFERRER_TAG = 'referrer';
+    const ROBOTS_TAG = 'robots';
 
     // Static Methods
     // =========================================================================
@@ -89,6 +91,25 @@ class MetaTag extends MetaItem
             [['charset', 'content', 'httpEquiv', 'name'], 'string'],
             // Special validation rules for specific meta tags
             [['content'], 'string', 'length' => [70, 160], 'on' => self::DESCRIPTION_TAG],
+            ['content', 'in', 'range' => [
+                'no-referrer',
+                'origin',
+                'no-referrer-when-downgrade',
+                'origin-when-crossorigin',
+                'unsafe-URL',
+            ], 'on' => self::REFERRER_TAG],
+            ['content', 'in', 'range' => [
+                'index',
+                'noindex',
+                'follow',
+                'nofollow',
+                'none',
+                'noodp',
+                'noarchive',
+                'nosnippet',
+                'noimageindex',
+                'nocache',
+            ], 'on' => self::ROBOTS_TAG],
         ]);
 
         return $rules;

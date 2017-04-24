@@ -32,7 +32,7 @@ class SeomaticVariable
     /**
      * Set the page's <title> tag
      *
-     * @param string $title  The page <title> tag text
+     * @param string $title The page <title> tag text
      */
     public function includeMetaTitle(string $title)
     {
@@ -42,9 +42,9 @@ class SeomaticVariable
     /**
      * Create a meta tag
      *
-     * @param array  $attributes  The meta tag attributes
+     * @param array $attributes The meta tag attributes
      *
-     * @return mixed              The model object
+     * @return null|MetaTag     The model object
      */
     public function createMetaTag(array $attributes = [])
     {
@@ -53,19 +53,19 @@ class SeomaticVariable
 
     /**
      * @param MetaTag $metaTag
-     * @param null    $key
+     * @param string  $key
      */
     public function includeMetaTag(MetaTag $metaTag, $key = MetaContainers::SEOMATIC_METATAG_CONTAINER)
     {
-        Seomatic::$plugin->metaContainers->addToMetaContainer($metaTag, MetaTagContainer::CONTAINER_TYPE, $key);
+        Seomatic::$plugin->metaContainers->addToMetaContainer($metaTag, $key);
     }
 
     /**
      * Create a link tag
      *
-     * @param array  $attributes  The link tag attributes
+     * @param array $attributes The link tag attributes
      *
-     * @return mixed              The model object
+     * @return null|MetaLink    The model object
      */
     public function createMetaLink(array $attributes = [])
     {
@@ -74,20 +74,20 @@ class SeomaticVariable
 
     /**
      * @param MetaLink $metaLink
-     * @param null     $key
+     * @param string   $key
      */
     public function includeMetaLink(MetaLink $metaLink, $key = MetaContainers::SEOMATIC_METALINK_CONTAINER)
     {
-        Seomatic::$plugin->metaContainers->addToMetaContainer($metaLink, MetaLinkContainer::CONTAINER_TYPE, $key);
+        Seomatic::$plugin->metaContainers->addToMetaContainer($metaLink, $key);
     }
 
     /**
      * Create a new JSON-LD schema type object
      *
-     * @param string $jsonLdType  The schema.org type to create
-     * @param array  $config      The default attributes for the model
+     * @param string $jsonLdType The schema.org type to create
+     * @param array  $config     The default attributes for the model
      *
-     * @return mixed              The model object
+     * @return null|MetaJsonLd   The model object
      */
     public function createMetaJsonLd(string $jsonLdType, $config = [])
     {
@@ -96,37 +96,38 @@ class SeomaticVariable
 
     /**
      * @param MetaJsonLd $jsonLdModel
-     * @param string $key
+     * @param string     $key
      */
     public function includeMetaJsonLd(MetaJsonLd $jsonLdModel, $key = MetaContainers::SEOMATIC_METAJSONLD_CONTAINER)
     {
-        Seomatic::$plugin->metaContainers->addToMetaContainer($jsonLdModel, MetaJsonLdContainer::CONTAINER_TYPE, $key);
+        Seomatic::$plugin->metaContainers->addToMetaContainer($jsonLdModel, $key);
     }
 
     /**
      * Create a meta script from a template
      *
-     * @param string $template  The template to render
-     * @param array  $vars      The variables to include
+     * @param string $template The template to render
+     * @param array  $vars     The variables to include
      *
-     * @return mixed            The model object
+     * @return null|MetaScript The model object
      */
     public function createMetaScript(string $template, array $vars = [])
     {
         $config = [
             'templatePath' => '_metaScripts/' . $template,
-            'vars' => $vars,
+            'vars'         => $vars,
         ];
+
         return MetaScript::create($config);
     }
 
     /**
      * @param MetaScript $metaScript
-     * @param string $key
+     * @param string     $key
      */
     public function includeMetaScript(MetaScript $metaScript, $key = MetaContainers::SEOMATIC_METASCRIPT_CONTAINER)
     {
-        Seomatic::$plugin->metaContainers->addToMetaContainer($metaScript, MetaScriptContainer::CONTAINER_TYPE, $key);
+        Seomatic::$plugin->metaContainers->addToMetaContainer($metaScript, $key);
     }
 
     /**
@@ -142,10 +143,12 @@ class SeomaticVariable
     /**
      * Get all of the meta bundles
      *
+     * @param bool $allSites
+     *
      * @return array
      */
-    public function getMetaBundles()
+    public function getContentMetaBundles(bool $allSites = true)
     {
-        return Seomatic::$plugin->metaBundles->getAllMetaBundles();
+        return Seomatic::$plugin->metaBundles->getContentMetaBundles($allSites);
     }
 }

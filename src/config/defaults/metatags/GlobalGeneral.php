@@ -16,7 +16,7 @@
  */
 
 return [
-    'Content-Type' => [
+    'contenttype' => [
         'charset'   => '',
         'content'   => 'text/html; charset=utf-8',
         'httpEquiv' => 'Content-Type',

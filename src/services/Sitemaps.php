@@ -78,11 +78,16 @@ class Sitemaps extends Component implements SitemapInterface
         $sitemapTemplate = SitemapTemplate::create();
         $this->sitemapTemplateContainer->addData($sitemapTemplate, self::SEOMATIC_SITEMAP_CONTAINER);
 
-        // Register our site routes
+        // Handler: UrlManager::EVENT_REGISTER_SITE_URL_RULES
         Event::on(
             UrlManager::className(),
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
+                Craft::trace(
+                    'UrlManager::EVENT_REGISTER_SITE_URL_RULES',
+                    'seomatic'
+                );
+                // Register our sitemap routes
                 $event->rules = array_merge(
                     $event->rules,
                     $this->sitemapRouteRules()

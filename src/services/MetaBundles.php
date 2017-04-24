@@ -211,18 +211,31 @@ class MetaBundles extends Component
     /**
      * Return all of the content meta bundles
      *
+     * @param bool $allSites
+     *
      * @return array
      */
-    public function getContentMetaBundles(): array
+    public function getContentMetaBundles(bool $allSites = true): array
     {
         $metaBundles = [];
+        $metaBundleSourceHandles = [];
         $metaBundleRecords = MetaBundleRecord::find()
             ->where(['!=', 'sourceHandle', self::GLOBAL_META_BUNDLE])
             ->all();
+        /** @var  $metaBundleRecord MetaBundle */
         foreach ($metaBundleRecords as $metaBundleRecord) {
-            $metaBundle = MetaBundle::create($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
-            if ($metaBundle) {
-                $metaBundles[] = $metaBundle;
+            $addToMetaBundles = true;
+            if (!$allSites) {
+                if (in_array($metaBundleRecord->sourceHandle, $metaBundleSourceHandles)) {
+                    $addToMetaBundles = false;
+                }
+                $metaBundleSourceHandles[] = $metaBundleRecord->sourceHandle;
+            }
+            if ($addToMetaBundles) {
+                $metaBundle = MetaBundle::create($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
+                if ($metaBundle) {
+                    $metaBundles[] = $metaBundle;
+                }
             }
         }
 

@@ -30,7 +30,7 @@ return [
     ],
     'referrer' => [
         'charset'   => '',
-        'content'   => 'always',
+        'content'   => 'no-referrer-when-downgrade',
         'httpEquiv' => '',
         'name'      => 'referrer',
     ],

@@ -101,7 +101,6 @@ class Seomatic extends Plugin
         $this->name = $this->getName();
         // Initialize properties
         self::$devMode = Craft::$app->getConfig()->getGeneral()->devMode;
-        self::setMatchedElement(Craft::$app->getUrlManager()->getMatchedElement());
         // We're loaded
         Craft::info(
             Craft::t(
@@ -125,6 +124,12 @@ class Seomatic extends Plugin
             Craft::$app->set('errorHandler', $handler);
             $handler->register();
         }
+        /**
+         * @todo: calling this causes Craft to no longer send us
+         * UrlManager::EVENT_REGISTER_SITE_URL_RULES events so we call it
+         * after we register our event listener
+         */
+        self::setMatchedElement(Craft::$app->getUrlManager()->getMatchedElement());
     }
 
     /**
