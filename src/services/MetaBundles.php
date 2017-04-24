@@ -82,29 +82,40 @@ class MetaBundles extends Component
     /**
      * Invalidate the caches and data structures associated with this MetaBundle
      *
-     * @param int  $sourceId
-     * @param int  $sourceSiteId
-     * @param bool $isNew
+     * @param int      $sourceId
+     * @param int|null $sourceSiteId
+     * @param bool     $isNew
      */
-    public function invalidateMetaBundle(int $sourceId, int $sourceSiteId, bool $isNew)
+    public function invalidateMetaBundle(int $sourceId, int $sourceSiteId = null, bool $isNew = false)
     {
         $metaBundleInvalidated = false;
-        $metaBundle = $this->getMetaBundleBySourceId($sourceId, $sourceSiteId);
-        if ($metaBundle) {
-            Craft::info(
-                'Invalidating meta bundle: '
-                . $metaBundle->sourceHandle
-                . ' from siteId: '
-                . $sourceSiteId,
-                'seomatic'
-            );
-            // Invalidate sitemap caches after an existing section is saved
-            if (!$isNew) {
-                $metaBundleInvalidated = true;
-                Seomatic::$plugin->sitemaps->invalidateSitemapCache(
-                    $metaBundle->sourceHandle,
-                    $metaBundle->sourceSiteId
+        if ($sourceSiteId) {
+            $siteIds[] = $sourceSiteId;
+        } else {
+            $sites = Craft::$app->getSites()->getAllSites();
+            foreach ($sites as $site) {
+                $siteIds[] = $site->id;
+            }
+        }
+        foreach ($siteIds as $siteId) {
+            // See if this is a section we are tracking
+            $metaBundle = $this->getMetaBundleBySourceId($sourceId, $siteId);
+            if ($metaBundle) {
+                Craft::info(
+                    'Invalidating meta bundle: '
+                        . $metaBundle->sourceHandle
+                        . ' from siteId: '
+                        . $siteId,
+                    'seomatic'
                 );
+                // Invalidate sitemap caches after an existing section is saved
+                if (!$isNew) {
+                    $metaBundleInvalidated = true;
+                    Seomatic::$plugin->sitemaps->invalidateSitemapCache(
+                        $metaBundle->sourceHandle,
+                        $metaBundle->sourceSiteId
+                    );
+                }
             }
         }
         // If we've invalidated a meta bundle, we need to invalidate the sitemap index, too
@@ -170,37 +181,6 @@ class MetaBundles extends Component
             $id = count($this->metaBundles);
             $this->metaBundles[$id] = $metaBundle;
             $this->metaBundlesBySourceHandle[$sourceHandle][$siteId] = $id;
-        }
-
-        return $metaBundle;
-    }
-
-    /**
-     * @param string $sourceTemplate
-     * @param int    $siteId
-     *
-     * @return null|MetaBundle
-     */
-    public function getMetaBundleBySourceTemplate(string $sourceTemplate, int $siteId = null)
-    {
-        $metaBundle = null;
-        // See if we have the meta bundle cached
-        if (!empty($this->metaBundlesBySourceTemplate[$sourceTemplate][$siteId])) {
-            $id = $this->metaBundlesBySourceTemplate[$sourceTemplate][$siteId];
-            if (!empty($this->metaBundles[$id])) {
-                return $this->metaBundles[$id];
-            }
-        }
-        // Look for a matching meta bundle in the db
-        $metaBundleRecord = MetaBundleRecord::findOne([
-            'sourceTemplate' => $sourceTemplate,
-            'sourceSiteId' => $siteId,
-        ]);
-        if ($metaBundleRecord) {
-            $metaBundle = MetaBundle::create($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
-            $id = count($this->metaBundles);
-            $this->metaBundles[$id] = $metaBundle;
-            $this->metaBundlesBySourceTemplate[$sourceTemplate][$siteId] = $id;
         }
 
         return $metaBundle;

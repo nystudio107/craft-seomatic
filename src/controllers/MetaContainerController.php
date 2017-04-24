@@ -41,15 +41,15 @@ class MetaContainerController extends Controller
     // =========================================================================
 
     /**
-     * @param string $template
+     * @param string $path
      * @param int    $siteId
      *
      * @return Response
      */
-    public function actionAll(string $template, int $siteId = null)
+    public function actionAll(string $path, int $siteId = null)
     {
         $result = [];
-        Seomatic::$plugin->metaContainers->loadMetaContainers($template, $siteId);
+        Seomatic::$plugin->metaContainers->loadMetaContainers($path, $siteId);
         $result[MetaTitleContainer::CONTAINER_TYPE] = Seomatic::$plugin->metaContainers->renderContainersByType(
             MetaTitleContainer::CONTAINER_TYPE
         );

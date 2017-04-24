@@ -143,11 +143,11 @@ class Install extends Migration
         $this->createIndex(
             $this->db->getIndexName(
                 '{{%seomatic_metabundles}}',
-                'sourceTemplate',
+                'sourceHandle',
                 false
             ),
             '{{%seomatic_metabundles}}',
-            'sourceTemplate',
+            'sourceHandle',
             false
         );
         // Additional commands depending on the db driver

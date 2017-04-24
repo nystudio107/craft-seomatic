@@ -203,6 +203,7 @@ class Seomatic extends Plugin
                 );
                 Seomatic::$plugin->metaBundles->invalidateMetaBundle(
                     $event->section->id,
+                    null,
                     $event->isNew
                 );
             }
@@ -218,6 +219,7 @@ class Seomatic extends Plugin
                 );
                 Seomatic::$plugin->metaBundles->invalidateMetaBundle(
                     $event->section->id,
+                    null,
                     false
                 );
             }
@@ -233,6 +235,7 @@ class Seomatic extends Plugin
                 );
                 Seomatic::$plugin->metaBundles->invalidateMetaBundle(
                     $event->categoryGroup->id,
+                    null,
                     $event->isNew
                 );
             }
@@ -248,6 +251,7 @@ class Seomatic extends Plugin
                 );
                 Seomatic::$plugin->metaBundles->invalidateMetaBundle(
                     $event->categoryGroup->id,
+                    null,
                     false
                 );
             }
