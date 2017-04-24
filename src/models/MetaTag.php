@@ -159,8 +159,22 @@ class MetaTag extends MetaItem
             case 'live':
                 break;
             case 'staging':
+                if (!empty($data['name'])) {
+                    switch ($data['name']) {
+                        case self::ROBOTS_TAG:
+                            $data['content'] = 'none';
+                            break;
+                    }
+                }
                 break;
             case 'local':
+                if (!empty($data['name'])) {
+                    switch ($data['name']) {
+                        case self::ROBOTS_TAG:
+                            $data['content'] = 'none';
+                            break;
+                    }
+                }
                 break;
         }
     }

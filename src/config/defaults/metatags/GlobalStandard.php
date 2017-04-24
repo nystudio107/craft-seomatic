@@ -36,7 +36,7 @@ return [
     ],
     'robots' => [
         'charset'   => '',
-        'content'   => 'all',
+        'content'   => 'index',
         'httpEquiv' => '',
         'name'      => 'robots',
     ],
