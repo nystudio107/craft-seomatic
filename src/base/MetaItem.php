@@ -41,7 +41,8 @@ abstract class MetaItem extends Model implements MetaItemInterface
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['key'], 'required'],
+            [['include', 'uniqueKeys', 'key'], 'required'],
+            [['include', 'uniqueKeys'], 'boolean'],
             [['key'], 'string'],
         ]);
 

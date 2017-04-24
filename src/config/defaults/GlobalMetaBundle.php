@@ -41,6 +41,7 @@ return [
     'metaLinkContainer' => ConfigHelper::getConfigFromFile('GlobalMetaLinkContainer', 'defaults'),
     'metaScriptContainer' => ConfigHelper::getConfigFromFile('GlobalMetaScriptContainer', 'defaults'),
     'metaJsonLdContainer' => ConfigHelper::getConfigFromFile('GlobalMetaJsonLdContainer', 'defaults'),
+    'metaTitleContainer' => ConfigHelper::getConfigFromFile('GlobalMetaTitleContainer', 'defaults'),
     'redirectsContainer' => ConfigHelper::getConfigFromFile('GlobalRedirectsContainer', 'defaults'),
     'frontendTemplatesContainer' => ConfigHelper::getConfigFromFile('GlobalFrontendTemplatesContainer', 'defaults'),
 ];

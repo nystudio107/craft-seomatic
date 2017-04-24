@@ -20,10 +20,12 @@ use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\models\MetaLink;
 use nystudio107\seomatic\models\MetaScript;
 use nystudio107\seomatic\models\MetaTag;
-use nystudio107\seomatic\models\MetaTagContainer;
+use nystudio107\seomatic\models\MetaTitle;
+use nystudio107\seomatic\models\MetaJsonLdContainer;
 use nystudio107\seomatic\models\MetaLinkContainer;
 use nystudio107\seomatic\models\MetaScriptContainer;
-use nystudio107\seomatic\models\MetaJsonLdContainer;
+use nystudio107\seomatic\models\MetaTagContainer;
+use nystudio107\seomatic\models\MetaTitleContainer;
 
 use Craft;
 use craft\base\Component;
@@ -45,6 +47,7 @@ class MetaContainers extends Component
     const SEOMATIC_METALINK_CONTAINER = Seomatic::SEOMATIC_HANDLE . MetaLink::ITEM_TYPE;
     const SEOMATIC_METASCRIPT_CONTAINER = Seomatic::SEOMATIC_HANDLE . MetaScript::ITEM_TYPE;
     const SEOMATIC_METAJSONLD_CONTAINER = Seomatic::SEOMATIC_HANDLE . MetaJsonLd::ITEM_TYPE;
+    const SEOMATIC_METATITLE_CONTAINER = Seomatic::SEOMATIC_HANDLE . MetaTitle::ITEM_TYPE;
 
     const METATAG_GENERAL_HANDLE = 'general';
     const METATAG_STANDARD_HANDLE = 'standard';
@@ -53,10 +56,9 @@ class MetaContainers extends Component
     const METATAG_MISCELLANEOUS_HANDLE = 'misc';
 
     const METALINK_GENERAL_HANDLE = 'general';
-
     const METASCRIPT_GENERAL_HANDLE = 'general';
-
     const METAJSONLD_GENERAL_HANDLE = 'general';
+    const METATITLE_GENERAL_HANDLE = 'general';
 
     // Protected Properties
     // =========================================================================
@@ -136,7 +138,8 @@ class MetaContainers extends Component
     public function includeMetaTitle(string $title)
     {
         $view = Craft::$app->getView();
-        $view->title = MetaValueHelper::parseString($title);
+        $title = MetaValueHelper::parseString($title);
+        $view->title = $title;
     }
 
     /**
@@ -234,6 +237,10 @@ class MetaContainers extends Component
                 $key = self::SEOMATIC_METAJSONLD_CONTAINER . $metaJsonLdContainer->handle;
                 $this->metaContainers[$key] = $metaJsonLdContainer;
             }
+            foreach ($metaBundle->metaTitleContainer as $metaTitleContainer) {
+                $key = self::SEOMATIC_METATITLE_CONTAINER . $metaTitleContainer->handle;
+                $this->metaContainers[$key] = $metaTitleContainer;
+            }
         }
     }
 
@@ -313,6 +320,16 @@ class MetaContainers extends Component
                 $this->addToMetaContainer(
                     $metaJsonLd,
                     MetaJsonLdContainer::CONTAINER_TYPE,
+                    $key
+                );
+            }
+        }
+        foreach ($metaBundle->metaTitleContainer as $metaTitleContainer) {
+            $key = self::SEOMATIC_METATITLE_CONTAINER . $metaTitleContainer->handle;
+            foreach ($metaTitleContainer->data as $metaTitle) {
+                $this->addToMetaContainer(
+                    $metaTitle,
+                    MetaTitleContainer::CONTAINER_TYPE,
                     $key
                 );
             }

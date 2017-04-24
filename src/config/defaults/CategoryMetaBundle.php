@@ -42,6 +42,7 @@ return [
     'metaLinkContainer' => ConfigHelper::getConfigFromFile('CategoryMetaLinkContainer', 'defaults'),
     'metaScriptContainer' => ConfigHelper::getConfigFromFile('CategoryMetaScriptContainer', 'defaults'),
     'metaJsonLdContainer' => ConfigHelper::getConfigFromFile('CategoryMetaJsonLdContainer', 'defaults'),
+    'metaTitleContainer' => ConfigHelper::getConfigFromFile('CategoryMetaTitleContainer', 'defaults'),
     'redirectsContainer' => ConfigHelper::getConfigFromFile('CategoryRedirectsContainer', 'defaults'),
     'frontendTemplatesContainer' => ConfigHelper::getConfigFromFile('CategoryFrontendTemplatesContainer', 'defaults'),
 ];

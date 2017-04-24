@@ -14,21 +14,23 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
-use nystudio107\seomatic\models\MetaTag;
+use nystudio107\seomatic\models\MetaTitle;
 
 use Craft;
+
+use yii\web\View;
 
 /**
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaTagContainer extends MetaContainer
+class MetaTitleContainer extends MetaContainer
 {
     // Constants
     // =========================================================================
 
-    const CONTAINER_TYPE = 'MetaTagContainer';
+    const CONTAINER_TYPE = 'MetaTitleContainer';
 
     // Public Properties
     // =========================================================================
@@ -36,7 +38,7 @@ class MetaTagContainer extends MetaContainer
     /**
      * The data in this container
      *
-     * @var MetaTag
+     * @var MetaTitle
      */
     public $data = [];
 
@@ -49,29 +51,17 @@ class MetaTagContainer extends MetaContainer
     public function includeMetaData(): void
     {
         $view = Craft::$app->getView();
-        /** @var $metaTagModel MetaTag */
-        foreach ($this->data as $metaTagModel) {
-            $scenario = $metaTagModel->scenario;
-            $metaTagModel->setScenario('render');
-            $options = $metaTagModel->tagAttributes();
+        /** @var $metaTitleModel MetaTitle */
+        foreach ($this->data as $metaTitleModel) {
+            $scenario = $metaTitleModel->scenario;
+            $metaTitleModel->setScenario('render');
+            $title = MetaValueHelper::parseString($metaTitleModel->title);
             $this->setScenario($scenario);
-            MetaValueHelper::parseArray($options);
-            $view->registerMetaTag($options);
+            $view->title = $title;
             // If `devMode` is enabled, validate the Meta Tag and output any model errors
             if (Seomatic::$devMode) {
-                $scenario = [];
-                $scenario['default'] = 'error';
-                // Special validation for certain meta tags
-                if (!empty($options['name'])) {
-                    switch ($options['name']) {
-                        case MetaTag::DESCRIPTION_TAG:
-                            $scenario[MetaTag::DESCRIPTION_TAG] = 'warning';
-                            break;
-                    }
-                }
-                $metaTagModel->debugMetaItem(
-                    "Tag attribute: ",
-                    $scenario
+                $metaTitleModel->debugMetaItem(
+                    "Tag attribute: "
                 );
             }
         }
@@ -83,7 +73,7 @@ class MetaTagContainer extends MetaContainer
     public function normalizeContainerData(): void
     {
         foreach ($this->data as $key => $config) {
-            $this->data[$key] = MetaTag::create($config);
+            $this->data[$key] = MetaTitle::create($config);
         }
     }
 }

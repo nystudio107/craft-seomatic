@@ -14,24 +14,19 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
-use craft\helpers\ArrayHelper;
-
 use yii\helpers\Html;
-use yii\helpers\Inflector;
 
 /**
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaTag extends MetaItem
+class MetaTitle extends MetaItem
 {
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'MetaTag';
-
-    const DESCRIPTION_TAG = 'description';
+    const ITEM_TYPE = 'MetaTitle';
 
     // Static Methods
     // =========================================================================
@@ -39,16 +34,13 @@ class MetaTag extends MetaItem
     /**
      * @param array $config
      *
-     * @return null|MetaTag
+     * @return null|MetaTitle
      */
     public static function create(array $config = [])
     {
         $model = null;
-        foreach ($config as $key => $value) {
-            ArrayHelper::rename($config, $key, Inflector::variablize($key));
-        }
-        $model = new MetaTag($config);
-        $model->key = $model->name ?? $model->charset ?? $model->httpEquiv;
+        $model = new MetaTitle($config);
+        $model->key = $model->title;
 
         return $model;
     }
@@ -59,22 +51,7 @@ class MetaTag extends MetaItem
     /**
      * @var string
      */
-    public $charset;
-
-    /**
-     * @var string
-     */
-    public $content;
-
-    /**
-     * @var string
-     */
-    public $httpEquiv;
-
-    /**
-     * @var string
-     */
-    public $name;
+    public $title;
 
     // Public Methods
     // =========================================================================
@@ -86,24 +63,11 @@ class MetaTag extends MetaItem
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['charset', 'content', 'httpEquiv', 'name'], 'string'],
-            // Special validation rules for specific meta tags
-            [['content'], 'string', 'length' => [70, 160], 'on' => self::DESCRIPTION_TAG],
+            [['title'], 'required'],
+            [['title'], 'string', 'length' => [40, 70]],
         ]);
 
         return $rules;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function fields()
-    {
-        $fields = parent::fields();
-        if ($this->scenario === 'default') {
-        }
-
-        return $fields;
     }
 
     /**
@@ -113,9 +77,8 @@ class MetaTag extends MetaItem
     {
         $scenario = $this->scenario;
         $this->setScenario('render');
-        $options = $this->tagAttributes();
+        $title = MetaValueHelper::parseString($this->title);
         $this->setScenario($scenario);
-        MetaValueHelper::parseArray($options);
-        return Html::tag('meta', '', $options);
+        return Html::tag('title', $title, []);
     }
 }

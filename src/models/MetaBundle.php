@@ -11,10 +11,12 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\models\MetaTagContainer;
+use nystudio107\seomatic\models\MetaJsonLdContainer;
 use nystudio107\seomatic\models\MetaLinkContainer;
 use nystudio107\seomatic\models\MetaScriptContainer;
-use nystudio107\seomatic\models\MetaJsonLdContainer;
+use nystudio107\seomatic\models\MetaTagContainer;
+use nystudio107\seomatic\models\MetaTitleContainer;
+
 use nystudio107\seomatic\models\FrontendTemplateContainer;
 
 use Craft;
@@ -126,6 +128,11 @@ class MetaBundle extends Model
     public $metaJsonLdContainer;
 
     /**
+     * @var MetaTitleContainer[]
+     */
+    public $metaTitleContainer;
+
+    /**
      * @var array
      */
     public $redirectsContainer;
@@ -189,6 +196,13 @@ class MetaBundle extends Model
             $this->metaJsonLdContainer = [];
             foreach ($metaJsonLdContainers as $metaJsonLdContainer) {
                 $this->metaJsonLdContainer[] = MetaJsonLdContainer::create($metaJsonLdContainer);
+            }
+        }
+        if (!empty($this->metaTitleContainer)) {
+            $metaTitleContainers = json_decode($this->metaTitleContainer, true);
+            $this->metaTitleContainer = [];
+            foreach ($metaTitleContainers as $metaTitleContainer) {
+                $this->metaTitleContainer[] = MetaTitleContainer::create($metaTitleContainer);
             }
         }
         if (!empty($this->frontendTemplatesContainer)) {
