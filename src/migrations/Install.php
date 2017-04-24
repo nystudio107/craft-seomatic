@@ -46,6 +46,8 @@ class Install extends Migration
             $this->addForeignKeys();
             $this->insertDefaultData();
         }
+        // Refresh the db schema caches
+        Craft::$app->db->schema->refresh();
 
         return true;
     }

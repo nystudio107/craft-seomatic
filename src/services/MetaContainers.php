@@ -93,15 +93,18 @@ class MetaContainers extends Component
 
     /**
      * Load the meta containers
+     *
+     * @param string|null $template
+     * @param int|null    $siteId
      */
-    public function loadMetaContainers(): void
+    public function loadMetaContainers(string $template = null, int $siteId = null): void
     {
         // Avoid recursion
         if (!$this->loadingContainers && !$this->containersLoaded) {
             $this->loadingContainers = true;
 
-            $this->loadGlobalMetaContainers();
-            $this->loadContentMetaContainers();
+            $this->loadGlobalMetaContainers($siteId);
+            $this->loadContentMetaContainers($template, $siteId);
 
             // Handler: View::EVENT_END_PAGE
             Event::on(
@@ -219,15 +222,38 @@ class MetaContainers extends Component
         return $container;
     }
 
+    /**
+     * Render the HTML of all MetaContainers of a specific $type
+     *
+     * @param string $type
+     *
+     * @return string
+     */
+    public function renderContainersByType(string $type)
+    {
+        $html = '';
+        /** @var  $metaContainer MetaContainer */
+        foreach ($this->metaContainers as $metaContainer) {
+            if ($metaContainer::CONTAINER_TYPE == $type) {
+                $html .= $metaContainer->render();
+            }
+        }
+
+        return $html;
+    }
     // Protected Methods
     // =========================================================================
 
     /**
      * Load the global site meta containers
+     *
+     * @param int|null $siteId
      */
-    protected function loadGlobalMetaContainers()
+    protected function loadGlobalMetaContainers(int $siteId = null)
     {
-        $siteId = Craft::$app->getSites()->currentSite->id;
+        if (!$siteId) {
+            $siteId = Craft::$app->getSites()->currentSite->id;
+        }
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle) {
             foreach ($metaBundle->metaTagContainer as $metaTagContainer) {
@@ -253,41 +279,96 @@ class MetaContainers extends Component
         }
     }
 
+    private function _getMatchedElementRoute(string $path)
+    {
+        if ($this->_matchedElementRoute !== null) {
+            return $this->_matchedElementRoute;
+        }
+
+        $this->_matchedElement = false;
+        $this->_matchedElementRoute = false;
+
+        if (Craft::$app->getIsInstalled() && Craft::$app->getRequest()->getIsSiteRequest()) {
+            /** @var Element $element */
+            $element = Craft::$app->getElements()->getElementByUri($path, Craft::$app->getSites()->currentSite->id, true);
+
+            if ($element) {
+                $route = $element->getRoute();
+
+                if ($route) {
+                    $this->_matchedElement = $element;
+                    $this->_matchedElementRoute = $route;
+                }
+            }
+        }
+
+        if (YII_DEBUG) {
+            Craft::trace([
+                'rule' => 'Element URI: '.$path,
+                'match' => isset($element, $route),
+                'parent' => null
+            ], __METHOD__);
+        }
+
+        return $this->_matchedElementRoute;
+    }
+
     /**
-     * Load the meta containers specific to the currently rendering template, and
-     * combine it with the global meta containers
+     * Load the meta containers specific to the URI passed in $path,
+     * and combine it with the global meta containers
+     *
+     * @param string   $path
+     * @param int|null $siteId
+     *
+     * @internal param null|string $template
      */
-    protected function loadContentMetaContainers()
+    protected function loadContentMetaContainers(string $path, int $siteId = null)
     {
         $metaBundle = null;
-        $siteId = Craft::$app->getSites()->currentSite->id;
-        $view = Craft::$app->getView();
-        $template = $view->getRenderingTemplate();
+        if (!$siteId) {
+            $siteId = Craft::$app->getSites()->primarySite->id;
+        }
+        /** @var Element $element */
+        $element = Craft::$app->getElements()->getElementByUri($path, $siteId, true);
+
+        // If passed in an explicit template, try to load it
         if ($template) {
-            $templatePath = $view->getTemplatesPath() . DIRECTORY_SEPARATOR;
-            $template = str_replace($templatePath, '', $template);
-            // Try an exact match first
             $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceTemplate(
                 $template,
                 $siteId
             );
-            // Try without the file extension
-            if (!$metaBundle) {
-                $pathParts = pathinfo($template);
-                $template = ($pathParts['dirname'] == '.' ? '' : $pathParts['dirname']) . $pathParts['filename'];
+        } else {
+            // Otherwise, determine the $template and $siteId from the current request
+            $siteId = Craft::$app->getSites()->currentSite->id;
+            $view = Craft::$app->getView();
+            $template = $view->getRenderingTemplate();
+            if ($template) {
+                $templatePath = $view->getTemplatesPath() . DIRECTORY_SEPARATOR;
+                $template = str_replace($templatePath, '', $template);
+                // Try an exact match first
                 $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceTemplate(
                     $template,
                     $siteId
                 );
+                // Try without the file extension
+                if (!$metaBundle) {
+                    $pathParts = pathinfo($template);
+                    $template = ($pathParts['dirname'] == '.' ? '' : $pathParts['dirname']) . $pathParts['filename'];
+                    $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceTemplate(
+                        $template,
+                        $siteId
+                    );
+                }
             }
         }
         if ($metaBundle) {
+            $this->addMetaBundleToContainers($metaBundle);
         }
     }
 
     /**
-     * Add the meta bundle to our existing meta containers, overwriting meta items
-     * with the same key
+     * Add the meta bundle to our existing meta containers, overwriting meta
+     * items with the same key
      *
      * @param MetaBundle $metaBundle
      */

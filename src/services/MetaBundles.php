@@ -18,6 +18,7 @@ use nystudio107\seomatic\records\MetaBundle as MetaBundleRecord;
 
 use Craft;
 use craft\base\Component;
+use craft\base\Element;
 use craft\elements\Category;
 use craft\elements\Entry;
 use craft\helpers\ArrayHelper;
@@ -82,31 +83,28 @@ class MetaBundles extends Component
      * Invalidate the caches and data structures associated with this MetaBundle
      *
      * @param int  $sourceId
+     * @param int  $sourceSiteId
      * @param bool $isNew
      */
-    public function invalidateMetaBundle(int $sourceId, bool $isNew)
+    public function invalidateMetaBundle(int $sourceId, int $sourceSiteId, bool $isNew)
     {
         $metaBundleInvalidated = false;
-        $sites = Craft::$app->getSites()->getAllSites();
-        foreach ($sites as $site) {
-            // See if this is a section we are tracking
-            $metaBundle = $this->getMetaBundleBySourceId($sourceId, $site->id);
-            if ($metaBundle) {
-                Craft::info(
-                    'Invalidating meta bundle: '
-                        . $metaBundle->sourceHandle
-                        . ' from siteId: '
-                        . $site->id,
-                    'seomatic'
+        $metaBundle = $this->getMetaBundleBySourceId($sourceId, $sourceSiteId);
+        if ($metaBundle) {
+            Craft::info(
+                'Invalidating meta bundle: '
+                . $metaBundle->sourceHandle
+                . ' from siteId: '
+                . $sourceSiteId,
+                'seomatic'
+            );
+            // Invalidate sitemap caches after an existing section is saved
+            if (!$isNew) {
+                $metaBundleInvalidated = true;
+                Seomatic::$plugin->sitemaps->invalidateSitemapCache(
+                    $metaBundle->sourceHandle,
+                    $metaBundle->sourceSiteId
                 );
-                // Invalidate sitemap caches after an existing section is saved
-                if (!$isNew) {
-                    $metaBundleInvalidated = true;
-                    Seomatic::$plugin->sitemaps->invalidateSitemapCache(
-                        $metaBundle->sourceHandle,
-                        $metaBundle->sourceSiteId
-                    );
-                }
             }
         }
         // If we've invalidated a meta bundle, we need to invalidate the sitemap index, too
@@ -315,6 +313,33 @@ class MetaBundles extends Component
             $metaBundleRecord = new MetaBundleRecord($metaBundle->getAttributes());
             $metaBundleRecord->save();
         }
+    }
+
+    /**
+     * @param Element $element
+     *
+     * @return array
+     */
+    public function getMetaSourceIdFromElement(Element $element): array
+    {
+        $sourceId = 0;
+        $siteId = 0;
+        // See if this is a section we are tracking
+        switch ($element::className()) {
+            case Entry::class:
+                /** @var  $element Entry */
+                $sourceId = $element->sectionId;
+                $siteId = $element->siteId;
+                break;
+
+            case Category::class:
+                /** @var  $element Category */
+                $sourceId = $element->groupId;
+                $siteId = $element->siteId;
+                break;
+        }
+
+        return [$sourceId, $siteId];
     }
 
     // Protected Methods

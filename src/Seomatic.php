@@ -264,10 +264,11 @@ class Seomatic extends Plugin
                 /** @var  $element Element */
                 $element = $event->element;
                 // See if this is a section we are tracking
-                $id = $this->getMetaSourceIdFromElement($element);
+                list($id, $siteId) = Seomatic::$plugin->metaBundles->getMetaSourceIdFromElement($element);
                 if ($id) {
                     Seomatic::$plugin->metaBundles->invalidateMetaBundle(
                         $id,
+                        $siteId,
                         $event->isNew
                     );
                 }
@@ -285,10 +286,11 @@ class Seomatic extends Plugin
                 /** @var  $element Element */
                 $element = $event->element;
                 // See if this is a section we are tracking
-                $id = $this->getMetaSourceIdFromElement($element);
+                list($id, $siteId) = Seomatic::$plugin->metaBundles->getMetaSourceIdFromElement($element);
                 if ($id) {
                     Seomatic::$plugin->metaBundles->invalidateMetaBundle(
                         $id,
+                        $siteId,
                         false
                     );
                 }
@@ -305,36 +307,11 @@ class Seomatic extends Plugin
                 );
                 // Create our default data
                 if ($event->plugin === $this) {
-                    // @todo: this is broken in Craft 3 beta 12
-                    //Seomatic::$plugin->metaBundles->createGlobalMetaBundles();
-                    //Seomatic::$plugin->metaBundles->createContentMetaBundles();
+                    Seomatic::$plugin->metaBundles->createGlobalMetaBundles();
+                    Seomatic::$plugin->metaBundles->createContentMetaBundles();
                 }
             }
         );
-    }
-
-    /**
-     * @param Element $element
-     *
-     * @return int
-     */
-    protected function getMetaSourceIdFromElement(Element $element): int
-    {
-        $sourceId = 0;
-        // See if this is a section we are tracking
-        switch ($element::className()) {
-            case Entry::class:
-                /** @var  $element Entry */
-                $sourceId = $element->sectionId;
-                break;
-
-            case Category::class:
-                /** @var  $element Category */
-                $sourceId = $element->groupId;
-                break;
-        }
-
-        return $sourceId;
     }
 }
 
