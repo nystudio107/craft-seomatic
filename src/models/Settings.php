@@ -44,6 +44,20 @@ class Settings extends Model
      */
     public $devModeTitlePrefix = '[devMode] ';
 
+    /**
+     * The max number of characters in the `<title>` tag
+     *
+     * @var int
+     */
+    public $maxTitleLength = 70;
+
+    /**
+     * The max number of characters in the `<meta name="description">` tag
+     *
+     * @var int
+     */
+    public $maxDescriptionLength = 160;
+
     // Public Methods
     // =========================================================================
 
@@ -64,6 +78,10 @@ class Settings extends Model
             ]],
             ['devModeTitlePrefix', 'string'],
             ['devModeTitlePrefix', 'default', 'value' => '[devMode] '],
+            ['maxTitleLength', 'integer', 'min' => 10],
+            ['maxTitleLength', 'default', 'value' => 70],
+            ['maxDescriptionLength', 'integer', 'min' => 10],
+            ['maxDescriptionLength', 'default', 'value' => 160],
         ];
     }
 }

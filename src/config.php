@@ -38,4 +38,10 @@ return [
 
     // If `devMode` is on, prefix the <title> with this string
     'devModeTitlePrefix' => '[devMode] ',
+
+    // The max number of characters in the `<title>` tag
+    'maxTitleLength' => 70,
+
+    // The max number of characters in the `<meta name="description">` tag
+    'maxDescriptionLength' => 160,
 ];

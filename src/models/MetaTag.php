@@ -18,6 +18,8 @@ use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use Craft;
 use craft\helpers\ArrayHelper;
 
+use Stringy\Stringy;
+
 use yii\helpers\Html;
 use yii\helpers\Inflector;
 
@@ -155,8 +157,20 @@ class MetaTag extends MetaItem
         /** @var  $settings Settings */
         $settings = Seomatic::$plugin->getSettings();
         // Special-case scenarios
+        if (!empty($data['name'])) {
+            switch ($data['name']) {
+                case self::DESCRIPTION_TAG:
+                    $data['content'] = (string)Stringy::create($data['content'])->safeTruncate(
+                        Seomatic::$plugin->getSettings()->maxDescriptionLength,
+                        '…'
+                    );
+                    break;
+            }
+        }
+        // devMove
         if (Seomatic::$devMode) {
         }
+        // Per environment
         switch ($settings->environment) {
             case 'live':
                 break;

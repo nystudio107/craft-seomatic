@@ -15,6 +15,8 @@ use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
+use Stringy\Stringy;
+
 use yii\helpers\Html;
 
 /**
@@ -83,9 +85,15 @@ class MetaTitle extends MetaItem
         /** @var  $settings Settings */
         $settings = Seomatic::$plugin->getSettings();
         // Special-case scenarios
+        $data = (string)Stringy::create($data)->safeTruncate(
+            Seomatic::$plugin->getSettings()->maxTitleLength,
+            '…'
+        );
+        // devMode
         if (Seomatic::$devMode) {
             $data = $settings->devModeTitlePrefix . $data;
         }
+        // Per-environment
         switch ($settings->environment) {
             case 'live':
                 break;
