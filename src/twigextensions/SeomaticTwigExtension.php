@@ -29,8 +29,6 @@ class SeomaticTwigExtension extends \Twig_Extension implements \Twig_Extension_G
      */
     public function getGlobals(): array
     {
-        $result = [];
-
         $view = Craft::$app->getView();
         if ($view->getIsRenderingPageTemplate()) {
             $request = Craft::$app->getRequest();
@@ -38,7 +36,7 @@ class SeomaticTwigExtension extends \Twig_Extension implements \Twig_Extension_G
             Seomatic::$plugin->metaContainers->loadMetaContainers($request->getPathInfo(), null);
         }
 
-        return $result;
+        return ['seomatic' => Seomatic::$plugin->metaContainers->metaGlobalVars];
     }
 
     /**

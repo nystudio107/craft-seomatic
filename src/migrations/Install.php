@@ -101,6 +101,8 @@ class Install extends Migration
                     'sitemapChangeFreq' => $this->string(16)->notNull()->defaultValue(''),
                     'sitemapPriority' => $this->float()->notNull(),
 
+                    'metaGlobalVars' => $this->text(),
+
                     'metaTagContainer' => $this->text(),
                     'metaLinkContainer' => $this->text(),
                     'metaScriptContainer' => $this->text(),

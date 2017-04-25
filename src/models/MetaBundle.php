@@ -16,6 +16,7 @@ use nystudio107\seomatic\models\MetaLinkContainer;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\MetaTagContainer;
 use nystudio107\seomatic\models\MetaTitleContainer;
+use nystudio107\seomatic\models\MetaGlobalVars;
 
 use nystudio107\seomatic\models\FrontendTemplateContainer;
 
@@ -108,6 +109,11 @@ class MetaBundle extends Model
     public $sitemapPriority;
 
     /**
+     * @var MetaGlobalVars
+     */
+    public $metaGlobalVars;
+
+    /**
      * @var MetaTagContainer[]
      */
     public $metaTagContainer;
@@ -170,6 +176,12 @@ class MetaBundle extends Model
      */
     public function normalizeMetaBundleData()
     {
+        // Meta global variables
+        if (!empty($this->metaGlobalVars)) {
+            $metaGlobalVars = json_decode($this->metaGlobalVars, true);
+            $this->metaGlobalVars = MetaGlobalVars::create($metaGlobalVars);
+        }
+        // Meta containers
         if (!empty($this->metaTagContainer)) {
             $metaTagContainers = json_decode($this->metaTagContainer, true);
             $this->metaTagContainer = [];

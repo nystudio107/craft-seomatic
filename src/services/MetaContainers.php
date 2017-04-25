@@ -11,11 +11,12 @@
 
 namespace nystudio107\seomatic\services;
 
-use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\models\jsonld\BreadcrumbList;
+use nystudio107\seomatic\models\MetaBundle;
+use nystudio107\seomatic\models\MetaGlobalVars;
 use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\models\MetaLink;
 use nystudio107\seomatic\models\MetaScript;
@@ -71,6 +72,14 @@ class MetaContainers extends Component
     const DEVMODE_METACONTAINER_CACHE_DURATION = 30;
     const CACHE_KEY = 'seomatic_metacontainer_';
 
+    // Public Properties
+    // =========================================================================
+
+    /**
+     * @var MetaGlobalVars
+     */
+    public $metaGlobalVars;
+
     // Protected Properties
     // =========================================================================
 
@@ -106,7 +115,8 @@ class MetaContainers extends Component
         // Avoid recursion
         if (empty($this->metaContainers && !$this->loadingContainers)) {
             $this->loadingContainers = true;
-
+            $this->setMatchedElement($path, $siteId);
+            // Load the meta containers
             $duration = Seomatic::$devMode
                 ? $this::DEVMODE_METACONTAINER_CACHE_DURATION
                 : $this::METACONTAINER_CACHE_DURATION;
@@ -116,9 +126,8 @@ class MetaContainers extends Component
                     $this::METACONTAINER_CACHE_TAG . $path . $siteId,
                 ],
             ]);
-            $this->setMatchedElement($path, $siteId);
             $cache = Craft::$app->getCache();
-            $this->metaContainers = $cache->getOrSet(
+            list($this->metaGlobalVars, $this->metaContainers) = $cache->getOrSet(
                 $this::CACHE_KEY . $path . $siteId,
                 function () use ($path, $siteId) {
                     Craft::info(
@@ -130,7 +139,7 @@ class MetaContainers extends Component
                     $this->addMetaJsonLdBreadCrumbs($siteId);
                     $this->addMetaLinkHrefLang();
 
-                    return $this->metaContainers;
+                    return [$this->metaGlobalVars, $this->metaContainers];
                 },
                 $duration,
                 $dependency
@@ -306,6 +315,9 @@ class MetaContainers extends Component
         }
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle) {
+            // Meta global vars
+            $this->metaGlobalVars = $metaBundle->metaGlobalVars;
+            // Meta containers
             foreach ($metaBundle->metaTagContainer as $metaTagContainer) {
                 $key = self::SEOMATIC_METATAG_CONTAINER . $metaTagContainer->handle;
                 $this->metaContainers[$key] = $metaTagContainer;
@@ -384,6 +396,11 @@ class MetaContainers extends Component
      */
     public function addMetaBundleToContainers(MetaBundle $metaBundle)
     {
+        // Meta global vars
+        $attributes = $metaBundle->getAttributes();
+        $attributes = array_filter($attributes);
+        $this->metaGlobalVars->setAttributes($attributes);
+        // Meta containers
         foreach ($metaBundle->metaTagContainer as $metaTagContainer) {
             $key = self::SEOMATIC_METATAG_CONTAINER . $metaTagContainer->handle;
             foreach ($metaTagContainer->data as $metaTag) {

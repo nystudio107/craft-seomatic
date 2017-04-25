@@ -37,6 +37,8 @@ return [
     'sitemapChangeFreq' => 'weekly',
     'sitemapPriority' => 0.5,
 
+    'metaGlobalVars' => ConfigHelper::getConfigFromFile('GlobalMetaGlobalVars', 'defaults'),
+
     'metaTagContainer' => ConfigHelper::getConfigFromFile('GlobalMetaTagContainer', 'defaults'),
     'metaLinkContainer' => ConfigHelper::getConfigFromFile('GlobalMetaLinkContainer', 'defaults'),
     'metaScriptContainer' => ConfigHelper::getConfigFromFile('GlobalMetaScriptContainer', 'defaults'),
