@@ -38,6 +38,7 @@ class MetaTag extends MetaItem
     const ROBOTS_TAG = 'robots';
 
     const UNIQUEKEYS_TAGS = [
+        'alternate',
         'og:see_also',
         'og:image',
         'og:image:type',
