@@ -15,7 +15,6 @@ use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
 use craft\helpers\Json;
-use craft\helpers\ArrayHelper;
 
 /**
  * @author    nystudio107
@@ -24,6 +23,16 @@ use craft\helpers\ArrayHelper;
  */
 class JsonLd extends Json
 {
+    // Constants
+    // =========================================================================
+
+    const IGNORE_ATTRIBUTES = [
+        '@context',
+        'include',
+        'uniqueKeys',
+        'key',
+    ];
+
     // Static Properties
     // =========================================================================
 
@@ -77,9 +86,35 @@ class JsonLd extends Json
     protected static function normalizeJsonLdArray(&$array, $depth)
     {
         $array = array_filter($array);
-        ArrayHelper::rename($array, 'context', '@context');
-        ArrayHelper::rename($array, 'type', '@type');
+        $array = self::changeKey($array, 'context', '@context');
+        $array = self::changeKey($array, 'type', '@type');
+        if ($depth > 1) {
+            foreach (self::IGNORE_ATTRIBUTES as $attribute) {
+                unset($array[$attribute]);
+            }
+        }
         MetaValueHelper::parseArray($array);
         ksort($array);
+    }
+
+    /**
+     * Replace key values without reordering the array or converting numeric
+     * keys to associative keys (which unset() does)
+     *
+     * @param $array
+     * @param $oldKey
+     * @param $newKey
+     *
+     * @return array
+     */
+    protected static function changeKey($array, $oldKey, $newKey)
+    {
+        if (!array_key_exists($oldKey, $array)) {
+            return $array;
+        }
+        $keys = array_keys($array);
+        $keys[array_search($oldKey, $keys)] = $newKey;
+
+        return array_combine($keys, $array);
     }
 }

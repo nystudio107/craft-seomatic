@@ -15,7 +15,7 @@ use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\base\MetaItem;
-use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
+use nystudio107\seomatic\models\jsonld\BreadcrumbList;
 use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\models\MetaLink;
 use nystudio107\seomatic\models\MetaScript;
@@ -30,11 +30,11 @@ use nystudio107\seomatic\models\MetaTitleContainer;
 use Craft;
 use craft\base\Component;
 use craft\base\Element;
+use craft\helpers\UrlHelper;
 use craft\web\View;
 
 use yii\base\Event;
 use yii\base\Exception;
-
 
 /**
  * @author    nystudio107
@@ -76,11 +76,6 @@ class MetaContainers extends Component
      */
     protected $loadingContainers = false;
 
-    /**
-     * @var bool
-     */
-    protected $containersLoaded = false;
-
     // Public Methods
     // =========================================================================
 
@@ -95,17 +90,18 @@ class MetaContainers extends Component
     /**
      * Load the meta containers
      *
-     * @param string|null $template
+     * @param string|null $path
      * @param int|null    $siteId
      */
     public function loadMetaContainers(string $path = '', int $siteId = null): void
     {
         // Avoid recursion
-        if (!$this->loadingContainers && !$this->containersLoaded) {
+        if (empty($this->metaContainers && !$this->loadingContainers)) {
             $this->loadingContainers = true;
 
             $this->loadGlobalMetaContainers($siteId);
             $this->loadContentMetaContainers($path, $siteId);
+            $this->addBreadCrumbs();
 
             // Handler: View::EVENT_END_PAGE
             Event::on(
@@ -121,7 +117,6 @@ class MetaContainers extends Component
                 }
             );
             $this->loadingContainers = false;
-            $this->containersLoaded = true;
         }
     }
 
@@ -170,7 +165,7 @@ class MetaContainers extends Component
             throw new Exception($error);
         }
         /** @var  $container MetaContainer */
-            $container = $this->metaContainers[$key];
+        $container = $this->metaContainers[$key];
         // If $uniqueKeys is set, generate a hash of the data for the key
         $dataKey = $data->key;
         if ($data->uniqueKeys) {
@@ -274,7 +269,7 @@ class MetaContainers extends Component
     protected function loadGlobalMetaContainers(int $siteId = null)
     {
         if (!$siteId) {
-            $siteId = Craft::$app->getSites()->currentSite->id;
+            $siteId = Craft::$app->getSites()->primarySite->id;
         }
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle) {
@@ -370,6 +365,78 @@ class MetaContainers extends Component
             }
         }
     }
+
+    /**
+     * Add breadcrumbs to the MetaJsonLdContainer
+     *
+     * @param int|null $siteId
+     */
+    public function addBreadCrumbs(int $siteId = null)
+    {
+        $position = 1;
+        if (!$siteId) {
+            $siteId = Craft::$app->getSites()->primarySite->id;
+        }
+        $site = Craft::$app->getSites()->getSiteById($siteId);
+        $siteUrl = $site->hasUrls ? $site->baseUrl : Craft::$app->getConfig()->getGeneral()->siteUrl;
+        /** @var  $crumbs BreadcrumbList */
+        $crumbs = MetaJsonLd::create("BreadCrumbList");
+        $key = self::SEOMATIC_METAJSONLD_CONTAINER . self::METAJSONLD_GENERAL_HANDLE;
+
+        /** @var  $element Element */
+        $element = Craft::$app->getElements()->getElementByUri("__home__", $siteId);
+        if ($element) {
+            $uri = $element->uri == '__home__' ? '' : $element->uri;
+            $listItem = MetaJsonLd::create("ListItem", [
+                'position' => $position,
+                'item'     => [
+                    '@id'  => UrlHelper::siteUrl($uri, null, null, $siteId),
+                    'name' => $element->title,
+                ],
+            ]);
+            $crumbs->itemListElement[] = $listItem;
+        } else {
+            $crumbs->itemListElement[] = MetaJsonLd::create("ListItem", [
+                'position' => $position,
+                'item'     => [
+                    '@id'  => $siteUrl,
+                    'name' => 'Homepage',
+                ],
+            ]);
+        }
+        // Build up the segments, and look for elements that match
+        $uri = '';
+        $segments = Craft::$app->getRequest()->getSegments();
+        /** @var  $lastElement Element */
+        $lastElement = Seomatic::$matchedElement;
+        if ($lastElement && $element) {
+            if ($lastElement->uri != "__home__" && $element->uri) {
+                $path = parse_url($lastElement->url, PHP_URL_PATH);
+                $path = trim($path, "/");
+                $segments = explode("/", $path);
+            }
+        }
+        // Parse through the segments looking for elements that match
+        foreach ($segments as $segment) {
+            $uri .= $segment;
+            $element = Craft::$app->getElements()->getElementByUri($uri, $siteId);
+            if ($element && $element->uri) {
+                $position++;
+                $uri = $element->uri == '__home__' ? '' : $element->uri;
+                $crumbs->itemListElement[] = MetaJsonLd::create("ListItem", [
+                    'position' => $position,
+                    'item'     => [
+                        '@id'  => UrlHelper::siteUrl($uri, null, null, $siteId),
+                        'name' => $element->title,
+                    ],
+                ]);
+            }
+            $uri .= "/";
+        }
+
+        $this->addToMetaContainer($crumbs, $key);
+    }
+
     // Protected Methods
     // =========================================================================
 
