@@ -230,7 +230,7 @@ class MetaContainers extends Component
      *
      * @return string
      */
-    public function renderContainersByType(string $type)
+    public function renderContainersByType(string $type): string
     {
         $html = '';
         /** @var  $metaContainer MetaContainer */
@@ -242,6 +242,27 @@ class MetaContainers extends Component
 
         return $html;
     }
+
+    /**
+     * Render the HTML of all MetaContainers of a specific $type as an array
+     *
+     * @param string $type
+     *
+     * @return array
+     */
+    public function renderContainersArrayByType(string $type): array
+    {
+        $htmlArray = [];
+        /** @var  $metaContainer MetaContainer */
+        foreach ($this->metaContainers as $metaContainer) {
+            if ($metaContainer::CONTAINER_TYPE == $type) {
+                $htmlArray = array_merge($htmlArray, $metaContainer->renderArray());
+            }
+        }
+
+        return $htmlArray;
+    }
+
     // Protected Methods
     // =========================================================================
 
@@ -298,6 +319,7 @@ class MetaContainers extends Component
         /** @var Element $element */
         $element = Craft::$app->getElements()->getElementByUri($path, $siteId, true);
         if ($element) {
+            Seomatic::setMatchedElement($element);
             list($sourceId, $sourceSiteId) = Seomatic::$plugin->metaBundles->getMetaSourceIdFromElement($element);
             $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
                 $sourceId,

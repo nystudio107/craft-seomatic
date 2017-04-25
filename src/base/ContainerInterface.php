@@ -47,7 +47,7 @@ interface ContainerInterface
      *
      * @return string
      */
-    public function render($params = []):string;
+    public function render($params = []): string;
 
     /**
      * Normalizes the containers’s data for use.

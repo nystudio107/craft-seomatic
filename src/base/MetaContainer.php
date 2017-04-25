@@ -13,6 +13,8 @@ namespace nystudio107\seomatic\base;
 
 use nystudio107\seomatic\base\Container as SeomaticContainer;
 
+use Craft;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -51,6 +53,21 @@ abstract class MetaContainer extends SeomaticContainer implements MetaContainerI
         }
 
         return $html;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function renderArray($params = []): array
+    {
+        $htmlArray = [];
+
+        /** @var  $metaItemModel MetaItem*/
+        foreach ($this->data as $metaItemModel) {
+            $htmlArray[] = $metaItemModel->render();
+        }
+
+        return $htmlArray;
     }
 
     /**

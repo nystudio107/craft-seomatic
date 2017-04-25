@@ -21,5 +21,17 @@ interface MetaContainerInterface
     // Public Methods
     // =========================================================================
 
+    /**
+     * Include the MetaItems in the container in the Yii View
+     */
     public function includeMetaData(): void;
+
+    /**
+     * Render the container's content as an array
+     *
+     * @param array $params
+     *
+     * @return array
+     */
+    public function renderArray($params = []): array;
 }

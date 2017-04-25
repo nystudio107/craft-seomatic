@@ -46,27 +46,27 @@ class MetaContainerController extends Controller
 
     /**
      * Return all of the containers
-     * URI: /actions/seomatic/meta-container/all?path=&siteId=
+     * URI: /actions/seomatic/meta-container/all-meta-containers?path=&siteId=
      *
      * @param string $path
      * @param int    $siteId
      *
      * @return Response
      */
-    public function actionAll(string $path, int $siteId = null)
+    public function actionAllMetaContainers(string $path, int $siteId = null)
     {
         $result = [];
         Seomatic::$plugin->metaContainers->loadMetaContainers($path, $siteId);
-        $result[MetaTitleContainer::CONTAINER_TYPE] = Seomatic::$plugin->metaContainers->renderContainersByType(
+        $result[MetaTitleContainer::CONTAINER_TYPE] = Seomatic::$plugin->metaContainers->renderContainersArrayByType(
             MetaTitleContainer::CONTAINER_TYPE
         );
-        $result[MetaTagContainer::CONTAINER_TYPE] = Seomatic::$plugin->metaContainers->renderContainersByType(
+        $result[MetaTagContainer::CONTAINER_TYPE] = Seomatic::$plugin->metaContainers->renderContainersArrayByType(
             MetaTagContainer::CONTAINER_TYPE
         );
-        $result[MetaScriptContainer::CONTAINER_TYPE] = Seomatic::$plugin->metaContainers->renderContainersByType(
+        $result[MetaScriptContainer::CONTAINER_TYPE] = Seomatic::$plugin->metaContainers->renderContainersArrayByType(
             MetaScriptContainer::CONTAINER_TYPE
         );
-        $result[MetaJsonLdContainer::CONTAINER_TYPE] = Seomatic::$plugin->metaContainers->renderContainersByType(
+        $result[MetaJsonLdContainer::CONTAINER_TYPE] = Seomatic::$plugin->metaContainers->renderContainersArrayByType(
             MetaJsonLdContainer::CONTAINER_TYPE
         );
         // use "pretty" output in debug mode
@@ -91,7 +91,7 @@ class MetaContainerController extends Controller
     {
         $result = [];
         Seomatic::$plugin->metaContainers->loadMetaContainers($path, $siteId);
-        $result[MetaTitleContainer::CONTAINER_TYPE] = Seomatic::$plugin->metaContainers->renderContainersByType(
+        $result[MetaTitleContainer::CONTAINER_TYPE] = Seomatic::$plugin->metaContainers->renderContainersArrayByType(
             MetaTitleContainer::CONTAINER_TYPE
         );
         // use "pretty" output in debug mode
@@ -116,7 +116,7 @@ class MetaContainerController extends Controller
     {
         $result = [];
         Seomatic::$plugin->metaContainers->loadMetaContainers($path, $siteId);
-        $result[MetaTagContainer::CONTAINER_TYPE] = Seomatic::$plugin->metaContainers->renderContainersByType(
+        $result[MetaTagContainer::CONTAINER_TYPE] = Seomatic::$plugin->metaContainers->renderContainersArrayByType(
             MetaTagContainer::CONTAINER_TYPE
         );
         // use "pretty" output in debug mode
@@ -141,7 +141,7 @@ class MetaContainerController extends Controller
     {
         $result = [];
         Seomatic::$plugin->metaContainers->loadMetaContainers($path, $siteId);
-        $result[MetaScriptContainer::CONTAINER_TYPE] = Seomatic::$plugin->metaContainers->renderContainersByType(
+        $result[MetaScriptContainer::CONTAINER_TYPE] = Seomatic::$plugin->metaContainers->renderContainersArrayByType(
             MetaScriptContainer::CONTAINER_TYPE
         );
         // use "pretty" output in debug mode
@@ -166,7 +166,7 @@ class MetaContainerController extends Controller
     {
         $result = [];
         Seomatic::$plugin->metaContainers->loadMetaContainers($path, $siteId);
-        $result[MetaJsonLdContainer::CONTAINER_TYPE] = Seomatic::$plugin->metaContainers->renderContainersByType(
+        $result[MetaJsonLdContainer::CONTAINER_TYPE] = Seomatic::$plugin->metaContainers->renderContainersArrayByType(
             MetaJsonLdContainer::CONTAINER_TYPE
         );
         // use "pretty" output in debug mode
