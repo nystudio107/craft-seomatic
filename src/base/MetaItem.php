@@ -152,10 +152,12 @@ abstract class MetaItem extends Model implements MetaItemInterface
                     // Extra debugging info for MetaJsonLd objects
                     if ($isMetaJsonLdModel) {
                         $className = get_class($this);
-                        $errorMsg = Craft::t('seomatic', $errorLabel) . $param;
-                        /** @var $className MetaJsonLd */
-                        $errorMsg .= ' -> ' . $className::$schemaPropertyDescriptions[$param];
-                        Craft::info($errorMsg, __METHOD__);
+                        if (!empty($className::$schemaPropertyDescriptions[$param])) {
+                            $errorMsg = Craft::t('seomatic', $errorLabel) . $param;
+                            /** @var $className MetaJsonLd */
+                            $errorMsg .= ' -> ' . $className::$schemaPropertyDescriptions[$param];
+                            Craft::info($errorMsg, __METHOD__);
+                        }
                     }
                 }
             }

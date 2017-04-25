@@ -35,6 +35,7 @@ use craft\web\View;
 
 use yii\base\Event;
 use yii\base\Exception;
+use yii\caching\TagDependency;
 
 /**
  * @author    nystudio107
@@ -62,6 +63,13 @@ class MetaContainers extends Component
     const METASCRIPT_GENERAL_HANDLE = 'general';
     const METAJSONLD_GENERAL_HANDLE = 'general';
     const METATITLE_GENERAL_HANDLE = 'general';
+
+    const GLOBAL_METACONTAINER_CACHE_TAG = 'seomatic_metacontainer';
+    const METACONTAINER_CACHE_TAG = 'seomatic_metacontainer_';
+
+    const METACONTAINER_CACHE_DURATION = null;
+    const DEVMODE_METACONTAINER_CACHE_DURATION = 30;
+    const CACHE_KEY = 'seomatic_metacontainer_';
 
     // Protected Properties
     // =========================================================================
@@ -99,10 +107,34 @@ class MetaContainers extends Component
         if (empty($this->metaContainers && !$this->loadingContainers)) {
             $this->loadingContainers = true;
 
-            $this->loadGlobalMetaContainers($siteId);
-            $this->loadContentMetaContainers($path, $siteId);
-            $this->addMetaJsonLdBreadCrumbs($siteId);
-            $this->addMetaLinkHrefLang();
+            $duration = Seomatic::$devMode
+                ? $this::DEVMODE_METACONTAINER_CACHE_DURATION
+                : $this::METACONTAINER_CACHE_DURATION;
+            $dependency = new TagDependency([
+                'tags' => [
+                    $this::GLOBAL_METACONTAINER_CACHE_TAG,
+                    $this::METACONTAINER_CACHE_TAG . $path . $siteId,
+                ],
+            ]);
+            $this->setMatchedElement($path, $siteId);
+            $cache = Craft::$app->getCache();
+            $this->metaContainers = $cache->getOrSet(
+                $this::CACHE_KEY . $path . $siteId,
+                function () use ($path, $siteId) {
+                    Craft::info(
+                        'Meta container cache miss: ' . $path . '/' . $siteId,
+                        'seomatic'
+                    );
+                    $this->loadGlobalMetaContainers($siteId);
+                    $this->loadContentMetaContainers($path, $siteId);
+                    $this->addMetaJsonLdBreadCrumbs($siteId);
+                    $this->addMetaLinkHrefLang();
+
+                    return $this->metaContainers;
+                },
+                $duration,
+                $dependency
+            );
 
             // Handler: View::EVENT_END_PAGE
             Event::on(
@@ -315,7 +347,6 @@ class MetaContainers extends Component
         /** @var Element $element */
         $element = Craft::$app->getElements()->getElementByUri($path, $siteId, true);
         if ($element) {
-            Seomatic::setMatchedElement($element);
             list($sourceId, $sourceSiteId) = Seomatic::$plugin->metaBundles->getMetaSourceIdFromElement($element);
             $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
                 $sourceId,
@@ -324,6 +355,24 @@ class MetaContainers extends Component
         }
         if ($metaBundle) {
             $this->addMetaBundleToContainers($metaBundle);
+        }
+    }
+
+    /**
+     * Set the element that matches the URI in $path
+     *
+     * @param string   $path
+     * @param int|null $siteId
+     */
+    protected function setMatchedElement(string $path, int $siteId = null)
+    {
+        if (!$siteId) {
+            $siteId = Craft::$app->getSites()->primarySite->id;
+        }
+        /** @var Element $element */
+        $element = Craft::$app->getElements()->getElementByUri($path, $siteId, true);
+        if ($element) {
+            Seomatic::setMatchedElement($element);
         }
     }
 
@@ -365,6 +414,22 @@ class MetaContainers extends Component
                 $this->addToMetaContainer($metaTitle, $key);
             }
         }
+    }
+
+    /**
+     * Invalidate a meta container cache
+     *
+     * @param string $path
+     * @param int    $siteId
+     */
+    public function invalidateCache(string $path, int $siteId)
+    {
+        $cache = Craft::$app->getCache();
+        TagDependency::invalidate($cache, $this::METACONTAINER_CACHE_TAG . $path . $siteId);
+        Craft::info(
+            'MetaContainer cache cleared: ' . $path . '/' . $siteId,
+            'seomatic'
+        );
     }
 
     // Protected Methods
@@ -453,9 +518,9 @@ class MetaContainers extends Component
                 $language = strtolower($language);
                 $language = str_replace('_', '-', $language);
                 $metaTag = MetaLink::create([
-                    'rel' => 'alternate',
+                    'rel'      => 'alternate',
                     'hreflang' => $language,
-                    'href' => $siteUrl
+                    'href'     => $siteUrl,
                 ]);
                 $key = self::SEOMATIC_METALINK_CONTAINER . self::METALINK_GENERAL_HANDLE;
                 $this->addToMetaContainer($metaTag, $key);
