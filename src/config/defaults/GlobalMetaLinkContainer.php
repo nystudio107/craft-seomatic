@@ -27,7 +27,7 @@ return [
         'data'        => [
             'canonical' => [
                 'crossorigin' => '',
-                'href'        => '{craft.request}',
+                'href'        => '{{ seomatic.canonicalUrl }}',
                 'hreflang'    => '',
                 'media'       => '',
                 'rel'         => 'canonical',

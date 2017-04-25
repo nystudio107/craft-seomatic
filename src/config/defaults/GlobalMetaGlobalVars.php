@@ -19,4 +19,5 @@ return [
     'seoTitle'       => 'Global SEO Title',
     'seoDescription' => 'Global SEO Description',
     'seoImage'       => 'Global SEO Image',
+    'canonicalUrl'   => '',
 ];

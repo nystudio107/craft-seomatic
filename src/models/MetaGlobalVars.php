@@ -11,6 +11,9 @@
 
 namespace nystudio107\seomatic\models;
 
+use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
+
+use Craft;
 use craft\base\Model;
 
 /**
@@ -32,6 +35,10 @@ class MetaGlobalVars extends Model
     {
         $model = null;
         $model = new MetaGlobalVars($config);
+        // Parse the meta global vars
+        $attributes = $model->getAttributes();
+        MetaValueHelper::parseArray($attributes);
+        $model->setAttributes($attributes);
 
         return $model;
     }
@@ -54,6 +61,10 @@ class MetaGlobalVars extends Model
      */
     public $seoImage;
 
+    /**
+     * @var string
+     */
+    public $canonicalUrl;
 
     // Public Methods
     // =========================================================================
@@ -65,6 +76,7 @@ class MetaGlobalVars extends Model
     {
         return [
             [['seoTitle', 'seoDescription', 'seoImage'], 'string'],
+            [['canonicalUrl'], 'url'],
         ];
     }
 }

@@ -317,6 +317,8 @@ class MetaContainers extends Component
         if ($metaBundle) {
             // Meta global vars
             $this->metaGlobalVars = $metaBundle->metaGlobalVars;
+            $request = Craft::$app->getRequest();
+            $this->metaGlobalVars->canonicalUrl = UrlHelper::siteUrl($request->getPathInfo(), null, null, $siteId);
             // Meta containers
             foreach ($metaBundle->metaTagContainer as $metaTagContainer) {
                 $key = self::SEOMATIC_METATAG_CONTAINER . $metaTagContainer->handle;
@@ -400,6 +402,12 @@ class MetaContainers extends Component
         $attributes = $metaBundle->getAttributes();
         $attributes = array_filter($attributes);
         $this->metaGlobalVars->setAttributes($attributes);
+        $this->metaGlobalVars->canonicalUrl = UrlHelper::siteUrl(
+            Seomatic::$matchedElement->uri,
+            null,
+            null,
+            $metaBundle->sourceSiteId
+        );
         // Meta containers
         foreach ($metaBundle->metaTagContainer as $metaTagContainer) {
             $key = self::SEOMATIC_METATAG_CONTAINER . $metaTagContainer->handle;
