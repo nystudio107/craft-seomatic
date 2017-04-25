@@ -38,7 +38,6 @@ class MetaTag extends MetaItem
     const ROBOTS_TAG = 'robots';
 
     const UNIQUEKEYS_TAGS = [
-        'alternate',
         'og:see_also',
         'og:image',
         'og:image:type',
@@ -67,6 +66,7 @@ class MetaTag extends MetaItem
         if (in_array($model->name, self::UNIQUEKEYS_TAGS)) {
             $model->uniqueKeys = true;
         }
+
         return $model;
     }
 

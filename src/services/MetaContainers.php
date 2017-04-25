@@ -101,7 +101,8 @@ class MetaContainers extends Component
 
             $this->loadGlobalMetaContainers($siteId);
             $this->loadContentMetaContainers($path, $siteId);
-            $this->addBreadCrumbs();
+            $this->addMetaJsonLdBreadCrumbs($siteId);
+            $this->addMetaLinkHrefLang();
 
             // Handler: View::EVENT_END_PAGE
             Event::on(
@@ -366,23 +367,24 @@ class MetaContainers extends Component
         }
     }
 
+    // Protected Methods
+    // =========================================================================
+
     /**
      * Add breadcrumbs to the MetaJsonLdContainer
      *
      * @param int|null $siteId
      */
-    public function addBreadCrumbs(int $siteId = null)
+    protected function addMetaJsonLdBreadCrumbs(int $siteId = null)
     {
         $position = 1;
         if (!$siteId) {
             $siteId = Craft::$app->getSites()->primarySite->id;
         }
         $site = Craft::$app->getSites()->getSiteById($siteId);
-        $siteUrl = $site->hasUrls ? $site->baseUrl : Craft::$app->getConfig()->getGeneral()->siteUrl;
+        $siteUrl = $site->hasUrls ? $site->baseUrl : Craft::$app->getSites()->getPrimarySite()->baseUrl;
         /** @var  $crumbs BreadcrumbList */
         $crumbs = MetaJsonLd::create("BreadCrumbList");
-        $key = self::SEOMATIC_METAJSONLD_CONTAINER . self::METAJSONLD_GENERAL_HANDLE;
-
         /** @var  $element Element */
         $element = Craft::$app->getElements()->getElementByUri("__home__", $siteId);
         if ($element) {
@@ -434,11 +436,32 @@ class MetaContainers extends Component
             $uri .= "/";
         }
 
+        $key = self::SEOMATIC_METAJSONLD_CONTAINER . self::METAJSONLD_GENERAL_HANDLE;
         $this->addToMetaContainer($crumbs, $key);
     }
 
-    // Protected Methods
-    // =========================================================================
+    /**
+     * Add meta hreflang tags if there is more than one site
+     */
+    protected function addMetaLinkHrefLang()
+    {
+        $sites = Craft::$app->getSites()->getAllSites();
+        if (count($sites) > 1) {
+            foreach ($sites as $site) {
+                $siteUrl = $site->hasUrls ? $site->baseUrl : Craft::$app->getSites()->getPrimarySite()->baseUrl;
+                $language = $site->language;
+                $language = strtolower($language);
+                $language = str_replace('_', '-', $language);
+                $metaTag = MetaLink::create([
+                    'rel' => 'alternate',
+                    'hreflang' => $language,
+                    'href' => $siteUrl
+                ]);
+                $key = self::SEOMATIC_METALINK_CONTAINER . self::METALINK_GENERAL_HANDLE;
+                $this->addToMetaContainer($metaTag, $key);
+            }
+        }
+    }
 
     /**
      * Generate an md5 hash from an object or array

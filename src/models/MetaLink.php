@@ -32,6 +32,10 @@ class MetaLink extends MetaItem
 
     const ITEM_TYPE = 'MetaLink';
 
+    const UNIQUEKEYS_TAGS = [
+        'alternate',
+    ];
+
     // Static Methods
     // =========================================================================
 
@@ -48,6 +52,11 @@ class MetaLink extends MetaItem
         }
         $model = new MetaLink($config);
         $model->key = $model->rel;
+
+        // Unique keys for specific tags
+        if (in_array($model->rel, self::UNIQUEKEYS_TAGS)) {
+            $model->uniqueKeys = true;
+        }
 
         return $model;
     }

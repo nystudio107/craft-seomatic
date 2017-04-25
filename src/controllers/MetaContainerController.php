@@ -11,6 +11,7 @@ namespace nystudio107\seomatic\controllers;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
+use nystudio107\seomatic\models\MetaLinkContainer;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\MetaTitleContainer;
 use nystudio107\seomatic\models\MetaTagContainer;
@@ -37,6 +38,7 @@ class MetaContainerController extends Controller
         'all',
         'meta-title-container',
         'meta-tag-container',
+        'meta-link-container',
         'meta-script-container',
         'meta-json-ld-container',
     ];
@@ -55,25 +57,17 @@ class MetaContainerController extends Controller
      */
     public function actionAllMetaContainers(string $path, int $siteId = null)
     {
-        $result = [];
-        Seomatic::$plugin->metaContainers->loadMetaContainers($path, $siteId);
-        $result[MetaTitleContainer::CONTAINER_TYPE] = Seomatic::$plugin->metaContainers->renderContainersArrayByType(
-            MetaTitleContainer::CONTAINER_TYPE
+        $result = $this->getContainerArrays(
+            [
+                MetaTitleContainer::CONTAINER_TYPE,
+                MetaTagContainer::CONTAINER_TYPE,
+                MetaLinkContainer::CONTAINER_TYPE,
+                MetaScriptContainer::CONTAINER_TYPE,
+                MetaJsonLdContainer::CONTAINER_TYPE,
+            ],
+            $path,
+            $siteId
         );
-        $result[MetaTagContainer::CONTAINER_TYPE] = Seomatic::$plugin->metaContainers->renderContainersArrayByType(
-            MetaTagContainer::CONTAINER_TYPE
-        );
-        $result[MetaScriptContainer::CONTAINER_TYPE] = Seomatic::$plugin->metaContainers->renderContainersArrayByType(
-            MetaScriptContainer::CONTAINER_TYPE
-        );
-        $result[MetaJsonLdContainer::CONTAINER_TYPE] = Seomatic::$plugin->metaContainers->renderContainersArrayByType(
-            MetaJsonLdContainer::CONTAINER_TYPE
-        );
-        // use "pretty" output in debug mode
-        Craft::$app->response->formatters[Response::FORMAT_JSON] = [
-            'class' => 'yii\web\JsonResponseFormatter',
-            'prettyPrint' => YII_DEBUG,
-        ];
 
         return $this->asJson($result);
     }
@@ -89,16 +83,13 @@ class MetaContainerController extends Controller
      */
     public function actionMetaTitleContainer(string $path, int $siteId = null)
     {
-        $result = [];
-        Seomatic::$plugin->metaContainers->loadMetaContainers($path, $siteId);
-        $result[MetaTitleContainer::CONTAINER_TYPE] = Seomatic::$plugin->metaContainers->renderContainersArrayByType(
-            MetaTitleContainer::CONTAINER_TYPE
+        $result = $this->getContainerArrays(
+            [
+                MetaTitleContainer::CONTAINER_TYPE,
+            ],
+            $path,
+            $siteId
         );
-        // use "pretty" output in debug mode
-        Craft::$app->response->formatters[Response::FORMAT_JSON] = [
-            'class' => 'yii\web\JsonResponseFormatter',
-            'prettyPrint' => YII_DEBUG,
-        ];
 
         return $this->asJson($result);
     }
@@ -114,16 +105,35 @@ class MetaContainerController extends Controller
      */
     public function actionMetaTagContainer(string $path, int $siteId = null)
     {
-        $result = [];
-        Seomatic::$plugin->metaContainers->loadMetaContainers($path, $siteId);
-        $result[MetaTagContainer::CONTAINER_TYPE] = Seomatic::$plugin->metaContainers->renderContainersArrayByType(
-            MetaTagContainer::CONTAINER_TYPE
+        $result = $this->getContainerArrays(
+            [
+                MetaTagContainer::CONTAINER_TYPE,
+            ],
+            $path,
+            $siteId
         );
-        // use "pretty" output in debug mode
-        Craft::$app->response->formatters[Response::FORMAT_JSON] = [
-            'class' => 'yii\web\JsonResponseFormatter',
-            'prettyPrint' => YII_DEBUG,
-        ];
+
+        return $this->asJson($result);
+    }
+
+    /**
+     * Return the MetaLinkContainer
+     * URI: /actions/seomatic/meta-container/meta-link-container?path=&siteId=
+     *
+     * @param string $path
+     * @param int    $siteId
+     *
+     * @return Response
+     */
+    public function actionMetaLinkContainer(string $path, int $siteId = null)
+    {
+        $result = $this->getContainerArrays(
+            [
+                MetaLinkContainer::CONTAINER_TYPE,
+            ],
+            $path,
+            $siteId
+        );
 
         return $this->asJson($result);
     }
@@ -139,16 +149,13 @@ class MetaContainerController extends Controller
      */
     public function actionMetaScriptContainer(string $path, int $siteId = null)
     {
-        $result = [];
-        Seomatic::$plugin->metaContainers->loadMetaContainers($path, $siteId);
-        $result[MetaScriptContainer::CONTAINER_TYPE] = Seomatic::$plugin->metaContainers->renderContainersArrayByType(
-            MetaScriptContainer::CONTAINER_TYPE
+        $result = $this->getContainerArrays(
+            [
+                MetaScriptContainer::CONTAINER_TYPE,
+            ],
+            $path,
+            $siteId
         );
-        // use "pretty" output in debug mode
-        Craft::$app->response->formatters[Response::FORMAT_JSON] = [
-            'class' => 'yii\web\JsonResponseFormatter',
-            'prettyPrint' => YII_DEBUG,
-        ];
 
         return $this->asJson($result);
     }
@@ -164,17 +171,38 @@ class MetaContainerController extends Controller
      */
     public function actionMetaJsonLdContainer(string $path, int $siteId = null)
     {
-        $result = [];
-        Seomatic::$plugin->metaContainers->loadMetaContainers($path, $siteId);
-        $result[MetaJsonLdContainer::CONTAINER_TYPE] = Seomatic::$plugin->metaContainers->renderContainersArrayByType(
-            MetaJsonLdContainer::CONTAINER_TYPE
+        $result = $this->getContainerArrays(
+            [
+                MetaJsonLdContainer::CONTAINER_TYPE,
+            ],
+            $path,
+            $siteId
         );
+
+        return $this->asJson($result);
+    }
+
+    // Protected Methods
+    // =========================================================================
+
+    protected function getContainerArrays(array $containerKeys, string $path, int $siteId = null): array
+    {
+        $result = [];
+
+        Seomatic::$plugin->metaContainers->loadMetaContainers($path, $siteId);
+        // Iterate through the desired $containerKeys
+        foreach ($containerKeys as $containerKey) {
+            Seomatic::$plugin->metaContainers->loadMetaContainers($path, $siteId);
+            $result[$containerKey] = Seomatic::$plugin->metaContainers->renderContainersArrayByType(
+                $containerKey
+            );
+        }
         // use "pretty" output in debug mode
         Craft::$app->response->formatters[Response::FORMAT_JSON] = [
             'class' => 'yii\web\JsonResponseFormatter',
             'prettyPrint' => YII_DEBUG,
         ];
 
-        return $this->asJson($result);
+        return $result;
     }
 }
