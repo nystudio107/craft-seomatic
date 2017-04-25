@@ -55,7 +55,7 @@ class MetaContainerController extends Controller
      *
      * @return Response
      */
-    public function actionAllMetaContainers(string $path, int $siteId = null)
+    public function actionAllMetaContainers(string $path, int $siteId = null, bool $asArray = false)
     {
         $result = $this->getContainerArrays(
             [
@@ -66,7 +66,8 @@ class MetaContainerController extends Controller
                 MetaJsonLdContainer::CONTAINER_TYPE,
             ],
             $path,
-            $siteId
+            $siteId,
+            $asArray
         );
 
         return $this->asJson($result);
@@ -81,14 +82,15 @@ class MetaContainerController extends Controller
      *
      * @return Response
      */
-    public function actionMetaTitleContainer(string $path, int $siteId = null)
+    public function actionMetaTitleContainer(string $path, int $siteId = null, bool $asArray = false)
     {
         $result = $this->getContainerArrays(
             [
                 MetaTitleContainer::CONTAINER_TYPE,
             ],
             $path,
-            $siteId
+            $siteId,
+            $asArray
         );
 
         return $this->asJson($result);
@@ -103,14 +105,15 @@ class MetaContainerController extends Controller
      *
      * @return Response
      */
-    public function actionMetaTagContainer(string $path, int $siteId = null)
+    public function actionMetaTagContainer(string $path, int $siteId = null, bool $asArray = false)
     {
         $result = $this->getContainerArrays(
             [
                 MetaTagContainer::CONTAINER_TYPE,
             ],
             $path,
-            $siteId
+            $siteId,
+            $asArray
         );
 
         return $this->asJson($result);
@@ -125,14 +128,15 @@ class MetaContainerController extends Controller
      *
      * @return Response
      */
-    public function actionMetaLinkContainer(string $path, int $siteId = null)
+    public function actionMetaLinkContainer(string $path, int $siteId = null, bool $asArray = false)
     {
         $result = $this->getContainerArrays(
             [
                 MetaLinkContainer::CONTAINER_TYPE,
             ],
             $path,
-            $siteId
+            $siteId,
+            $asArray
         );
 
         return $this->asJson($result);
@@ -147,14 +151,15 @@ class MetaContainerController extends Controller
      *
      * @return Response
      */
-    public function actionMetaScriptContainer(string $path, int $siteId = null)
+    public function actionMetaScriptContainer(string $path, int $siteId = null, bool $asArray = false)
     {
         $result = $this->getContainerArrays(
             [
                 MetaScriptContainer::CONTAINER_TYPE,
             ],
             $path,
-            $siteId
+            $siteId,
+            $asArray
         );
 
         return $this->asJson($result);
@@ -169,14 +174,15 @@ class MetaContainerController extends Controller
      *
      * @return Response
      */
-    public function actionMetaJsonLdContainer(string $path, int $siteId = null)
+    public function actionMetaJsonLdContainer(string $path, int $siteId = null, bool $asArray = false)
     {
         $result = $this->getContainerArrays(
             [
                 MetaJsonLdContainer::CONTAINER_TYPE,
             ],
             $path,
-            $siteId
+            $siteId,
+            $asArray
         );
 
         return $this->asJson($result);
@@ -185,17 +191,27 @@ class MetaContainerController extends Controller
     // Protected Methods
     // =========================================================================
 
-    protected function getContainerArrays(array $containerKeys, string $path, int $siteId = null): array
-    {
+    protected function getContainerArrays(
+        array $containerKeys,
+        string $path,
+        int $siteId = null,
+        bool $asArray = false
+    ): array {
         $result = [];
 
         Seomatic::$plugin->metaContainers->loadMetaContainers($path, $siteId);
         // Iterate through the desired $containerKeys
         foreach ($containerKeys as $containerKey) {
             Seomatic::$plugin->metaContainers->loadMetaContainers($path, $siteId);
-            $result[$containerKey] = Seomatic::$plugin->metaContainers->renderContainersArrayByType(
-                $containerKey
-            );
+            if ($asArray) {
+                $result[$containerKey] = Seomatic::$plugin->metaContainers->renderContainersArrayByType(
+                    $containerKey
+                );
+            } else {
+                $result[$containerKey] = Seomatic::$plugin->metaContainers->renderContainersByType(
+                    $containerKey
+                );
+            }
         }
         // use "pretty" output in debug mode
         Craft::$app->response->formatters[Response::FORMAT_JSON] = [
