@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic;
 
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
+use nystudio107\seomatic\helpers\MetaValue;
 use nystudio107\seomatic\models\Settings;
 use nystudio107\seomatic\services\MetaBundles as MetaBundlesService;
 use nystudio107\seomatic\services\MetaContainers as MetaContainersService;
@@ -104,6 +105,7 @@ class Seomatic extends Plugin
         $this->name = $settings->pluginName;
         // Initialize properties
         self::$devMode = Craft::$app->getConfig()->getGeneral()->devMode;
+        MetaValue::cache();
         // We're loaded
         Craft::info(
             Craft::t(
