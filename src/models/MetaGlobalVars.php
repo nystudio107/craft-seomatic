@@ -13,7 +13,6 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
-use Craft;
 use craft\base\Model;
 
 use yii\base\InvalidParamException;

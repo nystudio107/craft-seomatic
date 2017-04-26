@@ -11,7 +11,6 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use Craft;
 use craft\base\Component;
 use craft\base\Element;
 use craft\base\Field as BaseField;

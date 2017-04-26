@@ -14,7 +14,6 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\base\SitemapInterface;
-use nystudio107\seomatic\models\MetaBundle;
 
 use Craft;
 use craft\helpers\UrlHelper;

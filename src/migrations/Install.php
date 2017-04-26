@@ -11,8 +11,6 @@
 
 namespace nystudio107\seomatic\migrations;
 
-use nystudio107\seomatic\Seomatic;
-
 use Craft;
 use craft\config\DbConfig;
 use craft\db\Migration;

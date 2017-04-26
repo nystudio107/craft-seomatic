@@ -89,6 +89,7 @@ class MetaBundles extends Component
     public function invalidateMetaBundle(int $sourceId, int $sourceSiteId = null, bool $isNew = false)
     {
         $metaBundleInvalidated = false;
+        $siteIds = [];
         if ($sourceSiteId) {
             $siteIds[] = $sourceSiteId;
         } else {

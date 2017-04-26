@@ -18,7 +18,6 @@ use craft\base\Component;
 use craft\helpers\UrlHelper;
 use craft\web\UrlManager;
 
-use yii\base\Event;
 use yii\caching\TagDependency;
 
 /**

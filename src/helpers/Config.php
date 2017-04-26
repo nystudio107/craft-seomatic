@@ -13,7 +13,6 @@ namespace nystudio107\seomatic\helpers;
 
 use Craft;
 use craft\base\Component;
-use craft\helpers\ArrayHelper;
 
 /**
  * @author    nystudio107

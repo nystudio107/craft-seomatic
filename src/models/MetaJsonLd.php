@@ -15,14 +15,12 @@ use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\JsonLd as JsonLdHelper;
 use nystudio107\seomatic\base\MetaItem;
 
-use Craft;
 use craft\helpers\Template;
 
 use yii\validators\UrlValidator;
 use yii\validators\BooleanValidator;
 use yii\validators\NumberValidator;
 use yii\validators\DateValidator;
-use yii\base\InvalidParamException;
 
 /**
  * @author    nystudio107
@@ -256,7 +254,7 @@ class MetaJsonLd extends MetaItem
 
         return $result;
     }
-    
+
     /**
      * @inheritdoc
      */

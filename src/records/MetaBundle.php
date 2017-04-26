@@ -11,9 +11,6 @@
 
 namespace nystudio107\seomatic\records;
 
-use nystudio107\seomatic\Seomatic;
-
-use Craft;
 use craft\db\ActiveRecord;
 
 /**

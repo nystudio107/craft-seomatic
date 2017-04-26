@@ -10,8 +10,6 @@
 namespace nystudio107\seomatic\controllers;
 
 use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\models\SitemapIndexTemplate;
-use nystudio107\seomatic\models\SitemapTemplate;
 use nystudio107\seomatic\services\Sitemaps;
 
 use Craft;

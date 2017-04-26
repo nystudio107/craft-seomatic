@@ -13,8 +13,6 @@ namespace nystudio107\seomatic\base;
 
 use nystudio107\seomatic\base\Container as SeomaticContainer;
 
-use Craft;
-
 /**
  * @author    nystudio107
  * @package   Seomatic

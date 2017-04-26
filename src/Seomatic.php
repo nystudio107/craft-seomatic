@@ -16,6 +16,7 @@ use nystudio107\seomatic\helpers\MetaValue;
 use nystudio107\seomatic\models\Settings;
 use nystudio107\seomatic\services\MetaBundles as MetaBundlesService;
 use nystudio107\seomatic\services\MetaContainers as MetaContainersService;
+use nystudio107\seomatic\services\Redirects as RedirectsService;
 use nystudio107\seomatic\services\Sitemaps as SitemapsService;
 use nystudio107\seomatic\twigextensions\SeomaticTwigExtension;
 use nystudio107\seomatic\variables\SeomaticVariable;
@@ -25,8 +26,6 @@ use Craft;
 use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\base\Plugin;
-use craft\elements\Category;
-use craft\elements\Entry;
 use craft\events\CategoryGroupEvent;
 use craft\events\ElementEvent;
 use craft\events\PluginEvent;
@@ -49,6 +48,7 @@ use yii\base\Event;
  *
  * @property  MetaBundlesService    metaBundles
  * @property  MetaContainersService metaContainers
+ * @property  RedirectsService      redirects
  * @property  SitemapsService       sitemaps
  */
 class Seomatic extends Plugin

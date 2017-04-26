@@ -13,9 +13,6 @@ namespace nystudio107\seomatic\web;
 
 use nystudio107\seomatic\Seomatic;
 
-use Craft;
-
-use yii\base\Exception;
 use yii\web\HttpException;
 
 /**

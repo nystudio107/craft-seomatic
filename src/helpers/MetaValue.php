@@ -15,6 +15,7 @@ use nystudio107\seomatic\Seomatic;
 
 use Craft;
 use craft\base\Component;
+use craft\base\Element;
 use craft\helpers\StringHelper;
 use craft\web\View;
 

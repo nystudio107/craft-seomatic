@@ -52,6 +52,7 @@ class MetaContainerController extends Controller
      *
      * @param string $path
      * @param int    $siteId
+     * @param bool   $asArray
      *
      * @return Response
      */
@@ -79,6 +80,7 @@ class MetaContainerController extends Controller
      *
      * @param string $path
      * @param int    $siteId
+     * @param bool   $asArray
      *
      * @return Response
      */
@@ -102,6 +104,7 @@ class MetaContainerController extends Controller
      *
      * @param string $path
      * @param int    $siteId
+     * @param bool   $asArray
      *
      * @return Response
      */
@@ -125,6 +128,7 @@ class MetaContainerController extends Controller
      *
      * @param string $path
      * @param int    $siteId
+     * @param bool   $asArray
      *
      * @return Response
      */
@@ -148,6 +152,7 @@ class MetaContainerController extends Controller
      *
      * @param string $path
      * @param int    $siteId
+     * @param bool   $asArray
      *
      * @return Response
      */
@@ -171,6 +176,7 @@ class MetaContainerController extends Controller
      *
      * @param string $path
      * @param int    $siteId
+     * @param bool   $asArray
      *
      * @return Response
      */

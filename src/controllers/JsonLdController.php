@@ -13,7 +13,6 @@ namespace nystudio107\seomatic\controllers;
 
 use nystudio107\seomatic\models\MetaJsonLd;
 
-use Craft;
 use craft\web\Controller;
 
 /**

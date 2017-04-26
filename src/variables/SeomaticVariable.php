@@ -16,10 +16,6 @@ use nystudio107\seomatic\models\MetaTag;
 use nystudio107\seomatic\models\MetaLink;
 use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\models\MetaScript;
-use nystudio107\seomatic\models\MetaTagContainer;
-use nystudio107\seomatic\models\MetaLinkContainer;
-use nystudio107\seomatic\models\MetaScriptContainer;
-use nystudio107\seomatic\models\MetaJsonLdContainer;
 use nystudio107\seomatic\services\MetaContainers;
 
 /**

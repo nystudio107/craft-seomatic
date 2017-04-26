@@ -13,9 +13,7 @@ namespace nystudio107\seomatic\base;
 
 use nystudio107\seomatic\Seomatic;
 
-use Craft;
 use craft\base\Model;
-use craft\helpers\UrlHelper;
 
 /**
  * @author    nystudio107
