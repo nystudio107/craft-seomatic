@@ -72,6 +72,17 @@ class MetaGlobalVars extends Model
     // =========================================================================
 
     /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['seoTitle', 'seoDescription', 'seoImage'], 'string'],
+            [['canonicalUrl'], 'url'],
+        ];
+    }
+
+    /**
      * Magic getter/setter for the static properties of the class
      *
      * @param string $method    The method name (static property name)
@@ -98,16 +109,5 @@ class MetaGlobalVars extends Model
         }
 
         return null;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['seoTitle', 'seoDescription', 'seoImage'], 'string'],
-            [['canonicalUrl'], 'url'],
-        ];
     }
 }
