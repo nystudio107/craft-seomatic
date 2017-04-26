@@ -402,8 +402,11 @@ class MetaContainers extends Component
         $attributes = $metaBundle->getAttributes();
         $attributes = array_filter($attributes);
         $this->metaGlobalVars->setAttributes($attributes);
+        /** @var  $element Element */
+        $element = Seomatic::$matchedElement;
+        $uri = $element->uri == '__home__' ? '' : $element->uri;
         $this->metaGlobalVars->canonicalUrl = UrlHelper::siteUrl(
-            Seomatic::$matchedElement->uri,
+            $uri,
             null,
             null,
             $metaBundle->sourceSiteId

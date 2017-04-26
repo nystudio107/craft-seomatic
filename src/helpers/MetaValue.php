@@ -54,10 +54,7 @@ class MetaValue extends Component
         }
         try {
             if (self::$matchedElement) {
-                $metaValue = self::$view->renderString($metaValue, [
-                    'seomatic' => Seomatic::$plugin->metaContainers->metaGlobalVars
-                ]);
-                //$metaValue = self::$view->renderObjectTemplate($metaValue, self::$matchedElement);
+                $metaValue = self::$view->renderObjectTemplate($metaValue, self::$matchedElement);
             } else {
                 $metaValue = self::$view->renderString($metaValue);
             }
