@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\base;
 
 use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\helpers\PluginTemplate;
 
 use craft\base\Model;
 
@@ -66,6 +67,8 @@ abstract class FrontendTemplate extends Model implements FrontendTemplateInterfa
      */
     public function render($params = []): string
     {
-        return '';
+        $html = PluginTemplate::renderPluginTemplate($this->path, []);
+
+        return $html;
     }
 }

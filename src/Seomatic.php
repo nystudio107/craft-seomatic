@@ -36,6 +36,7 @@ use craft\services\Elements;
 use craft\services\Plugins;
 use craft\services\Sections;
 use craft\utilities\ClearCaches;
+use craft\web\View;
 
 use yii\base\Event;
 
@@ -76,6 +77,11 @@ class Seomatic extends Plugin
      */
     public static $devMode;
 
+    /**
+     * @var View
+     */
+    public static $view;
+
     // Static Methods
     // =========================================================================
 
@@ -105,6 +111,7 @@ class Seomatic extends Plugin
         $this->name = $settings->pluginName;
         // Initialize properties
         self::$devMode = Craft::$app->getConfig()->getGeneral()->devMode;
+        self::$view = Craft::$app->getView();
         MetaValue::cache();
         // We're loaded
         Craft::info(
@@ -121,7 +128,7 @@ class Seomatic extends Plugin
         $request = Craft::$app->getRequest();
         if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
             // Add in our Twig extensions
-            Craft::$app->view->twig->addExtension(new SeomaticTwigExtension);
+            Seomatic::$view->twig->addExtension(new SeomaticTwigExtension);
             // Load the sitemap containers
             Seomatic::$plugin->sitemaps->loadSitemapContainers();
             // Register our error handler

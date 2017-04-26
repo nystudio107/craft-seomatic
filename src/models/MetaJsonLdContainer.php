@@ -49,7 +49,6 @@ class MetaJsonLdContainer extends MetaContainer
      */
     public function includeMetaData(): void
     {
-        $view = Craft::$app->getView();
         /** @var $metaJsonLdModel MetaJsonLd */
         foreach ($this->data as $metaJsonLdModel) {
             if ($metaJsonLdModel->include) {
@@ -57,7 +56,7 @@ class MetaJsonLdContainer extends MetaContainer
                     'renderRaw'        => true,
                     'renderScriptTags' => false
                 ]);
-                $view->registerScript(
+                Seomatic::$view->registerScript(
                     $jsonLd,
                     View::POS_END,
                     ['type' => 'application/ld+json']

@@ -89,6 +89,6 @@ class MetaValue extends Component
     public static function cache()
     {
         self::$matchedElement = Seomatic::$matchedElement;
-        self::$view = Craft::$app->getView();
+        self::$view = Seomatic::$view;
     }
 }

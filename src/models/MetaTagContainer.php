@@ -53,13 +53,12 @@ class MetaTagContainer extends MetaContainer
      */
     public function includeMetaData(): void
     {
-        $view = Craft::$app->getView();
         /** @var $metaTagModel MetaTag */
         foreach ($this->data as $metaTagModel) {
             if ($metaTagModel->include) {
                 $options = $metaTagModel->tagAttributes();
                 $metaTagModel->prepForRender($options);
-                $view->registerMetaTag($options);
+                Seomatic::$view->registerMetaTag($options);
                 // If `devMode` is enabled, validate the Meta Tag and output any model errors
                 if (Seomatic::$devMode) {
                     $scenario = [];

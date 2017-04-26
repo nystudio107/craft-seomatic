@@ -47,13 +47,12 @@ class MetaLinkContainer extends MetaContainer
      */
     public function includeMetaData(): void
     {
-        $view = Craft::$app->getView();
         /** @var $metaLinkModel MetaLink */
         foreach ($this->data as $metaLinkModel) {
             if ($metaLinkModel->include) {
                 $options = $metaLinkModel->tagAttributes();
                 $metaLinkModel->prepForRender($options);
-                $view->registerLinkTag($options);
+                Seomatic::$view->registerLinkTag($options);
                 // If `devMode` is enabled, validate the Meta Link and output any model errors
                 if (Seomatic::$devMode) {
                     $metaLinkModel->debugMetaItem(

@@ -32,7 +32,7 @@ return [
 
     'sitemapUrls' => true,
     'sitemapAssets' => true,
-    'sitemapFiles' => false,
+    'sitemapFiles' => true,
     'sitemapAltLinks' => true,
     'sitemapChangeFreq' => 'weekly',
     'sitemapPriority' => 0.5,

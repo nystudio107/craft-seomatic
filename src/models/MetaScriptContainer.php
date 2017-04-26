@@ -54,12 +54,11 @@ class MetaScriptContainer extends MetaContainer
      */
     public function includeMetaData(): void
     {
-        $view = Craft::$app->getView();
         /** @var $metaScriptModel MetaScript */
         foreach ($this->data as $metaScriptModel) {
             if ($metaScriptModel->include) {
                 $js = $metaScriptModel->render();
-                $view->registerJs(
+                Seomatic::$view->registerJs(
                     $js,
                     $this->position
                 );

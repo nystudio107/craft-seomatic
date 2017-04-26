@@ -29,8 +29,7 @@ class SeomaticTwigExtension extends \Twig_Extension implements \Twig_Extension_G
      */
     public function getGlobals(): array
     {
-        $view = Craft::$app->getView();
-        if ($view->getIsRenderingPageTemplate()) {
+        if (Seomatic::$view->getIsRenderingPageTemplate()) {
             $request = Craft::$app->getRequest();
             // Load the meta containers for this page
             Seomatic::$plugin->metaContainers->loadMetaContainers($request->getPathInfo(), null);

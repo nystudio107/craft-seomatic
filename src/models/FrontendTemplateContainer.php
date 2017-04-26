@@ -39,14 +39,7 @@ class FrontendTemplateContainer extends SeomaticContainer
      */
     public function render($params = []): string
     {
-        $html = '';
-
-        /** @var  $frontendTemplateModel FrontendTemplate */
-        foreach ($this->data as $frontendTemplateModel) {
-            $html .= $frontendTemplateModel->render();
-        }
-
-        return $html;
+        return '';
     }
 
     /**
@@ -54,5 +47,8 @@ class FrontendTemplateContainer extends SeomaticContainer
      */
     public function normalizeContainerData(): void
     {
+        foreach ($this->data as $key => $config) {
+            $this->addData(FrontendTemplate::create($config), $key);
+        }
     }
 }

@@ -22,7 +22,7 @@ trait FrontendTemplateTrait
     // =========================================================================
 
     /**
-     * The path for this FrontendTemplate
+     * The path for the source template for this FrontendTemplate
      *
      * @var string
      */
