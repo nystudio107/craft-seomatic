@@ -20,6 +20,7 @@ use nystudio107\seomatic\records\FrontendTemplate as FrontendTemplateRecord;
 
 use Craft;
 use craft\base\Component;
+use craft\db\Query;
 use craft\events\RegisterUrlRulesEvent;
 use craft\web\UrlManager;
 
@@ -134,12 +135,17 @@ class FrontendTemplates extends Component
     public function getFrontendTemplateByHandle(string $handle)
     {
         $frontendTemplate = null;
-        $frontendTemplateRecord = FrontendTemplateRecord::findOne([
-            'handle' => $handle,
-        ]);
-        if ($frontendTemplateRecord) {
+        $frontendTemplateArray = (new Query())
+            ->from(['{{%seomatic_frontendtemplates}}'])
+            ->where([
+                'handle' => $handle,
+            ])
+            ->one();
+        Craft::dd($frontendTemplateArray);
+        if (!empty($frontendTemplateArray)) {
+            $frontendTemplateArray = array_diff_key($frontendTemplateArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
             $frontendTemplate = EditableTemplate::create(
-                $frontendTemplateRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES)
+                $frontendTemplateArray
             );
         }
 
@@ -154,13 +160,13 @@ class FrontendTemplates extends Component
     public function getFrontendTemplates(): array
     {
         $frontendTemplates = [];
-        $frontendTemplateRecords = FrontendTemplateRecord::find()
+        $frontendTemplateArrays = (new Query())
+            ->from(['{{%seomatic_frontendtemplates}}'])
             ->all();
-        /** @var  $frontendTemplateRecords EditableTemplate */
-        foreach ($frontendTemplateRecords as $frontendTemplateRecord) {
-            $frontendTemplate = EditableTemplate::create(
-                $frontendTemplateRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES)
-            );
+        /** @var  $frontendTemplateArrays EditableTemplate */
+        foreach ($frontendTemplateArrays as $frontendTemplateArray) {
+            $frontendTemplateArray = array_diff_key($frontendTemplateArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
+            $frontendTemplate = EditableTemplate::create($frontendTemplateArray);
             if ($frontendTemplate) {
                 $frontendTemplates[] = $frontendTemplate;
             }

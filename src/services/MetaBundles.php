@@ -19,6 +19,7 @@ use nystudio107\seomatic\records\MetaBundle as MetaBundleRecord;
 use Craft;
 use craft\base\Component;
 use craft\base\Element;
+use craft\db\Query;
 use craft\elements\Category;
 use craft\elements\Entry;
 use craft\helpers\ArrayHelper;
@@ -142,12 +143,16 @@ class MetaBundles extends Component
             }
         }
         // Look for a matching meta bundle in the db
-        $metaBundleRecord = MetaBundleRecord::findOne([
-            'sourceId' => $sourceId,
-            'sourceSiteId' => $siteId,
-        ]);
-        if ($metaBundleRecord) {
-            $metaBundle = MetaBundle::create($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
+        $metaBundleArray = (new Query())
+            ->from(['{{%seomatic_metabundles}}'])
+            ->where([
+                'sourceId'     => $sourceId,
+                'sourceSiteId' => $siteId,
+            ])
+            ->one();
+        if (!empty($metaBundleArray)) {
+            $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
+            $metaBundle = MetaBundle::create($metaBundleArray);
             $id = count($this->metaBundles);
             $this->metaBundles[$id] = $metaBundle;
             $this->metaBundlesBySourceId[$sourceId][$siteId] = $id;
@@ -173,12 +178,16 @@ class MetaBundles extends Component
             }
         }
         // Look for a matching meta bundle in the db
-        $metaBundleRecord = MetaBundleRecord::findOne([
-            'sourceHandle' => $sourceHandle,
-            'sourceSiteId' => $siteId,
-        ]);
-        if ($metaBundleRecord) {
-            $metaBundle = MetaBundle::create($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
+        $metaBundleArray = (new Query())
+            ->from(['{{%seomatic_metabundles}}'])
+            ->where([
+                'sourceHandle' => $sourceHandle,
+                'sourceSiteId' => $siteId,
+            ])
+            ->one();
+        if (!empty($metaBundleArray)) {
+            $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
+            $metaBundle = MetaBundle::create($metaBundleArray);
             $id = count($this->metaBundles);
             $this->metaBundles[$id] = $metaBundle;
             $this->metaBundlesBySourceHandle[$sourceHandle][$siteId] = $id;
@@ -198,20 +207,22 @@ class MetaBundles extends Component
     {
         $metaBundles = [];
         $metaBundleSourceHandles = [];
-        $metaBundleRecords = MetaBundleRecord::find()
+        $metaBundleArrays = (new Query())
+            ->from(['{{%seomatic_metabundles}}'])
             ->where(['!=', 'sourceHandle', self::GLOBAL_META_BUNDLE])
             ->all();
-        /** @var  $metaBundleRecord MetaBundle */
-        foreach ($metaBundleRecords as $metaBundleRecord) {
+        /** @var  $metaBundleArray array */
+        foreach ($metaBundleArrays as $metaBundleArray) {
             $addToMetaBundles = true;
             if (!$allSites) {
-                if (in_array($metaBundleRecord->sourceHandle, $metaBundleSourceHandles)) {
+                if (in_array($metaBundleArray['sourceHandle'], $metaBundleSourceHandles)) {
                     $addToMetaBundles = false;
                 }
-                $metaBundleSourceHandles[] = $metaBundleRecord->sourceHandle;
+                $metaBundleSourceHandles[] = $metaBundleArray['sourceHandle'];
             }
             if ($addToMetaBundles) {
-                $metaBundle = MetaBundle::create($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
+                $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
+                $metaBundle = MetaBundle::create($metaBundleArray);
                 if ($metaBundle) {
                     $metaBundles[] = $metaBundle;
                 }
@@ -231,12 +242,16 @@ class MetaBundles extends Component
     public function getGlobalMetaBundle(int $sourceSiteId)
     {
         $metaBundle = null;
-        $metaBundleRecord = MetaBundleRecord::findOne([
-            'sourceHandle' => self::GLOBAL_META_BUNDLE,
-            'sourceSiteId' => $sourceSiteId,
-        ]);
-        if ($metaBundleRecord) {
-            $metaBundle = MetaBundle::create($metaBundleRecord->getAttributes(null, self::IGNORE_DB_ATTRIBUTES));
+        $metaBundleArray = (new Query())
+            ->from(['{{%seomatic_metabundles}}'])
+            ->where([
+                'sourceHandle' => self::GLOBAL_META_BUNDLE,
+                'sourceSiteId' => $sourceSiteId,
+            ])
+            ->one();
+        if (!empty($metaBundleArray)) {
+            $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
+            $metaBundle = MetaBundle::create($metaBundleArray);
         }
 
         return $metaBundle;
