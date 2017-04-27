@@ -54,7 +54,8 @@ class MetaJsonLdContainer extends MetaContainer
             if ($metaJsonLdModel->include) {
                 $jsonLd = $metaJsonLdModel->render([
                     'renderRaw'        => true,
-                    'renderScriptTags' => false
+                    'renderScriptTags' => false,
+                    'array'            => false,
                 ]);
                 Seomatic::$view->registerScript(
                     $jsonLd,
@@ -67,7 +68,7 @@ class MetaJsonLdContainer extends MetaContainer
                         'JSON-LD property: ',
                         [
                             'default' => 'error',
-                            'google'  => 'warning'
+                            'google'  => 'warning',
                         ]
                     );
                 }

@@ -62,6 +62,7 @@ class Redirects extends Component
     {
         Craft::dd('404');
     }
+
     /**
      * Invalidate all of the redirects caches
      */

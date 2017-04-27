@@ -174,7 +174,7 @@ class MetaJsonLd extends MetaItem
     public static function create($schemaType, $config = [])
     {
         $model = null;
-        $className = 'nystudio107\\seomatic\\models\\jsonld\\'.$schemaType;
+        $className = 'nystudio107\\seomatic\\models\\jsonld\\' . $schemaType;
         /** @var $model MetaJsonLd */
         if (class_exists($className)) {
             $model = new $className($config);
@@ -208,8 +208,8 @@ class MetaJsonLd extends MetaItem
     public function __toString()
     {
         return $this->render([
-            'renderRaw' => false,
-            'renderScriptTags' => true
+            'renderRaw'        => false,
+            'renderScriptTags' => true,
         ]);
     }
 
@@ -227,16 +227,19 @@ class MetaJsonLd extends MetaItem
      *
      * @return string
      */
-    public function render($params = ['renderRaw' => true, 'renderScriptTags' => true]): string
-    {
+    public function render(
+        $params = [
+            'renderRaw'        => true,
+            'renderScriptTags' => true,
+            'array'            => false,
+        ]
+    ): string {
         $linebreak = "";
-
         // If we're rendering for an array, don't add linebreaks
         $oldDevMode = Seomatic::$devMode;
-        if ($params['renderRaw'] === true) {
+        if ($params['array'] === true) {
             Seomatic::$devMode = false;
         }
-
         // If `devMode` is enabled, make the JSON-LD human-readable
         if (Seomatic::$devMode) {
             $linebreak = PHP_EOL;
@@ -246,6 +249,9 @@ class MetaJsonLd extends MetaItem
         $this->setScenario('render');
         $result = JsonLdHelper::encode($this);
         $this->setScenario($scenario);
+        if ($params['array'] === true) {
+            Seomatic::$devMode = $oldDevMode;
+        }
         if ($params['renderScriptTags']) {
             $result =
                 '<script type="application/ld+json">'
@@ -253,12 +259,14 @@ class MetaJsonLd extends MetaItem
                 . $result
                 . $linebreak
                 . '</script>';
+        } elseif (Seomatic::$devMode) {
+            $result =
+                $linebreak
+                . $result
+                . $linebreak;
         }
         if ($params['renderRaw'] === true) {
             $result = Template::raw($result);
-        }
-        if ($params['renderRaw'] === true) {
-            Seomatic::$devMode = $oldDevMode;
         }
 
         return $result;
@@ -310,7 +318,7 @@ class MetaJsonLd extends MetaItem
             }
             foreach ($dataToValidate as $data) {
                 foreach ($expectedTypes as $expectedType) {
-                    $className = 'craft\\plugins\\seomatic\\models\\jsonld\\'.$expectedType;
+                    $className = 'craft\\plugins\\seomatic\\models\\jsonld\\' . $expectedType;
                     switch ($expectedType) {
                         // Text always validates
                         case 'Text':
@@ -387,7 +395,7 @@ class MetaJsonLd extends MetaItem
                     }
                 }
                 if (!$validated) {
-                    $this->addError($attribute, 'Must be one of these types: '.implode(', ', $expectedTypes));
+                    $this->addError($attribute, 'Must be one of these types: ' . implode(', ', $expectedTypes));
                 }
             }
         }

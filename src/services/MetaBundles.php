@@ -105,9 +105,9 @@ class MetaBundles extends Component
             if ($metaBundle) {
                 Craft::info(
                     'Invalidating meta bundle: '
-                        . $metaBundle->sourceHandle
-                        . ' from siteId: '
-                        . $siteId,
+                    . $metaBundle->sourceHandle
+                    . ' from siteId: '
+                    . $siteId,
                     'seomatic'
                 );
                 // Invalidate sitemap caches after an existing section is saved
@@ -367,7 +367,7 @@ class MetaBundles extends Component
     protected function createMetaBundleFromCategory(CategoryGroup $category, int $siteId)
     {
         $metaBundle = null;
-    // Get the site settings and turn them into arrays
+        // Get the site settings and turn them into arrays
         $siteSettings = $category->getSiteSettings();
         if (!empty($siteSettings[$siteId])) {
             $siteSettingsArray = [];
@@ -397,13 +397,13 @@ class MetaBundles extends Component
                     $metaBundleDefaults = array_merge(
                         ConfigHelper::getConfigFromFile('CategoryMetaBundle', 'defaults'),
                         [
-                            'sourceId' => $category->id,
-                            'sourceName' => $category->name,
-                            'sourceHandle' => $category->handle,
-                            'sourceTemplate' => $siteSetting->template,
-                            'sourceSiteId' => $siteSetting->siteId,
+                            'sourceId'              => $category->id,
+                            'sourceName'            => $category->name,
+                            'sourceHandle'          => $category->handle,
+                            'sourceTemplate'        => $siteSetting->template,
+                            'sourceSiteId'          => $siteSetting->siteId,
                             'sourceAltSiteSettings' => $siteSettingsArray,
-                            'sourceDateUpdated' => $dateUpdated,
+                            'sourceDateUpdated'     => $dateUpdated,
                         ]
                     );
                     $metaBundle = new MetaBundle($metaBundleDefaults);
@@ -453,14 +453,14 @@ class MetaBundles extends Component
                     $metaBundleDefaults = array_merge(
                         ConfigHelper::getConfigFromFile('EntryMetaBundle', 'defaults'),
                         [
-                            'sourceId' => $section->id,
-                            'sourceName' => $section->name,
-                            'sourceHandle' => $section->handle,
-                            'sourceType' => $section->type,
-                            'sourceTemplate' => $siteSetting->template,
-                            'sourceSiteId' => $siteSetting->siteId,
+                            'sourceId'              => $section->id,
+                            'sourceName'            => $section->name,
+                            'sourceHandle'          => $section->handle,
+                            'sourceType'            => $section->type,
+                            'sourceTemplate'        => $siteSetting->template,
+                            'sourceSiteId'          => $siteSetting->siteId,
                             'sourceAltSiteSettings' => $siteSettingsArray,
-                            'sourceDateUpdated' => $dateUpdated,
+                            'sourceDateUpdated'     => $dateUpdated,
                         ]
                     );
                     $metaBundle = new MetaBundle($metaBundleDefaults);
