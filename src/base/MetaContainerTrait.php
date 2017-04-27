@@ -22,26 +22,6 @@ trait MetaContainerTrait
     // =========================================================================
 
     /**
-     * @var string
-     */
-    public $name;
-
-    /**
-     * @var string
-     */
-    public $description;
-
-    /**
-     * @var string
-     */
-    public $handle;
-
-    /**
-     * @var bool
-     */
-    public $include = true;
-
-    /**
      * The data in this container
      *
      * @var MetaItem

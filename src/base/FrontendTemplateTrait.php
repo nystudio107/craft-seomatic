@@ -22,11 +22,25 @@ trait FrontendTemplateTrait
     // =========================================================================
 
     /**
-     * The path for the source template for this FrontendTemplate
+     * The FrontEndTemplate handle
+     *
+     * @var string
+     */
+    public $handle;
+
+    /**
+     * The the frontend URI to listen for
      *
      * @var string
      */
     public $path;
+
+    /**
+     * The path for the source template for this FrontendTemplate
+     *
+     * @var string
+     */
+    public $template;
 
     /**
      * The controller for this FrontendTemplate

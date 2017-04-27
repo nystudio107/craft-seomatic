@@ -9,9 +9,10 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-namespace nystudio107\seomatic\base;
+namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\base\FrontendTemplate;
 
 use Craft;
 
@@ -22,6 +23,11 @@ use Craft;
  */
 class EditableTemplate extends FrontendTemplate
 {
+    // Constants
+    // =========================================================================
+
+    const TEMPLATE_TYPE = 'EditableTemplate';
+
     // Static Methods
     // =========================================================================
 
@@ -39,11 +45,13 @@ class EditableTemplate extends FrontendTemplate
             $path = Craft::getAlias('@nystudio107/seomatic')
                 . DIRECTORY_SEPARATOR
                 . 'templates'
-                . $model->path;
+                . DIRECTORY_SEPARATOR
+                . $model->template;
             if (file_exists($path)) {
                 $model->templateString = @file_get_contents($path);
             }
         }
+
         return $model;
     }
 

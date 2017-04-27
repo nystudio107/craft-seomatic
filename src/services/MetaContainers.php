@@ -445,17 +445,30 @@ class MetaContainers extends Component
     }
 
     /**
+     * Invalidate all of the meta container caches
+     */
+    public function invalidateCaches()
+    {
+        $cache = Craft::$app->getCache();
+        TagDependency::invalidate($cache, $this::GLOBAL_METACONTAINER_CACHE_TAG);
+        Craft::info(
+            'All meta container caches cleared',
+            'seomatic'
+        );
+    }
+
+    /**
      * Invalidate a meta container cache
      *
      * @param string $path
      * @param int    $siteId
      */
-    public function invalidateCache(string $path, int $siteId)
+    public function invalidateContainerCache(string $path, int $siteId)
     {
         $cache = Craft::$app->getCache();
         TagDependency::invalidate($cache, $this::METACONTAINER_CACHE_TAG . $path . $siteId);
         Craft::info(
-            'MetaContainer cache cleared: ' . $path . '/' . $siteId,
+            'Meta container cache cleared: ' . $path . '/' . $siteId,
             'seomatic'
         );
     }

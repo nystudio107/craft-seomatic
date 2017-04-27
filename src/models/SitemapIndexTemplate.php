@@ -48,6 +48,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
     {
         $defaults = [
             'path'       => 'sitemap.xml',
+            'template'   => '',
             'controller' => 'sitemap',
             'action'     => 'sitemap-index',
         ];

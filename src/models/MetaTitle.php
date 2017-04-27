@@ -82,8 +82,6 @@ class MetaTitle extends MetaItem
         $this->setScenario('render');
         $data = MetaValueHelper::parseString($data);
         $this->setScenario($scenario);
-        /** @var  $settings Settings */
-        $settings = Seomatic::$plugin->getSettings();
         // Special-case scenarios
         $data = (string)Stringy::create($data)->safeTruncate(
             Seomatic::$plugin->getSettings()->maxTitleLength,
@@ -91,10 +89,10 @@ class MetaTitle extends MetaItem
         );
         // devMode
         if (Seomatic::$devMode) {
-            $data = $settings->devModeTitlePrefix . $data;
+            $data = Seomatic::$settings->devModeTitlePrefix . $data;
         }
         // Per-environment
-        switch ($settings->environment) {
+        switch (Seomatic::$settings->environment) {
             case 'live':
                 break;
             case 'staging':

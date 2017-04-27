@@ -9,43 +9,25 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-namespace nystudio107\seomatic\base;
+namespace nystudio107\seomatic\records;
+
+use craft\db\ActiveRecord;
 
 /**
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-trait ContainerTrait
+class FrontendTemplate extends ActiveRecord
 {
-    // Properties
+    // Public Static Methods
     // =========================================================================
 
     /**
-     * @var string
+     * @inheritdoc
      */
-    public $name;
-
-    /**
-     * @var string
-     */
-    public $description;
-
-    /**
-     * @var string
-     */
-    public $handle;
-
-    /**
-     * @var bool
-     */
-
-    public $include = true;
-
-    /**
-     * The data in this container
-     *
-     * @var array
-     */
-    public $data = [];
+    public static function tableName()
+    {
+        return '{{%seomatic_frontendtemplates}}';
+    }
 }

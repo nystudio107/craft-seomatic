@@ -164,12 +164,10 @@ class MetaLink extends MetaItem
         $data = $this->tagAttributes();
         $this->setScenario($scenario);
         MetaValueHelper::parseArray($data);
-        /** @var  $settings Settings */
-        $settings = Seomatic::$plugin->getSettings();
         // Special-case scenarios
         if (Seomatic::$devMode) {
         }
-        switch ($settings->environment) {
+        switch (Seomatic::$settings->environment) {
             case 'live':
                 break;
             case 'staging':

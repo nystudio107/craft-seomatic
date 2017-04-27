@@ -64,6 +64,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
     {
         $defaults = [
             'path'       => 'sitemaps/<handle:[-\w\.*]+>/<siteId:\d+>/<file:[-\w\.*]+>',
+            'template'   => '',
             'controller' => 'sitemap',
             'action'     => 'sitemap',
         ];

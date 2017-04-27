@@ -12,7 +12,6 @@
 namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\base\Container as SeomaticContainer;
-use nystudio107\seomatic\base\FrontendTemplate;
 
 /**
  * @author    nystudio107
@@ -27,7 +26,7 @@ class FrontendTemplateContainer extends SeomaticContainer
     /**
      * The FrontendTemplates in this container
      *
-     * @var FrontendTemplate
+     * @var EditableTemplate
      */
     public $data = [];
 
@@ -48,7 +47,7 @@ class FrontendTemplateContainer extends SeomaticContainer
     public function normalizeContainerData(): void
     {
         foreach ($this->data as $key => $config) {
-            $this->addData(FrontendTemplate::create($config), $key);
+            $this->addData(EditableTemplate::create($config), $key);
         }
     }
 }

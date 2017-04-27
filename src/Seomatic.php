@@ -14,6 +14,7 @@ namespace nystudio107\seomatic;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\helpers\MetaValue;
 use nystudio107\seomatic\models\Settings;
+use nystudio107\seomatic\services\FrontendTemplates as FrontendTemplatesService;
 use nystudio107\seomatic\services\MetaBundles as MetaBundlesService;
 use nystudio107\seomatic\services\MetaContainers as MetaContainersService;
 use nystudio107\seomatic\services\Redirects as RedirectsService;
@@ -47,10 +48,11 @@ use yii\base\Event;
  * @package   Seomatic
  * @since     3.0.0
  *
- * @property  MetaBundlesService    metaBundles
- * @property  MetaContainersService metaContainers
- * @property  RedirectsService      redirects
- * @property  SitemapsService       sitemaps
+ * @property  FrontendTemplatesService    frontendTemplates
+ * @property  MetaBundlesService          metaBundles
+ * @property  MetaContainersService       metaContainers
+ * @property  RedirectsService            redirects
+ * @property  SitemapsService             sitemaps
  */
 class Seomatic extends Plugin
 {
@@ -66,6 +68,11 @@ class Seomatic extends Plugin
      * @var Seomatic
      */
     public static $plugin;
+
+    /**
+     * @var Settings
+     */
+    public static $settings;
 
     /**
      * @var ElementInterface
@@ -106,13 +113,12 @@ class Seomatic extends Plugin
     {
         parent::init();
         self::$plugin = $this;
-        /** @var  $settings Settings */
-        $settings = Seomatic::$plugin->getSettings();
-        $this->name = $settings->pluginName;
         // Initialize properties
+        self::$settings = Seomatic::$plugin->getSettings();
         self::$devMode = Craft::$app->getConfig()->getGeneral()->devMode;
         self::$view = Craft::$app->getView();
         MetaValue::cache();
+        $this->name = Seomatic::$settings->pluginName;
         // We're loaded
         Craft::info(
             Craft::t(
@@ -131,6 +137,8 @@ class Seomatic extends Plugin
             Seomatic::$view->twig->addExtension(new SeomaticTwigExtension);
             // Load the sitemap containers
             Seomatic::$plugin->sitemaps->loadSitemapContainers();
+            // Load the frontend template containers
+            Seomatic::$plugin->frontendTemplates->loadFrontendTemplateContainers();
             // Register our error handler
             $handler = new SeomaticErrorHandler;
             Craft::$app->set('errorHandler', $handler);
@@ -185,6 +193,22 @@ class Seomatic extends Plugin
                     'ClearCaches::EVENT_REGISTER_CACHE_OPTIONS',
                     'seomatic'
                 );
+                // Frontend template caches
+                $event->options[] = [
+                    'key' => 'seomatic-frontendtemplate-caches',
+                    'label' => Craft::t('seomatic', 'SEOmatic frontend template caches'),
+                    'action' => function () {
+                        Seomatic::$plugin->frontendTemplates->invalidateCaches();
+                    }
+                ];
+                // Meta bundle caches
+                $event->options[] = [
+                    'key' => 'seomatic-metabundle-caches',
+                    'label' => Craft::t('seomatic', 'SEOmatic metadata caches'),
+                    'action' => function () {
+                        Seomatic::$plugin->metaContainers->invalidateCaches();
+                    }
+                ];
                 // Sitemap caches
                 $event->options[] = [
                     'key' => 'seomatic-sitemap-caches',
@@ -312,10 +336,7 @@ class Seomatic extends Plugin
                     'Plugins::EVENT_AFTER_INSTALL_PLUGIN',
                     'seomatic'
                 );
-                // Create our default data
                 if ($event->plugin === $this) {
-                    Seomatic::$plugin->metaBundles->createGlobalMetaBundles();
-                    Seomatic::$plugin->metaBundles->createContentMetaBundles();
                 }
             }
         );

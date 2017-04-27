@@ -11,6 +11,8 @@
 
 namespace nystudio107\seomatic\migrations;
 
+use nystudio107\seomatic\Seomatic;
+
 use Craft;
 use craft\config\DbConfig;
 use craft\db\Migration;
@@ -42,10 +44,10 @@ class Install extends Migration
         if ($this->createTables()) {
             $this->createIndexes();
             $this->addForeignKeys();
+            // Refresh the db schema caches
+            Craft::$app->db->schema->refresh();
             $this->insertDefaultData();
         }
-        // Refresh the db schema caches
-        Craft::$app->db->schema->refresh();
 
         return true;
     }
@@ -74,6 +76,7 @@ class Install extends Migration
         $tableSchema = Craft::$app->db->schema->getTableSchema('{{%seomatic_metabundles}}');
         if ($tableSchema === null) {
             $tablesCreated = true;
+            // seomatic_metabundles table
             $this->createTable(
                 '{{%seomatic_metabundles}}',
                 [
@@ -110,6 +113,23 @@ class Install extends Migration
                     'frontendTemplatesContainer' => $this->text(),
                 ]
             );
+            // seomatic_frontendtemplates table
+            $this->createTable(
+                '{{%seomatic_frontendtemplates}}',
+                [
+                    'id' => $this->primaryKey(),
+                    'dateCreated' => $this->dateTime()->notNull(),
+                    'dateUpdated' => $this->dateTime()->notNull(),
+                    'uid' => $this->uid(),
+
+                    'handle' => $this->string()->notNull()->defaultValue(''),
+                    'path' => $this->string()->notNull()->defaultValue(''),
+                    'template' => $this->string(500)->notNull()->defaultValue(''),
+                    'controller' => $this->string()->notNull()->defaultValue(''),
+                    'action' => $this->string()->notNull()->defaultValue(''),
+                    'templateString' => $this->text(),
+                ]
+            );
         }
 
         return $tablesCreated;
@@ -120,6 +140,7 @@ class Install extends Migration
      */
     protected function createIndexes()
     {
+        // seomatic_metabundles table
         $this->createIndex(
             $this->db->getIndexName(
                 '{{%seomatic_metabundles}}',
@@ -149,6 +170,17 @@ class Install extends Migration
             '{{%seomatic_metabundles}}',
             'sourceHandle',
             false
+        );
+        // seomatic_frontendtemplates table
+        $this->createIndex(
+            $this->db->getIndexName(
+                '{{%seomatic_frontendtemplates}}',
+                'handle',
+                true
+            ),
+            '{{%seomatic_frontendtemplates}}',
+            'handle',
+            true
         );
         // Additional commands depending on the db driver
         switch ($this->driver) {
@@ -189,6 +221,10 @@ class Install extends Migration
      */
     protected function insertDefaultData()
     {
+        // Insert our default data
+        Seomatic::$plugin->metaBundles->createGlobalMetaBundles();
+        Seomatic::$plugin->metaBundles->createContentMetaBundles();
+        Seomatic::$plugin->frontendTemplates->createFrontendTemplates();
     }
 
     /**
@@ -196,6 +232,9 @@ class Install extends Migration
      */
     protected function removeTables()
     {
+        // seomatic_metabundles table
         $this->dropTableIfExists('{{%seomatic_metabundles}}');
+        // seomatic_frontendtemplates table
+        $this->dropTableIfExists('{{%seomatic_frontendtemplates}}');
     }
 }

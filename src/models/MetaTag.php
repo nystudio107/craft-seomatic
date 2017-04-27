@@ -153,8 +153,6 @@ class MetaTag extends MetaItem
         $data = $this->tagAttributes();
         $this->setScenario($scenario);
         MetaValueHelper::parseArray($data);
-        /** @var  $settings Settings */
-        $settings = Seomatic::$plugin->getSettings();
         // Special-case scenarios
         if (!empty($data['name'])) {
             switch ($data['name']) {
@@ -170,7 +168,7 @@ class MetaTag extends MetaItem
         if (Seomatic::$devMode) {
         }
         // Per environment
-        switch ($settings->environment) {
+        switch (Seomatic::$settings->environment) {
             case 'live':
                 break;
             case 'staging':
