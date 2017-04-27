@@ -1,1 +1,34 @@
-Robots.txt
+# robots.txt for {{ siteUrl }}
+
+Sitemap: {{ siteUrl |trim('/') }}/sitemap.xml
+{% switch craft.seomatic.settings.environment %}
+
+    {% case "live" %}
+
+# live - don't allow web crawlers to index Craft
+
+User-agent: *
+Disallow: /craft/
+
+{% case "staging" %}
+
+# staging - disallow all
+
+User-agent: *
+Disallow: /
+
+{% case "local" %}
+
+# local - disallow all
+
+User-agent: *
+Disallow: /
+
+{% default %}
+
+# Default - don't allow web crawlers to index Craft
+
+User-agent: *
+Disallow: /craft/
+
+{% endswitch %}

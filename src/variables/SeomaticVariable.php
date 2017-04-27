@@ -16,6 +16,7 @@ use nystudio107\seomatic\models\MetaTag;
 use nystudio107\seomatic\models\MetaLink;
 use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\models\MetaScript;
+use nystudio107\seomatic\models\Settings;
 use nystudio107\seomatic\services\MetaContainers;
 
 /**
@@ -25,6 +26,17 @@ use nystudio107\seomatic\services\MetaContainers;
  */
 class SeomaticVariable
 {
+
+    /**
+     * Return the plugin's settings
+     *
+     * @return Settings
+     */
+    public function settings(): Settings
+    {
+        return Seomatic::$settings;
+    }
+
     /**
      * Set the page's <title> tag
      *
