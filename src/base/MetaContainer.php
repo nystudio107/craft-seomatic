@@ -62,7 +62,11 @@ abstract class MetaContainer extends SeomaticContainer implements MetaContainerI
 
         /** @var  $metaItemModel MetaItem*/
         foreach ($this->data as $metaItemModel) {
-            $htmlArray[] = $metaItemModel->render();
+            $htmlArray[] = $metaItemModel->render([
+                'array' => true,
+                'renderRaw' => true,
+                'renderScriptTags' => true,
+            ]);
         }
 
         return $htmlArray;

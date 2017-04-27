@@ -231,6 +231,12 @@ class MetaJsonLd extends MetaItem
     {
         $linebreak = "";
 
+        // If we're rendering for an array, don't add linebreaks
+        $oldDevMode = Seomatic::$devMode;
+        if ($params['renderRaw'] === true) {
+            Seomatic::$devMode = false;
+        }
+
         // If `devMode` is enabled, make the JSON-LD human-readable
         if (Seomatic::$devMode) {
             $linebreak = PHP_EOL;
@@ -250,6 +256,9 @@ class MetaJsonLd extends MetaItem
         }
         if ($params['renderRaw'] === true) {
             $result = Template::raw($result);
+        }
+        if ($params['renderRaw'] === true) {
+            Seomatic::$devMode = $oldDevMode;
         }
 
         return $result;
