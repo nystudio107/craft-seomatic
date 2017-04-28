@@ -73,20 +73,13 @@ class MetaBundles extends Component
     // =========================================================================
 
     /**
-     * @inheritdoc
-     */
-    public function init()
-    {
-        parent::init();
-    }
-
-    /**
      * Invalidate the caches and data structures associated with this MetaBundle
      *
-     * @param int      $sourceId
-     * @param bool     $isNew
+     * @param int  $sourceId
+     * @param bool $isNew
+     * @param bool $sourceDeleted
      */
-    public function invalidateMetaBundleById(int $sourceId, bool $isNew = false)
+    public function invalidateMetaBundleById(int $sourceId, bool $isNew = false, bool $sourceDeleted = false)
     {
         $metaBundleInvalidated = false;
         $sites = Craft::$app->getSites()->getAllSites();
@@ -109,6 +102,12 @@ class MetaBundles extends Component
                         $metaBundle->sourceHandle,
                         $metaBundle->sourceSiteId
                     );
+                } else {
+                    $this->createContentMetaBundleFromId($sourceId, $site->id);
+                }
+                // Delete the meta bundle if the source has been deleted
+                if ($sourceDeleted) {
+                    $this->deleteMetaBundleBySourceId($sourceId, $site->id);
                 }
             }
         }
@@ -226,6 +225,26 @@ class MetaBundles extends Component
     }
 
     /**
+     * Delete a meta bundle by $sourceId
+     *
+     * @param int $sourceId
+     * @param int $siteId
+     */
+    public function deleteMetaBundleBySourceId(int $sourceId, int $siteId)
+    {
+        $metaBundle = null;
+        // Look for a matching meta bundle in the db
+        $metaBundleRecord = MetaBundleRecord::findOne([
+            'sourceId'     => $sourceId,
+            'sourceSiteId' => $siteId,
+        ]);
+
+        if ($metaBundleRecord) {
+            $metaBundleRecord->delete();
+        }
+    }
+
+    /**
      * Return all of the content meta bundles
      *
      * @param bool $allSites
@@ -284,6 +303,38 @@ class MetaBundles extends Component
         }
 
         return $metaBundle;
+    }
+
+    /**
+     * Create a new meta bundle from the $sourceId
+     *
+     * @param int $sourceId
+     * @param int $siteId
+     */
+    public function createContentMetaBundleFromId(int $sourceId, int $siteId)
+    {
+        /** @var  $element Element */
+        $element = Craft::$app->getElements()->getElementById($sourceId, $siteId);
+        switch ($element::className()) {
+            case Entry::class:
+                /** @var  $element Entry */
+                $metaBundle = $this->createMetaBundleFromEntry($element->getSection(), $siteId);
+                if ($metaBundle) {
+                    $metaBundleRecord = new MetaBundleRecord($metaBundle->getAttributes());
+                    $metaBundleRecord->save();
+                }
+                break;
+
+            case Category::class:
+                /** @var  $element Category */
+                $metaBundle = $this->createMetaBundleFromCategory($element->getGroup(), $siteId);
+                if ($metaBundle) {
+                    $metaBundleRecord = new MetaBundleRecord($metaBundle->getAttributes());
+                    $metaBundleRecord->save();
+                }
+                break;
+            // @todo handle commerce products
+        }
     }
 
     /**
@@ -362,6 +413,7 @@ class MetaBundles extends Component
                 $sourceId = $element->groupId;
                 $siteId = $element->siteId;
                 break;
+            // @todo handle commerce products
         }
 
         return [$sourceId, $siteId];

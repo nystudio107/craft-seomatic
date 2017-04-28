@@ -230,7 +230,8 @@ class Seomatic extends Plugin
                 );
                 Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
                     $event->section->id,
-                    $event->isNew
+                    $event->isNew,
+                    false
                 );
             }
         );
@@ -245,7 +246,8 @@ class Seomatic extends Plugin
                 );
                 Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
                     $event->section->id,
-                    false
+                    false,
+                    true
                 );
             }
         );
@@ -260,7 +262,8 @@ class Seomatic extends Plugin
                 );
                 Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
                     $event->categoryGroup->id,
-                    $event->isNew
+                    $event->isNew,
+                    false
                 );
             }
         );
@@ -275,7 +278,8 @@ class Seomatic extends Plugin
                 );
                 Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
                     $event->categoryGroup->id,
-                    false
+                    false,
+                    true
                 );
             }
         );
@@ -288,7 +292,12 @@ class Seomatic extends Plugin
                     'Elements::EVENT_AFTER_SAVE_ELEMENT',
                     'seomatic'
                 );
-                Seomatic::$plugin->metaBundles->invalidateMetaBundleByElement($event->element, $event->isNew);
+                /** @var  $element Element */
+                $element = $event->element;
+                Seomatic::$plugin->metaBundles->invalidateMetaBundleByElement(
+                    $element,
+                    $event->isNew
+                );
             }
         );
         // Handler: Elements::EVENT_AFTER_DELETE_ELEMENT
@@ -300,7 +309,12 @@ class Seomatic extends Plugin
                     'Elements::EVENT_AFTER_DELETE_ELEMENT',
                     'seomatic'
                 );
-                Seomatic::$plugin->metaBundles->invalidateMetaBundleByElement($event->element, false);
+                /** @var  $element Element */
+                $element = $event->element;
+                Seomatic::$plugin->metaBundles->invalidateMetaBundleByElement(
+                    $element,
+                    false
+                );
             }
         );
         // Handler: Plugins::EVENT_AFTER_INSTALL_PLUGIN
