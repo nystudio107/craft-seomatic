@@ -228,9 +228,8 @@ class Seomatic extends Plugin
                     'Sections::EVENT_AFTER_SAVE_SECTION',
                     'seomatic'
                 );
-                Seomatic::$plugin->metaBundles->invalidateMetaBundle(
+                Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
                     $event->section->id,
-                    null,
                     $event->isNew
                 );
             }
@@ -244,9 +243,8 @@ class Seomatic extends Plugin
                     'Sections::EVENT_AFTER_DELETE_SECTION',
                     'seomatic'
                 );
-                Seomatic::$plugin->metaBundles->invalidateMetaBundle(
+                Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
                     $event->section->id,
-                    null,
                     false
                 );
             }
@@ -260,9 +258,8 @@ class Seomatic extends Plugin
                     'Categories::EVENT_AFTER_SAVE_GROUP',
                     'seomatic'
                 );
-                Seomatic::$plugin->metaBundles->invalidateMetaBundle(
+                Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
                     $event->categoryGroup->id,
-                    null,
                     $event->isNew
                 );
             }
@@ -276,9 +273,8 @@ class Seomatic extends Plugin
                     'Categories::EVENT_AFTER_DELETE_GROUP',
                     'seomatic'
                 );
-                Seomatic::$plugin->metaBundles->invalidateMetaBundle(
+                Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
                     $event->categoryGroup->id,
-                    null,
                     false
                 );
             }
@@ -292,17 +288,7 @@ class Seomatic extends Plugin
                     'Elements::EVENT_AFTER_SAVE_ELEMENT',
                     'seomatic'
                 );
-                /** @var  $element Element */
-                $element = $event->element;
-                // See if this is a section we are tracking
-                list($id, $siteId) = Seomatic::$plugin->metaBundles->getMetaSourceIdFromElement($element);
-                if ($id) {
-                    Seomatic::$plugin->metaBundles->invalidateMetaBundle(
-                        $id,
-                        $siteId,
-                        $event->isNew
-                    );
-                }
+                Seomatic::$plugin->metaBundles->invalidateMetaBundleByElement($event->element, $event->isNew);
             }
         );
         // Handler: Elements::EVENT_AFTER_DELETE_ELEMENT
@@ -314,17 +300,7 @@ class Seomatic extends Plugin
                     'Elements::EVENT_AFTER_DELETE_ELEMENT',
                     'seomatic'
                 );
-                /** @var  $element Element */
-                $element = $event->element;
-                // See if this is a section we are tracking
-                list($id, $siteId) = Seomatic::$plugin->metaBundles->getMetaSourceIdFromElement($element);
-                if ($id) {
-                    Seomatic::$plugin->metaBundles->invalidateMetaBundle(
-                        $id,
-                        $siteId,
-                        false
-                    );
-                }
+                Seomatic::$plugin->metaBundles->invalidateMetaBundleByElement($event->element, false);
             }
         );
         // Handler: Plugins::EVENT_AFTER_INSTALL_PLUGIN

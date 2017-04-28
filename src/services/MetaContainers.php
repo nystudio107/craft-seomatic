@@ -93,6 +93,11 @@ class MetaContainers extends Component
      */
     protected $loadingContainers = false;
 
+    /**
+     * @var null|MetaBundle
+     */
+    protected $matchedMetaBundle = null;
+
     // Public Methods
     // =========================================================================
 
@@ -116,6 +121,12 @@ class MetaContainers extends Component
         if (empty($this->metaContainers && !$this->loadingContainers)) {
             $this->loadingContainers = true;
             $this->setMatchedElement($path, $siteId);
+            // Get the cache tag for the matched meta bundle
+            $metaBundle = $this->getMatchedMetaBundle();
+            $metaBundleSourceId = "";
+            if ($metaBundle) {
+                $metaBundleSourceId = $metaBundle->sourceId;
+            }
             // Load the meta containers
             $duration = Seomatic::$devMode
                 ? $this::DEVMODE_METACONTAINER_CACHE_DURATION
@@ -123,6 +134,7 @@ class MetaContainers extends Component
             $dependency = new TagDependency([
                 'tags' => [
                     $this::GLOBAL_METACONTAINER_CACHE_TAG,
+                    $this::METACONTAINER_CACHE_TAG . $metaBundleSourceId,
                     $this::METACONTAINER_CACHE_TAG . $path . $siteId,
                 ],
             ]);
@@ -135,7 +147,7 @@ class MetaContainers extends Component
                         'seomatic'
                     );
                     $this->loadGlobalMetaContainers($siteId);
-                    $this->loadContentMetaContainers($path, $siteId);
+                    $this->loadContentMetaContainers();
                     $this->addMetaJsonLdBreadCrumbs($siteId);
                     $this->addMetaLinkHrefLang();
 
@@ -300,6 +312,7 @@ class MetaContainers extends Component
         return $htmlArray;
     }
 
+
     // Protected Methods
     // =========================================================================
 
@@ -344,22 +357,29 @@ class MetaContainers extends Component
     }
 
     /**
-     * Load the meta containers specific to the URI passed in $path,
-     * and combine it with the global meta containers
-     *
-     * @param string   $path
-     * @param int|null $siteId
-     *
-     * @internal param null|string $template
+     * Load the meta containers specific to the matched meta bundle
      */
-    protected function loadContentMetaContainers(string $path, int $siteId = null)
+    protected function loadContentMetaContainers()
     {
-        $metaBundle = null;
-        if (!$siteId) {
-            $siteId = Craft::$app->getSites()->primarySite->id;
+        $metaBundle = $this->getMatchedMetaBundle();
+        if ($metaBundle) {
+            $this->addMetaBundleToContainers($metaBundle);
         }
+    }
+
+    /**
+     * Return the MetaBundle that corresponds with the Seomatic::$matchedElement
+     *
+     * @return null|MetaBundle
+     */
+    public function getMatchedMetaBundle()
+    {
+        if ($this->matchedMetaBundle) {
+            return $this->matchedMetaBundle;
+        }
+        $metaBundle = null;
         /** @var Element $element */
-        $element = Craft::$app->getElements()->getElementByUri($path, $siteId, true);
+        $element = Seomatic::$matchedElement;
         if ($element) {
             list($sourceId, $sourceSiteId) = Seomatic::$plugin->metaBundles->getMetaSourceIdFromElement($element);
             $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
@@ -367,9 +387,9 @@ class MetaContainers extends Component
                 $sourceSiteId
             );
         }
-        if ($metaBundle) {
-            $this->addMetaBundleToContainers($metaBundle);
-        }
+        $this->matchedMetaBundle = $metaBundle;
+
+        return $metaBundle;
     }
 
     /**
@@ -458,12 +478,31 @@ class MetaContainers extends Component
     }
 
     /**
-     * Invalidate a meta container cache
+     * Invalidate a meta bundle cache
+     *
+     * @param int $sourceId
+     */
+    public function invalidateContainerCacheById(int $sourceId)
+    {
+        $metaBundleSourceId = "";
+        if ($sourceId) {
+            $metaBundleSourceId = $sourceId;
+        }
+        $cache = Craft::$app->getCache();
+        TagDependency::invalidate($cache, $this::METACONTAINER_CACHE_TAG . $metaBundleSourceId);
+        Craft::info(
+            'Meta bundle cache cleared: ' . $metaBundleSourceId,
+            'seomatic'
+        );
+    }
+
+    /**
+     * Invalidate a meta bundle cache
      *
      * @param string $path
      * @param int    $siteId
      */
-    public function invalidateContainerCache(string $path, int $siteId)
+    public function invalidateContainerCacheByPath(string $path, int $siteId)
     {
         $cache = Craft::$app->getCache();
         TagDependency::invalidate($cache, $this::METACONTAINER_CACHE_TAG . $path . $siteId);
