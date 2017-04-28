@@ -46,6 +46,15 @@ class MetaBundles extends Component
         'uid',
     ];
 
+    const META_BUNDLE_UPDATE_ATTRIBUTES = [
+        'sourceName',
+        'sourceHandle',
+        'sourceTemplate',
+        'sourceSiteId',
+        'sourceAltSiteSettings',
+        'sourceDateUpdated',
+    ];
+
     // Protected Properties
     // =========================================================================
 
@@ -94,14 +103,17 @@ class MetaBundles extends Component
                     . $site->id,
                     'seomatic'
                 );
-                // Invalidate sitemap caches after an existing section is saved
+                // Is this a new source?
                 if (!$isNew) {
                     $metaBundleInvalidated = true;
+                    // Invalidate caches after an existing section is saved
                     Seomatic::$plugin->metaContainers->invalidateContainerCacheById($sourceId);
                     Seomatic::$plugin->sitemaps->invalidateSitemapCache(
                         $metaBundle->sourceHandle,
                         $metaBundle->sourceSiteId
                     );
+                    // Update the meta bundle data
+                    $this->updateMetaBundleById($sourceId, $site->id);
                 } else {
                     $this->createContentMetaBundleFromId($sourceId, $site->id);
                 }
@@ -228,19 +240,26 @@ class MetaBundles extends Component
      * Delete a meta bundle by $sourceId
      *
      * @param int $sourceId
-     * @param int $siteId
+     * @param int $sourceSiteId
      */
-    public function deleteMetaBundleBySourceId(int $sourceId, int $siteId)
+    public function deleteMetaBundleBySourceId(int $sourceId, int $sourceSiteId)
     {
-        $metaBundle = null;
+        $metaBundleRecord = null;
         // Look for a matching meta bundle in the db
         $metaBundleRecord = MetaBundleRecord::findOne([
             'sourceId'     => $sourceId,
-            'sourceSiteId' => $siteId,
+            'sourceSiteId' => $sourceSiteId,
         ]);
 
         if ($metaBundleRecord) {
             $metaBundleRecord->delete();
+            Craft::info(
+                'Meta bundle deleted: '
+                . $sourceId
+                . ' from siteId: '
+                . $sourceSiteId,
+                'seomatic'
+            );
         }
     }
 
@@ -309,31 +328,106 @@ class MetaBundles extends Component
      * Create a new meta bundle from the $sourceId
      *
      * @param int $sourceId
-     * @param int $siteId
+     * @param int $sourceSiteId
      */
-    public function createContentMetaBundleFromId(int $sourceId, int $siteId)
+    public function createContentMetaBundleFromId(int $sourceId, int $sourceSiteId)
     {
         /** @var  $element Element */
-        $element = Craft::$app->getElements()->getElementById($sourceId, $siteId);
+        $element = Craft::$app->getElements()->getElementById($sourceId, null, $sourceSiteId);
         switch ($element::className()) {
             case Entry::class:
                 /** @var  $element Entry */
-                $metaBundle = $this->createMetaBundleFromEntry($element->getSection(), $siteId);
+                $metaBundle = $this->createMetaBundleFromEntry($element->getSection(), $sourceSiteId);
                 if ($metaBundle) {
                     $metaBundleRecord = new MetaBundleRecord($metaBundle->getAttributes());
                     $metaBundleRecord->save();
+                    Craft::info(
+                        'Meta bundle created: '
+                        . $sourceId
+                        . ' from siteId: '
+                        . $sourceSiteId,
+                        'seomatic'
+                    );
                 }
                 break;
 
             case Category::class:
                 /** @var  $element Category */
-                $metaBundle = $this->createMetaBundleFromCategory($element->getGroup(), $siteId);
+                $metaBundle = $this->createMetaBundleFromCategory($element->getGroup(), $sourceSiteId);
                 if ($metaBundle) {
                     $metaBundleRecord = new MetaBundleRecord($metaBundle->getAttributes());
                     $metaBundleRecord->save();
+                    Craft::info(
+                        'Meta bundle created: '
+                        . $sourceId
+                        . ' from siteId: '
+                        . $sourceSiteId,
+                        'seomatic'
+                    );
                 }
                 break;
             // @todo handle commerce products
+        }
+    }
+
+    /**
+     * Update the meta bundle to make sure it's in sync
+     *
+     * @param int $sourceId
+     * @param int $sourceSiteId
+     */
+    public function updateMetaBundleById(int $sourceId, int $sourceSiteId)
+    {
+        $metaBundleRecord = null;
+        // Look for a matching meta bundle in the db
+        $metaBundleRecord = MetaBundleRecord::findOne([
+            'sourceId'     => $sourceId,
+            'sourceSiteId' => $sourceSiteId,
+        ]);
+        /** @var  $metaBundleRecord MetaBundle */
+        if ($metaBundleRecord) {
+            /** @var  $element Element */
+            $element = Craft::$app->getElements()->getElementById($sourceId, null, $sourceSiteId);
+            switch ($metaBundleRecord->sourceType) {
+                case Entry::class:
+                    /** @var  $element Entry */
+                    $metaBundle = $this->createMetaBundleFromEntry($element->getSection(), $sourceSiteId);
+                    if ($metaBundle) {
+                        /** @var  $metaBundleRecord MetaBundleRecord */
+                        $metaBundleRecord->setAttributes(
+                            $metaBundle->getAttributes(self::META_BUNDLE_UPDATE_ATTRIBUTES)
+                        );
+                        $metaBundleRecord->save();
+                        Craft::info(
+                            'Meta bundle updated: '
+                            . $sourceId
+                            . ' from siteId: '
+                            . $sourceSiteId,
+                            'seomatic'
+                        );
+                    }
+                    break;
+
+                case Category::class:
+                    /** @var  $element Category */
+                    $metaBundle = $this->createMetaBundleFromCategory($element->getGroup(), $sourceSiteId);
+                    if ($metaBundle) {
+                        /** @var  $metaBundleRecord MetaBundleRecord */
+                        $metaBundleRecord->setAttributes(
+                            $metaBundle->getAttributes(self::META_BUNDLE_UPDATE_ATTRIBUTES)
+                        );
+                        $metaBundleRecord->save();
+                    }
+                    Craft::info(
+                        'Meta bundle updated: '
+                        . $sourceId
+                        . ' from siteId: '
+                        . $sourceSiteId,
+                        'seomatic'
+                    );
+                    break;
+                // @todo handle commerce products
+            }
         }
     }
 
