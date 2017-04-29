@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic;
 
+use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\helpers\MetaValue;
 use nystudio107\seomatic\models\Settings;
@@ -22,6 +23,7 @@ use nystudio107\seomatic\services\Sitemaps as SitemapsService;
 use nystudio107\seomatic\twigextensions\SeomaticTwigExtension;
 use nystudio107\seomatic\variables\SeomaticVariable;
 use nystudio107\seomatic\web\ErrorHandler as SeomaticErrorHandler;
+
 
 use Craft;
 use craft\base\Element;
@@ -48,11 +50,11 @@ use yii\base\Event;
  * @package   Seomatic
  * @since     3.0.0
  *
- * @property  FrontendTemplatesService    frontendTemplates
- * @property  MetaBundlesService          metaBundles
- * @property  MetaContainersService       metaContainers
- * @property  RedirectsService            redirects
- * @property  SitemapsService             sitemaps
+ * @property  FrontendTemplatesService frontendTemplates
+ * @property  MetaBundlesService       metaBundles
+ * @property  MetaContainersService    metaContainers
+ * @property  RedirectsService         redirects
+ * @property  SitemapsService          sitemaps
  */
 class Seomatic extends Plugin
 {
@@ -144,6 +146,29 @@ class Seomatic extends Plugin
             Craft::$app->set('errorHandler', $handler);
             $handler->register();
         }
+        // AdminCP magic
+        if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
+            Craft::$app->getView()->hook('cp.entries.edit.right-pane', function (&$context) {
+                self::$view->registerAssetBundle(SeomaticAsset::class);
+                // Render our sidebar template
+                return Craft::$app->view->renderTemplate(
+                    'seomatic/_sidebar',
+                    [
+                        'settings' => $this->getSettings(),
+                    ]
+                );
+            });
+            Craft::$app->getView()->hook('cp.categories.edit.right-pane', function (&$context) {
+                self::$view->registerAssetBundle(SeomaticAsset::class);
+                // Render our sidebar template
+                return Craft::$app->view->renderTemplate(
+                    'seomatic/_sidebar',
+                    [
+                        'settings' => $this->getSettings(),
+                    ]
+                );
+            });
+        }
     }
 
     /**
@@ -195,27 +220,27 @@ class Seomatic extends Plugin
                 );
                 // Frontend template caches
                 $event->options[] = [
-                    'key' => 'seomatic-frontendtemplate-caches',
-                    'label' => Craft::t('seomatic', 'SEOmatic frontend template caches'),
+                    'key'    => 'seomatic-frontendtemplate-caches',
+                    'label'  => Craft::t('seomatic', 'SEOmatic frontend template caches'),
                     'action' => function () {
                         Seomatic::$plugin->frontendTemplates->invalidateCaches();
-                    }
+                    },
                 ];
                 // Meta bundle caches
                 $event->options[] = [
-                    'key' => 'seomatic-metabundle-caches',
-                    'label' => Craft::t('seomatic', 'SEOmatic metadata caches'),
+                    'key'    => 'seomatic-metabundle-caches',
+                    'label'  => Craft::t('seomatic', 'SEOmatic metadata caches'),
                     'action' => function () {
                         Seomatic::$plugin->metaContainers->invalidateCaches();
-                    }
+                    },
                 ];
                 // Sitemap caches
                 $event->options[] = [
-                    'key' => 'seomatic-sitemap-caches',
-                    'label' => Craft::t('seomatic', 'SEOmatic sitemap caches'),
+                    'key'    => 'seomatic-sitemap-caches',
+                    'label'  => Craft::t('seomatic', 'SEOmatic sitemap caches'),
                     'action' => function () {
                         Seomatic::$plugin->sitemaps->invalidateCaches();
-                    }
+                    },
                 ];
             }
         );
