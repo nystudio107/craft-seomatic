@@ -85,6 +85,27 @@ class MetaValue extends Component
     }
 
     /**
+     * Get the language from a siteId
+     *
+     * @param int $siteId
+     *
+     * @return string
+     */
+    public static function getSiteLanguage(int $siteId): string
+    {
+        $site = Craft::$app->getSites()->getSiteById($siteId);
+        if ($site) {
+            $language = $site->language;
+        } else {
+            $language = Craft::$app->language;
+        }
+        $language = strtolower($language);
+        $language = str_replace('_', '-', $language);
+
+        return $language;
+    }
+
+    /**
      * Cache frequently accessed properties locally
      */
     public static function cache()

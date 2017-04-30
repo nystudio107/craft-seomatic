@@ -14,6 +14,7 @@ namespace nystudio107\seomatic\services;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\base\MetaItem;
+use nystudio107\seomatic\helpers\MetaValue;
 use nystudio107\seomatic\models\jsonld\BreadcrumbList;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaGlobalVars;
@@ -223,7 +224,7 @@ class MetaContainers extends Component
         // If $uniqueKeys is set, generate a hash of the data for the key
         $dataKey = $data->key;
         if ($data->uniqueKeys) {
-            $dataKey = $this->getHash($data);
+            $dataKey = $dataKey . $this->getHash($data);
         }
         $container->addData($data, $dataKey);
     }
@@ -419,6 +420,7 @@ class MetaContainers extends Component
         if ($metaBundle) {
             // Meta global vars
             $this->metaGlobalVars = $metaBundle->metaGlobalVars;
+            $this->metaGlobalVars->language = Seomatic::$language;
             // Meta containers
             foreach ($metaBundle->metaTagContainer as $metaTagContainer) {
                 $key = self::SEOMATIC_METATAG_CONTAINER . $metaTagContainer->handle;
@@ -506,6 +508,7 @@ class MetaContainers extends Component
         $attributes = $metaBundle->metaGlobalVars->getAttributes();
         $attributes = array_filter($attributes);
         $this->metaGlobalVars->setAttributes($attributes, false);
+        $this->metaGlobalVars->language = Seomatic::$language;
         // Meta containers
         foreach ($metaBundle->metaTagContainer as $metaTagContainer) {
             $key = self::SEOMATIC_METATAG_CONTAINER . $metaTagContainer->handle;

@@ -14,6 +14,7 @@ namespace nystudio107\seomatic\services;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
+use nystudio107\seomatic\helpers\MetaValue;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\records\MetaBundle as MetaBundleRecord;
 
@@ -517,23 +518,6 @@ class MetaBundles extends Component
     // =========================================================================
 
     /**
-     * Get the language from a siteId
-     *
-     * @param int $siteId
-     *
-     * @return string
-     */
-    protected function getSiteLanguage(int $siteId): string
-    {
-        $site = Craft::$app->getSites()->getSiteById($siteId);
-        $language = $site->language;
-        $language = strtolower($language);
-        $language = str_replace('_', '-', $language);
-
-        return $language;
-    }
-
-    /**
      * @param CategoryGroup $category
      * @param int           $siteId
      *
@@ -551,7 +535,7 @@ class MetaBundles extends Component
                 if ($siteSetting->hasUrls) {
                     $siteSettingArray = $siteSetting->toArray();
                     // Get the site language
-                    $siteSettingArray['language'] = $this->getSiteLanguage($siteSetting->siteId);
+                    $siteSettingArray['language'] = MetaValue::getSiteLanguage($siteSetting->siteId);
                     $siteSettingsArray[] = $siteSettingArray;
                 }
             }
@@ -607,7 +591,7 @@ class MetaBundles extends Component
                 if ($siteSetting->hasUrls) {
                     $siteSettingArray = $siteSetting->toArray();
                     // Get the site language
-                    $siteSettingArray['language'] = $this->getSiteLanguage($siteSetting->siteId);
+                    $siteSettingArray['language'] = MetaValue::getSiteLanguage($siteSetting->siteId);
                     $siteSettingsArray[] = $siteSettingArray;
                 }
             }

@@ -93,6 +93,11 @@ class Seomatic extends Plugin
      */
     public static $view;
 
+    /**
+     * @var
+     */
+    public static $language;
+
     // Static Methods
     // =========================================================================
 
@@ -104,6 +109,8 @@ class Seomatic extends Plugin
     public static function setMatchedElement($element)
     {
         self::$matchedElement = $element;
+        /** @var  $element Element */
+        self::$language = MetaValue::getSiteLanguage($element->siteId);
         MetaValueHelper::cache();
     }
 

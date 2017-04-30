@@ -49,6 +49,11 @@ class MetaGlobalVars extends Model
     // =========================================================================
 
     /**
+     * @var
+     */
+    public $language;
+
+    /**
      * @var string
      */
     public $seoTitle;
@@ -77,7 +82,7 @@ class MetaGlobalVars extends Model
     public function rules()
     {
         return [
-            [['seoTitle', 'seoDescription', 'seoImage'], 'string'],
+            [['language', 'seoTitle', 'seoDescription', 'seoImage'], 'string'],
             [['canonicalUrl'], 'url'],
         ];
     }
