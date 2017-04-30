@@ -43,7 +43,9 @@ class MetaTitle extends MetaItem
     {
         $model = null;
         $model = new MetaTitle($config);
-        $model->key = 'title';
+        if (empty($model->key)) {
+            $model->key = 'title';
+        }
 
         return $model;
     }

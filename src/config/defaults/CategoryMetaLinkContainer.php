@@ -25,15 +25,6 @@ return [
         'handle'      => MetaContainers::METALINK_GENERAL_HANDLE,
         'include'     => 'true',
         'data'        => [
-            'canonical' => [
-                'crossorigin' => '',
-                'href'        => '{{ seomatic.canonicalUrl }}',
-                'hreflang'    => '',
-                'media'       => '',
-                'rel'         => 'canonical',
-                'sizes'       => '',
-                'type'        => '',
-            ],
         ],
     ],
 ];

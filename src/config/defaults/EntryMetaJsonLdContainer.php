@@ -25,6 +25,20 @@ return [
         'handle'      => MetaContainers::METAJSONLD_GENERAL_HANDLE,
         'include'     => 'true',
         'data'        => [
+            'mainEntityOfPage' => [
+                'type'             => 'WebPage',
+                'name'             => '{{ seomatic.seoTitle }}',
+                'description'      => '{{ seomatic.seoDescription }}',
+                'image'            => [
+                    'type'   => 'ImageObject',
+                    'url'    => '{{ seomatic.seoImage }}',
+                    'width'  => '1200',
+                    'height' => '804',
+                ],
+                'url'              => '{{ seomatic.canonicalUrl }}',
+                'mainEntityOfPage' => '{{ seomatic.canonicalUrl }}',
+                'inLanguage'       => '{language}',
+            ],
         ],
     ],
 ];

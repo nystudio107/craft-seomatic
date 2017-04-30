@@ -31,15 +31,22 @@
 
     <table class="data">
         <thead class="sections first">
+        {#
         <tr>
             <th colspan="6">
                 <h1>{{ "Content"|t }}</h1>
             </th>
         </tr>
+        #}
         <tr>
             <th>{{ "Name"|t }}</th>
             <th class="thin">{{ "Entries"|t }}</th>
             <th>{{ "Type"|t }}</th>
+            <th>{{ "Meta Tags"|t }}</th>
+            <th>{{ "Link Tags"|t }}</th>
+            <th>{{ "Script Tags"|t }}</th>
+            <th>{{ "Structured Data"|t }}</th>
+            <th>{{ "Sitemap"|t }}</th>
             <th class="thin"></th>
         </tr>
         </thead>
@@ -56,6 +63,33 @@
                 </td>
                 <td>
                     {{ metaBundle.sourceType }}
+                </td>
+                <td>
+                    {% for metaTagContainer in metaBundle.metaTagContainer %}
+                        {{ metaTagContainer.data |length }}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for metaLinkContainer in metaBundle.metaLinkContainer %}
+                        {{ metaLinkContainer.data |length }}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for metaScriptContainer in metaBundle.metaScriptContainer %}
+                        {{ metaScriptContainer.data |length }}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for metaJsonLdContainer in metaBundle.metaJsonLdContainer %}
+                        {{ metaJsonLdContainer.data |length }}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% if metaBundle.sitemapUrls %}
+                        &check;
+                    {% else %}
+                        &cross;
+                    {% endif %}
                 </td>
                 <td></td>
             </tr>

@@ -50,11 +50,13 @@ class MetaLink extends MetaItem
             ArrayHelper::rename($config, $key, Inflector::variablize($key));
         }
         $model = new MetaLink($config);
-        $model->key = $model->rel;
+        if (empty($model->key)) {
+            $model->key = $model->rel;
 
-        // Unique keys for specific tags
-        if (in_array($model->rel, self::UNIQUEKEYS_TAGS)) {
-            $model->uniqueKeys = true;
+            // Unique keys for specific tags
+            if (in_array($model->rel, self::UNIQUEKEYS_TAGS)) {
+                $model->uniqueKeys = true;
+            }
         }
 
         return $model;

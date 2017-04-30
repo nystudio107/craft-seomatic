@@ -179,7 +179,9 @@ class MetaJsonLd extends MetaItem
         if (class_exists($className)) {
             $model = new $className($config);
         }
-        $model->key = $model->type;
+        if (empty($model->key)) {
+            $model->key = $model->type;
+        }
 
         return $model;
     }

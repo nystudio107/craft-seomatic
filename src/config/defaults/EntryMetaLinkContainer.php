@@ -25,33 +25,6 @@ return [
         'handle'      => MetaContainers::METALINK_GENERAL_HANDLE,
         'include'     => 'true',
         'data'        => [
-            'canonical' => [
-                'crossorigin' => '',
-                'href'        => '{{ seomatic.canonicalUrl }}',
-                'hreflang'    => '',
-                'media'       => '',
-                'rel'         => 'canonical',
-                'sizes'       => '',
-                'type'        => '',
-            ],
-            'author'    => [
-                'crossorigin' => '',
-                'href'        => '/humans.txt',
-                'hreflang'    => '',
-                'media'       => '',
-                'rel'         => 'author',
-                'sizes'       => '',
-                'type'        => 'text/plain',
-            ],
-            'publisher' => [
-                'crossorigin' => '',
-                'href'        => '{seomatic.social.googlePublisherLink}',
-                'hreflang'    => '',
-                'media'       => '',
-                'rel'         => 'publisher',
-                'sizes'       => '',
-                'type'        => '',
-            ],
         ],
     ],
 ];

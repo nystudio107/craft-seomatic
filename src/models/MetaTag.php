@@ -60,11 +60,12 @@ class MetaTag extends MetaItem
             ArrayHelper::rename($config, $key, Inflector::variablize($key));
         }
         $model = new MetaTag($config);
-        $model->key = $model->name ?: $model->httpEquiv;
-
-        // Unique keys for specific tags
-        if (in_array($model->name, self::UNIQUEKEYS_TAGS)) {
-            $model->uniqueKeys = true;
+        if (empty($model->key)) {
+            $model->key = $model->name ?: $model->httpEquiv;
+            // Unique keys for specific tags
+            if (in_array($model->name, self::UNIQUEKEYS_TAGS)) {
+                $model->uniqueKeys = true;
+            }
         }
 
         return $model;
