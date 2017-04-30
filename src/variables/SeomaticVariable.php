@@ -167,4 +167,65 @@ class SeomaticVariable
     {
         return Seomatic::$plugin->metaBundles->getContentMetaBundles($allSites);
     }
+
+    /**
+     * Return a MetaTag object by $key
+     *
+     * @param string $key
+     *
+     * @return null|MetaTag
+     */
+    public function getMetaTagByKey(string $key)
+    {
+        /** @var  $metaTag MetaTag */
+        $metaTag = Seomatic::$plugin->metaContainers->getMetaTagByKey($key);
+
+        return $metaTag;
+    }
+
+    /**
+     * Return a MetaLink object by $key
+     *
+     * @param string $key
+     *
+     * @return null|MetaLink
+     */
+    public function getMetaLinkByKey(string $key)
+    {
+        /** @var  $metaLink MetaLink */
+        $metaLink = Seomatic::$plugin->metaContainers->getMetaLinkByKey($key);
+
+        return $metaLink;
+    }
+
+    /**
+     * Return a MetaScript object by $key
+     *
+     * @param string $key
+     *
+     * @return null|MetaScript
+     */
+    public function getMetaScriptByKey(string $key)
+    {
+        /** @var  $metaScript MetaScript */
+        $metaScript = Seomatic::$plugin->metaContainers->getMetaScriptByKey($key);
+
+        return $metaScript;
+    }
+
+    /**
+     * Return a MetaJsonLd object by $key
+     *
+     * @param string $key
+     *
+     * @return null|MetaJsonLd
+     */
+    public function getMetaJsonLdByKey(string $key)
+    {
+        /** @var  $metaJsonLd MetaJsonLd */
+        $metaJsonLd = Seomatic::$plugin->metaContainers->getMetaJsonLdByKey($key);
+
+        return $metaJsonLd;
+    }
+
 }

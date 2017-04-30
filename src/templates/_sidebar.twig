@@ -2,4 +2,6 @@
 
 <div class="pane social-poster-pane">
     hello, world
+    {% set metaDescription = craft.seomatic.getMetaTagByKey('description') %}
+    {{ dump(metaDescription) }}
 </div>

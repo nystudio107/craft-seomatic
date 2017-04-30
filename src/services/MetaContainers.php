@@ -316,6 +316,91 @@ class MetaContainers extends Component
         return $htmlArray;
     }
 
+    /**
+     * Return a MetaTag object by $key
+     *
+     * @param string $key
+     *
+     * @return null|MetaTag
+     */
+    public function getMetaTagByKey(string $key)
+    {
+        /** @var  $metaTag MetaTag */
+        $metaTag = $this->getMetaItemByKey($key, MetaTagContainer::CONTAINER_TYPE);
+
+        return $metaTag;
+    }
+
+    /**
+     * Return a MetaLink object by $key
+     *
+     * @param string $key
+     *
+     * @return null|MetaLink
+     */
+    public function getMetaLinkByKey(string $key)
+    {
+        /** @var  $metaLink MetaLink */
+        $metaLink = $this->getMetaItemByKey($key, MetaLinkContainer::CONTAINER_TYPE);
+
+        return $metaLink;
+    }
+
+    /**
+     * Return a MetaScript object by $key
+     *
+     * @param string $key
+     *
+     * @return null|MetaScript
+     */
+    public function getMetaScriptByKey(string $key)
+    {
+        /** @var  $metaScript MetaScript */
+        $metaScript = $this->getMetaItemByKey($key, MetaScriptContainer::CONTAINER_TYPE);
+
+        return $metaScript;
+    }
+
+    /**
+     * Return a MetaJsonLd object by $key
+     *
+     * @param string $key
+     *
+     * @return null|MetaJsonLd
+     */
+    public function getMetaJsonLdByKey(string $key)
+    {
+        /** @var  $metaJsonLd MetaJsonLd */
+        $metaJsonLd = $this->getMetaItemByKey($key, MetaJsonLdContainer::CONTAINER_TYPE);
+
+        return $metaJsonLd;
+    }
+
+    /**
+     * Return a MetaLink object by $key from container $type
+     *
+     * @param string $key
+     * @param string $type
+     *
+     * @return null|MetaItem
+     */
+    public function getMetaItemByKey(string $key, string $type)
+    {
+        $metaItem = null;
+        /** @var  $metaContainer MetaContainer */
+        foreach ($this->metaContainers as $metaContainer) {
+            if ($metaContainer::CONTAINER_TYPE == $type) {
+                /** @var  $metaTag MetaItem */
+                foreach ($metaContainer->data as $metaItem) {
+                    if ($key == $metaItem->key) {
+                        return $metaItem;
+                    }
+                }
+            }
+        }
+
+        return $metaItem;
+    }
 
     // Protected Methods
     // =========================================================================

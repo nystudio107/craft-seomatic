@@ -29,6 +29,8 @@ use Craft;
 use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\base\Plugin;
+use craft\elements\Entry;
+use craft\elements\Category;
 use craft\events\CategoryGroupEvent;
 use craft\events\ElementEvent;
 use craft\events\PluginEvent;
@@ -149,24 +151,41 @@ class Seomatic extends Plugin
         // AdminCP magic
         if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
             Craft::$app->getView()->hook('cp.entries.edit.right-pane', function (&$context) {
+                $html = '';
                 self::$view->registerAssetBundle(SeomaticAsset::class);
-                // Render our sidebar template
-                return Craft::$app->view->renderTemplate(
-                    'seomatic/_sidebar',
-                    [
-                        'settings' => $this->getSettings(),
-                    ]
-                );
+                /** @var  $entry Entry */
+                $entry = $context['entry'];
+                if ($entry) {
+                    Seomatic::$plugin->metaContainers->loadMetaContainers($entry->uri, $entry->siteId);
+                    // Render our sidebar template
+                    $html = Craft::$app->view->renderTemplate(
+                        'seomatic/_sidebar',
+                        [
+                            'settings' => $this->getSettings(),
+                        ]
+                    );
+                }
+
+                return $html;
             });
             Craft::$app->getView()->hook('cp.categories.edit.right-pane', function (&$context) {
+                $html = '';
                 self::$view->registerAssetBundle(SeomaticAsset::class);
-                // Render our sidebar template
-                return Craft::$app->view->renderTemplate(
-                    'seomatic/_sidebar',
-                    [
-                        'settings' => $this->getSettings(),
-                    ]
-                );
+                /** @var  $category Category */
+                $category = $context['category'];
+                if ($category) {
+                    Seomatic::$plugin->metaContainers->loadMetaContainers($category->uri, $category->siteId);
+
+                    // Render our sidebar template
+                    $html = Craft::$app->view->renderTemplate(
+                        'seomatic/_sidebar',
+                        [
+                            'settings' => $this->getSettings(),
+                        ]
+                    );
+                }
+                
+                return $html;
             });
         }
     }
