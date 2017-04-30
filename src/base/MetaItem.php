@@ -11,11 +11,11 @@
 
 namespace nystudio107\seomatic\base;
 
+use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 use Craft;
 use craft\base\Model;
-use craft\helpers\ArrayHelper;
 
 use yii\base\InvalidParamException;
 use yii\helpers\Inflector;

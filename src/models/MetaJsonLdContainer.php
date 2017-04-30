@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
+use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 use Craft;
@@ -43,6 +44,28 @@ class MetaJsonLdContainer extends MetaContainer
 
     // Public Methods
     // =========================================================================
+
+    /**
+     * @inheritdoc
+     */
+    public function renderArray($params = []): array
+    {
+        $htmlArray = [];
+
+        /** @var  $metaItemModel MetaJsonLd */
+        foreach ($this->data as $metaItemModel) {
+            // Render the resulting JSON-LD
+            $scenario = $this->scenario;
+            $this->setScenario('render');
+            $htmlArray[] = ArrayHelper::arrayFilterRecursive(
+                $metaItemModel->toArray(),
+                [ArrayHelper::class, 'unsetNullChildren']
+            );
+            $this->setScenario($scenario);
+        }
+
+        return $htmlArray;
+    }
 
     /**
      * @inheritdoc

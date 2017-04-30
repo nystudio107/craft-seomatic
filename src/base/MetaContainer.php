@@ -47,7 +47,7 @@ abstract class MetaContainer extends SeomaticContainer implements MetaContainerI
 
         /** @var  $metaItemModel MetaItem*/
         foreach ($this->data as $metaItemModel) {
-            $html .= $metaItemModel->render();
+            $html .= $metaItemModel->render($params);
         }
 
         return $html;
@@ -62,11 +62,7 @@ abstract class MetaContainer extends SeomaticContainer implements MetaContainerI
 
         /** @var  $metaItemModel MetaItem*/
         foreach ($this->data as $metaItemModel) {
-            $htmlArray[] = $metaItemModel->render([
-                'array' => true,
-                'renderRaw' => true,
-                'renderScriptTags' => true,
-            ]);
+            $htmlArray[] = array_filter($metaItemModel->toArray());
         }
 
         return $htmlArray;

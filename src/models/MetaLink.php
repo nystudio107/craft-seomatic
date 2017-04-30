@@ -13,9 +13,8 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaItem;
+use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
-
-use craft\helpers\ArrayHelper;
 
 use yii\helpers\Html;
 use yii\helpers\Inflector;

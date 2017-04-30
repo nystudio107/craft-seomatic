@@ -285,7 +285,11 @@ class MetaContainers extends Component
         /** @var  $metaContainer MetaContainer */
         foreach ($this->metaContainers as $metaContainer) {
             if ($metaContainer::CONTAINER_TYPE == $type) {
-                $html .= $metaContainer->render();
+                $html .= $metaContainer->render([
+                    'renderRaw'        => true,
+                    'renderScriptTags' => true,
+                    'array'            => true,
+                ]);
             }
         }
 

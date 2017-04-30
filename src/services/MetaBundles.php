@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\records\MetaBundle as MetaBundleRecord;
@@ -22,7 +23,6 @@ use craft\base\Element;
 use craft\db\Query;
 use craft\elements\Category;
 use craft\elements\Entry;
-use craft\helpers\ArrayHelper;
 use craft\models\Section_SiteSettings;
 use craft\models\CategoryGroup_SiteSettings;
 use craft\models\CategoryGroup;
