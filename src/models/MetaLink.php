@@ -114,7 +114,7 @@ class MetaLink extends MetaItem
                 'use-credentials'
             ]],
             ['href', 'url'],
-            ['hreflang', 'url'],
+            ['hreflang', 'string'],
             ['rel', 'required'],
             ['rel', 'in', 'range' => [
                 'alternate',
