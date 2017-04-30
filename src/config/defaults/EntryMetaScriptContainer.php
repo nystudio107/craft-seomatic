@@ -21,13 +21,10 @@ use nystudio107\seomatic\services\MetaContainers;
 return [
     [
         'name'        => 'General',
-        'description' => 'Meta Title Tag',
-        'handle'      => MetaContainers::METATITLE_GENERAL_HANDLE,
+        'description' => 'Script Tags',
+        'handle'      => MetaContainers::METASCRIPT_GENERAL_HANDLE,
         'include'     => 'true',
         'data'        => [
-            'title' => [
-                'title' => '{{ seomatic.seoTitle }}',
-            ],
         ],
     ],
 ];

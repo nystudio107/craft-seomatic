@@ -21,12 +21,18 @@ use nystudio107\seomatic\services\MetaContainers;
 return [
     [
         'name'        => 'General',
-        'description' => 'Meta Title Tag',
-        'handle'      => MetaContainers::METATITLE_GENERAL_HANDLE,
+        'description' => 'Link Tags',
+        'handle'      => MetaContainers::METALINK_GENERAL_HANDLE,
         'include'     => 'true',
         'data'        => [
-            'title' => [
-                'title' => '{{ seomatic.seoTitle }}',
+            'canonical' => [
+                'crossorigin' => '',
+                'href'        => '{{ seomatic.canonicalUrl }}',
+                'hreflang'    => '',
+                'media'       => '',
+                'rel'         => 'canonical',
+                'sizes'       => '',
+                'type'        => '',
             ],
         ],
     ],

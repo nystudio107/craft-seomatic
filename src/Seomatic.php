@@ -161,6 +161,7 @@ class Seomatic extends Plugin
                     $html = Craft::$app->view->renderTemplate(
                         'seomatic/_sidebar',
                         [
+                            'seomatic' => Seomatic::$plugin->metaContainers->metaGlobalVars,
                             'settings' => $this->getSettings(),
                         ]
                     );
@@ -180,6 +181,7 @@ class Seomatic extends Plugin
                     $html = Craft::$app->view->renderTemplate(
                         'seomatic/_sidebar',
                         [
+                            'seomatic' => Seomatic::$plugin->metaContainers->metaGlobalVars,
                             'settings' => $this->getSettings(),
                         ]
                     );

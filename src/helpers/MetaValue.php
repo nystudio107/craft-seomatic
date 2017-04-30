@@ -56,6 +56,7 @@ class MetaValue extends Component
         try {
             if (self::$matchedElement) {
                 $metaValue = self::$view->renderObjectTemplate($metaValue, self::$matchedElement);
+                $metaValue = self::$view->renderString($metaValue);
             } else {
                 $metaValue = self::$view->renderString($metaValue);
             }

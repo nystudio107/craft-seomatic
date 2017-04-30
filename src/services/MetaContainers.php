@@ -118,7 +118,7 @@ class MetaContainers extends Component
     public function loadMetaContainers(string $path = '', int $siteId = null): void
     {
         // Avoid recursion
-        if (empty($this->metaContainers && !$this->loadingContainers)) {
+        if (!$this->loadingContainers) {
             $this->loadingContainers = true;
             $this->setMatchedElement($path, $siteId);
             // Get the cache tag for the matched meta bundle
@@ -419,8 +419,6 @@ class MetaContainers extends Component
         if ($metaBundle) {
             // Meta global vars
             $this->metaGlobalVars = $metaBundle->metaGlobalVars;
-            $request = Craft::$app->getRequest();
-            $this->metaGlobalVars->canonicalUrl = UrlHelper::siteUrl($request->getPathInfo(), null, null, $siteId);
             // Meta containers
             foreach ($metaBundle->metaTagContainer as $metaTagContainer) {
                 $key = self::SEOMATIC_METATAG_CONTAINER . $metaTagContainer->handle;
@@ -463,9 +461,6 @@ class MetaContainers extends Component
      */
     public function getMatchedMetaBundle()
     {
-        if ($this->matchedMetaBundle) {
-            return $this->matchedMetaBundle;
-        }
         $metaBundle = null;
         /** @var Element $element */
         $element = Seomatic::$matchedElement;
@@ -508,18 +503,9 @@ class MetaContainers extends Component
     public function addMetaBundleToContainers(MetaBundle $metaBundle)
     {
         // Meta global vars
-        $attributes = $metaBundle->getAttributes();
+        $attributes = $metaBundle->metaGlobalVars->getAttributes();
         $attributes = array_filter($attributes);
-        $this->metaGlobalVars->setAttributes($attributes);
-        /** @var  $element Element */
-        $element = Seomatic::$matchedElement;
-        $uri = $element->uri == '__home__' ? '' : $element->uri;
-        $this->metaGlobalVars->canonicalUrl = UrlHelper::siteUrl(
-            $uri,
-            null,
-            null,
-            $metaBundle->sourceSiteId
-        );
+        $this->metaGlobalVars->setAttributes($attributes, false);
         // Meta containers
         foreach ($metaBundle->metaTagContainer as $metaTagContainer) {
             $key = self::SEOMATIC_METATAG_CONTAINER . $metaTagContainer->handle;

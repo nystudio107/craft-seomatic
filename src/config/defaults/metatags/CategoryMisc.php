@@ -16,8 +16,4 @@
  */
 
 return [
-    'seoTitle'       => '{title}',
-    'seoDescription' => 'Entry SEO Description',
-    'seoImage'       => 'Entry SEO Image',
-    'canonicalUrl'   => '{url}',
 ];
