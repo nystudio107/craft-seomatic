@@ -134,11 +134,11 @@ class Seomatic extends Plugin
         );
         // Add in our event listeners that are needed for every request
         $this->installEventListeners();
+        // Add in our Twig extensions
+        Seomatic::$view->twig->addExtension(new SeomaticTwigExtension);
         // Only respond to non-console site requests
         $request = Craft::$app->getRequest();
         if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
-            // Add in our Twig extensions
-            Seomatic::$view->twig->addExtension(new SeomaticTwigExtension);
             // Load the sitemap containers
             Seomatic::$plugin->sitemaps->loadSitemapContainers();
             // Load the frontend template containers
@@ -184,7 +184,7 @@ class Seomatic extends Plugin
                         ]
                     );
                 }
-                
+
                 return $html;
             });
         }
