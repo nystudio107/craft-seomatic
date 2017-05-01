@@ -4,6 +4,11 @@ div.content-icon-wrapper {
     display: inline-block;
     padding: 3px 10px;
 }
+
+span.content-seo-checkmark {
+    color: darkgreen;
+}
+
 .content-icon {
     height: 24px;
     width: auto;
