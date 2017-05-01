@@ -371,7 +371,7 @@ class Seomatic extends Plugin
             self::$view->registerAssetBundle(SeomaticAsset::class);
             /** @var  $entry Entry */
             $entry = $context['entry'];
-            if ($entry) {
+            if (!empty($entry) && !empty($entry->uri)) {
                 Seomatic::$plugin->metaContainers->loadMetaContainers($entry->uri, $entry->siteId);
                 // Render our sidebar template
                 $html = Craft::$app->view->renderTemplate(
@@ -390,7 +390,7 @@ class Seomatic extends Plugin
             self::$view->registerAssetBundle(SeomaticAsset::class);
             /** @var  $category Category */
             $category = $context['category'];
-            if ($category) {
+            if (!empty($category) && !empty($category->uri)) {
                 Seomatic::$plugin->metaContainers->loadMetaContainers($category->uri, $category->siteId);
 
                 // Render our sidebar template

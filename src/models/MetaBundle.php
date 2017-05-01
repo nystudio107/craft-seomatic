@@ -22,6 +22,7 @@ use nystudio107\seomatic\models\FrontendTemplateContainer;
 
 use Craft;
 use craft\base\Model;
+use craft\validators\DateTimeValidator;
 
 /**
  * @author    nystudio107
@@ -275,7 +276,7 @@ class MetaBundle extends Model
                 'string',
             ],
             [['sourceId', 'sourceSiteId'], 'number', 'min' => 1],
-            [['sourceDateUpdated'], 'datetime'],
+            [['sourceDateUpdated'], DateTimeValidator::class],
             [['sourceAltSiteSettings'], 'safe'],
             [['sitemapPriority'], 'number'],
             [['sitemapUrls', 'sitemapAssets', 'sitemapAltLinks', 'sitemapFiles'], 'boolean'],

@@ -113,7 +113,7 @@ class MetaBundles extends Component
                         $metaBundle->sourceSiteId
                     );
                     // Update the meta bundle data
-                    $this->updateMetaBundleById($sourceId, $site->id);
+                    $this->updateMetaBundleById($sourceType, $sourceId, $site->id);
                 }
             }
         }
@@ -123,6 +123,61 @@ class MetaBundles extends Component
         }
     }
 
+
+    /**
+     * Invalidate the caches and data structures associated with this MetaBundle
+     *
+     * @param Element $element
+     * @param bool    $isNew
+     */
+    public function invalidateMetaBundleByElement($element, bool $isNew = false)
+    {
+        $metaBundleInvalidated = false;
+        if ($element) {
+            // Invalidate sitemap caches after an existing element is saved
+            list($sourceId, $siteId) = $this->getMetaSourceIdFromElement($element);
+            if ($sourceId) {
+                Craft::info(
+                    'Invalidating meta bundle: '
+                    .$element->uri
+                    .'/'
+                    .$siteId,
+                    'seomatic'
+                );
+                if (!$isNew) {
+                    $sourceType = '';
+                    $metaBundleInvalidated = true;
+                    Seomatic::$plugin->metaContainers->invalidateContainerCacheByPath($element->uri, $siteId);
+                    switch ($element::className()) {
+                        case Entry::class:
+                            /** @var  $element Entry */
+                            $sourceType = self::SECTION_META_BUNDLE;
+                            break;
+
+                        case Category::class:
+                            /** @var  $element Category */
+                            $sourceType = self::CATEGORYGROUP_META_BUNDLE;
+                            break;
+                        // @todo handle commerce products
+                    }
+                    // Update the meta bundle data
+                    $this->updateMetaBundleById($sourceType, $sourceId, $siteId);
+                    // Invalidate the sitemap cache
+                    $metaBundle = $this->getMetaBundleBySourceId($sourceType, $sourceId, $siteId);
+                    if ($metaBundle) {
+                        Seomatic::$plugin->sitemaps->invalidateSitemapCache(
+                            $metaBundle->sourceHandle,
+                            $metaBundle->sourceSiteId
+                        );
+                    }
+                }
+            }
+        }
+        // If we've invalidated a meta bundle, we need to invalidate the sitemap index, too
+        if ($metaBundleInvalidated) {
+            Seomatic::$plugin->sitemaps->invalidateSitemapIndexCache();
+        }
+    }
     /**
      * @param string   $sourceType
      * @param int      $sourceId
@@ -200,29 +255,32 @@ class MetaBundles extends Component
     /**
      * Update the meta bundle to make sure it's in sync
      *
-     * @param int $sourceId
-     * @param int $sourceSiteId
+     * @param string $sourceType
+     * @param int    $sourceId
+     * @param int    $sourceSiteId
      */
-    public function updateMetaBundleById(int $sourceId, int $sourceSiteId)
+    public function updateMetaBundleById(string $sourceType, int $sourceId, int $sourceSiteId)
     {
         $metaBundleRecord = null;
         // Look for a matching meta bundle in the db
         $metaBundleRecord = MetaBundleRecord::findOne([
+            'sourceBundleType' => $sourceType,
             'sourceId' => $sourceId,
             'sourceSiteId' => $sourceSiteId,
         ]);
         /** @var  $metaBundleRecord MetaBundle */
         if ($metaBundleRecord) {
-            /** @var  $element Element */
-            $element = Craft::$app->getElements()->getElementById($sourceId, null, $sourceSiteId);
-            switch ($metaBundleRecord->sourceType) {
-                case Entry::class:
-                    /** @var  $element Entry */
-                    $metaBundle = $this->createMetaBundleFromSection($element->getSection(), $sourceSiteId);
+            switch ($metaBundleRecord->sourceBundleType) {
+                case self::SECTION_META_BUNDLE:
+                    /** @var  $section Section */
+                    $section = Craft::$app->getSections()->getSectionById($sourceId);
+                    $metaBundle = $this->createMetaBundleFromSection($section, $sourceSiteId);
                     if ($metaBundle) {
+                        $metaBundle->validate(null, true);
                         /** @var  $metaBundleRecord MetaBundleRecord */
                         $metaBundleRecord->setAttributes(
-                            $metaBundle->getAttributes(self::META_BUNDLE_UPDATE_ATTRIBUTES)
+                            $metaBundle->getAttributes(self::META_BUNDLE_UPDATE_ATTRIBUTES),
+                            false
                         );
                         $metaBundleRecord->save();
                         Craft::info(
@@ -235,13 +293,15 @@ class MetaBundles extends Component
                     }
                     break;
 
-                case Category::class:
-                    /** @var  $element Category */
-                    $metaBundle = $this->createMetaBundleFromCategory($element->getGroup(), $sourceSiteId);
+                case self::CATEGORYGROUP_META_BUNDLE:
+                    /** @var  $category CategoryGroup */
+                    $category = Craft::$app->getCategories()->getCategoryById($sourceId);
+                    $metaBundle = $this->createMetaBundleFromCategory($category, $sourceSiteId);
                     if ($metaBundle) {
                         /** @var  $metaBundleRecord MetaBundleRecord */
                         $metaBundleRecord->setAttributes(
-                            $metaBundle->getAttributes(self::META_BUNDLE_UPDATE_ATTRIBUTES)
+                            $metaBundle->getAttributes(self::META_BUNDLE_UPDATE_ATTRIBUTES),
+                            false
                         );
                         $metaBundleRecord->save();
                     }
@@ -341,56 +401,6 @@ class MetaBundles extends Component
                     'seomatic'
                 );
             }
-        }
-    }
-
-    /**
-     * Invalidate the caches and data structures associated with this MetaBundle
-     *
-     * @param Element $element
-     * @param bool    $isNew
-     */
-    public function invalidateMetaBundleByElement($element, bool $isNew = false)
-    {
-        $metaBundleInvalidated = false;
-        if ($element) {
-            // Invalidate sitemap caches after an existing element is saved
-            list($sourceId, $siteId) = $this->getMetaSourceIdFromElement($element);
-            if ($sourceId) {
-                Craft::info(
-                    'Invalidating meta bundle: '
-                    .$element->uri
-                    .'/'
-                    .$siteId,
-                    'seomatic'
-                );
-                if (!$isNew) {
-                    $sourceType = '';
-                    $metaBundleInvalidated = true;
-                    Seomatic::$plugin->metaContainers->invalidateContainerCacheByPath($element->uri, $siteId);
-                    switch ($element::className()) {
-                        case Entry::class:
-                            /** @var  $element Entry */
-                            $sourceType = self::SECTION_META_BUNDLE;
-                            break;
-
-                        case Category::class:
-                            /** @var  $element Category */
-                            $sourceType = self::CATEGORYGROUP_META_BUNDLE;
-                            break;
-                        // @todo handle commerce products
-                    }
-                    $metaBundle = $this->getMetaBundleBySourceId($sourceType, $sourceId, $siteId);
-                    Seomatic::$plugin->sitemaps->invalidateSitemapCache(
-                        $metaBundle->sourceHandle,
-                        $metaBundle->sourceSiteId
-                    );
-                }
-            }
-        }
-        // If we've invalidated a meta bundle, we need to invalidate the sitemap index, too
-        if ($metaBundleInvalidated) {
-            Seomatic::$plugin->sitemaps->invalidateSitemapIndexCache();
         }
     }
 

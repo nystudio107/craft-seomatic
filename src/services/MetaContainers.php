@@ -453,8 +453,22 @@ class MetaContainers extends Component
         /** @var Element $element */
         $element = Seomatic::$matchedElement;
         if ($element) {
+            $sourceType = '';
+            switch ($element::className()) {
+                case Entry::class:
+                    /** @var  $element Entry */
+                    $sourceType = self::SECTION_META_BUNDLE;
+                    break;
+
+                case Category::class:
+                    /** @var  $element Category */
+                    $sourceType = self::CATEGORYGROUP_META_BUNDLE;
+                    break;
+                // @todo handle commerce products
+            }
             list($sourceId, $sourceSiteId) = Seomatic::$plugin->metaBundles->getMetaSourceIdFromElement($element);
             $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
+                $sourceType,
                 $sourceId,
                 $sourceSiteId
             );
