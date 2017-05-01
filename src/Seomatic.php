@@ -110,7 +110,11 @@ class Seomatic extends Plugin
     {
         self::$matchedElement = $element;
         /** @var  $element Element */
-        self::$language = MetaValue::getSiteLanguage($element->siteId);
+        if ($element) {
+            self::$language = MetaValue::getSiteLanguage($element->siteId);
+        } else {
+            self::$language = MetaValue::getSiteLanguage(0);
+        }
         MetaValueHelper::cache();
     }
 
@@ -140,115 +144,27 @@ class Seomatic extends Plugin
             __METHOD__
         );
         // Add in our event listeners that are needed for every request
-        $this->installEventListeners();
+        $this->installGlobalEventListeners();
         // Add in our Twig extensions
         Seomatic::$view->twig->addExtension(new SeomaticTwigExtension);
         // Only respond to non-console site requests
         $request = Craft::$app->getRequest();
         if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
-            // Load the sitemap containers
-            Seomatic::$plugin->sitemaps->loadSitemapContainers();
-            // Load the frontend template containers
-            Seomatic::$plugin->frontendTemplates->loadFrontendTemplateContainers();
-            // Register our error handler
-            $handler = new SeomaticErrorHandler;
-            Craft::$app->set('errorHandler', $handler);
-            $handler->register();
-            // Handler: View::EVENT_END_PAGE
-            Event::on(
-                View::className(),
-                View::EVENT_END_PAGE,
-                function (Event $event) {
-                    Craft::trace(
-                        'View::EVENT_END_PAGE',
-                        'seomatic'
-                    );
-                    // The page is done rendering, include our meta containers
-                    Seomatic::$plugin->metaContainers->includeMetaContainers();
-                }
-            );
+            $this->handleSiteRequest();
         }
         // AdminCP magic
         if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
-            Craft::$app->getView()->hook('cp.entries.edit.right-pane', function (&$context) {
-                $html = '';
-                self::$view->registerAssetBundle(SeomaticAsset::class);
-                /** @var  $entry Entry */
-                $entry = $context['entry'];
-                if ($entry) {
-                    Seomatic::$plugin->metaContainers->loadMetaContainers($entry->uri, $entry->siteId);
-                    // Render our sidebar template
-                    $html = Craft::$app->view->renderTemplate(
-                        'seomatic/_sidebar',
-                        [
-                            'seomatic' => Seomatic::$plugin->metaContainers->metaGlobalVars,
-                            'settings' => $this->getSettings(),
-                        ]
-                    );
-                }
-
-                return $html;
-            });
-            Craft::$app->getView()->hook('cp.categories.edit.right-pane', function (&$context) {
-                $html = '';
-                self::$view->registerAssetBundle(SeomaticAsset::class);
-                /** @var  $category Category */
-                $category = $context['category'];
-                if ($category) {
-                    Seomatic::$plugin->metaContainers->loadMetaContainers($category->uri, $category->siteId);
-
-                    // Render our sidebar template
-                    $html = Craft::$app->view->renderTemplate(
-                        'seomatic/_sidebar',
-                        [
-                            'seomatic' => Seomatic::$plugin->metaContainers->metaGlobalVars,
-                            'settings' => $this->getSettings(),
-                        ]
-                    );
-                }
-
-                return $html;
-            });
+            $this->handleAdminCpRequest();
         }
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function defineTemplateComponent()
-    {
-        return SeomaticVariable::class;
     }
 
     // Protected Methods
     // =========================================================================
 
     /**
-     * @inheritdoc
-     */
-    protected function createSettingsModel()
-    {
-        return new Settings();
-    }
-
-    /**
-     * @inheritdoc
-     */
-    protected function settingsHtml(): string
-    {
-        // Render our settings template
-        return Craft::$app->view->renderTemplate(
-            'seomatic/settings',
-            [
-                'settings' => $this->getSettings(),
-            ]
-        );
-    }
-
-    /**
      * Install global event listeners
      */
-    protected function installEventListeners()
+    protected function installGlobalEventListeners()
     {
         // Handler: ClearCaches::EVENT_REGISTER_CACHE_OPTIONS
         Event::on(
@@ -261,24 +177,24 @@ class Seomatic extends Plugin
                 );
                 // Frontend template caches
                 $event->options[] = [
-                    'key'    => 'seomatic-frontendtemplate-caches',
-                    'label'  => Craft::t('seomatic', 'SEOmatic frontend template caches'),
+                    'key' => 'seomatic-frontendtemplate-caches',
+                    'label' => Craft::t('seomatic', 'SEOmatic frontend template caches'),
                     'action' => function () {
                         Seomatic::$plugin->frontendTemplates->invalidateCaches();
                     },
                 ];
                 // Meta bundle caches
                 $event->options[] = [
-                    'key'    => 'seomatic-metabundle-caches',
-                    'label'  => Craft::t('seomatic', 'SEOmatic metadata caches'),
+                    'key' => 'seomatic-metabundle-caches',
+                    'label' => Craft::t('seomatic', 'SEOmatic metadata caches'),
                     'action' => function () {
                         Seomatic::$plugin->metaContainers->invalidateCaches();
                     },
                 ];
                 // Sitemap caches
                 $event->options[] = [
-                    'key'    => 'seomatic-sitemap-caches',
-                    'label'  => Craft::t('seomatic', 'SEOmatic sitemap caches'),
+                    'key' => 'seomatic-sitemap-caches',
+                    'label' => Craft::t('seomatic', 'SEOmatic sitemap caches'),
                     'action' => function () {
                         Seomatic::$plugin->sitemaps->invalidateCaches();
                     },
@@ -395,6 +311,110 @@ class Seomatic extends Plugin
                 if ($event->plugin === $this) {
                 }
             }
+        );
+    }
+
+    /**
+     * Handle site requests
+     */
+    protected function handleSiteRequest()
+    {
+        // Load the sitemap containers
+        Seomatic::$plugin->sitemaps->loadSitemapContainers();
+        // Load the frontend template containers
+        Seomatic::$plugin->frontendTemplates->loadFrontendTemplateContainers();
+        // Register our error handler
+        $handler = new SeomaticErrorHandler;
+        Craft::$app->set('errorHandler', $handler);
+        $handler->register();
+        // Handler: View::EVENT_END_PAGE
+        Event::on(
+            View::className(),
+            View::EVENT_END_PAGE,
+            function (Event $event) {
+                Craft::trace(
+                    'View::EVENT_END_PAGE',
+                    'seomatic'
+                );
+                // The page is done rendering, include our meta containers
+                Seomatic::$plugin->metaContainers->includeMetaContainers();
+            }
+        );
+    }
+
+    /**
+     * Handle AdminCP requests
+     */
+    protected function handleAdminCpRequest()
+    {
+        Craft::$app->getView()->hook('cp.entries.edit.right-pane', function (&$context) {
+            $html = '';
+            self::$view->registerAssetBundle(SeomaticAsset::class);
+            /** @var  $entry Entry */
+            $entry = $context['entry'];
+            if ($entry) {
+                Seomatic::$plugin->metaContainers->loadMetaContainers($entry->uri, $entry->siteId);
+                // Render our sidebar template
+                $html = Craft::$app->view->renderTemplate(
+                    'seomatic/_sidebar',
+                    [
+                        'seomatic' => Seomatic::$plugin->metaContainers->metaGlobalVars,
+                        'settings' => $this->getSettings(),
+                    ]
+                );
+            }
+
+            return $html;
+        });
+        Craft::$app->getView()->hook('cp.categories.edit.right-pane', function (&$context) {
+            $html = '';
+            self::$view->registerAssetBundle(SeomaticAsset::class);
+            /** @var  $category Category */
+            $category = $context['category'];
+            if ($category) {
+                Seomatic::$plugin->metaContainers->loadMetaContainers($category->uri, $category->siteId);
+
+                // Render our sidebar template
+                $html = Craft::$app->view->renderTemplate(
+                    'seomatic/_sidebar',
+                    [
+                        'seomatic' => Seomatic::$plugin->metaContainers->metaGlobalVars,
+                        'settings' => $this->getSettings(),
+                    ]
+                );
+            }
+
+            return $html;
+        });
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function defineTemplateComponent()
+    {
+        return SeomaticVariable::class;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function createSettingsModel()
+    {
+        return new Settings();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function settingsHtml(): string
+    {
+        // Render our settings template
+        return Craft::$app->view->renderTemplate(
+            'seomatic/settings',
+            [
+                'settings' => $this->getSettings(),
+            ]
         );
     }
 }
