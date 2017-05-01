@@ -10,8 +10,7 @@
  */
 
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
-
-use craft\elements\Category;
+use nystudio107\seomatic\services\MetaBundles;
 
 /**
  * @author    nystudio107
@@ -20,7 +19,7 @@ use craft\elements\Category;
  */
 
 return [
-    'sourceElementType' => Category::class,
+    'sourceBundleType' => MetaBundles::CATEGORYGROUP_META_BUNDLE,
     'sourceId' => null,
     'sourceName' => null,
     'sourceHandle' => null,

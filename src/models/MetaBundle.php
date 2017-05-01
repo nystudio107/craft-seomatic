@@ -36,7 +36,7 @@ class MetaBundle extends Model
     /**
      * @var string
      */
-    public $sourceElementType;
+    public $sourceBundleType;
 
     /**
      * @var int
@@ -246,7 +246,7 @@ class MetaBundle extends Model
         $rules = [
             [
                 [
-                    'sourceElementType',
+                    'sourceBundleType',
                     'sourceId',
                     'sourceName',
                     'sourceHandle',

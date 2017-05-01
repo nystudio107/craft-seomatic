@@ -15,6 +15,7 @@ use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\base\SitemapInterface;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
+use nystudio107\seomatic\services\MetaBundles;
 
 use Craft;
 use craft\elements\Asset;
@@ -63,7 +64,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
     public static function create(array $config = [])
     {
         $defaults = [
-            'path'       => 'sitemaps/<handle:[-\w\.*]+>/<siteId:\d+>/<file:[-\w\.*]+>',
+            'path'       => 'sitemaps/<type:[-\w\.*]+>/<handle:[-\w\.*]+>/<siteId:\d+>/<file:[-\w\.*]+>',
             'template'   => '',
             'controller' => 'sitemap',
             'action'     => 'sitemap',
@@ -110,6 +111,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
     public function render($params = []): string
     {
         $cache = Craft::$app->getCache();
+        $type = $params['type'];
         $handle = $params['handle'];
         $siteId = $params['siteId'];
         $duration = Seomatic::$devMode ? $this::DEVMODE_SITEMAP_CACHE_DURATION : $this::SITEMAP_CACHE_DURATION;
@@ -120,7 +122,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             ],
         ]);
 
-        return $cache->getOrSet($this::CACHE_KEY . $handle . $siteId, function () use ($handle, $siteId) {
+        return $cache->getOrSet($this::CACHE_KEY . $handle . $siteId, function () use ($type, $handle, $siteId) {
             Craft::info(
                 'Sitemap cache miss: ' . $handle . '/' . $siteId,
                 'seomatic'
@@ -129,7 +131,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             // Sitemap index XML header and opening tag
             $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
             // One sitemap entry for each element
-            $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle($handle, $siteId);
+            $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle($type, $handle, $siteId);
             $multiSite = count($metaBundle->sourceAltSiteSettings) > 1;
             $elements = null;
             if ($metaBundle && $metaBundle->sitemapUrls) {
@@ -144,14 +146,14 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 $urlsetLine .= '>';
                 $lines[] = $urlsetLine;
                 // Handle each element type separately
-                switch ($metaBundle->sourceElementType) {
-                    case Entry::class:
+                switch ($metaBundle->sourceBundleType) {
+                    case MetaBundles::SECTION_META_BUNDLE:
                         $elements = Entry::find()
                             ->section($metaBundle->sourceHandle)
                             ->siteId($metaBundle->sourceSiteId)
                             ->limit(null);
                         break;
-                    case Category::class:
+                    case MetaBundles::CATEGORYGROUP_META_BUNDLE:
                         $elements = Category::find()
                             ->siteId($metaBundle->sourceSiteId)
                             ->limit(null);
@@ -182,7 +184,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                         foreach ($metaBundle->sourceAltSiteSettings as $altSiteSettings) {
                             $altElement = null;
                             // Handle each element type separately
-                            switch ($metaBundle->sourceElementType) {
+                            switch ($metaBundle->sourceSectionType) {
                                 case Entry::class:
                                     $altElement = Entry::find()
                                         ->section($metaBundle->sourceHandle)

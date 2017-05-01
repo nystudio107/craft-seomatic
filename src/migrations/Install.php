@@ -85,7 +85,7 @@ class Install extends Migration
                     'dateUpdated' => $this->dateTime()->notNull(),
                     'uid' => $this->uid(),
 
-                    'sourceElementType' => $this->string()->notNull()->defaultValue(''),
+                    'sourceBundleType' => $this->string()->notNull()->defaultValue(''),
                     'sourceId' => $this->integer()->null(),
                     'sourceName' => $this->string()->notNull()->defaultValue(''),
                     'sourceHandle' => $this->string(64)->notNull()->defaultValue(''),
@@ -141,6 +141,16 @@ class Install extends Migration
     protected function createIndexes()
     {
         // seomatic_metabundles table
+        $this->createIndex(
+            $this->db->getIndexName(
+                '{{%seomatic_metabundles}}',
+                'sourceBundleType',
+                false
+            ),
+            '{{%seomatic_metabundles}}',
+            'sourceBundleType',
+            false
+        );
         $this->createIndex(
             $this->db->getIndexName(
                 '{{%seomatic_metabundles}}',

@@ -62,11 +62,12 @@ class SitemapController extends Controller
      *
      * @return Response
      */
-    public function actionSitemap(string $handle, int $siteId, string $file = null)
+    public function actionSitemap(string $type, string $handle, int $siteId, string $file = null)
     {
         $xml = Seomatic::$plugin->sitemaps->renderTemplate(
             Sitemaps::SEOMATIC_SITEMAP_CONTAINER,
             [
+                'type' => $type,
                 'handle' => $handle,
                 'siteId' => $siteId
             ]

@@ -117,6 +117,8 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             foreach ($metaBundles as $metaBundle) {
                 $sitemapUrl = UrlHelper::siteUrl(
                     '/sitemaps/'
+                    . $metaBundle->sourceBundleType
+                    . '/'
                     . $metaBundle->sourceHandle
                     . '/'
                     . $metaBundle->sourceSiteId

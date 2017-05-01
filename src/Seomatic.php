@@ -211,6 +211,7 @@ class Seomatic extends Plugin
                     'seomatic'
                 );
                 Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
+                    MetaBundlesService::SECTION_META_BUNDLE,
                     $event->section->id,
                     $event->isNew
                 );
@@ -230,11 +231,15 @@ class Seomatic extends Plugin
                     'seomatic'
                 );
                 Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
+                    MetaBundlesService::SECTION_META_BUNDLE,
                     $event->section->id,
                     false
                 );
                 // Delete the meta bundles for this section
-                Seomatic::$plugin->metaBundles->deleteMetaBundleBySourceId($event->section->id);
+                Seomatic::$plugin->metaBundles->deleteMetaBundleBySourceId(
+                    MetaBundlesService::SECTION_META_BUNDLE,
+                    $event->section->id
+                );
             }
         );
         // Handler: Categories::EVENT_AFTER_SAVE_GROUP
@@ -247,6 +252,7 @@ class Seomatic extends Plugin
                     'seomatic'
                 );
                 Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
+                    MetaBundlesService::CATEGORYGROUP_META_BUNDLE,
                     $event->categoryGroup->id,
                     $event->isNew,
                     false
@@ -267,12 +273,15 @@ class Seomatic extends Plugin
                     'seomatic'
                 );
                 Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
+                    MetaBundlesService::CATEGORYGROUP_META_BUNDLE,
                     $event->categoryGroup->id,
-                    false,
-                    true
+                    false
                 );
                 // Delete the meta bundles for this category
-                Seomatic::$plugin->metaBundles->deleteMetaBundleBySourceId($event->categoryGroup->id);
+                Seomatic::$plugin->metaBundles->deleteMetaBundleBySourceId(
+                    MetaBundlesService::CATEGORYGROUP_META_BUNDLE,
+                    $event->categoryGroup->id
+                );
             }
         );
         // Handler: Elements::EVENT_AFTER_SAVE_ELEMENT
