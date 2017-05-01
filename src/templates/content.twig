@@ -1,9 +1,11 @@
 {% extends "_layouts/cp" %}
 {% import '_includes/forms' as forms %}
 
+{% do view.registerAssetBundle('nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset') %}
+
 {% set metaBundles = craft.seomatic.getContentMetaBundles(false) %}
 
-{% set title = craft.seomatic.getPluginName() %}
+{% set title = craft.seomatic.getPluginName() ~ " Content SEO" %}
 
 {% set fullPageForm = true %}
 
@@ -59,39 +61,66 @@
                     <a href="{{ url('settings/sections/' ~ metaBundle.sourceId) }}" target="_blank">{{ metaBundle.sourceName }}</a>
                 </td>
                 <td>
-                    {{ num_entries }}
+                    {% set numEntries = craft.entries.total({ sectionId: metaBundle.sourceId }) %}
+                    {{ numEntries }}
                 </td>
                 <td>
                     {{ metaBundle.sourceType }}
                 </td>
                 <td>
+                    {% set total = 0 %}
                     {% for metaTagContainer in metaBundle.metaTagContainer %}
-                        {{ metaTagContainer.data |length }}
+                        {% set total = total + (metaTagContainer.data |length) %}
                     {% endfor %}
+                    {% if total > 0 %}
+                        <span class="content-stats-checkmark">&check;</span>&nbsp;<span class="content-stats-total">({{ total }})</span>
+                    {% else %}
+                        -
+                    {% endif %}
                 </td>
                 <td>
+                    {% set total = 0 %}
                     {% for metaLinkContainer in metaBundle.metaLinkContainer %}
-                        {{ metaLinkContainer.data |length }}
+                        {% set total = total + (metaLinkContainer.data |length) %}
                     {% endfor %}
+                    {% if total > 0 %}
+                        <span class="content-stats-checkmark">&check;</span>&nbsp;<span class="content-stats-total">({{ total }})</span>
+                    {% else %}
+                        -
+                    {% endif %}
                 </td>
                 <td>
+                    {% set total = 0 %}
                     {% for metaScriptContainer in metaBundle.metaScriptContainer %}
-                        {{ metaScriptContainer.data |length }}
+                        {% set total = total + (metaScriptContainer.data |length) %}
                     {% endfor %}
+                    {% if total > 0 %}
+                        <span class="content-stats-checkmark">&check;</span>&nbsp;<span class="content-stats-total">({{ total }})</span>
+                    {% else %}
+                        -
+                    {% endif %}
                 </td>
                 <td>
+                    {% set total = 0 %}
                     {% for metaJsonLdContainer in metaBundle.metaJsonLdContainer %}
-                        {{ metaJsonLdContainer.data |length }}
+                        {% set total = total + (metaJsonLdContainer.data |length) %}
                     {% endfor %}
+                    {% if total > 0 %}
+                        <span class="content-stats-checkmark">&check;</span>&nbsp;<span class="content-stats-total">({{ total }})</span>
+                    {% else %}
+                        -
+                    {% endif %}
                 </td>
                 <td>
                     {% if metaBundle.sitemapUrls %}
                         &check;
                     {% else %}
-                        &cross;
+                        -
                     {% endif %}
                 </td>
-                <td></td>
+                <td>
+                    <a class="btn">Settings…</a>
+                </td>
             </tr>
         {% endfor %}
         </tbody>

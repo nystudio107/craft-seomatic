@@ -157,20 +157,6 @@ class MetaContainers extends Component
                 $duration,
                 $dependency
             );
-
-            // Handler: View::EVENT_END_PAGE
-            Event::on(
-                View::className(),
-                View::EVENT_END_PAGE,
-                function (Event $event) {
-                    Craft::trace(
-                        'View::EVENT_END_PAGE',
-                        'seomatic'
-                    );
-                    // The page is done rendering, include our meta containers
-                    $this->includeMetaContainers();
-                }
-            );
             $this->loadingContainers = false;
         }
     }

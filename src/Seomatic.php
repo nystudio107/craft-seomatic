@@ -154,6 +154,19 @@ class Seomatic extends Plugin
             $handler = new SeomaticErrorHandler;
             Craft::$app->set('errorHandler', $handler);
             $handler->register();
+            // Handler: View::EVENT_END_PAGE
+            Event::on(
+                View::className(),
+                View::EVENT_END_PAGE,
+                function (Event $event) {
+                    Craft::trace(
+                        'View::EVENT_END_PAGE',
+                        'seomatic'
+                    );
+                    // The page is done rendering, include our meta containers
+                    Seomatic::$plugin->metaContainers->includeMetaContainers();
+                }
+            );
         }
         // AdminCP magic
         if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
