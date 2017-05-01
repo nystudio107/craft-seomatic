@@ -1,9 +1,22 @@
-span.content-stats-checkmark {
-    color: darkgreen;
+div.content-icon-wrapper {
+    height: 24px;
+    width: auto;
+    display: inline-block;
+    padding: 3px 10px;
+}
+.content-icon {
+    height: 24px;
+    width: auto;
+    pointer-events: none;
 }
 
-span.content-stats-total {
-    color: grey;
+.content-seo-enabled {
+    color: black;
+}
+
+.content-seo-disabled {
+    color: black;
+    opacity: 0.2;
 }
 
 div.seomatic-devmode-wrapper {
