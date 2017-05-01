@@ -59,7 +59,10 @@
                 <td>
                     {% set sourcePrefix =  '' %}
                     {% switch metaBundle.sourceType %}
-                        {% case 'section' %}
+                        {% case 'channel' %}
+                            {% set sourcePrefix = 'settings/sections/' %}
+                        {% case 'structure' %}
+                            {% set sourcePrefix = 'settings/sections/' %}
                         {% case 'single' %}
                             {% set sourcePrefix = 'settings/sections/' %}
                         {% case 'category' %}

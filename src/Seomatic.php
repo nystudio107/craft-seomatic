@@ -212,9 +212,12 @@ class Seomatic extends Plugin
                 );
                 Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
                     $event->section->id,
-                    $event->isNew,
-                    false
+                    $event->isNew
                 );
+                // Create the meta bundles for this section if it's new
+                if ($event->isNew) {
+                    Seomatic::$plugin->metaBundles->createContentMetaBundleForSection($event->section);
+                }
             }
         );
         // Handler: Sections::EVENT_AFTER_DELETE_SECTION
@@ -228,9 +231,10 @@ class Seomatic extends Plugin
                 );
                 Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
                     $event->section->id,
-                    false,
-                    true
+                    false
                 );
+                // Delete the meta bundles for this section
+                Seomatic::$plugin->metaBundles->deleteMetaBundleBySourceId($event->section->id);
             }
         );
         // Handler: Categories::EVENT_AFTER_SAVE_GROUP
@@ -247,6 +251,10 @@ class Seomatic extends Plugin
                     $event->isNew,
                     false
                 );
+                // Create the meta bundles for this category if it's new
+                if ($event->isNew) {
+                    Seomatic::$plugin->metaBundles->createContentMetaBundleForCategoryGroup($event->categoryGroup);
+                }
             }
         );
         // Handler: Categories::EVENT_AFTER_DELETE_GROUP
@@ -263,6 +271,8 @@ class Seomatic extends Plugin
                     false,
                     true
                 );
+                // Delete the meta bundles for this category
+                Seomatic::$plugin->metaBundles->deleteMetaBundleBySourceId($event->categoryGroup->id);
             }
         );
         // Handler: Elements::EVENT_AFTER_SAVE_ELEMENT

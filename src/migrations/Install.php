@@ -196,6 +196,7 @@ class Install extends Migration
      */
     protected function addForeignKeys()
     {
+        /*
         $this->addForeignKey(
             $this->db->getForeignKeyName('{{%seomatic_metabundles}}', 'sourceId'),
             '{{%seomatic_metabundles}}',
@@ -205,6 +206,7 @@ class Install extends Migration
             'CASCADE',
             'CASCADE'
         );
+        */
         $this->addForeignKey(
             $this->db->getForeignKeyName('{{%seomatic_metabundles}}', 'sourceSiteId'),
             '{{%seomatic_metabundles}}',
