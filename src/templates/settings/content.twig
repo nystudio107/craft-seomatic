@@ -1,0 +1,112 @@
+{% extends "_layouts/cp" %}
+{% import '_includes/forms' as forms %}
+
+{% set content %}
+
+    <input type="hidden" name="action" value="seomatic/saveContentSeo" />
+    <input type="hidden" name="redirect" value="seomatic/content" />
+
+    {{ getCsrfInput() }}
+
+    <table class="data">
+        <thead class="sections first">
+        {#
+        <tr>
+            <th colspan="6">
+                <h1>{{ "Content"|t }}</h1>
+            </th>
+        </tr>
+        #}
+        <tr>
+            <th>{{ "Name"|t }}</th>
+            <th class="thin">{{ "Entries"|t }}</th>
+            <th>{{ "Type"|t }}</th>
+            <th>{{ "Custom SEO"|t }}</th>
+            <th>{{ "Setup"|t }}</th>
+            <th class="thin"></th>
+            <th class="thin"></th>
+        </tr>
+        </thead>
+
+        <tbody class="sections">
+        {% for metaBundle in metaBundles %}
+            {% set num_entries = 0 %}
+            <tr>
+                <td>
+                    {% set sourcePrefix =  '' %}
+                    {% switch metaBundle.sourceType %}
+                        {% case 'channel' %}
+                            {% set sourcePrefix = 'settings/sections/' %}
+                        {% case 'structure' %}
+                            {% set sourcePrefix = 'settings/sections/' %}
+                        {% case 'single' %}
+                            {% set sourcePrefix = 'settings/sections/' %}
+                        {% case 'category' %}
+                            {% set sourcePrefix =  'settings/categories/' %}
+                    {% endswitch %}
+                    <a href="{{ url(sourcePrefix ~ metaBundle.sourceId) }}">{{ metaBundle.sourceName }}</a>
+                </td>
+                <td>
+                    {% set numEntries = craft.entries.total({ sectionId: metaBundle.sourceId }) %}
+                    {{ numEntries }}
+                </td>
+                <td>
+                    {{ metaBundle.sourceType }}
+                </td>
+                <td>
+                    {# -- Meta Tags -- #}
+                    {% set total = 0 %}
+                    {% for metaTagContainer in metaBundle.metaTagContainer %}
+                        {% set total = total + (metaTagContainer.data |length) %}
+                    {% endfor %}
+                    <div title="{{ total }} Meta Tags" class="content-icon-wrapper">
+                        <img src="{{ baseAssetUrl ~ '/img/tags-icon.svg' }}"
+                                class="content-icon {% if total > 0 %}content-seo-enabled{% else %}content-seo-disabled{% endif %}">
+                    </div>
+                    {# -- Meta Links -- #}
+                    {% set total = 0 %}
+                    {% for metaLinkContainer in metaBundle.metaLinkContainer %}
+                        {% set total = total + (metaLinkContainer.data |length) %}
+                    {% endfor %}
+                    <div title="{{ total }} Link Tags" class="content-icon-wrapper">
+                        <img src="{{ baseAssetUrl ~ '/img/link-icon.svg' }}"
+                                class="content-icon {% if total > 0 %}content-seo-enabled{% else %}content-seo-disabled{% endif %}">
+                    </div>
+                    {# -- Meta Scripts -- #}
+                    {% set total = 0 %}
+                    {% for metaScriptContainer in metaBundle.metaScriptContainer %}
+                        {% set total = total + (metaScriptContainer.data |length) %}
+                    {% endfor %}
+                    <div title="{{ total }} Script Tags" class="content-icon-wrapper">
+                        <img src="{{ baseAssetUrl ~ '/img/script-icon.svg' }}"
+                                class="content-icon {% if total > 0 %}content-seo-enabled{% else %}content-seo-disabled{% endif %}">
+                    </div>
+                    {# -- Meta Json Ld -- #}
+                    {% set total = 0 %}
+                    {% for metaJsonLdContainer in metaBundle.metaJsonLdContainer %}
+                        {% set total = total + (metaJsonLdContainer.data |length) %}
+                    {% endfor %}
+                    <div title="{{ total }} Structured Data Objects" class="content-icon-wrapper">
+                        <img src="{{ baseAssetUrl ~ '/img/structured-data-icon.svg' }}"
+                                class="content-icon {% if total > 0 %}content-seo-enabled{% else %}content-seo-disabled{% endif %}">
+                    </div>
+                    {# -- Sitemap -- #}
+                    <div title="{% if metaBundle.sitemapUrls %}Sitemap Enabled{% else %}Sitemap Disabled{% endif %}" class="content-icon-wrapper">
+                        <img src="{{ baseAssetUrl ~ '/img/sitemap-icon.svg' }}"
+                                class="content-icon {% if metaBundle.sitemapUrls %}content-seo-enabled{% else %}content-seo-disabled{% endif %}">
+                    </div>
+                </td>
+                <td>
+                    <span class="content-seo-checkmark">&check;</span>
+                </td>
+                <td>
+                    <a class="btn">Settings…</a>
+                </td>
+                <td>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endset %}

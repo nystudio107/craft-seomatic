@@ -35,12 +35,14 @@ use craft\events\CategoryGroupEvent;
 use craft\events\ElementEvent;
 use craft\events\PluginEvent;
 use craft\events\RegisterCacheOptionsEvent;
+use craft\events\RegisterUrlRulesEvent;
 use craft\events\SectionEvent;
 use craft\services\Categories;
 use craft\services\Elements;
 use craft\services\Plugins;
 use craft\services\Sections;
 use craft\utilities\ClearCaches;
+use craft\web\UrlManager;
 use craft\web\View;
 
 use yii\base\Event;
@@ -145,8 +147,6 @@ class Seomatic extends Plugin
         );
         // Add in our event listeners that are needed for every request
         $this->installGlobalEventListeners();
-        // Add in our Twig extensions
-        Seomatic::$view->twig->addExtension(new SeomaticTwigExtension);
         // Only respond to non-console site requests
         $request = Craft::$app->getRequest();
         if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
@@ -254,8 +254,7 @@ class Seomatic extends Plugin
                 Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
                     MetaBundlesService::CATEGORYGROUP_META_BUNDLE,
                     $event->categoryGroup->id,
-                    $event->isNew,
-                    false
+                    $event->isNew
                 );
                 // Create the meta bundles for this category if it's new
                 if ($event->isNew) {
@@ -338,6 +337,8 @@ class Seomatic extends Plugin
      */
     protected function handleSiteRequest()
     {
+        // Add in our Twig extensions
+        Seomatic::$view->twig->addExtension(new SeomaticTwigExtension);
         // Load the sitemap containers
         Seomatic::$plugin->sitemaps->loadSitemapContainers();
         // Load the frontend template containers
@@ -366,6 +367,27 @@ class Seomatic extends Plugin
      */
     protected function handleAdminCpRequest()
     {
+        // Handler: UrlManager::EVENT_REGISTER_CP_URL_RULES
+        Event::on(
+            UrlManager::className(),
+            UrlManager::EVENT_REGISTER_CP_URL_RULES,
+            function (RegisterUrlRulesEvent $event) {
+                Craft::trace(
+                    'UrlManager::EVENT_REGISTER_CP_URL_RULES',
+                    'seomatic'
+                );
+                // Register our sitemap routes
+                $event->rules = array_merge(
+                    $event->rules,
+                    [
+                        'seomatic' => 'seomatic/seomatic-settings/index',
+                        'seomatic/content' => 'seomatic/seomatic-settings/index',
+                    ]
+                );
+            }
+        );
+
+        // Entries sidebar
         Craft::$app->getView()->hook('cp.entries.edit.right-pane', function (&$context) {
             $html = '';
             self::$view->registerAssetBundle(SeomaticAsset::class);
@@ -385,6 +407,7 @@ class Seomatic extends Plugin
 
             return $html;
         });
+        // Category Groups sidebar
         Craft::$app->getView()->hook('cp.categories.edit.right-pane', function (&$context) {
             $html = '';
             self::$view->registerAssetBundle(SeomaticAsset::class);

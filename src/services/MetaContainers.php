@@ -32,6 +32,8 @@ use nystudio107\seomatic\models\MetaTitleContainer;
 use Craft;
 use craft\base\Component;
 use craft\base\Element;
+use craft\elements\Category;
+use craft\elements\Entry;
 use craft\helpers\UrlHelper;
 use craft\web\View;
 
@@ -457,12 +459,12 @@ class MetaContainers extends Component
             switch ($element::className()) {
                 case Entry::class:
                     /** @var  $element Entry */
-                    $sourceType = self::SECTION_META_BUNDLE;
+                    $sourceType = MetaBundles::SECTION_META_BUNDLE;
                     break;
 
                 case Category::class:
                     /** @var  $element Category */
-                    $sourceType = self::CATEGORYGROUP_META_BUNDLE;
+                    $sourceType = MetaBundles::CATEGORYGROUP_META_BUNDLE;
                     break;
                 // @todo handle commerce products
             }

@@ -3,6 +3,7 @@ div.content-icon-wrapper {
     width: auto;
     display: inline-block;
     padding: 3px 10px;
+    cursor: help;
 }
 
 span.content-seo-checkmark {
