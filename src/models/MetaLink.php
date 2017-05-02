@@ -50,14 +50,6 @@ class MetaLink extends MetaItem
             ArrayHelper::rename($config, $key, Inflector::variablize($key));
         }
         $model = new MetaLink($config);
-        if (empty($model->key)) {
-            $model->key = $model->rel;
-
-            // Unique keys for specific tags
-            if (in_array($model->rel, self::UNIQUEKEYS_TAGS)) {
-                $model->uniqueKeys = true;
-            }
-        }
 
         return $model;
     }
@@ -102,6 +94,22 @@ class MetaLink extends MetaItem
 
     // Public Methods
     // =========================================================================
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+
+        if (empty($this->key)) {
+            $this->key = $this->rel;
+            // Unique keys for specific tags
+            if (in_array($this->rel, self::UNIQUEKEYS_TAGS)) {
+                $this->uniqueKeys = true;
+            }
+        }
+    }
 
     /**
      * @inheritdoc

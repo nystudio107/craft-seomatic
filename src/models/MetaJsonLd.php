@@ -179,9 +179,6 @@ class MetaJsonLd extends MetaItem
         if (class_exists($className)) {
             $model = new $className($config);
         }
-        if (empty($model->key)) {
-            $model->key = $model->type;
-        }
 
         return $model;
     }
@@ -198,8 +195,12 @@ class MetaJsonLd extends MetaItem
     public function init()
     {
         parent::init();
+
         $this->type = static::$schemaTypeName;
         $this->context = "http://schema.org";
+        if (empty($this->key)) {
+            $this->key = $this->type;
+        }
     }
 
     /**

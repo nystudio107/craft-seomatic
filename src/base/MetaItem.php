@@ -38,6 +38,14 @@ abstract class MetaItem extends Model implements MetaItemInterface
     /**
      * @inheritdoc
      */
+    public function init()
+    {
+        parent::init();
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         $rules = parent::rules();

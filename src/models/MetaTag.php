@@ -60,13 +60,6 @@ class MetaTag extends MetaItem
             ArrayHelper::rename($config, $key, Inflector::variablize($key));
         }
         $model = new MetaTag($config);
-        if (empty($model->key)) {
-            $model->key = $model->name ?: $model->httpEquiv;
-            // Unique keys for specific tags
-            if (in_array($model->name, self::UNIQUEKEYS_TAGS)) {
-                $model->uniqueKeys = true;
-            }
-        }
 
         return $model;
     }
@@ -96,6 +89,22 @@ class MetaTag extends MetaItem
 
     // Public Methods
     // =========================================================================
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+
+        if (empty($this->key)) {
+            $this->key = $this->name ?: $this->httpEquiv;
+            // $this keys for specific tags
+            if (in_array($this->name, self::UNIQUEKEYS_TAGS)) {
+                $this->uniqueKeys = true;
+            }
+        }
+    }
 
     /**
      * @inheritdoc

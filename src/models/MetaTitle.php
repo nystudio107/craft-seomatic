@@ -43,9 +43,6 @@ class MetaTitle extends MetaItem
     {
         $model = null;
         $model = new MetaTitle($config);
-        if (empty($model->key)) {
-            $model->key = 'title';
-        }
 
         return $model;
     }
@@ -60,6 +57,18 @@ class MetaTitle extends MetaItem
 
     // Public Methods
     // =========================================================================
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+
+        if (empty($this->key)) {
+            $this->key = 'title';
+        }
+    }
 
     /**
      * @inheritdoc

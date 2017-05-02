@@ -38,9 +38,6 @@ class MetaScript extends MetaItem
     {
         $model = null;
         $model = new MetaScript($config);
-        if (empty($model->key)) {
-            $model->key = $model->templatePath;
-        }
 
         return $model;
     }
@@ -60,6 +57,18 @@ class MetaScript extends MetaItem
 
     // Public Methods
     // =========================================================================
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+
+        if (empty($this->key)) {
+            $this->key = $this->templatePath;
+        }
+    }
 
     /**
      * @inheritdoc
