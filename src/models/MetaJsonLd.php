@@ -219,8 +219,13 @@ class MetaJsonLd extends MetaItem
     /**
      * @inheritdoc
      */
-    public function prepForRender(&$data)
+    public function prepForRender(&$data): bool
     {
+        $shouldRender = parent::prepForRender($data);
+        if ($shouldRender) {
+        }
+
+        return $shouldRender;
     }
 
     /**
@@ -237,173 +242,180 @@ class MetaJsonLd extends MetaItem
             'array'            => false,
         ]
     ): string {
-        $linebreak = "";
-        // If we're rendering for an array, don't add linebreaks
-        $oldDevMode = Seomatic::$devMode;
-        if ($params['array'] === true) {
-            Seomatic::$devMode = false;
-        }
-        // If `devMode` is enabled, make the JSON-LD human-readable
-        if (Seomatic::$devMode) {
-            $linebreak = PHP_EOL;
-        }
-        // Render the resulting JSON-LD
-        $scenario = $this->scenario;
-        $this->setScenario('render');
-        $result = JsonLdHelper::encode($this);
-        $this->setScenario($scenario);
-        if ($params['array'] === true) {
-            Seomatic::$devMode = $oldDevMode;
-        }
-        if ($params['renderScriptTags']) {
-            $result =
-                '<script type="application/ld+json">'
-                . $linebreak
-                . $result
-                . $linebreak
-                . '</script>';
-        } elseif (Seomatic::$devMode) {
-            $result =
-                $linebreak
-                . $result
-                . $linebreak;
-        }
-        if ($params['renderRaw'] === true) {
-            $result = Template::raw($result);
-        }
-
-        return $result;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function fields()
-    {
-        $fields = parent::fields();
-        switch ($this->scenario) {
-            case 'google':
-            case 'default':
-                break;
-        }
-
-        return $fields;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        $rules = parent::rules();
-        $rules = array_merge($rules, [
-        ]);
-
-        return $rules;
-    }
-
-    /**
-     * Validate the passed in $attribute based on $schemaPropertyExpectedTypes
-     *
-     * @param string $attribute the attribute currently being validated
-     * @param mixed  $params    the value of the "params" given in the rule
-     */
-    public function validateJsonSchema($attribute, $params)
-    {
-        if (!in_array($attribute, static::$schemaPropertyNames)) {
-            $this->addError($attribute, 'The attribute does not exist.');
-        } else {
-            $expectedTypes = static::$schemaPropertyExpectedTypes[$attribute];
-            $validated = false;
-            $dataToValidate = $this->$attribute;
-            if (!is_array($dataToValidate)) {
-                $dataToValidate = [$dataToValidate];
+        $html = '';
+        $options = $this->tagAttributes();
+        if ($this->prepForRender($options)) {
+            $linebreak = '';
+            // If we're rendering for an array, don't add linebreaks
+            $oldDevMode = Seomatic::$devMode;
+            if ($params['array'] === true) {
+                Seomatic::$devMode = false;
             }
-            foreach ($dataToValidate as $data) {
-                foreach ($expectedTypes as $expectedType) {
-                    $className = 'craft\\plugins\\seomatic\\models\\jsonld\\' . $expectedType;
-                    switch ($expectedType) {
-                        // Text always validates
-                        case 'Text':
+            // If `devMode` is enabled, make the JSON-LD human-readable
+            if (Seomatic::$devMode) {
+                $linebreak = PHP_EOL;
+            }
+            // Render the resulting JSON-LD
+            $scenario = $this->scenario;
+            $this->setScenario('render');
+            $html = JsonLdHelper::encode($this);
+            $this->setScenario($scenario);
+            if ($params['array'] === true) {
+                Seomatic::$devMode = $oldDevMode;
+            }
+            if ($params['renderScriptTags']) {
+                $html =
+                    '<script type="application/ld+json">'
+                    . $linebreak
+                    . $html
+                    . $linebreak
+                    . '</script>';
+            } elseif (Seomatic::$devMode) {
+                $html =
+                    $linebreak
+                    . $html
+                    . $linebreak;
+            }
+            if ($params['renderRaw'] === true) {
+                $html = Template::raw($html);
+            }
+        }
+
+        return $html;
+    }
+
+/**
+ * @inheritdoc
+ */
+public
+function fields()
+{
+    $fields = parent::fields();
+    switch ($this->scenario) {
+        case 'google':
+        case 'default':
+            break;
+    }
+
+    return $fields;
+}
+
+/**
+ * @inheritdoc
+ */
+public
+function rules()
+{
+    $rules = parent::rules();
+    $rules = array_merge($rules, [
+    ]);
+
+    return $rules;
+}
+
+/**
+ * Validate the passed in $attribute based on $schemaPropertyExpectedTypes
+ *
+ * @param string $attribute the attribute currently being validated
+ * @param mixed  $params    the value of the "params" given in the rule
+ */
+public
+function validateJsonSchema($attribute, $params)
+{
+    if (!in_array($attribute, static::$schemaPropertyNames)) {
+        $this->addError($attribute, 'The attribute does not exist.');
+    } else {
+        $expectedTypes = static::$schemaPropertyExpectedTypes[$attribute];
+        $validated = false;
+        $dataToValidate = $this->$attribute;
+        if (!is_array($dataToValidate)) {
+            $dataToValidate = [$dataToValidate];
+        }
+        foreach ($dataToValidate as $data) {
+            foreach ($expectedTypes as $expectedType) {
+                $className = 'craft\\plugins\\seomatic\\models\\jsonld\\' . $expectedType;
+                switch ($expectedType) {
+                    // Text always validates
+                    case 'Text':
+                        $validated = true;
+                        break;
+
+                    // Use Yii's validator for URLs
+                    case 'URL':
+                        $validator = new UrlValidator;
+                        if ($validator->validate($data, $error)) {
                             $validated = true;
-                            break;
+                        }
+                        break;
 
-                        // Use Yii's validator for URLs
-                        case 'URL':
-                            $validator = new UrlValidator;
-                            if ($validator->validate($data, $error)) {
+                    // Use Yii's validator for Booleans
+                    case 'Boolean':
+                        $validator = new BooleanValidator;
+                        if ($validator->validate($data, $error)) {
+                            $validated = true;
+                        }
+                        break;
+
+                    // Use Yii's validator for Numbers
+                    case 'Number':
+                    case 'Float':
+                    case 'Integer':
+                        $validator = new NumberValidator;
+                        if ($expectedType == 'Integer') {
+                            $validator->integerOnly = true;
+                        }
+                        if ($validator->validate($data, $error)) {
+                            $validated = true;
+                        }
+                        break;
+
+                    // Use Yii's validator for Dates
+                    case 'Date':
+                        $validator = new DateValidator;
+                        $validator->type = DateValidator::TYPE_DATE;
+                        $validator->format = 'YYYY-MM-DD';
+                        if ($validator->validate($data, $error)) {
+                            $validated = true;
+                        }
+                        break;
+
+                    // Use Yii's validator for DateTimes
+                    case 'DateTime':
+                        $validator = new DateValidator;
+                        $validator->type = DateValidator::TYPE_DATETIME;
+                        $validator->format = 'YYYY-MM-DDThh:mm:ss.sTZD';
+                        if ($validator->validate($data, $error)) {
+                            $validated = true;
+                        }
+                        break;
+
+                    // Use Yii's validator for Times
+                    case 'Time':
+                        $validator = new DateValidator;
+                        $validator->type = DateValidator::TYPE_TIME;
+                        $validator->format = 'hh:mm:ss.sTZD';
+                        if ($validator->validate($data, $error)) {
+                            $validated = true;
+                        }
+                        break;
+
+                    // By default, assume it's a schema.org JSON-LD object, and validate that
+                    default:
+                        if (is_object($data)) {
+                            if (is_a($data, $className)) {
                                 $validated = true;
                             }
-                            break;
-
-                        // Use Yii's validator for Booleans
-                        case 'Boolean':
-                            $validator = new BooleanValidator;
-                            if ($validator->validate($data, $error)) {
-                                $validated = true;
-                            }
-                            break;
-
-                        // Use Yii's validator for Numbers
-                        case 'Number':
-                        case 'Float':
-                        case 'Integer':
-                            $validator = new NumberValidator;
-                            if ($expectedType == 'Integer') {
-                                $validator->integerOnly = true;
-                            }
-                            if ($validator->validate($data, $error)) {
-                                $validated = true;
-                            }
-                            break;
-
-                        // Use Yii's validator for Dates
-                        case 'Date':
-                            $validator = new DateValidator;
-                            $validator->type = DateValidator::TYPE_DATE;
-                            $validator->format = 'YYYY-MM-DD';
-                            if ($validator->validate($data, $error)) {
-                                $validated = true;
-                            }
-                            break;
-
-                        // Use Yii's validator for DateTimes
-                        case 'DateTime':
-                            $validator = new DateValidator;
-                            $validator->type = DateValidator::TYPE_DATETIME;
-                            $validator->format = 'YYYY-MM-DDThh:mm:ss.sTZD';
-                            if ($validator->validate($data, $error)) {
-                                $validated = true;
-                            }
-                            break;
-
-                        // Use Yii's validator for Times
-                        case 'Time':
-                            $validator = new DateValidator;
-                            $validator->type = DateValidator::TYPE_TIME;
-                            $validator->format = 'hh:mm:ss.sTZD';
-                            if ($validator->validate($data, $error)) {
-                                $validated = true;
-                            }
-                            break;
-
-                        // By default, assume it's a schema.org JSON-LD object, and validate that
-                        default:
-                            if (is_object($data)) {
-                                if (is_a($data, $className)) {
-                                    $validated = true;
-                                }
-                            }
-                            break;
-                    }
+                        }
+                        break;
                 }
-                if (!$validated) {
-                    $this->addError($attribute, 'Must be one of these types: ' . implode(', ', $expectedTypes));
-                }
+            }
+            if (!$validated) {
+                $this->addError($attribute, 'Must be one of these types: ' . implode(', ', $expectedTypes));
             }
         }
     }
+}
 
-    // Private Methods
-    // =========================================================================
+// Private Methods
+// =========================================================================
 }

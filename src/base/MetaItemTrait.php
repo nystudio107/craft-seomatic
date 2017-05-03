@@ -37,4 +37,9 @@ trait MetaItemTrait
      * @var string
      */
     public $key;
+
+    /**
+     * @var array
+     */
+    public $environment;
 }

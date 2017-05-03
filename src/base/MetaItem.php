@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\base;
 
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\models\MetaJsonLd;
 
@@ -41,6 +42,12 @@ abstract class MetaItem extends Model implements MetaItemInterface
     public function init()
     {
         parent::init();
+
+        $envVars = ArrayHelper::getValue($this->environment, Seomatic::$settings->environment);
+        if ($envVars) {
+            $envVars = array_filter($envVars);
+            $this->setAttributes($envVars);
+        }
     }
 
     /**
@@ -53,6 +60,7 @@ abstract class MetaItem extends Model implements MetaItemInterface
             [['include', 'uniqueKeys', 'key'], 'required'],
             [['include', 'uniqueKeys'], 'boolean'],
             [['key'], 'string'],
+            [['environment'], 'safe'],
         ]);
 
         return $rules;
@@ -72,6 +80,7 @@ abstract class MetaItem extends Model implements MetaItemInterface
                         'include',
                         'uniqueKeys',
                         'key',
+                        'environment',
                     ])
                 );
                 break;
@@ -83,8 +92,11 @@ abstract class MetaItem extends Model implements MetaItemInterface
     /**
      * @inheritdoc
      */
-    public function prepForRender(&$data)
+    public function prepForRender(&$data): bool
     {
+        $shouldRender = true;
+
+        return $shouldRender;
     }
 
     /**
@@ -92,7 +104,9 @@ abstract class MetaItem extends Model implements MetaItemInterface
      */
     public function render($params = []): string
     {
-        return '';
+        $html = '';
+
+        return $html;
     }
 
     /**

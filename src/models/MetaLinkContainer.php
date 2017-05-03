@@ -51,13 +51,14 @@ class MetaLinkContainer extends MetaContainer
         foreach ($this->data as $metaLinkModel) {
             if ($metaLinkModel->include) {
                 $options = $metaLinkModel->tagAttributes();
-                $metaLinkModel->prepForRender($options);
-                Seomatic::$view->registerLinkTag($options);
-                // If `devMode` is enabled, validate the Meta Link and output any model errors
-                if (Seomatic::$devMode) {
-                    $metaLinkModel->debugMetaItem(
-                        "Link attribute: "
-                    );
+                if ($metaLinkModel->prepForRender($options)) {
+                    Seomatic::$view->registerLinkTag($options);
+                    // If `devMode` is enabled, validate the Meta Link and output any model errors
+                    if (Seomatic::$devMode) {
+                        $metaLinkModel->debugMetaItem(
+                            "Link attribute: "
+                        );
+                    }
                 }
             }
         }

@@ -41,7 +41,7 @@ interface MetaItemInterface
      *
      * @param mixed $data
      *
-     * @return mixed
+     * @return bool
      */
-    public function prepForRender(&$data);
+    public function prepForRender(&$data): bool;
 }

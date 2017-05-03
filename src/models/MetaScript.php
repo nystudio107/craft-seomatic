@@ -88,8 +88,13 @@ class MetaScript extends MetaItem
     /**
      * @inheritdoc
      */
-    public function prepForRender(&$data)
+    public function prepForRender(&$data): bool
     {
+        $shouldRender = parent::prepForRender($data);
+        if ($shouldRender) {
+        }
+
+        return $shouldRender;
     }
 
     /**
@@ -97,6 +102,11 @@ class MetaScript extends MetaItem
      */
     public function render($params = []):string
     {
-        return PluginTemplateHelper::renderPluginTemplate($this->templatePath, $this->vars);
+        $html = '';
+        if ($this->prepForRender($options)) {
+            $html = PluginTemplateHelper::renderPluginTemplate($this->templatePath, $this->vars);
+        }
+
+        return $html;
     }
 }

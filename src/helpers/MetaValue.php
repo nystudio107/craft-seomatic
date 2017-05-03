@@ -82,6 +82,8 @@ class MetaValue extends Component
                 $metaArray[$key] = self::parseString($value);
             }
         }
+
+        $metaArray = array_filter($metaArray);
     }
 
     /**

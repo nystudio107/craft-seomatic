@@ -54,22 +54,23 @@ class MetaTagContainer extends MetaContainer
         foreach ($this->data as $metaTagModel) {
             if ($metaTagModel->include) {
                 $options = $metaTagModel->tagAttributes();
-                $metaTagModel->prepForRender($options);
-                Seomatic::$view->registerMetaTag($options);
-                // If `devMode` is enabled, validate the Meta Tag and output any model errors
-                if (Seomatic::$devMode) {
-                    $scenario = [];
-                    $scenario['default'] = 'error';
-                    // Special validation for certain meta tags
-                    if (!empty($options['name'])) {
-                        if (in_array($options['name'], self::TAGS_WITH_VALIDATION)) {
-                            $scenario[$options['name']] = 'warning';
+                if ($metaTagModel->prepForRender($options)) {
+                    Seomatic::$view->registerMetaTag($options);
+                    // If `devMode` is enabled, validate the Meta Tag and output any model errors
+                    if (Seomatic::$devMode) {
+                        $scenario = [];
+                        $scenario['default'] = 'error';
+                        // Special validation for certain meta tags
+                        if (!empty($options['name'])) {
+                            if (in_array($options['name'], self::TAGS_WITH_VALIDATION)) {
+                                $scenario[$options['name']] = 'warning';
+                            }
                         }
+                        $metaTagModel->debugMetaItem(
+                            "Tag attribute: ",
+                            $scenario
+                        );
                     }
-                    $metaTagModel->debugMetaItem(
-                        "Tag attribute: ",
-                        $scenario
-                    );
                 }
             }
         }

@@ -16,6 +16,8 @@ use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
+use Craft;
+
 use Stringy\Stringy;
 
 use yii\helpers\Html;
@@ -116,25 +118,29 @@ class MetaTag extends MetaItem
             [['charset', 'content', 'httpEquiv', 'name'], 'string'],
             // Special validation rules for specific meta tags
             [['content'], 'string', 'length' => [70, 160], 'on' => self::DESCRIPTION_TAG],
-            ['content', 'in', 'range' => [
-                'no-referrer',
-                'origin',
-                'no-referrer-when-downgrade',
-                'origin-when-crossorigin',
-                'unsafe-URL',
-            ], 'on' => self::REFERRER_TAG],
-            ['content', 'in', 'range' => [
-                'index',
-                'noindex',
-                'follow',
-                'nofollow',
-                'none',
-                'noodp',
-                'noarchive',
-                'nosnippet',
-                'noimageindex',
-                'nocache',
-            ], 'on' => self::ROBOTS_TAG],
+            [
+                'content', 'in', 'range' => [
+                    'no-referrer',
+                    'origin',
+                    'no-referrer-when-downgrade',
+                    'origin-when-crossorigin',
+                    'unsafe-URL',
+                ], 'on' => self::REFERRER_TAG,
+            ],
+            [
+                'content', 'in', 'range' => [
+                    'index',
+                    'noindex',
+                    'follow',
+                    'nofollow',
+                    'none',
+                    'noodp',
+                    'noarchive',
+                    'nosnippet',
+                    'noimageindex',
+                    'nocache',
+                ], 'on' => self::ROBOTS_TAG,
+            ],
         ]);
 
         return $rules;
@@ -155,59 +161,58 @@ class MetaTag extends MetaItem
     /**
      * @inheritdoc
      */
-    public function prepForRender(&$data)
+    public function prepForRender(&$data): bool
     {
-        $scenario = $this->scenario;
-        $this->setScenario('render');
-        $data = $this->tagAttributes();
-        $this->setScenario($scenario);
-        MetaValueHelper::parseArray($data);
-        // Special-case scenarios
-        if (!empty($data['name'])) {
-            switch ($data['name']) {
-                case self::DESCRIPTION_TAG:
-                    $data['content'] = (string)Stringy::create($data['content'])->safeTruncate(
-                        Seomatic::$plugin->getSettings()->maxDescriptionLength,
-                        '…'
-                    );
-                    break;
+        $shouldRender = parent::prepForRender($data);
+        if ($shouldRender) {
+            $scenario = $this->scenario;
+            $this->setScenario('render');
+            $data = $this->tagAttributes();
+            $this->setScenario($scenario);
+            MetaValueHelper::parseArray($data);
+            // Only render if there's more than one attribute
+            if (count($data) > 1) {
+                // Special-case scenarios
+                if (!empty($data['name'])) {
+                    switch ($data['name']) {
+                        case self::DESCRIPTION_TAG:
+                            if (!empty($data['content'])) {
+                                $data['content'] = (string)Stringy::create($data['content'])->safeTruncate(
+                                    Seomatic::$plugin->getSettings()->maxDescriptionLength,
+                                    '…'
+                                );
+                            }
+                            break;
+                    }
+                }
+                // devMove
+                if (Seomatic::$devMode) {
+                }
+            } else {
+                $error = Craft::t(
+                    'seomatic',
+                    '{tagtype} tag `{key}` did not render because it is missing attributes.',
+                    ['tagtype' => 'Meta', 'key' => $this->key]
+                );
+                Craft::error($error, __METHOD__);
+                $shouldRender = false;
             }
         }
-        // devMove
-        if (Seomatic::$devMode) {
-        }
-        // Per environment
-        switch (Seomatic::$settings->environment) {
-            case 'live':
-                break;
-            case 'staging':
-                if (!empty($data['name'])) {
-                    switch ($data['name']) {
-                        case self::ROBOTS_TAG:
-                            $data['content'] = 'none';
-                            break;
-                    }
-                }
-                break;
-            case 'local':
-                if (!empty($data['name'])) {
-                    switch ($data['name']) {
-                        case self::ROBOTS_TAG:
-                            $data['content'] = 'none';
-                            break;
-                    }
-                }
-                break;
-        }
+
+        return $shouldRender;
     }
 
     /**
      * @inheritdoc
      */
-    public function render($params = []):string
+    public function render($params = []): string
     {
+        $html = '';
         $options = $this->tagAttributes();
-        $this->prepForRender($options);
-        return Html::tag('meta', '', $options);
+        if ($this->prepForRender($options)) {
+            $html = Html::tag('meta', '', $options);
+        }
+
+        return $html;
     }
 }

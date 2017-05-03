@@ -75,25 +75,28 @@ class MetaJsonLdContainer extends MetaContainer
         /** @var $metaJsonLdModel MetaJsonLd */
         foreach ($this->data as $metaJsonLdModel) {
             if ($metaJsonLdModel->include) {
-                $jsonLd = $metaJsonLdModel->render([
-                    'renderRaw'        => true,
-                    'renderScriptTags' => false,
-                    'array'            => false,
-                ]);
-                Seomatic::$view->registerScript(
-                    $jsonLd,
-                    View::POS_END,
-                    ['type' => 'application/ld+json']
-                );
-                // If `devMode` is enabled, validate the JSON-LD and output any model errors
-                if (Seomatic::$devMode) {
-                    $metaJsonLdModel->debugMetaItem(
-                        'JSON-LD property: ',
-                        [
-                            'default' => 'error',
-                            'google'  => 'warning',
-                        ]
+                $options = $metaJsonLdModel->tagAttributes();
+                if ($metaJsonLdModel->prepForRender($options)) {
+                    $jsonLd = $metaJsonLdModel->render([
+                        'renderRaw'        => true,
+                        'renderScriptTags' => false,
+                        'array'            => false,
+                    ]);
+                    Seomatic::$view->registerScript(
+                        $jsonLd,
+                        View::POS_END,
+                        ['type' => 'application/ld+json']
                     );
+                    // If `devMode` is enabled, validate the JSON-LD and output any model errors
+                    if (Seomatic::$devMode) {
+                        $metaJsonLdModel->debugMetaItem(
+                            'JSON-LD property: ',
+                            [
+                                'default' => 'error',
+                                'google'  => 'warning',
+                            ]
+                        );
+                    }
                 }
             }
         }

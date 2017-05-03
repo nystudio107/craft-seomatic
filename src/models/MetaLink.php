@@ -16,6 +16,8 @@ use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
+use Craft;
+
 use yii\helpers\Html;
 use yii\helpers\Inflector;
 
@@ -166,24 +168,40 @@ class MetaLink extends MetaItem
     /**
      * @inheritdoc
      */
-    public function prepForRender(&$data)
+    public function prepForRender(&$data): bool
     {
-        $scenario = $this->scenario;
-        $this->setScenario('render');
-        $data = $this->tagAttributes();
-        $this->setScenario($scenario);
-        MetaValueHelper::parseArray($data);
-        // Special-case scenarios
-        if (Seomatic::$devMode) {
+        $shouldRender = parent::prepForRender($data);
+        if ($shouldRender) {
+            $scenario = $this->scenario;
+            $this->setScenario('render');
+            $data = $this->tagAttributes();
+            $this->setScenario($scenario);
+            MetaValueHelper::parseArray($data);
+            // Only render if there's more than one attribute
+            if (count($data) > 1) {
+                // Special-case scenarios
+                if (Seomatic::$devMode) {
+                }
+                switch (Seomatic::$settings->environment) {
+                    case 'live':
+                        break;
+                    case 'staging':
+                        break;
+                    case 'local':
+                        break;
+                }
+            } else {
+                $error = Craft::t(
+                    'seomatic',
+                    '{tagtype} tag `{key}` did not render because it is missing attributes.',
+                    ['tagtype' => 'Link', 'key' => $this->key]
+                );
+                Craft::error($error, __METHOD__);
+                $shouldRender = false;
+            }
         }
-        switch (Seomatic::$settings->environment) {
-            case 'live':
-                break;
-            case 'staging':
-                break;
-            case 'local':
-                break;
-        }
+
+        return $shouldRender;
     }
 
     /**
@@ -191,8 +209,12 @@ class MetaLink extends MetaItem
      */
     public function render($params = []):string
     {
+        $html = '';
         $options = $this->tagAttributes();
-        $this->prepForRender($options);
-        return Html::tag('link', '', $options);
+        if ($this->prepForRender($options)) {
+            $html = Html::tag('link', '', $options);
+        }
+
+        return $html;
     }
 }

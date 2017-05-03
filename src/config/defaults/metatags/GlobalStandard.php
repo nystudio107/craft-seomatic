@@ -16,7 +16,7 @@
  */
 
 return [
-    'keywords' => [
+    'keywords'    => [
         'charset'   => '',
         'content'   => '{seomatic.seo.title}',
         'httpEquiv' => '',
@@ -28,16 +28,27 @@ return [
         'httpEquiv' => '',
         'name'      => 'description',
     ],
-    'referrer' => [
+    'referrer'    => [
         'charset'   => '',
         'content'   => 'no-referrer-when-downgrade',
         'httpEquiv' => '',
         'name'      => 'referrer',
     ],
-    'robots' => [
-        'charset'   => '',
-        'content'   => 'index',
-        'httpEquiv' => '',
-        'name'      => 'robots',
+    'robots'      => [
+        'charset'     => '',
+        'content'     => 'index',
+        'httpEquiv'   => '',
+        'name'        => 'robots',
+        'environment' => [
+            'live'    => [
+                'content' => 'index',
+            ],
+            'staging' => [
+                'content' => 'none',
+            ],
+            'local'   => [
+                'content' => 'none',
+            ],
+        ],
     ],
 ];

@@ -87,30 +87,26 @@ class MetaTitle extends MetaItem
     /**
      * @inheritdoc
      */
-    public function prepForRender(&$data)
+    public function prepForRender(&$data): bool
     {
-        $scenario = $this->scenario;
-        $this->setScenario('render');
-        $data = MetaValueHelper::parseString($data);
-        $this->setScenario($scenario);
-        // Special-case scenarios
-        $data = (string)Stringy::create($data)->safeTruncate(
-            Seomatic::$plugin->getSettings()->maxTitleLength,
-            '…'
-        );
-        // devMode
-        if (Seomatic::$devMode) {
-            $data = Seomatic::$settings->devModeTitlePrefix . $data;
+        $shouldRender = parent::prepForRender($data);
+        if ($shouldRender) {
+            $scenario = $this->scenario;
+            $this->setScenario('render');
+            $data = MetaValueHelper::parseString($data);
+            $this->setScenario($scenario);
+            // Special-case scenarios
+            $data = (string)Stringy::create($data)->safeTruncate(
+                Seomatic::$plugin->getSettings()->maxTitleLength,
+                '…'
+            );
+            // devMode
+            if (Seomatic::$devMode) {
+                $data = Seomatic::$settings->devModeTitlePrefix . $data;
+            }
         }
-        // Per-environment
-        switch (Seomatic::$settings->environment) {
-            case 'live':
-                break;
-            case 'staging':
-                break;
-            case 'local':
-                break;
-        }
+
+        return $shouldRender;
     }
 
     /**
@@ -118,8 +114,12 @@ class MetaTitle extends MetaItem
      */
     public function render($params = []):string
     {
+        $html = '';
         $title = $this->title;
-        $this->prepForRender($title);
-        return Html::tag('title', $title, []);
+        if ($this->prepForRender($title)) {
+            $html = Html::tag('title', $title, []);
+        }
+
+        return $html;
     }
 }

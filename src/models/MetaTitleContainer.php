@@ -51,13 +51,14 @@ class MetaTitleContainer extends MetaContainer
         foreach ($this->data as $metaTitleModel) {
             if ($metaTitleModel->include) {
                 $title = $metaTitleModel->title;
-                $metaTitleModel->prepForRender($title);
-                Seomatic::$view->title = $title;
-                // If `devMode` is enabled, validate the Meta Tag and output any model errors
-                if (Seomatic::$devMode) {
-                    $metaTitleModel->debugMetaItem(
-                        "Tag attribute: "
-                    );
+                if ($metaTitleModel->prepForRender($title)) {
+                    Seomatic::$view->title = $title;
+                    // If `devMode` is enabled, validate the Meta Tag and output any model errors
+                    if (Seomatic::$devMode) {
+                        $metaTitleModel->debugMetaItem(
+                            "Tag attribute: "
+                        );
+                    }
                 }
             }
         }
