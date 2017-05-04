@@ -168,7 +168,7 @@ class Seomatic extends Plugin
     {
         // Handler: ClearCaches::EVENT_REGISTER_CACHE_OPTIONS
         Event::on(
-            ClearCaches::className(),
+            ClearCaches::class,
             ClearCaches::EVENT_REGISTER_CACHE_OPTIONS,
             function (RegisterCacheOptionsEvent $event) {
                 Craft::trace(
@@ -319,7 +319,7 @@ class Seomatic extends Plugin
         );
         // Handler: Plugins::EVENT_AFTER_INSTALL_PLUGIN
         Event::on(
-            Plugins::className(),
+            Plugins::class,
             Plugins::EVENT_AFTER_INSTALL_PLUGIN,
             function (PluginEvent $event) {
                 Craft::trace(
@@ -349,7 +349,7 @@ class Seomatic extends Plugin
         $handler->register();
         // Handler: View::EVENT_END_PAGE
         Event::on(
-            View::className(),
+            View::class,
             View::EVENT_END_PAGE,
             function (Event $event) {
                 Craft::trace(
@@ -369,7 +369,7 @@ class Seomatic extends Plugin
     {
         // Handler: UrlManager::EVENT_REGISTER_CP_URL_RULES
         Event::on(
-            UrlManager::className(),
+            UrlManager::class,
             UrlManager::EVENT_REGISTER_CP_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
                 Craft::trace(
