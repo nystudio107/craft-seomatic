@@ -97,7 +97,7 @@ class FrontendTemplates extends Component
             function (RegisterUrlRulesEvent $event) {
                 Craft::trace(
                     'UrlManager::EVENT_REGISTER_SITE_URL_RULES',
-                    'seomatic'
+                    __METHOD__
                 );
                 // Register our sitemap routes
                 $event->rules = array_merge(
@@ -218,7 +218,7 @@ class FrontendTemplates extends Component
             function () use ($template, $params) {
                 Craft::info(
                     'Frontend template cache miss: ' . $template,
-                    'seomatic'
+                    __METHOD__
                 );
                 $html = '';
                 if (!empty($this->frontendTemplateContainers->data[$template])) {
@@ -245,7 +245,7 @@ class FrontendTemplates extends Component
         TagDependency::invalidate($cache, $this::GLOBAL_FRONTENDTEMPLATE_CACHE_TAG);
         Craft::info(
             'All frontend template caches cleared',
-            'seomatic'
+            __METHOD__
         );
     }
 
@@ -260,7 +260,7 @@ class FrontendTemplates extends Component
         TagDependency::invalidate($cache, $this::FRONTENDTEMPLATE_CACHE_TAG . $template);
         Craft::info(
             'Frontend template cache cleared: ' . $template,
-            'seomatic'
+            __METHOD__
         );
     }
 }

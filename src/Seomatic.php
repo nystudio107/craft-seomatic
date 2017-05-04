@@ -173,7 +173,7 @@ class Seomatic extends Plugin
             function (RegisterCacheOptionsEvent $event) {
                 Craft::trace(
                     'ClearCaches::EVENT_REGISTER_CACHE_OPTIONS',
-                    'seomatic'
+                    __METHOD__
                 );
                 // Frontend template caches
                 $event->options[] = [
@@ -208,7 +208,7 @@ class Seomatic extends Plugin
             function (SectionEvent $event) {
                 Craft::trace(
                     'Sections::EVENT_AFTER_SAVE_SECTION',
-                    'seomatic'
+                    __METHOD__
                 );
                 Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
                     MetaBundlesService::SECTION_META_BUNDLE,
@@ -228,7 +228,7 @@ class Seomatic extends Plugin
             function (SectionEvent $event) {
                 Craft::trace(
                     'Sections::EVENT_AFTER_DELETE_SECTION',
-                    'seomatic'
+                    __METHOD__
                 );
                 Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
                     MetaBundlesService::SECTION_META_BUNDLE,
@@ -249,7 +249,7 @@ class Seomatic extends Plugin
             function (CategoryGroupEvent $event) {
                 Craft::trace(
                     'Categories::EVENT_AFTER_SAVE_GROUP',
-                    'seomatic'
+                    __METHOD__
                 );
                 Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
                     MetaBundlesService::CATEGORYGROUP_META_BUNDLE,
@@ -269,7 +269,7 @@ class Seomatic extends Plugin
             function (CategoryGroupEvent $event) {
                 Craft::trace(
                     'Categories::EVENT_AFTER_DELETE_GROUP',
-                    'seomatic'
+                    __METHOD__
                 );
                 Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
                     MetaBundlesService::CATEGORYGROUP_META_BUNDLE,
@@ -290,7 +290,7 @@ class Seomatic extends Plugin
             function (ElementEvent $event) {
                 Craft::trace(
                     'Elements::EVENT_AFTER_SAVE_ELEMENT',
-                    'seomatic'
+                    __METHOD__
                 );
                 /** @var  $element Element */
                 $element = $event->element;
@@ -307,7 +307,7 @@ class Seomatic extends Plugin
             function (ElementEvent $event) {
                 Craft::trace(
                     'Elements::EVENT_AFTER_DELETE_ELEMENT',
-                    'seomatic'
+                    __METHOD__
                 );
                 /** @var  $element Element */
                 $element = $event->element;
@@ -324,7 +324,7 @@ class Seomatic extends Plugin
             function (PluginEvent $event) {
                 Craft::trace(
                     'Plugins::EVENT_AFTER_INSTALL_PLUGIN',
-                    'seomatic'
+                    __METHOD__
                 );
                 if ($event->plugin === $this) {
                 }
@@ -354,7 +354,7 @@ class Seomatic extends Plugin
             function (Event $event) {
                 Craft::trace(
                     'View::EVENT_END_PAGE',
-                    'seomatic'
+                    __METHOD__
                 );
                 // The page is done rendering, include our meta containers
                 Seomatic::$plugin->metaContainers->includeMetaContainers();
@@ -374,7 +374,7 @@ class Seomatic extends Plugin
             function (RegisterUrlRulesEvent $event) {
                 Craft::trace(
                     'UrlManager::EVENT_REGISTER_CP_URL_RULES',
-                    'seomatic'
+                    __METHOD__
                 );
                 // Register our sitemap routes
                 $event->rules = array_merge(

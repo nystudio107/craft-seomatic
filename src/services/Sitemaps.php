@@ -85,7 +85,7 @@ class Sitemaps extends Component implements SitemapInterface
             function (RegisterUrlRulesEvent $event) {
                 Craft::trace(
                     'UrlManager::EVENT_REGISTER_SITE_URL_RULES',
-                    'seomatic'
+                    __METHOD__
                 );
                 // Register our sitemap routes
                 $event->rules = array_merge(
@@ -146,12 +146,12 @@ class Sitemaps extends Component implements SitemapInterface
                 $guzzleClient->post($submissionUrl);
                 Craft::info(
                     'Sitemap index submitted to: ' . $submissionUrl,
-                    'seomatic'
+                    __METHOD__
                 );
             } catch (\Exception $e) {
                 Craft::error(
                     'Error submitting sitemap index to: ' . $submissionUrl . ' - ' . $e->getMessage(),
-                    'seomatic'
+                    __METHOD__
                 );
             }
         }
@@ -166,7 +166,7 @@ class Sitemaps extends Component implements SitemapInterface
         TagDependency::invalidate($cache, $this::GLOBAL_SITEMAP_CACHE_TAG);
         Craft::info(
             'All sitemap caches cleared',
-            'seomatic'
+            __METHOD__
         );
     }
 
@@ -182,7 +182,7 @@ class Sitemaps extends Component implements SitemapInterface
         TagDependency::invalidate($cache, SitemapTemplate::SITEMAP_CACHE_TAG . $handle . $siteId);
         Craft::info(
             'Sitemap cache cleared: ' . $handle,
-            'seomatic'
+            __METHOD__
         );
     }
 
@@ -195,7 +195,7 @@ class Sitemaps extends Component implements SitemapInterface
         TagDependency::invalidate($cache, SitemapIndexTemplate::SITEMAP_INDEX_CACHE_TAG);
         Craft::info(
             'Sitemap index cache cleared',
-            'seomatic'
+            __METHOD__
         );
     }
 }

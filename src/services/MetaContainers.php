@@ -147,7 +147,7 @@ class MetaContainers extends Component
                 function () use ($path, $siteId) {
                     Craft::info(
                         'Meta container cache miss: ' . $path . '/' . $siteId,
-                        'seomatic'
+                        __METHOD__
                     );
                     $this->loadGlobalMetaContainers($siteId);
                     $this->loadContentMetaContainers();
@@ -553,7 +553,7 @@ class MetaContainers extends Component
         TagDependency::invalidate($cache, $this::GLOBAL_METACONTAINER_CACHE_TAG);
         Craft::info(
             'All meta container caches cleared',
-            'seomatic'
+            __METHOD__
         );
     }
 
@@ -572,7 +572,7 @@ class MetaContainers extends Component
         TagDependency::invalidate($cache, $this::METACONTAINER_CACHE_TAG . $metaBundleSourceId);
         Craft::info(
             'Meta bundle cache cleared: ' . $metaBundleSourceId,
-            'seomatic'
+            __METHOD__
         );
     }
 
@@ -588,7 +588,7 @@ class MetaContainers extends Component
         TagDependency::invalidate($cache, $this::METACONTAINER_CACHE_TAG . $path . $siteId);
         Craft::info(
             'Meta container cache cleared: ' . $path . '/' . $siteId,
-            'seomatic'
+            __METHOD__
         );
     }
 

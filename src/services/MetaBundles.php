@@ -101,7 +101,7 @@ class MetaBundles extends Component
                     .$metaBundle->sourceHandle
                     .' from siteId: '
                     .$site->id,
-                    'seomatic'
+                    __METHOD__
                 );
                 // Is this a new source?
                 if (!$isNew) {
@@ -142,7 +142,7 @@ class MetaBundles extends Component
                     .$element->uri
                     .'/'
                     .$siteId,
-                    'seomatic'
+                    __METHOD__
                 );
                 if (!$isNew) {
                     $sourceType = '';
@@ -288,7 +288,7 @@ class MetaBundles extends Component
                             .$sourceId
                             .' from siteId: '
                             .$sourceSiteId,
-                            'seomatic'
+                            __METHOD__
                         );
                     }
                     break;
@@ -310,7 +310,7 @@ class MetaBundles extends Component
                         .$sourceId
                         .' from siteId: '
                         .$sourceSiteId,
-                        'seomatic'
+                        __METHOD__
                     );
                     break;
                 // @todo handle commerce products
@@ -339,7 +339,7 @@ class MetaBundles extends Component
                     . $metaBundle->sourceId
                     .' from siteId: '
                     . $site->id,
-                    'seomatic'
+                    __METHOD__
                 );
             }
         }
@@ -366,7 +366,7 @@ class MetaBundles extends Component
                     . $metaBundle->sourceId
                     .' from siteId: '
                     . $site->id,
-                    'seomatic'
+                    __METHOD__
                 );
             }
         }
@@ -398,7 +398,7 @@ class MetaBundles extends Component
                     .$sourceId
                     .' from siteId: '
                     . $site->id,
-                    'seomatic'
+                    __METHOD__
                 );
             }
         }

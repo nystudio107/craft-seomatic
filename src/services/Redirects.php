@@ -72,7 +72,7 @@ class Redirects extends Component
         TagDependency::invalidate($cache, $this::GLOBAL_REDIRECTS_CACHE_TAG);
         Craft::info(
             'All redirect caches cleared',
-            'seomatic'
+            __METHOD__
         );
     }
 }

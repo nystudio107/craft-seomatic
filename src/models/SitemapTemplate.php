@@ -125,7 +125,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         return $cache->getOrSet($this::CACHE_KEY . $handle . $siteId, function () use ($type, $handle, $siteId) {
             Craft::info(
                 'Sitemap cache miss: ' . $handle . '/' . $siteId,
-                'seomatic'
+                __METHOD__
             );
             $lines = [];
             // Sitemap index XML header and opening tag
@@ -335,7 +335,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         TagDependency::invalidate($cache, $this::SITEMAP_CACHE_TAG . $handle . $siteId);
         Craft::info(
             'Sitemap cache cleared: ' . $handle,
-            'seomatic'
+            __METHOD__
         );
     }
 }
