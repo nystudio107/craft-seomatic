@@ -123,7 +123,6 @@ class MetaBundles extends Component
         }
     }
 
-
     /**
      * Invalidate the caches and data structures associated with this MetaBundle
      *
@@ -214,7 +213,6 @@ class MetaBundles extends Component
 
         return $metaBundle;
     }
-
 
     /**
      * @param string $sourceType
