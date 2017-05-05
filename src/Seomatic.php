@@ -415,7 +415,6 @@ class Seomatic extends Plugin
             $category = $context['category'];
             if (!empty($category) && !empty($category->uri)) {
                 Seomatic::$plugin->metaContainers->loadMetaContainers($category->uri, $category->siteId);
-
                 // Render our sidebar template
                 $html = Craft::$app->view->renderTemplate(
                     'seomatic/_sidebar',

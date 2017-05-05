@@ -11,16 +11,6 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\models\MetaJsonLdContainer;
-use nystudio107\seomatic\models\MetaLinkContainer;
-use nystudio107\seomatic\models\MetaScriptContainer;
-use nystudio107\seomatic\models\MetaTagContainer;
-use nystudio107\seomatic\models\MetaTitleContainer;
-use nystudio107\seomatic\models\MetaGlobalVars;
-
-use nystudio107\seomatic\models\FrontendTemplateContainer;
-
-use Craft;
 use craft\base\Model;
 use craft\validators\DateTimeValidator;
 

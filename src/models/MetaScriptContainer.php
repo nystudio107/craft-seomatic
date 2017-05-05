@@ -13,9 +13,6 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
-use nystudio107\seomatic\models\MetaScript;
-
-use Craft;
 
 use yii\web\View;
 

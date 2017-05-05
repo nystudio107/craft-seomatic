@@ -14,7 +14,6 @@ namespace nystudio107\seomatic\services;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\base\MetaItem;
-use nystudio107\seomatic\helpers\MetaValue;
 use nystudio107\seomatic\models\jsonld\BreadcrumbList;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaGlobalVars;
@@ -35,9 +34,7 @@ use craft\base\Element;
 use craft\elements\Category;
 use craft\elements\Entry;
 use craft\helpers\UrlHelper;
-use craft\web\View;
 
-use yii\base\Event;
 use yii\base\Exception;
 use yii\caching\TagDependency;
 
@@ -273,7 +270,7 @@ class MetaContainers extends Component
         $html = '';
         /** @var  $metaContainer MetaContainer */
         foreach ($this->metaContainers as $metaContainer) {
-            if ($metaContainer::CONTAINER_TYPE == $type) {
+            if ($metaContainer::CONTAINER_TYPE == $type && $metaContainer->include) {
                 $html .= $metaContainer->render([
                     'renderRaw'        => true,
                     'renderScriptTags' => true,
@@ -297,7 +294,7 @@ class MetaContainers extends Component
         $htmlArray = [];
         /** @var  $metaContainer MetaContainer */
         foreach ($this->metaContainers as $metaContainer) {
-            if ($metaContainer::CONTAINER_TYPE == $type) {
+            if ($metaContainer::CONTAINER_TYPE == $type && $metaContainer->include) {
                 $htmlArray = array_merge($htmlArray, $metaContainer->renderArray());
             }
         }

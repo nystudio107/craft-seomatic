@@ -83,7 +83,7 @@ class FrontendTemplates extends Component
     {
         $this->frontendTemplateContainers = FrontendTemplateContainer::create();
         // Load in all of the frontend templates
-        $frontendTemplates = $this->getFrontendTemplates();
+        $frontendTemplates = $this->frontendTemplates();
         foreach ($frontendTemplates as $frontendTemplate) {
             $this->frontendTemplateContainers->addData(
                 $frontendTemplate,
@@ -132,7 +132,7 @@ class FrontendTemplates extends Component
      *
      * @return null|FrontendTemplate
      */
-    public function getFrontendTemplateByHandle(string $handle)
+    public function frontendTemplateByHandle(string $handle)
     {
         $frontendTemplate = null;
         $frontendTemplateArray = (new Query())
@@ -141,7 +141,6 @@ class FrontendTemplates extends Component
                 'handle' => $handle,
             ])
             ->one();
-        Craft::dd($frontendTemplateArray);
         if (!empty($frontendTemplateArray)) {
             $frontendTemplateArray = array_diff_key($frontendTemplateArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
             $frontendTemplate = EditableTemplate::create(
@@ -157,7 +156,7 @@ class FrontendTemplates extends Component
      *
      * @return array
      */
-    public function getFrontendTemplates(): array
+    public function frontendTemplates(): array
     {
         $frontendTemplates = [];
         $frontendTemplateArrays = (new Query())

@@ -184,8 +184,8 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                         foreach ($metaBundle->sourceAltSiteSettings as $altSiteSettings) {
                             $altElement = null;
                             // Handle each element type separately
-                            switch ($metaBundle->sourceSectionType) {
-                                case Entry::class:
+                            switch ($metaBundle->sourceBundleType) {
+                                case MetaBundles::SECTION_META_BUNDLE:
                                     $altElement = Entry::find()
                                         ->section($metaBundle->sourceHandle)
                                         ->id($element->id)
@@ -194,13 +194,14 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                                         ->one();
                                     break;
 
-                                case Category::class:
+                                case MetaBundles::CATEGORYGROUP_META_BUNDLE:
                                     $altElement = Category::find()
                                         ->id($element->id)
                                         ->siteId($altSiteSettings['siteId'])
                                         ->limit(1)
                                         ->one();
                                     break;
+                                    // @todo: handle Commerce products
                             }
                             if ($altElement) {
                                 $lines[] = '    <xhtml:link rel="alternate"'

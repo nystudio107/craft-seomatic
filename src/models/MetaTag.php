@@ -178,7 +178,7 @@ class MetaTag extends MetaItem
                         case self::DESCRIPTION_TAG:
                             if (!empty($data['content'])) {
                                 $data['content'] = (string)Stringy::create($data['content'])->safeTruncate(
-                                    Seomatic::$plugin->getSettings()->maxDescriptionLength,
+                                    Seomatic::$settings->maxDescriptionLength,
                                     '…'
                                 );
                             }
