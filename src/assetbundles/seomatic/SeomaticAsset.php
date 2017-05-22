@@ -36,11 +36,11 @@ class SeomaticAsset extends AssetBundle
         ];
 
         $this->js = [
+            'js/vendor.js'
         ];
 
         $this->css = [
-            'css/css-reset.css',
-            'css/style.css',
+            'css/seomatic.css',
         ];
 
         parent::init();

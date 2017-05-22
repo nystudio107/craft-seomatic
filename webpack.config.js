@@ -1,16 +1,22 @@
 var path = require('path')
 var webpack = require('webpack')
 
-const assetBundleRoot = './src/assetbundles/seomatic/dist';
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
+
+const assetBundleRoot = './src/assetbundles/seomatic';
+const inProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
     entry: {
+        'seomatic': path.resolve(assetBundleRoot, './src/js/seomatic.js'),
         'vendor': ['vue', 'axios'],
     },
     output: {
-        path: path.resolve(__dirname, assetBundleRoot + '/js'),
+        path: path.resolve(__dirname, assetBundleRoot + '/dist'),
         publicPath: assetBundleRoot,
-        filename: '[name].js'
+        filename: path.join('./js', '[name].js')
     },
     module: {
         rules: [
@@ -28,18 +34,69 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.(png|jpg|gif|svg)$/,
-                loader: 'file-loader',
-                options: {
-                    name: '[name].[ext]?[hash]'
-                }
+                test: /\.s[ac]ss$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader', 'sass-loader'],
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                url: false
+                            }
+                        }
+                    ]
+                }),
+                exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader'],
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                url: false
+                            }
+                        }
+                    ]
+                }),
+                exclude: /node_modules/
+            },
+            {
+                test: /\.(png|jpe?g|gif|svg)$/,
+                loader: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: path.join('./img', '[name].[ext]')
+                        }
+                    },
+                    'img-loader'
+                ]
             }
         ]
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
             names: ['vendor']
-        })
+        }),
+        new ExtractTextPlugin({
+            filename: path.join('./css', '[name].css'),
+            allChunks: true,
+        }),
+        new webpack.LoaderOptionsPlugin({
+            minimize: inProduction
+        }),
+        new CleanWebpackPlugin(['dist'], {
+            root: path.resolve(__dirname, assetBundleRoot),
+            verbose: true,
+            dry: false,
+            watch: inProduction
+        }),
+        new ManifestPlugin()
     ],
     resolve: {
         alias: {
@@ -56,7 +113,7 @@ module.exports = {
     devtool: '#eval-source-map'
 }
 
-if (process.env.NODE_ENV === 'production') {
+if (inProduction) {
     module.exports.devtool = '#source-map'
     // http://vue-loader.vuejs.org/en/workflow/production.html
     module.exports.plugins = (module.exports.plugins || []).concat([
@@ -71,8 +128,5 @@ if (process.env.NODE_ENV === 'production') {
                 warnings: false
             }
         }),
-        new webpack.LoaderOptionsPlugin({
-            minimize: true
-        })
     ])
 }
