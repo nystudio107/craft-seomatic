@@ -32,6 +32,7 @@ use craft\base\Plugin;
 use craft\elements\Entry;
 use craft\elements\Category;
 use craft\events\CategoryGroupEvent;
+use craft\events\DefineComponentsEvent;
 use craft\events\ElementEvent;
 use craft\events\PluginEvent;
 use craft\events\RegisterCacheOptionsEvent;
@@ -42,6 +43,7 @@ use craft\services\Elements;
 use craft\services\Plugins;
 use craft\services\Sections;
 use craft\utilities\ClearCaches;
+use craft\web\twig\variables\CraftVariable;
 use craft\web\UrlManager;
 use craft\web\View;
 
@@ -166,6 +168,14 @@ class Seomatic extends Plugin
      */
     protected function installGlobalEventListeners()
     {
+        // Handler: ClearCaches::EVENT_REGISTER_CACHE_OPTIONS
+        Event::on(
+            CraftVariable::class,
+            CraftVariable::EVENT_DEFINE_COMPONENTS,
+            function (DefineComponentsEvent $event) {
+                $event->components['seomatic'] = SeomaticVariable::class;
+            }
+        );
         // Handler: ClearCaches::EVENT_REGISTER_CACHE_OPTIONS
         Event::on(
             ClearCaches::class,
@@ -427,14 +437,6 @@ class Seomatic extends Plugin
 
             return $html;
         });
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function defineTemplateComponent()
-    {
-        return SeomaticVariable::class;
     }
 
     /**
