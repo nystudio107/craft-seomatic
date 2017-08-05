@@ -32,7 +32,6 @@ use craft\base\Plugin;
 use craft\elements\Entry;
 use craft\elements\Category;
 use craft\events\CategoryGroupEvent;
-use craft\events\DefineComponentsEvent;
 use craft\events\ElementEvent;
 use craft\events\PluginEvent;
 use craft\events\RegisterCacheOptionsEvent;
@@ -168,14 +167,17 @@ class Seomatic extends Plugin
      */
     protected function installGlobalEventListeners()
     {
-        // Handler: ClearCaches::EVENT_REGISTER_CACHE_OPTIONS
+        // Handler: CraftVariable::EVENT_INIT
         Event::on(
             CraftVariable::class,
-            CraftVariable::EVENT_DEFINE_COMPONENTS,
-            function (DefineComponentsEvent $event) {
-                $event->components['seomatic'] = SeomaticVariable::class;
+            CraftVariable::EVENT_INIT,
+            function (Event $event) {
+                /** @var CraftVariable $variable */
+                $variable = $event->sender;
+                $variable->set('seomatic', SeomaticVariable::class);
             }
         );
+
         // Handler: ClearCaches::EVENT_REGISTER_CACHE_OPTIONS
         Event::on(
             ClearCaches::class,
