@@ -22,8 +22,6 @@ use nystudio107\seomatic\services\Redirects as RedirectsService;
 use nystudio107\seomatic\services\Sitemaps as SitemapsService;
 use nystudio107\seomatic\twigextensions\SeomaticTwigExtension;
 use nystudio107\seomatic\variables\SeomaticVariable;
-use nystudio107\seomatic\web\ErrorHandler as SeomaticErrorHandler;
-
 
 use Craft;
 use craft\base\Element;
@@ -33,6 +31,7 @@ use craft\elements\Entry;
 use craft\elements\Category;
 use craft\events\CategoryGroupEvent;
 use craft\events\ElementEvent;
+use craft\events\ExceptionEvent;
 use craft\events\PluginEvent;
 use craft\events\RegisterCacheOptionsEvent;
 use craft\events\RegisterUrlRulesEvent;
@@ -43,6 +42,8 @@ use craft\services\Plugins;
 use craft\services\Sections;
 use craft\utilities\ClearCaches;
 use craft\web\twig\variables\CraftVariable;
+use craft\web\ErrorHandler;
+use yii\web\HttpException;
 use craft\web\UrlManager;
 use craft\web\View;
 
@@ -355,10 +356,27 @@ class Seomatic extends Plugin
         Seomatic::$plugin->sitemaps->loadSitemapContainers();
         // Load the frontend template containers
         Seomatic::$plugin->frontendTemplates->loadFrontendTemplateContainers();
-        // Register our error handler
-        $handler = new SeomaticErrorHandler;
-        Craft::$app->set('errorHandler', $handler);
-        $handler->register();
+        // Handler: UrlManager::EVENT_REGISTER_CP_URL_RULES
+        Event::on(
+            ErrorHandler::class,
+            ErrorHandler::EVENT_BEFORE_HANDLE_EXCEPTION,
+            function (ExceptionEvent $event) {
+                Craft::trace(
+                    'ErrorHandler::EVENT_BEFORE_HANDLE_EXCEPTION',
+                    __METHOD__
+                );
+                $exception = $event->exception;
+                // If this is a Twig Runtime exception, use the previous one instead
+                if ($exception instanceof \Twig_Error_Runtime &&
+                    ($previousException = $exception->getPrevious()) !== null) {
+                    $exception = $previousException;
+                }
+                // If this is a 404 error, see if we can handle it
+                if ($exception instanceof HttpException && $exception->statusCode === 404) {
+                    Seomatic::$plugin->redirects->handle404();
+                }
+            }
+        );
         // Handler: View::EVENT_END_PAGE
         Event::on(
             View::class,
