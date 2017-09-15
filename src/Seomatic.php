@@ -178,42 +178,6 @@ class Seomatic extends Plugin
                 $variable->set('seomatic', SeomaticVariable::class);
             }
         );
-
-        // Handler: ClearCaches::EVENT_REGISTER_CACHE_OPTIONS
-        Event::on(
-            ClearCaches::class,
-            ClearCaches::EVENT_REGISTER_CACHE_OPTIONS,
-            function (RegisterCacheOptionsEvent $event) {
-                Craft::trace(
-                    'ClearCaches::EVENT_REGISTER_CACHE_OPTIONS',
-                    __METHOD__
-                );
-                // Frontend template caches
-                $event->options[] = [
-                    'key' => 'seomatic-frontendtemplate-caches',
-                    'label' => Craft::t('seomatic', 'SEOmatic frontend template caches'),
-                    'action' => function () {
-                        Seomatic::$plugin->frontendTemplates->invalidateCaches();
-                    },
-                ];
-                // Meta bundle caches
-                $event->options[] = [
-                    'key' => 'seomatic-metabundle-caches',
-                    'label' => Craft::t('seomatic', 'SEOmatic metadata caches'),
-                    'action' => function () {
-                        Seomatic::$plugin->metaContainers->invalidateCaches();
-                    },
-                ];
-                // Sitemap caches
-                $event->options[] = [
-                    'key' => 'seomatic-sitemap-caches',
-                    'label' => Craft::t('seomatic', 'SEOmatic sitemap caches'),
-                    'action' => function () {
-                        Seomatic::$plugin->sitemaps->invalidateCaches();
-                    },
-                ];
-            }
-        );
         // Handler: Sections::EVENT_AFTER_SAVE_SECTION
         Event::on(
             Sections::class,
@@ -340,6 +304,7 @@ class Seomatic extends Plugin
                     __METHOD__
                 );
                 if ($event->plugin === $this) {
+                    //This is our plugin that's been installed
                 }
             }
         );
@@ -416,7 +381,41 @@ class Seomatic extends Plugin
                 );
             }
         );
-
+        // Handler: ClearCaches::EVENT_REGISTER_CACHE_OPTIONS
+        Event::on(
+            ClearCaches::class,
+            ClearCaches::EVENT_REGISTER_CACHE_OPTIONS,
+            function (RegisterCacheOptionsEvent $event) {
+                Craft::trace(
+                    'ClearCaches::EVENT_REGISTER_CACHE_OPTIONS',
+                    __METHOD__
+                );
+                // Frontend template caches
+                $event->options[] = [
+                    'key' => 'seomatic-frontendtemplate-caches',
+                    'label' => Craft::t('seomatic', 'SEOmatic frontend template caches'),
+                    'action' => function () {
+                        Seomatic::$plugin->frontendTemplates->invalidateCaches();
+                    },
+                ];
+                // Meta bundle caches
+                $event->options[] = [
+                    'key' => 'seomatic-metabundle-caches',
+                    'label' => Craft::t('seomatic', 'SEOmatic metadata caches'),
+                    'action' => function () {
+                        Seomatic::$plugin->metaContainers->invalidateCaches();
+                    },
+                ];
+                // Sitemap caches
+                $event->options[] = [
+                    'key' => 'seomatic-sitemap-caches',
+                    'label' => Craft::t('seomatic', 'SEOmatic sitemap caches'),
+                    'action' => function () {
+                        Seomatic::$plugin->sitemaps->invalidateCaches();
+                    },
+                ];
+            }
+        );
         // Entries sidebar
         Craft::$app->getView()->hook('cp.entries.edit.right-pane', function (&$context) {
             $html = '';

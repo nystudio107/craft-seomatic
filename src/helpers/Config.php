@@ -21,29 +21,32 @@ use craft\base\Component;
  */
 class Config extends Component
 {
+    // Constants
+    // =========================================================================
+
+    const LOCAL_CONFIG_DIR = 'seomatic-config';
+
     // Static Methods
     // =========================================================================
 
     /**
      * Loads a config file from the plugin's config/ folder
      *
-     * @param $directory
-     * @param $filename
+     * @param string $path
      *
      * @return array
      */
-    public static function getConfigFromFile(string $filename, string $directory = '')
+    public static function getConfigFromFile(string $path)
     {
-        if (!empty($directory)) {
-            $directory = DIRECTORY_SEPARATOR . $directory;
-        }
+        $path = DIRECTORY_SEPARATOR . ltrim($path, DIRECTORY_SEPARATOR);
         $path = Craft::getAlias('@nystudio107/seomatic')
             . DIRECTORY_SEPARATOR
-            . 'config'
-            . $directory
-            . DIRECTORY_SEPARATOR
-            . $filename
-            . '.php';
+            . self::LOCAL_CONFIG_DIR
+            . str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path);
+        if (!file_exists($path)) {
+            return [];
+        }
+
         if (!file_exists($path)) {
             return [];
         }

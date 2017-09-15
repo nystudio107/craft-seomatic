@@ -16,4 +16,16 @@
  */
 
 return [
+    'og:type' => [
+        'charset'   => '',
+        'content'   => 'website',
+        'httpEquiv' => '',
+        'name'      => 'og:type',
+    ],
+    'og:title' => [
+        'charset'   => '',
+        'content'   => '{{ seomatic.seoTitle }}',
+        'httpEquiv' => '',
+        'name'      => 'og:title',
+    ],
 ];

@@ -16,19 +16,22 @@
  */
 
 return [
-    'tagSetName' => 'FaceBook OpenGraph Meta Tags',
-    'tagSetDescription' => 'FaceBook OpenGraph Tags',
-
-    'og:type' => [
+    'contenttype' => [
         'charset'   => '',
-        'content'   => 'website',
-        'httpEquiv' => '',
-        'name'      => 'og:type',
+        'content'   => 'text/html; charset=utf-8',
+        'httpEquiv' => 'Content-Type',
+        'name'      => '',
     ],
-    'og:title' => [
+    'generator'    => [
         'charset'   => '',
-        'content'   => 'Some OG title',
+        'content'   => 'SEOmatic',
         'httpEquiv' => '',
-        'name'      => 'og:title',
+        'name'      => 'generator',
+    ],
+    'viewport'     => [
+        'charset'   => '',
+        'content'   => 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no',
+        'httpEquiv' => '',
+        'name'      => 'viewport',
     ],
 ];

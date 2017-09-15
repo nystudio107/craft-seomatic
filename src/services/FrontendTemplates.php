@@ -181,7 +181,7 @@ class FrontendTemplates extends Component
     {
         // Create a new FrontendTemplatesContainer with propagated defaults
         $frontendTemplateDefaults = array_merge(
-            ConfigHelper::getConfigFromFile('FrontendTemplatesContainer', 'defaults'),
+            ConfigHelper::getConfigFromFile('frontendtemplates/Bundle.php'),
             []
         );
         // Save each container out as a record
