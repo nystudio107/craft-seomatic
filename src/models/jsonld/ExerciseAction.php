@@ -94,6 +94,13 @@ class ExerciseAction extends PlayAction
     // =========================================================================
 
     /**
+     * A sub property of instrument. The diet used in this action.
+     *
+     * @var Diet [schema.org types: Diet]
+     */
+    public $diet;
+
+    /**
      * The distance travelled, e.g. exercising or travelling.
      *
      * @var Distance [schema.org types: Distance]
@@ -107,6 +114,28 @@ class ExerciseAction extends PlayAction
      * @var Place [schema.org types: Place]
      */
     public $exerciseCourse;
+
+    /**
+     * A sub property of instrument. The exercise plan used on this action.
+     *
+     * @var ExercisePlan [schema.org types: ExercisePlan]
+     */
+    public $exercisePlan;
+
+    /**
+     * A sub property of instrument. The diet used in this action.
+     *
+     * @var Diet [schema.org types: Diet]
+     */
+    public $exerciseRelatedDiet;
+
+    /**
+     * Type(s) of exercise or activity, such as strength training, flexibility
+     * training, aerobics, cardiac rehabilitation, etc.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $exerciseType;
 
     /**
      * A sub property of location. The original location of the object or the
@@ -163,8 +192,12 @@ class ExerciseAction extends PlayAction
      * @var array
      */
     static protected $_schemaPropertyNames = [
+        'diet',
         'distance',
         'exerciseCourse',
+        'exercisePlan',
+        'exerciseRelatedDiet',
+        'exerciseType',
         'fromLocation',
         'opponent',
         'sportsActivityLocation',
@@ -179,8 +212,12 @@ class ExerciseAction extends PlayAction
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
+        'diet' => ['Diet'],
         'distance' => ['Distance'],
         'exerciseCourse' => ['Place'],
+        'exercisePlan' => ['ExercisePlan'],
+        'exerciseRelatedDiet' => ['Diet'],
+        'exerciseType' => ['Text'],
         'fromLocation' => ['Place'],
         'opponent' => ['Person'],
         'sportsActivityLocation' => ['SportsActivityLocation'],
@@ -195,8 +232,12 @@ class ExerciseAction extends PlayAction
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
+        'diet' => 'A sub property of instrument. The diet used in this action.',
         'distance' => 'The distance travelled, e.g. exercising or travelling.',
         'exerciseCourse' => 'A sub property of location. The course where this action was taken. Supersedes course.',
+        'exercisePlan' => 'A sub property of instrument. The exercise plan used on this action.',
+        'exerciseRelatedDiet' => 'A sub property of instrument. The diet used in this action.',
+        'exerciseType' => 'Type(s) of exercise or activity, such as strength training, flexibility training, aerobics, cardiac rehabilitation, etc.',
         'fromLocation' => 'A sub property of location. The original location of the object or the agent before the action.',
         'opponent' => 'A sub property of participant. The opponent on this action.',
         'sportsActivityLocation' => 'A sub property of location. The sports activity location where this action occurred.',
@@ -263,7 +304,7 @@ class ExerciseAction extends PlayAction
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['distance','exerciseCourse','fromLocation','opponent','sportsActivityLocation','sportsEvent','sportsTeam','toLocation'], 'validateJsonSchema'],
+            [['diet','distance','exerciseCourse','exercisePlan','exerciseRelatedDiet','exerciseType','fromLocation','opponent','sportsActivityLocation','sportsEvent','sportsTeam','toLocation'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

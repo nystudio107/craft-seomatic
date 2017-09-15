@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\JsonLdType;
+use nystudio107\seomatic\models\jsonld\MediaObject;
 
 /**
  * ImageObject - An image file.
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\JsonLdType;
  * @since     3.0.0
  * @see       http://schema.org/ImageObject
  */
-class ImageObject extends JsonLdType
+class ImageObject extends MediaObject
 {
     // Static Public Properties
     // =========================================================================
@@ -52,7 +52,7 @@ class ImageObject extends JsonLdType
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'JsonLdType';
+    static public $schemaTypeExtends = 'MediaObject';
 
     /**
      * The Schema.org composed Property Names

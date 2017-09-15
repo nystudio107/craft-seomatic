@@ -107,7 +107,7 @@ class BedDetails extends Intangible
      * The type of bed to which the BedDetail refers, i.e. the type of bed
      * available in the quantity indicated by quantity.
      *
-     * @var string [schema.org types: Text]
+     * @var mixed|BedType|string [schema.org types: BedType, Text]
      */
     public $typeOfBed;
 
@@ -131,7 +131,7 @@ class BedDetails extends Intangible
      */
     static protected $_schemaPropertyExpectedTypes = [
         'numberOfBeds' => ['Number'],
-        'typeOfBed' => ['Text']
+        'typeOfBed' => ['BedType','Text']
     ];
 
     /**

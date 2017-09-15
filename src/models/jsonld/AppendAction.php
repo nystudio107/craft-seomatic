@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\InsertAction;
+use nystudio107\seomatic\models\jsonld\JsonLdType;
 
 /**
  * AppendAction - The act of inserting at the end if an ordered collection.
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\InsertAction;
  * @since     3.0.0
  * @see       http://schema.org/AppendAction
  */
-class AppendAction extends InsertAction
+class AppendAction extends JsonLdType
 {
     // Static Public Properties
     // =========================================================================
@@ -52,7 +52,7 @@ class AppendAction extends InsertAction
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'InsertAction';
+    static public $schemaTypeExtends = 'JsonLdType';
 
     /**
      * The Schema.org composed Property Names
@@ -92,14 +92,6 @@ class AppendAction extends InsertAction
     // Public Properties
     // =========================================================================
 
-    /**
-     * A sub property of location. The final location of the object or the agent
-     * after the action.
-     *
-     * @var Place [schema.org types: Place]
-     */
-    public $toLocation;
-
     // Static Protected Properties
     // =========================================================================
 
@@ -109,7 +101,7 @@ class AppendAction extends InsertAction
      * @var array
      */
     static protected $_schemaPropertyNames = [
-        'toLocation'
+
     ];
 
     /**
@@ -118,7 +110,7 @@ class AppendAction extends InsertAction
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'toLocation' => ['Place']
+
     ];
 
     /**
@@ -127,7 +119,7 @@ class AppendAction extends InsertAction
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'toLocation' => 'A sub property of location. The final location of the object or the agent after the action.'
+
     ];
 
     /**
@@ -188,7 +180,7 @@ class AppendAction extends InsertAction
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['toLocation'], 'validateJsonSchema'],
+            [[], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

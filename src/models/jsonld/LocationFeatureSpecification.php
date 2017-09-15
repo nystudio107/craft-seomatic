@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\PropertyValue;
+use nystudio107\seomatic\models\jsonld\JsonLdType;
 
 /**
  * LocationFeatureSpecification - Specifies a location feature by providing a
@@ -23,7 +23,7 @@ use nystudio107\seomatic\models\jsonld\PropertyValue;
  * @since     3.0.0
  * @see       http://schema.org/LocationFeatureSpecification
  */
-class LocationFeatureSpecification extends PropertyValue
+class LocationFeatureSpecification extends JsonLdType
 {
     // Static Public Properties
     // =========================================================================
@@ -54,7 +54,7 @@ class LocationFeatureSpecification extends PropertyValue
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'PropertyValue';
+    static public $schemaTypeExtends = 'JsonLdType';
 
     /**
      * The Schema.org composed Property Names

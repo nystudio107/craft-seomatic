@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\StructuredValue;
+use nystudio107\seomatic\models\jsonld\JsonLdType;
 
 /**
  * OwnershipInfo - A structured value providing information about when a
@@ -22,7 +22,7 @@ use nystudio107\seomatic\models\jsonld\StructuredValue;
  * @since     3.0.0
  * @see       http://schema.org/OwnershipInfo
  */
-class OwnershipInfo extends StructuredValue
+class OwnershipInfo extends JsonLdType
 {
     // Static Public Properties
     // =========================================================================
@@ -53,7 +53,7 @@ class OwnershipInfo extends StructuredValue
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'StructuredValue';
+    static public $schemaTypeExtends = 'JsonLdType';
 
     /**
      * The Schema.org composed Property Names

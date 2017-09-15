@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\jsonld\JsonLdType;
 
 /**
- * Book - A book.
+ * Book - No comment
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -45,7 +45,7 @@ class Book extends JsonLdType
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'A book.';
+    static public $schemaTypeDescription = 'No comment';
 
     /**
      * The Schema.org Type Extends
@@ -92,41 +92,6 @@ class Book extends JsonLdType
     // Public Properties
     // =========================================================================
 
-    /**
-     * The edition of the book.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $bookEdition;
-
-    /**
-     * The format of the book.
-     *
-     * @var BookFormatType [schema.org types: BookFormatType]
-     */
-    public $bookFormat;
-
-    /**
-     * The illustrator of the book.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $illustrator;
-
-    /**
-     * The ISBN of the book.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $isbn;
-
-    /**
-     * The number of pages in the book.
-     *
-     * @var int [schema.org types: Integer]
-     */
-    public $numberOfPages;
-
     // Static Protected Properties
     // =========================================================================
 
@@ -136,11 +101,7 @@ class Book extends JsonLdType
      * @var array
      */
     static protected $_schemaPropertyNames = [
-        'bookEdition',
-        'bookFormat',
-        'illustrator',
-        'isbn',
-        'numberOfPages'
+
     ];
 
     /**
@@ -149,11 +110,7 @@ class Book extends JsonLdType
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'bookEdition' => ['Text'],
-        'bookFormat' => ['BookFormatType'],
-        'illustrator' => ['Person'],
-        'isbn' => ['Text'],
-        'numberOfPages' => ['Integer']
+
     ];
 
     /**
@@ -162,11 +119,7 @@ class Book extends JsonLdType
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'bookEdition' => 'The edition of the book.',
-        'bookFormat' => 'The format of the book.',
-        'illustrator' => 'The illustrator of the book.',
-        'isbn' => 'The ISBN of the book.',
-        'numberOfPages' => 'The number of pages in the book.'
+
     ];
 
     /**
@@ -227,7 +180,7 @@ class Book extends JsonLdType
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['bookEdition','bookFormat','illustrator','isbn','numberOfPages'], 'validateJsonSchema'],
+            [[], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

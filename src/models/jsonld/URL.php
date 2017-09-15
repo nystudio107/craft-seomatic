@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\jsonld\Text;
 
 /**
- * URL - Data type: URL.
+ * URL - No comment
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -45,7 +45,7 @@ class URL extends Text
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'Data type: URL.';
+    static public $schemaTypeDescription = 'No comment';
 
     /**
      * The Schema.org Type Extends

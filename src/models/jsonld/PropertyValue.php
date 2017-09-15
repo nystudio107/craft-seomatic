@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\StructuredValue;
+use nystudio107\seomatic\models\jsonld\JsonLdType;
 
 /**
  * PropertyValue - A property-value pair, e.g. representing a feature of a
@@ -27,7 +27,7 @@ use nystudio107\seomatic\models\jsonld\StructuredValue;
  * @since     3.0.0
  * @see       http://schema.org/PropertyValue
  */
-class PropertyValue extends StructuredValue
+class PropertyValue extends JsonLdType
 {
     // Static Public Properties
     // =========================================================================
@@ -58,7 +58,7 @@ class PropertyValue extends StructuredValue
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'StructuredValue';
+    static public $schemaTypeExtends = 'JsonLdType';
 
     /**
      * The Schema.org composed Property Names
@@ -106,9 +106,28 @@ class PropertyValue extends StructuredValue
     public $maxValue;
 
     /**
+     * A technique or technology used in a Dataset (or DataDownload, DataCatalog),
+     * corresponding to the method used for measuring the corresponding
+     * variable(s) (described using variableMeasured). This is oriented towards
+     * scientific and scholarly dataset publication but may have broader
+     * applicability; it is not intended as a full representation of measurement,
+     * but rather as a high level summary for dataset discovery. For example, if
+     * variableMeasured is: molecule concentration, measurementTechnique could be:
+     * "mass spectrometry" or "nmr spectroscopy" or "colorimetry" or
+     * "immunofluorescence". If the variableMeasured is "depression rating", the
+     * measurementTechnique could be "Zung Scale" or "HAM-D" or "Beck Depression
+     * Inventory". If there are several variableMeasured properties recorded for
+     * some given data object, use a PropertyValue for each variableMeasured and
+     * attach the corresponding measurementTechnique.
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $measurementTechnique;
+
+    /**
      * The lower value of some characteristic or property.
      *
-     * @var float [schema.org types: Number]
+     * @var mixed|float [schema.org types: Number]
      */
     public $minValue;
 
@@ -172,6 +191,7 @@ class PropertyValue extends StructuredValue
      */
     static protected $_schemaPropertyNames = [
         'maxValue',
+        'measurementTechnique',
         'minValue',
         'propertyID',
         'unitCode',
@@ -187,6 +207,7 @@ class PropertyValue extends StructuredValue
      */
     static protected $_schemaPropertyExpectedTypes = [
         'maxValue' => ['Number'],
+        'measurementTechnique' => ['Text','URL'],
         'minValue' => ['Number'],
         'propertyID' => ['Text','URL'],
         'unitCode' => ['Text','URL'],
@@ -202,6 +223,7 @@ class PropertyValue extends StructuredValue
      */
     static protected $_schemaPropertyDescriptions = [
         'maxValue' => 'The upper value of some characteristic or property.',
+        'measurementTechnique' => 'A technique or technology used in a Dataset (or DataDownload, DataCatalog), corresponding to the method used for measuring the corresponding variable(s) (described using variableMeasured). This is oriented towards scientific and scholarly dataset publication but may have broader applicability; it is not intended as a full representation of measurement, but rather as a high level summary for dataset discovery. For example, if variableMeasured is: molecule concentration, measurementTechnique could be: "mass spectrometry" or "nmr spectroscopy" or "colorimetry" or "immunofluorescence". If the variableMeasured is "depression rating", the measurementTechnique could be "Zung Scale" or "HAM-D" or "Beck Depression Inventory". If there are several variableMeasured properties recorded for some given data object, use a PropertyValue for each variableMeasured and attach the corresponding measurementTechnique.',
         'minValue' => 'The lower value of some characteristic or property.',
         'propertyID' => 'A commonly used identifier for the characteristic represented by the property, e.g. a manufacturer or a standard code for a property. propertyID can be (1) a prefixed string, mainly meant to be used with standards for product properties; (2) a site-specific, non-prefixed string (e.g. the primary key of the property or the vendor-specific id of the property), or (3) a URL indicating the type of the property, either pointing to an external vocabulary, or a Web resource that describes the property (e.g. a glossary entry). Standards bodies should promote a standard prefix for the identifiers of properties from their standards.',
         'unitCode' => 'The unit of measurement given using the UN/CEFACT Common Code (3 characters) or a URL. Other codes than the UN/CEFACT Common Code may be used with a prefix followed by a colon.',
@@ -268,7 +290,7 @@ class PropertyValue extends StructuredValue
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['maxValue','minValue','propertyID','unitCode','unitText','value','valueReference'], 'validateJsonSchema'],
+            [['maxValue','measurementTechnique','minValue','propertyID','unitCode','unitText','value','valueReference'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

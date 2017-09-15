@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\Action;
+use nystudio107\seomatic\models\jsonld\JsonLdType;
 
 /**
  * UpdateAction - The act of managing by changing/editing the state of the
@@ -22,7 +22,7 @@ use nystudio107\seomatic\models\jsonld\Action;
  * @since     3.0.0
  * @see       http://schema.org/UpdateAction
  */
-class UpdateAction extends Action
+class UpdateAction extends JsonLdType
 {
     // Static Public Properties
     // =========================================================================
@@ -53,7 +53,7 @@ class UpdateAction extends Action
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'Action';
+    static public $schemaTypeExtends = 'JsonLdType';
 
     /**
      * The Schema.org composed Property Names

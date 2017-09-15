@@ -14,11 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\jsonld\Thing;
 
 /**
- * Action - An action performed by a direct agent and indirect participants
- * upon a direct object. Optionally happens at a location with the help of an
- * inanimate instrument. The execution of the action may produce a result.
- * Specific action sub-type documentation specifies the exact expectation of
- * each argument/role. See also blog post and Actions overview document.
+ * Action - No comment
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -49,7 +45,7 @@ class Action extends Thing
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'An action performed by a direct agent and indirect participants upon a direct object. Optionally happens at a location with the help of an inanimate instrument. The execution of the action may produce a result. Specific action sub-type documentation specifies the exact expectation of each argument/role. See also blog post and Actions overview document.';
+    static public $schemaTypeDescription = 'No comment';
 
     /**
      * The Schema.org Type Extends

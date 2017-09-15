@@ -93,9 +93,18 @@ class MenuItem extends Intangible
     // =========================================================================
 
     /**
+     * Additional menu item(s) such as a side dish of salad or side order of fries
+     * that can be added to this menu item. Additionally it can be a menu section
+     * containing allowed add-on menu items for this menu item.
+     *
+     * @var mixed|MenuItem|MenuSection [schema.org types: MenuItem, MenuSection]
+     */
+    public $menuAddOn;
+
+    /**
      * Nutrition information about the recipe or menu item.
      *
-     * @var NutritionInformation [schema.org types: NutritionInformation]
+     * @var mixed|NutritionInformation [schema.org types: NutritionInformation]
      */
     public $nutrition;
 
@@ -104,7 +113,7 @@ class MenuItem extends Intangible
      * rent the DVD of a movie, perform a service, or give away tickets to an
      * event.
      *
-     * @var Offer [schema.org types: Offer]
+     * @var mixed|Offer [schema.org types: Offer]
      */
     public $offers;
 
@@ -112,7 +121,7 @@ class MenuItem extends Intangible
      * Indicates a dietary restriction or guideline for which this recipe or menu
      * item is suitable, e.g. diabetic, halal etc.
      *
-     * @var RestrictedDiet [schema.org types: RestrictedDiet]
+     * @var mixed|RestrictedDiet [schema.org types: RestrictedDiet]
      */
     public $suitableForDiet;
 
@@ -125,6 +134,7 @@ class MenuItem extends Intangible
      * @var array
      */
     static protected $_schemaPropertyNames = [
+        'menuAddOn',
         'nutrition',
         'offers',
         'suitableForDiet'
@@ -136,6 +146,7 @@ class MenuItem extends Intangible
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
+        'menuAddOn' => ['MenuItem','MenuSection'],
         'nutrition' => ['NutritionInformation'],
         'offers' => ['Offer'],
         'suitableForDiet' => ['RestrictedDiet']
@@ -147,6 +158,7 @@ class MenuItem extends Intangible
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
+        'menuAddOn' => 'Additional menu item(s) such as a side dish of salad or side order of fries that can be added to this menu item. Additionally it can be a menu section containing allowed add-on menu items for this menu item.',
         'nutrition' => 'Nutrition information about the recipe or menu item.',
         'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event.',
         'suitableForDiet' => 'Indicates a dietary restriction or guideline for which this recipe or menu item is suitable, e.g. diabetic, halal etc.'
@@ -210,7 +222,7 @@ class MenuItem extends Intangible
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['nutrition','offers','suitableForDiet'], 'validateJsonSchema'],
+            [['menuAddOn','nutrition','offers','suitableForDiet'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

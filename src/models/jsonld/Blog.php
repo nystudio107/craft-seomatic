@@ -99,6 +99,15 @@ class Blog extends CreativeWork
      */
     public $blogPost;
 
+    /**
+     * The International Standard Serial Number (ISSN) that identifies this serial
+     * publication. You can repeat this property to identify different formats of,
+     * or the linking ISSN (ISSN-L) for, this serial publication.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $issn;
+
     // Static Protected Properties
     // =========================================================================
 
@@ -108,7 +117,8 @@ class Blog extends CreativeWork
      * @var array
      */
     static protected $_schemaPropertyNames = [
-        'blogPost'
+        'blogPost',
+        'issn'
     ];
 
     /**
@@ -117,7 +127,8 @@ class Blog extends CreativeWork
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'blogPost' => ['BlogPosting']
+        'blogPost' => ['BlogPosting'],
+        'issn' => ['Text']
     ];
 
     /**
@@ -126,7 +137,8 @@ class Blog extends CreativeWork
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'blogPost' => 'A posting that is part of this blog. Supersedes blogPosts.'
+        'blogPost' => 'A posting that is part of this blog. Supersedes blogPosts.',
+        'issn' => 'The International Standard Serial Number (ISSN) that identifies this serial publication. You can repeat this property to identify different formats of, or the linking ISSN (ISSN-L) for, this serial publication.'
     ];
 
     /**
@@ -187,7 +199,7 @@ class Blog extends CreativeWork
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['blogPost'], 'validateJsonSchema'],
+            [['blogPost','issn'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

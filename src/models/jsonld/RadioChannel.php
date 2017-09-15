@@ -102,10 +102,19 @@ class RadioChannel extends BroadcastChannel
     public $broadcastChannelId;
 
     /**
+     * The frequency used for over-the-air broadcasts. Numeric values or simple
+     * ranges e.g. 87-99. In addition a shortcut idiom is supported for frequences
+     * of AM and FM radio channels, e.g. "87 FM".
+     *
+     * @var mixed|BroadcastFrequencySpecification|string [schema.org types: BroadcastFrequencySpecification, Text]
+     */
+    public $broadcastFrequency;
+
+    /**
      * The type of service required to have access to the channel (e.g. Standard
      * or Premium).
      *
-     * @var string [schema.org types: Text]
+     * @var mixed|string [schema.org types: Text]
      */
     public $broadcastServiceTier;
 
@@ -124,7 +133,8 @@ class RadioChannel extends BroadcastChannel
     public $inBroadcastLineup;
 
     /**
-     * The BroadcastService offered on this channel.
+     * The BroadcastService offered on this channel. Inverse property:
+     * hasBroadcastChannel.
      *
      * @var mixed|BroadcastService [schema.org types: BroadcastService]
      */
@@ -140,6 +150,7 @@ class RadioChannel extends BroadcastChannel
      */
     static protected $_schemaPropertyNames = [
         'broadcastChannelId',
+        'broadcastFrequency',
         'broadcastServiceTier',
         'genre',
         'inBroadcastLineup',
@@ -153,6 +164,7 @@ class RadioChannel extends BroadcastChannel
      */
     static protected $_schemaPropertyExpectedTypes = [
         'broadcastChannelId' => ['Text'],
+        'broadcastFrequency' => ['BroadcastFrequencySpecification','Text'],
         'broadcastServiceTier' => ['Text'],
         'genre' => ['Text','URL'],
         'inBroadcastLineup' => ['CableOrSatelliteService'],
@@ -166,10 +178,11 @@ class RadioChannel extends BroadcastChannel
      */
     static protected $_schemaPropertyDescriptions = [
         'broadcastChannelId' => 'The unique address by which the BroadcastService can be identified in a provider lineup. In US, this is typically a number.',
+        'broadcastFrequency' => 'The frequency used for over-the-air broadcasts. Numeric values or simple ranges e.g. 87-99. In addition a shortcut idiom is supported for frequences of AM and FM radio channels, e.g. "87 FM".',
         'broadcastServiceTier' => 'The type of service required to have access to the channel (e.g. Standard or Premium).',
         'genre' => 'Genre of the creative work, broadcast channel or group.',
         'inBroadcastLineup' => 'The CableOrSatelliteService offering the channel.',
-        'providesBroadcastService' => 'The BroadcastService offered on this channel.'
+        'providesBroadcastService' => 'The BroadcastService offered on this channel. Inverse property: hasBroadcastChannel.'
     ];
 
     /**
@@ -230,7 +243,7 @@ class RadioChannel extends BroadcastChannel
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['broadcastChannelId','broadcastServiceTier','genre','inBroadcastLineup','providesBroadcastService'], 'validateJsonSchema'],
+            [['broadcastChannelId','broadcastFrequency','broadcastServiceTier','genre','inBroadcastLineup','providesBroadcastService'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

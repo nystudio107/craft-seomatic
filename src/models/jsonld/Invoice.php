@@ -121,7 +121,7 @@ class Invoice extends Intangible
      * A category for the item. Greater signs or slashes can be used to informally
      * indicate a category hierarchy.
      *
-     * @var mixed|string|Thing [schema.org types: Text, Thing]
+     * @var mixed|PhysicalActivityCategory|string|Thing [schema.org types: PhysicalActivityCategory, Text, Thing]
      */
     public $category;
 
@@ -242,7 +242,7 @@ class Invoice extends Intangible
         'accountId' => ['Text'],
         'billingPeriod' => ['Duration'],
         'broker' => ['Organization','Person'],
-        'category' => ['Text','Thing'],
+        'category' => ['PhysicalActivityCategory','Text','Thing'],
         'confirmationNumber' => ['Text'],
         'customer' => ['Organization','Person'],
         'minimumPaymentDue' => ['MonetaryAmount','PriceSpecification'],

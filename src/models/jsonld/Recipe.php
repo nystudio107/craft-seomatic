@@ -11,19 +11,17 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\CreativeWork;
+use nystudio107\seomatic\models\jsonld\HowTo;
 
 /**
- * Recipe - A recipe. For dietary restrictions covered by the recipe, a few
- * common restrictions are enumerated via suitableForDiet. The keywords
- * property can also be used to add more detail.
+ * Recipe - No comment
  *
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  * @see       http://schema.org/Recipe
  */
-class Recipe extends CreativeWork
+class Recipe extends HowTo
 {
     // Static Public Properties
     // =========================================================================
@@ -47,14 +45,14 @@ class Recipe extends CreativeWork
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'A recipe. For dietary restrictions covered by the recipe, a few common restrictions are enumerated via suitableForDiet. The keywords property can also be used to add more detail.';
+    static public $schemaTypeDescription = 'No comment';
 
     /**
      * The Schema.org Type Extends
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'CreativeWork';
+    static public $schemaTypeExtends = 'HowTo';
 
     /**
      * The Schema.org composed Property Names
@@ -116,14 +114,6 @@ class Recipe extends CreativeWork
     public $nutrition;
 
     /**
-     * The length of time it takes to prepare the recipe, in ISO 8601 duration
-     * format.
-     *
-     * @var Duration [schema.org types: Duration]
-     */
-    public $prepTime;
-
-    /**
      * The category of the recipe—for example, appetizer, entree, etc.
      *
      * @var string [schema.org types: Text]
@@ -146,9 +136,10 @@ class Recipe extends CreativeWork
     public $recipeIngredient;
 
     /**
-     * A step or instruction involved in making the recipe.
+     * A step in making the recipe, in the form of a single item (document, video,
+     * etc.) or an ordered list with HowToStep and/or HowToSection items.
      *
-     * @var mixed|ItemList|string [schema.org types: ItemList, Text]
+     * @var mixed|CreativeWork|ItemList|string [schema.org types: CreativeWork, ItemList, Text]
      */
     public $recipeInstructions;
 
@@ -156,7 +147,7 @@ class Recipe extends CreativeWork
      * The quantity produced by the recipe (for example, number of people served,
      * number of servings, etc).
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var mixed|QuantitativeValue|string [schema.org types: QuantitativeValue, Text]
      */
     public $recipeYield;
 
@@ -167,14 +158,6 @@ class Recipe extends CreativeWork
      * @var mixed|RestrictedDiet [schema.org types: RestrictedDiet]
      */
     public $suitableForDiet;
-
-    /**
-     * The total time it takes to prepare and cook the recipe, in ISO 8601
-     * duration format.
-     *
-     * @var mixed|Duration [schema.org types: Duration]
-     */
-    public $totalTime;
 
     // Static Protected Properties
     // =========================================================================
@@ -188,14 +171,12 @@ class Recipe extends CreativeWork
         'cookTime',
         'cookingMethod',
         'nutrition',
-        'prepTime',
         'recipeCategory',
         'recipeCuisine',
         'recipeIngredient',
         'recipeInstructions',
         'recipeYield',
-        'suitableForDiet',
-        'totalTime'
+        'suitableForDiet'
     ];
 
     /**
@@ -207,14 +188,12 @@ class Recipe extends CreativeWork
         'cookTime' => ['Duration'],
         'cookingMethod' => ['Text'],
         'nutrition' => ['NutritionInformation'],
-        'prepTime' => ['Duration'],
         'recipeCategory' => ['Text'],
         'recipeCuisine' => ['Text'],
         'recipeIngredient' => ['Text'],
-        'recipeInstructions' => ['ItemList','Text'],
-        'recipeYield' => ['Text'],
-        'suitableForDiet' => ['RestrictedDiet'],
-        'totalTime' => ['Duration']
+        'recipeInstructions' => ['CreativeWork','ItemList','Text'],
+        'recipeYield' => ['QuantitativeValue','Text'],
+        'suitableForDiet' => ['RestrictedDiet']
     ];
 
     /**
@@ -226,14 +205,12 @@ class Recipe extends CreativeWork
         'cookTime' => 'The time it takes to actually cook the dish, in ISO 8601 duration format.',
         'cookingMethod' => 'The method of cooking, such as Frying, Steaming, ...',
         'nutrition' => 'Nutrition information about the recipe or menu item.',
-        'prepTime' => 'The length of time it takes to prepare the recipe, in ISO 8601 duration format.',
         'recipeCategory' => 'The category of the recipe—for example, appetizer, entree, etc.',
         'recipeCuisine' => 'The cuisine of the recipe (for example, French or Ethiopian).',
         'recipeIngredient' => 'A single ingredient used in the recipe, e.g. sugar, flour or garlic. Supersedes ingredients.',
-        'recipeInstructions' => 'A step or instruction involved in making the recipe.',
+        'recipeInstructions' => 'A step in making the recipe, in the form of a single item (document, video, etc.) or an ordered list with HowToStep and/or HowToSection items.',
         'recipeYield' => 'The quantity produced by the recipe (for example, number of people served, number of servings, etc).',
-        'suitableForDiet' => 'Indicates a dietary restriction or guideline for which this recipe or menu item is suitable, e.g. diabetic, halal etc.',
-        'totalTime' => 'The total time it takes to prepare and cook the recipe, in ISO 8601 duration format.'
+        'suitableForDiet' => 'Indicates a dietary restriction or guideline for which this recipe or menu item is suitable, e.g. diabetic, halal etc.'
     ];
 
     /**
@@ -294,7 +271,7 @@ class Recipe extends CreativeWork
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['cookTime','cookingMethod','nutrition','prepTime','recipeCategory','recipeCuisine','recipeIngredient','recipeInstructions','recipeYield','suitableForDiet','totalTime'], 'validateJsonSchema'],
+            [['cookTime','cookingMethod','nutrition','recipeCategory','recipeCuisine','recipeIngredient','recipeInstructions','recipeYield','suitableForDiet'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

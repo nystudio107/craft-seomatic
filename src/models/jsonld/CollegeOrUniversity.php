@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\JsonLdType;
+use nystudio107\seomatic\models\jsonld\EducationalOrganization;
 
 /**
  * CollegeOrUniversity - A college, university, or other third-level
@@ -22,7 +22,7 @@ use nystudio107\seomatic\models\jsonld\JsonLdType;
  * @since     3.0.0
  * @see       http://schema.org/CollegeOrUniversity
  */
-class CollegeOrUniversity extends JsonLdType
+class CollegeOrUniversity extends EducationalOrganization
 {
     // Static Public Properties
     // =========================================================================
@@ -53,7 +53,7 @@ class CollegeOrUniversity extends JsonLdType
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'JsonLdType';
+    static public $schemaTypeExtends = 'EducationalOrganization';
 
     /**
      * The Schema.org composed Property Names

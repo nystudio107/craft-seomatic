@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\Article;
+use nystudio107\seomatic\models\jsonld\JsonLdType;
 
 /**
  * TechArticle - A technical article - Example: How-to (task) topics,
@@ -22,7 +22,7 @@ use nystudio107\seomatic\models\jsonld\Article;
  * @since     3.0.0
  * @see       http://schema.org/TechArticle
  */
-class TechArticle extends Article
+class TechArticle extends JsonLdType
 {
     // Static Public Properties
     // =========================================================================
@@ -53,7 +53,7 @@ class TechArticle extends Article
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'Article';
+    static public $schemaTypeExtends = 'JsonLdType';
 
     /**
      * The Schema.org composed Property Names

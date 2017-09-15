@@ -14,7 +14,8 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\jsonld\Product;
 
 /**
- * IndividualProduct - No comment
+ * IndividualProduct - A single, identifiable product instance (e.g. a laptop
+ * with a particular serial number).
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -45,7 +46,7 @@ class IndividualProduct extends Product
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'No comment';
+    static public $schemaTypeDescription = 'A single, identifiable product instance (e.g. a laptop with a particular serial number).';
 
     /**
      * The Schema.org Type Extends

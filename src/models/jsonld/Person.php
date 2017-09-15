@@ -384,6 +384,20 @@ class Person extends Thing
     public $performerIn;
 
     /**
+     * The publishingPrinciples property indicates (typically via URL) a document
+     * describing the editorial principles of an Organization (or individual e.g.
+     * a Person writing a blog) that relate to their activities as a publisher,
+     * e.g. ethics or diversity policies. When applied to a CreativeWork (e.g.
+     * NewsArticle) the principles are those of the party primarily responsible
+     * for the creation of the CreativeWork. While such policies are most
+     * typically expressed in natural language, sometimes related information
+     * (e.g. indicating a funder) can be expressed using schema.org terminology.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
+     */
+    public $publishingPrinciples;
+
+    /**
      * The most generic familial relation.
      *
      * @var mixed|Person [schema.org types: Person]
@@ -512,6 +526,7 @@ class Person extends Thing
         'owns',
         'parent',
         'performerIn',
+        'publishingPrinciples',
         'relatedTo',
         'seeks',
         'sibling',
@@ -570,6 +585,7 @@ class Person extends Thing
         'owns' => ['OwnershipInfo','Product'],
         'parent' => ['Person'],
         'performerIn' => ['Event'],
+        'publishingPrinciples' => ['CreativeWork','URL'],
         'relatedTo' => ['Person'],
         'seeks' => ['Demand'],
         'sibling' => ['Person'],
@@ -628,6 +644,7 @@ class Person extends Thing
         'owns' => 'Products owned by the organization or person.',
         'parent' => 'A parent of this person. Supersedes parents.',
         'performerIn' => 'Event that this person is a performer or participant in.',
+        'publishingPrinciples' => 'The publishingPrinciples property indicates (typically via URL) a document describing the editorial principles of an Organization (or individual e.g. a Person writing a blog) that relate to their activities as a publisher, e.g. ethics or diversity policies. When applied to a CreativeWork (e.g. NewsArticle) the principles are those of the party primarily responsible for the creation of the CreativeWork. While such policies are most typically expressed in natural language, sometimes related information (e.g. indicating a funder) can be expressed using schema.org terminology.',
         'relatedTo' => 'The most generic familial relation.',
         'seeks' => 'A pointer to products or services sought by the organization or person (demand).',
         'sibling' => 'A sibling of the person. Supersedes siblings.',
@@ -699,7 +716,7 @@ class Person extends Thing
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['additionalName','address','affiliation','alumniOf','award','birthDate','birthPlace','brand','children','colleague','contactPoint','deathDate','deathPlace','duns','email','familyName','faxNumber','follows','funder','gender','givenName','globalLocationNumber','hasOfferCatalog','hasPOS','height','homeLocation','honorificPrefix','honorificSuffix','isicV4','jobTitle','knows','makesOffer','memberOf','naics','nationality','netWorth','owns','parent','performerIn','relatedTo','seeks','sibling','sponsor','spouse','taxID','telephone','vatID','weight','workLocation','worksFor'], 'validateJsonSchema'],
+            [['additionalName','address','affiliation','alumniOf','award','birthDate','birthPlace','brand','children','colleague','contactPoint','deathDate','deathPlace','duns','email','familyName','faxNumber','follows','funder','gender','givenName','globalLocationNumber','hasOfferCatalog','hasPOS','height','homeLocation','honorificPrefix','honorificSuffix','isicV4','jobTitle','knows','makesOffer','memberOf','naics','nationality','netWorth','owns','parent','performerIn','publishingPrinciples','relatedTo','seeks','sibling','sponsor','spouse','taxID','telephone','vatID','weight','workLocation','worksFor'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

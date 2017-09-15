@@ -152,14 +152,6 @@ class MusicVideoObject extends MediaObject
     public $encodingFormat;
 
     /**
-     * Date the content expires and is no longer useful or available. Useful for
-     * videos.
-     *
-     * @var Date [schema.org types: Date]
-     */
-    public $expires;
-
-    /**
      * The height of the item.
      *
      * @var mixed|Distance|QuantitativeValue [schema.org types: Distance, QuantitativeValue]
@@ -229,7 +221,6 @@ class MusicVideoObject extends MediaObject
         'embedUrl',
         'encodesCreativeWork',
         'encodingFormat',
-        'expires',
         'height',
         'playerType',
         'productionCompany',
@@ -253,7 +244,6 @@ class MusicVideoObject extends MediaObject
         'embedUrl' => ['URL'],
         'encodesCreativeWork' => ['CreativeWork'],
         'encodingFormat' => ['Text'],
-        'expires' => ['Date'],
         'height' => ['Distance','QuantitativeValue'],
         'playerType' => ['Text'],
         'productionCompany' => ['Organization'],
@@ -277,7 +267,6 @@ class MusicVideoObject extends MediaObject
         'embedUrl' => 'A URL pointing to a player for a specific video. In general, this is the information in the src element of an embed tag and should not be the same as the content of the loc tag.',
         'encodesCreativeWork' => 'The CreativeWork encoded by this media object.',
         'encodingFormat' => 'mp3, mpeg4, etc.',
-        'expires' => 'Date the content expires and is no longer useful or available. Useful for videos.',
         'height' => 'The height of the item.',
         'playerType' => 'Player type required—for example, Flash or Silverlight.',
         'productionCompany' => 'The production company or studio responsible for the item e.g. series, video game, episode etc.',
@@ -345,7 +334,7 @@ class MusicVideoObject extends MediaObject
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['associatedArticle','bitrate','contentSize','contentUrl','duration','embedUrl','encodesCreativeWork','encodingFormat','expires','height','playerType','productionCompany','regionsAllowed','requiresSubscription','uploadDate','width'], 'validateJsonSchema'],
+            [['associatedArticle','bitrate','contentSize','contentUrl','duration','embedUrl','encodesCreativeWork','encodingFormat','height','playerType','productionCompany','regionsAllowed','requiresSubscription','uploadDate','width'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

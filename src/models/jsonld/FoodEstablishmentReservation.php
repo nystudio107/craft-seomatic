@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\Reservation;
+use nystudio107\seomatic\models\jsonld\JsonLdType;
 
 /**
  * FoodEstablishmentReservation - A reservation to dine at a food-related
@@ -24,7 +24,7 @@ use nystudio107\seomatic\models\jsonld\Reservation;
  * @since     3.0.0
  * @see       http://schema.org/FoodEstablishmentReservation
  */
-class FoodEstablishmentReservation extends Reservation
+class FoodEstablishmentReservation extends JsonLdType
 {
     // Static Public Properties
     // =========================================================================
@@ -55,7 +55,7 @@ class FoodEstablishmentReservation extends Reservation
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'Reservation';
+    static public $schemaTypeExtends = 'JsonLdType';
 
     /**
      * The Schema.org composed Property Names
@@ -95,37 +95,6 @@ class FoodEstablishmentReservation extends Reservation
     // Public Properties
     // =========================================================================
 
-    /**
-     * The endTime of something. For a reserved event or service (e.g.
-     * FoodEstablishmentReservation), the time that it is expected to end. For
-     * actions that span a period of time, when the action was performed. e.g.
-     * John wrote a book from January to December. Note that Event uses
-     * startDate/endDate instead of startTime/endTime, even when describing dates
-     * with times. This situation may be clarified in future revisions.
-     *
-     * @var DateTime [schema.org types: DateTime]
-     */
-    public $endTime;
-
-    /**
-     * Number of people the reservation should accommodate.
-     *
-     * @var mixed|int|QuantitativeValue [schema.org types: Integer, QuantitativeValue]
-     */
-    public $partySize;
-
-    /**
-     * The startTime of something. For a reserved event or service (e.g.
-     * FoodEstablishmentReservation), the time that it is expected to start. For
-     * actions that span a period of time, when the action was performed. e.g.
-     * John wrote a book from January to December. Note that Event uses
-     * startDate/endDate instead of startTime/endTime, even when describing dates
-     * with times. This situation may be clarified in future revisions.
-     *
-     * @var mixed|DateTime [schema.org types: DateTime]
-     */
-    public $startTime;
-
     // Static Protected Properties
     // =========================================================================
 
@@ -135,9 +104,7 @@ class FoodEstablishmentReservation extends Reservation
      * @var array
      */
     static protected $_schemaPropertyNames = [
-        'endTime',
-        'partySize',
-        'startTime'
+
     ];
 
     /**
@@ -146,9 +113,7 @@ class FoodEstablishmentReservation extends Reservation
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'endTime' => ['DateTime'],
-        'partySize' => ['Integer','QuantitativeValue'],
-        'startTime' => ['DateTime']
+
     ];
 
     /**
@@ -157,9 +122,7 @@ class FoodEstablishmentReservation extends Reservation
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'endTime' => 'The endTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to end. For actions that span a period of time, when the action was performed. e.g. John wrote a book from January to December. Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.',
-        'partySize' => 'Number of people the reservation should accommodate.',
-        'startTime' => 'The startTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to start. For actions that span a period of time, when the action was performed. e.g. John wrote a book from January to December. Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.'
+
     ];
 
     /**
@@ -220,7 +183,7 @@ class FoodEstablishmentReservation extends Reservation
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['endTime','partySize','startTime'], 'validateJsonSchema'],
+            [[], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

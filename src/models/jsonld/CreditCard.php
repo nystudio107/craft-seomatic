@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\PaymentCard;
+use nystudio107\seomatic\models\jsonld\JsonLdType;
 
 /**
  * CreditCard - A card payment method of a particular brand or name. Used to
@@ -29,7 +29,7 @@ use nystudio107\seomatic\models\jsonld\PaymentCard;
  * @since     3.0.0
  * @see       http://schema.org/CreditCard
  */
-class CreditCard extends PaymentCard
+class CreditCard extends JsonLdType
 {
     // Static Public Properties
     // =========================================================================
@@ -60,7 +60,7 @@ class CreditCard extends PaymentCard
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'PaymentCard';
+    static public $schemaTypeExtends = 'JsonLdType';
 
     /**
      * The Schema.org composed Property Names
@@ -101,26 +101,12 @@ class CreditCard extends PaymentCard
     // =========================================================================
 
     /**
-     * The amount of money.
+     * The minimum payment is the lowest amount of money that one is required to
+     * pay on a credit card statement each month.
      *
      * @var mixed|MonetaryAmount|float [schema.org types: MonetaryAmount, Number]
      */
-    public $amount;
-
-    /**
-     * The duration of the loan or credit agreement.
-     *
-     * @var mixed|QuantitativeValue [schema.org types: QuantitativeValue]
-     */
-    public $loanTerm;
-
-    /**
-     * Assets required to secure loan or credit repayments. It may take form of
-     * third party pledge, goods, financial instruments (cash, securities, etc.)
-     *
-     * @var mixed|string|Thing [schema.org types: Text, Thing]
-     */
-    public $requiredCollateral;
+    public $monthlyMinimumRepaymentAmount;
 
     // Static Protected Properties
     // =========================================================================
@@ -131,9 +117,7 @@ class CreditCard extends PaymentCard
      * @var array
      */
     static protected $_schemaPropertyNames = [
-        'amount',
-        'loanTerm',
-        'requiredCollateral'
+        'monthlyMinimumRepaymentAmount'
     ];
 
     /**
@@ -142,9 +126,7 @@ class CreditCard extends PaymentCard
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'amount' => ['MonetaryAmount','Number'],
-        'loanTerm' => ['QuantitativeValue'],
-        'requiredCollateral' => ['Text','Thing']
+        'monthlyMinimumRepaymentAmount' => ['MonetaryAmount','Number']
     ];
 
     /**
@@ -153,9 +135,7 @@ class CreditCard extends PaymentCard
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'amount' => 'The amount of money.',
-        'loanTerm' => 'The duration of the loan or credit agreement.',
-        'requiredCollateral' => 'Assets required to secure loan or credit repayments. It may take form of third party pledge, goods, financial instruments (cash, securities, etc.)'
+        'monthlyMinimumRepaymentAmount' => 'The minimum payment is the lowest amount of money that one is required to pay on a credit card statement each month.'
     ];
 
     /**
@@ -216,7 +196,7 @@ class CreditCard extends PaymentCard
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['amount','loanTerm','requiredCollateral'], 'validateJsonSchema'],
+            [['monthlyMinimumRepaymentAmount'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

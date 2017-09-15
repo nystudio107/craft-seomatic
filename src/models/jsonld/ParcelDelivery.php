@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\Intangible;
+use nystudio107\seomatic\models\jsonld\JsonLdType;
 
 /**
  * ParcelDelivery - The delivery of a parcel either via the postal service or
@@ -22,7 +22,7 @@ use nystudio107\seomatic\models\jsonld\Intangible;
  * @since     3.0.0
  * @see       http://schema.org/ParcelDelivery
  */
-class ParcelDelivery extends Intangible
+class ParcelDelivery extends JsonLdType
 {
     // Static Public Properties
     // =========================================================================
@@ -53,7 +53,7 @@ class ParcelDelivery extends Intangible
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'Intangible';
+    static public $schemaTypeExtends = 'JsonLdType';
 
     /**
      * The Schema.org composed Property Names

@@ -115,6 +115,15 @@ class Course extends CreativeWork
     public $coursePrerequisites;
 
     /**
+     * A description of the qualification, award, certificate, diploma or other
+     * educational credential awarded as a consequence of successful completion of
+     * this course.
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $educationalCredentialAwarded;
+
+    /**
      * An offering of the course at a specific time and place or through specific
      * media or mode of study or to a specific section of students.
      *
@@ -133,6 +142,7 @@ class Course extends CreativeWork
     static protected $_schemaPropertyNames = [
         'courseCode',
         'coursePrerequisites',
+        'educationalCredentialAwarded',
         'hasCourseInstance'
     ];
 
@@ -144,6 +154,7 @@ class Course extends CreativeWork
     static protected $_schemaPropertyExpectedTypes = [
         'courseCode' => ['Text'],
         'coursePrerequisites' => ['AlignmentObject','Course','Text'],
+        'educationalCredentialAwarded' => ['Text','URL'],
         'hasCourseInstance' => ['CourseInstance']
     ];
 
@@ -155,6 +166,7 @@ class Course extends CreativeWork
     static protected $_schemaPropertyDescriptions = [
         'courseCode' => 'The identifier for the Course used by the course provider (e.g. CS101 or 6.001).',
         'coursePrerequisites' => 'Requirements for taking the Course. May be completion of another Course or a textual description like "permission of instructor". Requirements may be a pre-requisite competency, referenced using AlignmentObject.',
+        'educationalCredentialAwarded' => 'A description of the qualification, award, certificate, diploma or other educational credential awarded as a consequence of successful completion of this course.',
         'hasCourseInstance' => 'An offering of the course at a specific time and place or through specific media or mode of study or to a specific section of students.'
     ];
 
@@ -216,7 +228,7 @@ class Course extends CreativeWork
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['courseCode','coursePrerequisites','hasCourseInstance'], 'validateJsonSchema'],
+            [['courseCode','coursePrerequisites','educationalCredentialAwarded','hasCourseInstance'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

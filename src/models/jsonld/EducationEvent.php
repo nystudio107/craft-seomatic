@@ -203,8 +203,8 @@ class EducationEvent extends Event
     public $inLanguage;
 
     /**
-     * A flag to signal that the publication is accessible for free. Supersedes
-     * free.
+     * A flag to signal that the item, event, or place is accessible for free.
+     * Supersedes free.
      *
      * @var mixed|bool [schema.org types: Boolean]
      */
@@ -452,7 +452,7 @@ class EducationEvent extends Event
         'eventStatus' => 'An eventStatus of an event represents its status; particularly useful when an event is cancelled or rescheduled.',
         'funder' => 'A person or organization that supports (sponsors) something through some kind of financial contribution.',
         'inLanguage' => 'The language of the content or performance or used in an action. Please use one of the language codes from the IETF BCP 47 standard. See also availableLanguage. Supersedes language.',
-        'isAccessibleForFree' => 'A flag to signal that the publication is accessible for free. Supersedes free.',
+        'isAccessibleForFree' => 'A flag to signal that the item, event, or place is accessible for free. Supersedes free.',
         'location' => 'The location of for example where the event is happening, an organization is located, or where an action takes place.',
         'maximumAttendeeCapacity' => 'The total number of individuals that may attend an event or venue.',
         'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event.',

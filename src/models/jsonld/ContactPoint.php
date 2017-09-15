@@ -102,8 +102,9 @@ class ContactPoint extends StructuredValue
     public $areaServed;
 
     /**
-     * A language someone may use with the item. Please use one of the language
-     * codes from the IETF BCP 47 standard. See also inLanguage
+     * A language someone may use with or at the item, service or place. Please
+     * use one of the language codes from the IETF BCP 47 standard. See also
+     * inLanguage
      *
      * @var mixed|Language|string [schema.org types: Language, Text]
      */
@@ -208,7 +209,7 @@ class ContactPoint extends StructuredValue
      */
     static protected $_schemaPropertyDescriptions = [
         'areaServed' => 'The geographic area where a service or offered item is provided. Supersedes serviceArea.',
-        'availableLanguage' => 'A language someone may use with the item. Please use one of the language codes from the IETF BCP 47 standard. See also inLanguage',
+        'availableLanguage' => 'A language someone may use with or at the item, service or place. Please use one of the language codes from the IETF BCP 47 standard. See also inLanguage',
         'contactOption' => 'An option available on this contact point (e.g. a toll-free number or support for hearing-impaired callers).',
         'contactType' => 'A person or organization can have different contact points, for different purposes. For example, a sales contact point, a PR contact point and so on. This property is used to specify the kind of contact point.',
         'email' => 'Email address.',

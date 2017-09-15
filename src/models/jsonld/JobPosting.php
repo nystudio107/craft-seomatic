@@ -123,6 +123,17 @@ class JobPosting extends Intangible
     public $employmentType;
 
     /**
+     * A property describing the estimated salary for a job posting based on a
+     * variety of variables including, but not limited to industry, job title, and
+     * location. The estimated salary is usually computed by outside organizations
+     * and therefore the hiring organization is not bound to this estimated
+     * salary.
+     *
+     * @var mixed|MonetaryAmount|float|PriceSpecification [schema.org types: MonetaryAmount, Number, PriceSpecification]
+     */
+    public $estimatedSalary;
+
+    /**
      * Description of skills and experience needed for the position.
      *
      * @var mixed|string [schema.org types: Text]
@@ -247,6 +258,7 @@ class JobPosting extends Intangible
         'datePosted',
         'educationRequirements',
         'employmentType',
+        'estimatedSalary',
         'experienceRequirements',
         'hiringOrganization',
         'incentiveCompensation',
@@ -274,6 +286,7 @@ class JobPosting extends Intangible
         'datePosted' => ['Date'],
         'educationRequirements' => ['Text'],
         'employmentType' => ['Text'],
+        'estimatedSalary' => ['MonetaryAmount','Number','PriceSpecification'],
         'experienceRequirements' => ['Text'],
         'hiringOrganization' => ['Organization'],
         'incentiveCompensation' => ['Text'],
@@ -301,6 +314,7 @@ class JobPosting extends Intangible
         'datePosted' => 'Publication date for the job posting.',
         'educationRequirements' => 'Educational background needed for the position.',
         'employmentType' => 'Type of employment (e.g. full-time, part-time, contract, temporary, seasonal, internship).',
+        'estimatedSalary' => 'A property describing the estimated salary for a job posting based on a variety of variables including, but not limited to industry, job title, and location. The estimated salary is usually computed by outside organizations and therefore the hiring organization is not bound to this estimated salary.',
         'experienceRequirements' => 'Description of skills and experience needed for the position.',
         'hiringOrganization' => 'Organization offering the job position.',
         'incentiveCompensation' => 'Description of bonus and commission compensation aspects of the job. Supersedes incentives.',
@@ -376,7 +390,7 @@ class JobPosting extends Intangible
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['baseSalary','datePosted','educationRequirements','employmentType','experienceRequirements','hiringOrganization','incentiveCompensation','industry','jobBenefits','jobLocation','occupationalCategory','qualifications','responsibilities','salaryCurrency','skills','specialCommitments','title','validThrough','workHours'], 'validateJsonSchema'],
+            [['baseSalary','datePosted','educationRequirements','employmentType','estimatedSalary','experienceRequirements','hiringOrganization','incentiveCompensation','industry','jobBenefits','jobLocation','occupationalCategory','qualifications','responsibilities','salaryCurrency','skills','specialCommitments','title','validThrough','workHours'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

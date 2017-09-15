@@ -113,7 +113,7 @@ class ShareAction extends CommunicateAction
      * A sub property of participant. The participant who is at the receiving end
      * of the action.
      *
-     * @var mixed|Audience|Organization|Person [schema.org types: Audience, Organization, Person]
+     * @var mixed|Audience|ContactPoint|Organization|Person [schema.org types: Audience, ContactPoint, Organization, Person]
      */
     public $recipient;
 
@@ -139,7 +139,7 @@ class ShareAction extends CommunicateAction
     static protected $_schemaPropertyExpectedTypes = [
         'about' => ['Thing'],
         'inLanguage' => ['Language','Text'],
-        'recipient' => ['Audience','Organization','Person']
+        'recipient' => ['Audience','ContactPoint','Organization','Person']
     ];
 
     /**

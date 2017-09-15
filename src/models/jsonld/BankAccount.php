@@ -14,8 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\jsonld\FinancialProduct;
 
 /**
- * BankAccount - A product or service offered by a bank whereby one may
- * deposit, withdraw or transfer money and in some cases be paid interest.
+ * BankAccount - No comment
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -46,7 +45,7 @@ class BankAccount extends FinancialProduct
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'A product or service offered by a bank whereby one may deposit, withdraw or transfer money and in some cases be paid interest.';
+    static public $schemaTypeDescription = 'No comment';
 
     /**
      * The Schema.org Type Extends
@@ -94,30 +93,28 @@ class BankAccount extends FinancialProduct
     // =========================================================================
 
     /**
-     * The annual rate that is charged for borrowing (or made by investing),
-     * expressed as a single percentage number that represents the actual yearly
-     * cost of funds over the term of a loan. This includes any fees or additional
-     * costs associated with the transaction.
+     * A minimum amount that has to be paid in every month.
      *
-     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
+     * @var MonetaryAmount [schema.org types: MonetaryAmount]
      */
-    public $annualPercentageRate;
+    public $accountMinimumInflow;
 
     /**
-     * Description of fees, commissions, and other terms applied either to a class
-     * of financial product, or by a financial service organization.
+     * An overdraft is an extension of credit from a lending institution when an
+     * account reaches zero. An overdraft allows the individual to continue
+     * withdrawing money even if the account has no funds in it. Basically the
+     * bank allows people to borrow a set amount of money.
+     *
+     * @var MonetaryAmount [schema.org types: MonetaryAmount]
+     */
+    public $accountOverdraftLimit;
+
+    /**
+     * The type of a bank account.
      *
      * @var mixed|string|string [schema.org types: Text, URL]
      */
-    public $feesAndCommissionsSpecification;
-
-    /**
-     * The interest rate, charged or paid, applicable to the financial product.
-     * Note: This is different from the calculated annualPercentageRate.
-     *
-     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
-     */
-    public $interestRate;
+    public $bankAccountType;
 
     // Static Protected Properties
     // =========================================================================
@@ -128,9 +125,9 @@ class BankAccount extends FinancialProduct
      * @var array
      */
     static protected $_schemaPropertyNames = [
-        'annualPercentageRate',
-        'feesAndCommissionsSpecification',
-        'interestRate'
+        'accountMinimumInflow',
+        'accountOverdraftLimit',
+        'bankAccountType'
     ];
 
     /**
@@ -139,9 +136,9 @@ class BankAccount extends FinancialProduct
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'annualPercentageRate' => ['Number','QuantitativeValue'],
-        'feesAndCommissionsSpecification' => ['Text','URL'],
-        'interestRate' => ['Number','QuantitativeValue']
+        'accountMinimumInflow' => ['MonetaryAmount'],
+        'accountOverdraftLimit' => ['MonetaryAmount'],
+        'bankAccountType' => ['Text','URL']
     ];
 
     /**
@@ -150,9 +147,9 @@ class BankAccount extends FinancialProduct
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'annualPercentageRate' => 'The annual rate that is charged for borrowing (or made by investing), expressed as a single percentage number that represents the actual yearly cost of funds over the term of a loan. This includes any fees or additional costs associated with the transaction.',
-        'feesAndCommissionsSpecification' => 'Description of fees, commissions, and other terms applied either to a class of financial product, or by a financial service organization.',
-        'interestRate' => 'The interest rate, charged or paid, applicable to the financial product. Note: This is different from the calculated annualPercentageRate.'
+        'accountMinimumInflow' => 'A minimum amount that has to be paid in every month.',
+        'accountOverdraftLimit' => 'An overdraft is an extension of credit from a lending institution when an account reaches zero. An overdraft allows the individual to continue withdrawing money even if the account has no funds in it. Basically the bank allows people to borrow a set amount of money.',
+        'bankAccountType' => 'The type of a bank account.'
     ];
 
     /**
@@ -213,7 +210,7 @@ class BankAccount extends FinancialProduct
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['annualPercentageRate','feesAndCommissionsSpecification','interestRate'], 'validateJsonSchema'],
+            [['accountMinimumInflow','accountOverdraftLimit','bankAccountType'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\Service;
+use nystudio107\seomatic\models\jsonld\JsonLdType;
 
 /**
  * BroadcastService - A delivery service through which content is provided via
@@ -22,7 +22,7 @@ use nystudio107\seomatic\models\jsonld\Service;
  * @since     3.0.0
  * @see       http://schema.org/BroadcastService
  */
-class BroadcastService extends Service
+class BroadcastService extends JsonLdType
 {
     // Static Public Properties
     // =========================================================================
@@ -53,7 +53,7 @@ class BroadcastService extends Service
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'Service';
+    static public $schemaTypeExtends = 'JsonLdType';
 
     /**
      * The Schema.org composed Property Names
@@ -109,24 +109,41 @@ class BroadcastService extends Service
     public $broadcastDisplayName;
 
     /**
+     * The frequency used for over-the-air broadcasts. Numeric values or simple
+     * ranges e.g. 87-99. In addition a shortcut idiom is supported for frequences
+     * of AM and FM radio channels, e.g. "87 FM".
+     *
+     * @var mixed|BroadcastFrequencySpecification|string [schema.org types: BroadcastFrequencySpecification, Text]
+     */
+    public $broadcastFrequency;
+
+    /**
      * The timezone in ISO 8601 format for which the service bases its broadcasts
      *
-     * @var string [schema.org types: Text]
+     * @var mixed|string [schema.org types: Text]
      */
     public $broadcastTimezone;
 
     /**
      * The organization owning or operating the broadcast service.
      *
-     * @var Organization [schema.org types: Organization]
+     * @var mixed|Organization [schema.org types: Organization]
      */
     public $broadcaster;
+
+    /**
+     * A broadcast channel of a broadcast service. Inverse property:
+     * providesBroadcastService.
+     *
+     * @var mixed|BroadcastChannel [schema.org types: BroadcastChannel]
+     */
+    public $hasBroadcastChannel;
 
     /**
      * A broadcast service to which the broadcast service may belong to such as
      * regional variations of a national channel.
      *
-     * @var BroadcastService [schema.org types: BroadcastService]
+     * @var mixed|BroadcastService [schema.org types: BroadcastService]
      */
     public $parentService;
 
@@ -134,7 +151,7 @@ class BroadcastService extends Service
      * The type of screening or video broadcast used (e.g. IMAX, 3D, SD, HD,
      * etc.).
      *
-     * @var string [schema.org types: Text]
+     * @var mixed|string [schema.org types: Text]
      */
     public $videoFormat;
 
@@ -149,8 +166,10 @@ class BroadcastService extends Service
     static protected $_schemaPropertyNames = [
         'broadcastAffiliateOf',
         'broadcastDisplayName',
+        'broadcastFrequency',
         'broadcastTimezone',
         'broadcaster',
+        'hasBroadcastChannel',
         'parentService',
         'videoFormat'
     ];
@@ -163,8 +182,10 @@ class BroadcastService extends Service
     static protected $_schemaPropertyExpectedTypes = [
         'broadcastAffiliateOf' => ['Organization'],
         'broadcastDisplayName' => ['Text'],
+        'broadcastFrequency' => ['BroadcastFrequencySpecification','Text'],
         'broadcastTimezone' => ['Text'],
         'broadcaster' => ['Organization'],
+        'hasBroadcastChannel' => ['BroadcastChannel'],
         'parentService' => ['BroadcastService'],
         'videoFormat' => ['Text']
     ];
@@ -177,8 +198,10 @@ class BroadcastService extends Service
     static protected $_schemaPropertyDescriptions = [
         'broadcastAffiliateOf' => 'The media network(s) whose content is broadcast on this station.',
         'broadcastDisplayName' => 'The name displayed in the channel guide. For many US affiliates, it is the network name.',
+        'broadcastFrequency' => 'The frequency used for over-the-air broadcasts. Numeric values or simple ranges e.g. 87-99. In addition a shortcut idiom is supported for frequences of AM and FM radio channels, e.g. "87 FM".',
         'broadcastTimezone' => 'The timezone in ISO 8601 format for which the service bases its broadcasts',
         'broadcaster' => 'The organization owning or operating the broadcast service.',
+        'hasBroadcastChannel' => 'A broadcast channel of a broadcast service. Inverse property: providesBroadcastService.',
         'parentService' => 'A broadcast service to which the broadcast service may belong to such as regional variations of a national channel.',
         'videoFormat' => 'The type of screening or video broadcast used (e.g. IMAX, 3D, SD, HD, etc.).'
     ];
@@ -241,7 +264,7 @@ class BroadcastService extends Service
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['broadcastAffiliateOf','broadcastDisplayName','broadcastTimezone','broadcaster','parentService','videoFormat'], 'validateJsonSchema'],
+            [['broadcastAffiliateOf','broadcastDisplayName','broadcastFrequency','broadcastTimezone','broadcaster','hasBroadcastChannel','parentService','videoFormat'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\AllocateAction;
+use nystudio107\seomatic\models\jsonld\JsonLdType;
 
 /**
  * AuthorizeAction - The act of granting permission to an object.
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\AllocateAction;
  * @since     3.0.0
  * @see       http://schema.org/AuthorizeAction
  */
-class AuthorizeAction extends AllocateAction
+class AuthorizeAction extends JsonLdType
 {
     // Static Public Properties
     // =========================================================================
@@ -52,7 +52,7 @@ class AuthorizeAction extends AllocateAction
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'AllocateAction';
+    static public $schemaTypeExtends = 'JsonLdType';
 
     /**
      * The Schema.org composed Property Names
@@ -96,7 +96,7 @@ class AuthorizeAction extends AllocateAction
      * A sub property of participant. The participant who is at the receiving end
      * of the action.
      *
-     * @var mixed|Audience|Organization|Person [schema.org types: Audience, Organization, Person]
+     * @var mixed|Audience|ContactPoint|Organization|Person [schema.org types: Audience, ContactPoint, Organization, Person]
      */
     public $recipient;
 
@@ -118,7 +118,7 @@ class AuthorizeAction extends AllocateAction
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'recipient' => ['Audience','Organization','Person']
+        'recipient' => ['Audience','ContactPoint','Organization','Person']
     ];
 
     /**

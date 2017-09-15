@@ -101,11 +101,60 @@ class LoanOrCredit extends FinancialProduct
     public $amount;
 
     /**
+     * The currency in which the monetary amount is expressed (in 3-letter ISO
+     * 4217 format).
+     *
+     * @var mixed|string [schema.org types: Text]
+     */
+    public $currency;
+
+    /**
+     * The period of time after any due date that the borrower has to fulfil its
+     * obligations before a default (failure to pay) is deemed to have occurred.
+     *
+     * @var mixed|Duration [schema.org types: Duration]
+     */
+    public $gracePeriod;
+
+    /**
+     * A form of paying back money previously borrowed from a lender. Repayment
+     * usually takes the form of periodic payments that normally include part
+     * principal plus interest in each payment.
+     *
+     * @var mixed|RepaymentSpecification [schema.org types: RepaymentSpecification]
+     */
+    public $loanRepaymentForm;
+
+    /**
      * The duration of the loan or credit agreement.
      *
      * @var mixed|QuantitativeValue [schema.org types: QuantitativeValue]
      */
     public $loanTerm;
+
+    /**
+     * The type of a loan or credit.
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $loanType;
+
+    /**
+     * The only way you get the money back in the event of default is the
+     * security. Recourse is where you still have the opportunity to go back to
+     * the borrower for the rest of the money.
+     *
+     * @var mixed|bool [schema.org types: Boolean]
+     */
+    public $recourseLoan;
+
+    /**
+     * Whether the terms for payment of interest can be renegotiated during the
+     * life of the loan.
+     *
+     * @var mixed|bool [schema.org types: Boolean]
+     */
+    public $renegotiableLoan;
 
     /**
      * Assets required to secure loan or credit repayments. It may take form of
@@ -125,7 +174,13 @@ class LoanOrCredit extends FinancialProduct
      */
     static protected $_schemaPropertyNames = [
         'amount',
+        'currency',
+        'gracePeriod',
+        'loanRepaymentForm',
         'loanTerm',
+        'loanType',
+        'recourseLoan',
+        'renegotiableLoan',
         'requiredCollateral'
     ];
 
@@ -136,7 +191,13 @@ class LoanOrCredit extends FinancialProduct
      */
     static protected $_schemaPropertyExpectedTypes = [
         'amount' => ['MonetaryAmount','Number'],
+        'currency' => ['Text'],
+        'gracePeriod' => ['Duration'],
+        'loanRepaymentForm' => ['RepaymentSpecification'],
         'loanTerm' => ['QuantitativeValue'],
+        'loanType' => ['Text','URL'],
+        'recourseLoan' => ['Boolean'],
+        'renegotiableLoan' => ['Boolean'],
         'requiredCollateral' => ['Text','Thing']
     ];
 
@@ -147,7 +208,13 @@ class LoanOrCredit extends FinancialProduct
      */
     static protected $_schemaPropertyDescriptions = [
         'amount' => 'The amount of money.',
+        'currency' => 'The currency in which the monetary amount is expressed (in 3-letter ISO 4217 format).',
+        'gracePeriod' => 'The period of time after any due date that the borrower has to fulfil its obligations before a default (failure to pay) is deemed to have occurred.',
+        'loanRepaymentForm' => 'A form of paying back money previously borrowed from a lender. Repayment usually takes the form of periodic payments that normally include part principal plus interest in each payment.',
         'loanTerm' => 'The duration of the loan or credit agreement.',
+        'loanType' => 'The type of a loan or credit.',
+        'recourseLoan' => 'The only way you get the money back in the event of default is the security. Recourse is where you still have the opportunity to go back to the borrower for the rest of the money.',
+        'renegotiableLoan' => 'Whether the terms for payment of interest can be renegotiated during the life of the loan.',
         'requiredCollateral' => 'Assets required to secure loan or credit repayments. It may take form of third party pledge, goods, financial instruments (cash, securities, etc.)'
     ];
 
@@ -209,7 +276,7 @@ class LoanOrCredit extends FinancialProduct
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['amount','loanTerm','requiredCollateral'], 'validateJsonSchema'],
+            [['amount','currency','gracePeriod','loanRepaymentForm','loanTerm','loanType','recourseLoan','renegotiableLoan','requiredCollateral'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

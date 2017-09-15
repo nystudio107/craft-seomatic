@@ -93,31 +93,45 @@ class EmailMessage extends Message
     // =========================================================================
 
     /**
+     * A sub property of recipient. The recipient blind copied on a message.
+     *
+     * @var mixed|ContactPoint|Organization|Person [schema.org types: ContactPoint, Organization, Person]
+     */
+    public $bccRecipient;
+
+    /**
+     * A sub property of recipient. The recipient copied on a message.
+     *
+     * @var mixed|ContactPoint|Organization|Person [schema.org types: ContactPoint, Organization, Person]
+     */
+    public $ccRecipient;
+
+    /**
      * The date/time at which the message has been read by the recipient if a
      * single recipient exists.
      *
-     * @var DateTime [schema.org types: DateTime]
+     * @var mixed|DateTime [schema.org types: DateTime]
      */
     public $dateRead;
 
     /**
      * The date/time the message was received if a single recipient exists.
      *
-     * @var DateTime [schema.org types: DateTime]
+     * @var mixed|DateTime [schema.org types: DateTime]
      */
     public $dateReceived;
 
     /**
      * The date/time at which the message was sent.
      *
-     * @var DateTime [schema.org types: DateTime]
+     * @var mixed|DateTime [schema.org types: DateTime]
      */
     public $dateSent;
 
     /**
      * A CreativeWork attached to the message.
      *
-     * @var CreativeWork [schema.org types: CreativeWork]
+     * @var mixed|CreativeWork [schema.org types: CreativeWork]
      */
     public $messageAttachment;
 
@@ -125,7 +139,7 @@ class EmailMessage extends Message
      * A sub property of participant. The participant who is at the receiving end
      * of the action.
      *
-     * @var mixed|Audience|Organization|Person [schema.org types: Audience, Organization, Person]
+     * @var mixed|Audience|ContactPoint|Organization|Person [schema.org types: Audience, ContactPoint, Organization, Person]
      */
     public $recipient;
 
@@ -137,6 +151,14 @@ class EmailMessage extends Message
      */
     public $sender;
 
+    /**
+     * A sub property of recipient. The recipient who was directly sent the
+     * message.
+     *
+     * @var mixed|Audience|ContactPoint|Organization|Person [schema.org types: Audience, ContactPoint, Organization, Person]
+     */
+    public $toRecipient;
+
     // Static Protected Properties
     // =========================================================================
 
@@ -146,12 +168,15 @@ class EmailMessage extends Message
      * @var array
      */
     static protected $_schemaPropertyNames = [
+        'bccRecipient',
+        'ccRecipient',
         'dateRead',
         'dateReceived',
         'dateSent',
         'messageAttachment',
         'recipient',
-        'sender'
+        'sender',
+        'toRecipient'
     ];
 
     /**
@@ -160,12 +185,15 @@ class EmailMessage extends Message
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
+        'bccRecipient' => ['ContactPoint','Organization','Person'],
+        'ccRecipient' => ['ContactPoint','Organization','Person'],
         'dateRead' => ['DateTime'],
         'dateReceived' => ['DateTime'],
         'dateSent' => ['DateTime'],
         'messageAttachment' => ['CreativeWork'],
-        'recipient' => ['Audience','Organization','Person'],
-        'sender' => ['Audience','Organization','Person']
+        'recipient' => ['Audience','ContactPoint','Organization','Person'],
+        'sender' => ['Audience','Organization','Person'],
+        'toRecipient' => ['Audience','ContactPoint','Organization','Person']
     ];
 
     /**
@@ -174,12 +202,15 @@ class EmailMessage extends Message
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
+        'bccRecipient' => 'A sub property of recipient. The recipient blind copied on a message.',
+        'ccRecipient' => 'A sub property of recipient. The recipient copied on a message.',
         'dateRead' => 'The date/time at which the message has been read by the recipient if a single recipient exists.',
         'dateReceived' => 'The date/time the message was received if a single recipient exists.',
         'dateSent' => 'The date/time at which the message was sent.',
         'messageAttachment' => 'A CreativeWork attached to the message.',
         'recipient' => 'A sub property of participant. The participant who is at the receiving end of the action.',
-        'sender' => 'A sub property of participant. The participant who is at the sending end of the action.'
+        'sender' => 'A sub property of participant. The participant who is at the sending end of the action.',
+        'toRecipient' => 'A sub property of recipient. The recipient who was directly sent the message.'
     ];
 
     /**
@@ -240,7 +271,7 @@ class EmailMessage extends Message
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['dateRead','dateReceived','dateSent','messageAttachment','recipient','sender'], 'validateJsonSchema'],
+            [['bccRecipient','ccRecipient','dateRead','dateReceived','dateSent','messageAttachment','recipient','sender','toRecipient'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

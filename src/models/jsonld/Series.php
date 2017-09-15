@@ -272,6 +272,14 @@ class Series extends CreativeWork
     public $contentRating;
 
     /**
+     * The specific time described by a creative work, for works (e.g. articles,
+     * video objects etc.) that emphasise a particular moment within an Event.
+     *
+     * @var mixed|DateTime [schema.org types: DateTime]
+     */
+    public $contentReferenceTime;
+
+    /**
      * A secondary contributor to the CreativeWork or Event.
      *
      * @var mixed|Organization|Person [schema.org types: Organization, Person]
@@ -370,6 +378,17 @@ class Series extends CreativeWork
     public $exampleOfWork;
 
     /**
+     * Date the content expires and is no longer useful or available. For example
+     * a VideoObject or NewsArticle whose availability or relevance is
+     * time-limited, or a ClaimReview fact check whose publisher wants to indicate
+     * that it may no longer be relevant (or helpful to highlight) after some
+     * date.
+     *
+     * @var mixed|Date [schema.org types: Date]
+     */
+    public $expires;
+
+    /**
      * Media type, typically MIME format (see IANA site) of the content e.g.
      * application/zip of a SoftwareApplication binary. In cases where a
      * CreativeWork has several media type representations, 'encoding' can be used
@@ -438,8 +457,8 @@ class Series extends CreativeWork
     public $interactivityType;
 
     /**
-     * A flag to signal that the publication is accessible for free. Supersedes
-     * free.
+     * A flag to signal that the item, event, or place is accessible for free.
+     * Supersedes free.
      *
      * @var mixed|bool [schema.org types: Boolean]
      */
@@ -574,10 +593,23 @@ class Series extends CreativeWork
     public $publisher;
 
     /**
-     * Link to page describing the editorial principles of the organization
-     * primarily responsible for the creation of the CreativeWork.
+     * The publishing division which published the comic.
      *
-     * @var mixed|string [schema.org types: URL]
+     * @var mixed|Organization [schema.org types: Organization]
+     */
+    public $publisherImprint;
+
+    /**
+     * The publishingPrinciples property indicates (typically via URL) a document
+     * describing the editorial principles of an Organization (or individual e.g.
+     * a Person writing a blog) that relate to their activities as a publisher,
+     * e.g. ethics or diversity policies. When applied to a CreativeWork (e.g.
+     * NewsArticle) the principles are those of the party primarily responsible
+     * for the creation of the CreativeWork. While such policies are most
+     * typically expressed in natural language, sometimes related information
+     * (e.g. indicating a funder) can be expressed using schema.org terminology.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
      */
     public $publishingPrinciples;
 
@@ -681,6 +713,15 @@ class Series extends CreativeWork
     public $timeRequired;
 
     /**
+     * The work that this work has been translated from. e.g. 物种起源 is a
+     * translationOf “On the Origin of Species” Inverse property:
+     * workTranslation.
+     *
+     * @var mixed|CreativeWork [schema.org types: CreativeWork]
+     */
+    public $translationOfWork;
+
+    /**
      * Organization or person who adapts a creative work to different languages,
      * regional differences and technical requirements of a target market, or that
      * translates during some event.
@@ -719,6 +760,16 @@ class Series extends CreativeWork
      */
     public $workExample;
 
+    /**
+     * A work that is a translation of the content of this work. e.g. 西遊記
+     * has an English workTranslation “Journey to the West”,a German
+     * workTranslation “Monkeys Pilgerfahrt” and a Vietnamese translation Tây
+     * du ký bình khảo. Inverse property: translationOfWork.
+     *
+     * @var mixed|CreativeWork [schema.org types: CreativeWork]
+     */
+    public $workTranslation;
+
     // Static Protected Properties
     // =========================================================================
 
@@ -750,6 +801,7 @@ class Series extends CreativeWork
         'commentCount',
         'contentLocation',
         'contentRating',
+        'contentReferenceTime',
         'contributor',
         'copyrightHolder',
         'copyrightYear',
@@ -763,6 +815,7 @@ class Series extends CreativeWork
         'educationalUse',
         'encoding',
         'exampleOfWork',
+        'expires',
         'fileFormat',
         'funder',
         'genre',
@@ -788,6 +841,7 @@ class Series extends CreativeWork
         'provider',
         'publication',
         'publisher',
+        'publisherImprint',
         'publishingPrinciples',
         'recordedAt',
         'releasedEvent',
@@ -800,11 +854,13 @@ class Series extends CreativeWork
         'text',
         'thumbnailUrl',
         'timeRequired',
+        'translationOfWork',
         'translator',
         'typicalAgeRange',
         'version',
         'video',
-        'workExample'
+        'workExample',
+        'workTranslation'
     ];
 
     /**
@@ -835,6 +891,7 @@ class Series extends CreativeWork
         'commentCount' => ['Integer'],
         'contentLocation' => ['Place'],
         'contentRating' => ['Text'],
+        'contentReferenceTime' => ['DateTime'],
         'contributor' => ['Organization','Person'],
         'copyrightHolder' => ['Organization','Person'],
         'copyrightYear' => ['Number'],
@@ -848,6 +905,7 @@ class Series extends CreativeWork
         'educationalUse' => ['Text'],
         'encoding' => ['MediaObject'],
         'exampleOfWork' => ['CreativeWork'],
+        'expires' => ['Date'],
         'fileFormat' => ['Text','URL'],
         'funder' => ['Organization','Person'],
         'genre' => ['Text','URL'],
@@ -873,7 +931,8 @@ class Series extends CreativeWork
         'provider' => ['Organization','Person'],
         'publication' => ['PublicationEvent'],
         'publisher' => ['Organization','Person'],
-        'publishingPrinciples' => ['URL'],
+        'publisherImprint' => ['Organization'],
+        'publishingPrinciples' => ['CreativeWork','URL'],
         'recordedAt' => ['Event'],
         'releasedEvent' => ['PublicationEvent'],
         'review' => ['Review'],
@@ -885,11 +944,13 @@ class Series extends CreativeWork
         'text' => ['Text'],
         'thumbnailUrl' => ['URL'],
         'timeRequired' => ['Duration'],
+        'translationOfWork' => ['CreativeWork'],
         'translator' => ['Organization','Person'],
         'typicalAgeRange' => ['Text'],
         'version' => ['Number','Text'],
         'video' => ['VideoObject'],
-        'workExample' => ['CreativeWork']
+        'workExample' => ['CreativeWork'],
+        'workTranslation' => ['CreativeWork']
     ];
 
     /**
@@ -920,6 +981,7 @@ class Series extends CreativeWork
         'commentCount' => 'The number of comments this CreativeWork (e.g. Article, Question or Answer) has received. This is most applicable to works published in Web sites with commenting system; additional comments may exist elsewhere.',
         'contentLocation' => 'The location depicted or described in the content. For example, the location in a photograph or painting.',
         'contentRating' => 'Official rating of a piece of content—for example,\'MPAA PG-13\'.',
+        'contentReferenceTime' => 'The specific time described by a creative work, for works (e.g. articles, video objects etc.) that emphasise a particular moment within an Event.',
         'contributor' => 'A secondary contributor to the CreativeWork or Event.',
         'copyrightHolder' => 'The party holding the legal copyright to the CreativeWork.',
         'copyrightYear' => 'The year during which the claimed copyright for the CreativeWork was first asserted.',
@@ -933,6 +995,7 @@ class Series extends CreativeWork
         'educationalUse' => 'The purpose of a work in the context of education; for example, \'assignment\', \'group work\'.',
         'encoding' => 'A media object that encodes this CreativeWork. This property is a synonym for associatedMedia. Supersedes encodings.',
         'exampleOfWork' => 'A creative work that this work is an example/instance/realization/derivation of. Inverse property: workExample.',
+        'expires' => 'Date the content expires and is no longer useful or available. For example a VideoObject or NewsArticle whose availability or relevance is time-limited, or a ClaimReview fact check whose publisher wants to indicate that it may no longer be relevant (or helpful to highlight) after some date.',
         'fileFormat' => 'Media type, typically MIME format (see IANA site) of the content e.g. application/zip of a SoftwareApplication binary. In cases where a CreativeWork has several media type representations, \'encoding\' can be used to indicate each MediaObject alongside particular fileFormat information. Unregistered or niche file formats can be indicated instead via the most appropriate URL, e.g. defining Web page or a Wikipedia entry.',
         'funder' => 'A person or organization that supports (sponsors) something through some kind of financial contribution.',
         'genre' => 'Genre of the creative work, broadcast channel or group.',
@@ -941,7 +1004,7 @@ class Series extends CreativeWork
         'inLanguage' => 'The language of the content or performance or used in an action. Please use one of the language codes from the IETF BCP 47 standard. See also availableLanguage. Supersedes language.',
         'interactionStatistic' => 'The number of interactions for the CreativeWork using the WebSite or SoftwareApplication. The most specific child type of InteractionCounter should be used. Supersedes interactionCount.',
         'interactivityType' => 'The predominant mode of learning supported by the learning resource. Acceptable values are \'active\', \'expositive\', or \'mixed\'.',
-        'isAccessibleForFree' => 'A flag to signal that the publication is accessible for free. Supersedes free.',
+        'isAccessibleForFree' => 'A flag to signal that the item, event, or place is accessible for free. Supersedes free.',
         'isBasedOn' => 'A resource that was used in the creation of this resource. This term can be repeated for multiple sources. For example, http://example.com/great-multiplication-intro.html. Supersedes isBasedOnUrl.',
         'isFamilyFriendly' => 'Indicates whether this content is family friendly.',
         'isPartOf' => 'Indicates a CreativeWork that this CreativeWork is (in some sense) part of. Inverse property: hasPart.',
@@ -958,7 +1021,8 @@ class Series extends CreativeWork
         'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller. Supersedes carrier.',
         'publication' => 'A publication event associated with the item.',
         'publisher' => 'The publisher of the creative work.',
-        'publishingPrinciples' => 'Link to page describing the editorial principles of the organization primarily responsible for the creation of the CreativeWork.',
+        'publisherImprint' => 'The publishing division which published the comic.',
+        'publishingPrinciples' => 'The publishingPrinciples property indicates (typically via URL) a document describing the editorial principles of an Organization (or individual e.g. a Person writing a blog) that relate to their activities as a publisher, e.g. ethics or diversity policies. When applied to a CreativeWork (e.g. NewsArticle) the principles are those of the party primarily responsible for the creation of the CreativeWork. While such policies are most typically expressed in natural language, sometimes related information (e.g. indicating a funder) can be expressed using schema.org terminology.',
         'recordedAt' => 'The Event where the CreativeWork was recorded. The CreativeWork may capture all or part of the event. Inverse property: recordedIn.',
         'releasedEvent' => 'The place and time the release was issued, expressed as a PublicationEvent.',
         'review' => 'A review of the item. Supersedes reviews.',
@@ -970,11 +1034,13 @@ class Series extends CreativeWork
         'text' => 'The textual content of this CreativeWork.',
         'thumbnailUrl' => 'A thumbnail image relevant to the Thing.',
         'timeRequired' => 'Approximate or typical time it takes to work with or through this learning resource for the typical intended target audience, e.g. \'P30M\', \'P1H25M\'.',
+        'translationOfWork' => 'The work that this work has been translated from. e.g. 物种起源 is a translationOf “On the Origin of Species” Inverse property: workTranslation.',
         'translator' => 'Organization or person who adapts a creative work to different languages, regional differences and technical requirements of a target market, or that translates during some event.',
         'typicalAgeRange' => 'The typical expected age range, e.g. \'7-9\', \'11-\'.',
         'version' => 'The version of the CreativeWork embodied by a specified resource.',
         'video' => 'An embedded video object.',
-        'workExample' => 'Example/instance/realization/derivation of the concept of this creative work. eg. The paperback edition, first edition, or eBook. Inverse property: exampleOfWork.'
+        'workExample' => 'Example/instance/realization/derivation of the concept of this creative work. eg. The paperback edition, first edition, or eBook. Inverse property: exampleOfWork.',
+        'workTranslation' => 'A work that is a translation of the content of this work. e.g. 西遊記 has an English workTranslation “Journey to the West”,a German workTranslation “Monkeys Pilgerfahrt” and a Vietnamese translation Tây du ký bình khảo. Inverse property: translationOfWork.'
     ];
 
     /**
@@ -1035,7 +1101,7 @@ class Series extends CreativeWork
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['about','accessMode','accessModeSufficient','accessibilityAPI','accessibilityControl','accessibilityFeature','accessibilityHazard','accessibilitySummary','accountablePerson','aggregateRating','alternativeHeadline','associatedMedia','audience','audio','author','award','character','citation','comment','commentCount','contentLocation','contentRating','contributor','copyrightHolder','copyrightYear','creator','dateCreated','dateModified','datePublished','discussionUrl','editor','educationalAlignment','educationalUse','encoding','exampleOfWork','fileFormat','funder','genre','hasPart','headline','inLanguage','interactionStatistic','interactivityType','isAccessibleForFree','isBasedOn','isFamilyFriendly','isPartOf','keywords','learningResourceType','license','locationCreated','mainEntity','material','mentions','offers','position','producer','provider','publication','publisher','publishingPrinciples','recordedAt','releasedEvent','review','schemaVersion','sourceOrganization','spatialCoverage','sponsor','temporalCoverage','text','thumbnailUrl','timeRequired','translator','typicalAgeRange','version','video','workExample'], 'validateJsonSchema'],
+            [['about','accessMode','accessModeSufficient','accessibilityAPI','accessibilityControl','accessibilityFeature','accessibilityHazard','accessibilitySummary','accountablePerson','aggregateRating','alternativeHeadline','associatedMedia','audience','audio','author','award','character','citation','comment','commentCount','contentLocation','contentRating','contentReferenceTime','contributor','copyrightHolder','copyrightYear','creator','dateCreated','dateModified','datePublished','discussionUrl','editor','educationalAlignment','educationalUse','encoding','exampleOfWork','expires','fileFormat','funder','genre','hasPart','headline','inLanguage','interactionStatistic','interactivityType','isAccessibleForFree','isBasedOn','isFamilyFriendly','isPartOf','keywords','learningResourceType','license','locationCreated','mainEntity','material','mentions','offers','position','producer','provider','publication','publisher','publisherImprint','publishingPrinciples','recordedAt','releasedEvent','review','schemaVersion','sourceOrganization','spatialCoverage','sponsor','temporalCoverage','text','thumbnailUrl','timeRequired','translationOfWork','translator','typicalAgeRange','version','video','workExample','workTranslation'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

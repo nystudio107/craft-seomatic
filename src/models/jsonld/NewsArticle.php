@@ -14,7 +14,9 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\jsonld\Article;
 
 /**
- * NewsArticle - A news article.
+ * NewsArticle - A NewsArticle is an article whose content reports news, or
+ * provides background context and supporting materials for understanding the
+ * news. A more detailed overview of schema.org News markup is also available.
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -45,7 +47,7 @@ class NewsArticle extends Article
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'A news article.';
+    static public $schemaTypeDescription = 'A NewsArticle is an article whose content reports news, or provides background context and supporting materials for understanding the news. A more detailed overview of schema.org News markup is also available.';
 
     /**
      * The Schema.org Type Extends
@@ -93,7 +95,9 @@ class NewsArticle extends Article
     // =========================================================================
 
     /**
-     * The location where the NewsArticle was produced.
+     * A dateline is a brief piece of text included in news articles that
+     * describes where and when the story was written or filed though the date is
+     * often omitted. Sometimes only a placename is provided.
      *
      * @var string [schema.org types: Text]
      */
@@ -166,7 +170,7 @@ class NewsArticle extends Article
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'dateline' => 'The location where the NewsArticle was produced.',
+        'dateline' => 'A dateline is a brief piece of text included in news articles that describes where and when the story was written or filed though the date is often omitted. Sometimes only a placename is provided.',
         'printColumn' => 'The number of the column in which the NewsArticle appears in the print edition.',
         'printEdition' => 'The edition of the print product in which the NewsArticle appears.',
         'printPage' => 'If this NewsArticle appears in print, this field indicates the name of the page on which the article is found. Please note that this field is intended for the exact page name (e.g. A5, B18).',

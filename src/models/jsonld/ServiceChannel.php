@@ -94,8 +94,9 @@ class ServiceChannel extends Intangible
     // =========================================================================
 
     /**
-     * A language someone may use with the item. Please use one of the language
-     * codes from the IETF BCP 47 standard. See also inLanguage
+     * A language someone may use with or at the item, service or place. Please
+     * use one of the language codes from the IETF BCP 47 standard. See also
+     * inLanguage
      *
      * @var mixed|Language|string [schema.org types: Language, Text]
      */
@@ -192,7 +193,7 @@ class ServiceChannel extends Intangible
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'availableLanguage' => 'A language someone may use with the item. Please use one of the language codes from the IETF BCP 47 standard. See also inLanguage',
+        'availableLanguage' => 'A language someone may use with or at the item, service or place. Please use one of the language codes from the IETF BCP 47 standard. See also inLanguage',
         'processingTime' => 'Estimated processing time for the service using this channel.',
         'providesService' => 'The service provided by this channel.',
         'serviceLocation' => 'The location (e.g. civic structure, local business, etc.) where a person can go to access the service.',

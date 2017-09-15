@@ -187,7 +187,7 @@ class Offer extends Intangible
      * A category for the item. Greater signs or slashes can be used to informally
      * indicate a category hierarchy.
      *
-     * @var mixed|string|Thing [schema.org types: Text, Thing]
+     * @var mixed|PhysicalActivityCategory|string|Thing [schema.org types: PhysicalActivityCategory, Text, Thing]
      */
     public $category;
 
@@ -497,7 +497,7 @@ class Offer extends Intangible
         'availableAtOrFrom' => ['Place'],
         'availableDeliveryMethod' => ['DeliveryMethod'],
         'businessFunction' => ['BusinessFunction'],
-        'category' => ['Text','Thing'],
+        'category' => ['PhysicalActivityCategory','Text','Thing'],
         'deliveryLeadTime' => ['QuantitativeValue'],
         'eligibleCustomerType' => ['BusinessEntityType'],
         'eligibleDuration' => ['QuantitativeValue'],

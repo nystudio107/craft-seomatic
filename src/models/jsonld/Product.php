@@ -142,7 +142,7 @@ class Product extends Thing
      * A category for the item. Greater signs or slashes can be used to informally
      * indicate a category hierarchy.
      *
-     * @var mixed|string|Thing [schema.org types: Text, Thing]
+     * @var mixed|PhysicalActivityCategory|string|Thing [schema.org types: PhysicalActivityCategory, Text, Thing]
      */
     public $category;
 
@@ -404,7 +404,7 @@ class Product extends Thing
         'audience' => ['Audience'],
         'award' => ['Text'],
         'brand' => ['Brand','Organization'],
-        'category' => ['Text','Thing'],
+        'category' => ['PhysicalActivityCategory','Text','Thing'],
         'color' => ['Text'],
         'depth' => ['Distance','QuantitativeValue'],
         'gtin12' => ['Text'],

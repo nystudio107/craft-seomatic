@@ -94,30 +94,28 @@ class PaymentCard extends FinancialProduct
     // =========================================================================
 
     /**
-     * The annual rate that is charged for borrowing (or made by investing),
-     * expressed as a single percentage number that represents the actual yearly
-     * cost of funds over the term of a loan. This includes any fees or additional
-     * costs associated with the transaction.
+     * A cardholder benefit that pays the cardholder a small percentage of their
+     * net expenditures.
      *
-     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
+     * @var mixed|bool|float [schema.org types: Boolean, Number]
      */
-    public $annualPercentageRate;
+    public $cashBack;
 
     /**
-     * Description of fees, commissions, and other terms applied either to a class
-     * of financial product, or by a financial service organization.
+     * A secure method for consumers to purchase products or services via debit,
+     * credit or smartcards by using RFID or NFC technology.
      *
-     * @var mixed|string|string [schema.org types: Text, URL]
+     * @var mixed|bool [schema.org types: Boolean]
      */
-    public $feesAndCommissionsSpecification;
+    public $contactlessPayment;
 
     /**
-     * The interest rate, charged or paid, applicable to the financial product.
-     * Note: This is different from the calculated annualPercentageRate.
+     * A floor limit is the amount of money above which credit card transactions
+     * must be authorized.
      *
-     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
+     * @var mixed|MonetaryAmount [schema.org types: MonetaryAmount]
      */
-    public $interestRate;
+    public $floorLimit;
 
     // Static Protected Properties
     // =========================================================================
@@ -128,9 +126,9 @@ class PaymentCard extends FinancialProduct
      * @var array
      */
     static protected $_schemaPropertyNames = [
-        'annualPercentageRate',
-        'feesAndCommissionsSpecification',
-        'interestRate'
+        'cashBack',
+        'contactlessPayment',
+        'floorLimit'
     ];
 
     /**
@@ -139,9 +137,9 @@ class PaymentCard extends FinancialProduct
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'annualPercentageRate' => ['Number','QuantitativeValue'],
-        'feesAndCommissionsSpecification' => ['Text','URL'],
-        'interestRate' => ['Number','QuantitativeValue']
+        'cashBack' => ['Boolean','Number'],
+        'contactlessPayment' => ['Boolean'],
+        'floorLimit' => ['MonetaryAmount']
     ];
 
     /**
@@ -150,9 +148,9 @@ class PaymentCard extends FinancialProduct
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'annualPercentageRate' => 'The annual rate that is charged for borrowing (or made by investing), expressed as a single percentage number that represents the actual yearly cost of funds over the term of a loan. This includes any fees or additional costs associated with the transaction.',
-        'feesAndCommissionsSpecification' => 'Description of fees, commissions, and other terms applied either to a class of financial product, or by a financial service organization.',
-        'interestRate' => 'The interest rate, charged or paid, applicable to the financial product. Note: This is different from the calculated annualPercentageRate.'
+        'cashBack' => 'A cardholder benefit that pays the cardholder a small percentage of their net expenditures.',
+        'contactlessPayment' => 'A secure method for consumers to purchase products or services via debit, credit or smartcards by using RFID or NFC technology.',
+        'floorLimit' => 'A floor limit is the amount of money above which credit card transactions must be authorized.'
     ];
 
     /**
@@ -213,7 +211,7 @@ class PaymentCard extends FinancialProduct
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['annualPercentageRate','feesAndCommissionsSpecification','interestRate'], 'validateJsonSchema'],
+            [['cashBack','contactlessPayment','floorLimit'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

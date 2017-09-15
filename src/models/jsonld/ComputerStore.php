@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\Store;
+use nystudio107\seomatic\models\jsonld\JsonLdType;
 
 /**
  * ComputerStore - A computer store.
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\Store;
  * @since     3.0.0
  * @see       http://schema.org/ComputerStore
  */
-class ComputerStore extends Store
+class ComputerStore extends JsonLdType
 {
     // Static Public Properties
     // =========================================================================
@@ -52,7 +52,7 @@ class ComputerStore extends Store
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'Store';
+    static public $schemaTypeExtends = 'JsonLdType';
 
     /**
      * The Schema.org composed Property Names

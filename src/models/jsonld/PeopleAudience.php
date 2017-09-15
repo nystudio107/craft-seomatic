@@ -94,6 +94,14 @@ class PeopleAudience extends Audience
     // =========================================================================
 
     /**
+     * Specifying the health condition(s) of a patient, medical study, or other
+     * target audience.
+     *
+     * @var MedicalCondition [schema.org types: MedicalCondition]
+     */
+    public $healthCondition;
+
+    /**
      * Audiences defined by a person's gender.
      *
      * @var string [schema.org types: Text]
@@ -144,6 +152,7 @@ class PeopleAudience extends Audience
      * @var array
      */
     static protected $_schemaPropertyNames = [
+        'healthCondition',
         'requiredGender',
         'requiredMaxAge',
         'requiredMinAge',
@@ -158,6 +167,7 @@ class PeopleAudience extends Audience
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
+        'healthCondition' => ['MedicalCondition'],
         'requiredGender' => ['Text'],
         'requiredMaxAge' => ['Integer'],
         'requiredMinAge' => ['Integer'],
@@ -172,6 +182,7 @@ class PeopleAudience extends Audience
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
+        'healthCondition' => 'Specifying the health condition(s) of a patient, medical study, or other target audience.',
         'requiredGender' => 'Audiences defined by a person\'s gender.',
         'requiredMaxAge' => 'Audiences defined by a person\'s maximum age.',
         'requiredMinAge' => 'Audiences defined by a person\'s minimum age.',
@@ -238,7 +249,7 @@ class PeopleAudience extends Audience
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['requiredGender','requiredMaxAge','requiredMinAge','suggestedGender','suggestedMaxAge','suggestedMinAge'], 'validateJsonSchema'],
+            [['healthCondition','requiredGender','requiredMaxAge','requiredMinAge','suggestedGender','suggestedMaxAge','suggestedMinAge'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

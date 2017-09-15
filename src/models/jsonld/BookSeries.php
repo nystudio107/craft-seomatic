@@ -101,6 +101,15 @@ class BookSeries extends CreativeWorkSeries
     public $endDate;
 
     /**
+     * The International Standard Serial Number (ISSN) that identifies this serial
+     * publication. You can repeat this property to identify different formats of,
+     * or the linking ISSN (ISSN-L) for, this serial publication.
+     *
+     * @var mixed|string [schema.org types: Text]
+     */
+    public $issn;
+
+    /**
      * The start date and time of the item (in ISO 8601 date format).
      *
      * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
@@ -117,6 +126,7 @@ class BookSeries extends CreativeWorkSeries
      */
     static protected $_schemaPropertyNames = [
         'endDate',
+        'issn',
         'startDate'
     ];
 
@@ -127,6 +137,7 @@ class BookSeries extends CreativeWorkSeries
      */
     static protected $_schemaPropertyExpectedTypes = [
         'endDate' => ['Date','DateTime'],
+        'issn' => ['Text'],
         'startDate' => ['Date','DateTime']
     ];
 
@@ -137,6 +148,7 @@ class BookSeries extends CreativeWorkSeries
      */
     static protected $_schemaPropertyDescriptions = [
         'endDate' => 'The end date and time of the item (in ISO 8601 date format).',
+        'issn' => 'The International Standard Serial Number (ISSN) that identifies this serial publication. You can repeat this property to identify different formats of, or the linking ISSN (ISSN-L) for, this serial publication.',
         'startDate' => 'The start date and time of the item (in ISO 8601 date format).'
     ];
 
@@ -198,7 +210,7 @@ class BookSeries extends CreativeWorkSeries
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['endDate','startDate'], 'validateJsonSchema'],
+            [['endDate','issn','startDate'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

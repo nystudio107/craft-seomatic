@@ -119,12 +119,28 @@ class VisualArtwork extends CreativeWork
     public $artform;
 
     /**
+     * The primary artist for a work in a medium other than pencils or digital
+     * line art--for example, if the primary artwork is done in watercolors or
+     * digital paints.
+     *
+     * @var mixed|Person [schema.org types: Person]
+     */
+    public $artist;
+
+    /**
      * The supporting materials for the artwork, e.g. Canvas, Paper, Wood, Board,
      * etc. Supersedes surface.
      *
      * @var mixed|string|string [schema.org types: Text, URL]
      */
     public $artworkSurface;
+
+    /**
+     * The individual who adds color to inked drawings.
+     *
+     * @var mixed|Person [schema.org types: Person]
+     */
+    public $colorist;
 
     /**
      * The depth of the item.
@@ -139,6 +155,29 @@ class VisualArtwork extends CreativeWork
      * @var mixed|Distance|QuantitativeValue [schema.org types: Distance, QuantitativeValue]
      */
     public $height;
+
+    /**
+     * The individual who traces over the pencil drawings in ink after pencils are
+     * complete.
+     *
+     * @var mixed|Person [schema.org types: Person]
+     */
+    public $inker;
+
+    /**
+     * The individual who adds lettering, including speech balloons and sound
+     * effects, to artwork.
+     *
+     * @var mixed|Person [schema.org types: Person]
+     */
+    public $letterer;
+
+    /**
+     * The individual who draws the primary narrative artwork.
+     *
+     * @var mixed|Person [schema.org types: Person]
+     */
+    public $penciler;
 
     /**
      * The width of the item.
@@ -159,9 +198,14 @@ class VisualArtwork extends CreativeWork
         'artEdition',
         'artMedium',
         'artform',
+        'artist',
         'artworkSurface',
+        'colorist',
         'depth',
         'height',
+        'inker',
+        'letterer',
+        'penciler',
         'width'
     ];
 
@@ -174,9 +218,14 @@ class VisualArtwork extends CreativeWork
         'artEdition' => ['Integer','Text'],
         'artMedium' => ['Text','URL'],
         'artform' => ['Text','URL'],
+        'artist' => ['Person'],
         'artworkSurface' => ['Text','URL'],
+        'colorist' => ['Person'],
         'depth' => ['Distance','QuantitativeValue'],
         'height' => ['Distance','QuantitativeValue'],
+        'inker' => ['Person'],
+        'letterer' => ['Person'],
+        'penciler' => ['Person'],
         'width' => ['Distance','QuantitativeValue']
     ];
 
@@ -189,9 +238,14 @@ class VisualArtwork extends CreativeWork
         'artEdition' => 'The number of copies when multiple copies of a piece of artwork are produced - e.g. for a limited edition of 20 prints, \'artEdition\' refers to the total number of copies (in this example "20").',
         'artMedium' => 'The material used. (e.g. Oil, Watercolour, Acrylic, Linoprint, Marble, Cyanotype, Digital, Lithograph, DryPoint, Intaglio, Pastel, Woodcut, Pencil, Mixed Media, etc.)',
         'artform' => 'e.g. Painting, Drawing, Sculpture, Print, Photograph, Assemblage, Collage, etc.',
+        'artist' => 'The primary artist for a work in a medium other than pencils or digital line art--for example, if the primary artwork is done in watercolors or digital paints.',
         'artworkSurface' => 'The supporting materials for the artwork, e.g. Canvas, Paper, Wood, Board, etc. Supersedes surface.',
+        'colorist' => 'The individual who adds color to inked drawings.',
         'depth' => 'The depth of the item.',
         'height' => 'The height of the item.',
+        'inker' => 'The individual who traces over the pencil drawings in ink after pencils are complete.',
+        'letterer' => 'The individual who adds lettering, including speech balloons and sound effects, to artwork.',
+        'penciler' => 'The individual who draws the primary narrative artwork.',
         'width' => 'The width of the item.'
     ];
 
@@ -253,7 +307,7 @@ class VisualArtwork extends CreativeWork
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['artEdition','artMedium','artform','artworkSurface','depth','height','width'], 'validateJsonSchema'],
+            [['artEdition','artMedium','artform','artist','artworkSurface','colorist','depth','height','inker','letterer','penciler','width'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

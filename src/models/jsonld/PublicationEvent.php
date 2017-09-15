@@ -96,17 +96,24 @@ class PublicationEvent extends Event
     // =========================================================================
 
     /**
-     * A flag to signal that the publication is accessible for free. Supersedes
-     * free.
+     * A flag to signal that the item, event, or place is accessible for free.
+     * Supersedes free.
      *
      * @var bool [schema.org types: Boolean]
      */
     public $isAccessibleForFree;
 
     /**
+     * An agent associated with the publication event.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $publishedBy;
+
+    /**
      * A broadcast service associated with the publication event.
      *
-     * @var BroadcastService [schema.org types: BroadcastService]
+     * @var mixed|BroadcastService [schema.org types: BroadcastService]
      */
     public $publishedOn;
 
@@ -120,6 +127,7 @@ class PublicationEvent extends Event
      */
     static protected $_schemaPropertyNames = [
         'isAccessibleForFree',
+        'publishedBy',
         'publishedOn'
     ];
 
@@ -130,6 +138,7 @@ class PublicationEvent extends Event
      */
     static protected $_schemaPropertyExpectedTypes = [
         'isAccessibleForFree' => ['Boolean'],
+        'publishedBy' => ['Organization','Person'],
         'publishedOn' => ['BroadcastService']
     ];
 
@@ -139,7 +148,8 @@ class PublicationEvent extends Event
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'isAccessibleForFree' => 'A flag to signal that the publication is accessible for free. Supersedes free.',
+        'isAccessibleForFree' => 'A flag to signal that the item, event, or place is accessible for free. Supersedes free.',
+        'publishedBy' => 'An agent associated with the publication event.',
         'publishedOn' => 'A broadcast service associated with the publication event.'
     ];
 
@@ -201,7 +211,7 @@ class PublicationEvent extends Event
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['isAccessibleForFree','publishedOn'], 'validateJsonSchema'],
+            [['isAccessibleForFree','publishedBy','publishedOn'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

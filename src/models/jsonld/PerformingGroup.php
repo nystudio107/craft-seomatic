@@ -94,6 +94,16 @@ class PerformingGroup extends Organization
     // =========================================================================
 
     /**
+     * For a NewsMediaOrganization or other news-related Organization, a statement
+     * about public engagement activities (for news media, the newsroom’s),
+     * including involving the public - digitally or otherwise -- in coverage
+     * decisions, reporting and activities after publication.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
+     */
+    public $actionableFeedbackPolicy;
+
+    /**
      * Physical address of the item.
      *
      * @var mixed|PostalAddress|string [schema.org types: PostalAddress, Text]
@@ -146,6 +156,15 @@ class PerformingGroup extends Organization
     public $contactPoint;
 
     /**
+     * For an Organization (e.g. NewsMediaOrganization), a statement describing
+     * (in news media, the newsroom’s) disclosure and correction policy for
+     * errors.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
+     */
+    public $correctionsPolicy;
+
+    /**
      * A relationship between an organization and a department of that
      * organization, also described as an organization (allowing different urls,
      * logos, opening hours). For example: a store with a pharmacy, or a bakery
@@ -161,6 +180,16 @@ class PerformingGroup extends Organization
      * @var mixed|Date [schema.org types: Date]
      */
     public $dissolutionDate;
+
+    /**
+     * Statement on diversity policy by an Organization e.g. a
+     * NewsMediaOrganization. For a NewsMediaOrganization, a statement describing
+     * the newsroom’s diversity policy on both staffing and sources, typically
+     * providing staffing data.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
+     */
+    public $diversityPolicy;
 
     /**
      * The Dun & Bradstreet DUNS number for identifying an organization or
@@ -183,6 +212,18 @@ class PerformingGroup extends Organization
      * @var mixed|Person [schema.org types: Person]
      */
     public $employee;
+
+    /**
+     * Statement about ethics policy, e.g. of a NewsMediaOrganization regarding
+     * journalistic and publishing practices, or of a Restaurant, a page
+     * describing food source policies. In the case of a NewsMediaOrganization, an
+     * ethicsPolicy is typically a statement describing the personal,
+     * organizational, and corporate standards of behavior expected by the
+     * organization.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
+     */
+    public $ethicsPolicy;
 
     /**
      * Upcoming or past event associated with this place, organization, or action.
@@ -348,6 +389,20 @@ class PerformingGroup extends Organization
     public $parentOrganization;
 
     /**
+     * The publishingPrinciples property indicates (typically via URL) a document
+     * describing the editorial principles of an Organization (or individual e.g.
+     * a Person writing a blog) that relate to their activities as a publisher,
+     * e.g. ethics or diversity policies. When applied to a CreativeWork (e.g.
+     * NewsArticle) the principles are those of the party primarily responsible
+     * for the creation of the CreativeWork. While such policies are most
+     * typically expressed in natural language, sometimes related information
+     * (e.g. indicating a funder) can be expressed using schema.org terminology.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
+     */
+    public $publishingPrinciples;
+
+    /**
      * A review of the item. Supersedes reviews.
      *
      * @var mixed|Review [schema.org types: Review]
@@ -396,6 +451,14 @@ class PerformingGroup extends Organization
     public $telephone;
 
     /**
+     * For an Organization (typically a NewsMediaOrganization), a statement about
+     * policy on use of unnamed sources and the decision process required.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
+     */
+    public $unnamedSourcesPolicy;
+
+    /**
      * The Value-added Tax ID of the organization or person.
      *
      * @var mixed|string [schema.org types: Text]
@@ -411,6 +474,7 @@ class PerformingGroup extends Organization
      * @var array
      */
     static protected $_schemaPropertyNames = [
+        'actionableFeedbackPolicy',
         'address',
         'aggregateRating',
         'alumni',
@@ -418,11 +482,14 @@ class PerformingGroup extends Organization
         'award',
         'brand',
         'contactPoint',
+        'correctionsPolicy',
         'department',
         'dissolutionDate',
+        'diversityPolicy',
         'duns',
         'email',
         'employee',
+        'ethicsPolicy',
         'event',
         'faxNumber',
         'founder',
@@ -444,12 +511,14 @@ class PerformingGroup extends Organization
         'numberOfEmployees',
         'owns',
         'parentOrganization',
+        'publishingPrinciples',
         'review',
         'seeks',
         'sponsor',
         'subOrganization',
         'taxID',
         'telephone',
+        'unnamedSourcesPolicy',
         'vatID'
     ];
 
@@ -459,6 +528,7 @@ class PerformingGroup extends Organization
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
+        'actionableFeedbackPolicy' => ['CreativeWork','URL'],
         'address' => ['PostalAddress','Text'],
         'aggregateRating' => ['AggregateRating'],
         'alumni' => ['Person'],
@@ -466,11 +536,14 @@ class PerformingGroup extends Organization
         'award' => ['Text'],
         'brand' => ['Brand','Organization'],
         'contactPoint' => ['ContactPoint'],
+        'correctionsPolicy' => ['CreativeWork','URL'],
         'department' => ['Organization'],
         'dissolutionDate' => ['Date'],
+        'diversityPolicy' => ['CreativeWork','URL'],
         'duns' => ['Text'],
         'email' => ['Text'],
         'employee' => ['Person'],
+        'ethicsPolicy' => ['CreativeWork','URL'],
         'event' => ['Event'],
         'faxNumber' => ['Text'],
         'founder' => ['Person'],
@@ -492,12 +565,14 @@ class PerformingGroup extends Organization
         'numberOfEmployees' => ['QuantitativeValue'],
         'owns' => ['OwnershipInfo','Product'],
         'parentOrganization' => ['Organization'],
+        'publishingPrinciples' => ['CreativeWork','URL'],
         'review' => ['Review'],
         'seeks' => ['Demand'],
         'sponsor' => ['Organization','Person'],
         'subOrganization' => ['Organization'],
         'taxID' => ['Text'],
         'telephone' => ['Text'],
+        'unnamedSourcesPolicy' => ['CreativeWork','URL'],
         'vatID' => ['Text']
     ];
 
@@ -507,6 +582,7 @@ class PerformingGroup extends Organization
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
+        'actionableFeedbackPolicy' => 'For a NewsMediaOrganization or other news-related Organization, a statement about public engagement activities (for news media, the newsroom’s), including involving the public - digitally or otherwise -- in coverage decisions, reporting and activities after publication.',
         'address' => 'Physical address of the item.',
         'aggregateRating' => 'The overall rating, based on a collection of reviews or ratings, of the item.',
         'alumni' => 'Alumni of an organization. Inverse property: alumniOf.',
@@ -514,11 +590,14 @@ class PerformingGroup extends Organization
         'award' => 'An award won by or for this item. Supersedes awards.',
         'brand' => 'The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.',
         'contactPoint' => 'A contact point for a person or organization. Supersedes contactPoints.',
+        'correctionsPolicy' => 'For an Organization (e.g. NewsMediaOrganization), a statement describing (in news media, the newsroom’s) disclosure and correction policy for errors.',
         'department' => 'A relationship between an organization and a department of that organization, also described as an organization (allowing different urls, logos, opening hours). For example: a store with a pharmacy, or a bakery with a cafe.',
         'dissolutionDate' => 'The date that this organization was dissolved.',
+        'diversityPolicy' => 'Statement on diversity policy by an Organization e.g. a NewsMediaOrganization. For a NewsMediaOrganization, a statement describing the newsroom’s diversity policy on both staffing and sources, typically providing staffing data.',
         'duns' => 'The Dun & Bradstreet DUNS number for identifying an organization or business person.',
         'email' => 'Email address.',
         'employee' => 'Someone working for this organization. Supersedes employees.',
+        'ethicsPolicy' => 'Statement about ethics policy, e.g. of a NewsMediaOrganization regarding journalistic and publishing practices, or of a Restaurant, a page describing food source policies. In the case of a NewsMediaOrganization, an ethicsPolicy is typically a statement describing the personal, organizational, and corporate standards of behavior expected by the organization.',
         'event' => 'Upcoming or past event associated with this place, organization, or action. Supersedes events.',
         'faxNumber' => 'The fax number.',
         'founder' => 'A person who founded this organization. Supersedes founders.',
@@ -540,12 +619,14 @@ class PerformingGroup extends Organization
         'numberOfEmployees' => 'The number of employees in an organization e.g. business.',
         'owns' => 'Products owned by the organization or person.',
         'parentOrganization' => 'The larger organization that this organization is a subOrganization of, if any. Supersedes branchOf. Inverse property: subOrganization.',
+        'publishingPrinciples' => 'The publishingPrinciples property indicates (typically via URL) a document describing the editorial principles of an Organization (or individual e.g. a Person writing a blog) that relate to their activities as a publisher, e.g. ethics or diversity policies. When applied to a CreativeWork (e.g. NewsArticle) the principles are those of the party primarily responsible for the creation of the CreativeWork. While such policies are most typically expressed in natural language, sometimes related information (e.g. indicating a funder) can be expressed using schema.org terminology.',
         'review' => 'A review of the item. Supersedes reviews.',
         'seeks' => 'A pointer to products or services sought by the organization or person (demand).',
         'sponsor' => 'A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.',
         'subOrganization' => 'A relationship between two organizations where the first includes the second, e.g., as a subsidiary. See also: the more specific \'department\' property. Inverse property: parentOrganization.',
         'taxID' => 'The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US or the CIF/NIF in Spain.',
         'telephone' => 'The telephone number.',
+        'unnamedSourcesPolicy' => 'For an Organization (typically a NewsMediaOrganization), a statement about policy on use of unnamed sources and the decision process required.',
         'vatID' => 'The Value-added Tax ID of the organization or person.'
     ];
 
@@ -607,7 +688,7 @@ class PerformingGroup extends Organization
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['address','aggregateRating','alumni','areaServed','award','brand','contactPoint','department','dissolutionDate','duns','email','employee','event','faxNumber','founder','foundingDate','foundingLocation','funder','globalLocationNumber','hasOfferCatalog','hasPOS','isicV4','legalName','leiCode','location','logo','makesOffer','member','memberOf','naics','numberOfEmployees','owns','parentOrganization','review','seeks','sponsor','subOrganization','taxID','telephone','vatID'], 'validateJsonSchema'],
+            [['actionableFeedbackPolicy','address','aggregateRating','alumni','areaServed','award','brand','contactPoint','correctionsPolicy','department','dissolutionDate','diversityPolicy','duns','email','employee','ethicsPolicy','event','faxNumber','founder','foundingDate','foundingLocation','funder','globalLocationNumber','hasOfferCatalog','hasPOS','isicV4','legalName','leiCode','location','logo','makesOffer','member','memberOf','naics','numberOfEmployees','owns','parentOrganization','publishingPrinciples','review','seeks','sponsor','subOrganization','taxID','telephone','unnamedSourcesPolicy','vatID'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

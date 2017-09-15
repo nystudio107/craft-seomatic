@@ -96,13 +96,27 @@ class Periodical extends CreativeWorkSeries
     // =========================================================================
 
     /**
-     * The International Standard Serial Number (ISSN) that identifies this
-     * periodical. You can repeat this property to (for example) identify
-     * different formats of this periodical.
+     * The end date and time of the item (in ISO 8601 date format).
      *
-     * @var string [schema.org types: Text]
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     */
+    public $endDate;
+
+    /**
+     * The International Standard Serial Number (ISSN) that identifies this serial
+     * publication. You can repeat this property to identify different formats of,
+     * or the linking ISSN (ISSN-L) for, this serial publication.
+     *
+     * @var mixed|string [schema.org types: Text]
      */
     public $issn;
+
+    /**
+     * The start date and time of the item (in ISO 8601 date format).
+     *
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     */
+    public $startDate;
 
     // Static Protected Properties
     // =========================================================================
@@ -113,7 +127,9 @@ class Periodical extends CreativeWorkSeries
      * @var array
      */
     static protected $_schemaPropertyNames = [
-        'issn'
+        'endDate',
+        'issn',
+        'startDate'
     ];
 
     /**
@@ -122,7 +138,9 @@ class Periodical extends CreativeWorkSeries
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'issn' => ['Text']
+        'endDate' => ['Date','DateTime'],
+        'issn' => ['Text'],
+        'startDate' => ['Date','DateTime']
     ];
 
     /**
@@ -131,7 +149,9 @@ class Periodical extends CreativeWorkSeries
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'issn' => 'The International Standard Serial Number (ISSN) that identifies this periodical. You can repeat this property to (for example) identify different formats of this periodical.'
+        'endDate' => 'The end date and time of the item (in ISO 8601 date format).',
+        'issn' => 'The International Standard Serial Number (ISSN) that identifies this serial publication. You can repeat this property to identify different formats of, or the linking ISSN (ISSN-L) for, this serial publication.',
+        'startDate' => 'The start date and time of the item (in ISO 8601 date format).'
     ];
 
     /**
@@ -192,7 +212,7 @@ class Periodical extends CreativeWorkSeries
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['issn'], 'validateJsonSchema'],
+            [['endDate','issn','startDate'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

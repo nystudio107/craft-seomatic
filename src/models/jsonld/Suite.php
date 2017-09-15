@@ -103,7 +103,7 @@ class Suite extends Accommodation
      * want to indicate the quantity of a certain kind of bed, use an instance of
      * BedDetails. For more detailed information, use the amenityFeature property.
      *
-     * @var mixed|BedDetails|string [schema.org types: BedDetails, Text]
+     * @var mixed|BedDetails|BedType|string [schema.org types: BedDetails, BedType, Text]
      */
     public $bed;
 
@@ -148,7 +148,7 @@ class Suite extends Accommodation
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'bed' => ['BedDetails','Text'],
+        'bed' => ['BedDetails','BedType','Text'],
         'numberOfRooms' => ['Number','QuantitativeValue'],
         'occupancy' => ['QuantitativeValue']
     ];
