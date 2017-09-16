@@ -670,7 +670,19 @@ class MetaContainers extends Component
      */
     protected function addMetaLinkHrefLang()
     {
+        /** @TODO: this is wrong, we should get the localized URLs for the current request */
         $sites = Craft::$app->getSites()->getAllSites();
+        $key = self::SEOMATIC_METALINK_CONTAINER . self::METALINK_GENERAL_HANDLE;
+        // Add the x-default hreflang
+        $site = $sites[0];
+        $siteUrl = $site->hasUrls ? $site->baseUrl : Craft::$app->getSites()->getPrimarySite()->baseUrl;
+        $metaTag = MetaLink::create([
+            'rel'      => 'alternate',
+            'hreflang' => 'x-default',
+            'href'     => $siteUrl,
+        ]);
+        $this->addToMetaContainer($metaTag, $key);
+        // Add the alternate language link rel's
         if (count($sites) > 1) {
             foreach ($sites as $site) {
                 $siteUrl = $site->hasUrls ? $site->baseUrl : Craft::$app->getSites()->getPrimarySite()->baseUrl;
@@ -682,7 +694,6 @@ class MetaContainers extends Component
                     'hreflang' => $language,
                     'href'     => $siteUrl,
                 ]);
-                $key = self::SEOMATIC_METALINK_CONTAINER . self::METALINK_GENERAL_HANDLE;
                 $this->addToMetaContainer($metaTag, $key);
             }
         }
