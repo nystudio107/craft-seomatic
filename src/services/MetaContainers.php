@@ -671,32 +671,61 @@ class MetaContainers extends Component
     protected function addMetaLinkHrefLang()
     {
         /** @TODO: this is wrong, we should get the localized URLs for the current request */
-        $sites = Craft::$app->getSites()->getAllSites();
         $key = self::SEOMATIC_METALINK_CONTAINER . self::METALINK_GENERAL_HANDLE;
+        $sites = $this->getLocalizedUrls();
+
         // Add the x-default hreflang
         $site = $sites[0];
-        $siteUrl = $site->hasUrls ? $site->baseUrl : Craft::$app->getSites()->getPrimarySite()->baseUrl;
         $metaTag = MetaLink::create([
             'rel'      => 'alternate',
             'hreflang' => 'x-default',
-            'href'     => $siteUrl,
+            'href'     => $site['url'],
         ]);
         $this->addToMetaContainer($metaTag, $key);
         // Add the alternate language link rel's
         if (count($sites) > 1) {
             foreach ($sites as $site) {
-                $siteUrl = $site->hasUrls ? $site->baseUrl : Craft::$app->getSites()->getPrimarySite()->baseUrl;
-                $language = $site->language;
-                $language = strtolower($language);
-                $language = str_replace('_', '-', $language);
                 $metaTag = MetaLink::create([
                     'rel'      => 'alternate',
-                    'hreflang' => $language,
-                    'href'     => $siteUrl,
+                    'hreflang' => $site['language'],
+                    'href'     => $site['url'],
                 ]);
                 $this->addToMetaContainer($metaTag, $key);
             }
         }
+    }
+
+    /**
+     * @return array
+     */
+    protected function getLocalizedUrls()
+    {
+        $localizedUrls = [];
+        $requestUri = Craft::$app->getRequest()->getUrl();
+        $sites = Craft::$app->getSites()->getAllSites();
+        $elements = Craft::$app->getElements();
+        foreach ($sites as $site) {
+            if (Seomatic::$matchedElement) {
+                $url = $elements->getElementUriForSite(Seomatic::$matchedElement->getId(), $site->id);
+                $url = ($url === '__home__') ? '' : $url;
+            } else {
+                $url = $site->hasUrls ? UrlHelper::siteUrl($requestUri, null, null, $site->id)
+                    : Craft::$app->getSites()->getPrimarySite()->baseUrl;
+            }
+            if (!UrlHelper::isAbsoluteUrl($url)) {
+                $url = UrlHelper::siteUrl($url);
+            }
+            $language = $site->language;
+            $language = strtolower($language);
+            $language = str_replace('_', '-', $language);
+            $localizedUrls[] = [
+                'id' => $site->id,
+                'language' => $language,
+                'url' => $url
+            ];
+        }
+
+        return $localizedUrls;
     }
 
     /**
