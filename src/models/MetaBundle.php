@@ -101,6 +101,11 @@ class MetaBundle extends Model
     public $sitemapPriority;
 
     /**
+     * @var int
+     */
+    public $sitemapLimit = null;
+
+    /**
      * @var array
      */
     public $sitemapImageFieldMap = [];
@@ -178,6 +183,18 @@ class MetaBundle extends Model
      */
     public function normalizeMetaBundleData()
     {
+        // sourceAltSiteSettings
+        if (!empty($this->sourceAltSiteSettings)) {
+            $this->sourceAltSiteSettings = json_decode($this->sourceAltSiteSettings, true);
+        }
+        // sitemapImageFieldMap
+        if (!empty($this->sitemapImageFieldMap)) {
+            $this->sitemapImageFieldMap = json_decode($this->sitemapImageFieldMap, true);
+        }
+        // sitemapVideoFieldMap
+        if (!empty($this->sitemapVideoFieldMap)) {
+            $this->sitemapVideoFieldMap = json_decode($this->sitemapVideoFieldMap, true);
+        }
         // Meta global variables
         if (!empty($this->metaGlobalVars)) {
             $metaGlobalVars = json_decode($this->metaGlobalVars, true);
@@ -280,6 +297,7 @@ class MetaBundle extends Model
             [['sourceDateUpdated'], DateTimeValidator::class],
             [['sourceAltSiteSettings'], 'safe'],
             [['sitemapPriority'], 'number'],
+            [['sitemapLimit'], 'integer'],
             [['sitemapUrls', 'sitemapAssets', 'sitemapAltLinks', 'sitemapFiles'], 'boolean'],
             [['sitemapImageFieldMap', 'sitemapVideoFieldMap'], ArrayValidator::class],
         ];

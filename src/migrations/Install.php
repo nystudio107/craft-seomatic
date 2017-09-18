@@ -101,6 +101,9 @@ class Install extends Migration
                     'sitemapAltLinks' => $this->boolean()->notNull(),
                     'sitemapChangeFreq' => $this->string(16)->notNull()->defaultValue(''),
                     'sitemapPriority' => $this->float()->notNull(),
+                    'sitemapLimit' => $this->integer()->null(),
+                    'sitemapImageFieldMap' => $this->text(),
+                    'sitemapVideoFieldMap' => $this->text(),
 
                     'metaGlobalVars' => $this->text(),
 
