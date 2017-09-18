@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\models;
 
 use craft\base\Model;
+use craft\validators\ArrayValidator;
 use craft\validators\DateTimeValidator;
 
 /**
@@ -98,6 +99,16 @@ class MetaBundle extends Model
      * @var float
      */
     public $sitemapPriority;
+
+    /**
+     * @var array
+     */
+    public $sitemapImageFieldMap = [];
+
+    /**
+     * @var array
+     */
+    public $sitemapVideoFieldMap = [];
 
     /**
      * @var MetaGlobalVars
@@ -270,6 +281,7 @@ class MetaBundle extends Model
             [['sourceAltSiteSettings'], 'safe'],
             [['sitemapPriority'], 'number'],
             [['sitemapUrls', 'sitemapAssets', 'sitemapAltLinks', 'sitemapFiles'], 'boolean'],
+            [['sitemapImageFieldMap', 'sitemapVideoFieldMap'], ArrayValidator::class],
         ];
         return $rules;
     }

@@ -36,6 +36,19 @@ return [
     'sitemapAltLinks'   => true,
     'sitemapChangeFreq' => 'weekly',
     'sitemapPriority'   => 0.5,
+    'sitemapImageFieldMap' => [
+        'title' => 'title',
+        'caption' => 'caption',
+        'geoLocation' => 'geo_location',
+        'license' => 'license'
+    ],
+    'sitemapVideoFieldMap' => [
+        'title' => 'title',
+        'description' => 'description',
+        'thumbnailLoc' => 'thumbnail_loc',
+        'duration' => 'duration',
+        'category' => 'category',
+    ],
 
     'metaGlobalVars'             => @include('GlobalVars.php'),
     'metaTagContainer'           => @include('TagContainer.php'),

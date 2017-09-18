@@ -217,7 +217,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                         $assetFields = FieldHelper::fieldsOfType($element, AssetsField::className());
                         foreach ($assetFields as $assetField) {
                             foreach ($element[$assetField] as $asset) {
-                                $this->assetSitemapItem($asset, $lines);
+                                $this->assetSitemapItem($asset, $metaBundle, $lines);
                             }
                         }
                         // Assets embeded in Matrix fields
@@ -227,7 +227,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                                 $assetFields = FieldHelper::matrixFieldsOfType($matrixBlock, AssetsField::className());
                                 foreach ($assetFields as $assetField) {
                                     foreach ($matrixBlock[$assetField] as $asset) {
-                                        $this->assetSitemapItem($asset, $lines);
+                                        $this->assetSitemapItem($asset, $metaBundle, $lines);
                                     }
                                 }
                             }
@@ -266,10 +266,11 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
     }
 
     /**
-     * @param Asset $asset
-     * @param array $lines
+     * @param Asset      $asset
+     * @param MetaBundle $metaBundle
+     * @param array      $lines
      */
-    protected function assetSitemapItem(Asset $asset, array &$lines)
+    protected function assetSitemapItem(Asset $asset, MetaBundle $metaBundle, array &$lines)
     {
         switch ($asset->kind) {
             case 'image':
@@ -281,6 +282,13 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 $lines[] = '        ' . $asset->title;
                 $lines[] = '      </image:title>';
                 $lines[] = '    </image:image>';
+                foreach ($metaBundle->sitemapImageFieldMap as $fieldName => $propName) {
+                    if (!empty($asset[$fieldName])) {
+                        $lines[] = '      <image:' . $asset[$propName] .'>';
+                        $lines[] = '        ' . $asset[$fieldName];
+                        $lines[] = '      </image:' . $asset[$propName] .'>';
+                    }
+                }
                 break;
 
             case 'video':
