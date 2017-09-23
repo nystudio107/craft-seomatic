@@ -50,13 +50,14 @@ class SeomaticVariable
     /**
      * Create a meta tag
      *
+     * @param string $tagType
      * @param array $attributes The meta tag attributes
      *
      * @return null|MetaTag     The model object
      */
-    public function createMetaTag(array $attributes = [])
+    public function createMetaTag($tagType = null, array $attributes = [])
     {
-        return MetaTag::create($attributes);
+        return MetaTag::create($tagType, $attributes);
     }
 
     /**

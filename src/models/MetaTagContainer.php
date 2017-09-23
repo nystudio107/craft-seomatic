@@ -26,12 +26,6 @@ class MetaTagContainer extends MetaContainer
 
     const CONTAINER_TYPE = 'MetaTagContainer';
 
-    const TAGS_WITH_VALIDATION = [
-        'description',
-        'referrer',
-        'robots',
-    ];
-
     // Public Properties
     // =========================================================================
 
@@ -60,12 +54,6 @@ class MetaTagContainer extends MetaContainer
                     if (Seomatic::$devMode) {
                         $scenario = [];
                         $scenario['default'] = 'error';
-                        // Special validation for certain meta tags
-                        if (!empty($options['name'])) {
-                            if (in_array($options['name'], self::TAGS_WITH_VALIDATION)) {
-                                $scenario[$options['name']] = 'warning';
-                            }
-                        }
                         $metaTagModel->debugMetaItem(
                             "Tag attribute: ",
                             $scenario
@@ -82,7 +70,7 @@ class MetaTagContainer extends MetaContainer
     public function normalizeContainerData(): void
     {
         foreach ($this->data as $key => $config) {
-            $this->data[$key] = MetaTag::create($config);
+            $this->data[$key] = MetaTag::create($key, $config);
         }
     }
 }

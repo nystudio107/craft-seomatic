@@ -18,8 +18,6 @@ use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
 use Craft;
 
-use Stringy\Stringy;
-
 use yii\helpers\Html;
 use yii\helpers\Inflector;
 
@@ -35,10 +33,6 @@ class MetaTag extends MetaItem
 
     const ITEM_TYPE = 'MetaTag';
 
-    const DESCRIPTION_TAG = 'description';
-    const REFERRER_TAG = 'referrer';
-    const ROBOTS_TAG = 'robots';
-
     const UNIQUEKEYS_TAGS = [
         'og:see_also',
         'og:image',
@@ -51,17 +45,28 @@ class MetaTag extends MetaItem
     // =========================================================================
 
     /**
+     * @param string $tagType
      * @param array $config
      *
      * @return null|MetaTag
      */
-    public static function create(array $config = [])
+    public static function create($tagType = null, array $config = [])
     {
         $model = null;
+        // Variablize the keys so that they coincide with our property names
         foreach ($config as $key => $value) {
             ArrayHelper::rename($config, $key, Inflector::variablize($key));
         }
-        $model = new MetaTag($config);
+        $className = MetaTag::class;
+        if ($tagType) {
+            // Potentially load a sub-type of MetaTag
+            $tagClassName = 'nystudio107\\seomatic\\models\\metatag\\' . ucfirst($tagType) . 'Tag';
+            /** @var $model MetaTag */
+            if (class_exists($tagClassName)) {
+                $className = $tagClassName;
+            }
+        }
+        $model = new $className($config);
 
         return $model;
     }
@@ -116,31 +121,6 @@ class MetaTag extends MetaItem
         $rules = parent::rules();
         $rules = array_merge($rules, [
             [['charset', 'content', 'httpEquiv', 'name'], 'string'],
-            // Special validation rules for specific meta tags
-            [['content'], 'string', 'length' => [70, 160], 'on' => self::DESCRIPTION_TAG],
-            [
-                'content', 'in', 'range' => [
-                    'no-referrer',
-                    'origin',
-                    'no-referrer-when-downgrade',
-                    'origin-when-crossorigin',
-                    'unsafe-URL',
-                ], 'on' => self::REFERRER_TAG,
-            ],
-            [
-                'content', 'in', 'range' => [
-                    'index',
-                    'noindex',
-                    'follow',
-                    'nofollow',
-                    'none',
-                    'noodp',
-                    'noarchive',
-                    'nosnippet',
-                    'noimageindex',
-                    'nocache',
-                ], 'on' => self::ROBOTS_TAG,
-            ],
         ]);
 
         return $rules;
@@ -172,20 +152,7 @@ class MetaTag extends MetaItem
             MetaValueHelper::parseArray($data);
             // Only render if there's more than one attribute
             if (count($data) > 1) {
-                // Special-case scenarios
-                if (!empty($data['name'])) {
-                    switch ($data['name']) {
-                        case self::DESCRIPTION_TAG:
-                            if (!empty($data['content'])) {
-                                $data['content'] = (string)Stringy::create($data['content'])->safeTruncate(
-                                    Seomatic::$settings->maxDescriptionLength,
-                                    '…'
-                                );
-                            }
-                            break;
-                    }
-                }
-                // devMove
+                // devMode
                 if (Seomatic::$devMode) {
                 }
             } else {
