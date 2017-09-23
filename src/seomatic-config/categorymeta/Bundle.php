@@ -9,7 +9,6 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-use nystudio107\seomatic\helpers\Config as ConfigHelper;
 use nystudio107\seomatic\services\MetaBundles;
 
 /**

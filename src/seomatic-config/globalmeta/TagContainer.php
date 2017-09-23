@@ -9,7 +9,6 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-use nystudio107\seomatic\helpers\Config as ConfigHelper;
 use nystudio107\seomatic\services\MetaContainers;
 
 /**
@@ -24,34 +23,95 @@ return [
         'description' => 'General Meta Tags',
         'handle'      => MetaContainers::METATAG_GENERAL_HANDLE,
         'include'     => 'true',
-        'data'        => @include('metatags/General.php'),
-    ],
-    [
-        'name'        => 'Standard SEO',
-        'description' => 'Standard SEO Meta Tags',
-        'handle'      => MetaContainers::METATAG_STANDARD_HANDLE,
-        'include'     => 'true',
-        'data'        => @include('metatags/Standard.php'),
-    ],
-    [
-        'name'        => 'Facebook',
-        'description' => 'FaceBook OpenGraph Meta Tags',
-        'handle'      => MetaContainers::METATAG_OPENGRAPH_HANDLE,
-        'include'     => 'true',
-        'data'        => @include('metatags/OpenGraph.php'),
-    ],
-    [
-        'name'        => 'Twitter',
-        'description' => 'Twitter Meta Tags',
-        'handle'      => MetaContainers::METATAG_TWITTER_HANDLE,
-        'include'     => 'true',
-        'data'        => @include('metatags/Twitter.php'),
-    ],
-    [
-        'name'        => 'Miscellaneous',
-        'description' => 'Miscellaneous Meta Tags',
-        'handle'      => MetaContainers::METATAG_MISCELLANEOUS_HANDLE,
-        'include'     => 'true',
-        'data'        => @include('metatags/Misc.php'),
+        'data'        => [
+            'generator' => [
+                'charset'   => '',
+                'content'   => 'SEOmatic',
+                'httpEquiv' => '',
+                'name'      => 'generator',
+            ],
+
+            'keywords'    => [
+                'charset'   => '',
+                'content'   => '{seomatic.seo.title}',
+                'httpEquiv' => '',
+                'name'      => 'keywords',
+            ],
+            'description' => [
+                'charset'   => '',
+                'content'   => '{seomatic.seo.description}',
+                'httpEquiv' => '',
+                'name'      => 'description',
+            ],
+            'referrer'    => [
+                'charset'   => '',
+                'content'   => 'no-referrer-when-downgrade',
+                'httpEquiv' => '',
+                'name'      => 'referrer',
+            ],
+            'robots'      => [
+                'charset'     => '',
+                'content'     => 'index',
+                'httpEquiv'   => '',
+                'name'        => 'robots',
+                'environment' => [
+                    'live'    => [
+                        'content' => 'index',
+                    ],
+                    'staging' => [
+                        'content' => 'none',
+                    ],
+                    'local'   => [
+                        'content' => 'none',
+                    ],
+                ],
+            ],
+
+            'google-site-verification' => [
+                'charset'   => '',
+                'content'   => '{seomatic.identity.googleSiteVerification}',
+                'httpEquiv' => '',
+                'name'      => 'google-site-verification',
+            ],
+
+            'twitter:card'        => [
+                'charset'   => '',
+                'content'   => 'summary',
+                'httpEquiv' => '',
+                'name'      => 'twitter:card',
+            ],
+            'twitter:site'        => [
+                'charset'   => '',
+                'content'   => '@{seomatic.social.twitterHandle}',
+                'httpEquiv' => '',
+                'name'      => 'twitter:site',
+            ],
+            'twitter:title'       => [
+                'charset'   => '',
+                'content'   => '{seomatic.seo.title}',
+                'httpEquiv' => '',
+                'name'      => 'twitter:title',
+            ],
+            'twitter:description' => [
+                'charset'   => '',
+                'content'   => '{seomatic.seo.description}',
+                'httpEquiv' => '',
+                'name'      => 'twitter:description',
+            ],
+
+            'og:type'  => [
+                'charset'   => '',
+                'content'   => 'website',
+                'httpEquiv' => '',
+                'name'      => 'og:type',
+            ],
+            'og:title' => [
+                'charset'   => '',
+                'content'   => '{{ seomatic.seoTitle }}',
+                'httpEquiv' => '',
+                'name'      => 'og:title',
+            ],
+
+        ],
     ],
 ];

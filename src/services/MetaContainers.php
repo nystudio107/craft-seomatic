@@ -55,11 +55,6 @@ class MetaContainers extends Component
     const SEOMATIC_METATITLE_CONTAINER = Seomatic::SEOMATIC_HANDLE . MetaTitle::ITEM_TYPE;
 
     const METATAG_GENERAL_HANDLE = 'general';
-    const METATAG_STANDARD_HANDLE = 'standard';
-    const METATAG_OPENGRAPH_HANDLE = 'opengraph';
-    const METATAG_TWITTER_HANDLE = 'twitter';
-    const METATAG_MISCELLANEOUS_HANDLE = 'misc';
-
     const METALINK_GENERAL_HANDLE = 'general';
     const METASCRIPT_GENERAL_HANDLE = 'general';
     const METAJSONLD_GENERAL_HANDLE = 'general';
