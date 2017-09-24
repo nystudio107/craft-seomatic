@@ -54,6 +54,7 @@ class MetaTagContainer extends MetaContainer
                     if (Seomatic::$devMode) {
                         $scenario = [];
                         $scenario['default'] = 'error';
+                        $scenario['warning'] = 'warning';
                         $metaTagModel->debugMetaItem(
                             "Tag attribute: ",
                             $scenario

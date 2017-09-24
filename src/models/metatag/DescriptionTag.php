@@ -53,7 +53,7 @@ class DescriptionTag extends MetaTag
         $rules = parent::rules();
         $rules = array_merge($rules, [
             // Description tags have a special length
-            [['content'], 'string', 'length' => [70, 160]],
+            [['content'], 'string', 'length' => [70, 160], 'on' => ['warning']],
         ]);
 
         return $rules;

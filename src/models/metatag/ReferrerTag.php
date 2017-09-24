@@ -57,7 +57,7 @@ class ReferrerTag extends MetaTag
                 'no-referrer-when-downgrade',
                 'origin-when-crossorigin',
                 'unsafe-URL',
-                ],
+                ], 'on' => ['warning'],
             ],
         ]);
 

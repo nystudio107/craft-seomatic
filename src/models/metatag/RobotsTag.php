@@ -62,7 +62,7 @@ class RobotsTag extends MetaTag
                 'nosnippet',
                 'noimageindex',
                 'nocache',
-                ],
+                ], 'on' => ['warning'],
             ],
         ]);
 

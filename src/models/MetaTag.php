@@ -121,6 +121,7 @@ class MetaTag extends MetaItem
         $rules = parent::rules();
         $rules = array_merge($rules, [
             [['charset', 'content', 'httpEquiv', 'name'], 'string'],
+            [['name'], 'required', 'on' => ['warning']]
         ]);
 
         return $rules;

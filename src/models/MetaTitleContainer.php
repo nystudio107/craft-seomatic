@@ -52,8 +52,12 @@ class MetaTitleContainer extends MetaContainer
                     Seomatic::$view->title = $title;
                     // If `devMode` is enabled, validate the Meta Tag and output any model errors
                     if (Seomatic::$devMode) {
+                        $scenario = [];
+                        $scenario['default'] = 'error';
+                        $scenario['warning'] = 'warning';
                         $metaTitleModel->debugMetaItem(
-                            "Tag attribute: "
+                            "Tag attribute: ",
+                            $scenario
                         );
                     }
                 }
