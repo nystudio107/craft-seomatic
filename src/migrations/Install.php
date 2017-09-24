@@ -95,16 +95,6 @@ class Install extends Migration
                     'sourceAltSiteSettings' => $this->text(),
                     'sourceDateUpdated' => $this->dateTime()->notNull(),
 
-                    'sitemapUrls' => $this->boolean()->notNull(),
-                    'sitemapAssets' => $this->boolean()->notNull(),
-                    'sitemapFiles' => $this->boolean()->notNull(),
-                    'sitemapAltLinks' => $this->boolean()->notNull(),
-                    'sitemapChangeFreq' => $this->string(16)->notNull()->defaultValue(''),
-                    'sitemapPriority' => $this->float()->notNull(),
-                    'sitemapLimit' => $this->integer()->null(),
-                    'sitemapImageFieldMap' => $this->text(),
-                    'sitemapVideoFieldMap' => $this->text(),
-
                     'metaGlobalVars' => $this->text(),
 
                     'metaTagContainer' => $this->text(),

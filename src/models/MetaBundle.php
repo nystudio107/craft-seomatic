@@ -12,7 +12,6 @@
 namespace nystudio107\seomatic\models;
 
 use craft\base\Model;
-use craft\validators\ArrayValidator;
 use craft\validators\DateTimeValidator;
 
 /**
@@ -69,51 +68,6 @@ class MetaBundle extends Model
      * @var \DateTime
      */
     public $sourceDateUpdated;
-
-    /**
-     * @var bool
-     */
-    public $sitemapUrls;
-
-    /**
-     * @var bool
-     */
-    public $sitemapAssets;
-
-    /**
-     * @var bool
-     */
-    public $sitemapFiles;
-
-    /**
-     * @var bool
-     */
-    public $sitemapAltLinks;
-
-    /**
-     * @var string
-     */
-    public $sitemapChangeFreq;
-
-    /**
-     * @var float
-     */
-    public $sitemapPriority;
-
-    /**
-     * @var int
-     */
-    public $sitemapLimit = null;
-
-    /**
-     * @var array
-     */
-    public $sitemapImageFieldMap = [];
-
-    /**
-     * @var array
-     */
-    public $sitemapVideoFieldMap = [];
 
     /**
      * @var MetaGlobalVars
@@ -273,12 +227,6 @@ class MetaBundle extends Model
                     'sourceTemplate',
                     'sourceSiteId',
                     'sourceDateUpdated',
-                    'sitemapUrls',
-                    'sitemapAssets',
-                    'sitemapFiles',
-                    'sitemapAltLinks',
-                    'sitemapChangeFreq',
-                    'sitemapPriority',
                 ],
                 'required',
             ],
@@ -289,17 +237,12 @@ class MetaBundle extends Model
                     'sourceHandle',
                     'sourceTemplate',
                     'sourceType',
-                    'sitemapChangeFreq',
                 ],
                 'string',
             ],
             [['sourceId', 'sourceSiteId'], 'number', 'min' => 1],
             [['sourceDateUpdated'], DateTimeValidator::class],
             [['sourceAltSiteSettings'], 'safe'],
-            [['sitemapPriority'], 'number'],
-            [['sitemapLimit'], 'integer'],
-            [['sitemapUrls', 'sitemapAssets', 'sitemapAltLinks', 'sitemapFiles'], 'boolean'],
-            [['sitemapImageFieldMap', 'sitemapVideoFieldMap'], ArrayValidator::class],
         ];
         return $rules;
     }

@@ -16,8 +16,28 @@
  */
 
 return [
-    'seoTitle'       => '{title}',
-    'seoDescription' => 'Category SEO Description',
-    'seoImage'       => 'Category SEO Image',
-    'canonicalUrl'   => '{url}',
+    'seoTitle'             => '{title}',
+    'seoDescription'       => 'Category SEO Description',
+    'seoImage'             => 'Category SEO Image',
+    'canonicalUrl'         => '{url}',
+    'sitemapUrls'          => true,
+    'sitemapAssets'        => true,
+    'sitemapFiles'         => true,
+    'sitemapAltLinks'      => true,
+    'sitemapChangeFreq'    => 'weekly',
+    'sitemapPriority'      => 0.5,
+    'sitemapLimit'         => null,
+    'sitemapImageFieldMap' => [
+        'title'       => 'title',
+        'caption'     => 'caption',
+        'geoLocation' => 'geo_location',
+        'license'     => 'license',
+    ],
+    'sitemapVideoFieldMap' => [
+        'title'        => 'title',
+        'description'  => 'description',
+        'thumbnailLoc' => 'thumbnail_loc',
+        'duration'     => 'duration',
+        'category'     => 'category',
+    ],
 ];

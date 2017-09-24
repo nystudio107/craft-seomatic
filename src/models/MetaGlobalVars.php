@@ -14,6 +14,7 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
 use craft\base\Model;
+use craft\validators\ArrayValidator;
 
 use yii\base\InvalidParamException;
 
@@ -80,6 +81,11 @@ class MetaGlobalVars extends Model
     /**
      * @var string
      */
+    public $ogType;
+
+    /**
+     * @var string
+     */
     public $ogTitle;
 
     /**
@@ -107,6 +113,51 @@ class MetaGlobalVars extends Model
      */
     public $twitterImage;
 
+    /**
+     * @var bool
+     */
+    public $sitemapUrls;
+
+    /**
+     * @var bool
+     */
+    public $sitemapAssets;
+
+    /**
+     * @var bool
+     */
+    public $sitemapFiles;
+
+    /**
+     * @var bool
+     */
+    public $sitemapAltLinks;
+
+    /**
+     * @var string
+     */
+    public $sitemapChangeFreq;
+
+    /**
+     * @var float
+     */
+    public $sitemapPriority;
+
+    /**
+     * @var int
+     */
+    public $sitemapLimit = null;
+
+    /**
+     * @var array
+     */
+    public $sitemapImageFieldMap = [];
+
+    /**
+     * @var array
+     */
+    public $sitemapVideoFieldMap = [];
+
     // Public Methods
     // =========================================================================
 
@@ -116,8 +167,37 @@ class MetaGlobalVars extends Model
     public function rules()
     {
         return [
-            [['language', 'seoTitle', 'seoDescription', 'seoImage'], 'string'],
+            [
+                [
+                    'sitemapUrls',
+                    'sitemapAssets',
+                    'sitemapFiles',
+                    'sitemapAltLinks',
+                    'sitemapChangeFreq',
+                    'sitemapPriority',
+                ],
+                'required',
+            ],
+            [
+                [
+                    'language',
+                    'seoTitle',
+                    'seoDescription',
+                    'seoImage',
+                    'sourceType',
+                    'sourceName',
+                    'sourceHandle',
+                    'sourceTemplate',
+                    'sourceType',
+                    'sitemapChangeFreq',
+                ],
+                'string',
+            ],
             [['canonicalUrl'], 'url'],
+            [['sitemapPriority'], 'number'],
+            [['sitemapLimit'], 'integer'],
+            [['sitemapUrls', 'sitemapAssets', 'sitemapAltLinks', 'sitemapFiles'], 'boolean'],
+            [['sitemapImageFieldMap', 'sitemapVideoFieldMap'], ArrayValidator::class],
         ];
     }
 

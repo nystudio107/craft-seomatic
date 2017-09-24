@@ -134,9 +134,9 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle($type, $handle, $siteId);
             $multiSite = count($metaBundle->sourceAltSiteSettings) > 1;
             $elements = null;
-            if ($metaBundle && $metaBundle->sitemapUrls) {
+            if ($metaBundle && $metaBundle->metaGlobalVars->sitemapUrls) {
                 $urlsetLine = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"';
-                if ($metaBundle->sitemapAssets) {
+                if ($metaBundle->metaGlobalVars->sitemapAssets) {
                     $urlsetLine .= ' xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"';
                     $urlsetLine .= ' xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"';
                 }
@@ -151,12 +151,12 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                         $elements = Entry::find()
                             ->section($metaBundle->sourceHandle)
                             ->siteId($metaBundle->sourceSiteId)
-                            ->limit($metaBundle->sitemapLimit);
+                            ->limit($metaBundle->metaGlobalVars->sitemapLimit);
                         break;
                     case MetaBundles::CATEGORYGROUP_META_BUNDLE:
                         $elements = Category::find()
                             ->siteId($metaBundle->sourceSiteId)
-                            ->limit($metaBundle->sitemapLimit);
+                            ->limit($metaBundle->metaGlobalVars->sitemapLimit);
                         break;
                     // @todo: handle Commerce products
                 }
@@ -174,13 +174,13 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                     $lines[] = '      ' . $element->dateUpdated->format(\DateTime::W3C);
                     $lines[] = '    </lastmod>';
                     $lines[] = '    <changefreq>';
-                    $lines[] = '      ' . $metaBundle->sitemapChangeFreq;
+                    $lines[] = '      ' . $metaBundle->metaGlobalVars->sitemapChangeFreq;
                     $lines[] = '    </changefreq>';
                     $lines[] = '    <priority>';
-                    $lines[] = '      ' . $metaBundle->sitemapPriority;
+                    $lines[] = '      ' . $metaBundle->metaGlobalVars->sitemapPriority;
                     $lines[] = '    </priority>';
                     // Handle alternate URLs if this is multi-site
-                    if ($multiSite && $metaBundle->sitemapAltLinks) {
+                    if ($multiSite && $metaBundle->metaGlobalVars->sitemapAltLinks) {
                         /** @var  $altSiteSettings */
                         foreach ($metaBundle->sourceAltSiteSettings as $altSiteSettings) {
                             $altElement = null;
@@ -213,7 +213,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                         }
                     }
                     // Handle any Assets
-                    if ($metaBundle->sitemapAssets) {
+                    if ($metaBundle->metaGlobalVars->sitemapAssets) {
                         // Regular Assets fields
                         $assetFields = FieldHelper::fieldsOfType($element, AssetsField::className());
                         foreach ($assetFields as $assetField) {
@@ -236,7 +236,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                     }
                     $lines[] = '  </url>';
                     // Include links to any known file types in the assets fields
-                    if ($metaBundle->sitemapFiles) {
+                    if ($metaBundle->metaGlobalVars->sitemapFiles) {
                         // Regular Assets fields
                         $assetFields = FieldHelper::fieldsOfType($element, AssetsField::className());
                         foreach ($assetFields as $assetField) {
@@ -280,7 +280,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 $lines[] = '        ' . $asset->url;
                 $lines[] = '      </image:loc>';
                 // Handle the dynamic field => property mappings
-                foreach ($metaBundle->sitemapImageFieldMap as $fieldName => $propName) {
+                foreach ($metaBundle->metaGlobalVars->sitemapImageFieldMap as $fieldName => $propName) {
                     if (!empty($asset[$fieldName])) {
                         $lines[] = '      <image:' . $propName .'>';
                         $lines[] = '        ' . $asset[$fieldName];
@@ -299,7 +299,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 $lines[] = '        ' . $asset->getThumbUrl(320);
                 $lines[] = '      </video:thumbnail_loc>';
                 // Handle the dynamic field => property mappings
-                foreach ($metaBundle->sitemapVideoFieldMap as $fieldName => $propName) {
+                foreach ($metaBundle->metaGlobalVars->sitemapVideoFieldMap as $fieldName => $propName) {
                     if (!empty($asset[$fieldName])) {
                         $lines[] = '      <video:' . $propName .'>';
                         $lines[] = '        ' . $asset[$fieldName];
@@ -327,10 +327,10 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             $lines[] = '      ' . $asset->dateUpdated->format(\DateTime::W3C);
             $lines[] = '    </lastmod>';
             $lines[] = '    <changefreq>';
-            $lines[] = '      ' . $metaBundle->sitemapChangeFreq;
+            $lines[] = '      ' . $metaBundle->metaGlobalVars->sitemapChangeFreq;
             $lines[] = '    </changefreq>';
             $lines[] = '    <priority>';
-            $lines[] = '      ' . $metaBundle->sitemapPriority;
+            $lines[] = '      ' . $metaBundle->metaGlobalVars->sitemapPriority;
             $lines[] = '    </priority>';
             $lines[] = '  </url>';
         }
