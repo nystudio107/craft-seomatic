@@ -16,8 +16,15 @@
  */
 
 return [
-    'seoTitle'       => 'Global SEO Title',
-    'seoDescription' => 'Global SEO Description',
-    'seoImage'       => 'Global SEO Image',
-    'canonicalUrl'   => '{{ craft.request.url }}',
+    'seoTitle'           => 'Global SEO Title',
+    'seoDescription'     => 'Global SEO Description',
+    'seoImage'           => 'Global SEO Image',
+    'canonicalUrl'       => '{{ craft.request.url }}',
+    'robots'             => 'all',
+    'ogTitle'            => '{{ seomatic.seoTitle }}',
+    'ogDescription'      => '{{ seomatic.seoDescription }}',
+    'ogImage'            => 'Global SEO Image',
+    'twitterTitle'       => '{{ seomatic.seoTitle }}',
+    'twitterDescription' => '{{ seomatic.seoDescription }}',
+    'twitterImage'       => 'Global SEO Image',
 ];

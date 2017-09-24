@@ -72,6 +72,41 @@ class MetaGlobalVars extends Model
      */
     public $canonicalUrl;
 
+    /**
+     * @var string
+     */
+    public $robots;
+
+    /**
+     * @var string
+     */
+    public $ogTitle;
+
+    /**
+     * @var string
+     */
+    public $ogDescription;
+
+    /**
+     * @var string
+     */
+    public $ogImage;
+
+    /**
+     * @var string
+     */
+    public $twitterTitle;
+
+    /**
+     * @var string
+     */
+    public $twitterDescription;
+
+    /**
+     * @var string
+     */
+    public $twitterImage;
+
     // Public Methods
     // =========================================================================
 

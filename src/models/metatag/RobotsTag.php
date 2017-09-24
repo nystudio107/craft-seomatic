@@ -52,16 +52,17 @@ class RobotsTag extends MetaTag
             // Robots tags have specific content attributes
             [
                 'content', 'in', 'range' => [
-                'index',
-                'noindex',
-                'follow',
-                'nofollow',
-                'none',
-                'noodp',
-                'noarchive',
-                'nosnippet',
-                'noimageindex',
-                'nocache',
+                    'all',
+                    'index',
+                    'noindex',
+                    'follow',
+                    'nofollow',
+                    'none',
+                    'noodp',
+                    'noarchive',
+                    'nosnippet',
+                    'noimageindex',
+                    'nocache',
                 ], 'on' => ['warning'],
             ],
         ]);
