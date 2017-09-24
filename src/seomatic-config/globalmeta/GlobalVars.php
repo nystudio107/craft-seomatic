@@ -19,7 +19,7 @@ return [
     'seoTitle'           => 'Global SEO Title',
     'seoDescription'     => 'Global SEO Description',
     'seoImage'           => 'Global SEO Image',
-    'canonicalUrl'       => '{{ craft.request.url }}',
+    'canonicalUrl'       => '{{ craft.app.request.pathInfo }}',
     'robots'             => 'all',
     'ogType'             => 'Website',
     'ogTitle'            => '{{ seomatic.seoTitle }}',
