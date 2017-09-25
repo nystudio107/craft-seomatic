@@ -69,6 +69,17 @@ class Seomatic extends Plugin
 
     const SEOMATIC_HANDLE = 'Seomatic';
 
+    const ADMIN_CP_SECTIONS = [
+        'content' => [
+            'label' => 'Content SEO',
+            'url' => 'seomatic/content',
+        ],
+        'global' => [
+            'label' => 'Global SEO',
+            'url' => 'seomatic/global',
+        ]
+    ];
+
     // Static Properties
     // =========================================================================
 
@@ -375,8 +386,9 @@ class Seomatic extends Plugin
                 $event->rules = array_merge(
                     $event->rules,
                     [
-                        'seomatic' => 'seomatic/seomatic-settings/index',
-                        'seomatic/content' => 'seomatic/seomatic-settings/index',
+                        'seomatic' => 'seomatic/seomatic-settings/content',
+                        'seomatic/content' => 'seomatic/seomatic-settings/content',
+                        'seomatic/global' => 'seomatic/seomatic-settings/global',
                     ]
                 );
             }
@@ -456,6 +468,19 @@ class Seomatic extends Plugin
 
             return $html;
         });
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getCpNavItem()
+    {
+        $navItem = parent::getCpNavItem();
+        $navItem = array_merge($navItem, [
+            'subnav' => self::ADMIN_CP_SECTIONS,
+        ]);
+
+        return $navItem;
     }
 
     /**

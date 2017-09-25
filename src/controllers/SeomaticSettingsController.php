@@ -25,17 +25,6 @@ use yii\web\Response;
  */
 class SeomaticSettingsController extends Controller
 {
-    const ADMIN_CP_SECTIONS = [
-        'content' => [
-            'label' => 'Content SEO',
-            'url' => 'seomatic',
-        ],
-        'global' => [
-            'label' => 'Global SEO',
-            'url' => 'seomatic/global',
-        ]
-    ];
-
     const DOCUMENTATION_URL = 'https://github.com/nystudio107/craft3-seomatic/wiki';
 
     // Properties
@@ -51,13 +40,13 @@ class SeomaticSettingsController extends Controller
     // =========================================================================
 
     /**
-     * Sections index.
+     * Content
      *
      * @param array $variables
      *
      * @return Response The rendering result
      */
-    public function actionIndex(array $variables = []): Response
+    public function actionContent(array $variables = []): Response
     {
         $pluginName = Seomatic::$settings->pluginName;
         $templateTitle = Craft::t('seomatic', 'Content SEO');
@@ -69,7 +58,6 @@ class SeomaticSettingsController extends Controller
         );
         // Basic variables
         $variables['fullPageForm'] = false;
-        $variables['subnav'] = self::ADMIN_CP_SECTIONS;
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = Seomatic::$settings->pluginName;
         $variables['title'] = $pluginName . ' ' . $templateTitle;
@@ -88,4 +76,43 @@ class SeomaticSettingsController extends Controller
         // Render the template
         return $this->renderTemplate('seomatic/settings/content', $variables);
     }
+
+    /**
+     * Global
+     *
+     * @param array $variables
+     *
+     * @return Response The rendering result
+     */
+    public function actionGlobal(array $variables = []): Response
+    {
+        $pluginName = Seomatic::$settings->pluginName;
+        $templateTitle = Craft::t('seomatic', 'Global SEO');
+        // Asset bundle
+        Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
+        $variables['baseAssetUrl'] = Craft::$app->assetManager->getPublishedUrl(
+            '@nystudio107/seomatic/assetbundles/seomatic/dist',
+            true
+        );
+        // Basic variables
+        $variables['fullPageForm'] = false;
+        $variables['docsUrl'] = self::DOCUMENTATION_URL;
+        $variables['pluginName'] = Seomatic::$settings->pluginName;
+        $variables['title'] = $pluginName . ' ' . $templateTitle;
+        $variables['crumbs'] = [
+            [
+                'label' => $pluginName,
+                'url' => UrlHelper::cpUrl('seomatic'),
+            ],
+            [
+                'label' => $templateTitle,
+                'url' => UrlHelper::cpUrl('seomatic'),
+            ],
+        ];
+        $variables['selectedSubnavItem'] = 'global';
+        $variables['metaBundles'] = Seomatic::$plugin->metaBundles->getContentMetaBundles(false);
+        // Render the template
+        return $this->renderTemplate('seomatic/settings/global', $variables);
+    }
+
 }
