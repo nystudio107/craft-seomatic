@@ -59,7 +59,7 @@
                     var x = document.getElementsByClassName("TwitterCard-image-wrapper");
                     var i;
                     for (i = 0; i < x.length; i++) {
-                        x[i].style.backgroundImage = "url(" + "{{ resourceUrl('seomatic/images/no_image_set.png') }}" + ")";
+                        x[i].style.backgroundImage = "url(" + "{{ ('seomatic/images/no_image_set.png') }}" + ")";
                         {% if seomaticMeta.twitter.image %}
                         x[i].style.backgroundImage = "url(" + "{{ seomaticMeta.twitter.image }}" + ")";
                         {% endif %}
@@ -108,7 +108,7 @@
                     var x = document.getElementsByClassName("Facebook-post-image");
                     var i;
                     for (i = 0; i < x.length; i++) {
-                        x[i].style.backgroundImage = "url(" + "{{ resourceUrl('seomatic/images/no_image_set.png') }}" + ")";
+                        x[i].style.backgroundImage = "url(" + "{{ ('seomatic/images/no_image_set.png') }}" + ")";
                         {% if seomaticMeta.og.image %}
                         x[i].style.backgroundImage = "url(" + "{{ seomaticMeta.og.image }}" + ")";
                         {% endif %}

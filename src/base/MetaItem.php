@@ -43,6 +43,7 @@ abstract class MetaItem extends Model implements MetaItemInterface
     {
         parent::init();
 
+        // Set any per-environment attributes
         $envVars = ArrayHelper::getValue($this->environment, Seomatic::$settings->environment);
         if ($envVars) {
             $envVars = array_filter($envVars);

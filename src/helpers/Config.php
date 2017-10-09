@@ -11,8 +11,11 @@
 
 namespace nystudio107\seomatic\helpers;
 
+use nystudio107\seomatic\Seomatic;
+
 use Craft;
 use craft\base\Component;
+use craft\helpers\StringHelper;
 
 /**
  * @author    nystudio107
@@ -32,58 +35,65 @@ class Config extends Component
     /**
      * Loads a config file from the plugin's config/ folder
      *
-     * @param string $path
+     * @param string $filePath
      *
      * @return array
      */
-    public static function getConfigFromFile(string $path)
+    public static function getConfigFromFile(string $filePath): array
     {
-        $path = DIRECTORY_SEPARATOR . ltrim($path, DIRECTORY_SEPARATOR);
-        $path = Craft::getAlias('@nystudio107/seomatic')
-            . DIRECTORY_SEPARATOR
-            . self::LOCAL_CONFIG_DIR
-            . str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path);
+        // Try craft/config first
+        $path = self::getConfigFilePath('@craft/config', $filePath);
         if (!file_exists($path)) {
-            return [];
-        }
-
-        if (!file_exists($path)) {
-            return [];
+            // Now try our own internal config
+            $path = self::getConfigFilePath('@nystudio107/seomatic', $filePath);
+            if (!file_exists($path)) {
+                return [];
+            }
         }
 
         if (!is_array($config = @include $path)) {
             return [];
         }
 
-        return $config;
+        // If it's not a multi-environment config, return the whole thing
+        if (!array_key_exists('*', $config)) {
+            return $config;
+        }
+
+        // If no environment was specified, just look in the '*' array
+        if (Seomatic::$settings->environment === null) {
+            return $config['*'];
+        }
+
+        $mergedConfig = [];
+        foreach ($config as $env => $envConfig) {
+            if ($env === '*' || StringHelper::contains(Seomatic::$settings->environment, $env)) {
+                $mergedConfig = ArrayHelper::merge($mergedConfig, $envConfig);
+            }
+        }
+
+        return $mergedConfig;
     }
 
-    /**
-     * Combined multiple config files together, removing the $unsetKeys
-     *
-     * @param array      $configFiles
-     * @param array|null $unsetKeys
-     *
-     * @return array
-     */
-    public static function combineConfigFiles(array $configFiles, array $unsetKeys = null)
-    {
-        $config = [];
-        // Coalesce the passed in config files
-        foreach ($configFiles as $configFile) {
-            $config = array_merge(
-                $config,
-                self::getConfigFromFile(
-                    $configFile['filename'],
-                    $configFile['directory']
-                )
-            );
-        }
-        // Filter out the $unsetKeys
-        if ($unsetKeys) {
-            $config = array_diff_key($config, array_flip($unsetKeys));
-        }
+    // Private Methods
+    // =========================================================================
 
-        return $config;
+    /**
+     * Return a path from an alias and a partial path
+     *
+     * @param string $alias
+     * @param string $filePath
+     *
+     * @return string
+     */
+    private static function getConfigFilePath(string $alias, string $filePath): string
+    {
+        $path = DIRECTORY_SEPARATOR . ltrim($filePath, DIRECTORY_SEPARATOR);
+        $path = Craft::getAlias($alias)
+            . DIRECTORY_SEPARATOR
+            . self::LOCAL_CONFIG_DIR
+            . str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path);
+
+        return $path;
     }
 }

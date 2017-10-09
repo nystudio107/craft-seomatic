@@ -9,6 +9,7 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
+use nystudio107\seomatic\helpers\Config;
 use nystudio107\seomatic\services\MetaBundles;
 
 /**
@@ -28,11 +29,11 @@ return [
     'sourceAltSiteSettings' => [
     ],
     'sourceDateUpdated'     => new \DateTime(),
-    'metaGlobalVars'        => @include('GlobalVars.php'),
-    'metaTagContainer'      => @include('TagContainer.php'),
-    'metaLinkContainer'     => @include('LinkContainer.php'),
-    'metaScriptContainer'   => @include('ScriptContainer.php'),
-    'metaJsonLdContainer'   => @include('JsonLdContainer.php'),
-    'metaTitleContainer'    => @include('TitleContainer.php'),
-    'redirectsContainer'    => @include('RedirectsContainer.php'),
+    'metaGlobalVars'        => Config::getConfigFromFile('categorymeta/GlobalVars'),
+    'metaTagContainer'      => Config::getConfigFromFile('categorymeta/TagContainer'),
+    'metaLinkContainer'     => Config::getConfigFromFile('categorymeta/LinkContainer'),
+    'metaScriptContainer'   => Config::getConfigFromFile('categorymeta/ScriptContainer'),
+    'metaJsonLdContainer'   => Config::getConfigFromFile('categorymeta/JsonLdContainer'),
+    'metaTitleContainer'    => Config::getConfigFromFile('categorymeta/TitleContainer'),
+    'redirectsContainer'    => Config::getConfigFromFile('categorymeta/RedirectsContainer'),
 ];
