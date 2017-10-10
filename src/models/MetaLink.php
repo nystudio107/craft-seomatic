@@ -182,14 +182,6 @@ class MetaLink extends MetaItem
                 // Special-case scenarios
                 if (Seomatic::$devMode) {
                 }
-                switch (Seomatic::$settings->environment) {
-                    case 'live':
-                        break;
-                    case 'staging':
-                        break;
-                    case 'local':
-                        break;
-                }
             } else {
                 $error = Craft::t(
                     'seomatic',
