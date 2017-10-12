@@ -92,7 +92,8 @@ class Config extends Component
         $path = Craft::getAlias($alias)
             . DIRECTORY_SEPARATOR
             . self::LOCAL_CONFIG_DIR
-            . str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path);
+            . str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path)
+            . '.php';
 
         return $path;
     }

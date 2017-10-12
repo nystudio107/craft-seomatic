@@ -534,7 +534,7 @@ class MetaBundles extends Component
                 }
                 // Create a new meta bundle with propagated defaults
                 $metaBundleDefaults = array_merge(
-                    ConfigHelper::getConfigFromFile('entrymeta/Bundle.php'),
+                    ConfigHelper::getConfigFromFile('entrymeta/Bundle'),
                     [
                         'sourceId' => $section->id,
                         'sourceName' => $section->name,
@@ -593,7 +593,7 @@ class MetaBundles extends Component
                 }
                 // Create a new meta bundle with propagated defaults
                 $metaBundleDefaults = array_merge(
-                    ConfigHelper::getConfigFromFile('categorymeta/Bundle.php'),
+                    ConfigHelper::getConfigFromFile('categorymeta/Bundle'),
                     [
                         'sourceId' => $category->id,
                         'sourceName' => $category->name,
@@ -639,7 +639,7 @@ class MetaBundles extends Component
         foreach ($sites as $site) {
             // Create a new meta bundle with propagated defaults
             $metaBundleDefaults = array_merge(
-                ConfigHelper::getConfigFromFile('globalmeta/Bundle.php'),
+                ConfigHelper::getConfigFromFile('globalmeta/Bundle'),
                 [
                     'sourceSiteId' => $site->id,
                 ]
