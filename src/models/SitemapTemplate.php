@@ -171,7 +171,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 /** @var  $element Entry */
                 foreach ($elements as $element) {
                     $path = ($element->uri === '__home__') ? '' : $element->uri;
-                    $url = UrlHelper::siteUrl($path);
+                    $url = UrlHelper::siteUrl($path, null, null, $metaBundle->sourceSiteId);
                     $lines[] = '  <url>';
                     // Standard sitemap key/values
                     $lines[] = '    <loc>';

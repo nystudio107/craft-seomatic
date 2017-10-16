@@ -134,7 +134,10 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
                             .$metaBundle->sourceHandle
                             .'/'
                             .$metaBundle->sourceSiteId
-                            .'/sitemap.xml'
+                            .'/sitemap.xml',
+                            null,
+                            null,
+                            $metaBundle->sourceSiteId
                         );
                         $lines[] = '  <sitemap>';
                         $lines[] = '    <loc>';
