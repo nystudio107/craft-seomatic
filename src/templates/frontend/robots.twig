@@ -1,6 +1,6 @@
 # robots.txt for {{ siteUrl }}
 
-Sitemap: {{ siteUrl |trim('/') }}/sitemap.xml
+Sitemap: {{ siteUrl |trim('/') }}/sitemaps/{{ currentSite.id }}/sitemap.xml
 {% switch craft.seomatic.settings.environment %}
 
     {% case "live" %}

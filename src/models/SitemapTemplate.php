@@ -24,6 +24,7 @@ use craft\elements\Category;
 use craft\fields\Assets as AssetsField;
 use craft\fields\Matrix as MatrixField;
 use craft\helpers\UrlHelper;
+use craft\models\SiteGroup;
 
 use yii\caching\TagDependency;
 
@@ -64,7 +65,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
     public static function create(array $config = [])
     {
         $defaults = [
-            'path'       => 'sitemaps/<type:[-\w\.*]+>/<handle:[-\w\.*]+>/<siteId:\d+>/<file:[-\w\.*]+>',
+            'path'       => 'sitemaps/<groupId:\d+>/<type:[-\w\.*]+>/<handle:[-\w\.*]+>/<siteId:\d+>/<file:[-\w\.*]+>',
             'template'   => '',
             'controller' => 'sitemap',
             'action'     => 'sitemap',
@@ -111,6 +112,10 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
     public function render($params = []): string
     {
         $cache = Craft::$app->getCache();
+        $groupId = $params['groupId'];
+        /** @var SiteGroup $siteGroup */
+        $siteGroup = Craft::$app->getSites()->getGroupById($groupId);
+        $groupSiteIds = $siteGroup->getSiteIds();
         $type = $params['type'];
         $handle = $params['handle'];
         $siteId = $params['siteId'];
@@ -118,13 +123,13 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         $dependency = new TagDependency([
             'tags' => [
                 $this::GLOBAL_SITEMAP_CACHE_TAG,
-                $this::SITEMAP_CACHE_TAG . $handle . $siteId,
+                $this::SITEMAP_CACHE_TAG.$handle.$siteId,
             ],
         ]);
 
-        return $cache->getOrSet($this::CACHE_KEY . $handle . $siteId, function () use ($type, $handle, $siteId) {
+        return $cache->getOrSet($this::CACHE_KEY.$groupId.$handle.$siteId, function () use ($type, $handle, $siteId, $groupSiteIds) {
             Craft::info(
-                'Sitemap cache miss: ' . $handle . '/' . $siteId,
+                'Sitemap cache miss: '.$handle.'/'.$siteId,
                 __METHOD__
             );
             $lines = [];
@@ -170,47 +175,49 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                     $lines[] = '  <url>';
                     // Standard sitemap key/values
                     $lines[] = '    <loc>';
-                    $lines[] = '      ' . $url;
+                    $lines[] = '      '.$url;
                     $lines[] = '    </loc>';
                     $lines[] = '    <lastmod>';
-                    $lines[] = '      ' . $element->dateUpdated->format(\DateTime::W3C);
+                    $lines[] = '      '.$element->dateUpdated->format(\DateTime::W3C);
                     $lines[] = '    </lastmod>';
                     $lines[] = '    <changefreq>';
-                    $lines[] = '      ' . $metaBundle->metaGlobalVars->sitemapChangeFreq;
+                    $lines[] = '      '.$metaBundle->metaGlobalVars->sitemapChangeFreq;
                     $lines[] = '    </changefreq>';
                     $lines[] = '    <priority>';
-                    $lines[] = '      ' . $metaBundle->metaGlobalVars->sitemapPriority;
+                    $lines[] = '      '.$metaBundle->metaGlobalVars->sitemapPriority;
                     $lines[] = '    </priority>';
                     // Handle alternate URLs if this is multi-site
                     if ($multiSite && $metaBundle->metaGlobalVars->sitemapAltLinks) {
                         /** @var  $altSiteSettings */
                         foreach ($metaBundle->sourceAltSiteSettings as $altSiteSettings) {
-                            $altElement = null;
-                            // Handle each element type separately
-                            switch ($metaBundle->sourceBundleType) {
-                                case MetaBundles::SECTION_META_BUNDLE:
-                                    $altElement = Entry::find()
-                                        ->section($metaBundle->sourceHandle)
-                                        ->id($element->id)
-                                        ->siteId($altSiteSettings['siteId'])
-                                        ->limit(1)
-                                        ->one();
-                                    break;
+                            if (in_array($altSiteSettings['siteId'], $groupSiteIds)) {
+                                $altElement = null;
+                                // Handle each element type separately
+                                switch ($metaBundle->sourceBundleType) {
+                                    case MetaBundles::SECTION_META_BUNDLE:
+                                        $altElement = Entry::find()
+                                            ->section($metaBundle->sourceHandle)
+                                            ->id($element->id)
+                                            ->siteId($altSiteSettings['siteId'])
+                                            ->limit(1)
+                                            ->one();
+                                        break;
 
-                                case MetaBundles::CATEGORYGROUP_META_BUNDLE:
-                                    $altElement = Category::find()
-                                        ->id($element->id)
-                                        ->siteId($altSiteSettings['siteId'])
-                                        ->limit(1)
-                                        ->one();
-                                    break;
+                                    case MetaBundles::CATEGORYGROUP_META_BUNDLE:
+                                        $altElement = Category::find()
+                                            ->id($element->id)
+                                            ->siteId($altSiteSettings['siteId'])
+                                            ->limit(1)
+                                            ->one();
+                                        break;
                                     // @todo: handle Commerce products
-                            }
-                            if ($altElement) {
-                                $lines[] = '    <xhtml:link rel="alternate"'
-                                    . ' hreflang="' . $altSiteSettings['language'] . '"'
-                                    . ' href="' . $altElement->url . '"'
-                                    . ' />';
+                                }
+                                if ($altElement) {
+                                    $lines[] = '    <xhtml:link rel="alternate"'
+                                        .' hreflang="'.$altSiteSettings['language'].'"'
+                                        .' href="'.$altElement->url.'"'
+                                        .' />';
+                                }
                             }
                         }
                     }
@@ -283,14 +290,14 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             case 'image':
                 $lines[] = '    <image:image>';
                 $lines[] = '      <image:loc>';
-                $lines[] = '        ' . $asset->url;
+                $lines[] = '        '.$asset->url;
                 $lines[] = '      </image:loc>';
                 // Handle the dynamic field => property mappings
                 foreach ($metaBundle->metaGlobalVars->sitemapImageFieldMap as $fieldName => $propName) {
                     if (!empty($asset[$fieldName])) {
-                        $lines[] = '      <image:' . $propName .'>';
-                        $lines[] = '        ' . $asset[$fieldName];
-                        $lines[] = '      </image:' . $propName .'>';
+                        $lines[] = '      <image:'.$propName.'>';
+                        $lines[] = '        '.$asset[$fieldName];
+                        $lines[] = '      </image:'.$propName.'>';
                     }
                 }
                 $lines[] = '    </image:image>';
@@ -299,17 +306,17 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             case 'video':
                 $lines[] = '    <video:video>';
                 $lines[] = '      <video:content_loc>';
-                $lines[] = '        ' . $asset->url;
+                $lines[] = '        '.$asset->url;
                 $lines[] = '      </video:content_loc>';
                 $lines[] = '      <video:thumbnail_loc>';
-                $lines[] = '        ' . $asset->getThumbUrl(320);
+                $lines[] = '        '.$asset->getThumbUrl(320);
                 $lines[] = '      </video:thumbnail_loc>';
                 // Handle the dynamic field => property mappings
                 foreach ($metaBundle->metaGlobalVars->sitemapVideoFieldMap as $fieldName => $propName) {
                     if (!empty($asset[$fieldName])) {
-                        $lines[] = '      <video:' . $propName .'>';
-                        $lines[] = '        ' . $asset[$fieldName];
-                        $lines[] = '      </video:' . $propName .'>';
+                        $lines[] = '      <video:'.$propName.'>';
+                        $lines[] = '        '.$asset[$fieldName];
+                        $lines[] = '      </video:'.$propName.'>';
                     }
                 }
                 $lines[] = '    </video:video>';
@@ -327,16 +334,16 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         if (in_array($asset->kind, $this::FILE_TYPES)) {
             $lines[] = '  <url>';
             $lines[] = '    <loc>';
-            $lines[] = '      ' . $asset->url;
+            $lines[] = '      '.$asset->url;
             $lines[] = '    </loc>';
             $lines[] = '    <lastmod>';
-            $lines[] = '      ' . $asset->dateUpdated->format(\DateTime::W3C);
+            $lines[] = '      '.$asset->dateUpdated->format(\DateTime::W3C);
             $lines[] = '    </lastmod>';
             $lines[] = '    <changefreq>';
-            $lines[] = '      ' . $metaBundle->metaGlobalVars->sitemapChangeFreq;
+            $lines[] = '      '.$metaBundle->metaGlobalVars->sitemapChangeFreq;
             $lines[] = '    </changefreq>';
             $lines[] = '    <priority>';
-            $lines[] = '      ' . $metaBundle->metaGlobalVars->sitemapPriority;
+            $lines[] = '      '.$metaBundle->metaGlobalVars->sitemapPriority;
             $lines[] = '    </priority>';
             $lines[] = '  </url>';
         }
@@ -351,9 +358,9 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
     public function invalidateCache(string $handle, int $siteId)
     {
         $cache = Craft::$app->getCache();
-        TagDependency::invalidate($cache, $this::SITEMAP_CACHE_TAG . $handle . $siteId);
+        TagDependency::invalidate($cache, $this::SITEMAP_CACHE_TAG.$handle.$siteId);
         Craft::info(
-            'Sitemap cache cleared: ' . $handle,
+            'Sitemap cache cleared: '.$handle,
             __METHOD__
         );
     }

@@ -32,7 +32,7 @@ class SitemapController extends Controller
      */
     protected $allowAnonymous = [
         'sitemap-index',
-        'sitemap'
+        'sitemap',
     ];
 
     // Public Methods
@@ -43,9 +43,14 @@ class SitemapController extends Controller
      *
      * @return Response
      */
-    public function actionSitemapIndex()
+    public function actionSitemapIndex(int $groupId)
     {
-        $xml = Seomatic::$plugin->sitemaps->renderTemplate(Sitemaps::SEOMATIC_SITEMAPINDEX_CONTAINER);
+        $xml = Seomatic::$plugin->sitemaps->renderTemplate(
+            Sitemaps::SEOMATIC_SITEMAPINDEX_CONTAINER,
+            [
+                'groupId' => $groupId,
+            ]
+        );
 
         $headers = Craft::$app->response->headers;
         $headers->add('Content-Type', 'text/xml; charset=utf-8');
@@ -62,14 +67,15 @@ class SitemapController extends Controller
      *
      * @return Response
      */
-    public function actionSitemap(string $type, string $handle, int $siteId, string $file = null)
+    public function actionSitemap(int $groupId, string $type, string $handle, int $siteId, string $file = null)
     {
         $xml = Seomatic::$plugin->sitemaps->renderTemplate(
             Sitemaps::SEOMATIC_SITEMAP_CONTAINER,
             [
-                'type' => $type,
-                'handle' => $handle,
-                'siteId' => $siteId
+                'groupId' => $groupId,
+                'type'    => $type,
+                'handle'  => $handle,
+                'siteId'  => $siteId,
             ]
         );
 

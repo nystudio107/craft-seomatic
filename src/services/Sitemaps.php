@@ -102,6 +102,18 @@ class Sitemaps extends Component implements SitemapInterface
     public function sitemapRouteRules(): array
     {
         $rules = [];
+        $groups = Craft::$app->getSites()->getAllGroups();
+        $groupId = $groups[0]->id;
+        $route =
+            Seomatic::$plugin->handle
+            . '/'
+            . 'sitemap'
+            . '/'
+            . 'sitemap-index';
+        $rules['sitemap.xml'] = [
+            'route' => $route,
+            'defaults' => ['groupId' => $groupId]
+        ];
         foreach ($this->sitemapTemplateContainer->data as $sitemapTemplate) {
             /** @var $sitemapTemplate FrontendTemplate */
             $rules = array_merge(
@@ -138,21 +150,25 @@ class Sitemaps extends Component implements SitemapInterface
     {
         // Submit the sitemap to each search engine
         foreach ($this::SEARCH_ENGINE_SUBMISSION_URLS as &$url) {
-            $submissionUrl = $url . UrlHelper::siteUrl('sitemap.xml');
-            // create new guzzle client
-            $guzzleClient = Craft::createGuzzleClient(['timeout' => 120, 'connect_timeout' => 120]);
-            // Submit the sitemap index to each search engine
-            try {
-                $guzzleClient->post($submissionUrl);
-                Craft::info(
-                    'Sitemap index submitted to: ' . $submissionUrl,
-                    __METHOD__
-                );
-            } catch (\Exception $e) {
-                Craft::error(
-                    'Error submitting sitemap index to: ' . $submissionUrl . ' - ' . $e->getMessage(),
-                    __METHOD__
-                );
+            $groups = Craft::$app->getSites()->getAllGroups();
+            foreach ($groups as $group) {
+                $siteId = $group->getSiteIds()[0];
+                $submissionUrl = $url . UrlHelper::siteUrl('sitemaps/'.$group->id.'/sitemap.xml', null, null, $siteId);
+                // create new guzzle client
+                $guzzleClient = Craft::createGuzzleClient(['timeout' => 120, 'connect_timeout' => 120]);
+                // Submit the sitemap index to each search engine
+                try {
+                    $guzzleClient->post($submissionUrl);
+                    Craft::info(
+                        'Sitemap index submitted to: ' . $submissionUrl,
+                        __METHOD__
+                    );
+                } catch (\Exception $e) {
+                    Craft::error(
+                        'Error submitting sitemap index to: ' . $submissionUrl . ' - ' . $e->getMessage(),
+                        __METHOD__
+                    );
+                }
             }
         }
     }

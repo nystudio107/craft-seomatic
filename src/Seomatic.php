@@ -382,7 +382,7 @@ class Seomatic extends Plugin
                     'UrlManager::EVENT_REGISTER_CP_URL_RULES',
                     __METHOD__
                 );
-                // Register our sitemap routes
+                // Register our AdminCP routes
                 $event->rules = array_merge(
                     $event->rules,
                     [

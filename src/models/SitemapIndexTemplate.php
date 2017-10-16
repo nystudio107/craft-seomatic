@@ -17,8 +17,10 @@ use nystudio107\seomatic\base\SitemapInterface;
 
 use Craft;
 use craft\helpers\UrlHelper;
+use craft\models\SiteGroup;
 
 use yii\caching\TagDependency;
+use yii\web\NotFoundHttpException;
 
 /**
  * @author    nystudio107
@@ -47,7 +49,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
     public static function create(array $config = [])
     {
         $defaults = [
-            'path'       => 'sitemap.xml',
+            'path'       => 'sitemaps/<groupId:\d+>/sitemap.xml',
             'template'   => '',
             'controller' => 'sitemap',
             'action'     => 'sitemap-index',
@@ -90,56 +92,72 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
 
     /**
      * @inheritdoc
+     *
+     * @throws NotFoundHttpException if the sitemap.xml doesn't exist
      */
     public function render($params = []): string
     {
         $cache = Craft::$app->getCache();
-        $duration = Seomatic::$devMode ? $this::DEVMODE_SITEMAP_CACHE_DURATION : $this::SITEMAP_CACHE_DURATION;
-        $dependency = new TagDependency([
-            'tags' => [
-                $this::GLOBAL_SITEMAP_CACHE_TAG,
-                $this::SITEMAP_INDEX_CACHE_TAG,
-            ],
-        ]);
+        $groupId = $params['groupId'];
+        /** @var SiteGroup $siteGroup */
+        $siteGroup = Craft::$app->getSites()->getGroupById($groupId);
+        $groupSiteIds = $siteGroup->getSiteIds();
+        if ($siteGroup) {
+            $duration = Seomatic::$devMode ? $this::DEVMODE_SITEMAP_CACHE_DURATION : $this::SITEMAP_CACHE_DURATION;
+            $dependency = new TagDependency([
+                'tags' => [
+                    $this::GLOBAL_SITEMAP_CACHE_TAG,
+                    $this::SITEMAP_INDEX_CACHE_TAG,
+                ],
+            ]);
 
-        return $cache->getOrSet($this::CACHE_KEY, function () {
-            Craft::info(
-                'Sitemap index cache miss',
-                __METHOD__
-            );
-            $lines = [];
-            // Sitemap index XML header and opening tag
-            $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
-            $lines[] = '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-            // One sitemap entry for each MeteBundle
-            $metaBundles = Seomatic::$plugin->metaBundles->getContentMetaBundles(true);
-            /** @var  $metaBundle MetaBundle */
-            foreach ($metaBundles as $metaBundle) {
-                $sitemapUrl = UrlHelper::siteUrl(
-                    '/sitemaps/'
-                    . $metaBundle->sourceBundleType
-                    . '/'
-                    . $metaBundle->sourceHandle
-                    . '/'
-                    . $metaBundle->sourceSiteId
-                    . '/sitemap.xml'
+            return $cache->getOrSet($this::CACHE_KEY.$groupId, function () use ($groupId, $groupSiteIds) {
+                Craft::info(
+                    'Sitemap index cache miss',
+                    __METHOD__
                 );
-                $lines[] = '  <sitemap>';
-                $lines[] = '    <loc>';
-                $lines[] = '      ' . $sitemapUrl;
-                $lines[] = '    </loc>';
-                if (!empty($metaBundle->sourceDateUpdated)) {
-                    $lines[] = '    <lastmod>';
-                    $lines[] = '      ' . $metaBundle->sourceDateUpdated->format(\DateTime::W3C);
-                    $lines[] = '    </lastmod>';
+                $lines = [];
+                // Sitemap index XML header and opening tag
+                $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
+                $lines[] = '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+                // One sitemap entry for each MeteBundle
+                $metaBundles = Seomatic::$plugin->metaBundles->getContentMetaBundles(true);
+                /** @var  $metaBundle MetaBundle */
+                foreach ($metaBundles as $metaBundle) {
+                    if (in_array($metaBundle->sourceSiteId, $groupSiteIds)) {
+                        $sitemapUrl = UrlHelper::siteUrl(
+                            '/sitemaps/'
+                            .$groupId
+                            .'/'
+                            .$metaBundle->sourceBundleType
+                            .'/'
+                            .$metaBundle->sourceHandle
+                            .'/'
+                            .$metaBundle->sourceSiteId
+                            .'/sitemap.xml'
+                        );
+                        $lines[] = '  <sitemap>';
+                        $lines[] = '    <loc>';
+                        $lines[] = '      '.$sitemapUrl;
+                        $lines[] = '    </loc>';
+                        if (!empty($metaBundle->sourceDateUpdated)) {
+                            $lines[] = '    <lastmod>';
+                            $lines[] = '      '.$metaBundle->sourceDateUpdated->format(\DateTime::W3C);
+                            $lines[] = '    </lastmod>';
+                        }
+                        $lines[] = '  </sitemap>';
+                    }
                 }
-                $lines[] = '  </sitemap>';
-            }
-            // Sitemap index closing tag
-            $lines[] = '</sitemapindex>';
+                // Sitemap index closing tag
+                $lines[] = '</sitemapindex>';
 
-            return implode("\r\n", $lines);
-        }, $duration, $dependency);
+                return implode("\r\n", $lines);
+            }, $duration, $dependency);
+        } else {
+            throw new NotFoundHttpException(Craft::t('seomatic', 'Sitemap.xml not found for groupId {groupId}', [
+                'groupId' => "{$groupId}",
+            ]));
+        }
     }
 
     /**
