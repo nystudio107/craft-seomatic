@@ -13,7 +13,6 @@ namespace nystudio107\seomatic;
 
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
-use nystudio107\seomatic\helpers\MetaValue;
 use nystudio107\seomatic\models\Settings;
 use nystudio107\seomatic\services\FrontendTemplates as FrontendTemplatesService;
 use nystudio107\seomatic\services\MetaBundles as MetaBundlesService;
@@ -126,9 +125,9 @@ class Seomatic extends Plugin
         self::$matchedElement = $element;
         /** @var  $element Element */
         if ($element) {
-            self::$language = MetaValue::getSiteLanguage($element->siteId);
+            self::$language = MetaValueHelper::getSiteLanguage($element->siteId);
         } else {
-            self::$language = MetaValue::getSiteLanguage(0);
+            self::$language = MetaValueHelper::getSiteLanguage(0);
         }
         MetaValueHelper::cache();
     }
@@ -147,7 +146,7 @@ class Seomatic extends Plugin
         self::$settings = Seomatic::$plugin->getSettings();
         self::$devMode = Craft::$app->getConfig()->getGeneral()->devMode;
         self::$view = Craft::$app->getView();
-        MetaValue::cache();
+        MetaValueHelper::cache();
         $this->name = Seomatic::$settings->pluginName;
         // We're loaded
         Craft::info(
@@ -439,10 +438,7 @@ class Seomatic extends Plugin
                 // Render our sidebar template
                 $html = Craft::$app->view->renderTemplate(
                     'seomatic/_sidebar',
-                    [
-                        'seomatic' => Seomatic::$plugin->metaContainers->metaGlobalVars,
-                        'settings' => $this->getSettings(),
-                    ]
+                    MetaValueHelper::$templateObjectVars
                 );
             }
 
@@ -459,10 +455,7 @@ class Seomatic extends Plugin
                 // Render our sidebar template
                 $html = Craft::$app->view->renderTemplate(
                     'seomatic/_sidebar',
-                    [
-                        'seomatic' => Seomatic::$plugin->metaContainers->metaGlobalVars,
-                        'settings' => $this->getSettings(),
-                    ]
+                    MetaValueHelper::$templateObjectVars
                 );
             }
 

@@ -16,6 +16,8 @@ use nystudio107\seomatic\Seomatic;
 use Craft;
 use craft\base\Component;
 use craft\base\Element;
+use craft\elements\Category;
+use craft\elements\Entry;
 use craft\helpers\StringHelper;
 use craft\web\View;
 
@@ -30,9 +32,9 @@ class MetaValue extends Component
     // =========================================================================
 
     /**
-     * @var Element
+     * @var array
      */
-    public static $matchedElement;
+    public static $templateObjectVars;
 
     /**
      * @var View
@@ -54,12 +56,7 @@ class MetaValue extends Component
             return $metaValue;
         }
         try {
-            if (self::$matchedElement) {
-                $metaValue = self::$view->renderObjectTemplate($metaValue, self::$matchedElement);
-                $metaValue = self::$view->renderString($metaValue);
-            } else {
-                $metaValue = self::$view->renderString($metaValue);
-            }
+                $metaValue = self::$view->renderObjectTemplate($metaValue, self::$templateObjectVars);
         } catch (\Exception $e) {
             $metaValue = Craft::t(
                 'seomatic',
@@ -112,7 +109,19 @@ class MetaValue extends Component
      */
     public static function cache()
     {
-        self::$matchedElement = Seomatic::$matchedElement;
+        self::$templateObjectVars = [
+            'seomaticGlobals' => Seomatic::$plugin->metaContainers->metaGlobalVars,
+            'seomaticSettings' => Seomatic::$plugin->getSettings()
+        ];
+
+        $element = Seomatic::$matchedElement;
+        /** @var Element $element */
+        if (!empty($element)) {
+            $reflector = new \ReflectionClass($element);
+            $matchedElementType = strtolower($reflector->getShortName());
+            self::$templateObjectVars[$matchedElementType] = $element;
+        }
+
         self::$view = Seomatic::$view;
     }
 }
