@@ -6,6 +6,10 @@ A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and 
 
 No, really.
 
+## Requirements
+
+This plugin requires Craft CMS 3.0.0-RC1 or later.
+
 ## Installation
 
 To install SEOmatic, follow these steps:
