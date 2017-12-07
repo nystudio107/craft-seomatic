@@ -326,7 +326,7 @@ class Seomatic extends Plugin
     protected function handleSiteRequest()
     {
         // Add in our Twig extensions
-        Seomatic::$view->twig->addExtension(new SeomaticTwigExtension);
+        Seomatic::$view->registerTwigExtension(new SeomaticTwigExtension);
         // Load the sitemap containers
         Seomatic::$plugin->sitemaps->loadSitemapContainers();
         // Load the frontend template containers

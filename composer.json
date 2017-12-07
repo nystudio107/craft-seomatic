@@ -22,7 +22,7 @@
         }
     ],
     "require": {
-        "craftcms/cms": "~3.0.0-beta.23",
+        "craftcms/cms": "^3.0.0-RC1",
         "craftcms/vue-asset": "^1.0",
         "davechild/textstatistics": "^1.0.1",
         "sunra/php-simple-html-dom-parser": "^1.5.2"
