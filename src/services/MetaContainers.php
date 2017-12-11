@@ -601,7 +601,7 @@ class MetaContainers extends Component
         $site = Craft::$app->getSites()->getSiteById($siteId);
         $siteUrl = $site->hasUrls ? $site->baseUrl : Craft::$app->getSites()->getPrimarySite()->baseUrl;
         /** @var  $crumbs BreadcrumbList */
-        $crumbs = MetaJsonLd::create("BreadCrumbList", [
+        $crumbs = MetaJsonLd::create("BreadcrumbList", [
             'name' => 'Breadcrumbs',
             'description' => 'Breadcrumbs list'
         ]);
