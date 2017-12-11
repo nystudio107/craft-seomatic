@@ -14,6 +14,7 @@ namespace nystudio107\seomatic\services;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\base\MetaItem;
+use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\models\jsonld\BreadcrumbList;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaGlobalVars;
@@ -151,6 +152,7 @@ class MetaContainers extends Component
                 $duration,
                 $dependency
             );
+            MetaValueHelper::cache();
             $this->loadingContainers = false;
         }
     }
