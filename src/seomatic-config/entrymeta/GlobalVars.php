@@ -16,10 +16,10 @@
  */
 
 return [
-    'seoTitle'             => '{title}',
+    'seoTitle'             => '{{ entry.title |}',
     'seoDescription'       => 'Entry SEO Description',
     'seoImage'             => 'Entry SEO Image',
-    'canonicalUrl'         => '{url}',
+    'canonicalUrl'         => '{{ entry.url }}',
     'sitemapUrls'          => true,
     'sitemapAssets'        => true,
     'sitemapFiles'         => true,
