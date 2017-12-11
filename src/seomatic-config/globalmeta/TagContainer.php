@@ -98,6 +98,12 @@ return [
                 'httpEquiv' => '',
                 'name'      => 'twitter:description',
             ],
+            'twitter:image' => [
+                'charset'   => '',
+                'content'   => '{seomaticGlobals.twitterImage}',
+                'httpEquiv' => '',
+                'name'      => 'twitter:image',
+            ],
 
             'og:type'  => [
                 'charset'   => '',
@@ -107,9 +113,21 @@ return [
             ],
             'og:title' => [
                 'charset'   => '',
-                'content'   => '{seomaticGlobals.twitterTitle}',
+                'content'   => '{seomaticGlobals.ogTitle}',
                 'httpEquiv' => '',
                 'name'      => 'og:title',
+            ],
+            'og:description' => [
+                'charset'   => '',
+                'content'   => '{seomaticGlobals.ogDescription}',
+                'httpEquiv' => '',
+                'name'      => 'og:description',
+            ],
+            'og:image' => [
+                'charset'   => '',
+                'content'   => '{seomaticGlobals.ogImage}',
+                'httpEquiv' => '',
+                'name'      => 'og:image',
             ],
 
         ],

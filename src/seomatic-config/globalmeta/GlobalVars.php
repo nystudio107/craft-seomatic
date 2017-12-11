@@ -25,7 +25,7 @@ return [
         'ogType'               => 'Website',
         'ogTitle'              => '{seomaticGlobals.seoTitle}',
         'ogDescription'        => '{seomaticGlobals.seoDescription}',
-        'ogImage'              => 'Global SEO Image',
+        'ogImage'              => '{seomaticGlobals.seoImage}',
         'twitterTitle'         => '{seomaticGlobals.seoTitle}',
         'twitterDescription'   => '{seomaticGlobals.seoDescription}',
         'twitterImage'         => '{seomaticGlobals.seoImage}',
