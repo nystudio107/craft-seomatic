@@ -58,6 +58,13 @@ class Settings extends Model
      */
     public $maxDescriptionLength = 160;
 
+    /**
+     * The Twitter handle
+     *
+     * @var string
+     */
+    public $twitterHandle = '';
+
     // Public Methods
     // =========================================================================
 
@@ -82,6 +89,37 @@ class Settings extends Model
             ['maxTitleLength', 'default', 'value' => 70],
             ['maxDescriptionLength', 'integer', 'min' => 10],
             ['maxDescriptionLength', 'default', 'value' => 160],
+            ['twitterHandle', 'string'],
+            ['twitterHandle', 'default', 'value' => ''],
         ];
+    }
+
+    /**
+     * Magic getter/setter for the static properties of the class
+     *
+     * @param string $method    The method name (static property name)
+     * @param array  $args      The arguments list
+     *
+     * @return mixed           The value of the property
+     */
+    public function __call($method, $args)
+    {
+        if (preg_match('/^([gs]et)([A-Z])(.*)$/', $method, $match)) {
+            $reflector = new \ReflectionClass(get_called_class());
+            $property = strtolower($match[2]).$match[3];
+            if ($reflector->hasProperty($property)) {
+                $property = $reflector->getProperty($property);
+                switch ($match[1]) {
+                    case 'get':
+                        return $property->getValue();
+                    case 'set':
+                        $property->setValue($this, $args[0]);
+                }
+            } else {
+                throw new InvalidParamException("Property {$property} doesn't exist");
+            }
+        }
+
+        return null;
     }
 }
