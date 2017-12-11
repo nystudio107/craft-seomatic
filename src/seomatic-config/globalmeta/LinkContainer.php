@@ -26,7 +26,7 @@ return [
         'data'        => [
             'canonical' => [
                 'crossorigin' => '',
-                'href'        => '{{ seomatic.canonicalUrl }}',
+                'href'        => '{seomaticGlobals.canonicalUrl}',
                 'hreflang'    => '',
                 'media'       => '',
                 'rel'         => 'canonical',
@@ -44,7 +44,7 @@ return [
             ],
             'publisher' => [
                 'crossorigin' => '',
-                'href'        => '{seomatic.social.googlePublisherLink}',
+                'href'        => '{seomaticSettings.googlePublisherLink}',
                 'hreflang'    => '',
                 'media'       => '',
                 'rel'         => 'publisher',

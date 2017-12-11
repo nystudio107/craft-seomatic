@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
+use Craft;
 use craft\base\Model;
 use craft\validators\ArrayValidator;
 
@@ -37,10 +38,6 @@ class MetaGlobalVars extends Model
     {
         $model = null;
         $model = new MetaGlobalVars($config);
-        // Parse the meta global vars
-        $attributes = $model->getAttributes();
-        MetaValueHelper::parseArray($attributes);
-        $model->setAttributes($attributes);
 
         return $model;
     }
@@ -162,6 +159,17 @@ class MetaGlobalVars extends Model
     // =========================================================================
 
     /**
+     * Parse the model properties
+     */
+    public function parseProperties()
+    {
+        // Parse the meta global vars
+        $attributes = $this->getAttributes();
+        MetaValueHelper::parseArray($attributes);
+        $this->setAttributes($attributes);
+    }
+
+    /**
      * @inheritdoc
      */
     public function rules()
@@ -184,11 +192,15 @@ class MetaGlobalVars extends Model
                     'seoTitle',
                     'seoDescription',
                     'seoImage',
-                    'sourceType',
-                    'sourceName',
-                    'sourceHandle',
-                    'sourceTemplate',
-                    'sourceType',
+                    'canonicalUrl',
+                    'robots',
+                    'ogTitle',
+                    'ogDescription',
+                    'ogImage',
+                    'twitterTitle',
+                    'twitterDescription',
+                    'twitterImage',
+
                     'sitemapChangeFreq',
                 ],
                 'string',

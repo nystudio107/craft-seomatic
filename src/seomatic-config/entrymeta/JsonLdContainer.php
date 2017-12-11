@@ -26,17 +26,17 @@ return [
         'data'        => [
             'mainEntityOfPage' => [
                 'type'             => 'WebPage',
-                'name'             => '{{ seomatic.seoTitle }}',
-                'description'      => '{{ seomatic.seoDescription }}',
+                'name'             => '{seomaticGlobals.seoTitle}',
+                'description'      => '{seomaticGlobals.seoDescription}',
                 'image'            => [
                     'type'   => 'ImageObject',
-                    'url'    => '{{ seomatic.seoImage }}',
+                    'url'    => '{seomaticGlobals.seoImage}',
                     'width'  => '1200',
                     'height' => '804',
                 ],
-                'url'              => '{{ seomatic.canonicalUrl }}',
-                'mainEntityOfPage' => '{{ seomatic.canonicalUrl }}',
-                'inLanguage'       => '{language}',
+                'url'              => '{seomaticGlobals.canonicalUrl}',
+                'mainEntityOfPage' => '{seomaticGlobals.canonicalUrl}',
+                'inLanguage'       => '{seomaticGlobals.language}',
             ],
         ],
     ],

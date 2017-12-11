@@ -76,7 +76,12 @@ class MetaValue extends Component
     {
         foreach ($metaArray as $key => $value) {
             if ($value !== null && is_string($value)) {
-                $metaArray[$key] = self::parseString($value);
+                $newValue = '';
+                while ($newValue != $value) {
+                    $value = $metaArray[$key];
+                    $metaArray[$key] = self::parseString($value);
+                    $newValue = $metaArray[$key];
+                }
             }
         }
 

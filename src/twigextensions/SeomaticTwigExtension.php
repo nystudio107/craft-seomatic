@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\twigextensions;
 
 use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 use Craft;
@@ -43,7 +44,7 @@ class SeomaticTwigExtension extends \Twig_Extension implements \Twig_Extension_G
             Seomatic::$plugin->metaContainers->loadMetaContainers($request->getPathInfo(), null);
         }
 
-        return ['seomatic' => Seomatic::$plugin->metaContainers->metaGlobalVars];
+        return MetaValueHelper::$templateObjectVars;
     }
 
     /**

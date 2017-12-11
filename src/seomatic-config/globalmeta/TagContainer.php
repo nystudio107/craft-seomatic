@@ -33,13 +33,13 @@ return [
 
             'keywords'    => [
                 'charset'   => '',
-                'content'   => '{seomatic.seo.title}',
+                'content'   => '{seomaticGlobals.seoTitle}',
                 'httpEquiv' => '',
                 'name'      => 'keywords',
             ],
             'description' => [
                 'charset'   => '',
-                'content'   => '{seomatic.seo.description}',
+                'content'   => '{seomaticGlobals.seoDescription}',
                 'httpEquiv' => '',
                 'name'      => 'description',
             ],
@@ -69,7 +69,7 @@ return [
 
             'google-site-verification' => [
                 'charset'   => '',
-                'content'   => '{seomatic.identity.googleSiteVerification}',
+                'content'   => '{seomaticSettings.googleSiteVerification}',
                 'httpEquiv' => '',
                 'name'      => 'google-site-verification',
             ],
@@ -82,19 +82,19 @@ return [
             ],
             'twitter:site'        => [
                 'charset'   => '',
-                'content'   => '@{seomatic.social.twitterHandle}',
+                'content'   => '@{seomaticSettings.twitterHandle}',
                 'httpEquiv' => '',
                 'name'      => 'twitter:site',
             ],
             'twitter:title'       => [
                 'charset'   => '',
-                'content'   => '{seomatic.seo.title}',
+                'content'   => '{seomaticGlobals.twitterTitle}',
                 'httpEquiv' => '',
                 'name'      => 'twitter:title',
             ],
             'twitter:description' => [
                 'charset'   => '',
-                'content'   => '{seomatic.seo.description}',
+                'content'   => '{seomaticGlobals.twitterDescription}',
                 'httpEquiv' => '',
                 'name'      => 'twitter:description',
             ],
@@ -107,7 +107,7 @@ return [
             ],
             'og:title' => [
                 'charset'   => '',
-                'content'   => '{{ seomatic.seoTitle }}',
+                'content'   => '{seomaticGlobals.twitterTitle}',
                 'httpEquiv' => '',
                 'name'      => 'og:title',
             ],
