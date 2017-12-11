@@ -16,7 +16,7 @@
  */
 
 return [
-    'seoTitle'             => '{{ entry.title |}',
+    'seoTitle'             => '{{ entry.title }}',
     'seoDescription'       => 'Entry SEO Description',
     'seoImage'             => 'Entry SEO Image',
     'canonicalUrl'         => '{{ entry.url }}',
