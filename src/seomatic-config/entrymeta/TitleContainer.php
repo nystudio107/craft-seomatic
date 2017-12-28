@@ -25,7 +25,7 @@ return [
         'include'     => 'true',
         'data'        => [
             'title' => [
-                'title' => '{seomaticGlobals.seoTitle}',
+                'title' => '{seomaticSettings.siteName} | {seomaticGlobals.seoTitle}',
             ],
         ],
     ],

@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\models;
 
+use Craft;
 use craft\base\Model;
 
 /**
@@ -45,18 +46,25 @@ class Settings extends Model
     public $devModeTitlePrefix = '[devMode] ';
 
     /**
+     * The name of the website
+     *
+     * @var string
+     */
+    public $siteName = '';
+
+    /**
      * The max number of characters in the `<title>` tag
      *
      * @var int
      */
-    public $maxTitleLength = 70;
+    public $maxTitleLength = 120;
 
     /**
      * The max number of characters in the `<meta name="description">` tag
      *
      * @var int
      */
-    public $maxDescriptionLength = 160;
+    public $maxDescriptionLength = 300;
 
     /**
      * The Twitter handle
@@ -81,6 +89,16 @@ class Settings extends Model
 
     // Public Methods
     // =========================================================================
+
+    public function init()
+    {
+        parent::init();
+
+        // Set some default values
+        if (empty($this->siteName)) {
+            $this->siteName = Craft::$app->config->general->siteName;
+        }
+    }
 
     /**
      * @inheritdoc
