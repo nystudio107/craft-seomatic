@@ -65,6 +65,20 @@ class Settings extends Model
      */
     public $twitterHandle = '';
 
+    /**
+     * The Facebook profile ID
+     *
+     * @var string
+     */
+    public $facebookProfileId = '';
+
+    /**
+     * The Facebook app ID
+     *
+     * @var string
+     */
+    public $facebookAppId = '';
+
     // Public Methods
     // =========================================================================
 

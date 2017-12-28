@@ -98,6 +98,21 @@ class MetaGlobalVars extends Model
     /**
      * @var string
      */
+    public $twitterCard;
+
+    /**
+     * @var string
+     */
+    public $twitterSite;
+
+    /**
+     * @var string
+     */
+    public $twitterCreator;
+
+    /**
+     * @var string
+     */
     public $twitterTitle;
 
     /**

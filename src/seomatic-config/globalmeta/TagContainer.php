@@ -74,17 +74,66 @@ return [
                 'name'      => 'google-site-verification',
             ],
 
+            'fb:profile_id'  => [
+                'charset'   => '',
+                'content'   => '{seomaticSettings.facebookProfileId}',
+                'httpEquiv' => '',
+                'name'      => 'fb:profile_id',
+            ],
+            'fb:app_id'      => [
+                'charset'   => '',
+                'content'   => '{seomaticSettings.facebookAppId}',
+                'httpEquiv' => '',
+                'name'      => 'fb:app_id',
+            ],
+            'og:local'       => [
+                'charset'   => '',
+                'content'   => '{{ craft.app.language }}',
+                'httpEquiv' => '',
+                'name'      => 'og:local',
+            ],
+            'og:type'        => [
+                'charset'   => '',
+                'content'   => 'website',
+                'httpEquiv' => '',
+                'name'      => 'og:type',
+            ],
+            'og:title'       => [
+                'charset'   => '',
+                'content'   => '{seomaticGlobals.ogTitle}',
+                'httpEquiv' => '',
+                'name'      => 'og:title',
+            ],
+            'og:description' => [
+                'charset'   => '',
+                'content'   => '{seomaticGlobals.ogDescription}',
+                'httpEquiv' => '',
+                'name'      => 'og:description',
+            ],
+            'og:image'       => [
+                'charset'   => '',
+                'content'   => '{seomaticGlobals.ogImage}',
+                'httpEquiv' => '',
+                'name'      => 'og:image',
+            ],
+
             'twitter:card'        => [
                 'charset'   => '',
-                'content'   => 'summary',
+                'content'   => '{seomaticGlobals.twitterCard}',
                 'httpEquiv' => '',
                 'name'      => 'twitter:card',
             ],
             'twitter:site'        => [
                 'charset'   => '',
-                'content'   => '@{seomaticSettings.twitterHandle}',
+                'content'   => '@{seomaticGlobals.twitterSite}',
                 'httpEquiv' => '',
                 'name'      => 'twitter:site',
+            ],
+            'twitter:creator'     => [
+                'charset'   => '',
+                'content'   => '@{seomaticGlobals.twitterCreator}',
+                'httpEquiv' => '',
+                'name'      => 'twitter:creator',
             ],
             'twitter:title'       => [
                 'charset'   => '',
@@ -98,36 +147,11 @@ return [
                 'httpEquiv' => '',
                 'name'      => 'twitter:description',
             ],
-            'twitter:image' => [
+            'twitter:image'       => [
                 'charset'   => '',
                 'content'   => '{seomaticGlobals.twitterImage}',
                 'httpEquiv' => '',
                 'name'      => 'twitter:image',
-            ],
-
-            'og:type'  => [
-                'charset'   => '',
-                'content'   => 'website',
-                'httpEquiv' => '',
-                'name'      => 'og:type',
-            ],
-            'og:title' => [
-                'charset'   => '',
-                'content'   => '{seomaticGlobals.ogTitle}',
-                'httpEquiv' => '',
-                'name'      => 'og:title',
-            ],
-            'og:description' => [
-                'charset'   => '',
-                'content'   => '{seomaticGlobals.ogDescription}',
-                'httpEquiv' => '',
-                'name'      => 'og:description',
-            ],
-            'og:image' => [
-                'charset'   => '',
-                'content'   => '{seomaticGlobals.ogImage}',
-                'httpEquiv' => '',
-                'name'      => 'og:image',
             ],
 
         ],
