@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\models;
 
 use Craft;
 use craft\base\Model;
+use yii\web\ServerErrorHttpException;
 
 /**
  * @author    nystudio107
@@ -96,7 +97,12 @@ class Settings extends Model
 
         // Set some default values
         if (empty($this->siteName)) {
-            $this->siteName = Craft::$app->config->general->siteName;
+            try {
+                $info = Craft::$app->getInfo();
+            } catch (ServerErrorHttpException $e) {
+                $info = null;
+            }
+            $this->siteName = Craft::$app->config->general->siteName ?? $info->name;
         }
     }
 
