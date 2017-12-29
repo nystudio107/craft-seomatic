@@ -58,9 +58,11 @@ class Redirects extends Component
     {
     }
 
+    /**
+     * Handle 404s by looking for redirects
+     */
     public function handle404()
     {
-        Craft::dd('404');
     }
 
     /**
