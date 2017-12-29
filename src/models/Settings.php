@@ -40,6 +40,13 @@ class Settings extends Model
     public $environment = 'live';
 
     /**
+     * Should SEOmatic render metadata?
+     *
+     * @var bool
+     */
+    public $renderEnabled = true;
+
+    /**
      * If `devMode` is on, prefix the <title> with this string
      *
      * @var string
