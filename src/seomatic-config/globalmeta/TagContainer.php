@@ -86,11 +86,11 @@ return [
                 'httpEquiv' => '',
                 'name'      => 'fb:app_id',
             ],
-            'og:local'       => [
+            'og:locale'       => [
                 'charset'   => '',
                 'content'   => '{{ craft.app.language }}',
                 'httpEquiv' => '',
-                'name'      => 'og:local',
+                'name'      => 'og:locale',
             ],
             'og:type'        => [
                 'charset'   => '',
