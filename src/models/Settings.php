@@ -61,6 +61,13 @@ class Settings extends Model
     public $siteName = '';
 
     /**
+     * The separator character to use for the `<title>` tag
+     *
+     * @var string
+     */
+    public $separatorChar = '|';
+
+    /**
      * The max number of characters in the `<title>` tag
      *
      * @var int
