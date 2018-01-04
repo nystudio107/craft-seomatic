@@ -20,6 +20,9 @@ use craft\validators\ArrayValidator;
 use yii\base\InvalidParamException;
 
 /**
+ * @inheritdoc
+ * @method void setLanguage(string $language)
+ *
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
@@ -46,7 +49,7 @@ class MetaGlobalVars extends Model
     // =========================================================================
 
     /**
-     * @var
+     * @var string
      */
     public $language;
 
