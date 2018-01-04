@@ -1,14 +1,14 @@
 # robots.txt for {{ siteUrl }}
 
 Sitemap: {{ siteUrl |trim('/') }}/sitemaps/{{ currentSite.groupId }}/sitemap.xml
-{% switch craft.seomatic.settings.environment %}
+{% switch seomatic.settings.environment %}
 
     {% case "live" %}
 
 # live - don't allow web crawlers to index Craft
 
 User-agent: *
-Disallow: /craft/
+Disallow: /vendor/
 
 {% case "staging" %}
 
@@ -29,6 +29,6 @@ Disallow: /
 # Default - don't allow web crawlers to index Craft
 
 User-agent: *
-Disallow: /craft/
+Disallow: /vendor/
 
 {% endswitch %}

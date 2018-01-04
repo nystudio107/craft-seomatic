@@ -15,6 +15,7 @@ use Craft;
 use craft\base\Component;
 use craft\helpers\Template;
 use craft\web\View;
+use yii\base\Exception;
 
 /**
  * @author    nystudio107
@@ -30,19 +31,23 @@ class PluginTemplate extends Component
      * Render a plugin template
      *
      * @param $templatePath
-     * @param $vars
+     * @param $params
      *
      * @return string
      */
-    public static function renderPluginTemplate(string $templatePath, array $vars = []): string
+    public static function renderPluginTemplate(string $templatePath, array $params = []): string
     {
         // Stash the old template mode, and set it AdminCP template mode
         $oldMode = Craft::$app->view->getTemplateMode();
-        Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_CP);
+        try {
+            Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_CP);
+        } catch (Exception $e) {
+            Craft::error($e->getMessage(), __METHOD__);
+        }
 
         // Render the template with our vars passed in
         try {
-            $htmlText = Craft::$app->view->renderTemplate('seomatic/' . $templatePath, $vars);
+            $htmlText = Craft::$app->view->renderTemplate('seomatic/' . $templatePath, $params);
         } catch (\Exception $e) {
             $htmlText = Craft::t(
                 'seomatic',
@@ -53,7 +58,11 @@ class PluginTemplate extends Component
         }
 
         // Restore the old template mode
-        Craft::$app->view->setTemplateMode($oldMode);
+        try {
+            Craft::$app->view->setTemplateMode($oldMode);
+        } catch (Exception $e) {
+            Craft::error($e->getMessage(), __METHOD__);
+        }
 
         return Template::raw($htmlText);
     }

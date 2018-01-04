@@ -1,8 +1,8 @@
 /* TEAM */
 
-    Creator: { seomaticCreator.name }
-    URL: { seomaticCreator.url }
-    Description: { seomaticCreator.description }
+    Creator: {{ seomatic.settings.creator.name ?? "n/a" }}
+    URL: {{ seomatic.settings.creator.url ?? "n/a" }}
+    Description: {{ seomatic.settings.creator.description ?? "n/a" }}
 
 /* THANKS */
 
@@ -11,4 +11,4 @@ Pixel & Tonic - https://pixelandtonic.com
 /* SITE */
 
 Standards: HTML5, CSS3
-Components: Craft CMS, Yii, PHP, JavaScript, SEOmatic
+Components: Craft CMS 3, Yii2, PHP, JavaScript, SEOmatic

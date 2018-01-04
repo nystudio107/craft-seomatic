@@ -14,6 +14,7 @@ namespace nystudio107\seomatic\twigextensions;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\models\MetaJsonLd;
+use nystudio107\seomatic\variables\SeomaticVariable;
 
 use Craft;
 
@@ -28,23 +29,26 @@ class SeomaticTwigExtension extends \Twig_Extension implements \Twig_Extension_G
     /**
      * Have we loaded out meta containers?
      *
-     * @var bool
+     * @var SeomaticVariable
      */
-    protected $loaded = false;
+    protected $seomaticVariable = null;
 
     /**
      * @inheritdoc
      */
     public function getGlobals(): array
     {
-        if (Seomatic::$view->getIsRenderingPageTemplate() && !$this->loaded) {
-            $this->loaded = true;
+        if (Seomatic::$view->getIsRenderingPageTemplate() && !$this->seomaticVariable) {
+            // Create our variable and stash it in the plugin for global access
+            $this->seomaticVariable = new SeomaticVariable();
+            Seomatic::$seomaticVariable = $this->seomaticVariable;
             $request = Craft::$app->getRequest();
             // Load the meta containers for this page
             Seomatic::$plugin->metaContainers->loadMetaContainers($request->getPathInfo(), null);
+            $this->seomaticVariable->init();
         }
 
-        return MetaValueHelper::$templateObjectVars;
+        return ['seomatic' => $this->seomaticVariable];
     }
 
     /**

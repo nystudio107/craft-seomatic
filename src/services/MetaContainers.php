@@ -106,6 +106,191 @@ class MetaContainers extends Component
     }
 
     /**
+     * Return the MetaTitle object by $key
+     *
+     * @param string $key
+     *
+     * @return MetaTitle
+     */
+    public function getTitle($key = 'title')
+    {
+        /** @var  $metaTitle MetaTitle */
+        $metaTitle = $this->getMetaItemByKey($key, MetaTitleContainer::CONTAINER_TYPE);
+
+        return $metaTitle;
+    }
+
+    /**
+     * Return a MetaTag object by $key
+     *
+     * @param string $key
+     *
+     * @return null|MetaTag
+     */
+    public function getTag(string $key)
+    {
+        /** @var  $metaTag MetaTag */
+        $metaTag = $this->getMetaItemByKey($key, MetaTagContainer::CONTAINER_TYPE);
+
+        return $metaTag;
+    }
+
+    /**
+     * Return a MetaLink object by $key
+     *
+     * @param string $key
+     *
+     * @return null|MetaLink
+     */
+    public function getLink(string $key)
+    {
+        /** @var  $metaLink MetaLink */
+        $metaLink = $this->getMetaItemByKey($key, MetaLinkContainer::CONTAINER_TYPE);
+
+        return $metaLink;
+    }
+
+    /**
+     * Return a MetaScript object by $key
+     *
+     * @param string $key
+     *
+     * @return null|MetaScript
+     */
+    public function getScript(string $key)
+    {
+        /** @var  $metaScript MetaScript */
+        $metaScript = $this->getMetaItemByKey($key, MetaScriptContainer::CONTAINER_TYPE);
+
+        return $metaScript;
+    }
+
+    /**
+     * Return a MetaJsonLd object by $key
+     *
+     * @param string $key
+     *
+     * @return null|MetaJsonLd
+     */
+    public function getJsonLd(string $key)
+    {
+        /** @var  $metaJsonLd MetaJsonLd */
+        $metaJsonLd = $this->getMetaItemByKey($key, MetaJsonLdContainer::CONTAINER_TYPE);
+
+        return $metaJsonLd;
+    }
+
+    /**
+     * Create a meta title tag
+     *
+     * @param array  $config     The default properties for the model
+     * @param bool   $include    Whether or not to add it to the container to be rendered
+     *
+     * @return null|MetaTitle    The model object
+     * @throws Exception
+     */
+    public function createTitle(array $config = [], bool $include = true)
+    {
+        $metaTitle = MetaTitle::create($config);
+        // Include it in the container so it gets rendered
+        if ($include) {
+            $key = self::SEOMATIC_METATITLE_CONTAINER . self::METATITLE_GENERAL_HANDLE;
+            $this->addToMetaContainer($metaTitle, $key);
+        }
+
+        return $metaTitle;
+    }
+
+    /**
+     * Create a meta tag
+     *
+     * @param null   $tagType    The type of tag to create
+     * @param array  $config     The default properties for the model
+     * @param bool   $include    Whether or not to add it to the container to be rendered
+     *
+     * @return null|MetaTag      The model object
+     * @throws Exception
+     */
+    public function createTag($tagType = null, array $config = [], bool $include = true)
+    {
+        $metaTag = MetaTag::create($tagType, $config);
+        // Include it in the container so it gets rendered
+        if ($include) {
+            $key = self::SEOMATIC_METATAG_CONTAINER . self::METATAG_GENERAL_HANDLE;
+            $this->addToMetaContainer($metaTag, $key);
+        }
+
+        return $metaTag;
+    }
+
+    /**
+     * Create a meta link tag
+     *
+     * @param array  $config     The default properties for the model
+     * @param bool   $include    Whether or not to add it to the container to be rendered
+     *
+     * @return null|MetaLink     The model object
+     * @throws Exception
+     */
+    public function createLink(array $config = [], bool $include = true)
+    {
+        $metaLink = MetaLink::create($config);
+        // Include it in the container so it gets rendered
+        if ($include) {
+            $key = self::SEOMATIC_METALINK_CONTAINER . self::METALINK_GENERAL_HANDLE;
+            $this->addToMetaContainer($metaLink, $key);
+        }
+
+        return $metaLink;
+    }
+
+    /**
+     * @param string $jsonLdType The schema.org type to create
+     * @param array  $config     The default properties for the model
+     * @param bool   $include    Whether or not to add it to the container to be rendered
+     *
+     * @return null|MetaJsonLd   The model object
+     * @throws Exception
+     */
+    public function createJsonLd(string $jsonLdType, $config = [], bool $include = true)
+    {
+        $metaJsonLd = MetaJsonLd::create($jsonLdType, $config);
+        // Include it in the container so it gets rendered
+        if ($include) {
+            $key = self::SEOMATIC_METAJSONLD_CONTAINER . self::METAJSONLD_GENERAL_HANDLE;
+            $this->addToMetaContainer($metaJsonLd, $key);
+        }
+
+        return $metaJsonLd;
+    }
+
+    /**
+     * Create a meta script from a template
+     *
+     * @param string $template   The template name to use to create the script
+     * @param array  $vars       The variables to pass down to the script
+     * @param bool   $include    Whether or not to add it to the container to be rendered
+     *
+     * @return null|MetaScript
+     * @throws Exception
+     */
+    public function createScript(string $template, array $vars = [], bool $include = true)
+    {
+        $config = [
+            'templatePath' => '_metaScripts/' . $template,
+            'vars'         => $vars,
+        ];
+        $metaScript = MetaScript::create($config);
+        // Include it in the container so it gets rendered
+        if ($include) {
+            $key = self::SEOMATIC_METASCRIPT_CONTAINER . self::METASCRIPT_GENERAL_HANDLE;
+            $this->addToMetaContainer($metaScript, $key);
+        }
+
+        return $metaScript;
+    }
+
+    /**
      * Load the meta containers
      *
      * @param string|null $path
@@ -171,18 +356,6 @@ class MetaContainers extends Component
                 $metaContainer->includeMetaData();
             }
         }
-    }
-
-    /**
-     * @param string $title
-     */
-    public function includeMetaTitle(string $title)
-    {
-        $metaTitle = MetaTitle::create([
-            'title' => $title,
-        ]);
-        $key = self::SEOMATIC_METATITLE_CONTAINER . self::METATITLE_GENERAL_HANDLE;
-        $this->addToMetaContainer($metaTitle, $key);
     }
 
     /**
@@ -303,66 +476,6 @@ class MetaContainers extends Component
     }
 
     /**
-     * Return a MetaTag object by $key
-     *
-     * @param string $key
-     *
-     * @return null|MetaTag
-     */
-    public function getMetaTagByKey(string $key)
-    {
-        /** @var  $metaTag MetaTag */
-        $metaTag = $this->getMetaItemByKey($key, MetaTagContainer::CONTAINER_TYPE);
-
-        return $metaTag;
-    }
-
-    /**
-     * Return a MetaLink object by $key
-     *
-     * @param string $key
-     *
-     * @return null|MetaLink
-     */
-    public function getMetaLinkByKey(string $key)
-    {
-        /** @var  $metaLink MetaLink */
-        $metaLink = $this->getMetaItemByKey($key, MetaLinkContainer::CONTAINER_TYPE);
-
-        return $metaLink;
-    }
-
-    /**
-     * Return a MetaScript object by $key
-     *
-     * @param string $key
-     *
-     * @return null|MetaScript
-     */
-    public function getMetaScriptByKey(string $key)
-    {
-        /** @var  $metaScript MetaScript */
-        $metaScript = $this->getMetaItemByKey($key, MetaScriptContainer::CONTAINER_TYPE);
-
-        return $metaScript;
-    }
-
-    /**
-     * Return a MetaJsonLd object by $key
-     *
-     * @param string $key
-     *
-     * @return null|MetaJsonLd
-     */
-    public function getMetaJsonLdByKey(string $key)
-    {
-        /** @var  $metaJsonLd MetaJsonLd */
-        $metaJsonLd = $this->getMetaItemByKey($key, MetaJsonLdContainer::CONTAINER_TYPE);
-
-        return $metaJsonLd;
-    }
-
-    /**
      * Return a MetaLink object by $key from container $type
      *
      * @param string $key
@@ -432,6 +545,8 @@ class MetaContainers extends Component
 
     /**
      * Load the meta containers specific to the matched meta bundle
+     *
+     * @throws Exception
      */
     protected function loadContentMetaContainers()
     {
@@ -500,6 +615,8 @@ class MetaContainers extends Component
      * items with the same key
      *
      * @param MetaBundle $metaBundle
+     *
+     * @throws Exception
      */
     public function addMetaBundleToContainers(MetaBundle $metaBundle)
     {
@@ -596,6 +713,9 @@ class MetaContainers extends Component
      * Add breadcrumbs to the MetaJsonLdContainer
      *
      * @param int|null $siteId
+     *
+     * @throws Exception
+     * @throws \craft\errors\SiteNotFoundException
      */
     protected function addMetaJsonLdBreadCrumbs(int $siteId = null)
     {
@@ -697,6 +817,9 @@ class MetaContainers extends Component
 
     /**
      * @return array
+     * @throws Exception
+     * @throws \craft\errors\SiteNotFoundException
+     * @throws \yii\base\InvalidConfigException
      */
     protected function getLocalizedUrls()
     {

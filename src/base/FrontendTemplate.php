@@ -67,7 +67,7 @@ abstract class FrontendTemplate extends Model implements FrontendTemplateInterfa
      */
     public function render($params = []): string
     {
-        $html = PluginTemplate::renderPluginTemplate($this->path, []);
+        $html = PluginTemplate::renderPluginTemplate($this->path, $params);
 
         return $html;
     }

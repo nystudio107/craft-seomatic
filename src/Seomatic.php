@@ -88,6 +88,11 @@ class Seomatic extends Plugin
     public static $plugin;
 
     /**
+     * @var SeomaticVariable
+     */
+    public static $seomaticVariable;
+
+    /**
      * @var Settings
      */
     public static $settings;
@@ -178,16 +183,6 @@ class Seomatic extends Plugin
      */
     protected function installGlobalEventListeners()
     {
-        // Handler: CraftVariable::EVENT_INIT
-        Event::on(
-            CraftVariable::class,
-            CraftVariable::EVENT_INIT,
-            function (Event $event) {
-                /** @var CraftVariable $variable */
-                $variable = $event->sender;
-                $variable->set('seomatic', SeomaticVariable::class);
-            }
-        );
         // Handler: Sections::EVENT_AFTER_SAVE_SECTION
         Event::on(
             Sections::class,
@@ -430,7 +425,7 @@ class Seomatic extends Plugin
             }
         );
         // Entries sidebar
-        Craft::$app->getView()->hook('cp.entries.edit.right-pane', function (&$context) {
+        Craft::$app->getView()->hook('cp.entries.edit.details', function (&$context) {
             $html = '';
             self::$view->registerAssetBundle(SeomaticAsset::class);
             /** @var  $entry Entry */
@@ -439,15 +434,14 @@ class Seomatic extends Plugin
                 Seomatic::$plugin->metaContainers->loadMetaContainers($entry->uri, $entry->siteId);
                 // Render our sidebar template
                 $html = Craft::$app->view->renderTemplate(
-                    'seomatic/_sidebar',
-                    MetaValueHelper::$templateObjectVars
+                    'seomatic/_sidebar'
                 );
             }
 
             return $html;
         });
         // Category Groups sidebar
-        Craft::$app->getView()->hook('cp.categories.edit.right-pane', function (&$context) {
+        Craft::$app->getView()->hook('cp.categories.edit.details', function (&$context) {
             $html = '';
             self::$view->registerAssetBundle(SeomaticAsset::class);
             /** @var  $category Category */
@@ -456,8 +450,7 @@ class Seomatic extends Plugin
                 Seomatic::$plugin->metaContainers->loadMetaContainers($category->uri, $category->siteId);
                 // Render our sidebar template
                 $html = Craft::$app->view->renderTemplate(
-                    'seomatic/_sidebar',
-                    MetaValueHelper::$templateObjectVars
+                    'seomatic/_sidebar'
                 );
             }
 

@@ -116,8 +116,7 @@ class MetaValue extends Component
     public static function cache()
     {
         self::$templateObjectVars = [
-            'seomaticGlobals' => Seomatic::$plugin->metaContainers->metaGlobalVars,
-            'seomaticSettings' => Seomatic::$plugin->getSettings()
+            'seomatic' => Seomatic::$seomaticVariable,
         ];
 
         $element = Seomatic::$matchedElement;
