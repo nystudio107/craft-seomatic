@@ -35,12 +35,12 @@ use craft\events\PluginEvent;
 use craft\events\RegisterCacheOptionsEvent;
 use craft\events\RegisterUrlRulesEvent;
 use craft\events\SectionEvent;
+use craft\helpers\UrlHelper;
 use craft\services\Categories;
 use craft\services\Elements;
 use craft\services\Plugins;
 use craft\services\Sections;
 use craft\utilities\ClearCaches;
-use craft\web\twig\variables\CraftVariable;
 use craft\web\ErrorHandler;
 use yii\web\HttpException;
 use craft\web\UrlManager;
@@ -153,6 +153,25 @@ class Seomatic extends Plugin
         self::$view = Craft::$app->getView();
         MetaValueHelper::cache();
         $this->name = Seomatic::$settings->pluginName;
+        // Handler: EVENT_AFTER_INSTALL_PLUGIN
+        Event::on(
+            Plugins::class,
+            Plugins::EVENT_AFTER_INSTALL_PLUGIN,
+            function (PluginEvent $event) {
+                if ($event->plugin === $this) {
+                    // Invalidate our caches after we've been installed
+                    Seomatic::$plugin->frontendTemplates->invalidateCaches();
+                    Seomatic::$plugin->metaContainers->invalidateCaches();
+                    Seomatic::$plugin->sitemaps->invalidateCaches();
+                    // Send them to our welcome screen
+                    $request = Craft::$app->getRequest();
+                    if ($request->isCpRequest) {
+                        Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('seomatic/welcome'))->send();
+                    }
+                }
+            }
+        );
+
         // We're loaded
         Craft::info(
             Craft::t(

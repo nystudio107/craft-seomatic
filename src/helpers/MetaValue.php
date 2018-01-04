@@ -28,6 +28,11 @@ use craft\web\View;
  */
 class MetaValue extends Component
 {
+    // Constants
+    // =========================================================================
+
+    const MAX_PARSE_TRIES = 5;
+
     // Static Properties
     // =========================================================================
 
@@ -78,7 +83,9 @@ class MetaValue extends Component
             if ($value !== null && is_string($value)) {
                 $newValue = '';
                 // Parse it repeatedly until it doesn't change
-                while ($newValue != $value) {
+                $tries = self::MAX_PARSE_TRIES;
+                while ($newValue != $value && $tries) {
+                    $tries--;
                     $value = $metaArray[$key];
                     $metaArray[$key] = self::parseString($value);
                     $newValue = $metaArray[$key];
