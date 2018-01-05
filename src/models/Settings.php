@@ -11,8 +11,9 @@
 
 namespace nystudio107\seomatic\models;
 
+use nystudio107\seomatic\base\FluentModel;
+
 use Craft;
-use craft\base\Model;
 use yii\web\ServerErrorHttpException;
 
 /**
@@ -20,7 +21,7 @@ use yii\web\ServerErrorHttpException;
  * @package   Seomatic
  * @since     3.0.0
  */
-class Settings extends Model
+class Settings extends FluentModel
 {
     // Public Properties
     // =========================================================================
@@ -144,34 +145,5 @@ class Settings extends Model
             ['twitterHandle', 'string'],
             ['twitterHandle', 'default', 'value' => ''],
         ];
-    }
-
-    /**
-     * Magic getter/setter for the static properties of the class
-     *
-     * @param string $method    The method name (static property name)
-     * @param array  $args      The arguments list
-     *
-     * @return mixed           The value of the property
-     */
-    public function __call($method, $args)
-    {
-        if (preg_match('/^([gs]et)([A-Z])(.*)$/', $method, $match)) {
-            $reflector = new \ReflectionClass(get_called_class());
-            $property = strtolower($match[2]).$match[3];
-            if ($reflector->hasProperty($property)) {
-                $property = $reflector->getProperty($property);
-                switch ($match[1]) {
-                    case 'get':
-                        return $property->getValue();
-                    case 'set':
-                        $property->setValue($this, $args[0]);
-                }
-            } else {
-                throw new InvalidParamException("Property {$property} doesn't exist");
-            }
-        }
-
-        return null;
     }
 }

@@ -11,13 +11,11 @@
 
 namespace nystudio107\seomatic\models;
 
+use nystudio107\seomatic\base\FluentModel;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
 use Craft;
-use craft\base\Model;
 use craft\validators\ArrayValidator;
-
-use yii\base\InvalidParamException;
 
 /**
  * @inheritdoc
@@ -27,7 +25,7 @@ use yii\base\InvalidParamException;
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaGlobalVars extends Model
+class MetaGlobalVars extends FluentModel
 {
     // Static Methods
     // =========================================================================
@@ -229,34 +227,5 @@ class MetaGlobalVars extends Model
             [['sitemapUrls', 'sitemapAssets', 'sitemapAltLinks', 'sitemapFiles'], 'boolean'],
             [['sitemapImageFieldMap', 'sitemapVideoFieldMap'], ArrayValidator::class],
         ];
-    }
-
-    /**
-     * Magic getter/setter for the static properties of the class
-     *
-     * @param string $method    The method name (static property name)
-     * @param array  $args      The arguments list
-     *
-     * @return mixed           The value of the property
-     */
-    public function __call($method, $args)
-    {
-        if (preg_match('/^([gs]et)([A-Z])(.*)$/', $method, $match)) {
-            $reflector = new \ReflectionClass(get_called_class());
-            $property = strtolower($match[2]).$match[3];
-            if ($reflector->hasProperty($property)) {
-                $property = $reflector->getProperty($property);
-                switch ($match[1]) {
-                    case 'get':
-                        return $property->getValue();
-                    case 'set':
-                        $property->setValue($this, $args[0]);
-                }
-            } else {
-                throw new InvalidParamException("Property {$property} doesn't exist");
-            }
-        }
-
-        return null;
     }
 }
