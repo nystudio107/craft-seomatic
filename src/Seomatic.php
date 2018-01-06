@@ -15,10 +15,15 @@ use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\models\Settings;
 use nystudio107\seomatic\services\FrontendTemplates as FrontendTemplatesService;
+use nystudio107\seomatic\services\JsonLd as JsonLdService;
+use nystudio107\seomatic\services\Link as LinkService;
 use nystudio107\seomatic\services\MetaBundles as MetaBundlesService;
 use nystudio107\seomatic\services\MetaContainers as MetaContainersService;
 use nystudio107\seomatic\services\Redirects as RedirectsService;
+use nystudio107\seomatic\services\Script as ScriptService;
 use nystudio107\seomatic\services\Sitemaps as SitemapsService;
+use nystudio107\seomatic\services\Tag as TagService;
+use nystudio107\seomatic\services\Title as TitleService;
 use nystudio107\seomatic\twigextensions\SeomaticTwigExtension;
 use nystudio107\seomatic\variables\SeomaticVariable;
 
@@ -56,10 +61,15 @@ use yii\base\Event;
  * @since     3.0.0
  *
  * @property  FrontendTemplatesService frontendTemplates
+ * @property  JsonLdService            jsonLd
+ * @property  LinkService              link
  * @property  MetaBundlesService       metaBundles
  * @property  MetaContainersService    metaContainers
  * @property  RedirectsService         redirects
+ * @property  ScriptService            script
  * @property  SitemapsService          sitemaps
+ * @property  TagService               tag
+ * @property  TitleService             title
  */
 class Seomatic extends Plugin
 {

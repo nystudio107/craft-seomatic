@@ -14,15 +14,15 @@ namespace nystudio107\seomatic\services;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaService;
 use nystudio107\seomatic\base\MetaServiceInterface;
-use nystudio107\seomatic\models\MetaScript;
-use nystudio107\seomatic\models\MetaScriptContainer;
+use nystudio107\seomatic\models\MetaLink;
+use nystudio107\seomatic\models\MetaLinkContainer;
 
 /**
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-class Scripts extends MetaService implements MetaServiceInterface
+class Link extends MetaService implements MetaServiceInterface
 {
     // Constants
     // =========================================================================
@@ -33,10 +33,10 @@ class Scripts extends MetaService implements MetaServiceInterface
     /**
      * @inheritdoc
      */
-    public function get(string $key, string $handle = self::GENERAL_HANDLE): MetaScript
+    public function get(string $key, string $handle = self::GENERAL_HANDLE): MetaLink
     {
-        /** @var  $metaItem MetaScript */
-        $metaItem = Seomatic::$plugin->metaContainers->getMetaItemByKey($key, MetaScriptContainer::CONTAINER_TYPE);
+        /** @var  $metaItem MetaLink */
+        $metaItem = Seomatic::$plugin->metaContainers->getMetaItemByKey($key, MetaLinkContainer::CONTAINER_TYPE);
 
         return $metaItem;
     }
@@ -44,9 +44,9 @@ class Scripts extends MetaService implements MetaServiceInterface
     /**
      * @inheritdoc
      */
-    public function create($config = []): MetaScript
+    public function create($config = []): MetaLink
     {
-        $metaItem = MetaScript::create($config);
+        $metaItem = MetaLink::create($config);
 
         return $metaItem;
     }
@@ -56,16 +56,16 @@ class Scripts extends MetaService implements MetaServiceInterface
      */
     public function add($metaItem, string $handle = self::GENERAL_HANDLE)
     {
-        $key = MetaScriptContainer::CONTAINER_TYPE . $handle;
+        $key = MetaLinkContainer::CONTAINER_TYPE . $handle;
         Seomatic::$plugin->metaContainers->addToMetaContainer($metaItem, $key);
     }
 
     /**
      * @inheritdoc
      */
-    public function container(string $handle = self::GENERAL_HANDLE): MetaScriptContainer
+    public function container(string $handle = self::GENERAL_HANDLE): MetaLinkContainer
     {
-        $key = MetaScriptContainer::CONTAINER_TYPE . $handle;
+        $key = MetaLinkContainer::CONTAINER_TYPE . $handle;
         return Seomatic::$plugin->metaContainers->getMetaContainer($key);
     }
 }

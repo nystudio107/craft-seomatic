@@ -14,14 +14,22 @@ namespace nystudio107\seomatic\variables;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\models\MetaGlobalVars;
 use nystudio107\seomatic\models\Settings;
-use nystudio107\seomatic\services\MetaContainers;
+use nystudio107\seomatic\services\JsonLd;
+use nystudio107\seomatic\services\Link;
+use nystudio107\seomatic\services\Script;
+use nystudio107\seomatic\services\Tag;
+use nystudio107\seomatic\services\Title;
 
 use yii\di\ServiceLocator;
 
 /**
  * Seomatic defines the `seomatic` global template variable.
  *
- * @property MetaContainers    meta
+ * @property JsonLd     jsonLd
+ * @property Link       link
+ * @property Script     script
+ * @property Tag        tag
+ * @property Title      title
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -42,11 +50,6 @@ class SeomaticVariable extends ServiceLocator
      */
     public $settings;
 
-    /**
-     * @var MetaContainers
-     */
-    public $meta;
-
     // Public Methods
     // =========================================================================
 
@@ -57,6 +60,11 @@ class SeomaticVariable extends ServiceLocator
     {
         /** @noinspection PhpDeprecationInspection */
         $components = [
+            'jsonLd' => JsonLd::class,
+            'link' => Link::class,
+            'script' => Script::class,
+            'tag' => Tag::class,
+            'title' => Title::class,
         ];
 
         $config['components'] = $components;
@@ -73,7 +81,6 @@ class SeomaticVariable extends ServiceLocator
 
         $this->settings = Seomatic::$plugin->getSettings();
         $this->globals = Seomatic::$plugin->metaContainers->metaGlobalVars;
-        $this->meta = Seomatic::$plugin->metaContainers;
     }
 
     /**

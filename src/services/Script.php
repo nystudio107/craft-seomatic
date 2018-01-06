@@ -22,7 +22,7 @@ use nystudio107\seomatic\models\MetaScriptContainer;
  * @package   Seomatic
  * @since     3.0.0
  */
-class Scripts extends MetaService implements MetaServiceInterface
+class Script extends MetaService implements MetaServiceInterface
 {
     // Constants
     // =========================================================================

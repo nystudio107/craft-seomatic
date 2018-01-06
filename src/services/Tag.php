@@ -14,18 +14,22 @@ namespace nystudio107\seomatic\services;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaService;
 use nystudio107\seomatic\base\MetaServiceInterface;
-use nystudio107\seomatic\models\MetaScript;
-use nystudio107\seomatic\models\MetaScriptContainer;
+use nystudio107\seomatic\models\MetaTag;
+use nystudio107\seomatic\models\MetaTagContainer;
+
+use craft\helpers\ArrayHelper;
 
 /**
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-class Scripts extends MetaService implements MetaServiceInterface
+class Tag extends MetaService implements MetaServiceInterface
 {
     // Constants
     // =========================================================================
+
+    const DEFAULT_TYPE = null;
 
     // Public Methods
     // =========================================================================
@@ -33,10 +37,10 @@ class Scripts extends MetaService implements MetaServiceInterface
     /**
      * @inheritdoc
      */
-    public function get(string $key, string $handle = self::GENERAL_HANDLE): MetaScript
+    public function get(string $key, string $handle = self::GENERAL_HANDLE): MetaTag
     {
-        /** @var  $metaItem MetaScript */
-        $metaItem = Seomatic::$plugin->metaContainers->getMetaItemByKey($key, MetaScriptContainer::CONTAINER_TYPE);
+        /** @var  $metaItem MetaTag */
+        $metaItem = Seomatic::$plugin->metaContainers->getMetaItemByKey($key, MetaTagContainer::CONTAINER_TYPE);
 
         return $metaItem;
     }
@@ -44,9 +48,13 @@ class Scripts extends MetaService implements MetaServiceInterface
     /**
      * @inheritdoc
      */
-    public function create($config = []): MetaScript
+    public function create($config = []): MetaTag
     {
-        $metaItem = MetaScript::create($config);
+        $type = self::DEFAULT_TYPE;
+        if (!empty($config['type'])) {
+            $type = ArrayHelper::remove($config, 'type');
+        }
+        $metaItem = MetaTag::create($type, $config);
 
         return $metaItem;
     }
@@ -56,16 +64,16 @@ class Scripts extends MetaService implements MetaServiceInterface
      */
     public function add($metaItem, string $handle = self::GENERAL_HANDLE)
     {
-        $key = MetaScriptContainer::CONTAINER_TYPE . $handle;
+        $key = MetaTagContainer::CONTAINER_TYPE . $handle;
         Seomatic::$plugin->metaContainers->addToMetaContainer($metaItem, $key);
     }
 
     /**
      * @inheritdoc
      */
-    public function container(string $handle = self::GENERAL_HANDLE): MetaScriptContainer
+    public function container(string $handle = self::GENERAL_HANDLE): MetaTagContainer
     {
-        $key = MetaScriptContainer::CONTAINER_TYPE . $handle;
+        $key = MetaTagContainer::CONTAINER_TYPE . $handle;
         return Seomatic::$plugin->metaContainers->getMetaContainer($key);
     }
 }

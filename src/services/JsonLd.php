@@ -18,6 +18,7 @@ use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 
 use craft\helpers\ArrayHelper;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -27,6 +28,8 @@ class JsonLd extends MetaService implements MetaServiceInterface
 {
     // Constants
     // =========================================================================
+
+    const DEFAULT_TYPE = 'Thing';
 
     // Public Methods
     // =========================================================================
@@ -47,7 +50,7 @@ class JsonLd extends MetaService implements MetaServiceInterface
      */
     public function create($config = []): MetaJsonLd
     {
-        $type = 'Thing';
+        $type = self::DEFAULT_TYPE;
         if (!empty($config['type'])) {
             $type = ArrayHelper::remove($config, 'type');
         }

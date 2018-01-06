@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\services;
 
+use craft\errors\SiteNotFoundException;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\base\MetaItem;
@@ -19,10 +20,6 @@ use nystudio107\seomatic\models\jsonld\BreadcrumbList;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaGlobalVars;
 use nystudio107\seomatic\models\MetaJsonLd;
-use nystudio107\seomatic\models\MetaLink;
-use nystudio107\seomatic\models\MetaScript;
-use nystudio107\seomatic\models\MetaTag;
-use nystudio107\seomatic\models\MetaTitle;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 use nystudio107\seomatic\models\MetaLinkContainer;
 use nystudio107\seomatic\models\MetaScriptContainer;
@@ -37,6 +34,7 @@ use craft\elements\Entry;
 use craft\helpers\UrlHelper;
 
 use yii\base\Exception;
+use yii\base\InvalidConfigException;
 use yii\caching\TagDependency;
 
 /**
@@ -48,16 +46,6 @@ class MetaContainers extends Component
 {
     // Constants
     // =========================================================================
-
-    const SEOMATIC_METATAG_CONTAINER = Seomatic::SEOMATIC_HANDLE . MetaTag::ITEM_TYPE;
-    const SEOMATIC_METALINK_CONTAINER = Seomatic::SEOMATIC_HANDLE . MetaLink::ITEM_TYPE;
-    const SEOMATIC_METAJSONLD_CONTAINER = Seomatic::SEOMATIC_HANDLE . MetaJsonLd::ITEM_TYPE;
-    const SEOMATIC_METATITLE_CONTAINER = Seomatic::SEOMATIC_HANDLE . MetaTitle::ITEM_TYPE;
-
-    const METATAG_GENERAL_HANDLE = 'general';
-    const METALINK_GENERAL_HANDLE = 'general';
-    const METAJSONLD_GENERAL_HANDLE = 'general';
-    const METATITLE_GENERAL_HANDLE = 'general';
 
     const GLOBAL_METACONTAINER_CACHE_TAG = 'seomatic_metacontainer';
     const METACONTAINER_CACHE_TAG = 'seomatic_metacontainer_';
@@ -101,148 +89,6 @@ class MetaContainers extends Component
     public function init()
     {
         parent::init();
-    }
-
-    /**
-     * Return the MetaTitle object by $key
-     *
-     * @param string $key
-     *
-     * @return MetaTitle
-     */
-    public function getTitle($key = 'title')
-    {
-        /** @var  $metaTitle MetaTitle */
-        $metaTitle = $this->getMetaItemByKey($key, MetaTitleContainer::CONTAINER_TYPE);
-
-        return $metaTitle;
-    }
-
-    /**
-     * Return a MetaTag object by $key
-     *
-     * @param string $key
-     *
-     * @return null|MetaTag
-     */
-    public function getTag(string $key)
-    {
-        /** @var  $metaTag MetaTag */
-        $metaTag = $this->getMetaItemByKey($key, MetaTagContainer::CONTAINER_TYPE);
-
-        return $metaTag;
-    }
-
-    /**
-     * Return a MetaLink object by $key
-     *
-     * @param string $key
-     *
-     * @return null|MetaLink
-     */
-    public function getLink(string $key)
-    {
-        /** @var  $metaLink MetaLink */
-        $metaLink = $this->getMetaItemByKey($key, MetaLinkContainer::CONTAINER_TYPE);
-
-        return $metaLink;
-    }
-
-    /**
-     * Return a MetaJsonLd object by $key
-     *
-     * @param string $key
-     *
-     * @return null|MetaJsonLd
-     */
-    public function getJsonLd(string $key)
-    {
-        /** @var  $metaJsonLd MetaJsonLd */
-        $metaJsonLd = $this->getMetaItemByKey($key, MetaJsonLdContainer::CONTAINER_TYPE);
-
-        return $metaJsonLd;
-    }
-
-    /**
-     * Create a meta title tag
-     *
-     * @param array  $config     The default properties for the model
-     * @param bool   $include    Whether or not to add it to the container to be rendered
-     *
-     * @return null|MetaTitle    The model object
-     * @throws Exception
-     */
-    public function createTitle(array $config = [], bool $include = true)
-    {
-        $metaTitle = MetaTitle::create($config);
-        // Include it in the container so it gets rendered
-        if ($include) {
-            $key = self::SEOMATIC_METATITLE_CONTAINER . self::METATITLE_GENERAL_HANDLE;
-            $this->addToMetaContainer($metaTitle, $key);
-        }
-
-        return $metaTitle;
-    }
-
-    /**
-     * Create a meta tag
-     *
-     * @param null   $tagType    The type of tag to create
-     * @param array  $config     The default properties for the model
-     * @param bool   $include    Whether or not to add it to the container to be rendered
-     *
-     * @return null|MetaTag      The model object
-     * @throws Exception
-     */
-    public function createTag($tagType = null, array $config = [], bool $include = true)
-    {
-        $metaTag = MetaTag::create($tagType, $config);
-        // Include it in the container so it gets rendered
-        if ($include) {
-            $key = self::SEOMATIC_METATAG_CONTAINER . self::METATAG_GENERAL_HANDLE;
-            $this->addToMetaContainer($metaTag, $key);
-        }
-
-        return $metaTag;
-    }
-
-    /**
-     * Create a meta link tag
-     *
-     * @param array  $config     The default properties for the model
-     * @param bool   $include    Whether or not to add it to the container to be rendered
-     *
-     * @return null|MetaLink     The model object
-     */
-    public function createLink(array $config = [], bool $include = true)
-    {
-        $metaLink = MetaLink::create($config);
-        // Include it in the container so it gets rendered
-        if ($include) {
-            $key = self::SEOMATIC_METALINK_CONTAINER . self::METALINK_GENERAL_HANDLE;
-            $this->addToMetaContainer($metaLink, $key);
-        }
-
-        return $metaLink;
-    }
-
-    /**
-     * @param string $jsonLdType The schema.org type to create
-     * @param array  $config     The default properties for the model
-     * @param bool   $include    Whether or not to add it to the container to be rendered
-     *
-     * @return null|MetaJsonLd   The model object
-     */
-    public function createJsonLd(string $jsonLdType, $config = [], bool $include = true)
-    {
-        $metaJsonLd = MetaJsonLd::create($jsonLdType, $config);
-        // Include it in the container so it gets rendered
-        if ($include) {
-            $key = self::SEOMATIC_METAJSONLD_CONTAINER . self::METAJSONLD_GENERAL_HANDLE;
-            $this->addToMetaContainer($metaJsonLd, $key);
-        }
-
-        return $metaJsonLd;
     }
 
     /**
@@ -489,23 +335,23 @@ class MetaContainers extends Component
             $this->metaGlobalVars->language = Seomatic::$language;
             // Meta containers
             foreach ($metaBundle->metaTagContainer as $metaTagContainer) {
-                $key = self::SEOMATIC_METATAG_CONTAINER . $metaTagContainer->handle;
+                $key = MetaTagContainer::CONTAINER_TYPE . $metaTagContainer->handle;
                 $this->metaContainers[$key] = $metaTagContainer;
             }
             foreach ($metaBundle->metaLinkContainer as $metaLinkContainer) {
-                $key = self::SEOMATIC_METALINK_CONTAINER . $metaLinkContainer->handle;
+                $key = MetaLinkContainer::CONTAINER_TYPE . $metaLinkContainer->handle;
                 $this->metaContainers[$key] = $metaLinkContainer;
             }
             foreach ($metaBundle->metaScriptContainer as $metaScriptContainer) {
-                $key = self::SEOMATIC_METASCRIPT_CONTAINER . $metaScriptContainer->handle;
+                $key = MetaScriptContainer::CONTAINER_TYPE . $metaScriptContainer->handle;
                 $this->metaContainers[$key] = $metaScriptContainer;
             }
             foreach ($metaBundle->metaJsonLdContainer as $metaJsonLdContainer) {
-                $key = self::SEOMATIC_METAJSONLD_CONTAINER . $metaJsonLdContainer->handle;
+                $key = MetaJsonLdContainer::CONTAINER_TYPE . $metaJsonLdContainer->handle;
                 $this->metaContainers[$key] = $metaJsonLdContainer;
             }
             foreach ($metaBundle->metaTitleContainer as $metaTitleContainer) {
-                $key = self::SEOMATIC_METATITLE_CONTAINER . $metaTitleContainer->handle;
+                $key = MetaTitleContainer::CONTAINER_TYPE . $metaTitleContainer->handle;
                 $this->metaContainers[$key] = $metaTitleContainer;
             }
         }
@@ -513,8 +359,6 @@ class MetaContainers extends Component
 
     /**
      * Load the meta containers specific to the matched meta bundle
-     *
-     * @throws Exception
      */
     protected function loadContentMetaContainers()
     {
@@ -583,8 +427,6 @@ class MetaContainers extends Component
      * items with the same key
      *
      * @param MetaBundle $metaBundle
-     *
-     * @throws Exception
      */
     public function addMetaBundleToContainers(MetaBundle $metaBundle)
     {
@@ -595,31 +437,31 @@ class MetaContainers extends Component
         $this->metaGlobalVars->language = Seomatic::$language;
         // Meta containers
         foreach ($metaBundle->metaTagContainer as $metaTagContainer) {
-            $key = self::SEOMATIC_METATAG_CONTAINER . $metaTagContainer->handle;
+            $key = MetaTagContainer::CONTAINER_TYPE . $metaTagContainer->handle;
             foreach ($metaTagContainer->data as $metaTag) {
                 $this->addToMetaContainer($metaTag, $key);
             }
         }
         foreach ($metaBundle->metaLinkContainer as $metaLinkContainer) {
-            $key = self::SEOMATIC_METALINK_CONTAINER . $metaLinkContainer->handle;
+            $key = MetaLinkContainer::CONTAINER_TYPE . $metaLinkContainer->handle;
             foreach ($metaLinkContainer->data as $metaLink) {
                 $this->addToMetaContainer($metaLink, $key);
             }
         }
         foreach ($metaBundle->metaScriptContainer as $metaScriptContainer) {
-            $key = self::SEOMATIC_METASCRIPT_CONTAINER . $metaScriptContainer->handle;
+            $key = MetaScriptContainer::CONTAINER_TYPE . $metaScriptContainer->handle;
             foreach ($metaScriptContainer->data as $metaScript) {
                 $this->addToMetaContainer($metaScript, $key);
             }
         }
         foreach ($metaBundle->metaJsonLdContainer as $metaJsonLdContainer) {
-            $key = self::SEOMATIC_METAJSONLD_CONTAINER . $metaJsonLdContainer->handle;
+            $key = MetaJsonLdContainer::CONTAINER_TYPE . $metaJsonLdContainer->handle;
             foreach ($metaJsonLdContainer->data as $metaJsonLd) {
                 $this->addToMetaContainer($metaJsonLd, $key);
             }
         }
         foreach ($metaBundle->metaTitleContainer as $metaTitleContainer) {
-            $key = self::SEOMATIC_METATITLE_CONTAINER . $metaTitleContainer->handle;
+            $key = MetaTitleContainer::CONTAINER_TYPE . $metaTitleContainer->handle;
             foreach ($metaTitleContainer->data as $metaTitle) {
                 $this->addToMetaContainer($metaTitle, $key);
             }
@@ -694,7 +536,8 @@ class MetaContainers extends Component
         $site = Craft::$app->getSites()->getSiteById($siteId);
         $siteUrl = $site->hasUrls ? $site->baseUrl : Craft::$app->getSites()->getPrimarySite()->baseUrl;
         /** @var  $crumbs BreadcrumbList */
-        $crumbs = MetaJsonLd::create("BreadcrumbList", [
+        $crumbs = Seomatic::$plugin->jsonLd->create([
+            'type' => 'BreadcrumbList',
             'name' => 'Breadcrumbs',
             'description' => 'Breadcrumbs list'
         ]);
@@ -749,8 +592,7 @@ class MetaContainers extends Component
             $uri .= "/";
         }
 
-        $key = self::SEOMATIC_METAJSONLD_CONTAINER . self::METAJSONLD_GENERAL_HANDLE;
-        $this->addToMetaContainer($crumbs, $key);
+        Seomatic::$plugin->jsonLd->add($crumbs);
     }
 
     /**
@@ -759,40 +601,41 @@ class MetaContainers extends Component
     protected function addMetaLinkHrefLang()
     {
         /** @TODO: this is wrong, we should get the localized URLs for the current request */
-        $key = self::SEOMATIC_METALINK_CONTAINER . self::METALINK_GENERAL_HANDLE;
         $sites = $this->getLocalizedUrls();
 
         // Add the x-default hreflang
         $site = $sites[0];
-        $metaTag = MetaLink::create([
+        $metaTag = Seomatic::$plugin->link->create([
             'rel'      => 'alternate',
             'hreflang' => 'x-default',
             'href'     => $site['url'],
         ]);
-        $this->addToMetaContainer($metaTag, $key);
+        Seomatic::$plugin->link->add($metaTag);
         // Add the alternate language link rel's
         if (count($sites) > 1) {
             foreach ($sites as $site) {
-                $metaTag = MetaLink::create([
+                $metaTag = Seomatic::$plugin->link->create([
                     'rel'      => 'alternate',
                     'hreflang' => $site['language'],
                     'href'     => $site['url'],
                 ]);
-                $this->addToMetaContainer($metaTag, $key);
+                Seomatic::$plugin->link->add($metaTag);
             }
         }
     }
 
     /**
      * @return array
-     * @throws Exception
-     * @throws \craft\errors\SiteNotFoundException
-     * @throws \yii\base\InvalidConfigException
      */
     protected function getLocalizedUrls()
     {
         $localizedUrls = [];
-        $requestUri = Craft::$app->getRequest()->getUrl();
+        try {
+            $requestUri = Craft::$app->getRequest()->getUrl();
+        } catch (InvalidConfigException $e) {
+            $requestUri = '';
+            Craft::error($e->getMessage(), __METHOD__);
+        }
         $sites = Craft::$app->getSites()->getAllSites();
         $elements = Craft::$app->getElements();
         foreach ($sites as $site) {
@@ -800,11 +643,23 @@ class MetaContainers extends Component
                 $url = $elements->getElementUriForSite(Seomatic::$matchedElement->getId(), $site->id);
                 $url = ($url === '__home__') ? '' : $url;
             } else {
-                $url = $site->hasUrls ? UrlHelper::siteUrl($requestUri, null, null, $site->id)
-                    : Craft::$app->getSites()->getPrimarySite()->baseUrl;
+                try {
+                    $url = $site->hasUrls ? UrlHelper::siteUrl($requestUri, null, null, $site->id)
+                        : Craft::$app->getSites()->getPrimarySite()->baseUrl;
+                } catch (SiteNotFoundException $e) {
+                    $url = '';
+                    Craft::error($e->getMessage(), __METHOD__);
+                } catch (Exception $e) {
+                    $url = '';
+                    Craft::error($e->getMessage(), __METHOD__);
+                }
             }
             if (!UrlHelper::isAbsoluteUrl($url)) {
-                $url = UrlHelper::siteUrl($url);
+                try {
+                    $url = UrlHelper::siteUrl($url);
+                } catch (Exception $e) {
+                    Craft::error($e->getMessage(), __METHOD__);
+                }
             }
             $language = $site->language;
             $language = strtolower($language);
