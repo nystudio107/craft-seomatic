@@ -1,0 +1,34 @@
+{% extends '_layouts/cp' %}
+{% set title = 'Welcome to SEOmatic!' %}
+
+{% set linkGetStarted = url('settings/plugins/image-optimize') %}
+{% set docsUrl = "https://github.com/nystudio107/craft3-seomatic/blob/master/README.md" %}
+
+{% do view.registerAssetBundle("nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset") %}
+{% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/assetbundles/seomatic/dist', true) %}
+
+{% set crumbs = [
+    { label: "SEOmatic", url: url('seomatic') },
+    { label: "Welcome"|t, url: url('seomatic/welcome') },
+] %}
+
+{% set content %}
+    <div style="text-align:center; margin:0 auto; padding: 5% 10%;">
+        <img src="{{ baseAssetsUrl ~ '/img/Seomatic-icon.svg' }}"
+             width="30%" height="auto"/>
+        <h2>Thanks for using SEOmatic!</h2>
+        <p>Nifty welcome text goes here</p>
+
+        </p>
+        <p>
+            <a href="{{ linkGetStarted }}">
+                <button class="btn submit">Get Started</button>
+            </a>
+        </p>
+    </div>
+    <div style="text-align:center; margin:0 auto; padding: 0;">
+        <p class="instructions">
+            Brought to you by <a href="http://nystudio107.com" target="_blank">nystudio107</a>
+        </p>
+    </div>
+{% endset %}
