@@ -51,13 +51,11 @@ class MetaContainers extends Component
 
     const SEOMATIC_METATAG_CONTAINER = Seomatic::SEOMATIC_HANDLE . MetaTag::ITEM_TYPE;
     const SEOMATIC_METALINK_CONTAINER = Seomatic::SEOMATIC_HANDLE . MetaLink::ITEM_TYPE;
-    const SEOMATIC_METASCRIPT_CONTAINER = Seomatic::SEOMATIC_HANDLE . MetaScript::ITEM_TYPE;
     const SEOMATIC_METAJSONLD_CONTAINER = Seomatic::SEOMATIC_HANDLE . MetaJsonLd::ITEM_TYPE;
     const SEOMATIC_METATITLE_CONTAINER = Seomatic::SEOMATIC_HANDLE . MetaTitle::ITEM_TYPE;
 
     const METATAG_GENERAL_HANDLE = 'general';
     const METALINK_GENERAL_HANDLE = 'general';
-    const METASCRIPT_GENERAL_HANDLE = 'general';
     const METAJSONLD_GENERAL_HANDLE = 'general';
     const METATITLE_GENERAL_HANDLE = 'general';
 
@@ -151,21 +149,6 @@ class MetaContainers extends Component
     }
 
     /**
-     * Return a MetaScript object by $key
-     *
-     * @param string $key
-     *
-     * @return null|MetaScript
-     */
-    public function getScript(string $key)
-    {
-        /** @var  $metaScript MetaScript */
-        $metaScript = $this->getMetaItemByKey($key, MetaScriptContainer::CONTAINER_TYPE);
-
-        return $metaScript;
-    }
-
-    /**
      * Return a MetaJsonLd object by $key
      *
      * @param string $key
@@ -230,7 +213,6 @@ class MetaContainers extends Component
      * @param bool   $include    Whether or not to add it to the container to be rendered
      *
      * @return null|MetaLink     The model object
-     * @throws Exception
      */
     public function createLink(array $config = [], bool $include = true)
     {
@@ -250,7 +232,6 @@ class MetaContainers extends Component
      * @param bool   $include    Whether or not to add it to the container to be rendered
      *
      * @return null|MetaJsonLd   The model object
-     * @throws Exception
      */
     public function createJsonLd(string $jsonLdType, $config = [], bool $include = true)
     {
@@ -262,32 +243,6 @@ class MetaContainers extends Component
         }
 
         return $metaJsonLd;
-    }
-
-    /**
-     * Create a meta script from a template
-     *
-     * @param string $template   The template name to use to create the script
-     * @param array  $vars       The variables to pass down to the script
-     * @param bool   $include    Whether or not to add it to the container to be rendered
-     *
-     * @return null|MetaScript
-     * @throws Exception
-     */
-    public function createScript(string $template, array $vars = [], bool $include = true)
-    {
-        $config = [
-            'templatePath' => '_metaScripts/' . $template,
-            'vars'         => $vars,
-        ];
-        $metaScript = MetaScript::create($config);
-        // Include it in the container so it gets rendered
-        if ($include) {
-            $key = self::SEOMATIC_METASCRIPT_CONTAINER . self::METASCRIPT_GENERAL_HANDLE;
-            $this->addToMetaContainer($metaScript, $key);
-        }
-
-        return $metaScript;
     }
 
     /**
@@ -364,9 +319,28 @@ class MetaContainers extends Component
      * @param $data MetaItem The MetaItem to add to the container
      * @param $key  string   The key to the container to add the data to
      *
-     * @throws Exception     If the container $key doesn't exist
      */
     public function addToMetaContainer(MetaItem $data, string $key = null)
+    {
+        /** @var  $container MetaContainer */
+        $container = $this->getMetaContainer($key);
+
+        if (!empty($container)) {
+            // If $uniqueKeys is set, generate a hash of the data for the key
+            $dataKey = $data->key;
+            if ($data->uniqueKeys) {
+                $dataKey = $dataKey . $this->getHash($data);
+            }
+            $container->addData($data, $dataKey);
+        }
+    }
+
+    /**
+     * @param string $key
+     *
+     * @return mixed|null
+     */
+    public function getMetaContainer(string $key)
     {
         if (!$key || empty($this->metaContainers[$key])) {
             $error = Craft::t(
@@ -375,16 +349,10 @@ class MetaContainers extends Component
                 ['key' => $key]
             );
             Craft::error($error, __METHOD__);
-            throw new Exception($error);
+            return null;
         }
-        /** @var  $container MetaContainer */
-        $container = $this->metaContainers[$key];
-        // If $uniqueKeys is set, generate a hash of the data for the key
-        $dataKey = $data->key;
-        if ($data->uniqueKeys) {
-            $dataKey = $dataKey . $this->getHash($data);
-        }
-        $container->addData($data, $dataKey);
+
+        return $this->metaContainers[$key];
     }
 
     /**
