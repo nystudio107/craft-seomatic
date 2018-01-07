@@ -30,6 +30,7 @@ return [
     ],
     'sourceDateUpdated'     => new \DateTime(),
     'metaGlobalVars'        => Config::getConfigFromFile('entrymeta/GlobalVars'),
+    'metaSitemapVars'       => Config::getConfigFromFile('entrymeta/SitemapVars'),
     'metaTagContainer'      => Config::getConfigFromFile('entrymeta/TagContainer'),
     'metaLinkContainer'     => Config::getConfigFromFile('entrymeta/LinkContainer'),
     'metaScriptContainer'   => Config::getConfigFromFile('entrymeta/ScriptContainer'),

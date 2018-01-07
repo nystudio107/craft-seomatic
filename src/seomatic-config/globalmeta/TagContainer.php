@@ -125,7 +125,7 @@ return [
             ],
             'twitter:site'        => [
                 'charset'   => '',
-                'content'   => '@{seomatic.globals.twitterSite}',
+                'content'   => '@{seomatic.settings.twitterHandle}',
                 'httpEquiv' => '',
                 'name'      => 'twitter:site',
             ],

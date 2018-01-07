@@ -75,6 +75,11 @@ class MetaBundle extends Model
     public $metaGlobalVars;
 
     /**
+     * @var MetaSitemapVars
+     */
+    public $metaSitemapVars;
+
+    /**
      * @var MetaTagContainer[]
      */
     public $metaTagContainer;
@@ -153,6 +158,11 @@ class MetaBundle extends Model
         if (!empty($this->metaGlobalVars)) {
             $metaGlobalVars = json_decode($this->metaGlobalVars, true);
             $this->metaGlobalVars = MetaGlobalVars::create($metaGlobalVars);
+        }
+        // Meta sitemap variables
+        if (!empty($this->metaSitemapVars)) {
+            $metaSitemapVars = json_decode($this->metaSitemapVars, true);
+            $this->metaSitemapVars = MetaSitemapVars::create($metaSitemapVars);
         }
         // Meta containers
         if (!empty($this->metaTagContainer)) {

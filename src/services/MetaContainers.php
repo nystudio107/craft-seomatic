@@ -19,6 +19,7 @@ use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\models\jsonld\BreadcrumbList;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaGlobalVars;
+use nystudio107\seomatic\models\MetaSitemapVars;
 use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 use nystudio107\seomatic\models\MetaLinkContainer;
@@ -61,6 +62,11 @@ class MetaContainers extends Component
      * @var MetaGlobalVars
      */
     public $metaGlobalVars;
+
+    /**
+     * @var MetaSitemapVars
+     */
+    public $metaSitemapVars;
 
     // Protected Properties
     // =========================================================================
@@ -121,7 +127,7 @@ class MetaContainers extends Component
                 ],
             ]);
             $cache = Craft::$app->getCache();
-            list($this->metaGlobalVars, $this->metaContainers) = $cache->getOrSet(
+            list($this->metaGlobalVars, $this->metaSitemapVars, $this->metaContainers) = $cache->getOrSet(
                 $this::CACHE_KEY . $path . $siteId,
                 function () use ($path, $siteId) {
                     Craft::info(
@@ -133,7 +139,7 @@ class MetaContainers extends Component
                     $this->addMetaJsonLdBreadCrumbs($siteId);
                     $this->addMetaLinkHrefLang();
 
-                    return [$this->metaGlobalVars, $this->metaContainers];
+                    return [$this->metaGlobalVars, $this->metaSitemapVars, $this->metaContainers];
                 },
                 $duration,
                 $dependency
@@ -150,6 +156,9 @@ class MetaContainers extends Component
     {
         if ($this->metaGlobalVars) {
             $this->metaGlobalVars->parseProperties();
+        }
+        if ($this->metaSitemapVars) {
+            $this->metaSitemapVars->parseProperties();
         }
         foreach ($this->metaContainers as $metaContainer) {
             /** @var $metaContainer MetaContainer */
@@ -332,6 +341,9 @@ class MetaContainers extends Component
         if ($metaBundle) {
             // Meta global vars
             $this->metaGlobalVars = $metaBundle->metaGlobalVars;
+            // Meta sitemap vars
+            $this->metaSitemapVars = $metaBundle->metaSitemapVars;
+            // Language
             $this->metaGlobalVars->language = Seomatic::$language;
             // Meta containers
             foreach ($metaBundle->metaTagContainer as $metaTagContainer) {
@@ -434,6 +446,11 @@ class MetaContainers extends Component
         $attributes = $metaBundle->metaGlobalVars->getAttributes();
         $attributes = array_filter($attributes);
         $this->metaGlobalVars->setAttributes($attributes, false);
+        // Meta sitemap vars
+        $attributes = $metaBundle->metaSitemapVars->getAttributes();
+        $attributes = array_filter($attributes);
+        $this->metaSitemapVars->setAttributes($attributes, false);
+        // Language
         $this->metaGlobalVars->language = Seomatic::$language;
         // Meta containers
         foreach ($metaBundle->metaTagContainer as $metaTagContainer) {

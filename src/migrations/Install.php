@@ -96,6 +96,7 @@ class Install extends Migration
                     'sourceDateUpdated' => $this->dateTime()->notNull(),
 
                     'metaGlobalVars' => $this->text(),
+                    'metaSitemapVars' => $this->text(),
 
                     'metaTagContainer' => $this->text(),
                     'metaLinkContainer' => $this->text(),

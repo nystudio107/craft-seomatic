@@ -19,13 +19,12 @@ use craft\validators\ArrayValidator;
 
 /**
  * @inheritdoc
- * @method void setLanguage(string $language)
  *
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaGlobalVars extends FluentModel
+class MetaSitemapVars extends FluentModel
 {
     // Static Methods
     // =========================================================================
@@ -33,12 +32,12 @@ class MetaGlobalVars extends FluentModel
     /**
      * @param array $config
      *
-     * @return null|MetaGlobalVars
+     * @return null|MetaSitemapVars
      */
     public static function create(array $config = [])
     {
         $model = null;
-        $model = new MetaGlobalVars($config);
+        $model = new MetaSitemapVars($config);
 
         return $model;
     }
@@ -47,84 +46,49 @@ class MetaGlobalVars extends FluentModel
     // =========================================================================
 
     /**
-     * @var string
+     * @var bool
      */
-    public $language;
+    public $sitemapUrls;
+
+    /**
+     * @var bool
+     */
+    public $sitemapAssets;
+
+    /**
+     * @var bool
+     */
+    public $sitemapFiles;
+
+    /**
+     * @var bool
+     */
+    public $sitemapAltLinks;
 
     /**
      * @var string
      */
-    public $seoTitle;
+    public $sitemapChangeFreq;
 
     /**
-     * @var string
+     * @var float
      */
-    public $seoDescription;
+    public $sitemapPriority;
 
     /**
-     * @var string
+     * @var int
      */
-    public $seoImage;
+    public $sitemapLimit = null;
 
     /**
-     * @var string
+     * @var array
      */
-    public $canonicalUrl;
+    public $sitemapImageFieldMap = [];
 
     /**
-     * @var string
+     * @var array
      */
-    public $robots;
-
-    /**
-     * @var string
-     */
-    public $ogType;
-
-    /**
-     * @var string
-     */
-    public $ogTitle;
-
-    /**
-     * @var string
-     */
-    public $ogDescription;
-
-    /**
-     * @var string
-     */
-    public $ogImage;
-
-    /**
-     * @var string
-     */
-    public $twitterCard;
-
-    /**
-     * @var string
-     */
-    public $twitterSite;
-
-    /**
-     * @var string
-     */
-    public $twitterCreator;
-
-    /**
-     * @var string
-     */
-    public $twitterTitle;
-
-    /**
-     * @var string
-     */
-    public $twitterDescription;
-
-    /**
-     * @var string
-     */
-    public $twitterImage;
+    public $sitemapVideoFieldMap = [];
 
     // Public Methods
     // =========================================================================
@@ -148,22 +112,25 @@ class MetaGlobalVars extends FluentModel
         return [
             [
                 [
-                    'language',
-                    'seoTitle',
-                    'seoDescription',
-                    'seoImage',
-                    'canonicalUrl',
-                    'robots',
-                    'ogTitle',
-                    'ogDescription',
-                    'ogImage',
-                    'twitterTitle',
-                    'twitterDescription',
-                    'twitterImage',
+                    'sitemapUrls',
+                    'sitemapAssets',
+                    'sitemapFiles',
+                    'sitemapAltLinks',
+                    'sitemapChangeFreq',
+                    'sitemapPriority',
+                ],
+                'required',
+            ],
+            [
+                [
+                    'sitemapChangeFreq',
                 ],
                 'string',
             ],
-            [['canonicalUrl'], 'url'],
+            [['sitemapPriority'], 'number'],
+            [['sitemapLimit'], 'integer'],
+            [['sitemapUrls', 'sitemapAssets', 'sitemapAltLinks', 'sitemapFiles'], 'boolean'],
+            [['sitemapImageFieldMap', 'sitemapVideoFieldMap'], ArrayValidator::class],
         ];
     }
 }
