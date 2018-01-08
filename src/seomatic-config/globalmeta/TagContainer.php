@@ -33,13 +33,13 @@ return [
 
             'keywords'    => [
                 'charset'   => '',
-                'content'   => '{seomatic.globals.seoTitle}',
+                'content'   => '{seomatic.meta.seoTitle}',
                 'httpEquiv' => '',
                 'name'      => 'keywords',
             ],
             'description' => [
                 'charset'   => '',
-                'content'   => '{seomatic.globals.seoDescription}',
+                'content'   => '{seomatic.meta.seoDescription}',
                 'httpEquiv' => '',
                 'name'      => 'description',
             ],
@@ -69,20 +69,20 @@ return [
 
             'google-site-verification' => [
                 'charset'   => '',
-                'content'   => '{seomatic.settings.googleSiteVerification}',
+                'content'   => '{seomatic.config.googleSiteVerification}',
                 'httpEquiv' => '',
                 'name'      => 'google-site-verification',
             ],
 
             'fb:profile_id'  => [
                 'charset'   => '',
-                'content'   => '{seomatic.settings.facebookProfileId}',
+                'content'   => '{seomatic.config.facebookProfileId}',
                 'httpEquiv' => '',
                 'name'      => 'fb:profile_id',
             ],
             'fb:app_id'      => [
                 'charset'   => '',
-                'content'   => '{seomatic.settings.facebookAppId}',
+                'content'   => '{seomatic.config.facebookAppId}',
                 'httpEquiv' => '',
                 'name'      => 'fb:app_id',
             ],
@@ -100,56 +100,56 @@ return [
             ],
             'og:title'       => [
                 'charset'   => '',
-                'content'   => '{seomatic.globals.ogTitle}',
+                'content'   => '{seomatic.meta.ogTitle}',
                 'httpEquiv' => '',
                 'name'      => 'og:title',
             ],
             'og:description' => [
                 'charset'   => '',
-                'content'   => '{seomatic.globals.ogDescription}',
+                'content'   => '{seomatic.meta.ogDescription}',
                 'httpEquiv' => '',
                 'name'      => 'og:description',
             ],
             'og:image'       => [
                 'charset'   => '',
-                'content'   => '{seomatic.globals.ogImage}',
+                'content'   => '{seomatic.meta.ogImage}',
                 'httpEquiv' => '',
                 'name'      => 'og:image',
             ],
 
             'twitter:card'        => [
                 'charset'   => '',
-                'content'   => '{seomatic.globals.twitterCard}',
+                'content'   => '{seomatic.meta.twitterCard}',
                 'httpEquiv' => '',
                 'name'      => 'twitter:card',
             ],
             'twitter:site'        => [
                 'charset'   => '',
-                'content'   => '@{seomatic.settings.twitterHandle}',
+                'content'   => '@{seomatic.config.twitterHandle}',
                 'httpEquiv' => '',
                 'name'      => 'twitter:site',
             ],
             'twitter:creator'     => [
                 'charset'   => '',
-                'content'   => '@{seomatic.globals.twitterCreator}',
+                'content'   => '@{seomatic.meta.twitterCreator}',
                 'httpEquiv' => '',
                 'name'      => 'twitter:creator',
             ],
             'twitter:title'       => [
                 'charset'   => '',
-                'content'   => '{seomatic.globals.twitterTitle}',
+                'content'   => '{seomatic.meta.twitterTitle}',
                 'httpEquiv' => '',
                 'name'      => 'twitter:title',
             ],
             'twitter:description' => [
                 'charset'   => '',
-                'content'   => '{seomatic.globals.twitterDescription}',
+                'content'   => '{seomatic.meta.twitterDescription}',
                 'httpEquiv' => '',
                 'name'      => 'twitter:description',
             ],
             'twitter:image'       => [
                 'charset'   => '',
-                'content'   => '{seomatic.globals.twitterImage}',
+                'content'   => '{seomatic.meta.twitterImage}',
                 'httpEquiv' => '',
                 'name'      => 'twitter:image',
             ],

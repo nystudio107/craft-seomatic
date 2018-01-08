@@ -43,12 +43,12 @@ class SeomaticVariable extends ServiceLocator
     /**
      * @var MetaGlobalVars
      */
-    public $globals;
+    public $meta;
 
     /**
      * @var Settings
      */
-    public $settings;
+    public $config;
 
     // Public Methods
     // =========================================================================
