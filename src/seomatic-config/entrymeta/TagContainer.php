@@ -9,7 +9,7 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-use nystudio107\seomatic\base\MetaService;
+use nystudio107\seomatic\services\Tag as TagService;
 
 /**
  * @author    nystudio107
@@ -21,10 +21,33 @@ return [
     [
         'name'        => 'General',
         'description' => 'General Meta Tags',
-        'handle'      => MetaService::GENERAL_HANDLE,
+        'handle'      => TagService::GENERAL_HANDLE,
         'include'     => 'true',
         'data'        => [
-
+        ],
+    ],
+    [
+        'name'        => 'Facebook',
+        'description' => 'Facebook OpenGraph Meta Tags',
+        'handle'      => TagService::FACEBOOK_HANDLE,
+        'include'     => 'true',
+        'data'        => [
+        ],
+    ],
+    [
+        'name'        => 'Twitter',
+        'description' => 'Twitter Card Meta Tags',
+        'handle'      => TagService::TWITTER_HANDLE,
+        'include'     => 'true',
+        'data'        => [
+        ],
+    ],
+    [
+        'name'        => 'Miscellaneous',
+        'description' => 'Miscellaneous Meta Tags',
+        'handle'      => TagService::MISC_HANDLE,
+        'include'     => 'true',
+        'data'        => [
         ],
     ],
 ];

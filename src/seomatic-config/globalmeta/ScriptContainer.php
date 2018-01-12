@@ -9,7 +9,7 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-use nystudio107\seomatic\base\MetaService;
+use nystudio107\seomatic\services\Script as ScriptService;
 
 /**
  * @author    nystudio107
@@ -21,7 +21,7 @@ return [
     [
         'name'        => 'General',
         'description' => 'Script Tags',
-        'handle'      => MetaService::GENERAL_HANDLE,
+        'handle'      => ScriptService::GENERAL_HANDLE,
         'include'     => 'true',
         'data'        => [
         ],

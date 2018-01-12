@@ -23,7 +23,7 @@ return [
     'sourceId'              => null,
     'sourceName'            => null,
     'sourceHandle'          => null,
-    'sourceType'            => null,
+    'sourceType'            => 'section',
     'sourceTemplate'        => '',
     'sourceSiteId'          => null,
     'sourceAltSiteSettings' => [

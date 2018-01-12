@@ -9,7 +9,7 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-use nystudio107\seomatic\base\MetaService;
+use nystudio107\seomatic\services\Tag as TagService;
 
 /**
  * @author    nystudio107
@@ -21,7 +21,7 @@ return [
     [
         'name'        => 'General',
         'description' => 'General Meta Tags',
-        'handle'      => MetaService::GENERAL_HANDLE,
+        'handle'      => TagService::GENERAL_HANDLE,
         'include'     => 'true',
         'data'        => [
             'generator' => [
@@ -66,14 +66,14 @@ return [
                     ],
                 ],
             ],
-
-            'google-site-verification' => [
-                'charset'   => '',
-                'content'   => '{seomatic.config.googleSiteVerification}',
-                'httpEquiv' => '',
-                'name'      => 'google-site-verification',
-            ],
-
+        ],
+    ],
+    [
+        'name'        => 'Facebook',
+        'description' => 'Facebook OpenGraph Meta Tags',
+        'handle'      => TagService::FACEBOOK_HANDLE,
+        'include'     => 'true',
+        'data'        => [
             'fb:profile_id'  => [
                 'charset'   => '',
                 'content'   => '{seomatic.config.facebookProfileId}',
@@ -116,7 +116,14 @@ return [
                 'httpEquiv' => '',
                 'name'      => 'og:image',
             ],
-
+        ],
+    ],
+    [
+        'name'        => 'Twitter',
+        'description' => 'Twitter Card Meta Tags',
+        'handle'      => TagService::TWITTER_HANDLE,
+        'include'     => 'true',
+        'data'        => [
             'twitter:card'        => [
                 'charset'   => '',
                 'content'   => '{seomatic.meta.twitterCard}',
@@ -153,7 +160,20 @@ return [
                 'httpEquiv' => '',
                 'name'      => 'twitter:image',
             ],
-
+        ],
+    ],
+    [
+        'name'        => 'Miscellaneous',
+        'description' => 'Miscellaneous Meta Tags',
+        'handle'      => TagService::MISC_HANDLE,
+        'include'     => 'true',
+        'data'        => [
+            'google-site-verification' => [
+                'charset'   => '',
+                'content'   => '{seomatic.config.googleSiteVerification}',
+                'httpEquiv' => '',
+                'name'      => 'google-site-verification',
+            ],
         ],
     ],
 ];

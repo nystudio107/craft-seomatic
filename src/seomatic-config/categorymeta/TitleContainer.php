@@ -9,7 +9,7 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-use nystudio107\seomatic\base\MetaService;
+use nystudio107\seomatic\services\Title as TitleService;
 
 /**
  * @author    nystudio107
@@ -21,7 +21,7 @@ return [
     [
         'name'        => 'General',
         'description' => 'Meta Title Tag',
-        'handle'      => MetaService::GENERAL_HANDLE,
+        'handle'      => TitleService::GENERAL_HANDLE,
         'include'     => 'true',
         'data'        => [
             'title' => [

@@ -29,6 +29,10 @@ class Tag extends MetaService implements MetaServiceInterface
     // Constants
     // =========================================================================
 
+    const FACEBOOK_HANDLE = 'opengraph';
+    const TWITTER_HANDLE = 'twitter';
+    const MISC_HANDLE = 'miscellaneous';
+
     const DEFAULT_TYPE = null;
 
     // Public Methods

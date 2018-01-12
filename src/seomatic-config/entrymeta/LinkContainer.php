@@ -9,7 +9,7 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-use nystudio107\seomatic\base\MetaService;
+use nystudio107\seomatic\services\Link as LinkService;
 
 /**
  * @author    nystudio107
@@ -21,7 +21,7 @@ return [
     [
         'name'        => 'General',
         'description' => 'Link Tags',
-        'handle'      => MetaService::GENERAL_HANDLE,
+        'handle'      => LinkService::GENERAL_HANDLE,
         'include'     => 'true',
         'data'        => [
         ],

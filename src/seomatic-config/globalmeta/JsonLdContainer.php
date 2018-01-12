@@ -9,7 +9,7 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-use nystudio107\seomatic\base\MetaService;
+use nystudio107\seomatic\services\JsonLd as JsonLdService;
 
 /**
  * @author    nystudio107
@@ -21,9 +21,23 @@ return [
     [
         'name'        => 'General',
         'description' => 'JsonLd Tags',
-        'handle'      => MetaService::GENERAL_HANDLE,
+        'handle'      => JsonLdService::GENERAL_HANDLE,
         'include'     => 'true',
         'data'        => [
+            'mainEntityOfPage' => [
+                'type'             => 'WebPage',
+                'name'             => '{seomatic.meta.seoTitle}',
+                'description'      => '{seomatic.meta.seoDescription}',
+                'image'            => [
+                    'type'   => 'ImageObject',
+                    'url'    => '{seomatic.meta.seoImage}',
+                    'width'  => '1200',
+                    'height' => '804',
+                ],
+                'url'              => '{seomatic.meta.canonicalUrl}',
+                'mainEntityOfPage' => '{seomatic.meta.canonicalUrl}',
+                'inLanguage'       => '{seomatic.meta.language}',
+            ],
         ],
     ],
 ];
