@@ -22,7 +22,7 @@ use craft\helpers\StringHelper;
  * @package   Seomatic
  * @since     3.0.0
  */
-class Config extends Component
+class Config
 {
     // Constants
     // =========================================================================

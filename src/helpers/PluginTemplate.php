@@ -22,7 +22,7 @@ use yii\base\Exception;
  * @package   Seomatic
  * @since     3.0.0
  */
-class PluginTemplate extends Component
+class PluginTemplate
 {
     // Static Methods
     // =========================================================================

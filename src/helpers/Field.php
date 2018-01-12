@@ -21,7 +21,7 @@ use craft\elements\MatrixBlock;
  * @package   Seomatic
  * @since     3.0.0
  */
-class Field extends Component
+class Field
 {
     // Static Methods
     // =========================================================================

@@ -26,7 +26,7 @@ use craft\web\View;
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaValue extends Component
+class MetaValue
 {
     // Constants
     // =========================================================================
