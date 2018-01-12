@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\helpers;
 
+use craft\elements\Asset;
 use nystudio107\seomatic\Seomatic;
 
 use Craft;
@@ -54,21 +55,36 @@ class MetaValue
      *
      * @return string
      */
-    public static function parseString(string $metaValue)
+    public static function parseString($metaValue)
     {
-        // If there are no dynamic tags, just return the template
-        if (!StringHelper::contains($metaValue, '{')) {
-            return $metaValue;
-        }
-        try {
+        // Handle being passed in a string
+        if (is_string($metaValue)) {
+            // If there are no dynamic tags, just return the template
+            if (!StringHelper::contains($metaValue, '{')) {
+                return $metaValue;
+            }
+            try {
                 $metaValue = self::$view->renderObjectTemplate($metaValue, self::$templateObjectVars);
-        } catch (\Exception $e) {
-            $metaValue = Craft::t(
-                'seomatic',
-                'Error rendering `{template}` -> {error}',
-                ['template' => $metaValue, 'error' => $e->getMessage()]
-            );
-            Craft::error($metaValue, __METHOD__);
+            } catch (\Exception $e) {
+                $metaValue = Craft::t(
+                    'seomatic',
+                    'Error rendering `{template}` -> {error}',
+                    ['template' => $metaValue, 'error' => $e->getMessage()]
+                );
+                Craft::error($metaValue, __METHOD__);
+            }
+        }
+        // Handle being passed in an object
+        if (is_object($metaValue)) {
+            if ($metaValue instanceof Asset) {
+                /** @var Asset $metaValue */
+                return $metaValue->uri;
+            }
+            return strval($metaValue);
+        }
+        // Handle being passed in an array
+        if (is_array($metaValue)) {
+            return implode(' ', $metaValue);
         }
 
         return $metaValue;
