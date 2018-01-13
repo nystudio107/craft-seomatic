@@ -44,21 +44,23 @@ class MetaTitleContainer extends MetaContainer
      */
     public function includeMetaData(): void
     {
-        /** @var $metaTitleModel MetaTitle */
-        foreach ($this->data as $metaTitleModel) {
-            if ($metaTitleModel->include) {
-                $title = $metaTitleModel->title;
-                if ($metaTitleModel->prepForRender($title)) {
-                    Seomatic::$view->title = $title;
-                    // If `devMode` is enabled, validate the Meta Tag and output any model errors
-                    if (Seomatic::$devMode) {
-                        $scenario = [];
-                        $scenario['default'] = 'error';
-                        $scenario['warning'] = 'warning';
-                        $metaTitleModel->debugMetaItem(
-                            "Tag attribute: ",
-                            $scenario
-                        );
+        if ($this->prepForInclusion()) {
+            /** @var $metaTitleModel MetaTitle */
+            foreach ($this->data as $metaTitleModel) {
+                if ($metaTitleModel->include) {
+                    $title = $metaTitleModel->title;
+                    if ($metaTitleModel->prepForRender($title)) {
+                        Seomatic::$view->title = $title;
+                        // If `devMode` is enabled, validate the Meta Tag and output any model errors
+                        if (Seomatic::$devMode) {
+                            $scenario = [];
+                            $scenario['default'] = 'error';
+                            $scenario['warning'] = 'warning';
+                            $metaTitleModel->debugMetaItem(
+                                "Tag attribute: ",
+                                $scenario
+                            );
+                        }
                     }
                 }
             }

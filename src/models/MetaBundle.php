@@ -27,6 +27,11 @@ class MetaBundle extends Model
     /**
      * @var string
      */
+    public $bundleVersion;
+
+    /**
+     * @var string
+     */
     public $sourceBundleType;
 
     /**
@@ -229,6 +234,7 @@ class MetaBundle extends Model
         $rules = [
             [
                 [
+                    'bundleVersion',
                     'sourceBundleType',
                     'sourceId',
                     'sourceName',
@@ -242,6 +248,7 @@ class MetaBundle extends Model
             ],
             [
                 [
+                    'bundleVersion',
                     'sourceType',
                     'sourceName',
                     'sourceHandle',

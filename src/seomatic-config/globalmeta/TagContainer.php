@@ -76,6 +76,10 @@ return [
         'handle'       => TagService::FACEBOOK_HANDLE,
         'include'      => 'true',
         'dependencies' => [
+            [
+                'type' => 'config',
+                'keys' => ['facebookProfileId', 'facebookAppId'],
+            ],
         ],
         'data'         => [
             'fb:profile_id'  => [
@@ -128,6 +132,10 @@ return [
         'handle'       => TagService::TWITTER_HANDLE,
         'include'      => 'true',
         'dependencies' => [
+            [
+                'type' => 'config',
+                'keys' => ['twitterHandle'],
+            ],
         ],
         'data'         => [
             'twitter:card'        => [

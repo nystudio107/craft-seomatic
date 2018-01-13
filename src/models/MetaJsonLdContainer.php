@@ -49,7 +49,7 @@ class MetaJsonLdContainer extends MetaContainer
     {
         $htmlArray = [];
 
-        if ($this->prepForRender()) {
+        if ($this->prepForInclusion()) {
             /** @var  $metaItemModel MetaJsonLd */
             foreach ($this->data as $metaItemModel) {
                 // Render the resulting JSON-LD
@@ -71,30 +71,32 @@ class MetaJsonLdContainer extends MetaContainer
      */
     public function includeMetaData(): void
     {
-        /** @var $metaJsonLdModel MetaJsonLd */
-        foreach ($this->data as $metaJsonLdModel) {
-            if ($metaJsonLdModel->include) {
-                $options = $metaJsonLdModel->tagAttributes();
-                if ($metaJsonLdModel->prepForRender($options)) {
-                    $jsonLd = $metaJsonLdModel->render([
-                        'renderRaw'        => true,
-                        'renderScriptTags' => false,
-                        'array'            => false,
-                    ]);
-                    Seomatic::$view->registerScript(
-                        $jsonLd,
-                        View::POS_END,
-                        ['type' => 'application/ld+json']
-                    );
-                    // If `devMode` is enabled, validate the JSON-LD and output any model errors
-                    if (Seomatic::$devMode) {
-                        $metaJsonLdModel->debugMetaItem(
-                            'JSON-LD property: ',
-                            [
-                                'default' => 'error',
-                                'google'  => 'warning',
-                            ]
+        if ($this->prepForInclusion()) {
+            /** @var $metaJsonLdModel MetaJsonLd */
+            foreach ($this->data as $metaJsonLdModel) {
+                if ($metaJsonLdModel->include) {
+                    $options = $metaJsonLdModel->tagAttributes();
+                    if ($metaJsonLdModel->prepForRender($options)) {
+                        $jsonLd = $metaJsonLdModel->render([
+                            'renderRaw'        => true,
+                            'renderScriptTags' => false,
+                            'array'            => false,
+                        ]);
+                        Seomatic::$view->registerScript(
+                            $jsonLd,
+                            View::POS_END,
+                            ['type' => 'application/ld+json']
                         );
+                        // If `devMode` is enabled, validate the JSON-LD and output any model errors
+                        if (Seomatic::$devMode) {
+                            $metaJsonLdModel->debugMetaItem(
+                                'JSON-LD property: ',
+                                [
+                                    'default' => 'error',
+                                    'google'  => 'warning',
+                                ]
+                            );
+                        }
                     }
                 }
             }

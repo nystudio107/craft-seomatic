@@ -44,21 +44,23 @@ class MetaTagContainer extends MetaContainer
      */
     public function includeMetaData(): void
     {
-        /** @var $metaTagModel MetaTag */
-        foreach ($this->data as $metaTagModel) {
-            if ($metaTagModel->include) {
-                $options = $metaTagModel->tagAttributes();
-                if ($metaTagModel->prepForRender($options)) {
-                    Seomatic::$view->registerMetaTag($options);
-                    // If `devMode` is enabled, validate the Meta Tag and output any model errors
-                    if (Seomatic::$devMode) {
-                        $scenario = [];
-                        $scenario['default'] = 'error';
-                        $scenario['warning'] = 'warning';
-                        $metaTagModel->debugMetaItem(
-                            "Tag attribute: ",
-                            $scenario
-                        );
+        if ($this->prepForInclusion()) {
+            /** @var $metaTagModel MetaTag */
+            foreach ($this->data as $metaTagModel) {
+                if ($metaTagModel->include) {
+                    $options = $metaTagModel->tagAttributes();
+                    if ($metaTagModel->prepForRender($options)) {
+                        Seomatic::$view->registerMetaTag($options);
+                        // If `devMode` is enabled, validate the Meta Tag and output any model errors
+                        if (Seomatic::$devMode) {
+                            $scenario = [];
+                            $scenario['default'] = 'error';
+                            $scenario['warning'] = 'warning';
+                            $metaTagModel->debugMetaItem(
+                                "Tag attribute: ",
+                                $scenario
+                            );
+                        }
                     }
                 }
             }

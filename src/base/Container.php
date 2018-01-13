@@ -74,7 +74,7 @@ abstract class Container extends Model implements ContainerInterface
     /**
      * @inheritdoc
      */
-    public function prepForRender(&$data): bool
+    public function prepForInclusion(): bool
     {
         return Dependency::validateDependencies($this->dependencies);
     }

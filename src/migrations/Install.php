@@ -85,6 +85,7 @@ class Install extends Migration
                     'dateUpdated' => $this->dateTime()->notNull(),
                     'uid' => $this->uid(),
 
+                    'bundleVersion' => $this->string()->notNull()->defaultValue(''),
                     'sourceBundleType' => $this->string()->notNull()->defaultValue(''),
                     'sourceId' => $this->integer()->null(),
                     'sourceName' => $this->string()->notNull()->defaultValue(''),

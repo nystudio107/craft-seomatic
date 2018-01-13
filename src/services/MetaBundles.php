@@ -29,6 +29,7 @@ use craft\models\CategoryGroup_SiteSettings;
 use craft\models\CategoryGroup;
 use craft\models\Section;
 use craft\models\Site;
+use yii\db\StaleObjectException;
 
 /**
  * @author    nystudio107
@@ -52,6 +53,7 @@ class MetaBundles extends Component
     ];
 
     const META_BUNDLE_UPDATE_ATTRIBUTES = [
+        'bundleVersion',
         'sourceName',
         'sourceHandle',
         'sourceTemplate',
@@ -80,6 +82,106 @@ class MetaBundles extends Component
 
     // Public Methods
     // =========================================================================
+
+    /**
+     * Get the global meta bundle for the site
+     *
+     * @param int $sourceSiteId
+     *
+     * @return null|MetaBundle
+     */
+    public function getGlobalMetaBundle(int $sourceSiteId)
+    {
+        $metaBundle = null;
+        $metaBundleArray = (new Query())
+            ->from(['{{%seomatic_metabundles}}'])
+            ->where([
+                'sourceBundleType' => self::GLOBAL_META_BUNDLE,
+                'sourceSiteId' => $sourceSiteId,
+            ])
+            ->one();
+        if (!empty($metaBundleArray)) {
+            // Get the attributes from the db
+            $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
+            $metaBundle = MetaBundle::create($metaBundleArray);
+        }
+
+        return $metaBundle;
+    }
+
+    /**
+     * @param string   $sourceType
+     * @param int      $sourceId
+     * @param int|null $siteId
+     *
+     * @return null|MetaBundle
+     */
+    public function getMetaBundleBySourceId(string $sourceType, int $sourceId, int $siteId)
+    {
+        $metaBundle = null;
+        // See if we have the meta bundle cached
+        if (!empty($this->metaBundlesBySourceId[$sourceType][$sourceId][$siteId])) {
+            $id = $this->metaBundlesBySourceId[$sourceType][$sourceId][$siteId];
+            if (!empty($this->metaBundles[$id])) {
+                return $this->metaBundles[$id];
+            }
+        }
+        // Look for a matching meta bundle in the db
+        $metaBundleArray = (new Query())
+            ->from(['{{%seomatic_metabundles}}'])
+            ->where([
+                'sourceBundleType' => $sourceType,
+                'sourceId' => $sourceId,
+                'sourceSiteId' => $siteId,
+            ])
+            ->one();
+        if (!empty($metaBundleArray)) {
+            // Get the attributes from the db
+            $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
+            $metaBundle = MetaBundle::create($metaBundleArray);
+            $id = count($this->metaBundles);
+            $this->metaBundles[$id] = $metaBundle;
+            $this->metaBundlesBySourceId[$sourceType][$sourceId][$siteId] = $id;
+        }
+
+        return $metaBundle;
+    }
+
+    /**
+     * @param string $sourceType
+     * @param string $sourceHandle
+     * @param int    $siteId
+     *
+     * @return null|MetaBundle
+     */
+    public function getMetaBundleBySourceHandle(string $sourceType, string $sourceHandle, int $siteId)
+    {
+        $metaBundle = null;
+        // See if we have the meta bundle cached
+        if (!empty($this->metaBundlesBySourceHandle[$sourceType][$sourceHandle][$siteId])) {
+            $id = $this->metaBundlesBySourceHandle[$sourceType][$sourceHandle][$siteId];
+            if (!empty($this->metaBundles[$id])) {
+                return $this->metaBundles[$id];
+            }
+        }
+        // Look for a matching meta bundle in the db
+        $metaBundleArray = (new Query())
+            ->from(['{{%seomatic_metabundles}}'])
+            ->where([
+                'sourceHandle' => $sourceHandle,
+                'sourceSiteId' => $siteId,
+            ])
+            ->one();
+        if (!empty($metaBundleArray)) {
+            $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
+            $metaBundle = MetaBundle::create($metaBundleArray);
+            $id = count($this->metaBundles);
+            $this->metaBundles[$id] = $metaBundle;
+            $this->metaBundlesBySourceHandle[$sourceType][$sourceHandle][$siteId] = $id;
+        }
+
+        return $metaBundle;
+    }
 
     /**
      * Invalidate the caches and data structures associated with this MetaBundle
@@ -177,78 +279,6 @@ class MetaBundles extends Component
             Seomatic::$plugin->sitemaps->invalidateSitemapIndexCache();
         }
     }
-    /**
-     * @param string   $sourceType
-     * @param int      $sourceId
-     * @param int|null $siteId
-     *
-     * @return null|MetaBundle
-     */
-    public function getMetaBundleBySourceId(string $sourceType, int $sourceId, int $siteId)
-    {
-        $metaBundle = null;
-        // See if we have the meta bundle cached
-        if (!empty($this->metaBundlesBySourceId[$sourceType][$sourceId][$siteId])) {
-            $id = $this->metaBundlesBySourceId[$sourceType][$sourceId][$siteId];
-            if (!empty($this->metaBundles[$id])) {
-                return $this->metaBundles[$id];
-            }
-        }
-        // Look for a matching meta bundle in the db
-        $metaBundleArray = (new Query())
-            ->from(['{{%seomatic_metabundles}}'])
-            ->where([
-                'sourceBundleType' => $sourceType,
-                'sourceId' => $sourceId,
-                'sourceSiteId' => $siteId,
-            ])
-            ->one();
-        if (!empty($metaBundleArray)) {
-            $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
-            $metaBundle = MetaBundle::create($metaBundleArray);
-            $id = count($this->metaBundles);
-            $this->metaBundles[$id] = $metaBundle;
-            $this->metaBundlesBySourceId[$sourceType][$sourceId][$siteId] = $id;
-        }
-
-        return $metaBundle;
-    }
-
-    /**
-     * @param string $sourceType
-     * @param string $sourceHandle
-     * @param int    $siteId
-     *
-     * @return null|MetaBundle
-     */
-    public function getMetaBundleBySourceHandle(string $sourceType, string $sourceHandle, int $siteId)
-    {
-        $metaBundle = null;
-        // See if we have the meta bundle cached
-        if (!empty($this->metaBundlesBySourceHandle[$sourceType][$sourceHandle][$siteId])) {
-            $id = $this->metaBundlesBySourceHandle[$sourceType][$sourceHandle][$siteId];
-            if (!empty($this->metaBundles[$id])) {
-                return $this->metaBundles[$id];
-            }
-        }
-        // Look for a matching meta bundle in the db
-        $metaBundleArray = (new Query())
-            ->from(['{{%seomatic_metabundles}}'])
-            ->where([
-                'sourceHandle' => $sourceHandle,
-                'sourceSiteId' => $siteId,
-            ])
-            ->one();
-        if (!empty($metaBundleArray)) {
-            $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
-            $metaBundle = MetaBundle::create($metaBundleArray);
-            $id = count($this->metaBundles);
-            $this->metaBundles[$id] = $metaBundle;
-            $this->metaBundlesBySourceHandle[$sourceType][$sourceHandle][$siteId] = $id;
-        }
-
-        return $metaBundle;
-    }
 
     /**
      * Update the meta bundle to make sure it's in sync
@@ -317,6 +347,46 @@ class MetaBundles extends Component
     }
 
     /**
+     * Delete a meta bundle by $sourceId
+     *
+     * @param string $sourceType
+     * @param int    $sourceId
+     */
+    public function deleteMetaBundleBySourceId(string $sourceType, int $sourceId)
+    {
+        $sites = Craft::$app->getSites()->getAllSites();
+        /** @var  $site Site */
+        foreach ($sites as $site) {
+            $metaBundleRecord = null;
+            // Look for a matching meta bundle in the db
+            $metaBundleRecord = MetaBundleRecord::findOne([
+                'sourceBundleType' => $sourceType,
+                'sourceId' => $sourceId,
+                'sourceSiteId' => $site->id,
+            ]);
+
+            if ($metaBundleRecord) {
+                try {
+                    $metaBundleRecord->delete();
+                } catch (StaleObjectException $e) {
+                    Craft::error($e->getMessage(), __METHOD__);
+                } catch (\Exception $e) {
+                    Craft::error($e->getMessage(), __METHOD__);
+                } catch (\Throwable $e) {
+                    Craft::error($e->getMessage(), __METHOD__);
+                }
+                Craft::info(
+                    'Meta bundle deleted: '
+                    .$sourceId
+                    .' from siteId: '
+                    . $site->id,
+                    __METHOD__
+                );
+            }
+        }
+    }
+
+    /**
      * Create a new meta bundle from the $section
      *
      * @param Section $section
@@ -362,38 +432,6 @@ class MetaBundles extends Component
                 Craft::info(
                     'Meta bundle created: '
                     . $metaBundle->sourceId
-                    .' from siteId: '
-                    . $site->id,
-                    __METHOD__
-                );
-            }
-        }
-    }
-
-    /**
-     * Delete a meta bundle by $sourceId
-     *
-     * @param string $sourceType
-     * @param int    $sourceId
-     */
-    public function deleteMetaBundleBySourceId(string $sourceType, int $sourceId)
-    {
-        $sites = Craft::$app->getSites()->getAllSites();
-        /** @var  $site Site */
-        foreach ($sites as $site) {
-            $metaBundleRecord = null;
-            // Look for a matching meta bundle in the db
-            $metaBundleRecord = MetaBundleRecord::findOne([
-                'sourceBundleType' => $sourceType,
-                'sourceId' => $sourceId,
-                'sourceSiteId' => $site->id,
-            ]);
-
-            if ($metaBundleRecord) {
-                $metaBundleRecord->delete();
-                Craft::info(
-                    'Meta bundle deleted: '
-                    .$sourceId
                     .' from siteId: '
                     . $site->id,
                     __METHOD__
@@ -464,31 +502,6 @@ class MetaBundles extends Component
         }
 
         return $metaBundles;
-    }
-
-    /**
-     * Get the global meta bundle for the site
-     *
-     * @param int $sourceSiteId
-     *
-     * @return null|MetaBundle
-     */
-    public function getGlobalMetaBundle(int $sourceSiteId)
-    {
-        $metaBundle = null;
-        $metaBundleArray = (new Query())
-            ->from(['{{%seomatic_metabundles}}'])
-            ->where([
-                'sourceBundleType' => self::GLOBAL_META_BUNDLE,
-                'sourceSiteId' => $sourceSiteId,
-            ])
-            ->one();
-        if (!empty($metaBundleArray)) {
-            $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
-            $metaBundle = MetaBundle::create($metaBundleArray);
-        }
-
-        return $metaBundle;
     }
 
     // Protected Methods

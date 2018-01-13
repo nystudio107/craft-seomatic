@@ -43,7 +43,7 @@ class Dependency
             switch ($dependency['type']) {
                 // Handle config setting dependencies
                 case self::CONFIG_TYPE:
-                    foreach ($dependency['key'] as $key) {
+                    foreach ($dependency['keys'] as $key) {
                         // If any value is in the $settings[$key] it validates
                         if (!empty($settings[$key])) {
                             $validates = true;
@@ -52,7 +52,7 @@ class Dependency
                     break;
                 // Handle tag dependencies
                 case self::TAG_TYPE:
-                    foreach ($dependency['key'] as $key) {
+                    foreach ($dependency['keys'] as $key) {
                         $meta = Seomatic::$plugin->metaContainers->getMetaItemByKey($key, '');
                         if (!empty($meta)) {
                             $options = $meta->tagAttributes();

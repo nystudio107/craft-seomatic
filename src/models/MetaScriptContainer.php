@@ -51,19 +51,21 @@ class MetaScriptContainer extends MetaContainer
      */
     public function includeMetaData(): void
     {
-        /** @var $metaScriptModel MetaScript */
-        foreach ($this->data as $metaScriptModel) {
-            if ($metaScriptModel->include) {
-                $js = $metaScriptModel->render();
-                Seomatic::$view->registerJs(
-                    $js,
-                    $this->position
-                );
-                // If `devMode` is enabled, validate the Meta Script and output any model errors
-                if (Seomatic::$devMode) {
-                    $metaScriptModel->debugMetaItem(
-                        "Script attribute: "
+        if ($this->prepForInclusion()) {
+            /** @var $metaScriptModel MetaScript */
+            foreach ($this->data as $metaScriptModel) {
+                if ($metaScriptModel->include) {
+                    $js = $metaScriptModel->render();
+                    Seomatic::$view->registerJs(
+                        $js,
+                        $this->position
                     );
+                    // If `devMode` is enabled, validate the Meta Script and output any model errors
+                    if (Seomatic::$devMode) {
+                        $metaScriptModel->debugMetaItem(
+                            "Script attribute: "
+                        );
+                    }
                 }
             }
         }

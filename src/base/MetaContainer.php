@@ -42,19 +42,11 @@ abstract class MetaContainer extends SeomaticContainer implements MetaContainerI
     /**
      * @inheritdoc
      */
-    public function prepForRender(&$data = null): bool
-    {
-        return Dependency::validateDependencies($this->dependencies);
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function render($params = []): string
     {
         $html = '';
 
-        if ($this->prepForRender()) {
+        if ($this->prepForInclusion()) {
             /** @var  $metaItemModel MetaItem */
             foreach ($this->data as $metaItemModel) {
                 if ($metaItemModel->include) {
@@ -73,7 +65,7 @@ abstract class MetaContainer extends SeomaticContainer implements MetaContainerI
     {
         $htmlArray = [];
 
-        if ($this->prepForRender()) {
+        if ($this->prepForInclusion()) {
             /** @var  $metaItemModel MetaItem */
             foreach ($this->data as $metaItemModel) {
                 if ($metaItemModel->include) {
