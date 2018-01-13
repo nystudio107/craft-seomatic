@@ -42,4 +42,9 @@ trait MetaItemTrait
      * @var array
      */
     public $environment;
+
+    /**
+     * @var array
+     */
+    public $dependencies;
 }

@@ -13,10 +13,11 @@ namespace nystudio107\seomatic\base;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\helpers\Dependency;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 use Craft;
-use craft\base\Model;
+use craft\validators\ArrayValidator;
 
 use yii\base\InvalidParamException;
 use yii\helpers\Inflector;
@@ -62,6 +63,7 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
             [['include', 'uniqueKeys'], 'boolean'],
             [['key'], 'string'],
             [['environment'], 'safe'],
+            [['dependencies'], 'safe'],
         ]);
 
         return $rules;
@@ -82,6 +84,7 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
                         'uniqueKeys',
                         'key',
                         'environment',
+                        'dependencies',
                     ])
                 );
                 break;
@@ -95,9 +98,7 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
      */
     public function prepForRender(&$data): bool
     {
-        $shouldRender = true;
-
-        return $shouldRender;
+        return Dependency::validateDependencies($this->dependencies);
     }
 
     /**

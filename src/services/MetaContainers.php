@@ -299,19 +299,19 @@ class MetaContainers extends Component
     }
 
     /**
-     * Return a MetaLink object by $key from container $type
+     * Return a MetaItem object by $key from container $type
      *
      * @param string $key
      * @param string $type
      *
      * @return null|MetaItem
      */
-    public function getMetaItemByKey(string $key, string $type)
+    public function getMetaItemByKey(string $key, string $type = '')
     {
         $metaItem = null;
         /** @var  $metaContainer MetaContainer */
         foreach ($this->metaContainers as $metaContainer) {
-            if ($metaContainer::CONTAINER_TYPE == $type) {
+            if (($metaContainer::CONTAINER_TYPE == $type) || (empty($type))) {
                 /** @var  $metaTag MetaItem */
                 foreach ($metaContainer->data as $metaItem) {
                     if ($key == $metaItem->key) {
