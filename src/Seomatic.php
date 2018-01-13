@@ -454,7 +454,7 @@ class Seomatic extends Plugin
             }
         );
         // Entries sidebar
-        Craft::$app->getView()->hook('cp.entries.edit.details', function (&$context) {
+        self::$view->hook('cp.entries.edit.details', function (&$context) {
             $html = '';
             self::$view->registerAssetBundle(SeomaticAsset::class);
             /** @var  $entry Entry */
@@ -470,7 +470,7 @@ class Seomatic extends Plugin
             return $html;
         });
         // Category Groups sidebar
-        Craft::$app->getView()->hook('cp.categories.edit.details', function (&$context) {
+        self::$view->hook('cp.categories.edit.details', function (&$context) {
             $html = '';
             self::$view->registerAssetBundle(SeomaticAsset::class);
             /** @var  $category Category */

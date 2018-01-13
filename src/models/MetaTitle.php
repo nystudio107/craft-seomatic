@@ -97,7 +97,7 @@ class MetaTitle extends MetaItem
             $this->setScenario($scenario);
             // Special-case scenarios
             $data = (string)Stringy::create($data)->safeTruncate(
-                Seomatic::$plugin->getSettings()->maxTitleLength,
+                Seomatic::$settings->maxTitleLength,
                 '…'
             );
             // devMode

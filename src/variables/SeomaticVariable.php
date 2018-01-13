@@ -80,7 +80,7 @@ class SeomaticVariable extends ServiceLocator
         parent::init();
 
         $this->meta = Seomatic::$plugin->metaContainers->metaGlobalVars;
-        $this->config = Seomatic::$plugin->getSettings();
+        $this->config = Seomatic::$settings;
     }
 
     /**

@@ -36,7 +36,7 @@ class Dependency
         if (empty($dependencies) || !is_array($dependencies)) {
             return true;
         }
-        $settings = Seomatic::$plugin->getSettings();
+        $settings = Seomatic::$settings;
         foreach ($dependencies as $dependency) {
             $validates = false;
             // If any dependency key in the array validates, this this dependency validates
