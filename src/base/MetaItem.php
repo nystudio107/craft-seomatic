@@ -17,9 +17,7 @@ use nystudio107\seomatic\helpers\Dependency;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 use Craft;
-use craft\validators\ArrayValidator;
 
-use yii\base\InvalidParamException;
 use yii\helpers\Inflector;
 
 /**

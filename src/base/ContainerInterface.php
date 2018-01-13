@@ -41,6 +41,15 @@ interface ContainerInterface
     public function addData($data, string $key): void;
 
     /**
+     * Prepare the container's data for rendering
+     *
+     * @param mixed $data
+     *
+     * @return bool Whether the render should happen or not
+     */
+    public function prepForRender(&$data): bool;
+
+    /**
      * Render the container's content
      *
      * @param array $params

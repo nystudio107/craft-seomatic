@@ -49,16 +49,18 @@ class MetaJsonLdContainer extends MetaContainer
     {
         $htmlArray = [];
 
-        /** @var  $metaItemModel MetaJsonLd */
-        foreach ($this->data as $metaItemModel) {
-            // Render the resulting JSON-LD
-            $scenario = $this->scenario;
-            $this->setScenario('render');
-            $htmlArray[] = ArrayHelper::arrayFilterRecursive(
-                $metaItemModel->toArray(),
-                [ArrayHelper::class, 'unsetNullChildren']
-            );
-            $this->setScenario($scenario);
+        if ($this->prepForRender()) {
+            /** @var  $metaItemModel MetaJsonLd */
+            foreach ($this->data as $metaItemModel) {
+                // Render the resulting JSON-LD
+                $scenario = $this->scenario;
+                $this->setScenario('render');
+                $htmlArray[] = ArrayHelper::arrayFilterRecursive(
+                    $metaItemModel->toArray(),
+                    [ArrayHelper::class, 'unsetNullChildren']
+                );
+                $this->setScenario($scenario);
+            }
         }
 
         return $htmlArray;

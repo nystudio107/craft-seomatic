@@ -19,11 +19,13 @@ use nystudio107\seomatic\services\Title as TitleService;
 
 return [
     [
-        'name'        => 'General',
-        'description' => 'Meta Title Tag',
-        'handle'      => TitleService::GENERAL_HANDLE,
-        'include'     => 'true',
-        'data'        => [
+        'name'         => 'General',
+        'description'  => 'Meta Title Tag',
+        'handle'       => TitleService::GENERAL_HANDLE,
+        'include'      => 'true',
+        'dependencies' => [
+        ],
+        'data'         => [
             'title' => [
                 'title' => '{seomatic.config.siteName} | {seomatic.meta.seoTitle}',
             ],

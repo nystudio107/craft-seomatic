@@ -39,8 +39,12 @@ trait ContainerTrait
     /**
      * @var bool
      */
-
     public $include = true;
+
+    /**
+     * @var array
+     */
+    public $dependencies;
 
     /**
      * The data in this container

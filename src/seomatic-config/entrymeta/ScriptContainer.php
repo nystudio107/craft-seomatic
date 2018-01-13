@@ -19,11 +19,13 @@ use nystudio107\seomatic\services\Script as ScriptService;
 
 return [
     [
-        'name'        => 'General',
-        'description' => 'Script Tags',
-        'handle'      => ScriptService::GENERAL_HANDLE,
-        'include'     => 'true',
-        'data'        => [
+        'name'         => 'General',
+        'description'  => 'Script Tags',
+        'handle'       => ScriptService::GENERAL_HANDLE,
+        'include'      => 'true',
+        'dependencies' => [
+        ],
+        'data'         => [
         ],
     ],
 ];

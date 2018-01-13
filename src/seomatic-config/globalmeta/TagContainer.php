@@ -19,11 +19,13 @@ use nystudio107\seomatic\services\Tag as TagService;
 
 return [
     [
-        'name'        => 'General',
-        'description' => 'General Meta Tags',
-        'handle'      => TagService::GENERAL_HANDLE,
-        'include'     => 'true',
-        'data'        => [
+        'name'         => 'General',
+        'description'  => 'General Meta Tags',
+        'handle'       => TagService::GENERAL_HANDLE,
+        'include'      => 'true',
+        'dependencies' => [
+        ],
+        'data'         => [
             'generator' => [
                 'charset'   => '',
                 'content'   => 'SEOmatic',
@@ -69,11 +71,13 @@ return [
         ],
     ],
     [
-        'name'        => 'Facebook',
-        'description' => 'Facebook OpenGraph Meta Tags',
-        'handle'      => TagService::FACEBOOK_HANDLE,
-        'include'     => 'true',
-        'data'        => [
+        'name'         => 'Facebook',
+        'description'  => 'Facebook OpenGraph Meta Tags',
+        'handle'       => TagService::FACEBOOK_HANDLE,
+        'include'      => 'true',
+        'dependencies' => [
+        ],
+        'data'         => [
             'fb:profile_id'  => [
                 'charset'   => '',
                 'content'   => '{seomatic.config.facebookProfileId}',
@@ -86,7 +90,7 @@ return [
                 'httpEquiv' => '',
                 'name'      => 'fb:app_id',
             ],
-            'og:locale'       => [
+            'og:locale'      => [
                 'charset'   => '',
                 'content'   => '{{ craft.app.language }}',
                 'httpEquiv' => '',
@@ -119,11 +123,13 @@ return [
         ],
     ],
     [
-        'name'        => 'Twitter',
-        'description' => 'Twitter Card Meta Tags',
-        'handle'      => TagService::TWITTER_HANDLE,
-        'include'     => 'true',
-        'data'        => [
+        'name'         => 'Twitter',
+        'description'  => 'Twitter Card Meta Tags',
+        'handle'       => TagService::TWITTER_HANDLE,
+        'include'      => 'true',
+        'dependencies' => [
+        ],
+        'data'         => [
             'twitter:card'        => [
                 'charset'   => '',
                 'content'   => '{seomatic.meta.twitterCard}',
@@ -163,11 +169,13 @@ return [
         ],
     ],
     [
-        'name'        => 'Miscellaneous',
-        'description' => 'Miscellaneous Meta Tags',
-        'handle'      => TagService::MISC_HANDLE,
-        'include'     => 'true',
-        'data'        => [
+        'name'         => 'Miscellaneous',
+        'description'  => 'Miscellaneous Meta Tags',
+        'handle'       => TagService::MISC_HANDLE,
+        'include'      => 'true',
+        'dependencies' => [
+        ],
+        'data'         => [
             'google-site-verification' => [
                 'charset'   => '',
                 'content'   => '{seomatic.config.googleSiteVerification}',

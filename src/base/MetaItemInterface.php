@@ -28,20 +28,20 @@ interface MetaItemInterface
     // =========================================================================
 
     /**
-     * Render the meta item as HTML-safe text
-     *
-     * @param array $params
-     *
-     * @return string
-     */
-    public function render($params = []): string;
-
-    /**
      * Prepare the MetaItem's data for rendering
      *
      * @param mixed $data
      *
-     * @return bool
+     * @return bool Whether the render should happen or not
      */
     public function prepForRender(&$data): bool;
+
+    /**
+     * Render the meta item as HTML-safe text
+     *
+     * @param array $params
+     *
+     * @return string The rendered meta item
+     */
+    public function render($params = []): string;
 }

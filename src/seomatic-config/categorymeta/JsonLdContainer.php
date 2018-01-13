@@ -19,11 +19,13 @@ use nystudio107\seomatic\services\JsonLd as JsonLdService;
 
 return [
     [
-        'name'        => 'General',
-        'description' => 'JsonLd Tags',
-        'handle'      => JsonLdService::GENERAL_HANDLE,
-        'include'     => 'true',
-        'data'        => [
+        'name'         => 'General',
+        'description'  => 'JsonLd Tags',
+        'handle'       => JsonLdService::GENERAL_HANDLE,
+        'include'      => 'true',
+        'dependencies' => [
+        ],
+        'data'         => [
         ],
     ],
 ];

@@ -19,35 +19,43 @@ use nystudio107\seomatic\services\Tag as TagService;
 
 return [
     [
-        'name'        => 'General',
-        'description' => 'General Meta Tags',
-        'handle'      => TagService::GENERAL_HANDLE,
-        'include'     => 'true',
-        'data'        => [
+        'name'         => 'General',
+        'description'  => 'General Meta Tags',
+        'handle'       => TagService::GENERAL_HANDLE,
+        'include'      => 'true',
+        'dependencies' => [
+        ],
+        'data'         => [
         ],
     ],
     [
-        'name'        => 'Facebook',
-        'description' => 'Facebook OpenGraph Meta Tags',
-        'handle'      => TagService::FACEBOOK_HANDLE,
-        'include'     => 'true',
-        'data'        => [
+        'name'         => 'Facebook',
+        'description'  => 'Facebook OpenGraph Meta Tags',
+        'handle'       => TagService::FACEBOOK_HANDLE,
+        'include'      => 'true',
+        'dependencies' => [
+        ],
+        'data'         => [
         ],
     ],
     [
-        'name'        => 'Twitter',
-        'description' => 'Twitter Card Meta Tags',
-        'handle'      => TagService::TWITTER_HANDLE,
-        'include'     => 'true',
-        'data'        => [
+        'name'         => 'Twitter',
+        'description'  => 'Twitter Card Meta Tags',
+        'handle'       => TagService::TWITTER_HANDLE,
+        'include'      => 'true',
+        'dependencies' => [
+        ],
+        'data'         => [
         ],
     ],
     [
-        'name'        => 'Miscellaneous',
-        'description' => 'Miscellaneous Meta Tags',
-        'handle'      => TagService::MISC_HANDLE,
-        'include'     => 'true',
-        'data'        => [
+        'name'         => 'Miscellaneous',
+        'description'  => 'Miscellaneous Meta Tags',
+        'handle'       => TagService::MISC_HANDLE,
+        'include'      => 'true',
+        'dependencies' => [
+        ],
+        'data'         => [
         ],
     ],
 ];

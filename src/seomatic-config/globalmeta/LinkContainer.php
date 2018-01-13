@@ -19,11 +19,13 @@ use nystudio107\seomatic\services\Link as LinkService;
 
 return [
     [
-        'name'        => 'General',
-        'description' => 'Link Tags',
-        'handle'      => LinkService::GENERAL_HANDLE,
-        'include'     => 'true',
-        'data'        => [
+        'name'         => 'General',
+        'description'  => 'Link Tags',
+        'handle'       => LinkService::GENERAL_HANDLE,
+        'include'      => 'true',
+        'dependencies' => [
+        ],
+        'data'         => [
             'canonical' => [
                 'crossorigin' => '',
                 'href'        => '{seomatic.meta.canonicalUrl}',

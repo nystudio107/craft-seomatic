@@ -11,7 +11,10 @@
 
 namespace nystudio107\seomatic\base;
 
+use nystudio107\seomatic\helpers\Dependency;
+
 use craft\base\Model;
+use craft\validators\ArrayValidator;
 
 /**
  * @author    nystudio107
@@ -71,6 +74,14 @@ abstract class Container extends Model implements ContainerInterface
     /**
      * @inheritdoc
      */
+    public function prepForRender(&$data): bool
+    {
+        return Dependency::validateDependencies($this->dependencies);
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function render($params = []): string
     {
         return '';
@@ -81,5 +92,22 @@ abstract class Container extends Model implements ContainerInterface
      */
     public function normalizeContainerData(): void
     {
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        $rules = parent::rules();
+        $rules = array_merge($rules, [
+            [['name', 'description', 'handle'], 'required'],
+            [['include'], 'boolean'],
+            [['name', 'description', 'handle'], 'string'],
+            [['dependencies'], 'safe'],
+            [['data'], ArrayValidator::class],
+        ]);
+
+        return $rules;
     }
 }
