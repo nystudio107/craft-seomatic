@@ -93,8 +93,8 @@ class MetaBundles extends Component
         if (!empty($metaBundleArray)) {
             // Get the attributes from the db
             $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
-            $metaBundleArray = $this->syncBundleWithConfig(self::GLOBAL_META_BUNDLE, $metaBundleArray);
             $metaBundle = MetaBundle::create($metaBundleArray);
+            $this->syncBundleWithConfig(self::GLOBAL_META_BUNDLE, $metaBundle);
         }
 
         return $metaBundle;
@@ -129,8 +129,8 @@ class MetaBundles extends Component
         if (!empty($metaBundleArray)) {
             // Get the attributes from the db
             $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
-            $metaBundleArray = $this->syncBundleWithConfig($sourceType, $metaBundleArray);
             $metaBundle = MetaBundle::create($metaBundleArray);
+            $this->syncBundleWithConfig($sourceType, $metaBundle);
             $id = count($this->metaBundles);
             $this->metaBundles[$id] = $metaBundle;
             $this->metaBundlesBySourceId[$sourceType][$sourceId][$siteId] = $id;
@@ -500,12 +500,12 @@ class MetaBundles extends Component
     // =========================================================================
 
     /**
-     * @param string $sourceType
-     * @param array  $metaBundleArray
+     * @param string     $sourceType
+     * @param MetaBundle $metaBundle
      *
      * @return array
      */
-    protected function syncBundleWithConfig(string $sourceType, array $metaBundleArray): array
+    protected function syncBundleWithConfig(string $sourceType, MetaBundle $metaBundle): array
     {
         $config = null;
         switch ($sourceType) {
@@ -521,8 +521,10 @@ class MetaBundles extends Component
         }
         // If the config file has a newer version than the $metaBundleArray, merge them
         if ($config) {
-            if (version_compare($config['bundleVersion'], $metaBundleArray['bundleVersion'], '>')) {
+            if (version_compare($config['bundleVersion'], $metaBundle->bundleVersion, '>')) {
+                $metaBundleArray = $metaBundle->getAttributes();
                 $metaBundleArray = ArrayHelper::merge($metaBundleArray, $config);
+                $metaBundle->setAttributes($metaBundleArray);
             }
         }
 
