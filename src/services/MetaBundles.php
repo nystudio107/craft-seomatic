@@ -52,16 +52,6 @@ class MetaBundles extends Component
         'uid',
     ];
 
-    const META_BUNDLE_UPDATE_ATTRIBUTES = [
-        'bundleVersion',
-        'sourceName',
-        'sourceHandle',
-        'sourceTemplate',
-        'sourceSiteId',
-        'sourceAltSiteSettings',
-        'sourceDateUpdated',
-    ];
-
     // Protected Properties
     // =========================================================================
 
@@ -103,6 +93,7 @@ class MetaBundles extends Component
         if (!empty($metaBundleArray)) {
             // Get the attributes from the db
             $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
+            $metaBundleArray = $this->syncBundleWithConfig(self::GLOBAL_META_BUNDLE, $metaBundleArray);
             $metaBundle = MetaBundle::create($metaBundleArray);
         }
 
@@ -138,6 +129,7 @@ class MetaBundles extends Component
         if (!empty($metaBundleArray)) {
             // Get the attributes from the db
             $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
+            $metaBundleArray = $this->syncBundleWithConfig($sourceType, $metaBundleArray);
             $metaBundle = MetaBundle::create($metaBundleArray);
             $id = count($this->metaBundles);
             $this->metaBundles[$id] = $metaBundle;
@@ -307,7 +299,7 @@ class MetaBundles extends Component
                         $metaBundle->validate(null, true);
                         /** @var  $metaBundleRecord MetaBundleRecord */
                         $metaBundleRecord->setAttributes(
-                            $metaBundle->getAttributes(self::META_BUNDLE_UPDATE_ATTRIBUTES),
+                            $metaBundle->getAttributes(),
                             false
                         );
                         $metaBundleRecord->save();
@@ -328,7 +320,7 @@ class MetaBundles extends Component
                     if ($metaBundle) {
                         /** @var  $metaBundleRecord MetaBundleRecord */
                         $metaBundleRecord->setAttributes(
-                            $metaBundle->getAttributes(self::META_BUNDLE_UPDATE_ATTRIBUTES),
+                            $metaBundle->getAttributes(),
                             false
                         );
                         $metaBundleRecord->save();
@@ -506,6 +498,36 @@ class MetaBundles extends Component
 
     // Protected Methods
     // =========================================================================
+
+    /**
+     * @param string $sourceType
+     * @param array  $metaBundleArray
+     *
+     * @return array
+     */
+    protected function syncBundleWithConfig(string $sourceType, array $metaBundleArray): array
+    {
+        $config = null;
+        switch ($sourceType) {
+            case self::GLOBAL_META_BUNDLE:
+                $config = ConfigHelper::getConfigFromFile('globalmeta/Bundle');
+                break;
+            case self::CATEGORYGROUP_META_BUNDLE:
+                $config = ConfigHelper::getConfigFromFile('categorymeta/Bundle');
+                break;
+            case self::SECTION_META_BUNDLE:
+                $config = ConfigHelper::getConfigFromFile('entrymeta/Bundle');
+                break;
+        }
+        // If the config file has a newer version than the $metaBundleArray, merge them
+        if ($config) {
+            if (version_compare($config['bundleVersion'], $metaBundleArray['bundleVersion'], '>')) {
+                $metaBundleArray = ArrayHelper::merge($metaBundleArray, $config);
+            }
+        }
+
+        return $metaBundleArray;
+    }
 
     /**
      * @param Section $section
