@@ -500,12 +500,13 @@ class MetaBundles extends Component
     // =========================================================================
 
     /**
+     * Synchronize the passed in metaBundle with the seomatic-config files if
+     * there is a newer version of the MetaBundle bundleVersion in the config file
+     *
      * @param string     $sourceType
      * @param MetaBundle $metaBundle
-     *
-     * @return array
      */
-    protected function syncBundleWithConfig(string $sourceType, MetaBundle $metaBundle): array
+    protected function syncBundleWithConfig(string $sourceType, MetaBundle $metaBundle)
     {
         $config = null;
         switch ($sourceType) {
@@ -527,8 +528,6 @@ class MetaBundles extends Component
                 $metaBundle->setAttributes($metaBundleArray);
             }
         }
-
-        return $metaBundleArray;
     }
 
     /**
