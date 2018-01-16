@@ -398,6 +398,8 @@ class Seomatic extends Plugin
      */
     protected function handleAdminCpRequest()
     {
+        // Add in our Twig extensions
+        Seomatic::$view->registerTwigExtension(new SeomaticTwigExtension);
         // Handler: UrlManager::EVENT_REGISTER_CP_URL_RULES
         Event::on(
             UrlManager::class,
