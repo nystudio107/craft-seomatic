@@ -42,6 +42,7 @@
         "name": "SEOmatic",
         "handle": "seomatic",
         "schemaVersion": "3.0.0",
+        "basePath": "/nystudio107/craft-seomatic/src",
         "hasCpSettings": true,
         "hasCpSection": true,
         "changelogUrl": "https://raw.githubusercontent.com/nystudio107/craft-seomatic/master/CHANGELOG.md",
