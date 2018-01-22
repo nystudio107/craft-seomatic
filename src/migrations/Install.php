@@ -52,7 +52,7 @@ class Install extends Migration
         return true;
     }
 
-   /**
+    /**
      * @inheritdoc
      */
     public function safeDown()
@@ -80,31 +80,31 @@ class Install extends Migration
             $this->createTable(
                 '{{%seomatic_metabundles}}',
                 [
-                    'id' => $this->primaryKey(),
+                    'id'          => $this->primaryKey(),
                     'dateCreated' => $this->dateTime()->notNull(),
                     'dateUpdated' => $this->dateTime()->notNull(),
-                    'uid' => $this->uid(),
+                    'uid'         => $this->uid(),
 
-                    'bundleVersion' => $this->string()->notNull()->defaultValue(''),
-                    'sourceBundleType' => $this->string()->notNull()->defaultValue(''),
-                    'sourceId' => $this->integer()->null(),
-                    'sourceName' => $this->string()->notNull()->defaultValue(''),
-                    'sourceHandle' => $this->string(64)->notNull()->defaultValue(''),
-                    'sourceType' => $this->string(64)->notNull()->defaultValue(''),
-                    'sourceTemplate' => $this->string(500)->notNull()->defaultValue(''),
-                    'sourceSiteId' => $this->integer()->null(),
+                    'bundleVersion'         => $this->string()->notNull()->defaultValue(''),
+                    'sourceBundleType'      => $this->string()->notNull()->defaultValue(''),
+                    'sourceId'              => $this->integer()->null(),
+                    'sourceName'            => $this->string()->notNull()->defaultValue(''),
+                    'sourceHandle'          => $this->string(64)->notNull()->defaultValue(''),
+                    'sourceType'            => $this->string(64)->notNull()->defaultValue(''),
+                    'sourceTemplate'        => $this->string(500)->notNull()->defaultValue(''),
+                    'sourceSiteId'          => $this->integer()->null(),
                     'sourceAltSiteSettings' => $this->text(),
-                    'sourceDateUpdated' => $this->dateTime()->notNull(),
+                    'sourceDateUpdated'     => $this->dateTime()->notNull(),
 
-                    'metaGlobalVars' => $this->text(),
+                    'metaGlobalVars'  => $this->text(),
                     'metaSitemapVars' => $this->text(),
 
-                    'metaTagContainer' => $this->text(),
-                    'metaLinkContainer' => $this->text(),
-                    'metaScriptContainer' => $this->text(),
-                    'metaJsonLdContainer' => $this->text(),
-                    'metaTitleContainer' => $this->text(),
-                    'redirectsContainer' => $this->text(),
+                    'metaTagContainer'           => $this->text(),
+                    'metaLinkContainer'          => $this->text(),
+                    'metaScriptContainer'        => $this->text(),
+                    'metaJsonLdContainer'        => $this->text(),
+                    'metaTitleContainer'         => $this->text(),
+                    'redirectsContainer'         => $this->text(),
                     'frontendTemplatesContainer' => $this->text(),
                 ]
             );
@@ -112,17 +112,19 @@ class Install extends Migration
             $this->createTable(
                 '{{%seomatic_frontendtemplates}}',
                 [
-                    'id' => $this->primaryKey(),
+                    'id'          => $this->primaryKey(),
                     'dateCreated' => $this->dateTime()->notNull(),
                     'dateUpdated' => $this->dateTime()->notNull(),
-                    'uid' => $this->uid(),
+                    'uid'         => $this->uid(),
 
-                    'handle' => $this->string()->notNull()->defaultValue(''),
-                    'path' => $this->string()->notNull()->defaultValue(''),
-                    'template' => $this->string(500)->notNull()->defaultValue(''),
-                    'controller' => $this->string()->notNull()->defaultValue(''),
-                    'action' => $this->string()->notNull()->defaultValue(''),
-                    'templateString' => $this->text(),
+                    'templateVersion' => $this->string()->notNull()->defaultValue(''),
+                    'handle'          => $this->string()->notNull()->defaultValue(''),
+                    'path'            => $this->string()->notNull()->defaultValue(''),
+                    'template'        => $this->string(500)->notNull()->defaultValue(''),
+                    'siteId'          => $this->integer()->null(),
+                    'controller'      => $this->string()->notNull()->defaultValue(''),
+                    'action'          => $this->string()->notNull()->defaultValue(''),
+                    'templateString'  => $this->text(),
                 ]
             );
         }
@@ -181,11 +183,11 @@ class Install extends Migration
             $this->db->getIndexName(
                 '{{%seomatic_frontendtemplates}}',
                 'handle',
-                true
+                false
             ),
             '{{%seomatic_frontendtemplates}}',
             'handle',
-            true
+            false
         );
         // Additional commands depending on the db driver
         switch ($this->driver) {

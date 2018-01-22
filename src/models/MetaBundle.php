@@ -240,7 +240,6 @@ class MetaBundle extends Model
                     'sourceName',
                     'sourceHandle',
                     'sourceType',
-                    'sourceTemplate',
                     'sourceSiteId',
                     'sourceDateUpdated',
                 ],
@@ -259,7 +258,7 @@ class MetaBundle extends Model
             ],
             [['sourceId', 'sourceSiteId'], 'number', 'min' => 1],
             [['sourceDateUpdated'], DateTimeValidator::class],
-            [['sourceAltSiteSettings'], 'safe'],
+            [['sourceTemplate', 'sourceAltSiteSettings'], 'safe'],
         ];
         return $rules;
     }

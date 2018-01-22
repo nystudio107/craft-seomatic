@@ -335,7 +335,7 @@ class MetaContainers extends Component
     protected function loadGlobalMetaContainers(int $siteId = null)
     {
         if (!$siteId) {
-            $siteId = Craft::$app->getSites()->primarySite->id;
+            $siteId = Craft::$app->getSites()->currentSite->id;
         }
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle) {
@@ -346,24 +346,19 @@ class MetaContainers extends Component
             // Language
             $this->metaGlobalVars->language = Seomatic::$language;
             // Meta containers
-            foreach ($metaBundle->metaTagContainer as $metaTagContainer) {
-                $key = MetaTagContainer::CONTAINER_TYPE . $metaTagContainer->handle;
+            foreach ($metaBundle->metaTagContainer as $key => $metaTagContainer) {
                 $this->metaContainers[$key] = $metaTagContainer;
             }
-            foreach ($metaBundle->metaLinkContainer as $metaLinkContainer) {
-                $key = MetaLinkContainer::CONTAINER_TYPE . $metaLinkContainer->handle;
+            foreach ($metaBundle->metaLinkContainer as $key => $metaLinkContainer) {
                 $this->metaContainers[$key] = $metaLinkContainer;
             }
-            foreach ($metaBundle->metaScriptContainer as $metaScriptContainer) {
-                $key = MetaScriptContainer::CONTAINER_TYPE . $metaScriptContainer->handle;
+            foreach ($metaBundle->metaScriptContainer as $key => $metaScriptContainer) {
                 $this->metaContainers[$key] = $metaScriptContainer;
             }
-            foreach ($metaBundle->metaJsonLdContainer as $metaJsonLdContainer) {
-                $key = MetaJsonLdContainer::CONTAINER_TYPE . $metaJsonLdContainer->handle;
+            foreach ($metaBundle->metaJsonLdContainer as $key => $metaJsonLdContainer) {
                 $this->metaContainers[$key] = $metaJsonLdContainer;
             }
-            foreach ($metaBundle->metaTitleContainer as $metaTitleContainer) {
-                $key = MetaTitleContainer::CONTAINER_TYPE . $metaTitleContainer->handle;
+            foreach ($metaBundle->metaTitleContainer as $key => $metaTitleContainer) {
                 $this->metaContainers[$key] = $metaTitleContainer;
             }
         }
@@ -453,32 +448,27 @@ class MetaContainers extends Component
         // Language
         $this->metaGlobalVars->language = Seomatic::$language;
         // Meta containers
-        foreach ($metaBundle->metaTagContainer as $metaTagContainer) {
-            $key = MetaTagContainer::CONTAINER_TYPE . $metaTagContainer->handle;
+        foreach ($metaBundle->metaTagContainer as $key => $metaTagContainer) {
             foreach ($metaTagContainer->data as $metaTag) {
                 $this->addToMetaContainer($metaTag, $key);
             }
         }
-        foreach ($metaBundle->metaLinkContainer as $metaLinkContainer) {
-            $key = MetaLinkContainer::CONTAINER_TYPE . $metaLinkContainer->handle;
+        foreach ($metaBundle->metaLinkContainer as $key => $metaLinkContainer) {
             foreach ($metaLinkContainer->data as $metaLink) {
                 $this->addToMetaContainer($metaLink, $key);
             }
         }
-        foreach ($metaBundle->metaScriptContainer as $metaScriptContainer) {
-            $key = MetaScriptContainer::CONTAINER_TYPE . $metaScriptContainer->handle;
+        foreach ($metaBundle->metaScriptContainer as $key => $metaScriptContainer) {
             foreach ($metaScriptContainer->data as $metaScript) {
                 $this->addToMetaContainer($metaScript, $key);
             }
         }
-        foreach ($metaBundle->metaJsonLdContainer as $metaJsonLdContainer) {
-            $key = MetaJsonLdContainer::CONTAINER_TYPE . $metaJsonLdContainer->handle;
+        foreach ($metaBundle->metaJsonLdContainer as $key => $metaJsonLdContainer) {
             foreach ($metaJsonLdContainer->data as $metaJsonLd) {
                 $this->addToMetaContainer($metaJsonLd, $key);
             }
         }
-        foreach ($metaBundle->metaTitleContainer as $metaTitleContainer) {
-            $key = MetaTitleContainer::CONTAINER_TYPE . $metaTitleContainer->handle;
+        foreach ($metaBundle->metaTitleContainer as $key => $metaTitleContainer) {
             foreach ($metaTitleContainer->data as $metaTitle) {
                 $this->addToMetaContainer($metaTitle, $key);
             }

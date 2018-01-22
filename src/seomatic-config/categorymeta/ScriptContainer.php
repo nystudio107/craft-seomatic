@@ -9,6 +9,7 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
+use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\services\Script as ScriptService;
 
 /**
@@ -18,7 +19,7 @@ use nystudio107\seomatic\services\Script as ScriptService;
  */
 
 return [
-    [
+    MetaScriptContainer::CONTAINER_TYPE . ScriptService::GENERAL_HANDLE => [
         'name'         => 'General',
         'description'  => 'Script Tags',
         'handle'       => ScriptService::GENERAL_HANDLE,

@@ -9,6 +9,7 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
+use nystudio107\seomatic\models\MetaJsonLdContainer;
 use nystudio107\seomatic\services\JsonLd as JsonLdService;
 
 /**
@@ -18,7 +19,7 @@ use nystudio107\seomatic\services\JsonLd as JsonLdService;
  */
 
 return [
-    [
+    MetaJsonLdContainer::CONTAINER_TYPE . JsonLdService::GENERAL_HANDLE => [
         'name'         => 'General',
         'description'  => 'JsonLd Tags',
         'handle'       => JsonLdService::GENERAL_HANDLE,

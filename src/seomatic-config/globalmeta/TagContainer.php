@@ -9,6 +9,7 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
+use nystudio107\seomatic\models\MetaTagContainer;
 use nystudio107\seomatic\services\Tag as TagService;
 
 /**
@@ -18,7 +19,7 @@ use nystudio107\seomatic\services\Tag as TagService;
  */
 
 return [
-    [
+    MetaTagContainer::CONTAINER_TYPE . TagService::GENERAL_HANDLE => [
         'name'         => 'General',
         'description'  => 'General Meta Tags',
         'handle'       => TagService::GENERAL_HANDLE,
@@ -70,7 +71,7 @@ return [
             ],
         ],
     ],
-    [
+    MetaTagContainer::CONTAINER_TYPE . TagService::FACEBOOK_HANDLE => [
         'name'         => 'Facebook',
         'description'  => 'Facebook OpenGraph Meta Tags',
         'handle'       => TagService::FACEBOOK_HANDLE,
@@ -126,7 +127,7 @@ return [
             ],
         ],
     ],
-    [
+    MetaTagContainer::CONTAINER_TYPE . TagService::TWITTER_HANDLE => [
         'name'         => 'Twitter',
         'description'  => 'Twitter Card Meta Tags',
         'handle'       => TagService::TWITTER_HANDLE,
@@ -176,7 +177,7 @@ return [
             ],
         ],
     ],
-    [
+    MetaTagContainer::CONTAINER_TYPE . TagService::MISC_HANDLE => [
         'name'         => 'Miscellaneous',
         'description'  => 'Miscellaneous Meta Tags',
         'handle'       => TagService::MISC_HANDLE,

@@ -59,11 +59,21 @@ class EditableTemplate extends FrontendTemplate
     // =========================================================================
 
     /**
+     * @var string
+     */
+    public $templateVersion;
+
+    /**
      * The template to render this FrontendTemplate
      *
      * @var string
      */
     public $templateString;
+
+    /**
+     * @var int
+     */
+    public $siteId;
 
     // Public Methods
     // =========================================================================

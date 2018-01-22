@@ -87,7 +87,7 @@ class MetaBundles extends Component
             ->from(['{{%seomatic_metabundles}}'])
             ->where([
                 'sourceBundleType' => self::GLOBAL_META_BUNDLE,
-                'sourceSiteId' => $sourceSiteId,
+                'sourceSiteId'     => $sourceSiteId,
             ])
             ->one();
         if (!empty($metaBundleArray)) {
@@ -95,6 +95,9 @@ class MetaBundles extends Component
             $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
             $metaBundle = MetaBundle::create($metaBundleArray);
             $this->syncBundleWithConfig(self::GLOBAL_META_BUNDLE, $metaBundle);
+        } else {
+            // If it doesn't exist, create it
+            $metaBundle = $this->createGlobalMetaBundleForSite($sourceSiteId);
         }
 
         return $metaBundle;
@@ -103,16 +106,16 @@ class MetaBundles extends Component
     /**
      * @param string   $sourceType
      * @param int      $sourceId
-     * @param int|null $siteId
+     * @param int|null $sourceSiteId
      *
      * @return null|MetaBundle
      */
-    public function getMetaBundleBySourceId(string $sourceType, int $sourceId, int $siteId)
+    public function getMetaBundleBySourceId(string $sourceType, int $sourceId, int $sourceSiteId)
     {
         $metaBundle = null;
         // See if we have the meta bundle cached
-        if (!empty($this->metaBundlesBySourceId[$sourceType][$sourceId][$siteId])) {
-            $id = $this->metaBundlesBySourceId[$sourceType][$sourceId][$siteId];
+        if (!empty($this->metaBundlesBySourceId[$sourceType][$sourceId][$sourceSiteId])) {
+            $id = $this->metaBundlesBySourceId[$sourceType][$sourceId][$sourceSiteId];
             if (!empty($this->metaBundles[$id])) {
                 return $this->metaBundles[$id];
             }
@@ -122,8 +125,8 @@ class MetaBundles extends Component
             ->from(['{{%seomatic_metabundles}}'])
             ->where([
                 'sourceBundleType' => $sourceType,
-                'sourceId' => $sourceId,
-                'sourceSiteId' => $siteId,
+                'sourceId'         => $sourceId,
+                'sourceSiteId'     => $sourceSiteId,
             ])
             ->one();
         if (!empty($metaBundleArray)) {
@@ -133,7 +136,22 @@ class MetaBundles extends Component
             $this->syncBundleWithConfig($sourceType, $metaBundle);
             $id = count($this->metaBundles);
             $this->metaBundles[$id] = $metaBundle;
-            $this->metaBundlesBySourceId[$sourceType][$sourceId][$siteId] = $id;
+            $this->metaBundlesBySourceId[$sourceType][$sourceId][$sourceSiteId] = $id;
+        } else {
+            // If it doesn't exist, create it
+            switch ($sourceType) {
+                case self::SECTION_META_BUNDLE:
+                    /** @var  $section Section */
+                    $section = Craft::$app->getSections()->getSectionById($sourceId);
+                    $metaBundle = $this->createMetaBundleFromSection($section, $sourceSiteId);
+                    break;
+
+                case self::CATEGORYGROUP_META_BUNDLE:
+                    $category = Craft::$app->getCategories()->getGroupById($sourceId);
+                    $metaBundle = $this->createMetaBundleFromCategory($category, $sourceSiteId);
+                    break;
+                // @TODO: handle commerce products
+            }
         }
 
         return $metaBundle;
@@ -142,16 +160,16 @@ class MetaBundles extends Component
     /**
      * @param string $sourceType
      * @param string $sourceHandle
-     * @param int    $siteId
+     * @param int    $sourceSiteId
      *
      * @return null|MetaBundle
      */
-    public function getMetaBundleBySourceHandle(string $sourceType, string $sourceHandle, int $siteId)
+    public function getMetaBundleBySourceHandle(string $sourceType, string $sourceHandle, int $sourceSiteId)
     {
         $metaBundle = null;
         // See if we have the meta bundle cached
-        if (!empty($this->metaBundlesBySourceHandle[$sourceType][$sourceHandle][$siteId])) {
-            $id = $this->metaBundlesBySourceHandle[$sourceType][$sourceHandle][$siteId];
+        if (!empty($this->metaBundlesBySourceHandle[$sourceType][$sourceHandle][$sourceSiteId])) {
+            $id = $this->metaBundlesBySourceHandle[$sourceType][$sourceHandle][$sourceSiteId];
             if (!empty($this->metaBundles[$id])) {
                 return $this->metaBundles[$id];
             }
@@ -161,7 +179,7 @@ class MetaBundles extends Component
             ->from(['{{%seomatic_metabundles}}'])
             ->where([
                 'sourceHandle' => $sourceHandle,
-                'sourceSiteId' => $siteId,
+                'sourceSiteId' => $sourceSiteId,
             ])
             ->one();
         if (!empty($metaBundleArray)) {
@@ -169,7 +187,22 @@ class MetaBundles extends Component
             $metaBundle = MetaBundle::create($metaBundleArray);
             $id = count($this->metaBundles);
             $this->metaBundles[$id] = $metaBundle;
-            $this->metaBundlesBySourceHandle[$sourceType][$sourceHandle][$siteId] = $id;
+            $this->metaBundlesBySourceHandle[$sourceType][$sourceHandle][$sourceSiteId] = $id;
+        } else {
+            // If it doesn't exist, create it
+            switch ($sourceType) {
+                case self::SECTION_META_BUNDLE:
+                    /** @var  $section Section */
+                    $section = Craft::$app->getSections()->getSectionByHandle($sourceHandle);
+                    $metaBundle = $this->createMetaBundleFromSection($section, $sourceSiteId);
+                    break;
+
+                case self::CATEGORYGROUP_META_BUNDLE:
+                    $category = Craft::$app->getCategories()->getGroupByHandle($sourceHandle);
+                    $metaBundle = $this->createMetaBundleFromCategory($category, $sourceSiteId);
+                    break;
+                // @TODO: handle commerce products
+            }
         }
 
         return $metaBundle;
@@ -251,7 +284,7 @@ class MetaBundles extends Component
                             /** @var  $element Category */
                             $sourceType = self::CATEGORYGROUP_META_BUNDLE;
                             break;
-                        // @todo handle commerce products
+                        // @TODO: handle commerce products
                     }
                     // Update the meta bundle data
                     $this->updateMetaBundleById($sourceType, $sourceId, $siteId);
@@ -285,55 +318,34 @@ class MetaBundles extends Component
         // Look for a matching meta bundle in the db
         $metaBundleRecord = MetaBundleRecord::findOne([
             'sourceBundleType' => $sourceType,
-            'sourceId' => $sourceId,
-            'sourceSiteId' => $sourceSiteId,
+            'sourceId'         => $sourceId,
+            'sourceSiteId'     => $sourceSiteId,
         ]);
         /** @var  $metaBundleRecord MetaBundle */
         if ($metaBundleRecord) {
             switch ($metaBundleRecord->sourceBundleType) {
-                case self::SECTION_META_BUNDLE:
-                    /** @var  $section Section */
-                    $section = Craft::$app->getSections()->getSectionById($sourceId);
-                    $metaBundle = $this->createMetaBundleFromSection($section, $sourceSiteId);
-                    if ($metaBundle) {
-                        $metaBundle->validate(null, true);
-                        /** @var  $metaBundleRecord MetaBundleRecord */
-                        $metaBundleRecord->setAttributes(
-                            $metaBundle->getAttributes(),
-                            false
-                        );
-                        $metaBundleRecord->save();
-                        Craft::info(
-                            'Meta bundle updated: '
-                            .$sourceId
-                            .' from siteId: '
-                            .$sourceSiteId,
-                            __METHOD__
-                        );
-                    }
-                    break;
-
-                case self::CATEGORYGROUP_META_BUNDLE:
-                    /** @var  $category CategoryGroup */
-                    $category = Craft::$app->getCategories()->getCategoryById($sourceId);
-                    $metaBundle = $this->createMetaBundleFromCategory($category, $sourceSiteId);
-                    if ($metaBundle) {
-                        /** @var  $metaBundleRecord MetaBundleRecord */
-                        $metaBundleRecord->setAttributes(
-                            $metaBundle->getAttributes(),
-                            false
-                        );
-                        $metaBundleRecord->save();
-                    }
+                case self::GLOBAL_META_BUNDLE:
+                    $this->createGlobalMetaBundles();
                     Craft::info(
-                        'Meta bundle updated: '
+                        'Global meta bundle updated: '
                         .$sourceId
                         .' from siteId: '
                         .$sourceSiteId,
                         __METHOD__
                     );
                     break;
-                // @todo handle commerce products
+
+                case self::SECTION_META_BUNDLE:
+                    /** @var  $section Section */
+                    $section = Craft::$app->getSections()->getSectionById($sourceId);
+                    $metaBundle = $this->createMetaBundleFromSection($section, $sourceSiteId);
+                    break;
+
+                case self::CATEGORYGROUP_META_BUNDLE:
+                    $category = Craft::$app->getCategories()->getGroupById($sourceId);
+                    $metaBundle = $this->createMetaBundleFromCategory($category, $sourceSiteId);
+                    break;
+                // @TODO: handle commerce products
             }
         }
     }
@@ -353,8 +365,8 @@ class MetaBundles extends Component
             // Look for a matching meta bundle in the db
             $metaBundleRecord = MetaBundleRecord::findOne([
                 'sourceBundleType' => $sourceType,
-                'sourceId' => $sourceId,
-                'sourceSiteId' => $site->id,
+                'sourceId'         => $sourceId,
+                'sourceSiteId'     => $site->id,
             ]);
 
             if ($metaBundleRecord) {
@@ -371,7 +383,7 @@ class MetaBundles extends Component
                     'Meta bundle deleted: '
                     .$sourceId
                     .' from siteId: '
-                    . $site->id,
+                    .$site->id,
                     __METHOD__
                 );
             }
@@ -388,20 +400,7 @@ class MetaBundles extends Component
         $sites = Craft::$app->getSites()->getAllSites();
         /** @var  $site Site */
         foreach ($sites as $site) {
-            $metaBundle = null;
             $metaBundle = $this->createMetaBundleFromSection($section, $site->id);
-            // Create the meta bundle
-            if ($metaBundle) {
-                $metaBundleRecord = new MetaBundleRecord($metaBundle->getAttributes());
-                $metaBundleRecord->save();
-                Craft::info(
-                    'Meta bundle created: '
-                    . $metaBundle->sourceId
-                    .' from siteId: '
-                    . $site->id,
-                    __METHOD__
-                );
-            }
         }
     }
 
@@ -417,18 +416,6 @@ class MetaBundles extends Component
         foreach ($sites as $site) {
             $metaBundle = null;
             $metaBundle = $this->createMetaBundleFromCategory($category, $site->id);
-            // Create the meta bundle
-            if ($metaBundle) {
-                $metaBundleRecord = new MetaBundleRecord($metaBundle->getAttributes());
-                $metaBundleRecord->save();
-                Craft::info(
-                    'Meta bundle created: '
-                    . $metaBundle->sourceId
-                    .' from siteId: '
-                    . $site->id,
-                    __METHOD__
-                );
-            }
         }
     }
 
@@ -454,7 +441,7 @@ class MetaBundles extends Component
                 $sourceId = $element->groupId;
                 $siteId = $element->siteId;
                 break;
-            // @todo handle commerce products
+            // @TODO: handle commerce products
         }
 
         return [$sourceId, $siteId];
@@ -496,6 +483,36 @@ class MetaBundles extends Component
         return $metaBundles;
     }
 
+    /**
+     * Create all of the content meta bundles
+     */
+    public function createContentMetaBundles()
+    {
+        // Get all of the sections with URLs
+        $sections = Craft::$app->getSections()->getAllSections();
+        foreach ($sections as $section) {
+            $this->createContentMetaBundleForSection($section);
+        }
+
+        // Get all of the category groups with URLs
+        $categories = Craft::$app->getCategories()->getAllGroups();
+        foreach ($categories as $category) {
+            $this->createContentMetaBundleForCategoryGroup($category);
+        }
+        // @TODO: Get all of the Commerce Products with URLs
+    }
+
+    /**
+     * Create the default global meta bundles
+     */
+    public function createGlobalMetaBundles()
+    {
+        $sites = Craft::$app->getSites()->getAllSites();
+        foreach ($sites as $site) {
+            $metaBundle = $this->createGlobalMetaBundleForSite($site->id);
+        }
+    }
+
     // Protected Methods
     // =========================================================================
 
@@ -506,9 +523,8 @@ class MetaBundles extends Component
      * @param string     $sourceType
      * @param MetaBundle $metaBundle
      */
-    protected function syncBundleWithConfig(string $sourceType, MetaBundle $metaBundle)
+    protected function syncBundleWithConfig(string $sourceType, MetaBundle &$metaBundle)
     {
-        $config = null;
         switch ($sourceType) {
             case self::GLOBAL_META_BUNDLE:
                 $config = ConfigHelper::getConfigFromFile('globalmeta/Bundle');
@@ -519,24 +535,106 @@ class MetaBundles extends Component
             case self::SECTION_META_BUNDLE:
                 $config = ConfigHelper::getConfigFromFile('entrymeta/Bundle');
                 break;
+            // @TODO: handle commerce products
         }
         // If the config file has a newer version than the $metaBundleArray, merge them
-        if ($config) {
+        if (!empty($config)) {
             if (version_compare($config['bundleVersion'], $metaBundle->bundleVersion, '>')) {
                 $metaBundleArray = $metaBundle->getAttributes();
-                $metaBundleArray = ArrayHelper::merge($metaBundleArray, $config);
-                $metaBundle->setAttributes($metaBundleArray);
+                // Create a new meta bundle
+                switch ($sourceType) {
+                    case self::GLOBAL_META_BUNDLE:
+                        $metaBundle = $this->createGlobalMetaBundleForSite(
+                            $metaBundle->sourceSiteId,
+                            $metaBundleArray
+                        );
+                        break;
+                    case self::CATEGORYGROUP_META_BUNDLE:
+                        $category = Craft::$app->getCategories()->getGroupById($metaBundle->sourceId);
+                        $metaBundle = $this->createMetaBundleFromCategory(
+                            $category,
+                            $metaBundle->sourceSiteId,
+                            $metaBundleArray
+                        );
+                        break;
+                    case self::SECTION_META_BUNDLE:
+                        $section = Craft::$app->getSections()->getSectionById($metaBundle->sourceId);
+                        $metaBundle = $this->createMetaBundleFromSection(
+                            $section,
+                            $metaBundle->sourceSiteId,
+                            $metaBundleArray
+                        );
+                        break;
+                    // @TODO: handle commerce products
+                }
             }
         }
     }
 
     /**
+     * @param int   $siteId
+     * @param array $baseConfig
+     *
+     * @return MetaBundle
+     */
+    protected function createGlobalMetaBundleForSite(int $siteId, $baseConfig = []): MetaBundle
+    {
+        // Create a new meta bundle with propagated defaults
+        $metaBundleDefaults = array_merge(
+            ConfigHelper::getConfigFromFile('globalmeta/Bundle'),
+            [
+                'sourceSiteId' => $siteId,
+            ]
+        );
+        $metaBundle = new MetaBundle(ArrayHelper::merge(
+            $baseConfig,
+            $metaBundleDefaults
+        ));
+        // Make sure it validates
+        if ($metaBundle->validate(null, true)) {
+            // Save it out to a record
+            $metaBundleRecord = MetaBundleRecord::findOne([
+                'sourceBundleType' => self::GLOBAL_META_BUNDLE,
+                'sourceSiteId'     => $siteId,
+            ]);
+            if (!$metaBundleRecord) {
+                $metaBundleRecord = new MetaBundleRecord($metaBundle->getAttributes());
+            }
+            $metaBundleRecord->save();
+            Craft::info(
+                'Meta bundle updated: '
+                .$metaBundle->sourceType
+                . ' id: '
+                .$metaBundle->sourceId
+                .' from siteId: '
+                .$metaBundle->sourceSiteId,
+                __METHOD__
+            );
+        } else {
+            Craft::error(
+                'Meta bundle failed validation: '
+                . print_r($metaBundle->getErrors(), true)
+                . ' type: '
+                .$metaBundle->sourceType
+                . ' id: '
+                .$metaBundle->sourceId
+                .' from siteId: '
+                .$metaBundle->sourceSiteId,
+                __METHOD__
+            );
+        }
+
+        return $metaBundle;
+    }
+
+    /**
      * @param Section $section
      * @param int     $siteId
+     * @param array   $baseConfig
      *
      * @return null|MetaBundle
      */
-    protected function createMetaBundleFromSection(Section $section, int $siteId)
+    protected function createMetaBundleFromSection(Section $section, int $siteId, $baseConfig = [])
     {
         $metaBundle = null;
         // Get the site settings and turn them into arrays
@@ -572,17 +670,54 @@ class MetaBundles extends Component
                 $metaBundleDefaults = array_merge(
                     ConfigHelper::getConfigFromFile('entrymeta/Bundle'),
                     [
-                        'sourceId' => $section->id,
-                        'sourceName' => $section->name,
-                        'sourceHandle' => $section->handle,
-                        'sourceType' => $section->type,
-                        'sourceTemplate' => $siteSetting->template,
-                        'sourceSiteId' => $siteSetting->siteId,
+                        'sourceId'              => $section->id,
+                        'sourceName'            => $section->name,
+                        'sourceHandle'          => $section->handle,
+                        'sourceType'            => $section->type,
+                        'sourceTemplate'        => $siteSetting->template,
+                        'sourceSiteId'          => $siteSetting->siteId,
                         'sourceAltSiteSettings' => $siteSettingsArray,
-                        'sourceDateUpdated' => $dateUpdated,
+                        'sourceDateUpdated'     => $dateUpdated,
                     ]
                 );
-                $metaBundle = new MetaBundle($metaBundleDefaults);
+                $metaBundle = new MetaBundle(ArrayHelper::merge(
+                    $baseConfig,
+                    $metaBundleDefaults
+                ));
+                // Make sure it validates
+                if ($metaBundle->validate(null, true)) {
+                    // Save it out to a record
+                    $metaBundleRecord = MetaBundleRecord::findOne([
+                        'sourceBundleType' => $metaBundle->sourceType,
+                        'sourceId'         => $metaBundle->sourceId,
+                        'sourceSiteId'     => $metaBundle->sourceSiteId,
+                    ]);
+                    if (!$metaBundleRecord) {
+                        $metaBundleRecord = new MetaBundleRecord($metaBundle->getAttributes());
+                    }
+                    $metaBundleRecord->save();
+                    Craft::info(
+                        'Meta bundle updated: '
+                        .$metaBundle->sourceType
+                        . ' id: '
+                        .$metaBundle->sourceId
+                        .' from siteId: '
+                        .$metaBundle->sourceSiteId,
+                        __METHOD__
+                    );
+                } else {
+                    Craft::error(
+                        'Meta bundle failed validation: '
+                        . print_r($metaBundle->getErrors(), true)
+                        . ' type: '
+                        .$metaBundle->sourceType
+                        . ' id: '
+                        .$metaBundle->sourceId
+                        .' from siteId: '
+                        .$metaBundle->sourceSiteId,
+                        __METHOD__
+                    );
+                }
             }
         }
 
@@ -592,10 +727,11 @@ class MetaBundles extends Component
     /**
      * @param CategoryGroup $category
      * @param int           $siteId
+     * @param array         $baseConfig
      *
      * @return null|MetaBundle
      */
-    protected function createMetaBundleFromCategory(CategoryGroup $category, int $siteId)
+    protected function createMetaBundleFromCategory(CategoryGroup $category, int $siteId, $baseConfig = [])
     {
         $metaBundle = null;
         // Get the site settings and turn them into arrays
@@ -631,59 +767,56 @@ class MetaBundles extends Component
                 $metaBundleDefaults = array_merge(
                     ConfigHelper::getConfigFromFile('categorymeta/Bundle'),
                     [
-                        'sourceId' => $category->id,
-                        'sourceName' => $category->name,
-                        'sourceHandle' => $category->handle,
-                        'sourceTemplate' => $siteSetting->template,
-                        'sourceSiteId' => $siteSetting->siteId,
+                        'sourceId'              => $category->id,
+                        'sourceName'            => $category->name,
+                        'sourceHandle'          => $category->handle,
+                        'sourceTemplate'        => $siteSetting->template,
+                        'sourceSiteId'          => $siteSetting->siteId,
                         'sourceAltSiteSettings' => $siteSettingsArray,
-                        'sourceDateUpdated' => $dateUpdated,
+                        'sourceDateUpdated'     => $dateUpdated,
                     ]
                 );
-                $metaBundle = new MetaBundle($metaBundleDefaults);
+                $metaBundle = new MetaBundle(ArrayHelper::merge(
+                    $baseConfig,
+                    $metaBundleDefaults
+                ));
+                // Make sure it validates
+                if ($metaBundle->validate(null, true)) {
+                    // Save it out to a record
+                    $metaBundleRecord = MetaBundleRecord::findOne([
+                        'sourceBundleType' => $metaBundle->sourceType,
+                        'sourceId'         => $metaBundle->sourceId,
+                        'sourceSiteId'     => $metaBundle->sourceSiteId,
+                    ]);
+                    if (!$metaBundleRecord) {
+                        $metaBundleRecord = new MetaBundleRecord($metaBundle->getAttributes());
+                    }
+                    $metaBundleRecord->save();
+                    Craft::info(
+                        'Meta bundle updated: '
+                        .$metaBundle->sourceType
+                        . ' id: '
+                        .$metaBundle->sourceId
+                        .' from siteId: '
+                        .$metaBundle->sourceSiteId,
+                        __METHOD__
+                    );
+                } else {
+                    Craft::error(
+                        'Meta bundle failed validation: '
+                        . print_r($metaBundle->getErrors(), true)
+                        . ' type: '
+                        .$metaBundle->sourceType
+                        . ' id: '
+                        .$metaBundle->sourceId
+                        .' from siteId: '
+                        .$metaBundle->sourceSiteId,
+                        __METHOD__
+                    );
+                }
             }
         }
 
         return $metaBundle;
-    }
-
-    /**
-     * Create all of the content meta bundles
-     */
-    public function createContentMetaBundles()
-    {
-        // Get all of the sections with URLs
-        $sections = Craft::$app->getSections()->getAllSections();
-        foreach ($sections as $section) {
-            $this->createContentMetaBundleForSection($section);
-        }
-
-        // Get all of the category groups with URLs
-        $categories = Craft::$app->getCategories()->getAllGroups();
-        foreach ($categories as $category) {
-            $this->createContentMetaBundleForCategoryGroup($category);
-        }
-        // @todo Get all of the Commerce Products with URLs
-    }
-
-    /**
-     * Create the default global meta bundles
-     */
-    public function createGlobalMetaBundles()
-    {
-        $sites = Craft::$app->getSites()->getAllSites();
-        foreach ($sites as $site) {
-            // Create a new meta bundle with propagated defaults
-            $metaBundleDefaults = array_merge(
-                ConfigHelper::getConfigFromFile('globalmeta/Bundle'),
-                [
-                    'sourceSiteId' => $site->id,
-                ]
-            );
-            $metaBundle = new MetaBundle($metaBundleDefaults);
-            // Save it out to a record
-            $metaBundleRecord = new MetaBundleRecord($metaBundle->getAttributes());
-            $metaBundleRecord->save();
-        }
     }
 }
