@@ -92,7 +92,7 @@ abstract class Container extends Model implements ContainerInterface
      */
     public function normalizeContainerData(): void
     {
-        $this->class = self::class;
+        $this->class = (string)self::class;
     }
 
     /**
