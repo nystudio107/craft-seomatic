@@ -113,6 +113,13 @@ return [
                 'name'      => '',
                 'property'  => 'og:type',
             ],
+            'og:url'        => [
+                'charset'   => '',
+                'content'   => '{seomatic.meta.canonicalUrl}',
+                'httpEquiv' => '',
+                'name'      => '',
+                'property'  => 'og:url',
+            ],
             'og:title'       => [
                 'charset'   => '',
                 'content'   => '{seomatic.meta.ogTitle}',
