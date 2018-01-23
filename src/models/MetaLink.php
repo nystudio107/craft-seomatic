@@ -203,8 +203,8 @@ class MetaLink extends MetaItem
     {
         $html = '';
         $options = $this->tagAttributes();
-        ksort($options);
         if ($this->prepForRender($options)) {
+            ksort($options);
             $html = Html::tag('link', '', $options);
         }
 
