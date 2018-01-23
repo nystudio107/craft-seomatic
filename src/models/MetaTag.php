@@ -94,6 +94,11 @@ class MetaTag extends MetaItem
      */
     public $name;
 
+    /**
+     * @var string
+     */
+    public $property;
+
     // Public Methods
     // =========================================================================
 
@@ -105,7 +110,7 @@ class MetaTag extends MetaItem
         parent::init();
 
         if (empty($this->key)) {
-            $this->key = $this->name ?: $this->httpEquiv;
+            $this->key = $this->name ?? $this->property ?? $this->httpEquiv;
             // $this keys for specific tags
             if (in_array($this->name, self::UNIQUEKEYS_TAGS)) {
                 $this->uniqueKeys = true;
@@ -120,7 +125,7 @@ class MetaTag extends MetaItem
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['charset', 'content', 'httpEquiv', 'name'], 'string'],
+            [['charset', 'content', 'httpEquiv', 'name', 'property'], 'string'],
             [['name'], 'required', 'on' => ['warning']]
         ]);
 
