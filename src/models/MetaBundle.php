@@ -174,36 +174,36 @@ class MetaBundle extends Model
         if (!empty($this->metaTagContainer)) {
             $metaTagContainers = json_decode($this->metaTagContainer, true);
             $this->metaTagContainer = [];
-            foreach ($metaTagContainers as $metaTagContainer) {
-                $this->metaTagContainer[] = MetaTagContainer::create($metaTagContainer);
+            foreach ($metaTagContainers as $key => $metaTagContainer) {
+                $this->metaTagContainer[$key] = MetaTagContainer::create($metaTagContainer);
             }
         }
         if (!empty($this->metaLinkContainer)) {
             $metaLinkContainers = json_decode($this->metaLinkContainer, true);
             $this->metaLinkContainer = [];
-            foreach ($metaLinkContainers as $metaLinkContainer) {
-                $this->metaLinkContainer[] = MetaLinkContainer::create($metaLinkContainer);
+            foreach ($metaLinkContainers as $key => $metaLinkContainer) {
+                $this->metaLinkContainer[$key] = MetaLinkContainer::create($metaLinkContainer);
             }
         }
         if (!empty($this->metaScriptContainer)) {
             $metaScriptContainers = json_decode($this->metaScriptContainer, true);
             $this->metaScriptContainer = [];
-            foreach ($metaScriptContainers as $metaScriptContainer) {
-                $this->metaScriptContainer[] = MetaScriptContainer::create($metaScriptContainer);
+            foreach ($metaScriptContainers as $key => $metaScriptContainer) {
+                $this->metaScriptContainer[$key] = MetaScriptContainer::create($metaScriptContainer);
             }
         }
         if (!empty($this->metaJsonLdContainer)) {
             $metaJsonLdContainers = json_decode($this->metaJsonLdContainer, true);
             $this->metaJsonLdContainer = [];
-            foreach ($metaJsonLdContainers as $metaJsonLdContainer) {
-                $this->metaJsonLdContainer[] = MetaJsonLdContainer::create($metaJsonLdContainer);
+            foreach ($metaJsonLdContainers as $key => $metaJsonLdContainer) {
+                $this->metaJsonLdContainer[$key] = MetaJsonLdContainer::create($metaJsonLdContainer);
             }
         }
         if (!empty($this->metaTitleContainer)) {
             $metaTitleContainers = json_decode($this->metaTitleContainer, true);
             $this->metaTitleContainer = [];
-            foreach ($metaTitleContainers as $metaTitleContainer) {
-                $this->metaTitleContainer[] = MetaTitleContainer::create($metaTitleContainer);
+            foreach ($metaTitleContainers as $key => $metaTitleContainer) {
+                $this->metaTitleContainer[$key] = MetaTitleContainer::create($metaTitleContainer);
             }
         }
         if (!empty($this->frontendTemplatesContainer)) {
