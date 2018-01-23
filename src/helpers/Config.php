@@ -33,7 +33,8 @@ class Config
     // =========================================================================
 
     /**
-     * Loads a config file from the plugin's config/ folder
+     * Loads a config file from, trying @craft/config first, then the plugin's
+     * @nystudio107/seomatic
      *
      * @param string $filePath
      *
@@ -70,6 +71,23 @@ class Config
             if ($env === '*' || StringHelper::contains(Seomatic::$settings->environment, $env)) {
                 $mergedConfig = ArrayHelper::merge($mergedConfig, $envConfig);
             }
+        }
+
+        return $mergedConfig;
+    }
+
+    /**
+     * Load an array of config files, merging them together in a single array
+     *
+     * @param array $filePaths
+     *
+     * @return array
+     */
+    public static function getMergedConfigFromFiles(array $filePaths): array
+    {
+        $mergedConfig = [];
+        foreach ($filePaths as $filePath) {
+            $mergedConfig = ArrayHelper::merge($mergedConfig, self::getConfigFromFile($filePath));
         }
 
         return $mergedConfig;

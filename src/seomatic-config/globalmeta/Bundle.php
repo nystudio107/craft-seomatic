@@ -32,10 +32,12 @@ return [
     'sourceDateUpdated'     => new \DateTime(),
     'metaGlobalVars'        => Config::getConfigFromFile('globalmeta/GlobalVars'),
     'metaSitemapVars'       => Config::getConfigFromFile('globalmeta/SitemapVars'),
-    'metaTagContainer'      => Config::getConfigFromFile('globalmeta/TagContainer'),
-    'metaLinkContainer'     => Config::getConfigFromFile('globalmeta/LinkContainer'),
-    'metaScriptContainer'   => Config::getConfigFromFile('globalmeta/ScriptContainer'),
-    'metaJsonLdContainer'   => Config::getConfigFromFile('globalmeta/JsonLdContainer'),
-    'metaTitleContainer'    => Config::getConfigFromFile('globalmeta/TitleContainer'),
+    'metaContainers'        => Config::getMergedConfigFromFiles([
+        'globalmeta/TagContainer',
+        'globalmeta/LinkContainer',
+        'globalmeta/ScriptContainer',
+        'globalmeta/JsonLdContainer',
+        'globalmeta/TitleContainer',
+    ]),
     'redirectsContainer'    => Config::getConfigFromFile('globalmeta/RedirectsContainer'),
 ];
