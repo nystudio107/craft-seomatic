@@ -19,10 +19,11 @@ use nystudio107\seomatic\services\Link as LinkService;
  */
 
 return [
-    MetaLinkContainer::CONTAINER_TYPE . LinkService::GENERAL_HANDLE => [
+    MetaLinkContainer::CONTAINER_TYPE.LinkService::GENERAL_HANDLE => [
         'name'         => 'General',
         'description'  => 'Link Tags',
         'handle'       => LinkService::GENERAL_HANDLE,
+        'class'        => MetaLinkContainer::class,
         'include'      => 'true',
         'dependencies' => [
         ],

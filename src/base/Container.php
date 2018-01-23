@@ -92,6 +92,7 @@ abstract class Container extends Model implements ContainerInterface
      */
     public function normalizeContainerData(): void
     {
+        $this->class = self::class;
     }
 
     /**
@@ -101,9 +102,9 @@ abstract class Container extends Model implements ContainerInterface
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['name', 'description', 'handle'], 'required'],
+            [['name', 'description', 'handle', 'class'], 'required'],
             [['include'], 'boolean'],
-            [['name', 'description', 'handle'], 'string'],
+            [['name', 'description', 'handle', 'class'], 'string'],
             [['dependencies'], 'safe'],
             [['data'], ArrayValidator::class],
         ]);

@@ -72,6 +72,8 @@ class MetaTagContainer extends MetaContainer
      */
     public function normalizeContainerData(): void
     {
+        parent::normalizeContainerData();
+
         foreach ($this->data as $key => $config) {
             $this->data[$key] = MetaTag::create($key, $config);
         }

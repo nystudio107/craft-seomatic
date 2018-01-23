@@ -89,5 +89,6 @@ abstract class MetaContainer extends SeomaticContainer implements MetaContainerI
      */
     public function normalizeContainerData(): void
     {
+        parent::normalizeContainerData();
     }
 }

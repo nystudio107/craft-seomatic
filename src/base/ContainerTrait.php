@@ -34,6 +34,11 @@ trait ContainerTrait
     /**
      * @var string
      */
+    public $class;
+
+    /**
+     * @var string
+     */
     public $handle;
 
     /**

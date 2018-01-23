@@ -19,11 +19,12 @@ use nystudio107\seomatic\services\Script as ScriptService;
  */
 
 return [
-    MetaScriptContainer::CONTAINER_TYPE . ScriptService::GENERAL_HANDLE => [
+    MetaScriptContainer::CONTAINER_TYPE.ScriptService::GENERAL_HANDLE => [
         'name'         => 'General',
         'description'  => 'Script Tags',
         'handle'       => ScriptService::GENERAL_HANDLE,
         'include'      => 'true',
+        'class'        => MetaScriptContainer::class,
         'dependencies' => [
         ],
         'data'         => [

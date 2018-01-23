@@ -68,6 +68,8 @@ class MetaLinkContainer extends MetaContainer
      */
     public function normalizeContainerData(): void
     {
+        parent::normalizeContainerData();
+
         foreach ($this->data as $key => $config) {
             $this->data[$key] = MetaLink::create($config);
         }

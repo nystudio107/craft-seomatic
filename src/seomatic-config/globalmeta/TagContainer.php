@@ -19,10 +19,11 @@ use nystudio107\seomatic\services\Tag as TagService;
  */
 
 return [
-    MetaTagContainer::CONTAINER_TYPE . TagService::GENERAL_HANDLE => [
+    MetaTagContainer::CONTAINER_TYPE.TagService::GENERAL_HANDLE  => [
         'name'         => 'General',
         'description'  => 'General Meta Tags',
         'handle'       => TagService::GENERAL_HANDLE,
+        'class'        => MetaTagContainer::class,
         'include'      => 'true',
         'dependencies' => [
         ],
@@ -71,10 +72,11 @@ return [
             ],
         ],
     ],
-    MetaTagContainer::CONTAINER_TYPE . TagService::FACEBOOK_HANDLE => [
+    MetaTagContainer::CONTAINER_TYPE.TagService::FACEBOOK_HANDLE => [
         'name'         => 'Facebook',
         'description'  => 'Facebook OpenGraph Meta Tags',
         'handle'       => TagService::FACEBOOK_HANDLE,
+        'class'        => MetaTagContainer::class,
         'include'      => 'true',
         'dependencies' => [
             [
@@ -127,11 +129,12 @@ return [
             ],
         ],
     ],
-    MetaTagContainer::CONTAINER_TYPE . TagService::TWITTER_HANDLE => [
+    MetaTagContainer::CONTAINER_TYPE.TagService::TWITTER_HANDLE  => [
         'name'         => 'Twitter',
         'description'  => 'Twitter Card Meta Tags',
         'handle'       => TagService::TWITTER_HANDLE,
         'include'      => 'true',
+        'class'        => MetaTagContainer::class,
         'dependencies' => [
             [
                 'type' => 'config',
@@ -177,10 +180,11 @@ return [
             ],
         ],
     ],
-    MetaTagContainer::CONTAINER_TYPE . TagService::MISC_HANDLE => [
+    MetaTagContainer::CONTAINER_TYPE.TagService::MISC_HANDLE     => [
         'name'         => 'Miscellaneous',
         'description'  => 'Miscellaneous Meta Tags',
         'handle'       => TagService::MISC_HANDLE,
+        'class'        => MetaTagContainer::class,
         'include'      => 'true',
         'dependencies' => [
         ],

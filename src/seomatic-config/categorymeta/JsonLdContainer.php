@@ -19,10 +19,11 @@ use nystudio107\seomatic\services\JsonLd as JsonLdService;
  */
 
 return [
-    MetaJsonLdContainer::CONTAINER_TYPE . JsonLdService::GENERAL_HANDLE => [
+    MetaJsonLdContainer::CONTAINER_TYPE.JsonLdService::GENERAL_HANDLE => [
         'name'         => 'General',
         'description'  => 'JsonLd Tags',
         'handle'       => JsonLdService::GENERAL_HANDLE,
+        'class'        => MetaJsonLdContainer::class,
         'include'      => 'true',
         'dependencies' => [
         ],

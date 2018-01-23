@@ -108,6 +108,8 @@ class MetaJsonLdContainer extends MetaContainer
      */
     public function normalizeContainerData(): void
     {
+        parent::normalizeContainerData();
+
         foreach ($this->data as $key => $config) {
             $this->data[$key] = MetaJsonLd::create($config['type'], $config);
         }
