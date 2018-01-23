@@ -346,20 +346,8 @@ class MetaContainers extends Component
             // Language
             $this->metaGlobalVars->language = Seomatic::$language;
             // Meta containers
-            foreach ($metaBundle->metaTagContainer as $key => $metaTagContainer) {
-                $this->metaContainers[$key] = $metaTagContainer;
-            }
-            foreach ($metaBundle->metaLinkContainer as $key => $metaLinkContainer) {
-                $this->metaContainers[$key] = $metaLinkContainer;
-            }
-            foreach ($metaBundle->metaScriptContainer as $key => $metaScriptContainer) {
-                $this->metaContainers[$key] = $metaScriptContainer;
-            }
-            foreach ($metaBundle->metaJsonLdContainer as $key => $metaJsonLdContainer) {
-                $this->metaContainers[$key] = $metaJsonLdContainer;
-            }
-            foreach ($metaBundle->metaTitleContainer as $key => $metaTitleContainer) {
-                $this->metaContainers[$key] = $metaTitleContainer;
+            foreach ($metaBundle->metaContainers as $key => $metaContainer) {
+                $this->metaContainers[$key] = $metaContainer;
             }
         }
     }
@@ -448,29 +436,9 @@ class MetaContainers extends Component
         // Language
         $this->metaGlobalVars->language = Seomatic::$language;
         // Meta containers
-        foreach ($metaBundle->metaTagContainer as $key => $metaTagContainer) {
-            foreach ($metaTagContainer->data as $metaTag) {
+        foreach ($metaBundle->metaContainers as $key => $metaContainer) {
+            foreach ($metaContainer->data as $metaTag) {
                 $this->addToMetaContainer($metaTag, $key);
-            }
-        }
-        foreach ($metaBundle->metaLinkContainer as $key => $metaLinkContainer) {
-            foreach ($metaLinkContainer->data as $metaLink) {
-                $this->addToMetaContainer($metaLink, $key);
-            }
-        }
-        foreach ($metaBundle->metaScriptContainer as $key => $metaScriptContainer) {
-            foreach ($metaScriptContainer->data as $metaScript) {
-                $this->addToMetaContainer($metaScript, $key);
-            }
-        }
-        foreach ($metaBundle->metaJsonLdContainer as $key => $metaJsonLdContainer) {
-            foreach ($metaJsonLdContainer->data as $metaJsonLd) {
-                $this->addToMetaContainer($metaJsonLd, $key);
-            }
-        }
-        foreach ($metaBundle->metaTitleContainer as $key => $metaTitleContainer) {
-            foreach ($metaTitleContainer->data as $metaTitle) {
-                $this->addToMetaContainer($metaTitle, $key);
             }
         }
     }

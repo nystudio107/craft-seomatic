@@ -14,6 +14,8 @@ namespace nystudio107\seomatic\models;
 use Craft;
 use craft\base\Model;
 use craft\validators\DateTimeValidator;
+use nystudio107\seomatic\base\MetaContainer;
+use nystudio107\seomatic\base\MetaContainerInterface;
 
 /**
  * @author    nystudio107
@@ -86,29 +88,9 @@ class MetaBundle extends Model
     public $metaSitemapVars;
 
     /**
-     * @var MetaTagContainer[]
+     * @var MetaContainer[]
      */
-    public $metaTagContainer;
-
-    /**
-     * @var MetaLinkContainer[]
-     */
-    public $metaLinkContainer;
-
-    /**
-     * @var MetaScriptContainer[]
-     */
-    public $metaScriptContainer;
-
-    /**
-     * @var MetaJsonLdContainer[]
-     */
-    public $metaJsonLdContainer;
-
-    /**
-     * @var MetaTitleContainer[]
-     */
-    public $metaTitleContainer;
+    public $metaContainers;
 
     /**
      * @var array
@@ -171,41 +153,25 @@ class MetaBundle extends Model
             $this->metaSitemapVars = MetaSitemapVars::create($metaSitemapVars);
         }
         // Meta containers
-        if (!empty($this->metaTagContainer)) {
-            $metaTagContainers = json_decode($this->metaTagContainer, true);
-            $this->metaTagContainer = [];
-            foreach ($metaTagContainers as $key => $metaTagContainer) {
-                $this->metaTagContainer[$key] = MetaTagContainer::create($metaTagContainer);
+        if (!empty($this->metaContainers)) {
+            $metaContainers = json_decode($this->metaContainers, true);
+            $this->metaContainers = [];
+            /**  @var MetaContainer $metaContainer */
+            foreach ($metaContainers as $key => $metaContainer) {
+                /** @var MetaContainer $containerClass */
+                $containerClass = $metaContainer['class'];
+                $this->metaContainers[$key] = $containerClass::create($metaContainer);
             }
         }
-        if (!empty($this->metaLinkContainer)) {
-            $metaLinkContainers = json_decode($this->metaLinkContainer, true);
-            $this->metaLinkContainer = [];
-            foreach ($metaLinkContainers as $key => $metaLinkContainer) {
-                $this->metaLinkContainer[$key] = MetaLinkContainer::create($metaLinkContainer);
+        // Redirects container
+        if (!empty($this->redirectsContainer)) {
+            $redirectsContainers = json_decode($this->redirectsContainer, true);
+            $this->redirectsContainer = [];
+            foreach ($redirectsContainers as $redirectsContainer) {
+                $this->redirectsContainer[] = RedirectsContainer::create($redirectsContainer);
             }
         }
-        if (!empty($this->metaScriptContainer)) {
-            $metaScriptContainers = json_decode($this->metaScriptContainer, true);
-            $this->metaScriptContainer = [];
-            foreach ($metaScriptContainers as $key => $metaScriptContainer) {
-                $this->metaScriptContainer[$key] = MetaScriptContainer::create($metaScriptContainer);
-            }
-        }
-        if (!empty($this->metaJsonLdContainer)) {
-            $metaJsonLdContainers = json_decode($this->metaJsonLdContainer, true);
-            $this->metaJsonLdContainer = [];
-            foreach ($metaJsonLdContainers as $key => $metaJsonLdContainer) {
-                $this->metaJsonLdContainer[$key] = MetaJsonLdContainer::create($metaJsonLdContainer);
-            }
-        }
-        if (!empty($this->metaTitleContainer)) {
-            $metaTitleContainers = json_decode($this->metaTitleContainer, true);
-            $this->metaTitleContainer = [];
-            foreach ($metaTitleContainers as $key => $metaTitleContainer) {
-                $this->metaTitleContainer[$key] = MetaTitleContainer::create($metaTitleContainer);
-            }
-        }
+        // Frontend templates
         if (!empty($this->frontendTemplatesContainer)) {
             $frontendTemplatesContainers = json_decode($this->frontendTemplatesContainer, true);
             $this->frontendTemplatesContainer = [];
