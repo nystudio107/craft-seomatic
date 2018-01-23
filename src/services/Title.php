@@ -44,9 +44,12 @@ class Title extends MetaService implements MetaServiceInterface
     /**
      * @inheritdoc
      */
-    public function create($config = []): MetaTitle
+    public function create($config = [], $add = true): MetaTitle
     {
         $metaItem = MetaTitle::create($config);
+        if ($add && !empty($metaItem)) {
+            $this->add($metaItem);
+        }
 
         return $metaItem;
     }

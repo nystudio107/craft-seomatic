@@ -44,9 +44,12 @@ class Link extends MetaService implements MetaServiceInterface
     /**
      * @inheritdoc
      */
-    public function create($config = []): MetaLink
+    public function create($config = [], $add = true): MetaLink
     {
         $metaItem = MetaLink::create($config);
+        if ($add && !empty($metaItem)) {
+            $this->add($metaItem);
+        }
 
         return $metaItem;
     }

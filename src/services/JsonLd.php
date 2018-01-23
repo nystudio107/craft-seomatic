@@ -48,13 +48,16 @@ class JsonLd extends MetaService implements MetaServiceInterface
     /**
      * @inheritdoc
      */
-    public function create($config = []): MetaJsonLd
+    public function create($config = [], $add = true): MetaJsonLd
     {
         $type = self::DEFAULT_TYPE;
         if (!empty($config['type'])) {
             $type = ArrayHelper::remove($config, 'type');
         }
         $metaItem = MetaJsonLd::create($type, $config);
+        if ($add && !empty($metaItem)) {
+            $this->add($metaItem);
+        }
 
         return $metaItem;
     }

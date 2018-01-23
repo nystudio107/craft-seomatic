@@ -24,27 +24,28 @@ interface MetaServiceInterface
     /**
      * Get a meta item of a given key
      *
-     * @param string $key
-     * @param string $handle
+     * @param string $key    The key of the MetaItem to fetch
+     * @param string $handle An optional handle to for the MetaContainer to search (defaults to all)
      *
-     * @return MetaItem
+     * @return null|MetaItem
      */
     public function get(string $key, string $handle = '');
 
     /**
      * Create a meta item
      *
-     * @param array $config
+     * @param array $config The configuration array used to create the MetaItem
+     * @param bool  $add    Whether to add the newly created tag to a container
      *
-     * @return MetaItem
+     * @return null|MetaItem
      */
-    public function create($config = []);
+    public function create($config = [], $add = true);
 
     /**
      * Add a meta item to its appropriate container
      *
-     * @param MetaItem $metaItem
-     * @param string $handle
+     * @param MetaItem $metaItem The MetaItem to add
+     * @param string   $handle   An optional container handle to add the MetaItem to (defaults to GENERAL)
      *
      * @return void
      */
@@ -53,9 +54,9 @@ interface MetaServiceInterface
     /**
      * Get the container for these meta items
      *
-     * @param string $handle
+     * @param string $handle An optional container handle to get (defaults to GENERAL)
      *
-     * @return MetaContainer
+     * @return null|MetaContainer The found MetaContainer
      */
     public function container(string $handle = '');
 }

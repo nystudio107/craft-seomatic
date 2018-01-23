@@ -52,13 +52,16 @@ class Tag extends MetaService implements MetaServiceInterface
     /**
      * @inheritdoc
      */
-    public function create($config = []): MetaTag
+    public function create($config = [], $add = true): MetaTag
     {
         $type = self::DEFAULT_TYPE;
         if (!empty($config['type'])) {
             $type = ArrayHelper::remove($config, 'type');
         }
         $metaItem = MetaTag::create($type, $config);
+        if ($add && !empty($metaItem)) {
+            $this->add($metaItem);
+        }
 
         return $metaItem;
     }

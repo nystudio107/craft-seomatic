@@ -44,9 +44,12 @@ class Script extends MetaService implements MetaServiceInterface
     /**
      * @inheritdoc
      */
-    public function create($config = []): MetaScript
+    public function create($config = [], $add = true): MetaScript
     {
         $metaItem = MetaScript::create($config);
+        if ($add && !empty($metaItem)) {
+            $this->add($metaItem);
+        }
 
         return $metaItem;
     }
