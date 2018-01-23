@@ -23,8 +23,8 @@ return [
         'name'         => 'General',
         'description'  => 'Script Tags',
         'handle'       => ScriptService::GENERAL_HANDLE,
+        'class'        => (string)MetaScriptContainer::class,
         'include'      => 'true',
-        'class'        => MetaScriptContainer::class,
         'dependencies' => [
         ],
         'data'         => [

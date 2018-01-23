@@ -23,7 +23,7 @@ return [
         'name'         => 'General',
         'description'  => 'General Meta Tags',
         'handle'       => TagService::GENERAL_HANDLE,
-        'class'        => MetaTagContainer::class,
+        'class'        => (string)MetaTagContainer::class,
         'include'      => 'true',
         'dependencies' => [
         ],

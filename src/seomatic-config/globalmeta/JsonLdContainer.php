@@ -23,7 +23,7 @@ return [
         'name'         => 'General',
         'description'  => 'JsonLd Tags',
         'handle'       => JsonLdService::GENERAL_HANDLE,
-        'class'        => MetaJsonLdContainer::class,
+        'class'        => (string)MetaJsonLdContainer::class,
         'include'      => 'true',
         'dependencies' => [
         ],

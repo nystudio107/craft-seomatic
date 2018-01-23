@@ -23,7 +23,7 @@ return [
         'name'         => 'General',
         'description'  => 'Meta Title Tag',
         'handle'       => TitleService::GENERAL_HANDLE,
-        'class'        => MetaTitleContainer::class,
+        'class'        => (string)MetaTitleContainer::class,
         'include'      => 'true',
         'dependencies' => [
         ],

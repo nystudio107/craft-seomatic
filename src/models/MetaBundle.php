@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\models;
 
+use Craft;
 use craft\base\Model;
 use craft\validators\DateTimeValidator;
 

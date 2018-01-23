@@ -23,7 +23,7 @@ return [
         'name'         => 'General',
         'description'  => 'Link Tags',
         'handle'       => LinkService::GENERAL_HANDLE,
-        'class'        => MetaLinkContainer::class,
+        'class'        => (string)MetaLinkContainer::class,
         'include'      => 'true',
         'dependencies' => [
         ],

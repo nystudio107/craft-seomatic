@@ -10,6 +10,7 @@
  */
 
 use nystudio107\seomatic\services\FrontendTemplates;
+use nystudio107\seomatic\models\FrontendTemplateContainer;
 
 /**
  * @author    nystudio107
@@ -21,6 +22,7 @@ return [
     'name'        => 'Frontend Templates',
     'description' => 'Templates that are rendered on the frontend',
     'handle'      => FrontendTemplates::FRONTENDTEMPLATES_CONTAINER,
+    'class'       => (string)FrontendTemplateContainer::class,
     'include'     => 'true',
     'data'        => [
         FrontendTemplates::HUMANS_TXT_HANDLE => [
