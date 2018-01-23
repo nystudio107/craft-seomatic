@@ -230,6 +230,11 @@ class Install extends Migration
      */
     protected function insertDefaultData()
     {
+        // Invalidate our data caches
+        Seomatic::$plugin->frontendTemplates->invalidateCaches();
+        Seomatic::$plugin->metaContainers->invalidateCaches();
+        Seomatic::$plugin->sitemaps->invalidateCaches();
+
         // Insert our default data
         Seomatic::$plugin->metaBundles->createGlobalMetaBundles();
         Seomatic::$plugin->metaBundles->createContentMetaBundles();
