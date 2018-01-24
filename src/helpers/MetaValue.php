@@ -59,7 +59,7 @@ class MetaValue
     {
         // If it's a string, and there are no dynamic tags, just return the template
         if (is_string($metaValue) && !StringHelper::contains($metaValue, '{')) {
-            return self::parseMetaString($metaValue);
+            return self::parseMetaString($metaValue) ?? $metaValue;
         }
         // Parse it repeatedly until it doesn't change
         $tries = self::MAX_PARSE_TRIES;
@@ -67,7 +67,7 @@ class MetaValue
         while ($metaValue != $value && $tries) {
             $tries--;
             $value = $metaValue;
-            $metaValue = self::parseMetaString($value);
+            $metaValue = self::parseMetaString($value) ?? $metaValue;
         }
 
         return $metaValue;
@@ -134,7 +134,7 @@ class MetaValue
     /**
      * @param string $metaValue
      *
-     * @return string
+     * @return null|string
      */
     protected static function parseMetaString($metaValue)
     {
@@ -155,6 +155,8 @@ class MetaValue
                     ['template' => $metaValue, 'error' => $e->getMessage()]
                 );
                 Craft::error($metaValue, __METHOD__);
+
+                return null;
             }
         }
         // Handle being passed in an object
