@@ -16,6 +16,7 @@ use Craft;
 use craft\helpers\UrlHelper;
 use craft\web\Controller;
 
+use yii\base\InvalidConfigException;
 use yii\web\Response;
 
 /**
@@ -25,7 +26,7 @@ use yii\web\Response;
  */
 class SeomaticSettingsController extends Controller
 {
-    const DOCUMENTATION_URL = 'https://github.com/nystudio107/craft3-seomatic/wiki';
+    const DOCUMENTATION_URL = 'https://github.com/nystudio107/craft-seomatic/wiki';
 
     // Properties
     // =========================================================================
@@ -44,14 +45,17 @@ class SeomaticSettingsController extends Controller
      *
      * @param array $variables
      *
-     * @return Response The rendering result
+     * @return Response The rendered result
      */
     public function actionContent(array $variables = []): Response
     {
         $pluginName = Seomatic::$settings->pluginName;
         $templateTitle = Craft::t('seomatic', 'Content SEO');
         // Asset bundle
-        Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
+        try {
+            Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
+        } catch (InvalidConfigException $e) {
+        }
         $variables['baseAssetUrl'] = Craft::$app->assetManager->getPublishedUrl(
             '@nystudio107/seomatic/assetbundles/seomatic/dist',
             true
@@ -82,14 +86,17 @@ class SeomaticSettingsController extends Controller
      *
      * @param array $variables
      *
-     * @return Response The rendering result
+     * @return Response The rendered result
      */
     public function actionGlobal(array $variables = []): Response
     {
         $pluginName = Seomatic::$settings->pluginName;
         $templateTitle = Craft::t('seomatic', 'Global SEO');
         // Asset bundle
-        Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
+        try {
+            Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
+        } catch (InvalidConfigException $e) {
+        }
         $variables['baseAssetUrl'] = Craft::$app->assetManager->getPublishedUrl(
             '@nystudio107/seomatic/assetbundles/seomatic/dist',
             true
@@ -113,6 +120,48 @@ class SeomaticSettingsController extends Controller
         $variables['metaBundles'] = Seomatic::$plugin->metaBundles->getContentMetaBundles(false);
         // Render the template
         return $this->renderTemplate('seomatic/settings/global', $variables);
+    }
+
+    /**
+     * Settings
+     *
+     * @param array $variables
+     *
+     * @return Response The rendered result
+     */
+    public function actionSettings(array $variables = []): Response
+    {
+        $pluginName = Seomatic::$settings->pluginName;
+        $templateTitle = Craft::t('seomatic', 'Settings');
+        // Asset bundle
+        try {
+            Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
+        } catch (InvalidConfigException $e) {
+        }
+        $variables['baseAssetUrl'] = Craft::$app->assetManager->getPublishedUrl(
+            '@nystudio107/seomatic/assetbundles/seomatic/dist',
+            true
+        );
+        // Basic variables
+        $variables['fullPageForm'] = false;
+        $variables['docsUrl'] = self::DOCUMENTATION_URL;
+        $variables['pluginName'] = Seomatic::$settings->pluginName;
+        $variables['title'] = $pluginName . ' ' . $templateTitle;
+        $variables['crumbs'] = [
+            [
+                'label' => $pluginName,
+                'url' => UrlHelper::cpUrl('seomatic'),
+            ],
+            [
+                'label' => $templateTitle,
+                'url' => UrlHelper::cpUrl('seomatic'),
+            ],
+        ];
+        $variables['selectedSubnavItem'] = 'settings';
+        $variables['settings'] = Seomatic::$settings;
+        $variables['metaBundles'] = Seomatic::$plugin->metaBundles->getContentMetaBundles(false);
+        // Render the template
+        return $this->renderTemplate('seomatic/settings/settings', $variables);
     }
 
 }

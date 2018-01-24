@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic;
 
+use craft\web\Controller;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\models\Settings;
@@ -79,14 +80,18 @@ class Seomatic extends Plugin
     const SEOMATIC_HANDLE = 'Seomatic';
 
     const ADMIN_CP_SECTIONS = [
-        'content' => [
+        'content'  => [
             'label' => 'Content SEO',
-            'url' => 'seomatic/content',
+            'url'   => 'seomatic/content',
         ],
-        'global' => [
+        'global'   => [
             'label' => 'Global SEO',
-            'url' => 'seomatic/global',
-        ]
+            'url'   => 'seomatic/global',
+        ],
+        'settings' => [
+            'label' => 'settings',
+            'url'   => 'seomatic/settings',
+        ],
     ];
 
     // Static Properties
@@ -202,6 +207,27 @@ class Seomatic extends Plugin
         if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
             $this->handleAdminCpRequest();
         }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSettingsResponse()
+    {
+        return Craft::$app->runAction('seomatic/seomatic-settings/settings');
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getCpNavItem()
+    {
+        $navItem = parent::getCpNavItem();
+        $navItem = array_merge($navItem, [
+            'subnav' => self::ADMIN_CP_SECTIONS,
+        ]);
+
+        return $navItem;
     }
 
     // Protected Methods
@@ -413,9 +439,10 @@ class Seomatic extends Plugin
                 $event->rules = array_merge(
                     $event->rules,
                     [
-                        'seomatic' => 'seomatic/seomatic-settings/content',
-                        'seomatic/content' => 'seomatic/seomatic-settings/content',
-                        'seomatic/global' => 'seomatic/seomatic-settings/global',
+                        'seomatic'          => 'seomatic/seomatic-settings/content',
+                        'seomatic/content'  => 'seomatic/seomatic-settings/content',
+                        'seomatic/global'   => 'seomatic/seomatic-settings/global',
+                        'seomatic/settings' => 'seomatic/seomatic-settings/settings',
                     ]
                 );
             }
@@ -431,24 +458,24 @@ class Seomatic extends Plugin
                 );
                 // Frontend template caches
                 $event->options[] = [
-                    'key' => 'seomatic-frontendtemplate-caches',
-                    'label' => Craft::t('seomatic', 'SEOmatic frontend template caches'),
+                    'key'    => 'seomatic-frontendtemplate-caches',
+                    'label'  => Craft::t('seomatic', 'SEOmatic frontend template caches'),
                     'action' => function () {
                         Seomatic::$plugin->frontendTemplates->invalidateCaches();
                     },
                 ];
                 // Meta bundle caches
                 $event->options[] = [
-                    'key' => 'seomatic-metabundle-caches',
-                    'label' => Craft::t('seomatic', 'SEOmatic metadata caches'),
+                    'key'    => 'seomatic-metabundle-caches',
+                    'label'  => Craft::t('seomatic', 'SEOmatic metadata caches'),
                     'action' => function () {
                         Seomatic::$plugin->metaContainers->invalidateCaches();
                     },
                 ];
                 // Sitemap caches
                 $event->options[] = [
-                    'key' => 'seomatic-sitemap-caches',
-                    'label' => Craft::t('seomatic', 'SEOmatic sitemap caches'),
+                    'key'    => 'seomatic-sitemap-caches',
+                    'label'  => Craft::t('seomatic', 'SEOmatic sitemap caches'),
                     'action' => function () {
                         Seomatic::$plugin->sitemaps->invalidateCaches();
                     },
@@ -492,70 +519,9 @@ class Seomatic extends Plugin
     /**
      * @inheritdoc
      */
-    public function getCpNavItem()
-    {
-        $navItem = parent::getCpNavItem();
-        $navItem = array_merge($navItem, [
-            'subnav' => self::ADMIN_CP_SECTIONS,
-        ]);
-
-        return $navItem;
-    }
-
-    /**
-     * @inheritdoc
-     */
     protected function createSettingsModel()
     {
         return new Settings();
     }
 
-    /**
-     * @inheritdoc
-     */
-    protected function settingsHtml(): string
-    {
-        // Render our settings template
-        return Craft::$app->view->renderTemplate(
-            'seomatic/settings',
-            [
-                'settings' => $this->getSettings(),
-            ]
-        );
-    }
 }
-
-/*
-        $someSchema = JsonLd::create("Article");
-        $someSchema->name = "Andrew";
-        $someSchema->url = "https://nystudio107.com";
-        $someSchema->description = "This is some description thing";
-
-        $someOtherSchema = JsonLd::create("Person", [
-            "name" => "Polly",
-            "description" => "wife",
-            "url" => "https://nystudio107.com",
-            ]);
-
-        $someMoreSchema = JsonLd::create("Person");
-        $someMoreSchema->attributes = [
-            "name" => "Kumba",
-            "description" => "dog",
-            "url" => "http://woof.com",
-            ];
-
-        $someSchema->author = [$someOtherSchema, $someOtherSchema];
-        $someSchema->publisher = $someMoreSchema;
-        $someJson = $someSchema->render();
-        if ($someSchema->validate())
-        {
-        }
-        else
-        {
-        //    Craft::dd($someSchema->errors);
-        }
-        $stuff = (string)$someSchema;
-        Craft::dump($stuff);
-        Craft::dump($someSchema->getSchemaTypeDescription());
-        Craft::dd($someJson);
-        */

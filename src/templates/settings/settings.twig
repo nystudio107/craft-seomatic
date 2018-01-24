@@ -1,0 +1,35 @@
+{% requireAdmin %}
+
+{% set fullPageForm = true %}
+
+{% extends "_layouts/cp" %}
+
+{% import "_includes/forms" as forms %}
+
+{% block content %}
+
+    <input type="hidden" name="action" value="seomatic/saveContent" />
+    <input type="hidden" name="redirect" value="seomatic/content" />
+
+    {{ redirectInput('settings/plugins') }}
+    {% namespace 'settings' %}
+        {{ forms.textField({
+            'label': 'Plugin name',
+            'instructions': 'The public-facing name of the plugin',
+            'id': 'pluginName',
+            'name': 'pluginName',
+            'value': settings['pluginName'],
+            'warning': false
+        }) }}
+
+        {{ forms.textField({
+            'label': 'devMode <title> prefix',
+            'instructions': 'If `devMode` is on, prefix the <title> with this string',
+            'id': 'devModeTitlePrefix',
+            'name': 'devModeTitlePrefix',
+            'value': settings['devModeTitlePrefix'],
+            'warning': false
+        }) }}
+    {% endnamespace %}
+{% endblock %}
+
