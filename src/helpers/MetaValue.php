@@ -57,36 +57,17 @@ class MetaValue
      */
     public static function parseString($metaValue)
     {
-        // Handle being passed in a string
-        if (is_string($metaValue)) {
-            // Resolve it as an alias
-            $metaValue = Craft::getAlias($metaValue, false);
-            // If there are no dynamic tags, just return the template
-            if (!StringHelper::contains($metaValue, '{')) {
-                return $metaValue;
-            }
-            try {
-                $metaValue = self::$view->renderObjectTemplate($metaValue, self::$templateObjectVars);
-            } catch (\Exception $e) {
-                $metaValue = Craft::t(
-                    'seomatic',
-                    'Error rendering `{template}` -> {error}',
-                    ['template' => $metaValue, 'error' => $e->getMessage()]
-                );
-                Craft::error($metaValue, __METHOD__);
-            }
+        // If it's a string, and there are no dynamic tags, just return the template
+        if (is_string($metaValue) && !StringHelper::contains($metaValue, '{')) {
+            return self::parseMetaString($metaValue);
         }
-        // Handle being passed in an object
-        if (is_object($metaValue)) {
-            if ($metaValue instanceof Asset) {
-                /** @var Asset $metaValue */
-                return $metaValue->uri;
-            }
-            return strval($metaValue);
-        }
-        // Handle being passed in an array
-        if (is_array($metaValue)) {
-            return implode(' ', $metaValue);
+        // Parse it repeatedly until it doesn't change
+        $tries = self::MAX_PARSE_TRIES;
+        $value = '';
+        while ($metaValue != $value && $tries) {
+            $tries--;
+            $value = $metaValue;
+            $metaValue = self::parseMetaString($value);
         }
 
         return $metaValue;
@@ -98,16 +79,8 @@ class MetaValue
     public static function parseArray(array &$metaArray)
     {
         foreach ($metaArray as $key => $value) {
-            if ($value !== null && is_string($value)) {
-                $newValue = '';
-                // Parse it repeatedly until it doesn't change
-                $tries = self::MAX_PARSE_TRIES;
-                while ($newValue != $value && $tries) {
-                    $tries--;
-                    $value = $metaArray[$key];
-                    $metaArray[$key] = self::parseString($value);
-                    $newValue = $metaArray[$key];
-                }
+            if ($value != null) {
+                $metaArray[$key] = self::parseString($value);
             }
         }
 
@@ -154,4 +127,50 @@ class MetaValue
 
         self::$view = Seomatic::$view;
     }
+
+    // Protected Methods
+    // =========================================================================
+
+    /**
+     * @param string $metaValue
+     *
+     * @return string
+     */
+    protected static function parseMetaString($metaValue)
+    {
+        // Handle being passed in a string
+        if (is_string($metaValue)) {
+            // Resolve it as an alias
+            $metaValue = Craft::getAlias($metaValue, false);
+            // If there are no dynamic tags, just return the template
+            if (!StringHelper::contains($metaValue, '{')) {
+                return $metaValue;
+            }
+            try {
+                $metaValue = self::$view->renderObjectTemplate($metaValue, self::$templateObjectVars);
+            } catch (\Exception $e) {
+                $metaValue = Craft::t(
+                    'seomatic',
+                    'Error rendering `{template}` -> {error}',
+                    ['template' => $metaValue, 'error' => $e->getMessage()]
+                );
+                Craft::error($metaValue, __METHOD__);
+            }
+        }
+        // Handle being passed in an object
+        if (is_object($metaValue)) {
+            if ($metaValue instanceof Asset) {
+                /** @var Asset $metaValue */
+                return $metaValue->uri;
+            }
+            return strval($metaValue);
+        }
+        // Handle being passed in an array
+        if (is_array($metaValue)) {
+            return implode(' ', $metaValue);
+        }
+
+        return $metaValue;
+    }
+
 }
