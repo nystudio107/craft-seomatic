@@ -59,6 +59,8 @@ class MetaValue
     {
         // Handle being passed in a string
         if (is_string($metaValue)) {
+            // Resolve it as an alias
+            $metaValue = Craft::getAlias($metaValue, false);
             // If there are no dynamic tags, just return the template
             if (!StringHelper::contains($metaValue, '{')) {
                 return $metaValue;
