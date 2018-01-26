@@ -239,7 +239,8 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                             foreach ($matrixBlocks as $matrixBlock) {
                                 $assetFields = FieldHelper::matrixFieldsOfType($matrixBlock, AssetsField::className());
                                 foreach ($assetFields as $assetField) {
-                                    foreach ($matrixBlock[$assetField] as $asset) {
+                                    /** @var MatrixBlock $matrixBlock */
+                                    foreach ($matrixBlock[$assetField]->all() as $asset) {
                                         $this->assetSitemapItem($asset, $metaBundle, $lines);
                                     }
                                 }
