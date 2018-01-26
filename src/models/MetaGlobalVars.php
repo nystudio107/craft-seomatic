@@ -69,6 +69,11 @@ class MetaGlobalVars extends FluentModel
     /**
      * @var string
      */
+    public $seoImageDescription;
+
+    /**
+     * @var string
+     */
     public $canonicalUrl;
 
     /**
@@ -95,6 +100,11 @@ class MetaGlobalVars extends FluentModel
      * @var string
      */
     public $ogImage;
+
+    /**
+     * @var string
+     */
+    public $ogImageDescription;
 
     /**
      * @var string
@@ -126,6 +136,11 @@ class MetaGlobalVars extends FluentModel
      */
     public $twitterImage;
 
+    /**
+     * @var string
+     */
+    public $twitterImageDescription;
+
     // Public Methods
     // =========================================================================
 
@@ -152,14 +167,17 @@ class MetaGlobalVars extends FluentModel
                     'seoTitle',
                     'seoDescription',
                     'seoImage',
+                    'seoImageDescription',
                     'canonicalUrl',
                     'robots',
                     'ogTitle',
                     'ogDescription',
                     'ogImage',
+                    'ogImageDescription',
                     'twitterTitle',
                     'twitterDescription',
                     'twitterImage',
+                    'twitterImageDescription',
                 ],
                 'string',
             ],
