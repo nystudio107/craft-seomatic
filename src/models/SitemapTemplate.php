@@ -21,6 +21,7 @@ use Craft;
 use craft\elements\Asset;
 use craft\elements\Entry;
 use craft\elements\Category;
+use craft\elements\MatrixBlock;
 use craft\fields\Assets as AssetsField;
 use craft\fields\Matrix as MatrixField;
 use craft\helpers\UrlHelper;
@@ -260,10 +261,11 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                         $matrixFields = FieldHelper::fieldsOfType($element, MatrixField::className());
                         foreach ($matrixFields as $matrixField) {
                             $matrixBlocks = $element[$matrixField]->all();
+                            /** @var MatrixBlock $matrixBlock */
                             foreach ($matrixBlocks as $matrixBlock) {
                                 $assetFields = FieldHelper::matrixFieldsOfType($matrixBlock, AssetsField::className());
                                 foreach ($assetFields as $assetField) {
-                                    foreach ($matrixBlock[$assetField] as $asset) {
+                                    foreach ($matrixBlock[$assetField]->all() as $asset) {
                                         $this->assetFilesSitemapLink($asset, $metaBundle, $lines);
                                     }
                                 }
