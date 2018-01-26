@@ -9,6 +9,7 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
+use nystudio107\seomatic\helpers\Dependency;
 use nystudio107\seomatic\models\MetaTagContainer;
 use nystudio107\seomatic\services\Tag as TagService;
 
@@ -19,7 +20,7 @@ use nystudio107\seomatic\services\Tag as TagService;
  */
 
 return [
-    MetaTagContainer::CONTAINER_TYPE.TagService::GENERAL_HANDLE  => [
+    MetaTagContainer::CONTAINER_TYPE . TagService::GENERAL_HANDLE  => [
         'name'         => 'General',
         'description'  => 'General Meta Tags',
         'handle'       => TagService::GENERAL_HANDLE,
@@ -72,17 +73,14 @@ return [
             ],
         ],
     ],
-    MetaTagContainer::CONTAINER_TYPE.TagService::FACEBOOK_HANDLE => [
+    MetaTagContainer::CONTAINER_TYPE . TagService::FACEBOOK_HANDLE => [
         'name'         => 'Facebook',
         'description'  => 'Facebook OpenGraph Meta Tags',
         'handle'       => TagService::FACEBOOK_HANDLE,
         'class'        => (string)MetaTagContainer::class,
         'include'      => 'true',
         'dependencies' => [
-            [
-                'type' => 'config',
-                'keys' => ['facebookProfileId', 'facebookAppId'],
-            ],
+            Dependency::CONFIG_DEPENDENCY => ['facebookProfileId', 'facebookAppId'],
         ],
         'data'         => [
             'fb:profile_id'  => [
@@ -113,7 +111,7 @@ return [
                 'name'      => '',
                 'property'  => 'og:type',
             ],
-            'og:url'        => [
+            'og:url'         => [
                 'charset'   => '',
                 'content'   => '{seomatic.meta.canonicalUrl}',
                 'httpEquiv' => '',
@@ -141,19 +139,26 @@ return [
                 'name'      => '',
                 'property'  => 'og:image',
             ],
+            'og:image:alt'   => [
+                'dependencies' => [
+                    Dependency::TAG_DEPENDENCY => ['og:image'],
+                ],
+                'charset'   => '',
+                'content'   => '{seomatic.meta.ogImageDescription}',
+                'httpEquiv' => '',
+                'name'      => '',
+                'property'  => 'og:image:alt',
+            ],
         ],
     ],
-    MetaTagContainer::CONTAINER_TYPE.TagService::TWITTER_HANDLE  => [
+    MetaTagContainer::CONTAINER_TYPE . TagService::TWITTER_HANDLE  => [
         'name'         => 'Twitter',
         'description'  => 'Twitter Card Meta Tags',
         'handle'       => TagService::TWITTER_HANDLE,
         'include'      => 'true',
         'class'        => (string)MetaTagContainer::class,
         'dependencies' => [
-            [
-                'type' => 'config',
-                'keys' => ['twitterHandle'],
-            ],
+            Dependency::CONFIG_DEPENDENCY => ['twitterHandle'],
         ],
         'data'         => [
             'twitter:card'        => [
@@ -163,16 +168,22 @@ return [
                 'name'      => 'twitter:card',
             ],
             'twitter:site'        => [
-                'charset'   => '',
-                'content'   => '@{seomatic.config.twitterHandle}',
-                'httpEquiv' => '',
-                'name'      => 'twitter:site',
+                'dependencies' => [
+                    Dependency::CONFIG_DEPENDENCY => ['twitterHandle'],
+                ],
+                'charset'      => '',
+                'content'      => '@{seomatic.config.twitterHandle}',
+                'httpEquiv'    => '',
+                'name'         => 'twitter:site',
             ],
             'twitter:creator'     => [
-                'charset'   => '',
-                'content'   => '@{seomatic.meta.twitterCreator}',
-                'httpEquiv' => '',
-                'name'      => 'twitter:creator',
+                'dependencies' => [
+                    Dependency::META_DEPENDENCY => ['twitterCreator'],
+                ],
+                'charset'      => '',
+                'content'      => '@{seomatic.meta.twitterCreator}',
+                'httpEquiv'    => '',
+                'name'         => 'twitter:creator',
             ],
             'twitter:title'       => [
                 'charset'   => '',
@@ -192,9 +203,18 @@ return [
                 'httpEquiv' => '',
                 'name'      => 'twitter:image',
             ],
+            'twitter:image:alt'       => [
+                'dependencies' => [
+                    Dependency::TAG_DEPENDENCY => ['twitter:image'],
+                ],
+                'charset'   => '',
+                'content'   => '{seomatic.meta.twitterImageDescription}',
+                'httpEquiv' => '',
+                'name'      => 'twitter:image',
+            ],
         ],
     ],
-    MetaTagContainer::CONTAINER_TYPE.TagService::MISC_HANDLE     => [
+    MetaTagContainer::CONTAINER_TYPE . TagService::MISC_HANDLE     => [
         'name'         => 'Miscellaneous',
         'description'  => 'Miscellaneous Meta Tags',
         'handle'       => TagService::MISC_HANDLE,

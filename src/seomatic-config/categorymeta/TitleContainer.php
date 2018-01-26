@@ -9,6 +9,7 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
+use nystudio107\seomatic\helpers\Dependency;
 use nystudio107\seomatic\models\MetaTitleContainer;
 use nystudio107\seomatic\services\Title as TitleService;
 
