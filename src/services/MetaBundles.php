@@ -586,7 +586,7 @@ class MetaBundles extends Component
                 'sourceSiteId' => $siteId,
             ]
         );
-        $metaBundle = new MetaBundle(ArrayHelper::merge(
+        $metaBundle = MetaBundle::create(ArrayHelper::merge(
             $baseConfig,
             $metaBundleDefaults
         ));
@@ -598,18 +598,20 @@ class MetaBundles extends Component
                 'sourceSiteId'     => $siteId,
             ]);
             if (!$metaBundleRecord) {
-                $metaBundleRecord = new MetaBundleRecord($metaBundle->getAttributes());
+                $metaBundleRecord = new MetaBundleRecord();
             }
-            $metaBundleRecord->save();
-            Craft::info(
-                'Meta bundle updated: '
-                .$metaBundle->sourceType
-                . ' id: '
-                .$metaBundle->sourceId
-                .' from siteId: '
-                .$metaBundle->sourceSiteId,
-                __METHOD__
-            );
+            $metaBundleRecord->setAttributes($metaBundle->getAttributes(), false);
+            if ($metaBundleRecord->save()) {
+                Craft::info(
+                    'Meta bundle updated: '
+                    .$metaBundle->sourceType
+                    . ' id: '
+                    .$metaBundle->sourceId
+                    .' from siteId: '
+                    .$metaBundle->sourceSiteId,
+                    __METHOD__
+                );
+            }
         } else {
             Craft::error(
                 'Meta bundle failed validation: '
@@ -680,7 +682,7 @@ class MetaBundles extends Component
                         'sourceDateUpdated'     => $dateUpdated,
                     ]
                 );
-                $metaBundle = new MetaBundle(ArrayHelper::merge(
+                $metaBundle = MetaBundle::create(ArrayHelper::merge(
                     $baseConfig,
                     $metaBundleDefaults
                 ));
@@ -688,23 +690,25 @@ class MetaBundles extends Component
                 if ($metaBundle->validate(null, true)) {
                     // Save it out to a record
                     $metaBundleRecord = MetaBundleRecord::findOne([
-                        'sourceBundleType' => $metaBundle->sourceType,
+                        'sourceBundleType' => self::SECTION_META_BUNDLE,
                         'sourceId'         => $metaBundle->sourceId,
                         'sourceSiteId'     => $metaBundle->sourceSiteId,
                     ]);
                     if (!$metaBundleRecord) {
-                        $metaBundleRecord = new MetaBundleRecord($metaBundle->getAttributes());
+                        $metaBundleRecord = new MetaBundleRecord();
                     }
-                    $metaBundleRecord->save();
-                    Craft::info(
-                        'Meta bundle updated: '
-                        .$metaBundle->sourceType
-                        . ' id: '
-                        .$metaBundle->sourceId
-                        .' from siteId: '
-                        .$metaBundle->sourceSiteId,
-                        __METHOD__
-                    );
+                    $metaBundleRecord->setAttributes($metaBundle->getAttributes(), false);
+                    if ($metaBundleRecord->save()) {
+                        Craft::info(
+                            'Meta bundle updated: '
+                            .$metaBundle->sourceType
+                            . ' id: '
+                            .$metaBundle->sourceId
+                            .' from siteId: '
+                            .$metaBundle->sourceSiteId,
+                            __METHOD__
+                        );
+                    }
                 } else {
                     Craft::error(
                         'Meta bundle failed validation: '
@@ -776,7 +780,7 @@ class MetaBundles extends Component
                         'sourceDateUpdated'     => $dateUpdated,
                     ]
                 );
-                $metaBundle = new MetaBundle(ArrayHelper::merge(
+                $metaBundle = MetaBundle::create(ArrayHelper::merge(
                     $baseConfig,
                     $metaBundleDefaults
                 ));
@@ -784,23 +788,25 @@ class MetaBundles extends Component
                 if ($metaBundle->validate(null, true)) {
                     // Save it out to a record
                     $metaBundleRecord = MetaBundleRecord::findOne([
-                        'sourceBundleType' => $metaBundle->sourceType,
+                        'sourceBundleType' => self::CATEGORYGROUP_META_BUNDLE,
                         'sourceId'         => $metaBundle->sourceId,
                         'sourceSiteId'     => $metaBundle->sourceSiteId,
                     ]);
                     if (!$metaBundleRecord) {
-                        $metaBundleRecord = new MetaBundleRecord($metaBundle->getAttributes());
+                        $metaBundleRecord = new MetaBundleRecord();
                     }
-                    $metaBundleRecord->save();
-                    Craft::info(
-                        'Meta bundle updated: '
-                        .$metaBundle->sourceType
-                        . ' id: '
-                        .$metaBundle->sourceId
-                        .' from siteId: '
-                        .$metaBundle->sourceSiteId,
-                        __METHOD__
-                    );
+                    $metaBundleRecord->setAttributes($metaBundle->getAttributes(), false);
+                    if ($metaBundleRecord->save()) {
+                        Craft::info(
+                            'Meta bundle updated: '
+                            .$metaBundle->sourceType
+                            . ' id: '
+                            .$metaBundle->sourceId
+                            .' from siteId: '
+                            .$metaBundle->sourceSiteId,
+                            __METHOD__
+                        );
+                    }
                 } else {
                     Craft::error(
                         'Meta bundle failed validation: '
