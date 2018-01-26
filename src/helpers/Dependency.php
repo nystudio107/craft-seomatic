@@ -24,8 +24,9 @@ class Dependency
     // Constants
     // =========================================================================
 
-    const CONFIG_TYPE = 'config';
-    const TAG_TYPE = 'tag';
+    const CONFIG_DEPENDENCY = 'config';
+    const META_DEPENDENCY = 'meta';
+    const TAG_DEPENDENCY = 'tag';
 
     // Static Methods
     // =========================================================================
@@ -37,22 +38,32 @@ class Dependency
             return true;
         }
         $settings = Seomatic::$settings;
-        foreach ($dependencies as $dependency) {
+        $globals = Seomatic::$seomaticVariable->meta;
+        foreach ($dependencies as $type => $keys) {
             $validates = false;
             // If any dependency key in the array validates, this this dependency validates
-            switch ($dependency['type']) {
+            switch ($type) {
                 // Handle config setting dependencies
-                case self::CONFIG_TYPE:
-                    foreach ($dependency['keys'] as $key) {
+                case self::CONFIG_DEPENDENCY:
+                    foreach ($keys as $key) {
                         // If any value is in the $settings[$key] it validates
                         if (!empty($settings[$key])) {
                             $validates = true;
                         }
                     }
                     break;
+                // Handle meta setting dependencies
+                case self::META_DEPENDENCY:
+                    foreach ($keys as $key) {
+                        // If any value is in the $globals[$key] it validates
+                        if (!empty($globals[$key])) {
+                            $validates = true;
+                        }
+                    }
+                    break;
                 // Handle tag dependencies
-                case self::TAG_TYPE:
-                    foreach ($dependency['keys'] as $key) {
+                case self::TAG_DEPENDENCY:
+                    foreach ($keys as $key) {
                         $meta = Seomatic::$plugin->metaContainers->getMetaItemByKey($key, '');
                         if (!empty($meta)) {
                             $options = $meta->tagAttributes();
