@@ -103,7 +103,7 @@ class MetaContainers extends Component
      * @param string|null $path
      * @param int|null    $siteId
      */
-    public function loadMetaContainers(string $path = '', int $siteId = null): void
+    public function loadMetaContainers(string $path = '', int $siteId = null)
     {
         // Avoid recursion
         if (!$this->loadingContainers) {
@@ -152,7 +152,7 @@ class MetaContainers extends Component
     /**
      * Include the meta containers
      */
-    public function includeMetaContainers(): void
+    public function includeMetaContainers()
     {
         if ($this->metaGlobalVars) {
             $this->metaGlobalVars->parseProperties();
@@ -166,6 +166,24 @@ class MetaContainers extends Component
                 $metaContainer->includeMetaData();
             }
         }
+    }
+
+    /**
+     * Prep all of the meta for preview purposes
+     *
+     * @param string   $path
+     * @param int|null $siteId
+     */
+    public function previewMetaContainers(string $path = '', int $siteId = null)
+    {
+        $this->loadMetaContainers($path, $siteId);
+        if ($this->metaGlobalVars) {
+            $this->metaGlobalVars->parseProperties();
+        }
+        if ($this->metaSitemapVars) {
+            $this->metaSitemapVars->parseProperties();
+        }
+        Seomatic::$seomaticVariable->init();
     }
 
     /**

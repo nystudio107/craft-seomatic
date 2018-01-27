@@ -42,7 +42,7 @@ class MetaTitleContainer extends MetaContainer
     /**
      * @inheritdoc
      */
-    public function includeMetaData(): void
+    public function includeMetaData()
     {
         if ($this->prepForInclusion()) {
             /** @var $metaTitleModel MetaTitle */
@@ -70,7 +70,7 @@ class MetaTitleContainer extends MetaContainer
     /**
      * @inheritdoc
      */
-    public function normalizeContainerData(): void
+    public function normalizeContainerData()
     {
         parent::normalizeContainerData();
 

@@ -69,7 +69,7 @@ class MetaJsonLdContainer extends MetaContainer
     /**
      * @inheritdoc
      */
-    public function includeMetaData(): void
+    public function includeMetaData()
     {
         if ($this->prepForInclusion()) {
             /** @var $metaJsonLdModel MetaJsonLd */
@@ -106,7 +106,7 @@ class MetaJsonLdContainer extends MetaContainer
     /**
      * @inheritdoc
      */
-    public function normalizeContainerData(): void
+    public function normalizeContainerData()
     {
         parent::normalizeContainerData();
 

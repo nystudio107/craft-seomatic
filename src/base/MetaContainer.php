@@ -80,14 +80,14 @@ abstract class MetaContainer extends SeomaticContainer implements MetaContainerI
     /**
      * @inheritdoc
      */
-    public function includeMetaData(): void
+    public function includeMetaData()
     {
     }
 
     /**
      * @inheritdoc
      */
-    public function normalizeContainerData(): void
+    public function normalizeContainerData()
     {
         parent::normalizeContainerData();
     }

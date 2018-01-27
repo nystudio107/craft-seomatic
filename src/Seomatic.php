@@ -89,7 +89,7 @@ class Seomatic extends Plugin
             'url'   => 'seomatic/global',
         ],
         'settings' => [
-            'label' => 'settings',
+            'label' => 'Settings',
             'url'   => 'seomatic/settings',
         ],
     ];
@@ -489,7 +489,7 @@ class Seomatic extends Plugin
             /** @var  $entry Entry */
             $entry = $context['entry'];
             if (!empty($entry) && !empty($entry->uri)) {
-                Seomatic::$plugin->metaContainers->loadMetaContainers($entry->uri, $entry->siteId);
+                Seomatic::$plugin->metaContainers->previewMetaContainers($entry->uri, $entry->siteId);
                 // Render our sidebar template
                 $html = Craft::$app->view->renderTemplate(
                     'seomatic/_sidebar'
@@ -505,7 +505,7 @@ class Seomatic extends Plugin
             /** @var  $category Category */
             $category = $context['category'];
             if (!empty($category) && !empty($category->uri)) {
-                Seomatic::$plugin->metaContainers->loadMetaContainers($category->uri, $category->siteId);
+                Seomatic::$plugin->metaContainers->previewMetaContainers($category->uri, $category->siteId);
                 // Render our sidebar template
                 $html = Craft::$app->view->renderTemplate(
                     'seomatic/_sidebar'

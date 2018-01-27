@@ -38,7 +38,7 @@ interface ContainerInterface
      * @param        $data
      * @param string $key
      */
-    public function addData($data, string $key): void;
+    public function addData($data, string $key);
 
     /**
      * Prepare the container's data for inclusion
@@ -62,5 +62,5 @@ interface ContainerInterface
      * This is called after container data is loaded, to allow it to be parsed,
      * models instantiated, etc.
      */
-    public function normalizeContainerData(): void;
+    public function normalizeContainerData();
 }

@@ -44,7 +44,7 @@ class FrontendTemplateContainer extends SeomaticContainer
     /**
      * @inheritdoc
      */
-    public function normalizeContainerData(): void
+    public function normalizeContainerData()
     {
         parent::normalizeContainerData();
 

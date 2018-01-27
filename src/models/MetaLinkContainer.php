@@ -42,7 +42,7 @@ class MetaLinkContainer extends MetaContainer
     /**
      * @inheritdoc
      */
-    public function includeMetaData(): void
+    public function includeMetaData()
     {
         if ($this->prepForInclusion()) {
             /** @var $metaLinkModel MetaLink */
@@ -66,7 +66,7 @@ class MetaLinkContainer extends MetaContainer
     /**
      * @inheritdoc
      */
-    public function normalizeContainerData(): void
+    public function normalizeContainerData()
     {
         parent::normalizeContainerData();
 

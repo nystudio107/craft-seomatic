@@ -66,7 +66,7 @@ abstract class Container extends Model implements ContainerInterface
     /**
      * @inheritdoc
      */
-    public function addData($data, string $key): void
+    public function addData($data, string $key)
     {
         $this->data[$key] = $data;
     }
@@ -90,7 +90,7 @@ abstract class Container extends Model implements ContainerInterface
     /**
      * @inheritdoc
      */
-    public function normalizeContainerData(): void
+    public function normalizeContainerData()
     {
         $this->class = (string)static::class;
     }

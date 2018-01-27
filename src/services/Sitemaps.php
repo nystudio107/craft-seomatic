@@ -146,7 +146,7 @@ class Sitemaps extends Component implements SitemapInterface
     /**
      * Submit the sitemap index to the search engine services
      */
-    public function submitSitemapIndex(): void
+    public function submitSitemapIndex()
     {
         // Submit the sitemap to each search engine
         foreach ($this::SEARCH_ENGINE_SUBMISSION_URLS as &$url) {

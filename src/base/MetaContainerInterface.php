@@ -24,7 +24,7 @@ interface MetaContainerInterface
     /**
      * Include the MetaItems in the container in the Yii View
      */
-    public function includeMetaData(): void;
+    public function includeMetaData();
 
     /**
      * Render the container's content as an array
