@@ -19,6 +19,8 @@ use Stringy\Stringy;
 
 use yii\helpers\Html;
 
+use Craft;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -122,4 +124,19 @@ class MetaTitle extends MetaItem
 
         return $html;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function renderAttributes($params = []): array
+    {
+        $attributes = [];
+        $title = $this->title;
+        if ($this->prepForRender($title)) {
+            $attributes = ['title' => $title];
+        }
+
+        return $attributes;
+    }
+
 }

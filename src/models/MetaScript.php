@@ -109,4 +109,19 @@ class MetaScript extends MetaItem
 
         return $html;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function renderAttributes($params = []): array
+    {
+        $attributes = [];
+
+        if ($this->prepForRender($options)) {
+            $attributes = ['script' => PluginTemplateHelper::renderPluginTemplate($this->templatePath, $this->vars)];
+        }
+
+        return $attributes;
+    }
+
 }

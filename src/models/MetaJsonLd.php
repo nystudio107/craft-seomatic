@@ -15,6 +15,7 @@ use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\JsonLd as JsonLdHelper;
 use nystudio107\seomatic\base\MetaItem;
 
+use craft\helpers\Json;
 use craft\helpers\Template;
 
 use yii\validators\UrlValidator;
@@ -282,6 +283,26 @@ class MetaJsonLd extends MetaItem
         }
 
         return $html;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function renderAttributes($params = []): array
+    {
+        $attributes = [];
+
+        $result = Json::decodeIfJson($this->render([
+            'renderRaw'        => true,
+            'renderScriptTags' => false,
+            'array'            => true,
+
+        ]));
+        if ($result !== false) {
+            $attributes = $result;
+        }
+
+        return $attributes;
     }
 
     /**

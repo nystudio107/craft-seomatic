@@ -180,4 +180,22 @@ class MetaTag extends MetaItem
 
         return $html;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function renderAttributes($params = []): array
+    {
+        $attributes = [];
+
+        $configs = $this->tagAttributesArray();
+        foreach ($configs as $config) {
+            if ($this->prepForRender($config)) {
+                ksort($config);
+                $attributes = array_merge($attributes, $config);
+            }
+        }
+
+        return $attributes;
+    }
 }

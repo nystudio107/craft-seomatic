@@ -45,30 +45,6 @@ class MetaJsonLdContainer extends MetaContainer
     /**
      * @inheritdoc
      */
-    public function renderArray($params = []): array
-    {
-        $htmlArray = [];
-
-        if ($this->prepForInclusion()) {
-            /** @var  $metaItemModel MetaJsonLd */
-            foreach ($this->data as $metaItemModel) {
-                // Render the resulting JSON-LD
-                $scenario = $this->scenario;
-                $this->setScenario('render');
-                $htmlArray[] = ArrayHelper::arrayFilterRecursive(
-                    $metaItemModel->toArray(),
-                    [ArrayHelper::class, 'unsetNullChildren']
-                );
-                $this->setScenario($scenario);
-            }
-        }
-
-        return $htmlArray;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function includeMetaData()
     {
         if ($this->prepForInclusion()) {

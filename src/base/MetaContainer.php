@@ -69,7 +69,7 @@ abstract class MetaContainer extends SeomaticContainer implements MetaContainerI
             /** @var  $metaItemModel MetaItem */
             foreach ($this->data as $metaItemModel) {
                 if ($metaItemModel->include) {
-                    $htmlArray[] = array_filter($metaItemModel->toArray());
+                    $htmlArray[$metaItemModel->key] = $metaItemModel->renderAttributes($params);
                 }
             }
         }

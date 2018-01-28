@@ -44,4 +44,14 @@ interface MetaItemInterface
      * @return string The rendered meta item
      */
     public function render($params = []): string;
+
+    /**
+     * Render the meta item as an array of attributes
+     *
+     * @param array $params
+     *
+     * @return array
+     */
+    public function renderAttributes($params = []): array;
+
 }

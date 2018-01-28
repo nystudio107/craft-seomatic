@@ -115,6 +115,16 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
     }
 
     /**
+     * @inheritdoc
+     */
+    public function renderAttributes($params = []): array
+    {
+        $attributes = [];
+
+        return $attributes;
+    }
+
+    /**
      * Add debug logging for the MetaItem
      *
      * @param string $errorLabel
