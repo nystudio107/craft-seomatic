@@ -38,7 +38,7 @@
         <div class="preview-column">
             <div class="displaypreview">
                 {% if seomatic.config.twitterHandle |length %}
-                    {% set lg = true %}
+                    {% set lg = false %}
                     {% if seomatic.meta.twitterCard == "summary_large_image" %}
                         {% set lg = true %}
                     {% endif %}
