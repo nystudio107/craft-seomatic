@@ -100,15 +100,15 @@ class MetaContainers extends Component
     /**
      * Load the meta containers
      *
-     * @param string|null $path
+     * @param string|null $uri
      * @param int|null    $siteId
      */
-    public function loadMetaContainers(string $path = '', int $siteId = null)
+    public function loadMetaContainers(string $uri = '', int $siteId = null)
     {
         // Avoid recursion
         if (!$this->loadingContainers) {
             $this->loadingContainers = true;
-            $this->setMatchedElement($path, $siteId);
+            $this->setMatchedElement($uri, $siteId);
             // Get the cache tag for the matched meta bundle
             $metaBundle = $this->getMatchedMetaBundle();
             $metaBundleSourceId = "";
@@ -123,15 +123,15 @@ class MetaContainers extends Component
                 'tags' => [
                     $this::GLOBAL_METACONTAINER_CACHE_TAG,
                     $this::METACONTAINER_CACHE_TAG . $metaBundleSourceId,
-                    $this::METACONTAINER_CACHE_TAG . $path . $siteId,
+                    $this::METACONTAINER_CACHE_TAG . $uri . $siteId,
                 ],
             ]);
             $cache = Craft::$app->getCache();
             list($this->metaGlobalVars, $this->metaSitemapVars, $this->metaContainers) = $cache->getOrSet(
-                $this::CACHE_KEY . $path . $siteId,
-                function () use ($path, $siteId) {
+                $this::CACHE_KEY . $uri . $siteId,
+                function () use ($uri, $siteId) {
                     Craft::info(
-                        'Meta container cache miss: ' . $path . '/' . $siteId,
+                        'Meta container cache miss: ' . $uri . '/' . $siteId,
                         __METHOD__
                     );
                     $this->loadGlobalMetaContainers($siteId);
@@ -171,12 +171,12 @@ class MetaContainers extends Component
     /**
      * Prep all of the meta for preview purposes
      *
-     * @param string   $path
+     * @param string   $uri
      * @param int|null $siteId
      */
-    public function previewMetaContainers(string $path = '', int $siteId = null)
+    public function previewMetaContainers(string $uri = '', int $siteId = null)
     {
-        $this->loadMetaContainers($path, $siteId);
+        $this->loadMetaContainers($uri, $siteId);
         if ($this->metaGlobalVars) {
             $this->metaGlobalVars->parseProperties();
         }
@@ -413,19 +413,19 @@ class MetaContainers extends Component
     }
 
     /**
-     * Set the element that matches the URI in $path
+     * Set the element that matches the $uri
      *
-     * @param string   $path
+     * @param string   $uri
      * @param int|null $siteId
      */
-    protected function setMatchedElement(string $path, int $siteId = null)
+    protected function setMatchedElement(string $uri, int $siteId = null)
     {
         if (!$siteId) {
             $siteId = Craft::$app->getSites()->primarySite->id;
         }
-        $path = trim($path, '/');
+        $uri = trim($uri, '/');
         /** @var Element $element */
-        $element = Craft::$app->getElements()->getElementByUri($path, $siteId, true);
+        $element = Craft::$app->getElements()->getElementByUri($uri, $siteId, true);
         if ($element) {
             Seomatic::setMatchedElement($element);
         }
@@ -492,15 +492,15 @@ class MetaContainers extends Component
     /**
      * Invalidate a meta bundle cache
      *
-     * @param string $path
+     * @param string $uri
      * @param int    $siteId
      */
-    public function invalidateContainerCacheByPath(string $path, int $siteId)
+    public function invalidateContainerCacheByPath(string $uri, int $siteId)
     {
         $cache = Craft::$app->getCache();
-        TagDependency::invalidate($cache, $this::METACONTAINER_CACHE_TAG . $path . $siteId);
+        TagDependency::invalidate($cache, $this::METACONTAINER_CACHE_TAG . $uri . $siteId);
         Craft::info(
-            'Meta container cache cleared: ' . $path . '/' . $siteId,
+            'Meta container cache cleared: ' . $uri . '/' . $siteId,
             __METHOD__
         );
     }

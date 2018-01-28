@@ -52,13 +52,13 @@ class MetaContainerController extends Controller
      * Return all of the containers
      * URI: /actions/seomatic/meta-container/all-meta-containers?path=&siteId=
      *
-     * @param string $path
+     * @param string $uri
      * @param int    $siteId
      * @param bool   $asArray
      *
      * @return Response
      */
-    public function actionAllMetaContainers(string $path, int $siteId = null, bool $asArray = false)
+    public function actionAllMetaContainers(string $uri, int $siteId = null, bool $asArray = false)
     {
         $result = $this->getContainerArrays(
             [
@@ -68,7 +68,7 @@ class MetaContainerController extends Controller
                 MetaScriptContainer::CONTAINER_TYPE,
                 MetaJsonLdContainer::CONTAINER_TYPE,
             ],
-            $path,
+            $uri,
             $siteId,
             $asArray
         );
@@ -80,19 +80,19 @@ class MetaContainerController extends Controller
      * Return the MetaTitleContainer
      * URI: /actions/seomatic/meta-container/meta-title-container?path=&siteId=
      *
-     * @param string $path
+     * @param string $uri
      * @param int    $siteId
      * @param bool   $asArray
      *
      * @return Response
      */
-    public function actionMetaTitleContainer(string $path, int $siteId = null, bool $asArray = false)
+    public function actionMetaTitleContainer(string $uri, int $siteId = null, bool $asArray = false)
     {
         $result = $this->getContainerArrays(
             [
                 MetaTitleContainer::CONTAINER_TYPE,
             ],
-            $path,
+            $uri,
             $siteId,
             $asArray
         );
@@ -104,19 +104,19 @@ class MetaContainerController extends Controller
      * Return the MetaTagContainer
      * URI: /actions/seomatic/meta-container/meta-tag-container?path=&siteId=
      *
-     * @param string $path
+     * @param string $uri
      * @param int    $siteId
      * @param bool   $asArray
      *
      * @return Response
      */
-    public function actionMetaTagContainer(string $path, int $siteId = null, bool $asArray = false)
+    public function actionMetaTagContainer(string $uri, int $siteId = null, bool $asArray = false)
     {
         $result = $this->getContainerArrays(
             [
                 MetaTagContainer::CONTAINER_TYPE,
             ],
-            $path,
+            $uri,
             $siteId,
             $asArray
         );
@@ -128,19 +128,19 @@ class MetaContainerController extends Controller
      * Return the MetaLinkContainer
      * URI: /actions/seomatic/meta-container/meta-link-container?path=&siteId=
      *
-     * @param string $path
+     * @param string $uri
      * @param int    $siteId
      * @param bool   $asArray
      *
      * @return Response
      */
-    public function actionMetaLinkContainer(string $path, int $siteId = null, bool $asArray = false)
+    public function actionMetaLinkContainer(string $uri, int $siteId = null, bool $asArray = false)
     {
         $result = $this->getContainerArrays(
             [
                 MetaLinkContainer::CONTAINER_TYPE,
             ],
-            $path,
+            $uri,
             $siteId,
             $asArray
         );
@@ -152,19 +152,19 @@ class MetaContainerController extends Controller
      * Return the MetaScriptContainer
      * URI: /actions/seomatic/meta-container/meta-script-container?path=&siteId=
      *
-     * @param string $path
+     * @param string $uri
      * @param int    $siteId
      * @param bool   $asArray
      *
      * @return Response
      */
-    public function actionMetaScriptContainer(string $path, int $siteId = null, bool $asArray = false)
+    public function actionMetaScriptContainer(string $uri, int $siteId = null, bool $asArray = false)
     {
         $result = $this->getContainerArrays(
             [
                 MetaScriptContainer::CONTAINER_TYPE,
             ],
-            $path,
+            $uri,
             $siteId,
             $asArray
         );
@@ -176,19 +176,19 @@ class MetaContainerController extends Controller
      * Return the MetaJsonLdContainer
      * URI: /actions/seomatic/meta-container/meta-json-ld-container?path=&siteId=
      *
-     * @param string $path
+     * @param string $uri
      * @param int    $siteId
      * @param bool   $asArray
      *
      * @return Response
      */
-    public function actionMetaJsonLdContainer(string $path, int $siteId = null, bool $asArray = false)
+    public function actionMetaJsonLdContainer(string $uri, int $siteId = null, bool $asArray = false)
     {
         $result = $this->getContainerArrays(
             [
                 MetaJsonLdContainer::CONTAINER_TYPE,
             ],
-            $path,
+            $uri,
             $siteId,
             $asArray
         );
@@ -201,14 +201,14 @@ class MetaContainerController extends Controller
 
     protected function getContainerArrays(
         array $containerKeys,
-        string $path,
+        string $uri,
         int $siteId = null,
         bool $asArray = false
     ): array {
         $result = [];
 
         // Load the meta containers and parse our globals
-        Seomatic::$plugin->metaContainers->loadMetaContainers($path, $siteId);
+        Seomatic::$plugin->metaContainers->loadMetaContainers($uri, $siteId);
         if (Seomatic::$plugin->metaContainers->metaGlobalVars) {
             Seomatic::$plugin->metaContainers->metaGlobalVars->parseProperties();
         }
