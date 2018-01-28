@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\variables;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\models\MetaGlobalVars;
+use nystudio107\seomatic\models\MetaSitemapVars;
 use nystudio107\seomatic\models\Settings;
 use nystudio107\seomatic\services\JsonLd;
 use nystudio107\seomatic\services\Link;
@@ -44,6 +45,11 @@ class SeomaticVariable extends ServiceLocator
      * @var MetaGlobalVars
      */
     public $meta;
+
+    /**
+     * @var MetaSitemapVars
+     */
+    public $sitemap;
 
     /**
      * @var Settings
@@ -80,6 +86,7 @@ class SeomaticVariable extends ServiceLocator
         parent::init();
 
         $this->meta = Seomatic::$plugin->metaContainers->metaGlobalVars;
+        $this->sitemap = Seomatic::$plugin->metaContainers->metaSitemapVars;
         $this->config = Seomatic::$settings;
     }
 

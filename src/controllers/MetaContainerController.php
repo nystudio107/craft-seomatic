@@ -9,12 +9,14 @@
 
 namespace nystudio107\seomatic\controllers;
 
+use nystudio107\seomatic\helpers\MetaValue;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 use nystudio107\seomatic\models\MetaLinkContainer;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\MetaTitleContainer;
 use nystudio107\seomatic\models\MetaTagContainer;
+use nystudio107\seomatic\variables\SeomaticVariable;
 
 use Craft;
 use craft\web\Controller;
@@ -35,7 +37,7 @@ class MetaContainerController extends Controller
      * @inheritdoc
      */
     protected $allowAnonymous = [
-        'all',
+        'all-meta-containers',
         'meta-title-container',
         'meta-tag-container',
         'meta-link-container',
@@ -205,10 +207,17 @@ class MetaContainerController extends Controller
     ): array {
         $result = [];
 
+        // Load the meta containers and parse our globals
         Seomatic::$plugin->metaContainers->loadMetaContainers($path, $siteId);
+        if (Seomatic::$plugin->metaContainers->metaGlobalVars) {
+            Seomatic::$plugin->metaContainers->metaGlobalVars->parseProperties();
+        }
+        if (Seomatic::$plugin->metaContainers->metaSitemapVars) {
+            Seomatic::$plugin->metaContainers->metaSitemapVars->parseProperties();
+        }
+
         // Iterate through the desired $containerKeys
         foreach ($containerKeys as $containerKey) {
-            Seomatic::$plugin->metaContainers->loadMetaContainers($path, $siteId);
             if ($asArray) {
                 $result[$containerKey] = Seomatic::$plugin->metaContainers->renderContainersArrayByType(
                     $containerKey

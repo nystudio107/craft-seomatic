@@ -83,7 +83,6 @@ class MetaValue
                 $metaArray[$key] = self::parseString($value);
             }
         }
-
         $metaArray = array_filter($metaArray);
     }
 
