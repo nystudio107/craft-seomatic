@@ -9,14 +9,12 @@
 
 namespace nystudio107\seomatic\controllers;
 
-use nystudio107\seomatic\helpers\MetaValue;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 use nystudio107\seomatic\models\MetaLinkContainer;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\MetaTitleContainer;
 use nystudio107\seomatic\models\MetaTagContainer;
-use nystudio107\seomatic\variables\SeomaticVariable;
 
 use Craft;
 use craft\web\Controller;
