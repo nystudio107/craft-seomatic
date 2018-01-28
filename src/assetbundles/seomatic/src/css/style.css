@@ -137,9 +137,14 @@ div.displaypreview-container {
 }
 
 div.displaypreview {
-    width: 512px;
+    width: 468px;
     overflow: hidden;
     padding: 20px 0px;
+}
+
+div.googleWrapper {
+    padding: 10px;
+    background-color: #d5d8dd;
 }
 
 h3.googleDisplay {
