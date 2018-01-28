@@ -48,18 +48,20 @@ class MetaTagContainer extends MetaContainer
             /** @var $metaTagModel MetaTag */
             foreach ($this->data as $metaTagModel) {
                 if ($metaTagModel->include) {
-                    $options = $metaTagModel->tagAttributes();
-                    if ($metaTagModel->prepForRender($options)) {
-                        Seomatic::$view->registerMetaTag($options);
-                        // If `devMode` is enabled, validate the Meta Tag and output any model errors
-                        if (Seomatic::$devMode) {
-                            $scenario = [];
-                            $scenario['default'] = 'error';
-                            $scenario['warning'] = 'warning';
-                            $metaTagModel->debugMetaItem(
-                                "Tag attribute: ",
-                                $scenario
-                            );
+                    $configs = $metaTagModel->tagAttributesArray();
+                    foreach ($configs as $config) {
+                        if ($metaTagModel->prepForRender($config)) {
+                            Seomatic::$view->registerMetaTag($config);
+                            // If `devMode` is enabled, validate the Meta Tag and output any model errors
+                            if (Seomatic::$devMode) {
+                                $scenario = [];
+                                $scenario['default'] = 'error';
+                                $scenario['warning'] = 'warning';
+                                $metaTagModel->debugMetaItem(
+                                    "Tag attribute: ",
+                                    $scenario
+                                );
+                            }
                         }
                     }
                 }

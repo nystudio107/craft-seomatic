@@ -11,11 +11,13 @@
 
 namespace nystudio107\seomatic\models;
 
+use nystudio107\seomatic\base\MetaContainer;
+
 use Craft;
 use craft\base\Model;
+use craft\helpers\Json as JsonHelper;
+
 use craft\validators\DateTimeValidator;
-use nystudio107\seomatic\base\MetaContainer;
-use nystudio107\seomatic\base\MetaContainerInterface;
 
 /**
  * @author    nystudio107
@@ -130,44 +132,25 @@ class MetaBundle extends Model
      */
     public function normalizeMetaBundleData()
     {
-        // sourceAltSiteSettings
-        if (!empty($this->sourceAltSiteSettings)) {
-            if (is_string($this->sourceAltSiteSettings)) {
-                $this->sourceAltSiteSettings = json_decode($this->sourceAltSiteSettings, true);
+        // Decode any JSON data
+        $properties = $this->getAttributes();
+        foreach ($properties as $property => $value) {
+            if (!empty($value) && is_string($value)) {
+                $this->$property = JsonHelper::decodeIfJson($value);
             }
         }
-        // sitemapImageFieldMap
-        if (!empty($this->sitemapImageFieldMap)) {
-            if (is_string($this->sitemapImageFieldMap)) {
-                $this->sitemapImageFieldMap = json_decode($this->sitemapImageFieldMap, true);
-            }
-        }
-        // sitemapVideoFieldMap
-        if (!empty($this->sitemapVideoFieldMap)) {
-            if (is_string($this->sitemapVideoFieldMap)) {
-                $this->sitemapVideoFieldMap = json_decode($this->sitemapVideoFieldMap, true);
-            }
-        }
+
         // Meta global variables
         if (!empty($this->metaGlobalVars)) {
-            if (is_string($this->metaGlobalVars)) {
-                $this->metaGlobalVars = json_decode($this->metaGlobalVars, true);
-            }
             $this->metaGlobalVars = MetaGlobalVars::create($this->metaGlobalVars);
         }
         // Meta sitemap variables
         if (!empty($this->metaSitemapVars)) {
-            if (is_string($this->metaSitemapVars)) {
-                $this->metaSitemapVars = json_decode($this->metaSitemapVars, true);
-            }
             $this->metaSitemapVars = MetaSitemapVars::create($this->metaSitemapVars);
         }
         // Meta containers
         if (!empty($this->metaContainers)) {
             $metaContainers = $this->metaContainers;
-            if (is_string($metaContainers)) {
-                $metaContainers = json_decode($metaContainers, true);
-            }
             $this->metaContainers = [];
             /**  @var MetaContainer $metaContainer */
             foreach ($metaContainers as $key => $metaContainer) {
@@ -179,9 +162,6 @@ class MetaBundle extends Model
         // Redirects container
         if (!empty($this->redirectsContainer)) {
             $redirectsContainers = $this->redirectsContainer;
-            if (is_string($redirectsContainers)) {
-                $redirectsContainers = json_decode($redirectsContainers, true);
-            }
             $this->redirectsContainer = [];
             foreach ($redirectsContainers as $redirectsContainer) {
                 $this->redirectsContainer[] = RedirectsContainer::create($redirectsContainer);
@@ -190,9 +170,6 @@ class MetaBundle extends Model
         // Frontend templates
         if (!empty($this->frontendTemplatesContainer)) {
             $frontendTemplatesContainers = $this->frontendTemplatesContainer;
-            if (is_string($frontendTemplatesContainers)) {
-                $frontendTemplatesContainers = json_decode($frontendTemplatesContainers, true);
-            }
             $this->frontendTemplatesContainer = [];
             foreach ($frontendTemplatesContainers as $frontendTemplatesContainer) {
                 $this->frontendTemplatesContainer[] = FrontendTemplateContainer::create($frontendTemplatesContainer);

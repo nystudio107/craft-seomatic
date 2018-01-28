@@ -33,8 +33,8 @@ class MetaLink extends MetaItem
 
     const ITEM_TYPE = 'MetaLink';
 
-    const UNIQUEKEYS_TAGS = [
-        'alternate',
+    const ARRAY_PROPERTIES = [
+        'href',
     ];
 
     // Static Methods
@@ -106,10 +106,6 @@ class MetaLink extends MetaItem
 
         if (empty($this->key)) {
             $this->key = $this->rel;
-            // Unique keys for specific tags
-            if (in_array($this->rel, self::UNIQUEKEYS_TAGS)) {
-                $this->uniqueKeys = true;
-            }
         }
     }
 
@@ -172,10 +168,6 @@ class MetaLink extends MetaItem
     {
         $shouldRender = parent::prepForRender($data);
         if ($shouldRender) {
-            $scenario = $this->scenario;
-            $this->setScenario('render');
-            $data = $this->tagAttributes();
-            $this->setScenario($scenario);
             MetaValueHelper::parseArray($data);
             // Only render if there's more than one attribute
             if (count($data) > 1) {
@@ -202,10 +194,12 @@ class MetaLink extends MetaItem
     public function render($params = []):string
     {
         $html = '';
-        $options = $this->tagAttributes();
-        if ($this->prepForRender($options)) {
-            ksort($options);
-            $html = Html::tag('link', '', $options);
+        $configs = $this->tagAttributesArray();
+        foreach ($configs as $config) {
+            if ($this->prepForRender($config)) {
+                ksort($config);
+                $html = Html::tag('link', '', $config);
+            }
         }
 
         return $html;

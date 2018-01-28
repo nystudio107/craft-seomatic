@@ -33,12 +33,8 @@ class MetaTag extends MetaItem
 
     const ITEM_TYPE = 'MetaTag';
 
-    const UNIQUEKEYS_TAGS = [
-        'og:see_also',
-        'og:image',
-        'og:image:type',
-        'og:image:height',
-        'og:image:width',
+    const ARRAY_PROPERTIES = [
+        'content',
     ];
 
     // Static Methods
@@ -111,10 +107,6 @@ class MetaTag extends MetaItem
 
         if (empty($this->key)) {
             $this->key = $this->name ?? $this->property ?? $this->httpEquiv;
-            // $this keys for specific tags
-            if (in_array($this->name, self::UNIQUEKEYS_TAGS)) {
-                $this->uniqueKeys = true;
-            }
         }
     }
 
@@ -125,7 +117,8 @@ class MetaTag extends MetaItem
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['charset', 'content', 'httpEquiv', 'name', 'property'], 'string'],
+            [['charset', 'httpEquiv', 'name', 'property'], 'string'],
+            [['content'], 'validateStringOrArray'],
             [['name'], 'required', 'on' => ['warning']]
         ]);
 
@@ -151,10 +144,6 @@ class MetaTag extends MetaItem
     {
         $shouldRender = parent::prepForRender($data);
         if ($shouldRender) {
-            $scenario = $this->scenario;
-            $this->setScenario('render');
-            $data = $this->tagAttributes();
-            $this->setScenario($scenario);
             MetaValueHelper::parseArray($data);
             // Only render if there's more than one attribute
             if (count($data) > 1) {
@@ -181,10 +170,12 @@ class MetaTag extends MetaItem
     public function render($params = []): string
     {
         $html = '';
-        $options = $this->tagAttributes();
-        if ($this->prepForRender($options)) {
-            ksort($options);
-            $html = Html::tag('meta', '', $options);
+        $configs = $this->tagAttributesArray();
+        foreach ($configs as $config) {
+            if ($this->prepForRender($config)) {
+                ksort($config);
+                $html = Html::tag('meta', '', $config);
+            }
         }
 
         return $html;

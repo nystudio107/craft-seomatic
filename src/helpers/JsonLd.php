@@ -29,7 +29,6 @@ class JsonLd extends Json
     const IGNORE_ATTRIBUTES = [
         '@context',
         'include',
-        'uniqueKeys',
         'key',
     ];
 

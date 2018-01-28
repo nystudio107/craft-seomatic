@@ -92,6 +92,7 @@ abstract class Container extends Model implements ContainerInterface
      */
     public function normalizeContainerData()
     {
+        // Set the appropriate class for this container
         $this->class = (string)static::class;
     }
 

@@ -45,17 +45,19 @@ class MetaLinkContainer extends MetaContainer
     public function includeMetaData()
     {
         if ($this->prepForInclusion()) {
-            /** @var $metaLinkModel MetaLink */
+            /** @var MetaLink $metaLinkModel */
             foreach ($this->data as $metaLinkModel) {
                 if ($metaLinkModel->include) {
-                    $options = $metaLinkModel->tagAttributes();
-                    if ($metaLinkModel->prepForRender($options)) {
-                        Seomatic::$view->registerLinkTag($options);
-                        // If `devMode` is enabled, validate the Meta Link and output any model errors
-                        if (Seomatic::$devMode) {
-                            $metaLinkModel->debugMetaItem(
-                                "Link attribute: "
-                            );
+                    $configs = $metaLinkModel->tagAttributesArray();
+                    foreach ($configs as $config) {
+                        if ($metaLinkModel->prepForRender($config)) {
+                            Seomatic::$view->registerLinkTag($config);
+                            // If `devMode` is enabled, validate the Meta Link and output any model errors
+                            if (Seomatic::$devMode) {
+                                $metaLinkModel->debugMetaItem(
+                                    "Link attribute: "
+                                );
+                            }
                         }
                     }
                 }

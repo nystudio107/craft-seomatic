@@ -199,12 +199,7 @@ class MetaContainers extends Component
         $container = $this->getMetaContainer($key);
 
         if (!empty($container)) {
-            // If $uniqueKeys is set, generate a hash of the data for the key
-            $dataKey = $data->key;
-            if ($data->uniqueKeys) {
-                $dataKey = $dataKey . $this->getHash($data);
-            }
-            $container->addData($data, $dataKey);
+            $container->addData($data, $data->key);
         }
     }
 

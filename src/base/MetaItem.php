@@ -32,6 +32,12 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
 
     use MetaItemTrait;
 
+    // Constants
+    // =========================================================================
+
+    const ARRAY_PROPERTIES = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -57,8 +63,8 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['include', 'uniqueKeys', 'key'], 'required'],
-            [['include', 'uniqueKeys'], 'boolean'],
+            [['include', 'key'], 'required'],
+            [['include'], 'boolean'],
             [['key'], 'string'],
             [['environment'], 'safe'],
             [['dependencies'], 'safe'],
@@ -79,7 +85,6 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
                     $fields,
                     array_flip([
                         'include',
-                        'uniqueKeys',
                         'key',
                         'environment',
                         'dependencies',
@@ -107,21 +112,6 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
         $html = '';
 
         return $html;
-    }
-
-    /**
-     * @return array
-     */
-    public function tagAttributes(): array
-    {
-        $tagAttributes = $this->toArray();
-        $tagAttributes = array_filter($tagAttributes);
-        foreach ($tagAttributes as $key => $value) {
-            ArrayHelper::rename($tagAttributes, $key, Inflector::slug(Inflector::titleize($key)));
-        }
-        ksort($tagAttributes);
-
-        return $tagAttributes;
     }
 
     /**
@@ -187,4 +177,78 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
             }
         }
     }
+
+    /**
+     * Return an array of tag attributes, normalizing the keys
+     *
+     * @return array
+     */
+    public function tagAttributes(): array
+    {
+        $tagAttributes = $this->toArray();
+        $tagAttributes = array_filter($tagAttributes);
+        foreach ($tagAttributes as $key => $value) {
+            ArrayHelper::rename($tagAttributes, $key, Inflector::slug(Inflector::titleize($key)));
+        }
+        ksort($tagAttributes);
+
+        return $tagAttributes;
+    }
+
+    /**
+     * Return an array of arrays that contain the meta tag attributes
+     *
+     * @return array
+     */
+    public function tagAttributesArray(): array
+    {
+        $result = [];
+        $optionsCount = 1;
+        $scenario = $this->scenario;
+        $this->setScenario('render');
+        $options = $this->tagAttributes();
+        $this->setScenario($scenario);
+
+        // See if any of the potentially array properties actually are
+        foreach (static::ARRAY_PROPERTIES as $arrayProperty) {
+            if (!empty($options[$arrayProperty]) && is_array($options[$arrayProperty])) {
+                $optionsCount = count($options[$arrayProperty]) > $optionsCount
+                    ? count($options[$arrayProperty]) : $optionsCount;
+            }
+        }
+        // Return an array of resulting options
+        while ($optionsCount--) {
+            $resultOptions = $options;
+            foreach ($resultOptions as $key => $value) {
+                $resultOptions[$key] = (is_array($value) && !empty($value[$optionsCount]))
+                    ? $value[$optionsCount] : $value;
+            }
+            $result[] = $resultOptions;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Validate the passed in $attribute as either an array or a string
+     *
+     * @param string $attribute the attribute currently being validated
+     * @param mixed  $params    the value of the "params" given in the rule
+     */
+    public function validateStringOrArray(
+        $attribute,
+        $params
+    ) {
+        $validated = false;
+        if (is_string($attribute)) {
+            $validated = true;
+        }
+        if (is_array($attribute)) {
+            $validated = true;
+        }
+        if (!$validated) {
+            $this->addError($attribute, 'Must be either a string or an array');
+        }
+    }
+
 }
