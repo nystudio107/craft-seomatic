@@ -423,6 +423,7 @@ class MetaContainers extends Component
         if (!$siteId) {
             $siteId = Craft::$app->getSites()->primarySite->id;
         }
+        $path = trim($path, '/');
         /** @var Element $element */
         $element = Craft::$app->getElements()->getElementByUri($path, $siteId, true);
         if ($element) {
