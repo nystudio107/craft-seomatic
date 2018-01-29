@@ -96,29 +96,11 @@ class Install extends Migration
                     'sourceAltSiteSettings'      => $this->text(),
                     'sourceDateUpdated'          => $this->dateTime()->notNull(),
                     'metaGlobalVars'             => $this->text(),
+                    'metaSiteVars'               => $this->text(),
                     'metaSitemapVars'            => $this->text(),
                     'metaContainers'             => $this->text(),
                     'redirectsContainer'         => $this->text(),
                     'frontendTemplatesContainer' => $this->text(),
-                ]
-            );
-            // seomatic_frontendtemplates table
-            $this->createTable(
-                '{{%seomatic_frontendtemplates}}',
-                [
-                    'id'          => $this->primaryKey(),
-                    'dateCreated' => $this->dateTime()->notNull(),
-                    'dateUpdated' => $this->dateTime()->notNull(),
-                    'uid'         => $this->uid(),
-
-                    'templateVersion' => $this->string()->notNull()->defaultValue(''),
-                    'handle'          => $this->string()->notNull()->defaultValue(''),
-                    'path'            => $this->string()->notNull()->defaultValue(''),
-                    'template'        => $this->string(500)->notNull()->defaultValue(''),
-                    'siteId'          => $this->integer()->null(),
-                    'controller'      => $this->string()->notNull()->defaultValue(''),
-                    'action'          => $this->string()->notNull()->defaultValue(''),
-                    'templateString'  => $this->text(),
                 ]
             );
         }
@@ -172,17 +154,6 @@ class Install extends Migration
             'sourceHandle',
             false
         );
-        // seomatic_frontendtemplates table
-        $this->createIndex(
-            $this->db->getIndexName(
-                '{{%seomatic_frontendtemplates}}',
-                'handle',
-                false
-            ),
-            '{{%seomatic_frontendtemplates}}',
-            'handle',
-            false
-        );
         // Additional commands depending on the db driver
         switch ($this->driver) {
             case DbConfig::DRIVER_MYSQL:
@@ -232,7 +203,6 @@ class Install extends Migration
         // Insert our default data
         Seomatic::$plugin->metaBundles->createGlobalMetaBundles();
         Seomatic::$plugin->metaBundles->createContentMetaBundles();
-        Seomatic::$plugin->frontendTemplates->createFrontendTemplates();
     }
 
     /**

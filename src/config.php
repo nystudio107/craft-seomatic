@@ -43,5 +43,5 @@ return [
     'maxTitleLength' => 70,
 
     // The max number of characters in the `<meta name="description">` tag
-    'maxDescriptionLength' => 160,
+    'maxDescriptionLength' => 320,
 ];

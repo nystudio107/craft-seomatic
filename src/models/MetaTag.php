@@ -153,7 +153,7 @@ class MetaTag extends MetaItem
             } else {
                 $error = Craft::t(
                     'seomatic',
-                    '{tagtype} tag `{key}` did not render because it is missing attributes.',
+                    '{tagtype} tag `{key}` did not render because it is missing attributes. ' . print_r($data, true),
                     ['tagtype' => 'Meta', 'key' => $this->key]
                 );
                 Craft::error($error, __METHOD__);

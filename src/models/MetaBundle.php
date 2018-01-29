@@ -85,6 +85,11 @@ class MetaBundle extends Model
     public $metaGlobalVars;
 
     /**
+     * @var MetaSiteVars
+     */
+    public $metaSiteVars;
+
+    /**
      * @var MetaSitemapVars
      */
     public $metaSitemapVars;
@@ -100,7 +105,7 @@ class MetaBundle extends Model
     public $redirectsContainer;
 
     /**
-     * @var FrontendTemplateContainer[]
+     * @var FrontendTemplateContainer
      */
     public $frontendTemplatesContainer;
 
@@ -141,11 +146,15 @@ class MetaBundle extends Model
         }
 
         // Meta global variables
-        if (!empty($this->metaGlobalVars)) {
+        if (isset($this->metaGlobalVars)) {
             $this->metaGlobalVars = MetaGlobalVars::create($this->metaGlobalVars);
         }
+        // Meta site variables
+        if (isset($this->metaSiteVars)) {
+            $this->metaSiteVars = MetaSiteVars::create($this->metaSiteVars);
+        }
         // Meta sitemap variables
-        if (!empty($this->metaSitemapVars)) {
+        if (isset($this->metaSitemapVars)) {
             $this->metaSitemapVars = MetaSitemapVars::create($this->metaSitemapVars);
         }
         // Meta containers
@@ -160,20 +169,12 @@ class MetaBundle extends Model
             }
         }
         // Redirects container
-        if (!empty($this->redirectsContainer)) {
-            $redirectsContainers = $this->redirectsContainer;
-            $this->redirectsContainer = [];
-            foreach ($redirectsContainers as $redirectsContainer) {
-                $this->redirectsContainer[] = RedirectsContainer::create($redirectsContainer);
-            }
+        if (isset($this->redirectsContainer)) {
+            //$this->redirectsContainer = RedirectsContainer::create($this->redirectsContainer);
         }
         // Frontend templates
-        if (!empty($this->frontendTemplatesContainer)) {
-            $frontendTemplatesContainers = $this->frontendTemplatesContainer;
-            $this->frontendTemplatesContainer = [];
-            foreach ($frontendTemplatesContainers as $frontendTemplatesContainer) {
-                $this->frontendTemplatesContainer[] = FrontendTemplateContainer::create($frontendTemplatesContainer);
-            }
+        if (isset($this->frontendTemplatesContainer)) {
+            $this->frontendTemplatesContainer = FrontendTemplateContainer::create($this->frontendTemplatesContainer);
         }
     }
 

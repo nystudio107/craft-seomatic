@@ -29,7 +29,7 @@ return [
         'ogImage'                 => '{seomatic.meta.seoImage}',
         'ogImageDescription'      => '{seomatic.meta.seoImageDescription}',
         'twitterCard'             => 'summary',
-        'twitterCreator'          => '{seomatic.config.twitterHandle}',
+        'twitterCreator'          => '{seomatic.site.twitterHandle}',
         'twitterTitle'            => '{seomatic.meta.seoTitle}',
         'twitterDescription'      => '{seomatic.meta.seoDescription}',
         'twitterImage'            => '{seomatic.meta.seoImage}',

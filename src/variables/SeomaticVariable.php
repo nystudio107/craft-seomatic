@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\variables;
 
+use nystudio107\seomatic\models\MetaSiteVars;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\models\MetaGlobalVars;
 use nystudio107\seomatic\models\MetaSitemapVars;
@@ -45,6 +46,11 @@ class SeomaticVariable extends ServiceLocator
      * @var MetaGlobalVars
      */
     public $meta;
+
+    /**
+     * @var MetaSiteVars
+     */
+    public $site;
 
     /**
      * @var MetaSitemapVars
@@ -86,6 +92,7 @@ class SeomaticVariable extends ServiceLocator
         parent::init();
 
         $this->meta = Seomatic::$plugin->metaContainers->metaGlobalVars;
+        $this->site = Seomatic::$plugin->metaContainers->metaSiteVars;
         $this->sitemap = Seomatic::$plugin->metaContainers->metaSitemapVars;
         $this->config = Seomatic::$settings;
     }

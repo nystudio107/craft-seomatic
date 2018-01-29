@@ -210,6 +210,9 @@ class MetaContainerController extends Controller
         if (Seomatic::$plugin->metaContainers->metaGlobalVars) {
             Seomatic::$plugin->metaContainers->metaGlobalVars->parseProperties();
         }
+        if (Seomatic::$plugin->metaContainers->metaSiteVars) {
+            Seomatic::$plugin->metaContainers->metaSiteVars->parseProperties();
+        }
         if (Seomatic::$plugin->metaContainers->metaSitemapVars) {
             Seomatic::$plugin->metaContainers->metaSitemapVars->parseProperties();
         }

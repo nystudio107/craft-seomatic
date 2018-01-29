@@ -19,25 +19,27 @@ use nystudio107\seomatic\services\MetaBundles;
  */
 
 return [
-    'bundleVersion'         => '1.0.0',
-    'sourceBundleType'      => MetaBundles::SECTION_META_BUNDLE,
-    'sourceId'              => null,
-    'sourceName'            => null,
-    'sourceHandle'          => null,
-    'sourceType'            => 'section',
-    'sourceTemplate'        => '',
-    'sourceSiteId'          => null,
-    'sourceAltSiteSettings' => [
+    'bundleVersion'              => '1.0.0',
+    'sourceBundleType'           => MetaBundles::SECTION_META_BUNDLE,
+    'sourceId'                   => null,
+    'sourceName'                 => null,
+    'sourceHandle'               => null,
+    'sourceType'                 => 'section',
+    'sourceTemplate'             => '',
+    'sourceSiteId'               => null,
+    'sourceAltSiteSettings'      => [
     ],
-    'sourceDateUpdated'     => new \DateTime(),
-    'metaGlobalVars'        => Config::getConfigFromFile('entrymeta/GlobalVars'),
-    'metaSitemapVars'       => Config::getConfigFromFile('entrymeta/SitemapVars'),
-    'metaContainers'        => Config::getMergedConfigFromFiles([
+    'sourceDateUpdated'          => new \DateTime(),
+    'metaGlobalVars'             => Config::getConfigFromFile('entrymeta/GlobalVars'),
+    'metaSiteVars'               => Config::getConfigFromFile('entrymeta/SiteVars'),
+    'metaSitemapVars'            => Config::getConfigFromFile('entrymeta/SitemapVars'),
+    'metaContainers'             => Config::getMergedConfigFromFiles([
         'entrymeta/TagContainer',
         'entrymeta/LinkContainer',
         'entrymeta/ScriptContainer',
         'entrymeta/JsonLdContainer',
         'entrymeta/TitleContainer',
     ]),
-    'redirectsContainer'    => Config::getConfigFromFile('entrymeta/RedirectsContainer'),
+    'redirectsContainer'         => Config::getConfigFromFile('entrymeta/RedirectsContainer'),
+    'frontendTemplatesContainer' => Config::getConfigFromFile('entrymeta/FrontendTemplatesContainer'),
 ];

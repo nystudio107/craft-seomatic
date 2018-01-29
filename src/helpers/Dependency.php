@@ -12,7 +12,8 @@
 namespace nystudio107\seomatic\helpers;
 
 use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\services\MetaContainers;
+
+use Craft;
 
 /**
  * @author    nystudio107
@@ -25,6 +26,7 @@ class Dependency
     // =========================================================================
 
     const CONFIG_DEPENDENCY = 'config';
+    const SITE_DEPENDENCY = 'site';
     const META_DEPENDENCY = 'meta';
     const TAG_DEPENDENCY = 'tag';
 
@@ -37,8 +39,9 @@ class Dependency
         if (empty($dependencies) || !is_array($dependencies)) {
             return true;
         }
-        $settings = Seomatic::$settings;
-        $globals = Seomatic::$seomaticVariable->meta;
+        $config = Seomatic::$settings;
+        $meta = Seomatic::$seomaticVariable->meta;
+        $site = Seomatic::$seomaticVariable->site;
         foreach ($dependencies as $type => $keys) {
             $validates = false;
             // If any dependency key in the array validates, this this dependency validates
@@ -46,8 +49,17 @@ class Dependency
                 // Handle config setting dependencies
                 case self::CONFIG_DEPENDENCY:
                     foreach ($keys as $key) {
-                        // If any value is in the $settings[$key] it validates
-                        if (!empty($settings[$key])) {
+                        // If any value is in the $config[$key] it validates
+                        if (!empty($config[$key])) {
+                            $validates = true;
+                        }
+                    }
+                    break;
+                // Handle site setting dependencies
+                case self::SITE_DEPENDENCY:
+                    foreach ($keys as $key) {
+                        // If any value is in the $site[$key] it validates
+                        if (!empty($site[$key])) {
                             $validates = true;
                         }
                     }
@@ -55,8 +67,8 @@ class Dependency
                 // Handle meta setting dependencies
                 case self::META_DEPENDENCY:
                     foreach ($keys as $key) {
-                        // If any value is in the $globals[$key] it validates
-                        if (!empty($globals[$key])) {
+                        // If any value is in the $meta[$key] it validates
+                        if (!empty($meta[$key])) {
                             $validates = true;
                         }
                     }

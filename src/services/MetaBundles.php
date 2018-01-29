@@ -61,14 +61,19 @@ class MetaBundles extends Component
     protected $metaBundles = [];
 
     /**
-     * @var array indexed by [sourceId][siteId] = id
+     * @var array indexed by [sourceId][sourceSiteId] = id
      */
     protected $metaBundlesBySourceId = [];
 
     /**
-     * @var array indexed by [sourceHandle][siteId] = id
+     * @var array indexed by [sourceHandle][sourceSiteId] = id
      */
     protected $metaBundlesBySourceHandle = [];
+
+    /**
+     * @var array indexed by [sourceSiteId] = id
+     */
+    protected $globalMetaBundles = [];
 
     // Public Methods
     // =========================================================================
@@ -83,6 +88,10 @@ class MetaBundles extends Component
     public function getGlobalMetaBundle(int $sourceSiteId)
     {
         $metaBundle = null;
+        // See if we have the meta bundle cached
+        if (!empty($this->globalMetaBundles[$sourceSiteId])) {
+            return $this->globalMetaBundles[$sourceSiteId];
+        }
         $metaBundleArray = (new Query())
             ->from(['{{%seomatic_metabundles}}'])
             ->where([
@@ -99,6 +108,8 @@ class MetaBundles extends Component
             // If it doesn't exist, create it
             $metaBundle = $this->createGlobalMetaBundleForSite($sourceSiteId);
         }
+        // Cache it for future accesses
+        $this->globalMetaBundles[$sourceSiteId] = $metaBundle;
 
         return $metaBundle;
     }

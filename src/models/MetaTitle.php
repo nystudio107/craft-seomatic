@@ -80,7 +80,7 @@ class MetaTitle extends MetaItem
         $rules = parent::rules();
         $rules = array_merge($rules, [
             [['title'], 'required'],
-            [['title'], 'string', 'length' => [40, 70], 'on' => ['warning']],
+            [['title'], 'string', 'length' => [40, Seomatic::$settings->maxTitleLength], 'on' => ['warning']],
         ]);
 
         return $rules;
@@ -138,5 +138,4 @@ class MetaTitle extends MetaItem
 
         return $attributes;
     }
-
 }

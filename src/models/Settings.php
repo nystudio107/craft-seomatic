@@ -82,26 +82,6 @@ class Settings extends FluentModel
      */
     public $maxDescriptionLength = 300;
 
-    /**
-     * The Twitter handle
-     *
-     * @var string
-     */
-    public $twitterHandle = '';
-
-    /**
-     * The Facebook profile ID
-     *
-     * @var string
-     */
-    public $facebookProfileId = '';
-
-    /**
-     * The Facebook app ID
-     *
-     * @var string
-     */
-    public $facebookAppId = '';
 
     // Public Methods
     // =========================================================================
@@ -139,9 +119,9 @@ class Settings extends FluentModel
             ['devModeTitlePrefix', 'string'],
             ['devModeTitlePrefix', 'default', 'value' => '[devMode] '],
             ['maxTitleLength', 'integer', 'min' => 10],
-            ['maxTitleLength', 'default', 'value' => 70],
+            ['maxTitleLength', 'default', 'value' => 120],
             ['maxDescriptionLength', 'integer', 'min' => 10],
-            ['maxDescriptionLength', 'default', 'value' => 160],
+            ['maxDescriptionLength', 'default', 'value' => 300],
             ['twitterHandle', 'string'],
             ['twitterHandle', 'default', 'value' => ''],
         ];

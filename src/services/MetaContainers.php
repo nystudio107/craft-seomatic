@@ -11,7 +11,6 @@
 
 namespace nystudio107\seomatic\services;
 
-use craft\errors\SiteNotFoundException;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\base\MetaItem;
@@ -19,6 +18,7 @@ use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\models\jsonld\BreadcrumbList;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaGlobalVars;
+use nystudio107\seomatic\models\MetaSiteVars;
 use nystudio107\seomatic\models\MetaSitemapVars;
 use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
@@ -32,6 +32,7 @@ use craft\base\Component;
 use craft\base\Element;
 use craft\elements\Category;
 use craft\elements\Entry;
+use craft\errors\SiteNotFoundException;
 use craft\helpers\UrlHelper;
 
 use yii\base\Exception;
@@ -62,6 +63,11 @@ class MetaContainers extends Component
      * @var MetaGlobalVars
      */
     public $metaGlobalVars;
+
+    /**
+     * @var MetaSiteVars
+     */
+    public $metaSiteVars;
 
     /**
      * @var MetaSitemapVars
@@ -127,7 +133,7 @@ class MetaContainers extends Component
                 ],
             ]);
             $cache = Craft::$app->getCache();
-            list($this->metaGlobalVars, $this->metaSitemapVars, $this->metaContainers) = $cache->getOrSet(
+            list($this->metaGlobalVars, $this->metaSiteVars, $this->metaSitemapVars, $this->metaContainers) = $cache->getOrSet(
                 $this::CACHE_KEY . $uri . $siteId,
                 function () use ($uri, $siteId) {
                     Craft::info(
@@ -139,7 +145,7 @@ class MetaContainers extends Component
                     $this->addMetaJsonLdBreadCrumbs($siteId);
                     $this->addMetaLinkHrefLang();
 
-                    return [$this->metaGlobalVars, $this->metaSitemapVars, $this->metaContainers];
+                    return [$this->metaGlobalVars, $this->metaSiteVars, $this->metaSitemapVars, $this->metaContainers];
                 },
                 $duration,
                 $dependency
@@ -156,6 +162,9 @@ class MetaContainers extends Component
     {
         if ($this->metaGlobalVars) {
             $this->metaGlobalVars->parseProperties();
+        }
+        if ($this->metaSiteVars) {
+            $this->metaSiteVars->parseProperties();
         }
         if ($this->metaSitemapVars) {
             $this->metaSitemapVars->parseProperties();
@@ -179,6 +188,9 @@ class MetaContainers extends Component
         $this->loadMetaContainers($uri, $siteId);
         if ($this->metaGlobalVars) {
             $this->metaGlobalVars->parseProperties();
+        }
+        if ($this->metaSiteVars) {
+            $this->metaSiteVars->parseProperties();
         }
         if ($this->metaSitemapVars) {
             $this->metaSitemapVars->parseProperties();
@@ -354,6 +366,8 @@ class MetaContainers extends Component
         if ($metaBundle) {
             // Meta global vars
             $this->metaGlobalVars = $metaBundle->metaGlobalVars;
+            // Meta site vars
+            $this->metaSiteVars = $metaBundle->metaSiteVars;
             // Meta sitemap vars
             $this->metaSitemapVars = $metaBundle->metaSitemapVars;
             // Language
@@ -443,6 +457,10 @@ class MetaContainers extends Component
         $attributes = $metaBundle->metaGlobalVars->getAttributes();
         $attributes = array_filter($attributes);
         $this->metaGlobalVars->setAttributes($attributes, false);
+        // Meta site vars
+        $attributes = $metaBundle->metaSiteVars->getAttributes();
+        $attributes = array_filter($attributes);
+        $this->metaSiteVars->setAttributes($attributes, false);
         // Meta sitemap vars
         $attributes = $metaBundle->metaSitemapVars->getAttributes();
         $attributes = array_filter($attributes);

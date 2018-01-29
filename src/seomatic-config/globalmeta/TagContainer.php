@@ -80,19 +80,19 @@ return [
         'class'        => (string)MetaTagContainer::class,
         'include'      => 'true',
         'dependencies' => [
-            Dependency::CONFIG_DEPENDENCY => ['facebookProfileId', 'facebookAppId'],
+            Dependency::SITE_DEPENDENCY => ['facebookProfileId', 'facebookAppId'],
         ],
         'data'         => [
             'fb:profile_id'  => [
                 'charset'   => '',
-                'content'   => '{seomatic.config.facebookProfileId}',
+                'content'   => '{seomatic.site.facebookProfileId}',
                 'httpEquiv' => '',
                 'name'      => '',
                 'property'  => 'fb:profile_id',
             ],
             'fb:app_id'      => [
                 'charset'   => '',
-                'content'   => '{seomatic.config.facebookAppId}',
+                'content'   => '{seomatic.site.facebookAppId}',
                 'httpEquiv' => '',
                 'name'      => '',
                 'property'  => 'fb:app_id',
@@ -158,7 +158,7 @@ return [
         'include'      => 'true',
         'class'        => (string)MetaTagContainer::class,
         'dependencies' => [
-            Dependency::CONFIG_DEPENDENCY => ['twitterHandle'],
+            Dependency::SITE_DEPENDENCY => ['twitterHandle'],
         ],
         'data'         => [
             'twitter:card'        => [
@@ -169,10 +169,10 @@ return [
             ],
             'twitter:site'        => [
                 'dependencies' => [
-                    Dependency::CONFIG_DEPENDENCY => ['twitterHandle'],
+                    Dependency::SITE_DEPENDENCY => ['twitterHandle'],
                 ],
                 'charset'      => '',
-                'content'      => '@{seomatic.config.twitterHandle}',
+                'content'      => '@{seomatic.site.twitterHandle}',
                 'httpEquiv'    => '',
                 'name'         => 'twitter:site',
             ],
@@ -210,7 +210,7 @@ return [
                 'charset'   => '',
                 'content'   => '{seomatic.meta.twitterImageDescription}',
                 'httpEquiv' => '',
-                'name'      => 'twitter:image',
+                'name'      => 'twitter:image:alt',
             ],
         ],
     ],
@@ -225,7 +225,7 @@ return [
         'data'         => [
             'google-site-verification' => [
                 'charset'   => '',
-                'content'   => '{seomatic.config.googleSiteVerification}',
+                'content'   => '{seomatic.site.googleSiteVerification}',
                 'httpEquiv' => '',
                 'name'      => 'google-site-verification',
             ],

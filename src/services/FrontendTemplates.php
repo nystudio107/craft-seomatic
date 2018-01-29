@@ -86,17 +86,9 @@ class FrontendTemplates extends Component
         if (!$siteId) {
             $siteId = Craft::$app->getSites()->currentSite->id;
         }
-        /** @var FrontendTemplateContainer $container */
-        $container = FrontendTemplateContainer::create();
-        // Load in all of the frontend templates
-        $frontendTemplates = $this->frontendTemplates($siteId);
-        foreach ($frontendTemplates as $frontendTemplate) {
-            $container->addData(
-                $frontendTemplate,
-                $frontendTemplate->handle
-            );
-        }
-        $this->frontendTemplateContainers = $container;
+        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
+
+        $this->frontendTemplateContainers = $metaBundle->frontendTemplatesContainer;
         // Handler: UrlManager::EVENT_REGISTER_SITE_URL_RULES
         Event::on(
             UrlManager::className(),
@@ -130,83 +122,6 @@ class FrontendTemplates extends Component
         }
 
         return $rules;
-    }
-
-    /**
-     * Get an individual frontend template by handle
-     *
-     * @param string $handle
-     * @param int    $siteId
-     *
-     * @return null|FrontendTemplate
-     */
-    public function frontendTemplateByHandle(string $handle, int $siteId)
-    {
-        $frontendTemplate = null;
-        $frontendTemplateArray = (new Query())
-            ->from(['{{%seomatic_frontendtemplates}}'])
-            ->where([
-                'handle' => $handle,
-                'siteId' => $siteId,
-            ])
-            ->one();
-        if (!empty($frontendTemplateArray)) {
-            $frontendTemplateArray = array_diff_key($frontendTemplateArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
-            $frontendTemplate = EditableTemplate::create(
-                $frontendTemplateArray
-            );
-        }
-
-        return $frontendTemplate;
-    }
-
-    /**
-     * Get all of the frontend templates
-     *
-     * @param int $siteId
-     *
-     * @return array
-     */
-    public function frontendTemplates(int $siteId): array
-    {
-        $frontendTemplates = [];
-        $frontendTemplateArrays = (new Query())
-            ->from(['{{%seomatic_frontendtemplates}}'])
-            ->where([
-                'siteId' => $siteId,
-            ])
-            ->all();
-        if (!empty($frontendTemplateArrays)) {
-            /** @var  $frontendTemplateArrays EditableTemplate */
-            foreach ($frontendTemplateArrays as $frontendTemplateArray) {
-                $frontendTemplateArray = array_diff_key($frontendTemplateArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
-                /** @var EditableTemplate $frontendTemplate */
-                $frontendTemplate = EditableTemplate::create($frontendTemplateArray);
-                $this->syncTemplateWithConfig($frontendTemplate);
-                if ($frontendTemplate) {
-                    $frontendTemplates[] = $frontendTemplate;
-                }
-            }
-        } else {
-            // If it doesn't exist, create it
-            $this->createFrontendTemplatesForSite($siteId);
-        }
-
-        return $frontendTemplates;
-    }
-
-    /**
-     * Create the default frontend templates
-     *
-     * @param array $baseConfig
-     */
-    public function createFrontendTemplates($baseConfig = [])
-    {
-        $sites = Craft::$app->getSites()->getAllSites();
-        /** @var EditableTemplate $frontendTemplate */
-        foreach ($sites as $site) {
-            $this->createFrontendTemplatesForSite($site->id, $baseConfig);
-        }
     }
 
     /**
@@ -280,71 +195,4 @@ class FrontendTemplates extends Component
 
     // Protected Methods
     // =========================================================================
-
-    /**
-     * @param int   $siteId
-     * @param array $baseConfig
-     */
-    protected function createFrontendTemplatesForSite(int $siteId, $baseConfig = [])
-    {
-        // Create a new FrontendTemplatesContainer with propagated defaults
-        $config = array_merge(
-            ConfigHelper::getConfigFromFile('frontendtemplates/Bundle'),
-            []
-        );
-        // Save each container out as a record
-        /** @var FrontendTemplateContainer $frontendTemplateContainer */
-        $frontendTemplateContainer = FrontendTemplateContainer::create(ArrayHelper::merge(
-            $baseConfig,
-            $config
-        ));
-
-        /** @var EditableTemplate $frontendTemplate */
-        foreach ($frontendTemplateContainer->data as $frontendTemplate) {
-            $frontendTemplate->siteId = $siteId;
-            $this->createFrontendTemplate($frontendTemplate);
-        }
-    }
-
-    /**
-     * Synchronize the passed in $container with the seomatic-config files if
-     * there is a newer version of the EditableTemplate containerVersion
-     * in the config file
-     *
-     * @param EditableTemplate $template
-     */
-    protected function syncTemplateWithConfig(EditableTemplate &$template)
-    {
-        $config = array_merge(
-            ConfigHelper::getConfigFromFile('frontendtemplates/Bundle'),
-            []
-        );
-        // If the config file has a newer version than the $metaBundleArray, merge them
-        if (!empty($config) && !empty($config[$template->handle])) {
-            $templateConfig = $config[$template->handle];
-            if (version_compare($templateConfig['templateVersion'], $template->templateVersion, '>')) {
-                $template->setAttributes($templateConfig);
-                // Create a new EditableTemplate
-                $this->createFrontendTemplate(
-                    $template
-                );
-            }
-        }
-    }
-
-    /**
-     * @param EditableTemplate $template
-     */
-    protected function createFrontendTemplate(EditableTemplate &$template)
-    {
-        // Save it out to a record
-        $frontendTemplateRecord = FrontendTemplateRecord::findOne([
-            'handle' => $template->handle,
-            'siteId' => $template->siteId,
-        ]);
-        if (!$frontendTemplateRecord) {
-            $frontendTemplateRecord = new FrontendTemplateRecord($template->getAttributes());
-        }
-        $frontendTemplateRecord->save();
-    }
 }
