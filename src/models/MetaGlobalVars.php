@@ -114,11 +114,6 @@ class MetaGlobalVars extends FluentModel
     /**
      * @var string
      */
-    public $twitterSite;
-
-    /**
-     * @var string
-     */
     public $twitterCreator;
 
     /**

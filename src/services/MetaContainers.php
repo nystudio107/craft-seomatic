@@ -160,6 +160,19 @@ class MetaContainers extends Component
      */
     public function includeMetaContainers()
     {
+        foreach ($this->metaContainers as $metaContainer) {
+            /** @var $metaContainer MetaContainer */
+            if ($metaContainer->include) {
+                $metaContainer->includeMetaData();
+            }
+        }
+    }
+
+    /**
+     * Parse the global variables
+     */
+    public function parseGlobalVars()
+    {
         if ($this->metaGlobalVars) {
             $this->metaGlobalVars->parseProperties();
         }
@@ -168,12 +181,6 @@ class MetaContainers extends Component
         }
         if ($this->metaSitemapVars) {
             $this->metaSitemapVars->parseProperties();
-        }
-        foreach ($this->metaContainers as $metaContainer) {
-            /** @var $metaContainer MetaContainer */
-            if ($metaContainer->include) {
-                $metaContainer->includeMetaData();
-            }
         }
     }
 
@@ -186,15 +193,7 @@ class MetaContainers extends Component
     public function previewMetaContainers(string $uri = '', int $siteId = null)
     {
         $this->loadMetaContainers($uri, $siteId);
-        if ($this->metaGlobalVars) {
-            $this->metaGlobalVars->parseProperties();
-        }
-        if ($this->metaSiteVars) {
-            $this->metaSiteVars->parseProperties();
-        }
-        if ($this->metaSitemapVars) {
-            $this->metaSitemapVars->parseProperties();
-        }
+        $this->parseGlobalVars();
         Seomatic::$seomaticVariable->init();
     }
 

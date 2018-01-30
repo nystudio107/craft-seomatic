@@ -207,15 +207,7 @@ class MetaContainerController extends Controller
 
         // Load the meta containers and parse our globals
         Seomatic::$plugin->metaContainers->loadMetaContainers($uri, $siteId);
-        if (Seomatic::$plugin->metaContainers->metaGlobalVars) {
-            Seomatic::$plugin->metaContainers->metaGlobalVars->parseProperties();
-        }
-        if (Seomatic::$plugin->metaContainers->metaSiteVars) {
-            Seomatic::$plugin->metaContainers->metaSiteVars->parseProperties();
-        }
-        if (Seomatic::$plugin->metaContainers->metaSitemapVars) {
-            Seomatic::$plugin->metaContainers->metaSitemapVars->parseProperties();
-        }
+        Seomatic::$plugin->metaContainers->parseGlobalVars();
 
         // Iterate through the desired $containerKeys
         foreach ($containerKeys as $containerKey) {

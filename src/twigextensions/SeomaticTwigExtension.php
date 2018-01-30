@@ -37,6 +37,7 @@ class SeomaticTwigExtension extends \Twig_Extension implements \Twig_Extension_G
             // Load the meta containers for this page
             Seomatic::$plugin->metaContainers->loadMetaContainers($request->getPathInfo(), null);
             Seomatic::$seomaticVariable->init();
+            Seomatic::$plugin->metaContainers->parseGlobalVars();
         }
 
         return ['seomatic' => Seomatic::$seomaticVariable];

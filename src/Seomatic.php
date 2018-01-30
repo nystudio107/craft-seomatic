@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic;
 
+use craft\events\TemplateEvent;
 use craft\web\Controller;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
