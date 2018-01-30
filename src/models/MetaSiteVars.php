@@ -14,6 +14,9 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\base\FluentModel;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
+use Craft;
+use yii\web\ServerErrorHttpException;
+
 /**
  * @inheritdoc
  *
@@ -76,7 +79,31 @@ class MetaSiteVars extends FluentModel
     // =========================================================================
 
     /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+
+        // Set some default values
+        if (empty($this->siteName)) {
+            try {
+                $info = Craft::$app->getInfo();
+            } catch (ServerErrorHttpException $e) {
+                $info = null;
+            }
+            $siteName = Craft::$app->config->general->siteName;
+            if (is_array($siteName)) {
+                $siteName = reset($siteName);
+            }
+            $this->siteName = $siteName ?? $info->name;
+        }
+    }
+
+    /**
      * Parse the model properties
+     *
+     * @inheritdoc
      */
     public function parseProperties()
     {

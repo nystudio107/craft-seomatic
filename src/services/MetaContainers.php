@@ -160,6 +160,7 @@ class MetaContainers extends Component
      */
     public function includeMetaContainers()
     {
+        $this->parseGlobalVars();
         foreach ($this->metaContainers as $metaContainer) {
             /** @var $metaContainer MetaContainer */
             if ($metaContainer->include) {

@@ -13,9 +13,6 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\base\FluentModel;
 
-use Craft;
-use yii\web\ServerErrorHttpException;
-
 /**
  * @author    nystudio107
  * @package   Seomatic
