@@ -104,9 +104,8 @@ class MetaLink extends MetaItem
     {
         parent::init();
 
-        if (empty($this->key)) {
-            $this->key = $this->rel;
-        }
+        // Make sure we have a valid key
+        $this->key = $this->key ?: $this->rel;
     }
 
     /**

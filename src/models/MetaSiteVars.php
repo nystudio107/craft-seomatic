@@ -43,38 +43,34 @@ class MetaSiteVars extends FluentModel
     // =========================================================================
 
     /**
-     * The name of the website
-     *
-     * @var string
+     * @var string The name of the website
      */
     public $siteName = '';
 
     /**
-     * The Twitter handle
-     *
-     * @var string
+     * @var string The Twitter handle
      */
     public $twitterHandle = '';
 
     /**
-     * The Facebook profile ID
-     *
-     * @var string
+     * @var string The Facebook profile ID
      */
     public $facebookProfileId = '';
 
     /**
-     * The Facebook app ID
-     *
-     * @var string
+     * @var string The Facebook app ID
      */
     public $facebookAppId = '';
 
     /**
-     * The Google Site Verification code
-     * @var string
+     * @var string The Google Site Verification code
      */
     public $googleSiteVerification;
+
+    /**
+     * @var string Link to the Google+ My Business page
+     */
+    public $googlePublisherLink;
 
     // Public Methods
     // =========================================================================

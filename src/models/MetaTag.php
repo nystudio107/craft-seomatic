@@ -105,9 +105,10 @@ class MetaTag extends MetaItem
     {
         parent::init();
 
-        if (empty($this->key)) {
-            $this->key = $this->name ?? $this->property ?? $this->httpEquiv;
-        }
+        // Make sure we have a valid key
+        $this->key = $this->key ?: $this->name;
+        $this->key = $this->key ?: $this->property;
+        $this->key = $this->key ?: $this->httpEquiv;
     }
 
     /**
@@ -119,7 +120,7 @@ class MetaTag extends MetaItem
         $rules = array_merge($rules, [
             [['charset', 'httpEquiv', 'name', 'property'], 'string'],
             [['content'], 'validateStringOrArray'],
-            [['name'], 'required', 'on' => ['warning']]
+            [['name'], 'safe', 'on' => ['warning']]
         ]);
 
         return $rules;

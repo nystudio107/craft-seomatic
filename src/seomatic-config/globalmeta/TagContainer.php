@@ -224,6 +224,9 @@ return [
         ],
         'data'         => [
             'google-site-verification' => [
+                'dependencies' => [
+                    Dependency::SITE_DEPENDENCY => ['googleSiteVerification'],
+                ],
                 'charset'   => '',
                 'content'   => '{seomatic.site.googleSiteVerification}',
                 'httpEquiv' => '',

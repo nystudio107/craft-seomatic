@@ -22,5 +22,6 @@ return [
         'facebookProfileId'      => '',
         'facebookAppId'          => '',
         'googleSiteVerification' => '',
+        'googlePublisherLink'    => '',
     ],
 ];

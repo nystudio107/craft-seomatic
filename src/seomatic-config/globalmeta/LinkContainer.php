@@ -40,7 +40,7 @@ return [
             ],
             'author'    => [
                 'crossorigin' => '',
-                'href'        => '/humans.txt',
+                'href'        => '{{ url("/humans.txt") }}',
                 'hreflang'    => '',
                 'media'       => '',
                 'rel'         => 'author',
@@ -48,8 +48,11 @@ return [
                 'type'        => 'text/plain',
             ],
             'publisher' => [
+                'dependencies' => [
+                    Dependency::SITE_DEPENDENCY => ['googlePublisherLink'],
+                ],
                 'crossorigin' => '',
-                'href'        => '{seomatic.config.googlePublisherLink}',
+                'href'        => '{seomatic.site.googlePublisherLink}',
                 'hreflang'    => '',
                 'media'       => '',
                 'rel'         => 'publisher',
