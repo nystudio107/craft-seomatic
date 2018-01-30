@@ -11,8 +11,7 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\base\FluentModel;
-use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
+use nystudio107\seomatic\base\VarsModel;
 
 use Craft;
 use yii\web\ServerErrorHttpException;
@@ -24,7 +23,7 @@ use yii\web\ServerErrorHttpException;
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaSiteVars extends FluentModel
+class MetaSiteVars extends VarsModel
 {
     // Static Methods
     // =========================================================================
@@ -98,19 +97,6 @@ class MetaSiteVars extends FluentModel
             }
             $this->siteName = $siteName ?? $info->name;
         }
-    }
-
-    /**
-     * Parse the model properties
-     *
-     * @inheritdoc
-     */
-    public function parseProperties()
-    {
-        // Parse the meta global vars
-        $attributes = $this->getAttributes();
-        MetaValueHelper::parseArray($attributes);
-        $this->setAttributes($attributes);
     }
 
     /**

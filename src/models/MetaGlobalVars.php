@@ -11,10 +11,9 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\base\FluentModel;
+use nystudio107\seomatic\base\VarsModel;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
-use Craft;
 use craft\validators\ArrayValidator;
 
 /**
@@ -25,7 +24,7 @@ use craft\validators\ArrayValidator;
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaGlobalVars extends FluentModel
+class MetaGlobalVars extends VarsModel
 {
     // Static Methods
     // =========================================================================

@@ -12,9 +12,7 @@
 namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\base\FluentModel;
-use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
-use Craft;
 use craft\validators\ArrayValidator;
 
 /**
@@ -92,17 +90,6 @@ class MetaSitemapVars extends FluentModel
 
     // Public Methods
     // =========================================================================
-
-    /**
-     * Parse the model properties
-     */
-    public function parseProperties()
-    {
-        // Parse the meta global vars
-        $attributes = $this->getAttributes();
-        MetaValueHelper::parseArray($attributes);
-        $this->setAttributes($attributes);
-    }
 
     /**
      * @inheritdoc

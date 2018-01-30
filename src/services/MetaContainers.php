@@ -180,9 +180,6 @@ class MetaContainers extends Component
         if ($this->metaSiteVars) {
             $this->metaSiteVars->parseProperties();
         }
-        if ($this->metaSitemapVars) {
-            $this->metaSitemapVars->parseProperties();
-        }
     }
 
     /**
