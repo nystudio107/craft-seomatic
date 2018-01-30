@@ -105,8 +105,6 @@ class Settings extends FluentModel
             ['maxTitleLength', 'default', 'value' => 120],
             ['maxDescriptionLength', 'integer', 'min' => 10],
             ['maxDescriptionLength', 'default', 'value' => 300],
-            ['twitterHandle', 'string'],
-            ['twitterHandle', 'default', 'value' => ''],
         ];
     }
 }
