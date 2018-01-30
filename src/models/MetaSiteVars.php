@@ -43,6 +43,13 @@ class MetaSiteVars extends FluentModel
     // =========================================================================
 
     /**
+     * The name of the website
+     *
+     * @var string
+     */
+    public $siteName = '';
+
+    /**
      * The Twitter handle
      *
      * @var string
@@ -91,6 +98,7 @@ class MetaSiteVars extends FluentModel
         return [
             [
                 [
+                    'siteName',
                     'twitterHandle',
                     'facebookProfileId',
                     'facebookAppId',

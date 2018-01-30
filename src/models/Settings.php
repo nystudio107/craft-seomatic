@@ -55,13 +55,6 @@ class Settings extends FluentModel
     public $devModeTitlePrefix = '[devMode] ';
 
     /**
-     * The name of the website
-     *
-     * @var string
-     */
-    public $siteName = '';
-
-    /**
      * The separator character to use for the `<title>` tag
      *
      * @var string
@@ -89,16 +82,6 @@ class Settings extends FluentModel
     public function init()
     {
         parent::init();
-
-        // Set some default values
-        if (empty($this->siteName)) {
-            try {
-                $info = Craft::$app->getInfo();
-            } catch (ServerErrorHttpException $e) {
-                $info = null;
-            }
-            $this->siteName = Craft::$app->config->general->siteName ?? $info->name;
-        }
     }
 
     /**

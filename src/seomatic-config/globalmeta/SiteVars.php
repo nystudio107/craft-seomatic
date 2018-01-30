@@ -17,6 +17,7 @@
 
 return [
     '*' => [
+        'siteName'               => '{{ craft.app.info.name }}',
         'twitterHandle'          => '',
         'facebookProfileId'      => '',
         'facebookAppId'          => '',
