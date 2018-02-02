@@ -11,7 +11,7 @@
         "seomatic"
     ],
     "support": {
-        "docs": "https://github.com/nystudio107/craft-seomatic/blob/master/README.md",
+        "docs": "https://github.com/nystudio107/craft-seomatic/blob/v3/README.md",
         "issues": "https://github.com/nystudio107/craft-seomatic/issues"
     },
     "license": "proprietary",
@@ -44,7 +44,7 @@
         "schemaVersion": "3.0.0",
         "hasCpSettings": true,
         "hasCpSection": true,
-        "changelogUrl": "https://raw.githubusercontent.com/nystudio107/craft-seomatic/master/CHANGELOG.md",
+        "changelogUrl": "https://raw.githubusercontent.com/nystudio107/craft-seomatic/v3/CHANGELOG.md",
         "class": "nystudio107\\seomatic\\Seomatic",
         "components": {
             "frontendTemplates": "nystudio107\\seomatic\\services\\FrontendTemplates",
