@@ -81,16 +81,20 @@ class Seomatic extends Plugin
     const SEOMATIC_HANDLE = 'Seomatic';
 
     const ADMIN_CP_SECTIONS = [
-        'content'  => [
-            'label' => 'Content SEO',
-            'url'   => 'seomatic/content',
-        ],
         'global'   => [
             'label' => 'Global SEO',
             'url'   => 'seomatic/global',
         ],
+        'content'  => [
+            'label' => 'Content SEO',
+            'url'   => 'seomatic/content',
+        ],
+        'site'     => [
+            'label' => 'Site Settings',
+            'url'   => 'seomatic/site',
+        ],
         'settings' => [
-            'label' => 'Settings',
+            'label' => 'Plugin Settings',
             'url'   => 'seomatic/settings',
         ],
     ];
@@ -440,10 +444,12 @@ class Seomatic extends Plugin
                 $event->rules = array_merge(
                     $event->rules,
                     [
-                        'seomatic'          => 'seomatic/seomatic-settings/content',
-                        'seomatic/content'  => 'seomatic/seomatic-settings/content',
-                        'seomatic/global'   => 'seomatic/seomatic-settings/global',
-                        'seomatic/settings' => 'seomatic/seomatic-settings/settings',
+                        'seomatic'                   => 'seomatic/seomatic-settings/content',
+                        'seomatic/global'            => 'seomatic/seomatic-settings/global',
+                        'seomatic/content'           => 'seomatic/seomatic-settings/content',
+                        'seomatic/site'              => 'seomatic/seomatic-settings/site',
+                        'seomatic/site/<siteId:\d+>' => 'seomatic/seomatic-settings/site',
+                        'seomatic/settings'          => 'seomatic/seomatic-settings/settings',
                     ]
                 );
             }

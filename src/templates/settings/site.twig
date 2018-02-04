@@ -1,0 +1,32 @@
+{% requireAdmin %}
+
+{% set fullPageForm = true %}
+
+{% from "seomatic/macros.twig" import configWarning %}
+
+{% extends "_layouts/cp" %}
+
+{% import "_includes/forms" as forms %}
+
+{% block header %}
+    {{ block('pageTitle') }}
+    {{ block('contextMenu') }}
+    <div class="flex-grow"></div>
+    <div class="flex-grow"></div>
+    {{ block('actionButton') }}
+{% endblock %}
+
+{% block contextMenu %}
+    {% include "seomatic/settings/sites-menu.twig" %}
+{% endblock %}
+
+{% block content %}
+
+    <input type="hidden" name="action" value="plugins/save-plugin-settings">
+    <input type="hidden" name="pluginHandle" value="seomatic">
+
+    {{ redirectInput("seomatic/settings") }}
+    {% namespace "site" %}
+    {% endnamespace %}
+{% endblock %}
+
