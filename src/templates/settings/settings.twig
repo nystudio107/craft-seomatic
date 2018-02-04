@@ -2,34 +2,93 @@
 
 {% set fullPageForm = true %}
 
+{% from 'seomatic/macros' import configWarning %}
+
 {% extends "_layouts/cp" %}
 
 {% import "_includes/forms" as forms %}
 
 {% block content %}
 
-    <input type="hidden" name="action" value="seomatic/saveContent" />
-    <input type="hidden" name="redirect" value="seomatic/content" />
+    <input type="hidden" name="action" value="plugins/save-plugin-settings">
+    <input type="hidden" name="pluginHandle" value="seomatic">
 
-    {{ redirectInput('settings/plugins') }}
-    {% namespace 'settings' %}
+    {{ redirectInput("seomatic/settings") }}
+    {% namespace "settings" %}
         {{ forms.textField({
-            'label': 'Plugin name',
-            'instructions': 'The public-facing name of the plugin',
-            'id': 'pluginName',
-            'name': 'pluginName',
-            'value': settings['pluginName'],
-            'warning': false
+            label: "Plugin name" |t("seomatic"),
+            instructions: "The public-facing name of the plugin" |t("seomatic"),
+            id: "pluginName",
+            name: "pluginName",
+            value: settings.pluginName,
+            warning: configWarning("pluginName", "seomatic"),
+        }) }}
+
+        {{ forms.selectField({
+            label: "Environment" |t("seomatic"),
+            instructions: "The server environment, either `live`, `staging`, or `local`" |t("seomatic"),
+            id: "environment",
+            name: "environment",
+            options: {
+                live: "Live Production" |t("seomatic"),
+                staging: "Staging" |t("seomatic"),
+                local: "Local Development" |t("seomatic"),
+            },
+            value: settings.environment,
+            warning: configWarning("environment", "seomatic"),
+        }) }}
+
+        {{ forms.lightswitchField({
+            label: "Render Enabled" |t("seomatic"),
+            instructions: "Should SEOmatic render metadata?" |t("seomatic"),
+            id: "renderEnabled",
+            name: "renderEnabled",
+            on: settings.renderEnabled,
+            warning: configWarning("renderEnabled", "seomatic"),
         }) }}
 
         {{ forms.textField({
-            'label': 'devMode <title> prefix',
-            'instructions': 'If `devMode` is on, prefix the <title> with this string',
-            'id': 'devModeTitlePrefix',
-            'name': 'devModeTitlePrefix',
-            'value': settings['devModeTitlePrefix'],
-            'warning': false
+            label: "devMode <title> prefix" |t("seomatic") |e,
+            instructions: "If `devMode` is on, prefix the <title> with this string" |t("seomatic") |e,
+            id: "devModeTitlePrefix",
+            name: "devModeTitlePrefix",
+            value: settings.devModeTitlePrefix,
+            warning: configWarning("devModeTitlePrefix", "seomatic"),
         }) }}
+
+        {{ forms.textField({
+            label: "Separator Character" |t("seomatic"),
+            instructions: "The separator character to use for the `<title>` tag" |t("seomatic") |e,
+            id: "separatorChar",
+            name: "separatorChar",
+            size: 5,
+            maxlength: 5,
+            value: settings.separatorChar,
+            warning: configWarning("separatorChar", "seomatic"),
+        }) }}
+
+        {{ forms.textField({
+            label: "Max SEO Title Length" |t("seomatic") |e,
+            instructions: "The max number of characters in the `<title>` tag" |t("seomatic") |e,
+            id: "maxTitleLength",
+            name: "maxTitleLength",
+            size: 5,
+            maxlength: 5,
+            value: settings.maxTitleLength,
+            warning: configWarning("maxTitleLength", "seomatic"),
+        }) }}
+
+        {{ forms.textField({
+            label: "Max SEO Description Length" |t("seomatic"),
+            instructions: "The max number of characters in the `<meta name='description'>` tag" |t("seomatic") |e,
+            id: "maxDescriptionLength",
+            name: "maxDescriptionLength",
+            size: 5,
+            maxlength: 5,
+            value: settings.maxDescriptionLength,
+            warning: configWarning("maxDescriptionLength", "seomatic"),
+        }) }}
+
     {% endnamespace %}
 {% endblock %}
 

@@ -24,51 +24,37 @@ class Settings extends FluentModel
     // =========================================================================
 
     /**
-     * The public-facing name of the plugin
-     *
-     * @var string
+     * @var string The public-facing name of the plugin
      */
     public $pluginName = 'SEOmatic';
 
     /**
-     * The server environment, either `live`, `staging`, or `local`
-     *
-     * @var string
+     * @var string The server environment, either `live`, `staging`, or `local`
      */
     public $environment = 'live';
 
     /**
-     * Should SEOmatic render metadata?
-     *
-     * @var bool
+     * @var bool Should SEOmatic render metadata?
      */
     public $renderEnabled = true;
 
     /**
-     * If `devMode` is on, prefix the <title> with this string
-     *
-     * @var string
+     * @var string If `devMode` is on, prefix the <title> with this string
      */
     public $devModeTitlePrefix = '[devMode] ';
 
     /**
-     * The separator character to use for the `<title>` tag
-     *
-     * @var string
+     * @var string The separator character to use for the `<title>` tag
      */
     public $separatorChar = '|';
 
     /**
-     * The max number of characters in the `<title>` tag
-     *
-     * @var int
+     * @var int The max number of characters in the `<title>` tag
      */
     public $maxTitleLength = 120;
 
     /**
-     * The max number of characters in the `<meta name="description">` tag
-     *
-     * @var int
+     * @var int The max number of characters in the `<meta name="description">` tag
      */
     public $maxDescriptionLength = 300;
 

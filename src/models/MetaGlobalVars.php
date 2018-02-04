@@ -51,12 +51,14 @@ class MetaGlobalVars extends VarsModel
     public $language;
 
     /**
-     * @var string
+     * @var string The seoTitle is used in the `<title>` tag, and as a default
+     *      setting for the ogTitle & twitterTitle
      */
     public $seoTitle;
 
     /**
-     * @var string
+     * @var string The seoDescription is used for the `<meta name="description">`
+     *      tag, and as a default setting for the Description & twitterDescription
      */
     public $seoDescription;
 
