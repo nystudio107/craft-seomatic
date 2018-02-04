@@ -1,7 +1,7 @@
 {% import "_includes/forms" as forms %}
 
-        {% do seomatic.config.twitterHandle('woof') %}
-        {% do seomatic.config.facebookProfileId('woof') %}
+        {% do seomatic.site.twitterHandle('woof') %}
+        {% do seomatic.site.facebookProfileId('woof') %}
 
 {% do view.registerAssetBundle("nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset") %}
 {% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/assetbundles/seomatic/dist', true) %}
@@ -37,7 +37,7 @@
 
         <div class="preview-column">
             <div class="displaypreview">
-                {% if seomatic.config.twitterHandle |length %}
+                {% if seomatic.site.twitterHandle |length %}
                     {% set lg = false %}
                     {% if seomatic.meta.twitterCard == "summary_large_image" %}
                         {% set lg = true %}
@@ -80,7 +80,7 @@
 
         <div class="preview-column">
             <div class="displaypreview">
-                {% if seomatic.config.facebookAppId |length or seomatic.config.facebookProfileId |length %}
+                {% if seomatic.site.facebookAppId |length or seomatic.site.facebookProfileId |length %}
                     <div class="Facebook-container">
                         <div class="">
                             <a href="{{ seomatic.meta.canonicalUrl }}" target="_blank">
