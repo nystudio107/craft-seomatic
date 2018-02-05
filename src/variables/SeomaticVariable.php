@@ -11,9 +11,9 @@
 
 namespace nystudio107\seomatic\variables;
 
-use nystudio107\seomatic\models\MetaSiteVars;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\models\MetaGlobalVars;
+use nystudio107\seomatic\models\MetaSiteVars;
 use nystudio107\seomatic\models\MetaSitemapVars;
 use nystudio107\seomatic\models\Settings;
 use nystudio107\seomatic\services\JsonLd;
@@ -21,6 +21,8 @@ use nystudio107\seomatic\services\Link;
 use nystudio107\seomatic\services\Script;
 use nystudio107\seomatic\services\Tag;
 use nystudio107\seomatic\services\Title;
+use nystudio107\seomatic\services\MetaContainers;
+use nystudio107\seomatic\services\MetaBundles;
 
 use yii\di\ServiceLocator;
 
@@ -62,6 +64,16 @@ class SeomaticVariable extends ServiceLocator
      */
     public $config;
 
+    /**
+     * @var MetaContainers
+     */
+    public $containers;
+
+    /**
+     * @var MetaBundles
+     */
+    public $bundles;
+
     // Public Methods
     // =========================================================================
 
@@ -95,6 +107,8 @@ class SeomaticVariable extends ServiceLocator
         $this->site = Seomatic::$plugin->metaContainers->metaSiteVars;
         $this->sitemap = Seomatic::$plugin->metaContainers->metaSitemapVars;
         $this->config = Seomatic::$settings;
+        $this->containers = Seomatic::$plugin->metaContainers;
+        $this->bundles = Seomatic::$plugin->metaBundles;
     }
 
     /**
