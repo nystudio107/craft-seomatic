@@ -8,10 +8,7 @@ No, really.
 
 ## Installation
 
-To install SEOmatic, follow these steps:
-
-1. Install with Composer via `composer require https://github.com/aelvan/Imager-Craft/seomatic`
-2. Install plugin in the Craft Control Panel under Settings > Plugins
+Don't. It's still in development.
 
 SEOmatic works on Craft 3.x.
 
