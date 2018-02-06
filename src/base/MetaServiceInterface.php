@@ -47,7 +47,7 @@ interface MetaServiceInterface
      * @param MetaItem $metaItem The MetaItem to add
      * @param string   $handle   An optional container handle to add the MetaItem to (defaults to GENERAL)
      *
-     * @return void
+     * @return null|MetaItem
      */
     public function add($metaItem, string $handle = '');
 

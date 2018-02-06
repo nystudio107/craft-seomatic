@@ -73,6 +73,9 @@ class Tag extends MetaService implements MetaServiceInterface
     {
         $key = MetaTagContainer::CONTAINER_TYPE . $handle;
         Seomatic::$plugin->metaContainers->addToMetaContainer($metaItem, $key);
+
+        /** @var MetaTag $metaItem */
+        return $metaItem;
     }
 
     /**

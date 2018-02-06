@@ -61,6 +61,9 @@ class Script extends MetaService implements MetaServiceInterface
     {
         $key = MetaScriptContainer::CONTAINER_TYPE . $handle;
         Seomatic::$plugin->metaContainers->addToMetaContainer($metaItem, $key);
+
+        /** @var MetaScript $metaItem */
+        return $metaItem;
     }
 
     /**

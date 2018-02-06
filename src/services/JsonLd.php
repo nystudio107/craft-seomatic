@@ -65,10 +65,13 @@ class JsonLd extends MetaService implements MetaServiceInterface
     /**
      * @inheritdoc
      */
-    public function add($metaItem, string $handle = self::GENERAL_HANDLE)
+    public function add($metaItem, string $handle = self::GENERAL_HANDLE): MetaJsonLd
     {
         $key = MetaJsonLdContainer::CONTAINER_TYPE . $handle;
         Seomatic::$plugin->metaContainers->addToMetaContainer($metaItem, $key);
+
+        /** @var MetaJsonLd $metaItem */
+        return $metaItem;
     }
 
     /**

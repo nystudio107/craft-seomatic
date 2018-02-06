@@ -61,6 +61,9 @@ class Link extends MetaService implements MetaServiceInterface
     {
         $key = MetaLinkContainer::CONTAINER_TYPE . $handle;
         Seomatic::$plugin->metaContainers->addToMetaContainer($metaItem, $key);
+
+        /** @var MetaLink $metaItem */
+        return $metaItem;
     }
 
     /**

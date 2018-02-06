@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\base;
 
+use Craft;
 use craft\base\Model;
 
 use yii\base\InvalidParamException;
@@ -32,13 +33,25 @@ abstract class FluentModel extends Model
      */
     public function __call($method, $args)
     {
-        $reflector = new \ReflectionClass(get_called_class());
+        try {
+            $reflector = new \ReflectionClass(get_called_class());
+        } catch (\ReflectionException $e) {
+            Craft::error(
+                $e->getMessage(),
+                __METHOD__
+            );
+            return null;
+        }
         if ($reflector->hasProperty($method)) {
             $property = $reflector->getProperty($method);
             if (empty($args)) {
+                // Return the property
                 return $property->getValue();
             } else {
+                // Set the property
                 $property->setValue($this, $args[0]);
+                // Make it chainable
+                return $this;
             }
         } else {
             throw new InvalidParamException("Property {$method} doesn't exist");

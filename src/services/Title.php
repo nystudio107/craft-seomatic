@@ -61,6 +61,9 @@ class Title extends MetaService implements MetaServiceInterface
     {
         $key = MetaTitleContainer::CONTAINER_TYPE . $handle;
         Seomatic::$plugin->metaContainers->addToMetaContainer($metaItem, $key);
+
+        /** @var MetaTitle $metaItem */
+        return $metaItem;
     }
 
     /**
