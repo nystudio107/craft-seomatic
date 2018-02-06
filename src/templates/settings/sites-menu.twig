@@ -3,10 +3,10 @@
 {% set baseUrl = "seomatic/#{controllerHandle}/" %}
 {% set params = [] %}
 
-<div id="sites-btn" class="btn menubtn" data-icon="world">{{ sitesMenuLabel }}</div>
-
-<div class="menu">
-    {% if showSites %}
+{% if showSites %}
+    <div id="sites-btn" class="btn menubtn" data-icon="world">{{ sitesMenuLabel }}</div>
+    
+    <div class="menu">
         {% set siteGroups = craft.app.sites.getAllGroups() %}
         {% for group in siteGroups %}
             {% set groupSiteIds = group.getSiteIds()|intersect(siteIds) %}
@@ -32,5 +32,5 @@
                 </ul>
             {% endif %}
         {% endfor %}
-    {% endif %}
-</div>
+    </div>
+{% endif %}

@@ -115,6 +115,49 @@ class MetaBundles extends Component
     }
 
     /**
+     * @param MetaBundle $metaBundle
+     * @param int        $siteId
+     */
+    public function updateGlobalMetaBundle(MetaBundle $metaBundle, int $siteId)
+    {
+        // Make sure it validates
+        if ($metaBundle->validate(null, true)) {
+            // Save it out to a record
+            $metaBundleRecord = MetaBundleRecord::findOne([
+                'sourceBundleType' => self::GLOBAL_META_BUNDLE,
+                'sourceSiteId'     => $siteId,
+            ]);
+            if (!$metaBundleRecord) {
+                $metaBundleRecord = new MetaBundleRecord();
+            }
+            $metaBundleRecord->setAttributes($metaBundle->getAttributes(), false);
+            if ($metaBundleRecord->save()) {
+                Craft::info(
+                    'Meta bundle updated: '
+                    .$metaBundle->sourceType
+                    . ' id: '
+                    .$metaBundle->sourceId
+                    .' from siteId: '
+                    .$metaBundle->sourceSiteId,
+                    __METHOD__
+                );
+            }
+        } else {
+            Craft::error(
+                'Meta bundle failed validation: '
+                . print_r($metaBundle->getErrors(), true)
+                . ' type: '
+                .$metaBundle->sourceType
+                . ' id: '
+                .$metaBundle->sourceId
+                .' from siteId: '
+                .$metaBundle->sourceSiteId,
+                __METHOD__
+            );
+        }
+    }
+
+    /**
      * @param string   $sourceType
      * @param int      $sourceId
      * @param int|null $sourceSiteId
@@ -601,40 +644,8 @@ class MetaBundles extends Component
             $baseConfig,
             $metaBundleDefaults
         ));
-        // Make sure it validates
-        if ($metaBundle->validate(null, true)) {
-            // Save it out to a record
-            $metaBundleRecord = MetaBundleRecord::findOne([
-                'sourceBundleType' => self::GLOBAL_META_BUNDLE,
-                'sourceSiteId'     => $siteId,
-            ]);
-            if (!$metaBundleRecord) {
-                $metaBundleRecord = new MetaBundleRecord();
-            }
-            $metaBundleRecord->setAttributes($metaBundle->getAttributes(), false);
-            if ($metaBundleRecord->save()) {
-                Craft::info(
-                    'Meta bundle updated: '
-                    .$metaBundle->sourceType
-                    . ' id: '
-                    .$metaBundle->sourceId
-                    .' from siteId: '
-                    .$metaBundle->sourceSiteId,
-                    __METHOD__
-                );
-            }
-        } else {
-            Craft::error(
-                'Meta bundle failed validation: '
-                . print_r($metaBundle->getErrors(), true)
-                . ' type: '
-                .$metaBundle->sourceType
-                . ' id: '
-                .$metaBundle->sourceId
-                .' from siteId: '
-                .$metaBundle->sourceSiteId,
-                __METHOD__
-            );
+        if ($metaBundle) {
+            $this->updateGlobalMetaBundle($metaBundle, $siteId);
         }
 
         return $metaBundle;

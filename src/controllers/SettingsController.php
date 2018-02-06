@@ -25,7 +25,7 @@ use yii\web\Response;
  * @package   Seomatic
  * @since     3.0.0
  */
-class SeomaticSettingsController extends Controller
+class SettingsController extends Controller
 {
     const DOCUMENTATION_URL = 'https://github.com/nystudio107/craft-seomatic/wiki';
 
@@ -42,7 +42,7 @@ class SeomaticSettingsController extends Controller
     // =========================================================================
 
     /**
-     * Global
+     * Global settings
      *
      * @param array $variables
      *
@@ -84,7 +84,7 @@ class SeomaticSettingsController extends Controller
     }
 
     /**
-     * Content
+     * Content settings
      *
      * @param array $variables
      *
@@ -126,7 +126,7 @@ class SeomaticSettingsController extends Controller
     }
 
     /**
-     * Site
+     * Site settings
      *
      * @param int $siteId
      *
@@ -188,20 +188,47 @@ class SeomaticSettingsController extends Controller
         } else {
             $variables['sitesMenuLabel'] = '';
         }
-
         $variables['controllerHandle'] = 'site';
+
+        // The site settings for the appropriate meta bundle
+        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($variables['currentSiteId']);
+        $variables['site'] = $metaBundle->metaSiteVars;
+
         // Render the template
         return $this->renderTemplate('seomatic/settings/site', $variables);
     }
 
     /**
-     * Settings
+     * @return Response
+     * @throws \yii\web\BadRequestHttpException
+     */
+    public function actionSaveSite()
+    {
+        $this->requirePostRequest();
+        $request = Craft::$app->getRequest();
+        $siteId = $request->getParam('siteId');
+        $siteSettings = $request->getParam('site');
+
+        // The site settings for the appropriate meta bundle
+        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
+        if ($metaBundle) {
+            $metaBundle->metaSiteVars->setAttributes($siteSettings);
+            Seomatic::$plugin->metaBundles->updateGlobalMetaBundle($metaBundle, $siteId);
+
+            Craft::$app->getSession()->setNotice(Craft::t('seomatic', 'Site settings saved.'));
+        }
+
+        return $this->redirectToPostedUrl();
+    }
+
+    /**
+     * Plugin settings
      *
      * @param array $variables
      *
      * @return Response The rendered result
      */
-    public function actionSettings(array $variables = []): Response
+    public function actionPlugin(array $variables = []): Response
     {
         $pluginName = Seomatic::$settings->pluginName;
         $templateTitle = Craft::t('seomatic', 'Plugin Settings');
@@ -234,7 +261,7 @@ class SeomaticSettingsController extends Controller
         $variables['metaBundles'] = Seomatic::$plugin->metaBundles->getContentMetaBundles(false);
 
         // Render the template
-        return $this->renderTemplate('seomatic/settings/settings', $variables);
+        return $this->renderTemplate('seomatic/settings/plugin', $variables);
     }
 
 }

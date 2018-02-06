@@ -82,11 +82,11 @@ class Seomatic extends Plugin
 
     const ADMIN_CP_SECTIONS = [
         'global'   => [
-            'label' => 'Global SEO',
+            'label' => 'Global Meta',
             'url'   => 'seomatic/global',
         ],
         'content'  => [
-            'label' => 'Content SEO',
+            'label' => 'Content Meta',
             'url'   => 'seomatic/content',
         ],
         'site'     => [
@@ -95,7 +95,7 @@ class Seomatic extends Plugin
         ],
         'settings' => [
             'label' => 'Plugin Settings',
-            'url'   => 'seomatic/settings',
+            'url'   => 'seomatic/plugin',
         ],
     ];
 
@@ -219,7 +219,7 @@ class Seomatic extends Plugin
      */
     public function getSettingsResponse()
     {
-        return Craft::$app->runAction('seomatic/seomatic-settings/settings');
+        return Craft::$app->runAction('seomatic/settings/plugin');
     }
 
     /**
@@ -444,12 +444,12 @@ class Seomatic extends Plugin
                 $event->rules = array_merge(
                     $event->rules,
                     [
-                        'seomatic'                   => 'seomatic/seomatic-settings/content',
-                        'seomatic/global'            => 'seomatic/seomatic-settings/global',
-                        'seomatic/content'           => 'seomatic/seomatic-settings/content',
-                        'seomatic/site'              => 'seomatic/seomatic-settings/site',
-                        'seomatic/site/<siteId:\d+>' => 'seomatic/seomatic-settings/site',
-                        'seomatic/settings'          => 'seomatic/seomatic-settings/settings',
+                        'seomatic'                   => 'seomatic/settings/content',
+                        'seomatic/global'            => 'seomatic/settings/global',
+                        'seomatic/content'           => 'seomatic/settings/content',
+                        'seomatic/site'              => 'seomatic/settings/site',
+                        'seomatic/site/<siteId:\d+>' => 'seomatic/settings/site',
+                        'seomatic/plugin'          => 'seomatic/settings/plugin',
                     ]
                 );
             }

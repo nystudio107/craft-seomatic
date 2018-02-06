@@ -70,6 +70,11 @@ class MetaSiteVars extends VarsModel
     public $googleSiteVerification;
 
     /**
+     * @var string The Bing Site Verification code
+     */
+    public $bingSiteVerification;
+
+    /**
      * @var string Link to the Google+ My Business page
      */
     public $googlePublisherLink;
@@ -112,6 +117,7 @@ class MetaSiteVars extends VarsModel
                     'facebookProfileId',
                     'facebookAppId',
                     'googleSiteVerification',
+                    'bingSiteVerification',
                 ],
                 'string'
             ],

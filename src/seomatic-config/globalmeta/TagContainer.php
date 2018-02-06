@@ -232,6 +232,15 @@ return [
                 'httpEquiv' => '',
                 'name'      => 'google-site-verification',
             ],
+            'bing-site-verification' => [
+                'dependencies' => [
+                    Dependency::SITE_DEPENDENCY => ['bingSiteVerification'],
+                ],
+                'charset'   => '',
+                'content'   => '{seomatic.site.bingSiteVerification}',
+                'httpEquiv' => '',
+                'name'      => 'msvalidate.01',
+            ],
         ],
     ],
 ];
