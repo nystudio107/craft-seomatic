@@ -180,9 +180,7 @@ class Seomatic extends Plugin
             function (PluginEvent $event) {
                 if ($event->plugin === $this) {
                     // Invalidate our caches after we've been installed
-                    Seomatic::$plugin->frontendTemplates->invalidateCaches();
-                    Seomatic::$plugin->metaContainers->invalidateCaches();
-                    Seomatic::$plugin->sitemaps->invalidateCaches();
+                    $this->clearAllCaches();
                     // Send them to our welcome screen
                     $request = Craft::$app->getRequest();
                     if ($request->isCpRequest) {
@@ -233,6 +231,16 @@ class Seomatic extends Plugin
         ]);
 
         return $navItem;
+    }
+
+    /**
+     * Clear all the caches!
+     */
+    public function clearAllCaches()
+    {
+        Seomatic::$plugin->frontendTemplates->invalidateCaches();
+        Seomatic::$plugin->metaContainers->invalidateCaches();
+        Seomatic::$plugin->sitemaps->invalidateCaches();
     }
 
     // Protected Methods

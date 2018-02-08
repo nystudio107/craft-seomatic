@@ -168,17 +168,6 @@ class Install extends Migration
      */
     protected function addForeignKeys()
     {
-        /*
-        $this->addForeignKey(
-            $this->db->getForeignKeyName('{{%seomatic_metabundles}}', 'sourceId'),
-            '{{%seomatic_metabundles}}',
-            'sourceId',
-            '{{%elements}}',
-            'id',
-            'CASCADE',
-            'CASCADE'
-        );
-        */
         $this->addForeignKey(
             $this->db->getForeignKeyName('{{%seomatic_metabundles}}', 'sourceSiteId'),
             '{{%seomatic_metabundles}}',
@@ -195,11 +184,6 @@ class Install extends Migration
      */
     protected function insertDefaultData()
     {
-        // Invalidate our data caches
-        Seomatic::$plugin->frontendTemplates->invalidateCaches();
-        Seomatic::$plugin->metaContainers->invalidateCaches();
-        Seomatic::$plugin->sitemaps->invalidateCaches();
-
         // Insert our default data
         Seomatic::$plugin->metaBundles->createGlobalMetaBundles();
         Seomatic::$plugin->metaBundles->createContentMetaBundles();
@@ -212,7 +196,7 @@ class Install extends Migration
     {
         // seomatic_metabundles table
         $this->dropTableIfExists('{{%seomatic_metabundles}}');
-        // seomatic_frontendtemplates table
+        // seomatic_frontendtemplates table (deprecated)
         $this->dropTableIfExists('{{%seomatic_frontendtemplates}}');
     }
 }

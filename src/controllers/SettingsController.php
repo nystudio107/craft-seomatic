@@ -224,6 +224,7 @@ class SettingsController extends Controller
             $metaBundle->metaSiteVars->setAttributes($siteSettings);
             Seomatic::$plugin->metaBundles->updateGlobalMetaBundle($metaBundle, $siteId);
 
+            Seomatic::$plugin->clearAllCaches();
             Craft::$app->getSession()->setNotice(Craft::t('seomatic', 'Site settings saved.'));
         }
 
