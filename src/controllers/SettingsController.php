@@ -212,7 +212,7 @@ class SettingsController extends Controller
 
         // Make sure the twitter handle isn't prefixed with an @
         if (!empty($siteSettings['twitterHandle'])) {
-            $siteSettings['twitterHandle'] = ltrim($siteSettings['sameAsLinks'], '@');
+            $siteSettings['twitterHandle'] = ltrim($siteSettings['twitterHandle'], '@');
         }
         // Make sure the sameAsLinks are indexed by the handle
         if (!empty($siteSettings['sameAsLinks'])) {
