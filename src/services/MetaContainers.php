@@ -650,7 +650,7 @@ class MetaContainers extends Component
     protected function addSameAsMeta()
     {
         $sameAsUrls = ArrayHelper::getColumn($this->metaSiteVars->sameAsLinks, 'url', false);
-        $sameAsUrls = array_filter($sameAsUrls);
+        $sameAsUrls = array_values(array_filter($sameAsUrls));
         // Facebook OpenGraph
         $ogSeeAlso = Seomatic::$plugin->tag->get('og:see_also');
         if ($ogSeeAlso) {
