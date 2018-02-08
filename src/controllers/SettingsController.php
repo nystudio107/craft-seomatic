@@ -10,6 +10,7 @@
 namespace nystudio107\seomatic\controllers;
 
 use craft\models\Site;
+use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 
@@ -209,6 +210,10 @@ class SettingsController extends Controller
         $siteId = $request->getParam('siteId');
         $siteSettings = $request->getParam('site');
 
+        // Make sure the sameAsLinks are indexed by the handle
+        if (!empty($siteSettings['sameAsLinks'])) {
+            $siteSettings['sameAsLinks'] = ArrayHelper::index($siteSettings['sameAsLinks'], 'handle');
+        }
         // The site settings for the appropriate meta bundle
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle) {
