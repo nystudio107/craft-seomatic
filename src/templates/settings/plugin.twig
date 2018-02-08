@@ -48,8 +48,8 @@
         }) }}
 
         {{ forms.textField({
-            label: "devMode <title> prefix" |t("seomatic") |e("html_attr"),
-            instructions: "If `devMode` is on, prefix the <title> with this string" |t("seomatic") |e("html_attr"),
+            label: "devMode &lt;title&gt; prefix" |t("seomatic"),
+            instructions: "If `devMode` is on, prefix the &lt;title&gt; with this string" |t("seomatic"),
             id: "devModeTitlePrefix",
             name: "devModeTitlePrefix",
             value: settings.devModeTitlePrefix,
@@ -58,7 +58,7 @@
 
         {{ forms.textField({
             label: "Separator Character" |t("seomatic"),
-            instructions: "The separator character to use for the `<title>` tag" |t("seomatic") |e("html_attr"),
+            instructions: "The separator character to use for the `&lt;title&gt;` tag" |t("seomatic"),
             id: "separatorChar",
             name: "separatorChar",
             size: 5,
@@ -69,7 +69,7 @@
 
         {{ forms.textField({
             label: "Max SEO Title Length" |t("seomatic"),
-            instructions: "The max number of characters in the `<title>` tag" |t("seomatic") |e("html_attr"),
+            instructions: "The max number of characters in the `&lt;title&gt;` tag" |t("seomatic"),
             id: "maxTitleLength",
             name: "maxTitleLength",
             size: 5,
@@ -80,7 +80,7 @@
 
         {{ forms.textField({
             label: "Max SEO Description Length" |t("seomatic"),
-            instructions: "The max number of characters in the `<meta name='description'>` tag" |t("seomatic") |e("html_attr"),
+            instructions: "The max number of characters in the `&lt;meta name='description'&gt;` tag" |t("seomatic"),
             id: "maxDescriptionLength",
             name: "maxDescriptionLength",
             size: 5,

@@ -92,7 +92,7 @@
                 
                 {{ forms.textField({
                     label: "Google Site Verification" |t("seomatic"),
-                    instructions: "For the `<meta name='google-site-verification'>` tag. Only enter the code in the `content=''`, not the entire tag. [Learn More](https://www.google.com/webmasters/verification/home?hl=en)" |t("seomatic") |e("html_attr"),
+                    instructions: "For the `&lt;meta name='google-site-verification'&gt;` tag. Only enter the code in the `content=''`, not the entire tag. [Learn More](https://www.google.com/webmasters/verification/home?hl=en)" |t("seomatic"),
                     id: "googleSiteVerification",
                     name: "googleSiteVerification",
                     value: site.googleSiteVerification,
@@ -101,7 +101,7 @@
     
                 {{ forms.textField({
                     label: "Bing Site Verification" |t("seomatic"),
-                    instructions: "For the `<meta name='msvalidate.01'>` tag. Only enter the code in the `content=''`, not the entire tag. [Learn More](https://www.bing.com/webmaster/help/how-to-verify-ownership-of-your-site-afcfefc6)" |t("seomatic") |e("html_attr"),
+                    instructions: "For the `&lt;meta name='msvalidate.01'&gt;` tag. Only enter the code in the `content=''`, not the entire tag. [Learn More](https://www.bing.com/webmaster/help/how-to-verify-ownership-of-your-site-afcfefc6)" |t("seomatic"),
                     id: "bingSiteVerification",
                     name: "bingSiteVerification",
                     value: site.bingSiteVerification,
@@ -110,7 +110,7 @@
     
                 {{ forms.editableTableField({
                     label: "Same As URLs" |t("seomatic"),
-                    instructions: "" |t("seomatic") |e("html_attr"),
+                    instructions: "Add the URLs to social media sites, and other presences on the web. These URLs are also made available to your frontend templates." |t("seomatic"),
                     id: 'sameAsLinks',
                     name: 'sameAsLinks',
                     required: false,

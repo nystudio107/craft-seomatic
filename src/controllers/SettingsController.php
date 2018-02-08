@@ -210,6 +210,10 @@ class SettingsController extends Controller
         $siteId = $request->getParam('siteId');
         $siteSettings = $request->getParam('site');
 
+        // Make sure the twitter handle isn't prefixed with an @
+        if (!empty($siteSettings['twitterHandle'])) {
+            $siteSettings['twitterHandle'] = ltrim($siteSettings['sameAsLinks'], '@');
+        }
         // Make sure the sameAsLinks are indexed by the handle
         if (!empty($siteSettings['sameAsLinks'])) {
             $siteSettings['sameAsLinks'] = ArrayHelper::index($siteSettings['sameAsLinks'], 'handle');
