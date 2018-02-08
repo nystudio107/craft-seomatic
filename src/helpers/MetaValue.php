@@ -167,11 +167,6 @@ class MetaValue
                 /** @var Asset $metaValue */
                 return $metaValue->uri;
             }
-            return strval($metaValue);
-        }
-        // Handle being passed in an array
-        if (is_array($metaValue)) {
-            return implode(' ', $metaValue);
         }
 
         return $metaValue;

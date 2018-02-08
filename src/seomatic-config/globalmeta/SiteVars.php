@@ -22,6 +22,58 @@ return [
         'facebookProfileId'      => '',
         'facebookAppId'          => '',
         'googleSiteVerification' => '',
-        'googlePublisherLink'    => '',
+        'bingSiteVerification'   => '',
+        'sameAsLinks'            => [
+            'twitter' => [
+                'siteName' => 'Twitter',
+                'handle'   => 'twitter',
+                'url'      => '',
+            ],
+            'facebook' => [
+                'siteName' => 'Facebook',
+                'handle'   => 'facebook',
+                'url'      => '',
+            ],
+            'wikipedia' => [
+                'siteName' => 'Wikpedia',
+                'handle'   => 'wikipedia',
+                'url'      => '',
+            ],
+            'linkedin' => [
+                'siteName' => 'LinkedIn',
+                'handle'   => 'linkedin',
+                'url'      => '',
+            ],
+            'googleplus' => [
+                'siteName' => 'Google+',
+                'handle'   => 'googleplus',
+                'url'      => '',
+            ],
+            'youtube' => [
+                'siteName' => 'YouTube',
+                'handle'   => 'youtube',
+                'url'      => '',
+            ],
+            'instagram' => [
+                'siteName' => 'Instagram',
+                'handle'   => 'instagram',
+                'url'      => '',
+            ],
+            'pinterest' => [
+                'siteName' => 'Pinterest',
+                'handle'   => 'pinterest',
+                'url'      => '',
+            ],
+            'github' => [
+                'siteName' => 'GitHub',
+                'handle'   => 'github',
+                'url'      => '',
+            ],
+            'vimeo' => [
+                'siteName' => 'Vimeo',
+                'handle'   => 'vimeo',
+                'url'      => '',
+            ],
+        ],
     ],
 ];

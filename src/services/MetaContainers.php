@@ -11,9 +11,11 @@
 
 namespace nystudio107\seomatic\services;
 
+use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\base\MetaItem;
+use nystudio107\seomatic\helpers\Dependency as DependencyHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\models\jsonld\BreadcrumbList;
 use nystudio107\seomatic\models\MetaBundle;
@@ -142,9 +144,7 @@ class MetaContainers extends Component
                     );
                     $this->loadGlobalMetaContainers($siteId);
                     $this->loadContentMetaContainers();
-                    $this->addMetaJsonLdBreadCrumbs($siteId);
-                    $this->addMetaLinkHrefLang();
-
+                    $this->addDynamicMetaToContainers($uri, $siteId);
                     return [$this->metaGlobalVars, $this->metaSiteVars, $this->metaSitemapVars, $this->metaContainers];
                 },
                 $duration,
@@ -193,6 +193,22 @@ class MetaContainers extends Component
         $this->loadMetaContainers($uri, $siteId);
         $this->parseGlobalVars();
         Seomatic::$seomaticVariable->init();
+    }
+
+    /**
+     * Add any custom/dynamic meta to the containers
+     *
+     * @param string $uri
+     * @param int    $siteId
+     *
+     * @throws Exception
+     * @throws SiteNotFoundException
+     */
+    public function addDynamicMetaToContainers(string $uri = '', int $siteId = null)
+    {
+        $this->addMetaJsonLdBreadCrumbs($siteId);
+        $this->addMetaLinkHrefLang();
+        $this->addSameAsMeta();
     }
 
     /**
@@ -625,6 +641,20 @@ class MetaContainers extends Component
                 ]);
                 Seomatic::$plugin->link->add($metaTag);
             }
+        }
+    }
+
+    /**
+     * Add the Same As meta tags and JSON-LD
+     */
+    protected function addSameAsMeta()
+    {
+        $sameAsUrls = ArrayHelper::getColumn($this->metaSiteVars->sameAsLinks, 'url', false);
+        $sameAsUrls = array_filter($sameAsUrls);
+        // Facebook OpenGraph
+        $ogSeeAlso = Seomatic::$plugin->tag->get('og:see_also');
+        if ($ogSeeAlso) {
+            $ogSeeAlso->content = $sameAsUrls;
         }
     }
 

@@ -107,6 +107,35 @@
                     value: site.bingSiteVerification,
                     warning: false,
                 }) }}
+    
+                {{ forms.editableTableField({
+                    label: "Same As URLs" |t("seomatic"),
+                    instructions: "" |t("seomatic") |e("html_attr"),
+                    id: 'sameAsLinks',
+                    name: 'sameAsLinks',
+                    required: false,
+                    cols: {
+                        siteName: {
+                            heading: "Site Name" |t("seomatic"),
+                            type: "singleline",
+                            autopopulate: "handle",
+                            width: "15%",
+                        },
+                        handle: {
+                            heading: "Handle" |t("seomatic"),
+                            type: "singleline",
+                            code: true,
+                            width: "15%",
+                        },
+                        url: {
+                            heading: "URL" |t("seomatic"),
+                            type: "singleline",
+                            width: "70%",
+                        },
+                    },
+                    rows: site.sameAsLinks,
+                }) }}
+
             {% endnamespace %}
         </div>
         

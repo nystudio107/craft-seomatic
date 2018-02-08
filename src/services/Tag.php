@@ -39,9 +39,12 @@ class Tag extends MetaService implements MetaServiceInterface
     // =========================================================================
 
     /**
-     * @inheritdoc
+     * @param string $key
+     * @param string $handle
+     *
+     * @return null|MetaTag
      */
-    public function get(string $key, string $handle = self::GENERAL_HANDLE): MetaTag
+    public function get(string $key, string $handle = self::GENERAL_HANDLE)
     {
         /** @var  $metaItem MetaTag */
         $metaItem = Seomatic::$plugin->metaContainers->getMetaItemByKey($key, MetaTagContainer::CONTAINER_TYPE);

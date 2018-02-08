@@ -20,7 +20,7 @@ use nystudio107\seomatic\services\Tag as TagService;
  */
 
 return [
-    MetaTagContainer::CONTAINER_TYPE . TagService::GENERAL_HANDLE  => [
+    MetaTagContainer::CONTAINER_TYPE.TagService::GENERAL_HANDLE  => [
         'name'         => 'General',
         'description'  => 'General Meta Tags',
         'handle'       => TagService::GENERAL_HANDLE,
@@ -73,7 +73,7 @@ return [
             ],
         ],
     ],
-    MetaTagContainer::CONTAINER_TYPE . TagService::FACEBOOK_HANDLE => [
+    MetaTagContainer::CONTAINER_TYPE.TagService::FACEBOOK_HANDLE => [
         'name'         => 'Facebook',
         'description'  => 'Facebook OpenGraph Meta Tags',
         'handle'       => TagService::FACEBOOK_HANDLE,
@@ -143,15 +143,22 @@ return [
                 'dependencies' => [
                     Dependency::TAG_DEPENDENCY => ['og:image'],
                 ],
+                'charset'      => '',
+                'content'      => '{seomatic.meta.ogImageDescription}',
+                'httpEquiv'    => '',
+                'name'         => '',
+                'property'     => 'og:image:alt',
+            ],
+            'og:see_also'    => [
                 'charset'   => '',
-                'content'   => '{seomatic.meta.ogImageDescription}',
+                'content'   => '',
                 'httpEquiv' => '',
                 'name'      => '',
-                'property'  => 'og:image:alt',
+                'property'  => 'og:see_also',
             ],
         ],
     ],
-    MetaTagContainer::CONTAINER_TYPE . TagService::TWITTER_HANDLE  => [
+    MetaTagContainer::CONTAINER_TYPE.TagService::TWITTER_HANDLE  => [
         'name'         => 'Twitter',
         'description'  => 'Twitter Card Meta Tags',
         'handle'       => TagService::TWITTER_HANDLE,
@@ -203,18 +210,18 @@ return [
                 'httpEquiv' => '',
                 'name'      => 'twitter:image',
             ],
-            'twitter:image:alt'       => [
+            'twitter:image:alt'   => [
                 'dependencies' => [
                     Dependency::TAG_DEPENDENCY => ['twitter:image'],
                 ],
-                'charset'   => '',
-                'content'   => '{seomatic.meta.twitterImageDescription}',
-                'httpEquiv' => '',
-                'name'      => 'twitter:image:alt',
+                'charset'      => '',
+                'content'      => '{seomatic.meta.twitterImageDescription}',
+                'httpEquiv'    => '',
+                'name'         => 'twitter:image:alt',
             ],
         ],
     ],
-    MetaTagContainer::CONTAINER_TYPE . TagService::MISC_HANDLE     => [
+    MetaTagContainer::CONTAINER_TYPE.TagService::MISC_HANDLE     => [
         'name'         => 'Miscellaneous',
         'description'  => 'Miscellaneous Meta Tags',
         'handle'       => TagService::MISC_HANDLE,
@@ -227,19 +234,19 @@ return [
                 'dependencies' => [
                     Dependency::SITE_DEPENDENCY => ['googleSiteVerification'],
                 ],
-                'charset'   => '',
-                'content'   => '{seomatic.site.googleSiteVerification}',
-                'httpEquiv' => '',
-                'name'      => 'google-site-verification',
+                'charset'      => '',
+                'content'      => '{seomatic.site.googleSiteVerification}',
+                'httpEquiv'    => '',
+                'name'         => 'google-site-verification',
             ],
-            'bing-site-verification' => [
+            'bing-site-verification'   => [
                 'dependencies' => [
                     Dependency::SITE_DEPENDENCY => ['bingSiteVerification'],
                 ],
-                'charset'   => '',
-                'content'   => '{seomatic.site.bingSiteVerification}',
-                'httpEquiv' => '',
-                'name'      => 'msvalidate.01',
+                'charset'      => '',
+                'content'      => '{seomatic.site.bingSiteVerification}',
+                'httpEquiv'    => '',
+                'name'         => 'msvalidate.01',
             ],
         ],
     ],

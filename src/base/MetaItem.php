@@ -230,7 +230,7 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
         while ($optionsCount--) {
             $resultOptions = $options;
             foreach ($resultOptions as $key => $value) {
-                $resultOptions[$key] = (is_array($value) && !empty($value[$optionsCount]))
+                $resultOptions[$key] = (is_array($value) && isset($value[$optionsCount]))
                     ? $value[$optionsCount] : $value;
             }
             $result[] = $resultOptions;

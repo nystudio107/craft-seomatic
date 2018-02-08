@@ -31,9 +31,12 @@ class Title extends MetaService implements MetaServiceInterface
     // =========================================================================
 
     /**
-     * @inheritdoc
+     * @param string $key
+     * @param string $handle
+     *
+     * @return null|MetaTitle
      */
-    public function get(string $key = 'title', string $handle = self::GENERAL_HANDLE): MetaTitle
+    public function get(string $key = 'title', string $handle = self::GENERAL_HANDLE)
     {
         /** @var  $metaItem MetaTitle */
         $metaItem = Seomatic::$plugin->metaContainers->getMetaItemByKey($key, MetaTitleContainer::CONTAINER_TYPE);

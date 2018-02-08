@@ -14,6 +14,8 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\base\VarsModel;
 
 use Craft;
+use craft\validators\ArrayValidator;
+
 use yii\web\ServerErrorHttpException;
 
 /**
@@ -75,9 +77,9 @@ class MetaSiteVars extends VarsModel
     public $bingSiteVerification;
 
     /**
-     * @var string Link to the Google+ My Business page
+     * @var array Array of links for Same As... sites, indexed by the handle
      */
-    public $googlePublisherLink;
+    public $sameAsLinks;
 
     // Public Methods
     // =========================================================================
@@ -120,6 +122,12 @@ class MetaSiteVars extends VarsModel
                     'bingSiteVerification',
                 ],
                 'string'
+            ],
+            [
+                [
+                    'sameAsLinks',
+                ],
+                ArrayValidator::class,
             ],
         ];
     }
