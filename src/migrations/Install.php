@@ -101,6 +101,7 @@ class Install extends Migration
                     'metaContainers'             => $this->text(),
                     'redirectsContainer'         => $this->text(),
                     'frontendTemplatesContainer' => $this->text(),
+                    'metaBundleSettings'         => $this->text(),
                 ]
             );
         }

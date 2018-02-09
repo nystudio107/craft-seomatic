@@ -42,4 +42,5 @@ return [
     ]),
     'redirectsContainer'         => Config::getConfigFromFile('categorymeta/RedirectsContainer'),
     'frontendTemplatesContainer' => Config::getConfigFromFile('categorymeta/FrontendTemplatesContainer'),
+    'metaBundleSettings'         => [],
 ];

@@ -22,7 +22,7 @@
                                     <div class="status {{ status }}"></div>{{ site.name|t('site') }}
                                 </a>
                             {% else %}
-                                {% set url = url(baseUrl~site.id, params) %}
+                                {% set url = url(baseUrl~site.handle, params) %}
                                 <a href="{{ url }}">
                                     <div class="status {{ status }}"></div>{{ site.name|t('site') }}
                                 </a>

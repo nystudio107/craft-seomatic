@@ -9,16 +9,18 @@
 
 namespace nystudio107\seomatic\controllers;
 
-use craft\models\Site;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 
 use Craft;
+use craft\elements\Asset;
 use craft\helpers\UrlHelper;
+use craft\models\Site;
 use craft\web\Controller;
 
 use yii\base\InvalidConfigException;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
 /**
@@ -45,14 +47,26 @@ class SettingsController extends Controller
     /**
      * Global settings
      *
-     * @param array $variables
+     * @param string|null $siteHandle
      *
      * @return Response The rendered result
+     * @throws NotFoundHttpException
      */
-    public function actionGlobal(array $variables = []): Response
+    public function actionGlobal(string $siteHandle = null): Response
     {
+        // Get the site to edit
+        if ($siteHandle !== null) {
+            $site = Craft::$app->getSites()->getSiteByHandle($siteHandle);
+            if (!$site) {
+                throw new NotFoundHttpException('Invalid site handle: '.$siteHandle);
+            }
+            $siteId = $site->id;
+        } else {
+            $siteId = Craft::$app->getSites()->currentSite->id;
+        }
+
         $pluginName = Seomatic::$settings->pluginName;
-        $templateTitle = Craft::t('seomatic', 'Global SEO');
+        $templateTitle = Craft::t('seomatic', 'Global Meta');
         // Asset bundle
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
@@ -63,7 +77,7 @@ class SettingsController extends Controller
             true
         );
         // Basic variables
-        $variables['fullPageForm'] = false;
+        $variables['fullPageForm'] = true;
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = Seomatic::$settings->pluginName;
         $variables['title'] = $pluginName . ' ' . $templateTitle;
@@ -78,7 +92,42 @@ class SettingsController extends Controller
             ],
         ];
         $variables['selectedSubnavItem'] = 'global';
-        $variables['metaBundles'] = Seomatic::$plugin->metaBundles->getContentMetaBundles(false);
+
+        // Enabled sites
+        $sites = Craft::$app->getSites();
+        $variables['currentSiteId'] = empty($siteId) ? Craft::$app->getSites()->currentSite->id : $siteId;
+        if (Craft::$app->getIsMultiSite()) {
+            // Set defaults based on the section settings
+            $variables['enabledSiteIds'] = [];
+            $variables['siteIds'] = [];
+
+            /** @var Site $site */
+            foreach ($sites->getAllSites() as $site) {
+                $variables['enabledSiteIds'][] = $site->id;
+                $variables['siteIds'][] = $site->id;
+            }
+        }
+
+        // For the image selector
+        $variables['elementType'] = Asset::class;
+
+        // Page title w/ revision label
+        $variables['showSites'] = (
+            Craft::$app->getIsMultiSite() &&
+            count($variables['enabledSiteIds'])
+        );
+
+        if ($variables['showSites']) {
+            $variables['sitesMenuLabel'] = Craft::t('site', $sites->getSiteById($variables['currentSiteId'])->name);
+        } else {
+            $variables['sitesMenuLabel'] = '';
+        }
+        $variables['controllerHandle'] = 'global';
+        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($variables['currentSiteId']);
+
+        $variables['globals'] = $metaBundle->metaGlobalVars;
+        $variables['sitemap'] = $metaBundle->metaSitemapVars;
+        $variables['settings'] = $metaBundle->metaBundleSettings;
 
         // Render the template
         return $this->renderTemplate('seomatic/settings/global', $variables);
@@ -129,12 +178,24 @@ class SettingsController extends Controller
     /**
      * Site settings
      *
-     * @param int $siteId
+     * @param string $siteHandle
      *
      * @return Response The rendered result
+     * @throws NotFoundHttpException
      */
-    public function actionSite(int $siteId = 0): Response
+    public function actionSite(string $siteHandle = null): Response
     {
+        // Get the site to edit
+        if ($siteHandle !== null) {
+            $site = Craft::$app->getSites()->getSiteByHandle($siteHandle);
+            if (!$site) {
+                throw new NotFoundHttpException('Invalid site handle: '.$siteHandle);
+            }
+            $siteId = $site->id;
+        } else {
+            $siteId = Craft::$app->getSites()->currentSite->id;
+        }
+
         $pluginName = Seomatic::$settings->pluginName;
         $templateTitle = Craft::t('seomatic', 'Site Settings');
         // Asset bundle
@@ -147,7 +208,7 @@ class SettingsController extends Controller
             true
         );
         // Basic variables
-        $variables['fullPageForm'] = false;
+        $variables['fullPageForm'] = true;
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = Seomatic::$settings->pluginName;
         $variables['title'] = $pluginName . ' ' . $templateTitle;
@@ -158,19 +219,19 @@ class SettingsController extends Controller
             ],
             [
                 'label' => $templateTitle,
-                'url'   => UrlHelper::cpUrl('seomatic'),
+                'url'   => UrlHelper::cpUrl('seomatic/site'),
             ],
         ];
         $variables['selectedSubnavItem'] = 'site';
 
         // Enabled sites
+        $sites = Craft::$app->getSites();
         $variables['currentSiteId'] = empty($siteId) ? Craft::$app->getSites()->currentSite->id : $siteId;
         if (Craft::$app->getIsMultiSite()) {
             // Set defaults based on the section settings
             $variables['enabledSiteIds'] = [];
             $variables['siteIds'] = [];
 
-            $sites = Craft::$app->getSites();
             /** @var Site $site */
             foreach ($sites->getAllSites() as $site) {
                 $variables['enabledSiteIds'][] = $site->id;
@@ -252,7 +313,7 @@ class SettingsController extends Controller
             true
         );
         // Basic variables
-        $variables['fullPageForm'] = false;
+        $variables['fullPageForm'] = true;
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = Seomatic::$settings->pluginName;
         $variables['title'] = $pluginName . ' ' . $templateTitle;

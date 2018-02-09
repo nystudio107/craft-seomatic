@@ -1,12 +1,105 @@
+{% from "seomatic/macros.twig" import configWarning %}
+
 {% extends "_layouts/cp" %}
-{% import '_includes/forms' as forms %}
 
-{% set content %}
+{% import "_includes/forms" as forms %}
 
-    <input type="hidden" name="action" value="seomatic/saveGlobal" />
-    <input type="hidden" name="redirect" value="seomatic/global" />
+{% set tabs = {
+    core: {
+        url: "#tab-global-core",
+        label: "Core SEO" |t("seomatic"),
+    },
+    social: {
+        url: "#tab-global-social",
+        label: "Social Media" |t("seomatic"),
+    }
+} %}
 
-    {{ csrfInput() }}
+{% block header %}
+    {{ block('pageTitle') }}
+    {{ block('contextMenu') }}
+    <div class="flex-grow"></div>
+    <div class="flex-grow"></div>
+    {{ block('actionButton') }}
+{% endblock %}
 
-Content
-{% endset %}
+{% block contextMenu %}
+    {% include "seomatic/settings/sites-menu.twig" %}
+{% endblock %}
+
+{% block content %}
+    
+    <input type="hidden" name="action" value="seomatic/settings/save-global">
+    <input type="hidden" name="siteId" value="{{ currentSiteId }}">
+    {{ redirectInput("seomatic/site") }}
+    
+    <div id="tab-global-core">
+        {% namespace "globals" %}
+    
+            {{ forms.textField({
+                label: "SEO Title" |t("seomatic"),
+                instructions: "Make sure your title tag is explicit and contains your most important keywords. Be sure that each page has a unique title tag." |t("seomatic"),
+                id: "seoTitle",
+                name: "seoTitle",
+                value: globals.seoTitle,
+                class: "nicetext",
+                maxlength: seomatic.config.maxTitleLength,
+                showCharsLeft: true,
+                warning: false,
+            }) }}
+    
+            {{ forms.textAreaField({
+                label: "SEO Description" |t("seomatic"),
+                instructions: "SEO descriptions allow you to influence how your web pages are described and displayed in search results. Ensure that all of your web pages have a unique meta description that is explicit and contains your most important keywords." |t("seomatic"),
+                id: "seoDescription",
+                name: "seoDescription",
+                value: globals.seoDescription,
+                class: "nicetext",
+                maxlength: seomatic.config.maxDescriptionLength,
+                showCharsLeft: true,
+                warning: false,
+            }) }}
+    
+            {{ forms.textAreaField({
+                label: "SEO Keywords" |t("seomatic"),
+                instructions: "Google ignores SEO Keywords tag; though other search engines do look at it. Utilize it carefully, as improper or spammy use most likely will hurt you, or even have your site marked as spam." |t("seomatic"),
+                id: "seoKeywords",
+                name: "seoKeywords",
+                value: globals.seoKeywords,
+                class: "nicetext",
+                maxlength: seomatic.config.maxDescriptionLength,
+                showCharsLeft: true,
+                warning: false,
+            }) }}
+        {% endnamespace %}
+    
+        {% namespace "settings" %}
+            {{ forms.elementSelectField({
+                label: "SEO Image"|t("seomatic"),
+                instructions: "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified. The image must be in JPG, PNG, or GIF format." |t("seomatic"),
+                id: "seoImage",
+                name: "seoImage",
+                viewMode: "large",
+                elementType: elementType,
+                criteria: {
+                    kind: ["image"],
+                },
+                sourceElementId: siteSeoImageId,
+                jsClass: 'Craft.AssetSelectInput',
+                selectionLabel: "Select SEO Image" |t("seomatic"),
+                sources: [],
+                limit: 1,
+                elements: null,
+                warning: false,
+            }) }}
+
+        {% endnamespace %}
+    </div>
+    
+    <div id="tab-global-social" class="hidden">
+        {% namespace "globals" %}
+            Don't hide me bro2
+        {% endnamespace %}
+    </div>
+    
+{% endblock %}

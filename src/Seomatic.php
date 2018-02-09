@@ -157,6 +157,14 @@ class Seomatic extends Plugin
         MetaValueHelper::cache();
     }
 
+    // Public Properties
+    // =========================================================================
+
+    /**
+     * @var string
+     */
+    public $schemaVersion = '3.0.1';
+
     // Public Methods
     // =========================================================================
 
@@ -456,7 +464,7 @@ class Seomatic extends Plugin
                         'seomatic/global'            => 'seomatic/settings/global',
                         'seomatic/content'           => 'seomatic/settings/content',
                         'seomatic/site'              => 'seomatic/settings/site',
-                        'seomatic/site/<siteId:\d+>' => 'seomatic/settings/site',
+                        'seomatic/site/<siteHandle:{handle}>' => 'seomatic/settings/site',
                         'seomatic/plugin'          => 'seomatic/settings/plugin',
                     ]
                 );

@@ -63,6 +63,11 @@ class MetaGlobalVars extends VarsModel
     public $seoDescription;
 
     /**
+     * @var string The $seoKeywords are used for the `<meta name="keywords">` tag
+     */
+    public $seoKeywords;
+
+    /**
      * @var string
      */
     public $seoImage;

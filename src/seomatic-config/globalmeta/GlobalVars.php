@@ -19,6 +19,7 @@ return [
     '*' => [
         'seoTitle'                => 'Global SEO Title',
         'seoDescription'          => 'Global SEO Description',
+        'seoKeywords'             => 'Global SEO Keywords',
         'seoImage'                => 'Global SEO Image',
         'seoImageDescription'     => 'Global SEO Image Description',
         'canonicalUrl'            => '{{ craft.app.request.pathInfo }}',

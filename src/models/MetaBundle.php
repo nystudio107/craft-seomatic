@@ -109,6 +109,11 @@ class MetaBundle extends Model
      */
     public $frontendTemplatesContainer;
 
+    /**
+     * @var array
+     */
+    public $metaBundleSettings;
+
     // Methods
     // =========================================================================
 
