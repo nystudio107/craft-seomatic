@@ -130,7 +130,7 @@ class SettingsController extends Controller
         $variables['settings'] = $metaBundle->metaBundleSettings;
 
         // Render the template
-        return $this->renderTemplate('seomatic/settings/global', $variables);
+        return $this->renderTemplate('seomatic/settings/global/_edit', $variables);
     }
 
     /**
@@ -172,7 +172,7 @@ class SettingsController extends Controller
         $variables['metaBundles'] = Seomatic::$plugin->metaBundles->getContentMetaBundles(false);
 
         // Render the template
-        return $this->renderTemplate('seomatic/settings/content', $variables);
+        return $this->renderTemplate('seomatic/settings/content/index', $variables);
     }
 
     /**
@@ -257,7 +257,7 @@ class SettingsController extends Controller
         $variables['site'] = $metaBundle->metaSiteVars;
 
         // Render the template
-        return $this->renderTemplate('seomatic/settings/site', $variables);
+        return $this->renderTemplate('seomatic/settings/site/_edit', $variables);
     }
 
     /**
@@ -332,7 +332,7 @@ class SettingsController extends Controller
         $variables['metaBundles'] = Seomatic::$plugin->metaBundles->getContentMetaBundles(false);
 
         // Render the template
-        return $this->renderTemplate('seomatic/settings/plugin', $variables);
+        return $this->renderTemplate('seomatic/settings/plugin/_edit', $variables);
     }
 
 }

@@ -515,7 +515,7 @@ class Seomatic extends Plugin
                 Seomatic::$plugin->metaContainers->previewMetaContainers($entry->uri, $entry->siteId);
                 // Render our sidebar template
                 $html = Craft::$app->view->renderTemplate(
-                    'seomatic/_sidebar'
+                    'seomatic/sidebars/entry'
                 );
             }
 
@@ -531,7 +531,7 @@ class Seomatic extends Plugin
                 Seomatic::$plugin->metaContainers->previewMetaContainers($category->uri, $category->siteId);
                 // Render our sidebar template
                 $html = Craft::$app->view->renderTemplate(
-                    'seomatic/_sidebar'
+                    'seomatic/sidebars/category'
                 );
             }
 

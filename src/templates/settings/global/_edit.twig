@@ -1,4 +1,4 @@
-{% from "seomatic/macros.twig" import configWarning %}
+{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 
 {% extends "_layouts/cp" %}
 
@@ -24,7 +24,7 @@
 {% endblock %}
 
 {% block contextMenu %}
-    {% include "seomatic/settings/sites-menu.twig" %}
+    {% include "seomatic/settings/_includes/sites-menu.twig" %}
 {% endblock %}
 
 {% block content %}
@@ -84,7 +84,6 @@
                 criteria: {
                     kind: ["image"],
                 },
-                sourceElementId: siteSeoImageId,
                 jsClass: 'Craft.AssetSelectInput',
                 selectionLabel: "Select SEO Image" |t("seomatic"),
                 sources: [],
