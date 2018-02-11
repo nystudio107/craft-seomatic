@@ -26,19 +26,19 @@ return [
     'include'     => 'true',
     'data'        => [
         FrontendTemplates::HUMANS_TXT_HANDLE => [
-            'templateVersion' => '1.0.0',
+            'templateVersion' => '1.0.2',
             'handle'          => FrontendTemplates::HUMANS_TXT_HANDLE,
             'path'            => 'humans.txt',
-            'template'        => 'frontend/pages/humans.twig',
+            'template'        => '_frontend/pages/humans.twig',
             'controller'      => 'frontend-template',
             'action'          => 'humans',
             'templateString'  => '',
         ],
         FrontendTemplates::ROBOTS_TXT_HANDLE => [
-            'templateVersion' => '1.0.0',
+            'templateVersion' => '1.0.2',
             'handle'          => FrontendTemplates::ROBOTS_TXT_HANDLE,
             'path'            => 'robots.txt',
-            'template'        => 'frontend/pages/robots.twig',
+            'template'        => '_frontend/pages/robots.twig',
             'controller'      => 'frontend-template',
             'action'          => 'robots',
             'templateString'  => '',
