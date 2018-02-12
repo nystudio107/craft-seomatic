@@ -594,7 +594,7 @@ class MetaBundles extends Component
         // If the config file has a newer version than the $metaBundleArray, merge them
         if (!empty($config)) {
             if (version_compare($config['bundleVersion'], $metaBundle->bundleVersion, '>')) {
-                $metaBundleArray = $metaBundle->getAttributes();
+                $metaBundleArray = $metaBundle->toArray();
                 // Create a new meta bundle
                 switch ($sourceType) {
                     case self::GLOBAL_META_BUNDLE:
@@ -634,12 +634,18 @@ class MetaBundles extends Component
     protected function createGlobalMetaBundleForSite(int $siteId, $baseConfig = []): MetaBundle
     {
         // Create a new meta bundle with propagated defaults
-        $metaBundleDefaults = array_merge(
+        $metaBundleDefaults = ArrayHelper::merge(
             ConfigHelper::getConfigFromFile('globalmeta/Bundle'),
             [
                 'sourceSiteId' => $siteId,
             ]
         );
+        // Remove any empty keys from our file-based config
+        $metaBundleDefaults = ArrayHelper::arrayFilterRecursive(
+            $metaBundleDefaults,
+            [ArrayHelper::class, 'unsetEmptyChildren']
+        );
+        // Merge them together
         $metaBundle = MetaBundle::create(ArrayHelper::merge(
             $baseConfig,
             $metaBundleDefaults
@@ -704,6 +710,12 @@ class MetaBundles extends Component
                         'sourceDateUpdated'     => $dateUpdated,
                     ]
                 );
+                // Remove any empty keys from our file-based config
+                $metaBundleDefaults = ArrayHelper::arrayFilterRecursive(
+                    $metaBundleDefaults,
+                    [ArrayHelper::class, 'unsetEmptyChildren']
+                );
+                // Merge them together
                 $metaBundle = MetaBundle::create(ArrayHelper::merge(
                     $baseConfig,
                     $metaBundleDefaults
