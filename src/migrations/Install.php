@@ -91,7 +91,7 @@ class Install extends Migration
                     'sourceName'                 => $this->string()->notNull()->defaultValue(''),
                     'sourceHandle'               => $this->string(64)->notNull()->defaultValue(''),
                     'sourceType'                 => $this->string(64)->notNull()->defaultValue(''),
-                    'sourceTemplate'             => $this->string(500)->notNull()->defaultValue(''),
+                    'sourceTemplate'             => $this->string(500)->defaultValue(''),
                     'sourceSiteId'               => $this->integer()->null(),
                     'sourceAltSiteSettings'      => $this->text(),
                     'sourceDateUpdated'          => $this->dateTime()->notNull(),

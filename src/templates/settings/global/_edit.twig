@@ -31,7 +31,7 @@
     
     <input type="hidden" name="action" value="seomatic/settings/save-global">
     <input type="hidden" name="siteId" value="{{ currentSiteId }}">
-    {{ redirectInput("seomatic/site") }}
+    {{ redirectInput("seomatic/global") }}
     
     <div id="tab-global-core">
         {% namespace "globals" %}
@@ -77,9 +77,10 @@
             {{ forms.elementSelectField({
                 label: "SEO Image"|t("seomatic"),
                 instructions: "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified. The image must be in JPG, PNG, or GIF format." |t("seomatic"),
-                id: "seoImage",
-                name: "seoImage",
+                id: "seoImageIds",
+                name: "seoImageIds",
                 viewMode: "large",
+                elements: seoImageElements,
                 elementType: elementType,
                 criteria: {
                     kind: ["image"],
@@ -88,10 +89,8 @@
                 selectionLabel: "Select SEO Image" |t("seomatic"),
                 sources: [],
                 limit: 1,
-                elements: null,
                 warning: false,
             }) }}
-
         {% endnamespace %}
     </div>
     

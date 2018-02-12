@@ -108,9 +108,6 @@ class SettingsController extends Controller
             }
         }
 
-        // For the image selector
-        $variables['elementType'] = Asset::class;
-
         // Page title w/ revision label
         $variables['showSites'] = (
             Craft::$app->getIsMultiSite() &&
@@ -129,8 +126,53 @@ class SettingsController extends Controller
         $variables['sitemap'] = $metaBundle->metaSitemapVars;
         $variables['settings'] = $metaBundle->metaBundleSettings;
 
+        // Image selectors
+        $elements = Craft::$app->getElements();
+        $variables['elementType'] = Asset::class;
+        $seoImageElements = [];
+        if (!empty($variables['settings']['seoImageIds'])) {
+            foreach ($variables['settings']['seoImageIds'] as $seoImageId) {
+                $seoImageElements[] = $elements->getElementById($seoImageId, Asset::class, $siteId);
+            }
+        }
+        $variables['seoImageElements'] = $seoImageElements;
+
         // Render the template
         return $this->renderTemplate('seomatic/settings/global/_edit', $variables);
+    }
+
+    /**
+     * @return Response
+     * @throws \yii\web\BadRequestHttpException
+     */
+    public function actionSaveGlobal()
+    {
+        $this->requirePostRequest();
+        $request = Craft::$app->getRequest();
+        $siteId = $request->getParam('siteId');
+        $globalsSettings = $request->getParam('globals');
+        $bundleSettings = $request->getParam('settings');
+
+        // The site settings for the appropriate meta bundle
+        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
+        if ($metaBundle) {
+            $elements = Craft::$app->getElements();
+            // Handle the SEO Image
+            if (!empty($bundleSettings['seoImageIds'])) {
+                $seoImage = $elements->getElementById($bundleSettings['seoImageIds'][0], Asset::class, $siteId);
+                if ($seoImage) {
+                    $globalsSettings['seoImage'] = $seoImage->getUrl();
+                }
+            }
+            $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
+            $metaBundle->metaBundleSettings = $bundleSettings;
+            Seomatic::$plugin->metaBundles->updateGlobalMetaBundle($metaBundle, $siteId);
+
+            Seomatic::$plugin->clearAllCaches();
+            Craft::$app->getSession()->setNotice(Craft::t('seomatic', 'SEOmatic global settings saved.'));
+        }
+
+        return $this->redirectToPostedUrl();
     }
 
     /**
@@ -286,7 +328,7 @@ class SettingsController extends Controller
             Seomatic::$plugin->metaBundles->updateGlobalMetaBundle($metaBundle, $siteId);
 
             Seomatic::$plugin->clearAllCaches();
-            Craft::$app->getSession()->setNotice(Craft::t('seomatic', 'Site settings saved.'));
+            Craft::$app->getSession()->setNotice(Craft::t('seomatic', 'SEOmatic site settings saved.'));
         }
 
         return $this->redirectToPostedUrl();
