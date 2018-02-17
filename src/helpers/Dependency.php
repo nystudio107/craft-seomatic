@@ -29,6 +29,9 @@ class Dependency
     const SITE_DEPENDENCY = 'site';
     const META_DEPENDENCY = 'meta';
     const TAG_DEPENDENCY = 'tag';
+    const SCRIPT_DEPENDENCY = 'script';
+    const LINK_DEPENDENCY = 'link';
+    const JSONLD_DEPENDENCY = 'jsonld';
 
     // Static Methods
     // =========================================================================
@@ -76,7 +79,46 @@ class Dependency
                 // Handle tag dependencies
                 case self::TAG_DEPENDENCY:
                     foreach ($keys as $key) {
-                        $meta = Seomatic::$plugin->metaContainers->getMetaItemByKey($key, '');
+                        $meta = Seomatic::$plugin->tag->get($key);
+                        if (!empty($meta)) {
+                            $options = $meta->tagAttributes();
+                            // If the meta item exists, and would render, it validates
+                            if ($meta->prepForRender($options)) {
+                                $validates = true;
+                            }
+                        }
+                    }
+                    break;
+                // Handle script dependencies
+                case self::SCRIPT_DEPENDENCY:
+                    foreach ($keys as $key) {
+                        $meta = Seomatic::$plugin->script->get($key);
+                        if (!empty($meta)) {
+                            $options = $meta->tagAttributes();
+                            // If the meta item exists, and would render, it validates
+                            if ($meta->prepForRender($options)) {
+                                $validates = true;
+                            }
+                        }
+                    }
+                    break;
+                // Handle link dependencies
+                case self::LINK_DEPENDENCY:
+                    foreach ($keys as $key) {
+                        $meta = Seomatic::$plugin->link->get($key);
+                        if (!empty($meta)) {
+                            $options = $meta->tagAttributes();
+                            // If the meta item exists, and would render, it validates
+                            if ($meta->prepForRender($options)) {
+                                $validates = true;
+                            }
+                        }
+                    }
+                    break;
+                // Handle link dependencies
+                case self::JSONLD_DEPENDENCY:
+                    foreach ($keys as $key) {
+                        $meta = Seomatic::$plugin->jsonLd->get($key);
                         if (!empty($meta)) {
                             $options = $meta->tagAttributes();
                             // If the meta item exists, and would render, it validates

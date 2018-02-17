@@ -101,7 +101,11 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
      */
     public function prepForRender(&$data): bool
     {
-        return Dependency::validateDependencies($this->dependencies);
+        if ($this->include) {
+            return Dependency::validateDependencies($this->dependencies);
+        }
+
+        return false;
     }
 
     /**
