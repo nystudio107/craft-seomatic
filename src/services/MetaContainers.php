@@ -452,7 +452,7 @@ class MetaContainers extends Component
         }
         $uri = trim($uri, '/');
         /** @var Element $element */
-        $element = Craft::$app->getElements()->getElementByUri($uri, $siteId, true);
+        $element = Craft::$app->getElements()->getElementByUri($uri, $siteId, false);
         if ($element) {
             Seomatic::setMatchedElement($element);
         }
