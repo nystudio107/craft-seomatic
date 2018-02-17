@@ -13,6 +13,8 @@ use nystudio107\seomatic\helpers\Dependency;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\services\Script as ScriptService;
 
+use yii\web\View;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -29,6 +31,21 @@ return [
         'dependencies' => [
         ],
         'data'         => [
+            'googleAnalytics' => [
+                'include' => false,
+                'templatePath'   => '_frontend/scripts/googleAnalytics.twig',
+                'position'   => View::POS_HEAD,
+                'vars' => [
+                    'trackingId' => '',
+                    'sendPageView' => true,
+                    'ipAnonymization' => false,
+                    'displayFeatures' => false,
+                    'ecommerce' => false,
+                    'enhancedEcommerce' => false,
+                    'enhancedLinkAttribution' => false,
+                    'linker' => false,
+                ],
+            ],
         ],
     ],
 ];

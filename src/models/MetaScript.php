@@ -14,6 +14,8 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\helpers\PluginTemplate as PluginTemplateHelper;
 use nystudio107\seomatic\base\MetaItem;
 
+use yii\web\View;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -49,6 +51,11 @@ class MetaScript extends MetaItem
      * @var string
      */
     public $templatePath;
+
+    /**
+     * @var int
+     */
+    public $position = View::POS_HEAD;
 
     /**
      * @var array

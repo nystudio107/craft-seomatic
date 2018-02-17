@@ -58,7 +58,7 @@ class MetaScriptContainer extends MetaContainer
                     $js = $metaScriptModel->render();
                     Seomatic::$view->registerJs(
                         $js,
-                        $this->position
+                        $metaScriptModel->position ?? $this->position
                     );
                     // If `devMode` is enabled, validate the Meta Script and output any model errors
                     if (Seomatic::$devMode) {
