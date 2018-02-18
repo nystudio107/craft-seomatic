@@ -22,37 +22,32 @@ trait FrontendTemplateTrait
     // =========================================================================
 
     /**
-     * The FrontEndTemplate handle
-     *
-     * @var string
+     * @var bool Should the template be included for frontend requests?
+     */
+    public $include = true;
+
+    /**
+     * @var string The FrontEndTemplate handle
      */
     public $handle;
 
     /**
-     * The the frontend URI to listen for
-     *
-     * @var string
+     * @var string The the frontend URI to listen for
      */
     public $path;
 
     /**
-     * The path for the source template for this FrontendTemplate
-     *
-     * @var string
+     * @var string The path for the source template for this FrontendTemplate
      */
     public $template;
 
     /**
-     * The controller for this FrontendTemplate
-     *
-     * @var string
+     * @var string The controller for this FrontendTemplate
      */
     public $controller;
 
     /**
-     * The action for this FrontendTemplate
-     *
-     * @var string
+     * @var string The action for this FrontendTemplate
      */
     public $action;
 }

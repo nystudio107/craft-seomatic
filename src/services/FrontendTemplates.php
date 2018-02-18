@@ -114,11 +114,13 @@ class FrontendTemplates extends Component
     {
         $rules = [];
         foreach ($this->frontendTemplateContainer->data as $frontendTemplate) {
-            /** @var $frontendTemplate FrontendTemplate */
-            $rules = array_merge(
-                $rules,
-                $frontendTemplate->routeRules()
-            );
+            if ($frontendTemplate->include) {
+                /** @var $frontendTemplate FrontendTemplate */
+                $rules = array_merge(
+                    $rules,
+                    $frontendTemplate->routeRules()
+                );
+            }
         }
 
         return $rules;
