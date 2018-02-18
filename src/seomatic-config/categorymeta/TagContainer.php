@@ -25,7 +25,7 @@ return [
         'description'  => 'General Meta Tags',
         'handle'       => TagService::GENERAL_HANDLE,
         'class'        => (string)MetaTagContainer::class,
-        'include'      => 'true',
+        'include'      => true,
         'dependencies' => [
         ],
         'data'         => [
@@ -36,7 +36,7 @@ return [
         'description'  => 'Facebook OpenGraph Meta Tags',
         'handle'       => TagService::FACEBOOK_HANDLE,
         'class'        => (string)MetaTagContainer::class,
-        'include'      => 'true',
+        'include'      => true,
         'dependencies' => [
         ],
         'data'         => [
@@ -47,7 +47,7 @@ return [
         'description'  => 'Twitter Card Meta Tags',
         'handle'       => TagService::TWITTER_HANDLE,
         'class'        => (string)MetaTagContainer::class,
-        'include'      => 'true',
+        'include'      => true,
         'dependencies' => [
         ],
         'data'         => [
@@ -58,7 +58,7 @@ return [
         'description'  => 'Miscellaneous Meta Tags',
         'handle'       => TagService::MISC_HANDLE,
         'class'        => (string)MetaTagContainer::class,
-        'include'      => 'true',
+        'include'      => true,
         'dependencies' => [
         ],
         'data'         => [

@@ -23,7 +23,7 @@ return [
     'description' => 'Templates that are rendered on the frontend',
     'handle'      => FrontendTemplates::FRONTENDTEMPLATES_CONTAINER,
     'class'       => (string)FrontendTemplateContainer::class,
-    'include'     => 'true',
+    'include'     => true,
     'data'        => [
         FrontendTemplates::HUMANS_TXT_HANDLE => [
             'handle'          => FrontendTemplates::HUMANS_TXT_HANDLE,

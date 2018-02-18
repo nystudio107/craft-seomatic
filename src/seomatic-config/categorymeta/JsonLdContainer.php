@@ -25,7 +25,7 @@ return [
         'description'  => 'JsonLd Tags',
         'handle'       => JsonLdService::GENERAL_HANDLE,
         'class'        => (string)MetaJsonLdContainer::class,
-        'include'      => 'true',
+        'include'      => true,
         'dependencies' => [
         ],
         'data'         => [

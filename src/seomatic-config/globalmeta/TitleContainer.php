@@ -25,7 +25,7 @@ return [
         'description'  => 'Meta Title Tag',
         'handle'       => TitleService::GENERAL_HANDLE,
         'class'        => (string)MetaTitleContainer::class,
-        'include'      => 'true',
+        'include'      => true,
         'dependencies' => [
         ],
         'data'         => [

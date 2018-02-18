@@ -25,7 +25,7 @@ return [
         'description'  => 'Link Tags',
         'handle'       => LinkService::GENERAL_HANDLE,
         'class'        => (string)MetaLinkContainer::class,
-        'include'      => 'true',
+        'include'      => true,
         'dependencies' => [
         ],
         'data'         => [
