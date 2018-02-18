@@ -110,8 +110,6 @@ class SeomaticVariable extends ServiceLocator
         $this->site = Seomatic::$plugin->metaContainers->metaSiteVars;
         $this->sitemap = Seomatic::$plugin->metaContainers->metaSitemapVars;
         $this->config = Seomatic::$settings;
-        $this->containers = Seomatic::$plugin->metaContainers;
-        $this->bundles = Seomatic::$plugin->metaBundles;
     }
 
     /**
