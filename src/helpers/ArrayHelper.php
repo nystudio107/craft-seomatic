@@ -50,7 +50,11 @@ class ArrayHelper extends \craft\helpers\ArrayHelper
      */
     public static function unsetEmptyChildren($value, $key)
     {
-        return empty($value) ? true : false;
+        if (is_bool($value)) {
+            return false;
+        } else {
+            return empty($value) ? true : false;
+        }
     }
 
     /**

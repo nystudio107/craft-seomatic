@@ -27,7 +27,7 @@ return [
         'description'  => 'Script Tags',
         'handle'       => ScriptService::GENERAL_HANDLE,
         'class'        => (string)MetaScriptContainer::class,
-        'include'      => 'true',
+        'include'      => true,
         'dependencies' => [
         ],
         'data'         => [

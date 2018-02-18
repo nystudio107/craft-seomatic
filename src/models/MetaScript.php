@@ -14,6 +14,8 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\helpers\PluginTemplate as PluginTemplateHelper;
 use nystudio107\seomatic\base\MetaItem;
 
+use Craft;
+
 use yii\web\View;
 
 /**
