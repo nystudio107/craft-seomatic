@@ -22,14 +22,12 @@ trait MetaItemTrait
     // =========================================================================
 
     /**
-     * @var bool
+     * @var bool Should the meta item be included on the page?
      */
     public $include = true;
 
     /**
-     * The key for this MetaItem
-     *
-     * @var string
+     * @var string The key for this MetaItem
      */
     public $key;
 
