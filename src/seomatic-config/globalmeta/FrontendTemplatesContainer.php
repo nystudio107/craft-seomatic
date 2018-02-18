@@ -26,7 +26,6 @@ return [
     'include'     => 'true',
     'data'        => [
         FrontendTemplates::HUMANS_TXT_HANDLE => [
-            'templateVersion' => '1.0.2',
             'handle'          => FrontendTemplates::HUMANS_TXT_HANDLE,
             'path'            => 'humans.txt',
             'template'        => '_frontend/pages/humans.twig',
@@ -35,7 +34,6 @@ return [
             'templateString'  => '',
         ],
         FrontendTemplates::ROBOTS_TXT_HANDLE => [
-            'templateVersion' => '1.0.2',
             'handle'          => FrontendTemplates::ROBOTS_TXT_HANDLE,
             'path'            => 'robots.txt',
             'template'        => '_frontend/pages/robots.twig',

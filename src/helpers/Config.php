@@ -43,7 +43,7 @@ class Config
     public static function getConfigFromFile(string $filePath): array
     {
         // Try craft/config first
-        $path = self::getConfigFilePath('@craft/config', $filePath);
+        $path = self::getConfigFilePath('@config', $filePath);
         if (!file_exists($path)) {
             // Now try our own internal config
             $path = self::getConfigFilePath('@nystudio107/seomatic', $filePath);

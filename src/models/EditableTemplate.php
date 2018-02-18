@@ -54,8 +54,9 @@ class EditableTemplate extends FrontendTemplate
 
     /**
      * @var string
+     * @deprecated This is no longer used
      */
-    public $templateVersion;
+    public $templateVersion = '1.0.0';
 
     /**
      * The template to render this FrontendTemplate
