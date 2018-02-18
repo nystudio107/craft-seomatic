@@ -34,7 +34,7 @@ class EditableTemplate extends FrontendTemplate
     /**
      * @param array $config
      *
-     * @return null|FrontendTemplate
+     * @return null|EditableTemplate
      */
     public static function create(array $config = [])
     {
@@ -42,18 +42,12 @@ class EditableTemplate extends FrontendTemplate
         $model = new EditableTemplate($config);
         // Load $templateString from the source template if it's not set
         if (empty($model->templateString)) {
-            $path = Craft::getAlias('@nystudio107/seomatic')
-                . DIRECTORY_SEPARATOR
-                . 'templates'
-                . DIRECTORY_SEPARATOR
-                . $model->template;
-            if (file_exists($path)) {
-                $model->templateString = @file_get_contents($path);
-            }
+            $model->loadTemplate();
         }
 
         return $model;
     }
+
 
     // Public Properties
     // =========================================================================
@@ -77,6 +71,27 @@ class EditableTemplate extends FrontendTemplate
 
     // Public Methods
     // =========================================================================
+
+    /**
+     * Load the existing template into a string
+     */
+    public function loadTemplate()
+    {
+        $this->templateString = '';
+        // Try it from our plugin directory first
+        $path = Craft::getAlias('@nystudio107/seomatic/templates/')
+            .$this->template;
+        if (file_exists($path)) {
+            $this->templateString = @file_get_contents($path);
+        } else {
+            // Next try it from the Craft template directory
+            $path = Craft::getAlias('@templates/')
+                . $this->template;
+            if (file_exists($path)) {
+                $this->templateString = @file_get_contents($path);
+            }
+        }
+    }
 
     /**
      * @inheritdoc

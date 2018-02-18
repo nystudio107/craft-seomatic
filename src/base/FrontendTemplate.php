@@ -21,7 +21,7 @@ use craft\base\Model;
  * @package   Seomatic
  * @since     3.0.0
  */
-abstract class FrontendTemplate extends Model implements FrontendTemplateInterface
+abstract class FrontendTemplate extends FluentModel implements FrontendTemplateInterface
 {
     // Traits
     // =========================================================================

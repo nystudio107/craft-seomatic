@@ -37,6 +37,7 @@ class PluginTemplate
      */
     public static function renderPluginTemplate(string $templatePath, array $params = []): string
     {
+        $templateRendered = false;
         // Stash the old template mode, and set it AdminCP template mode
         $oldMode = Craft::$app->view->getTemplateMode();
         try {
@@ -48,6 +49,7 @@ class PluginTemplate
         // Render the template with our vars passed in
         try {
             $htmlText = Craft::$app->view->renderTemplate('seomatic/' . $templatePath, $params);
+            $templateRendered = true;
         } catch (\Exception $e) {
             $htmlText = Craft::t(
                 'seomatic',
@@ -55,6 +57,29 @@ class PluginTemplate
                 ['template' => $templatePath, 'error' => $e->getMessage()]
             );
             Craft::error($htmlText, __METHOD__);
+            $templateRendered = false;
+        }
+
+        // If we couldn't find a plugin template, look for a frontend template
+        if (!$templateRendered) {
+            try {
+                Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_SITE);
+            } catch (Exception $e) {
+                Craft::error($e->getMessage(), __METHOD__);
+            }
+            // Render the template with our vars passed in
+            try {
+                $htmlText = Craft::$app->view->renderTemplate($templatePath, $params);
+                $templateRendered = true;
+            } catch (\Exception $e) {
+                $htmlText = Craft::t(
+                    'seomatic',
+                    'Error rendering `{template}` -> {error}',
+                    ['template' => $templatePath, 'error' => $e->getMessage()]
+                );
+                Craft::error($htmlText, __METHOD__);
+                $templateRendered = false;
+            }
         }
 
         // Restore the old template mode

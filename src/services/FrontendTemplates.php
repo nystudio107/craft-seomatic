@@ -38,7 +38,7 @@ class FrontendTemplates extends Component
     // Constants
     // =========================================================================
 
-    const FRONTENDTEMPLATES_CONTAINER = Seomatic::SEOMATIC_HANDLE.EditableTemplate::TEMPLATE_TYPE;
+    const FRONTENDTEMPLATES_CONTAINER = Seomatic::SEOMATIC_HANDLE . EditableTemplate::TEMPLATE_TYPE;
 
     const HUMANS_TXT_HANDLE = 'humans';
     const ROBOTS_TXT_HANDLE = 'robots';
@@ -63,7 +63,7 @@ class FrontendTemplates extends Component
     /**
      * @var FrontendTemplateContainer
      */
-    protected $frontendTemplateContainers = [];
+    protected $frontendTemplateContainer;
 
     // Public Methods
     // =========================================================================
@@ -88,7 +88,7 @@ class FrontendTemplates extends Component
         }
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
 
-        $this->frontendTemplateContainers = $metaBundle->frontendTemplatesContainer;
+        $this->frontendTemplateContainer = $metaBundle->frontendTemplatesContainer;
         // Handler: UrlManager::EVENT_REGISTER_SITE_URL_RULES
         Event::on(
             UrlManager::className(),
@@ -113,7 +113,7 @@ class FrontendTemplates extends Component
     public function frontendTemplateRouteRules(): array
     {
         $rules = [];
-        foreach ($this->frontendTemplateContainers->data as $frontendTemplate) {
+        foreach ($this->frontendTemplateContainer->data as $frontendTemplate) {
             /** @var $frontendTemplate FrontendTemplate */
             $rules = array_merge(
                 $rules,
@@ -138,21 +138,21 @@ class FrontendTemplates extends Component
         $dependency = new TagDependency([
             'tags' => [
                 $this::GLOBAL_FRONTENDTEMPLATE_CACHE_TAG,
-                $this::FRONTENDTEMPLATE_CACHE_TAG.$template,
+                $this::FRONTENDTEMPLATE_CACHE_TAG . $template,
             ],
         ]);
         $cache = Craft::$app->getCache();
         $html = $cache->getOrSet(
-            $this::CACHE_KEY.$template,
+            $this::CACHE_KEY . $template,
             function () use ($template, $params) {
                 Craft::info(
-                    'Frontend template cache miss: '.$template,
+                    'Frontend template cache miss: ' . $template,
                     __METHOD__
                 );
                 $html = '';
-                if (!empty($this->frontendTemplateContainers->data[$template])) {
+                if (!empty($this->frontendTemplateContainer->data[$template])) {
                     /** @var $frontendTemplate FrontendTemplate */
-                    $frontendTemplate = $this->frontendTemplateContainers->data[$template];
+                    $frontendTemplate = $this->frontendTemplateContainer->data[$template];
                     $html = $frontendTemplate->render($params);
                 }
 
@@ -163,6 +163,27 @@ class FrontendTemplates extends Component
         );
 
         return $html;
+    }
+
+    /**
+     * Return a EditableTemplate object by $key from container $type
+     *
+     * @param string $key
+     * @param string $type
+     *
+     * @return null|EditableTemplate
+     */
+    public function getFrontendTemplateByKey(string $key, string $type = '')
+    {
+        $frontendTemplate = null;
+        /** @var  $frontendTemplate EditableTemplate */
+        foreach ($this->frontendTemplateContainer->data as $frontendTemplate) {
+            if ($key == $frontendTemplate->handle) {
+                return $frontendTemplate;
+            }
+        }
+
+        return $frontendTemplate;
     }
 
     /**
@@ -186,9 +207,9 @@ class FrontendTemplates extends Component
     public function invalidateFrontendTemplateCache(string $template)
     {
         $cache = Craft::$app->getCache();
-        TagDependency::invalidate($cache, $this::FRONTENDTEMPLATE_CACHE_TAG.$template);
+        TagDependency::invalidate($cache, $this::FRONTENDTEMPLATE_CACHE_TAG . $template);
         Craft::info(
-            'Frontend template cache cleared: '.$template,
+            'Frontend template cache cleared: ' . $template,
             __METHOD__
         );
     }
