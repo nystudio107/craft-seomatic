@@ -36,6 +36,7 @@ return [
                 'templatePath'   => '_frontend/scripts/googleAnalytics.twig',
                 'position'   => View::POS_HEAD,
                 'vars' => [
+                    'analyticsUrl' => '//www.google-analytics.com/analytics.js',
                     'trackingId' => '',
                     'sendPageView' => true,
                     'ipAnonymization' => false,
