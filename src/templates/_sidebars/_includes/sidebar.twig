@@ -1,8 +1,5 @@
 {% import "_includes/forms" as forms %}
 
-        {% do seomatic.site.twitterHandle('woof') %}
-        {% do seomatic.site.facebookProfileId('woof') %}
-
 {% do view.registerAssetBundle("nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset") %}
 {% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/assetbundles/seomatic/dist', true) %}
 
