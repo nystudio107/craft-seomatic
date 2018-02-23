@@ -42,5 +42,5 @@ return [
     ]),
     'redirectsContainer'         => Config::getConfigFromFile('entrymeta/RedirectsContainer'),
     'frontendTemplatesContainer' => Config::getConfigFromFile('entrymeta/FrontendTemplatesContainer'),
-    'metaBundleSettings'         => [],
+    'metaBundleSettings'         => Config::getConfigFromFile('entrymeta/BundleSettings'),
 ];

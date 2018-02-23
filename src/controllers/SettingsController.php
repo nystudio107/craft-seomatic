@@ -165,7 +165,7 @@ class SettingsController extends Controller
                 }
             }
             $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
-            $metaBundle->metaBundleSettings = $bundleSettings;
+            $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
             Seomatic::$plugin->metaBundles->updateGlobalMetaBundle($metaBundle, $siteId);
 
             Seomatic::$plugin->clearAllCaches();

@@ -13,7 +13,6 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\base\MetaContainer;
 
-use Craft;
 use craft\base\Model;
 use craft\helpers\Json as JsonHelper;
 
@@ -110,7 +109,7 @@ class MetaBundle extends Model
     public $frontendTemplatesContainer;
 
     /**
-     * @var array
+     * @var MetaBundleSettings
      */
     public $metaBundleSettings;
 
@@ -161,6 +160,10 @@ class MetaBundle extends Model
         // Meta sitemap variables
         if (isset($this->metaSitemapVars)) {
             $this->metaSitemapVars = MetaSitemapVars::create($this->metaSitemapVars);
+        }
+        // Meta bundle settings
+        if (isset($this->metaBundleSettings)) {
+            $this->metaBundleSettings = MetaBundleSettings::create($this->metaBundleSettings);
         }
         // Meta containers
         if (!empty($this->metaContainers)) {
