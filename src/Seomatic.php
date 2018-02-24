@@ -264,7 +264,7 @@ class Seomatic extends Plugin
             Sections::class,
             Sections::EVENT_AFTER_SAVE_SECTION,
             function (SectionEvent $event) {
-                Craft::trace(
+                Craft::debug(
                     'Sections::EVENT_AFTER_SAVE_SECTION',
                     __METHOD__
                 );
@@ -284,7 +284,7 @@ class Seomatic extends Plugin
             Sections::class,
             Sections::EVENT_AFTER_DELETE_SECTION,
             function (SectionEvent $event) {
-                Craft::trace(
+                Craft::debug(
                     'Sections::EVENT_AFTER_DELETE_SECTION',
                     __METHOD__
                 );
@@ -305,7 +305,7 @@ class Seomatic extends Plugin
             Categories::class,
             Categories::EVENT_AFTER_SAVE_GROUP,
             function (CategoryGroupEvent $event) {
-                Craft::trace(
+                Craft::debug(
                     'Categories::EVENT_AFTER_SAVE_GROUP',
                     __METHOD__
                 );
@@ -325,7 +325,7 @@ class Seomatic extends Plugin
             Categories::class,
             Categories::EVENT_AFTER_DELETE_GROUP,
             function (CategoryGroupEvent $event) {
-                Craft::trace(
+                Craft::debug(
                     'Categories::EVENT_AFTER_DELETE_GROUP',
                     __METHOD__
                 );
@@ -346,7 +346,7 @@ class Seomatic extends Plugin
             Elements::class,
             Elements::EVENT_AFTER_SAVE_ELEMENT,
             function (ElementEvent $event) {
-                Craft::trace(
+                Craft::debug(
                     'Elements::EVENT_AFTER_SAVE_ELEMENT',
                     __METHOD__
                 );
@@ -363,7 +363,7 @@ class Seomatic extends Plugin
             Elements::class,
             Elements::EVENT_AFTER_DELETE_ELEMENT,
             function (ElementEvent $event) {
-                Craft::trace(
+                Craft::debug(
                     'Elements::EVENT_AFTER_DELETE_ELEMENT',
                     __METHOD__
                 );
@@ -380,7 +380,7 @@ class Seomatic extends Plugin
             Plugins::class,
             Plugins::EVENT_AFTER_INSTALL_PLUGIN,
             function (PluginEvent $event) {
-                Craft::trace(
+                Craft::debug(
                     'Plugins::EVENT_AFTER_INSTALL_PLUGIN',
                     __METHOD__
                 );
@@ -407,7 +407,7 @@ class Seomatic extends Plugin
             ErrorHandler::class,
             ErrorHandler::EVENT_BEFORE_HANDLE_EXCEPTION,
             function (ExceptionEvent $event) {
-                Craft::trace(
+                Craft::debug(
                     'ErrorHandler::EVENT_BEFORE_HANDLE_EXCEPTION',
                     __METHOD__
                 );
@@ -428,7 +428,7 @@ class Seomatic extends Plugin
             View::class,
             View::EVENT_END_PAGE,
             function (Event $event) {
-                Craft::trace(
+                Craft::debug(
                     'View::EVENT_END_PAGE',
                     __METHOD__
                 );
@@ -452,7 +452,7 @@ class Seomatic extends Plugin
             UrlManager::class,
             UrlManager::EVENT_REGISTER_CP_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
-                Craft::trace(
+                Craft::debug(
                     'UrlManager::EVENT_REGISTER_CP_URL_RULES',
                     __METHOD__
                 );
@@ -460,12 +460,13 @@ class Seomatic extends Plugin
                 $event->rules = array_merge(
                     $event->rules,
                     [
-                        'seomatic'                   => 'seomatic/settings/content',
-                        'seomatic/global'            => 'seomatic/settings/global',
-                        'seomatic/content'           => 'seomatic/settings/content',
-                        'seomatic/site'              => 'seomatic/settings/site',
-                        'seomatic/site/<siteHandle:{handle}>' => 'seomatic/settings/site',
-                        'seomatic/plugin'          => 'seomatic/settings/plugin',
+                        'seomatic'                              => 'seomatic/settings/content',
+                        'seomatic/global'                       => 'seomatic/settings/global',
+                        'seomatic/global/<siteHandle:{handle}>' => 'seomatic/settings/global',
+                        'seomatic/content'                      => 'seomatic/settings/content',
+                        'seomatic/site'                         => 'seomatic/settings/site',
+                        'seomatic/site/<siteHandle:{handle}>'   => 'seomatic/settings/site',
+                        'seomatic/plugin'                       => 'seomatic/settings/plugin',
                     ]
                 );
             }
@@ -475,7 +476,7 @@ class Seomatic extends Plugin
             ClearCaches::class,
             ClearCaches::EVENT_REGISTER_CACHE_OPTIONS,
             function (RegisterCacheOptionsEvent $event) {
-                Craft::trace(
+                Craft::debug(
                     'ClearCaches::EVENT_REGISTER_CACHE_OPTIONS',
                     __METHOD__
                 );

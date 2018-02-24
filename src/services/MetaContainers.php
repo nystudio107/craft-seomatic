@@ -192,6 +192,13 @@ class MetaContainers extends Component
     {
         $this->loadMetaContainers($uri, $siteId);
         $this->parseGlobalVars();
+        // Special-case the global bundle
+        if ($uri == MetaBundles::GLOBAL_META_BUNDLE) {
+            try {
+                $this->metaGlobalVars->canonicalUrl = UrlHelper::siteUrl('/', null, null, $siteId);
+            } catch (Exception $e) {
+            }
+        }
         Seomatic::$seomaticVariable->init();
     }
 

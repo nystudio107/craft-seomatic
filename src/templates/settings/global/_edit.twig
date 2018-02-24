@@ -4,15 +4,22 @@
 
 {% import "_includes/forms" as forms %}
 
+{% do view.registerAssetBundle("nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset") %}
+{% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/assetbundles/seomatic/dist', true) %}
+
 {% set tabs = {
-    core: {
-        url: "#tab-global-core",
-        label: "Core SEO" |t("seomatic"),
+    general: {
+        url: "#tab-global-general",
+        label: "General" |t("seomatic"),
     },
-    social: {
-        url: "#tab-global-social",
-        label: "Social Media" |t("seomatic"),
-    }
+    twitter: {
+        url: "#tab-global-twitter",
+        label: "Twitter" |t("seomatic"),
+    },
+    facebook: {
+        url: "#tab-global-facebook",
+        label: "Facebook" |t("seomatic"),
+    },
 } %}
 
 {% block header %}
@@ -33,7 +40,8 @@
     <input type="hidden" name="siteId" value="{{ currentSiteId }}">
     {{ redirectInput("seomatic/global") }}
     
-    <div id="tab-global-core">
+    <div id="tab-global-general">
+        {% include "seomatic/_includes/googlePreview.twig" %}
         {% namespace "globals" %}
     
             {{ forms.textField({
@@ -94,10 +102,18 @@
         {% endnamespace %}
     </div>
     
-    <div id="tab-global-social" class="hidden">
+    <div id="tab-global-twitter" class="hidden">
+        {% include "seomatic/_includes/twitterPreview.twig" %}
         {% namespace "globals" %}
             Don't hide me bro2
         {% endnamespace %}
     </div>
-    
+
+    <div id="tab-global-facebook" class="hidden">
+        {% include "seomatic/_includes/facebookPreview.twig" %}
+        {% namespace "globals" %}
+            Don't hide me bro2
+        {% endnamespace %}
+    </div>
+
 {% endblock %}

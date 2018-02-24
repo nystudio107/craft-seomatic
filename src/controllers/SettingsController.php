@@ -19,6 +19,7 @@ use craft\helpers\UrlHelper;
 use craft\models\Site;
 use craft\web\Controller;
 
+use nystudio107\seomatic\services\MetaBundles;
 use yii\base\InvalidConfigException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -136,6 +137,12 @@ class SettingsController extends Controller
             }
         }
         $variables['seoImageElements'] = $seoImageElements;
+
+        // Preview the meta containers
+        Seomatic::$plugin->metaContainers->previewMetaContainers(
+            MetaBundles::GLOBAL_META_BUNDLE,
+            $variables['currentSiteId']
+        );
 
         // Render the template
         return $this->renderTemplate('seomatic/settings/global/_edit', $variables);
