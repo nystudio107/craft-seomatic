@@ -191,6 +191,7 @@ class MetaContainers extends Component
     public function previewMetaContainers(string $uri = '', int $siteId = null)
     {
         $this->loadMetaContainers($uri, $siteId);
+        Seomatic::$previewingMetaContainers = true;
         $this->parseGlobalVars();
         // Special-case the global bundle
         if ($uri == MetaBundles::GLOBAL_META_BUNDLE) {

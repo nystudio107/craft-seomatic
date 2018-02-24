@@ -137,6 +137,11 @@ class Seomatic extends Plugin
      */
     public static $language;
 
+    /**
+     * @var bool
+     */
+    public static $previewingMetaContainers = false;
+
     // Static Methods
     // =========================================================================
 
