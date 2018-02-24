@@ -9,118 +9,12 @@
         <h5 class="heading">{{ "SEO Preview:" |t('seomatic') }}</h5>
     </div>
     <div style="zoom: 0.61;">
-        <div class="preview-column">
-            <div class="displaypreview">
-                <div class="googleWrapper">
-                    <div class="rc" data-hveid="27">
-                        <h3 class="googleDisplay">
-                            <a class="googleDisplay" href="{{ seomatic.meta.canonicalUrl }}" target="_blank">{{ seomatic.meta.seoTitle |raw }}</a>
-                        </h3>
-                        <div class="googleDisplay1">
-                            <div>
-                                <div class="googleDisplay2" style="white-space:nowrap">
-                                    <cite class="googleDisplay">{{ seomatic.meta.canonicalUrl | replace({'http://': ''}) | replace({'https://': ''}) }}</cite>
-                                    <div class="googleDisplay3">
-                                        <span class="googleDisplay1"></span>
-                                    </div>
-                                </div>
-                                <span class="googleDisplay2">{{ seomatic.meta.seoDescription |raw }}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% include "seomatic/_includes/googlePreview.twig" %}
 
-        <div class="preview-column">
-            <div class="displaypreview">
-                {% if seomatic.site.twitterHandle |length %}
-                    {% set lg = false %}
-                    {% if seomatic.meta.twitterCard == "summary_large_image" %}
-                        {% set lg = true %}
-                    {% endif %}
-                    <div class="TwitterCardsGrid{% if lg %} TwitterCardsGrid-Large{% endif %}">
-                        <div class="TwitterCardGrid-col{% if lg %} TwitterCardGrid-col-Large{% endif %}">
-                            <a class="TwitterCard-container{% if lg %} TwitterCard-container-Large{% endif %}" href="{{ seomatic.meta.canonicalUrl }}" target="_blank">
-                                <div class="TwitterCard-summary-image{% if lg %} TwitterCard-summary-image-Large{% endif %}">
-                                    <div class="TwitterCard-image-container{% if lg %} TwitterCard-image-container-Large{% endif %}">
-                                        <div id="twitter-card-image" class="TwitterCard-image-wrapper{% if lg %} TwitterCard-image-wrapper-Large{% endif %}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="TwitterCard-summary-content-container{% if lg %} TwitterCard-summary-content-container-Large{% endif %}">
-                                    <div class="TwitterCard-summary-content{% if lg %} TwitterCard-summary-content-Large{% endif %}">
-                                        <h2 class="TwitterCard-title">{{ seomatic.meta.twitterTitle |raw }}</h2>
-                                        <p class="TwitterCard-text{% if lg %} TwitterCard-text-Large{% endif %}">{{ seomatic.meta.twitterDescription |raw }}</p>
-                                        <span class="TwitterCard-destination">{{ siteUrl | replace({'http://': ''}) | replace({'https://': ''})  | replace({'/': ''}) }}</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+        {% include "seomatic/_includes/twitterPreview.twig" %}
 
-                    <script type="text/javascript">
-                        var x = document.getElementsByClassName("TwitterCard-image-wrapper");
-                        var i;
-                        for (i = 0; i < x.length; i++) {
-                            x[i].style.backgroundImage = "url(" + "{{ baseAssetsUrl ~ '/img/no_image_set.png' }}" + ")";
-                            {% if seomatic.meta.twitterImage %}
-                            x[i].style.backgroundImage = "url(" + "{{ seomatic.meta.twitterImage }}" + ")";
-                            {% endif %}
-                        }
-                    </script>
-                {% else %}
-                    <p>Twitter Handle has not been set</p>
-                {% endif %}
-            </div>
-        </div>
+        {% include "seomatic/_includes/facebookPreview.twig" %}
 
-        <div class="preview-column">
-            <div class="displaypreview">
-                {% if seomatic.site.facebookAppId |length or seomatic.site.facebookProfileId |length %}
-                    <div class="Facebook-container">
-                        <div class="">
-                            <a href="{{ seomatic.meta.canonicalUrl }}" target="_blank">
-                                <div class="Facebook-image-wrap">
-                                    <div id="facebook-post-image" class="Facebook-post-image" style="width:470px;height:246px;">
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="facebook-text-wrap">
-                            <div class="Facebook-text-container">
-                                <div class="Facebook-headline">
-                                    <a class="Facebook-link" href="{{ seomatic.meta.canonicalUrl }}" target="_blank">{{ seomatic.meta.ogTitle |raw }}</a>
-                                </div>
-                                <div class="Facebook-text">
-                                    {{ seomatic.meta.ogDescription |raw }}
-                                </div>
-                                <div class="Facebook-site-url-wrapper">
-                                    <div>
-                                        <div class="Facebook-site-url">
-                                            {{ siteUrl | replace({'http://': ''}) | replace({'https://': ''})  | replace({'/': ''}) }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <script type="text/javascript">
-                        var x = document.getElementsByClassName("Facebook-post-image");
-                        var i;
-                        for (i = 0; i < x.length; i++) {
-                            x[i].style.backgroundImage = "url(" + "{{ baseAssetsUrl ~ '/img/no_image_set.png' }}" + ")";
-                            {% if seomatic.meta.ogImage %}
-                            x[i].style.backgroundImage = "url(" + "{{ seomatic.meta.ogImage }}" + ")";
-                            {% endif %}
-                        }
-                    </script>
-                {% else %}
-                    <p>No Facebook Profile ID has been set</p>
-                {% endif %}
-            </div>
-        </div>
     </div>
     {#
     <div class="field first">

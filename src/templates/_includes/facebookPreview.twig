@@ -1,0 +1,46 @@
+<div class="preview-column">
+    <div class="displaypreview">
+        {% if seomatic.site.facebookAppId |length or seomatic.site.facebookProfileId |length %}
+            <div class="Facebook-container">
+                <div class="">
+                    <a href="{{ seomatic.meta.canonicalUrl }}" target="_blank">
+                        <div class="Facebook-image-wrap">
+                            <div id="facebook-post-image" class="Facebook-post-image" style="width:470px;height:246px;">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="facebook-text-wrap">
+                    <div class="Facebook-text-container">
+                        <div class="Facebook-headline">
+                            <a class="Facebook-link" href="{{ seomatic.meta.canonicalUrl }}" target="_blank">{{ seomatic.meta.ogTitle |raw }}</a>
+                        </div>
+                        <div class="Facebook-text">
+                            {{ seomatic.meta.ogDescription |raw }}
+                        </div>
+                        <div class="Facebook-site-url-wrapper">
+                            <div>
+                                <div class="Facebook-site-url">
+                                    {{ siteUrl | replace({'http://': ''}) | replace({'https://': ''})  | replace({'/': ''}) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script type="text/javascript">
+                var x = document.getElementsByClassName("Facebook-post-image");
+                var i;
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.backgroundImage = "url(" + "{{ baseAssetsUrl ~ '/img/no_image_set.png' }}" + ")";
+                    {% if seomatic.meta.ogImage %}
+                    x[i].style.backgroundImage = "url(" + "{{ seomatic.meta.ogImage }}" + ")";
+                    {% endif %}
+                }
+            </script>
+        {% else %}
+            <p>No Facebook Profile ID has been set</p>
+        {% endif %}
+    </div>
+</div>
