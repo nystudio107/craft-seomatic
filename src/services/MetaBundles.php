@@ -328,7 +328,7 @@ class MetaBundles extends Component
                     $sourceType = '';
                     $metaBundleInvalidated = true;
                     Seomatic::$plugin->metaContainers->invalidateContainerCacheByPath($element->uri, $siteId);
-                    switch ($element::className()) {
+                    switch (get_class($element)) {
                         case Entry::class:
                             /** @var  $element Entry */
                             $sourceType = self::SECTION_META_BUNDLE;
@@ -483,7 +483,7 @@ class MetaBundles extends Component
         $sourceId = 0;
         $siteId = 0;
         // See if this is a section we are tracking
-        switch ($element::className()) {
+        switch (get_class($element)) {
             case Entry::class:
                 /** @var  $element Entry */
                 $sourceId = $element->sectionId;

@@ -40,7 +40,7 @@ abstract class Container extends Model implements ContainerInterface
      */
     public static function create($config = [])
     {
-        $className = self::className();
+        $className = get_called_class();
         /** @var $model Container */
         $model = new $className($config);
         if ($model) {

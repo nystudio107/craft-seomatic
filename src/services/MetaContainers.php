@@ -295,19 +295,19 @@ class MetaContainers extends Component
             // Create a new container based on the type passed in
             switch ($type) {
                 case MetaTagContainer::CONTAINER_TYPE:
-                    $className = MetaTagContainer::className();
+                    $className = MetaTagContainer::class;
                     break;
                 case MetaLinkContainer::CONTAINER_TYPE:
-                    $className = MetaLinkContainer::className();
+                    $className = MetaLinkContainer::class;
                     break;
                 case MetaScriptContainer::CONTAINER_TYPE:
-                    $className = MetaScriptContainer::className();
+                    $className = MetaScriptContainer::class;
                     break;
                 case MetaJsonLdContainer::CONTAINER_TYPE:
-                    $className = MetaJsonLdContainer::className();
+                    $className = MetaJsonLdContainer::class;
                     break;
                 case MetaTitleContainer::CONTAINER_TYPE:
-                    $className = MetaTitleContainer::className();
+                    $className = MetaTitleContainer::class;
                     break;
             }
             if ($className) {
@@ -444,7 +444,7 @@ class MetaContainers extends Component
         $element = Seomatic::$matchedElement;
         if ($element) {
             $sourceType = '';
-            switch ($element::className()) {
+            switch (get_class($element)) {
                 case Entry::class:
                     /** @var  $element Entry */
                     $sourceType = MetaBundles::SECTION_META_BUNDLE;

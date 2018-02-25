@@ -225,7 +225,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                     // Handle any Assets
                     if ($metaBundle->metaSitemapVars->sitemapAssets) {
                         // Regular Assets fields
-                        $assetFields = FieldHelper::fieldsOfType($element, AssetsField::className());
+                        $assetFields = FieldHelper::fieldsOfType($element, AssetsField::class);
                         foreach ($assetFields as $assetField) {
                             $assets = $element[$assetField]->all();
                             foreach ($assets as $asset) {
@@ -233,11 +233,11 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                             }
                         }
                         // Assets embeded in Matrix fields
-                        $matrixFields = FieldHelper::fieldsOfType($element, MatrixField::className());
+                        $matrixFields = FieldHelper::fieldsOfType($element, MatrixField::class);
                         foreach ($matrixFields as $matrixField) {
                             $matrixBlocks = $element[$matrixField]->all();
                             foreach ($matrixBlocks as $matrixBlock) {
-                                $assetFields = FieldHelper::matrixFieldsOfType($matrixBlock, AssetsField::className());
+                                $assetFields = FieldHelper::matrixFieldsOfType($matrixBlock, AssetsField::class);
                                 foreach ($assetFields as $assetField) {
                                     /** @var MatrixBlock $matrixBlock */
                                     foreach ($matrixBlock[$assetField]->all() as $asset) {
@@ -251,7 +251,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                     // Include links to any known file types in the assets fields
                     if ($metaBundle->metaSitemapVars->sitemapFiles) {
                         // Regular Assets fields
-                        $assetFields = FieldHelper::fieldsOfType($element, AssetsField::className());
+                        $assetFields = FieldHelper::fieldsOfType($element, AssetsField::class);
                         foreach ($assetFields as $assetField) {
                             $assets = $element[$assetField]->all();
                             foreach ($assets as $asset) {
@@ -259,12 +259,12 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                             }
                         }
                         // Assets embeded in Matrix fields
-                        $matrixFields = FieldHelper::fieldsOfType($element, MatrixField::className());
+                        $matrixFields = FieldHelper::fieldsOfType($element, MatrixField::class);
                         foreach ($matrixFields as $matrixField) {
                             $matrixBlocks = $element[$matrixField]->all();
                             /** @var MatrixBlock $matrixBlock */
                             foreach ($matrixBlocks as $matrixBlock) {
-                                $assetFields = FieldHelper::matrixFieldsOfType($matrixBlock, AssetsField::className());
+                                $assetFields = FieldHelper::matrixFieldsOfType($matrixBlock, AssetsField::class);
                                 foreach ($assetFields as $assetField) {
                                     foreach ($matrixBlock[$assetField]->all() as $asset) {
                                         $this->assetFilesSitemapLink($asset, $metaBundle, $lines);

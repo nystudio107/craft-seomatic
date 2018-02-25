@@ -139,7 +139,7 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
         $scenarios = ['default' => 'error']
     ) {
         $isMetaJsonLdModel = false;
-        if (is_subclass_of($this, MetaJsonLd::className())) {
+        if (is_subclass_of($this, MetaJsonLd::class)) {
             $isMetaJsonLdModel = true;
         }
         foreach ($scenarios as $scenario => $logLevel) {

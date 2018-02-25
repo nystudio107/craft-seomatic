@@ -39,7 +39,11 @@ class JsonLdController extends Controller
 
         if ($jsonLdType) {
             // Get the static properties
-            $classRef = new \ReflectionClass($jsonLdType::className());
+            try {
+                $classRef = new \ReflectionClass(get_class($jsonLdType));
+            } catch (\ReflectionException $e) {
+                $classRef = null;
+            }
             if ($classRef) {
                 $result = $classRef->getStaticProperties();
             }
@@ -61,7 +65,11 @@ class JsonLdController extends Controller
         while ($schemaType) {
             $className = 'nystudio107\\seomatic\\models\\jsonld\\'.$schemaType;
             if (class_exists($className)) {
-                $classRef = new \ReflectionClass($className);
+                try {
+                    $classRef = new \ReflectionClass($className);
+                } catch (\ReflectionException $e) {
+                    $classRef = null;
+                }
                 if ($classRef) {
                     $staticProps = $classRef->getStaticProperties();
                     foreach ($staticProps as $key => $value) {
