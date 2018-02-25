@@ -146,6 +146,14 @@ class SettingsController extends Controller
             }
         }
         $variables['twitterImageElements'] = $twitterImageElements;
+        // OG Image
+        $ogImageElements = [];
+        if (!empty($variables['settings']['ogImageIds'])) {
+            foreach ($variables['settings']['ogImageIds'] as $ogImageId) {
+                $ogImageElements[] = $elements->getElementById($ogImageId, Asset::class, $siteId);
+            }
+        }
+        $variables['ogImageElements'] = $ogImageElements;
 
         // Preview the meta containers
         Seomatic::$plugin->metaContainers->previewMetaContainers(
