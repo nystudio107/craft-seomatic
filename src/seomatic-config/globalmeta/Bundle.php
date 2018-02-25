@@ -19,7 +19,7 @@ use nystudio107\seomatic\services\MetaBundles;
  */
 
 return [
-    'bundleVersion'              => '1.0.2',
+    'bundleVersion'              => '1.0.3',
     'sourceBundleType'           => MetaBundles::GLOBAL_META_BUNDLE,
     'sourceId'                   => 1,
     'sourceName'                 => MetaBundles::GLOBAL_META_BUNDLE,
@@ -33,6 +33,7 @@ return [
     'metaGlobalVars'             => Config::getConfigFromFile('globalmeta/GlobalVars'),
     'metaSiteVars'               => Config::getConfigFromFile('globalmeta/SiteVars'),
     'metaSitemapVars'            => Config::getConfigFromFile('globalmeta/SitemapVars'),
+    'metaBundleSettings'         => Config::getConfigFromFile('globalmeta/BundleSettings'),
     'metaContainers'             => Config::getMergedConfigFromFiles([
         'globalmeta/TagContainer',
         'globalmeta/LinkContainer',
@@ -42,5 +43,4 @@ return [
     ]),
     'redirectsContainer'         => Config::getConfigFromFile('globalmeta/RedirectsContainer'),
     'frontendTemplatesContainer' => Config::getConfigFromFile('globalmeta/FrontendTemplatesContainer'),
-    'metaBundleSettings'         => Config::getConfigFromFile('globalmeta/BundleSettings'),
 ];

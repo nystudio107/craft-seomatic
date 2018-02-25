@@ -1,9 +1,10 @@
+{% set titleArray = seomatic.title.get('title').renderAttributes() %}
 <div class="preview-column">
     <div class="displaypreview">
         <div class="googleWrapper">
             <div class="rc" data-hveid="27">
                 <h3 class="googleDisplay">
-                    <a class="googleDisplay" href="{{ seomatic.meta.canonicalUrl }}" target="_blank">{{ seomatic.meta.seoTitle |raw }}</a>
+                    <a class="googleDisplay" href="{{ seomatic.meta.canonicalUrl }}" target="_blank">{{ titleArray.title |raw }}</a>
                 </h3>
                 <div class="googleDisplay1">
                     <div>

@@ -18,6 +18,7 @@
 return [
     '*' => [
         'seoTitle'                => 'Global SEO Title',
+        'siteNamePosition'        => 'before',
         'seoDescription'          => 'Global SEO Description',
         'seoKeywords'             => 'Global SEO Keywords',
         'seoImage'                => 'Global SEO Image',

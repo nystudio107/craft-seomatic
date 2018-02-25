@@ -33,6 +33,7 @@ return [
     'metaGlobalVars'             => Config::getConfigFromFile('entrymeta/GlobalVars'),
     'metaSiteVars'               => Config::getConfigFromFile('entrymeta/SiteVars'),
     'metaSitemapVars'            => Config::getConfigFromFile('entrymeta/SitemapVars'),
+    'metaBundleSettings'         => Config::getConfigFromFile('entrymeta/BundleSettings'),
     'metaContainers'             => Config::getMergedConfigFromFiles([
         'entrymeta/TagContainer',
         'entrymeta/LinkContainer',
@@ -42,5 +43,4 @@ return [
     ]),
     'redirectsContainer'         => Config::getConfigFromFile('entrymeta/RedirectsContainer'),
     'frontendTemplatesContainer' => Config::getConfigFromFile('entrymeta/FrontendTemplatesContainer'),
-    'metaBundleSettings'         => Config::getConfigFromFile('entrymeta/BundleSettings'),
 ];

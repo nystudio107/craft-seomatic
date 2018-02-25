@@ -20,6 +20,7 @@ use Stringy\Stringy;
 use yii\helpers\Html;
 
 use Craft;
+use yii\helpers\StringHelper;
 
 /**
  * @author    nystudio107
@@ -57,6 +58,21 @@ class MetaTitle extends MetaItem
      */
     public $title;
 
+    /**
+     * @var string
+     */
+    public $siteName;
+
+    /**
+     * @var string
+     */
+    public $siteNamePosition;
+
+    /**
+     * @var string
+     */
+    public $separatorChar;
+
     // Public Methods
     // =========================================================================
 
@@ -89,19 +105,66 @@ class MetaTitle extends MetaItem
     /**
      * @inheritdoc
      */
+    public function fields()
+    {
+        $fields = parent::fields();
+        switch ($this->scenario) {
+            case 'render':
+                $fields = array_diff_key(
+                    $fields,
+                    array_flip([
+                        'siteName',
+                        'siteNamePosition',
+                        'separatorChar',
+                    ])
+                );
+                break;
+        }
+
+        return $fields;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function prepForRender(&$data): bool
     {
         $shouldRender = parent::prepForRender($data);
         if ($shouldRender) {
+            // handle the site name
+            $position = MetaValueHelper::parseString($this->siteNamePosition);
+            switch ($position) {
+                case 'before':
+                    $prefix = MetaValueHelper::parseString($this->siteName)
+                        . ' '
+                        . MetaValueHelper::parseString($this->separatorChar)
+                        . ' ';
+                    $suffix = '';
+                    break;
+                case 'after':
+                    $prefix = '';
+                    $suffix = ' '
+                        . MetaValueHelper::parseString($this->separatorChar)
+                        . ' '
+                        . MetaValueHelper::parseString($this->siteName);
+                    break;
+                default:
+                    $prefix = '';
+                    $suffix = '';
+                    break;
+            }
+            $lengthAdjust = mb_strlen($prefix.$suffix);
+            // Parse the data
             $scenario = $this->scenario;
             $this->setScenario('render');
             $data = MetaValueHelper::parseString($data);
             $this->setScenario($scenario);
             // Special-case scenarios
             $data = (string)Stringy::create($data)->safeTruncate(
-                Seomatic::$settings->maxTitleLength,
+                Seomatic::$settings->maxTitleLength - $lengthAdjust,
                 '…'
             );
+            $data = $prefix.$data.$suffix;
             // devMode
             if (Seomatic::$devMode) {
                 $data = Seomatic::$settings->devModeTitlePrefix . $data;

@@ -20,7 +20,7 @@ use nystudio107\seomatic\services\Title as TitleService;
  */
 
 return [
-    MetaTitleContainer::CONTAINER_TYPE.TitleService::GENERAL_HANDLE => [
+    MetaTitleContainer::CONTAINER_TYPE . TitleService::GENERAL_HANDLE => [
         'name'         => 'General',
         'description'  => 'Meta Title Tag',
         'handle'       => TitleService::GENERAL_HANDLE,
@@ -30,7 +30,10 @@ return [
         ],
         'data'         => [
             'title' => [
-                'title' => '{seomatic.site.siteName} {seomatic.config.separatorChar} {seomatic.meta.seoTitle}',
+                'title'            => '{seomatic.meta.seoTitle}',
+                'siteName'         => '{seomatic.site.siteName}',
+                'siteNamePosition' => '{seomatic.meta.siteNamePosition}',
+                'separatorChar'    => '{seomatic.config.separatorChar}',
             ],
         ],
     ],

@@ -37,6 +37,7 @@ use craft\elements\Entry;
 use craft\errors\SiteNotFoundException;
 use craft\helpers\UrlHelper;
 
+use nystudio107\seomatic\variables\SeomaticVariable;
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
 use yii\caching\TagDependency;
@@ -192,6 +193,9 @@ class MetaContainers extends Component
     {
         $this->loadMetaContainers($uri, $siteId);
         Seomatic::$previewingMetaContainers = true;
+        Seomatic::$seomaticVariable = new SeomaticVariable();
+        Seomatic::$seomaticVariable->init();
+        MetaValueHelper::cache();
         $this->parseGlobalVars();
         // Special-case the global bundle
         if ($uri == MetaBundles::GLOBAL_META_BUNDLE) {
@@ -200,7 +204,6 @@ class MetaContainers extends Component
             } catch (Exception $e) {
             }
         }
-        Seomatic::$seomaticVariable->init();
     }
 
     /**

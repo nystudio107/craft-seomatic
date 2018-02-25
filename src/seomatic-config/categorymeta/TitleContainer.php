@@ -30,7 +30,10 @@ return [
         ],
         'data'         => [
             'title' => [
-                'title' => '{seomatic.site.siteName} | {seomatic.meta.seoTitle}',
+                'title'            => '{seomatic.meta.seoTitle}',
+                'siteName'         => '{seomatic.site.siteName}',
+                'siteNamePosition' => '{seomatic.meta.siteNamePosition}',
+                'separatorChar'    => '{seomatic.config.separatorChar}',
             ],
         ],
     ],

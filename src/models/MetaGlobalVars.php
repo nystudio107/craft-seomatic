@@ -57,6 +57,11 @@ class MetaGlobalVars extends VarsModel
     public $seoTitle;
 
     /**
+     * @var string where the site name should be positioned in the `<title>` tag
+     */
+    public $siteNamePosition;
+
+    /**
      * @var string The seoDescription is used for the `<meta name="description">`
      *      tag, and as a default setting for the Description & twitterDescription
      */

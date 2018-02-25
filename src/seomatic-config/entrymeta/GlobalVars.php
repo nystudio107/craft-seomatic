@@ -16,9 +16,10 @@
  */
 
 return [
-    'seoTitle'       => '{entry.title}',
-    'seoDescription' => 'Entry SEO Description',
-    'seoKeywords'    => 'Entry SEO Keywords',
-    'seoImage'       => '',
-    'canonicalUrl'   => '{entry.url}',
+    'seoTitle'         => '{entry.title}',
+    'siteNamePosition' => 'before',
+    'seoDescription'   => 'Entry SEO Description',
+    'seoKeywords'      => 'Entry SEO Keywords',
+    'seoImage'         => '',
+    'canonicalUrl'     => '{entry.url}',
 ];
