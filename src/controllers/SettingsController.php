@@ -188,6 +188,20 @@ class SettingsController extends Controller
                     $globalsSettings['seoImage'] = $seoImage->getUrl();
                 }
             }
+            // Handle the Twitter Image
+            if (!empty($bundleSettings['twitterImageIds'])) {
+                $twitterImage = $elements->getElementById($bundleSettings['twitterImageIds'][0], Asset::class, $siteId);
+                if ($twitterImage) {
+                    $globalsSettings['twitterImage'] = $twitterImage->getUrl();
+                }
+            }
+            // Handle the Facebook IG Image
+            if (!empty($bundleSettings['ogImageIds'])) {
+                $ogImage = $elements->getElementById($bundleSettings['ogImageIds'][0], Asset::class, $siteId);
+                if ($ogImage) {
+                    $globalsSettings['ogImage'] = $ogImage->getUrl();
+                }
+            }
             $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
             $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
             Seomatic::$plugin->metaBundles->updateGlobalMetaBundle($metaBundle, $siteId);

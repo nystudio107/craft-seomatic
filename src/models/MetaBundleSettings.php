@@ -56,6 +56,11 @@ class MetaBundleSettings extends VarsModel
      */
     public $twitterImageIds = [];
 
+    /**
+     * @var int[] The AssetIDs for the Facebook OG Image
+     */
+    public $ogImageIds = [];
+
     // Public Methods
     // =========================================================================
 
@@ -76,18 +81,14 @@ class MetaBundleSettings extends VarsModel
             [
                 [
                     'siteName',
-                    'twitterHandle',
-                    'facebookProfileId',
-                    'facebookAppId',
-                    'googleSiteVerification',
-                    'bingSiteVerification',
                 ],
                 'string'
             ],
             [
                 [
                     'seoImageIds',
-                    'twitterSeoImageIds'
+                    'twitterImageIds',
+                    'ogImageIds',
                 ],
                 'each', 'rule' => ['integer'],
             ],
