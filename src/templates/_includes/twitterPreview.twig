@@ -1,3 +1,6 @@
+{% set twitterTitleArray = seomatic.tag.get('twitter:title').renderAttributes() %}
+{% set twitterDescriptionArray = seomatic.tag.get('twitter:description').renderAttributes() %}
+
 <div class="preview-column">
     <div class="displaypreview">
         {% if seomatic.site.twitterHandle |length %}
@@ -16,8 +19,8 @@
                         </div>
                         <div class="TwitterCard-summary-content-container{% if lg %} TwitterCard-summary-content-container-Large{% endif %}">
                             <div class="TwitterCard-summary-content{% if lg %} TwitterCard-summary-content-Large{% endif %}">
-                                <h2 class="TwitterCard-title">{{ seomatic.meta.twitterTitle |raw }}</h2>
-                                <p class="TwitterCard-text{% if lg %} TwitterCard-text-Large{% endif %}">{{ seomatic.meta.twitterDescription |raw }}</p>
+                                <h2 class="TwitterCard-title">{{ twitterTitleArray.content |raw }}</h2>
+                                <p class="TwitterCard-text{% if lg %} TwitterCard-text-Large{% endif %}">{{ twitterDescriptionArray.content |raw }}</p>
                                 <span class="TwitterCard-destination">{{ siteUrl | replace({'http://': ''}) | replace({'https://': ''})  | replace({'/': ''}) }}</span>
                             </div>
                         </div>

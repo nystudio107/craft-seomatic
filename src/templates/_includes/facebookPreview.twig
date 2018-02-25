@@ -1,3 +1,6 @@
+{% set ogTitleArray = seomatic.tag.get('og:title').renderAttributes() %}
+{% set ogDescriptionArray = seomatic.tag.get('og:description').renderAttributes() %}
+
 <div class="preview-column">
     <div class="displaypreview">
         {% if seomatic.site.facebookAppId |length or seomatic.site.facebookProfileId |length %}
@@ -13,10 +16,10 @@
                 <div class="facebook-text-wrap">
                     <div class="Facebook-text-container">
                         <div class="Facebook-headline">
-                            <a class="Facebook-link" href="{{ seomatic.meta.canonicalUrl }}" target="_blank">{{ seomatic.meta.ogTitle |raw }}</a>
+                            <a class="Facebook-link" href="{{ seomatic.meta.canonicalUrl }}" target="_blank">{{ ogTitleArray.content |raw }}</a>
                         </div>
                         <div class="Facebook-text">
-                            {{ seomatic.meta.ogDescription |raw }}
+                            {{ ogDescriptionArray.content |raw }}
                         </div>
                         <div class="Facebook-site-url-wrapper">
                             <div>
