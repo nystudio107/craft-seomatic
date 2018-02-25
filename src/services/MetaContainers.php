@@ -161,6 +161,7 @@ class MetaContainers extends Component
      */
     public function includeMetaContainers()
     {
+        $this->includeHttpHeaders();
         $this->parseGlobalVars();
         foreach ($this->metaContainers as $metaContainer) {
             /** @var $metaContainer MetaContainer */
@@ -170,6 +171,20 @@ class MetaContainers extends Component
         }
     }
 
+    /**
+     * Include any headers for this request
+     */
+    public function includeHttpHeaders()
+    {
+        $robots = Seomatic::$seomaticVariable->tag->get('robots');
+        if (!empty($robots)) {
+            $response = Craft::$app->getResponse();
+            $content = $robots->content;
+            if (!empty($content)) {
+                $response->headers->add('X-Robots-Tag', $content);
+            }
+        }
+    }
     /**
      * Parse the global variables
      */

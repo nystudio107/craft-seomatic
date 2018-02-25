@@ -56,12 +56,12 @@ return [
             ],
             'robots'      => [
                 'charset'     => '',
-                'content'     => 'index',
+                'content'     => '{seomatic.meta.robots}',
                 'httpEquiv'   => '',
                 'name'        => 'robots',
                 'environment' => [
                     'live'    => [
-                        'content' => 'index',
+                        'content' => '{seomatic.meta.robots}',
                     ],
                     'staging' => [
                         'content' => 'none',

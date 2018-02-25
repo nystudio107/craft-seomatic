@@ -188,6 +188,21 @@ class MetaGlobalVars extends VarsModel
                 ],
                 'string',
             ],
+            [
+                'robots', 'in', 'range' => [
+                'all',
+                'index',
+                'noindex',
+                'follow',
+                'nofollow',
+                'none',
+                'noodp',
+                'noarchive',
+                'nosnippet',
+                'noimageindex',
+                'nocache',
+                ],
+            ],
             [['canonicalUrl'], 'url'],
         ];
     }
