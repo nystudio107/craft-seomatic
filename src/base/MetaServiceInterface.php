@@ -52,6 +52,13 @@ interface MetaServiceInterface
     public function add($metaItem, string $handle = '');
 
     /**
+     * Render all of the MetaItems in this container
+     *
+     * @return \Twig_Markup|null
+     */
+    public function render();
+
+    /**
      * Get the container for these meta items
      *
      * @param string $handle An optional container handle to get (defaults to GENERAL)

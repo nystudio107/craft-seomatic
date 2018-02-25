@@ -55,6 +55,13 @@ abstract class MetaService extends Component implements MetaServiceInterface
     /**
      * @inheritdoc
      */
+    public function render()
+    {
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function container(string $handle = '')
     {
     }

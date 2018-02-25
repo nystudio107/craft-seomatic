@@ -17,6 +17,8 @@ use nystudio107\seomatic\base\MetaServiceInterface;
 use nystudio107\seomatic\models\MetaTitle;
 use nystudio107\seomatic\models\MetaTitleContainer;
 
+use craft\helpers\Template as TemplateHelper;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -67,6 +69,15 @@ class Title extends MetaService implements MetaServiceInterface
 
         /** @var MetaTitle $metaItem */
         return $metaItem;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function render()
+    {
+        $key = MetaTitleContainer::CONTAINER_TYPE;
+        return TemplateHelper::raw(Seomatic::$plugin->metaContainers->renderContainersByType($key));
     }
 
     /**

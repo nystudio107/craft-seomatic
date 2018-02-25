@@ -17,6 +17,8 @@ use nystudio107\seomatic\base\MetaServiceInterface;
 use nystudio107\seomatic\models\MetaScript;
 use nystudio107\seomatic\models\MetaScriptContainer;
 
+use craft\helpers\Template as TemplateHelper;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -67,6 +69,15 @@ class Script extends MetaService implements MetaServiceInterface
 
         /** @var MetaScript $metaItem */
         return $metaItem;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function render()
+    {
+        $key = MetaScriptContainer::CONTAINER_TYPE;
+        return TemplateHelper::raw(Seomatic::$plugin->metaContainers->renderContainersByType($key));
     }
 
     /**

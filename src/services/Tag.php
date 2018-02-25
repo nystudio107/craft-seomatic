@@ -18,6 +18,7 @@ use nystudio107\seomatic\models\MetaTag;
 use nystudio107\seomatic\models\MetaTagContainer;
 
 use craft\helpers\ArrayHelper;
+use craft\helpers\Template as TemplateHelper;
 
 /**
  * @author    nystudio107
@@ -79,6 +80,15 @@ class Tag extends MetaService implements MetaServiceInterface
 
         /** @var MetaTag $metaItem */
         return $metaItem;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function render()
+    {
+        $key = MetaTagContainer::CONTAINER_TYPE;
+        return TemplateHelper::raw(Seomatic::$plugin->metaContainers->renderContainersByType($key));
     }
 
     /**

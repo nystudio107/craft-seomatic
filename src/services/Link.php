@@ -17,6 +17,8 @@ use nystudio107\seomatic\base\MetaServiceInterface;
 use nystudio107\seomatic\models\MetaLink;
 use nystudio107\seomatic\models\MetaLinkContainer;
 
+use craft\helpers\Template as TemplateHelper;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -70,6 +72,15 @@ class Link extends MetaService implements MetaServiceInterface
 
         /** @var MetaLink $metaItem */
         return $metaItem;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function render()
+    {
+        $key = MetaLinkContainer::CONTAINER_TYPE;
+        return TemplateHelper::raw(Seomatic::$plugin->metaContainers->renderContainersByType($key));
     }
 
     /**

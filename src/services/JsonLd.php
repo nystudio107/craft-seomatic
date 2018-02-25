@@ -18,6 +18,7 @@ use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 
 use craft\helpers\ArrayHelper;
+use craft\helpers\Template as TemplateHelper;
 
 /**
  * @author    nystudio107
@@ -75,6 +76,15 @@ class JsonLd extends MetaService implements MetaServiceInterface
 
         /** @var MetaJsonLd $metaItem */
         return $metaItem;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function render()
+    {
+        $key = MetaJsonLdContainer::CONTAINER_TYPE;
+        return TemplateHelper::raw(Seomatic::$plugin->metaContainers->renderContainersByType($key));
     }
 
     /**

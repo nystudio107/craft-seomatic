@@ -17,6 +17,7 @@ use nystudio107\seomatic\models\EditableTemplate;
 use nystudio107\seomatic\models\FrontendTemplateContainer;
 
 use craft\base\Component;
+use craft\helpers\Template as TemplateHelper;
 
 /**
  * @author    nystudio107
@@ -71,6 +72,14 @@ class Template extends Component implements MetaServiceInterface
 
         /** @var EditableTemplate $frontendTemplate */
         return $frontendTemplate;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function render()
+    {
+        return null;
     }
 
     /**
