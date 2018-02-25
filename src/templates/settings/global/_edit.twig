@@ -39,11 +39,10 @@
     <input type="hidden" name="action" value="seomatic/settings/save-global">
     <input type="hidden" name="siteId" value="{{ currentSiteId }}">
     {{ redirectInput("seomatic/global") }}
-    
+
     <div id="tab-global-general">
         {% include "seomatic/_includes/googlePreview.twig" %}
         {% namespace "globals" %}
-    
             {{ forms.textField({
                 label: "SEO Title" |t("seomatic"),
                 instructions: "Make sure your title tag is explicit and contains your most important keywords. Be sure that each page has a unique title tag." |t("seomatic"),
@@ -55,7 +54,21 @@
                 showCharsLeft: true,
                 warning: false,
             }) }}
-    
+
+            {{ forms.selectField({
+                label: "Site Name Position" |t("seomatic"),
+                instructions: "Where the Site Name is placed relative to the Title in the &lt;title&gt; tag" |t("seomatic"),
+                id: "siteNamePosition",
+                name: "siteNamePosition",
+                options: {
+                    before: "Before" |t("seomatic"),
+                    after: "After" |t("seomatic"),
+                    none: "None" |t("seomatic"),
+                },
+                value: globals.siteNamePosition,
+                warning: configWarning("siteNamePosition", "seomatic"),
+            }) }}
+
             {{ forms.textAreaField({
                 label: "SEO Description" |t("seomatic"),
                 instructions: "SEO descriptions allow you to influence how your web pages are described and displayed in search results. Ensure that all of your web pages have a unique meta description that is explicit and contains your most important keywords." |t("seomatic"),
@@ -100,12 +113,79 @@
                 warning: false,
             }) }}
         {% endnamespace %}
+
+        {% namespace "globals" %}
+            {{ forms.textField({
+                label: "SEO Image Description" |t("seomatic"),
+                instructions: "Description of the SEO Image" |t("seomatic"),
+                id: "seoImageDescription",
+                name: "seoImageDescription",
+                value: globals.seoImageDescription,
+                class: "nicetext",
+                warning: false,
+            }) }}
+        {% endnamespace %}
     </div>
     
     <div id="tab-global-twitter" class="hidden">
         {% include "seomatic/_includes/twitterPreview.twig" %}
         {% namespace "globals" %}
-            Don't hide me bro2
+
+            {{ forms.textField({
+                label: "Twitter Title" |t("seomatic"),
+                instructions: "Make sure your title tag is explicit and contains your most important keywords. Be sure that each page has a unique title tag." |t("seomatic"),
+                id: "twitterTitle",
+                name: "twitterTitle",
+                value: globals.twitterTitle,
+                class: "nicetext",
+                maxlength: seomatic.config.maxTitleLength,
+                showCharsLeft: true,
+                warning: false,
+            }) }}
+
+            {{ forms.textAreaField({
+                label: "Twitter Description" |t("seomatic"),
+                instructions: "SEO descriptions allow you to influence how your web pages are described and displayed in search results. Ensure that all of your web pages have a unique meta description that is explicit and contains your most important keywords." |t("seomatic"),
+                id: "twitterDescription",
+                name: "twitterDescription",
+                value: globals.twitterDescription,
+                class: "nicetext",
+                maxlength: seomatic.config.maxDescriptionLength,
+                showCharsLeft: true,
+                warning: false,
+            }) }}
+        {% endnamespace %}
+
+        {% namespace "settings" %}
+            {{ forms.elementSelectField({
+                label: "Twitter Image"|t("seomatic"),
+                instructions: "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified. The image must be in JPG, PNG, or GIF format." |t("seomatic"),
+                id: "twitterImageIds",
+                name: "twitterImageIds",
+                viewMode: "large",
+                elements: twitterImageElements,
+                elementType: elementType,
+                criteria: {
+                    kind: ["image"],
+                },
+                jsClass: 'Craft.AssetSelectInput',
+                selectionLabel: "Select Twitter SEO Image" |t("seomatic"),
+                sources: [],
+                limit: 1,
+                warning: false,
+            }) }}
+        {% endnamespace %}
+
+        {% namespace "globals" %}
+            {{ forms.textField({
+                label: "Twitter Image Description" |t("seomatic"),
+                instructions: "Description of the Twitter Image" |t("seomatic"),
+                id: "twitterImageDescription",
+                name: "twitterImageDescription",
+                value: globals.twitterImageDescription,
+                class: "nicetext",
+                warning: false,
+            }) }}
         {% endnamespace %}
     </div>
 

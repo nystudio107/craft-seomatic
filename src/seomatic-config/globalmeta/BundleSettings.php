@@ -18,5 +18,6 @@
 return [
     '*' => [
         'seoImageIds'               => [],
+        'twitterImageIds'           => [],
     ],
 ];

@@ -47,9 +47,14 @@ class MetaBundleSettings extends VarsModel
     // =========================================================================
 
     /**
-     * @var int[] The name of the website
+     * @var int[] The AssetIDs for the SEO Image
      */
     public $seoImageIds = [];
+
+    /**
+     * @var int[] The AssetIDs for the Twitter Image
+     */
+    public $twitterImageIds = [];
 
     // Public Methods
     // =========================================================================
@@ -82,6 +87,7 @@ class MetaBundleSettings extends VarsModel
             [
                 [
                     'seoImageIds',
+                    'twitterSeoImageIds'
                 ],
                 'each', 'rule' => ['integer'],
             ],

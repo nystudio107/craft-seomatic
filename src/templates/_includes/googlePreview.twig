@@ -1,4 +1,5 @@
 {% set titleArray = seomatic.title.get('title').renderAttributes() %}
+{% set descriptionArray = seomatic.tag.get('description').renderAttributes() %}
 <div class="preview-column">
     <div class="displaypreview">
         <div class="googleWrapper">
@@ -14,7 +15,7 @@
                                 <span class="googleDisplay1"></span>
                             </div>
                         </div>
-                        <span class="googleDisplay2">{{ seomatic.meta.seoDescription |raw }}</span>
+                        <span class="googleDisplay2">{{ descriptionArray.content |raw }}</span>
                     </div>
                 </div>
             </div>

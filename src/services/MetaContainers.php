@@ -188,15 +188,18 @@ class MetaContainers extends Component
      *
      * @param string   $uri
      * @param int|null $siteId
+     * @param bool     $parseVariables
      */
-    public function previewMetaContainers(string $uri = '', int $siteId = null)
+    public function previewMetaContainers(string $uri = '', int $siteId = null, bool $parseVariables = false)
     {
         $this->loadMetaContainers($uri, $siteId);
         Seomatic::$previewingMetaContainers = true;
         Seomatic::$seomaticVariable = new SeomaticVariable();
         Seomatic::$seomaticVariable->init();
         MetaValueHelper::cache();
-        $this->parseGlobalVars();
+        if ($parseVariables) {
+            $this->parseGlobalVars();
+        }
         // Special-case the global bundle
         if ($uri == MetaBundles::GLOBAL_META_BUNDLE) {
             try {

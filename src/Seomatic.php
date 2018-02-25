@@ -518,7 +518,7 @@ class Seomatic extends Plugin
             /** @var  $entry Entry */
             $entry = $context['entry'];
             if (!empty($entry) && !empty($entry->uri)) {
-                Seomatic::$plugin->metaContainers->previewMetaContainers($entry->uri, $entry->siteId);
+                Seomatic::$plugin->metaContainers->previewMetaContainers($entry->uri, $entry->siteId, true);
                 // Render our sidebar template
                 $html = Craft::$app->view->renderTemplate(
                     'seomatic/_sidebars/entry.twig'
@@ -534,7 +534,7 @@ class Seomatic extends Plugin
             /** @var  $category Category */
             $category = $context['category'];
             if (!empty($category) && !empty($category->uri)) {
-                Seomatic::$plugin->metaContainers->previewMetaContainers($category->uri, $category->siteId);
+                Seomatic::$plugin->metaContainers->previewMetaContainers($category->uri, $category->siteId, true);
                 // Render our sidebar template
                 $html = Craft::$app->view->renderTemplate(
                     'seomatic/_sidebars/category.twig'

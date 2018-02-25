@@ -171,6 +171,7 @@ class MetaGlobalVars extends VarsModel
                 [
                     'language',
                     'seoTitle',
+                    'siteNamePosition',
                     'seoDescription',
                     'seoImage',
                     'seoImageDescription',

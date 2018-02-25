@@ -130,6 +130,7 @@ class SettingsController extends Controller
         // Image selectors
         $elements = Craft::$app->getElements();
         $variables['elementType'] = Asset::class;
+        // SEO Image
         $seoImageElements = [];
         if (!empty($variables['settings']['seoImageIds'])) {
             foreach ($variables['settings']['seoImageIds'] as $seoImageId) {
@@ -137,6 +138,14 @@ class SettingsController extends Controller
             }
         }
         $variables['seoImageElements'] = $seoImageElements;
+        // Twitter Image
+        $twitterImageElements = [];
+        if (!empty($variables['settings']['twitterImageIds'])) {
+            foreach ($variables['settings']['twitterImageIds'] as $twitterImageId) {
+                $twitterImageElements[] = $elements->getElementById($twitterImageId, Asset::class, $siteId);
+            }
+        }
+        $variables['twitterImageElements'] = $twitterImageElements;
 
         // Preview the meta containers
         Seomatic::$plugin->metaContainers->previewMetaContainers(
