@@ -142,6 +142,17 @@
                 value: globals.siteNamePosition,
                 warning: configWarning("siteNamePosition", "seomatic"),
             }) }}
+
+            {{ forms.textField({
+                label: "Canonical URL" |t("seomatic"),
+                instructions: "Canonical URL" |t("seomatic"),
+                id: "canonicalUrl",
+                name: "canonicalUrl",
+                value: globals.canonicalUrl,
+                class: "nicetext",
+                warning: false,
+            }) }}
+
         {% endnamespace %}
     </div>
     
