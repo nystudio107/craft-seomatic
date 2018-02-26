@@ -1,146 +1,57 @@
+{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
+
 {% extends "_layouts/cp" %}
-{% import '_includes/forms' as forms %}
 
-{% do view.registerAssetBundle('nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset') %}
-{% set baseAssetUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/assetbundles/seomatic/dist', true) %}
+{% import "_includes/forms" as forms %}
 
-{% set metaBundles = craft.seomatic.getContentMetaBundles(false) %}
+{% do view.registerAssetBundle("nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset") %}
+{% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/assetbundles/seomatic/dist', true) %}
 
-{% set title = craft.seomatic.getPluginName() ~ " Content SEO" %}
-
-{% set fullPageForm = true %}
-
-{% set docsUrl = "https://github.com/nystudio107/craft3-seomatic/wiki" %}
-
-{% set seomaticSections = {
-    content: { label: "Content SEO"|t, url: url('seomatic/content') },
-    global: { label: "Global SEO"|t, url: url('seomatic/global') },
+{% set tabs = {
+    general: {
+        url: "#tab-content-general",
+        label: "General" |t("seomatic"),
+    },
+    twitter: {
+        url: "#tab-content-twitter",
+        label: "Twitter" |t("seomatic"),
+    },
+    facebook: {
+        url: "#tab-content-facebook",
+        label: "Facebook" |t("seomatic"),
+    },
 } %}
 
-{% set crumbs = [
-    { label: craft.seomatic.getPluginName(), url: url('seomatic') },
-    { label: "Content SEO"|t, url: url('seomatic/content') },
-] %}
+{% block header %}
+    {{ block('pageTitle') }}
+    {{ block('contextMenu') }}
+    <div class="flex-grow"></div>
+    <div class="flex-grow"></div>
+    {{ block('actionButton') }}
+{% endblock %}
 
-    {% set subnav = seomaticSections %}
-    {% set selectedSubnavItem = 'content' %}
+{% block contextMenu %}
+    {% include "seomatic/settings/_includes/sites-menu.twig" %}
+{% endblock %}
 
-{% set content %}
+{% block content %}
 
-    <input type="hidden" name="action" value="seomatic/saveContentSeo" />
-    <input type="hidden" name="redirect" value="seomatic/content" />
+    <input type="hidden" name="action" value="seomatic/settings/save-content">
+    <input type="hidden" name="siteId" value="{{ currentSiteId }}">
+    <input type="hidden" name="sourceHandle" value="{{ currentSourceHandle }}">
+    <input type="hidden" name="sourceType" value="{{ currentSourceType }}">
+    {{ redirectInput("seomatic/edit-content/#{currentSourceType}/#{currentSourceHandle}/#{currentSiteHandle}") }}
 
-    {{ getCsrfInput() }}
+    <div id="tab-content-general">
+        {% include "seomatic/settings/_includes/tab-general.twig" %}
+    </div>
 
-    <table class="data">
-        <thead class="sections first">
-        {#
-        <tr>
-            <th colspan="6">
-                <h1>{{ "Content"|t }}</h1>
-            </th>
-        </tr>
-        #}
-        <tr>
-            <th>{{ "Name"|t }}</th>
-            <th class="thin">{{ "Entries"|t }}</th>
-            <th>{{ "Type"|t }}</th>
-            <th>{{ "Custom SEO"|t }}</th>
-            <th>{{ "Setup"|t }}</th>
-            <th class="thin"></th>
-            <th class="thin"></th>
-        </tr>
-        </thead>
+    <div id="tab-content-twitter" class="hidden">
+        {% include "seomatic/settings/_includes/tab-twitter.twig" %}
+    </div>
 
-        <tbody class="sections">
-        {% for metaBundle in metaBundles %}
-            {% set num_entries = 0 %}
-            <tr>
-                <td>
-                    {% set sourcePrefix =  '' %}
-                    {% switch metaBundle.sourceType %}
-                        {% case 'channel' %}
-                            {% set sourcePrefix = 'settings/sections/' %}
-                        {% case 'structure' %}
-                            {% set sourcePrefix = 'settings/sections/' %}
-                        {% case 'single' %}
-                            {% set sourcePrefix = 'settings/sections/' %}
-                        {% case 'category' %}
-                            {% set sourcePrefix =  'settings/categories/' %}
-                    {% endswitch %}
-                    <a href="{{ url(sourcePrefix ~ metaBundle.sourceId) }}">{{ metaBundle.sourceName }}</a>
-                </td>
-                <td>
-                    {% set numEntries = craft.entries.total({ sectionId: metaBundle.sourceId }) %}
-                    {{ numEntries }}
-                </td>
-                <td>
-                    {{ metaBundle.sourceType }}
-                </td>
-                <td>
-                    {# -- Meta Tags -- #}
-                    {% set total = 0 %}
-                    {% for metaTagContainer in metaBundle.metaTagContainer %}
-                        {% set total = total + (metaTagContainer.data |length) %}
-                    {% endfor %}
-                    <div title="{{ total }} Meta Tags" class="content-icon-wrapper">
-                        <object type="image/svg+xml"
-                                data="{{ baseAssetUrl ~ '/img/tags-icon.svg' }}"
-                                class="content-icon {% if total > 0 %}content-seo-enabled{% else %}content-seo-disabled{% endif %}">
-                        </object>
-                    </div>
-                    {# -- Meta Links -- #}
-                    {% set total = 0 %}
-                    {% for metaLinkContainer in metaBundle.metaLinkContainer %}
-                        {% set total = total + (metaLinkContainer.data |length) %}
-                    {% endfor %}
-                    <div title="{{ total }} Link Tags" class="content-icon-wrapper">
-                        <object type="image/svg+xml"
-                                data="{{ baseAssetUrl ~ '/img/link-icon.svg' }}"
-                                class="content-icon {% if total > 0 %}content-seo-enabled{% else %}content-seo-disabled{% endif %}">
-                        </object>
-                    </div>
-                    {# -- Meta Scripts -- #}
-                    {% set total = 0 %}
-                    {% for metaScriptContainer in metaBundle.metaScriptContainer %}
-                        {% set total = total + (metaScriptContainer.data |length) %}
-                    {% endfor %}
-                    <div title="{{ total }} Script Tags" class="content-icon-wrapper">
-                        <object type="image/svg+xml"
-                                data="{{ baseAssetUrl ~ '/img/script-icon.svg' }}"
-                                class="content-icon {% if total > 0 %}content-seo-enabled{% else %}content-seo-disabled{% endif %}">
-                        </object>
-                    </div>
-                    {# -- Meta Json Ld -- #}
-                    {% set total = 0 %}
-                    {% for metaJsonLdContainer in metaBundle.metaJsonLdContainer %}
-                        {% set total = total + (metaJsonLdContainer.data |length) %}
-                    {% endfor %}
-                    <div title="{{ total }} Structured Data Objects" class="content-icon-wrapper">
-                        <object type="image/svg+xml"
-                                data="{{ baseAssetUrl ~ '/img/structured-data-icon.svg' }}"
-                                class="content-icon {% if total > 0 %}content-seo-enabled{% else %}content-seo-disabled{% endif %}">
-                        </object>
-                    </div>
-                    {# -- Sitemap -- #}
-                    <div title="{% if metaBundle.sitemapUrls %}Sitemap Enabled{% else %}Sitemap Disabled{% endif %}" class="content-icon-wrapper">
-                        <object type="image/svg+xml"
-                                data="{{ baseAssetUrl ~ '/img/sitemap-icon.svg' }}"
-                                class="content-icon {% if metaBundle.sitemapUrls %}content-seo-enabled{% else %}content-seo-disabled{% endif %}">
-                        </object>
-                    </div>
-                </td>
-                <td>
-                    <span class="content-seo-checkmark">&check;</span>
-                </td>
-                <td>
-                    <a class="btn">Settings…</a>
-                </td>
-                <td>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div id="tab-content-facebook" class="hidden">
+        {% include "seomatic/settings/_includes/tab-facebook.twig" %}
+    </div>
 
-{% endset %}
+{% endblock %}

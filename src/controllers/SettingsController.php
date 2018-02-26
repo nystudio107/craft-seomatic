@@ -97,6 +97,7 @@ class SettingsController extends Controller
         // Enabled sites
         $sites = Craft::$app->getSites();
         $variables['currentSiteId'] = empty($siteId) ? Craft::$app->getSites()->currentSite->id : $siteId;
+        $variables['currentSiteHandle'] = empty($siteHandle) ? Craft::$app->getSites()->currentSite->handle : $siteHandle;
         if (Craft::$app->getIsMultiSite()) {
             // Set defaults based on the section settings
             $variables['enabledSiteIds'] = [];
@@ -256,6 +257,190 @@ class SettingsController extends Controller
     }
 
     /**
+     * Global settings
+     *
+     * @param string      $sourceType
+     * @param string      $sourceHandle
+     * @param string|null $siteHandle
+     *
+     * @return Response The rendered result
+     * @throws NotFoundHttpException
+     */
+    public function actionEditContent(string $sourceType, string $sourceHandle, string $siteHandle = null): Response
+    {
+        // Get the site to edit
+        if ($siteHandle !== null) {
+            $site = Craft::$app->getSites()->getSiteByHandle($siteHandle);
+            if (!$site) {
+                throw new NotFoundHttpException('Invalid site handle: '.$siteHandle);
+            }
+            $siteId = $site->id;
+        } else {
+            $siteId = Craft::$app->getSites()->currentSite->id;
+        }
+
+        $pluginName = Seomatic::$settings->pluginName;
+        $templateTitle = Craft::t('seomatic', 'Content Meta');
+        // Asset bundle
+        try {
+            Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
+        } catch (InvalidConfigException $e) {
+        }
+        $variables['baseAssetUrl'] = Craft::$app->assetManager->getPublishedUrl(
+            '@nystudio107/seomatic/assetbundles/seomatic/dist',
+            true
+        );
+        // Basic variables
+        $variables['fullPageForm'] = true;
+        $variables['docsUrl'] = self::DOCUMENTATION_URL;
+        $variables['pluginName'] = Seomatic::$settings->pluginName;
+        $variables['title'] = $pluginName . ' ' . $templateTitle;
+        $variables['crumbs'] = [
+            [
+                'label' => $pluginName,
+                'url'   => UrlHelper::cpUrl('seomatic'),
+            ],
+            [
+                'label' => $templateTitle,
+                'url'   => UrlHelper::cpUrl('seomatic/content'),
+            ],
+        ];
+        $variables['selectedSubnavItem'] = 'content';
+
+        // Enabled sites
+        $sites = Craft::$app->getSites();
+        $variables['currentSiteId'] = empty($siteId) ? Craft::$app->getSites()->currentSite->id : $siteId;
+        $variables['currentSiteHandle'] = empty($siteHandle) ? Craft::$app->getSites()->currentSite->handle : $siteHandle;
+        $variables['currentSourceHandle'] = $sourceHandle;
+        $variables['currentSourceType'] = $sourceType;
+        if (Craft::$app->getIsMultiSite()) {
+            // Set defaults based on the section settings
+            $variables['enabledSiteIds'] = [];
+            $variables['siteIds'] = [];
+
+            /** @var Site $site */
+            foreach ($sites->getAllSites() as $site) {
+                $variables['enabledSiteIds'][] = $site->id;
+                $variables['siteIds'][] = $site->id;
+            }
+        }
+
+        // Page title w/ revision label
+        $variables['showSites'] = (
+            Craft::$app->getIsMultiSite() &&
+            count($variables['enabledSiteIds'])
+        );
+
+        if ($variables['showSites']) {
+            $variables['sitesMenuLabel'] = Craft::t('site', $sites->getSiteById($variables['currentSiteId'])->name);
+        } else {
+            $variables['sitesMenuLabel'] = '';
+        }
+        $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
+            $sourceType,
+            $sourceHandle,
+            $variables['currentSiteId']
+        );
+        $variables['controllerHandle'] = 'edit-content' . '/' . $sourceHandle;
+
+        $variables['globals'] = $metaBundle->metaGlobalVars;
+        $variables['sitemap'] = $metaBundle->metaSitemapVars;
+        $variables['settings'] = $metaBundle->metaBundleSettings;
+
+        // Image selectors
+        $elements = Craft::$app->getElements();
+        $variables['elementType'] = Asset::class;
+        // SEO Image
+        $seoImageElements = [];
+        if (!empty($variables['settings']['seoImageIds'])) {
+            foreach ($variables['settings']['seoImageIds'] as $seoImageId) {
+                $seoImageElements[] = $elements->getElementById($seoImageId, Asset::class, $siteId);
+            }
+        }
+        $variables['seoImageElements'] = $seoImageElements;
+        // Twitter Image
+        $twitterImageElements = [];
+        if (!empty($variables['settings']['twitterImageIds'])) {
+            foreach ($variables['settings']['twitterImageIds'] as $twitterImageId) {
+                $twitterImageElements[] = $elements->getElementById($twitterImageId, Asset::class, $siteId);
+            }
+        }
+        $variables['twitterImageElements'] = $twitterImageElements;
+        // OG Image
+        $ogImageElements = [];
+        if (!empty($variables['settings']['ogImageIds'])) {
+            foreach ($variables['settings']['ogImageIds'] as $ogImageId) {
+                $ogImageElements[] = $elements->getElementById($ogImageId, Asset::class, $siteId);
+            }
+        }
+        $variables['ogImageElements'] = $ogImageElements;
+
+        // Preview the meta containers
+        Seomatic::$plugin->metaContainers->previewMetaContainers(
+            MetaBundles::GLOBAL_META_BUNDLE,
+            $variables['currentSiteId']
+        );
+
+        // Render the template
+        return $this->renderTemplate('seomatic/settings/content/_edit', $variables);
+    }
+
+
+    /**
+     * @return Response
+     * @throws \yii\web\BadRequestHttpException
+     */
+    public function actionSaveContent()
+    {
+        $this->requirePostRequest();
+        $request = Craft::$app->getRequest();
+        $sourceType = $request->getParam('sourceType');
+        $sourceHandle = $request->getParam('sourceHandle');
+        $siteId = $request->getParam('siteId');
+        $globalsSettings = $request->getParam('globals');
+        $bundleSettings = $request->getParam('settings');
+
+        // The site settings for the appropriate meta bundle
+        $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
+            $sourceType,
+            $sourceHandle,
+            $siteId
+        );
+        if ($metaBundle) {
+            $elements = Craft::$app->getElements();
+            // Handle the SEO Image
+            if (!empty($bundleSettings['seoImageIds'])) {
+                $seoImage = $elements->getElementById($bundleSettings['seoImageIds'][0], Asset::class, $siteId);
+                if ($seoImage) {
+                    $globalsSettings['seoImage'] = $seoImage->getUrl();
+                }
+            }
+            // Handle the Twitter Image
+            if (!empty($bundleSettings['twitterImageIds'])) {
+                $twitterImage = $elements->getElementById($bundleSettings['twitterImageIds'][0], Asset::class, $siteId);
+                if ($twitterImage) {
+                    $globalsSettings['twitterImage'] = $twitterImage->getUrl();
+                }
+            }
+            // Handle the Facebook IG Image
+            if (!empty($bundleSettings['ogImageIds'])) {
+                $ogImage = $elements->getElementById($bundleSettings['ogImageIds'][0], Asset::class, $siteId);
+                if ($ogImage) {
+                    $globalsSettings['ogImage'] = $ogImage->getUrl();
+                }
+            }
+            $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
+            $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
+            Seomatic::$plugin->metaBundles->updateGlobalMetaBundle($metaBundle, $siteId);
+
+            Seomatic::$plugin->clearAllCaches();
+            Craft::$app->getSession()->setNotice(Craft::t('seomatic', 'SEOmatic content settings saved.'));
+        }
+
+        return $this->redirectToPostedUrl();
+    }
+
+    /**
      * Site settings
      *
      * @param string $siteHandle
@@ -307,6 +492,7 @@ class SettingsController extends Controller
         // Enabled sites
         $sites = Craft::$app->getSites();
         $variables['currentSiteId'] = empty($siteId) ? Craft::$app->getSites()->currentSite->id : $siteId;
+        $variables['currentSiteHandle'] = empty($siteHandle) ? Craft::$app->getSites()->currentSite->handle : $siteHandle;
         if (Craft::$app->getIsMultiSite()) {
             // Set defaults based on the section settings
             $variables['enabledSiteIds'] = [];

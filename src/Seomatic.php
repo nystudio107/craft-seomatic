@@ -465,13 +465,24 @@ class Seomatic extends Plugin
                 $event->rules = array_merge(
                     $event->rules,
                     [
-                        'seomatic'                              => 'seomatic/settings/content',
-                        'seomatic/global'                       => 'seomatic/settings/global',
-                        'seomatic/global/<siteHandle:{handle}>' => 'seomatic/settings/global',
-                        'seomatic/content'                      => 'seomatic/settings/content',
-                        'seomatic/site'                         => 'seomatic/settings/site',
-                        'seomatic/site/<siteHandle:{handle}>'   => 'seomatic/settings/site',
-                        'seomatic/plugin'                       => 'seomatic/settings/plugin',
+                        'seomatic' =>
+                            'seomatic/settings/content',
+                        'seomatic/global' =>
+                            'seomatic/settings/global',
+                        'seomatic/global/<siteHandle:{handle}>' =>
+                            'seomatic/settings/global',
+                        'seomatic/content' =>
+                            'seomatic/settings/content',
+                        'seomatic/edit-content/<sourceType:{handle}>/<sourceHandle:{handle}>' =>
+                            'seomatic/settings/edit-content',
+                        'seomatic/edit-content/<sourceType:{handle}>/<sourceHandle:{handle}>/<siteHandle:{handle}>' =>
+                            'seomatic/settings/edit-content',
+                        'seomatic/site' =>
+                            'seomatic/settings/site',
+                        'seomatic/site/<siteHandle:{handle}>' =>
+                            'seomatic/settings/site',
+                        'seomatic/plugin' =>
+                            'seomatic/settings/plugin',
                     ]
                 );
             }
