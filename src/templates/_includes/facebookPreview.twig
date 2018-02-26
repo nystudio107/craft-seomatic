@@ -1,5 +1,6 @@
 {% set ogTitleArray = seomatic.tag.get('og:title').renderAttributes() %}
 {% set ogDescriptionArray = seomatic.tag.get('og:description').renderAttributes() %}
+{% set ogImageArray = seomatic.tag.get('og:image').renderAttributes() %}
 
 <div class="preview-column">
     <div class="displaypreview">
@@ -37,8 +38,8 @@
                 var i;
                 for (i = 0; i < x.length; i++) {
                     x[i].style.backgroundImage = "url(" + "{{ baseAssetsUrl ~ '/img/no_image_set.png' }}" + ")";
-                    {% if seomatic.meta.ogImage %}
-                    x[i].style.backgroundImage = "url(" + "{{ seomatic.meta.ogImage }}" + ")";
+                    {% if ogImageArray.content %}
+                    x[i].style.backgroundImage = "url(" + "{{ ogImageArray.content }}" + ")";
                     {% endif %}
                 }
             </script>

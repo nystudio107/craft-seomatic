@@ -1,5 +1,6 @@
 {% set twitterTitleArray = seomatic.tag.get('twitter:title').renderAttributes() %}
 {% set twitterDescriptionArray = seomatic.tag.get('twitter:description').renderAttributes() %}
+{% set twitterImageArray = seomatic.tag.get('twitter:image').renderAttributes() %}
 
 <div class="preview-column">
     <div class="displaypreview">
@@ -33,8 +34,8 @@
                 var i;
                 for (i = 0; i < x.length; i++) {
                     x[i].style.backgroundImage = "url(" + "{{ baseAssetsUrl ~ '/img/no_image_set.png' }}" + ")";
-                    {% if seomatic.meta.twitterImage %}
-                    x[i].style.backgroundImage = "url(" + "{{ seomatic.meta.twitterImage }}" + ")";
+                    {% if twitterImageArray.content %}
+                    x[i].style.backgroundImage = "url(" + "{{ twitterImageArray.content }}" + ")";
                     {% endif %}
                 }
             </script>

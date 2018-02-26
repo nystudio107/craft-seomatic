@@ -119,9 +119,15 @@ class MetaValue
         $element = Seomatic::$matchedElement;
         /** @var Element $element */
         if (!empty($element)) {
-            $reflector = new \ReflectionClass($element);
-            $matchedElementType = strtolower($reflector->getShortName());
-            self::$templateObjectVars[$matchedElementType] = $element;
+            try {
+                $reflector = new \ReflectionClass($element);
+            } catch (\ReflectionException $e) {
+                $reflector = null;
+            }
+            if ($reflector) {
+                $matchedElementType = strtolower($reflector->getShortName());
+                self::$templateObjectVars[$matchedElementType] = $element;
+            }
         }
 
         self::$view = Seomatic::$view;
@@ -171,5 +177,4 @@ class MetaValue
 
         return $metaValue;
     }
-
 }
