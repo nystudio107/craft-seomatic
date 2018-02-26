@@ -293,12 +293,12 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             case 'image':
                 $lines[] = '    <image:image>';
                 $lines[] = '      <image:loc>';
-                $lines[] = '        '.$asset->url;
+                $lines[] = '        '.$asset->getUrl();
                 $lines[] = '      </image:loc>';
                 // Handle the dynamic field => property mappings
                 foreach ($metaBundle->metaSitemapVars->sitemapImageFieldMap as $row) {
-                    $fieldName = $row['field'];
-                    $propName = $row['property'];
+                    $fieldName = $row['field'] ?? '';
+                    $propName = $row['property'] ?? '';
                     if (!empty($asset[$fieldName])) {
                         $lines[] = '      <image:'.$propName.'>';
                         $lines[] = '        '.$asset[$fieldName];
@@ -311,15 +311,15 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             case 'video':
                 $lines[] = '    <video:video>';
                 $lines[] = '      <video:content_loc>';
-                $lines[] = '        '.$asset->url;
+                $lines[] = '        '.$asset->getUrl();
                 $lines[] = '      </video:content_loc>';
                 $lines[] = '      <video:thumbnail_loc>';
                 $lines[] = '        '.$asset->getThumbUrl(320);
                 $lines[] = '      </video:thumbnail_loc>';
                 // Handle the dynamic field => property mappings
                 foreach ($metaBundle->metaSitemapVars->sitemapVideoFieldMap as $row) {
-                    $fieldName = $row['field'];
-                    $propName = $row['property'];
+                    $fieldName = $row['field'] ?? '';
+                    $propName = $row['property'] ?? '';
                     if (!empty($asset[$fieldName])) {
                         $lines[] = '      <video:'.$propName.'>';
                         $lines[] = '        '.$asset[$fieldName];
@@ -341,7 +341,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         if (in_array($asset->kind, $this::FILE_TYPES)) {
             $lines[] = '  <url>';
             $lines[] = '    <loc>';
-            $lines[] = '      '.$asset->url;
+            $lines[] = '      '.$asset->getUrl();
             $lines[] = '    </loc>';
             $lines[] = '    <lastmod>';
             $lines[] = '      '.$asset->dateUpdated->format(\DateTime::W3C);
