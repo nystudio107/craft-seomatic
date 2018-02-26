@@ -15,6 +15,7 @@ use craft\base\Component;
 use craft\base\Element;
 use craft\base\Field as BaseField;
 use craft\elements\MatrixBlock;
+use yii\base\InvalidConfigException;
 
 /**
  * @author    nystudio107
@@ -62,12 +63,18 @@ class Field
     {
         $foundFields = [];
 
-        $matrixBlockTypeModel = $matrixBlock->getType();
-        $fields = $matrixBlockTypeModel->getFields();
-        /** @var  $field BaseField */
-        foreach ($fields as $field) {
-            if (($field instanceof $fieldType) || (is_subclass_of($field, $fieldType))) {
-                $foundFields[] = $field->handle;
+        try {
+            $matrixBlockTypeModel = $matrixBlock->getType();
+        } catch (InvalidConfigException $e) {
+            $matrixBlockTypeModel = null;
+        }
+        if ($matrixBlockTypeModel) {
+            $fields = $matrixBlockTypeModel->getFields();
+            /** @var  $field BaseField */
+            foreach ($fields as $field) {
+                if (($field instanceof $fieldType) || (is_subclass_of($field, $fieldType))) {
+                    $foundFields[] = $field->handle;
+                }
             }
         }
 
