@@ -20,6 +20,10 @@
         url: "#tab-content-facebook",
         label: "Facebook" |t("seomatic"),
     },
+    sitemap: {
+        url: "#tab-content-sitemap",
+        label: "Sitemap" |t("seomatic"),
+    },
 } %}
 
 {% block header %}
@@ -52,6 +56,10 @@
 
     <div id="tab-content-facebook" class="hidden">
         {% include "seomatic/settings/_includes/tab-facebook.twig" %}
+    </div>
+
+    <div id="tab-content-sitemap" class="hidden">
+        {% include "seomatic/settings/_includes/tab-sitemap.twig" %}
     </div>
 
 {% endblock %}

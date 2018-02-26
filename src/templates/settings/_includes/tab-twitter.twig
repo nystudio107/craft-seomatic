@@ -4,6 +4,30 @@
 {% include "seomatic/_includes/twitterPreview.twig" %}
 {% namespace "globals" %}
 
+    {{ forms.selectField({
+        label: "Twitter Card Type" |t("seomatic"),
+        instructions: "With Twitter Cards, you can attach rich photos and information to Tweets that drive traffic to your website. Users who Tweet links to your content will have a 'Card' added to the Tweet that’s visible to all of their followers." |t("seomatic"),
+        id: "twitterCard",
+        name: "twitterCard",
+        options: {
+            summary: "Summary Card" |t("seomatic"),
+            summary_large_image: "Summary Card with Large Image" |t("seomatic"),
+            app: "App Card" |t("seomatic"),
+            player: "Player Card" |t("seomatic"),
+        },
+        value: globals.twitterCard,
+    }) }}
+
+    {{ forms.textField({
+        label: "Twitter Creator" |t("seomatic"),
+        instructions: "Twitter username for the content creator / author, without the preceding @." |t("seomatic"),
+        id: "twitterCreator",
+        name: "twitterCreator",
+        value: globals.twitterCreator,
+        class: "nicetext",
+        warning: false,
+    }) }}
+
     {{ forms.textField({
         label: "Twitter Title" |t("seomatic"),
         instructions: "Make sure your title tag is explicit and contains your most important keywords. Be sure that each page has a unique title tag." |t("seomatic"),
@@ -50,13 +74,15 @@
 {% endnamespace %}
 
 {% namespace "globals" %}
-    {{ forms.textField({
+    {{ forms.textAreaField({
         label: "Twitter Image Description" |t("seomatic"),
         instructions: "Description of the Twitter Image" |t("seomatic"),
         id: "twitterImageDescription",
         name: "twitterImageDescription",
         value: globals.twitterImageDescription,
         class: "nicetext",
+        maxlength: seomatic.config.maxDescriptionLength,
+        showCharsLeft: true,
         warning: false,
     }) }}
 {% endnamespace %}

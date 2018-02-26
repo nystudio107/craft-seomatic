@@ -75,13 +75,15 @@
 {% endnamespace %}
 
 {% namespace "globals" %}
-    {{ forms.textField({
+    {{ forms.textAreaField({
         label: "SEO Image Description" |t("seomatic"),
         instructions: "Description of the SEO Image" |t("seomatic"),
         id: "seoImageDescription",
         name: "seoImageDescription",
         value: globals.seoImageDescription,
         class: "nicetext",
+        maxlength: seomatic.config.maxDescriptionLength,
+        showCharsLeft: true,
         warning: false,
     }) }}
 
@@ -99,7 +101,7 @@
             noarchive: "No Archive - Do not archived a cached version of this page" |t("seomatic"),
             noimageindex : "No Image Index - Do not index images on this page" |t("seomatic"),
         },
-        value: globals.siteNamePosition,
+        value: globals.robots,
     }) }}
 
     {{ forms.textField({

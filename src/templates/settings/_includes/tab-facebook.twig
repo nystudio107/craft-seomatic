@@ -50,13 +50,15 @@
 {% endnamespace %}
 
 {% namespace "globals" %}
-    {{ forms.textField({
+    {{ forms.textAreaField({
         label: "Facebook OpenGraph Image Description" |t("seomatic"),
         instructions: "Description of the Facebook OpenGraph Image" |t("seomatic"),
         id: "ogImageDescription",
         name: "ogImageDescription",
         value: globals.ogImageDescription,
         class: "nicetext",
+        maxlength: seomatic.config.maxDescriptionLength,
+        showCharsLeft: true,
         warning: false,
     }) }}
 {% endnamespace %}

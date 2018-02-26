@@ -296,7 +296,9 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 $lines[] = '        '.$asset->url;
                 $lines[] = '      </image:loc>';
                 // Handle the dynamic field => property mappings
-                foreach ($metaBundle->metaSitemapVars->sitemapImageFieldMap as $fieldName => $propName) {
+                foreach ($metaBundle->metaSitemapVars->sitemapImageFieldMap as $row) {
+                    $fieldName = $row['field'];
+                    $propName = $row['property'];
                     if (!empty($asset[$fieldName])) {
                         $lines[] = '      <image:'.$propName.'>';
                         $lines[] = '        '.$asset[$fieldName];
@@ -315,7 +317,9 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 $lines[] = '        '.$asset->getThumbUrl(320);
                 $lines[] = '      </video:thumbnail_loc>';
                 // Handle the dynamic field => property mappings
-                foreach ($metaBundle->metaSitemapVars->sitemapVideoFieldMap as $fieldName => $propName) {
+                foreach ($metaBundle->metaSitemapVars->sitemapVideoFieldMap as $row) {
+                    $fieldName = $row['field'];
+                    $propName = $row['property'];
                     if (!empty($asset[$fieldName])) {
                         $lines[] = '      <video:'.$propName.'>';
                         $lines[] = '        '.$asset[$fieldName];
