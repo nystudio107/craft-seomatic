@@ -205,7 +205,7 @@ class SettingsController extends Controller
             }
             $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
             $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
-            Seomatic::$plugin->metaBundles->updateGlobalMetaBundle($metaBundle, $siteId);
+            Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
 
             Seomatic::$plugin->clearAllCaches();
             Craft::$app->getSession()->setNotice(Craft::t('seomatic', 'SEOmatic global settings saved.'));
@@ -259,14 +259,14 @@ class SettingsController extends Controller
     /**
      * Global settings
      *
-     * @param string      $sourceType
+     * @param string      $sourceBundleType
      * @param string      $sourceHandle
      * @param string|null $siteHandle
      *
      * @return Response The rendered result
      * @throws NotFoundHttpException
      */
-    public function actionEditContent(string $sourceType, string $sourceHandle, string $siteHandle = null): Response
+    public function actionEditContent(string $sourceBundleType, string $sourceHandle, string $siteHandle = null): Response
     {
         // Get the site to edit
         if ($siteHandle !== null) {
@@ -312,7 +312,7 @@ class SettingsController extends Controller
         $variables['currentSiteId'] = empty($siteId) ? Craft::$app->getSites()->currentSite->id : $siteId;
         $variables['currentSiteHandle'] = empty($siteHandle) ? Craft::$app->getSites()->currentSite->handle : $siteHandle;
         $variables['currentSourceHandle'] = $sourceHandle;
-        $variables['currentSourceType'] = $sourceType;
+        $variables['currentSourceBundleType'] = $sourceBundleType;
         if (Craft::$app->getIsMultiSite()) {
             // Set defaults based on the section settings
             $variables['enabledSiteIds'] = [];
@@ -337,7 +337,7 @@ class SettingsController extends Controller
             $variables['sitesMenuLabel'] = '';
         }
         $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
-            $sourceType,
+            $sourceBundleType,
             $sourceHandle,
             $variables['currentSiteId']
         );
@@ -394,15 +394,16 @@ class SettingsController extends Controller
     {
         $this->requirePostRequest();
         $request = Craft::$app->getRequest();
-        $sourceType = $request->getParam('sourceType');
+        $sourceBundleType = $request->getParam('sourceBundleType');
         $sourceHandle = $request->getParam('sourceHandle');
         $siteId = $request->getParam('siteId');
         $globalsSettings = $request->getParam('globals');
         $bundleSettings = $request->getParam('settings');
+        $sitemapSettings = $request->getParam('sitemap');
 
         // The site settings for the appropriate meta bundle
         $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
-            $sourceType,
+            $sourceBundleType,
             $sourceHandle,
             $siteId
         );
@@ -431,7 +432,8 @@ class SettingsController extends Controller
             }
             $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
             $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
-            Seomatic::$plugin->metaBundles->updateGlobalMetaBundle($metaBundle, $siteId);
+            $metaBundle->metaSitemapVars->setAttributes($sitemapSettings);
+            Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
 
             Seomatic::$plugin->clearAllCaches();
             Craft::$app->getSession()->setNotice(Craft::t('seomatic', 'SEOmatic content settings saved.'));
@@ -549,7 +551,7 @@ class SettingsController extends Controller
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle) {
             $metaBundle->metaSiteVars->setAttributes($siteSettings);
-            Seomatic::$plugin->metaBundles->updateGlobalMetaBundle($metaBundle, $siteId);
+            Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
 
             Seomatic::$plugin->clearAllCaches();
             Craft::$app->getSession()->setNotice(Craft::t('seomatic', 'SEOmatic site settings saved.'));
