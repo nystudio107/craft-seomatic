@@ -26,7 +26,7 @@ return [
     'sitemapImageFieldMap' => [
         ['property' => 'title', 'field' => 'title'],
         ['property' => 'caption', 'field' => ''],
-        ['property' => 'geoLocation', 'field' => ''],
+        ['property' => 'geo_location', 'field' => ''],
         ['property' => 'license', 'field' => ''],
     ],
     'sitemapVideoFieldMap' => [

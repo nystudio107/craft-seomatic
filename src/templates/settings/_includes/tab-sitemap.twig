@@ -108,9 +108,12 @@
                 width: "30%",
             },
             field: {
-                heading: "Field" |t("seomatic"),
-                type: "singleline",
+                heading: "Source Field" |t("seomatic"),
+                type: "select",
                 width: "70%",
+                options: {
+                    "title": "Title"
+                },
             },
         },
         rows: sitemap.sitemapImageFieldMap,
@@ -130,8 +133,11 @@
             },
             field: {
                 heading: "Field" |t("seomatic"),
-                type: "singleline",
+                type: "select",
                 width: "70%",
+                options: {
+                    "title": "Title"
+                },
             },
         },
         rows: sitemap.sitemapVideoFieldMap,
