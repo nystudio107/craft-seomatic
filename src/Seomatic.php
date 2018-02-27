@@ -407,7 +407,7 @@ class Seomatic extends Plugin
         Seomatic::$plugin->sitemaps->loadSitemapContainers();
         // Load the frontend template containers
         Seomatic::$plugin->frontendTemplates->loadFrontendTemplateContainers();
-        // Handler: UrlManager::EVENT_REGISTER_CP_URL_RULES
+        // Handler: ErrorHandler::EVENT_BEFORE_HANDLE_EXCEPTION
         Event::on(
             ErrorHandler::class,
             ErrorHandler::EVENT_BEFORE_HANDLE_EXCEPTION,
