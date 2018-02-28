@@ -97,7 +97,9 @@ class SettingsController extends Controller
         // Enabled sites
         $sites = Craft::$app->getSites();
         $variables['currentSiteId'] = empty($siteId) ? Craft::$app->getSites()->currentSite->id : $siteId;
-        $variables['currentSiteHandle'] = empty($siteHandle) ? Craft::$app->getSites()->currentSite->handle : $siteHandle;
+        $variables['currentSiteHandle'] = empty($siteHandle)
+            ? Craft::$app->getSites()->currentSite->handle
+            : $siteHandle;
         if (Craft::$app->getIsMultiSite()) {
             // Set defaults based on the section settings
             $variables['enabledSiteIds'] = [];
@@ -181,27 +183,26 @@ class SettingsController extends Controller
         // The site settings for the appropriate meta bundle
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle) {
-            $elements = Craft::$app->getElements();
             // Handle the SEO Image
             if (!empty($bundleSettings['seoImageIds'])) {
-                $seoImage = $elements->getElementById($bundleSettings['seoImageIds'][0], Asset::class, $siteId);
-                if ($seoImage) {
-                    $globalsSettings['seoImage'] = $seoImage->getUrl();
-                }
+                $globalsSettings['seoImage'] = '{seomatic.helper.socialTransform('
+                    .$bundleSettings['seoImageIds'][0]
+                    .', "base"'
+                    .', '.$siteId.')}';
             }
             // Handle the Twitter Image
             if (!empty($bundleSettings['twitterImageIds'])) {
-                $twitterImage = $elements->getElementById($bundleSettings['twitterImageIds'][0], Asset::class, $siteId);
-                if ($twitterImage) {
-                    $globalsSettings['twitterImage'] = $twitterImage->getUrl();
-                }
+                $globalsSettings['twitterImage'] = '{seomatic.helper.socialTransform('
+                    .$bundleSettings['twitterImageIds'][0]
+                    .', "twitter-large"'
+                    .', '.$siteId.')}';
             }
             // Handle the Facebook IG Image
             if (!empty($bundleSettings['ogImageIds'])) {
-                $ogImage = $elements->getElementById($bundleSettings['ogImageIds'][0], Asset::class, $siteId);
-                if ($ogImage) {
-                    $globalsSettings['ogImage'] = $ogImage->getUrl();
-                }
+                $globalsSettings['ogImage'] = '{seomatic.helper.socialTransform('
+                    .$bundleSettings['ogImageIds'][0]
+                    .', "facebook"'
+                    .', '.$siteId.')}';
             }
             $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
             $metaBundle->metaBundleSettings->setAttributes($bundleSettings);

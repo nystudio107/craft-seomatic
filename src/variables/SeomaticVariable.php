@@ -16,12 +16,13 @@ use nystudio107\seomatic\models\MetaGlobalVars;
 use nystudio107\seomatic\models\MetaSiteVars;
 use nystudio107\seomatic\models\MetaSitemapVars;
 use nystudio107\seomatic\models\Settings;
+use nystudio107\seomatic\services\Helper;
 use nystudio107\seomatic\services\JsonLd;
 use nystudio107\seomatic\services\Link;
 use nystudio107\seomatic\services\Script;
 use nystudio107\seomatic\services\Tag;
-use nystudio107\seomatic\services\Title;
 use nystudio107\seomatic\services\Template;
+use nystudio107\seomatic\services\Title;
 use nystudio107\seomatic\services\MetaContainers;
 use nystudio107\seomatic\services\MetaBundles;
 
@@ -30,12 +31,13 @@ use yii\di\ServiceLocator;
 /**
  * Seomatic defines the `seomatic` global template variable.
  *
+ * @property Helper     helper
  * @property JsonLd     jsonLd
  * @property Link       link
  * @property Script     script
  * @property Tag        tag
- * @property Title      title
  * @property Template   template
+ * @property Title      title
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -86,6 +88,7 @@ class SeomaticVariable extends ServiceLocator
     {
         /** @noinspection PhpDeprecationInspection */
         $components = [
+            'helper' => Helper::class,
             'jsonLd' => JsonLd::class,
             'link' => Link::class,
             'script' => Script::class,
