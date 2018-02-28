@@ -4,8 +4,8 @@
 {% namespace "sitemap" %}
 
     {{ forms.lightswitchField({
-        label: "Include in Sitemap" |t("seomatic"),
-        instructions: "Whether URLs be included in the sitemap" |t("seomatic"),
+        label: "Sitemap Enabled" |t("seomatic"),
+        instructions: "Whether URLs in this section should be included in the sitemap" |t("seomatic"),
         id: "sitemapUrls",
         name: "sitemapUrls",
         on: sitemap.sitemapUrls,
@@ -13,8 +13,8 @@
     }) }}
 
     {{ forms.lightswitchField({
-        label: "Asset Images in Sitemap" |t("seomatic"),
-        instructions: "Whether the URLs to asset images in fields or matrix blocks should be included in the sitemap" |t("seomatic"),
+        label: "Include Images & Videos in Sitemap" |t("seomatic"),
+        instructions: "Whether the URLs to images & videos in Asset fields or Asset fields in matrix blocks should be included in the sitemap" |t("seomatic"),
         id: "sitemapAssets",
         name: "sitemapAssets",
         on: sitemap.sitemapAssets,
@@ -22,8 +22,8 @@
     }) }}
 
     {{ forms.lightswitchField({
-        label: "Asset Files in Sitemap" |t("seomatic"),
-        instructions: "Whether the URLs to asset files such as `.pdf`, `.doc` and other indexable types should be in fields or matrix blocks should be included in the sitemap" |t("seomatic"),
+        label: "Include Indexable Files in Sitemap" |t("seomatic"),
+        instructions: "Whether the URLs to files such as `.pdf`, `.xls`, `.doc` and other indexable file types in Asset fields or Asset fields in matrix blocks should be included in the sitemap" |t("seomatic"),
         id: "sitemapFiles",
         name: "sitemapFiles",
         on: sitemap.sitemapFiles,

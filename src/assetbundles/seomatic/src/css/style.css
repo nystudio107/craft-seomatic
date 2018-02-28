@@ -26,26 +26,26 @@ span.content-seo-checkmark {
 }
 
 div.seomatic-devmode-wrapper {
-	width: 100%;
-	margin-bottom: 10px;
-	background-color: #333f4d;
+    width: 100%;
+    margin-bottom: 10px;
+    background-color: #333f4d;
 }
 
 div.seomatic-devmode {
-	width: 100%;
-	height: 4px;
-	background: url('/admin/resources/images/dev-mode.svg') repeat-x 15px 0;
-	cursor: help;
+    width: 100%;
+    height: 4px;
+    background: url('/admin/resources/images/dev-mode.svg') repeat-x 15px 0;
+    cursor: help;
 }
 
 .geolookup-errors-wrapper {
-	display: none;
+    display: none;
 }
 
 p.seomatic-devmode-text {
-	margin: 0;
-	padding: 10px;
-	color: white;
+    margin: 0;
+    padding: 10px;
+    color: white;
 }
 
 .smallfield {
@@ -83,19 +83,19 @@ div.inline-item {
 }
 
 div.half-width-field {
-	display: inline-block;
-	width: 45%;
+    display: inline-block;
+    width: 45%;
 }
 
 div.half-width-field-left {
-	padding-right: 5%;
+    padding-right: 5%;
 }
 
 p.instructions {
-	margin-top: 4px;
-	font-size: 11px;
-	line-height: 1.4;
-	color: #8f98a3;
+    margin-top: 4px;
+    font-size: 11px;
+    line-height: 1.4;
+    color: #8f98a3;
 }
 
 .codeStyle {
@@ -137,14 +137,10 @@ div.displaypreview-container {
 }
 
 div.displaypreview {
-    width: 468px;
+    width: 512px;
     overflow: hidden;
-    padding: 20px 0px;
-}
-
-div.googleWrapper {
-    padding: 10px;
-    background-color: #d5d8dd;
+    border: 1px solid #EEE;
+    padding: 30px;
 }
 
 h3.googleDisplay {
@@ -314,7 +310,7 @@ div.googleDisplay2 {
     display: block;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 14px;
-    height: 120.1793px;
+    height: 129.9375px;
     line-height: 18.200000762939453px;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -323,7 +319,7 @@ div.googleDisplay2 {
 }
 
 .TwitterCardsGrid-Large {
-	height: 330px;
+    height: 357px;
 }
 
 .TwitterCardGrid-col {
@@ -333,15 +329,15 @@ div.googleDisplay2 {
     float: left;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 14px;
-    height: 116px;
+    height: 125.421875px;
     line-height: 18.200000762939453px;
     margin-bottom: 4.526619911193848px;
     text-align: left;
-    width: 468px;
+    width: 506px;
 }
 
 .TwitterCardGrid-col-Large {
-	height: 330px;
+    height: 357px;
 }
 
 a.TwitterCard-container {
@@ -373,7 +369,7 @@ a.TwitterCard-container {
     float: left;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 14px;
-    height: 116px;
+    height: 125.421875px;
     line-height: 18.200000762939453px;
     outline-offset: 0px;
     overflow-x: hidden;
@@ -384,12 +380,11 @@ a.TwitterCard-container {
     transition-duration: 0.15s, 0.15s;
     transition-property: background-color, border-color;
     transition-timing-function: ease-in-out, ease-in-out;
-    width: 468px;
-    background-color: #d5d8dd;
+    width: 506px;
 }
 
 a.TwitterCard-container-Large {
-	height: 330px;
+    height: 357px;
 }
 
 a.TwitterCard-container:hover {
@@ -418,16 +413,16 @@ a.TwitterCard-container:hover {
     float: left;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 14px;
-    height: 114.1529px;
+    height: 123.421875px;
     line-height: 18.200000762939453px;
     text-align: left;
     text-decoration: none;
-    width: 114.1529px;
+    width: 123.421875px;
 }
 
 .TwitterCard-summary-image-Large {
-    width: 468px;
-	height: 235px;
+    width: 506px;
+    height: 254px;
 }
 
 .TwitterCard-image-container {
@@ -436,19 +431,19 @@ a.TwitterCard-container:hover {
     display: block;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 14px;
-    height: 114.1529px;
+    height: 123.421875px;
     line-height: 18.200000762939453px;
     overflow-x: hidden;
     overflow-y: hidden;
     position: relative;
     text-align: left;
     text-decoration: none;
-    width: 114.1529px;
+    width: 123.421875px;
 }
 
 .TwitterCard-image-container-Large {
-    width: 468px;
-	height: 235px;
+    width: 506px;
+    height: 254px;
 }
 
 .TwitterCard-image-wrapper {
@@ -463,7 +458,7 @@ a.TwitterCard-container:hover {
     display: block;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 14px;
-    height: 114.1529px;
+    height: 125.421875px;
     left: -1px;
     line-height: 18.200000762939453px;
     position: absolute;
@@ -471,12 +466,12 @@ a.TwitterCard-container:hover {
     text-align: left;
     text-decoration: none;
     top: -1px;
-    width: 114.1529px;
+    width: 125.421875px;
 }
 
 .TwitterCard-image-wrapper-Large {
-    width: 468px;
-	height: 235px;
+    width: 506px;
+    height: 254px;
 }
 
 .TwitterCard-summary-content-container {
@@ -490,12 +485,12 @@ a.TwitterCard-container:hover {
     line-height: 18.200000762939453px;
     text-align: left;
     text-decoration: none;
-    width: 341px;
+    width: 379.5625px;
 }
 
 .TwitterCard-summary-content-container-Large {
-    width: 468px;
-	height: 94.34px;
+    width: 504px;
+    height: 102px;
 }
 
 .TwitterCard-summary-content {
@@ -513,12 +508,12 @@ a.TwitterCard-container:hover {
     padding-top: 10.5px;
     text-align: left;
     text-decoration: none;
-    width: 341px;
+    width: 379.5625px;
 }
 
 .TwitterCard-summary-content-Large {
-    width: 468px;
-	height: 94.33px;
+    width: 504px;
+    height: 102px;
 }
 
 h2.TwitterCard-title {
@@ -587,9 +582,9 @@ p.TwitterCard-text-Large {
 
 .Facebook-container {
     -webkit-box-shadow: rgba(0, 0, 0, 0.14902) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.0980392) 0px 1px 4px 0px;
-    background-color: #d5d8dd;
+    background-color: rgb(255, 255, 255);
     box-shadow: rgba(0, 0, 0, 0.14902) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.0980392) 0px 1px 4px 0px;
-    color: #000;
+    color: rgb(20, 24, 35);
     direction: ltr;
     display: block;
     font-family: helvetica, arial, sans-serif;
@@ -611,8 +606,8 @@ p.TwitterCard-text-Large {
 }
 
 .Facebook-image-wrap {
-	padding: 1px;
-	overflow: hidden;
+    padding: 1px;
+    overflow: hidden;
 }
 
 .Facebook-post-image {
@@ -620,7 +615,6 @@ p.TwitterCard-text-Large {
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-size: contain;
-    background-color: #FFF;
     border-bottom-color: rgba(0, 0, 0, 0.0980392);
     border-bottom-width: 1px;
     border-bottom-style: solid;
