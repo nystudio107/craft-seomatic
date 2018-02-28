@@ -21,6 +21,7 @@ use craft\elements\Category;
 use craft\elements\Entry;
 use craft\helpers\StringHelper;
 use craft\web\View;
+use yii\base\Exception;
 
 /**
  * @author    nystudio107
@@ -154,8 +155,18 @@ class MetaValue
             if (!StringHelper::contains($metaValue, '{')) {
                 return $metaValue;
             }
+            $oldTemplateMode = self::$view->getTemplateMode();
             try {
+                // Render in site template mode so that we get globals injected
+                if ($oldTemplateMode != self::$view::TEMPLATE_MODE_SITE) {
+                    self::$view->setTemplateMode(self::$view::TEMPLATE_MODE_SITE);
+                }
+                // Render the template out
                 $metaValue = self::$view->renderObjectTemplate($metaValue, self::$templateObjectVars);
+                // Restore the template mode
+                if ($oldTemplateMode != self::$view::TEMPLATE_MODE_SITE) {
+                    self::$view->setTemplateMode($oldTemplateMode);
+                }
             } catch (\Exception $e) {
                 $metaValue = Craft::t(
                     'seomatic',
@@ -163,6 +174,13 @@ class MetaValue
                     ['template' => $metaValue, 'error' => $e->getMessage()]
                 );
                 Craft::error($metaValue, __METHOD__);
+                // Restore the template mode
+                if ($oldTemplateMode != self::$view::TEMPLATE_MODE_SITE) {
+                    try {
+                        self::$view->setTemplateMode($oldTemplateMode);
+                    } catch (Exception $e) {
+                    }
+                }
 
                 return null;
             }
