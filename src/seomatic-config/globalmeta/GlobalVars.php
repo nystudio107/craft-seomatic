@@ -25,7 +25,7 @@ return [
         'seoImageDescription'     => 'Global SEO Image Description',
         'canonicalUrl'            => '{{ craft.app.request.pathInfo }}',
         'robots'                  => 'all',
-        'ogType'                  => 'Website',
+        'ogType'                  => 'website',
         'ogTitle'                 => '{seomatic.meta.seoTitle}',
         'ogSiteNamePosition'      => '{seomatic.meta.siteNamePosition}',
         'ogDescription'           => '{seomatic.meta.seoDescription}',

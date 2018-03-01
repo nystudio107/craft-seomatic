@@ -15,6 +15,8 @@ use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\models\MetaTag;
 
+use Craft;
+
 use Stringy\Stringy;
 
 /**

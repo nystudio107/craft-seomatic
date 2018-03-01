@@ -192,9 +192,13 @@ class SettingsController extends Controller
             }
             // Handle the Twitter Image
             if (!empty($bundleSettings['twitterImageIds'])) {
+                $twitterCardTransform = 'twitter-summary';
+                if ($globalsSettings['twitterCard'] == 'summary_large_image') {
+                    $twitterCardTransform = 'twitter-large';
+                }
                 $globalsSettings['twitterImage'] = '{seomatic.helper.socialTransform('
                     .$bundleSettings['twitterImageIds'][0]
-                    .', "twitter-large"'
+                    .', "'.$twitterCardTransform.'"'
                     .', '.$siteId.')}';
             }
             // Handle the Facebook IG Image

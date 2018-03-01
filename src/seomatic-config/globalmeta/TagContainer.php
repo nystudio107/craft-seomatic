@@ -106,7 +106,7 @@ return [
             ],
             'og:type'        => [
                 'charset'   => '',
-                'content'   => 'website',
+                'content'   => '{seomatic.meta.ogType}',
                 'httpEquiv' => '',
                 'name'      => '',
                 'property'  => 'og:type',

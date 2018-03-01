@@ -27,7 +27,7 @@
             none: "None" |t("seomatic"),
         },
         value: globals.siteNamePosition,
-        warning: configWarning("siteNamePosition", "seomatic"),
+        warning: false,
     }) }}
 
     {{ forms.textAreaField({
@@ -51,6 +51,18 @@
         class: "nicetext",
         maxlength: seomatic.config.maxDescriptionLength,
         showCharsLeft: true,
+        warning: false,
+    }) }}
+{% endnamespace %}
+
+{% namespace "globals" %}
+    {{ forms.textField({
+        label: "SEO Image URL" |t("seomatic"),
+        instructions: "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified. The image must be in JPG, PNG, or GIF format." |t("seomatic"),
+        id: "seoImage",
+        name: "seoImage",
+        value: globals.seoImage,
+        class: "nicetext",
         warning: false,
     }) }}
 {% endnamespace %}

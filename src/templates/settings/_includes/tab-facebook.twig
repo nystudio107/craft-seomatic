@@ -4,7 +4,28 @@
 <h4 class="heading">{{ "SEO Preview:" |t('seomatic') }}</h4>
 {% include "seomatic/_includes/facebookPreview.twig" %}
 {% namespace "globals" %}
-
+    
+    {{ forms.selectField({
+        label: "Facebook OpenGraph Type" |t("seomatic"),
+        instructions: "Adding OpenGraph tags to your website influences the performance of your links on social media by allowing you to control what appears when a user posts a link to your content on Facebook." |t("seomatic"),
+        id: "ogType",
+        name: "ogType",
+        options: {
+            "article": "Article" |t("seomatic"),
+            "book": "Book" |t("seomatic"),
+            "business.business": "Business" |t("seomatic"),
+            "music.album": "Music Album" |t("seomatic"),
+            "music.song": "Music Song" |t("seomatic"),
+            "place": "Place" |t("seomatic"),
+            "product": "Product" |t("seomatic"),
+            "profile": "Profile" |t("seomatic"),
+            "restaurant.restaurant": "Restaurant" |t("seomatic"),
+            "video.other": "Video" |t("seomatic"),
+            "website": "Website" |t("seomatic"),
+        },
+        value: globals.ogType,
+    }) }}
+    
     {{ forms.textField({
         label: "Facebook OpenGraph Title" |t("seomatic"),
         instructions: "Make sure your title tag is explicit and contains your most important keywords. Be sure that each page has a unique title tag." |t("seomatic"),
@@ -16,7 +37,21 @@
         showCharsLeft: true,
         warning: false,
     }) }}
-
+    
+    {{ forms.selectField({
+        label: "Facebook OpenGraph Site Name Position" |t("seomatic"),
+        instructions: "Where the Site Name is placed relative to the Facebook OpenGraph Title in the &lt;og:title&gt; tag" |t("seomatic"),
+        id: "ogSiteNamePosition",
+        name: "ogSiteNamePosition",
+        options: {
+            before: "Before" |t("seomatic"),
+            after: "After" |t("seomatic"),
+            none: "None" |t("seomatic"),
+        },
+        value: globals.ogSiteNamePosition,
+        warning: false,
+    }) }}
+    
     {{ forms.textAreaField({
         label: "Facebook OpenGraph Description" |t("seomatic"),
         instructions: "SEO descriptions allow you to influence how your web pages are described and displayed in search results. Ensure that all of your web pages have a unique meta description that is explicit and contains your most important keywords." |t("seomatic"),
@@ -26,6 +61,18 @@
         class: "nicetext",
         maxlength: 300,
         showCharsLeft: true,
+        warning: false,
+    }) }}
+{% endnamespace %}
+
+{% namespace "globals" %}
+    {{ forms.textField({
+        label: "Facebook OpenGraph Image URL" |t("seomatic"),
+        instructions: "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified. The image must be in JPG, PNG, or GIF format." |t("seomatic"),
+        id: "ogImage",
+        name: "ogImage",
+        value: globals.ogImage,
+        class: "nicetext",
         warning: false,
     }) }}
 {% endnamespace %}

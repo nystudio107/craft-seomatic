@@ -105,6 +105,11 @@ class MetaGlobalVars extends VarsModel
     /**
      * @var string
      */
+    public $ogSiteNamePosition;
+
+    /**
+     * @var string
+     */
     public $ogDescription;
 
     /**
@@ -135,6 +140,11 @@ class MetaGlobalVars extends VarsModel
     /**
      * @var string
      */
+    public $twitterSiteNamePosition;
+
+    /**
+     * @var string
+     */
     public $twitterDescription;
 
     /**
@@ -149,6 +159,16 @@ class MetaGlobalVars extends VarsModel
 
     // Public Methods
     // =========================================================================
+
+    /**
+     * @inheritdoc
+     */
+    public function __construct(array $config = [])
+    {
+        // Unset any deprecated properties
+        //unset($config['siteNamePosition']);
+        parent::__construct($config);
+    }
 
     /**
      * Parse the model properties
@@ -179,12 +199,14 @@ class MetaGlobalVars extends VarsModel
                     'robots',
                     'ogType',
                     'ogTitle',
+                    'ogSiteNamePosition',
                     'ogDescription',
                     'ogImage',
                     'ogImageDescription',
                     'twitterCard',
                     'twitterCreator',
                     'twitterTitle',
+                    'twitterSiteNamePosition',
                     'twitterDescription',
                     'twitterImage',
                     'twitterImageDescription',

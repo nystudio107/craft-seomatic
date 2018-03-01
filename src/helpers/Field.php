@@ -32,10 +32,11 @@ class Field
      *
      * @param Element $element
      * @param string  $fieldType
+     * @param bool    $keysOnly
      *
      * @return array
      */
-    public static function fieldsOfType(Element $element, string $fieldType)
+    public static function fieldsOfType(Element $element, string $fieldType, bool $keysOnly = true)
     {
         $foundFields = [];
 
@@ -43,9 +44,14 @@ class Field
         $fields = $layout->getFields();
         /** @var  $field BaseField */
         foreach ($fields as $field) {
-            if (($field instanceof $fieldType) || (is_subclass_of($field, $fieldType))) {
-                $foundFields[] = $field->handle;
+            if ($field instanceof $fieldType) {
+                $foundFields[$field->handle] = $field->name;
             }
+        }
+
+        // Return only the keys if asked
+        if ($keysOnly) {
+            $foundFields = array_keys($foundFields);
         }
 
         return $foundFields;
@@ -56,10 +62,11 @@ class Field
      *
      * @param MatrixBlock $matrixBlock
      * @param string      $fieldType
+     * @param bool        $keysOnly
      *
      * @return array
      */
-    public static function matrixFieldsOfType(MatrixBlock $matrixBlock, string $fieldType)
+    public static function matrixFieldsOfType(MatrixBlock $matrixBlock, string $fieldType, bool $keysOnly = true)
     {
         $foundFields = [];
 
@@ -72,10 +79,15 @@ class Field
             $fields = $matrixBlockTypeModel->getFields();
             /** @var  $field BaseField */
             foreach ($fields as $field) {
-                if (($field instanceof $fieldType) || (is_subclass_of($field, $fieldType))) {
-                    $foundFields[] = $field->handle;
+                if ($field instanceof $fieldType) {
+                    $foundFields[$field->handle] = $field->name;
                 }
             }
+        }
+
+        // Return only the keys if asked
+        if ($keysOnly) {
+            $foundFields = array_keys($foundFields);
         }
 
         return $foundFields;
