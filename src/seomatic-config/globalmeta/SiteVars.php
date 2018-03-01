@@ -17,29 +17,30 @@
 
 return [
     '*' => [
-        'siteName'               => '',
-        'twitterHandle'          => '',
-        'facebookProfileId'      => '',
-        'facebookAppId'          => '',
-        'googleSiteVerification' => '',
-        'bingSiteVerification'   => '',
-        'sameAsLinks'            => [
-            'twitter' => [
+        'siteName'                  => '',
+        'twitterHandle'             => '',
+        'facebookProfileId'         => '',
+        'facebookAppId'             => '',
+        'googleSiteVerification'    => '',
+        'bingSiteVerification'      => '',
+        'pinterestSiteVerification' => '',
+        'sameAsLinks'               => [
+            'twitter'    => [
                 'siteName' => 'Twitter',
                 'handle'   => 'twitter',
                 'url'      => '',
             ],
-            'facebook' => [
+            'facebook'   => [
                 'siteName' => 'Facebook',
                 'handle'   => 'facebook',
                 'url'      => '',
             ],
-            'wikipedia' => [
+            'wikipedia'  => [
                 'siteName' => 'Wikpedia',
                 'handle'   => 'wikipedia',
                 'url'      => '',
             ],
-            'linkedin' => [
+            'linkedin'   => [
                 'siteName' => 'LinkedIn',
                 'handle'   => 'linkedin',
                 'url'      => '',
@@ -49,27 +50,27 @@ return [
                 'handle'   => 'googleplus',
                 'url'      => '',
             ],
-            'youtube' => [
+            'youtube'    => [
                 'siteName' => 'YouTube',
                 'handle'   => 'youtube',
                 'url'      => '',
             ],
-            'instagram' => [
+            'instagram'  => [
                 'siteName' => 'Instagram',
                 'handle'   => 'instagram',
                 'url'      => '',
             ],
-            'pinterest' => [
+            'pinterest'  => [
                 'siteName' => 'Pinterest',
                 'handle'   => 'pinterest',
                 'url'      => '',
             ],
-            'github' => [
+            'github'     => [
                 'siteName' => 'GitHub',
                 'handle'   => 'github',
                 'url'      => '',
             ],
-            'vimeo' => [
+            'vimeo'      => [
                 'siteName' => 'Vimeo',
                 'handle'   => 'vimeo',
                 'url'      => '',

@@ -69,17 +69,22 @@ class MetaSiteVars extends VarsModel
     /**
      * @var string The Google Site Verification code
      */
-    public $googleSiteVerification;
+    public $googleSiteVerification = '';
 
     /**
      * @var string The Bing Site Verification code
      */
-    public $bingSiteVerification;
+    public $bingSiteVerification = '';
+
+    /**
+     * @var string The Pinterest Site Verification code
+     */
+    public $pinterestSiteVerification = '';
 
     /**
      * @var array Array of links for Same As... sites, indexed by the handle
      */
-    public $sameAsLinks;
+    public $sameAsLinks = [];
 
     // Public Methods
     // =========================================================================
@@ -120,6 +125,7 @@ class MetaSiteVars extends VarsModel
                     'facebookAppId',
                     'googleSiteVerification',
                     'bingSiteVerification',
+                    'pinterestSiteVerification',
                 ],
                 'string'
             ],

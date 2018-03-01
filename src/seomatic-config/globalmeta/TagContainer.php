@@ -236,7 +236,7 @@ return [
         'dependencies' => [
         ],
         'data'         => [
-            'google-site-verification' => [
+            'google-site-verification'    => [
                 'dependencies' => [
                     Dependency::SITE_DEPENDENCY => ['googleSiteVerification'],
                 ],
@@ -245,7 +245,7 @@ return [
                 'httpEquiv'    => '',
                 'name'         => 'google-site-verification',
             ],
-            'bing-site-verification'   => [
+            'bing-site-verification'      => [
                 'dependencies' => [
                     Dependency::SITE_DEPENDENCY => ['bingSiteVerification'],
                 ],
@@ -253,6 +253,15 @@ return [
                 'content'      => '{seomatic.site.bingSiteVerification}',
                 'httpEquiv'    => '',
                 'name'         => 'msvalidate.01',
+            ],
+            'pinterest-site-verification' => [
+                'dependencies' => [
+                    Dependency::SITE_DEPENDENCY => ['bingSiteVerification'],
+                ],
+                'charset'      => '',
+                'content'      => '{seomatic.site.pinterestSiteVerification}',
+                'httpEquiv'    => '',
+                'name'         => 'p:domain_verify',
             ],
         ],
     ],
