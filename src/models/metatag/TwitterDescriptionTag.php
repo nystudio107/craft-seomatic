@@ -53,7 +53,7 @@ class TwitterDescriptionTag extends MetaTag
         $rules = parent::rules();
         $rules = array_merge($rules, [
             // Description tags have a special length
-            [['content'], 'string', 'length' => [70, 200, 'on' => ['warning']],
+            [['content'], 'string', 'length' => [70, 200], 'on' => ['warning']],
         ]);
 
         return $rules;
