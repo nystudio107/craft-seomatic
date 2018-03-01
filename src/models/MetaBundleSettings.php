@@ -52,14 +52,44 @@ class MetaBundleSettings extends VarsModel
     public $seoImageIds = [];
 
     /**
+     * @var string The source that the SEO image should come from
+     */
+    public $seoImageSource = '';
+
+    /**
+     * @var string The field handle that SEO Image to be pulled from
+     */
+    public $seoImageField = '';
+
+    /**
      * @var int[] The AssetIDs for the Twitter Image
      */
     public $twitterImageIds = [];
 
     /**
+     * @var string The source that the Twitter image should come from
+     */
+    public $twitterImageSource = '';
+
+    /**
+     * @var string The field handle that Twitter Image to be pulled from
+     */
+    public $twitterImageField = '';
+
+    /**
      * @var int[] The AssetIDs for the Facebook OG Image
      */
     public $ogImageIds = [];
+
+    /**
+     * @var string The source that the OpenGraph image should come from
+     */
+    public $ogImageSource = '';
+
+    /**
+     * @var string The field handle that OpenGraph Image to be pulled from
+     */
+    public $ogImageField = '';
 
     // Public Methods
     // =========================================================================

@@ -12,6 +12,7 @@ namespace nystudio107\seomatic\controllers;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
+use nystudio107\seomatic\helpers\Field as FieldHelper;
 
 use Craft;
 use craft\elements\Asset;
@@ -31,9 +32,12 @@ use yii\web\Response;
  */
 class SettingsController extends Controller
 {
+    // Constants
+    // =========================================================================
+
     const DOCUMENTATION_URL = 'https://github.com/nystudio107/craft-seomatic/wiki';
 
-    // Properties
+    // Protected Properties
     // =========================================================================
 
     /**
@@ -379,6 +383,20 @@ class SettingsController extends Controller
             }
         }
         $variables['ogImageElements'] = $ogImageElements;
+
+        // Pass in the pull fields
+        $variables['textFieldSources'] = FieldHelper::fieldsOfTypeFromSource(
+            $sourceBundleType,
+            $sourceHandle,
+            FieldHelper::TEXT_FIELD_CLASS_KEY,
+            false
+        );
+        $variables['assetFieldSources'] = FieldHelper::fieldsOfTypeFromSource(
+            $sourceBundleType,
+            $sourceHandle,
+            FieldHelper::ASSET_FIELD_CLASS_KEY,
+            false
+        );
 
         // Preview the meta containers
         Seomatic::$plugin->metaContainers->previewMetaContainers(

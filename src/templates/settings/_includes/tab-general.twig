@@ -55,10 +55,29 @@
     }) }}
 {% endnamespace %}
 
+{% set imageOptions = {
+    fromAsset: "Custom Image" |t("seomatic"),
+    fromUrl: "Custom URL" |t("seomatic"),
+} %}
+{% if assetFieldSources is defined and assetFieldSources |length %}
+    {% set imageOptions = imageOptions | merge({
+        fromField: "From Asset Field" |t("seomatic"),
+    }) %}
+{% endif %}
+
+{% namespace "settings" %}
+    {{ forms.selectField({
+        label: "SEO Image Source" |t("seomatic"),
+        instructions: "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified." |t("seomatic"),
+        id: "seoImageSource",
+        name: "seoImageSource",
+        options: imageOptions,
+        value: settings.seoImageSource,
+    }) }}
+{% endnamespace %}
+
 {% namespace "globals" %}
-    {{ forms.textField({
-        label: "SEO Image URL" |t("seomatic"),
-        instructions: "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified. The image must be in JPG, PNG, or GIF format." |t("seomatic"),
+    {{ forms.text({
         id: "seoImage",
         name: "seoImage",
         value: globals.seoImage,
@@ -68,9 +87,7 @@
 {% endnamespace %}
 
 {% namespace "settings" %}
-    {{ forms.elementSelectField({
-        label: "SEO Image"|t("seomatic"),
-        instructions: "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified. The image must be in JPG, PNG, or GIF format." |t("seomatic"),
+    {{ forms.elementSelect({
         id: "seoImageIds",
         name: "seoImageIds",
         viewMode: "large",
@@ -85,7 +102,17 @@
         limit: 1,
         warning: false,
     }) }}
+    
+    {% if assetFieldSources is defined and assetFieldSources |length %}
+        {{ forms.select({
+            id: "seoImageField",
+            name: "seoImageField",
+            options: assetFieldSources,
+            value: settings.seoImageField,
+        }) }}
+    {% endif %}
 {% endnamespace %}
+
 
 {% namespace "globals" %}
     {{ forms.textAreaField({

@@ -11,10 +11,17 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use craft\base\Component;
+use nystudio107\seomatic\services\MetaBundles;
+
+use Craft;
 use craft\base\Element;
 use craft\base\Field as BaseField;
 use craft\elements\MatrixBlock;
+use craft\fields\Assets as AssetsField;
+use craft\fields\PlainText as PlainTextField;
+use craft\redactor\Field as RedactorField;
+use craft\ckeditor\Field as CKEditorField;
+
 use yii\base\InvalidConfigException;
 
 /**
@@ -24,6 +31,22 @@ use yii\base\InvalidConfigException;
  */
 class Field
 {
+    // Constants
+    // =========================================================================
+
+    const TEXT_FIELD_CLASS_KEY = 'text';
+    const ASSET_FIELD_CLASS_KEY = 'asset';
+    const FIELD_CLASSES = [
+        self::TEXT_FIELD_CLASS_KEY  => [
+            PlainTextField::class,
+            RedactorField::class,
+            CKEditorField::class,
+        ],
+        self::ASSET_FIELD_CLASS_KEY => [
+            AssetsField::class,
+        ],
+    ];
+
     // Static Methods
     // =========================================================================
 
@@ -46,6 +69,73 @@ class Field
         foreach ($fields as $field) {
             if ($field instanceof $fieldType) {
                 $foundFields[$field->handle] = $field->name;
+            }
+        }
+
+        // Return only the keys if asked
+        if ($keysOnly) {
+            $foundFields = array_keys($foundFields);
+        }
+
+        return $foundFields;
+    }
+
+    /**
+     * Return all of the fields from the $sourceBundleType in the $sourceHandle
+     * of the type $fieldType class
+     *
+     * @param string $sourceBundleType
+     * @param string $sourceHandle
+     * @param string $fieldClassKey
+     * @param bool   $keysOnly
+     *
+     * @return array
+     */
+    public static function fieldsOfTypeFromSource(
+        string $sourceBundleType,
+        string $sourceHandle,
+        string $fieldClassKey,
+        bool $keysOnly = true
+    ) {
+        $foundFields = [];
+        $layouts = [];
+        if (!empty(self::FIELD_CLASSES[$fieldClassKey])) {
+            $fieldClasses = self::FIELD_CLASSES[$fieldClassKey];
+            // Get the layouts
+            switch ($sourceBundleType) {
+                case MetaBundles::GLOBAL_META_BUNDLE:
+                    break;
+
+                case MetaBundles::SECTION_META_BUNDLE:
+                    $entryTypes = Craft::$app->getSections()->getSectionByHandle($sourceHandle)->getEntryTypes();
+                    foreach ($entryTypes as $entryType) {
+                        $layouts[] = Craft::$app->getFields()->getLayoutById($entryType->fieldLayoutId);
+                    }
+                    break;
+
+                case MetaBundles::CATEGORYGROUP_META_BUNDLE:
+                    try {
+                        $layoutId = Craft::$app->getCategories()->getGroupByHandle($sourceHandle)->getFieldLayoutId();
+                    } catch (InvalidConfigException $e) {
+                        $layoutId = null;
+                    }
+                    if ($layoutId) {
+                        $layouts[] = Craft::$app->getFields()->getLayoutById($entryType->fieldLayoutId);
+                    }
+                    break;
+                // @TODO: handle commerce products
+            }
+            // Iterate through the layouts looking for the fields of the type $fieldType
+            foreach ($layouts as $layout) {
+                $fields = $layout->getFields();
+                /** @var  $field BaseField */
+                foreach ($fields as $field) {
+                    foreach ($fieldClasses as $fieldClassKey) {
+                        if ($field instanceof $fieldClassKey) {
+                            $foundFields[$field->handle] = $field->name;
+                        }
+                    }
+                }
             }
         }
 
