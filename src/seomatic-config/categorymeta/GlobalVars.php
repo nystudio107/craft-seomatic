@@ -16,10 +16,27 @@
  */
 
 return [
-    'seoTitle'         => '{category.title}',
-    'siteNamePosition' => 'before',
-    'seoDescription'   => 'Category SEO Description',
-    'seoKeywords'      => 'Category SEO Keywords',
-    'seoImage'         => '',
-    'canonicalUrl'     => '{category.url}',
+    '*' => [
+        'seoTitle'                => '{category.title}',
+        'siteNamePosition'        => 'before',
+        'seoDescription'          => 'Category SEO Description',
+        'seoKeywords'             => 'Category SEO Keywords',
+        'seoImage'                => '',
+        'seoImageDescription'     => 'Category SEO Image Description',
+        'canonicalUrl'            => '{category.url}',
+        'robots'                  => 'all',
+        'ogType'                  => 'website',
+        'ogTitle'                 => '{seomatic.meta.seoTitle}',
+        'ogSiteNamePosition'      => '{seomatic.meta.siteNamePosition}',
+        'ogDescription'           => '{seomatic.meta.seoDescription}',
+        'ogImage'                 => '{seomatic.meta.seoImage}',
+        'ogImageDescription'      => '{seomatic.meta.seoImageDescription}',
+        'twitterCard'             => 'summary',
+        'twitterCreator'          => '{seomatic.site.twitterHandle}',
+        'twitterTitle'            => '{seomatic.meta.seoTitle}',
+        'twitterSiteNamePosition' => '{seomatic.meta.siteNamePosition}',
+        'twitterDescription'      => '{seomatic.meta.seoDescription}',
+        'twitterImage'            => '{seomatic.meta.seoImage}',
+        'twitterImageDescription' => '{seomatic.meta.seoImageDescription}',
+    ],
 ];
