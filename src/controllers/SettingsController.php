@@ -189,7 +189,7 @@ class SettingsController extends Controller
         // The site settings for the appropriate meta bundle
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle) {
-            $this->setImageSources($globalsSettings, $bundleSettings, $siteId);
+            $this->parseImageSources($globalsSettings, $bundleSettings, $siteId);
             $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
             $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
             Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
@@ -434,7 +434,7 @@ class SettingsController extends Controller
             $siteId
         );
         if ($metaBundle) {
-            $this->setImageSources($globalsSettings, $bundleSettings, $siteId);
+            $this->parseImageSources($globalsSettings, $bundleSettings, $siteId);
             $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
             $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
             $metaBundle->metaSitemapVars->setAttributes($sitemapSettings);
@@ -618,7 +618,7 @@ class SettingsController extends Controller
      * @param $bundleSettings
      * @param $siteId
      */
-    protected function setImageSources(&$globalsSettings, &$bundleSettings, $siteId): void
+    protected function parseImageSources(&$globalsSettings, &$bundleSettings, $siteId): void
     {
         // Handle the SEO Image
         switch ($bundleSettings['seoImageSource']) {
