@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\base;
 use Craft;
 use craft\base\Model;
 
-use yii\base\InvalidParamException;
+use yii\base\InvalidArgumentException;
 
 /**
  * @author    nystudio107
@@ -54,9 +54,7 @@ abstract class FluentModel extends Model
                 return $this;
             }
         } else {
-            throw new InvalidParamException("Property {$method} doesn't exist");
+            throw new InvalidArgumentException("Property {$method} doesn't exist");
         }
-
-        return null;
     }
 }

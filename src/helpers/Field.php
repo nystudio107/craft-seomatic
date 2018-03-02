@@ -18,6 +18,7 @@ use craft\base\Element;
 use craft\base\Field as BaseField;
 use craft\elements\MatrixBlock;
 use craft\fields\Assets as AssetsField;
+use craft\fields\Matrix as MatrixField;
 use craft\fields\PlainText as PlainTextField;
 use craft\redactor\Field as RedactorField;
 use craft\ckeditor\Field as CKEditorField;
@@ -39,6 +40,7 @@ class Field
     const FIELD_CLASSES = [
         self::TEXT_FIELD_CLASS_KEY  => [
             PlainTextField::class,
+            MatrixField::class,
             RedactorField::class,
             CKEditorField::class,
         ],
@@ -120,7 +122,7 @@ class Field
                         $layoutId = null;
                     }
                     if ($layoutId) {
-                        $layouts[] = Craft::$app->getFields()->getLayoutById($entryType->fieldLayoutId);
+                        $layouts[] = Craft::$app->getFields()->getLayoutById($layoutId);
                     }
                     break;
                 // @TODO: handle commerce products

@@ -255,6 +255,7 @@ class SettingsController extends Controller
      */
     public function actionEditContent(string $sourceBundleType, string $sourceHandle, string $siteHandle = null): Response
     {
+        // @TODO: Let people choose an entry/categorygroup/product as the preview
         // Get the site to edit
         if ($siteHandle !== null) {
             $site = Craft::$app->getSites()->getSiteByHandle($siteHandle);
