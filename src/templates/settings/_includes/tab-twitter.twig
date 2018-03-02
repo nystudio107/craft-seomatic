@@ -68,37 +68,78 @@
     }) }}
 {% endnamespace %}
 
-{% namespace "globals" %}
-    {{ forms.textField({
-        label: "Twitter Image URL" |t("seomatic"),
-        instructions: "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified. The image must be in JPG, PNG, or GIF format." |t("seomatic"),
-        id: "twitterImage",
-        name: "twitterImage",
-        value: globals.twitterImage,
-        class: "nicetext",
-        warning: false,
-    }) }}
-{% endnamespace %}
+{% set imageOptions = {
+    fromAsset: "Custom Image" |t("seomatic"),
+    fromUrl: "Custom URL" |t("seomatic"),
+} %}
+{% if assetFieldSources is defined and assetFieldSources |length %}
+    {% set imageOptions = { fromField: "From Asset Field" |t("seomatic"), } | merge(imageOptions) %}
+{% endif %}
+{% set imageOptions = { sameAsSeo: "Same As SEO Image" |t("seomatic"), } | merge(imageOptions) %}
 
-{% namespace "settings" %}
-    {{ forms.elementSelectField({
-        label: "Twitter Image"|t("seomatic"),
-        instructions: "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified. The image must be in JPG, PNG, or GIF format." |t("seomatic"),
-        id: "twitterImageIds",
-        name: "twitterImageIds",
-        viewMode: "large",
-        elements: twitterImageElements,
-        elementType: elementType,
-        criteria: {
-            kind: ["image"],
-        },
-        jsClass: 'Craft.AssetSelectInput',
-        selectionLabel: "Select Twitter Image" |t("seomatic"),
-        sources: [],
-        limit: 1,
-        warning: false,
-    }) }}
-{% endnamespace %}
+<div class="field" id="settings-twitterImageSource-field">
+    <div class="heading">
+        <label id="settings-twitterImageSource-label" for="settings-twitterImageSource">{{ "Twitter Image Source" |t("seomatic") }}</label>
+        <div class="instructions"><p>{{ "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified." |t("seomatic") }}</p>
+        </div>
+    </div>
+    {% namespace "settings" %}
+        <div class="heading">
+            {{ forms.select({
+                id: "twitterImageSource",
+                name: "twitterImageSource",
+                options: imageOptions,
+                value: settings.twitterImageSource,
+            }) }}
+        </div>
+    {% endnamespace %}
+
+    {% if assetFieldSources is defined and assetFieldSources |length %}
+        {% namespace "settings" %}
+            <div class="heading seomatic-fromField">
+                <label id="settings-twitterImageField-label" for="settings-twitterImageField">{{ "Asset Field: " |t("seomatic") }}</label>
+                {{ forms.select({
+                    id: "twitterImageField",
+                    name: "twitterImageField",
+                    options: assetFieldSources,
+                    value: settings.twitterImageField,
+                }) }}
+            </div>
+        {% endnamespace %}
+    {% endif %}
+
+    {% namespace "settings" %}
+        <div class="heading seomatic-fromAsset">
+            {{ forms.elementSelect({
+                id: "twitterImageIds",
+                name: "twitterImageIds",
+                viewMode: "large",
+                elements: twitterImageElements,
+                elementType: elementType,
+                criteria: {
+                    kind: ["image"],
+                },
+                jsClass: 'Craft.AssetSelectInput',
+                selectionLabel: "Select Twitter Image" |t("seomatic"),
+                sources: [],
+                limit: 1,
+                warning: false,
+            }) }}
+        </div>
+    {% endnamespace %}
+
+    {% namespace "globals" %}
+        <div class="heading seomatic-fromUrl">
+            {{ forms.text({
+                id: "twitterImage",
+                name: "twitterImage",
+                value: globals.twitterImage,
+                class: "nicetext",
+                warning: false,
+            }) }}
+        </div>
+    {% endnamespace %}
+</div>
 
 {% namespace "globals" %}
     {{ forms.textAreaField({

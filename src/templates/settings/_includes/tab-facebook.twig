@@ -65,37 +65,79 @@
     }) }}
 {% endnamespace %}
 
-{% namespace "globals" %}
-    {{ forms.textField({
-        label: "Facebook OpenGraph Image URL" |t("seomatic"),
-        instructions: "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified. The image must be in JPG, PNG, or GIF format." |t("seomatic"),
-        id: "ogImage",
-        name: "ogImage",
-        value: globals.ogImage,
-        class: "nicetext",
-        warning: false,
-    }) }}
-{% endnamespace %}
 
-{% namespace "settings" %}
-    {{ forms.elementSelectField({
-        label: "Facebook OpenGraph Image"|t("seomatic"),
-        instructions: "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified. The image must be in JPG, PNG, or GIF format." |t("seomatic"),
-        id: "ogImageIds",
-        name: "ogImageIds",
-        viewMode: "large",
-        elements: ogImageElements,
-        elementType: elementType,
-        criteria: {
-            kind: ["image"],
-        },
-        jsClass: 'Craft.AssetSelectInput',
-        selectionLabel: "Select Facebook OpenGraph Image" |t("seomatic"),
-        sources: [],
-        limit: 1,
-        warning: false,
-    }) }}
-{% endnamespace %}
+{% set imageOptions = {
+    fromAsset: "Custom Image" |t("seomatic"),
+    fromUrl: "Custom URL" |t("seomatic"),
+} %}
+{% if assetFieldSources is defined and assetFieldSources |length %}
+    {% set imageOptions = { fromField: "From Asset Field" |t("seomatic"), } | merge(imageOptions) %}
+{% endif %}
+{% set imageOptions = { sameAsSeo: "Same As SEO Image" |t("seomatic"), } | merge(imageOptions) %}
+
+<div class="field" id="settings-ogImageSource-field">
+    <div class="heading">
+        <label id="settings-ogImageSource-label" for="settings-ogImageSource">{{ "Facebook OpenGraph Image Source" |t("seomatic") }}</label>
+        <div class="instructions"><p>{{ "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified." |t("seomatic") }}</p>
+        </div>
+    </div>
+    {% namespace "settings" %}
+        <div class="heading">
+            {{ forms.select({
+                id: "ogImageSource",
+                name: "ogImageSource",
+                options: imageOptions,
+                value: settings.ogImageSource,
+            }) }}
+        </div>
+    {% endnamespace %}
+
+    {% if assetFieldSources is defined and assetFieldSources |length %}
+        {% namespace "settings" %}
+            <div class="heading seomatic-fromField">
+                <label id="settings-ogImageField-label" for="settings-ogImageField">{{ "Asset Field: " |t("seomatic") }}</label>
+                {{ forms.select({
+                    id: "ogImageField",
+                    name: "ogImageField",
+                    options: assetFieldSources,
+                    value: settings.ogImageField,
+                }) }}
+            </div>
+        {% endnamespace %}
+    {% endif %}
+
+    {% namespace "settings" %}
+        <div class="heading seomatic-fromAsset">
+            {{ forms.elementSelect({
+                id: "ogImageIds",
+                name: "ogImageIds",
+                viewMode: "large",
+                elements: ogImageElements,
+                elementType: elementType,
+                criteria: {
+                    kind: ["image"],
+                },
+                jsClass: 'Craft.AssetSelectInput',
+                selectionLabel: "Select Facebook OpenGraph Image" |t("seomatic"),
+                sources: [],
+                limit: 1,
+                warning: false,
+            }) }}
+        </div>
+    {% endnamespace %}
+
+    {% namespace "globals" %}
+        <div class="heading seomatic-fromUrl">
+            {{ forms.text({
+                id: "ogImage",
+                name: "ogImage",
+                value: globals.ogImage,
+                class: "nicetext",
+                warning: false,
+            }) }}
+        </div>
+    {% endnamespace %}
+</div>
 
 {% namespace "globals" %}
     {{ forms.textAreaField({

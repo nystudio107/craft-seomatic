@@ -16,6 +16,8 @@ use nystudio107\seomatic\helpers\Field as FieldHelper;
 
 use Craft;
 use craft\elements\Asset;
+use craft\elements\Category;
+use craft\elements\Entry;
 use craft\helpers\UrlHelper;
 use craft\models\Site;
 use craft\web\Controller;
@@ -85,7 +87,7 @@ class SettingsController extends Controller
         $variables['fullPageForm'] = true;
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = Seomatic::$settings->pluginName;
-        $variables['title'] = $pluginName . ' ' . $templateTitle;
+        $variables['title'] = $pluginName.' '.$templateTitle;
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -187,31 +189,7 @@ class SettingsController extends Controller
         // The site settings for the appropriate meta bundle
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle) {
-            // Handle the SEO Image
-            if (!empty($bundleSettings['seoImageIds'])) {
-                $globalsSettings['seoImage'] = '{seomatic.helper.socialTransform('
-                    .$bundleSettings['seoImageIds'][0]
-                    .', "base"'
-                    .', '.$siteId.')}';
-            }
-            // Handle the Twitter Image
-            if (!empty($bundleSettings['twitterImageIds'])) {
-                $twitterCardTransform = 'twitter-summary';
-                if ($globalsSettings['twitterCard'] == 'summary_large_image') {
-                    $twitterCardTransform = 'twitter-large';
-                }
-                $globalsSettings['twitterImage'] = '{seomatic.helper.socialTransform('
-                    .$bundleSettings['twitterImageIds'][0]
-                    .', "'.$twitterCardTransform.'"'
-                    .', '.$siteId.')}';
-            }
-            // Handle the Facebook IG Image
-            if (!empty($bundleSettings['ogImageIds'])) {
-                $globalsSettings['ogImage'] = '{seomatic.helper.socialTransform('
-                    .$bundleSettings['ogImageIds'][0]
-                    .', "facebook"'
-                    .', '.$siteId.')}';
-            }
+            $this->setImageSources($globalsSettings, $bundleSettings, $siteId);
             $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
             $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
             Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
@@ -247,7 +225,7 @@ class SettingsController extends Controller
         $variables['fullPageForm'] = false;
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = Seomatic::$settings->pluginName;
-        $variables['title'] = $pluginName . ' ' . $templateTitle;
+        $variables['title'] = $pluginName.' '.$templateTitle;
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -303,7 +281,7 @@ class SettingsController extends Controller
         $variables['fullPageForm'] = true;
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = Seomatic::$settings->pluginName;
-        $variables['title'] = $pluginName . ' ' . $templateTitle;
+        $variables['title'] = $pluginName.' '.$templateTitle;
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -350,7 +328,7 @@ class SettingsController extends Controller
             $sourceHandle,
             $variables['currentSiteId']
         );
-        $variables['controllerHandle'] = 'edit-content' . '/' . $sourceHandle;
+        $variables['controllerHandle'] = 'edit-content'.'/'.$sourceHandle;
 
         $variables['globals'] = $metaBundle->metaGlobalVars;
         $variables['sitemap'] = $metaBundle->metaSitemapVars;
@@ -398,9 +376,34 @@ class SettingsController extends Controller
             false
         );
 
+        $uri = '';
+        // Pick an Element to be used for the preview
+        switch ($sourceBundleType) {
+            case MetaBundles::GLOBAL_META_BUNDLE:
+                $uri = MetaBundles::GLOBAL_META_BUNDLE;
+                break;
+
+            case MetaBundles::SECTION_META_BUNDLE:
+                $entry = Entry::find()->section($sourceHandle)->one();
+                if ($entry) {
+                    $uri = $entry->uri;
+                }
+                break;
+
+            case MetaBundles::CATEGORYGROUP_META_BUNDLE:
+                $category = Category::find()->group($sourceHandle)->one();
+                if ($category) {
+                    $uri = $category->uri;
+                }
+                break;
+            // @TODO: handle commerce products
+        }
+        if ($uri == '__home__') {
+            $uri = '/';
+        }
         // Preview the meta containers
         Seomatic::$plugin->metaContainers->previewMetaContainers(
-            MetaBundles::GLOBAL_META_BUNDLE,
+            $uri,
             $variables['currentSiteId']
         );
 
@@ -431,28 +434,7 @@ class SettingsController extends Controller
             $siteId
         );
         if ($metaBundle) {
-            $elements = Craft::$app->getElements();
-            // Handle the SEO Image
-            if (!empty($bundleSettings['seoImageIds'])) {
-                $seoImage = $elements->getElementById($bundleSettings['seoImageIds'][0], Asset::class, $siteId);
-                if ($seoImage) {
-                    $globalsSettings['seoImage'] = $seoImage->getUrl();
-                }
-            }
-            // Handle the Twitter Image
-            if (!empty($bundleSettings['twitterImageIds'])) {
-                $twitterImage = $elements->getElementById($bundleSettings['twitterImageIds'][0], Asset::class, $siteId);
-                if ($twitterImage) {
-                    $globalsSettings['twitterImage'] = $twitterImage->getUrl();
-                }
-            }
-            // Handle the Facebook IG Image
-            if (!empty($bundleSettings['ogImageIds'])) {
-                $ogImage = $elements->getElementById($bundleSettings['ogImageIds'][0], Asset::class, $siteId);
-                if ($ogImage) {
-                    $globalsSettings['ogImage'] = $ogImage->getUrl();
-                }
-            }
+            $this->setImageSources($globalsSettings, $bundleSettings, $siteId);
             $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
             $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
             $metaBundle->metaSitemapVars->setAttributes($sitemapSettings);
@@ -501,7 +483,7 @@ class SettingsController extends Controller
         $variables['fullPageForm'] = true;
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = Seomatic::$settings->pluginName;
-        $variables['title'] = $pluginName . ' ' . $templateTitle;
+        $variables['title'] = $pluginName.' '.$templateTitle;
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -607,7 +589,7 @@ class SettingsController extends Controller
         $variables['fullPageForm'] = true;
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = Seomatic::$settings->pluginName;
-        $variables['title'] = $pluginName . ' ' . $templateTitle;
+        $variables['title'] = $pluginName.' '.$templateTitle;
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -626,4 +608,84 @@ class SettingsController extends Controller
         return $this->renderTemplate('seomatic/settings/plugin/_edit', $variables);
     }
 
+    // Protected Methods
+    // =========================================================================
+
+    /**
+     * Set the image sources depending on the field settings
+     *
+     * @param $globalsSettings
+     * @param $bundleSettings
+     * @param $siteId
+     */
+    protected function setImageSources(&$globalsSettings, &$bundleSettings, $siteId): void
+    {
+        // Handle the SEO Image
+        switch ($bundleSettings['seoImageSource']) {
+            case 'fromField':
+                if (!empty($bundleSettings['seoImageField'])) {
+                    $globalsSettings['seoImage'] = '{seomatic.helper.socialTransform('
+                        .'object.entry.'.$bundleSettings['seoImageField'].'.one()'
+                        .', "base"'
+                        .', '.$siteId.')}';
+                }
+                break;
+            case 'fromAsset':
+                if (!empty($bundleSettings['seoImageIds'])) {
+                    $globalsSettings['seoImage'] = '{seomatic.helper.socialTransform('
+                        .$bundleSettings['seoImageIds'][0]
+                        .', "base"'
+                        .', '.$siteId.')}';
+                }
+                break;
+        }
+        $twitterCardTransform = 'twitter-summary';
+        if ($globalsSettings['twitterCard'] == 'summary_large_image') {
+            $twitterCardTransform = 'twitter-large';
+        }
+        // Handle the Twitter Image
+        switch ($bundleSettings['twitterImageSource']) {
+            case 'sameAsSeo':
+                $globalsSettings['twitterImage'] = '{seomatic.meta.seoImage}';
+                break;
+            case 'fromField':
+                if (!empty($bundleSettings['twitterImageField'])) {
+                    $globalsSettings['twitterImage'] = '{seomatic.helper.socialTransform('
+                        .'object.entry.'.$bundleSettings['twitterImageField'].'.one()'
+                        .', "'.$twitterCardTransform.'"'
+                        .', '.$siteId.')}';
+                }
+                break;
+            case 'fromAsset':
+                if (!empty($bundleSettings['twitterImageIds'])) {
+                    $globalsSettings['twitterImage'] = '{seomatic.helper.socialTransform('
+                        .$bundleSettings['twitterImageIds'][0]
+                        .', "'.$twitterCardTransform.'"'
+                        .', '.$siteId.')}';
+                }
+                break;
+        }
+        // Handle the Facebook IG Image
+        switch ($bundleSettings['ogImageSource']) {
+            case 'sameAsSeo':
+                $globalsSettings['ogImage'] = '{seomatic.meta.seoImage}';
+                break;
+            case 'fromField':
+                if (!empty($bundleSettings['ogImageField'])) {
+                    $globalsSettings['ogImage'] = '{seomatic.helper.socialTransform('
+                        .'object.entry.'.$bundleSettings['ogImageField'].'.one()'
+                        .', "facebook"'
+                        .', '.$siteId.')}';
+                }
+                break;
+            case 'fromAsset':
+                if (!empty($bundleSettings['ogImageIds'])) {
+                    $globalsSettings['ogImage'] = '{seomatic.helper.socialTransform('
+                        .$bundleSettings['ogImageIds'][0]
+                        .', "facebook"'
+                        .', '.$siteId.')}';
+                }
+                break;
+        }
+    }
 }

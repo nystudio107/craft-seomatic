@@ -111,9 +111,24 @@ class MetaBundleSettings extends VarsModel
             [
                 [
                     'siteName',
+                    'seoImageSource',
+                    'seoImageField',
+                    'twitterImageSource',
+                    'twitterImageField',
+                    'ogImageSource',
+                    'ogImageField',
                 ],
                 'string'
             ],
+            [
+                ['seoImageSource', 'twitterImageSource', 'ogImageSource'], 'in', 'range' => [
+                    'sameAsSeo',
+                    'fromField',
+                    'fromAsset',
+                    'fromUrl',
+                ],
+            ],
+
             [
                 [
                     'seoImageIds',

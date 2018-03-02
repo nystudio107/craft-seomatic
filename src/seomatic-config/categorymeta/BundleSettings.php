@@ -21,10 +21,10 @@ return [
         'seoImageSource'     => 'fromAsset',
         'seoImageField'      => '',
         'twitterImageIds'    => [],
-        'twitterImageSource' => 'fromAsset',
+        'twitterImageSource' => 'sameAsSeo',
         'twitterImageField'  => '',
         'ogImageIds'         => [],
-        'ogImageSource'      => 'fromAsset',
+        'ogImageSource'      => 'sameAsSeo',
         'ogImageField'       => '',
     ],
 ];
