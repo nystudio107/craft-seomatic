@@ -18,13 +18,13 @@
 return [
     '*' => [
         'seoImageIds'        => [],
-        'seoImageSource'     => '',
+        'seoImageSource'     => 'fromAsset',
         'seoImageField'      => '',
         'twitterImageIds'    => [],
-        'twitterImageSource' => '',
+        'twitterImageSource' => 'fromAsset',
         'twitterImageField'  => '',
         'ogImageIds'         => [],
-        'ogImageSource'      => '',
+        'ogImageSource'      => 'fromAsset',
         'ogImageField'       => '',
     ],
 ];

@@ -60,59 +60,72 @@
     fromUrl: "Custom URL" |t("seomatic"),
 } %}
 {% if assetFieldSources is defined and assetFieldSources |length %}
-    {% set imageOptions = imageOptions | merge({
-        fromField: "From Asset Field" |t("seomatic"),
-    }) %}
+    {% set imageOptions = { fromField: "From Asset Field" |t("seomatic"), } | merge(imageOptions) %}
 {% endif %}
 
-{% namespace "settings" %}
-    {{ forms.selectField({
-        label: "SEO Image Source" |t("seomatic"),
-        instructions: "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified." |t("seomatic"),
-        id: "seoImageSource",
-        name: "seoImageSource",
-        options: imageOptions,
-        value: settings.seoImageSource,
-    }) }}
-{% endnamespace %}
-
-{% namespace "globals" %}
-    {{ forms.text({
-        id: "seoImage",
-        name: "seoImage",
-        value: globals.seoImage,
-        class: "nicetext",
-        warning: false,
-    }) }}
-{% endnamespace %}
-
-{% namespace "settings" %}
-    {{ forms.elementSelect({
-        id: "seoImageIds",
-        name: "seoImageIds",
-        viewMode: "large",
-        elements: seoImageElements,
-        elementType: elementType,
-        criteria: {
-            kind: ["image"],
-        },
-        jsClass: 'Craft.AssetSelectInput',
-        selectionLabel: "Select SEO Image" |t("seomatic"),
-        sources: [],
-        limit: 1,
-        warning: false,
-    }) }}
+<div class="field" id="settings-seoImageSource-field">
+    <div class="heading">
+        <label id="settings-seoImageSource-label" for="settings-seoImageSource">{{ "SEO Image Source" |t("seomatic") }}</label>
+        <div class="instructions"><p>{{ "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified." |t("seomatic") }}</p>
+        </div>
+    </div>
+    {% namespace "settings" %}
+        <div class="heading">
+            {{ forms.select({
+                id: "seoImageSource",
+                name: "seoImageSource",
+                options: imageOptions,
+                value: settings.seoImageSource,
+            }) }}
+        </div>
+    {% endnamespace %}
     
     {% if assetFieldSources is defined and assetFieldSources |length %}
-        {{ forms.select({
-            id: "seoImageField",
-            name: "seoImageField",
-            options: assetFieldSources,
-            value: settings.seoImageField,
-        }) }}
+        {% namespace "settings" %}
+            <div class="heading seomatic-fromField">
+                <label id="settings-seoImageField-label" for="settings-seoImageField">{{ "Asset Field: " |t("seomatic") }}</label>
+                {{ forms.select({
+                    id: "seoImageField",
+                    name: "seoImageField",
+                    options: assetFieldSources,
+                    value: settings.seoImageField,
+                }) }}
+            </div>
+        {% endnamespace %}
     {% endif %}
-{% endnamespace %}
-
+    
+    {% namespace "settings" %}
+        <div class="heading seomatic-fromAsset">
+            {{ forms.elementSelect({
+                id: "seoImageIds",
+                name: "seoImageIds",
+                viewMode: "large",
+                elements: seoImageElements,
+                elementType: elementType,
+                criteria: {
+                    kind: ["image"],
+                },
+                jsClass: 'Craft.AssetSelectInput',
+                selectionLabel: "Select SEO Image" |t("seomatic"),
+                sources: [],
+                limit: 1,
+                warning: false,
+            }) }}
+        </div>
+    {% endnamespace %}
+    
+    {% namespace "globals" %}
+        <div class="heading seomatic-fromUrl">
+            {{ forms.text({
+                id: "seoImage",
+                name: "seoImage",
+                value: globals.seoImage,
+                class: "nicetext",
+                warning: false,
+            }) }}
+        </div>
+    {% endnamespace %}
+</div>
 
 {% namespace "globals" %}
     {{ forms.textAreaField({
