@@ -18,10 +18,11 @@ use craft\base\Element;
 use craft\base\Field as BaseField;
 use craft\elements\MatrixBlock;
 use craft\fields\Assets as AssetsField;
+use craft\ckeditor\Field as CKEditorField;
 use craft\fields\Matrix as MatrixField;
 use craft\fields\PlainText as PlainTextField;
 use craft\redactor\Field as RedactorField;
-use craft\ckeditor\Field as CKEditorField;
+use craft\fields\Tags as TagsField;
 
 use yii\base\InvalidConfigException;
 
@@ -39,10 +40,11 @@ class Field
     const ASSET_FIELD_CLASS_KEY = 'asset';
     const FIELD_CLASSES = [
         self::TEXT_FIELD_CLASS_KEY  => [
+            CKEditorField::class,
             PlainTextField::class,
             MatrixField::class,
             RedactorField::class,
-            CKEditorField::class,
+            TagsField::class,
         ],
         self::ASSET_FIELD_CLASS_KEY => [
             AssetsField::class,

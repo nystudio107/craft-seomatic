@@ -13,9 +13,6 @@ namespace nystudio107\seomatic\helpers;
 
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 
-use craft\base\ElementInterface;
-use craft\elements\Tag;
-use craft\elements\MatrixBlock;
 use craft\elements\db\MatrixBlockQuery;
 use craft\elements\db\TagQuery;
 
@@ -118,7 +115,7 @@ class Text
                     foreach ($fieldClasses as $fieldClassKey) {
                         if ($field instanceof $fieldClassKey) {
                             if ($field->handle == $fieldHandle || empty($fieldHandle)) {
-                                $result .= strip_tags($block[$field->handle]).' ';
+                                $result .= self::extractTextFromField($block[$field->handle]).' ';
                             }
                         }
                     }
