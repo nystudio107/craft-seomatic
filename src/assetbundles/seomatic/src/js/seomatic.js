@@ -27,3 +27,5 @@ require('../img/sitemap-icon.svg');
 require('../img/structured-data-icon.svg');
 require('../img/tags-icon.svg');
 require('../img/variables-icon.svg');
+require('../img/missing_image.png');
+require('../img/no_image_set.png');

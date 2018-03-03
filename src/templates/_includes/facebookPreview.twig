@@ -3,7 +3,7 @@
 {% set ogImageArray = seomatic.tag.get('og:image').renderAttributes() %}
 
 <div class="preview-column">
-    <div class="displaypreview">
+    <div class="displaypreview" style="{{ displayPreviewInlineStyles ?? '' }}">
         {% if seomatic.site.facebookAppId |length or seomatic.site.facebookProfileId |length %}
             <div class="Facebook-container">
                 <div class="">

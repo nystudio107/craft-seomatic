@@ -345,18 +345,16 @@ a.TwitterCard-container {
     -webkit-transition-duration: 0.15s, 0.15s;
     -webkit-transition-property: background-color, border-color;
     -webkit-transition-timing-function: ease-in-out, ease-in-out;
-    border-bottom-color: rgb(225, 232, 237);
     border-bottom-left-radius: 5.984375px;
     border-bottom-right-radius: 5.984375px;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-left-color: rgb(225, 232, 237);
+    border-bottom: 1px solid rgba(167, 187, 202,  0.5);
+    border-left-color: rgba(167, 187, 202,  0.5);
     border-left-style: solid;
     border-left-width: 1px;
-    border-right-color: rgb(225, 232, 237);
+    border-right-color: rgba(167, 187, 202,  0.5);
     border-right-style: solid;
     border-right-width: 1px;
-    border-top-color: rgb(225, 232, 237);
+    border-top-color: rgba(167, 187, 202,  0.5);
     border-top-left-radius: 5.984375px;
     border-top-right-radius: 5.984375px;
     border-top-style: solid;
@@ -394,17 +392,17 @@ a.TwitterCard-container:hover {
 }
 
 .TwitterCard-summary-image {
-    background-color: rgb(225, 232, 237);
-    border-bottom-color: rgb(225, 232, 237);
+    background-color: rgba(167, 187, 202,  0.5);
+    border-bottom-color: rgba(167, 187, 202,  0.5);
     border-bottom-style: solid;
     border-bottom-width: 0px;
-    border-left-color: rgb(225, 232, 237);
+    border-left-color: rgba(167, 187, 202,  0.5);
     border-left-style: solid;
     border-left-width: 0px;
-    border-right-color: rgb(225, 232, 237);
+    border-right-color: rgba(167, 187, 202,  0.5);
     border-right-style: solid;
     border-right-width: 1px;
-    border-top-color: rgb(225, 232, 237);
+    border-top-color: rgba(167, 187, 202,  0.5);
     border-top-style: solid;
     border-top-width: 0px;
     color: rgb(0, 0, 0);

@@ -3,7 +3,7 @@
 {% set twitterImageArray = seomatic.tag.get('twitter:image').renderAttributes() %}
 
 <div class="preview-column">
-    <div class="displaypreview">
+    <div class="displaypreview" style="{{ displayPreviewInlineStyles ?? '' }}">
         {% if seomatic.site.twitterHandle |length %}
             {% set lg = false %}
             {% if seomatic.meta.twitterCard == "summary_large_image" %}

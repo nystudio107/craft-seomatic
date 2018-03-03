@@ -3,12 +3,13 @@
 {% do view.registerAssetBundle("nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset") %}
 {% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/assetbundles/seomatic/dist', true) %}
 
+{% set displayPreviewInlineStyles = "border: none; padding-left: 0;" %}
 <hr />
 <div class="meta read-only">
     <div class="data">
         <h5 class="heading">{{ "SEO Preview:" |t('seomatic') }}</h5>
     </div>
-    <div style="zoom: 0.61;">
+    <div style="zoom: 0.60;">
         {% include "seomatic/_includes/googlePreview.twig" %}
 
         {% include "seomatic/_includes/twitterPreview.twig" %}

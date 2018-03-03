@@ -2,7 +2,7 @@
 {% set descriptionArray = seomatic.tag.get('description').renderAttributes() %}
 
 <div class="preview-column">
-    <div class="displaypreview">
+    <div class="displaypreview" style="{{ displayPreviewInlineStyles ?? '' }}">
         <div class="googleWrapper">
             <div class="rc" data-hveid="27">
                 <h3 class="googleDisplay">
