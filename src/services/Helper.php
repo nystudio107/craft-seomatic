@@ -13,9 +13,12 @@ namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
+use nystudio107\seomatic\helpers\Text as TextHelper;
 
-use craft\elements\Asset;
 use craft\base\Component;
+use craft\elements\Asset;
+use craft\elements\db\MatrixBlockQuery;
+use craft\elements\db\TagQuery;
 
 /**
  * @author    nystudio107
@@ -29,6 +32,73 @@ class Helper extends Component
 
     // Public Methods
     // =========================================================================
+
+    /**
+     * Extract plain old text from a field
+     *
+     * @param $field
+     *
+     * @return string
+     */
+    public static function extractTextFromField($field)
+    {
+        return TextHelper::extractTextFromField($field);
+    }
+
+    /**
+     * Extract concatenated text from all of the tags in the $tagElement and
+     * return as a comma-delimited string
+     *
+     * @param TagQuery $tagQuery
+     *
+     * @return string
+     */
+    public static function extractTextFromTags(TagQuery $tagQuery)
+    {
+        return TextHelper::extractTextFromTags($tagQuery);
+    }
+
+    /**
+     * Extract text from all of the blocks in a matrix field, concatenating it
+     * together.
+     *
+     * @param MatrixBlockQuery $matrixQuery
+     * @param string      $fieldHandle
+     *
+     * @return string
+     */
+    public static function extractTextFromMatrix(MatrixBlockQuery $matrixQuery, $fieldHandle = '')
+    {
+        return TextHelper::extractTextFromMatrix($matrixQuery, $fieldHandle);
+    }
+
+    /**
+     * Return the most important keywords extracted from the text as a comma-
+     * delimited string
+     *
+     * @param string $text
+     * @param int    $limit
+     * @param bool   $useStopWords
+     *
+     * @return string
+     */
+    public static function extractKeywords(string $text, $limit = 15, $useStopWords = true): string
+    {
+        return TextHelper::extractKeywords($text, $limit, $useStopWords);
+    }
+
+    /**
+     * Extract a summary consisting of the 3 most important sentences from the text
+     *
+     * @param string $text
+     * @param bool   $useStopWords
+     *
+     * @return string
+     */
+    public static function extractSummary(string $text, $useStopWords = true): string
+    {
+        return TextHelper::extractSummary($text, $useStopWords);
+    }
 
     /**
      * @param int|Asset $asset         the Asset or Asset ID

@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\helpers;
 
 use craft\elements\Asset;
+use craft\errors\SiteNotFoundException;
 use nystudio107\seomatic\Seomatic;
 
 use Craft;
@@ -96,6 +97,12 @@ class MetaValue
      */
     public static function getSiteLanguage(int $siteId): string
     {
+        if ($siteId == 0) {
+            try {
+                $siteId = Craft::$app->getSites()->getCurrentSite()->id;
+            } catch (SiteNotFoundException $e) {
+            }
+        }
         $site = Craft::$app->getSites()->getSiteById($siteId);
         if ($site) {
             $language = $site->language;
