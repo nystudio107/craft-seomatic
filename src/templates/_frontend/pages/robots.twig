@@ -3,12 +3,14 @@
 Sitemap: {{ siteUrl |trim('/') }}/sitemaps/{{ currentSite.groupId }}/sitemap.xml
 {% switch seomatic.config.environment %}
 
-    {% case "live" %}
+{% case "live" %}
 
-# live - don't allow web crawlers to index Craft
+# live - don't allow web crawlers to index cpresources/ or vendor/
 
 User-agent: *
+Disallow: /cpresources/
 Disallow: /vendor/
+Disallow: /.env
 
 {% case "staging" %}
 
@@ -26,9 +28,11 @@ Disallow: /
 
 {% default %}
 
-# Default - don't allow web crawlers to index Craft
+# default - don't allow web crawlers to index cpresources/ or vendor/
 
 User-agent: *
+Disallow: /cpresources/
 Disallow: /vendor/
+Disallow: /.env
 
 {% endswitch %}

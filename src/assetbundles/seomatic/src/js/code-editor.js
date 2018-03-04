@@ -16,7 +16,7 @@
 
 // JavaScript
 var ace = require('brace');
-require('brace/mode/plain_text');
+require('brace/mode/twig');
 require('brace/theme/github');
 
 $(function () {
@@ -33,7 +33,7 @@ $(function () {
         var editor = ace.edit(editDiv[0]);
         editor.renderer.setShowGutter(textarea.data('gutter'));
         editor.getSession().setValue(textarea.val());
-        editor.getSession().setMode("ace/mode/plain_text");
+        editor.getSession().setMode("ace/mode/twig");
         editor.setTheme("ace/theme/github");
         editor.setFontSize(14);
         editor.setShowPrintMargin(false);
