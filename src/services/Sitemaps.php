@@ -25,6 +25,7 @@ use craft\helpers\UrlHelper;
 use craft\web\UrlManager;
 
 use yii\base\Event;
+use yii\base\Exception;
 use yii\caching\TagDependency;
 
 /**
@@ -171,6 +172,71 @@ class Sitemaps extends Component implements SitemapInterface
                 }
             }
         }
+    }
+
+    /**
+     * Get the URL to the $siteId's sitemap index
+     *
+     * @param int|null $siteId
+     *
+     * @return string
+     */
+    public function sitemapIndexUrlForSiteId(int $siteId = null): string
+    {
+        $url = '';
+        $sites = Craft::$app->getSites();
+        if (!$siteId) {
+            $siteId = $sites->currentSite->id;
+        }
+        $site = $sites->getSiteById($siteId);
+        if ($site) {
+            try {
+                $url = UrlHelper::siteUrl(
+                    '/sitemaps/'
+                    .$site->groupId
+                    .'/sitemap.xml'
+                );
+            } catch (Exception $e) {
+            }
+        }
+
+        return $url;
+    }
+
+    /**
+     * @param string   $sourceType
+     * @param string   $sourceHandle
+     * @param int|null $siteId
+     *
+     * @return string
+     */
+    public function sitemapUrlForSection(string $sourceType, string $sourceHandle, int $siteId = null): string
+    {
+        $url = '';
+        $sites = Craft::$app->getSites();
+        if (!$siteId) {
+            $siteId = $sites->currentSite->id;
+        }
+        $site = $sites->getSiteById($siteId);
+        $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle($sourceType, $sourceHandle, $siteId);
+        if ($site && $metaBundle) {
+            try {
+                $url = UrlHelper::siteUrl(
+                    '/sitemaps/'
+                    .$site->groupId
+                    .'/'
+                    .$metaBundle->sourceBundleType
+                    .'/'
+                    .$metaBundle->sourceHandle
+                    .'/'
+                    .$metaBundle->sourceSiteId
+                    .'/sitemap.xml'
+                );
+            } catch (Exception $e) {
+            }
+        }
+
+        return $url;
     }
 
     /**

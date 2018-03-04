@@ -299,7 +299,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 foreach ($metaBundle->metaSitemapVars->sitemapImageFieldMap as $row) {
                     $fieldName = $row['field'] ?? '';
                     $propName = $row['property'] ?? '';
-                    if (!empty($asset[$fieldName])) {
+                    if (!empty($asset[$fieldName]) && !empty($propName)) {
                         $lines[] = '      <image:'.$propName.'>';
                         $lines[] = '        '.$asset[$fieldName];
                         $lines[] = '      </image:'.$propName.'>';
@@ -320,7 +320,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 foreach ($metaBundle->metaSitemapVars->sitemapVideoFieldMap as $row) {
                     $fieldName = $row['field'] ?? '';
                     $propName = $row['property'] ?? '';
-                    if (!empty($asset[$fieldName])) {
+                    if (!empty($asset[$fieldName]) && !empty($propName)) {
                         $lines[] = '      <video:'.$propName.'>';
                         $lines[] = '        '.$asset[$fieldName];
                         $lines[] = '      </video:'.$propName.'>';

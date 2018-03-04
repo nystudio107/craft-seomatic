@@ -15,10 +15,13 @@ use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
 use nystudio107\seomatic\helpers\Text as TextHelper;
 
+use Craft;
 use craft\base\Component;
 use craft\elements\Asset;
 use craft\elements\db\MatrixBlockQuery;
 use craft\elements\db\TagQuery;
+use craft\helpers\UrlHelper;
+use yii\base\Exception;
 
 /**
  * @author    nystudio107
@@ -32,6 +35,30 @@ class Helper extends Component
 
     // Public Methods
     // =========================================================================
+
+    /**
+     * Get the URL to the $siteId's sitemap index
+     *
+     * @param int|null $siteId
+     *
+     * @return string
+     */
+    public static function sitemapIndexForSiteId(int $siteId = null): string
+    {
+        return Seomatic::$plugin->sitemaps->sitemapIndexUrlForSiteId($siteId);
+    }
+
+    /**
+     * @param string   $sourceType
+     * @param string   $sourceHandle
+     * @param int|null $siteId
+     *
+     * @return string
+     */
+    public static function sitemapUrlForSection(string $sourceType, string $sourceHandle, int $siteId = null): string
+    {
+        return Seomatic::$plugin->sitemaps->sitemapUrlForSection($sourceType, $sourceHandle, $siteId);
+    }
 
     /**
      * Extract plain old text from a field

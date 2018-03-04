@@ -1,6 +1,13 @@
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
 
+<div class="flex">
+    <div class="flex-grow"></div>
+    <div class="btngroup">
+        <a href="{{ seomatic.helper.sitemapUrlForSection(currentSourceBundleType, currentSourceHandle, currentSiteId) }}" class="btn sharebtn" target="_blank">{{ 'View Sitemap'|t("seomatic") }}</a>
+    </div>
+
+</div>
 {% namespace "sitemap" %}
 
     {{ forms.lightswitchField({
