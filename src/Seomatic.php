@@ -476,14 +476,19 @@ class Seomatic extends Plugin
                 );
             }
         );
+        // Handler: UserPermissions::EVENT_REGISTER_PERMISSIONS
         Event::on(
             UserPermissions::class,
             UserPermissions::EVENT_REGISTER_PERMISSIONS,
             function (RegisterUserPermissionsEvent $event) {
+                Craft::debug(
+                    'UserPermissions::EVENT_REGISTER_PERMISSIONS',
+                    __METHOD__
+                );
+                // Register our custmo permissions
                 $event->permissions[Craft::t('seomatic', 'SEOmatic')] = $this->customAdminCpPermissions();
             }
         );
-
         // Handler: ClearCaches::EVENT_REGISTER_CACHE_OPTIONS
         Event::on(
             ClearCaches::class,
@@ -493,30 +498,11 @@ class Seomatic extends Plugin
                     'ClearCaches::EVENT_REGISTER_CACHE_OPTIONS',
                     __METHOD__
                 );
-                // Frontend template caches
-                $event->options[] = [
-                    'key'    => 'seomatic-frontendtemplate-caches',
-                    'label'  => Craft::t('seomatic', 'SEOmatic frontend template caches'),
-                    'action' => function () {
-                        Seomatic::$plugin->frontendTemplates->invalidateCaches();
-                    },
-                ];
-                // Meta bundle caches
-                $event->options[] = [
-                    'key'    => 'seomatic-metabundle-caches',
-                    'label'  => Craft::t('seomatic', 'SEOmatic metadata caches'),
-                    'action' => function () {
-                        Seomatic::$plugin->metaContainers->invalidateCaches();
-                    },
-                ];
-                // Sitemap caches
-                $event->options[] = [
-                    'key'    => 'seomatic-sitemap-caches',
-                    'label'  => Craft::t('seomatic', 'SEOmatic sitemap caches'),
-                    'action' => function () {
-                        Seomatic::$plugin->sitemaps->invalidateCaches();
-                    },
-                ];
+                // Register our AdminCP routes
+                $event->options = array_merge(
+                    $event->options,
+                    $this->customAdminCpCacheOptions()
+                );
             }
         );
         // Entries sidebar
@@ -591,6 +577,34 @@ class Seomatic extends Plugin
     }
 
     /**
+     * Returns the custom AdminCP cache options.
+     *
+     * @return array
+     */
+    protected function customAdminCpCacheOptions(): array
+    {
+        return [
+            // Frontend template caches
+            [
+                'key'    => 'seomatic-frontendtemplate-caches',
+                'label'  => Craft::t('seomatic', 'SEOmatic frontend template caches'),
+                'action' =>  [Seomatic::$plugin->frontendTemplates, 'invalidateCaches'],
+            ],
+            // Meta bundle caches
+            [
+                'key'    => 'seomatic-metabundle-caches',
+                'label'  => Craft::t('seomatic', 'SEOmatic metadata caches'),
+                'action' =>  [Seomatic::$plugin->metaContainers, 'invalidateCaches'],
+            ],
+            // Sitemap caches
+            [
+                'key'    => 'seomatic-sitemap-caches',
+                'label'  => Craft::t('seomatic', 'SEOmatic sitemap caches'),
+                'action' =>  [Seomatic::$plugin->sitemaps, 'invalidateCaches'],
+            ]
+        ];
+    }
+    /**
      * Returns the custom AdminCP user permissions.
      *
      * @return array
@@ -646,6 +660,9 @@ class Seomatic extends Plugin
                     ],
                     "seomatic:site-settings:social-media" => [
                         'label' => Craft::t('seomatic', 'Social Media'),
+                    ],
+                    "seomatic:site-settings:tracking" => [
+                        'label' => Craft::t('seomatic', 'Tracking'),
                     ],
                 ]
             ],
