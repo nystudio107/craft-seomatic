@@ -1,4 +1,4 @@
-{% if trackingId is defined and trackingId %}
+{% if trackingId.value is defined and trackingId.value %}
         (function(i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function() {
@@ -9,28 +9,28 @@
             a.async = 1;
             a.src = g;
             m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '{{ analyticsUrl }}', 'ga');
+        })(window, document, 'script', '{{ analyticsUrl.value }}', 'ga');
 
-        ga('create', '{{ trackingId |raw }}', 'auto'{% if linker %}, {allowLinker: true}{% endif %});
-        {% if ipAnonymization %}
+        ga('create', '{{ trackingId.value |raw }}', 'auto'{% if linker.value %}, {allowLinker: true}{% endif %});
+        {% if ipAnonymization.value %}
             ga('set', 'anonymizeIp', true);
         {% endif %}
-        {% if displayFeatures %}
+        {% if displayFeatures.value %}
             ga('require', 'displayfeatures');
         {% endif %}
-        {% if ecommerce %}
+        {% if ecommerce.value %}
             ga('require', 'ecommerce');
         {% endif %}
-        {% if enhancedEcommerce %}
+        {% if enhancedEcommerce.value %}
             ga('require', 'ec');
         {% endif %}
-        {% if enhancedLinkAttribution %}
+        {% if enhancedLinkAttribution.value %}
             ga('require', 'linkid');
         {% endif %}
-        {% if enhancedLinkAttribution %}
+        {% if enhancedLinkAttribution.value %}
             ga('require', 'linker');
         {% endif %}
-        {% if sendPageView %}
+        {% if sendPageView.value %}
             ga('send', 'pageview');
         {% endif %}
 {% endif %}
