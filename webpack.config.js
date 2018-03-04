@@ -10,8 +10,12 @@ const inProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
     entry: {
-        'seomatic': path.resolve(assetBundleRoot, './src/js/seomatic.js'),
-        'code-editor': path.resolve(assetBundleRoot, './src/js/code-editor.js'),
+        'vendor': ['brace', 'brace/theme/github'],
+        'seomatic': [
+            path.resolve(assetBundleRoot, './src/js/seomatic.js'),
+            path.resolve(assetBundleRoot, './src/js/twig-editor.js'),
+            path.resolve(assetBundleRoot, './src/js/javascript-editor.js'),
+        ]
     },
     output: {
         path: path.resolve(__dirname, assetBundleRoot + '/dist'),
@@ -82,9 +86,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({
-            names: ['seomatic']
-        }),
         new ExtractTextPlugin({
             filename: path.join('./css', '[name].css'),
             allChunks: true,
@@ -98,7 +99,11 @@ module.exports = {
             dry: false,
             watch: inProduction
         }),
-        new ManifestPlugin()
+        new ManifestPlugin(),
+        new webpack.optimize.CommonsChunkPlugin({
+            names: ['vendor'],
+            minChunks: 2
+        })
     ],
     resolve: {
         alias: {

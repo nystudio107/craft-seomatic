@@ -21,7 +21,7 @@ require('brace/theme/github');
 
 $(function () {
     // Hook up ACE editor to all textareas with data-editor attribute
-    $('textarea.seomatic-code-editor').each(function() {
+    $('textarea.seomatic-twig-editor').each(function() {
         var textarea = $(this);
         var editDiv = $('<div>', {
             position: 'absolute',
