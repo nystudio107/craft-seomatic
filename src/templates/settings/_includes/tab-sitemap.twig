@@ -3,11 +3,10 @@
 
 <div class="flex">
     <div class="flex-grow"></div>
-    <div class="btngroup">
-        <a href="{{ seomatic.helper.sitemapUrlForSection(currentSourceBundleType, currentSourceHandle, currentSiteId) }}" class="btn sharebtn" target="_blank">{{ 'View Sitemap'|t("seomatic") }}</a>
-    </div>
-
+    <a href="{{ seomatic.helper.sitemapIndexForSiteId(currentSiteId) }}" class="btn livepreviewbtn" target="_blank">{{ 'View Sitemap Index'|t("seomatic") }}</a>
+    <a href="{{ seomatic.helper.sitemapUrlForSection(currentSourceBundleType, currentSourceHandle, currentSiteId) }}" class="btn livepreviewbtn" target="_blank">{{ 'View Section Sitemap'|t("seomatic") }}</a>
 </div>
+
 {% namespace "sitemap" %}
 
     {{ forms.lightswitchField({

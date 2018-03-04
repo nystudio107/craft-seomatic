@@ -1,6 +1,11 @@
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
 
+<div class="flex">
+    <div class="flex-grow"></div>
+    <a href="{{ siteUrl("/robots.txt") }}" class="btn livepreviewbtn" target="_blank">{{ 'View robots.txt'|t("seomatic") }}</a>
+</div>
+
 {% namespace "robotsTemplate" %}
     {{ forms.lightswitchField({
         label: "Robots.txt Enabled" |t("seomatic"),

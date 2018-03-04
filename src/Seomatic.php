@@ -166,6 +166,10 @@ class Seomatic extends Plugin
         self::$devMode = Craft::$app->getConfig()->getGeneral()->devMode;
         self::$view = Craft::$app->getView();
         MetaValueHelper::cache();
+        // If devMode is on, always force the environment to be "local"
+        if (self::$devMode) {
+            self::$settings->environment = "local";
+        }
         $this->name = Seomatic::$settings->pluginName;
         // Handler: EVENT_AFTER_INSTALL_PLUGIN
         Event::on(
