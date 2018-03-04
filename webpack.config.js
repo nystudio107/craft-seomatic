@@ -21,6 +21,10 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /bootstrap-tokenfield[\/\\]js[\/\\]bootstrap-tokenfield.js$/,
+                loader: "imports-loader?define=>false"
+            },
+            {
                 test: /\.vue$/,
                 loader: 'vue-loader',
                 options: {
@@ -53,7 +57,6 @@ module.exports = {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
-                    use: ['css-loader'],
                     use: [
                         {
                             loader: 'css-loader',
@@ -62,8 +65,7 @@ module.exports = {
                             }
                         }
                     ]
-                }),
-                exclude: /node_modules/
+                })
             },
             {
                 test: /\.(png|jpe?g|gif|svg)$/,

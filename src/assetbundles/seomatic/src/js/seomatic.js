@@ -17,6 +17,7 @@
 // CSS
 require('../css/css-reset.css');
 require('../css/style.css');
+require('bootstrap-tokenfield/dist/css/bootstrap-tokenfield.min.css');
 
 // Images
 require('../img/Seomatic-icon.svg');
@@ -29,3 +30,14 @@ require('../img/tags-icon.svg');
 require('../img/variables-icon.svg');
 require('../img/missing_image.png');
 require('../img/no_image_set.png');
+
+// JavaScript
+require('bootstrap-tokenfield/js/bootstrap-tokenfield.js');
+
+$(function () {
+
+    $('.seoKeywords').tokenfield({
+        createTokensOnBlur: true,
+    });
+
+});
