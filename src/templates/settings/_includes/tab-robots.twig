@@ -1,0 +1,18 @@
+{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
+{% import "_includes/forms" as forms %}
+
+<h4 class="heading">{{ "Robots.txt" |t('seomatic') }}</h4>
+
+{% namespace "robots" %}
+    {{ forms.textAreaField({
+        label: "Facebook OpenGraph Description" |t("seomatic"),
+        instructions: "SEO descriptions allow you to influence how your web pages are described and displayed in search results. Ensure that all of your web pages have a unique meta description that is explicit and contains your most important keywords." |t("seomatic"),
+        id: "robotsTemplate",
+        name: "robotsTemplate",
+        value: "",
+        class: "seomatic-code-editor nicetext",
+        maxlength: 300,
+        showCharsLeft: true,
+        warning: false,
+    }) }}
+{% endnamespace %}

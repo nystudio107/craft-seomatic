@@ -36,8 +36,8 @@ class SeomaticAsset extends AssetBundle
         ];
 
         $this->js = [
-            'js/vendor.js',
-            'js/seomatic.js'
+            'js/seomatic.js',
+            'js/code-editor.js',
         ];
 
         $this->css = [

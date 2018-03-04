@@ -35,9 +35,8 @@ require('../img/no_image_set.png');
 require('bootstrap-tokenfield/js/bootstrap-tokenfield.js');
 
 $(function () {
-
-    $('.seoKeywords').tokenfield({
+    // Tokenize any seomatic-keywords fields
+    $('.seomatic-keywords').tokenfield({
         createTokensOnBlur: true,
     });
-
 });

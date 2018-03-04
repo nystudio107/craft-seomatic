@@ -1,4 +1,6 @@
 {
+  "code-editor.js": "js/code-editor.js",
+  "code-editor.js.map": "js/code-editor.js.map",
   "img/Seomatic-icon.svg": "img/Seomatic-icon.svg",
   "img/link-icon.svg": "img/link-icon.svg",
   "img/missing_image.png": "img/missing_image.png",
@@ -12,7 +14,5 @@
   "seomatic.css": "css/seomatic.css",
   "seomatic.css.map": "css/seomatic.css.map",
   "seomatic.js": "js/seomatic.js",
-  "seomatic.js.map": "js/seomatic.js.map",
-  "vendor.js": "js/vendor.js",
-  "vendor.js.map": "js/vendor.js.map"
+  "seomatic.js.map": "js/seomatic.js.map"
 }

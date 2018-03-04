@@ -11,7 +11,7 @@ const inProduction = process.env.NODE_ENV === 'production';
 module.exports = {
     entry: {
         'seomatic': path.resolve(assetBundleRoot, './src/js/seomatic.js'),
-        'vendor': ['vue', 'axios'],
+        'code-editor': path.resolve(assetBundleRoot, './src/js/code-editor.js'),
     },
     output: {
         path: path.resolve(__dirname, assetBundleRoot + '/dist'),
@@ -83,7 +83,7 @@ module.exports = {
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
-            names: ['vendor']
+            names: ['seomatic']
         }),
         new ExtractTextPlugin({
             filename: path.join('./css', '[name].css'),
@@ -102,7 +102,6 @@ module.exports = {
     ],
     resolve: {
         alias: {
-            'vue$': 'vue/dist/vue.common.js'
         }
     },
     devServer: {

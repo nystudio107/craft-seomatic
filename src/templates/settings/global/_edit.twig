@@ -20,6 +20,10 @@
         url: "#tab-content-facebook",
         label: "Facebook" |t("seomatic"),
     },
+    robots: {
+        url: "#tab-content-robots",
+        label: "Robots" |t("seomatic"),
+    },
 } %}
 
 {% block header %}
@@ -50,6 +54,10 @@
 
     <div id="tab-content-facebook" class="hidden">
         {% include "seomatic/settings/_includes/tab-facebook.twig" %}
+    </div>
+
+    <div id="tab-content-robots" class="hidden">
+        {% include "seomatic/settings/_includes/tab-robots.twig" %}
     </div>
 
 {% endblock %}
