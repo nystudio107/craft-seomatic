@@ -22,6 +22,7 @@ use craft\helpers\UrlHelper;
 use craft\models\Site;
 use craft\web\Controller;
 
+use nystudio107\seomatic\services\FrontendTemplates;
 use nystudio107\seomatic\services\MetaBundles;
 use yii\base\InvalidConfigException;
 use yii\web\NotFoundHttpException;
@@ -135,6 +136,9 @@ class SettingsController extends Controller
         $variables['globals'] = $metaBundle->metaGlobalVars;
         $variables['sitemap'] = $metaBundle->metaSitemapVars;
         $variables['settings'] = $metaBundle->metaBundleSettings;
+        $templateContainers = $metaBundle->frontendTemplatesContainer->data;
+        $variables['robotsTemplate'] = $templateContainers[FrontendTemplates::ROBOTS_TXT_HANDLE];
+        $variables['humansTemplate'] = $templateContainers[FrontendTemplates::HUMANS_TXT_HANDLE];
 
         // Image selectors
         $elements = Craft::$app->getElements();
@@ -185,6 +189,8 @@ class SettingsController extends Controller
         $siteId = $request->getParam('siteId');
         $globalsSettings = $request->getParam('globals');
         $bundleSettings = $request->getParam('settings');
+        $robotsTemplate = $request->getParam('robotsTemplate');
+        $humansTemplate = $request->getParam('humansTemplate');
 
         // The site settings for the appropriate meta bundle
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
@@ -192,6 +198,10 @@ class SettingsController extends Controller
             $this->parseImageSources($globalsSettings, $bundleSettings, $siteId);
             $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
             $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
+            $templateContainers = $metaBundle->frontendTemplatesContainer->data;
+            $templateContainers[FrontendTemplates::ROBOTS_TXT_HANDLE]->setAttributes($robotsTemplate);
+            $templateContainers[FrontendTemplates::HUMANS_TXT_HANDLE]->setAttributes($humansTemplate);
+
             Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
 
             Seomatic::$plugin->clearAllCaches();

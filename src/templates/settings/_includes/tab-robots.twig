@@ -1,18 +1,23 @@
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
 
-<h4 class="heading">{{ "Robots.txt" |t('seomatic') }}</h4>
+{% namespace "robotsTemplate" %}
+    {{ forms.lightswitchField({
+        label: "Robots.txt Enabled" |t("seomatic"),
+        instructions: "Whether the `robots.txt` template should be rendered" |t("seomatic"),
+        id: "include",
+        name: "include",
+        on: humansTemplate.include,
+        warning: false,
+    }) }}
 
-{% namespace "robots" %}
     {{ forms.textAreaField({
-        label: "Facebook OpenGraph Description" |t("seomatic"),
-        instructions: "SEO descriptions allow you to influence how your web pages are described and displayed in search results. Ensure that all of your web pages have a unique meta description that is explicit and contains your most important keywords." |t("seomatic"),
-        id: "robotsTemplate",
-        name: "robotsTemplate",
-        value: "",
-        class: "seomatic-code-editor nicetext",
-        maxlength: 300,
-        showCharsLeft: true,
+        label: "Robots.txt Template" |t("seomatic"),
+        instructions: "A `robots.txt` file is a file at the root of your site that indicates those parts of your site you don’t want accessed by search engine crawlers. The file uses the [Robots Exclusion Standard](http://en.wikipedia.org/wiki/Robots_exclusion_standard#About_the_standard), which is a protocol with a small set of commands that can be used to indicate access to your site by section and by specific kinds of web crawlers (such as mobile crawlers vs desktop crawlers)." |t("seomatic"),
+        id: "templateString",
+        name: "templateString",
+        value: robotsTemplate.templateString,
+        class: "seomatic-code-editor",
         warning: false,
     }) }}
 {% endnamespace %}

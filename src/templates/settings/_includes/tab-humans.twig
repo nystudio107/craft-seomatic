@@ -1,0 +1,23 @@
+{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
+{% import "_includes/forms" as forms %}
+
+{% namespace "humansTemplate" %}
+    {{ forms.lightswitchField({
+        label: "Humans.txt Enabled" |t("seomatic"),
+        instructions: "Whether the `humans.txt` template should be rendered" |t("seomatic"),
+        id: "include",
+        name: "include",
+        on: humansTemplate.include,
+        warning: false,
+    }) }}
+
+    {{ forms.textAreaField({
+        label: "Humans.txt Template" |t("seomatic"),
+        instructions: "[Humans.txt](http://humanstxt.org) is an initiative for knowing the people behind a website. It's a text file that contains information about the different people who have contributed to building the website. By adding a text file, you can prove your authorship (not your property) in an external, fast, easy and accessible way." |t("seomatic") |raw,
+        id: "templateString",
+        name: "templateString",
+        value: humansTemplate.templateString,
+        class: "seomatic-code-editor",
+        warning: false,
+    }) }}
+{% endnamespace %}

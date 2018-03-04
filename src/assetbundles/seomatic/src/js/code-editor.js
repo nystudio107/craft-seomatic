@@ -25,8 +25,8 @@ $(function () {
         var textarea = $(this);
         var editDiv = $('<div>', {
             position: 'absolute',
-            width: textarea.width(),
-            height: 400,
+            width: '98%',
+            height: 700,
             'class': textarea.attr('class')
         }).insertBefore(textarea);
         textarea.css('display', 'none');
@@ -39,6 +39,11 @@ $(function () {
         editor.setShowPrintMargin(false);
         editor.setDisplayIndentGuides(true);
         editor.renderer.setShowGutter(true);
+        editor.setHighlightActiveLine(false);
+        editor.setOptions({
+            minLines: 10,
+            maxLines: Infinity
+        });
 
         // copy back to textarea on form submit...
         textarea.closest('form').submit(function() {

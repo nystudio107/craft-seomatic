@@ -24,6 +24,10 @@
         url: "#tab-content-robots",
         label: "Robots" |t("seomatic"),
     },
+    humans: {
+        url: "#tab-content-humans",
+        label: "Humans" |t("seomatic"),
+    },
 } %}
 
 {% block header %}
@@ -58,6 +62,10 @@
 
     <div id="tab-content-robots" class="hidden">
         {% include "seomatic/settings/_includes/tab-robots.twig" %}
+    </div>
+
+    <div id="tab-content-humans" class="hidden">
+        {% include "seomatic/settings/_includes/tab-humans.twig" %}
     </div>
 
 {% endblock %}
