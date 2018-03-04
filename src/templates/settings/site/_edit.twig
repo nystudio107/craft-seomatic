@@ -30,6 +30,14 @@
         }
     }) %}
 {% endif %}
+{% if currentUser.can("seomatic:site-settings:tracking") %}
+    {% set tabs = tabs |merge({
+        tracking: {
+            url: "#tab-content-tracking",
+            label: "Tracking" |t("seomatic"),
+        }
+    }) %}
+{% endif %}
 
 {% block header %}
     {{ block('pageTitle') }}
@@ -64,6 +72,12 @@
     {% if currentUser.can("seomatic:site-settings:social-media") %}
         <div id="tab-content-social" class="hidden">
             {% include "seomatic/settings/site/_includes/tab-social.twig" %}
+        </div>
+    {% endif %}
+
+    {% if currentUser.can("seomatic:site-settings:tracking") %}
+        <div id="tab-content-tracking" class="hidden">
+            {% include "seomatic/settings/site/_includes/tab-tracking.twig" %}
         </div>
     {% endif %}
 
