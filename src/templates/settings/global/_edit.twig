@@ -1,3 +1,5 @@
+{% requirePermission "seomatic:global-meta" %}
+
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 
 {% extends "_layouts/cp" %}
@@ -7,28 +9,47 @@
 {% do view.registerAssetBundle("nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset") %}
 {% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/assetbundles/seomatic/dist', true) %}
 
-{% set tabs = {
-    general: {
-        url: "#tab-content-general",
-        label: "General" |t("seomatic"),
-    },
-    twitter: {
-        url: "#tab-content-twitter",
-        label: "Twitter" |t("seomatic"),
-    },
-    facebook: {
-        url: "#tab-content-facebook",
-        label: "Facebook" |t("seomatic"),
-    },
-    robots: {
-        url: "#tab-content-robots",
-        label: "Robots" |t("seomatic"),
-    },
-    humans: {
-        url: "#tab-content-humans",
-        label: "Humans" |t("seomatic"),
-    },
-} %}
+{% set tabs = {} %}
+{% if currentUser.can("seomatic:global-meta:general") %}
+    {% set tabs = tabs |merge({
+        general: {
+            url: "#tab-content-general",
+            label: "General" |t("seomatic"),
+        },
+    }) %}
+{% endif %}
+{% if currentUser.can("seomatic:global-meta:twitter") %}
+    {% set tabs = tabs |merge({
+        twitter: {
+            url: "#tab-content-twitter",
+            label: "Twitter" |t("seomatic"),
+        },
+    }) %}
+{% endif %}
+{% if currentUser.can("seomatic:global-meta:facebook") %}
+    {% set tabs = tabs |merge({
+        facebook: {
+            url: "#tab-content-facebook",
+            label: "Facebook" |t("seomatic"),
+        },
+    }) %}
+{% endif %}
+{% if currentUser.can("seomatic:global-meta:robots") %}
+    {% set tabs = tabs |merge({
+        robots: {
+            url: "#tab-content-robots",
+            label: "Robots" |t("seomatic"),
+        },
+    }) %}
+{% endif %}
+{% if currentUser.can("seomatic:global-meta:humans") %}
+    {% set tabs = tabs |merge({
+        humans: {
+            url: "#tab-content-humans",
+            label: "Humans" |t("seomatic"),
+        },
+    }) %}
+{% endif %}
 
 {% block header %}
     {{ block('pageTitle') }}
@@ -48,24 +69,34 @@
     <input type="hidden" name="siteId" value="{{ currentSiteId }}">
     {{ redirectInput("seomatic/global/#{currentSiteHandle}") }}
 
-    <div id="tab-content-general">
-        {% include "seomatic/settings/_includes/tab-general.twig" %}
-    </div>
-    
-    <div id="tab-content-twitter" class="hidden">
-        {% include "seomatic/settings/_includes/tab-twitter.twig" %}
-    </div>
+    {% if currentUser.can("seomatic:global-meta:general") %}
+        <div id="tab-content-general">
+            {% include "seomatic/settings/_includes/tab-general.twig" %}
+        </div>
+    {% endif %}
 
-    <div id="tab-content-facebook" class="hidden">
-        {% include "seomatic/settings/_includes/tab-facebook.twig" %}
-    </div>
+    {% if currentUser.can("seomatic:global-meta:twitter") %}
+        <div id="tab-content-twitter" class="hidden">
+            {% include "seomatic/settings/_includes/tab-twitter.twig" %}
+        </div>
+    {% endif %}
 
-    <div id="tab-content-robots" class="hidden">
-        {% include "seomatic/settings/_includes/tab-robots.twig" %}
-    </div>
+    {% if currentUser.can("seomatic:global-meta:facebook") %}
+        <div id="tab-content-facebook" class="hidden">
+            {% include "seomatic/settings/_includes/tab-facebook.twig" %}
+        </div>
+    {% endif %}
 
-    <div id="tab-content-humans" class="hidden">
-        {% include "seomatic/settings/_includes/tab-humans.twig" %}
-    </div>
+    {% if currentUser.can("seomatic:global-meta:robots") %}
+        <div id="tab-content-robots" class="hidden">
+            {% include "seomatic/settings/_includes/tab-robots.twig" %}
+        </div>
+    {% endif %}
+
+    {% if currentUser.can("seomatic:global-meta:humans") %}
+        <div id="tab-content-humans" class="hidden">
+            {% include "seomatic/settings/_includes/tab-humans.twig" %}
+        </div>
+    {% endif %}
 
 {% endblock %}

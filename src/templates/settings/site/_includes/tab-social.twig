@@ -1,0 +1,87 @@
+{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
+{% import "_includes/forms" as forms %}
+
+{% namespace "site" %}
+    {{ forms.textField({
+        label: "Twitter handle" |t("seomatic"),
+        instructions: "Twitter username for the website used in the card footer, without the preceding @. This must be set for Twitter Card tags to be generated." |t("seomatic"),
+        id: "twitterHandle",
+        name: "twitterHandle",
+        value: site.twitterHandle,
+        warning: false,
+    }) }}
+
+    {{ forms.textField({
+        label: "Facebook Profile ID" |t("seomatic"),
+        instructions: "Your Facebook Profile/Page ID. Click on the 'About' tab on your Facebook company/fan page, click on 'Page Info', then scroll to the bottom to find your 'Facebook Page ID'" |t("seomatic"),
+        id: "facebookProfileId",
+        name: "facebookProfileId",
+        value: site.facebookProfileId,
+        warning: false,
+    }) }}
+
+    {{ forms.textField({
+        label: "Facebook App ID" |t("seomatic"),
+        instructions: "Your Facebook App ID. Providing a Facebook Application ID for use with the Social Media Sharing feature is recommended, but optional. [Learn More](https://developers.facebook.com/docs/apps/register)" |t("seomatic"),
+        id: "facebookAppId",
+        name: "facebookAppId",
+        value: site.facebookAppId,
+        warning: false,
+    }) }}
+
+    {{ forms.textField({
+        label: "Google Site Verification" |t("seomatic"),
+        instructions: "For the `&lt;meta name='google-site-verification'&gt;` tag. Only enter the code in the `content=''`, not the entire tag. [Learn More](https://www.google.com/webmasters/verification/home?hl=en)" |t("seomatic"),
+        id: "googleSiteVerification",
+        name: "googleSiteVerification",
+        value: site.googleSiteVerification,
+        warning: false,
+    }) }}
+
+    {{ forms.textField({
+        label: "Bing Site Verification" |t("seomatic"),
+        instructions: "For the `&lt;meta name='msvalidate.01'&gt;` tag. Only enter the code in the `content=''`, not the entire tag. [Learn More](https://www.bing.com/webmaster/help/how-to-verify-ownership-of-your-site-afcfefc6)" |t("seomatic"),
+        id: "bingSiteVerification",
+        name: "bingSiteVerification",
+        value: site.bingSiteVerification,
+        warning: false,
+    }) }}
+
+    {{ forms.textField({
+        label: "Pinterest Site Verification" |t("seomatic"),
+        instructions: "For the `&lt;meta name='p:domain_verify'&gt;` tag. Only enter the code in the `content=''`, not the entire tag. [Learn More](https://help.pinterest.com/en/articles/claim-your-website)" |t("seomatic"),
+        id: "pinterestSiteVerification",
+        name: "pinterestSiteVerification",
+        value: site.pinterestSiteVerification,
+        warning: false,
+    }) }}
+
+    {{ forms.editableTableField({
+        label: "Same As URLs" |t("seomatic"),
+        instructions: "Add the URLs to social media sites, and other presences on the web. These URLs are also made available to your frontend templates." |t("seomatic"),
+        id: 'sameAsLinks',
+        name: 'sameAsLinks',
+        required: false,
+        cols: {
+            siteName: {
+                heading: "Site Name" |t("seomatic"),
+                type: "singleline",
+                autopopulate: "handle",
+                width: "15%",
+            },
+            handle: {
+                heading: "Handle" |t("seomatic"),
+                type: "singleline",
+                code: true,
+                width: "15%",
+            },
+            url: {
+                heading: "URL" |t("seomatic"),
+                type: "singleline",
+                width: "70%",
+            },
+        },
+        rows: site.sameAsLinks,
+    }) }}
+
+{% endnamespace %}

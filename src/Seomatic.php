@@ -11,8 +11,6 @@
 
 namespace nystudio107\seomatic;
 
-use craft\events\TemplateEvent;
-use craft\web\Controller;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\models\Settings;
@@ -41,12 +39,14 @@ use craft\events\ExceptionEvent;
 use craft\events\PluginEvent;
 use craft\events\RegisterCacheOptionsEvent;
 use craft\events\RegisterUrlRulesEvent;
+use craft\events\RegisterUserPermissionsEvent;
 use craft\events\SectionEvent;
-use craft\helpers\UrlHelper;
 use craft\services\Categories;
 use craft\services\Elements;
 use craft\services\Plugins;
 use craft\services\Sections;
+use craft\services\UserPermissions;
+use craft\helpers\UrlHelper;
 use craft\utilities\ClearCaches;
 use craft\web\ErrorHandler;
 use yii\web\HttpException;
@@ -464,29 +464,18 @@ class Seomatic extends Plugin
                 // Register our AdminCP routes
                 $event->rules = array_merge(
                     $event->rules,
-                    [
-                        'seomatic' =>
-                            'seomatic/settings/content',
-                        'seomatic/global' =>
-                            'seomatic/settings/global',
-                        'seomatic/global/<siteHandle:{handle}>' =>
-                            'seomatic/settings/global',
-                        'seomatic/content' =>
-                            'seomatic/settings/content',
-                        'seomatic/edit-content/<sourceBundleType:{handle}>/<sourceHandle:{handle}>' =>
-                            'seomatic/settings/edit-content',
-                        'seomatic/edit-content/<sourceBundleType:{handle}>/<sourceHandle:{handle}>/<siteHandle:{handle}>' =>
-                            'seomatic/settings/edit-content',
-                        'seomatic/site' =>
-                            'seomatic/settings/site',
-                        'seomatic/site/<siteHandle:{handle}>' =>
-                            'seomatic/settings/site',
-                        'seomatic/plugin' =>
-                            'seomatic/settings/plugin',
-                    ]
+                    $this->customAdminCpRoutes()
                 );
             }
         );
+        Event::on(
+            UserPermissions::class,
+            UserPermissions::EVENT_REGISTER_PERMISSIONS,
+            function (RegisterUserPermissionsEvent $event) {
+                $event->permissions[Craft::t('seomatic', 'SEOmatic')] = $this->customAdminCpPermissions();
+            }
+        );
+
         // Handler: ClearCaches::EVENT_REGISTER_CACHE_OPTIONS
         Event::on(
             ClearCaches::class,
@@ -564,4 +553,97 @@ class Seomatic extends Plugin
         return new Settings();
     }
 
+    /**
+     * Return the custom AdminCP routes
+     *
+     * @return array
+     */
+    protected function customAdminCpRoutes(): array
+    {
+        return [
+            'seomatic' =>
+                'seomatic/settings/content',
+            'seomatic/global' =>
+                'seomatic/settings/global',
+            'seomatic/global/<siteHandle:{handle}>' =>
+                'seomatic/settings/global',
+            'seomatic/content' =>
+                'seomatic/settings/content',
+            'seomatic/edit-content/<sourceBundleType:{handle}>/<sourceHandle:{handle}>' =>
+                'seomatic/settings/edit-content',
+            'seomatic/edit-content/<sourceBundleType:{handle}>/<sourceHandle:{handle}>/<siteHandle:{handle}>' =>
+                'seomatic/settings/edit-content',
+            'seomatic/site' =>
+                'seomatic/settings/site',
+            'seomatic/site/<siteHandle:{handle}>' =>
+                'seomatic/settings/site',
+            'seomatic/plugin' =>
+                'seomatic/settings/plugin',
+        ];
+    }
+
+    /**
+     * Returns the custom AdminCP user permissions.
+     *
+     * @return array
+     */
+    protected function customAdminCpPermissions(): array
+    {
+        return [
+            "seomatic:global-meta" => [
+                'label' => Craft::t('seomatic', 'Edit Global Meta'),
+                'nested' => [
+                    "seomatic:global-meta:general" => [
+                        'label' => Craft::t('seomatic', 'General'),
+                    ],
+                    "seomatic:global-meta:twitter" => [
+                        'label' => Craft::t('seomatic', 'Twitter'),
+                    ],
+                    "seomatic:global-meta:facebook" => [
+                        'label' => Craft::t('seomatic', 'Facebook'),
+                    ],
+                    "seomatic:global-meta:robots" => [
+                        'label' => Craft::t('seomatic', 'Robots'),
+                    ],
+                    "seomatic:global-meta:humans" => [
+                        'label' => Craft::t('seomatic', 'Humans'),
+                    ],
+                ]
+            ],
+            "seomatic:content-meta" => [
+                'label' => Craft::t('seomatic', 'Edit Content Meta'),
+                'nested' => [
+                    "seomatic:content-meta:general" => [
+                        'label' => Craft::t('seomatic', 'General'),
+                    ],
+                    "seomatic:content-meta:twitter" => [
+                        'label' => Craft::t('seomatic', 'Twitter'),
+                    ],
+                    "seomatic:content-meta:facebook" => [
+                        'label' => Craft::t('seomatic', 'Facebook'),
+                    ],
+                    "seomatic:content-meta:sitemap" => [
+                        'label' => Craft::t('seomatic', 'Sitemap'),
+                    ],
+                ]
+            ],
+            "seomatic:site-settings" => [
+                'label' => Craft::t('seomatic', 'Edit Site Settings'),
+                'nested' => [
+                    "seomatic:site-settings:identity" => [
+                        'label' => Craft::t('seomatic', 'Identity'),
+                    ],
+                    "seomatic:site-settings:creator" => [
+                        'label' => Craft::t('seomatic', 'Creator'),
+                    ],
+                    "seomatic:site-settings:social-media" => [
+                        'label' => Craft::t('seomatic', 'Social Media'),
+                    ],
+                ]
+            ],
+            "seomatic:plugin-settings" => [
+                'label' => Craft::t('seomatic', 'Edit Plugin Settings'),
+            ],
+        ];
+    }
 }

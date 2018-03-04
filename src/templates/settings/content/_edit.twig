@@ -1,3 +1,5 @@
+{% requirePermission "seomatic:content-meta" %}
+
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 
 {% extends "_layouts/cp" %}
@@ -7,24 +9,39 @@
 {% do view.registerAssetBundle("nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset") %}
 {% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/assetbundles/seomatic/dist', true) %}
 
-{% set tabs = {
-    general: {
-        url: "#tab-content-general",
-        label: "General" |t("seomatic"),
-    },
-    twitter: {
-        url: "#tab-content-twitter",
-        label: "Twitter" |t("seomatic"),
-    },
-    facebook: {
-        url: "#tab-content-facebook",
-        label: "Facebook" |t("seomatic"),
-    },
-    sitemap: {
-        url: "#tab-content-sitemap",
-        label: "Sitemap" |t("seomatic"),
-    },
-} %}
+{% set tabs = {} %}
+{% if currentUser.can("seomatic:content-meta:general") %}
+    {% set tabs = tabs |merge({
+        general: {
+            url: "#tab-content-general",
+            label: "General" |t("seomatic"),
+        },
+    }) %}
+{% endif %}
+{% if currentUser.can("seomatic:content-meta:twitter") %}
+    {% set tabs = tabs |merge({
+        twitter: {
+            url: "#tab-content-twitter",
+            label: "Twitter" |t("seomatic"),
+        },
+    }) %}
+{% endif %}
+{% if currentUser.can("seomatic:content-meta:facebook") %}
+    {% set tabs = tabs |merge({
+        facebook: {
+            url: "#tab-content-facebook",
+            label: "Facebook" |t("seomatic"),
+        },
+    }) %}
+{% endif %}
+{% if currentUser.can("seomatic:content-meta:sitemap") %}
+    {% set tabs = tabs |merge({
+        sitemap: {
+            url: "#tab-content-sitemap",
+            label: "Sitemap" |t("seomatic"),
+        },
+    }) %}
+{% endif %}
 
 {% block header %}
     {{ block('pageTitle') }}
@@ -46,20 +63,28 @@
     <input type="hidden" name="sourceBundleType" value="{{ currentSourceBundleType }}">
     {{ redirectInput("seomatic/edit-content/#{currentSourceBundleType}/#{currentSourceHandle}/#{currentSiteHandle}") }}
 
-    <div id="tab-content-general">
-        {% include "seomatic/settings/_includes/tab-general.twig" %}
-    </div>
+    {% if currentUser.can("seomatic:content-meta:general") %}
+        <div id="tab-content-general">
+            {% include "seomatic/settings/_includes/tab-general.twig" %}
+        </div>
+    {% endif %}
 
-    <div id="tab-content-twitter" class="hidden">
-        {% include "seomatic/settings/_includes/tab-twitter.twig" %}
-    </div>
+    {% if currentUser.can("seomatic:content-meta:twitter") %}
+        <div id="tab-content-twitter" class="hidden">
+            {% include "seomatic/settings/_includes/tab-twitter.twig" %}
+        </div>
+    {% endif %}
 
-    <div id="tab-content-facebook" class="hidden">
-        {% include "seomatic/settings/_includes/tab-facebook.twig" %}
-    </div>
+    {% if currentUser.can("seomatic:content-meta:facebook") %}
+        <div id="tab-content-facebook" class="hidden">
+            {% include "seomatic/settings/_includes/tab-facebook.twig" %}
+        </div>
+    {% endif %}
 
-    <div id="tab-content-sitemap" class="hidden">
-        {% include "seomatic/settings/_includes/tab-sitemap.twig" %}
-    </div>
+    {% if currentUser.can("seomatic:content-meta:sitemap") %}
+        <div id="tab-content-sitemap" class="hidden">
+            {% include "seomatic/settings/_includes/tab-sitemap.twig" %}
+        </div>
+    {% endif %}
 
 {% endblock %}
