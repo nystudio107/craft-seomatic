@@ -611,7 +611,7 @@ class SettingsController extends Controller
                 'url'   => UrlHelper::cpUrl('seomatic/settings'),
             ],
         ];
-        $variables['selectedSubnavItem'] = 'settings';
+        $variables['selectedSubnavItem'] = 'plugin';
         $variables['settings'] = Seomatic::$settings;
         $variables['metaBundles'] = Seomatic::$plugin->metaBundles->getContentMetaBundles(false);
 

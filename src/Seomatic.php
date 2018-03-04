@@ -80,25 +80,6 @@ class Seomatic extends Plugin
 
     const SEOMATIC_HANDLE = 'Seomatic';
 
-    const ADMIN_CP_SECTIONS = [
-        'global'   => [
-            'label' => 'Global Meta',
-            'url'   => 'seomatic/global',
-        ],
-        'content'  => [
-            'label' => 'Content Meta',
-            'url'   => 'seomatic/content',
-        ],
-        'site'     => [
-            'label' => 'Site Settings',
-            'url'   => 'seomatic/site',
-        ],
-        'settings' => [
-            'label' => 'Plugin Settings',
-            'url'   => 'seomatic/plugin',
-        ],
-    ];
-
     // Static Properties
     // =========================================================================
 
@@ -238,9 +219,36 @@ class Seomatic extends Plugin
      */
     public function getCpNavItem()
     {
+        $subNavs = [];
         $navItem = parent::getCpNavItem();
+        $currentUser = Craft::$app->getUser()->getIdentity();
+        // Only show sub-navs the user has permission to view
+        if ($currentUser->can('seomatic:global-meta')) {
+            $subNavs['global'] = [
+                'label' => 'Global Meta',
+                'url'   => 'seomatic/global',
+            ];
+        }
+        if ($currentUser->can('seomatic:content-meta')) {
+            $subNavs['content'] = [
+                'label' => 'Content Meta',
+                'url'   => 'seomatic/content',
+            ];
+        }
+        if ($currentUser->can('seomatic:site-settings')) {
+            $subNavs['site'] = [
+                'label' => 'Site Settings',
+                'url'   => 'seomatic/site',
+            ];
+        }
+        if ($currentUser->can('seomatic:plugin-settings')) {
+            $subNavs['plugin'] = [
+                'label' => 'Plugin Settings',
+                'url'   => 'seomatic/plugin',
+            ];
+        }
         $navItem = array_merge($navItem, [
-            'subnav' => self::ADMIN_CP_SECTIONS,
+            'subnav' => $subNavs,
         ]);
 
         return $navItem;
