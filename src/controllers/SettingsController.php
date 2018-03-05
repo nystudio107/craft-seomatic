@@ -386,6 +386,17 @@ class SettingsController extends Controller
             FieldHelper::ASSET_FIELD_CLASS_KEY,
             false
         );
+        $variables['assetVolumeTextFieldSources'] = FieldHelper::fieldsOfTypeFromAssetVolumes(
+            FieldHelper::TEXT_FIELD_CLASS_KEY,
+            false
+        );
+        $variables['assetVolumeTextFieldSources'] = array_merge(
+            [
+                'none' => '',
+                'title' => 'Title',
+            ],
+            $variables['assetVolumeTextFieldSources']
+        );
 
         $uri = '';
         // Pick an Element to be used for the preview

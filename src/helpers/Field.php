@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\helpers;
 
+use craft\base\Volume;
 use nystudio107\seomatic\services\MetaBundles;
 
 use Craft;
@@ -60,8 +61,20 @@ class Field
     // Static Methods
     // =========================================================================
 
-    public static function fieldsOfTypeFromLayout(string $fieldClassKey, FieldLayout $layout, bool $keysOnly = true)
-    {
+    /**
+     * Return all of the fields from the $layout that are of the type $fieldClassKey
+     *
+     * @param string      $fieldClassKey
+     * @param FieldLayout $layout
+     * @param bool        $keysOnly
+     *
+     * @return array
+     */
+    public static function fieldsOfTypeFromLayout(
+        string $fieldClassKey,
+        FieldLayout $layout,
+        bool $keysOnly = true
+    ): array {
         $foundFields = [];
         if (!empty(self::FIELD_CLASSES[$fieldClassKey])) {
             $fieldClasses = self::FIELD_CLASSES[$fieldClassKey];
@@ -85,7 +98,7 @@ class Field
     }
 
     /**
-     * Return all of the fields in the $element of the type $fieldType class
+     * Return all of the fields in the $element of the type $fieldClassKey
      *
      * @param Element $element
      * @param string  $fieldClassKey
@@ -93,8 +106,11 @@ class Field
      *
      * @return array
      */
-    public static function fieldsOfTypeFromElement(Element $element, string $fieldClassKey, bool $keysOnly = true)
-    {
+    public static function fieldsOfTypeFromElement(
+        Element $element,
+        string $fieldClassKey,
+        bool $keysOnly = true
+    ): array {
         $layout = $element->getFieldLayout();
         $foundFields = self::fieldsOfTypeFromLayout($fieldClassKey, $layout, $keysOnly);
 
@@ -102,8 +118,38 @@ class Field
     }
 
     /**
+     * Return all of the fields from all Asset Volume layouts of the type $fieldClassKey
+     *
+     * @param string $fieldClassKey
+     * @param bool   $keysOnly
+     *
+     * @return array
+     */
+    public static function fieldsOfTypeFromAssetVolumes(string $fieldClassKey, bool $keysOnly = true): array
+    {
+        $foundFields = [];
+        $volumes = Craft::$app->getVolumes()->getAllVolumes();
+        foreach ($volumes as $volume) {
+            /** @var Volume $volume */
+            try {
+                $layout = $volume->getFieldLayout();
+            } catch (InvalidConfigException $e) {
+                $layout = null;
+            }
+            if ($layout) {
+                $foundFields = array_merge(
+                    $foundFields,
+                    self::fieldsOfTypeFromLayout($fieldClassKey, $layout, $keysOnly)
+                );
+            }
+        }
+
+        return $foundFields;
+    }
+
+    /**
      * Return all of the fields from the $sourceBundleType in the $sourceHandle
-     * of the type $fieldType class
+     * of the type $fieldClassKey
      *
      * @param string $sourceBundleType
      * @param string $sourceHandle
@@ -117,7 +163,7 @@ class Field
         string $sourceHandle,
         string $fieldClassKey,
         bool $keysOnly = true
-    ) {
+    ):array {
         $foundFields = [];
         $layouts = [];
         // Get the layouts
@@ -164,7 +210,7 @@ class Field
      *
      * @return array
      */
-    public static function matrixFieldsOfType(MatrixBlock $matrixBlock, string $fieldType, bool $keysOnly = true)
+    public static function matrixFieldsOfType(MatrixBlock $matrixBlock, string $fieldType, bool $keysOnly = true): array
     {
         $foundFields = [];
 
