@@ -20,7 +20,7 @@
                             <a class="Facebook-link" href="{{ seomatic.meta.canonicalUrl }}" target="_blank">{{ ogTitleArray.content |raw }}</a>
                         </div>
                         <div class="Facebook-text">
-                            {{ ogDescriptionArray.content |raw }}
+                            {{ ogDescriptionArray.content ?? "" |raw }}
                         </div>
                         <div class="Facebook-site-url-wrapper">
                             <div>
