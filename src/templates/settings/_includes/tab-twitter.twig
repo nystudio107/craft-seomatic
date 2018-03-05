@@ -3,8 +3,11 @@
 
 <h4 class="heading">{{ "SEO Preview:" |t('seomatic') }}</h4>
 {% include "seomatic/_includes/twitterPreview.twig" %}
-{% namespace "globals" %}
 
+{% namespace "globals" %}
+    
+    {############### Twitter Card Type ###############}
+    
     {{ forms.selectField({
         label: "Twitter Card Type" |t("seomatic"),
         instructions: "With Twitter Cards, you can attach rich photos and information to Tweets that drive traffic to your website. Users who Tweet links to your content will have a 'Card' added to the Tweet that’s visible to all of their followers." |t("seomatic"),
@@ -18,7 +21,9 @@
         },
         value: globals.twitterCard,
     }) }}
-
+    
+    {############### Twitter Creator ###############}
+    
     {{ forms.textField({
         label: "Twitter Creator" |t("seomatic"),
         instructions: "Twitter username for the content creator / author, without the preceding @." |t("seomatic"),
@@ -28,19 +33,68 @@
         class: "nicetext",
         warning: false,
     }) }}
+{% endnamespace %}
 
-    {{ forms.textField({
-        label: "Twitter Title" |t("seomatic"),
-        instructions: "Make sure your title tag is explicit and contains your most important keywords. Be sure that each page has a unique title tag." |t("seomatic"),
-        id: "twitterTitle",
-        name: "twitterTitle",
-        value: globals.twitterTitle,
-        class: "nicetext",
-        maxlength: seomatic.config.maxTitleLength,
-        showCharsLeft: true,
-        warning: false,
-    }) }}
+{############### Twitter Title ###############}
+
+{% set textOptions = {
+    fromCustom: "Custom Text" |t("seomatic"),
+} %}
+{% if textFieldSources is defined and textFieldSources |length %}
+    {% set textOptions = { fromField: "From Field" |t("seomatic"), } | merge(textOptions) %}
+{% endif %}
+{% set textOptions = { sameAsSeo: "Same as SEO Title" |t("seomatic"), } | merge(textOptions) %}
+
+<div class="field seomatic-textSourceWrapper" id="settings-twitterTitleSource-field">
+    <div class="heading">
+        <label id="settings-twitterTitleSource-label" for="settings-twitterTitleSource">{{ "Twitter Title Source" |t("seomatic") }}</label>
+        <div class="instructions"><p>{{ "The Twitter Title is displayed in bold at the top of your Twitter card. Make sure it is a pithy summary of your webpage." |t("seomatic") }}</p>
+        </div>
+    </div>
+    {% namespace "settings" %}
+        <div class="heading">
+            {{ forms.select({
+                id: "twitterTitleSource",
+                name: "twitterTitleSource",
+                options: textOptions,
+                value: settings.twitterTitleSource,
+                class: "seomatic-textSourceSelect"
+            }) }}
+        </div>
+    {% endnamespace %}
     
+    {% if textFieldSources is defined and textFieldSources |length %}
+        {% namespace "settings" %}
+            <div class="heading seomatic-textSourceFromField">
+                <label id="settings-twitterTitleField-label" for="settings-twitterTitleField">{{ "Source Field: " |t("seomatic") }}</label>
+                {{ forms.select({
+                    id: "twitterTitleField",
+                    name: "twitterTitleField",
+                    options: textFieldSources,
+                    value: settings.twitterTitleField,
+                }) }}
+            </div>
+        {% endnamespace %}
+    {% endif %}
+    
+    {% namespace "globals" %}
+        <div class="heading seomatic-textSourceFromUrl">
+            {{ forms.text({
+                id: "twitterTitle",
+                name: "twitterTitle",
+                value: globals.twitterTitle,
+                class: "nicetext",
+                maxlength: seomatic.config.maxTitleLength,
+                showCharsLeft: true,
+                warning: false,
+            }) }}
+        </div>
+    {% endnamespace %}
+</div>
+
+{############### Twitter Site Name Position ###############}
+
+{% namespace "globals" %}
     {{ forms.selectField({
         label: "Twitter Site Name Position" |t("seomatic"),
         instructions: "Where the Site Name is placed relative to the Twitter Title in the &lt;twitter:title&gt; tag" |t("seomatic"),
@@ -54,19 +108,68 @@
         value: globals.twitterSiteNamePosition,
         warning: false,
     }) }}
-    
-    {{ forms.textAreaField({
-        label: "Twitter Description" |t("seomatic"),
-        instructions: "SEO descriptions allow you to influence how your web pages are described and displayed in search results. Ensure that all of your web pages have a unique meta description that is explicit and contains your most important keywords." |t("seomatic"),
-        id: "twitterDescription",
-        name: "twitterDescription",
-        value: globals.twitterDescription,
-        class: "nicetext",
-        maxlength: 200,
-        showCharsLeft: true,
-        warning: false,
-    }) }}
 {% endnamespace %}
+
+
+{############### Twitter Description ###############}
+
+{% set textOptions = {
+    fromCustom: "Custom Text" |t("seomatic"),
+} %}
+{% if textFieldSources is defined and textFieldSources |length %}
+    {% set textOptions = { summaryFromField: "Summary From Field" |t("seomatic"), } | merge(textOptions) %}
+    {% set textOptions = { fromField: "From Field" |t("seomatic"), } | merge(textOptions) %}
+{% endif %}
+{% set textOptions = { sameAsSeo: "Same as SEO Description" |t("seomatic"), } | merge(textOptions) %}
+
+<div class="field seomatic-textSourceWrapper" id="settings-twitterDescriptionSource-field">
+    <div class="heading">
+        <label id="settings-twitterDescriptionSource-label" for="settings-twitterDescriptionSource">{{ "Twitter Description Source" |t("seomatic") }}</label>
+        <div class="instructions"><p>{{ "Twitter descriptions are displayed below the Twitter Title in your Twitter Cards. Use them to provide a summary of what your page is about." |t("seomatic") }}</p>
+        </div>
+    </div>
+    {% namespace "settings" %}
+        <div class="heading">
+            {{ forms.select({
+                id: "twitterDescriptionSource",
+                name: "twitterDescriptionSource",
+                options: textOptions,
+                value: settings.twitterDescriptionSource,
+                class: "seomatic-textSourceSelect"
+            }) }}
+        </div>
+    {% endnamespace %}
+    
+    {% if textFieldSources is defined and textFieldSources |length %}
+        {% namespace "settings" %}
+            <div class="heading seomatic-textSourceFromField">
+                <label id="settings-twitterDescriptionField-label" for="settings-twitterDescriptionField">{{ "Source Field: " |t("seomatic") }}</label>
+                {{ forms.select({
+                    id: "twitterDescriptionField",
+                    name: "twitterDescriptionField",
+                    options: textFieldSources,
+                    value: settings.twitterDescriptionField,
+                }) }}
+            </div>
+        {% endnamespace %}
+    {% endif %}
+    
+    {% namespace "globals" %}
+        <div class="heading seomatic-textSourceFromUrl">
+            {{ forms.textArea({
+                id: "twitterDescription",
+                name: "twitterDescription",
+                value: globals.twitterDescription,
+                class: "nicetext",
+                maxlength: 200,
+                showCharsLeft: true,
+                warning: false,
+            }) }}
+        </div>
+    {% endnamespace %}
+</div>
+
+{############### Twitter Image ###############}
 
 {% set imageOptions = {
     fromAsset: "Custom Image" |t("seomatic"),
@@ -142,16 +245,60 @@
     {% endnamespace %}
 </div>
 
-{% namespace "globals" %}
-    {{ forms.textAreaField({
-        label: "Twitter Image Description" |t("seomatic"),
-        instructions: "Description of the Twitter Image" |t("seomatic"),
-        id: "twitterImageDescription",
-        name: "twitterImageDescription",
-        value: globals.twitterImageDescription,
-        class: "nicetext",
-        maxlength: 420,
-        showCharsLeft: true,
-        warning: false,
-    }) }}
-{% endnamespace %}
+{############### Twitter Image Description ###############}
+
+{% set textOptions = {
+    fromCustom: "Custom Text" |t("seomatic"),
+} %}
+{% if textFieldSources is defined and textFieldSources |length %}
+    {% set textOptions = { summaryFromField: "Summary From Field" |t("seomatic"), } | merge(textOptions) %}
+    {% set textOptions = { fromField: "From Field" |t("seomatic"), } | merge(textOptions) %}
+{% endif %}
+{% set imageOptions = { sameAsSeo: "Same As SEO Image Description" |t("seomatic"), } | merge(imageOptions) %}
+
+<div class="field seomatic-textSourceWrapper" id="settings-twitterImageDescriptionSource-field">
+    <div class="heading">
+        <label id="settings-twitterImageDescriptionSource-label" for="settings-twitterImageDescriptionSource">{{ "Twitter Image Description Source" |t("seomatic") }}</label>
+        <div class="instructions"><p>{{ "A text description of the image conveying the essential nature of an image to users who are visually impaired." |t("seomatic") }}</p>
+        </div>
+    </div>
+    {% namespace "settings" %}
+        <div class="heading">
+            {{ forms.select({
+                id: "twitterImageDescriptionSource",
+                name: "twitterImageDescriptionSource",
+                options: textOptions,
+                value: settings.twitterImageDescriptionSource,
+                class: "seomatic-textSourceSelect"
+            }) }}
+        </div>
+    {% endnamespace %}
+    
+    {% if textFieldSources is defined and textFieldSources |length %}
+        {% namespace "settings" %}
+            <div class="heading seomatic-textSourceFromField">
+                <label id="settings-twitterImageDescriptionField-label" for="settings-twitterImageDescriptionField">{{ "Source Field: " |t("seomatic") }}</label>
+                {{ forms.select({
+                    id: "twitterImageDescriptionField",
+                    name: "twitterImageDescriptionField",
+                    options: textFieldSources,
+                    value: settings.twitterImageDescriptionField,
+                }) }}
+            </div>
+        {% endnamespace %}
+    {% endif %}
+    
+    {% namespace "globals" %}
+        <div class="heading seomatic-textSourceFromUrl">
+            {{ forms.textAreaField({
+                id: "twitterImageDescription",
+                name: "twitterImageDescription",
+                value: globals.twitterImageDescription,
+                class: "nicetext",
+                maxlength: 420,
+                showCharsLeft: true,
+                warning: false,
+            }) }}
+        </div>
+    {% endnamespace %}
+</div>
