@@ -98,4 +98,49 @@ $(function () {
         }
     });
 
+
+    // Show/hide the text source fields initially
+    $('.seomatic-textSourceSelect > select').each(function( index, value ) {
+        var popupValue = $(this).val();
+        switch (popupValue) {
+            case "sameAsSeo":
+                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').hide();
+                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').hide();
+                break;
+
+            case "fromField":
+            case "summaryFromField":
+            case "keywordsFromField":
+                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').show();
+                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').hide();
+                break;
+
+            case "fromCustom":
+                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').hide();
+                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').show();
+                break;
+        }
+    });
+    // Handle hiding/showing the image source fields based on the selection
+    $('.seomatic-textSourceSelect > select').on('change', function(e) {
+        switch (this.value) {
+            case "sameAsSeo":
+                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').hide();
+                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').hide();
+                break;
+
+            case "fromField":
+            case "summaryFromField":
+            case "keywordsFromField":
+                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').show();
+                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').hide();
+                break;
+
+            case "fromCustom":
+                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').hide();
+                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').show();
+                break;
+        }
+    });
+
 });

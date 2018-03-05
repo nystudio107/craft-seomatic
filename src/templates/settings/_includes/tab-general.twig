@@ -3,22 +3,69 @@
 
 <h4 class="heading">{{ "SEO Preview:" |t('seomatic') }}</h4>
 {% include "seomatic/_includes/googlePreview.twig" %}
-{% namespace "globals" %}
-    {{ forms.textField({
-        label: "SEO Title" |t("seomatic"),
-        instructions: "Make sure your title tag is explicit and contains your most important keywords. Be sure that each page has a unique title tag." |t("seomatic"),
-        id: "seoTitle",
-        name: "seoTitle",
-        value: globals.seoTitle,
-        class: "nicetext",
-        maxlength: seomatic.config.maxTitleLength,
-        showCharsLeft: true,
-        warning: false,
-    }) }}
 
+{% set textOptions = {
+    fromCustom: "Custom Text" |t("seomatic"),
+} %}
+{% if textFieldSources is defined and textFieldSources |length %}
+    {% set textOptions = { fromField: "From Field" |t("seomatic"), } | merge(textOptions) %}
+{% endif %}
+
+{############### SEO Title ###############}
+
+<div class="field seomatic-textSourceWrapper" id="settings-seoTitleSource-field">
+    <div class="heading">
+        <label id="settings-seoTitleSource-label" for="settings-seoTitleSource">{{ "SEO Title Source" |t("seomatic") }}</label>
+        <div class="instructions"><p>{{ "Make sure your title tag is explicit and contains your most important keywords. Be sure that each page has a unique title tag." |t("seomatic") }}</p>
+        </div>
+    </div>
+    {% namespace "settings" %}
+        <div class="heading">
+            {{ forms.select({
+                id: "seoTitleSource",
+                name: "seoTitleSource",
+                options: textOptions,
+                value: settings.seoTitleSource,
+                class: "seomatic-textSourceSelect"
+            }) }}
+        </div>
+    {% endnamespace %}
+
+    {% if textFieldSources is defined and textFieldSources |length %}
+        {% namespace "settings" %}
+            <div class="heading seomatic-textSourceFromField">
+                <label id="settings-seoTitleField-label" for="settings-seoTitleField">{{ "Source Field: " |t("seomatic") }}</label>
+                {{ forms.select({
+                    id: "seoTitleField",
+                    name: "seoTitleField",
+                    options: textFieldSources,
+                    value: settings.seoTitleField,
+                }) }}
+            </div>
+        {% endnamespace %}
+    {% endif %}
+
+    {% namespace "globals" %}
+        <div class="heading seomatic-textSourceFromUrl">
+            {{ forms.text({
+                id: "seoTitle",
+                name: "seoTitle",
+                value: globals.seoTitle,
+                class: "nicetext",
+                maxlength: seomatic.config.maxTitleLength,
+                showCharsLeft: true,
+                warning: false,
+            }) }}
+        </div>
+    {% endnamespace %}
+</div>
+
+{############### Site Name Position ###############}
+
+{% namespace "globals" %}
     {{ forms.selectField({
         label: "Site Name Position" |t("seomatic"),
-        instructions: "Where the Site Name is placed relative to the Title in the &lt;title&gt; tag" |t("seomatic"),
+        instructions: ("Where the Site Name is placed relative to the Title in the &lt;title&gt; tag. The Site Name is set in [Site Settings](" ~ cpUrl('seomatic/site') ~ ")") |t("seomatic"),
         id: "siteNamePosition",
         name: "siteNamePosition",
         options: {
@@ -29,31 +76,123 @@
         value: globals.siteNamePosition,
         warning: false,
     }) }}
-
-    {{ forms.textAreaField({
-        label: "SEO Description" |t("seomatic"),
-        instructions: "SEO descriptions allow you to influence how your web pages are described and displayed in search results. Ensure that all of your web pages have a unique meta description that is explicit and contains your most important keywords." |t("seomatic"),
-        id: "seoDescription",
-        name: "seoDescription",
-        value: globals.seoDescription,
-        class: "nicetext",
-        maxlength: seomatic.config.maxDescriptionLength,
-        showCharsLeft: true,
-        warning: false,
-    }) }}
-
-    {{ forms.textAreaField({
-        label: "SEO Keywords" |t("seomatic"),
-        instructions: "Google ignores SEO Keywords tag; though other search engines do look at it. Utilize it carefully, as improper or spammy use most likely will hurt you, or even have your site marked as spam." |t("seomatic"),
-        id: "seoKeywords",
-        name: "seoKeywords",
-        value: globals.seoKeywords,
-        class: "seomatic-keywords nicetext",
-        maxlength: seomatic.config.maxDescriptionLength,
-        showCharsLeft: true,
-        warning: false,
-    }) }}
 {% endnamespace %}
+
+{############### SEO Description ###############}
+
+{% set textOptions = {
+    fromCustom: "Custom Text" |t("seomatic"),
+} %}
+{% if textFieldSources is defined and textFieldSources |length %}
+    {% set textOptions = { summaryFromField: "Summary From Field" |t("seomatic"), } | merge(textOptions) %}
+    {% set textOptions = { fromField: "From Field" |t("seomatic"), } | merge(textOptions) %}
+{% endif %}
+
+<div class="field seomatic-textSourceWrapper" id="settings-seoDescriptionSource-field">
+    <div class="heading">
+        <label id="settings-seoDescriptionSource-label" for="settings-seoDescriptionSource">{{ "SEO Description Source" |t("seomatic") }}</label>
+        <div class="instructions"><p>{{ "SEO descriptions allow you to influence how your web pages are described and displayed in search results. Ensure that all of your web pages have a unique meta description that is explicit and contains your most important keywords." |t("seomatic") }}</p>
+        </div>
+    </div>
+    {% namespace "settings" %}
+        <div class="heading">
+            {{ forms.select({
+                id: "seoDescriptionSource",
+                name: "seoDescriptionSource",
+                options: textOptions,
+                value: settings.seoDescriptionSource,
+                class: "seomatic-textSourceSelect"
+            }) }}
+        </div>
+    {% endnamespace %}
+
+    {% if textFieldSources is defined and textFieldSources |length %}
+        {% namespace "settings" %}
+            <div class="heading seomatic-textSourceFromField">
+                <label id="settings-seoDescriptionField-label" for="settings-seoDescriptionField">{{ "Source Field: " |t("seomatic") }}</label>
+                {{ forms.select({
+                    id: "seoDescriptionField",
+                    name: "seoDescriptionField",
+                    options: textFieldSources,
+                    value: settings.seoDescriptionField,
+                }) }}
+            </div>
+        {% endnamespace %}
+    {% endif %}
+
+    {% namespace "globals" %}
+        <div class="heading seomatic-textSourceFromUrl">
+            {{ forms.textArea({
+                id: "seoDescription",
+                name: "seoDescription",
+                value: globals.seoDescription,
+                class: "nicetext",
+                maxlength: seomatic.config.maxDescriptionLength,
+                showCharsLeft: true,
+                warning: false,
+            }) }}
+        </div>
+    {% endnamespace %}
+</div>
+
+{############### SEO Keywords ###############}
+
+{% set textOptions = {
+    fromCustom: "Custom Text" |t("seomatic"),
+} %}
+{% if textFieldSources is defined and textFieldSources |length %}
+    {% set textOptions = { summaryFromField: "Keywords From Field" |t("seomatic"), } | merge(textOptions) %}
+    {% set textOptions = { fromField: "From Field" |t("seomatic"), } | merge(textOptions) %}
+{% endif %}
+
+<div class="field seomatic-textSourceWrapper" id="settings-seoKeywordsSource-field">
+    <div class="heading">
+        <label id="settings-seoKeywordsSource-label" for="settings-seoKeywordsSource">{{ "SEO Keywords Source" |t("seomatic") }}</label>
+        <div class="instructions"><p>{{ "Google ignores SEO Keywords tag; though other search engines do look at it. Utilize it carefully, as improper or spammy use most likely will hurt you, or even have your site marked as spam." |t("seomatic") }}</p>
+        </div>
+    </div>
+    {% namespace "settings" %}
+        <div class="heading">
+            {{ forms.select({
+                id: "seoKeywordsSource",
+                name: "seoKeywordsSource",
+                options: textOptions,
+                value: settings.seoKeywordsSource,
+                class: "seomatic-textSourceSelect"
+            }) }}
+        </div>
+    {% endnamespace %}
+
+    {% if textFieldSources is defined and textFieldSources |length %}
+        {% namespace "settings" %}
+            <div class="heading seomatic-textSourceFromField">
+                <label id="settings-seoKeywordsField-label" for="settings-seoKeywordsField">{{ "Source Field: " |t("seomatic") }}</label>
+                {{ forms.select({
+                    id: "seoKeywordsField",
+                    name: "seoKeywordsField",
+                    options: textFieldSources,
+                    value: settings.seoKeywordsField,
+                }) }}
+            </div>
+        {% endnamespace %}
+    {% endif %}
+
+    {% namespace "globals" %}
+        <div class="heading seomatic-textSourceFromUrl">
+            {{ forms.textArea({
+                id: "seoKeywords",
+                name: "seoKeywords",
+                value: globals.seoKeywords,
+                class: "seomatic-keywords nicetext",
+                maxlength: seomatic.config.maxDescriptionLength,
+                showCharsLeft: true,
+                warning: false,
+            }) }}
+        </div>
+    {% endnamespace %}
+</div>
+
+{############### SEO Image ###############}
 
 {% set imageOptions = {
     fromAsset: "Custom Image" |t("seomatic"),
@@ -84,7 +223,7 @@
     {% if assetFieldSources is defined and assetFieldSources |length %}
         {% namespace "settings" %}
             <div class="heading seomatic-imageSourceFromField">
-                <label id="settings-seoImageField-label" for="settings-seoImageField">{{ "Asset Field: " |t("seomatic") }}</label>
+                <label id="settings-seoImageField-label" for="settings-seoImageField">{{ "Source Field: " |t("seomatic") }}</label>
                 {{ forms.select({
                     id: "seoImageField",
                     name: "seoImageField",
@@ -128,19 +267,66 @@
     {% endnamespace %}
 </div>
 
-{% namespace "globals" %}
-    {{ forms.textAreaField({
-        label: "SEO Image Description" |t("seomatic"),
-        instructions: "Description of the SEO Image" |t("seomatic"),
-        id: "seoImageDescription",
-        name: "seoImageDescription",
-        value: globals.seoImageDescription,
-        class: "nicetext",
-        maxlength: seomatic.config.maxDescriptionLength,
-        showCharsLeft: true,
-        warning: false,
-    }) }}
+{############### SEO Image Description ###############}
 
+{% set textOptions = {
+    fromCustom: "Custom Text" |t("seomatic"),
+} %}
+{% if textFieldSources is defined and textFieldSources |length %}
+    {% set textOptions = { summaryFromField: "Summary From Field" |t("seomatic"), } | merge(textOptions) %}
+    {% set textOptions = { fromField: "From Field" |t("seomatic"), } | merge(textOptions) %}
+{% endif %}
+
+<div class="field seomatic-textSourceWrapper" id="settings-seoImageDescriptionSource-field">
+    <div class="heading">
+        <label id="settings-seoImageDescriptionSource-label" for="settings-seoImageDescriptionSource">{{ "SEO Image Description Source" |t("seomatic") }}</label>
+        <div class="instructions"><p>{{ "A textual description of the SEO Image." |t("seomatic") }}</p>
+        </div>
+    </div>
+    {% namespace "settings" %}
+        <div class="heading">
+            {{ forms.select({
+                id: "seoImageDescriptionSource",
+                name: "seoImageDescriptionSource",
+                options: textOptions,
+                value: settings.seoImageDescriptionSource,
+                class: "seomatic-textSourceSelect"
+            }) }}
+        </div>
+    {% endnamespace %}
+
+    {% if textFieldSources is defined and textFieldSources |length %}
+        {% namespace "settings" %}
+            <div class="heading seomatic-textSourceFromField">
+                <label id="settings-seoImageDescriptionField-label" for="settings-seoImageDescriptionField">{{ "Source Field: " |t("seomatic") }}</label>
+                {{ forms.select({
+                    id: "seoImageDescriptionField",
+                    name: "seoImageDescriptionField",
+                    options: textFieldSources,
+                    value: settings.seoImageDescriptionField,
+                }) }}
+            </div>
+        {% endnamespace %}
+    {% endif %}
+
+    {% namespace "globals" %}
+        <div class="heading seomatic-textSourceFromUrl">
+            {{ forms.textArea({
+                id: "seoImageDescription",
+                name: "seoImageDescription",
+                value: globals.seoImageDescription,
+                class: "nicetext",
+                maxlength: seomatic.config.maxDescriptionLength,
+                showCharsLeft: true,
+                warning: false,
+            }) }}
+        </div>
+    {% endnamespace %}
+</div>
+
+{############### Robots ###############}
+
+{% namespace "globals" %}
     {{ forms.selectField({
         label: "Robots" |t("seomatic"),
         instructions: "The robots meta tag lets you utilize a granular, page-specific approach to controlling how an individual page should be indexed and served to users in search results." |t("seomatic"),
@@ -157,7 +343,11 @@
         },
         value: globals.robots,
     }) }}
+{% endnamespace %}
 
+{############### Canonical URL ###############}
+
+{% namespace "globals" %}
     {{ forms.textField({
         label: "Canonical URL" |t("seomatic"),
         instructions: "Canonical URL" |t("seomatic"),
@@ -167,5 +357,4 @@
         class: "nicetext",
         warning: false,
     }) }}
-
 {% endnamespace %}

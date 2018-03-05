@@ -380,6 +380,12 @@ class SettingsController extends Controller
             FieldHelper::TEXT_FIELD_CLASS_KEY,
             false
         );
+        $variables['textFieldSources'] = array_merge(
+            [
+                'title' => 'Title',
+            ],
+            $variables['textFieldSources']
+        );
         $variables['assetFieldSources'] = FieldHelper::fieldsOfTypeFromSource(
             $sourceBundleType,
             $sourceHandle,
