@@ -39,4 +39,51 @@ $(function () {
     $('.seomatic-keywords').tokenfield({
         createTokensOnBlur: true,
     });
+
+    // Show/hide the image source fields initially
+    $('.seomatic-imageSourceSelect > select').each(function( index, value ) {
+        var popupValue = $(this).val();
+        switch (popupValue) {
+            case "fromField":
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').show();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').hide();
+                break;
+
+            case "fromAsset":
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').show();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').hide();
+                break;
+
+            case "fromUrl":
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').show();
+                break;
+        }
+    });
+    // Handle hiding/showing the image source fields based on the selection
+    $('.seomatic-imageSourceSelect > select').on('change', function(e) {
+        switch (this.value) {
+            case "fromField":
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').slideDown();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').slideUp();
+                break;
+
+            case "fromAsset":
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').slideDown();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').slideUp();
+                break;
+
+            case "fromUrl":
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').slideDown();
+                break;
+        }
+    });
+
 });

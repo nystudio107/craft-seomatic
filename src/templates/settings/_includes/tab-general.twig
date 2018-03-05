@@ -63,7 +63,7 @@
     {% set imageOptions = { fromField: "From Asset Field" |t("seomatic"), } | merge(imageOptions) %}
 {% endif %}
 
-<div class="field" id="settings-seoImageSource-field">
+<div class="field seomatic-imageSourceWrapper" id="settings-seoImageSource-field">
     <div class="heading">
         <label id="settings-seoImageSource-label" for="settings-seoImageSource">{{ "SEO Image Source" |t("seomatic") }}</label>
         <div class="instructions"><p>{{ "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified." |t("seomatic") }}</p>
@@ -76,13 +76,14 @@
                 name: "seoImageSource",
                 options: imageOptions,
                 value: settings.seoImageSource,
+                class: "seomatic-imageSourceSelect"
             }) }}
         </div>
     {% endnamespace %}
     
     {% if assetFieldSources is defined and assetFieldSources |length %}
         {% namespace "settings" %}
-            <div class="heading seomatic-fromField">
+            <div class="heading seomatic-imageSourceFromField">
                 <label id="settings-seoImageField-label" for="settings-seoImageField">{{ "Asset Field: " |t("seomatic") }}</label>
                 {{ forms.select({
                     id: "seoImageField",
@@ -95,7 +96,7 @@
     {% endif %}
     
     {% namespace "settings" %}
-        <div class="heading seomatic-fromAsset">
+        <div class="heading seomatic-imageSourceFromAsset">
             {{ forms.elementSelect({
                 id: "seoImageIds",
                 name: "seoImageIds",
@@ -115,7 +116,7 @@
     {% endnamespace %}
     
     {% namespace "globals" %}
-        <div class="heading seomatic-fromUrl">
+        <div class="heading seomatic-imageSourceFromUrl">
             {{ forms.text({
                 id: "seoImage",
                 name: "seoImage",

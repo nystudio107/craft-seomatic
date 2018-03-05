@@ -75,7 +75,7 @@
 {% endif %}
 {% set imageOptions = { sameAsSeo: "Same As SEO Image" |t("seomatic"), } | merge(imageOptions) %}
 
-<div class="field" id="settings-ogImageSource-field">
+<div class="field seomatic-imageSourceWrapper" id="settings-ogImageSource-field">
     <div class="heading">
         <label id="settings-ogImageSource-label" for="settings-ogImageSource">{{ "Facebook OpenGraph Image Source" |t("seomatic") }}</label>
         <div class="instructions"><p>{{ "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified." |t("seomatic") }}</p>
@@ -94,7 +94,7 @@
 
     {% if assetFieldSources is defined and assetFieldSources |length %}
         {% namespace "settings" %}
-            <div class="heading seomatic-fromField">
+            <div class="heading seomatic-imageSourceFromField">
                 <label id="settings-ogImageField-label" for="settings-ogImageField">{{ "Asset Field: " |t("seomatic") }}</label>
                 {{ forms.select({
                     id: "ogImageField",
@@ -107,7 +107,7 @@
     {% endif %}
 
     {% namespace "settings" %}
-        <div class="heading seomatic-fromAsset">
+        <div class="heading seomatic-imageSourceFromAsset">
             {{ forms.elementSelect({
                 id: "ogImageIds",
                 name: "ogImageIds",
@@ -127,7 +127,7 @@
     {% endnamespace %}
 
     {% namespace "globals" %}
-        <div class="heading seomatic-fromUrl">
+        <div class="heading seomatic-imageSourceFromUrl">
             {{ forms.text({
                 id: "ogImage",
                 name: "ogImage",
