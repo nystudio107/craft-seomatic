@@ -1,6 +1,6 @@
 # robots.txt for {{ siteUrl }}
 
-Sitemap: {{ siteUrl |trim('/') }}/sitemaps/{{ currentSite.groupId }}/sitemap.xml
+Sitemap: {{ seomatic.helper.sitemapIndexForSiteId() }}
 {% switch seomatic.config.environment %}
 
 {% case "live" %}

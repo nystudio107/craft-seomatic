@@ -103,7 +103,7 @@
 
     {{ forms.editableTableField({
         label: "Image Sitemap Fields" |t("seomatic"),
-        instructions: "XXX" |t("seomatic"),
+        instructions: "Choose what source fields to map to the image sitemap properties. [Learn more](https://support.google.com/webmasters/answer/178636?hl=en)" |t("seomatic"),
         id: 'sitemapImageFieldMap',
         name: 'sitemapImageFieldMap',
         required: false,
@@ -118,6 +118,7 @@
                 type: "select",
                 width: "70%",
                 options: {
+                    "none": "",
                     "title": "Title"
                 },
             },
@@ -127,7 +128,7 @@
 
     {{ forms.editableTableField({
         label: "Video Sitemap Fields" |t("seomatic"),
-        instructions: "XXX" |t("seomatic"),
+        instructions: "Choose what source fields to map to the image sitemap properties. [Learn more](https://developers.google.com/webmasters/videosearch/sitemaps)" |t("seomatic"),
         id: 'sitemapVideoFieldMap',
         name: 'sitemapVideoFieldMap',
         required: false,
@@ -142,6 +143,7 @@
                 type: "select",
                 width: "70%",
                 options: {
+                    "none": "",
                     "title": "Title"
                 },
             },
