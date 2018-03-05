@@ -125,7 +125,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
                 /** @var  $metaBundle MetaBundle */
                 foreach ($metaBundles as $metaBundle) {
                     if (in_array($metaBundle->sourceSiteId, $groupSiteIds)) {
-                        $sitemapUrl = Seomatic::$plugin->sitemaps->sitemapUrlForSection(
+                        $sitemapUrl = Seomatic::$plugin->sitemaps->sitemapUrlForBundle(
                             $metaBundle->sourceBundleType,
                             $metaBundle->sourceHandle,
                             $metaBundle->sourceSiteId

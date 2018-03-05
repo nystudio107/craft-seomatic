@@ -316,33 +316,22 @@ class MetaBundles extends Component
         $metaBundleInvalidated = false;
         if ($element) {
             // Invalidate sitemap caches after an existing element is saved
-            list($sourceId, $siteId) = $this->getMetaSourceIdFromElement($element);
+            list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
+                = $this->getMetaSourceFromElement($element);
             if ($sourceId) {
                 Craft::info(
                     'Invalidating meta bundle: '
                     .$element->uri
                     .'/'
-                    .$siteId,
+                    .$sourceSiteId,
                     __METHOD__
                 );
                 if (!$isNew) {
                     $sourceType = '';
                     $metaBundleInvalidated = true;
-                    Seomatic::$plugin->metaContainers->invalidateContainerCacheByPath($element->uri, $siteId);
-                    switch (get_class($element)) {
-                        case Entry::class:
-                            /** @var  $element Entry */
-                            $sourceType = self::SECTION_META_BUNDLE;
-                            break;
-
-                        case Category::class:
-                            /** @var  $element Category */
-                            $sourceType = self::CATEGORYGROUP_META_BUNDLE;
-                            break;
-                        // @TODO: handle commerce products
-                    }
+                    Seomatic::$plugin->metaContainers->invalidateContainerCacheByPath($element->uri, $sourceSiteId);
                     // Invalidate the sitemap cache
-                    $metaBundle = $this->getMetaBundleBySourceId($sourceType, $sourceId, $siteId);
+                    $metaBundle = $this->getMetaBundleBySourceId($sourceType, $sourceId, $sourceSiteId);
                     if ($metaBundle) {
                         if ($element) {
                             $dateUpdated = $element->dateUpdated ?? $element->dateCreated;
@@ -351,7 +340,7 @@ class MetaBundles extends Component
                         }
                         $metaBundle->sourceDateUpdated = $dateUpdated;
                         // Update the meta bundle data
-                        $this->updateMetaBundle($metaBundle, $siteId);
+                        $this->updateMetaBundle($metaBundle, $sourceSiteId);
                         if ($metaBundle) {
                             Seomatic::$plugin->sitemaps->invalidateSitemapCache(
                                 $metaBundle->sourceHandle,
@@ -442,27 +431,31 @@ class MetaBundles extends Component
      *
      * @return array
      */
-    public function getMetaSourceIdFromElement(Element $element): array
+    public function getMetaSourceFromElement(Element $element): array
     {
         $sourceId = 0;
-        $siteId = 0;
+        $sourceSiteId = 0;
+        $sourceBundleType = '';
+        $sourceHandle = '';
         // See if this is a section we are tracking
         switch (get_class($element)) {
             case Entry::class:
                 /** @var  $element Entry */
                 $sourceId = $element->sectionId;
-                $siteId = $element->siteId;
+                $sourceSiteId = $element->siteId;
+                $sourceBundleType = self::SECTION_META_BUNDLE;
                 break;
 
             case Category::class:
                 /** @var  $element Category */
                 $sourceId = $element->groupId;
-                $siteId = $element->siteId;
+                $sourceSiteId = $element->siteId;
+                $sourceBundleType = self::CATEGORYGROUP_META_BUNDLE;
                 break;
             // @TODO: handle commerce products
         }
 
-        return [$sourceId, $siteId];
+        return [$sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId];
     }
 
     /**

@@ -4,14 +4,14 @@
 <div class="flex">
     <div class="flex-grow"></div>
     <a href="{{ seomatic.helper.sitemapIndexForSiteId(currentSiteId) }}" class="btn livepreviewbtn" target="_blank">{{ 'View Sitemap Index'|t("seomatic") }}</a>
-    <a href="{{ seomatic.helper.sitemapUrlForSection(currentSourceBundleType, currentSourceHandle, currentSiteId) }}" class="btn livepreviewbtn" target="_blank">{{ 'View Section Sitemap'|t("seomatic") }}</a>
+    <a href="{{ seomatic.helper.sitemapUrlForBundle(currentSourceBundleType, currentSourceHandle, currentSiteId) }}" class="btn livepreviewbtn" target="_blank">{{ "View #{currentSourceBundleType |capitalize} Sitemap"|t("seomatic") }}</a>
 </div>
 
 {% namespace "sitemap" %}
 
     {{ forms.lightswitchField({
         label: "Sitemap Enabled" |t("seomatic"),
-        instructions: "Whether URLs in this section should be included in the sitemap" |t("seomatic"),
+        instructions: "Whether URLs in this #{currentSourceBundleType} should be included in the sitemap" |t("seomatic"),
         id: "sitemapUrls",
         name: "sitemapUrls",
         on: sitemap.sitemapUrls,
@@ -146,3 +146,10 @@
     }) }}
 
 {% endnamespace %}
+
+{% include "seomatic/_includes/footer-message.twig" with {
+    message: "Sitemap Indexes are automatically submitted to search engines whenever a new Section/Category Group is added."
+} %}
+{% include "seomatic/_includes/footer-message.twig" with {
+    message: "#{currentSourceBundleType |capitalize} Sitemaps are automatically submitted to search engines whenever a new Element in that Section/Category Group is added."
+} %}

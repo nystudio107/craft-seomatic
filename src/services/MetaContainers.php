@@ -456,7 +456,8 @@ class MetaContainers extends Component
                     break;
                 // @todo handle commerce products
             }
-            list($sourceId, $sourceSiteId) = Seomatic::$plugin->metaBundles->getMetaSourceIdFromElement($element);
+            list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
+                = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
             $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
                 $sourceType,
                 $sourceId,

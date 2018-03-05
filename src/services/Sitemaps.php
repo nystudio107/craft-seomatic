@@ -20,6 +20,7 @@ use nystudio107\seomatic\models\SitemapTemplate;
 
 use Craft;
 use craft\base\Component;
+use craft\base\ElementInterface;
 use craft\events\RegisterUrlRulesEvent;
 use craft\helpers\UrlHelper;
 use craft\web\UrlManager;
@@ -38,9 +39,9 @@ class Sitemaps extends Component implements SitemapInterface
     // Constants
     // =========================================================================
 
-    const SEOMATIC_SITEMAPINDEX_CONTAINER = Seomatic::SEOMATIC_HANDLE . SitemapIndexTemplate::TEMPLATE_TYPE;
+    const SEOMATIC_SITEMAPINDEX_CONTAINER = Seomatic::SEOMATIC_HANDLE.SitemapIndexTemplate::TEMPLATE_TYPE;
 
-    const SEOMATIC_SITEMAP_CONTAINER = Seomatic::SEOMATIC_HANDLE . SitemapTemplate::TEMPLATE_TYPE;
+    const SEOMATIC_SITEMAP_CONTAINER = Seomatic::SEOMATIC_HANDLE.SitemapTemplate::TEMPLATE_TYPE;
 
     const SEARCH_ENGINE_SUBMISSION_URLS = [
         'google' => 'http://www.google.com/webmasters/sitemaps/ping?sitemap=',
@@ -107,13 +108,13 @@ class Sitemaps extends Component implements SitemapInterface
         $groupId = $groups[0]->id;
         $route =
             Seomatic::$plugin->handle
-            . '/'
-            . 'sitemap'
-            . '/'
-            . 'sitemap-index';
+            .'/'
+            .'sitemap'
+            .'/'
+            .'sitemap-index';
         $rules['sitemap.xml'] = [
-            'route' => $route,
-            'defaults' => ['groupId' => $groupId]
+            'route'    => $route,
+            'defaults' => ['groupId' => $groupId],
         ];
         foreach ($this->sitemapTemplateContainer->data as $sitemapTemplate) {
             /** @var $sitemapTemplate FrontendTemplate */
@@ -149,26 +150,66 @@ class Sitemaps extends Component implements SitemapInterface
      */
     public function submitSitemapIndex()
     {
-        // Submit the sitemap to each search engine
-        foreach ($this::SEARCH_ENGINE_SUBMISSION_URLS as &$url) {
-            $groups = Craft::$app->getSites()->getAllGroups();
-            foreach ($groups as $group) {
-                $siteId = $group->getSiteIds()[0];
-                $submissionUrl = $url . UrlHelper::siteUrl('sitemaps/'.$group->id.'/sitemap.xml', null, null, $siteId);
-                // create new guzzle client
-                $guzzleClient = Craft::createGuzzleClient(['timeout' => 120, 'connect_timeout' => 120]);
-                // Submit the sitemap index to each search engine
-                try {
-                    $guzzleClient->post($submissionUrl);
-                    Craft::info(
-                        'Sitemap index submitted to: ' . $submissionUrl,
-                        __METHOD__
-                    );
-                } catch (\Exception $e) {
-                    Craft::error(
-                        'Error submitting sitemap index to: ' . $submissionUrl . ' - ' . $e->getMessage(),
-                        __METHOD__
-                    );
+        if (Seomatic::$settings->environment == 'live') {
+            // Submit the sitemap to each search engine
+            foreach ($this::SEARCH_ENGINE_SUBMISSION_URLS as &$url) {
+                $groups = Craft::$app->getSites()->getAllGroups();
+                foreach ($groups as $group) {
+                    $siteId = $group->getSiteIds()[0];
+                    $sitemapIndexUrl = $this->sitemapIndexUrlForSiteId($siteId);
+                    if (!empty($sitemapIndexUrl)) {
+                        $submissionUrl = $url.$sitemapIndexUrl;
+                        // create new guzzle client
+                        $guzzleClient = Craft::createGuzzleClient(['timeout' => 120, 'connect_timeout' => 120]);
+                        // Submit the sitemap index to each search engine
+                        try {
+                            $guzzleClient->post($submissionUrl);
+                            Craft::info(
+                                'Sitemap index submitted to: '.$submissionUrl,
+                                __METHOD__
+                            );
+                        } catch (\Exception $e) {
+                            Craft::error(
+                                'Error submitting sitemap index to: '.$submissionUrl.' - '.$e->getMessage(),
+                                __METHOD__
+                            );
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Submit the bundle sitemap to the search engine services
+     *
+     * @param ElementInterface $element
+     */
+    public function submitSitemapForElement(ElementInterface $element)
+    {
+        if (Seomatic::$settings->environment == 'live') {
+            list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
+                = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
+            // Submit the sitemap to each search engine
+            foreach ($this::SEARCH_ENGINE_SUBMISSION_URLS as &$url) {
+                $sitemapUrl = $this->sitemapUrlForBundle($sourceBundleType, $sourceHandle, $sourceSiteId);
+                if (!empty($sitemapUrl)) {
+                    $submissionUrl = $url.$sitemapUrl;
+                    // create new guzzle client
+                    $guzzleClient = Craft::createGuzzleClient(['timeout' => 120, 'connect_timeout' => 120]);
+                    // Submit the sitemap index to each search engine
+                    try {
+                        $guzzleClient->post($submissionUrl);
+                        Craft::info(
+                            'Sitemap index submitted to: '.$submissionUrl,
+                            __METHOD__
+                        );
+                    } catch (\Exception $e) {
+                        Craft::error(
+                            'Error submitting sitemap index to: '.$submissionUrl.' - '.$e->getMessage(),
+                            __METHOD__
+                        );
+                    }
                 }
             }
         }
@@ -204,13 +245,13 @@ class Sitemaps extends Component implements SitemapInterface
     }
 
     /**
-     * @param string   $sourceType
+     * @param string   $sourceBundleType
      * @param string   $sourceHandle
      * @param int|null $siteId
      *
      * @return string
      */
-    public function sitemapUrlForSection(string $sourceType, string $sourceHandle, int $siteId = null): string
+    public function sitemapUrlForBundle(string $sourceBundleType, string $sourceHandle, int $siteId = null): string
     {
         $url = '';
         $sites = Craft::$app->getSites();
@@ -218,7 +259,11 @@ class Sitemaps extends Component implements SitemapInterface
             $siteId = $sites->currentSite->id;
         }
         $site = $sites->getSiteById($siteId);
-        $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle($sourceType, $sourceHandle, $siteId);
+        $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
+            $sourceBundleType,
+            $sourceHandle,
+            $siteId
+        );
         if ($site && $metaBundle) {
             try {
                 $url = UrlHelper::siteUrl(
@@ -261,9 +306,9 @@ class Sitemaps extends Component implements SitemapInterface
     public function invalidateSitemapCache(string $handle, int $siteId)
     {
         $cache = Craft::$app->getCache();
-        TagDependency::invalidate($cache, SitemapTemplate::SITEMAP_CACHE_TAG . $handle . $siteId);
+        TagDependency::invalidate($cache, SitemapTemplate::SITEMAP_CACHE_TAG.$handle.$siteId);
         Craft::info(
-            'Sitemap cache cleared: ' . $handle,
+            'Sitemap cache cleared: '.$handle,
             __METHOD__
         );
     }

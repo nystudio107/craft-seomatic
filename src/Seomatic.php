@@ -293,6 +293,7 @@ class Seomatic extends Plugin
                 // Create the meta bundles for this section if it's new
                 if ($event->isNew) {
                     Seomatic::$plugin->metaBundles->createContentMetaBundleForSection($event->section);
+                    Seomatic::$plugin->sitemaps->submitSitemapIndex();
                 }
             }
         );
@@ -334,6 +335,7 @@ class Seomatic extends Plugin
                 // Create the meta bundles for this category if it's new
                 if ($event->isNew) {
                     Seomatic::$plugin->metaBundles->createContentMetaBundleForCategoryGroup($event->categoryGroup);
+                    Seomatic::$plugin->sitemaps->submitSitemapIndex();
                 }
             }
         );
@@ -373,6 +375,9 @@ class Seomatic extends Plugin
                     $element,
                     $event->isNew
                 );
+                if ($event->isNew) {
+                    Seomatic::$plugin->sitemaps->submitSitemapForElement($element);
+                }
             }
         );
         // Handler: Elements::EVENT_AFTER_DELETE_ELEMENT
