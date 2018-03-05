@@ -157,6 +157,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                         $elements = Entry::find()
                             ->section($metaBundle->sourceHandle)
                             ->siteId($metaBundle->sourceSiteId)
+                            ->enabledForSite(true)
                             ->limit($metaBundle->metaSitemapVars->sitemapLimit)
                             ->all();
                         break;
@@ -164,6 +165,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                         $elements = Category::find()
                             ->siteId($metaBundle->sourceSiteId)
                             ->limit($metaBundle->metaSitemapVars->sitemapLimit)
+                            ->enabledForSite(true)
                             ->all();
                         break;
                     // @todo: handle Commerce products
@@ -200,6 +202,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                                             ->section($metaBundle->sourceHandle)
                                             ->id($element->id)
                                             ->siteId($altSiteSettings['siteId'])
+                                            ->enabledForSite(true)
                                             ->limit(1)
                                             ->one();
                                         break;
@@ -209,6 +212,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                                             ->id($element->id)
                                             ->siteId($altSiteSettings['siteId'])
                                             ->limit(1)
+                                            ->enabledForSite(true)
                                             ->one();
                                         break;
                                     // @todo: handle Commerce products
@@ -299,80 +303,6 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
     }
 
     /**
-     * @param Asset      $asset
-     * @param MetaBundle $metaBundle
-     * @param array      $lines
-     */
-    protected function assetSitemapItem(Asset $asset, MetaBundle $metaBundle, array &$lines)
-    {
-        switch ($asset->kind) {
-            case 'image':
-                $lines[] = '    <image:image>';
-                $lines[] = '      <image:loc>';
-                $lines[] = '        '.$asset->getUrl();
-                $lines[] = '      </image:loc>';
-                // Handle the dynamic field => property mappings
-                foreach ($metaBundle->metaSitemapVars->sitemapImageFieldMap as $row) {
-                    $fieldName = $row['field'] ?? '';
-                    $propName = $row['property'] ?? '';
-                    if (!empty($asset[$fieldName]) && !empty($propName)) {
-                        $lines[] = '      <image:'.$propName.'>';
-                        $lines[] = '        '.$asset[$fieldName];
-                        $lines[] = '      </image:'.$propName.'>';
-                    }
-                }
-                $lines[] = '    </image:image>';
-                break;
-
-            case 'video':
-                $lines[] = '    <video:video>';
-                $lines[] = '      <video:content_loc>';
-                $lines[] = '        '.$asset->getUrl();
-                $lines[] = '      </video:content_loc>';
-                $lines[] = '      <video:thumbnail_loc>';
-                $lines[] = '        '.$asset->getThumbUrl(320);
-                $lines[] = '      </video:thumbnail_loc>';
-                // Handle the dynamic field => property mappings
-                foreach ($metaBundle->metaSitemapVars->sitemapVideoFieldMap as $row) {
-                    $fieldName = $row['field'] ?? '';
-                    $propName = $row['property'] ?? '';
-                    if (!empty($asset[$fieldName]) && !empty($propName)) {
-                        $lines[] = '      <video:'.$propName.'>';
-                        $lines[] = '        '.$asset[$fieldName];
-                        $lines[] = '      </video:'.$propName.'>';
-                    }
-                }
-                $lines[] = '    </video:video>';
-                break;
-        }
-    }
-
-    /**
-     * @param Asset      $asset
-     * @param MetaBundle $metaBundle
-     * @param array      $lines
-     */
-    protected function assetFilesSitemapLink(Asset $asset, MetaBundle $metaBundle, array &$lines)
-    {
-        if (in_array($asset->kind, $this::FILE_TYPES)) {
-            $lines[] = '  <url>';
-            $lines[] = '    <loc>';
-            $lines[] = '      '.$asset->getUrl();
-            $lines[] = '    </loc>';
-            $lines[] = '    <lastmod>';
-            $lines[] = '      '.$asset->dateUpdated->format(\DateTime::W3C);
-            $lines[] = '    </lastmod>';
-            $lines[] = '    <changefreq>';
-            $lines[] = '      '.$metaBundle->metaSitemapVars->sitemapChangeFreq;
-            $lines[] = '    </changefreq>';
-            $lines[] = '    <priority>';
-            $lines[] = '      '.$metaBundle->metaSitemapVars->sitemapPriority;
-            $lines[] = '    </priority>';
-            $lines[] = '  </url>';
-        }
-    }
-
-    /**
      * Invalidate a sitemap cache
      *
      * @param string $handle
@@ -386,5 +316,83 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             'Sitemap cache cleared: '.$handle,
             __METHOD__
         );
+    }
+
+    /**
+     * @param Asset      $asset
+     * @param MetaBundle $metaBundle
+     * @param array      $lines
+     */
+    protected function assetSitemapItem(Asset $asset, MetaBundle $metaBundle, array &$lines)
+    {
+        if ($asset->enabledForSite) {
+            switch ($asset->kind) {
+                case 'image':
+                    $lines[] = '    <image:image>';
+                    $lines[] = '      <image:loc>';
+                    $lines[] = '        '.$asset->getUrl();
+                    $lines[] = '      </image:loc>';
+                    // Handle the dynamic field => property mappings
+                    foreach ($metaBundle->metaSitemapVars->sitemapImageFieldMap as $row) {
+                        $fieldName = $row['field'] ?? '';
+                        $propName = $row['property'] ?? '';
+                        if (!empty($asset[$fieldName]) && !empty($propName)) {
+                            $lines[] = '      <image:'.$propName.'>';
+                            $lines[] = '        '.$asset[$fieldName];
+                            $lines[] = '      </image:'.$propName.'>';
+                        }
+                    }
+                    $lines[] = '    </image:image>';
+                    break;
+
+                case 'video':
+                    $lines[] = '    <video:video>';
+                    $lines[] = '      <video:content_loc>';
+                    $lines[] = '        '.$asset->getUrl();
+                    $lines[] = '      </video:content_loc>';
+                    $lines[] = '      <video:thumbnail_loc>';
+                    $lines[] = '        '.$asset->getThumbUrl(320);
+                    $lines[] = '      </video:thumbnail_loc>';
+                    // Handle the dynamic field => property mappings
+                    foreach ($metaBundle->metaSitemapVars->sitemapVideoFieldMap as $row) {
+                        $fieldName = $row['field'] ?? '';
+                        $propName = $row['property'] ?? '';
+                        if (!empty($asset[$fieldName]) && !empty($propName)) {
+                            $lines[] = '      <video:'.$propName.'>';
+                            $lines[] = '        '.$asset[$fieldName];
+                            $lines[] = '      </video:'.$propName.'>';
+                        }
+                    }
+                    $lines[] = '    </video:video>';
+                    break;
+            }
+        }
+    }
+
+    /**
+     * @param Asset      $asset
+     * @param MetaBundle $metaBundle
+     * @param array      $lines
+     */
+    protected function assetFilesSitemapLink(Asset $asset, MetaBundle $metaBundle, array &$lines)
+    {
+        if ($asset->enabledForSite) {
+            if (in_array($asset->kind, $this::FILE_TYPES)) {
+                $lines[] = '  <url>';
+                $lines[] = '    <loc>';
+                $lines[] = '      '.$asset->getUrl();
+                $lines[] = '    </loc>';
+                $lines[] = '    <lastmod>';
+                $lines[] = '      '.$asset->dateUpdated->format(\DateTime::W3C);
+                $lines[] = '    </lastmod>';
+                $lines[] = '    <changefreq>';
+                $lines[] = '      '.$metaBundle->metaSitemapVars->sitemapChangeFreq;
+                $lines[] = '    </changefreq>';
+                $lines[] = '    <priority>';
+                $lines[] = '      '.$metaBundle->metaSitemapVars->sitemapPriority;
+                $lines[] = '    </priority>';
+                $lines[] = '  </url>';
+            }
+        }
     }
 }
