@@ -450,7 +450,7 @@ class Seomatic extends Plugin
                     __METHOD__
                 );
                 // The page is done rendering, include our meta containers
-                if (Seomatic::$settings->renderEnabled) {
+                if (Seomatic::$settings->renderEnabled && Seomatic::$seomaticVariable) {
                     Seomatic::$plugin->metaContainers->includeMetaContainers();
                 }
             }
