@@ -80,5 +80,8 @@
             {% include "seomatic/settings/site/_includes/tab-tracking.twig" %}
         </div>
     {% endif %}
-
+    
+    {% include "seomatic/_includes/footer-message.twig" with {
+        message: "Any text fields can include single-bracket tags that output Seomatic properties, such as `{seomatic.meta.seoTitle}`."
+    } %}
 {% endblock %}

@@ -86,5 +86,18 @@
             {% include "seomatic/settings/_includes/tab-sitemap.twig" %}
         </div>
     {% endif %}
-
+    
+    {% include "seomatic/_includes/footer-message.twig" with {
+        message: "Any text fields can include single-bracket tags that output Seomatic properties, such as `{seomatic.meta.seoTitle}`."
+    } %}
+    {% switch currentSourceBundleType %}
+        {% case "section" %}
+            {% include "seomatic/_includes/footer-message.twig" with {
+                message: "Any text fields can include single-bracket tags that output Entry properties, such as `{entry.title}`."
+            } %}
+        {% case "category" %}
+            {% include "seomatic/_includes/footer-message.twig" with {
+                message: "Any text fields can include single-bracket tags that output Category properties, such as `{category.title}`."
+            } %}
+    {% endswitch %}
 {% endblock %}
