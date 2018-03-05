@@ -17,8 +17,8 @@
 
 return [
     '*' => [
-        'seoTitleSource'                => 'fromCustom',
-        'seoTitleField'                 => '',
+        'seoTitleSource'                => 'fromField',
+        'seoTitleField'                 => 'title',
         'seoDescriptionSource'          => 'fromCustom',
         'seoDescriptionField'           => '',
         'seoKeywordsSource'             => 'fromCustom',

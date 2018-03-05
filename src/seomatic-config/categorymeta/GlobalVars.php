@@ -19,10 +19,10 @@ return [
     '*' => [
         'seoTitle'                => '{category.title}',
         'siteNamePosition'        => 'before',
-        'seoDescription'          => 'Category SEO Description',
-        'seoKeywords'             => 'Category SEO Keywords',
+        'seoDescription'          => '',
+        'seoKeywords'             => '',
         'seoImage'                => '',
-        'seoImageDescription'     => 'Category SEO Image Description',
+        'seoImageDescription'     => '',
         'canonicalUrl'            => '{category.url}',
         'robots'                  => 'all',
         'ogType'                  => 'website',

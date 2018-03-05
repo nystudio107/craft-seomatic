@@ -17,12 +17,12 @@
 
 return [
     '*' => [
-        'seoTitle'                => 'Global SEO Title',
+        'seoTitle'                => '',
         'siteNamePosition'        => 'before',
-        'seoDescription'          => 'Global SEO Description',
-        'seoKeywords'             => 'Global SEO Keywords',
-        'seoImage'                => 'Global SEO Image',
-        'seoImageDescription'     => 'Global SEO Image Description',
+        'seoDescription'          => '',
+        'seoKeywords'             => '',
+        'seoImage'                => '',
+        'seoImageDescription'     => '',
         'canonicalUrl'            => '{{ craft.app.request.pathInfo }}',
         'robots'                  => 'all',
         'ogType'                  => 'website',
