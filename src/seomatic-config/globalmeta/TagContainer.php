@@ -38,7 +38,7 @@ return [
 
             'keywords'    => [
                 'charset'   => '',
-                'content'   => '{seomatic.meta.seoTitle}',
+                'content'   => '{seomatic.meta.seoKeywords}',
                 'httpEquiv' => '',
                 'name'      => 'keywords',
             ],
