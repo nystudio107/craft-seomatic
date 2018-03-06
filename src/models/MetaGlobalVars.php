@@ -193,6 +193,7 @@ class MetaGlobalVars extends VarsModel
                     'seoTitle',
                     'siteNamePosition',
                     'seoDescription',
+                    'seoKeywords',
                     'seoImage',
                     'seoImageDescription',
                     'canonicalUrl',
