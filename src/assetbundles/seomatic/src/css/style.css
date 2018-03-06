@@ -10,6 +10,10 @@ span.content-seo-checkmark {
     color: darkgreen;
 }
 
+span.content-seo-xmark {
+    color: darkred;
+}
+
 .content-icon {
     height: 24px;
     width: auto;
@@ -34,7 +38,6 @@ div.seomatic-devmode-wrapper {
 div.seomatic-devmode {
     width: 100%;
     height: 4px;
-    background: url('/admin/resources/images/dev-mode.svg') repeat-x 15px 0;
     cursor: help;
 }
 
@@ -118,7 +121,7 @@ div.preview-modal-inner {
 
 div.preview-column {
     float: none;
-    width: 100%%;
+    width: 100%;
 }
 
 div.seomatic-container {

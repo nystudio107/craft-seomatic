@@ -1,3 +1,6 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{# @var metaBundle \nystudio107\seomatic\models\MetaBundle #}
+
 {% requirePermission "seomatic:content-meta" %}
 
 {% extends "_layouts/cp" %}
@@ -12,20 +15,14 @@
 
     <table class="data">
         <thead class="sections first">
-        {#
-        <tr>
-            <th colspan="6">
-                <h1>{{ "Content"|t }}</h1>
-            </th>
-        </tr>
-        #}
         <tr>
             <th>{{ "Name"|t }}</th>
             <th class="thin">{{ "Entries"|t }}</th>
             <th>{{ "Type"|t }}</th>
-            <th>{{ "Custom SEO"|t }}</th>
-            <th>{{ "Setup"|t }}</th>
-            <th class="thin"></th>
+            <th>{{ "Title"|t }}</th>
+            <th>{{ "Description"|t }}</th>
+            <th>{{ "Image"|t }}</th>
+            <th>{{ "Sitemap"|t }}</th>
             <th class="thin"></th>
         </tr>
         </thead>
@@ -34,82 +31,75 @@
         {% for metaBundle in metaBundles %}
             {% set num_entries = 0 %}
             <tr>
+                
+                {############### Name ###############}
+                
                 <td>
                     {% set sourcePrefix =  '' %}
-                    {% switch metaBundle.sourceType %}
-                        {% case 'channel' %}
-                            {% set sourcePrefix = 'settings/sections/' %}
-                        {% case 'structure' %}
-                            {% set sourcePrefix = 'settings/sections/' %}
-                        {% case 'single' %}
+                    {% switch metaBundle.sourceBundleType %}
+                        {% case 'section' %}
                             {% set sourcePrefix = 'settings/sections/' %}
                         {% case 'category' %}
                             {% set sourcePrefix =  'settings/categories/' %}
                     {% endswitch %}
-                    <a href="{{ url(sourcePrefix ~ metaBundle.sourceId) }}">{{ metaBundle.sourceName }}</a>
+                    <a href="{{ cpUrl("seomatic/edit-content/#{metaBundle.sourceBundleType}/#{metaBundle.sourceHandle}") }}">{{ metaBundle.sourceName }}</a>
+                    <a class="go" href="{{ url(sourcePrefix ~ metaBundle.sourceId) }}"></a>
                 </td>
+                
+                {############### Entries ###############}
+                
                 <td>
                     {% set numEntries = craft.entries({ sectionId: metaBundle.sourceId }).count() %}
                     {{ numEntries }}
                 </td>
+
+                {############### Type ###############}
+
                 <td>
                     {{ metaBundle.sourceType }}
                 </td>
+    
+                {############### SEO Title ###############}
+    
                 <td>
-                    {# -- Meta Tags
-                    {% set total = 0 %}
-                    {% for metaTagContainer in metaBundle.metaTagContainer %}
-                        {% set total = total + (metaTagContainer.data |length) %}
-                    {% endfor %}
-                    <div title="{{ total }} Meta Tags" class="content-icon-wrapper">
-                        <img src="{{ baseAssetUrl ~ '/img/tags-icon.svg' }}"
-                                class="content-icon {% if total > 0 %}content-seo-enabled{% else %}content-seo-disabled{% endif %}">
-                    </div>
-                     -- #}
-                    {# -- Meta Links
-                    {% set total = 0 %}
-                    {% for metaLinkContainer in metaBundle.metaLinkContainer %}
-                        {% set total = total + (metaLinkContainer.data |length) %}
-                    {% endfor %}
-                    <div title="{{ total }} Link Tags" class="content-icon-wrapper">
-                        <img src="{{ baseAssetUrl ~ '/img/link-icon.svg' }}"
-                                class="content-icon {% if total > 0 %}content-seo-enabled{% else %}content-seo-disabled{% endif %}">
-                    </div>
-                     -- #}
-                    {# -- Meta Scripts
-                    {% set total = 0 %}
-                    {% for metaScriptContainer in metaBundle.metaScriptContainer %}
-                        {% set total = total + (metaScriptContainer.data |length) %}
-                    {% endfor %}
-                    <div title="{{ total }} Script Tags" class="content-icon-wrapper">
-                        <img src="{{ baseAssetUrl ~ '/img/script-icon.svg' }}"
-                                class="content-icon {% if total > 0 %}content-seo-enabled{% else %}content-seo-disabled{% endif %}">
-                    </div>
-                     -- #}
-                    {# -- Meta Json Ld
-                    {% set total = 0 %}
-                    {% for metaJsonLdContainer in metaBundle.metaJsonLdContainer %}
-                        {% set total = total + (metaJsonLdContainer.data |length) %}
-                    {% endfor %}
-                    <div title="{{ total }} Structured Data Objects" class="content-icon-wrapper">
-                        <img src="{{ baseAssetUrl ~ '/img/structured-data-icon.svg' }}"
-                                class="content-icon {% if total > 0 %}content-seo-enabled{% else %}content-seo-disabled{% endif %}">
-                    </div>
-                     -- #}
-                    {# -- Sitemap -- #}
-                    <div title="{% if metaBundle.metaSitemapVars.sitemapUrls %}Sitemap Enabled{% else %}Sitemap Disabled{% endif %}" class="content-icon-wrapper">
-                        <img src="{{ baseAssetUrl ~ '/img/sitemap-icon.svg' }}"
-                                class="content-icon {% if metaBundle.metaSitemapVars.sitemapUrls %}content-seo-enabled{% else %}content-seo-disabled{% endif %}">
-                    </div>
+                    {% if metaBundle.metaGlobalVars.seoTitle |length %}
+                        <span class="content-seo-checkmark">&check;</span>
+                    {% else %}
+                        <span class="content-seo-xmark">&cross;</span>
+                    {% endif %}
                 </td>
+    
+                {############### SEO Description ###############}
+    
                 <td>
-                    <span class="content-seo-checkmark">&check;</span>
+                    {% if metaBundle.metaGlobalVars.seoDescription |length %}
+                        <span class="content-seo-checkmark">&check;</span>
+                    {% else %}
+                        <span class="content-seo-xmark">&cross;</span>
+                    {% endif %}
                 </td>
+    
+                {############### SEO Image ###############}
+    
                 <td>
-                    <a class="btn" href="{{ cpUrl("seomatic/edit-content/#{metaBundle.sourceBundleType}/#{metaBundle.sourceHandle}") }}">Edit…</a>
+                    {% if metaBundle.metaGlobalVars.seoImage |length %}
+                        <span class="content-seo-checkmark">&check;</span>
+                    {% else %}
+                        <span class="content-seo-xmark">&cross;</span>
+                    {% endif %}
                 </td>
+    
+                {############### SEO Description ###############}
+    
                 <td>
+                    {% if metaBundle.metaSitemapVars.sitemapUrls %}
+                        <span class="content-seo-checkmark">&check;</span>
+                    {% else %}
+                        <span class="content-seo-xmark">&cross;</span>
+                    {% endif %}
                 </td>
+
+
             </tr>
         {% endfor %}
         </tbody>
