@@ -500,6 +500,28 @@ class MetaBundles extends Component
         return $metaBundles;
     }
 
+    public function getContentMetaBundlesForSiteId(int $sourceSiteId): array
+    {
+        $metaBundles = [];
+        $metaBundleArrays = (new Query())
+            ->from(['{{%seomatic_metabundles}}'])
+            ->where([
+                'sourceSiteId'     => $sourceSiteId,
+            ])
+            ->andWhere(['!=', 'sourceBundleType', self::GLOBAL_META_BUNDLE])
+            ->all();
+        /** @var  $metaBundleArray array */
+        foreach ($metaBundleArrays as $metaBundleArray) {
+            $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
+            $metaBundle = MetaBundle::create($metaBundleArray);
+            if ($metaBundle) {
+                $metaBundles[] = $metaBundle;
+            }
+        }
+
+        return $metaBundles;
+    }
+
     /**
      * Create all of the content meta bundles
      */

@@ -576,6 +576,8 @@ class Seomatic extends Plugin
                 'seomatic/settings/global',
             'seomatic/content' =>
                 'seomatic/settings/content',
+            'seomatic/content/<siteHandle:{handle}>' =>
+                'seomatic/settings/content',
             'seomatic/edit-content/<sourceBundleType:{handle}>/<sourceHandle:{handle}>' =>
                 'seomatic/settings/edit-content',
             'seomatic/edit-content/<sourceBundleType:{handle}>/<sourceHandle:{handle}>/<siteHandle:{handle}>' =>

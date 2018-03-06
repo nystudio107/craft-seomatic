@@ -218,12 +218,24 @@ class SettingsController extends Controller
     /**
      * Content settings
      *
-     * @param array $variables
+     * @param string|null $siteHandle
      *
      * @return Response The rendered result
+     * @throws NotFoundHttpException
      */
-    public function actionContent(array $variables = []): Response
+    public function actionContent(string $siteHandle = null): Response
     {
+        // Get the site to edit
+        if ($siteHandle !== null) {
+            $site = Craft::$app->getSites()->getSiteByHandle($siteHandle);
+            if (!$site) {
+                throw new NotFoundHttpException('Invalid site handle: '.$siteHandle);
+            }
+            $siteId = $site->id;
+        } else {
+            $siteId = Craft::$app->getSites()->currentSite->id;
+        }
+
         $pluginName = Seomatic::$settings->pluginName;
         $templateTitle = Craft::t('seomatic', 'Content SEO');
         // Asset bundle
@@ -250,8 +262,39 @@ class SettingsController extends Controller
                 'url'   => UrlHelper::cpUrl('seomatic/content'),
             ],
         ];
+        // Enabled sites
+        $sites = Craft::$app->getSites();
+        $variables['currentSiteId'] = empty($siteId) ? Craft::$app->getSites()->currentSite->id : $siteId;
+        $variables['currentSiteHandle'] = empty($siteHandle)
+            ? Craft::$app->getSites()->currentSite->handle
+            : $siteHandle;
+        if (Craft::$app->getIsMultiSite()) {
+            // Set defaults based on the section settings
+            $variables['enabledSiteIds'] = [];
+            $variables['siteIds'] = [];
+
+            /** @var Site $site */
+            foreach ($sites->getAllSites() as $site) {
+                $variables['enabledSiteIds'][] = $site->id;
+                $variables['siteIds'][] = $site->id;
+            }
+        }
+
+        // Page title w/ revision label
+        $variables['showSites'] = (
+            Craft::$app->getIsMultiSite() &&
+            count($variables['enabledSiteIds'])
+        );
+
+        if ($variables['showSites']) {
+            $variables['sitesMenuLabel'] = Craft::t('site', $sites->getSiteById($variables['currentSiteId'])->name);
+        } else {
+            $variables['sitesMenuLabel'] = '';
+        }
+        $variables['controllerHandle'] = 'content';
+
         $variables['selectedSubnavItem'] = 'content';
-        $variables['metaBundles'] = Seomatic::$plugin->metaBundles->getContentMetaBundles(false);
+        $variables['metaBundles'] = Seomatic::$plugin->metaBundles->getContentMetaBundlesForSiteId($siteId);
 
         // Render the template
         return $this->renderTemplate('seomatic/settings/content/index', $variables);
@@ -647,7 +690,6 @@ class SettingsController extends Controller
         ];
         $variables['selectedSubnavItem'] = 'plugin';
         $variables['settings'] = Seomatic::$settings;
-        $variables['metaBundles'] = Seomatic::$plugin->metaBundles->getContentMetaBundles(false);
 
         // Render the template
         return $this->renderTemplate('seomatic/settings/plugin/_edit', $variables);

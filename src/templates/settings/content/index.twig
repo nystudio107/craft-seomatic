@@ -6,6 +6,10 @@
 {% extends "_layouts/cp" %}
 {% import '_includes/forms' as forms %}
 
+{% block contextMenu %}
+    {% include "seomatic/settings/_includes/sites-menu.twig" %}
+{% endblock %}
+
 {% set content %}
 
     <input type="hidden" name="action" value="seomatic/saveContent" />
@@ -17,12 +21,13 @@
         <thead class="sections first">
         <tr>
             <th>{{ "Name"|t }}</th>
-            <th class="thin">{{ "Entries"|t }}</th>
+            <th class="thin centeralign">{{ "Entries"|t }}</th>
             <th>{{ "Type"|t }}</th>
-            <th>{{ "Title"|t }}</th>
-            <th>{{ "Description"|t }}</th>
-            <th>{{ "Image"|t }}</th>
-            <th>{{ "Sitemap"|t }}</th>
+            <th class="centeralign">{{ "Title"|t }}</th>
+            <th class="centeralign">{{ "Description"|t }}</th>
+            <th class="centeralign">{{ "Image"|t }}</th>
+            <th class="centeralign">{{ "Sitemap"|t }}</th>
+            <th>{{ "Robots"|t }}</th>
             <th class="thin"></th>
         </tr>
         </thead>
@@ -42,13 +47,13 @@
                         {% case 'category' %}
                             {% set sourcePrefix =  'settings/categories/' %}
                     {% endswitch %}
-                    <a href="{{ cpUrl("seomatic/edit-content/#{metaBundle.sourceBundleType}/#{metaBundle.sourceHandle}") }}">{{ metaBundle.sourceName }}</a>
+                    <a href="{{ cpUrl("seomatic/edit-content/#{metaBundle.sourceBundleType}/#{metaBundle.sourceHandle}/#{currentSiteHandle}") }}">{{ metaBundle.sourceName }}</a>
                     <a class="go" href="{{ url(sourcePrefix ~ metaBundle.sourceId) }}"></a>
                 </td>
                 
                 {############### Entries ###############}
-                
-                <td>
+    
+                <td class="centeralign">
                     {% set numEntries = craft.entries({ sectionId: metaBundle.sourceId }).count() %}
                     {{ numEntries }}
                 </td>
@@ -61,7 +66,7 @@
     
                 {############### SEO Title ###############}
     
-                <td>
+                <td class="centeralign">
                     {% if metaBundle.metaGlobalVars.seoTitle |length %}
                         <span class="content-seo-checkmark">&check;</span>
                     {% else %}
@@ -71,7 +76,7 @@
     
                 {############### SEO Description ###############}
     
-                <td>
+                <td class="centeralign">
                     {% if metaBundle.metaGlobalVars.seoDescription |length %}
                         <span class="content-seo-checkmark">&check;</span>
                     {% else %}
@@ -81,7 +86,7 @@
     
                 {############### SEO Image ###############}
     
-                <td>
+                <td class="centeralign">
                     {% if metaBundle.metaGlobalVars.seoImage |length %}
                         <span class="content-seo-checkmark">&check;</span>
                     {% else %}
@@ -89,16 +94,21 @@
                     {% endif %}
                 </td>
     
-                {############### SEO Description ###############}
+                {############### Sitemap ###############}
     
-                <td>
+                <td class="centeralign">
                     {% if metaBundle.metaSitemapVars.sitemapUrls %}
                         <span class="content-seo-checkmark">&check;</span>
                     {% else %}
                         <span class="content-seo-xmark">&cross;</span>
                     {% endif %}
                 </td>
-
+    
+                {############### Robots ###############}
+    
+                <td>
+                    {{ metaBundle.metaGlobalVars.robots }}
+                </td>
 
             </tr>
         {% endfor %}
