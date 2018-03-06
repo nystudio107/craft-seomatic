@@ -1,6 +1,7 @@
 {% set twitterTitleArray = seomatic.tag.get('twitter:title').renderAttributes() %}
 {% set twitterDescriptionArray = seomatic.tag.get('twitter:description').renderAttributes() %}
 {% set twitterImageArray = seomatic.tag.get('twitter:image').renderAttributes() %}
+{% set canonicalArray = seomatic.link.get('canonical').renderAttributes() %}
 
 <div class="preview-column">
     <div class="displaypreview" style="{{ displayPreviewInlineStyles ?? '' }}">
@@ -11,7 +12,7 @@
             {% endif %}
             <div class="TwitterCardsGrid{% if lg %} TwitterCardsGrid-Large{% endif %}">
                 <div class="TwitterCardGrid-col{% if lg %} TwitterCardGrid-col-Large{% endif %}">
-                    <a class="TwitterCard-container{% if lg %} TwitterCard-container-Large{% endif %}" href="{{ seomatic.meta.canonicalUrl }}" target="_blank">
+                    <a class="TwitterCard-container{% if lg %} TwitterCard-container-Large{% endif %}" href="{{ canonicalArray.href ?? siteUrl("/") }}" target="_blank">
                         <div class="TwitterCard-summary-image{% if lg %} TwitterCard-summary-image-Large{% endif %}">
                             <div class="TwitterCard-image-container{% if lg %} TwitterCard-image-container-Large{% endif %}">
                                 <div id="twitter-card-image" class="TwitterCard-image-wrapper{% if lg %} TwitterCard-image-wrapper-Large{% endif %}">

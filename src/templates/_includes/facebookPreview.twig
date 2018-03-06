@@ -1,13 +1,14 @@
 {% set ogTitleArray = seomatic.tag.get('og:title').renderAttributes() %}
 {% set ogDescriptionArray = seomatic.tag.get('og:description').renderAttributes() %}
 {% set ogImageArray = seomatic.tag.get('og:image').renderAttributes() %}
+{% set canonicalArray = seomatic.link.get('canonical').renderAttributes() %}
 
 <div class="preview-column">
     <div class="displaypreview" style="{{ displayPreviewInlineStyles ?? '' }}">
         {% if seomatic.site.facebookAppId |length or seomatic.site.facebookProfileId |length %}
             <div class="Facebook-container">
                 <div class="">
-                    <a href="{{ seomatic.meta.canonicalUrl }}" target="_blank">
+                    <a href="{{ canonicalArray.href ?? siteUrl("/") }}" target="_blank">
                         <div class="Facebook-image-wrap">
                             <div id="facebook-post-image" class="Facebook-post-image" style="width:470px;height:246px;">
                             </div>
@@ -17,7 +18,7 @@
                 <div class="facebook-text-wrap">
                     <div class="Facebook-text-container">
                         <div class="Facebook-headline">
-                            <a class="Facebook-link" href="{{ seomatic.meta.canonicalUrl }}" target="_blank">{{ ogTitleArray.content |raw }}</a>
+                            <a class="Facebook-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" target="_blank">{{ ogTitleArray.content ?? "" |raw }}</a>
                         </div>
                         <div class="Facebook-text">
                             {{ ogDescriptionArray.content ?? "" |raw }}
