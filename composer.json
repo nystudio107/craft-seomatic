@@ -48,13 +48,15 @@
         "class": "nystudio107\\seomatic\\Seomatic",
         "components": {
             "frontendTemplates": "nystudio107\\seomatic\\services\\FrontendTemplates",
+            "helper": "nystudio107\\seomatic\\services\\Helper",
             "jsonLd": "nystudio107\\seomatic\\services\\JsonLd",
             "link": "nystudio107\\seomatic\\services\\Link",
-            "metaContainers": "nystudio107\\seomatic\\services\\MetaContainers",
             "metaBundles": "nystudio107\\seomatic\\services\\MetaBundles",
+            "metaContainers": "nystudio107\\seomatic\\services\\MetaContainers",
             "redirects": "nystudio107\\seomatic\\services\\Redirects",
             "script": "nystudio107\\seomatic\\services\\Script",
             "sitemaps": "nystudio107\\seomatic\\services\\Sitemaps",
+            "template": "nystudio107\\seomatic\\services\\Template",
             "tag": "nystudio107\\seomatic\\services\\Tag",
             "title": "nystudio107\\seomatic\\services\\Title"
         }
