@@ -62,7 +62,8 @@ class Field
     // =========================================================================
 
     /**
-     * Return all of the fields from the $layout that are of the type $fieldClassKey
+     * Return all of the fields from the $layout that are of the type
+     * $fieldClassKey
      *
      * @param string      $fieldClassKey
      * @param FieldLayout $layout
@@ -118,7 +119,8 @@ class Field
     }
 
     /**
-     * Return all of the fields from all Asset Volume layouts of the type $fieldClassKey
+     * Return all of the fields from all Asset Volume layouts of the type
+     * $fieldClassKey
      *
      * @param string $fieldClassKey
      * @param bool   $keysOnly
@@ -148,6 +150,42 @@ class Field
     }
 
     /**
+     * Return all of the fields from all Global Set layouts of the type
+     * $fieldClassKey
+     *
+     * @param string $fieldClassKey
+     * @param bool   $keysOnly
+     *
+     * @return array
+     */
+    public static function fieldsOfTypeFromGlobals(string $fieldClassKey, bool $keysOnly = true): array
+    {
+        $foundFields = [];
+        $globals = Craft::$app->getGlobals()->getAllSets();
+        foreach ($globals as $global) {
+            $layout = $global->getFieldLayout();
+            if ($layout) {
+                $fields = self::fieldsOfTypeFromLayout($fieldClassKey, $layout, $keysOnly);
+                // Prefix the keys with the global set name
+                $prefix = $global->handle;
+                $fields = array_combine(
+                    array_map(function ($key) use ($prefix) {
+                        return $prefix.'.'.$key;
+                    }, array_keys($fields)),
+                    $fields
+                );
+                // Merge with any fields we've already found
+                $foundFields = array_merge(
+                    $foundFields,
+                    $fields
+                );
+            }
+        }
+
+        return $foundFields;
+    }
+
+    /**
      * Return all of the fields from the $sourceBundleType in the $sourceHandle
      * of the type $fieldClassKey
      *
@@ -163,7 +201,7 @@ class Field
         string $sourceHandle,
         string $fieldClassKey,
         bool $keysOnly = true
-    ):array {
+    ): array {
         $foundFields = [];
         $layouts = [];
         // Get the layouts
