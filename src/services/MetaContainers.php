@@ -501,9 +501,13 @@ class MetaContainers extends Component
         $attributes = array_filter($attributes);
         $this->metaGlobalVars->setAttributes($attributes, false);
         // Meta site vars
+        /*
+         * Don't merge in the Site vars, since they are only editable on
+         * a global basis. Otherwise stale data will be unable to be edited
         $attributes = $metaBundle->metaSiteVars->getAttributes();
         $attributes = array_filter($attributes);
         $this->metaSiteVars->setAttributes($attributes, false);
+        */
         // Meta sitemap vars
         $attributes = $metaBundle->metaSitemapVars->getAttributes();
         $attributes = array_filter($attributes);
