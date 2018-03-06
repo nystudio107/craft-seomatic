@@ -4,10 +4,9 @@
 <h4 class="heading">{{ "SEO Preview:" |t('seomatic') }}</h4>
 {% include "seomatic/_includes/twitterPreview.twig" %}
 
+{############### Twitter Card Type ###############}
+
 {% namespace "globals" %}
-    
-    {############### Twitter Card Type ###############}
-    
     {{ forms.selectField({
         label: "Twitter Card Type" |t("seomatic"),
         instructions: "With Twitter Cards, you can attach rich photos and information to Tweets that drive traffic to your website. Users who Tweet links to your content will have a 'Card' added to the Tweet that’s visible to all of their followers." |t("seomatic"),
@@ -21,9 +20,11 @@
         },
         value: globals.twitterCard,
     }) }}
-    
-    {############### Twitter Creator ###############}
-    
+{% endnamespace %}
+
+{############### Twitter Creator ###############}
+
+{% namespace "globals" %}
     {{ forms.textField({
         label: "Twitter Creator" |t("seomatic"),
         instructions: "Twitter username for the content creator / author, without the preceding @." |t("seomatic"),
@@ -183,7 +184,7 @@
 <div class="field seomatic-imageSourceWrapper" id="settings-twitterImageSource-field">
     <div class="heading">
         <label id="settings-twitterImageSource-label" for="settings-twitterImageSource">{{ "Twitter Image Source" |t("seomatic") }}</label>
-        <div class="instructions"><p>{{ "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified." |t("seomatic") }}</p>
+        <div class="instructions"><p>{{ "This is the image that will be used for display as on Twitter Cards that link to the website." |t("seomatic") }}</p>
         </div>
     </div>
     {% namespace "settings" %}
