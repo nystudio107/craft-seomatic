@@ -460,7 +460,7 @@ class SettingsController extends Controller
         $sitemapSettings = $request->getParam('sitemap');
 
         // Set the element type in the template
-        switch ($$sourceHandle) {
+        switch ($sourceHandle) {
             case MetaBundles::SECTION_META_BUNDLE:
                 $elementType = 'entry';
                 break;

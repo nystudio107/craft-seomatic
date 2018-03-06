@@ -29,6 +29,7 @@ use craft\models\CategoryGroup_SiteSettings;
 use craft\models\CategoryGroup;
 use craft\models\Section;
 use craft\models\Site;
+use yii\base\InvalidConfigException;
 use yii\db\StaleObjectException;
 
 /**
@@ -443,6 +444,7 @@ class MetaBundles extends Component
                 /** @var  $element Entry */
                 $sourceId = $element->sectionId;
                 $sourceSiteId = $element->siteId;
+                $sourceHandle = $element->section->handle;
                 $sourceBundleType = self::SECTION_META_BUNDLE;
                 break;
 
@@ -450,6 +452,10 @@ class MetaBundles extends Component
                 /** @var  $element Category */
                 $sourceId = $element->groupId;
                 $sourceSiteId = $element->siteId;
+                try {
+                    $sourceHandle = $element->getGroup()->handle;
+                } catch (InvalidConfigException $e) {
+                }
                 $sourceBundleType = self::CATEGORYGROUP_META_BUNDLE;
                 break;
             // @TODO: handle commerce products
