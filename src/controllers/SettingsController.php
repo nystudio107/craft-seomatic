@@ -343,7 +343,7 @@ class SettingsController extends Controller
             $sourceHandle,
             $variables['currentSiteId']
         );
-        $variables['controllerHandle'] = 'edit-content'.'/'.$sourceHandle;
+        $variables['controllerHandle'] = "edit-content/${sourceBundleType}/${sourceHandle}";
 
         $variables['globals'] = $metaBundle->metaGlobalVars;
         $variables['sitemap'] = $metaBundle->metaSitemapVars;
@@ -460,15 +460,15 @@ class SettingsController extends Controller
         $sitemapSettings = $request->getParam('sitemap');
 
         // Set the element type in the template
-        switch ($sourceHandle) {
+        switch ($sourceBundleType) {
             case MetaBundles::SECTION_META_BUNDLE:
-                $elementType = 'entry';
+                $elementName = 'entry';
                 break;
             case MetaBundles::CATEGORYGROUP_META_BUNDLE:
-                $elementType = 'category';
+                $elementName = 'category';
                 break;
             default:
-                $elementType = '';
+                $elementName = '';
                 break;
         }
         // The site settings for the appropriate meta bundle
@@ -478,7 +478,7 @@ class SettingsController extends Controller
             $siteId
         );
         if ($metaBundle) {
-            $this->parseTextSources($elementType, $globalsSettings, $bundleSettings);
+            $this->parseTextSources($elementName, $globalsSettings, $bundleSettings);
             $this->parseImageSources($globalsSettings, $bundleSettings, $siteId);
             $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
             $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
@@ -659,38 +659,38 @@ class SettingsController extends Controller
     /**
      * Set the text sources depending on the field settings
      *
-     * @param string $elementType
+     * @param string $elementName
      * @param        $globalsSettings
      * @param        $bundleSettings
      */
-    protected function parseTextSources(string $elementType, &$globalsSettings, &$bundleSettings): void
+    protected function parseTextSources(string $elementName, &$globalsSettings, &$bundleSettings): void
     {
         // seoTitle
         $globalsSettings['seoTitle'] = $this->textSourceFromSettings(
             $bundleSettings['seoTitleSource'],
             $bundleSettings['seoTitleField'] ?? '',
-            $elementType,
+            $elementName,
             'seoTitle'
         ) ?? $globalsSettings['seoTitle'];
         // seoDescription
         $globalsSettings['seoDescription'] = $this->textSourceFromSettings(
             $bundleSettings['seoDescriptionSource'],
             $bundleSettings['seoDescriptionField'] ?? '',
-            $elementType,
+            $elementName,
             'seoDescription'
         ) ?? $globalsSettings['seoDescription'];
         // seoKeywords
         $globalsSettings['seoKeywords'] = $this->textSourceFromSettings(
             $bundleSettings['seoKeywordsSource'],
             $bundleSettings['seoKeywordsField'] ?? '',
-            $elementType,
+            $elementName,
             'seoKeywords'
         ) ?? $globalsSettings['seoKeywords'];
         // seoImageDescription
         $globalsSettings['seoImageDescription'] = $this->textSourceFromSettings(
             $bundleSettings['seoImageDescriptionSource'],
             $bundleSettings['seoImageDescriptionField'] ?? '',
-            $elementType,
+            $elementName,
             'seoImageDescription'
         ) ?? $globalsSettings['seoImageDescription'];
 
@@ -698,21 +698,21 @@ class SettingsController extends Controller
         $globalsSettings['ogTitle'] = $this->textSourceFromSettings(
             $bundleSettings['ogTitleSource'],
             $bundleSettings['ogTitleField'] ?? '',
-            $elementType,
+            $elementName,
             'seoTitle'
         ) ?? $globalsSettings['ogTitle'];
         // ogDescription
         $globalsSettings['ogDescription'] = $this->textSourceFromSettings(
             $bundleSettings['ogDescriptionSource'],
             $bundleSettings['ogDescriptionField'] ?? '',
-            $elementType,
+            $elementName,
             'seoDescription'
         ) ?? $globalsSettings['ogDescription'];
         // ogImageDescription
         $globalsSettings['ogImageDescription'] = $this->textSourceFromSettings(
             $bundleSettings['ogImageDescriptionSource'],
             $bundleSettings['ogImageDescriptionField'] ?? '',
-            $elementType,
+            $elementName,
             'seoImageDescription'
         ) ?? $globalsSettings['ogImageDescription'];
 
@@ -720,21 +720,21 @@ class SettingsController extends Controller
         $globalsSettings['twitterTitle'] = $this->textSourceFromSettings(
             $bundleSettings['twitterTitleSource'],
             $bundleSettings['twitterTitleField'] ?? '',
-            $elementType,
+            $elementName,
             'seoTitle'
         ) ?? $globalsSettings['twitterTitle'];
         // twitterDescription
         $globalsSettings['twitterDescription'] = $this->textSourceFromSettings(
             $bundleSettings['twitterDescriptionSource'],
             $bundleSettings['twitterDescriptionField'] ?? '',
-            $elementType,
+            $elementName,
             'seoDescription'
         ) ?? $globalsSettings['twitterDescription'];
         // twitterImageDescription
         $globalsSettings['twitterImageDescription'] = $this->textSourceFromSettings(
             $bundleSettings['twitterImageDescriptionSource'],
             $bundleSettings['twitterImageDescriptionField'] ?? '',
-            $elementType,
+            $elementName,
             'seoImageDescription'
         ) ?? $globalsSettings['twitterImageDescription'];
     }
@@ -761,19 +761,19 @@ class SettingsController extends Controller
 
             case 'fromField':
                 $result = '{seomatic.helper.extractTextFromField(object.'
-                    .$elementName.$sourceField
+                    .$elementName.'.'.$sourceField
                     .')}';
                 break;
 
             case 'summaryFromField':
                 $result = '{seomatic.helper.extractSummary(seomatic.helper.extractTextFromField(object.'
-                    .$elementName.$sourceField
+                    .$elementName.'.'.$sourceField
                     .'))}';
                 break;
 
             case 'keywordsFromField':
                 $result = '{seomatic.helper.extractKeywords(seomatic.helper.extractTextFromField(object.'
-                    .$elementName.$sourceField
+                    .$elementName.'.'.$sourceField
                     .'))}';
                 break;
 
