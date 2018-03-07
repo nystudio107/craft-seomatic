@@ -40,6 +40,26 @@ class SettingsController extends Controller
 
     const DOCUMENTATION_URL = 'https://github.com/nystudio107/craft-seomatic/wiki';
 
+    const PULL_TEXT_FIELDS = [
+        [ 'fieldName' => 'seoTitle', 'seoField' => 'seoTitle'],
+        [ 'fieldName' => 'seoDescription', 'seoField' => 'seoDescription'],
+        [ 'fieldName' => 'seoKeywords', 'seoField' => 'seoKeywords'],
+        [ 'fieldName' => 'seoImageDescription', 'seoField' => 'seoImageDescription'],
+        [ 'fieldName' => 'ogTitle', 'seoField' => 'seoTitle'],
+        [ 'fieldName' => 'ogDescription', 'seoField' => 'seoDescription'],
+        [ 'fieldName' => 'ogImageDescription', 'seoField' => 'seoImageDescription'],
+        [ 'fieldName' => 'twitterTitle', 'seoField' => 'seoTitle'],
+        [ 'fieldName' => 'twitterDescription', 'seoField' => 'seoDescription'],
+        [ 'fieldName' => 'twitterImageDescription', 'seoField' => 'seoImageDescription'],
+    ];
+
+    const PULL_ASSET_FIELDS = [
+        [ 'fieldName' => 'seoImage', 'seoField' => 'seoImage', 'transformName' => 'base'],
+        [ 'fieldName' => 'ogImage', 'seoField' => 'seoImage', 'transformName' => 'facebook'],
+        [ 'fieldName' => 'twitterImage', 'seoField' => 'seoImage', 'transformName' => 'twitter'],
+    ];
+
+
     // Protected Properties
     // =========================================================================
 
@@ -320,8 +340,11 @@ class SettingsController extends Controller
      * @return Response The rendered result
      * @throws NotFoundHttpException
      */
-    public function actionEditContent(string $sourceBundleType, string $sourceHandle, string $siteHandle = null): Response
-    {
+    public function actionEditContent(
+        string $sourceBundleType,
+        string $sourceHandle,
+        string $siteHandle = null
+    ): Response {
         // @TODO: Let people choose an entry/categorygroup/product as the preview
         // Get the site to edit
         if ($siteHandle !== null) {
@@ -365,7 +388,9 @@ class SettingsController extends Controller
         // Enabled sites
         $sites = Craft::$app->getSites();
         $variables['currentSiteId'] = empty($siteId) ? Craft::$app->getSites()->currentSite->id : $siteId;
-        $variables['currentSiteHandle'] = empty($siteHandle) ? Craft::$app->getSites()->currentSite->handle : $siteHandle;
+        $variables['currentSiteHandle'] = empty($siteHandle)
+            ? Craft::$app->getSites()->currentSite->handle
+            : $siteHandle;
         $variables['currentSourceHandle'] = $sourceHandle;
         $variables['currentSourceBundleType'] = $sourceBundleType;
         if (Craft::$app->getIsMultiSite()) {
@@ -597,7 +622,9 @@ class SettingsController extends Controller
         // Enabled sites
         $sites = Craft::$app->getSites();
         $variables['currentSiteId'] = empty($siteId) ? Craft::$app->getSites()->currentSite->id : $siteId;
-        $variables['currentSiteHandle'] = empty($siteHandle) ? Craft::$app->getSites()->currentSite->handle : $siteHandle;
+        $variables['currentSiteHandle'] = empty($siteHandle)
+            ? Craft::$app->getSites()->currentSite->handle
+            : $siteHandle;
         if (Craft::$app->getIsMultiSite()) {
             // Set defaults based on the section settings
             $variables['enabledSiteIds'] = [];
@@ -717,128 +744,47 @@ class SettingsController extends Controller
      */
     protected function parseTextSources(string $elementName, &$globalsSettings, &$bundleSettings): void
     {
-        // seoTitle
-        $globalsSettings['seoTitle'] = $this->textSourceFromSettings(
-                $bundleSettings['seoTitleSource'],
-                $bundleSettings['seoTitleField'] ?? '',
-                $elementName,
-                'seoTitle'
-            ) ?? $globalsSettings['seoTitle'];
-        // seoDescription
-        $globalsSettings['seoDescription'] = $this->textSourceFromSettings(
-                $bundleSettings['seoDescriptionSource'],
-                $bundleSettings['seoDescriptionField'] ?? '',
-                $elementName,
-                'seoDescription'
-            ) ?? $globalsSettings['seoDescription'];
-        // seoKeywords
-        $globalsSettings['seoKeywords'] = $this->textSourceFromSettings(
-                $bundleSettings['seoKeywordsSource'],
-                $bundleSettings['seoKeywordsField'] ?? '',
-                $elementName,
-                'seoKeywords'
-            ) ?? $globalsSettings['seoKeywords'];
-        // seoImageDescription
-        $globalsSettings['seoImageDescription'] = $this->textSourceFromSettings(
-                $bundleSettings['seoImageDescriptionSource'],
-                $bundleSettings['seoImageDescriptionField'] ?? '',
-                $elementName,
-                'seoImageDescription'
-            ) ?? $globalsSettings['seoImageDescription'];
-
-        // ogTitle
-        $globalsSettings['ogTitle'] = $this->textSourceFromSettings(
-                $bundleSettings['ogTitleSource'],
-                $bundleSettings['ogTitleField'] ?? '',
-                $elementName,
-                'seoTitle'
-            ) ?? $globalsSettings['ogTitle'];
-        // ogDescription
-        $globalsSettings['ogDescription'] = $this->textSourceFromSettings(
-                $bundleSettings['ogDescriptionSource'],
-                $bundleSettings['ogDescriptionField'] ?? '',
-                $elementName,
-                'seoDescription'
-            ) ?? $globalsSettings['ogDescription'];
-        // ogImageDescription
-        $globalsSettings['ogImageDescription'] = $this->textSourceFromSettings(
-                $bundleSettings['ogImageDescriptionSource'],
-                $bundleSettings['ogImageDescriptionField'] ?? '',
-                $elementName,
-                'seoImageDescription'
-            ) ?? $globalsSettings['ogImageDescription'];
-
-        // twitterTitle
-        $globalsSettings['twitterTitle'] = $this->textSourceFromSettings(
-                $bundleSettings['twitterTitleSource'],
-                $bundleSettings['twitterTitleField'] ?? '',
-                $elementName,
-                'seoTitle'
-            ) ?? $globalsSettings['twitterTitle'];
-        // twitterDescription
-        $globalsSettings['twitterDescription'] = $this->textSourceFromSettings(
-                $bundleSettings['twitterDescriptionSource'],
-                $bundleSettings['twitterDescriptionField'] ?? '',
-                $elementName,
-                'seoDescription'
-            ) ?? $globalsSettings['twitterDescription'];
-        // twitterImageDescription
-        $globalsSettings['twitterImageDescription'] = $this->textSourceFromSettings(
-                $bundleSettings['twitterImageDescriptionSource'],
-                $bundleSettings['twitterImageDescriptionField'] ?? '',
-                $elementName,
-                'seoImageDescription'
-            ) ?? $globalsSettings['twitterImageDescription'];
-    }
-
-    /**
-     * @param string $source
-     * @param string $sourceField
-     * @param string $elementName
-     * @param string $seoField
-     *
-     * @return string
-     */
-    protected function textSourceFromSettings(
-        string $source,
-        string $sourceField,
-        string $elementName,
-        string $seoField
-    ) {
-        $result = null;
         $objectPrefix = '';
         if (!empty($elementName)) {
             $elementName .= '.';
             $objectPrefix = 'object.';
         }
-        switch ($source) {
-            case 'sameAsSeo':
-                $result = '{seomatic.meta.'.$seoField.'}';
-                break;
+        foreach (self::PULL_TEXT_FIELDS as $fields) {
+            $fieldName = $fields['fieldName'];
+            $source = $bundleSettings[$fieldName.'Source'];
+            $sourceField = $bundleSettings[$fieldName.'Field'] ?? '';
+            $seoField = $fields['seoField'];
+            switch ($source) {
+                case 'sameAsSeo':
+                    $globalsSettings[$fieldName] =
+                        '{seomatic.meta.'.$seoField.'}';
+                    break;
 
-            case 'fromField':
-                $result = '{seomatic.helper.extractTextFromField('
-                    .$objectPrefix.$elementName.$sourceField
-                    .')}';
-                break;
+                case 'fromField':
+                    $globalsSettings[$fieldName] =
+                        '{seomatic.helper.extractTextFromField('
+                        .$objectPrefix.$elementName.$sourceField
+                        .')}';
+                    break;
 
-            case 'summaryFromField':
-                $result = '{seomatic.helper.extractSummary(seomatic.helper.extractTextFromField('
-                    .$objectPrefix.$elementName.$sourceField
-                    .'))}';
-                break;
+                case 'summaryFromField':
+                    $globalsSettings[$fieldName] =
+                        '{seomatic.helper.extractSummary(seomatic.helper.extractTextFromField('
+                        .$objectPrefix.$elementName.$sourceField
+                        .'))}';
+                    break;
 
-            case 'keywordsFromField':
-                $result = '{seomatic.helper.extractKeywords(seomatic.helper.extractTextFromField('
-                    .$objectPrefix.$elementName.$sourceField
-                    .'))}';
-                break;
+                case 'keywordsFromField':
+                    $globalsSettings[$fieldName] =
+                        '{seomatic.helper.extractKeywords(seomatic.helper.extractTextFromField('
+                        .$objectPrefix.$elementName.$sourceField
+                        .'))}';
+                    break;
 
-            case 'fromCustom':
-                break;
+                case 'fromCustom':
+                    break;
+            }
         }
-
-        return $result;
     }
 
     /**
@@ -856,72 +802,40 @@ class SettingsController extends Controller
             $elementName .= '.';
             $objectPrefix = 'object.';
         }
-        // Handle the SEO Image
-        switch ($bundleSettings['seoImageSource']) {
-            case 'fromField':
-                if (!empty($bundleSettings['seoImageField'])) {
-                    $globalsSettings['seoImage'] = '{seomatic.helper.socialTransform('
-                        .$objectPrefix.$elementName.$bundleSettings['seoImageField'].'.one()'
-                        .', "base"'
-                        .', '.$siteId.')}';
+        foreach (self::PULL_ASSET_FIELDS as $fields) {
+            $fieldName = $fields['fieldName'];
+            $source = $bundleSettings[$fieldName.'Source'];
+            $ids = $bundleSettings[$fieldName.'Ids'];
+            $sourceField = $bundleSettings[$fieldName.'Field'] ?? '';
+            $seoField = $fields['seoField'];
+            $transformName = $fields['transformName'];
+            if ($transformName == 'twitter') {
+                $transformName = 'twitter-summary';
+                if ($globalsSettings['twitterCard'] == 'summary_large_image') {
+                    $transformName = 'twitter-large';
                 }
-                break;
-            case 'fromAsset':
-                if (!empty($bundleSettings['seoImageIds'])) {
-                    $globalsSettings['seoImage'] = '{seomatic.helper.socialTransform('
-                        .$bundleSettings['seoImageIds'][0]
-                        .', "base"'
-                        .', '.$siteId.')}';
-                }
-                break;
-        }
-        $twitterCardTransform = 'twitter-summary';
-        if ($globalsSettings['twitterCard'] == 'summary_large_image') {
-            $twitterCardTransform = 'twitter-large';
-        }
-        // Handle the Twitter Image
-        switch ($bundleSettings['twitterImageSource']) {
-            case 'sameAsSeo':
-                $globalsSettings['twitterImage'] = '{seomatic.meta.seoImage}';
-                break;
-            case 'fromField':
-                if (!empty($bundleSettings['twitterImageField'])) {
-                    $globalsSettings['twitterImage'] = '{seomatic.helper.socialTransform('
-                        .$objectPrefix.$elementName.$bundleSettings['twitterImageField'].'.one()'
-                        .', "'.$twitterCardTransform.'"'
-                        .', '.$siteId.')}';
-                }
-                break;
-            case 'fromAsset':
-                if (!empty($bundleSettings['twitterImageIds'])) {
-                    $globalsSettings['twitterImage'] = '{seomatic.helper.socialTransform('
-                        .$bundleSettings['twitterImageIds'][0]
-                        .', "'.$twitterCardTransform.'"'
-                        .', '.$siteId.')}';
-                }
-                break;
-        }
-        // Handle the Facebook IG Image
-        switch ($bundleSettings['ogImageSource']) {
-            case 'sameAsSeo':
-                $globalsSettings['ogImage'] = '{seomatic.meta.seoImage}';
-                break;
-            case 'fromField':
-                if (!empty($bundleSettings['ogImageField'])) {
-                    $globalsSettings['ogImage'] = '{seomatic.helper.socialTransform('
-                        .$objectPrefix.$elementName.$bundleSettings['ogImageField'].'.one()'
-                        .', "facebook"'
-                        .', '.$siteId.')}';
-                }
-                break;
-            case 'fromAsset':
-                if (!empty($bundleSettings['ogImageIds'])) {
-                    $globalsSettings['ogImage'] = '{seomatic.helper.socialTransform('
-                        .$bundleSettings['ogImageIds'][0]
-                        .', "facebook"'
-                        .', '.$siteId.')}';
-                }
-                break;
+            }
+            switch ($source) {
+                case 'sameAsSeo':
+                    $globalsSettings[$fieldName] = '{seomatic.meta.'.$seoField.'}';
+                    break;
+                case 'fromField':
+                    if (!empty($sourceField)) {
+                        $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
+                            .$objectPrefix.$elementName.$sourceField.'.one()'
+                            .', "'.$transformName.'"'
+                            .', '.$siteId.')}';
+                    }
+                    break;
+                case 'fromAsset':
+                    if (!empty($ids)) {
+                        $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
+                            .$ids[0]
+                            .', "'.$transformName.'"'
+                            .', '.$siteId.')}';
+                    }
+                    break;
+            }
         }
     }
 }
