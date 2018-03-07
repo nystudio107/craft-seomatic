@@ -41,6 +41,15 @@ interface ContainerInterface
     public function addData($data, string $key);
 
     /**
+     * Get data from the container with the key $key
+     *
+     * @param string $key
+     *
+     * @return null|mixed
+     */
+    public function getData(string $key);
+
+    /**
      * Prepare the container's data for inclusion
      *
      * @return bool Whether the render should happen or not

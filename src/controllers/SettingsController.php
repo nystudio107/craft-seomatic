@@ -42,22 +42,22 @@ class SettingsController extends Controller
     const DOCUMENTATION_URL = 'https://github.com/nystudio107/craft-seomatic/wiki';
 
     const PULL_TEXT_FIELDS = [
-        [ 'fieldName' => 'seoTitle', 'seoField' => 'seoTitle'],
-        [ 'fieldName' => 'seoDescription', 'seoField' => 'seoDescription'],
-        [ 'fieldName' => 'seoKeywords', 'seoField' => 'seoKeywords'],
-        [ 'fieldName' => 'seoImageDescription', 'seoField' => 'seoImageDescription'],
-        [ 'fieldName' => 'ogTitle', 'seoField' => 'seoTitle'],
-        [ 'fieldName' => 'ogDescription', 'seoField' => 'seoDescription'],
-        [ 'fieldName' => 'ogImageDescription', 'seoField' => 'seoImageDescription'],
-        [ 'fieldName' => 'twitterTitle', 'seoField' => 'seoTitle'],
-        [ 'fieldName' => 'twitterDescription', 'seoField' => 'seoDescription'],
-        [ 'fieldName' => 'twitterImageDescription', 'seoField' => 'seoImageDescription'],
+        ['fieldName' => 'seoTitle', 'seoField' => 'seoTitle'],
+        ['fieldName' => 'seoDescription', 'seoField' => 'seoDescription'],
+        ['fieldName' => 'seoKeywords', 'seoField' => 'seoKeywords'],
+        ['fieldName' => 'seoImageDescription', 'seoField' => 'seoImageDescription'],
+        ['fieldName' => 'ogTitle', 'seoField' => 'seoTitle'],
+        ['fieldName' => 'ogDescription', 'seoField' => 'seoDescription'],
+        ['fieldName' => 'ogImageDescription', 'seoField' => 'seoImageDescription'],
+        ['fieldName' => 'twitterTitle', 'seoField' => 'seoTitle'],
+        ['fieldName' => 'twitterDescription', 'seoField' => 'seoDescription'],
+        ['fieldName' => 'twitterImageDescription', 'seoField' => 'seoImageDescription'],
     ];
 
     const PULL_ASSET_FIELDS = [
-        [ 'fieldName' => 'seoImage', 'seoField' => 'seoImage', 'transformName' => 'base'],
-        [ 'fieldName' => 'ogImage', 'seoField' => 'seoImage', 'transformName' => 'facebook'],
-        [ 'fieldName' => 'twitterImage', 'seoField' => 'seoImage', 'transformName' => 'twitter'],
+        ['fieldName' => 'seoImage', 'seoField' => 'seoImage', 'transformName' => 'base'],
+        ['fieldName' => 'ogImage', 'seoField' => 'seoImage', 'transformName' => 'facebook'],
+        ['fieldName' => 'twitterImage', 'seoField' => 'seoImage', 'transformName' => 'twitter'],
     ];
 
 
@@ -80,19 +80,11 @@ class SettingsController extends Controller
      *
      * @return Response The rendered result
      * @throws NotFoundHttpException
+     * @throws \yii\web\ForbiddenHttpException
      */
     public function actionGlobal(string $siteHandle = null): Response
     {
-        // Get the site to edit
-        if ($siteHandle !== null) {
-            $site = Craft::$app->getSites()->getSiteByHandle($siteHandle);
-            if (!$site) {
-                throw new NotFoundHttpException('Invalid site handle: '.$siteHandle);
-            }
-            $siteId = $site->id;
-        } else {
-            $siteId = Craft::$app->getSites()->currentSite->id;
-        }
+        $siteId = $this->getSiteIdFromHandle($siteHandle);
 
         $pluginName = Seomatic::$settings->pluginName;
         $templateTitle = Craft::t('seomatic', 'Global Meta');
@@ -133,34 +125,7 @@ class SettingsController extends Controller
         );
 
         // Enabled sites
-        $sites = Craft::$app->getSites();
-        $variables['currentSiteId'] = empty($siteId) ? Craft::$app->getSites()->currentSite->id : $siteId;
-        $variables['currentSiteHandle'] = empty($siteHandle)
-            ? Craft::$app->getSites()->currentSite->handle
-            : $siteHandle;
-        if (Craft::$app->getIsMultiSite()) {
-            // Set defaults based on the section settings
-            $variables['enabledSiteIds'] = [];
-            $variables['siteIds'] = [];
-
-            /** @var Site $site */
-            foreach ($sites->getAllSites() as $site) {
-                $variables['enabledSiteIds'][] = $site->id;
-                $variables['siteIds'][] = $site->id;
-            }
-        }
-
-        // Page title w/ revision label
-        $variables['showSites'] = (
-            Craft::$app->getIsMultiSite() &&
-            count($variables['enabledSiteIds'])
-        );
-
-        if ($variables['showSites']) {
-            $variables['sitesMenuLabel'] = Craft::t('site', $sites->getSiteById($variables['currentSiteId'])->name);
-        } else {
-            $variables['sitesMenuLabel'] = '';
-        }
+        $this->setMultiSiteVariables($siteHandle, $siteId, $variables);
         $variables['controllerHandle'] = 'global';
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($variables['currentSiteId']);
 
@@ -253,19 +218,12 @@ class SettingsController extends Controller
      *
      * @return Response The rendered result
      * @throws NotFoundHttpException
+     * @throws \yii\web\ForbiddenHttpException
      */
     public function actionContent(string $siteHandle = null): Response
     {
         // Get the site to edit
-        if ($siteHandle !== null) {
-            $site = Craft::$app->getSites()->getSiteByHandle($siteHandle);
-            if (!$site) {
-                throw new NotFoundHttpException('Invalid site handle: '.$siteHandle);
-            }
-            $siteId = $site->id;
-        } else {
-            $siteId = Craft::$app->getSites()->currentSite->id;
-        }
+        $siteId = $this->getSiteIdFromHandle($siteHandle);
 
         $pluginName = Seomatic::$settings->pluginName;
         $templateTitle = Craft::t('seomatic', 'Content SEO');
@@ -293,35 +251,8 @@ class SettingsController extends Controller
                 'url'   => UrlHelper::cpUrl('seomatic/content'),
             ],
         ];
-        // Enabled sites
-        $sites = Craft::$app->getSites();
-        $variables['currentSiteId'] = empty($siteId) ? Craft::$app->getSites()->currentSite->id : $siteId;
-        $variables['currentSiteHandle'] = empty($siteHandle)
-            ? Craft::$app->getSites()->currentSite->handle
-            : $siteHandle;
-        if (Craft::$app->getIsMultiSite()) {
-            // Set defaults based on the section settings
-            $variables['enabledSiteIds'] = [];
-            $variables['siteIds'] = [];
+        $this->setMultiSiteVariables($siteHandle, $siteId, $variables);
 
-            /** @var Site $site */
-            foreach ($sites->getAllSites() as $site) {
-                $variables['enabledSiteIds'][] = $site->id;
-                $variables['siteIds'][] = $site->id;
-            }
-        }
-
-        // Page title w/ revision label
-        $variables['showSites'] = (
-            Craft::$app->getIsMultiSite() &&
-            count($variables['enabledSiteIds'])
-        );
-
-        if ($variables['showSites']) {
-            $variables['sitesMenuLabel'] = Craft::t('site', $sites->getSiteById($variables['currentSiteId'])->name);
-        } else {
-            $variables['sitesMenuLabel'] = '';
-        }
         $variables['controllerHandle'] = 'content';
 
         $variables['selectedSubnavItem'] = 'content';
@@ -340,6 +271,7 @@ class SettingsController extends Controller
      *
      * @return Response The rendered result
      * @throws NotFoundHttpException
+     * @throws \yii\web\ForbiddenHttpException
      */
     public function actionEditContent(
         string $sourceBundleType,
@@ -348,15 +280,7 @@ class SettingsController extends Controller
     ): Response {
         // @TODO: Let people choose an entry/categorygroup/product as the preview
         // Get the site to edit
-        if ($siteHandle !== null) {
-            $site = Craft::$app->getSites()->getSiteByHandle($siteHandle);
-            if (!$site) {
-                throw new NotFoundHttpException('Invalid site handle: '.$siteHandle);
-            }
-            $siteId = $site->id;
-        } else {
-            $siteId = Craft::$app->getSites()->currentSite->id;
-        }
+        $siteId = $this->getSiteIdFromHandle($siteHandle);
 
         $pluginName = Seomatic::$settings->pluginName;
         $templateTitle = Craft::t('seomatic', 'Content Meta');
@@ -578,19 +502,12 @@ class SettingsController extends Controller
      *
      * @return Response The rendered result
      * @throws NotFoundHttpException
+     * @throws \yii\web\ForbiddenHttpException
      */
     public function actionSite(string $siteHandle = null): Response
     {
         // Get the site to edit
-        if ($siteHandle !== null) {
-            $site = Craft::$app->getSites()->getSiteByHandle($siteHandle);
-            if (!$site) {
-                throw new NotFoundHttpException('Invalid site handle: '.$siteHandle);
-            }
-            $siteId = $site->id;
-        } else {
-            $siteId = Craft::$app->getSites()->currentSite->id;
-        }
+        $siteId = $this->getSiteIdFromHandle($siteHandle);
 
         $pluginName = Seomatic::$settings->pluginName;
         $templateTitle = Craft::t('seomatic', 'Site Settings');
@@ -621,34 +538,7 @@ class SettingsController extends Controller
         $variables['selectedSubnavItem'] = 'site';
 
         // Enabled sites
-        $sites = Craft::$app->getSites();
-        $variables['currentSiteId'] = empty($siteId) ? Craft::$app->getSites()->currentSite->id : $siteId;
-        $variables['currentSiteHandle'] = empty($siteHandle)
-            ? Craft::$app->getSites()->currentSite->handle
-            : $siteHandle;
-        if (Craft::$app->getIsMultiSite()) {
-            // Set defaults based on the section settings
-            $variables['enabledSiteIds'] = [];
-            $variables['siteIds'] = [];
-
-            /** @var Site $site */
-            foreach ($sites->getAllSites() as $site) {
-                $variables['enabledSiteIds'][] = $site->id;
-                $variables['siteIds'][] = $site->id;
-            }
-        }
-
-        // Page title w/ revision label
-        $variables['showSites'] = (
-            Craft::$app->getIsMultiSite() &&
-            count($variables['enabledSiteIds'])
-        );
-
-        if ($variables['showSites']) {
-            $variables['sitesMenuLabel'] = Craft::t('site', $sites->getSiteById($variables['currentSiteId'])->name);
-        } else {
-            $variables['sitesMenuLabel'] = '';
-        }
+        $this->setMultiSiteVariables($siteHandle, $siteId, $variables);
         $variables['controllerHandle'] = 'site';
 
         // The site settings for the appropriate meta bundle
@@ -741,19 +631,12 @@ class SettingsController extends Controller
      *
      * @return Response The rendered result
      * @throws NotFoundHttpException
+     * @throws \yii\web\ForbiddenHttpException
      */
     public function actionTracking(string $siteHandle = null): Response
     {
         // Get the site to edit
-        if ($siteHandle !== null) {
-            $site = Craft::$app->getSites()->getSiteByHandle($siteHandle);
-            if (!$site) {
-                throw new NotFoundHttpException('Invalid site handle: '.$siteHandle);
-            }
-            $siteId = $site->id;
-        } else {
-            $siteId = Craft::$app->getSites()->currentSite->id;
-        }
+        $siteId = $this->getSiteIdFromHandle($siteHandle);
 
         $pluginName = Seomatic::$settings->pluginName;
         $templateTitle = Craft::t('seomatic', 'Tracking Scripts');
@@ -784,34 +667,7 @@ class SettingsController extends Controller
         $variables['selectedSubnavItem'] = 'tracking';
 
         // Enabled sites
-        $sites = Craft::$app->getSites();
-        $variables['currentSiteId'] = empty($siteId) ? Craft::$app->getSites()->currentSite->id : $siteId;
-        $variables['currentSiteHandle'] = empty($siteHandle)
-            ? Craft::$app->getSites()->currentSite->handle
-            : $siteHandle;
-        if (Craft::$app->getIsMultiSite()) {
-            // Set defaults based on the section settings
-            $variables['enabledSiteIds'] = [];
-            $variables['siteIds'] = [];
-
-            /** @var Site $site */
-            foreach ($sites->getAllSites() as $site) {
-                $variables['enabledSiteIds'][] = $site->id;
-                $variables['siteIds'][] = $site->id;
-            }
-        }
-
-        // Page title w/ revision label
-        $variables['showSites'] = (
-            Craft::$app->getIsMultiSite() &&
-            count($variables['enabledSiteIds'])
-        );
-
-        if ($variables['showSites']) {
-            $variables['sitesMenuLabel'] = Craft::t('site', $sites->getSiteById($variables['currentSiteId'])->name);
-        } else {
-            $variables['sitesMenuLabel'] = '';
-        }
+        $this->setMultiSiteVariables($siteHandle, $siteId, $variables);
         $variables['controllerHandle'] = 'tracking';
 
         // The script meta containers for the global meta bundle
@@ -834,20 +690,29 @@ class SettingsController extends Controller
         $this->requirePostRequest();
         $request = Craft::$app->getRequest();
         $siteId = $request->getParam('siteId');
-        $siteSettings = $request->getParam('site');
+        $scriptSettings = $request->getParam('scripts');
 
-        // Make sure the twitter handle isn't prefixed with an @
-        if (!empty($siteSettings['twitterHandle'])) {
-            $siteSettings['twitterHandle'] = ltrim($siteSettings['twitterHandle'], '@');
-        }
-        // Make sure the sameAsLinks are indexed by the handle
-        if (!empty($siteSettings['sameAsLinks'])) {
-            $siteSettings['sameAsLinks'] = ArrayHelper::index($siteSettings['sameAsLinks'], 'handle');
-        }
         // The site settings for the appropriate meta bundle
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle) {
-            $metaBundle->metaSiteVars->setAttributes($siteSettings);
+            foreach ($scriptSettings as $scriptHandle => $scriptData) {
+                foreach ($metaBundle->metaContainers as $metaContainer) {
+                    if ($metaContainer::CONTAINER_TYPE == MetaScriptContainer::CONTAINER_TYPE) {
+                        $data = $metaContainer->getData($scriptHandle);
+                        if ($data) {
+                            foreach ($scriptData as $key => $value) {
+                                if (is_array($value)) {
+                                    foreach ($value as $varsKey => $varsValue) {
+                                        $data->$key[$varsKey]['value'] = $varsValue;
+                                    }
+                                } else {
+                                    $data->$key = $value;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
 
             Seomatic::$plugin->clearAllCaches();
@@ -963,5 +828,79 @@ class SettingsController extends Controller
                     break;
             }
         }
+    }
+
+    /**
+     * @param string $siteHandle
+     * @param        $siteId
+     * @param        $variables
+     *
+     * @throws \yii\web\ForbiddenHttpException
+     */
+    protected function setMultiSiteVariables($siteHandle, &$siteId, &$variables): void
+    {
+        // Enabled sites
+        $sites = Craft::$app->getSites();
+        if (Craft::$app->getIsMultiSite()) {
+            // Set defaults based on the section settings
+            $variables['enabledSiteIds'] = [];
+            $variables['siteIds'] = [];
+
+            /** @var Site $site */
+            foreach ($sites->getEditableSiteIds() as $editableSiteId) {
+                $variables['enabledSiteIds'][] = $editableSiteId;
+                $variables['siteIds'][] = $editableSiteId;
+            }
+
+            // Make sure the $siteId they are trying to edit is in our array of editable sites
+            if (!in_array($siteId, $variables['enabledSiteIds'])) {
+                if (!empty($variables['enabledSiteIds'])) {
+                    $siteId = reset($variables['enabledSiteIds']);
+                } else {
+                    $this->requirePermission('editSite:'.$siteId);
+                }
+            }
+        }
+        // Set the currentSiteId and currentSiteHandle
+        $variables['currentSiteId'] = empty($siteId) ? Craft::$app->getSites()->currentSite->id : $siteId;
+        $variables['currentSiteHandle'] = empty($siteHandle)
+            ? Craft::$app->getSites()->currentSite->handle
+            : $siteHandle;
+
+        // Page title w/ revision label
+        $variables['showSites'] = (
+            Craft::$app->getIsMultiSite() &&
+            count($variables['enabledSiteIds'])
+        );
+
+        if ($variables['showSites']) {
+            $variables['sitesMenuLabel'] = Craft::t('site', $sites->getSiteById($variables['currentSiteId'])->name);
+        } else {
+            $variables['sitesMenuLabel'] = '';
+        }
+    }
+
+    /**
+     * Return a siteId from a siteHandle
+     *
+     * @param string $siteHandle
+     *
+     * @return int|null
+     * @throws NotFoundHttpException
+     */
+    protected function getSiteIdFromHandle($siteHandle)
+    {
+        // Get the site to edit
+        if ($siteHandle !== null) {
+            $site = Craft::$app->getSites()->getSiteByHandle($siteHandle);
+            if (!$site) {
+                throw new NotFoundHttpException('Invalid site handle: '.$siteHandle);
+            }
+            $siteId = $site->id;
+        } else {
+            $siteId = Craft::$app->getSites()->currentSite->id;
+        }
+
+        return $siteId;
     }
 }

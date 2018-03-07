@@ -40,7 +40,25 @@ $(function () {
         createTokensOnBlur: true,
     });
 
-    // Show/hide the image source fields initially
+    // Show/hide the script settings containers
+    var selector = $('.seomatic-script-lightswitch').find('.lightswitch').first();
+    $(selector).each(function( index, value ) {
+        var value = $(this).find('input').first().val();
+        if (value) {
+            $(this).closest('.seomatic-script-wrapper').find('.seomatic-script-container').show();
+        } else {
+            $(this).closest('.seomatic-script-wrapper').find('.seomatic-script-container').hide();
+        }
+    });
+    $(selector).on('click', function(e) {
+        var value = $(this).find('input').first().val();
+        if (value) {
+            $(this).closest('.seomatic-script-wrapper').find('.seomatic-script-container').slideDown();
+        } else {
+            $(this).closest('.seomatic-script-wrapper').find('.seomatic-script-container').slideUp();
+        }
+    });
+        // Show/hide the image source fields initially
     $('.seomatic-imageSourceSelect > select').each(function( index, value ) {
         var popupValue = $(this).val();
         switch (popupValue) {

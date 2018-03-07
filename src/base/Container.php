@@ -74,6 +74,18 @@ abstract class Container extends Model implements ContainerInterface
     /**
      * @inheritdoc
      */
+    public function getData(string $key)
+    {
+        if (!empty($this->data[$key])) {
+            return $this->data[$key];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function prepForInclusion(): bool
     {
         return Dependency::validateDependencies($this->dependencies);
