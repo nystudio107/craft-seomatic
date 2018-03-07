@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
+use nystudio107\seomatic\helpers\PluginTemplate as PluginTemplateHelper;
 
 use Craft;
 
@@ -113,16 +114,7 @@ class EditableTemplate extends FrontendTemplate
      */
     public function render($params = []): string
     {
-        try {
-            $html = Seomatic::$view->renderString($this->templateString);
-        } catch (\Exception $e) {
-            $html = Craft::t(
-                'seomatic',
-                'Error rendering `{template}` -> {error}',
-                ['template' => $this->templateString, 'error' => $e->getMessage()]
-            );
-            Craft::error($html, __METHOD__);
-        }
+        $html = PluginTemplateHelper::renderStringTemplate($this->templateString);
 
         return $html;
     }

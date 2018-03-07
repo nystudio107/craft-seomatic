@@ -40,6 +40,7 @@ $(function () {
         editor.setDisplayIndentGuides(true);
         editor.renderer.setShowGutter(true);
         editor.setHighlightActiveLine(false);
+        editor.session.setUseWorker(false);
         editor.setOptions({
             minLines: 10,
             maxLines: Infinity

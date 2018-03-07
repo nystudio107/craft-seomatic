@@ -10,6 +10,7 @@
 namespace nystudio107\seomatic\controllers;
 
 use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
@@ -732,6 +733,130 @@ class SettingsController extends Controller
         return $this->renderTemplate('seomatic/settings/plugin/_edit', $variables);
     }
 
+
+    /**
+     * Tracking settings
+     *
+     * @param string $siteHandle
+     *
+     * @return Response The rendered result
+     * @throws NotFoundHttpException
+     */
+    public function actionTracking(string $siteHandle = null): Response
+    {
+        // Get the site to edit
+        if ($siteHandle !== null) {
+            $site = Craft::$app->getSites()->getSiteByHandle($siteHandle);
+            if (!$site) {
+                throw new NotFoundHttpException('Invalid site handle: '.$siteHandle);
+            }
+            $siteId = $site->id;
+        } else {
+            $siteId = Craft::$app->getSites()->currentSite->id;
+        }
+
+        $pluginName = Seomatic::$settings->pluginName;
+        $templateTitle = Craft::t('seomatic', 'Tracking Scripts');
+        // Asset bundle
+        try {
+            Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
+        } catch (InvalidConfigException $e) {
+        }
+        $variables['baseAssetUrl'] = Craft::$app->assetManager->getPublishedUrl(
+            '@nystudio107/seomatic/assetbundles/seomatic/dist',
+            true
+        );
+        // Basic variables
+        $variables['fullPageForm'] = true;
+        $variables['docsUrl'] = self::DOCUMENTATION_URL;
+        $variables['pluginName'] = Seomatic::$settings->pluginName;
+        $variables['title'] = $pluginName.' '.$templateTitle;
+        $variables['crumbs'] = [
+            [
+                'label' => $pluginName,
+                'url'   => UrlHelper::cpUrl('seomatic'),
+            ],
+            [
+                'label' => $templateTitle,
+                'url'   => UrlHelper::cpUrl('seomatic/tracking'),
+            ],
+        ];
+        $variables['selectedSubnavItem'] = 'tracking';
+
+        // Enabled sites
+        $sites = Craft::$app->getSites();
+        $variables['currentSiteId'] = empty($siteId) ? Craft::$app->getSites()->currentSite->id : $siteId;
+        $variables['currentSiteHandle'] = empty($siteHandle)
+            ? Craft::$app->getSites()->currentSite->handle
+            : $siteHandle;
+        if (Craft::$app->getIsMultiSite()) {
+            // Set defaults based on the section settings
+            $variables['enabledSiteIds'] = [];
+            $variables['siteIds'] = [];
+
+            /** @var Site $site */
+            foreach ($sites->getAllSites() as $site) {
+                $variables['enabledSiteIds'][] = $site->id;
+                $variables['siteIds'][] = $site->id;
+            }
+        }
+
+        // Page title w/ revision label
+        $variables['showSites'] = (
+            Craft::$app->getIsMultiSite() &&
+            count($variables['enabledSiteIds'])
+        );
+
+        if ($variables['showSites']) {
+            $variables['sitesMenuLabel'] = Craft::t('site', $sites->getSiteById($variables['currentSiteId'])->name);
+        } else {
+            $variables['sitesMenuLabel'] = '';
+        }
+        $variables['controllerHandle'] = 'tracking';
+
+        // The script meta containers for the global meta bundle
+        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($variables['currentSiteId']);
+        $variables['scripts'] = Seomatic::$plugin->metaBundles->getContainerDataFromBundle(
+            $metaBundle,
+            MetaScriptContainer::CONTAINER_TYPE
+        );
+
+        // Render the template
+        return $this->renderTemplate('seomatic/settings/tracking/_edit', $variables);
+    }
+
+    /**
+     * @return Response
+     * @throws \yii\web\BadRequestHttpException
+     */
+    public function actionSaveTracking()
+    {
+        $this->requirePostRequest();
+        $request = Craft::$app->getRequest();
+        $siteId = $request->getParam('siteId');
+        $siteSettings = $request->getParam('site');
+
+        // Make sure the twitter handle isn't prefixed with an @
+        if (!empty($siteSettings['twitterHandle'])) {
+            $siteSettings['twitterHandle'] = ltrim($siteSettings['twitterHandle'], '@');
+        }
+        // Make sure the sameAsLinks are indexed by the handle
+        if (!empty($siteSettings['sameAsLinks'])) {
+            $siteSettings['sameAsLinks'] = ArrayHelper::index($siteSettings['sameAsLinks'], 'handle');
+        }
+        // The site settings for the appropriate meta bundle
+        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
+        if ($metaBundle) {
+            $metaBundle->metaSiteVars->setAttributes($siteSettings);
+            Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
+
+            Seomatic::$plugin->clearAllCaches();
+            Craft::$app->getSession()->setNotice(Craft::t('seomatic', 'SEOmatic site settings saved.'));
+        }
+
+        return $this->redirectToPostedUrl();
+    }
+
     // Protected Methods
     // =========================================================================
 
@@ -809,6 +934,7 @@ class SettingsController extends Controller
             $sourceField = $bundleSettings[$fieldName.'Field'] ?? '';
             $seoField = $fields['seoField'];
             $transformName = $fields['transformName'];
+            // Special-case Twitter transforms
             if ($transformName == 'twitter') {
                 $transformName = 'twitter-summary';
                 if ($globalsSettings['twitterCard'] == 'summary_large_image') {

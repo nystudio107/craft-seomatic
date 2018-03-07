@@ -13,6 +13,7 @@ namespace nystudio107\seomatic;
 
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
+use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\Settings;
 use nystudio107\seomatic\services\FrontendTemplates as FrontendTemplatesService;
 use nystudio107\seomatic\services\Helper as HelperService;
@@ -35,6 +36,7 @@ use craft\base\ElementInterface;
 use craft\base\Plugin;
 use craft\elements\Entry;
 use craft\elements\Category;
+use craft\errors\SiteNotFoundException;
 use craft\events\CategoryGroupEvent;
 use craft\events\ElementEvent;
 use craft\events\ExceptionEvent;
@@ -247,6 +249,12 @@ class Seomatic extends Plugin
             $subNavs['site'] = [
                 'label' => 'Site Settings',
                 'url'   => 'seomatic/site',
+            ];
+        }
+        if ($currentUser->can('seomatic:tracking-scripts')) {
+            $subNavs['tracking'] = [
+                'label' => 'Tracking Scripts',
+                'url'   => 'seomatic/tracking',
             ];
         }
         if ($currentUser->can('seomatic:plugin-settings')) {
@@ -586,6 +594,10 @@ class Seomatic extends Plugin
                 'seomatic/settings/site',
             'seomatic/site/<siteHandle:{handle}>' =>
                 'seomatic/settings/site',
+            'seomatic/tracking' =>
+                'seomatic/settings/tracking',
+            'seomatic/tracking/<siteHandle:{handle}>' =>
+                'seomatic/settings/tracking',
             'seomatic/plugin' =>
                 'seomatic/settings/plugin',
         ];
@@ -626,6 +638,24 @@ class Seomatic extends Plugin
      */
     protected function customAdminCpPermissions(): array
     {
+        // The script meta containers for the global meta bundle
+        try {
+            $currentSiteId = Craft::$app->getSites()->getCurrentSite()->id;
+        } catch (SiteNotFoundException $e) {
+            $currentSiteId = 0;
+        }
+        // Dynamic permissions for the scripts
+        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($currentSiteId);
+        $scripts = Seomatic::$plugin->metaBundles->getContainerDataFromBundle(
+            $metaBundle,
+            MetaScriptContainer::CONTAINER_TYPE
+        );
+        $scriptsPerms = [];
+        foreach ($scripts as $scriptHandle => $scriptData) {
+            $scriptsPerms["seomatic:tracking-scripts:${scriptHandle}"] = [
+                'label' => Craft::t('seomatic', $scriptData->name),
+            ];
+        }
         return [
             "seomatic:global-meta" => [
                 'label' => Craft::t('seomatic', 'Edit Global Meta'),
@@ -680,6 +710,10 @@ class Seomatic extends Plugin
                         'label' => Craft::t('seomatic', 'Tracking'),
                     ],
                 ]
+            ],
+            "seomatic:tracking-scripts" => [
+                'label' => Craft::t('seomatic', 'Edit Tracking Scripts'),
+                'nested' => $scriptsPerms,
             ],
             "seomatic:plugin-settings" => [
                 'label' => Craft::t('seomatic', 'Edit Plugin Settings'),

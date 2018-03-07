@@ -11,8 +11,8 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\helpers\PluginTemplate as PluginTemplateHelper;
 use nystudio107\seomatic\base\MetaItem;
+use nystudio107\seomatic\helpers\PluginTemplate as PluginTemplateHelper;
 
 use Craft;
 
@@ -42,6 +42,10 @@ class MetaScript extends MetaItem
     {
         $model = null;
         $model = new MetaScript($config);
+        // Load $templateString from the source template if it's not set
+        if (empty($model->templateString)) {
+            $model->loadTemplate();
+        }
 
         return $model;
     }
@@ -52,7 +56,22 @@ class MetaScript extends MetaItem
     /**
      * @var string
      */
+    public $name;
+
+    /**
+     * @var string
+     */
+    public $description;
+
+    /**
+     * @var string
+     */
     public $templatePath;
+
+    /**
+     * @var string
+     */
+    public $templateString;
 
     /**
      * @var int
@@ -80,18 +99,85 @@ class MetaScript extends MetaItem
     }
 
     /**
+     * Load the existing template into a string
+     */
+    public function loadTemplate()
+    {
+        $this->templateString = '';
+        // Try it from our plugin directory first
+        $path = Craft::getAlias('@nystudio107/seomatic/templates/')
+            .$this->templatePath;
+        if (file_exists($path)) {
+            $this->templateString = @file_get_contents($path);
+        } else {
+            // Next try it from the Craft template directory
+            $path = Craft::getAlias('@templates/')
+                . $this->templatePath;
+            if (file_exists($path)) {
+                $this->templateString = @file_get_contents($path);
+            }
+        }
+    }
+
+    /**
      * @inheritdoc
      */
     public function rules()
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['templatePath'], 'required'],
-            [['templatePath'], 'string'],
+            [
+                [
+                    'name',
+                    'description',
+                    'templatePath',
+                    'templateString'
+                ],
+                'string'
+            ],
+            [
+                [
+                    'position',
+                ],
+                'integer'
+            ],
+            [
+                [
+                    'name',
+                    'description',
+                    'templatePath',
+                    'templateString',
+                    'position',
+                ],
+                'required'
+            ],
             [['vars'], 'safe'],
         ]);
 
         return $rules;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function fields()
+    {
+        $fields = parent::fields();
+        switch ($this->scenario) {
+            case 'render':
+                $fields = array_diff_key(
+                    $fields,
+                    array_flip([
+                        'name',
+                        'description',
+                        'environment',
+                        'dependencies',
+                    ])
+                );
+                break;
+        }
+
+        return $fields;
     }
 
     /**
@@ -113,7 +199,7 @@ class MetaScript extends MetaItem
     {
         $html = '';
         if ($this->prepForRender($options)) {
-            $html = PluginTemplateHelper::renderPluginTemplate($this->templatePath, $this->vars);
+            $html = PluginTemplateHelper::renderStringTemplate($this->templateString, $this->vars);
         }
 
         return $html;
@@ -127,7 +213,7 @@ class MetaScript extends MetaItem
         $attributes = [];
 
         if ($this->prepForRender($options)) {
-            $attributes = ['script' => PluginTemplateHelper::renderPluginTemplate($this->templatePath, $this->vars)];
+            $attributes = ['script' => PluginTemplateHelper::renderStringTemplate($this->templateString, $this->vars)];
         }
 
         return $attributes;

@@ -523,6 +523,28 @@ class MetaBundles extends Component
     }
 
     /**
+     * Get all of the data from $bundle in containers of $type
+     *
+     * @param MetaBundle $bundle
+     * @param string     $type
+     *
+     * @return array
+     */
+    public function getContainerDataFromBundle(MetaBundle $bundle, string $type)
+    {
+        $containerData = [];
+        foreach ($bundle->metaContainers as $metaContainer) {
+            if ($metaContainer::CONTAINER_TYPE == $type) {
+                foreach ($metaContainer->data as $dataHandle => $data) {
+                    $containerData[$dataHandle] = $data;
+                }
+            }
+        }
+
+        return $containerData;
+    }
+
+    /**
      * Create all of the content meta bundles
      */
     public function createContentMetaBundles()

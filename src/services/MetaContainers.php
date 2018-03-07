@@ -322,6 +322,26 @@ class MetaContainers extends Component
     }
 
     /**
+     * Return the containers of a specific type
+     *
+     * @param string $type
+     *
+     * @return array
+     */
+    public function getContainersOfType(string $type): array
+    {
+        $containers = [];
+        /** @var  $metaContainer MetaContainer */
+        foreach ($this->metaContainers as $metaContainer) {
+            if ($metaContainer::CONTAINER_TYPE == $type) {
+                $containers[] = $metaContainer;
+            }
+        }
+
+        return $containers;
+    }
+
+    /**
      * Render the HTML of all MetaContainers of a specific $type
      *
      * @param string $type

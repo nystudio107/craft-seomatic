@@ -11,8 +11,9 @@
 
 namespace nystudio107\seomatic\helpers;
 
+use nystudio107\seomatic\Seomatic;
+
 use Craft;
-use craft\base\Component;
 use craft\helpers\Template;
 use craft\web\View;
 use yii\base\Exception;
@@ -26,6 +27,22 @@ class PluginTemplate
 {
     // Static Methods
     // =========================================================================
+
+    public static function renderStringTemplate(string $templateString, array $params = []): string
+    {
+        try {
+            $html = Seomatic::$view->renderString($templateString, $params);
+        } catch (\Exception $e) {
+            $html = Craft::t(
+                'seomatic',
+                'Error rendering template string -> {error}',
+                ['error' => $e->getMessage()]
+            );
+            Craft::error($html, __METHOD__);
+        }
+
+        return $html;
+    }
 
     /**
      * Render a plugin template

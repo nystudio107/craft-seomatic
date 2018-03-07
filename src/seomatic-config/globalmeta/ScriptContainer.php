@@ -33,15 +33,11 @@ return [
         'data'         => [
             'googleAnalytics' => [
                 'include' => false,
+                'name' => 'Google Analytics',
+                'description' => 'Collect, configure, and analyze your data to reach the right audience.',
                 'templatePath'   => '_frontend/scripts/googleAnalytics.twig',
                 'position'   => View::POS_HEAD,
                 'vars' => [
-                    'analyticsUrl' => [
-                        'title' => 'Google Analytics Script URL',
-                        'instructions' => 'The URL to the Google Analytics tracking script. Normally this should not be changed, unless you locally cache it.',
-                        'type' => 'string',
-                        'value' =>'//www.google-analytics.com/analytics.js',
-                    ],
                     'trackingId' => [
                         'title' => 'Google Analytics Tracking ID',
                         'instructions' => 'Only enter the ID, e.g.: `UA-XXXXXX-XX`, not the entire script code. [Learn More](https://support.google.com/analytics/answer/1032385?hl=e)',
@@ -62,33 +58,39 @@ return [
                     ],
                     'displayFeatures' => [
                         'title' => 'Display Features',
-                        'instructions' => '',
+                        'instructions' => 'Display Features',
                         'type' => 'bool',
                         'value' => false,
                     ],
                     'ecommerce' => [
                         'title' => 'Ecommerce',
-                        'instructions' => '',
+                        'instructions' => 'Ecommerce',
                         'type' => 'bool',
                         'value' => false,
                     ],
                     'enhancedEcommerce' => [
                         'title' => 'Enhanced Ecommerce',
-                        'instructions' => '',
+                        'instructions' => 'Enhanced Ecommerce',
                         'type' => 'bool',
                         'value' => false,
                     ],
                     'enhancedLinkAttribution' => [
                         'title' => 'Enhanced Link Attribution',
-                        'instructions' => '',
+                        'instructions' => 'Enhanced Link Attribution',
                         'type' => 'bool',
                         'value' => false,
                     ],
                     'linker' => [
                         'title' => 'Linker',
-                        'instructions' => '',
+                        'instructions' => 'Linker',
                         'type' => 'bool',
                         'value' => false,
+                    ],
+                    'analyticsUrl' => [
+                        'title' => 'Google Analytics Script URL',
+                        'instructions' => 'The URL to the Google Analytics tracking script. Normally this should not be changed, unless you locally cache it.',
+                        'type' => 'string',
+                        'value' =>'//www.google-analytics.com/analytics.js',
                     ],
                 ]
             ],
