@@ -226,7 +226,7 @@ class SettingsController extends Controller
         $siteId = $this->getSiteIdFromHandle($siteHandle);
 
         $pluginName = Seomatic::$settings->pluginName;
-        $templateTitle = Craft::t('seomatic', 'Content SEO');
+        $templateTitle = Craft::t('seomatic', 'Content Meta');
         // Asset bundle
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);

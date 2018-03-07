@@ -233,16 +233,16 @@ class Seomatic extends Plugin
         $navItem = parent::getCpNavItem();
         $currentUser = Craft::$app->getUser()->getIdentity();
         // Only show sub-navs the user has permission to view
-        if ($currentUser->can('seomatic:global-meta')) {
-            $subNavs['global'] = [
-                'label' => 'Global Meta',
-                'url'   => 'seomatic/global',
-            ];
-        }
         if ($currentUser->can('seomatic:content-meta')) {
             $subNavs['content'] = [
                 'label' => 'Content Meta',
                 'url'   => 'seomatic/content',
+            ];
+        }
+        if ($currentUser->can('seomatic:global-meta')) {
+            $subNavs['global'] = [
+                'label' => 'Global Meta',
+                'url'   => 'seomatic/global',
             ];
         }
         if ($currentUser->can('seomatic:site-settings')) {
