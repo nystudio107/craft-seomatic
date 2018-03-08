@@ -141,7 +141,7 @@
     fromCustom: "Custom Text" |t("seomatic"),
 } %}
 {% if textFieldSources is defined and textFieldSources |length %}
-    {% set textOptions = { summaryFromField: "Keywords From Field" |t("seomatic"), } | merge(textOptions) %}
+    {% set textOptions = { keywordsFromField: "Keywords From Field" |t("seomatic"), } | merge(textOptions) %}
     {% set textOptions = { fromField: "From Field" |t("seomatic"), } | merge(textOptions) %}
 {% endif %}
 
