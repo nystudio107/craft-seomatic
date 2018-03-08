@@ -41,7 +41,7 @@ $(function () {
     });
 
     // Show/hide the script settings containers
-    var selector = $('.seomatic-script-lightswitch').find('.lightswitch').first();
+    var selector = $('.seomatic-script-lightswitch').find('.lightswitch');
     $(selector).each(function( index, value ) {
         var value = $(this).find('input').first().val();
         if (value) {
