@@ -31,7 +31,7 @@ return [
         'ogDescription'           => '{seomatic.meta.seoDescription}',
         'ogImage'                 => '{seomatic.meta.seoImage}',
         'ogImageDescription'      => '{seomatic.meta.seoImageDescription}',
-        'twitterCard'             => 'summary',
+        'twitterCard'             => 'summary_large_image',
         'twitterCreator'          => '{seomatic.site.twitterHandle}',
         'twitterTitle'            => '{seomatic.meta.seoTitle}',
         'twitterSiteNamePosition' => '{seomatic.meta.siteNamePosition}',
