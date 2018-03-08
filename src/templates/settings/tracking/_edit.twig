@@ -81,7 +81,7 @@
     
                         {{ forms.textAreaField({
                             label: "Script Template" |t("seomatic"),
-                            instructions: "You can edit the script here." |t("seomatic") |raw,
+                            instructions: "The script that will render on the page. Note that this script will not render in `local` development or `staging` environments." |t("seomatic"),
                             id: "templateString",
                             name: "templateString",
                             value: scriptData.templateString,
