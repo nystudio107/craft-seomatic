@@ -549,10 +549,18 @@ class Seomatic extends Plugin
             $entry = $context['entry'];
             if (!empty($entry) && !empty($entry->uri)) {
                 Seomatic::$plugin->metaContainers->previewMetaContainers($entry->uri, $entry->siteId, true);
-                // Render our sidebar template
-                $html = Craft::$app->view->renderTemplate(
-                    'seomatic/_sidebars/entry.twig'
-                );
+                // Render our preview sidebar template
+                if (self::$settings->displayPreviewSidebar) {
+                    $html .= Craft::$app->view->renderTemplate(
+                        'seomatic/_sidebars/entry-preview.twig'
+                    );
+                }
+                // Render our analysis sidebar template
+                if (self::$settings->displayAnalysisSidebar) {
+                    $html .= Craft::$app->view->renderTemplate(
+                        'seomatic/_sidebars/entry-analysis.twig'
+                    );
+                }
             }
 
             return $html;
@@ -565,10 +573,18 @@ class Seomatic extends Plugin
             $category = $context['category'];
             if (!empty($category) && !empty($category->uri)) {
                 Seomatic::$plugin->metaContainers->previewMetaContainers($category->uri, $category->siteId, true);
-                // Render our sidebar template
-                $html = Craft::$app->view->renderTemplate(
-                    'seomatic/_sidebars/category.twig'
-                );
+                // Render our preview sidebar template
+                if (self::$settings->displayPreviewSidebar) {
+                    $html .= Craft::$app->view->renderTemplate(
+                        'seomatic/_sidebars/category-preview.twig'
+                    );
+                }
+                // Render our analysis sidebar template
+                if (self::$settings->displayAnalysisSidebar) {
+                    $html .= Craft::$app->view->renderTemplate(
+                        'seomatic/_sidebars/category-analysis.twig'
+                    );
+                }
             }
 
             return $html;

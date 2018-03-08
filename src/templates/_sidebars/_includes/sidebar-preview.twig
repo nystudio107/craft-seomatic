@@ -1,11 +1,9 @@
-{% import "_includes/forms" as forms %}
-
 {% do view.registerAssetBundle("nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset") %}
 {% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/assetbundles/seomatic/dist', true) %}
 
 {% set displayPreviewInlineStyles = "border: none; padding-left: 0;" %}
 <hr />
-<div class="meta read-only">
+<div class="meta">
     <div class="data">
         <h5 class="heading">{{ "SEO Preview:" |t('seomatic') }}</h5>
     </div>
@@ -15,16 +13,5 @@
         {% include "seomatic/_includes/twitterPreview.twig" %}
 
         {% include "seomatic/_includes/facebookPreview.twig" %}
-
     </div>
-    {#
-    <div class="field first">
-        <div class="preview-field-wrapper">
-            <div id="preview-display" class="btn big seomatic-livepreviewbtn">
-                {{ "Edit SEOmatic Settings" |t }}
-            </div>
-        </div>
-    </div>
-    #}
-
 </div>

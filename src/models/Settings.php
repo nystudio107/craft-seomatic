@@ -29,14 +29,24 @@ class Settings extends FluentModel
     public $pluginName = 'SEOmatic';
 
     /**
+     * @var bool Should SEOmatic render metadata?
+     */
+    public $renderEnabled = true;
+
+    /**
      * @var string The server environment, either `live`, `staging`, or `local`
      */
     public $environment = 'live';
 
     /**
-     * @var bool Should SEOmatic render metadata?
+     * @var bool Should SEOmatic display the SEO Preview sidebar?
      */
-    public $renderEnabled = true;
+    public $displayPreviewSidebar = true;
+
+    /**
+     * @var bool Should SEOmatic display the SEO Analysis sidebar?
+     */
+    public $displayAnalysisSidebar = true;
 
     /**
      * @var string If `devMode` is on, prefix the <title> with this string

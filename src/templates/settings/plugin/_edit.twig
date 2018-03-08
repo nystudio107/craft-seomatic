@@ -22,6 +22,15 @@
             warning: configWarning("pluginName", "seomatic"),
         }) }}
 
+        {{ forms.lightswitchField({
+            label: "Automatic Render Enabled" |t("seomatic"),
+            instructions: "Controls whether SEOmatic will automatically render metadata on your pages. If you turn this off, you will need to manually render the metadata." |t("seomatic"),
+            id: "renderEnabled",
+            name: "renderEnabled",
+            on: settings.renderEnabled,
+            warning: configWarning("renderEnabled", "seomatic"),
+        }) }}
+
         {{ forms.selectField({
             label: "Environment" |t("seomatic"),
             instructions: "The server environment, either `live`, `staging`, or `local`. If `devMode` is on, SEOmatic will override this setting to `local` Development." |t("seomatic"),
@@ -37,12 +46,21 @@
         }) }}
 
         {{ forms.lightswitchField({
-            label: "Automatic Render Enabled" |t("seomatic"),
-            instructions: "Should SEOmatic automatically render metadata?" |t("seomatic"),
-            id: "renderEnabled",
-            name: "renderEnabled",
-            on: settings.renderEnabled,
-            warning: configWarning("renderEnabled", "seomatic"),
+            label: "Display Sidebar SEO Preview" |t("seomatic"),
+            instructions: "Controls whether to display the Google, Twitter, and Facebook social media previews in the sidebar on entry and category pages." |t("seomatic"),
+            id: "displayPreviewSidebar",
+            name: "displayPreviewSidebar",
+            on: settings.displayPreviewSidebar,
+            warning: configWarning("displayPreviewSidebar", "seomatic"),
+        }) }}
+
+        {{ forms.lightswitchField({
+            label: "Display Sidebar SEO Analysis" |t("seomatic"),
+            instructions: "Controls whether to display the SEO and content analysis in the sidebar on entry and category pages." |t("seomatic"),
+            id: "displayAnalysisSidebar",
+            name: "displayAnalysisSidebar",
+            on: settings.displayAnalysisSidebar,
+            warning: configWarning("displayAnalysisSidebar", "seomatic"),
         }) }}
 
         {{ forms.textField({
