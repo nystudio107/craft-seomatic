@@ -74,6 +74,11 @@ class MetaScript extends MetaItem
     public $templateString;
 
     /**
+     * @var
+     */
+    public $bodyTemplatePath;
+
+    /**
      * @var int
      */
     public $position = View::POS_HEAD;
@@ -131,7 +136,8 @@ class MetaScript extends MetaItem
                     'name',
                     'description',
                     'templatePath',
-                    'templateString'
+                    'templateString',
+                    'bodyTemplatePath',
                 ],
                 'string'
             ],
@@ -147,6 +153,7 @@ class MetaScript extends MetaItem
                     'description',
                     'templatePath',
                     'templateString',
+                    'bodyTemplatePath',
                     'position',
                 ],
                 'required'
@@ -193,12 +200,31 @@ class MetaScript extends MetaItem
     }
 
     /**
+     * Render the script body HTML
+     *
+     * @param array $params
+     *
+     * @return string
+     */
+    public function renderBodyHtml($params = []):string
+    {
+        $html = '';
+        if (!empty($this->bodyTemplatePath)) {
+            if ($this->prepForRender($params)) {
+                $html = PluginTemplateHelper::renderPluginTemplate($this->bodyTemplatePath, $this->vars);
+            }
+        }
+
+        return $html;
+    }
+
+    /**
      * @inheritdoc
      */
     public function render($params = []):string
     {
         $html = '';
-        if ($this->prepForRender($options)) {
+        if ($this->prepForRender($params)) {
             $html = PluginTemplateHelper::renderStringTemplate($this->templateString, $this->vars);
         }
 

@@ -33,6 +33,14 @@ return [
         'data'         => [
             'googleAnalytics' => [
                 'include' => false,
+                'environment' => [
+                    'staging' => [
+                        'include' => false,
+                    ],
+                    'local'   => [
+                        'include' => false,
+                    ],
+                ],
                 'name' => 'Google Analytics',
                 'description' => 'Collect, configure, and analyze your data to reach the right audience.',
                 'templatePath'   => '_frontend/scripts/googleAnalytics.twig',
@@ -91,6 +99,48 @@ return [
                         'instructions' => 'The URL to the Google Analytics tracking script. Normally this should not be changed, unless you locally cache it.',
                         'type' => 'string',
                         'value' =>'//www.google-analytics.com/analytics.js',
+                    ],
+                ]
+            ],
+            'googleTagManager' => [
+                'include' => false,
+                'environment' => [
+                    'staging' => [
+                        'include' => false,
+                    ],
+                    'local'   => [
+                        'include' => false,
+                    ],
+                ],
+                'name' => 'Google Tag Manager',
+                'description' => 'Google Tag Manager is a tag management system that allows you to quickly and easily update tags and code snippets on your website. Once the Tag Manager snippet has been added to your website or mobile app, you can configure tags via a web-based user interface without having to alter and deploy additional code. [Learn more](https://support.google.com/tagmanager/answer/6102821?hl=en)',
+                'templatePath'   => '_frontend/scripts/googleTagManagerHead.twig',
+                'bodyTemplatePath'   => '_frontend/scripts/googleTagManagerBody.twig',
+                'position'   => View::POS_HEAD,
+                'vars' => [
+                    'googleTagManagerId' => [
+                        'title' => 'Google Tag Manager ID',
+                        'instructions' => 'Only enter the ID, e.g.: `GTM-XXXXXX`, not the entire script code. [Learn More](https://developers.google.com/tag-manager/quickstart)',
+                        'type' => 'string',
+                        'value' => '',
+                    ],
+                    'dataLayerVariableName' => [
+                        'title' => 'DataLayer Variable Name',
+                        'instructions' => 'The name to use for the JavaScript DataLayer variable. The value of this variable will be set to the `dataLayer` Twig template variable.',
+                        'type' => 'string',
+                        'value' => 'dl',
+                    ],
+                    'googleTagManagerUrl' => [
+                        'title' => 'Google Tag Manager Script URL',
+                        'instructions' => 'The URL to the Google Tag Manager script. Normally this should not be changed, unless you locally cache it.',
+                        'type' => 'string',
+                        'value' =>'//www.googletagmanager.com/gtm.js',
+                    ],
+                    'googleTagManagerNoScriptUrl' => [
+                        'title' => 'Google Tag Manager Script &lt;noscript&gt; URL',
+                        'instructions' => 'The URL to the Google Tag Manager `&lt;noscript&gt;`. Normally this should not be changed, unless you locally cache it.',
+                        'type' => 'string',
+                        'value' =>'//www.googletagmanager.com/ns.html',
                     ],
                 ]
             ],

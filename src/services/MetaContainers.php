@@ -11,11 +11,11 @@
 
 namespace nystudio107\seomatic\services;
 
-use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\helpers\Dependency as DependencyHelper;
+use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\models\jsonld\BreadcrumbList;
 use nystudio107\seomatic\models\MetaBundle;
@@ -26,6 +26,7 @@ use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 use nystudio107\seomatic\models\MetaLinkContainer;
 use nystudio107\seomatic\models\MetaScriptContainer;
+use nystudio107\seomatic\models\MetaScript;
 use nystudio107\seomatic\models\MetaTagContainer;
 use nystudio107\seomatic\models\MetaTitleContainer;
 
@@ -153,6 +154,22 @@ class MetaContainers extends Component
             );
             MetaValueHelper::cache();
             $this->loadingContainers = false;
+        }
+    }
+
+    /**
+     * Include any script body HTML
+     */
+    public function includeScriptBodyHtml()
+    {
+        $scriptContainers = $this->getContainersOfType(MetaScriptContainer::CONTAINER_TYPE);
+        foreach ($scriptContainers as $scriptContainer) {
+            foreach ($scriptContainer->data as $metaScript) {
+                /** @var MetaScript $metaScript */
+                if (!empty($metaScript->bodyTemplatePath)) {
+                    echo $metaScript->renderBodyHtml();
+                }
+            }
         }
     }
 

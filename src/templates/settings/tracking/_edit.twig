@@ -10,7 +10,7 @@
     {% set permission = "seomatic:tracking-scripts:#{scriptHandle}" %}
     {% if currentUser.can(permission) %}
         {% set tabs = tabs |merge({
-            "${scriptHandle}": {
+            (scriptHandle): {
                 url: "#tab-tracking-#{scriptHandle}",
                 label: "#{scriptData.name}" |t("seomatic"),
             },
@@ -39,7 +39,7 @@
     {% for scriptHandle,scriptData in scripts %}
         {% set permission = "seomatic:tracking-scripts:#{scriptHandle}" %}
         {% if currentUser.can(permission) %}
-            <div id='{{ "tab-tracking-#{scriptHandle}" }}' class="seomatic-script-wrapper">
+            <div id='{{ "tab-tracking-#{scriptHandle}" }}' class="seomatic-script-wrapper {% if not loop.first %}hidden{% endif %}">
                 {% namespace "scripts[#{scriptHandle}]" %}
                     <div class="field seomatic-script-lightswitch">
                     {{ forms.lightswitchField({
