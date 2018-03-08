@@ -66,31 +66,31 @@ return [
                     ],
                     'displayFeatures' => [
                         'title' => 'Display Features',
-                        'instructions' => 'Display Features',
+                        'instructions' => 'The display features plugin for analytics.js can be used to enable Advertising Features in Google Analytics, such as Remarketing, Demographics and Interest Reporting, and more. [Learn More](https://developers.google.com/analytics/devguides/collection/analyticsjs/display-features)',
                         'type' => 'bool',
                         'value' => false,
                     ],
                     'ecommerce' => [
                         'title' => 'Ecommerce',
-                        'instructions' => 'Ecommerce',
+                        'instructions' => 'Ecommerce tracking allows you to measure the number of transactions and revenue that your website generates. [Learn More](https://developers.google.com/analytics/devguides/collection/analyticsjs/ecommerce)',
                         'type' => 'bool',
                         'value' => false,
                     ],
                     'enhancedEcommerce' => [
                         'title' => 'Enhanced Ecommerce',
-                        'instructions' => 'Enhanced Ecommerce',
+                        'instructions' => 'The enhanced ecommerce plug-in for analytics.js enables the measurement of user interactions with products on ecommerce websites across the user\'s shopping experience, including: product impressions, product clicks, viewing product details, adding a product to a shopping cart, initiating the checkout process, transactions, and refunds. [Learn More](https://developers.google.com/analytics/devguides/collection/analyticsjs/enhanced-ecommerce)',
                         'type' => 'bool',
                         'value' => false,
                     ],
                     'enhancedLinkAttribution' => [
                         'title' => 'Enhanced Link Attribution',
-                        'instructions' => 'Enhanced Link Attribution',
+                        'instructions' => 'Enhanced Link Attribution improves the accuracy of your In-Page Analytics report by automatically differentiating between multiple links to the same URL on a single page by using link element IDs. [Learn More](https://developers.google.com/analytics/devguides/collection/analyticsjs/enhanced-link-attribution)',
                         'type' => 'bool',
                         'value' => false,
                     ],
                     'linker' => [
                         'title' => 'Linker',
-                        'instructions' => 'Linker',
+                        'instructions' => 'The linker plugin simplifies the process of implementing cross-domain tracking as described in the Cross-domain Tracking guide for analytics.js. [Learn More](https://developers.google.com/analytics/devguides/collection/analyticsjs/linker)',
                         'type' => 'bool',
                         'value' => false,
                     ],
@@ -142,7 +142,49 @@ return [
                         'type' => 'string',
                         'value' =>'//www.googletagmanager.com/ns.html',
                     ],
-                ]
+                ],
+            ],
+            'facebookPixel' => [
+                'include' => false,
+                'environment' => [
+                    'staging' => [
+                        'include' => false,
+                    ],
+                    'local'   => [
+                        'include' => false,
+                    ],
+                ],
+                'name' => 'Facebook Pixel',
+                'description' => 'The Facebook pixel is an analytics tool that helps you measure the effectiveness of your advertising. You can use the Facebook pixel to understand the actions people are taking on your website and reach audiences you care about. [Learn more](https://www.facebook.com/business/help/651294705016616)',
+                'templatePath'   => '_frontend/scripts/facebookPixelHead.twig',
+                'bodyTemplatePath'   => '_frontend/scripts/facebookPixelBody.twig',
+                'position'   => View::POS_HEAD,
+                'vars' => [
+                    'facebookPixelId' => [
+                        'title' => 'Facebook Pixel ID',
+                        'instructions' => 'Only enter the ID, e.g.: `XXXXXXXXXX`, not the entire script code. [Learn More](https://developers.facebook.com/docs/facebook-pixel/api-reference)',
+                        'type' => 'string',
+                        'value' => '',
+                    ],
+                    'sendPageView' => [
+                        'title' => 'Automatically send Facebook Pixel PageView',
+                        'instructions' => 'Controls whether the Facebook Pixel script automatically sends a PageView to Facebook Analytics when your pages are loaded.',
+                        'type' => 'bool',
+                        'value' => true,
+                    ],
+                    'facebookPixelUrl' => [
+                        'title' => 'Facebook Pixel Script URL',
+                        'instructions' => 'The URL to the Facebook Pixel script. Normally this should not be changed, unless you locally cache it.',
+                        'type' => 'string',
+                        'value' =>'//connect.facebook.net/en_US/fbevents.js',
+                    ],
+                    'facebookPixelNoScriptUrl' => [
+                        'title' => 'Facebook Pixel Script &lt;noscript&gt; URL',
+                        'instructions' => 'The URL to the Facebook Pixel `&lt;noscript&gt;`. Normally this should not be changed, unless you locally cache it.',
+                        'type' => 'string',
+                        'value' =>'//www.facebook.com/tr?id=FB_PIXEL_ID&amp;ev=PageView&amp;noscript=1',
+                    ],
+                ],
             ],
         ],
     ],
