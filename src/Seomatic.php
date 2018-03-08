@@ -235,13 +235,13 @@ class Seomatic extends Plugin
         // Only show sub-navs the user has permission to view
         if ($currentUser->can('seomatic:content-meta')) {
             $subNavs['content'] = [
-                'label' => 'Content Meta',
+                'label' => 'Content SEO',
                 'url'   => 'seomatic/content',
             ];
         }
         if ($currentUser->can('seomatic:global-meta')) {
             $subNavs['global'] = [
-                'label' => 'Global Meta',
+                'label' => 'Global SEO',
                 'url'   => 'seomatic/global',
             ];
         }
@@ -709,7 +709,7 @@ class Seomatic extends Plugin
                 ]
             ],
             "seomatic:content-meta" => [
-                'label' => Craft::t('seomatic', 'Edit Content Meta'),
+                'label' => Craft::t('seomatic', 'Edit Content SEO'),
                 'nested' => [
                     "seomatic:content-meta:general" => [
                         'label' => Craft::t('seomatic', 'General'),

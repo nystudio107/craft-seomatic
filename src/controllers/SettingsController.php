@@ -87,7 +87,7 @@ class SettingsController extends Controller
         $siteId = $this->getSiteIdFromHandle($siteHandle);
 
         $pluginName = Seomatic::$settings->pluginName;
-        $templateTitle = Craft::t('seomatic', 'Global Meta');
+        $templateTitle = Craft::t('seomatic', 'Global SEO');
         // Asset bundle
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
@@ -101,7 +101,7 @@ class SettingsController extends Controller
         $variables['fullPageForm'] = true;
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = Seomatic::$settings->pluginName;
-        $variables['title'] = $pluginName.' '.$templateTitle;
+        $variables['title'] = $templateTitle;
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -226,7 +226,7 @@ class SettingsController extends Controller
         $siteId = $this->getSiteIdFromHandle($siteHandle);
 
         $pluginName = Seomatic::$settings->pluginName;
-        $templateTitle = Craft::t('seomatic', 'Content Meta');
+        $templateTitle = Craft::t('seomatic', 'Content SEO');
         // Asset bundle
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
@@ -240,7 +240,7 @@ class SettingsController extends Controller
         $variables['fullPageForm'] = false;
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = Seomatic::$settings->pluginName;
-        $variables['title'] = $pluginName.' '.$templateTitle;
+        $variables['title'] = $templateTitle;
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -283,7 +283,6 @@ class SettingsController extends Controller
         $siteId = $this->getSiteIdFromHandle($siteHandle);
 
         $pluginName = Seomatic::$settings->pluginName;
-        $templateTitle = Craft::t('seomatic', 'Content Meta');
         // Asset bundle
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
@@ -293,15 +292,29 @@ class SettingsController extends Controller
             '@nystudio107/seomatic/assetbundles/seomatic/dist',
             true
         );
+        // Enabled sites
+        $this->setMultiSiteVariables($siteHandle, $siteId, $variables);
+        $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
+            $sourceBundleType,
+            $sourceHandle,
+            $variables['currentSiteId']
+        );
+        $variables['currentSourceHandle'] = $metaBundle->sourceHandle;
+        $variables['currentSourceBundleType'] = $metaBundle->sourceBundleType;
+        $templateTitle = $metaBundle->sourceName;
         // Basic variables
         $variables['fullPageForm'] = true;
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = Seomatic::$settings->pluginName;
-        $variables['title'] = $pluginName.' '.$templateTitle;
+        $variables['title'] = $templateTitle;
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
                 'url'   => UrlHelper::cpUrl('seomatic'),
+            ],
+            [
+                'label' => 'Content SEO',
+                'url'   => UrlHelper::cpUrl('seomatic/content'),
             ],
             [
                 'label' => $templateTitle,
@@ -310,42 +323,6 @@ class SettingsController extends Controller
         ];
         $variables['selectedSubnavItem'] = 'content';
 
-        // Enabled sites
-        $sites = Craft::$app->getSites();
-        $variables['currentSiteId'] = empty($siteId) ? Craft::$app->getSites()->currentSite->id : $siteId;
-        $variables['currentSiteHandle'] = empty($siteHandle)
-            ? Craft::$app->getSites()->currentSite->handle
-            : $siteHandle;
-        $variables['currentSourceHandle'] = $sourceHandle;
-        $variables['currentSourceBundleType'] = $sourceBundleType;
-        if (Craft::$app->getIsMultiSite()) {
-            // Set defaults based on the section settings
-            $variables['enabledSiteIds'] = [];
-            $variables['siteIds'] = [];
-
-            /** @var Site $site */
-            foreach ($sites->getAllSites() as $site) {
-                $variables['enabledSiteIds'][] = $site->id;
-                $variables['siteIds'][] = $site->id;
-            }
-        }
-
-        // Page title w/ revision label
-        $variables['showSites'] = (
-            Craft::$app->getIsMultiSite() &&
-            count($variables['enabledSiteIds'])
-        );
-
-        if ($variables['showSites']) {
-            $variables['sitesMenuLabel'] = Craft::t('site', $sites->getSiteById($variables['currentSiteId'])->name);
-        } else {
-            $variables['sitesMenuLabel'] = '';
-        }
-        $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
-            $sourceBundleType,
-            $sourceHandle,
-            $variables['currentSiteId']
-        );
         $variables['controllerHandle'] = "edit-content/${sourceBundleType}/${sourceHandle}";
 
         $variables['globals'] = $metaBundle->metaGlobalVars;
