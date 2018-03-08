@@ -36,6 +36,17 @@ class Helper extends Component
     // Public Methods
     // =========================================================================
 
+
+    /**
+     * Load the appropriate meta containers for the given $uri and optional $siteId
+     * @param string   $uri
+     * @param int|null $siteId
+     */
+    public static function loadMetadataForUri(string $uri = '', int $siteId = null)
+    {
+        Seomatic::$plugin->metaContainers->loadMetaContainers($uri, $siteId);
+    }
+
     /**
      * Get the URL to the $siteId's sitemap index
      *
