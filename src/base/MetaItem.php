@@ -47,7 +47,6 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
     public function init()
     {
         parent::init();
-
     }
 
     /**
