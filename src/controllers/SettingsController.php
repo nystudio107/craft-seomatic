@@ -785,7 +785,30 @@ class SettingsController extends Controller
             }
             switch ($source) {
                 case 'sameAsSeo':
-                    $globalsSettings[$fieldName] = '{seomatic.meta.'.$seoField.'}';
+                    $seoSource = $bundleSettings[$seoField.'Source'];
+                    $seoIds = $bundleSettings[$seoField.'Ids'];
+                    $seoSourceField = $bundleSettings[$seoField.'Field'] ?? '';
+                    switch ($seoSource) {
+                        case 'fromField':
+                            if (!empty($seoSourceField)) {
+                                $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
+                                    .$objectPrefix.$elementName.$seoSourceField.'.one()'
+                                    .', "'.$transformName.'"'
+                                    .', '.$siteId.')}';
+                            }
+                            break;
+                        case 'fromAsset':
+                            if (!empty($seoIds)) {
+                                $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
+                                    .$seoIds[0]
+                                    .', "'.$transformName.'"'
+                                    .', '.$siteId.')}';
+                            }
+                            break;
+                        default:
+                            $globalsSettings[$fieldName] = '{seomatic.meta.'.$seoField.'}';
+                            break;
+                    }
                     break;
                 case 'fromField':
                     if (!empty($sourceField)) {
