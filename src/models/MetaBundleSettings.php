@@ -92,6 +92,11 @@ class MetaBundleSettings extends VarsModel
     public $seoImageField = '';
 
     /**
+     * @var bool Whether the SEO image should be automatically transformed into an appropriate format
+     */
+    public $seoImageTransform = true;
+
+    /**
      * @var string The source that the SEO image description should come from
      */
     public $seoImageDescriptionSource;
@@ -137,6 +142,11 @@ class MetaBundleSettings extends VarsModel
     public $twitterImageField = '';
 
     /**
+     * @var bool Whether the Twitter image should be automatically transformed into an appropriate format
+     */
+    public $twitterImageTransform = true;
+
+    /**
      * @var string The source that the Twitter image description should come from
      */
     public $twitterImageDescriptionSource;
@@ -180,6 +190,11 @@ class MetaBundleSettings extends VarsModel
      * @var string The field handle that OpenGraph Image to be pulled from
      */
     public $ogImageField = '';
+
+    /**
+     * @var bool Whether the OpenGraph image should be automatically transformed into an appropriate format
+     */
+    public $ogImageTransform = true;
 
     /**
      * @var string The source that the Facebook OG image description should come from

@@ -26,6 +26,7 @@ return [
         'seoImageIds'                   => [],
         'seoImageSource'                => 'fromAsset',
         'seoImageField'                 => '',
+        'seoImageTransform'             => true,
         'seoImageDescriptionSource'     => 'fromCustom',
         'seoImageDescriptionField'      => '',
 
@@ -36,6 +37,7 @@ return [
         'twitterImageIds'               => [],
         'twitterImageSource'            => 'sameAsSeo',
         'twitterImageField'             => '',
+        'twitterImageTransform'         => true,
         'twitterImageDescriptionSource' => 'sameAsSeo',
         'twitterImageDescriptionField'  => '',
 
@@ -46,6 +48,7 @@ return [
         'ogImageIds'                    => [],
         'ogImageSource'                 => 'sameAsSeo',
         'ogImageField'                  => '',
+        'ogImageTransform'              => true,
         'ogImageDescriptionSource'      => 'sameAsSeo',
         'ogImageDescriptionField'       => '',
     ],
