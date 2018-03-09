@@ -468,7 +468,22 @@ class Seomatic extends Plugin
                 );
                 // The <body> placeholder tag has just rendered, include any script HTML
                 if (Seomatic::$settings->renderEnabled && Seomatic::$seomaticVariable) {
-                    Seomatic::$plugin->metaContainers->includeScriptBodyHtml();
+                    Seomatic::$plugin->metaContainers->includeScriptBodyHtml(View::POS_BEGIN);
+                }
+            }
+        );
+        // Handler: View::EVENT_END_BODY
+        Event::on(
+            View::class,
+            View::EVENT_END_BODY,
+            function (Event $event) {
+                Craft::debug(
+                    'View::EVENT_END_BODY',
+                    __METHOD__
+                );
+                // The </body> placeholder tag is about to be rendered, include any script HTML
+                if (Seomatic::$settings->renderEnabled && Seomatic::$seomaticVariable) {
+                    Seomatic::$plugin->metaContainers->includeScriptBodyHtml(View::POS_END);
                 }
             }
         );

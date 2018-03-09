@@ -159,14 +159,16 @@ class MetaContainers extends Component
 
     /**
      * Include any script body HTML
+     *
+     * @param int $bodyPosition
      */
-    public function includeScriptBodyHtml()
+    public function includeScriptBodyHtml(int $bodyPosition)
     {
         $scriptContainers = $this->getContainersOfType(MetaScriptContainer::CONTAINER_TYPE);
         foreach ($scriptContainers as $scriptContainer) {
             foreach ($scriptContainer->data as $metaScript) {
                 /** @var MetaScript $metaScript */
-                if (!empty($metaScript->bodyTemplatePath)) {
+                if (!empty($metaScript->bodyTemplatePath) && ($metaScript->bodyPosition == $bodyPosition)) {
                     echo $metaScript->renderBodyHtml();
                 }
             }

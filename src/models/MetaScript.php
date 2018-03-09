@@ -84,6 +84,11 @@ class MetaScript extends MetaItem
     public $position = View::POS_HEAD;
 
     /**
+     * @var int
+     */
+    public $bodyPosition = View::POS_BEGIN;
+
+    /**
      * @var array
      */
     public $vars;
