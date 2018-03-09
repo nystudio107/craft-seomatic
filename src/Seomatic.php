@@ -562,7 +562,7 @@ class Seomatic extends Plugin
             self::$view->registerAssetBundle(SeomaticAsset::class);
             /** @var  $entry Entry */
             $entry = $context['entry'];
-            if (!empty($entry) && !empty($entry->uri)) {
+            if (!empty($entry) && !empty($entry->uri) && self::$matchedElement) {
                 Seomatic::$plugin->metaContainers->previewMetaContainers($entry->uri, $entry->siteId, true);
                 // Render our preview sidebar template
                 if (self::$settings->displayPreviewSidebar) {
@@ -586,7 +586,7 @@ class Seomatic extends Plugin
             self::$view->registerAssetBundle(SeomaticAsset::class);
             /** @var  $category Category */
             $category = $context['category'];
-            if (!empty($category) && !empty($category->uri)) {
+            if (!empty($category) && !empty($category->uri) && self::$matchedElement) {
                 Seomatic::$plugin->metaContainers->previewMetaContainers($category->uri, $category->siteId, true);
                 // Render our preview sidebar template
                 if (self::$settings->displayPreviewSidebar) {
