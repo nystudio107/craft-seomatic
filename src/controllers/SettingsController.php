@@ -774,6 +774,7 @@ class SettingsController extends Controller
             $source = $bundleSettings[$fieldName.'Source'];
             $ids = $bundleSettings[$fieldName.'Ids'];
             $sourceField = $bundleSettings[$fieldName.'Field'] ?? '';
+            $transformImage = $bundleSettings[$fieldName.'Transform'];
             $seoField = $fields['seoField'];
             $transformName = $fields['transformName'];
             // Special-case Twitter transforms
@@ -785,45 +786,65 @@ class SettingsController extends Controller
             }
             switch ($source) {
                 case 'sameAsSeo':
-                    $seoSource = $bundleSettings[$seoField.'Source'];
-                    $seoIds = $bundleSettings[$seoField.'Ids'];
-                    $seoSourceField = $bundleSettings[$seoField.'Field'] ?? '';
-                    switch ($seoSource) {
-                        case 'fromField':
-                            if (!empty($seoSourceField)) {
-                                $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
-                                    .$objectPrefix.$elementName.$seoSourceField.'.one()'
-                                    .', "'.$transformName.'"'
-                                    .', '.$siteId.')}';
-                            }
-                            break;
-                        case 'fromAsset':
-                            if (!empty($seoIds)) {
-                                $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
-                                    .$seoIds[0]
-                                    .', "'.$transformName.'"'
-                                    .', '.$siteId.')}';
-                            }
-                            break;
-                        default:
-                            $globalsSettings[$fieldName] = '{seomatic.meta.'.$seoField.'}';
-                            break;
+                    if ($transformImage) {
+                        $seoSource = $bundleSettings[$seoField.'Source'];
+                        $seoIds = $bundleSettings[$seoField.'Ids'];
+                        $seoSourceField = $bundleSettings[$seoField.'Field'] ?? '';
+                        switch ($seoSource) {
+                            case 'fromField':
+                                if (!empty($seoSourceField)) {
+                                    $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
+                                        .$objectPrefix.$elementName.$seoSourceField.'.one()'
+                                        .', "'.$transformName.'"'
+                                        .', '.$siteId.')}';
+                                }
+                                break;
+                            case 'fromAsset':
+                                if (!empty($seoIds)) {
+                                    $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
+                                        .$seoIds[0]
+                                        .', "'.$transformName.'"'
+                                        .', '.$siteId.')}';
+                                }
+                                break;
+                            default:
+                                $globalsSettings[$fieldName] = '{seomatic.meta.'.$seoField.'}';
+                                break;
+                        }
+                    } else {
+                        $globalsSettings[$fieldName] = '{seomatic.meta.'.$seoField.'}';
                     }
                     break;
                 case 'fromField':
-                    if (!empty($sourceField)) {
-                        $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
-                            .$objectPrefix.$elementName.$sourceField.'.one()'
-                            .', "'.$transformName.'"'
-                            .', '.$siteId.')}';
+                    if ($transformImage) {
+                        if (!empty($sourceField)) {
+                            $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
+                                .$objectPrefix.$elementName.$sourceField.'.one()'
+                                .', "'.$transformName.'"'
+                                .', '.$siteId.')}';
+                        }
+                    } else {
+                        if (!empty($sourceField)) {
+                            $globalsSettings[$fieldName] = '{'
+                                .$elementName.$sourceField.'.one().url'
+                                .'}';
+                        }
                     }
                     break;
                 case 'fromAsset':
-                    if (!empty($ids)) {
-                        $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
-                            .$ids[0]
-                            .', "'.$transformName.'"'
-                            .', '.$siteId.')}';
+                    if ($transformImage) {
+                        if (!empty($ids)) {
+                            $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
+                                .$ids[0]
+                                .', "'.$transformName.'"'
+                                .', '.$siteId.')}';
+                        }
+                    } else {
+                        if (!empty($ids)) {
+                            $globalsSettings[$fieldName] = '{{ craft.app.assets.assetById('
+                                .$ids[0]
+                                .', '.$siteId.').url }}';
+                        }
                     }
                     break;
             }

@@ -184,7 +184,7 @@
 <div class="field seomatic-imageSourceWrapper" id="settings-twitterImageSource-field">
     <div class="heading">
         <label id="settings-twitterImageSource-label" for="settings-twitterImageSource">{{ "Twitter Image Source" |t("seomatic") }}</label>
-        <div class="instructions"><p>{{ "This is the image that will be used for display as Twitter Cards on tweets that link to the website. The image is automatically transformed to the right file format and aspect ratio." |t("seomatic") }}</p>
+        <div class="instructions"><p>{{ "This is the image that will be used for display as Twitter Cards on tweets that link to the website." |t("seomatic") }}</p>
         </div>
     </div>
     {% namespace "settings" %}
@@ -245,6 +245,19 @@
         </div>
     {% endnamespace %}
 </div>
+
+{############### SEO Image Transform ###############}
+
+{% namespace "settings" %}
+    {{ forms.lightswitchField({
+        label: "Transform Twitter Image" |t("seomatic"),
+        instructions: "Whether the Twitter image should be automatically transformed to an appropriate file format and aspect ratio for the chosen Twitter Card type." |t("seomatic"),
+        id: "twitterImageTransform",
+        name: "twitterImageTransform",
+        on: settings.twitterImageTransform,
+        warning: false,
+    }) }}
+{% endnamespace %}
 
 {############### Twitter Image Description ###############}
 

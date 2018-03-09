@@ -176,7 +176,7 @@
 <div class="field seomatic-imageSourceWrapper" id="settings-ogImageSource-field">
     <div class="heading">
         <label id="settings-ogImageSource-label" for="settings-ogImageSource">{{ "Facebook OpenGraph Image Source" |t("seomatic") }}</label>
-        <div class="instructions"><p>{{ "This is the image that will be used for display on Facebook posts that link to the website. The image is automatically transformed to the right file format and aspect ratio." |t("seomatic") }}</p>
+        <div class="instructions"><p>{{ "This is the image that will be used for display on Facebook posts that link to the website." |t("seomatic") }}</p>
         </div>
     </div>
     {% namespace "settings" %}
@@ -237,6 +237,19 @@
         </div>
     {% endnamespace %}
 </div>
+
+{############### Facebook OpenGraph Image Transform ###############}
+
+{% namespace "settings" %}
+    {{ forms.lightswitchField({
+        label: "Transform Facebook OpenGraph Image" |t("seomatic"),
+        instructions: "Whether the Facebook OpenGraph image should be automatically transformed to an appropriate file format and aspect ratio for display on Facebook." |t("seomatic"),
+        id: "ogImageTransform",
+        name: "ogImageTransform",
+        on: settings.ogImageTransform,
+        warning: false,
+    }) }}
+{% endnamespace %}
 
 {############### Facebook OpenGraph Image Description ###############}
 

@@ -257,6 +257,14 @@ class MetaBundleSettings extends VarsModel
                 'string'
             ],
             [
+                [
+                    'seoImageTransform',
+                    'twitterImageTransform',
+                    'ogImageTransform',
+                ],
+                'boolean'
+            ],
+            [
                 ['seoImageSource', 'twitterImageSource', 'ogImageSource'], 'in', 'range' => [
                     'sameAsSeo',
                     'fromField',

@@ -267,6 +267,19 @@
     {% endnamespace %}
 </div>
 
+{############### SEO Image Transform ###############}
+
+{% namespace "settings" %}
+    {{ forms.lightswitchField({
+    label: "Transform SEO Image" |t("seomatic"),
+    instructions: "Whether the SEO image should be automatically transformed to an appropriate file format and aspect ratio." |t("seomatic"),
+    id: "seoImageTransform",
+    name: "seoImageTransform",
+    on: settings.seoImageTransform,
+    warning: false,
+}) }}
+{% endnamespace %}
+
 {############### SEO Image Description ###############}
 
 {% set textOptions = {
@@ -276,7 +289,6 @@
     {% set textOptions = { summaryFromField: "Summary From Field" |t("seomatic"), } | merge(textOptions) %}
     {% set textOptions = { fromField: "From Field" |t("seomatic"), } | merge(textOptions) %}
 {% endif %}
-
 <div class="field seomatic-textSourceWrapper" id="settings-seoImageDescriptionSource-field">
     <div class="heading">
         <label id="settings-seoImageDescriptionSource-label" for="settings-seoImageDescriptionSource">{{ "SEO Image Description Source" |t("seomatic") }}</label>
