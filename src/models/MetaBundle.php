@@ -150,19 +150,19 @@ class MetaBundle extends Model
         }
 
         // Meta global variables
-        if (isset($this->metaGlobalVars)) {
+        if (isset($this->metaGlobalVars) && is_array($this->metaGlobalVars)) {
             $this->metaGlobalVars = MetaGlobalVars::create($this->metaGlobalVars);
         }
         // Meta site variables
-        if (isset($this->metaSiteVars)) {
+        if (isset($this->metaSiteVars) && is_array($this->metaSiteVars)) {
             $this->metaSiteVars = MetaSiteVars::create($this->metaSiteVars);
         }
         // Meta sitemap variables
-        if (isset($this->metaSitemapVars)) {
+        if (isset($this->metaSitemapVars) && is_array($this->metaSitemapVars)) {
             $this->metaSitemapVars = MetaSitemapVars::create($this->metaSitemapVars);
         }
         // Meta bundle settings
-        if (isset($this->metaBundleSettings)) {
+        if (isset($this->metaBundleSettings) && is_array($this->metaBundleSettings)) {
             $this->metaBundleSettings = MetaBundleSettings::create($this->metaBundleSettings);
         }
         // Meta containers
@@ -181,7 +181,7 @@ class MetaBundle extends Model
             //$this->redirectsContainer = RedirectsContainer::create($this->redirectsContainer);
         }
         // Frontend templates
-        if (isset($this->frontendTemplatesContainer)) {
+        if (isset($this->frontendTemplatesContainer) && is_array($this->frontendTemplatesContainer)) {
             $this->frontendTemplatesContainer = FrontendTemplateContainer::create($this->frontendTemplatesContainer);
         }
     }
