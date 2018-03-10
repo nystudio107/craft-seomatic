@@ -243,6 +243,7 @@ class MetaContainers extends Component
             try {
                 $this->metaGlobalVars->canonicalUrl = UrlHelper::siteUrl('/', null, null, $siteId);
             } catch (Exception $e) {
+                Craft::error($e->getMessage(), __METHOD__);
             }
         }
     }
