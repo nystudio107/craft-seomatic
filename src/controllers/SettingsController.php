@@ -135,7 +135,7 @@ class SettingsController extends Controller
         // Enabled sites
         $this->setMultiSiteVariables($siteHandle, $siteId, $variables);
         $variables['controllerHandle'] = 'global';
-        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($variables['currentSiteId']);
+        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle(intval($variables['currentSiteId']));
 
         $variables['globals'] = $metaBundle->metaGlobalVars;
         $variables['sitemap'] = $metaBundle->metaSitemapVars;
@@ -175,7 +175,7 @@ class SettingsController extends Controller
         // Preview the meta containers
         Seomatic::$plugin->metaContainers->previewMetaContainers(
             MetaBundles::GLOBAL_META_BUNDLE,
-            $variables['currentSiteId']
+            intval($variables['currentSiteId'])
         );
 
         // Render the template
@@ -202,13 +202,21 @@ class SettingsController extends Controller
         // The site settings for the appropriate meta bundle
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle) {
-            $this->parseTextSources($elementName, $globalsSettings, $bundleSettings);
-            $this->parseImageSources($elementName, $globalsSettings, $bundleSettings, $siteId);
-            $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
-            $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
+            if (is_array($globalsSettings) && is_array($bundleSettings)) {
+                $this->parseTextSources($elementName, $globalsSettings, $bundleSettings);
+                $this->parseImageSources($elementName, $globalsSettings, $bundleSettings, $siteId);
+                $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
+                $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
+            }
             $templateContainers = $metaBundle->frontendTemplatesContainer->data;
-            $templateContainers[FrontendTemplates::ROBOTS_TXT_HANDLE]->setAttributes($robotsTemplate);
-            $templateContainers[FrontendTemplates::HUMANS_TXT_HANDLE]->setAttributes($humansTemplate);
+            $robotsContainer = $templateContainers[FrontendTemplates::ROBOTS_TXT_HANDLE];
+            if (!empty($robotsContainer) && is_array($robotsTemplate)) {
+                $robotsContainer->setAttributes($robotsTemplate);
+            }
+            $humansContainer = $templateContainers[FrontendTemplates::HUMANS_TXT_HANDLE];
+            if (!empty($humansContainer) && is_array($humansTemplate)) {
+                $humansContainer->setAttributes($humansTemplate);
+            }
 
             Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
 
@@ -309,7 +317,7 @@ class SettingsController extends Controller
         $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
             $sourceBundleType,
             $sourceHandle,
-            $variables['currentSiteId']
+            intval($variables['currentSiteId'])
         );
         $variables['currentSourceHandle'] = $metaBundle->sourceHandle;
         $variables['currentSourceBundleType'] = $metaBundle->sourceBundleType;
@@ -424,7 +432,7 @@ class SettingsController extends Controller
         // Preview the meta containers
         Seomatic::$plugin->metaContainers->previewMetaContainers(
             $uri,
-            $variables['currentSiteId']
+            intval($variables['currentSiteId'])
         );
 
         // Render the template
@@ -466,11 +474,16 @@ class SettingsController extends Controller
             $siteId
         );
         if ($metaBundle) {
-            $this->parseTextSources($elementName, $globalsSettings, $bundleSettings);
-            $this->parseImageSources($elementName, $globalsSettings, $bundleSettings, $siteId);
-            $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
-            $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
-            $metaBundle->metaSitemapVars->setAttributes($sitemapSettings);
+            if (is_array($globalsSettings) && is_array($bundleSettings)) {
+                $this->parseTextSources($elementName, $globalsSettings, $bundleSettings);
+                $this->parseImageSources($elementName, $globalsSettings, $bundleSettings, $siteId);
+                $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
+                $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
+            }
+            if (is_array($sitemapSettings)) {
+                $metaBundle->metaSitemapVars->setAttributes($sitemapSettings);
+            }
+
             Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
 
             Seomatic::$plugin->clearAllCaches();
@@ -529,7 +542,7 @@ class SettingsController extends Controller
         $variables['controllerHandle'] = 'site';
 
         // The site settings for the appropriate meta bundle
-        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($variables['currentSiteId']);
+        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle(intval($variables['currentSiteId']));
         $variables['site'] = $metaBundle->metaSiteVars;
 
         // Render the template
@@ -558,7 +571,10 @@ class SettingsController extends Controller
         // The site settings for the appropriate meta bundle
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle) {
-            $metaBundle->metaSiteVars->setAttributes($siteSettings);
+            if (is_array($siteSettings)) {
+                $metaBundle->metaSiteVars->setAttributes($siteSettings);
+            }
+
             Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
 
             Seomatic::$plugin->clearAllCaches();
@@ -660,7 +676,7 @@ class SettingsController extends Controller
         $variables['controllerHandle'] = 'tracking';
 
         // The script meta containers for the global meta bundle
-        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($variables['currentSiteId']);
+        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle(intval($variables['currentSiteId']));
         $variables['scripts'] = Seomatic::$plugin->metaBundles->getContainerDataFromBundle(
             $metaBundle,
             MetaScriptContainer::CONTAINER_TYPE
@@ -900,14 +916,17 @@ class SettingsController extends Controller
             ? Craft::$app->getSites()->currentSite->handle
             : $siteHandle;
 
-        // Page title w/ revision label
+        // Page title
         $variables['showSites'] = (
             Craft::$app->getIsMultiSite() &&
             count($variables['enabledSiteIds'])
         );
 
         if ($variables['showSites']) {
-            $variables['sitesMenuLabel'] = Craft::t('site', $sites->getSiteById($variables['currentSiteId'])->name);
+            $variables['sitesMenuLabel'] = Craft::t(
+                'site',
+                $sites->getSiteById(intval($variables['currentSiteId']))->name
+            );
         } else {
             $variables['sitesMenuLabel'] = '';
         }
