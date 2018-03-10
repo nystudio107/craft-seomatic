@@ -228,10 +228,8 @@ class Sitemaps extends Component implements SitemapInterface
     {
         $url = '';
         $sites = Craft::$app->getSites();
-        if ($siteId !== null) {
-            $siteId = $sites->currentSite->id;
-        } else {
-            $siteId = 1;
+        if ($siteId === null) {
+            $siteId = $sites->currentSite->id ?? 1;
         }
         $site = $sites->getSiteById($siteId);
         if ($site !== null) {
@@ -260,10 +258,8 @@ class Sitemaps extends Component implements SitemapInterface
     {
         $url = '';
         $sites = Craft::$app->getSites();
-        if ($siteId !== null) {
-            $siteId = $sites->currentSite->id;
-        } else {
-            $siteId = 1;
+        if ($siteId === null) {
+            $siteId = $sites->currentSite->id ?? 1;
         }
         $site = $sites->getSiteById($siteId);
         $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
