@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\JsonLdType;
+use nystudio107\seomatic\models\jsonld\CreativeWork;
 
 /**
  * WebPageElement - A web page element, like a table or an image.
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\JsonLdType;
  * @since     3.0.0
  * @see       http://schema.org/WebPageElement
  */
-class WebPageElement extends JsonLdType
+class WebPageElement extends CreativeWork
 {
     // Static Public Properties
     // =========================================================================

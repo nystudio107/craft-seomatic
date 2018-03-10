@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\JsonLdType;
+use nystudio107\seomatic\models\jsonld\MediaObject;
 
 /**
  * VideoObject - A video file.
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\JsonLdType;
  * @since     3.0.0
  * @see       http://schema.org/VideoObject
  */
-class VideoObject extends JsonLdType
+class VideoObject extends MediaObject
 {
     // Static Public Properties
     // =========================================================================

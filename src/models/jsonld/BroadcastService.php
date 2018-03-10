@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\JsonLdType;
+use nystudio107\seomatic\models\jsonld\Service;
 
 /**
  * BroadcastService - A delivery service through which content is provided via
@@ -22,7 +22,7 @@ use nystudio107\seomatic\models\jsonld\JsonLdType;
  * @since     3.0.0
  * @see       http://schema.org/BroadcastService
  */
-class BroadcastService extends JsonLdType
+class BroadcastService extends Service
 {
     // Static Public Properties
     // =========================================================================

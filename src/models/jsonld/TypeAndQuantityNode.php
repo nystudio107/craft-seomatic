@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\JsonLdType;
+use nystudio107\seomatic\models\jsonld\StructuredValue;
 
 /**
  * TypeAndQuantityNode - A structured value indicating the quantity, unit of
@@ -22,7 +22,7 @@ use nystudio107\seomatic\models\jsonld\JsonLdType;
  * @since     3.0.0
  * @see       http://schema.org/TypeAndQuantityNode
  */
-class TypeAndQuantityNode extends JsonLdType
+class TypeAndQuantityNode extends StructuredValue
 {
     // Static Public Properties
     // =========================================================================
