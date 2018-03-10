@@ -56,7 +56,6 @@
             "redirects": "nystudio107\\seomatic\\services\\Redirects",
             "script": "nystudio107\\seomatic\\services\\Script",
             "sitemaps": "nystudio107\\seomatic\\services\\Sitemaps",
-            "template": "nystudio107\\seomatic\\services\\Template",
             "tag": "nystudio107\\seomatic\\services\\Tag",
             "title": "nystudio107\\seomatic\\services\\Title"
         }
