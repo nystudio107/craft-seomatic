@@ -255,9 +255,8 @@ class MetaContainers extends Component
      *
      * @param $data MetaItem The MetaItem to add to the container
      * @param $key  string   The key to the container to add the data to
-     *
      */
-    public function addToMetaContainer(MetaItem $data, string $key = null)
+    public function addToMetaContainer(MetaItem $data, string $key)
     {
         /** @var  $container MetaContainer */
         $container = $this->getMetaContainer($key);
@@ -294,14 +293,14 @@ class MetaContainers extends Component
      * @param string $type
      * @param string $key
      *
-     * @return MetaContainer
+     * @return null|MetaContainer
      */
     public function createMetaContainer(string $type, string $key): MetaContainer
     {
-        /** @var  $container MetaContainer */
+        /** @var MetaContainer $container */
         $container = null;
         if (empty($this->metaContainers[$key])) {
-            /** @var  $className MetaContainer */
+            /** @var MetaContainer $className */
             $className = null;
             // Create a new container based on the type passed in
             switch ($type) {
@@ -323,6 +322,7 @@ class MetaContainers extends Component
             }
             if ($className) {
                 $container = $className::create();
+                /** @var MetaContainer $className */
                 if ($container) {
                     $this->metaContainers[$key] = $container;
                 }
@@ -432,8 +432,8 @@ class MetaContainers extends Component
      */
     protected function loadGlobalMetaContainers(int $siteId = null)
     {
-        if (!$siteId) {
-            $siteId = Craft::$app->getSites()->currentSite->id;
+        if ($siteId === null) {
+            $siteId = Craft::$app->getSites()->currentSite->id ?? 1;
         }
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle) {
@@ -508,8 +508,8 @@ class MetaContainers extends Component
      */
     protected function setMatchedElement(string $uri, int $siteId = null)
     {
-        if (!$siteId) {
-            $siteId = Craft::$app->getSites()->primarySite->id;
+        if ($siteId === null) {
+            $siteId = Craft::$app->getSites()->primarySite->id ?? 1;
         }
         $uri = trim($uri, '/');
         /** @var Element $element */
