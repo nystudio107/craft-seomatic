@@ -84,6 +84,7 @@ class SettingsController extends Controller
      */
     public function actionGlobal(string $siteHandle = null): Response
     {
+        $variables = [];
         $siteId = $this->getSiteIdFromHandle($siteHandle);
 
         $pluginName = Seomatic::$settings->pluginName;
@@ -92,6 +93,7 @@ class SettingsController extends Controller
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
         } catch (InvalidConfigException $e) {
+            Craft::error($e->getMessage(), __METHOD__);
         }
         $variables['baseAssetUrl'] = Craft::$app->assetManager->getPublishedUrl(
             '@nystudio107/seomatic/assetbundles/seomatic/dist',
@@ -228,6 +230,7 @@ class SettingsController extends Controller
      */
     public function actionContent(string $siteHandle = null): Response
     {
+        $variables = [];
         // Get the site to edit
         $siteId = $this->getSiteIdFromHandle($siteHandle);
 
@@ -237,6 +240,7 @@ class SettingsController extends Controller
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
         } catch (InvalidConfigException $e) {
+            Craft::error($e->getMessage(), __METHOD__);
         }
         $variables['baseAssetUrl'] = Craft::$app->assetManager->getPublishedUrl(
             '@nystudio107/seomatic/assetbundles/seomatic/dist',
@@ -284,6 +288,7 @@ class SettingsController extends Controller
         string $sourceHandle,
         string $siteHandle = null
     ): Response {
+        $variables = [];
         // @TODO: Let people choose an entry/categorygroup/product as the preview
         // Get the site to edit
         $siteId = $this->getSiteIdFromHandle($siteHandle);
@@ -293,6 +298,7 @@ class SettingsController extends Controller
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
         } catch (InvalidConfigException $e) {
+            Craft::error($e->getMessage(), __METHOD__);
         }
         $variables['baseAssetUrl'] = Craft::$app->assetManager->getPublishedUrl(
             '@nystudio107/seomatic/assetbundles/seomatic/dist',
@@ -412,7 +418,7 @@ class SettingsController extends Controller
                 break;
             // @TODO: handle commerce products
         }
-        if ($uri == '__home__') {
+        if (($uri == '__home__') || ($uri === null)) {
             $uri = '/';
         }
         // Preview the meta containers
@@ -485,6 +491,7 @@ class SettingsController extends Controller
      */
     public function actionSite(string $siteHandle = null): Response
     {
+        $variables = [];
         // Get the site to edit
         $siteId = $this->getSiteIdFromHandle($siteHandle);
 
@@ -494,6 +501,7 @@ class SettingsController extends Controller
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
         } catch (InvalidConfigException $e) {
+            Craft::error($e->getMessage(), __METHOD__);
         }
         $variables['baseAssetUrl'] = Craft::$app->assetManager->getPublishedUrl(
             '@nystudio107/seomatic/assetbundles/seomatic/dist',
@@ -563,18 +571,18 @@ class SettingsController extends Controller
     /**
      * Plugin settings
      *
-     * @param array $variables
-     *
      * @return Response The rendered result
      */
-    public function actionPlugin(array $variables = []): Response
+    public function actionPlugin(): Response
     {
+        $variables = [];
         $pluginName = Seomatic::$settings->pluginName;
         $templateTitle = Craft::t('seomatic', 'Plugin Settings');
         // Asset bundle
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
         } catch (InvalidConfigException $e) {
+            Craft::error($e->getMessage(), __METHOD__);
         }
         $variables['baseAssetUrl'] = Craft::$app->assetManager->getPublishedUrl(
             '@nystudio107/seomatic/assetbundles/seomatic/dist',
@@ -614,6 +622,7 @@ class SettingsController extends Controller
      */
     public function actionTracking(string $siteHandle = null): Response
     {
+        $variables = [];
         // Get the site to edit
         $siteId = $this->getSiteIdFromHandle($siteHandle);
 
@@ -623,6 +632,7 @@ class SettingsController extends Controller
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
         } catch (InvalidConfigException $e) {
+            Craft::error($e->getMessage(), __METHOD__);
         }
         $variables['baseAssetUrl'] = Craft::$app->assetManager->getPublishedUrl(
             '@nystudio107/seomatic/assetbundles/seomatic/dist',
