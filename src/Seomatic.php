@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic;
 
+use craft\elements\User;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\models\MetaScriptContainer;
@@ -144,7 +145,7 @@ class Seomatic extends Plugin
         if ($element) {
             self::$language = MetaValueHelper::getSiteLanguage($element->siteId);
         } else {
-            self::$language = MetaValueHelper::getSiteLanguage(0);
+            self::$language = MetaValueHelper::getSiteLanguage(null);
         }
         MetaValueHelper::cache();
     }
@@ -231,6 +232,7 @@ class Seomatic extends Plugin
     {
         $subNavs = [];
         $navItem = parent::getCpNavItem();
+        /** @var User $currentUser */
         $currentUser = Craft::$app->getUser()->getIdentity();
         // Only show sub-navs the user has permission to view
         if ($currentUser->can('seomatic:content-meta')) {
@@ -297,15 +299,17 @@ class Seomatic extends Plugin
                     'Sections::EVENT_AFTER_SAVE_SECTION',
                     __METHOD__
                 );
-                Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
-                    MetaBundlesService::SECTION_META_BUNDLE,
-                    $event->section->id,
-                    $event->isNew
-                );
-                // Create the meta bundles for this section if it's new
-                if ($event->isNew) {
-                    Seomatic::$plugin->metaBundles->createContentMetaBundleForSection($event->section);
-                    Seomatic::$plugin->sitemaps->submitSitemapIndex();
+                if ($event->section->id !== null) {
+                    Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
+                        MetaBundlesService::SECTION_META_BUNDLE,
+                        $event->section->id,
+                        $event->isNew
+                    );
+                    // Create the meta bundles for this section if it's new
+                    if ($event->isNew) {
+                        Seomatic::$plugin->metaBundles->createContentMetaBundleForSection($event->section);
+                        Seomatic::$plugin->sitemaps->submitSitemapIndex();
+                    }
                 }
             }
         );
@@ -318,16 +322,18 @@ class Seomatic extends Plugin
                     'Sections::EVENT_AFTER_DELETE_SECTION',
                     __METHOD__
                 );
-                Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
-                    MetaBundlesService::SECTION_META_BUNDLE,
-                    $event->section->id,
-                    false
-                );
-                // Delete the meta bundles for this section
-                Seomatic::$plugin->metaBundles->deleteMetaBundleBySourceId(
-                    MetaBundlesService::SECTION_META_BUNDLE,
-                    $event->section->id
-                );
+                if ($event->section->id !== null) {
+                    Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
+                        MetaBundlesService::SECTION_META_BUNDLE,
+                        $event->section->id,
+                        false
+                    );
+                    // Delete the meta bundles for this section
+                    Seomatic::$plugin->metaBundles->deleteMetaBundleBySourceId(
+                        MetaBundlesService::SECTION_META_BUNDLE,
+                        $event->section->id
+                    );
+                }
             }
         );
         // Handler: Categories::EVENT_AFTER_SAVE_GROUP
@@ -339,15 +345,17 @@ class Seomatic extends Plugin
                     'Categories::EVENT_AFTER_SAVE_GROUP',
                     __METHOD__
                 );
-                Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
-                    MetaBundlesService::CATEGORYGROUP_META_BUNDLE,
-                    $event->categoryGroup->id,
-                    $event->isNew
-                );
-                // Create the meta bundles for this category if it's new
-                if ($event->isNew) {
-                    Seomatic::$plugin->metaBundles->createContentMetaBundleForCategoryGroup($event->categoryGroup);
-                    Seomatic::$plugin->sitemaps->submitSitemapIndex();
+                if ($event->categoryGroup->id !== null) {
+                    Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
+                        MetaBundlesService::CATEGORYGROUP_META_BUNDLE,
+                        $event->categoryGroup->id,
+                        $event->isNew
+                    );
+                    // Create the meta bundles for this category if it's new
+                    if ($event->isNew) {
+                        Seomatic::$plugin->metaBundles->createContentMetaBundleForCategoryGroup($event->categoryGroup);
+                        Seomatic::$plugin->sitemaps->submitSitemapIndex();
+                    }
                 }
             }
         );
@@ -360,16 +368,18 @@ class Seomatic extends Plugin
                     'Categories::EVENT_AFTER_DELETE_GROUP',
                     __METHOD__
                 );
-                Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
-                    MetaBundlesService::CATEGORYGROUP_META_BUNDLE,
-                    $event->categoryGroup->id,
-                    false
-                );
-                // Delete the meta bundles for this category
-                Seomatic::$plugin->metaBundles->deleteMetaBundleBySourceId(
-                    MetaBundlesService::CATEGORYGROUP_META_BUNDLE,
-                    $event->categoryGroup->id
-                );
+                if ($event->categoryGroup->id !== null) {
+                    Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
+                        MetaBundlesService::CATEGORYGROUP_META_BUNDLE,
+                        $event->categoryGroup->id,
+                        false
+                    );
+                    // Delete the meta bundles for this category
+                    Seomatic::$plugin->metaBundles->deleteMetaBundleBySourceId(
+                        MetaBundlesService::CATEGORYGROUP_META_BUNDLE,
+                        $event->categoryGroup->id
+                    );
+                }
             }
         );
         // Handler: Elements::EVENT_AFTER_SAVE_ELEMENT
@@ -622,29 +632,29 @@ class Seomatic extends Plugin
     protected function customAdminCpRoutes(): array
     {
         return [
-            'seomatic' =>
+            'seomatic'                                                                                        =>
                 'seomatic/settings/content',
-            'seomatic/global' =>
+            'seomatic/global'                                                                                 =>
                 'seomatic/settings/global',
-            'seomatic/global/<siteHandle:{handle}>' =>
+            'seomatic/global/<siteHandle:{handle}>'                                                           =>
                 'seomatic/settings/global',
-            'seomatic/content' =>
+            'seomatic/content'                                                                                =>
                 'seomatic/settings/content',
-            'seomatic/content/<siteHandle:{handle}>' =>
+            'seomatic/content/<siteHandle:{handle}>'                                                          =>
                 'seomatic/settings/content',
-            'seomatic/edit-content/<sourceBundleType:{handle}>/<sourceHandle:{handle}>' =>
+            'seomatic/edit-content/<sourceBundleType:{handle}>/<sourceHandle:{handle}>'                       =>
                 'seomatic/settings/edit-content',
             'seomatic/edit-content/<sourceBundleType:{handle}>/<sourceHandle:{handle}>/<siteHandle:{handle}>' =>
                 'seomatic/settings/edit-content',
-            'seomatic/site' =>
+            'seomatic/site'                                                                                   =>
                 'seomatic/settings/site',
-            'seomatic/site/<siteHandle:{handle}>' =>
+            'seomatic/site/<siteHandle:{handle}>'                                                             =>
                 'seomatic/settings/site',
-            'seomatic/tracking' =>
+            'seomatic/tracking'                                                                               =>
                 'seomatic/settings/tracking',
-            'seomatic/tracking/<siteHandle:{handle}>' =>
+            'seomatic/tracking/<siteHandle:{handle}>'                                                         =>
                 'seomatic/settings/tracking',
-            'seomatic/plugin' =>
+            'seomatic/plugin'                                                                                 =>
                 'seomatic/settings/plugin',
         ];
     }
@@ -661,22 +671,23 @@ class Seomatic extends Plugin
             [
                 'key'    => 'seomatic-frontendtemplate-caches',
                 'label'  => Craft::t('seomatic', 'SEOmatic frontend template caches'),
-                'action' =>  [Seomatic::$plugin->frontendTemplates, 'invalidateCaches'],
+                'action' => [Seomatic::$plugin->frontendTemplates, 'invalidateCaches'],
             ],
             // Meta bundle caches
             [
                 'key'    => 'seomatic-metabundle-caches',
                 'label'  => Craft::t('seomatic', 'SEOmatic metadata caches'),
-                'action' =>  [Seomatic::$plugin->metaContainers, 'invalidateCaches'],
+                'action' => [Seomatic::$plugin->metaContainers, 'invalidateCaches'],
             ],
             // Sitemap caches
             [
                 'key'    => 'seomatic-sitemap-caches',
                 'label'  => Craft::t('seomatic', 'SEOmatic sitemap caches'),
-                'action' =>  [Seomatic::$plugin->sitemaps, 'invalidateCaches'],
-            ]
+                'action' => [Seomatic::$plugin->sitemaps, 'invalidateCaches'],
+            ],
         ];
     }
+
     /**
      * Returns the custom AdminCP user permissions.
      *
@@ -686,9 +697,9 @@ class Seomatic extends Plugin
     {
         // The script meta containers for the global meta bundle
         try {
-            $currentSiteId = Craft::$app->getSites()->getCurrentSite()->id;
+            $currentSiteId = Craft::$app->getSites()->getCurrentSite()->id ?? 1;
         } catch (SiteNotFoundException $e) {
-            $currentSiteId = 0;
+            $currentSiteId = 1;
         }
         // Dynamic permissions for the scripts
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($currentSiteId);
@@ -702,66 +713,67 @@ class Seomatic extends Plugin
                 'label' => Craft::t('seomatic', $scriptData->name),
             ];
         }
+
         return [
-            "seomatic:global-meta" => [
-                'label' => Craft::t('seomatic', 'Edit Global Meta'),
+            "seomatic:global-meta"      => [
+                'label'  => Craft::t('seomatic', 'Edit Global Meta'),
                 'nested' => [
-                    "seomatic:global-meta:general" => [
+                    "seomatic:global-meta:general"  => [
                         'label' => Craft::t('seomatic', 'General'),
                     ],
-                    "seomatic:global-meta:twitter" => [
+                    "seomatic:global-meta:twitter"  => [
                         'label' => Craft::t('seomatic', 'Twitter'),
                     ],
                     "seomatic:global-meta:facebook" => [
                         'label' => Craft::t('seomatic', 'Facebook'),
                     ],
-                    "seomatic:global-meta:robots" => [
+                    "seomatic:global-meta:robots"   => [
                         'label' => Craft::t('seomatic', 'Robots'),
                     ],
-                    "seomatic:global-meta:humans" => [
+                    "seomatic:global-meta:humans"   => [
                         'label' => Craft::t('seomatic', 'Humans'),
                     ],
-                ]
+                ],
             ],
-            "seomatic:content-meta" => [
-                'label' => Craft::t('seomatic', 'Edit Content SEO'),
+            "seomatic:content-meta"     => [
+                'label'  => Craft::t('seomatic', 'Edit Content SEO'),
                 'nested' => [
-                    "seomatic:content-meta:general" => [
+                    "seomatic:content-meta:general"  => [
                         'label' => Craft::t('seomatic', 'General'),
                     ],
-                    "seomatic:content-meta:twitter" => [
+                    "seomatic:content-meta:twitter"  => [
                         'label' => Craft::t('seomatic', 'Twitter'),
                     ],
                     "seomatic:content-meta:facebook" => [
                         'label' => Craft::t('seomatic', 'Facebook'),
                     ],
-                    "seomatic:content-meta:sitemap" => [
+                    "seomatic:content-meta:sitemap"  => [
                         'label' => Craft::t('seomatic', 'Sitemap'),
                     ],
-                ]
+                ],
             ],
-            "seomatic:site-settings" => [
-                'label' => Craft::t('seomatic', 'Edit Site Settings'),
+            "seomatic:site-settings"    => [
+                'label'  => Craft::t('seomatic', 'Edit Site Settings'),
                 'nested' => [
-                    "seomatic:site-settings:identity" => [
+                    "seomatic:site-settings:identity"     => [
                         'label' => Craft::t('seomatic', 'Identity'),
                     ],
-                    "seomatic:site-settings:creator" => [
+                    "seomatic:site-settings:creator"      => [
                         'label' => Craft::t('seomatic', 'Creator'),
                     ],
                     "seomatic:site-settings:social-media" => [
                         'label' => Craft::t('seomatic', 'Social Media'),
                     ],
-                    "seomatic:site-settings:tracking" => [
+                    "seomatic:site-settings:tracking"     => [
                         'label' => Craft::t('seomatic', 'Tracking'),
                     ],
-                ]
+                ],
             ],
             "seomatic:tracking-scripts" => [
-                'label' => Craft::t('seomatic', 'Edit Tracking Scripts'),
+                'label'  => Craft::t('seomatic', 'Edit Tracking Scripts'),
                 'nested' => $scriptsPerms,
             ],
-            "seomatic:plugin-settings" => [
+            "seomatic:plugin-settings"  => [
                 'label' => Craft::t('seomatic', 'Edit Plugin Settings'),
             ],
         ];

@@ -268,7 +268,7 @@ class MetaBundles extends Component
      * Invalidate the caches and data structures associated with this MetaBundle
      *
      * @param string $sourceType
-     * @param int    $sourceId
+     * @param int|null    $sourceId
      * @param bool   $isNew
      */
     public function invalidateMetaBundleById(string $sourceType, int $sourceId, bool $isNew = false)
