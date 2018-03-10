@@ -198,7 +198,7 @@ class MetaContainers extends Component
                 if (is_array($content)) {
                     $contentHeader = '';
                     foreach ($content as $contentVal) {
-                        $contentHeader.= ($content.',');
+                        $contentHeader.= ($contentVal.',');
                     }
                     $contentHeader = rtrim($contentHeader, ',');
                 } else {
