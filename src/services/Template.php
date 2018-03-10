@@ -67,7 +67,7 @@ class Template extends Component implements MetaServiceInterface
      */
     public function add($frontendTemplate, string $handle = '')
     {
-        $key = FrontendTemplateContainer::CONTAINER_TYPE . $handle;
+        $key = FrontendTemplateContainer::CONTAINER_TYPE.$handle;
         Seomatic::$plugin->metaContainers->addToMetaContainer(FrontendTemplateContainer, $key);
 
         /** @var EditableTemplate $frontendTemplate */
@@ -89,7 +89,8 @@ class Template extends Component implements MetaServiceInterface
      */
     public function container(string $handle = '')
     {
-        $key = FrontendTemplateContainer::CONTAINER_TYPE . $handle;
+        $key = FrontendTemplateContainer::CONTAINER_TYPE.$handle;
+
         return Seomatic::$plugin->metaContainers->getMetaContainer($key);
     }
 }

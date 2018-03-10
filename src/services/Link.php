@@ -67,7 +67,7 @@ class Link extends MetaService implements MetaServiceInterface
      */
     public function add($metaItem, string $handle = self::GENERAL_HANDLE)
     {
-        $key = MetaLinkContainer::CONTAINER_TYPE . $handle;
+        $key = MetaLinkContainer::CONTAINER_TYPE.$handle;
         Seomatic::$plugin->metaContainers->addToMetaContainer($metaItem, $key);
 
         /** @var MetaLink $metaItem */
@@ -80,6 +80,7 @@ class Link extends MetaService implements MetaServiceInterface
     public function render()
     {
         $key = MetaLinkContainer::CONTAINER_TYPE;
+
         return TemplateHelper::raw(Seomatic::$plugin->metaContainers->renderContainersByType($key));
     }
 
@@ -90,7 +91,8 @@ class Link extends MetaService implements MetaServiceInterface
      */
     public function container(string $handle = self::GENERAL_HANDLE)
     {
-        $key = MetaLinkContainer::CONTAINER_TYPE . $handle;
+        $key = MetaLinkContainer::CONTAINER_TYPE.$handle;
+
         return Seomatic::$plugin->metaContainers->getMetaContainer($key);
     }
 }

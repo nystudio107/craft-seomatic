@@ -71,7 +71,7 @@ class JsonLd extends MetaService implements MetaServiceInterface
      */
     public function add($metaItem, string $handle = self::GENERAL_HANDLE): MetaJsonLd
     {
-        $key = MetaJsonLdContainer::CONTAINER_TYPE . $handle;
+        $key = MetaJsonLdContainer::CONTAINER_TYPE.$handle;
         Seomatic::$plugin->metaContainers->addToMetaContainer($metaItem, $key);
 
         /** @var MetaJsonLd $metaItem */
@@ -84,6 +84,7 @@ class JsonLd extends MetaService implements MetaServiceInterface
     public function render()
     {
         $key = MetaJsonLdContainer::CONTAINER_TYPE;
+
         return TemplateHelper::raw(Seomatic::$plugin->metaContainers->renderContainersByType($key));
     }
 
@@ -94,7 +95,8 @@ class JsonLd extends MetaService implements MetaServiceInterface
      */
     public function container(string $handle = self::GENERAL_HANDLE)
     {
-        $key = MetaJsonLdContainer::CONTAINER_TYPE . $handle;
+        $key = MetaJsonLdContainer::CONTAINER_TYPE.$handle;
+
         return Seomatic::$plugin->metaContainers->getMetaContainer($key);
     }
 }

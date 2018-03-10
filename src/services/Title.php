@@ -64,7 +64,7 @@ class Title extends MetaService implements MetaServiceInterface
      */
     public function add($metaItem, string $handle = self::GENERAL_HANDLE)
     {
-        $key = MetaTitleContainer::CONTAINER_TYPE . $handle;
+        $key = MetaTitleContainer::CONTAINER_TYPE.$handle;
         Seomatic::$plugin->metaContainers->addToMetaContainer($metaItem, $key);
 
         /** @var MetaTitle $metaItem */
@@ -77,6 +77,7 @@ class Title extends MetaService implements MetaServiceInterface
     public function render()
     {
         $key = MetaTitleContainer::CONTAINER_TYPE;
+
         return TemplateHelper::raw(Seomatic::$plugin->metaContainers->renderContainersByType($key));
     }
 
@@ -87,7 +88,8 @@ class Title extends MetaService implements MetaServiceInterface
      */
     public function container(string $handle = self::GENERAL_HANDLE)
     {
-        $key = MetaTitleContainer::CONTAINER_TYPE . $handle;
+        $key = MetaTitleContainer::CONTAINER_TYPE.$handle;
+
         return Seomatic::$plugin->metaContainers->getMetaContainer($key);
     }
 }

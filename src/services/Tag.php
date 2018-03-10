@@ -75,7 +75,7 @@ class Tag extends MetaService implements MetaServiceInterface
      */
     public function add($metaItem, string $handle = self::GENERAL_HANDLE)
     {
-        $key = MetaTagContainer::CONTAINER_TYPE . $handle;
+        $key = MetaTagContainer::CONTAINER_TYPE.$handle;
         Seomatic::$plugin->metaContainers->addToMetaContainer($metaItem, $key);
 
         /** @var MetaTag $metaItem */
@@ -88,6 +88,7 @@ class Tag extends MetaService implements MetaServiceInterface
     public function render()
     {
         $key = MetaTagContainer::CONTAINER_TYPE;
+
         return TemplateHelper::raw(Seomatic::$plugin->metaContainers->renderContainersByType($key));
     }
 
@@ -98,7 +99,8 @@ class Tag extends MetaService implements MetaServiceInterface
      */
     public function container(string $handle = self::GENERAL_HANDLE)
     {
-        $key = MetaTagContainer::CONTAINER_TYPE . $handle;
+        $key = MetaTagContainer::CONTAINER_TYPE.$handle;
+
         return Seomatic::$plugin->metaContainers->getMetaContainer($key);
     }
 }

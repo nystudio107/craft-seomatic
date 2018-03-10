@@ -64,7 +64,7 @@ class Script extends MetaService implements MetaServiceInterface
      */
     public function add($metaItem, string $handle = self::GENERAL_HANDLE)
     {
-        $key = MetaScriptContainer::CONTAINER_TYPE . $handle;
+        $key = MetaScriptContainer::CONTAINER_TYPE.$handle;
         Seomatic::$plugin->metaContainers->addToMetaContainer($metaItem, $key);
 
         /** @var MetaScript $metaItem */
@@ -77,6 +77,7 @@ class Script extends MetaService implements MetaServiceInterface
     public function render()
     {
         $key = MetaScriptContainer::CONTAINER_TYPE;
+
         return TemplateHelper::raw(Seomatic::$plugin->metaContainers->renderContainersByType($key));
     }
 
@@ -87,7 +88,8 @@ class Script extends MetaService implements MetaServiceInterface
      */
     public function container(string $handle = self::GENERAL_HANDLE)
     {
-        $key = MetaScriptContainer::CONTAINER_TYPE . $handle;
+        $key = MetaScriptContainer::CONTAINER_TYPE.$handle;
+
         return Seomatic::$plugin->metaContainers->getMetaContainer($key);
     }
 }
