@@ -97,10 +97,12 @@ class MetaValue
      */
     public static function getSiteLanguage(int $siteId): string
     {
-        if ($siteId == 0) {
+        if ($siteId === null) {
             try {
                 $siteId = Craft::$app->getSites()->getCurrentSite()->id;
             } catch (SiteNotFoundException $e) {
+                $siteId = 1;
+                Craft::error($e->getMessage(), __METHOD__);
             }
         }
         $site = Craft::$app->getSites()->getSiteById($siteId);
@@ -131,6 +133,7 @@ class MetaValue
                 $reflector = new \ReflectionClass($element);
             } catch (\ReflectionException $e) {
                 $reflector = null;
+                Craft::error($e->getMessage(), __METHOD__);
             }
             if ($reflector) {
                 $matchedElementType = strtolower($reflector->getShortName());
@@ -186,6 +189,7 @@ class MetaValue
                     try {
                         self::$view->setTemplateMode($oldTemplateMode);
                     } catch (Exception $e) {
+                        Craft::error($e->getMessage(), __METHOD__);
                     }
                 }
 
