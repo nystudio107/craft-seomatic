@@ -316,13 +316,14 @@ class MetaBundles extends Component
     {
         $metaBundleInvalidated = false;
         if ($element) {
+            $uri = $element->uri ?? '';
             // Invalidate sitemap caches after an existing element is saved
             list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
                 = $this->getMetaSourceFromElement($element);
             if ($sourceId) {
                 Craft::info(
                     'Invalidating meta bundle: '
-                    .($element->uri ?? '')
+                    .$uri
                     .'/'
                     .$sourceSiteId,
                     __METHOD__
@@ -330,7 +331,7 @@ class MetaBundles extends Component
                 if (!$isNew) {
                     $sourceType = '';
                     $metaBundleInvalidated = true;
-                    Seomatic::$plugin->metaContainers->invalidateContainerCacheByPath($element->uri, $sourceSiteId);
+                    Seomatic::$plugin->metaContainers->invalidateContainerCacheByPath($uri, $sourceSiteId);
                     // Invalidate the sitemap cache
                     $metaBundle = $this->getMetaBundleBySourceId($sourceType, $sourceId, $sourceSiteId);
                     if ($metaBundle) {
@@ -455,6 +456,7 @@ class MetaBundles extends Component
                 try {
                     $sourceHandle = $element->getGroup()->handle;
                 } catch (InvalidConfigException $e) {
+                    Craft::error($e->getMessage(), __METHOD__);
                 }
                 $sourceBundleType = self::CATEGORYGROUP_META_BUNDLE;
                 break;
