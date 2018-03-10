@@ -14,15 +14,12 @@ namespace nystudio107\seomatic\services;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\base\MetaItem;
-use nystudio107\seomatic\helpers\Dependency as DependencyHelper;
-use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\helpers\DynamicMeta as DynamicMetaHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
-use nystudio107\seomatic\models\jsonld\BreadcrumbList;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaGlobalVars;
 use nystudio107\seomatic\models\MetaSiteVars;
 use nystudio107\seomatic\models\MetaSitemapVars;
-use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 use nystudio107\seomatic\models\MetaLinkContainer;
 use nystudio107\seomatic\models\MetaScriptContainer;
@@ -35,12 +32,10 @@ use craft\base\Component;
 use craft\base\Element;
 use craft\elements\Category;
 use craft\elements\Entry;
-use craft\errors\SiteNotFoundException;
 use craft\helpers\UrlHelper;
 
 use nystudio107\seomatic\variables\SeomaticVariable;
 use yii\base\Exception;
-use yii\base\InvalidConfigException;
 use yii\caching\TagDependency;
 
 /**
@@ -146,7 +141,7 @@ class MetaContainers extends Component
                     );
                     $this->loadGlobalMetaContainers($siteId);
                     $this->loadContentMetaContainers();
-                    $this->addDynamicMetaToContainers($uri, $siteId);
+                    DynamicMetaHelper::addDynamicMetaToContainers($uri, $siteId);
                     return [$this->metaGlobalVars, $this->metaSiteVars, $this->metaSitemapVars, $this->metaContainers];
                 },
                 $duration,
@@ -241,22 +236,6 @@ class MetaContainers extends Component
             } catch (Exception $e) {
             }
         }
-    }
-
-    /**
-     * Add any custom/dynamic meta to the containers
-     *
-     * @param string $uri
-     * @param int    $siteId
-     *
-     * @throws Exception
-     * @throws SiteNotFoundException
-     */
-    public function addDynamicMetaToContainers(string $uri = '', int $siteId = null)
-    {
-        $this->addMetaJsonLdBreadCrumbs($siteId);
-        $this->addMetaLinkHrefLang();
-        $this->addSameAsMeta();
     }
 
     /**
@@ -611,175 +590,6 @@ class MetaContainers extends Component
 
     // Protected Methods
     // =========================================================================
-
-    /**
-     * Add breadcrumbs to the MetaJsonLdContainer
-     *
-     * @param int|null $siteId
-     *
-     * @throws Exception
-     * @throws \craft\errors\SiteNotFoundException
-     */
-    protected function addMetaJsonLdBreadCrumbs(int $siteId = null)
-    {
-        $position = 1;
-        if (!$siteId) {
-            $siteId = Craft::$app->getSites()->primarySite->id;
-        }
-        $site = Craft::$app->getSites()->getSiteById($siteId);
-        $siteUrl = $site->hasUrls ? $site->baseUrl : Craft::$app->getSites()->getPrimarySite()->baseUrl;
-        /** @var  $crumbs BreadcrumbList */
-        $crumbs = Seomatic::$plugin->jsonLd->create([
-            'type' => 'BreadcrumbList',
-            'name' => 'Breadcrumbs',
-            'description' => 'Breadcrumbs list'
-        ]);
-        /** @var  $element Element */
-        $element = Craft::$app->getElements()->getElementByUri("__home__", $siteId);
-        if ($element) {
-            $uri = $element->uri == '__home__' ? '' : $element->uri;
-            $listItem = MetaJsonLd::create("ListItem", [
-                'position' => $position,
-                'item'     => [
-                    '@id'  => UrlHelper::siteUrl($uri, null, null, $siteId),
-                    'name' => $element->title,
-                ],
-            ]);
-            $crumbs->itemListElement[] = $listItem;
-        } else {
-            $crumbs->itemListElement[] = MetaJsonLd::create("ListItem", [
-                'position' => $position,
-                'item'     => [
-                    '@id'  => $siteUrl,
-                    'name' => 'Homepage',
-                ],
-            ]);
-        }
-        // Build up the segments, and look for elements that match
-        $uri = '';
-        $segments = Craft::$app->getRequest()->getSegments();
-        /** @var  $lastElement Element */
-        $lastElement = Seomatic::$matchedElement;
-        if ($lastElement && $element) {
-            if ($lastElement->uri != "__home__" && $element->uri) {
-                $path = parse_url($lastElement->url, PHP_URL_PATH);
-                $path = trim($path, "/");
-                $segments = explode("/", $path);
-            }
-        }
-        // Parse through the segments looking for elements that match
-        foreach ($segments as $segment) {
-            $uri .= $segment;
-            $element = Craft::$app->getElements()->getElementByUri($uri, $siteId);
-            if ($element && $element->uri) {
-                $position++;
-                $uri = $element->uri == '__home__' ? '' : $element->uri;
-                $crumbs->itemListElement[] = MetaJsonLd::create("ListItem", [
-                    'position' => $position,
-                    'item'     => [
-                        '@id'  => UrlHelper::siteUrl($uri, null, null, $siteId),
-                        'name' => $element->title,
-                    ],
-                ]);
-            }
-            $uri .= "/";
-        }
-
-        Seomatic::$plugin->jsonLd->add($crumbs);
-    }
-
-    /**
-     * Add meta hreflang tags if there is more than one site
-     */
-    protected function addMetaLinkHrefLang()
-    {
-        /** @TODO: this is wrong, we should get the localized URLs for the current request */
-        $sites = $this->getLocalizedUrls();
-
-        // Add the x-default hreflang
-        $site = $sites[0];
-        $metaTag = Seomatic::$plugin->link->create([
-            'rel'      => 'alternate',
-            'hreflang' => 'x-default',
-            'href'     => $site['url'],
-        ]);
-        Seomatic::$plugin->link->add($metaTag);
-        // Add the alternate language link rel's
-        if (count($sites) > 1) {
-            foreach ($sites as $site) {
-                $metaTag = Seomatic::$plugin->link->create([
-                    'rel'      => 'alternate',
-                    'hreflang' => $site['language'],
-                    'href'     => $site['url'],
-                ]);
-                Seomatic::$plugin->link->add($metaTag);
-            }
-        }
-    }
-
-    /**
-     * Add the Same As meta tags and JSON-LD
-     */
-    protected function addSameAsMeta()
-    {
-        $sameAsUrls = ArrayHelper::getColumn($this->metaSiteVars->sameAsLinks, 'url', false);
-        $sameAsUrls = array_values(array_filter($sameAsUrls));
-        // Facebook OpenGraph
-        $ogSeeAlso = Seomatic::$plugin->tag->get('og:see_also');
-        if ($ogSeeAlso) {
-            $ogSeeAlso->content = $sameAsUrls;
-        }
-    }
-
-    /**
-     * @return array
-     */
-    protected function getLocalizedUrls()
-    {
-        $localizedUrls = [];
-        try {
-            $requestUri = Craft::$app->getRequest()->getUrl();
-        } catch (InvalidConfigException $e) {
-            $requestUri = '';
-            Craft::error($e->getMessage(), __METHOD__);
-        }
-        $sites = Craft::$app->getSites()->getAllSites();
-        $elements = Craft::$app->getElements();
-        foreach ($sites as $site) {
-            if (Seomatic::$matchedElement) {
-                $url = $elements->getElementUriForSite(Seomatic::$matchedElement->getId(), $site->id);
-                $url = ($url === '__home__') ? '' : $url;
-            } else {
-                try {
-                    $url = $site->hasUrls ? UrlHelper::siteUrl($requestUri, null, null, $site->id)
-                        : Craft::$app->getSites()->getPrimarySite()->baseUrl;
-                } catch (SiteNotFoundException $e) {
-                    $url = '';
-                    Craft::error($e->getMessage(), __METHOD__);
-                } catch (Exception $e) {
-                    $url = '';
-                    Craft::error($e->getMessage(), __METHOD__);
-                }
-            }
-            if (!UrlHelper::isAbsoluteUrl($url)) {
-                try {
-                    $url = UrlHelper::siteUrl($url);
-                } catch (Exception $e) {
-                    Craft::error($e->getMessage(), __METHOD__);
-                }
-            }
-            $language = $site->language;
-            $language = strtolower($language);
-            $language = str_replace('_', '-', $language);
-            $localizedUrls[] = [
-                'id' => $site->id,
-                'language' => $language,
-                'url' => $url
-            ];
-        }
-
-        return $localizedUrls;
-    }
 
     /**
      * Generate an md5 hash from an object or array
