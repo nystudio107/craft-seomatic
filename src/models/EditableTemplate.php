@@ -39,7 +39,6 @@ class EditableTemplate extends FrontendTemplate
      */
     public static function create(array $config = [])
     {
-        $model = null;
         $model = new EditableTemplate($config);
         // Load $templateString from the source template if it's not set
         if (empty($model->templateString)) {
