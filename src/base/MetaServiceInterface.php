@@ -37,7 +37,7 @@ interface MetaServiceInterface
      * @param array $config The configuration array used to create the MetaItem
      * @param bool  $add    Whether to add the newly created tag to a container
      *
-     * @return null|MetaItem
+     * @return MetaItem
      */
     public function create($config = [], $add = true);
 
