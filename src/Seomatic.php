@@ -27,7 +27,6 @@ use nystudio107\seomatic\services\Redirects as RedirectsService;
 use nystudio107\seomatic\services\Script as ScriptService;
 use nystudio107\seomatic\services\Sitemaps as SitemapsService;
 use nystudio107\seomatic\services\Tag as TagService;
-use nystudio107\seomatic\services\Template as TemplateService;
 use nystudio107\seomatic\services\Title as TitleService;
 use nystudio107\seomatic\twigextensions\SeomaticTwigExtension;
 use nystudio107\seomatic\variables\SeomaticVariable;
