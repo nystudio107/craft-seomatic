@@ -152,7 +152,8 @@ class Sitemaps extends Component implements SitemapInterface
     {
         if (Seomatic::$settings->environment == 'live') {
             // Submit the sitemap to each search engine
-            foreach ($this::SEARCH_ENGINE_SUBMISSION_URLS as &$url) {
+            $searchEngineUrls = $this::SEARCH_ENGINE_SUBMISSION_URLS;
+            foreach ($searchEngineUrls as &$url) {
                 $groups = Craft::$app->getSites()->getAllGroups();
                 foreach ($groups as $group) {
                     $siteId = $group->getSiteIds()[0];
@@ -191,7 +192,8 @@ class Sitemaps extends Component implements SitemapInterface
             list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
                 = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
             // Submit the sitemap to each search engine
-            foreach ($this::SEARCH_ENGINE_SUBMISSION_URLS as &$url) {
+            $searchEngineUrls = $this::SEARCH_ENGINE_SUBMISSION_URLS;
+            foreach ($searchEngineUrls as &$url) {
                 $sitemapUrl = $this->sitemapUrlForBundle($sourceBundleType, $sourceHandle, $sourceSiteId);
                 if (!empty($sitemapUrl)) {
                     $submissionUrl = $url.$sitemapUrl;
@@ -226,11 +228,13 @@ class Sitemaps extends Component implements SitemapInterface
     {
         $url = '';
         $sites = Craft::$app->getSites();
-        if (!$siteId) {
+        if ($siteId !== null) {
             $siteId = $sites->currentSite->id;
+        } else {
+            $siteId = 1;
         }
         $site = $sites->getSiteById($siteId);
-        if ($site) {
+        if ($site !== null) {
             try {
                 $url = UrlHelper::siteUrl(
                     '/sitemaps/'
@@ -238,6 +242,7 @@ class Sitemaps extends Component implements SitemapInterface
                     .'/sitemap.xml'
                 );
             } catch (Exception $e) {
+                Craft::error($e->getMessage(), __METHOD__);
             }
         }
 
@@ -255,8 +260,10 @@ class Sitemaps extends Component implements SitemapInterface
     {
         $url = '';
         $sites = Craft::$app->getSites();
-        if (!$siteId) {
+        if ($siteId !== null) {
             $siteId = $sites->currentSite->id;
+        } else {
+            $siteId = 1;
         }
         $site = $sites->getSiteById($siteId);
         $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
@@ -278,6 +285,7 @@ class Sitemaps extends Component implements SitemapInterface
                     .'/sitemap.xml'
                 );
             } catch (Exception $e) {
+                Craft::error($e->getMessage(), __METHOD__);
             }
         }
 
