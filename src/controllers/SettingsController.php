@@ -115,13 +115,19 @@ class SettingsController extends Controller
         $variables['selectedSubnavItem'] = 'global';
 
         // Pass in the pull fields
-        $variables['textFieldSources'] = FieldHelper::fieldsOfTypeFromGlobals(
-            FieldHelper::TEXT_FIELD_CLASS_KEY,
-            false
+        $variables['textFieldSources'] = array_merge(
+            ['globalsGroup' => ['optgroup' => 'Globals Fields']],
+            FieldHelper::fieldsOfTypeFromGlobals(
+                FieldHelper::TEXT_FIELD_CLASS_KEY,
+                false
+            )
         );
-        $variables['assetFieldSources'] = FieldHelper::fieldsOfTypeFromGlobals(
-            FieldHelper::ASSET_FIELD_CLASS_KEY,
-            false
+        $variables['assetFieldSources'] = array_merge(
+            ['globalsGroup' => ['optgroup' => 'Globals Fields']],
+            FieldHelper::fieldsOfTypeFromGlobals(
+                FieldHelper::ASSET_FIELD_CLASS_KEY,
+                false
+            )
         );
 
         // Enabled sites
@@ -358,34 +364,30 @@ class SettingsController extends Controller
         $variables['ogImageElements'] = $ogImageElements;
 
         // Pass in the pull fields
-        $variables['textFieldSources'] = FieldHelper::fieldsOfTypeFromSource(
-            $sourceBundleType,
-            $sourceHandle,
-            FieldHelper::TEXT_FIELD_CLASS_KEY,
-            false
-        );
         $variables['textFieldSources'] = array_merge(
-            [
-                'title' => 'Title',
-            ],
-            $variables['textFieldSources']
+            ['entryGroup' => ['optgroup' => 'Entry Fields'], 'title' => 'Title'],
+            FieldHelper::fieldsOfTypeFromSource(
+                $sourceBundleType,
+                $sourceHandle,
+                FieldHelper::TEXT_FIELD_CLASS_KEY,
+                false
+            )
         );
-        $variables['assetFieldSources'] = FieldHelper::fieldsOfTypeFromSource(
-            $sourceBundleType,
-            $sourceHandle,
-            FieldHelper::ASSET_FIELD_CLASS_KEY,
-            false
-        );
-        $variables['assetVolumeTextFieldSources'] = FieldHelper::fieldsOfTypeFromAssetVolumes(
-            FieldHelper::TEXT_FIELD_CLASS_KEY,
-            false
+        $variables['assetFieldSources'] = array_merge(
+            ['entryGroup' => ['optgroup' => 'Entry Fields']],
+            FieldHelper::fieldsOfTypeFromSource(
+                $sourceBundleType,
+                $sourceHandle,
+                FieldHelper::ASSET_FIELD_CLASS_KEY,
+                false
+            )
         );
         $variables['assetVolumeTextFieldSources'] = array_merge(
-            [
-                'none'  => '',
-                'title' => 'Title',
-            ],
-            $variables['assetVolumeTextFieldSources']
+            ['entryGroup' => ['optgroup' => 'Asset Volume Fields'], 'title' => 'Title'],
+            FieldHelper::fieldsOfTypeFromAssetVolumes(
+                FieldHelper::TEXT_FIELD_CLASS_KEY,
+                false
+            )
         );
 
         $uri = '';
