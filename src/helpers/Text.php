@@ -146,7 +146,7 @@ class Text
         if ($useStopWords) {
             $language = strtolower(substr(Seomatic::$language, 0, 2));
             $stopWords = self::stopWordsForLanguage($language);
-            if ($stopWords) {
+            if ($stopWords !== null) {
                 $api->setStopWords($stopWords);
             }
         }
@@ -182,7 +182,7 @@ class Text
         if ($useStopWords) {
             $language = strtolower(substr(Seomatic::$language, 0, 2));
             $stopWords = self::stopWordsForLanguage($language);
-            if ($stopWords) {
+            if ($stopWords !== null) {
                 $api->setStopWords($stopWords);
             }
         }
@@ -229,7 +229,12 @@ class Text
     // Protected Static Methods
     // =========================================================================
 
-    protected static function stopWordsForLanguage(string $language): StopWordsAbstract
+    /**
+     * @param string $language
+     *
+     * @return null|StopWordsAbstract
+     */
+    protected static function stopWordsForLanguage(string $language)
     {
         $stopWords = null;
         if (!empty(self::LANGUAGE_MAP[$language])) {
