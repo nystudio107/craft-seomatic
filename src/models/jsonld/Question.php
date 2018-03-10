@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\JsonLdType;
+use nystudio107\seomatic\models\jsonld\CreativeWork;
 
 /**
  * Question - A specific question - e.g. from a user seeking answers online,
@@ -22,7 +22,7 @@ use nystudio107\seomatic\models\jsonld\JsonLdType;
  * @since     3.0.0
  * @see       http://schema.org/Question
  */
-class Question extends JsonLdType
+class Question extends CreativeWork
 {
     // Static Public Properties
     // =========================================================================

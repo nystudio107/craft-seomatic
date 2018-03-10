@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\JsonLdType;
+use nystudio107\seomatic\models\jsonld\DigitalDocument;
 
 /**
  * PresentationDigitalDocument - A file containing slides or used for a
@@ -22,7 +22,7 @@ use nystudio107\seomatic\models\jsonld\JsonLdType;
  * @since     3.0.0
  * @see       http://schema.org/PresentationDigitalDocument
  */
-class PresentationDigitalDocument extends JsonLdType
+class PresentationDigitalDocument extends DigitalDocument
 {
     // Static Public Properties
     // =========================================================================

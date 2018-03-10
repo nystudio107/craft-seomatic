@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\MedicalBusiness;
+use nystudio107\seomatic\models\jsonld\MedicalOrganization;
 
 /**
  * Pharmacy - A pharmacy or drugstore.
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\MedicalBusiness;
  * @since     3.0.0
  * @see       http://schema.org/Pharmacy
  */
-class Pharmacy extends MedicalBusiness
+class Pharmacy extends MedicalOrganization
 {
     // Static Public Properties
     // =========================================================================

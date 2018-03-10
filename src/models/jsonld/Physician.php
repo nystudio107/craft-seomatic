@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\MedicalBusiness;
+use nystudio107\seomatic\models\jsonld\MedicalOrganization;
 
 /**
  * Physician - A doctor's office.
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\MedicalBusiness;
  * @since     3.0.0
  * @see       http://schema.org/Physician
  */
-class Physician extends MedicalBusiness
+class Physician extends MedicalOrganization
 {
     // Static Public Properties
     // =========================================================================

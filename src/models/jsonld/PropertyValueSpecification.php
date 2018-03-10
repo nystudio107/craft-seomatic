@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\JsonLdType;
+use nystudio107\seomatic\models\jsonld\Intangible;
 
 /**
  * PropertyValueSpecification - A Property value specification.
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\JsonLdType;
  * @since     3.0.0
  * @see       http://schema.org/PropertyValueSpecification
  */
-class PropertyValueSpecification extends JsonLdType
+class PropertyValueSpecification extends Intangible
 {
     // Static Public Properties
     // =========================================================================

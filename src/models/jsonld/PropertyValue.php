@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\JsonLdType;
+use nystudio107\seomatic\models\jsonld\StructuredValue;
 
 /**
  * PropertyValue - A property-value pair, e.g. representing a feature of a
@@ -27,7 +27,7 @@ use nystudio107\seomatic\models\jsonld\JsonLdType;
  * @since     3.0.0
  * @see       http://schema.org/PropertyValue
  */
-class PropertyValue extends JsonLdType
+class PropertyValue extends StructuredValue
 {
     // Static Public Properties
     // =========================================================================
