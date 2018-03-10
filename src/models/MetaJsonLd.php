@@ -170,15 +170,17 @@ class MetaJsonLd extends MetaItem
      * @param string $schemaType
      * @param array  $config
      *
-     * @return mixed
+     * @return MetaJsonLd
      */
-    public static function create($schemaType, $config = [])
+    public static function create($schemaType, $config = []): MetaJsonLd
     {
         $model = null;
         $className = 'nystudio107\\seomatic\\models\\jsonld\\' . $schemaType;
         /** @var $model MetaJsonLd */
         if (class_exists($className)) {
             $model = new $className($config);
+        } else {
+            $model = new MetaJsonLd($config);
         }
 
         return $model;

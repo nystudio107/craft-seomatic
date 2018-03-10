@@ -36,9 +36,9 @@ class MetaScript extends MetaItem
     /**
      * @param array $config
      *
-     * @return null|MetaScript
+     * @return MetaScript
      */
-    public static function create(array $config = [])
+    public static function create(array $config = []): MetaScript
     {
         $model = new MetaScript($config);
         // Load $templateString from the source template if it's not set
