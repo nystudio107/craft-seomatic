@@ -36,7 +36,7 @@ class Redirects extends Component
     // =========================================================================
 
     /**
-     * @var RedirectsContainer
+     * @var
      */
     protected $redirectsContainer;
 
