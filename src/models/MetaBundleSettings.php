@@ -107,14 +107,29 @@ class MetaBundleSettings extends VarsModel
     public $seoImageDescriptionField;
 
     /**
+     * @var string The source that the Twitter creator should come from
+     */
+    public $twitterCreatorSource;
+
+    /**
+     * @var string The field handle that the Twitter creator is pulled from
+     */
+    public $twitterCreatorField;
+
+    /**
      * @var string The source that the Twitter title should come from
      */
     public $twitterTitleSource;
 
     /**
-     * @var string the field handle that the Twitter title is pulled from
+     * @var string The field handle that the Twitter title is pulled from
      */
     public $twitterTitleField;
+
+    /**
+     * @var string The source that the Twitter site name position should come from
+     */
+    public $twitterSiteNamePositionSource;
 
     /**
      * @var string The source that the Twitter description should come from
@@ -165,6 +180,11 @@ class MetaBundleSettings extends VarsModel
      * @var string the field handle that the Facebook OG title is pulled from
      */
     public $ogTitleField;
+
+    /**
+     * @var string The source that the Facebook OG site name position should come from
+     */
+    public $ogSiteNamePositionSource;
 
     /**
      * @var string The source that the Facebook OG description should come from
@@ -236,8 +256,11 @@ class MetaBundleSettings extends VarsModel
                     'seoImageDescriptionSource',
                     'seoImageDescriptionField',
 
+                    'twitterCreatorSource',
+                    'twitterCreatorField',
                     'twitterTitleSource',
                     'twitterTitleField',
+                    'twitterSiteNamePositionSource',
                     'twitterDescriptionSource',
                     'twitterDescriptionField',
                     'twitterImageSource',
@@ -247,6 +270,7 @@ class MetaBundleSettings extends VarsModel
 
                     'ogTitleSource',
                     'ogTitleField',
+                    'ogSiteNamePositionSource',
                     'ogDescriptionSource',
                     'ogDescriptionField',
                     'ogImageSource',
