@@ -21,7 +21,6 @@ use nystudio107\seomatic\services\JsonLd;
 use nystudio107\seomatic\services\Link;
 use nystudio107\seomatic\services\Script;
 use nystudio107\seomatic\services\Tag;
-use nystudio107\seomatic\services\Template;
 use nystudio107\seomatic\services\Title;
 use nystudio107\seomatic\services\MetaContainers;
 use nystudio107\seomatic\services\MetaBundles;
@@ -36,7 +35,6 @@ use yii\di\ServiceLocator;
  * @property Link       link
  * @property Script     script
  * @property Tag        tag
- * @property Template   template
  * @property Title      title
  *
  * @author    nystudio107
@@ -94,7 +92,6 @@ class SeomaticVariable extends ServiceLocator
             'script' => Script::class,
             'tag' => Tag::class,
             'title' => Title::class,
-            'template' => Template::class,
         ];
 
         $config['components'] = $components;
