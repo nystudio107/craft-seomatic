@@ -175,13 +175,14 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 foreach ($elements as $element) {
                     $path = ($element->uri === '__home__') ? '' : $element->uri;
                     $url = UrlHelper::siteUrl($path, null, null, $metaBundle->sourceSiteId);
+                    $dateUpdated = $element->dateUpdated ?? $element->dateCreated ?? new \DateTime;
                     $lines[] = '  <url>';
                     // Standard sitemap key/values
                     $lines[] = '    <loc>';
                     $lines[] = '      '.$url;
                     $lines[] = '    </loc>';
                     $lines[] = '    <lastmod>';
-                    $lines[] = '      '.$element->dateUpdated->format(\DateTime::W3C);
+                    $lines[] = '      '.$dateUpdated->format(\DateTime::W3C);
                     $lines[] = '    </lastmod>';
                     $lines[] = '    <changefreq>';
                     $lines[] = '      '.$metaBundle->metaSitemapVars->sitemapChangeFreq;
@@ -378,12 +379,13 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
     {
         if ($asset->enabledForSite) {
             if (in_array($asset->kind, $this::FILE_TYPES)) {
+                $dateUpdated = $asset->dateUpdated ?? $asset->dateCreated ?? new \DateTime;
                 $lines[] = '  <url>';
                 $lines[] = '    <loc>';
                 $lines[] = '      '.$asset->getUrl();
                 $lines[] = '    </loc>';
                 $lines[] = '    <lastmod>';
-                $lines[] = '      '.$asset->dateUpdated->format(\DateTime::W3C);
+                $lines[] = '      '.$dateUpdated->format(\DateTime::W3C);
                 $lines[] = '    </lastmod>';
                 $lines[] = '    <changefreq>';
                 $lines[] = '      '.$metaBundle->metaSitemapVars->sitemapChangeFreq;

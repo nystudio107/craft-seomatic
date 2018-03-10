@@ -37,7 +37,6 @@ class MetaBundleSettings extends VarsModel
      */
     public static function create(array $config = [])
     {
-        $model = null;
         $model = new MetaBundleSettings($config);
 
         return $model;
