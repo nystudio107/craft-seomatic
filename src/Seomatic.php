@@ -299,7 +299,7 @@ class Seomatic extends Plugin
                     'Sections::EVENT_AFTER_SAVE_SECTION',
                     __METHOD__
                 );
-                if ($event->section->id !== null) {
+                if (!empty($event->section) && $event->section->id !== null) {
                     Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
                         MetaBundlesService::SECTION_META_BUNDLE,
                         $event->section->id,
@@ -322,7 +322,7 @@ class Seomatic extends Plugin
                     'Sections::EVENT_AFTER_DELETE_SECTION',
                     __METHOD__
                 );
-                if ($event->section->id !== null) {
+                if (!empty($event->section) && $event->section->id !== null) {
                     Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
                         MetaBundlesService::SECTION_META_BUNDLE,
                         $event->section->id,
@@ -345,7 +345,7 @@ class Seomatic extends Plugin
                     'Categories::EVENT_AFTER_SAVE_GROUP',
                     __METHOD__
                 );
-                if ($event->categoryGroup->id !== null) {
+                if (!empty($event->categoryGroup) && $event->categoryGroup->id !== null) {
                     Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
                         MetaBundlesService::CATEGORYGROUP_META_BUNDLE,
                         $event->categoryGroup->id,
@@ -368,7 +368,7 @@ class Seomatic extends Plugin
                     'Categories::EVENT_AFTER_DELETE_GROUP',
                     __METHOD__
                 );
-                if ($event->categoryGroup->id !== null) {
+                if (!empty($event->categoryGroup) && $event->categoryGroup->id !== null) {
                     Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
                         MetaBundlesService::CATEGORYGROUP_META_BUNDLE,
                         $event->categoryGroup->id,
