@@ -169,7 +169,7 @@ class MetaBundle extends Model
         if (!empty($this->metaContainers)) {
             $metaContainers = $this->metaContainers;
             $this->metaContainers = [];
-            /**  @var MetaContainer $metaContainer */
+            /**  @var array $metaContainer */
             foreach ($metaContainers as $key => $metaContainer) {
                 /** @var MetaContainer $containerClass */
                 $containerClass = $metaContainer['class'];
