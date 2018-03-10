@@ -83,8 +83,8 @@ class FrontendTemplates extends Component
      */
     public function loadFrontendTemplateContainers(int $siteId = null)
     {
-        if (!$siteId) {
-            $siteId = Craft::$app->getSites()->currentSite->id;
+        if ($siteId === null) {
+            $siteId = Craft::$app->getSites()->currentSite->id ?? 1;
         }
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
 
