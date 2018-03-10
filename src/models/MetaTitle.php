@@ -41,7 +41,6 @@ class MetaTitle extends MetaItem
      */
     public static function create(array $config = [])
     {
-        $model = null;
         $model = new MetaTitle($config);
 
         return $model;

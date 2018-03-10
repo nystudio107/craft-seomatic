@@ -36,7 +36,6 @@ class MetaGlobalVars extends VarsModel
      */
     public static function create(array $config = [])
     {
-        $model = null;
         $model = new MetaGlobalVars($config);
 
         return $model;

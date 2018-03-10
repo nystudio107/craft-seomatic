@@ -16,7 +16,6 @@ use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\base\SitemapInterface;
 
 use Craft;
-use craft\helpers\UrlHelper;
 use craft\models\SiteGroup;
 
 use yii\caching\TagDependency;
@@ -111,7 +110,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
                 ],
             ]);
 
-            return $cache->getOrSet($this::CACHE_KEY.$groupId, function () use ($groupId, $groupSiteIds) {
+            return $cache->getOrSet($this::CACHE_KEY.$groupId, function () use ($groupSiteIds) {
                 Craft::info(
                     'Sitemap index cache miss',
                     __METHOD__

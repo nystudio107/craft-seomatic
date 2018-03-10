@@ -37,7 +37,6 @@ class MetaSiteVars extends VarsModel
      */
     public static function create(array $config = [])
     {
-        $model = null;
         $model = new MetaSiteVars($config);
 
         return $model;

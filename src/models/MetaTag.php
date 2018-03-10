@@ -48,7 +48,6 @@ class MetaTag extends MetaItem
      */
     public static function create($tagType = null, array $config = [])
     {
-        $model = null;
         $tagType = Inflector::variablize($tagType);
         // Variablize the keys so that they coincide with our property names
         foreach ($config as $key => $value) {

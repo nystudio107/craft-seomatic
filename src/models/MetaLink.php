@@ -47,7 +47,6 @@ class MetaLink extends MetaItem
      */
     public static function create(array $config = [])
     {
-        $model = null;
         foreach ($config as $key => $value) {
             ArrayHelper::rename($config, $key, Inflector::variablize($key));
         }

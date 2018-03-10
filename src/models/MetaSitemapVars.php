@@ -34,7 +34,6 @@ class MetaSitemapVars extends FluentModel
      */
     public static function create(array $config = [])
     {
-        $model = null;
         $model = new MetaSitemapVars($config);
 
         return $model;
