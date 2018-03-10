@@ -322,13 +322,13 @@ class MetaContainers extends Component
             }
             if ($className) {
                 $container = $className::create();
-                /** @var MetaContainer $className */
                 if ($container) {
                     $this->metaContainers[$key] = $container;
                 }
             }
         }
 
+        /** @var MetaContainer $className */
         return $container;
     }
 
