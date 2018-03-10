@@ -78,7 +78,6 @@ use yii\base\Event;
  * @property  ScriptService            script
  * @property  SitemapsService          sitemaps
  * @property  TagService               tag
- * @property  TemplateService          template
  * @property  TitleService             title
  */
 class Seomatic extends Plugin
@@ -756,9 +755,6 @@ class Seomatic extends Plugin
                     ],
                     "seomatic:site-settings:social-media" => [
                         'label' => Craft::t('seomatic', 'Social Media'),
-                    ],
-                    "seomatic:site-settings:tracking"     => [
-                        'label' => Craft::t('seomatic', 'Tracking'),
                     ],
                 ],
             ],
