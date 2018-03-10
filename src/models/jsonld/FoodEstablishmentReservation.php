@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\JsonLdType;
+use nystudio107\seomatic\models\jsonld\Reservation;
 
 /**
  * FoodEstablishmentReservation - A reservation to dine at a food-related
@@ -24,7 +24,7 @@ use nystudio107\seomatic\models\jsonld\JsonLdType;
  * @since     3.0.0
  * @see       http://schema.org/FoodEstablishmentReservation
  */
-class FoodEstablishmentReservation extends JsonLdType
+class FoodEstablishmentReservation extends Reservation
 {
     // Static Public Properties
     // =========================================================================

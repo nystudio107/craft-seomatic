@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\JsonLdType;
+use nystudio107\seomatic\models\jsonld\UpdateAction;
 
 /**
  * AppendAction - The act of inserting at the end if an ordered collection.
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\JsonLdType;
  * @since     3.0.0
  * @see       http://schema.org/AppendAction
  */
-class AppendAction extends JsonLdType
+class AppendAction extends UpdateAction
 {
     // Static Public Properties
     // =========================================================================

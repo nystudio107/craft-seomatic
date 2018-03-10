@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\JsonLdType;
+use nystudio107\seomatic\models\jsonld\ControlAction;
 
 /**
  * ActivateAction - No comment
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\JsonLdType;
  * @since     3.0.0
  * @see       http://schema.org/ActivateAction
  */
-class ActivateAction extends JsonLdType
+class ActivateAction extends ControlAction
 {
     // Static Public Properties
     // =========================================================================

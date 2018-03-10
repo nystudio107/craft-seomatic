@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\JsonLdType;
+use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
  * DataType - The basic data types such as Integers, Strings, etc.
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\JsonLdType;
  * @since     3.0.0
  * @see       http://schema.org/DataType
  */
-class DataType extends JsonLdType
+class DataType extends MetaJsonLd
 {
     // Static Public Properties
     // =========================================================================

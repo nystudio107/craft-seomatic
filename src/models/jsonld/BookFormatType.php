@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\JsonLdType;
+use nystudio107\seomatic\models\jsonld\Thing;
 
 /**
  * BookFormatType - The publication format of the book.
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\JsonLdType;
  * @since     3.0.0
  * @see       http://schema.org/BookFormatType
  */
-class BookFormatType extends JsonLdType
+class BookFormatType extends Thing
 {
     // Static Public Properties
     // =========================================================================

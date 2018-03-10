@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\JsonLdType;
+use nystudio107\seomatic\models\jsonld\LoanOrCredit;
 
 /**
  * CreditCard - A card payment method of a particular brand or name. Used to
@@ -29,7 +29,7 @@ use nystudio107\seomatic\models\jsonld\JsonLdType;
  * @since     3.0.0
  * @see       http://schema.org/CreditCard
  */
-class CreditCard extends JsonLdType
+class CreditCard extends LoanOrCredit
 {
     // Static Public Properties
     // =========================================================================

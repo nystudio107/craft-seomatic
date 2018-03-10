@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\JsonLdType;
+use nystudio107\seomatic\models\jsonld\AllocateAction;
 
 /**
  * AuthorizeAction - The act of granting permission to an object.
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\JsonLdType;
  * @since     3.0.0
  * @see       http://schema.org/AuthorizeAction
  */
-class AuthorizeAction extends JsonLdType
+class AuthorizeAction extends AllocateAction
 {
     // Static Public Properties
     // =========================================================================
