@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\JsonLdType;
+use nystudio107\seomatic\models\jsonld\HealthAndBeautyBusiness ;
 
 /**
  * HairSalon - A hair salon.
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\JsonLdType;
  * @since     3.0.0
  * @see       http://schema.org/HairSalon
  */
-class HairSalon extends JsonLdType
+class HairSalon extends HealthAndBeautyBusiness
 {
     // Static Public Properties
     // =========================================================================

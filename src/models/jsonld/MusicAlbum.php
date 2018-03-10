@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\JsonLdType;
+use nystudio107\seomatic\models\jsonld\MusicPlaylist;
 
 /**
  * MusicAlbum - A collection of music tracks.
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\JsonLdType;
  * @since     3.0.0
  * @see       http://schema.org/MusicAlbum
  */
-class MusicAlbum extends JsonLdType
+class MusicAlbum extends MusicPlaylist
 {
     // Static Public Properties
     // =========================================================================

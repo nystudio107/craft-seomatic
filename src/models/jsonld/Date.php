@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\JsonLdType;
+use nystudio107\seomatic\models\jsonld\DataType;
 
 /**
  * Date - A date value in ISO 8601 date format.
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\JsonLdType;
  * @since     3.0.0
  * @see       http://schema.org/Date
  */
-class Date extends JsonLdType
+class Date extends DataType
 {
     // Static Public Properties
     // =========================================================================

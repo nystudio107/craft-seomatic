@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\JsonLdType;
+use nystudio107\seomatic\models\jsonld\Thing;
 
 /**
  * LocationFeatureSpecification - Specifies a location feature by providing a
@@ -23,7 +23,7 @@ use nystudio107\seomatic\models\jsonld\JsonLdType;
  * @since     3.0.0
  * @see       http://schema.org/LocationFeatureSpecification
  */
-class LocationFeatureSpecification extends JsonLdType
+class LocationFeatureSpecification extends Thing
 {
     // Static Public Properties
     // =========================================================================

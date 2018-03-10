@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\JsonLdType;
+use nystudio107\seomatic\models\jsonld\HomeAndConstructionBusiness;
 
 /**
  * Electrician - An electrician.
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\JsonLdType;
  * @since     3.0.0
  * @see       http://schema.org/Electrician
  */
-class Electrician extends JsonLdType
+class Electrician extends HomeAndConstructionBusiness
 {
     // Static Public Properties
     // =========================================================================
