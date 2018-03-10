@@ -44,7 +44,8 @@ class SeomaticTwigExtension extends \Twig_Extension implements \Twig_Extension_G
 
     /**
      * Return our Twig Extension name
-     * @return string [description]
+     *
+     * @return string
      */
     public function getName()
     {
@@ -53,37 +54,21 @@ class SeomaticTwigExtension extends \Twig_Extension implements \Twig_Extension_G
 
     /**
      * Return our Twig filters
-     * @return array [description]
+     *
+     * @return array
      */
     public function getFilters()
     {
-        return array(
-            new \Twig_SimpleFilter('createJsonLd', [$this, 'createJsonLd']),
-        );
-    } /* -- getFilters */
+        return [];
+    }
 
     /**
      * Return our Twig functions
-     * @return array [description]
+     *
+     * @return array
      */
     public function getFunctions()
     {
-        return array(
-            new \Twig_SimpleFunction('createJsonLd', [$this, 'createJsonLd']),
-        );
-    } /* -- getFunctions */
-
-    /**
-     * Create a new JSON-LD schema type object
-     *
-     * @param  string $jsonLdType The schema.org type to create
-     * @param  array  $config     The default attributes for the model
-     *
-     * @return mixed              The model object
-     */
-    public function createJsonLd($jsonLdType, $config = [])
-    {
-        return $someSchema = MetaJsonLd::create($jsonLdType, $config);
+        return [];
     }
-
 }
