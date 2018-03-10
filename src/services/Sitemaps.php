@@ -137,7 +137,7 @@ class Sitemaps extends Component implements SitemapInterface
     {
         $html = '';
         if (!empty($this->sitemapTemplateContainer->data[$template])) {
-            /** @var $sitemapTemplate FrontendTemplate */
+            /** @var FrontendTemplate $sitemapTemplate */
             $sitemapTemplate = $this->sitemapTemplateContainer->data[$template];
             $html = $sitemapTemplate->render($params);
         }

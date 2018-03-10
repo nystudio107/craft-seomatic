@@ -57,8 +57,8 @@ class DynamicMeta
     public static function addMetaJsonLdBreadCrumbs(int $siteId = null)
     {
         $position = 1;
-        if (!$siteId) {
-            $siteId = Craft::$app->getSites()->primarySite->id;
+        if ($siteId === null) {
+            $siteId = Craft::$app->getSites()->primarySite->id ?? 1;
         }
         $site = Craft::$app->getSites()->getSiteById($siteId);
         try {
@@ -73,10 +73,10 @@ class DynamicMeta
             'name' => 'Breadcrumbs',
             'description' => 'Breadcrumbs list'
         ]);
-        /** @var  $element Element */
+        /** @var Element $element */
         $element = Craft::$app->getElements()->getElementByUri("__home__", $siteId);
         if ($element) {
-            $uri = $element->uri == '__home__' ? '' : $element->uri;
+            $uri = $element->uri == '__home__' ? '' : ($element->uri ?? '');
             try {
                 $id = UrlHelper::siteUrl($uri, null, null, $siteId);
             } catch (Exception $e) {
@@ -115,6 +115,7 @@ class DynamicMeta
         // Parse through the segments looking for elements that match
         foreach ($segments as $segment) {
             $uri .= $segment;
+            /** @var Element $element */
             $element = Craft::$app->getElements()->getElementByUri($uri, $siteId);
             if ($element && $element->uri) {
                 $position++;
@@ -201,6 +202,7 @@ class DynamicMeta
         foreach ($sites as $site) {
             if (Seomatic::$matchedElement) {
                 $url = $elements->getElementUriForSite(Seomatic::$matchedElement->getId(), $site->id);
+                $url = ($url === null) ? '' : $url;
                 $url = ($url === '__home__') ? '' : $url;
             } else {
                 try {

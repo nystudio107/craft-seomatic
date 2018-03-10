@@ -41,6 +41,8 @@ class SitemapController extends Controller
     /**
      * Returns the rendered sitemap index.
      *
+     * @param int $groupId Which Site Group the sitemap index is for
+     *
      * @return Response
      */
     public function actionSitemapIndex(int $groupId)
@@ -51,7 +53,6 @@ class SitemapController extends Controller
                 'groupId' => $groupId,
             ]
         );
-
         $headers = Craft::$app->response->headers;
         $headers->add('Content-Type', 'text/xml; charset=utf-8');
 
@@ -61,13 +62,14 @@ class SitemapController extends Controller
     /**
      * Returns a rendered sitemap.
      *
+     * @param int         $groupId Which Site Group the sitemap index is for
+     * @param string      $type
      * @param string      $handle
      * @param int         $siteId
-     * @param string|null $file
      *
      * @return Response
      */
-    public function actionSitemap(int $groupId, string $type, string $handle, int $siteId, string $file = null)
+    public function actionSitemap(int $groupId, string $type, string $handle, int $siteId)
     {
         $xml = Seomatic::$plugin->sitemaps->renderTemplate(
             Sitemaps::SEOMATIC_SITEMAP_CONTAINER,
@@ -78,7 +80,6 @@ class SitemapController extends Controller
                 'siteId'  => $siteId,
             ]
         );
-
         $headers = Craft::$app->response->headers;
         $headers->add('Content-Type', 'text/xml; charset=utf-8');
 

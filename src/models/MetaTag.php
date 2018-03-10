@@ -77,7 +77,7 @@ class MetaTag extends MetaItem
     public $charset;
 
     /**
-     * @var string
+     * @var string|array
      */
     public $content;
 

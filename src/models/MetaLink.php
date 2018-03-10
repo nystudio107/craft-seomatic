@@ -65,7 +65,7 @@ class MetaLink extends MetaItem
     public $crossorigin;
 
     /**
-     * @var string
+     * @var string|array
      */
     public $href;
 
