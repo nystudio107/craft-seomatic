@@ -14,6 +14,7 @@ namespace nystudio107\seomatic;
 use craft\elements\User;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
+use nystudio107\seomatic\helpers\PluginTemplate;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\Settings;
 use nystudio107\seomatic\services\FrontendTemplates as FrontendTemplatesService;
@@ -546,7 +547,7 @@ class Seomatic extends Plugin
                     'UserPermissions::EVENT_REGISTER_PERMISSIONS',
                     __METHOD__
                 );
-                // Register our custmo permissions
+                // Register our custom permissions
                 $event->permissions[Craft::t('seomatic', 'SEOmatic')] = $this->customAdminCpPermissions();
             }
         );
@@ -572,19 +573,15 @@ class Seomatic extends Plugin
             self::$view->registerAssetBundle(SeomaticAsset::class);
             /** @var  $entry Entry */
             $entry = $context['entry'];
-            if (!empty($entry) && !empty($entry->uri) && self::$matchedElement) {
+            if (!empty($entry) && !empty($entry->uri)) {
                 Seomatic::$plugin->metaContainers->previewMetaContainers($entry->uri, $entry->siteId, true);
                 // Render our preview sidebar template
-                if (self::$settings->displayPreviewSidebar) {
-                    $html .= Craft::$app->view->renderTemplate(
-                        'seomatic/_sidebars/entry-preview.twig'
-                    );
+                if (self::$settings->displayPreviewSidebar && self::$matchedElement) {
+                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/entry-preview.twig');
                 }
                 // Render our analysis sidebar template
-                if (self::$settings->displayAnalysisSidebar) {
-                    $html .= Craft::$app->view->renderTemplate(
-                        'seomatic/_sidebars/entry-analysis.twig'
-                    );
+                if (self::$settings->displayAnalysisSidebar && self::$matchedElement) {
+                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/entry-analysis.twig');
                 }
             }
 
@@ -596,19 +593,15 @@ class Seomatic extends Plugin
             self::$view->registerAssetBundle(SeomaticAsset::class);
             /** @var  $category Category */
             $category = $context['category'];
-            if (!empty($category) && !empty($category->uri) && self::$matchedElement) {
+            if (!empty($category) && !empty($category->uri)) {
                 Seomatic::$plugin->metaContainers->previewMetaContainers($category->uri, $category->siteId, true);
                 // Render our preview sidebar template
                 if (self::$settings->displayPreviewSidebar) {
-                    $html .= Craft::$app->view->renderTemplate(
-                        'seomatic/_sidebars/category-preview.twig'
-                    );
+                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/category-preview.twig');
                 }
                 // Render our analysis sidebar template
                 if (self::$settings->displayAnalysisSidebar) {
-                    $html .= Craft::$app->view->renderTemplate(
-                        'seomatic/_sidebars/category-analysis.twig'
-                    );
+                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/category-analysis.twig');
                 }
             }
 
@@ -632,29 +625,29 @@ class Seomatic extends Plugin
     protected function customAdminCpRoutes(): array
     {
         return [
-            'seomatic'                                                                                        =>
+            'seomatic' =>
                 'seomatic/settings/content',
-            'seomatic/global'                                                                                 =>
+            'seomatic/global' =>
                 'seomatic/settings/global',
-            'seomatic/global/<siteHandle:{handle}>'                                                           =>
+            'seomatic/global/<siteHandle:{handle}>' =>
                 'seomatic/settings/global',
-            'seomatic/content'                                                                                =>
+            'seomatic/content' =>
                 'seomatic/settings/content',
-            'seomatic/content/<siteHandle:{handle}>'                                                          =>
+            'seomatic/content/<siteHandle:{handle}>' =>
                 'seomatic/settings/content',
-            'seomatic/edit-content/<sourceBundleType:{handle}>/<sourceHandle:{handle}>'                       =>
+            'seomatic/edit-content/<sourceBundleType:{handle}>/<sourceHandle:{handle}>' =>
                 'seomatic/settings/edit-content',
             'seomatic/edit-content/<sourceBundleType:{handle}>/<sourceHandle:{handle}>/<siteHandle:{handle}>' =>
                 'seomatic/settings/edit-content',
-            'seomatic/site'                                                                                   =>
+            'seomatic/site' =>
                 'seomatic/settings/site',
-            'seomatic/site/<siteHandle:{handle}>'                                                             =>
+            'seomatic/site/<siteHandle:{handle}>' =>
                 'seomatic/settings/site',
-            'seomatic/tracking'                                                                               =>
+            'seomatic/tracking' =>
                 'seomatic/settings/tracking',
-            'seomatic/tracking/<siteHandle:{handle}>'                                                         =>
+            'seomatic/tracking/<siteHandle:{handle}>' =>
                 'seomatic/settings/tracking',
-            'seomatic/plugin'                                                                                 =>
+            'seomatic/plugin' =>
                 'seomatic/settings/plugin',
         ];
     }
