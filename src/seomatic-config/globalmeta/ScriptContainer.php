@@ -102,6 +102,71 @@ return [
                     ],
                 ],
             ],
+            'gtag'             => [
+                'include'      => false,
+                'environment'  => [
+                    'staging' => [
+                        'include' => false,
+                    ],
+                    'local'   => [
+                        'include' => false,
+                    ],
+                ],
+                'name'         => 'Google gtag.js',
+                'description'  => 'The global site tag (gtag.js) is a JavaScript tagging framework and API that allows you to send event data to AdWords, DoubleClick, and Google Analytics. Instead of having to manage multiple tags for different products, you can use gtag.js and more easily benefit from the latest tracking features and integrations as they become available. [Learn More](https://developers.google.com/gtagjs/)',
+                'templatePath' => '_frontend/scripts/gtagHead.twig',
+                'position'     => View::POS_HEAD,
+                'vars'         => [
+                    'googleAnalyticsId'       => [
+                        'title'        => 'Google Analytics Tracking ID',
+                        'instructions' => 'Only enter the ID, e.g.: `UA-XXXXXX-XX`, not the entire script code. [Learn More](https://support.google.com/analytics/answer/1032385?hl=e)',
+                        'type'         => 'string',
+                        'value'        => '',
+                    ],
+                    'googleAdWordsId'         => [
+                        'title'        => 'AdWords Conversion ID',
+                        'instructions' => 'Only enter the ID, e.g.: `AW-XXXXXXXX`, not the entire script code. [Learn More](https://developers.google.com/adwords-remarketing-tag/)',
+                        'type'         => 'string',
+                        'value'        => '',
+                    ],
+                    'dcFloodlightId'          => [
+                        'title'        => 'DoubleClick Floodlight ID',
+                        'instructions' => 'Only enter the ID, e.g.: `DC-XXXXXXXX`, not the entire script code. [Learn More](https://support.google.com/dcm/partner/answer/7568534)',
+                        'type'         => 'string',
+                        'value'        => '',
+                    ],
+                    'sendPageView'            => [
+                        'title'        => 'Automatically send PageView',
+                        'instructions' => 'Controls whether the `gtag.js` script automatically sends a PageView to Google Analytics, AdWords, and DoubleClick Floodlight when your pages are loaded.',
+                        'type'         => 'bool',
+                        'value'        => true,
+                    ],
+                    'ipAnonymization'         => [
+                        'title'        => 'Google Analytics IP Anonymization',
+                        'instructions' => 'In some cases, you might need to anonymize the IP addresses of hits sent to Google Analytics. [Learn More](https://developers.google.com/analytics/devguides/collection/gtagjs/ip-anonymization)',
+                        'type'         => 'bool',
+                        'value'        => false,
+                    ],
+                    'displayFeatures'         => [
+                        'title'        => 'Google Analytics Display Features',
+                        'instructions' => 'The display features plugin for gtag.js can be used to enable Advertising Features in Google Analytics, such as Remarketing, Demographics and Interest Reporting, and more. [Learn More](https://developers.google.com/analytics/devguides/collection/gtagjs/display-features)',
+                        'type'         => 'bool',
+                        'value'        => false,
+                    ],
+                    'enhancedLinkAttribution' => [
+                        'title'        => 'Google Analytics Enhanced Link Attribution',
+                        'instructions' => 'Enhanced link attribution improves click track reporting by automatically differentiating between multiple link clicks that have the same URL on a given page. [Learn More](https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-link-attribution)',
+                        'type'         => 'bool',
+                        'value'        => false,
+                    ],
+                    'gtagScriptUrl'           => [
+                        'title'        => 'Google gtag.js Script URL',
+                        'instructions' => 'The URL to the Google gtag.js tracking script. Normally this should not be changed, unless you locally cache it. The JavaScript `dataLayer` will automatically be set to the `dataLayer` Twig template variable.',
+                        'type'         => 'string',
+                        'value'        => '//www.googletagmanager.com/gtag/js',
+                    ],
+                ],
+            ],
             'googleTagManager' => [
                 'include'          => false,
                 'environment'      => [

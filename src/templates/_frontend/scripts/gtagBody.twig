@@ -1,0 +1,4 @@
+{% set gtagProperty = googleAnalyticsId.value ?? googleAdWordsId.value ?? dcFloodlightId ?? null %}
+{% if gtagProperty %}
+<script async src="{{ gtagScriptUrl }}?id={{ gtagProperty }}"></script>
+{% endif %}

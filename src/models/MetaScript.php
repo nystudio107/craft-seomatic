@@ -74,14 +74,14 @@ class MetaScript extends MetaItem
     public $templateString;
 
     /**
-     * @var
-     */
-    public $bodyTemplatePath;
-
-    /**
      * @var int
      */
     public $position = View::POS_HEAD;
+
+    /**
+     * @var
+     */
+    public $bodyTemplatePath;
 
     /**
      * @var int
