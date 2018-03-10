@@ -127,21 +127,22 @@ class MetaContainers extends Component
             $dependency = new TagDependency([
                 'tags' => [
                     $this::GLOBAL_METACONTAINER_CACHE_TAG,
-                    $this::METACONTAINER_CACHE_TAG . $metaBundleSourceId,
-                    $this::METACONTAINER_CACHE_TAG . $uri . $siteId,
+                    $this::METACONTAINER_CACHE_TAG.$metaBundleSourceId,
+                    $this::METACONTAINER_CACHE_TAG.$uri.$siteId,
                 ],
             ]);
             $cache = Craft::$app->getCache();
             list($this->metaGlobalVars, $this->metaSiteVars, $this->metaSitemapVars, $this->metaContainers) = $cache->getOrSet(
-                $this::CACHE_KEY . $uri . $siteId,
+                $this::CACHE_KEY.$uri.$siteId,
                 function () use ($uri, $siteId) {
                     Craft::info(
-                        'Meta container cache miss: ' . $uri . '/' . $siteId,
+                        'Meta container cache miss: '.$uri.'/'.$siteId,
                         __METHOD__
                     );
                     $this->loadGlobalMetaContainers($siteId);
                     $this->loadContentMetaContainers();
                     DynamicMetaHelper::addDynamicMetaToContainers($uri, $siteId);
+
                     return [$this->metaGlobalVars, $this->metaSiteVars, $this->metaSitemapVars, $this->metaContainers];
                 },
                 $duration,
@@ -198,7 +199,7 @@ class MetaContainers extends Component
                 if (is_array($content)) {
                     $contentHeader = '';
                     foreach ($content as $contentVal) {
-                        $contentHeader.= ($contentVal.',');
+                        $contentHeader .= ($contentVal.',');
                     }
                     $contentHeader = rtrim($contentHeader, ',');
                 } else {
@@ -208,6 +209,7 @@ class MetaContainers extends Component
             }
         }
     }
+
     /**
      * Parse the global variables
      */
@@ -279,6 +281,7 @@ class MetaContainers extends Component
                 ['key' => $key]
             );
             Craft::error($error, __METHOD__);
+
             return null;
         }
 
@@ -575,9 +578,9 @@ class MetaContainers extends Component
             $metaBundleSourceId = $sourceId;
         }
         $cache = Craft::$app->getCache();
-        TagDependency::invalidate($cache, $this::METACONTAINER_CACHE_TAG . $metaBundleSourceId);
+        TagDependency::invalidate($cache, $this::METACONTAINER_CACHE_TAG.$metaBundleSourceId);
         Craft::info(
-            'Meta bundle cache cleared: ' . $metaBundleSourceId,
+            'Meta bundle cache cleared: '.$metaBundleSourceId,
             __METHOD__
         );
     }
@@ -591,9 +594,9 @@ class MetaContainers extends Component
     public function invalidateContainerCacheByPath(string $uri, int $siteId)
     {
         $cache = Craft::$app->getCache();
-        TagDependency::invalidate($cache, $this::METACONTAINER_CACHE_TAG . $uri . $siteId);
+        TagDependency::invalidate($cache, $this::METACONTAINER_CACHE_TAG.$uri.$siteId);
         Craft::info(
-            'Meta container cache cleared: ' . $uri . '/' . $siteId,
+            'Meta container cache cleared: '.$uri.'/'.$siteId,
             __METHOD__
         );
     }
