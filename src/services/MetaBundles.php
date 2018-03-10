@@ -322,7 +322,7 @@ class MetaBundles extends Component
             if ($sourceId) {
                 Craft::info(
                     'Invalidating meta bundle: '
-                    .$element->uri
+                    .($element->uri ?? '')
                     .'/'
                     .$sourceSiteId,
                     __METHOD__
@@ -587,6 +587,7 @@ class MetaBundles extends Component
      */
     protected function syncBundleWithConfig(string $sourceType, MetaBundle &$metaBundle)
     {
+        $config = [];
         switch ($sourceType) {
             case self::GLOBAL_META_BUNDLE:
                 $config = ConfigHelper::getConfigFromFile('globalmeta/Bundle');
