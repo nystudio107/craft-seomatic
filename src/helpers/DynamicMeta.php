@@ -202,7 +202,6 @@ class DynamicMeta
         foreach ($sites as $site) {
             if (Seomatic::$matchedElement) {
                 $url = $elements->getElementUriForSite(Seomatic::$matchedElement->getId(), $site->id);
-                $url = ($url === null) ? '' : $url;
                 $url = ($url === '__home__') ? '' : $url;
             } else {
                 try {
@@ -216,13 +215,16 @@ class DynamicMeta
                     Craft::error($e->getMessage(), __METHOD__);
                 }
             }
+            $url = ($url === null) ? '' : $url;
             if (!UrlHelper::isAbsoluteUrl($url)) {
                 try {
                     $url = UrlHelper::siteUrl($url);
                 } catch (Exception $e) {
+                    $url = '';
                     Craft::error($e->getMessage(), __METHOD__);
                 }
             }
+            $url = ($url === null) ? '' : $url;
             $language = $site->language;
             $language = strtolower($language);
             $language = str_replace('_', '-', $language);
