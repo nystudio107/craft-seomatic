@@ -81,9 +81,11 @@ class Script extends MetaService implements MetaServiceInterface
     }
 
     /**
-     * @inheritdoc
+     * @param string $handle
+     *
+     * @return null|MetaScriptContainer
      */
-    public function container(string $handle = self::GENERAL_HANDLE): MetaScriptContainer
+    public function container(string $handle = self::GENERAL_HANDLE)
     {
         $key = MetaScriptContainer::CONTAINER_TYPE . $handle;
         return Seomatic::$plugin->metaContainers->getMetaContainer($key);

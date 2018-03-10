@@ -83,9 +83,11 @@ class Template extends Component implements MetaServiceInterface
     }
 
     /**
-     * @inheritdoc
+     * @param string $handle
+     *
+     * @return null|FrontendTemplateContainer
      */
-    public function container(string $handle = ''): FrontendTemplateContainer
+    public function container(string $handle = '')
     {
         $key = FrontendTemplateContainer::CONTAINER_TYPE . $handle;
         return Seomatic::$plugin->metaContainers->getMetaContainer($key);

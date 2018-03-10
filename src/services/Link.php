@@ -84,9 +84,11 @@ class Link extends MetaService implements MetaServiceInterface
     }
 
     /**
-     * @inheritdoc
+     * @param string $handle
+     *
+     * @return null|MetaLinkContainer
      */
-    public function container(string $handle = self::GENERAL_HANDLE): MetaLinkContainer
+    public function container(string $handle = self::GENERAL_HANDLE)
     {
         $key = MetaLinkContainer::CONTAINER_TYPE . $handle;
         return Seomatic::$plugin->metaContainers->getMetaContainer($key);
