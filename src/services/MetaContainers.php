@@ -195,7 +195,16 @@ class MetaContainers extends Component
             $response = Craft::$app->getResponse();
             $content = $robots->content;
             if (!empty($content)) {
-                $response->headers->add('X-Robots-Tag', $content);
+                if (is_array($content)) {
+                    $contentHeader = '';
+                    foreach ($content as $contentVal) {
+                        $contentHeader.= ($content.',');
+                    }
+                    $contentHeader = rtrim($contentHeader, ',');
+                } else {
+                    $contentHeader = $content;
+                }
+                $response->headers->add('X-Robots-Tag', $contentHeader);
             }
         }
     }
