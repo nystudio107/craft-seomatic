@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\helpers;
 
 use craft\base\Volume;
+use craft\elements\User;
 use nystudio107\seomatic\services\MetaBundles;
 
 use Craft;
@@ -113,6 +114,22 @@ class Field
         bool $keysOnly = true
     ): array {
         $layout = $element->getFieldLayout();
+        $foundFields = self::fieldsOfTypeFromLayout($fieldClassKey, $layout, $keysOnly);
+
+        return $foundFields;
+    }
+
+    /**
+     * Return all of the fields from Users layout of the type $fieldClassKey
+     *
+     * @param string  $fieldClassKey
+     * @param bool    $keysOnly
+     *
+     * @return array
+     */
+    public static function fieldsOfTypeFromUsers(string $fieldClassKey, bool $keysOnly = true): array
+    {
+        $layout = Craft::$app->getFields()->getLayoutByType(User::class);
         $foundFields = self::fieldsOfTypeFromLayout($fieldClassKey, $layout, $keysOnly);
 
         return $foundFields;
