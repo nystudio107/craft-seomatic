@@ -1,3 +1,5 @@
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/?branch=develop)[![Code Coverage](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/coverage.png?b=develop)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/?branch=develop)[![Build Status](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/build.png?b=develop)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/build-status/develop)[![Code Intelligence Status](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/code-intelligence.svg?b=develop)](https://scrutinizer-ci.com/code-intelligence)
+
 # SEOmatic plugin for Craft CMS 3.x
 
 A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
