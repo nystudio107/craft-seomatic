@@ -68,41 +68,29 @@
                 {############### SEO Title ###############}
     
                 <td class="centeralign">
-                    {% if metaBundle.metaGlobalVars.seoTitle |length %}
-                        <span class="content-seo-checkmark">&check;</span>
-                    {% else %}
-                        <span class="content-seo-xmark">&cross;</span>
-                    {% endif %}
+                    {% set status = (metaBundle.metaGlobalVars.seoTitle |length) ? "enabled" : "disabled" %}
+                    <span class='{{ "status #{status} inline-item"}}'></span>
                 </td>
     
                 {############### SEO Description ###############}
     
                 <td class="centeralign">
-                    {% if metaBundle.metaGlobalVars.seoDescription |length %}
-                        <span class="content-seo-checkmark">&check;</span>
-                    {% else %}
-                        <span class="content-seo-xmark">&cross;</span>
-                    {% endif %}
+                    {% set status = (metaBundle.metaGlobalVars.seoDescription |length) ? "enabled" : "disabled" %}
+                    <span class='{{ "status #{status} inline-item"}}'></span>
                 </td>
     
                 {############### SEO Image ###############}
     
                 <td class="centeralign">
-                    {% if metaBundle.metaGlobalVars.seoImage |length %}
-                        <span class="content-seo-checkmark">&check;</span>
-                    {% else %}
-                        <span class="content-seo-xmark">&cross;</span>
-                    {% endif %}
+                    {% set status = (metaBundle.metaGlobalVars.seoImage |length) ? "enabled" : "disabled" %}
+                    <span class='{{ "status #{status} inline-item"}}'></span>
                 </td>
     
                 {############### Sitemap ###############}
     
                 <td class="centeralign">
-                    {% if metaBundle.metaSitemapVars.sitemapUrls %}
-                        <span class="content-seo-checkmark">&check;</span>
-                    {% else %}
-                        <span class="content-seo-xmark">&cross;</span>
-                    {% endif %}
+                    {% set status = metaBundle.metaSitemapVars.sitemapUrls ? "enabled" : "disabled" %}
+                    <span class='{{ "status #{status} inline-item"}}'></span>
                 </td>
     
                 {############### Robots ###############}

@@ -72,6 +72,8 @@ div.inline-item-padding {
     padding-left: 10px;
 }
 
+body.ltr span.inline-item,
+span.inline-item,
 div.inline-item {
     display: inline-block;
     vertical-align: middle;
