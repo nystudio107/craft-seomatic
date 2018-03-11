@@ -540,20 +540,34 @@ class SettingsController extends Controller
     /**
      * Tracking settings
      *
+     * @param string $subSection
      * @param string $siteHandle
      *
      * @return Response The rendered result
      * @throws NotFoundHttpException
      * @throws \yii\web\ForbiddenHttpException
      */
-    public function actionTracking(string $siteHandle = null): Response
+    public function actionTracking(string $subSection = 'googleAnalytics', string $siteHandle = null): Response
     {
         $variables = [];
         // Get the site to edit
         $siteId = $this->getSiteIdFromHandle($siteHandle);
+        // Enabled sites
+        $this->setMultiSiteVariables($siteHandle, $siteId, $variables);
+        $variables['controllerHandle'] = 'tracking';
+        $variables['currentSubSection'] = $subSection;
 
+        // The script meta containers for the global meta bundle
+        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle(intval($variables['currentSiteId']));
+        $variables['scripts'] = Seomatic::$plugin->metaBundles->getContainerDataFromBundle(
+            $metaBundle,
+            MetaScriptContainer::CONTAINER_TYPE
+        );
+        // Plugin and section settings
         $pluginName = Seomatic::$settings->pluginName;
         $templateTitle = Craft::t('seomatic', 'Tracking Scripts');
+        $subSectionTitle = $variables['scripts'][$subSection]->name;
+        $subSectionTitle = Craft::t('seomatic', $subSectionTitle);
         // Asset bundle
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
@@ -569,6 +583,7 @@ class SettingsController extends Controller
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = Seomatic::$settings->pluginName;
         $variables['title'] = $templateTitle;
+        $variables['subSectionTitle'] = $subSectionTitle;
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -578,19 +593,12 @@ class SettingsController extends Controller
                 'label' => $templateTitle,
                 'url'   => UrlHelper::cpUrl('seomatic/tracking'),
             ],
+            [
+                'label' => $subSectionTitle,
+                'url'   => UrlHelper::cpUrl('seomatic/tracking/'.$subSection),
+            ],
         ];
         $variables['selectedSubnavItem'] = 'tracking';
-
-        // Enabled sites
-        $this->setMultiSiteVariables($siteHandle, $siteId, $variables);
-        $variables['controllerHandle'] = 'tracking';
-
-        // The script meta containers for the global meta bundle
-        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle(intval($variables['currentSiteId']));
-        $variables['scripts'] = Seomatic::$plugin->metaBundles->getContainerDataFromBundle(
-            $metaBundle,
-            MetaScriptContainer::CONTAINER_TYPE
-        );
 
         // Render the template
         return $this->renderTemplate('seomatic/settings/tracking/_edit', $variables);

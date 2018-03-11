@@ -653,10 +653,14 @@ class Seomatic extends Plugin
                 'seomatic/settings/site',
             'seomatic/site/<subSection:{handle}>/<siteHandle:{handle}>' =>
                 'seomatic/settings/site',
-            'seomatic/tracking' =>
 
+            'seomatic/tracking' => [
+                'route' => 'seomatic/settings/tracking',
+                'defaults' => ['subSection' => 'googleAnalytics'],
+            ],
+            'seomatic/tracking/<subSection:{handle}>' =>
                 'seomatic/settings/tracking',
-            'seomatic/tracking/<siteHandle:{handle}>' =>
+            'seomatic/tracking/<subSection:{handle}>/<siteHandle:{handle}>' =>
                 'seomatic/settings/tracking',
 
             'seomatic/plugin' =>

@@ -1,22 +1,9 @@
 {% requirePermission "seomatic:site-settings" %}
 
-{% extends "_layouts/cp" %}
+{% extends "seomatic/_layouts/trackingSettings.twig" %}
 
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
-
-{% set tabs = {} %}
-{% for scriptHandle,scriptData in scripts %}
-    {% set permission = "seomatic:tracking-scripts:#{scriptHandle}" %}
-    {% if currentUser.can(permission) %}
-        {% set tabs = tabs |merge({
-            (scriptHandle): {
-                url: "#tab-tracking-#{scriptHandle}",
-                label: "#{scriptData.name}" |t("seomatic"),
-            },
-        }) %}
-    {% endif %}
-{% endfor %}
 
 {% block header %}
     {{ block('pageTitle') }}
@@ -38,12 +25,13 @@
 
     {% for scriptHandle,scriptData in scripts %}
         {% set permission = "seomatic:tracking-scripts:#{scriptHandle}" %}
-        {% if currentUser.can(permission) %}
-            <div id='{{ "tab-tracking-#{scriptHandle}" }}' class="seomatic-script-wrapper {% if not loop.first %}hidden{% endif %}">
+        {% if currentUser.can(permission) and currentSubSection == scriptHandle %}
+            <div id='{{ "tab-tracking-#{scriptHandle}" }}' class="seomatic-script-wrapper">
+                <h2>{{ subSectionTitle ~ " Settings" |t("seomatic") }}</h2>
                 {% namespace "scripts[#{scriptHandle}]" %}
                     <div class="field seomatic-script-lightswitch">
                     {{ forms.lightswitchField({
-                        label: "#{scriptData.name}" |t("seomatic"),
+                        label: "#{scriptData.name} Enabled" |t("seomatic"),
                         instructions: "#{scriptData.description}" |t("seomatic"),
                         id: "include",
                         name: "include",
@@ -51,7 +39,7 @@
                         warning: false,
                     }) }}
                     </div>
-                    <div class="seomatic-script-container">
+                    <div class="seomatic-script-container" {% if not scriptData.include %}style="display: none;"{% endif %}>
                         {% for varHandle,varData in scriptData.vars %}
                             {% switch varData.type %}
                                 {% case "bool" %}
