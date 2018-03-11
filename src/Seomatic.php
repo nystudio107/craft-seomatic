@@ -640,9 +640,9 @@ class Seomatic extends Plugin
             'seomatic/content/<siteHandle:{handle}>' =>
                 'seomatic/settings/content',
 
-            'seomatic/edit-content/<sourceBundleType:{handle}>/<sourceHandle:{handle}>' =>
+            'seomatic/edit-content/<subSection:{handle}>/<sourceBundleType:{handle}>/<sourceHandle:{handle}>' =>
                 'seomatic/settings/edit-content',
-            'seomatic/edit-content/<sourceBundleType:{handle}>/<sourceHandle:{handle}>/<siteHandle:{handle}>' =>
+            'seomatic/edit-content/<subSection:{handle}>/<sourceBundleType:{handle}>/<sourceHandle:{handle}>/<siteHandle:{handle}>' =>
                 'seomatic/settings/edit-content',
 
             'seomatic/site' => [

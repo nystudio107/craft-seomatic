@@ -48,7 +48,7 @@
                         {% case 'category' %}
                             {% set sourcePrefix =  'settings/categories/' %}
                     {% endswitch %}
-                    <a href="{{ cpUrl("seomatic/edit-content/#{metaBundle.sourceBundleType}/#{metaBundle.sourceHandle}/#{currentSiteHandle}") }}">{{ metaBundle.sourceName }}</a>
+                    <a href="{{ cpUrl("seomatic/edit-content/general/#{metaBundle.sourceBundleType}/#{metaBundle.sourceHandle}/#{currentSiteHandle}") }}">{{ metaBundle.sourceName }}</a>
                     <a class="go" href="{{ url(sourcePrefix ~ metaBundle.sourceId) }}"></a>
                 </td>
                 

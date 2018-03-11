@@ -83,7 +83,7 @@ class SettingsController extends Controller
      * @throws NotFoundHttpException
      * @throws \yii\web\ForbiddenHttpException
      */
-    public function actionGlobal(string $subSection = "general", string $siteHandle = null): Response
+    public function actionGlobal(string $subSection = 'general', string $siteHandle = null): Response
     {
         $variables = [];
         $siteId = $this->getSiteIdFromHandle($siteHandle);
@@ -253,6 +253,7 @@ class SettingsController extends Controller
     /**
      * Global settings
      *
+     * @param string      $subSection
      * @param string      $sourceBundleType
      * @param string      $sourceHandle
      * @param string|null $siteHandle
@@ -262,6 +263,7 @@ class SettingsController extends Controller
      * @throws \yii\web\ForbiddenHttpException
      */
     public function actionEditContent(
+        string $subSection,
         string $sourceBundleType,
         string $sourceHandle,
         string $siteHandle = null
@@ -297,10 +299,12 @@ class SettingsController extends Controller
         $variables['currentSourceBundleType'] = $metaBundle->sourceBundleType;
         // Basic variables
         $templateTitle = $metaBundle->sourceName;
+        $subSectionTitle = Craft::t('seomatic', ucfirst($subSection));
         $variables['fullPageForm'] = true;
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = Seomatic::$settings->pluginName;
         $variables['title'] = $templateTitle;
+        $variables['subSectionTitle'] = $subSectionTitle;
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -311,13 +315,14 @@ class SettingsController extends Controller
                 'url'   => UrlHelper::cpUrl('seomatic/content'),
             ],
             [
-                'label' => $templateTitle,
-                'url'   => UrlHelper::cpUrl('seomatic/content'),
+                'label' => $metaBundle->sourceName.' · '.$subSectionTitle,
+                'url'   => UrlHelper::cpUrl("seomatic/content/${subSection}/${sourceBundleType}/${sourceHandle}"),
             ],
         ];
         $variables['selectedSubnavItem'] = 'content';
-        $variables['controllerHandle'] = "edit-content/${sourceBundleType}/${sourceHandle}";
+        $variables['controllerHandle'] = "edit-content/${subSection}/${sourceBundleType}/${sourceHandle}";
         // Image selectors
+        $variables['currentSubSection'] = $subSection;
         $bundleSettings = $metaBundle->metaBundleSettings;
         $variables['elementType'] = Asset::class;
         $variables['seoImageElements'] = $this->assetElementsFromIds($bundleSettings->seoImageIds, $siteId);
@@ -334,7 +339,7 @@ class SettingsController extends Controller
         );
 
         // Render the template
-        return $this->renderTemplate('seomatic/settings/content/_edit', $variables);
+        return $this->renderTemplate('seomatic/settings/content/'.$subSection, $variables);
     }
 
 
