@@ -625,6 +625,7 @@ class Seomatic extends Plugin
         return [
             'seomatic' =>
                 'seomatic/settings/content',
+
             'seomatic/global' => [
                 'route' => 'seomatic/settings/global',
                 'defaults' => ['subSection' => 'general'],
@@ -633,22 +634,31 @@ class Seomatic extends Plugin
                 'seomatic/settings/global',
             'seomatic/global/<subSection:{handle}>/<siteHandle:{handle}>' =>
                 'seomatic/settings/global',
+
             'seomatic/content' =>
                 'seomatic/settings/content',
             'seomatic/content/<siteHandle:{handle}>' =>
                 'seomatic/settings/content',
+
             'seomatic/edit-content/<sourceBundleType:{handle}>/<sourceHandle:{handle}>' =>
                 'seomatic/settings/edit-content',
             'seomatic/edit-content/<sourceBundleType:{handle}>/<sourceHandle:{handle}>/<siteHandle:{handle}>' =>
                 'seomatic/settings/edit-content',
-            'seomatic/site' =>
+
+            'seomatic/site' => [
+                'route' => 'seomatic/settings/site',
+                'defaults' => ['subSection' => 'identity'],
+            ],
+            'seomatic/site/<subSection:{handle}>' =>
                 'seomatic/settings/site',
-            'seomatic/site/<siteHandle:{handle}>' =>
+            'seomatic/site/<subSection:{handle}>/<siteHandle:{handle}>' =>
                 'seomatic/settings/site',
             'seomatic/tracking' =>
+
                 'seomatic/settings/tracking',
             'seomatic/tracking/<siteHandle:{handle}>' =>
                 'seomatic/settings/tracking',
+
             'seomatic/plugin' =>
                 'seomatic/settings/plugin',
         ];

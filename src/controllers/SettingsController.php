@@ -76,6 +76,7 @@ class SettingsController extends Controller
     /**
      * Global settings
      *
+     * @param string      $subSection
      * @param string|null $siteHandle
      *
      * @return Response The rendered result
@@ -393,13 +394,14 @@ class SettingsController extends Controller
     /**
      * Site settings
      *
+     * @param string $subSection
      * @param string $siteHandle
      *
      * @return Response The rendered result
      * @throws NotFoundHttpException
      * @throws \yii\web\ForbiddenHttpException
      */
-    public function actionSite(string $siteHandle = null): Response
+    public function actionSite(string $subSection = 'identity', string $siteHandle = null): Response
     {
         $variables = [];
         // Get the site to edit
@@ -407,6 +409,11 @@ class SettingsController extends Controller
 
         $pluginName = Seomatic::$settings->pluginName;
         $templateTitle = Craft::t('seomatic', 'Site Settings');
+        $subSectionSuffix = "";
+        if ($subSection == "social") {
+            $subSectionSuffix = " Media";
+        }
+        $subSectionTitle = Craft::t('seomatic', ucfirst($subSection).$subSectionSuffix);
         // Asset bundle
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
@@ -421,7 +428,8 @@ class SettingsController extends Controller
         $variables['fullPageForm'] = true;
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = Seomatic::$settings->pluginName;
-        $variables['title'] = $pluginName.' '.$templateTitle;
+        $variables['title'] = $templateTitle;
+        $variables['subSectionTitle'] = $subSectionTitle;
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -431,19 +439,24 @@ class SettingsController extends Controller
                 'label' => $templateTitle,
                 'url'   => UrlHelper::cpUrl('seomatic/site'),
             ],
+            [
+                'label' => $subSectionTitle,
+                'url'   => UrlHelper::cpUrl('seomatic/site/'.$subSection),
+            ],
         ];
         $variables['selectedSubnavItem'] = 'site';
+        $variables['currentSubSection'] = $subSection;
 
         // Enabled sites
         $this->setMultiSiteVariables($siteHandle, $siteId, $variables);
-        $variables['controllerHandle'] = 'site';
+        $variables['controllerHandle'] = 'site'.'/'.$subSection;
 
         // The site settings for the appropriate meta bundle
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle(intval($variables['currentSiteId']));
         $variables['site'] = $metaBundle->metaSiteVars;
 
         // Render the template
-        return $this->renderTemplate('seomatic/settings/site/_edit', $variables);
+        return $this->renderTemplate('seomatic/settings/site/'.$subSection, $variables);
     }
 
     /**
@@ -505,7 +518,7 @@ class SettingsController extends Controller
         $variables['fullPageForm'] = true;
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = Seomatic::$settings->pluginName;
-        $variables['title'] = $pluginName.' '.$templateTitle;
+        $variables['title'] = $templateTitle;
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -555,7 +568,7 @@ class SettingsController extends Controller
         $variables['fullPageForm'] = true;
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = Seomatic::$settings->pluginName;
-        $variables['title'] = $pluginName.' '.$templateTitle;
+        $variables['title'] = $templateTitle;
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
