@@ -249,7 +249,7 @@ return [
                         'title'        => 'Facebook Pixel Script &lt;noscript&gt; URL',
                         'instructions' => 'The URL to the Facebook Pixel `&lt;noscript&gt;`. Normally this should not be changed, unless you locally cache it.',
                         'type'         => 'string',
-                        'value'        => '//www.facebook.com/tr?id=FB_PIXEL_ID&amp;ev=PageView&amp;noscript=1',
+                        'value'        => '//www.facebook.com/tr',
                     ],
                 ],
             ],
