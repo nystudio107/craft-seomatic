@@ -82,20 +82,21 @@ class SettingsController extends Controller
      * @throws NotFoundHttpException
      * @throws \yii\web\ForbiddenHttpException
      */
-    public function actionGlobal(string $siteHandle = null): Response
+    public function actionGlobal(string $subSection = "general", string $siteHandle = null): Response
     {
         $variables = [];
         $siteId = $this->getSiteIdFromHandle($siteHandle);
 
         $pluginName = Seomatic::$settings->pluginName;
         $templateTitle = Craft::t('seomatic', 'Global SEO');
+        $subSectionTitle = Craft::t('seomatic', ucfirst($subSection));
         // Asset bundle
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
         } catch (InvalidConfigException $e) {
             Craft::error($e->getMessage(), __METHOD__);
         }
-        $variables['baseAssetUrl'] = Craft::$app->assetManager->getPublishedUrl(
+        $variables['baseAssetsUrl'] = Craft::$app->assetManager->getPublishedUrl(
             '@nystudio107/seomatic/assetbundles/seomatic/dist',
             true
         );
@@ -104,6 +105,8 @@ class SettingsController extends Controller
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = Seomatic::$settings->pluginName;
         $variables['title'] = $templateTitle;
+        $variables['subSectionTitle'] = $subSectionTitle;
+        $variables['docTitle'] = $templateTitle.' - '.$subSectionTitle;
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -113,13 +116,18 @@ class SettingsController extends Controller
                 'label' => $templateTitle,
                 'url'   => UrlHelper::cpUrl('seomatic/global'),
             ],
+            [
+                'label' => $subSectionTitle,
+                'url'   => UrlHelper::cpUrl('seomatic/global/'.$subSection),
+            ],
         ];
         $variables['selectedSubnavItem'] = 'global';
         // Pass in the pull fields
         $this->setGlobalFieldSourceVariables($variables);
         // Enabled sites
         $this->setMultiSiteVariables($siteHandle, $siteId, $variables);
-        $variables['controllerHandle'] = 'global';
+        $variables['controllerHandle'] = 'global' . '/' . $subSection;
+        $variables['currentSubSection'] = $subSection;
         // Meta bundle settings
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle(intval($variables['currentSiteId']));
         $variables['globals'] = $metaBundle->metaGlobalVars;
@@ -142,7 +150,7 @@ class SettingsController extends Controller
         );
 
         // Render the template
-        return $this->renderTemplate('seomatic/settings/global/_edit', $variables);
+        return $this->renderTemplate('seomatic/settings/global/'.$subSection, $variables);
     }
 
     /**
@@ -213,7 +221,7 @@ class SettingsController extends Controller
         } catch (InvalidConfigException $e) {
             Craft::error($e->getMessage(), __METHOD__);
         }
-        $variables['baseAssetUrl'] = Craft::$app->assetManager->getPublishedUrl(
+        $variables['baseAssetsUrl'] = Craft::$app->assetManager->getPublishedUrl(
             '@nystudio107/seomatic/assetbundles/seomatic/dist',
             true
         );
@@ -269,7 +277,7 @@ class SettingsController extends Controller
         } catch (InvalidConfigException $e) {
             Craft::error($e->getMessage(), __METHOD__);
         }
-        $variables['baseAssetUrl'] = Craft::$app->assetManager->getPublishedUrl(
+        $variables['baseAssetsUrl'] = Craft::$app->assetManager->getPublishedUrl(
             '@nystudio107/seomatic/assetbundles/seomatic/dist',
             true
         );
@@ -405,7 +413,7 @@ class SettingsController extends Controller
         } catch (InvalidConfigException $e) {
             Craft::error($e->getMessage(), __METHOD__);
         }
-        $variables['baseAssetUrl'] = Craft::$app->assetManager->getPublishedUrl(
+        $variables['baseAssetsUrl'] = Craft::$app->assetManager->getPublishedUrl(
             '@nystudio107/seomatic/assetbundles/seomatic/dist',
             true
         );
@@ -489,7 +497,7 @@ class SettingsController extends Controller
         } catch (InvalidConfigException $e) {
             Craft::error($e->getMessage(), __METHOD__);
         }
-        $variables['baseAssetUrl'] = Craft::$app->assetManager->getPublishedUrl(
+        $variables['baseAssetsUrl'] = Craft::$app->assetManager->getPublishedUrl(
             '@nystudio107/seomatic/assetbundles/seomatic/dist',
             true
         );
@@ -539,7 +547,7 @@ class SettingsController extends Controller
         } catch (InvalidConfigException $e) {
             Craft::error($e->getMessage(), __METHOD__);
         }
-        $variables['baseAssetUrl'] = Craft::$app->assetManager->getPublishedUrl(
+        $variables['baseAssetsUrl'] = Craft::$app->assetManager->getPublishedUrl(
             '@nystudio107/seomatic/assetbundles/seomatic/dist',
             true
         );
@@ -635,38 +643,40 @@ class SettingsController extends Controller
         }
         foreach (self::PULL_TEXT_FIELDS as $fields) {
             $fieldName = $fields['fieldName'];
-            $source = $bundleSettings[$fieldName.'Source'];
+            $source = $bundleSettings[$fieldName.'Source'] ?? '';
             $sourceField = $bundleSettings[$fieldName.'Field'] ?? '';
-            $seoField = $fields['seoField'];
-            switch ($source) {
-                case 'sameAsSeo':
-                    $globalsSettings[$fieldName] =
-                        '{seomatic.meta.'.$seoField.'}';
-                    break;
+            if (!empty($source) && !empty($sourceField)) {
+                $seoField = $fields['seoField'];
+                switch ($source) {
+                    case 'sameAsSeo':
+                        $globalsSettings[$fieldName] =
+                            '{seomatic.meta.'.$seoField.'}';
+                        break;
 
-                case 'fromField':
-                    $globalsSettings[$fieldName] =
-                        '{seomatic.helper.extractTextFromField('
-                        .$objectPrefix.$elementName.$sourceField
-                        .')}';
-                    break;
+                    case 'fromField':
+                        $globalsSettings[$fieldName] =
+                            '{seomatic.helper.extractTextFromField('
+                            .$objectPrefix.$elementName.$sourceField
+                            .')}';
+                        break;
 
-                case 'summaryFromField':
-                    $globalsSettings[$fieldName] =
-                        '{seomatic.helper.extractSummary(seomatic.helper.extractTextFromField('
-                        .$objectPrefix.$elementName.$sourceField
-                        .'))}';
-                    break;
+                    case 'summaryFromField':
+                        $globalsSettings[$fieldName] =
+                            '{seomatic.helper.extractSummary(seomatic.helper.extractTextFromField('
+                            .$objectPrefix.$elementName.$sourceField
+                            .'))}';
+                        break;
 
-                case 'keywordsFromField':
-                    $globalsSettings[$fieldName] =
-                        '{seomatic.helper.extractKeywords(seomatic.helper.extractTextFromField('
-                        .$objectPrefix.$elementName.$sourceField
-                        .'))}';
-                    break;
+                    case 'keywordsFromField':
+                        $globalsSettings[$fieldName] =
+                            '{seomatic.helper.extractKeywords(seomatic.helper.extractTextFromField('
+                            .$objectPrefix.$elementName.$sourceField
+                            .'))}';
+                        break;
 
-                case 'fromCustom':
-                    break;
+                    case 'fromCustom':
+                        break;
+                }
             }
         }
     }
@@ -688,82 +698,84 @@ class SettingsController extends Controller
         }
         foreach (self::PULL_ASSET_FIELDS as $fields) {
             $fieldName = $fields['fieldName'];
-            $source = $bundleSettings[$fieldName.'Source'];
-            $ids = $bundleSettings[$fieldName.'Ids'];
+            $source = $bundleSettings[$fieldName.'Source'] ?? '';
+            $ids = $bundleSettings[$fieldName.'Ids'] ?? [];
             $sourceField = $bundleSettings[$fieldName.'Field'] ?? '';
-            $transformImage = $bundleSettings[$fieldName.'Transform'];
-            $seoField = $fields['seoField'];
-            $transformName = $fields['transformName'];
-            // Special-case Twitter transforms
-            if ($transformName == 'twitter') {
-                $transformName = 'twitter-summary';
-                if ($globalsSettings['twitterCard'] == 'summary_large_image') {
-                    $transformName = 'twitter-large';
+            if (!empty($source) && !empty($sourceField)) {
+                $transformImage = $bundleSettings[$fieldName.'Transform'];
+                $seoField = $fields['seoField'];
+                $transformName = $fields['transformName'];
+                // Special-case Twitter transforms
+                if ($transformName == 'twitter') {
+                    $transformName = 'twitter-summary';
+                    if ($globalsSettings['twitterCard'] == 'summary_large_image') {
+                        $transformName = 'twitter-large';
+                    }
                 }
-            }
-            switch ($source) {
-                case 'sameAsSeo':
-                    if ($transformImage) {
-                        $seoSource = $bundleSettings[$seoField.'Source'];
-                        $seoIds = $bundleSettings[$seoField.'Ids'];
-                        $seoSourceField = $bundleSettings[$seoField.'Field'] ?? '';
-                        switch ($seoSource) {
-                            case 'fromField':
-                                if (!empty($seoSourceField)) {
-                                    $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
-                                        .$objectPrefix.$elementName.$seoSourceField.'.one()'
-                                        .', "'.$transformName.'"'
-                                        .', '.$siteId.')}';
-                                }
-                                break;
-                            case 'fromAsset':
-                                if (!empty($seoIds)) {
-                                    $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
-                                        .$seoIds[0]
-                                        .', "'.$transformName.'"'
-                                        .', '.$siteId.')}';
-                                }
-                                break;
-                            default:
-                                $globalsSettings[$fieldName] = '{seomatic.meta.'.$seoField.'}';
-                                break;
+                switch ($source) {
+                    case 'sameAsSeo':
+                        if ($transformImage) {
+                            $seoSource = $bundleSettings[$seoField.'Source'];
+                            $seoIds = $bundleSettings[$seoField.'Ids'];
+                            $seoSourceField = $bundleSettings[$seoField.'Field'] ?? '';
+                            switch ($seoSource) {
+                                case 'fromField':
+                                    if (!empty($seoSourceField)) {
+                                        $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
+                                            .$objectPrefix.$elementName.$seoSourceField.'.one()'
+                                            .', "'.$transformName.'"'
+                                            .', '.$siteId.')}';
+                                    }
+                                    break;
+                                case 'fromAsset':
+                                    if (!empty($seoIds)) {
+                                        $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
+                                            .$seoIds[0]
+                                            .', "'.$transformName.'"'
+                                            .', '.$siteId.')}';
+                                    }
+                                    break;
+                                default:
+                                    $globalsSettings[$fieldName] = '{seomatic.meta.'.$seoField.'}';
+                                    break;
+                            }
+                        } else {
+                            $globalsSettings[$fieldName] = '{seomatic.meta.'.$seoField.'}';
                         }
-                    } else {
-                        $globalsSettings[$fieldName] = '{seomatic.meta.'.$seoField.'}';
-                    }
-                    break;
-                case 'fromField':
-                    if ($transformImage) {
-                        if (!empty($sourceField)) {
-                            $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
-                                .$objectPrefix.$elementName.$sourceField.'.one()'
-                                .', "'.$transformName.'"'
-                                .', '.$siteId.')}';
+                        break;
+                    case 'fromField':
+                        if ($transformImage) {
+                            if (!empty($sourceField)) {
+                                $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
+                                    .$objectPrefix.$elementName.$sourceField.'.one()'
+                                    .', "'.$transformName.'"'
+                                    .', '.$siteId.')}';
+                            }
+                        } else {
+                            if (!empty($sourceField)) {
+                                $globalsSettings[$fieldName] = '{'
+                                    .$elementName.$sourceField.'.one().url'
+                                    .'}';
+                            }
                         }
-                    } else {
-                        if (!empty($sourceField)) {
-                            $globalsSettings[$fieldName] = '{'
-                                .$elementName.$sourceField.'.one().url'
-                                .'}';
+                        break;
+                    case 'fromAsset':
+                        if ($transformImage) {
+                            if (!empty($ids)) {
+                                $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
+                                    .$ids[0]
+                                    .', "'.$transformName.'"'
+                                    .', '.$siteId.')}';
+                            }
+                        } else {
+                            if (!empty($ids)) {
+                                $globalsSettings[$fieldName] = '{{ craft.app.assets.assetById('
+                                    .$ids[0]
+                                    .', '.$siteId.').url }}';
+                            }
                         }
-                    }
-                    break;
-                case 'fromAsset':
-                    if ($transformImage) {
-                        if (!empty($ids)) {
-                            $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
-                                .$ids[0]
-                                .', "'.$transformName.'"'
-                                .', '.$siteId.')}';
-                        }
-                    } else {
-                        if (!empty($ids)) {
-                            $globalsSettings[$fieldName] = '{{ craft.app.assets.assetById('
-                                .$ids[0]
-                                .', '.$siteId.').url }}';
-                        }
-                    }
-                    break;
+                        break;
+                }
             }
         }
     }

@@ -625,9 +625,13 @@ class Seomatic extends Plugin
         return [
             'seomatic' =>
                 'seomatic/settings/content',
-            'seomatic/global' =>
+            'seomatic/global' => [
+                'route' => 'seomatic/settings/global',
+                'defaults' => ['subSection' => 'general'],
+            ],
+            'seomatic/global/<subSection:{handle}>' =>
                 'seomatic/settings/global',
-            'seomatic/global/<siteHandle:{handle}>' =>
+            'seomatic/global/<subSection:{handle}>/<siteHandle:{handle}>' =>
                 'seomatic/settings/global',
             'seomatic/content' =>
                 'seomatic/settings/content',
