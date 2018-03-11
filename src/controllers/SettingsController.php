@@ -115,7 +115,6 @@ class SettingsController extends Controller
             ],
         ];
         $variables['selectedSubnavItem'] = 'global';
-
         // Pass in the pull fields
         $variables['textFieldSources'] = array_merge(
             ['globalsGroup' => ['optgroup' => 'Globals Fields']],
@@ -131,47 +130,24 @@ class SettingsController extends Controller
                 false
             )
         );
-
         // Enabled sites
         $this->setMultiSiteVariables($siteHandle, $siteId, $variables);
         $variables['controllerHandle'] = 'global';
+        // Meta bundle settings
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle(intval($variables['currentSiteId']));
-
         $variables['globals'] = $metaBundle->metaGlobalVars;
         $variables['sitemap'] = $metaBundle->metaSitemapVars;
         $variables['settings'] = $metaBundle->metaBundleSettings;
+        // Template container settings
         $templateContainers = $metaBundle->frontendTemplatesContainer->data;
         $variables['robotsTemplate'] = $templateContainers[FrontendTemplates::ROBOTS_TXT_HANDLE];
         $variables['humansTemplate'] = $templateContainers[FrontendTemplates::HUMANS_TXT_HANDLE];
-
         // Image selectors
-        $elements = Craft::$app->getElements();
+        $bundleSettings = $metaBundle->metaBundleSettings;
         $variables['elementType'] = Asset::class;
-        // SEO Image
-        $seoImageElements = [];
-        if (!empty($variables['settings']['seoImageIds'])) {
-            foreach ($variables['settings']['seoImageIds'] as $seoImageId) {
-                $seoImageElements[] = $elements->getElementById($seoImageId, Asset::class, $siteId);
-            }
-        }
-        $variables['seoImageElements'] = $seoImageElements;
-        // Twitter Image
-        $twitterImageElements = [];
-        if (!empty($variables['settings']['twitterImageIds'])) {
-            foreach ($variables['settings']['twitterImageIds'] as $twitterImageId) {
-                $twitterImageElements[] = $elements->getElementById($twitterImageId, Asset::class, $siteId);
-            }
-        }
-        $variables['twitterImageElements'] = $twitterImageElements;
-        // OG Image
-        $ogImageElements = [];
-        if (!empty($variables['settings']['ogImageIds'])) {
-            foreach ($variables['settings']['ogImageIds'] as $ogImageId) {
-                $ogImageElements[] = $elements->getElementById($ogImageId, Asset::class, $siteId);
-            }
-        }
-        $variables['ogImageElements'] = $ogImageElements;
-
+        $variables['seoImageElements'] = $this->assetElementsFromIds($bundleSettings->seoImageIds, $siteId);
+        $variables['twitterImageElements'] = $this->assetElementsFromIds($bundleSettings->twitterImageIds, $siteId);
+        $variables['ogImageElements'] = $this->assetElementsFromIds($bundleSettings->ogImageIds, $siteId);
         // Preview the meta containers
         Seomatic::$plugin->metaContainers->previewMetaContainers(
             MetaBundles::GLOBAL_META_BUNDLE,
@@ -270,9 +246,7 @@ class SettingsController extends Controller
             ],
         ];
         $this->setMultiSiteVariables($siteHandle, $siteId, $variables);
-
         $variables['controllerHandle'] = 'content';
-
         $variables['selectedSubnavItem'] = 'content';
         $variables['metaBundles'] = Seomatic::$plugin->metaBundles->getContentMetaBundlesForSiteId($siteId);
 
@@ -314,15 +288,19 @@ class SettingsController extends Controller
         );
         // Enabled sites
         $this->setMultiSiteVariables($siteHandle, $siteId, $variables);
+        // Meta Bundle settings
         $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
             $sourceBundleType,
             $sourceHandle,
             intval($variables['currentSiteId'])
         );
+        $variables['globals'] = $metaBundle->metaGlobalVars;
+        $variables['sitemap'] = $metaBundle->metaSitemapVars;
+        $variables['settings'] = $metaBundle->metaBundleSettings;
         $variables['currentSourceHandle'] = $metaBundle->sourceHandle;
         $variables['currentSourceBundleType'] = $metaBundle->sourceBundleType;
-        $templateTitle = $metaBundle->sourceName;
         // Basic variables
+        $templateTitle = $metaBundle->sourceName;
         $variables['fullPageForm'] = true;
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = Seomatic::$settings->pluginName;
@@ -342,41 +320,13 @@ class SettingsController extends Controller
             ],
         ];
         $variables['selectedSubnavItem'] = 'content';
-
         $variables['controllerHandle'] = "edit-content/${sourceBundleType}/${sourceHandle}";
-
-        $variables['globals'] = $metaBundle->metaGlobalVars;
-        $variables['sitemap'] = $metaBundle->metaSitemapVars;
-        $variables['settings'] = $metaBundle->metaBundleSettings;
-
         // Image selectors
-        $elements = Craft::$app->getElements();
+        $bundleSettings = $metaBundle->metaBundleSettings;
         $variables['elementType'] = Asset::class;
-        // SEO Image
-        $seoImageElements = [];
-        if (!empty($variables['settings']['seoImageIds'])) {
-            foreach ($variables['settings']['seoImageIds'] as $seoImageId) {
-                $seoImageElements[] = $elements->getElementById($seoImageId, Asset::class, $siteId);
-            }
-        }
-        $variables['seoImageElements'] = $seoImageElements;
-        // Twitter Image
-        $twitterImageElements = [];
-        if (!empty($variables['settings']['twitterImageIds'])) {
-            foreach ($variables['settings']['twitterImageIds'] as $twitterImageId) {
-                $twitterImageElements[] = $elements->getElementById($twitterImageId, Asset::class, $siteId);
-            }
-        }
-        $variables['twitterImageElements'] = $twitterImageElements;
-        // OG Image
-        $ogImageElements = [];
-        if (!empty($variables['settings']['ogImageIds'])) {
-            foreach ($variables['settings']['ogImageIds'] as $ogImageId) {
-                $ogImageElements[] = $elements->getElementById($ogImageId, Asset::class, $siteId);
-            }
-        }
-        $variables['ogImageElements'] = $ogImageElements;
-
+        $variables['seoImageElements'] = $this->assetElementsFromIds($bundleSettings->seoImageIds, $siteId);
+        $variables['twitterImageElements'] = $this->assetElementsFromIds($bundleSettings->twitterImageIds, $siteId);
+        $variables['ogImageElements'] = $this->assetElementsFromIds($bundleSettings->ogImageIds, $siteId);
         // Pass in the pull fields
         $variables['textFieldSources'] = array_merge(
             ['entryGroup' => ['optgroup' => 'Entry Fields'], 'title' => 'Title'],
@@ -930,6 +880,27 @@ class SettingsController extends Controller
         } else {
             $variables['sitesMenuLabel'] = '';
         }
+    }
+
+    /**
+     * Return an array of Asset elements from an array of element IDs
+     *
+     * @param array|string $assetIds
+     * @param int          $siteId
+     *
+     * @return array
+     */
+    protected function assetElementsFromIds($assetIds, int $siteId)
+    {
+        $elements = Craft::$app->getElements();
+        $assets = [];
+        if (!empty($assetIds)) {
+            foreach ($assetIds as $assetId) {
+                $assets[] = $elements->getElementById($assetId, Asset::class, $siteId);
+            }
+        }
+
+        return $assets;
     }
 
     /**
