@@ -116,20 +116,7 @@ class SettingsController extends Controller
         ];
         $variables['selectedSubnavItem'] = 'global';
         // Pass in the pull fields
-        $variables['textFieldSources'] = array_merge(
-            ['globalsGroup' => ['optgroup' => 'Globals Fields']],
-            FieldHelper::fieldsOfTypeFromGlobals(
-                FieldHelper::TEXT_FIELD_CLASS_KEY,
-                false
-            )
-        );
-        $variables['assetFieldSources'] = array_merge(
-            ['globalsGroup' => ['optgroup' => 'Globals Fields']],
-            FieldHelper::fieldsOfTypeFromGlobals(
-                FieldHelper::ASSET_FIELD_CLASS_KEY,
-                false
-            )
-        );
+        $this->setGlobalFieldSourceVariables($variables);
         // Enabled sites
         $this->setMultiSiteVariables($siteHandle, $siteId, $variables);
         $variables['controllerHandle'] = 'global';
@@ -328,57 +315,9 @@ class SettingsController extends Controller
         $variables['twitterImageElements'] = $this->assetElementsFromIds($bundleSettings->twitterImageIds, $siteId);
         $variables['ogImageElements'] = $this->assetElementsFromIds($bundleSettings->ogImageIds, $siteId);
         // Pass in the pull fields
-        $variables['textFieldSources'] = array_merge(
-            ['entryGroup' => ['optgroup' => 'Entry Fields'], 'title' => 'Title'],
-            FieldHelper::fieldsOfTypeFromSource(
-                $sourceBundleType,
-                $sourceHandle,
-                FieldHelper::TEXT_FIELD_CLASS_KEY,
-                false
-            )
-        );
-        $variables['assetFieldSources'] = array_merge(
-            ['entryGroup' => ['optgroup' => 'Entry Fields']],
-            FieldHelper::fieldsOfTypeFromSource(
-                $sourceBundleType,
-                $sourceHandle,
-                FieldHelper::ASSET_FIELD_CLASS_KEY,
-                false
-            )
-        );
-        $variables['assetVolumeTextFieldSources'] = array_merge(
-            ['entryGroup' => ['optgroup' => 'Asset Volume Fields'], 'title' => 'Title'],
-            FieldHelper::fieldsOfTypeFromAssetVolumes(
-                FieldHelper::TEXT_FIELD_CLASS_KEY,
-                false
-            )
-        );
-
-        $uri = '';
-        // Pick an Element to be used for the preview
-        switch ($sourceBundleType) {
-            case MetaBundles::GLOBAL_META_BUNDLE:
-                $uri = MetaBundles::GLOBAL_META_BUNDLE;
-                break;
-
-            case MetaBundles::SECTION_META_BUNDLE:
-                $entry = Entry::find()->section($sourceHandle)->one();
-                if ($entry) {
-                    $uri = $entry->uri;
-                }
-                break;
-
-            case MetaBundles::CATEGORYGROUP_META_BUNDLE:
-                $category = Category::find()->group($sourceHandle)->one();
-                if ($category) {
-                    $uri = $category->uri;
-                }
-                break;
-            // @TODO: handle commerce products
-        }
-        if (($uri == '__home__') || ($uri === null)) {
-            $uri = '/';
-        }
+        $groupName = "Entry";
+        $this->setContentFieldSourceVariables($sourceBundleType, $sourceHandle, $groupName, $variables);
+        $uri = $this->uriFromSourceBundle($sourceBundleType, $sourceHandle);
         // Preview the meta containers
         Seomatic::$plugin->metaContainers->previewMetaContainers(
             $uri,
@@ -830,13 +769,110 @@ class SettingsController extends Controller
     }
 
     /**
+     * @param array $variables
+     */
+    protected function setGlobalFieldSourceVariables(array &$variables)
+    {
+        $variables['textFieldSources'] = array_merge(
+            ['globalsGroup' => ['optgroup' => 'Globals Fields']],
+            FieldHelper::fieldsOfTypeFromGlobals(
+                FieldHelper::TEXT_FIELD_CLASS_KEY,
+                false
+            )
+        );
+        $variables['assetFieldSources'] = array_merge(
+            ['globalsGroup' => ['optgroup' => 'Globals Fields']],
+            FieldHelper::fieldsOfTypeFromGlobals(
+                FieldHelper::ASSET_FIELD_CLASS_KEY,
+                false
+            )
+        );
+    }
+
+    /**
+     * @param string $sourceBundleType
+     * @param string $sourceHandle
+     * @param string $groupName
+     * @param array  $variables
+     */
+    protected function setContentFieldSourceVariables(
+        string $sourceBundleType,
+        string $sourceHandle,
+        string $groupName,
+        array &$variables
+    ) {
+        $variables['textFieldSources'] = array_merge(
+            ['entryGroup' => ['optgroup' => $groupName.' Fields'], 'title' => 'Title'],
+            FieldHelper::fieldsOfTypeFromSource(
+                $sourceBundleType,
+                $sourceHandle,
+                FieldHelper::TEXT_FIELD_CLASS_KEY,
+                false
+            )
+        );
+        $variables['assetFieldSources'] = array_merge(
+            ['entryGroup' => ['optgroup' => $groupName.' Fields']],
+            FieldHelper::fieldsOfTypeFromSource(
+                $sourceBundleType,
+                $sourceHandle,
+                FieldHelper::ASSET_FIELD_CLASS_KEY,
+                false
+            )
+        );
+        $variables['assetVolumeTextFieldSources'] = array_merge(
+            ['entryGroup' => ['optgroup' => 'Asset Volume Fields'], 'title' => 'Title'],
+            FieldHelper::fieldsOfTypeFromAssetVolumes(
+                FieldHelper::TEXT_FIELD_CLASS_KEY,
+                false
+            )
+        );
+    }
+
+    /**
+     * @param string $sourceBundleType
+     * @param string $sourceHandle
+     *
+     * @return string
+     */
+    protected function uriFromSourceBundle(string $sourceBundleType, string $sourceHandle): string
+    {
+        $uri = '';
+        // Pick an Element to be used for the preview
+        switch ($sourceBundleType) {
+            case MetaBundles::GLOBAL_META_BUNDLE:
+                $uri = MetaBundles::GLOBAL_META_BUNDLE;
+                break;
+
+            case MetaBundles::SECTION_META_BUNDLE:
+                $entry = Entry::find()->section($sourceHandle)->one();
+                if ($entry) {
+                    $uri = $entry->uri;
+                }
+                break;
+
+            case MetaBundles::CATEGORYGROUP_META_BUNDLE:
+                $category = Category::find()->group($sourceHandle)->one();
+                if ($category) {
+                    $uri = $category->uri;
+                }
+                break;
+            // @TODO: handle commerce products
+        }
+        if (($uri == '__home__') || ($uri === null)) {
+            $uri = '/';
+        }
+
+        return $uri;
+    }
+
+    /**
      * @param string $siteHandle
      * @param        $siteId
      * @param        $variables
      *
      * @throws \yii\web\ForbiddenHttpException
      */
-    protected function setMultiSiteVariables($siteHandle, &$siteId, &$variables): void
+    protected function setMultiSiteVariables($siteHandle, &$siteId, array &$variables): void
     {
         // Enabled sites
         $sites = Craft::$app->getSites();
