@@ -9,6 +9,8 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
+use nystudio107\seomatic\helpers\Config;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -18,6 +20,8 @@
 return [
     '*' => [
         'siteName'                  => '',
+        'identity'                  => Config::getConfigFromFile('globalmeta/Identity'),
+        'creator'                   => Config::getConfigFromFile('globalmeta/Creator'),
         'twitterHandle'             => '',
         'facebookProfileId'         => '',
         'facebookAppId'             => '',

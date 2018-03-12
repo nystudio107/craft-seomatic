@@ -1,6 +1,12 @@
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
 
+<div class="field">
+    <p class="warning">
+        This section is unfinished in the SEOmatic for Craft 3 beta
+    </p>
+</div>
+
 {% namespace "site" %}
     {{ forms.textField({
         label: "Site Name" |t("seomatic"),
@@ -12,8 +18,7 @@
     }) }}
 {% endnamespace %}
 
-<div class="field">
-    <p class="warning">
-        This section is unfinished in the SEOmatic for Craft 3 beta
-    </p>
-</div>
+{% set entity = site.identity %}
+{% namespace "site[identity]" %}
+    {% include "seomatic/settings/site/_includes/entity-partial.twig" %}
+{% endnamespace %}

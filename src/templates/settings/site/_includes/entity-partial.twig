@@ -1,3 +1,6 @@
+{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
+{% import "_includes/forms" as forms %}
+
 <div class="field">
     <div class="heading">
         <label for="siteType">{{ "Entity Type" |t("seomatic")}}</label>
@@ -14,7 +17,7 @@
                     "Person": "Person" |t("seomatic"),
                 },
                 name: "siteType",
-                value: siteType,
+                value: entity.siteType,
                 required: true,
             }) }}
         </div>
@@ -36,7 +39,7 @@
                     "SportsOrganization": "Sports Organization" |t("seomatic"),
                 },
                 name: "siteSubType",
-                value: siteSubType,
+                value: entity.siteSubType,
                 required: false,
             }) }}
         </div>
@@ -49,17 +52,18 @@
                 options: {
                 },
                 name: "siteSpecificType",
-                value: siteSpecificType,
+                value: entity.siteSpecificType,
                 required: false,
             }) }}
         </div>
     </div>
 </div>
+{#
 {% set myJs %}
-    setSelectedValue("{{ siteSpecificType }}");
+    setSelectedValue("{{ entity.siteSpecificType }}");
 {% endset %}
 {% includeJs myJs %}
-
+#}
 <!-- General Info -->
 <h2>{{ "General Info"  |t("seomatic") }}</h2>
 
@@ -69,7 +73,7 @@
     id: 'genericName',
     class: 'nicetext',
     name: 'genericName',
-    value: genericName,
+    value: entity.genericName,
     required: true,
 }) }}
 
@@ -79,7 +83,7 @@
     id: 'genericAlternateName',
     class: 'nicetext',
     name: 'genericAlternateName',
-    value: genericAlternateName,
+    value: entity.genericAlternateName,
     required: false,
 }) }}
 
@@ -94,7 +98,7 @@
         id: 'genericDescription',
         class: 'nicetext',
         name: 'genericDescription',
-        value: genericDescription,
+        value: entity.genericDescription,
         maxlength: 1024,
         showCharsLeft: true,
         required: false,
@@ -107,35 +111,27 @@
     id: 'genericUrl',
     class: 'nicetext',
     name: 'genericUrl',
-    value: genericUrl,
+    value: entity.genericUrl,
     required: false,
 }) }}
 
-<div class="field" id="genericImageId-field">
-    <div class="heading">
-        <label for="genericImageId">{{ "Entity Brand" |t("seomatic")}}</label>
-        <div class="instructions"><p>{{ "An image or logo that represents the entity that owns the website.  The image must be in JPG, PNG, or GIF format."  |t("seomatic") |raw}}</p></div>
-    </div>
-    <div class="input">
-        {% if assetsSourceExists %}
-            {{ forms.elementSelect({
-                elements: elementsImage,
-                id: 'genericImageId',
-                name: 'genericImageId',
-                elementType: elementType,
-                criteria: {
-                    'kind': ['image'],
-                },
-                sourceElementId: genericImageId,
-                jsClass: 'Craft.AssetSelectInput',
-                addButtonLabel: "Select Brand Image"  |t("seomatic"),
-                limit: 1,
-            }) }}
-        {% else %}
-            <p class="error">No assets sources currently exist. <a href="{{ newAssetsSourceUrl }}">Create one now...</a></p>
-        {% endif %}
-    </div>
-</div>
+{{ forms.elementSelectfield({
+    label: "Entity Brand" |t("seomatic"),
+    instructions: "An image or logo that represents the entity that owns the website.  The image must be in JPG, PNG, or GIF format."  |t("seomatic"),
+    id: "genericImageIds",
+    name: "genericImageIds",
+    viewMode: "large",
+    elements: genericImageElements,
+    elementType: elementType,
+    criteria: {
+        kind: ["image"],
+    },
+    jsClass: 'Craft.AssetSelectInput',
+    selectionLabel: "Select Brand Image" |t("seomatic"),
+    sources: [],
+    limit: 1,
+    warning: false,
+}) }}
 
 {{ forms.textField({
     label: "Entity Telephone" |t("seomatic"),
@@ -143,7 +139,7 @@
     id: 'genericTelephone',
     class: 'nicetext',
     name: 'genericTelephone',
-    value: genericTelephone,
+    value: entity.genericTelephone,
     required: false,
 }) }}
 
@@ -153,7 +149,7 @@
     id: 'genericEmail',
     class: 'nicetext',
     name: 'genericEmail',
-    value: genericEmail,
+    value: entity.genericEmail,
     required: false,
 }) }}
 
@@ -166,7 +162,7 @@
     id: 'genericStreetAddress',
     class: 'nicetext',
     name: 'genericStreetAddress',
-    value: genericStreetAddress,
+    value: entity.genericStreetAddress,
     required: false,
 }) }}
 
@@ -178,7 +174,7 @@
             id: 'genericAddressLocality',
             class: 'nicetext',
             name: 'genericAddressLocality',
-            value: genericAddressLocality,
+            value: entity.genericAddressLocality,
             required: false,
         }) }}
     </div>
@@ -189,7 +185,7 @@
             id: 'genericAddressRegion',
             class: 'nicetext',
             name: 'genericAddressRegion',
-            value: genericAddressRegion,
+            value: entity.genericAddressRegion,
             required: false,
         }) }}
     </div>
@@ -203,7 +199,7 @@
             id: 'genericPostalCode',
             class: 'nicetext',
             name: 'genericPostalCode',
-            value: genericPostalCode,
+            value: entity.genericPostalCode,
             required: false,
         }) }}
     </div>
@@ -214,7 +210,7 @@
             id: 'genericAddressCountry',
             class: 'nicetext',
             name: 'genericAddressCountry',
-            value: genericAddressCountry,
+            value: entity.genericAddressCountry,
             required: false,
         }) }}
     </div>
@@ -228,7 +224,7 @@
             id: 'genericGeoLatitude',
             class: 'nicetext',
             name: 'genericGeoLatitude',
-            value: genericGeoLatitude,
+            value: entity.genericGeoLatitude,
             required: false,
         }) }}
     </div>
@@ -240,7 +236,7 @@
             id: 'genericGeoLongitude',
             class: 'nicetext',
             name: 'genericGeoLongitude',
-            value: genericGeoLongitude,
+            value: entity.genericGeoLongitude,
             required: false,
         }) }}
     </div>
@@ -260,7 +256,7 @@
 
 <!-- Person-specific fields -->
 
-<div id="Person" class="metaPane field">
+<div id="Person" class="field">
     <h2>{{ "Person Info"  |t("seomatic") }}</h2>
     <div class="field">
         <div class="half-width-field half-width-field-left">
@@ -275,7 +271,7 @@
                     "Other": "Other" |t("seomatic"),
                 },
                 name: 'personGender',
-                value: personGender,
+                value: entity.personGender,
                 required: false,
             }) }}
         </div>
@@ -286,7 +282,7 @@
                 id: 'personBirthPlace',
                 class: 'nicetext',
                 name: 'personBirthPlace',
-                value: personBirthPlace,
+                value: entity.personBirthPlace,
                 required: false,
             }) }}
         </div>
@@ -295,7 +291,7 @@
 
 <!-- General Organization fields -->
 
-<div id="Organization" class="metaPane">
+<div id="Organization" class="">
     <h2>{{ "Organization Info"  |t("seomatic") }}</h2>
     
     <div class="field">
@@ -306,7 +302,7 @@
                 id: 'organizationDuns',
                 class: 'nicetext',
                 name: 'organizationDuns',
-                value: organizationDuns,
+                value: entity.organizationDuns,
                 required: false,
             }) }}
         </div>
@@ -317,7 +313,7 @@
                 id: 'organizationFounder',
                 class: 'nicetext',
                 name: 'organizationFounder',
-                value: organizationFounder,
+                value: entity.organizationFounder,
                 required: false,
             }) }}
         </div>
@@ -331,7 +327,7 @@
                 id: 'organizationFoundingDate',
                 class: 'nicetext',
                 name: 'organizationFoundingDate',
-                value: organizationFoundingDate,
+                value: entity.organizationFoundingDate,
                 required: false,
             }) }}
         </div>
@@ -342,7 +338,7 @@
                 id: 'organizationFoundingLocation',
                 class: 'nicetext',
                 name: 'organizationFoundingLocation',
-                value: organizationFoundingLocation,
+                value: entity.organizationFoundingLocation,
                 required: false,
             }) }}
         </div>
@@ -350,41 +346,37 @@
     
     <h2>{{ "Organization Contact Points"  |t("seomatic") }}</h2>
     
-    <div class="field">
-        <div class="heading">
-            <label for="organizationContactPoints">{{ "Contact Points" |t("seomatic")}}</label>
-            <div class="instructions"><p>{{ "Use <a href='https://developers.google.com/structured-data/customize/contact-points' target='_blank'>organization contact points</a> to add your organizations's contact information to the Google Knowledge panel in some searches.  The Telephone Number <strong>must be</strong> an internationalized version of the phone number, starting with the '+' symbol and country code (+1 in the US and Canada).  e.g.: <code>+1-800-555-1212</code> or <code>+44-2078225951</code>"  |t("seomatic") |raw}}</p></div>
-        </div>
-        {{ forms.editableTable({
-            id: 'organizationContactPoints',
-            name: 'organizationContactPoints',
-            required: false,
-            cols: {
-                telephone: {
-                    heading: "Telephone Number"  |t("seomatic"),
-                    type: "singleline"  |t("seomatic"),
-                },
-                contactType: {
-                    heading: "Contact Type"  |t("seomatic"),
-                    type: "select"  |t("seomatic"),
-                    options: {
-                        "customer support": "Customer Support",
-                        "technical support": "Technical Support",
-                        "billing support": "Billing Support",
-                        "bill payment": "Bill Payment",
-                        "sales": "Sales",
-                        "reservations": "Reservations",
-                        "credit card support": "Credit Card Support",
-                        "emergency": "Emergency",
-                        "baggage tracking": "Baggage Tracking",
-                        "roadside assistance": "Roadside Assistance",
-                        "package tracking": "Package Tracking",
-                    }
-                }
+    {{ forms.editableTableField({
+        label: "Contact Points" |t("seomatic"),
+        instructions: "Use <a href='https://developers.google.com/structured-data/customize/contact-points' target='_blank'>organization contact points</a> to add your organizations's contact information to the Google Knowledge panel in some searches.  The Telephone Number <strong>must be</strong> an internationalized version of the phone number, starting with the '+' symbol and country code (+1 in the US and Canada).  e.g.: <code>+1-800-555-1212</code> or <code>+44-2078225951</code>"  |t("seomatic") |raw,
+        id: 'organizationContactPoints',
+        name: 'organizationContactPoints',
+        required: false,
+        cols: {
+            telephone: {
+                heading: "Telephone Number"  |t("seomatic"),
+                type: "singleline"  |t("seomatic"),
             },
-            rows: organizationContactPoints,
-        }) }}
-    </div>
+            contactType: {
+                heading: "Contact Type"  |t("seomatic"),
+                type: "select"  |t("seomatic"),
+                options: {
+                    "customer support": "Customer Support",
+                    "technical support": "Technical Support",
+                    "billing support": "Billing Support",
+                    "bill payment": "Bill Payment",
+                    "sales": "Sales",
+                    "reservations": "Reservations",
+                    "credit card support": "Credit Card Support",
+                    "emergency": "Emergency",
+                    "baggage tracking": "Baggage Tracking",
+                    "roadside assistance": "Roadside Assistance",
+                    "package tracking": "Package Tracking",
+                }
+            }
+        },
+        rows: entity.organizationContactPoints,
+    }) }}
 
 </div>
 
@@ -405,7 +397,7 @@
         id: 'corporationTickerSymbol',
         class: 'nicetext',
         name: 'corporationTickerSymbol',
-        value: corporationTickerSymbol,
+        value: entity.corporationTickerSymbol,
         required: false,
     }) }}
 </div>
@@ -437,53 +429,58 @@
             "$$$$$": "$$$$$",
         },
         name: "localBusinessPriceRange",
-        value: localBusinessPriceRange,
+        value: entity.localBusinessPriceRange,
     }) }}
-    
+
     <div class="field" id="localBusinessOpeningHours-field">
         <div class="heading">
             <label for="localBusinessOpeningHours">{{ "Opening Hours" |t("seomatic")}}</label>
             <div class="instructions"><p>{{ "The opening hours for this local business.  If the business is closed on a given day, just leave the hours for that day blank.  If you leave everything blank, no opening hours will be listed."  |t("seomatic") |raw}}</p></div>
         </div>
-        
+    
         {% macro day(id, name, value, day) %}
             {% from "_includes/forms" import time %}
             <tr>
                 <th>
-                    {{ craft.i18n.getLocaleData().getWeekDayName(day) }}
+                    {{ craft.app.locale.getWeekDayName(day) }}
                 </th>
                 <td>
                     {{ time({
                         id: id~'-'~day~'-open',
                         name: name~'['~day~'][open]',
-                        value: value ? value[day].open
+                        value: value[day].open.date ?? ''
                     }) }}
                 </td>
                 <td>
                     {{ time({
                         id: id~'-'~day~'-close',
                         name: name~'['~day~'][close]',
-                        value: value ? value[day].close
+                        value: value[day].close.date ?? ''
                     }) }}
                 </td>
             </tr>
         {% endmacro %}
-        
+    
         {% from _self import day %}
-        
-        {% set localeData = craft.i18n.getLocaleData() %}
-        
+    
+        {% set startDay = currentUser.getPreference('weekStartDay') ?? craft.app.config.general.defaultWeekStartDay %}
+        {% set days = (startDay..6) %}
+    
+        {% if startDay != 0 %}
+            {% set days = days|merge(0..(startDay -1)) %}
+        {% endif %}
+    
         <table class="data">
             <thead>
             <tr>
                 <td></td>
-                <th>Opening Time</th>
-                <th>Closing Time</th>
+                <th>{{ "Opening Time"|t('store-hours') }}</th>
+                <th>{{ "Closing Time"|t('store-hours') }}</th>
             </tr>
             </thead>
             <tbody>
-            {% for i in 0..6 %}
-                {{ day('localBusinessOpeningHours', 'localBusinessOpeningHours', localBusinessOpeningHours, i) }}
+            {% for i in days %}
+                {{ day('localBusinessOpeningHours', 'localBusinessOpeningHours', entity.localBusinessOpeningHours, i) }}
             {% endfor %}
             </tbody>
         </table>
@@ -517,7 +514,7 @@
         id: 'restaurantServesCuisine',
         class: 'nicetext',
         name: 'restaurantServesCuisine',
-        value: restaurantServesCuisine,
+        value: entity.restaurantServesCuisine,
         required: false,
     }) }}
     
@@ -527,7 +524,7 @@
         id: 'restaurantMenuUrl',
         class: 'nicetext',
         name: 'restaurantMenuUrl',
-        value: restaurantMenuUrl,
+        value: entity.restaurantMenuUrl,
         required: false,
     }) }}
     
@@ -537,10 +534,7 @@
         id: 'restaurantReservationsUrl',
         class: 'nicetext',
         name: 'restaurantReservationsUrl',
-        value: restaurantReservationsUrl,
+        value: entity.restaurantReservationsUrl,
         required: false,
     }) }}
 </div>
-
-<p>&nbsp;</p>
-<p>{{ "<p>You can use any Craft <code>environmentVariables</code> in these fields in addition to static text, e.g.:<br /> <code>This is my {baseUrl}</code></p>"  |t("seomatic") |raw }}</p>

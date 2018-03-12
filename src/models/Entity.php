@@ -60,9 +60,9 @@ class Entity extends FluentModel
     public $genericUrl;
 
     /**
-     * @var int
+     * @var array
      */
-    public $genericImageId;
+    public $genericImageIds;
 
     /**
      * @var string
@@ -93,6 +93,11 @@ class Entity extends FluentModel
      * @var string
      */
     public $genericPostalCode;
+
+    /**
+     * @var string
+     */
+    public $genericAddressCountry;
 
     /**
      * @var string
@@ -128,6 +133,11 @@ class Entity extends FluentModel
      * @var string
      */
     public $organizationFoundingDate;
+
+    /**
+     * @var string
+     */
+    public $organizationFoundingLocation;
 
     /**
      * @var array
@@ -210,9 +220,9 @@ class Entity extends FluentModel
             ],
             [
                 [
-                    'genericImageId',
+                    'genericImageIds',
                 ],
-                'integer'
+                'each', 'rule' => ['integer'],
             ],
             [
                 [

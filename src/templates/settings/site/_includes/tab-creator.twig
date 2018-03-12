@@ -8,3 +8,8 @@
         </p>
     </div>
 {% endnamespace %}
+
+{% set entity = site.creator %}
+{% namespace "site[creator]" %}
+    {% include "seomatic/settings/site/_includes/entity-partial.twig" %}
+{% endnamespace %}

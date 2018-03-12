@@ -12,8 +12,10 @@
 namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\base\VarsModel;
+use nystudio107\seomatic\models\Entity;
 
 use Craft;
+use craft\helpers\Json as JsonHelper;
 use craft\validators\ArrayValidator;
 
 use yii\web\ServerErrorHttpException;
@@ -38,6 +40,9 @@ class MetaSiteVars extends VarsModel
     public static function create(array $config = [])
     {
         $model = new MetaSiteVars($config);
+        if ($model) {
+            $model->normalizeData();
+        }
 
         return $model;
     }
@@ -49,6 +54,16 @@ class MetaSiteVars extends VarsModel
      * @var string The name of the website
      */
     public $siteName = '';
+
+    /**
+     * @var Entity
+     */
+    public $identity;
+
+    /**
+     * @var Entity
+     */
+    public $creator;
 
     /**
      * @var string The Twitter handle
@@ -136,4 +151,27 @@ class MetaSiteVars extends VarsModel
             ],
         ];
     }
+
+    /**
+     * Normalizes model data
+     */
+    public function normalizeData()
+    {
+        // Decode any JSON data
+        $properties = $this->getAttributes();
+        foreach ($properties as $property => $value) {
+            if (!empty($value) && is_string($value)) {
+                $this->$property = JsonHelper::decodeIfJson($value);
+            }
+        }
+        // Identity
+        if (isset($this->identity) && is_array($this->identity)) {
+            $this->identity = new Entity($this->identity);
+        }
+        // Creator
+        if (isset($this->creator) && is_array($this->creator)) {
+            $this->creator = new Entity($this->creator);
+        }
+    }
+
 }

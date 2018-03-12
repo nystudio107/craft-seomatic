@@ -9,6 +9,8 @@
 
 namespace nystudio107\seomatic\controllers;
 
+use craft\helpers\DateTimeHelper;
+use nystudio107\recipe\helpers\Json;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\Seomatic;
@@ -506,6 +508,8 @@ class SettingsController extends Controller
         // The site settings for the appropriate meta bundle
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle(intval($variables['currentSiteId']));
         $variables['site'] = $metaBundle->metaSiteVars;
+        $variables['genericImageElements'] = $this->assetElementsFromIds($variables['site']->identity->genericImageIds, $siteId);
+        $variables['elementType'] = Asset::class;
 
         // Render the template
         return $this->renderTemplate('seomatic/settings/site/'.$subSection, $variables);
@@ -534,9 +538,18 @@ class SettingsController extends Controller
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle) {
             if (is_array($siteSettings)) {
-                $metaBundle->metaSiteVars->setAttributes($siteSettings);
+                if (!empty($siteSettings['identity'])) {
+                    $this->normalizeTimes($siteSettings['identity']['localBusinessOpeningHours']);
+                    $metaBundle->metaSiteVars->identity->setAttributes($siteSettings['identity']);
+                    $siteSettings['identity'] = $metaBundle->metaSiteVars->identity;
+                }
+                if (!empty($siteSettings['creator'])) {
+                    $this->normalizeTimes($siteSettings['creator']['localBusinessOpeningHours']);
+                    $metaBundle->metaSiteVars->creator->setAttributes($siteSettings['creator']);
+                    $siteSettings['creator'] = $metaBundle->metaSiteVars->creator;
+                }
+                //$metaBundle->metaSiteVars->setAttributes($siteSettings);
             }
-
             Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
 
             Seomatic::$plugin->clearAllCaches();
@@ -699,6 +712,32 @@ class SettingsController extends Controller
 
     // Protected Methods
     // =========================================================================
+
+    /**
+     * @inheritdoc
+     */
+    public function normalizeTimes(&$value)
+    {
+        if (is_string($value)) {
+            $value = Json::decode($value);
+        }
+        $normalized = [];
+        $times = ['open', 'close'];
+        for ($day = 0; $day <= 6; $day++) {
+            foreach ($times as $time) {
+                if (
+                    isset($value[$day][$time]) &&
+                    ($date = DateTimeHelper::toDateTime($value[$day][$time])) !== false
+                ) {
+                    $normalized[$day][$time] = $date;
+                } else {
+                    $normalized[$day][$time] = null;
+                }
+            }
+        }
+
+        $value = $normalized;
+    }
 
     /**
      * Set the text sources depending on the field settings
@@ -1070,4 +1109,5 @@ class SettingsController extends Controller
 
         return $siteId;
     }
+
 }
