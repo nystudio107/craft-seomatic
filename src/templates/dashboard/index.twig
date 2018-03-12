@@ -1,6 +1,6 @@
 {% extends '_layouts/cp' %}
 
-{% set linkGetStarted = url('seomatic/settings/global') %}
+{% set linkGetStarted = url('seomatic/global') %}
 
 {% do view.registerAssetBundle("nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset") %}
 {% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/assetbundles/seomatic/dist', true) %}
