@@ -74,6 +74,50 @@ class SettingsController extends Controller
     // =========================================================================
 
     /**
+     * Dashboard display
+     *
+     * @param bool $showWelcome
+     *
+     * @return Response The rendered result
+     */
+    public function actionDashboard(bool $showWelcome = false): Response
+    {
+        $variables = [];
+        $pluginName = Seomatic::$settings->pluginName;
+        $templateTitle = Craft::t('seomatic', 'Dashboard');
+        // Asset bundle
+        try {
+            Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
+        } catch (InvalidConfigException $e) {
+            Craft::error($e->getMessage(), __METHOD__);
+        }
+        $variables['baseAssetsUrl'] = Craft::$app->assetManager->getPublishedUrl(
+            '@nystudio107/seomatic/assetbundles/seomatic/dist',
+            true
+        );
+        // Basic variables
+        $variables['fullPageForm'] = false;
+        $variables['docsUrl'] = self::DOCUMENTATION_URL;
+        $variables['pluginName'] = Seomatic::$settings->pluginName;
+        $variables['title'] = $templateTitle;
+        $variables['crumbs'] = [
+            [
+                'label' => $pluginName,
+                'url'   => UrlHelper::cpUrl('seomatic'),
+            ],
+            [
+                'label' => $templateTitle,
+                'url'   => UrlHelper::cpUrl('seomatic/dashboard'),
+            ],
+        ];
+        $variables['selectedSubnavItem'] = 'dashboard';
+        $variables['showWelcome'] = $showWelcome;
+
+        // Render the template
+        return $this->renderTemplate('seomatic/dashboard/index', $variables);
+    }
+
+    /**
      * Global settings
      *
      * @param string      $subSection

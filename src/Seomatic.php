@@ -188,7 +188,12 @@ class Seomatic extends Plugin
                     // Send them to our welcome screen
                     $request = Craft::$app->getRequest();
                     if ($request->isCpRequest) {
-                        Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('seomatic/welcome'))->send();
+                        Craft::$app->getResponse()->redirect(UrlHelper::cpUrl(
+                            'seomatic/dashboard',
+                            [
+                                'showWelcome' => true
+                            ]
+                        ))->send();
                     }
                 }
             }
@@ -234,6 +239,12 @@ class Seomatic extends Plugin
         /** @var User $currentUser */
         $currentUser = Craft::$app->getUser()->getIdentity();
         // Only show sub-navs the user has permission to view
+        if ($currentUser->can('seomatic:dashboard')) {
+            $subNavs['dashboard'] = [
+                'label' => 'Dashboard',
+                'url'   => 'seomatic/dashboard',
+            ];
+        }
         if ($currentUser->can('seomatic:content-meta')) {
             $subNavs['content'] = [
                 'label' => 'Content SEO',
@@ -624,7 +635,9 @@ class Seomatic extends Plugin
     {
         return [
             'seomatic' =>
-                'seomatic/settings/content',
+                'seomatic/settings/dashboard',
+            'seomatic/dashboard' =>
+                'seomatic/settings/dashboard',
 
             'seomatic/global' => [
                 'route' => 'seomatic/settings/global',
@@ -724,6 +737,9 @@ class Seomatic extends Plugin
         }
 
         return [
+            "seomatic:dashboard"  => [
+                'label' => Craft::t('seomatic', 'Dashboard'),
+            ],
             "seomatic:global-meta"      => [
                 'label'  => Craft::t('seomatic', 'Edit Global Meta'),
                 'nested' => [
