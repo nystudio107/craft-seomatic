@@ -171,7 +171,7 @@ class SettingsController extends Controller
         $this->setGlobalFieldSourceVariables($variables);
         // Enabled sites
         $this->setMultiSiteVariables($siteHandle, $siteId, $variables);
-        $variables['controllerHandle'] = 'global' . '/' . $subSection;
+        $variables['controllerHandle'] = 'global'.'/'.$subSection;
         $variables['currentSubSection'] = $subSection;
         // Meta bundle settings
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle(intval($variables['currentSiteId']));
@@ -782,9 +782,9 @@ class SettingsController extends Controller
                         $transformName = 'twitter-large';
                     }
                 }
-                switch ($source) {
-                    case 'sameAsSeo':
-                        if ($transformImage) {
+                if ($transformImage) {
+                    switch ($source) {
+                        case 'sameAsSeo':
                             $seoSource = $bundleSettings[$seoField.'Source'] ?? '';
                             $seoIds = $bundleSettings[$seoField.'Ids'] ?? [];
                             $seoSourceField = $bundleSettings[$seoField.'Field'] ?? '';
@@ -811,42 +811,44 @@ class SettingsController extends Controller
                                         break;
                                 }
                             }
-                        } else {
-                            $globalsSettings[$fieldName] = '{seomatic.meta.'.$seoField.'}';
-                        }
-                        break;
-                    case 'fromField':
-                        if ($transformImage) {
+                            break;
+                        case 'fromField':
                             if (!empty($sourceField)) {
                                 $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
                                     .$objectPrefix.$elementName.$sourceField.'.one()'
                                     .', "'.$transformName.'"'
                                     .', '.$siteId.')}';
                             }
-                        } else {
-                            if (!empty($sourceField)) {
-                                $globalsSettings[$fieldName] = '{'
-                                    .$elementName.$sourceField.'.one().url'
-                                    .'}';
-                            }
-                        }
-                        break;
-                    case 'fromAsset':
-                        if ($transformImage) {
+                            break;
+                        case 'fromAsset':
                             if (!empty($ids)) {
                                 $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
                                     .$ids[0]
                                     .', "'.$transformName.'"'
                                     .', '.$siteId.')}';
                             }
-                        } else {
+                            break;
+                    }
+                } else {
+                    switch ($source) {
+                        case 'sameAsSeo':
+                            $globalsSettings[$fieldName] = '{seomatic.meta.'.$seoField.'}';
+                            break;
+                        case 'fromField':
+                            if (!empty($sourceField)) {
+                                $globalsSettings[$fieldName] = '{'
+                                    .$elementName.$sourceField.'.one().url'
+                                    .'}';
+                            }
+                            break;
+                        case 'fromAsset':
                             if (!empty($ids)) {
                                 $globalsSettings[$fieldName] = '{{ craft.app.assets.assetById('
                                     .$ids[0]
                                     .', '.$siteId.').url }}';
                             }
-                        }
-                        break;
+                            break;
+                    }
                 }
             }
         }
