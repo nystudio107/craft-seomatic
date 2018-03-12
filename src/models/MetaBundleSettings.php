@@ -303,6 +303,19 @@ class MetaBundleSettings extends VarsModel
                 ],
             ],
             [
+                ['twitterCreatorSource'], 'in', 'range' => [
+                'sameAsSiteTwitter',
+                'fromUserField',
+                'fromCustom',
+                ],
+            ],
+            [
+                ['twitterSiteNamePositionSource', 'ogSiteNamePositionSource'], 'in', 'range' => [
+                'sameAsSeo',
+                'fromCustom',
+                ],
+            ],
+            [
                 ['seoDescriptionSource', 'twitterDescriptionSource', 'ogDescriptionSource'], 'in', 'range' => [
                     'sameAsSeo',
                     'fromField',

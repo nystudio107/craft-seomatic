@@ -34,7 +34,7 @@ return [
         'twitterCreatorField'           => '',
         'twitterTitleSource'            => 'sameAsSeo',
         'twitterTitleField'             => '',
-        'twitterSiteNamePositionSource' => 'sameAsSeo',
+        'twitterSiteNamePositionSource' => 'fromCustom',
         'twitterDescriptionSource'      => 'sameAsSeo',
         'twitterDescriptionField'       => '',
         'twitterImageIds'               => [],
@@ -46,7 +46,7 @@ return [
 
         'ogTitleSource'                 => 'sameAsSeo',
         'ogTitleField'                  => '',
-        'ogSiteNamePositionSource'      => 'sameAsSeo',
+        'ogSiteNamePositionSource'      => 'fromCustom',
         'ogDescriptionSource'           => 'sameAsSeo',
         'ogDescriptionField'            => '',
         'ogImageIds'                    => [],

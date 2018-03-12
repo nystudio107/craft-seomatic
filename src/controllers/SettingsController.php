@@ -47,9 +47,12 @@ class SettingsController extends Controller
         ['fieldName' => 'seoKeywords', 'seoField' => 'seoKeywords'],
         ['fieldName' => 'seoImageDescription', 'seoField' => 'seoImageDescription'],
         ['fieldName' => 'ogTitle', 'seoField' => 'seoTitle'],
+        ['fieldName' => 'ogSiteNamePosition', 'seoField' => 'siteNamePosition'],
         ['fieldName' => 'ogDescription', 'seoField' => 'seoDescription'],
         ['fieldName' => 'ogImageDescription', 'seoField' => 'seoImageDescription'],
         ['fieldName' => 'twitterTitle', 'seoField' => 'seoTitle'],
+        ['fieldName' => 'twitterSiteNamePosition', 'seoField' => 'siteNamePosition'],
+        ['fieldName' => 'twitterCreator', 'seoField' => 'twitterHandle'],
         ['fieldName' => 'twitterDescription', 'seoField' => 'seoDescription'],
         ['fieldName' => 'twitterImageDescription', 'seoField' => 'seoImageDescription'],
     ];
@@ -715,7 +718,7 @@ class SettingsController extends Controller
             $fieldName = $fields['fieldName'];
             $source = $bundleSettings[$fieldName.'Source'] ?? '';
             $sourceField = $bundleSettings[$fieldName.'Field'] ?? '';
-            if (!empty($source) && !empty($sourceField)) {
+            if (!empty($source)) {
                 $seoField = $fields['seoField'];
                 switch ($source) {
                     case 'sameAsSeo':
@@ -723,10 +726,22 @@ class SettingsController extends Controller
                             '{seomatic.meta.'.$seoField.'}';
                         break;
 
+                    case 'sameAsSiteTwitter':
+                        $globalsSettings[$fieldName] =
+                            '{seomatic.site.'.$seoField.'}';
+                        break;
+
                     case 'fromField':
                         $globalsSettings[$fieldName] =
                             '{seomatic.helper.extractTextFromField('
                             .$objectPrefix.$elementName.$sourceField
+                            .')}';
+                        break;
+
+                    case 'fromUserField':
+                        $globalsSettings[$fieldName] =
+                            '{seomatic.helper.extractTextFromField('
+                            .$objectPrefix.$elementName.'author.'.$sourceField
                             .')}';
                         break;
 
@@ -771,7 +786,7 @@ class SettingsController extends Controller
             $source = $bundleSettings[$fieldName.'Source'] ?? '';
             $ids = $bundleSettings[$fieldName.'Ids'] ?? [];
             $sourceField = $bundleSettings[$fieldName.'Field'] ?? '';
-            if (!empty($source) && !empty($sourceField)) {
+            if (!empty($source)) {
                 $transformImage = $bundleSettings[$fieldName.'Transform'];
                 $seoField = $fields['seoField'];
                 $transformName = $fields['transformName'];
@@ -788,7 +803,7 @@ class SettingsController extends Controller
                             $seoSource = $bundleSettings[$seoField.'Source'] ?? '';
                             $seoIds = $bundleSettings[$seoField.'Ids'] ?? [];
                             $seoSourceField = $bundleSettings[$seoField.'Field'] ?? '';
-                            if (!empty($seoSource) && !empty($seoSourceField)) {
+                            if (!empty($seoSource)) {
                                 switch ($seoSource) {
                                     case 'fromField':
                                         if (!empty($seoSourceField)) {
@@ -908,6 +923,13 @@ class SettingsController extends Controller
         $variables['assetVolumeTextFieldSources'] = array_merge(
             ['entryGroup' => ['optgroup' => 'Asset Volume Fields'], 'title' => 'Title'],
             FieldHelper::fieldsOfTypeFromAssetVolumes(
+                FieldHelper::TEXT_FIELD_CLASS_KEY,
+                false
+            )
+        );
+        $variables['userFieldSources'] = array_merge(
+            ['entryGroup' => ['optgroup' => 'User Fields']],
+            FieldHelper::fieldsOfTypeFromUsers(
                 FieldHelper::TEXT_FIELD_CLASS_KEY,
                 false
             )

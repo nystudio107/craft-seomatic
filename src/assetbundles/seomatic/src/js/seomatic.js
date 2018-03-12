@@ -122,6 +122,7 @@ $(function () {
         var popupValue = $(this).val();
         switch (popupValue) {
             case "sameAsSeo":
+            case "sameAsSiteTwitter":
                 $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').hide();
                 $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').hide();
                 break;
@@ -129,6 +130,7 @@ $(function () {
             case "fromField":
             case "summaryFromField":
             case "keywordsFromField":
+            case "fromUserField":
                 $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').show();
                 $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').hide();
                 break;
@@ -143,6 +145,7 @@ $(function () {
     $('.seomatic-textSourceSelect > select').on('change', function(e) {
         switch (this.value) {
             case "sameAsSeo":
+            case "sameAsSiteTwitter":
                 $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').hide();
                 $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').hide();
                 break;
@@ -150,6 +153,7 @@ $(function () {
             case "fromField":
             case "summaryFromField":
             case "keywordsFromField":
+            case "fromUserField":
                 $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').show();
                 $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').hide();
                 break;

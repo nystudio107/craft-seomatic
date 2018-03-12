@@ -24,17 +24,58 @@
 
 {############### Twitter Creator ###############}
 
-{% namespace "globals" %}
-    {{ forms.textField({
-        label: "Twitter Creator" |t("seomatic"),
-        instructions: "Twitter username for the content creator / author, without the preceding @." |t("seomatic"),
-        id: "twitterCreator",
-        name: "twitterCreator",
-        value: globals.twitterCreator,
-        class: "nicetext",
-        warning: false,
-    }) }}
+{% set textOptions = {
+    fromCustom: "Custom Text" |t("seomatic"),
+} %}
+{% if userFieldSources is defined and userFieldSources |length %}
+    {% set textOptions = { fromUserField: "From User Field" |t("seomatic"), } | merge(textOptions) %}
+{% endif %}
+{% set textOptions = { sameAsSiteTwitter: "Same as Site Twitter Handle" |t("seomatic"), } | merge(textOptions) %}
+
+<div class="field seomatic-textSourceWrapper" id="settings-twitterCreatorSource-field">
+    <div class="heading">
+        <label id="settings-twitterCreatorSource-label" for="settings-twitterTitleSource">{{ "Twitter Creator Source" |t("seomatic") }}</label>
+        <div class="instructions"><p>{{ "Twitter username for the content creator / author, without the preceding @." |t("seomatic") }}</p>
+        </div>
+    </div>
+    {% namespace "settings" %}
+        <div class="heading">
+            {{ forms.select({
+                id: "twitterCreatorSource",
+                name: "twitterCreatorSource",
+                options: textOptions,
+                value: settings.twitterCreatorSource,
+                class: "seomatic-textSourceSelect"
+            }) }}
+        </div>
+    {% endnamespace %}
+    
+    {% if userFieldSources is defined and userFieldSources |length %}
+        {% namespace "settings" %}
+            <div class="heading seomatic-textSourceFromField">
+                <label id="settings-twitterCreatorField-label" for="settings-twitterCreatorField">{{ "Source Field: " |t("seomatic") }}</label>
+                {{ forms.select({
+                    id: "twitterCreatorField",
+                    name: "twitterCreatorField",
+                    options: userFieldSources,
+                    value: settings.twitterCreatorField,
+                }) }}
+            </div>
+        {% endnamespace %}
+    {% endif %}
+
+    {% namespace "globals" %}
+    <div class="heading seomatic-textSourceFromUrl">
+        {{ forms.text({
+            id: "twitterCreator",
+            name: "twitterCreator",
+            value: globals.twitterCreator,
+            class: "nicetext",
+            warning: false,
+        }) }}
+    </div>
 {% endnamespace %}
+</div>
 
 {############### Twitter Title ###############}
 
@@ -95,22 +136,45 @@
 
 {############### Twitter Site Name Position ###############}
 
-{% namespace "globals" %}
-    {{ forms.selectField({
-        label: "Twitter Site Name Position" |t("seomatic"),
-        instructions: "Where the Site Name is placed relative to the Twitter Title in the &lt;twitter:title&gt; tag" |t("seomatic"),
-        id: "twitterSiteNamePosition",
-        name: "twitterSiteNamePosition",
-        options: {
-            before: "Before" |t("seomatic"),
-            after: "After" |t("seomatic"),
-            none: "None" |t("seomatic"),
-        },
-        value: globals.twitterSiteNamePosition,
-        warning: false,
-    }) }}
-{% endnamespace %}
+{% set textOptions = {
+    fromCustom: "Custom Position" |t("seomatic"),
+} %}
+{% set textOptions = { sameAsSeo: "Same as Site Name Position" |t("seomatic"), } | merge(textOptions) %}
 
+<div class="field seomatic-textSourceWrapper" id="settings-twitterSiteNamePositionSource-field">
+    <div class="heading">
+        <label id="settings-twitterSiteNamePositionSource-label" for="settings-twitterTitleSource">{{ "Twitter Site Name Position Source" |t("seomatic") }}</label>
+        <div class="instructions"><p>{{ "Where the Site Name is placed relative to the Twitter Title in the &lt;twitter:title&gt; tag" |t("seomatic") }}</p>
+        </div>
+    </div>
+    {% namespace "settings" %}
+        <div class="heading">
+            {{ forms.select({
+                id: "twitterSiteNamePositionSource",
+                name: "twitterSiteNamePositionSource",
+                options: textOptions,
+                value: settings.twitterSiteNamePositionSource,
+                class: "seomatic-textSourceSelect"
+            }) }}
+        </div>
+    {% endnamespace %}
+    
+    {% namespace "globals" %}
+        <div class="heading seomatic-textSourceFromUrl">
+            {{ forms.selectField({
+                id: "twitterSiteNamePosition",
+                name: "twitterSiteNamePosition",
+                options: {
+                    before: "Before" |t("seomatic"),
+                    after: "After" |t("seomatic"),
+                    none: "None" |t("seomatic"),
+                },
+                value: globals.twitterSiteNamePosition,
+                warning: false,
+            }) }}
+        </div>
+</div>
+{% endnamespace %}
 
 {############### Twitter Description ###############}
 
