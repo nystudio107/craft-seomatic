@@ -23,7 +23,14 @@ SEOmatic works on Craft 3.x.
 
 ## SEOmatic Beta Notes
 
-SEOmatic for Craft CMS 3 is currently in beta.
+SEOmatic for Craft CMS 3 is currently in beta. Please report any issues you find to the [SEOmatic Issues](https://github.com/nystudio107/craft-seomatic/issues) page.
+
+The following are still works in progress:
+
+* **Dashboard** - the Dashboard page doesn't show anything interesting at the moment
+* **Content Analytics** - the Content Analytics sidebar doesn't show anything interesting yet
+* **Documentation** - the documentation needs to be more fully fleshed out
+* **Field** - there is no SEOmatic Field anymore; it's not necessary given the new architecture. Depending on demand, it may be brought back.
 
 ## SEOmatic Overview
 
@@ -31,7 +38,17 @@ SEOmatic for Craft CMS 3 is currently in beta.
 
 ## Configuring SEOmatic
 
--Insert text here-
+As soon as you install SEOmatic, it automatically will render meta data on your web pages, and create sitemaps for all of your Sections and Category Groups that have public URLs. You don't need to add any template code for this to happen.
+
+Still, it needs to be configured for it to be truly useful.
+
+**Global SEO** is where you set all of the default site-wide settings.
+
+**Content SEO** is where you can configure each Section and Category Group that has public URLs.
+
+Best practices for modern SEO are for the meta information to _reflect your content_, so you should set up the fields that SEOmatic _pulls_ the **SEO Title**, **SEO Description**, and **SEO Image** from.
+
+By default, the Twitter and Facebook settings will mirror what you set in the **General** section, but you can customize them to your heart's content.
 
 ## Using SEOmatic
 
