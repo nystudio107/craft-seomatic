@@ -4,10 +4,6 @@
 
 A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
 
-## This plugin is in development; don't use it yet
-
-No, really.
-
 ## Requirements
 
 This plugin requires Craft CMS 3.0.0-RC12 or later.
@@ -23,9 +19,9 @@ SEOmatic works on Craft 3.x.
 
 ## SEOmatic Beta Notes
 
-SEOmatic for Craft CMS 3 is currently in beta. Please report any issues you find to the [SEOmatic Issues](https://github.com/nystudio107/craft-seomatic/issues) page.
+SEOmatic for Craft CMS 3 is currently in beta; that means it _may_ be a little rough around the edges. Please report any issues you find to the [SEOmatic Issues](https://github.com/nystudio107/craft-seomatic/issues) page.
 
-The following are still works in progress:
+The following are currently works in progress:
 
 * **Dashboard** - the Dashboard page doesn't show anything interesting at the moment
 * **Content Analytics** - the Content Analytics sidebar doesn't show anything interesting yet
@@ -40,19 +36,119 @@ The following are still works in progress:
 
 As soon as you install SEOmatic, it automatically will render meta data on your web pages, and create sitemaps for all of your Sections and Category Groups that have public URLs. You don't need to add any template code for this to happen.
 
-Still, it needs to be configured for it to be truly useful.
+All of SEOmatic's settings are multi-site aware, allowing you to have different settings for each site/language combination.
+
+For SEOmatic to be truly useful, you need to configure it so that it knows where to _pull_ SEO content from.
+
+### Dashboard
+
+### Global SEO
 
 **Global SEO** is where you set all of the default site-wide settings.
 
-**Content SEO** is where you can configure each Section and Category Group that has public URLs.
+#### General
 
 Best practices for modern SEO are for the meta information to _reflect your content_, so you should set up the fields that SEOmatic _pulls_ the **SEO Title**, **SEO Description**, and **SEO Image** from.
 
+#### Twitter
+
 By default, the Twitter and Facebook settings will mirror what you set in the **General** section, but you can customize them to your heart's content.
+
+#### Facebook
+
+By default, the Twitter and Facebook settings will mirror what you set in the **General** section, but you can customize them to your heart's content.
+
+#### Robots
+
+A `robots.txt` file is a file at the root of your site that indicates those parts of your site you don’t want accessed by search engine crawlers. The file uses the [Robots Exclusion Standard](http://www.robotstxt.org/robotstxt.html), which is a protocol with a small set of commands that can be used to indicate access to your site by section and by specific kinds of web crawlers (such as mobile crawlers vs desktop crawlers).
+
+You shouldn't need to edit the default `robots.txt` Template, but you can if you like.
+
+SEOmatic automatically handles requests for `/robots.txt`. For this to work, make sure that you do not have an actual `robots.txt` file in your `web/` folder (because that will take precedence).
+
+If you are running Nginx, make sure that you don't have a line like:
+
+    location = /robots.txt  { access_log off; log_not_found off; }
+    
+...in your config file.  A directive like this will prevent SEOmatic from being able to service the request for `/robots.txt`.  If you do have a line like this in your config file, just comment it out, and restart Nginx with `sudo nginx -s reload`.
+
+The **View robots.txt** button lets you view your `robots.txt`.
+
+#### Humans
+
+[Humans.txt](http://humanstxt.org/) is an initiative for knowing the people behind a website. It's a text file that contains information about the different people who have contributed to building the website. By adding a text file, you can prove your authorship (not your property) in an external, fast, easy and accessible way.
+
+Feel free to edit the default `humans.txt` Template to your heart's content.
+
+### Content SEO
+
+**Content SEO** is where you can configure each Section and Category Group that has public URLs. You'll see a list of all of your Sections and Category Groups that have public URLs, with status indicators letting you know what has been configured for each.
+
+Click on a Section or Category Group name to edit its settings.
+
+#### General
+
+Best practices for modern SEO are for the meta information to _reflect your content_, so you should set up the fields that SEOmatic _pulls_ the **SEO Title**, **SEO Description**, and **SEO Image** from.
+
+#### Twitter
+
+By default, the Twitter and Facebook settings will mirror what you set in the **General** section, but you can customize them to your heart's content.
+
+#### Facebook
+
+By default, the Twitter and Facebook settings will mirror what you set in the **General** section, but you can customize them to your heart's content.
+
+#### Sitemap
+
+SEOmatic automatically creates a sitemap index for each of your Site Groups. This sitemap index points to individual sitemaps for each of your Sections and Category Groups.
+
+Instead of one massive sitemap that must be updated any time anything changes, only the sitemap for the Section or Category group will be updated when something changes in it.
+
+SEOmatic can automatically include files such as `.pdf`, `.xls`, `.doc` and other indexable file types in Asset fields or Asset fields in matrix blocks.
+
+In addition, SEOmatic can automatically create [Image sitemaps](https://support.google.com/webmasters/answer/178636?hl=en) and [Video sitemaps](https://developers.google.com/webmasters/videosearch/sitemaps) from images & videos in Asset fields or Asset fields in matrix blocks
+
+Sitemap Indexes are automatically submitted to search engines whenever a new Section/Category Group is added.
+
+Section Sitemaps are automatically submitted to search engines whenever a new Element in that Section/Category Group is added.
+
+### Site Settings
+
+#### Identity
+
+#### Creator
+
+#### Social Media
+
+### Tracking Scripts
+
+None of the Tracking Scripts are included on the page unless the SEOmatic environment is set to `live` production. If `devMode` is enabled, the SEOmatic environment is automatically set to `local` development.
+
+#### Google Analytics
+
+Google Analytics gives you the digital analytics tools you need to analyze data from all touchpoints in one place, for a deeper understanding of the customer experience. You can then share the insights that matter with your whole organization. [Learn More](https://www.google.com/analytics/analytics/#?modal_active=none)
+
+#### Google `gtag.js`
+
+The global site tag (gtag.js) is a JavaScript tagging framework and API that allows you to send event data to AdWords, DoubleClick, and Google Analytics. Instead of having to manage multiple tags for different products, you can use gtag.js and more easily benefit from the latest tracking features and integrations as they become available. [Learn More](https://developers.google.com/gtagjs/)
+
+#### Google Tag Manager
+
+Google Tag Manager is a tag management system that allows you to quickly and easily update tags and code snippets on your website. Once the Tag Manager snippet has been added to your website or mobile app, you can configure tags via a web-based user interface without having to alter and deploy additional code. [Learn More](https://support.google.com/tagmanager/answer/6102821?hl=en)
+
+#### Facebook Pixel
+
+The Facebook pixel is an analytics tool that helps you measure the effectiveness of your advertising. You can use the Facebook pixel to understand the actions people are taking on your website and reach audiences you care about. [Learn More](https://www.facebook.com/business/help/651294705016616)
+
+#### Plugin Settings
+
+The Plugin Settings lets you control various SEOmatic settings globally (across all sites/languages).
 
 ## Using SEOmatic
 
 ### Twig Templating
+
+SEOmatic can work fully without any Twig templating code at all. However, it provides a robust API that you can tap into from your Twig templates should you desire to do so.
 
 SEOmatic makes a global `seomatic` variable available in your Twig templates that allows you to work with the SEOmatic variables and functions.
 
