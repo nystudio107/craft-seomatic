@@ -2,7 +2,7 @@
 
 # SEOmatic plugin for Craft CMS 3.x
 
-SEOmatic facilitates modern SEO best practices & implementation for Craft CMS 3. It is a turnkey SEO system that is comprehensive, powerful, and flexible.
+SEOmatic facilitates [modern SEO best practices](https://nystudio107.com/blog/modern-seo-snake-oil-vs-substance) & implementation for Craft CMS 3. It is a turnkey SEO system that is comprehensive, powerful, and flexible.
 
 ![Screenshot](resources/img/plugin-logo.png)
 
@@ -36,7 +36,15 @@ The following are currently works in progress:
 
 ## SEOmatic Overview
 
--Insert text here-
+SEOmatic facilitates [modern SEO best practices](https://nystudio107.com/blog/modern-seo-snake-oil-vs-substance) & implementation for Craft CMS 3. It is a turnkey SEO system that is comprehensive, powerful, and flexible.
+
+SEOmatic allows you to quickly get a website up and running with a robust, comprehensive SEO strategy.  It is also implemented in a Craft-y way, in that it is also flexible and customizable.
+
+It implements [JSON-LD](https://developers.google.com/schemas/formats/json-ld?hl=en) microdata, [Twitter Cards](https://dev.twitter.com/cards/overview) tags, [Facebook OpenGraph](https://developers.facebook.com/docs/sharing/opengraph) tags, [Sitemaps](https://www.sitemaps.org/protocol.html) of your content, [Robots.txt](http://www.robotstxt.org/robotstxt.html) bot directives, [Humans.txt](http://humanstxt.org) authorship accreditation, and as well as HTML meta tags.
+
+SEOmatic populates your templates with SEO Meta in the same way that Craft populates your templates with `entry` variables, with a similar level of freedom and flexibility in terms of how you utilize them.
+
+SEOmatic also caches each unique SEO Meta request so that your website performance is minimally impacted by the rich SEO Meta tags provided.
 
 ## Configuring SEOmatic
 
@@ -53,31 +61,6 @@ For SEOmatic to be truly useful, you need to configure it so that it knows where
 ### Global SEO
 
 **Global SEO** is where you set all of the default site-wide settings.
-
-The fields in the AdminCP Global SEO settings are parsed as Twig object templates, so in addition to plain old text, you can also put single and double bracket Twig expressions.
-
-For example, the following will output the contents of the **companyInfo** field from the **siteInfo** Global:
-
-```twig
-{{ siteInfo.companyInfo }}
-```
-
-You can even do complex expressions, such as the following which outputs the first field that isn't empty, or a default text:
-
-```twig
-{{ siteInfo.companyInfo ?? siteInfo.companySummary ?? "Some default text" }}
-```
-
-You can also access SEOmatic global variables (discussed below):
-
-```twig
-{seomatic.meta.seoTitle}
-```
-Normal Twig double bracket syntax is supported too, but you'll need to preface it with `object.` for any `seomatic` variables:
-
-```twig
-{{ object.seomatic.meta.seoTitle }}
-```
 
 #### General
 
@@ -123,6 +106,36 @@ The **View robots.txt** button lets you view your `robots.txt`.
 
 Feel free to edit the default `humans.txt` Template to your heart's content.
 
+#### Global SEO AdminCP Fields
+
+
+The fields in the AdminCP Global SEO settings are parsed as Twig object templates, so in addition to plain old text, you can also put single and double bracket Twig expressions.
+
+This is entirely optional; in typical usage the controls you have in the AdminCP for pulling from other fields will be all you need. But the ability is there if you need it.
+
+For example, the following will output the contents of the **companyInfo** field from the **siteInfo** Global:
+
+```twig
+{{ siteInfo.companyInfo }}
+```
+
+You can even do complex expressions, such as the following which outputs the first field that isn't empty, or a default text:
+
+```twig
+{{ siteInfo.companyInfo ?? siteInfo.companySummary ?? "Some default text" }}
+```
+
+You can also access SEOmatic global variables (discussed below):
+
+```twig
+{seomatic.meta.seoTitle}
+```
+Normal Twig double bracket syntax is supported too, but you'll need to preface it with `object.` for any `seomatic` variables:
+
+```twig
+{{ object.seomatic.meta.seoTitle }}
+```
+
 ### Content SEO
 
 ![Screenshot](resources/screenshots/seomatic-content.png)
@@ -130,41 +143,6 @@ Feel free to edit the default `humans.txt` Template to your heart's content.
 **Content SEO** is where you can configure each Section and Category Group that has public URLs. You'll see a list of all of your Sections and Category Groups that have public URLs, with status indicators letting you know what has been configured for each.
 
 Click on a Section or Category Group name to edit its settings.
-
-The fields in the AdminCP Content SEO settings are parsed as Twig object templates, so in addition to plain old text, you can also put single and double bracket Twig expressions.
-
-For example, the following will output the contents of the **description** field from the current **Entry**:
-
-```twig
-{entry.description}
-```
-
-Normal Twig double bracket syntax is supported too, but you'll need to preface it with `object.`:
-
-```twig
-{{ object.entry.description }}
-```
-
-The same applies to any SEOmatic global variables (discussed below):
-
-```twig
-{seomatic.meta.seoTitle}
-```
-Is the same as:
-
-```twig
-{{ object.seomatic.meta.seoTitle }}
-```
-
-You can even do complex expressions, such as the following which outputs the first field that isn't empty, or a default text:
-
-```twig
-{entry.description ?? entry.summary ?? "Some default text"}
-```
-Is the same as:
-```twig
-{{ object.entry.description ?? object.entry.summary ?? "Some default text" }}
-```
 
 #### General
 
@@ -199,6 +177,45 @@ In addition, SEOmatic can automatically create [Image sitemaps](https://support.
 Sitemap Indexes are automatically submitted to search engines whenever a new Section/Category Group is added.
 
 Section Sitemaps are automatically submitted to search engines whenever a new Element in that Section/Category Group is added.
+
+#### Content SEO AdminCP Fields
+
+The fields in the AdminCP Content SEO settings are parsed as Twig object templates, so in addition to plain old text, you can also put single and double bracket Twig expressions.
+
+This is entirely optional; in typical usage the controls you have in the AdminCP for pulling from other fields will be all you need. But the ability is there if you need it.
+
+For example, the following will output the contents of the **description** field from the current **Entry**:
+
+```twig
+{entry.description}
+```
+
+Normal Twig double bracket syntax is supported too, but you'll need to preface it with `object.`:
+
+```twig
+{{ object.entry.description }}
+```
+
+The same applies to any SEOmatic global variables (discussed below):
+
+```twig
+{seomatic.meta.seoTitle}
+```
+Is the same as:
+
+```twig
+{{ object.seomatic.meta.seoTitle }}
+```
+
+You can even do complex expressions, such as the following which outputs the first field that isn't empty, or a default text:
+
+```twig
+{entry.description ?? entry.summary ?? "Some default text"}
+```
+Is the same as:
+```twig
+{{ object.entry.description ?? object.entry.summary ?? "Some default text" }}
+```
 
 ### Site Settings
 
@@ -675,6 +692,26 @@ Note that you can achieve the same result with:
 ```
 
 ...since the `seoTitle` populates the `<title">` Title meta object
+
+## Config File Customization
+
+### Config Settings
+
+SEOmatic supports the standard `config.php` multi-environment friendly config file for the plugin settings. Just copy the `config.php` to your Craft `config/` directory as `seomatic.php` and you can configure the settings in a multi-environment friendly way.
+
+These are the same settings that are configured in the **Plugin Settings** in the AdminCP.
+
+### Meta Bundle / Container Settings
+
+The directory `vendor/nystudio107/seomatic/src/seomatic-config` contains a number of files that are used when initially configuring SEOmatic.
+
+![Screenshot](resources/screenshots/seomatic-seomatic-config.png)
+
+You can copy this entire directory to your Craft `config/` directory, and customize the files to your heart's content. SEOmatic will first look in the `config/` directory for any given file, and then fall back on its own internal `seomatic-config` files.
+
+Note that these files are only used when initially creating a meta bundle. That is, whenever the plugin is installed, or new Section or Category Groups are created. Once meta bundles have been created, changing the settings in the file will have no effect.
+
+You can bump the `Bundle.php`'s `bundleVersion` setting if you want it to re-read your config settings.
 
 ## Headless SPA API
 
