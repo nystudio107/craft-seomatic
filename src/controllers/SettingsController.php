@@ -548,7 +548,7 @@ class SettingsController extends Controller
                     $metaBundle->metaSiteVars->creator->setAttributes($siteSettings['creator']);
                     $siteSettings['creator'] = $metaBundle->metaSiteVars->creator;
                 }
-                //$metaBundle->metaSiteVars->setAttributes($siteSettings);
+                $metaBundle->metaSiteVars->setAttributes($siteSettings);
             }
             Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
 
