@@ -21,6 +21,10 @@ To install SEOmatic, follow these steps:
 
 SEOmatic works on Craft 3.x.
 
+## SEOmatic Beta Notes
+
+SEOmatic for Craft CMS 3 is currently in beta.
+
 ## SEOmatic Overview
 
 -Insert text here-
@@ -229,16 +233,13 @@ By default, newly created meta objects are added to the appropriate meta contain
 
 ##### Meta Object Validation
 
+All meta objects can self-validate:
+```
 {% set myJsonLd = seomatic.jsonLd.create({
     'type': 'Article',
     'name': 'Some Blog',
     'url': 'woopsie',
 }) %}
-{% do myJsonLd.setScenario('google') %}
-
-{% do myJsonLd.description('Here is some description') %}
-
-    {{ myJsonLd.render(true) }}
 
 {% if myJsonLd.validate() %}
     <p>Valid!</p>
@@ -258,7 +259,64 @@ By default, newly created meta objects are added to the appropriate meta contain
         {% endfor %}
     </ul>
 {% endif %}
+```
 
+This will output:
+
+* url
+  * Must be one of these types: URL
+
+Which tells you that the `url` parameter is invalid.  The default validation just ensures that all of the properties are correct.
+
+You can also set the _scenario_ to display properties that Google requires/recommends:
+
+```
+{% set myJsonLd = seomatic.jsonLd.create({
+    'type': 'Article',
+    'name': 'Some Blog',
+    'url': 'woopsie',
+}) %}
+
+{% do myJsonLd.setScenario('google') %}
+
+{% if myJsonLd.validate() %}
+    <p>Valid!</p>
+{% else %}
+    <ul>
+        {% for param,errors in myJsonLd.errors %}
+            <li>
+                {{ param ~ " " }}
+                <ul>
+                    {% for error in errors %}
+                        <li>
+                            {{ error ~ " " }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+```
+
+This will output:
+
+* url
+  * Must be one of these types: URL
+* image
+  * This property is recommended by Google.
+* author
+  * This property is required by Google.
+* datePublished
+  * This property is required by Google.
+* headline
+  * This property is required by Google.
+* publisher
+  * This property is required by Google.
+* mainEntityOfPage
+  * This property is recommended by Google.
+* dateModified
+  * This property is recommended by Google.
 
 #### JSON-LD Meta Object Functions `seomatic.jsonLd`
 
