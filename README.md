@@ -153,6 +153,14 @@ The `seomatic.config` variables are the global plugin configuration variables se
 
 #### Helper Functions `seomatic.helper`
 
+* **`seomatic.helper.loadMetadataForUri(URI, SITE_ID)**` - Load the appropriate meta containers for the given `URI` and optional `SITE_ID`
+* **`seomatic.helper.sitemapIndexForSiteId(SITE_ID)**` - Get the URL to the `SITE_ID`s sitemap index
+* **`seomatic.helper.extractTextFromField(FIELD)**` - Extract plain text from a PlainText, Redactor, CKEdtior, Tags, or Matrix field
+* **`seomatic.helper.extractKeywords(TEXT, LIMIT)**` - Extract up to `LIMIT` most important keywords from `TEXT`
+* **`seomatic.helper.extractSummary(TEXT)**` - Extract the most important 3 sentences from `TEXT`
+* **`seomatic.helper.socialTransform(ASSET, TRANSFORMNAME)**` - Transform the `ASSET` (either an Asset or an Asset ID) for social media sites in `TRANSFORMNAME`; valid values are `base`, `facebook`, `twitter-summary`, and `twitter-large`
+
+
 #### SEOmatic Tags & Containers
 
 All of the SEOmatic tags, links, scripts, title, and JSON-LD are meta objects that have their values set from the `seomatic.meta` variables.
@@ -318,45 +326,109 @@ This will output:
 * dateModified
   * This property is recommended by Google.
 
+If the website has `devMode` on, all of the meta objects are automatically validated as they are rendered, with the results displayed in the Yii Debug Toolbar. The Yii Debug Toolbar can be enabled in your account settings page.
+
 #### JSON-LD Meta Object Functions `seomatic.jsonLd`
 
-* **`seomatic.jsonLd.get()`**
-* **`seomatic.jsonLd.create()`**
-* **`seomatic.jsonLd.add()`**
-* **`seomatic.jsonLd.render()`**
-* **`seomatic.jsonLd.container()`**
+* **`seomatic.jsonLd.get(META_HANDLE)`** Returns the JSON-LD meta object of the handle `META_HANDLE` or `null` if it is not found
+* **`seomatic.jsonLd.create()`** Creates a JSON-LD meta object from an array of key/value properties. The `type` can be any of the [Schema.org](http://schema.org/docs/full.html) types.
+* **`seomatic.jsonLd.add(META_OBJECT)`** Adds the `META_OBJECT` to the JSON-LD container to be rendered
+* **`seomatic.jsonLd.render()`** Renders all of the JSON-LD meta objects to your template. This is only needed if you have turned off **Automatic Render** in Plugin Settings
+* **`seomatic.jsonLd.container()`** Returns the container that holds an array of all of the JSON-LD meta objects
+
+##### JSON-LD Meta Object Examples:
+
+Create a new [Article](http://schema.org/Article) JSON-LD meta object:
+```
+{% set myJsonLd = seomatic.jsonLd.create({
+    'type': 'Article',
+    'name': 'Some Blog',
+    'url': 'https://nystudio107.com/blog',
+}) %}
+```
 
 #### Link Meta Object Functions `seomatic.link`
 
-* **`seomatic.link.get()`**
-* **`seomatic.link.create()`**
-* **`seomatic.link.add()`**
-* **`seomatic.link.render()`**
-* **`seomatic.link.container()`**
+* **`seomatic.link.get(META_HANDLE)`** Returns the Link meta object of the handle `META_HANDLE` or `null` if it is not found
+* **`seomatic.link.create(CONFIG_ARRAY)`** Creates a Link meta object from an array of key/value properties
+* **`seomatic.link.add(META_OBJECT)`** Adds the `META_OBJECT` to the Link container to be rendered
+* **`seomatic.link.render()`** Renders all of the Link meta objects to your template. This is only needed if you have turned off **Automatic Render** in Plugin Settings
+* **`seomatic.link.container()`** Returns the container that holds an array of all of the Link meta objects
+
+##### Link Meta Object Examples:
+
+Change the `<link rel="canonical">`:
+```
+{% do seomatic.link.get("canonical").href("https://nystudio107.com") %}
+```
+
+Note that you can achieve the same result with:
+```
+{% do seomatic.meta.canonicalUrl("https://nystudio107.com") %}
+```
+
+...since the `canonicalUrl` populates the `<link rel="canonical">` Link meta object
 
 #### Script Meta Object Functions `seomatic.script`
 
-* **`seomatic.script.get()`**
-* **`seomatic.script.create()`**
-* **`seomatic.script.add()`**
-* **`seomatic.script.render()`**
-* **`seomatic.script.container()`**
+* **`seomatic.script.get(META_HANDLE)`** Returns the Script meta object of the handle `META_HANDLE` or `null` if it is not found 
+* **`seomatic.script.create()`** Creates a Script meta object from an array of key/value properties
+* **`seomatic.script.add(META_OBJECT)`** Adds the `META_OBJECT` to the Script container to be rendered
+* **`seomatic.script.render()`** Renders all of the Script meta objects to your template. This is only needed if you have turned off **Automatic Render** in Plugin Settings
+* **`seomatic.script.container()`** Returns the container that holds an array of all of the Script meta objects
+
+##### Script Meta Object Examples:
+
+Don't include the Google Analytics script on the page:
+```
+{% do seomatic.script.get("googleAnalytics").include(false) %}
+```
 
 #### Tag Meta Object Functions `seomatic.tag`
 
-* **`seomatic.tag.get()`**
-* **`seomatic.tag.create()`**
-* **`seomatic.tag.add()`**
-* **`seomatic.tag.render()`**
-* **`seomatic.tag.container()`**
+* **`seomatic.tag.get(META_HANDLE)`** Returns the Tag meta object of the handle `META_HANDLE` or `null` if it is not found
+* **`seomatic.tag.create()`** Creates a Tag meta object from an array of key/value properties
+* **`seomatic.tag.add(META_OBJECT)`** Adds the `META_OBJECT` to the Tag container to be rendered
+* **`seomatic.tag.render()`** Renders all of the Tag meta objects to your template. This is only needed if you have turned off **Automatic Render** in Plugin Settings
+* **`seomatic.tag.container()`** Returns the container that holds an array of all of the Tag meta objects
+
+##### Tag Meta Object Examples:
+
+Change the `<meta name="twitter:title">`:
+
+```
+{% do seomatic.tag.get("twitter:title").content("Hello, world") %}
+```
+
+Note that you can achieve the same result with:
+```
+{% do seomatic.meta.twitterTitle("Hello, world") %}
+```
+
+...since the `twitterTitle` populates the `<meta name="twitter:title">` Tag meta object
 
 #### Title Meta Object Functions `seomatic.title`
 
-* **`seomatic.title.get()`**
-* **`seomatic.title.create()`**
-* **`seomatic.title.add()`**
-* **`seomatic.title.render()`**
-* **`seomatic.title.container()`**
+* **`seomatic.title.get(META_HANDLE)`** Returns the Title meta object of the handle `META_HANDLE` or `null` if it is not found
+* **`seomatic.title.create()`** Creates a Title meta object from an array of key/value properties
+* **`seomatic.title.add(META_OBJECT)`** Adds the `META_OBJECT` to the Title container to be rendered
+* **`seomatic.title.render()`** Renders Title meta object to your template. This is only needed if you have turned off **Automatic Render** in Plugin Settings
+* **`seomatic.title.container()`** Returns the container that holds an array with the Title meta object in it
+
+##### Tag Meta Object Examples:
+
+Change the `<title>`:
+
+```
+{% do seomatic.title.get("title").content("My page title") %}
+```
+
+Note that you can achieve the same result with:
+```
+{% do seomatic.meta.seoTitle("My page title") %}
+```
+
+...since the `seoTitle` populates the `<title">` Title meta object
 
 ## SEOmatic Meta Object Roadmap
 
