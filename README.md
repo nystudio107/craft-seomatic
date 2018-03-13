@@ -2,7 +2,13 @@
 
 # SEOmatic plugin for Craft CMS 3.x
 
-A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
+SEOmatic facilitates modern SEO best practices & implementation for Craft CMS 3. It is a turnkey SEO system that is comprehensive, powerful, and flexible.
+
+![Screenshot](resources/img/plugin-logo.png)
+
+Related: [SEOmatic for Craft 2.x](https://github.com/nystudio107/seomatic)
+
+**Note**: This plugin may become a paid add-on when the Craft Plugin store becomes available.
 
 ## Requirements
 
