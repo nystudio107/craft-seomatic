@@ -144,6 +144,33 @@ The Facebook pixel is an analytics tool that helps you measure the effectiveness
 
 The Plugin Settings lets you control various SEOmatic settings globally (across all sites/languages).
 
+### Access Permissions
+
+SEOmatic allows you to restrict access to various parts of the plugin based on User Group Permissions:
+
+* Dashboard
+* Edit Global Meta
+  * General
+  * Twitter
+  * Facebook
+  * Robots
+  * Humans
+* Edit Content SEO
+  * General
+  * Twitter
+  * Facebook
+  * Sitemap
+* Edit Site Settings
+  * Identity
+  * Creator
+  * Social Media
+* Edit Tracking Scripts
+  * Google Analytics
+  * Google gtag.js
+  * Google Tag Manager
+  * Facebook Pixel
+* Edit Plugin Settings
+
 ## Using SEOmatic
 
 ### Twig Templating
