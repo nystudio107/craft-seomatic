@@ -909,10 +909,4 @@ Some things to do, and ideas for potential features:
 
 * Release it
 
-## SEOmatic Changelog
-
-### 3.0.0-beta.1 -- 2018.03.13
-
-* Initial beta release
-
 Brought to you by [nystudio107](https://nystudio107.com/)
