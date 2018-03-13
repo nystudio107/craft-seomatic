@@ -570,6 +570,177 @@ Note that you can achieve the same result with:
 
 ...since the `seoTitle` populates the `<title">` Title meta object
 
+## Headless SPA API
+
+SEOmatic allows you to fetch the meta information for any page via a controller API endpoint, so you can render the meta data via a frontend framework like VueJS or React.
+
+To get all of the meta containers for a given URI, the controller action is:
+
+```
+/actions/seomatic/meta-container/all-meta-containers/?uri=/
+```
+...where `uri` is the path to obtain the meta information from.
+
+This will return to you an array of meta containers, with the render-ready meta tags in each:
+
+```
+{
+    "MetaTitleContainer": "<title>[devMode] Craft3 | Homepage</title>",
+    "MetaTagContainer": "<meta name=\"generator\" content=\"SEOmatic\"><meta name=\"referrer\" content=\"no-referrer-when-downgrade\"><meta name=\"robots\" content=\"all\">",
+    "MetaLinkContainer": "<link href=\"http://craft3.test/\" rel=\"canonical\"><link type=\"text/plain\" href=\"/humans.txt\" rel=\"author\"><link href=\"http://craft3.test/\" rel=\"alternate\" hreflang=\"es\">",
+    "MetaScriptContainer": "",
+    "MetaJsonLdContainer": "<script type=\"application/ld+json\">{\"@context\":\"http://schema.org\",\"@type\":\"WebPage\",\"image\":{\"@type\":\"ImageObject\",\"height\":\"804\",\"width\":\"1200\"},\"inLanguage\":\"en-us\",\"mainEntityOfPage\":\"http://craft3.test/\",\"name\":\"Homepage\",\"url\":\"http://craft3.test/\"}</script><script type=\"application/ld+json\">{\"@context\":\"http://schema.org\",\"@type\":\"BreadcrumbList\",\"description\":\"Breadcrumbs list\",\"itemListElement\":[{\"@type\":\"ListItem\",\"item\":{\"@id\":\"http://craft3.test/\",\"name\":\"Homepage\"},\"position\":1}],\"name\":\"Breadcrumbs\"}</script>"
+}
+```
+
+Should you wish to have the items in the meta containers return as an array of data instead, you can do that with the optional `asArray=true` parameter:
+
+```
+/actions/seomatic/meta-container/all-meta-containers/?uri=/&asArray=true
+```
+
+Which will return the data in array form:
+```
+{
+    "MetaTitleContainer": {
+        "title": {
+            "title": "[devMode] Craft3 | Homepage"
+        }
+    },
+    "MetaTagContainer": {
+        "generator": {
+            "content": "SEOmatic",
+            "name": "generator"
+        },
+        "referrer": {
+            "content": "no-referrer-when-downgrade",
+            "name": "referrer"
+        },
+        "robots": {
+            "content": "all",
+            "name": "robots"
+        },
+    },
+    "MetaLinkContainer": {
+        "canonical": {
+            "href": "http://craft3.test/",
+            "rel": "canonical"
+        },
+        "author": {
+            "href": "/humans.txt",
+            "rel": "author",
+            "type": "text/plain"
+        },
+        "alternate": {
+            "href": "http://craft3.test/",
+            "hreflang": "es",
+            "rel": "alternate"
+        }
+    },
+    "MetaScriptContainer": [],
+    "MetaJsonLdContainer": {
+        "WebPage": {
+            "@context": "http://schema.org",
+            "@type": "WebPage",
+            "image": {
+                "@type": "ImageObject",
+                "height": "804",
+                "width": "1200"
+            },
+            "inLanguage": "en-us",
+            "mainEntityOfPage": "http://craft3.test/",
+            "name": "Homepage",
+            "url": "http://craft3.test/"
+        },
+        "BreadcrumbList": {
+            "@context": "http://schema.org",
+            "@type": "BreadcrumbList",
+            "description": "Breadcrumbs list",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "item": {
+                        "@id": "http://craft3.test/",
+                        "name": "Homepage"
+                    },
+                    "position": 1
+                }
+            ],
+            "name": "Breadcrumbs"
+        }
+    }
+}
+```
+
+You can also request individual meta containers.
+
+Title container:
+
+```
+/actions/seomatic/meta-container/meta-title-container/?uri=/
+```
+
+...will return just the Title container:
+```
+{
+    "MetaTitleContainer": "<title>[devMode] Craft3 | Homepage</title>"
+}
+```
+
+Tag container:
+
+```
+/actions/seomatic/meta-container/meta-tag-container/?uri=/
+```
+
+...will return just the Tag container:
+```
+{
+     "MetaTagContainer": "<meta name=\"generator\" content=\"SEOmatic\"><meta name=\"referrer\" content=\"no-referrer-when-downgrade\"><meta name=\"robots\" content=\"all\">"
+ }
+```
+
+Script container:
+
+```
+/actions/seomatic/meta-container/meta-script-container/?uri=/
+```
+
+...will return just the Script container:
+```
+{
+    "MetaScriptContainer": ""
+}
+```
+
+Link container:
+
+```
+/actions/seomatic/meta-container/meta-link-container/?uri=/
+```
+
+...will return just the Link container:
+```
+{
+    "MetaLinkContainer": "<link href=\"http://craft3.test/\" rel=\"canonical\"><link type=\"text/plain\" href=\"/humans.txt\" rel=\"author\"><link href=\"http://craft3.test/\" rel=\"alternate\" hreflang=\"es\">"
+}
+```
+
+JSON-LD container:
+
+```
+/actions/seomatic/meta-container/meta-json-ld-container/?uri=/
+```
+
+...will return just the JSON-LD container:
+```
+{
+    "MetaJsonLdContainer": "<script type=\"application/ld+json\">{\"@context\":\"http://schema.org\",\"@type\":\"WebPage\",\"image\":{\"@type\":\"ImageObject\",\"height\":\"804\",\"width\":\"1200\"},\"inLanguage\":\"en-us\",\"mainEntityOfPage\":\"http://craft3.test/\",\"name\":\"Homepage\",\"url\":\"http://craft3.test/\"}</script><script type=\"application/ld+json\">{\"@context\":\"http://schema.org\",\"@type\":\"BreadcrumbList\",\"description\":\"Breadcrumbs list\",\"itemListElement\":[{\"@type\":\"ListItem\",\"item\":{\"@id\":\"http://craft3.test/\",\"name\":\"Homepage\"},\"position\":1}],\"name\":\"Breadcrumbs\"}</script>"
+}
+```
+
+All of the individual container controller API endpoints also accept the `&asArray=true` parameter if you'd like the data in array form.
+ 
 ## SEOmatic Meta Object Roadmap
 
 Some things to do, and ideas for potential features:
