@@ -61,7 +61,7 @@ class JsonLdController extends Controller
      */
     public function actionGetDecomposedType($schemaType)
     {
-        $result = null;
+        $result = [];
         while ($schemaType) {
             $className = 'nystudio107\\seomatic\\models\\jsonld\\'.$schemaType;
             if (class_exists($className)) {
@@ -72,6 +72,7 @@ class JsonLdController extends Controller
                 }
                 if ($classRef) {
                     $staticProps = $classRef->getStaticProperties();
+
                     foreach ($staticProps as $key => $value) {
                         if ($key[0] == '_') {
                             $newKey = ltrim($key, '_');
@@ -81,9 +82,13 @@ class JsonLdController extends Controller
                     }
                     $result[$schemaType] = $staticProps;
                     $schemaType = $staticProps['schemaTypeExtends'];
+                    if ($schemaType == "JsonLdType") {
+                        $schemaType = null;
+                    }
                 }
             }
         }
+
         return $this->asJson($result);
     }
 }

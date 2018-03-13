@@ -574,6 +574,8 @@ Note that you can achieve the same result with:
 
 SEOmatic allows you to fetch the meta information for any page via a controller API endpoint, so you can render the meta data via a frontend framework like VueJS or React.
 
+### Meta Container API Endpoints
+
 To get all of the meta containers for a given URI, the controller action is:
 
 ```
@@ -741,6 +743,21 @@ JSON-LD container:
 
 All of the individual container controller API endpoints also accept the `&asArray=true` parameter if you'd like the data in array form.
  
+### Schema.org API Endpoints
+
+To get a key/value array of a given [Schema.org](http://schema.org/docs/full.html) type:
+
+```
+/actions/seomatic/json-ld/get-type?schemaType=Article
+```
+
+To get a decomposed version of a given [Schema.org](http://schema.org/docs/full.html) type, with the properties grouped by each inherited type:
+
+```
+/actions/seomatic/json-ld/get-decomposed-type?schemaType=Article
+```
+
+
 ## SEOmatic Meta Object Roadmap
 
 Some things to do, and ideas for potential features:
