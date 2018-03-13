@@ -1,0 +1,28 @@
+{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
+{% import "_includes/forms" as forms %}
+
+<div class="flex">
+    <div class="flex-grow"></div>
+    <a href="{{ siteUrl("/robots.txt") }}" class="btn livepreviewbtn" target="_blank">{{ 'View robots.txt'|t("seomatic") }}</a>
+</div>
+
+{% namespace "robotsTemplate" %}
+    {{ forms.lightswitchField({
+        label: "Robots.txt Enabled" |t("seomatic"),
+        instructions: "Whether the `robots.txt` template should be rendered" |t("seomatic"),
+        id: "include",
+        name: "include",
+        on: humansTemplate.include,
+        warning: false,
+    }) }}
+
+    {{ forms.textAreaField({
+        label: "Robots.txt Template" |t("seomatic"),
+        instructions: "A `robots.txt` file is a file at the root of your site that indicates those parts of your site you don’t want accessed by search engine crawlers. The file uses the [Robots Exclusion Standard](http://www.robotstxt.org/robotstxt.html), which is a protocol with a small set of commands that can be used to indicate access to your site by section and by specific kinds of web crawlers (such as mobile crawlers vs desktop crawlers)." |t("seomatic"),
+        id: "templateString",
+        name: "templateString",
+        value: robotsTemplate.templateString,
+        class: "seomatic-twig-editor",
+        warning: false,
+    }) }}
+{% endnamespace %}

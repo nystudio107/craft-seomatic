@@ -1,0 +1,42 @@
+{% extends "_layouts/cp" %}
+
+{% set navItems = {
+    'heading': { heading: "Settings"|t },
+} %}
+{% if currentUser.can("seomatic:site-settings:identity") %}
+    {% set navItems = navItems |merge({
+        identity: {
+            title: "Identity" |t("seomatic"),
+        },
+    }) %}
+{% endif %}
+{% if currentUser.can("seomatic:site-settings:creator") %}
+    {% set navItems = navItems |merge({
+        creator: {
+            title: "Creator" |t("seomatic"),
+        },
+    }) %}
+{% endif %}
+{% if currentUser.can("seomatic:site-settings:social-media") %}
+    {% set navItems = navItems |merge({
+        social: {
+            title: "Social Media" |t("seomatic"),
+        },
+    }) %}
+{% endif %}
+
+{% set selectedItem = craft.app.request.getSegment(3)|default("identity") %}
+
+{% block sidebar %}
+    <nav>
+        <ul>
+            {% for id, item in navItems %}
+                {% if item.heading is defined %}
+                    <li class="heading"><span>{{ item.heading }}</span></li>
+                {% else %}
+                    <li><a href="{{ url("seomatic/site/#{id}/#{currentSiteHandle}") }}"{% if id == selectedItem %} class="sel"{% endif %}>{{ item.title }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </nav>
+{% endblock %}

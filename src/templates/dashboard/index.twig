@@ -1,0 +1,37 @@
+{% extends '_layouts/cp' %}
+
+{% set linkGetStarted = url('seomatic/global') %}
+
+{% do view.registerAssetBundle("nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset") %}
+{% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/assetbundles/seomatic/dist', true) %}
+
+{% set content %}
+    <div class="field readable">
+            {% if showWelcome %}
+                <div style="text-align:center; margin:0 auto; padding: 5% 10%;">
+                    <img src="{{ baseAssetsUrl ~ '/img/Seomatic-icon.svg' }}"
+                         width="30%" height="auto"/>
+                    <h2>Thanks for using SEOmatic!</h2>
+                    <p>Nifty welcome text goes here</p>
+
+                    </p>
+                    <p>
+                        <a href="{{ linkGetStarted }}">
+                            <button class="btn submit">Get Started</button>
+                        </a>
+                    </p>
+                </div>
+                <div style="text-align:center; margin:0 auto; padding: 0;">
+                    <p class="instructions">
+                        Brought to you by <a href="http://nystudio107.com" target="_blank">nystudio107</a>
+                    </p>
+                </div>
+            {% endif %}
+            <p class="warning">
+                This section is unfinished in the SEOmatic for Craft 3 beta
+            </p>
+            <p>
+                Dashboard showing settings left to tbe setup, as well as SEO analysis.
+            </p>
+    </fiv>
+{% endset %}

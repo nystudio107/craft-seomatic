@@ -1,0 +1,26 @@
+{% set titleArray = seomatic.title.get('title').renderAttributes() %}
+{% set descriptionArray = seomatic.tag.get('description').renderAttributes() %}
+{% set canonicalArray = seomatic.link.get('canonical').renderAttributes() %}
+
+<div class="preview-column">
+    <div class="displaypreview" style="{{ displayPreviewInlineStyles ?? '' }}">
+        <div class="googleWrapper">
+            <div class="rc" data-hveid="27">
+                <h3 class="googleDisplay">
+                    <a class="googleDisplay" href="{{ canonicalArray.href ?? siteUrl("/") }}" target="_blank">{{ titleArray.title ?? "" |raw }}</a>
+                </h3>
+                <div class="googleDisplay1">
+                    <div>
+                        <div class="googleDisplay2" style="white-space:nowrap">
+                            <cite class="googleDisplay">{{ (canonicalArray.href ?? siteUrl("/")) | replace({'http://': ''}) | replace({'https://': ''}) }}</cite>
+                            <div class="googleDisplay3">
+                                <span class="googleDisplay1"></span>
+                            </div>
+                        </div>
+                        <span class="googleDisplay2">{{ descriptionArray.content ?? "" |raw }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

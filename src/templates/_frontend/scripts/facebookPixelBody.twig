@@ -1,0 +1,4 @@
+{% if facebookPixelId.value is defined and facebookPixelId.value %}
+<noscript><img height="1" width="1" style="display:none"
+src="{{ facebookPixelNoScriptUrl.value }}?id={{ facebookPixelId.value }}&ev=PageView&noscript=1" /></noscript>
+{% endif %}

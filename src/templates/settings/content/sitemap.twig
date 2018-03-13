@@ -1,0 +1,34 @@
+{% requirePermission "seomatic:content-meta:sitemap" %}
+
+{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
+
+{% extends "seomatic/_layouts/contentSettings.twig" %}
+
+{% block header %}
+    {{ block('pageTitle') }}
+    {{ block('contextMenu') }}
+    <div class="flex-grow"></div>
+    <div class="flex-grow"></div>
+    {{ block('actionButton') }}
+{% endblock %}
+
+{% block contextMenu %}
+    {% include "seomatic/settings/_includes/sites-menu.twig" %}
+{% endblock %}
+
+{% block content %}
+    
+    <input type="hidden" name="action" value="seomatic/settings/save-content">
+    <input type="hidden" name="siteId" value="{{ currentSiteId }}">
+    <input type="hidden" name="sourceHandle" value="{{ currentSourceHandle }}">
+    <input type="hidden" name="sourceBundleType" value="{{ currentSourceBundleType }}">
+    {{ redirectInput("seomatic/edit-content/#{currentSubSection}/#{currentSourceBundleType}/#{currentSourceHandle}/#{currentSiteHandle}") }}
+
+    {% if currentUser.can("seomatic:content-meta:sitemap") %}
+        <div id="tab-content-sitemap">
+            <h2>{{ subSectionTitle ~ " Settings" |t("seomatic") }}</h2>
+            {% include "seomatic/settings/_includes/tab-sitemap.twig" %}
+        </div>
+    {% endif %}
+    
+{% endblock %}

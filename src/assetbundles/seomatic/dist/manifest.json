@@ -1,0 +1,18 @@
+{
+  "img/Seomatic-icon.svg": "img/Seomatic-icon.svg",
+  "img/link-icon.svg": "img/link-icon.svg",
+  "img/missing_image.png": "img/missing_image.png",
+  "img/no_image_set.png": "img/no_image_set.png",
+  "img/redirects-icon.svg": "img/redirects-icon.svg",
+  "img/script-icon.svg": "img/script-icon.svg",
+  "img/sitemap-icon.svg": "img/sitemap-icon.svg",
+  "img/structured-data-icon.svg": "img/structured-data-icon.svg",
+  "img/tags-icon.svg": "img/tags-icon.svg",
+  "img/variables-icon.svg": "img/variables-icon.svg",
+  "seomatic.css": "css/seomatic.css",
+  "seomatic.css.map": "css/seomatic.css.map",
+  "seomatic.js": "js/seomatic.js",
+  "seomatic.js.map": "js/seomatic.js.map",
+  "vendor.js": "js/vendor.js",
+  "vendor.js.map": "js/vendor.js.map"
+}

@@ -1,0 +1,49 @@
+{% set twitterTitleArray = seomatic.tag.get('twitter:title').renderAttributes() %}
+{% set twitterDescriptionArray = seomatic.tag.get('twitter:description').renderAttributes() %}
+{% set twitterImageArray = seomatic.tag.get('twitter:image').renderAttributes() %}
+{% set canonicalArray = seomatic.link.get('canonical').renderAttributes() %}
+
+<div class="preview-column">
+    <div class="displaypreview" style="{{ displayPreviewInlineStyles ?? '' }}">
+        {% if seomatic.site.twitterHandle |length %}
+            {% set lg = false %}
+            {% if seomatic.meta.twitterCard == "summary_large_image" %}
+                {% set lg = true %}
+            {% endif %}
+            <div class="TwitterCardsGrid{% if lg %} TwitterCardsGrid-Large{% endif %}">
+                <div class="TwitterCardGrid-col{% if lg %} TwitterCardGrid-col-Large{% endif %}">
+                    <a class="TwitterCard-container{% if lg %} TwitterCard-container-Large{% endif %}" href="{{ canonicalArray.href ?? siteUrl("/") }}" target="_blank">
+                        <div class="TwitterCard-summary-image{% if lg %} TwitterCard-summary-image-Large{% endif %}">
+                            <div class="TwitterCard-image-container{% if lg %} TwitterCard-image-container-Large{% endif %}">
+                                <div id="twitter-card-image" class="TwitterCard-image-wrapper{% if lg %} TwitterCard-image-wrapper-Large{% endif %}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="TwitterCard-summary-content-container{% if lg %} TwitterCard-summary-content-container-Large{% endif %}">
+                            <div class="TwitterCard-summary-content{% if lg %} TwitterCard-summary-content-Large{% endif %}">
+                                <h2 class="TwitterCard-title">{{ twitterTitleArray.content ?? "" |raw }}</h2>
+                                <p class="TwitterCard-text{% if lg %} TwitterCard-text-Large{% endif %}">{{ twitterDescriptionArray.content ?? "" |raw }}</p>
+                                <span class="TwitterCard-destination">{{ siteUrl | replace({'http://': ''}) | replace({'https://': ''})  | replace({'/': ''}) }}</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <script type="text/javascript">
+                var x = document.getElementsByClassName("TwitterCard-image-wrapper");
+                var i;
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.backgroundImage = "url(" + "{{ baseAssetsUrl ~ '/img/no_image_set.png' }}" + ")";
+                    {% if twitterImageArray.content is defined and twitterImageArray.content |length %}
+                    x[i].style.backgroundImage = "url(" + "{{ twitterImageArray.content }}" + ")";
+                    {% endif %}
+                }
+            </script>
+        {% else %}
+            <div class="field">
+                <p class="warning">No Twitter Handle has been set. <a href="{{ cpUrl("seomatic/site/social") }}">Set it here.</a></p>
+            </div>
+        {% endif %}
+    </div>
+</div>

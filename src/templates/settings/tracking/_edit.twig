@@ -1,0 +1,101 @@
+{% requirePermission "seomatic:site-settings" %}
+
+{% extends "seomatic/_layouts/trackingSettings.twig" %}
+
+{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
+{% import "_includes/forms" as forms %}
+
+{% block header %}
+    {{ block('pageTitle') }}
+    {{ block('contextMenu') }}
+    <div class="flex-grow"></div>
+    <div class="flex-grow"></div>
+    {{ block('actionButton') }}
+{% endblock %}
+
+{% block contextMenu %}
+    {% include "seomatic/settings/_includes/sites-menu.twig" %}
+{% endblock %}
+
+{% block content %}
+    
+    <input type="hidden" name="action" value="seomatic/settings/save-tracking">
+    <input type="hidden" name="siteId" value="{{ currentSiteId }}">
+    {{ redirectInput("seomatic/tracking/#{currentSiteHandle}") }}
+
+    {% for scriptHandle,scriptData in scripts %}
+        {% set permission = "seomatic:tracking-scripts:#{scriptHandle}" %}
+        {% if currentUser.can(permission) and currentSubSection == scriptHandle %}
+            <div id='{{ "tab-tracking-#{scriptHandle}" }}' class="seomatic-script-wrapper">
+                <h2>{{ subSectionTitle ~ " Settings" |t("seomatic") }}</h2>
+                {% namespace "scripts[#{scriptHandle}]" %}
+                    <div class="field seomatic-script-lightswitch">
+                    {{ forms.lightswitchField({
+                        label: "#{scriptData.name} Enabled" |t("seomatic"),
+                        instructions: "#{scriptData.description}" |t("seomatic"),
+                        id: "include",
+                        name: "include",
+                        on: scriptData.include,
+                        warning: false,
+                    }) }}
+                    </div>
+                    <div class="seomatic-script-container" {% if not scriptData.include %}style="display: none;"{% endif %}>
+                        {% for varHandle,varData in scriptData.vars %}
+                            {% switch varData.type %}
+                                {% case "bool" %}
+                                    {{ forms.lightswitchField({
+                                        label: "#{varData.title}" |t("seomatic"),
+                                        instructions: "#{varData.instructions}" |t("seomatic"),
+                                        id: "vars-#{varHandle}",
+                                        name: "vars[#{varHandle}]",
+                                        on: varData.value,
+                                        warning: false,
+                                    }) }}
+    
+                                {% case "string" %}
+                                    {{ forms.textField({
+                                        label: "#{varData.title}" |t("seomatic"),
+                                        instructions: "#{varData.instructions}" |t("seomatic"),
+                                        id: "vars-#{varHandle}",
+                                        name: "vars[#{varHandle}]",
+                                        value: varData.value ?? "",
+                                        warning: false,
+                                    }) }}
+    
+                                {% default %}
+    
+                            {% endswitch %}
+                        {% endfor %}
+    
+                        {{ forms.textAreaField({
+                            label: "Script Template" |t("seomatic"),
+                            instructions: "The script that will render on the page. Note that this script will not render in `local` development or `staging` environments." |t("seomatic"),
+                            id: "templateString",
+                            name: "templateString",
+                            value: scriptData.templateString,
+                            class: "seomatic-javascript-editor",
+                            warning: false,
+                        }) }}
+    
+                        {{ forms.selectField({
+                            label: "Script Render Location" |t("seomatic"),
+                            instructions: "Determaines where in the HTML document the script renders." |t("seomatic"),
+                            id: "position",
+                            name: "position",
+                            options: {
+                                1: "Head - in the <head> tag" |t("seomatic"),
+                                2: "Body Begin - after the <body> tag " |t("seomatic"),
+                                3: "Body End - before the </body> tag" |t("seomatic"),
+                            },
+                            value: scriptData.position,
+                        }) }}
+                    </div>
+                {% endnamespace %}
+            </div>
+        {% endif %}
+    {% endfor %}
+
+    {% include "seomatic/_includes/footer-message.twig" with {
+        message: ""
+    } %}
+{% endblock %}

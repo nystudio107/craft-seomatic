@@ -1,0 +1,30 @@
+{% set gtagProperty = googleAnalyticsId.value ?? googleAdWordsId.value ?? dcFloodlightId ?? null %}
+{% if gtagProperty %}
+window.dataLayer = window.dataLayer || [{% if dataLayer is defined and dataLayer %}{{ dataLayer |json_encode() |raw }}{% endif %}];
+function gtag(){dataLayer.push(arguments)};
+gtag('js', new Date());
+{% if googleAnalyticsId.value %}
+{%- set gtagConfig = "{"
+    ~ "'send_page_view': #{sendPageView.value ? 'true' : 'false'},"
+    ~ "'anonymize_ip': #{ipAnonymization.value ? 'true' : 'false'},"
+    ~ "'link_attribution': #{enhancedLinkAttribution.value ? 'true' : 'false'},"
+    ~ "'allow_display_features': #{displayFeatures.value ? 'true' : 'false'},"
+    ~ "}"
+-%}
+gtag('config', '{{ googleAnalyticsId.value }}', {{ gtagConfig }});
+{% endif %}
+{% if googleAdWordsId.value %}
+{%- set gtagConfig = "{"
+    ~ "'send_page_view': #{sendPageView.value ? 'true' : 'false'}"
+    ~ "}"
+-%}
+gtag('config', '{{ googleAdWordsId.value }}', {{ gtagConfig }});
+{% endif %}
+{% if dcFloodlightId.value %}
+{%- set gtagConfig = "{"
+    ~ "'send_page_view': #{sendPageView.value ? 'true' : 'false'}"
+    ~ "}"
+-%}
+gtag('config', '{{ dcFloodlightId.value }}', {{ gtagConfig }});
+{% endif %}
+{% endif %}

@@ -1,0 +1,108 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{# @var metaBundle \nystudio107\seomatic\models\MetaBundle #}
+
+{% requirePermission "seomatic:content-meta" %}
+
+{% extends "_layouts/cp" %}
+{% import '_includes/forms' as forms %}
+
+{% block contextMenu %}
+    {% include "seomatic/settings/_includes/sites-menu.twig" %}
+{% endblock %}
+
+{% set content %}
+<div class="readable">
+
+    <input type="hidden" name="action" value="seomatic/saveContent" />
+    <input type="hidden" name="redirect" value="seomatic/content" />
+
+    {{ csrfInput() }}
+
+    <table class="data">
+        <thead class="sections first">
+        <tr>
+            <th>{{ "Name"|t }}</th>
+            <th class="thin centeralign">{{ "Entries"|t }}</th>
+            <th>{{ "Type"|t }}</th>
+            <th class="centeralign">{{ "Title"|t }}</th>
+            <th class="centeralign">{{ "Description"|t }}</th>
+            <th class="centeralign">{{ "Image"|t }}</th>
+            <th class="centeralign">{{ "Sitemap"|t }}</th>
+            <th>{{ "Robots"|t }}</th>
+            <th class="thin"></th>
+        </tr>
+        </thead>
+
+        <tbody class="sections">
+        {% for metaBundle in metaBundles %}
+            {% set num_entries = 0 %}
+            <tr>
+                
+                {############### Name ###############}
+                
+                <td>
+                    {% set sourcePrefix =  '' %}
+                    {% switch metaBundle.sourceBundleType %}
+                        {% case 'section' %}
+                            {% set sourcePrefix = 'settings/sections/' %}
+                        {% case 'category' %}
+                            {% set sourcePrefix =  'settings/categories/' %}
+                    {% endswitch %}
+                    <a href="{{ cpUrl("seomatic/edit-content/general/#{metaBundle.sourceBundleType}/#{metaBundle.sourceHandle}/#{currentSiteHandle}") }}">{{ metaBundle.sourceName }}</a>
+                    <a class="go" href="{{ url(sourcePrefix ~ metaBundle.sourceId) }}"></a>
+                </td>
+                
+                {############### Entries ###############}
+    
+                <td class="centeralign">
+                    {% set numEntries = craft.entries({ sectionId: metaBundle.sourceId }).count() %}
+                    {{ numEntries }}
+                </td>
+
+                {############### Type ###############}
+
+                <td>
+                    {{ metaBundle.sourceType }}
+                </td>
+    
+                {############### SEO Title ###############}
+    
+                <td class="centeralign">
+                    {% set status = (metaBundle.metaGlobalVars.seoTitle |length) ? "enabled" : "disabled" %}
+                    <span class='{{ "status #{status} inline-item"}}'></span>
+                </td>
+    
+                {############### SEO Description ###############}
+    
+                <td class="centeralign">
+                    {% set status = (metaBundle.metaGlobalVars.seoDescription |length) ? "enabled" : "disabled" %}
+                    <span class='{{ "status #{status} inline-item"}}'></span>
+                </td>
+    
+                {############### SEO Image ###############}
+    
+                <td class="centeralign">
+                    {% set status = (metaBundle.metaGlobalVars.seoImage |length) ? "enabled" : "disabled" %}
+                    <span class='{{ "status #{status} inline-item"}}'></span>
+                </td>
+    
+                {############### Sitemap ###############}
+    
+                <td class="centeralign">
+                    {% set status = metaBundle.metaSitemapVars.sitemapUrls ? "enabled" : "disabled" %}
+                    <span class='{{ "status #{status} inline-item"}}'></span>
+                </td>
+    
+                {############### Robots ###############}
+    
+                <td>
+                    {{ metaBundle.metaGlobalVars.robots }}
+                </td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% endset %}

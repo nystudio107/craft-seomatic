@@ -11,7 +11,7 @@
         "seomatic"
     ],
     "support": {
-        "docs": "https://github.com/nystudio107/craft-seomatic/blob/master/README.md",
+        "docs": "https://github.com/nystudio107/craft-seomatic/blob/v3/README.md",
         "issues": "https://github.com/nystudio107/craft-seomatic/issues"
     },
     "license": "proprietary",
@@ -22,8 +22,9 @@
         }
     ],
     "require": {
-        "craftcms/cms": "^3.0.0-RC1",
+        "craftcms/cms": "^3.0.0-RC12",
         "craftcms/vue-asset": "^1.0",
+        "php-science/textrank": "^1.0.3",
         "davechild/textstatistics": "^1.0.1",
         "sunra/php-simple-html-dom-parser": "^1.5.2"
     },
@@ -41,18 +42,17 @@
     "extra": {
         "name": "SEOmatic",
         "handle": "seomatic",
-        "schemaVersion": "3.0.0",
-        "basePath": "/nystudio107/craft-seomatic/src",
         "hasCpSettings": true,
         "hasCpSection": true,
-        "changelogUrl": "https://raw.githubusercontent.com/nystudio107/craft-seomatic/master/CHANGELOG.md",
+        "changelogUrl": "https://raw.githubusercontent.com/nystudio107/craft-seomatic/v3/CHANGELOG.md",
         "class": "nystudio107\\seomatic\\Seomatic",
         "components": {
             "frontendTemplates": "nystudio107\\seomatic\\services\\FrontendTemplates",
+            "helper": "nystudio107\\seomatic\\services\\Helper",
             "jsonLd": "nystudio107\\seomatic\\services\\JsonLd",
             "link": "nystudio107\\seomatic\\services\\Link",
-            "metaContainers": "nystudio107\\seomatic\\services\\MetaContainers",
             "metaBundles": "nystudio107\\seomatic\\services\\MetaBundles",
+            "metaContainers": "nystudio107\\seomatic\\services\\MetaContainers",
             "redirects": "nystudio107\\seomatic\\services\\Redirects",
             "script": "nystudio107\\seomatic\\services\\Script",
             "sitemaps": "nystudio107\\seomatic\\services\\Sitemaps",

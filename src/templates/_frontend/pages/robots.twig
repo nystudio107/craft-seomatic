@@ -1,0 +1,38 @@
+# robots.txt for {{ siteUrl }}
+
+Sitemap: {{ seomatic.helper.sitemapIndexForSiteId() }}
+{% switch seomatic.config.environment %}
+
+{% case "live" %}
+
+# live - don't allow web crawlers to index cpresources/ or vendor/
+
+User-agent: *
+Disallow: /cpresources/
+Disallow: /vendor/
+Disallow: /.env
+
+{% case "staging" %}
+
+# staging - disallow all
+
+User-agent: *
+Disallow: /
+
+{% case "local" %}
+
+# local - disallow all
+
+User-agent: *
+Disallow: /
+
+{% default %}
+
+# default - don't allow web crawlers to index cpresources/ or vendor/
+
+User-agent: *
+Disallow: /cpresources/
+Disallow: /vendor/
+Disallow: /.env
+
+{% endswitch %}
