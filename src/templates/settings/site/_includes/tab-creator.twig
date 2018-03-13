@@ -1,14 +1,6 @@
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
 
-{% namespace "site" %}
-    <div class="field">
-        <p class="warning">
-            This section is unfinished in the SEOmatic for Craft 3 beta
-        </p>
-    </div>
-{% endnamespace %}
-
 {% set entity = site.creator %}
 {% namespace "site[creator]" %}
     {% include "seomatic/settings/site/_includes/entity-partial.twig" %}
