@@ -39,6 +39,7 @@ class Helper extends Component
 
     /**
      * Load the appropriate meta containers for the given $uri and optional $siteId
+     *
      * @param string   $uri
      * @param int|null $siteId
      */
@@ -139,6 +140,8 @@ class Helper extends Component
     }
 
     /**
+     * Transform the $asset for social media sites in $transformName and optional $siteId
+     *
      * @param int|Asset $asset         the Asset or Asset ID
      * @param string    $transformName the name of the transform to apply
      * @param int|null  $siteId
