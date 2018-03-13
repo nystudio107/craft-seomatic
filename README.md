@@ -25,6 +25,10 @@ SEOmatic works on Craft 3.x.
 
 ## SEOmatic Beta Notes
 
+To install/update SEOmatic while it is in beta, your `minimum-stability` must be set to `beta` in your Craft project's `composer.json`:
+```json
+  "minimum-stability": "beta",
+```
 SEOmatic for Craft CMS 3 is currently in beta; that means it _may_ be a little rough around the edges. Please report any issues you find to the [SEOmatic Issues](https://github.com/nystudio107/craft-seomatic/issues) page.
 
 The following are currently works in progress:
