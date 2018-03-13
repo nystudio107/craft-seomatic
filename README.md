@@ -293,12 +293,12 @@ The `seomatic.config` variables are the global plugin configuration variables se
 
 #### Helper Functions `seomatic.helper`
 
-* **`seomatic.helper.loadMetadataForUri(URI, SITE_ID)**` - Load the appropriate meta containers for the given `URI` and optional `SITE_ID`
-* **`seomatic.helper.sitemapIndexForSiteId(SITE_ID)**` - Get the URL to the `SITE_ID`s sitemap index
-* **`seomatic.helper.extractTextFromField(FIELD)**` - Extract plain text from a PlainText, Redactor, CKEdtior, Tags, or Matrix field
-* **`seomatic.helper.extractKeywords(TEXT, LIMIT)**` - Extract up to `LIMIT` most important keywords from `TEXT`
-* **`seomatic.helper.extractSummary(TEXT)**` - Extract the most important 3 sentences from `TEXT`
-* **`seomatic.helper.socialTransform(ASSET, TRANSFORMNAME)**` - Transform the `ASSET` (either an Asset or an Asset ID) for social media sites in `TRANSFORMNAME`; valid values are `base`, `facebook`, `twitter-summary`, and `twitter-large`
+* **`seomatic.helper.loadMetadataForUri(URI, SITE_ID)`** - Load the appropriate meta containers for the given `URI` and optional `SITE_ID`
+* **`seomatic.helper.sitemapIndexForSiteId(SITE_ID)`** - Get the URL to the `SITE_ID`s sitemap index
+* **`seomatic.helper.extractTextFromField(FIELD)`** - Extract plain text from a PlainText, Redactor, CKEdtior, Tags, or Matrix field
+* **`seomatic.helper.extractKeywords(TEXT, LIMIT)`** - Extract up to `LIMIT` most important keywords from `TEXT`
+* **`seomatic.helper.extractSummary(TEXT)`** - Extract the most important 3 sentences from `TEXT`
+* **`seomatic.helper.socialTransform(ASSET, TRANSFORMNAME)`** - Transform the `ASSET` (either an Asset or an Asset ID) for social media sites in `TRANSFORMNAME`; valid values are `base`, `facebook`, `twitter-summary`, and `twitter-large`
 
 
 #### SEOmatic Tags & Containers
