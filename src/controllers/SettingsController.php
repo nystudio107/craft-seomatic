@@ -746,7 +746,7 @@ class SettingsController extends Controller
      * @param        $globalsSettings
      * @param        $bundleSettings
      */
-    protected function parseTextSources(string $elementName, &$globalsSettings, &$bundleSettings): void
+    protected function parseTextSources(string $elementName, &$globalsSettings, &$bundleSettings)
     {
         $objectPrefix = '';
         if (!empty($elementName)) {
@@ -813,7 +813,7 @@ class SettingsController extends Controller
      * @param $bundleSettings
      * @param $siteId
      */
-    protected function parseImageSources($elementName, &$globalsSettings, &$bundleSettings, $siteId): void
+    protected function parseImageSources($elementName, &$globalsSettings, &$bundleSettings, $siteId)
     {
         $objectPrefix = '';
         if (!empty($elementName)) {
@@ -1019,7 +1019,7 @@ class SettingsController extends Controller
      *
      * @throws \yii\web\ForbiddenHttpException
      */
-    protected function setMultiSiteVariables($siteHandle, &$siteId, array &$variables): void
+    protected function setMultiSiteVariables($siteHandle, &$siteId, array &$variables)
     {
         // Enabled sites
         $sites = Craft::$app->getSites();
