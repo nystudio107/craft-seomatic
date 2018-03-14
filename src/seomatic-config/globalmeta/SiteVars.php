@@ -40,7 +40,7 @@ return [
                 'url'      => '',
             ],
             'wikipedia'  => [
-                'siteName' => 'Wikpedia',
+                'siteName' => 'Wikipedia',
                 'handle'   => 'wikipedia',
                 'url'      => '',
             ],
