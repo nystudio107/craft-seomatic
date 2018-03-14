@@ -9,7 +9,7 @@ SEOmatic facilitates [modern SEO best practices](https://nystudio107.com/blog/mo
 
 Related: [SEOmatic for Craft 2.x](https://github.com/nystudio107/seomatic)
 
-**Note**: This plugin may become a paid add-on when the Craft Plugin store becomes available.
+**Note**: _This plugin will cost $99.00 once Craft 3 GA is released._
 
 ## Requirements
 
