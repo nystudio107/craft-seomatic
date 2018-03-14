@@ -110,7 +110,7 @@ module.exports = {
     ],
     resolve: {
         alias: {
-            'billboard.js': path.resolve(__dirname,'./node_modules/billboard.js/dist/billboard.min.js')
+            'billboard.css': path.resolve(__dirname,'./node_modules/billboard.js/dist/billboard.css')
         }
     },
     devServer: {

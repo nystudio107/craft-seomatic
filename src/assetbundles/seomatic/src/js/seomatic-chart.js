@@ -16,12 +16,15 @@
 
 // CSS
 require('../css/seomatic-chart.css');
+require('billboard.css');
 
 // Images
 
 // JavaScript
 import {bb} from 'billboard.js';
 
-$(function () {
+// Set the window.bb global so we can use it in Twig
+window.bb = bb;
 
+$(function () {
 });
