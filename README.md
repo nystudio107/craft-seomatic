@@ -1,4 +1,5 @@
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/?branch=develop)[![Code Coverage](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/coverage.png?b=develop)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/?branch=develop)[![Build Status](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/build.png?b=develop)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/build-status/develop)[![Code Intelligence Status](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/code-intelligence.svg?b=develop)](https://scrutinizer-ci.com/code-intelligence)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/quality-score.png?b=v3)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/?branch=v3) [![Code Coverage](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/coverage.png?b=v3)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/?branch=v3) [![Build Status](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/build.png?b=v3)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/build-status/v3) 
+[![Code Intelligence Status](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/code-intelligence.svg?b=v3)](https://scrutinizer-ci.com/code-intelligence)
 
 # SEOmatic plugin for Craft CMS 3.x
 
@@ -18,7 +19,7 @@ This plugin requires Craft CMS 3.0.0-RC12 or later.
 
 To install SEOmatic, follow these steps:
 
-1. Install with Composer via `composer require nystudio107/craft-seomatic:^3.0.0-beta.1`
+1. Install with Composer via `composer require nystudio107/craft-seomatic:^3.0.0-beta.3`
 2. Install plugin in the Craft Control Panel under Settings > Plugins
 
 You can also install SEOmatic via the **Plugin Store** in the Craft AdminCP.
@@ -908,11 +909,5 @@ To get a decomposed version of a given [Schema.org](http://schema.org/docs/full.
 Some things to do, and ideas for potential features:
 
 * Release it
-
-## SEOmatic Changelog
-
-### 3.0.0-beta.1 -- 2018.03.13
-
-* Initial beta release
 
 Brought to you by [nystudio107](https://nystudio107.com/)
