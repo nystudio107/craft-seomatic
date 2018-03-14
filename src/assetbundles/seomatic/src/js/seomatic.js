@@ -16,7 +16,7 @@
 
 // CSS
 require('../css/css-reset.css');
-require('../css/style.css');
+require('../css/seomatic.css');
 require('bootstrap-tokenfield/dist/css/bootstrap-tokenfield.min.css');
 
 // Images

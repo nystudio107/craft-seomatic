@@ -9,18 +9,19 @@
 
 namespace nystudio107\seomatic\controllers;
 
-use craft\helpers\DateTimeHelper;
+use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
+use nystudio107\seomatic\assetbundles\seomatic\SeomaticChartAsset;
 use nystudio107\recipe\helpers\Json;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 
 use Craft;
 use craft\elements\Asset;
 use craft\elements\Category;
 use craft\elements\Entry;
+use craft\helpers\DateTimeHelper;
 use craft\helpers\UrlHelper;
 use craft\models\Site;
 use craft\web\Controller;
@@ -93,6 +94,7 @@ class SettingsController extends Controller
         // Asset bundle
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
+            Seomatic::$view->registerAssetBundle(SeomaticChartAsset::class);
         } catch (InvalidConfigException $e) {
             Craft::error($e->getMessage(), __METHOD__);
         }
