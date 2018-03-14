@@ -20,6 +20,7 @@ require('../css/seomatic-chart.css');
 // Images
 
 // JavaScript
+import {bb} from 'billboard.js';
 
 $(function () {
 
