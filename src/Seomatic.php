@@ -155,7 +155,7 @@ class Seomatic extends Plugin
     /**
      * @var string
      */
-    public $schemaVersion = '3.0.2';
+    public $schemaVersion = '3.0.3';
 
     // Public Methods
     // =========================================================================
@@ -177,28 +177,8 @@ class Seomatic extends Plugin
             self::$settings->environment = "local";
         }
         $this->name = Seomatic::$settings->pluginName;
-        // Handler: EVENT_AFTER_INSTALL_PLUGIN
-        Event::on(
-            Plugins::class,
-            Plugins::EVENT_AFTER_INSTALL_PLUGIN,
-            function (PluginEvent $event) {
-                if ($event->plugin === $this) {
-                    // Invalidate our caches after we've been installed
-                    $this->clearAllCaches();
-                    // Send them to our welcome screen
-                    $request = Craft::$app->getRequest();
-                    if ($request->isCpRequest) {
-                        Craft::$app->getResponse()->redirect(UrlHelper::cpUrl(
-                            'seomatic/dashboard',
-                            [
-                                'showWelcome' => true
-                            ]
-                        ))->send();
-                    }
-                }
-            }
-        );
-
+        // Install our event listeners
+        $this->installEventListeners();
         // We're loaded
         Craft::info(
             Craft::t(
@@ -208,17 +188,6 @@ class Seomatic extends Plugin
             ),
             __METHOD__
         );
-        // Add in our event listeners that are needed for every request
-        $this->installGlobalEventListeners();
-        // Only respond to non-console site requests
-        $request = Craft::$app->getRequest();
-        if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
-            $this->handleSiteRequest();
-        }
-        // AdminCP magic
-        if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
-            $this->handleAdminCpRequest();
-        }
     }
 
     /**
@@ -296,10 +265,58 @@ class Seomatic extends Plugin
     // =========================================================================
 
     /**
+     * Install our event listeners. We do it only after we receive the event
+     * EVENT_AFTER_LOAD_PLUGINS so that any pending db migrations can be run
+     * before our event listeners kick in
+     */
+    protected function installEventListeners()
+    {
+        // Handler: EVENT_AFTER_LOAD_PLUGINS
+        Event::on(
+            Plugins::class,
+            Plugins::EVENT_AFTER_LOAD_PLUGINS,
+            function () {
+                // Add in our event listeners that are needed for every request
+                $this->installGlobalEventListeners();
+                // Only respond to non-console site requests
+                $request = Craft::$app->getRequest();
+                if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
+                    $this->handleSiteRequest();
+                }
+                // AdminCP magic
+                if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
+                    $this->handleAdminCpRequest();
+                }
+            }
+        );
+    }
+
+    /**
      * Install global event listeners
      */
     protected function installGlobalEventListeners()
     {
+        // Handler: EVENT_AFTER_INSTALL_PLUGIN
+        Event::on(
+            Plugins::class,
+            Plugins::EVENT_AFTER_INSTALL_PLUGIN,
+            function (PluginEvent $event) {
+                if ($event->plugin === $this) {
+                    // Invalidate our caches after we've been installed
+                    $this->clearAllCaches();
+                    // Send them to our welcome screen
+                    $request = Craft::$app->getRequest();
+                    if ($request->isCpRequest) {
+                        Craft::$app->getResponse()->redirect(UrlHelper::cpUrl(
+                            'seomatic/dashboard',
+                            [
+                                'showWelcome' => true
+                            ]
+                        ))->send();
+                    }
+                }
+            }
+        );
         // Handler: Sections::EVENT_AFTER_SAVE_SECTION
         Event::on(
             Sections::class,
@@ -429,20 +446,6 @@ class Seomatic extends Plugin
                 );
             }
         );
-        // Handler: Plugins::EVENT_AFTER_INSTALL_PLUGIN
-        Event::on(
-            Plugins::class,
-            Plugins::EVENT_AFTER_INSTALL_PLUGIN,
-            function (PluginEvent $event) {
-                Craft::debug(
-                    'Plugins::EVENT_AFTER_INSTALL_PLUGIN',
-                    __METHOD__
-                );
-                if ($event->plugin === $this) {
-                    //This is our plugin that's been installed
-                }
-            }
-        );
     }
 
     /**
@@ -481,7 +484,7 @@ class Seomatic extends Plugin
         Event::on(
             View::class,
             View::EVENT_BEGIN_BODY,
-            function (Event $event) {
+            function () {
                 Craft::debug(
                     'View::EVENT_BEGIN_BODY',
                     __METHOD__
@@ -496,7 +499,7 @@ class Seomatic extends Plugin
         Event::on(
             View::class,
             View::EVENT_END_BODY,
-            function (Event $event) {
+            function () {
                 Craft::debug(
                     'View::EVENT_END_BODY',
                     __METHOD__
@@ -511,7 +514,7 @@ class Seomatic extends Plugin
         Event::on(
             View::class,
             View::EVENT_END_PAGE,
-            function (Event $event) {
+            function () {
                 Craft::debug(
                     'View::EVENT_END_PAGE',
                     __METHOD__
