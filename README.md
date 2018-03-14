@@ -49,6 +49,18 @@ SEOmatic populates your templates with SEO Meta in the same way that Craft popul
 
 SEOmatic also caches each unique SEO Meta request so that your website performance is minimally impacted by the rich SEO Meta tags provided.
 
+## SEO Resources
+
+### Crafting Modern SEO Presentation:
+
+[![Crafting Modern SEO video](https://i.vimeocdn.com/video/671925645.jpg?mw=1920&mh=1080&q=70)](http://dotall.com/sessions/seo-best-practices-from-a-developers-point-of-view)
+
+* [Crafting Modern SEO slide deck](https://speakerdeck.com/nystudio107/crafting-modern-seo)
+
+* [Modern SEO: Snake Oil vs. Substance](https://nystudio107.com/blog/modern-seo-snake-oil-vs-substance)
+
+* [JSON-LD, Structured Data and Erotica](https://nystudio107.com/blog/json-ld-structured-data-and-erotica)
+
 ## Configuring SEOmatic
 
 As soon as you install SEOmatic, it automatically will render meta data on your web pages, and create sitemaps for all of your Sections and Category Groups that have public URLs. You don't need to add any template code for this to happen.
