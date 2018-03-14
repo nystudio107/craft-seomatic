@@ -3,6 +3,7 @@
 ### 3.0.0-beta.4 - 2018.03.14
 ## Added
 * Added a validation rule for `genericAddressCountry` so it saves
+* Added a validation rules for `renderEnabled`, `separatorChar`, `displayAnalysisSidebar` and `displayPreviewSidebar` so you can save the plugin settings.
 
 ### 3.0.0-beta.3 - 2018.03.14
 ### Added
