@@ -44,7 +44,6 @@ class SeomaticChartAsset extends AssetBundle
 
         $this->css = [
             'css/seomatic-chart.css',
-            'css/billboard.css',
         ];
 
         parent::init();

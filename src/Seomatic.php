@@ -214,16 +214,16 @@ class Seomatic extends Plugin
                 'url'   => 'seomatic/dashboard',
             ];
         }
-        if ($currentUser->can('seomatic:content-meta')) {
-            $subNavs['content'] = [
-                'label' => 'Content SEO',
-                'url'   => 'seomatic/content',
-            ];
-        }
         if ($currentUser->can('seomatic:global-meta')) {
             $subNavs['global'] = [
                 'label' => 'Global SEO',
                 'url'   => 'seomatic/global',
+            ];
+        }
+        if ($currentUser->can('seomatic:content-meta')) {
+            $subNavs['content'] = [
+                'label' => 'Content SEO',
+                'url'   => 'seomatic/content',
             ];
         }
         if ($currentUser->can('seomatic:site-settings')) {
@@ -640,6 +640,8 @@ class Seomatic extends Plugin
             'seomatic' =>
                 'seomatic/settings/dashboard',
             'seomatic/dashboard' =>
+                'seomatic/settings/dashboard',
+            'seomatic/dashboard/<siteHandle:{handle}>' =>
                 'seomatic/settings/dashboard',
 
             'seomatic/global' => [
