@@ -155,7 +155,7 @@ class Seomatic extends Plugin
     /**
      * @var string
      */
-    public $schemaVersion = '3.0.3';
+    public $schemaVersion = '3.0.4';
 
     // Public Methods
     // =========================================================================
@@ -177,10 +177,10 @@ class Seomatic extends Plugin
             self::$settings->environment = "local";
         }
         $this->name = Seomatic::$settings->pluginName;
-        // Add in our Twig extensions
-        Seomatic::$view->registerTwigExtension(new SeomaticTwigExtension);
         // Install our event listeners
-        $this->installEventListeners();
+        if ($this->tableSchemaExists()) {
+            $this->installEventListeners();
+        }
         // We're loaded
         Craft::info(
             Craft::t(
@@ -267,6 +267,18 @@ class Seomatic extends Plugin
     // =========================================================================
 
     /**
+     * Determine whether our table schema exists or not; this is needed because
+     * migrations such as the install migration and base_install migration may
+     * not have been run by the time our init() method has been called
+     *
+     * @return bool
+     */
+    protected function tableSchemaExists(): bool
+    {
+        return (Craft::$app->db->schema->getTableSchema('{{%seomatic_metabundles}}') !== null);
+    }
+
+    /**
      * Install our event listeners. We do it only after we receive the event
      * EVENT_AFTER_LOAD_PLUGINS so that any pending db migrations can be run
      * before our event listeners kick in
@@ -278,6 +290,8 @@ class Seomatic extends Plugin
             Plugins::class,
             Plugins::EVENT_AFTER_LOAD_PLUGINS,
             function () {
+                // Add in our Twig extensions
+                Seomatic::$view->registerTwigExtension(new SeomaticTwigExtension);
                 // Add in our event listeners that are needed for every request
                 $this->installGlobalEventListeners();
                 // Only respond to non-console site requests
