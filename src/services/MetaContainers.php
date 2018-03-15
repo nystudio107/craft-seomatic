@@ -120,6 +120,12 @@ class MetaContainers extends Component
             if ($metaBundle) {
                 $metaBundleSourceId = $metaBundle->sourceId;
             }
+            // We need an actual $siteId here for the cache key
+            if ($siteId === null) {
+                $siteId = Craft::$app->getSites()->currentSite->id
+                    ?? Craft::$app->getSites()->primarySite->id
+                    ?? 1;
+            }
             // Load the meta containers
             $duration = Seomatic::$devMode
                 ? $this::DEVMODE_METACONTAINER_CACHE_DURATION
@@ -509,7 +515,9 @@ class MetaContainers extends Component
     protected function setMatchedElement(string $uri, int $siteId = null)
     {
         if ($siteId === null) {
-            $siteId = Craft::$app->getSites()->primarySite->id ?? 1;
+            $siteId = Craft::$app->getSites()->currentSite->id
+                ?? Craft::$app->getSites()->primarySite->id
+                ?? 1;
         }
         $uri = trim($uri, '/');
         /** @var Element $element */

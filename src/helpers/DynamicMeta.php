@@ -58,7 +58,9 @@ class DynamicMeta
     {
         $position = 1;
         if ($siteId === null) {
-            $siteId = Craft::$app->getSites()->primarySite->id ?? 1;
+            $siteId = Craft::$app->getSites()->currentSite->id
+                ?? Craft::$app->getSites()->primarySite->id
+                ?? 1;
         }
         $site = Craft::$app->getSites()->getSiteById($siteId);
         try {
