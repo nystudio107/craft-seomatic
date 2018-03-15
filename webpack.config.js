@@ -15,6 +15,9 @@ module.exports = {
             path.resolve(assetBundleRoot, './src/js/seomatic.js'),
             path.resolve(assetBundleRoot, './src/js/twig-editor.js'),
             path.resolve(assetBundleRoot, './src/js/javascript-editor.js'),
+        ],
+        'seomatic-chart': [
+            path.resolve(assetBundleRoot, './src/js/seomatic-chart.js'),
         ]
     },
     output: {
@@ -107,6 +110,7 @@ module.exports = {
     ],
     resolve: {
         alias: {
+            'billboard.css': path.resolve(__dirname,'./node_modules/billboard.js/dist/billboard.css')
         }
     },
     devServer: {

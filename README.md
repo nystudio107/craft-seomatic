@@ -9,7 +9,7 @@ SEOmatic facilitates [modern SEO best practices](https://nystudio107.com/blog/mo
 
 Related: [SEOmatic for Craft 2.x](https://github.com/nystudio107/seomatic)
 
-**Note**: This plugin may become a paid add-on when the Craft Plugin store becomes available.
+**Note**: _This plugin will cost $99.00 once Craft 3 GA is released._
 
 ## Requirements
 
@@ -48,6 +48,18 @@ It implements [JSON-LD](https://developers.google.com/schemas/formats/json-ld?hl
 SEOmatic populates your templates with SEO Meta in the same way that Craft populates your templates with `entry` variables, with a similar level of freedom and flexibility in terms of how you utilize them.
 
 SEOmatic also caches each unique SEO Meta request so that your website performance is minimally impacted by the rich SEO Meta tags provided.
+
+## SEO Resources
+
+### Crafting Modern SEO Presentation:
+
+[![Crafting Modern SEO video](https://i.vimeocdn.com/video/671925645.jpg?mw=1920&mh=1080&q=70)](http://dotall.com/sessions/seo-best-practices-from-a-developers-point-of-view)
+
+* [Crafting Modern SEO slide deck](https://speakerdeck.com/nystudio107/crafting-modern-seo)
+
+* [Modern SEO: Snake Oil vs. Substance](https://nystudio107.com/blog/modern-seo-snake-oil-vs-substance)
+
+* [JSON-LD, Structured Data and Erotica](https://nystudio107.com/blog/json-ld-structured-data-and-erotica)
 
 ## Configuring SEOmatic
 

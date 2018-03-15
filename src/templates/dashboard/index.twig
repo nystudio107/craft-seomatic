@@ -1,3 +1,5 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{# @var metaBundle \nystudio107\seomatic\models\MetaBundle #}
 {% extends '_layouts/cp' %}
 
 {% set linkGetStarted = url('seomatic/global') %}
@@ -5,7 +7,17 @@
 {% do view.registerAssetBundle("nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset") %}
 {% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/assetbundles/seomatic/dist', true) %}
 
+{% block contextMenu %}
+    {% include "seomatic/settings/_includes/sites-menu.twig" %}
+{% endblock %}
+
 {% set content %}
+    <style>
+        text.bb-chart-arcs-title {
+            font-size: 2.0em;
+            font-family: system-ui, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+        }
+    </style>
     <div class="field readable">
             {% if showWelcome %}
                 <div style="text-align:center; margin:0 auto; padding: 5% 10%;">
@@ -27,11 +39,127 @@
                     </p>
                 </div>
             {% endif %}
-            <p class="warning">
-                This section is unfinished in the SEOmatic for Craft 3 beta
-            </p>
-            <p>
-                Dashboard showing settings left to tbe setup, as well as SEO analysis.
-            </p>
-    </fiv>
+        <div class="flex">
+            <div class="flex-grow">
+                <div id="GlobalSEOChart" style="width: 300px; margin: 0 auto;"></div>
+            </div>
+            <div class="flex-grow">
+                <div id="ContentSEOChart" style="width: 300px; margin: 0 auto;"></div>
+            </div>
+            <div class="flex-grow">
+                <div id="SiteSettingsChart" style="width: 300px; margin: 0 auto;"></div>
+            </div>
+        </div>
+
+        <p class="warning">
+            This section is unfinished in the SEOmatic for Craft 3 beta
+        </p>
+    </div>
 {% endset %}
+
+
+{############### Global SEO Graph ###############}
+
+{% js %}
+    var chart = bb.generate({
+        data: {
+            columns: [
+                {% for setupGrade in setupGrades %}
+                ["{{ setupGrade.id }}", {{ globalSetupStats[loop.index0] }}],
+                {% endfor %}
+            ],
+            colors: {
+            {% for setupGrade in setupGrades %}
+                {{ setupGrade.id }}: "{{ setupGrade.color }}",
+            {% endfor %}
+            },
+            names: {
+            {% for setupGrade in setupGrades %}
+                {{ setupGrade.id }}: "{{ setupGrade.name }}",
+            {% endfor %}
+            },
+            type: "donut",
+            onclick: function(d, element) {
+                window.location = '{{ cpUrl('seomatic/global/general/' ~ currentSiteHandle) }}';
+            }
+        },
+        donut: {
+            title: "Global SEO\nSetup Grade"
+        },
+        legend: {
+            show: true
+        },
+        bindto: "#GlobalSEOChart"
+    });
+{% endjs %}
+
+{############### Content SEO Graph ###############}
+
+{% js %}
+    var chart = bb.generate({
+        data: {
+            columns: [
+                {% for setupGrade in setupGrades %}
+                ["{{ setupGrade.id }}", {{ contentSetupStats[loop.index0] }}],
+                {% endfor %}
+            ],
+            colors: {
+            {% for setupGrade in setupGrades %}
+                {{ setupGrade.id }}: "{{ setupGrade.color }}",
+            {% endfor %}
+            },
+            names: {
+            {% for setupGrade in setupGrades %}
+                {{ setupGrade.id }}: "{{ setupGrade.name }}",
+            {% endfor %}
+            },
+            type: "donut",
+            onclick: function(d, element) {
+                window.location = '{{ cpUrl('seomatic/content/' ~ currentSiteHandle) }}';
+            }
+        },
+        donut: {
+            title: "Content SEO\nSetup Grade"
+        },
+        legend: {
+            show: true
+        },
+        bindto: "#ContentSEOChart"
+    });
+{% endjs %}
+
+
+{############### Site Settings Graph ###############}
+
+{% js %}
+    var chart = bb.generate({
+        data: {
+            columns: [
+                {% for setupGrade in setupGrades %}
+                ["{{ setupGrade.id }}", {{ siteSetupStats[loop.index0] }}],
+                {% endfor %}
+            ],
+            colors: {
+            {% for setupGrade in setupGrades %}
+                {{ setupGrade.id }}: "{{ setupGrade.color }}",
+            {% endfor %}
+            },
+            names: {
+            {% for setupGrade in setupGrades %}
+                {{ setupGrade.id }}: "{{ setupGrade.name }}",
+            {% endfor %}
+            },
+            type: "donut",
+            onclick: function(d, element) {
+                window.location = '{{ cpUrl('seomatic/site/identity/' ~ currentSiteHandle) }}';
+            }
+        },
+        donut: {
+            title: "Site Settings\nSetup Grade"
+        },
+        legend: {
+            show: true
+        },
+        bindto: "#SiteSettingsChart"
+    });
+{% endjs %}

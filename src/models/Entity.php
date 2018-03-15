@@ -203,6 +203,7 @@ class Entity extends FluentModel
                     'genericAddressLocality',
                     'genericAddressRegion',
                     'genericPostalCode',
+                    'genericAddressCountry',
                     'genericGeoLatitude',
                     'genericGeoLongitude',
                     'personGender',

@@ -9,18 +9,20 @@
 
 namespace nystudio107\seomatic\controllers;
 
-use craft\helpers\DateTimeHelper;
+use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
+use nystudio107\seomatic\assetbundles\seomatic\SeomaticChartAsset;
 use nystudio107\recipe\helpers\Json;
 use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 
 use Craft;
 use craft\elements\Asset;
 use craft\elements\Category;
 use craft\elements\Entry;
+use craft\helpers\DateTimeHelper;
 use craft\helpers\UrlHelper;
 use craft\models\Site;
 use craft\web\Controller;
@@ -65,6 +67,26 @@ class SettingsController extends Controller
         ['fieldName' => 'twitterImage', 'seoField' => 'seoImage', 'transformName' => 'twitter'],
     ];
 
+    const SETUP_GRADES = [
+        ['id' => 'data1', 'name' => 'A', 'color' => '#008002'],
+        ['id' => 'data2', 'name' => 'B', 'color' => '#9ACD31'],
+        ['id' => 'data4', 'name' => 'C', 'color' => '#FFA500'],
+        ['id' => 'data5', 'name' => 'D', 'color' => '#8B0100'],
+    ];
+
+    const SEO_SETUP_FIELDS = [
+        'seoTitle',
+        'seoDescription',
+        'seoKeywords',
+        'seoImage',
+        'seoImageDescription',
+    ];
+
+    const SITE_SETUP_FIELDS = [
+        'siteName',
+        'twitterHandle',
+        'facebookProfileId',
+    ];
 
     // Protected Properties
     // =========================================================================
@@ -81,18 +103,24 @@ class SettingsController extends Controller
     /**
      * Dashboard display
      *
-     * @param bool $showWelcome
+     * @param string|null $siteHandle
+     * @param bool        $showWelcome
      *
      * @return Response The rendered result
+     * @throws NotFoundHttpException
+     * @throws \yii\web\ForbiddenHttpException
      */
-    public function actionDashboard(bool $showWelcome = false): Response
+    public function actionDashboard(string $siteHandle = null, bool $showWelcome = false): Response
     {
         $variables = [];
+        // Get the site to edit
+        $siteId = $this->getSiteIdFromHandle($siteHandle);
         $pluginName = Seomatic::$settings->pluginName;
         $templateTitle = Craft::t('seomatic', 'Dashboard');
         // Asset bundle
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
+            Seomatic::$view->registerAssetBundle(SeomaticChartAsset::class);
         } catch (InvalidConfigException $e) {
             Craft::error($e->getMessage(), __METHOD__);
         }
@@ -100,6 +128,10 @@ class SettingsController extends Controller
             '@nystudio107/seomatic/assetbundles/seomatic/dist',
             true
         );
+        // Enabled sites
+        $this->setMultiSiteVariables($siteHandle, $siteId, $variables);
+        $variables['controllerHandle'] = 'dashboard';
+
         // Basic variables
         $variables['fullPageForm'] = false;
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
@@ -117,6 +149,49 @@ class SettingsController extends Controller
         ];
         $variables['selectedSubnavItem'] = 'dashboard';
         $variables['showWelcome'] = $showWelcome;
+        // Calulate the setup grades
+        $variables['contentSetupStats'] = [];
+        $variables['globalSetupStats'] = [];
+        $variables['setupGrades'] = self::SETUP_GRADES;
+        $numFields = count(self::SEO_SETUP_FIELDS);
+        $numGrades = count(self::SETUP_GRADES);
+        while ($numGrades--) {
+            $variables['contentSetupStats'][] = 0;
+            $variables['globalSetupStats'][] = 0;
+        }
+        $numGrades = count(self::SETUP_GRADES);
+        // Content SEO grades
+        $variables['metaBundles'] = Seomatic::$plugin->metaBundles->getContentMetaBundlesForSiteId($siteId);
+        /** @var MetaBundle $metaBundle */
+        foreach ($variables['metaBundles'] as $metaBundle) {
+            $stat = 0;
+            foreach (self::SEO_SETUP_FIELDS as $setupField) {
+                $stat += intval(!empty($metaBundle->metaGlobalVars[$setupField]));
+            }
+            $stat = round($numGrades - (($stat * $numGrades) / $numFields) - 1);
+            $variables['contentSetupStats'][$stat]++;
+        }
+        // Global SEO grades
+        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle(intval($siteId));
+        $stat = 0;
+        foreach (self::SEO_SETUP_FIELDS as $setupField) {
+            $stat += intval(!empty($metaBundle->metaGlobalVars[$setupField]));
+        }
+        $stat = round($numGrades - (($stat * $numGrades) / $numFields) - 1);
+        $variables['globalSetupStats'][$stat]++;
+        // Site Settings grades
+        $numFields = count(self::SITE_SETUP_FIELDS);
+        $numGrades = count(self::SETUP_GRADES);
+        while ($numGrades--) {
+            $variables['siteSetupStats'][] = 0;
+        }
+        $numGrades = count(self::SETUP_GRADES);
+        $stat = 0;
+        foreach (self::SITE_SETUP_FIELDS as $setupField) {
+            $stat += intval(!empty($metaBundle->metaSiteVars[$setupField]));
+        }
+        $stat = round($numGrades - (($stat * $numGrades) / $numFields) - 1);
+        $variables['siteSetupStats'][$stat]++;
 
         // Render the template
         return $this->renderTemplate('seomatic/dashboard/index', $variables);
