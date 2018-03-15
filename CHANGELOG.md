@@ -4,6 +4,7 @@
 ## Added
 * Added a validation rule for `genericAddressCountry` so it saves
 * Added a validation rules for `renderEnabled`, `separatorChar`, `displayAnalysisSidebar` and `displayPreviewSidebar` so you can save the plugin settings.
+* Added initial Dashboard
 
 ## Changed
 * Don't install event listeners until after all plugins have loaded, to ensure db migrations have been run
