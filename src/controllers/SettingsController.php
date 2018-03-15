@@ -168,7 +168,10 @@ class SettingsController extends Controller
             foreach (self::SEO_SETUP_FIELDS as $setupField) {
                 $stat += intval(!empty($metaBundle->metaGlobalVars[$setupField]));
             }
-            $stat = round($numGrades - (($stat * $numGrades) / $numFields) - 1);
+            $stat = round($numGrades - (($stat * $numGrades) / $numFields));
+            if ($stat >= $numGrades) {
+                $stat = $numGrades - 1;
+            }
             $variables['contentSetupStats'][$stat]++;
         }
         // Global SEO grades
@@ -177,7 +180,10 @@ class SettingsController extends Controller
         foreach (self::SEO_SETUP_FIELDS as $setupField) {
             $stat += intval(!empty($metaBundle->metaGlobalVars[$setupField]));
         }
-        $stat = round($numGrades - (($stat * $numGrades) / $numFields) - 1);
+        $stat = round($numGrades - (($stat * $numGrades) / $numFields));
+        if ($stat >= $numGrades) {
+            $stat = $numGrades - 1;
+        }
         $variables['globalSetupStats'][$stat]++;
         // Site Settings grades
         $numFields = count(self::SITE_SETUP_FIELDS);
@@ -190,7 +196,10 @@ class SettingsController extends Controller
         foreach (self::SITE_SETUP_FIELDS as $setupField) {
             $stat += intval(!empty($metaBundle->metaSiteVars[$setupField]));
         }
-        $stat = round($numGrades - (($stat * $numGrades) / $numFields) - 1);
+        $stat = round($numGrades - (($stat * $numGrades) / $numFields));
+        if ($stat >= $numGrades) {
+            $stat = $numGrades - 1;
+        }
         $variables['siteSetupStats'][$stat]++;
 
         // Render the template
