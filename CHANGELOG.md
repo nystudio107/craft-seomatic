@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+### 3.0.0-beta.6 - 2018.03.15
+## Added
+* Check whether the `seomatic_metabundles` table exists before installing any even listeners
+
 ### 3.0.0-beta.5 - 2018.03.15
 ## Changed
 * Fixed an issue where the caching didn't work properly for multi-sites
