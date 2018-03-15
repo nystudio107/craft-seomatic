@@ -1,5 +1,11 @@
 # SEOmatic Changelog
 
+### 3.0.0-beta.5 - 2018.03.15
+## Added
+
+## Changed
+* Fixed an issue where the caching didn't work properly for multi-sites
+
 ### 3.0.0-beta.4 - 2018.03.14
 ## Added
 * Added a validation rule for `genericAddressCountry` so it saves
