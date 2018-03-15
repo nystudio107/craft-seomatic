@@ -177,6 +177,8 @@ class Seomatic extends Plugin
             self::$settings->environment = "local";
         }
         $this->name = Seomatic::$settings->pluginName;
+        // Add in our Twig extensions
+        Seomatic::$view->registerTwigExtension(new SeomaticTwigExtension);
         // Install our event listeners
         $this->installEventListeners();
         // We're loaded
@@ -453,8 +455,6 @@ class Seomatic extends Plugin
      */
     protected function handleSiteRequest()
     {
-        // Add in our Twig extensions
-        Seomatic::$view->registerTwigExtension(new SeomaticTwigExtension);
         // Load the sitemap containers
         Seomatic::$plugin->sitemaps->loadSitemapContainers();
         // Load the frontend template containers
@@ -532,8 +532,6 @@ class Seomatic extends Plugin
      */
     protected function handleAdminCpRequest()
     {
-        // Add in our Twig extensions
-        Seomatic::$view->registerTwigExtension(new SeomaticTwigExtension);
         // Handler: UrlManager::EVENT_REGISTER_CP_URL_RULES
         Event::on(
             UrlManager::class,
