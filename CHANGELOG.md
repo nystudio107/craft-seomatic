@@ -1,8 +1,6 @@
 # SEOmatic Changelog
 
 ### 3.0.0-beta.8 - 2018.03.16
-## Added
-
 ## Changed
 * Fixed per-environment rendering of attributes
 * Made meta bundle updating non-destructive to existing data
