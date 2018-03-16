@@ -201,7 +201,8 @@ class MetaContainers extends Component
         $robots = Seomatic::$seomaticVariable->tag->get('robots');
         if (!empty($robots)) {
             $response = Craft::$app->getResponse();
-            $content = $robots->content;
+            $robotsArray = $robots->renderAttributes();
+            $content = $robotsArray['content'] ?? $robots->content;
             if (!empty($content)) {
                 if (is_array($content)) {
                     $contentHeader = '';
