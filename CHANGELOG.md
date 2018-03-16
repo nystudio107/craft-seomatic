@@ -7,6 +7,8 @@
 ## Changed
 * Fixed an issue where the last breadcrumb on the Content SEO `edit-content` page was a 404
 * Fixed a caching issue that could result in stale data if you used `seomatic.helper.loadMetadataForUri()`
+* Don't automatically generate thumbnails for videos in the sitemap
+* Changed the Dashboard charts over to gauge charts
 
 ### 3.0.0-beta.6 - 2018.03.15
 ## Added
