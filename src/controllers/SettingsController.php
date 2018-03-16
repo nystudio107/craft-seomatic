@@ -151,13 +151,11 @@ class SettingsController extends Controller
         $variables['showWelcome'] = $showWelcome;
         // Calulate the setup grades
         $variables['contentSetupStats'] = [];
-        $variables['globalSetupStats'] = [];
         $variables['setupGrades'] = self::SETUP_GRADES;
         $numFields = count(self::SEO_SETUP_FIELDS);
         $numGrades = count(self::SETUP_GRADES);
         while ($numGrades--) {
             $variables['contentSetupStats'][] = 0;
-            $variables['globalSetupStats'][] = 0;
         }
         $numGrades = count(self::SETUP_GRADES);
         // Content SEO grades
@@ -180,27 +178,17 @@ class SettingsController extends Controller
         foreach (self::SEO_SETUP_FIELDS as $setupField) {
             $stat += intval(!empty($metaBundle->metaGlobalVars[$setupField]));
         }
-        $stat = round($numGrades - (($stat * $numGrades) / $numFields));
-        if ($stat >= $numGrades) {
-            $stat = $numGrades - 1;
-        }
-        $variables['globalSetupStats'][$stat]++;
+        $stat = round($numGrades - (($stat * 100) / $numFields));
+        $variables['globalSetupStat'] = $stat;
         // Site Settings grades
         $numFields = count(self::SITE_SETUP_FIELDS);
-        $numGrades = count(self::SETUP_GRADES);
-        while ($numGrades--) {
-            $variables['siteSetupStats'][] = 0;
-        }
         $numGrades = count(self::SETUP_GRADES);
         $stat = 0;
         foreach (self::SITE_SETUP_FIELDS as $setupField) {
             $stat += intval(!empty($metaBundle->metaSiteVars[$setupField]));
         }
-        $stat = round($numGrades - (($stat * $numGrades) / $numFields));
-        if ($stat >= $numGrades) {
-            $stat = $numGrades - 1;
-        }
-        $variables['siteSetupStats'][$stat]++;
+        $stat = round($numGrades - (($stat * 100) / $numFields));
+        $variables['siteSetupStat'] = $stat;
 
         // Render the template
         return $this->renderTemplate('seomatic/dashboard/index', $variables);
@@ -449,7 +437,7 @@ class SettingsController extends Controller
             ],
             [
                 'label' => $metaBundle->sourceName.' · '.$subSectionTitle,
-                'url'   => UrlHelper::cpUrl("seomatic/content/${subSection}/${sourceBundleType}/${sourceHandle}"),
+                'url'   => UrlHelper::cpUrl("seomatic/edit-content/${subSection}/${sourceBundleType}/${sourceHandle}"),
             ],
         ];
         $variables['selectedSubnavItem'] = 'content';
