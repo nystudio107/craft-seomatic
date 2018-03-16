@@ -179,7 +179,7 @@ class SettingsController extends Controller
         foreach (self::SEO_SETUP_FIELDS as $setupField) {
             $stat += intval(!empty($metaBundle->metaGlobalVars[$setupField]));
         }
-        $stat = round($numGrades - (($stat * 100) / $numFields));
+        $stat = round(($stat / $numFields) * 100);
         $variables['globalSetupStat'] = $stat;
         // Site Settings grades
         $numFields = count(self::SITE_SETUP_FIELDS);
@@ -188,7 +188,7 @@ class SettingsController extends Controller
         foreach (self::SITE_SETUP_FIELDS as $setupField) {
             $stat += intval(!empty($metaBundle->metaSiteVars[$setupField]));
         }
-        $stat = round($numGrades - (($stat * 100) / $numFields));
+        $stat = round(($stat / $numFields) * 100);
         $variables['siteSetupStat'] = $stat;
 
         // Render the template
