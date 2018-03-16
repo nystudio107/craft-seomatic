@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ### 3.0.0-beta.7 - 2018.03.16
+## Added
+* Added a "Same as Global Site Name Position" setting as the default for the **Site Name Position** Content SEO settings
+
 ## Changed
 * Fixed an issue where the last breadcrumb on the Content SEO `edit-content` page was a 404
 * Fixed a caching issue that could result in stale data if you used `seomatic.helper.loadMetadataForUri()`
