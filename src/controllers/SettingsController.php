@@ -183,7 +183,6 @@ class SettingsController extends Controller
         $variables['globalSetupStat'] = $stat;
         // Site Settings grades
         $numFields = count(self::SITE_SETUP_FIELDS);
-        $numGrades = count(self::SETUP_GRADES);
         $stat = 0;
         foreach (self::SITE_SETUP_FIELDS as $setupField) {
             $stat += intval(!empty($metaBundle->metaSiteVars[$setupField]));
