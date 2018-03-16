@@ -64,30 +64,39 @@
     var chart = bb.generate({
         data: {
             columns: [
-                {% for setupGrade in setupGrades %}
-                ["{{ setupGrade.id }}", {{ globalSetupStats[loop.index0] }}],
-                {% endfor %}
+                ["data", {{ globalSetupStat }}],
             ],
-            colors: {
-            {% for setupGrade in setupGrades %}
-                {{ setupGrade.id }}: "{{ setupGrade.color }}",
-            {% endfor %}
-            },
+            type: "gauge",
             names: {
-            {% for setupGrade in setupGrades %}
-                {{ setupGrade.id }}: "{{ setupGrade.name }}",
-            {% endfor %}
+                data: "Global SEO Setup",
             },
-            type: "donut",
             onclick: function(d, element) {
                 window.location = '{{ cpUrl('seomatic/global/general/' ~ currentSiteHandle) }}';
             }
         },
-        donut: {
+        gauge: {
             title: "Global SEO\nSetup Grade"
         },
+        color: {
+            pattern: [
+        {% for setupGrade in setupGrades |reverse %}
+            "{{ setupGrade.color }}",
+        {% endfor %}
+            ],
+            threshold: {
+                values: [
+                    30,
+                    60,
+                    90,
+                    100
+                ]
+            }
+        },
         legend: {
-            show: true
+            show: false
+        },
+        size: {
+            height: 180
         },
         bindto: "#GlobalSEOChart"
     });
@@ -135,30 +144,39 @@
     var chart = bb.generate({
         data: {
             columns: [
-                {% for setupGrade in setupGrades %}
-                ["{{ setupGrade.id }}", {{ siteSetupStats[loop.index0] }}],
-                {% endfor %}
+                ["data", {{ siteSetupStat }}],
             ],
-            colors: {
-            {% for setupGrade in setupGrades %}
-                {{ setupGrade.id }}: "{{ setupGrade.color }}",
-            {% endfor %}
-            },
             names: {
-            {% for setupGrade in setupGrades %}
-                {{ setupGrade.id }}: "{{ setupGrade.name }}",
-            {% endfor %}
+                data: "Site Settings Setup",
             },
-            type: "donut",
+            type: "gauge",
             onclick: function(d, element) {
                 window.location = '{{ cpUrl('seomatic/site/identity/' ~ currentSiteHandle) }}';
             }
         },
-        donut: {
+        gauge: {
             title: "Site Settings\nSetup Grade"
         },
+        color: {
+            pattern: [
+        {% for setupGrade in setupGrades |reverse %}
+            "{{ setupGrade.color }}",
+        {% endfor %}
+            ],
+            threshold: {
+                values: [
+                    30,
+                    60,
+                    90,
+                    100
+                ]
+            }
+        },
         legend: {
-            show: true
+            show: false
+        },
+        size: {
+            height: 180
         },
         bindto: "#SiteSettingsChart"
     });
