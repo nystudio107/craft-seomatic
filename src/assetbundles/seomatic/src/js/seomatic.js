@@ -122,6 +122,7 @@ $(function () {
         var popupValue = $(this).val();
         switch (popupValue) {
             case "sameAsSeo":
+            case "sameAsGlobal":
             case "sameAsSiteTwitter":
                 $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').hide();
                 $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').hide();
@@ -145,6 +146,7 @@ $(function () {
     $('.seomatic-textSourceSelect > select').on('change', function(e) {
         switch (this.value) {
             case "sameAsSeo":
+            case "sameAsGlobal":
             case "sameAsSiteTwitter":
                 $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').hide();
                 $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').hide();

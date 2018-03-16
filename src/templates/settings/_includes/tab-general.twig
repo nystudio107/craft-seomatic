@@ -62,20 +62,48 @@
 
 {############### Site Name Position ###############}
 
-{% namespace "globals" %}
-    {{ forms.selectField({
-        label: "Site Name Position" |t("seomatic"),
-        instructions: ("Where the Site Name is placed relative to the Title in the &lt;title&gt; tag. The Site Name is set in [Site Settings](" ~ cpUrl('seomatic/site') ~ ")") |t("seomatic"),
-        id: "siteNamePosition",
-        name: "siteNamePosition",
-        options: {
-            before: "Before" |t("seomatic"),
-            after: "After" |t("seomatic"),
-            none: "None" |t("seomatic"),
-        },
-        value: globals.siteNamePosition,
-        warning: false,
-    }) }}
+{% set textOptions = {
+    fromCustom: "Custom Position" |t("seomatic"),
+} %}
+{% set positionSuffix = "" %}
+{% if pageContext == "content" %}
+    {% set positionSuffix = " Source" %}
+    {% set textOptions = { sameAsGlobal: "Same as Global Site Name Position" |t("seomatic"), } | merge(textOptions) %}
+{% endif %}
+
+<div class="field seomatic-textSourceWrapper" id="settings-siteNamePositionSource-field">
+    <div class="heading">
+        <label id="settings-siteNamePositionSource-label" for="settings-siteNamePositionSource">{{ "Site Name Position#{positionSuffix}" |t("seomatic") }}</label>
+        <div class="instructions">{{ ("Where the Site Name is placed relative to the Title in the &lt;title&gt; tag. The Site Name is set in [Site Settings](" ~ cpUrl('seomatic/site') ~ ")") |t("seomatic") |markdown }}
+        </div>
+    </div>
+    {% namespace "settings" %}
+        <div class="heading" {% if pageContext == "global" %}style="display: none;"{% endif %}#}>
+            {{ forms.select({
+                id: "siteNamePositionSource",
+                name: "siteNamePositionSource",
+                options: textOptions,
+                value: settings.siteNamePositionSource,
+                class: "seomatic-textSourceSelect"
+            }) }}
+        </div>
+    {% endnamespace %}
+
+    {% namespace "globals" %}
+    <div class="heading seomatic-textSourceFromUrl">
+        {{ forms.selectField({
+            id: "siteNamePosition",
+            name: "siteNamePosition",
+            options: {
+                before: "Before" |t("seomatic"),
+                after: "After" |t("seomatic"),
+                none: "None" |t("seomatic"),
+            },
+            value: globals.siteNamePosition,
+            warning: false,
+        }) }}
+    </div>
+</div>
 {% endnamespace %}
 
 {############### SEO Description ###############}

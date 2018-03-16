@@ -14,5 +14,5 @@
 
 {% set entity = site.identity %}
 {% namespace "site[identity]" %}
-    {% include "seomatic/settings/site/_includes/entity-partial.twig" %}
+    {% include "seomatic/settings/site/_includes/entity-partial.twig" with {"pageContext": "identity"} %}
 {% endnamespace %}

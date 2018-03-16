@@ -92,11 +92,14 @@
     fromCustom: "Custom Position" |t("seomatic"),
 } %}
 {% set textOptions = { sameAsSeo: "Same as Site Name Position" |t("seomatic"), } | merge(textOptions) %}
+{% if pageContext == "content" %}
+    {% set textOptions = { sameAsGlobal: "Same as Global Facebook OpenGraph Site Name Position" |t("seomatic"), } | merge(textOptions) %}
+{% endif %}
 
 <div class="field seomatic-textSourceWrapper" id="settings-ogSiteNamePositionSource-field">
     <div class="heading">
-        <label id="settings-ogSiteNamePositionSource-label" for="settings-ogTitleSource">{{ "Facebook OpenGraph Site Name Position Source" |t("seomatic") }}</label>
-        <div class="instructions"><p>{{ "Where the Site Name is placed relative to the Facebook OpenGraph Title in the &lt;og:title&gt; tag" |t("seomatic") }}</p>
+        <label id="settings-ogSiteNamePositionSource-label" for="settings-ogSiteNamePositionSource">{{ "Facebook OpenGraph Site Name Position Source" |t("seomatic") }}</label>
+        <div class="instructions"><p>{{ "Where the Site Name is placed relative to the Facebook OpenGraph Title in the &lt;og:title&gt; tag" |t("seomatic") |raw }}</p>
         </div>
     </div>
     {% namespace "settings" %}

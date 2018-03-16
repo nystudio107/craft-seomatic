@@ -285,13 +285,13 @@ class Seomatic extends Plugin
      */
     protected function installEventListeners()
     {
+        // Add in our Twig extensions
+        Seomatic::$view->registerTwigExtension(new SeomaticTwigExtension);
         // Handler: EVENT_AFTER_LOAD_PLUGINS
         Event::on(
             Plugins::class,
             Plugins::EVENT_AFTER_LOAD_PLUGINS,
             function () {
-                // Add in our Twig extensions
-                Seomatic::$view->registerTwigExtension(new SeomaticTwigExtension);
                 // Add in our event listeners that are needed for every request
                 $this->installGlobalEventListeners();
                 // Only respond to non-console site requests
