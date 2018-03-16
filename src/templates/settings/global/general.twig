@@ -27,7 +27,7 @@
     {% if currentUser.can("seomatic:global-meta:general") %}
         <div id="tab-content-general">
             <h2>{{ subSectionTitle ~ " Settings" |t("seomatic") }}</h2>
-            {% include "seomatic/settings/_includes/tab-general.twig" %}
+            {% include "seomatic/settings/_includes/tab-general.twig" with {"pageContext": "global"} %}
         </div>
     {% endif %}
     

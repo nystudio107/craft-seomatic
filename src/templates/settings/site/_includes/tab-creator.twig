@@ -3,5 +3,5 @@
 
 {% set entity = site.creator %}
 {% namespace "site[creator]" %}
-    {% include "seomatic/settings/site/_includes/entity-partial.twig" %}
+    {% include "seomatic/settings/site/_includes/entity-partial.twig" with {"pageContext": "creator"} %}
 {% endnamespace %}

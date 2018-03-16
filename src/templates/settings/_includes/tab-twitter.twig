@@ -140,11 +140,14 @@
     fromCustom: "Custom Position" |t("seomatic"),
 } %}
 {% set textOptions = { sameAsSeo: "Same as Site Name Position" |t("seomatic"), } | merge(textOptions) %}
+{% if pageContext == "content" %}
+    {% set textOptions = { sameAsGlobal: "Same as Global Twitter Site Name Position" |t("seomatic"), } | merge(textOptions) %}
+{% endif %}
 
 <div class="field seomatic-textSourceWrapper" id="settings-twitterSiteNamePositionSource-field">
     <div class="heading">
-        <label id="settings-twitterSiteNamePositionSource-label" for="settings-twitterTitleSource">{{ "Twitter Site Name Position Source" |t("seomatic") }}</label>
-        <div class="instructions"><p>{{ "Where the Site Name is placed relative to the Twitter Title in the &lt;twitter:title&gt; tag" |t("seomatic") }}</p>
+        <label id="settings-twitterSiteNamePositionSource-label" for="settings-twitterSiteNamePositionSource">{{ "Twitter Site Name Position Source" |t("seomatic") }}</label>
+        <div class="instructions"><p>{{ "Where the Site Name is placed relative to the Twitter Title in the &lt;twitter:title&gt; tag" |t("seomatic") |raw }}</p>
         </div>
     </div>
     {% namespace "settings" %}

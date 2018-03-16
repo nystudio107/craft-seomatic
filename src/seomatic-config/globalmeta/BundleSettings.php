@@ -19,6 +19,7 @@ return [
     '*' => [
         'seoTitleSource'                => 'fromCustom',
         'seoTitleField'                 => '',
+        'siteNamePositionSource'        => 'fromCustom',
         'seoDescriptionSource'          => 'fromCustom',
         'seoDescriptionField'           => '',
         'seoKeywordsSource'             => 'fromCustom',

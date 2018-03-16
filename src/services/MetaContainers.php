@@ -154,6 +154,7 @@ class MetaContainers extends Component
                 $duration,
                 $dependency
             );
+            Seomatic::$seomaticVariable->init();
             MetaValueHelper::cache();
             $this->loadingContainers = false;
         }
@@ -238,11 +239,13 @@ class MetaContainers extends Component
      */
     public function previewMetaContainers(string $uri = '', int $siteId = null, bool $parseVariables = false)
     {
+        // It's possible this won't exist at this point
+        if (!Seomatic::$seomaticVariable) {
+            // Create our variable and stash it in the plugin for global access
+            Seomatic::$seomaticVariable = new SeomaticVariable();
+        }
         $this->loadMetaContainers($uri, $siteId);
         Seomatic::$previewingMetaContainers = true;
-        Seomatic::$seomaticVariable = new SeomaticVariable();
-        Seomatic::$seomaticVariable->init();
-        MetaValueHelper::cache();
         if ($parseVariables) {
             $this->parseGlobalVars();
         }

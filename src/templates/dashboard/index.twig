@@ -41,12 +41,15 @@
             {% endif %}
         <div class="flex">
             <div class="flex-grow">
+                <h3 class="centeralign">Global SEO Setup</h3>
                 <div id="GlobalSEOChart" style="width: 300px; margin: 0 auto;"></div>
             </div>
             <div class="flex-grow">
+                <h3 class="centeralign">Content SEO Setup</h3>
                 <div id="ContentSEOChart" style="width: 300px; margin: 0 auto;"></div>
             </div>
             <div class="flex-grow">
+                <h3 class="centeralign">Site Settings Setup</h3>
                 <div id="SiteSettingsChart" style="width: 300px; margin: 0 auto;"></div>
             </div>
         </div>
@@ -64,30 +67,42 @@
     var chart = bb.generate({
         data: {
             columns: [
-                {% for setupGrade in setupGrades %}
-                ["{{ setupGrade.id }}", {{ globalSetupStats[loop.index0] }}],
-                {% endfor %}
+                ["data", {{ globalSetupStat }}],
             ],
-            colors: {
-            {% for setupGrade in setupGrades %}
-                {{ setupGrade.id }}: "{{ setupGrade.color }}",
-            {% endfor %}
-            },
+            type: "gauge",
             names: {
-            {% for setupGrade in setupGrades %}
-                {{ setupGrade.id }}: "{{ setupGrade.name }}",
-            {% endfor %}
+                data: "Global SEO Setup",
             },
-            type: "donut",
             onclick: function(d, element) {
                 window.location = '{{ cpUrl('seomatic/global/general/' ~ currentSiteHandle) }}';
             }
         },
-        donut: {
-            title: "Global SEO\nSetup Grade"
+        gauge: {
+            label: {
+                show: false,
+            },
+            fullCircle: true,
+        },
+        color: {
+            pattern: [
+        {% for setupGrade in setupGrades |reverse %}
+            "{{ setupGrade.color }}",
+        {% endfor %}
+            ],
+            threshold: {
+                values: [
+                    30,
+                    60,
+                    90,
+                    100
+                ]
+            }
         },
         legend: {
-            show: true
+            show: false
+        },
+        size: {
+            height: 320
         },
         bindto: "#GlobalSEOChart"
     });
@@ -119,7 +134,7 @@
             }
         },
         donut: {
-            title: "Content SEO\nSetup Grade"
+            title: "Overall Grade: "
         },
         legend: {
             show: true
@@ -135,30 +150,42 @@
     var chart = bb.generate({
         data: {
             columns: [
-                {% for setupGrade in setupGrades %}
-                ["{{ setupGrade.id }}", {{ siteSetupStats[loop.index0] }}],
-                {% endfor %}
+                ["data", {{ siteSetupStat }}],
             ],
-            colors: {
-            {% for setupGrade in setupGrades %}
-                {{ setupGrade.id }}: "{{ setupGrade.color }}",
-            {% endfor %}
-            },
             names: {
-            {% for setupGrade in setupGrades %}
-                {{ setupGrade.id }}: "{{ setupGrade.name }}",
-            {% endfor %}
+                data: "Site Settings Setup",
             },
-            type: "donut",
+            type: "gauge",
             onclick: function(d, element) {
                 window.location = '{{ cpUrl('seomatic/site/identity/' ~ currentSiteHandle) }}';
             }
         },
-        donut: {
-            title: "Site Settings\nSetup Grade"
+        gauge: {
+            label: {
+                show: false,
+            },
+            fullCircle: true,
+        },
+        color: {
+            pattern: [
+        {% for setupGrade in setupGrades |reverse %}
+            "{{ setupGrade.color }}",
+        {% endfor %}
+            ],
+            threshold: {
+                values: [
+                    30,
+                    60,
+                    90,
+                    100
+                ]
+            }
         },
         legend: {
-            show: true
+            show: false
+        },
+        size: {
+            height: 320
         },
         bindto: "#SiteSettingsChart"
     });

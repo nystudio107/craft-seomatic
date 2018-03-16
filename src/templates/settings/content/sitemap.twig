@@ -27,7 +27,7 @@
     {% if currentUser.can("seomatic:content-meta:sitemap") %}
         <div id="tab-content-sitemap">
             <h2>{{ subSectionTitle ~ " Settings" |t("seomatic") }}</h2>
-            {% include "seomatic/settings/_includes/tab-sitemap.twig" %}
+            {% include "seomatic/settings/_includes/tab-sitemap.twig" with {"pageContext": "content"} %}
         </div>
     {% endif %}
     
