@@ -97,7 +97,9 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
         // Set any per-environment attributes
         $envVars = ArrayHelper::getValue($this->environment, Seomatic::$settings->environment);
         if ($envVars) {
-            $this->setAttributes($envVars);
+            foreach ($envVars as $key => $value) {
+                $data[$key] = $value;
+            }
         }
         if ($this->include) {
             return Dependency::validateDependencies($this->dependencies);
