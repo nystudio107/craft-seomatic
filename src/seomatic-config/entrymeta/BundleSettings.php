@@ -19,6 +19,7 @@ return [
     '*' => [
         'seoTitleSource'                => 'fromField',
         'seoTitleField'                 => 'title',
+        'siteNamePositionSource'        => 'sameAsGlobal',
         'seoDescriptionSource'          => 'fromCustom',
         'seoDescriptionField'           => '',
         'seoKeywordsSource'             => 'fromCustom',
@@ -34,7 +35,7 @@ return [
         'twitterCreatorField'           => '',
         'twitterTitleSource'            => 'sameAsSeo',
         'twitterTitleField'             => '',
-        'twitterSiteNamePositionSource' => 'fromCustom',
+        'twitterSiteNamePositionSource' => 'sameAsGlobal',
         'twitterDescriptionSource'      => 'sameAsSeo',
         'twitterDescriptionField'       => '',
         'twitterImageIds'               => [],
@@ -46,7 +47,7 @@ return [
 
         'ogTitleSource'                 => 'sameAsSeo',
         'ogTitleField'                  => '',
-        'ogSiteNamePositionSource'      => 'fromCustom',
+        'ogSiteNamePositionSource'      => 'sameAsGlobal',
         'ogDescriptionSource'           => 'sameAsSeo',
         'ogDescriptionField'            => '',
         'ogImageIds'                    => [],

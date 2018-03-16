@@ -47,6 +47,7 @@ class SettingsController extends Controller
 
     const PULL_TEXT_FIELDS = [
         ['fieldName' => 'seoTitle', 'seoField' => 'seoTitle'],
+        ['fieldName' => 'siteNamePosition', 'seoField' => 'siteNamePosition'],
         ['fieldName' => 'seoDescription', 'seoField' => 'seoDescription'],
         ['fieldName' => 'seoKeywords', 'seoField' => 'seoKeywords'],
         ['fieldName' => 'seoImageDescription', 'seoField' => 'seoImageDescription'],
@@ -840,6 +841,11 @@ class SettingsController extends Controller
                     case 'sameAsSiteTwitter':
                         $globalsSettings[$fieldName] =
                             '{seomatic.site.'.$seoField.'}';
+                        break;
+
+                    case 'sameAsGlobal':
+                        $globalsSettings[$fieldName] =
+                            '';
                         break;
 
                     case 'fromField':

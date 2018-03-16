@@ -56,6 +56,11 @@ class MetaBundleSettings extends VarsModel
     public $seoTitleField;
 
     /**
+     * @var string The source that the Twitter site name position should come from
+     */
+    public $siteNamePositionSource;
+
+    /**
      * @var string The source that the SEO description should come from
      */
     public $seoDescriptionSource;
@@ -246,6 +251,7 @@ class MetaBundleSettings extends VarsModel
                 [
                     'seoTitleSource',
                     'seoTitleField',
+                    'siteNamePositionSource',
                     'seoDescriptionSource',
                     'seoDescriptionField',
                     'seoKeywordsSource',
@@ -310,8 +316,9 @@ class MetaBundleSettings extends VarsModel
                 ],
             ],
             [
-                ['twitterSiteNamePositionSource', 'ogSiteNamePositionSource'], 'in', 'range' => [
+                ['siteNamePositionSource', 'twitterSiteNamePositionSource', 'ogSiteNamePositionSource'], 'in', 'range' => [
                 'sameAsSeo',
+                'sameAsGlobal',
                 'fromCustom',
                 ],
             ],
