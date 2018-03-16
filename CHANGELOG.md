@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+### 3.0.0-beta.7 - 2018.03.16
+## Changed
+* Fixed an issue where the last breadcrumb on the Content SEO `edit-content` page was a 404
+
 ### 3.0.0-beta.6 - 2018.03.15
 ## Added
 * Check whether the `seomatic_metabundles` table exists before installing any even listeners
