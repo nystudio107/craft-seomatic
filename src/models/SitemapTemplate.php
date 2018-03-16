@@ -351,9 +351,6 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                     $lines[] = '      <video:content_loc>';
                     $lines[] = '        '.$asset->getUrl();
                     $lines[] = '      </video:content_loc>';
-                    $lines[] = '      <video:thumbnail_loc>';
-                    $lines[] = '        '.$asset->getThumbUrl(320);
-                    $lines[] = '      </video:thumbnail_loc>';
                     // Handle the dynamic field => property mappings
                     foreach ($metaBundle->metaSitemapVars->sitemapVideoFieldMap as $row) {
                         $fieldName = $row['field'] ?? '';
