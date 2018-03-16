@@ -23,7 +23,7 @@ class RobotsTag extends MetaTag
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'ReferrerTag';
+    const ITEM_TYPE = 'RobotsTag';
 
     // Static Methods
     // =========================================================================
