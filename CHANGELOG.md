@@ -1,5 +1,12 @@
 # SEOmatic Changelog
 
+### 3.0.0-beta.8 - 2018.03.16
+## Added
+
+## Changed
+* Fixed per-environment rendering of attributes
+* Made meta bundle updating non-destructive to existing data
+
 ### 3.0.0-beta.7 - 2018.03.16
 ## Added
 * Added a "Same as Global Site Name Position" setting as the default for the **Site Name Position** Content SEO settings
