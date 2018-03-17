@@ -41,6 +41,14 @@ The following are currently works in progress:
 * **Documentation** - the documentation needs to be more fully fleshed out
 * **Field** - there is no SEOmatic Field anymore; it's not necessary given the new architecture. Depending on demand, it may be brought back.
 
+### Can I use it on a live production site?
+
+Like any beta software, SEOmatic for Craft CMS 3 may have issues that need addressing. However, we have been using SEOmatic for Craft CMS 3 on a number of live production sites for some time without incident.
+
+The largest question is whether some of the unfinished features (as detailed above) are an issue for you. If they are not, and you're willing accept that all software is of varying degrees of perfection (with beta software tending towards the "less perfect" end of the spectrum), go for it.
+
+Report any issues you find on the [SEOmatic Issues](https://github.com/nystudio107/craft-seomatic/issues) page, and you should see a fairly rapid turn-around time in them being addressed.
+
 ### Upgrading from SEOmatic 1.x for Craft CMS 2.x
 
 If you are upgrading a site from Craft CMS 2.x to Craft CMS 3.x that used the older SEOmatic plugin, here's what you need to know.
