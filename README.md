@@ -7,7 +7,7 @@ SEOmatic facilitates [modern SEO best practices](https://nystudio107.com/blog/mo
 
 ![Screenshot](resources/img/plugin-logo.png)
 
-Related: [SEOmatic for Craft 2.x](https://github.com/nystudio107/seomatic)
+Related: [SEOmatic for Craft 2.x](https://github.com/nystudio107/seomatic). SEOmatic for Craft CMS 3 is a complete re-write & re-architecture from scratch.
 
 **Note**: _This plugin will cost $99.00 once Craft 3 GA is released._
 
@@ -28,7 +28,11 @@ SEOmatic works on Craft 3.x.
 
 ## SEOmatic Beta Notes
 
+### Issues
+
 SEOmatic for Craft CMS 3 is currently in beta; that means it _may_ be a little rough around the edges. Please report any issues you find to the [SEOmatic Issues](https://github.com/nystudio107/craft-seomatic/issues) page.
+
+### Work in Progress
 
 The following are currently works in progress:
 
@@ -36,6 +40,18 @@ The following are currently works in progress:
 * **Content Analytics** - the Content Analytics sidebar doesn't show anything interesting yet
 * **Documentation** - the documentation needs to be more fully fleshed out
 * **Field** - there is no SEOmatic Field anymore; it's not necessary given the new architecture. Depending on demand, it may be brought back.
+
+### Upgrading from SEOmatic 1.x for Craft CMS 2.x
+
+If you are upgrading a site from Craft CMS 2.x to Craft CMS 3.x that used the older SEOmatic plugin, here's what you need to know.
+
+SEOmatic for Craft CMS 3 is a complete re-write and re-architecture from scratch of the plugin. This allowed us to take what we learned from SEOmatic 1.x, and rebuild it with a much more robust and extendable architecture.
+
+This also means that SEOmatic for Craft CMS 3 has little in common with the older plugin, both from a code point of view, and also conceptually. As such there isn't a way to migrate data in a way that makes sense; instead, you should just set up SEOmatic for Craft CMS 3 fresh.
+
+Thankfully, due to the new architecture, this is quite easy to do. If we do [bring back the SEOmatic Field](https://github.com/nystudio107/craft-seomatic/issues/14) (which is looking very likely at), then there will be a data migration.
+
+Still, we think the best way to update sites using SEOmatic is to start fresh, and explore how the conceptual changes in the plugin affect how you use it. We hope you love it!
 
 ## SEOmatic Overview
 
