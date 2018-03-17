@@ -49,9 +49,9 @@ SEOmatic for Craft CMS 3 is a complete re-write and re-architecture from scratch
 
 This also means that SEOmatic for Craft CMS 3 has little in common with the older plugin, both from a code point of view, and also conceptually. As such there isn't a way to migrate data in a way that makes sense; instead, you should just set up SEOmatic for Craft CMS 3 fresh.
 
-Thankfully, due to the new architecture, this is quite easy to do. If we do [bring back the SEOmatic Field](https://github.com/nystudio107/craft-seomatic/issues/14) (which is looking very likely at), then there will be a data migration.
+Thankfully, due to the new architecture, this is quite easy to do. If we do [bring back the SEOmatic Field](https://github.com/nystudio107/craft-seomatic/issues/14) (which is looking very likely), then there will be a data migration.
 
-Still, we think the best way to update sites using SEOmatic is to start fresh, and explore how the conceptual changes in the plugin affect how you use it. We hope you love it!
+Still, we think the best way to update sites using SEOmatic is to start fresh, and explore how the conceptual changes in the plugin affect how you use it. In most cases, you don't even need to use an SEOmatic Field, and the setup is cleaner and easier without it! We hope you love it!
 
 ## SEOmatic Overview
 
