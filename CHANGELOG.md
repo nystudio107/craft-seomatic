@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+### 3.0.0-beta.9 - 2018.03.17
+## Changed
+* Fixed incorrect `moz-transform` vendor prefix that caused the sidebar SEO preview to look weird in FireFox
+
 ### 3.0.0-beta.8 - 2018.03.16
 ## Changed
 * Fixed per-environment rendering of attributes
