@@ -939,6 +939,43 @@ To get a decomposed version of a given [Schema.org](http://schema.org/docs/full.
 /actions/seomatic/json-ld/get-decomposed-type?schemaType=Article
 ```
 
+To get a hierarchical array of all of the schema types: 
+
+```
+/actions/seomatic/json-ld/get-type-array?path=Article
+```
+
+You can narrow this down to a specific sub-type list by passing in a `path` of schema types delimited by a `.`:
+```
+/actions/seomatic/json-ld/get-type-array?path=CreativeWork.Article
+```
+...this would output all of the sub-types of `Article`:
+```
+{
+  "AdvertiserContentArticle": "AdvertiserContentArticle",
+  "NewsArticle": {
+    "AnalysisNewsArticle": "AnalysisNewsArticle",
+    "BackgroundNewsArticle": "BackgroundNewsArticle",
+    "OpinionNewsArticle": "OpinionNewsArticle",
+    "ReportageNewsArticle": "ReportageNewsArticle",
+    "ReviewNewsArticle": "ReviewNewsArticle"
+  },
+  "Report": "Report",
+  "SatiricalArticle": "SatiricalArticle",
+  "ScholarlyArticle": {
+    "MedicalScholarlyArticle": "MedicalScholarlyArticle"
+  },
+  "SocialMediaPosting": {
+    "BlogPosting": {
+      "LiveBlogPosting": "LiveBlogPosting"
+    },
+    "DiscussionForumPosting": "DiscussionForumPosting"
+  },
+  "TechArticle": {
+    "APIReference": "APIReference"
+  }
+}
+```
 
 ## SEOmatic Meta Object Roadmap
 
