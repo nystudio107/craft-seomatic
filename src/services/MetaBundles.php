@@ -645,7 +645,7 @@ class MetaBundles extends Component
     protected function createGlobalMetaBundleForSite(int $siteId, $baseConfig = []): MetaBundle
     {
         // Create a new meta bundle with propagated defaults
-        $metaBundleDefaults = ArrayHelper::merge(
+        $metaBundleDefaults = ArrayHelper::strictMerge(
             ConfigHelper::getConfigFromFile('globalmeta/Bundle'),
             [
                 'sourceSiteId' => $siteId,
@@ -657,7 +657,7 @@ class MetaBundles extends Component
             [ArrayHelper::class, 'unsetEmptyChildren']
         );
         // Merge them together
-        $metaBundle = MetaBundle::create(ArrayHelper::merge(
+        $metaBundle = MetaBundle::create(ArrayHelper::strictMerge(
             $metaBundleDefaults,
             $baseConfig
         ));
@@ -708,7 +708,7 @@ class MetaBundles extends Component
                     $dateUpdated = new \DateTime();
                 }
                 // Create a new meta bundle with propagated defaults
-                $metaBundleDefaults = array_merge(
+                $metaBundleDefaults = ArrayHelper::strictMerge(
                     ConfigHelper::getConfigFromFile('entrymeta/Bundle'),
                     [
                         'sourceId'              => $section->id,
@@ -727,7 +727,7 @@ class MetaBundles extends Component
                     [ArrayHelper::class, 'unsetEmptyChildren']
                 );
                 // Merge them together
-                $metaBundle = MetaBundle::create(ArrayHelper::merge(
+                $metaBundle = MetaBundle::create(ArrayHelper::strictMerge(
                     $metaBundleDefaults,
                     $baseConfig
                 ));
@@ -780,7 +780,7 @@ class MetaBundles extends Component
                     $dateUpdated = new \DateTime();
                 }
                 // Create a new meta bundle with propagated defaults
-                $metaBundleDefaults = array_merge(
+                $metaBundleDefaults = ArrayHelper::strictMerge(
                     ConfigHelper::getConfigFromFile('categorymeta/Bundle'),
                     [
                         'sourceId'              => $category->id,
@@ -792,7 +792,13 @@ class MetaBundles extends Component
                         'sourceDateUpdated'     => $dateUpdated,
                     ]
                 );
-                $metaBundle = MetaBundle::create(ArrayHelper::merge(
+                // Remove any empty keys from our file-based config
+                $metaBundleDefaults = ArrayHelper::arrayFilterRecursive(
+                    $metaBundleDefaults,
+                    [ArrayHelper::class, 'unsetEmptyChildren']
+                );
+                // Merge them together
+                $metaBundle = MetaBundle::create(ArrayHelper::strictMerge(
                     $metaBundleDefaults,
                     $baseConfig
                 ));
