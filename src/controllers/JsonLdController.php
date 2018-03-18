@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\controllers;
 
-use nystudio107\seomatic\models\MetaJsonLd;
+use nystudio107\seomatic\helpers\Schema as SchemaHelper;
 
 use craft\web\Controller;
 
@@ -22,73 +22,54 @@ use craft\web\Controller;
  */
 class JsonLdController extends Controller
 {
+    // Properties
+    // =========================================================================
+
+    /**
+     * @inheritdoc
+     */
+    protected $allowAnonymous = [
+        'get-type',
+        'get-decomposed-type',
+        'get-type-array',
+    ];
+
     // Public Methods
     // =========================================================================
 
     /**
      * Get the fully composed schema type
      *
-     * @param $schemaType
+     * @param string $schemaType
      *
      * @return \yii\web\Response
      */
     public function actionGetType($schemaType)
     {
-        $result = null;
-        $jsonLdType = MetaJsonLd::create($schemaType);
-
-        if ($jsonLdType) {
-            // Get the static properties
-            try {
-                $classRef = new \ReflectionClass(get_class($jsonLdType));
-            } catch (\ReflectionException $e) {
-                $classRef = null;
-            }
-            if ($classRef) {
-                $result = $classRef->getStaticProperties();
-            }
-        }
-
-        return $this->asJson($result);
+        return $this->asJson(SchemaHelper::getSchemaType($schemaType));
     }
 
     /**
      * Get the decomposed schema type
      *
-     * @param $schemaType
+     * @param string $schemaType
      *
      * @return \yii\web\Response
      */
     public function actionGetDecomposedType($schemaType)
     {
-        $result = [];
-        while ($schemaType) {
-            $className = 'nystudio107\\seomatic\\models\\jsonld\\'.$schemaType;
-            if (class_exists($className)) {
-                try {
-                    $classRef = new \ReflectionClass($className);
-                } catch (\ReflectionException $e) {
-                    $classRef = null;
-                }
-                if ($classRef) {
-                    $staticProps = $classRef->getStaticProperties();
+        return $this->asJson(SchemaHelper::getDecomposedSchemaType($schemaType));
+    }
 
-                    foreach ($staticProps as $key => $value) {
-                        if ($key[0] == '_') {
-                            $newKey = ltrim($key, '_');
-                            $staticProps[$newKey] = $value;
-                            unset($staticProps[$key]);
-                        }
-                    }
-                    $result[$schemaType] = $staticProps;
-                    $schemaType = $staticProps['schemaTypeExtends'];
-                    if ($schemaType == "JsonLdType") {
-                        $schemaType = null;
-                    }
-                }
-            }
-        }
-
-        return $this->asJson($result);
+    /**
+     * Get the decomposed schema type
+     *
+     * @param string $path
+     *
+     * @return \yii\web\Response
+     */
+    public function actionGetTypeArray($path)
+    {
+        return $this->asJson(SchemaHelper::getSchemaArray($path));
     }
 }
