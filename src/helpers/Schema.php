@@ -27,6 +27,7 @@ class Schema
     // =========================================================================
 
     const SCHEMA_PATH_DELIMITER = '.';
+    const MENU_INDENT_STEP = 4;
 
     // Static Properties
     // =========================================================================
@@ -104,6 +105,20 @@ class Schema
     }
 
     /**
+     * Return a flattened, indented menu of the given $path
+     *
+     * @param string $path
+     *
+     * @return array
+     */
+    public static function getSchemaMenu($path = ''): array
+    {
+        $schemaTypes = self::getSchemaArray($path);
+
+        return self::flattenSchemaArray($schemaTypes, 0);
+    }
+
+    /**
      * Return a hierarchical array of schema types, starting at $path. The $path
      * is specified as SchemaType.SubSchemaType using SCHEMA_PATH_DELIMITER as
      * the delimiter.
@@ -130,6 +145,29 @@ class Schema
         }
 
         return $typesArray;
+    }
+
+    /**
+     * @param array $typesArray
+     * @param       $indentLevel
+     *
+     * @return array
+     */
+    protected static function flattenSchemaArray(array $typesArray, int $indentLevel): array
+    {
+        $result = [];
+        foreach ($typesArray as $key => $value) {
+            $indent = str_repeat('&nbsp;', $indentLevel);
+            if (is_array($value)) {
+                $result[$key] = $indent . $key;
+                $value = self::flattenSchemaArray($value, $indentLevel + self::MENU_INDENT_STEP);
+                $result = array_merge($result, $value);
+            } else {
+                $result[$key] = $indent . $value;
+            }
+        }
+
+        return $result;
     }
 
     /**

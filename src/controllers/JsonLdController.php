@@ -32,6 +32,7 @@ class JsonLdController extends Controller
         'get-type',
         'get-decomposed-type',
         'get-type-array',
+        'get-type-menu',
     ];
 
     // Public Methods
@@ -62,7 +63,7 @@ class JsonLdController extends Controller
     }
 
     /**
-     * Get the decomposed schema type
+     * Get an array of schema types
      *
      * @param string $path
      *
@@ -72,4 +73,17 @@ class JsonLdController extends Controller
     {
         return $this->asJson(SchemaHelper::getSchemaArray($path));
     }
+
+    /**
+     * Get a flattened menu of schema types as an array
+     *
+     * @param string $path
+     *
+     * @return \yii\web\Response
+     */
+    public function actionGetTypeMenu($path)
+    {
+        return $this->asJson(SchemaHelper::getSchemaMenu($path));
+    }
+
 }
