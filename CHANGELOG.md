@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-### 3.0.0-beta.9 - 2018.03.17
+### 3.0.0-beta.9 - 2018.03.18
 ## Added
 * Added `Schema` helper class & controller in preparation for dynamic schema types displayed in the AdminCP
 
