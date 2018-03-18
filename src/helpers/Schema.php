@@ -241,7 +241,13 @@ class Schema
             if (is_array($value)) {
                 $value = self::makeSchemaAssociative($value);
             }
-            $result[$key] = $value;
+            if (isset($value['layer'])) {
+                if ($value['layer'] == 'core') {
+                    $result[$key] = $value;
+                }
+            } else {
+                $result[$key] = $value;
+            }
         }
 
         return $result;
