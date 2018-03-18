@@ -33,6 +33,7 @@ class JsonLdController extends Controller
         'get-decomposed-type',
         'get-type-array',
         'get-type-menu',
+        'get-single-type-menu',
     ];
 
     // Public Methods
@@ -86,4 +87,15 @@ class JsonLdController extends Controller
         return $this->asJson(SchemaHelper::getSchemaMenu($path));
     }
 
+    /**
+     * Return a single menu of schemas starting at $path
+     *
+     * @param string $path
+     *
+     * @return \yii\web\Response
+     */
+    public function actionGetSingleTypeMenu($path)
+    {
+        return $this->asJson(SchemaHelper::getSingleSchemaMenu($path));
+    }
 }

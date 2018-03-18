@@ -119,6 +119,24 @@ class Schema
     }
 
     /**
+     * Return a single menu of schemas starting at $path
+     *
+     * @param string $path
+     *
+     * @return array
+     */
+    public static function getSingleSchemaMenu($path = ''): array
+    {
+        $result = [];
+        $schemaTypes = self::getSchemaArray($path);
+        foreach ($schemaTypes as $key => $value) {
+            $result[$key] = $key;
+        }
+
+        return $result;
+    }
+
+    /**
      * Return a hierarchical array of schema types, starting at $path. The $path
      * is specified as SchemaType.SubSchemaType using SCHEMA_PATH_DELIMITER as
      * the delimiter.
