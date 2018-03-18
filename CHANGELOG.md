@@ -1,5 +1,13 @@
 # SEOmatic Changelog
 
+### 3.0.0-beta.9 - 2018.03.18
+## Added
+* Added `Schema` helper class & controller in preparation for dynamic schema types displayed in the AdminCP
+
+## Changed
+* Fixed incorrect `moz-transform` vendor prefix that caused the sidebar SEO preview to look weird in FireFox
+* Fixed a nasty bug that could cause improper merging of config arrays, resulting in an ever-growing column size in the db
+
 ### 3.0.0-beta.8 - 2018.03.16
 ## Changed
 * Fixed per-environment rendering of attributes
