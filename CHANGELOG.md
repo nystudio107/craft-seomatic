@@ -6,6 +6,7 @@
 
 ## Changed
 * Fixed incorrect `moz-transform` vendor prefix that caused the sidebar SEO preview to look weird in FireFox
+* Fixed a nasty bug that could cause improper merging of config arrays, resulting in an ever-growing column size in the db
 
 ### 3.0.0-beta.8 - 2018.03.16
 ## Changed
