@@ -1,5 +1,11 @@
 # SEOmatic Changelog
 
+### 3.0.0-beta.11 - 2018.03.19
+## Changed
+* Refactored the meta bundle update process to preserve user configured meta bundle settings
+* Throw a 404 if a sitemap is hit but sitemaps have been disabled for that section
+* Exclude section sitemaps from the sitemap index if sitemaps have been disabled for that section
+
 ### 3.0.0-beta.10 - 2018.03.18
 ## Changed
 * Reverted incorrect bundle merging

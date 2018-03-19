@@ -28,6 +28,7 @@ use craft\helpers\UrlHelper;
 use craft\models\SiteGroup;
 
 use yii\caching\TagDependency;
+use yii\web\NotFoundHttpException;
 
 /**
  * @author    nystudio107
@@ -138,9 +139,13 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
             // One sitemap entry for each element
             $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle($type, $handle, $siteId);
+            // If it's disabled, just throw a 404
+            if (empty($metaBundle) || !$metaBundle->metaSitemapVars->sitemapUrls) {
+                throw new NotFoundHttpException(Craft::t('seomatic', 'Page not found.'));
+            }
             $multiSite = count($metaBundle->sourceAltSiteSettings) > 1;
             $elements = null;
-            if ($metaBundle && $metaBundle->metaSitemapVars->sitemapUrls) {
+            if ($metaBundle) {
                 $urlsetLine = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"';
                 if ($metaBundle->metaSitemapVars->sitemapAssets) {
                     $urlsetLine .= ' xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"';
