@@ -977,7 +977,7 @@ You can narrow this down to a specific sub-type list by passing in a `path` of s
 }
 ```
 
-## SEOmatic Meta Object Roadmap
+## SEOmatic Roadmap
 
 Some things to do, and ideas for potential features:
 
