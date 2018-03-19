@@ -267,9 +267,9 @@ class MetaBundles extends Component
     /**
      * Invalidate the caches and data structures associated with this MetaBundle
      *
-     * @param string $sourceType
-     * @param int|null    $sourceId
-     * @param bool   $isNew
+     * @param string   $sourceType
+     * @param int|null $sourceId
+     * @param bool     $isNew
      */
     public function invalidateMetaBundleById(string $sourceType, int $sourceId, bool $isNew = false)
     {
@@ -605,13 +605,12 @@ class MetaBundles extends Component
         // If the config file has a newer version than the $metaBundleArray, merge them
         if (!empty($config)) {
             if (version_compare($config['bundleVersion'], $metaBundle->bundleVersion, '>')) {
-                $metaBundleArray = $metaBundle->toArray();
                 // Create a new meta bundle
                 switch ($sourceType) {
                     case self::GLOBAL_META_BUNDLE:
                         $metaBundle = $this->createGlobalMetaBundleForSite(
                             $metaBundle->sourceSiteId,
-                            $metaBundleArray
+                            $metaBundle
                         );
                         break;
                     case self::CATEGORYGROUP_META_BUNDLE:
@@ -619,7 +618,7 @@ class MetaBundles extends Component
                         $metaBundle = $this->createMetaBundleFromCategory(
                             $category,
                             $metaBundle->sourceSiteId,
-                            $metaBundleArray
+                            $metaBundle
                         );
                         break;
                     case self::SECTION_META_BUNDLE:
@@ -627,7 +626,7 @@ class MetaBundles extends Component
                         $metaBundle = $this->createMetaBundleFromSection(
                             $section,
                             $metaBundle->sourceSiteId,
-                            $metaBundleArray
+                            $metaBundle
                         );
                         break;
                     // @TODO: handle commerce products
@@ -637,45 +636,37 @@ class MetaBundles extends Component
     }
 
     /**
-     * @param int   $siteId
-     * @param array $baseConfig
+     * @param int             $siteId
+     * @param MetaBundle|null $baseConfig
      *
      * @return MetaBundle
      */
-    protected function createGlobalMetaBundleForSite(int $siteId, $baseConfig = []): MetaBundle
+    protected function createGlobalMetaBundleForSite(int $siteId, $baseConfig = null): MetaBundle
     {
         // Create a new meta bundle with propagated defaults
-        $metaBundleDefaults = ArrayHelper::strictMerge(
+        $metaBundleDefaults = ArrayHelper::merge(
             ConfigHelper::getConfigFromFile('globalmeta/Bundle'),
             [
                 'sourceSiteId' => $siteId,
             ]
         );
-        // Remove any empty keys from our file-based config
-        $metaBundleDefaults = ArrayHelper::arrayFilterRecursive(
-            $metaBundleDefaults,
-            [ArrayHelper::class, 'unsetEmptyChildren']
-        );
-        // Merge them together
-        $metaBundle = MetaBundle::create(ArrayHelper::strictMerge(
-            $baseConfig,
-            $metaBundleDefaults
-        ));
-        if ($metaBundle) {
-            $this->updateMetaBundle($metaBundle, $siteId);
+        $metaBundle = MetaBundle::create($metaBundleDefaults);
+        if (!empty($baseConfig)) {
+            $this->mergeMetaBundleSettings($metaBundle, $baseConfig);
         }
+        $this->updateMetaBundle($metaBundle, $siteId);
 
         return $metaBundle;
     }
 
     /**
-     * @param Section $section
-     * @param int     $siteId
-     * @param array   $baseConfig
+     * @param Section         $section
+     * @param int             $siteId
+     * @param MetaBundle|null $baseConfig
      *
      * @return null|MetaBundle
      */
-    protected function createMetaBundleFromSection(Section $section, int $siteId, $baseConfig = [])
+    protected function createMetaBundleFromSection(Section $section, int $siteId, $baseConfig = null)
     {
         $metaBundle = null;
         // Get the site settings and turn them into arrays
@@ -708,7 +699,7 @@ class MetaBundles extends Component
                     $dateUpdated = new \DateTime();
                 }
                 // Create a new meta bundle with propagated defaults
-                $metaBundleDefaults = ArrayHelper::strictMerge(
+                $metaBundleDefaults = ArrayHelper::merge(
                     ConfigHelper::getConfigFromFile('entrymeta/Bundle'),
                     [
                         'sourceId'              => $section->id,
@@ -721,19 +712,11 @@ class MetaBundles extends Component
                         'sourceDateUpdated'     => $dateUpdated,
                     ]
                 );
-                // Remove any empty keys from our file-based config
-                $metaBundleDefaults = ArrayHelper::arrayFilterRecursive(
-                    $metaBundleDefaults,
-                    [ArrayHelper::class, 'unsetEmptyChildren']
-                );
-                // Merge them together
-                $metaBundle = MetaBundle::create(ArrayHelper::strictMerge(
-                    $baseConfig,
-                    $metaBundleDefaults
-                ));
-                if ($metaBundle) {
-                    $this->updateMetaBundle($metaBundle, $siteId);
+                $metaBundle = MetaBundle::create($metaBundleDefaults);
+                if (!empty($baseConfig)) {
+                    $this->mergeMetaBundleSettings($metaBundle, $baseConfig);
                 }
+                $this->updateMetaBundle($metaBundle, $siteId);
             }
         }
 
@@ -741,13 +724,13 @@ class MetaBundles extends Component
     }
 
     /**
-     * @param CategoryGroup $category
-     * @param int           $siteId
-     * @param array         $baseConfig
+     * @param CategoryGroup   $category
+     * @param int             $siteId
+     * @param MetaBundle|null $baseConfig
      *
      * @return null|MetaBundle
      */
-    protected function createMetaBundleFromCategory(CategoryGroup $category, int $siteId, $baseConfig = [])
+    protected function createMetaBundleFromCategory(CategoryGroup $category, int $siteId, $baseConfig = null)
     {
         $metaBundle = null;
         // Get the site settings and turn them into arrays
@@ -780,7 +763,7 @@ class MetaBundles extends Component
                     $dateUpdated = new \DateTime();
                 }
                 // Create a new meta bundle with propagated defaults
-                $metaBundleDefaults = ArrayHelper::strictMerge(
+                $metaBundleDefaults = ArrayHelper::merge(
                     ConfigHelper::getConfigFromFile('categorymeta/Bundle'),
                     [
                         'sourceId'              => $category->id,
@@ -792,22 +775,38 @@ class MetaBundles extends Component
                         'sourceDateUpdated'     => $dateUpdated,
                     ]
                 );
-                // Remove any empty keys from our file-based config
-                $metaBundleDefaults = ArrayHelper::arrayFilterRecursive(
-                    $metaBundleDefaults,
-                    [ArrayHelper::class, 'unsetEmptyChildren']
-                );
-                // Merge them together
-                $metaBundle = MetaBundle::create(ArrayHelper::strictMerge(
-                    $baseConfig,
-                    $metaBundleDefaults
-                ));
-                if ($metaBundle) {
-                    $this->updateMetaBundle($metaBundle, $siteId);
+                $metaBundle = MetaBundle::create($metaBundleDefaults);
+                if (!empty($baseConfig)) {
+                    $this->mergeMetaBundleSettings($metaBundle, $baseConfig);
                 }
+                $this->updateMetaBundle($metaBundle, $siteId);
             }
         }
 
         return $metaBundle;
+    }
+
+
+    /**
+     * Preserve user settings from the meta bundle when updating it from the
+     * config
+     *
+     * @param MetaBundle $metaBundle
+     * @param MetaBundle $baseConfig
+     */
+    protected function mergeMetaBundleSettings(MetaBundle $metaBundle, MetaBundle $baseConfig)
+    {
+        // Preserve the metaGlobalVars
+        $attributes = $baseConfig->metaGlobalVars->getAttributes();
+        $metaBundle->metaGlobalVars->setAttributes($attributes);
+        // Preserve the metaSiteVars
+        $attributes = $baseConfig->metaSiteVars->getAttributes();
+        $metaBundle->metaSiteVars->setAttributes($attributes);
+        // Preserve the metaSitemapVars
+        $attributes = $baseConfig->metaSitemapVars->getAttributes();
+        $metaBundle->metaSitemapVars->setAttributes($attributes);
+        // Preserve the metaBundleSettings
+        $attributes = $baseConfig->metaBundleSettings->getAttributes();
+        $metaBundle->metaBundleSettings->setAttributes($attributes);
     }
 }
