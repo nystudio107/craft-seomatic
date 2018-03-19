@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+### 3.0.0-beta.11 - 2018.03.19
+## Changed
+* Refactored the meta bundle update process to preserve user configured meta bundle settings
+
 ### 3.0.0-beta.10 - 2018.03.18
 ## Changed
 * Reverted incorrect bundle merging
