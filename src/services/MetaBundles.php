@@ -658,8 +658,8 @@ class MetaBundles extends Component
         );
         // Merge them together
         $metaBundle = MetaBundle::create(ArrayHelper::strictMerge(
-            $metaBundleDefaults,
-            $baseConfig
+            $baseConfig,
+            $metaBundleDefaults
         ));
         if ($metaBundle) {
             $this->updateMetaBundle($metaBundle, $siteId);
@@ -728,8 +728,8 @@ class MetaBundles extends Component
                 );
                 // Merge them together
                 $metaBundle = MetaBundle::create(ArrayHelper::strictMerge(
-                    $metaBundleDefaults,
-                    $baseConfig
+                    $baseConfig,
+                    $metaBundleDefaults
                 ));
                 if ($metaBundle) {
                     $this->updateMetaBundle($metaBundle, $siteId);
@@ -799,8 +799,8 @@ class MetaBundles extends Component
                 );
                 // Merge them together
                 $metaBundle = MetaBundle::create(ArrayHelper::strictMerge(
-                    $metaBundleDefaults,
-                    $baseConfig
+                    $baseConfig,
+                    $metaBundleDefaults
                 ));
                 if ($metaBundle) {
                     $this->updateMetaBundle($metaBundle, $siteId);
