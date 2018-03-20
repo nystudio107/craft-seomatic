@@ -1,5 +1,11 @@
 # SEOmatic Changelog
 
+### 3.0.0-beta.12 - 2018.03.19
+## Added
+* Added colored status indicators on the Content SEO index page that match the colors in the donut chart on the Dashboard
+
+## Changed
+
 ### 3.0.0-beta.11 - 2018.03.19
 ## Changed
 * Refactored the meta bundle update process to preserve user configured meta bundle settings
