@@ -34,8 +34,20 @@
         </thead>
 
         <tbody class="sections">
+        {% set numGrades = seoSetupGrades |length %}
         {% for metaBundle in metaBundles %}
             {% set num_entries = 0 %}
+            {% set stat = 0 %}
+            {% set numFields = seoSetupFields |length %}
+            {% for fieldName in seoSetupFields %}
+                {% if metaBundle.metaGlobalVars[fieldName] is defined and metaBundle.metaGlobalVars[fieldName] |length %}
+                    {% set stat = stat + 1 %}
+                {% endif %}
+            {% endfor %}
+            {% set stat = round(numGrades - ((stat * numGrades) / numFields)) %}
+            {% if stat >= numGrades %}
+                {% set stat = numGrades - 1 %}
+            {% endif %}
             <tr>
                 
                 {############### Name ###############}
@@ -48,6 +60,8 @@
                         {% case 'category' %}
                             {% set sourcePrefix =  'settings/categories/' %}
                     {% endswitch %}
+                    {% set thisGrade = seoSetupGrades[stat] %}
+                    <span class="status" style="background-color: {{ thisGrade['color'] }}" title="Setup Grade: {{ thisGrade['name'] }}"></span>
                     <a href="{{ cpUrl("seomatic/edit-content/general/#{metaBundle.sourceBundleType}/#{metaBundle.sourceHandle}/#{currentSiteHandle}") }}">{{ metaBundle.sourceName }}</a>
                     <a class="go" href="{{ url(sourcePrefix ~ metaBundle.sourceId) }}"></a>
                 </td>
