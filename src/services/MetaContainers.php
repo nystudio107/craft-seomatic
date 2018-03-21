@@ -183,37 +183,12 @@ class MetaContainers extends Component
      */
     public function includeMetaContainers()
     {
-        $this->includeHttpHeaders();
+        DynamicMetaHelper::includeHttpHeaders();
         $this->parseGlobalVars();
         foreach ($this->metaContainers as $metaContainer) {
             /** @var $metaContainer MetaContainer */
             if ($metaContainer->include) {
                 $metaContainer->includeMetaData();
-            }
-        }
-    }
-
-    /**
-     * Include any headers for this request
-     */
-    public function includeHttpHeaders()
-    {
-        $robots = Seomatic::$seomaticVariable->tag->get('robots');
-        if (!empty($robots)) {
-            $response = Craft::$app->getResponse();
-            $robotsArray = $robots->renderAttributes();
-            $content = $robotsArray['content'] ?? $robots->content;
-            if (!empty($content)) {
-                if (is_array($content)) {
-                    $contentHeader = '';
-                    foreach ($content as $contentVal) {
-                        $contentHeader .= ($contentVal.',');
-                    }
-                    $contentHeader = rtrim($contentHeader, ',');
-                } else {
-                    $contentHeader = $content;
-                }
-                $response->headers->add('X-Robots-Tag', $contentHeader);
             }
         }
     }
