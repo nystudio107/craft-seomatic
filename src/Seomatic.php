@@ -177,7 +177,7 @@ class Seomatic extends Plugin
             self::$settings->environment = "local";
         }
         $this->name = Seomatic::$settings->pluginName;
-        // Install our event listeners
+        // Install our event listeners only if our table schema exists
         if ($this->tableSchemaExists()) {
             $this->installEventListeners();
         }
