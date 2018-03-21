@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+### 3.0.0-beta.13 - 2018.03.20
+## Changed
+* Don't look for `getPathInfo()` during a console request
+
 ### 3.0.0-beta.12 - 2018.03.19
 ## Added
 * Added colored status indicators on the Content SEO index page that match the colors in the donut chart on the Dashboard
