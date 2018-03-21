@@ -391,6 +391,16 @@ or
  {% do seomatic.meta.seoTitle("{category.title}") %}
 ```
 
+There may be occasions where you want to output the final parsed value of an SEOmatic variable on the frontend. You can do that via `seomatic.meta.parsedValue()`. For example:
+
+```twig
+{{ seomatic.meta.parsedValue('seoDescription') }}
+```
+
+This will output the final parsed value of the `seomatic.meta.seoDescription` variable.
+
+This parsing is done automatically by SEOmatic just before the meta information is added to your page.
+
 #### Meta Variables: `seomatic.meta`
 
 The `seomatic.meta` variable contains all of the meta variables that control the SEO that will be rendered on the site. They are pre-populated from your settings and content in the AdminCP, but you can change them as you see fit.
