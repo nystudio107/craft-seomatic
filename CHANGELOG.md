@@ -4,6 +4,7 @@
 ## Added
 * Added colored status indicators on the Content SEO index page that match the colors in the donut chart on the Dashboard
 * Added `seomatic.helper.seoFileLink()` to allow setting the `X-Robots-Tag` and `Link` headers on static files as per [Advanced rel="canonical" HTTP Headers](https://moz.com/blog/how-to-advanced-relcanonical-http-headers)
+* Added a `Link` header for the canonical URL
 
 ## Changed
 * Don't display SEO previews if the Section has no URLs
