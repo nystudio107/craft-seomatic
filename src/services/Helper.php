@@ -20,8 +20,8 @@ use craft\base\Component;
 use craft\elements\Asset;
 use craft\elements\db\MatrixBlockQuery;
 use craft\elements\db\TagQuery;
+use craft\helpers\Template;
 use craft\helpers\UrlHelper;
-use yii\base\Exception;
 
 /**
  * @author    nystudio107
@@ -36,9 +36,33 @@ class Helper extends Component
     // Public Methods
     // =========================================================================
 
+    /**
+     * Allow setting the X-Robots-Tag and Link headers on static files as per:
+     * https://moz.com/blog/how-to-advanced-relcanonical-http-headers
+     *
+     * @param        $url
+     * @param string $robots
+     * @param string $canonical
+     * @param bool   $inline
+     *
+     * @return \Twig_Markup
+     */
+    public static function seoFileLink($url, $robots = 'all', $canonical = '', $inline = true)
+    {
+        return Template::raw(UrlHelper::actionUrl(
+            'seomatic/file/seo-file-link',
+            [
+                'url' => $url,
+                'robots' => $robots,
+                'canonical' => $canonical,
+                'inline' => $inline
+            ]
+        ));
+    }
 
     /**
-     * Load the appropriate meta containers for the given $uri and optional $siteId
+     * Load the appropriate meta containers for the given $uri and optional
+     * $siteId
      *
      * @param string   $uri
      * @param int|null $siteId
@@ -102,7 +126,7 @@ class Helper extends Component
      * together.
      *
      * @param MatrixBlockQuery $matrixQuery
-     * @param string      $fieldHandle
+     * @param string           $fieldHandle
      *
      * @return string
      */
@@ -127,7 +151,8 @@ class Helper extends Component
     }
 
     /**
-     * Extract a summary consisting of the 3 most important sentences from the text
+     * Extract a summary consisting of the 3 most important sentences from the
+     * text
      *
      * @param string $text
      * @param bool   $useStopWords
@@ -140,7 +165,8 @@ class Helper extends Component
     }
 
     /**
-     * Transform the $asset for social media sites in $transformName and optional $siteId
+     * Transform the $asset for social media sites in $transformName and
+     * optional $siteId
      *
      * @param int|Asset $asset         the Asset or Asset ID
      * @param string    $transformName the name of the transform to apply
