@@ -3,6 +3,7 @@
 ### 3.0.0-beta.12 - 2018.03.19
 ## Added
 * Added colored status indicators on the Content SEO index page that match the colors in the donut chart on the Dashboard
+* Added `seomatic.helper.seoFileLink()` to allow setting the `X-Robots-Tag` and `Link` headers on static files as per [Advanced rel="canonical" HTTP Headers](https://moz.com/blog/how-to-advanced-relcanonical-http-headers)
 
 ## Changed
 * Don't display SEO previews if the Section has no URLs
