@@ -37,6 +37,53 @@ class DynamicMeta
     // =========================================================================
 
     /**
+     * Include any headers for this request
+     */
+    public static function includeHttpHeaders()
+    {
+        $response = Craft::$app->getResponse();
+        // X-Robots-Tag header
+        $robots = Seomatic::$seomaticVariable->tag->get('robots');
+        if (!empty($robots)) {
+            $robotsArray = $robots->renderAttributes();
+            $content = $robotsArray['content'] ?? $robots->content;
+            if (!empty($content)) {
+                // The content property can be a string or an array
+                if (is_array($content)) {
+                    $headerValue = '';
+                    foreach ($content as $contentVal) {
+                        $headerValue .= ($contentVal.',');
+                    }
+                    $headerValue = rtrim($headerValue, ',');
+                } else {
+                    $headerValue = $content;
+                }
+                $response->headers->add('X-Robots-Tag', $headerValue);
+            }
+        }
+        // Link canonical header
+        $canonical = Seomatic::$seomaticVariable->link->get('canonical');
+        if (!empty($canonical)) {
+            $canonicalArray = $canonical->renderAttributes();
+            $href = $canonicalArray['href'] ?? $canonical->href;
+            if (!empty($href)) {
+                // The href property can be a string or an array
+                if (is_array($href)) {
+                    $headerValue = '';
+                    foreach ($href as $hrefVal) {
+                        $headerValue .= ('<'.$hrefVal.'>'.',');
+                    }
+                    $headerValue = rtrim($headerValue, ',');
+                } else {
+                    $headerValue = '<'.$href.'>';
+                }
+                $headerValue .= '; rel="canonical"';
+                $response->headers->add('Link', $headerValue);
+            }
+        }
+    }
+
+    /**
      * Add any custom/dynamic meta to the containers
      *
      * @param string $uri

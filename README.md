@@ -391,6 +391,16 @@ or
  {% do seomatic.meta.seoTitle("{category.title}") %}
 ```
 
+There may be occasions where you want to output the final parsed value of an SEOmatic variable on the frontend. You can do that via `seomatic.meta.parsedValue()`. For example:
+
+```twig
+{{ seomatic.meta.parsedValue('seoDescription') }}
+```
+
+This will output the final parsed value of the `seomatic.meta.seoDescription` variable.
+
+This parsing is done automatically by SEOmatic just before the meta information is added to your page.
+
 #### Meta Variables: `seomatic.meta`
 
 The `seomatic.meta` variable contains all of the meta variables that control the SEO that will be rendered on the site. They are pre-populated from your settings and content in the AdminCP, but you can change them as you see fit.
@@ -461,7 +471,7 @@ The `seomatic.config` variables are the global plugin configuration variables se
 * **`seomatic.helper.extractKeywords(TEXT, LIMIT)`** - Extract up to `LIMIT` most important keywords from `TEXT`
 * **`seomatic.helper.extractSummary(TEXT)`** - Extract the most important 3 sentences from `TEXT`
 * **`seomatic.helper.socialTransform(ASSET, TRANSFORMNAME)`** - Transform the `ASSET` (either an Asset or an Asset ID) for social media sites in `TRANSFORMNAME`; valid values are `base`, `facebook`, `twitter-summary`, and `twitter-large`
-
+* **`seomatic.helper.seoFileLink(FILE_URL, ROBOTS, CANONICAL, INLINE)`** - Generates a link to a local or remote file that allows you to set the `X-Robots-Tag` header via `ROBOTS` (defaults to `all`) and `Link` canonical header via `CANONICAL` (defaults to `''`) as per [Advanced rel="canonical" HTTP Headers](https://moz.com/blog/how-to-advanced-relcanonical-http-headers). `INLINE` controls whether the file will be displayed inline or downloaded. If any values are empty `''`, the headers will not be included.
 
 #### SEOmatic Tags & Containers
 
@@ -977,7 +987,7 @@ You can narrow this down to a specific sub-type list by passing in a `path` of s
 }
 ```
 
-## SEOmatic Meta Object Roadmap
+## SEOmatic Roadmap
 
 Some things to do, and ideas for potential features:
 
