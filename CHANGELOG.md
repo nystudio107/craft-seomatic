@@ -5,6 +5,7 @@
 * Added colored status indicators on the Content SEO index page that match the colors in the donut chart on the Dashboard
 
 ## Changed
+* Don't display SEO previews if the Section has no URLs
 
 ### 3.0.0-beta.11 - 2018.03.19
 ## Changed
