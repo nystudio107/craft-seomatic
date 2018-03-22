@@ -539,6 +539,20 @@ class Seomatic extends Plugin
                 }
             }
         );
+        // Handler: UrlManager::EVENT_REGISTER_SITE_URL_RULES
+        Event::on(
+            UrlManager::class,
+            UrlManager::EVENT_REGISTER_SITE_URL_RULES,
+            function (RegisterUrlRulesEvent $event) {
+                Craft::debug(
+                    'UrlManager::EVENT_REGISTER_SITE_URL_RULES',
+                    __METHOD__
+                );
+                $path = 'seomatic/seo-file-link/<url:[^\/]+>/<robots:[^\/]+>/<canonical:[^\/]+>/<inline:\d+>/<fileName:[-\w\.*]+>';
+                $route = Seomatic::$plugin->handle.'/file/seo-file-link';
+                $event->rules[$path] = ['route' => $route];
+            }
+        );
     }
 
     /**
