@@ -1,5 +1,8 @@
 # SEOmatic Changelog
 
+### 3.0.0-beta.14 - 2018.03.23
+## Changed
+
 ### 3.0.0-beta.13 - 2018.03.22
 ## Changed
 * Don't look for `getPathInfo()` during a console request
