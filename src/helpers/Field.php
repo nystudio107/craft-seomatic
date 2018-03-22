@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\helpers;
 
 use craft\base\Volume;
+use craft\elements\db\ElementQuery;
 use craft\elements\User;
 use nystudio107\seomatic\services\MetaBundles;
 
@@ -61,6 +62,25 @@ class Field
 
     // Static Methods
     // =========================================================================
+
+    /**
+     * @param array ...$fields
+     */
+    public static function firstNonEmptyField(...$fields)
+    {
+        foreach ($fields as $field) {
+            if ($field !== null) {
+                // Pick the first type
+                if ($field instanceof ElementQuery) {
+                    $field = $field->all();
+                }
+                // There can be only one
+                if (is_array($field)) {
+                    $field = $field[0];
+                }
+            }
+        }
+    }
 
     /**
      * Return all of the fields from the $layout that are of the type
