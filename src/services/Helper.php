@@ -46,18 +46,29 @@ class Helper extends Component
      * @param bool   $inline
      *
      * @return \Twig_Markup
+     * @throws \yii\base\Exception
      */
-    public static function seoFileLink($url, $robots = 'all', $canonical = '', $inline = true)
+    public static function seoFileLink($url, $robots = '', $canonical = '', $inline = true)
     {
-        return Template::raw(UrlHelper::actionUrl(
-            'seomatic/file/seo-file-link',
-            [
-                'url' => $url,
-                'robots' => $robots,
-                'canonical' => $canonical,
-                'inline' => $inline
-            ]
-        ));
+        // Get the file name
+        $path = parse_url($url, PHP_URL_PATH);
+        $fileName = pathinfo($path, PATHINFO_BASENAME);
+        // Set some defaults
+        $robots = empty($robots) ? 'all' : $robots;
+        $canonical = empty($canonical) ? $url : $canonical;
+        $inline = $inline == true ? '1' : '0';
+        // Compose the base64 encoded URL
+        $seoFileLink = 'seomatic/seo-file-link/'
+            .base64_encode($url)
+            .'/'
+            .base64_encode($robots)
+            .'/'
+            .base64_encode($canonical)
+            .'/'
+            .$inline
+            .'/'
+            .$fileName;
+        return Template::raw(UrlHelper::siteUrl($seoFileLink));
     }
 
     /**

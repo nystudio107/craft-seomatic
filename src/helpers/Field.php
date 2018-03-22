@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\helpers;
 
 use craft\base\Volume;
+use craft\elements\db\ElementQuery;
 use craft\elements\User;
 use nystudio107\seomatic\services\MetaBundles;
 

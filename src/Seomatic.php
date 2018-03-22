@@ -177,7 +177,7 @@ class Seomatic extends Plugin
             self::$settings->environment = "local";
         }
         $this->name = Seomatic::$settings->pluginName;
-        // Install our event listeners
+        // Install our event listeners only if our table schema exists
         if ($this->tableSchemaExists()) {
             $this->installEventListeners();
         }
@@ -537,6 +537,20 @@ class Seomatic extends Plugin
                 if (Seomatic::$settings->renderEnabled && Seomatic::$seomaticVariable) {
                     Seomatic::$plugin->metaContainers->includeMetaContainers();
                 }
+            }
+        );
+        // Handler: UrlManager::EVENT_REGISTER_SITE_URL_RULES
+        Event::on(
+            UrlManager::class,
+            UrlManager::EVENT_REGISTER_SITE_URL_RULES,
+            function (RegisterUrlRulesEvent $event) {
+                Craft::debug(
+                    'UrlManager::EVENT_REGISTER_SITE_URL_RULES',
+                    __METHOD__
+                );
+                $path = 'seomatic/seo-file-link/<url:[^\/]+>/<robots:[^\/]+>/<canonical:[^\/]+>/<inline:\d+>/<fileName:[-\w\.*]+>';
+                $route = Seomatic::$plugin->handle.'/file/seo-file-link';
+                $event->rules[$path] = ['route' => $route];
             }
         );
     }
