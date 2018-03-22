@@ -694,7 +694,7 @@ class SettingsController extends Controller
         $siteId = $this->getSiteIdFromHandle($siteHandle);
         // Enabled sites
         $this->setMultiSiteVariables($siteHandle, $siteId, $variables);
-        $variables['controllerHandle'] = 'tracking';
+        $variables['controllerHandle'] = 'tracking'.'/'.$subSection;
         $variables['currentSubSection'] = $subSection;
 
         // The script meta containers for the global meta bundle
