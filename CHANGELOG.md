@@ -1,12 +1,12 @@
 # SEOmatic Changelog
 
-### 3.0.0-beta.13 - 2018.03.20
+### 3.0.0-beta.13 - 2018.03.22
 ## Changed
 * Don't look for `getPathInfo()` during a console request
 * Fixed an issue switching between sites on the Tracking scripts settings
 * Revise how `seoFileLink()` works
 
-### 3.0.0-beta.12 - 2018.03.19
+### 3.0.0-beta.12 - 2018.03.20
 ## Added
 * Added colored status indicators on the Content SEO index page that match the colors in the donut chart on the Dashboard
 * Added `seomatic.helper.seoFileLink()` to allow setting the `X-Robots-Tag` and `Link` headers on static files as per [Advanced rel="canonical" HTTP Headers](https://moz.com/blog/how-to-advanced-relcanonical-http-headers)
