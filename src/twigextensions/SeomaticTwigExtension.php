@@ -33,9 +33,14 @@ class SeomaticTwigExtension extends \Twig_Extension implements \Twig_Extension_G
         if (!Seomatic::$seomaticVariable && !Seomatic::$previewingMetaContainers) {
             // Create our variable and stash it in the plugin for global access
             Seomatic::$seomaticVariable = new SeomaticVariable();
+            // Get the path for the current request
             $request = Craft::$app->getRequest();
+            $requestPath = '/';
+            if (!$request->getIsConsoleRequest()) {
+                $requestPath = $request->getPathInfo();
+            }
             // Load the meta containers for this page
-            Seomatic::$plugin->metaContainers->loadMetaContainers($request->getPathInfo(), null);
+            Seomatic::$plugin->metaContainers->loadMetaContainers($requestPath, null);
         }
 
         return ['seomatic' => Seomatic::$seomaticVariable];

@@ -15,6 +15,8 @@ use nystudio107\seomatic\helpers\Field as FieldHelper;
 
 use craft\elements\db\MatrixBlockQuery;
 use craft\elements\db\TagQuery;
+use craft\elements\MatrixBlock;
+use craft\elements\Tag;
 
 use nystudio107\seomatic\Seomatic;
 use yii\base\InvalidConfigException;
@@ -53,13 +55,18 @@ class Text
      */
     public static function extractTextFromField($field)
     {
-        if ($field instanceof MatrixBlockQuery) {
-            /** @var MatrixBlockQuery $field */
+        if ($field instanceof MatrixBlockQuery
+            || (is_array($field) && $field[0] instanceof MatrixBlock)) {
             $result = self::extractTextFromMatrix($field);
-        } elseif ($field instanceof TagQuery) {
+        } elseif ($field instanceof TagQuery
+            || (is_array($field) && $field[0] instanceof Tag)) {
             $result = self::extractTextFromTags($field);
         } else {
-            $result = strip_tags($field);
+            if (is_array($field)) {
+                $result = strip_tags(strval($field[0]));
+            } else {
+                $result = strip_tags(strval($field));
+            }
         }
 
         return $result;
@@ -69,15 +76,17 @@ class Text
      * Extract concatenated text from all of the tags in the $tagElement and
      * return as a comma-delimited string
      *
-     * @param TagQuery $tagQuery
+     * @param TagQuery|Tag[] $tags
      *
      * @return string
      */
-    public static function extractTextFromTags(TagQuery $tagQuery)
+    public static function extractTextFromTags($tags)
     {
         $result = '';
         // Iterate through all of the matrix blocks
-        $tags = $tagQuery->all();
+        if ($tags instanceof TagQuery) {
+            $tags = $tags->all();
+        }
         foreach ($tags as $tag) {
             $result .= $tag->title.", ";
         }
@@ -90,16 +99,18 @@ class Text
      * Extract text from all of the blocks in a matrix field, concatenating it
      * together.
      *
-     * @param MatrixBlockQuery $matrixQuery
-     * @param string           $fieldHandle
+     * @param MatrixBlockQuery|MatrixBlock[] $blocks
+     * @param string                         $fieldHandle
      *
      * @return string
      */
-    public static function extractTextFromMatrix(MatrixBlockQuery $matrixQuery, $fieldHandle = '')
+    public static function extractTextFromMatrix($blocks, $fieldHandle = '')
     {
         $result = '';
         // Iterate through all of the matrix blocks
-        $blocks = $matrixQuery->all();
+        if ($blocks instanceof MatrixBlockQuery) {
+            $blocks = $blocks->all();
+        }
         foreach ($blocks as $block) {
             try {
                 $matrixBlockTypeModel = $block->getType();

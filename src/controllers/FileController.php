@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\controllers;
 
 use Craft;
+use craft\helpers\FileHelper;
 use craft\web\Controller;
 
 use nystudio107\seomatic\helpers\UrlHelper;
@@ -44,21 +45,23 @@ class FileController extends Controller
      * https://moz.com/blog/how-to-advanced-relcanonical-http-headers
      *
      * @param        $url
-     * @param bool   $inline
      * @param string $robots
      * @param string $canonical
+     * @param bool   $inline
+     * @param string $fileName
      *
      * @return Response
-     * @throws NotFoundHttpException
      * @throws HttpException
+     * @throws NotFoundHttpException
      */
-    public function actionSeoFileLink($url, $robots = 'all', $canonical = '', $inline = true)
+    public function actionSeoFileLink($url, $robots = '', $canonical = '', $inline = true, $fileName = '')
     {
+        $url = base64_decode($url);
+        $robots = base64_decode($robots);
+        $canonical = base64_decode($canonical);
         $url = UrlHelper::absoluteUrlWithProtocol($url);
         $contents = file_get_contents($url);
         if ($contents) {
-            $path = parse_url($url, PHP_URL_PATH);
-            $fileName = pathinfo($path, PATHINFO_BASENAME);
             $response = Craft::$app->getResponse();
             // Add the X-Robots-Tag header
             if (!empty($robots)) {
@@ -76,6 +79,7 @@ class FileController extends Controller
                 $fileName,
                 [
                     'inline' => $inline,
+                    'mimeType' => FileHelper::getMimeTypeByExtension($fileName)
                 ]
             );
         } else {
