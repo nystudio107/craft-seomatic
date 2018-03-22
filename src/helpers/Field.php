@@ -62,7 +62,7 @@ class Field
 
     // Static Methods
     // =========================================================================
-    
+
     /**
      * Return all of the fields from the $layout that are of the type
      * $fieldClassKey
