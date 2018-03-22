@@ -4,7 +4,7 @@
 ## Changed
 * Don't look for `getPathInfo()` during a console request
 * Fixed an issue switching between sites on the Tracking scripts settings
-* Revise how seoFileLink() works
+* Revise how `seoFileLink()` works
 
 ### 3.0.0-beta.12 - 2018.03.19
 ## Added
