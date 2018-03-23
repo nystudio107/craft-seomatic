@@ -19,6 +19,7 @@
                 name: "siteType",
                 value: entity.siteType,
                 required: true,
+                errors: entity.getErrors("siteType"),
             }) }}
         </div>
         <div class="inline-item">
@@ -41,6 +42,7 @@
                 name: "siteSubType",
                 value: entity.siteSubType,
                 required: false,
+                errors: entity.getErrors("siteSubType"),
             }) }}
         </div>
         <div class="inline-item">
@@ -54,6 +56,7 @@
                 name: "siteSpecificType",
                 value: entity.siteSpecificType,
                 required: false,
+                errors: entity.getErrors("siteSpecificType"),
             }) }}
         </div>
     </div>
@@ -75,6 +78,7 @@
     name: 'genericName',
     value: entity.genericName,
     required: true,
+    errors: entity.getErrors("genericName"),
 }) }}
 
 {{ forms.textField({
@@ -85,6 +89,7 @@
     name: 'genericAlternateName',
     value: entity.genericAlternateName,
     required: false,
+    errors: entity.getErrors("genericAlternateName"),
 }) }}
 
 <div class="field" id="genericDescription-field">
@@ -102,6 +107,7 @@
         maxlength: 1024,
         showCharsLeft: true,
         required: false,
+        errors: entity.getErrors("genericDescription"),
     }) }}
 </div>
 
@@ -113,6 +119,7 @@
     name: 'genericUrl',
     value: entity.genericUrl,
     required: false,
+    errors: entity.getErrors("genericUrl"),
 }) }}
 
 {{ forms.elementSelectfield({
@@ -131,6 +138,7 @@
     sources: [],
     limit: 1,
     warning: false,
+    errors: entity.getErrors("genericImageIds"),
 }) }}
 
 {{ forms.textField({
@@ -141,6 +149,7 @@
     name: 'genericTelephone',
     value: entity.genericTelephone,
     required: false,
+    errors: entity.getErrors("genericTelephone"),
 }) }}
 
 {{ forms.textField({
@@ -151,6 +160,7 @@
     name: 'genericEmail',
     value: entity.genericEmail,
     required: false,
+    errors: entity.getErrors("genericEmail"),
 }) }}
 
 <!-- Location -->
@@ -164,6 +174,7 @@
     name: 'genericStreetAddress',
     value: entity.genericStreetAddress,
     required: false,
+    errors: entity.getErrors("genericStreetAddress"),
 }) }}
 
 <div class="field">
@@ -176,6 +187,7 @@
             name: 'genericAddressLocality',
             value: entity.genericAddressLocality,
             required: false,
+            errors: entity.getErrors("genericAddressLocality"),
         }) }}
     </div>
     <div class="half-width-field">
@@ -187,6 +199,7 @@
             name: 'genericAddressRegion',
             value: entity.genericAddressRegion,
             required: false,
+            errors: entity.getErrors("genericAddressRegion"),
         }) }}
     </div>
 </div>
@@ -201,6 +214,7 @@
             name: 'genericPostalCode',
             value: entity.genericPostalCode,
             required: false,
+            errors: entity.getErrors("genericPostalCode"),
         }) }}
     </div>
     <div class="half-width-field">
@@ -212,6 +226,7 @@
             name: 'genericAddressCountry',
             value: entity.genericAddressCountry,
             required: false,
+            errors: entity.getErrors("genericAddressCountry"),
         }) }}
     </div>
 </div>
@@ -226,6 +241,7 @@
             name: 'genericGeoLatitude',
             value: entity.genericGeoLatitude,
             required: false,
+            errors: entity.getErrors("genericGeoLatitude"),
         }) }}
     </div>
     
@@ -238,6 +254,7 @@
             name: 'genericGeoLongitude',
             value: entity.genericGeoLongitude,
             required: false,
+            errors: entity.getErrors("genericGeoLongitude"),
         }) }}
     </div>
 </div>
@@ -273,6 +290,7 @@
                 name: 'personGender',
                 value: entity.personGender,
                 required: false,
+                errors: entity.getErrors("personGender"),
             }) }}
         </div>
         <div class="half-width-field">
@@ -284,6 +302,7 @@
                 name: 'personBirthPlace',
                 value: entity.personBirthPlace,
                 required: false,
+                errors: entity.getErrors("personBirthPlace"),
             }) }}
         </div>
     </div>
@@ -304,6 +323,7 @@
                 name: 'organizationDuns',
                 value: entity.organizationDuns,
                 required: false,
+                errors: entity.getErrors("organizationDuns"),
             }) }}
         </div>
         <div class="half-width-field">
@@ -315,6 +335,7 @@
                 name: 'organizationFounder',
                 value: entity.organizationFounder,
                 required: false,
+                errors: entity.getErrors("organizationFounder"),
             }) }}
         </div>
     </div>
@@ -329,6 +350,7 @@
                 name: 'organizationFoundingDate',
                 value: entity.organizationFoundingDate,
                 required: false,
+                errors: entity.getErrors("organizationFoundingDate"),
             }) }}
         </div>
         <div class="half-width-field">
@@ -340,6 +362,7 @@
                 name: 'organizationFoundingLocation',
                 value: entity.organizationFoundingLocation,
                 required: false,
+                errors: entity.getErrors("organizationFoundingLocation"),
             }) }}
         </div>
     </div>
@@ -376,6 +399,7 @@
             }
         },
         rows: entity.organizationContactPoints,
+        errors: entity.getErrors("organizationContactPoints"),
     }) }}
 
 </div>
@@ -399,6 +423,7 @@
         name: 'corporationTickerSymbol',
         value: entity.corporationTickerSymbol,
         required: false,
+        errors: entity.getErrors("corporationTickerSymbol"),
     }) }}
 </div>
 
@@ -430,6 +455,7 @@
         },
         name: "localBusinessPriceRange",
         value: entity.localBusinessPriceRange,
+        errors: entity.getErrors("localBusinessPriceRange"),
     }) }}
 
     <div class="field" id="localBusinessOpeningHours-field">
@@ -516,6 +542,7 @@
         name: 'restaurantServesCuisine',
         value: entity.restaurantServesCuisine,
         required: false,
+        errors: entity.getErrors("restaurantServesCuisine"),
     }) }}
     
     {{ forms.textField({
@@ -526,6 +553,7 @@
         name: 'restaurantMenuUrl',
         value: entity.restaurantMenuUrl,
         required: false,
+        errors: entity.getErrors("restaurantMenuUrl"),
     }) }}
     
     {{ forms.textField({
@@ -536,5 +564,6 @@
         name: 'restaurantReservationsUrl',
         value: entity.restaurantReservationsUrl,
         required: false,
+        errors: entity.getErrors("restaurantReservationsUrl"),
     }) }}
 </div>

@@ -20,6 +20,7 @@
             name: "pluginName",
             value: settings.pluginName,
             warning: configWarning("pluginName", "seomatic"),
+            errors: settings.getErrors("pluginName"),
         }) }}
 
         {{ forms.lightswitchField({
@@ -29,6 +30,7 @@
             name: "renderEnabled",
             on: settings.renderEnabled,
             warning: configWarning("renderEnabled", "seomatic"),
+            errors: settings.getErrors("renderEnabled"),
         }) }}
 
         {{ forms.selectField({
@@ -43,6 +45,7 @@
             },
             value: settings.environment,
             warning: configWarning("environment", "seomatic"),
+            errors: settings.getErrors("environment"),
         }) }}
 
         {{ forms.lightswitchField({
@@ -52,6 +55,7 @@
             name: "displayPreviewSidebar",
             on: settings.displayPreviewSidebar,
             warning: configWarning("displayPreviewSidebar", "seomatic"),
+            errors: settings.getErrors("displayPreviewSidebar"),
         }) }}
 
         {{ forms.lightswitchField({
@@ -61,6 +65,7 @@
             name: "displayAnalysisSidebar",
             on: settings.displayAnalysisSidebar,
             warning: configWarning("displayAnalysisSidebar", "seomatic"),
+            errors: settings.getErrors("displayAnalysisSidebar"),
         }) }}
 
         {{ forms.textField({
@@ -70,6 +75,7 @@
             name: "devModeTitlePrefix",
             value: settings.devModeTitlePrefix,
             warning: configWarning("devModeTitlePrefix", "seomatic"),
+            errors: settings.getErrors("devModeTitlePrefix"),
         }) }}
 
         {{ forms.textField({
@@ -81,6 +87,7 @@
             maxlength: 5,
             value: settings.separatorChar,
             warning: configWarning("separatorChar", "seomatic"),
+            errors: settings.getErrors("separatorChar"),
         }) }}
 
         {{ forms.textField({
@@ -92,6 +99,7 @@
             maxlength: 5,
             value: settings.maxTitleLength,
             warning: configWarning("maxTitleLength", "seomatic"),
+            errors: settings.getErrors("maxTitleLength"),
         }) }}
 
         {{ forms.textField({
@@ -103,6 +111,7 @@
             maxlength: 5,
             value: settings.maxDescriptionLength,
             warning: configWarning("maxDescriptionLength", "seomatic"),
+            errors: settings.getErrors("maxDescriptionLength"),
         }) }}
 
     {% endnamespace %}
