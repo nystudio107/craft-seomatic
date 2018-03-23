@@ -62,10 +62,10 @@
     </div>
 </div>
 {#
-{% set myJs %}
+
+{% js %}
     setSelectedValue("{{ entity.siteSpecificType }}");
-{% endset %}
-{% includeJs myJs %}
+{% endjs %}
 #}
 
 {############### General Info for all types ###############}
