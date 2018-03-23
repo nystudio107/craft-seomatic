@@ -26,7 +26,8 @@
                 name: "seoTitleSource",
                 options: textOptions,
                 value: settings.seoTitleSource,
-                class: "seomatic-textSourceSelect"
+                class: "seomatic-textSourceSelect",
+                errors: settings.getErrors("seoTitleSource"),
             }) }}
         </div>
     {% endnamespace %}
@@ -40,6 +41,7 @@
                     name: "seoTitleField",
                     options: textFieldSources,
                     value: settings.seoTitleField,
+                    errors: settings.getErrors("seoTitleField"),
                 }) }}
             </div>
         {% endnamespace %}
@@ -55,6 +57,7 @@
                 maxlength: seomatic.config.maxTitleLength,
                 showCharsLeft: true,
                 warning: false,
+                errors: globals.getErrors("seoTitle"),
             }) }}
         </div>
     {% endnamespace %}
@@ -84,7 +87,8 @@
                 name: "siteNamePositionSource",
                 options: textOptions,
                 value: settings.siteNamePositionSource,
-                class: "seomatic-textSourceSelect"
+                class: "seomatic-textSourceSelect",
+                errors: settings.getErrors("siteNamePositionSource"),
             }) }}
         </div>
     {% endnamespace %}
@@ -101,6 +105,7 @@
             },
             value: globals.siteNamePosition,
             warning: false,
+            errors: globals.getErrors("siteNamePosition"),
         }) }}
     </div>
 </div>
@@ -129,7 +134,8 @@
                 name: "seoDescriptionSource",
                 options: textOptions,
                 value: settings.seoDescriptionSource,
-                class: "seomatic-textSourceSelect"
+                class: "seomatic-textSourceSelect",
+                errors: settings.getErrors("seoDescriptionSource"),
             }) }}
         </div>
     {% endnamespace %}
@@ -143,6 +149,7 @@
                     name: "seoDescriptionField",
                     options: textFieldSources,
                     value: settings.seoDescriptionField,
+                    errors: settings.getErrors("seoDescriptionField"),
                 }) }}
             </div>
         {% endnamespace %}
@@ -158,6 +165,7 @@
                 maxlength: seomatic.config.maxDescriptionLength,
                 showCharsLeft: true,
                 warning: false,
+                errors: globals.getErrors("seoDescription"),
             }) }}
         </div>
     {% endnamespace %}
@@ -186,7 +194,8 @@
                 name: "seoKeywordsSource",
                 options: textOptions,
                 value: settings.seoKeywordsSource,
-                class: "seomatic-textSourceSelect"
+                class: "seomatic-textSourceSelect",
+                errors: settings.getErrors("seoKeywordsSource"),
             }) }}
         </div>
     {% endnamespace %}
@@ -200,6 +209,7 @@
                     name: "seoKeywordsField",
                     options: textFieldSources,
                     value: settings.seoKeywordsField,
+                    errors: settings.getErrors("seoKeywordsField"),
                 }) }}
             </div>
         {% endnamespace %}
@@ -215,6 +225,7 @@
                 maxlength: seomatic.config.maxDescriptionLength,
                 showCharsLeft: true,
                 warning: false,
+                errors: globals.getErrors("seoKeywords"),
             }) }}
         </div>
     {% endnamespace %}
@@ -244,7 +255,8 @@
                 name: "seoImageDescriptionSource",
                 options: textOptions,
                 value: settings.seoImageDescriptionSource,
-                class: "seomatic-textSourceSelect"
+                class: "seomatic-textSourceSelect",
+                errors: settings.getErrors("seoImageDescriptionSource"),
             }) }}
         </div>
     {% endnamespace %}
@@ -258,6 +270,7 @@
                     name: "seoImageDescriptionField",
                     options: textFieldSources,
                     value: settings.seoImageDescriptionField,
+                    errors: settings.getErrors("seoImageDescriptionField"),
                 }) }}
             </div>
         {% endnamespace %}
@@ -273,6 +286,7 @@
                 maxlength: seomatic.config.maxDescriptionLength,
                 showCharsLeft: true,
                 warning: false,
+                errors: globals.getErrors("seoImageDescription"),
             }) }}
         </div>
     {% endnamespace %}
@@ -296,6 +310,7 @@
             noimageindex : "No Image Index - Do not index images on this page" |t("seomatic"),
         },
         value: globals.robots,
+        errors: globals.getErrors("robots"),
     }) }}
 {% endnamespace %}
 
@@ -310,5 +325,6 @@
         value: globals.canonicalUrl,
         class: "nicetext",
         warning: false,
+        errors: globals.getErrors("canonicalUrl"),
     }) }}
 {% endnamespace %}

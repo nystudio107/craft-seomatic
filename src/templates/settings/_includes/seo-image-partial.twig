@@ -25,6 +25,7 @@
                 options: imageOptions,
                 value: settings.seoImageSource,
                 class: "seomatic-imageSourceSelect"
+                errors: settings.getErrors("seoImageSource"),
             }) }}
         </div>
     {% endnamespace %}
@@ -38,6 +39,7 @@
                     name: "seoImageField",
                     options: assetFieldSources,
                     value: settings.seoImageField,
+                    errors: settings.getErrors("seoImageField"),
                 }) }}
             </div>
         {% endnamespace %}
@@ -59,6 +61,7 @@
                 sources: [],
                 limit: 1,
                 warning: false,
+                errors: settings.getErrors("seoImageIds"),
             }) }}
         </div>
     {% endnamespace %}
@@ -71,6 +74,7 @@
                 value: globals.seoImage,
                 class: "nicetext",
                 warning: false,
+                errors: settings.getErrors("seoImage"),
             }) }}
         </div>
     {% endnamespace %}
@@ -86,5 +90,6 @@
         name: "seoImageTransform",
         on: settings.seoImageTransform,
         warning: false,
+        errors: settings.getErrors("seoImageTransform"),
     }) }}
 {% endnamespace %}
