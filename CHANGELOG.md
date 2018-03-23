@@ -2,6 +2,7 @@
 
 ### 3.0.0-beta.14 - 2018.03.23
 ## Changed
+* Fixed an issue with console requests raising an exception in `addDynamicMetaToContainers()`
 
 ### 3.0.0-beta.13 - 2018.03.22
 ## Changed
