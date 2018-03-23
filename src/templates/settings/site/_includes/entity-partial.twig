@@ -374,7 +374,7 @@
     
     {{ forms.editableTableField({
         label: "Contact Points" |t("seomatic"),
-        instructions: "Use <a href="https://developers.google.com/structured-data/customize/contact-points" target="_blank">organization contact points</a> to add your organizations's contact information to the Google Knowledge panel in some searches.  The Telephone Number <strong>must be</strong> an internationalized version of the phone number, starting with the "+" symbol and country code (+1 in the US and Canada).  e.g.: <code>+1-800-555-1212</code> or <code>+44-2078225951</code>"  |t("seomatic") |raw,
+        instructions: "Use [organization contact points](https://developers.google.com/structured-data/customize/contact-points) to add your organizations's contact information to the Google Knowledge panel in some searches.  The Telephone Number **must be** an internationalized version of the phone number, starting with the '+' symbol and country code (+1 in the US and Canada).  e.g.: `+1-800-555-1212` or `+44-2078225951`" |t("seomatic") |md,
         id: "organizationContactPoints",
         name: "organizationContactPoints",
         required: false,
