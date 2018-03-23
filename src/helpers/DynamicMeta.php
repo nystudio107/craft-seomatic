@@ -91,9 +91,13 @@ class DynamicMeta
      */
     public static function addDynamicMetaToContainers(string $uri = '', int $siteId = null)
     {
-        self::addMetaJsonLdBreadCrumbs($siteId);
-        self::addMetaLinkHrefLang();
-        self::addSameAsMeta();
+        $request = Craft::$app->getRequest();
+        // Don't add dynamic meta to console requests, they have no concept of a URI or segments
+        if (!$request->getIsConsoleRequest()) {
+            self::addMetaJsonLdBreadCrumbs($siteId);
+            self::addMetaLinkHrefLang();
+            self::addSameAsMeta();
+        }
     }
 
     /**
