@@ -6,7 +6,8 @@
 * Cleaned up the Identity Settings & Creator Settings pages
 
 ## Added
-* Added a description of JSON-LD Structured Data to the Identity & Creator pages  
+* Added a description of JSON-LD Structured Data to the Identity & Creator pages
+* Added **Main Entity of Page** settings on the Global SEO and Content SEO General pages
 
 ### 3.0.0-beta.14 - 2018.03.23
 ## Changed
