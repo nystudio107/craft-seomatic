@@ -3,5 +3,14 @@
 
 {% set entity = site.creator %}
 {% namespace "site[creator]" %}
+
+    {############### Main Entity of Page ###############}
+
+    {% include "seomatic/settings/_includes/mainEntityOfPage-partial.twig" with {
+        "mainEntityOfPage": entity,
+        "mainEntityTitle": "",
+        "mainEntityDescription": "",
+    } %}
+
     {% include "seomatic/settings/site/_includes/entity-partial.twig" with {"pageContext": "creator"} %}
 {% endnamespace %}

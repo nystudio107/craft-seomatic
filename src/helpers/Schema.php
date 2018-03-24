@@ -111,7 +111,7 @@ class Schema
      *
      * @return array
      */
-    public static function getSchemaMenu($path = ''): array
+    public static function getTypeMenu($path = ''): array
     {
         $schemaTypes = self::getSchemaArray($path);
 
@@ -125,7 +125,7 @@ class Schema
      *
      * @return array
      */
-    public static function getSingleSchemaMenu($path = ''): array
+    public static function getSingleTypeMenu($path = ''): array
     {
         $result = [];
         $schemaTypes = self::getSchemaArray($path);
@@ -178,7 +178,7 @@ class Schema
     {
         $result = [];
         foreach ($typesArray as $key => $value) {
-            $indent = str_repeat('&nbsp;', $indentLevel);
+            $indent = html_entity_decode(str_repeat('&nbsp;', $indentLevel));
             if (is_array($value)) {
                 $result[$key] = $indent . $key;
                 $value = self::flattenSchemaArray($value, $indentLevel + self::MENU_INDENT_STEP);
