@@ -25,17 +25,17 @@ class Entity extends FluentModel
     // =========================================================================
 
     /**
-     * @var string
+     * @var string The schema.org general type
      */
     public $siteType;
 
     /**
-     * @var string
+     * @var string The schema.org sub-type
      */
     public $siteSubType;
 
     /**
-     * @var string
+     * @var string The schema.org specific type
      */
     public $siteSpecificType;
 

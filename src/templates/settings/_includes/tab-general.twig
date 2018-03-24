@@ -4,6 +4,16 @@
 <h4 class="heading">{{ "SEO Preview:" |t('seomatic') }}</h4>
 {% include "seomatic/_includes/googlePreview.twig" %}
 
+{############### Main Entity of Page ###############}
+
+{% namespace "settings" %}
+    {% include "seomatic/settings/_includes/mainEntityOfPage-partial.twig" with {
+        "mainEntityOfPage": settings,
+        "mainEntityTitle": "Main Entity of Page",
+        "mainEntityDescription": "The primary topic, some entity or thing that the page describes.",
+    } %}
+{% endnamespace %}
+
 {% set textOptions = {
     fromCustom: "Custom Text" |t("seomatic"),
 } %}
@@ -77,7 +87,7 @@
 <div class="field seomatic-textSourceWrapper" id="settings-siteNamePositionSource-field">
     <div class="heading">
         <label id="settings-siteNamePositionSource-label" for="settings-siteNamePositionSource">{{ "Site Name Position#{positionSuffix}" |t("seomatic") }}</label>
-        <div class="instructions">{{ ("Where the Site Name is placed relative to the Title in the &lt;title&gt; tag. The Site Name is set in [Site Settings](" ~ cpUrl('seomatic/site') ~ ")") |t("seomatic") |markdown }}
+        <div class="instructions">{{ ("Where the Site Name is placed relative to the Title in the &lt;title&gt; tag. The Site Name is set in [Site Settings](" ~ cpUrl('seomatic/site') ~ ")") |t("seomatic") |md }}
         </div>
     </div>
     {% namespace "settings" %}

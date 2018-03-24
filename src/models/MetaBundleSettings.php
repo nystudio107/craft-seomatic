@@ -46,6 +46,21 @@ class MetaBundleSettings extends VarsModel
     // =========================================================================
 
     /**
+     * @var string The schema.org general type
+     */
+    public $siteType = 'CreativeWork';
+
+    /**
+     * @var string The schema.org sub-type
+     */
+    public $siteSubType = 'WebPage';
+
+    /**
+     * @var string The schema.org specific type
+     */
+    public $siteSpecificType = '';
+
+    /**
      * @var string The source that the SEO title should come from
      */
     public $seoTitleSource;
@@ -249,6 +264,10 @@ class MetaBundleSettings extends VarsModel
         return [
             [
                 [
+                    'siteType',
+                    'siteSubType',
+                    'siteSpecificType',
+
                     'seoTitleSource',
                     'seoTitleField',
                     'siteNamePositionSource',
