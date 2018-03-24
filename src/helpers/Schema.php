@@ -158,7 +158,9 @@ class Schema
         if (!empty($path)) {
             $keys = explode(self::SCHEMA_PATH_DELIMITER, $path);
             foreach ($keys as $key) {
-                $typesArray = $typesArray[$key];
+                if (!empty($typesArray[$key])) {
+                    $typesArray = $typesArray[$key];
+                }
             }
         }
         if (!is_array($typesArray)) {
