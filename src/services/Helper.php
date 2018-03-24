@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
+use nystudio107\seomatic\helpers\Schema as SchemaHelper;
 use nystudio107\seomatic\helpers\Text as TextHelper;
 
 use Craft;
@@ -188,5 +189,29 @@ class Helper extends Component
     public function socialTransform($asset, string $transformName, int $siteId = null): string
     {
         return ImageTransformHelper::socialTransform($asset, $transformName, $siteId);
+    }
+
+    /**
+     * Return a flattened, indented menu of the given $path
+     *
+     * @param string $path
+     *
+     * @return array
+     */
+    public static function getTypeMenu(string $path): array
+    {
+        return SchemaHelper::getTypeMenu($path);
+    }
+
+    /**
+     * Return a single menu of schemas starting at $path
+     *
+     * @param string $path
+     *
+     * @return array
+     */
+    public static function getSingleTypeMenu(string $path): array
+    {
+        return SchemaHelper::getSingleTypeMenu($path);
     }
 }

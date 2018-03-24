@@ -84,7 +84,7 @@ class JsonLdController extends Controller
      */
     public function actionGetTypeMenu($path)
     {
-        return $this->asJson(SchemaHelper::getSchemaMenu($path));
+        return $this->asJson(SchemaHelper::getTypeMenu($path));
     }
 
     /**
@@ -96,6 +96,6 @@ class JsonLdController extends Controller
      */
     public function actionGetSingleTypeMenu($path)
     {
-        return $this->asJson(SchemaHelper::getSingleSchemaMenu($path));
+        return $this->asJson(SchemaHelper::getSingleTypeMenu($path));
     }
 }

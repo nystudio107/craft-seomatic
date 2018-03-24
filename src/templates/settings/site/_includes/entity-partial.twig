@@ -2,56 +2,6 @@
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
 
-<div class="field">
-    <div class="heading">
-        <label for="siteType">{{ "Entity Type" |t("seomatic")}}</label>
-        <div class="instructions"><p>{{ "The type of entity that owns this website.  Choose as general or specific of an Entity Type as you wish.  Leave a sub-type blank if you don't want to specify a sub-type."  |t("seomatic") |raw}}</p></div>
-    </div>
-    <div>
-        <div class="inline-item">
-            {{ forms.selectField({
-                id: "siteType",
-                class: "inline-item",
-                fieldClass: "inline-item",
-                options: {
-                },
-                name: "siteType",
-                value: entity.siteType,
-                required: true,
-                errors: entity.getErrors("siteType"),
-            }) }}
-        </div>
-        <div class="inline-item">
-            {{ forms.selectField({
-                id: "siteSubType",
-                label: "&rarr;",
-                class: "inline-item",
-                fieldClass: "inline-item",
-                options: {
-                },
-                name: "siteSubType",
-                value: entity.siteSubType,
-                required: false,
-                errors: entity.getErrors("siteSubType"),
-            }) }}
-        </div>
-        <div class="inline-item">
-            {{ forms.selectField({
-                id: "siteSpecificType",
-                label: "&rarr;",
-                class: "inline-item",
-                fieldClass: "inline-item",
-                options: {
-                },
-                name: "siteSpecificType",
-                value: entity.siteSpecificType,
-                required: false,
-                errors: entity.getErrors("siteSpecificType"),
-            }) }}
-        </div>
-    </div>
-</div>
-
 {############### General Info for all types ###############}
 
 <h2>{{ "General Info"  |t("seomatic") }}</h2>
@@ -556,71 +506,6 @@
 </div>
 
 {% js %}
-    // Initially hide all of the meta panes
-    $('.metaPane').hide();
-    $('.metaSubPane').hide();
-    $('.metaSpecificPane').hide();
-
-    // Fill in the dynamic schema menus
-    var siteTypeId = '{{ "siteType" |namespaceInputId }}';
-    var siteSubTypeId = '{{ "siteSubType" |namespaceInputId }}';
-    var siteSpecificTypeId = '{{ "siteSpecificType" |namespaceInputId }}';
-
-    fillDynamicSchemaMenu(siteTypeId, '{{ entity.siteType }}', '', false, false);
-    {% if entity.siteType |length %}
-        fillDynamicSchemaMenu(siteSubTypeId, '{{ entity.siteSubType }}', '{{ entity.siteType }}', false, true);
-        $('.metaPane.{{ entity.siteType }}').show();
-    {% else %}
-        $('#'+siteSubTypeId+'-field').hide();
-    {% endif %}
-    {% if entity.siteSubType |length %}
-        fillDynamicSchemaMenu(siteSpecificTypeId, '{{ entity.siteSpecificType }}', '{{ "#{entity.siteType}.#{entity.siteSubType}" }}', true, true);
-        $('.metaSubPane.{{ entity.siteSubType }}').show();
-    {% else %}
-        $('#'+siteSpecificTypeId+'-field').hide();
-    {% endif %}
-    {% if entity.siteSpecificType |length %}
-        $('.metaSpecificPane.{{ entity.siteSpecificType }}').show();
-    {% endif %}
-
-    // Handle clicks on the siteType schema menu
-    $('#'+siteTypeId).on('change', function(e) {
-        var path = $('#'+siteTypeId).val();
-        var value = $('#'+siteTypeId).val();
-        $('.metaPane').hide();
-        $('.metaPane.' + value).show();
-        fillDynamicSchemaMenu(siteSubTypeId, '', path, false, true, function() {
-            if ($('#' + siteSubTypeId + ' option').length <= 1) {
-                $('#'+siteSubTypeId+'-field').hide();
-                $('#'+siteSpecificTypeId+'-field').hide();
-            } else {
-                $('#'+siteSubTypeId+'-field').show();
-            }
-        });
-    });
-
-    // Handle clicks on the siteSubType schema menu
-    $('#'+siteSubTypeId).on('change', function(e) {
-        var path = $('#'+siteTypeId).val() + '.' + $('#'+siteSubTypeId).val();
-        var value = $('#'+siteSubTypeId).val();
-        $('.metaSubPane').hide();
-        $('.metaSubPane.' + value).show();
-        fillDynamicSchemaMenu(siteSpecificTypeId, '', path, true, true, function() {
-            if ($('#' + siteSpecificTypeId + ' option').length <= 1) {
-                $('#'+siteSpecificTypeId+'-field').hide();
-            } else {
-                $('#'+siteSpecificTypeId+'-field').show();
-            }
-        });
-    });
-
-    // Handle clicks on the siteSpecificType schema menu
-    $('#'+siteSpecificTypeId).on('change', function(e) {
-        var value = $('#'+siteSpecificTypeId).val();
-        $('.metaSpecificPane').hide();
-        $('.metaSpecificPane.' + value).show();
-    });
-
     // Handle looking up the lattitude/longitude
     $('#{{ "geolookup" |namespaceInputId }}').on('click', function(e) {
         address = $('#{{ "genericStreetAddress" |namespaceInputId }}').val() + ", "
