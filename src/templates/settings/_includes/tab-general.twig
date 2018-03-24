@@ -4,6 +4,16 @@
 <h4 class="heading">{{ "SEO Preview:" |t('seomatic') }}</h4>
 {% include "seomatic/_includes/googlePreview.twig" %}
 
+{############### Main Entity of Page ###############}
+
+{% namespace "settings" %}
+    {% include "seomatic/settings/_includes/mainEntityOfPage-partial.twig" with {
+        "mainEntityOfPage": settings,
+        "mainEntityTitle": "Main Entity of Page",
+        "mainEntityDescription": "The primary topic, some entity or thing that the page describes.",
+    } %}
+{% endnamespace %}
+
 {% set textOptions = {
     fromCustom: "Custom Text" |t("seomatic"),
 } %}

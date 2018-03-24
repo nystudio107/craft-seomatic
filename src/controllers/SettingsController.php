@@ -89,6 +89,12 @@ class SettingsController extends Controller
         'facebookProfileId',
     ];
 
+    const SCHEMA_TYPES = [
+        'siteSpecificType',
+        'siteSubType',
+        'siteType'
+    ];
+
     // Protected Properties
     // =========================================================================
 
@@ -298,6 +304,7 @@ class SettingsController extends Controller
             if (is_array($globalsSettings) && is_array($bundleSettings)) {
                 $this->parseTextSources($elementName, $globalsSettings, $bundleSettings);
                 $this->parseImageSources($elementName, $globalsSettings, $bundleSettings, $siteId);
+                $globalsSettings['mainEntityOfPage'] = $this->getMainEntityOfPage($globalsSettings);
                 $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
                 $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
             }
@@ -504,6 +511,7 @@ class SettingsController extends Controller
             if (is_array($globalsSettings) && is_array($bundleSettings)) {
                 $this->parseTextSources($elementName, $globalsSettings, $bundleSettings);
                 $this->parseImageSources($elementName, $globalsSettings, $bundleSettings, $siteId);
+                $globalsSettings['mainEntityOfPage'] = $this->getMainEntityOfPage($globalsSettings);
                 $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
                 $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
             }
@@ -1143,6 +1151,27 @@ class SettingsController extends Controller
         } else {
             $variables['sitesMenuLabel'] = '';
         }
+    }
+
+    /**
+     * Return the most specific schema.org type possible from the $settings
+     *
+     * @param $settings
+     *
+     * @return string
+     */
+    protected function getMainEntityOfPage($settings): string
+    {
+        if (!empty($settings)) {
+            // Go from most specific type to least specific type
+            foreach (self::SCHEMA_TYPES as $schemaType) {
+                if (!empty($settings[$schemaType]) && ($settings[$schemaType] != 'none')) {
+                    return $settings[$schemaType];
+                }
+            }
+        }
+
+        return 'WebPage';
     }
 
     /**
