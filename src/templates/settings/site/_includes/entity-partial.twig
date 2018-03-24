@@ -1,3 +1,4 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
 
@@ -13,8 +14,6 @@
                 class: "inline-item",
                 fieldClass: "inline-item",
                 options: {
-                    "Organization": "Organization" |t("seomatic"),
-                    "Person": "Person" |t("seomatic"),
                 },
                 name: "siteType",
                 value: entity.siteType,
@@ -29,15 +28,6 @@
                 class: "inline-item",
                 fieldClass: "inline-item",
                 options: {
-                    "": "",
-                    "Airline": "Airline" |t("seomatic"),
-                    "Corporation": "Corporation" |t("seomatic"),
-                    "EducationalOrganization": "Educational Organization" |t("seomatic"),
-                    "GovernmentOrganization": "Government Organization" |t("seomatic"),
-                    "LocalBusiness": "Local Business" |t("seomatic"),
-                    "NGO": "Non-Government Organization" |t("seomatic"),
-                    "PerformingGroup": "Performing Group" |t("seomatic"),
-                    "SportsOrganization": "Sports Organization" |t("seomatic"),
                 },
                 name: "siteSubType",
                 value: entity.siteSubType,
@@ -61,12 +51,6 @@
         </div>
     </div>
 </div>
-{#
-
-{% js %}
-    setSelectedValue("{{ entity.siteSpecificType }}");
-{% endjs %}
-#}
 
 {############### General Info for all types ###############}
 
@@ -263,20 +247,20 @@
 
 <div class="buttons">
     <div class="btngroup first">
-        <input class="geolookup" type="button" class="btn" value="{{ "Look up Latitude/Longitude" |t("seomatic") }}">
+        <input id="geolookup" type="button" class="btn" value="{{ "Look up Latitude/Longitude" |t("seomatic") }}">
     </div>
 </div>
-<div class="geolookup-errors-wrapper">
+<div id="geolookup-errors" style="display: none;">
     <ul class="errors">
         <li>{{ "No location found.  Perhaps the address is wrong/incomplete?"  |t("seomatic") }}</li>
     </ul>
 </div>
 
-{############### Entity type specific fields ###############}
+{############### Entity metaPane fields ###############}
 
 {############### Person type specific fields ###############}
 
-<div class="metaSubPane field Person">
+<div class="metaPane field Person">
     <h2>{{ "Person Info"  |t("seomatic") }}</h2>
     <div class="field">
         <div class="half-width-field half-width-field-left">
@@ -313,7 +297,7 @@
 
 {############### Organization type specific fields ###############}
 
-<div class="metaSubPane field Organization">
+<div class="metaPane field Organization">
     <h2>{{ "Organization Info"  |t("seomatic") }}</h2>
     
     <div class="field">
@@ -407,7 +391,7 @@
 
 </div>
 
-{############### Entity sub-type specific fields ###############}
+{############### Entity metaSubPane fields ###############}
 
 {############### Airline type specific fields ###############}
 
@@ -531,6 +515,8 @@
 <div class="metaSubPane field SportsOrganization">
 </div>
 
+{############### Entity metaSpecificPane fields ###############}
+
 {############### FoodEstablishment type specific fields ###############}
 
 <div  class="metaSpecificPane field FoodEstablishment Bakery BarOrPub Brewery CafeOrCoffeeShop FastFoodRestaurant IceCreamShop Restaurant Winery">
@@ -568,3 +554,92 @@
         errors: entity.getErrors("restaurantReservationsUrl"),
     }) }}
 </div>
+
+{% js %}
+    // Initially hide all of the meta panes
+    $('.metaPane').hide();
+    $('.metaSubPane').hide();
+    $('.metaSpecificPane').hide();
+
+    // Fill in the dynamic schema menus
+    var siteTypeId = '{{ "siteType" |namespaceInputId }}';
+    var siteSubTypeId = '{{ "siteSubType" |namespaceInputId }}';
+    var siteSpecificTypeId = '{{ "siteSpecificType" |namespaceInputId }}';
+
+    fillDynamicSchemaMenu(siteTypeId, '{{ entity.siteType }}', '', false, false);
+    {% if entity.siteType |length %}
+        fillDynamicSchemaMenu(siteSubTypeId, '{{ entity.siteSubType }}', '{{ entity.siteType }}', false, true);
+        $('.metaPane.{{ entity.siteType }}').show();
+    {% else %}
+        $('#'+siteSubTypeId+'-field').hide();
+    {% endif %}
+    {% if entity.siteSubType |length %}
+        fillDynamicSchemaMenu(siteSpecificTypeId, '{{ entity.siteSpecificType }}', '{{ "#{entity.siteType}.#{entity.siteSubType}" }}', true, true);
+        $('.metaSubPane.{{ entity.siteSubType }}').show();
+    {% else %}
+        $('#'+siteSpecificTypeId+'-field').hide();
+    {% endif %}
+    {% if entity.siteSpecificType |length %}
+        $('.metaSpecificPane.{{ entity.siteSpecificType }}').show();
+    {% endif %}
+
+    // Handle clicks on the siteType schema menu
+    $('#'+siteTypeId).on('change', function(e) {
+        var path = $('#'+siteTypeId).val();
+        var value = $('#'+siteTypeId).val();
+        $('.metaPane').hide();
+        $('.metaPane.' + value).show();
+        fillDynamicSchemaMenu(siteSubTypeId, '', path, false, true, function() {
+            if ($('#' + siteSubTypeId + ' option').length <= 1) {
+                $('#'+siteSubTypeId+'-field').hide();
+                $('#'+siteSpecificTypeId+'-field').hide();
+            } else {
+                $('#'+siteSubTypeId+'-field').show();
+            }
+        });
+    });
+
+    // Handle clicks on the siteSubType schema menu
+    $('#'+siteSubTypeId).on('change', function(e) {
+        var path = $('#'+siteTypeId).val() + '.' + $('#'+siteSubTypeId).val();
+        var value = $('#'+siteSubTypeId).val();
+        $('.metaSubPane').hide();
+        $('.metaSubPane.' + value).show();
+        fillDynamicSchemaMenu(siteSpecificTypeId, '', path, true, true, function() {
+            if ($('#' + siteSpecificTypeId + ' option').length <= 1) {
+                $('#'+siteSpecificTypeId+'-field').hide();
+            } else {
+                $('#'+siteSpecificTypeId+'-field').show();
+            }
+        });
+    });
+
+    // Handle clicks on the siteSpecificType schema menu
+    $('#'+siteSpecificTypeId).on('change', function(e) {
+        var value = $('#'+siteSpecificTypeId).val();
+        $('.metaSpecificPane').hide();
+        $('.metaSpecificPane.' + value).show();
+    });
+
+    // Handle looking up the lattitude/longitude
+    $('#{{ "geolookup" |namespaceInputId }}').on('click', function(e) {
+        address = $('#{{ "genericStreetAddress" |namespaceInputId }}').val() + ", "
+                    + $('#{{ "genericAddressLocality" |namespaceInputId }}').val() + ", "
+                    + $('#{{ "genericAddressRegion" |namespaceInputId }}').val() + ", "
+                    + $('#{{ "genericPostalCode" |namespaceInputId }}').val() + ", "
+                    + $('#{{ "genericAddressCountry" |namespaceInputId }}').val();
+        $.ajax({
+            url:"//maps.googleapis.com/maps/api/geocode/json?address="+address+"&sensor=false",
+            type: "POST",
+            success:function(res) {
+                $('#{{ "geolookup-errors" |namespaceInputId }}').hide();
+                if (res.results.length) {
+                    $('#{{ "genericGeoLatitude" |namespaceInputId }}').val(res.results[0].geometry.location.lat);
+                    $('#{{ "genericGeoLongitude" |namespaceInputId }}').val(res.results[0].geometry.location.lng);
+                } else {
+                    $('#{{ "geolookup-errors" |namespaceInputId }}').show();
+                }
+            }
+        });
+    });
+{% endjs %}
