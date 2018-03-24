@@ -17,6 +17,10 @@
 
 return [
     '*' => [
+        'siteType'                      => 'CreativeWork',
+        'siteSubType'                   => 'WebPage',
+        'siteSpecificType'              => '',
+
         'seoTitleSource'                => 'fromField',
         'seoTitleField'                 => 'title',
         'siteNamePositionSource'        => 'sameAsGlobal',
