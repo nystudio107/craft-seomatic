@@ -34,7 +34,56 @@ require('../img/no_image_set.png');
 // JavaScript
 require('bootstrap-tokenfield/js/bootstrap-tokenfield.js');
 
-$(function () {
+/**
+ * Fill a dynamic schema.org type menu with the schema hierarchy in path
+ *
+ * @param menuId
+ * @param menuValue
+ * @param path
+ * @param subTypes
+ * @param blankItem
+ * @param callback
+ */
+function fillDynamicSchemaMenu(menuId, menuValue, path, subTypes, blankItem, callback) {
+    var menu = $('#' + menuId);
+
+    if (menu.length) {
+        menu.empty();
+        var action = 'get-single-type-menu';
+        if (subTypes) {
+            action = 'get-type-menu';
+        }
+        $.ajax({
+                url: Craft.getActionUrl('seomatic/json-ld/' + action + '?path=' + path)
+            })
+            .done(function(data) {
+                if (blankItem) {
+                    $('<option />')
+                        .attr('value', 'none')
+                        .html('')
+                        .appendTo(menu);
+                }
+                $.each(data, function() {
+                    $('<option />')
+                        .attr('value', this)
+                        .html(this)
+                        .appendTo(menu);
+                });
+                menu.val(menuValue);
+                if (callback !== undefined) {
+                    callback();
+                }
+            })
+            .fail(function(data) {
+                console.log('Error loading schema data');
+            })
+    }
+
+}
+
+window.fillDynamicSchemaMenu = fillDynamicSchemaMenu;
+
+$(function() {
     // Tokenize any seomatic-keywords fields
     $('.seomatic-keywords').tokenfield({
         createTokensOnBlur: true,
@@ -42,7 +91,7 @@ $(function () {
 
     // Show/hide the script settings containers
     var selector = $('.seomatic-script-lightswitch').find('.lightswitch');
-    $(selector).each(function( index, value ) {
+    $(selector).each(function(index, value) {
         var value = $(this).find('input').first().val();
         if (value) {
             $(this).closest('.seomatic-script-wrapper').find('.seomatic-script-container').show();
@@ -58,29 +107,29 @@ $(function () {
             $(this).closest('.seomatic-script-wrapper').find('.seomatic-script-container').slideUp();
         }
     });
-        // Show/hide the image source fields initially
-    $('.seomatic-imageSourceSelect > select').each(function( index, value ) {
+    // Show/hide the image source fields initially
+    $('.seomatic-imageSourceSelect > select').each(function(index, value) {
         var popupValue = $(this).val();
         switch (popupValue) {
-            case "sameAsSeo":
+            case 'sameAsSeo':
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').hide();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').hide();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').hide();
                 break;
 
-            case "fromField":
+            case 'fromField':
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').show();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').hide();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').hide();
                 break;
 
-            case "fromAsset":
+            case 'fromAsset':
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').hide();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').show();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').hide();
                 break;
 
-            case "fromUrl":
+            case 'fromUrl':
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').hide();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').hide();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').show();
@@ -90,25 +139,25 @@ $(function () {
     // Handle hiding/showing the image source fields based on the selection
     $('.seomatic-imageSourceSelect > select').on('change', function(e) {
         switch (this.value) {
-            case "sameAsSeo":
+            case 'sameAsSeo':
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').slideUp();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').slideUp();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').slideUp();
                 break;
 
-            case "fromField":
+            case 'fromField':
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').slideDown();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').slideUp();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').slideUp();
                 break;
 
-            case "fromAsset":
+            case 'fromAsset':
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').slideUp();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').slideDown();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').slideUp();
                 break;
 
-            case "fromUrl":
+            case 'fromUrl':
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').slideUp();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').slideUp();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').slideDown();
@@ -118,25 +167,25 @@ $(function () {
 
 
     // Show/hide the text source fields initially
-    $('.seomatic-textSourceSelect > select').each(function( index, value ) {
+    $('.seomatic-textSourceSelect > select').each(function(index, value) {
         var popupValue = $(this).val();
         switch (popupValue) {
-            case "sameAsSeo":
-            case "sameAsGlobal":
-            case "sameAsSiteTwitter":
+            case 'sameAsSeo':
+            case 'sameAsGlobal':
+            case 'sameAsSiteTwitter':
                 $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').hide();
                 $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').hide();
                 break;
 
-            case "fromField":
-            case "summaryFromField":
-            case "keywordsFromField":
-            case "fromUserField":
+            case 'fromField':
+            case 'summaryFromField':
+            case 'keywordsFromField':
+            case 'fromUserField':
                 $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').show();
                 $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').hide();
                 break;
 
-            case "fromCustom":
+            case 'fromCustom':
                 $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').hide();
                 $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').show();
                 break;
@@ -145,22 +194,22 @@ $(function () {
     // Handle hiding/showing the image source fields based on the selection
     $('.seomatic-textSourceSelect > select').on('change', function(e) {
         switch (this.value) {
-            case "sameAsSeo":
-            case "sameAsGlobal":
-            case "sameAsSiteTwitter":
+            case 'sameAsSeo':
+            case 'sameAsGlobal':
+            case 'sameAsSiteTwitter':
                 $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').hide();
                 $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').hide();
                 break;
 
-            case "fromField":
-            case "summaryFromField":
-            case "keywordsFromField":
-            case "fromUserField":
+            case 'fromField':
+            case 'summaryFromField':
+            case 'keywordsFromField':
+            case 'fromUserField':
                 $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').show();
                 $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').hide();
                 break;
 
-            case "fromCustom":
+            case 'fromCustom':
                 $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').hide();
                 $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').show();
                 break;
