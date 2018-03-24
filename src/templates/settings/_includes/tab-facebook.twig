@@ -26,6 +26,7 @@
             "website": "Website" |t("seomatic"),
         },
         value: globals.ogType,
+        errors: globals.getErrors("ogType"),
     }) }}
 {% endnamespace %}
 
@@ -52,7 +53,8 @@
                 name: "ogTitleSource",
                 options: textOptions,
                 value: settings.ogTitleSource,
-                class: "seomatic-textSourceSelect"
+                class: "seomatic-textSourceSelect",
+                errors: settings.getErrors("ogTitleSource"),
             }) }}
         </div>
     {% endnamespace %}
@@ -66,6 +68,7 @@
                     name: "ogTitleField",
                     options: textFieldSources,
                     value: settings.ogTitleField,
+                    errors: settings.getErrors("ogTitleField"),
                 }) }}
             </div>
         {% endnamespace %}
@@ -81,6 +84,7 @@
                 maxlength: seomatic.config.maxTitleLength,
                 showCharsLeft: true,
                 warning: false,
+                errors: globals.getErrors("ogTitle"),
             }) }}
         </div>
     {% endnamespace %}
@@ -109,7 +113,8 @@
                 name: "ogSiteNamePositionSource",
                 options: textOptions,
                 value: settings.ogSiteNamePositionSource,
-                class: "seomatic-textSourceSelect"
+                class: "seomatic-textSourceSelect",
+                errors: settings.getErrors("ogSiteNamePositionSource"),
             }) }}
         </div>
     {% endnamespace %}
@@ -126,6 +131,7 @@
             },
             value: globals.ogSiteNamePosition,
             warning: false,
+            errors: globals.getErrors("ogSiteNamePosition"),
         }) }}
     </div>
 </div>
@@ -155,7 +161,8 @@
                 name: "ogDescriptionSource",
                 options: textOptions,
                 value: settings.ogDescriptionSource,
-                class: "seomatic-textSourceSelect"
+                class: "seomatic-textSourceSelect",
+                errors: settings.getErrors("ogDescriptionSource"),
             }) }}
         </div>
     {% endnamespace %}
@@ -169,6 +176,7 @@
                     name: "ogDescriptionField",
                     options: textFieldSources,
                     value: settings.ogDescriptionField,
+                    errors: settings.getErrors("ogDescriptionField"),
                 }) }}
             </div>
         {% endnamespace %}
@@ -184,6 +192,7 @@
                 maxlength: 300,
                 showCharsLeft: true,
                 warning: false,
+                errors: globals.getErrors("ogDescription"),
             }) }}
         </div>
     {% endnamespace %}
@@ -219,7 +228,8 @@
                 name: "ogImageSource",
                 options: imageOptions,
                 value: settings.ogImageSource,
-                class: "seomatic-imageSourceSelect"
+                class: "seomatic-imageSourceSelect",
+                errors: settings.getErrors("ogImageSource"),
             }) }}
         </div>
     {% endnamespace %}
@@ -233,6 +243,7 @@
                     name: "ogImageField",
                     options: assetFieldSources,
                     value: settings.ogImageField,
+                    errors: settings.getErrors("ogImageField"),
                 }) }}
             </div>
         {% endnamespace %}
@@ -254,6 +265,7 @@
                 sources: [],
                 limit: 1,
                 warning: false,
+                errors: settings.getErrors("ogImageIds"),
             }) }}
         </div>
     {% endnamespace %}
@@ -266,6 +278,7 @@
                 value: globals.ogImage,
                 class: "nicetext",
                 warning: false,
+                errors: globals.getErrors("ogImage"),
             }) }}
         </div>
     {% endnamespace %}
@@ -281,6 +294,7 @@
         name: "ogImageTransform",
         on: settings.ogImageTransform,
         warning: false,
+        errors: settings.getErrors("ogImageTransform"),
     }) }}
 {% endnamespace %}
 
@@ -308,7 +322,8 @@
                 name: "ogImageDescriptionSource",
                 options: textOptions,
                 value: settings.ogImageDescriptionSource,
-                class: "seomatic-textSourceSelect"
+                class: "seomatic-textSourceSelect",
+                errors: settings.getErrors("ogImageDescriptionSource"),
             }) }}
         </div>
     {% endnamespace %}
@@ -322,6 +337,7 @@
                     name: "ogImageDescriptionField",
                     options: textFieldSources,
                     value: settings.ogImageDescriptionField,
+                    errors: settings.getErrors("ogImageDescriptionField"),
                 }) }}
             </div>
         {% endnamespace %}
@@ -337,6 +353,7 @@
                 maxlength: 420,
                 showCharsLeft: true,
                 warning: false,
+                errors: globals.getErrors("ogImageDescription"),
             }) }}
         </div>
     {% endnamespace %}

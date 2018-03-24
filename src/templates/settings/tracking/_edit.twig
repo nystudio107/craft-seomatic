@@ -37,6 +37,7 @@
                         name: "include",
                         on: scriptData.include,
                         warning: false,
+                        errors: scriptData.getErrors("include"),
                     }) }}
                     </div>
                     <div class="seomatic-script-container" {% if not scriptData.include %}style="display: none;"{% endif %}>
@@ -75,6 +76,7 @@
                             value: scriptData.templateString,
                             class: "seomatic-javascript-editor",
                             warning: false,
+                            errors: scriptData.getErrors("templateString"),
                         }) }}
     
                         {{ forms.selectField({
@@ -88,6 +90,7 @@
                                 3: "Body End - before the </body> tag" |t("seomatic"),
                             },
                             value: scriptData.position,
+                            errors: scriptData.getErrors("position"),
                         }) }}
                     </div>
                 {% endnamespace %}

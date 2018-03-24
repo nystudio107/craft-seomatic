@@ -9,6 +9,7 @@
         name: "twitterHandle",
         value: site.twitterHandle,
         warning: false,
+        errors: site.getErrors("twitterHandle"),
     }) }}
 
     {{ forms.textField({
@@ -18,6 +19,7 @@
         name: "facebookProfileId",
         value: site.facebookProfileId,
         warning: false,
+        errors: site.getErrors("facebookProfileId"),
     }) }}
 
     {{ forms.textField({
@@ -27,6 +29,7 @@
         name: "facebookAppId",
         value: site.facebookAppId,
         warning: false,
+        errors: site.getErrors("facebookAppId"),
     }) }}
 
     {{ forms.textField({
@@ -36,6 +39,7 @@
         name: "googleSiteVerification",
         value: site.googleSiteVerification,
         warning: false,
+        errors: site.getErrors("googleSiteVerification"),
     }) }}
 
     {{ forms.textField({
@@ -45,6 +49,7 @@
         name: "bingSiteVerification",
         value: site.bingSiteVerification,
         warning: false,
+        errors: site.getErrors("bingSiteVerification"),
     }) }}
 
     {{ forms.textField({
@@ -54,6 +59,7 @@
         name: "pinterestSiteVerification",
         value: site.pinterestSiteVerification,
         warning: false,
+        errors: site.getErrors("pinterestSiteVerification"),
     }) }}
 
     {{ forms.editableTableField({
@@ -82,6 +88,7 @@
             },
         },
         rows: site.sameAsLinks,
+        errors: site.getErrors("sameAsLinks"),
     }) }}
 
 {% endnamespace %}

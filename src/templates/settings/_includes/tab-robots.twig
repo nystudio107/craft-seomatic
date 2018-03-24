@@ -12,8 +12,9 @@
         instructions: "Whether the `robots.txt` template should be rendered" |t("seomatic"),
         id: "include",
         name: "include",
-        on: humansTemplate.include,
+        on: robotsTemplate.include,
         warning: false,
+        errors: robotsTemplate.getErrors("include"),
     }) }}
 
     {{ forms.textAreaField({
@@ -24,5 +25,6 @@
         value: robotsTemplate.templateString,
         class: "seomatic-twig-editor",
         warning: false,
+        errors: robotsTemplate.getErrors("templateString"),
     }) }}
 {% endnamespace %}

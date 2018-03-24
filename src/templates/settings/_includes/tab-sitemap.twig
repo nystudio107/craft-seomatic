@@ -16,6 +16,7 @@
         name: "sitemapUrls",
         on: sitemap.sitemapUrls,
         warning: false,
+        errors: sitemap.getErrors("sitemapUrls"),
     }) }}
 
     {{ forms.lightswitchField({
@@ -25,6 +26,7 @@
         name: "sitemapAssets",
         on: sitemap.sitemapAssets,
         warning: false,
+        errors: sitemap.getErrors("sitemapAssets"),
     }) }}
 
     {{ forms.lightswitchField({
@@ -34,6 +36,7 @@
         name: "sitemapFiles",
         on: sitemap.sitemapFiles,
         warning: false,
+        errors: sitemap.getErrors("sitemapFiles"),
     }) }}
 
     {{ forms.lightswitchField({
@@ -43,6 +46,7 @@
         name: "sitemapAltLinks",
         on: sitemap.sitemapAltLinks,
         warning: false,
+        errors: sitemap.getErrors("sitemapAltLinks"),
     }) }}
 
     {{ forms.selectField({
@@ -60,6 +64,7 @@
             never : "Never" |t("seomatic"),
         },
         value: sitemap.sitemapChangeFreq,
+        errors: sitemap.getErrors("sitemapChangeFreq"),
     }) }}
 
     {{ forms.selectField({
@@ -81,6 +86,7 @@
             "0.0": "0.0",
         },
         value: sitemap.sitemapPriority,
+        errors: sitemap.getErrors("sitemapPriority"),
     }) }}
 
     {{ forms.selectField({
@@ -99,6 +105,7 @@
             "5": "5",
         },
         value: sitemap.sitemapLimit,
+        errors: sitemap.getErrors("sitemapLimit"),
     }) }}
 
     {{ forms.editableTableField({
@@ -121,6 +128,7 @@
             },
         },
         rows: sitemap.sitemapImageFieldMap,
+        errors: sitemap.getErrors("sitemapImageFieldMap"),
     }) }}
 
     {{ forms.editableTableField({
@@ -143,6 +151,7 @@
             },
         },
         rows: sitemap.sitemapVideoFieldMap,
+        errors: sitemap.getErrors("sitemapVideoFieldMap"),
     }) }}
 
 {% endnamespace %}
