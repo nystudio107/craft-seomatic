@@ -60,21 +60,26 @@
     var siteSubTypeId = '{{ "siteSubType" |namespaceInputId }}';
     var siteSpecificTypeId = '{{ "siteSpecificType" |namespaceInputId }}';
 
+    // Show any panes that should be visible based on the chosen type
     {% if mainEntityOfPage.siteType |length %}
         $('.metaPane.{{ mainEntityOfPage.siteType }}').show();
-    {% else %}
-        $('#'+siteSubTypeId+'-field').hide();
     {% endif %}
-    {% if mainEntityOfPage.siteSubType |length and mainEntityOfPage.siteSubType != "none" %}
+    {% if mainEntityOfPage.siteSubType |length %}
         $('.metaSubPane.{{ mainEntityOfPage.siteSubType }}').show();
-    {% else %}
-        $('#'+siteSpecificTypeId+'-field').hide();
     {% endif %}
-    {% if mainEntityOfPage.siteSpecificType |length and mainEntityOfPage.siteSpecificType != "none" %}
+    {% if mainEntityOfPage.siteSpecificType |length %}
         $('.metaSpecificPane.{{ mainEntityOfPage.siteSpecificType }}').show();
-    {% else %}
-        $('#'+siteSpecificTypeId+'-field').hide();
     {% endif %}
+
+    // Hide the sub-type menus as appropriate
+    if ($('#' + siteSubTypeId + ' option').length <= 1) {
+        $('#'+siteSubTypeId+'-field').hide();
+        $('#'+siteSubTypeId).val('none');
+    }
+    if ($('#' + siteSpecificTypeId + ' option').length <= 1) {
+        $('#'+siteSpecificTypeId+'-field').hide();
+        $('#'+siteSpecificTypeId).val('none');
+    }
 
     // Handle clicks on the siteType schema menu
     $('#'+siteTypeId).on('change', function(e) {
@@ -85,10 +90,12 @@
         fillDynamicSchemaMenu(siteSubTypeId, '', path, false, true, function() {
             if ($('#' + siteSubTypeId + ' option').length <= 1) {
                 $('#'+siteSubTypeId+'-field').hide();
+                $('#'+siteSubTypeId).val('none');
             } else {
                 $('#'+siteSubTypeId+'-field').show();
             }
             $('#'+siteSpecificTypeId+'-field').hide();
+            $('#'+siteSpecificTypeId).val('none');
         });
     });
 
@@ -101,6 +108,7 @@
         fillDynamicSchemaMenu(siteSpecificTypeId, '', path, true, true, function() {
             if ($('#' + siteSpecificTypeId + ' option').length <= 1) {
                 $('#'+siteSpecificTypeId+'-field').hide();
+                $('#'+siteSpecificTypeId).val('none');
             } else {
                 $('#'+siteSpecificTypeId+'-field').show();
             }
