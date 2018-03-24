@@ -2,13 +2,24 @@
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
 
+{% switch pageContext %}
+    {% case "identity" %}
+        {% set websiteVerb = "owns" %}
+
+    {% case "creator" %}
+        {% set websiteVerb = "created" %}
+
+    {% default %}
+        {% set websiteVerb = "" %}
+{% endswitch %}
+
 {############### General Info for all types ###############}
 
 <h2>{{ "General Info"  |t("seomatic") }}</h2>
 
 {{ forms.textField({
     label: "Entity Name" |t("seomatic"),
-    instructions: "The name of the entity that owns the website"  |t("seomatic") |raw,
+    instructions: "The name of the entity that #{websiteVerb} the website"  |t("seomatic") |raw,
     id: "genericName",
     class: "nicetext",
     name: "genericName",
@@ -19,7 +30,7 @@
 
 {{ forms.textField({
     label: "Alternate Entity Name" |t("seomatic"),
-    instructions: "An alternate or nickname for the entity that owns the website"  |t("seomatic") |raw,
+    instructions: "An alternate or nickname for the entity that #{websiteVerb} the website"  |t("seomatic") |raw,
     id: "genericAlternateName",
     class: "nicetext",
     name: "genericAlternateName",
@@ -31,11 +42,11 @@
 <div class="field" id="genericDescription-field">
     <div class="heading">
         <label for="genericDescription">{{ "Entity Description" |t("seomatic")}}</label>
-        <div class="instructions"><p>{{ "A description of the entity that owns the website"  |t("seomatic") |raw}}</p></div>
+        <div class="instructions"><p>{{ "A description of the entity that #{websiteVerb} the website"  |t("seomatic") |raw}}</p></div>
     </div>
     {{ forms.textarea({
         label: "Entity Description" |t("seomatic"),
-        instructions: "A description of the entity that owns the website"  |t("seomatic") |raw,
+        instructions: "A description of the entity that #{websiteVerb} the website"  |t("seomatic") |raw,
         id: "genericDescription",
         class: "nicetext",
         name: "genericDescription",
@@ -49,7 +60,7 @@
 
 {{ forms.textField({
     label: "Entity URL" |t("seomatic"),
-    instructions: "A URL for the entity that owns the website"  |t("seomatic") |raw,
+    instructions: "A URL for the entity that #{websiteVerb} the website"  |t("seomatic") |raw,
     id: "genericUrl",
     class: "nicetext",
     name: "genericUrl",
@@ -60,7 +71,7 @@
 
 {{ forms.elementSelectfield({
     label: "Entity Brand" |t("seomatic"),
-    instructions: "An image or logo that represents the entity that owns the website.  The image must be in JPG, PNG, or GIF format."  |t("seomatic"),
+    instructions: "An image or logo that represents the entity that #{websiteVerb} the website.  The image must be in JPG, PNG, or GIF format."  |t("seomatic"),
     id: "genericImageIds",
     name: "genericImageIds",
     viewMode: "large",
@@ -79,7 +90,7 @@
 
 {{ forms.textField({
     label: "Entity Telephone" |t("seomatic"),
-    instructions: "The primary contact telephone number for the entity that owns the website"  |t("seomatic") |raw,
+    instructions: "The primary contact telephone number for the entity that #{websiteVerb} the website"  |t("seomatic") |raw,
     id: "genericTelephone",
     class: "nicetext",
     name: "genericTelephone",
@@ -90,7 +101,7 @@
 
 {{ forms.textField({
     label: "Entity Email" |t("seomatic"),
-    instructions: "The primary contact email address for the entity that owns the website"  |t("seomatic") |raw,
+    instructions: "The primary contact email address for the entity that #{websiteVerb} the website"  |t("seomatic") |raw,
     id: "genericEmail",
     class: "nicetext",
     name: "genericEmail",
@@ -104,7 +115,7 @@
 
 {{ forms.textField({
     label: "Entity Street Address" |t("seomatic"),
-    instructions: "The street address of the entity that owns the website, e.g.: 123 Main Street"  |t("seomatic") |raw,
+    instructions: "The street address of the entity that #{websiteVerb} the website, e.g.: 123 Main Street"  |t("seomatic") |raw,
     id: "genericStreetAddress",
     class: "nicetext",
     name: "genericStreetAddress",
@@ -117,7 +128,7 @@
     <div class="half-width-field half-width-field-left">
         {{ forms.textField({
             label: "Entity Locality" |t("seomatic"),
-            instructions: "The locality of the entity that owns the website, e.g.: Portchester"  |t("seomatic") |raw,
+            instructions: "The locality of the entity that #{websiteVerb} the website, e.g.: Portchester"  |t("seomatic") |raw,
             id: "genericAddressLocality",
             class: "nicetext",
             name: "genericAddressLocality",
@@ -129,7 +140,7 @@
     <div class="half-width-field">
         {{ forms.textField({
             label: "Entity Region" |t("seomatic"),
-            instructions: "The region of the entity that owns the website, e.g.: New York or NY"  |t("seomatic") |raw,
+            instructions: "The region of the entity that #{websiteVerb} the website, e.g.: New York or NY"  |t("seomatic") |raw,
             id: "genericAddressRegion",
             class: "nicetext",
             name: "genericAddressRegion",
@@ -144,7 +155,7 @@
     <div class="half-width-field half-width-field-left">
         {{ forms.textField({
             label: "Entity Postal Code" |t("seomatic"),
-            instructions: "The postal code of the entity that owns the website, e.g.: 14580"  |t("seomatic") |raw,
+            instructions: "The postal code of the entity that #{websiteVerb} the website, e.g.: 14580"  |t("seomatic") |raw,
             id: "genericPostalCode",
             class: "nicetext",
             name: "genericPostalCode",
@@ -156,7 +167,7 @@
     <div class="half-width-field">
         {{ forms.textField({
             label: "Entity Country" |t("seomatic"),
-            instructions: "The country in which the entity that owns the website is located, e.g.: US"  |t("seomatic") |raw,
+            instructions: "The country in which the entity that #{websiteVerb} the website is located, e.g.: US"  |t("seomatic") |raw,
             id: "genericAddressCountry",
             class: "nicetext",
             name: "genericAddressCountry",
@@ -171,7 +182,7 @@
     <div class="half-width-field half-width-field-left">
         {{ forms.textField({
             label: "Entity Latitude" |t("seomatic"),
-            instructions: "The latitude of the location of the entity that owns the website, e.g.: -120.5436367"  |t("seomatic") |raw,
+            instructions: "The latitude of the location of the entity that #{websiteVerb} the website, e.g.: -120.5436367"  |t("seomatic") |raw,
             id: "genericGeoLatitude",
             class: "nicetext",
             name: "genericGeoLatitude",
@@ -184,7 +195,7 @@
     <div class="half-width-field">
         {{ forms.textField({
             label: "Entity Longitude" |t("seomatic"),
-            instructions: "The longitude of the location of the entity that owns the website, e.g.: 80.6033588"  |t("seomatic") |raw,
+            instructions: "The longitude of the location of the entity that #{websiteVerb} the website, e.g.: 80.6033588"  |t("seomatic") |raw,
             id: "genericGeoLongitude",
             class: "nicetext",
             name: "genericGeoLongitude",
@@ -254,7 +265,7 @@
         <div class="half-width-field half-width-field-left">
             {{ forms.textField({
                 label: "Organization DUNS Number" |t("seomatic"),
-                instructions: "The DUNS (Dunn & Bradstreet) number of the organization/company/restaurant that owns the website"  |t("seomatic") |raw,
+                instructions: "The DUNS (Dunn & Bradstreet) number of the organization/company/restaurant that #{websiteVerb} the website"  |t("seomatic") |raw,
                 id: "organizationDuns",
                 class: "nicetext",
                 name: "organizationDuns",
