@@ -161,6 +161,9 @@ class Schema
                 $typesArray = $typesArray[$key];
             }
         }
+        if (!is_array($typesArray)) {
+            $typesArray = [];
+        }
 
         return $typesArray;
     }

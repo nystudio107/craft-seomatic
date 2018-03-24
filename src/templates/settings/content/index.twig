@@ -44,7 +44,7 @@
                     {% set stat = stat + 1 %}
                 {% endif %}
             {% endfor %}
-            {% set stat = round(numGrades - ((stat * numGrades) / numFields)) %}
+            {% set stat = (numGrades - ((stat * numGrades) / numFields)) |round %}
             {% if stat >= numGrades %}
                 {% set stat = numGrades - 1 %}
             {% endif %}
