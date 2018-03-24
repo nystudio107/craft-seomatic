@@ -1,0 +1,117 @@
+{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
+{% import "_includes/forms" as forms %}
+
+<div class="field">
+    <div class="heading">
+        <label for="siteType">{{ mainEntityTitle |t("seomatic")}}</label>
+        <div class="instructions"><p>{{ mainEntityDescription ~ " Choose as general or specific of an Entity Type as you wish.  Leave a sub-type blank if you don't want to specify a sub-type."  |t("seomatic") |raw}}</p></div>
+    </div>
+    <div>
+        <div class="inline-item">
+            {{ forms.selectField({
+                id: "siteType",
+                class: "inline-item",
+                fieldClass: "inline-item",
+                options: seomatic.helper.getSingleTypeMenu(''),
+                name: "siteType",
+                value: mainEntityOfPage.siteType,
+                required: true,
+                errors: mainEntityOfPage.getErrors("siteType"),
+            }) }}
+        </div>
+        <div class="inline-item">
+            {{ forms.selectField({
+                id: "siteSubType",
+                label: "&rarr;",
+                class: "inline-item",
+                fieldClass: "inline-item",
+                options: {"none": ""} |merge(seomatic.helper.getSingleTypeMenu(mainEntityOfPage.siteType)),
+                name: "siteSubType",
+                value: mainEntityOfPage.siteSubType,
+                required: false,
+                errors: mainEntityOfPage.getErrors("siteSubType"),
+            }) }}
+        </div>
+        <div class="inline-item">
+            {{ forms.selectField({
+                id: "siteSpecificType",
+                label: "&rarr;",
+                class: "inline-item",
+                fieldClass: "inline-item",
+                options: {"none": ""} |merge(seomatic.helper.getTypeMenu(mainEntityOfPage.siteType ~ '.' ~ mainEntityOfPage.siteSubType)),
+                name: "siteSpecificType",
+                value: mainEntityOfPage.siteSpecificType,
+                required: false,
+                errors: mainEntityOfPage.getErrors("siteSpecificType"),
+            }) }}
+        </div>
+    </div>
+</div>
+
+
+{% js %}
+    // Initially hide all of the meta panes
+    $('.metaPane').hide();
+    $('.metaSubPane').hide();
+    $('.metaSpecificPane').hide();
+
+    // Fill in the dynamic schema menus
+    var siteTypeId = '{{ "siteType" |namespaceInputId }}';
+    var siteSubTypeId = '{{ "siteSubType" |namespaceInputId }}';
+    var siteSpecificTypeId = '{{ "siteSpecificType" |namespaceInputId }}';
+
+    {% if mainEntityOfPage.siteType |length %}
+        $('.metaPane.{{ mainEntityOfPage.siteType }}').show();
+    {% else %}
+        $('#'+siteSubTypeId+'-field').hide();
+    {% endif %}
+    {% if mainEntityOfPage.siteSubType |length and mainEntityOfPage.siteSubType != "none" %}
+        $('.metaSubPane.{{ mainEntityOfPage.siteSubType }}').show();
+    {% else %}
+        $('#'+siteSpecificTypeId+'-field').hide();
+    {% endif %}
+    {% if mainEntityOfPage.siteSpecificType |length and mainEntityOfPage.siteSpecificType != "none" %}
+        $('.metaSpecificPane.{{ mainEntityOfPage.siteSpecificType }}').show();
+    {% else %}
+        $('#'+siteSpecificTypeId+'-field').hide();
+    {% endif %}
+
+    // Handle clicks on the siteType schema menu
+    $('#'+siteTypeId).on('change', function(e) {
+        var path = $('#'+siteTypeId).val();
+        var value = $('#'+siteTypeId).val();
+        $('.metaPane').hide();
+        $('.metaPane.' + value).show();
+        fillDynamicSchemaMenu(siteSubTypeId, '', path, false, true, function() {
+            if ($('#' + siteSubTypeId + ' option').length <= 1) {
+                $('#'+siteSubTypeId+'-field').hide();
+            } else {
+                $('#'+siteSubTypeId+'-field').show();
+            }
+            $('#'+siteSpecificTypeId+'-field').hide();
+        });
+    });
+
+    // Handle clicks on the siteSubType schema menu
+    $('#'+siteSubTypeId).on('change', function(e) {
+        var path = $('#'+siteTypeId).val() + '.' + $('#'+siteSubTypeId).val();
+        var value = $('#'+siteSubTypeId).val();
+        $('.metaSubPane').hide();
+        $('.metaSubPane.' + value).show();
+        fillDynamicSchemaMenu(siteSpecificTypeId, '', path, true, true, function() {
+            if ($('#' + siteSpecificTypeId + ' option').length <= 1) {
+                $('#'+siteSpecificTypeId+'-field').hide();
+            } else {
+                $('#'+siteSpecificTypeId+'-field').show();
+            }
+        });
+    });
+
+    // Handle clicks on the siteSpecificType schema menu
+    $('#'+siteSpecificTypeId).on('change', function(e) {
+        var value = $('#'+siteSpecificTypeId).val();
+        $('.metaSpecificPane').hide();
+        $('.metaSpecificPane.' + value).show();
+    });
+
+{% endjs %}
