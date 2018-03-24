@@ -407,6 +407,7 @@ The `seomatic.meta` variable contains all of the meta variables that control the
 
 ##### General Variables:
 
+* **`seomatic.meta.mainEntityOfPage`** - the [schema.org](http://schema.org/docs/full.html) type that represents the main entity of the page
 * **`seomatic.meta.seoTitle`** - the title that is used for the `<title>` tag
 * **`seomatic.meta.siteNamePosition`** - controls where the `seomatic.site.siteName` appears relative to the `seomatic.meta.seoTitle` in the `<title>` tag. Valid values are `before`, `after`, or `none`.
 * **`seomatic.meta.seoDescription`** - the description that is used for the `<meta name="description">` tag

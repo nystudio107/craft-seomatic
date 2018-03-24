@@ -17,6 +17,7 @@
 
 return [
     '*' => [
+        'mainEntityOfPage'        => 'WebSite',
         'seoTitle'                => '',
         'siteNamePosition'        => 'before',
         'seoDescription'          => '',

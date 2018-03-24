@@ -50,6 +50,11 @@ class MetaGlobalVars extends VarsModel
     public $language;
 
     /**
+     * @var string The schema.org type representing the mainEntityOfPage
+     */
+    public $mainEntityOfPage = 'WebPage';
+
+    /**
      * @var string The seoTitle is used in the `<title>` tag, and as a default
      *      setting for the ogTitle & twitterTitle
      */
@@ -189,6 +194,7 @@ class MetaGlobalVars extends VarsModel
             [
                 [
                     'language',
+                    'mainEntityOfPage',
                     'seoTitle',
                     'siteNamePosition',
                     'seoDescription',

@@ -1,5 +1,14 @@
 # SEOmatic Changelog
 
+### 3.0.0-beta.15 - 2018.03.24
+## Changed
+* Separated the mainEntityOfPage templates off into a partial
+* Cleaned up the Identity Settings & Creator Settings pages
+
+## Added
+* Added a description of JSON-LD Structured Data to the Identity & Creator pages
+* Added **Main Entity of Page** settings on the Global SEO and Content SEO General pages
+
 ### 3.0.0-beta.14 - 2018.03.23
 ## Changed
 * Fixed an issue with console requests raising an exception in `addDynamicMetaToContainers()`

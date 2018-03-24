@@ -17,8 +17,8 @@
 
 return [
     '*' => [
-        'siteType'                     => '',
-        'siteSubType'                  => '',
+        'siteType'                     => 'Organization',
+        'siteSubType'                  => 'LocalBusiness',
         'siteSpecificType'             => '',
         'genericName'                  => '',
         'genericAlternateName'         => '',
