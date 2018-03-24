@@ -5,6 +5,9 @@
 * Fixed an issue with console requests raising an exception in `addDynamicMetaToContainers()`
 * Add `errors` display to all settings templates
 
+## Added
+* Implemented dynamic Identity Settings & Creator Settings pages
+
 ### 3.0.0-beta.13 - 2018.03.22
 ## Changed
 * Don't look for `getPathInfo()` during a console request
