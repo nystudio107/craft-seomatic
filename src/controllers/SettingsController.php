@@ -622,15 +622,15 @@ class SettingsController extends Controller
         if ($metaBundle) {
             if (is_array($siteSettings)) {
                 if (!empty($siteSettings['identity'])) {
-                    $this->normalizeTimes($siteSettings['identity']['localBusinessOpeningHours']);
-                    $siteSettings['identity']['computedType'] = $this->getSpecificEntityType($siteSettings['identity']);
-                    $metaBundle->metaSiteVars->identity->setAttributes($siteSettings['identity']);
+                    $settings = $siteSettings['identity'];
+                    $this->prepEntitySettings($settings);
+                    $metaBundle->metaSiteVars->identity->setAttributes($settings);
                     $siteSettings['identity'] = $metaBundle->metaSiteVars->identity;
                 }
                 if (!empty($siteSettings['creator'])) {
-                    $this->normalizeTimes($siteSettings['creator']['localBusinessOpeningHours']);
-                    $siteSettings['creator']['computedType'] = $this->getSpecificEntityType($siteSettings['creator']);
-                    $metaBundle->metaSiteVars->creator->setAttributes($siteSettings['creator']);
+                    $settings = $siteSettings['creator'];
+                    $this->prepEntitySettings($settings);
+                    $metaBundle->metaSiteVars->creator->setAttributes($settings);
                     $siteSettings['creator'] = $metaBundle->metaSiteVars->creator;
                 }
                 $metaBundle->metaSiteVars->setAttributes($siteSettings);
@@ -1219,6 +1219,24 @@ class SettingsController extends Controller
         }
 
         return $siteId;
+    }
+
+    /**
+     * Prep the entity settings for saving to the db
+     * @param array &$settings
+     */
+    protected function prepEntitySettings(&$settings)
+    {
+        $this->normalizeTimes($settings['localBusinessOpeningHours']);
+        $settings['computedType'] = $this->getSpecificEntityType($settings);
+        if (!empty($settings['genericImageIds'])) {
+            $asset = Craft::$app->getAssets()->getAssetById($settings['genericImageIds'][0]);
+            if (!empty($asset)) {
+                $settings['genericImage'] = $asset->getUrl();
+                $settings['genericImageWidth'] = $asset->getWidth();
+                $settings['genericImageHeight'] = $asset->getHeight();
+            }
+        }
     }
 
 }
