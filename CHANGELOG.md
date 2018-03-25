@@ -1,5 +1,13 @@
 # SEOmatic Changelog
 
+### 3.0.0-beta.16 - 2018.03.25
+## Changed
+* Fixed an issue where fresh installations were not taken to the Welcome screen
+* Replaced old SEOmatic icon in the Asset Bundle
+
+## Added
+* Added Miscellaneous settings with Google Site Links search settings
+
 ### 3.0.0-beta.15 - 2018.03.24
 ## Changed
 * Separated the mainEntityOfPage templates off into a partial
