@@ -1,0 +1,42 @@
+{% requirePermission "seomatic:site-settings:miscellaneous" %}
+
+{% extends "seomatic/_layouts/siteSettings.twig" %}
+
+{% block header %}
+    {{ block('pageTitle') }}
+    {{ block('contextMenu') }}
+    <div class="flex-grow"></div>
+    <div class="flex-grow"></div>
+    {{ block('actionButton') }}
+{% endblock %}
+
+{% block contextMenu %}
+    {% include "seomatic/settings/_includes/sites-menu.twig" %}
+{% endblock %}
+
+{% block content %}
+    
+    <input type="hidden" name="action" value="seomatic/settings/save-site">
+    <input type="hidden" name="siteId" value="{{ currentSiteId }}">
+    {{ redirectInput("seomatic/site/#{currentSubSection}/#{currentSiteHandle}") }}
+    
+    {% if currentUser.can("seomatic:site-settings:miscellaneous") %}
+        <div id="tab-content-miscellaneous">
+            <div class="field">
+                <div class="heading">
+                    <h2>{{ subSectionTitle ~ " Settings" |t("seomatic") }}</h2>
+                    <div class="instructions">
+                        <p>
+                            {{ "Miscallaneous site-side SEO settings." |t("seomatic") |md }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% include "seomatic/settings/site/_includes/tab-miscellaneous.twig" %}
+        </div>
+    {% endif %}
+    
+    {% include "seomatic/_includes/footer-message.twig" with {
+        message: ""
+    } %}
+{% endblock %}

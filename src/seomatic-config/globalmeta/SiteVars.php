@@ -80,5 +80,7 @@ return [
                 'url'      => '',
             ],
         ],
+        'siteLinksSearchTarget' => '',
+        'siteLinksQueryInput' => '',
     ],
 ];
