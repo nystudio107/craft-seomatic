@@ -20,6 +20,7 @@ return [
         'siteType'                     => 'Organization',
         'siteSubType'                  => 'LocalBusiness',
         'siteSpecificType'             => '',
+        'computedType'                 => 'Organization',
         'genericName'                  => '',
         'genericAlternateName'         => '',
         'genericDescription'           => '',

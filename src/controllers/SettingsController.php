@@ -304,7 +304,7 @@ class SettingsController extends Controller
             if (is_array($globalsSettings) && is_array($bundleSettings)) {
                 $this->parseTextSources($elementName, $globalsSettings, $bundleSettings);
                 $this->parseImageSources($elementName, $globalsSettings, $bundleSettings, $siteId);
-                $globalsSettings['mainEntityOfPage'] = $this->getMainEntityOfPage($globalsSettings);
+                $globalsSettings['mainEntityOfPage'] = $this->getSpecificEntityType($globalsSettings);
                 $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
                 $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
             }
@@ -511,7 +511,7 @@ class SettingsController extends Controller
             if (is_array($globalsSettings) && is_array($bundleSettings)) {
                 $this->parseTextSources($elementName, $globalsSettings, $bundleSettings);
                 $this->parseImageSources($elementName, $globalsSettings, $bundleSettings, $siteId);
-                $globalsSettings['mainEntityOfPage'] = $this->getMainEntityOfPage($globalsSettings);
+                $globalsSettings['mainEntityOfPage'] = $this->getSpecificEntityType($globalsSettings);
                 $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
                 $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
             }
@@ -623,11 +623,13 @@ class SettingsController extends Controller
             if (is_array($siteSettings)) {
                 if (!empty($siteSettings['identity'])) {
                     $this->normalizeTimes($siteSettings['identity']['localBusinessOpeningHours']);
+                    $siteSettings['identity']['computedType'] = $this->getSpecificEntityType($siteSettings['identity']);
                     $metaBundle->metaSiteVars->identity->setAttributes($siteSettings['identity']);
                     $siteSettings['identity'] = $metaBundle->metaSiteVars->identity;
                 }
                 if (!empty($siteSettings['creator'])) {
                     $this->normalizeTimes($siteSettings['creator']['localBusinessOpeningHours']);
+                    $siteSettings['creator']['computedType'] = $this->getSpecificEntityType($siteSettings['creator']);
                     $metaBundle->metaSiteVars->creator->setAttributes($siteSettings['creator']);
                     $siteSettings['creator'] = $metaBundle->metaSiteVars->creator;
                 }
@@ -1160,7 +1162,7 @@ class SettingsController extends Controller
      *
      * @return string
      */
-    protected function getMainEntityOfPage($settings): string
+    protected function getSpecificEntityType($settings): string
     {
         if (!empty($settings)) {
             // Go from most specific type to least specific type
