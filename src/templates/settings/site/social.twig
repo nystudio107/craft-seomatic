@@ -22,7 +22,16 @@
     
     {% if currentUser.can("seomatic:site-settings:social") %}
         <div id="tab-content-social">
-            <h2>{{ subSectionTitle ~ " Settings" |t("seomatic") }}</h2>
+            <div class="field">
+                <div class="heading">
+                    <h2>{{ subSectionTitle ~ " Settings" |t("seomatic") }}</h2>
+                    <div class="instructions">
+                        <p>
+                            {{ "The social media settings connect your website to its other points of pressence on the Internet. They also facilitate attaching your branding to social media posts via Twitter Cards and Facebook OpenGraph." |t("seomatic") |md }}
+                        </p>
+                    </div>
+                </div>
+            </div>
             {% include "seomatic/settings/site/_includes/tab-social.twig" %}
         </div>
     {% endif %}
