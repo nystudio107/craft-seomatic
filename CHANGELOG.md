@@ -4,6 +4,7 @@
 ## Changed
 * Fixed an issue where fresh installations were not taken to the Welcome screen
 * Replaced old SEOmatic icon in the Asset Bundle
+* Fixed an issue where Identity and Creator settings were not properly defaulted from the config files on fresh installations
 
 ## Added
 * Added Miscellaneous settings with Google Site Links search settings
