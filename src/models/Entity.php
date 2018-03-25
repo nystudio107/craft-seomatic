@@ -40,6 +40,11 @@ class Entity extends FluentModel
     public $siteSpecificType;
 
     /**
+     * @var string The computed most specific schema.org type
+     */
+    public $computedType = 'Organization';
+
+    /**
      * @var string
      */
     public $genericName;
@@ -193,6 +198,7 @@ class Entity extends FluentModel
                     'siteType',
                     'siteSubType',
                     'siteSpecificType',
+                    'computedType',
                     'genericName',
                     'genericAlternateName',
                     'genericDescription',
