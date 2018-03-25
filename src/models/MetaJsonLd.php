@@ -12,8 +12,8 @@
 namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\helpers\JsonLd as JsonLdHelper;
 use nystudio107\seomatic\base\MetaItem;
+use nystudio107\seomatic\helpers\JsonLd as JsonLdHelper;
 
 use craft\helpers\Json;
 use craft\helpers\Template;
@@ -118,6 +118,13 @@ class MetaJsonLd extends MetaItem
      */
     public $type;
 
+    /**
+     * The item's id.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $id;
+
     // Static Protected Properties
     // =========================================================================
 
@@ -175,17 +182,35 @@ class MetaJsonLd extends MetaItem
     public static function create($schemaType, $config = []): MetaJsonLd
     {
         $model = null;
+
         $className = 'nystudio107\\seomatic\\models\\jsonld\\' . $schemaType;
         /** @var $model MetaJsonLd */
         if (class_exists($className)) {
+            self::cleanProperties($className, $config);
             $model = new $className($config);
         } else {
+            $className = MetaJsonLd::class;
+            self::cleanProperties($className, $config);
             $model = new MetaJsonLd($config);
         }
 
         return $model;
     }
 
+    /**
+     * Remove any properties that don't exist in the model
+     *
+     * @param string $class
+     * @param array  $config
+     */
+    protected static function cleanProperties(string $class, array &$config)
+    {
+        foreach ($config as $propName => $propValue) {
+            if (!property_exists($class, $propName)) {
+                unset($config[$propName]);
+            }
+        }
+    }
 
     // Public Methods
     // =========================================================================
