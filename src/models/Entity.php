@@ -65,7 +65,22 @@ class Entity extends FluentModel
     public $genericUrl;
 
     /**
-     * @var array
+     * @var array URL for the entity image
+     */
+    public $genericImage;
+
+    /**
+     * @var int The width of the entity image
+     */
+    public $genericImageWidth;
+
+    /**
+     * @var int The height of the entity image
+     */
+    public $genericImageHeight;
+
+    /**
+     * @var array Asset ID array for the entity image
      */
     public $genericImageIds;
 
@@ -203,6 +218,7 @@ class Entity extends FluentModel
                     'genericAlternateName',
                     'genericDescription',
                     'genericUrl',
+                    'genericImage',
                     'genericTelephone',
                     'genericEmail',
                     'genericStreetAddress',
@@ -224,6 +240,13 @@ class Entity extends FluentModel
                     'restaurantReservationsUrl',
                 ],
                 'string'
+            ],
+            [
+                [
+                    'genericImageWidth',
+                    'genericImageHeight',
+                ],
+                'integer'
             ],
             [
                 [
