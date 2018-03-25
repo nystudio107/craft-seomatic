@@ -76,8 +76,10 @@ class JsonLd extends Json
     }
 
     /**
-     * Normalize the JSON-LD array recursively to remove empty values, prefixing
-     * 'id', 'context', and 'type' with '@', and have 'type' be the first item in the array
+     * Normalize the JSON-LD array recursively to remove empty values,
+     * prefixing
+     * 'id', 'context', and 'type' with '@', and have 'type' be the first item
+     * in the array
      *
      * @param array $array
      * @param int   $depth
@@ -101,7 +103,7 @@ class JsonLd extends Json
      * Replace key values without reordering the array or converting numeric
      * keys to associative keys (which unset() does)
      *
-     * @param array $array
+     * @param array  $array
      * @param string $oldKey
      * @param string $newKey
      *
