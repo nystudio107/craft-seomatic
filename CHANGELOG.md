@@ -9,6 +9,7 @@
 ## Added
 * Added Miscellaneous settings with Google Site Links search settings
 * Preserve user settings in the Tracking Scripts when bundles are updated
+* Better parsing of the JSON-LD config files
 
 ### 3.0.0-beta.15 - 2018.03.24
 ## Changed
