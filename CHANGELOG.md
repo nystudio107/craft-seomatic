@@ -4,6 +4,7 @@
 ## Changed
 * Check against `siteType`, `siteSubType` and `siteSpecificType` being `null` on the Site Settings pages
 * Updated `humans.txt` template to display information from the Creator settings
+* Separate Identity and Creator Entity Brand fields
 
 ### 3.0.0-beta.16 - 2018.03.25
 ## Changed
