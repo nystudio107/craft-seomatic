@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\helpers;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\models\jsonld\BreadcrumbList;
+use nystudio107\seomatic\models\jsonld\Thing;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 use Craft;
@@ -122,9 +123,9 @@ class DynamicMeta
         }
         /** @var  $crumbs BreadcrumbList */
         $crumbs = Seomatic::$plugin->jsonLd->create([
-            'type' => 'BreadcrumbList',
-            'name' => 'Breadcrumbs',
-            'description' => 'Breadcrumbs list'
+            'type'        => 'BreadcrumbList',
+            'name'        => 'Breadcrumbs',
+            'description' => 'Breadcrumbs list',
         ]);
         /** @var Element $element */
         $element = Craft::$app->getElements()->getElementByUri("__home__", $siteId);
@@ -198,24 +199,23 @@ class DynamicMeta
      */
     public static function addMetaLinkHrefLang()
     {
-        /** @TODO: this is wrong, we should get the localized URLs for the current request */
-        $sites = self::getLocalizedUrls();
+        $siteLocalizedUrls = self::getLocalizedUrls();
 
         // Add the x-default hreflang
-        $site = $sites[0];
+        $siteLocalizedUrl = $siteLocalizedUrls[0];
         $metaTag = Seomatic::$plugin->link->create([
             'rel'      => 'alternate',
             'hreflang' => 'x-default',
-            'href'     => $site['url'],
+            'href'     => $siteLocalizedUrl['url'],
         ]);
         Seomatic::$plugin->link->add($metaTag);
         // Add the alternate language link rel's
-        if (count($sites) > 1) {
-            foreach ($sites as $site) {
+        if (count($siteLocalizedUrls) > 1) {
+            foreach ($siteLocalizedUrls as $siteLocalizedUrl) {
                 $metaTag = Seomatic::$plugin->link->create([
                     'rel'      => 'alternate',
-                    'hreflang' => $site['language'],
-                    'href'     => $site['url'],
+                    'hreflang' => $siteLocalizedUrl['hreflangLanguage'],
+                    'href'     => $siteLocalizedUrl['url'],
                 ]);
                 Seomatic::$plugin->link->add($metaTag);
             }
@@ -235,22 +235,69 @@ class DynamicMeta
         if ($ogSeeAlso) {
             $ogSeeAlso->content = $sameAsUrls;
         }
+        // Site Identity JSON-LD
+        $identity = Seomatic::$plugin->jsonLd->get('identity');
+        if ($identity) {
+            /** @var Thing $identity */
+            if (property_exists($identity, 'sameAs')) {
+                $identity->sameAs = $sameAsUrls;
+            }
+        }
     }
 
-
     /**
+     * Return a list of localized URLs that are in the current site's group
+     * The current URI is used if $uri is null. Similarly, the current site is
+     * used if $siteId is null.
+     * The resulting array of arrays has `id`, `language`, `hreflangLanguage`,
+     * and `url` as keys.
+     *
+     * @param string|null $uri
+     * @param int|null    $siteId
+     *
      * @return array
      */
-    public static function getLocalizedUrls()
+    public static function getLocalizedUrls(string $uri = null, int $siteId = null)
     {
         $localizedUrls = [];
+        // Get the request URI
+        if ($uri == null) {
+            try {
+                $requestUri = Craft::$app->getRequest()->getUrl();
+            } catch (InvalidConfigException $e) {
+                $requestUri = '';
+                Craft::error($e->getMessage(), __METHOD__);
+            }
+        } else {
+            $requestUri = $uri;
+        }
+        // Get the site to use
+        if ($siteId == null) {
+            try {
+                $thisSite = Craft::$app->getSites()->getCurrentSite();
+            } catch (SiteNotFoundException $e) {
+                $thisSite = null;
+                Craft::error($e->getMessage(), __METHOD__);
+            }
+        } else {
+            $thisSite = Craft::$app->getSites()->getSiteById($siteId);
+        }
+        // Bail if we can't get a site
+        if ($thisSite == null) {
+            return $localizedUrls;
+        }
+        // Get only the sites that are in the current site's group
         try {
-            $requestUri = Craft::$app->getRequest()->getUrl();
+            $siteGroup = $thisSite->getGroup();
         } catch (InvalidConfigException $e) {
-            $requestUri = '';
+            $siteGroup = null;
             Craft::error($e->getMessage(), __METHOD__);
         }
-        $sites = Craft::$app->getSites()->getAllSites();
+        // Bail if we can't get a site group
+        if ($siteGroup == null) {
+            return $localizedUrls;
+        }
+        $sites = $siteGroup->getSites();
         $elements = Craft::$app->getElements();
         foreach ($sites as $site) {
             if (Seomatic::$matchedElement) {
@@ -271,7 +318,7 @@ class DynamicMeta
             $url = ($url === null) ? '' : $url;
             if (!UrlHelper::isAbsoluteUrl($url)) {
                 try {
-                    $url = UrlHelper::siteUrl($url);
+                    $url = UrlHelper::siteUrl($url, null, null, $site->id);
                 } catch (Exception $e) {
                     $url = '';
                     Craft::error($e->getMessage(), __METHOD__);
@@ -279,12 +326,14 @@ class DynamicMeta
             }
             $url = ($url === null) ? '' : $url;
             $language = $site->language;
-            $language = strtolower($language);
-            $language = str_replace('_', '-', $language);
+            $hreflangLanguage = $site->language;
+            $hreflangLanguage = strtolower($hreflangLanguage);
+            $hreflangLanguage = str_replace('_', '-', $hreflangLanguage);
             $localizedUrls[] = [
-                'id' => $site->id,
-                'language' => $language,
-                'url' => $url
+                'id'               => $site->id,
+                'language'         => $language,
+                'hreflangLanguage' => $hreflangLanguage,
+                'url'              => $url,
             ];
         }
 
