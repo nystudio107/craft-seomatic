@@ -591,7 +591,10 @@ class SettingsController extends Controller
         // The site settings for the appropriate meta bundle
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle(intval($variables['currentSiteId']));
         $variables['site'] = $metaBundle->metaSiteVars;
-        $variables['genericImageElements'] = $this->assetElementsFromIds($variables['site']->identity->genericImageIds, $siteId);
+        $variables['identityImageElements'] =
+            $this->assetElementsFromIds($variables['site']->identity->genericImageIds, $siteId);
+        $variables['creatorImageElements'] =
+            $this->assetElementsFromIds($variables['site']->creator->genericImageIds, $siteId);
         $variables['elementType'] = Asset::class;
 
         // Render the template
