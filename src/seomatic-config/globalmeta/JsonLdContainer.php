@@ -33,6 +33,9 @@ return [
                 'type'             => '{seomatic.meta.mainEntityOfPage}',
                 'name'             => '{seomatic.meta.seoTitle}',
                 'description'      => '{seomatic.meta.seoDescription}',
+                'url'              => '{seomatic.meta.canonicalUrl}',
+                'mainEntityOfPage' => '{seomatic.meta.canonicalUrl}',
+                'inLanguage'       => '{seomatic.meta.language}',
                 'copyrightHolder'  => [
                     'id' => '{seomatic.site.identity.genericUrl}#identity',
                 ],
@@ -46,9 +49,11 @@ return [
                     'type' => 'ImageObject',
                     'url'  => '{seomatic.meta.seoImage}',
                 ],
-                'url'              => '{seomatic.meta.canonicalUrl}',
-                'mainEntityOfPage' => '{seomatic.meta.canonicalUrl}',
-                'inLanguage'       => '{seomatic.meta.language}',
+                'potentialAction' => [
+                    'type' => 'SearchAction',
+                    'target' => '{seomatic.site.siteLinksSearchTarget}',
+                    'query-input' => '{seomatic.site.siteLinksQueryInput}',
+                ],
             ],
             'identity'         => [
                 'type'          => '{seomatic.site.identity.computedType}',
