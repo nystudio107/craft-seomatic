@@ -32,7 +32,9 @@
                     </div>
                 </div>
             </div>
-            {% include "seomatic/settings/site/_includes/tab-identity.twig" %}
+            {% include "seomatic/settings/site/_includes/tab-identity.twig" with {
+                "genericImageElements": identityImageElements,
+            } %}
         </div>
     {% endif %}
     
