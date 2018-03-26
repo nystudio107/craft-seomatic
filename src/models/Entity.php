@@ -233,6 +233,7 @@ class Entity extends FluentModel
                     'organizationDuns',
                     'organizationFounder',
                     'organizationFoundingDate',
+                    'organizationFoundingLocation',
                     'corporationTickerSymbol',
                     'localBusinessPriceRange',
                     'restaurantServesCuisine',
