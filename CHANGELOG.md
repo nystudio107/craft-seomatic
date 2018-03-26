@@ -6,10 +6,13 @@
 * Updated `humans.txt` template to display information from the Creator settings
 * Separate Identity and Creator Entity Brand fields
 * Remove JSON-LD schema.org properties that have just one entry in them (just the `@type`)
+* Fixed an issue where `hreflang`s could be incorrect
 
 ## Added
 * Documented the Identity and Creator Site Settings variables
 * Added `menu` and `acceptsReservations` to the FoodEstablishment JSON-LD
+* Added link `rel=“home”` to the default tag container
+* Added `seomatic.helper.getLocalizedUrls()` function that will return a list of localized URLs
 
 ### 3.0.0-beta.16 - 2018.03.25
 ## Changed
