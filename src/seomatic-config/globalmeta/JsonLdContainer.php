@@ -49,9 +49,9 @@ return [
                     'type' => 'ImageObject',
                     'url'  => '{seomatic.meta.seoImage}',
                 ],
-                'potentialAction' => [
-                    'type' => 'SearchAction',
-                    'target' => '{seomatic.site.siteLinksSearchTarget}',
+                'potentialAction'  => [
+                    'type'        => 'SearchAction',
+                    'target'      => '{seomatic.site.siteLinksSearchTarget}',
                     'query-input' => '{seomatic.site.siteLinksQueryInput}',
                 ],
             ],
@@ -97,20 +97,22 @@ return [
                 'founder'          => '{seomatic.site.identity.organizationFounder}',
                 'foundingDate'     => '{seomatic.site.identity.organizationFoundingDate}',
                 'foundingLocation' => '{seomatic.site.identity.organizationFoundingLocation}',
-                'contactPoints' => [],
+                'contactPoints'    => [],
 
                 'tickerSymbol' => '{seomatic.site.identity.corporationTickerSymbol}',
 
-                'priceRange' => '{seomatic.site.identity.localBusinessPriceRange}',
+                'priceRange'   => '{seomatic.site.identity.localBusinessPriceRange}',
                 'openingHours' => [],
 
-                'servesCuisine' => '{seomatic.site.identity.restaurantServesCuisine}',
-                'menuUrl' => '{seomatic.site.identity.restaurantMenuUrl}',
-                'reservationsUrl' => '{seomatic.site.identity.restaurantReservationsUrl}',
+                'servesCuisine'       => '{seomatic.site.identity.restaurantServesCuisine}',
+                'menuUrl'             => '{seomatic.site.identity.restaurantMenuUrl}',
+                'menu'                => '{seomatic.site.identity.restaurantMenuUrl}',
+                'reservationsUrl'     => '{seomatic.site.identity.restaurantReservationsUrl}',
+                'acceptsReservations' => '{seomatic.site.identity.restaurantReservationsUrl}',
 
                 'inLanguage' => '{seomatic.meta.language}',
             ],
-            'creator'         => [
+            'creator'          => [
                 'type'          => '{seomatic.site.creator.computedType}',
                 'id'            => '{seomatic.site.creator.genericUrl}#creator',
                 'name'          => '{seomatic.site.creator.genericName}',
@@ -152,16 +154,18 @@ return [
                 'founder'          => '{seomatic.site.creator.organizationFounder}',
                 'foundingDate'     => '{seomatic.site.creator.organizationFoundingDate}',
                 'foundingLocation' => '{seomatic.site.creator.organizationFoundingLocation}',
-                'contactPoints' => [],
+                'contactPoints'    => [],
 
                 'tickerSymbol' => '{seomatic.site.creator.corporationTickerSymbol}',
 
-                'priceRange' => '{seomatic.site.creator.localBusinessPriceRange}',
+                'priceRange'   => '{seomatic.site.creator.localBusinessPriceRange}',
                 'openingHours' => [],
 
-                'servesCuisine' => '{seomatic.site.creator.restaurantServesCuisine}',
-                'menuUrl' => '{seomatic.site.creator.restaurantMenuUrl}',
-                'reservationsUrl' => '{seomatic.site.creator.restaurantReservationsUrl}',
+                'servesCuisine'       => '{seomatic.site.creator.restaurantServesCuisine}',
+                'menuUrl'             => '{seomatic.site.creator.restaurantMenuUrl}',
+                'menu'                => '{seomatic.site.creator.restaurantMenuUrl}',
+                'reservationsUrl'     => '{seomatic.site.creator.restaurantReservationsUrl}',
+                'acceptsReservations' => '{seomatic.site.creator.restaurantReservationsUrl}',
 
                 'inLanguage' => '{seomatic.meta.language}',
             ],
