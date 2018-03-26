@@ -32,7 +32,9 @@
                     </div>
                 </div>
             </div>
-            {% include "seomatic/settings/site/_includes/tab-creator.twig" %}
+            {% include "seomatic/settings/site/_includes/tab-creator.twig" with {
+                "genericImageElements": creatorImageElements,
+            } %}
         </div>
     {% endif %}
     

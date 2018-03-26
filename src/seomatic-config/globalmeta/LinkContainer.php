@@ -38,6 +38,15 @@ return [
                 'sizes'       => '',
                 'type'        => '',
             ],
+            'home' => [
+                'crossorigin' => '',
+                'href'        => '{{ siteUrl }}',
+                'hreflang'    => '',
+                'media'       => '',
+                'rel'         => 'home',
+                'sizes'       => '',
+                'type'        => '',
+            ],
             'author'    => [
                 'crossorigin' => '',
                 'href'        => '{{ url("/humans.txt") }}',
