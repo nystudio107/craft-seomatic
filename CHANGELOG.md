@@ -13,6 +13,8 @@
 * Added `menu` and `acceptsReservations` to the FoodEstablishment JSON-LD
 * Added link `rel=“home”` to the default tag container
 * Added `seomatic.helper.getLocalizedUrls()` function that will return a list of localized URLs
+* Added `sameAs` social media URLs to the Identity JSON-LD
+* Added `og:locale:alternate` Facebook OpenGraph tags
 
 ### 3.0.0-beta.16 - 2018.03.25
 ## Changed
