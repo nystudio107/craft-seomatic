@@ -1,4 +1,4 @@
-{% requirePermission "seomatic:site-settings:social" %}
+{% requirePermission "seomatic:site-settings:miscellaneous" %}
 
 {% extends "seomatic/_layouts/siteSettings.twig" %}
 
@@ -20,23 +20,23 @@
     <input type="hidden" name="siteId" value="{{ currentSiteId }}">
     {{ redirectInput("seomatic/site/#{currentSubSection}/#{currentSiteHandle}") }}
     
-    {% if currentUser.can("seomatic:site-settings:social") %}
-        <div id="tab-content-social">
+    {% if currentUser.can("seomatic:site-settings:miscellaneous") %}
+        <div id="tab-content-miscellaneous">
             <div class="field">
                 <div class="heading">
                     <h2>{{ subSectionTitle ~ " Settings" |t("seomatic") }}</h2>
                     <div class="instructions">
                         <p>
-                            {{ "The social media settings connect your website to its other points of pressence on the Internet. They also facilitate attaching your branding to social media posts via Twitter Cards and Facebook OpenGraph." |t("seomatic") |md }}
+                            {{ "Miscallaneous site-side SEO settings." |t("seomatic") |md }}
                         </p>
                     </div>
                 </div>
             </div>
-            {% include "seomatic/settings/site/_includes/tab-social.twig" %}
+            {% include "seomatic/settings/site/_includes/tab-miscellaneous.twig" %}
         </div>
     {% endif %}
     
     {% include "seomatic/_includes/footer-message.twig" with {
-        message: "Any text fields can include single-bracket tags that output Seomatic properties, such as `{seomatic.meta.seoTitle}`."
+        message: ""
     } %}
 {% endblock %}

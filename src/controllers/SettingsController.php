@@ -304,7 +304,7 @@ class SettingsController extends Controller
             if (is_array($globalsSettings) && is_array($bundleSettings)) {
                 $this->parseTextSources($elementName, $globalsSettings, $bundleSettings);
                 $this->parseImageSources($elementName, $globalsSettings, $bundleSettings, $siteId);
-                $globalsSettings['mainEntityOfPage'] = $this->getMainEntityOfPage($globalsSettings);
+                $globalsSettings['mainEntityOfPage'] = $this->getSpecificEntityType($globalsSettings);
                 $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
                 $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
             }
@@ -511,7 +511,7 @@ class SettingsController extends Controller
             if (is_array($globalsSettings) && is_array($bundleSettings)) {
                 $this->parseTextSources($elementName, $globalsSettings, $bundleSettings);
                 $this->parseImageSources($elementName, $globalsSettings, $bundleSettings, $siteId);
-                $globalsSettings['mainEntityOfPage'] = $this->getMainEntityOfPage($globalsSettings);
+                $globalsSettings['mainEntityOfPage'] = $this->getSpecificEntityType($globalsSettings);
                 $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
                 $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
             }
@@ -622,13 +622,15 @@ class SettingsController extends Controller
         if ($metaBundle) {
             if (is_array($siteSettings)) {
                 if (!empty($siteSettings['identity'])) {
-                    $this->normalizeTimes($siteSettings['identity']['localBusinessOpeningHours']);
-                    $metaBundle->metaSiteVars->identity->setAttributes($siteSettings['identity']);
+                    $settings = $siteSettings['identity'];
+                    $this->prepEntitySettings($settings);
+                    $metaBundle->metaSiteVars->identity->setAttributes($settings);
                     $siteSettings['identity'] = $metaBundle->metaSiteVars->identity;
                 }
                 if (!empty($siteSettings['creator'])) {
-                    $this->normalizeTimes($siteSettings['creator']['localBusinessOpeningHours']);
-                    $metaBundle->metaSiteVars->creator->setAttributes($siteSettings['creator']);
+                    $settings = $siteSettings['creator'];
+                    $this->prepEntitySettings($settings);
+                    $metaBundle->metaSiteVars->creator->setAttributes($settings);
                     $siteSettings['creator'] = $metaBundle->metaSiteVars->creator;
                 }
                 $metaBundle->metaSiteVars->setAttributes($siteSettings);
@@ -1160,7 +1162,7 @@ class SettingsController extends Controller
      *
      * @return string
      */
-    protected function getMainEntityOfPage($settings): string
+    protected function getSpecificEntityType($settings): string
     {
         if (!empty($settings)) {
             // Go from most specific type to least specific type
@@ -1217,6 +1219,24 @@ class SettingsController extends Controller
         }
 
         return $siteId;
+    }
+
+    /**
+     * Prep the entity settings for saving to the db
+     * @param array &$settings
+     */
+    protected function prepEntitySettings(&$settings)
+    {
+        $this->normalizeTimes($settings['localBusinessOpeningHours']);
+        $settings['computedType'] = $this->getSpecificEntityType($settings);
+        if (!empty($settings['genericImageIds'])) {
+            $asset = Craft::$app->getAssets()->getAssetById($settings['genericImageIds'][0]);
+            if (!empty($asset)) {
+                $settings['genericImage'] = $asset->getUrl();
+                $settings['genericImageWidth'] = $asset->getWidth();
+                $settings['genericImageHeight'] = $asset->getHeight();
+            }
+        }
     }
 
 }

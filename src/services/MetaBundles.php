@@ -16,6 +16,7 @@ use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
 use nystudio107\seomatic\helpers\MetaValue;
 use nystudio107\seomatic\models\MetaBundle;
+use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\records\MetaBundle as MetaBundleRecord;
 
 use Craft;
@@ -532,7 +533,7 @@ class MetaBundles extends Component
      *
      * @return array
      */
-    public function getContainerDataFromBundle(MetaBundle $bundle, string $type)
+    public function getContainerDataFromBundle(MetaBundle $bundle, string $type): array
     {
         $containerData = [];
         foreach ($bundle->metaContainers as $metaContainer) {
@@ -791,8 +792,9 @@ class MetaBundles extends Component
      * Preserve user settings from the meta bundle when updating it from the
      * config
      *
-     * @param MetaBundle $metaBundle
-     * @param MetaBundle $baseConfig
+     * @param MetaBundle $metaBundle The new meta bundle
+     * @param MetaBundle $baseConfig The existing meta bundle to preserve
+     *                               settings from
      */
     protected function mergeMetaBundleSettings(MetaBundle $metaBundle, MetaBundle $baseConfig)
     {
@@ -808,5 +810,30 @@ class MetaBundles extends Component
         // Preserve the metaBundleSettings
         $attributes = $baseConfig->metaBundleSettings->getAttributes();
         $metaBundle->metaBundleSettings->setAttributes($attributes);
+        // Preserve the vars from each Tracking Script
+        $scripts = Seomatic::$plugin->metaBundles->getContainerDataFromBundle(
+            $baseConfig,
+            MetaScriptContainer::CONTAINER_TYPE
+        );
+        foreach ($scripts as $scriptHandle => $scriptData) {
+            foreach ($metaBundle->metaContainers as $metaContainer) {
+                if ($metaContainer::CONTAINER_TYPE == MetaScriptContainer::CONTAINER_TYPE) {
+                    $data = $metaContainer->getData($scriptHandle);
+                    if ($data) {
+                        foreach ($scriptData as $key => $value) {
+                            if (is_array($value)) {
+                                foreach ($value as $varsKey => $varsValue) {
+                                    if (isset($varsValue['value'])) {
+                                        $data->$key[$varsKey]['value'] = $varsValue['value'];
+                                    }
+                                }
+                            } else {
+                                $data->$key = $value;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

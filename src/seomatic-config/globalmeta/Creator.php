@@ -17,13 +17,17 @@
 
 return [
     '*' => [
-        'siteType'                     => '',
-        'siteSubType'                  => '',
+        'siteType'                     => 'Organization',
+        'siteSubType'                  => 'LocalBusiness',
         'siteSpecificType'             => '',
+        'computedType'                 => 'Organization',
         'genericName'                  => '',
         'genericAlternateName'         => '',
         'genericDescription'           => '',
         'genericUrl'                   => '',
+        'genericImage'                 => '',
+        'genericImageWidth'            => '',
+        'genericImageHeight'           => '',
         'genericImageIds'              => [],
         'genericTelephone'             => '',
         'genericEmail'                 => '',

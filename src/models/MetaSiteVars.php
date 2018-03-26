@@ -100,6 +100,16 @@ class MetaSiteVars extends VarsModel
      */
     public $sameAsLinks = [];
 
+    /**
+     * @var array Google Site Links search target
+     */
+    public $siteLinksSearchTarget = '';
+
+    /**
+     * @var string Google Site Links query input
+     */
+    public $siteLinksQueryInput = '';
+
     // Public Methods
     // =========================================================================
 
@@ -140,6 +150,8 @@ class MetaSiteVars extends VarsModel
                     'googleSiteVerification',
                     'bingSiteVerification',
                     'pinterestSiteVerification',
+                    'siteLinksSearchTarget',
+                    'siteLinksQueryInput',
                 ],
                 'string'
             ],

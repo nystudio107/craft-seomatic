@@ -13,7 +13,7 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
-use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
 use yii\web\View;
 
@@ -87,7 +87,9 @@ class MetaJsonLdContainer extends MetaContainer
         parent::normalizeContainerData();
 
         foreach ($this->data as $key => $config) {
-            $this->data[$key] = MetaJsonLd::create($config['type'], $config);
+            $schemaType = $config['type'];
+            $schemaType = MetaValueHelper::parseString($schemaType);
+            $this->data[$key] = MetaJsonLd::create($schemaType, $config);
         }
     }
 }

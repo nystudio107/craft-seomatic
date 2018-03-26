@@ -34,7 +34,7 @@
 
     {{ forms.textField({
         label: "Google Site Verification" |t("seomatic"),
-        instructions: "For the `&lt;meta name='google-site-verification'&gt;` tag. Only enter the code in the `content=''`, not the entire tag. [Learn More](https://www.google.com/webmasters/verification/home?hl=en)" |t("seomatic"),
+        instructions: "For the `meta google-site-verification` tag. Only enter the code in the `content=''`, not the entire tag. [Learn More](https://www.google.com/webmasters/verification/home?hl=en)" |t("seomatic"),
         id: "googleSiteVerification",
         name: "googleSiteVerification",
         value: site.googleSiteVerification,
@@ -44,7 +44,7 @@
 
     {{ forms.textField({
         label: "Bing Site Verification" |t("seomatic"),
-        instructions: "For the `&lt;meta name='msvalidate.01'&gt;` tag. Only enter the code in the `content=''`, not the entire tag. [Learn More](https://www.bing.com/webmaster/help/how-to-verify-ownership-of-your-site-afcfefc6)" |t("seomatic"),
+        instructions: "For the `meta msvalidate.01` tag. Only enter the code in the `content=''`, not the entire tag. [Learn More](https://www.bing.com/webmaster/help/how-to-verify-ownership-of-your-site-afcfefc6)" |t("seomatic"),
         id: "bingSiteVerification",
         name: "bingSiteVerification",
         value: site.bingSiteVerification,
@@ -54,7 +54,7 @@
 
     {{ forms.textField({
         label: "Pinterest Site Verification" |t("seomatic"),
-        instructions: "For the `&lt;meta name='p:domain_verify'&gt;` tag. Only enter the code in the `content=''`, not the entire tag. [Learn More](https://help.pinterest.com/en/articles/claim-your-website)" |t("seomatic"),
+        instructions: "For the `meta p:domain_verify` tag. Only enter the code in the `content=''`, not the entire tag. [Learn More](https://help.pinterest.com/en/articles/claim-your-website)" |t("seomatic"),
         id: "pinterestSiteVerification",
         name: "pinterestSiteVerification",
         value: site.pinterestSiteVerification,
@@ -64,7 +64,7 @@
 
     {{ forms.editableTableField({
         label: "Same As URLs" |t("seomatic"),
-        instructions: "Add the URLs to social media sites, and other presences on the web. These URLs are also made available to your frontend templates." |t("seomatic"),
+        instructions: "Add the URLs to social media sites, and other presences on the web. These URLs are made available to your frontend templates. They will also appear in `same_as` Facebook OpenGraph tags, and `seeAlso` JSON-LD Structured Data. [Learn More](https://developers.google.com/search/docs/data-types/social-profile)" |t("seomatic"),
         id: 'sameAsLinks',
         name: 'sameAsLinks',
         required: false,
