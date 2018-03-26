@@ -7,6 +7,10 @@
 * Separate Identity and Creator Entity Brand fields
 * Remove JSON-LD schema.org properties that have just one entry in them (just the `@type`)
 
+## Added
+* Documented the Identity and Creator Site Settings variables
+* Added `menu` and `acceptsReservations` to the FoodEstablishment JSON-LD
+
 ### 3.0.0-beta.16 - 2018.03.25
 ## Changed
 * Fixed an issue where fresh installations were not taken to the Welcome screen
