@@ -181,6 +181,27 @@ class Seomatic extends Plugin
         if ($this->tableSchemaExists()) {
             $this->installEventListeners();
         }
+        // Handler: EVENT_AFTER_INSTALL_PLUGIN
+        Event::on(
+            Plugins::class,
+            Plugins::EVENT_AFTER_INSTALL_PLUGIN,
+            function (PluginEvent $event) {
+                if ($event->plugin === $this) {
+                    // Invalidate our caches after we've been installed
+                    $this->clearAllCaches();
+                    // Send them to our welcome screen
+                    $request = Craft::$app->getRequest();
+                    if ($request->isCpRequest) {
+                        Craft::$app->getResponse()->redirect(UrlHelper::cpUrl(
+                            'seomatic/dashboard',
+                            [
+                                'showWelcome' => true
+                            ]
+                        ))->send();
+                    }
+                }
+            }
+        );
         // We're loaded
         Craft::info(
             Craft::t(
@@ -312,27 +333,6 @@ class Seomatic extends Plugin
      */
     protected function installGlobalEventListeners()
     {
-        // Handler: EVENT_AFTER_INSTALL_PLUGIN
-        Event::on(
-            Plugins::class,
-            Plugins::EVENT_AFTER_INSTALL_PLUGIN,
-            function (PluginEvent $event) {
-                if ($event->plugin === $this) {
-                    // Invalidate our caches after we've been installed
-                    $this->clearAllCaches();
-                    // Send them to our welcome screen
-                    $request = Craft::$app->getRequest();
-                    if ($request->isCpRequest) {
-                        Craft::$app->getResponse()->redirect(UrlHelper::cpUrl(
-                            'seomatic/dashboard',
-                            [
-                                'showWelcome' => true
-                            ]
-                        ))->send();
-                    }
-                }
-            }
-        );
         // Handler: Sections::EVENT_AFTER_SAVE_SECTION
         Event::on(
             Sections::class,
@@ -819,6 +819,9 @@ class Seomatic extends Plugin
                     ],
                     "seomatic:site-settings:social-media" => [
                         'label' => Craft::t('seomatic', 'Social Media'),
+                    ],
+                    "seomatic:site-settings:miscellaneous" => [
+                        'label' => Craft::t('seomatic', 'Miscellaneous'),
                     ],
                 ],
             ],

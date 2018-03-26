@@ -76,15 +76,18 @@ class JsonLd extends Json
     }
 
     /**
-     * Normalize the JSON-LD array recursively to remove empty values, change
-     * 'type' to '@type' and have it be the first item in the array
+     * Normalize the JSON-LD array recursively to remove empty values,
+     * prefixing
+     * 'id', 'context', and 'type' with '@', and have 'type' be the first item
+     * in the array
      *
-     * @param $array
-     * @param $depth
+     * @param array $array
+     * @param int   $depth
      */
-    protected static function normalizeJsonLdArray(&$array, $depth)
+    protected static function normalizeJsonLdArray(array &$array, int $depth)
     {
         $array = array_filter($array);
+        $array = self::changeKey($array, 'id', '@id');
         $array = self::changeKey($array, 'context', '@context');
         $array = self::changeKey($array, 'type', '@type');
         if ($depth > 1) {
@@ -100,13 +103,13 @@ class JsonLd extends Json
      * Replace key values without reordering the array or converting numeric
      * keys to associative keys (which unset() does)
      *
-     * @param $array
-     * @param $oldKey
-     * @param $newKey
+     * @param array  $array
+     * @param string $oldKey
+     * @param string $newKey
      *
      * @return array
      */
-    protected static function changeKey($array, $oldKey, $newKey)
+    protected static function changeKey(array $array, string $oldKey, string $newKey): array
     {
         if (!array_key_exists($oldKey, $array)) {
             return $array;

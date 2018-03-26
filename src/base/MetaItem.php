@@ -142,6 +142,8 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
         if (is_subclass_of($this, MetaJsonLd::class)) {
             $isMetaJsonLdModel = true;
         }
+        $modelScenarios = $this->scenarios();
+        $scenarios = array_intersect_key($scenarios, $modelScenarios);
         foreach ($scenarios as $scenario => $logLevel) {
             $this->setScenario($scenario);
             if (!$this->validate()) {

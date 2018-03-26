@@ -24,6 +24,13 @@
         },
     }) %}
 {% endif %}
+{% if currentUser.can("seomatic:site-settings:miscellaneous") %}
+    {% set navItems = navItems |merge({
+        miscellaneous: {
+            title: "Miscellaneous" |t("seomatic"),
+        },
+    }) %}
+{% endif %}
 
 {% set selectedItem = craft.app.request.getSegment(3)|default("identity") %}
 

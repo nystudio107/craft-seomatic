@@ -11,7 +11,10 @@
 
 namespace nystudio107\seomatic\models;
 
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
+use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
+use nystudio107\seomatic\variables\SeomaticVariable;
 
 use craft\base\Model;
 use craft\helpers\Json as JsonHelper;
@@ -165,6 +168,14 @@ class MetaBundle extends Model
         if (isset($this->metaBundleSettings) && is_array($this->metaBundleSettings)) {
             $this->metaBundleSettings = MetaBundleSettings::create($this->metaBundleSettings);
         }
+        // Create our variable so that meta containers can be parsed based on dynamic values
+        $oldSeomaticVariable = Seomatic::$seomaticVariable;
+        Seomatic::$seomaticVariable = new SeomaticVariable([
+            'meta' => $this->metaGlobalVars,
+            'site' => $this->metaSiteVars,
+        ]);
+        MetaValueHelper::cache();
+
         // Meta containers
         if (!empty($this->metaContainers)) {
             $metaContainers = $this->metaContainers;
@@ -184,6 +195,9 @@ class MetaBundle extends Model
         if (isset($this->frontendTemplatesContainer) && is_array($this->frontendTemplatesContainer)) {
             $this->frontendTemplatesContainer = FrontendTemplateContainer::create($this->frontendTemplatesContainer);
         }
+        // Restore the $seomaticVariable
+        Seomatic::$seomaticVariable = $oldSeomaticVariable;
+        MetaValueHelper::cache();
     }
 
     /**

@@ -1,0 +1,36 @@
+{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
+{% import "_includes/forms" as forms %}
+
+{% namespace "site" %}
+<div class="field">
+    <div class="heading">
+        <h2>{{ "SiteLinks Search Box" |t("seomatic") }}</h2>
+        <div class="instructions">
+            <p>
+                {{ "With Google Sitelinks search box, from search results. Search users sometimes use navigational queries, typing in the brand name or URL of a known site or app, only to do a more detailed search once they reach their destination. [Learn More](https://developers.google.com/search/docs/data-types/sitelinks-searchbox)" |t("seomatic") |md }}
+            </p>
+        </div>
+    </div>
+
+    {{ forms.textField({
+        label: "Search Target URL Pattern" |t("seomatic"),
+        instructions: "This property specifies a search URL pattern for sending queries to your site's search engine.  It must include a string enclosed in curly braces that is a placeholder for the user's search query (e.g., `{search_term_string}`). The string inside the curly braces must also appear in the name attribute of the query-input property." |t("seomatic"),
+        id: "siteLinksSearchTarget",
+        name: "siteLinksSearchTarget",
+        value: site.siteLinksSearchTarget,
+        warning: false,
+        errors: site.getErrors("siteLinksSearchTarget"),
+    }) }}
+
+    {{ forms.textField({
+        label: "Search Query Input" |t("seomatic"),
+        instructions: "The value for the name attribute of query-input must match the string enclosed inside curly braces in the target property of potentialAction, e.g.: `search_term_string`" |t("seomatic"),
+        id: "siteLinksQueryInput",
+        name: "siteLinksQueryInput",
+        value: site.siteLinksQueryInput,
+        warning: false,
+        errors: site.getErrors("siteLinksQueryInput"),
+    }) }}
+
+</div>
+{% endnamespace %}
