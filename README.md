@@ -37,8 +37,6 @@ SEOmatic for Craft CMS 3 is currently in beta; that means it _may_ be a little r
 The following are currently works in progress:
 
 * **Dashboard** - the Dashboard page should show some more interesting information
-* **Content Analytics** - the Content Analytics sidebar doesn't show anything interesting yet
-* **Documentation** - the documentation needs to be more fully fleshed out
 * **Field** - there is no SEOmatic Field anymore; it's not necessary given the new architecture. Depending on demand, it may be brought back.
 
 ### Can I use it on a live production site?
@@ -1079,6 +1077,6 @@ You can narrow this down to a specific sub-type list by passing in a `path` of s
 
 Some things to do, and ideas for potential features:
 
-* Release it
+* **Content Analytics** - Add content analytics, potentially in the "Pro" edition
 
 Brought to you by [nystudio107](https://nystudio107.com/)
