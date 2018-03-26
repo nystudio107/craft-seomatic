@@ -3,6 +3,7 @@
 ### 3.0.0-beta.17 - 2018.03.26
 ## Changed
 * Check against `siteType`, `siteSubType` and `siteSpecificType` being `null` on the Site Settings pages
+* Updated `humans.txt` template to display information from the Creator settings
 
 ### 3.0.0-beta.16 - 2018.03.25
 ## Changed
