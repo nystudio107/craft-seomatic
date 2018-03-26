@@ -220,6 +220,15 @@ class DynamicMeta
                 Seomatic::$plugin->link->add($metaTag);
             }
         }
+        // Add in the og:locale:alternate tags
+        $ogLocaleAlternate = Seomatic::$plugin->tag->get('og:locale:alternate');
+        if (count($siteLocalizedUrls) > 1 && $ogLocaleAlternate) {
+            $ogContentArray = [];
+            foreach ($siteLocalizedUrls as $siteLocalizedUrl) {
+                $ogContentArray[] = $siteLocalizedUrl['language'];
+            }
+            $ogLocaleAlternate->content = $ogContentArray;
+        }
     }
 
     /**
