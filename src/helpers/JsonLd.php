@@ -77,9 +77,8 @@ class JsonLd extends Json
 
     /**
      * Normalize the JSON-LD array recursively to remove empty values,
-     * prefixing
-     * 'id', 'context', and 'type' with '@', and have 'type' be the first item
-     * in the array
+     * prefixing 'id', 'context', and 'type' with '@', and have 'type' be the
+     * first item in the array
      *
      * @param array $array
      * @param int   $depth
@@ -97,6 +96,10 @@ class JsonLd extends Json
         }
         MetaValueHelper::parseArray($array);
         ksort($array);
+        // If we have only one item in the array, return an empty array
+        if (count($array) <= 1) {
+            $array = [];
+        }
     }
 
     /**

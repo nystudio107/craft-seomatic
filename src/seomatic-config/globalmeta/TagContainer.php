@@ -83,42 +83,49 @@ return [
             Dependency::SITE_DEPENDENCY => ['facebookProfileId', 'facebookAppId'],
         ],
         'data'         => [
-            'fb:profile_id'  => [
+            'fb:profile_id'       => [
                 'charset'   => '',
                 'content'   => '{seomatic.site.facebookProfileId}',
                 'httpEquiv' => '',
                 'name'      => '',
                 'property'  => 'fb:profile_id',
             ],
-            'fb:app_id'      => [
+            'fb:app_id'           => [
                 'charset'   => '',
                 'content'   => '{seomatic.site.facebookAppId}',
                 'httpEquiv' => '',
                 'name'      => '',
                 'property'  => 'fb:app_id',
             ],
-            'og:locale'      => [
+            'og:locale'           => [
                 'charset'   => '',
                 'content'   => '{{ craft.app.language }}',
                 'httpEquiv' => '',
                 'name'      => '',
                 'property'  => 'og:locale',
             ],
-            'og:type'        => [
+            'og:locale:alternate' => [
+                'charset'   => '',
+                'content'   => '',
+                'httpEquiv' => '',
+                'name'      => '',
+                'property'  => 'og:locale:alternate',
+            ],
+            'og:type'             => [
                 'charset'   => '',
                 'content'   => '{seomatic.meta.ogType}',
                 'httpEquiv' => '',
                 'name'      => '',
                 'property'  => 'og:type',
             ],
-            'og:url'         => [
+            'og:url'              => [
                 'charset'   => '',
                 'content'   => '{seomatic.meta.canonicalUrl}',
                 'httpEquiv' => '',
                 'name'      => '',
                 'property'  => 'og:url',
             ],
-            'og:title'       => [
+            'og:title'            => [
                 'charset'          => '',
                 'content'          => '{seomatic.meta.ogTitle}',
                 'httpEquiv'        => '',
@@ -128,21 +135,21 @@ return [
                 'siteNamePosition' => '{seomatic.meta.ogSiteNamePosition}',
                 'separatorChar'    => '{seomatic.config.separatorChar}',
             ],
-            'og:description' => [
+            'og:description'      => [
                 'charset'   => '',
                 'content'   => '{seomatic.meta.ogDescription}',
                 'httpEquiv' => '',
                 'name'      => '',
                 'property'  => 'og:description',
             ],
-            'og:image'       => [
+            'og:image'            => [
                 'charset'   => '',
                 'content'   => '{seomatic.meta.ogImage}',
                 'httpEquiv' => '',
                 'name'      => '',
                 'property'  => 'og:image',
             ],
-            'og:image:alt'   => [
+            'og:image:alt'        => [
                 'dependencies' => [
                     Dependency::TAG_DEPENDENCY => ['og:image'],
                 ],
@@ -152,7 +159,7 @@ return [
                 'name'         => '',
                 'property'     => 'og:image:alt',
             ],
-            'og:see_also'    => [
+            'og:see_also'         => [
                 'charset'   => '',
                 'content'   => '',
                 'httpEquiv' => '',

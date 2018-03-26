@@ -88,6 +88,7 @@ class MetaJsonLdContainer extends MetaContainer
 
         foreach ($this->data as $key => $config) {
             $schemaType = $config['type'];
+            $config['key'] = $key;
             $schemaType = MetaValueHelper::parseString($schemaType);
             $this->data[$key] = MetaJsonLd::create($schemaType, $config);
         }

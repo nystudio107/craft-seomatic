@@ -12,11 +12,11 @@
 namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\helpers\DynamicMeta as DynamicMetaHelper;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
 use nystudio107\seomatic\helpers\Schema as SchemaHelper;
 use nystudio107\seomatic\helpers\Text as TextHelper;
 
-use Craft;
 use craft\base\Component;
 use craft\elements\Asset;
 use craft\elements\db\MatrixBlockQuery;
@@ -36,6 +36,23 @@ class Helper extends Component
 
     // Public Methods
     // =========================================================================
+
+    /**
+     * Return a list of localized URLs that are in the current site's group
+     * The current URI is used if $uri is null. Similarly, the current site is
+     * used if $siteId is null.
+     * The resulting array of arrays has `id`, `language`, `hreflangLanguage`,
+     * and `url` as keys.
+     *
+     * @param string|null $uri
+     * @param int|null    $siteId
+     *
+     * @return array
+     */
+    public static function getLocalizedUrls(string $uri = null, int $siteId = null)
+    {
+        return DynamicMetaHelper::getLocalizedUrls($uri, $siteId);
+    }
 
     /**
      * Allow setting the X-Robots-Tag and Link headers on static files as per:
