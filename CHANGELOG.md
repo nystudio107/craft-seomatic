@@ -5,11 +5,12 @@
 * Fixed an issue where fresh installations were not taken to the Welcome screen
 * Replaced old SEOmatic icon in the Asset Bundle
 * Fixed an issue where Identity and Creator settings were not properly defaulted from the config files on fresh installations
+* Better parsing of the JSON-LD config files
 
 ## Added
 * Added Miscellaneous settings with Google Site Links search settings
 * Preserve user settings in the Tracking Scripts when bundles are updated
-* Better parsing of the JSON-LD config files
+* Fleshed out the JSON-LD for `mainEntityOfPage`, `identity`, and `creator`
 
 ### 3.0.0-beta.15 - 2018.03.24
 ## Changed
