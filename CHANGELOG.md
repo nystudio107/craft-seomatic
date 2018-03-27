@@ -1,5 +1,8 @@
 # SEOmatic Changelog
 
+### 3.0.0-beta.19 - 2018.03.27
+## Changed
+
 ### 3.0.0-beta.18 - 2018.03.26
 ## Changed
 * Preserve Site Identity and Site Creator settings across bundle updates
