@@ -177,8 +177,6 @@ class Seomatic extends Plugin
             self::$settings->environment = "local";
         }
         $this->name = Seomatic::$settings->pluginName;
-        // Add in our Twig extensions
-        Seomatic::$view->registerTwigExtension(new SeomaticTwigExtension);
         // Install our event listeners only if our table schema exists
         if ($this->tableSchemaExists()) {
             $this->installEventListeners();
@@ -308,6 +306,8 @@ class Seomatic extends Plugin
      */
     protected function installEventListeners()
     {
+        // Add in our Twig extensions
+        Seomatic::$view->registerTwigExtension(new SeomaticTwigExtension);
         // Handler: EVENT_AFTER_LOAD_PLUGINS
         Event::on(
             Plugins::class,
