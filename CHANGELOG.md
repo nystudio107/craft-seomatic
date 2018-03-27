@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+### 3.0.0-beta.18 - 2018.03.26
+## Changed
+* Preserve Site Identity and Site Creator settings across bundle updates
+
 ### 3.0.0-beta.17 - 2018.03.26
 ## Changed
 * Check against `siteType`, `siteSubType` and `siteSpecificType` being `null` on the Site Settings pages
