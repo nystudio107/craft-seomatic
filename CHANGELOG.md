@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+### 3.0.0-beta.20 - 2018.03.29
+## Changed
+* Added additional fields for the `mainEntityOfPage` JSON-LD
+
 ### 3.0.0-beta.19 - 2018.03.28
 ## Changed
 * Fixed an issue where you could not disable `humans.txt` or `robots.txt`
