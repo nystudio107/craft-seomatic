@@ -802,12 +802,18 @@ class MetaBundles extends Component
         $attributes = $baseConfig->metaGlobalVars->getAttributes();
         $metaBundle->metaGlobalVars->setAttributes($attributes);
         // Preserve the metaSiteVars
-        $attributes = $baseConfig->metaSiteVars->getAttributes();
-        $metaBundle->metaSiteVars->setAttributes($attributes);
-        $attributes = $baseConfig->metaSiteVars->identity->getAttributes();
-        $metaBundle->metaSiteVars->identity->setAttributes($attributes);
-        $attributes = $baseConfig->metaSiteVars->creator->getAttributes();
-        $metaBundle->metaSiteVars->creator->setAttributes($attributes);
+        if (!empty($baseConfig->metaSiteVars)) {
+            $attributes = $baseConfig->metaSiteVars->getAttributes();
+            $metaBundle->metaSiteVars->setAttributes($attributes);
+            if (!empty($baseConfig->metaSiteVars->identity)) {
+                $attributes = $baseConfig->metaSiteVars->identity->getAttributes();
+                $metaBundle->metaSiteVars->identity->setAttributes($attributes);
+            }
+            if (!empty($baseConfig->metaSiteVars->creator)) {
+                $attributes = $baseConfig->metaSiteVars->creator->getAttributes();
+                $metaBundle->metaSiteVars->creator->setAttributes($attributes);
+            }
+        }
         // Preserve the metaSitemapVars
         $attributes = $baseConfig->metaSitemapVars->getAttributes();
         $metaBundle->metaSitemapVars->setAttributes($attributes);

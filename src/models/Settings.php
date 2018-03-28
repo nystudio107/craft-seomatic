@@ -34,6 +34,11 @@ class Settings extends FluentModel
     public $renderEnabled = true;
 
     /**
+     * @var bool Should SEOmatic render frontend sitemaps?
+     */
+    public $sitemapsEnabled = true;
+
+    /**
      * @var string The server environment, either `live`, `staging`, or `local`
      */
     public $environment = 'live';
@@ -85,7 +90,7 @@ class Settings extends FluentModel
         return [
             ['pluginName', 'string'],
             ['pluginName', 'default', 'value' => 'SEOmatic'],
-            ['renderEnabled', 'boolean'],
+            [['renderEnabled', 'sitemapsEnabled'], 'boolean'],
             ['environment', 'string'],
             ['environment', 'default', 'value' => 'live'],
             ['environment', 'in', 'range' => [

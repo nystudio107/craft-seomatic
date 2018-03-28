@@ -72,30 +72,32 @@ class Sitemaps extends Component implements SitemapInterface
      */
     public function loadSitemapContainers()
     {
-        $this->sitemapTemplateContainer = FrontendTemplateContainer::create();
-        // The Sitemap Index
-        $sitemapIndexTemplate = SitemapIndexTemplate::create();
-        $this->sitemapTemplateContainer->addData($sitemapIndexTemplate, self::SEOMATIC_SITEMAPINDEX_CONTAINER);
-        // A generic sitemap
-        $sitemapTemplate = SitemapTemplate::create();
-        $this->sitemapTemplateContainer->addData($sitemapTemplate, self::SEOMATIC_SITEMAP_CONTAINER);
+        if (Seomatic::$settings->sitemapsEnabled) {
+            $this->sitemapTemplateContainer = FrontendTemplateContainer::create();
+            // The Sitemap Index
+            $sitemapIndexTemplate = SitemapIndexTemplate::create();
+            $this->sitemapTemplateContainer->addData($sitemapIndexTemplate, self::SEOMATIC_SITEMAPINDEX_CONTAINER);
+            // A generic sitemap
+            $sitemapTemplate = SitemapTemplate::create();
+            $this->sitemapTemplateContainer->addData($sitemapTemplate, self::SEOMATIC_SITEMAP_CONTAINER);
 
-        // Handler: UrlManager::EVENT_REGISTER_SITE_URL_RULES
-        Event::on(
-            UrlManager::class,
-            UrlManager::EVENT_REGISTER_SITE_URL_RULES,
-            function (RegisterUrlRulesEvent $event) {
-                Craft::debug(
-                    'UrlManager::EVENT_REGISTER_SITE_URL_RULES',
-                    __METHOD__
-                );
-                // Register our sitemap routes
-                $event->rules = array_merge(
-                    $event->rules,
-                    $this->sitemapRouteRules()
-                );
-            }
-        );
+            // Handler: UrlManager::EVENT_REGISTER_SITE_URL_RULES
+            Event::on(
+                UrlManager::class,
+                UrlManager::EVENT_REGISTER_SITE_URL_RULES,
+                function (RegisterUrlRulesEvent $event) {
+                    Craft::debug(
+                        'UrlManager::EVENT_REGISTER_SITE_URL_RULES',
+                        __METHOD__
+                    );
+                    // Register our sitemap routes
+                    $event->rules = array_merge(
+                        $event->rules,
+                        $this->sitemapRouteRules()
+                    );
+                }
+            );
+        }
     }
 
     /**
@@ -150,7 +152,7 @@ class Sitemaps extends Component implements SitemapInterface
      */
     public function submitSitemapIndex()
     {
-        if (Seomatic::$settings->environment == 'live') {
+        if (Seomatic::$settings->sitemapsEnabled && Seomatic::$settings->environment == 'live') {
             // Submit the sitemap to each search engine
             $searchEngineUrls = $this::SEARCH_ENGINE_SUBMISSION_URLS;
             foreach ($searchEngineUrls as &$url) {
@@ -188,7 +190,7 @@ class Sitemaps extends Component implements SitemapInterface
      */
     public function submitSitemapForElement(ElementInterface $element)
     {
-        if (Seomatic::$settings->environment == 'live') {
+        if (Seomatic::$settings->sitemapsEnabled && Seomatic::$settings->environment == 'live') {
             list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
                 = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
             // Submit the sitemap to each search engine
