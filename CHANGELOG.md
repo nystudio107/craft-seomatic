@@ -1,7 +1,8 @@
 # SEOmatic Changelog
 
-### 3.0.0-beta.19 - 2018.03.27
+### 3.0.0-beta.19 - 2018.03.28
 ## Changed
+* Fixed an issue where you could not disable `humans.txt` or `robots.txt`
 
 ### 3.0.0-beta.18 - 2018.03.26
 ## Changed
