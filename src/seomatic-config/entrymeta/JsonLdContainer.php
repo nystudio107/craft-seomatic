@@ -32,9 +32,14 @@ return [
             'mainEntityOfPage' => [
                 'type'             => '{seomatic.meta.mainEntityOfPage}',
                 'name'             => '{seomatic.meta.seoTitle}',
+                'headline'         => '{seomatic.meta.seoTitle}',
                 'description'      => '{seomatic.meta.seoDescription}',
                 'url'              => '{seomatic.meta.canonicalUrl}',
                 'mainEntityOfPage' => '{seomatic.meta.canonicalUrl}',
+                'dateCreated'      => '{entry.dateCreated.iso8601()}',
+                'dateModified'     => '{entry.dateUpdated.iso8601()}',
+                'datePublished'    => '{entry.postDate.iso8601()}',
+                'copyrightYear'    => '{entry.postDate.iso8601()}',
                 'inLanguage'       => '{seomatic.meta.language}',
                 'copyrightHolder'  => [
                     'id' => '{seomatic.site.identity.genericUrl}#identity',
@@ -43,7 +48,10 @@ return [
                     'id' => '{seomatic.site.identity.genericUrl}#identity',
                 ],
                 'creator'          => [
-                    'id' => '{seomatic.site.creator.genericUrl}#creator',
+                    'id' => '{seomatic.site.identity.genericUrl}#creator',
+                ],
+                'publisher'        => [
+                    'id' => '{seomatic.site.identity.genericUrl}#creator',
                 ],
                 'image'            => [
                     'type' => 'ImageObject',
