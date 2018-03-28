@@ -4,6 +4,9 @@
 ## Changed
 * Fixed an issue where you could not disable `humans.txt` or `robots.txt`
 
+## Added
+* Added the ability to globally disable sitemap rendering
+
 ### 3.0.0-beta.18 - 2018.03.26
 ## Changed
 * Preserve Site Identity and Site Creator settings across bundle updates
