@@ -38,6 +38,7 @@ abstract class FrontendTemplate extends FluentModel implements FrontendTemplateI
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
+            [['include'], 'boolean'],
             [['path', 'controller', 'action'], 'required'],
             [['path', 'controller', 'action'], 'string'],
         ]);
