@@ -29,6 +29,32 @@ return [
         'dependencies' => [
         ],
         'data'         => [
+            'mainEntityOfPage' => [
+                'type'             => '{seomatic.meta.mainEntityOfPage}',
+                'name'             => '{seomatic.meta.seoTitle}',
+                'description'      => '{seomatic.meta.seoDescription}',
+                'url'              => '{seomatic.meta.canonicalUrl}',
+                'mainEntityOfPage' => '{seomatic.meta.canonicalUrl}',
+                'inLanguage'       => '{seomatic.meta.language}',
+                'copyrightHolder'  => [
+                    'id' => '{seomatic.site.identity.genericUrl}#identity',
+                ],
+                'author'           => [
+                    'id' => '{seomatic.site.identity.genericUrl}#identity',
+                ],
+                'creator'          => [
+                    'id' => '{seomatic.site.creator.genericUrl}#creator',
+                ],
+                'image'            => [
+                    'type' => 'ImageObject',
+                    'url'  => '{seomatic.meta.seoImage}',
+                ],
+                'potentialAction'  => [
+                    'type'        => 'SearchAction',
+                    'target'      => '{seomatic.site.siteLinksSearchTarget}',
+                    'query-input' => '{seomatic.site.siteLinksQueryInput}',
+                ],
+            ],
         ],
     ],
 ];

@@ -90,7 +90,10 @@ class MetaJsonLdContainer extends MetaContainer
             $schemaType = $config['type'];
             $config['key'] = $key;
             $schemaType = MetaValueHelper::parseString($schemaType);
-            $this->data[$key] = MetaJsonLd::create($schemaType, $config);
+            $jsonLd = MetaJsonLd::create($schemaType, $config);
+            // Retain the intended type
+            $jsonLd->type = $config['type'];
+            $this->data[$key] = $jsonLd;
         }
     }
 }

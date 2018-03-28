@@ -618,9 +618,10 @@ class Seomatic extends Plugin
                     $html .= PluginTemplate::renderPluginTemplate('_sidebars/entry-preview.twig');
                 }
                 // Render our analysis sidebar template
-                if (self::$settings->displayAnalysisSidebar && self::$matchedElement) {
-                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/entry-analysis.twig');
-                }
+// @TODO: This will be added an upcoming "pro" edition
+//                if (self::$settings->displayAnalysisSidebar && self::$matchedElement) {
+//                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/entry-analysis.twig');
+//                }
             }
 
             return $html;
@@ -638,9 +639,10 @@ class Seomatic extends Plugin
                     $html .= PluginTemplate::renderPluginTemplate('_sidebars/category-preview.twig');
                 }
                 // Render our analysis sidebar template
-                if (self::$settings->displayAnalysisSidebar) {
-                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/category-analysis.twig');
-                }
+// @TODO: This will be added an upcoming "pro" edition
+//                if (self::$settings->displayAnalysisSidebar) {
+//                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/category-analysis.twig');
+//                }
             }
 
             return $html;
