@@ -304,7 +304,7 @@ class SettingsController extends Controller
             if (is_array($globalsSettings) && is_array($bundleSettings)) {
                 $this->parseTextSources($elementName, $globalsSettings, $bundleSettings);
                 $this->parseImageSources($elementName, $globalsSettings, $bundleSettings, $siteId);
-                $globalsSettings['mainEntityOfPage'] = $this->getSpecificEntityType($globalsSettings);
+                $globalsSettings['mainEntityOfPage'] = $this->getSpecificEntityType($bundleSettings);
                 $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
                 $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
             }
@@ -511,7 +511,7 @@ class SettingsController extends Controller
             if (is_array($globalsSettings) && is_array($bundleSettings)) {
                 $this->parseTextSources($elementName, $globalsSettings, $bundleSettings);
                 $this->parseImageSources($elementName, $globalsSettings, $bundleSettings, $siteId);
-                $globalsSettings['mainEntityOfPage'] = $this->getSpecificEntityType($globalsSettings);
+                $globalsSettings['mainEntityOfPage'] = $this->getSpecificEntityType($bundleSettings);
                 $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
                 $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
             }
