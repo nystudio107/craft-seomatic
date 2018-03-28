@@ -36,6 +36,9 @@ return [
     // Should SEOmatic render metadata?
     'renderEnabled' => true,
 
+    // Should SEOmatic render frontend sitemaps?
+    'sitemapsEnabled' => true,
+
     // The server environment, either `live`, `staging`, or `local`
     'environment' => 'live',
 

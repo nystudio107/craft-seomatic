@@ -32,7 +32,17 @@
             warning: configWarning("renderEnabled", "seomatic"),
             errors: settings.getErrors("renderEnabled"),
         }) }}
-
+    
+        {{ forms.lightswitchField({
+            label: "Sitemaps Enabled" |t("seomatic"),
+            instructions: "Controls whether SEOmatic will automatically render frontend sitemaps for your website." |t("seomatic"),
+            id: "sitemapsEnabled",
+            name: "sitemapsEnabled",
+            on: settings.sitemapsEnabled,
+            warning: configWarning("sitemapsEnabled", "seomatic"),
+            errors: settings.getErrors("sitemapsEnabled"),
+        }) }}
+    
         {{ forms.selectField({
             label: "Environment" |t("seomatic"),
             instructions: "The server environment, either `live`, `staging`, or `local`. If `devMode` is on, SEOmatic will override this setting to `local` Development." |t("seomatic"),
