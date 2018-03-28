@@ -67,6 +67,8 @@
             warning: configWarning("displayPreviewSidebar", "seomatic"),
             errors: settings.getErrors("displayPreviewSidebar"),
         }) }}
+        
+{# @TODO: This will be added an upcoming "pro" edition
 
         {{ forms.lightswitchField({
             label: "Display Sidebar SEO Analysis" |t("seomatic"),
@@ -78,6 +80,7 @@
             errors: settings.getErrors("displayAnalysisSidebar"),
         }) }}
 
+#}
         {{ forms.textField({
             label: "devMode &lt;title&gt; prefix" |t("seomatic"),
             instructions: "If `devMode` is on, prefix the &lt;title&gt; with this string" |t("seomatic"),
