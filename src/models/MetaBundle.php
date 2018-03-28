@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
+use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\variables\SeomaticVariable;
 
@@ -169,10 +170,26 @@ class MetaBundle extends Model
             $this->metaBundleSettings = MetaBundleSettings::create($this->metaBundleSettings);
         }
         // Create our variable so that meta containers can be parsed based on dynamic values
+        // Make sure Twig is loaded and instantiated first by priming the pump
+        MetaValueHelper::parseString("{prime}");
         $oldSeomaticVariable = Seomatic::$seomaticVariable;
+        // Merge these global vars with the MetaContainers global vars
+        $globalVars = [];
+        if (!empty(Seomatic::$plugin->metaContainers->metaGlobalVars)) {
+            $globalVars = Seomatic::$plugin->metaContainers->metaGlobalVars->getAttributes();
+        }
+        $thisGlobalVars = $this->metaGlobalVars->getAttributes();
+        $thisGlobals = MetaGlobalVars::create(ArrayHelper::merge($globalVars, $thisGlobalVars));
+        // Merge these site vars with the MetaContainers site vars
+        $siteVars = [];
+        if (!empty(Seomatic::$plugin->metaContainers->metaSiteVars)) {
+            $siteVars = Seomatic::$plugin->metaContainers->metaSiteVars->getAttributes();
+        }
+        $thisSiteVars = $this->metaSiteVars->getAttributes();
+        $thisSite = MetaSiteVars::create(ArrayHelper::merge($siteVars, $thisSiteVars));
         Seomatic::$seomaticVariable = new SeomaticVariable([
-            'meta' => $this->metaGlobalVars,
-            'site' => $this->metaSiteVars,
+            'meta' => $thisGlobals,
+            'site' => $thisSite,
         ]);
         MetaValueHelper::cache();
 
