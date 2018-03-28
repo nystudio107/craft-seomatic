@@ -3,6 +3,8 @@
 ### 3.0.0-beta.19 - 2018.03.28
 ## Changed
 * Fixed an issue where you could not disable `humans.txt` or `robots.txt`
+* Fixed an issue where the `computedType` wasn't saved properly for Global and Content SEO
+* Fixed an issue with JSON-LD generated for content containers not cascading as intended
 
 ## Added
 * Added the ability to globally disable sitemap rendering
