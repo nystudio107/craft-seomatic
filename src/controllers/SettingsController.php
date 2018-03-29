@@ -13,6 +13,7 @@ use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticChartAsset;
 use nystudio107\recipe\helpers\Json;
 use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\Seomatic;
@@ -268,9 +269,18 @@ class SettingsController extends Controller
         // Image selectors
         $bundleSettings = $metaBundle->metaBundleSettings;
         $variables['elementType'] = Asset::class;
-        $variables['seoImageElements'] = $this->assetElementsFromIds($bundleSettings->seoImageIds, $siteId);
-        $variables['twitterImageElements'] = $this->assetElementsFromIds($bundleSettings->twitterImageIds, $siteId);
-        $variables['ogImageElements'] = $this->assetElementsFromIds($bundleSettings->ogImageIds, $siteId);
+        $variables['seoImageElements'] = ImageTransformHelper::assetElementsFromIds(
+            $bundleSettings->seoImageIds,
+            $siteId
+        );
+        $variables['twitterImageElements'] = ImageTransformHelper::assetElementsFromIds(
+            $bundleSettings->twitterImageIds,
+            $siteId
+        );
+        $variables['ogImageElements'] = ImageTransformHelper::assetElementsFromIds(
+            $bundleSettings->ogImageIds,
+            $siteId
+        );
         // Preview the meta containers
         Seomatic::$plugin->metaContainers->previewMetaContainers(
             MetaBundles::GLOBAL_META_BUNDLE,
@@ -456,9 +466,18 @@ class SettingsController extends Controller
         $variables['currentSubSection'] = $subSection;
         $bundleSettings = $metaBundle->metaBundleSettings;
         $variables['elementType'] = Asset::class;
-        $variables['seoImageElements'] = $this->assetElementsFromIds($bundleSettings->seoImageIds, $siteId);
-        $variables['twitterImageElements'] = $this->assetElementsFromIds($bundleSettings->twitterImageIds, $siteId);
-        $variables['ogImageElements'] = $this->assetElementsFromIds($bundleSettings->ogImageIds, $siteId);
+        $variables['seoImageElements'] = ImageTransformHelper::assetElementsFromIds(
+            $bundleSettings->seoImageIds,
+            $siteId
+        );
+        $variables['twitterImageElements'] = ImageTransformHelper::assetElementsFromIds(
+            $bundleSettings->twitterImageIds,
+            $siteId
+        );
+        $variables['ogImageElements'] = ImageTransformHelper::assetElementsFromIds(
+            $bundleSettings->ogImageIds,
+            $siteId
+        );
         // Pass in the pull fields
         $groupName = "Entry";
         $this->setContentFieldSourceVariables($sourceBundleType, $sourceHandle, $groupName, $variables);
@@ -591,10 +610,14 @@ class SettingsController extends Controller
         // The site settings for the appropriate meta bundle
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle(intval($variables['currentSiteId']));
         $variables['site'] = $metaBundle->metaSiteVars;
-        $variables['identityImageElements'] =
-            $this->assetElementsFromIds($variables['site']->identity->genericImageIds, $siteId);
-        $variables['creatorImageElements'] =
-            $this->assetElementsFromIds($variables['site']->creator->genericImageIds, $siteId);
+        $variables['identityImageElements'] = ImageTransformHelper::assetElementsFromIds(
+            $variables['site']->identity->genericImageIds,
+            $siteId
+        );
+        $variables['creatorImageElements'] = ImageTransformHelper::assetElementsFromIds(
+            $variables['site']->creator->genericImageIds,
+            $siteId
+        );
         $variables['elementType'] = Asset::class;
 
         // Render the template
@@ -1177,27 +1200,6 @@ class SettingsController extends Controller
         }
 
         return 'WebPage';
-    }
-
-    /**
-     * Return an array of Asset elements from an array of element IDs
-     *
-     * @param array|string $assetIds
-     * @param int          $siteId
-     *
-     * @return array
-     */
-    protected function assetElementsFromIds($assetIds, int $siteId)
-    {
-        $elements = Craft::$app->getElements();
-        $assets = [];
-        if (!empty($assetIds)) {
-            foreach ($assetIds as $assetId) {
-                $assets[] = $elements->getElementById($assetId, Asset::class, $siteId);
-            }
-        }
-
-        return $assets;
     }
 
     /**
