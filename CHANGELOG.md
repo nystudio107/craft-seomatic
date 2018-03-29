@@ -4,6 +4,9 @@
 ## Changed
 * Added additional fields for the `mainEntityOfPage` JSON-LD
 
+## Added
+* Added `seomatic.helper.truncate` and `seomatic.helper.truncateOnWord` helper functions for truncating text
+
 ### 3.0.0-beta.19 - 2018.03.28
 ## Changed
 * Fixed an issue where you could not disable `humans.txt` or `robots.txt`
