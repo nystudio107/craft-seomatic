@@ -11,8 +11,8 @@
 
 namespace nystudio107\seomatic;
 
-use craft\elements\User;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
+use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\helpers\PluginTemplate;
 use nystudio107\seomatic\models\MetaScriptContainer;
@@ -37,17 +37,20 @@ use craft\base\ElementInterface;
 use craft\base\Plugin;
 use craft\elements\Entry;
 use craft\elements\Category;
+use craft\elements\User;
 use craft\errors\SiteNotFoundException;
 use craft\events\CategoryGroupEvent;
 use craft\events\ElementEvent;
 use craft\events\ExceptionEvent;
 use craft\events\PluginEvent;
 use craft\events\RegisterCacheOptionsEvent;
+use craft\events\RegisterComponentTypesEvent;
 use craft\events\RegisterUrlRulesEvent;
 use craft\events\RegisterUserPermissionsEvent;
 use craft\events\SectionEvent;
 use craft\services\Categories;
 use craft\services\Elements;
+use craft\services\Fields;
 use craft\services\Plugins;
 use craft\services\Sections;
 use craft\services\UserPermissions;
@@ -308,7 +311,15 @@ class Seomatic extends Plugin
     {
         // Add in our Twig extensions
         Seomatic::$view->registerTwigExtension(new SeomaticTwigExtension);
-        // Handler: EVENT_AFTER_LOAD_PLUGINS
+        // Handler: Fields::EVENT_REGISTER_FIELD_TYPES
+        Event::on(
+            Fields::class,
+            Fields::EVENT_REGISTER_FIELD_TYPES,
+            function (RegisterComponentTypesEvent $event) {
+                $event->types[] = SeoSettingsField::class;
+            }
+        );
+        // Handler: Plugins::EVENT_AFTER_LOAD_PLUGINS
         Event::on(
             Plugins::class,
             Plugins::EVENT_AFTER_LOAD_PLUGINS,
