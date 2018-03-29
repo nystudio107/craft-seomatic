@@ -13,6 +13,7 @@ use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
+use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
 use nystudio107\seomatic\models\MetaBundle;
 
@@ -162,12 +163,21 @@ class SeoSettings extends Field
         $variables['name'] = $this->handle;
         $variables['value'] = $value;
         $variables['field'] = $this;
+        $variables['currentSourceBundleType'] = 'entry';
 
         // Get our id and namespace
         $id = Craft::$app->getView()->formatInputId($this->handle);
         $nameSpacedId = Craft::$app->getView()->namespaceInputId($id);
         $variables['id'] = $id;
         $variables['nameSpacedId'] = $nameSpacedId;
+        // Pull field sources
+        $variables['assetVolumeTextFieldSources'] = array_merge(
+            ['entryGroup' => ['optgroup' => 'Asset Volume Fields'], 'title' => 'Title'],
+            FieldHelper::fieldsOfTypeFromAssetVolumes(
+                FieldHelper::TEXT_FIELD_CLASS_KEY,
+                false
+            )
+        );
 
         /** @var MetaBundle $value */
         $variables['globals'] = $value->metaGlobalVars;

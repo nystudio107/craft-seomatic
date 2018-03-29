@@ -1,11 +1,13 @@
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
 
+{% if pageContext != "field" %}
 <div class="flex">
     <div class="flex-grow"></div>
     <a href="{{ seomatic.helper.sitemapIndexForSiteId(currentSiteId) }}" class="btn livepreviewbtn" target="_blank">{{ 'View Sitemap Index'|t("seomatic") }}</a>
     <a href="{{ seomatic.helper.sitemapUrlForBundle(currentSourceBundleType, currentSourceHandle, currentSiteId) }}" class="btn livepreviewbtn" target="_blank">{{ "View #{currentSourceBundleType |capitalize} Sitemap"|t("seomatic") }}</a>
 </div>
+{% endif %}
 
 {% namespace "sitemap" %}
 
