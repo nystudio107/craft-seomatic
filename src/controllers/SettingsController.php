@@ -9,15 +9,15 @@
 
 namespace nystudio107\seomatic\controllers;
 
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticChartAsset;
+use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\recipe\helpers\Json;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaScriptContainer;
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\helpers\Field as FieldHelper;
 
 use Craft;
 use craft\elements\Asset;
