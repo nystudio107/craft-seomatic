@@ -13,13 +13,16 @@ namespace nystudio107\seomatic\helpers;
 
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 
+use nystudio107\seomatic\Seomatic;
+
 use craft\elements\db\MatrixBlockQuery;
 use craft\elements\db\TagQuery;
 use craft\elements\MatrixBlock;
 use craft\elements\Tag;
 
-use nystudio107\seomatic\Seomatic;
 use yii\base\InvalidConfigException;
+
+use Stringy\Stringy;
 
 use PhpScience\TextRank\TextRankFacade;
 use PhpScience\TextRank\Tool\StopWords\StopWordsAbstract;
@@ -45,6 +48,53 @@ class Text
 
     // Public Static Methods
     // =========================================================================
+
+    /**
+     * Truncates the string to a given length. If $substring is provided, and
+     * truncating occurs, the string is further truncated so that the substring
+     * may be appended without exceeding the desired length.
+     *
+     * @param  string $string    The string to truncate
+     * @param  int    $length    Desired length of the truncated string
+     * @param  string $substring The substring to append if it can fit
+     *
+     * @return string with the resulting $str after truncating
+     */
+    public static function truncate($string, $length, $substring = '…'): string
+    {
+        $result = $string;
+
+        if (!empty($string)) {
+            $string = strip_tags($string);
+            $result = (string)Stringy::create($string)->truncate($length, $substring);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Truncates the string to a given length, while ensuring that it does not
+     * split words. If $substring is provided, and truncating occurs, the
+     * string is further truncated so that the substring may be appended without
+     * exceeding the desired length.
+     *
+     * @param  string $string    The string to truncate
+     * @param  int    $length    Desired length of the truncated string
+     * @param  string $substring The substring to append if it can fit
+     *
+     * @return string with the resulting $str after truncating
+     */
+    public static function truncateOnWord($string, $length, $substring = '…'): string
+    {
+        $result = $string;
+
+        if (!empty($string)) {
+            $string = strip_tags($string);
+            $result = (string)Stringy::create($string)->safeTruncate($length, $substring);
+        }
+
+        return $result;
+    }
 
     /**
      * Extract plain old text from a field
