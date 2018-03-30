@@ -15,11 +15,12 @@ use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
+use nystudio107\seomatic\validators\EmbeddedModelValidator;
 use nystudio107\seomatic\variables\SeomaticVariable;
 
 use craft\base\Model;
 use craft\helpers\Json as JsonHelper;
-
+use craft\validators\ArrayValidator;
 use craft\validators\DateTimeValidator;
 
 /**
@@ -238,19 +239,6 @@ class MetaBundle extends Model
             [
                 [
                     'bundleVersion',
-                    'sourceBundleType',
-                    'sourceId',
-                    'sourceName',
-                    'sourceHandle',
-                    'sourceType',
-                    'sourceSiteId',
-                    'sourceDateUpdated',
-                ],
-                'required',
-            ],
-            [
-                [
-                    'bundleVersion',
                     'sourceType',
                     'sourceName',
                     'sourceHandle',
@@ -261,7 +249,30 @@ class MetaBundle extends Model
             ],
             [['sourceId', 'sourceSiteId'], 'number', 'min' => 1],
             [['sourceDateUpdated'], DateTimeValidator::class],
-            [['sourceTemplate', 'sourceAltSiteSettings'], 'safe'],
+            [
+                [
+                    'sourceTemplate',
+                    'sourceAltSiteSettings',
+                ],
+                'safe'
+            ],
+            [
+                [
+                    'metaContainers',
+                    'redirectsContainer',
+                ],
+                ArrayValidator::class
+            ],
+            [
+                [
+                    'metaGlobalVars',
+                    'metaSiteVars',
+                    'metaSitemapVars',
+                    'metaBundleSettings',
+                    'frontendTemplatesContainer',
+                ],
+                EmbeddedModelValidator::class
+            ],
         ];
         return $rules;
     }
