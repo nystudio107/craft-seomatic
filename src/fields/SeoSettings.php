@@ -132,6 +132,14 @@ class SeoSettings extends Field
     /**
      * @inheritdoc
      */
+    public function serializeValue($value, ElementInterface $element = null)
+    {
+        parent::serializeValue($value, $element);
+    }
+
+        /**
+     * @inheritdoc
+     */
     public function getSettingsHtml()
     {
         $variables = [];
