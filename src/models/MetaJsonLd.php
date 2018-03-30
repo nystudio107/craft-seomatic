@@ -241,6 +241,7 @@ class MetaJsonLd extends MetaItem
         return $this->render([
             'renderRaw'        => false,
             'renderScriptTags' => true,
+            'array'            => false,
         ]);
     }
 
