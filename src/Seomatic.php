@@ -221,7 +221,8 @@ class Seomatic extends Plugin
      */
     public function getSettingsResponse()
     {
-        return Craft::$app->runAction('seomatic/settings/plugin');
+        // Just redirect to the plugin settings page
+        Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('seomatic/plugin'));
     }
 
     /**
