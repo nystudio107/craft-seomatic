@@ -3,6 +3,7 @@
 ### 3.0.0-beta.20 - 2018.03.29
 ## Changed
 * Added additional fields for the `mainEntityOfPage` JSON-LD
+* Clicking on Settings on from the AdminCP now redirects to the appropriate SEOmatic sub-nav
 
 ## Added
 * Added `seomatic.helper.truncate` and `seomatic.helper.truncateOnWord` helper functions for truncating text
