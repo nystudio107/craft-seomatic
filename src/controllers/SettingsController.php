@@ -259,9 +259,9 @@ class SettingsController extends Controller
         $variables['currentSubSection'] = $subSection;
         // Meta bundle settings
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle(intval($variables['currentSiteId']));
-        $variables['globals'] = $metaBundle->metaGlobalVars;
-        $variables['sitemap'] = $metaBundle->metaSitemapVars;
-        $variables['settings'] = $metaBundle->metaBundleSettings;
+        $variables['metaGlobalVars'] = $metaBundle->metaGlobalVars;
+        $variables['metaSitemapVars'] = $metaBundle->metaSitemapVars;
+        $variables['metaBundleSettings'] = $metaBundle->metaBundleSettings;
         // Template container settings
         $templateContainers = $metaBundle->frontendTemplatesContainer->data;
         $variables['robotsTemplate'] = $templateContainers[FrontendTemplates::ROBOTS_TXT_HANDLE];
@@ -300,8 +300,8 @@ class SettingsController extends Controller
         $this->requirePostRequest();
         $request = Craft::$app->getRequest();
         $siteId = $request->getParam('siteId');
-        $globalsSettings = $request->getParam('globals');
-        $bundleSettings = $request->getParam('settings');
+        $globalsSettings = $request->getParam('metaGlobalVars');
+        $bundleSettings = $request->getParam('metaBundleSettings');
         $robotsTemplate = $request->getParam('robotsTemplate');
         $humansTemplate = $request->getParam('humansTemplate');
 
@@ -433,9 +433,9 @@ class SettingsController extends Controller
             $sourceHandle,
             intval($variables['currentSiteId'])
         );
-        $variables['globals'] = $metaBundle->metaGlobalVars;
-        $variables['sitemap'] = $metaBundle->metaSitemapVars;
-        $variables['settings'] = $metaBundle->metaBundleSettings;
+        $variables['metaGlobalVars'] = $metaBundle->metaGlobalVars;
+        $variables['metaSitemapVars'] = $metaBundle->metaSitemapVars;
+        $variables['metaBundleSettings'] = $metaBundle->metaBundleSettings;
         $variables['currentSourceHandle'] = $metaBundle->sourceHandle;
         $variables['currentSourceBundleType'] = $metaBundle->sourceBundleType;
         // Basic variables
@@ -504,9 +504,9 @@ class SettingsController extends Controller
         $sourceBundleType = $request->getParam('sourceBundleType');
         $sourceHandle = $request->getParam('sourceHandle');
         $siteId = $request->getParam('siteId');
-        $globalsSettings = $request->getParam('globals');
-        $bundleSettings = $request->getParam('settings');
-        $sitemapSettings = $request->getParam('sitemap');
+        $globalsSettings = $request->getParam('metaGlobalVars');
+        $bundleSettings = $request->getParam('metaBundleSettings');
+        $sitemapSettings = $request->getParam('metaSitemapVars');
 
         // Set the element type in the template
         switch ($sourceBundleType) {
