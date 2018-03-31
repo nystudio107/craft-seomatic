@@ -34,28 +34,24 @@
     {############### General tab settings ###############}
 
     <div id="{{ id ~ "tab-general" }}" class="seomatic-tab-content">
-        <h2>{{ "General Settings" |t("seomatic") }}</h2>
         {% include "seomatic/settings/_includes/tab-general.twig" with {"pageContext": "field"} %}
     </div>
 
     {############### Twitter tab settings ###############}
 
     <div id="{{ id ~ "tab-twitter" }}" class="seomatic-tab-content hidden">
-        <h2>{{ "Twitter Settings" |t("seomatic") }}</h2>
         {% include "seomatic/settings/_includes/tab-twitter.twig" with {"pageContext": "field"} %}
     </div>
 
     {############### Facebook tab settings ###############}
 
     <div id="{{ id ~ "tab-facebook" }}" class="seomatic-tab-content hidden">
-        <h2>{{ "Facebook Settings" |t("seomatic") }}</h2>
         {% include "seomatic/settings/_includes/tab-facebook.twig" with {"pageContext": "field"} %}
     </div>
 
     {############### Sitemap tab settings ###############}
 
     <div id="{{ id ~ "tab-Sitemap" }}" class="seomatic-tab-content hidden">
-        <h2>{{ "Sitemap Settings" |t("seomatic") }}</h2>
         {% include "seomatic/settings/_includes/tab-sitemap.twig" with {"pageContext": "field"} %}
     </div>
 
