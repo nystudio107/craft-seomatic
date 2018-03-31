@@ -67,6 +67,12 @@ nav.seomatic-tabs ul li a {
     text-decoration: none;
 }
 
+nav.seomatic-tabs ul li a:active, nav.seomatic-tabs ul li a:focus {
+    outline: 0;
+    border: none;
+    -moz-outline-style: none;
+}
+
 nav.seomatic-tabs ul li a.sel {
     color: #29323d;
     background: #fff;
