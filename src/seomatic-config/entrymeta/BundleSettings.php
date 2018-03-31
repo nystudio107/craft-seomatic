@@ -17,12 +17,12 @@
 
 return [
     '*' => [
-        'siteType'                      => 'CreativeWork',
-        'siteSubType'                   => 'WebPage',
+        'siteType'                      => '',
+        'siteSubType'                   => '',
         'siteSpecificType'              => '',
 
-        'seoTitleSource'                => 'fromField',
-        'seoTitleField'                 => 'title',
+        'seoTitleSource'                => 'fromCustom',
+        'seoTitleField'                 => '',
         'siteNamePositionSource'        => 'sameAsGlobal',
         'seoDescriptionSource'          => 'fromCustom',
         'seoDescriptionField'           => '',
