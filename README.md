@@ -364,15 +364,27 @@ or
 {% do seomatic.meta.seoDescription("This is my description. There are many like it, but this one is mine.") %}
 ```
 
-You can also set multiple variables at once:
+You can also set multiple variables at once using array syntax:
 
 ```twig
-{% do seomatic.meta.attributes({
+{% do seomatic.meta.setSttributes({
   "seoTitle": "Some Title",
   "seoDescription": "This is my description. There are many like it, but this one is mine."
   })
 %}
 ```
+
+Or you can chain them together:
+
+
+```twig
+{% do seomatic.meta
+  .seoTitle("Some Title")
+  .seoDescription("This is my description. There are many like it, but this one is mine.")
+%}
+```
+
+These do the same thing, so use whichever you prefer.
 
 You can set SEOmatic variables anywhere in your templates, even in sub-templates you `include` from other templates. This works because SEOmatic dynamically injects the meta tags, scripts, links, and JSON-LD into your page after the template is done rendering.
 
@@ -607,15 +619,27 @@ You could also chain this together in a single line:
 {% do seomatic.tag.get("description").include(false) %}
 ```
 
-And you can set multiple attributes at once:
+And you can set multiple attributes at once using an array syntax:
 
 ```twig
-{% do seomatic.tag.get("description").attributes({
+{% do seomatic.tag.get("description").setAttributes({
   "content": "Some Description",
   "include": false
   })
 %}
 ```
+
+Which is the same as doing:
+
+
+```twig
+{% do seomatic.tag.get("description")
+  .content("Some Description")
+  .include(false)
+%}
+```
+
+So use whatever you like better.
 
 ##### Meta Object `.create()`
 
