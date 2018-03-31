@@ -17,8 +17,9 @@
 
 {% import "_includes/forms" as forms %}
 
+<h1>{{ name }}</h1>
 {% namespace name %}
-<div id="{{ id }}" class="seomatic-meta-field">
+<div id="{{ id }}" class="field seomatic-meta-field">
     <div class="pane">
         <nav id="{{ id ~ "tabs" }}" class="tabs">
             <ul>
@@ -33,7 +34,11 @@
 
         <div id="{{ id ~ "tab-general" }}">
             <h2>{{ "General Settings" |t("seomatic") }}</h2>
-            {% include "seomatic/settings/_includes/tab-general.twig" with {"pageContext": "field"} %}
+            {% include "seomatic/settings/_includes/test.twig" with {"pageContext": "field"} %}
+    
+            {#
+                        {% include "seomatic/settings/_includes/tab-general.twig" with {"pageContext": "field"} %}
+            #}
         </div>
 
 
@@ -41,7 +46,9 @@
 
         <div id="{{ id ~ "tab-twitter" }}">
             <h2>{{ "Twitter Settings" |t("seomatic") }}</h2>
+{#
             {% include "seomatic/settings/_includes/tab-twitter.twig" with {"pageContext": "field"} %}
+#}
         </div>
 
 
@@ -49,7 +56,9 @@
 
         <div id="{{ id ~ "tab-facebook" }}">
             <h2>{{ "Facebook Settings" |t("seomatic") }}</h2>
+{#
             {% include "seomatic/settings/_includes/tab-facebook.twig" with {"pageContext": "field"} %}
+#}
         </div>
 
 
@@ -57,7 +66,9 @@
 
         <div id="{{ id ~ "tab-Sitemap" }}">
             <h2>{{ "Sitemap Settings" |t("seomatic") }}</h2>
+{#
             {% include "seomatic/settings/_includes/tab-sitemap.twig" with {"pageContext": "field"} %}
+#}
         </div>
 
     </div>
