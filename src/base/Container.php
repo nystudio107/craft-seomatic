@@ -115,7 +115,6 @@ abstract class Container extends Model implements ContainerInterface
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['name', 'description', 'handle', 'class'], 'required'],
             [['include'], 'boolean'],
             [['name', 'description', 'handle', 'class'], 'string'],
             [['dependencies'], 'safe'],
