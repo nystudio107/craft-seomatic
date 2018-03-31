@@ -367,7 +367,7 @@ or
 You can also set multiple variables at once using array syntax:
 
 ```twig
-{% do seomatic.meta.setSttributes({
+{% do seomatic.meta.setAttributes({
   "seoTitle": "Some Title",
   "seoDescription": "This is my description. There are many like it, but this one is mine."
   })
