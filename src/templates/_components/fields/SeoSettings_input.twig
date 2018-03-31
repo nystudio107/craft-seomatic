@@ -17,60 +17,47 @@
 
 {% import "_includes/forms" as forms %}
 
-<h1>{{ name }}</h1>
+{% set metaGlobalVars = value.metaGlobalVars %}
+{% set metaBundleSettings = value.metaBundleSettings %}
+{% set metaSitemapVars = value.metaSitemapVars %}
 {% namespace name %}
-<div id="{{ id }}" class="field seomatic-meta-field">
-    <div class="pane">
-        <nav id="{{ id ~ "tabs" }}" class="tabs">
-            <ul>
-                <li><a id="{{ id ~ "tabs-general" }}" class="tab sel" href="#{{ nameSpacedId ~ 'tab-general' }}"  tabindex="0">General</a></li>
-                <li><a id="{{ id ~ "tabs-twitter" }}" class="tab" href="#{{ nameSpacedId ~ 'tab-twitter' }}"  tabindex="0">Twitter</a></li>
-                <li><a id="{{ id ~ "tabs-facebook" }}" class="tab" href="#{{ nameSpacedId ~ 'tab-facebook' }}"  tabindex="0">Facebook</a></li>
-                <li><a id="{{ id ~ "tabs-sitemap" }}" class="tab" href="#{{ nameSpacedId ~ 'tab-sitemap' }}"  tabindex="0">Sitemap</a></li>
-            </ul>
-        </nav>
+<div id="{{ id }}" class="field seomatic-field">
+    <nav id="{{ id ~ "tabs" }}" class="seomatic-tabs">
+        <ul>
+            <li><a id="{{ id ~ "tabs-general" }}" class="tab sel" href="#{{ nameSpacedId ~ 'tab-general' }}"  tabindex="0">General</a></li>
+            <li><a id="{{ id ~ "tabs-twitter" }}" class="tab" href="#{{ nameSpacedId ~ 'tab-twitter' }}"  tabindex="0">Twitter</a></li>
+            <li><a id="{{ id ~ "tabs-facebook" }}" class="tab" href="#{{ nameSpacedId ~ 'tab-facebook' }}"  tabindex="0">Facebook</a></li>
+            <li><a id="{{ id ~ "tabs-sitemap" }}" class="tab" href="#{{ nameSpacedId ~ 'tab-sitemap' }}"  tabindex="0">Sitemap</a></li>
+        </ul>
+    </nav>
 
-        {############### General tab settings ###############}
+    {############### General tab settings ###############}
 
-        <div id="{{ id ~ "tab-general" }}">
-            <h2>{{ "General Settings" |t("seomatic") }}</h2>
-            {% include "seomatic/settings/_includes/test.twig" with {"pageContext": "field"} %}
-    
-            {#
-                        {% include "seomatic/settings/_includes/tab-general.twig" with {"pageContext": "field"} %}
-            #}
-        </div>
-
-
-        {############### Twitter tab settings ###############}
-
-        <div id="{{ id ~ "tab-twitter" }}">
-            <h2>{{ "Twitter Settings" |t("seomatic") }}</h2>
-{#
-            {% include "seomatic/settings/_includes/tab-twitter.twig" with {"pageContext": "field"} %}
-#}
-        </div>
-
-
-        {############### Facebook tab settings ###############}
-
-        <div id="{{ id ~ "tab-facebook" }}">
-            <h2>{{ "Facebook Settings" |t("seomatic") }}</h2>
-{#
-            {% include "seomatic/settings/_includes/tab-facebook.twig" with {"pageContext": "field"} %}
-#}
-        </div>
-
-
-        {############### Sitemap tab settings ###############}
-
-        <div id="{{ id ~ "tab-Sitemap" }}">
-            <h2>{{ "Sitemap Settings" |t("seomatic") }}</h2>
-{#
-            {% include "seomatic/settings/_includes/tab-sitemap.twig" with {"pageContext": "field"} %}
-#}
-        </div>
-
+    <div id="{{ id ~ "tab-general" }}" class="seomatic-tab-content">
+        <h2>{{ "General Settings" |t("seomatic") }}</h2>
+        {% include "seomatic/settings/_includes/tab-general.twig" with {"pageContext": "field"} %}
     </div>
+
+    {############### Twitter tab settings ###############}
+
+    <div id="{{ id ~ "tab-twitter" }}" class="seomatic-tab-content hidden">
+        <h2>{{ "Twitter Settings" |t("seomatic") }}</h2>
+        {% include "seomatic/settings/_includes/tab-twitter.twig" with {"pageContext": "field"} %}
+    </div>
+
+    {############### Facebook tab settings ###############}
+
+    <div id="{{ id ~ "tab-facebook" }}" class="seomatic-tab-content hidden">
+        <h2>{{ "Facebook Settings" |t("seomatic") }}</h2>
+        {% include "seomatic/settings/_includes/tab-facebook.twig" with {"pageContext": "field"} %}
+    </div>
+
+    {############### Sitemap tab settings ###############}
+
+    <div id="{{ id ~ "tab-Sitemap" }}" class="seomatic-tab-content hidden">
+        <h2>{{ "Sitemap Settings" |t("seomatic") }}</h2>
+        {% include "seomatic/settings/_includes/tab-sitemap.twig" with {"pageContext": "field"} %}
+    </div>
+
 </div>
 {% endnamespace %}
