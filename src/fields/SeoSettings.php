@@ -119,6 +119,9 @@ class SeoSettings extends Field
         if (!empty($value) && is_string($value)) {
             $config = Json::decode($value);
         }
+        if (is_array($value)) {
+            $config = $value;
+        }
         // Create a new meta bundle with propagated defaults
         $metaBundleDefaults = ArrayHelper::merge(
             ConfigHelper::getConfigFromFile('fieldmeta/Bundle'),
@@ -134,7 +137,8 @@ class SeoSettings extends Field
      */
     public function serializeValue($value, ElementInterface $element = null)
     {
-        parent::serializeValue($value, $element);
+        /** @var MetaBundle $value */
+        return parent::serializeValue($value, $element);
     }
 
         /**
@@ -188,9 +192,6 @@ class SeoSettings extends Field
         );
 
         /** @var MetaBundle $value */
-        $variables['globals'] = $value->metaGlobalVars;
-        $variables['sitemap'] = $value->metaSitemapVars;
-        $variables['settings'] = $value->metaBundleSettings;
         $variables['elementType'] = Asset::class;
         $variables['seoImageElements'] = ImageTransformHelper::assetElementsFromIds(
             $value->metaBundleSettings->seoImageIds,
