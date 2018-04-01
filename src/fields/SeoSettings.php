@@ -15,9 +15,11 @@ use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
+use nystudio107\seomatic\helpers\PullField as PullFieldHelper;
 use nystudio107\seomatic\models\MetaBundle;
 
 use Craft;
+use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\elements\Asset;
@@ -116,11 +118,34 @@ class SeoSettings extends Field
     public function normalizeValue($value, ElementInterface $element = null)
     {
         $config = [];
-        if (!empty($value) && is_string($value)) {
-            $config = Json::decode($value);
+        if (!empty($value)) {
+            if (is_string($value)) {
+                $config = Json::decode($value);
+            }
+            if (is_array($value)) {
+                $config = $value;
+            }
         }
-        if (is_array($value)) {
-            $config = $value;
+        if (!empty($config)) {
+            $elementName = '';
+            /** @var Element $element */
+            if (!empty($element)) {
+                try {
+                    $reflector = new \ReflectionClass($element);
+                } catch (\ReflectionException $e) {
+                    $reflector = null;
+                    Craft::error($e->getMessage(), __METHOD__);
+                }
+                if ($reflector) {
+                    $elementName = strtolower($reflector->getShortName());
+                }
+            }
+            if (!empty($config['metaGlobalVars']) && !empty($config['metaBundleSettings'])) {
+                $globalsSettings = $config['metaGlobalVars'];
+                $bundleSettings = $config['metaBundleSettings'];
+                PullFieldHelper::parseTextSources($elementName, $globalsSettings, $bundleSettings);
+                PullFieldHelper::parseImageSources($elementName, $globalsSettings, $bundleSettings, null);
+            }
         }
         // Create a new meta bundle with propagated defaults
         $metaBundleDefaults = ArrayHelper::merge(
@@ -158,6 +183,7 @@ class SeoSettings extends Field
             true
         );
         $variables['field'] = $this;
+
         // Render the settings template
         return Craft::$app->getView()->renderTemplate(
             'seomatic/_components/fields/SeoSettings_settings',
@@ -193,13 +219,10 @@ class SeoSettings extends Field
         $variables['id'] = $id;
         $variables['nameSpacedId'] = $nameSpacedId;
         // Pull field sources
-        $variables['assetVolumeTextFieldSources'] = array_merge(
-            ['entryGroup' => ['optgroup' => 'Asset Volume Fields'], 'title' => 'Title'],
-            FieldHelper::fieldsOfTypeFromAssetVolumes(
-                FieldHelper::TEXT_FIELD_CLASS_KEY,
-                false
-            )
-        );
+        if (!empty($element)) {
+            /** @var Element $element */
+            $this->setContentFieldSourceVariables($element, 'Entry', $variables);
+        }
 
         /** @var MetaBundle $value */
         $variables['elementType'] = Asset::class;
@@ -218,15 +241,60 @@ class SeoSettings extends Field
 
         // Variables to pass down to our field JavaScript to let it namespace properly
         $jsonVars = [
-            'id' => $id,
-            'name' => $this->handle,
+            'id'        => $id,
+            'name'      => $this->handle,
             'namespace' => $nameSpacedId,
-            'prefix' => Craft::$app->getView()->namespaceInputId(''),
+            'prefix'    => Craft::$app->getView()->namespaceInputId(''),
         ];
         $jsonVars = Json::encode($jsonVars);
         //Craft::$app->getView()->registerJs("$('#{$nameSpacedId}-field').RecipeRecipe(".$jsonVars.");");
 
         // Render the input template
         return Craft::$app->getView()->renderTemplate('seomatic/_components/fields/SeoSettings_input', $variables);
+    }
+
+    // Protected Methods
+    // =========================================================================
+
+    /**
+     * @param Element $element
+     * @param string  $groupName
+     * @param array   $variables
+     */
+    protected function setContentFieldSourceVariables(
+        Element $element,
+        string $groupName,
+        array &$variables
+    ) {
+        $variables['textFieldSources'] = array_merge(
+            ['entryGroup' => ['optgroup' => $groupName.' Fields'], 'title' => 'Title'],
+            FieldHelper::fieldsOfTypeFromElement(
+                $element,
+                FieldHelper::TEXT_FIELD_CLASS_KEY,
+                false
+            )
+        );
+        $variables['assetFieldSources'] = array_merge(
+            ['entryGroup' => ['optgroup' => $groupName.' Fields']],
+            FieldHelper::fieldsOfTypeFromElement(
+                $element,
+                FieldHelper::ASSET_FIELD_CLASS_KEY,
+                false
+            )
+        );
+        $variables['assetVolumeTextFieldSources'] = array_merge(
+            ['entryGroup' => ['optgroup' => 'Asset Volume Fields'], 'title' => 'Title'],
+            FieldHelper::fieldsOfTypeFromAssetVolumes(
+                FieldHelper::TEXT_FIELD_CLASS_KEY,
+                false
+            )
+        );
+        $variables['userFieldSources'] = array_merge(
+            ['entryGroup' => ['optgroup' => 'User Fields']],
+            FieldHelper::fieldsOfTypeFromUsers(
+                FieldHelper::TEXT_FIELD_CLASS_KEY,
+                false
+            )
+        );
     }
 }
