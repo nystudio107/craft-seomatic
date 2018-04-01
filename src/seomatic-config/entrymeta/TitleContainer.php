@@ -29,6 +29,12 @@ return [
         'dependencies' => [
         ],
         'data'         => [
+            'title' => [
+                'title'            => '{seomatic.meta.seoTitle}',
+                'siteName'         => '{seomatic.site.siteName}',
+                'siteNamePosition' => '{seomatic.meta.siteNamePosition}',
+                'separatorChar'    => '{seomatic.config.separatorChar}',
+            ],
         ],
     ],
 ];

@@ -11,7 +11,6 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use craft\helpers\Json;
 use nystudio107\seomatic\models\Entity;
 use nystudio107\seomatic\models\jsonld\LocalBusiness;
 use nystudio107\seomatic\Seomatic;
@@ -23,6 +22,7 @@ use Craft;
 use craft\base\Element;
 use craft\errors\SiteNotFoundException;
 use craft\helpers\DateTimeHelper;
+use craft\helpers\Json;
 use craft\helpers\UrlHelper;
 
 use yii\base\Exception;
