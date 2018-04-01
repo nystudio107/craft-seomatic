@@ -118,6 +118,7 @@ class SeoSettings extends Field
     public function normalizeValue($value, ElementInterface $element = null)
     {
         $config = [];
+        // Handle incoming values potentially being JSON, an array, or an object
         if (!empty($value)) {
             if (is_string($value)) {
                 $config = Json::decode($value);
@@ -125,7 +126,11 @@ class SeoSettings extends Field
             if (is_array($value)) {
                 $config = $value;
             }
+            if (is_object($value) && $value instanceof MetaBundle) {
+                //$config = $value->getAttributes();
+            }
         }
+        // If the config isn't empty, do some processing on the values
         if (!empty($config)) {
             $elementName = '';
             /** @var Element $element */
