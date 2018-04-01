@@ -10,10 +10,10 @@
  */
 #}
 
-    {% set tabs = {
-        url: "#tab-content-identity",
-        label: "Identity" |t("seomatic"),
-    } %}
+{% set tabs = {
+    url: "#tab-content-identity",
+    label: "Identity" |t("seomatic"),
+} %}
 
 {% import "_includes/forms" as forms %}
 
@@ -24,36 +24,52 @@
 <div id="{{ id }}" class="field seomatic-field">
     <nav id="{{ id ~ "tabs" }}" class="seomatic-tabs">
         <ul>
-            <li><a id="{{ id ~ "-tabs-general" }}" class="seomatic-tab-links tab sel" href="#{{ nameSpacedId ~ '-tab-general' }}"  tabindex="0">General</a></li>
-            <li><a id="{{ id ~ "-tabs-twitter" }}" class="seomatic-tab-links tab" href="#{{ nameSpacedId ~ '-tab-twitter' }}"  tabindex="0">Twitter</a></li>
-            <li><a id="{{ id ~ "-tabs-facebook" }}" class="seomatic-tab-links tab" href="#{{ nameSpacedId ~ '-tab-facebook' }}"  tabindex="0">Facebook</a></li>
-            <li><a id="{{ id ~ "-tabs-sitemap" }}" class="seomatic-tab-links tab" href="#{{ nameSpacedId ~ '-tab-sitemap' }}"  tabindex="0">Sitemap</a></li>
+            {% if field.generalTabEnabled %}
+                <li><a id="{{ id ~ "-tabs-general" }}" class="seomatic-tab-links tab sel" href="#{{ nameSpacedId ~ '-tab-general' }}"  tabindex="0">General</a></li>
+            {% endif %}
+            {% if field.twitterTabEnabled %}
+                <li><a id="{{ id ~ "-tabs-twitter" }}" class="seomatic-tab-links tab" href="#{{ nameSpacedId ~ '-tab-twitter' }}"  tabindex="0">Twitter</a></li>
+            {% endif %}
+            {% if field.facebookTabEnabled %}
+                <li><a id="{{ id ~ "-tabs-facebook" }}" class="seomatic-tab-links tab" href="#{{ nameSpacedId ~ '-tab-facebook' }}"  tabindex="0">Facebook</a></li>
+            {% endif %}
+            {% if field.sitemapTabEnabled %}
+                <li><a id="{{ id ~ "-tabs-sitemap" }}" class="seomatic-tab-links tab" href="#{{ nameSpacedId ~ '-tab-sitemap' }}"  tabindex="0">Sitemap</a></li>
+            {% endif %}
         </ul>
     </nav>
 
     {############### General tab settings ###############}
 
-    <div id="{{ "tab-general" }}" class="seomatic-tab-content">
-        {% include "seomatic/settings/_includes/tab-general.twig" with {"pageContext": "field"} %}
-    </div>
+    {% if field.generalTabEnabled %}
+        <div id="{{ "tab-general" }}" class="seomatic-tab-content">
+            {% include "seomatic/settings/_includes/tab-general.twig" with {"pageContext": "field"} %}
+        </div>
+    {% endif %}
 
     {############### Twitter tab settings ###############}
 
-    <div id="{{ "tab-twitter" }}" class="seomatic-tab-content hidden">
-        {% include "seomatic/settings/_includes/tab-twitter.twig" with {"pageContext": "field"} %}
-    </div>
+    {% if field.twitterTabEnabled %}
+        <div id="{{ "tab-twitter" }}" class="seomatic-tab-content hidden">
+            {% include "seomatic/settings/_includes/tab-twitter.twig" with {"pageContext": "field"} %}
+        </div>
+    {% endif %}
 
     {############### Facebook tab settings ###############}
 
-    <div id="{{ "tab-facebook" }}" class="seomatic-tab-content hidden">
-        {% include "seomatic/settings/_includes/tab-facebook.twig" with {"pageContext": "field"} %}
-    </div>
+    {% if field.facebookTabEnabled %}
+        <div id="{{ "tab-facebook" }}" class="seomatic-tab-content hidden">
+            {% include "seomatic/settings/_includes/tab-facebook.twig" with {"pageContext": "field"} %}
+        </div>
+    {% endif %}
 
     {############### Sitemap tab settings ###############}
 
-    <div id="{{ "tab-sitemap" }}" class="seomatic-tab-content hidden">
-        {% include "seomatic/settings/_includes/tab-sitemap.twig" with {"pageContext": "field"} %}
-    </div>
+    {% if field.sitemapTabEnabled %}
+        <div id="{{ "tab-sitemap" }}" class="seomatic-tab-content hidden">
+            {% include "seomatic/settings/_includes/tab-sitemap.twig" with {"pageContext": "field"} %}
+        </div>
+    {% endif %}
 
 </div>
 {% endnamespace %}
