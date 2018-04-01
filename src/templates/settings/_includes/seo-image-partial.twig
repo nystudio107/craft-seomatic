@@ -82,14 +82,16 @@
 
 {############### SEO Image Transform ###############}
 
-{% namespace "metaBundleSettings" %}
-    {{ forms.lightswitchField({
-        label: "Transform SEO Image" |t("seomatic"),
-        instructions: "Whether the SEO image should be automatically transformed to an appropriate file format and aspect ratio." |t("seomatic"),
-        id: "seoImageTransform",
-        name: "seoImageTransform",
-        on: metaBundleSettings.seoImageTransform,
-        warning: false,
-        errors: metaBundleSettings.getErrors("seoImageTransform"),
-    }) }}
-{% endnamespace %}
+{% if field is not defined or 'seoImageTransform' in field.generalEnabledFields %}
+    {% namespace "metaBundleSettings" %}
+        {{ forms.lightswitchField({
+            label: "Transform SEO Image" |t("seomatic"),
+            instructions: "Whether the SEO image should be automatically transformed to an appropriate file format and aspect ratio." |t("seomatic"),
+            id: "seoImageTransform",
+            name: "seoImageTransform",
+            on: metaBundleSettings.seoImageTransform,
+            warning: false,
+            errors: metaBundleSettings.getErrors("seoImageTransform"),
+        }) }}
+    {% endnamespace %}
+{% endif %}
