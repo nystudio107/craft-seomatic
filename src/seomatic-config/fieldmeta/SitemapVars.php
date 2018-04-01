@@ -24,16 +24,7 @@ return [
     'sitemapPriority'      => 0.5,
     'sitemapLimit'         => null,
     'sitemapImageFieldMap' => [
-        ['property' => 'title', 'field' => 'title'],
-        ['property' => 'caption', 'field' => ''],
-        ['property' => 'geo_location', 'field' => ''],
-        ['property' => 'license', 'field' => ''],
     ],
     'sitemapVideoFieldMap' => [
-        ['property' => 'title', 'field' => 'title'],
-        ['property' => 'description', 'field' => ''],
-        ['property' => 'thumbnailLoc', 'field' => ''],
-        ['property' => 'duration', 'field' => ''],
-        ['property' => 'category', 'field' => ''],
     ],
 ];

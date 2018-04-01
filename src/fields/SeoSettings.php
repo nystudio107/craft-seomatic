@@ -141,12 +141,22 @@ class SeoSettings extends Field
         return parent::serializeValue($value, $element);
     }
 
-        /**
+    /**
      * @inheritdoc
      */
     public function getSettingsHtml()
     {
         $variables = [];
+        // Asset bundle
+        try {
+            Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
+        } catch (InvalidConfigException $e) {
+            Craft::error($e->getMessage(), __METHOD__);
+        }
+        $variables['baseAssetsUrl'] = Craft::$app->assetManager->getPublishedUrl(
+            '@nystudio107/seomatic/assetbundles/seomatic/dist',
+            true
+        );
         $variables['field'] = $this;
         // Render the settings template
         return Craft::$app->getView()->renderTemplate(
