@@ -149,11 +149,19 @@ class SeoSettings extends Field
                     $elementName = strtolower($reflector->getShortName());
                 }
             }
+            // Handle the pull fields
             if (!empty($config['metaGlobalVars']) && !empty($config['metaBundleSettings'])) {
-                $globalsSettings = $config['metaGlobalVars'];
-                $bundleSettings = $config['metaBundleSettings'];
-                PullFieldHelper::parseTextSources($elementName, $globalsSettings, $bundleSettings);
-                PullFieldHelper::parseImageSources($elementName, $globalsSettings, $bundleSettings, null);
+                PullFieldHelper::parseTextSources(
+                    $elementName,
+                    $config['metaGlobalVars'],
+                    $config['metaBundleSettings']
+                );
+                PullFieldHelper::parseImageSources(
+                    $elementName,
+                    $config['metaGlobalVars'],
+                    $config['metaBundleSettings'],
+                    null
+                );
             }
         }
         // Create a new meta bundle with propagated defaults
