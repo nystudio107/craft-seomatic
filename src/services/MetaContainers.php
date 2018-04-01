@@ -15,6 +15,7 @@ use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\helpers\DynamicMeta as DynamicMetaHelper;
+use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaGlobalVars;
@@ -147,6 +148,7 @@ class MetaContainers extends Component
                     );
                     $this->loadGlobalMetaContainers($siteId);
                     $this->loadContentMetaContainers();
+                    $this->loadFieldMetaContainers();
                     DynamicMetaHelper::addDynamicMetaToContainers($uri, $siteId);
 
                     return [$this->metaGlobalVars, $this->metaSiteVars, $this->metaSitemapVars, $this->metaContainers];
@@ -445,6 +447,24 @@ class MetaContainers extends Component
         $metaBundle = $this->getMatchedMetaBundle();
         if ($metaBundle) {
             $this->addMetaBundleToContainers($metaBundle);
+        }
+    }
+
+    /**
+     * Load any meta containers in the current element
+     */
+    protected function loadFieldMetaContainers()
+    {
+        $element = Seomatic::$matchedElement;
+        if ($element) {
+            /** @var Element $element */
+            $fieldHandles = FieldHelper::fieldsOfTypeFromElement($element, FieldHelper::SEO_SETTINGS_CLASS_KEY, true);
+            foreach ($fieldHandles as $fieldHandle) {
+                if (!empty($element->$fieldHandle)) {
+                    $metaBundle = $element->$fieldHandle;
+                    $this->addMetaBundleToContainers($metaBundle);
+                }
+            }
         }
     }
 

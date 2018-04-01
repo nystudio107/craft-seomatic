@@ -20,11 +20,11 @@ use nystudio107\seomatic\services\MetaBundles;
 
 return [
     'bundleVersion'              => '1.0.21',
-    'sourceBundleType'           => MetaBundles::SECTION_META_BUNDLE,
+    'sourceBundleType'           => MetaBundles::FIELD_META_BUNDLE,
     'sourceId'                   => null,
     'sourceName'                 => null,
     'sourceHandle'               => null,
-    'sourceType'                 => 'section',
+    'sourceType'                 => 'field',
     'sourceTemplate'             => '',
     'sourceSiteId'               => null,
     'sourceAltSiteSettings'      => [

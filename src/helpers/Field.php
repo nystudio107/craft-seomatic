@@ -11,14 +11,14 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use craft\base\Volume;
-use craft\elements\db\ElementQuery;
-use craft\elements\User;
 use nystudio107\seomatic\services\MetaBundles;
+use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
 
 use Craft;
 use craft\base\Element;
 use craft\base\Field as BaseField;
+use craft\base\Volume;
+use craft\elements\User;
 use craft\ckeditor\Field as CKEditorField;
 use craft\elements\MatrixBlock;
 use craft\fields\Assets as AssetsField;
@@ -43,6 +43,7 @@ class Field
     const TEXT_FIELD_CLASS_KEY = 'text';
     const ASSET_FIELD_CLASS_KEY = 'asset';
     const BLOCK_FIELD_CLASS_KEY = 'block';
+    const SEO_SETTINGS_CLASS_KEY = 'seo';
 
     const FIELD_CLASSES = [
         self::TEXT_FIELD_CLASS_KEY  => [
@@ -57,6 +58,9 @@ class Field
         ],
         self::BLOCK_FIELD_CLASS_KEY => [
             MatrixField::class,
+        ],
+        self::SEO_SETTINGS_CLASS_KEY => [
+            SeoSettingsField::class,
         ],
     ];
 

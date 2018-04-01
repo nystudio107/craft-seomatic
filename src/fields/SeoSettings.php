@@ -131,7 +131,7 @@ class SeoSettings extends Field
                 $config = $value;
             }
             if (is_object($value) && $value instanceof MetaBundle) {
-                //$config = $value->getAttributes();
+                $config = $value->getAttributes();
             }
         }
         // If the config isn't empty, do some processing on the values

@@ -82,7 +82,7 @@
 
 {############### SEO Image Transform ###############}
 
-{% if field is not defined or 'seoImageTransform' in field.generalEnabledFields %}
+<div {% if field is defined and 'seoImageTransform' not in field.generalEnabledFields %}style="display: none;"{% endif %}>
     {% namespace "metaBundleSettings" %}
         {{ forms.lightswitchField({
             label: "Transform SEO Image" |t("seomatic"),
@@ -94,4 +94,4 @@
             errors: metaBundleSettings.getErrors("seoImageTransform"),
         }) }}
     {% endnamespace %}
-{% endif %}
+</div>
