@@ -41,42 +41,46 @@ class SeoSettings extends Field
     /**
      * @var bool
      */
-    public $generalTabEnabled;
+    public $generalTabEnabled = true;
 
     /**
      * @var array
      */
-    public $generalEnabledFields;
+    public $generalEnabledFields = [
+        'seoTitle',
+        'seoDescription',
+        'seoImage',
+    ];
 
     /**
      * @var bool
      */
-    public $twitterTabEnabled;
+    public $twitterTabEnabled = false;
 
     /**
      * @var array
      */
-    public $twitterEnabledFields;
+    public $twitterEnabledFields = [];
 
     /**
      * @var bool
      */
-    public $facebookTabEnabled;
+    public $facebookTabEnabled = false;
 
     /**
      * @var array
      */
-    public $facebookEnabledFields;
+    public $facebookEnabledFields = [];
 
     /**
      * @var bool
      */
-    public $sitemapTabEnabled;
+    public $sitemapTabEnabled = false;
 
     /**
      * @var array
      */
-    public $sitemapEnabledFields;
+    public $sitemapEnabledFields = [];
 
     // Static Methods
     // =========================================================================
