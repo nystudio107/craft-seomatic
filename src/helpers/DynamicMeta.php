@@ -11,6 +11,9 @@
 
 namespace nystudio107\seomatic\helpers;
 
+use craft\helpers\Json;
+use nystudio107\seomatic\models\Entity;
+use nystudio107\seomatic\models\jsonld\LocalBusiness;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\models\jsonld\BreadcrumbList;
 use nystudio107\seomatic\models\jsonld\Thing;
@@ -19,6 +22,7 @@ use nystudio107\seomatic\models\MetaJsonLd;
 use Craft;
 use craft\base\Element;
 use craft\errors\SiteNotFoundException;
+use craft\helpers\DateTimeHelper;
 use craft\helpers\UrlHelper;
 
 use yii\base\Exception;
@@ -98,6 +102,57 @@ class DynamicMeta
             self::addMetaJsonLdBreadCrumbs($siteId);
             self::addMetaLinkHrefLang();
             self::addSameAsMeta();
+            $metaSiteVars = Seomatic::$plugin->metaContainers->metaSiteVars;
+            $jsonLd = Seomatic::$plugin->jsonLd->get('identity');
+            self::addOpeningHours($jsonLd, $metaSiteVars->identity);
+            $jsonLd = Seomatic::$plugin->jsonLd->get('creator');
+            self::addOpeningHours($jsonLd, $metaSiteVars->creator);
+        }
+    }
+
+    /**
+     * Add the OpeningHoursSpecific to the $jsonLd based on the Entity settings
+     *
+     * @param MetaJsonLd $jsonLd
+     * @param Entity     $entity
+     */
+    public static function addOpeningHours(MetaJsonLd $jsonLd, Entity $entity)
+    {
+        if ($jsonLd instanceof LocalBusiness && !empty($entity)) {
+            /** @var LocalBusiness $jsonLd */
+            $openingHours = [];
+            $days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            $times = $entity->localBusinessOpeningHours;
+            $index = 0;
+            foreach ($times as $hours) {
+                $openTime = "";
+                $closeTime = "";
+                if (!empty($hours['open'])) {
+                    /** @var \DateTime $dateTime */
+                    $dateTime = DateTimeHelper::toDateTime($hours['open']['date'], false, false);
+                    if ($dateTime !== false) {
+                        $openTime = $dateTime->format('H:i:s');
+                    }
+                }
+                if (!empty($hours['close'])) {
+                    /** @var \DateTime $dateTime */
+                    $dateTime = DateTimeHelper::toDateTime($hours['close']['date'], false, false);
+                    if ($dateTime !== false) {
+                        $closeTime = $dateTime->format('H:i:s');
+                    }
+                }
+                if ($openTime && $closeTime) {
+                    $spec = [
+                        "type"      => "OpeningHoursSpecification",
+                        "opens"     => $openTime,
+                        "closes"    => $closeTime,
+                        "dayOfWeek" => [$days[$index]],
+                    ];
+                    $openingHours[] = $spec;
+                }
+                $index++;
+            }
+            $jsonLd->openingHoursSpecification = $openingHours;
         }
     }
 
@@ -348,4 +403,32 @@ class DynamicMeta
 
         return $localizedUrls;
     }
+
+    /**
+     * Normalize the array of opening hours passed in
+     *
+     * @param $value
+     */
+    public static function normalizeTimes(&$value)
+    {
+        if (is_string($value)) {
+            $value = Json::decode($value);
+        }
+        $normalized = [];
+        $times = ['open', 'close'];
+        for ($day = 0; $day <= 6; $day++) {
+            foreach ($times as $time) {
+                if (isset($value[$day][$time])
+                    && ($date = DateTimeHelper::toDateTime($value[$day][$time])) !== false
+                ) {
+                    $normalized[$day][$time] = $date;
+                } else {
+                    $normalized[$day][$time] = null;
+                }
+            }
+        }
+
+        $value = $normalized;
+    }
+
 }

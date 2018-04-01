@@ -15,6 +15,7 @@ use nystudio107\seomatic\assetbundles\seomatic\SeomaticChartAsset;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\helpers\PullField as PullFieldHelper;
 use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\helpers\DynamicMeta as DynamicMetaHelper;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaScriptContainer;
@@ -23,7 +24,6 @@ use Craft;
 use craft\elements\Asset;
 use craft\elements\Category;
 use craft\elements\Entry;
-use craft\helpers\DateTimeHelper;
 use craft\helpers\UrlHelper;
 use craft\models\Site;
 use craft\web\Controller;
@@ -802,32 +802,6 @@ class SettingsController extends Controller
     // =========================================================================
 
     /**
-     * @inheritdoc
-     */
-    public function normalizeTimes(&$value)
-    {
-        if (is_string($value)) {
-            $value = Json::decode($value);
-        }
-        $normalized = [];
-        $times = ['open', 'close'];
-        for ($day = 0; $day <= 6; $day++) {
-            foreach ($times as $time) {
-                if (
-                    isset($value[$day][$time]) &&
-                    ($date = DateTimeHelper::toDateTime($value[$day][$time])) !== false
-                ) {
-                    $normalized[$day][$time] = $date;
-                } else {
-                    $normalized[$day][$time] = null;
-                }
-            }
-        }
-
-        $value = $normalized;
-    }
-
-    /**
      * @param array $variables
      */
     protected function setGlobalFieldSourceVariables(array &$variables)
@@ -1031,11 +1005,12 @@ class SettingsController extends Controller
 
     /**
      * Prep the entity settings for saving to the db
+     *
      * @param array &$settings
      */
     protected function prepEntitySettings(&$settings)
     {
-        $this->normalizeTimes($settings['localBusinessOpeningHours']);
+        DynamicMetaHelper::normalizeTimes($settings['localBusinessOpeningHours']);
         $settings['computedType'] = $this->getSpecificEntityType($settings);
         if (!empty($settings['genericImageIds'])) {
             $asset = Craft::$app->getAssets()->getAssetById($settings['genericImageIds'][0]);
@@ -1046,5 +1021,4 @@ class SettingsController extends Controller
             }
         }
     }
-
 }
