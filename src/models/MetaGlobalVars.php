@@ -216,6 +216,7 @@ class MetaGlobalVars extends VarsModel
                     'twitterDescription',
                     'twitterImage',
                     'twitterImageDescription',
+                    'canonicalUrl',
                 ],
                 'string',
             ],
@@ -242,7 +243,6 @@ class MetaGlobalVars extends VarsModel
                     'nocache',
                 ],
             ],
-            [['canonicalUrl'], 'url'],
         ];
     }
 }

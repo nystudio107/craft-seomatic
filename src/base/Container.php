@@ -41,11 +41,9 @@ abstract class Container extends Model implements ContainerInterface
     public static function create($config = [])
     {
         $className = get_called_class();
-        /** @var $model Container */
+        /** @var Container $model */
         $model = new $className($config);
-        if ($model) {
-            $model->normalizeContainerData();
-        }
+        $model->normalizeContainerData();
 
         return $model;
     }
@@ -115,7 +113,6 @@ abstract class Container extends Model implements ContainerInterface
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['name', 'description', 'handle', 'class'], 'required'],
             [['include'], 'boolean'],
             [['name', 'description', 'handle', 'class'], 'string'],
             [['dependencies'], 'safe'],

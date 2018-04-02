@@ -89,6 +89,16 @@ $(function() {
         createTokensOnBlur: true,
     });
 
+    // Tab handler
+    $('.seomatic-tab-links').on('click', function(e) {
+        e.preventDefault();
+        $('.seomatic-tab-links').removeClass('sel');
+        $(this).addClass('sel');
+        $('.seomatic-tab-content').addClass('hidden');
+        var selector = $(this).attr('href');
+        $(selector).removeClass('hidden');
+    });
+
     // Show/hide the script settings containers
     var selector = $('.seomatic-script-lightswitch').find('.lightswitch');
     $(selector).each(function(index, value) {
@@ -107,6 +117,7 @@ $(function() {
             $(this).closest('.seomatic-script-wrapper').find('.seomatic-script-container').slideUp();
         }
     });
+
     // Show/hide the image source fields initially
     $('.seomatic-imageSourceSelect > select').each(function(index, value) {
         var popupValue = $(this).val();
@@ -164,7 +175,6 @@ $(function() {
                 break;
         }
     });
-
 
     // Show/hide the text source fields initially
     $('.seomatic-textSourceSelect > select').each(function(index, value) {

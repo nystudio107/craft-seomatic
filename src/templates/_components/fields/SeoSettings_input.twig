@@ -1,0 +1,75 @@
+{#
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
+#}
+
+{% set tabs = {
+    url: "#tab-content-identity",
+    label: "Identity" |t("seomatic"),
+} %}
+
+{% import "_includes/forms" as forms %}
+
+{% set metaGlobalVars = value.metaGlobalVars %}
+{% set metaBundleSettings = value.metaBundleSettings %}
+{% set metaSitemapVars = value.metaSitemapVars %}
+{% namespace name %}
+<div id="{{ id }}" class="field seomatic-field">
+    <nav id="{{ id ~ "tabs" }}" class="seomatic-tabs">
+        <ul>
+            {% if field.generalTabEnabled %}
+                <li><a id="{{ id ~ "-tabs-general" }}" class="seomatic-tab-links tab sel" href="#{{ nameSpacedId ~ '-tab-general' }}"  tabindex="0">General</a></li>
+            {% endif %}
+            {% if field.twitterTabEnabled %}
+                <li><a id="{{ id ~ "-tabs-twitter" }}" class="seomatic-tab-links tab" href="#{{ nameSpacedId ~ '-tab-twitter' }}"  tabindex="0">Twitter</a></li>
+            {% endif %}
+            {% if field.facebookTabEnabled %}
+                <li><a id="{{ id ~ "-tabs-facebook" }}" class="seomatic-tab-links tab" href="#{{ nameSpacedId ~ '-tab-facebook' }}"  tabindex="0">Facebook</a></li>
+            {% endif %}
+            {% if field.sitemapTabEnabled %}
+                <li><a id="{{ id ~ "-tabs-sitemap" }}" class="seomatic-tab-links tab" href="#{{ nameSpacedId ~ '-tab-sitemap' }}"  tabindex="0">Sitemap</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    {############### General tab settings ###############}
+
+    {% if field.generalTabEnabled %}
+        <div id="{{ "tab-general" }}" class="seomatic-tab-content">
+            {% include "seomatic/settings/_includes/tab-general.twig" with {"pageContext": "field"} %}
+        </div>
+    {% endif %}
+
+    {############### Twitter tab settings ###############}
+
+    {% if field.twitterTabEnabled %}
+        <div id="{{ "tab-twitter" }}" class="seomatic-tab-content hidden">
+            {% include "seomatic/settings/_includes/tab-twitter.twig" with {"pageContext": "field"} %}
+        </div>
+    {% endif %}
+
+    {############### Facebook tab settings ###############}
+
+    {% if field.facebookTabEnabled %}
+        <div id="{{ "tab-facebook" }}" class="seomatic-tab-content hidden">
+            {% include "seomatic/settings/_includes/tab-facebook.twig" with {"pageContext": "field"} %}
+        </div>
+    {% endif %}
+
+    {############### Sitemap tab settings ###############}
+
+    {% if field.sitemapTabEnabled %}
+        <div id="{{ "tab-sitemap" }}" class="seomatic-tab-content hidden">
+            {% include "seomatic/settings/_includes/tab-sitemap.twig" with {"pageContext": "field"} %}
+        </div>
+    {% endif %}
+
+</div>
+{% endnamespace %}

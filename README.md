@@ -32,18 +32,11 @@ SEOmatic works on Craft 3.x.
 
 SEOmatic for Craft CMS 3 is currently in beta; that means it _may_ be a little rough around the edges. Please report any issues you find to the [SEOmatic Issues](https://github.com/nystudio107/craft-seomatic/issues) page.
 
-### Work in Progress
-
-The following are currently works in progress:
-
-* **Dashboard** - the Dashboard page should show some more interesting information
-* **Field** - there is no SEOmatic Field anymore; it's not necessary given the new architecture. Depending on demand, it may be brought back.
-
 ### Can I use it on a live production site?
 
-Like any beta software, SEOmatic for Craft CMS 3 may have issues that need addressing. However, we have been using SEOmatic for Craft CMS 3 on a number of live production sites for some time without incident.
+Yes, you can. And people are. All software is of varying degrees of perfection (with beta software tending towards the "less perfect" end of the spectrum), but SEOmatic is ready for your website.
 
-The largest question is whether some of the unfinished features (as detailed above) are an issue for you. If they are not, and you're willing accept that all software is of varying degrees of perfection (with beta software tending towards the "less perfect" end of the spectrum), go for it.
+Like any beta software, SEOmatic for Craft CMS 3 may have issues that need addressing. However, we have been using SEOmatic for Craft CMS 3 on a number of live production sites for some time without incident.
 
 Report any issues you find on the [SEOmatic Issues](https://github.com/nystudio107/craft-seomatic/issues) page, and you should see a fairly rapid turn-around time in them being addressed.
 
@@ -55,7 +48,7 @@ SEOmatic for Craft CMS 3 is a complete re-write and re-architecture from scratch
 
 This also means that SEOmatic for Craft CMS 3 has little in common with the older plugin, both from a code point of view, and also conceptually. As such there isn't a way to migrate data in a way that makes sense; instead, you should just set up SEOmatic for Craft CMS 3 fresh.
 
-Thankfully, due to the new architecture, this is quite easy to do. If we do [bring back the SEOmatic Field](https://github.com/nystudio107/craft-seomatic/issues/14) (which is looking very likely), then there will be a data migration.
+Thankfully, due to the new architecture, this is quite easy to do. After the GA release, we will look into whether any kind of data migration actually makes sense.
 
 Still, we think the best way to update sites using SEOmatic is to start fresh, and explore how the conceptual changes in the plugin affect how you use it. In most cases, you don't even need to use an SEOmatic Field, and the setup is cleaner and easier without it! We hope you love it!
 
@@ -334,6 +327,32 @@ SEOmatic allows you to restrict access to various parts of the plugin based on U
   * Facebook Pixel
 * Edit Plugin Settings
 
+## SEOmatic Fields
+
+### SEO Settings Field
+
+SEOmatic has an SEO Settings Field that you can add to your Field Layouts. For most sites, the Field is not needed; instead set up the fields to pull from in the Content SEO settings for each Section.
+
+Modern SEO works best if it actually reflects what is on the page, visible to the user, so pulling from your page's content will work well in most cases.
+
+However, in some cases you may want more control over page SEO for specific entries. That's where the SEO Settings field comes in. Add it to your Section's Field Layout, and you can override specific SEO settings on a per-entry basis.
+
+The Field settings let you control exactly what fields will appear and be visible for you or your client to override:
+
+![Screenshot](resources/screenshots/seomatic-field-settings.png)
+
+By default, just a few sensible settings are made visible in the Field:
+
+![Screenshot](resources/screenshots/seomatic-field-defaults.png)
+
+Any setting left blank will just fall back on the Content SEO settings for that Section, so you can use the Field only for the exceptional cases.
+
+You can enable every possible field to be displayed in the SEO Settings field if you like:
+
+![Screenshot](resources/screenshots/seomatic-field-full.png)
+
+But it's probably best to limit it to just the things that you or your client might want to change on a per-entry basis.
+
 ## Using SEOmatic
 
 ### Twig Templating
@@ -364,15 +383,27 @@ or
 {% do seomatic.meta.seoDescription("This is my description. There are many like it, but this one is mine.") %}
 ```
 
-You can also set multiple variables at once:
+You can also set multiple variables at once using array syntax:
 
 ```twig
-{% do seomatic.meta.attributes({
+{% do seomatic.meta.setAttributes({
   "seoTitle": "Some Title",
   "seoDescription": "This is my description. There are many like it, but this one is mine."
   })
 %}
 ```
+
+Or you can chain them together:
+
+
+```twig
+{% do seomatic.meta
+  .seoTitle("Some Title")
+  .seoDescription("This is my description. There are many like it, but this one is mine.")
+%}
+```
+
+These do the same thing, so use whichever you prefer.
 
 You can set SEOmatic variables anywhere in your templates, even in sub-templates you `include` from other templates. This works because SEOmatic dynamically injects the meta tags, scripts, links, and JSON-LD into your page after the template is done rendering.
 
@@ -550,6 +581,8 @@ The `seomatic.config` variables are the global plugin configuration variables se
 
 #### Helper Functions `seomatic.helper`
 
+* **`seomatic.helper.truncate(TEXT, LENGTH, SUBSTR)`** - Truncates the `TEXT` to a given `LENGTH`. If `SUBSTR` is provided, and truncating occurs, the string is further truncated so that the substring may be appended without exceeding the desired length.
+* **`seomatic.helper.truncateOnWord(TEXT, LENGTH, SUBSTR)`** - Truncates the `TEXT` to a given `LENGTH`, while ensuring that it does not split words. If `SUBSTR` is provided, and truncating occurs, the string is further truncated so that the substring may be appended without exceeding the desired length.
 * **`seomatic.helper.getLocalizedUrls(URI, SITE_ID)`** - Return a list of localized URLs for a given `URI` that are in the `SITE_ID` site's group. Both `URI` and `SITE_ID` are optional, and will use the current request's `URI` and the current site's `SITE_ID` if omitted.
 * **`seomatic.helper.loadMetadataForUri(URI, SITE_ID)`** - Load the appropriate meta containers for the given `URI` and optional `SITE_ID`
 * **`seomatic.helper.sitemapIndexForSiteId(SITE_ID)`** - Get the URL to the `SITE_ID`s sitemap index
@@ -605,15 +638,27 @@ You could also chain this together in a single line:
 {% do seomatic.tag.get("description").include(false) %}
 ```
 
-And you can set multiple attributes at once:
+And you can set multiple attributes at once using an array syntax:
 
 ```twig
-{% do seomatic.tag.get("description").attributes({
+{% do seomatic.tag.get("description").setAttributes({
   "content": "Some Description",
   "include": false
   })
 %}
 ```
+
+Which is the same as doing:
+
+
+```twig
+{% do seomatic.tag.get("description")
+  .content("Some Description")
+  .include(false)
+%}
+```
+
+So use whatever you like better.
 
 ##### Meta Object `.create()`
 

@@ -40,9 +40,7 @@ class MetaSiteVars extends VarsModel
     public static function create(array $config = [])
     {
         $model = new MetaSiteVars($config);
-        if ($model) {
-            $model->normalizeData();
-        }
+        $model->normalizeData();
 
         return $model;
     }
