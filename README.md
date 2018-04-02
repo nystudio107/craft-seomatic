@@ -334,6 +334,32 @@ SEOmatic allows you to restrict access to various parts of the plugin based on U
   * Facebook Pixel
 * Edit Plugin Settings
 
+## SEOmatic Fields
+
+### SEO Settings Field
+
+SEOmatic has an SEO Settings Field that you can add to your Field Layouts. For most sites, the Field is not needed; instead set up the fields to pull from in the Content SEO settings for each Section.
+
+Modern SEO works best if it actually reflects what is on the page, visible to the user, so pulling from your page's content will work well in most cases.
+
+However, in some cases you may want more control over page SEO for specific entries. That's where the SEO Settings field comes in. Add it to your Section's Field Layout, and you can override specific SEO settings on a per-entry basis.
+
+The Field settings let you control exactly what fields will appear and be visible for you or your client to override:
+
+![Screenshot](resources/screenshots/seomatic-field-settings.png)
+
+By default, just a few sensible settings are made visible in the Field:
+
+![Screenshot](resources/screenshots/seomatic-field-defaults.png)
+
+Any setting left blank will just fall back on the Content SEO settings for that Section, so you can use the Field only for the exceptional cases.
+
+You can enable every possible field to be displayed in the SEO Settings field if you like:
+
+![Screenshot](resources/screenshots/seomatic-field-full.png)
+
+But it's probably best to limit it to just the things that you or your client might want to change on a per-entry basis.
+
 ## Using SEOmatic
 
 ### Twig Templating
