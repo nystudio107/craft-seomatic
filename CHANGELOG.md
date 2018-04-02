@@ -6,6 +6,8 @@
 * Clicking on Settings on from the AdminCP now redirects to the appropriate SEOmatic sub-nav
 
 ## Added
+* Added an **SEO Settings** Field that allows you to override SEO settings on a per-entry basis
+* Added a schema.org link for the Main Entity of Page type you have specified
 * Added `seomatic.helper.truncate` and `seomatic.helper.truncateOnWord` helper functions for truncating text
 
 ### 3.0.0-beta.19 - 2018.03.28
