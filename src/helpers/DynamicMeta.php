@@ -325,7 +325,7 @@ class DynamicMeta
     {
         $localizedUrls = [];
         // Get the request URI
-        if ($uri == null) {
+        if ($uri === null) {
             try {
                 $requestUri = Craft::$app->getRequest()->getUrl();
             } catch (InvalidConfigException $e) {
@@ -336,7 +336,7 @@ class DynamicMeta
             $requestUri = $uri;
         }
         // Get the site to use
-        if ($siteId == null) {
+        if ($siteId === null) {
             try {
                 $thisSite = Craft::$app->getSites()->getCurrentSite();
             } catch (SiteNotFoundException $e) {
@@ -347,7 +347,7 @@ class DynamicMeta
             $thisSite = Craft::$app->getSites()->getSiteById($siteId);
         }
         // Bail if we can't get a site
-        if ($thisSite == null) {
+        if ($thisSite === null) {
             return $localizedUrls;
         }
         // Get only the sites that are in the current site's group
@@ -358,7 +358,7 @@ class DynamicMeta
             Craft::error($e->getMessage(), __METHOD__);
         }
         // Bail if we can't get a site group
-        if ($siteGroup == null) {
+        if ($siteGroup === null) {
             return $localizedUrls;
         }
         $sites = $siteGroup->getSites();
