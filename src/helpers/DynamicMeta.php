@@ -23,7 +23,6 @@ use craft\base\Element;
 use craft\errors\SiteNotFoundException;
 use craft\helpers\DateTimeHelper;
 use craft\helpers\Json;
-use craft\helpers\UrlHelper;
 
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
