@@ -144,12 +144,16 @@ class Schema
      * @param string $path
      *
      * @return array
+     * @throws \Exception
      */
     public static function getSchemaArray($path = ''): array
     {
         if (empty(self::$schemaTypes)) {
             $filePath = Craft::getAlias('@nystudio107/seomatic/resources/schema/tree.jsonld');
             self::$schemaTypes = JsonHelper::decode(@file_get_contents($filePath));
+            if (empty(self::$schemaTypes)) {
+                throw new \Exception(Craft::t('seomatic', 'Schema tree file not found'));
+            }
             self::$schemaTypes = self::makeSchemaAssociative(self::$schemaTypes);
             self::$schemaTypes = self::orphanChildren(self::$schemaTypes);
         }
