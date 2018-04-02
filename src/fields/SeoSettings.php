@@ -256,16 +256,6 @@ class SeoSettings extends Field
             null
         );
 
-        // Variables to pass down to our field JavaScript to let it namespace properly
-        $jsonVars = [
-            'id'        => $id,
-            'name'      => $this->handle,
-            'namespace' => $nameSpacedId,
-            'prefix'    => Craft::$app->getView()->namespaceInputId(''),
-        ];
-        $jsonVars = Json::encode($jsonVars);
-        //Craft::$app->getView()->registerJs("$('#{$nameSpacedId}-field').RecipeRecipe(".$jsonVars.");");
-
         // Render the input template
         return Craft::$app->getView()->renderTemplate('seomatic/_components/fields/SeoSettings_input', $variables);
     }

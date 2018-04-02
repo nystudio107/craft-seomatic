@@ -41,11 +41,9 @@ abstract class Container extends Model implements ContainerInterface
     public static function create($config = [])
     {
         $className = get_called_class();
-        /** @var $model Container */
+        /** @var Container $model */
         $model = new $className($config);
-        if ($model) {
-            $model->normalizeContainerData();
-        }
+        $model->normalizeContainerData();
 
         return $model;
     }
