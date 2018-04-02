@@ -107,7 +107,7 @@ class Helper extends Component
         // Set some defaults
         $robots = empty($robots) ? 'all' : $robots;
         $canonical = empty($canonical) ? $url : $canonical;
-        $inline = $inline == true ? '1' : '0';
+        $inline = $inline === true ? '1' : '0';
         // Compose the base64 encoded URL
         $seoFileLink = 'seomatic/seo-file-link/'
             .base64_encode($url)
