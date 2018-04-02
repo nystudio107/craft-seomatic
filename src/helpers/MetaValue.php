@@ -91,11 +91,11 @@ class MetaValue
     /**
      * Get the language from a siteId
      *
-     * @param int $siteId
+     * @param null|int $siteId
      *
      * @return string
      */
-    public static function getSiteLanguage(int $siteId): string
+    public static function getSiteLanguage(int $siteId = null): string
     {
         if ($siteId === null) {
             try {
