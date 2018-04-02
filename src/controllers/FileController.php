@@ -50,7 +50,7 @@ class FileController extends Controller
      * @param bool   $inline
      * @param string $fileName
      *
-     * @return Response
+     * @return Response|\yii\console\Response
      * @throws HttpException
      * @throws NotFoundHttpException
      */
