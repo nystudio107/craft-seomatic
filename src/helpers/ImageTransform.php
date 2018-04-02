@@ -86,4 +86,25 @@ class ImageTransform
 
         return $url;
     }
+
+    /**
+     * Return an array of Asset elements from an array of element IDs
+     *
+     * @param array|string $assetIds
+     * @param int|null     $siteId
+     *
+     * @return array
+     */
+    public static function assetElementsFromIds($assetIds, int $siteId = null)
+    {
+        $elements = Craft::$app->getElements();
+        $assets = [];
+        if (!empty($assetIds)) {
+            foreach ($assetIds as $assetId) {
+                $assets[] = $elements->getElementById($assetId, Asset::class, $siteId);
+            }
+        }
+
+        return $assets;
+    }
 }

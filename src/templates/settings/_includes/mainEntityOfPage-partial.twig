@@ -45,21 +45,34 @@
                 errors: mainEntityOfPage.getErrors("siteSpecificType"),
             }) }}
         </div>
+        <div class="inline-item">
+            <div class="inline-item inline-item-padding seomaticSchemaInfo">
+            </div>
+        </div>
     </div>
 </div>
 
 
 {% js %}
-    // Initially hide all of the meta panes
-    $('.metaPane').hide();
-    $('.metaSubPane').hide();
-    $('.metaSpecificPane').hide();
-
     // Fill in the dynamic schema menus
     var siteTypeId = '{{ "siteType" |namespaceInputId }}';
     var siteSubTypeId = '{{ "siteSubType" |namespaceInputId }}';
     var siteSpecificTypeId = '{{ "siteSpecificType" |namespaceInputId }}';
 
+    // Update the Schema.org info link
+    function updateInfoLink() {
+        var selectValue = $('#'+siteSpecificTypeId + ' option:selected').text() || $('#'+siteSubTypeId + ' option:selected').text() || $('#'+siteTypeId + ' option:selected').text();
+        // Remove any whitepsace, including encoded &nbsp; characters
+        selectValue = selectValue.replace(/\s/g, '');
+        $('.seomaticSchemaInfo').html("<a href='http://schema.org/" + selectValue + "' target='_blank'>" + selectValue + " info...</a>");
+    }
+    
+    // Initially hide all of the meta panes
+    $('.metaPane').hide();
+    $('.metaSubPane').hide();
+    $('.metaSpecificPane').hide();
+    updateInfoLink();
+    
     // Show any panes that should be visible based on the chosen type
     {% if mainEntityOfPage.siteType |length %}
         $('.metaPane.{{ mainEntityOfPage.siteType }}').show();
@@ -97,6 +110,8 @@
             $('#'+siteSpecificTypeId+'-field').hide();
             $('#'+siteSpecificTypeId).val('none');
         });
+        $('#'+siteSpecificTypeId).val('none');
+        updateInfoLink();
     });
 
     // Handle clicks on the siteSubType schema menu
@@ -113,6 +128,7 @@
                 $('#'+siteSpecificTypeId+'-field').show();
             }
         });
+        updateInfoLink();
     });
 
     // Handle clicks on the siteSpecificType schema menu
@@ -120,6 +136,6 @@
         var value = $('#'+siteSpecificTypeId).val();
         $('.metaSpecificPane').hide();
         $('.metaSpecificPane.' + value).show();
+        updateInfoLink();
     });
-
 {% endjs %}

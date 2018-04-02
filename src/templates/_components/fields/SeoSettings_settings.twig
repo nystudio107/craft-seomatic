@@ -1,0 +1,166 @@
+{#
+/**
+ * SEOmatic plugin for Craft CMS 3.x
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+<div>
+
+    {############### General tab settings ###############}
+
+    <div class="field seomatic-script-wrapper">
+        <div class="seomatic-script-lightswitch">
+            {{ forms.lightswitchField({
+                label: "General Tab" |t("seomatic"),
+                instructions: "Controls whether to display the General SEO settings tab" |t("seomatic"),
+                id: "generalTabEnabled",
+                name: "generalTabEnabled",
+                on: field.generalTabEnabled,
+                warning: false,
+                errors: field.getErrors("generalTabEnabled"),
+            }) }}
+        </div>
+        <div class="seomatic-script-container" {% if not field.generalTabEnabled %}style="display: none;"{% endif %}>
+            {{ forms.checkboxSelectField({
+                instructions: "Choose the General SEO settings fields to display"|t,
+                id: 'generalEnabledFields',
+                name: 'generalEnabledFields',
+                options: {
+                    'seoPreview': 'SEO Preview',
+                    'mainEntityOfPage': 'Main Entity of Page',
+                    'seoTitle': 'SEO Title',
+                    'siteNamePosition': 'Site Name Position',
+                    'seoDescription': 'SEO Description',
+                    'seoKeywords': 'SEO Keywords',
+                    'seoImage': 'SEO Image',
+                    'seoImageTransform': 'Transform SEO Image',
+                    'seoImageDescription': 'SEO Image Description',
+                    'robots': 'Robots',
+                    'canonicalUrl': 'Canonical URL',
+                },
+                values: field.generalEnabledFields,
+                warning: false,
+                errors: field.getErrors("generalEnabledFields"),
+            }) }}
+        </div>
+    </div>
+
+    {############### Twitter tab settings ###############}
+
+    <div class="field seomatic-script-wrapper">
+        <div class="seomatic-script-lightswitch">
+            {{ forms.lightswitchField({
+                label: "Twitter Tab" |t("seomatic"),
+                instructions: "Controls whether to display the Twitter SEO settings tab" |t("seomatic"),
+                id: "twitterTabEnabled",
+                name: "twitterTabEnabled",
+                on: field.twitterTabEnabled,
+                warning: false,
+                errors: field.getErrors("twitterTabEnabled"),
+            }) }}
+        </div>
+        <div class="seomatic-script-container" {% if not field.twitterTabEnabled %}style="display: none;"{% endif %}>
+            {{ forms.checkboxSelectField({
+                instructions: "Choose the Twitter SEO settings fields to display"|t,
+                id: 'twitterEnabledFields',
+                name: 'twitterEnabledFields',
+                options: {
+                    'seoPreview': 'SEO Preview',
+                    'twitterCardType': 'Twitter Card Type',
+                    'twitterCreator': 'Twitter Creator',
+                    'twitterTitle': 'Twitter Title',
+                    'twitterSiteNamePosition': 'Twitter Site Name Position',
+                    'twitterDescription': 'Twitter Description',
+                    'twitterImage': 'Twitter Image',
+                    'transformTwitterImage': 'Transform Twitter Image',
+                    'twitterImageDescription': 'Twitter Image Description',
+                },
+                values: field.twitterEnabledFields,
+                warning: false,
+                errors: field.getErrors("twitterEnabledFields"),
+            }) }}
+        </div>
+    </div>
+
+
+    {############### Facebook tab settings ###############}
+
+    <div class="field seomatic-script-wrapper">
+        <div class="seomatic-script-lightswitch">
+            {{ forms.lightswitchField({
+                label: "Facebook Tab" |t("seomatic"),
+                instructions: "Controls whether to display the Facebook SEO settings tab" |t("seomatic"),
+                id: "facebookTabEnabled",
+                name: "facebookTabEnabled",
+                on: field.facebookTabEnabled,
+                warning: false,
+                errors: field.getErrors("facebookTabEnabled"),
+            }) }}
+        </div>
+        <div class="seomatic-script-container" {% if not field.facebookTabEnabled %}style="display: none;"{% endif %}>
+            {{ forms.checkboxSelectField({
+                instructions: "Choose the Facebook SEO settings fields to display"|t,
+                id: 'facebookEnabledFields',
+                name: 'facebookEnabledFields',
+                options: {
+                    'seoPreview': 'SEO Preview',
+                    'ogType': 'Facebook OpenGraph Type',
+                    'ogTitle': 'Facebook OpenGraph Title Title',
+                    'ogSiteNamePosition': 'Facebook OpenGraph Site Name Position',
+                    'goDescription': 'Facebook OpenGraph Description',
+                    'ogImage': 'Facebook OpenGraph Image',
+                    'ogImageTransform': 'Transform Facebook OpenGraph Image',
+                    'ogImageDescription': 'Facebook OpenGraph Image Description',
+                },
+                values: field.facebookEnabledFields,
+                warning: false,
+                errors: field.getErrors("facebookEnabledFields"),
+            }) }}
+        </div>
+    </div>
+
+
+    {############### Sitemap tab settings ###############}
+
+    <div class="field seomatic-script-wrapper">
+        <div class="seomatic-script-lightswitch">
+            {{ forms.lightswitchField({
+                label: "Sitemap Tab" |t("seomatic"),
+                instructions: "Controls whether to display the Sitemap SEO settings tab" |t("seomatic"),
+                id: "sitemapTabEnabled",
+                name: "sitemapTabEnabled",
+                on: field.sitemapTabEnabled,
+                warning: false,
+                errors: field.getErrors("sitemapTabEnabled"),
+            }) }}
+        </div>
+        <div class="seomatic-script-container" {% if not field.sitemapTabEnabled %}style="display: none;"{% endif %}>
+            {{ forms.checkboxSelectField({
+                instructions: "Choose the Sitemap SEO settings fields to display"|t,
+                id: 'sitemapEnabledFields',
+                name: 'sitemapEnabledFields',
+                options: {
+                    'sitemapUrls': 'Sitemap Enabled',
+                    'sitemapAssets': 'Include Images & Videos in Sitemap',
+                    'sitemapFiles': 'Include Indexable Files in Sitemap',
+                    'sitemapAltLinks': 'Sitemap Alt URLs',
+                    'sitemapChangeFreq': 'Change Frequency',
+                    'sitemapPriority': 'Priority',
+                    'sitemapLimit': 'Sitemap Limit',
+                },
+                values: field.sitemapEnabledFields,
+                warning: false,
+                errors: field.getErrors("sitemapEnabledFields"),
+            }) }}
+        </div>
+    </div>
+
+</div>

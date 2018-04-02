@@ -9,20 +9,21 @@
 
 namespace nystudio107\seomatic\controllers;
 
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticChartAsset;
-use nystudio107\recipe\helpers\Json;
+use nystudio107\seomatic\helpers\Field as FieldHelper;
+use nystudio107\seomatic\helpers\PullField as PullFieldHelper;
 use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\helpers\DynamicMeta as DynamicMetaHelper;
+use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaScriptContainer;
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\helpers\Field as FieldHelper;
 
 use Craft;
 use craft\elements\Asset;
 use craft\elements\Category;
 use craft\elements\Entry;
-use craft\helpers\DateTimeHelper;
 use craft\helpers\UrlHelper;
 use craft\models\Site;
 use craft\web\Controller;
@@ -44,29 +45,6 @@ class SettingsController extends Controller
     // =========================================================================
 
     const DOCUMENTATION_URL = 'https://github.com/nystudio107/craft-seomatic/wiki';
-
-    const PULL_TEXT_FIELDS = [
-        ['fieldName' => 'seoTitle', 'seoField' => 'seoTitle'],
-        ['fieldName' => 'siteNamePosition', 'seoField' => 'siteNamePosition'],
-        ['fieldName' => 'seoDescription', 'seoField' => 'seoDescription'],
-        ['fieldName' => 'seoKeywords', 'seoField' => 'seoKeywords'],
-        ['fieldName' => 'seoImageDescription', 'seoField' => 'seoImageDescription'],
-        ['fieldName' => 'ogTitle', 'seoField' => 'seoTitle'],
-        ['fieldName' => 'ogSiteNamePosition', 'seoField' => 'siteNamePosition'],
-        ['fieldName' => 'ogDescription', 'seoField' => 'seoDescription'],
-        ['fieldName' => 'ogImageDescription', 'seoField' => 'seoImageDescription'],
-        ['fieldName' => 'twitterTitle', 'seoField' => 'seoTitle'],
-        ['fieldName' => 'twitterSiteNamePosition', 'seoField' => 'siteNamePosition'],
-        ['fieldName' => 'twitterCreator', 'seoField' => 'twitterHandle'],
-        ['fieldName' => 'twitterDescription', 'seoField' => 'seoDescription'],
-        ['fieldName' => 'twitterImageDescription', 'seoField' => 'seoImageDescription'],
-    ];
-
-    const PULL_ASSET_FIELDS = [
-        ['fieldName' => 'seoImage', 'seoField' => 'seoImage', 'transformName' => 'base'],
-        ['fieldName' => 'ogImage', 'seoField' => 'seoImage', 'transformName' => 'facebook'],
-        ['fieldName' => 'twitterImage', 'seoField' => 'seoImage', 'transformName' => 'twitter'],
-    ];
 
     const SETUP_GRADES = [
         ['id' => 'data1', 'name' => 'A', 'color' => '#008002'],
@@ -258,9 +236,9 @@ class SettingsController extends Controller
         $variables['currentSubSection'] = $subSection;
         // Meta bundle settings
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle(intval($variables['currentSiteId']));
-        $variables['globals'] = $metaBundle->metaGlobalVars;
-        $variables['sitemap'] = $metaBundle->metaSitemapVars;
-        $variables['settings'] = $metaBundle->metaBundleSettings;
+        $variables['metaGlobalVars'] = $metaBundle->metaGlobalVars;
+        $variables['metaSitemapVars'] = $metaBundle->metaSitemapVars;
+        $variables['metaBundleSettings'] = $metaBundle->metaBundleSettings;
         // Template container settings
         $templateContainers = $metaBundle->frontendTemplatesContainer->data;
         $variables['robotsTemplate'] = $templateContainers[FrontendTemplates::ROBOTS_TXT_HANDLE];
@@ -268,9 +246,18 @@ class SettingsController extends Controller
         // Image selectors
         $bundleSettings = $metaBundle->metaBundleSettings;
         $variables['elementType'] = Asset::class;
-        $variables['seoImageElements'] = $this->assetElementsFromIds($bundleSettings->seoImageIds, $siteId);
-        $variables['twitterImageElements'] = $this->assetElementsFromIds($bundleSettings->twitterImageIds, $siteId);
-        $variables['ogImageElements'] = $this->assetElementsFromIds($bundleSettings->ogImageIds, $siteId);
+        $variables['seoImageElements'] = ImageTransformHelper::assetElementsFromIds(
+            $bundleSettings->seoImageIds,
+            $siteId
+        );
+        $variables['twitterImageElements'] = ImageTransformHelper::assetElementsFromIds(
+            $bundleSettings->twitterImageIds,
+            $siteId
+        );
+        $variables['ogImageElements'] = ImageTransformHelper::assetElementsFromIds(
+            $bundleSettings->ogImageIds,
+            $siteId
+        );
         // Preview the meta containers
         Seomatic::$plugin->metaContainers->previewMetaContainers(
             MetaBundles::GLOBAL_META_BUNDLE,
@@ -290,8 +277,8 @@ class SettingsController extends Controller
         $this->requirePostRequest();
         $request = Craft::$app->getRequest();
         $siteId = $request->getParam('siteId');
-        $globalsSettings = $request->getParam('globals');
-        $bundleSettings = $request->getParam('settings');
+        $globalsSettings = $request->getParam('metaGlobalVars');
+        $bundleSettings = $request->getParam('metaBundleSettings');
         $robotsTemplate = $request->getParam('robotsTemplate');
         $humansTemplate = $request->getParam('humansTemplate');
 
@@ -302,8 +289,8 @@ class SettingsController extends Controller
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle) {
             if (is_array($globalsSettings) && is_array($bundleSettings)) {
-                $this->parseTextSources($elementName, $globalsSettings, $bundleSettings);
-                $this->parseImageSources($elementName, $globalsSettings, $bundleSettings, $siteId);
+                PullFieldHelper::parseTextSources($elementName, $globalsSettings, $bundleSettings);
+                PullFieldHelper::parseImageSources($elementName, $globalsSettings, $bundleSettings, $siteId);
                 $globalsSettings['mainEntityOfPage'] = $this->getSpecificEntityType($bundleSettings);
                 $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
                 $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
@@ -423,9 +410,9 @@ class SettingsController extends Controller
             $sourceHandle,
             intval($variables['currentSiteId'])
         );
-        $variables['globals'] = $metaBundle->metaGlobalVars;
-        $variables['sitemap'] = $metaBundle->metaSitemapVars;
-        $variables['settings'] = $metaBundle->metaBundleSettings;
+        $variables['metaGlobalVars'] = $metaBundle->metaGlobalVars;
+        $variables['metaSitemapVars'] = $metaBundle->metaSitemapVars;
+        $variables['metaBundleSettings'] = $metaBundle->metaBundleSettings;
         $variables['currentSourceHandle'] = $metaBundle->sourceHandle;
         $variables['currentSourceBundleType'] = $metaBundle->sourceBundleType;
         // Basic variables
@@ -456,9 +443,18 @@ class SettingsController extends Controller
         $variables['currentSubSection'] = $subSection;
         $bundleSettings = $metaBundle->metaBundleSettings;
         $variables['elementType'] = Asset::class;
-        $variables['seoImageElements'] = $this->assetElementsFromIds($bundleSettings->seoImageIds, $siteId);
-        $variables['twitterImageElements'] = $this->assetElementsFromIds($bundleSettings->twitterImageIds, $siteId);
-        $variables['ogImageElements'] = $this->assetElementsFromIds($bundleSettings->ogImageIds, $siteId);
+        $variables['seoImageElements'] = ImageTransformHelper::assetElementsFromIds(
+            $bundleSettings->seoImageIds,
+            $siteId
+        );
+        $variables['twitterImageElements'] = ImageTransformHelper::assetElementsFromIds(
+            $bundleSettings->twitterImageIds,
+            $siteId
+        );
+        $variables['ogImageElements'] = ImageTransformHelper::assetElementsFromIds(
+            $bundleSettings->ogImageIds,
+            $siteId
+        );
         // Pass in the pull fields
         $groupName = "Entry";
         $this->setContentFieldSourceVariables($sourceBundleType, $sourceHandle, $groupName, $variables);
@@ -485,9 +481,9 @@ class SettingsController extends Controller
         $sourceBundleType = $request->getParam('sourceBundleType');
         $sourceHandle = $request->getParam('sourceHandle');
         $siteId = $request->getParam('siteId');
-        $globalsSettings = $request->getParam('globals');
-        $bundleSettings = $request->getParam('settings');
-        $sitemapSettings = $request->getParam('sitemap');
+        $globalsSettings = $request->getParam('metaGlobalVars');
+        $bundleSettings = $request->getParam('metaBundleSettings');
+        $sitemapSettings = $request->getParam('metaSitemapVars');
 
         // Set the element type in the template
         switch ($sourceBundleType) {
@@ -509,8 +505,8 @@ class SettingsController extends Controller
         );
         if ($metaBundle) {
             if (is_array($globalsSettings) && is_array($bundleSettings)) {
-                $this->parseTextSources($elementName, $globalsSettings, $bundleSettings);
-                $this->parseImageSources($elementName, $globalsSettings, $bundleSettings, $siteId);
+                PullFieldHelper::parseTextSources($elementName, $globalsSettings, $bundleSettings);
+                PullFieldHelper::parseImageSources($elementName, $globalsSettings, $bundleSettings, $siteId);
                 $globalsSettings['mainEntityOfPage'] = $this->getSpecificEntityType($bundleSettings);
                 $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
                 $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
@@ -591,10 +587,14 @@ class SettingsController extends Controller
         // The site settings for the appropriate meta bundle
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle(intval($variables['currentSiteId']));
         $variables['site'] = $metaBundle->metaSiteVars;
-        $variables['identityImageElements'] =
-            $this->assetElementsFromIds($variables['site']->identity->genericImageIds, $siteId);
-        $variables['creatorImageElements'] =
-            $this->assetElementsFromIds($variables['site']->creator->genericImageIds, $siteId);
+        $variables['identityImageElements'] = ImageTransformHelper::assetElementsFromIds(
+            $variables['site']->identity->genericImageIds,
+            $siteId
+        );
+        $variables['creatorImageElements'] = ImageTransformHelper::assetElementsFromIds(
+            $variables['site']->creator->genericImageIds,
+            $siteId
+        );
         $variables['elementType'] = Asset::class;
 
         // Render the template
@@ -802,206 +802,6 @@ class SettingsController extends Controller
     // =========================================================================
 
     /**
-     * @inheritdoc
-     */
-    public function normalizeTimes(&$value)
-    {
-        if (is_string($value)) {
-            $value = Json::decode($value);
-        }
-        $normalized = [];
-        $times = ['open', 'close'];
-        for ($day = 0; $day <= 6; $day++) {
-            foreach ($times as $time) {
-                if (
-                    isset($value[$day][$time]) &&
-                    ($date = DateTimeHelper::toDateTime($value[$day][$time])) !== false
-                ) {
-                    $normalized[$day][$time] = $date;
-                } else {
-                    $normalized[$day][$time] = null;
-                }
-            }
-        }
-
-        $value = $normalized;
-    }
-
-    /**
-     * Set the text sources depending on the field settings
-     *
-     * @param string $elementName
-     * @param        $globalsSettings
-     * @param        $bundleSettings
-     */
-    protected function parseTextSources(string $elementName, &$globalsSettings, &$bundleSettings)
-    {
-        $objectPrefix = '';
-        if (!empty($elementName)) {
-            $elementName .= '.';
-            $objectPrefix = 'object.';
-        }
-        foreach (self::PULL_TEXT_FIELDS as $fields) {
-            $fieldName = $fields['fieldName'];
-            $source = $bundleSettings[$fieldName.'Source'] ?? '';
-            $sourceField = $bundleSettings[$fieldName.'Field'] ?? '';
-            if (!empty($source)) {
-                $seoField = $fields['seoField'];
-                switch ($source) {
-                    case 'sameAsSeo':
-                        $globalsSettings[$fieldName] =
-                            '{seomatic.meta.'.$seoField.'}';
-                        break;
-
-                    case 'sameAsSiteTwitter':
-                        $globalsSettings[$fieldName] =
-                            '{seomatic.site.'.$seoField.'}';
-                        break;
-
-                    case 'sameAsGlobal':
-                        $globalsSettings[$fieldName] =
-                            '';
-                        break;
-
-                    case 'fromField':
-                        $globalsSettings[$fieldName] =
-                            '{seomatic.helper.extractTextFromField('
-                            .$objectPrefix.$elementName.$sourceField
-                            .')}';
-                        break;
-
-                    case 'fromUserField':
-                        $globalsSettings[$fieldName] =
-                            '{seomatic.helper.extractTextFromField('
-                            .$objectPrefix.$elementName.'author.'.$sourceField
-                            .')}';
-                        break;
-
-                    case 'summaryFromField':
-                        $globalsSettings[$fieldName] =
-                            '{seomatic.helper.extractSummary(seomatic.helper.extractTextFromField('
-                            .$objectPrefix.$elementName.$sourceField
-                            .'))}';
-                        break;
-
-                    case 'keywordsFromField':
-                        $globalsSettings[$fieldName] =
-                            '{seomatic.helper.extractKeywords(seomatic.helper.extractTextFromField('
-                            .$objectPrefix.$elementName.$sourceField
-                            .'))}';
-                        break;
-
-                    case 'fromCustom':
-                        break;
-                }
-            }
-        }
-    }
-
-    /**
-     * Set the image sources depending on the field settings
-     *
-     * @param $elementName
-     * @param $globalsSettings
-     * @param $bundleSettings
-     * @param $siteId
-     */
-    protected function parseImageSources($elementName, &$globalsSettings, &$bundleSettings, $siteId)
-    {
-        $objectPrefix = '';
-        if (!empty($elementName)) {
-            $elementName .= '.';
-            $objectPrefix = 'object.';
-        }
-        foreach (self::PULL_ASSET_FIELDS as $fields) {
-            $fieldName = $fields['fieldName'];
-            $source = $bundleSettings[$fieldName.'Source'] ?? '';
-            $ids = $bundleSettings[$fieldName.'Ids'] ?? [];
-            $sourceField = $bundleSettings[$fieldName.'Field'] ?? '';
-            if (!empty($source)) {
-                $transformImage = $bundleSettings[$fieldName.'Transform'];
-                $seoField = $fields['seoField'];
-                $transformName = $fields['transformName'];
-                // Special-case Twitter transforms
-                if ($transformName == 'twitter') {
-                    $transformName = 'twitter-summary';
-                    if ($globalsSettings['twitterCard'] == 'summary_large_image') {
-                        $transformName = 'twitter-large';
-                    }
-                }
-                if ($transformImage) {
-                    switch ($source) {
-                        case 'sameAsSeo':
-                            $seoSource = $bundleSettings[$seoField.'Source'] ?? '';
-                            $seoIds = $bundleSettings[$seoField.'Ids'] ?? [];
-                            $seoSourceField = $bundleSettings[$seoField.'Field'] ?? '';
-                            if (!empty($seoSource)) {
-                                switch ($seoSource) {
-                                    case 'fromField':
-                                        if (!empty($seoSourceField)) {
-                                            $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
-                                                .$objectPrefix.$elementName.$seoSourceField.'.one()'
-                                                .', "'.$transformName.'"'
-                                                .', '.$siteId.')}';
-                                        }
-                                        break;
-                                    case 'fromAsset':
-                                        if (!empty($seoIds)) {
-                                            $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
-                                                .$seoIds[0]
-                                                .', "'.$transformName.'"'
-                                                .', '.$siteId.')}';
-                                        }
-                                        break;
-                                    default:
-                                        $globalsSettings[$fieldName] = '{seomatic.meta.'.$seoField.'}';
-                                        break;
-                                }
-                            }
-                            break;
-                        case 'fromField':
-                            if (!empty($sourceField)) {
-                                $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
-                                    .$objectPrefix.$elementName.$sourceField.'.one()'
-                                    .', "'.$transformName.'"'
-                                    .', '.$siteId.')}';
-                            }
-                            break;
-                        case 'fromAsset':
-                            if (!empty($ids)) {
-                                $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
-                                    .$ids[0]
-                                    .', "'.$transformName.'"'
-                                    .', '.$siteId.')}';
-                            }
-                            break;
-                    }
-                } else {
-                    switch ($source) {
-                        case 'sameAsSeo':
-                            $globalsSettings[$fieldName] = '{seomatic.meta.'.$seoField.'}';
-                            break;
-                        case 'fromField':
-                            if (!empty($sourceField)) {
-                                $globalsSettings[$fieldName] = '{'
-                                    .$elementName.$sourceField.'.one().url'
-                                    .'}';
-                            }
-                            break;
-                        case 'fromAsset':
-                            if (!empty($ids)) {
-                                $globalsSettings[$fieldName] = '{{ craft.app.assets.assetById('
-                                    .$ids[0]
-                                    .', '.$siteId.').url }}';
-                            }
-                            break;
-                    }
-                }
-            }
-        }
-    }
-
-    /**
      * @param array $variables
      */
     protected function setGlobalFieldSourceVariables(array &$variables)
@@ -1180,27 +980,6 @@ class SettingsController extends Controller
     }
 
     /**
-     * Return an array of Asset elements from an array of element IDs
-     *
-     * @param array|string $assetIds
-     * @param int          $siteId
-     *
-     * @return array
-     */
-    protected function assetElementsFromIds($assetIds, int $siteId)
-    {
-        $elements = Craft::$app->getElements();
-        $assets = [];
-        if (!empty($assetIds)) {
-            foreach ($assetIds as $assetId) {
-                $assets[] = $elements->getElementById($assetId, Asset::class, $siteId);
-            }
-        }
-
-        return $assets;
-    }
-
-    /**
      * Return a siteId from a siteHandle
      *
      * @param string $siteHandle
@@ -1226,11 +1005,12 @@ class SettingsController extends Controller
 
     /**
      * Prep the entity settings for saving to the db
+     *
      * @param array &$settings
      */
     protected function prepEntitySettings(&$settings)
     {
-        $this->normalizeTimes($settings['localBusinessOpeningHours']);
+        DynamicMetaHelper::normalizeTimes($settings['localBusinessOpeningHours']);
         $settings['computedType'] = $this->getSpecificEntityType($settings);
         if (!empty($settings['genericImageIds'])) {
             $asset = Craft::$app->getAssets()->getAssetById($settings['genericImageIds'][0]);
@@ -1241,5 +1021,4 @@ class SettingsController extends Controller
             }
         }
     }
-
 }

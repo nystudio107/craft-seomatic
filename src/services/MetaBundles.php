@@ -46,6 +46,7 @@ class MetaBundles extends Component
     const GLOBAL_META_BUNDLE = '__GLOBAL_BUNDLE__';
     const SECTION_META_BUNDLE = 'section';
     const CATEGORYGROUP_META_BUNDLE = 'categorygroup';
+    const FIELD_META_BUNDLE = 'field';
 
     const IGNORE_DB_ATTRIBUTES = [
         'id',

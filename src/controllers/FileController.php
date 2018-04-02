@@ -23,7 +23,7 @@ use yii\web\Response;
 /**
  * @author    nystudio107
  * @package   Seomatic
- * @since     1.0.0
+ * @since     3.0.0
  */
 class FileController extends Controller
 {
@@ -50,7 +50,7 @@ class FileController extends Controller
      * @param bool   $inline
      * @param string $fileName
      *
-     * @return Response
+     * @return Response|\yii\console\Response
      * @throws HttpException
      * @throws NotFoundHttpException
      */
@@ -61,8 +61,8 @@ class FileController extends Controller
         $canonical = base64_decode($canonical);
         $url = UrlHelper::absoluteUrlWithProtocol($url);
         $contents = file_get_contents($url);
+        $response = Craft::$app->getResponse();
         if ($contents) {
-            $response = Craft::$app->getResponse();
             // Add the X-Robots-Tag header
             if (!empty($robots)) {
                 $headerValue = $robots;
@@ -74,7 +74,7 @@ class FileController extends Controller
                 $response->headers->add('Link', $headerValue);
             }
             // Send the file as a stream, so it can exist anywhere
-            $result = $response->sendContentAsFile(
+            $response->sendContentAsFile(
                 $contents,
                 $fileName,
                 [

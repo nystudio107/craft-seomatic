@@ -329,7 +329,7 @@ class MetaBundleSettings extends VarsModel
             ],
             [
                 ['twitterCreatorSource'], 'in', 'range' => [
-                'sameAsSiteTwitter',
+                'sameAsSite',
                 'fromUserField',
                 'fromCustom',
                 ],
