@@ -54,6 +54,7 @@ class SettingsController extends Controller
     ];
 
     const SEO_SETUP_FIELDS = [
+        'mainEntityOfPage',
         'seoTitle',
         'seoDescription',
         'seoKeywords',
@@ -65,6 +66,15 @@ class SettingsController extends Controller
         'siteName',
         'twitterHandle',
         'facebookProfileId',
+    ];
+
+    const IDENTITY_SETUP_FIELDS = [
+        'siteType',
+        'computedType',
+        'genericName',
+        'genericDescription',
+        'genericUrl',
+        'genericImage',
     ];
 
     const SCHEMA_TYPES = [
@@ -166,10 +176,13 @@ class SettingsController extends Controller
         $stat = round(($stat / $numFields) * 100);
         $variables['globalSetupStat'] = $stat;
         // Site Settings grades
-        $numFields = count(self::SITE_SETUP_FIELDS);
+        $numFields = count(self::SITE_SETUP_FIELDS) + count(self::IDENTITY_SETUP_FIELDS);
         $stat = 0;
         foreach (self::SITE_SETUP_FIELDS as $setupField) {
             $stat += intval(!empty($metaBundle->metaSiteVars[$setupField]));
+        }
+        foreach (self::IDENTITY_SETUP_FIELDS as $setupField) {
+            $stat += intval(!empty($metaBundle->metaSiteVars->identity[$setupField]));
         }
         $stat = round(($stat / $numFields) * 100);
         $variables['siteSetupStat'] = $stat;
