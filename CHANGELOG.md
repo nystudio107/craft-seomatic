@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.0.0-beta.21 - 2018.04.03
+### Changed
+* Better Dashboard display of SEO setup graphs
+
 ## 3.0.0-beta.20 - 2018.04.02
 ### Changed
 * Added additional fields for the `mainEntityOfPage` JSON-LD
