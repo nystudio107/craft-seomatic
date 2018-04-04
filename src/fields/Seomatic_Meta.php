@@ -109,7 +109,7 @@ class Seomatic_Meta extends Field
     {
         if (!empty($value)) {
             if (is_string($value)) {
-                $value = Json::decode($value);
+                $value = Json::decodeIfJson($value);
             }
         }
 

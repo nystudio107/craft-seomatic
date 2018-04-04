@@ -125,7 +125,7 @@ class SeoSettings extends Field
         // Handle incoming values potentially being JSON, an array, or an object
         if (!empty($value)) {
             if (is_string($value)) {
-                $config = Json::decode($value);
+                $config = Json::decodeIfJson($value);
             }
             if (is_array($value)) {
                 $config = $value;
