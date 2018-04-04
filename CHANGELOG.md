@@ -3,6 +3,8 @@
 ## 3.0.0-beta.21 - 2018.04.03
 ### Changed
 * Better Dashboard display of SEO setup graphs
+* Fixed an issue with an improperly named Site / Social Media permission
+* Fixed an issue with the helper functions not gracefully handling `null` being passed in
 
 ## 3.0.0-beta.20 - 2018.04.02
 ### Changed
