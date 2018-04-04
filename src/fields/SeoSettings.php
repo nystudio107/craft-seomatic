@@ -23,6 +23,7 @@ use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\elements\Asset;
+use craft\fields\MissingField;
 use craft\helpers\Json;
 
 use yii\base\InvalidConfigException;
@@ -133,6 +134,8 @@ class SeoSettings extends Field
             if (is_object($value) && $value instanceof MetaBundle) {
                 $config = $value->getAttributes();
             }
+        } else {
+            $config = $this->importOldFieldData($element);
         }
         // If the config isn't empty, do some processing on the values
         if (!empty($config)) {
@@ -180,6 +183,7 @@ class SeoSettings extends Field
     public function serializeValue($value, ElementInterface $element = null)
     {
         /** @var MetaBundle $value */
+        $config = $this->importOldFieldData($element);
         return parent::serializeValue($value, $element);
     }
 
@@ -262,6 +266,27 @@ class SeoSettings extends Field
 
     // Protected Methods
     // =========================================================================
+
+    protected function importOldFieldData(Element $element): array
+    {
+        $config = [];
+
+        $layout = $element->getFieldLayout();
+        $fields = $layout->getFields();
+        /** @var  BaseField $field */
+        foreach ($fields as $field) {
+            if ($field instanceof MissingField && $field->expectedType == 'Seomatic_Meta') {
+                $fieldHandle = $field->handle;
+                Craft::dd($element);
+                if (!empty($element->$fieldHandle)) {
+                    $fieldData = $element->$fieldHandle;
+                    Craft::dd($fieldData);
+                }
+            }
+        }
+
+        return $config;
+    }
 
     /**
      * @param Element $element
