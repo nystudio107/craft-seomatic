@@ -41,9 +41,11 @@
                 }
             </script>
         {% else %}
-            <div class="field">
-                <p class="warning">No Twitter Handle has been set. <a href="{{ cpUrl("seomatic/site/social") }}">Set it here.</a></p>
-            </div>
+            {% if previewContext is not defined or previewContext != "sidebar" %}
+                <div class="field">
+                    <p class="warning">No Twitter Handle has been set. <a href="{{ cpUrl("seomatic/site/social") }}">Set it here.</a></p>
+                </div>
+            {% endif %}
         {% endif %}
     </div>
 </div>
