@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.0.0-beta.21 - 2018.04.03
+### Added
+* Don't display the Facebook/Twitter not set in the sidebar preview, only on the Settings pages
+
 ### Changed
 * Better Dashboard display of SEO setup graphs
 * Fixed an issue with an improperly named Site / Social Media permission
