@@ -833,7 +833,7 @@ class Seomatic extends Plugin
                     "seomatic:site-settings:creator"      => [
                         'label' => Craft::t('seomatic', 'Creator'),
                     ],
-                    "seomatic:site-settings:social-media" => [
+                    "seomatic:site-settings:social" => [
                         'label' => Craft::t('seomatic', 'Social Media'),
                     ],
                     "seomatic:site-settings:miscellaneous" => [
