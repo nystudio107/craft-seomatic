@@ -36,7 +36,16 @@ class EmbeddedModelValidator extends Validator
         if (!empty($value) && is_object($value) && $value instanceof Model) {
             /** @var Model $value */
             if (!$value->validate()) {
-                $model->addError($attribute, Craft::t('seomatic', 'Model object does not validate.'));
+                $errors = $value->getErrors();
+                foreach ($errors as $attributeError => $valueErrors) {
+                    foreach ($valueErrors as $valueError) {
+                        $model->addError(
+                            $attribute,
+                            Craft::t('seomatic', 'Object failed to validate')
+                            .'-'.$attributeError.' - '.$valueError
+                        );
+                    }
+                }
             }
         } else {
             $model->addError($attribute, Craft::t('seomatic', 'Is not a Model object.'));
