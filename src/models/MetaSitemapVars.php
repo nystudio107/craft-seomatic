@@ -98,25 +98,38 @@ class MetaSitemapVars extends FluentModel
         return [
             [
                 [
-                    'sitemapUrls',
-                    'sitemapAssets',
-                    'sitemapFiles',
-                    'sitemapAltLinks',
-                    'sitemapChangeFreq',
-                    'sitemapPriority',
-                ],
-                'required',
-            ],
-            [
-                [
                     'sitemapChangeFreq',
                 ],
                 'string',
             ],
-            [['sitemapPriority'], 'number'],
-            [['sitemapLimit'], 'integer'],
-            [['sitemapUrls', 'sitemapAssets', 'sitemapAltLinks', 'sitemapFiles'], 'boolean'],
-            [['sitemapImageFieldMap', 'sitemapVideoFieldMap'], ArrayValidator::class],
+            [
+                [
+                    'sitemapPriority'
+                ],
+                'number'
+            ],
+            [
+                [
+                    'sitemapLimit'
+                ],
+                'integer'
+            ],
+            [
+                [
+                    'sitemapUrls',
+                    'sitemapAssets',
+                    'sitemapAltLinks',
+                    'sitemapFiles',
+                ],
+                'boolean'
+            ],
+            [
+                [
+                    'sitemapImageFieldMap',
+                    'sitemapVideoFieldMap'
+                ],
+                ArrayValidator::class
+            ],
         ];
     }
 }
