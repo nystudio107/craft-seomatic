@@ -271,7 +271,7 @@ class MetaBundle extends Model
                     'metaBundleSettings',
                     'frontendTemplatesContainer',
                 ],
-                EmbeddedModelValidator::class
+                'safe'
             ],
         ];
         return $rules;
