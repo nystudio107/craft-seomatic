@@ -141,13 +141,13 @@ class PullField
             $ids = $bundleSettings[$fieldName.'Ids'] ?? [];
             $sourceField = $bundleSettings[$fieldName.'Field'] ?? '';
             if (!empty($source)) {
-                $transformImage = $bundleSettings[$fieldName.'Transform'];
+                $transformImage = $bundleSettings[$fieldName.'Transform'] ?? true;
                 $seoField = $fields['seoField'];
                 $transformName = $fields['transformName'];
                 // Special-case Twitter transforms
                 if ($transformName == 'twitter') {
                     $transformName = 'twitter-summary';
-                    if ($globalsSettings['twitterCard'] == 'summary_large_image') {
+                    if (!empty($globalsSettings['twitterCard']) && $globalsSettings['twitterCard'] === 'summary_large_image') {
                         $transformName = 'twitter-large';
                     }
                 }
