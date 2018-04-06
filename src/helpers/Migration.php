@@ -135,6 +135,9 @@ class Migration
     {
         $config = [];
 
+        if (empty($element)) {
+            return [];
+        }
         if (empty(self::MIGRATION_CONTEXTS[$mapContext])) {
             return [];
         }
