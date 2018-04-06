@@ -15,6 +15,7 @@ use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
+use nystudio107\seomatic\helpers\Migration as MigrationHelper;
 use nystudio107\seomatic\helpers\PullField as PullFieldHelper;
 use nystudio107\seomatic\models\MetaBundle;
 
@@ -134,7 +135,11 @@ class SeoSettings extends Field
                 $config = $value->getAttributes();
             }
         } else {
-            $config = $this->importOldFieldData($element);
+            /** @var Element $element */
+            $config = MigrationHelper::configFromSeomaticMeta(
+                $element,
+                MigrationHelper::FIELD_MIGRATION_CONTEXT
+            );
         }
         // If the config isn't empty, do some processing on the values
         if (!empty($config)) {
@@ -259,27 +264,14 @@ class SeoSettings extends Field
         );
 
         // Render the input template
-        return Craft::$app->getView()->renderTemplate('seomatic/_components/fields/SeoSettings_input', $variables);
+        return Craft::$app->getView()->renderTemplate(
+            'seomatic/_components/fields/SeoSettings_input',
+            $variables
+        );
     }
 
     // Protected Methods
     // =========================================================================
-
-    protected function importOldFieldData(Element $element): array
-    {
-        $config = [];
-
-        $fieldHandles = FieldHelper::fieldsOfTypeFromElement($element, FieldHelper::OLD_SEOMATIC_META_CLASS_KEY, true);
-        foreach ($fieldHandles as $fieldHandle) {
-            if (!empty($element->$fieldHandle)) {
-                $fieldValue = $element->$fieldHandle;
-                if (!empty($fieldValue)) {
-                }
-            }
-        }
-
-        return $config;
-    }
 
     /**
      * @param Element $element
