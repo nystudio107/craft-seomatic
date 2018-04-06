@@ -1,8 +1,11 @@
 # SEOmatic Changelog
 
-## 3.0.0-beta.21 - 2018.04.05
+## 3.0.0-beta.21 - 2018.04.06
 ### Added
 * Don't display the Facebook/Twitter not set in the sidebar preview, only on the Settings pages
+* Added an `Seomatic_Meta` Field to more gracefully handle sites upgraded from Craft 2.x that used the old FieldType
+* If you add an SEO Settings field to a Section that has an old Craft 2.x Seomatic Meta field in it, it will automatically migrate the data and settings to the new field for you
+* SEOmatic will automatically map your old Craft 2.x Field settings to corresponding Content SEO settings
 
 ### Changed
 * Better Dashboard display of SEO setup graphs
