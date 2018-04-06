@@ -320,7 +320,7 @@ class DynamicMeta
      *
      * @return array
      */
-    public static function getLocalizedUrls(string $uri = null, int $siteId = null)
+    public static function getLocalizedUrls(string $uri = null, int $siteId = null): array
     {
         $localizedUrls = [];
         // Get the request URI
