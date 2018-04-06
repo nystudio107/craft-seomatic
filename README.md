@@ -38,19 +38,23 @@ Yes, you can. And people are. All software is of varying degrees of perfection (
 
 Like any beta software, SEOmatic for Craft CMS 3 may have issues that need addressing. However, we have been using SEOmatic for Craft CMS 3 on a number of live production sites for some time without incident.
 
+The GA release is coming very soon.
+
 Report any issues you find on the [SEOmatic Issues](https://github.com/nystudio107/craft-seomatic/issues) page, and you should see a fairly rapid turn-around time in them being addressed.
 
 ### Upgrading from SEOmatic 1.x for Craft CMS 2.x
 
 If you are upgrading a site from Craft CMS 2.x to Craft CMS 3.x that used the older SEOmatic plugin, here's what you need to know.
 
+SEOmatic will migrate your old Craft 2.x Field settings & data in the following ways:
+ 
+ * The Content SEO settings for each Section where you had an old SEOmatic Meta FieldType will be migrated for you.
+ 
+* If you add a new SEO Settings Field to a section that had an old SEOmatic Meta field in it, it will migrate any custom data you had entered on a per-Entry basis
+
 SEOmatic for Craft CMS 3 is a complete re-write and re-architecture from scratch of the plugin. This allowed us to take what we learned from SEOmatic 1.x, and rebuild it with a much more robust and extendable architecture.
 
-This also means that SEOmatic for Craft CMS 3 has little in common with the older plugin, both from a code point of view, and also conceptually. As such there isn't a way to migrate data in a way that makes sense; instead, you should just set up SEOmatic for Craft CMS 3 fresh.
-
-Thankfully, due to the new architecture, this is quite easy to do. After the GA release, we will look into whether any kind of data migration actually makes sense.
-
-Still, we think the best way to update sites using SEOmatic is to start fresh, and explore how the conceptual changes in the plugin affect how you use it. In most cases, you don't even need to use an SEOmatic Field, and the setup is cleaner and easier without it! We hope you love it!
+If feasible, we think the best way to update sites using SEOmatic is to start fresh, and explore how the conceptual changes in the plugin affect how you use it. In most cases, you don't even need to use an SEOmatic Field, and the setup is cleaner and easier without it! We hope you love it!
 
 ## SEOmatic Overview
 
@@ -137,7 +141,6 @@ The **View robots.txt** button lets you view your `robots.txt`.
 Feel free to edit the default `humans.txt` Template to your heart's content.
 
 #### Global SEO AdminCP Fields
-
 
 The fields in the AdminCP Global SEO settings are parsed as Twig object templates, so in addition to plain old text, you can also put single and double bracket Twig expressions.
 
