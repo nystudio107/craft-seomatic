@@ -105,6 +105,9 @@ class Text
      */
     public static function extractTextFromField($field)
     {
+        if (empty($field)) {
+            return '';
+        }
         if ($field instanceof MatrixBlockQuery
             || (is_array($field) && $field[0] instanceof MatrixBlock)) {
             $result = self::extractTextFromMatrix($field);
@@ -132,6 +135,9 @@ class Text
      */
     public static function extractTextFromTags($tags)
     {
+        if (empty($tags)) {
+            return '';
+        }
         $result = '';
         // Iterate through all of the matrix blocks
         if ($tags instanceof TagQuery) {
@@ -156,6 +162,9 @@ class Text
      */
     public static function extractTextFromMatrix($blocks, $fieldHandle = '')
     {
+        if (empty($blocks)) {
+            return '';
+        }
         $result = '';
         // Iterate through all of the matrix blocks
         if ($blocks instanceof MatrixBlockQuery) {
@@ -270,6 +279,9 @@ class Text
      */
     public static function cleanupText(string $text): string
     {
+        if (empty($text)) {
+            return '';
+        }
         // Convert to UTF-8
         if (function_exists('iconv')) {
             $text = iconv(mb_detect_encoding($text, mb_detect_order(), true), "UTF-8//IGNORE", $text);

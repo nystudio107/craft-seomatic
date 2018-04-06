@@ -165,7 +165,7 @@ class Helper extends Component
      *
      * @return string
      */
-    public static function extractTextFromField($field)
+    public static function extractTextFromField($field = null)
     {
         return TextHelper::extractTextFromField($field);
     }
@@ -178,7 +178,7 @@ class Helper extends Component
      *
      * @return string
      */
-    public static function extractTextFromTags(TagQuery $tagQuery)
+    public static function extractTextFromTags($tagQuery = null)
     {
         return TextHelper::extractTextFromTags($tagQuery);
     }
@@ -192,7 +192,7 @@ class Helper extends Component
      *
      * @return string
      */
-    public static function extractTextFromMatrix(MatrixBlockQuery $matrixQuery, $fieldHandle = '')
+    public static function extractTextFromMatrix($matrixQuery = null, $fieldHandle = '')
     {
         return TextHelper::extractTextFromMatrix($matrixQuery, $fieldHandle);
     }
@@ -207,7 +207,7 @@ class Helper extends Component
      *
      * @return string
      */
-    public static function extractKeywords(string $text, $limit = 15, $useStopWords = true): string
+    public static function extractKeywords(string $text = '', $limit = 15, $useStopWords = true): string
     {
         return TextHelper::extractKeywords($text, $limit, $useStopWords);
     }
@@ -221,7 +221,7 @@ class Helper extends Component
      *
      * @return string
      */
-    public static function extractSummary(string $text, $useStopWords = true): string
+    public static function extractSummary(string $text = '', $useStopWords = true): string
     {
         return TextHelper::extractSummary($text, $useStopWords);
     }

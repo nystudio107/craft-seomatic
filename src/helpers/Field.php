@@ -11,8 +11,9 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use nystudio107\seomatic\services\MetaBundles;
 use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
+use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
+use nystudio107\seomatic\services\MetaBundles;
 
 use Craft;
 use craft\base\Element;
@@ -44,6 +45,7 @@ class Field
     const ASSET_FIELD_CLASS_KEY = 'asset';
     const BLOCK_FIELD_CLASS_KEY = 'block';
     const SEO_SETTINGS_CLASS_KEY = 'seo';
+    const OLD_SEOMATIC_META_CLASS_KEY = 'Seomatic_Meta';
 
     const FIELD_CLASSES = [
         self::TEXT_FIELD_CLASS_KEY  => [
@@ -61,6 +63,9 @@ class Field
         ],
         self::SEO_SETTINGS_CLASS_KEY => [
             SeoSettingsField::class,
+        ],
+        self::OLD_SEOMATIC_META_CLASS_KEY => [
+            Seomatic_MetaField::class,
         ],
     ];
 
