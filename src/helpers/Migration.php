@@ -174,7 +174,7 @@ class Migration
                         }
                     }
                     // Map it to an array of values if needs be
-                    if (!empty(self::ARRAY_VALUE_MAP[$mapFieldTo])) {
+                    if (in_array($mapFieldTo, self::ARRAY_VALUE_MAP)) {
                         $value = [$value];
                     }
                     $config[$migrationFieldKey][$mapFieldTo] = $value;
