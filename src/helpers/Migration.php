@@ -26,6 +26,7 @@ class Migration
     // =========================================================================
 
     const FIELD_MIGRATION_CONTEXT = 'field';
+    const SECTION_MIGRATION_CONTEXT = 'section';
 
     const MIGRATION_CONTEXTS = [
         self::FIELD_MIGRATION_CONTEXT => [
@@ -35,6 +36,32 @@ class Migration
                 'seoDescription'   => 'seoDescription',
                 'seoKeywords'      => 'seoKeywords',
                 'canonicalUrl'     => 'canonicalUrlOverride',
+                'robots'           => 'robots',
+                'ogType'           => 'openGraphType',
+            ],
+            'metaBundleSettings' => [
+                'siteType'             => 'seoMainEntityCategory',
+                'siteSubType'          => 'seoMainEntityOfPage',
+                'seoTitleSource'       => 'seoTitleSource',
+                'seoTitleField'        => 'seoTitleSourceField',
+                'seoDescriptionSource' => 'seoDescriptionSource',
+                'seoDescriptionField'  => 'seoDescriptionSourceField',
+                'seoKeywordsSource'    => 'seoKeywordsSource',
+                'seoKeywordsField'     => 'seoKeywordsSourceField',
+                'seoImageIds'          => 'seoImageId',
+                'seoImageSource'       => 'seoImageIdSource',
+                'seoImageField'        => 'seoImageIdSourceField',
+                'twitterImageIds'      => 'seoTwitterImageId',
+                'twitterImageSource'   => 'seoTwitterImageIdSource',
+                'twitterImageField'    => 'seoTwitterImageIdSourceField',
+                'ogImageIds'           => 'seoFacebookImageId',
+                'ogImageSource'        => 'seoFacebookImageIdSource',
+                'ogImageField'         => 'seoFacebookImageIdSourceField',
+            ],
+        ],
+        self::SECTION_MIGRATION_CONTEXT => [
+            'metaGlobalVars'     => [
+                'mainEntityOfPage' => 'seoMainEntityOfPage',
                 'robots'           => 'robots',
                 'ogType'           => 'openGraphType',
             ],
