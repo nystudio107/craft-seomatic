@@ -13,6 +13,7 @@ namespace nystudio107\seomatic;
 
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
+use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\helpers\PluginTemplate;
 use nystudio107\seomatic\models\MetaScriptContainer;
@@ -318,6 +319,7 @@ class Seomatic extends Plugin
             Fields::EVENT_REGISTER_FIELD_TYPES,
             function (RegisterComponentTypesEvent $event) {
                 $event->types[] = SeoSettingsField::class;
+                $event->types[] = Seomatic_MetaField::class;
             }
         );
         // Handler: Plugins::EVENT_AFTER_LOAD_PLUGINS
@@ -831,7 +833,7 @@ class Seomatic extends Plugin
                     "seomatic:site-settings:creator"      => [
                         'label' => Craft::t('seomatic', 'Creator'),
                     ],
-                    "seomatic:site-settings:social-media" => [
+                    "seomatic:site-settings:social" => [
                         'label' => Craft::t('seomatic', 'Social Media'),
                     ],
                     "seomatic:site-settings:miscellaneous" => [

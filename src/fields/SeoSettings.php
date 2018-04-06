@@ -15,6 +15,7 @@ use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
+use nystudio107\seomatic\helpers\Migration as MigrationHelper;
 use nystudio107\seomatic\helpers\PullField as PullFieldHelper;
 use nystudio107\seomatic\models\MetaBundle;
 
@@ -125,7 +126,7 @@ class SeoSettings extends Field
         // Handle incoming values potentially being JSON, an array, or an object
         if (!empty($value)) {
             if (is_string($value)) {
-                $config = Json::decode($value);
+                $config = Json::decodeIfJson($value);
             }
             if (is_array($value)) {
                 $config = $value;
@@ -133,6 +134,12 @@ class SeoSettings extends Field
             if (is_object($value) && $value instanceof MetaBundle) {
                 $config = $value->getAttributes();
             }
+        } else {
+            /** @var Element $element */
+            $config = MigrationHelper::configFromSeomaticMeta(
+                $element,
+                MigrationHelper::FIELD_MIGRATION_CONTEXT
+            );
         }
         // If the config isn't empty, do some processing on the values
         if (!empty($config)) {
@@ -257,7 +264,10 @@ class SeoSettings extends Field
         );
 
         // Render the input template
-        return Craft::$app->getView()->renderTemplate('seomatic/_components/fields/SeoSettings_input', $variables);
+        return Craft::$app->getView()->renderTemplate(
+            'seomatic/_components/fields/SeoSettings_input',
+            $variables
+        );
     }
 
     // Protected Methods

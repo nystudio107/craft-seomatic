@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\migrations;
 
 use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
 
 use Craft;
 use craft\config\DbConfig;
@@ -47,6 +48,7 @@ class Install extends Migration
             // Refresh the db schema caches
             Craft::$app->db->schema->refresh();
             $this->insertDefaultData();
+            $this->migrateData();
         }
 
         return true;
@@ -188,6 +190,17 @@ class Install extends Migration
         // Insert our default data
         Seomatic::$plugin->metaBundles->createGlobalMetaBundles();
         Seomatic::$plugin->metaBundles->createContentMetaBundles();
+    }
+
+    /**
+     * @return void
+     */
+    protected function migrateData()
+    {
+        // Migrate the old Seomatic_Meta field
+        $this->update('{{%fields}}', [
+            'type' => Seomatic_MetaField::class
+        ], ['type' => 'Seomatic_Meta']);
     }
 
     /**
