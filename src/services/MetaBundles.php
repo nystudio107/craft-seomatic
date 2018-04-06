@@ -14,7 +14,8 @@ namespace nystudio107\seomatic\services;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
-use nystudio107\seomatic\helpers\MetaValue;
+use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
+use nystudio107\seomatic\helpers\Migration as MigrationHelper;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\records\MetaBundle as MetaBundleRecord;
@@ -372,7 +373,6 @@ class MetaBundles extends Component
         $sites = Craft::$app->getSites()->getAllSites();
         /** @var  $site Site */
         foreach ($sites as $site) {
-            $metaBundleRecord = null;
             // Look for a matching meta bundle in the db
             $metaBundleRecord = MetaBundleRecord::findOne([
                 'sourceBundleType' => $sourceBundleType,
@@ -425,7 +425,6 @@ class MetaBundles extends Component
         $sites = Craft::$app->getSites()->getAllSites();
         /** @var  $site Site */
         foreach ($sites as $site) {
-            $metaBundle = null;
             $metaBundle = $this->createMetaBundleFromCategory($category, $site->id);
         }
     }
@@ -680,7 +679,7 @@ class MetaBundles extends Component
                 if ($siteSetting->hasUrls) {
                     $siteSettingArray = $siteSetting->toArray();
                     // Get the site language
-                    $siteSettingArray['language'] = MetaValue::getSiteLanguage($siteSetting->siteId);
+                    $siteSettingArray['language'] = MetaValueHelper::getSiteLanguage($siteSetting->siteId);
                     $siteSettingsArray[] = $siteSettingArray;
                 }
             }
@@ -714,6 +713,18 @@ class MetaBundles extends Component
                         'sourceDateUpdated'     => $dateUpdated,
                     ]
                 );
+                // Merge in any migrated settings from an old Seomatic_Meta Field
+                if (!empty($element)) {
+                    $element = Craft::$app->getElements()->getElementById($element->id, null, $siteId);
+                    $config = MigrationHelper::configFromSeomaticMeta(
+                        $element,
+                        MigrationHelper::SECTION_MIGRATION_CONTEXT
+                    );
+                    $metaBundleDefaults = ArrayHelper::merge(
+                        $metaBundleDefaults,
+                        $config
+                    );
+                }
                 $metaBundle = MetaBundle::create($metaBundleDefaults);
                 if (!empty($baseConfig)) {
                     $this->mergeMetaBundleSettings($metaBundle, $baseConfig);
@@ -744,7 +755,7 @@ class MetaBundles extends Component
                 if ($siteSetting->hasUrls) {
                     $siteSettingArray = $siteSetting->toArray();
                     // Get the site language
-                    $siteSettingArray['language'] = MetaValue::getSiteLanguage($siteSetting->siteId);
+                    $siteSettingArray['language'] = MetaValueHelper::getSiteLanguage($siteSetting->siteId);
                     $siteSettingsArray[] = $siteSettingArray;
                 }
             }
@@ -777,7 +788,18 @@ class MetaBundles extends Component
                         'sourceDateUpdated'     => $dateUpdated,
                     ]
                 );
-                $metaBundle = MetaBundle::create($metaBundleDefaults);
+                // Merge in any migrated settings from an old Seomatic_Meta Field
+                if (!empty($element)) {
+                    $element = Craft::$app->getElements()->getElementById($element->id, null, $siteId);
+                    $config = MigrationHelper::configFromSeomaticMeta(
+                        $element,
+                        MigrationHelper::SECTION_MIGRATION_CONTEXT
+                    );
+                    $metaBundleDefaults = ArrayHelper::merge(
+                        $metaBundleDefaults,
+                        $config
+                    );
+                }                $metaBundle = MetaBundle::create($metaBundleDefaults);
                 if (!empty($baseConfig)) {
                     $this->mergeMetaBundleSettings($metaBundle, $baseConfig);
                 }
