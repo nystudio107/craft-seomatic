@@ -100,7 +100,12 @@ class ImageTransform
         $elements = Craft::$app->getElements();
         $assets = [];
         if (!empty($assetIds)) {
-            foreach ($assetIds as $assetId) {
+            if (is_array($assetIds)) {
+                foreach ($assetIds as $assetId) {
+                    $assets[] = $elements->getElementById($assetId, Asset::class, $siteId);
+                }
+            } else {
+                $assetId = $assetIds;
                 $assets[] = $elements->getElementById($assetId, Asset::class, $siteId);
             }
         }
