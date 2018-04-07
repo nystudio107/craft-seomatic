@@ -124,7 +124,6 @@ class Migration
     // Static Methods
     // =========================================================================
 
-
     /**
      * @param Element $element
      * @param string  $mapContext
@@ -155,6 +154,9 @@ class Migration
 
         return $config;
     }
+
+    // Protected Methods
+    // =========================================================================
 
     /**
      * @param array $migrationFieldsArrays
