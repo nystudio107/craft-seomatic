@@ -111,6 +111,7 @@ class MetaContainers extends Component
      */
     public function loadMetaContainers(string $uri = '', int $siteId = null)
     {
+        Craft::beginProfile('loadMetaContainers', __METHOD__);
         // Avoid recursion
         if (!$this->loadingContainers) {
             $this->loadingContainers = true;
@@ -160,6 +161,7 @@ class MetaContainers extends Component
             MetaValueHelper::cache();
             $this->loadingContainers = false;
         }
+        Craft::endProfile('loadMetaContainers', __METHOD__);
     }
 
     /**
@@ -169,6 +171,7 @@ class MetaContainers extends Component
      */
     public function includeScriptBodyHtml(int $bodyPosition)
     {
+        Craft::beginProfile('includeScriptBodyHtml', __METHOD__);
         $scriptContainers = $this->getContainersOfType(MetaScriptContainer::CONTAINER_TYPE);
         foreach ($scriptContainers as $scriptContainer) {
             foreach ($scriptContainer->data as $metaScript) {
@@ -178,6 +181,7 @@ class MetaContainers extends Component
                 }
             }
         }
+        Craft::endProfile('includeScriptBodyHtml', __METHOD__);
     }
 
     /**
@@ -185,6 +189,7 @@ class MetaContainers extends Component
      */
     public function includeMetaContainers()
     {
+        Craft::beginProfile('includeMetaContainers', __METHOD__);
         DynamicMetaHelper::includeHttpHeaders();
         $this->parseGlobalVars();
         foreach ($this->metaContainers as $metaContainer) {
@@ -193,6 +198,7 @@ class MetaContainers extends Component
                 $metaContainer->includeMetaData();
             }
         }
+        Craft::endProfile('includeMetaContainers', __METHOD__);
     }
 
     /**
