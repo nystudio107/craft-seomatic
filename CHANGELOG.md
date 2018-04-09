@@ -1,5 +1,11 @@
 # SEOmatic Changelog
 
+## 3.0.0-beta.22 - 2018.04.09
+### Added
+* Added performance profiling to major bottlenecks
+
+### Changed
+
 ## 3.0.0-beta.21 - 2018.04.06
 ### Added
 * Don't display the Facebook/Twitter not set in the sidebar preview, only on the Settings pages
