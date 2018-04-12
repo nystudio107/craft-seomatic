@@ -52,8 +52,6 @@ class MetaContainers extends Component
     const GLOBAL_METACONTAINER_CACHE_TAG = 'seomatic_metacontainer';
     const METACONTAINER_CACHE_TAG = 'seomatic_metacontainer_';
 
-    const METACONTAINER_CACHE_DURATION = null;
-    const DEVMODE_METACONTAINER_CACHE_DURATION = 30;
     const CACHE_KEY = 'seomatic_metacontainer_';
 
     // Public Properties
@@ -129,9 +127,6 @@ class MetaContainers extends Component
                     ?? 1;
             }
             // Load the meta containers
-            $duration = Seomatic::$devMode
-                ? $this::DEVMODE_METACONTAINER_CACHE_DURATION
-                : $this::METACONTAINER_CACHE_DURATION;
             $dependency = new TagDependency([
                 'tags' => [
                     $this::GLOBAL_METACONTAINER_CACHE_TAG,
@@ -154,7 +149,7 @@ class MetaContainers extends Component
 
                     return [$this->metaGlobalVars, $this->metaSiteVars, $this->metaSitemapVars, $this->metaContainers];
                 },
-                $duration,
+                Seomatic::$cacheDuration,
                 $dependency
             );
             Seomatic::$seomaticVariable->init();
