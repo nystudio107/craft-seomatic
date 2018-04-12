@@ -54,9 +54,8 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             'action'     => 'sitemap-index',
         ];
         $config = array_merge($config, $defaults);
-        $model = new SitemapIndexTemplate($config);
 
-        return $model;
+        return new SitemapIndexTemplate($config);
     }
 
     // Public Properties
@@ -80,13 +79,9 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
     /**
      * @inheritdoc
      */
-    public function fields()
+    public function fields(): array
     {
-        $fields = parent::fields();
-        if ($this->scenario === 'default') {
-        }
-
-        return $fields;
+        return parent::fields();
     }
 
     /**
@@ -101,57 +96,55 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
         /** @var SiteGroup $siteGroup */
         $siteGroup = Craft::$app->getSites()->getGroupById($groupId);
         $groupSiteIds = $siteGroup->getSiteIds();
-        if ($siteGroup) {
-            $duration = Seomatic::$devMode ? $this::DEVMODE_SITEMAP_CACHE_DURATION : $this::SITEMAP_CACHE_DURATION;
-            $dependency = new TagDependency([
-                'tags' => [
-                    $this::GLOBAL_SITEMAP_CACHE_TAG,
-                    $this::SITEMAP_INDEX_CACHE_TAG,
-                ],
-            ]);
-
-            return $cache->getOrSet($this::CACHE_KEY.$groupId, function () use ($groupSiteIds) {
-                Craft::info(
-                    'Sitemap index cache miss',
-                    __METHOD__
-                );
-                $lines = [];
-                // Sitemap index XML header and opening tag
-                $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
-                $lines[] = '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-                // One sitemap entry for each MeteBundle
-                $metaBundles = Seomatic::$plugin->metaBundles->getContentMetaBundles(true);
-                /** @var  $metaBundle MetaBundle */
-                foreach ($metaBundles as $metaBundle) {
-                    if (in_array($metaBundle->sourceSiteId, $groupSiteIds)
-                        && $metaBundle->metaSitemapVars->sitemapUrls) {
-                        $sitemapUrl = Seomatic::$plugin->sitemaps->sitemapUrlForBundle(
-                            $metaBundle->sourceBundleType,
-                            $metaBundle->sourceHandle,
-                            $metaBundle->sourceSiteId
-                        );
-                        $lines[] = '  <sitemap>';
-                        $lines[] = '    <loc>';
-                        $lines[] = '      '.$sitemapUrl;
-                        $lines[] = '    </loc>';
-                        if (!empty($metaBundle->sourceDateUpdated)) {
-                            $lines[] = '    <lastmod>';
-                            $lines[] = '      '.$metaBundle->sourceDateUpdated->format(\DateTime::W3C);
-                            $lines[] = '    </lastmod>';
-                        }
-                        $lines[] = '  </sitemap>';
-                    }
-                }
-                // Sitemap index closing tag
-                $lines[] = '</sitemapindex>';
-
-                return implode("\r\n", $lines);
-            }, $duration, $dependency);
-        } else {
+        if ($siteGroup === null) {
             throw new NotFoundHttpException(Craft::t('seomatic', 'Sitemap.xml not found for groupId {groupId}', [
-                'groupId' => "{$groupId}",
+                'groupId' => $groupId,
             ]));
         }
+        $dependency = new TagDependency([
+            'tags' => [
+                $this::GLOBAL_SITEMAP_CACHE_TAG,
+                $this::SITEMAP_INDEX_CACHE_TAG,
+            ],
+        ]);
+
+        return $cache->getOrSet($this::CACHE_KEY.$groupId, function () use ($groupSiteIds) {
+            Craft::info(
+                'Sitemap index cache miss',
+                __METHOD__
+            );
+            $lines = [];
+            // Sitemap index XML header and opening tag
+            $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
+            $lines[] = '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+            // One sitemap entry for each MeteBundle
+            $metaBundles = Seomatic::$plugin->metaBundles->getContentMetaBundles(true);
+            /** @var  $metaBundle MetaBundle */
+            foreach ($metaBundles as $metaBundle) {
+                if (in_array($metaBundle->sourceSiteId, $groupSiteIds)
+                    && $metaBundle->metaSitemapVars->sitemapUrls) {
+                    $sitemapUrl = Seomatic::$plugin->sitemaps->sitemapUrlForBundle(
+                        $metaBundle->sourceBundleType,
+                        $metaBundle->sourceHandle,
+                        $metaBundle->sourceSiteId
+                    );
+                    $lines[] = '  <sitemap>';
+                    $lines[] = '    <loc>';
+                    $lines[] = '      '.$sitemapUrl;
+                    $lines[] = '    </loc>';
+                    if ($metaBundle->sourceDateUpdated !== null) {
+                        $lines[] = '    <lastmod>';
+                        $lines[] = '      '.$metaBundle->sourceDateUpdated->format(\DateTime::W3C);
+                        $lines[] = '    </lastmod>';
+                    }
+                    $lines[] = '  </sitemap>';
+                }
+            }
+            // Sitemap index closing tag
+            $lines[] = '</sitemapindex>';
+
+            return implode("\r\n", $lines);
+        }, Seomatic::$cacheDuration, $dependency);
     }
 
     /**
