@@ -11,17 +11,13 @@
 
 namespace nystudio107\seomatic\services;
 
-use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
-use nystudio107\seomatic\helpers\Config as ConfigHelper;
 use nystudio107\seomatic\models\EditableTemplate;
 use nystudio107\seomatic\models\FrontendTemplateContainer;
-use nystudio107\seomatic\records\FrontendTemplate as FrontendTemplateRecord;
 
 use Craft;
 use craft\base\Component;
-use craft\db\Query;
 use craft\events\RegisterUrlRulesEvent;
 use craft\web\UrlManager;
 
@@ -46,8 +42,6 @@ class FrontendTemplates extends Component
     const GLOBAL_FRONTENDTEMPLATE_CACHE_TAG = 'seomatic_frontendtemplate';
     const FRONTENDTEMPLATE_CACHE_TAG = 'seomatic_frontendtemplate_';
 
-    const FRONTENDTEMPLATE_CACHE_DURATION = null;
-    const DEVMODE_FRONTENDTEMPLATE_CACHE_DURATION = 30;
     const CACHE_KEY = 'seomatic_frontendtemplate_';
 
     const IGNORE_DB_ATTRIBUTES = [
@@ -87,7 +81,9 @@ class FrontendTemplates extends Component
             $siteId = Craft::$app->getSites()->currentSite->id ?? 1;
         }
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
-
+        if ($metaBundle === null) {
+            return;
+        }
         $this->frontendTemplateContainer = $metaBundle->frontendTemplatesContainer;
         // Handler: UrlManager::EVENT_REGISTER_SITE_URL_RULES
         Event::on(
@@ -132,11 +128,8 @@ class FrontendTemplates extends Component
      *
      * @return string
      */
-    public function renderTemplate(string $template, $params = []): string
+    public function renderTemplate(string $template, array $params = []): string
     {
-        $duration = Seomatic::$devMode
-            ? $this::DEVMODE_FRONTENDTEMPLATE_CACHE_DURATION
-            : $this::FRONTENDTEMPLATE_CACHE_DURATION;
         $dependency = new TagDependency([
             'tags' => [
                 $this::GLOBAL_FRONTENDTEMPLATE_CACHE_TAG,
@@ -160,7 +153,7 @@ class FrontendTemplates extends Component
 
                 return $html;
             },
-            $duration,
+            Seomatic::$cacheDuration,
             $dependency
         );
 
@@ -180,7 +173,7 @@ class FrontendTemplates extends Component
         $frontendTemplate = null;
         /** @var  $frontendTemplate EditableTemplate */
         foreach ($this->frontendTemplateContainer->data as $frontendTemplate) {
-            if ($key == $frontendTemplate->handle) {
+            if ($key === $frontendTemplate->handle) {
                 return $frontendTemplate;
             }
         }
