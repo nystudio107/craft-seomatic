@@ -54,7 +54,7 @@ class MetaValue
      *
      * @return string
      */
-    public static function parseString($metaValue): string
+    public static function parseString($metaValue)
     {
         // If it's a string, and there are no dynamic tags, just return the template
         if (\is_string($metaValue) && !StringHelper::contains($metaValue, '{')) {
