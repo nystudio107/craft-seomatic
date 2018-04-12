@@ -73,9 +73,8 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             'action'     => 'sitemap',
         ];
         $config = array_merge($config, $defaults);
-        $model = new SitemapTemplate($config);
 
-        return $model;
+        return new SitemapTemplate($config);
     }
 
     // Public Properties
@@ -99,13 +98,9 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
     /**
      * @inheritdoc
      */
-    public function fields()
+    public function fields(): array
     {
-        $fields = parent::fields();
-        if ($this->scenario === 'default') {
-        }
-
-        return $fields;
+        return parent::fields();
     }
 
     /**
@@ -121,7 +116,6 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         $type = $params['type'];
         $handle = $params['handle'];
         $siteId = $params['siteId'];
-        $duration = Seomatic::$devMode ? $this::DEVMODE_SITEMAP_CACHE_DURATION : $this::SITEMAP_CACHE_DURATION;
         $dependency = new TagDependency([
             'tags' => [
                 $this::GLOBAL_SITEMAP_CACHE_TAG,
@@ -129,7 +123,12 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             ],
         ]);
 
-        return $cache->getOrSet($this::CACHE_KEY.$groupId.$handle.$siteId, function () use ($type, $handle, $siteId, $groupSiteIds) {
+        return $cache->getOrSet($this::CACHE_KEY.$groupId.$handle.$siteId, function () use (
+            $type,
+            $handle,
+            $siteId,
+            $groupSiteIds
+        ) {
             Craft::info(
                 'Sitemap cache miss: '.$handle.'/'.$siteId,
                 __METHOD__
@@ -140,10 +139,10 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             // One sitemap entry for each element
             $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle($type, $handle, $siteId);
             // If it's disabled, just throw a 404
-            if (empty($metaBundle) || !$metaBundle->metaSitemapVars->sitemapUrls) {
+            if ($metaBundle === null || !$metaBundle->metaSitemapVars->sitemapUrls) {
                 throw new NotFoundHttpException(Craft::t('seomatic', 'Page not found.'));
             }
-            $multiSite = count($metaBundle->sourceAltSiteSettings) > 1;
+            $multiSite = \count($metaBundle->sourceAltSiteSettings) > 1;
             $elements = null;
             if ($metaBundle) {
                 $urlsetLine = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"';
@@ -199,7 +198,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                     if ($multiSite && $metaBundle->metaSitemapVars->sitemapAltLinks) {
                         /** @var  $altSiteSettings */
                         foreach ($metaBundle->sourceAltSiteSettings as $altSiteSettings) {
-                            if (in_array($altSiteSettings['siteId'], $groupSiteIds)) {
+                            if (\in_array($altSiteSettings['siteId'], $groupSiteIds, true)) {
                                 $altElement = null;
                                 // Handle each element type separately
                                 switch ($metaBundle->sourceBundleType) {
@@ -242,6 +241,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                         );
                         foreach ($assetFields as $assetField) {
                             $assets = $element[$assetField]->all();
+                            /** @var Asset[] $assets */
                             foreach ($assets as $asset) {
                                 $this->assetSitemapItem($asset, $metaBundle, $lines);
                             }
@@ -254,6 +254,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                         );
                         foreach ($matrixFields as $matrixField) {
                             $matrixBlocks = $element[$matrixField]->all();
+                            /** @var MatrixBlock[] $matrixBlocks */
                             foreach ($matrixBlocks as $matrixBlock) {
                                 $assetFields = FieldHelper::matrixFieldsOfType($matrixBlock, AssetsField::class);
                                 foreach ($assetFields as $assetField) {
@@ -305,7 +306,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             }
 
             return implode("\r\n", $lines);
-        }, $duration, $dependency);
+        }, Seomatic::$cacheDuration, $dependency);
     }
 
     /**
@@ -380,7 +381,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
     protected function assetFilesSitemapLink(Asset $asset, MetaBundle $metaBundle, array &$lines)
     {
         if ($asset->enabledForSite) {
-            if (in_array($asset->kind, $this::FILE_TYPES)) {
+            if (\in_array($asset->kind, $this::FILE_TYPES, true)) {
                 $dateUpdated = $asset->dateUpdated ?? $asset->dateCreated ?? new \DateTime;
                 $lines[] = '  <url>';
                 $lines[] = '    <loc>';
