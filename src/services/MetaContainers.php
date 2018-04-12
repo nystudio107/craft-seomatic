@@ -116,7 +116,7 @@ class MetaContainers extends Component
             $this->setMatchedElement($uri, $siteId);
             // Get the cache tag for the matched meta bundle
             $metaBundle = $this->getMatchedMetaBundle();
-            $metaBundleSourceId = "";
+            $metaBundleSourceId = '';
             if ($metaBundle) {
                 $metaBundleSourceId = $metaBundle->sourceId;
             }
@@ -169,9 +169,10 @@ class MetaContainers extends Component
         Craft::beginProfile('includeScriptBodyHtml', __METHOD__);
         $scriptContainers = $this->getContainersOfType(MetaScriptContainer::CONTAINER_TYPE);
         foreach ($scriptContainers as $scriptContainer) {
+            /** @var MetaScriptContainer $scriptContainer */
             foreach ($scriptContainer->data as $metaScript) {
                 /** @var MetaScript $metaScript */
-                if (!empty($metaScript->bodyTemplatePath) && ($metaScript->bodyPosition == $bodyPosition)) {
+                if (!empty($metaScript->bodyTemplatePath) && ($metaScript->bodyPosition === $bodyPosition)) {
                     echo $metaScript->renderBodyHtml();
                 }
             }
@@ -229,7 +230,7 @@ class MetaContainers extends Component
             $this->parseGlobalVars();
         }
         // Special-case the global bundle
-        if ($uri == MetaBundles::GLOBAL_META_BUNDLE) {
+        if ($uri === MetaBundles::GLOBAL_META_BUNDLE) {
             try {
                 $this->metaGlobalVars->canonicalUrl = UrlHelper::siteUrl('/', null, null, $siteId);
             } catch (Exception $e) {
@@ -249,7 +250,7 @@ class MetaContainers extends Component
         /** @var  $container MetaContainer */
         $container = $this->getMetaContainer($key);
 
-        if (!empty($container)) {
+        if ($container !== null) {
             $container->addData($data, $data->key);
         }
     }
@@ -332,7 +333,7 @@ class MetaContainers extends Component
         $containers = [];
         /** @var  $metaContainer MetaContainer */
         foreach ($this->metaContainers as $metaContainer) {
-            if ($metaContainer::CONTAINER_TYPE == $type) {
+            if ($metaContainer::CONTAINER_TYPE === $type) {
                 $containers[] = $metaContainer;
             }
         }
@@ -352,7 +353,7 @@ class MetaContainers extends Component
         $html = '';
         /** @var  $metaContainer MetaContainer */
         foreach ($this->metaContainers as $metaContainer) {
-            if ($metaContainer::CONTAINER_TYPE == $type && $metaContainer->include) {
+            if ($metaContainer::CONTAINER_TYPE === $type && $metaContainer->include) {
                 $html .= $metaContainer->render([
                     'renderRaw'        => true,
                     'renderScriptTags' => true,
@@ -376,7 +377,7 @@ class MetaContainers extends Component
         $htmlArray = [];
         /** @var  $metaContainer MetaContainer */
         foreach ($this->metaContainers as $metaContainer) {
-            if ($metaContainer::CONTAINER_TYPE == $type && $metaContainer->include) {
+            if ($metaContainer::CONTAINER_TYPE === $type && $metaContainer->include) {
                 $htmlArray = array_merge($htmlArray, $metaContainer->renderArray());
             }
         }
@@ -397,10 +398,10 @@ class MetaContainers extends Component
         $metaItem = null;
         /** @var  $metaContainer MetaContainer */
         foreach ($this->metaContainers as $metaContainer) {
-            if (($metaContainer::CONTAINER_TYPE == $type) || (empty($type))) {
+            if (($metaContainer::CONTAINER_TYPE === $type) || empty($type)) {
                 /** @var  $metaTag MetaItem */
                 foreach ($metaContainer->data as $metaItem) {
-                    if ($key == $metaItem->key) {
+                    if ($key === $metaItem->key) {
                         return $metaItem;
                     }
                 }
@@ -408,6 +409,128 @@ class MetaContainers extends Component
         }
 
         return $metaItem;
+    }
+
+    // Protected Methods
+    // =========================================================================
+
+    /**
+     * Return the MetaBundle that corresponds with the Seomatic::$matchedElement
+     *
+     * @return null|MetaBundle
+     */
+    public function getMatchedMetaBundle()
+    {
+        $metaBundle = null;
+        /** @var Element $element */
+        $element = Seomatic::$matchedElement;
+        if ($element) {
+            $sourceType = '';
+            switch (\get_class($element)) {
+                case Entry::class:
+                    /** @var  $element Entry */
+                    $sourceType = MetaBundles::SECTION_META_BUNDLE;
+                    break;
+
+                case Category::class:
+                    /** @var  $element Category */
+                    $sourceType = MetaBundles::CATEGORYGROUP_META_BUNDLE;
+                    break;
+                // @todo handle commerce products
+            }
+            list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
+                = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
+            $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
+                $sourceType,
+                $sourceId,
+                $sourceSiteId
+            );
+        }
+        $this->matchedMetaBundle = $metaBundle;
+
+        return $metaBundle;
+    }
+
+    /**
+     * Add the meta bundle to our existing meta containers, overwriting meta
+     * items with the same key
+     *
+     * @param MetaBundle $metaBundle
+     */
+    public function addMetaBundleToContainers(MetaBundle $metaBundle)
+    {
+        // Meta global vars
+        $attributes = $metaBundle->metaGlobalVars->getAttributes();
+        $attributes = array_filter($attributes);
+        $this->metaGlobalVars->setAttributes($attributes, false);
+        // Meta site vars
+        /*
+         * Don't merge in the Site vars, since they are only editable on
+         * a global basis. Otherwise stale data will be unable to be edited
+        $attributes = $metaBundle->metaSiteVars->getAttributes();
+        $attributes = array_filter($attributes);
+        $this->metaSiteVars->setAttributes($attributes, false);
+        */
+        // Meta sitemap vars
+        $attributes = $metaBundle->metaSitemapVars->getAttributes();
+        $attributes = array_filter($attributes);
+        $this->metaSitemapVars->setAttributes($attributes, false);
+        // Language
+        $this->metaGlobalVars->language = Seomatic::$language;
+        // Meta containers
+        foreach ($metaBundle->metaContainers as $key => $metaContainer) {
+            foreach ($metaContainer->data as $metaTag) {
+                $this->addToMetaContainer($metaTag, $key);
+            }
+        }
+    }
+
+    /**
+     * Invalidate all of the meta container caches
+     */
+    public function invalidateCaches()
+    {
+        $cache = Craft::$app->getCache();
+        TagDependency::invalidate($cache, $this::GLOBAL_METACONTAINER_CACHE_TAG);
+        Craft::info(
+            'All meta container caches cleared',
+            __METHOD__
+        );
+    }
+
+    /**
+     * Invalidate a meta bundle cache
+     *
+     * @param int $sourceId
+     */
+    public function invalidateContainerCacheById(int $sourceId)
+    {
+        $metaBundleSourceId = '';
+        if ($sourceId) {
+            $metaBundleSourceId = $sourceId;
+        }
+        $cache = Craft::$app->getCache();
+        TagDependency::invalidate($cache, $this::METACONTAINER_CACHE_TAG.$metaBundleSourceId);
+        Craft::info(
+            'Meta bundle cache cleared: '.$metaBundleSourceId,
+            __METHOD__
+        );
+    }
+
+    /**
+     * Invalidate a meta bundle cache
+     *
+     * @param string $uri
+     * @param int    $siteId
+     */
+    public function invalidateContainerCacheByPath(string $uri, int $siteId)
+    {
+        $cache = Craft::$app->getCache();
+        TagDependency::invalidate($cache, $this::METACONTAINER_CACHE_TAG.$uri.$siteId);
+        Craft::info(
+            'Meta container cache cleared: '.$uri.'/'.$siteId,
+            __METHOD__
+        );
     }
 
     // Protected Methods
@@ -470,43 +593,6 @@ class MetaContainers extends Component
     }
 
     /**
-     * Return the MetaBundle that corresponds with the Seomatic::$matchedElement
-     *
-     * @return null|MetaBundle
-     */
-    public function getMatchedMetaBundle()
-    {
-        $metaBundle = null;
-        /** @var Element $element */
-        $element = Seomatic::$matchedElement;
-        if ($element) {
-            $sourceType = '';
-            switch (get_class($element)) {
-                case Entry::class:
-                    /** @var  $element Entry */
-                    $sourceType = MetaBundles::SECTION_META_BUNDLE;
-                    break;
-
-                case Category::class:
-                    /** @var  $element Category */
-                    $sourceType = MetaBundles::CATEGORYGROUP_META_BUNDLE;
-                    break;
-                // @todo handle commerce products
-            }
-            list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
-                = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
-            $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
-                $sourceType,
-                $sourceId,
-                $sourceSiteId
-            );
-        }
-        $this->matchedMetaBundle = $metaBundle;
-
-        return $metaBundle;
-    }
-
-    /**
      * Set the element that matches the $uri
      *
      * @param string   $uri
@@ -528,103 +614,18 @@ class MetaContainers extends Component
     }
 
     /**
-     * Add the meta bundle to our existing meta containers, overwriting meta
-     * items with the same key
-     *
-     * @param MetaBundle $metaBundle
-     */
-    public function addMetaBundleToContainers(MetaBundle $metaBundle)
-    {
-        // Meta global vars
-        $attributes = $metaBundle->metaGlobalVars->getAttributes();
-        $attributes = array_filter($attributes);
-        $this->metaGlobalVars->setAttributes($attributes, false);
-        // Meta site vars
-        /*
-         * Don't merge in the Site vars, since they are only editable on
-         * a global basis. Otherwise stale data will be unable to be edited
-        $attributes = $metaBundle->metaSiteVars->getAttributes();
-        $attributes = array_filter($attributes);
-        $this->metaSiteVars->setAttributes($attributes, false);
-        */
-        // Meta sitemap vars
-        $attributes = $metaBundle->metaSitemapVars->getAttributes();
-        $attributes = array_filter($attributes);
-        $this->metaSitemapVars->setAttributes($attributes, false);
-        // Language
-        $this->metaGlobalVars->language = Seomatic::$language;
-        // Meta containers
-        foreach ($metaBundle->metaContainers as $key => $metaContainer) {
-            foreach ($metaContainer->data as $metaTag) {
-                $this->addToMetaContainer($metaTag, $key);
-            }
-        }
-    }
-
-    /**
-     * Invalidate all of the meta container caches
-     */
-    public function invalidateCaches()
-    {
-        $cache = Craft::$app->getCache();
-        TagDependency::invalidate($cache, $this::GLOBAL_METACONTAINER_CACHE_TAG);
-        Craft::info(
-            'All meta container caches cleared',
-            __METHOD__
-        );
-    }
-
-    /**
-     * Invalidate a meta bundle cache
-     *
-     * @param int $sourceId
-     */
-    public function invalidateContainerCacheById(int $sourceId)
-    {
-        $metaBundleSourceId = "";
-        if ($sourceId) {
-            $metaBundleSourceId = $sourceId;
-        }
-        $cache = Craft::$app->getCache();
-        TagDependency::invalidate($cache, $this::METACONTAINER_CACHE_TAG.$metaBundleSourceId);
-        Craft::info(
-            'Meta bundle cache cleared: '.$metaBundleSourceId,
-            __METHOD__
-        );
-    }
-
-    /**
-     * Invalidate a meta bundle cache
-     *
-     * @param string $uri
-     * @param int    $siteId
-     */
-    public function invalidateContainerCacheByPath(string $uri, int $siteId)
-    {
-        $cache = Craft::$app->getCache();
-        TagDependency::invalidate($cache, $this::METACONTAINER_CACHE_TAG.$uri.$siteId);
-        Craft::info(
-            'Meta container cache cleared: '.$uri.'/'.$siteId,
-            __METHOD__
-        );
-    }
-
-    // Protected Methods
-    // =========================================================================
-
-    /**
      * Generate an md5 hash from an object or array
      *
-     * @param MetaItem $data
+     * @param string|array|MetaItem $data
      *
      * @return string
      */
-    protected function getHash(MetaItem $data): string
+    protected function getHash($data): string
     {
-        if (is_object($data)) {
+        if (\is_object($data)) {
             $data = $data->toArray();
         }
-        if (is_array($data)) {
+        if (\is_array($data)) {
             $data = serialize($data);
         }
 

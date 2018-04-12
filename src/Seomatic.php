@@ -186,9 +186,9 @@ class Seomatic extends Plugin
             ? $this::DEVMODE_CACHE_DURATION
             : null;
         MetaValueHelper::cache();
-        // If devMode is on, always force the environment to be "local"
+        // If devMode is on, always force the environment to be 'local'
         if (self::$devMode) {
-            self::$settings->environment = "local";
+            self::$settings->environment = 'local';
         }
         $this->name = Seomatic::$settings->pluginName;
         // Install our event listeners only if our table schema exists
@@ -366,7 +366,7 @@ class Seomatic extends Plugin
                     'Sections::EVENT_AFTER_SAVE_SECTION',
                     __METHOD__
                 );
-                if (!empty($event->section) && $event->section->id !== null) {
+                if ($event->section !== null && $event->section->id !== null) {
                     Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
                         MetaBundlesService::SECTION_META_BUNDLE,
                         $event->section->id,
@@ -389,7 +389,7 @@ class Seomatic extends Plugin
                     'Sections::EVENT_AFTER_DELETE_SECTION',
                     __METHOD__
                 );
-                if (!empty($event->section) && $event->section->id !== null) {
+                if ($event->section !== null && $event->section->id !== null) {
                     Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
                         MetaBundlesService::SECTION_META_BUNDLE,
                         $event->section->id,
@@ -412,7 +412,7 @@ class Seomatic extends Plugin
                     'Categories::EVENT_AFTER_SAVE_GROUP',
                     __METHOD__
                 );
-                if (!empty($event->categoryGroup) && $event->categoryGroup->id !== null) {
+                if ($event->categoryGroup !== null && $event->categoryGroup->id !== null) {
                     Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
                         MetaBundlesService::CATEGORYGROUP_META_BUNDLE,
                         $event->categoryGroup->id,
@@ -435,7 +435,7 @@ class Seomatic extends Plugin
                     'Categories::EVENT_AFTER_DELETE_GROUP',
                     __METHOD__
                 );
-                if (!empty($event->categoryGroup) && $event->categoryGroup->id !== null) {
+                if ($event->categoryGroup !== null && $event->categoryGroup->id !== null) {
                     Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
                         MetaBundlesService::CATEGORYGROUP_META_BUNDLE,
                         $event->categoryGroup->id,
@@ -637,14 +637,14 @@ class Seomatic extends Plugin
             self::$view->registerAssetBundle(SeomaticAsset::class);
             /** @var  $entry Entry */
             $entry = $context['entry'];
-            if (!empty($entry) && !empty($entry->uri)) {
+            if ($entry !== null && $entry->uri !== null) {
                 Seomatic::$plugin->metaContainers->previewMetaContainers($entry->uri, $entry->siteId, true);
                 // Render our preview sidebar template
                 if (self::$settings->displayPreviewSidebar && self::$matchedElement) {
                     $html .= PluginTemplate::renderPluginTemplate('_sidebars/entry-preview.twig');
                 }
                 // Render our analysis sidebar template
-// @TODO: This will be added an upcoming "pro" edition
+// @TODO: This will be added an upcoming 'pro' edition
 //                if (self::$settings->displayAnalysisSidebar && self::$matchedElement) {
 //                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/entry-analysis.twig');
 //                }
@@ -658,14 +658,14 @@ class Seomatic extends Plugin
             self::$view->registerAssetBundle(SeomaticAsset::class);
             /** @var  $category Category */
             $category = $context['category'];
-            if (!empty($category) && !empty($category->uri)) {
+            if ($category !== null && $category->uri !== null) {
                 Seomatic::$plugin->metaContainers->previewMetaContainers($category->uri, $category->siteId, true);
                 // Render our preview sidebar template
                 if (self::$settings->displayPreviewSidebar) {
                     $html .= PluginTemplate::renderPluginTemplate('_sidebars/category-preview.twig');
                 }
                 // Render our analysis sidebar template
-// @TODO: This will be added an upcoming "pro" edition
+// @TODO: This will be added an upcoming 'pro' edition
 //                if (self::$settings->displayAnalysisSidebar) {
 //                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/category-analysis.twig');
 //                }
@@ -784,80 +784,82 @@ class Seomatic extends Plugin
         }
         // Dynamic permissions for the scripts
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($currentSiteId);
-        $scripts = Seomatic::$plugin->metaBundles->getContainerDataFromBundle(
-            $metaBundle,
-            MetaScriptContainer::CONTAINER_TYPE
-        );
         $scriptsPerms = [];
-        foreach ($scripts as $scriptHandle => $scriptData) {
-            $scriptsPerms["seomatic:tracking-scripts:${scriptHandle}"] = [
-                'label' => Craft::t('seomatic', $scriptData->name),
-            ];
+        if ($metaBundle !== null) {
+            $scripts = Seomatic::$plugin->metaBundles->getContainerDataFromBundle(
+                $metaBundle,
+                MetaScriptContainer::CONTAINER_TYPE
+            );
+            foreach ($scripts as $scriptHandle => $scriptData) {
+                $scriptsPerms['seomatic:tracking-scripts:${scriptHandle}'] = [
+                    'label' => Craft::t('seomatic', $scriptData->name),
+                ];
+            }
         }
 
         return [
-            "seomatic:dashboard"  => [
+            'seomatic:dashboard'  => [
                 'label' => Craft::t('seomatic', 'Dashboard'),
             ],
-            "seomatic:global-meta"      => [
+            'seomatic:global-meta'      => [
                 'label'  => Craft::t('seomatic', 'Edit Global Meta'),
                 'nested' => [
-                    "seomatic:global-meta:general"  => [
+                    'seomatic:global-meta:general'  => [
                         'label' => Craft::t('seomatic', 'General'),
                     ],
-                    "seomatic:global-meta:twitter"  => [
+                    'seomatic:global-meta:twitter'  => [
                         'label' => Craft::t('seomatic', 'Twitter'),
                     ],
-                    "seomatic:global-meta:facebook" => [
+                    'seomatic:global-meta:facebook' => [
                         'label' => Craft::t('seomatic', 'Facebook'),
                     ],
-                    "seomatic:global-meta:robots"   => [
+                    'seomatic:global-meta:robots'   => [
                         'label' => Craft::t('seomatic', 'Robots'),
                     ],
-                    "seomatic:global-meta:humans"   => [
+                    'seomatic:global-meta:humans'   => [
                         'label' => Craft::t('seomatic', 'Humans'),
                     ],
                 ],
             ],
-            "seomatic:content-meta"     => [
+            'seomatic:content-meta'     => [
                 'label'  => Craft::t('seomatic', 'Edit Content SEO'),
                 'nested' => [
-                    "seomatic:content-meta:general"  => [
+                    'seomatic:content-meta:general'  => [
                         'label' => Craft::t('seomatic', 'General'),
                     ],
-                    "seomatic:content-meta:twitter"  => [
+                    'seomatic:content-meta:twitter'  => [
                         'label' => Craft::t('seomatic', 'Twitter'),
                     ],
-                    "seomatic:content-meta:facebook" => [
+                    'seomatic:content-meta:facebook' => [
                         'label' => Craft::t('seomatic', 'Facebook'),
                     ],
-                    "seomatic:content-meta:sitemap"  => [
+                    'seomatic:content-meta:sitemap'  => [
                         'label' => Craft::t('seomatic', 'Sitemap'),
                     ],
                 ],
             ],
-            "seomatic:site-settings"    => [
+            'seomatic:site-settings'    => [
                 'label'  => Craft::t('seomatic', 'Edit Site Settings'),
                 'nested' => [
-                    "seomatic:site-settings:identity"     => [
+                    'seomatic:site-settings:identity'     => [
                         'label' => Craft::t('seomatic', 'Identity'),
                     ],
-                    "seomatic:site-settings:creator"      => [
+                    'seomatic:site-settings:creator'      => [
                         'label' => Craft::t('seomatic', 'Creator'),
                     ],
-                    "seomatic:site-settings:social" => [
+                    'seomatic:site-settings:social' => [
                         'label' => Craft::t('seomatic', 'Social Media'),
                     ],
-                    "seomatic:site-settings:miscellaneous" => [
+                    'seomatic:site-settings:miscellaneous' => [
                         'label' => Craft::t('seomatic', 'Miscellaneous'),
                     ],
                 ],
             ],
-            "seomatic:tracking-scripts" => [
+            'seomatic:tracking-scripts' => [
                 'label'  => Craft::t('seomatic', 'Edit Tracking Scripts'),
                 'nested' => $scriptsPerms,
             ],
-            "seomatic:plugin-settings"  => [
+            'seomatic:plugin-settings'  => [
                 'label' => Craft::t('seomatic', 'Edit Plugin Settings'),
             ],
         ];

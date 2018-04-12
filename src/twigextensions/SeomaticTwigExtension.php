@@ -12,10 +12,10 @@
 namespace nystudio107\seomatic\twigextensions;
 
 use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\variables\SeomaticVariable;
 
 use Craft;
+use yii\base\InvalidConfigException;
 
 /**
  * @author    nystudio107
@@ -37,7 +37,11 @@ class SeomaticTwigExtension extends \Twig_Extension implements \Twig_Extension_G
             $request = Craft::$app->getRequest();
             $requestPath = '/';
             if (!$request->getIsConsoleRequest()) {
-                $requestPath = $request->getPathInfo();
+                try {
+                    $requestPath = $request->getPathInfo();
+                } catch (InvalidConfigException $e) {
+                    Craft::error($e->getMessage(), __METHOD__);
+                }
             }
             // Load the meta containers for this page
             Seomatic::$plugin->metaContainers->loadMetaContainers($requestPath, null);
@@ -51,7 +55,7 @@ class SeomaticTwigExtension extends \Twig_Extension implements \Twig_Extension_G
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return 'Seomatic';
     }
@@ -61,7 +65,7 @@ class SeomaticTwigExtension extends \Twig_Extension implements \Twig_Extension_G
      *
      * @return array
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [];
     }
@@ -71,7 +75,7 @@ class SeomaticTwigExtension extends \Twig_Extension implements \Twig_Extension_G
      *
      * @return array
      */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [];
     }
