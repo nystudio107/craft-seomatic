@@ -125,17 +125,17 @@ class SeoSettings extends Field
         $config = [];
         // Handle incoming values potentially being JSON, an array, or an object
         if (!empty($value)) {
-            if (is_string($value)) {
+            if (\is_string($value)) {
                 $config = Json::decodeIfJson($value);
             }
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 $config = $value;
             }
-            if (is_object($value) && $value instanceof MetaBundle) {
+            if (\is_object($value) && $value instanceof MetaBundle) {
                 $config = $value->getAttributes();
             }
         } else {
-            /** @var Element $element */
+            /** @var null|Element $element */
             $config = MigrationHelper::configFromSeomaticMeta(
                 $element,
                 MigrationHelper::FIELD_MIGRATION_CONTEXT
@@ -145,7 +145,7 @@ class SeoSettings extends Field
         if (!empty($config)) {
             $elementName = '';
             /** @var Element $element */
-            if (!empty($element)) {
+            if ($element !== null) {
                 try {
                     $reflector = new \ReflectionClass($element);
                 } catch (\ReflectionException $e) {
@@ -176,18 +176,8 @@ class SeoSettings extends Field
             ConfigHelper::getConfigFromFile('fieldmeta/Bundle'),
             $config
         );
-        $model = MetaBundle::create($metaBundleDefaults);
 
-        return $model;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function serializeValue($value, ElementInterface $element = null)
-    {
-        /** @var MetaBundle $value */
-        return parent::serializeValue($value, $element);
+        return MetaBundle::create($metaBundleDefaults);
     }
 
     /**
@@ -243,7 +233,7 @@ class SeoSettings extends Field
         $variables['id'] = $id;
         $variables['nameSpacedId'] = $nameSpacedId;
         // Pull field sources
-        if (!empty($element)) {
+        if ($element !== null) {
             /** @var Element $element */
             $this->setContentFieldSourceVariables($element, 'Entry', $variables);
         }

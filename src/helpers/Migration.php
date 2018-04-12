@@ -29,7 +29,7 @@ class Migration
     const SECTION_MIGRATION_CONTEXT = 'section';
 
     const MIGRATION_CONTEXTS = [
-        self::FIELD_MIGRATION_CONTEXT => [
+        self::FIELD_MIGRATION_CONTEXT   => [
             'metaGlobalVars'     => [
                 'mainEntityOfPage' => 'seoMainEntityOfPage',
                 'seoTitle'         => 'seoTitle',
@@ -125,16 +125,16 @@ class Migration
     // =========================================================================
 
     /**
-     * @param Element $element
-     * @param string  $mapContext
+     * @param null|Element $element
+     * @param string       $mapContext
      *
      * @return array
      */
-    public static function configFromSeomaticMeta(Element $element, string $mapContext): array
+    public static function configFromSeomaticMeta($element, string $mapContext): array
     {
         $config = [];
 
-        if (empty($element)) {
+        if ($element === null) {
             return [];
         }
         if (empty(self::MIGRATION_CONTEXTS[$mapContext])) {
@@ -169,17 +169,17 @@ class Migration
         $config = [];
 
         foreach ($migrationFieldsArrays as $migrationFieldKey => $migrationFieldsArray) {
+            /** @var array $migrationFieldsArray */
             foreach ($migrationFieldsArray as $mapFieldTo => $mapFieldFrom) {
                 if (!empty($fieldValue[$mapFieldFrom])) {
                     $value = $fieldValue[$mapFieldFrom];
                     // Map the value if necessary
-                    if (!empty(self::FIELD_VALUE_MAP[$mapFieldTo])) {
-                        if (!empty(self::FIELD_VALUE_MAP[$mapFieldTo][$value])) {
-                            $value = self::FIELD_VALUE_MAP[$mapFieldTo][$value];
-                        }
+                    if (!empty(self::FIELD_VALUE_MAP[$mapFieldTo])
+                        && !empty(self::FIELD_VALUE_MAP[$mapFieldTo][$value])) {
+                        $value = self::FIELD_VALUE_MAP[$mapFieldTo][$value];
                     }
                     // Map it to an array of values if needs be
-                    if (in_array($mapFieldTo, self::ARRAY_VALUE_MAP)) {
+                    if (\in_array($mapFieldTo, self::ARRAY_VALUE_MAP, true)) {
                         $value = [$value];
                     }
                     $config[$migrationFieldKey][$mapFieldTo] = $value;
