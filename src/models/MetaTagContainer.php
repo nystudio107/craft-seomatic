@@ -14,8 +14,6 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 
-use Craft;
-
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -34,7 +32,7 @@ class MetaTagContainer extends MetaContainer
     /**
      * The data in this container
      *
-     * @var MetaTag
+     * @var MetaTag[] $data
      */
     public $data = [];
 
@@ -60,7 +58,7 @@ class MetaTagContainer extends MetaContainer
                                 $scenario['default'] = 'error';
                                 $scenario['warning'] = 'warning';
                                 $metaTagModel->debugMetaItem(
-                                    "Tag attribute: ",
+                                    'Tag attribute: ',
                                     $scenario
                                 );
                             }

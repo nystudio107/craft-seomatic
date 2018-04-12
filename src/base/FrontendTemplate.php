@@ -14,8 +14,6 @@ namespace nystudio107\seomatic\base;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\PluginTemplate;
 
-use craft\base\Model;
-
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -34,7 +32,7 @@ abstract class FrontendTemplate extends FluentModel implements FrontendTemplateI
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
@@ -66,10 +64,8 @@ abstract class FrontendTemplate extends FluentModel implements FrontendTemplateI
     /**
      * @inheritdoc
      */
-    public function render($params = []): string
+    public function render(array $params = []): string
     {
-        $html = PluginTemplate::renderPluginTemplate($this->path, $params);
-
-        return $html;
+        return PluginTemplate::renderPluginTemplate($this->path, $params);
     }
 }

@@ -11,7 +11,6 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\helpers\PluginTemplate as PluginTemplateHelper;
 
@@ -97,7 +96,7 @@ class EditableTemplate extends FrontendTemplate
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
@@ -111,10 +110,8 @@ class EditableTemplate extends FrontendTemplate
     /**
      * @inheritdoc
      */
-    public function render($params = []): string
+    public function render(array $params = []): string
     {
-        $html = PluginTemplateHelper::renderStringTemplate($this->templateString);
-
-        return $html;
+        return PluginTemplateHelper::renderStringTemplate($this->templateString);
     }
 }

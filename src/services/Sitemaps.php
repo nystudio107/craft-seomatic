@@ -20,6 +20,7 @@ use nystudio107\seomatic\models\SitemapTemplate;
 
 use Craft;
 use craft\base\Component;
+use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\events\RegisterUrlRulesEvent;
 use craft\helpers\UrlHelper;
@@ -135,7 +136,7 @@ class Sitemaps extends Component implements SitemapInterface
      *
      * @return string
      */
-    public function renderTemplate(string $template, $params = []): string
+    public function renderTemplate(string $template, array $params = []): string
     {
         $html = '';
         if (!empty($this->sitemapTemplateContainer->data[$template])) {
@@ -152,7 +153,7 @@ class Sitemaps extends Component implements SitemapInterface
      */
     public function submitSitemapIndex()
     {
-        if (Seomatic::$settings->sitemapsEnabled && Seomatic::$settings->environment == 'live') {
+        if (Seomatic::$settings->sitemapsEnabled && Seomatic::$settings->environment === 'live') {
             // Submit the sitemap to each search engine
             $searchEngineUrls = $this::SEARCH_ENGINE_SUBMISSION_URLS;
             foreach ($searchEngineUrls as &$url) {
@@ -190,7 +191,8 @@ class Sitemaps extends Component implements SitemapInterface
      */
     public function submitSitemapForElement(ElementInterface $element)
     {
-        if (Seomatic::$settings->sitemapsEnabled && Seomatic::$settings->environment == 'live') {
+        if (Seomatic::$settings->sitemapsEnabled && Seomatic::$settings->environment === 'live') {
+            /** @var Element $element */
             list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
                 = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
             // Submit the sitemap to each search engine

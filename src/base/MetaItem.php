@@ -96,7 +96,7 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
     {
         // Set any per-environment attributes
         $envVars = ArrayHelper::getValue($this->environment, Seomatic::$settings->environment);
-        if ($envVars) {
+        if (\is_array($envVars)) {
             foreach ($envVars as $key => $value) {
                 $data[$key] = $value;
             }
@@ -111,21 +111,17 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
     /**
      * @inheritdoc
      */
-    public function render($params = []): string
+    public function render(array $params = []): string
     {
-        $html = '';
-
-        return $html;
+        return '';
     }
 
     /**
      * @inheritdoc
      */
-    public function renderAttributes($params = []): array
+    public function renderAttributes(array $params = []): array
     {
-        $attributes = [];
-
-        return $attributes;
+        return [];
     }
 
     /**
@@ -135,8 +131,8 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
      * @param array  $scenarios
      */
     public function debugMetaItem(
-        $errorLabel = "Error: ",
-        $scenarios = ['default' => 'error']
+        $errorLabel = 'Error: ',
+        array $scenarios = ['default' => 'error']
     ) {
         $isMetaJsonLdModel = false;
         if (is_subclass_of($this, MetaJsonLd::class)) {
@@ -163,6 +159,7 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
                 Craft::info($errorMsg, __METHOD__);
                 foreach ($this->errors as $param => $errors) {
                     $errorMsg = Craft::t('seomatic', $errorLabel) . $param;
+                    /** @var array $errors */
                     foreach ($errors as $error) {
                         $errorMsg .= ' -> ' . $error;
                         // Change the error level depending on the error message if this is a MetaJsonLD object
@@ -180,8 +177,8 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
                     Craft::$logLevel($errorMsg, __METHOD__);
                     // Extra debugging info for MetaJsonLd objects
                     if ($isMetaJsonLdModel) {
-                        /** @var  $className MetaJsonLd */
-                        $className = get_class($this);
+                        /** @var MetaJsonLd $className  */
+                        $className = \get_class($this);
                         if (!empty($className::$schemaPropertyDescriptions[$param])) {
                             $errorMsg = Craft::t('seomatic', $errorLabel) . $param;
                             /** @var $className MetaJsonLd */
@@ -227,16 +224,16 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
 
         // See if any of the potentially array properties actually are
         foreach (static::ARRAY_PROPERTIES as $arrayProperty) {
-            if (!empty($options[$arrayProperty]) && is_array($options[$arrayProperty])) {
-                $optionsCount = count($options[$arrayProperty]) > $optionsCount
-                    ? count($options[$arrayProperty]) : $optionsCount;
+            if (!empty($options[$arrayProperty]) && \is_array($options[$arrayProperty])) {
+                $optionsCount = \count($options[$arrayProperty]) > $optionsCount
+                    ? \count($options[$arrayProperty]) : $optionsCount;
             }
         }
         // Return an array of resulting options
         while ($optionsCount--) {
             $resultOptions = $options;
             foreach ($resultOptions as $key => $value) {
-                $resultOptions[$key] = (is_array($value) && isset($value[$optionsCount]))
+                $resultOptions[$key] = (\is_array($value) && isset($value[$optionsCount]))
                     ? $value[$optionsCount] : $value;
             }
             $result[] = $resultOptions;
@@ -248,23 +245,22 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
     /**
      * Validate the passed in $attribute as either an array or a string
      *
-     * @param string $attribute the attribute currently being validated
-     * @param mixed  $params    the value of the "params" given in the rule
+     * @param mixed $attribute the attribute currently being validated
+     * @param mixed $params    the value of the "params" given in the rule
      */
     public function validateStringOrArray(
         $attribute,
         $params
     ) {
         $validated = false;
-        if (is_string($attribute)) {
+        if (\is_string($attribute)) {
             $validated = true;
         }
-        if (is_array($attribute)) {
+        if (\is_array($attribute)) {
             $validated = true;
         }
         if (!$validated) {
             $this->addError($attribute, 'Must be either a string or an array');
         }
     }
-
 }

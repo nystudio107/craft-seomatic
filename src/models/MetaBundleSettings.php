@@ -13,11 +13,6 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\base\VarsModel;
 
-use Craft;
-use craft\validators\ArrayValidator;
-
-use yii\web\ServerErrorHttpException;
-
 /**
  * @inheritdoc
  *
@@ -37,9 +32,7 @@ class MetaBundleSettings extends VarsModel
      */
     public static function create(array $config = [])
     {
-        $model = new MetaBundleSettings($config);
-
-        return $model;
+        return new MetaBundleSettings($config);
     }
 
     // Public Properties
@@ -259,7 +252,7 @@ class MetaBundleSettings extends VarsModel
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [

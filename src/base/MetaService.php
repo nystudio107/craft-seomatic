@@ -41,7 +41,7 @@ abstract class MetaService extends Component implements MetaServiceInterface
     /**
      * @inheritdoc
      */
-    public function create($config = [], $add = true)
+    public function create(array $config = [], $add = true)
     {
     }
 

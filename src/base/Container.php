@@ -38,9 +38,9 @@ abstract class Container extends Model implements ContainerInterface
      *
      * @return null|Container
      */
-    public static function create($config = [])
+    public static function create(array $config = [])
     {
-        $className = get_called_class();
+        $className = static::class;
         /** @var Container $model */
         $model = new $className($config);
         $model->normalizeContainerData();
@@ -50,13 +50,6 @@ abstract class Container extends Model implements ContainerInterface
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The data in this container
-     *
-     * @var array
-     */
-    public $data = [];
 
     // Public Methods
     // =========================================================================
@@ -74,11 +67,11 @@ abstract class Container extends Model implements ContainerInterface
      */
     public function getData(string $key)
     {
-        if (!empty($this->data[$key])) {
-            return $this->data[$key];
-        } else {
+        if (empty($this->data[$key])) {
             return null;
         }
+
+        return $this->data[$key];
     }
 
     /**
@@ -92,7 +85,7 @@ abstract class Container extends Model implements ContainerInterface
     /**
      * @inheritdoc
      */
-    public function render($params = []): string
+    public function render(array $params = []): string
     {
         return '';
     }
