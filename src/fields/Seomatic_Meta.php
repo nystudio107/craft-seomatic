@@ -27,37 +27,37 @@ class Seomatic_Meta extends Field
     // =========================================================================
 
     public $assetSources = [];
-    public $seoMainEntityCategory = "";
-    public $seoMainEntityOfPage = "";
-    public $seoTitleSource = "";
-    public $seoTitleSourceField = "";
-    public $seoTitle = "";
+    public $seoMainEntityCategory = '';
+    public $seoMainEntityOfPage = '';
+    public $seoTitleSource = '';
+    public $seoTitleSourceField = '';
+    public $seoTitle = '';
     public $seoTitleSourceChangeable = true;
-    public $seoDescriptionSource = "";
-    public $seoDescriptionSourceField = "";
-    public $seoDescription = "";
+    public $seoDescriptionSource = '';
+    public $seoDescriptionSourceField = '';
+    public $seoDescription = '';
     public $seoDescriptionSourceChangeable = true;
-    public $seoKeywordsSource = "";
-    public $seoKeywordsSourceField = "";
-    public $seoKeywords = "";
+    public $seoKeywordsSource = '';
+    public $seoKeywordsSourceField = '';
+    public $seoKeywords = '';
     public $seoKeywordsSourceChangeable = true;
-    public $seoImageIdSource = "";
-    public $seoImageIdSourceField = "";
+    public $seoImageIdSource = '';
+    public $seoImageIdSourceField = '';
     public $seoImageIdSourceChangeable = true;
-    public $seoImageTransform = "";
-    public $twitterCardType = "";
+    public $seoImageTransform = '';
+    public $twitterCardType = '';
     public $twitterCardTypeChangeable = true;
-    public $seoTwitterImageIdSource = "";
-    public $seoTwitterImageIdSourceField = "";
+    public $seoTwitterImageIdSource = '';
+    public $seoTwitterImageIdSourceField = '';
     public $seoTwitterImageIdSourceChangeable = true;
-    public $seoTwitterImageTransform = "";
-    public $openGraphType = "";
+    public $seoTwitterImageTransform = '';
+    public $openGraphType = '';
     public $openGraphTypeChangeable = true;
-    public $seoFacebookImageIdSource = "";
-    public $seoFacebookImageIdSourceField = "";
+    public $seoFacebookImageIdSource = '';
+    public $seoFacebookImageIdSourceField = '';
     public $seoFacebookImageIdSourceChangeable = true;
-    public $seoFacebookImageTransform = "";
-    public $robots = "";
+    public $seoFacebookImageTransform = '';
+    public $robots = '';
     public $robotsChangeable = true;
 
     // Static Methods
@@ -108,7 +108,7 @@ class Seomatic_Meta extends Field
     public function normalizeValue($value, ElementInterface $element = null)
     {
         if (!empty($value)) {
-            if (is_string($value)) {
+            if (\is_string($value)) {
                 $value = Json::decodeIfJson($value);
             }
         }
@@ -121,7 +121,7 @@ class Seomatic_Meta extends Field
      */
     public function getSettingsHtml()
     {
-        return "<p>The SEOmatic Meta field type is deprecated in Craft 3. Use the SEO Settings field instead.</p>";
+        return '<p>The SEOmatic Meta field type is deprecated in Craft 3. Use the SEO Settings field instead.</p>';
     }
 
     /**
@@ -129,6 +129,6 @@ class Seomatic_Meta extends Field
      */
     public function getInputHtml($value, ElementInterface $element = null): string
     {
-        return "";
+        return '';
     }
 }
