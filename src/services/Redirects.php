@@ -11,12 +11,8 @@
 
 namespace nystudio107\seomatic\services;
 
-use nystudio107\seomatic\Seomatic;
-
 use Craft;
 use craft\base\Component;
-use craft\helpers\UrlHelper;
-use craft\web\UrlManager;
 
 use yii\caching\TagDependency;
 

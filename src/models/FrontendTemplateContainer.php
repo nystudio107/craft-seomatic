@@ -26,7 +26,7 @@ class FrontendTemplateContainer extends SeomaticContainer
     /**
      * The FrontendTemplates in this container
      *
-     * @var EditableTemplate
+     * @var EditableTemplate[] $data
      */
     public $data = [];
 
@@ -36,7 +36,7 @@ class FrontendTemplateContainer extends SeomaticContainer
     /**
      * @inheritdoc
      */
-    public function render($params = []): string
+    public function render(array $params = []): string
     {
         return '';
     }

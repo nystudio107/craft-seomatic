@@ -32,7 +32,7 @@ class MetaLinkContainer extends MetaContainer
     /**
      * The data in this container
      *
-     * @var MetaLink
+     * @var MetaLink[] $data
      */
     public $data = [];
 
@@ -55,7 +55,7 @@ class MetaLinkContainer extends MetaContainer
                             // If `devMode` is enabled, validate the Meta Link and output any model errors
                             if (Seomatic::$devMode) {
                                 $metaLinkModel->debugMetaItem(
-                                    "Link attribute: "
+                                    'Link attribute: '
                                 );
                             }
                         }

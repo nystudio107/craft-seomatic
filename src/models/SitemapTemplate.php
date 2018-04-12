@@ -86,7 +86,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
@@ -106,7 +106,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
     /**
      * @inheritdoc
      */
-    public function render($params = []): string
+    public function render(array $params = []): string
     {
         $cache = Craft::$app->getCache();
         $groupId = $params['groupId'];
@@ -258,7 +258,6 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                             foreach ($matrixBlocks as $matrixBlock) {
                                 $assetFields = FieldHelper::matrixFieldsOfType($matrixBlock, AssetsField::class);
                                 foreach ($assetFields as $assetField) {
-                                    /** @var MatrixBlock $matrixBlock */
                                     foreach ($matrixBlock[$assetField]->all() as $asset) {
                                         $this->assetSitemapItem($asset, $metaBundle, $lines);
                                     }

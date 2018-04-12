@@ -50,9 +50,8 @@ class MetaLink extends MetaItem
         foreach ($config as $key => $value) {
             ArrayHelper::rename($config, $key, Inflector::variablize($key));
         }
-        $model = new MetaLink($config);
 
-        return $model;
+        return new MetaLink($config);
     }
 
     // Public Properties
@@ -156,7 +155,7 @@ class MetaLink extends MetaItem
         if ($this->scenario === 'default') {
         }
 
-        return $fields;
+        return parent::fields();
     }
 
     /**
@@ -168,7 +167,7 @@ class MetaLink extends MetaItem
         if ($shouldRender) {
             MetaValueHelper::parseArray($data);
             // Only render if there's more than one attribute
-            if (count($data) > 1) {
+            if (\count($data) > 1) {
                 // Special-case scenarios
                 if (Seomatic::$devMode) {
                 }
@@ -189,7 +188,7 @@ class MetaLink extends MetaItem
     /**
      * @inheritdoc
      */
-    public function render($params = []):string
+    public function render(array $params = []):string
     {
         $html = '';
         $configs = $this->tagAttributesArray();
@@ -206,7 +205,7 @@ class MetaLink extends MetaItem
     /**
      * @inheritdoc
      */
-    public function renderAttributes($params = []): array
+    public function renderAttributes(array $params = []): array
     {
         $attributes = [];
 
@@ -220,5 +219,4 @@ class MetaLink extends MetaItem
 
         return $attributes;
     }
-
 }

@@ -22,9 +22,9 @@ trait MetaContainerTrait
     // =========================================================================
 
     /**
-     * The data in this container
+     * The MetaItems in this container
      *
-     * @var MetaItem
+     * @var MetaItem[] $data
      */
     public $data = [];
 }

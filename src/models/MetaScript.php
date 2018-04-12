@@ -32,6 +32,41 @@ class MetaScript extends MetaItem
 
     // Static Methods
     // =========================================================================
+    /**
+     * @var string
+     */
+    public $name;
+
+    // Public Properties
+    // =========================================================================
+    /**
+     * @var string
+     */
+    public $description;
+    /**
+     * @var string
+     */
+    public $templatePath;
+    /**
+     * @var string
+     */
+    public $templateString;
+    /**
+     * @var int
+     */
+    public $position = View::POS_HEAD;
+    /**
+     * @var
+     */
+    public $bodyTemplatePath;
+    /**
+     * @var int
+     */
+    public $bodyPosition = View::POS_BEGIN;
+    /**
+     * @var array
+     */
+    public $vars;
 
     /**
      * @param array $config
@@ -48,49 +83,6 @@ class MetaScript extends MetaItem
 
         return $model;
     }
-
-    // Public Properties
-    // =========================================================================
-
-    /**
-     * @var string
-     */
-    public $name;
-
-    /**
-     * @var string
-     */
-    public $description;
-
-    /**
-     * @var string
-     */
-    public $templatePath;
-
-    /**
-     * @var string
-     */
-    public $templateString;
-
-    /**
-     * @var int
-     */
-    public $position = View::POS_HEAD;
-
-    /**
-     * @var
-     */
-    public $bodyTemplatePath;
-
-    /**
-     * @var int
-     */
-    public $bodyPosition = View::POS_BEGIN;
-
-    /**
-     * @var array
-     */
-    public $vars;
 
     // Public Methods
     // =========================================================================
@@ -121,7 +113,7 @@ class MetaScript extends MetaItem
         } else {
             // Next try it from the Craft template directory
             $path = Craft::getAlias('@templates/')
-                . $this->templatePath;
+                .$this->templatePath;
             if (file_exists($path)) {
                 $this->templateString = @file_get_contents($path);
             }
@@ -143,13 +135,13 @@ class MetaScript extends MetaItem
                     'templateString',
                     'bodyTemplatePath',
                 ],
-                'string'
+                'string',
             ],
             [
                 [
                     'position',
                 ],
-                'integer'
+                'integer',
             ],
             [
                 [
@@ -160,7 +152,7 @@ class MetaScript extends MetaItem
                     'bodyTemplatePath',
                     'position',
                 ],
-                'required'
+                'required',
             ],
             [['vars'], 'safe'],
         ]);
@@ -210,13 +202,11 @@ class MetaScript extends MetaItem
      *
      * @return string
      */
-    public function renderBodyHtml($params = []):string
+    public function renderBodyHtml(array $params = []): string
     {
         $html = '';
-        if (!empty($this->bodyTemplatePath)) {
-            if ($this->prepForRender($params)) {
-                $html = PluginTemplateHelper::renderPluginTemplate($this->bodyTemplatePath, $this->vars);
-            }
+        if (!empty($this->bodyTemplatePath) && $this->prepForRender($params)) {
+            $html = PluginTemplateHelper::renderPluginTemplate($this->bodyTemplatePath, $this->vars);
         }
 
         return $html;
@@ -225,7 +215,7 @@ class MetaScript extends MetaItem
     /**
      * @inheritdoc
      */
-    public function render($params = []):string
+    public function render(array $params = []): string
     {
         $html = '';
         if ($this->prepForRender($params)) {
@@ -238,7 +228,7 @@ class MetaScript extends MetaItem
     /**
      * @inheritdoc
      */
-    public function renderAttributes($params = []): array
+    public function renderAttributes(array $params = []): array
     {
         $attributes = [];
 
@@ -248,5 +238,4 @@ class MetaScript extends MetaItem
 
         return $attributes;
     }
-
 }

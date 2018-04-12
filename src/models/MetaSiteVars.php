@@ -12,7 +12,6 @@
 namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\base\VarsModel;
-use nystudio107\seomatic\models\Entity;
 
 use Craft;
 use craft\helpers\Json as JsonHelper;
@@ -126,7 +125,7 @@ class MetaSiteVars extends VarsModel
                 $info = null;
             }
             $siteName = Craft::$app->config->general->siteName;
-            if (is_array($siteName)) {
+            if (\is_array($siteName)) {
                 $siteName = reset($siteName);
             }
             $this->siteName = $siteName ?? $info->name;
@@ -136,7 +135,7 @@ class MetaSiteVars extends VarsModel
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [
@@ -170,18 +169,17 @@ class MetaSiteVars extends VarsModel
         // Decode any JSON data
         $properties = $this->getAttributes();
         foreach ($properties as $property => $value) {
-            if (!empty($value) && is_string($value)) {
+            if (!empty($value) && \is_string($value)) {
                 $this->$property = JsonHelper::decodeIfJson($value);
             }
         }
         // Identity
-        if (isset($this->identity) && is_array($this->identity)) {
+        if ($this->identity !== null && \is_array($this->identity)) {
             $this->identity = new Entity($this->identity);
         }
         // Creator
-        if (isset($this->creator) && is_array($this->creator)) {
+        if ($this->creator !== null && \is_array($this->creator)) {
             $this->creator = new Entity($this->creator);
         }
     }
-
 }

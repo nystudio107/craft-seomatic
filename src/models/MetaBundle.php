@@ -128,7 +128,7 @@ class MetaBundle extends Model
      *
      * @return null|MetaBundle
      */
-    public static function create($config = [])
+    public static function create(array $config = [])
     {
         $model = new MetaBundle($config);
         if ($model) {
@@ -149,41 +149,41 @@ class MetaBundle extends Model
         // Decode any JSON data
         $properties = $this->getAttributes();
         foreach ($properties as $property => $value) {
-            if (!empty($value) && is_string($value)) {
+            if (!empty($value) && \is_string($value)) {
                 $this->$property = JsonHelper::decodeIfJson($value);
             }
         }
 
         // Meta global variables
-        if (isset($this->metaGlobalVars) && is_array($this->metaGlobalVars)) {
+        if ($this->metaGlobalVars !== null && \is_array($this->metaGlobalVars)) {
             $this->metaGlobalVars = MetaGlobalVars::create($this->metaGlobalVars);
         }
         // Meta site variables
-        if (isset($this->metaSiteVars) && is_array($this->metaSiteVars)) {
+        if ($this->metaSiteVars !== null && \is_array($this->metaSiteVars)) {
             $this->metaSiteVars = MetaSiteVars::create($this->metaSiteVars);
         }
         // Meta sitemap variables
-        if (isset($this->metaSitemapVars) && is_array($this->metaSitemapVars)) {
+        if ($this->metaSitemapVars !== null && \is_array($this->metaSitemapVars)) {
             $this->metaSitemapVars = MetaSitemapVars::create($this->metaSitemapVars);
         }
         // Meta bundle settings
-        if (isset($this->metaBundleSettings) && is_array($this->metaBundleSettings)) {
+        if ($this->metaBundleSettings !== null && \is_array($this->metaBundleSettings)) {
             $this->metaBundleSettings = MetaBundleSettings::create($this->metaBundleSettings);
         }
         // Create our variable so that meta containers can be parsed based on dynamic values
         // Make sure Twig is loaded and instantiated first by priming the pump
-        MetaValueHelper::parseString("{prime}");
+        MetaValueHelper::parseString('{prime}');
         $oldSeomaticVariable = Seomatic::$seomaticVariable;
         // Merge these global vars with the MetaContainers global vars
         $globalVars = [];
-        if (!empty(Seomatic::$plugin->metaContainers->metaGlobalVars)) {
+        if (Seomatic::$plugin->metaContainers->metaGlobalVars !== null) {
             $globalVars = Seomatic::$plugin->metaContainers->metaGlobalVars->getAttributes();
         }
         $thisGlobalVars = $this->metaGlobalVars->getAttributes();
         $thisGlobals = MetaGlobalVars::create(ArrayHelper::merge($globalVars, $thisGlobalVars));
         // Merge these site vars with the MetaContainers site vars
         $siteVars = [];
-        if (!empty(Seomatic::$plugin->metaContainers->metaSiteVars)) {
+        if (Seomatic::$plugin->metaContainers->metaSiteVars !== null) {
             $siteVars = Seomatic::$plugin->metaContainers->metaSiteVars->getAttributes();
         }
         $thisSiteVars = $this->metaSiteVars->getAttributes();
@@ -206,11 +206,11 @@ class MetaBundle extends Model
             }
         }
         // Redirects container
-        if (isset($this->redirectsContainer)) {
+        if ($this->redirectsContainer !== null) {
             //$this->redirectsContainer = RedirectsContainer::create($this->redirectsContainer);
         }
         // Frontend templates
-        if (isset($this->frontendTemplatesContainer) && is_array($this->frontendTemplatesContainer)) {
+        if ($this->frontendTemplatesContainer !== null && \is_array($this->frontendTemplatesContainer)) {
             $this->frontendTemplatesContainer = FrontendTemplateContainer::create($this->frontendTemplatesContainer);
         }
         // Restore the $seomaticVariable
@@ -233,7 +233,7 @@ class MetaBundle extends Model
      * Validation rules
      * @return array the validation rules
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = [
             [

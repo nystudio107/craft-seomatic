@@ -85,7 +85,7 @@ class Settings extends FluentModel
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             ['pluginName', 'string'],

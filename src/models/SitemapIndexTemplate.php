@@ -67,7 +67,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
@@ -89,7 +89,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
      *
      * @throws NotFoundHttpException if the sitemap.xml doesn't exist
      */
-    public function render($params = []): string
+    public function render(array $params = []): string
     {
         $cache = Craft::$app->getCache();
         $groupId = $params['groupId'];
@@ -121,7 +121,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             $metaBundles = Seomatic::$plugin->metaBundles->getContentMetaBundles(true);
             /** @var  $metaBundle MetaBundle */
             foreach ($metaBundles as $metaBundle) {
-                if (in_array($metaBundle->sourceSiteId, $groupSiteIds)
+                if (\in_array($metaBundle->sourceSiteId, $groupSiteIds, true)
                     && $metaBundle->metaSitemapVars->sitemapUrls) {
                     $sitemapUrl = Seomatic::$plugin->sitemaps->sitemapUrlForBundle(
                         $metaBundle->sourceBundleType,

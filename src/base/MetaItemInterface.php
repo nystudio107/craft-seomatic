@@ -43,7 +43,7 @@ interface MetaItemInterface
      *
      * @return string The rendered meta item
      */
-    public function render($params = []): string;
+    public function render(array $params = []): string;
 
     /**
      * Render the meta item as an array of attributes
@@ -52,6 +52,5 @@ interface MetaItemInterface
      *
      * @return array
      */
-    public function renderAttributes($params = []): array;
-
+    public function renderAttributes(array $params = []): array;
 }

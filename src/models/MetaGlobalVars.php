@@ -36,9 +36,7 @@ class MetaGlobalVars extends VarsModel
      */
     public static function create(array $config = [])
     {
-        $model = new MetaGlobalVars($config);
-
-        return $model;
+        return new MetaGlobalVars($config);
     }
 
     // Public Properties
@@ -175,20 +173,9 @@ class MetaGlobalVars extends VarsModel
     }
 
     /**
-     * Parse the model properties
-     */
-    public function parseProperties()
-    {
-        // Parse the meta global vars
-        $attributes = $this->getAttributes();
-        MetaValueHelper::parseArray($attributes);
-        $this->setAttributes($attributes);
-    }
-
-    /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [
