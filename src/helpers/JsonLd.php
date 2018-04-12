@@ -54,9 +54,8 @@ class JsonLd extends Json
             $options |= JSON_PRETTY_PRINT;
         }
         self::$recursionLevel = 0;
-        $result = parent::encode($value, $options);
 
-        return $result;
+        return parent::encode($value, $options);
     }
 
     // Protected Static Methods
@@ -97,7 +96,7 @@ class JsonLd extends Json
         MetaValueHelper::parseArray($array);
         ksort($array);
         // If we have only one item in the array, return an empty array
-        if (count($array) <= 1) {
+        if (\count($array) <= 1) {
             $array = [];
         }
     }
@@ -118,7 +117,7 @@ class JsonLd extends Json
             return $array;
         }
         $keys = array_keys($array);
-        $keys[array_search($oldKey, $keys)] = $newKey;
+        $keys[array_search($oldKey, $keys, true)] = $newKey;
 
         return array_combine($keys, $array);
     }

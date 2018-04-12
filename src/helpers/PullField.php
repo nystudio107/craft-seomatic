@@ -145,7 +145,7 @@ class PullField
                 $seoField = $fields['seoField'];
                 $transformName = $fields['transformName'];
                 // Special-case Twitter transforms
-                if ($transformName == 'twitter') {
+                if ($transformName === 'twitter') {
                     $transformName = 'twitter-summary';
                     if (!empty($globalsSettings['twitterCard']) && $globalsSettings['twitterCard'] === 'summary_large_image') {
                         $transformName = 'twitter-large';

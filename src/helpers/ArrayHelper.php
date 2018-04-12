@@ -11,9 +11,6 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use yii\helpers\ReplaceArrayValue;
-use yii\helpers\UnsetArrayValue;
-
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -30,10 +27,10 @@ class ArrayHelper extends \craft\helpers\ArrayHelper
      *
      * @return array
      */
-    public static function arrayFilterRecursive(array $array, callable $callback)
+    public static function arrayFilterRecursive(array $array, callable $callback): array
     {
         foreach ($array as $k => $v) {
-            if (is_array($v)) {
+            if (\is_array($v)) {
                 $array[$k] = self::arrayFilterRecursive($v, $callback);
             } else {
                 if ($callback($v, $k)) {
@@ -51,13 +48,13 @@ class ArrayHelper extends \craft\helpers\ArrayHelper
      *
      * @return bool
      */
-    public static function unsetEmptyChildren($value, $key)
+    public static function unsetEmptyChildren($value, $key): bool
     {
-        if (is_bool($value)) {
+        if (\is_bool($value)) {
             return false;
-        } else {
-            return empty($value) ? true : false;
         }
+
+        return empty($value) ? true : false;
     }
 
     /**
@@ -66,8 +63,8 @@ class ArrayHelper extends \craft\helpers\ArrayHelper
      *
      * @return bool
      */
-    public static function unsetNullChildren($value, $key)
+    public static function unsetNullChildren($value, $key): bool
     {
-        return $value == null ? true : false;
+        return $value === null;
     }
 }

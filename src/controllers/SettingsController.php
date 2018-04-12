@@ -80,7 +80,7 @@ class SettingsController extends Controller
     const SCHEMA_TYPES = [
         'siteSpecificType',
         'siteSubType',
-        'siteType'
+        'siteType',
     ];
 
     // Protected Properties
@@ -147,19 +147,19 @@ class SettingsController extends Controller
         // Calulate the setup grades
         $variables['contentSetupStats'] = [];
         $variables['setupGrades'] = self::SETUP_GRADES;
-        $numFields = count(self::SEO_SETUP_FIELDS);
-        $numGrades = count(self::SETUP_GRADES);
+        $numFields = \count(self::SEO_SETUP_FIELDS);
+        $numGrades = \count(self::SETUP_GRADES);
         while ($numGrades--) {
             $variables['contentSetupStats'][] = 0;
         }
-        $numGrades = count(self::SETUP_GRADES);
+        $numGrades = \count(self::SETUP_GRADES);
         // Content SEO grades
         $variables['metaBundles'] = Seomatic::$plugin->metaBundles->getContentMetaBundlesForSiteId($siteId);
         /** @var MetaBundle $metaBundle */
         foreach ($variables['metaBundles'] as $metaBundle) {
             $stat = 0;
             foreach (self::SEO_SETUP_FIELDS as $setupField) {
-                $stat += intval(!empty($metaBundle->metaGlobalVars[$setupField]));
+                $stat += (int)!empty($metaBundle->metaGlobalVars[$setupField]);
             }
             $stat = round($numGrades - (($stat * $numGrades) / $numFields));
             if ($stat >= $numGrades) {
@@ -168,23 +168,25 @@ class SettingsController extends Controller
             $variables['contentSetupStats'][$stat]++;
         }
         // Global SEO grades
-        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle(intval($siteId));
+        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle((int)$siteId);
         $stat = 0;
-        foreach (self::SEO_SETUP_FIELDS as $setupField) {
-            $stat += intval(!empty($metaBundle->metaGlobalVars[$setupField]));
+        if ($metaBundle !== null) {
+            foreach (self::SEO_SETUP_FIELDS as $setupField) {
+                $stat += (int)!empty($metaBundle->metaGlobalVars[$setupField]);
+            }
+            $stat = round(($stat / $numFields) * 100);
+            $variables['globalSetupStat'] = $stat;
+            // Site Settings grades
+            $numFields = \count(self::SITE_SETUP_FIELDS) + \count(self::IDENTITY_SETUP_FIELDS);
+            $stat = 0;
+            foreach (self::SITE_SETUP_FIELDS as $setupField) {
+                $stat += (int)!empty($metaBundle->metaSiteVars[$setupField]);
+            }
+            foreach (self::IDENTITY_SETUP_FIELDS as $setupField) {
+                $stat += (int)!empty($metaBundle->metaSiteVars->identity[$setupField]);
+            }
+            $stat = round(($stat / $numFields) * 100);
         }
-        $stat = round(($stat / $numFields) * 100);
-        $variables['globalSetupStat'] = $stat;
-        // Site Settings grades
-        $numFields = count(self::SITE_SETUP_FIELDS) + count(self::IDENTITY_SETUP_FIELDS);
-        $stat = 0;
-        foreach (self::SITE_SETUP_FIELDS as $setupField) {
-            $stat += intval(!empty($metaBundle->metaSiteVars[$setupField]));
-        }
-        foreach (self::IDENTITY_SETUP_FIELDS as $setupField) {
-            $stat += intval(!empty($metaBundle->metaSiteVars->identity[$setupField]));
-        }
-        $stat = round(($stat / $numFields) * 100);
         $variables['siteSetupStat'] = $stat;
 
         // Render the template
@@ -248,33 +250,35 @@ class SettingsController extends Controller
         $variables['controllerHandle'] = 'global'.'/'.$subSection;
         $variables['currentSubSection'] = $subSection;
         // Meta bundle settings
-        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle(intval($variables['currentSiteId']));
-        $variables['metaGlobalVars'] = $metaBundle->metaGlobalVars;
-        $variables['metaSitemapVars'] = $metaBundle->metaSitemapVars;
-        $variables['metaBundleSettings'] = $metaBundle->metaBundleSettings;
-        // Template container settings
-        $templateContainers = $metaBundle->frontendTemplatesContainer->data;
-        $variables['robotsTemplate'] = $templateContainers[FrontendTemplates::ROBOTS_TXT_HANDLE];
-        $variables['humansTemplate'] = $templateContainers[FrontendTemplates::HUMANS_TXT_HANDLE];
-        // Image selectors
-        $bundleSettings = $metaBundle->metaBundleSettings;
-        $variables['elementType'] = Asset::class;
-        $variables['seoImageElements'] = ImageTransformHelper::assetElementsFromIds(
-            $bundleSettings->seoImageIds,
-            $siteId
-        );
-        $variables['twitterImageElements'] = ImageTransformHelper::assetElementsFromIds(
-            $bundleSettings->twitterImageIds,
-            $siteId
-        );
-        $variables['ogImageElements'] = ImageTransformHelper::assetElementsFromIds(
-            $bundleSettings->ogImageIds,
-            $siteId
-        );
+        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle((int)$variables['currentSiteId']);
+        if ($metaBundle !== null) {
+            $variables['metaGlobalVars'] = $metaBundle->metaGlobalVars;
+            $variables['metaSitemapVars'] = $metaBundle->metaSitemapVars;
+            $variables['metaBundleSettings'] = $metaBundle->metaBundleSettings;
+            // Template container settings
+            $templateContainers = $metaBundle->frontendTemplatesContainer->data;
+            $variables['robotsTemplate'] = $templateContainers[FrontendTemplates::ROBOTS_TXT_HANDLE];
+            $variables['humansTemplate'] = $templateContainers[FrontendTemplates::HUMANS_TXT_HANDLE];
+            // Image selectors
+            $bundleSettings = $metaBundle->metaBundleSettings;
+            $variables['elementType'] = Asset::class;
+            $variables['seoImageElements'] = ImageTransformHelper::assetElementsFromIds(
+                $bundleSettings->seoImageIds,
+                $siteId
+            );
+            $variables['twitterImageElements'] = ImageTransformHelper::assetElementsFromIds(
+                $bundleSettings->twitterImageIds,
+                $siteId
+            );
+            $variables['ogImageElements'] = ImageTransformHelper::assetElementsFromIds(
+                $bundleSettings->ogImageIds,
+                $siteId
+            );
+        }
         // Preview the meta containers
         Seomatic::$plugin->metaContainers->previewMetaContainers(
             MetaBundles::GLOBAL_META_BUNDLE,
-            intval($variables['currentSiteId'])
+            (int)$variables['currentSiteId']
         );
 
         // Render the template
@@ -285,7 +289,7 @@ class SettingsController extends Controller
      * @return Response
      * @throws \yii\web\BadRequestHttpException
      */
-    public function actionSaveGlobal()
+    public function actionSaveGlobal(): Response
     {
         $this->requirePostRequest();
         $request = Craft::$app->getRequest();
@@ -301,7 +305,7 @@ class SettingsController extends Controller
         // The site settings for the appropriate meta bundle
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle) {
-            if (is_array($globalsSettings) && is_array($bundleSettings)) {
+            if (\is_array($globalsSettings) && \is_array($bundleSettings)) {
                 PullFieldHelper::parseTextSources($elementName, $globalsSettings, $bundleSettings);
                 PullFieldHelper::parseImageSources($elementName, $globalsSettings, $bundleSettings, $siteId);
                 $globalsSettings['mainEntityOfPage'] = $this->getSpecificEntityType($bundleSettings);
@@ -310,11 +314,11 @@ class SettingsController extends Controller
             }
             $templateContainers = $metaBundle->frontendTemplatesContainer->data;
             $robotsContainer = $templateContainers[FrontendTemplates::ROBOTS_TXT_HANDLE];
-            if (!empty($robotsContainer) && is_array($robotsTemplate)) {
+            if ($robotsContainer !== null && \is_array($robotsTemplate)) {
                 $robotsContainer->setAttributes($robotsTemplate);
             }
             $humansContainer = $templateContainers[FrontendTemplates::HUMANS_TXT_HANDLE];
-            if (!empty($humansContainer) && is_array($humansTemplate)) {
+            if ($humansContainer !== null && \is_array($humansTemplate)) {
                 $humansContainer->setAttributes($humansTemplate);
             }
 
@@ -421,15 +425,18 @@ class SettingsController extends Controller
         $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
             $sourceBundleType,
             $sourceHandle,
-            intval($variables['currentSiteId'])
+            (int)$variables['currentSiteId']
         );
-        $variables['metaGlobalVars'] = $metaBundle->metaGlobalVars;
-        $variables['metaSitemapVars'] = $metaBundle->metaSitemapVars;
-        $variables['metaBundleSettings'] = $metaBundle->metaBundleSettings;
-        $variables['currentSourceHandle'] = $metaBundle->sourceHandle;
-        $variables['currentSourceBundleType'] = $metaBundle->sourceBundleType;
+        $templateTitle = '';
+        if ($metaBundle !== null) {
+            $variables['metaGlobalVars'] = $metaBundle->metaGlobalVars;
+            $variables['metaSitemapVars'] = $metaBundle->metaSitemapVars;
+            $variables['metaBundleSettings'] = $metaBundle->metaBundleSettings;
+            $variables['currentSourceHandle'] = $metaBundle->sourceHandle;
+            $variables['currentSourceBundleType'] = $metaBundle->sourceBundleType;
+            $templateTitle = $metaBundle->sourceName;
+        }
         // Basic variables
-        $templateTitle = $metaBundle->sourceName;
         $subSectionTitle = Craft::t('seomatic', ucfirst($subSection));
         $variables['fullPageForm'] = true;
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
@@ -469,13 +476,13 @@ class SettingsController extends Controller
             $siteId
         );
         // Pass in the pull fields
-        $groupName = "Entry";
+        $groupName = 'Entry';
         $this->setContentFieldSourceVariables($sourceBundleType, $sourceHandle, $groupName, $variables);
         $uri = $this->uriFromSourceBundle($sourceBundleType, $sourceHandle);
         // Preview the meta containers
         Seomatic::$plugin->metaContainers->previewMetaContainers(
             $uri,
-            intval($variables['currentSiteId'])
+            (int)$variables['currentSiteId']
         );
 
         // Render the template
@@ -487,7 +494,7 @@ class SettingsController extends Controller
      * @return Response
      * @throws \yii\web\BadRequestHttpException
      */
-    public function actionSaveContent()
+    public function actionSaveContent(): Response
     {
         $this->requirePostRequest();
         $request = Craft::$app->getRequest();
@@ -517,14 +524,14 @@ class SettingsController extends Controller
             $siteId
         );
         if ($metaBundle) {
-            if (is_array($globalsSettings) && is_array($bundleSettings)) {
+            if (\is_array($globalsSettings) && \is_array($bundleSettings)) {
                 PullFieldHelper::parseTextSources($elementName, $globalsSettings, $bundleSettings);
                 PullFieldHelper::parseImageSources($elementName, $globalsSettings, $bundleSettings, $siteId);
                 $globalsSettings['mainEntityOfPage'] = $this->getSpecificEntityType($bundleSettings);
                 $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
                 $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
             }
-            if (is_array($sitemapSettings)) {
+            if (\is_array($sitemapSettings)) {
                 $metaBundle->metaSitemapVars->setAttributes($sitemapSettings);
             }
 
@@ -555,9 +562,9 @@ class SettingsController extends Controller
 
         $pluginName = Seomatic::$settings->pluginName;
         $templateTitle = Craft::t('seomatic', 'Site Settings');
-        $subSectionSuffix = "";
-        if ($subSection == "social") {
-            $subSectionSuffix = " Media";
+        $subSectionSuffix = '';
+        if ($subSection === 'social') {
+            $subSectionSuffix = ' Media';
         }
         $subSectionTitle = Craft::t('seomatic', ucfirst($subSection).$subSectionSuffix);
         // Asset bundle
@@ -598,16 +605,18 @@ class SettingsController extends Controller
         $variables['controllerHandle'] = 'site'.'/'.$subSection;
 
         // The site settings for the appropriate meta bundle
-        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle(intval($variables['currentSiteId']));
-        $variables['site'] = $metaBundle->metaSiteVars;
-        $variables['identityImageElements'] = ImageTransformHelper::assetElementsFromIds(
-            $variables['site']->identity->genericImageIds,
-            $siteId
-        );
-        $variables['creatorImageElements'] = ImageTransformHelper::assetElementsFromIds(
-            $variables['site']->creator->genericImageIds,
-            $siteId
-        );
+        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle((int)$variables['currentSiteId']);
+        if ($metaBundle !== null) {
+            $variables['site'] = $metaBundle->metaSiteVars;
+            $variables['identityImageElements'] = ImageTransformHelper::assetElementsFromIds(
+                $variables['site']->identity->genericImageIds,
+                $siteId
+            );
+            $variables['creatorImageElements'] = ImageTransformHelper::assetElementsFromIds(
+                $variables['site']->creator->genericImageIds,
+                $siteId
+            );
+        }
         $variables['elementType'] = Asset::class;
 
         // Render the template
@@ -618,7 +627,7 @@ class SettingsController extends Controller
      * @return Response
      * @throws \yii\web\BadRequestHttpException
      */
-    public function actionSaveSite()
+    public function actionSaveSite(): Response
     {
         $this->requirePostRequest();
         $request = Craft::$app->getRequest();
@@ -636,7 +645,7 @@ class SettingsController extends Controller
         // The site settings for the appropriate meta bundle
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle) {
-            if (is_array($siteSettings)) {
+            if (\is_array($siteSettings)) {
                 if (!empty($siteSettings['identity'])) {
                     $settings = $siteSettings['identity'];
                     $this->prepEntitySettings($settings);
@@ -724,11 +733,13 @@ class SettingsController extends Controller
         $variables['currentSubSection'] = $subSection;
 
         // The script meta containers for the global meta bundle
-        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle(intval($variables['currentSiteId']));
-        $variables['scripts'] = Seomatic::$plugin->metaBundles->getContainerDataFromBundle(
-            $metaBundle,
-            MetaScriptContainer::CONTAINER_TYPE
-        );
+        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle((int)$variables['currentSiteId']);
+        if ($metaBundle !== null) {
+            $variables['scripts'] = Seomatic::$plugin->metaBundles->getContainerDataFromBundle(
+                $metaBundle,
+                MetaScriptContainer::CONTAINER_TYPE
+            );
+        }
         // Plugin and section settings
         $pluginName = Seomatic::$settings->pluginName;
         $templateTitle = Craft::t('seomatic', 'Tracking Scripts');
@@ -774,7 +785,7 @@ class SettingsController extends Controller
      * @return Response
      * @throws \yii\web\BadRequestHttpException
      */
-    public function actionSaveTracking()
+    public function actionSaveTracking(): Response
     {
         $this->requirePostRequest();
         $request = Craft::$app->getRequest();
@@ -784,13 +795,15 @@ class SettingsController extends Controller
         // The site settings for the appropriate meta bundle
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle) {
+            /** @var array $scriptSettings */
             foreach ($scriptSettings as $scriptHandle => $scriptData) {
                 foreach ($metaBundle->metaContainers as $metaContainer) {
-                    if ($metaContainer::CONTAINER_TYPE == MetaScriptContainer::CONTAINER_TYPE) {
+                    if ($metaContainer::CONTAINER_TYPE === MetaScriptContainer::CONTAINER_TYPE) {
                         $data = $metaContainer->getData($scriptHandle);
                         if ($data) {
+                            /** @var array $scriptData */
                             foreach ($scriptData as $key => $value) {
-                                if (is_array($value)) {
+                                if (\is_array($value)) {
                                     foreach ($value as $varsKey => $varsValue) {
                                         $data->$key[$varsKey]['value'] = $varsValue;
                                     }
@@ -911,7 +924,7 @@ class SettingsController extends Controller
                 break;
             // @TODO: handle commerce products
         }
-        if (($uri == '__home__') || ($uri === null)) {
+        if (($uri === '__home__') || ($uri === null)) {
             $uri = '/';
         }
 
@@ -941,7 +954,7 @@ class SettingsController extends Controller
             }
 
             // Make sure the $siteId they are trying to edit is in our array of editable sites
-            if (!in_array($siteId, $variables['enabledSiteIds'])) {
+            if (!\in_array($siteId, $variables['enabledSiteIds'], true)) {
                 if (!empty($variables['enabledSiteIds'])) {
                     $siteId = reset($variables['enabledSiteIds']);
                 } else {
@@ -958,13 +971,13 @@ class SettingsController extends Controller
         // Page title
         $variables['showSites'] = (
             Craft::$app->getIsMultiSite() &&
-            count($variables['enabledSiteIds'])
+            \count($variables['enabledSiteIds'])
         );
 
         if ($variables['showSites']) {
             $variables['sitesMenuLabel'] = Craft::t(
                 'site',
-                $sites->getSiteById(intval($variables['currentSiteId']))->name
+                $sites->getSiteById((int)$variables['currentSiteId'])->name
             );
         } else {
             $variables['sitesMenuLabel'] = '';
@@ -983,7 +996,7 @@ class SettingsController extends Controller
         if (!empty($settings)) {
             // Go from most specific type to least specific type
             foreach (self::SCHEMA_TYPES as $schemaType) {
-                if (!empty($settings[$schemaType]) && ($settings[$schemaType] != 'none')) {
+                if (!empty($settings[$schemaType]) && ($settings[$schemaType] !== 'none')) {
                     return $settings[$schemaType];
                 }
             }
@@ -1027,7 +1040,7 @@ class SettingsController extends Controller
         $settings['computedType'] = $this->getSpecificEntityType($settings);
         if (!empty($settings['genericImageIds'])) {
             $asset = Craft::$app->getAssets()->getAssetById($settings['genericImageIds'][0]);
-            if (!empty($asset)) {
+            if ($asset !== null) {
                 $settings['genericImage'] = $asset->getUrl();
                 $settings['genericImageWidth'] = $asset->getWidth();
                 $settings['genericImageHeight'] = $asset->getHeight();
