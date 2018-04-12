@@ -79,7 +79,7 @@ class ImageTransform
             // Generate a transformed image
             $assets = Craft::$app->getAssets();
             $url = $assets->getAssetUrl($asset, $transform, true);
-            if ($url !== null) {
+            if ($url === null) {
                 $url = '';
             }
         }
