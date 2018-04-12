@@ -193,7 +193,7 @@ class MetaBundles extends Component
             $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
             $metaBundle = MetaBundle::create($metaBundleArray);
             $this->syncBundleWithConfig($sourceBundleType, $metaBundle);
-            $id = count($this->metaBundles);
+            $id = \count($this->metaBundles);
             $this->metaBundles[$id] = $metaBundle;
             $this->metaBundlesBySourceId[$sourceBundleType][$sourceId][$sourceSiteId] = $id;
         } else {
