@@ -16,10 +16,7 @@ use craft\errors\SiteNotFoundException;
 use nystudio107\seomatic\Seomatic;
 
 use Craft;
-use craft\base\Component;
 use craft\base\Element;
-use craft\elements\Category;
-use craft\elements\Entry;
 use craft\helpers\StringHelper;
 use craft\web\View;
 use yii\base\Exception;
@@ -57,16 +54,16 @@ class MetaValue
      *
      * @return string
      */
-    public static function parseString($metaValue)
+    public static function parseString($metaValue): string
     {
         // If it's a string, and there are no dynamic tags, just return the template
-        if (is_string($metaValue) && !StringHelper::contains($metaValue, '{')) {
+        if (\is_string($metaValue) && !StringHelper::contains($metaValue, '{')) {
             return self::parseMetaString($metaValue) ?? $metaValue;
         }
         // Parse it repeatedly until it doesn't change
         $tries = self::MAX_PARSE_TRIES;
         $value = '';
-        while ($metaValue != $value && $tries) {
+        while ($metaValue !== $value && $tries) {
             $tries--;
             $value = $metaValue;
             $metaValue = self::parseMetaString($value) ?? $metaValue;
@@ -81,7 +78,7 @@ class MetaValue
     public static function parseArray(array &$metaArray)
     {
         foreach ($metaArray as $key => $value) {
-            if ($value != null) {
+            if ($value !== null) {
                 $metaArray[$key] = self::parseString($value);
             }
         }
@@ -128,7 +125,7 @@ class MetaValue
 
         $element = Seomatic::$matchedElement;
         /** @var Element $element */
-        if (!empty($element)) {
+        if ($element !== null) {
             try {
                 $reflector = new \ReflectionClass($element);
             } catch (\ReflectionException $e) {
@@ -148,17 +145,17 @@ class MetaValue
     // =========================================================================
 
     /**
-     * @param string $metaValue
+     * @param string|Asset $metaValue
      *
      * @return null|string
      */
     protected static function parseMetaString($metaValue)
     {
         // Handle being passed in a string
-        if (is_string($metaValue)) {
+        if (\is_string($metaValue)) {
             // Resolve it as an alias
             $alias = Craft::getAlias($metaValue, false);
-            if ($alias !== false) {
+            if (\is_string($alias)) {
                 $metaValue = $alias;
             }
             // If there are no dynamic tags, just return the template
@@ -168,13 +165,13 @@ class MetaValue
             $oldTemplateMode = self::$view->getTemplateMode();
             try {
                 // Render in site template mode so that we get globals injected
-                if ($oldTemplateMode != self::$view::TEMPLATE_MODE_SITE) {
+                if ($oldTemplateMode !== self::$view::TEMPLATE_MODE_SITE) {
                     self::$view->setTemplateMode(self::$view::TEMPLATE_MODE_SITE);
                 }
                 // Render the template out
                 $metaValue = self::$view->renderObjectTemplate($metaValue, self::$templateObjectVars);
                 // Restore the template mode
-                if ($oldTemplateMode != self::$view::TEMPLATE_MODE_SITE) {
+                if ($oldTemplateMode !== self::$view::TEMPLATE_MODE_SITE) {
                     self::$view->setTemplateMode($oldTemplateMode);
                 }
             } catch (\Exception $e) {
@@ -185,7 +182,7 @@ class MetaValue
                 );
                 Craft::error($metaValue, __METHOD__);
                 // Restore the template mode
-                if ($oldTemplateMode != self::$view::TEMPLATE_MODE_SITE) {
+                if ($oldTemplateMode !== self::$view::TEMPLATE_MODE_SITE) {
                     try {
                         self::$view->setTemplateMode($oldTemplateMode);
                     } catch (Exception $e) {
@@ -197,7 +194,7 @@ class MetaValue
             }
         }
         // Handle being passed in an object
-        if (is_object($metaValue)) {
+        if (\is_object($metaValue)) {
             if ($metaValue instanceof Asset) {
                 /** @var Asset $metaValue */
                 return $metaValue->uri;

@@ -45,7 +45,7 @@ class SitemapController extends Controller
      *
      * @return Response
      */
-    public function actionSitemapIndex(int $groupId)
+    public function actionSitemapIndex(int $groupId): Response
     {
         $xml = Seomatic::$plugin->sitemaps->renderTemplate(
             Sitemaps::SEOMATIC_SITEMAPINDEX_CONTAINER,
@@ -69,7 +69,7 @@ class SitemapController extends Controller
      *
      * @return Response
      */
-    public function actionSitemap(int $groupId, string $type, string $handle, int $siteId)
+    public function actionSitemap(int $groupId, string $type, string $handle, int $siteId): Response
     {
         $xml = Seomatic::$plugin->sitemaps->renderTemplate(
             Sitemaps::SEOMATIC_SITEMAP_CONTAINER,
