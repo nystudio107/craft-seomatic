@@ -90,6 +90,8 @@ class Seomatic extends Plugin
 
     const SEOMATIC_HANDLE = 'Seomatic';
 
+    const DEVMODE_CACHE_DURATION = 30;
+
     // Static Properties
     // =========================================================================
 
@@ -127,6 +129,11 @@ class Seomatic extends Plugin
      * @var
      */
     public static $language;
+
+    /**
+     * @var int
+     */
+    public static $cacheDuration;
 
     /**
      * @var bool
@@ -175,6 +182,9 @@ class Seomatic extends Plugin
         self::$settings = Seomatic::$plugin->getSettings();
         self::$devMode = Craft::$app->getConfig()->getGeneral()->devMode;
         self::$view = Craft::$app->getView();
+        self::$cacheDuration = Seomatic::$devMode
+            ? $this::DEVMODE_CACHE_DURATION
+            : null;
         MetaValueHelper::cache();
         // If devMode is on, always force the environment to be "local"
         if (self::$devMode) {
@@ -574,6 +584,8 @@ class Seomatic extends Plugin
      */
     protected function handleAdminCpRequest()
     {
+        // Don't cache AdminCP requests
+        self::$cacheDuration = 1;
         // Handler: UrlManager::EVENT_REGISTER_CP_URL_RULES
         Event::on(
             UrlManager::class,
