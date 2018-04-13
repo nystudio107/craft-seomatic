@@ -1,8 +1,14 @@
 # SEOmatic Changelog
 
-## 3.0.0-beta.22 - 2018.04.09
+## 3.0.0-beta.22 - 2018.04.12
 ### Added
 * Added performance profiling to major bottlenecks
+* Lots of code cleanup courtesy of the PHP Inspections plugin
+
+### Changed
+* Fixed an issue with the Field improperly saving values as objects
+* Removed caching from AdminCP requests, which fixes improperly displayed social media previews
+* Fixed a deprecation error with `.iso8601()`
 
 ### Changed
 
