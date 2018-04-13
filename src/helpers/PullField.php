@@ -128,8 +128,11 @@ class PullField
      * @param $bundleSettings
      * @param $siteId
      */
-    public static function parseImageSources($elementName, &$globalsSettings, &$bundleSettings, $siteId)
+    public static function parseImageSources($elementName, &$globalsSettings, &$bundleSettings, $siteId = 0)
     {
+        if (empty($siteId)) {
+            $siteId = 0;
+        }
         $objectPrefix = '';
         if (!empty($elementName)) {
             $elementName .= '.';
