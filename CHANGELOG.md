@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.0.0-beta.23 - 2018.04.13
+### Changed
+* Fixed an issue where the social transforms sometimes might not render properly
+
 ## 3.0.0-beta.22 - 2018.04.12
 ### Added
 * Added performance profiling to major bottlenecks
