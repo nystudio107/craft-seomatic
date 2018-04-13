@@ -14,7 +14,6 @@ namespace nystudio107\seomatic\helpers;
 use nystudio107\seomatic\Seomatic;
 
 use Craft;
-use craft\base\Component;
 use craft\helpers\StringHelper;
 
 /**
@@ -52,7 +51,7 @@ class Config
             }
         }
 
-        if (!is_array($config = @include $path)) {
+        if (!\is_array($config = @include $path)) {
             return [];
         }
 
@@ -67,6 +66,7 @@ class Config
         }
 
         $mergedConfig = [];
+        /** @var array $config */
         foreach ($config as $env => $envConfig) {
             if ($env === '*' || StringHelper::contains(Seomatic::$settings->environment, $env)) {
                 $mergedConfig = ArrayHelper::merge($mergedConfig, $envConfig);

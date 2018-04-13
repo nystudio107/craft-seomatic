@@ -13,7 +13,6 @@ namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaService;
-use nystudio107\seomatic\base\MetaServiceInterface;
 use nystudio107\seomatic\models\MetaTitle;
 use nystudio107\seomatic\models\MetaTitleContainer;
 
@@ -24,7 +23,7 @@ use craft\helpers\Template as TemplateHelper;
  * @package   Seomatic
  * @since     3.0.0
  */
-class Title extends MetaService implements MetaServiceInterface
+class Title extends MetaService
 {
     // Constants
     // =========================================================================
@@ -49,10 +48,10 @@ class Title extends MetaService implements MetaServiceInterface
     /**
      * @inheritdoc
      */
-    public function create($config = [], $add = true): MetaTitle
+    public function create(array $config = [], $add = true): MetaTitle
     {
         $metaItem = MetaTitle::create($config);
-        if ($add && !empty($metaItem)) {
+        if ($add && $metaItem !== null) {
             $this->add($metaItem);
         }
 

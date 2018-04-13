@@ -13,7 +13,6 @@ namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaService;
-use nystudio107\seomatic\base\MetaServiceInterface;
 use nystudio107\seomatic\models\MetaScript;
 use nystudio107\seomatic\models\MetaScriptContainer;
 
@@ -24,7 +23,7 @@ use craft\helpers\Template as TemplateHelper;
  * @package   Seomatic
  * @since     3.0.0
  */
-class Script extends MetaService implements MetaServiceInterface
+class Script extends MetaService
 {
     // Constants
     // =========================================================================
@@ -49,10 +48,10 @@ class Script extends MetaService implements MetaServiceInterface
     /**
      * @inheritdoc
      */
-    public function create($config = [], $add = true): MetaScript
+    public function create(array $config = [], $add = true): MetaScript
     {
         $metaItem = MetaScript::create($config);
-        if ($add && !empty($metaItem)) {
+        if ($add && $metaItem !== null) {
             $this->add($metaItem);
         }
 

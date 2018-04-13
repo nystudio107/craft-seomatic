@@ -62,9 +62,8 @@ class MetaTag extends MetaItem
                 $className = $tagClassName;
             }
         }
-        $model = new $className($config);
 
-        return $model;
+        return new $className($config);
     }
 
     // Public Properties
@@ -147,7 +146,7 @@ class MetaTag extends MetaItem
         if ($shouldRender) {
             MetaValueHelper::parseArray($data);
             // Only render if there's more than one attribute
-            if (count($data) > 1) {
+            if (\count($data) > 1) {
                 // devMode
                 if (Seomatic::$devMode) {
                 }
@@ -168,7 +167,7 @@ class MetaTag extends MetaItem
     /**
      * @inheritdoc
      */
-    public function render($params = []): string
+    public function render(array $params = []): string
     {
         $html = '';
         $configs = $this->tagAttributesArray();
@@ -185,7 +184,7 @@ class MetaTag extends MetaItem
     /**
      * @inheritdoc
      */
-    public function renderAttributes($params = []): array
+    public function renderAttributes(array $params = []): array
     {
         $attributes = [];
 

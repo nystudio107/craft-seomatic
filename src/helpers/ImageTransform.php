@@ -71,7 +71,7 @@ class ImageTransform
             self::$transforms[$transformName] ?? self::$transforms['base']
         );
         $transform = new AssetTransform($config);
-        if (is_int($asset)) {
+        if (\is_int($asset)) {
             // Get the asset
             $asset = Craft::$app->getAssets()->getAssetById($asset, $siteId);
         }
@@ -79,7 +79,7 @@ class ImageTransform
             // Generate a transformed image
             $assets = Craft::$app->getAssets();
             $url = $assets->getAssetUrl($asset, $transform, true);
-            if (empty($url)) {
+            if ($url === null) {
                 $url = '';
             }
         }
@@ -95,12 +95,12 @@ class ImageTransform
      *
      * @return array
      */
-    public static function assetElementsFromIds($assetIds, int $siteId = null)
+    public static function assetElementsFromIds($assetIds, int $siteId = null): array
     {
         $elements = Craft::$app->getElements();
         $assets = [];
         if (!empty($assetIds)) {
-            if (is_array($assetIds)) {
+            if (\is_array($assetIds)) {
                 foreach ($assetIds as $assetId) {
                     $assets[] = $elements->getElementById($assetId, Asset::class, $siteId);
                 }

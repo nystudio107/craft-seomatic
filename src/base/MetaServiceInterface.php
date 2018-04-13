@@ -39,7 +39,7 @@ interface MetaServiceInterface
      *
      * @return MetaItem
      */
-    public function create($config = [], $add = true);
+    public function create(array $config = [], $add = true);
 
     /**
      * Add a meta item to its appropriate container

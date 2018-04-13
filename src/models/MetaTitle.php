@@ -41,9 +41,7 @@ class MetaTitle extends MetaItem
      */
     public static function create(array $config = []): MetaTitle
     {
-        $model = new MetaTitle($config);
-
-        return $model;
+        return new MetaTitle($config);
     }
 
     // Public Properties
@@ -173,7 +171,7 @@ class MetaTitle extends MetaItem
     /**
      * @inheritdoc
      */
-    public function render($params = []):string
+    public function render(array $params = []):string
     {
         $html = '';
         $title = $this->title;
@@ -187,7 +185,7 @@ class MetaTitle extends MetaItem
     /**
      * @inheritdoc
      */
-    public function renderAttributes($params = []): array
+    public function renderAttributes(array $params = []): array
     {
         $attributes = [];
         $title = $this->title;

@@ -13,7 +13,6 @@ namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaService;
-use nystudio107\seomatic\base\MetaServiceInterface;
 use nystudio107\seomatic\models\MetaLink;
 use nystudio107\seomatic\models\MetaLinkContainer;
 
@@ -24,7 +23,7 @@ use craft\helpers\Template as TemplateHelper;
  * @package   Seomatic
  * @since     3.0.0
  */
-class Link extends MetaService implements MetaServiceInterface
+class Link extends MetaService
 {
     // Constants
     // =========================================================================
@@ -52,10 +51,10 @@ class Link extends MetaService implements MetaServiceInterface
     /**
      * @inheritdoc
      */
-    public function create($config = [], $add = true): MetaLink
+    public function create(array $config = [], $add = true): MetaLink
     {
         $metaItem = MetaLink::create($config);
-        if ($add && !empty($metaItem)) {
+        if ($add && $metaItem !== null) {
             $this->add($metaItem);
         }
 

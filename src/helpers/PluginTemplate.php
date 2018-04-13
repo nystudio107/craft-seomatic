@@ -54,7 +54,6 @@ class PluginTemplate
      */
     public static function renderPluginTemplate(string $templatePath, array $params = []): string
     {
-        $templateRendered = false;
         // Stash the old template mode, and set it AdminCP template mode
         $oldMode = Craft::$app->view->getTemplateMode();
         try {

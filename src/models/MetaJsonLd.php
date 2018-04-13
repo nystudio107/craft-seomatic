@@ -179,7 +179,7 @@ class MetaJsonLd extends MetaItem
      *
      * @return MetaJsonLd
      */
-    public static function create($schemaType, $config = []): MetaJsonLd
+    public static function create($schemaType, array $config = []): MetaJsonLd
     {
         $model = null;
 
@@ -225,7 +225,7 @@ class MetaJsonLd extends MetaItem
         parent::init();
 
         $this->type = static::$schemaTypeName;
-        $this->context = "http://schema.org";
+        $this->context = 'http://schema.org';
         if (empty($this->key)) {
             $this->key = $this->type;
         }
@@ -265,7 +265,7 @@ class MetaJsonLd extends MetaItem
      * @return string
      */
     public function render(
-        $params = [
+        array $params = [
             'renderRaw'        => true,
             'renderScriptTags' => true,
             'array'            => false,
@@ -316,7 +316,7 @@ class MetaJsonLd extends MetaItem
     /**
      * @inheritdoc
      */
-    public function renderAttributes($params = []): array
+    public function renderAttributes(array $params = []): array
     {
         $attributes = [];
 
@@ -370,16 +370,17 @@ class MetaJsonLd extends MetaItem
         $attribute,
         $params
     ) {
-        if (!in_array($attribute, static::$schemaPropertyNames)) {
+        if (!\in_array($attribute, static::$schemaPropertyNames, true)) {
             $this->addError($attribute, 'The attribute does not exist.');
         } else {
             $expectedTypes = static::$schemaPropertyExpectedTypes[$attribute];
             $validated = false;
             $dataToValidate = $this->$attribute;
-            if (!is_array($dataToValidate)) {
+            if (!\is_array($dataToValidate)) {
                 $dataToValidate = [$dataToValidate];
             }
             foreach ($dataToValidate as $data) {
+                /** @var array $expectedTypes */
                 foreach ($expectedTypes as $expectedType) {
                     $className = 'craft\\plugins\\seomatic\\models\\jsonld\\' . $expectedType;
                     switch ($expectedType) {
@@ -409,7 +410,7 @@ class MetaJsonLd extends MetaItem
                         case 'Float':
                         case 'Integer':
                             $validator = new NumberValidator;
-                            if ($expectedType == 'Integer') {
+                            if ($expectedType === 'Integer') {
                                 $validator->integerOnly = true;
                             }
                             if ($validator->validate($data, $error)) {
@@ -449,10 +450,8 @@ class MetaJsonLd extends MetaItem
 
                         // By default, assume it's a schema.org JSON-LD object, and validate that
                         default:
-                            if (is_object($data)) {
-                                if (is_a($data, $className)) {
+                            if (\is_object($data) && is_a($data, $className)) {
                                     $validated = true;
-                                }
                             }
                             break;
                     }

@@ -33,11 +33,12 @@ class EmbeddedModelValidator extends Validator
     {
         $value = $model->$attribute;
 
-        if (!empty($value) && is_object($value) && $value instanceof Model) {
+        if (!empty($value) && \is_object($value) && $value instanceof Model) {
             /** @var Model $value */
             if (!$value->validate()) {
                 $errors = $value->getErrors();
                 foreach ($errors as $attributeError => $valueErrors) {
+                    /** @var array $valueErrors */
                     foreach ($valueErrors as $valueError) {
                         $model->addError(
                             $attribute,

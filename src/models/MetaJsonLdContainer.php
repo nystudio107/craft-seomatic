@@ -35,7 +35,7 @@ class MetaJsonLdContainer extends MetaContainer
     /**
      * The data in this container
      *
-     * @var MetaJsonLd
+     * @var MetaJsonLd[] $data
      */
     public $data = [];
 

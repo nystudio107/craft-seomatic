@@ -1,5 +1,17 @@
 # SEOmatic Changelog
 
+## 3.0.0-beta.22 - 2018.04.12
+### Added
+* Added performance profiling to major bottlenecks
+* Lots of code cleanup courtesy of the PHP Inspections plugin
+
+### Changed
+* Fixed an issue with the Field improperly saving values as objects
+* Removed caching from AdminCP requests, which fixes improperly displayed social media previews
+* Fixed a deprecation error with `.iso8601()`
+
+### Changed
+
 ## 3.0.0-beta.21 - 2018.04.06
 ### Added
 * Don't display the Facebook/Twitter not set in the sidebar preview, only on the Settings pages

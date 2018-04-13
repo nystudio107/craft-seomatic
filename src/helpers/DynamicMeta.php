@@ -48,12 +48,12 @@ class DynamicMeta
         $response = Craft::$app->getResponse();
         // X-Robots-Tag header
         $robots = Seomatic::$seomaticVariable->tag->get('robots');
-        if (!empty($robots)) {
+        if ($robots !== null) {
             $robotsArray = $robots->renderAttributes();
             $content = $robotsArray['content'] ?? $robots->content;
             if (!empty($content)) {
                 // The content property can be a string or an array
-                if (is_array($content)) {
+                if (\is_array($content)) {
                     $headerValue = '';
                     foreach ($content as $contentVal) {
                         $headerValue .= ($contentVal.',');
@@ -67,12 +67,12 @@ class DynamicMeta
         }
         // Link canonical header
         $canonical = Seomatic::$seomaticVariable->link->get('canonical');
-        if (!empty($canonical)) {
+        if ($canonical !== null) {
             $canonicalArray = $canonical->renderAttributes();
             $href = $canonicalArray['href'] ?? $canonical->href;
             if (!empty($href)) {
                 // The href property can be a string or an array
-                if (is_array($href)) {
+                if (\is_array($href)) {
                     $headerValue = '';
                     foreach ($href as $hrefVal) {
                         $headerValue .= ('<'.$hrefVal.'>'.',');
@@ -81,7 +81,7 @@ class DynamicMeta
                 } else {
                     $headerValue = '<'.$href.'>';
                 }
-                $headerValue .= '; rel="canonical"';
+                $headerValue .= "; rel='canonical'";
                 $response->headers->add('Link', $headerValue);
             }
         }
@@ -103,9 +103,13 @@ class DynamicMeta
             self::addSameAsMeta();
             $metaSiteVars = Seomatic::$plugin->metaContainers->metaSiteVars;
             $jsonLd = Seomatic::$plugin->jsonLd->get('identity');
-            self::addOpeningHours($jsonLd, $metaSiteVars->identity);
+            if ($jsonLd !== null) {
+                self::addOpeningHours($jsonLd, $metaSiteVars->identity);
+            }
             $jsonLd = Seomatic::$plugin->jsonLd->get('creator');
-            self::addOpeningHours($jsonLd, $metaSiteVars->creator);
+            if ($jsonLd !== null) {
+                self::addOpeningHours($jsonLd, $metaSiteVars->creator);
+            }
         }
     }
 
@@ -117,15 +121,15 @@ class DynamicMeta
      */
     public static function addOpeningHours(MetaJsonLd $jsonLd, Entity $entity)
     {
-        if ($jsonLd instanceof LocalBusiness && !empty($entity)) {
+        if ($jsonLd instanceof LocalBusiness && $entity !== null) {
             /** @var LocalBusiness $jsonLd */
             $openingHours = [];
-            $days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            $days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
             $times = $entity->localBusinessOpeningHours;
             $index = 0;
             foreach ($times as $hours) {
-                $openTime = "";
-                $closeTime = "";
+                $openTime = '';
+                $closeTime = '';
                 if (!empty($hours['open'])) {
                     /** @var \DateTime $dateTime */
                     $dateTime = DateTimeHelper::toDateTime($hours['open']['date'], false, false);
@@ -142,10 +146,10 @@ class DynamicMeta
                 }
                 if ($openTime && $closeTime) {
                     $spec = [
-                        "type"      => "OpeningHoursSpecification",
-                        "opens"     => $openTime,
-                        "closes"    => $closeTime,
-                        "dayOfWeek" => [$days[$index]],
+                        'type'      => 'OpeningHoursSpecification',
+                        'opens'     => $openTime,
+                        'closes'    => $closeTime,
+                        'dayOfWeek' => [$days[$index]],
                     ];
                     $openingHours[] = $spec;
                 }
@@ -169,6 +173,9 @@ class DynamicMeta
                 ?? 1;
         }
         $site = Craft::$app->getSites()->getSiteById($siteId);
+        if ($site === null) {
+            return;
+        }
         try {
             $siteUrl = $site->hasUrls ? $site->baseUrl : Craft::$app->getSites()->getPrimarySite()->baseUrl;
         } catch (SiteNotFoundException $e) {
@@ -182,16 +189,16 @@ class DynamicMeta
             'description' => 'Breadcrumbs list',
         ]);
         /** @var Element $element */
-        $element = Craft::$app->getElements()->getElementByUri("__home__", $siteId);
+        $element = Craft::$app->getElements()->getElementByUri('__home__', $siteId);
         if ($element) {
-            $uri = $element->uri == '__home__' ? '' : ($element->uri ?? '');
+            $uri = $element->uri === '__home__' ? '' : ($element->uri ?? '');
             try {
                 $id = UrlHelper::siteUrl($uri, null, null, $siteId);
             } catch (Exception $e) {
                 $id = $siteUrl;
                 Craft::error($e->getMessage(), __METHOD__);
             }
-            $listItem = MetaJsonLd::create("ListItem", [
+            $listItem = MetaJsonLd::create('ListItem', [
                 'position' => $position,
                 'item'     => [
                     '@id'  => $id,
@@ -200,7 +207,7 @@ class DynamicMeta
             ]);
             $crumbs->itemListElement[] = $listItem;
         } else {
-            $crumbs->itemListElement[] = MetaJsonLd::create("ListItem", [
+            $crumbs->itemListElement[] = MetaJsonLd::create('ListItem', [
                 'position' => $position,
                 'item'     => [
                     '@id'  => $siteUrl,
@@ -214,10 +221,10 @@ class DynamicMeta
         /** @var  $lastElement Element */
         $lastElement = Seomatic::$matchedElement;
         if ($lastElement && $element) {
-            if ($lastElement->uri != "__home__" && $element->uri) {
+            if ($lastElement->uri !== '__home__' && $element->uri) {
                 $path = parse_url($lastElement->url, PHP_URL_PATH);
-                $path = trim($path, "/");
-                $segments = explode("/", $path);
+                $path = trim($path, '/');
+                $segments = explode('/', $path);
             }
         }
         // Parse through the segments looking for elements that match
@@ -227,14 +234,14 @@ class DynamicMeta
             $element = Craft::$app->getElements()->getElementByUri($uri, $siteId);
             if ($element && $element->uri) {
                 $position++;
-                $uri = $element->uri == '__home__' ? '' : $element->uri;
+                $uri = $element->uri === '__home__' ? '' : $element->uri;
                 try {
                     $id = UrlHelper::siteUrl($uri, null, null, $siteId);
                 } catch (Exception $e) {
                     $id = $siteUrl;
                     Craft::error($e->getMessage(), __METHOD__);
                 }
-                $crumbs->itemListElement[] = MetaJsonLd::create("ListItem", [
+                $crumbs->itemListElement[] = MetaJsonLd::create('ListItem', [
                     'position' => $position,
                     'item'     => [
                         '@id'  => $id,
@@ -242,7 +249,7 @@ class DynamicMeta
                     ],
                 ]);
             }
-            $uri .= "/";
+            $uri .= '/';
         }
 
         Seomatic::$plugin->jsonLd->add($crumbs);
@@ -264,7 +271,7 @@ class DynamicMeta
         ]);
         Seomatic::$plugin->link->add($metaTag);
         // Add the alternate language link rel's
-        if (count($siteLocalizedUrls) > 1) {
+        if (\count($siteLocalizedUrls) > 1) {
             foreach ($siteLocalizedUrls as $siteLocalizedUrl) {
                 $metaTag = Seomatic::$plugin->link->create([
                     'rel'      => 'alternate',
@@ -276,7 +283,7 @@ class DynamicMeta
         }
         // Add in the og:locale:alternate tags
         $ogLocaleAlternate = Seomatic::$plugin->tag->get('og:locale:alternate');
-        if (count($siteLocalizedUrls) > 1 && $ogLocaleAlternate) {
+        if (\count($siteLocalizedUrls) > 1 && $ogLocaleAlternate) {
             $ogContentArray = [];
             foreach ($siteLocalizedUrls as $siteLocalizedUrl) {
                 $ogContentArray[] = $siteLocalizedUrl['language'];
@@ -300,11 +307,9 @@ class DynamicMeta
         }
         // Site Identity JSON-LD
         $identity = Seomatic::$plugin->jsonLd->get('identity');
-        if ($identity) {
-            /** @var Thing $identity */
-            if (property_exists($identity, 'sameAs')) {
-                $identity->sameAs = $sameAsUrls;
-            }
+        /** @var Thing $identity */
+        if ($identity !== null && property_exists($identity, 'sameAs')) {
+            $identity->sameAs = $sameAsUrls;
         }
     }
 
@@ -378,7 +383,7 @@ class DynamicMeta
                     Craft::error($e->getMessage(), __METHOD__);
                 }
             }
-            $url = ($url === null) ? '' : $url;
+            $url = $url ?? '';
             if (!UrlHelper::isAbsoluteUrl($url)) {
                 try {
                     $url = UrlHelper::siteUrl($url, null, null, $site->id);
@@ -387,7 +392,7 @@ class DynamicMeta
                     Craft::error($e->getMessage(), __METHOD__);
                 }
             }
-            $url = ($url === null) ? '' : $url;
+            $url = $url ?? '';
             $language = $site->language;
             $hreflangLanguage = $site->language;
             $hreflangLanguage = strtolower($hreflangLanguage);
@@ -410,7 +415,7 @@ class DynamicMeta
      */
     public static function normalizeTimes(&$value)
     {
-        if (is_string($value)) {
+        if (\is_string($value)) {
             $value = Json::decode($value);
         }
         $normalized = [];
@@ -429,5 +434,4 @@ class DynamicMeta
 
         $value = $normalized;
     }
-
 }

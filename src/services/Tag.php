@@ -13,7 +13,6 @@ namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaService;
-use nystudio107\seomatic\base\MetaServiceInterface;
 use nystudio107\seomatic\models\MetaTag;
 use nystudio107\seomatic\models\MetaTagContainer;
 
@@ -25,7 +24,7 @@ use craft\helpers\Template as TemplateHelper;
  * @package   Seomatic
  * @since     3.0.0
  */
-class Tag extends MetaService implements MetaServiceInterface
+class Tag extends MetaService
 {
     // Constants
     // =========================================================================
@@ -56,14 +55,14 @@ class Tag extends MetaService implements MetaServiceInterface
     /**
      * @inheritdoc
      */
-    public function create($config = [], $add = true): MetaTag
+    public function create(array $config = [], $add = true): MetaTag
     {
         $type = self::DEFAULT_TYPE;
         if (!empty($config['type'])) {
             $type = ArrayHelper::remove($config, 'type');
         }
         $metaItem = MetaTag::create($type, $config);
-        if ($add && !empty($metaItem)) {
+        if ($add && $metaItem !== null) {
             $this->add($metaItem);
         }
 

@@ -14,8 +14,6 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 
-use Craft;
-
 use yii\web\View;
 
 /**
@@ -36,7 +34,7 @@ class MetaScriptContainer extends MetaContainer
     /**
      * The data in this container
      *
-     * @var MetaScript
+     * @var MetaScript[] $data
      */
     public $data = [];
 
@@ -65,7 +63,7 @@ class MetaScriptContainer extends MetaContainer
                     // If `devMode` is enabled, validate the Meta Script and output any model errors
                     if (Seomatic::$devMode) {
                         $metaScriptModel->debugMetaItem(
-                            "Script attribute: "
+                            'Script attribute: '
                         );
                     }
                 }

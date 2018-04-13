@@ -13,7 +13,6 @@ namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaService;
-use nystudio107\seomatic\base\MetaServiceInterface;
 use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 
@@ -25,7 +24,7 @@ use craft\helpers\Template as TemplateHelper;
  * @package   Seomatic
  * @since     3.0.0
  */
-class JsonLd extends MetaService implements MetaServiceInterface
+class JsonLd extends MetaService
 {
     // Constants
     // =========================================================================
@@ -52,14 +51,14 @@ class JsonLd extends MetaService implements MetaServiceInterface
     /**
      * @inheritdoc
      */
-    public function create($config = [], $add = true): MetaJsonLd
+    public function create(array $config = [], $add = true): MetaJsonLd
     {
         $type = self::DEFAULT_TYPE;
         if (!empty($config['type'])) {
             $type = ArrayHelper::remove($config, 'type');
         }
         $metaItem = MetaJsonLd::create($type, $config);
-        if ($add && !empty($metaItem)) {
+        if ($add && $metaItem !== null) {
             $this->add($metaItem);
         }
 

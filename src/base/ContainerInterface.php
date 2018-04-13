@@ -27,7 +27,7 @@ interface ContainerInterface
     // Static Methods
     // =========================================================================
 
-    public static function create($config = []);
+    public static function create(array $config = []);
 
     // Public Methods
     // =========================================================================
@@ -63,7 +63,7 @@ interface ContainerInterface
      *
      * @return string
      */
-    public function render($params = []): string;
+    public function render(array $params = []): string;
 
     /**
      * Normalizes the containers’s data for use.

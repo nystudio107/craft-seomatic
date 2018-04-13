@@ -41,5 +41,5 @@ interface FrontendTemplateInterface
      *
      * @return string
      */
-    public function render($params = []): string;
+    public function render(array $params = []): string;
 }

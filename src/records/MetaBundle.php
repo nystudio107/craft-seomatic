@@ -26,7 +26,7 @@ class MetaBundle extends ActiveRecord
     /**
      * @inheritdoc
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return '{{%seomatic_metabundles}}';
     }

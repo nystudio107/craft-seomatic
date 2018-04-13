@@ -33,5 +33,5 @@ interface MetaContainerInterface
      *
      * @return array
      */
-    public function renderArray($params = []): array;
+    public function renderArray(array $params = []): array;
 }
