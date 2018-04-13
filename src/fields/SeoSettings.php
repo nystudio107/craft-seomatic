@@ -132,7 +132,7 @@ class SeoSettings extends Field
                 $config = $value;
             }
             if (\is_object($value) && $value instanceof MetaBundle) {
-                $config = $value->getAttributes();
+                $config = $value->toArray();
             }
         } else {
             /** @var null|Element $element */
