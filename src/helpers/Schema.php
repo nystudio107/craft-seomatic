@@ -52,7 +52,7 @@ class Schema
         if ($jsonLdType) {
             // Get the static properties
             try {
-                $classRef = new \ReflectionClass(get_class($jsonLdType));
+                $classRef = new \ReflectionClass(\get_class($jsonLdType));
             } catch (\ReflectionException $e) {
                 $classRef = null;
             }
@@ -86,7 +86,7 @@ class Schema
                     $staticProps = $classRef->getStaticProperties();
 
                     foreach ($staticProps as $key => $value) {
-                        if ($key[0] == '_') {
+                        if ($key[0] === '_') {
                             $newKey = ltrim($key, '_');
                             $staticProps[$newKey] = $value;
                             unset($staticProps[$key]);
@@ -94,7 +94,7 @@ class Schema
                     }
                     $result[$schemaType] = $staticProps;
                     $schemaType = $staticProps['schemaTypeExtends'];
-                    if ($schemaType == "JsonLdType") {
+                    if ($schemaType === 'JsonLdType') {
                         $schemaType = null;
                     }
                 }
@@ -113,7 +113,12 @@ class Schema
      */
     public static function getTypeMenu($path = ''): array
     {
-        $schemaTypes = self::getSchemaArray($path);
+        try {
+            $schemaTypes = self::getSchemaArray($path);
+        } catch (\Exception $e) {
+            Craft::error($e->getMessage(), __METHOD__);
+            return [];
+        }
 
         return self::flattenSchemaArray($schemaTypes, 0);
     }
@@ -128,7 +133,12 @@ class Schema
     public static function getSingleTypeMenu($path = ''): array
     {
         $result = [];
-        $schemaTypes = self::getSchemaArray($path);
+        try {
+            $schemaTypes = self::getSchemaArray($path);
+        } catch (\Exception $e) {
+            Craft::error($e->getMessage(), __METHOD__);
+            return [];
+        }
         foreach ($schemaTypes as $key => $value) {
             $result[$key] = $key;
         }
@@ -167,7 +177,7 @@ class Schema
                 }
             }
         }
-        if (!is_array($typesArray)) {
+        if (!\is_array($typesArray)) {
             $typesArray = [];
         }
 
@@ -185,7 +195,7 @@ class Schema
         $result = [];
         foreach ($typesArray as $key => $value) {
             $indent = html_entity_decode(str_repeat('&nbsp;', $indentLevel));
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 $result[$key] = $indent . $key;
                 $value = self::flattenSchemaArray($value, $indentLevel + self::MENU_INDENT_STEP);
                 $result = array_merge($result, $value);
@@ -198,9 +208,9 @@ class Schema
     }
 
     /**
-     * Reduce everything in the $schemaTypes array to a simple hierarchical array
-     * as "SchemaType" => "SchemaType" if it has no children, and if it has
-     * children, as "SchemaType" = [] with an array of sub-types
+     * Reduce everything in the $schemaTypes array to a simple hierarchical
+     * array as 'SchemaType' => 'SchemaType' if it has no children, and if it
+     * has children, as 'SchemaType' = [] with an array of sub-types
      *
      * @param array $typesArray
      *
@@ -210,7 +220,7 @@ class Schema
     {
         $result = [];
 
-        if (!empty($typesArray['children'])) {
+        if (!empty($typesArray['children']) && \is_array($typesArray['children'])) {
             foreach ($typesArray['children'] as $key => $value) {
                 $key = '';
                 if (!empty($value['name'])) {
@@ -232,14 +242,14 @@ class Schema
 
     /**
      * Return a new array that has each type returned as an associative array
-     * as "SchemaType" => [] rather than the way the tree.jsonld file has it
+     * as 'SchemaType' => [] rather than the way the tree.jsonld file has it
      * stored as a non-associative array
      *
      * @param array $typesArray
      *
      * @return array
      */
-    protected static function makeSchemaAssociative(array $typesArray)
+    protected static function makeSchemaAssociative(array $typesArray): array
     {
         $result = [];
 
@@ -247,11 +257,11 @@ class Schema
             if (isset($value['name'])) {
                 $key = $value['name'];
             }
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 $value = self::makeSchemaAssociative($value);
             }
-            if (isset($value['layer'])) {
-                if ($value['layer'] == 'core') {
+            if (isset($value['layer']) && \is_string($value['layer'])) {
+                if ($value['layer'] === 'core') {
                     $result[$key] = $value;
                 }
             } else {

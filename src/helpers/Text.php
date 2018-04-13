@@ -103,22 +103,22 @@ class Text
      *
      * @return string
      */
-    public static function extractTextFromField($field)
+    public static function extractTextFromField($field): string
     {
         if (empty($field)) {
             return '';
         }
         if ($field instanceof MatrixBlockQuery
-            || (is_array($field) && $field[0] instanceof MatrixBlock)) {
+            || (\is_array($field) && $field[0] instanceof MatrixBlock)) {
             $result = self::extractTextFromMatrix($field);
         } elseif ($field instanceof TagQuery
-            || (is_array($field) && $field[0] instanceof Tag)) {
+            || (\is_array($field) && $field[0] instanceof Tag)) {
             $result = self::extractTextFromTags($field);
         } else {
-            if (is_array($field)) {
-                $result = strip_tags(strval($field[0]));
+            if (\is_array($field)) {
+                $result = strip_tags((string)$field[0]);
             } else {
-                $result = strip_tags(strval($field));
+                $result = strip_tags((string)$field);
             }
         }
 
@@ -133,7 +133,7 @@ class Text
      *
      * @return string
      */
-    public static function extractTextFromTags($tags)
+    public static function extractTextFromTags($tags): string
     {
         if (empty($tags)) {
             return '';
@@ -144,9 +144,9 @@ class Text
             $tags = $tags->all();
         }
         foreach ($tags as $tag) {
-            $result .= $tag->title.", ";
+            $result .= $tag->title.', ';
         }
-        $result = rtrim($result, ", ");
+        $result = rtrim($result, ', ');
 
         return $result;
     }
@@ -160,7 +160,7 @@ class Text
      *
      * @return string
      */
-    public static function extractTextFromMatrix($blocks, $fieldHandle = '')
+    public static function extractTextFromMatrix($blocks, $fieldHandle = ''): string
     {
         if (empty($blocks)) {
             return '';
@@ -182,9 +182,10 @@ class Text
                 $fields = $matrixBlockTypeModel->getFields();
 
                 foreach ($fields as $field) {
+                    /** @var array $fieldClasses */
                     foreach ($fieldClasses as $fieldClassKey) {
                         if ($field instanceof $fieldClassKey) {
-                            if ($field->handle == $fieldHandle || empty($fieldHandle)) {
+                            if ($field->handle === $fieldHandle || empty($fieldHandle)) {
                                 $result .= self::extractTextFromField($block[$field->handle]).' ';
                             }
                         }
@@ -228,9 +229,9 @@ class Text
             return $text;
         }
 
-        return is_array($keywords)
-            ? implode(", ", array_slice(array_keys($keywords), 0, $limit))
-            : strval($keywords);
+        return \is_array($keywords)
+            ? implode(', ', \array_slice(array_keys($keywords), 0, $limit))
+            : (string)$keywords;
     }
 
     /**
@@ -264,9 +265,9 @@ class Text
             return $text;
         }
 
-        return is_array($sentences)
-            ? implode(" ", $sentences)
-            : strval($sentences);
+        return \is_array($sentences)
+            ? implode(' ', $sentences)
+            : (string)$sentences;
     }
 
     /**
@@ -283,10 +284,10 @@ class Text
             return '';
         }
         // Convert to UTF-8
-        if (function_exists('iconv')) {
-            $text = iconv(mb_detect_encoding($text, mb_detect_order(), true), "UTF-8//IGNORE", $text);
+        if (\function_exists('iconv')) {
+            $text = iconv(mb_detect_encoding($text, mb_detect_order(), true), 'UTF-8//IGNORE', $text);
         } else {
-            ini_set('mbstring.substitute_character', "none");
+            ini_set('mbstring.substitute_character', 'none');
             $text = mb_convert_encoding($text, 'UTF-8', 'UTF-8');
         }
         // Strip HTML tags

@@ -26,35 +26,35 @@ abstract class FluentModel extends Model
     /**
      * Add fluent getters/setters for this class
      *
-     * @param string $method    The method name (property name)
-     * @param array  $args      The arguments list
+     * @param string $method The method name (property name)
+     * @param array  $args   The arguments list
      *
      * @return mixed            The value of the property
      */
     public function __call($method, $args)
     {
         try {
-            $reflector = new \ReflectionClass(get_called_class());
+            $reflector = new \ReflectionClass(static::class);
         } catch (\ReflectionException $e) {
             Craft::error(
                 $e->getMessage(),
                 __METHOD__
             );
+
             return null;
         }
-        if ($reflector->hasProperty($method)) {
-            $property = $reflector->getProperty($method);
-            if (empty($args)) {
-                // Return the property
-                return $property->getValue();
-            } else {
-                // Set the property
-                $property->setValue($this, $args[0]);
-                // Make it chainable
-                return $this;
-            }
-        } else {
+        if (!$reflector->hasProperty($method)) {
             throw new InvalidArgumentException("Property {$method} doesn't exist");
         }
+        $property = $reflector->getProperty($method);
+        if (empty($args)) {
+            // Return the property
+            return $property->getValue();
+        }
+        // Set the property
+        $property->setValue($this, $args[0]);
+
+        // Make it chainable
+        return $this;
     }
 }

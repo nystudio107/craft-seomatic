@@ -93,8 +93,9 @@ class Field
             $fields = $layout->getFields();
             /** @var  $field BaseField */
             foreach ($fields as $field) {
-                foreach ($fieldClasses as $fieldClassKey) {
-                    if ($field instanceof $fieldClassKey) {
+                /** @var array $fieldClasses */
+                foreach ($fieldClasses as $fieldClass) {
+                    if ($field instanceof $fieldClass) {
                         $foundFields[$field->handle] = $field->name;
                     }
                 }
@@ -123,8 +124,11 @@ class Field
         string $fieldClassKey,
         bool $keysOnly = true
     ): array {
+        $foundFields = [];
         $layout = $element->getFieldLayout();
-        $foundFields = self::fieldsOfTypeFromLayout($fieldClassKey, $layout, $keysOnly);
+        if ($layout !== null) {
+            $foundFields = self::fieldsOfTypeFromLayout($fieldClassKey, $layout, $keysOnly);
+        }
 
         return $foundFields;
     }
@@ -140,9 +144,8 @@ class Field
     public static function fieldsOfTypeFromUsers(string $fieldClassKey, bool $keysOnly = true): array
     {
         $layout = Craft::$app->getFields()->getLayoutByType(User::class);
-        $foundFields = self::fieldsOfTypeFromLayout($fieldClassKey, $layout, $keysOnly);
 
-        return $foundFields;
+        return self::fieldsOfTypeFromLayout($fieldClassKey, $layout, $keysOnly);
     }
 
     /**

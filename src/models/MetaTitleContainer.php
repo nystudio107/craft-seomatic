@@ -32,7 +32,7 @@ class MetaTitleContainer extends MetaContainer
     /**
      * The data in this container
      *
-     * @var MetaTitle
+     * @var MetaTitle[] $data
      */
     public $data = [];
 
@@ -57,7 +57,7 @@ class MetaTitleContainer extends MetaContainer
                             $scenario['default'] = 'error';
                             $scenario['warning'] = 'warning';
                             $metaTitleModel->debugMetaItem(
-                                "Tag attribute: ",
+                                'Tag attribute: ',
                                 $scenario
                             );
                         }

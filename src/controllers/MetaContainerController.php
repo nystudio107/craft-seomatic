@@ -20,6 +20,7 @@ use Craft;
 use craft\web\Controller;
 
 use yii\web\Response;
+use yii\web\JsonResponseFormatter;
 
 /**
  * @author    nystudio107
@@ -56,7 +57,7 @@ class MetaContainerController extends Controller
      *
      * @return Response
      */
-    public function actionAllMetaContainers(string $uri, int $siteId = null, bool $asArray = false)
+    public function actionAllMetaContainers(string $uri, int $siteId = null, bool $asArray = false): Response
     {
         $result = $this->getContainerArrays(
             [
@@ -84,7 +85,7 @@ class MetaContainerController extends Controller
      *
      * @return Response
      */
-    public function actionMetaTitleContainer(string $uri, int $siteId = null, bool $asArray = false)
+    public function actionMetaTitleContainer(string $uri, int $siteId = null, bool $asArray = false): Response
     {
         $result = $this->getContainerArrays(
             [
@@ -108,7 +109,7 @@ class MetaContainerController extends Controller
      *
      * @return Response
      */
-    public function actionMetaTagContainer(string $uri, int $siteId = null, bool $asArray = false)
+    public function actionMetaTagContainer(string $uri, int $siteId = null, bool $asArray = false): Response
     {
         $result = $this->getContainerArrays(
             [
@@ -132,7 +133,7 @@ class MetaContainerController extends Controller
      *
      * @return Response
      */
-    public function actionMetaLinkContainer(string $uri, int $siteId = null, bool $asArray = false)
+    public function actionMetaLinkContainer(string $uri, int $siteId = null, bool $asArray = false): Response
     {
         $result = $this->getContainerArrays(
             [
@@ -156,7 +157,7 @@ class MetaContainerController extends Controller
      *
      * @return Response
      */
-    public function actionMetaScriptContainer(string $uri, int $siteId = null, bool $asArray = false)
+    public function actionMetaScriptContainer(string $uri, int $siteId = null, bool $asArray = false): Response
     {
         $result = $this->getContainerArrays(
             [
@@ -180,7 +181,7 @@ class MetaContainerController extends Controller
      *
      * @return Response
      */
-    public function actionMetaJsonLdContainer(string $uri, int $siteId = null, bool $asArray = false)
+    public function actionMetaJsonLdContainer(string $uri, int $siteId = null, bool $asArray = false): Response
     {
         $result = $this->getContainerArrays(
             [
@@ -222,7 +223,7 @@ class MetaContainerController extends Controller
         }
         // use "pretty" output in debug mode
         Craft::$app->response->formatters[Response::FORMAT_JSON] = [
-            'class' => 'yii\web\JsonResponseFormatter',
+            'class' => JsonResponseFormatter::class,
             'prettyPrint' => YII_DEBUG,
         ];
 

@@ -15,6 +15,8 @@ use nystudio107\seomatic\helpers\Schema as SchemaHelper;
 
 use craft\web\Controller;
 
+use yii\web\Response;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -44,9 +46,9 @@ class JsonLdController extends Controller
      *
      * @param string $schemaType
      *
-     * @return \yii\web\Response
+     * @return Response
      */
-    public function actionGetType($schemaType)
+    public function actionGetType($schemaType): Response
     {
         return $this->asJson(SchemaHelper::getSchemaType($schemaType));
     }
@@ -56,9 +58,9 @@ class JsonLdController extends Controller
      *
      * @param string $schemaType
      *
-     * @return \yii\web\Response
+     * @return Response
      */
-    public function actionGetDecomposedType($schemaType)
+    public function actionGetDecomposedType($schemaType): Response
     {
         return $this->asJson(SchemaHelper::getDecomposedSchemaType($schemaType));
     }
@@ -68,11 +70,17 @@ class JsonLdController extends Controller
      *
      * @param string $path
      *
-     * @return \yii\web\Response
+     * @return Response
      */
-    public function actionGetTypeArray($path)
+    public function actionGetTypeArray($path): Response
     {
-        return $this->asJson(SchemaHelper::getSchemaArray($path));
+        try {
+            $schemaArray = SchemaHelper::getSchemaArray($path);
+        } catch (\Exception $e) {
+            $schemaArray = [];
+        }
+
+        return $this->asJson($schemaArray);
     }
 
     /**
@@ -80,9 +88,9 @@ class JsonLdController extends Controller
      *
      * @param string $path
      *
-     * @return \yii\web\Response
+     * @return Response
      */
-    public function actionGetTypeMenu($path)
+    public function actionGetTypeMenu($path): Response
     {
         return $this->asJson(SchemaHelper::getTypeMenu($path));
     }
@@ -92,9 +100,9 @@ class JsonLdController extends Controller
      *
      * @param string $path
      *
-     * @return \yii\web\Response
+     * @return Response
      */
-    public function actionGetSingleTypeMenu($path)
+    public function actionGetSingleTypeMenu($path): Response
     {
         return $this->asJson(SchemaHelper::getSingleTypeMenu($path));
     }

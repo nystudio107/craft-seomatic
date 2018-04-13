@@ -34,9 +34,7 @@ class MetaSitemapVars extends FluentModel
      */
     public static function create(array $config = [])
     {
-        $model = new MetaSitemapVars($config);
-
-        return $model;
+        return new MetaSitemapVars($config);
     }
 
     // Public Properties
@@ -73,9 +71,9 @@ class MetaSitemapVars extends FluentModel
     public $sitemapPriority;
 
     /**
-     * @var int
+     * @var null|int
      */
-    public $sitemapLimit = null;
+    public $sitemapLimit;
 
     /**
      * @var array
@@ -93,7 +91,7 @@ class MetaSitemapVars extends FluentModel
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [

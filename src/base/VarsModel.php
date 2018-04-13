@@ -27,7 +27,7 @@ abstract class VarsModel extends FluentModel
      *
      * @return string
      */
-    public function parsedValue(string $property)
+    public function parsedValue(string $property): string
     {
         $result = '';
 

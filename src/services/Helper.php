@@ -82,7 +82,7 @@ class Helper extends Component
      *
      * @return array
      */
-    public static function getLocalizedUrls(string $uri = null, int $siteId = null)
+    public static function getLocalizedUrls(string $uri = null, int $siteId = null): array
     {
         return DynamicMetaHelper::getLocalizedUrls($uri, $siteId);
     }
@@ -99,7 +99,7 @@ class Helper extends Component
      * @return \Twig_Markup
      * @throws \yii\base\Exception
      */
-    public static function seoFileLink($url, $robots = '', $canonical = '', $inline = true)
+    public static function seoFileLink($url, $robots = '', $canonical = '', $inline = true): \Twig_Markup
     {
         // Get the file name
         $path = parse_url($url, PHP_URL_PATH);
@@ -107,7 +107,7 @@ class Helper extends Component
         // Set some defaults
         $robots = empty($robots) ? 'all' : $robots;
         $canonical = empty($canonical) ? $url : $canonical;
-        $inline = $inline === true ? '1' : '0';
+        $inlineStr = $inline === true ? '1' : '0';
         // Compose the base64 encoded URL
         $seoFileLink = 'seomatic/seo-file-link/'
             .base64_encode($url)
@@ -116,7 +116,7 @@ class Helper extends Component
             .'/'
             .base64_encode($canonical)
             .'/'
-            .$inline
+            .$inlineStr
             .'/'
             .$fileName;
         return Template::raw(UrlHelper::siteUrl($seoFileLink));
@@ -165,7 +165,7 @@ class Helper extends Component
      *
      * @return string
      */
-    public static function extractTextFromField($field = null)
+    public static function extractTextFromField($field = null): string
     {
         return TextHelper::extractTextFromField($field);
     }
@@ -178,7 +178,7 @@ class Helper extends Component
      *
      * @return string
      */
-    public static function extractTextFromTags($tagQuery = null)
+    public static function extractTextFromTags($tagQuery = null): string
     {
         return TextHelper::extractTextFromTags($tagQuery);
     }
@@ -192,7 +192,7 @@ class Helper extends Component
      *
      * @return string
      */
-    public static function extractTextFromMatrix($matrixQuery = null, $fieldHandle = '')
+    public static function extractTextFromMatrix($matrixQuery = null, $fieldHandle = ''): string
     {
         return TextHelper::extractTextFromMatrix($matrixQuery, $fieldHandle);
     }

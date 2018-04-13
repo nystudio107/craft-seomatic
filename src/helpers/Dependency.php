@@ -13,8 +13,6 @@ namespace nystudio107\seomatic\helpers;
 
 use nystudio107\seomatic\Seomatic;
 
-use Craft;
-
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -36,16 +34,17 @@ class Dependency
     // Static Methods
     // =========================================================================
 
-    public static function validateDependencies($dependencies)
+    public static function validateDependencies($dependencies): bool
     {
         // No dependencies means we validate
-        if (empty($dependencies) || !is_array($dependencies)) {
+        if (empty($dependencies) || !\is_array($dependencies)) {
             return true;
         }
         $config = Seomatic::$settings;
         $meta = Seomatic::$seomaticVariable->meta;
         $site = Seomatic::$seomaticVariable->site;
         foreach ($dependencies as $type => $keys) {
+            /** @var array $keys */
             $validates = false;
             // If any dependency key in the array validates, this this dependency validates
             switch ($type) {
@@ -80,7 +79,7 @@ class Dependency
                 case self::TAG_DEPENDENCY:
                     foreach ($keys as $key) {
                         $meta = Seomatic::$plugin->tag->get($key);
-                        if (!empty($meta)) {
+                        if ($meta !== null) {
                             $options = $meta->tagAttributes();
                             // If the meta item exists, and would render, it validates
                             if ($meta->prepForRender($options)) {
@@ -93,7 +92,7 @@ class Dependency
                 case self::SCRIPT_DEPENDENCY:
                     foreach ($keys as $key) {
                         $meta = Seomatic::$plugin->script->get($key);
-                        if (!empty($meta)) {
+                        if ($meta !== null) {
                             $options = $meta->tagAttributes();
                             // If the meta item exists, and would render, it validates
                             if ($meta->prepForRender($options)) {
@@ -106,7 +105,7 @@ class Dependency
                 case self::LINK_DEPENDENCY:
                     foreach ($keys as $key) {
                         $meta = Seomatic::$plugin->link->get($key);
-                        if (!empty($meta)) {
+                        if ($meta !== null) {
                             $options = $meta->tagAttributes();
                             // If the meta item exists, and would render, it validates
                             if ($meta->prepForRender($options)) {
@@ -119,7 +118,7 @@ class Dependency
                 case self::JSONLD_DEPENDENCY:
                     foreach ($keys as $key) {
                         $meta = Seomatic::$plugin->jsonLd->get($key);
-                        if (!empty($meta)) {
+                        if ($meta !== null) {
                             $options = $meta->tagAttributes();
                             // If the meta item exists, and would render, it validates
                             if ($meta->prepForRender($options)) {

@@ -12,7 +12,6 @@
 namespace nystudio107\seomatic\base;
 
 use nystudio107\seomatic\base\Container as SeomaticContainer;
-use nystudio107\seomatic\helpers\Dependency;
 
 /**
  * @author    nystudio107
@@ -32,7 +31,7 @@ abstract class MetaContainer extends SeomaticContainer implements MetaContainerI
     /**
      * The MetaItems in this container
      *
-     * @var MetaItem
+     * @var MetaItem[] $data
      */
     public $data = [];
 
@@ -42,12 +41,12 @@ abstract class MetaContainer extends SeomaticContainer implements MetaContainerI
     /**
      * @inheritdoc
      */
-    public function render($params = []): string
+    public function render(array $params = []): string
     {
         $html = '';
 
         if ($this->prepForInclusion()) {
-            /** @var  $metaItemModel MetaItem */
+            /** @var MetaItem $metaItemModel */
             foreach ($this->data as $metaItemModel) {
                 if ($metaItemModel->include) {
                     $html .= $metaItemModel->render($params);
@@ -61,7 +60,7 @@ abstract class MetaContainer extends SeomaticContainer implements MetaContainerI
     /**
      * @inheritdoc
      */
-    public function renderArray($params = []): array
+    public function renderArray(array $params = []): array
     {
         $htmlArray = [];
 

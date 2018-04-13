@@ -43,7 +43,7 @@ class FrontendTemplateController extends Controller
      *
      * @return Response
      */
-    public function actionHumans()
+    public function actionHumans(): Response
     {
         $text = Seomatic::$plugin->frontendTemplates->renderTemplate(FrontendTemplates::HUMANS_TXT_HANDLE);
 
@@ -58,7 +58,7 @@ class FrontendTemplateController extends Controller
      *
      * @return Response
      */
-    public function actionRobots()
+    public function actionRobots(): Response
     {
         $text = Seomatic::$plugin->frontendTemplates->renderTemplate(FrontendTemplates::ROBOTS_TXT_HANDLE);
 
