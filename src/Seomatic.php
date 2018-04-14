@@ -43,6 +43,7 @@ use craft\errors\SiteNotFoundException;
 use craft\events\CategoryGroupEvent;
 use craft\events\ElementEvent;
 use craft\events\ExceptionEvent;
+use craft\events\DeleteTemplateCachesEvent;
 use craft\events\PluginEvent;
 use craft\events\RegisterCacheOptionsEvent;
 use craft\events\RegisterComponentTypesEvent;
@@ -54,6 +55,7 @@ use craft\services\Elements;
 use craft\services\Fields;
 use craft\services\Plugins;
 use craft\services\Sections;
+use craft\services\TemplateCaches;
 use craft\services\UserPermissions;
 use craft\helpers\UrlHelper;
 use craft\utilities\ClearCaches;
@@ -357,6 +359,14 @@ class Seomatic extends Plugin
      */
     protected function installGlobalEventListeners()
     {
+        // Handler: TemplateCaches::EVENT_AFTER_DELETE_CACHES
+        Event::on(
+            TemplateCaches::class,
+            TemplateCaches::EVENT_AFTER_DELETE_CACHES,
+            function (DeleteTemplateCachesEvent $event) {
+                $this->clearAllCaches();
+            }
+        );
         // Handler: Sections::EVENT_AFTER_SAVE_SECTION
         Event::on(
             Sections::class,
