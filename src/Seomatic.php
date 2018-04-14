@@ -372,7 +372,7 @@ class Seomatic extends Plugin
             TemplateCaches::class,
             TemplateCaches::EVENT_AFTER_DELETE_CACHES,
             function (DeleteTemplateCachesEvent $event) {
-                $this->clearAllCaches();
+                Seomatic::$plugin->metaContainers->invalidateCaches();
             }
         );
         // Handler: Sections::EVENT_AFTER_SAVE_SECTION
