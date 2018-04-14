@@ -4,6 +4,7 @@
 ### Changed
 * Fixed an issue where the social transforms sometimes might not render properly
 * SEOmatic now requires Craft CMS 3.0.2 or later (so we can listen to `TemplateCaches::EVENT_AFTER_DELETE_CACHES`)
+* Handle Section or Category Groups that may have had their handles renamed
 
 ### Added
 * SEOmatic now clears its caches any time `TemplateCaches::EVENT_AFTER_DELETE_CACHES` is triggered
