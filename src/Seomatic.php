@@ -32,6 +32,8 @@ use nystudio107\seomatic\services\Title as TitleService;
 use nystudio107\seomatic\twigextensions\SeomaticTwigExtension;
 use nystudio107\seomatic\variables\SeomaticVariable;
 
+use nystudio107\fastcgicachebust\FastcgiCacheBust;
+
 use Craft;
 use craft\base\Element;
 use craft\base\ElementInterface;
@@ -296,9 +298,15 @@ class Seomatic extends Plugin
      */
     public function clearAllCaches()
     {
+        // Clear all of SEOmatic's caches
         Seomatic::$plugin->frontendTemplates->invalidateCaches();
         Seomatic::$plugin->metaContainers->invalidateCaches();
         Seomatic::$plugin->sitemaps->invalidateCaches();
+        // If the FastCGI Cache Bust plugin is installed, clear its caches too
+        $plugin = Craft::$app->getPlugins()->getPlugin('fastcgi-cache-bust');
+        if ($plugin !== null) {
+            FastcgiCacheBust::$plugin->cache->clearAll();
+        }
     }
 
     // Protected Methods
