@@ -3,6 +3,10 @@
 ## 3.0.0-beta.23 - 2018.04.13
 ### Changed
 * Fixed an issue where the social transforms sometimes might not render properly
+* SEOmatic now requires Craft CMS 3.0.2 or later (so we can listen to `TemplateCaches::EVENT_AFTER_DELETE_CACHES`)
+
+### Added
+* SEOmatic now clears its caches any time `TemplateCaches::EVENT_AFTER_DELETE_CACHES` is triggered
 
 ## 3.0.0-beta.22 - 2018.04.12
 ### Added
