@@ -503,6 +503,13 @@ class MetaBundles extends Component
         return $metaBundles;
     }
 
+    /**
+     * Get all of the meta bundles for a given $sourceSiteId
+     *
+     * @param int $sourceSiteId
+     *
+     * @return array
+     */
     public function getContentMetaBundlesForSiteId(int $sourceSiteId): array
     {
         $metaBundles = [];
@@ -526,6 +533,41 @@ class MetaBundles extends Component
     }
 
     /**
+     * Remove any meta bundles from the $metaBundles array that no longer correspond
+     * with a category group or section
+     *
+     * @param array $metaBundles
+     */
+    public function pruneVestigialMetaBundles(array &$metaBundles)
+    {
+        $categories = Craft::$app->getCategories();
+        $sections = Craft::$app->getSections();
+        foreach ($metaBundles as $key => $metaBundle) {
+            $unsetMetaBundle = false;
+            /** @var MetaBundle $metaBundle */
+            switch ($metaBundle->sourceType) {
+                case self::GLOBAL_META_BUNDLE:
+                    $unsetMetaBundle = false;
+                    break;
+                case self::CATEGORYGROUP_META_BUNDLE:
+                    if ($categories->getGroupByHandle($metaBundle->sourceHandle) === null) {
+                        $unsetMetaBundle = true;
+                    }
+                    break;
+                case self::SECTION_META_BUNDLE:
+                    if ($sections->getSectionByHandle($metaBundle->sourceHandle) === null) {
+                        $unsetMetaBundle = true;
+                    }
+                    break;
+                // @TODO: handle commerce products
+            }
+            if ($unsetMetaBundle) {
+                unset($metaBundles[$key]);
+            }
+        }
+    }
+
+    /**
      * Get all of the data from $bundle in containers of $type
      *
      * @param MetaBundle $bundle
@@ -537,7 +579,7 @@ class MetaBundles extends Component
     {
         $containerData = [];
         foreach ($bundle->metaContainers as $metaContainer) {
-            if ($metaContainer::CONTAINER_TYPE == $type) {
+            if ($metaContainer::CONTAINER_TYPE === $type) {
                 foreach ($metaContainer->data as $dataHandle => $data) {
                     $containerData[$dataHandle] = $data;
                 }
