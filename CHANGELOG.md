@@ -7,6 +7,7 @@
 
 ### Added
 * SEOmatic now clears its caches any time `TemplateCaches::EVENT_AFTER_DELETE_CACHES` is triggered
+* If the FastcgiCacheBust plugins is installed, clear its caches when SEOmatic clears its own caches
 
 ## 3.0.0-beta.22 - 2018.04.12
 ### Added
