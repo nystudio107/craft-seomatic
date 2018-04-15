@@ -202,12 +202,16 @@ class MetaBundles extends Component
                 case self::SECTION_META_BUNDLE:
                     /** @var  $section Section */
                     $section = Craft::$app->getSections()->getSectionById($sourceId);
-                    $metaBundle = $this->createMetaBundleFromSection($section, $sourceSiteId);
+                    if ($section !== null) {
+                        $metaBundle = $this->createMetaBundleFromSection($section, $sourceSiteId);
+                    }
                     break;
 
                 case self::CATEGORYGROUP_META_BUNDLE:
                     $category = Craft::$app->getCategories()->getGroupById($sourceId);
-                    $metaBundle = $this->createMetaBundleFromCategory($category, $sourceSiteId);
+                    if ($category !== null) {
+                        $metaBundle = $this->createMetaBundleFromCategory($category, $sourceSiteId);
+                    }
                     break;
                 // @TODO: handle commerce products
             }
@@ -244,7 +248,7 @@ class MetaBundles extends Component
         if (!empty($metaBundleArray)) {
             $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
             $metaBundle = MetaBundle::create($metaBundleArray);
-            $id = count($this->metaBundles);
+            $id = \count($this->metaBundles);
             $this->metaBundles[$id] = $metaBundle;
             $this->metaBundlesBySourceHandle[$sourceType][$sourceHandle][$sourceSiteId] = $id;
         } else {
@@ -253,12 +257,16 @@ class MetaBundles extends Component
                 case self::SECTION_META_BUNDLE:
                     /** @var  $section Section */
                     $section = Craft::$app->getSections()->getSectionByHandle($sourceHandle);
-                    $metaBundle = $this->createMetaBundleFromSection($section, $sourceSiteId);
+                    if ($section !== null) {
+                        $metaBundle = $this->createMetaBundleFromSection($section, $sourceSiteId);
+                    }
                     break;
 
                 case self::CATEGORYGROUP_META_BUNDLE:
                     $category = Craft::$app->getCategories()->getGroupByHandle($sourceHandle);
-                    $metaBundle = $this->createMetaBundleFromCategory($category, $sourceSiteId);
+                    if ($category !== null) {
+                        $metaBundle = $this->createMetaBundleFromCategory($category, $sourceSiteId);
+                    }
                     break;
                 // @TODO: handle commerce products
             }
@@ -411,7 +419,7 @@ class MetaBundles extends Component
         $sites = Craft::$app->getSites()->getAllSites();
         /** @var  $site Site */
         foreach ($sites as $site) {
-            $metaBundle = $this->createMetaBundleFromSection($section, $site->id);
+            $this->createMetaBundleFromSection($section, $site->id);
         }
     }
 
@@ -425,7 +433,7 @@ class MetaBundles extends Component
         $sites = Craft::$app->getSites()->getAllSites();
         /** @var  $site Site */
         foreach ($sites as $site) {
-            $metaBundle = $this->createMetaBundleFromCategory($category, $site->id);
+            $this->createMetaBundleFromCategory($category, $site->id);
         }
     }
 
@@ -441,7 +449,7 @@ class MetaBundles extends Component
         $sourceBundleType = '';
         $sourceHandle = '';
         // See if this is a section we are tracking
-        switch (get_class($element)) {
+        switch (\get_class($element)) {
             case Entry::class:
                 /** @var  $element Entry */
                 $sourceId = $element->sectionId;
@@ -486,7 +494,7 @@ class MetaBundles extends Component
         foreach ($metaBundleArrays as $metaBundleArray) {
             $addToMetaBundles = true;
             if (!$allSites) {
-                if (in_array($metaBundleArray['sourceHandle'], $metaBundleSourceHandles)) {
+                if (\in_array($metaBundleArray['sourceHandle'], $metaBundleSourceHandles, true)) {
                     $addToMetaBundles = false;
                 }
                 $metaBundleSourceHandles[] = $metaBundleArray['sourceHandle'];
@@ -533,8 +541,8 @@ class MetaBundles extends Component
     }
 
     /**
-     * Remove any meta bundles from the $metaBundles array that no longer correspond
-     * with a category group or section
+     * Remove any meta bundles from the $metaBundles array that no longer
+     * correspond with a category group or section
      *
      * @param array $metaBundles
      */
@@ -615,7 +623,7 @@ class MetaBundles extends Component
     {
         $sites = Craft::$app->getSites()->getAllSites();
         foreach ($sites as $site) {
-            $metaBundle = $this->createGlobalMetaBundleForSite($site->id);
+            $this->createGlobalMetaBundleForSite($site->id);
         }
     }
 
@@ -646,34 +654,36 @@ class MetaBundles extends Component
             // @TODO: handle commerce products
         }
         // If the config file has a newer version than the $metaBundleArray, merge them
-        if (!empty($config)) {
-            if (version_compare($config['bundleVersion'], $metaBundle->bundleVersion, '>')) {
-                // Create a new meta bundle
-                switch ($sourceType) {
-                    case self::GLOBAL_META_BUNDLE:
-                        $metaBundle = $this->createGlobalMetaBundleForSite(
-                            $metaBundle->sourceSiteId,
-                            $metaBundle
-                        );
-                        break;
-                    case self::CATEGORYGROUP_META_BUNDLE:
-                        $category = Craft::$app->getCategories()->getGroupById($metaBundle->sourceId);
+        if (!empty($config) && version_compare($config['bundleVersion'], $metaBundle->bundleVersion, '>')) {
+            // Create a new meta bundle
+            switch ($sourceType) {
+                case self::GLOBAL_META_BUNDLE:
+                    $metaBundle = $this->createGlobalMetaBundleForSite(
+                        $metaBundle->sourceSiteId,
+                        $metaBundle
+                    );
+                    break;
+                case self::CATEGORYGROUP_META_BUNDLE:
+                    $category = Craft::$app->getCategories()->getGroupById($metaBundle->sourceId);
+                    if ($category !== null) {
                         $metaBundle = $this->createMetaBundleFromCategory(
                             $category,
                             $metaBundle->sourceSiteId,
                             $metaBundle
                         );
-                        break;
-                    case self::SECTION_META_BUNDLE:
-                        $section = Craft::$app->getSections()->getSectionById($metaBundle->sourceId);
+                    }
+                    break;
+                case self::SECTION_META_BUNDLE:
+                    $section = Craft::$app->getSections()->getSectionById($metaBundle->sourceId);
+                    if ($section !== null) {
                         $metaBundle = $this->createMetaBundleFromSection(
                             $section,
                             $metaBundle->sourceSiteId,
                             $metaBundle
                         );
                         break;
-                    // @TODO: handle commerce products
-                }
+                    }
+                // @TODO: handle commerce products
             }
         }
     }
@@ -694,10 +704,12 @@ class MetaBundles extends Component
             ]
         );
         $metaBundle = MetaBundle::create($metaBundleDefaults);
-        if (!empty($baseConfig)) {
-            $this->mergeMetaBundleSettings($metaBundle, $baseConfig);
+        if ($metaBundle !== null) {
+            if ($baseConfig !== null) {
+                $this->mergeMetaBundleSettings($metaBundle, $baseConfig);
+            }
+            $this->updateMetaBundle($metaBundle, $siteId);
         }
-        $this->updateMetaBundle($metaBundle, $siteId);
 
         return $metaBundle;
     }
@@ -758,17 +770,19 @@ class MetaBundles extends Component
                 // Merge in any migrated settings from an old Seomatic_Meta Field
                 if (!empty($element)) {
                     $element = Craft::$app->getElements()->getElementById($element->id, null, $siteId);
-                    $config = MigrationHelper::configFromSeomaticMeta(
-                        $element,
-                        MigrationHelper::SECTION_MIGRATION_CONTEXT
-                    );
-                    $metaBundleDefaults = ArrayHelper::merge(
-                        $metaBundleDefaults,
-                        $config
-                    );
+                    if ($element instanceof Element) {
+                        $config = MigrationHelper::configFromSeomaticMeta(
+                            $element,
+                            MigrationHelper::SECTION_MIGRATION_CONTEXT
+                        );
+                        $metaBundleDefaults = ArrayHelper::merge(
+                            $metaBundleDefaults,
+                            $config
+                        );
+                    }
                 }
                 $metaBundle = MetaBundle::create($metaBundleDefaults);
-                if (!empty($baseConfig)) {
+                if ($baseConfig !== null) {
                     $this->mergeMetaBundleSettings($metaBundle, $baseConfig);
                 }
                 $this->updateMetaBundle($metaBundle, $siteId);
@@ -833,16 +847,19 @@ class MetaBundles extends Component
                 // Merge in any migrated settings from an old Seomatic_Meta Field
                 if (!empty($element)) {
                     $element = Craft::$app->getElements()->getElementById($element->id, null, $siteId);
-                    $config = MigrationHelper::configFromSeomaticMeta(
-                        $element,
-                        MigrationHelper::SECTION_MIGRATION_CONTEXT
-                    );
-                    $metaBundleDefaults = ArrayHelper::merge(
-                        $metaBundleDefaults,
-                        $config
-                    );
-                }                $metaBundle = MetaBundle::create($metaBundleDefaults);
-                if (!empty($baseConfig)) {
+                    if ($element instanceof Element) {
+                        $config = MigrationHelper::configFromSeomaticMeta(
+                            $element,
+                            MigrationHelper::SECTION_MIGRATION_CONTEXT
+                        );
+                        $metaBundleDefaults = ArrayHelper::merge(
+                            $metaBundleDefaults,
+                            $config
+                        );
+                    }
+                }
+                $metaBundle = MetaBundle::create($metaBundleDefaults);
+                if ($baseConfig !== null) {
                     $this->mergeMetaBundleSettings($metaBundle, $baseConfig);
                 }
                 $this->updateMetaBundle($metaBundle, $siteId);
@@ -867,14 +884,14 @@ class MetaBundles extends Component
         $attributes = $baseConfig->metaGlobalVars->getAttributes();
         $metaBundle->metaGlobalVars->setAttributes($attributes);
         // Preserve the metaSiteVars
-        if (!empty($baseConfig->metaSiteVars)) {
+        if ($baseConfig->metaSiteVars !== null) {
             $attributes = $baseConfig->metaSiteVars->getAttributes();
             $metaBundle->metaSiteVars->setAttributes($attributes);
-            if (!empty($baseConfig->metaSiteVars->identity)) {
+            if ($baseConfig->metaSiteVars->identity !== null) {
                 $attributes = $baseConfig->metaSiteVars->identity->getAttributes();
                 $metaBundle->metaSiteVars->identity->setAttributes($attributes);
             }
-            if (!empty($baseConfig->metaSiteVars->creator)) {
+            if ($baseConfig->metaSiteVars->creator !== null) {
                 $attributes = $baseConfig->metaSiteVars->creator->getAttributes();
                 $metaBundle->metaSiteVars->creator->setAttributes($attributes);
             }
@@ -892,11 +909,12 @@ class MetaBundles extends Component
         );
         foreach ($scripts as $scriptHandle => $scriptData) {
             foreach ($metaBundle->metaContainers as $metaContainer) {
-                if ($metaContainer::CONTAINER_TYPE == MetaScriptContainer::CONTAINER_TYPE) {
+                if ($metaContainer::CONTAINER_TYPE === MetaScriptContainer::CONTAINER_TYPE) {
                     $data = $metaContainer->getData($scriptHandle);
                     if ($data) {
+                        /** @var array $scriptData*/
                         foreach ($scriptData as $key => $value) {
-                            if (is_array($value)) {
+                            if (\is_array($value)) {
                                 foreach ($value as $varsKey => $varsValue) {
                                     if (isset($varsValue['value'])) {
                                         $data->$key[$varsKey]['value'] = $varsValue['value'];
