@@ -377,6 +377,8 @@ class SettingsController extends Controller
         $variables['controllerHandle'] = 'content';
         $variables['selectedSubnavItem'] = 'content';
         $variables['metaBundles'] = Seomatic::$plugin->metaBundles->getContentMetaBundlesForSiteId($siteId);
+        Seomatic::$plugin->metaBundles->pruneVestigialMetaBundles($variables['metaBundles']);
+
         // For the grades
         $variables['seoSetupGrades'] = self::SETUP_GRADES;
         $variables['seoSetupFields'] = self::SEO_SETUP_FIELDS;

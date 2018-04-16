@@ -32,6 +32,8 @@ use nystudio107\seomatic\services\Title as TitleService;
 use nystudio107\seomatic\twigextensions\SeomaticTwigExtension;
 use nystudio107\seomatic\variables\SeomaticVariable;
 
+use nystudio107\fastcgicachebust\FastcgiCacheBust;
+
 use Craft;
 use craft\base\Element;
 use craft\base\ElementInterface;
@@ -43,6 +45,7 @@ use craft\errors\SiteNotFoundException;
 use craft\events\CategoryGroupEvent;
 use craft\events\ElementEvent;
 use craft\events\ExceptionEvent;
+use craft\events\DeleteTemplateCachesEvent;
 use craft\events\PluginEvent;
 use craft\events\RegisterCacheOptionsEvent;
 use craft\events\RegisterComponentTypesEvent;
@@ -54,6 +57,7 @@ use craft\services\Elements;
 use craft\services\Fields;
 use craft\services\Plugins;
 use craft\services\Sections;
+use craft\services\TemplateCaches;
 use craft\services\UserPermissions;
 use craft\helpers\UrlHelper;
 use craft\utilities\ClearCaches;
@@ -294,9 +298,15 @@ class Seomatic extends Plugin
      */
     public function clearAllCaches()
     {
+        // Clear all of SEOmatic's caches
         Seomatic::$plugin->frontendTemplates->invalidateCaches();
         Seomatic::$plugin->metaContainers->invalidateCaches();
         Seomatic::$plugin->sitemaps->invalidateCaches();
+        // If the FastCGI Cache Bust plugin is installed, clear its caches too
+        $plugin = Craft::$app->getPlugins()->getPlugin('fastcgi-cache-bust');
+        if ($plugin !== null) {
+            FastcgiCacheBust::$plugin->cache->clearAll();
+        }
     }
 
     // Protected Methods
@@ -357,6 +367,14 @@ class Seomatic extends Plugin
      */
     protected function installGlobalEventListeners()
     {
+        // Handler: TemplateCaches::EVENT_AFTER_DELETE_CACHES
+        Event::on(
+            TemplateCaches::class,
+            TemplateCaches::EVENT_AFTER_DELETE_CACHES,
+            function (DeleteTemplateCachesEvent $event) {
+                Seomatic::$plugin->metaContainers->invalidateCaches();
+            }
+        );
         // Handler: Sections::EVENT_AFTER_SAVE_SECTION
         Event::on(
             Sections::class,
