@@ -9,7 +9,7 @@ SEOmatic facilitates [modern SEO best practices](https://nystudio107.com/blog/mo
 
 Related: [SEOmatic for Craft 2.x](https://github.com/nystudio107/seomatic). SEOmatic for Craft CMS 3 is a complete re-write & re-architecture from scratch.
 
-**Note**: _This plugin will cost $99.00 once Craft 3 GA is released._
+**Note**: _The license fee for this plugin is $99.00 via the Craft Plugin Store._
 
 ## Requirements
 
