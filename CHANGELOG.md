@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.0.0-beta.24 - 2018.04.16
+### Changed
+* Fixed a regression that caused the Site switcher to no longer work in the SEOmatic settings
+
 ## 3.0.0-beta.23 - 2018.04.15
 ### Changed
 * Fixed an issue where the social transforms sometimes might not render properly
