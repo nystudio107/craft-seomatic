@@ -198,7 +198,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                     if ($multiSite && $metaBundle->metaSitemapVars->sitemapAltLinks) {
                         /** @var  $altSiteSettings */
                         foreach ($metaBundle->sourceAltSiteSettings as $altSiteSettings) {
-                            if (\in_array($altSiteSettings['siteId'], $groupSiteIds, true)) {
+                            if (\in_array($altSiteSettings['siteId'], $groupSiteIds, false)) {
                                 $altElement = null;
                                 // Handle each element type separately
                                 switch ($metaBundle->sourceBundleType) {
@@ -380,7 +380,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
     protected function assetFilesSitemapLink(Asset $asset, MetaBundle $metaBundle, array &$lines)
     {
         if ($asset->enabledForSite) {
-            if (\in_array($asset->kind, $this::FILE_TYPES, true)) {
+            if (\in_array($asset->kind, $this::FILE_TYPES, false)) {
                 $dateUpdated = $asset->dateUpdated ?? $asset->dateCreated ?? new \DateTime;
                 $lines[] = '  <url>';
                 $lines[] = '    <loc>';
