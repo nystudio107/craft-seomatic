@@ -1,6 +1,11 @@
 # SEOmatic Changelog
 
-## 3.0.0-beta.23 - 2018.04.15
+## 3.0.0-beta.24 - 2018.04.17
+### Changed
+* Fixed a regression that caused the Site switcher to no longer work in the SEOmatic settings
+* Fixed a regression that could cause the sitemap index to include the appropriate sections
+
+## 3.0.0-beta.23 - 2018.04.16
 ### Changed
 * Fixed an issue where the social transforms sometimes might not render properly
 * SEOmatic now requires Craft CMS 3.0.2 or later (so we can listen to `TemplateCaches::EVENT_AFTER_DELETE_CACHES`)
