@@ -13,34 +13,24 @@ Related: [SEOmatic for Craft 2.x](https://github.com/nystudio107/seomatic). SEOm
 
 ## Requirements
 
-This plugin requires Craft CMS 3.0.0-RC12 or later.
+This plugin requires Craft CMS 3.0.2 or later.
 
 ## Installation
 
 To install SEOmatic, follow these steps:
 
-1. Install with Composer via `composer require nystudio107/craft-seomatic:^3.0.0-beta.3`
+1. Install with Composer via `composer require nystudio107/craft-seomatic`
 2. Install plugin in the Craft Control Panel under Settings > Plugins
 
 You can also install SEOmatic via the **Plugin Store** in the Craft AdminCP.
 
 SEOmatic works on Craft 3.x.
 
-## SEOmatic Beta Notes
+## SEOmatic Usage Notes
 
 ### Issues
 
-SEOmatic for Craft CMS 3 is currently in beta; that means it _may_ be a little rough around the edges. Please report any issues you find to the [SEOmatic Issues](https://github.com/nystudio107/craft-seomatic/issues) page.
-
-### Can I use it on a live production site?
-
-Yes, you can. And people are. All software is of varying degrees of perfection (with beta software tending towards the "less perfect" end of the spectrum), but SEOmatic is ready for your website.
-
-Like any beta software, SEOmatic for Craft CMS 3 may have issues that need addressing. However, we have been using SEOmatic for Craft CMS 3 on a number of live production sites for some time without incident.
-
-The GA release is coming very soon.
-
-Report any issues you find on the [SEOmatic Issues](https://github.com/nystudio107/craft-seomatic/issues) page, and you should see a fairly rapid turn-around time in them being addressed.
+Please report any issues you find to the [SEOmatic Issues](https://github.com/nystudio107/craft-seomatic/issues) page.
 
 ### Upgrading from SEOmatic 1.x for Craft CMS 2.x
 
