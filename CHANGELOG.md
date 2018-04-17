@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.0.0 - 2018.04.17
+### Added
+* Official GA release
+
 ## 3.0.0-beta.24 - 2018.04.17
 ### Changed
 * Fixed a regression that caused the Site switcher to no longer work in the SEOmatic settings
