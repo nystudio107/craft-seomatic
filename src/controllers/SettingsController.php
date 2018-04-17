@@ -956,7 +956,7 @@ class SettingsController extends Controller
             }
 
             // Make sure the $siteId they are trying to edit is in our array of editable sites
-            if (!\in_array($siteId, $variables['enabledSiteIds'], true)) {
+            if (!\in_array($siteId, $variables['enabledSiteIds'], false)) {
                 if (!empty($variables['enabledSiteIds'])) {
                     $siteId = reset($variables['enabledSiteIds']);
                 } else {
