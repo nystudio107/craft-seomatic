@@ -3,6 +3,7 @@
 ## 3.0.0-beta.24 - 2018.04.16
 ### Changed
 * Fixed a regression that caused the Site switcher to no longer work in the SEOmatic settings
+* Fixed a regression that could cause the sitemap index to include the appropriate sections
 
 ## 3.0.0-beta.23 - 2018.04.15
 ### Changed
