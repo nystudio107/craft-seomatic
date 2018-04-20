@@ -178,94 +178,96 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 /** @var  $element Entry */
                 foreach ($elements as $element) {
                     $path = ($element->uri === '__home__') ? '' : $element->uri;
-                    $url = UrlHelper::siteUrl($path, null, null, $metaBundle->sourceSiteId);
-                    $dateUpdated = $element->dateUpdated ?? $element->dateCreated ?? new \DateTime;
-                    $lines[] = '  <url>';
-                    // Standard sitemap key/values
-                    $lines[] = '    <loc>';
-                    $lines[] = '      '.$url;
-                    $lines[] = '    </loc>';
-                    $lines[] = '    <lastmod>';
-                    $lines[] = '      '.$dateUpdated->format(\DateTime::W3C);
-                    $lines[] = '    </lastmod>';
-                    $lines[] = '    <changefreq>';
-                    $lines[] = '      '.$metaBundle->metaSitemapVars->sitemapChangeFreq;
-                    $lines[] = '    </changefreq>';
-                    $lines[] = '    <priority>';
-                    $lines[] = '      '.$metaBundle->metaSitemapVars->sitemapPriority;
-                    $lines[] = '    </priority>';
-                    // Handle alternate URLs if this is multi-site
-                    if ($multiSite && $metaBundle->metaSitemapVars->sitemapAltLinks) {
-                        /** @var  $altSiteSettings */
-                        foreach ($metaBundle->sourceAltSiteSettings as $altSiteSettings) {
-                            if (\in_array($altSiteSettings['siteId'], $groupSiteIds, false)) {
-                                $altElement = null;
-                                // Handle each element type separately
-                                switch ($metaBundle->sourceBundleType) {
-                                    case MetaBundles::SECTION_META_BUNDLE:
-                                        $altElement = Entry::find()
-                                            ->section($metaBundle->sourceHandle)
-                                            ->id($element->id)
-                                            ->siteId($altSiteSettings['siteId'])
-                                            ->enabledForSite(true)
-                                            ->limit(1)
-                                            ->one();
-                                        break;
+                    if ($path !== null) {
+                        $url = UrlHelper::siteUrl($path, null, null, $metaBundle->sourceSiteId);
+                        $dateUpdated = $element->dateUpdated ?? $element->dateCreated ?? new \DateTime;
+                        $lines[] = '  <url>';
+                        // Standard sitemap key/values
+                        $lines[] = '    <loc>';
+                        $lines[] = '      '.$url;
+                        $lines[] = '    </loc>';
+                        $lines[] = '    <lastmod>';
+                        $lines[] = '      '.$dateUpdated->format(\DateTime::W3C);
+                        $lines[] = '    </lastmod>';
+                        $lines[] = '    <changefreq>';
+                        $lines[] = '      '.$metaBundle->metaSitemapVars->sitemapChangeFreq;
+                        $lines[] = '    </changefreq>';
+                        $lines[] = '    <priority>';
+                        $lines[] = '      '.$metaBundle->metaSitemapVars->sitemapPriority;
+                        $lines[] = '    </priority>';
+                        // Handle alternate URLs if this is multi-site
+                        if ($multiSite && $metaBundle->metaSitemapVars->sitemapAltLinks) {
+                            /** @var  $altSiteSettings */
+                            foreach ($metaBundle->sourceAltSiteSettings as $altSiteSettings) {
+                                if (\in_array($altSiteSettings['siteId'], $groupSiteIds, false)) {
+                                    $altElement = null;
+                                    // Handle each element type separately
+                                    switch ($metaBundle->sourceBundleType) {
+                                        case MetaBundles::SECTION_META_BUNDLE:
+                                            $altElement = Entry::find()
+                                                ->section($metaBundle->sourceHandle)
+                                                ->id($element->id)
+                                                ->siteId($altSiteSettings['siteId'])
+                                                ->enabledForSite(true)
+                                                ->limit(1)
+                                                ->one();
+                                            break;
 
-                                    case MetaBundles::CATEGORYGROUP_META_BUNDLE:
-                                        $altElement = Category::find()
-                                            ->id($element->id)
-                                            ->siteId($altSiteSettings['siteId'])
-                                            ->limit(1)
-                                            ->enabledForSite(true)
-                                            ->one();
-                                        break;
-                                    // @todo: handle Commerce products
-                                }
-                                if ($altElement) {
-                                    $lines[] = '    <xhtml:link rel="alternate"'
-                                        .' hreflang="'.$altSiteSettings['language'].'"'
-                                        .' href="'.$altElement->url.'"'
-                                        .' />';
-                                }
-                            }
-                        }
-                    }
-                    // Handle any Assets
-                    if ($metaBundle->metaSitemapVars->sitemapAssets) {
-                        // Regular Assets fields
-                        $assetFields = FieldHelper::fieldsOfTypeFromElement(
-                            $element,
-                            FieldHelper::ASSET_FIELD_CLASS_KEY,
-                            true
-                        );
-                        foreach ($assetFields as $assetField) {
-                            $assets = $element[$assetField]->all();
-                            /** @var Asset[] $assets */
-                            foreach ($assets as $asset) {
-                                $this->assetSitemapItem($asset, $metaBundle, $lines);
-                            }
-                        }
-                        // Assets embeded in Matrix fields
-                        $matrixFields = FieldHelper::fieldsOfTypeFromElement(
-                            $element,
-                            FieldHelper::BLOCK_FIELD_CLASS_KEY,
-                            true
-                        );
-                        foreach ($matrixFields as $matrixField) {
-                            $matrixBlocks = $element[$matrixField]->all();
-                            /** @var MatrixBlock[] $matrixBlocks */
-                            foreach ($matrixBlocks as $matrixBlock) {
-                                $assetFields = FieldHelper::matrixFieldsOfType($matrixBlock, AssetsField::class);
-                                foreach ($assetFields as $assetField) {
-                                    foreach ($matrixBlock[$assetField]->all() as $asset) {
-                                        $this->assetSitemapItem($asset, $metaBundle, $lines);
+                                        case MetaBundles::CATEGORYGROUP_META_BUNDLE:
+                                            $altElement = Category::find()
+                                                ->id($element->id)
+                                                ->siteId($altSiteSettings['siteId'])
+                                                ->limit(1)
+                                                ->enabledForSite(true)
+                                                ->one();
+                                            break;
+                                        // @todo: handle Commerce products
+                                    }
+                                    if ($altElement) {
+                                        $lines[] = '    <xhtml:link rel="alternate"'
+                                            .' hreflang="'.$altSiteSettings['language'].'"'
+                                            .' href="'.$altElement->url.'"'
+                                            .' />';
                                     }
                                 }
                             }
                         }
+                        // Handle any Assets
+                        if ($metaBundle->metaSitemapVars->sitemapAssets) {
+                            // Regular Assets fields
+                            $assetFields = FieldHelper::fieldsOfTypeFromElement(
+                                $element,
+                                FieldHelper::ASSET_FIELD_CLASS_KEY,
+                                true
+                            );
+                            foreach ($assetFields as $assetField) {
+                                $assets = $element[$assetField]->all();
+                                /** @var Asset[] $assets */
+                                foreach ($assets as $asset) {
+                                    $this->assetSitemapItem($asset, $metaBundle, $lines);
+                                }
+                            }
+                            // Assets embeded in Matrix fields
+                            $matrixFields = FieldHelper::fieldsOfTypeFromElement(
+                                $element,
+                                FieldHelper::BLOCK_FIELD_CLASS_KEY,
+                                true
+                            );
+                            foreach ($matrixFields as $matrixField) {
+                                $matrixBlocks = $element[$matrixField]->all();
+                                /** @var MatrixBlock[] $matrixBlocks */
+                                foreach ($matrixBlocks as $matrixBlock) {
+                                    $assetFields = FieldHelper::matrixFieldsOfType($matrixBlock, AssetsField::class);
+                                    foreach ($assetFields as $assetField) {
+                                        foreach ($matrixBlock[$assetField]->all() as $asset) {
+                                            $this->assetSitemapItem($asset, $metaBundle, $lines);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        $lines[] = '  </url>';
                     }
-                    $lines[] = '  </url>';
                     // Include links to any known file types in the assets fields
                     if ($metaBundle->metaSitemapVars->sitemapFiles) {
                         // Regular Assets fields
@@ -298,6 +300,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                                 }
                             }
                         }
+
                     }
                 }
                 // Sitemap index closing tag
