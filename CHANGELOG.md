@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.0.1 - 2018.04.19
+## 3.0.1 - 2018.04.20
 ### Changed
 * Fixed an issue with sitemap indexes for elements that have null URLs
 * Fixed an issue with permissions and the Tracking Scripts page
