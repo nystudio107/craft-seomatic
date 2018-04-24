@@ -15,11 +15,11 @@
 
 {############### General Info for all types ###############}
 
-<h2>{{ "General Info"  |t("seomatic") }}</h2>
+<h2>{{ "General Info" |t("seomatic") }}</h2>
 
 {{ forms.textField({
-    label: "Entity Name" |t("seomatic"),
-    instructions: "The name of the entity that #{websiteVerb} the website"  |t("seomatic"),
+    label: "Entity Name"|t("seomatic"),
+    instructions: "The name of the entity that #{websiteVerb} the website" |t("seomatic"),
     id: "genericName",
     class: "nicetext",
     name: "genericName",
@@ -29,8 +29,8 @@
 }) }}
 
 {{ forms.textField({
-    label: "Alternate Entity Name" |t("seomatic"),
-    instructions: "An alternate or nickname for the entity that #{websiteVerb} the website"  |t("seomatic"),
+    label: "Alternate Entity Name"|t("seomatic"),
+    instructions: "An alternate or nickname for the entity that #{websiteVerb} the website" |t("seomatic"),
     id: "genericAlternateName",
     class: "nicetext",
     name: "genericAlternateName",
@@ -41,12 +41,12 @@
 
 <div class="field" id="genericDescription-field">
     <div class="heading">
-        <label for="genericDescription">{{ "Entity Description" |t("seomatic")}}</label>
-        <div class="instructions"><p>{{ "A description of the entity that #{websiteVerb} the website"  |t("seomatic") }}</p></div>
+        <label for="genericDescription">{{ "Entity Description"|t("seomatic")}}</label>
+        <div class="instructions"><p>{{ "A description of the entity that #{websiteVerb} the website" |t("seomatic") }}</p></div>
     </div>
     {{ forms.textarea({
-        label: "Entity Description" |t("seomatic"),
-        instructions: "A description of the entity that #{websiteVerb} the website"  |t("seomatic"),
+        label: "Entity Description"|t("seomatic"),
+        instructions: "A description of the entity that #{websiteVerb} the website" |t("seomatic"),
         id: "genericDescription",
         class: "nicetext",
         name: "genericDescription",
@@ -59,8 +59,8 @@
 </div>
 
 {{ forms.textField({
-    label: "Entity URL" |t("seomatic"),
-    instructions: "A URL for the entity that #{websiteVerb} the website"  |t("seomatic"),
+    label: "Entity URL"|t("seomatic"),
+    instructions: "A URL for the entity that #{websiteVerb} the website" |t("seomatic"),
     id: "genericUrl",
     class: "nicetext",
     name: "genericUrl",
@@ -70,8 +70,8 @@
 }) }}
 
 {{ forms.elementSelectfield({
-    label: "Entity Brand" |t("seomatic"),
-    instructions: "An image or logo that represents the entity that #{websiteVerb} the website.  The image must be in JPG, PNG, or GIF format."  |t("seomatic"),
+    label: "Entity Brand"|t("seomatic"),
+    instructions: "An image or logo that represents the entity that #{websiteVerb} the website.  The image must be in JPG, PNG, or GIF format." |t("seomatic"),
     id: "genericImageIds",
     name: "genericImageIds",
     viewMode: "large",
@@ -81,7 +81,7 @@
         kind: ["image"],
     },
     jsClass: "Craft.AssetSelectInput",
-    selectionLabel: "Select Brand Image" |t("seomatic"),
+    selectionLabel: "Select Brand Image"|t("seomatic"),
     sources: [],
     limit: 1,
     warning: false,
@@ -89,8 +89,8 @@
 }) }}
 
 {{ forms.textField({
-    label: "Entity Telephone" |t("seomatic"),
-    instructions: "The primary contact telephone number for the entity that #{websiteVerb} the website"  |t("seomatic"),
+    label: "Entity Telephone"|t("seomatic"),
+    instructions: "The primary contact telephone number for the entity that #{websiteVerb} the website" |t("seomatic"),
     id: "genericTelephone",
     class: "nicetext",
     name: "genericTelephone",
@@ -100,8 +100,8 @@
 }) }}
 
 {{ forms.textField({
-    label: "Entity Email" |t("seomatic"),
-    instructions: "The primary contact email address for the entity that #{websiteVerb} the website"  |t("seomatic"),
+    label: "Entity Email"|t("seomatic"),
+    instructions: "The primary contact email address for the entity that #{websiteVerb} the website" |t("seomatic"),
     id: "genericEmail",
     class: "nicetext",
     name: "genericEmail",
@@ -111,11 +111,11 @@
 }) }}
 
 <!-- Location -->
-<h2>{{ "Location Info"  |t("seomatic") }}</h2>
+<h2>{{ "Location Info" |t("seomatic") }}</h2>
 
 {{ forms.textField({
-    label: "Entity Street Address" |t("seomatic"),
-    instructions: "The street address of the entity that #{websiteVerb} the website, e.g.: 123 Main Street"  |t("seomatic"),
+    label: "Entity Street Address"|t("seomatic"),
+    instructions: "The street address of the entity that #{websiteVerb} the website, e.g.: 123 Main Street" |t("seomatic"),
     id: "genericStreetAddress",
     class: "nicetext",
     name: "genericStreetAddress",
@@ -127,8 +127,8 @@
 <div class="field">
     <div class="half-width-field half-width-field-left">
         {{ forms.textField({
-            label: "Entity Locality" |t("seomatic"),
-            instructions: "The locality of the entity that #{websiteVerb} the website, e.g.: Portchester"  |t("seomatic"),
+            label: "Entity Locality"|t("seomatic"),
+            instructions: "The locality of the entity that #{websiteVerb} the website, e.g.: Portchester" |t("seomatic"),
             id: "genericAddressLocality",
             class: "nicetext",
             name: "genericAddressLocality",
@@ -139,8 +139,8 @@
     </div>
     <div class="half-width-field">
         {{ forms.textField({
-            label: "Entity Region" |t("seomatic"),
-            instructions: "The region of the entity that #{websiteVerb} the website, e.g.: New York or NY"  |t("seomatic"),
+            label: "Entity Region"|t("seomatic"),
+            instructions: "The region of the entity that #{websiteVerb} the website, e.g.: New York or NY" |t("seomatic"),
             id: "genericAddressRegion",
             class: "nicetext",
             name: "genericAddressRegion",
@@ -154,8 +154,8 @@
 <div class="field">
     <div class="half-width-field half-width-field-left">
         {{ forms.textField({
-            label: "Entity Postal Code" |t("seomatic"),
-            instructions: "The postal code of the entity that #{websiteVerb} the website, e.g.: 14580"  |t("seomatic"),
+            label: "Entity Postal Code"|t("seomatic"),
+            instructions: "The postal code of the entity that #{websiteVerb} the website, e.g.: 14580" |t("seomatic"),
             id: "genericPostalCode",
             class: "nicetext",
             name: "genericPostalCode",
@@ -166,8 +166,8 @@
     </div>
     <div class="half-width-field">
         {{ forms.textField({
-            label: "Entity Country" |t("seomatic"),
-            instructions: "The country in which the entity that #{websiteVerb} the website is located, e.g.: US"  |t("seomatic"),
+            label: "Entity Country"|t("seomatic"),
+            instructions: "The country in which the entity that #{websiteVerb} the website is located, e.g.: US" |t("seomatic"),
             id: "genericAddressCountry",
             class: "nicetext",
             name: "genericAddressCountry",
@@ -181,8 +181,8 @@
 <div class="field">
     <div class="half-width-field half-width-field-left">
         {{ forms.textField({
-            label: "Entity Latitude" |t("seomatic"),
-            instructions: "The latitude of the location of the entity that #{websiteVerb} the website, e.g.: -120.5436367"  |t("seomatic"),
+            label: "Entity Latitude"|t("seomatic"),
+            instructions: "The latitude of the location of the entity that #{websiteVerb} the website, e.g.: -120.5436367" |t("seomatic"),
             id: "genericGeoLatitude",
             class: "nicetext",
             name: "genericGeoLatitude",
@@ -194,8 +194,8 @@
     
     <div class="half-width-field">
         {{ forms.textField({
-            label: "Entity Longitude" |t("seomatic"),
-            instructions: "The longitude of the location of the entity that #{websiteVerb} the website, e.g.: 80.6033588"  |t("seomatic"),
+            label: "Entity Longitude"|t("seomatic"),
+            instructions: "The longitude of the location of the entity that #{websiteVerb} the website, e.g.: 80.6033588" |t("seomatic"),
             id: "genericGeoLongitude",
             class: "nicetext",
             name: "genericGeoLongitude",
@@ -208,12 +208,12 @@
 
 <div class="buttons">
     <div class="btngroup first">
-        <input id="geolookup" type="button" class="btn" value="{{ "Look up Latitude/Longitude" |t("seomatic") }}">
+        <input id="geolookup" type="button" class="btn" value="{{ "Look up Latitude/Longitude"|t("seomatic") }}">
     </div>
 </div>
 <div id="geolookup-errors" style="display: none;">
     <ul class="errors">
-        <li>{{ "No location found.  Perhaps the address is wrong/incomplete?"  |t("seomatic") }}</li>
+        <li>{{ "No location found.  Perhaps the address is wrong/incomplete?" |t("seomatic") }}</li>
     </ul>
 </div>
 
@@ -222,18 +222,18 @@
 {############### Person type specific fields ###############}
 
 <div class="metaPane field Person">
-    <h2>{{ "Person Info"  |t("seomatic") }}</h2>
+    <h2>{{ "Person Info" |t("seomatic") }}</h2>
     <div class="field">
         <div class="half-width-field half-width-field-left">
             {{ forms.selectField({
-                label: "Person Gender" |t("seomatic"),
-                instructions: "The gender of the person"  |t("seomatic"),
+                label: "Person Gender"|t("seomatic"),
+                instructions: "The gender of the person" |t("seomatic"),
                 id: "personGender",
                 class: "nicetext",
                 options: {
-                    "Male": "Male" |t("seomatic"),
-                    "Female": "Female" |t("seomatic"),
-                    "Other": "Other" |t("seomatic"),
+                    "Male": "Male"|t("seomatic"),
+                    "Female": "Female"|t("seomatic"),
+                    "Other": "Other"|t("seomatic"),
                 },
                 name: "personGender",
                 value: entity.personGender,
@@ -243,8 +243,8 @@
         </div>
         <div class="half-width-field">
             {{ forms.textField({
-                label: "Person Birth Place" |t("seomatic"),
-                instructions: "The place where the person was born"  |t("seomatic"),
+                label: "Person Birth Place"|t("seomatic"),
+                instructions: "The place where the person was born" |t("seomatic"),
                 id: "personBirthPlace",
                 class: "nicetext",
                 name: "personBirthPlace",
@@ -259,13 +259,13 @@
 {############### Organization type specific fields ###############}
 
 <div class="metaPane field Organization">
-    <h2>{{ "Organization Info"  |t("seomatic") }}</h2>
+    <h2>{{ "Organization Info" |t("seomatic") }}</h2>
     
     <div class="field">
         <div class="half-width-field half-width-field-left">
             {{ forms.textField({
-                label: "Organization DUNS Number" |t("seomatic"),
-                instructions: "The DUNS (Dunn & Bradstreet) number of the organization that #{websiteVerb} the website"  |t("seomatic"),
+                label: "Organization DUNS Number"|t("seomatic"),
+                instructions: "The DUNS (Dunn & Bradstreet) number of the organization that #{websiteVerb} the website" |t("seomatic"),
                 id: "organizationDuns",
                 class: "nicetext",
                 name: "organizationDuns",
@@ -276,8 +276,8 @@
         </div>
         <div class="half-width-field">
             {{ forms.textField({
-                label: "Organization Founder" |t("seomatic"),
-                instructions: "The name of the founder of the organization"  |t("seomatic"),
+                label: "Organization Founder"|t("seomatic"),
+                instructions: "The name of the founder of the organization" |t("seomatic"),
                 id: "organizationFounder",
                 class: "nicetext",
                 name: "organizationFounder",
@@ -291,8 +291,8 @@
     <div class="field">
         <div class="half-width-field half-width-field-left">
             {{ forms.textField({
-                label: "Organization Founding Date" |t("seomatic"),
-                instructions: "The date the organization was founded, in ISO 8601 date format, e.g.: `2018-03-26`. [Learn More](http://schema.org/Date)"  |t("seomatic"),
+                label: "Organization Founding Date"|t("seomatic"),
+                instructions: "The date the organization was founded, in ISO 8601 date format, e.g.: `2018-03-26`. [Learn More](http://schema.org/Date)" |t("seomatic"),
                 id: "organizationFoundingDate",
                 class: "nicetext",
                 name: "organizationFoundingDate",
@@ -303,8 +303,8 @@
         </div>
         <div class="half-width-field">
             {{ forms.textField({
-                label: "Organization Founding Location" |t("seomatic"),
-                instructions: "The location where the organization was founded"  |t("seomatic"),
+                label: "Organization Founding Location"|t("seomatic"),
+                instructions: "The location where the organization was founded" |t("seomatic"),
                 id: "organizationFoundingLocation",
                 class: "nicetext",
                 name: "organizationFoundingLocation",
@@ -315,22 +315,22 @@
         </div>
     </div>
     
-    <h2>{{ "Organization Contact Points"  |t("seomatic") }}</h2>
+    <h2>{{ "Organization Contact Points" |t("seomatic") }}</h2>
     
     {{ forms.editableTableField({
-        label: "Contact Points" |t("seomatic"),
-        instructions: "Use organization contact points to add your organizations's contact information to the Google Knowledge panel in some searches.  The Telephone Number **must be** an internationalized version of the phone number, starting with the '+' symbol and country code (+1 in the US and Canada).  e.g.: `+1-800-555-1212` or `+44-2078225951`. [Learn More](https://developers.google.com/structured-data/customize/contact-points)" |t("seomatic") |md,
+        label: "Contact Points"|t("seomatic"),
+        instructions: "Use organization contact points to add your organizations's contact information to the Google Knowledge panel in some searches.  The Telephone Number **must be** an internationalized version of the phone number, starting with the '+' symbol and country code (+1 in the US and Canada).  e.g.: `+1-800-555-1212` or `+44-2078225951`. [Learn More](https://developers.google.com/structured-data/customize/contact-points)"|t("seomatic") |md,
         id: "organizationContactPoints",
         name: "organizationContactPoints",
         required: false,
         cols: {
             telephone: {
-                heading: "Telephone Number"  |t("seomatic"),
-                type: "singleline"  |t("seomatic"),
+                heading: "Telephone Number" |t("seomatic"),
+                type: "singleline" |t("seomatic"),
             },
             contactType: {
-                heading: "Contact Type"  |t("seomatic"),
-                type: "select"  |t("seomatic"),
+                heading: "Contact Type" |t("seomatic"),
+                type: "select" |t("seomatic"),
                 options: {
                     "customer support": "Customer Support",
                     "technical support": "Technical Support",
@@ -362,10 +362,10 @@
 {############### Corporation type specific fields ###############}
 
 <div class="metaSubPane field Corporation">
-    <h2>{{ "Corporation Info"  |t("seomatic") }}</h2>
+    <h2>{{ "Corporation Info" |t("seomatic") }}</h2>
     {{ forms.textField({
-        label: "Corporation Ticker Symbol" |t("seomatic"),
-        instructions: "The exchange ticker symbol of the corporation"  |t("seomatic"),
+        label: "Corporation Ticker Symbol"|t("seomatic"),
+        instructions: "The exchange ticker symbol of the corporation" |t("seomatic"),
         id: "corporationTickerSymbol",
         class: "nicetext",
         name: "corporationTickerSymbol",
@@ -388,11 +388,11 @@
 {############### LocalBusiness type specific fields ###############}
 
 <div class="metaSubPane field LocalBusiness">
-    <h2>{{ "Local Business Info"  |t("seomatic") }}</h2>
+    <h2>{{ "Local Business Info" |t("seomatic") }}</h2>
     
     {{ forms.selectField({
-        label: "Price Range" |t("seomatic"),
-        instructions: "The approximate price range of the goods or services offered by this local business." |t("seomatic"),
+        label: "Price Range"|t("seomatic"),
+        instructions: "The approximate price range of the goods or services offered by this local business."|t("seomatic"),
         id: "localBusinessPriceRange",
         options: {
             "$": "$",
@@ -408,8 +408,8 @@
 
     <div class="field" id="localBusinessOpeningHours-field">
         <div class="heading">
-            <label for="localBusinessOpeningHours">{{ "Opening Hours" |t("seomatic")}}</label>
-            <div class="instructions"><p>{{ "The opening hours for this local business.  If the business is closed on a given day, just leave the hours for that day blank.  If you leave everything blank, no opening hours will be listed. [Learn More](https://developers.google.com/search/docs/data-types/local-business)"  |t("seomatic") |md}}</p></div>
+            <label for="localBusinessOpeningHours">{{ "Opening Hours"|t("seomatic")}}</label>
+            <div class="instructions"><p>{{ "The opening hours for this local business.  If the business is closed on a given day, just leave the hours for that day blank.  If you leave everything blank, no opening hours will be listed. [Learn More](https://developers.google.com/search/docs/data-types/local-business)" |t("seomatic") |md}}</p></div>
         </div>
     
         {% macro day(id, name, value, day) %}
@@ -481,10 +481,10 @@
 {############### FoodEstablishment type specific fields ###############}
 
 <div  class="metaSpecificPane field FoodEstablishment Bakery BarOrPub Brewery CafeOrCoffeeShop FastFoodRestaurant IceCreamShop Restaurant Winery">
-    <h2>{{ "Food Establishment Info"  |t("seomatic") }}</h2>
+    <h2>{{ "Food Establishment Info" |t("seomatic") }}</h2>
     {{ forms.textField({
-        label: "Food Establishment Cuisine" |t("seomatic"),
-        instructions: "The primary type of cuisine that the food establishment serves"  |t("seomatic"),
+        label: "Food Establishment Cuisine"|t("seomatic"),
+        instructions: "The primary type of cuisine that the food establishment serves" |t("seomatic"),
         id: "restaurantServesCuisine",
         class: "nicetext",
         name: "restaurantServesCuisine",
@@ -494,8 +494,8 @@
     }) }}
     
     {{ forms.textField({
-        label: "Food Establishment Menu URL" |t("seomatic"),
-        instructions: "URL to the food establishment's menu"  |t("seomatic"),
+        label: "Food Establishment Menu URL"|t("seomatic"),
+        instructions: "URL to the food establishment's menu" |t("seomatic"),
         id: "restaurantMenuUrl",
         class: "nicetext",
         name: "restaurantMenuUrl",
@@ -505,8 +505,8 @@
     }) }}
     
     {{ forms.textField({
-        label: "Food Establishment Reservations URL" |t("seomatic"),
-        instructions: "URL to the food establishment's reservations page"  |t("seomatic"),
+        label: "Food Establishment Reservations URL"|t("seomatic"),
+        instructions: "URL to the food establishment's reservations page" |t("seomatic"),
         id: "restaurantReservationsUrl",
         class: "nicetext",
         name: "restaurantReservationsUrl",

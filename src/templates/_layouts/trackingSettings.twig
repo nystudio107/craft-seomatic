@@ -8,7 +8,7 @@
     {% if currentUser.can(permission) %}
         {% set navItems = navItems |merge({
             (scriptHandle): {
-                title: "#{scriptData.name}" |t("seomatic"),
+                title: "#{scriptData.name}"|t("seomatic"),
             },
         }) %}
     {% endif %}

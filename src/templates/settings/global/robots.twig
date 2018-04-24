@@ -26,7 +26,7 @@
 
     {% if currentUser.can("seomatic:global-meta:robots") %}
         <div id="tab-content-robots">
-            <h2>{{ subSectionTitle ~ " Settings" |t("seomatic") }}</h2>
+            <h2>{{ subSectionTitle ~ " Settings"|t("seomatic") }}</h2>
             {% include "seomatic/settings/_includes/tab-robots.twig" with {"pageContext": "global"} %}
         </div>
     {% endif %}

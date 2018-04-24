@@ -13,8 +13,8 @@
 
     {% if field is not defined or 'sitemapUrls' in field.sitemapEnabledFields %}
         {{ forms.lightswitchField({
-            label: "Sitemap Enabled" |t("seomatic"),
-            instructions: "Whether URLs in this #{currentSourceBundleType} should be included in the sitemap" |t("seomatic"),
+            label: "Sitemap Enabled"|t("seomatic"),
+            instructions: "Whether URLs in this #{currentSourceBundleType} should be included in the sitemap"|t("seomatic"),
             id: "sitemapUrls",
             name: "sitemapUrls",
             on: metaSitemapVars.sitemapUrls,
@@ -25,8 +25,8 @@
 
     {% if field is not defined or 'sitemapAssets' in field.sitemapEnabledFields %}
         {{ forms.lightswitchField({
-            label: "Include Images & Videos in Sitemap" |t("seomatic"),
-            instructions: "Whether the URLs to images & videos in Asset fields or Asset fields in matrix blocks should be included in the sitemap" |t("seomatic"),
+            label: "Include Images & Videos in Sitemap"|t("seomatic"),
+            instructions: "Whether the URLs to images & videos in Asset fields or Asset fields in matrix blocks should be included in the sitemap"|t("seomatic"),
             id: "sitemapAssets",
             name: "sitemapAssets",
             on: metaSitemapVars.sitemapAssets,
@@ -37,8 +37,8 @@
 
     {% if field is not defined or 'sitemapFiles' in field.sitemapEnabledFields %}
         {{ forms.lightswitchField({
-            label: "Include Indexable Files in Sitemap" |t("seomatic"),
-            instructions: "Whether the URLs to files such as `.pdf`, `.xls`, `.doc` and other indexable file types in Asset fields or Asset fields in matrix blocks should be included in the sitemap" |t("seomatic"),
+            label: "Include Indexable Files in Sitemap"|t("seomatic"),
+            instructions: "Whether the URLs to files such as `.pdf`, `.xls`, `.doc` and other indexable file types in Asset fields or Asset fields in matrix blocks should be included in the sitemap"|t("seomatic"),
             id: "sitemapFiles",
             name: "sitemapFiles",
             on: metaSitemapVars.sitemapFiles,
@@ -49,8 +49,8 @@
 
     {% if field is not defined or 'sitemapAltLinks' in field.sitemapEnabledFields %}
         {{ forms.lightswitchField({
-            label: "Sitemap Alt URLs" |t("seomatic"),
-            instructions: "Whether URLs to alternate translations should be in fields or matrix blocks should be included in the sitemap" |t("seomatic"),
+            label: "Sitemap Alt URLs"|t("seomatic"),
+            instructions: "Whether URLs to alternate translations should be in fields or matrix blocks should be included in the sitemap"|t("seomatic"),
             id: "sitemapAltLinks",
             name: "sitemapAltLinks",
             on: metaSitemapVars.sitemapAltLinks,
@@ -61,18 +61,18 @@
 
     {% if field is not defined or 'sitemapChangeFreq' in field.sitemapEnabledFields %}
         {{ forms.selectField({
-            label: "Change Frequency" |t("seomatic"),
-            instructions: "How frequently the page is likely to change. This value provides general information to search engines and may not correlate exactly to how often they crawl the page." |t("seomatic"),
+            label: "Change Frequency"|t("seomatic"),
+            instructions: "How frequently the page is likely to change. This value provides general information to search engines and may not correlate exactly to how often they crawl the page."|t("seomatic"),
             id: "sitemapChangeFreq",
             name: "sitemapChangeFreq",
             options: {
-                always: "Always" |t("seomatic"),
-                hourly: "Hourly" |t("seomatic"),
-                daily: "Daily" |t("seomatic"),
-                weekly: "Weekly" |t("seomatic"),
-                monthly: "Monthly" |t("seomatic"),
-                yearly: "Yearly" |t("seomatic"),
-                never : "Never" |t("seomatic"),
+                always: "Always"|t("seomatic"),
+                hourly: "Hourly"|t("seomatic"),
+                daily: "Daily"|t("seomatic"),
+                weekly: "Weekly"|t("seomatic"),
+                monthly: "Monthly"|t("seomatic"),
+                yearly: "Yearly"|t("seomatic"),
+                never : "Never"|t("seomatic"),
             },
             value: metaSitemapVars.sitemapChangeFreq,
             errors: metaSitemapVars.getErrors("sitemapChangeFreq"),
@@ -81,8 +81,8 @@
 
     {% if field is not defined or 'sitemapPriority' in field.sitemapEnabledFields %}
         {{ forms.selectField({
-            label: "Priority" |t("seomatic"),
-            instructions: "The priority of this URL relative to other URLs on your site. This value does not affect how your pages are compared to pages on other sites—it only lets the search engines know which pages you deem most important for the crawlers." |t("seomatic"),
+            label: "Priority"|t("seomatic"),
+            instructions: "The priority of this URL relative to other URLs on your site. This value does not affect how your pages are compared to pages on other sites—it only lets the search engines know which pages you deem most important for the crawlers."|t("seomatic"),
             id: "sitemapPriority",
             name: "sitemapPriority",
             options: {
@@ -106,8 +106,8 @@
 
     {% if field is not defined or 'sitemapLimit' in field.sitemapEnabledFields %}
         {{ forms.selectField({
-            label: "Sitemap Limit" |t("seomatic"),
-            instructions: "Controls a limit to how many entries will be in this sitemap. The sitemap entries will be sorted by modification date." |t("seomatic"),
+            label: "Sitemap Limit"|t("seomatic"),
+            instructions: "Controls a limit to how many entries will be in this sitemap. The sitemap entries will be sorted by modification date."|t("seomatic"),
             id: "sitemapLimit",
             name: "sitemapLimit",
             options: {
@@ -127,19 +127,19 @@
 
     {% if field is not defined or 'sitemapImageFieldMap' in field.sitemapEnabledFields %}
         {{ forms.editableTableField({
-            label: "Image Sitemap Fields" |t("seomatic"),
-            instructions: "Choose what source fields from your Asset Volume field layouts to map to the image sitemap properties. [Learn more](https://support.google.com/webmasters/answer/178636?hl=en)" |t("seomatic"),
+            label: "Image Sitemap Fields"|t("seomatic"),
+            instructions: "Choose what source fields from your Asset Volume field layouts to map to the image sitemap properties. [Learn more](https://support.google.com/webmasters/answer/178636?hl=en)"|t("seomatic"),
             id: 'sitemapImageFieldMap',
             name: 'sitemapImageFieldMap',
             required: false,
             cols: {
                 property: {
-                    heading: "Image Sitemap Property" |t("seomatic"),
+                    heading: "Image Sitemap Property"|t("seomatic"),
                     type: "singleline",
                     width: "30%",
                 },
                 field: {
-                    heading: "Source Field" |t("seomatic"),
+                    heading: "Source Field"|t("seomatic"),
                     type: "select",
                     width: "70%",
                     options: assetVolumeTextFieldSources,
@@ -152,19 +152,19 @@
 
     {% if field is not defined or 'sitemapVideoFieldMap' in field.sitemapEnabledFields %}
         {{ forms.editableTableField({
-            label: "Video Sitemap Fields" |t("seomatic"),
-            instructions: "Choose what source fields from your Asset Volume field layouts to map to the image sitemap properties. [Learn more](https://developers.google.com/webmasters/videosearch/sitemaps)" |t("seomatic"),
+            label: "Video Sitemap Fields"|t("seomatic"),
+            instructions: "Choose what source fields from your Asset Volume field layouts to map to the image sitemap properties. [Learn more](https://developers.google.com/webmasters/videosearch/sitemaps)"|t("seomatic"),
             id: 'sitemapVideoFieldMap',
             name: 'sitemapVideoFieldMap',
             required: false,
             cols: {
                 property: {
-                    heading: "Video Sitemap Property" |t("seomatic"),
+                    heading: "Video Sitemap Property"|t("seomatic"),
                     type: "singleline",
                     width: "30%",
                 },
                 field: {
-                    heading: "Field" |t("seomatic"),
+                    heading: "Field"|t("seomatic"),
                     type: "select",
                     width: "70%",
                     options: assetVolumeTextFieldSources,

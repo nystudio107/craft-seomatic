@@ -1,5 +1,16 @@
 # SEOmatic Changelog
 
+## 3.0.2 - 2018.04.24
+### Added
+* `og:image` tags are now validated to ensure they are fully qualified URLs
+* `og:image` tags now are converted to absolute URLs (to handle protocol-less URLs)
+* `twitter:image` tags are now validated to ensure they are fully qualified URLs
+* `twitter:image` tags now are converted to absolute URLs (to handle protocol-less URLs)
+* Added missing translations
+
+### Changed
+* Fixed an issue where Tracking Scripts permissions weren't all propertly presented
+
 ## 3.0.1 - 2018.04.20
 ### Changed
 * Fixed an issue with sitemap indexes for elements that have null URLs

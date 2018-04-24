@@ -6,28 +6,28 @@
 {% if currentUser.can("seomatic:site-settings:identity") %}
     {% set navItems = navItems |merge({
         identity: {
-            title: "Identity" |t("seomatic"),
+            title: "Identity"|t("seomatic"),
         },
     }) %}
 {% endif %}
 {% if currentUser.can("seomatic:site-settings:creator") %}
     {% set navItems = navItems |merge({
         creator: {
-            title: "Creator" |t("seomatic"),
+            title: "Creator"|t("seomatic"),
         },
     }) %}
 {% endif %}
 {% if currentUser.can("seomatic:site-settings:social-media") %}
     {% set navItems = navItems |merge({
         social: {
-            title: "Social Media" |t("seomatic"),
+            title: "Social Media"|t("seomatic"),
         },
     }) %}
 {% endif %}
 {% if currentUser.can("seomatic:site-settings:miscellaneous") %}
     {% set navItems = navItems |merge({
         miscellaneous: {
-            title: "Miscellaneous" |t("seomatic"),
+            title: "Miscellaneous"|t("seomatic"),
         },
     }) %}
 {% endif %}
