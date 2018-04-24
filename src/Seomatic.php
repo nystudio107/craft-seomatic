@@ -809,7 +809,7 @@ class Seomatic extends Plugin
                 MetaScriptContainer::CONTAINER_TYPE
             );
             foreach ($scripts as $scriptHandle => $scriptData) {
-                $scriptsPerms['seomatic:tracking-scripts:${scriptHandle}'] = [
+                $scriptsPerms["seomatic:tracking-scripts:${scriptHandle}"] = [
                     'label' => Craft::t('seomatic', $scriptData->name),
                 ];
             }
