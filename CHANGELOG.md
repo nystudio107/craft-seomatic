@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.0.2 - 2018.04.21
+## 3.0.2 - 2018.04.24
 ### Added
 * `og:image` tags are now validated to ensure they are fully qualified URLs
 * `og:image` tags now are converted to absolute URLs (to handle protocol-less URLs)
