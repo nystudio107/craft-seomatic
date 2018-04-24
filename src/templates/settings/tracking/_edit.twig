@@ -27,12 +27,12 @@
         {% set permission = "seomatic:tracking-scripts:#{scriptHandle}" %}
         {% if currentUser.can(permission) and currentSubSection == scriptHandle %}
             <div id='{{ "tab-tracking-#{scriptHandle}" }}' class="seomatic-script-wrapper">
-                <h2>{{ subSectionTitle ~ " Settings" |t("seomatic") }}</h2>
+                <h2>{{ subSectionTitle ~ " Settings"|t("seomatic") }}</h2>
                 {% namespace "scripts[#{scriptHandle}]" %}
                     <div class="field seomatic-script-lightswitch">
                     {{ forms.lightswitchField({
-                        label: "#{scriptData.name} Enabled" |t("seomatic"),
-                        instructions: "#{scriptData.description}" |t("seomatic"),
+                        label: "#{scriptData.name} Enabled"|t("seomatic"),
+                        instructions: "#{scriptData.description}"|t("seomatic"),
                         id: "include",
                         name: "include",
                         on: scriptData.include,
@@ -45,8 +45,8 @@
                             {% switch varData.type %}
                                 {% case "bool" %}
                                     {{ forms.lightswitchField({
-                                        label: "#{varData.title}" |t("seomatic"),
-                                        instructions: "#{varData.instructions}" |t("seomatic"),
+                                        label: "#{varData.title}"|t("seomatic"),
+                                        instructions: "#{varData.instructions}"|t("seomatic"),
                                         id: "vars-#{varHandle}",
                                         name: "vars[#{varHandle}]",
                                         on: varData.value,
@@ -55,8 +55,8 @@
     
                                 {% case "string" %}
                                     {{ forms.textField({
-                                        label: "#{varData.title}" |t("seomatic"),
-                                        instructions: "#{varData.instructions}" |t("seomatic"),
+                                        label: "#{varData.title}"|t("seomatic"),
+                                        instructions: "#{varData.instructions}"|t("seomatic"),
                                         id: "vars-#{varHandle}",
                                         name: "vars[#{varHandle}]",
                                         value: varData.value ?? "",
@@ -69,8 +69,8 @@
                         {% endfor %}
     
                         {{ forms.textAreaField({
-                            label: "Script Template" |t("seomatic"),
-                            instructions: "The script that will render on the page. Note that this script will not render in `local` development or `staging` environments." |t("seomatic"),
+                            label: "Script Template"|t("seomatic"),
+                            instructions: "The script that will render on the page. Note that this script will not render in `local` development or `staging` environments."|t("seomatic"),
                             id: "templateString",
                             name: "templateString",
                             value: scriptData.templateString,
@@ -80,14 +80,14 @@
                         }) }}
     
                         {{ forms.selectField({
-                            label: "Script Render Location" |t("seomatic"),
-                            instructions: "Determaines where in the HTML document the script renders." |t("seomatic"),
+                            label: "Script Render Location"|t("seomatic"),
+                            instructions: "Determaines where in the HTML document the script renders."|t("seomatic"),
                             id: "position",
                             name: "position",
                             options: {
-                                1: "Head - in the <head> tag" |t("seomatic"),
-                                2: "Body Begin - after the <body> tag " |t("seomatic"),
-                                3: "Body End - before the </body> tag" |t("seomatic"),
+                                1: "Head - in the <head> tag"|t("seomatic"),
+                                2: "Body Begin - after the <body> tag "|t("seomatic"),
+                                3: "Body End - before the </body> tag"|t("seomatic"),
                             },
                             value: scriptData.position,
                             errors: scriptData.getErrors("position"),

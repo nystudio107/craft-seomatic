@@ -26,7 +26,7 @@
 
     {% if currentUser.can("seomatic:global-meta:twitter") %}
         <div id="tab-content-twitter">
-            <h2>{{ subSectionTitle ~ " Settings" |t("seomatic") }}</h2>
+            <h2>{{ subSectionTitle ~ " Settings"|t("seomatic") }}</h2>
             {% include "seomatic/settings/_includes/tab-twitter.twig" with {"pageContext": "global"} %}
         </div>
     {% endif %}
