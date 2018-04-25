@@ -1,5 +1,11 @@
 # SEOmatic Changelog
 
+## 3.0.3 - 2018.04.25
+### Added
+
+### Changed
+* Fixed an issue where re-using the same Field handle from other Field types would cause an exception to be thrown in the AdminCP
+
 ## 3.0.2 - 2018.04.24
 ### Added
 * `og:image` tags are now validated to ensure they are fully qualified URLs
