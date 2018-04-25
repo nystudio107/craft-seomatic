@@ -188,7 +188,6 @@ class MetaGlobalVars extends VarsModel
                     'seoKeywords',
                     'seoImage',
                     'seoImageDescription',
-                    'canonicalUrl',
                     'robots',
                     'ogType',
                     'ogTitle',
