@@ -1,13 +1,12 @@
 # SEOmatic Changelog
 
 ## 3.0.3 - 2018.04.25
-### Added
-
 ### Changed
 * Fixed an issue where re-using the same Field handle from other Field types would cause an exception to be thrown in the AdminCP
 * Improved the way SEOmatic matches the current element
 * Bypass the data cache entirely in the AdminCP, to avoid refresh issues
 * Fixed an issue where sometimes the correct data is not what is previewed in the AdminCP
+* Fixed an issue where the `canonicalUrl` seemed immutable on the Global SEO pages
 
 ## 3.0.2 - 2018.04.24
 ### Added
