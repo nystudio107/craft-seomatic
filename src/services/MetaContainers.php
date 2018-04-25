@@ -134,24 +134,31 @@ class MetaContainers extends Component
                     $this::METACONTAINER_CACHE_TAG.$uri.$siteId,
                 ],
             ]);
-            $cache = Craft::$app->getCache();
-            list($this->metaGlobalVars, $this->metaSiteVars, $this->metaSitemapVars, $this->metaContainers) = $cache->getOrSet(
-                $this::CACHE_KEY.$uri.$siteId,
-                function () use ($uri, $siteId) {
-                    Craft::info(
-                        'Meta container cache miss: '.$uri.'/'.$siteId,
-                        __METHOD__
-                    );
-                    $this->loadGlobalMetaContainers($siteId);
-                    $this->loadContentMetaContainers();
-                    $this->loadFieldMetaContainers();
-                    DynamicMetaHelper::addDynamicMetaToContainers($uri, $siteId);
+            if (Seomatic::$previewingMetaContainers) {
+                $this->loadGlobalMetaContainers($siteId);
+                $this->loadContentMetaContainers();
+                $this->loadFieldMetaContainers();
+                DynamicMetaHelper::addDynamicMetaToContainers($uri, $siteId);
+            } else {
+                $cache = Craft::$app->getCache();
+                list($this->metaGlobalVars, $this->metaSiteVars, $this->metaSitemapVars, $this->metaContainers) = $cache->getOrSet(
+                    $this::CACHE_KEY.$uri.$siteId,
+                    function () use ($uri, $siteId) {
+                        Craft::info(
+                            'Meta container cache miss: '.$uri.'/'.$siteId,
+                            __METHOD__
+                        );
+                        $this->loadGlobalMetaContainers($siteId);
+                        $this->loadContentMetaContainers();
+                        $this->loadFieldMetaContainers();
+                        DynamicMetaHelper::addDynamicMetaToContainers($uri, $siteId);
 
-                    return [$this->metaGlobalVars, $this->metaSiteVars, $this->metaSitemapVars, $this->metaContainers];
-                },
-                Seomatic::$cacheDuration,
-                $dependency
-            );
+                        return [$this->metaGlobalVars, $this->metaSiteVars, $this->metaSitemapVars, $this->metaContainers];
+                    },
+                    Seomatic::$cacheDuration,
+                    $dependency
+                );
+            }
             Seomatic::$seomaticVariable->init();
             MetaValueHelper::cache();
             $this->loadingContainers = false;
@@ -224,15 +231,18 @@ class MetaContainers extends Component
             // Create our variable and stash it in the plugin for global access
             Seomatic::$seomaticVariable = new SeomaticVariable();
         }
-        $this->loadMetaContainers($uri, $siteId);
         Seomatic::$previewingMetaContainers = true;
+        $this->loadMetaContainers($uri, $siteId);
         if ($parseVariables) {
             $this->parseGlobalVars();
         }
         // Special-case the global bundle
         if ($uri === MetaBundles::GLOBAL_META_BUNDLE) {
             try {
-                $this->metaGlobalVars->canonicalUrl = UrlHelper::siteUrl('/', null, null, $siteId);
+                $canonical = Seomatic::$seomaticVariable->link->get('canonical');
+                if ($canonical !== null) {
+                    $canonical->href = UrlHelper::siteUrl('/', null, null, $siteId);
+                }
             } catch (Exception $e) {
                 Craft::error($e->getMessage(), __METHOD__);
             }
@@ -607,7 +617,8 @@ class MetaContainers extends Component
         }
         $uri = trim($uri, '/');
         /** @var Element $element */
-        $element = Craft::$app->getElements()->getElementByUri($uri, $siteId, false);
+        $element = Craft::$app->getElements()->getElementByUri($uri, $siteId, false)
+            ?? Craft::$app->getUrlManager()->getMatchedElement();
         if ($element && ($element->uri !== null)) {
             Seomatic::setMatchedElement($element);
         }
