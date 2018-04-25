@@ -239,7 +239,10 @@ class MetaContainers extends Component
         // Special-case the global bundle
         if ($uri === MetaBundles::GLOBAL_META_BUNDLE) {
             try {
-                $this->metaGlobalVars->canonicalUrl = UrlHelper::siteUrl('/', null, null, $siteId);
+                $canonical = Seomatic::$seomaticVariable->link->get('canonical');
+                if ($canonical !== null) {
+                    $canonical->href = UrlHelper::siteUrl('/', null, null, $siteId);
+                }
             } catch (Exception $e) {
                 Craft::error($e->getMessage(), __METHOD__);
             }
