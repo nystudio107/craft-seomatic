@@ -15,10 +15,9 @@ use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
-use nystudio107\seomatic\validators\EmbeddedModelValidator;
+use nystudio107\seomatic\base\FluentModel;
 use nystudio107\seomatic\variables\SeomaticVariable;
 
-use craft\base\Model;
 use craft\helpers\Json as JsonHelper;
 use craft\validators\ArrayValidator;
 use craft\validators\DateTimeValidator;
@@ -28,7 +27,7 @@ use craft\validators\DateTimeValidator;
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaBundle extends Model
+class MetaBundle extends FluentModel
 {
     // Properties
     // =========================================================================
@@ -130,6 +129,7 @@ class MetaBundle extends Model
      */
     public static function create(array $config = [])
     {
+        self::cleanProperties(__CLASS__, $config);
         $model = new MetaBundle($config);
         if ($model) {
             $model->normalizeMetaBundleData();
