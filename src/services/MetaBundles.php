@@ -558,13 +558,35 @@ class MetaBundles extends Component
                     $unsetMetaBundle = false;
                     break;
                 case self::CATEGORYGROUP_META_BUNDLE:
-                    if ($categories->getGroupByHandle($metaBundle->sourceHandle) === null) {
+                    $category = $categories->getGroupByHandle($metaBundle->sourceHandle);
+                    if ($category === null) {
                         $unsetMetaBundle = true;
+                    } else {
+                        $siteSettings = $category->getSiteSettings();
+                        if (!empty($siteSettings)) {
+                            /** @var CategoryGroup_SiteSettings $siteSetting */
+                            foreach ($siteSettings as $siteSetting) {
+                                if ($siteSetting->siteId === $metaBundle->sourceSiteId && !$siteSetting->hasUrls) {
+                                    $unsetMetaBundle = true;
+                                }
+                            }
+                        }
                     }
                     break;
                 case self::SECTION_META_BUNDLE:
-                    if ($sections->getSectionByHandle($metaBundle->sourceHandle) === null) {
+                    $section = $sections->getSectionByHandle($metaBundle->sourceHandle);
+                    if ($section === null) {
                         $unsetMetaBundle = true;
+                    } else {
+                        $siteSettings = $section->getSiteSettings();
+                        if (!empty($siteSettings)) {
+                            /** @var Section_SiteSettings $siteSetting */
+                            foreach ($siteSettings as $siteSetting) {
+                                if ($siteSetting->siteId === $metaBundle->sourceSiteId && !$siteSetting->hasUrls) {
+                                    $unsetMetaBundle = true;
+                                }
+                            }
+                        }
                     }
                     break;
                 // @TODO: handle commerce products
