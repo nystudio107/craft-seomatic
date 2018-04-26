@@ -100,7 +100,7 @@ class MetaBundles extends Component
             ->from(['{{%seomatic_metabundles}}'])
             ->where([
                 'sourceBundleType' => self::GLOBAL_META_BUNDLE,
-                'sourceSiteId'     => $sourceSiteId,
+                'sourceSiteId' => $sourceSiteId,
             ])
             ->one();
         if (!empty($metaBundleArray)) {
@@ -129,8 +129,8 @@ class MetaBundles extends Component
             // Save it out to a record
             $metaBundleRecord = MetaBundleRecord::findOne([
                 'sourceBundleType' => $metaBundle->sourceBundleType,
-                'sourceId'         => $metaBundle->sourceId,
-                'sourceSiteId'     => $siteId,
+                'sourceId' => $metaBundle->sourceId,
+                'sourceSiteId' => $siteId,
             ]);
             if (!$metaBundleRecord) {
                 $metaBundleRecord = new MetaBundleRecord();
@@ -184,8 +184,8 @@ class MetaBundles extends Component
             ->from(['{{%seomatic_metabundles}}'])
             ->where([
                 'sourceBundleType' => $sourceBundleType,
-                'sourceId'         => $sourceId,
-                'sourceSiteId'     => $sourceSiteId,
+                'sourceId' => $sourceId,
+                'sourceSiteId' => $sourceSiteId,
             ])
             ->one();
         if (!empty($metaBundleArray)) {
@@ -241,6 +241,7 @@ class MetaBundles extends Component
         $metaBundleArray = (new Query())
             ->from(['{{%seomatic_metabundles}}'])
             ->where([
+                'sourceType' => $sourceType,
                 'sourceHandle' => $sourceHandle,
                 'sourceSiteId' => $sourceSiteId,
             ])
@@ -384,8 +385,8 @@ class MetaBundles extends Component
             // Look for a matching meta bundle in the db
             $metaBundleRecord = MetaBundleRecord::findOne([
                 'sourceBundleType' => $sourceBundleType,
-                'sourceId'         => $sourceId,
-                'sourceSiteId'     => $site->id,
+                'sourceId' => $sourceId,
+                'sourceSiteId' => $site->id,
             ]);
 
             if ($metaBundleRecord) {
@@ -779,14 +780,14 @@ class MetaBundles extends Component
                 $metaBundleDefaults = ArrayHelper::merge(
                     ConfigHelper::getConfigFromFile('entrymeta/Bundle'),
                     [
-                        'sourceId'              => $section->id,
-                        'sourceName'            => $section->name,
-                        'sourceHandle'          => $section->handle,
-                        'sourceType'            => $section->type,
-                        'sourceTemplate'        => $siteSetting->template,
-                        'sourceSiteId'          => $siteSetting->siteId,
+                        'sourceId' => $section->id,
+                        'sourceName' => $section->name,
+                        'sourceHandle' => $section->handle,
+                        'sourceType' => $section->type,
+                        'sourceTemplate' => $siteSetting->template,
+                        'sourceSiteId' => $siteSetting->siteId,
                         'sourceAltSiteSettings' => $siteSettingsArray,
-                        'sourceDateUpdated'     => $dateUpdated,
+                        'sourceDateUpdated' => $dateUpdated,
                     ]
                 );
                 // Merge in any migrated settings from an old Seomatic_Meta Field
@@ -857,13 +858,13 @@ class MetaBundles extends Component
                 $metaBundleDefaults = ArrayHelper::merge(
                     ConfigHelper::getConfigFromFile('categorymeta/Bundle'),
                     [
-                        'sourceId'              => $category->id,
-                        'sourceName'            => $category->name,
-                        'sourceHandle'          => $category->handle,
-                        'sourceTemplate'        => $siteSetting->template,
-                        'sourceSiteId'          => $siteSetting->siteId,
+                        'sourceId' => $category->id,
+                        'sourceName' => $category->name,
+                        'sourceHandle' => $category->handle,
+                        'sourceTemplate' => $siteSetting->template,
+                        'sourceSiteId' => $siteSetting->siteId,
                         'sourceAltSiteSettings' => $siteSettingsArray,
-                        'sourceDateUpdated'     => $dateUpdated,
+                        'sourceDateUpdated' => $dateUpdated,
                     ]
                 );
                 // Merge in any migrated settings from an old Seomatic_Meta Field
@@ -934,7 +935,7 @@ class MetaBundles extends Component
                 if ($metaContainer::CONTAINER_TYPE === MetaScriptContainer::CONTAINER_TYPE) {
                     $data = $metaContainer->getData($scriptHandle);
                     if ($data) {
-                        /** @var array $scriptData*/
+                        /** @var array $scriptData */
                         foreach ($scriptData as $key => $value) {
                             if (\is_array($value)) {
                                 foreach ($value as $varsKey => $varsValue) {
