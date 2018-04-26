@@ -3,6 +3,7 @@
 ## 3.0.4 - 2018.04.26
 ### Changed
 * Don't display Sections / Category Groups in Content SEO that no longer have public URLs
+* Fixed an issue with console requests
 
 ## 3.0.3 - 2018.04.25
 ### Changed
