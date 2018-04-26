@@ -4,6 +4,7 @@
 ### Changed
 * Don't display Sections / Category Groups in Content SEO that no longer have public URLs
 * Fixed an issue with console requests
+* Fixed an issue where Sections and Category groups with the same `handle` didn't work right in Content SEO
 
 ## 3.0.3 - 2018.04.25
 ### Changed
