@@ -1,10 +1,11 @@
 # SEOmatic Changelog
 
-## 3.0.5 - 2018.04.28
+## 3.0.5 - 2018.04.27
 ### Changed
 * Better instructions for the **Canonical URL**
 * Updated translations
 * Use correct `sourceBundleType` for Field meta bundles
+* Fixed a regression that caused Content SEO sections to not save properly
 
 ## 3.0.4 - 2018.04.26
 ### Changed
