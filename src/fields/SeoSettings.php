@@ -145,7 +145,9 @@ class SeoSettings extends Field
         // Validate that this is a MetaBundles::SECTION_META_BUNDLE array
         if (\is_array($config)) {
             if (!isset($config['sourceBundleType'])
-                || $config['sourceBundleType'] !== MetaBundles::SECTION_META_BUNDLE) {
+                || ($config['sourceBundleType'] !== MetaBundles::SECTION_META_BUNDLE
+                    && $config['sourceBundleType'] !== MetaBundles::FIELD_META_BUNDLE)
+            ) {
                 $config = [];
             }
         } else {
