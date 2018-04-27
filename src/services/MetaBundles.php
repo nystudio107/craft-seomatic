@@ -241,7 +241,7 @@ class MetaBundles extends Component
         $metaBundleArray = (new Query())
             ->from(['{{%seomatic_metabundles}}'])
             ->where([
-                'sourceType' => $sourceType,
+                'sourceBundleType' => $sourceType,
                 'sourceHandle' => $sourceHandle,
                 'sourceSiteId' => $sourceSiteId,
             ])
