@@ -1,5 +1,12 @@
 # SEOmatic Changelog
 
+## 3.0.4 - 2018.04.26
+### Changed
+* Don't display Sections / Category Groups in Content SEO that no longer have public URLs
+* Fixed an issue with console requests
+* Fixed an issue where Sections and Category groups with the same `handle` didn't work right in Content SEO
+* More validation on the data passed into the SEO Settings field as a config array
+
 ## 3.0.3 - 2018.04.25
 ### Changed
 * Fixed an issue where re-using the same Field handle from other Field types would cause an exception to be thrown in the AdminCP

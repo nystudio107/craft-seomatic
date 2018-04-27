@@ -18,6 +18,7 @@ use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
 use nystudio107\seomatic\helpers\Migration as MigrationHelper;
 use nystudio107\seomatic\helpers\PullField as PullFieldHelper;
 use nystudio107\seomatic\models\MetaBundle;
+use nystudio107\seomatic\services\MetaBundles;
 
 use Craft;
 use craft\base\Element;
@@ -140,6 +141,15 @@ class SeoSettings extends Field
                 $element,
                 MigrationHelper::FIELD_MIGRATION_CONTEXT
             );
+        }
+        // Validate that this is a MetaBundles::SECTION_META_BUNDLE array
+        if (\is_array($config)) {
+            if (!isset($config['sourceBundleType'])
+                || $config['sourceBundleType'] !== MetaBundles::SECTION_META_BUNDLE) {
+                $config = [];
+            }
+        } else {
+            $config = [];
         }
         // If the config isn't empty, do some processing on the values
         if (!empty($config)) {
