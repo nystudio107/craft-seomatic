@@ -2,6 +2,9 @@
 
 ## 3.0.5 - 2018.04.28
 ### Changed
+* Better instructions for the **Canonical URL**
+* Updated translations
+* Use correct `sourceBundleType` for Field meta bundles
 
 ## 3.0.4 - 2018.04.26
 ### Changed
