@@ -350,7 +350,7 @@
 {% if field is not defined or 'canonicalUrl' in field.generalEnabledFields %}
     {% namespace "metaGlobalVars" %}
         {{ forms.textField({
-            label: "Canonical URL"|t("seomatic"),
+            label: "The search engine friendly URL that you want the search engines to treat as authoritative."|t("seomatic"),
             instructions: "Canonical URL"|t("seomatic"),
             id: "canonicalUrl",
             name: "canonicalUrl",
