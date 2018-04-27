@@ -1,5 +1,8 @@
 # SEOmatic Changelog
 
+## 3.0.5 - 2018.04.28
+### Changed
+
 ## 3.0.4 - 2018.04.26
 ### Changed
 * Don't display Sections / Category Groups in Content SEO that no longer have public URLs
