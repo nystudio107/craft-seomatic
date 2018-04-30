@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.0.9 - 2018.05.01
+### Changed
+* Fixed an issue when migrating data from Craft 2.x `Seomatic_Meta` fields and an Asset was set to "Custom"
+
 ## 3.0.8 - 2018.04.30
 ### Changed
 * Removed excessive validation that was causing SEOmatic Fields to not save properly
