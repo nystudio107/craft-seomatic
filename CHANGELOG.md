@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.0.8 - 2018.04.30
+### Changed
+* Removed excessive validation that was causing SEOmatic Fields to not save properly
+
 ## 3.0.7 - 2018.04.30
 ### Changed
 * Fixed a regression that caused SEOmatic to not import data from old Craft 2.x `Seomatic_Meta` fields properly
