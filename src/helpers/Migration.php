@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\helpers;
 
 use nystudio107\seomatic\helpers\Field as FieldHelper;
+use nystudio107\seomatic\services\MetaBundles;
 
 use craft\base\Element;
 
@@ -133,12 +134,13 @@ class Migration
     public static function configFromSeomaticMeta($element, string $mapContext): array
     {
         $config = [];
+        $config['sourceBundleType'] = MetaBundles::FIELD_META_BUNDLE;
 
         if ($element === null) {
-            return [];
+            return $config;
         }
         if (empty(self::MIGRATION_CONTEXTS[$mapContext])) {
-            return [];
+            return $config;
         }
         $migrationFieldsArrays = self::MIGRATION_CONTEXTS[$mapContext];
 
