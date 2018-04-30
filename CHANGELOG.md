@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.0.7 - 2018.04.30
+### Changed
+* Fixed a regression that caused SEOmatic to not import data from old Craft 2.x `Seomatic_Meta` fields properly
+
 ## 3.0.6 - 2018.04.30
 ### Changed
 * Fixed a regression that caused the Section meta bundles to be the wrong type
