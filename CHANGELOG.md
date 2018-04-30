@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.0.6 - 2018.04.30
+### Changed
+* Fixed a regression that caused the Section meta bundles to be the wrong type
+
 ## 3.0.5 - 2018.04.27
 ### Changed
 * Better instructions for the **Canonical URL**
