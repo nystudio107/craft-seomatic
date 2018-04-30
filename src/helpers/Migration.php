@@ -89,9 +89,6 @@ class Migration
     ];
 
     const ARRAY_VALUE_MAP = [
-        'seoImageIds',
-        'twitterImageIds',
-        'ogImageIds',
     ];
 
     const FIELD_VALUE_MAP = [
