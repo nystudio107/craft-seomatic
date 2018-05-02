@@ -131,7 +131,6 @@ class Migration
     public static function configFromSeomaticMeta($element, string $mapContext): array
     {
         $config = [];
-        $config['sourceBundleType'] = MetaBundles::FIELD_META_BUNDLE;
 
         if ($element === null) {
             return $config;
