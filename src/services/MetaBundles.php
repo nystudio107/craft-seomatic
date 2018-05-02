@@ -798,6 +798,7 @@ class MetaBundles extends Component
                             $element,
                             MigrationHelper::SECTION_MIGRATION_CONTEXT
                         );
+                        $config['sourceBundleType'] = self::SECTION_META_BUNDLE;
                         $metaBundleDefaults = ArrayHelper::merge(
                             $metaBundleDefaults,
                             $config
@@ -875,6 +876,7 @@ class MetaBundles extends Component
                             $element,
                             MigrationHelper::SECTION_MIGRATION_CONTEXT
                         );
+                        $config['sourceBundleType'] = self::CATEGORYGROUP_META_BUNDLE;
                         $metaBundleDefaults = ArrayHelper::merge(
                             $metaBundleDefaults,
                             $config
