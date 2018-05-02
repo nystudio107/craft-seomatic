@@ -3,9 +3,13 @@
 {% set ogImageArray = seomatic.tag.get('og:image').renderAttributes() %}
 {% set canonicalArray = seomatic.link.get('canonical').renderAttributes() %}
 
+{% set previewFacebook = true %}
+{# Always display the Facebook OpenGraph preview now. Used to be:
+set previewFacebook = seomatic.site.facebookAppId |length or seomatic.site.facebookProfileId |length
+#}
 <div class="preview-column">
     <div class="displaypreview" style="{{ displayPreviewInlineStyles ?? '' }}">
-        {% if seomatic.site.facebookAppId |length or seomatic.site.facebookProfileId |length %}
+        {% if previewFacebook %}
             <div class="Facebook-container">
                 <div class="">
                     <a href="{{ canonicalArray.href ?? siteUrl("/") }}" target="_blank">
