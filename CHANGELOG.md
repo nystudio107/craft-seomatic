@@ -3,6 +3,8 @@
 ## 3.0.10 - 2018.05.02
 ### Changed
 * Fixed incorrect social media permissions that prevented access to that settings page
+* Fixed an issue where `section` meta bundles would be improperly marked as `field` due to a regression in the migration importing code
+* Fixed an issue where `categoryGroup` meta bundles would be improperly marked as `field` due to a regression in the migration importing code
 * Bumped the schemaVersion
 
 ### Added
