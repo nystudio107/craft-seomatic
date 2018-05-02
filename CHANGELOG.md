@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.0.10 - 2018.05.02
+### Changed
+* Fixed incorrect social media permissions that prevented access to that settings page
+
 ## 3.0.9 - 2018.05.01
 ### Changed
 * Fixed an issue when migrating data from Craft 2.x `Seomatic_Meta` fields and an Asset was set to "Custom"
