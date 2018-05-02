@@ -1,5 +1,17 @@
 # SEOmatic Changelog
 
+## 3.0.10 - 2018.05.02
+### Changed
+* Fixed incorrect social media permissions that prevented access to that settings page
+* Fixed an issue where `section` meta bundles would be improperly marked as `field` due to a regression in the migration importing code
+* Fixed an issue where `categoryGroup` meta bundles would be improperly marked as `field` due to a regression in the migration importing code
+* Removed OpenGraph tag dependency on `facebookProfileId` or `facebookAppId` being present
+* Fixed Pinterest verification tag dependency
+* Bumped the schemaVersion
+
+### Added
+* Added a migration to remove any errant `seomatic_metabundles` rows that have `sourceBundleType` set to `field`
+
 ## 3.0.9 - 2018.05.01
 ### Changed
 * Fixed an issue when migrating data from Craft 2.x `Seomatic_Meta` fields and an Asset was set to "Custom"

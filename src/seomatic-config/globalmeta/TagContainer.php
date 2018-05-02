@@ -80,7 +80,6 @@ return [
         'class'        => (string)MetaTagContainer::class,
         'include'      => true,
         'dependencies' => [
-            Dependency::SITE_DEPENDENCY => ['facebookProfileId', 'facebookAppId'],
         ],
         'data'         => [
             'fb:profile_id'       => [
@@ -263,7 +262,7 @@ return [
             ],
             'pinterest-site-verification' => [
                 'dependencies' => [
-                    Dependency::SITE_DEPENDENCY => ['bingSiteVerification'],
+                    Dependency::SITE_DEPENDENCY => ['pinterestSiteVerification'],
                 ],
                 'charset'      => '',
                 'content'      => '{seomatic.site.pinterestSiteVerification}',

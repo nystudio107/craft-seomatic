@@ -17,7 +17,7 @@
         },
     }) %}
 {% endif %}
-{% if currentUser.can("seomatic:site-settings:social-media") %}
+{% if currentUser.can("seomatic:site-settings:social") %}
     {% set navItems = navItems |merge({
         social: {
             title: "Social Media"|t("seomatic"),
