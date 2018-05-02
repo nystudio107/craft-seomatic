@@ -3,6 +3,10 @@
 ## 3.0.10 - 2018.05.02
 ### Changed
 * Fixed incorrect social media permissions that prevented access to that settings page
+* Bumped the schemaVersion
+
+### Added
+* Added a migration to remove any errant `seomatic_metabundles` rows that have `sourceBundleType` set to `field`
 
 ## 3.0.9 - 2018.05.01
 ### Changed
