@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.0.11 - 2018.05.04
+### Changed
+* Removed `'interlace' => 'line'` from the social media transforms, which inexplicably caused Focal Points to not be used
+
 ## 3.0.10 - 2018.05.02
 ### Changed
 * Fixed incorrect social media permissions that prevented access to that settings page
