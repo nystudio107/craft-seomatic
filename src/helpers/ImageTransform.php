@@ -34,7 +34,6 @@ class ImageTransform
         'base' => [
             'format' => 'jpg',
             'quality' => self::SOCIAL_TRANSFORM_QUALITY,
-            'interlace' => 'line',
             'width' => 1200,
             'height' => 630,
             'mode' => 'crop',
