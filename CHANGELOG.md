@@ -3,6 +3,7 @@
 ## 3.0.11 - 2018.05.04
 ### Changed
 * Removed `'interlace' => 'line'` from the social media transforms, which inexplicably caused Focal Points to not be used
+* Fixed an issue where the JSON-LD would not fully render
 
 ## 3.0.10 - 2018.05.02
 ### Changed
