@@ -1,5 +1,10 @@
 # SEOmatic Changelog
 
+## 3.0.11 - 2018.05.03
+### Changed
+* Removed `'interlace' => 'line'` from the social media transforms, which inexplicably caused Focal Points to not be used
+* Fixed an issue where the JSON-LD would not fully render due to a regression
+
 ## 3.0.10 - 2018.05.02
 ### Changed
 * Fixed incorrect social media permissions that prevented access to that settings page
