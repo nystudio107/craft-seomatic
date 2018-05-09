@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.0.12 - 2018.05.10
+### Changed
+* Switch from `.one()` syntax to `[0]` to account for eager loading of transformed social media images
+
 ## 3.0.11 - 2018.05.03
 ### Changed
 * Removed `'interlace' => 'line'` from the social media transforms, which inexplicably caused Focal Points to not be used
