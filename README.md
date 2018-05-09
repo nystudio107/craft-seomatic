@@ -787,17 +787,17 @@ Create a new [Article](http://schema.org/Article) JSON-LD meta object:
 }) %}
 ```
 
-Get the existing **MainEntityOfPage** as set in the Global SEO or Content SEO AdminCP settings to modify it:
+Get the existing **MainEntityOfPage** as set in the Global SEO or Content SEO AdminCP section to modify it:
 ```twig
 {% set mainEntity = seomatic.jsonLd.get('mainEntityOfPage') %}
 ```
 
-Get the existing **Identity** as set in the Site Settings settings to modify it:
+Get the existing **Identity** as set in the Site Settings AdminCP section to modify it:
 ```twig
 {% set identity = seomatic.jsonLd.get('identity') %}
 ```
 
-Get the existing **Creator** as set in the Site Settings settings to modify it:
+Get the existing **Creator** as set in the Site Settings AdminCP section to modify it:
 ```twig
 {% set identity = seomatic.jsonLd.get('creator') %}
 ```
