@@ -42,7 +42,7 @@ SEOmatic will migrate your old Craft 2.x Field settings & data in the following 
  
 * If you add a new SEO Settings Field to a section that had an old SEOmatic Meta field in it, it will migrate any custom data you had entered on a per-Entry basis
 
-**Important:** Keep your old Craft 2.x Seomatic_Meta fields intact; don't delete it or change the Field type to the new SEO Settings field type. Instead, create a new SEO Settings field in the same Section / Category Group. It will automatically look for and migrate data from the old Seomatic_Meta Field.
+**Important:** Keep your old Craft 2.x Seomatic_Meta fields intact; don't delete them or change the Field type to the new SEO Settings field type. Instead, create a new SEO Settings field in the same Section / Category Group. It will automatically look for and migrate data from the old Seomatic_Meta Field.
 
 SEOmatic for Craft CMS 3 is a complete re-write and re-architecture from scratch of the plugin. This allowed us to take what we learned from SEOmatic 1.x, and rebuild it with a much more robust and extendable architecture.
 
@@ -785,6 +785,21 @@ Create a new [Article](http://schema.org/Article) JSON-LD meta object:
     'name': 'Some Blog',
     'url': 'https://nystudio107.com/blog',
 }) %}
+```
+
+Get the existing **MainEntityOfPage** as set in the Global SEO or Content SEO AdminCP settings to modify it:
+```twig
+{% set mainEntity = seomatic.jsonLd.get('mainEntityOfPage') %}
+```
+
+Get the existing **Identity** as set in the Site Settings settings to modify it:
+```twig
+{% set identity = seomatic.jsonLd.get('identity') %}
+```
+
+Get the existing **Creator** as set in the Site Settings settings to modify it:
+```twig
+{% set identity = seomatic.jsonLd.get('creator') %}
 ```
 
 #### Link Meta Object Functions `seomatic.link`
