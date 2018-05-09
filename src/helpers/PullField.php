@@ -165,7 +165,7 @@ class PullField
                                     case 'fromField':
                                         if (!empty($seoSourceField)) {
                                             $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
-                                                .$objectPrefix.$elementName.$seoSourceField.'.one()'
+                                                .$objectPrefix.$elementName.$seoSourceField.'[0]'
                                                 .', "'.$transformName.'"'
                                                 .', '.$siteId.')}';
                                         }
@@ -187,7 +187,7 @@ class PullField
                         case 'fromField':
                             if (!empty($sourceField)) {
                                 $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
-                                    .$objectPrefix.$elementName.$sourceField.'.one()'
+                                    .$objectPrefix.$elementName.$sourceField.'[0]'
                                     .', "'.$transformName.'"'
                                     .', '.$siteId.')}';
                             }
@@ -209,7 +209,7 @@ class PullField
                         case 'fromField':
                             if (!empty($sourceField)) {
                                 $globalsSettings[$fieldName] = '{'
-                                    .$elementName.$sourceField.'.one().url'
+                                    .$elementName.$sourceField.'[0].url'
                                     .'}';
                             }
                             break;
