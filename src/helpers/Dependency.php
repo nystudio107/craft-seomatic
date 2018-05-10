@@ -30,6 +30,7 @@ class Dependency
     const SCRIPT_DEPENDENCY = 'script';
     const LINK_DEPENDENCY = 'link';
     const JSONLD_DEPENDENCY = 'jsonld';
+    const FRONTEND_TEMPLATE_DEPENDENCY = 'frontend_template';
 
     // Static Methods
     // =========================================================================
@@ -122,6 +123,18 @@ class Dependency
                             $options = $meta->tagAttributes();
                             // If the meta item exists, and would render, it validates
                             if ($meta->prepForRender($options)) {
+                                $validates = true;
+                            }
+                        }
+                    }
+                    break;
+                // Handle frontend template dependencies
+                case self::FRONTEND_TEMPLATE_DEPENDENCY:
+                    foreach ($keys as $key) {
+                        $template = Seomatic::$plugin->frontendTemplates->getFrontendTemplateByKey($key);
+                        if ($template !== null) {
+                            // If the frontend template exists, and is included, it validates
+                            if ($template->include) {
                                 $validates = true;
                             }
                         }
