@@ -7,6 +7,9 @@
 * Fixed an issue where Content SEO social images wouldn't fall back on the global images if they were set to "Same as SEO Image" and the SEO Image was empty
 * Fixed a typo in the SEO Settings field settings
 
+### Added
+* Added translations for the SEO Settings Field options
+
 ## 3.0.11 - 2018.05.03
 ### Changed
 * Removed `'interlace' => 'line'` from the social media transforms, which inexplicably caused Focal Points to not be used
