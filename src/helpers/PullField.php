@@ -163,14 +163,16 @@ class PullField
                             if (!empty($seoSource)) {
                                 switch ($seoSource) {
                                     case 'fromField':
+                                        $globalsSettings[$fieldName] = '';
                                         if (!empty($seoSourceField)) {
                                             $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
-                                                .$objectPrefix.$elementName.$seoSourceField.'.one()'
+                                                .$objectPrefix.$elementName.$seoSourceField.'[0]'
                                                 .', "'.$transformName.'"'
                                                 .', '.$siteId.')}';
                                         }
                                         break;
                                     case 'fromAsset':
+                                        $globalsSettings[$fieldName] = '';
                                         if (!empty($seoIds)) {
                                             $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
                                                 .$seoIds[0]
@@ -187,7 +189,7 @@ class PullField
                         case 'fromField':
                             if (!empty($sourceField)) {
                                 $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
-                                    .$objectPrefix.$elementName.$sourceField.'.one()'
+                                    .$objectPrefix.$elementName.$sourceField.'[0]'
                                     .', "'.$transformName.'"'
                                     .', '.$siteId.')}';
                             }
@@ -207,13 +209,15 @@ class PullField
                             $globalsSettings[$fieldName] = '{seomatic.meta.'.$seoField.'}';
                             break;
                         case 'fromField':
+                            $globalsSettings[$fieldName] = '';
                             if (!empty($sourceField)) {
                                 $globalsSettings[$fieldName] = '{'
-                                    .$elementName.$sourceField.'.one().url'
+                                    .$elementName.$sourceField.'[0].url'
                                     .'}';
                             }
                             break;
                         case 'fromAsset':
+                            $globalsSettings[$fieldName] = '';
                             if (!empty($ids)) {
                                 $globalsSettings[$fieldName] = '{{ craft.app.assets.assetById('
                                     .$ids[0]
