@@ -163,6 +163,7 @@ class PullField
                             if (!empty($seoSource)) {
                                 switch ($seoSource) {
                                     case 'fromField':
+                                        $globalsSettings[$fieldName] = '';
                                         if (!empty($seoSourceField)) {
                                             $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
                                                 .$objectPrefix.$elementName.$seoSourceField.'[0]'
@@ -171,6 +172,7 @@ class PullField
                                         }
                                         break;
                                     case 'fromAsset':
+                                        $globalsSettings[$fieldName] = '';
                                         if (!empty($seoIds)) {
                                             $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
                                                 .$seoIds[0]
@@ -207,6 +209,7 @@ class PullField
                             $globalsSettings[$fieldName] = '{seomatic.meta.'.$seoField.'}';
                             break;
                         case 'fromField':
+                            $globalsSettings[$fieldName] = '';
                             if (!empty($sourceField)) {
                                 $globalsSettings[$fieldName] = '{'
                                     .$elementName.$sourceField.'[0].url'
@@ -214,6 +217,7 @@ class PullField
                             }
                             break;
                         case 'fromAsset':
+                            $globalsSettings[$fieldName] = '';
                             if (!empty($ids)) {
                                 $globalsSettings[$fieldName] = '{{ craft.app.assets.assetById('
                                     .$ids[0]
