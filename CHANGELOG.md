@@ -1,5 +1,16 @@
 # SEOmatic Changelog
 
+## 3.0.12 - 2018.05.10
+### Changed
+* Switch from `.one()` syntax to `[0]` to account for eager loading of transformed social media images
+* Fixed an issue where SEOmatic incorrectly showed how many categories were in a category group on the Content SEO page
+* Fixed an issue where Content SEO social images wouldn't fall back on the global images if they were set to "Same as SEO Image" and the SEO Image was empty
+* Fixed a typo in the SEO Settings field settings
+* SEOmatic no longer renders the `rel="author"` tag if you have `humans.txt` disabled
+
+### Added
+* Added translations for the SEO Settings Field options
+
 ## 3.0.11 - 2018.05.03
 ### Changed
 * Removed `'interlace' => 'line'` from the social media transforms, which inexplicably caused Focal Points to not be used

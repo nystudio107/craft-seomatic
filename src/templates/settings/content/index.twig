@@ -69,7 +69,15 @@
                 {############### Entries ###############}
     
                 <td class="centeralign">
-                    {% set numEntries = craft.entries({ sectionId: metaBundle.sourceId }).count() %}
+                    {% switch metaBundle.sourceBundleType %}
+                    {% case "section" %}
+                        {% set numEntries = craft.entries({ sectionId: metaBundle.sourceId }).count() %}
+                    {% case "categorygroup" %}
+                        {% set numEntries = craft.categories({ groupId: metaBundle.sourceId }).count() %}
+                    {% default %}
+                        {% set numEntries = 0 %}
+                    {% endswitch %}
+                    
                     {{ numEntries }}
                 </td>
 
