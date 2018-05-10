@@ -6,6 +6,7 @@
 * Fixed an issue where SEOmatic incorrectly showed how many categories were in a category group on the Content SEO page
 * Fixed an issue where Content SEO social images wouldn't fall back on the global images if they were set to "Same as SEO Image" and the SEO Image was empty
 * Fixed a typo in the SEO Settings field settings
+* SEOmatic no longer renders the `rel="author"` tag if you have `humans.txt` disabled
 
 ### Added
 * Added translations for the SEO Settings Field options
