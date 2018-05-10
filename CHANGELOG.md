@@ -4,6 +4,7 @@
 ### Changed
 * Switch from `.one()` syntax to `[0]` to account for eager loading of transformed social media images
 * Fixed an issue where SEOmatic incorrectly showed how many categories were in a category group on the Content SEO page
+* Fixed an issue where Content SEO social images wouldn't fall back on the global images if they were set to "Same as SEO Image" and the SEO Image was empty
 
 ## 3.0.11 - 2018.05.03
 ### Changed
