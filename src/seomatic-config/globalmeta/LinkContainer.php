@@ -12,6 +12,7 @@
 use nystudio107\seomatic\helpers\Dependency;
 use nystudio107\seomatic\models\MetaLinkContainer;
 use nystudio107\seomatic\services\Link as LinkService;
+use nystudio107\seomatic\services\FrontendTemplates;
 
 /**
  * @author    nystudio107
@@ -48,6 +49,9 @@ return [
                 'type'        => '',
             ],
             'author'    => [
+                'dependencies' => [
+                    Dependency::FRONTEND_TEMPLATE_DEPENDENCY => [FrontendTemplates::HUMANS_TXT_HANDLE],
+                ],
                 'crossorigin' => '',
                 'href'        => '{{ url("/humans.txt") }}',
                 'hreflang'    => '',
