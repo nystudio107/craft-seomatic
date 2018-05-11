@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.0.13 - 2018.05.12
+### Changed
+* Fixed an issue where the `gtag` body script did not properly render
+
 ## 3.0.12 - 2018.05.10
 ### Changed
 * Switch from `.one()` syntax to `[0]` to account for eager loading of transformed social media images
