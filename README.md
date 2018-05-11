@@ -787,9 +787,14 @@ Create a new [Article](http://schema.org/Article) JSON-LD meta object:
 }) %}
 ```
 
-Get the existing **MainEntityOfPage** as set in the Global SEO or Content SEO AdminCP section to modify it:
+Get the existing **MainEntityOfPage** as set in the Global SEO or Content SEO AdminCP section to modify it (schema.org: [mainEntityOfPage](http://schema.org/docs/datamodel.html#mainEntityBackground)):
 ```twig
 {% set mainEntity = seomatic.jsonLd.get('mainEntityOfPage') %}
+```
+
+Get the existing **BreadcrumbList** as generated automatically by SEOmatic to modify them (schema.org: [BreadcrumbList](http://schema.org/BreadcrumbList)):
+```twig
+{% set crumbs = seomatic.jsonLd.get('breadcrumbs') %}
 ```
 
 Get the existing **Identity** as set in the Site Settings AdminCP section to modify it:
