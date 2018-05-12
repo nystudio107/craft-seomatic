@@ -8,7 +8,14 @@
         "cms",
         "craftcms",
         "craft-plugin",
-        "seomatic"
+        "seomatic",
+        "seo",
+        "json-ld",
+        "meta",
+        "tags",
+        "sitemap",
+        "twitter",
+        "facebook"
     ],
     "support": {
         "docs": "https://github.com/nystudio107/craft-seomatic/blob/v3/README.md",
