@@ -476,7 +476,8 @@ class MetaContainers extends Component
         $parsedAttributes = $attributes;
         MetaValueHelper::parseArray($parsedAttributes);
         $parsedAttributes = array_filter($parsedAttributes);
-        $attributes = array_intersect($attributes, $parsedAttributes);
+        //Craft::dd($parsedAttributes);
+        $attributes = array_intersect_key($attributes, $parsedAttributes);
         // Add the attributes in
         $attributes = array_filter($attributes);
         $this->metaGlobalVars->setAttributes($attributes, false);
