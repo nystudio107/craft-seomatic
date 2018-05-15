@@ -471,6 +471,13 @@ class MetaContainers extends Component
     {
         // Meta global vars
         $attributes = $metaBundle->metaGlobalVars->getAttributes();
+        // Parse the meta values so we can filter out any blank or empty attributes
+        // So that they can fall back on the parent container
+        $parsedAttributes = $attributes;
+        MetaValueHelper::parseArray($parsedAttributes);
+        $parsedAttributes = array_filter($parsedAttributes);
+        $attributes = array_intersect($attributes, $parsedAttributes);
+        // Add the attributes in
         $attributes = array_filter($attributes);
         $this->metaGlobalVars->setAttributes($attributes, false);
         // Meta site vars
