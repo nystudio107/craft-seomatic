@@ -1,8 +1,9 @@
 # SEOmatic Changelog
 
-## 3.0.13 - 2018.05.12
+## 3.0.13 - 2018.05.15
 ### Changed
 * Fixed an issue where the `gtag` body script did not properly render
+* Fixed an issue where empty results for pull fields would not fall back on the parent (usually global) settings
 
 ## 3.0.12 - 2018.05.10
 ### Changed
