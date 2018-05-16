@@ -5,7 +5,6 @@
 * Fixed an issue where the `gtag` body script did not properly render
 * Fixed an issue where empty results for pull fields would not fall back on the parent (usually global) settings
 * Fixed an issue where `seomatic.helper.loadMetadataForUri()` might not replace the container metadata properly
-* Don't render any MetaScript container's body HTML unless they are actually included
 
 ## 3.0.12 - 2018.05.10
 ### Changed

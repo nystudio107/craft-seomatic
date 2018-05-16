@@ -15,6 +15,7 @@ use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\base\SitemapInterface;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
+use nystudio107\seomatic\helpers\UrlHelper;
 use nystudio107\seomatic\services\MetaBundles;
 
 use Craft;
@@ -24,7 +25,6 @@ use craft\elements\Category;
 use craft\elements\MatrixBlock;
 use craft\fields\Assets as AssetsField;
 use craft\fields\Matrix as MatrixField;
-use craft\helpers\UrlHelper;
 use craft\models\SiteGroup;
 
 use yii\caching\TagDependency;
@@ -339,7 +339,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 case 'image':
                     $lines[] = '    <image:image>';
                     $lines[] = '      <image:loc>';
-                    $lines[] = '        '.$asset->getUrl();
+                    $lines[] = '        '.UrlHelper::absoluteUrlWithProtocol($asset->getUrl());
                     $lines[] = '      </image:loc>';
                     // Handle the dynamic field => property mappings
                     foreach ($metaBundle->metaSitemapVars->sitemapImageFieldMap as $row) {
@@ -357,7 +357,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 case 'video':
                     $lines[] = '    <video:video>';
                     $lines[] = '      <video:content_loc>';
-                    $lines[] = '        '.$asset->getUrl();
+                    $lines[] = '        '.UrlHelper::absoluteUrlWithProtocol($asset->getUrl());
                     $lines[] = '      </video:content_loc>';
                     // Handle the dynamic field => property mappings
                     foreach ($metaBundle->metaSitemapVars->sitemapVideoFieldMap as $row) {
@@ -387,7 +387,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 $dateUpdated = $asset->dateUpdated ?? $asset->dateCreated ?? new \DateTime;
                 $lines[] = '  <url>';
                 $lines[] = '    <loc>';
-                $lines[] = '      '.$asset->getUrl();
+                $lines[] = '      '.UrlHelper::absoluteUrlWithProtocol($asset->getUrl());
                 $lines[] = '    </loc>';
                 $lines[] = '    <lastmod>';
                 $lines[] = '      '.$dateUpdated->format(\DateTime::W3C);
