@@ -944,7 +944,9 @@ class MetaBundles extends Component
                                     }
                                 }
                             } else {
-                                $data->$key = $value;
+                                if ($key === 'include') {
+                                    $data->$key = $value;
+                                }
                             }
                         }
                     }
