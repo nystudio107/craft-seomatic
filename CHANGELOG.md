@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.0.14 - 2018.05.17
+### Changed
+* Ensure that any image or video URLs in the sitemap are full absolute URLs
+
 ## 3.0.13 - 2018.05.15
 ### Changed
 * Fixed an issue where the `gtag` body script did not properly render
