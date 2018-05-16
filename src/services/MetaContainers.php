@@ -81,11 +81,6 @@ class MetaContainers extends Component
     protected $metaContainers = [];
 
     /**
-     * @var bool
-     */
-    protected $loadingContainers = false;
-
-    /**
      * @var null|MetaBundle
      */
     protected $matchedMetaBundle = null;
@@ -111,8 +106,8 @@ class MetaContainers extends Component
     {
         Craft::beginProfile('loadMetaContainers', __METHOD__);
         // Avoid recursion
-        if (!$this->loadingContainers) {
-            $this->loadingContainers = true;
+        if (!Seomatic::$loadingContainers) {
+            Seomatic::$loadingContainers = true;
             $this->setMatchedElement($uri, $siteId);
             // Get the cache tag for the matched meta bundle
             $metaBundle = $this->getMatchedMetaBundle();
@@ -161,7 +156,7 @@ class MetaContainers extends Component
             }
             Seomatic::$seomaticVariable->init();
             MetaValueHelper::cache();
-            $this->loadingContainers = false;
+            Seomatic::$loadingContainers = false;
         }
         Craft::endProfile('loadMetaContainers', __METHOD__);
     }
