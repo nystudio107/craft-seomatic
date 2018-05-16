@@ -1,5 +1,11 @@
 # SEOmatic Changelog
 
+## 3.0.13 - 2018.05.15
+### Changed
+* Fixed an issue where the `gtag` body script did not properly render
+* Fixed an issue where empty results for pull fields would not fall back on the parent (usually global) settings
+* Fixed an issue where `seomatic.helper.loadMetadataForUri()` might not replace the container metadata properly
+
 ## 3.0.12 - 2018.05.10
 ### Changed
 * Switch from `.one()` syntax to `[0]` to account for eager loading of transformed social media images
