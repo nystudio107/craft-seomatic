@@ -4,6 +4,7 @@
 ### Changed
 * Ensure that any image or video URLs in the sitemap are full absolute URLs
 * Fixed multiple issues with the `gtag.js` script that prevented it from working properly
+* HTML-encode all URLs and user-enterable data in the sitemaps and sitemap indexes
 
 ## 3.0.13 - 2018.05.15
 ### Changed
