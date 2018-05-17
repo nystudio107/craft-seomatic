@@ -220,6 +220,9 @@ class MetaScript extends MetaItem
             $html = PluginTemplateHelper::renderStringTemplate($this->templateString, $this->vars);
         }
 
+        if (empty($html)) {
+            $html = '/* '.$this->name.Craft::t('seomatic', ' script did not render').' */'.PHP_EOL;
+        }
         return $html;
     }
 
