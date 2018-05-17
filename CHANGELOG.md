@@ -5,6 +5,8 @@
 * Ensure that any image or video URLs in the sitemap are full absolute URLs
 * Fixed multiple issues with the `gtag.js` script that prevented it from working properly
 * HTML-encode all URLs and user-enterable data in the sitemaps and sitemap indexes
+* Fixed an issue where the meta items are not indexed properly, causing you to be unable to get them from the Twig API
+* Fixed an issue where meta items that should have been excluded by environment were not
 
 ## 3.0.13 - 2018.05.15
 ### Changed
