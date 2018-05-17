@@ -19,6 +19,7 @@ use Craft;
 use craft\models\SiteGroup;
 
 use yii\caching\TagDependency;
+use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -130,7 +131,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
                     );
                     $lines[] = '  <sitemap>';
                     $lines[] = '    <loc>';
-                    $lines[] = '      '.$sitemapUrl;
+                    $lines[] = '      '.Html::encode($sitemapUrl);
                     $lines[] = '    </loc>';
                     if ($metaBundle->sourceDateUpdated !== null) {
                         $lines[] = '    <lastmod>';
