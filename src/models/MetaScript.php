@@ -94,9 +94,7 @@ class MetaScript extends MetaItem
     {
         parent::init();
 
-        if (empty($this->key)) {
-            $this->key = $this->templatePath;
-        }
+        $this->key = $this->key ?: $this->name;
     }
 
     /**
