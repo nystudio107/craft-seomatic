@@ -28,6 +28,7 @@ use craft\fields\Matrix as MatrixField;
 use craft\models\SiteGroup;
 
 use yii\caching\TagDependency;
+use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -184,7 +185,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                         $lines[] = '  <url>';
                         // Standard sitemap key/values
                         $lines[] = '    <loc>';
-                        $lines[] = '      '.$url;
+                        $lines[] = '      '.Html::encode($url);
                         $lines[] = '    </loc>';
                         $lines[] = '    <lastmod>';
                         $lines[] = '      '.$dateUpdated->format(\DateTime::W3C);
@@ -226,7 +227,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                                     if ($altElement) {
                                         $lines[] = '    <xhtml:link rel="alternate"'
                                             .' hreflang="'.$altSiteSettings['language'].'"'
-                                            .' href="'.$altElement->url.'"'
+                                            .' href="'.Html::encode($altElement->url).'"'
                                             .' />';
                                     }
                                 }
@@ -339,7 +340,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 case 'image':
                     $lines[] = '    <image:image>';
                     $lines[] = '      <image:loc>';
-                    $lines[] = '        '.UrlHelper::absoluteUrlWithProtocol($asset->getUrl());
+                    $lines[] = '        '.Html::encode(UrlHelper::absoluteUrlWithProtocol($asset->getUrl()));
                     $lines[] = '      </image:loc>';
                     // Handle the dynamic field => property mappings
                     foreach ($metaBundle->metaSitemapVars->sitemapImageFieldMap as $row) {
@@ -347,7 +348,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                         $propName = $row['property'] ?? '';
                         if (!empty($asset[$fieldName]) && !empty($propName)) {
                             $lines[] = '      <image:'.$propName.'>';
-                            $lines[] = '        '.$asset[$fieldName];
+                            $lines[] = '        '.Html::encode($asset[$fieldName]);
                             $lines[] = '      </image:'.$propName.'>';
                         }
                     }
@@ -357,7 +358,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 case 'video':
                     $lines[] = '    <video:video>';
                     $lines[] = '      <video:content_loc>';
-                    $lines[] = '        '.UrlHelper::absoluteUrlWithProtocol($asset->getUrl());
+                    $lines[] = '        '.Html::encode(UrlHelper::absoluteUrlWithProtocol($asset->getUrl()));
                     $lines[] = '      </video:content_loc>';
                     // Handle the dynamic field => property mappings
                     foreach ($metaBundle->metaSitemapVars->sitemapVideoFieldMap as $row) {
@@ -365,7 +366,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                         $propName = $row['property'] ?? '';
                         if (!empty($asset[$fieldName]) && !empty($propName)) {
                             $lines[] = '      <video:'.$propName.'>';
-                            $lines[] = '        '.$asset[$fieldName];
+                            $lines[] = '        '.Html::encode($asset[$fieldName]);
                             $lines[] = '      </video:'.$propName.'>';
                         }
                     }
@@ -387,7 +388,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 $dateUpdated = $asset->dateUpdated ?? $asset->dateCreated ?? new \DateTime;
                 $lines[] = '  <url>';
                 $lines[] = '    <loc>';
-                $lines[] = '      '.UrlHelper::absoluteUrlWithProtocol($asset->getUrl());
+                $lines[] = '      '.Html::encode(UrlHelper::absoluteUrlWithProtocol($asset->getUrl()));
                 $lines[] = '    </loc>';
                 $lines[] = '    <lastmod>';
                 $lines[] = '      '.$dateUpdated->format(\DateTime::W3C);
