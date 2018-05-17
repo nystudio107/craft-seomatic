@@ -210,9 +210,8 @@ class MetaJsonLd extends MetaItem
 
         $this->type = static::$schemaTypeName;
         $this->context = 'http://schema.org';
-        if (empty($this->key)) {
-            $this->key = $this->type;
-        }
+        // Make sure we have a valid key
+        $this->key = $this->key ?: $this->type;
     }
 
     /**

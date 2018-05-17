@@ -77,9 +77,8 @@ class MetaTitle extends MetaItem
     {
         parent::init();
 
-        if (empty($this->key)) {
-            $this->key = 'title';
-        }
+        // Make sure we have a valid key
+        $this->key = $this->key ?: 'title';
     }
 
     /**
