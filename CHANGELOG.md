@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.0.16 - 2018.05.18
+### Changed
+* Fixed a regression that the `rel="alternate"` link tags to not render properly 
+
 ## 3.0.15 - 2018.05.17
 ### Changed
 * Fixed a regression that caused per-environment settings to be applied in the AdminCP
