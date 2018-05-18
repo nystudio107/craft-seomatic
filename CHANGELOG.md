@@ -3,6 +3,7 @@
 ## 3.0.16 - 2018.05.18
 ### Changed
 * Fixed a regression that the `rel="alternate"` link tags to not render properly 
+* Fixed a regression where the Site Settings would throw an exception
 
 ## 3.0.15 - 2018.05.17
 ### Changed
