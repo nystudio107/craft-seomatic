@@ -168,6 +168,7 @@ class SettingsController extends Controller
             $variables['contentSetupStats'][$stat]++;
         }
         // Global SEO grades
+        Seomatic::$previewingMetaContainers = true;
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle((int)$siteId);
         $stat = 0;
         if ($metaBundle !== null) {
@@ -250,6 +251,7 @@ class SettingsController extends Controller
         $variables['controllerHandle'] = 'global'.'/'.$subSection;
         $variables['currentSubSection'] = $subSection;
         // Meta bundle settings
+        Seomatic::$previewingMetaContainers = true;
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle((int)$variables['currentSiteId']);
         if ($metaBundle !== null) {
             $variables['metaGlobalVars'] = $metaBundle->metaGlobalVars;
@@ -303,6 +305,7 @@ class SettingsController extends Controller
         $elementName = '';
 
         // The site settings for the appropriate meta bundle
+        Seomatic::$previewingMetaContainers = true;
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle !== null) {
             if (\is_array($globalsSettings) && \is_array($bundleSettings)) {
@@ -424,6 +427,7 @@ class SettingsController extends Controller
         // Enabled sites
         $this->setMultiSiteVariables($siteHandle, $siteId, $variables);
         // Meta Bundle settings
+        Seomatic::$previewingMetaContainers = true;
         $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
             $sourceBundleType,
             $sourceHandle,
@@ -520,6 +524,7 @@ class SettingsController extends Controller
                 break;
         }
         // The site settings for the appropriate meta bundle
+        Seomatic::$previewingMetaContainers = true;
         $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
             $sourceBundleType,
             $sourceHandle,
@@ -607,6 +612,7 @@ class SettingsController extends Controller
         $variables['controllerHandle'] = 'site'.'/'.$subSection;
 
         // The site settings for the appropriate meta bundle
+        Seomatic::$previewingMetaContainers = true;
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle((int)$variables['currentSiteId']);
         if ($metaBundle !== null) {
             $variables['site'] = $metaBundle->metaSiteVars;
@@ -645,6 +651,7 @@ class SettingsController extends Controller
             $siteSettings['sameAsLinks'] = ArrayHelper::index($siteSettings['sameAsLinks'], 'handle');
         }
         // The site settings for the appropriate meta bundle
+        Seomatic::$previewingMetaContainers = true;
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle) {
             if (\is_array($siteSettings)) {
@@ -735,6 +742,7 @@ class SettingsController extends Controller
         $variables['currentSubSection'] = $subSection;
 
         // The script meta containers for the global meta bundle
+        Seomatic::$previewingMetaContainers = true;
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle((int)$variables['currentSiteId']);
         if ($metaBundle !== null) {
             $variables['scripts'] = Seomatic::$plugin->metaBundles->getContainerDataFromBundle(
@@ -795,6 +803,7 @@ class SettingsController extends Controller
         $scriptSettings = $request->getParam('scripts');
 
         // The site settings for the appropriate meta bundle
+        Seomatic::$previewingMetaContainers = true;
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle) {
             /** @var array $scriptSettings */
