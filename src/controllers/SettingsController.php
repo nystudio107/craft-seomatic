@@ -614,6 +614,7 @@ class SettingsController extends Controller
         // The site settings for the appropriate meta bundle
         Seomatic::$previewingMetaContainers = true;
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle((int)$variables['currentSiteId']);
+        Seomatic::$previewingMetaContainers = false;
         if ($metaBundle !== null) {
             $variables['site'] = $metaBundle->metaSiteVars;
             $variables['identityImageElements'] = ImageTransformHelper::assetElementsFromIds(
