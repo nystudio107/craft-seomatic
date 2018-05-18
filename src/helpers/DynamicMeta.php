@@ -266,20 +266,16 @@ class DynamicMeta
         $siteLocalizedUrl = $siteLocalizedUrls[0];
         $metaTag = Seomatic::$plugin->link->create([
             'rel'      => 'alternate',
-            'hreflang' => 'x-default',
-            'href'     => $siteLocalizedUrl['url'],
+            'hreflang' => ['x-default'],
+            'href'     => [$siteLocalizedUrl['url']],
         ]);
-        Seomatic::$plugin->link->add($metaTag);
         // Add the alternate language link rel's
         if (\count($siteLocalizedUrls) > 1) {
             foreach ($siteLocalizedUrls as $siteLocalizedUrl) {
-                $metaTag = Seomatic::$plugin->link->create([
-                    'rel'      => 'alternate',
-                    'hreflang' => $siteLocalizedUrl['hreflangLanguage'],
-                    'href'     => $siteLocalizedUrl['url'],
-                ]);
-                Seomatic::$plugin->link->add($metaTag);
+                $metaTag->hreflang[] = $siteLocalizedUrl['hreflangLanguage'];
+                $metaTag->href[] = $siteLocalizedUrl['url'];
             }
+            Seomatic::$plugin->link->add($metaTag);
         }
         // Add in the og:locale:alternate tags
         $ogLocaleAlternate = Seomatic::$plugin->tag->get('og:locale:alternate');
