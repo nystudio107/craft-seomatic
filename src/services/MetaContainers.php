@@ -413,7 +413,7 @@ class MetaContainers extends Component
             }
         }
 
-        return $metaItem;
+        return null;
     }
 
     // Protected Methods
