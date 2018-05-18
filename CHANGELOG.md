@@ -1,5 +1,10 @@
 # SEOmatic Changelog
 
+## 3.0.15 - 2018.05.17
+### Changed
+* Fixed a regression that caused per-environment settings to be applied in the AdminCP
+* Fixed an issue that caused `seomatic.xxx.get()` to not return `null` if no matching item was found
+
 ## 3.0.14 - 2018.05.17
 ### Changed
 * Ensure that any image or video URLs in the sitemap are full absolute URLs
