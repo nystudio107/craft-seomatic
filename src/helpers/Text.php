@@ -207,7 +207,7 @@ class Text
      *
      * @return string
      */
-    public static function extractKeywords(string $text, $limit = 15, $useStopWords = true): string
+    public static function extractKeywords($text, $limit = 15, $useStopWords = true): string
     {
         if (empty($text)) {
             return '';
@@ -243,7 +243,7 @@ class Text
      *
      * @return string
      */
-    public static function extractSummary(string $text, $useStopWords = true): string
+    public static function extractSummary($text, $useStopWords = true): string
     {
         if (empty($text)) {
             return '';
@@ -278,7 +278,7 @@ class Text
      *
      * @return string
      */
-    public static function cleanupText(string $text): string
+    public static function cleanupText($text): string
     {
         if (empty($text)) {
             return '';

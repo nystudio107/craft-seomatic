@@ -170,6 +170,7 @@ class SettingsController extends Controller
         // Global SEO grades
         Seomatic::$previewingMetaContainers = true;
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle((int)$siteId);
+        Seomatic::$previewingMetaContainers = false;
         $stat = 0;
         if ($metaBundle !== null) {
             foreach (self::SEO_SETUP_FIELDS as $setupField) {
@@ -253,6 +254,7 @@ class SettingsController extends Controller
         // Meta bundle settings
         Seomatic::$previewingMetaContainers = true;
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle((int)$variables['currentSiteId']);
+        Seomatic::$previewingMetaContainers = false;
         if ($metaBundle !== null) {
             $variables['metaGlobalVars'] = $metaBundle->metaGlobalVars;
             $variables['metaSitemapVars'] = $metaBundle->metaSitemapVars;
@@ -307,6 +309,7 @@ class SettingsController extends Controller
         // The site settings for the appropriate meta bundle
         Seomatic::$previewingMetaContainers = true;
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
+        Seomatic::$previewingMetaContainers = false;
         if ($metaBundle !== null) {
             if (\is_array($globalsSettings) && \is_array($bundleSettings)) {
                 PullFieldHelper::parseTextSources($elementName, $globalsSettings, $bundleSettings);
@@ -433,6 +436,7 @@ class SettingsController extends Controller
             $sourceHandle,
             (int)$variables['currentSiteId']
         );
+        Seomatic::$previewingMetaContainers = false;
         $templateTitle = '';
         if ($metaBundle !== null) {
             $variables['metaGlobalVars'] = $metaBundle->metaGlobalVars;
@@ -530,6 +534,7 @@ class SettingsController extends Controller
             $sourceHandle,
             $siteId
         );
+        Seomatic::$previewingMetaContainers = false;
         if ($metaBundle) {
             if (\is_array($globalsSettings) && \is_array($bundleSettings)) {
                 PullFieldHelper::parseTextSources($elementName, $globalsSettings, $bundleSettings);
@@ -654,6 +659,7 @@ class SettingsController extends Controller
         // The site settings for the appropriate meta bundle
         Seomatic::$previewingMetaContainers = true;
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
+        Seomatic::$previewingMetaContainers = false;
         if ($metaBundle) {
             if (\is_array($siteSettings)) {
                 if (!empty($siteSettings['identity'])) {
@@ -745,6 +751,7 @@ class SettingsController extends Controller
         // The script meta containers for the global meta bundle
         Seomatic::$previewingMetaContainers = true;
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle((int)$variables['currentSiteId']);
+        Seomatic::$previewingMetaContainers = false;
         if ($metaBundle !== null) {
             $variables['scripts'] = Seomatic::$plugin->metaBundles->getContainerDataFromBundle(
                 $metaBundle,
@@ -806,6 +813,7 @@ class SettingsController extends Controller
         // The site settings for the appropriate meta bundle
         Seomatic::$previewingMetaContainers = true;
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
+        Seomatic::$previewingMetaContainers = false;
         if ($metaBundle) {
             /** @var array $scriptSettings */
             foreach ($scriptSettings as $scriptHandle => $scriptData) {

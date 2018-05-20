@@ -207,7 +207,7 @@ class Helper extends Component
      *
      * @return string
      */
-    public static function extractKeywords(string $text = '', $limit = 15, $useStopWords = true): string
+    public static function extractKeywords($text = '', $limit = 15, $useStopWords = true): string
     {
         return TextHelper::extractKeywords($text, $limit, $useStopWords);
     }
@@ -221,7 +221,7 @@ class Helper extends Component
      *
      * @return string
      */
-    public static function extractSummary(string $text = '', $useStopWords = true): string
+    public static function extractSummary($text = '', $useStopWords = true): string
     {
         return TextHelper::extractSummary($text, $useStopWords);
     }
@@ -248,7 +248,7 @@ class Helper extends Component
      *
      * @return array
      */
-    public static function getTypeMenu(string $path): array
+    public static function getTypeMenu($path): array
     {
         return SchemaHelper::getTypeMenu($path);
     }
@@ -260,7 +260,7 @@ class Helper extends Component
      *
      * @return array
      */
-    public static function getSingleTypeMenu(string $path): array
+    public static function getSingleTypeMenu($path): array
     {
         return SchemaHelper::getSingleTypeMenu($path);
     }
