@@ -107,7 +107,7 @@ class MetaBundles extends Component
             // Get the attributes from the db
             $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
             $metaBundle = MetaBundle::create($metaBundleArray);
-            $this->syncBundleWithConfig(self::GLOBAL_META_BUNDLE, $metaBundle);
+            $this->syncBundleWithConfig($metaBundle);
         } else {
             // If it doesn't exist, create it
             $metaBundle = $this->createGlobalMetaBundleForSite($sourceSiteId);
@@ -192,7 +192,7 @@ class MetaBundles extends Component
             // Get the attributes from the db
             $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
             $metaBundle = MetaBundle::create($metaBundleArray);
-            $this->syncBundleWithConfig($sourceBundleType, $metaBundle);
+            $this->syncBundleWithConfig($metaBundle);
             $id = \count($this->metaBundles);
             $this->metaBundles[$id] = $metaBundle;
             $this->metaBundlesBySourceId[$sourceBundleType][$sourceId][$sourceSiteId] = $id;
@@ -650,20 +650,19 @@ class MetaBundles extends Component
         }
     }
 
-    // Protected Methods
-    // =========================================================================
 
     /**
      * Synchronize the passed in metaBundle with the seomatic-config files if
      * there is a newer version of the MetaBundle bundleVersion in the config
      * file
      *
-     * @param string     $sourceType
      * @param MetaBundle $metaBundle
+     * @param bool       $forceUpdate
      */
-    protected function syncBundleWithConfig(string $sourceType, MetaBundle &$metaBundle)
+    public function syncBundleWithConfig(MetaBundle &$metaBundle, bool $forceUpdate = false)
     {
         $config = [];
+        $sourceType = $metaBundle->sourceBundleType;
         switch ($sourceType) {
             case self::GLOBAL_META_BUNDLE:
                 $config = ConfigHelper::getConfigFromFile('globalmeta/Bundle');
@@ -677,7 +676,8 @@ class MetaBundles extends Component
             // @TODO: handle commerce products
         }
         // If the config file has a newer version than the $metaBundleArray, merge them
-        if (!empty($config) && version_compare($config['bundleVersion'], $metaBundle->bundleVersion, '>')) {
+        $shouldUpdate = !empty($config) && version_compare($config['bundleVersion'], $metaBundle->bundleVersion, '>');
+        if ($shouldUpdate || $forceUpdate) {
             // Create a new meta bundle
             switch ($sourceType) {
                 case self::GLOBAL_META_BUNDLE:
@@ -710,6 +710,9 @@ class MetaBundles extends Component
             }
         }
     }
+
+    // Protected Methods
+    // =========================================================================
 
     /**
      * @param int             $siteId
