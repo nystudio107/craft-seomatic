@@ -1,9 +1,13 @@
 # SEOmatic Changelog
 
+## 3.0.18 - 2018.05.20
+### Changed
+* Fixed an issue where the JSON-LD types weren’t correct
+* Sync bundle when Global SEO, Content SEO, and Site Settings are changed
+
 ## 3.0.17 - 2018.05.19
 ### Changed
 * Make the various `seomatic.helper` functions more tolerant about having `null` passed in as a parameter
-* Fixed an issue where the JSON-LD types weren’t correct
 
 ## 3.0.16 - 2018.05.18
 ### Changed
