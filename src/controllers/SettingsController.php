@@ -328,6 +328,7 @@ class SettingsController extends Controller
                 $humansContainer->setAttributes($humansTemplate);
             }
 
+            Seomatic::$plugin->metaBundles->syncBundleWithConfig($metaBundle, true);
             Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
 
             Seomatic::$plugin->clearAllCaches();
@@ -547,6 +548,7 @@ class SettingsController extends Controller
                 $metaBundle->metaSitemapVars->setAttributes($sitemapSettings);
             }
 
+            Seomatic::$plugin->metaBundles->syncBundleWithConfig($metaBundle, true);
             Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
 
             Seomatic::$plugin->clearAllCaches();
@@ -676,6 +678,7 @@ class SettingsController extends Controller
                 }
                 $metaBundle->metaSiteVars->setAttributes($siteSettings);
             }
+            Seomatic::$plugin->metaBundles->syncBundleWithConfig($metaBundle, true);
             Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
 
             Seomatic::$plugin->clearAllCaches();
