@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.0.17 - 2018.05.19
+### Changed
+* Make the various `seomatic.helper` functions more tolerant about having `null` passed in as a parameter
+
 ## 3.0.16 - 2018.05.18
 ### Changed
 * Fixed a regression that the `rel="alternate"` link tags to not render properly 
