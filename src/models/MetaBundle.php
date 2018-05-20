@@ -174,6 +174,8 @@ class MetaBundle extends FluentModel
         // Make sure Twig is loaded and instantiated first by priming the pump
         MetaValueHelper::parseString('{prime}');
         $oldSeomaticVariable = Seomatic::$seomaticVariable;
+        $oldLoadingContainers = Seomatic::$loadingContainers;
+        Seomatic::$loadingContainers = false;
         // Merge these global vars with the MetaContainers global vars
         $globalVars = [];
         if (Seomatic::$plugin->metaContainers->metaGlobalVars !== null) {
@@ -193,6 +195,7 @@ class MetaBundle extends FluentModel
             'site' => $thisSite,
         ]);
         MetaValueHelper::cache();
+        Seomatic::$loadingContainers = $oldLoadingContainers;
 
         // Meta containers
         if (!empty($this->metaContainers)) {
