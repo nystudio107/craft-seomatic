@@ -103,7 +103,7 @@ class MetaLink extends MetaItem
         parent::init();
 
         // Make sure we have a valid key
-        $this->key = $this->key ?: $this->rel;
+        $this->key = $this->key ?: lcfirst($this->rel);
     }
 
     /**

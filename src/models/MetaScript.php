@@ -94,7 +94,7 @@ class MetaScript extends MetaItem
     {
         parent::init();
 
-        $this->key = $this->key ?: $this->name;
+        $this->key = $this->key ?: lcfirst($this->name);
     }
 
     /**

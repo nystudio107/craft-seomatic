@@ -30,6 +30,7 @@ class MetaTitle extends MetaItem
     // =========================================================================
 
     const ITEM_TYPE = 'MetaTitle';
+    const DEFAULT_TITLE_KEY = 'title';
 
     // Static Methods
     // =========================================================================
@@ -78,7 +79,7 @@ class MetaTitle extends MetaItem
         parent::init();
 
         // Make sure we have a valid key
-        $this->key = $this->key ?: 'title';
+        $this->key = $this->key ?: lcfirst(self::DEFAULT_TITLE_KEY);
     }
 
     /**
