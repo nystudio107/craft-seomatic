@@ -794,7 +794,7 @@ Get the existing **MainEntityOfPage** as set in the Global SEO or Content SEO Ad
 
 Get the existing **BreadcrumbList** as generated automatically by SEOmatic to modify them (schema.org: [BreadcrumbList](http://schema.org/BreadcrumbList)):
 ```twig
-{% set crumbs = seomatic.jsonLd.get('breadcrumbs') %}
+{% set crumbs = seomatic.jsonLd.get('breadcrumbList') %}
 ```
 
 Get the existing **Identity** as set in the Site Settings AdminCP section to modify it:

@@ -105,9 +105,9 @@ class MetaTag extends MetaItem
         parent::init();
 
         // Make sure we have a valid key
-        $this->key = $this->key ?: $this->name;
-        $this->key = $this->key ?: $this->property;
-        $this->key = $this->key ?: $this->httpEquiv;
+        $this->key = $this->key ?: lcfirst($this->name);
+        $this->key = $this->key ?: lcfirst($this->property);
+        $this->key = $this->key ?: lcfirst($this->httpEquiv);
     }
 
     /**
