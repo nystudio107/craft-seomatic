@@ -4,6 +4,7 @@
 ### Changed
 * Fixed an issue where the JSON-LD types weren’t correct
 * Sync bundle when Global SEO, Content SEO, and Site Settings are changed
+* Ensure that the first character of each meta item key is lower-cased
 
 ## 3.0.17 - 2018.05.19
 ### Changed
