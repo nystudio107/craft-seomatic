@@ -865,7 +865,20 @@ Note that you can achieve the same result with:
 {% do seomatic.meta.twitterTitle("Hello, world") %}
 ```
 
-...since the `twitterTitle` populates the `<meta name="twitter:title">` Tag meta object
+...since the `twitterTitle` populates the `<meta name="twitter:title">` Tag meta object by default.
+
+Let's say you didn't want Google et al to index a particular page or under certain conditions. You could do this:
+
+```twig
+{% do seomatic.tag.get("robots").content("none") %}
+```
+
+Note that you can achieve the same result with:
+```twig
+{% do seomatic.meta.robots("none") %}
+```
+
+...since the `robots` populates the `<meta name="robots">` Tag meta object by default.
 
 #### Title Meta Object Functions `seomatic.title`
 
