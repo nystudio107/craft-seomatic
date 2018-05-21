@@ -96,7 +96,7 @@ class JsonLd extends Json
         MetaValueHelper::parseArray($array);
         ksort($array);
         // If we have only one item in the array, return an empty array
-        if (\count($array) <= 1) {
+        if ((\count($array) <= 1) && empty($array['@id'])) {
             $array = [];
         }
     }
