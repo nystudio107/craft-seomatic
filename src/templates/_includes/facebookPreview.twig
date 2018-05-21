@@ -22,10 +22,10 @@ set previewFacebook = seomatic.site.facebookAppId |length or seomatic.site.faceb
                 <div class="facebook-text-wrap">
                     <div class="Facebook-text-container">
                         <div class="Facebook-headline">
-                            <a class="Facebook-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" target="_blank">{{ ogTitleArray.content ?? "" |raw }}</a>
+                            <a class="Facebook-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" target="_blank">{{ (ogTitleArray.content ?? "") |raw }}</a>
                         </div>
                         <div class="Facebook-text">
-                            {{ ogDescriptionArray.content ?? "" |raw }}
+                            {{ (ogDescriptionArray.content ?? "") |raw }}
                         </div>
                         <div class="Facebook-site-url-wrapper">
                             <div>
