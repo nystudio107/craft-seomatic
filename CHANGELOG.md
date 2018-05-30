@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.0.20 - 2018.05.30
+### Changed
+* Make sure `twitter:creator` and `twitter:site` are not resolve as aliases
+
 ## 3.0.19 - 2018.05.21
 ### Changed
 * Ensure that the previews are not double-encoded
