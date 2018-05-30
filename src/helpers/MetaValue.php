@@ -55,11 +55,11 @@ class MetaValue
 
     /**
      * @param string $metaValue
-     * @param bool  $resolveAliases
+     * @param bool   $resolveAliases
      *
      * @return string
      */
-    public static function parseString($metaValue, bool $resolveAliases = true)
+    public static function parseString($metaValue, bool $resolveAliases = true): string
     {
         // If it's a string, and there are no dynamic tags, just return the template
         if (\is_string($metaValue) && !StringHelper::contains($metaValue, '{')) {
@@ -155,7 +155,7 @@ class MetaValue
 
     /**
      * @param string|Asset $metaValue
-     * @param bool  $resolveAliases
+     * @param bool         $resolveAliases
      *
      * @return null|string
      */
@@ -206,11 +206,9 @@ class MetaValue
             }
         }
         // Handle being passed in an object
-        if (\is_object($metaValue)) {
-            if ($metaValue instanceof Asset) {
-                /** @var Asset $metaValue */
-                return $metaValue->uri;
-            }
+        if (\is_object($metaValue) && $metaValue instanceof Asset) {
+            /** @var Asset $metaValue */
+            return $metaValue->uri;
         }
 
         return $metaValue;
