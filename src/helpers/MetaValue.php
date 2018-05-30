@@ -32,6 +32,10 @@ class MetaValue
     // =========================================================================
 
     const MAX_PARSE_TRIES = 5;
+    const NO_ALIASES = [
+        'twitter:site',
+        'twitter:creator',
+    ];
 
     // Static Properties
     // =========================================================================
@@ -51,14 +55,15 @@ class MetaValue
 
     /**
      * @param string $metaValue
+     * @param bool  $resolveAliases
      *
      * @return string
      */
-    public static function parseString($metaValue)
+    public static function parseString($metaValue, bool $resolveAliases = true)
     {
         // If it's a string, and there are no dynamic tags, just return the template
         if (\is_string($metaValue) && !StringHelper::contains($metaValue, '{')) {
-            return self::parseMetaString($metaValue) ?? $metaValue;
+            return self::parseMetaString($metaValue, $resolveAliases) ?? $metaValue;
         }
         // Parse it repeatedly until it doesn't change
         $tries = self::MAX_PARSE_TRIES;
@@ -74,12 +79,16 @@ class MetaValue
 
     /**
      * @param array $metaArray
+     * @param bool  $resolveAliases
      */
-    public static function parseArray(array &$metaArray)
+    public static function parseArray(array &$metaArray, bool $resolveAliases = true)
     {
         foreach ($metaArray as $key => $value) {
+            if (\in_array($key, self::NO_ALIASES, true)) {
+                $resolveAliases = false;
+            }
             if ($value !== null) {
-                $metaArray[$key] = self::parseString($value);
+                $metaArray[$key] = self::parseString($value, $resolveAliases);
             }
         }
         $metaArray = array_filter($metaArray);
@@ -146,17 +155,20 @@ class MetaValue
 
     /**
      * @param string|Asset $metaValue
+     * @param bool  $resolveAliases
      *
      * @return null|string
      */
-    protected static function parseMetaString($metaValue)
+    protected static function parseMetaString($metaValue, bool $resolveAliases = true)
     {
         // Handle being passed in a string
         if (\is_string($metaValue)) {
-            // Resolve it as an alias
-            $alias = Craft::getAlias($metaValue, false);
-            if (\is_string($alias)) {
-                $metaValue = $alias;
+            if ($resolveAliases) {
+                // Resolve it as an alias
+                $alias = Craft::getAlias($metaValue, false);
+                if (\is_string($alias)) {
+                    $metaValue = $alias;
+                }
             }
             // If there are no dynamic tags, just return the template
             if (!StringHelper::contains($metaValue, '{')) {
