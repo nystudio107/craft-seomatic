@@ -4,6 +4,7 @@
 ### Changed
 * Make sure `twitter:creator` and `twitter:site` are not resolve as aliases
 * Fixed an issue where `syncBundleWithConfig` could return `null`
+* Preserve the FrontendTemplate settings during meta bundle updates
 
 ## 3.0.19 - 2018.05.21
 ### Changed
