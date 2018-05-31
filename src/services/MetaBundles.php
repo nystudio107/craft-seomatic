@@ -928,6 +928,9 @@ class MetaBundles extends Component
                 $metaBundle->metaSiteVars->creator->setAttributes($attributes);
             }
         }
+        // Preserve the Frontend Templates
+        $attributes = $baseConfig->frontendTemplatesContainer->getAttributes();
+        $metaBundle->frontendTemplatesContainer->setAttributes($attributes);
         // Preserve the metaSitemapVars
         $attributes = $baseConfig->metaSitemapVars->getAttributes();
         $metaBundle->metaSitemapVars->setAttributes($attributes);
