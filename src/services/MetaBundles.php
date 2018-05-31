@@ -661,6 +661,7 @@ class MetaBundles extends Component
      */
     public function syncBundleWithConfig(MetaBundle &$metaBundle, bool $forceUpdate = false)
     {
+        $prevMetaBundle = $metaBundle;
         $config = [];
         $sourceType = $metaBundle->sourceBundleType;
         switch ($sourceType) {
@@ -708,6 +709,11 @@ class MetaBundles extends Component
                     }
                 // @TODO: handle commerce products
             }
+        }
+
+        // If for some reason we were unable to sync this meta bundle, return the old one
+        if ($metaBundle === null) {
+            $metaBundle = $prevMetaBundle;
         }
     }
 
