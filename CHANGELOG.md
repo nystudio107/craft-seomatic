@@ -1,8 +1,9 @@
 # SEOmatic Changelog
 
-## 3.0.20 - 2018.05.30
+## 3.0.20 - 2018.05.31
 ### Changed
 * Make sure `twitter:creator` and `twitter:site` are not resolve as aliases
+* Fixed an issue where `syncBundleWithConfig` could return `null`
 
 ## 3.0.19 - 2018.05.21
 ### Changed
