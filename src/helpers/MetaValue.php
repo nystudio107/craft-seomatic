@@ -59,7 +59,7 @@ class MetaValue
      *
      * @return string
      */
-    public static function parseString($metaValue, bool $resolveAliases = true): string
+    public static function parseString($metaValue, bool $resolveAliases = true)
     {
         // If it's a string, and there are no dynamic tags, just return the template
         if (\is_string($metaValue) && !StringHelper::contains($metaValue, '{')) {
