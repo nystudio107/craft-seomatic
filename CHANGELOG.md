@@ -1,5 +1,16 @@
 # SEOmatic Changelog
 
+## 3.0.20 - 2018.05.31
+### Changed
+* Make sure `twitter:creator` and `twitter:site` are not resolve as aliases
+* Fixed an issue where `syncBundleWithConfig` could return `null`
+* Preserve the FrontendTemplate settings during meta bundle updates
+
+## 3.0.19 - 2018.05.21
+### Changed
+* Ensure that the previews are not double-encoded
+* Remove vestigial meta bundles from the sitemap index
+
 ## 3.0.18 - 2018.05.20
 ### Changed
 * Fixed an issue where the JSON-LD types weren’t correct
