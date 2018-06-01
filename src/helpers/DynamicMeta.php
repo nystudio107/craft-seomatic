@@ -12,7 +12,9 @@
 namespace nystudio107\seomatic\helpers;
 
 use nystudio107\seomatic\models\Entity;
+use nystudio107\seomatic\models\jsonld\ContactPoint;
 use nystudio107\seomatic\models\jsonld\LocalBusiness;
+use nystudio107\seomatic\models\jsonld\Organization;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\models\jsonld\BreadcrumbList;
 use nystudio107\seomatic\models\jsonld\Thing;
@@ -105,10 +107,12 @@ class DynamicMeta
             $jsonLd = Seomatic::$plugin->jsonLd->get('identity');
             if ($jsonLd !== null) {
                 self::addOpeningHours($jsonLd, $metaSiteVars->identity);
+                self::addContactPoints($jsonLd, $metaSiteVars->identity);
             }
             $jsonLd = Seomatic::$plugin->jsonLd->get('creator');
             if ($jsonLd !== null) {
                 self::addOpeningHours($jsonLd, $metaSiteVars->creator);
+                self::addContactPoints($jsonLd, $metaSiteVars->creator);
             }
         }
     }
@@ -145,17 +149,43 @@ class DynamicMeta
                     }
                 }
                 if ($openTime && $closeTime) {
-                    $spec = [
-                        'type'      => 'OpeningHoursSpecification',
-                        'opens'     => $openTime,
-                        'closes'    => $closeTime,
+                    $hours = Seomatic::$plugin->jsonLd->create([
+                        'type' => 'OpeningHoursSpecification',
+                        'opens' => $openTime,
+                        'closes' => $closeTime,
                         'dayOfWeek' => [$days[$index]],
-                    ];
-                    $openingHours[] = $spec;
+                    ], false);
+                    $openingHours[] = $hours;
                 }
                 $index++;
             }
             $jsonLd->openingHoursSpecification = $openingHours;
+        }
+    }
+
+    /**
+     * Add the ContactPoint to the $jsonLd based on the Entity settings
+     *
+     * @param MetaJsonLd $jsonLd
+     * @param Entity     $entity
+     */
+    public static function addContactPoints(MetaJsonLd $jsonLd, Entity $entity)
+    {
+        if ($jsonLd instanceof Organization && $entity !== null) {
+            /** @var Organization $jsonLd */
+            $contactPoints = [];
+            if ($entity->organizationContactPoints !== null && \is_array($entity->organizationContactPoints)) {
+                foreach ($entity->organizationContactPoints as $contacts) {
+                    /** @var ContactPoint $contact */
+                    $contact = Seomatic::$plugin->jsonLd->create([
+                        'type' => 'ContactPoint',
+                        'telephone' => $contacts['telephone'],
+                        'contactType' => $contacts['contactType'],
+                    ], false);
+                    $contactPoints[] = $contact;
+                }
+            }
+            $jsonLd->contactPoint = $contactPoints;
         }
     }
 
@@ -184,8 +214,8 @@ class DynamicMeta
         }
         /** @var  $crumbs BreadcrumbList */
         $crumbs = Seomatic::$plugin->jsonLd->create([
-            'type'        => 'BreadcrumbList',
-            'name'        => 'Breadcrumbs',
+            'type' => 'BreadcrumbList',
+            'name' => 'Breadcrumbs',
             'description' => 'Breadcrumbs list',
         ]);
         /** @var Element $element */
@@ -200,8 +230,8 @@ class DynamicMeta
             }
             $listItem = MetaJsonLd::create('ListItem', [
                 'position' => $position,
-                'item'     => [
-                    '@id'  => $id,
+                'item' => [
+                    '@id' => $id,
                     'name' => $element->title,
                 ],
             ]);
@@ -209,8 +239,8 @@ class DynamicMeta
         } else {
             $crumbs->itemListElement[] = MetaJsonLd::create('ListItem', [
                 'position' => $position,
-                'item'     => [
-                    '@id'  => $siteUrl,
+                'item' => [
+                    '@id' => $siteUrl,
                     'name' => 'Homepage',
                 ],
             ]);
@@ -243,8 +273,8 @@ class DynamicMeta
                 }
                 $crumbs->itemListElement[] = MetaJsonLd::create('ListItem', [
                     'position' => $position,
-                    'item'     => [
-                        '@id'  => $id,
+                    'item' => [
+                        '@id' => $id,
                         'name' => $element->title,
                     ],
                 ]);
@@ -265,9 +295,9 @@ class DynamicMeta
         // Add the x-default hreflang
         $siteLocalizedUrl = $siteLocalizedUrls[0];
         $metaTag = Seomatic::$plugin->link->create([
-            'rel'      => 'alternate',
+            'rel' => 'alternate',
             'hreflang' => ['x-default'],
-            'href'     => [$siteLocalizedUrl['url']],
+            'href' => [$siteLocalizedUrl['url']],
         ]);
         // Add the alternate language link rel's
         if (\count($siteLocalizedUrls) > 1) {
@@ -394,10 +424,10 @@ class DynamicMeta
             $hreflangLanguage = strtolower($hreflangLanguage);
             $hreflangLanguage = str_replace('_', '-', $hreflangLanguage);
             $localizedUrls[] = [
-                'id'               => $site->id,
-                'language'         => $language,
+                'id' => $site->id,
+                'language' => $language,
                 'hreflangLanguage' => $hreflangLanguage,
-                'url'              => $url,
+                'url' => $url,
             ];
         }
 
