@@ -4,6 +4,7 @@
 ### Changed
 * Fixed `ContactPoint` rendering
 * Fixed an issue where an array of one JSON-LD would not render
+* Make JSON-LD URLs fully qualified
 
 ## 3.0.20 - 2018.05.31
 ### Changed
