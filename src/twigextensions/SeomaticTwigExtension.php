@@ -92,7 +92,7 @@ class SeomaticTwigExtension extends \Twig_Extension implements \Twig_Extension_G
             [],
             // Binary operators
             [
-                '??!' => [
+                '???' => [
                     'precedence' => 300,
                     'class' => \Twig_Node_Expression_EmptyCoalesce::class,
                     'associativity' => \Twig_ExpressionParser::OPERATOR_RIGHT
