@@ -13,7 +13,7 @@ namespace nystudio107\seomatic\twigextensions;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\variables\SeomaticVariable;
-use nystudio107\seomatic\twigoperators\EmptyCoalescingOperator;
+use nystudio107\seomatic\twigoperators\Twig_Node_Expression_EmptyCoalesce;
 
 use Craft;
 use yii\base\InvalidConfigException;
@@ -94,7 +94,7 @@ class SeomaticTwigExtension extends \Twig_Extension implements \Twig_Extension_G
             [
                 '>>' => [
                     'precedence' => 300,
-                    'class' => (string)EmptyCoalescingOperator::class,
+                    'class' => \Twig_Node_Expression_EmptyCoalesce::class,
                     'associativity' => \Twig_ExpressionParser::OPERATOR_RIGHT
                 ],
             ],
