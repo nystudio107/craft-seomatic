@@ -9,14 +9,12 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-namespace nystudio107\seomatic\twigoperators;
-
 /**
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-class EmptyCoalescingOperator extends \Twig_Node_Expression_Conditional
+class Twig_Node_Expression_EmptyCoalesce extends \Twig_Node_Expression_Conditional
 {
     public function __construct(\Twig_Node $left, \Twig_Node $right, $lineno)
     {
@@ -56,3 +54,5 @@ class EmptyCoalescingOperator extends \Twig_Node_Expression_Conditional
         }
     }
 }
+
+class_alias('Twig_Node_Expression_EmptyCoalesce', 'nystudio107\seomatic\Node\Expression\EmptyCoalesceExpression', false);
