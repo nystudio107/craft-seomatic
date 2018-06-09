@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.0.22 - 2018.06.09
+### Changed
+* Remove default value for devMode Prefix that prevented it from saving an empty value
+
 ## 3.0.21 - 2018.06.01
 ### Changed
 * Fixed `ContactPoint` rendering
