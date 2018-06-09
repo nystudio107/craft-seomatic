@@ -101,7 +101,6 @@ class Settings extends FluentModel
             ['displayPreviewSidebar', 'boolean'],
             ['displayAnalysisSidebar', 'boolean'],
             ['devModeTitlePrefix', 'string'],
-            ['devModeTitlePrefix', 'default', 'value' => '[devMode] '],
             ['separatorChar', 'string'],
             ['separatorChar', 'default', 'value' => '|'],
             ['maxTitleLength', 'integer', 'min' => 10],
