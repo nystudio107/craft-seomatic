@@ -25,6 +25,7 @@ use craft\base\Element;
 use craft\errors\SiteNotFoundException;
 use craft\helpers\DateTimeHelper;
 use craft\helpers\Json;
+use craft\web\twig\variables\Paginate;
 
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
@@ -41,6 +42,39 @@ class DynamicMeta
 
     // Static Methods
     // =========================================================================
+
+    /**
+     * Paginate based on the passed in Paginate variable as returned from the
+     * Twig {% paginate %} tag: https://docs.craftcms.com/v3/templating/tags/paginate.html#the-pageInfo-variable
+     *
+     * @param Paginate $pageInfo
+     */
+    public static function paginate(Paginate $pageInfo)
+    {
+        if ($pageInfo !== null) {
+            // Set the current page
+            $url = $pageInfo->getPageUrl($pageInfo->currentPage);
+            if (!empty($url)) {
+                Seomatic::$seomaticVariable->meta->canonicalUrl = $url;
+            }
+            // Set the previous URL
+            $url = $pageInfo->getPrevUrl();
+            if (!empty($url)) {
+                $metaTag = Seomatic::$plugin->link->create([
+                    'rel' => 'prev',
+                    'href' => $url,
+                ]);
+            }
+            // Set the next URL
+            $url = $pageInfo->getNextUrl();
+            if (!empty($url)) {
+                $metaTag = Seomatic::$plugin->link->create([
+                    'rel' => 'next',
+                    'href' => $url,
+                ]);
+            }
+        }
+    }
 
     /**
      * Include any headers for this request
