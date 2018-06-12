@@ -23,6 +23,7 @@ use craft\elements\db\MatrixBlockQuery;
 use craft\elements\db\TagQuery;
 use craft\helpers\Template;
 use craft\helpers\UrlHelper;
+use craft\web\twig\variables\Paginate;
 
 /**
  * @author    nystudio107
@@ -33,6 +34,20 @@ class Helper extends Component
 {
     // Constants
     // =========================================================================
+
+    // Public Methods
+    // =========================================================================
+
+    /**
+     * Paginate based on the passed in Paginate variable as returned from the
+     * Twig {% paginate %} tag: https://docs.craftcms.com/v3/templating/tags/paginate.html#the-pageInfo-variable
+     *
+     * @param Paginate $pageInfo
+     */
+    public static function paginate(Paginate $pageInfo)
+    {
+        DynamicMetaHelper::paginate($pageInfo);
+    }
 
     /**
      * Truncates the string to a given length. If $substring is provided, and
@@ -66,9 +81,6 @@ class Helper extends Component
     {
         return TextHelper::truncateOnWord($string, $length, $substring);
     }
-
-    // Public Methods
-    // =========================================================================
 
     /**
      * Return a list of localized URLs that are in the current site's group
