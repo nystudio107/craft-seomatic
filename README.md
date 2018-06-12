@@ -270,11 +270,23 @@ None of the Tracking Scripts are included on the page unless the SEOmatic enviro
 
 Google Analytics gives you the digital analytics tools you need to analyze data from all touchpoints in one place, for a deeper understanding of the customer experience. You can then share the insights that matter with your whole organization. [Learn More](https://www.google.com/analytics/analytics/#?modal_active=none)
 
+If you want to include the Google Analytics script despite `devMode` being enabled, you can do:
+
+```twig
+{% do seomatic.script.get('googleAnalytics').include(true) %}
+```
+
 #### Google `gtag.js`
 
 ![Screenshot](resources/screenshots/seomatic-tracking-gtag.png)
 
 The global site tag (gtag.js) is a JavaScript tagging framework and API that allows you to send event data to AdWords, DoubleClick, and Google Analytics. Instead of having to manage multiple tags for different products, you can use gtag.js and more easily benefit from the latest tracking features and integrations as they become available. [Learn More](https://developers.google.com/gtagjs/)
+
+If you want to include the gtag script despite `devMode` being enabled, you can do:
+
+```twig
+{% do seomatic.script.get('gtag').include(true) %}
+```
 
 #### Google Tag Manager
 
@@ -282,11 +294,31 @@ The global site tag (gtag.js) is a JavaScript tagging framework and API that all
 
 Google Tag Manager is a tag management system that allows you to quickly and easily update tags and code snippets on your website. Once the Tag Manager snippet has been added to your website or mobile app, you can configure tags via a web-based user interface without having to alter and deploy additional code. [Learn More](https://support.google.com/tagmanager/answer/6102821?hl=en)
 
+You can set the `dataLayer` passed in to Google Tag Manager via Twig:
+
+```twig
+{% do seomatic.script.get('googleTagManager').dataLayer({
+    'woof': 'bark'
+}) %}
+```
+
+If you want to include the Google Tag Manager script despite `devMode` being enabled, you can do:
+
+```twig
+{% do seomatic.script.get('googleTagManager').include(true) %}
+```
+
 #### Facebook Pixel
 
 ![Screenshot](resources/screenshots/seomatic-tracking-fb.png)
 
 The Facebook pixel is an analytics tool that helps you measure the effectiveness of your advertising. You can use the Facebook pixel to understand the actions people are taking on your website and reach audiences you care about. [Learn More](https://www.facebook.com/business/help/651294705016616)
+
+If you want to include the Facebook Pixel script despite `devMode` being enabled, you can do:
+
+```twig
+{% do seomatic.script.get('facebookPixel').include(true) %}
+```
 
 #### Plugin Settings
 
