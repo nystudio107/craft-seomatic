@@ -388,6 +388,26 @@ class DynamicMeta
     public static function getLocalizedUrls(string $uri = null, int $siteId = null): array
     {
         $localizedUrls = [];
+        // Set the pagination URL params, if they exist
+        $urlParams = null;
+        $pageTrigger = Craft::$app->getConfig()->getGeneral()->pageTrigger;
+        if (!\is_string($pageTrigger) || $pageTrigger === '') {
+            $pageTrigger = 'p';
+        }
+        // Is this query string-based pagination?
+        if ($pageTrigger[0] === '?') {
+            $pageTrigger = trim($pageTrigger, '?=');
+        }
+        // Avoid conflict with the path param
+        $pathParam = Craft::$app->getConfig()->getGeneral()->pathParam;
+        if ($pageTrigger === $pathParam) {
+            $pageTrigger = $pathParam === 'p' ? 'pg' : 'p';
+        }
+        $pageTriggerValue = Craft::$app->getRequest()->getParam($pageTrigger);
+        if ($pageTriggerValue !== null) {
+            $urlParams = [];
+            $urlParams[$pageTrigger] = $pageTriggerValue;
+        }
         // Get the request URI
         if ($uri === null) {
             try {
@@ -433,7 +453,7 @@ class DynamicMeta
                 $url = ($url === '__home__') ? '' : $url;
             } else {
                 try {
-                    $url = $site->hasUrls ? UrlHelper::siteUrl($requestUri, null, null, $site->id)
+                    $url = $site->hasUrls ? UrlHelper::siteUrl($requestUri, $urlParams, null, $site->id)
                         : Craft::$app->getSites()->getPrimarySite()->baseUrl;
                 } catch (SiteNotFoundException $e) {
                     $url = '';
@@ -446,7 +466,7 @@ class DynamicMeta
             $url = $url ?? '';
             if (!UrlHelper::isAbsoluteUrl($url)) {
                 try {
-                    $url = UrlHelper::siteUrl($url, null, null, $site->id);
+                    $url = UrlHelper::siteUrl($url, $urlParams, null, $site->id);
                 } catch (Exception $e) {
                     $url = '';
                     Craft::error($e->getMessage(), __METHOD__);
