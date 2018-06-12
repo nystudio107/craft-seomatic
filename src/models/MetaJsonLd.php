@@ -103,31 +103,6 @@ class MetaJsonLd extends MetaItem
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The schema context.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $context;
-
-    /**
-     * The item's type.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $type;
-
-    /**
-     * The item's id.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $id;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -135,7 +110,6 @@ class MetaJsonLd extends MetaItem
      */
     static protected $_schemaPropertyNames = [
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -143,7 +117,6 @@ class MetaJsonLd extends MetaItem
      */
     static protected $_schemaPropertyExpectedTypes = [
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -152,6 +125,8 @@ class MetaJsonLd extends MetaItem
     static protected $_schemaPropertyDescriptions = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -159,7 +134,6 @@ class MetaJsonLd extends MetaItem
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -167,6 +141,24 @@ class MetaJsonLd extends MetaItem
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The schema context.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $context;
+    /**
+     * The item's type.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $type;
+    /**
+     * The item's id.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $id;
 
     // Static Methods
     // =========================================================================
@@ -183,7 +175,7 @@ class MetaJsonLd extends MetaItem
     {
         $model = null;
 
-        $className = 'nystudio107\\seomatic\\models\\jsonld\\' . $schemaType;
+        $className = 'nystudio107\\seomatic\\models\\jsonld\\'.$schemaType;
         /** @var $model MetaJsonLd */
         if (class_exists($className)) {
             self::cleanProperties($className, $config);
@@ -222,9 +214,9 @@ class MetaJsonLd extends MetaItem
     public function __toString()
     {
         return $this->render([
-            'renderRaw'        => false,
+            'renderRaw' => false,
             'renderScriptTags' => true,
-            'array'            => false,
+            'array' => false,
         ]);
     }
 
@@ -249,9 +241,9 @@ class MetaJsonLd extends MetaItem
      */
     public function render(
         array $params = [
-            'renderRaw'        => true,
+            'renderRaw' => true,
             'renderScriptTags' => true,
-            'array'            => false,
+            'array' => false,
         ]
     ): string {
         $html = '';
@@ -278,15 +270,15 @@ class MetaJsonLd extends MetaItem
             if ($params['renderScriptTags']) {
                 $html =
                     '<script type="application/ld+json">'
-                    . $linebreak
-                    . $html
-                    . $linebreak
-                    . '</script>';
+                    .$linebreak
+                    .$html
+                    .$linebreak
+                    .'</script>';
             } elseif (Seomatic::$devMode) {
                 $html =
                     $linebreak
-                    . $html
-                    . $linebreak;
+                    .$html
+                    .$linebreak;
             }
             if ($params['renderRaw'] === true) {
                 $html = Template::raw($html);
@@ -304,9 +296,9 @@ class MetaJsonLd extends MetaItem
         $attributes = [];
 
         $result = Json::decodeIfJson($this->render([
-            'renderRaw'        => true,
+            'renderRaw' => true,
             'renderScriptTags' => false,
-            'array'            => true,
+            'array' => true,
 
         ]));
         if ($result !== false) {
@@ -365,7 +357,7 @@ class MetaJsonLd extends MetaItem
             foreach ($dataToValidate as $data) {
                 /** @var array $expectedTypes */
                 foreach ($expectedTypes as $expectedType) {
-                    $className = 'craft\\plugins\\seomatic\\models\\jsonld\\' . $expectedType;
+                    $className = 'nystudio107\\seomatic\\models\\jsonld\\'.$expectedType;
                     switch ($expectedType) {
                         // Text always validates
                         case 'Text':
@@ -434,13 +426,13 @@ class MetaJsonLd extends MetaItem
                         // By default, assume it's a schema.org JSON-LD object, and validate that
                         default:
                             if (\is_object($data) && is_a($data, $className)) {
-                                    $validated = true;
+                                $validated = true;
                             }
                             break;
                     }
                 }
                 if (!$validated) {
-                    $this->addError($attribute, 'Must be one of these types: ' . implode(', ', $expectedTypes));
+                    $this->addError($attribute, 'Must be one of these types: '.implode(', ', $expectedTypes));
                 }
             }
         }

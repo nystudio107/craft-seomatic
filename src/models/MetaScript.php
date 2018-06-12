@@ -39,34 +39,46 @@ class MetaScript extends MetaItem
 
     // Public Properties
     // =========================================================================
+
     /**
      * @var string
      */
     public $description;
+
     /**
      * @var string
      */
     public $templatePath;
+
     /**
      * @var string
      */
     public $templateString;
+
     /**
      * @var int
      */
     public $position = View::POS_HEAD;
+
     /**
      * @var
      */
     public $bodyTemplatePath;
+
     /**
      * @var int
      */
     public $bodyPosition = View::POS_BEGIN;
+
     /**
      * @var array
      */
     public $vars;
+
+    /**
+     * @var array
+     */
+    public $dataLayer = [];
 
     /**
      * @param array $config
@@ -153,6 +165,7 @@ class MetaScript extends MetaItem
                 'required',
             ],
             [['vars'], 'safe'],
+            [['dataLayer'], 'safe'],
         ]);
 
         return $rules;
@@ -204,7 +217,10 @@ class MetaScript extends MetaItem
     {
         $html = '';
         if (!empty($this->bodyTemplatePath) && $this->prepForRender($params)) {
-            $html = PluginTemplateHelper::renderPluginTemplate($this->bodyTemplatePath, $this->vars);
+            $variables = array_merge($this->vars, [
+                'dataLayer' => $this->dataLayer,
+            ]);
+            $html = PluginTemplateHelper::renderPluginTemplate($this->bodyTemplatePath, $variables);
         }
 
         return $html;
@@ -217,7 +233,10 @@ class MetaScript extends MetaItem
     {
         $html = '';
         if ($this->prepForRender($params)) {
-            $html = PluginTemplateHelper::renderStringTemplate($this->templateString, $this->vars);
+            $variables = array_merge($this->vars, [
+                'dataLayer' => $this->dataLayer,
+            ]);
+            $html = PluginTemplateHelper::renderStringTemplate($this->templateString, $variables);
         }
 
         if (empty($html)) {
@@ -234,7 +253,10 @@ class MetaScript extends MetaItem
         $attributes = [];
 
         if ($this->prepForRender($options)) {
-            $attributes = ['script' => PluginTemplateHelper::renderStringTemplate($this->templateString, $this->vars)];
+            $variables = array_merge($this->vars, [
+                'dataLayer' => $this->dataLayer,
+            ]);
+            $attributes = ['script' => PluginTemplateHelper::renderStringTemplate($this->templateString, $variables)];
         }
 
         return $attributes;
