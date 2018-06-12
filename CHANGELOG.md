@@ -4,6 +4,7 @@
 ### Changed
 * Remove default value for devMode Prefix that prevented it from saving an empty value
 * Fix default values for Title position, Twitter Title position, and OG Title position
+* Allow for the setting of the `dataLayer` via Twig for Google Tag Manager
 
 ## 3.0.21 - 2018.06.01
 ### Changed
