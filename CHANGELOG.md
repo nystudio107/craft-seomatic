@@ -1,5 +1,19 @@
 # SEOmatic Changelog
 
+## 3.0.22 - 2018.06.12
+### Changed
+* Remove default value for devMode Prefix that prevented it from saving an empty value
+* Fix default values for Title position, Twitter Title position, and OG Title position
+* Allow for the setting of the `dataLayer` via Twig for Google Tag Manager
+* Added pagination support via `seomatic.helper.paginate()` to properly set the paginated `canonicalUrl` as well as the `<link rel='prev'>` and `<link rel='next'>` tags
+* Preserve the pagination trigger query string for the `<link rel='hreflang'>` tags
+
+## 3.0.21 - 2018.06.01
+### Changed
+* Fixed `ContactPoint` rendering
+* Fixed an issue where an array of one JSON-LD would not render
+* Make JSON-LD URLs fully qualified
+
 ## 3.0.20 - 2018.05.31
 ### Changed
 * Make sure `twitter:creator` and `twitter:site` are not resolve as aliases

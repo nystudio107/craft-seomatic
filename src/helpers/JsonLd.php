@@ -32,6 +32,11 @@ class JsonLd extends Json
         'key',
     ];
 
+    const FULLY_QUALIFIED_URL_KEYS = [
+        'url',
+        'logo',
+    ];
+
     // Static Properties
     // =========================================================================
 
@@ -84,7 +89,9 @@ class JsonLd extends Json
      */
     protected static function normalizeJsonLdArray(array &$array, int $depth)
     {
+        // Remove any empty values
         $array = array_filter($array);
+        // Rename keys as appropriate
         $array = self::changeKey($array, 'id', '@id');
         $array = self::changeKey($array, 'context', '@context');
         $array = self::changeKey($array, 'type', '@type');
@@ -93,10 +100,18 @@ class JsonLd extends Json
                 unset($array[$attribute]);
             }
         }
+        // Parse the array as meta values
         MetaValueHelper::parseArray($array);
+        // Fully qualify anything that should be a URL
+        foreach (self::FULLY_QUALIFIED_URL_KEYS as $key) {
+            if (!empty($array[$key]) && \is_string($array[$key])) {
+                $array[$key] = UrlHelper::absoluteUrlWithProtocol($array[$key]);
+            }
+        }
+        // Sort by key to make it look pretty
         ksort($array);
         // If we have only one item in the array, return an empty array
-        if ((\count($array) <= 1) && empty($array['@id'])) {
+        if ((\count($array) <= 1) && empty($array['@id']) && ArrayHelper::isAssociative($array, false)) {
             $array = [];
         }
     }
