@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.0.23 - 2018.06.13
+### Changed
+* Allow nothing (`--`) to be selected as a Source Field in the Image/Video Sitemap fields
+
 ## 3.0.22 - 2018.06.12
 ### Changed
 * Remove default value for devMode Prefix that prevented it from saving an empty value
