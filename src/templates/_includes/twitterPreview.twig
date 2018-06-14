@@ -36,7 +36,11 @@
                 for (i = 0; i < x.length; i++) {
                     x[i].style.backgroundImage = "url(" + "{{ baseAssetsUrl ~ '/img/no_image_set.png' }}" + ")";
                     {% if twitterImageArray.content is defined and twitterImageArray.content |length %}
-                    x[i].style.backgroundImage = "url(" + "{{ twitterImageArray.content }}" + ")";
+                    {% set cacheBustString = "" %}
+                    {% if "?" not in twitterImageArray.content %}
+                        {% set cacheBustString = "?mtime=" ~ now|date('U') %}
+                    {% endif %}
+                    x[i].style.backgroundImage = "url(" + "{{ twitterImageArray.content ~ cacheBustString }}" + ")";
                     {% endif %}
                 }
             </script>
