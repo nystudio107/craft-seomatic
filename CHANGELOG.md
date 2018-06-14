@@ -3,6 +3,7 @@
 ## 3.0.23 - 2018.06.13
 ### Changed
 * Allow nothing (`--`) to be selected as a Source Field in the Image/Video Sitemap fields
+* Added cache busting to the SEO preview images so that they will always display the latest image
 
 ## 3.0.22 - 2018.06.12
 ### Changed
