@@ -172,7 +172,8 @@ class MetaBundle extends FluentModel
         // Create our variable so that meta containers can be parsed based on dynamic values
         // Make sure Twig is loaded and instantiated first by priming the pump
         MetaValueHelper::parseString('{prime}');
-        $oldSeomaticVariable = Seomatic::$seomaticVariable;
+        $oldMeta = Seomatic::$seomaticVariable->meta;
+        $oldSite = Seomatic::$seomaticVariable->site;
         $oldLoadingContainers = Seomatic::$loadingContainers;
         $oldPreviewingMetaContainers = Seomatic::$previewingMetaContainers;
         Seomatic::$loadingContainers = false;
@@ -217,7 +218,8 @@ class MetaBundle extends FluentModel
         // Restore the $seomaticVariable
         Seomatic::$loadingContainers = $oldLoadingContainers;
         Seomatic::$previewingMetaContainers = $oldPreviewingMetaContainers;
-        Seomatic::$seomaticVariable = $oldSeomaticVariable;
+        Seomatic::$seomaticVariable->meta = $oldMeta;
+        Seomatic::$seomaticVariable->site = $oldSite;
         MetaValueHelper::cache();
     }
 
