@@ -18,7 +18,6 @@ use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
 use nystudio107\seomatic\helpers\Migration as MigrationHelper;
 use nystudio107\seomatic\helpers\PullField as PullFieldHelper;
 use nystudio107\seomatic\models\MetaBundle;
-use nystudio107\seomatic\services\MetaBundles;
 
 use Craft;
 use craft\base\Element;
@@ -26,6 +25,7 @@ use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\elements\Asset;
 use craft\helpers\Json;
+use craft\helpers\StringHelper;
 
 use yii\base\InvalidConfigException;
 use yii\db\Schema;
@@ -127,6 +127,8 @@ class SeoSettings extends Field
         // Handle incoming values potentially being JSON, an array, or an object
         if (!empty($value)) {
             if (\is_string($value)) {
+                // Decode any html entities
+                $value = html_entity_decode($value, ENT_NOQUOTES, 'UTF-8');
                 $config = Json::decodeIfJson($value);
             }
             if (\is_array($value)) {
@@ -179,6 +181,29 @@ class SeoSettings extends Field
         );
 
         return MetaBundle::create($metaBundleDefaults);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function serializeValue($value, ElementInterface $element = null)
+    {
+        $value = parent::serializeValue($value, $element);
+        if (!Craft::$app->getDb()->getSupportsMb4()) {
+            if (\is_string($value)) {
+                // Encode any 4-byte UTF-8 characters.
+                $value = StringHelper::encodeMb4($value);
+            }
+            if (\is_array($value)) {
+                array_walk_recursive($value, function (&$arrayValue, &$arrayKey) {
+                    if ($arrayValue !== null && \is_string($arrayValue)) {
+                        $arrayValue = StringHelper::encodeMb4($arrayValue);
+                    }
+                });
+            }
+        }
+
+        return $value;
     }
 
     /**

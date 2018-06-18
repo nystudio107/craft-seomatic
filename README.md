@@ -364,6 +364,8 @@ SEOmatic has an SEO Settings Field that you can add to your Field Layouts. For m
 
 Modern SEO works best if it actually reflects what is on the page, visible to the user, so pulling from your page's content will work well in most cases.
 
+#### Using SEO Settings Fields
+
 However, in some cases you may want more control over page SEO for specific entries. That's where the SEO Settings field comes in. Add it to your Section's Field Layout, and you can override specific SEO settings on a per-entry basis.
 
 The Field settings let you control exactly what fields will appear and be visible for you or your client to override:
@@ -381,6 +383,52 @@ You can enable every possible field to be displayed in the SEO Settings field if
 ![Screenshot](resources/screenshots/seomatic-field-full.png)
 
 But it's probably best to limit it to just the things that you or your client might want to change on a per-entry basis.
+
+#### Template Access
+
+If you need to access your SEOmatic field's data directly in a template, you can do so via:
+
+```twig
+{{ entry.mySeoSettingsField.metaGlobalVars.seoTitle }}
+```
+
+All of the variables listed in the [General Variables](#general-variables) can be accessed in this manner.
+
+## Pagination and SEO
+
+If you are using paginated entries, you'll want to add some additional markup to your templates to make Google et al aware of this. Fortunately, SEOmatic makes that easy, you simply do:
+
+```twig
+{% do seomatic.helper.pageinate(PAGEINFO) %}
+```
+ 
+ The `PAGEINFO` here is the variable from the `{% paginate %}` tag as [described here](https://docs.craftcms.com/v3/templating/tags/paginate.html#the-pageInfo-variable), this will properly set the `canonicalUrl`, as well as adding the `<link rel='prev'>` and `<link rel='next'>` tags for you.
+
+A complete example (just a modified version of the [Craft 3 Documentation on {% Paginate %}](https://docs.craftcms.com/v3/templating/tags/paginate.html#the-pageInfo-variable)) might look like this:
+
+```twig
+{% paginate craft.entries.section('blog').limit(10) as pageInfo, pageEntries %}
+{% do seomatic.helper.pageinate(pageInfo) %}
+
+{% for entry in pageEntries %}
+    <article>
+        <h1>{{ entry.title }}</h1>
+        {{ entry.body }}
+    </article>
+{% endfor %}
+
+{% if pageInfo.prevUrl %}<a href="{{ pageInfo.prevUrl }}">Previous Page</a>{% endif %}
+{% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}">Next Page</a>{% endif %}
+```
+More info: [SEO Guide to Google Webmaster Recommendations for Pagination](https://moz.com/blog/seo-guide-to-google-webmaster-recommendations-for-pagination)
+
+## Emoji Support
+
+SEOmatic supports using Emojis in any of the fields in SEOmatic, so you could use one in the SEO Description, for instance:
+
+![Screenshot](resources/screenshots/seomatic-emoji-support.png)
+
+It's up to Google whether or not to display the emojis that you add to your SEO meta, but used effectively, they can help make your entries in the SERP stand out from others. Learn more: [Why Use Emojis in Your SEO / PPC Strategy?](https://www.jellyfish.net/en-us/news-and-views/why-use-emojis-in-your-seo-ppc-strategy)
 
 ## Using SEOmatic
 

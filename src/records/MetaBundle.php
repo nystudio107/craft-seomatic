@@ -11,7 +11,9 @@
 
 namespace nystudio107\seomatic\records;
 
+use Craft;
 use craft\db\ActiveRecord;
+use craft\helpers\StringHelper;
 
 /**
  * @author    nystudio107
@@ -29,5 +31,25 @@ class MetaBundle extends ActiveRecord
     public static function tableName(): string
     {
         return '{{%seomatic_metabundles}}';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+
+        $result = parent::beforeSave($insert);
+
+        if (!Craft::$app->getDb()->getSupportsMb4()) {
+            foreach ($this->fields() as $attribute) {
+                if (\is_string($this->$attribute)) {
+                    // Encode any 4-byte UTF-8 characters.
+                    $this->$attribute = StringHelper::encodeMb4($this->$attribute);
+                }
+            }
+        }
+
+        return $result;
     }
 }

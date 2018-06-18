@@ -16,7 +16,6 @@ use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\base\FluentModel;
-use nystudio107\seomatic\variables\SeomaticVariable;
 
 use craft\helpers\Json as JsonHelper;
 use craft\validators\ArrayValidator;
@@ -173,9 +172,12 @@ class MetaBundle extends FluentModel
         // Create our variable so that meta containers can be parsed based on dynamic values
         // Make sure Twig is loaded and instantiated first by priming the pump
         MetaValueHelper::parseString('{prime}');
-        $oldSeomaticVariable = Seomatic::$seomaticVariable;
+        $oldMeta = Seomatic::$seomaticVariable->meta;
+        $oldSite = Seomatic::$seomaticVariable->site;
         $oldLoadingContainers = Seomatic::$loadingContainers;
+        $oldPreviewingMetaContainers = Seomatic::$previewingMetaContainers;
         Seomatic::$loadingContainers = false;
+        Seomatic::$previewingMetaContainers = false;
         // Merge these global vars with the MetaContainers global vars
         $globalVars = [];
         if (Seomatic::$plugin->metaContainers->metaGlobalVars !== null) {
@@ -190,12 +192,9 @@ class MetaBundle extends FluentModel
         }
         $thisSiteVars = $this->metaSiteVars->getAttributes();
         $thisSite = MetaSiteVars::create(ArrayHelper::merge($siteVars, $thisSiteVars));
-        Seomatic::$seomaticVariable = new SeomaticVariable([
-            'meta' => $thisGlobals,
-            'site' => $thisSite,
-        ]);
+        Seomatic::$seomaticVariable->meta = $thisGlobals;
+        Seomatic::$seomaticVariable->site = $thisSite;
         MetaValueHelper::cache();
-        Seomatic::$loadingContainers = $oldLoadingContainers;
 
         // Meta containers
         if (!empty($this->metaContainers)) {
@@ -217,7 +216,10 @@ class MetaBundle extends FluentModel
             $this->frontendTemplatesContainer = FrontendTemplateContainer::create($this->frontendTemplatesContainer);
         }
         // Restore the $seomaticVariable
-        Seomatic::$seomaticVariable = $oldSeomaticVariable;
+        Seomatic::$loadingContainers = $oldLoadingContainers;
+        Seomatic::$previewingMetaContainers = $oldPreviewingMetaContainers;
+        Seomatic::$seomaticVariable->meta = $oldMeta;
+        Seomatic::$seomaticVariable->site = $oldSite;
         MetaValueHelper::cache();
     }
 
