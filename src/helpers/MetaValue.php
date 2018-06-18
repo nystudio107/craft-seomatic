@@ -172,7 +172,7 @@ class MetaValue
             }
             // If there are no dynamic tags, just return the template
             if (!StringHelper::contains($metaValue, '{')) {
-                return $metaValue;
+                return html_entity_decode($metaValue, ENT_NOQUOTES, 'UTF-8');
             }
             $oldTemplateMode = self::$view->getTemplateMode();
             try {
@@ -181,7 +181,11 @@ class MetaValue
                     self::$view->setTemplateMode(self::$view::TEMPLATE_MODE_SITE);
                 }
                 // Render the template out
-                $metaValue = self::$view->renderObjectTemplate($metaValue, self::$templateObjectVars);
+                $metaValue = html_entity_decode(
+                    self::$view->renderObjectTemplate($metaValue, self::$templateObjectVars),
+                    ENT_NOQUOTES,
+                    'UTF-8'
+                );
                 // Restore the template mode
                 if ($oldTemplateMode !== self::$view::TEMPLATE_MODE_SITE) {
                     self::$view->setTemplateMode($oldTemplateMode);

@@ -902,10 +902,12 @@ class SettingsController extends Controller
             )
         );
         $variables['assetVolumeTextFieldSources'] = array_merge(
-            ['entryGroup' => ['optgroup' => 'Asset Volume Fields'], 'title' => 'Title'],
-            FieldHelper::fieldsOfTypeFromAssetVolumes(
-                FieldHelper::TEXT_FIELD_CLASS_KEY,
-                false
+            ['entryGroup' => ['optgroup' => 'Asset Volume Fields'], '' => '--', 'title' => 'Title'],
+            array_merge(
+                FieldHelper::fieldsOfTypeFromAssetVolumes(
+                    FieldHelper::TEXT_FIELD_CLASS_KEY,
+                    false
+                )
             )
         );
         $variables['userFieldSources'] = array_merge(
