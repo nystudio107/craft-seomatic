@@ -20,6 +20,7 @@ use nystudio107\seomatic\base\FluentModel;
 use craft\helpers\Json as JsonHelper;
 use craft\validators\ArrayValidator;
 use craft\validators\DateTimeValidator;
+use nystudio107\seomatic\variables\SeomaticVariable;
 
 /**
  * @author    nystudio107
@@ -172,6 +173,10 @@ class MetaBundle extends FluentModel
         // Create our variable so that meta containers can be parsed based on dynamic values
         // Make sure Twig is loaded and instantiated first by priming the pump
         MetaValueHelper::parseString('{prime}');
+        $oldSeomaticVariable = Seomatic::$seomaticVariable;
+        if (Seomatic::$seomaticVariable === null) {
+            Seomatic::$seomaticVariable = new SeomaticVariable();
+        }
         $oldMeta = Seomatic::$seomaticVariable->meta;
         $oldSite = Seomatic::$seomaticVariable->site;
         $oldLoadingContainers = Seomatic::$loadingContainers;
@@ -220,6 +225,7 @@ class MetaBundle extends FluentModel
         Seomatic::$previewingMetaContainers = $oldPreviewingMetaContainers;
         Seomatic::$seomaticVariable->meta = $oldMeta;
         Seomatic::$seomaticVariable->site = $oldSite;
+        Seomatic::$seomaticVariable = $oldSeomaticVariable;
         MetaValueHelper::cache();
     }
 
