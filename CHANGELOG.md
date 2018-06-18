@@ -4,6 +4,7 @@
 ### Changed
 * Allow nothing (`--`) to be selected as a Source Field in the Image/Video Sitemap fields
 * Added cache busting to the SEO preview images so that they will always display the latest image
+* Added support for emojis in any of the SEOmatic fields
 
 ## 3.0.22 - 2018.06.12
 ### Changed
