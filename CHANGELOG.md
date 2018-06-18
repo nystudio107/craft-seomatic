@@ -1,10 +1,13 @@
 # SEOmatic Changelog
 
 ## 3.0.23 - 2018.06.13
+### Added
+* Added support for emojis in any of the SEOmatic fields
+
 ### Changed
 * Allow nothing (`--`) to be selected as a Source Field in the Image/Video Sitemap fields
 * Added cache busting to the SEO preview images so that they will always display the latest image
-* Added support for emojis in any of the SEOmatic fields
+* Fixed an issue where removing an SEO Image from an SEO Settings field would cause it to persist
 
 ## 3.0.22 - 2018.06.12
 ### Changed
