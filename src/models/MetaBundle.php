@@ -16,7 +16,6 @@ use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\base\FluentModel;
-use nystudio107\seomatic\variables\SeomaticVariable;
 
 use craft\helpers\Json as JsonHelper;
 use craft\validators\ArrayValidator;
@@ -175,7 +174,9 @@ class MetaBundle extends FluentModel
         MetaValueHelper::parseString('{prime}');
         $oldSeomaticVariable = Seomatic::$seomaticVariable;
         $oldLoadingContainers = Seomatic::$loadingContainers;
+        $oldPreviewingMetaContainers = Seomatic::$previewingMetaContainers;
         Seomatic::$loadingContainers = false;
+        Seomatic::$previewingMetaContainers = false;
         // Merge these global vars with the MetaContainers global vars
         $globalVars = [];
         if (Seomatic::$plugin->metaContainers->metaGlobalVars !== null) {
@@ -190,12 +191,9 @@ class MetaBundle extends FluentModel
         }
         $thisSiteVars = $this->metaSiteVars->getAttributes();
         $thisSite = MetaSiteVars::create(ArrayHelper::merge($siteVars, $thisSiteVars));
-        Seomatic::$seomaticVariable = new SeomaticVariable([
-            'meta' => $thisGlobals,
-            'site' => $thisSite,
-        ]);
+        Seomatic::$seomaticVariable->meta = $thisGlobals;
+        Seomatic::$seomaticVariable->site = $thisSite;
         MetaValueHelper::cache();
-        Seomatic::$loadingContainers = $oldLoadingContainers;
 
         // Meta containers
         if (!empty($this->metaContainers)) {
@@ -217,6 +215,8 @@ class MetaBundle extends FluentModel
             $this->frontendTemplatesContainer = FrontendTemplateContainer::create($this->frontendTemplatesContainer);
         }
         // Restore the $seomaticVariable
+        Seomatic::$loadingContainers = $oldLoadingContainers;
+        Seomatic::$previewingMetaContainers = $oldPreviewingMetaContainers;
         Seomatic::$seomaticVariable = $oldSeomaticVariable;
         MetaValueHelper::cache();
     }
