@@ -41,7 +41,7 @@ class MetaBundle extends ActiveRecord
 
         $result = parent::beforeSave($insert);
 
-        if (Craft::$app->getDb()->getIsMysql()) {
+        if (!Craft::$app->getDb()->getSupportsMb4()) {
             foreach ($this->fields() as $attribute) {
                 if (\is_string($this->$attribute)) {
                     // Encode any 4-byte UTF-8 characters.
