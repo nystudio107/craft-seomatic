@@ -189,7 +189,7 @@ class SeoSettings extends Field
     public function serializeValue($value, ElementInterface $element = null)
     {
         $value = parent::serializeValue($value, $element);
-        if (Craft::$app->getDb()->getIsMysql()) {
+        if (!Craft::$app->getDb()->getSupportsMb4()) {
             if (\is_string($value)) {
                 // Encode any 4-byte UTF-8 characters.
                 $value = StringHelper::encodeMb4($value);
