@@ -8,6 +8,7 @@
 * Allow nothing (`--`) to be selected as a Source Field in the Image/Video Sitemap fields
 * Added cache busting to the SEO preview images so that they will always display the latest image
 * Fixed an issue where removing an SEO Image from an SEO Settings field would cause it to persist
+* Fixed an issue introduced in Craft CMS 3.0.10 that would cause JSON-LD to be not fully rendered
 
 ## 3.0.22 - 2018.06.12
 ### Changed
