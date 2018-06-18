@@ -187,6 +187,7 @@ class PullField
                             }
                             break;
                         case 'fromField':
+                            $globalsSettings[$fieldName] = '';
                             if (!empty($sourceField)) {
                                 $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
                                     .$objectPrefix.$elementName.$sourceField.'[0]'
@@ -195,6 +196,7 @@ class PullField
                             }
                             break;
                         case 'fromAsset':
+                            $globalsSettings[$fieldName] = '';
                             if (!empty($ids)) {
                                 $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
                                     .$ids[0]
