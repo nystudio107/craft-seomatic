@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.0.24 - 2018.06.22
+### Changed
+* Don't log meta item error messages unless `devMode` is on
+
 ## 3.0.23 - 2018.06.18
 ### Added
 * Added support for emojis in any of the SEOmatic fields
