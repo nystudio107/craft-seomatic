@@ -151,12 +151,14 @@ class MetaTag extends MetaItem
                 if (Seomatic::$devMode) {
                 }
             } else {
-                $error = Craft::t(
-                    'seomatic',
-                    '{tagtype} tag `{key}` did not render because it is missing attributes. ' . print_r($data, true),
-                    ['tagtype' => 'Meta', 'key' => $this->key]
-                );
-                Craft::error($error, __METHOD__);
+                if (Seomatic::$devMode) {
+                    $error = Craft::t(
+                        'seomatic',
+                        '{tagtype} tag `{key}` did not render because it is missing attributes. '.print_r($data, true),
+                        ['tagtype' => 'Meta', 'key' => $this->key]
+                    );
+                    Craft::error($error, __METHOD__);
+                }
                 $shouldRender = false;
             }
         }
