@@ -172,20 +172,6 @@ class MetaGlobalVars extends VarsModel
     /**
      * @inheritdoc
      */
-    public function init()
-    {
-        // For all the emojis
-        $attributes = $this->attributes();
-        if ($attributes !== null) {
-            foreach ($attributes as $attribute) {
-                $this->$attribute = html_entity_decode($this->$attribute, ENT_NOQUOTES, 'UTF-8');
-            }
-        }
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function rules(): array
     {
         return [
