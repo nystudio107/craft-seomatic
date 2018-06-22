@@ -40,7 +40,7 @@
                     {% if "?" not in twitterImageArray.content %}
                         {% set cacheBustString = "?mtime=" ~ now|date('U') %}
                     {% endif %}
-                    x[i].style.backgroundImage = "url(" + "{{ twitterImageArray.content ~ cacheBustString }}" + ")";
+                    x[i].style.backgroundImage = "url(" + "{{ (twitterImageArray.content ~ cacheBustString) | raw }}" + ")";
                     {% endif %}
                 }
             </script>
