@@ -11,14 +11,14 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\base\FluentModel;
+use nystudio107\seomatic\base\VarsModel;
 
 /**
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-class Settings extends FluentModel
+class Settings extends VarsModel
 {
     // Public Properties
     // =========================================================================
@@ -77,9 +77,19 @@ class Settings extends FluentModel
     // Public Methods
     // =========================================================================
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
+        // For all the emojis
+        $attributes = $this->attributes();
+        if ($attributes !== null) {
+            foreach ($attributes as $attribute) {
+                $this->$attribute = html_entity_decode($this->$attribute, ENT_NOQUOTES, 'UTF-8');
+            }
+        }
     }
 
     /**
