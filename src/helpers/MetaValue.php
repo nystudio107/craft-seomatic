@@ -17,8 +17,10 @@ use nystudio107\seomatic\Seomatic;
 
 use Craft;
 use craft\base\Element;
+use craft\helpers\Html;
 use craft\helpers\StringHelper;
 use craft\web\View;
+
 use yii\base\Exception;
 
 /**
@@ -172,7 +174,7 @@ class MetaValue
             }
             // If there are no dynamic tags, just return the template
             if (!StringHelper::contains($metaValue, '{')) {
-                return html_entity_decode($metaValue, ENT_NOQUOTES, 'UTF-8');
+                return Html::decode($metaValue);
             }
             $oldTemplateMode = self::$view->getTemplateMode();
             try {
@@ -181,11 +183,7 @@ class MetaValue
                     self::$view->setTemplateMode(self::$view::TEMPLATE_MODE_SITE);
                 }
                 // Render the template out
-                $metaValue = html_entity_decode(
-                    self::$view->renderObjectTemplate($metaValue, self::$templateObjectVars),
-                    ENT_NOQUOTES,
-                    'UTF-8'
-                );
+                $metaValue = Html::decode(self::$view->renderObjectTemplate($metaValue, self::$templateObjectVars));
                 // Restore the template mode
                 if ($oldTemplateMode !== self::$view::TEMPLATE_MODE_SITE) {
                     self::$view->setTemplateMode($oldTemplateMode);
