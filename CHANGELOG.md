@@ -3,6 +3,7 @@
 ## 3.0.24 - 2018.06.22
 ### Changed
 * Don't log meta item error messages unless `devMode` is on
+* Don’t encode preview URLs
 
 ## 3.0.23 - 2018.06.18
 ### Added
