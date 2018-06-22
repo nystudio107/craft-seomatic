@@ -48,7 +48,7 @@ set previewFacebook = seomatic.site.facebookAppId |length or seomatic.site.faceb
                     {% if "?" not in ogImageArray.content %}
                         {% set cacheBustString = "?mtime=" ~ now|date('U') %}
                     {% endif %}
-                    x[i].style.backgroundImage = "url(" + "{{ ogImageArray.content ~ cacheBustString }}" + ")";
+                    x[i].style.backgroundImage = "url(" + "{{ (ogImageArray.content ~ cacheBustString) | raw }}" + ")";
                     {% endif %}
                 }
             </script>
