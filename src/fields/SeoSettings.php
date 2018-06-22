@@ -24,7 +24,6 @@ use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\elements\Asset;
-use craft\helpers\Html;
 use craft\helpers\Json;
 use craft\helpers\StringHelper;
 
@@ -129,7 +128,7 @@ class SeoSettings extends Field
         if (!empty($value)) {
             if (\is_string($value)) {
                 // Decode any html entities
-                $value = Html::decode($value);
+                $value = html_entity_decode($value, ENT_NOQUOTES, 'UTF-8');
                 $config = Json::decodeIfJson($value);
             }
             if (\is_array($value)) {

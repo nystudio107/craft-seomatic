@@ -12,9 +12,6 @@
 namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\base\VarsModel;
-use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
-
-use craft\validators\ArrayValidator;
 
 /**
  * @inheritdoc
@@ -170,6 +167,20 @@ class MetaGlobalVars extends VarsModel
         // Unset any deprecated properties
         //unset($config['siteNamePosition']);
         parent::__construct($config);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        // For all the emojis
+        $attributes = $this->attributes();
+        if ($attributes !== null) {
+            foreach ($attributes as $attribute) {
+                $this->$attribute = html_entity_decode($this->$attribute, ENT_NOQUOTES, 'UTF-8');
+            }
+        }
     }
 
     /**
