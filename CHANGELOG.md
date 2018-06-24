@@ -1,7 +1,11 @@
 # SEOmatic Changelog
 
 ## 3.0.24 - 2018.06.22
+### Added
+* Allow the use of Emoji in the plugin settings, such as for the `devMode` title prefix
+
 ### Changed
+* Set the default devMode title prefix to 🚧 
 * Don't log meta item error messages unless `devMode` is on
 * Don’t encode preview URLs
 
