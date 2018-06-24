@@ -6,6 +6,7 @@
 
 ### Changed
 * Set the default devMode title prefix to 🚧 
+* Sync section / category group handles that are renamed
 * Don't log meta item error messages unless `devMode` is on
 * Don’t encode preview URLs
 
