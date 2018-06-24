@@ -9,6 +9,7 @@
 * Sync section / category group handles that are renamed
 * Don't log meta item error messages unless `devMode` is on
 * Don’t encode preview URLs
+* Fixed an issue where disabling a section’s URLs was not sync properly with the Content SEO settings
 
 ## 3.0.23 - 2018.06.18
 ### Added
