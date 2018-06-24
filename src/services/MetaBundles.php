@@ -574,7 +574,7 @@ class MetaBundles extends Component
         foreach ($metaBundles as $key => $metaBundle) {
             $unsetMetaBundle = false;
             /** @var MetaBundle $metaBundle */
-            switch ($metaBundle->sourceType) {
+            switch ($metaBundle->sourceBundleType) {
                 case self::GLOBAL_META_BUNDLE:
                     $unsetMetaBundle = false;
                     break;
@@ -587,7 +587,7 @@ class MetaBundles extends Component
                         if (!empty($siteSettings)) {
                             /** @var CategoryGroup_SiteSettings $siteSetting */
                             foreach ($siteSettings as $siteSetting) {
-                                if ($siteSetting->siteId === $metaBundle->sourceSiteId && !$siteSetting->hasUrls) {
+                                if ($siteSetting->siteId == $metaBundle->sourceSiteId && !$siteSetting->hasUrls) {
                                     $unsetMetaBundle = true;
                                 }
                             }
@@ -603,7 +603,7 @@ class MetaBundles extends Component
                         if (!empty($siteSettings)) {
                             /** @var Section_SiteSettings $siteSetting */
                             foreach ($siteSettings as $siteSetting) {
-                                if ($siteSetting->siteId === $metaBundle->sourceSiteId && !$siteSetting->hasUrls) {
+                                if ($siteSetting->siteId == $metaBundle->sourceSiteId && !$siteSetting->hasUrls) {
                                     $unsetMetaBundle = true;
                                 }
                             }
