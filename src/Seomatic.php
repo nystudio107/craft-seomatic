@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic;
 
+use craft\helpers\StringHelper;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
 use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
@@ -149,6 +150,11 @@ class Seomatic extends Plugin
      */
     public static $loadingContainers = false;
 
+    /**
+     * @var bool
+     */
+    public static $savingSettings = false;
+
     // Static Methods
     // =========================================================================
 
@@ -218,9 +224,33 @@ class Seomatic extends Plugin
                         Craft::$app->getResponse()->redirect(UrlHelper::cpUrl(
                             'seomatic/dashboard',
                             [
-                                'showWelcome' => true
+                                'showWelcome' => true,
                             ]
                         ))->send();
+                    }
+                }
+            }
+        );
+        // Handler: EVENT_BEFORE_SAVE_PLUGIN_SETTINGS
+        Event::on(
+            Plugins::class,
+            Plugins::EVENT_BEFORE_SAVE_PLUGIN_SETTINGS,
+            function (PluginEvent $event) {
+                if ($event->plugin === $this) {
+                    // For all the emojis
+                    if (!Craft::$app->getDb()->getSupportsMb4()) {
+                        $settingsModel = $this->getSettings();
+                        Seomatic::$savingSettings = true;
+                        if ($settingsModel !== null) {
+                            $attributes = $settingsModel->attributes();
+                            if ($attributes !== null) {
+                                foreach ($attributes as $attribute) {
+                                    if (\is_string($settingsModel->$attribute)) {
+                                        $settingsModel->$attribute = StringHelper::encodeMb4($settingsModel->$attribute);
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -234,6 +264,28 @@ class Seomatic extends Plugin
             ),
             __METHOD__
         );
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSettings()
+    {
+        // For all the emojis
+        $settingsModel = parent::getSettings();
+        if ($settingsModel !== null && !Seomatic::$savingSettings) {
+            $attributes = $settingsModel->attributes();
+            if ($attributes !== null) {
+                foreach ($attributes as $attribute) {
+                    if (\is_string($settingsModel->$attribute)) {
+                        $settingsModel->$attribute = html_entity_decode($settingsModel->$attribute, ENT_NOQUOTES, 'UTF-8');
+                    }
+                }
+            }
+            Seomatic::$savingSettings = false;
+        }
+
+        return $settingsModel;
     }
 
     /**
@@ -258,37 +310,37 @@ class Seomatic extends Plugin
         if ($currentUser->can('seomatic:dashboard')) {
             $subNavs['dashboard'] = [
                 'label' => 'Dashboard',
-                'url'   => 'seomatic/dashboard',
+                'url' => 'seomatic/dashboard',
             ];
         }
         if ($currentUser->can('seomatic:global-meta')) {
             $subNavs['global'] = [
                 'label' => 'Global SEO',
-                'url'   => 'seomatic/global',
+                'url' => 'seomatic/global',
             ];
         }
         if ($currentUser->can('seomatic:content-meta')) {
             $subNavs['content'] = [
                 'label' => 'Content SEO',
-                'url'   => 'seomatic/content',
+                'url' => 'seomatic/content',
             ];
         }
         if ($currentUser->can('seomatic:site-settings')) {
             $subNavs['site'] = [
                 'label' => 'Site Settings',
-                'url'   => 'seomatic/site',
+                'url' => 'seomatic/site',
             ];
         }
         if ($currentUser->can('seomatic:tracking-scripts')) {
             $subNavs['tracking'] = [
                 'label' => 'Tracking Scripts',
-                'url'   => 'seomatic/tracking',
+                'url' => 'seomatic/tracking',
             ];
         }
         if ($currentUser->can('seomatic:plugin-settings')) {
             $subNavs['plugin'] = [
                 'label' => 'Plugin Settings',
-                'url'   => 'seomatic/plugin',
+                'url' => 'seomatic/plugin',
             ];
         }
         $navItem = array_merge($navItem, [
@@ -773,20 +825,20 @@ class Seomatic extends Plugin
         return [
             // Frontend template caches
             [
-                'key'    => 'seomatic-frontendtemplate-caches',
-                'label'  => Craft::t('seomatic', 'SEOmatic frontend template caches'),
+                'key' => 'seomatic-frontendtemplate-caches',
+                'label' => Craft::t('seomatic', 'SEOmatic frontend template caches'),
                 'action' => [Seomatic::$plugin->frontendTemplates, 'invalidateCaches'],
             ],
             // Meta bundle caches
             [
-                'key'    => 'seomatic-metabundle-caches',
-                'label'  => Craft::t('seomatic', 'SEOmatic metadata caches'),
+                'key' => 'seomatic-metabundle-caches',
+                'label' => Craft::t('seomatic', 'SEOmatic metadata caches'),
                 'action' => [Seomatic::$plugin->metaContainers, 'invalidateCaches'],
             ],
             // Sitemap caches
             [
-                'key'    => 'seomatic-sitemap-caches',
-                'label'  => Craft::t('seomatic', 'SEOmatic sitemap caches'),
+                'key' => 'seomatic-sitemap-caches',
+                'label' => Craft::t('seomatic', 'SEOmatic sitemap caches'),
                 'action' => [Seomatic::$plugin->sitemaps, 'invalidateCaches'],
             ],
         ];
@@ -821,53 +873,53 @@ class Seomatic extends Plugin
         }
 
         return [
-            'seomatic:dashboard'  => [
+            'seomatic:dashboard' => [
                 'label' => Craft::t('seomatic', 'Dashboard'),
             ],
-            'seomatic:global-meta'      => [
-                'label'  => Craft::t('seomatic', 'Edit Global Meta'),
+            'seomatic:global-meta' => [
+                'label' => Craft::t('seomatic', 'Edit Global Meta'),
                 'nested' => [
-                    'seomatic:global-meta:general'  => [
+                    'seomatic:global-meta:general' => [
                         'label' => Craft::t('seomatic', 'General'),
                     ],
-                    'seomatic:global-meta:twitter'  => [
+                    'seomatic:global-meta:twitter' => [
                         'label' => Craft::t('seomatic', 'Twitter'),
                     ],
                     'seomatic:global-meta:facebook' => [
                         'label' => Craft::t('seomatic', 'Facebook'),
                     ],
-                    'seomatic:global-meta:robots'   => [
+                    'seomatic:global-meta:robots' => [
                         'label' => Craft::t('seomatic', 'Robots'),
                     ],
-                    'seomatic:global-meta:humans'   => [
+                    'seomatic:global-meta:humans' => [
                         'label' => Craft::t('seomatic', 'Humans'),
                     ],
                 ],
             ],
-            'seomatic:content-meta'     => [
-                'label'  => Craft::t('seomatic', 'Edit Content SEO'),
+            'seomatic:content-meta' => [
+                'label' => Craft::t('seomatic', 'Edit Content SEO'),
                 'nested' => [
-                    'seomatic:content-meta:general'  => [
+                    'seomatic:content-meta:general' => [
                         'label' => Craft::t('seomatic', 'General'),
                     ],
-                    'seomatic:content-meta:twitter'  => [
+                    'seomatic:content-meta:twitter' => [
                         'label' => Craft::t('seomatic', 'Twitter'),
                     ],
                     'seomatic:content-meta:facebook' => [
                         'label' => Craft::t('seomatic', 'Facebook'),
                     ],
-                    'seomatic:content-meta:sitemap'  => [
+                    'seomatic:content-meta:sitemap' => [
                         'label' => Craft::t('seomatic', 'Sitemap'),
                     ],
                 ],
             ],
-            'seomatic:site-settings'    => [
-                'label'  => Craft::t('seomatic', 'Edit Site Settings'),
+            'seomatic:site-settings' => [
+                'label' => Craft::t('seomatic', 'Edit Site Settings'),
                 'nested' => [
-                    'seomatic:site-settings:identity'     => [
+                    'seomatic:site-settings:identity' => [
                         'label' => Craft::t('seomatic', 'Identity'),
                     ],
-                    'seomatic:site-settings:creator'      => [
+                    'seomatic:site-settings:creator' => [
                         'label' => Craft::t('seomatic', 'Creator'),
                     ],
                     'seomatic:site-settings:social' => [
@@ -879,10 +931,10 @@ class Seomatic extends Plugin
                 ],
             ],
             'seomatic:tracking-scripts' => [
-                'label'  => Craft::t('seomatic', 'Edit Tracking Scripts'),
+                'label' => Craft::t('seomatic', 'Edit Tracking Scripts'),
                 'nested' => $scriptsPerms,
             ],
-            'seomatic:plugin-settings'  => [
+            'seomatic:plugin-settings' => [
                 'label' => Craft::t('seomatic', 'Edit Plugin Settings'),
             ],
         ];
