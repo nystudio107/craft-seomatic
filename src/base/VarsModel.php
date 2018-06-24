@@ -30,7 +30,9 @@ abstract class VarsModel extends FluentModel
         $attributes = $this->attributes();
         if ($attributes !== null) {
             foreach ($attributes as $attribute) {
-                $this->$attribute = html_entity_decode($this->$attribute, ENT_NOQUOTES, 'UTF-8');
+                if (\is_string($this->$attribute)) {
+                    $this->$attribute = html_entity_decode($this->$attribute, ENT_NOQUOTES, 'UTF-8');
+                }
             }
         }
     }
