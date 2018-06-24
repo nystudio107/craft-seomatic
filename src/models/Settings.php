@@ -56,7 +56,7 @@ class Settings extends VarsModel
     /**
      * @var string If `devMode` is on, prefix the <title> with this string
      */
-    public $devModeTitlePrefix = '[devMode] ';
+    public $devModeTitlePrefix = '&#x1f6a7; ';
 
     /**
      * @var string The separator character to use for the `<title>` tag
