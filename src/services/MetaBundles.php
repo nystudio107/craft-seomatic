@@ -301,6 +301,26 @@ class MetaBundles extends Component
                 // Is this a new source?
                 if (!$isNew) {
                     $metaBundleInvalidated = true;
+                    // Handle syncing up the sourceHandle
+                    $categories = Craft::$app->getCategories();
+                    $sections = Craft::$app->getSections();
+                    switch ($sourceType) {
+                        case self::GLOBAL_META_BUNDLE:
+                            break;
+                        case self::CATEGORYGROUP_META_BUNDLE:
+                            $category = $categories->getGroupById($sourceId);
+                            if ($category !== null) {
+                                $metaBundle->sourceHandle = $category->handle;
+                            }
+                            break;
+                        case self::SECTION_META_BUNDLE:
+                            $section = $sections->getSectionById($sourceId);
+                            if ($section !== null) {
+                                $metaBundle->sourceHandle = $section->handle;
+                            }
+                            break;
+                        // @TODO: handle commerce products
+                    }
                     // Invalidate caches after an existing section is saved
                     Seomatic::$plugin->metaContainers->invalidateContainerCacheById($sourceId);
                     Seomatic::$plugin->sitemaps->invalidateSitemapCache(
