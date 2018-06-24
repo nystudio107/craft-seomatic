@@ -11,7 +11,6 @@
 
 namespace nystudio107\seomatic;
 
-use craft\helpers\StringHelper;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
 use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
@@ -53,6 +52,7 @@ use craft\events\RegisterComponentTypesEvent;
 use craft\events\RegisterUrlRulesEvent;
 use craft\events\RegisterUserPermissionsEvent;
 use craft\events\SectionEvent;
+use craft\helpers\StringHelper;
 use craft\services\Categories;
 use craft\services\Elements;
 use craft\services\Fields;
