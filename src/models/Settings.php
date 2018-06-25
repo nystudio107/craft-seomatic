@@ -11,14 +11,14 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\base\FluentModel;
+use nystudio107\seomatic\base\VarsModel;
 
 /**
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-class Settings extends FluentModel
+class Settings extends VarsModel
 {
     // Public Properties
     // =========================================================================
@@ -56,7 +56,7 @@ class Settings extends FluentModel
     /**
      * @var string If `devMode` is on, prefix the <title> with this string
      */
-    public $devModeTitlePrefix = '[devMode] ';
+    public $devModeTitlePrefix = '&#x1f6a7; ';
 
     /**
      * @var string The separator character to use for the `<title>` tag
@@ -76,11 +76,6 @@ class Settings extends FluentModel
 
     // Public Methods
     // =========================================================================
-
-    public function init()
-    {
-        parent::init();
-    }
 
     /**
      * @inheritdoc

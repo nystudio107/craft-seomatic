@@ -172,12 +172,14 @@ class MetaLink extends MetaItem
                 if (Seomatic::$devMode) {
                 }
             } else {
-                $error = Craft::t(
-                    'seomatic',
-                    '{tagtype} tag `{key}` did not render because it is missing attributes.',
-                    ['tagtype' => 'Link', 'key' => $this->key]
-                );
-                Craft::error($error, __METHOD__);
+                if (Seomatic::$devMode) {
+                    $error = Craft::t(
+                        'seomatic',
+                        '{tagtype} tag `{key}` did not render because it is missing attributes.',
+                        ['tagtype' => 'Link', 'key' => $this->key]
+                    );
+                    Craft::error($error, __METHOD__);
+                }
                 $shouldRender = false;
             }
         }

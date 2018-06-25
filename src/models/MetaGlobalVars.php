@@ -12,9 +12,6 @@
 namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\base\VarsModel;
-use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
-
-use craft\validators\ArrayValidator;
 
 /**
  * @inheritdoc
