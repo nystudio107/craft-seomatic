@@ -301,6 +301,26 @@ class MetaBundles extends Component
                 // Is this a new source?
                 if (!$isNew) {
                     $metaBundleInvalidated = true;
+                    // Handle syncing up the sourceHandle
+                    $categories = Craft::$app->getCategories();
+                    $sections = Craft::$app->getSections();
+                    switch ($sourceType) {
+                        case self::GLOBAL_META_BUNDLE:
+                            break;
+                        case self::CATEGORYGROUP_META_BUNDLE:
+                            $category = $categories->getGroupById($sourceId);
+                            if ($category !== null) {
+                                $metaBundle->sourceHandle = $category->handle;
+                            }
+                            break;
+                        case self::SECTION_META_BUNDLE:
+                            $section = $sections->getSectionById($sourceId);
+                            if ($section !== null) {
+                                $metaBundle->sourceHandle = $section->handle;
+                            }
+                            break;
+                        // @TODO: handle commerce products
+                    }
                     // Invalidate caches after an existing section is saved
                     Seomatic::$plugin->metaContainers->invalidateContainerCacheById($sourceId);
                     Seomatic::$plugin->sitemaps->invalidateSitemapCache(
@@ -554,7 +574,7 @@ class MetaBundles extends Component
         foreach ($metaBundles as $key => $metaBundle) {
             $unsetMetaBundle = false;
             /** @var MetaBundle $metaBundle */
-            switch ($metaBundle->sourceType) {
+            switch ($metaBundle->sourceBundleType) {
                 case self::GLOBAL_META_BUNDLE:
                     $unsetMetaBundle = false;
                     break;
@@ -567,7 +587,7 @@ class MetaBundles extends Component
                         if (!empty($siteSettings)) {
                             /** @var CategoryGroup_SiteSettings $siteSetting */
                             foreach ($siteSettings as $siteSetting) {
-                                if ($siteSetting->siteId === $metaBundle->sourceSiteId && !$siteSetting->hasUrls) {
+                                if ($siteSetting->siteId == $metaBundle->sourceSiteId && !$siteSetting->hasUrls) {
                                     $unsetMetaBundle = true;
                                 }
                             }
@@ -583,7 +603,7 @@ class MetaBundles extends Component
                         if (!empty($siteSettings)) {
                             /** @var Section_SiteSettings $siteSetting */
                             foreach ($siteSettings as $siteSetting) {
-                                if ($siteSetting->siteId === $metaBundle->sourceSiteId && !$siteSetting->hasUrls) {
+                                if ($siteSetting->siteId == $metaBundle->sourceSiteId && !$siteSetting->hasUrls) {
                                     $unsetMetaBundle = true;
                                 }
                             }

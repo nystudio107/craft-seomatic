@@ -1,5 +1,16 @@
 # SEOmatic Changelog
 
+## 3.0.24 - 2018.06.25
+### Added
+* Allow the use of Emoji in the plugin settings, such as for the `devMode` title prefix
+
+### Changed
+* Set the default devMode title prefix to 🚧 
+* Sync section / category group handles that are renamed
+* Don't log meta item error messages unless `devMode` is on
+* Don’t encode preview URLs
+* Fixed an issue where disabling a section’s URLs was not sync properly with the Content SEO settings
+
 ## 3.0.23 - 2018.06.18
 ### Added
 * Added support for emojis in any of the SEOmatic fields

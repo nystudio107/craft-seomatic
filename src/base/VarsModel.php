@@ -21,6 +21,22 @@ use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 abstract class VarsModel extends FluentModel
 {
     /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+        // For all the emojis
+        $attributes = $this->attributes();
+        if ($attributes !== null) {
+            foreach ($attributes as $attribute) {
+                if (\is_string($this->$attribute)) {
+                    $this->$attribute = html_entity_decode($this->$attribute, ENT_NOQUOTES, 'UTF-8');
+                }
+            }
+        }
+    }
+    /**
      * Return the parsed value of a single property
      *
      * @param string $property

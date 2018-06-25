@@ -49,7 +49,7 @@ return [
     'displayAnalysisSidebar' => true,
 
     // If `devMode` is on, prefix the <title> with this string
-    'devModeTitlePrefix' => '[devMode] ',
+    'devModeTitlePrefix' => '&#x1f6a7; ',
 
     // The separator character to use for the `<title>` tag
     'separatorChar' => '|',
