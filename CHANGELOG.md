@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.0.24 - 2018.06.22
+## 3.0.24 - 2018.06.25
 ### Added
 * Allow the use of Emoji in the plugin settings, such as for the `devMode` title prefix
 
