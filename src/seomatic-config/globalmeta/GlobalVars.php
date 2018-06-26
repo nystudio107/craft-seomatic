@@ -24,7 +24,7 @@ return [
         'seoKeywords'             => '',
         'seoImage'                => '',
         'seoImageDescription'     => '',
-        'canonicalUrl'            => '{{ craft.app.request.pathInfo }}',
+        'canonicalUrl'            => '{{ craft.app.request.pathInfo | striptags }}',
         'robots'                  => 'all',
         'ogType'                  => 'website',
         'ogTitle'                 => '{seomatic.meta.seoTitle}',
