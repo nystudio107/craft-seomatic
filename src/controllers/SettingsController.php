@@ -720,7 +720,7 @@ class SettingsController extends Controller
             ],
             [
                 'label' => $templateTitle,
-                'url'   => UrlHelper::cpUrl('seomatic/settings'),
+                'url'   => UrlHelper::cpUrl('seomatic/plugin'),
             ],
         ];
         $variables['selectedSubnavItem'] = 'plugin';
