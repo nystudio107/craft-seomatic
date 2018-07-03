@@ -1,5 +1,8 @@
 # SEOmatic Changelog
 
+## 3.0.26 - 2018.07.03
+### Changed
+
 ## 3.0.25 - 2018.07.03
 ### Changed
 * Strip tags from the incoming `craft.app.request.pathInfo` for the `canonicalUrl`
