@@ -168,6 +168,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                         break;
                     case MetaBundles::CATEGORYGROUP_META_BUNDLE:
                         $elements = Category::find()
+                            ->group($metaBundle->sourceHandle)
                             ->siteId($metaBundle->sourceSiteId)
                             ->limit($metaBundle->metaSitemapVars->sitemapLimit)
                             ->enabledForSite(true)
