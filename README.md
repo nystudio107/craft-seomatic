@@ -252,13 +252,33 @@ Is the same as:
 
 ![Screenshot](resources/screenshots/seomatic-site-identity.png)
 
+These Site Identity settings are used to globally define the identity and ownership of the website.
+
+They are used in combination with the SEO Template Meta settings to generate [JSON-LD](https://developers.google.com/schemas/formats/json-ld?hl=en) microdata.
+
+The Site Owner type determines the JSON-LD schema that will be used to identity the website to search engines.
+
+Leave any fields blank that aren't applicable or which you do not want as part of the SEO schema.
+
 #### Creator
 
 ![Screenshot](resources/screenshots/seomatic-site-creator.png)
 
+These Site Creator settings are used to globally define the _creator_ (such as the agency or freelancer) of the website.
+
+They are used in combination with the SEO Template Meta settings to generate [JSON-LD](https://developers.google.com/schemas/formats/json-ld?hl=en) microdata as well as the `humans.txt` file.
+
+The Site Creator type determines the JSON-LD schema that will be used to identity the website to search engines.
+
+Leave any fields blank that aren't applicable or which you do not want as part of the SEO schema.
+
 #### Social Media
 
 ![Screenshot](resources/screenshots/seomatic-site-social.png)
+
+The social media settings connect your website to its other points of pressence on the Internet. They also facilitate attaching your branding to social media posts via Twitter Cards and Facebook OpenGraph.
+
+
 
 ### Tracking Scripts
 
@@ -325,6 +345,16 @@ If you want to include the Facebook Pixel script despite `devMode` being enabled
 ![Screenshot](resources/screenshots/seomatic-plugin-settings.png)
 
 The Plugin Settings lets you control various SEOmatic settings globally (across all sites/languages).
+
+* **Plugin name** - This is the name that will be used for the plugin everywhere it is referenced in the AdminCP GUI
+* **Automatic Render Enabled** - Controls whether SEOmatic will automatically render metadata on your pages. If you turn this off, you will need to manually render the metadata via `{{ seomatic.tag.render() }}`, `{{ seomatic.link.render() }}`, etc. You can selectively disable rendering via Twig with `{% do seomatic.config.renderEnabled(false) %}
+* **Sitemaps Enabled** - Controls whether SEOmatic will automatically render frontend sitemaps for your website.
+* **Environment** - The server environment, either `live`, `staging`, or `local`. If `devMode` is on, SEOmatic will override this setting to local Development. This setting controls whether certain things render; for instance only in the `live` production environment will Google Analytics and other tracking tags send analytics data. SEOmatic also automatically sets the `robots` tag to `none` for everything but the `live` production environment. If you're using a multi-environment config, you can map your environment settings using SEOmatic's `config.php`
+* **Display Sidebar SEO Preview** - Controls whether to display the Google, Twitter, and Facebook social media previews in the sidebar on entry and category pages.
+* **devMode `<title>` prefix** - If devMode is on, prefix the `<title>` with this string
+* **Separator Character** - The separator character to use for the `<title>` tag
+* **Max SEO Title Length** - The max number of characters in the <title> tag; anything beyond this will be truncated on word boundaries
+* **Max SEO Description Length** - The max number of characters in the `meta description` tag
 
 ### Access Permissions
 
