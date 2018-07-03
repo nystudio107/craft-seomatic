@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.0.25 - 2018.06.30
+## 3.0.25 - 2018.07.03
 ### Changed
 * Strip tags from the incoming `craft.app.request.pathInfo` for the `canonicalUrl`
 * Fixed the breadcrumbs link on the Plugin Settings page
