@@ -67,6 +67,8 @@ use yii\web\HttpException;
 use craft\web\UrlManager;
 use craft\web\View;
 
+use craft\commerce\Plugin as CommercePlugin;
+
 use yii\base\Event;
 
 /**
@@ -143,6 +145,11 @@ class Seomatic extends Plugin
     /**
      * @var bool
      */
+    public static $commerceInstalled = false;
+
+    /**
+     * @var bool
+     */
     public static $previewingMetaContainers = false;
 
     /**
@@ -206,6 +213,8 @@ class Seomatic extends Plugin
             self::$settings->environment = 'local';
         }
         $this->name = Seomatic::$settings->pluginName;
+        // Determine whether Craft Commerce exists
+        self::$commerceInstalled = class_exists(CommercePlugin::class);
         // Install our event listeners only if our table schema exists
         if ($this->tableSchemaExists()) {
             $this->installEventListeners();
