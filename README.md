@@ -349,12 +349,61 @@ The Plugin Settings lets you control various SEOmatic settings globally (across 
 * **Plugin name** - This is the name that will be used for the plugin everywhere it is referenced in the AdminCP GUI
 * **Automatic Render Enabled** - Controls whether SEOmatic will automatically render metadata on your pages. If you turn this off, you will need to manually render the metadata via `{{ seomatic.tag.render() }}`, `{{ seomatic.link.render() }}`, etc. You can selectively disable rendering via Twig with `{% do seomatic.config.renderEnabled(false) %}
 * **Sitemaps Enabled** - Controls whether SEOmatic will automatically render frontend sitemaps for your website.
-* **Environment** - The server environment, either `live`, `staging`, or `local`. If `devMode` is on, SEOmatic will override this setting to local Development. This setting controls whether certain things render; for instance only in the `live` production environment will Google Analytics and other tracking tags send analytics data. SEOmatic also automatically sets the `robots` tag to `none` for everything but the `live` production environment. If you're using a multi-environment config, you can map your environment settings using SEOmatic's `config.php`
+* **Environment** - The server environment, either `live`, `staging`, or `local`. If `devMode` is on, SEOmatic will override this setting to local Development. This setting controls whether certain things render; for instance only in the `live` production environment will Google Analytics and other tracking tags send analytics data. SEOmatic also automatically sets the `robots` tag to `none` for everything but the `live` production environment.
 * **Display Sidebar SEO Preview** - Controls whether to display the Google, Twitter, and Facebook social media previews in the sidebar on entry and category pages.
 * **devMode `<title>` prefix** - If devMode is on, prefix the `<title>` with this string
 * **Separator Character** - The separator character to use for the `<title>` tag
 * **Max SEO Title Length** - The max number of characters in the <title> tag; anything beyond this will be truncated on word boundaries
 * **Max SEO Description Length** - The max number of characters in the `meta description` tag
+
+If you're using a multi-environment config, you can map your environment settings using SEOmatic's `config.php` something like this:
+
+```php
+<?php 
+return [
+    '*' => [
+    // The public-facing name of the plugin
+    'pluginName' => 'SEOmatic',
+
+    // Should SEOmatic render metadata?
+    'renderEnabled' => true,
+
+    // Should SEOmatic render frontend sitemaps?
+    'sitemapsEnabled' => true,
+
+    // The server environment, either `live`, `staging`, or `local`
+    'environment' => 'live',
+
+    // Should SEOmatic display the SEO Preview sidebar?
+    'displayPreviewSidebar' => true,
+
+    // Should SEOmatic display the SEO Analysis sidebar?
+    'displayAnalysisSidebar' => true,
+
+    // If `devMode` is on, prefix the <title> with this string
+    'devModeTitlePrefix' => '&#x1f6a7; ',
+
+    // The separator character to use for the `<title>` tag
+    'separatorChar' => '|',
+
+    // The max number of characters in the `<title>` tag
+    'maxTitleLength' => 70,
+
+    // The max number of characters in the `<meta name="description">` tag
+    'maxDescriptionLength' => 320,
+    ],
+    'local' => [
+        'environment' => 'local',
+    ],
+    'staging' => [
+        'environment' => 'staging',
+    ],
+    'live' => [
+        'environment' => 'live',
+    ],
+];
+```
+This is how you can make your multi-environment nomenclature to SEOmatic's. This works exactly like Craft's [multi-environment config](https://docs.craftcms.com/v3/configuration.html#application-config) files such as `general.php` and `db.php`. See SEOmatic's `config.php` for details.
 
 ### Access Permissions
 
