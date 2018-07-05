@@ -90,6 +90,15 @@
     {% set textOptions = { sameAsGlobal: "Same as Global Site Name Position"|t("seomatic"), } | merge(textOptions) %}
 {% endif %}
 
+{% set customPositions = {
+    before: "Before"|t("seomatic"),
+    after: "After"|t("seomatic"),
+    none: "None"|t("seomatic"),
+} %}
+{% if pageContext == "field" %}
+    {% set customPositions = { "": ""} | merge(customPositions) %}
+{% endif %}
+
 {% if field is not defined or 'siteNamePosition' in field.generalEnabledFields %}
     <div class="field seomatic-textSourceWrapper" id="metaBundleSettings-siteNamePositionSource-field">
         <div class="heading">
@@ -115,11 +124,7 @@
             {{ forms.selectField({
                 id: "siteNamePosition",
                 name: "siteNamePosition",
-                options: {
-                    before: "Before"|t("seomatic"),
-                    after: "After"|t("seomatic"),
-                    none: "None"|t("seomatic"),
-                },
+                options: customPositions,
                 value: metaGlobalVars.siteNamePosition,
                 warning: false,
                 errors: metaGlobalVars.getErrors("siteNamePosition"),
@@ -323,6 +328,19 @@
 
 {############### Robots ###############}
 
+{% set robotOptions = {
+    all: "All - Index this page and follow links (default)"|t("seomatic"),
+    none: "None - Do not index or follow links on this page"|t("seomatic"),
+    noindex: "No Index - Do not index this page"|t("seomatic"),
+    nofollow: "No Follow - Do not follow links on this page"|t("seomatic"),
+    nosnippet: "No Snippet - Do not show rich snippets from this page"|t("seomatic"),
+    noarchive: "No Archive - Do not archived a cached version of this page"|t("seomatic"),
+    noimageindex : "No Image Index - Do not index images on this page"|t("seomatic"),
+} %}
+{% if pageContext == "field" %}
+    {% set robotOptions = { "": ""} | merge(robotOptions) %}
+{% endif %}
+
 {% if field is not defined or 'robots' in field.generalEnabledFields %}
     {% namespace "metaGlobalVars" %}
         {{ forms.selectField({
@@ -330,15 +348,7 @@
             instructions: "The robots meta tag lets you utilize a granular, page-specific approach to controlling how an individual page should be indexed and served to users in search results."|t("seomatic"),
             id: "robots",
             name: "robots",
-            options: {
-                all: "All - Index this page and follow links (default)"|t("seomatic"),
-                none: "None - Do not index or follow links on this page"|t("seomatic"),
-                noindex: "No Index - Do not index this page"|t("seomatic"),
-                nofollow: "No Follow - Do not follow links on this page"|t("seomatic"),
-                nosnippet: "No Snippet - Do not show rich snippets from this page"|t("seomatic"),
-                noarchive: "No Archive - Do not archived a cached version of this page"|t("seomatic"),
-                noimageindex : "No Image Index - Do not index images on this page"|t("seomatic"),
-            },
+            options: robotOptions,
             value: metaGlobalVars.robots,
             errors: metaGlobalVars.getErrors("robots"),
         }) }}
