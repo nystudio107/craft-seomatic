@@ -447,6 +447,8 @@ Modern SEO works best if it actually reflects what is on the page, visible to th
 
 However, in some cases you may want more control over page SEO for specific entries. That's where the SEO Settings field comes in. Add it to your Section's Field Layout, and you can override specific SEO settings on a per-entry basis.
 
+Any setting that you leave blank or empty in the SEO Settings field will just default to the Content SEO and/or Global SEO setting.
+
 The Field settings let you control exactly what fields will appear and be visible for you or your client to override:
 
 ![Screenshot](resources/screenshots/seomatic-field-settings.png)
