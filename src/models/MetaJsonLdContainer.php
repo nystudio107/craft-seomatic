@@ -15,6 +15,8 @@ use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
+use Craft;
+
 use yii\web\View;
 
 /**
@@ -47,6 +49,7 @@ class MetaJsonLdContainer extends MetaContainer
      */
     public function includeMetaData()
     {
+        Craft::beginProfile('MetaJsonLdContainer::includeMetaData', __METHOD__);
         if ($this->prepForInclusion()) {
             /** @var $metaJsonLdModel MetaJsonLd */
             foreach ($this->data as $metaJsonLdModel) {
@@ -77,6 +80,7 @@ class MetaJsonLdContainer extends MetaContainer
                 }
             }
         }
+        Craft::endProfile('MetaJsonLdContainer::includeMetaData', __METHOD__);
     }
 
     /**

@@ -104,7 +104,7 @@ class MetaContainers extends Component
      */
     public function loadMetaContainers(string $uri = '', int $siteId = null)
     {
-        Craft::beginProfile('loadMetaContainers', __METHOD__);
+        Craft::beginProfile('MetaContainers::loadMetaContainers', __METHOD__);
         // Avoid recursion
         if (!Seomatic::$loadingContainers) {
             Seomatic::$loadingContainers = true;
@@ -158,7 +158,7 @@ class MetaContainers extends Component
             MetaValueHelper::cache();
             Seomatic::$loadingContainers = false;
         }
-        Craft::endProfile('loadMetaContainers', __METHOD__);
+        Craft::endProfile('MetaContainers::loadMetaContainers', __METHOD__);
     }
 
     /**
@@ -168,7 +168,7 @@ class MetaContainers extends Component
      */
     public function includeScriptBodyHtml(int $bodyPosition)
     {
-        Craft::beginProfile('includeScriptBodyHtml', __METHOD__);
+        Craft::beginProfile('MetaContainers::includeScriptBodyHtml', __METHOD__);
         $scriptContainers = $this->getContainersOfType(MetaScriptContainer::CONTAINER_TYPE);
         foreach ($scriptContainers as $scriptContainer) {
             /** @var MetaScriptContainer $scriptContainer */
@@ -179,7 +179,7 @@ class MetaContainers extends Component
                 }
             }
         }
-        Craft::endProfile('includeScriptBodyHtml', __METHOD__);
+        Craft::endProfile('MetaContainers::includeScriptBodyHtml', __METHOD__);
     }
 
     /**
@@ -187,7 +187,7 @@ class MetaContainers extends Component
      */
     public function includeMetaContainers()
     {
-        Craft::beginProfile('includeMetaContainers', __METHOD__);
+        Craft::beginProfile('MetaContainers::includeMetaContainers', __METHOD__);
         DynamicMetaHelper::includeHttpHeaders();
         $this->parseGlobalVars();
         foreach ($this->metaContainers as $metaContainer) {
@@ -196,7 +196,7 @@ class MetaContainers extends Component
                 $metaContainer->includeMetaData();
             }
         }
-        Craft::endProfile('includeMetaContainers', __METHOD__);
+        Craft::endProfile('MetaContainers::includeMetaContainers', __METHOD__);
     }
 
     /**
@@ -556,6 +556,7 @@ class MetaContainers extends Component
      */
     protected function loadGlobalMetaContainers(int $siteId = null)
     {
+        Craft::beginProfile('MetaContainers::loadGlobalMetaContainers', __METHOD__);
         if ($siteId === null) {
             $siteId = Craft::$app->getSites()->currentSite->id ?? 1;
         }
@@ -574,6 +575,7 @@ class MetaContainers extends Component
                 $this->metaContainers[$key] = $metaContainer;
             }
         }
+        Craft::beginProfile('MetaContainers::loadGlobalMetaContainers', __METHOD__);
     }
 
     /**
@@ -581,10 +583,12 @@ class MetaContainers extends Component
      */
     protected function loadContentMetaContainers()
     {
+        Craft::beginProfile('MetaContainers::loadContentMetaContainers', __METHOD__);
         $metaBundle = $this->getMatchedMetaBundle();
         if ($metaBundle) {
             $this->addMetaBundleToContainers($metaBundle);
         }
+        Craft::beginProfile('MetaContainers::loadContentMetaContainers', __METHOD__);
     }
 
     /**
@@ -592,6 +596,7 @@ class MetaContainers extends Component
      */
     protected function loadFieldMetaContainers()
     {
+        Craft::beginProfile('MetaContainers::loadFieldMetaContainers', __METHOD__);
         $element = Seomatic::$matchedElement;
         if ($element) {
             /** @var Element $element */
@@ -603,6 +608,7 @@ class MetaContainers extends Component
                 }
             }
         }
+        Craft::beginProfile('MetaContainers::loadFieldMetaContainers', __METHOD__);
     }
 
     /**

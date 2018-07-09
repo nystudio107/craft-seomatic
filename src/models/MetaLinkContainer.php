@@ -14,6 +14,8 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 
+use Craft;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -44,6 +46,7 @@ class MetaLinkContainer extends MetaContainer
      */
     public function includeMetaData()
     {
+        Craft::beginProfile('MetaLinkContainer::includeMetaData', __METHOD__);
         if ($this->prepForInclusion()) {
             /** @var MetaLink $metaLinkModel */
             foreach ($this->data as $metaLinkModel) {
@@ -63,6 +66,7 @@ class MetaLinkContainer extends MetaContainer
                 }
             }
         }
+        Craft::endProfile('MetaLinkContainer::includeMetaData', __METHOD__);
     }
 
     /**

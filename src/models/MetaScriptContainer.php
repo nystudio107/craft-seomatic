@@ -14,6 +14,8 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 
+use Craft;
+
 use yii\web\View;
 
 /**
@@ -51,6 +53,7 @@ class MetaScriptContainer extends MetaContainer
      */
     public function includeMetaData()
     {
+        Craft::beginProfile('MetaScriptContainer::ncludeMetaData', __METHOD__);
         if ($this->prepForInclusion()) {
             /** @var $metaScriptModel MetaScript */
             foreach ($this->data as $metaScriptModel) {
@@ -69,6 +72,7 @@ class MetaScriptContainer extends MetaContainer
                 }
             }
         }
+        Craft::endProfile('MetaScriptContainer::includeMetaData', __METHOD__);
     }
 
     /**
