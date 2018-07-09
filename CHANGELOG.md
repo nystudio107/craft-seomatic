@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.0.26 - 2018.07.06
+### Added
+* Added more fine-grained profiling data
+
 ### Changed
 * Fixed an issue where the SiteLinks Search Box wouldn't work because it errantly parsed the setting as Twig
 * Allow for default empty settings for the SEO Settings field for things like the Twitter Card type, etc.
