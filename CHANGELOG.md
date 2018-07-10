@@ -2,6 +2,7 @@
 
 ## 3.0.26 - 2018.07.06
 ### Added
+* Added a caching layer to `includeMetaContainers()` for improved performance
 * Added more fine-grained profiling data
 
 ### Changed
