@@ -27,6 +27,7 @@ use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\MetaScript;
 use nystudio107\seomatic\models\MetaTagContainer;
 use nystudio107\seomatic\models\MetaTitleContainer;
+use nystudio107\seomatic\variables\SeomaticVariable;
 
 use Craft;
 use craft\base\Component;
@@ -35,7 +36,9 @@ use craft\elements\Category;
 use craft\elements\Entry;
 use craft\helpers\UrlHelper;
 
-use nystudio107\seomatic\variables\SeomaticVariable;
+use craft\commerce\Plugin as CommercePlugin;
+use craft\commerce\elements\Product;
+
 use yii\base\Exception;
 use yii\caching\TagDependency;
 
@@ -485,7 +488,14 @@ class MetaContainers extends Component
                     /** @var  $element Category */
                     $sourceType = MetaBundles::CATEGORYGROUP_META_BUNDLE;
                     break;
-                // @todo handle commerce products
+                case Product::class:
+                    if (Seomatic::$commerceInstalled) {
+                        $commerce = CommercePlugin::getInstance();
+                        if ($commerce !== null) {
+                            $sourceType = MetaBundles::PRODUCT_META_BUNDLE;
+                        }
+                    }
+                    break;
             }
             list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
                 = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);

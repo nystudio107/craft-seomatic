@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\helpers;
 
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
 use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
 use nystudio107\seomatic\services\MetaBundles;
@@ -28,6 +29,8 @@ use craft\fields\PlainText as PlainTextField;
 use craft\fields\Tags as TagsField;
 use craft\models\FieldLayout;
 use craft\redactor\Field as RedactorField;
+
+use craft\commerce\Plugin as CommercePlugin;
 
 use yii\base\InvalidConfigException;
 
@@ -256,7 +259,21 @@ class Field
                     $layouts[] = Craft::$app->getFields()->getLayoutById($layoutId);
                 }
                 break;
-            // @TODO: handle commerce products
+            case MetaBundles::PRODUCT_META_BUNDLE:
+                if (Seomatic::$commerceInstalled) {
+                    $commerce = CommercePlugin::getInstance();
+                    if ($commerce !== null) {
+                        try {
+                            $layoutId = $commerce->productTypes->getProductTypeByHandle($sourceHandle)->getFieldLayoutId();
+                        } catch (InvalidConfigException $e) {
+                            $layoutId = null;
+                        }
+                        if ($layoutId) {
+                            $layouts[] = Craft::$app->getFields()->getLayoutById($layoutId);
+                        }
+                    }
+                }
+                break;
         }
         // Iterate through the layouts looking for the fields of the type $fieldType
         foreach ($layouts as $layout) {
