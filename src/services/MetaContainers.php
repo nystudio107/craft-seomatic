@@ -54,6 +54,7 @@ class MetaContainers extends Component
 
     const CACHE_KEY = 'seomatic_metacontainer_';
     const GLOBALS_CACHE_KEY = 'parsed_globals_';
+    const SCRIPTS_CACHE_KEY = 'body_scripts_';
 
     // Public Properties
     // =========================================================================
@@ -176,15 +177,35 @@ class MetaContainers extends Component
     public function includeScriptBodyHtml(int $bodyPosition)
     {
         Craft::beginProfile('MetaContainers::includeScriptBodyHtml', __METHOD__);
-        $scriptContainers = $this->getContainersOfType(MetaScriptContainer::CONTAINER_TYPE);
-        foreach ($scriptContainers as $scriptContainer) {
-            /** @var MetaScriptContainer $scriptContainer */
-            foreach ($scriptContainer->data as $metaScript) {
-                /** @var MetaScript $metaScript */
-                if (!empty($metaScript->bodyTemplatePath) && ($metaScript->bodyPosition === $bodyPosition)) {
-                    echo $metaScript->renderBodyHtml();
+        $dependency = $this->containerDependency;
+        $uniqueKey = $dependency->tags[2].$bodyPosition;
+        $scriptData = Craft::$app->getCache()->getOrSet(
+            $this::GLOBALS_CACHE_KEY.$uniqueKey,
+            function () use ($uniqueKey, $bodyPosition) {
+                Craft::info(
+                    $this::SCRIPTS_CACHE_KEY.' cache miss: '.$uniqueKey,
+                    __METHOD__
+                );
+                $scriptData = [];
+                $scriptContainers = $this->getContainersOfType(MetaScriptContainer::CONTAINER_TYPE);
+                foreach ($scriptContainers as $scriptContainer) {
+                    /** @var MetaScriptContainer $scriptContainer */
+                    foreach ($scriptContainer->data as $metaScript) {
+                        /** @var MetaScript $metaScript */
+                        if (!empty($metaScript->bodyTemplatePath) && ($metaScript->bodyPosition === $bodyPosition)) {
+                            $scriptData[] = $metaScript->renderBodyHtml();
+                        }
+                    }
                 }
-            }
+
+                return $scriptData;
+            },
+            Seomatic::$cacheDuration,
+            $dependency
+        );
+        // Output the script HTML
+        foreach ($scriptData as $script) {
+            echo $script;
         }
         Craft::endProfile('MetaContainers::includeScriptBodyHtml', __METHOD__);
     }
