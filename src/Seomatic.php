@@ -611,7 +611,51 @@ class Seomatic extends Plugin
      */
     protected function installCpEventListeners()
     {
-
+        // Handler: UrlManager::EVENT_REGISTER_CP_URL_RULES
+        Event::on(
+            UrlManager::class,
+            UrlManager::EVENT_REGISTER_CP_URL_RULES,
+            function (RegisterUrlRulesEvent $event) {
+                Craft::debug(
+                    'UrlManager::EVENT_REGISTER_CP_URL_RULES',
+                    __METHOD__
+                );
+                // Register our AdminCP routes
+                $event->rules = array_merge(
+                    $event->rules,
+                    $this->customAdminCpRoutes()
+                );
+            }
+        );
+        // Handler: UserPermissions::EVENT_REGISTER_PERMISSIONS
+        Event::on(
+            UserPermissions::class,
+            UserPermissions::EVENT_REGISTER_PERMISSIONS,
+            function (RegisterUserPermissionsEvent $event) {
+                Craft::debug(
+                    'UserPermissions::EVENT_REGISTER_PERMISSIONS',
+                    __METHOD__
+                );
+                // Register our custom permissions
+                $event->permissions[Craft::t('seomatic', 'SEOmatic')] = $this->customAdminCpPermissions();
+            }
+        );
+        // Handler: ClearCaches::EVENT_REGISTER_CACHE_OPTIONS
+        Event::on(
+            ClearCaches::class,
+            ClearCaches::EVENT_REGISTER_CACHE_OPTIONS,
+            function (RegisterCacheOptionsEvent $event) {
+                Craft::debug(
+                    'ClearCaches::EVENT_REGISTER_CACHE_OPTIONS',
+                    __METHOD__
+                );
+                // Register our AdminCP routes
+                $event->options = array_merge(
+                    $event->options,
+                    $this->customAdminCpCacheOptions()
+                );
+            }
+        );
     }
 
     /**
@@ -690,7 +734,7 @@ class Seomatic extends Plugin
     }
 
     /**
-     * Handle AdminCP requests.  We do it only after we receive the event
+     * Handle AdminCP requests. We do it only after we receive the event
      * EVENT_AFTER_LOAD_PLUGINS so that any pending db migrations can be run
      * before our event listeners kick in
      */
@@ -698,51 +742,6 @@ class Seomatic extends Plugin
     {
         // Don't cache AdminCP requests
         self::$cacheDuration = 1;
-        // Handler: UrlManager::EVENT_REGISTER_CP_URL_RULES
-        Event::on(
-            UrlManager::class,
-            UrlManager::EVENT_REGISTER_CP_URL_RULES,
-            function (RegisterUrlRulesEvent $event) {
-                Craft::debug(
-                    'UrlManager::EVENT_REGISTER_CP_URL_RULES',
-                    __METHOD__
-                );
-                // Register our AdminCP routes
-                $event->rules = array_merge(
-                    $event->rules,
-                    $this->customAdminCpRoutes()
-                );
-            }
-        );
-        // Handler: UserPermissions::EVENT_REGISTER_PERMISSIONS
-        Event::on(
-            UserPermissions::class,
-            UserPermissions::EVENT_REGISTER_PERMISSIONS,
-            function (RegisterUserPermissionsEvent $event) {
-                Craft::debug(
-                    'UserPermissions::EVENT_REGISTER_PERMISSIONS',
-                    __METHOD__
-                );
-                // Register our custom permissions
-                $event->permissions[Craft::t('seomatic', 'SEOmatic')] = $this->customAdminCpPermissions();
-            }
-        );
-        // Handler: ClearCaches::EVENT_REGISTER_CACHE_OPTIONS
-        Event::on(
-            ClearCaches::class,
-            ClearCaches::EVENT_REGISTER_CACHE_OPTIONS,
-            function (RegisterCacheOptionsEvent $event) {
-                Craft::debug(
-                    'ClearCaches::EVENT_REGISTER_CACHE_OPTIONS',
-                    __METHOD__
-                );
-                // Register our AdminCP routes
-                $event->options = array_merge(
-                    $event->options,
-                    $this->customAdminCpCacheOptions()
-                );
-            }
-        );
         // Entries sidebar
         self::$view->hook('cp.entries.edit.details', function (&$context) {
             $html = '';
