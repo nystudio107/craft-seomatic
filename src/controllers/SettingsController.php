@@ -527,6 +527,9 @@ class SettingsController extends Controller
             case MetaBundles::CATEGORYGROUP_META_BUNDLE:
                 $elementName = 'category';
                 break;
+            case MetaBundles::PRODUCT_META_BUNDLE:
+                $elementName = 'product';
+                break;
             default:
                 $elementName = '';
                 break;
