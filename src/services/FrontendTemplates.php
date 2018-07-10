@@ -80,7 +80,7 @@ class FrontendTemplates extends Component
         if ($siteId === null) {
             $siteId = Craft::$app->getSites()->currentSite->id ?? 1;
         }
-        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
+        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId, false);
         if ($metaBundle === null) {
             return;
         }
