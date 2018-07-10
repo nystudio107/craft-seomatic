@@ -4,6 +4,7 @@
 ### Added
 * Added a caching layer to `includeMetaContainers()` for improved performance
 * Added more fine-grained profiling data
+* Re-organize how event handlers are loaded to allow for compatibility with Fallback Site plugin
 
 ### Changed
 * Fixed an issue where the SiteLinks Search Box wouldn't work because it errantly parsed the setting as Twig
