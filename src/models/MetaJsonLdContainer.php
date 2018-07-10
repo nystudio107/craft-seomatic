@@ -50,7 +50,7 @@ class MetaJsonLdContainer extends MetaContainer
     public function includeMetaData($dependency)
     {
         Craft::beginProfile('MetaJsonLdContainer::includeMetaData', __METHOD__);
-        $uniqueKey = $dependency->tags[2];
+        $uniqueKey = $this->handle.$dependency->tags[2];
         $tagData = Craft::$app->getCache()->getOrSet(
             $this::CONTAINER_TYPE.$uniqueKey,
             function () use ($uniqueKey) {
@@ -58,7 +58,6 @@ class MetaJsonLdContainer extends MetaContainer
                     $this::CONTAINER_TYPE.' cache miss: '.$uniqueKey,
                     __METHOD__
                 );
-
                 $tagData = [];
                 if ($this->prepForInclusion()) {
                     /** @var $metaJsonLdModel MetaJsonLd */
@@ -95,7 +94,6 @@ class MetaJsonLdContainer extends MetaContainer
             Seomatic::$cacheDuration,
             $dependency
         );
-
         // Register the tags
         foreach ($tagData as $config) {
             Seomatic::$view->registerScript(

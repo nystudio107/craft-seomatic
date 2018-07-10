@@ -47,7 +47,7 @@ class MetaTitleContainer extends MetaContainer
     public function includeMetaData($dependency)
     {
         Craft::beginProfile('MetaTitleContainer::includeMetaData', __METHOD__);
-        $uniqueKey = $dependency->tags[2];
+        $uniqueKey = $this->handle.$dependency->tags[2];
         $tagData = Craft::$app->getCache()->getOrSet(
             $this::CONTAINER_TYPE.$uniqueKey,
             function () use ($uniqueKey) {
@@ -55,7 +55,6 @@ class MetaTitleContainer extends MetaContainer
                     $this::CONTAINER_TYPE.' cache miss: '.$uniqueKey,
                     __METHOD__
                 );
-
                 $tagData = '';
                 if ($this->prepForInclusion()) {
                     /** @var $metaTitleModel MetaTitle */
@@ -84,10 +83,8 @@ class MetaTitleContainer extends MetaContainer
             Seomatic::$cacheDuration,
             $dependency
         );
-
         // Register the tags
         Seomatic::$view->title = $tagData;
-
         Craft::endProfile('MetaTitleContainer::includeMetaData', __METHOD__);
     }
 

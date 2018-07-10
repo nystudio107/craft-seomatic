@@ -47,7 +47,7 @@ class MetaTagContainer extends MetaContainer
     public function includeMetaData($dependency)
     {
         Craft::beginProfile('MetaTagContainer::includeMetaData', __METHOD__);
-        $uniqueKey = $dependency->tags[2];
+        $uniqueKey = $this->handle.$this->handle.$dependency->tags[2];
         $tagData = Craft::$app->getCache()->getOrSet(
             $this::CONTAINER_TYPE.$uniqueKey,
             function () use ($uniqueKey) {
@@ -55,7 +55,6 @@ class MetaTagContainer extends MetaContainer
                     $this::CONTAINER_TYPE.' cache miss: '.$uniqueKey,
                     __METHOD__
                 );
-
                 $tagData = [];
                 if ($this->prepForInclusion()) {
                     /** @var $metaTagModel MetaTag */
@@ -86,7 +85,6 @@ class MetaTagContainer extends MetaContainer
             Seomatic::$cacheDuration,
             $dependency
         );
-
         // Register the tags
         foreach ($tagData as $config) {
             Seomatic::$view->registerMetaTag($config);
