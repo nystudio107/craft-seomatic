@@ -11,6 +11,8 @@
 
 namespace nystudio107\seomatic\base;
 
+use yii\caching\TagDependency;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -23,8 +25,10 @@ interface MetaContainerInterface
 
     /**
      * Include the MetaItems in the container in the Yii View
+     *
+     * @param null|TagDependency $dependency
      */
-    public function includeMetaData();
+    public function includeMetaData($dependency);
 
     /**
      * Render the container's content as an array
