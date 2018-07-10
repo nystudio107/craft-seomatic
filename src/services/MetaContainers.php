@@ -53,6 +53,7 @@ class MetaContainers extends Component
     const METACONTAINER_CACHE_TAG = 'seomatic_metacontainer_';
 
     const CACHE_KEY = 'seomatic_metacontainer_';
+    const GLOBALS_CACHE_KEY = 'parsed_globals_';
 
     // Public Properties
     // =========================================================================
@@ -84,6 +85,11 @@ class MetaContainers extends Component
      * @var null|MetaBundle
      */
     protected $matchedMetaBundle = null;
+
+    /**
+     * @var null|TagDependency
+     */
+    protected $containerDependency = null;
 
     // Public Methods
     // =========================================================================
@@ -129,6 +135,7 @@ class MetaContainers extends Component
                     $this::METACONTAINER_CACHE_TAG.$uri.$siteId,
                 ],
             ]);
+            $this->containerDependency = $dependency;
             if (Seomatic::$previewingMetaContainers) {
                 $this->loadGlobalMetaContainers($siteId);
                 $this->loadContentMetaContainers();
@@ -193,7 +200,7 @@ class MetaContainers extends Component
         foreach ($this->metaContainers as $metaContainer) {
             /** @var $metaContainer MetaContainer */
             if ($metaContainer->include) {
-                $metaContainer->includeMetaData();
+                $metaContainer->includeMetaData($this->containerDependency);
             }
         }
         Craft::endProfile('MetaContainers::includeMetaContainers', __METHOD__);
@@ -204,12 +211,28 @@ class MetaContainers extends Component
      */
     public function parseGlobalVars()
     {
-        if ($this->metaGlobalVars) {
-            $this->metaGlobalVars->parseProperties();
-        }
-        if ($this->metaSiteVars) {
-            $this->metaSiteVars->parseProperties();
-        }
+        $dependency = $this->containerDependency;
+        $uniqueKey = $dependency->tags[2];
+        list($this->metaGlobalVars, $this->metaSiteVars) = Craft::$app->getCache()->getOrSet(
+            $this::GLOBALS_CACHE_KEY.$uniqueKey,
+            function () use ($uniqueKey) {
+                Craft::info(
+                    $this::GLOBALS_CACHE_KEY.' cache miss: '.$uniqueKey,
+                    __METHOD__
+                );
+
+                if ($this->metaGlobalVars) {
+                    $this->metaGlobalVars->parseProperties();
+                }
+                if ($this->metaSiteVars) {
+                    $this->metaSiteVars->parseProperties();
+                }
+
+                return [$this->metaGlobalVars, $this->metaSiteVars];
+            },
+            Seomatic::$cacheDuration,
+            $dependency
+        );
     }
 
     /**

@@ -51,7 +51,7 @@ class MetaScriptContainer extends MetaContainer
     /**
      * @inheritdoc
      */
-    public function includeMetaData()
+    public function includeMetaData($dependency)
     {
         Craft::beginProfile('MetaScriptContainer::ncludeMetaData', __METHOD__);
         if ($this->prepForInclusion()) {

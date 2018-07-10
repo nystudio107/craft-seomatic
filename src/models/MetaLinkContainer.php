@@ -44,28 +44,50 @@ class MetaLinkContainer extends MetaContainer
     /**
      * @inheritdoc
      */
-    public function includeMetaData()
+    public function includeMetaData($dependency)
     {
         Craft::beginProfile('MetaLinkContainer::includeMetaData', __METHOD__);
-        if ($this->prepForInclusion()) {
-            /** @var MetaLink $metaLinkModel */
-            foreach ($this->data as $metaLinkModel) {
-                if ($metaLinkModel->include) {
-                    $configs = $metaLinkModel->tagAttributesArray();
-                    foreach ($configs as $config) {
-                        if ($metaLinkModel->prepForRender($config)) {
-                            Seomatic::$view->registerLinkTag($config);
-                            // If `devMode` is enabled, validate the Meta Link and output any model errors
-                            if (Seomatic::$devMode) {
-                                $metaLinkModel->debugMetaItem(
-                                    'Link attribute: '
-                                );
+        $uniqueKey = $dependency->tags[2];
+        $tagData = Craft::$app->getCache()->getOrSet(
+            $this::CONTAINER_TYPE.$uniqueKey,
+            function () use ($uniqueKey) {
+                Craft::info(
+                    $this::CONTAINER_TYPE.' cache miss: '.$uniqueKey,
+                    __METHOD__
+                );
+
+                $tagData = [];
+                if ($this->prepForInclusion()) {
+                    /** @var MetaLink $metaLinkModel */
+                    foreach ($this->data as $metaLinkModel) {
+                        if ($metaLinkModel->include) {
+                            $configs = $metaLinkModel->tagAttributesArray();
+                            foreach ($configs as $config) {
+                                if ($metaLinkModel->prepForRender($config)) {
+                                    $tagData[] = $config;
+                                    // If `devMode` is enabled, validate the Meta Link and output any model errors
+                                    if (Seomatic::$devMode) {
+                                        $metaLinkModel->debugMetaItem(
+                                            'Link attribute: '
+                                        );
+                                    }
+                                }
                             }
                         }
                     }
                 }
-            }
+
+                return $tagData;
+            },
+            Seomatic::$cacheDuration,
+            $dependency
+        );
+
+        // Register the tags
+        foreach ($tagData as $config) {
+            Seomatic::$view->registerLinkTag($config);
         }
+
         Craft::endProfile('MetaLinkContainer::includeMetaData', __METHOD__);
     }
 
