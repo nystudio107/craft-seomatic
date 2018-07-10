@@ -92,11 +92,12 @@ class MetaBundles extends Component
     /**
      * Get the global meta bundle for the site
      *
-     * @param int $sourceSiteId
+     * @param int  $sourceSiteId
+     * @param bool $parse         Whether the resulting metabundle should be parsed
      *
      * @return null|MetaBundle
      */
-    public function getGlobalMetaBundle(int $sourceSiteId)
+    public function getGlobalMetaBundle(int $sourceSiteId, $parse = true)
     {
         $metaBundle = null;
         // See if we have the meta bundle cached
@@ -113,14 +114,18 @@ class MetaBundles extends Component
         if (!empty($metaBundleArray)) {
             // Get the attributes from the db
             $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
-            $metaBundle = MetaBundle::create($metaBundleArray);
-            $this->syncBundleWithConfig($metaBundle);
+            $metaBundle = MetaBundle::create($metaBundleArray, $parse);
+            if ($parse) {
+                $this->syncBundleWithConfig($metaBundle);
+            }
         } else {
             // If it doesn't exist, create it
             $metaBundle = $this->createGlobalMetaBundleForSite($sourceSiteId);
         }
-        // Cache it for future accesses
-        $this->globalMetaBundles[$sourceSiteId] = $metaBundle;
+        if ($parse) {
+            // Cache it for future accesses
+            $this->globalMetaBundles[$sourceSiteId] = $metaBundle;
+        }
 
         return $metaBundle;
     }
