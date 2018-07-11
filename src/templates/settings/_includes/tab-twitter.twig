@@ -8,6 +8,16 @@
 
 {############### Twitter Card Type ###############}
 
+{% set twitterCardTypes = {
+    summary: "Summary Card"|t("seomatic"),
+    summary_large_image: "Summary Card with Large Image"|t("seomatic"),
+    app: "App Card"|t("seomatic"),
+    player: "Player Card"|t("seomatic"),
+} %}
+{% if pageContext == "field" %}
+    {% set twitterCardTypes = { "": ""} | merge(twitterCardTypes) %}
+{% endif %}
+
 {% if field is not defined or 'twitterCardType' in field.twitterEnabledFields %}
     {% namespace "metaGlobalVars" %}
         {{ forms.selectField({
@@ -15,12 +25,7 @@
             instructions: "With Twitter Cards, you can attach rich photos and information to Tweets that drive traffic to your website. Users who Tweet links to your content will have a 'Card' added to the Tweet that’s visible to all of their followers."|t("seomatic"),
             id: "twitterCard",
             name: "twitterCard",
-            options: {
-                summary: "Summary Card"|t("seomatic"),
-                summary_large_image: "Summary Card with Large Image"|t("seomatic"),
-                app: "App Card"|t("seomatic"),
-                player: "Player Card"|t("seomatic"),
-            },
+            options: twitterCardTypes,
             value: metaGlobalVars.twitterCard,
             errors: metaGlobalVars.getErrors("twitterCard"),
         }) }}
@@ -377,6 +382,10 @@
     {% set textOptions = { fromField: "From Field"|t("seomatic"), } | merge(textOptions) %}
 {% endif %}
 {% set textOptions = { sameAsSeo: "Same As SEO Image Description"|t("seomatic"), } | merge(textOptions) %}
+
+{% if pageContext == "field" %}
+    {% set textOptions = { "": ""} | merge(textOptions) %}
+{% endif %}
 
 {% if field is not defined or 'twitterImageDescription' in field.twitterEnabledFields %}
     <div class="field seomatic-textSourceWrapper" id="metaBundleSettings-twitterImageDescriptionSource-field">

@@ -15,6 +15,8 @@ use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
+use Craft;
+
 use yii\web\View;
 
 /**
@@ -45,38 +47,62 @@ class MetaJsonLdContainer extends MetaContainer
     /**
      * @inheritdoc
      */
-    public function includeMetaData()
+    public function includeMetaData($dependency)
     {
-        if ($this->prepForInclusion()) {
-            /** @var $metaJsonLdModel MetaJsonLd */
-            foreach ($this->data as $metaJsonLdModel) {
-                if ($metaJsonLdModel->include) {
-                    $options = $metaJsonLdModel->tagAttributes();
-                    if ($metaJsonLdModel->prepForRender($options)) {
-                        $jsonLd = $metaJsonLdModel->render([
-                            'renderRaw'        => true,
-                            'renderScriptTags' => false,
-                            'array'            => false,
-                        ]);
-                        Seomatic::$view->registerScript(
-                            $jsonLd,
-                            View::POS_END,
-                            ['type' => 'application/ld+json']
-                        );
-                        // If `devMode` is enabled, validate the JSON-LD and output any model errors
-                        if (Seomatic::$devMode) {
-                            $metaJsonLdModel->debugMetaItem(
-                                'JSON-LD property: ',
-                                [
-                                    'default' => 'error',
-                                    'google'  => 'warning',
-                                ]
-                            );
+        Craft::beginProfile('MetaJsonLdContainer::includeMetaData', __METHOD__);
+        $uniqueKey = $this->handle.$dependency->tags[2];
+        $tagData = Craft::$app->getCache()->getOrSet(
+            $this::CONTAINER_TYPE.$uniqueKey,
+            function () use ($uniqueKey) {
+                Craft::info(
+                    $this::CONTAINER_TYPE.' cache miss: '.$uniqueKey,
+                    __METHOD__
+                );
+                $tagData = [];
+                if ($this->prepForInclusion()) {
+                    /** @var $metaJsonLdModel MetaJsonLd */
+                    foreach ($this->data as $metaJsonLdModel) {
+                        if ($metaJsonLdModel->include) {
+                            $options = $metaJsonLdModel->tagAttributes();
+                            if ($metaJsonLdModel->prepForRender($options)) {
+                                $jsonLd = $metaJsonLdModel->render([
+                                    'renderRaw'        => true,
+                                    'renderScriptTags' => false,
+                                    'array'            => false,
+                                ]);
+                                $tagData[] = [
+                                    'jsonLd' => $jsonLd,
+                                    'position' => View::POS_END
+                                ];
+                                // If `devMode` is enabled, validate the JSON-LD and output any model errors
+                                if (Seomatic::$devMode) {
+                                    $metaJsonLdModel->debugMetaItem(
+                                        'JSON-LD property: ',
+                                        [
+                                            'default' => 'error',
+                                            'google'  => 'warning',
+                                        ]
+                                    );
+                                }
+                            }
                         }
                     }
                 }
-            }
+
+                return $tagData;
+            },
+            Seomatic::$cacheDuration,
+            $dependency
+        );
+        // Register the tags
+        foreach ($tagData as $config) {
+            Seomatic::$view->registerScript(
+                $config['jsonLd'],
+                $config['position'],
+                ['type' => 'application/ld+json']
+            );
         }
+        Craft::endProfile('MetaJsonLdContainer::includeMetaData', __METHOD__);
     }
 
     /**

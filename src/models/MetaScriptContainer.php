@@ -14,6 +14,8 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 
+use Craft;
+
 use yii\web\View;
 
 /**
@@ -49,26 +51,50 @@ class MetaScriptContainer extends MetaContainer
     /**
      * @inheritdoc
      */
-    public function includeMetaData()
+    public function includeMetaData($dependency)
     {
-        if ($this->prepForInclusion()) {
-            /** @var $metaScriptModel MetaScript */
-            foreach ($this->data as $metaScriptModel) {
-                if ($metaScriptModel->include) {
-                    $js = $metaScriptModel->render();
-                    Seomatic::$view->registerJs(
-                        $js,
-                        $metaScriptModel->position ?? $this->position
-                    );
-                    // If `devMode` is enabled, validate the Meta Script and output any model errors
-                    if (Seomatic::$devMode) {
-                        $metaScriptModel->debugMetaItem(
-                            'Script attribute: '
-                        );
+        Craft::beginProfile('MetaScriptContainer::includeMetaData', __METHOD__);
+        $uniqueKey = $this->handle.$dependency->tags[2];
+        $tagData = Craft::$app->getCache()->getOrSet(
+            $this::CONTAINER_TYPE.$uniqueKey,
+            function () use ($uniqueKey) {
+                Craft::info(
+                    $this::CONTAINER_TYPE.' cache miss: '.$uniqueKey,
+                    __METHOD__
+                );
+                $tagData = [];
+                if ($this->prepForInclusion()) {
+                    /** @var $metaScriptModel MetaScript */
+                    foreach ($this->data as $metaScriptModel) {
+                        if ($metaScriptModel->include) {
+                            $js = $metaScriptModel->render();
+                            $tagData[] = [
+                                'js' => $js,
+                                'position' => $metaScriptModel->position ?? $this->position
+                            ];
+                            // If `devMode` is enabled, validate the Meta Script and output any model errors
+                            if (Seomatic::$devMode) {
+                                $metaScriptModel->debugMetaItem(
+                                    'Script attribute: '
+                                );
+                            }
+                        }
                     }
                 }
-            }
+
+                return $tagData;
+            },
+            Seomatic::$cacheDuration,
+            $dependency
+        );
+        // Register the tags
+        foreach ($tagData as $config) {
+            Seomatic::$view->registerJs(
+                $config['js'],
+                $config['position']
+            );
         }
+        Craft::endProfile('MetaScriptContainer::includeMetaData', __METHOD__);
     }
 
     /**

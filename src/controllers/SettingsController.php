@@ -19,6 +19,8 @@ use nystudio107\seomatic\helpers\DynamicMeta as DynamicMetaHelper;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaScriptContainer;
+use nystudio107\seomatic\services\FrontendTemplates;
+use nystudio107\seomatic\services\MetaBundles;
 
 use Craft;
 use craft\elements\Asset;
@@ -28,8 +30,9 @@ use craft\helpers\UrlHelper;
 use craft\models\Site;
 use craft\web\Controller;
 
-use nystudio107\seomatic\services\FrontendTemplates;
-use nystudio107\seomatic\services\MetaBundles;
+use craft\commerce\Plugin as CommercePlugin;
+use craft\commerce\elements\Product;
+
 use yii\base\InvalidConfigException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -524,6 +527,9 @@ class SettingsController extends Controller
             case MetaBundles::CATEGORYGROUP_META_BUNDLE:
                 $elementName = 'category';
                 break;
+            case MetaBundles::PRODUCT_META_BUNDLE:
+                $elementName = 'product';
+                break;
             default:
                 $elementName = '';
                 break;
@@ -981,7 +987,17 @@ class SettingsController extends Controller
                     $uri = $category->uri;
                 }
                 break;
-            // @TODO: handle commerce products
+            case MetaBundles::PRODUCT_META_BUNDLE:
+                if (Seomatic::$commerceInstalled) {
+                    $commerce = CommercePlugin::getInstance();
+                    if ($commerce !== null) {
+                        $product = Product::find()->type($sourceHandle)->one();
+                        if ($product) {
+                            $uri = $product->uri;
+                        }
+                    }
+                }
+                break;
         }
         if (($uri === '__home__') || ($uri === null)) {
             $uri = '/';

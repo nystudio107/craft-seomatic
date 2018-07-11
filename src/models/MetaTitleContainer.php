@@ -14,6 +14,8 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 
+use Craft;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -42,29 +44,48 @@ class MetaTitleContainer extends MetaContainer
     /**
      * @inheritdoc
      */
-    public function includeMetaData()
+    public function includeMetaData($dependency)
     {
-        if ($this->prepForInclusion()) {
-            /** @var $metaTitleModel MetaTitle */
-            foreach ($this->data as $metaTitleModel) {
-                if ($metaTitleModel->include) {
-                    $title = $metaTitleModel->title;
-                    if ($metaTitleModel->prepForRender($title)) {
-                        Seomatic::$view->title = $title;
-                        // If `devMode` is enabled, validate the Meta Tag and output any model errors
-                        if (Seomatic::$devMode) {
-                            $scenario = [];
-                            $scenario['default'] = 'error';
-                            $scenario['warning'] = 'warning';
-                            $metaTitleModel->debugMetaItem(
-                                'Tag attribute: ',
-                                $scenario
-                            );
+        Craft::beginProfile('MetaTitleContainer::includeMetaData', __METHOD__);
+        $uniqueKey = $this->handle.$dependency->tags[2];
+        $tagData = Craft::$app->getCache()->getOrSet(
+            $this::CONTAINER_TYPE.$uniqueKey,
+            function () use ($uniqueKey) {
+                Craft::info(
+                    $this::CONTAINER_TYPE.' cache miss: '.$uniqueKey,
+                    __METHOD__
+                );
+                $tagData = '';
+                if ($this->prepForInclusion()) {
+                    /** @var $metaTitleModel MetaTitle */
+                    foreach ($this->data as $metaTitleModel) {
+                        if ($metaTitleModel->include) {
+                            $title = $metaTitleModel->title;
+                            if ($metaTitleModel->prepForRender($title)) {
+                                $tagData = $title;
+                                // If `devMode` is enabled, validate the Meta Tag and output any model errors
+                                if (Seomatic::$devMode) {
+                                    $scenario = [];
+                                    $scenario['default'] = 'error';
+                                    $scenario['warning'] = 'warning';
+                                    $metaTitleModel->debugMetaItem(
+                                        'Tag attribute: ',
+                                        $scenario
+                                    );
+                                }
+                            }
                         }
                     }
                 }
-            }
-        }
+
+                return $tagData;
+            },
+            Seomatic::$cacheDuration,
+            $dependency
+        );
+        // Register the tags
+        Seomatic::$view->title = $tagData;
+        Craft::endProfile('MetaTitleContainer::includeMetaData', __METHOD__);
     }
 
     /**

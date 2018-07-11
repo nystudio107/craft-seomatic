@@ -1,11 +1,26 @@
 # SEOmatic Changelog
 
+## 3.1.0 - 2018.07.11
+### Added
+* Added full support for Craft Commerce 2
+* Added a caching layer to `includeMetaContainers()` for improved performance
+* Added more fine-grained profiling data
+* Re-organized how event handlers are loaded to allow for compatibility with Fallback Site plugin
+
+### Changed
+* Canonical URLs are now always lower-cased, and made absolute
+* Fixed an issue where the SiteLinks Search Box wouldn't work because it errantly parsed the setting as Twig
+* Allow for default empty settings for the SEO Settings field for things like the Twitter Card type, etc.
+* Added a warning to let people know tracking scripts are disabled when `devMode` is on
+* Fixed an issue with JSON-LD dropping certain properties if non-default types were selected
+
 ## 3.0.25 - 2018.07.03
 ### Changed
 * Strip tags from the incoming `craft.app.request.pathInfo` for the `canonicalUrl`
 * Fixed the breadcrumbs link on the Plugin Settings page
 * Fixed an issue where users without admin privileges could not save the SEOmatic Plugin Settings
 * Fixed an issue where category groups would be lumped together in the sitemap
+* Fixed an issue with og:locale and og:locale:alternate being improperly formatted
 
 ## 3.0.24 - 2018.06.25
 ### Added

@@ -16,11 +16,11 @@ use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\base\FluentModel;
+use nystudio107\seomatic\variables\SeomaticVariable;
 
 use craft\helpers\Json as JsonHelper;
 use craft\validators\ArrayValidator;
 use craft\validators\DateTimeValidator;
-use nystudio107\seomatic\variables\SeomaticVariable;
 
 /**
  * @author    nystudio107
@@ -124,15 +124,16 @@ class MetaBundle extends FluentModel
      * Create a new meta bundle
      *
      * @param array $config
+     * @param bool $parse    Whether the resulting metabundle should be parsed
      *
      * @return null|MetaBundle
      */
-    public static function create(array $config = [])
+    public static function create(array $config = [], bool $parse = true)
     {
         self::cleanProperties(__CLASS__, $config);
         $model = new MetaBundle($config);
         if ($model) {
-            $model->normalizeMetaBundleData();
+            $model->normalizeMetaBundleData($parse);
         }
 
         return $model;
@@ -143,8 +144,10 @@ class MetaBundle extends FluentModel
      *
      * This is called after meta bundle data is loaded, to allow it to be
      * parsed, models instantiated, etc.
+     *
+     * @param bool $parse    Whether the resulting metabundle should be parsed
      */
-    public function normalizeMetaBundleData()
+    public function normalizeMetaBundleData(bool $parse = true)
     {
         // Decode any JSON data
         $properties = $this->getAttributes();
@@ -170,48 +173,6 @@ class MetaBundle extends FluentModel
         if ($this->metaBundleSettings !== null && \is_array($this->metaBundleSettings)) {
             $this->metaBundleSettings = MetaBundleSettings::create($this->metaBundleSettings);
         }
-        // Create our variable so that meta containers can be parsed based on dynamic values
-        // Make sure Twig is loaded and instantiated first by priming the pump
-        MetaValueHelper::parseString('{prime}');
-        $oldSeomaticVariable = Seomatic::$seomaticVariable;
-        if (Seomatic::$seomaticVariable === null) {
-            Seomatic::$seomaticVariable = new SeomaticVariable();
-        }
-        $oldMeta = Seomatic::$seomaticVariable->meta;
-        $oldSite = Seomatic::$seomaticVariable->site;
-        $oldLoadingContainers = Seomatic::$loadingContainers;
-        $oldPreviewingMetaContainers = Seomatic::$previewingMetaContainers;
-        Seomatic::$loadingContainers = false;
-        Seomatic::$previewingMetaContainers = false;
-        // Merge these global vars with the MetaContainers global vars
-        $globalVars = [];
-        if (Seomatic::$plugin->metaContainers->metaGlobalVars !== null) {
-            $globalVars = Seomatic::$plugin->metaContainers->metaGlobalVars->getAttributes();
-        }
-        $thisGlobalVars = $this->metaGlobalVars->getAttributes();
-        $thisGlobals = MetaGlobalVars::create(ArrayHelper::merge($globalVars, $thisGlobalVars));
-        // Merge these site vars with the MetaContainers site vars
-        $siteVars = [];
-        if (Seomatic::$plugin->metaContainers->metaSiteVars !== null) {
-            $siteVars = Seomatic::$plugin->metaContainers->metaSiteVars->getAttributes();
-        }
-        $thisSiteVars = $this->metaSiteVars->getAttributes();
-        $thisSite = MetaSiteVars::create(ArrayHelper::merge($siteVars, $thisSiteVars));
-        Seomatic::$seomaticVariable->meta = $thisGlobals;
-        Seomatic::$seomaticVariable->site = $thisSite;
-        MetaValueHelper::cache();
-
-        // Meta containers
-        if (!empty($this->metaContainers)) {
-            $metaContainers = $this->metaContainers;
-            $this->metaContainers = [];
-            foreach ($metaContainers as $key => $metaContainer) {
-                /** @var MetaContainer $containerClass */
-                $containerClass = $metaContainer['class'];
-                /**  @var array $metaContainer */
-                $this->metaContainers[$key] = $containerClass::create($metaContainer);
-            }
-        }
         // Redirects container
         if ($this->redirectsContainer !== null) {
             //$this->redirectsContainer = RedirectsContainer::create($this->redirectsContainer);
@@ -220,13 +181,57 @@ class MetaBundle extends FluentModel
         if ($this->frontendTemplatesContainer !== null && \is_array($this->frontendTemplatesContainer)) {
             $this->frontendTemplatesContainer = FrontendTemplateContainer::create($this->frontendTemplatesContainer);
         }
-        // Restore the $seomaticVariable
-        Seomatic::$loadingContainers = $oldLoadingContainers;
-        Seomatic::$previewingMetaContainers = $oldPreviewingMetaContainers;
-        Seomatic::$seomaticVariable->meta = $oldMeta;
-        Seomatic::$seomaticVariable->site = $oldSite;
-        Seomatic::$seomaticVariable = $oldSeomaticVariable;
-        MetaValueHelper::cache();
+        // Create our variable so that meta containers can be parsed based on dynamic values
+        // Make sure Twig is loaded and instantiated first by priming the pump
+        if ($parse) {
+            MetaValueHelper::parseString('{prime}');
+            $oldSeomaticVariable = Seomatic::$seomaticVariable;
+            if (Seomatic::$seomaticVariable === null) {
+                Seomatic::$seomaticVariable = new SeomaticVariable();
+            }
+            $oldMeta = Seomatic::$seomaticVariable->meta;
+            $oldSite = Seomatic::$seomaticVariable->site;
+            $oldLoadingContainers = Seomatic::$loadingContainers;
+            $oldPreviewingMetaContainers = Seomatic::$previewingMetaContainers;
+            Seomatic::$loadingContainers = false;
+            Seomatic::$previewingMetaContainers = false;
+            // Merge these global vars with the MetaContainers global vars
+            $globalVars = [];
+            if (Seomatic::$plugin->metaContainers->metaGlobalVars !== null) {
+                $globalVars = Seomatic::$plugin->metaContainers->metaGlobalVars->getAttributes();
+            }
+            $thisGlobalVars = $this->metaGlobalVars->getAttributes();
+            $thisGlobals = MetaGlobalVars::create(ArrayHelper::merge($globalVars, $thisGlobalVars));
+            // Merge these site vars with the MetaContainers site vars
+            $siteVars = [];
+            if (Seomatic::$plugin->metaContainers->metaSiteVars !== null) {
+                $siteVars = Seomatic::$plugin->metaContainers->metaSiteVars->getAttributes();
+            }
+            $thisSiteVars = $this->metaSiteVars->getAttributes();
+            $thisSite = MetaSiteVars::create(ArrayHelper::merge($siteVars, $thisSiteVars));
+            Seomatic::$seomaticVariable->meta = $thisGlobals;
+            Seomatic::$seomaticVariable->site = $thisSite;
+            MetaValueHelper::cache();
+
+            // Meta containers
+            if (!empty($this->metaContainers)) {
+                $metaContainers = $this->metaContainers;
+                $this->metaContainers = [];
+                foreach ($metaContainers as $key => $metaContainer) {
+                    /** @var MetaContainer $containerClass */
+                    $containerClass = $metaContainer['class'];
+                    /**  @var array $metaContainer */
+                    $this->metaContainers[$key] = $containerClass::create($metaContainer);
+                }
+            }
+            // Restore the $seomaticVariable
+            Seomatic::$loadingContainers = $oldLoadingContainers;
+            Seomatic::$previewingMetaContainers = $oldPreviewingMetaContainers;
+            Seomatic::$seomaticVariable->meta = $oldMeta;
+            Seomatic::$seomaticVariable->site = $oldSite;
+            Seomatic::$seomaticVariable = $oldSeomaticVariable;
+            MetaValueHelper::cache();
+        }
     }
 
     /**

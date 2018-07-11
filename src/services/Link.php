@@ -16,6 +16,7 @@ use nystudio107\seomatic\base\MetaService;
 use nystudio107\seomatic\models\MetaLink;
 use nystudio107\seomatic\models\MetaLinkContainer;
 
+use craft\helpers\ArrayHelper;
 use craft\helpers\Template as TemplateHelper;
 
 /**
@@ -27,6 +28,8 @@ class Link extends MetaService
 {
     // Constants
     // =========================================================================
+
+    const DEFAULT_TYPE = null;
 
     // Public Methods
     // =========================================================================
@@ -53,7 +56,11 @@ class Link extends MetaService
      */
     public function create(array $config = [], $add = true): MetaLink
     {
-        $metaItem = MetaLink::create($config);
+        $type = self::DEFAULT_TYPE;
+        if (!empty($config['type'])) {
+            $type = ArrayHelper::remove($config, 'type');
+        }
+        $metaItem = MetaLink::create($type, $config);
         if ($add && $metaItem !== null) {
             $this->add($metaItem);
         }

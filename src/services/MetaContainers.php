@@ -27,6 +27,7 @@ use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\MetaScript;
 use nystudio107\seomatic\models\MetaTagContainer;
 use nystudio107\seomatic\models\MetaTitleContainer;
+use nystudio107\seomatic\variables\SeomaticVariable;
 
 use Craft;
 use craft\base\Component;
@@ -35,7 +36,9 @@ use craft\elements\Category;
 use craft\elements\Entry;
 use craft\helpers\UrlHelper;
 
-use nystudio107\seomatic\variables\SeomaticVariable;
+use craft\commerce\Plugin as CommercePlugin;
+use craft\commerce\elements\Product;
+
 use yii\base\Exception;
 use yii\caching\TagDependency;
 
@@ -53,6 +56,8 @@ class MetaContainers extends Component
     const METACONTAINER_CACHE_TAG = 'seomatic_metacontainer_';
 
     const CACHE_KEY = 'seomatic_metacontainer_';
+    const GLOBALS_CACHE_KEY = 'parsed_globals_';
+    const SCRIPTS_CACHE_KEY = 'body_scripts_';
 
     // Public Properties
     // =========================================================================
@@ -85,6 +90,11 @@ class MetaContainers extends Component
      */
     protected $matchedMetaBundle = null;
 
+    /**
+     * @var null|TagDependency
+     */
+    protected $containerDependency = null;
+
     // Public Methods
     // =========================================================================
 
@@ -104,7 +114,7 @@ class MetaContainers extends Component
      */
     public function loadMetaContainers(string $uri = '', int $siteId = null)
     {
-        Craft::beginProfile('loadMetaContainers', __METHOD__);
+        Craft::beginProfile('MetaContainers::loadMetaContainers', __METHOD__);
         // Avoid recursion
         if (!Seomatic::$loadingContainers) {
             Seomatic::$loadingContainers = true;
@@ -129,6 +139,7 @@ class MetaContainers extends Component
                     $this::METACONTAINER_CACHE_TAG.$uri.$siteId,
                 ],
             ]);
+            $this->containerDependency = $dependency;
             if (Seomatic::$previewingMetaContainers) {
                 $this->loadGlobalMetaContainers($siteId);
                 $this->loadContentMetaContainers();
@@ -158,7 +169,7 @@ class MetaContainers extends Component
             MetaValueHelper::cache();
             Seomatic::$loadingContainers = false;
         }
-        Craft::endProfile('loadMetaContainers', __METHOD__);
+        Craft::endProfile('MetaContainers::loadMetaContainers', __METHOD__);
     }
 
     /**
@@ -168,18 +179,38 @@ class MetaContainers extends Component
      */
     public function includeScriptBodyHtml(int $bodyPosition)
     {
-        Craft::beginProfile('includeScriptBodyHtml', __METHOD__);
-        $scriptContainers = $this->getContainersOfType(MetaScriptContainer::CONTAINER_TYPE);
-        foreach ($scriptContainers as $scriptContainer) {
-            /** @var MetaScriptContainer $scriptContainer */
-            foreach ($scriptContainer->data as $metaScript) {
-                /** @var MetaScript $metaScript */
-                if (!empty($metaScript->bodyTemplatePath) && ($metaScript->bodyPosition === $bodyPosition)) {
-                    echo $metaScript->renderBodyHtml();
+        Craft::beginProfile('MetaContainers::includeScriptBodyHtml', __METHOD__);
+        $dependency = $this->containerDependency;
+        $uniqueKey = $dependency->tags[2].$bodyPosition;
+        $scriptData = Craft::$app->getCache()->getOrSet(
+            $this::GLOBALS_CACHE_KEY.$uniqueKey,
+            function () use ($uniqueKey, $bodyPosition) {
+                Craft::info(
+                    $this::SCRIPTS_CACHE_KEY.' cache miss: '.$uniqueKey,
+                    __METHOD__
+                );
+                $scriptData = [];
+                $scriptContainers = $this->getContainersOfType(MetaScriptContainer::CONTAINER_TYPE);
+                foreach ($scriptContainers as $scriptContainer) {
+                    /** @var MetaScriptContainer $scriptContainer */
+                    foreach ($scriptContainer->data as $metaScript) {
+                        /** @var MetaScript $metaScript */
+                        if (!empty($metaScript->bodyTemplatePath) && ($metaScript->bodyPosition === $bodyPosition)) {
+                            $scriptData[] = $metaScript->renderBodyHtml();
+                        }
+                    }
                 }
-            }
+
+                return $scriptData;
+            },
+            Seomatic::$cacheDuration,
+            $dependency
+        );
+        // Output the script HTML
+        foreach ($scriptData as $script) {
+            echo $script;
         }
-        Craft::endProfile('includeScriptBodyHtml', __METHOD__);
+        Craft::endProfile('MetaContainers::includeScriptBodyHtml', __METHOD__);
     }
 
     /**
@@ -187,16 +218,16 @@ class MetaContainers extends Component
      */
     public function includeMetaContainers()
     {
-        Craft::beginProfile('includeMetaContainers', __METHOD__);
+        Craft::beginProfile('MetaContainers::includeMetaContainers', __METHOD__);
         DynamicMetaHelper::includeHttpHeaders();
         $this->parseGlobalVars();
         foreach ($this->metaContainers as $metaContainer) {
             /** @var $metaContainer MetaContainer */
             if ($metaContainer->include) {
-                $metaContainer->includeMetaData();
+                $metaContainer->includeMetaData($this->containerDependency);
             }
         }
-        Craft::endProfile('includeMetaContainers', __METHOD__);
+        Craft::endProfile('MetaContainers::includeMetaContainers', __METHOD__);
     }
 
     /**
@@ -204,12 +235,28 @@ class MetaContainers extends Component
      */
     public function parseGlobalVars()
     {
-        if ($this->metaGlobalVars) {
-            $this->metaGlobalVars->parseProperties();
-        }
-        if ($this->metaSiteVars) {
-            $this->metaSiteVars->parseProperties();
-        }
+        $dependency = $this->containerDependency;
+        $uniqueKey = $dependency->tags[2];
+        list($this->metaGlobalVars, $this->metaSiteVars) = Craft::$app->getCache()->getOrSet(
+            $this::GLOBALS_CACHE_KEY.$uniqueKey,
+            function () use ($uniqueKey) {
+                Craft::info(
+                    $this::GLOBALS_CACHE_KEY.' cache miss: '.$uniqueKey,
+                    __METHOD__
+                );
+
+                if ($this->metaGlobalVars) {
+                    $this->metaGlobalVars->parseProperties();
+                }
+                if ($this->metaSiteVars) {
+                    $this->metaSiteVars->parseProperties();
+                }
+
+                return [$this->metaGlobalVars, $this->metaSiteVars];
+            },
+            Seomatic::$cacheDuration,
+            $dependency
+        );
     }
 
     /**
@@ -441,7 +488,14 @@ class MetaContainers extends Component
                     /** @var  $element Category */
                     $sourceType = MetaBundles::CATEGORYGROUP_META_BUNDLE;
                     break;
-                // @todo handle commerce products
+                case Product::class:
+                    if (Seomatic::$commerceInstalled) {
+                        $commerce = CommercePlugin::getInstance();
+                        if ($commerce !== null) {
+                            $sourceType = MetaBundles::PRODUCT_META_BUNDLE;
+                        }
+                    }
+                    break;
             }
             list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
                 = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
@@ -556,6 +610,7 @@ class MetaContainers extends Component
      */
     protected function loadGlobalMetaContainers(int $siteId = null)
     {
+        Craft::beginProfile('MetaContainers::loadGlobalMetaContainers', __METHOD__);
         if ($siteId === null) {
             $siteId = Craft::$app->getSites()->currentSite->id ?? 1;
         }
@@ -574,6 +629,7 @@ class MetaContainers extends Component
                 $this->metaContainers[$key] = $metaContainer;
             }
         }
+        Craft::beginProfile('MetaContainers::loadGlobalMetaContainers', __METHOD__);
     }
 
     /**
@@ -581,10 +637,12 @@ class MetaContainers extends Component
      */
     protected function loadContentMetaContainers()
     {
+        Craft::beginProfile('MetaContainers::loadContentMetaContainers', __METHOD__);
         $metaBundle = $this->getMatchedMetaBundle();
         if ($metaBundle) {
             $this->addMetaBundleToContainers($metaBundle);
         }
+        Craft::beginProfile('MetaContainers::loadContentMetaContainers', __METHOD__);
     }
 
     /**
@@ -592,6 +650,7 @@ class MetaContainers extends Component
      */
     protected function loadFieldMetaContainers()
     {
+        Craft::beginProfile('MetaContainers::loadFieldMetaContainers', __METHOD__);
         $element = Seomatic::$matchedElement;
         if ($element) {
             /** @var Element $element */
@@ -603,6 +662,7 @@ class MetaContainers extends Component
                 }
             }
         }
+        Craft::beginProfile('MetaContainers::loadFieldMetaContainers', __METHOD__);
     }
 
     /**

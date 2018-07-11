@@ -18,7 +18,13 @@
 {% endblock %}
 
 {% block content %}
-    
+
+    {% if  craft.app.config.general.devMode %}
+        <div class="field">
+            <p class="warning">Tracking scripts are disabled when <code>devMode</code> is on.</p>
+        </div>
+    {% endif %}
+
     <input type="hidden" name="action" value="seomatic/settings/save-tracking">
     <input type="hidden" name="siteId" value="{{ currentSiteId }}">
     {{ redirectInput("seomatic/tracking/#{currentSubSection}/#{currentSiteHandle}") }}

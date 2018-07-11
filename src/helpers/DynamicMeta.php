@@ -131,6 +131,7 @@ class DynamicMeta
      */
     public static function addDynamicMetaToContainers(string $uri = '', int $siteId = null)
     {
+        Craft::beginProfile('DynamicMeta::addDynamicMetaToContainers', __METHOD__);
         $request = Craft::$app->getRequest();
         // Don't add dynamic meta to console requests, they have no concept of a URI or segments
         if (!$request->getIsConsoleRequest()) {
@@ -149,6 +150,7 @@ class DynamicMeta
                 self::addContactPoints($jsonLd, $metaSiteVars->creator);
             }
         }
+        Craft::endProfile('DynamicMeta::addDynamicMetaToContainers', __METHOD__);
     }
 
     /**
@@ -474,7 +476,8 @@ class DynamicMeta
             }
             $url = $url ?? '';
             $language = $site->language;
-            $hreflangLanguage = $site->language;
+            $language = str_replace('-', '_', $language);
+            $hreflangLanguage = $language;
             $hreflangLanguage = strtolower($hreflangLanguage);
             $hreflangLanguage = str_replace('_', '-', $hreflangLanguage);
             $localizedUrls[] = [
