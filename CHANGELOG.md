@@ -11,6 +11,7 @@
 * Canonical URLs are now always lower-cased, and made absolute
 * Fixed an issue where the SiteLinks Search Box wouldn't work because it errantly parsed the setting as Twig
 * Allow for default empty settings for the SEO Settings field for things like the Twitter Card type, etc.
+* Added a warning to let people know tracking scripts are disabled when `devMode` is on
 
 ## 3.0.25 - 2018.07.03
 ### Changed
