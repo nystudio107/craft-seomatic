@@ -190,6 +190,10 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                         }
                         break;
                 }
+                // If no elements exist, just throw a 404
+                if ($elements === null) {
+                    throw new NotFoundHttpException(Craft::t('seomatic', 'Page not found.'));
+                }
                 // Output the sitemap entry
                 /** @var  $element Entry */
                 foreach ($elements as $element) {
