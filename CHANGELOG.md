@@ -1,12 +1,14 @@
 # SEOmatic Changelog
 
-## 3.0.26 - 2018.07.06
+## 3.1.0 - 2018.07.11
 ### Added
+* Added full support for Craft Commerce 2
 * Added a caching layer to `includeMetaContainers()` for improved performance
 * Added more fine-grained profiling data
 * Re-organize how event handlers are loaded to allow for compatibility with Fallback Site plugin
 
 ### Changed
+* Canonical URLs are now always lower-cased, and made absolute
 * Fixed an issue where the SiteLinks Search Box wouldn't work because it errantly parsed the setting as Twig
 * Allow for default empty settings for the SEO Settings field for things like the Twitter Card type, etc.
 
