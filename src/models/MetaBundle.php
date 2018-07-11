@@ -16,11 +16,11 @@ use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\base\FluentModel;
+use nystudio107\seomatic\variables\SeomaticVariable;
 
 use craft\helpers\Json as JsonHelper;
 use craft\validators\ArrayValidator;
 use craft\validators\DateTimeValidator;
-use nystudio107\seomatic\variables\SeomaticVariable;
 
 /**
  * @author    nystudio107
