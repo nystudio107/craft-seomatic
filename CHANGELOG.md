@@ -20,6 +20,7 @@
 * Fixed the breadcrumbs link on the Plugin Settings page
 * Fixed an issue where users without admin privileges could not save the SEOmatic Plugin Settings
 * Fixed an issue where category groups would be lumped together in the sitemap
+* Fixed an issue with og:locale and og:locale:alternate being improperly formatted
 
 ## 3.0.24 - 2018.06.25
 ### Added
