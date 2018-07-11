@@ -74,7 +74,7 @@ return [
                     'seller'        => [
                         'id' => '{seomatic.site.identity.genericUrl}#identity',
                     ],
-                    'availability'  => 'http://schema.org/{% if product.variants[0].getIsAvailable() %}InStock{% else %}OutOfStock{% endif %}',
+                    'availability'  => 'http://schema.org/{% if object.product.variants[0].getIsAvailable() %}InStock{% else %}OutOfStock{% endif %}',
                 ],
             ],
         ],
