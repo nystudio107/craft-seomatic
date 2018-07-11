@@ -62,19 +62,19 @@ return [
                     'target'      => '{seomatic.site.siteLinksSearchTarget}',
                     'query-input' => '{seomatic.site.siteLinksQueryInput}',
                 ],
-                'sku'              => '{product.variants[0].getSku()}',
+                'sku'              => '{product.getDefaultVariant().getSku()}',
                 'offers'           => [
                     'type'          => 'Offer',
                     'url'           => '{seomatic.meta.canonicalUrl}',
-                    'price'         => '{product.variants[0].getPrice()|number_format(2)}',
-                    'priceCurrency' => '{{craft.paymentCurrencies.primaryPaymentCurrencyIso()}}',
+                    'price'         => '{product.getDefaultVariant().getPrice()|number_format(2)}',
+                    'priceCurrency' => '{{craft.commerce.paymentCurrencies.primaryPaymentCurrencyIso()}}',
                     'offeredBy'     => [
                         'id' => '{seomatic.site.identity.genericUrl}#identity',
                     ],
                     'seller'        => [
                         'id' => '{seomatic.site.identity.genericUrl}#identity',
                     ],
-                    'availability'  => 'http://schema.org/{% if object.product.variants[0].getIsAvailable() %}InStock{% else %}OutOfStock{% endif %}',
+                    'availability'  => 'http://schema.org/{% if object.product.getDefaultVariant().getIsAvailable() %}InStock{% else %}OutOfStock{% endif %}',
                 ],
             ],
         ],
