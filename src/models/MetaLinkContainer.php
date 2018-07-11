@@ -97,7 +97,7 @@ class MetaLinkContainer extends MetaContainer
 
         foreach ($this->data as $key => $config) {
             $config['key'] = $key;
-            $this->data[$key] = MetaLink::create($config);
+            $this->data[$key] = MetaLink::create($key, $config);
         }
     }
 }
