@@ -882,6 +882,12 @@ class MetaBundles extends Component
                 'sourceSiteId' => $siteId,
             ]
         );
+        // The computedType must be set before creating the bundle
+        if ($baseConfig !== null) {
+            $metaBundleDefaults['metaGlobalVars']['mainEntityOfPage'] = $baseConfig->metaGlobalVars->mainEntityOfPage;
+            $metaBundleDefaults['metaSiteVars']['identity']['computedType'] = $baseConfig->metaSiteVars->identity->computedType;
+            $metaBundleDefaults['metaSiteVars']['creator']['computedType'] = $baseConfig->metaSiteVars->creator->computedType;
+        }
         $metaBundle = MetaBundle::create($metaBundleDefaults);
         if ($metaBundle !== null) {
             if ($baseConfig !== null) {
@@ -946,6 +952,10 @@ class MetaBundles extends Component
                         'sourceDateUpdated' => $dateUpdated,
                     ]
                 );
+                // The mainEntityOfPage computedType must be set before creating the bundle
+                if ($baseConfig !== null && !empty($baseConfig->metaGlobalVars->mainEntityOfPage)) {
+                    $metaBundleDefaults['metaGlobalVars']['mainEntityOfPage'] = $baseConfig->metaGlobalVars->mainEntityOfPage;
+                }
                 // Merge in any migrated settings from an old Seomatic_Meta Field
                 if (!empty($element)) {
                     $element = Craft::$app->getElements()->getElementById($element->id, null, $siteId);
@@ -1023,6 +1033,10 @@ class MetaBundles extends Component
                         'sourceDateUpdated' => $dateUpdated,
                     ]
                 );
+                // The mainEntityOfPage computedType must be set before creating the bundle
+                if ($baseConfig !== null && !empty($baseConfig->metaGlobalVars->mainEntityOfPage)) {
+                    $metaBundleDefaults['metaGlobalVars']['mainEntityOfPage'] = $baseConfig->metaGlobalVars->mainEntityOfPage;
+                }
                 // Merge in any migrated settings from an old Seomatic_Meta Field
                 if (!empty($element)) {
                     $element = Craft::$app->getElements()->getElementById($element->id, null, $siteId);
@@ -1101,6 +1115,10 @@ class MetaBundles extends Component
                         'sourceDateUpdated' => $dateUpdated,
                     ]
                 );
+                // The mainEntityOfPage computedType must be set before creating the bundle
+                if ($baseConfig !== null && !empty($baseConfig->metaGlobalVars->mainEntityOfPage)) {
+                    $metaBundleDefaults['metaGlobalVars']['mainEntityOfPage'] = $baseConfig->metaGlobalVars->mainEntityOfPage;
+                }
                 // Merge in any migrated settings from an old Seomatic_Meta Field
                 if (!empty($element)) {
                     $element = Craft::$app->getElements()->getElementById($element->id, null, $siteId);
