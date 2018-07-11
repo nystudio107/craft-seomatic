@@ -753,7 +753,7 @@ class MetaBundles extends Component
             $this->createContentMetaBundleForCategoryGroup($category);
         }
 
-        // Get all of the category Commerce ProductTypes with URLs
+        // Get all of the Commerce ProductTypes with URLs
         if (Seomatic::$commerceInstalled) {
             $commerce = CommercePlugin::getInstance();
             if ($commerce !== null) {
