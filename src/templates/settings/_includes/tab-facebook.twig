@@ -8,6 +8,23 @@
 
 {############### Facebook OpenGraph Type ###############}
 
+{% set facebookOpenGraphTypes = {
+    "article": "Article"|t("seomatic"),
+    "book": "Book"|t("seomatic"),
+    "business.business": "Business"|t("seomatic"),
+    "music.album": "Music Album"|t("seomatic"),
+    "music.song": "Music Song"|t("seomatic"),
+    "place": "Place"|t("seomatic"),
+    "product": "Product"|t("seomatic"),
+    "profile": "Profile"|t("seomatic"),
+    "restaurant.restaurant": "Restaurant"|t("seomatic"),
+    "video.other": "Video"|t("seomatic"),
+    "website": "Website"|t("seomatic"),
+} %}
+{% if pageContext == "field" %}
+    {% set facebookOpenGraphTypes = { "": ""} | merge(facebookOpenGraphTypes) %}
+{% endif %}
+
 {% if field is not defined or 'ogType' in field.facebookEnabledFields %}
     {% namespace "metaGlobalVars" %}
         {{ forms.selectField({
@@ -15,19 +32,7 @@
             instructions: "Adding OpenGraph tags to your website influences the performance of your links on social media by allowing you to control what appears when a user posts a link to your content on Facebook."|t("seomatic"),
             id: "ogType",
             name: "ogType",
-            options: {
-                "article": "Article"|t("seomatic"),
-                "book": "Book"|t("seomatic"),
-                "business.business": "Business"|t("seomatic"),
-                "music.album": "Music Album"|t("seomatic"),
-                "music.song": "Music Song"|t("seomatic"),
-                "place": "Place"|t("seomatic"),
-                "product": "Product"|t("seomatic"),
-                "profile": "Profile"|t("seomatic"),
-                "restaurant.restaurant": "Restaurant"|t("seomatic"),
-                "video.other": "Video"|t("seomatic"),
-                "website": "Website"|t("seomatic"),
-            },
+            options: facebookOpenGraphTypes,
             value: metaGlobalVars.ogType,
             errors: metaGlobalVars.getErrors("ogType"),
         }) }}

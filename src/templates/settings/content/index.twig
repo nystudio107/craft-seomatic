@@ -74,6 +74,8 @@
                         {% set numEntries = craft.entries({ sectionId: metaBundle.sourceId }).count() %}
                     {% case "categorygroup" %}
                         {% set numEntries = craft.categories({ groupId: metaBundle.sourceId }).count() %}
+                    {% case "product" %}
+                        {% set numEntries = craft.products({ typeId: metaBundle.sourceId }).count() %}
                     {% default %}
                         {% set numEntries = 0 %}
                     {% endswitch %}

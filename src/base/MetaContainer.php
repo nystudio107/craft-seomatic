@@ -79,7 +79,7 @@ abstract class MetaContainer extends SeomaticContainer implements MetaContainerI
     /**
      * @inheritdoc
      */
-    public function includeMetaData()
+    public function includeMetaData($dependency)
     {
     }
 

@@ -24,8 +24,10 @@ use craft\elements\Entry;
 use craft\elements\Category;
 use craft\elements\MatrixBlock;
 use craft\fields\Assets as AssetsField;
-use craft\fields\Matrix as MatrixField;
 use craft\models\SiteGroup;
+
+use craft\commerce\Plugin as CommercePlugin;
+use craft\commerce\elements\Product;
 
 use yii\caching\TagDependency;
 use yii\helpers\Html;
@@ -174,7 +176,23 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                             ->enabledForSite(true)
                             ->all();
                         break;
-                    // @todo: handle Commerce products
+                    case MetaBundles::PRODUCT_META_BUNDLE:
+                        if (Seomatic::$commerceInstalled) {
+                            $commerce = CommercePlugin::getInstance();
+                            if ($commerce !== null) {
+                                $elements = Product::find()
+                                    ->type($metaBundle->sourceHandle)
+                                    ->siteId($metaBundle->sourceSiteId)
+                                    ->limit($metaBundle->metaSitemapVars->sitemapLimit)
+                                    ->enabledForSite(true)
+                                    ->all();
+                            }
+                        }
+                        break;
+                }
+                // If no elements exist, just throw a 404
+                if ($elements === null) {
+                    throw new NotFoundHttpException(Craft::t('seomatic', 'Page not found.'));
                 }
                 // Output the sitemap entry
                 /** @var  $element Entry */
@@ -223,7 +241,19 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                                                 ->enabledForSite(true)
                                                 ->one();
                                             break;
-                                        // @todo: handle Commerce products
+                                        case MetaBundles::PRODUCT_META_BUNDLE:
+                                            if (Seomatic::$commerceInstalled) {
+                                                $commerce = CommercePlugin::getInstance();
+                                                if ($commerce !== null) {
+                                                    $altElement = Product::find()
+                                                        ->id($element->id)
+                                                        ->siteId($altSiteSettings['siteId'])
+                                                        ->limit(1)
+                                                        ->enabledForSite(true)
+                                                        ->one();
+                                                }
+                                            }
+                                            break;
                                     }
                                     if ($altElement) {
                                         $lines[] = '    <xhtml:link rel="alternate"'

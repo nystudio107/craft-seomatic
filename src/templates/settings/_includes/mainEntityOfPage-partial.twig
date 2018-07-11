@@ -6,13 +6,17 @@
         <label for="siteType">{{ mainEntityTitle|t("seomatic")}}</label>
         <div class="instructions"><p>{{ mainEntityDescription ~ " Choose as general or specific of an type as you wish.  Leave a sub-type blank if you don't want to specify a sub-type." |t("seomatic") |raw}}</p></div>
     </div>
+    {% set mainEntityOfPageRootOptions = seomatic.helper.getSingleTypeMenu('') %}
+    {% if pageContext is defined and pageContext == "field" %}
+        {% set mainEntityOfPageRootOptions = { "": ""} | merge(mainEntityOfPageRootOptions) %}
+    {% endif %}
     <div>
         <div class="inline-item">
             {{ forms.selectField({
                 id: "siteType",
                 class: "inline-item",
                 fieldClass: "inline-item",
-                options: seomatic.helper.getSingleTypeMenu(''),
+                options: mainEntityOfPageRootOptions,
                 name: "siteType",
                 value: mainEntityOfPage.siteType,
                 required: true,

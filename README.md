@@ -42,7 +42,7 @@ SEOmatic will migrate your old Craft 2.x Field settings & data in the following 
  
 * If you add a new SEO Settings Field to a section that had an old SEOmatic Meta field in it, it will migrate any custom data you had entered on a per-Entry basis
 
-**Important:** Keep your old Craft 2.x Seomatic_Meta fields intact; don't delete them or change the Field type to the new SEO Settings field type. Instead, create a new SEO Settings field in the same Section / Category Group. It will automatically look for and migrate data from the old Seomatic_Meta Field.
+**Important:** Keep your old Craft 2.x Seomatic_Meta fields intact; don't delete them or change the Field type to the new SEO Settings field type. Instead, create a new SEO Settings field in the same Section, Category Group, or Commerce Product Type. It will automatically look for and migrate data from the old Seomatic_Meta Field.
 
 SEOmatic for Craft CMS 3 is a complete re-write and re-architecture from scratch of the plugin. This allowed us to take what we learned from SEOmatic 1.x, and rebuild it with a much more robust and extendable architecture.
 
@@ -60,6 +60,8 @@ It implements [JSON-LD](https://developers.google.com/schemas/formats/json-ld?hl
 
 SEOmatic populates your templates with SEO Meta in the same way that Craft populates your templates with `entry` variables, with a similar level of freedom and flexibility in terms of how you utilize them.
 
+SEOmatic works automatically with Craft Commerce 2 as well, providing metadata, JSON-LD structured data, and sitemaps for your Products.
+
 SEOmatic also caches each unique SEO Meta request so that your website performance is minimally impacted by the rich SEO Meta tags provided.
 
 ## SEO Resources
@@ -76,7 +78,7 @@ SEOmatic also caches each unique SEO Meta request so that your website performan
 
 ## Configuring SEOmatic
 
-As soon as you install SEOmatic, it automatically will render meta data on your web pages, and create sitemaps for all of your Sections and Category Groups that have public URLs. You don't need to add any template code for this to happen.
+As soon as you install SEOmatic, it automatically will render meta data on your web pages, and create sitemaps for all of your Sections, Category Groups, and Commerce Product Types that have public URLs. You don't need to add any template code for this to happen.
 
 ![Screenshot](resources/screenshots/seomatic-multi-site.png)
 
@@ -168,9 +170,9 @@ The single bracket syntax is just a shortcut that automatically prefixes any var
 
 ![Screenshot](resources/screenshots/seomatic-content.png)
 
-**Content SEO** is where you can configure each Section and Category Group that has public URLs. You'll see a list of all of your Sections and Category Groups that have public URLs, with status indicators letting you know what has been configured for each.
+**Content SEO** is where you can configure each Section, Category Group and Commerce Product Type that has public URLs. You'll see a list of all of your Sections, Category Groups, and Commerce Product Types that have public URLs, with status indicators letting you know what has been configured for each.
 
-Click on a Section or Category Group name to edit its settings.
+Click on a Section, Category Group, or Commerce Product Type name to edit its settings.
 
 #### General
 
@@ -194,17 +196,17 @@ By default, the Twitter and Facebook settings will mirror what you set in the **
 
 ![Screenshot](resources/screenshots/seomatic-content-sitemap.png)
 
-SEOmatic automatically creates a sitemap index for each of your Site Groups. This sitemap index points to individual sitemaps for each of your Sections and Category Groups.
+SEOmatic automatically creates a sitemap index for each of your Site Groups. This sitemap index points to individual sitemaps for each of your Sections, Category Groups, and Commerce Product Types.
 
-Instead of one massive sitemap that must be updated any time anything changes, only the sitemap for the Section or Category group will be updated when something changes in it.
+Instead of one massive sitemap that must be updated any time anything changes, only the sitemap for the Section, Category Group, or Commerce Product Type will be updated when something changes in it.
 
 SEOmatic can automatically include files such as `.pdf`, `.xls`, `.doc` and other indexable file types in Asset fields or Asset fields in matrix blocks.
 
 In addition, SEOmatic can automatically create [Image sitemaps](https://support.google.com/webmasters/answer/178636?hl=en) and [Video sitemaps](https://developers.google.com/webmasters/videosearch/sitemaps) from images & videos in Asset fields or Asset fields in matrix blocks
 
-Sitemap Indexes are automatically submitted to search engines whenever a new Section/Category Group is added.
+Sitemap Indexes are automatically submitted to search engines whenever a new Section, Category Group, or Commerce Product Type is added.
 
-Section Sitemaps are automatically submitted to search engines whenever a new Element in that Section/Category Group is added.
+Section Sitemaps are automatically submitted to search engines whenever a new Element in that Section, Category Group, or Commerce Product Type is added.
 
 #### Content SEO AdminCP Fields
 
@@ -252,13 +254,33 @@ Is the same as:
 
 ![Screenshot](resources/screenshots/seomatic-site-identity.png)
 
+These Site Identity settings are used to globally define the identity and ownership of the website.
+
+They are used in combination with the SEO Template Meta settings to generate [JSON-LD](https://developers.google.com/schemas/formats/json-ld?hl=en) microdata.
+
+The Site Owner type determines the JSON-LD schema that will be used to identity the website to search engines.
+
+Leave any fields blank that aren't applicable or which you do not want as part of the SEO schema.
+
 #### Creator
 
 ![Screenshot](resources/screenshots/seomatic-site-creator.png)
 
+These Site Creator settings are used to globally define the _creator_ (such as the agency or freelancer) of the website.
+
+They are used in combination with the SEO Template Meta settings to generate [JSON-LD](https://developers.google.com/schemas/formats/json-ld?hl=en) microdata as well as the `humans.txt` file.
+
+The Site Creator type determines the JSON-LD schema that will be used to identity the website to search engines.
+
+Leave any fields blank that aren't applicable or which you do not want as part of the SEO schema.
+
 #### Social Media
 
 ![Screenshot](resources/screenshots/seomatic-site-social.png)
+
+The social media settings connect your website to its other points of pressence on the Internet. They also facilitate attaching your branding to social media posts via Twitter Cards and Facebook OpenGraph.
+
+
 
 ### Tracking Scripts
 
@@ -326,6 +348,65 @@ If you want to include the Facebook Pixel script despite `devMode` being enabled
 
 The Plugin Settings lets you control various SEOmatic settings globally (across all sites/languages).
 
+* **Plugin name** - This is the name that will be used for the plugin everywhere it is referenced in the AdminCP GUI
+* **Automatic Render Enabled** - Controls whether SEOmatic will automatically render metadata on your pages. If you turn this off, you will need to manually render the metadata via `{{ seomatic.tag.render() }}`, `{{ seomatic.link.render() }}`, etc. You can selectively disable rendering via Twig with `{% do seomatic.config.renderEnabled(false) %}
+* **Sitemaps Enabled** - Controls whether SEOmatic will automatically render frontend sitemaps for your website.
+* **Environment** - The server environment, either `live`, `staging`, or `local`. If `devMode` is on, SEOmatic will override this setting to local Development. This setting controls whether certain things render; for instance only in the `live` production environment will Google Analytics and other tracking tags send analytics data. SEOmatic also automatically sets the `robots` tag to `none` for everything but the `live` production environment.
+* **Display Sidebar SEO Preview** - Controls whether to display the Google, Twitter, and Facebook social media previews in the sidebar on entry. category, and product pages.
+* **devMode `<title>` prefix** - If devMode is on, prefix the `<title>` with this string
+* **Separator Character** - The separator character to use for the `<title>` tag
+* **Max SEO Title Length** - The max number of characters in the <title> tag; anything beyond this will be truncated on word boundaries
+* **Max SEO Description Length** - The max number of characters in the `meta description` tag
+
+If you're using a multi-environment config, you can map your environment settings using SEOmatic's `config.php` something like this:
+
+```php
+<?php 
+return [
+    '*' => [
+    // The public-facing name of the plugin
+    'pluginName' => 'SEOmatic',
+
+    // Should SEOmatic render metadata?
+    'renderEnabled' => true,
+
+    // Should SEOmatic render frontend sitemaps?
+    'sitemapsEnabled' => true,
+
+    // The server environment, either `live`, `staging`, or `local`
+    'environment' => 'live',
+
+    // Should SEOmatic display the SEO Preview sidebar?
+    'displayPreviewSidebar' => true,
+
+    // Should SEOmatic display the SEO Analysis sidebar?
+    'displayAnalysisSidebar' => true,
+
+    // If `devMode` is on, prefix the <title> with this string
+    'devModeTitlePrefix' => '&#x1f6a7; ',
+
+    // The separator character to use for the `<title>` tag
+    'separatorChar' => '|',
+
+    // The max number of characters in the `<title>` tag
+    'maxTitleLength' => 70,
+
+    // The max number of characters in the `<meta name="description">` tag
+    'maxDescriptionLength' => 320,
+    ],
+    'local' => [
+        'environment' => 'local',
+    ],
+    'staging' => [
+        'environment' => 'staging',
+    ],
+    'live' => [
+        'environment' => 'live',
+    ],
+];
+```
+This is how you can make your multi-environment nomenclature to SEOmatic's. This works exactly like Craft's [multi-environment config](https://docs.craftcms.com/v3/configuration.html#application-config) files such as `general.php` and `db.php`. See SEOmatic's `config.php` for details.
+
 ### Access Permissions
 
 ![Screenshot](resources/screenshots/seomatic-permissions.png)
@@ -367,6 +448,8 @@ Modern SEO works best if it actually reflects what is on the page, visible to th
 #### Using SEO Settings Fields
 
 However, in some cases you may want more control over page SEO for specific entries. That's where the SEO Settings field comes in. Add it to your Section's Field Layout, and you can override specific SEO settings on a per-entry basis.
+
+Any setting that you leave blank or empty in the SEO Settings field will just default to the Content SEO and/or Global SEO setting.
 
 The Field settings let you control exactly what fields will appear and be visible for you or your client to override:
 
@@ -494,7 +577,7 @@ SEOmatic variables can also reference other SEOmatic variables using single-brac
  {% do seomatic.meta.seoDescription("{seomatic.meta.seoTitle}") %}
  ```
 
-You can also reference `entry` or `category` Craft variables, if they are present in your template:
+You can also reference `entry`, `category`, or `product` Craft variables, if they are present in your template:
 
  ```twig
  {% do seomatic.meta.seoTitle("{entry.title}") %}
@@ -1004,7 +1087,7 @@ The directory `vendor/nystudio107/seomatic/src/seomatic-config` contains a numbe
 
 You can copy this entire directory to your Craft `config/` directory, and customize the files to your heart's content. SEOmatic will first look in the `config/` directory for any given file, and then fall back on its own internal `seomatic-config` files.
 
-Note that these files are only used when initially creating a meta bundle. That is, whenever the plugin is installed, or new Section or Category Groups are created. Once meta bundles have been created, changing the settings in the file will have no effect.
+Note that these files are only used when initially creating a meta bundle. That is, whenever the plugin is installed, or new Section, Category Groups, or Commerce Product Types are created. Once meta bundles have been created, changing the settings in the file will have no effect.
 
 You can bump the `Bundle.php`'s `bundleVersion` setting if you want it to re-read your config settings.
 

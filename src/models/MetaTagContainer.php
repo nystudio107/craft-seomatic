@@ -14,6 +14,8 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 
+use Craft;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -42,31 +44,52 @@ class MetaTagContainer extends MetaContainer
     /**
      * @inheritdoc
      */
-    public function includeMetaData()
+    public function includeMetaData($dependency)
     {
-        if ($this->prepForInclusion()) {
-            /** @var $metaTagModel MetaTag */
-            foreach ($this->data as $metaTagModel) {
-                if ($metaTagModel->include) {
-                    $configs = $metaTagModel->tagAttributesArray();
-                    foreach ($configs as $config) {
-                        if ($metaTagModel->prepForRender($config)) {
-                            Seomatic::$view->registerMetaTag($config);
-                            // If `devMode` is enabled, validate the Meta Tag and output any model errors
-                            if (Seomatic::$devMode) {
-                                $scenario = [];
-                                $scenario['default'] = 'error';
-                                $scenario['warning'] = 'warning';
-                                $metaTagModel->debugMetaItem(
-                                    'Tag attribute: ',
-                                    $scenario
-                                );
+        Craft::beginProfile('MetaTagContainer::includeMetaData', __METHOD__);
+        $uniqueKey = $this->handle.$this->handle.$dependency->tags[2];
+        $tagData = Craft::$app->getCache()->getOrSet(
+            $this::CONTAINER_TYPE.$uniqueKey,
+            function () use ($uniqueKey) {
+                Craft::info(
+                    $this::CONTAINER_TYPE.' cache miss: '.$uniqueKey,
+                    __METHOD__
+                );
+                $tagData = [];
+                if ($this->prepForInclusion()) {
+                    /** @var $metaTagModel MetaTag */
+                    foreach ($this->data as $metaTagModel) {
+                        if ($metaTagModel->include) {
+                            $configs = $metaTagModel->tagAttributesArray();
+                            foreach ($configs as $config) {
+                                if ($metaTagModel->prepForRender($config)) {
+                                    $tagData[] = $config;
+                                    // If `devMode` is enabled, validate the Meta Tag and output any model errors
+                                    if (Seomatic::$devMode) {
+                                        $scenario = [];
+                                        $scenario['default'] = 'error';
+                                        $scenario['warning'] = 'warning';
+                                        $metaTagModel->debugMetaItem(
+                                            'Tag attribute: ',
+                                            $scenario
+                                        );
+                                    }
+                                }
                             }
                         }
                     }
                 }
-            }
+
+                return $tagData;
+            },
+            Seomatic::$cacheDuration,
+            $dependency
+        );
+        // Register the tags
+        foreach ($tagData as $config) {
+            Seomatic::$view->registerMetaTag($config);
         }
+        Craft::endProfile('MetaTagContainer::includeMetaData', __METHOD__);
     }
 
     /**

@@ -41,17 +41,28 @@ class MetaLink extends MetaItem
     // =========================================================================
 
     /**
+     * @param null|string $tagType
      * @param array $config
      *
      * @return MetaLink
      */
-    public static function create(array $config = []): MetaLink
+    public static function create($tagType = null, array $config = []): MetaLink
     {
+        $tagType = $tagType ? Inflector::variablize($tagType) : $tagType;
         foreach ($config as $key => $value) {
             ArrayHelper::rename($config, $key, Inflector::variablize($key));
         }
+        $className = MetaLink::class;
+        if ($tagType) {
+            // Potentially load a sub-type of MetaTag
+            $tagClassName = 'nystudio107\\seomatic\\models\\metalink\\' . ucfirst($tagType) . 'Link';
+            /** @var $model MetaLink */
+            if (class_exists($tagClassName)) {
+                $className = $tagClassName;
+            }
+        }
 
-        return new MetaLink($config);
+        return new $className($config);
     }
 
     // Public Properties

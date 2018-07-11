@@ -14,6 +14,8 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 
+use Craft;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -42,27 +44,48 @@ class MetaLinkContainer extends MetaContainer
     /**
      * @inheritdoc
      */
-    public function includeMetaData()
+    public function includeMetaData($dependency)
     {
-        if ($this->prepForInclusion()) {
-            /** @var MetaLink $metaLinkModel */
-            foreach ($this->data as $metaLinkModel) {
-                if ($metaLinkModel->include) {
-                    $configs = $metaLinkModel->tagAttributesArray();
-                    foreach ($configs as $config) {
-                        if ($metaLinkModel->prepForRender($config)) {
-                            Seomatic::$view->registerLinkTag($config);
-                            // If `devMode` is enabled, validate the Meta Link and output any model errors
-                            if (Seomatic::$devMode) {
-                                $metaLinkModel->debugMetaItem(
-                                    'Link attribute: '
-                                );
+        Craft::beginProfile('MetaLinkContainer::includeMetaData', __METHOD__);
+        $uniqueKey = $this->handle.$dependency->tags[2];
+        $tagData = Craft::$app->getCache()->getOrSet(
+            $this::CONTAINER_TYPE.$uniqueKey,
+            function () use ($uniqueKey) {
+                Craft::info(
+                    $this::CONTAINER_TYPE.' cache miss: '.$uniqueKey,
+                    __METHOD__
+                );
+                $tagData = [];
+                if ($this->prepForInclusion()) {
+                    /** @var MetaLink $metaLinkModel */
+                    foreach ($this->data as $metaLinkModel) {
+                        if ($metaLinkModel->include) {
+                            $configs = $metaLinkModel->tagAttributesArray();
+                            foreach ($configs as $config) {
+                                if ($metaLinkModel->prepForRender($config)) {
+                                    $tagData[] = $config;
+                                    // If `devMode` is enabled, validate the Meta Link and output any model errors
+                                    if (Seomatic::$devMode) {
+                                        $metaLinkModel->debugMetaItem(
+                                            'Link attribute: '
+                                        );
+                                    }
+                                }
                             }
                         }
                     }
                 }
-            }
+
+                return $tagData;
+            },
+            Seomatic::$cacheDuration,
+            $dependency
+        );
+        // Register the tags
+        foreach ($tagData as $config) {
+            Seomatic::$view->registerLinkTag($config);
         }
+        Craft::endProfile('MetaLinkContainer::includeMetaData', __METHOD__);
     }
 
     /**
@@ -74,7 +97,7 @@ class MetaLinkContainer extends MetaContainer
 
         foreach ($this->data as $key => $config) {
             $config['key'] = $key;
-            $this->data[$key] = MetaLink::create($config);
+            $this->data[$key] = MetaLink::create($key, $config);
         }
     }
 }

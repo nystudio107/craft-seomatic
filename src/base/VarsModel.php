@@ -13,6 +13,8 @@ namespace nystudio107\seomatic\base;
 
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
+use Craft;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -58,9 +60,11 @@ abstract class VarsModel extends FluentModel
      */
     public function parseProperties()
     {
+        Craft::beginProfile('VarsModel::parseProperties', __METHOD__);
         // Parse the meta global vars
         $attributes = $this->getAttributes();
         MetaValueHelper::parseArray($attributes);
         $this->setAttributes($attributes);
+        Craft::endProfile('VarsModel::parseProperties', __METHOD__);
     }
 }
