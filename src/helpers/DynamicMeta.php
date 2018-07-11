@@ -476,7 +476,8 @@ class DynamicMeta
             }
             $url = $url ?? '';
             $language = $site->language;
-            $hreflangLanguage = $site->language;
+            $language = str_replace('-', '_', $language);
+            $hreflangLanguage = $language;
             $hreflangLanguage = strtolower($hreflangLanguage);
             $hreflangLanguage = str_replace('_', '-', $hreflangLanguage);
             $localizedUrls[] = [
