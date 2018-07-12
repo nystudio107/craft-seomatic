@@ -89,14 +89,16 @@ class MetaValue
     public static function parseArray(array &$metaArray, bool $resolveAliases = true, bool $parseAsTwig = true)
     {
         foreach ($metaArray as $key => $value) {
+            $shouldParse = $parseAsTwig;
+            $shouldAlias = $resolveAliases;
             if (\in_array($key, self::NO_ALIASES, true)) {
-                $resolveAliases = false;
+                $shouldAlias = false;
             }
             if (\in_array($key, self::NO_PARSING, true)) {
-                $parseAsTwig = false;
+                $shouldParse = false;
             }
             if ($value !== null) {
-                $metaArray[$key] = self::parseString($value, $resolveAliases, $parseAsTwig);
+                $metaArray[$key] = self::parseString($value, $shouldAlias, $shouldParse);
             }
         }
         $metaArray = array_filter($metaArray);
