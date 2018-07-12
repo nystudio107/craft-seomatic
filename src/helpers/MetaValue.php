@@ -39,6 +39,9 @@ class MetaValue
     const NO_PARSING = [
         'siteLinksSearchTarget',
     ];
+    const PARSE_ONCE = [
+        'target',
+    ];
 
     // Static Properties
     // =========================================================================
@@ -60,17 +63,21 @@ class MetaValue
      * @param string $metaValue
      * @param bool   $resolveAliases Whether @ aliases should be resolved in this string
      * @param bool   $parseAsTwig    Whether items should be parsed as a Twig template in this string
+     * @param int    $tries The number of times to parse the string
      *
      * @return string
      */
-    public static function parseString($metaValue, bool $resolveAliases = true, bool $parseAsTwig = true)
-    {
+    public static function parseString(
+        $metaValue,
+        bool $resolveAliases = true,
+        bool $parseAsTwig = true,
+        $tries = self::MAX_PARSE_TRIES
+    ) {
         // If it's a string, and there are no dynamic tags, just return the template
         if (\is_string($metaValue) && !StringHelper::contains($metaValue, '{')) {
             return self::parseMetaString($metaValue, $resolveAliases, $parseAsTwig) ?? $metaValue;
         }
         // Parse it repeatedly until it doesn't change
-        $tries = self::MAX_PARSE_TRIES;
         $value = '';
         while ($metaValue !== $value && $tries) {
             $tries--;
@@ -91,14 +98,18 @@ class MetaValue
         foreach ($metaArray as $key => $value) {
             $shouldParse = $parseAsTwig;
             $shouldAlias = $resolveAliases;
+            $tries = self::MAX_PARSE_TRIES;
             if (\in_array($key, self::NO_ALIASES, true)) {
                 $shouldAlias = false;
             }
             if (\in_array($key, self::NO_PARSING, true)) {
                 $shouldParse = false;
             }
+            if (\in_array($key, self::PARSE_ONCE, true)) {
+                $tries = 1;
+            }
             if ($value !== null) {
-                $metaArray[$key] = self::parseString($value, $shouldAlias, $shouldParse);
+                $metaArray[$key] = self::parseString($value, $shouldAlias, $shouldParse, $tries);
             }
         }
         $metaArray = array_filter($metaArray);
