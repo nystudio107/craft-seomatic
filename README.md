@@ -13,7 +13,7 @@ Related: [SEOmatic for Craft 2.x](https://github.com/nystudio107/seomatic). SEOm
 
 ![Screenshot](resources/img/moz-logo-blue.png)![Screenshot](resources/img/craft-cms-logo.png)
 
-SEOmatic is the SEO tool that the SEO experts at [moz.com](https://moz.com/) and the creators of Craft CMS, Pixel & Tonic, rely on to handle their SEO!
+SEOmatic is the SEO tool that the SEO experts at [Moz.com](https://moz.com/) and the creators of Craft CMS, Pixel & Tonic, rely on to handle their SEO!
 
 ## Requirements
 
