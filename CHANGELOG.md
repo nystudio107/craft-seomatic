@@ -1,5 +1,12 @@
 # SEOmatic Changelog
 
+## 3.1.1 - 2018.07.14
+### Changed
+* Fix parsing logic error in `MetaValue`
+* Fixed an issue where the SiteLinks Search Box wouldn't work because it errantly parsed the setting as Twig
+* Better title for pull field dropdown menus
+* Fix potential preview issues in Content SEO for certain multi-site setups
+
 ## 3.1.0 - 2018.07.11
 ### Added
 * Added full support for Craft Commerce 2

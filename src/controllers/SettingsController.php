@@ -490,9 +490,9 @@ class SettingsController extends Controller
             $siteId
         );
         // Pass in the pull fields
-        $groupName = 'Entry';
+        $groupName = ucfirst($metaBundle->sourceType);
         $this->setContentFieldSourceVariables($sourceBundleType, $sourceHandle, $groupName, $variables);
-        $uri = $this->uriFromSourceBundle($sourceBundleType, $sourceHandle);
+        $uri = $this->uriFromSourceBundle($sourceBundleType, $sourceHandle, $siteId);
         // Preview the meta containers
         Seomatic::$plugin->metaContainers->previewMetaContainers(
             $uri,
@@ -965,7 +965,7 @@ class SettingsController extends Controller
      *
      * @return string
      */
-    protected function uriFromSourceBundle(string $sourceBundleType, string $sourceHandle): string
+    protected function uriFromSourceBundle(string $sourceBundleType, string $sourceHandle, $siteId): string
     {
         $uri = '';
         // Pick an Element to be used for the preview
@@ -975,14 +975,14 @@ class SettingsController extends Controller
                 break;
 
             case MetaBundles::SECTION_META_BUNDLE:
-                $entry = Entry::find()->section($sourceHandle)->one();
+                $entry = Entry::find()->section($sourceHandle)->siteId($siteId)->one();
                 if ($entry) {
                     $uri = $entry->uri;
                 }
                 break;
 
             case MetaBundles::CATEGORYGROUP_META_BUNDLE:
-                $category = Category::find()->group($sourceHandle)->one();
+                $category = Category::find()->group($sourceHandle)->siteId($siteId)->one();
                 if ($category) {
                     $uri = $category->uri;
                 }
@@ -991,7 +991,7 @@ class SettingsController extends Controller
                 if (Seomatic::$commerceInstalled) {
                     $commerce = CommercePlugin::getInstance();
                     if ($commerce !== null) {
-                        $product = Product::find()->type($sourceHandle)->one();
+                        $product = Product::find()->type($sourceHandle)->siteId($siteId)->one();
                         if ($product) {
                             $uri = $product->uri;
                         }
