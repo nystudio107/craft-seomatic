@@ -490,7 +490,7 @@ class SettingsController extends Controller
             $siteId
         );
         // Pass in the pull fields
-        $groupName = 'Entry';
+        $groupName = ucfirst($metaBundle->sourceType);
         $this->setContentFieldSourceVariables($sourceBundleType, $sourceHandle, $groupName, $variables);
         $uri = $this->uriFromSourceBundle($sourceBundleType, $sourceHandle);
         // Preview the meta containers
