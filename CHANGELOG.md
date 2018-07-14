@@ -4,6 +4,7 @@
 ### Changed
 * Fix parsing logic error in `MetaValue`
 * Fixed an issue where the SiteLinks Search Box wouldn't work because it errantly parsed the setting as Twig
+* Better title for pull field dropdown menus
 
 ## 3.1.0 - 2018.07.11
 ### Added
