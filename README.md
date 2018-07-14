@@ -11,6 +11,8 @@ Related: [SEOmatic for Craft 2.x](https://github.com/nystudio107/seomatic). SEOm
 
 **Note**: _The license fee for this plugin is $99.00 via the Craft Plugin Store._
 
+## Used By
+
 ![Screenshot](resources/img/moz-logo-blue.png)![Screenshot](resources/img/craft-cms-logo.png)
 
 SEOmatic is the SEO tool that the SEO experts at [Moz.com](https://moz.com/) and the creators of Craft CMS, Pixel & Tonic, rely on to handle their SEO!
