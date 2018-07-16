@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.1 - 2018.07.16
+### Changed
+* 
+
 ## 3.1.1 - 2018.07.14
 ### Changed
 * Fix parsing logic error in `MetaValue`
