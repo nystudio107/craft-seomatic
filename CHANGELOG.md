@@ -2,7 +2,7 @@
 
 ## 3.1.1 - 2018.07.16
 ### Changed
-* 
+* Fixed an issue with the language being set to `en_US` instead of `en-US` in `getLocalizedUrls()`
 
 ## 3.1.1 - 2018.07.14
 ### Changed
