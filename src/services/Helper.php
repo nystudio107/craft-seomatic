@@ -86,7 +86,7 @@ class Helper extends Component
      * Return a list of localized URLs that are in the current site's group
      * The current URI is used if $uri is null. Similarly, the current site is
      * used if $siteId is null.
-     * The resulting array of arrays has `id`, `language`, `hreflangLanguage`,
+     * The resulting array of arrays has `id`, `language`, `ogLanguage`, `hreflangLanguage`,
      * and `url` as keys.
      *
      * @param string|null $uri
