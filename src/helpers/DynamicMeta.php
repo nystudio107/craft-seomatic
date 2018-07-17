@@ -84,7 +84,7 @@ class DynamicMeta
         $response = Craft::$app->getResponse();
         // X-Robots-Tag header
         $robots = Seomatic::$seomaticVariable->tag->get('robots');
-        if ($robots !== null) {
+        if ($robots !== null && $robots->include) {
             $robotsArray = $robots->renderAttributes();
             $content = $robotsArray['content'] ?? $robots->content;
             if (!empty($content)) {
@@ -103,7 +103,7 @@ class DynamicMeta
         }
         // Link canonical header
         $canonical = Seomatic::$seomaticVariable->link->get('canonical');
-        if ($canonical !== null) {
+        if ($canonical !== null && $canonical->include) {
             $canonicalArray = $canonical->renderAttributes();
             $href = $canonicalArray['href'] ?? $canonical->href;
             if (!empty($href)) {
@@ -119,6 +119,25 @@ class DynamicMeta
                 }
                 $headerValue .= "; rel='canonical'";
                 $response->headers->add('Link', $headerValue);
+            }
+        }
+        // Referrer-Policy header
+        $referrer = Seomatic::$seomaticVariable->tag->get('referrer');
+        if ($referrer !== null && $referrer->include) {
+            $referrerArray = $referrer->renderAttributes();
+            $content = $referrerArray['content'] ?? $referrer->content;
+            if (!empty($content)) {
+                // The content property can be a string or an array
+                if (\is_array($content)) {
+                    $headerValue = '';
+                    foreach ($content as $contentVal) {
+                        $headerValue .= ($contentVal.',');
+                    }
+                    $headerValue = rtrim($headerValue, ',');
+                } else {
+                    $headerValue = $content;
+                }
+                $response->headers->add('Referrer-Policy', $headerValue);
             }
         }
     }
