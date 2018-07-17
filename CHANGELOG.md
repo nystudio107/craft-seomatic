@@ -6,6 +6,7 @@
 * Added the ability to control whether any http response headers are added by SEOmatic
 
 ### Changed
+* Clear SEOmatic caches after saving the plugin settings
 
 ## 3.1.2 - 2018.07.17
 ### Changed
