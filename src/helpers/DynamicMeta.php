@@ -348,7 +348,7 @@ class DynamicMeta
         if (\count($siteLocalizedUrls) > 1 && $ogLocaleAlternate) {
             $ogContentArray = [];
             foreach ($siteLocalizedUrls as $siteLocalizedUrl) {
-                $ogContentArray[] = $siteLocalizedUrl['language'];
+                $ogContentArray[] = $siteLocalizedUrl['ogLanguage'];
             }
             $ogLocaleAlternate->content = $ogContentArray;
         }
@@ -379,7 +379,7 @@ class DynamicMeta
      * Return a list of localized URLs that are in the current site's group
      * The current URI is used if $uri is null. Similarly, the current site is
      * used if $siteId is null.
-     * The resulting array of arrays has `id`, `language`, `hreflangLanguage`,
+     * The resulting array of arrays has `id`, `language`, `ogLanguage`, `hreflangLanguage`,
      * and `url` as keys.
      *
      * @param string|null $uri
@@ -476,13 +476,14 @@ class DynamicMeta
             }
             $url = $url ?? '';
             $language = $site->language;
-            $language = str_replace('-', '_', $language);
+            $ogLanguage = str_replace('-', '_', $language);
             $hreflangLanguage = $language;
             $hreflangLanguage = strtolower($hreflangLanguage);
             $hreflangLanguage = str_replace('_', '-', $hreflangLanguage);
             $localizedUrls[] = [
                 'id' => $site->id,
                 'language' => $language,
+                'ogLanguage' => $ogLanguage,
                 'hreflangLanguage' => $hreflangLanguage,
                 'url' => $url,
             ];
