@@ -882,6 +882,7 @@ class SettingsController extends Controller
             return null;
         }
 
+        Seomatic::$plugin->clearAllCaches();
         Craft::$app->getSession()->setNotice(Craft::t('app', 'Plugin settings saved.'));
 
         return $this->redirectToPostedUrl();
