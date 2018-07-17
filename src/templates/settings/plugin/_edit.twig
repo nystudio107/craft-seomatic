@@ -43,6 +43,16 @@
             errors: settings.getErrors("sitemapsEnabled"),
         }) }}
     
+        {{ forms.lightswitchField({
+            label: "HTTP Headers Enabled"|t("seomatic"),
+            instructions: "Controls whether SEOmatic will automatically add `X-Robots-Tag`, `canonical`, & `Referrer-Policy` to the http response headers."|t("seomatic"),
+            id: "headersEnabled",
+            name: "headersEnabled",
+            on: settings.headersEnabled,
+            warning: configWarning("headersEnabled", "seomatic"),
+            errors: settings.getErrors("headersEnabled"),
+        }) }}
+    
         {{ forms.selectField({
             label: "Environment"|t("seomatic"),
             instructions: "The server environment, either `live`, `staging`, or `local`. If `devMode` is on, SEOmatic will override this setting to `local` Development."|t("seomatic"),
@@ -125,6 +135,16 @@
             value: settings.maxDescriptionLength,
             warning: configWarning("maxDescriptionLength", "seomatic"),
             errors: settings.getErrors("maxDescriptionLength"),
+        }) }}
+    
+        {{ forms.lightswitchField({
+            label: "Generator Enabled"|t("seomatic"),
+            instructions: "Controls whether SEOmatic will include the meta `generator` tag and `X-Powered-By` header."|t("seomatic"),
+            id: "generatorEnabled",
+            name: "generatorEnabled",
+            on: settings.generatorEnabled,
+            warning: configWarning("generatorEnabled", "seomatic"),
+            errors: settings.getErrors("generatorEnabled"),
         }) }}
 
     {% endnamespace %}
