@@ -1,5 +1,11 @@
 # SEOmatic Changelog
 
+## 3.1.3 - 2018.07.19
+### Added
+* Added the `Referrer-Policy` header based on the value of the `referrer` tag
+
+### Changed
+
 ## 3.1.2 - 2018.07.17
 ### Changed
 * Fixed an issue with the language being set to `en_US` instead of `en-US` in `getLocalizedUrls()`
