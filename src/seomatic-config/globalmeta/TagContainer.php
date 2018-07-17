@@ -30,6 +30,9 @@ return [
         ],
         'data'         => [
             'generator' => [
+                'dependencies' => [
+                    Dependency::CONFIG_DEPENDENCY => ['generatorEnabled'],
+                ],
                 'charset'   => '',
                 'content'   => 'SEOmatic',
                 'httpEquiv' => '',
