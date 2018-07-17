@@ -3,6 +3,7 @@
 ## 3.1.3 - 2018.07.19
 ### Added
 * Added the `Referrer-Policy` header based on the value of the `referrer` tag
+* Added the ability to control whether any http response headers are added by SEOmatic
 
 ### Changed
 
