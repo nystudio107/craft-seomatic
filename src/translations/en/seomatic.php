@@ -316,5 +316,13 @@ return [
     'Twitter Image Description Source' => 'Twitter Image Description Source',
     'Google Site Verification' => 'Google Site Verification',
     'Robots.txt Template' => 'Robots.txt Template',
-    'Player Card' => 'Player Card'
+    'Player Card' => 'Player Card',
+    'script did not render' => 'script did not render',
+    'Controls whether to display the Google, Twitter, and Facebook social media previews in the sidebar on entry, category, and product pages.' => 'Controls whether to display the Google, Twitter, and Facebook social media previews in the sidebar on entry, category, and product pages.',
+    'Controls whether SEOmatic will include the meta `generator` tag and `X-Powered-By` header.' => 'Controls whether SEOmatic will include the meta `generator` tag and `X-Powered-By` header.',
+    'Controls whether SEOmatic will automatically add `X-Robots-Tag`, `canonical`, & `Referrer-Policy` to the http response headers.' => 'Controls whether SEOmatic will automatically add `X-Robots-Tag`, `canonical`, & `Referrer-Policy` to the http response headers.',
+    ' script did not render' => ' script did not render',
+    'HTTP Headers Enabled' => 'HTTP Headers Enabled',
+    'Generator Enabled' => 'Generator Enabled',
+    '`http` Headers Enabled' => '`http` Headers Enabled'
 ];
