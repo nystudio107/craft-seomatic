@@ -62,7 +62,7 @@ class ImageTransform
      *
      * @return string URL to the transformed image
      */
-    public static function socialTransform($asset, string $transformName, $siteId = null): string
+    public static function socialTransform($asset, string $transformName = '', $siteId = null): string
     {
         $url = '';
         $transform = self::createSocialTransform($transformName);
@@ -86,16 +86,12 @@ class ImageTransform
      *
      * @return string width of the transformed image
      */
-    public static function socialTransformWidth($asset, string $transformName, $siteId = null): string
+    public static function socialTransformWidth($asset, string $transformName = '', $siteId = null): string
     {
         $width = '';
         $transform = self::createSocialTransform($transformName);
         $asset = self::assetFromAssetOrId($asset, $siteId);
-        if (\is_int($asset)) {
-            // Get the asset
-            $asset = Craft::$app->getAssets()->getAssetById($asset, $siteId);
-        }
-        if ($transform && $asset instanceof Asset) {
+        if (($asset !== null) && ($asset instanceof Asset)) {
             $width = (string)$asset->getWidth($transform);
             if ($width === null) {
                 $width = '';
@@ -112,16 +108,12 @@ class ImageTransform
      *
      * @return string width of the transformed image
      */
-    public static function socialTransformHeight($asset, string $transformName, $siteId = null): string
+    public static function socialTransformHeight($asset, string $transformName = '', $siteId = null): string
     {
         $height = '';
         $transform = self::createSocialTransform($transformName);
         $asset = self::assetFromAssetOrId($asset, $siteId);
-        if (\is_int($asset)) {
-            // Get the asset
-            $asset = Craft::$app->getAssets()->getAssetById($asset, $siteId);
-        }
-        if ($transform && $asset instanceof Asset) {
+        if (($asset !== null) && ($asset instanceof Asset)) {
             $height = (string)$asset->getHeight($transform);
             if ($height === null) {
                 $height = '';
@@ -168,7 +160,7 @@ class ImageTransform
      *
      * @return Asset|null
      */
-    protected static function assetFromAssetOrId($asset, $siteId)
+    protected static function assetFromAssetOrId($asset, $siteId = null)
     {
         return \is_int($asset) ? Craft::$app->getAssets()->getAssetById($asset, $siteId) : $asset;
     }
@@ -180,7 +172,7 @@ class ImageTransform
      *
      * @return AssetTransform|null
      */
-    protected static function createSocialTransform(string $transformName)
+    protected static function createSocialTransform(string $transformName = '')
     {
         $transform = null;
         if (!empty($transformName)) {
