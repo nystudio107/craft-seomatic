@@ -87,6 +87,64 @@ class ImageTransform
     }
 
     /**
+     * @param int|Asset $asset         the Asset or Asset ID
+     * @param string    $transformName the name of the transform to apply
+     * @param int|null  $siteId
+     *
+     * @return string width of the transformed image
+     */
+    public static function socialTransformWidth($asset, string $transformName, int $siteId = null): string
+    {
+        $width = '';
+        $config = array_merge(
+            self::$transforms['base'],
+            self::$transforms[$transformName] ?? self::$transforms['base']
+        );
+        $transform = new AssetTransform($config);
+        if (\is_int($asset)) {
+            // Get the asset
+            $asset = Craft::$app->getAssets()->getAssetById($asset, $siteId);
+        }
+        if ($transform && $asset instanceof Asset) {
+            $width = (string)$asset->getWidth($transform);
+            if ($width === null) {
+                $width = '';
+            }
+        }
+
+        return $width;
+    }
+
+    /**
+     * @param int|Asset $asset         the Asset or Asset ID
+     * @param string    $transformName the name of the transform to apply
+     * @param int|null  $siteId
+     *
+     * @return string width of the transformed image
+     */
+    public static function socialTransformHeight($asset, string $transformName, int $siteId = null): string
+    {
+        $height = '';
+        $config = array_merge(
+            self::$transforms['base'],
+            self::$transforms[$transformName] ?? self::$transforms['base']
+        );
+        $transform = new AssetTransform($config);
+        if (\is_int($asset)) {
+            // Get the asset
+            $asset = Craft::$app->getAssets()->getAssetById($asset, $siteId);
+        }
+        if ($transform && $asset instanceof Asset) {
+            $height = (string)$asset->getHeight($transform);
+            if ($height === null) {
+                $height = '';
+            }
+        }
+
+        return $height;
+    }
+
+    /**
      * Return an array of Asset elements from an array of element IDs
      *
      * @param array|string $assetIds
