@@ -7,9 +7,9 @@
 * Added the Facebook OpenGraph tags `og:image:width` & `og:image:height`
 * Added the Twitter card tags `twitter:image:width` & `twitter:image:height`
 
-
 ### Changed
 * Clear SEOmatic caches after saving the plugin settings
+* Fixed an issue where boolean settings in meta containers that were set to false would not override as expected
 
 ## 3.1.2 - 2018.07.17
 ### Changed
