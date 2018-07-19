@@ -107,6 +107,11 @@ class MetaSiteVars extends VarsModel
      */
     public $siteLinksQueryInput = '';
 
+    /**
+     * @var array Array of additional sitemap URLs
+     */
+    public $additionalSitemapUrls = [];
+
     // Public Methods
     // =========================================================================
 
@@ -155,6 +160,7 @@ class MetaSiteVars extends VarsModel
             [
                 [
                     'sameAsLinks',
+                    'additionalSitemapUrls',
                 ],
                 ArrayValidator::class,
             ],
