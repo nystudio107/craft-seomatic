@@ -79,6 +79,16 @@ class MetaGlobalVars extends VarsModel
     /**
      * @var string
      */
+    public $seoImageWidth;
+
+    /**
+     * @var string
+     */
+    public $seoImageHeight;
+
+    /**
+     * @var string
+     */
     public $seoImageDescription;
 
     /**
@@ -119,6 +129,16 @@ class MetaGlobalVars extends VarsModel
     /**
      * @var string
      */
+    public $ogImageWidth;
+
+    /**
+     * @var string
+     */
+    public $ogImageHeight;
+
+    /**
+     * @var string
+     */
     public $ogImageDescription;
 
     /**
@@ -154,6 +174,16 @@ class MetaGlobalVars extends VarsModel
     /**
      * @var string
      */
+    public $twitterImageWidth;
+
+    /**
+     * @var string
+     */
+    public $twitterImageHeight;
+
+    /**
+     * @var string
+     */
     public $twitterImageDescription;
 
     // Public Methods
@@ -184,6 +214,8 @@ class MetaGlobalVars extends VarsModel
                     'seoDescription',
                     'seoKeywords',
                     'seoImage',
+                    'seoImageWidth',
+                    'seoImageHeight',
                     'seoImageDescription',
                     'robots',
                     'ogType',
@@ -191,6 +223,8 @@ class MetaGlobalVars extends VarsModel
                     'ogSiteNamePosition',
                     'ogDescription',
                     'ogImage',
+                    'ogImageWidth',
+                    'ogImageHeight',
                     'ogImageDescription',
                     'twitterCard',
                     'twitterCreator',
@@ -198,6 +232,8 @@ class MetaGlobalVars extends VarsModel
                     'twitterSiteNamePosition',
                     'twitterDescription',
                     'twitterImage',
+                    'twitterImageHeight',
+                    'twitterImageWidth',
                     'twitterImageDescription',
                     'canonicalUrl',
                 ],

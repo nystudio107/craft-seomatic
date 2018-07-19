@@ -19,7 +19,7 @@ use nystudio107\seomatic\services\MetaBundles;
  */
 
 return [
-    'bundleVersion'              => '1.0.22',
+    'bundleVersion'              => '1.0.23',
     'sourceBundleType'           => MetaBundles::CATEGORYGROUP_META_BUNDLE,
     'sourceId'                   => null,
     'sourceName'                 => null,
