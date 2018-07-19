@@ -4,6 +4,9 @@
 ### Added
 * Added the `Referrer-Policy` header based on the value of the `referrer` tag
 * Added the ability to control whether any http response headers are added by SEOmatic
+* Added the Facebook OpenGraph tags `og:image:width` & `og:image:height`
+* Added the Twitter card tags `twitter:image:width` & `twitter:image:height`
+
 
 ### Changed
 * Clear SEOmatic caches after saving the plugin settings
