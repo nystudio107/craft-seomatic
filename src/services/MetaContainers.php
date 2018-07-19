@@ -525,16 +525,18 @@ class MetaContainers extends Component
         // So that they can fall back on the parent container
         $parsedAttributes = $attributes;
         MetaValueHelper::parseArray($parsedAttributes);
-        $parsedAttributes = ArrayHelper::arrayFilterRecursive(
+        $parsedAttributes = array_filter(
             $parsedAttributes,
-            [ArrayHelper::class, 'unsetEmptyChildren']
+            [ArrayHelper::class, 'unsetEmptyChildren'],
+            ARRAY_FILTER_USE_BOTH
         );
         //Craft::dd($parsedAttributes);
         $attributes = array_intersect_key($attributes, $parsedAttributes);
         // Add the attributes in
-        $attributes = ArrayHelper::arrayFilterRecursive(
+        $attributes = array_filter(
             $attributes,
-            [ArrayHelper::class, 'unsetEmptyChildren']
+            [ArrayHelper::class, 'unsetEmptyChildren'],
+            ARRAY_FILTER_USE_BOTH
         );
         $this->metaGlobalVars->setAttributes($attributes, false);
         // Meta site vars
@@ -547,9 +549,10 @@ class MetaContainers extends Component
         */
         // Meta sitemap vars
         $attributes = $metaBundle->metaSitemapVars->getAttributes();
-        $attributes = ArrayHelper::arrayFilterRecursive(
+        $attributes = array_filter(
             $attributes,
-            [ArrayHelper::class, 'unsetEmptyChildren']
+            [ArrayHelper::class, 'unsetEmptyChildren'],
+            ARRAY_FILTER_USE_BOTH
         );
         $this->metaSitemapVars->setAttributes($attributes, false);
         // Language
