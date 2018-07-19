@@ -82,5 +82,7 @@ return [
         ],
         'siteLinksSearchTarget' => '',
         'siteLinksQueryInput' => '',
+        'additionalSitemapUrls' => [
+        ],
     ],
 ];
