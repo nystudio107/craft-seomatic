@@ -130,7 +130,7 @@ return [
     'View Sitemap Index' => 'View Sitemap Index',
     'Edit Content SEO' => 'Edit Content SEO',
     'This property specifies a search URL pattern for sending queries to your site\'s search engine.  It must include a string enclosed in curly braces that is a placeholder for the user\'s search query (e.g., `{search_term_string}`). The string inside the curly braces must also appear in the name attribute of the query-input property.' => 'This property specifies a search URL pattern for sending queries to your site\'s search engine.  It must include a string enclosed in curly braces that is a placeholder for the user\'s search query (e.g., `{search_term_string}`). The string inside the curly braces must also appear in the name attribute of the query-input property.',
-    'Miscallaneous site-side SEO settings.' => 'Miscallaneous site-side SEO settings.',
+    'Miscallaneous site-side SEO settings.' => 'Miscallaneous site-wide SEO settings.',
     'Twitter username for the content creator / author, without the preceding @.' => 'Twitter username for the content creator / author, without the preceding @.',
     'Video' => 'Video',
     'Adding OpenGraph tags to your website influences the performance of your links on social media by allowing you to control what appears when a user posts a link to your content on Facebook.' => 'Adding OpenGraph tags to your website influences the performance of your links on social media by allowing you to control what appears when a user posts a link to your content on Facebook.',
