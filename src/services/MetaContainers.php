@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\services;
 
+use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\base\MetaItem;
@@ -524,11 +525,17 @@ class MetaContainers extends Component
         // So that they can fall back on the parent container
         $parsedAttributes = $attributes;
         MetaValueHelper::parseArray($parsedAttributes);
-        $parsedAttributes = array_filter($parsedAttributes);
+        $parsedAttributes = ArrayHelper::arrayFilterRecursive(
+            $parsedAttributes,
+            [ArrayHelper::class, 'unsetEmptyChildren']
+        );
         //Craft::dd($parsedAttributes);
         $attributes = array_intersect_key($attributes, $parsedAttributes);
         // Add the attributes in
-        $attributes = array_filter($attributes);
+        $attributes = ArrayHelper::arrayFilterRecursive(
+            $attributes,
+            [ArrayHelper::class, 'unsetEmptyChildren']
+        );
         $this->metaGlobalVars->setAttributes($attributes, false);
         // Meta site vars
         /*
@@ -540,7 +547,10 @@ class MetaContainers extends Component
         */
         // Meta sitemap vars
         $attributes = $metaBundle->metaSitemapVars->getAttributes();
-        $attributes = array_filter($attributes);
+        $attributes = ArrayHelper::arrayFilterRecursive(
+            $attributes,
+            [ArrayHelper::class, 'unsetEmptyChildren']
+        );
         $this->metaSitemapVars->setAttributes($attributes, false);
         // Language
         $this->metaGlobalVars->language = Seomatic::$language;
