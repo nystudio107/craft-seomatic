@@ -56,13 +56,16 @@ class ImageTransform
     // =========================================================================
 
     /**
+     * Transform the $asset for social media sites in $transformName and
+     * optional $siteId
+     *
      * @param int|Asset $asset         the Asset or Asset ID
      * @param string    $transformName the name of the transform to apply
      * @param int|null  $siteId
      *
      * @return string URL to the transformed image
      */
-    public static function socialTransform($asset, string $transformName, $siteId = null): string
+    public static function socialTransform($asset, string $transformName = '', $siteId = null): string
     {
         $url = '';
         $transform = self::createSocialTransform($transformName);
@@ -86,7 +89,7 @@ class ImageTransform
      *
      * @return string width of the transformed image
      */
-    public static function socialTransformWidth($asset, string $transformName, $siteId = null): string
+    public static function socialTransformWidth($asset, string $transformName = '', $siteId = null): string
     {
         $width = '';
         $transform = self::createSocialTransform($transformName);
@@ -112,7 +115,7 @@ class ImageTransform
      *
      * @return string width of the transformed image
      */
-    public static function socialTransformHeight($asset, string $transformName, $siteId = null): string
+    public static function socialTransformHeight($asset, string $transformName = '', $siteId = null): string
     {
         $height = '';
         $transform = self::createSocialTransform($transformName);
@@ -168,7 +171,7 @@ class ImageTransform
      *
      * @return Asset|null
      */
-    protected static function assetFromAssetOrId($asset, $siteId)
+    protected static function assetFromAssetOrId($asset, $siteId = null)
     {
         return \is_int($asset) ? Craft::$app->getAssets()->getAssetById($asset, $siteId) : $asset;
     }
@@ -180,7 +183,7 @@ class ImageTransform
      *
      * @return AssetTransform|null
      */
-    protected static function createSocialTransform(string $transformName)
+    protected static function createSocialTransform(string $transformName = '')
     {
         $transform = null;
         if (!empty($transformName)) {

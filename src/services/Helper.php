@@ -248,9 +248,39 @@ class Helper extends Component
      *
      * @return string URL to the transformed image
      */
-    public function socialTransform($asset, string $transformName, int $siteId = null): string
+    public function socialTransform($asset, string $transformName = '', $siteId = null): string
     {
         return ImageTransformHelper::socialTransform($asset, $transformName, $siteId);
+    }
+
+    /**
+     * Get the width of the transformed social image for $transformName and
+     * optional $siteId
+     *
+     * @param int|Asset $asset         the Asset or Asset ID
+     * @param string    $transformName the name of the transform to apply
+     * @param int|null  $siteId
+     *
+     * @return string URL to the transformed image
+     */
+    public function socialTransformWidth($asset, string $transformName = '', $siteId = null): string
+    {
+        return ImageTransformHelper::socialTransformWidth($asset, $transformName, $siteId);
+    }
+
+    /**
+     * Get the height of the transformed social image for $transformName and
+     * optional $siteId
+     *
+     * @param int|Asset $asset         the Asset or Asset ID
+     * @param string    $transformName the name of the transform to apply
+     * @param int|null  $siteId
+     *
+     * @return string URL to the transformed image
+     */
+    public function socialTransformHeight($asset, string $transformName = '', $siteId = null): string
+    {
+        return ImageTransformHelper::socialTransformHeight($asset, $transformName, $siteId);
     }
 
     /**
