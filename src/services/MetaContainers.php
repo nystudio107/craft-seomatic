@@ -527,16 +527,14 @@ class MetaContainers extends Component
         MetaValueHelper::parseArray($parsedAttributes);
         $parsedAttributes = array_filter(
             $parsedAttributes,
-            [ArrayHelper::class, 'unsetEmptyChildren'],
-            ARRAY_FILTER_USE_BOTH
+            [ArrayHelper::class, 'preserveBools']
         );
         //Craft::dd($parsedAttributes);
         $attributes = array_intersect_key($attributes, $parsedAttributes);
         // Add the attributes in
         $attributes = array_filter(
             $attributes,
-            [ArrayHelper::class, 'unsetEmptyChildren'],
-            ARRAY_FILTER_USE_BOTH
+            [ArrayHelper::class, 'preserveBools']
         );
         $this->metaGlobalVars->setAttributes($attributes, false);
         // Meta site vars
@@ -551,8 +549,7 @@ class MetaContainers extends Component
         $attributes = $metaBundle->metaSitemapVars->getAttributes();
         $attributes = array_filter(
             $attributes,
-            [ArrayHelper::class, 'unsetEmptyChildren'],
-            ARRAY_FILTER_USE_BOTH
+            [ArrayHelper::class, 'preserveBools']
         );
         $this->metaSitemapVars->setAttributes($attributes, false);
         // Language

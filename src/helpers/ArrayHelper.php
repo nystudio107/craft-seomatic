@@ -43,6 +43,19 @@ class ArrayHelper extends \craft\helpers\ArrayHelper
     }
 
     /**
+     * Used as a callback for array_filter to preserve any boolean values
+     * that are in the array being filtered
+     *
+     * @param $value
+     *
+     * @return bool
+     */
+    public static function preserveBools($value): bool
+    {
+        return \is_bool($value) ? true : !empty($value);
+    }
+
+    /**
      * @param $value
      * @param $key
      *
