@@ -94,11 +94,7 @@ class ImageTransform
         $width = '';
         $transform = self::createSocialTransform($transformName);
         $asset = self::assetFromAssetOrId($asset, $siteId);
-        if (\is_int($asset)) {
-            // Get the asset
-            $asset = Craft::$app->getAssets()->getAssetById($asset, $siteId);
-        }
-        if ($transform && $asset instanceof Asset) {
+        if (($asset !== null) && ($asset instanceof Asset)) {
             $width = (string)$asset->getWidth($transform);
             if ($width === null) {
                 $width = '';
@@ -120,11 +116,7 @@ class ImageTransform
         $height = '';
         $transform = self::createSocialTransform($transformName);
         $asset = self::assetFromAssetOrId($asset, $siteId);
-        if (\is_int($asset)) {
-            // Get the asset
-            $asset = Craft::$app->getAssets()->getAssetById($asset, $siteId);
-        }
-        if ($transform && $asset instanceof Asset) {
+        if (($asset !== null) && ($asset instanceof Asset)) {
             $height = (string)$asset->getHeight($transform);
             if ($height === null) {
                 $height = '';
