@@ -17,6 +17,7 @@ use nystudio107\seomatic\base\SitemapInterface;
 use nystudio107\seomatic\models\FrontendTemplateContainer;
 use nystudio107\seomatic\models\SitemapIndexTemplate;
 use nystudio107\seomatic\models\SitemapTemplate;
+use nystudio107\seomatic\models\SitemapCustomTemplate;
 
 use Craft;
 use craft\base\Component;
@@ -43,6 +44,8 @@ class Sitemaps extends Component implements SitemapInterface
     const SEOMATIC_SITEMAPINDEX_CONTAINER = Seomatic::SEOMATIC_HANDLE.SitemapIndexTemplate::TEMPLATE_TYPE;
 
     const SEOMATIC_SITEMAP_CONTAINER = Seomatic::SEOMATIC_HANDLE.SitemapTemplate::TEMPLATE_TYPE;
+
+    const SEOMATIC_SITEMAPCUSTOM_CONTAINER = Seomatic::SEOMATIC_HANDLE.SitemapCustomTemplate::TEMPLATE_TYPE;
 
     const SEARCH_ENGINE_SUBMISSION_URLS = [
         'google' => 'http://www.google.com/webmasters/sitemaps/ping?sitemap=',
@@ -78,10 +81,12 @@ class Sitemaps extends Component implements SitemapInterface
             // The Sitemap Index
             $sitemapIndexTemplate = SitemapIndexTemplate::create();
             $this->sitemapTemplateContainer->addData($sitemapIndexTemplate, self::SEOMATIC_SITEMAPINDEX_CONTAINER);
+            // A custom sitemap
+            $sitemapCustomTemplate = SitemapCustomTemplate::create();
+            $this->sitemapTemplateContainer->addData($sitemapCustomTemplate, self::SEOMATIC_SITEMAPCUSTOM_CONTAINER);
             // A generic sitemap
             $sitemapTemplate = SitemapTemplate::create();
             $this->sitemapTemplateContainer->addData($sitemapTemplate, self::SEOMATIC_SITEMAP_CONTAINER);
-
             // Handler: UrlManager::EVENT_REGISTER_SITE_URL_RULES
             Event::on(
                 UrlManager::class,
@@ -241,6 +246,40 @@ class Sitemaps extends Component implements SitemapInterface
                 $url = UrlHelper::siteUrl(
                     '/sitemaps/'
                     .$site->groupId
+                    .'/sitemap.xml'
+                );
+            } catch (Exception $e) {
+                Craft::error($e->getMessage(), __METHOD__);
+            }
+        }
+
+        return $url;
+    }
+
+    /**
+     * @param int|null $siteId
+     *
+     * @return string
+     */
+    public function sitemapCustomUrlForSiteId(int $siteId = null)
+    {
+        $url = '';
+        $sites = Craft::$app->getSites();
+        if ($siteId === null) {
+            $siteId = $sites->currentSite->id ?? 1;
+        }
+        $site = $sites->getSiteById($siteId);
+        if ($site) {
+            try {
+                $url = UrlHelper::siteUrl(
+                    '/sitemaps/'
+                    .$site->groupId
+                    .'/'
+                    .SitemapCustomTemplate::CUSTOM_SCOPE
+                    .'/'
+                    .SitemapCustomTemplate::CUSTOM_HANDLE
+                    .'/'
+                    .$siteId
                     .'/sitemap.xml'
                 );
             } catch (Exception $e) {
