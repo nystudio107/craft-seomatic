@@ -684,6 +684,7 @@ class SettingsController extends Controller
                 }
                 if (!empty($siteSettings['additionalSitemapUrls'])) {
                     $siteSettings['additionalSitemapUrlsDateUpdated'] = new \DateTime;
+                    Seomatic::$plugin->sitemaps->submitCustomSitemap($siteId);
                 }
                 $metaBundle->metaSiteVars->setAttributes($siteSettings);
             }

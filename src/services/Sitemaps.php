@@ -227,6 +227,40 @@ class Sitemaps extends Component implements SitemapInterface
     }
 
     /**
+     * Submit the bundle sitemap to the search engine services
+     *
+     * @param int $siteId
+     */
+    public function submitCustomSitemap(int $siteId)
+    {
+        if (Seomatic::$settings->sitemapsEnabled && Seomatic::$settings->environment === 'live') {
+            // Submit the sitemap to each search engine
+            $searchEngineUrls = $this::SEARCH_ENGINE_SUBMISSION_URLS;
+            foreach ($searchEngineUrls as &$url) {
+                $sitemapUrl = $this->sitemapCustomUrlForSiteId($siteId);
+                if (!empty($sitemapUrl)) {
+                    $submissionUrl = $url.$sitemapUrl;
+                    // create new guzzle client
+                    $guzzleClient = Craft::createGuzzleClient(['timeout' => 120, 'connect_timeout' => 120]);
+                    // Submit the sitemap index to each search engine
+                    try {
+                        $guzzleClient->post($submissionUrl);
+                        Craft::info(
+                            'Sitemap Custom submitted to: '.$submissionUrl,
+                            __METHOD__
+                        );
+                    } catch (\Exception $e) {
+                        Craft::error(
+                            'Error submitting sitemap index to: '.$submissionUrl.' - '.$e->getMessage(),
+                            __METHOD__
+                        );
+                    }
+                }
+            }
+        }
+    }
+
+    /**
      * Get the URL to the $siteId's sitemap index
      *
      * @param int|null $siteId
