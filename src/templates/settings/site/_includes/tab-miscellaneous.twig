@@ -49,17 +49,17 @@
         name: 'additionalSitemapUrls',
         required: false,
         defaultValues: {
-            sitemapUrl: "",
-            sitemapChangeFreq: "weekly",
-            sitemapPriority: "0.5",
+            loc: "",
+            changefreq: "weekly",
+            priority: "0.5",
         },
         cols: {
-            sitemapUrl: {
+            loc: {
                 heading: "URL"|t("seomatic"),
                 type: "singleline",
                 width: "70%",
             },
-            sitemapChangeFreq: {
+            changefreq: {
                 heading: "Change Frequency"|t("seomatic"),
                 type: "select",
                 width: "20%",
@@ -73,7 +73,7 @@
                     never : "Never"|t("seomatic"),
                 },
             },
-            sitemapPriority: {
+            priority: {
                 heading: "Priority"|t("seomatic"),
                 type: "select",
                 width: "10%",
