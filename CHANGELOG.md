@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.1.3 - 2018.07.19
+## 3.1.3 - 2018.07.20
 ### Added
 * Added **Additional Sitemap URLs** to Site Settings -> Miscellaneous for custom sitemap URLs 
 * Added `EVENT_REGISTER_SITEMAP_URLS` event so plugins can register custom sitemap URLs 
