@@ -142,6 +142,26 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
                     $lines[] = '  </sitemap>';
                 }
             }
+            // Custom sitemap entries
+            foreach ($groupSiteIds as $groupSiteId) {
+                $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($groupSiteId, false);
+                if ($metaBundle !== null && !empty($metaBundle->metaSiteVars->additionalSitemapUrls)) {
+                    $sitemapUrl = Seomatic::$plugin->sitemaps->sitemapCustomUrlForSiteId(
+                        $metaBundle->sourceSiteId
+                    );
+                    $lines[] = '  <sitemap>';
+                    $lines[] = '    <loc>';
+                    $lines[] = '      '.Html::encode($sitemapUrl);
+                    $lines[] = '    </loc>';
+                    $dateUpdated = $metaBundle->metaSiteVars->additionalSitemapUrlsDateUpdated;
+                    if ($dateUpdated !== null) {
+                        $lines[] = '    <lastmod>';
+                        $lines[] = '      '.$dateUpdated->format(\DateTime::W3C);
+                        $lines[] = '    </lastmod>';
+                    }
+                    $lines[] = '  </sitemap>';
+                }
+            }
             // Sitemap index closing tag
             $lines[] = '</sitemapindex>';
 

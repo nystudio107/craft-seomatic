@@ -16,6 +16,7 @@ use nystudio107\seomatic\base\VarsModel;
 use Craft;
 use craft\helpers\Json as JsonHelper;
 use craft\validators\ArrayValidator;
+use craft\validators\DateTimeValidator;
 
 use yii\web\ServerErrorHttpException;
 
@@ -112,6 +113,11 @@ class MetaSiteVars extends VarsModel
      */
     public $additionalSitemapUrls = [];
 
+    /**
+     * @var \DateTime
+     */
+    public $additionalSitemapUrlsDateUpdated;
+
     // Public Methods
     // =========================================================================
 
@@ -159,12 +165,32 @@ class MetaSiteVars extends VarsModel
             ],
             [
                 [
+                    'additionalSitemapUrlsDateUpdated'
+                ],
+                DateTimeValidator::class
+            ],
+            [
+                [
                     'sameAsLinks',
                     'additionalSitemapUrls',
                 ],
                 ArrayValidator::class,
             ],
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function datetimeAttributes(): array
+    {
+        $attributes = parent::datetimeAttributes();
+
+        if (property_exists($this, 'additionalSitemapUrlsDateUpdated')) {
+            $attributes[] = 'additionalSitemapUrlsDateUpdated';
+        }
+
+        return $attributes;
     }
 
     /**

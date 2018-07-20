@@ -38,7 +38,9 @@ class SitemapCustomTemplate extends FrontendTemplate implements SitemapInterface
 
     const SITEMAP_CACHE_TAG = 'seomatic_sitemap_';
 
-    const TYPE_HANDLE = 'custom';
+    const CUSTOM_HANDLE = 'custom';
+
+    const CUSTOM_SCOPE = 'global';
 
     // Static Methods
     // =========================================================================
@@ -51,10 +53,10 @@ class SitemapCustomTemplate extends FrontendTemplate implements SitemapInterface
     public static function create(array $config = [])
     {
         $defaults = [
-            'path'       => 'sitemaps/<groupId:\d+>/global/custom/<siteId:\d+>/<file:[-\w\.*]+>',
-            'template'   => '',
+            'path' => 'sitemaps/<groupId:\d+>/'.self::CUSTOM_SCOPE.'/'.self::CUSTOM_HANDLE.'/<siteId:\d+>/<file:[-\w\.*]+>',
+            'template' => '',
             'controller' => 'sitemap',
-            'action'     => 'sitemap-custom',
+            'action' => 'sitemap-custom',
         ];
         $config = array_merge($config, $defaults);
 
@@ -94,7 +96,7 @@ class SitemapCustomTemplate extends FrontendTemplate implements SitemapInterface
     {
         $cache = Craft::$app->getCache();
         $groupId = $params['groupId'];
-        $handle = self::TYPE_HANDLE;
+        $handle = self::CUSTOM_HANDLE;
         $siteId = $params['siteId'];
         $dependency = new TagDependency([
             'tags' => [
@@ -103,7 +105,7 @@ class SitemapCustomTemplate extends FrontendTemplate implements SitemapInterface
             ],
         ]);
 
-        return $cache->getOrSet($this::CACHE_KEY.$groupId.$handle.$siteId, function () use (
+        return $cache->getOrSet($this::CACHE_KEY.$groupId.self::CUSTOM_SCOPE.$handle.$siteId, function () use (
             $handle,
             $siteId
         ) {
@@ -124,30 +126,34 @@ class SitemapCustomTemplate extends FrontendTemplate implements SitemapInterface
                 $urlsetLine = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"';
                 $urlsetLine .= '>';
                 $lines[] = $urlsetLine;
+                // If it's null, just throw a 404
+                if ($metaBundle->metaSiteVars->additionalSitemapUrls === null) {
+                    throw new NotFoundHttpException(Craft::t('seomatic', 'Page not found.'));
+                }
+                $dateUpdated = $metaBundle->metaSiteVars->additionalSitemapUrlsDateUpdated ?? new \DateTime;
                 // Output the sitemap entry
-                foreach ($elements as $element) {
-                    $path = ($element->uri === '__home__') ? '' : $element->uri;
-                    if ($path !== null) {
-                        $url = UrlHelper::siteUrl($path, null, null, $metaBundle->sourceSiteId);
-                        $dateUpdated = $element->dateUpdated ?? $element->dateCreated ?? new \DateTime;
-                        $lines[] = '  <url>';
-                        // Standard sitemap key/values
-                        $lines[] = '    <loc>';
-                        $lines[] = '      '.Html::encode($url);
-                        $lines[] = '    </loc>';
-                        $lines[] = '    <lastmod>';
-                        $lines[] = '      '.$dateUpdated->format(\DateTime::W3C);
-                        $lines[] = '    </lastmod>';
-                        $lines[] = '    <changefreq>';
-                        $lines[] = '      '.$metaBundle->metaSitemapVars->sitemapChangeFreq;
-                        $lines[] = '    </changefreq>';
-                        $lines[] = '    <priority>';
-                        $lines[] = '      '.$metaBundle->metaSitemapVars->sitemapPriority;
-                        $lines[] = '    </priority>';
-
-                        $lines[] = '  </url>';
-                    }
-
+                foreach ($metaBundle->metaSiteVars->additionalSitemapUrls as $additionalSitemapUrl) {
+                    $url = UrlHelper::siteUrl(
+                        $additionalSitemapUrl['sitemapUrl'],
+                        null,
+                        null,
+                        $metaBundle->sourceSiteId
+                    );
+                    $lines[] = '  <url>';
+                    // Standard sitemap key/values
+                    $lines[] = '    <loc>';
+                    $lines[] = '      '.Html::encode($url);
+                    $lines[] = '    </loc>';
+                    $lines[] = '    <lastmod>';
+                    $lines[] = '      '.$dateUpdated->format(\DateTime::W3C);
+                    $lines[] = '    </lastmod>';
+                    $lines[] = '    <changefreq>';
+                    $lines[] = '      '.$additionalSitemapUrl['sitemapChangeFreq'];
+                    $lines[] = '    </changefreq>';
+                    $lines[] = '    <priority>';
+                    $lines[] = '      '.$additionalSitemapUrl['sitemapPriority'];
+                    $lines[] = '    </priority>';
+                    $lines[] = '  </url>';
                 }
                 // Sitemap index closing tag
                 $lines[] = '</urlset>';
@@ -160,11 +166,11 @@ class SitemapCustomTemplate extends FrontendTemplate implements SitemapInterface
     /**
      * Invalidate a sitemap cache
      *
-     * @param int    $siteId
+     * @param int $siteId
      */
     public function invalidateCache(int $siteId)
     {
-        $handle = self::TYPE_HANDLE;
+        $handle = self::CUSTOM_HANDLE;
         $cache = Craft::$app->getCache();
         TagDependency::invalidate($cache, $this::SITEMAP_CACHE_TAG.$handle.$siteId);
         Craft::info(

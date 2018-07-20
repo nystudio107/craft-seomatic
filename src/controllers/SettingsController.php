@@ -682,6 +682,9 @@ class SettingsController extends Controller
                     $metaBundle->metaSiteVars->creator->setAttributes($settings);
                     $siteSettings['creator'] = $metaBundle->metaSiteVars->creator;
                 }
+                if (!empty($siteSettings['additionalSitemapUrls'])) {
+                    $siteSettings['additionalSitemapUrlsDateUpdated'] = new \DateTime;
+                }
                 $metaBundle->metaSiteVars->setAttributes($siteSettings);
             }
             Seomatic::$plugin->metaBundles->syncBundleWithConfig($metaBundle, true);
