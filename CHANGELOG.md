@@ -2,6 +2,8 @@
 
 ## 3.1.3 - 2018.07.19
 ### Added
+* Added **Additional Sitemap URLs** to Site Settings -> Miscellaneous for custom sitemap URLs 
+* Added `EVENT_REGISTER_SITEMAP_URLS` event so plugins can register custom sitemap URLs 
 * Added the `Referrer-Policy` header based on the value of the `referrer` tag
 * Added the ability to control whether any http response headers are added by SEOmatic
 * Added the Facebook OpenGraph tags `og:image:width` & `og:image:height`
