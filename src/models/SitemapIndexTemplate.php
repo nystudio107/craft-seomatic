@@ -14,6 +14,8 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\base\SitemapInterface;
+use nystudio107\seomatic\events\RegisterSitemapUrlsEvent;
+use nystudio107\seomatic\models\SitemapCustomTemplate;
 
 use Craft;
 use craft\models\SiteGroup;
@@ -145,21 +147,41 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             // Custom sitemap entries
             foreach ($groupSiteIds as $groupSiteId) {
                 $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($groupSiteId, false);
-                if ($metaBundle !== null && !empty($metaBundle->metaSiteVars->additionalSitemapUrls)) {
-                    $sitemapUrl = Seomatic::$plugin->sitemaps->sitemapCustomUrlForSiteId(
-                        $metaBundle->sourceSiteId
-                    );
-                    $lines[] = '  <sitemap>';
-                    $lines[] = '    <loc>';
-                    $lines[] = '      '.Html::encode($sitemapUrl);
-                    $lines[] = '    </loc>';
-                    $dateUpdated = $metaBundle->metaSiteVars->additionalSitemapUrlsDateUpdated;
-                    if ($dateUpdated !== null) {
-                        $lines[] = '    <lastmod>';
-                        $lines[] = '      '.$dateUpdated->format(\DateTime::W3C);
-                        $lines[] = '    </lastmod>';
+                if ($metaBundle !== null) {
+                    $additionalSitemapUrls = $metaBundle->metaSiteVars->additionalSitemapUrls;
+                    $additionalSitemapUrls = empty($additionalSitemapUrls) ? [] : $additionalSitemapUrls;
+                    // Allow plugins/modules to add custom URLs
+                    $event = new RegisterSitemapUrlsEvent([
+                        'sitemapUrls' => $additionalSitemapUrls,
+                        'siteId' => $groupSiteId,
+                    ]);
+                    $this->trigger(SitemapCustomTemplate::EVENT_REGISTER_SITEMAP_URLS, $event);
+                    $additionalSitemapUrls = array_filter($event->sitemapUrls);
+                    // Output the sitemap index
+                    if (!empty($additionalSitemapUrls)) {
+                        $sitemapUrl = Seomatic::$plugin->sitemaps->sitemapCustomUrlForSiteId(
+                            $groupSiteId
+                        );
+                        $lines[] = '  <sitemap>';
+                        $lines[] = '    <loc>';
+                        $lines[] = '      '.Html::encode($sitemapUrl);
+                        $lines[] = '    </loc>';
+                        // Find the most recent date
+                        $dateUpdated = $metaBundle->metaSiteVars->additionalSitemapUrlsDateUpdated
+                            ?? new \DateTime;
+                        foreach ($additionalSitemapUrls as $additionalSitemapUrl) {
+                            if (!empty($additionalSitemapUrl['lastmod']) && $additionalSitemapUrl['lastmod'] > $dateUpdated) {
+                                $dateUpdated = $additionalSitemapUrl['lastmod'];
+                            }
+                        }
+                        $dateUpdated = $metaBundle->metaSiteVars->additionalSitemapUrlsDateUpdated;
+                        if ($dateUpdated !== null) {
+                            $lines[] = '    <lastmod>';
+                            $lines[] = '      '.$dateUpdated->format(\DateTime::W3C);
+                            $lines[] = '    </lastmod>';
+                        }
+                        $lines[] = '  </sitemap>';
                     }
-                    $lines[] = '  </sitemap>';
                 }
             }
             // Sitemap index closing tag
