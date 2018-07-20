@@ -30,6 +30,9 @@ return [
         ],
         'data'         => [
             'generator' => [
+                'dependencies' => [
+                    Dependency::CONFIG_DEPENDENCY => ['generatorEnabled'],
+                ],
                 'charset'   => '',
                 'content'   => 'SEOmatic',
                 'httpEquiv' => '',
@@ -148,6 +151,26 @@ return [
                 'name'      => '',
                 'property'  => 'og:image',
             ],
+            'og:image:width'        => [
+                'dependencies' => [
+                    Dependency::TAG_DEPENDENCY => ['og:image'],
+                ],
+                'charset'      => '',
+                'content'      => '{seomatic.meta.ogImageWidth}',
+                'httpEquiv'    => '',
+                'name'         => '',
+                'property'     => 'og:image:width',
+            ],
+            'og:image:height'        => [
+                'dependencies' => [
+                    Dependency::TAG_DEPENDENCY => ['og:image'],
+                ],
+                'charset'      => '',
+                'content'      => '{seomatic.meta.ogImageHeight}',
+                'httpEquiv'    => '',
+                'name'         => '',
+                'property'     => 'og:image:height',
+            ],
             'og:image:alt'        => [
                 'dependencies' => [
                     Dependency::TAG_DEPENDENCY => ['og:image'],
@@ -221,6 +244,24 @@ return [
                 'content'   => '{seomatic.meta.twitterImage}',
                 'httpEquiv' => '',
                 'name'      => 'twitter:image',
+            ],
+            'twitter:image:width'   => [
+                'dependencies' => [
+                    Dependency::TAG_DEPENDENCY => ['twitter:image'],
+                ],
+                'charset'      => '',
+                'content'      => '{seomatic.meta.twitterImageWidth}',
+                'httpEquiv'    => '',
+                'name'         => 'twitter:image:width',
+            ],
+            'twitter:image:height'   => [
+                'dependencies' => [
+                    Dependency::TAG_DEPENDENCY => ['twitter:image'],
+                ],
+                'charset'      => '',
+                'content'      => '{seomatic.meta.twitterImageHeight}',
+                'httpEquiv'    => '',
+                'name'         => 'twitter:image:height',
             ],
             'twitter:image:alt'   => [
                 'dependencies' => [

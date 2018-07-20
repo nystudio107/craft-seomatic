@@ -45,7 +45,8 @@ class DynamicMeta
 
     /**
      * Paginate based on the passed in Paginate variable as returned from the
-     * Twig {% paginate %} tag: https://docs.craftcms.com/v3/templating/tags/paginate.html#the-pageInfo-variable
+     * Twig {% paginate %} tag:
+     * https://docs.craftcms.com/v3/templating/tags/paginate.html#the-pageInfo-variable
      *
      * @param Paginate $pageInfo
      */
@@ -81,44 +82,69 @@ class DynamicMeta
      */
     public static function includeHttpHeaders()
     {
-        $response = Craft::$app->getResponse();
-        // X-Robots-Tag header
-        $robots = Seomatic::$seomaticVariable->tag->get('robots');
-        if ($robots !== null) {
-            $robotsArray = $robots->renderAttributes();
-            $content = $robotsArray['content'] ?? $robots->content;
-            if (!empty($content)) {
-                // The content property can be a string or an array
-                if (\is_array($content)) {
-                    $headerValue = '';
-                    foreach ($content as $contentVal) {
-                        $headerValue .= ($contentVal.',');
+        if (Seomatic::$settings->headersEnabled) {
+            $response = Craft::$app->getResponse();
+            // X-Robots-Tag header
+            $robots = Seomatic::$seomaticVariable->tag->get('robots');
+            if ($robots !== null && $robots->include) {
+                $robotsArray = $robots->renderAttributes();
+                $content = $robotsArray['content'] ?? $robots->content;
+                if (!empty($content)) {
+                    // The content property can be a string or an array
+                    if (\is_array($content)) {
+                        $headerValue = '';
+                        foreach ($content as $contentVal) {
+                            $headerValue .= ($contentVal.',');
+                        }
+                        $headerValue = rtrim($headerValue, ',');
+                    } else {
+                        $headerValue = $content;
                     }
-                    $headerValue = rtrim($headerValue, ',');
-                } else {
-                    $headerValue = $content;
+                    $response->headers->add('X-Robots-Tag', $headerValue);
                 }
-                $response->headers->add('X-Robots-Tag', $headerValue);
             }
-        }
-        // Link canonical header
-        $canonical = Seomatic::$seomaticVariable->link->get('canonical');
-        if ($canonical !== null) {
-            $canonicalArray = $canonical->renderAttributes();
-            $href = $canonicalArray['href'] ?? $canonical->href;
-            if (!empty($href)) {
-                // The href property can be a string or an array
-                if (\is_array($href)) {
-                    $headerValue = '';
-                    foreach ($href as $hrefVal) {
-                        $headerValue .= ('<'.$hrefVal.'>'.',');
+            // Link canonical header
+            $canonical = Seomatic::$seomaticVariable->link->get('canonical');
+            if ($canonical !== null && $canonical->include) {
+                $canonicalArray = $canonical->renderAttributes();
+                $href = $canonicalArray['href'] ?? $canonical->href;
+                if (!empty($href)) {
+                    // The href property can be a string or an array
+                    if (\is_array($href)) {
+                        $headerValue = '';
+                        foreach ($href as $hrefVal) {
+                            $headerValue .= ('<'.$hrefVal.'>'.',');
+                        }
+                        $headerValue = rtrim($headerValue, ',');
+                    } else {
+                        $headerValue = '<'.$href.'>';
                     }
-                    $headerValue = rtrim($headerValue, ',');
-                } else {
-                    $headerValue = '<'.$href.'>';
+                    $headerValue .= "; rel='canonical'";
+                    $response->headers->add('Link', $headerValue);
                 }
-                $headerValue .= "; rel='canonical'";
-                $response->headers->add('Link', $headerValue);
+            }
+            // Referrer-Policy header
+            $referrer = Seomatic::$seomaticVariable->tag->get('referrer');
+            if ($referrer !== null && $referrer->include) {
+                $referrerArray = $referrer->renderAttributes();
+                $content = $referrerArray['content'] ?? $referrer->content;
+                if (!empty($content)) {
+                    // The content property can be a string or an array
+                    if (\is_array($content)) {
+                        $headerValue = '';
+                        foreach ($content as $contentVal) {
+                            $headerValue .= ($contentVal.',');
+                        }
+                        $headerValue = rtrim($headerValue, ',');
+                    } else {
+                        $headerValue = $content;
+                    }
+                    $response->headers->add('Referrer-Policy', $headerValue);
+                }
+            }
+            // The X-Powered-By tag
+            if (Seomatic::$settings->generatorEnabled) {
+                $response->headers->add('X-Powered-By', 'SEOmatic');
             }
         }
     }
@@ -379,8 +405,8 @@ class DynamicMeta
      * Return a list of localized URLs that are in the current site's group
      * The current URI is used if $uri is null. Similarly, the current site is
      * used if $siteId is null.
-     * The resulting array of arrays has `id`, `language`, `ogLanguage`, `hreflangLanguage`,
-     * and `url` as keys.
+     * The resulting array of arrays has `id`, `language`, `ogLanguage`,
+     * `hreflangLanguage`, and `url` as keys.
      *
      * @param string|null $uri
      * @param int|null    $siteId

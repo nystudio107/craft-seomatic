@@ -39,6 +39,9 @@ return [
     // Should SEOmatic render frontend sitemaps?
     'sitemapsEnabled' => true,
 
+    // Should SEOmatic add to the http response headers?
+    'headersEnabled' => true,
+
     // The server environment, either `live`, `staging`, or `local`
     'environment' => 'live',
 
@@ -59,4 +62,7 @@ return [
 
     // The max number of characters in the `<meta name="description">` tag
     'maxDescriptionLength' => 320,
+
+    // Should the meta generator tag and X-Powered-By header be included?
+    'generatorEnabled' => true,
 ];

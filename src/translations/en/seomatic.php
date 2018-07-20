@@ -130,7 +130,7 @@ return [
     'View Sitemap Index' => 'View Sitemap Index',
     'Edit Content SEO' => 'Edit Content SEO',
     'This property specifies a search URL pattern for sending queries to your site\'s search engine.  It must include a string enclosed in curly braces that is a placeholder for the user\'s search query (e.g., `{search_term_string}`). The string inside the curly braces must also appear in the name attribute of the query-input property.' => 'This property specifies a search URL pattern for sending queries to your site\'s search engine.  It must include a string enclosed in curly braces that is a placeholder for the user\'s search query (e.g., `{search_term_string}`). The string inside the curly braces must also appear in the name attribute of the query-input property.',
-    'Miscallaneous site-side SEO settings.' => 'Miscallaneous site-side SEO settings.',
+    'Miscallaneous site-side SEO settings.' => 'Miscallaneous site-wide SEO settings.',
     'Twitter username for the content creator / author, without the preceding @.' => 'Twitter username for the content creator / author, without the preceding @.',
     'Video' => 'Video',
     'Adding OpenGraph tags to your website influences the performance of your links on social media by allowing you to control what appears when a user posts a link to your content on Facebook.' => 'Adding OpenGraph tags to your website influences the performance of your links on social media by allowing you to control what appears when a user posts a link to your content on Facebook.',
@@ -316,5 +316,13 @@ return [
     'Twitter Image Description Source' => 'Twitter Image Description Source',
     'Google Site Verification' => 'Google Site Verification',
     'Robots.txt Template' => 'Robots.txt Template',
-    'Player Card' => 'Player Card'
+    'Player Card' => 'Player Card',
+    'script did not render' => 'script did not render',
+    'Controls whether to display the Google, Twitter, and Facebook social media previews in the sidebar on entry, category, and product pages.' => 'Controls whether to display the Google, Twitter, and Facebook social media previews in the sidebar on entry, category, and product pages.',
+    'Controls whether SEOmatic will include the meta `generator` tag and `X-Powered-By` header.' => 'Controls whether SEOmatic will include the meta `generator` tag and `X-Powered-By` header.',
+    'Controls whether SEOmatic will automatically add `X-Robots-Tag`, `canonical`, & `Referrer-Policy` to the http response headers.' => 'Controls whether SEOmatic will automatically add `X-Robots-Tag`, `canonical`, & `Referrer-Policy` to the http response headers.',
+    ' script did not render' => ' script did not render',
+    'HTTP Headers Enabled' => 'HTTP Headers Enabled',
+    'Generator Enabled' => 'Generator Enabled',
+    '`http` Headers Enabled' => '`http` Headers Enabled'
 ];

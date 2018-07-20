@@ -39,6 +39,11 @@ class Settings extends VarsModel
     public $sitemapsEnabled = true;
 
     /**
+     * @var bool Should SEOmatic add to the http response headers?
+     */
+    public $headersEnabled = true;
+
+    /**
      * @var string The server environment, either `live`, `staging`, or `local`
      */
     public $environment = 'live';
@@ -73,6 +78,10 @@ class Settings extends VarsModel
      */
     public $maxDescriptionLength = 300;
 
+    /**
+     * @var bool Should the meta generator tag and X-Powered-By header be included?
+     */
+    public $generatorEnabled = true;
 
     // Public Methods
     // =========================================================================
@@ -85,7 +94,14 @@ class Settings extends VarsModel
         return [
             ['pluginName', 'string'],
             ['pluginName', 'default', 'value' => 'SEOmatic'],
-            [['renderEnabled', 'sitemapsEnabled'], 'boolean'],
+            [
+                [
+                    'renderEnabled',
+                    'sitemapsEnabled',
+                    'headersEnabled',
+                    'generatorEnabled',
+                ],
+                'boolean'],
             ['environment', 'string'],
             ['environment', 'default', 'value' => 'live'],
             ['environment', 'in', 'range' => [

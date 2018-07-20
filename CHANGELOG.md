@@ -1,5 +1,18 @@
 # SEOmatic Changelog
 
+## 3.1.3 - 2018.07.20
+### Added
+* Added **Additional Sitemap URLs** to Site Settings -> Miscellaneous for custom sitemap URLs 
+* Added `EVENT_REGISTER_SITEMAP_URLS` event so plugins can register custom sitemap URLs 
+* Added the `Referrer-Policy` header based on the value of the `referrer` tag
+* Added the ability to control whether any http response headers are added by SEOmatic
+* Added the Facebook OpenGraph tags `og:image:width` & `og:image:height`
+* Added the Twitter card tags `twitter:image:width` & `twitter:image:height`
+
+### Changed
+* Clear SEOmatic caches after saving the plugin settings
+* Fixed an issue where boolean settings in meta containers that were set to false would not override as expected
+
 ## 3.1.2 - 2018.07.17
 ### Changed
 * Fixed an issue with the language being set to `en_US` instead of `en-US` in `getLocalizedUrls()`

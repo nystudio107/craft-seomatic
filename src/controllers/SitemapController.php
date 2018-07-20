@@ -33,6 +33,7 @@ class SitemapController extends Controller
     protected $allowAnonymous = [
         'sitemap-index',
         'sitemap',
+        'sitemap-custom',
     ];
 
     // Public Methods
@@ -62,10 +63,10 @@ class SitemapController extends Controller
     /**
      * Returns a rendered sitemap.
      *
-     * @param int         $groupId Which Site Group the sitemap index is for
-     * @param string      $type
-     * @param string      $handle
-     * @param int         $siteId
+     * @param int    $groupId Which Site Group the sitemap index is for
+     * @param string $type
+     * @param string $handle
+     * @param int    $siteId
      *
      * @return Response
      */
@@ -75,9 +76,32 @@ class SitemapController extends Controller
             Sitemaps::SEOMATIC_SITEMAP_CONTAINER,
             [
                 'groupId' => $groupId,
-                'type'    => $type,
-                'handle'  => $handle,
-                'siteId'  => $siteId,
+                'type' => $type,
+                'handle' => $handle,
+                'siteId' => $siteId,
+            ]
+        );
+        $headers = Craft::$app->response->headers;
+        $headers->add('Content-Type', 'text/xml; charset=utf-8');
+
+        return $this->asRaw($xml);
+    }
+
+    /**
+     * Returns a rendered custom sitemap.
+     *
+     * @param int $groupId Which Site Group the sitemap index is for
+     * @param int $siteId
+     *
+     * @return Response
+     */
+    public function actionSitemapCustom(int $groupId, int $siteId): Response
+    {
+        $xml = Seomatic::$plugin->sitemaps->renderTemplate(
+            Sitemaps::SEOMATIC_SITEMAPCUSTOM_CONTAINER,
+            [
+                'groupId' => $groupId,
+                'siteId' => $siteId,
             ]
         );
         $headers = Craft::$app->response->headers;

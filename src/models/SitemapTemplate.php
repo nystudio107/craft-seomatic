@@ -126,7 +126,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             ],
         ]);
 
-        return $cache->getOrSet($this::CACHE_KEY.$groupId.$handle.$siteId, function () use (
+        return $cache->getOrSet($this::CACHE_KEY.$groupId.$type.$handle.$siteId, function () use (
             $type,
             $handle,
             $siteId,
