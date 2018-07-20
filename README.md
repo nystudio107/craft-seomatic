@@ -214,6 +214,8 @@ Sitemap Indexes are automatically submitted to search engines whenever a new Sec
 
 Section Sitemaps are automatically submitted to search engines whenever a new Element in that Section, Category Group, or Commerce Product Type is added.
 
+If you have custom URLs that are not in the CMS, you can manually add them to their own Sitemap Index via **Site Settings** → **Miscellaneous**.
+
 #### Content SEO AdminCP Fields
 
 The fields in the AdminCP Content SEO settings are parsed as Twig object templates, so in addition to plain old text, you can also put single and double bracket Twig expressions.
