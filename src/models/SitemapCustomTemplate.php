@@ -14,20 +14,9 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\base\SitemapInterface;
-use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\helpers\UrlHelper;
-use nystudio107\seomatic\services\MetaBundles;
 
 use Craft;
-use craft\elements\Asset;
-use craft\elements\Entry;
-use craft\elements\Category;
-use craft\elements\MatrixBlock;
-use craft\fields\Assets as AssetsField;
-use craft\models\SiteGroup;
-
-use craft\commerce\Plugin as CommercePlugin;
-use craft\commerce\elements\Product;
 
 use yii\caching\TagDependency;
 use yii\helpers\Html;
@@ -36,7 +25,7 @@ use yii\web\NotFoundHttpException;
 /**
  * @author    nystudio107
  * @package   Seomatic
- * @since     3.0.0
+ * @since     3.1.0
  */
 class SitemapCustomTemplate extends FrontendTemplate implements SitemapInterface
 {
