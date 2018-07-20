@@ -682,6 +682,10 @@ class SettingsController extends Controller
                     $metaBundle->metaSiteVars->creator->setAttributes($settings);
                     $siteSettings['creator'] = $metaBundle->metaSiteVars->creator;
                 }
+                if (!empty($siteSettings['additionalSitemapUrls'])) {
+                    $siteSettings['additionalSitemapUrlsDateUpdated'] = new \DateTime;
+                    Seomatic::$plugin->sitemaps->submitCustomSitemap($siteId);
+                }
                 $metaBundle->metaSiteVars->setAttributes($siteSettings);
             }
             Seomatic::$plugin->metaBundles->syncBundleWithConfig($metaBundle, true);
@@ -882,6 +886,7 @@ class SettingsController extends Controller
             return null;
         }
 
+        Seomatic::$plugin->clearAllCaches();
         Craft::$app->getSession()->setNotice(Craft::t('app', 'Plugin settings saved.'));
 
         return $this->redirectToPostedUrl();
