@@ -26,7 +26,7 @@ return [
         'seoImageWidth'           => '',
         'seoImageHeight'          => '',
         'seoImageDescription'     => '',
-        'canonicalUrl'            => '{{ craft.app.request.pathInfo | striptags }}',
+        'canonicalUrl'            => '{seomatic.helper.safeCanonicalUrl()}',
         'robots'                  => 'all',
         'ogType'                  => 'website',
         'ogTitle'                 => '{seomatic.meta.seoTitle}',
