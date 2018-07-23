@@ -95,6 +95,17 @@ class MetaValue
      */
     public static function parseArray(array &$metaArray, bool $resolveAliases = true, bool $parseAsTwig = true)
     {
+        // Do this here as well so that parseString() won't potentially be constantly switching modes
+        // while parsing through the array
+        $oldTemplateMode = self::$view->getTemplateMode();
+        // Render in site template mode so that we get globals injected
+        if ($oldTemplateMode !== self::$view::TEMPLATE_MODE_SITE) {
+            try {
+                self::$view->setTemplateMode(self::$view::TEMPLATE_MODE_SITE);
+            } catch (Exception $e) {
+                Craft::error($e->getMessage(), __METHOD__);
+            }
+        }
         foreach ($metaArray as $key => $value) {
             $shouldParse = $parseAsTwig;
             $shouldAlias = $resolveAliases;
@@ -112,6 +123,15 @@ class MetaValue
                 $metaArray[$key] = self::parseString($value, $shouldAlias, $shouldParse, $tries);
             }
         }
+        // Restore the template mode
+        if ($oldTemplateMode !== self::$view::TEMPLATE_MODE_SITE) {
+            try {
+                self::$view->setTemplateMode($oldTemplateMode);
+            } catch (Exception $e) {
+                Craft::error($e->getMessage(), __METHOD__);
+            }
+        }
+
         $metaArray = array_filter($metaArray);
     }
 
@@ -194,7 +214,7 @@ class MetaValue
             }
             // If there are no dynamic tags, just return the template
             if (!$parseAsTwig || !StringHelper::contains($metaValue, '{')) {
-                return html_entity_decode($metaValue, ENT_NOQUOTES, 'UTF-8');
+                return trim(html_entity_decode($metaValue, ENT_NOQUOTES, 'UTF-8'));
             }
             $oldTemplateMode = self::$view->getTemplateMode();
             try {
@@ -203,11 +223,11 @@ class MetaValue
                     self::$view->setTemplateMode(self::$view::TEMPLATE_MODE_SITE);
                 }
                 // Render the template out
-                $metaValue = html_entity_decode(
+                $metaValue = trim(html_entity_decode(
                     self::$view->renderObjectTemplate($metaValue, self::$templateObjectVars),
                     ENT_NOQUOTES,
                     'UTF-8'
-                );
+                ));
                 // Restore the template mode
                 if ($oldTemplateMode !== self::$view::TEMPLATE_MODE_SITE) {
                     self::$view->setTemplateMode($oldTemplateMode);
