@@ -500,6 +500,12 @@ class DynamicMeta
                     Craft::error($e->getMessage(), __METHOD__);
                 }
             }
+            // Strip any query string params, and make sure we have an absolute URL with protocol
+            if ($urlParams === null) {
+                $url = UrlHelper::stripQueryString($url);
+            }
+            $url = UrlHelper::absoluteUrlWithProtocol($url);
+
             $url = $url ?? '';
             $language = $site->language;
             $ogLanguage = str_replace('-', '_', $language);

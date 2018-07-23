@@ -202,6 +202,20 @@ class MetaGlobalVars extends VarsModel
     /**
      * @inheritdoc
      */
+    public function init()
+    {
+        parent::init();
+        // If we have potentially unsafe Twig code, strip it out
+        if (!empty($this->canonicalUrl)) {
+            if (strpos($this->canonicalUrl, 'craft.app.request.pathInfo') !== false) {
+                $this->canonicalUrl = '{seomatic.helper.safeCanonicalUrl()}';
+            }
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules(): array
     {
         return [
