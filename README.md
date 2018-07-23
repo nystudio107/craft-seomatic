@@ -622,7 +622,7 @@ The `seomatic.meta` variable contains all of the meta variables that control the
 * **`seomatic.meta.seoImageWidth`** - the width of the SEO image
 * **`seomatic.meta.seoImageHeight`** - the height of the SEO image
 * **`seomatic.meta.seoImageDescription`** - a textual description of the SEO image
-* **`seomatic.meta.canonicalUrl`** - the URL used for the `<link rel="canonical">` tag. By default, this is set to `{{ craft.app.request.pathInfo | striptags }}` or `{entry.url}`/`{category.url}`/`{product.url}`, but you can change it as you see fit. This variable is also used to set the `link rel="canonical"` HTTP header.
+* **`seomatic.meta.canonicalUrl`** - the URL used for the `<link rel="canonical">` tag. By default, this is set to `{seomatic.helper.safeCanonicalUrl()}` or `{entry.url}`/`{category.url}`/`{product.url}`, but you can change it as you see fit. This variable is also used to set the `link rel="canonical"` HTTP header.
 * **`seomatic.meta.robots`** - the setting used for the `<meta name="robots">` tag that controls how bots should index your website. This variable is also used to set the `X-Robots-Tag` HTTP header. [Learn More](https://developers.google.com/search/reference/robots_meta_tag)
 
 ##### Facebook OpenGraph Variables:
