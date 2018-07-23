@@ -1,5 +1,8 @@
 # SEOmatic Changelog
 
+## 3.1.5 - 2018.07.24
+### Changed
+
 ## 3.1.4 - 2018.07.23
 ### Changed
 * Changed the way requests that don't match any elements generate the `canonicalUrl`, to avoid potentially executing injected Twig code
