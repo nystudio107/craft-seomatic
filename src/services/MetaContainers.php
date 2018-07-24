@@ -78,6 +78,11 @@ class MetaContainers extends Component
      */
     public $metaSitemapVars;
 
+    /**
+     * @var string The current page number of paginated pages
+     */
+    public $paginateionPage = '';
+
     // Protected Properties
     // =========================================================================
 
@@ -137,6 +142,8 @@ class MetaContainers extends Component
                     ?? Craft::$app->getSites()->primarySite->id
                     ?? 1;
             }
+            // If this page is paginated, we need to factor that into the cache key
+            $paginationPage = empty($this->paginateionPage) ? '' :'page'.$this->paginateionPage;
             // Load the meta containers
             $dependency = new TagDependency([
                 'tags' => [
@@ -154,7 +161,7 @@ class MetaContainers extends Component
             } else {
                 $cache = Craft::$app->getCache();
                 list($this->metaGlobalVars, $this->metaSiteVars, $this->metaSitemapVars, $this->metaContainers) = $cache->getOrSet(
-                    $this::CACHE_KEY.$uri.$siteId,
+                    $this::CACHE_KEY.$uri.$siteId.$paginationPage,
                     function () use ($uri, $siteId) {
                         Craft::info(
                             'Meta container cache miss: '.$uri.'/'.$siteId,
