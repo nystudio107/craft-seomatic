@@ -264,6 +264,24 @@
     {% include "seomatic/settings/_includes/seo-image-partial.twig" %}
 {% endif %}
 
+{############### Facebook OpenGraph Image ###############}
+
+{# These fields are added as hidden here so that "Same as SEO Image" changes can propagate down to them #}
+{% if field is not defined %}
+    <div style="display: none;">
+        {% include "seomatic/settings/_includes/facebook-og-image-partial.twig" %}
+    </div>
+{% endif %}
+
+{############### Twitter Image ###############}
+
+{# These fields are added as hidden here so that "Same as SEO Image" changes can propagate down to them #}
+{% if field is not defined %}
+    <div style="display: none;">
+        {% include "seomatic/settings/_includes/twitter-image-partial.twig" %}
+    </div>
+{% endif %}
+
 {############### SEO Image Description ###############}
 
 {% set textOptions = {
