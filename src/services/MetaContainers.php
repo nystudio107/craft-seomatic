@@ -41,6 +41,7 @@ use craft\commerce\Plugin as CommercePlugin;
 use craft\commerce\elements\Product;
 
 use yii\base\Exception;
+use yii\base\InvalidConfigException;
 use yii\caching\TagDependency;
 
 /**
@@ -230,6 +231,14 @@ class MetaContainers extends Component
     public function includeMetaContainers()
     {
         Craft::beginProfile('MetaContainers::includeMetaContainers', __METHOD__);
+        // If this page is paginated, we need to factor that into the cache key
+        $paginationPage = empty($this->paginationPage) ? '' : 'page'.$this->paginationPage;
+        // We also need to re-add the hreflangs
+        if (!empty($paginationPage)) {
+            DynamicMetaHelper::addMetaLinkHrefLang();
+        }
+        $this->containerDependency->tags[3] = $this->containerDependency->tags[2].$paginationPage;
+        // Add in our http headers
         DynamicMetaHelper::includeHttpHeaders();
         $this->parseGlobalVars();
         foreach ($this->metaContainers as $metaContainer) {
