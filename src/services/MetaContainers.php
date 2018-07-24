@@ -78,6 +78,11 @@ class MetaContainers extends Component
      */
     public $metaSitemapVars;
 
+    /**
+     * @var string The current page number of paginated pages
+     */
+    public $paginateionPage = '';
+
     // Protected Properties
     // =========================================================================
 
@@ -95,6 +100,11 @@ class MetaContainers extends Component
      * @var null|TagDependency
      */
     protected $containerDependency = null;
+
+    /**
+     * @var bool Whether or not the matched element should be included in the meta containers
+     */
+    protected $includeMatchedElement = true;
 
     // Public Methods
     // =========================================================================
@@ -132,6 +142,8 @@ class MetaContainers extends Component
                     ?? Craft::$app->getSites()->primarySite->id
                     ?? 1;
             }
+            // If this page is paginated, we need to factor that into the cache key
+            $paginationPage = empty($this->paginateionPage) ? '' :'page'.$this->paginateionPage;
             // Load the meta containers
             $dependency = new TagDependency([
                 'tags' => [
@@ -149,7 +161,7 @@ class MetaContainers extends Component
             } else {
                 $cache = Craft::$app->getCache();
                 list($this->metaGlobalVars, $this->metaSiteVars, $this->metaSitemapVars, $this->metaContainers) = $cache->getOrSet(
-                    $this::CACHE_KEY.$uri.$siteId,
+                    $this::CACHE_KEY.$uri.$siteId.$paginationPage,
                     function () use ($uri, $siteId) {
                         Craft::info(
                             'Meta container cache miss: '.$uri.'/'.$siteId,
@@ -265,16 +277,22 @@ class MetaContainers extends Component
      *
      * @param string   $uri
      * @param int|null $siteId
-     * @param bool     $parseVariables
+     * @param bool     $parseVariables Whether or not the variables should be parsed as Twig
+     * @param bool     $includeElement Whether or not the matched element should be factored into the preview
      */
-    public function previewMetaContainers(string $uri = '', int $siteId = null, bool $parseVariables = false)
-    {
+    public function previewMetaContainers(
+        string $uri = '',
+        int $siteId = null,
+        bool $parseVariables = false,
+        bool $includeElement = true
+    ) {
         // It's possible this won't exist at this point
         if (!Seomatic::$seomaticVariable) {
             // Create our variable and stash it in the plugin for global access
             Seomatic::$seomaticVariable = new SeomaticVariable();
         }
         Seomatic::$previewingMetaContainers = true;
+        $this->includeMatchedElement = $includeElement;
         $this->loadMetaContainers($uri, $siteId);
         if ($parseVariables) {
             $this->parseGlobalVars();
@@ -662,7 +680,7 @@ class MetaContainers extends Component
     {
         Craft::beginProfile('MetaContainers::loadFieldMetaContainers', __METHOD__);
         $element = Seomatic::$matchedElement;
-        if ($element) {
+        if ($element && $this->includeMatchedElement) {
             /** @var Element $element */
             $fieldHandles = FieldHelper::fieldsOfTypeFromElement($element, FieldHelper::SEO_SETTINGS_CLASS_KEY, true);
             foreach ($fieldHandles as $fieldHandle) {

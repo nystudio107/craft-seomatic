@@ -1,5 +1,11 @@
 # SEOmatic Changelog
 
+## 3.1.5 - 2018.07.24
+### Changed
+* No longer include any matched element in the Content SEO previews (which can be confusing if there are SEO Settings field overrides)
+* Ensure that paginated pages are cached separately in the second-level cache
+* Fixed an issue where changes to the SEO Image would not propagate to the Facebook/Twitter image when changed if "Same as SEO Image" was set
+
 ## 3.1.4 - 2018.07.23
 ### Changed
 * Changed the way requests that don't match any elements generate the `canonicalUrl`, to avoid potentially executing injected Twig code
