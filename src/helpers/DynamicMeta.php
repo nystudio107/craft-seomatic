@@ -420,20 +420,7 @@ class DynamicMeta
         $localizedUrls = [];
         // Set the pagination URL params, if they exist
         $urlParams = null;
-        $pageTrigger = Craft::$app->getConfig()->getGeneral()->pageTrigger;
-        if (!\is_string($pageTrigger) || $pageTrigger === '') {
-            $pageTrigger = 'p';
-        }
-        // Is this query string-based pagination?
-        if ($pageTrigger[0] === '?') {
-            $pageTrigger = trim($pageTrigger, '?=');
-        }
-        // Avoid conflict with the path param
-        $pathParam = Craft::$app->getConfig()->getGeneral()->pathParam;
-        if ($pageTrigger === $pathParam) {
-            $pageTrigger = $pathParam === 'p' ? 'pg' : 'p';
-        }
-        $pageTriggerValue = Craft::$app->getRequest()->getParam($pageTrigger);
+        list($pageTrigger, $pageTriggerValue) = UrlHelper::pageTriggerValue();
         if ($pageTriggerValue !== null) {
             $urlParams = [];
             $urlParams[$pageTrigger] = $pageTriggerValue;
