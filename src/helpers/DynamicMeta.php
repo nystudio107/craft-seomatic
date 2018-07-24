@@ -54,7 +54,7 @@ class DynamicMeta
     {
         if ($pageInfo !== null) {
             // Let the meta containers know that this page is paginated
-            Seomatic::$plugin->metaContainers->paginateionPage = (string)$pageInfo->currentPage;
+            Seomatic::$plugin->metaContainers->paginationPage = (string)$pageInfo->currentPage;
             // Set the current page
             $url = $pageInfo->getPageUrl($pageInfo->currentPage);
             if (!empty($url)) {
