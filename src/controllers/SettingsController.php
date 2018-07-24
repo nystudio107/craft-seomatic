@@ -496,7 +496,9 @@ class SettingsController extends Controller
         // Preview the meta containers
         Seomatic::$plugin->metaContainers->previewMetaContainers(
             $uri,
-            (int)$variables['currentSiteId']
+            (int)$variables['currentSiteId'],
+            false,
+            false
         );
 
         // Render the template

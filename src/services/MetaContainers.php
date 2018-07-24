@@ -96,6 +96,11 @@ class MetaContainers extends Component
      */
     protected $containerDependency = null;
 
+    /**
+     * @var bool Whether or not the matched element should be included in the meta containers
+     */
+    protected $includeMatchedElement = true;
+
     // Public Methods
     // =========================================================================
 
@@ -265,16 +270,22 @@ class MetaContainers extends Component
      *
      * @param string   $uri
      * @param int|null $siteId
-     * @param bool     $parseVariables
+     * @param bool     $parseVariables Whether or not the variables should be parsed as Twig
+     * @param bool     $includeElement Whether or not the matched element should be factored into the preview
      */
-    public function previewMetaContainers(string $uri = '', int $siteId = null, bool $parseVariables = false)
-    {
+    public function previewMetaContainers(
+        string $uri = '',
+        int $siteId = null,
+        bool $parseVariables = false,
+        bool $includeElement = true
+    ) {
         // It's possible this won't exist at this point
         if (!Seomatic::$seomaticVariable) {
             // Create our variable and stash it in the plugin for global access
             Seomatic::$seomaticVariable = new SeomaticVariable();
         }
         Seomatic::$previewingMetaContainers = true;
+        $this->includeMatchedElement = $includeElement;
         $this->loadMetaContainers($uri, $siteId);
         if ($parseVariables) {
             $this->parseGlobalVars();
@@ -662,7 +673,7 @@ class MetaContainers extends Component
     {
         Craft::beginProfile('MetaContainers::loadFieldMetaContainers', __METHOD__);
         $element = Seomatic::$matchedElement;
-        if ($element) {
+        if ($element && $this->includeMatchedElement) {
             /** @var Element $element */
             $fieldHandles = FieldHelper::fieldsOfTypeFromElement($element, FieldHelper::SEO_SETTINGS_CLASS_KEY, true);
             foreach ($fieldHandles as $fieldHandle) {
