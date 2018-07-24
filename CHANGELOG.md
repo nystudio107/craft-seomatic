@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.6 - 2018.07.25
+### Changed
+* Really ensure that paginated pages are cached separately in the second-level cache
+
 ## 3.1.5 - 2018.07.24
 ### Changed
 * No longer include any matched element in the Content SEO previews (which can be confusing if there are SEO Settings field overrides)
