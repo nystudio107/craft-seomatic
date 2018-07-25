@@ -47,7 +47,7 @@ class MetaTitleContainer extends MetaContainer
     public function includeMetaData($dependency)
     {
         Craft::beginProfile('MetaTitleContainer::includeMetaData', __METHOD__);
-        $uniqueKey = $this->handle.$dependency->tags[2];
+        $uniqueKey = $this->handle.$dependency->tags[3];
         $tagData = Craft::$app->getCache()->getOrSet(
             $this::CONTAINER_TYPE.$uniqueKey,
             function () use ($uniqueKey) {
