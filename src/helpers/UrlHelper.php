@@ -31,6 +31,31 @@ class UrlHelper extends CraftUrlHelper
     // =========================================================================
 
     /**
+     * Return the page trigger and the value of the page trigger (null if it doesn't exist)
+     *
+     * @return array
+     */
+    public static function pageTriggerValue(): array
+    {
+        $pageTrigger = Craft::$app->getConfig()->getGeneral()->pageTrigger;
+        if (!\is_string($pageTrigger) || $pageTrigger === '') {
+            $pageTrigger = 'p';
+        }
+        // Is this query string-based pagination?
+        if ($pageTrigger[0] === '?') {
+            $pageTrigger = trim($pageTrigger, '?=');
+        }
+        // Avoid conflict with the path param
+        $pathParam = Craft::$app->getConfig()->getGeneral()->pathParam;
+        if ($pageTrigger === $pathParam) {
+            $pageTrigger = $pathParam === 'p' ? 'pg' : 'p';
+        }
+        $pageTriggerValue = Craft::$app->getRequest()->getParam($pageTrigger);
+
+        return [$pageTrigger, $pageTriggerValue];
+    }
+
+    /**
      * Return an absolute URL with protocol that curl will be happy with
      *
      * @param string $url
