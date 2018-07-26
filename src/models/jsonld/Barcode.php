@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\ImageObject;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Barcode
+ * @see       https://schema.org/Barcode
  */
 class Barcode extends ImageObject
 {

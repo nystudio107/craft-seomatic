@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\WebPage;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/CollectionPage
+ * @see       https://schema.org/CollectionPage
  */
 class CollectionPage extends WebPage
 {

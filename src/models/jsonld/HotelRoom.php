@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\Room;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/HotelRoom
+ * @see       https://schema.org/HotelRoom
  */
 class HotelRoom extends Room
 {

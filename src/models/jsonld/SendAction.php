@@ -23,7 +23,7 @@ use nystudio107\seomatic\models\jsonld\TransferAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/SendAction
+ * @see       https://schema.org/SendAction
  */
 class SendAction extends TransferAction
 {

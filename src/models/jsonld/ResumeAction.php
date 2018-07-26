@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\ControlAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/ResumeAction
+ * @see       https://schema.org/ResumeAction
  */
 class ResumeAction extends ControlAction
 {

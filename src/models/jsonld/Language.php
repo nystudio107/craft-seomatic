@@ -23,7 +23,7 @@ use nystudio107\seomatic\models\jsonld\Intangible;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Language
+ * @see       https://schema.org/Language
  */
 class Language extends Intangible
 {

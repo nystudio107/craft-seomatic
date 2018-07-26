@@ -48,8 +48,8 @@ class Sitemaps extends Component implements SitemapInterface
     const SEOMATIC_SITEMAPCUSTOM_CONTAINER = Seomatic::SEOMATIC_HANDLE.SitemapCustomTemplate::TEMPLATE_TYPE;
 
     const SEARCH_ENGINE_SUBMISSION_URLS = [
-        'google' => 'http://www.google.com/webmasters/sitemaps/ping?sitemap=',
-        'bing'   => 'http://www.bing.com/webmaster/ping.aspx?siteMap=',
+        'google' => 'https://www.google.com/webmasters/sitemaps/ping?sitemap=',
+        'bing'   => 'https://www.bing.com/webmaster/ping.aspx?siteMap=',
     ];
 
     // Protected Properties

@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\Event;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/LiteraryEvent
+ * @see       https://schema.org/LiteraryEvent
  */
 class LiteraryEvent extends Event
 {

@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\Product;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Vehicle
+ * @see       https://schema.org/Vehicle
  */
 class Vehicle extends Product
 {

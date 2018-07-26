@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\FinancialService;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/BankOrCreditUnion
+ * @see       https://schema.org/BankOrCreditUnion
  */
 class BankOrCreditUnion extends FinancialService
 {

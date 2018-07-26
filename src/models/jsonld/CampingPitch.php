@@ -22,7 +22,7 @@ use nystudio107\seomatic\models\jsonld\Accommodation;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/CampingPitch
+ * @see       https://schema.org/CampingPitch
  */
 class CampingPitch extends Accommodation
 {

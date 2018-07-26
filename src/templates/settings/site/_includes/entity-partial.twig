@@ -292,7 +292,7 @@
         <div class="half-width-field half-width-field-left">
             {{ forms.textField({
                 label: "Organization Founding Date"|t("seomatic"),
-                instructions: "The date the organization was founded, in ISO 8601 date format, e.g.: `2018-03-26`. [Learn More](http://schema.org/Date)" |t("seomatic"),
+                instructions: "The date the organization was founded, in ISO 8601 date format, e.g.: `2018-03-26`. [Learn More](https://schema.org/Date)" |t("seomatic"),
                 id: "organizationFoundingDate",
                 class: "nicetext",
                 name: "organizationFoundingDate",
@@ -525,7 +525,7 @@
                     + $('#{{ "genericPostalCode" |namespaceInputId }}').val() + ", "
                     + $('#{{ "genericAddressCountry" |namespaceInputId }}').val();
         $.ajax({
-            url:"//maps.googleapis.com/maps/api/geocode/json?address="+address+"&sensor=false",
+            url:"https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&sensor=false",
             type: "POST",
             success:function(res) {
                 $('#{{ "geolookup-errors" |namespaceInputId }}').hide();

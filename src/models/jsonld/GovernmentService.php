@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\Service;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/GovernmentService
+ * @see       https://schema.org/GovernmentService
  */
 class GovernmentService extends Service
 {

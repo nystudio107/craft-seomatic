@@ -31,7 +31,7 @@ use nystudio107\seomatic\models\jsonld\InteractAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/FollowAction
+ * @see       https://schema.org/FollowAction
  */
 class FollowAction extends InteractAction
 {

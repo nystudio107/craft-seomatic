@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\CreativeWorkSeries;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/VideoGameSeries
+ * @see       https://schema.org/VideoGameSeries
  */
 class VideoGameSeries extends CreativeWorkSeries
 {

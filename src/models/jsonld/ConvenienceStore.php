@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\Store;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/ConvenienceStore
+ * @see       https://schema.org/ConvenienceStore
  */
 class ConvenienceStore extends Store
 {

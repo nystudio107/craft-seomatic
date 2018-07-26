@@ -16,12 +16,12 @@ use nystudio107\seomatic\models\jsonld\Accommodation;
 /**
  * House - A house is a building or structure that has the ability to be
  * occupied for habitation by humans or other creatures (Source: Wikipedia,
- * the free encyclopedia, see http://en.wikipedia.org/wiki/House).
+ * the free encyclopedia, see https://en.wikipedia.org/wiki/House).
  *
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/House
+ * @see       https://schema.org/House
  */
 class House extends Accommodation
 {
@@ -47,7 +47,7 @@ class House extends Accommodation
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'A house is a building or structure that has the ability to be occupied for habitation by humans or other creatures (Source: Wikipedia, the free encyclopedia, see http://en.wikipedia.org/wiki/House).';
+    static public $schemaTypeDescription = 'A house is a building or structure that has the ability to be occupied for habitation by humans or other creatures (Source: Wikipedia, the free encyclopedia, see https://en.wikipedia.org/wiki/House).';
 
     /**
      * The Schema.org Type Extends

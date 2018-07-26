@@ -646,7 +646,7 @@ The `seomatic.meta` variable contains all of the meta variables that control the
 
 ##### General Variables:
 
-* **`seomatic.meta.mainEntityOfPage`** - the [schema.org](http://schema.org/docs/full.html) type that represents the main entity of the page
+* **`seomatic.meta.mainEntityOfPage`** - the [schema.org](https://schema.org/docs/full.html) type that represents the main entity of the page
 * **`seomatic.meta.seoTitle`** - the title that is used for the `<title>` tag
 * **`seomatic.meta.siteNamePosition`** - controls where the `seomatic.site.siteName` appears relative to the `seomatic.meta.seoTitle` in the `<title>` tag. Valid values are `before`, `after`, or `none`.
 * **`seomatic.meta.seoDescription`** - the description that is used for the `<meta name="description">` tag
@@ -727,7 +727,7 @@ The `seomatic.site.identity` encapsulates all of the information associated with
 * **`seomatic.site.identity.personBirthPlace`** - Only for entities of the type Person, the place where the person was born
 * **`seomatic.site.identity.organizationDuns`** - Only for entities of the type Organization, the DUNS (Dunn & Bradstreet) number of the organization that owns the website
 * **`seomatic.site.identity.organizationFounder`** - Only for entities of the type Organization, the name of the founder of the organization
-* **`seomatic.site.identity.organizationFoundingDate`** - Only for entities of the type Organization, the date the organization/company/restaurant was founded in [ISO 8601 date format](http://schema.org/Date), e.g.: `2018-03-26`
+* **`seomatic.site.identity.organizationFoundingDate`** - Only for entities of the type Organization, the date the organization/company/restaurant was founded in [ISO 8601 date format](https://schema.org/Date), e.g.: `2018-03-26`
 * **`seomatic.site.identity.organizationFoundingLocation`** - Only for entities of the type Organization, the location where the organization was founded
 * **`seomatic.site.identity.organizationContactPoints`** - Only for entities of the type Organization, an array of contact points for the organization. [Learn More](https://developers.google.com/search/docs/guides/enhance-site#provide-business-contact-markup)
 * **`seomatic.site.identity.corporationTickerSymbol`** - Only for entities of the type Corporation, the exchange ticker symbol of the corporation
@@ -768,7 +768,7 @@ The `seomatic.site.creator` encapsulates all of the information associated with 
 * **`seomatic.site.creator.personBirthPlace`** - Only for entities of the type Person, the place where the person was born
 * **`seomatic.site.creator.organizationDuns`** - Only for entities of the type Organization, the DUNS (Dunn & Bradstreet) number of the organization that created the website
 * **`seomatic.site.creator.organizationFounder`** - Only for entities of the type Organization, the name of the founder of the organization
-* **`seomatic.site.creator.organizationFoundingDate`** - Only for entities of the type Organization, the date the organization/company/restaurant was founded in [ISO 8601 date format](http://schema.org/Date), e.g.: `2018-03-26`
+* **`seomatic.site.creator.organizationFoundingDate`** - Only for entities of the type Organization, the date the organization/company/restaurant was founded in [ISO 8601 date format](https://schema.org/Date), e.g.: `2018-03-26`
 * **`seomatic.site.creator.organizationFoundingLocation`** - Only for entities of the type Organization, the location where the organization was founded
 * **`seomatic.site.creator.organizationContactPoints`** - Only for entities of the type Organization, an array of contact points for the organization. [Learn More](https://developers.google.com/search/docs/guides/enhance-site#provide-business-contact-markup)
 * **`seomatic.site.creator.corporationTickerSymbol`** - Only for entities of the type Corporation, the exchange ticker symbol of the corporation
@@ -988,14 +988,14 @@ If the website has `devMode` on, all of the meta objects are automatically valid
 #### JSON-LD Meta Object Functions `seomatic.jsonLd`
 
 * **`seomatic.jsonLd.get(META_HANDLE)`** Returns the JSON-LD meta object of the handle `META_HANDLE` or `null` if it is not found
-* **`seomatic.jsonLd.create()`** Creates a JSON-LD meta object from an array of key/value properties. The `type` can be any of the [Schema.org](http://schema.org/docs/full.html) types.
+* **`seomatic.jsonLd.create()`** Creates a JSON-LD meta object from an array of key/value properties. The `type` can be any of the [Schema.org](https://schema.org/docs/full.html) types.
 * **`seomatic.jsonLd.add(META_OBJECT)`** Adds the `META_OBJECT` to the JSON-LD container to be rendered
 * **`seomatic.jsonLd.render()`** Renders all of the JSON-LD meta objects to your template. This is only needed if you have turned off **Automatic Render** in Plugin Settings
 * **`seomatic.jsonLd.container()`** Returns the container that holds an array of all of the JSON-LD meta objects
 
 ##### JSON-LD Meta Object Examples:
 
-Create a new [Article](http://schema.org/Article) JSON-LD meta object:
+Create a new [Article](https://schema.org/Article) JSON-LD meta object:
 ```twig
 {% set myJsonLd = seomatic.jsonLd.create({
     'type': 'Article',
@@ -1004,12 +1004,12 @@ Create a new [Article](http://schema.org/Article) JSON-LD meta object:
 }) %}
 ```
 
-Get the existing **MainEntityOfPage** as set in the Global SEO or Content SEO AdminCP section to modify it (schema.org: [mainEntityOfPage](http://schema.org/docs/datamodel.html#mainEntityBackground)):
+Get the existing **MainEntityOfPage** as set in the Global SEO or Content SEO AdminCP section to modify it (schema.org: [mainEntityOfPage](https://schema.org/docs/datamodel.html#mainEntityBackground)):
 ```twig
 {% set mainEntity = seomatic.jsonLd.get('mainEntityOfPage') %}
 ```
 
-Get the existing **BreadcrumbList** as generated automatically by SEOmatic to modify them (schema.org: [BreadcrumbList](http://schema.org/BreadcrumbList)):
+Get the existing **BreadcrumbList** as generated automatically by SEOmatic to modify them (schema.org: [BreadcrumbList](https://schema.org/BreadcrumbList)):
 ```twig
 {% set crumbs = seomatic.jsonLd.get('breadcrumbList') %}
 ```
@@ -1325,13 +1325,13 @@ All of the individual container controller API endpoints also accept the `&asArr
  
 ### Schema.org API Endpoints
 
-To get a key/value array of a given [Schema.org](http://schema.org/docs/full.html) type:
+To get a key/value array of a given [Schema.org](https://schema.org/docs/full.html) type:
 
 ```
 /actions/seomatic/json-ld/get-type?schemaType=Article
 ```
 
-To get a decomposed version of a given [Schema.org](http://schema.org/docs/full.html) type, with the properties grouped by each inherited type:
+To get a decomposed version of a given [Schema.org](https://schema.org/docs/full.html) type, with the properties grouped by each inherited type:
 
 ```
 /actions/seomatic/json-ld/get-decomposed-type?schemaType=Article

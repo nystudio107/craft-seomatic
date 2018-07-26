@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\ItemList;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/HowToSection
+ * @see       https://schema.org/HowToSection
  */
 class HowToSection extends ItemList
 {

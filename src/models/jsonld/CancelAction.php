@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\PlanAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/CancelAction
+ * @see       https://schema.org/CancelAction
  */
 class CancelAction extends PlanAction
 {

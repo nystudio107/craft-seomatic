@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\StructuredValue;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/NutritionInformation
+ * @see       https://schema.org/NutritionInformation
  */
 class NutritionInformation extends StructuredValue
 {

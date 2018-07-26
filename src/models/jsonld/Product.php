@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\Thing;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Product
+ * @see       https://schema.org/Product
  */
 class Product extends Thing
 {
@@ -99,7 +99,7 @@ class Product extends Thing
      * entitity, e.g. a product feature or another characteristic for which there
      * is no matching property in schema.org. Note: Publishers should be aware
      * that applications designed to use specific schema.org properties (e.g.
-     * http://schema.org/width, http://schema.org/color, http://schema.org/gtin13,
+     * https://schema.org/width, https://schema.org/color, https://schema.org/gtin13,
      * ...) will typically expect such data to be provided using those properties,
      * rather than using the generic property/value mechanism.
      *
@@ -439,7 +439,7 @@ class Product extends Thing
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'additionalProperty' => 'A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org. Note: Publishers should be aware that applications designed to use specific schema.org properties (e.g. http://schema.org/width, http://schema.org/color, http://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.',
+        'additionalProperty' => 'A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org. Note: Publishers should be aware that applications designed to use specific schema.org properties (e.g. https://schema.org/width, https://schema.org/color, https://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.',
         'aggregateRating' => 'The overall rating, based on a collection of reviews or ratings, of the item.',
         'audience' => 'An intended audience, i.e. a group for whom something was created. Supersedes serviceAudience.',
         'award' => 'An award won by or for this item. Supersedes awards.',

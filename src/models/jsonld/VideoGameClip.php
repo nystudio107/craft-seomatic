@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\Clip;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/VideoGameClip
+ * @see       https://schema.org/VideoGameClip
  */
 class VideoGameClip extends Clip
 {

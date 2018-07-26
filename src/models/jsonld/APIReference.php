@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\TechArticle;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/APIReference
+ * @see       https://schema.org/APIReference
  */
 class APIReference extends TechArticle
 {

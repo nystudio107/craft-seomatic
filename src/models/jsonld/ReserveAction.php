@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\PlanAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/ReserveAction
+ * @see       https://schema.org/ReserveAction
  */
 class ReserveAction extends PlanAction
 {

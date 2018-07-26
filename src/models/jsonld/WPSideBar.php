@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\WebPageElement;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/WPSideBar
+ * @see       https://schema.org/WPSideBar
  */
 class WPSideBar extends WebPageElement
 {
@@ -637,7 +637,7 @@ class WPSideBar extends WebPageElement
     /**
      * Indicates (by URL or string) a particular version of a schema used in some
      * CreativeWork. For example, a document could declare a schemaVersion using
-     * an URL such as http://schema.org/version/2.0/ if precise indication of
+     * an URL such as https://schema.org/version/2.0/ if precise indication of
      * schema version was required by some application.
      *
      * @var mixed|string|string [schema.org types: Text, URL]
@@ -1025,7 +1025,7 @@ class WPSideBar extends WebPageElement
         'recordedAt' => 'The Event where the CreativeWork was recorded. The CreativeWork may capture all or part of the event. Inverse property: recordedIn.',
         'releasedEvent' => 'The place and time the release was issued, expressed as a PublicationEvent.',
         'review' => 'A review of the item. Supersedes reviews.',
-        'schemaVersion' => 'Indicates (by URL or string) a particular version of a schema used in some CreativeWork. For example, a document could declare a schemaVersion using an URL such as http://schema.org/version/2.0/ if precise indication of schema version was required by some application.',
+        'schemaVersion' => 'Indicates (by URL or string) a particular version of a schema used in some CreativeWork. For example, a document could declare a schemaVersion using an URL such as https://schema.org/version/2.0/ if precise indication of schema version was required by some application.',
         'sourceOrganization' => 'The Organization on whose behalf the creator was working.',
         'spatialCoverage' => 'The spatialCoverage of a CreativeWork indicates the place(s) which are the focus of the content. It is a subproperty of contentLocation intended primarily for more technical and detailed materials. For example with a Dataset, it indicates areas that the dataset describes: a dataset of New York weather would have spatialCoverage which was the place: the state of New York. Supersedes spatial.',
         'sponsor' => 'A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.',

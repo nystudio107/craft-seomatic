@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\GovernmentBuilding;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/DefenceEstablishment
+ * @see       https://schema.org/DefenceEstablishment
  */
 class DefenceEstablishment extends GovernmentBuilding
 {

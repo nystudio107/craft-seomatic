@@ -23,7 +23,7 @@ use nystudio107\seomatic\models\jsonld\InteractAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/UnRegisterAction
+ * @see       https://schema.org/UnRegisterAction
  */
 class UnRegisterAction extends InteractAction
 {

@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\HealthAndBeautyBusiness ;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/HairSalon
+ * @see       https://schema.org/HairSalon
  */
 class HairSalon extends HealthAndBeautyBusiness
 {

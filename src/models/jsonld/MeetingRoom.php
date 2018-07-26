@@ -17,14 +17,14 @@ use nystudio107\seomatic\models\jsonld\Room;
  * MeetingRoom - A meeting room, conference room, or conference hall is a room
  * provided for singular events such as business conferences and meetings
  * (Source: Wikipedia, the free encyclopedia, see
- * http://en.wikipedia.org/wiki/Conference_hall). See also the dedicated
+ * https://en.wikipedia.org/wiki/Conference_hall). See also the dedicated
  * document on the use of schema.org for marking up hotels and other forms of
  * accommodations.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/MeetingRoom
+ * @see       https://schema.org/MeetingRoom
  */
 class MeetingRoom extends Room
 {
@@ -50,7 +50,7 @@ class MeetingRoom extends Room
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'A meeting room, conference room, or conference hall is a room provided for singular events such as business conferences and meetings (Source: Wikipedia, the free encyclopedia, see http://en.wikipedia.org/wiki/Conference_hall). See also the dedicated document on the use of schema.org for marking up hotels and other forms of accommodations.';
+    static public $schemaTypeDescription = 'A meeting room, conference room, or conference hall is a room provided for singular events such as business conferences and meetings (Source: Wikipedia, the free encyclopedia, see https://en.wikipedia.org/wiki/Conference_hall). See also the dedicated document on the use of schema.org for marking up hotels and other forms of accommodations.';
 
     /**
      * The Schema.org Type Extends

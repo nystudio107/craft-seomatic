@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\BlogPosting;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/LiveBlogPosting
+ * @see       https://schema.org/LiveBlogPosting
  */
 class LiveBlogPosting extends BlogPosting
 {

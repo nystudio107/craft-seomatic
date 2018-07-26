@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\ReactAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/WantAction
+ * @see       https://schema.org/WantAction
  */
 class WantAction extends ReactAction
 {

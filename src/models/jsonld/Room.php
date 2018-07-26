@@ -16,14 +16,14 @@ use nystudio107\seomatic\models\jsonld\Accommodation;
 /**
  * Room - A room is a distinguishable space within a structure, usually
  * separated from other spaces by interior walls. (Source: Wikipedia, the free
- * encyclopedia, see http://en.wikipedia.org/wiki/Room). See also the
+ * encyclopedia, see https://en.wikipedia.org/wiki/Room). See also the
  * dedicated document on the use of schema.org for marking up hotels and other
  * forms of accommodations.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Room
+ * @see       https://schema.org/Room
  */
 class Room extends Accommodation
 {
@@ -49,7 +49,7 @@ class Room extends Accommodation
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'A room is a distinguishable space within a structure, usually separated from other spaces by interior walls. (Source: Wikipedia, the free encyclopedia, see http://en.wikipedia.org/wiki/Room). See also the dedicated document on the use of schema.org for marking up hotels and other forms of accommodations.';
+    static public $schemaTypeDescription = 'A room is a distinguishable space within a structure, usually separated from other spaces by interior walls. (Source: Wikipedia, the free encyclopedia, see https://en.wikipedia.org/wiki/Room). See also the dedicated document on the use of schema.org for marking up hotels and other forms of accommodations.';
 
     /**
      * The Schema.org Type Extends

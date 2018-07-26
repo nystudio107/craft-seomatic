@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\Enumeration;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/OrderStatus
+ * @see       https://schema.org/OrderStatus
  */
 class OrderStatus extends Enumeration
 {

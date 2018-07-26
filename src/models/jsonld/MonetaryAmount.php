@@ -23,7 +23,7 @@ use nystudio107\seomatic\models\jsonld\StructuredValue;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/MonetaryAmount
+ * @see       https://schema.org/MonetaryAmount
  */
 class MonetaryAmount extends StructuredValue
 {

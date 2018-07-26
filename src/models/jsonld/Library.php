@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\LocalBusiness;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Library
+ * @see       https://schema.org/Library
  */
 class Library extends LocalBusiness
 {

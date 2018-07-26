@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\LodgingBusiness;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/BedAndBreakfast
+ * @see       https://schema.org/BedAndBreakfast
  */
 class BedAndBreakfast extends LodgingBusiness
 {

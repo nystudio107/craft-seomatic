@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\Audience;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/BusinessAudience
+ * @see       https://schema.org/BusinessAudience
  */
 class BusinessAudience extends Audience
 {

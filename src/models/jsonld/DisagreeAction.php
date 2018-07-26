@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\ReactAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/DisagreeAction
+ * @see       https://schema.org/DisagreeAction
  */
 class DisagreeAction extends ReactAction
 {

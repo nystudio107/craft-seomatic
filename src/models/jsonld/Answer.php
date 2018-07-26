@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\Comment;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Answer
+ * @see       https://schema.org/Answer
  */
 class Answer extends Comment
 {

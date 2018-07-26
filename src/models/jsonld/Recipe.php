@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\HowTo;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Recipe
+ * @see       https://schema.org/Recipe
  */
 class Recipe extends HowTo
 {

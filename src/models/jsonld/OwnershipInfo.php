@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\StructuredValue;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/OwnershipInfo
+ * @see       https://schema.org/OwnershipInfo
  */
 class OwnershipInfo extends StructuredValue
 {

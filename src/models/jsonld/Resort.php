@@ -17,14 +17,14 @@ use nystudio107\seomatic\models\jsonld\LodgingBusiness;
  * Resort - A resort is a place used for relaxation or recreation, attracting
  * visitors for holidays or vacations. Resorts are places, towns or sometimes
  * commercial establishment operated by a single company (Source: Wikipedia,
- * the free encyclopedia, see http://en.wikipedia.org/wiki/Resort). See also
+ * the free encyclopedia, see https://en.wikipedia.org/wiki/Resort). See also
  * the dedicated document on the use of schema.org for marking up hotels and
  * other forms of accommodations.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Resort
+ * @see       https://schema.org/Resort
  */
 class Resort extends LodgingBusiness
 {
@@ -50,7 +50,7 @@ class Resort extends LodgingBusiness
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'A resort is a place used for relaxation or recreation, attracting visitors for holidays or vacations. Resorts are places, towns or sometimes commercial establishment operated by a single company (Source: Wikipedia, the free encyclopedia, see http://en.wikipedia.org/wiki/Resort). See also the dedicated document on the use of schema.org for marking up hotels and other forms of accommodations.';
+    static public $schemaTypeDescription = 'A resort is a place used for relaxation or recreation, attracting visitors for holidays or vacations. Resorts are places, towns or sometimes commercial establishment operated by a single company (Source: Wikipedia, the free encyclopedia, see https://en.wikipedia.org/wiki/Resort). See also the dedicated document on the use of schema.org for marking up hotels and other forms of accommodations.';
 
     /**
      * The Schema.org Type Extends

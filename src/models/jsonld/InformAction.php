@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\CommunicateAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/InformAction
+ * @see       https://schema.org/InformAction
  */
 class InformAction extends CommunicateAction
 {

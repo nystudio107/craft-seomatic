@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\Thing;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Action
+ * @see       https://schema.org/Action
  */
 class Action extends Thing
 {

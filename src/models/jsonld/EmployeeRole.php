@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\OrganizationRole;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/EmployeeRole
+ * @see       https://schema.org/EmployeeRole
  */
 class EmployeeRole extends OrganizationRole
 {

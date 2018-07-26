@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\FoodEstablishment;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/CafeOrCoffeeShop
+ * @see       https://schema.org/CafeOrCoffeeShop
  */
 class CafeOrCoffeeShop extends FoodEstablishment
 {

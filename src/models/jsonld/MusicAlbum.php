@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\MusicPlaylist;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/MusicAlbum
+ * @see       https://schema.org/MusicAlbum
  */
 class MusicAlbum extends MusicPlaylist
 {

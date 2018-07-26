@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\WebPage;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/SearchResultsPage
+ * @see       https://schema.org/SearchResultsPage
  */
 class SearchResultsPage extends WebPage
 {

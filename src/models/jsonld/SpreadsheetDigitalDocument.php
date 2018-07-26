@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\DigitalDocument;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/SpreadsheetDigitalDocument
+ * @see       https://schema.org/SpreadsheetDigitalDocument
  */
 class SpreadsheetDigitalDocument extends DigitalDocument
 {

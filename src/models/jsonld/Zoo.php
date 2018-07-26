@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\CivicStructure;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Zoo
+ * @see       https://schema.org/Zoo
  */
 class Zoo extends CivicStructure
 {

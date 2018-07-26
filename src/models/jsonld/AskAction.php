@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\CommunicateAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/AskAction
+ * @see       https://schema.org/AskAction
  */
 class AskAction extends CommunicateAction
 {

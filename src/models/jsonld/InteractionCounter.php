@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\StructuredValue;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/InteractionCounter
+ * @see       https://schema.org/InteractionCounter
  */
 class InteractionCounter extends StructuredValue
 {

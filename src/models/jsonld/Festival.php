@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\Event;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Festival
+ * @see       https://schema.org/Festival
  */
 class Festival extends Event
 {

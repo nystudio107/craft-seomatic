@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\Episode;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/TVEpisode
+ * @see       https://schema.org/TVEpisode
  */
 class TVEpisode extends Episode
 {

@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\Store;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/HobbyShop
+ * @see       https://schema.org/HobbyShop
  */
 class HobbyShop extends Store
 {

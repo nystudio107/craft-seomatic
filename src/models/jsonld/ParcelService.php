@@ -22,7 +22,7 @@ use nystudio107\seomatic\models\jsonld\DeliveryMethod;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/ParcelService
+ * @see       https://schema.org/ParcelService
  */
 class ParcelService extends DeliveryMethod
 {

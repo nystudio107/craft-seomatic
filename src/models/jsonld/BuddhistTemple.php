@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\PlaceOfWorship;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/BuddhistTemple
+ * @see       https://schema.org/BuddhistTemple
  */
 class BuddhistTemple extends PlaceOfWorship
 {

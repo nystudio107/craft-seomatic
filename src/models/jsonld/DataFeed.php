@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\Dataset;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/DataFeed
+ * @see       https://schema.org/DataFeed
  */
 class DataFeed extends Dataset
 {

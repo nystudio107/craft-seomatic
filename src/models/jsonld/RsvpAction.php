@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\InformAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/RsvpAction
+ * @see       https://schema.org/RsvpAction
  */
 class RsvpAction extends InformAction
 {

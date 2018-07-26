@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\TradeAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/SellAction
+ * @see       https://schema.org/SellAction
  */
 class SellAction extends TradeAction
 {

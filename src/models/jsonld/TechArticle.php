@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\Article;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/TechArticle
+ * @see       https://schema.org/TechArticle
  */
 class TechArticle extends Article
 {

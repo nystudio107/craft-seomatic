@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\StructuredValue;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/QuantitativeValue
+ * @see       https://schema.org/QuantitativeValue
  */
 class QuantitativeValue extends StructuredValue
 {
@@ -98,7 +98,7 @@ class QuantitativeValue extends StructuredValue
      * entitity, e.g. a product feature or another characteristic for which there
      * is no matching property in schema.org. Note: Publishers should be aware
      * that applications designed to use specific schema.org properties (e.g.
-     * http://schema.org/width, http://schema.org/color, http://schema.org/gtin13,
+     * https://schema.org/width, https://schema.org/color, https://schema.org/gtin13,
      * ...) will typically expect such data to be provided using those properties,
      * rather than using the generic property/value mechanism.
      *
@@ -194,7 +194,7 @@ class QuantitativeValue extends StructuredValue
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'additionalProperty' => 'A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org. Note: Publishers should be aware that applications designed to use specific schema.org properties (e.g. http://schema.org/width, http://schema.org/color, http://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.',
+        'additionalProperty' => 'A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org. Note: Publishers should be aware that applications designed to use specific schema.org properties (e.g. https://schema.org/width, https://schema.org/color, https://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.',
         'maxValue' => 'The upper value of some characteristic or property.',
         'minValue' => 'The lower value of some characteristic or property.',
         'unitCode' => 'The unit of measurement given using the UN/CEFACT Common Code (3 characters) or a URL. Other codes than the UN/CEFACT Common Code may be used with a prefix followed by a colon.',

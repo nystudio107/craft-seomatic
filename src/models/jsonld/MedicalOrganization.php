@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\Organization;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/MedicalOrganization
+ * @see       https://schema.org/MedicalOrganization
  */
 class MedicalOrganization extends Organization
 {

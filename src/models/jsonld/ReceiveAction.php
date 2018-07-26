@@ -24,7 +24,7 @@ use nystudio107\seomatic\models\jsonld\TransferAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/ReceiveAction
+ * @see       https://schema.org/ReceiveAction
  */
 class ReceiveAction extends TransferAction
 {

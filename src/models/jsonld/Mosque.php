@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\PlaceOfWorship;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Mosque
+ * @see       https://schema.org/Mosque
  */
 class Mosque extends PlaceOfWorship
 {

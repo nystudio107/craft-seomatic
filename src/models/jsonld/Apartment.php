@@ -17,12 +17,12 @@ use nystudio107\seomatic\models\jsonld\Accommodation;
  * Apartment - An apartment (in American English) or flat (in British English)
  * is a self-contained housing unit (a type of residential real estate) that
  * occupies only part of a building (Source: Wikipedia, the free encyclopedia,
- * see http://en.wikipedia.org/wiki/Apartment).
+ * see https://en.wikipedia.org/wiki/Apartment).
  *
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Apartment
+ * @see       https://schema.org/Apartment
  */
 class Apartment extends Accommodation
 {
@@ -48,7 +48,7 @@ class Apartment extends Accommodation
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'An apartment (in American English) or flat (in British English) is a self-contained housing unit (a type of residential real estate) that occupies only part of a building (Source: Wikipedia, the free encyclopedia, see http://en.wikipedia.org/wiki/Apartment).';
+    static public $schemaTypeDescription = 'An apartment (in American English) or flat (in British English) is a self-contained housing unit (a type of residential real estate) that occupies only part of a building (Source: Wikipedia, the free encyclopedia, see https://en.wikipedia.org/wiki/Apartment).';
 
     /**
      * The Schema.org Type Extends

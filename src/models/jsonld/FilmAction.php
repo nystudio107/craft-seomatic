@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\CreateAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/FilmAction
+ * @see       https://schema.org/FilmAction
  */
 class FilmAction extends CreateAction
 {

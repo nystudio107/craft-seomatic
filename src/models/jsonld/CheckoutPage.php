@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\WebPage;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/CheckoutPage
+ * @see       https://schema.org/CheckoutPage
  */
 class CheckoutPage extends WebPage
 {

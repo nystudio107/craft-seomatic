@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\LocalBusiness;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/TouristInformationCenter
+ * @see       https://schema.org/TouristInformationCenter
  */
 class TouristInformationCenter extends LocalBusiness
 {

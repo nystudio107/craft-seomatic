@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\Reservation;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/ReservationPackage
+ * @see       https://schema.org/ReservationPackage
  */
 class ReservationPackage extends Reservation
 {

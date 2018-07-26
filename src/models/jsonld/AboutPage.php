@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\WebPage;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/AboutPage
+ * @see       https://schema.org/AboutPage
  */
 class AboutPage extends WebPage
 {

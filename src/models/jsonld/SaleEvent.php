@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\Event;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/SaleEvent
+ * @see       https://schema.org/SaleEvent
  */
 class SaleEvent extends Event
 {

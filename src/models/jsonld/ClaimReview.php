@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\Review;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/ClaimReview
+ * @see       https://schema.org/ClaimReview
  */
 class ClaimReview extends Review
 {

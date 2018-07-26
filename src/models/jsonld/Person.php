@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\Thing;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Person
+ * @see       https://schema.org/Person
  */
 class Person extends Thing
 {
@@ -231,8 +231,8 @@ class Person extends Thing
     public $funder;
 
     /**
-     * Gender of the person. While http://schema.org/Male and
-     * http://schema.org/Female may be used, text strings are also acceptable for
+     * Gender of the person. While https://schema.org/Male and
+     * https://schema.org/Female may be used, text strings are also acceptable for
      * people who do not identify as a binary gender.
      *
      * @var mixed|GenderType|string [schema.org types: GenderType, Text]
@@ -624,7 +624,7 @@ class Person extends Thing
         'faxNumber' => 'The fax number.',
         'follows' => 'The most generic uni-directional social relation.',
         'funder' => 'A person or organization that supports (sponsors) something through some kind of financial contribution.',
-        'gender' => 'Gender of the person. While http://schema.org/Male and http://schema.org/Female may be used, text strings are also acceptable for people who do not identify as a binary gender.',
+        'gender' => 'Gender of the person. While https://schema.org/Male and https://schema.org/Female may be used, text strings are also acceptable for people who do not identify as a binary gender.',
         'givenName' => 'Given name. In the U.S., the first name of a Person. This can be used along with familyName instead of the name property.',
         'globalLocationNumber' => 'The Global Location Number (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations.',
         'hasOfferCatalog' => 'Indicates an OfferCatalog listing for this Organization, Person, or Service.',

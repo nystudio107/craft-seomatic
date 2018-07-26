@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\FindAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/CheckAction
+ * @see       https://schema.org/CheckAction
  */
 class CheckAction extends FindAction
 {

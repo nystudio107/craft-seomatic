@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\GovernmentBuilding;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Courthouse
+ * @see       https://schema.org/Courthouse
  */
 class Courthouse extends GovernmentBuilding
 {

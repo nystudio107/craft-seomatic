@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\CivicStructure;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/StadiumOrArena
+ * @see       https://schema.org/StadiumOrArena
  */
 class StadiumOrArena extends CivicStructure
 {

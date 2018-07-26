@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\CivicStructure;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/GovernmentBuilding
+ * @see       https://schema.org/GovernmentBuilding
  */
 class GovernmentBuilding extends CivicStructure
 {

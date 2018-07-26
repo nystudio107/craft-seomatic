@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\TransferAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/ReturnAction
+ * @see       https://schema.org/ReturnAction
  */
 class ReturnAction extends TransferAction
 {
