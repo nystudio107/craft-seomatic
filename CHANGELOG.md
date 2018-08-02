@@ -4,6 +4,13 @@
 ### Changed
 * Fixed an issue where Content SEO permissions were not respected properly in the AdminCP
 
+### Added
+* Don't render a canonical url for http status codes >= 400
+* Set meta robots tag to `none` for http status codes >= 400
+
+### Security
+* Decode HTML entities, then strip tags in `safeCanonicalUrl()`
+
 ## 3.1.6 - 2018.07.25
 ### Changed
 * Really ensure that paginated pages are cached separately in the second-level cache
