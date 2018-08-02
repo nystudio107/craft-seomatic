@@ -4,28 +4,28 @@
 {% set navItems = {
     'heading': { heading: "Settings"|t },
 } %}
-{% if currentUser.can("seomatic:global-meta:general") %}
+{% if currentUser.can("seomatic:content-meta:general") %}
     {% set navItems = navItems |merge({
         general: {
             title: "General"|t("seomatic"),
         },
     }) %}
 {% endif %}
-{% if currentUser.can("seomatic:global-meta:twitter") %}
+{% if currentUser.can("seomatic:content-meta:twitter") %}
     {% set navItems = navItems |merge({
         twitter: {
             title: "Twitter"|t("seomatic"),
         },
     }) %}
 {% endif %}
-{% if currentUser.can("seomatic:global-meta:facebook") %}
+{% if currentUser.can("seomatic:content-meta:facebook") %}
     {% set navItems = navItems |merge({
         facebook: {
             title: "Facebook"|t("seomatic"),
         },
     }) %}
 {% endif %}
-{% if currentUser.can("seomatic:global-meta:sitemap") %}
+{% if currentUser.can("seomatic:content-meta:sitemap") %}
     {% set navItems = navItems |merge({
         sitemap: {
             title: "Sitemap"|t("seomatic"),
