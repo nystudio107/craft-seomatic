@@ -3,6 +3,7 @@
 ## 3.1.7 - 2018.08.02
 ### Changed
 * Fixed an issue where Content SEO permissions were not respected properly in the AdminCP
+* Display the Tracking Scripts status in the AdminCP regardless of `devMode` setting
 
 ### Added
 * Don't render a canonical url for http status codes >= 400
