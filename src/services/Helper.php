@@ -54,7 +54,11 @@ class Helper extends Component
         } catch (InvalidConfigException $e) {
             Craft::error($e->getMessage(), __METHOD__);
         }
+        // Remove the query string
         $url = UrlHelper::stripQueryString($url);
+        // HTML decode the entities, then strip out any tags
+        $url = html_entity_decode($url, ENT_NOQUOTES, 'UTF-8');
+        $url = strip_tags($url);
 
         return UrlHelper::absoluteUrlWithProtocol($url);
     }
