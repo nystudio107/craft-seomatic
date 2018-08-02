@@ -212,6 +212,7 @@ class MetaBundle extends FluentModel
             Seomatic::$seomaticVariable->meta = $thisGlobals;
             Seomatic::$seomaticVariable->site = $thisSite;
             MetaValueHelper::cache();
+            Seomatic::$previewingMetaContainers = $oldPreviewingMetaContainers;
 
             // Meta containers
             if (!empty($this->metaContainers)) {
@@ -226,7 +227,6 @@ class MetaBundle extends FluentModel
             }
             // Restore the $seomaticVariable
             Seomatic::$loadingContainers = $oldLoadingContainers;
-            Seomatic::$previewingMetaContainers = $oldPreviewingMetaContainers;
             Seomatic::$seomaticVariable->meta = $oldMeta;
             Seomatic::$seomaticVariable->site = $oldSite;
             Seomatic::$seomaticVariable = $oldSeomaticVariable;
