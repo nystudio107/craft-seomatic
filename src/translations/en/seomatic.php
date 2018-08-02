@@ -324,5 +324,10 @@ return [
     ' script did not render' => ' script did not render',
     'HTTP Headers Enabled' => 'HTTP Headers Enabled',
     'Generator Enabled' => 'Generator Enabled',
-    '`http` Headers Enabled' => '`http` Headers Enabled'
+    '`http` Headers Enabled' => '`http` Headers Enabled',
+    'Additional Sitemap URLs' => 'Additional Sitemap URLs',
+    'Add the custom sitemap URLs below.' => 'Add the custom sitemap URLs below.',
+    'SEOmatic will automatically create a sitemap for each of your sections, but if you have additional URLs that are outside of the CMS that you want to include, you can add them here.' => 'SEOmatic will automatically create a sitemap for each of your sections, but if you have additional URLs that are outside of the CMS that you want to include, you can add them here.',
+    'Sitemap URLs' => 'Sitemap URLs',
+    'Miscallaneous site-wide SEO settings.' => 'Miscallaneous site-wide SEO settings.'
 ];
