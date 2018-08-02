@@ -65,6 +65,10 @@ class CanonicalLink extends MetaLink
     {
         $shouldRender = parent::prepForRender($data);
         if ($shouldRender) {
+            // Don't render a canonical url for http status codes >= 400
+            if (Craft::$app->getResponse()->statusCode >= 400) {
+                return false;
+            }
             if (!empty($data['href'])) {
                 $data['href'] = UrlHelper::absoluteUrlWithProtocol(
                     StringHelper::toLowerCase($data['href'])

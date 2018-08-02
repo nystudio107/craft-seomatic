@@ -138,11 +138,11 @@ class SettingsController extends Controller
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
-                'url'   => UrlHelper::cpUrl('seomatic'),
+                'url' => UrlHelper::cpUrl('seomatic'),
             ],
             [
                 'label' => $templateTitle,
-                'url'   => UrlHelper::cpUrl('seomatic/dashboard'),
+                'url' => UrlHelper::cpUrl('seomatic/dashboard'),
             ],
         ];
         $variables['selectedSubnavItem'] = 'dashboard';
@@ -236,15 +236,15 @@ class SettingsController extends Controller
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
-                'url'   => UrlHelper::cpUrl('seomatic'),
+                'url' => UrlHelper::cpUrl('seomatic'),
             ],
             [
                 'label' => $templateTitle,
-                'url'   => UrlHelper::cpUrl('seomatic/global'),
+                'url' => UrlHelper::cpUrl('seomatic/global'),
             ],
             [
                 'label' => $subSectionTitle,
-                'url'   => UrlHelper::cpUrl('seomatic/global/'.$subSection),
+                'url' => UrlHelper::cpUrl('seomatic/global/'.$subSection),
             ],
         ];
         $variables['selectedSubnavItem'] = 'global';
@@ -295,6 +295,7 @@ class SettingsController extends Controller
     /**
      * @return Response
      * @throws \yii\web\BadRequestHttpException
+     * @throws \craft\errors\MissingComponentException
      */
     public function actionSaveGlobal(): Response
     {
@@ -376,11 +377,11 @@ class SettingsController extends Controller
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
-                'url'   => UrlHelper::cpUrl('seomatic'),
+                'url' => UrlHelper::cpUrl('seomatic'),
             ],
             [
                 'label' => $templateTitle,
-                'url'   => UrlHelper::cpUrl('seomatic/content'),
+                'url' => UrlHelper::cpUrl('seomatic/content'),
             ],
         ];
         $this->setMultiSiteVariables($siteHandle, $siteId, $variables);
@@ -460,15 +461,15 @@ class SettingsController extends Controller
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
-                'url'   => UrlHelper::cpUrl('seomatic'),
+                'url' => UrlHelper::cpUrl('seomatic'),
             ],
             [
                 'label' => 'Content SEO',
-                'url'   => UrlHelper::cpUrl('seomatic/content'),
+                'url' => UrlHelper::cpUrl('seomatic/content'),
             ],
             [
                 'label' => $metaBundle->sourceName.' · '.$subSectionTitle,
-                'url'   => UrlHelper::cpUrl("seomatic/edit-content/${subSection}/${sourceBundleType}/${sourceHandle}"),
+                'url' => UrlHelper::cpUrl("seomatic/edit-content/${subSection}/${sourceBundleType}/${sourceHandle}"),
             ],
         ];
         $variables['selectedSubnavItem'] = 'content';
@@ -509,6 +510,7 @@ class SettingsController extends Controller
     /**
      * @return Response
      * @throws \yii\web\BadRequestHttpException
+     * @throws \craft\errors\MissingComponentException
      */
     public function actionSaveContent(): Response
     {
@@ -608,15 +610,15 @@ class SettingsController extends Controller
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
-                'url'   => UrlHelper::cpUrl('seomatic'),
+                'url' => UrlHelper::cpUrl('seomatic'),
             ],
             [
                 'label' => $templateTitle,
-                'url'   => UrlHelper::cpUrl('seomatic/site'),
+                'url' => UrlHelper::cpUrl('seomatic/site'),
             ],
             [
                 'label' => $subSectionTitle,
-                'url'   => UrlHelper::cpUrl('seomatic/site/'.$subSection),
+                'url' => UrlHelper::cpUrl('seomatic/site/'.$subSection),
             ],
         ];
         $variables['selectedSubnavItem'] = 'site';
@@ -650,6 +652,7 @@ class SettingsController extends Controller
     /**
      * @return Response
      * @throws \yii\web\BadRequestHttpException
+     * @throws \craft\errors\MissingComponentException
      */
     public function actionSaveSite(): Response
     {
@@ -728,11 +731,11 @@ class SettingsController extends Controller
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
-                'url'   => UrlHelper::cpUrl('seomatic'),
+                'url' => UrlHelper::cpUrl('seomatic'),
             ],
             [
                 'label' => $templateTitle,
-                'url'   => UrlHelper::cpUrl('seomatic/plugin'),
+                'url' => UrlHelper::cpUrl('seomatic/plugin'),
             ],
         ];
         $variables['selectedSubnavItem'] = 'plugin';
@@ -797,15 +800,15 @@ class SettingsController extends Controller
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
-                'url'   => UrlHelper::cpUrl('seomatic'),
+                'url' => UrlHelper::cpUrl('seomatic'),
             ],
             [
                 'label' => $templateTitle,
-                'url'   => UrlHelper::cpUrl('seomatic/tracking'),
+                'url' => UrlHelper::cpUrl('seomatic/tracking'),
             ],
             [
                 'label' => $subSectionTitle,
-                'url'   => UrlHelper::cpUrl('seomatic/tracking/'.$subSection),
+                'url' => UrlHelper::cpUrl('seomatic/tracking/'.$subSection),
             ],
         ];
         $variables['selectedSubnavItem'] = 'tracking';
@@ -817,6 +820,7 @@ class SettingsController extends Controller
     /**
      * @return Response
      * @throws \yii\web\BadRequestHttpException
+     * @throws \craft\errors\MissingComponentException
      */
     public function actionSaveTracking(): Response
     {
@@ -865,6 +869,7 @@ class SettingsController extends Controller
      * @return Response|null
      * @throws NotFoundHttpException if the requested plugin cannot be found
      * @throws \yii\web\BadRequestHttpException
+     * @throws \craft\errors\MissingComponentException
      */
     public function actionSavePluginSettings()
     {
@@ -878,11 +883,11 @@ class SettingsController extends Controller
         }
 
         if (!Craft::$app->getPlugins()->savePluginSettings($plugin, $settings)) {
-            Craft::$app->getSession()->setError(Craft::t('app', 'Couldn’t save plugin settings.'));
+            Craft::$app->getSession()->setError(Craft::t('app', "Couldn't save plugin settings."));
 
             // Send the plugin back to the template
             Craft::$app->getUrlManager()->setRouteParams([
-                'plugin' => $plugin
+                'plugin' => $plugin,
             ]);
 
             return null;
@@ -967,8 +972,9 @@ class SettingsController extends Controller
     }
 
     /**
-     * @param string $sourceBundleType
-     * @param string $sourceHandle
+     * @param string   $sourceBundleType
+     * @param string   $sourceHandle
+     * @param null|int $siteId
      *
      * @return string
      */

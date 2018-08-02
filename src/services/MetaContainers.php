@@ -41,7 +41,6 @@ use craft\commerce\Plugin as CommercePlugin;
 use craft\commerce\elements\Product;
 
 use yii\base\Exception;
-use yii\base\InvalidConfigException;
 use yii\caching\TagDependency;
 
 /**
