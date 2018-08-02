@@ -13,6 +13,8 @@ namespace nystudio107\seomatic\models\metatag;
 
 use nystudio107\seomatic\models\MetaTag;
 
+use Craft;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -68,5 +70,21 @@ class RobotsTag extends MetaTag
         ]);
 
         return $rules;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function prepForRender(&$data): bool
+    {
+        $shouldRender = parent::prepForRender($data);
+        if ($shouldRender) {
+            // Set meta robots tag to `none` for http status codes >= 400
+            if (Craft::$app->getResponse()->statusCode >= 400) {
+                $data['content'] = 'none';
+            }
+        }
+
+        return $shouldRender;
     }
 }
