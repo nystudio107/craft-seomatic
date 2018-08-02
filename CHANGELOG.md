@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.7 - 2018.08.02
+### Changed
+* Fixed an issue where Content SEO permissions were not respected properly in the AdminCP
+
 ## 3.1.6 - 2018.07.25
 ### Changed
 * Really ensure that paginated pages are cached separately in the second-level cache
