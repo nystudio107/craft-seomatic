@@ -60,6 +60,11 @@ class Helper extends Component
         $url = html_entity_decode($url, ENT_NOQUOTES, 'UTF-8');
         $url = strip_tags($url);
 
+        // If this is a >= 400 status code, set the canonical URL to nothing
+        if (Craft::$app->getResponse()->statusCode >= 400) {
+            $url = '';
+        }
+
         return UrlHelper::absoluteUrlWithProtocol($url);
     }
 
