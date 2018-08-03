@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.8 - 2018.08.03
+### Changed
+* Fixed a regression that caused you to be unable to save **Custom URL** for an image source in the AdminCP
+
 ## 3.1.7 - 2018.08.02
 ### Changed
 * Fixed an issue where Content SEO permissions were not respected properly in the AdminCP
