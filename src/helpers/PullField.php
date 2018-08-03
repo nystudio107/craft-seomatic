@@ -159,7 +159,9 @@ class PullField
                     }
                 }
                 // Reset the fields to empty by default
-                $globalsSettings[$fieldName] = '';
+                if ($source !== 'fromUrl') {
+                    $globalsSettings[$fieldName] = '';
+                }
                 $globalsSettings[$fieldNameWidth] = '';
                 $globalsSettings[$fieldNameHeight] = '';
                 // Handle transformed images
