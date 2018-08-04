@@ -35,6 +35,8 @@ use craft\base\Component;
 use craft\base\Element;
 use craft\elements\Category;
 use craft\elements\Entry;
+use craft\models\EntryDraft;
+use craft\models\EntryVersion;
 use craft\helpers\UrlHelper;
 
 use craft\commerce\Plugin as CommercePlugin;
@@ -505,6 +507,8 @@ class MetaContainers extends Component
             $sourceType = '';
             switch (\get_class($element)) {
                 case Entry::class:
+                case EntryDraft::class:
+                case EntryVersion::class:
                     /** @var  $element Entry */
                     $sourceType = MetaBundles::SECTION_META_BUNDLE;
                     break;
@@ -553,7 +557,6 @@ class MetaContainers extends Component
             $parsedAttributes,
             [ArrayHelper::class, 'preserveBools']
         );
-        //Craft::dd($parsedAttributes);
         $attributes = array_intersect_key($attributes, $parsedAttributes);
         // Add the attributes in
         $attributes = array_filter(
