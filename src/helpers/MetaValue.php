@@ -184,6 +184,10 @@ class MetaValue
             }
             if ($reflector) {
                 $matchedElementType = strtolower($reflector->getShortName());
+                // Special cast for EntryDraft and EntryVersion
+                if ($matchedElementType === 'entrydraft' || $matchedElementType === 'entryversion') {
+                    $matchedElementType = 'entry';
+                }
                 self::$templateObjectVars[$matchedElementType] = $element;
             }
         }
