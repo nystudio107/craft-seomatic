@@ -11,14 +11,16 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use craft\elements\Asset;
-use craft\errors\SiteNotFoundException;
 use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\helpers\Field as FieldHelper;
 
 use Craft;
 use craft\base\Element;
+use craft\elements\Asset;
+use craft\errors\SiteNotFoundException;
 use craft\helpers\StringHelper;
 use craft\web\View;
+
 use yii\base\Exception;
 
 /**
@@ -177,17 +179,13 @@ class MetaValue
         /** @var Element $element */
         if ($element !== null) {
             try {
-                $reflector = new \ReflectionClass($element);
+                $reflector = new \ReflectionClass(FieldHelper::getElementRootClass($element));
             } catch (\ReflectionException $e) {
                 $reflector = null;
                 Craft::error($e->getMessage(), __METHOD__);
             }
             if ($reflector) {
                 $matchedElementType = strtolower($reflector->getShortName());
-                // Special cast for EntryDraft and EntryVersion
-                if ($matchedElementType === 'entrydraft' || $matchedElementType === 'entryversion') {
-                    $matchedElementType = 'entry';
-                }
                 self::$templateObjectVars[$matchedElementType] = $element;
             }
         }
