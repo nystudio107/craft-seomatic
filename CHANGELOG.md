@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.9 - 2018.08.04
+### Changed
+* Fixed an issue where SEOmatic wouldn't find Entry metadata if the entry was first saved as a Draft, then published
+
 ## 3.1.8 - 2018.08.03
 ### Changed
 * Fixed a regression that caused you to be unable to save **Custom URL** for an image source in the AdminCP
