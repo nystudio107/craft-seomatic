@@ -22,6 +22,8 @@ use craft\base\Field as BaseField;
 use craft\base\Volume;
 use craft\elements\User;
 use craft\ckeditor\Field as CKEditorField;
+use craft\elements\Category;
+use craft\elements\Entry;
 use craft\elements\MatrixBlock;
 use craft\fields\Assets as AssetsField;
 use craft\fields\Matrix as MatrixField;
@@ -31,6 +33,7 @@ use craft\models\FieldLayout;
 use craft\redactor\Field as RedactorField;
 
 use craft\commerce\Plugin as CommercePlugin;
+use craft\commerce\elements\Product;
 
 use yii\base\InvalidConfigException;
 
@@ -320,5 +323,30 @@ class Field
         }
 
         return $foundFields;
+    }
+
+    /**
+     * Get the root class of a passed in Element
+     *
+     * @param Element $element
+     *
+     * @return string
+     */
+    public static function getElementRootClass(Element $element): string
+    {
+        // By default, just use the class name
+        $className = \get_class($element);
+        // Handle sub-classes of specific types we know about
+        if ($element instanceof Entry) {
+            $className = Entry::class;
+        }
+        if ($element instanceof Category) {
+            $className = Category::class;
+        }
+        if ($element instanceof Product) {
+            $className = Product::class;
+        }
+
+        return $className;
     }
 }

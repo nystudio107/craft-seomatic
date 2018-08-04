@@ -35,8 +35,6 @@ use craft\base\Component;
 use craft\base\Element;
 use craft\elements\Category;
 use craft\elements\Entry;
-use craft\models\EntryDraft;
-use craft\models\EntryVersion;
 use craft\helpers\UrlHelper;
 
 use craft\commerce\Plugin as CommercePlugin;
@@ -505,10 +503,8 @@ class MetaContainers extends Component
         $element = Seomatic::$matchedElement;
         if ($element) {
             $sourceType = '';
-            switch (\get_class($element)) {
+            switch (FieldHelper::getElementRootClass($element)) {
                 case Entry::class:
-                case EntryDraft::class:
-                case EntryVersion::class:
                     /** @var  $element Entry */
                     $sourceType = MetaBundles::SECTION_META_BUNDLE;
                     break;
