@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.10 - 2018.08.06
+### Changed
+* Cleaned up how the pagination cache key works
+
 ## 3.1.9 - 2018.08.04
 ### Changed
 * Fixed an issue where SEOmatic wouldn't find Entry metadata if the entry was first saved as a Draft, then published
