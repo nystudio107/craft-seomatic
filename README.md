@@ -529,9 +529,9 @@ On the Mac, you can invoke an Emoji keyboard inside of any text field by hitting
 
 ## Google AMP Support
 
-SEOmatic works great with Google AMP! In fact, it will provide the JSON-LD structured data that is _required_ by the AMP spec.
+SEOmatic works great with [Google AMP](https://www.ampproject.org/)! In fact, it will provide the [JSON-LD structured data](https://www.ampproject.org/docs/fundamentals/spec) that is _required_ by the AMP spec.
 
-Since AMP doesn't allow for third-party JavaScript, you might want to add this to your AMP templates:
+Since AMP [doesn't allow for third-party JavaScript](https://medium.com/google-developers/how-to-avoid-common-mistakes-when-publishing-accelerated-mobile-pages-9ea61abf530f), you might want to add this to your AMP templates:
 ```twig
 {% do seomatic.script.container().include(false) %}
 ```
