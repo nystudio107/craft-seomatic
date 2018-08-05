@@ -1,5 +1,11 @@
 # SEOmatic Changelog
 
+## 3.1.10 - 2018.08.05
+### Changed
+* Cleaned up how the pagination cache key works
+* Add the current request path into the mix for the meta container cache key
+* Force social media values to be displayed as strings
+
 ## 3.1.9 - 2018.08.04
 ### Changed
 * Fixed an issue where SEOmatic wouldn't find Entry metadata if the entry was first saved as a Draft, then published

@@ -981,6 +981,16 @@ Get the existing **BreadcrumbList** as generated automatically by SEOmatic to mo
 {% set crumbs = seomatic.jsonLd.get('breadcrumbList') %}
 ```
 
+Display the breadcrumbs on the page:
+
+```twig
+{% set crumbList = seomatic.jsonLd.get('breadcrumbList').itemListElement %}
+{% for crumb in crumbList %}
+    <a href="{{ crumb.item['@id'] }}">{{ crumb.item['name'] }}</a>
+    {% if not loop.last %}&raquo;{% endif %}
+{% endfor %}
+```
+
 Get the existing **Identity** as set in the Site Settings AdminCP section to modify it:
 ```twig
 {% set identity = seomatic.jsonLd.get('identity') %}
