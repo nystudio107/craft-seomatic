@@ -204,6 +204,10 @@ class MetaSiteVars extends VarsModel
             if (!empty($value) && \is_string($value)) {
                 $this->$property = JsonHelper::decodeIfJson($value);
             }
+            // If it's not an array or an object, convert it to a string
+            if (!\is_array($value) && !\is_object($value)) {
+                $this->$property = (string)$value;
+            }
         }
         // Identity
         if ($this->identity !== null && \is_array($this->identity)) {
