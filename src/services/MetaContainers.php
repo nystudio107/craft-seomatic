@@ -41,6 +41,7 @@ use craft\commerce\Plugin as CommercePlugin;
 use craft\commerce\elements\Product;
 
 use yii\base\Exception;
+use yii\base\InvalidConfigException;
 use yii\caching\TagDependency;
 
 /**
@@ -147,13 +148,25 @@ class MetaContainers extends Component
             }
             // Handle pagination
             $paginationPage = 'page'.$this->paginationPage;
+            // Get the path for the current request
+            $request = Craft::$app->getRequest();
+            $requestPath = '/';
+            if (!$request->getIsConsoleRequest()) {
+                try {
+                    $requestPath = $request->getPathInfo();
+                } catch (InvalidConfigException $e) {
+                    Craft::error($e->getMessage(), __METHOD__);
+                }
+            }
+            // Get our cache key
+            $cacheKey = $uri.$siteId.$paginationPage.$requestPath;
             // Load the meta containers
             $dependency = new TagDependency([
                 'tags' => [
                     $this::GLOBAL_METACONTAINER_CACHE_TAG,
                     $this::METACONTAINER_CACHE_TAG.$metaBundleSourceId,
                     $this::METACONTAINER_CACHE_TAG.$uri.$siteId,
-                    $this::METACONTAINER_CACHE_TAG.$uri.$siteId.$paginationPage,
+                    $this::METACONTAINER_CACHE_TAG.$cacheKey,
                 ],
             ]);
             $this->containerDependency = $dependency;
@@ -165,7 +178,7 @@ class MetaContainers extends Component
             } else {
                 $cache = Craft::$app->getCache();
                 list($this->metaGlobalVars, $this->metaSiteVars, $this->metaSitemapVars, $this->metaContainers) = $cache->getOrSet(
-                    $this::CACHE_KEY.$uri.$siteId.$paginationPage,
+                    $this::CACHE_KEY.$cacheKey,
                     function () use ($uri, $siteId) {
                         Craft::info(
                             'Meta container cache miss: '.$uri.'/'.$siteId,
