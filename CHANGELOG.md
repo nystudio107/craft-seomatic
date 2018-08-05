@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.1.10 - 2018.08.06
+## 3.1.10 - 2018.08.05
 ### Changed
 * Cleaned up how the pagination cache key works
 * Add the current request path into the mix for the meta container cache key
