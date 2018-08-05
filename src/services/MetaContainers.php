@@ -81,7 +81,7 @@ class MetaContainers extends Component
     /**
      * @var string The current page number of paginated pages
      */
-    public $paginationPage = '';
+    public $paginationPage = '1';
 
     // Protected Properties
     // =========================================================================
@@ -117,7 +117,7 @@ class MetaContainers extends Component
     {
         parent::init();
         // Get the page number of this request
-        $this->paginationPage = (string)(Craft::$app->getRequest()->pageNum);
+        $this->paginationPage = (string)Craft::$app->getRequest()->pageNum;
     }
 
     /**
@@ -146,7 +146,7 @@ class MetaContainers extends Component
                     ?? 1;
             }
             // Handle pagination
-            $paginationPage = empty($this->paginationPage) ? '' : 'page'.$this->paginationPage;
+            $paginationPage = 'page'.$this->paginationPage;
             // Load the meta containers
             $dependency = new TagDependency([
                 'tags' => [
@@ -237,9 +237,8 @@ class MetaContainers extends Component
     {
         Craft::beginProfile('MetaContainers::includeMetaContainers', __METHOD__);
         // If this page is paginated, we need to factor that into the cache key
-        $paginationPage = empty($this->paginationPage) ? '' : 'page'.$this->paginationPage;
         // We also need to re-add the hreflangs
-        if (!empty($paginationPage)) {
+        if ($this->paginationPage !== '1') {
             DynamicMetaHelper::addMetaLinkHrefLang();
         }
         // Add in our http headers
