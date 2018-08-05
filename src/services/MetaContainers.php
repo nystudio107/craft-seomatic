@@ -102,7 +102,8 @@ class MetaContainers extends Component
     protected $containerDependency = null;
 
     /**
-     * @var bool Whether or not the matched element should be included in the meta containers
+     * @var bool Whether or not the matched element should be included in the
+     *      meta containers
      */
     protected $includeMatchedElement = true;
 
@@ -115,6 +116,8 @@ class MetaContainers extends Component
     public function init()
     {
         parent::init();
+        // Get the page number of this request
+        $this->paginationPage = (string)(Craft::$app->getRequest()->pageNum);
     }
 
     /**
@@ -142,12 +145,15 @@ class MetaContainers extends Component
                     ?? Craft::$app->getSites()->primarySite->id
                     ?? 1;
             }
+            // Handle pagination
+            $paginationPage = empty($this->paginationPage) ? '' : 'page'.$this->paginationPage;
             // Load the meta containers
             $dependency = new TagDependency([
                 'tags' => [
                     $this::GLOBAL_METACONTAINER_CACHE_TAG,
                     $this::METACONTAINER_CACHE_TAG.$metaBundleSourceId,
                     $this::METACONTAINER_CACHE_TAG.$uri.$siteId,
+                    $this::METACONTAINER_CACHE_TAG.$uri.$siteId.$paginationPage,
                 ],
             ]);
             $this->containerDependency = $dependency;
@@ -159,7 +165,7 @@ class MetaContainers extends Component
             } else {
                 $cache = Craft::$app->getCache();
                 list($this->metaGlobalVars, $this->metaSiteVars, $this->metaSitemapVars, $this->metaContainers) = $cache->getOrSet(
-                    $this::CACHE_KEY.$uri.$siteId,
+                    $this::CACHE_KEY.$uri.$siteId.$paginationPage,
                     function () use ($uri, $siteId) {
                         Craft::info(
                             'Meta container cache miss: '.$uri.'/'.$siteId,
@@ -236,7 +242,6 @@ class MetaContainers extends Component
         if (!empty($paginationPage)) {
             DynamicMetaHelper::addMetaLinkHrefLang();
         }
-        $this->containerDependency->tags[3] = $this->containerDependency->tags[2].$paginationPage;
         // Add in our http headers
         DynamicMetaHelper::includeHttpHeaders();
         $this->parseGlobalVars();
@@ -283,8 +288,10 @@ class MetaContainers extends Component
      *
      * @param string   $uri
      * @param int|null $siteId
-     * @param bool     $parseVariables Whether or not the variables should be parsed as Twig
-     * @param bool     $includeElement Whether or not the matched element should be factored into the preview
+     * @param bool     $parseVariables Whether or not the variables should be
+     *                                 parsed as Twig
+     * @param bool     $includeElement Whether or not the matched element
+     *                                 should be factored into the preview
      */
     public function previewMetaContainers(
         string $uri = '',
@@ -503,7 +510,7 @@ class MetaContainers extends Component
         $element = Seomatic::$matchedElement;
         if ($element) {
             $sourceType = '';
-            switch (\get_class($element)) {
+            switch (FieldHelper::getElementRootClass($element)) {
                 case Entry::class:
                     /** @var  $element Entry */
                     $sourceType = MetaBundles::SECTION_META_BUNDLE;
@@ -553,7 +560,6 @@ class MetaContainers extends Component
             $parsedAttributes,
             [ArrayHelper::class, 'preserveBools']
         );
-        //Craft::dd($parsedAttributes);
         $attributes = array_intersect_key($attributes, $parsedAttributes);
         // Add the attributes in
         $attributes = array_filter(
