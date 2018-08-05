@@ -527,6 +527,23 @@ It's up to Google whether or not to display the emojis that you add to your SEO 
 
 On the Mac, you can invoke an Emoji keyboard inside of any text field by hitting Command Control Space. This works in any Mac application, not just web browsers or SEOmatic.
 
+## Google AMP Support
+
+SEOmatic works great with Google AMP! In fact, it will provide the JSON-LD structured data that is _required_ by the AMP spec.
+
+Since AMP doesn't allow for third-party JavaScript, you might want to add this to your AMP templates:
+```twig
+{% do seomatic.script.container().include(false) %}
+```
+
+This will cause SEOmatic to not render _any_ custom scripts you might have enabled (such as Google Analytics, gtag, etc.)
+
+## Single Page App (SPA) Support
+
+SEOmatic fully supports working with SPAs, allowing you to receive the metadata needed for a given route either as an array, or as DOM elements ready to be inserted.
+
+See the **Headless SPA API** section for details.
+
 ## Using SEOmatic
 
 ### Twig Templating
