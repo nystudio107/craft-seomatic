@@ -1,6 +1,11 @@
 # SEOmatic Changelog
 
-## 3.1.11 - 2018.08.06
+## 3.1.12 - 2018.08.06
+### Changed
+* Make the base `Container` class extend `FluentModel` so that containers can be accessed via templates just like MetaTags are
+* Ensure that we check to see if a container's `include` property is set before rendering it
+
+## 3.1.11 - 2018.08.05
 ### Changed
 * Fixed a regression that caused an error loading entries
 
