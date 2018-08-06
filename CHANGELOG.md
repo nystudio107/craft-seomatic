@@ -1,7 +1,8 @@
 # SEOmatic Changelog
 
-## 3.1.11 - 2018.08.07
+## 3.1.11 - 2018.08.06
 ### Changed
+* Fixed a regression that caused an error loading entries
 
 ## 3.1.10 - 2018.08.05
 ### Changed
