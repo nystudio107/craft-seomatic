@@ -21,7 +21,7 @@ use craft\validators\ArrayValidator;
  * @package   Seomatic
  * @since     3.0.0
  */
-abstract class Container extends Model implements ContainerInterface
+abstract class Container extends FluentModel implements ContainerInterface
 {
     // Traits
     // =========================================================================
@@ -79,7 +79,12 @@ abstract class Container extends Model implements ContainerInterface
      */
     public function prepForInclusion(): bool
     {
-        return Dependency::validateDependencies($this->dependencies);
+        $include = $this->include;
+        if ($include) {
+            $include = Dependency::validateDependencies($this->dependencies);
+        }
+
+        return $include;
     }
 
     /**
