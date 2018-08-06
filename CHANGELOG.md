@@ -4,6 +4,8 @@
 ### Changed
 * Make the base `Container` class extend `FluentModel` so that containers can be accessed via templates just like MetaTags are
 * Ensure that we check to see if a container's `include` property is set before rendering it
+* Use a unique cache key for everything for the request, including the pagination and URI
+* Prep script containers for inclusion in `includeScriptBodyHtml()`
 
 ## 3.1.11 - 2018.08.05
 ### Changed
