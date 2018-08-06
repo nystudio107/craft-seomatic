@@ -211,7 +211,7 @@ class MetaContainers extends Component
     {
         Craft::beginProfile('MetaContainers::includeScriptBodyHtml', __METHOD__);
         $dependency = $this->containerDependency;
-        $uniqueKey = $dependency->tags[2].$bodyPosition;
+        $uniqueKey = $dependency->tags[3].$bodyPosition;
         $scriptData = Craft::$app->getCache()->getOrSet(
             $this::GLOBALS_CACHE_KEY.$uniqueKey,
             function () use ($uniqueKey, $bodyPosition) {
@@ -272,7 +272,7 @@ class MetaContainers extends Component
     public function parseGlobalVars()
     {
         $dependency = $this->containerDependency;
-        $uniqueKey = $dependency->tags[2];
+        $uniqueKey = $dependency->tags[3];
         list($this->metaGlobalVars, $this->metaSiteVars) = Craft::$app->getCache()->getOrSet(
             $this::GLOBALS_CACHE_KEY.$uniqueKey,
             function () use ($uniqueKey) {
