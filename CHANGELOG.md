@@ -1,5 +1,11 @@
 # SEOmatic Changelog
 
+## 3.1.13 - 2018.08.07
+### Added
+
+### Changed
+* Brought back the missing ** Transform Facebook OpenGraph Image** field
+
 ## 3.1.12 - 2018.08.06
 ### Changed
 * Make the base `Container` class extend `FluentModel` so that containers can be accessed via templates just like MetaTags are
