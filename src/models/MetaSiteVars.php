@@ -206,8 +206,12 @@ class MetaSiteVars extends VarsModel
             }
         }
         // Make sure these are strings
-        $this->facebookProfileId = (string)$this->facebookProfileId;
-        $this->facebookAppId = (string)$this->facebookAppId;
+        if (!empty($this->facebookProfileId)) {
+            $this->facebookProfileId = (string)$this->facebookProfileId;
+        }
+        if (!empty($this->facebookAppId)) {
+            $this->facebookAppId = (string)$this->facebookAppId;
+        }
         // Identity
         if ($this->identity !== null && \is_array($this->identity)) {
             $this->identity = new Entity($this->identity);
