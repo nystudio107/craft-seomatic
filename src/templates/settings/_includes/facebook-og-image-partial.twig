@@ -98,3 +98,28 @@
         }) }}
     {% endnamespace %}
 {% endif %}
+
+{############### Facebook OpenGraph Transform Mode ###############}
+
+{% set imageCropModes = {
+    "crop": "Crop"|t("seomatic"),
+    "fit": "Fit"|t("seomatic"),
+    "stretch": "Stretch"|t("seomatic"),
+} %}
+{% if pageContext == "field" %}
+    {% set imageCropModes = { "": ""} | merge(imageCropModes) %}
+{% endif %}
+<div class="field" {% if field is defined and 'ogImageTransformMode' not in field.facebookEnabledFields %}style="display: none;"{% endif %}>
+    {% namespace "metaBundleSettings" %}
+        {{ forms.selectField({
+            label: "Facebook OpenGraph Image Transform Mode"|t("seomatic"),
+            instructions: "The transform mode to use for the Facebook OpenGraph Image Transform."|t("seomatic"),
+            id: "ogImageTransformMode",
+            name: "ogImageTransformMode",
+            options: imageCropModes,
+            value: metaBundleSettings.ogImageTransformMode,
+            warning: false,
+            errors: metaBundleSettings.getErrors("ogImageTransformMode"),
+        }) }}
+    {% endnamespace %}
+</div>
