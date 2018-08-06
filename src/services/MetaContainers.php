@@ -211,7 +211,7 @@ class MetaContainers extends Component
     {
         Craft::beginProfile('MetaContainers::includeScriptBodyHtml', __METHOD__);
         $dependency = $this->containerDependency;
-        $uniqueKey = $dependency->tags[2].$bodyPosition;
+        $uniqueKey = $dependency->tags[3].$bodyPosition;
         $scriptData = Craft::$app->getCache()->getOrSet(
             $this::GLOBALS_CACHE_KEY.$uniqueKey,
             function () use ($uniqueKey, $bodyPosition) {
@@ -223,10 +223,12 @@ class MetaContainers extends Component
                 $scriptContainers = $this->getContainersOfType(MetaScriptContainer::CONTAINER_TYPE);
                 foreach ($scriptContainers as $scriptContainer) {
                     /** @var MetaScriptContainer $scriptContainer */
-                    foreach ($scriptContainer->data as $metaScript) {
-                        /** @var MetaScript $metaScript */
-                        if (!empty($metaScript->bodyTemplatePath) && ($metaScript->bodyPosition === $bodyPosition)) {
-                            $scriptData[] = $metaScript->renderBodyHtml();
+                    if ($scriptContainer->prepForInclusion()) {
+                        foreach ($scriptContainer->data as $metaScript) {
+                            /** @var MetaScript $metaScript */
+                            if (!empty($metaScript->bodyTemplatePath) && ($metaScript->bodyPosition === $bodyPosition)) {
+                                $scriptData[] = $metaScript->renderBodyHtml();
+                            }
                         }
                     }
                 }
@@ -272,7 +274,7 @@ class MetaContainers extends Component
     public function parseGlobalVars()
     {
         $dependency = $this->containerDependency;
-        $uniqueKey = $dependency->tags[2];
+        $uniqueKey = $dependency->tags[3];
         list($this->metaGlobalVars, $this->metaSiteVars) = Craft::$app->getCache()->getOrSet(
             $this::GLOBALS_CACHE_KEY.$uniqueKey,
             function () use ($uniqueKey) {
