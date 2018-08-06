@@ -98,3 +98,28 @@
         }) }}
     {% endnamespace %}
 {% endif %}
+
+{############### Twitter Transform Mode ###############}
+
+{% set imageCropModes = {
+    "crop": "Crop"|t("seomatic"),
+    "fit": "Fit"|t("seomatic"),
+    "stretch": "Stretch"|t("seomatic"),
+} %}
+{% if pageContext == "field" %}
+    {% set imageCropModes = { "": ""} | merge(imageCropModes) %}
+{% endif %}
+<div class="field" {% if field is defined and 'twitterImageTransformMode' not in field.twitterEnabledFields %}style="display: none;"{% endif %}>
+    {% namespace "metaBundleSettings" %}
+        {{ forms.selectField({
+            label: "Twitter Image Transform Mode"|t("seomatic"),
+            instructions: "The transform mode to use for the Twitter Image Transform."|t("seomatic"),
+            id: "twitterImageTransformMode",
+            name: "twitterImageTransformMode",
+            options: imageCropModes,
+            value: metaBundleSettings.twitterImageTransformMode,
+            warning: false,
+            errors: metaBundleSettings.getErrors("twitterImageTransformMode"),
+        }) }}
+    {% endnamespace %}
+</div>
