@@ -82,3 +82,19 @@
         {% endnamespace %}
     </div>
 {% endif %}
+
+{############### Facebook OpenGraph Image Transform ###############}
+
+{% if field is not defined or 'ogImageTransform' in field.facebookEnabledFields %}
+    {% namespace "metaBundleSettings" %}
+        {{ forms.lightswitchField({
+            label: "Transform Facebook OpenGraph Image"|t("seomatic"),
+            instructions: "Whether the Facebook OpenGraph image should be automatically transformed to an appropriate file format and aspect ratio for Facebook."|t("seomatic"),
+            id: "ogImageTransform",
+            name: "ogImageTransform",
+            on: metaBundleSettings.ogImageTransform,
+            warning: false,
+            errors: metaBundleSettings.getErrors("ogImageTransform"),
+        }) }}
+    {% endnamespace %}
+{% endif %}
