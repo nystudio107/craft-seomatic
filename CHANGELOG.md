@@ -2,6 +2,7 @@
 
 ## 3.1.13 - 2018.08.07
 ### Added
+* Added the ability to choose between **Crop** (the default), **Fit**, or **Stretch** for the SEO, Twitter, and Facebook image transforms
 
 ### Changed
 * Brought back the missing ** Transform Facebook OpenGraph Image** field
