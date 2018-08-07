@@ -216,6 +216,22 @@ Section Sitemaps are automatically submitted to search engines whenever a new El
 
 If you have custom URLs that are not in the CMS, you can manually add them to their own Sitemap Index via **Site Settings** → **Miscellaneous**.
 
+You can also add to it via a plugin:
+
+```php
+use nystudio107\seomatic\events\RegisterSitemapUrlsEvent;
+use nystudio107\seomatic\SitemapCustomTemplate;
+use yii\base\Event;
+Event::on(SitemapCustomTemplate::class, SitemapCustomTemplate::EVENT_REGISTER_SITEMAP_URLS, function(RegisterSitemapUrlsEvent $e) {
+$e->sitemapUrls[] => [
+         'loc' => $url,
+         'changefreq' => $changeFreq,
+         'priority' => $priority,
+         'lastmod' => $lastMod,
+     ];
+ });
+```
+
 #### Content SEO AdminCP Fields
 
 The fields in the AdminCP Content SEO settings are parsed as Twig object templates, so in addition to plain old text, you can also put single and double bracket Twig expressions.

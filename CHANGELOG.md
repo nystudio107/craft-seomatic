@@ -1,5 +1,13 @@
 # SEOmatic Changelog
 
+## 3.1.13 - 2018.08.07
+### Added
+* Added the ability to choose between **Crop** (the default), **Fit**, or **Stretch** for the SEO, Twitter, and Facebook image transforms
+
+### Changed
+* Brought back the missing ** Transform Facebook OpenGraph Image** field
+* Don't do anything with pagination on console requests
+
 ## 3.1.12 - 2018.08.06
 ### Changed
 * Make the base `Container` class extend `FluentModel` so that containers can be accessed via templates just like MetaTags are

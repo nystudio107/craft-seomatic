@@ -301,12 +301,13 @@ class Helper extends Component
      * @param int|Asset $asset         the Asset or Asset ID
      * @param string    $transformName the name of the transform to apply
      * @param int|null  $siteId
+     * @param string    $transformMode
      *
      * @return string URL to the transformed image
      */
-    public function socialTransform($asset, string $transformName = '', $siteId = null): string
+    public function socialTransform($asset, string $transformName = '', $siteId = null, $transformMode = 'crop'): string
     {
-        return ImageTransformHelper::socialTransform($asset, $transformName, $siteId);
+        return ImageTransformHelper::socialTransform($asset, $transformName, $siteId, $transformMode);
     }
 
     /**
@@ -316,12 +317,17 @@ class Helper extends Component
      * @param int|Asset $asset         the Asset or Asset ID
      * @param string    $transformName the name of the transform to apply
      * @param int|null  $siteId
+     * @param string    $transformMode
      *
      * @return string URL to the transformed image
      */
-    public function socialTransformWidth($asset, string $transformName = '', $siteId = null): string
-    {
-        return ImageTransformHelper::socialTransformWidth($asset, $transformName, $siteId);
+    public function socialTransformWidth(
+        $asset,
+        string $transformName = '',
+        $siteId = null,
+        $transformMode = 'crop'
+    ): string {
+        return ImageTransformHelper::socialTransformWidth($asset, $transformName, $siteId, $transformMode);
     }
 
     /**
@@ -331,11 +337,16 @@ class Helper extends Component
      * @param int|Asset $asset         the Asset or Asset ID
      * @param string    $transformName the name of the transform to apply
      * @param int|null  $siteId
+     * @param string    $transformMode
      *
      * @return string URL to the transformed image
      */
-    public function socialTransformHeight($asset, string $transformName = '', $siteId = null): string
-    {
-        return ImageTransformHelper::socialTransformHeight($asset, $transformName, $siteId);
+    public function socialTransformHeight(
+        $asset,
+        string $transformName = '',
+        $siteId = null,
+        $transformMode = 'crop'
+    ): string {
+        return ImageTransformHelper::socialTransformHeight($asset, $transformName, $siteId, $transformMode);
     }
 }
