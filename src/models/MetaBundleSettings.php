@@ -109,6 +109,11 @@ class MetaBundleSettings extends VarsModel
     public $seoImageTransform = true;
 
     /**
+     * @var bool The transform mode to use for SEO image transforms
+     */
+    public $seoImageTransformMode = 'crop';
+
+    /**
      * @var string The source that the SEO image description should come from
      */
     public $seoImageDescriptionSource;
@@ -174,6 +179,11 @@ class MetaBundleSettings extends VarsModel
     public $twitterImageTransform = true;
 
     /**
+     * @var bool The transform mode to use for Twitter image transforms
+     */
+    public $twitterImageTransformMode = 'crop';
+
+    /**
      * @var string The source that the Twitter image description should come from
      */
     public $twitterImageDescriptionSource;
@@ -227,6 +237,11 @@ class MetaBundleSettings extends VarsModel
      * @var bool Whether the OpenGraph image should be automatically transformed into an appropriate format
      */
     public $ogImageTransform = true;
+
+    /**
+     * @var bool The transform mode to use for OpenGraph image transforms
+     */
+    public $ogImageTransformMode = 'crop';
 
     /**
      * @var string The source that the Facebook OG image description should come from
@@ -296,6 +311,15 @@ class MetaBundleSettings extends VarsModel
                     'ogImageDescriptionField',
                 ],
                 'string'
+            ],
+            [
+                ['seoImageTransformMode', 'twitterImageTransformMode', 'ogImageTransformMode'],
+                'in',
+                'range' => [
+                    'stretch',
+                    'fit',
+                    'crop',
+                ],
             ],
             [
                 [
