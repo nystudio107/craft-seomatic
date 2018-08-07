@@ -6,6 +6,7 @@
 
 ### Changed
 * Brought back the missing ** Transform Facebook OpenGraph Image** field
+* Don't do anything with pagination on console requests
 
 ## 3.1.12 - 2018.08.06
 ### Changed
