@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.13.1 - 2018.08.07
+### Changed
+* Fixed a potential `undefined index` error with pull fields, resulting from the new cropping modes
+
 ## 3.1.13 - 2018.08.07
 ### Added
 * Added the ability to choose between **Crop** (the default), **Fit**, or **Stretch** for the SEO, Twitter, and Facebook image transforms
