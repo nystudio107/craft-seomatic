@@ -118,7 +118,10 @@ class MetaContainers extends Component
     {
         parent::init();
         // Get the page number of this request
-        $this->paginationPage = (string)Craft::$app->getRequest()->pageNum;
+        $request = Craft::$app->getRequest();
+        if (!$request->isConsoleRequest) {
+            $this->paginationPage = (string)$request->pageNum;
+        }
     }
 
     /**
