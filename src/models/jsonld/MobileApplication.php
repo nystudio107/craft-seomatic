@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\SoftwareApplication;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/MobileApplication
+ * @see       https://schema.org/MobileApplication
  */
 class MobileApplication extends SoftwareApplication
 {

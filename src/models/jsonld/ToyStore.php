@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\Store;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/ToyStore
+ * @see       https://schema.org/ToyStore
  */
 class ToyStore extends Store
 {

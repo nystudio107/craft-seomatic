@@ -22,7 +22,7 @@ use nystudio107\seomatic\models\jsonld\Service;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/FinancialProduct
+ * @see       https://schema.org/FinancialProduct
  */
 class FinancialProduct extends Service
 {

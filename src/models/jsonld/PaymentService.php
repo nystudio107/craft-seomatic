@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\FinancialProduct;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/PaymentService
+ * @see       https://schema.org/PaymentService
  */
 class PaymentService extends FinancialProduct
 {

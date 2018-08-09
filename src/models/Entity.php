@@ -156,7 +156,7 @@ class Entity extends FluentModel
 
     /**
      * @var string Only for entities of the type Organization, the date the
-     *      organization was founded in [ISO 8601 date format](http://schema.org/Date), e.g.: `2018-03-26`
+     *      organization was founded in [ISO 8601 date format](https://schema.org/Date), e.g.: `2018-03-26`
      */
     public $organizationFoundingDate;
 

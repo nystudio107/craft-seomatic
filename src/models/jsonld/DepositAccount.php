@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\InvestmentOrDeposit;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/DepositAccount
+ * @see       https://schema.org/DepositAccount
  */
 class DepositAccount extends InvestmentOrDeposit
 {

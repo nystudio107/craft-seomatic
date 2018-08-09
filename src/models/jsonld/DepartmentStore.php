@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\Store;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/DepartmentStore
+ * @see       https://schema.org/DepartmentStore
  */
 class DepartmentStore extends Store
 {

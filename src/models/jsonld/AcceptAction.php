@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\AllocateAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/AcceptAction
+ * @see       https://schema.org/AcceptAction
  */
 class AcceptAction extends AllocateAction
 {

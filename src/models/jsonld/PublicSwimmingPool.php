@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\SportsActivityLocation;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/PublicSwimmingPool
+ * @see       https://schema.org/PublicSwimmingPool
  */
 class PublicSwimmingPool extends SportsActivityLocation
 {

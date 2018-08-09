@@ -23,7 +23,7 @@ use nystudio107\seomatic\models\jsonld\Enumeration;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/WarrantyScope
+ * @see       https://schema.org/WarrantyScope
  */
 class WarrantyScope extends Enumeration
 {

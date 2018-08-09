@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\AchieveAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/LoseAction
+ * @see       https://schema.org/LoseAction
  */
 class LoseAction extends AchieveAction
 {

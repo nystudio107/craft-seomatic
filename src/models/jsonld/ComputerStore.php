@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\Organization;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/ComputerStore
+ * @see       https://schema.org/ComputerStore
  */
 class ComputerStore extends Organization
 {

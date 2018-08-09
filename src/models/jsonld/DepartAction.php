@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\MoveAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/DepartAction
+ * @see       https://schema.org/DepartAction
  */
 class DepartAction extends MoveAction
 {

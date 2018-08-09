@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\Service;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/CableOrSatelliteService
+ * @see       https://schema.org/CableOrSatelliteService
  */
 class CableOrSatelliteService extends Service
 {

@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\Store;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/PetStore
+ * @see       https://schema.org/PetStore
  */
 class PetStore extends Store
 {

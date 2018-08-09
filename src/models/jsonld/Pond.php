@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\BodyOfWater;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Pond
+ * @see       https://schema.org/Pond
  */
 class Pond extends BodyOfWater
 {
@@ -97,7 +97,7 @@ class Pond extends BodyOfWater
      * entitity, e.g. a product feature or another characteristic for which there
      * is no matching property in schema.org. Note: Publishers should be aware
      * that applications designed to use specific schema.org properties (e.g.
-     * http://schema.org/width, http://schema.org/color, http://schema.org/gtin13,
+     * https://schema.org/width, https://schema.org/color, https://schema.org/gtin13,
      * ...) will typically expect such data to be provided using those properties,
      * rather than using the generic property/value mechanism.
      *
@@ -134,7 +134,7 @@ class Pond extends BodyOfWater
      * A short textual code (also called "store code") that uniquely identifies a
      * place of business. The code is typically assigned by the parentOrganization
      * and used in structured URLs. For example, in the URL
-     * http://www.starbucks.co.uk/store-locator/etc/detail/3047 the code "3047" is
+     * https://www.starbucks.co.uk/store-locator/etc/detail/3047 the code "3047" is
      * a branchCode for a particular branch.
      *
      * @var mixed|string [schema.org types: Text]
@@ -468,11 +468,11 @@ class Pond extends BodyOfWater
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'additionalProperty' => 'A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org. Note: Publishers should be aware that applications designed to use specific schema.org properties (e.g. http://schema.org/width, http://schema.org/color, http://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.',
+        'additionalProperty' => 'A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org. Note: Publishers should be aware that applications designed to use specific schema.org properties (e.g. https://schema.org/width, https://schema.org/color, https://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.',
         'address' => 'Physical address of the item.',
         'aggregateRating' => 'The overall rating, based on a collection of reviews or ratings, of the item.',
         'amenityFeature' => 'An amenity feature (e.g. a characteristic or service) of the Accommodation. This generic property does not make a statement about whether the feature is included in an offer for the main accommodation or available at extra costs.',
-        'branchCode' => 'A short textual code (also called "store code") that uniquely identifies a place of business. The code is typically assigned by the parentOrganization and used in structured URLs. For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047 the code "3047" is a branchCode for a particular branch.',
+        'branchCode' => 'A short textual code (also called "store code") that uniquely identifies a place of business. The code is typically assigned by the parentOrganization and used in structured URLs. For example, in the URL https://www.starbucks.co.uk/store-locator/etc/detail/3047 the code "3047" is a branchCode for a particular branch.',
         'containedInPlace' => 'The basic containment relation between a place and one that contains it. Supersedes containedIn. Inverse property: containsPlace.',
         'containsPlace' => 'The basic containment relation between a place and another that it contains. Inverse property: containedInPlace.',
         'event' => 'Upcoming or past event associated with this place, organization, or action. Supersedes events.',

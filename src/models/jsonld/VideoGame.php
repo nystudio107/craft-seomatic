@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\SoftwareApplication;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/VideoGame
+ * @see       https://schema.org/VideoGame
  */
 class VideoGame extends SoftwareApplication
 {

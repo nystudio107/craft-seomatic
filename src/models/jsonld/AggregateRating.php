@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\Rating;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/AggregateRating
+ * @see       https://schema.org/AggregateRating
  */
 class AggregateRating extends Rating
 {

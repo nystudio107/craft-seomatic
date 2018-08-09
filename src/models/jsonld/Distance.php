@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\Quantity;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Distance
+ * @see       https://schema.org/Distance
  */
 class Distance extends Quantity
 {

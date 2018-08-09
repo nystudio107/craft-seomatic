@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\PublicationEvent;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/OnDemandEvent
+ * @see       https://schema.org/OnDemandEvent
  */
 class OnDemandEvent extends PublicationEvent
 {

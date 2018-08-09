@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\PlayAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/PerformAction
+ * @see       https://schema.org/PerformAction
  */
 class PerformAction extends PlayAction
 {

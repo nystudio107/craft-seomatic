@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\FoodEstablishment;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/IceCreamShop
+ * @see       https://schema.org/IceCreamShop
  */
 class IceCreamShop extends FoodEstablishment
 {

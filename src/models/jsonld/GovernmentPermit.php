@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\Permit;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/GovernmentPermit
+ * @see       https://schema.org/GovernmentPermit
  */
 class GovernmentPermit extends Permit
 {

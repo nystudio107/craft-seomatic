@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\Boolean;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/False
+ * @see       https://schema.org/False
  */
 class False extends Boolean
 {

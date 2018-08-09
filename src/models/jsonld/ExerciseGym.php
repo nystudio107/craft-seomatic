@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\SportsActivityLocation;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/ExerciseGym
+ * @see       https://schema.org/ExerciseGym
  */
 class ExerciseGym extends SportsActivityLocation
 {

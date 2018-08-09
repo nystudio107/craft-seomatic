@@ -22,7 +22,7 @@ use nystudio107\seomatic\models\jsonld\ListItem;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/HowToTip
+ * @see       https://schema.org/HowToTip
  */
 class HowToTip extends ListItem
 {

@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\DataType;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Number
+ * @see       https://schema.org/Number
  */
 class Number extends DataType
 {

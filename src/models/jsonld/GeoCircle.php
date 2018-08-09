@@ -23,7 +23,7 @@ use nystudio107\seomatic\models\jsonld\GeoShape;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/GeoCircle
+ * @see       https://schema.org/GeoCircle
  */
 class GeoCircle extends GeoShape
 {

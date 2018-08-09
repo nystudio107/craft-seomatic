@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\UpdateAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/DeleteAction
+ * @see       https://schema.org/DeleteAction
  */
 class DeleteAction extends UpdateAction
 {

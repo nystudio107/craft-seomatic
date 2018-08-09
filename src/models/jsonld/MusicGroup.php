@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\PerformingGroup;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/MusicGroup
+ * @see       https://schema.org/MusicGroup
  */
 class MusicGroup extends PerformingGroup
 {

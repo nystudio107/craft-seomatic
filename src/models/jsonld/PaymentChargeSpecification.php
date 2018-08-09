@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\PriceSpecification;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/PaymentChargeSpecification
+ * @see       https://schema.org/PaymentChargeSpecification
  */
 class PaymentChargeSpecification extends PriceSpecification
 {

@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\PeopleAudience;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/ParentAudience
+ * @see       https://schema.org/ParentAudience
  */
 class ParentAudience extends PeopleAudience
 {

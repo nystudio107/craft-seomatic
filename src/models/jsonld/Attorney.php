@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\LegalService;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Attorney
+ * @see       https://schema.org/Attorney
  */
 class Attorney extends LegalService
 {

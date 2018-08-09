@@ -16,13 +16,13 @@ use nystudio107\seomatic\models\jsonld\LodgingBusiness;
 /**
  * Hotel - A hotel is an establishment that provides lodging paid on a
  * short-term basis (Source: Wikipedia, the free encyclopedia, see
- * http://en.wikipedia.org/wiki/Hotel). See also the dedicated document on the
+ * https://en.wikipedia.org/wiki/Hotel). See also the dedicated document on the
  * use of schema.org for marking up hotels and other forms of accommodations.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Hotel
+ * @see       https://schema.org/Hotel
  */
 class Hotel extends LodgingBusiness
 {
@@ -48,7 +48,7 @@ class Hotel extends LodgingBusiness
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'A hotel is an establishment that provides lodging paid on a short-term basis (Source: Wikipedia, the free encyclopedia, see http://en.wikipedia.org/wiki/Hotel). See also the dedicated document on the use of schema.org for marking up hotels and other forms of accommodations.';
+    static public $schemaTypeDescription = 'A hotel is an establishment that provides lodging paid on a short-term basis (Source: Wikipedia, the free encyclopedia, see https://en.wikipedia.org/wiki/Hotel). See also the dedicated document on the use of schema.org for marking up hotels and other forms of accommodations.';
 
     /**
      * The Schema.org Type Extends

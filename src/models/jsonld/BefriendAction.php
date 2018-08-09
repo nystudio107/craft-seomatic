@@ -22,7 +22,7 @@ use nystudio107\seomatic\models\jsonld\InteractAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/BefriendAction
+ * @see       https://schema.org/BefriendAction
  */
 class BefriendAction extends InteractAction
 {

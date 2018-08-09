@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\Event;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/CourseInstance
+ * @see       https://schema.org/CourseInstance
  */
 class CourseInstance extends Event
 {

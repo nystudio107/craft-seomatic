@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\MetaJsonLd;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/DataType
+ * @see       https://schema.org/DataType
  */
 class DataType extends MetaJsonLd
 {

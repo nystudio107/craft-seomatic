@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\HealthAndBeautyBusiness;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/TattooParlor
+ * @see       https://schema.org/TattooParlor
  */
 class TattooParlor extends HealthAndBeautyBusiness
 {

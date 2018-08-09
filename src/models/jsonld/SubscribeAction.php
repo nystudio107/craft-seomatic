@@ -27,7 +27,7 @@ use nystudio107\seomatic\models\jsonld\InteractAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/SubscribeAction
+ * @see       https://schema.org/SubscribeAction
  */
 class SubscribeAction extends InteractAction
 {

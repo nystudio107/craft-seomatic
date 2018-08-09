@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\Enumeration;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/ActionStatusType
+ * @see       https://schema.org/ActionStatusType
  */
 class ActionStatusType extends Enumeration
 {

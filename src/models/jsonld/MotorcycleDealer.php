@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\AutomotiveBusiness;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/MotorcycleDealer
+ * @see       https://schema.org/MotorcycleDealer
  */
 class MotorcycleDealer extends AutomotiveBusiness
 {

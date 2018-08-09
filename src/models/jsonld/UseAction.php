@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\ConsumeAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/UseAction
+ * @see       https://schema.org/UseAction
  */
 class UseAction extends ConsumeAction
 {

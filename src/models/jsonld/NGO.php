@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\Organization;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/NGO
+ * @see       https://schema.org/NGO
  */
 class NGO extends Organization
 {

@@ -22,7 +22,7 @@ use nystudio107\seomatic\models\jsonld\Intangible;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/BedDetails
+ * @see       https://schema.org/BedDetails
  */
 class BedDetails extends Intangible
 {

@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\UpdateAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/AddAction
+ * @see       https://schema.org/AddAction
  */
 class AddAction extends UpdateAction
 {

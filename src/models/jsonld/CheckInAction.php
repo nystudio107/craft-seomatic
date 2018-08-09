@@ -28,7 +28,7 @@ use nystudio107\seomatic\models\jsonld\CommunicateAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/CheckInAction
+ * @see       https://schema.org/CheckInAction
  */
 class CheckInAction extends CommunicateAction
 {

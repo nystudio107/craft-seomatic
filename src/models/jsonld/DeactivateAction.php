@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\ControlAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/DeactivateAction
+ * @see       https://schema.org/DeactivateAction
  */
 class DeactivateAction extends ControlAction
 {

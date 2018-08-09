@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\Action;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/MoveAction
+ * @see       https://schema.org/MoveAction
  */
 class MoveAction extends Action
 {

@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\HomeAndConstructionBusiness;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/MovingCompany
+ * @see       https://schema.org/MovingCompany
  */
 class MovingCompany extends HomeAndConstructionBusiness
 {

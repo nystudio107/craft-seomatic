@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\Quantity;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Mass
+ * @see       https://schema.org/Mass
  */
 class Mass extends Quantity
 {

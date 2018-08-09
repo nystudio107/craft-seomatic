@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\EducationalOrganization;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/School
+ * @see       https://schema.org/School
  */
 class School extends EducationalOrganization
 {

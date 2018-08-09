@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\CreativeWorkSeries;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/RadioSeries
+ * @see       https://schema.org/RadioSeries
  */
 class RadioSeries extends CreativeWorkSeries
 {

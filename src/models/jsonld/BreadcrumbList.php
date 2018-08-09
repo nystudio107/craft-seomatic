@@ -28,7 +28,7 @@ use nystudio107\seomatic\models\jsonld\ItemList;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/BreadcrumbList
+ * @see       https://schema.org/BreadcrumbList
  */
 class BreadcrumbList extends ItemList
 {

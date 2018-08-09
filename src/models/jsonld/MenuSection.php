@@ -22,7 +22,7 @@ use nystudio107\seomatic\models\jsonld\CreativeWork;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/MenuSection
+ * @see       https://schema.org/MenuSection
  */
 class MenuSection extends CreativeWork
 {

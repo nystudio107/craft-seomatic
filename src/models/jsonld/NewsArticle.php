@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\Article;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/NewsArticle
+ * @see       https://schema.org/NewsArticle
  */
 class NewsArticle extends Article
 {

@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\Product;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/ProductModel
+ * @see       https://schema.org/ProductModel
  */
 class ProductModel extends Product
 {

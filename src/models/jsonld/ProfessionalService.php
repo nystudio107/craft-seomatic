@@ -25,7 +25,7 @@ use nystudio107\seomatic\models\jsonld\LocalBusiness;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/ProfessionalService
+ * @see       https://schema.org/ProfessionalService
  */
 class ProfessionalService extends LocalBusiness
 {

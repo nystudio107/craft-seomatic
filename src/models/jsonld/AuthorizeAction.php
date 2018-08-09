@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\AllocateAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/AuthorizeAction
+ * @see       https://schema.org/AuthorizeAction
  */
 class AuthorizeAction extends AllocateAction
 {

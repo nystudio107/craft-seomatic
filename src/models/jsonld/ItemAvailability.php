@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\Enumeration;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/ItemAvailability
+ * @see       https://schema.org/ItemAvailability
  */
 class ItemAvailability extends Enumeration
 {

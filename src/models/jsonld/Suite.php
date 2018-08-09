@@ -17,14 +17,14 @@ use nystudio107\seomatic\models\jsonld\Accommodation;
  * Suite - A suite in a hotel or other public accommodation, denotes a class
  * of luxury accommodations, the key feature of which is multiple rooms
  * (Source: Wikipedia, the free encyclopedia, see
- * http://en.wikipedia.org/wiki/Suite_(hotel)). See also the dedicated
+ * https://en.wikipedia.org/wiki/Suite_(hotel)). See also the dedicated
  * document on the use of schema.org for marking up hotels and other forms of
  * accommodations.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Suite
+ * @see       https://schema.org/Suite
  */
 class Suite extends Accommodation
 {
@@ -50,7 +50,7 @@ class Suite extends Accommodation
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'A suite in a hotel or other public accommodation, denotes a class of luxury accommodations, the key feature of which is multiple rooms (Source: Wikipedia, the free encyclopedia, see http://en.wikipedia.org/wiki/Suite_(hotel)). See also the dedicated document on the use of schema.org for marking up hotels and other forms of accommodations.';
+    static public $schemaTypeDescription = 'A suite in a hotel or other public accommodation, denotes a class of luxury accommodations, the key feature of which is multiple rooms (Source: Wikipedia, the free encyclopedia, see https://en.wikipedia.org/wiki/Suite_(hotel)). See also the dedicated document on the use of schema.org for marking up hotels and other forms of accommodations.';
 
     /**
      * The Schema.org Type Extends

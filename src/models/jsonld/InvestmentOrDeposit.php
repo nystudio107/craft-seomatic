@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\FinancialProduct;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/InvestmentOrDeposit
+ * @see       https://schema.org/InvestmentOrDeposit
  */
 class InvestmentOrDeposit extends FinancialProduct
 {

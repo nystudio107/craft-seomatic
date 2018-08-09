@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\Place;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/CivicStructure
+ * @see       https://schema.org/CivicStructure
  */
 class CivicStructure extends Place
 {

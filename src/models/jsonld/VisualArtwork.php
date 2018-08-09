@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\CreativeWork;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/VisualArtwork
+ * @see       https://schema.org/VisualArtwork
  */
 class VisualArtwork extends CreativeWork
 {

@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\DataType;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/DateTime
+ * @see       https://schema.org/DateTime
  */
 class DateTime extends DataType
 {

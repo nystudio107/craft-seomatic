@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\EducationalOrganization;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/MiddleSchool
+ * @see       https://schema.org/MiddleSchool
  */
 class MiddleSchool extends EducationalOrganization
 {

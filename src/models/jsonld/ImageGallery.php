@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\CollectionPage;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/ImageGallery
+ * @see       https://schema.org/ImageGallery
  */
 class ImageGallery extends CollectionPage
 {

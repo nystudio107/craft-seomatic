@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\CreativeWork;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Comment
+ * @see       https://schema.org/Comment
  */
 class Comment extends CreativeWork
 {

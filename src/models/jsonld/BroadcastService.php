@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\Service;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/BroadcastService
+ * @see       https://schema.org/BroadcastService
  */
 class BroadcastService extends Service
 {

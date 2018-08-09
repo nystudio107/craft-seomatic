@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\WebPage;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/QAPage
+ * @see       https://schema.org/QAPage
  */
 class QAPage extends WebPage
 {

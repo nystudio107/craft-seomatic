@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\BroadcastChannel;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/RadioChannel
+ * @see       https://schema.org/RadioChannel
  */
 class RadioChannel extends BroadcastChannel
 {

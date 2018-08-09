@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\CivicStructure;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/MusicVenue
+ * @see       https://schema.org/MusicVenue
  */
 class MusicVenue extends CivicStructure
 {

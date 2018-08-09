@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\Message;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/EmailMessage
+ * @see       https://schema.org/EmailMessage
  */
 class EmailMessage extends Message
 {

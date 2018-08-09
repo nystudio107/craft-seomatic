@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\Number;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Integer
+ * @see       https://schema.org/Integer
  */
 class Integer extends Number
 {

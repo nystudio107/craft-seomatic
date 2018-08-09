@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\PlayAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/ExerciseAction
+ * @see       https://schema.org/ExerciseAction
  */
 class ExerciseAction extends PlayAction
 {

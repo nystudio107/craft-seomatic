@@ -24,7 +24,7 @@ use nystudio107\seomatic\models\jsonld\InteractAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/JoinAction
+ * @see       https://schema.org/JoinAction
  */
 class JoinAction extends InteractAction
 {

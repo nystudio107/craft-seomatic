@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\AssessAction;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/ChooseAction
+ * @see       https://schema.org/ChooseAction
  */
 class ChooseAction extends AssessAction
 {

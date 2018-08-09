@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\MetaJsonLd;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Thing
+ * @see       https://schema.org/Thing
  */
 class Thing extends MetaJsonLd
 {

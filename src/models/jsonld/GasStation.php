@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\AutomotiveBusiness;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/GasStation
+ * @see       https://schema.org/GasStation
  */
 class GasStation extends AutomotiveBusiness
 {

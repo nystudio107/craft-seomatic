@@ -22,14 +22,14 @@ use nystudio107\seomatic\models\jsonld\CivicStructure;
  * American English the term campsite generally means an area where an
  * individual, family, group, or military unit can pitch a tent or parks a
  * camper; a campground may contain many campsites (Source: Wikipedia, the
- * free encyclopedia, see http://en.wikipedia.org/wiki/Campsite). See also the
+ * free encyclopedia, see https://en.wikipedia.org/wiki/Campsite). See also the
  * dedicated document on the use of schema.org for marking up hotels and other
  * forms of accommodations.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Campground
+ * @see       https://schema.org/Campground
  */
 class Campground extends CivicStructure
 {
@@ -55,7 +55,7 @@ class Campground extends CivicStructure
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'A camping site, campsite, or campground is a place used for overnight stay in the outdoors. In British English a campsite is an area, usually divided into a number of pitches, where people can camp overnight using tents or camper vans or caravans; this British English use of the word is synonymous with the American English expression campground. In American English the term campsite generally means an area where an individual, family, group, or military unit can pitch a tent or parks a camper; a campground may contain many campsites (Source: Wikipedia, the free encyclopedia, see http://en.wikipedia.org/wiki/Campsite). See also the dedicated document on the use of schema.org for marking up hotels and other forms of accommodations.';
+    static public $schemaTypeDescription = 'A camping site, campsite, or campground is a place used for overnight stay in the outdoors. In British English a campsite is an area, usually divided into a number of pitches, where people can camp overnight using tents or camper vans or caravans; this British English use of the word is synonymous with the American English expression campground. In American English the term campsite generally means an area where an individual, family, group, or military unit can pitch a tent or parks a camper; a campground may contain many campsites (Source: Wikipedia, the free encyclopedia, see https://en.wikipedia.org/wiki/Campsite). See also the dedicated document on the use of schema.org for marking up hotels and other forms of accommodations.';
 
     /**
      * The Schema.org Type Extends

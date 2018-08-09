@@ -19,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\Intangible;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Ticket
+ * @see       https://schema.org/Ticket
  */
 class Ticket extends Intangible
 {

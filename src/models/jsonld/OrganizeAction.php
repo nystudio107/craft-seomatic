@@ -20,7 +20,7 @@ use nystudio107\seomatic\models\jsonld\Action;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/OrganizeAction
+ * @see       https://schema.org/OrganizeAction
  */
 class OrganizeAction extends Action
 {
