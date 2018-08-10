@@ -20,7 +20,7 @@ use craft\db\Migration;
  * @package   SEOmatic
  * @since     3.0.0
  */
-class m180403_002756_field_type extends Migration
+class m180314_002755_field_type extends Migration
 {
     // Public Methods
     // =========================================================================
@@ -30,7 +30,7 @@ class m180403_002756_field_type extends Migration
      */
     public function safeUp()
     {
-        echo "m180403_002756_field_type updating.\n";
+        echo "m180314_002755_field_type updating.\n";
 
         // Migrate the old Seomatic_Meta field
         $this->update('{{%fields}}', [
@@ -45,7 +45,7 @@ class m180403_002756_field_type extends Migration
      */
     public function safeDown()
     {
-        echo "m180403_002756_field_type cannot be reverted.\n";
+        echo "m180314_002755_field_type cannot be reverted.\n";
 
         return false;
     }
