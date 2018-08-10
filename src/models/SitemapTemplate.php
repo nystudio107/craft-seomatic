@@ -14,6 +14,7 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\base\SitemapInterface;
+use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\helpers\UrlHelper;
 use nystudio107\seomatic\services\MetaBundles;
@@ -194,11 +195,36 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 if ($elements === null) {
                     throw new NotFoundHttpException(Craft::t('seomatic', 'Page not found.'));
                 }
+                // Stash the meta bundle so the object can be modified on a per-entry basis
+                $stashedMetaBundle = $metaBundle;
                 // Output the sitemap entry
                 /** @var  $element Entry */
                 foreach ($elements as $element) {
+                    $metaBundle = clone $stashedMetaBundle;
+                    // Make sure this entry isn't disabled
+                    $fieldHandles = FieldHelper::fieldsOfTypeFromElement(
+                        $element,
+                        FieldHelper::SEO_SETTINGS_CLASS_KEY,
+                        true
+                    );
+                    foreach ($fieldHandles as $fieldHandle) {
+                        if (!empty($element->$fieldHandle)) {
+                            /** @var MetaBundle $metaBundle */
+                            $fieldMetaBundle = $element->$fieldHandle;
+                            if ($fieldMetaBundle !== null) {
+                                // Combine the meta sitemap vars
+                                $attributes = $fieldMetaBundle->metaSitemapVars->getAttributes();
+                                $attributes = array_filter(
+                                    $attributes,
+                                    [ArrayHelper::class, 'preserveBools']
+                                );
+                                $metaBundle->metaSitemapVars->setAttributes($attributes, false);
+                            }
+                        }
+                    }
+                    // Special case for the __home__ URI
                     $path = ($element->uri === '__home__') ? '' : $element->uri;
-                    if ($path !== null) {
+                    if ($path !== null && $metaBundle->metaSitemapVars->sitemapUrls) {
                         $url = UrlHelper::siteUrl($path, null, null, $metaBundle->sourceSiteId);
                         $dateUpdated = $element->dateUpdated ?? $element->dateCreated ?? new \DateTime;
                         $lines[] = '  <url>';
