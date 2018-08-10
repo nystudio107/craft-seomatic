@@ -424,6 +424,7 @@ class MetaBundles extends Component
                                 $metaBundle->sourceHandle,
                                 $metaBundle->sourceSiteId
                             );
+                            Seomatic::$plugin->sitemaps->invalidateSitemapIndexCache();
                         }
                     }
                 }
