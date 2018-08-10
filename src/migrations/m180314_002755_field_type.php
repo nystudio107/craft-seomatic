@@ -37,6 +37,11 @@ class m180314_002755_field_type extends Migration
             'type' => Seomatic_MetaField::class
         ], ['type' => 'Seomatic_Meta']);
 
+        // Refresh the field memoization
+        if (method_exists(\Craft::$app->getFields(), 'refreshFields')) {
+            \Craft::$app->getFields()->refreshFields();
+        }
+
         return true;
     }
 
