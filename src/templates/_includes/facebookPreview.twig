@@ -12,7 +12,7 @@ set previewFacebook = seomatic.site.facebookAppId |length or seomatic.site.faceb
         {% if previewFacebook %}
             <div class="Facebook-container">
                 <div class="">
-                    <a href="{{ canonicalArray.href ?? siteUrl("/") }}" target="_blank">
+                    <a href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
                         <div class="Facebook-image-wrap">
                             <div id="facebook-post-image" class="Facebook-post-image" style="width:470px;height:246px;">
                             </div>
@@ -22,7 +22,7 @@ set previewFacebook = seomatic.site.facebookAppId |length or seomatic.site.faceb
                 <div class="facebook-text-wrap">
                     <div class="Facebook-text-container">
                         <div class="Facebook-headline">
-                            <a class="Facebook-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" target="_blank">{{ (ogTitleArray.content ?? "") |raw }}</a>
+                            <a class="Facebook-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">{{ (ogTitleArray.content ?? "") |raw }}</a>
                         </div>
                         <div class="Facebook-text">
                             {{ (ogDescriptionArray.content ?? "") |raw }}
