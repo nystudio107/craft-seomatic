@@ -93,7 +93,7 @@ class MetaSitemapVars extends FluentModel
      */
     public function init()
     {
-        // Force booleans to be real bools
+        // Enforce types
         $this->sitemapUrls = (bool)$this->sitemapUrls;
         $this->sitemapAssets = (bool)$this->sitemapAssets;
         $this->sitemapFiles = (bool)$this->sitemapFiles;
