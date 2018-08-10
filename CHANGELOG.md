@@ -3,6 +3,7 @@
 ## 3.1.14 - 2018.08.10
 ### Changed
 * Ensure that the sitemap index cache gets invalidated when entries are modified
+* Specify `rel="noopener"` for external links.
 
 ## 3.1.13.1 - 2018.08.07
 ### Changed
