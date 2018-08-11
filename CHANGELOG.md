@@ -3,6 +3,7 @@
 ## 3.1.14 - 2018.08.10
 ### Added
 * Added in the ability to override sitemap settings on a per-Entry/Category Group/Product basis
+* Implement `Json::decode()` to avoid large integers being converted to floats
 
 ### Changed
 * Ensure that the sitemap index cache gets invalidated when entries are modified
