@@ -10,6 +10,7 @@
 * Specify `rel="noopener"` for external links.
 * Fix the order that the field migration happens to let the mapping magic happen
 * SEOmatic now requires Craft CMS 3.0.20 or later
+* Fixed an issue with paginated pages that have no results on them
 
 ## 3.1.13.1 - 2018.08.07
 ### Changed
