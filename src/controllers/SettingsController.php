@@ -665,13 +665,6 @@ class SettingsController extends Controller
         if (!empty($siteSettings['twitterHandle'])) {
             $siteSettings['twitterHandle'] = ltrim($siteSettings['twitterHandle'], '@');
         }
-        // Make sure these are strings
-        if (!empty($siteSettings['facebookProfileId'])) {
-            $siteSettings['facebookProfileId'] = trim($siteSettings['facebookProfileId']);
-        }
-        if (!empty($siteSettings['facebookAppId'])) {
-            $siteSettings['facebookAppId'] = trim($siteSettings['facebookAppId']);
-        }
         // Make sure the sameAsLinks are indexed by the handle
         if (!empty($siteSettings['sameAsLinks'])) {
             $siteSettings['sameAsLinks'] = ArrayHelper::index($siteSettings['sameAsLinks'], 'handle');
