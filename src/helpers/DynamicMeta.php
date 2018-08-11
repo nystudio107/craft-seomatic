@@ -52,7 +52,7 @@ class DynamicMeta
      */
     public static function paginate(Paginate $pageInfo)
     {
-        if ($pageInfo !== null) {
+        if ($pageInfo !== null && $pageInfo->currentPage !== null) {
             // Let the meta containers know that this page is paginated
             Seomatic::$plugin->metaContainers->paginationPage = (string)$pageInfo->currentPage;
             // Set the current page
