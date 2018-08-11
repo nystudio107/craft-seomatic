@@ -12,9 +12,9 @@
 namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\base\VarsModel;
+use nystudio107\seomatic\helpers\Json as JsonHelper;
 
 use Craft;
-use craft\helpers\Json as JsonHelper;
 use craft\validators\ArrayValidator;
 use craft\validators\DateTimeValidator;
 
