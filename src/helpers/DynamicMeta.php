@@ -167,7 +167,9 @@ class DynamicMeta
         // Don't add dynamic meta to console requests, they have no concept of a URI or segments
         if (!$request->getIsConsoleRequest()) {
             self::addMetaJsonLdBreadCrumbs($siteId);
-            self::addMetaLinkHrefLang();
+            if (Seomatic::$settings->addHrefLang) {
+                self::addMetaLinkHrefLang();
+            }
             self::addSameAsMeta();
             $metaSiteVars = Seomatic::$plugin->metaContainers->metaSiteVars;
             $jsonLd = Seomatic::$plugin->jsonLd->get('identity');

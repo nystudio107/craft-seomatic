@@ -83,6 +83,11 @@ class Settings extends VarsModel
      */
     public $generatorEnabled = true;
 
+    /**
+     * @var bool Whether to dynamically include the hreflang tags
+     */
+    public $addHrefLang = true;
+
     // Public Methods
     // =========================================================================
 
@@ -100,6 +105,7 @@ class Settings extends VarsModel
                     'sitemapsEnabled',
                     'headersEnabled',
                     'generatorEnabled',
+                    'addHrefLang',
                 ],
                 'boolean'],
             ['environment', 'string'],
