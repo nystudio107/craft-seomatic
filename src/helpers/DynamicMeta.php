@@ -11,14 +11,17 @@
 
 namespace nystudio107\seomatic\helpers;
 
+use nystudio107\seomatic\models\MetaBundle;
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\models\Entity;
+use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\models\jsonld\ContactPoint;
 use nystudio107\seomatic\models\jsonld\LocalBusiness;
 use nystudio107\seomatic\models\jsonld\Organization;
-use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\models\jsonld\BreadcrumbList;
 use nystudio107\seomatic\models\jsonld\Thing;
 use nystudio107\seomatic\models\MetaJsonLd;
+
 
 use Craft;
 use craft\base\Element;
@@ -356,29 +359,31 @@ class DynamicMeta
     {
         $siteLocalizedUrls = self::getLocalizedUrls();
 
-        // Add the x-default hreflang
-        $siteLocalizedUrl = $siteLocalizedUrls[0];
-        $metaTag = Seomatic::$plugin->link->create([
-            'rel' => 'alternate',
-            'hreflang' => ['x-default'],
-            'href' => [$siteLocalizedUrl['url']],
-        ]);
-        // Add the alternate language link rel's
-        if (\count($siteLocalizedUrls) > 1) {
-            foreach ($siteLocalizedUrls as $siteLocalizedUrl) {
-                $metaTag->hreflang[] = $siteLocalizedUrl['hreflangLanguage'];
-                $metaTag->href[] = $siteLocalizedUrl['url'];
+        if (!empty($siteLocalizedUrls)) {
+            // Add the x-default hreflang
+            $siteLocalizedUrl = $siteLocalizedUrls[0];
+            $metaTag = Seomatic::$plugin->link->create([
+                'rel'      => 'alternate',
+                'hreflang' => ['x-default'],
+                'href'     => [$siteLocalizedUrl['url']],
+            ]);
+            // Add the alternate language link rel's
+            if (\count($siteLocalizedUrls) > 1) {
+                foreach ($siteLocalizedUrls as $siteLocalizedUrl) {
+                    $metaTag->hreflang[] = $siteLocalizedUrl['hreflangLanguage'];
+                    $metaTag->href[] = $siteLocalizedUrl['url'];
+                }
+                Seomatic::$plugin->link->add($metaTag);
             }
-            Seomatic::$plugin->link->add($metaTag);
-        }
-        // Add in the og:locale:alternate tags
-        $ogLocaleAlternate = Seomatic::$plugin->tag->get('og:locale:alternate');
-        if (\count($siteLocalizedUrls) > 1 && $ogLocaleAlternate) {
-            $ogContentArray = [];
-            foreach ($siteLocalizedUrls as $siteLocalizedUrl) {
-                $ogContentArray[] = $siteLocalizedUrl['ogLanguage'];
+            // Add in the og:locale:alternate tags
+            $ogLocaleAlternate = Seomatic::$plugin->tag->get('og:locale:alternate');
+            if (\count($siteLocalizedUrls) > 1 && $ogLocaleAlternate) {
+                $ogContentArray = [];
+                foreach ($siteLocalizedUrls as $siteLocalizedUrl) {
+                    $ogContentArray[] = $siteLocalizedUrl['ogLanguage'];
+                }
+                $ogLocaleAlternate->content = $ogContentArray;
             }
-            $ogLocaleAlternate->content = $ogContentArray;
         }
     }
 
@@ -465,8 +470,36 @@ class DynamicMeta
         $sites = $siteGroup->getSites();
         $elements = Craft::$app->getElements();
         foreach ($sites as $site) {
+            $includeUrl = true;
             if (Seomatic::$matchedElement) {
                 $url = $elements->getElementUriForSite(Seomatic::$matchedElement->getId(), $site->id);
+                // See if they have disabled sitemaps or robots for this entry,
+                // and if so, don't include it in the hreflang
+                /** @var Element $element */
+                $element = $elements->getElementByUri($url, $site->id, true);
+                if ($element !== null) {
+                    $fieldHandles = FieldHelper::fieldsOfTypeFromElement(
+                        $element,
+                        FieldHelper::SEO_SETTINGS_CLASS_KEY,
+                        true
+                    );
+                    foreach ($fieldHandles as $fieldHandle) {
+                        if (!empty($element->$fieldHandle)) {
+                            /** @var MetaBundle $metaBundle */
+                            $fieldMetaBundle = $element->$fieldHandle;
+                            if ($fieldMetaBundle !== null) {
+                                // If sitemaps are off for this entry, don't include the URL
+                                if (!$fieldMetaBundle->metaSitemapVars->sitemapUrls) {
+                                    $includeUrl = false;
+                                }
+                                // If robots is set tp 'none' don't include the URL
+                                if ($fieldMetaBundle->metaGlobalVars->robots === 'none') {
+                                    $includeUrl = false;
+                                }
+                            }
+                        }
+                    }
+                }
                 $url = ($url === '__home__') ? '' : $url;
             } else {
                 try {
@@ -501,13 +534,15 @@ class DynamicMeta
             $hreflangLanguage = $language;
             $hreflangLanguage = strtolower($hreflangLanguage);
             $hreflangLanguage = str_replace('_', '-', $hreflangLanguage);
-            $localizedUrls[] = [
-                'id' => $site->id,
-                'language' => $language,
-                'ogLanguage' => $ogLanguage,
-                'hreflangLanguage' => $hreflangLanguage,
-                'url' => $url,
-            ];
+            if ($includeUrl) {
+                $localizedUrls[] = [
+                    'id' => $site->id,
+                    'language' => $language,
+                    'ogLanguage' => $ogLanguage,
+                    'hreflangLanguage' => $hreflangLanguage,
+                    'url' => $url,
+                ];
+            }
         }
 
         return $localizedUrls;
