@@ -5,6 +5,7 @@
 * Added in the ability to override sitemap settings on a per-Entry/Category Group/Product basis
 * Implement `Json::decode()` to avoid large integers being converted to floats
 * If the SEO Settings field for an entry has **Robots** set to `none` or has sitemaps disabled, it isn't included in the `hreflang`
+* Added a setting to control whether `hreflang` tags are automatically added
 
 ### Changed
 * Ensure that the sitemap index cache gets invalidated when entries are modified
