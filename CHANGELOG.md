@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.1.14 - 2018.08.10
+## 3.1.14 - 2018.08.14
 ### Added
 * Added in the ability to override sitemap settings on a per-Entry/Category Group/Product basis
 * Implement `Json::decode()` to avoid large integers being converted to floats
