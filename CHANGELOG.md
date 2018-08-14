@@ -1,5 +1,19 @@
 # SEOmatic Changelog
 
+## 3.1.14 - 2018.08.14
+### Added
+* Added in the ability to override sitemap settings on a per-Entry/Category Group/Product basis
+* Implement `Json::decode()` to avoid large integers being converted to floats
+* If the SEO Settings field for an entry has **Robots** set to `none` or has sitemaps disabled, it isn't included in the `hreflang`
+* Added a setting to control whether `hreflang` tags are automatically added
+
+### Changed
+* Ensure that the sitemap index cache gets invalidated when entries are modified
+* Specify `rel="noopener"` for external links.
+* Fix the order that the field migration happens to let the mapping magic happen
+* SEOmatic now requires Craft CMS 3.0.20 or later
+* Fixed an issue with paginated pages that have no results on them
+
 ## 3.1.13.1 - 2018.08.07
 ### Changed
 * Fixed a potential `undefined index` error with pull fields, resulting from the new cropping modes
