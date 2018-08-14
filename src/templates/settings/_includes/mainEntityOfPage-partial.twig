@@ -68,7 +68,7 @@
         var selectValue = $('#'+siteSpecificTypeId + ' option:selected').text() || $('#'+siteSubTypeId + ' option:selected').text() || $('#'+siteTypeId + ' option:selected').text();
         // Remove any whitepsace, including encoded &nbsp; characters
         selectValue = selectValue.replace(/\s/g, '');
-        $('.seomaticSchemaInfo').html("<a href='http://schema.org/" + selectValue + "' target='_blank'>" + selectValue + " info...</a>");
+        $('.seomaticSchemaInfo').html("<a href='http://schema.org/" + selectValue + "' rel='noopener' target='_blank'>" + selectValue + " info...</a>");
     }
     
     // Initially hide all of the meta panes

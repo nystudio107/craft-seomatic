@@ -12,7 +12,7 @@
             {% endif %}
             <div class="TwitterCardsGrid{% if lg %} TwitterCardsGrid-Large{% endif %}">
                 <div class="TwitterCardGrid-col{% if lg %} TwitterCardGrid-col-Large{% endif %}">
-                    <a class="TwitterCard-container{% if lg %} TwitterCard-container-Large{% endif %}" href="{{ canonicalArray.href ?? siteUrl("/") }}" target="_blank">
+                    <a class="TwitterCard-container{% if lg %} TwitterCard-container-Large{% endif %}" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
                         <div class="TwitterCard-summary-image{% if lg %} TwitterCard-summary-image-Large{% endif %}">
                             <div class="TwitterCard-image-container{% if lg %} TwitterCard-image-container-Large{% endif %}">
                                 <div id="twitter-card-image" class="TwitterCard-image-wrapper{% if lg %} TwitterCard-image-wrapper-Large{% endif %}">

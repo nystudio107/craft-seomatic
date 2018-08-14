@@ -136,7 +136,17 @@
             warning: configWarning("maxDescriptionLength", "seomatic"),
             errors: settings.getErrors("maxDescriptionLength"),
         }) }}
-    
+
+        {{ forms.lightswitchField({
+            label: "Add `hreflang` Tags"|t("seomatic"),
+            instructions: "Controls whether SEOmatic will automatically add `hreflang` and `og:locale:alternate` tags."|t("seomatic"),
+            id: "addHrefLang",
+            name: "addHrefLang",
+            on: settings.addHrefLang,
+            warning: configWarning("addHrefLang", "seomatic"),
+            errors: settings.getErrors("addHrefLang"),
+        }) }}
+
         {{ forms.lightswitchField({
             label: "Generator Enabled"|t("seomatic"),
             instructions: "Controls whether SEOmatic will include the meta `generator` tag and `X-Powered-By` header."|t("seomatic"),

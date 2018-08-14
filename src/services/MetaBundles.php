@@ -404,9 +404,9 @@ class MetaBundles extends Component
                     .$sourceSiteId,
                     __METHOD__
                 );
+                $metaBundleInvalidated = true;
                 if (!$isNew) {
                     $sourceType = '';
-                    $metaBundleInvalidated = true;
                     Seomatic::$plugin->metaContainers->invalidateContainerCacheByPath($uri, $sourceSiteId);
                     // Invalidate the sitemap cache
                     $metaBundle = $this->getMetaBundleBySourceId($sourceType, $sourceId, $sourceSiteId);
@@ -424,14 +424,15 @@ class MetaBundles extends Component
                                 $metaBundle->sourceHandle,
                                 $metaBundle->sourceSiteId
                             );
+                            Seomatic::$plugin->sitemaps->invalidateSitemapIndexCache();
                         }
                     }
                 }
             }
-        }
-        // If we've invalidated a meta bundle, we need to invalidate the sitemap index, too
-        if ($metaBundleInvalidated) {
-            Seomatic::$plugin->sitemaps->invalidateSitemapIndexCache();
+            // If we've invalidated a meta bundle, we need to invalidate the sitemap index, too
+            if ($metaBundleInvalidated) {
+                Seomatic::$plugin->sitemaps->invalidateSitemapIndexCache();
+            }
         }
     }
 

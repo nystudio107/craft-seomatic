@@ -91,6 +91,18 @@ class MetaSitemapVars extends FluentModel
     /**
      * @inheritdoc
      */
+    public function init()
+    {
+        // Enforce types
+        $this->sitemapUrls = (bool)$this->sitemapUrls;
+        $this->sitemapAssets = (bool)$this->sitemapAssets;
+        $this->sitemapFiles = (bool)$this->sitemapFiles;
+        $this->sitemapAltLinks = (bool)$this->sitemapAltLinks;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules(): array
     {
         return [
