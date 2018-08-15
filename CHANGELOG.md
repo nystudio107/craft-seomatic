@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.15 - 2018.08.16
+### Changed
+* Fixed an issue where sitemap caches were not getting properly cleared
+
 ## 3.1.14 - 2018.08.14
 ### Added
 * Added in the ability to override sitemap settings on a per-Entry/Category Group/Product basis
