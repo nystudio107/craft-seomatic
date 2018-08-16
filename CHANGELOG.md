@@ -3,6 +3,7 @@
 ## 3.1.15 - 2018.08.16
 ### Changed
 * Fixed an issue where sitemap caches were not getting properly cleared
+* Fixed an issue where elements disabled in a site were showing up in the `hreflang`
 
 ## 3.1.14 - 2018.08.14
 ### Added
