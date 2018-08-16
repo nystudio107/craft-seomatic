@@ -23,6 +23,7 @@ use craft\models\SiteGroup;
 use yii\caching\TagDependency;
 use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
+use yii\base\Event;
 
 /**
  * @author    nystudio107
