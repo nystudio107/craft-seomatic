@@ -501,6 +501,8 @@ class DynamicMeta
                             }
                         }
                     }
+                } else {
+                    $includeUrl = false;
                 }
                 $url = ($url === '__home__') ? '' : $url;
             } else {
