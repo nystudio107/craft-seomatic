@@ -220,10 +220,10 @@ You can also add to it via a plugin:
 
 ```php
 use nystudio107\seomatic\events\RegisterSitemapUrlsEvent;
-use nystudio107\seomatic\SitemapCustomTemplate;
+use nystudio107\seomatic\models\SitemapCustomTemplate;
 use yii\base\Event;
 Event::on(SitemapCustomTemplate::class, SitemapCustomTemplate::EVENT_REGISTER_SITEMAP_URLS, function(RegisterSitemapUrlsEvent $e) {
-$e->sitemapUrls[] => [
+$e->sitemapUrls[] = [
          'loc' => $url,
          'changefreq' => $changeFreq,
          'priority' => $priority,
