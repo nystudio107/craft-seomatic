@@ -80,20 +80,22 @@
     {% endnamespace %}
 
 {############### SEO Image Transform ###############}
-
-    <div class="field seomatic-imageSourceNotFromUrl" {% if field is defined and 'seoImageTransform' not in field.generalEnabledFields %}style="display: none;"{% endif %}>
-        {% namespace "metaBundleSettings" %}
-            {{ forms.lightswitchField({
-                label: "Transform SEO Image"|t("seomatic"),
-                instructions: "Whether the SEO image should be automatically transformed to an appropriate file format and aspect ratio."|t("seomatic"),
-                id: "seoImageTransform",
-                name: "seoImageTransform",
-                class: "",
-                on: metaBundleSettings.seoImageTransform,
-                warning: false,
-                errors: metaBundleSettings.getErrors("seoImageTransform"),
-            }) }}
-        {% endnamespace %}
+    
+    <div class="field seomatic-imageSourceNotFromUrl">
+        <div class="field" {% if field is defined and 'seoImageTransform' not in field.generalEnabledFields %}style="display: none;"{% endif %}>
+            {% namespace "metaBundleSettings" %}
+                {{ forms.lightswitchField({
+                    label: "Transform SEO Image"|t("seomatic"),
+                    instructions: "Whether the SEO image should be automatically transformed to an appropriate file format and aspect ratio."|t("seomatic"),
+                    id: "seoImageTransform",
+                    name: "seoImageTransform",
+                    class: "",
+                    on: metaBundleSettings.seoImageTransform,
+                    warning: false,
+                    errors: metaBundleSettings.getErrors("seoImageTransform"),
+                }) }}
+            {% endnamespace %}
+        </div>
     </div>
 
 {############### SEO Image Transform Mode ###############}
@@ -106,18 +108,20 @@
     {% if pageContext == "field" %}
         {% set imageCropModes = { "": ""} | merge(imageCropModes) %}
     {% endif %}
-    <div class="field seomatic-imageSourceNotFromUrl" {% if field is defined and 'seoImageTransformMode' not in field.generalEnabledFields %}style="display: none;"{% endif %}>
-        {% namespace "metaBundleSettings" %}
-            {{ forms.selectField({
-                label: "SEO Image Transform Mode"|t("seomatic"),
-                instructions: "The transform mode to use for the SEO Image Transform."|t("seomatic"),
-                id: "seoImageTransformMode",
-                name: "seoImageTransformMode",
-                options: imageCropModes,
-                value: metaBundleSettings.seoImageTransformMode,
-                warning: false,
-                errors: metaBundleSettings.getErrors("seoImageTransformMode"),
-            }) }}
-        {% endnamespace %}
+    <div class="field seomatic-imageSourceNotFromUrl">
+        <div class="field" {% if field is defined and 'seoImageTransformMode' not in field.generalEnabledFields %}style="display: none;"{% endif %}>
+            {% namespace "metaBundleSettings" %}
+                {{ forms.selectField({
+                    label: "SEO Image Transform Mode"|t("seomatic"),
+                    instructions: "The transform mode to use for the SEO Image Transform."|t("seomatic"),
+                    id: "seoImageTransformMode",
+                    name: "seoImageTransformMode",
+                    options: imageCropModes,
+                    value: metaBundleSettings.seoImageTransformMode,
+                    warning: false,
+                    errors: metaBundleSettings.getErrors("seoImageTransformMode"),
+                }) }}
+            {% endnamespace %}
+        </div>
     </div>
 </div>
