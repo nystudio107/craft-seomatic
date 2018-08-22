@@ -478,7 +478,10 @@ class DynamicMeta
                 // See if they have disabled sitemaps or robots for this entry,
                 // and if so, don't include it in the hreflang
                 /** @var Element $element */
-                $element = $elements->getElementByUri($url, $site->id, true);
+                $element = null;
+                if ($url !== null) {
+                    $element = $elements->getElementByUri($url, $site->id, true);
+                }
                 if ($element !== null) {
                     $fieldHandles = FieldHelper::fieldsOfTypeFromElement(
                         $element,
