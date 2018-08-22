@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.16 - 2018.08.22
+### Changed
+* Handle elements that don't exist on other sites better
+
 ## 3.1.15 - 2018.08.16
 ### Changed
 * Fixed an issue where sitemap caches were not getting properly cleared
