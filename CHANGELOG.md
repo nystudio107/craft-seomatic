@@ -3,6 +3,7 @@
 ## 3.1.16 - 2018.08.22
 ### Changed
 * Handle elements that don't exist on other sites better
+* Don't include hreflang in sitemaps for sites where it has been disabled, whether through Content SEO or SEO Settings field settings
 
 ## 3.1.15 - 2018.08.16
 ### Changed
