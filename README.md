@@ -220,10 +220,10 @@ You can also add to it via a plugin:
 
 ```php
 use nystudio107\seomatic\events\RegisterSitemapUrlsEvent;
-use nystudio107\seomatic\SitemapCustomTemplate;
+use nystudio107\seomatic\models\SitemapCustomTemplate;
 use yii\base\Event;
 Event::on(SitemapCustomTemplate::class, SitemapCustomTemplate::EVENT_REGISTER_SITEMAP_URLS, function(RegisterSitemapUrlsEvent $e) {
-$e->sitemapUrls[] => [
+$e->sitemapUrls[] = [
          'loc' => $url,
          'changefreq' => $changeFreq,
          'priority' => $priority,
@@ -567,6 +567,14 @@ See the **Headless SPA API** section for details.
 SEOmatic can work fully without any Twig templating code at all. However, it provides a robust API that you can tap into from your Twig templates should you desire to do so.
 
 SEOmatic makes a global `seomatic` variable available in your Twig templates that allows you to work with the SEOmatic variables and functions.
+
+#### A Word About `{% cache %}` Tags
+
+If you use Craft's built-in `{% cache %}` tags, ensure that you don't have any of SEOmatic's tags (listed below) inside of them. The reason is that SEOmatic dynamically generates the tags on each request, using its own caching system for performance reasons.
+
+When you surround any Twig code in a `{% cache %}` tag, that code will only ever be executed once. On subsequent runs, the HTML result of what was inside of the `{% cache %}` tag is just returned, and the Twig code inside of it is never executed.
+
+For more information on how the `{% cache %}` tag works, see the [The Craft {% cache %} Tag In-Depth](https://nystudio107.com/blog/the-craft-cache-tag-in-depth) article.
 
 #### SEOmatic Variables
 
@@ -1173,6 +1181,11 @@ This will return to you an array of meta containers, with the render-ready meta 
     "MetaScriptContainer": "",
     "MetaJsonLdContainer": "<script type=\"application/ld+json\">{\"@context\":\"http://schema.org\",\"@type\":\"WebPage\",\"image\":{\"@type\":\"ImageObject\",\"height\":\"804\",\"width\":\"1200\"},\"inLanguage\":\"en-us\",\"mainEntityOfPage\":\"http://craft3.test/\",\"name\":\"Homepage\",\"url\":\"http://craft3.test/\"}</script><script type=\"application/ld+json\">{\"@context\":\"http://schema.org\",\"@type\":\"BreadcrumbList\",\"description\":\"Breadcrumbs list\",\"itemListElement\":[{\"@type\":\"ListItem\",\"item\":{\"@id\":\"http://craft3.test/\",\"name\":\"Homepage\"},\"position\":1}],\"name\":\"Breadcrumbs\"}</script>"
 }
+```
+If you need to request a URI from a specific site in a multi-site setup, you can do that with the optional `siteId=SITE_ID` parameter:
+
+```
+/actions/seomatic/meta-container/all-meta-containers/?uri=/&siteId=2
 ```
 
 Should you wish to have the items in the meta containers return as an array of data instead, you can do that with the optional `asArray=true` parameter:

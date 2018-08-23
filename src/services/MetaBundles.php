@@ -406,10 +406,9 @@ class MetaBundles extends Component
                 );
                 $metaBundleInvalidated = true;
                 if (!$isNew) {
-                    $sourceType = '';
                     Seomatic::$plugin->metaContainers->invalidateContainerCacheByPath($uri, $sourceSiteId);
                     // Invalidate the sitemap cache
-                    $metaBundle = $this->getMetaBundleBySourceId($sourceType, $sourceId, $sourceSiteId);
+                    $metaBundle = $this->getMetaBundleBySourceId($sourceBundleType, $sourceId, $sourceSiteId);
                     if ($metaBundle) {
                         if ($element) {
                             $dateUpdated = $element->dateUpdated ?? $element->dateCreated;

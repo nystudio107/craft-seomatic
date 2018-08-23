@@ -1,5 +1,18 @@
 # SEOmatic Changelog
 
+## 3.1.16 - 2018.08.23
+### Changed
+* Handle elements that don't exist on other sites better
+* Don't include hreflang in sitemaps for sites where it has been disabled, whether through Content SEO or SEO Settings field settings
+* Hide Transform Image and Transform Type in the SEO Settings field if they aren't enabled
+* Fixed a conflicting use \craft\helpers\Json import
+
+## 3.1.15 - 2018.08.16
+### Changed
+* Fixed an issue where sitemap caches were not getting properly cleared
+* Fixed an issue where elements disabled in a site were showing up in the `hreflang`
+* Fixed namespaces and custom sitemap event triggering
+
 ## 3.1.14 - 2018.08.14
 ### Added
 * Added in the ability to override sitemap settings on a per-Entry/Category Group/Product basis

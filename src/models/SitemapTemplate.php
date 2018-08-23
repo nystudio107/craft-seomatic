@@ -20,6 +20,7 @@ use nystudio107\seomatic\helpers\UrlHelper;
 use nystudio107\seomatic\services\MetaBundles;
 
 use Craft;
+use craft\base\Element;
 use craft\elements\Asset;
 use craft\elements\Entry;
 use craft\elements\Category;
@@ -71,10 +72,10 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
     public static function create(array $config = [])
     {
         $defaults = [
-            'path'       => 'sitemaps/<groupId:\d+>/<type:[-\w\.*]+>/<handle:[-\w\.*]+>/<siteId:\d+>/<file:[-\w\.*]+>',
-            'template'   => '',
+            'path' => 'sitemaps/<groupId:\d+>/<type:[-\w\.*]+>/<handle:[-\w\.*]+>/<siteId:\d+>/<file:[-\w\.*]+>',
+            'template' => '',
             'controller' => 'sitemap',
-            'action'     => 'sitemap',
+            'action' => 'sitemap',
         ];
         $config = array_merge($config, $defaults);
 
@@ -202,26 +203,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 foreach ($elements as $element) {
                     $metaBundle = clone $stashedMetaBundle;
                     // Make sure this entry isn't disabled
-                    $fieldHandles = FieldHelper::fieldsOfTypeFromElement(
-                        $element,
-                        FieldHelper::SEO_SETTINGS_CLASS_KEY,
-                        true
-                    );
-                    foreach ($fieldHandles as $fieldHandle) {
-                        if (!empty($element->$fieldHandle)) {
-                            /** @var MetaBundle $metaBundle */
-                            $fieldMetaBundle = $element->$fieldHandle;
-                            if ($fieldMetaBundle !== null) {
-                                // Combine the meta sitemap vars
-                                $attributes = $fieldMetaBundle->metaSitemapVars->getAttributes();
-                                $attributes = array_filter(
-                                    $attributes,
-                                    [ArrayHelper::class, 'preserveBools']
-                                );
-                                $metaBundle->metaSitemapVars->setAttributes($attributes, false);
-                            }
-                        }
-                    }
+                    $this->combineFieldSettings($element, $metaBundle);
                     // Special case for the __home__ URI
                     $path = ($element->uri === '__home__') ? '' : $element->uri;
                     if ($path !== null && $metaBundle->metaSitemapVars->sitemapUrls) {
@@ -281,11 +263,26 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                                             }
                                             break;
                                     }
+                                    // Make sure to only include the `hreflang` if the element exists,
+                                    // and sitemaps are on for it
                                     if ($altElement) {
-                                        $lines[] = '    <xhtml:link rel="alternate"'
-                                            .' hreflang="'.$altSiteSettings['language'].'"'
-                                            .' href="'.Html::encode($altElement->url).'"'
-                                            .' />';
+                                        list($altSourceId, $altSourceBundleType, $altSourceHandle, $altSourceSiteId)
+                                            = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($altElement);
+                                        $altMetaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
+                                            $altSourceBundleType,
+                                            $altSourceId,
+                                            $altSourceSiteId
+                                        );
+                                        if ($altMetaBundle) {
+                                            // Make sure this entry isn't disabled
+                                            $this->combineFieldSettings($altElement, $altMetaBundle);
+                                            if ($altMetaBundle->metaSitemapVars->sitemapUrls) {
+                                                $lines[] = '    <xhtml:link rel="alternate"'
+                                                    .' hreflang="'.$altSiteSettings['language'].'"'
+                                                    .' href="'.Html::encode($altElement->url).'"'
+                                                    .' />';
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -358,7 +355,6 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                                 }
                             }
                         }
-
                     }
                 }
                 // Sitemap index closing tag
@@ -383,6 +379,40 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             'Sitemap cache cleared: '.$handle,
             __METHOD__
         );
+    }
+
+    // Protected Methods
+    // =========================================================================
+
+    /**
+     * Combine any SEO Settings field settings from $element with the passed in
+     * $metaBundle
+     *
+     * @param Element    $element
+     * @param MetaBundle $metaBundle
+     */
+    protected function combineFieldSettings(Element $element, MetaBundle $metaBundle)
+    {
+        $fieldHandles = FieldHelper::fieldsOfTypeFromElement(
+            $element,
+            FieldHelper::SEO_SETTINGS_CLASS_KEY,
+            true
+        );
+        foreach ($fieldHandles as $fieldHandle) {
+            if (!empty($element->$fieldHandle)) {
+                /** @var MetaBundle $metaBundle */
+                $fieldMetaBundle = $element->$fieldHandle;
+                if ($fieldMetaBundle !== null) {
+                    // Combine the meta sitemap vars
+                    $attributes = $fieldMetaBundle->metaSitemapVars->getAttributes();
+                    $attributes = array_filter(
+                        $attributes,
+                        [ArrayHelper::class, 'preserveBools']
+                    );
+                    $metaBundle->metaSitemapVars->setAttributes($attributes, false);
+                }
+            }
+        }
     }
 
     /**
