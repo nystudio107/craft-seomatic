@@ -27,7 +27,6 @@ use Craft;
 use craft\base\Element;
 use craft\errors\SiteNotFoundException;
 use craft\helpers\DateTimeHelper;
-use craft\helpers\Json;
 use craft\web\twig\variables\Paginate;
 
 use yii\base\Exception;
