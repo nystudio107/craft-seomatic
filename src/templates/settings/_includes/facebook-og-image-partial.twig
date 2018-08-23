@@ -83,18 +83,20 @@
 
         {############### Facebook OpenGraph Image Transform ###############}
 
-        <div class="field seomatic-imageSourceNotFromUrl" {% if field is defined and 'ogImageTransform' not in field.facebookEnabledFields %}style="display: none;"{% endif %}>
-            {% namespace "metaBundleSettings" %}
-                {{ forms.lightswitchField({
-                    label: "Transform Facebook OpenGraph Image"|t("seomatic"),
-                    instructions: "Whether the Facebook OpenGraph image should be automatically transformed to an appropriate file format and aspect ratio for Facebook."|t("seomatic"),
-                    id: "ogImageTransform",
-                    name: "ogImageTransform",
-                    on: metaBundleSettings.ogImageTransform,
-                    warning: false,
-                    errors: metaBundleSettings.getErrors("ogImageTransform"),
-                }) }}
-            {% endnamespace %}
+        <div class="field seomatic-imageSourceNotFromUrl">
+            <div class="field" {% if field is defined and 'ogImageTransform' not in field.facebookEnabledFields %}style="display: none;"{% endif %}>
+                {% namespace "metaBundleSettings" %}
+                    {{ forms.lightswitchField({
+                        label: "Transform Facebook OpenGraph Image"|t("seomatic"),
+                        instructions: "Whether the Facebook OpenGraph image should be automatically transformed to an appropriate file format and aspect ratio for Facebook."|t("seomatic"),
+                        id: "ogImageTransform",
+                        name: "ogImageTransform",
+                        on: metaBundleSettings.ogImageTransform,
+                        warning: false,
+                        errors: metaBundleSettings.getErrors("ogImageTransform"),
+                    }) }}
+                {% endnamespace %}
+            </div>
         </div>
 
         {############### Facebook OpenGraph Transform Mode ###############}
@@ -107,19 +109,21 @@
         {% if pageContext == "field" %}
             {% set imageCropModes = { "": ""} | merge(imageCropModes) %}
         {% endif %}
-        <div class="field seomatic-imageSourceNotFromUrl" {% if field is defined and 'ogImageTransformMode' not in field.facebookEnabledFields %}style="display: none;"{% endif %}>
-            {% namespace "metaBundleSettings" %}
-                {{ forms.selectField({
-                    label: "Facebook OpenGraph Image Transform Mode"|t("seomatic"),
-                    instructions: "The transform mode to use for the Facebook OpenGraph Image Transform."|t("seomatic"),
-                    id: "ogImageTransformMode",
-                    name: "ogImageTransformMode",
-                    options: imageCropModes,
-                    value: metaBundleSettings.ogImageTransformMode,
-                    warning: false,
-                    errors: metaBundleSettings.getErrors("ogImageTransformMode"),
-                }) }}
-            {% endnamespace %}
+        <div class="field seomatic-imageSourceNotFromUrl">
+            <div class="field" {% if field is defined and 'ogImageTransformMode' not in field.facebookEnabledFields %}style="display: none;"{% endif %}>
+                {% namespace "metaBundleSettings" %}
+                    {{ forms.selectField({
+                        label: "Facebook OpenGraph Image Transform Mode"|t("seomatic"),
+                        instructions: "The transform mode to use for the Facebook OpenGraph Image Transform."|t("seomatic"),
+                        id: "ogImageTransformMode",
+                        name: "ogImageTransformMode",
+                        options: imageCropModes,
+                        value: metaBundleSettings.ogImageTransformMode,
+                        warning: false,
+                        errors: metaBundleSettings.getErrors("ogImageTransformMode"),
+                    }) }}
+                {% endnamespace %}
+            </div>
         </div>
     </div>
 {% endif %}
