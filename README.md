@@ -568,6 +568,14 @@ SEOmatic can work fully without any Twig templating code at all. However, it pro
 
 SEOmatic makes a global `seomatic` variable available in your Twig templates that allows you to work with the SEOmatic variables and functions.
 
+#### A Word About `{% cache %}` Tags
+
+If you use Craft's built-in `{% cache %}` tags, ensure that you don't have any of SEOmatic's tags (listed below) inside of them. The reason is that SEOmatic dynamically generates the tags on each request, using its own caching system for performance reasons.
+
+When you surround any Twig code in a `{% cache %}` tag, that code will only ever be executed once. On subsequent runs, the HTML result of what was inside of the `{% cache %}` tag is just returned, and the Twig code inside of it is never executed.
+
+For more information on how the `{% cache %}` tag works, see the [The Craft {% cache %} Tag In-Depth](https://nystudio107.com/blog/the-craft-cache-tag-in-depth) article.
+
 #### SEOmatic Variables
 
 All of the SEOmatic variables can be accessed as you would any normal Twig variable:
