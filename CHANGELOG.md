@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.17 - 2018.08.25
+### Changed
+* Fixed an error trying to access a property of a non-object in MetaContainers.php
+
 ## 3.1.16 - 2018.08.23
 ### Changed
 * Handle elements that don't exist on other sites better
