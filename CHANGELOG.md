@@ -3,6 +3,7 @@
 ## 3.1.17 - 2018.08.25
 ### Changed
 * Fixed an error trying to access a property of a non-object in MetaContainers.php
+* Prevent classname conflict with older versions of PHP
 
 ## 3.1.16 - 2018.08.23
 ### Changed
