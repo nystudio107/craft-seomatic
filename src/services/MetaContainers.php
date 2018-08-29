@@ -95,12 +95,12 @@ class MetaContainers extends Component
     /**
      * @var null|MetaBundle
      */
-    protected $matchedMetaBundle = null;
+    protected $matchedMetaBundle;
 
     /**
      * @var null|TagDependency
      */
-    protected $containerDependency = null;
+    protected $containerDependency;
 
     /**
      * @var bool Whether or not the matched element should be included in the
@@ -214,7 +214,7 @@ class MetaContainers extends Component
     {
         Craft::beginProfile('MetaContainers::includeScriptBodyHtml', __METHOD__);
         $dependency = $this->containerDependency;
-        $uniqueKey = $dependency->tags[3].$bodyPosition;
+        $uniqueKey = $dependency->tags[3].$bodyPosition ?? $bodyPosition;
         $scriptData = Craft::$app->getCache()->getOrSet(
             $this::GLOBALS_CACHE_KEY.$uniqueKey,
             function () use ($uniqueKey, $bodyPosition) {
@@ -277,7 +277,7 @@ class MetaContainers extends Component
     public function parseGlobalVars()
     {
         $dependency = $this->containerDependency;
-        $uniqueKey = $dependency->tags[3];
+        $uniqueKey = $dependency->tags[3] ?? $this::GLOBALS_CACHE_KEY;
         list($this->metaGlobalVars, $this->metaSiteVars) = Craft::$app->getCache()->getOrSet(
             $this::GLOBALS_CACHE_KEY.$uniqueKey,
             function () use ($uniqueKey) {
@@ -479,6 +479,7 @@ class MetaContainers extends Component
         /** @var  $metaContainer MetaContainer */
         foreach ($this->metaContainers as $metaContainer) {
             if ($metaContainer::CONTAINER_TYPE === $type && $metaContainer->include) {
+                /** @noinspection SlowArrayOperationsInLoopInspection */
                 $htmlArray = array_merge($htmlArray, $metaContainer->renderArray());
             }
         }
