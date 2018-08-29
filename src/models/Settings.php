@@ -81,7 +81,7 @@ class Settings extends VarsModel
     /**
      * @var bool Site Groups define logically separate sites
      */
-    public $siteGroupsSeparate = false;
+    public $siteGroupsSeparate = true;
 
     /**
      * @var bool Whether to dynamically include the hreflang tags
