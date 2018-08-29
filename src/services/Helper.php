@@ -305,7 +305,7 @@ class Helper extends Component
      *
      * @return string URL to the transformed image
      */
-    public function socialTransform($asset, string $transformName = '', $siteId = null, $transformMode = 'crop'): string
+    public function socialTransform($asset, string $transformName = '', $siteId = null, $transformMode = null): string
     {
         return ImageTransformHelper::socialTransform($asset, $transformName, $siteId, $transformMode);
     }
@@ -325,7 +325,7 @@ class Helper extends Component
         $asset,
         string $transformName = '',
         $siteId = null,
-        $transformMode = 'crop'
+        $transformMode = null
     ): string {
         return ImageTransformHelper::socialTransformWidth($asset, $transformName, $siteId, $transformMode);
     }
@@ -345,7 +345,7 @@ class Helper extends Component
         $asset,
         string $transformName = '',
         $siteId = null,
-        $transformMode = 'crop'
+        $transformMode = null
     ): string {
         return ImageTransformHelper::socialTransformHeight($asset, $transformName, $siteId, $transformMode);
     }
