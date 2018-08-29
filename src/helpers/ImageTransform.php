@@ -198,7 +198,10 @@ class ImageTransform
      */
     protected static function assetFromAssetOrId($asset, $siteId = null)
     {
-        return \is_int($asset) ? Craft::$app->getAssets()->getAssetById($asset, $siteId) : $asset;
+        if (empty($asset)) {
+            return null;
+        }
+        return ($asset instanceof Asset) ? $asset : Craft::$app->getAssets()->getAssetById($asset, $siteId);
     }
 
     /**
