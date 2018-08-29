@@ -554,6 +554,26 @@ Since AMP [doesn't allow for third-party JavaScript](https://medium.com/google-d
 
 This will cause SEOmatic to not render _any_ custom scripts you might have enabled (such as Google Analytics, gtag, etc.)
 
+Then you can include Google AMP Analytics as per [Adding Analytics to your AMP pages](https://developers.google.com/analytics/devguides/collection/amp-analytics/) (this assumes you're using `gtag`):
+```
+{% set script = seomatic.script.get('gtag') %}
+{% set analyticsId = script.vars.googleAnalyticsId.value ?? '' %}
+<amp-analytics type="googleanalytics">
+    <script type="application/json">
+        {
+            "vars": {
+                "account": "{{ analyticsId }}"
+            },
+            "triggers": {
+                "trackPageview": {
+                    "on": "visible",
+                    "request": "pageview"
+                }
+            }
+        }
+    </script>
+</amp-analytics>
+```
 ## Single Page App (SPA) Support
 
 SEOmatic fully supports working with SPAs, allowing you to receive the metadata needed for a given route either as an array, or as DOM elements ready to be inserted.
