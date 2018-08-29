@@ -382,6 +382,8 @@ The Plugin Settings lets you control various SEOmatic settings globally (across 
 * **Separator Character** - The separator character to use for the `<title>` tag
 * **Max SEO Title Length** - The max number of characters in the <title> tag; anything beyond this will be truncated on word boundaries
 * **Max SEO Description Length** - The max number of characters in the `meta description` tag
+* **Site Groups define logically separate sites** - If you are using Site Groups to logically separate 'sister sites', turn this on.
+* **Add `hreflang` Tags** - Controls whether SEOmatic will automatically add `hreflang` and `og:locale:alternate` tags.
 * **Generator Enabled** - Controls whether SEOmatic will include the meta `generator` tag and `X-Powered-By` header
 
 If you're using a multi-environment config, you can map your environment settings using SEOmatic's `config.php` something like this:
@@ -556,6 +558,8 @@ So for example, you might have:
 While you technically don't have to organize your Site Groups in this manner, SEOmatic currently requires it so that it can understand the relationship between your sites.
 
 This is necessary because for a variety of SEO-related things, we need to tell search engines what is really just another localization/translation of the same thing.
+
+If you _don't_ want to organize your sites in this manner, you'll need to turn off the **Site Groups define logically separate sites** setting on the Plugin Settings page.
 
 Sites that are grouped together under the same Site Group will have `<link rel="alternate" hreflang="XX">` & `<meta content="xx_XX" property="og:locale:alternate">` URLs added automatically in the HTML.
 
