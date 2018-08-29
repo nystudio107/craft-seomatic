@@ -64,7 +64,7 @@ return [
     'maxDescriptionLength' => 320,
 
     // Site Groups define logically separate sites
-    'siteGroupsSeparate' => false,
+    'siteGroupsSeparate' => true,
 
     // Whether to dynamically include the hreflang tags
     'addHrefLang' => true,
