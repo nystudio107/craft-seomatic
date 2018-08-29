@@ -129,9 +129,9 @@ return [
                 ],
                 'logo'          => [
                     'type'   => 'ImageObject',
-                    'url'    => '{seomatic.site.creator.genericImage}',
-                    'width'  => '{seomatic.site.creator.genericImageWidth}',
-                    'height' => '{seomatic.site.creator.genericImageHeight}',
+                    'url'    => '{seomatic.helper.socialTransform(seomatic.site.creator.genericImageIds[0], "schema-logo")}',
+                    'width'  => '{seomatic.helper.socialTransformWidth(seomatic.site.creator.genericImageIds[0], "schema-logo")}',
+                    'height' => '{seomatic.helper.socialTransformHeight(seomatic.site.creator.genericImageIds[0], "schema-logo")}',
                 ],
                 'address'       => [
                     'type'            => 'PostalAddress',
