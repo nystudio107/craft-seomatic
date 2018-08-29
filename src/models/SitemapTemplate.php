@@ -115,9 +115,13 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
     {
         $cache = Craft::$app->getCache();
         $groupId = $params['groupId'];
-        /** @var SiteGroup $siteGroup */
-        $siteGroup = Craft::$app->getSites()->getGroupById($groupId);
-        $groupSiteIds = $siteGroup->getSiteIds();
+        if (Seomatic::$settings->siteGroupsSeparate) {
+            /** @var SiteGroup $siteGroup */
+            $siteGroup = Craft::$app->getSites()->getGroupById($groupId);
+            $groupSiteIds = $siteGroup->getSiteIds();
+        } else {
+            $groupSiteIds = Craft::$app->getSites()->allSiteIds;
+        }
         $type = $params['type'];
         $handle = $params['handle'];
         $siteId = $params['siteId'];
