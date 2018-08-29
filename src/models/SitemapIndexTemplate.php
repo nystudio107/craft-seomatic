@@ -97,13 +97,17 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
     {
         $cache = Craft::$app->getCache();
         $groupId = $params['groupId'];
-        /** @var SiteGroup $siteGroup */
-        $siteGroup = Craft::$app->getSites()->getGroupById($groupId);
-        $groupSiteIds = $siteGroup->getSiteIds();
-        if ($siteGroup === null) {
-            throw new NotFoundHttpException(Craft::t('seomatic', 'Sitemap.xml not found for groupId {groupId}', [
-                'groupId' => $groupId,
-            ]));
+        if (Seomatic::$settings->siteGroupsSeparate) {
+            /** @var SiteGroup $siteGroup */
+            $siteGroup = Craft::$app->getSites()->getGroupById($groupId);
+            if ($siteGroup === null) {
+                throw new NotFoundHttpException(Craft::t('seomatic', 'Sitemap.xml not found for groupId {groupId}', [
+                    'groupId' => $groupId,
+                ]));
+            }
+            $groupSiteIds = $siteGroup->getSiteIds();
+        } else {
+            $groupSiteIds = Craft::$app->getSites()->allSiteIds;
         }
         $dependency = new TagDependency([
             'tags' => [

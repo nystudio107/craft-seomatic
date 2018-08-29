@@ -457,18 +457,22 @@ class DynamicMeta
         if ($thisSite === null) {
             return $localizedUrls;
         }
-        // Get only the sites that are in the current site's group
-        try {
-            $siteGroup = $thisSite->getGroup();
-        } catch (InvalidConfigException $e) {
-            $siteGroup = null;
-            Craft::error($e->getMessage(), __METHOD__);
+        if (Seomatic::$settings->siteGroupsSeparate) {
+            // Get only the sites that are in the current site's group
+            try {
+                $siteGroup = $thisSite->getGroup();
+            } catch (InvalidConfigException $e) {
+                $siteGroup = null;
+                Craft::error($e->getMessage(), __METHOD__);
+            }
+            // Bail if we can't get a site group
+            if ($siteGroup === null) {
+                return $localizedUrls;
+            }
+            $sites = $siteGroup->getSites();
+        } else {
+            $sites = Craft::$app->getSites()->getAllSites();
         }
-        // Bail if we can't get a site group
-        if ($siteGroup === null) {
-            return $localizedUrls;
-        }
-        $sites = $siteGroup->getSites();
         $elements = Craft::$app->getElements();
         foreach ($sites as $site) {
             $includeUrl = true;
