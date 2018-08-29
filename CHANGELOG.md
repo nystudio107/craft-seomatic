@@ -5,6 +5,7 @@
 * Fixed an error trying to access a property of a non-object in MetaContainers.php
 * Prevent classname conflict with older versions of PHP
 * Fix an issue where transform modes didn't work with Custom Image sources
+* Scale the `logo` to fit to 600x60 as per [Google specs](https://developers.google.com/search/docs/data-types/article#amp_logo_guidelines)
 
 ## 3.1.16 - 2018.08.23
 ### Changed
