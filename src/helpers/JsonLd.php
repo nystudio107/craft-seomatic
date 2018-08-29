@@ -14,14 +14,12 @@ namespace nystudio107\seomatic\helpers;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
-use craft\helpers\Json;
-
 /**
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-class JsonLd extends Json
+class JsonLd extends \craft\helpers\Json
 {
     // Constants
     // =========================================================================

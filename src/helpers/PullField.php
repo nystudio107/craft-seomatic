@@ -257,16 +257,19 @@ class PullField
                                     .$ids[0]
                                     .', "'.$transformName.'"'
                                     .', '.$siteId
+                                    .', "'.$transformMode.'"'
                                     .')}';
                                 $globalsSettings[$fieldNameWidth] = '{seomatic.helper.socialTransformWidth('
                                     .$ids[0]
                                     .', "'.$transformName.'"'
                                     .', '.$siteId
+                                    .', "'.$transformMode.'"'
                                     .')}';
                                 $globalsSettings[$fieldNameHeight] = '{seomatic.helper.socialTransformHeight('
                                     .$ids[0]
                                     .', "'.$transformName.'"'
                                     .', '.$siteId
+                                    .', "'.$transformMode.'"'
                                     .')}';
                             }
                             break;
