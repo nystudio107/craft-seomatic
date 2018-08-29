@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.1.17 - 2018.08.25
+## 3.1.17 - 2018.08.29
 ### Changed
 * Fixed an error trying to access a property of a non-object in MetaContainers.php
 * Prevent classname conflict with older versions of PHP
