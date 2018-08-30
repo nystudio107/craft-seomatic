@@ -63,9 +63,12 @@ return [
     // The max number of characters in the `<meta name="description">` tag
     'maxDescriptionLength' => 320,
 
-    // Should the meta generator tag and X-Powered-By header be included?
-    'generatorEnabled' => true,
+    // Site Groups define logically separate sites
+    'siteGroupsSeparate' => true,
 
     // Whether to dynamically include the hreflang tags
     'addHrefLang' => true,
+
+    // Should the meta generator tag and X-Powered-By header be included?
+    'generatorEnabled' => true,
 ];

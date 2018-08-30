@@ -79,14 +79,19 @@ class Settings extends VarsModel
     public $maxDescriptionLength = 300;
 
     /**
-     * @var bool Should the meta generator tag and X-Powered-By header be included?
+     * @var bool Site Groups define logically separate sites
      */
-    public $generatorEnabled = true;
+    public $siteGroupsSeparate = true;
 
     /**
      * @var bool Whether to dynamically include the hreflang tags
      */
     public $addHrefLang = true;
+
+    /**
+     * @var bool Should the meta generator tag and X-Powered-By header be included?
+     */
+    public $generatorEnabled = true;
 
     // Public Methods
     // =========================================================================

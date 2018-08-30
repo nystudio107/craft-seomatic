@@ -364,9 +364,9 @@ class DynamicMeta
             // Add the x-default hreflang
             $siteLocalizedUrl = $siteLocalizedUrls[0];
             $metaTag = Seomatic::$plugin->link->create([
-                'rel'      => 'alternate',
+                'rel' => 'alternate',
                 'hreflang' => ['x-default'],
-                'href'     => [$siteLocalizedUrl['url']],
+                'href' => [$siteLocalizedUrl['url']],
             ]);
             // Add the alternate language link rel's
             if (\count($siteLocalizedUrls) > 1) {
@@ -381,7 +381,9 @@ class DynamicMeta
             if (\count($siteLocalizedUrls) > 1 && $ogLocaleAlternate) {
                 $ogContentArray = [];
                 foreach ($siteLocalizedUrls as $siteLocalizedUrl) {
-                    $ogContentArray[] = $siteLocalizedUrl['ogLanguage'];
+                    if (!\in_array($siteLocalizedUrl['ogLanguage'], $ogContentArray, true)) {
+                        $ogContentArray[] = $siteLocalizedUrl['ogLanguage'];
+                    }
                 }
                 $ogLocaleAlternate->content = $ogContentArray;
             }
@@ -457,18 +459,22 @@ class DynamicMeta
         if ($thisSite === null) {
             return $localizedUrls;
         }
-        // Get only the sites that are in the current site's group
-        try {
-            $siteGroup = $thisSite->getGroup();
-        } catch (InvalidConfigException $e) {
-            $siteGroup = null;
-            Craft::error($e->getMessage(), __METHOD__);
+        if (Seomatic::$settings->siteGroupsSeparate) {
+            // Get only the sites that are in the current site's group
+            try {
+                $siteGroup = $thisSite->getGroup();
+            } catch (InvalidConfigException $e) {
+                $siteGroup = null;
+                Craft::error($e->getMessage(), __METHOD__);
+            }
+            // Bail if we can't get a site group
+            if ($siteGroup === null) {
+                return $localizedUrls;
+            }
+            $sites = $siteGroup->getSites();
+        } else {
+            $sites = Craft::$app->getSites()->getAllSites();
         }
-        // Bail if we can't get a site group
-        if ($siteGroup === null) {
-            return $localizedUrls;
-        }
-        $sites = $siteGroup->getSites();
         $elements = Craft::$app->getElements();
         foreach ($sites as $site) {
             $includeUrl = true;
@@ -482,6 +488,24 @@ class DynamicMeta
                     $element = $elements->getElementByUri($url, $site->id, true);
                 }
                 if ($element !== null) {
+                    /** @var MetaBundle $metaBundle */
+                    list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
+                        = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
+                    $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
+                        $sourceBundleType,
+                        $sourceId,
+                        $sourceSiteId
+                    );
+                    if ($metaBundle !== null) {
+                        // If sitemaps are off for this entry, don't include the URL
+                        if (!$metaBundle->metaSitemapVars->sitemapUrls) {
+                            $includeUrl = false;
+                        }
+                        // If robots is set tp 'none' don't include the URL
+                        if ($metaBundle->metaGlobalVars->robots === 'none') {
+                            $includeUrl = false;
+                        }
+                    }
                     $fieldHandles = FieldHelper::fieldsOfTypeFromElement(
                         $element,
                         FieldHelper::SEO_SETTINGS_CLASS_KEY,

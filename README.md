@@ -382,6 +382,8 @@ The Plugin Settings lets you control various SEOmatic settings globally (across 
 * **Separator Character** - The separator character to use for the `<title>` tag
 * **Max SEO Title Length** - The max number of characters in the <title> tag; anything beyond this will be truncated on word boundaries
 * **Max SEO Description Length** - The max number of characters in the `meta description` tag
+* **Site Groups define logically separate sites** - If you are using Site Groups to logically separate 'sister sites', turn this on.
+* **Add `hreflang` Tags** - Controls whether SEOmatic will automatically add `hreflang` and `og:locale:alternate` tags.
 * **Generator Enabled** - Controls whether SEOmatic will include the meta `generator` tag and `X-Powered-By` header
 
 If you're using a multi-environment config, you can map your environment settings using SEOmatic's `config.php` something like this:
@@ -557,6 +559,8 @@ While you technically don't have to organize your Site Groups in this manner, SE
 
 This is necessary because for a variety of SEO-related things, we need to tell search engines what is really just another localization/translation of the same thing.
 
+If you _don't_ want to organize your sites in this manner, you'll need to turn off the **Site Groups define logically separate sites** setting on the Plugin Settings page.
+
 Sites that are grouped together under the same Site Group will have `<link rel="alternate" hreflang="XX">` & `<meta content="xx_XX" property="og:locale:alternate">` URLs added automatically in the HTML.
 
 If you want to disable SEOmatic's automatic rendering of these tags, you can do:
@@ -584,6 +588,24 @@ On the Mac, you can invoke an Emoji keyboard inside of any text field by hitting
 ## Google AMP Support
 
 SEOmatic works great with [Google AMP](https://www.ampproject.org/)! In fact, it will provide the [JSON-LD structured data](https://www.ampproject.org/docs/fundamentals/spec) that is _required_ by the AMP spec.
+
+You do however need to [Make your page discoverable](https://www.ampproject.org/docs/fundamentals/discovery):
+
+Add the following to the non-AMP template to tell Google where the AMP version of the page is; `yourAmpPageLink` the URL to your AMP page:
+
+```twig
+{% set linkTag = seomatic.link.create({
+  "rel": "amphtml",
+  "content": yourAmpPageLink
+  })
+%}
+```
+
+And this to the AMP template to tell Google where the canonical HTML page is:
+
+```twig
+{% do seomatic.meta.canonicalUrl(entry.url) %}
+```
 
 Since AMP [doesn't allow for third-party JavaScript](https://medium.com/google-developers/how-to-avoid-common-mistakes-when-publishing-accelerated-mobile-pages-9ea61abf530f), you might want to add this to your AMP templates:
 ```twig
