@@ -589,6 +589,24 @@ On the Mac, you can invoke an Emoji keyboard inside of any text field by hitting
 
 SEOmatic works great with [Google AMP](https://www.ampproject.org/)! In fact, it will provide the [JSON-LD structured data](https://www.ampproject.org/docs/fundamentals/spec) that is _required_ by the AMP spec.
 
+You do however need to [Make your page discoverable](https://www.ampproject.org/docs/fundamentals/discovery):
+
+Add the following to the non-AMP template to tell Google where the AMP version of the page is; `yourAmpPageLink` the URL to your AMP page:
+
+```twig
+{% set linkTag = seomatic.link.create({
+  "rel": "amphtml",
+  "content": yourAmpPageLink
+  })
+%}
+```
+
+And this to the AMP template to tell Google where the canonical HTML page is:
+
+```twig
+{% do seomatic.meta.canonicalUrl(entry.url) %}
+```
+
 Since AMP [doesn't allow for third-party JavaScript](https://medium.com/google-developers/how-to-avoid-common-mistakes-when-publishing-accelerated-mobile-pages-9ea61abf530f), you might want to add this to your AMP templates:
 ```twig
 {% do seomatic.script.container().include(false) %}
