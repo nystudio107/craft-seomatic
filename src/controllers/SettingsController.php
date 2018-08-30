@@ -1084,14 +1084,16 @@ class SettingsController extends Controller
      */
     protected function cullDisabledSites(string $sourceBundleType, string $sourceHandle, array &$variables)
     {
-        foreach ($variables['enabledSiteIds'] as $key => $value) {
-            $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
-                $sourceBundleType,
-                $sourceHandle,
-                $value
-            );
-            if ($metaBundle === null) {
-                unset($variables['enabledSiteIds'][$key]);
+        if (isset($variables['enabledSiteIds'])) {
+            foreach ($variables['enabledSiteIds'] as $key => $value) {
+                $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
+                    $sourceBundleType,
+                    $sourceHandle,
+                    $value
+                );
+                if ($metaBundle === null) {
+                    unset($variables['enabledSiteIds'][$key]);
+                }
             }
         }
     }
