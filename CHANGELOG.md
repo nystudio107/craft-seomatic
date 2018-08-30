@@ -6,6 +6,7 @@
 
 ### Changed
 * Removed potential duplicates from `og:locale:alternate`
+* Don't include `alternate` or `og:locale:alternate` tags for Content SEO sections that have Sitemaps disabled
 
 ## 3.1.17 - 2018.08.29
 ### Changed
