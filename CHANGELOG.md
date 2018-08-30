@@ -1,5 +1,14 @@
 # SEOmatic Changelog
 
+## 3.1.18 - 2018.08.30
+### Added
+* Added the **Site Groups define logically separate sites** Plugin Setting to allow for different Site Group use-cases
+
+### Changed
+* Removed potential duplicates from `og:locale:alternate`
+* Don't include `alternate` or `og:locale:alternate` tags for Content SEO sections that have Sitemaps disabled
+* Handle disabled sections for sites in Content SEO better
+
 ## 3.1.17 - 2018.08.29
 ### Changed
 * Fixed an error trying to access a property of a non-object in MetaContainers.php

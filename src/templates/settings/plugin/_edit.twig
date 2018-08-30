@@ -136,7 +136,17 @@
             warning: configWarning("maxDescriptionLength", "seomatic"),
             errors: settings.getErrors("maxDescriptionLength"),
         }) }}
-
+    
+        {{ forms.lightswitchField({
+            label: "Site Groups define logically separate sites"|t("seomatic"),
+            instructions: "If you are using Site Groups to logically separate 'sister sites', turn this on."|t("seomatic"),
+            id: "siteGroupsSeparate",
+            name: "siteGroupsSeparate",
+            on: settings.siteGroupsSeparate,
+            warning: configWarning("siteGroupsSeparate", "seomatic"),
+            errors: settings.getErrors("siteGroupsSeparate"),
+        }) }}
+    
         {{ forms.lightswitchField({
             label: "Add `hreflang` Tags"|t("seomatic"),
             instructions: "Controls whether SEOmatic will automatically add `hreflang` and `og:locale:alternate` tags."|t("seomatic"),
