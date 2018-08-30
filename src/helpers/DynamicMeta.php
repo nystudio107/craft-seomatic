@@ -364,9 +364,9 @@ class DynamicMeta
             // Add the x-default hreflang
             $siteLocalizedUrl = $siteLocalizedUrls[0];
             $metaTag = Seomatic::$plugin->link->create([
-                'rel'      => 'alternate',
+                'rel' => 'alternate',
                 'hreflang' => ['x-default'],
-                'href'     => [$siteLocalizedUrl['url']],
+                'href' => [$siteLocalizedUrl['url']],
             ]);
             // Add the alternate language link rel's
             if (\count($siteLocalizedUrls) > 1) {
@@ -488,6 +488,17 @@ class DynamicMeta
                     $element = $elements->getElementByUri($url, $site->id, true);
                 }
                 if ($element !== null) {
+                    $metaBundle = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
+                    if ($metaBundle !== null) {
+                        // If sitemaps are off for this entry, don't include the URL
+                        if (!$metaBundle->metaSitemapVars->sitemapUrls) {
+                            $includeUrl = false;
+                        }
+                        // If robots is set tp 'none' don't include the URL
+                        if ($metaBundle->metaGlobalVars->robots === 'none') {
+                            $includeUrl = false;
+                        }
+                    }
                     $fieldHandles = FieldHelper::fieldsOfTypeFromElement(
                         $element,
                         FieldHelper::SEO_SETTINGS_CLASS_KEY,
