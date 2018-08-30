@@ -381,7 +381,9 @@ class DynamicMeta
             if (\count($siteLocalizedUrls) > 1 && $ogLocaleAlternate) {
                 $ogContentArray = [];
                 foreach ($siteLocalizedUrls as $siteLocalizedUrl) {
-                    $ogContentArray[] = $siteLocalizedUrl['ogLanguage'];
+                    if (!\in_array($siteLocalizedUrl['ogLanguage'], $ogContentArray, true)) {
+                        $ogContentArray[] = $siteLocalizedUrl['ogLanguage'];
+                    }
                 }
                 $ogLocaleAlternate->content = $ogContentArray;
             }
