@@ -434,6 +434,7 @@ class SettingsController extends Controller
         );
         // Enabled sites
         $this->setMultiSiteVariables($siteHandle, $siteId, $variables);
+        $this->cullDisabledSites($sourceBundleType, $sourceHandle, $variables);
         // Meta Bundle settings
         Seomatic::$previewingMetaContainers = true;
         $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
@@ -1026,7 +1027,7 @@ class SettingsController extends Controller
      *
      * @throws \yii\web\ForbiddenHttpException
      */
-    protected function setMultiSiteVariables($siteHandle, &$siteId, array &$variables)
+    protected function setMultiSiteVariables($siteHandle, &$siteId, array &$variables, $element = null)
     {
         // Enabled sites
         $sites = Craft::$app->getSites();
@@ -1050,6 +1051,7 @@ class SettingsController extends Controller
                 }
             }
         }
+
         // Set the currentSiteId and currentSiteHandle
         $variables['currentSiteId'] = empty($siteId) ? Craft::$app->getSites()->currentSite->id : $siteId;
         $variables['currentSiteHandle'] = empty($siteHandle)
@@ -1069,6 +1071,28 @@ class SettingsController extends Controller
             );
         } else {
             $variables['sitesMenuLabel'] = '';
+        }
+    }
+
+    /**
+     * Remove any sites for which meta bundles do not exist (they may be
+     * disabled for this section)
+     *
+     * @param string $sourceBundleType
+     * @param string $sourceHandle
+     * @param array  $variables
+     */
+    protected function cullDisabledSites(string $sourceBundleType, string $sourceHandle, array &$variables)
+    {
+        foreach ($variables['enabledSiteIds'] as $key => $value) {
+            $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
+                $sourceBundleType,
+                $sourceHandle,
+                $value
+            );
+            if ($metaBundle === null) {
+                unset($variables['enabledSiteIds'][$key]);
+            }
         }
     }
 

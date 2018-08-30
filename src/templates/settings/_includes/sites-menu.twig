@@ -23,9 +23,15 @@
                                 </a>
                             {% else %}
                                 {% set url = url(baseUrl~site.handle, params) %}
+                                {% if status == "enabled" %}
                                 <a href="{{ url }}">
                                     <div class="status {{ status }}"></div>{{ site.name|t('site') }}
                                 </a>
+                                {%  else %}
+                                    <div style="padding-left: 10px; color: #b9bfc6">
+                                    <div class="status {{ status }}"></div>{{ site.name|t('site') }}
+                                    </div>
+                                {% endif %}
                             {% endif %}
                         </li>
                     {% endfor %}
