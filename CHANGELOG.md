@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.18.1 - 2018.08.30
+### Changed
+* Fixed an `undefined index` error
+
 ## 3.1.18 - 2018.08.30
 ### Added
 * Added the **Site Groups define logically separate sites** Plugin Setting to allow for different Site Group use-cases
