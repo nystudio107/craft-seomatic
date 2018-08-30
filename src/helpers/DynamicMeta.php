@@ -489,7 +489,13 @@ class DynamicMeta
                 }
                 if ($element !== null) {
                     /** @var MetaBundle $metaBundle */
-                    $metaBundle = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
+                    list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
+                        = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
+                    $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
+                        $sourceBundleType,
+                        $sourceId,
+                        $sourceSiteId
+                    );
                     if ($metaBundle !== null) {
                         // If sitemaps are off for this entry, don't include the URL
                         if (!$metaBundle->metaSitemapVars->sitemapUrls) {
