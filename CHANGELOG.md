@@ -4,6 +4,9 @@
 ### Added
 * Added the **Site Groups define logically separate sites** Plugin Setting to allow for different Site Group use-cases
 
+### Changed
+* Removed potential duplicates from `og:locale:alternate`
+
 ## 3.1.17 - 2018.08.29
 ### Changed
 * Fixed an error trying to access a property of a non-object in MetaContainers.php
