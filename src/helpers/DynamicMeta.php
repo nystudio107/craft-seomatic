@@ -488,6 +488,7 @@ class DynamicMeta
                     $element = $elements->getElementByUri($url, $site->id, true);
                 }
                 if ($element !== null) {
+                    /** @var MetaBundle $metaBundle */
                     $metaBundle = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
                     if ($metaBundle !== null) {
                         // If sitemaps are off for this entry, don't include the URL
