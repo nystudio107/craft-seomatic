@@ -1,7 +1,11 @@
 # SEOmatic Changelog
 
 ## 3.1.20 - 2018.09.06
+### Added
+* Added  memoization cache to the FieldHelper class to help improve inner loop performance
+
 ### Changed
+* For requests with a status code of >= 400, use one cache key
 
 ## 3.1.19 - 2018.09.04
 ### Changed
