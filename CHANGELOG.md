@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.19 - 2018.09.04
+### Changed
+* Changed the Composer dependency for `davechild/textstatistics` to lock it down to `1.0.2` [Semver?](https://github.com/DaveChild/Text-Statistics/issues/48)
+
 ## 3.1.18.1 - 2018.08.30
 ### Changed
 * Fixed an `undefined index` error
