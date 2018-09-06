@@ -3,6 +3,7 @@
 ## 3.1.20 - 2018.09.06
 ### Added
 * Added  memoization cache to the FieldHelper class to help improve inner loop performance
+* Add the ability to control structure depth for sitemaps
 
 ### Changed
 * For requests with a status code of >= 400, use one cache key
