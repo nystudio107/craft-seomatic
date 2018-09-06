@@ -167,12 +167,15 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 // Handle each element type separately
                 switch ($metaBundle->sourceBundleType) {
                     case MetaBundles::SECTION_META_BUNDLE:
-                        $elements = Entry::find()
+                        $query = Entry::find()
                             ->section($metaBundle->sourceHandle)
                             ->siteId($metaBundle->sourceSiteId)
                             ->enabledForSite(true)
-                            ->limit($metaBundle->metaSitemapVars->sitemapLimit)
-                            ->all();
+                            ->limit($metaBundle->metaSitemapVars->sitemapLimit);
+                        if ($metaBundle->sourceType === 'structure' && $metaBundle->metaSitemapVars->structureDepth !== null) {
+                            $query->level($metaBundle->metaSitemapVars->structureDepth.'<=');
+                        }
+                        $elements = $query->all();
                         break;
                     case MetaBundles::CATEGORYGROUP_META_BUNDLE:
                         $elements = Category::find()

@@ -491,6 +491,7 @@ class SettingsController extends Controller
             $bundleSettings->ogImageIds,
             $siteId
         );
+        $variables['sourceType'] = $metaBundle->sourceType;
         // Pass in the pull fields
         $groupName = ucfirst($metaBundle->sourceType);
         $this->setContentFieldSourceVariables($sourceBundleType, $sourceHandle, $groupName, $variables);
