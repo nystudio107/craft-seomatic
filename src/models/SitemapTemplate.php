@@ -203,12 +203,12 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 if ($elements === null) {
                     throw new NotFoundHttpException(Craft::t('seomatic', 'Page not found.'));
                 }
-                // Stash the meta bundle so the object can be modified on a per-entry basis
-                $stashedMetaBundle = $metaBundle;
+                // Stash the sitemap attributes so they can be modified on a per-entry basis
+                $stashedSitemapAttrs = $metaBundle->metaSitemapVars->getAttributes();
                 // Output the sitemap entry
                 /** @var  $element Entry */
                 foreach ($elements as $element) {
-                    $metaBundle = clone $stashedMetaBundle;
+                    $metaBundle->metaSitemapVars->setAttributes($stashedSitemapAttrs, false);
                     // Make sure this entry isn't disabled
                     $this->combineFieldSettings($element, $metaBundle);
                     // Special case for the __home__ URI
