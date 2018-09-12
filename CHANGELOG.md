@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.1.20 - 2018.09.06
+## 3.1.20 - 2018.09.12
 ### Added
 * Added  memoization cache to the FieldHelper class to help improve inner loop performance
 * Add the ability to control structure depth for sitemaps
