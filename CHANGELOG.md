@@ -1,5 +1,13 @@
 # SEOmatic Changelog
 
+## 3.1.20 - 2018.09.12
+### Added
+* Added  memoization cache to the FieldHelper class to help improve inner loop performance
+* Add the ability to control structure depth for sitemaps
+
+### Changed
+* For requests with a status code of >= 400, use one cache key
+
 ## 3.1.19 - 2018.09.04
 ### Changed
 * Changed the Composer dependency for `davechild/textstatistics` to lock it down to `1.0.2` [Semver?](https://github.com/DaveChild/Text-Statistics/issues/48)

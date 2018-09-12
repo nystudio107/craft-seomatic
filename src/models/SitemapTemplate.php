@@ -167,12 +167,15 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 // Handle each element type separately
                 switch ($metaBundle->sourceBundleType) {
                     case MetaBundles::SECTION_META_BUNDLE:
-                        $elements = Entry::find()
+                        $query = Entry::find()
                             ->section($metaBundle->sourceHandle)
                             ->siteId($metaBundle->sourceSiteId)
                             ->enabledForSite(true)
-                            ->limit($metaBundle->metaSitemapVars->sitemapLimit)
-                            ->all();
+                            ->limit($metaBundle->metaSitemapVars->sitemapLimit);
+                        if ($metaBundle->sourceType === 'structure' && $metaBundle->metaSitemapVars->structureDepth !== null) {
+                            $query->level($metaBundle->metaSitemapVars->structureDepth.'<=');
+                        }
+                        $elements = $query->all();
                         break;
                     case MetaBundles::CATEGORYGROUP_META_BUNDLE:
                         $elements = Category::find()
@@ -200,12 +203,12 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 if ($elements === null) {
                     throw new NotFoundHttpException(Craft::t('seomatic', 'Page not found.'));
                 }
-                // Stash the meta bundle so the object can be modified on a per-entry basis
-                $stashedMetaBundle = $metaBundle;
+                // Stash the sitemap attributes so they can be modified on a per-entry basis
+                $stashedSitemapAttrs = $metaBundle->metaSitemapVars->getAttributes();
                 // Output the sitemap entry
                 /** @var  $element Entry */
                 foreach ($elements as $element) {
-                    $metaBundle = clone $stashedMetaBundle;
+                    $metaBundle->metaSitemapVars->setAttributes($stashedSitemapAttrs, false);
                     // Make sure this entry isn't disabled
                     $this->combineFieldSettings($element, $metaBundle);
                     // Special case for the __home__ URI

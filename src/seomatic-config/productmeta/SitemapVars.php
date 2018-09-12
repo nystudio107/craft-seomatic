@@ -23,6 +23,7 @@ return [
     'sitemapChangeFreq'    => 'weekly',
     'sitemapPriority'      => 0.5,
     'sitemapLimit'         => null,
+    'structureDepth'       => null,
     'sitemapImageFieldMap' => [
         ['property' => 'title', 'field' => 'title'],
         ['property' => 'caption', 'field' => ''],

@@ -76,6 +76,11 @@ class MetaSitemapVars extends FluentModel
     public $sitemapLimit;
 
     /**
+     * @var null|int
+     */
+    public $structureDepth;
+
+    /**
      * @var array
      */
     public $sitemapImageFieldMap = [];
@@ -121,6 +126,12 @@ class MetaSitemapVars extends FluentModel
             [
                 [
                     'sitemapLimit'
+                ],
+                'integer'
+            ],
+            [
+                [
+                    'structureDepth'
                 ],
                 'integer'
             ],

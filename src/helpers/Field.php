@@ -75,6 +75,19 @@ class Field
         ],
     ];
 
+    // Static Properties
+    // =========================================================================
+
+    /**
+     * @var array Memoization cache
+     */
+    public static $fieldsOfTypeFromLayoutCache = [];
+
+    /**
+     * @var array Memoization cache
+     */
+    public static $matrixFieldsOfTypeCache = [];
+
     // Static Methods
     // =========================================================================
 
@@ -95,6 +108,11 @@ class Field
     ): array {
         $foundFields = [];
         if (!empty(self::FIELD_CLASSES[$fieldClassKey])) {
+            // Cache me if you can
+            $memoKey = $fieldClassKey.$layout->id.($keysOnly ? 'keys' : 'nokeys');
+            if (!empty(self::$fieldsOfTypeFromLayoutCache[$memoKey])) {
+                return self::$fieldsOfTypeFromLayoutCache[$memoKey];
+            }
             $fieldClasses = self::FIELD_CLASSES[$fieldClassKey];
             $fields = $layout->getFields();
             /** @var  $field BaseField */
@@ -106,11 +124,12 @@ class Field
                     }
                 }
             }
-        }
-
-        // Return only the keys if asked
-        if ($keysOnly) {
-            $foundFields = array_keys($foundFields);
+            // Return only the keys if asked
+            if ($keysOnly) {
+                $foundFields = array_keys($foundFields);
+            }
+            // Cache for future use
+            self::$fieldsOfTypeFromLayoutCache[$memoKey] = $foundFields;
         }
 
         return $foundFields;
@@ -308,6 +327,11 @@ class Field
             $matrixBlockTypeModel = null;
         }
         if ($matrixBlockTypeModel) {
+            // Cache me if you can
+            $memoKey = $fieldType.$matrixBlock->id.($keysOnly ? 'keys' : 'nokeys');
+            if (!empty(self::$matrixFieldsOfTypeCache[$memoKey])) {
+                return self::$matrixFieldsOfTypeCache[$memoKey];
+            }
             $fields = $matrixBlockTypeModel->getFields();
             /** @var  $field BaseField */
             foreach ($fields as $field) {
@@ -315,11 +339,12 @@ class Field
                     $foundFields[$field->handle] = $field->name;
                 }
             }
-        }
-
-        // Return only the keys if asked
-        if ($keysOnly) {
-            $foundFields = array_keys($foundFields);
+            // Return only the keys if asked
+            if ($keysOnly) {
+                $foundFields = array_keys($foundFields);
+            }
+            // Cache for future use
+            self::$matrixFieldsOfTypeCache[$memoKey] = $foundFields;
         }
 
         return $foundFields;
