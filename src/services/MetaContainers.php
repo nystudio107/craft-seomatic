@@ -58,6 +58,7 @@ class MetaContainers extends Component
     const METACONTAINER_CACHE_TAG = 'seomatic_metacontainer_';
 
     const CACHE_KEY = 'seomatic_metacontainer_';
+    const INVALID_RESPONSE_CACHE_KEY = 'seomatic_invalid_response';
     const GLOBALS_CACHE_KEY = 'parsed_globals_';
     const SCRIPTS_CACHE_KEY = 'body_scripts_';
 
@@ -163,6 +164,11 @@ class MetaContainers extends Component
             }
             // Get our cache key
             $cacheKey = $uri.$siteId.$paginationPage.$requestPath;
+            // For requests with a status code of >= 400, use one cache key
+            $response = Craft::$app->getResponse();
+            if ($response->statusCode >= 400) {
+                $cacheKey = $siteId.$this::INVALID_RESPONSE_CACHE_KEY.$response->statusCode;
+            }
             // Load the meta containers
             $dependency = new TagDependency([
                 'tags' => [
