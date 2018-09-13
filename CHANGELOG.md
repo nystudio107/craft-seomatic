@@ -6,6 +6,7 @@
 
 ### Changed
 * SEOmatic will now automatically take the `dataLayer` property into account for the script container's cache key
+* Better document titles for SEOmatic AdminCP pages
 
 ## 3.1.20 - 2018.09.12
 ### Added
