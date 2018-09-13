@@ -135,6 +135,7 @@ class SettingsController extends Controller
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = Seomatic::$settings->pluginName;
         $variables['title'] = $templateTitle;
+        $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -232,7 +233,7 @@ class SettingsController extends Controller
         $variables['pluginName'] = Seomatic::$settings->pluginName;
         $variables['title'] = $templateTitle;
         $variables['subSectionTitle'] = $subSectionTitle;
-        $variables['docTitle'] = $templateTitle.' - '.$subSectionTitle;
+        $variables['docTitle'] = "{$pluginName} - {$templateTitle} - {$subSectionTitle}";
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -374,6 +375,7 @@ class SettingsController extends Controller
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = Seomatic::$settings->pluginName;
         $variables['title'] = $templateTitle;
+        $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -459,6 +461,7 @@ class SettingsController extends Controller
         $variables['pluginName'] = Seomatic::$settings->pluginName;
         $variables['title'] = $templateTitle;
         $variables['subSectionTitle'] = $subSectionTitle;
+        $variables['docTitle'] = "{$pluginName} - Content SEO - {$templateTitle} - {$subSectionTitle}";
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -609,6 +612,7 @@ class SettingsController extends Controller
         $variables['pluginName'] = Seomatic::$settings->pluginName;
         $variables['title'] = $templateTitle;
         $variables['subSectionTitle'] = $subSectionTitle;
+        $variables['docTitle'] = "{$pluginName} - {$templateTitle} - {$subSectionTitle}";
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -730,6 +734,7 @@ class SettingsController extends Controller
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = Seomatic::$settings->pluginName;
         $variables['title'] = $templateTitle;
+        $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -799,6 +804,7 @@ class SettingsController extends Controller
         $variables['pluginName'] = Seomatic::$settings->pluginName;
         $variables['title'] = $templateTitle;
         $variables['subSectionTitle'] = $subSectionTitle;
+        $variables['docTitle'] = "{$pluginName} - {$templateTitle} - {$subSectionTitle}";
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
