@@ -52,6 +52,11 @@ trait ContainerTrait
     public $dependencies;
 
     /**
+     * @var bool
+     */
+    public $clearCache = false;
+
+    /**
      * The data in this container
      *
      * @var array
