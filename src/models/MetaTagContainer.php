@@ -15,6 +15,7 @@ use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 
 use Craft;
+use yii\caching\TagDependency;
 
 /**
  * @author    nystudio107
@@ -48,7 +49,11 @@ class MetaTagContainer extends MetaContainer
     {
         Craft::beginProfile('MetaTagContainer::includeMetaData', __METHOD__);
         $uniqueKey = $this->handle.$this->handle.$dependency->tags[3];
-        $tagData = Craft::$app->getCache()->getOrSet(
+        $cache = Craft::$app->getCache();
+        if ($this->clearCache) {
+            TagDependency::invalidate($cache, $uniqueKey);
+        }
+        $tagData = $cache->getOrSet(
             $this::CONTAINER_TYPE.$uniqueKey,
             function () use ($uniqueKey) {
                 Craft::info(
