@@ -1,5 +1,12 @@
 # SEOmatic Changelog
 
+## 3.1.21 - 2018.09.13
+### Added
+* Added the `.clearCache` property to all meta containers, allowing them to be manually cleared via Twig
+
+### Changed
+* SEOmatic will now automatically take the `dataLayer` property into account for the script container's cache key
+
 ## 3.1.20 - 2018.09.12
 ### Added
 * Added  memoization cache to the FieldHelper class to help improve inner loop performance
