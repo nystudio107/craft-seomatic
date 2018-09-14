@@ -60,7 +60,6 @@
             "link": "nystudio107\\seomatic\\services\\Link",
             "metaBundles": "nystudio107\\seomatic\\services\\MetaBundles",
             "metaContainers": "nystudio107\\seomatic\\services\\MetaContainers",
-            "redirects": "nystudio107\\seomatic\\services\\Redirects",
             "script": "nystudio107\\seomatic\\services\\Script",
             "sitemaps": "nystudio107\\seomatic\\services\\Sitemaps",
             "tag": "nystudio107\\seomatic\\services\\Tag",
