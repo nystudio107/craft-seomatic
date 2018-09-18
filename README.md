@@ -11,6 +11,8 @@ Related: [SEOmatic for Craft 2.x](https://github.com/nystudio107/seomatic). SEOm
 
 **Note**: _The license fee for this plugin is $99.00 via the Craft Plugin Store._
 
+One SEO-related topic that SEOmatic _does not_ cover is 404 redirects; for that we recommend our [Retour plugin](https://github.com/nystudio107/craft-retour).
+
 ## Used By
 
 ![Screenshot](resources/img/moz-logo-blue.png)![Screenshot](resources/img/craft-cms-logo.png)
@@ -1217,6 +1219,46 @@ Note that you can achieve the same result with:
 ```
 
 ...since the `seoTitle` populates the `<title">` Title meta object
+
+#### Meta Containers
+
+Normally you don't need to work with meta containers directly, but SEOmatic gives you access to them if you need to.
+
+You can get the meta container for each type of meta object by doing:
+
+```twig
+{% set jsonLdContainer = seomatic.jsonLd.container() %}
+{% set linkContainer = seomatic.link.container() %}
+{% set scriptContainer = seomatic.script.container() %}
+{% set tagContainer = seomatic.tag.container() %}
+{% set titleContainer = seomatic.title.container() %}
+```
+
+Then you can do things like tell an entire container to not render:
+
+```twig
+{% set scriptContainer = seomatic.script.container() %}
+{% do scriptContainer.include(false) %}
+```
+
+or just:
+
+```twig
+{% do seomatic.script.container().include(false) %}
+```
+
+Containers are also cached. Typically SEOmatic manages this cache for you, but should you wish to invalidate the cache manually, you can do so via:
+
+```twig
+{% set scriptContainer = seomatic.script.container() %}
+{% do scriptContainer.clearCache(true) %}
+```
+
+or just:
+
+```twig
+{% do seomatic.script.container().clearCache(true) %}
+```
 
 ## Config File Customization
 

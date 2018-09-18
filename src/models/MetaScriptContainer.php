@@ -16,6 +16,7 @@ use nystudio107\seomatic\base\MetaContainer;
 
 use Craft;
 
+use yii\caching\TagDependency;
 use yii\web\View;
 
 /**
@@ -54,8 +55,12 @@ class MetaScriptContainer extends MetaContainer
     public function includeMetaData($dependency)
     {
         Craft::beginProfile('MetaScriptContainer::includeMetaData', __METHOD__);
-        $uniqueKey = $this->handle.$dependency->tags[3];
-        $tagData = Craft::$app->getCache()->getOrSet(
+        $uniqueKey = $this->handle.$dependency->tags[3] . $this->dataLayerHash();
+        $cache = Craft::$app->getCache();
+        if ($this->clearCache) {
+            TagDependency::invalidate($cache, $uniqueKey);
+        }
+        $tagData = $cache->getOrSet(
             $this::CONTAINER_TYPE.$uniqueKey,
             function () use ($uniqueKey) {
                 Craft::info(
@@ -108,5 +113,18 @@ class MetaScriptContainer extends MetaContainer
             $config['key'] = $key;
             $this->data[$key] = MetaScript::create($config);
         }
+    }
+
+    // Protected Methods
+    // =========================================================================
+
+    protected function dataLayerHash(): string
+    {
+        $data = '';
+        foreach ($this->data as $metaScriptModel) {
+            $data .= serialize($metaScriptModel->dataLayer);
+        }
+
+        return md5($data);
     }
 }
