@@ -1,8 +1,9 @@
 # SEOmatic Changelog
 
-## 3.1.21 - 2018.09.13
+## 3.1.21 - 2018.09.18
 ### Added
 * Added the `.clearCache` property to all meta containers, allowing them to be manually cleared via Twig
+* Don't include any dynamic metadata for response codes `>= 400`
 
 ### Changed
 * SEOmatic will now automatically take the `dataLayer` property into account for the script container's cache key
