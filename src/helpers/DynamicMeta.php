@@ -165,21 +165,24 @@ class DynamicMeta
         $request = Craft::$app->getRequest();
         // Don't add dynamic meta to console requests, they have no concept of a URI or segments
         if (!$request->getIsConsoleRequest()) {
-            self::addMetaJsonLdBreadCrumbs($siteId);
-            if (Seomatic::$settings->addHrefLang) {
-                self::addMetaLinkHrefLang();
-            }
-            self::addSameAsMeta();
-            $metaSiteVars = Seomatic::$plugin->metaContainers->metaSiteVars;
-            $jsonLd = Seomatic::$plugin->jsonLd->get('identity');
-            if ($jsonLd !== null) {
-                self::addOpeningHours($jsonLd, $metaSiteVars->identity);
-                self::addContactPoints($jsonLd, $metaSiteVars->identity);
-            }
-            $jsonLd = Seomatic::$plugin->jsonLd->get('creator');
-            if ($jsonLd !== null) {
-                self::addOpeningHours($jsonLd, $metaSiteVars->creator);
-                self::addContactPoints($jsonLd, $metaSiteVars->creator);
+            $response = Craft::$app->getResponse();
+            if ($response->statusCode < 400) {
+                self::addMetaJsonLdBreadCrumbs($siteId);
+                if (Seomatic::$settings->addHrefLang) {
+                    self::addMetaLinkHrefLang();
+                }
+                self::addSameAsMeta();
+                $metaSiteVars = Seomatic::$plugin->metaContainers->metaSiteVars;
+                $jsonLd = Seomatic::$plugin->jsonLd->get('identity');
+                if ($jsonLd !== null) {
+                    self::addOpeningHours($jsonLd, $metaSiteVars->identity);
+                    self::addContactPoints($jsonLd, $metaSiteVars->identity);
+                }
+                $jsonLd = Seomatic::$plugin->jsonLd->get('creator');
+                if ($jsonLd !== null) {
+                    self::addOpeningHours($jsonLd, $metaSiteVars->creator);
+                    self::addContactPoints($jsonLd, $metaSiteVars->creator);
+                }
             }
         }
         Craft::endProfile('DynamicMeta::addDynamicMetaToContainers', __METHOD__);
