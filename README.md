@@ -11,6 +11,8 @@ Related: [SEOmatic for Craft 2.x](https://github.com/nystudio107/seomatic). SEOm
 
 **Note**: _The license fee for this plugin is $99.00 via the Craft Plugin Store._
 
+One SEO-related topic that SEOmatic _does not_ cover is 404 redirects; for that we recommend our [Retour plugin](https://github.com/nystudio107/craft-retour).
+
 ## Used By
 
 ![Screenshot](resources/img/moz-logo-blue.png)![Screenshot](resources/img/craft-cms-logo.png)
