@@ -17,6 +17,7 @@ use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
 use Craft;
 
+use yii\caching\TagDependency;
 use yii\web\View;
 
 /**
@@ -51,7 +52,11 @@ class MetaJsonLdContainer extends MetaContainer
     {
         Craft::beginProfile('MetaJsonLdContainer::includeMetaData', __METHOD__);
         $uniqueKey = $this->handle.$dependency->tags[3];
-        $tagData = Craft::$app->getCache()->getOrSet(
+        $cache = Craft::$app->getCache();
+        if ($this->clearCache) {
+            TagDependency::invalidate($cache, $uniqueKey);
+        }
+        $tagData = $cache->getOrSet(
             $this::CONTAINER_TYPE.$uniqueKey,
             function () use ($uniqueKey) {
                 Craft::info(

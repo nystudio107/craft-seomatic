@@ -165,9 +165,11 @@ class MetaContainers extends Component
             // Get our cache key
             $cacheKey = $uri.$siteId.$paginationPage.$requestPath;
             // For requests with a status code of >= 400, use one cache key
-            $response = Craft::$app->getResponse();
-            if ($response->statusCode >= 400) {
-                $cacheKey = $siteId.$this::INVALID_RESPONSE_CACHE_KEY.$response->statusCode;
+            if (!$request->isConsoleRequest) {
+                $response = Craft::$app->getResponse();
+                if ($response->statusCode >= 400) {
+                    $cacheKey = $siteId.$this::INVALID_RESPONSE_CACHE_KEY.$response->statusCode;
+                }
             }
             // Load the meta containers
             $dependency = new TagDependency([

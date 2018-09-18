@@ -173,10 +173,6 @@ class MetaBundle extends FluentModel
         if ($this->metaBundleSettings !== null && \is_array($this->metaBundleSettings)) {
             $this->metaBundleSettings = MetaBundleSettings::create($this->metaBundleSettings);
         }
-        // Redirects container
-        if ($this->redirectsContainer !== null) {
-            //$this->redirectsContainer = RedirectsContainer::create($this->redirectsContainer);
-        }
         // Frontend templates
         if ($this->frontendTemplatesContainer !== null && \is_array($this->frontendTemplatesContainer)) {
             $this->frontendTemplatesContainer = FrontendTemplateContainer::create($this->frontendTemplatesContainer);

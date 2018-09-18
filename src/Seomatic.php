@@ -24,7 +24,6 @@ use nystudio107\seomatic\services\JsonLd as JsonLdService;
 use nystudio107\seomatic\services\Link as LinkService;
 use nystudio107\seomatic\services\MetaBundles as MetaBundlesService;
 use nystudio107\seomatic\services\MetaContainers as MetaContainersService;
-use nystudio107\seomatic\services\Redirects as RedirectsService;
 use nystudio107\seomatic\services\Script as ScriptService;
 use nystudio107\seomatic\services\Sitemaps as SitemapsService;
 use nystudio107\seomatic\services\Tag as TagService;
@@ -86,7 +85,6 @@ use yii\base\Event;
  * @property  LinkService              link
  * @property  MetaBundlesService       metaBundles
  * @property  MetaContainersService    metaContainers
- * @property  RedirectsService         redirects
  * @property  ScriptService            script
  * @property  SitemapsService          sitemaps
  * @property  TagService               tag
@@ -667,27 +665,6 @@ class Seomatic extends Plugin
      */
     protected function handleSiteRequest()
     {
-        // Handler: ErrorHandler::EVENT_BEFORE_HANDLE_EXCEPTION
-        Event::on(
-            ErrorHandler::class,
-            ErrorHandler::EVENT_BEFORE_HANDLE_EXCEPTION,
-            function (ExceptionEvent $event) {
-                Craft::debug(
-                    'ErrorHandler::EVENT_BEFORE_HANDLE_EXCEPTION',
-                    __METHOD__
-                );
-                $exception = $event->exception;
-                // If this is a Twig Runtime exception, use the previous one instead
-                if ($exception instanceof \Twig_Error_Runtime &&
-                    ($previousException = $exception->getPrevious()) !== null) {
-                    $exception = $previousException;
-                }
-                // If this is a 404 error, see if we can handle it
-                if ($exception instanceof HttpException && $exception->statusCode === 404) {
-                    Seomatic::$plugin->redirects->handle404();
-                }
-            }
-        );
         // Handler: View::EVENT_BEGIN_BODY
         Event::on(
             View::class,
