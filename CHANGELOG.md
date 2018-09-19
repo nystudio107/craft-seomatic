@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.22 - 2018.09.19
+### Changed
+* Fixed an issue where choosing **All** for sitemap **Structure Depth** resulted in it displaying nothing
+
 ## 3.1.21 - 2018.09.18
 ### Added
 * Added the `.clearCache` property to all meta containers, allowing them to be manually cleared via Twig
