@@ -3,6 +3,7 @@
 ## 3.1.22 - 2018.09.19
 ### Changed
 * Fixed an issue where choosing **All** for sitemap **Structure Depth** resulted in it displaying nothing
+* Fixed an issue with the SiteLinks Search Box not having the correct format in `query-input`
 
 ## 3.1.21 - 2018.09.18
 ### Added
