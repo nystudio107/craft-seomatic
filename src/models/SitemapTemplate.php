@@ -172,7 +172,8 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                             ->siteId($metaBundle->sourceSiteId)
                             ->enabledForSite(true)
                             ->limit($metaBundle->metaSitemapVars->sitemapLimit);
-                        if ($metaBundle->sourceType === 'structure' && $metaBundle->metaSitemapVars->structureDepth !== null) {
+                        if ($metaBundle->sourceType === 'structure'
+                            && !empty($metaBundle->metaSitemapVars->structureDepth)) {
                             $query->level($metaBundle->metaSitemapVars->structureDepth.'<=');
                         }
                         $elements = $query->all();

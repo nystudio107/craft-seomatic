@@ -1,5 +1,11 @@
 # SEOmatic Changelog
 
+## 3.1.22 - 2018.09.25
+### Changed
+* Fixed an issue where choosing **All** for sitemap **Structure Depth** resulted in it displaying nothing
+* Fixed an issue with the SiteLinks Search Box not having the correct format in `query-input`
+* Fixed an issue where Craft could sometimes hang if we asked for an image transform with `generateNow` = `true`
+
 ## 3.1.21 - 2018.09.18
 ### Added
 * Added the `.clearCache` property to all meta containers, allowing them to be manually cleared via Twig
