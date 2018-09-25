@@ -60,7 +60,7 @@ return [
                 'potentialAction'  => [
                     'type'        => 'SearchAction',
                     'target'      => '{seomatic.site.siteLinksSearchTarget}',
-                    'query-input' => '{seomatic.site.siteLinksQueryInput}',
+                    'query-input' => 'required name={seomatic.site.siteLinksQueryInput}',
                 ],
                 'sku'              => '{product.getDefaultVariant().getSku()}',
                 'offers'           => [

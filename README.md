@@ -1099,6 +1099,19 @@ Get the existing **MainEntityOfPage** as set in the Global SEO or Content SEO Ad
 {% set mainEntity = seomatic.jsonLd.get('mainEntityOfPage') %}
 ```
 
+If you want to add something to the existing **MainEntityOfPage** (in this case an [Offer](https://schema.org/Offer)), you can do it like this:
+```twig
+{% set mainEntity = seomatic.jsonLd.get('mainEntityOfPage') %}
+
+{% set offersJsonLd = seomatic.jsonLd.create({
+    'type': 'Offer',
+    'name': 'Some prop',
+    'url': 'Some url',
+}) %}
+
+{% do mainEntity.offers(offerJsonLd) %}
+```
+
 Get the existing **BreadcrumbList** as generated automatically by SEOmatic to modify them (schema.org: [BreadcrumbList](http://schema.org/BreadcrumbList)):
 ```twig
 {% set crumbs = seomatic.jsonLd.get('breadcrumbList') %}
@@ -1117,6 +1130,20 @@ Display the breadcrumbs on the page:
 Get the existing **Identity** as set in the Site Settings AdminCP section to modify it:
 ```twig
 {% set identity = seomatic.jsonLd.get('identity') %}
+```
+
+Let's say you want to add a [Brand](https://schema.org/Brand) to the **Identity**, you'd do this:
+
+```twig
+{% set identity = seomatic.jsonLd.get('identity') %}
+
+{% set brand = seomatic.jsonLd.create({
+    'type': 'Brand',
+    'name': 'Some prop',
+    'url': 'Some url',
+}) %}
+
+{% do identity.brand(brand) %}
 ```
 
 Get the existing **Creator** as set in the Site Settings AdminCP section to modify it:
