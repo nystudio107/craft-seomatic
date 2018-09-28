@@ -21,7 +21,7 @@ SEOmatic is the SEO tool that the SEO experts at [Moz.com](https://moz.com/) and
 
 ## Requirements
 
-This plugin requires Craft CMS 3.0.2 or later.
+This plugin requires Craft CMS 3.0.20 or later.
 
 ## Installation
 
