@@ -81,14 +81,8 @@ function fillDynamicSchemaMenu(menuId, menuValue, path, subTypes, blankItem, cal
 
 }
 
-window.fillDynamicSchemaMenu = fillDynamicSchemaMenu;
 
-$(function() {
-    // Tokenize any seomatic-keywords fields
-    $('.seomatic-keywords').tokenfield({
-        createTokensOnBlur: true,
-    });
-
+function seomaticTabChangeHandler() {
     // Tab handler
     $('.seomatic-tab-links').on('click', function(e) {
         e.preventDefault();
@@ -98,6 +92,18 @@ $(function() {
         var selector = $(this).attr('href');
         $(selector).removeClass('hidden');
     });
+}
+
+window.fillDynamicSchemaMenu = fillDynamicSchemaMenu;
+window.seomaticTabChangeHandler = seomaticTabChangeHandler;
+
+$(function() {
+    // Tokenize any seomatic-keywords fields
+    $('.seomatic-keywords').tokenfield({
+        createTokensOnBlur: true,
+    });
+
+
 
     // Show/hide the script settings containers
     var selector = $('.seomatic-script-lightswitch').find('.lightswitch');
