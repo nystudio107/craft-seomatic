@@ -37,11 +37,17 @@ class MetaContainerController extends Controller
      */
     protected $allowAnonymous = [
         'all-meta-containers',
+        'all-meta-containers-for-site',
         'meta-title-container',
+        'meta-title-container-for-site',
         'meta-tag-container',
+        'meta-tag-container-for-site',
         'meta-link-container',
+        'meta-link-container-for-site',
         'meta-script-container',
+        'meta-script-container-for-site',
         'meta-json-ld-container',
+        'meta-json-ld-container-for-site',
     ];
 
     // Public Methods
@@ -76,6 +82,23 @@ class MetaContainerController extends Controller
     }
 
     /**
+     * Return all of the containers for a given site handle
+     * URI: /actions/seomatic/meta-container/all-meta-containers-for-site?path=&site=
+     *
+     * @param string $uri
+     * @param string $site
+     * @param bool   $asArray
+     *
+     * @return Response
+     */
+    public function actionAllMetaContainersForSite(string $uri, string $site = null, bool $asArray = false): Response
+    {
+        $siteId = Craft::$app->getSites()->getSiteByHandle($site)->id;
+
+        return $this->actionAllMetaContainers($uri, $siteId, $asArray);
+    }
+
+    /**
      * Return the MetaTitleContainer
      * URI: /actions/seomatic/meta-container/meta-title-container?path=&siteId=
      *
@@ -97,6 +120,23 @@ class MetaContainerController extends Controller
         );
 
         return $this->asJson($result);
+    }
+
+    /**
+     * Return the MetaTitleContainer for a given site handle
+     * URI: /actions/seomatic/meta-container/meta-title-container-for-site?path=&site=
+     *
+     * @param string $uri
+     * @param string $site
+     * @param bool   $asArray
+     *
+     * @return Response
+     */
+    public function actionMetaTitleContainerForSite(string $uri, string $site = null, bool $asArray = false): Response
+    {
+        $siteId = Craft::$app->getSites()->getSiteByHandle($site)->id;
+
+        return $this->actionMetaTitleContainer($uri, $siteId, $asArray);
     }
 
     /**
@@ -124,6 +164,23 @@ class MetaContainerController extends Controller
     }
 
     /**
+     * Return the MetaTagContainer for a given site handle
+     * URI: /actions/seomatic/meta-container/meta-tag-container-for-site?path=&site=
+     *
+     * @param string $uri
+     * @param string $site
+     * @param bool   $asArray
+     *
+     * @return Response
+     */
+     public function actionMetaTagContainerForSite(string $uri, string $site = null, bool $asArray = false): Response
+     {
+        $siteId = Craft::$app->getSites()->getSiteByHandle($site)->id;
+
+        return $this->actionMetaTagContainer($uri, $siteId, $asArray);
+     }
+
+    /**
      * Return the MetaLinkContainer
      * URI: /actions/seomatic/meta-container/meta-link-container?path=&siteId=
      *
@@ -146,6 +203,23 @@ class MetaContainerController extends Controller
 
         return $this->asJson($result);
     }
+
+    /**
+     * Return the MetaLinkContainer for a given site handle
+     * URI: /actions/seomatic/meta-container/meta-link-container-for-site?path=&site=
+     *
+     * @param string $uri
+     * @param string $site
+     * @param bool   $asArray
+     *
+     * @return Response
+     */
+     public function actionMetaLinkContainerForSite(string $uri, string $site = null, bool $asArray = false): Response
+     {
+        $siteId = Craft::$app->getSites()->getSiteByHandle($site)->id;
+
+        return $this->actionMetaLinkContainer($uri, $siteId, $asArray);
+     }
 
     /**
      * Return the MetaScriptContainer
@@ -172,6 +246,23 @@ class MetaContainerController extends Controller
     }
 
     /**
+     * Return the MetaScriptContainer for a given site handle
+     * URI: /actions/seomatic/meta-container/meta-script-container-for-site?path=&site=
+     *
+     * @param string $uri
+     * @param string $site
+     * @param bool   $asArray
+     *
+     * @return Response
+     */
+     public function actionMetaScriptContainerForSite(string $uri, string $site = null, bool $asArray = false): Response
+     {
+        $siteId = Craft::$app->getSites()->getSiteByHandle($site)->id;
+
+        return $this->actionMetaScriptContainer($uri, $siteId, $asArray);
+     }
+
+    /**
      * Return the MetaJsonLdContainer
      * URI: /actions/seomatic/meta-container/meta-json-ld-container?path=&siteId=
      *
@@ -193,6 +284,23 @@ class MetaContainerController extends Controller
         );
 
         return $this->asJson($result);
+    }
+
+    /**
+     * Return the MetaJsonLdContainer for a given site handle
+     * URI: /actions/seomatic/meta-container/meta-json-ld-container-for-site?path=&site=
+     *
+     * @param string $uri
+     * @param int    $siteId
+     * @param bool   $asArray
+     *
+     * @return Response
+     */
+    public function actionMetaJsonLdContainerForSite(string $uri, string $site = null, bool $asArray = false): Response
+    {
+        $siteId = Craft::$app->getSites()->getSiteByHandle($site)->id;
+
+        return $this->actionMetaJsonLdContainer($uri, $siteId, $asArray);
     }
 
     // Protected Methods
