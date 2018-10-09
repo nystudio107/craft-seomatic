@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\services;
 
+use craft\errors\SiteNotFoundException;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\models\EditableTemplate;
@@ -130,15 +131,26 @@ class FrontendTemplates extends Component
      */
     public function renderTemplate(string $template, array $params = []): string
     {
+        // Make sure the cache is on a per-site basis
+        $siteId = 1;
+        try {
+            $currentSite = Craft::$app->getSites()->getCurrentSite();
+        } catch (SiteNotFoundException $e) {
+            $currentSite = null;
+        }
+        if ($currentSite) {
+            $siteId = $currentSite->id;
+        }
         $dependency = new TagDependency([
             'tags' => [
                 $this::GLOBAL_FRONTENDTEMPLATE_CACHE_TAG,
                 $this::FRONTENDTEMPLATE_CACHE_TAG . $template,
+                $this::FRONTENDTEMPLATE_CACHE_TAG . $template . $siteId,
             ],
         ]);
         $cache = Craft::$app->getCache();
         $html = $cache->getOrSet(
-            $this::CACHE_KEY . $template,
+            $this::CACHE_KEY . $template . $siteId,
             function () use ($template, $params) {
                 Craft::info(
                     'Frontend template cache miss: ' . $template,
