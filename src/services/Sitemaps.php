@@ -23,12 +23,14 @@ use Craft;
 use craft\base\Component;
 use craft\base\Element;
 use craft\base\ElementInterface;
+use craft\errors\SiteNotFoundException;
 use craft\events\RegisterUrlRulesEvent;
 use craft\helpers\UrlHelper;
 use craft\web\UrlManager;
 
 use yii\base\Event;
 use yii\base\Exception;
+use yii\base\InvalidConfigException;
 use yii\caching\TagDependency;
 
 /**
@@ -114,6 +116,19 @@ class Sitemaps extends Component implements SitemapInterface
         $rules = [];
         $groups = Craft::$app->getSites()->getAllGroups();
         $groupId = $groups[0]->id;
+        $currentSite = null;
+        try {
+            $currentSite = Craft::$app->getSites()->getCurrentSite();
+        } catch (SiteNotFoundException $e) {
+            Craft::error($e->getMessage(), __METHOD__);
+        }
+        if ($currentSite) {
+            try {
+                $groupId = $currentSite->getGroup()->id;
+            } catch (InvalidConfigException $e) {
+                Craft::error($e->getMessage(), __METHOD__);
+            }
+        }
         $route =
             Seomatic::$plugin->handle
             .'/'
