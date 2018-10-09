@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.23 - 2018.10.09
+### Changed
+* Returns the correct `sitemap.xml` for multi-site "sister site" groups
+
 ## 3.1.22 - 2018.09.25
 ### Changed
 * Fixed an issue where choosing **All** for sitemap **Structure Depth** resulted in it displaying nothing
