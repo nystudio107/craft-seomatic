@@ -3,6 +3,8 @@
 ## 3.1.23 - 2018.10.09
 ### Changed
 * Returns the correct `sitemap.xml` for multi-site "sister site" groups
+* Cache frontend templates on a per-site basis
+* Make sure that `humans.txt` links are full URLs
 
 ## 3.1.22 - 2018.09.25
 ### Changed
