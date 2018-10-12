@@ -5,6 +5,7 @@
 * Returns the correct `sitemap.xml` for multi-site "sister site" groups
 * Cache frontend templates on a per-site basis
 * Make sure that `humans.txt` links are full URLs
+* Handle the case where all **Same As** URLs are deleted
 
 ## 3.1.22 - 2018.09.25
 ### Changed
