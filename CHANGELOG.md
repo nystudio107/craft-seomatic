@@ -6,6 +6,7 @@
 * Cache frontend templates on a per-site basis
 * Make sure that `humans.txt` links are full URLs
 * Handle the case where all **Same As** URLs are deleted
+* Fixed an issue where `hreflang` tags were still added even with the setting was disabled, but only for paginated entries
 
 ## 3.1.22 - 2018.09.25
 ### Changed
