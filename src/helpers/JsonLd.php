@@ -26,6 +26,9 @@ class JsonLd extends \craft\helpers\Json
 
     const IGNORE_ATTRIBUTES = [
         '@context',
+    ];
+
+    const IGNORE_ALWAYS_ATTRIBUTES = [
         'include',
         'key',
     ];
@@ -97,6 +100,9 @@ class JsonLd extends \craft\helpers\Json
             foreach (self::IGNORE_ATTRIBUTES as $attribute) {
                 unset($array[$attribute]);
             }
+        }
+        foreach (self::IGNORE_ALWAYS_ATTRIBUTES as $attribute) {
+            unset($array[$attribute]);
         }
         // Parse the array as meta values
         MetaValueHelper::parseArray($array);
