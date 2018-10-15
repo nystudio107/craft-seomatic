@@ -7,6 +7,7 @@
 * Make sure that `humans.txt` links are full URLs
 * Handle the case where all **Same As** URLs are deleted
 * Fixed an issue where `hreflang` tags were still added even with the setting was disabled, but only for paginated entries
+* Changed the default `title` length to `70` and the default `description` length to `155`
 
 ## 3.1.22 - 2018.09.25
 ### Changed
