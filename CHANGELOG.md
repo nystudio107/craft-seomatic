@@ -1,5 +1,15 @@
 # SEOmatic Changelog
 
+## 3.1.23 - 2018.10.15
+### Changed
+* Returns the correct `sitemap.xml` for multi-site "sister site" groups
+* Cache frontend templates on a per-site basis
+* Make sure that `humans.txt` links are full URLs
+* Handle the case where all **Same As** URLs are deleted
+* Fixed an issue where `hreflang` tags were still added even with the setting was disabled, but only for paginated entries
+* Changed the default `title` length to `70` and the default `description` length to `155`
+* Fixed an issue where nested JSON-LD objects would contain erroneous `key` and `include` properties
+
 ## 3.1.22 - 2018.09.25
 ### Changed
 * Fixed an issue where choosing **All** for sitemap **Structure Depth** resulted in it displaying nothing

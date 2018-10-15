@@ -61,7 +61,7 @@ return [
     'maxTitleLength' => 70,
 
     // The max number of characters in the `<meta name="description">` tag
-    'maxDescriptionLength' => 320,
+    'maxDescriptionLength' => 155,
 
     // Site Groups define logically separate sites
     'siteGroupsSeparate' => true,

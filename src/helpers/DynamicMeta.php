@@ -399,8 +399,11 @@ class DynamicMeta
     public static function addSameAsMeta()
     {
         $metaContainers = Seomatic::$plugin->metaContainers;
-        $sameAsUrls = ArrayHelper::getColumn($metaContainers->metaSiteVars->sameAsLinks, 'url', false);
-        $sameAsUrls = array_values(array_filter($sameAsUrls));
+        $sameAsUrls = [];
+        if (!empty($metaContainers->metaSiteVars->sameAsLinks)) {
+            $sameAsUrls = ArrayHelper::getColumn($metaContainers->metaSiteVars->sameAsLinks, 'url', false);
+            $sameAsUrls = array_values(array_filter($sameAsUrls));
+        }
         // Facebook OpenGraph
         $ogSeeAlso = Seomatic::$plugin->tag->get('og:see_also');
         if ($ogSeeAlso) {

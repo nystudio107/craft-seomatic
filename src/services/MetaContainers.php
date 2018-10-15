@@ -265,7 +265,9 @@ class MetaContainers extends Component
         // If this page is paginated, we need to factor that into the cache key
         // We also need to re-add the hreflangs
         if ($this->paginationPage !== '1') {
-            DynamicMetaHelper::addMetaLinkHrefLang();
+            if (Seomatic::$settings->addHrefLang) {
+                DynamicMetaHelper::addMetaLinkHrefLang();
+            }
         }
         // Add in our http headers
         DynamicMetaHelper::includeHttpHeaders();
