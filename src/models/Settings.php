@@ -71,12 +71,12 @@ class Settings extends VarsModel
     /**
      * @var int The max number of characters in the `<title>` tag
      */
-    public $maxTitleLength = 120;
+    public $maxTitleLength = 70;
 
     /**
      * @var int The max number of characters in the `<meta name="description">` tag
      */
-    public $maxDescriptionLength = 300;
+    public $maxDescriptionLength = 155;
 
     /**
      * @var bool Site Groups define logically separate sites
@@ -126,9 +126,9 @@ class Settings extends VarsModel
             ['separatorChar', 'string'],
             ['separatorChar', 'default', 'value' => '|'],
             ['maxTitleLength', 'integer', 'min' => 10],
-            ['maxTitleLength', 'default', 'value' => 120],
+            ['maxTitleLength', 'default', 'value' => 70],
             ['maxDescriptionLength', 'integer', 'min' => 10],
-            ['maxDescriptionLength', 'default', 'value' => 300],
+            ['maxDescriptionLength', 'default', 'value' => 155],
         ];
     }
 }
