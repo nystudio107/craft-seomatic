@@ -1,5 +1,11 @@
 # SEOmatic Changelog
 
+## 3.1.24 - 2018.10.18
+### Added
+* Added the ability to control the depth that sitemaps should be generated for Categories (just like already existed for Structures)
+
+### Changed
+
 ## 3.1.23 - 2018.10.15
 ### Changed
 * Returns the correct `sitemap.xml` for multi-site "sister site" groups
