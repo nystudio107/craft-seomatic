@@ -179,12 +179,15 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                         $elements = $query->all();
                         break;
                     case MetaBundles::CATEGORYGROUP_META_BUNDLE:
-                        $elements = Category::find()
+                        $query = Category::find()
                             ->group($metaBundle->sourceHandle)
                             ->siteId($metaBundle->sourceSiteId)
                             ->limit($metaBundle->metaSitemapVars->sitemapLimit)
-                            ->enabledForSite(true)
-                            ->all();
+                            ->enabledForSite(true);
+                        if (!empty($metaBundle->metaSitemapVars->structureDepth)) {
+                            $query->level($metaBundle->metaSitemapVars->structureDepth.'<=');
+                        }
+                        $elements = $query->all();
                         break;
                     case MetaBundles::PRODUCT_META_BUNDLE:
                         if (Seomatic::$commerceInstalled) {
