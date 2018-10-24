@@ -229,11 +229,7 @@ class MetaLink extends MetaItem
                 $attributes[] = $config;
             }
         }
-
-        if (\count($attributes) === 1) {
-            $attributes = $attributes[0];
-        }
-
+        
         return $attributes;
     }
 }
