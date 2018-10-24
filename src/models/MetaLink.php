@@ -230,6 +230,10 @@ class MetaLink extends MetaItem
             }
         }
 
+        if (\count($attributes) === 1) {
+            $attributes = $attributes[0];
+        }
+
         return $attributes;
     }
 }
