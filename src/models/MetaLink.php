@@ -208,7 +208,7 @@ class MetaLink extends MetaItem
         foreach ($configs as $config) {
             if ($this->prepForRender($config)) {
                 ksort($config);
-                $html = Html::tag('link', '', $config);
+                $html .= Html::tag('link', '', $config);
             }
         }
 
@@ -226,7 +226,7 @@ class MetaLink extends MetaItem
         foreach ($configs as $config) {
             if ($this->prepForRender($config)) {
                 ksort($config);
-                $attributes = array_merge($attributes, $config);
+                $attributes[] = $config;
             }
         }
 
