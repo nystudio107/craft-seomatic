@@ -12,8 +12,8 @@
 namespace nystudio107\seomatic\base;
 
 use nystudio107\seomatic\helpers\Dependency;
+use nystudio107\seomatic\events\IncludeContainerEvent;
 
-use craft\base\Model;
 use craft\validators\ArrayValidator;
 
 /**
@@ -77,20 +77,20 @@ abstract class Container extends FluentModel implements ContainerInterface
     /**
      * @inheritdoc
      */
-     public function prepForInclusion(): bool
-     {
-         $include = $this->include;
-         if ($include) {
-             $include = Dependency::validateDependencies($this->dependencies);
-         }
+    public function prepForInclusion(): bool
+    {
+        $include = $this->include;
+        if ($include) {
+            $include = Dependency::validateDependencies($this->dependencies);
+        }
 
-         $event = new IncludeContainerEvent([
-             'include' => $include,
-         ]);
-         $this->trigger(self::EVENT_INCLUDE_CONTAINER, $event);
+        $event = new IncludeContainerEvent([
+            'include' => $include,
+        ]);
+        $this->trigger(self::EVENT_INCLUDE_CONTAINER, $event);
 
-         return $event->include;
-     }
+        return $event->include;
+    }
 
     /**
      * @inheritdoc
