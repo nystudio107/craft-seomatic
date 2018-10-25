@@ -78,20 +78,20 @@ abstract class Container extends FluentModel implements ContainerInterface
     /**
      * @inheritdoc
      */
-     public function prepForInclusion(): bool
-     {
-         $include = $this->include;
-         if ($include) {
-             $include = Dependency::validateDependencies($this->dependencies);
-         }
+    public function prepForInclusion(): bool
+    {
+        $include = $this->include;
+        if ($include) {
+            $include = Dependency::validateDependencies($this->dependencies);
+        }
 
-         $event = new IncludeContainerEvent([
+        $event = new IncludeContainerEvent([
              'include' => $include,
          ]);
-         $this->trigger(self::EVENT_INCLUDE_CONTAINER, $event);
+        $this->trigger(self::EVENT_INCLUDE_CONTAINER, $event);
 
-         return $event->include;
-     }
+        return $event->include;
+    }
 
     /**
      * @inheritdoc
