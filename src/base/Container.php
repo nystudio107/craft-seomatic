@@ -15,6 +15,7 @@ use nystudio107\seomatic\helpers\Dependency;
 
 use craft\base\Model;
 use craft\validators\ArrayValidator;
+use nystudio107\seomatic\events\IncludeContainerEvent;
 
 /**
  * @author    nystudio107
