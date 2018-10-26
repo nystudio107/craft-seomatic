@@ -8,6 +8,7 @@
 ### Changed
 * Fix rendering for MetaLink and MetaTag with multiple tags when requesting them via Controller
 * Fixed an issue where SEO Settings fields would override the Sitemap settings even if that was disabled
+* Fixed an issue with the SEO Settings field when switching between Entry Types
 
 ## 3.1.23 - 2018.10.15
 ### Changed
