@@ -156,10 +156,10 @@ class DynamicMeta
     /**
      * Add any custom/dynamic meta to the containers
      *
-     * @param string $uri
-     * @param int    $siteId
+     * @param string|null $uri
+     * @param int|null    $siteId
      */
-    public static function addDynamicMetaToContainers(string $uri = '', int $siteId = null)
+    public static function addDynamicMetaToContainers(string $uri = null, int $siteId = null)
     {
         Craft::beginProfile('DynamicMeta::addDynamicMetaToContainers', __METHOD__);
         $request = Craft::$app->getRequest();
@@ -169,7 +169,7 @@ class DynamicMeta
             if ($response->statusCode < 400) {
                 self::addMetaJsonLdBreadCrumbs($siteId);
                 if (Seomatic::$settings->addHrefLang) {
-                    self::addMetaLinkHrefLang();
+                    self::addMetaLinkHrefLang($uri, $siteId);
                 }
                 self::addSameAsMeta();
                 $metaSiteVars = Seomatic::$plugin->metaContainers->metaSiteVars;
@@ -358,10 +358,13 @@ class DynamicMeta
 
     /**
      * Add meta hreflang tags if there is more than one site
+     *
+     * @param string   $uri
+     * @param int|null $siteId
      */
-    public static function addMetaLinkHrefLang()
+    public static function addMetaLinkHrefLang(string $uri = null, int $siteId = null)
     {
-        $siteLocalizedUrls = self::getLocalizedUrls();
+        $siteLocalizedUrls = self::getLocalizedUrls($uri, $siteId);
 
         if (!empty($siteLocalizedUrls)) {
             // Add the x-default hreflang
