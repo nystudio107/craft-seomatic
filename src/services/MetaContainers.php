@@ -339,13 +339,19 @@ class MetaContainers extends Component
         }
         // Special-case the global bundle
         if ($uri === MetaBundles::GLOBAL_META_BUNDLE) {
+            $homeUrl = '/';
             try {
-                $canonical = Seomatic::$seomaticVariable->link->get('canonical');
-                if ($canonical !== null) {
-                    $canonical->href = UrlHelper::siteUrl('/', null, null, $siteId);
-                }
+                $homeUrl = UrlHelper::siteUrl('/', null, null, $siteId);
             } catch (Exception $e) {
                 Craft::error($e->getMessage(), __METHOD__);
+            }
+            $canonical = Seomatic::$seomaticVariable->link->get('canonical');
+            if ($canonical !== null) {
+                $canonical->href = $homeUrl;
+            }
+            $home = Seomatic::$seomaticVariable->link->get('home');
+            if ($home !== null) {
+                $home->href = $homeUrl;
             }
         }
     }
