@@ -10,6 +10,7 @@
 * Fixed an issue where SEO Settings fields would override the Sitemap settings even if that was disabled
 * Fixed an issue with the SEO Settings field when switching between Entry Types
 * Pass down the `$uri` and `$siteId` to `addDynamicMetaToContainers()` to `addMetaLinkHrefLang()`
+* Ensure that the `home` link is correct when accessed via controller
 
 ## 3.1.23 - 2018.10.15
 ### Changed
