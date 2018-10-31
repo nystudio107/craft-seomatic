@@ -525,14 +525,9 @@ class DynamicMeta
                             /** @var MetaBundle $metaBundle */
                             $fieldMetaBundle = $element->$fieldHandle;
                             if ($fieldMetaBundle !== null) {
-                                $attributes = $fieldMetaBundle->metaSitemapVars->getAttributes();
-                                $attributes = array_filter(
-                                    $attributes,
-                                    [ArrayHelper::class, 'preserveBools']
-                                );
-                                $fieldMetaBundle->metaSitemapVars->setAttributes($attributes, false);
                                 // If sitemaps are off for this entry, don't include the URL
-                                if (!$fieldMetaBundle->metaSitemapVars->sitemapUrls) {
+                                if (!$fieldMetaBundle->metaSitemapVars->sitemapUrls
+                                    && \is_bool($fieldMetaBundle->metaSitemapVars->sitemapUrls)) {
                                     $includeUrl = false;
                                 }
                                 // If robots is set tp 'none' don't include the URL
