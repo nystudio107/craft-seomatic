@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\helpers;
 
+use nystudio107\seomatic\fields\SeoSettings;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\models\Entity;
@@ -520,17 +521,19 @@ class DynamicMeta
                         FieldHelper::SEO_SETTINGS_CLASS_KEY,
                         true
                     );
+                    /** @var SeoSettings $fieldHandle */
                     foreach ($fieldHandles as $fieldHandle) {
                         if (!empty($element->$fieldHandle)) {
                             /** @var MetaBundle $metaBundle */
                             $fieldMetaBundle = $element->$fieldHandle;
-                            if ($fieldMetaBundle !== null) {
+                            if ($fieldMetaBundle !== null && $fieldHandle->sitemapTabEnabled) {
                                 // If sitemaps are off for this entry, don't include the URL
-                                if (!$fieldMetaBundle->metaSitemapVars->sitemapUrls
-                                    && \is_bool($fieldMetaBundle->metaSitemapVars->sitemapUrls)) {
+                                if (\in_array('sitemapUrls', $fieldHandle->sitemapEnabledFields, false)
+                                    && !$fieldMetaBundle->metaSitemapVars->sitemapUrls
+                                ) {
                                     $includeUrl = false;
                                 }
-                                // If robots is set tp 'none' don't include the URL
+                                // If robots is set to 'none' don't include the URL
                                 if ($fieldMetaBundle->metaGlobalVars->robots === 'none') {
                                     $includeUrl = false;
                                 }

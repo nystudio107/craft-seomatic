@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\models;
 
+use nystudio107\seomatic\fields\SeoSettings;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\base\SitemapInterface;
@@ -409,13 +410,15 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             FieldHelper::SEO_SETTINGS_CLASS_KEY,
             true
         );
+        /** @var SeoSettings $fieldHandle */
         foreach ($fieldHandles as $fieldHandle) {
-            if (!empty($element->$fieldHandle)) {
+            if (!empty($element->$fieldHandle) && $fieldHandle->sitemapTabEnabled) {
                 /** @var MetaBundle $metaBundle */
                 $fieldMetaBundle = $element->$fieldHandle;
                 if ($fieldMetaBundle !== null) {
                     // Combine the meta sitemap vars
                     $attributes = $fieldMetaBundle->metaSitemapVars->getAttributes();
+                    $attributes = \array_intersect($attributes, $fieldHandle->sitemapEnabledFields);
                     $attributes = array_filter(
                         $attributes,
                         [ArrayHelper::class, 'preserveBools']
