@@ -521,14 +521,15 @@ class DynamicMeta
                         FieldHelper::SEO_SETTINGS_CLASS_KEY,
                         true
                     );
-                    /** @var SeoSettings $fieldHandle */
                     foreach ($fieldHandles as $fieldHandle) {
                         if (!empty($element->$fieldHandle)) {
                             /** @var MetaBundle $metaBundle */
                             $fieldMetaBundle = $element->$fieldHandle;
-                            if ($fieldMetaBundle !== null && $fieldHandle->sitemapTabEnabled) {
+                            /** @var SeoSettings $seoSettingsField */
+                            $seoSettingsField = Craft::$app->getFields()->getFieldByHandle($fieldHandle);
+                            if ($fieldMetaBundle !== null && $seoSettingsField !== null && $seoSettingsField->sitemapTabEnabled) {
                                 // If sitemaps are off for this entry, don't include the URL
-                                if (\in_array('sitemapUrls', $fieldHandle->sitemapEnabledFields, false)
+                                if (\in_array('sitemapUrls', $seoSettingsField->sitemapEnabledFields, false)
                                     && !$fieldMetaBundle->metaSitemapVars->sitemapUrls
                                 ) {
                                     $includeUrl = false;
