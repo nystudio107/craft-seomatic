@@ -410,15 +410,16 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             FieldHelper::SEO_SETTINGS_CLASS_KEY,
             true
         );
-        /** @var SeoSettings $fieldHandle */
         foreach ($fieldHandles as $fieldHandle) {
-            if (!empty($element->$fieldHandle) && $fieldHandle->sitemapTabEnabled) {
+            if (!empty($element->$fieldHandle)) {
+                /** @var SeoSettings $seoSettingsField */
+                $seoSettingsField = Craft::$app->getFields()->getFieldByHandle($fieldHandle);
                 /** @var MetaBundle $metaBundle */
                 $fieldMetaBundle = $element->$fieldHandle;
-                if ($fieldMetaBundle !== null) {
+                if ($fieldMetaBundle !== null && $seoSettingsField !== null && $seoSettingsField->sitemapTabEnabled) {
                     // Combine the meta sitemap vars
                     $attributes = $fieldMetaBundle->metaSitemapVars->getAttributes();
-                    $attributes = \array_intersect($attributes, $fieldHandle->sitemapEnabledFields);
+                    $attributes = \array_intersect($attributes, $seoSettingsField->sitemapEnabledFields);
                     $attributes = array_filter(
                         $attributes,
                         [ArrayHelper::class, 'preserveBools']
