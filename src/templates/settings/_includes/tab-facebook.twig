@@ -161,7 +161,7 @@
 {% endif %}
 {% set textOptions = { sameAsSeo: "Same as SEO Description"|t("seomatic"), } | merge(textOptions) %}
 
-{% if field is not defined or 'goDescription' in field.facebookEnabledFields %}
+{% if field is not defined or 'ogDescription' in field.facebookEnabledFields %}
     <div class="field seomatic-textSourceWrapper" id="metaBundleSettings-ogDescriptionSource-field">
         <div class="heading">
             <label id="metaBundleSettings-ogDescriptionSource-label" for="metaBundleSettings-ogDescriptionSource">{{ "Facebook OpenGraph Description Source"|t("seomatic") }}</label>
