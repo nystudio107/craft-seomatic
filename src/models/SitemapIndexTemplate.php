@@ -97,6 +97,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
     {
         $cache = Craft::$app->getCache();
         $groupId = $params['groupId'];
+        $siteId = $params['siteId'];
         if (Seomatic::$settings->siteGroupsSeparate) {
             /** @var SiteGroup $siteGroup */
             $siteGroup = Craft::$app->getSites()->getGroupById($groupId);
@@ -116,7 +117,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             ],
         ]);
 
-        return $cache->getOrSet($this::CACHE_KEY.$groupId, function () use ($groupSiteIds) {
+        return $cache->getOrSet($this::CACHE_KEY.$groupId.'.'.$siteId, function () use ($groupSiteIds, $siteId) {
             Craft::info(
                 'Sitemap index cache miss',
                 __METHOD__
@@ -126,7 +127,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
             $lines[] = '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
             // One sitemap entry for each MeteBundle
-            $metaBundles = Seomatic::$plugin->metaBundles->getContentMetaBundles(true);
+            $metaBundles = Seomatic::$plugin->metaBundles->getContentMetaBundlesForSiteId($siteId);
             Seomatic::$plugin->metaBundles->pruneVestigialMetaBundles($metaBundles);
             /** @var  $metaBundle MetaBundle */
             foreach ($metaBundles as $metaBundle) {

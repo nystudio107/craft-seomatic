@@ -46,12 +46,13 @@ class SitemapController extends Controller
      *
      * @return Response
      */
-    public function actionSitemapIndex(int $groupId): Response
+    public function actionSitemapIndex(int $groupId, int $siteId = null): Response
     {
         $xml = Seomatic::$plugin->sitemaps->renderTemplate(
             Sitemaps::SEOMATIC_SITEMAPINDEX_CONTAINER,
             [
                 'groupId' => $groupId,
+                'siteId' => $siteId ?? Craft::$app->getSites()->currentSite->id,
             ]
         );
         $headers = Craft::$app->response->headers;
