@@ -159,6 +159,7 @@ class SettingsController extends Controller
         $numGrades = \count(self::SETUP_GRADES);
         // Content SEO grades
         $variables['metaBundles'] = Seomatic::$plugin->metaBundles->getContentMetaBundlesForSiteId($siteId);
+        Seomatic::$plugin->metaBundles->pruneVestigialMetaBundles($variables['metaBundles']);
         /** @var MetaBundle $metaBundle */
         foreach ($variables['metaBundles'] as $metaBundle) {
             $stat = 0;
