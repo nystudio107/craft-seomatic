@@ -1,9 +1,10 @@
 # SEOmatic Changelog
 
-## 3.1.24 - 2018.10.26
+## 3.1.24 - 2018.11.01
 ### Added
 * Added the ability to control the depth that sitemaps should be generated for Categories (just like already existed for Structures)
 * Added `EVENT_INCLUDE_CONTAINER` event to manipulate containers
+* Always create sitemap URLs from the given site, since they have to have the same origin
 
 ### Changed
 * Fix rendering for MetaLink and MetaTag with multiple tags when requesting them via Controller
