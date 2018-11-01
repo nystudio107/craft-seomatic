@@ -117,7 +117,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             ],
         ]);
 
-        return $cache->getOrSet([$this::CACHE_KEY, $groupId, $siteId], function () use ($groupSiteIds, $siteId) {
+        return $cache->getOrSet($this::CACHE_KEY.$groupId.'.'.$siteId, function () use ($groupSiteIds, $siteId) {
             Craft::info(
                 'Sitemap index cache miss',
                 __METHOD__
