@@ -736,6 +736,7 @@ class MetaContainers extends Component
             foreach ($fieldHandles as $fieldHandle) {
                 if (!empty($element->$fieldHandle)) {
                     $metaBundle = $element->$fieldHandle;
+                    Seomatic::$plugin->metaBundles->pruneFieldMetaBundleSettings($metaBundle, $fieldHandle);
                     $this->addMetaBundleToContainers($metaBundle);
                 }
             }
