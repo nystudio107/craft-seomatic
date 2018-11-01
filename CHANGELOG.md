@@ -12,6 +12,7 @@
 * Fixed an issue with the SEO Settings field when switching between Entry Types
 * Pass down the `$uri` and `$siteId` to `addDynamicMetaToContainers()` to `addMetaLinkHrefLang()`
 * Fix rendering of canonical and home links from Controllers
+* Fixed an issue with there Dashboard charts could be out of sync if sections were deleted/renamed
 
 ## 3.1.23 - 2018.10.15
 ### Changed
