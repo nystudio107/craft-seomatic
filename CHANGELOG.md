@@ -16,6 +16,7 @@
 * Fixed an issue with there Dashboard charts could be out of sync if sections were deleted/renamed
 * Use the default transform mechanism for SEO images
 * Only include the fields the user is allowed to edit in the SEO Settings overrides
+* Fixed an issue where Twitter images could be resized improperly based on the card type
 
 ## 3.1.23 - 2018.10.15
 ### Changed
