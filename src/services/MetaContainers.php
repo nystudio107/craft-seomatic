@@ -337,16 +337,26 @@ class MetaContainers extends Component
         if ($parseVariables) {
             $this->parseGlobalVars();
         }
+        // Get the homeUrl and canonicalUrl
+        $homeUrl = '/';
+        $canonicalUrl = $uri;
         // Special-case the global bundle
         if ($uri === MetaBundles::GLOBAL_META_BUNDLE) {
-            try {
-                $canonical = Seomatic::$seomaticVariable->link->get('canonical');
-                if ($canonical !== null) {
-                    $canonical->href = UrlHelper::siteUrl('/', null, null, $siteId);
-                }
-            } catch (Exception $e) {
-                Craft::error($e->getMessage(), __METHOD__);
-            }
+            $canonicalUrl = '/';
+        }
+        try {
+            $homeUrl = UrlHelper::siteUrl($homeUrl, null, null, $siteId);
+            $canonicalUrl = UrlHelper::siteUrl($canonicalUrl, null, null, $siteId);
+        } catch (Exception $e) {
+            Craft::error($e->getMessage(), __METHOD__);
+        }
+        $canonical = Seomatic::$seomaticVariable->link->get('canonical');
+        if ($canonical !== null) {
+            $canonical->href = $canonicalUrl;
+        }
+        $home = Seomatic::$seomaticVariable->link->get('home');
+        if ($home !== null) {
+            $home->href = $homeUrl;
         }
     }
 
@@ -726,6 +736,7 @@ class MetaContainers extends Component
             foreach ($fieldHandles as $fieldHandle) {
                 if (!empty($element->$fieldHandle)) {
                     $metaBundle = $element->$fieldHandle;
+                    Seomatic::$plugin->metaBundles->pruneFieldMetaBundleSettings($metaBundle, $fieldHandle);
                     $this->addMetaBundleToContainers($metaBundle);
                 }
             }

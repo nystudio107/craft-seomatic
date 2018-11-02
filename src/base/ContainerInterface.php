@@ -23,6 +23,7 @@ interface ContainerInterface
     // =========================================================================
 
     const CONTAINER_TYPE = 'GenericContainer';
+    const EVENT_INCLUDE_CONTAINER = 'includeContainer';
 
     // Static Methods
     // =========================================================================

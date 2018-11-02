@@ -176,7 +176,7 @@ class MetaTag extends MetaItem
         foreach ($configs as $config) {
             if ($this->prepForRender($config)) {
                 ksort($config);
-                $html = Html::tag('meta', '', $config);
+                $html .= Html::tag('meta', '', $config);
             }
         }
 
@@ -194,8 +194,11 @@ class MetaTag extends MetaItem
         foreach ($configs as $config) {
             if ($this->prepForRender($config)) {
                 ksort($config);
-                $attributes = array_merge($attributes, $config);
+                $attributes[] = $config;
             }
+        }
+        if (\count($attributes) === 1) {
+            $attributes = $attributes[0];
         }
 
         return $attributes;
