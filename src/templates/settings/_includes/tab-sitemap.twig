@@ -125,10 +125,29 @@
         }) }}
     {% endif %}
     
-    {% if field is not defined or 'structureDepth' in field.sitemapEnabledFields and sourceType == 'structure' %}
+    {% if (field is not defined or 'structureDepth' in field.sitemapEnabledFields) and sourceType == 'structure' %}
         {{ forms.selectField({
             label: "Structure Depth"|t("seomatic"),
             instructions: "Controls a how deep to go into a Structure when adding URLs into the sitemap."|t("seomatic"),
+            id: "structureDepth",
+            name: "structureDepth",
+            options: {
+                "": "All",
+                "5": "5",
+                "4": "4",
+                "3": "3",
+                "2": "2",
+                "1": "1",
+            },
+            value: metaSitemapVars.structureDepth,
+            errors: metaSitemapVars.getErrors("structureDepth"),
+        }) }}
+    {% endif %}
+    
+    {% if (field is not defined or 'structureDepth' in field.sitemapEnabledFields) and sourceType == 'category' %}
+        {{ forms.selectField({
+            label: "Category Depth"|t("seomatic"),
+            instructions: "Controls a how deep to go into a Category when adding URLs into the sitemap."|t("seomatic"),
             id: "structureDepth",
             name: "structureDepth",
             options: {

@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\models;
 
+use nystudio107\seomatic\fields\SeoSettings;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\base\SitemapInterface;
@@ -179,12 +180,15 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                         $elements = $query->all();
                         break;
                     case MetaBundles::CATEGORYGROUP_META_BUNDLE:
-                        $elements = Category::find()
+                        $query = Category::find()
                             ->group($metaBundle->sourceHandle)
                             ->siteId($metaBundle->sourceSiteId)
                             ->limit($metaBundle->metaSitemapVars->sitemapLimit)
-                            ->enabledForSite(true)
-                            ->all();
+                            ->enabledForSite(true);
+                        if (!empty($metaBundle->metaSitemapVars->structureDepth)) {
+                            $query->level($metaBundle->metaSitemapVars->structureDepth.'<=');
+                        }
+                        $elements = $query->all();
                         break;
                     case MetaBundles::PRODUCT_META_BUNDLE:
                         if (Seomatic::$commerceInstalled) {
@@ -408,11 +412,14 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         );
         foreach ($fieldHandles as $fieldHandle) {
             if (!empty($element->$fieldHandle)) {
+                /** @var SeoSettings $seoSettingsField */
+                $seoSettingsField = Craft::$app->getFields()->getFieldByHandle($fieldHandle);
                 /** @var MetaBundle $metaBundle */
                 $fieldMetaBundle = $element->$fieldHandle;
-                if ($fieldMetaBundle !== null) {
+                if ($fieldMetaBundle !== null && $seoSettingsField !== null && $seoSettingsField->sitemapTabEnabled) {
                     // Combine the meta sitemap vars
                     $attributes = $fieldMetaBundle->metaSitemapVars->getAttributes();
+                    $attributes = \array_intersect($attributes, $seoSettingsField->sitemapEnabledFields);
                     $attributes = array_filter(
                         $attributes,
                         [ArrayHelper::class, 'preserveBools']

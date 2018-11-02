@@ -295,7 +295,10 @@ class Sitemaps extends Component implements SitemapInterface
                 $url = UrlHelper::siteUrl(
                     '/sitemaps/'
                     .$site->groupId
-                    .'/sitemap.xml'
+                    .'/sitemap.xml',
+                    null,
+                    null,
+                    $siteId
                 );
             } catch (Exception $e) {
                 Craft::error($e->getMessage(), __METHOD__);
@@ -329,7 +332,10 @@ class Sitemaps extends Component implements SitemapInterface
                     .SitemapCustomTemplate::CUSTOM_HANDLE
                     .'/'
                     .$siteId
-                    .'/sitemap.xml'
+                    .'/sitemap.xml',
+                    null,
+                    null,
+                    $siteId
                 );
             } catch (Exception $e) {
                 Craft::error($e->getMessage(), __METHOD__);
@@ -370,7 +376,10 @@ class Sitemaps extends Component implements SitemapInterface
                     .$metaBundle->sourceHandle
                     .'/'
                     .$metaBundle->sourceSiteId
-                    .'/sitemap.xml'
+                    .'/sitemap.xml',
+                    null,
+                    null,
+                    $siteId
                 );
             } catch (Exception $e) {
                 Craft::error($e->getMessage(), __METHOD__);

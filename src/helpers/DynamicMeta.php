@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\helpers;
 
+use nystudio107\seomatic\fields\SeoSettings;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\models\Entity;
@@ -156,10 +157,10 @@ class DynamicMeta
     /**
      * Add any custom/dynamic meta to the containers
      *
-     * @param string $uri
-     * @param int    $siteId
+     * @param string|null $uri
+     * @param int|null    $siteId
      */
-    public static function addDynamicMetaToContainers(string $uri = '', int $siteId = null)
+    public static function addDynamicMetaToContainers(string $uri = null, int $siteId = null)
     {
         Craft::beginProfile('DynamicMeta::addDynamicMetaToContainers', __METHOD__);
         $request = Craft::$app->getRequest();
@@ -169,7 +170,7 @@ class DynamicMeta
             if ($response->statusCode < 400) {
                 self::addMetaJsonLdBreadCrumbs($siteId);
                 if (Seomatic::$settings->addHrefLang) {
-                    self::addMetaLinkHrefLang();
+                    self::addMetaLinkHrefLang($uri, $siteId);
                 }
                 self::addSameAsMeta();
                 $metaSiteVars = Seomatic::$plugin->metaContainers->metaSiteVars;
@@ -358,10 +359,13 @@ class DynamicMeta
 
     /**
      * Add meta hreflang tags if there is more than one site
+     *
+     * @param string   $uri
+     * @param int|null $siteId
      */
-    public static function addMetaLinkHrefLang()
+    public static function addMetaLinkHrefLang(string $uri = null, int $siteId = null)
     {
-        $siteLocalizedUrls = self::getLocalizedUrls();
+        $siteLocalizedUrls = self::getLocalizedUrls($uri, $siteId);
 
         if (!empty($siteLocalizedUrls)) {
             // Add the x-default hreflang
@@ -521,12 +525,16 @@ class DynamicMeta
                         if (!empty($element->$fieldHandle)) {
                             /** @var MetaBundle $metaBundle */
                             $fieldMetaBundle = $element->$fieldHandle;
-                            if ($fieldMetaBundle !== null) {
+                            /** @var SeoSettings $seoSettingsField */
+                            $seoSettingsField = Craft::$app->getFields()->getFieldByHandle($fieldHandle);
+                            if ($fieldMetaBundle !== null && $seoSettingsField !== null && $seoSettingsField->sitemapTabEnabled) {
                                 // If sitemaps are off for this entry, don't include the URL
-                                if (!$fieldMetaBundle->metaSitemapVars->sitemapUrls) {
+                                if (\in_array('sitemapUrls', $seoSettingsField->sitemapEnabledFields, false)
+                                    && !$fieldMetaBundle->metaSitemapVars->sitemapUrls
+                                ) {
                                     $includeUrl = false;
                                 }
-                                // If robots is set tp 'none' don't include the URL
+                                // If robots is set to 'none' don't include the URL
                                 if ($fieldMetaBundle->metaGlobalVars->robots === 'none') {
                                     $includeUrl = false;
                                 }
