@@ -278,6 +278,31 @@
 {# These fields are added as hidden here so that "Same as SEO Image" changes can propagate down to them #}
 {% if field is not defined %}
     <div style="display: none;">
+        {############### Twitter Card Type ###############}
+    
+        {# This has to be here because different Twitter Card types have different sizes for image transforms#}
+        {% set twitterCardTypes = {
+            summary: "Summary Card"|t("seomatic"),
+            summary_large_image: "Summary Card with Large Image"|t("seomatic"),
+            app: "App Card"|t("seomatic"),
+            player: "Player Card"|t("seomatic"),
+        } %}
+        {% if pageContext == "field" %}
+            {% set twitterCardTypes = { "": ""} | merge(twitterCardTypes) %}
+        {% endif %}
+    
+        {% namespace "metaGlobalVars" %}
+            {{ forms.selectField({
+                label: "Twitter Card Type"|t("seomatic"),
+                instructions: "With Twitter Cards, you can attach rich photos and information to Tweets that drive traffic to your website. Users who Tweet links to your content will have a 'Card' added to the Tweet that’s visible to all of their followers."|t("seomatic"),
+                id: "twitterCard",
+                name: "twitterCard",
+                options: twitterCardTypes,
+                value: metaGlobalVars.twitterCard,
+                errors: metaGlobalVars.getErrors("twitterCard"),
+            }) }}
+        {% endnamespace %}
+
         {% include "seomatic/settings/_includes/twitter-image-partial.twig" %}
     </div>
 {% endif %}
