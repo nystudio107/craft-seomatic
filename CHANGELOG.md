@@ -1,10 +1,11 @@
 # SEOmatic Changelog
 
-## 3.1.24 - 2018.11.01
+## 3.1.24 - 2018.11.02
 ### Added
 * Added the ability to control the depth that sitemaps should be generated for Categories (just like already existed for Structures)
 * Added `EVENT_INCLUDE_CONTAINER` event to manipulate containers
 * Always create sitemap URLs from the given site, since they have to have the same origin
+* Added labels to the Google, Twitter, and Facebook previews
 
 ### Changed
 * Fix rendering for MetaLink and MetaTag with multiple tags when requesting them via Controller
@@ -13,6 +14,8 @@
 * Pass down the `$uri` and `$siteId` to `addDynamicMetaToContainers()` to `addMetaLinkHrefLang()`
 * Fix rendering of canonical and home links from Controllers
 * Fixed an issue with there Dashboard charts could be out of sync if sections were deleted/renamed
+* Use the default transform mechanism for SEO images
+* Only include the fields the user is allowed to edit in the SEO Settings overrides
 
 ## 3.1.23 - 2018.10.15
 ### Changed
