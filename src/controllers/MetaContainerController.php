@@ -206,6 +206,9 @@ class MetaContainerController extends Controller
     ): array {
         $result = [];
 
+        // Normalize the incoming URI to account for `__home__`
+        $uri = ($uri === '__home__') ? '' : $uri;
+
         // Load the meta containers and parse our globals
         Seomatic::$plugin->metaContainers->previewMetaContainers($uri, $siteId, true);
 
