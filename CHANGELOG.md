@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.1.25 - 2018.11.05
+### Added
+* Moved sitemap generation to a queue job, to allow for very large sitemaps to be generated without timing out
+
 ### Changed
 * Normalize the incoming URI to account for `__home__`
 
