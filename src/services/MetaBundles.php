@@ -370,7 +370,8 @@ class MetaBundles extends Component
                     Seomatic::$plugin->metaContainers->invalidateContainerCacheById($sourceId);
                     Seomatic::$plugin->sitemaps->invalidateSitemapCache(
                         $metaBundle->sourceHandle,
-                        $metaBundle->sourceSiteId
+                        $metaBundle->sourceSiteId,
+                        $metaBundle->sourceBundleType
                     );
                     // Update the meta bundle data
                     $this->updateMetaBundle($metaBundle, $site->id);
@@ -422,7 +423,8 @@ class MetaBundles extends Component
                         if ($metaBundle) {
                             Seomatic::$plugin->sitemaps->invalidateSitemapCache(
                                 $metaBundle->sourceHandle,
-                                $metaBundle->sourceSiteId
+                                $metaBundle->sourceSiteId,
+                                $metaBundle->sourceBundleType
                             );
                             Seomatic::$plugin->sitemaps->invalidateSitemapIndexCache();
                         }
