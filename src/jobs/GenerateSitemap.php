@@ -1,8 +1,9 @@
 <?php
 /**
- * ImageOptimize plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS 3.x
  *
- * Automatically optimize images after they've been transformed
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
  *
  * @link      https://nystudio107.com
  * @copyright Copyright (c) 2017 nystudio107
@@ -39,8 +40,8 @@ use yii\helpers\Html;
 
 /**
  * @author    nystudio107
- * @package   ImageOptimize
- * @since     1.4.8
+ * @package   Seomatic
+ * @since     3.0.0
  */
 class GenerateSitemap extends BaseJob
 {
