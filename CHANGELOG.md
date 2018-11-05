@@ -1,5 +1,10 @@
 # SEOmatic Changelog
 
+## 3.1.26 - 2018.11.05
+### Changed
+* Don't regenerate the sitemaps when elements are being re-saved enmasse via Section resaving
+* Fixed JavaScript console error due to outdated assets build
+
 ## 3.1.25 - 2018.11.05
 ### Added
 * Moved sitemap generation to a queue job, to allow for very large sitemaps to be generated without timing out
