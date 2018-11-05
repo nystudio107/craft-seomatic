@@ -350,5 +350,10 @@ return [
     'The transform mode to use for the Twitter Image Transform.' => 'The transform mode to use for the Twitter Image Transform.',
     'Structure Depth' => 'Structure Depth',
     'Controls a how deep to go into a Structure when adding URLs into the sitemap.' => 'Controls a how deep to go into a Structure when adding URLs into the sitemap.',
-    'Add `hreflang` Tags' => 'Add `hreflang` Tags'
+    'Add `hreflang` Tags' => 'Add `hreflang` Tags',
+    'Started GenerateSitemap queue job id: {jobId}' => 'Started GenerateSitemap queue job id: {jobId}',
+    'This sitemap has not been generated yet.' => 'This sitemap has not been generated yet.',
+    'Redirects' => 'Redirects',
+    'Controls a how deep to go into a Category when adding URLs into the sitemap.' => 'Controls a how deep to go into a Category when adding URLs into the sitemap.',
+    'Category Depth' => 'Category Depth'
 ];

@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\services;
 
+use nystudio107\seomatic\jobs\GenerateSitemap;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\base\SitemapInterface;
@@ -407,13 +408,37 @@ class Sitemaps extends Component implements SitemapInterface
      *
      * @param string $handle
      * @param int    $siteId
+     * @param string $type
      */
-    public function invalidateSitemapCache(string $handle, int $siteId)
+    public function invalidateSitemapCache(string $handle, int $siteId, string $type)
     {
         $cache = Craft::$app->getCache();
         TagDependency::invalidate($cache, SitemapTemplate::SITEMAP_CACHE_TAG.$handle.$siteId);
         Craft::info(
             'Sitemap cache cleared: '.$handle,
+            __METHOD__
+        );
+        $sites = Craft::$app->getSites();
+        if ($siteId === null) {
+            $siteId = $sites->currentSite->id ?? 1;
+        }
+        $site = $sites->getSiteById($siteId);
+        // Start up a job to generate the sitemap
+        $queue = Craft::$app->getQueue();
+        $jobId = $queue->push(new GenerateSitemap([
+            'groupId' => $site->groupId,
+            'type' => $type,
+            'handle' => $handle,
+            'siteId' => $siteId,
+        ]));
+        Craft::debug(
+            Craft::t(
+                'seomatic',
+                'Started GenerateSitemap queue job id: {jobId}',
+                [
+                    'jobId' => $jobId,
+                ]
+            ),
             __METHOD__
         );
     }
