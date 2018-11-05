@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.1.26 - 2018.11.06
+## 3.1.26 - 2018.11.05
 ### Changed
 * Don't regenerate the sitemaps when elements are being re-saved enmasse via Section resaving
 * Fixed JavaScript console error due to outdated assets build
