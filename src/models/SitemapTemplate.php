@@ -122,7 +122,6 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 'handle' => $handle,
                 'siteId' => $siteId,
             ]));
-            $queue->run();
             Craft::debug(
                 Craft::t(
                     'seomatic',
