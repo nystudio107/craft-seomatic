@@ -132,10 +132,15 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 ),
                 __METHOD__
             );
-
+            // If the queue should be run automatically, do it now
+            if (Craft::$app->getConfig()->getGeneral()->runQueueAutomatically) {
+                $queue->run();
+            }
             // Return an empty XML document
             $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
             $lines[] = '<!-- ' . Craft::t('seomatic', 'This sitemap has not been generated yet.') . ' -->';
+            $lines[] = '<!-- ' . Craft::t('seomatic', 'If you are seeing this in local dev or an environment with `devMode` on, caches only') . ' -->';
+            $lines[] = '<!-- ' . Craft::t('seomatic', 'last for 30 seconds in local dev, so it is normal for the sitemap to not be cached.') . ' -->';
             $lines[] = '<urlset>';
             $lines[] = '</urlset>';
             $lines = implode("\r\n", $lines);
