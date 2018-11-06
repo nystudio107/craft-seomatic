@@ -3,7 +3,8 @@
 ## 3.1.27 - 2018.11.09
 ### Changed
 * Disabled tracking scripts from sending Page View data during Live Preview
-* Ensure background image values are quoted
+* Ensure background image values are quoted for the SEO previews
+* If `runQueueAutomatically` is set, start running the queue job to generate the sitemap immediately
 
 ## 3.1.26 - 2018.11.05
 ### Changed
