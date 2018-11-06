@@ -22,7 +22,8 @@ ga('require', 'linkid');
 {% if enhancedLinkAttribution.value %}
 ga('require', 'linker');
 {% endif %}
-{% if sendPageView.value %}
+{% set pageView = (sendPageView.value and not craft.app.request.isLivePreview) %}
+{% if pageView %}
 ga('send', 'pageview');
 {% endif %}
 {% endif %}
