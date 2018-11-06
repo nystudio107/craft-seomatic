@@ -355,5 +355,7 @@ return [
     'This sitemap has not been generated yet.' => 'This sitemap has not been generated yet.',
     'Redirects' => 'Redirects',
     'Controls a how deep to go into a Category when adding URLs into the sitemap.' => 'Controls a how deep to go into a Category when adding URLs into the sitemap.',
-    'Category Depth' => 'Category Depth'
+    'Category Depth' => 'Category Depth',
+    'last for 30 seconds in local dev, so it is normal for the sitemap to not be cached.' => 'last for 30 seconds in local dev, so it is normal for the sitemap to not be cached.',
+    'If you are seeing this in local dev or an environment with `devMode` on, caches only' => 'If you are seeing this in local dev or an environment with `devMode` on, caches only'
 ];
