@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.27 - 2018.11.09
+### Changed
+* Disabled tracking scripts from sending Page View data during Live Preview
+
 ## 3.1.26 - 2018.11.05
 ### Changed
 * Don't regenerate the sitemaps when elements are being re-saved enmasse via Section resaving
