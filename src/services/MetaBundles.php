@@ -657,10 +657,12 @@ class MetaBundles extends Component
             $seoSettingsField->sitemapEnabledFields
         ));
         // metaGlobalVars
+        /* Don't prune the metaGlobalVars
         $attributes = $metaBundle->metaGlobalVars->getAttributes();
         $emptyValues = array_fill_keys(array_keys(array_diff_key($attributes, $seoSettingsEnabledFields)), '');
         $attributes = array_merge($attributes, $emptyValues);
         $metaBundle->metaGlobalVars->setAttributes($attributes, false);
+        */
         // metaSiteVars
         $attributes = $metaBundle->metaSiteVars->getAttributes();
         $emptyValues = array_fill_keys(array_keys(array_diff_key($attributes, $seoSettingsEnabledFields)), '');
