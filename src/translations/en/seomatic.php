@@ -345,5 +345,19 @@ return [
     'Controls a how deep to go into a Category when adding URLs into the sitemap.' => 'Controls a how deep to go into a Category when adding URLs into the sitemap.',
     'Category Depth' => 'Category Depth',
     'last for 30 seconds in local dev, so it is normal for the sitemap to not be cached.' => 'last for 30 seconds in local dev, so it is normal for the sitemap to not be cached.',
-    'If you are seeing this in local dev or an environment with `devMode` on, caches only' => 'If you are seeing this in local dev or an environment with `devMode` on, caches only'
+    'If you are seeing this in local dev or an environment with `devMode` on, caches only' => 'If you are seeing this in local dev or an environment with `devMode` on, caches only',
+    'last for 30 seconds in local dev, so it is' => 'last for 30 seconds in local dev, so it is',
+    'Started GenerateSitemap queue job id: {jobId} with cache key {cacheKey}' => 'Started GenerateSitemap queue job id: {jobId} with cache key {cacheKey}',
+    'If you are seeing this in local dev or an environment with `devMode` on,' => 'If you are seeing this in local dev or an environment with `devMode` on,',
+    'If you are seeing this in local dev or an environment with' => 'If you are seeing this in local dev or an environment with',
+    'sitemap to not be cached.' => 'sitemap to not be cached.',
+    'so it is normal for the sitemap to not be cached.' => 'so it is normal for the sitemap to not be cached.',
+    'with `devMode` on, caches only last for 30 seconds in local dev,' => 'with `devMode` on, caches only last for 30 seconds in local dev,',
+    'environment with `devMode` on, caches only last for 30 seconds in local dev,' => 'environment with `devMode` on, caches only last for 30 seconds in local dev,',
+    '`devMode` on, caches only last for 30 seconds in local dev,' => '`devMode` on, caches only last for 30 seconds in local dev,',
+    'environment with `devMode` on, caches only' => 'environment with `devMode` on, caches only',
+    'normal for the sitemap to not be cached.' => 'normal for the sitemap to not be cached.',
+    'If you are seeing this in local dev or an environment' => 'If you are seeing this in local dev or an environment',
+    'If you are seeing this in local dev or an' => 'If you are seeing this in local dev or an',
+    'caches only last for 30 seconds in local dev, so it is normal for the' => 'caches only last for 30 seconds in local dev, so it is normal for the'
 ];

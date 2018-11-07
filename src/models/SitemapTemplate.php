@@ -125,9 +125,10 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             Craft::debug(
                 Craft::t(
                     'seomatic',
-                    'Started GenerateSitemap queue job id: {jobId}',
+                    'Started GenerateSitemap queue job id: {jobId} with cache key {cacheKey}',
                     [
                         'jobId' => $jobId,
+                        'cacheKey' => $cacheKey,
                     ]
                 ),
                 __METHOD__
@@ -139,8 +140,10 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             // Return an empty XML document
             $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
             $lines[] = '<!-- ' . Craft::t('seomatic', 'This sitemap has not been generated yet.') . ' -->';
-            $lines[] = '<!-- ' . Craft::t('seomatic', 'If you are seeing this in local dev or an environment with `devMode` on, caches only') . ' -->';
-            $lines[] = '<!-- ' . Craft::t('seomatic', 'last for 30 seconds in local dev, so it is normal for the sitemap to not be cached.') . ' -->';
+            $lines[] = '<!-- ' . Craft::t('seomatic', 'If you are seeing this in local dev or an') . ' -->';
+            $lines[] = '<!-- ' . Craft::t('seomatic', 'environment with `devMode` on, caches only') . ' -->';
+            $lines[] = '<!-- ' . Craft::t('seomatic', 'last for 30 seconds in local dev, so it is') . ' -->';
+            $lines[] = '<!-- ' . Craft::t('seomatic', 'normal for the sitemap to not be cached.') . ' -->';
             $lines[] = '<urlset>';
             $lines[] = '</urlset>';
             $lines = implode("\r\n", $lines);
