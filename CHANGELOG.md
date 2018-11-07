@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.28 - 2018.11.07
+### Changed
+* Remove `__home__` from preview URIs
+
 ## 3.1.27 - 2018.11.07
 ### Changed
 * Fixed an issue where sitemaps generated in the AdminCP did not have the proper cache duration set, so they were always invalidated
