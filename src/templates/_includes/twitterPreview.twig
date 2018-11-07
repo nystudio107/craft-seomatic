@@ -35,13 +35,13 @@
                 var x = document.getElementsByClassName("TwitterCard-image-wrapper");
                 var i;
                 for (i = 0; i < x.length; i++) {
-                    x[i].style.backgroundImage = "url(" + "{{ baseAssetsUrl ~ '/img/no_image_set.png' }}" + ")";
+                    x[i].style.backgroundImage = "url('" + "{{ baseAssetsUrl ~ '/img/no_image_set.png' }}" + "')";
                     {% if twitterImageArray.content is defined and twitterImageArray.content |length %}
                     {% set cacheBustString = "" %}
                     {% if "?" not in twitterImageArray.content %}
                         {% set cacheBustString = "?mtime=" ~ now|date('U') %}
                     {% endif %}
-                    x[i].style.backgroundImage = "url(" + "{{ (twitterImageArray.content ~ cacheBustString) | raw }}" + ")";
+                    x[i].style.backgroundImage = "url('" + "{{ (twitterImageArray.content ~ cacheBustString) | raw }}" + "')";
                     {% endif %}
                 }
             </script>

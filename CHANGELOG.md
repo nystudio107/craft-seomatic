@@ -1,5 +1,12 @@
 # SEOmatic Changelog
 
+## 3.1.27 - 2018.11.07
+### Changed
+* Fixed an issue where sitemaps generated in the AdminCP did not have the proper cache duration set, so they were always invalidated
+* Disabled tracking scripts from sending Page View data during Live Preview
+* Ensure background image values are quoted for the SEO previews
+* If `runQueueAutomatically` is set, start running the queue job to generate the sitemap immediately
+
 ## 3.1.26 - 2018.11.05
 ### Changed
 * Don't regenerate the sitemaps when elements are being re-saved enmasse via Section resaving
