@@ -96,7 +96,7 @@ class MetaBundles extends Component
      * Get the global meta bundle for the site
      *
      * @param int  $sourceSiteId
-     * @param bool $parse         Whether the resulting metabundle should be parsed
+     * @param bool $parse Whether the resulting metabundle should be parsed
      *
      * @return null|MetaBundle
      */
@@ -407,26 +407,24 @@ class MetaBundles extends Component
                     __METHOD__
                 );
                 $metaBundleInvalidated = true;
-                if (!$isNew) {
-                    Seomatic::$plugin->metaContainers->invalidateContainerCacheByPath($uri, $sourceSiteId);
-                    // Invalidate the sitemap cache
-                    $metaBundle = $this->getMetaBundleBySourceId($sourceBundleType, $sourceId, $sourceSiteId);
-                    if ($metaBundle) {
-                        if ($element) {
-                            $dateUpdated = $element->dateUpdated ?? $element->dateCreated;
-                        } else {
-                            $dateUpdated = new \DateTime();
-                        }
-                        $metaBundle->sourceDateUpdated = $dateUpdated;
-                        // Update the meta bundle data
-                        $this->updateMetaBundle($metaBundle, $sourceSiteId);
-                        if ($metaBundle && $element->scenario !== Element::SCENARIO_ESSENTIALS) {
-                            Seomatic::$plugin->sitemaps->invalidateSitemapCache(
-                                $metaBundle->sourceHandle,
-                                $metaBundle->sourceSiteId,
-                                $metaBundle->sourceBundleType
-                            );
-                        }
+                Seomatic::$plugin->metaContainers->invalidateContainerCacheByPath($uri, $sourceSiteId);
+                // Invalidate the sitemap cache
+                $metaBundle = $this->getMetaBundleBySourceId($sourceBundleType, $sourceId, $sourceSiteId);
+                if ($metaBundle) {
+                    if ($element) {
+                        $dateUpdated = $element->dateUpdated ?? $element->dateCreated;
+                    } else {
+                        $dateUpdated = new \DateTime();
+                    }
+                    $metaBundle->sourceDateUpdated = $dateUpdated;
+                    // Update the meta bundle data
+                    $this->updateMetaBundle($metaBundle, $sourceSiteId);
+                    if ($metaBundle && $element->scenario !== Element::SCENARIO_ESSENTIALS) {
+                        Seomatic::$plugin->sitemaps->invalidateSitemapCache(
+                            $metaBundle->sourceHandle,
+                            $metaBundle->sourceSiteId,
+                            $metaBundle->sourceBundleType
+                        );
                     }
                 }
             }
@@ -534,7 +532,7 @@ class MetaBundles extends Component
             case Entry::class:
             case EntryDraft::class:
             case EntryVersion::class:
-            /** @var  $element Entry */
+                /** @var  $element Entry */
                 $sourceId = $element->sectionId;
                 $sourceSiteId = $element->siteId;
                 $sourceHandle = $element->section->handle;
@@ -640,8 +638,8 @@ class MetaBundles extends Component
     }
 
     /**
-     * Set fields the user is unable to edit to an empty string, so they are filtered out
-     * when meta containers are combined
+     * Set fields the user is unable to edit to an empty string, so they are
+     * filtered out when meta containers are combined
      *
      * @param MetaBundle $metaBundle
      * @param string     $fieldHandle
