@@ -1,5 +1,11 @@
 # SEOmatic Changelog
 
+## 3.1.28 - 2018.11.07
+### Changed
+* Remove `__home__` from preview URIs
+* Fixed a regression that caused the SEO Settings field to not override things like Facebook/Twitter images properly
+* Fixed an issue that caused the SEO Settings field to not display tabs properly if the General tab was hidden
+
 ## 3.1.27 - 2018.11.07
 ### Changed
 * Fixed an issue where sitemaps generated in the AdminCP did not have the proper cache duration set, so they were always invalidated
