@@ -341,7 +341,7 @@ class MetaContainers extends Component
         $homeUrl = '/';
         $canonicalUrl = $uri;
         // Special-case the global bundle
-        if ($uri === MetaBundles::GLOBAL_META_BUNDLE) {
+        if ($uri === MetaBundles::GLOBAL_META_BUNDLE || $uri = '__home__') {
             $canonicalUrl = '/';
         }
         try {
