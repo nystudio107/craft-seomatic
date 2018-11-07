@@ -331,8 +331,14 @@ class GenerateSitemap extends BaseJob
             ],
         ]);
         $lines = implode("\r\n", $lines);
-        // Cache sitemap caches forever, even with devMode on
-        $cache->set($cacheKey, $lines, Seomatic::$cacheDuration, $dependency);
+        // Cache sitemap cache; we use this instead of Seomatic::$cacheDuration because for
+        // AdminCP requests, we set Seomatic::$cacheDuration = 1 so that they are never
+        // cached
+        $cacheDuration = Seomatic::$devMode
+            ? Seomatic::DEVMODE_CACHE_DURATION
+            : null;
+        $result = $cache->set($cacheKey, $lines, $cacheDuration, $dependency);
+        Craft::debug('Sitemap cache result: '.print_r($result, true).' for cache key: '.$cacheKey, __METHOD__);
     }
 
     // Protected Methods
