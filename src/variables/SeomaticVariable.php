@@ -25,8 +25,6 @@ use nystudio107\seomatic\services\Title;
 use nystudio107\seomatic\services\MetaContainers;
 use nystudio107\seomatic\services\MetaBundles;
 
-use yii\di\ServiceLocator;
-
 /**
  * Seomatic defines the `seomatic` global template variable.
  *
@@ -41,7 +39,7 @@ use yii\di\ServiceLocator;
  * @package   Seomatic
  * @since     3.0.0
  */
-class SeomaticVariable extends ServiceLocator
+class SeomaticVariable extends ManifestVariable
 {
     // Properties
     // =========================================================================
