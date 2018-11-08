@@ -55,7 +55,8 @@ module.exports = {
             "./src/assetbundles/seomatic/src/vue/**/*.{vue,html}"
         ],
         whitelist: [
-            "./src/assetbundles/seomatic/src/css/components/**/*.{css,pcss}"
+            "./src/assetbundles/seomatic/src/css/components/**/*.{css}",
+            "./node_modules/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.css"
         ],
         whitelistPatterns: [],
         extensions: [
