@@ -15,19 +15,11 @@
  */
 
 // CSS
-require('../css/css-reset.css');
-require('../css/seomatic.css');
+require('../css/app.pcss');
 require('bootstrap-tokenfield/dist/css/bootstrap-tokenfield.min.css');
 
 // Images
 require('../img/Seomatic-icon.svg');
-require('../img/link-icon.svg');
-require('../img/redirects-icon.svg');
-require('../img/script-icon.svg');
-require('../img/sitemap-icon.svg');
-require('../img/structured-data-icon.svg');
-require('../img/tags-icon.svg');
-require('../img/variables-icon.svg');
 require('../img/missing_image.png');
 require('../img/no_image_set.png');
 
