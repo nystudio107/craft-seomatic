@@ -110,11 +110,23 @@ const configureOptimization = () => {
         splitChunks: {
             cacheGroups: {
                 vendor: {
-                    test: /node_modules/,
-                    chunks: "initial",
                     name: "vendor",
-                    priority: 10,
-                    enforce: true
+                    chunks: "initial",
+                    test: /node_modules/,
+                    chunks: 'all',
+                    priority: 10
+                },
+                brace: {
+                    test: /[\\/]node_modules[\\/](brace)[\\/]/,
+                    name: 'brace',
+                    chunks: 'all',
+                    priority: 20
+                },
+                apexcharts: {
+                    test: /[\\/]node_modules[\\/](apexcharts)[\\/]/,
+                    name: 'apexcharts',
+                    chunks: 'all',
+                    priority: 20
                 },
                 styles: {
                     name: settings.vars.cssName,
