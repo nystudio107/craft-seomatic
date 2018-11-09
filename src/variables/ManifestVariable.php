@@ -121,14 +121,12 @@ class ManifestVariable
      * @param string $type
      * @param null   $config
      *
-     * @return null|\Twig_Markup
+     * @return null|string
      * @throws \yii\web\NotFoundHttpException
      */
     public function getModuleUri(string $moduleName, string $type = 'modern', $config = null)
     {
-        return Template::raw(
-            ManifestHelper::getModule(self::$config, $moduleName, $type)
-        );
+        return ManifestHelper::getModule(self::$config, $moduleName, $type, true);
     }
 
     /**

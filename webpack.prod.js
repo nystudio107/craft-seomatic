@@ -107,7 +107,6 @@ const configureImageLoader = () => {
 // Configure optimization
 const configureOptimization = () => {
     return {
-        runtimeChunk: true,
         splitChunks: {
             chunks: 'initial',
             cacheGroups: {

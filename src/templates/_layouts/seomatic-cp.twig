@@ -1,5 +1,7 @@
 {% extends "_layouts/cp" %}
 
+{% from 'seomatic/_includes/macros.twig' import registerJsModules %}
+
 {% block head %}
     {{ parent() }}
     {{ seomatic.manifest.includeCssModule("styles.css", false) }}
@@ -7,7 +9,8 @@
 
 {% block foot %}
     {{ parent() }}
-    {% do view.registerJsFile(seomatic.manifest.getModuleUri("seomatic.js"), {
-        'depends': 'craft\\web\\assets\\cp\\CpAsset'
-    }) %}
+    {% set jsModules = [
+        'seomatic.js',
+    ] %}
+    {{ registerJsModules(jsModules) }}
 {% endblock %}
