@@ -16,7 +16,6 @@
 
 // CSS
 require('../css/app.pcss');
-require('bootstrap-tokenfield/dist/css/bootstrap-tokenfield.min.css');
 
 // Images
 require('../img/Seomatic-icon.svg');

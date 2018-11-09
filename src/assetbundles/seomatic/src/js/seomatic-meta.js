@@ -15,11 +15,7 @@
  */
 
 // JavaScript
-import $ from 'jquery';
-window.jQuery = $;
-window.$ = $;
-
-require('bootstrap-tokenfield/js/bootstrap-tokenfield.js');
+import tokenfield from 'bootstrap-tokenfield/js/bootstrap-tokenfield.js';
 
 /**
  * Fill a dynamic schema.org type menu with the schema hierarchy in path
@@ -68,7 +64,6 @@ function fillDynamicSchemaMenu(menuId, menuValue, path, subTypes, blankItem, cal
 
 }
 
-
 function seomaticTabChangeHandler() {
     // Tab handler
     $('.seomatic-tab-links').on('click', function(e) {
@@ -89,7 +84,6 @@ $(function() {
     $('.seomatic-keywords').tokenfield({
         createTokensOnBlur: true,
     });
-
 
     // Show/hide the script settings containers
     var selector = $('.seomatic-script-lightswitch').find('.lightswitch');
@@ -225,5 +219,4 @@ $(function() {
                 break;
         }
     });
-
 });

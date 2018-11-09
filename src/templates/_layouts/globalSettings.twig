@@ -6,7 +6,9 @@
 
 {% block foot %}
     {{ parent() }}
-    {{ seomatic.manifest.includeJsModule("seomatic-meta.js", false) }}
+    {% do view.registerJsFile(seomatic.manifest.getModuleUri("seomatic-meta.js"), {
+        'depends': 'craft\\web\\assets\\cp\\CpAsset'
+    }) %}
 {% endblock %}
 
 {% set navItems = {
