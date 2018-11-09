@@ -65,15 +65,10 @@ const configureImageLoader = () => {
 // Configure optimization
 const configureOptimization = () => {
     return {
+        runtimeChunk: true,
         splitChunks: {
+            chunks: 'initial',
             cacheGroups: {
-                vendor: {
-                    test: /node_modules/,
-                    chunks: "initial",
-                    name: "vendor",
-                    priority: 10,
-                    enforce: true
-                }
             }
         },
     };

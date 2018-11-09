@@ -9,6 +9,9 @@
     {% do view.registerJsFile(seomatic.manifest.getModuleUri("seomatic-meta.js"), {
         'depends': 'craft\\web\\assets\\cp\\CpAsset'
     }) %}
+    {% do view.registerJsFile(seomatic.manifest.getModuleUri("vendors~seomatic-meta.js"), {
+        'depends': 'craft\\web\\assets\\cp\\CpAsset'
+    }) %}
 {% endblock %}
 
 {% set navItems = {

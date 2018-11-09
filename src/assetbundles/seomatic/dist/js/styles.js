@@ -2,8 +2,8 @@
  * @project        SEOmatic
  * @name           styles.js
  * @author         Andrew Welch
- * @build          Fri, Nov 9, 2018 6:02 AM ET
- * @release        c8ff5cf3c0d649371cb562af9017aa00b790f768 [feature/modernize-webpack]
+ * @build          Fri, Nov 9, 2018 6:13 AM ET
+ * @release        ccebc1d6d76812287de10501cc870f96418456fd [feature/modernize-webpack]
  * @copyright      Copyright (c) 2018 nystudio107
  *
  */
