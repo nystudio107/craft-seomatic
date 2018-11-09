@@ -46,7 +46,7 @@ class SettingsController extends Controller
     // Constants
     // =========================================================================
 
-    const DOCUMENTATION_URL = 'https://github.com/nystudio107/craft-seomatic/wiki';
+    const DOCUMENTATION_URL = 'https://github.com/nystudio107/craft-seomatic';
 
     const SETUP_GRADES = [
         ['id' => 'data1', 'name' => 'A', 'color' => '#008002'],
