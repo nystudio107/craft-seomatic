@@ -15,6 +15,10 @@
  */
 
 // JavaScript
+import $ from 'jquery';
+window.jQuery = $;
+window.$ = $;
+
 require('bootstrap-tokenfield/js/bootstrap-tokenfield.js');
 
 /**
@@ -85,7 +89,6 @@ $(function() {
     $('.seomatic-keywords').tokenfield({
         createTokensOnBlur: true,
     });
-
 
 
     // Show/hide the script settings containers

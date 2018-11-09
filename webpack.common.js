@@ -91,6 +91,10 @@ const baseConfig = {
     },
     module: {
         rules: [
+            {
+                test: /bootstrap-tokenfield[\/\\]js[\/\\]bootstrap-tokenfield.js$/,
+                loader: "imports-loader?define=>false"
+            },
             configureFontLoader(),
             configureVueLoader(),
         ],
