@@ -7,7 +7,6 @@
 
 {% block foot %}
     {{ parent() }}
-    {{ seomatic.manifest.includeJsModule("vendor.js", false) }}
     {% do view.registerJsFile(seomatic.manifest.getModuleUri("seomatic.js"), {
         'depends': 'craft\\web\\assets\\cp\\CpAsset'
     }) %}
