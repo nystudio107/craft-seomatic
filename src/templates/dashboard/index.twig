@@ -46,7 +46,15 @@
             <div class="flex">
                 <div class="flex-grow">
                     <h3 class="centeralign">Global SEO Setup</h3>
-                    <div id="GlobalSEOChart" style="width: 300px; margin: 0 auto;"></div>
+                    <div id="GlobalSEOChart" style="width: 300px; margin: 0 auto;">
+                        <dashboard-chart
+                                         :series="[{{ globalSetupStat | join(',') }}]"
+                                         :colors="['#008FFB', '#DCE6EC']"
+                                         :labels="[]"
+                        >
+                        
+                        </dashboard-chart>
+                    </div>
                 </div>
                 <div class="flex-grow">
                     <h3 class="centeralign">Content SEO Setup</h3>
