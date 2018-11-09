@@ -8,9 +8,7 @@ use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use Craft;
 use craft\helpers\Template;
 
-use yii\di\ServiceLocator;
-
-class ManifestVariable extends ServiceLocator
+class ManifestVariable
 {
     // Protected Static Properties
     // =========================================================================
@@ -45,7 +43,6 @@ class ManifestVariable extends ServiceLocator
      */
     public function __construct($config = [])
     {
-        parent::__construct($config);
         ManifestHelper::invalidateCaches();
         $bundle = new SeomaticAsset();
         $baseAssetsUrl = Craft::$app->assetManager->getPublishedUrl(

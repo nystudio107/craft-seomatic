@@ -1,0 +1,7 @@
+{% extends "_layouts/cp" %}
+
+{% block head %}
+    {{ parent() }}
+    {{ seomatic.manifest.includeCssModule("styles.css", false) }}
+    {{ seomatic.manifest.includeJsModule("seomatic.js", false) }}
+{% endblock %}
