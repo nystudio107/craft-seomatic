@@ -31,8 +31,11 @@ module.exports = {
         cssName: "styles"
     },
     entries: {
+        "dashboard": "dashboard.js",
         "seomatic": "seomatic.js",
         "seomatic-meta": "seomatic-meta.js",
+        "twig-editor": "twig-editor.js",
+        "javascript-editor": "javascript-editor.js",
     },
     copyWebpackConfig: [
     ],
