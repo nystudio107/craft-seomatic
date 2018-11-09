@@ -1,11 +1,22 @@
 {# @var craft \craft\web\twig\variables\CraftVariable #}
 {# @var metaBundle \nystudio107\seomatic\models\MetaBundle #}
-{% extends '_layouts/cp' %}
+{% extends 'seomatic/_layouts/seomatic-cp.twig' %}
+
+{% from 'seomatic/_includes/macros.twig' import registerJsModules %}
 
 {% set linkGetStarted = url('seomatic/global') %}
 
 {% do view.registerAssetBundle("nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset") %}
 {% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/assetbundles/seomatic/dist', true) %}
+
+{% block foot %}
+    {{ parent() }}
+    {% set jsModules = [
+        'vendors~dashboard.js',
+        'dashboard.js',
+    ] %}
+    {{ registerJsModules(jsModules) }}
+{% endblock %}
 
 {% block contextMenu %}
     {% include "seomatic/settings/_includes/sites-menu.twig" %}
@@ -18,44 +29,42 @@
             font-family: system-ui, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
         }
     </style>
-    <div class="field readable">
-            {% if showWelcome %}
-                <div class="readable" style="text-align:center; margin:0 auto; padding: 5% 10%;">
-                    <img src="{{ baseAssetsUrl ~ '/img/Seomatic-icon.svg' }}"
-                         width="30%" height="auto"/>
-                    <h2>Thanks for using SEOmatic!</h2>
-                    <p>
-                        This Dashboard will show you how set up your SEO implementation is; you can click on any shaded part of the graphs to go to the settings that need your attention.
-                    </p>
-                    <p>
-                        SEOmatic for Craft CMS 3 is a complete re-write and re-architecture from scratch of the plugin. This allowed us to take what we learned from SEOmatic 1.x, and rebuild it with a much more robust and extendable architecture.
-                    </p>
-                    <p>
-                        We hope you love it!
-                    </p>
+    <div id="cp-nav-content">
+        <div class="field readable">
+                {% if showWelcome %}
+                    <confetti></confetti>
+                    <div class="readable" style="text-align:center; margin:0 auto; padding: 5% 10%;">
+                        <img src="{{ baseAssetsUrl ~ '/img/Seomatic-icon.svg' }}"
+                             width="30%" height="auto"/>
+                        <h2>Thanks for using SEOmatic!</h2>
+                        <p>
+                            This Dashboard will show you how set up your SEO implementation is; you can click on any shaded part of the graphs to go to the settings that need your attention.
+                        </p>
+                        <p>We hope you love it! For more information, please <a href="{{ docsUrl }}" target="_blank" rel="noopener">see the documentation</a>.</p>
+                    </div>
+                {% endif %}
+            <div class="flex">
+                <div class="flex-grow">
+                    <h3 class="centeralign">Global SEO Setup</h3>
+                    <div id="GlobalSEOChart" style="width: 300px; margin: 0 auto;"></div>
                 </div>
-            {% endif %}
-        <div class="flex">
-            <div class="flex-grow">
-                <h3 class="centeralign">Global SEO Setup</h3>
-                <div id="GlobalSEOChart" style="width: 300px; margin: 0 auto;"></div>
+                <div class="flex-grow">
+                    <h3 class="centeralign">Content SEO Setup</h3>
+                    <div id="ContentSEOChart" style="width: 300px; margin: 0 auto;"></div>
+                </div>
+                <div class="flex-grow">
+                    <h3 class="centeralign">Site Settings Setup</h3>
+                    <div id="SiteSettingsChart" style="width: 300px; margin: 0 auto;"></div>
+                </div>
             </div>
-            <div class="flex-grow">
-                <h3 class="centeralign">Content SEO Setup</h3>
-                <div id="ContentSEOChart" style="width: 300px; margin: 0 auto;"></div>
-            </div>
-            <div class="flex-grow">
-                <h3 class="centeralign">Site Settings Setup</h3>
-                <div id="SiteSettingsChart" style="width: 300px; margin: 0 auto;"></div>
-            </div>
+    
         </div>
-
     </div>
 {% endset %}
 
 
 {############### Global SEO Graph ###############}
-
+{#
 {% js %}
     var chart = bb.generate({
         data: {
@@ -100,8 +109,11 @@
         bindto: "#GlobalSEOChart"
     });
 {% endjs %}
+#}
 
 {############### Content SEO Graph ###############}
+
+{#
 
 {% js %}
     var chart = bb.generate({
@@ -136,9 +148,11 @@
     });
 {% endjs %}
 
+#}
 
 {############### Site Settings Graph ###############}
 
+{#
 {% js %}
     var chart = bb.generate({
         data: {
@@ -183,3 +197,4 @@
         bindto: "#SiteSettingsChart"
     });
 {% endjs %}
+#}
