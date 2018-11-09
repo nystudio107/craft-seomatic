@@ -1,7 +1,6 @@
 {% extends "_layouts/cp" %}
 
 {% block head %}
-    {% do view.registerJsFile(seomatic.manifest.getModuleUri("vendor.js")) %}
     {{ parent() }}
     {{ seomatic.manifest.includeCssModule("styles.css", false) }}
 {% endblock %}
@@ -9,5 +8,7 @@
 {% block foot %}
     {{ parent() }}
     {{ seomatic.manifest.includeJsModule("vendor.js", false) }}
-    {{ seomatic.manifest.includeJsModule("seomatic.js", false) }}
+    {% do view.registerJsFile(seomatic.manifest.getModuleUri("seomatic.js"), {
+        'depends': 'craft\\web\\assets\\cp\\CpAsset'
+    }) %}
 {% endblock %}
