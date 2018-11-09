@@ -202,6 +202,8 @@ EOT;
                     Craft::error($e->getMessage(), __METHOD__);
                 }
             }
+        } else {
+            $module = '';
         }
 
         return $module;

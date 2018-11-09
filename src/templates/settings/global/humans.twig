@@ -1,6 +1,7 @@
 {% requirePermission "seomatic:global-meta:humans" %}
 
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
+{% from 'seomatic/_includes/macros.twig' import registerJsModules %}
 
 {% extends "seomatic/_layouts/globalSettings.twig" %}
 
@@ -12,6 +13,16 @@
     <div class="flex-grow"></div>
     <div class="flex-grow"></div>
     {{ block('actionButton') }}
+{% endblock %}
+
+{% block foot %}
+    {{ parent() }}
+    {% set jsModules = [
+        'vendors~javascript-editor~twig-editor.js',
+        'vendors~twig-editor.js',
+        'twig-editor.js',
+    ] %}
+    {{ registerJsModules(jsModules) }}
 {% endblock %}
 
 {% block contextMenu %}
