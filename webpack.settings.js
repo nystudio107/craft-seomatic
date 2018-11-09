@@ -33,9 +33,6 @@ module.exports = {
     entries: {
         "seomatic": "seomatic.js",
         "seomatic-meta": "seomatic-meta.js",
-        "dashboard": "dashboard.js",
-        "twig-editor": "twig-editor.js",
-        "javascript-editor": "javascript-editor.js",
     },
     copyWebpackConfig: [
     ],

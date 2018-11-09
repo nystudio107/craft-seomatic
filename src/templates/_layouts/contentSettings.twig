@@ -2,6 +2,10 @@
 
 {% block head %}
     {{ parent() }}
+{% endblock %}
+
+{% block foot %}
+    {{ parent() }}
     {{ seomatic.manifest.includeJsModule("seomatic-meta.js", false) }}
 {% endblock %}
 
