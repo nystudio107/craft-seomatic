@@ -92,10 +92,11 @@
                             setupGradeLabel(setupGrades, globalSetupStat),
                         ] %}
                         <dashboard-radial-chart :series="[{{ globalSetupStat }}]"
-                                         :colors="[{{ colors | join(',') | raw }}]"
-                                         :labels="[{{ grades | join(',') | raw }}]"
+                                                :colors="[{{ colors | join(',') | raw }}]"
+                                                :labels="[{{ grades | join(',') | raw }}]"
+                                                :url="'{{ cpUrl('seomatic/global/general/' ~ currentSiteHandle) | raw }}'"
                         >
-                        
+
                         </dashboard-radial-chart>
                     </div>
                 </div>
@@ -120,8 +121,9 @@
                         <dashboard-multi-radial-chart :series="[{{ contentStats | join(',')  }}]"
                                                       :colors="[{{ colors | join(',') | raw }}]"
                                                       :labels="['A', 'B', 'C', 'D']"
+                                                      :url="'{{ cpUrl('seomatic/content/' ~ currentSiteHandle) | raw }}'"
                         >
-    
+
                         </dashboard-multi-radial-chart>
                     </div>
                 </div>
@@ -137,13 +139,14 @@
                         <dashboard-radial-chart :series="[{{ siteSetupStat }}]"
                                                 :colors="[{{ colors | join(',') | raw }}]"
                                                 :labels="[{{ grades | join(',') | raw }}]"
+                                                :url="'{{ cpUrl('seomatic/site/identity/' ~ currentSiteHandle) | raw }}'"
                         >
-    
+
                         </dashboard-radial-chart>
                     </div>
                 </div>
             </div>
-    
+
         </div>
     </div>
 {% endset %}

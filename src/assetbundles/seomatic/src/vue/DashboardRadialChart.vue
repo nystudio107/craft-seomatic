@@ -1,5 +1,5 @@
 <template>
-    <apexcharts width="100%" height="400px" type="radialBar" :options="chartOptions" :series="series"></apexcharts>
+    <apexcharts class="cursor-pointer" width="100%" height="400px" type="radialBar" :options="chartOptions" :series="series"></apexcharts>
 </template>
 
 <script>
@@ -15,11 +15,11 @@
             labels: Array,
             series: Array,
             showLabels: {type: Boolean, default: false},
+            url: {type: String, default: ''},
         },
         methods: {
         },
         created: function() {
-            console.log(this.series);
         },
         data: function() {
             return {
@@ -27,6 +27,12 @@
                     chart: {
                         toolbar: {
                             show: false,
+                        },
+                        events: {
+                            click: (event, chartContext, config) => {
+                                console.log(this.url);
+                                window.location = this.url;
+                            }
                         },
                     },
                     plotOptions: {
