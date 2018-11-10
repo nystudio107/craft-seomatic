@@ -3,7 +3,6 @@
 {% extends "seomatic/_layouts/trackingSettings.twig" %}
 
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
-{% from 'seomatic/_includes/macros.twig' import registerJsModules %}
 {% import "_includes/forms" as forms %}
 
 {% block header %}
@@ -12,18 +11,6 @@
     <div class="flex-grow"></div>
     <div class="flex-grow"></div>
     {{ block('actionButton') }}
-{% endblock %}
-
-{% block foot %}
-    {{ parent() }}
-    {% set jsModules = [
-        'vendors~seomatic-meta.js',
-        'seomatic-meta.js',
-        'vendors~javascript-editor~twig-editor.js',
-        'vendors~javascript-editor.js',
-        'javascript-editor.js',
-    ] %}
-    {{ registerJsModules(jsModules) }}
 {% endblock %}
 
 {% block contextMenu %}
@@ -71,7 +58,7 @@
                                         on: varData.value,
                                         warning: false,
                                     }) }}
-    
+
                                 {% case "string" %}
                                     {{ forms.textField({
                                         label: "#{varData.title}"|t("seomatic"),
@@ -81,12 +68,12 @@
                                         value: varData.value ?? "",
                                         warning: false,
                                     }) }}
-    
+
                                 {% default %}
-    
+
                             {% endswitch %}
                         {% endfor %}
-    
+
                         {{ forms.textAreaField({
                             label: "Script Template"|t("seomatic"),
                             instructions: "The script that will render on the page. Note that this script will not render in `local` development or `staging` environments."|t("seomatic"),
@@ -97,7 +84,7 @@
                             warning: false,
                             errors: scriptData.getErrors("templateString"),
                         }) }}
-    
+
                         {{ forms.selectField({
                             label: "Script Render Location"|t("seomatic"),
                             instructions: "Determaines where in the HTML document the script renders."|t("seomatic"),

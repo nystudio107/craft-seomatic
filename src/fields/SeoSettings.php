@@ -215,6 +215,20 @@ class SeoSettings extends Field
     public function getSettingsHtml()
     {
         $variables = [];
+        // JS/CSS modules
+        try {
+            Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
+            $this->registerCssModules([
+                'styles.css',
+            ]);
+            $this->registerJsModules([
+                'vendors~seomatic-meta.js',
+                'seomatic-meta.js',
+                'seomatic.js',
+            ]);
+        } catch (InvalidConfigException $e) {
+            Craft::error($e->getMessage(), __METHOD__);
+        }
         // Asset bundle
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
@@ -240,7 +254,7 @@ class SeoSettings extends Field
     public function getInputHtml($value, ElementInterface $element = null): string
     {
         $variables = [];
-        // Asset bundle
+        // JS/CSS modules
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
             $this->registerCssModules([
@@ -254,7 +268,7 @@ class SeoSettings extends Field
         } catch (InvalidConfigException $e) {
             Craft::error($e->getMessage(), __METHOD__);
         }
-
+        // Asset bundle
         $variables['baseAssetsUrl'] = Craft::$app->assetManager->getPublishedUrl(
             '@nystudio107/seomatic/assetbundles/seomatic/dist',
             true
