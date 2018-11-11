@@ -9,6 +9,7 @@
 
 namespace nystudio107\seomatic\fields;
 
+use craft\base\PreviewableFieldInterface;
 use craft\web\assets\cp\CpAsset;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
@@ -28,7 +29,6 @@ use craft\elements\Asset;
 use craft\helpers\Json;
 use craft\helpers\StringHelper;
 
-use nystudio107\seomatic\variables\ManifestVariable;
 use yii\base\InvalidConfigException;
 use yii\db\Schema;
 use yii\web\NotFoundHttpException;
@@ -38,10 +38,15 @@ use yii\web\NotFoundHttpException;
  * @package   Seomatic
  * @since     3.0.0
  */
-class SeoSettings extends Field
+class SeoSettings extends Field implements PreviewableFieldInterface
 {
     // Public Properties
     // =========================================================================
+
+    /**
+     * @var string
+     */
+    public $elementDisplayPreviewType = 'google';
 
     /**
      * @var bool
@@ -108,6 +113,30 @@ class SeoSettings extends Field
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
+            [
+                [
+                    'elementDisplayPreviewType',
+                ],
+                'string',
+            ],
+            [
+                [
+                    'generalTabEnabled',
+                    'twitterTabEnabled',
+                    'facebookTabEnabled',
+                    'sitemapTabEnabled',
+                ],
+                'boolean',
+            ],
+            [
+                [
+                    'generalEnabledFields',
+                    'twitterEnabledFields',
+                    'facebookEnabledFields',
+                    'sitemapEnabledFields',
+                ],
+                'each', 'rule' => ['string']],
+
         ]);
 
         return $rules;
@@ -310,6 +339,32 @@ class SeoSettings extends Field
             'seomatic/_components/fields/SeoSettings_input',
             $variables
         );
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getTableAttributeHtml($value, ElementInterface $element): string
+    {
+        /** @var Element $element */
+        if ($element !== null && $element->uri !== null) {
+            Seomatic::$plugin->metaContainers->previewMetaContainers($element->uri, $element->siteId, true);
+            $variables = [
+                'previewTypes' => [
+                    $this->elementDisplayPreviewType ?? ''
+                ],
+            ];
+            // Render our preview table template
+            if (Seomatic::$matchedElement) {
+                return Craft::$app->getView()->renderTemplate(
+                    'seomatic/_includes/table-preview.twig',
+                    $variables
+                );
+            }
+        }
+
+        // Render the input template
+        return '';
     }
 
     // Protected Methods

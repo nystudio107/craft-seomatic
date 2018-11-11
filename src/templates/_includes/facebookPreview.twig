@@ -7,9 +7,12 @@
 {# Always display the Facebook OpenGraph preview now. Used to be:
 set previewFacebook = seomatic.site.facebookAppId |length or seomatic.site.facebookProfileId |length
 #}
+{% set showSeoTitleNames = showSeoTitleNames ?? true %}
 <div class="preview-column">
     <div class="displaypreview" style="{{ displayPreviewInlineStyles ?? '' }}">
-        <h1>Facebook:</h1>
+        {% if showSeoTitleNames %}
+            <h1>Facebook:</h1>
+        {% endif %}
         {% if previewFacebook %}
             <div class="Facebook-container">
                 <div class="">
