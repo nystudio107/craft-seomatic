@@ -58,7 +58,7 @@
                                         on: varData.value,
                                         warning: false,
                                     }) }}
-    
+
                                 {% case "string" %}
                                     {{ forms.textField({
                                         label: "#{varData.title}"|t("seomatic"),
@@ -68,12 +68,12 @@
                                         value: varData.value ?? "",
                                         warning: false,
                                     }) }}
-    
+
                                 {% default %}
-    
+
                             {% endswitch %}
                         {% endfor %}
-    
+
                         {{ forms.textAreaField({
                             label: "Script Template"|t("seomatic"),
                             instructions: "The script that will render on the page. Note that this script will not render in `local` development or `staging` environments."|t("seomatic"),
@@ -84,7 +84,7 @@
                             warning: false,
                             errors: scriptData.getErrors("templateString"),
                         }) }}
-    
+
                         {{ forms.selectField({
                             label: "Script Render Location"|t("seomatic"),
                             instructions: "Determaines where in the HTML document the script renders."|t("seomatic"),
