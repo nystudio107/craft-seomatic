@@ -1,17 +1,33 @@
 {% do view.registerAssetBundle("nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset") %}
 {% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/assetbundles/seomatic/dist', true) %}
 
+{% from 'seomatic/_includes/macros.twig' import registerJsModules %}
+
+{{ seomatic.manifest.includeCssModule("styles.css", false) }}
+
+{% set jsModules = [
+    'seomatic.js',
+] %}
+{{ registerJsModules(jsModules) }}
+
 {% set displayPreviewInlineStyles = "border: none; padding-left: 0;" %}
+{% set previewTypes = previewTypes ?? ['google', 'twitter', 'facebook'] %}
 <hr />
 <div class="meta">
     <div class="data">
         <h5 class="heading">{{ "SEO Preview:"|t('seomatic') }}</h5>
     </div>
     <div style="zoom: 0.60; -moz-transform: scale(0.60); -moz-transform-origin: 0 0;">
-        {% include "seomatic/_includes/googlePreview.twig" %}
+        {% if 'google' in previewTypes %}
+            {% include "seomatic/_includes/googlePreview.twig" %}
+        {% endif %}
 
-        {% include "seomatic/_includes/twitterPreview.twig" %}
+        {% if 'twitter' in previewTypes %}
+            {% include "seomatic/_includes/twitterPreview.twig" %}
+        {% endif %}
 
-        {% include "seomatic/_includes/facebookPreview.twig" %}
+        {% if 'facebook' in previewTypes %}
+            {% include "seomatic/_includes/facebookPreview.twig" %}
+        {% endif %}
     </div>
 </div>
