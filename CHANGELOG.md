@@ -1,5 +1,12 @@
 # SEOmatic Changelog
 
+## 3.1.29 - 2018.11.11
+### Changed
+* Added the ability to show SEO Settings fields in the Element Index's Table Columns
+* Redid the Dashboard graphs to be more useful and modern looking
+* Modernized package.json and webpack build
+* Confetti on install (yay!)
+
 ## 3.1.28 - 2018.11.07
 ### Changed
 * Remove `__home__` from preview URIs
