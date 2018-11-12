@@ -11,7 +11,6 @@ namespace nystudio107\seomatic\controllers;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
-use nystudio107\seomatic\assetbundles\seomatic\SeomaticChartAsset;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\helpers\PullField as PullFieldHelper;
 use nystudio107\seomatic\helpers\ArrayHelper;
@@ -47,7 +46,7 @@ class SettingsController extends Controller
     // Constants
     // =========================================================================
 
-    const DOCUMENTATION_URL = 'https://github.com/nystudio107/craft-seomatic/wiki';
+    const DOCUMENTATION_URL = 'https://github.com/nystudio107/craft-seomatic';
 
     const SETUP_GRADES = [
         ['id' => 'data1', 'name' => 'A', 'color' => '#008002'],
@@ -118,7 +117,6 @@ class SettingsController extends Controller
         // Asset bundle
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
-            Seomatic::$view->registerAssetBundle(SeomaticChartAsset::class);
         } catch (InvalidConfigException $e) {
             Craft::error($e->getMessage(), __METHOD__);
         }

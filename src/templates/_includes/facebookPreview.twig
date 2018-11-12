@@ -7,15 +7,19 @@
 {# Always display the Facebook OpenGraph preview now. Used to be:
 set previewFacebook = seomatic.site.facebookAppId |length or seomatic.site.facebookProfileId |length
 #}
+{% set showSeoTitleNames = showSeoTitleNames ?? true %}
+{% set previewElementId = previewElementId ?? 0 %}
 <div class="preview-column">
     <div class="displaypreview" style="{{ displayPreviewInlineStyles ?? '' }}">
-        <h1>Facebook:</h1>
+        {% if showSeoTitleNames %}
+            <h1>Facebook:</h1>
+        {% endif %}
         {% if previewFacebook %}
             <div class="Facebook-container">
                 <div class="">
                     <a href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
                         <div class="Facebook-image-wrap">
-                            <div id="facebook-post-image" class="Facebook-post-image" style="width:470px;height:246px;">
+                            <div class="{{ previewElementId }}-Facebook-post-image Facebook-post-image" style="width:470px;height:246px;">
                             </div>
                         </div>
                     </a>
@@ -23,10 +27,10 @@ set previewFacebook = seomatic.site.facebookAppId |length or seomatic.site.faceb
                 <div class="facebook-text-wrap">
                     <div class="Facebook-text-container">
                         <div class="Facebook-headline">
-                            <a class="Facebook-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">{{ (ogTitleArray.content ?? "") |raw }}</a>
+                            <a class="Facebook-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">{{ (ogTitleArray.content ?? "") }}</a>
                         </div>
                         <div class="Facebook-text">
-                            {{ (ogDescriptionArray.content ?? "") |raw }}
+                            {{ (ogDescriptionArray.content ?? "") }}
                         </div>
                         <div class="Facebook-site-url-wrapper">
                             <div>
@@ -40,7 +44,7 @@ set previewFacebook = seomatic.site.facebookAppId |length or seomatic.site.faceb
             </div>
 
             <script type="text/javascript">
-                var x = document.getElementsByClassName("Facebook-post-image");
+                var x = document.getElementsByClassName("{{ previewElementId }}-Facebook-post-image");
                 var i;
                 for (i = 0; i < x.length; i++) {
                     x[i].style.backgroundImage = "url('" + "{{ baseAssetsUrl ~ '/img/no_image_set.png' }}" + "')";

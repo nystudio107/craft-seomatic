@@ -1,0 +1,48 @@
+{% do view.registerAssetBundle("nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset") %}
+{% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/assetbundles/seomatic/dist', true) %}
+
+{% from 'seomatic/_includes/macros.twig' import registerJsModules %}
+
+{{ seomatic.manifest.includeCssModule("styles.css", false) }}
+
+{% set jsModules = [
+    'seomatic.js',
+] %}
+{{ registerJsModules(jsModules) }}
+
+{% set displayPreviewInlineStyles = "border: none; padding-left: 0;" %}
+
+{% set previewTypes = previewTypes ?? ['google'] %}
+<style>
+    div.table-preview-container {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        overflow: hidden;
+        display: inline-block;
+    }
+    div.displaypreview {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+</style>
+{% set showSeoTitleNames = false %}
+<div class="meta" style="overflow: hidden; display: inline-block;">
+    <div class="table-preview-container">
+        <div style="zoom: 0.60; -moz-transform: scale(0.60); -moz-transform-origin: 0 0;">
+            {% if 'google' in previewTypes %}
+                {% include "seomatic/_includes/googlePreview.twig" %}
+            {% endif %}
+
+            {% if 'twitter' in previewTypes %}
+                {% include "seomatic/_includes/twitterPreview.twig" %}
+            {% endif %}
+
+            {% if 'facebook' in previewTypes %}
+                {% include "seomatic/_includes/facebookPreview.twig" %}
+            {% endif %}
+        </div>
+    </div>
+</div>

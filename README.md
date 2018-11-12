@@ -96,6 +96,12 @@ For SEOmatic to be truly useful, you need to configure it so that it knows where
 
 ### Dashboard
 
+![Screenshot](resources/screenshots/seomatic-dashboard.png)
+
+The Dashboard gives you an overview of how fully set up your SEO setting in SEOmatic are, for Global SEO, Content SEO, and Site Settings.
+
+Click on any of the graphs to jump to the section in question to fill things out in more detail.
+
 ### Global SEO
 
 **Global SEO** is where you set all of the default site-wide settings.
@@ -498,6 +504,14 @@ You can enable every possible field to be displayed in the SEO Settings field if
 ![Screenshot](resources/screenshots/seomatic-field-full.png)
 
 But it's probably best to limit it to just the things that you or your client might want to change on a per-entry basis.
+
+If you enable an SEO Settings field in an Element Index's Table Columns, you'll see an SEO preview there as well:
+
+![Screenshot](resources/screenshots/seomatic-table-columns-google.png)
+
+You can control whether the preview will be from Google, Facebook, or Twitter in the Field Settings.
+
+![Screenshot](resources/screenshots/seomatic-table-columns-facebook.png)
 
 #### Template Access
 
