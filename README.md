@@ -505,6 +505,14 @@ You can enable every possible field to be displayed in the SEO Settings field if
 
 But it's probably best to limit it to just the things that you or your client might want to change on a per-entry basis.
 
+If you enable an SEO Settings field in an Element Index's Table Columns, you'll see an SEO preview there as well:
+
+![Screenshot](resources/screenshots/seomatic-table-columns-google.png)
+
+You can control whether the preview will be from Google, Facebook, or Twitter in the Field Settings.
+
+![Screenshot](resources/screenshots/seomatic-table-columns-facebook.png)
+
 #### Template Access
 
 If you need to access your SEOmatic field's data directly in a template, you can do so via:
