@@ -114,7 +114,7 @@
                         {% endfor %}
                         {% for contentSetupStat in contentSetupStats %}
                             {% set percentage = (contentSetupStat * 100.0) / totalStats  %}
-                            {% set contentStats = contentStats | merge([percentage]) %}
+                            {% set contentStats = contentStats | merge([percentage | number_format(2)]) %}
                         {% endfor %}
                         <dashboard-multi-radial-chart :series="[{{ contentStats | join(',')  }}]"
                                                       :colors="[{{ colors | join(',') | raw }}]"
