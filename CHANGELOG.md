@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.30 - 2018.11.12
+### Changed
+* Clear FastCGI Caches upon sitemap generation
+
 ## 3.1.29 - 2018.11.11
 ### Changed
 * Added the ability to show SEO Settings fields in the Element Index's Table Columns
