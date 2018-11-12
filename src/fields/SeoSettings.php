@@ -29,7 +29,9 @@ use craft\elements\Asset;
 use craft\helpers\Json;
 use craft\helpers\StringHelper;
 
+use nystudio107\seomatic\services\MetaContainers;
 use yii\base\InvalidConfigException;
+use yii\caching\TagDependency;
 use yii\db\Schema;
 use yii\web\NotFoundHttpException;
 
@@ -40,6 +42,11 @@ use yii\web\NotFoundHttpException;
  */
 class SeoSettings extends Field implements PreviewableFieldInterface
 {
+    // Constants
+    // =========================================================================
+
+    const CACHE_KEY = 'seomatic_fieldmeta_';
+
     // Public Properties
     // =========================================================================
 
@@ -346,25 +353,47 @@ class SeoSettings extends Field implements PreviewableFieldInterface
      */
     public function getTableAttributeHtml($value, ElementInterface $element): string
     {
+        $html = '';
         /** @var Element $element */
         if ($element !== null && $element->uri !== null) {
-            Seomatic::$plugin->metaContainers->previewMetaContainers($element->uri, $element->siteId, true);
-            $variables = [
-                'previewTypes' => [
-                    $this->elementDisplayPreviewType ?? ''
+            $siteId = $element->siteId;
+            $uri = $element->uri;
+            $cacheKey = self::CACHE_KEY.$uri.$siteId.$this->elementDisplayPreviewType;
+            $dependency = new TagDependency([
+                'tags' => [
+                    MetaContainers::GLOBAL_METACONTAINER_CACHE_TAG,
+                    MetaContainers::METACONTAINER_CACHE_TAG.$uri.$siteId,
                 ],
-            ];
-            // Render our preview table template
-            if (Seomatic::$matchedElement) {
-                return Craft::$app->getView()->renderTemplate(
-                    'seomatic/_includes/table-preview.twig',
-                    $variables
-                );
-            }
+            ]);
+            $cache = Craft::$app->getCache();
+            $cacheDuration = null;
+            $html = $cache->getOrSet(
+                $this::CACHE_KEY.$cacheKey,
+                function () use ($uri, $siteId, $element) {
+                    Seomatic::$plugin->metaContainers->previewMetaContainers($uri, $siteId, true);
+                    $variables = [
+                        'previewTypes' => [
+                            $this->elementDisplayPreviewType ?? ''
+                        ],
+                        'previewElementId' => $element->id,
+                    ];
+                    // Render our preview table template
+                    if (Seomatic::$matchedElement) {
+                        return Craft::$app->getView()->renderTemplate(
+                            'seomatic/_includes/table-preview.twig',
+                            $variables
+                        );
+                    }
+
+                    return '';
+                },
+                $cacheDuration,
+                $dependency
+            );
         }
 
         // Render the input template
-        return '';
+        return $html;
     }
 
     // Protected Methods
