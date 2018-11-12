@@ -96,6 +96,12 @@ For SEOmatic to be truly useful, you need to configure it so that it knows where
 
 ### Dashboard
 
+![Screenshot](resources/screenshots/seomatic-dashboard.png)
+
+The Dashboard gives you an overview of how fully set up your SEO setting in SEOmatic are, for Global SEO, Content SEO, and Site Settings.
+
+Click on any of the graphs to jump to the section in question to fill things out in more detail.
+
 ### Global SEO
 
 **Global SEO** is where you set all of the default site-wide settings.
