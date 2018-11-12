@@ -1,15 +1,64 @@
 {# @var craft \craft\web\twig\variables\CraftVariable #}
 {# @var metaBundle \nystudio107\seomatic\models\MetaBundle #}
-{% extends '_layouts/cp' %}
+{% extends 'seomatic/_layouts/seomatic-cp.twig' %}
+
+{% from 'seomatic/_includes/macros.twig' import registerJsModules %}
 
 {% set linkGetStarted = url('seomatic/global') %}
 
 {% do view.registerAssetBundle("nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset") %}
 {% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/assetbundles/seomatic/dist', true) %}
 
+{% block foot %}
+    {{ parent() }}
+    {% set jsModules = [
+        'vendors~dashboard.js',
+        'dashboard.js',
+    ] %}
+    {{ registerJsModules(jsModules) }}
+{% endblock %}
+
 {% block contextMenu %}
     {% include "seomatic/settings/_includes/sites-menu.twig" %}
 {% endblock %}
+
+{%- macro setupGradeColor(setupGrades, score) -%}
+    {% spaceless %}
+    {% set color = setupGrades[0].color %}
+    {% set values = [
+        30,
+        60,
+        90,
+        100
+    ] %}
+    {% for setupGrade in setupGrades | reverse %}
+        {% if score >= values[loop.index0] %}
+            {% set color = setupGrade.color %}
+        {% endif %}
+    {% endfor %}
+    {{ "'#{color}'" }}
+    {% endspaceless %}
+{%- endmacro -%}
+{% from _self import setupGradeColor %}
+
+{%- macro setupGradeLabel(setupGrades, score) -%}
+    {% spaceless %}
+        {% set grade = setupGrades[0].name %}
+        {% set values = [
+            30,
+            60,
+            90,
+            100
+        ] %}
+        {% for setupGrade in setupGrades | reverse %}
+            {% if score >= values[loop.index0] %}
+                {% set grade = setupGrade.name %}
+            {% endif %}
+        {% endfor %}
+        {{ "'#{grade}'" }}
+    {% endspaceless %}
+{%- endmacro -%}
+{% from _self import setupGradeLabel %}
 
 {% set content %}
     <style>
@@ -18,168 +67,86 @@
             font-family: system-ui, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
         }
     </style>
-    <div class="field readable">
-            {% if showWelcome %}
-                <div class="readable" style="text-align:center; margin:0 auto; padding: 5% 10%;">
-                    <img src="{{ baseAssetsUrl ~ '/img/Seomatic-icon.svg' }}"
-                         width="30%" height="auto"/>
-                    <h2>Thanks for using SEOmatic!</h2>
-                    <p>
-                        This Dashboard will show you how set up your SEO implementation is; you can click on any shaded part of the graphs to go to the settings that need your attention.
-                    </p>
-                    <p>
-                        SEOmatic for Craft CMS 3 is a complete re-write and re-architecture from scratch of the plugin. This allowed us to take what we learned from SEOmatic 1.x, and rebuild it with a much more robust and extendable architecture.
-                    </p>
-                    <p>
-                        We hope you love it!
-                    </p>
+    <div id="cp-nav-content">
+        <div class="field readable">
+                {% if showWelcome %}
+                    <confetti></confetti>
+                    <div class="readable" style="text-align:center; margin:0 auto; padding: 5% 10%;">
+                        <img src="{{ baseAssetsUrl ~ '/img/Seomatic-icon.svg' }}"
+                             width="30%" height="auto"/>
+                        <h2>Thanks for using SEOmatic!</h2>
+                        <p>SEOmatic facilitates modern SEO best practices & implementation for Craft CMS 3. It is a turnkey SEO system that is comprehensive, powerful, and flexible.</p>
+                        <p>We hope you love it! For more information, please <a href="{{ docsUrl }}" target="_blank" rel="noopener">see the documentation</a>.</p>
+                    </div>
+                {% endif %}
+            <div class="flex">
+                <div class="flex-grow">
+                    <h2 class="centeralign" style="font-weight: 200;">Global SEO Setup</h2>
+                    <div id="GlobalSEOChart" style="width: 300px; margin: 0 auto;">
+                        {% set colors = [
+                            setupGradeColor(setupGrades, globalSetupStat),
+                        ] %}
+                        {% set grades = [
+                            setupGradeLabel(setupGrades, globalSetupStat),
+                        ] %}
+                        <dashboard-radial-chart :series="[{{ globalSetupStat }}]"
+                                                :colors="[{{ colors | join(',') | raw }}]"
+                                                :labels="[{{ grades | join(',') | raw }}]"
+                                                :url="'{{ cpUrl('seomatic/global/general/' ~ currentSiteHandle) | raw }}'"
+                        >
+
+                        </dashboard-radial-chart>
+                    </div>
                 </div>
-            {% endif %}
-        <div class="flex">
-            <div class="flex-grow">
-                <h3 class="centeralign">Global SEO Setup</h3>
-                <div id="GlobalSEOChart" style="width: 300px; margin: 0 auto;"></div>
+                <div class="flex-grow">
+                    <h2 class="centeralign" style="font-weight: 200;">Content SEO Setup</h2>
+                    <div id="ContentSEOChart" style="width: 300px; margin: 0 auto;">
+                        {% set colors = [
+                            setupGradeColor(setupGrades, 100),
+                            setupGradeColor(setupGrades, 90),
+                            setupGradeColor(setupGrades, 60),
+                            setupGradeColor(setupGrades, 30),
+                        ] %}
+                        {% set contentStats = [] %}
+                        {% set totalStats = 0 %}
+                        {% for contentSetupStat in contentSetupStats %}
+                            {% set totalStats = totalStats + contentSetupStat %}
+                        {% endfor %}
+                        {% for contentSetupStat in contentSetupStats %}
+                            {% set percentage = (contentSetupStat * 100.0) / totalStats  %}
+                            {% set contentStats = contentStats | merge([percentage | number_format(2)]) %}
+                        {% endfor %}
+                        <dashboard-multi-radial-chart :series="[{{ contentStats | join(',')  }}]"
+                                                      :colors="[{{ colors | join(',') | raw }}]"
+                                                      :labels="['A', 'B', 'C', 'D']"
+                                                      :url="'{{ cpUrl('seomatic/content/' ~ currentSiteHandle) | raw }}'"
+                        >
+
+                        </dashboard-multi-radial-chart>
+                    </div>
+                </div>
+                <div class="flex-grow">
+                    <h2 class="centeralign" style="font-weight: 200;">Site Settings Setup</h2>
+                    <div id="SiteSettingsChart" style="width: 300px; margin: 0 auto;">
+                        {% set colors = [
+                            setupGradeColor(setupGrades, siteSetupStat),
+                        ] %}
+                        {% set grades = [
+                            setupGradeLabel(setupGrades, siteSetupStat),
+                        ] %}
+                        <dashboard-radial-chart :series="[{{ siteSetupStat }}]"
+                                                :colors="[{{ colors | join(',') | raw }}]"
+                                                :labels="[{{ grades | join(',') | raw }}]"
+                                                :url="'{{ cpUrl('seomatic/site/identity/' ~ currentSiteHandle) | raw }}'"
+                        >
+
+                        </dashboard-radial-chart>
+                    </div>
+                </div>
             </div>
-            <div class="flex-grow">
-                <h3 class="centeralign">Content SEO Setup</h3>
-                <div id="ContentSEOChart" style="width: 300px; margin: 0 auto;"></div>
-            </div>
-            <div class="flex-grow">
-                <h3 class="centeralign">Site Settings Setup</h3>
-                <div id="SiteSettingsChart" style="width: 300px; margin: 0 auto;"></div>
+            <div class="readable" style="text-align:center; margin:0 auto; padding: 5% 10%;">
+                <p>This Dashboard shows you how set up your SEO implementation is; you can click on any part of the graphs to go to the settings that need your attention.</p>
             </div>
         </div>
-
     </div>
 {% endset %}
-
-
-{############### Global SEO Graph ###############}
-
-{% js %}
-    var chart = bb.generate({
-        data: {
-            columns: [
-                ["data", {{ globalSetupStat }}],
-            ],
-            type: "gauge",
-            names: {
-                data: "Global SEO Setup",
-            },
-            onclick: function(d, element) {
-                window.location = '{{ cpUrl('seomatic/global/general/' ~ currentSiteHandle) }}';
-            }
-        },
-        gauge: {
-            label: {
-                show: false,
-            },
-            fullCircle: true,
-        },
-        color: {
-            pattern: [
-        {% for setupGrade in setupGrades |reverse %}
-            "{{ setupGrade.color }}",
-        {% endfor %}
-            ],
-            threshold: {
-                values: [
-                    30,
-                    60,
-                    90,
-                    100
-                ]
-            }
-        },
-        legend: {
-            show: false
-        },
-        size: {
-            height: 320
-        },
-        bindto: "#GlobalSEOChart"
-    });
-{% endjs %}
-
-{############### Content SEO Graph ###############}
-
-{% js %}
-    var chart = bb.generate({
-        data: {
-            columns: [
-                {% for setupGrade in setupGrades %}
-                ["{{ setupGrade.id }}", {{ contentSetupStats[loop.index0] }}],
-                {% endfor %}
-            ],
-            colors: {
-            {% for setupGrade in setupGrades %}
-                {{ setupGrade.id }}: "{{ setupGrade.color }}",
-            {% endfor %}
-            },
-            names: {
-            {% for setupGrade in setupGrades %}
-                {{ setupGrade.id }}: "{{ setupGrade.name }}",
-            {% endfor %}
-            },
-            type: "donut",
-            onclick: function(d, element) {
-                window.location = '{{ cpUrl('seomatic/content/' ~ currentSiteHandle) }}';
-            }
-        },
-        donut: {
-            title: "Overall Grade: "
-        },
-        legend: {
-            show: true
-        },
-        bindto: "#ContentSEOChart"
-    });
-{% endjs %}
-
-
-{############### Site Settings Graph ###############}
-
-{% js %}
-    var chart = bb.generate({
-        data: {
-            columns: [
-                ["data", {{ siteSetupStat }}],
-            ],
-            names: {
-                data: "Site Settings Setup",
-            },
-            type: "gauge",
-            onclick: function(d, element) {
-                window.location = '{{ cpUrl('seomatic/site/identity/' ~ currentSiteHandle) }}';
-            }
-        },
-        gauge: {
-            label: {
-                show: false,
-            },
-            fullCircle: true,
-        },
-        color: {
-            pattern: [
-        {% for setupGrade in setupGrades |reverse %}
-            "{{ setupGrade.color }}",
-        {% endfor %}
-            ],
-            threshold: {
-                values: [
-                    30,
-                    60,
-                    90,
-                    100
-                ]
-            }
-        },
-        legend: {
-            show: false
-        },
-        size: {
-            height: 320
-        },
-        bindto: "#SiteSettingsChart"
-    });
-{% endjs %}

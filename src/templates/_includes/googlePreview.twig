@@ -2,13 +2,16 @@
 {% set descriptionArray = seomatic.tag.get('description').renderAttributes() %}
 {% set canonicalArray = seomatic.link.get('canonical').renderAttributes() %}
 
+{% set showSeoTitleNames = showSeoTitleNames ?? true %}
 <div class="preview-column">
     <div class="displaypreview" style="{{ displayPreviewInlineStyles ?? '' }}">
-        <h1>Google:</h1>
+        {% if showSeoTitleNames %}
+            <h1>Google:</h1>
+        {% endif %}
         <div class="googleWrapper">
             <div class="rc" data-hveid="27">
                 <h3 class="googleDisplay">
-                    <a class="googleDisplay" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">{{ (titleArray.title ?? "") |raw }}</a>
+                    <a class="googleDisplay" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">{{ (titleArray.title ?? "") }}</a>
                 </h3>
                 <div class="googleDisplay1">
                     <div>
@@ -18,7 +21,7 @@
                                 <span class="googleDisplay1"></span>
                             </div>
                         </div>
-                        <span class="googleDisplay2">{{ (descriptionArray.content ?? "") |raw }}</span>
+                        <span class="googleDisplay2">{{ (descriptionArray.content ?? "") }}</span>
                     </div>
                 </div>
             </div>

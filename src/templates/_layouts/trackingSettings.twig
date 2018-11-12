@@ -1,4 +1,18 @@
-{% extends "_layouts/cp" %}
+{% extends "seomatic/_layouts/seomatic-cp.twig" %}
+
+{% from 'seomatic/_includes/macros.twig' import registerJsModules %}
+
+{% block foot %}
+    {{ parent() }}
+    {% set jsModules = [
+        'vendors~seomatic-meta.js',
+        'seomatic-meta.js',
+        'vendors~javascript-editor~twig-editor.js',
+        'vendors~javascript-editor.js',
+        'javascript-editor.js',
+    ] %}
+    {{ registerJsModules(jsModules) }}
+{% endblock %}
 
 {% set navItems = {
     'heading': { heading: "Settings"|t },

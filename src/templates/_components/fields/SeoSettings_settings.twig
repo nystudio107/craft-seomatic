@@ -14,6 +14,23 @@
 
 <div>
 
+    {############### Element Preview Type ###############}
+
+    {{ forms.selectField({
+        label: "Element Preview Type"|t("seomatic"),
+        instructions: "What type of preview to display for this field in the Element index table, if the field is added to the table columns."|t("seomatic"),
+        id: "elementDisplayPreviewType",
+        name: "elementDisplayPreviewType",
+        options: {
+            "none": "None"|t("seomatic"),
+            "google": "Google"|t("seomatic"),
+            "twitter": "Twitter"|t("seomatic"),
+            "facebook": "Facebook"|t("seomatic"),
+        },
+        value: field.elementDisplayPreviewType,
+        errors: field.getErrors("elementDisplayPreviewType"),
+    }) }}
+
     {############### General tab settings ###############}
 
     <div class="field seomatic-script-wrapper">

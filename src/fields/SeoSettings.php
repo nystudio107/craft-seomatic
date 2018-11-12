@@ -9,6 +9,8 @@
 
 namespace nystudio107\seomatic\fields;
 
+use craft\base\PreviewableFieldInterface;
+use craft\web\assets\cp\CpAsset;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\helpers\ArrayHelper;
@@ -27,18 +29,31 @@ use craft\elements\Asset;
 use craft\helpers\Json;
 use craft\helpers\StringHelper;
 
+use nystudio107\seomatic\services\MetaContainers;
 use yii\base\InvalidConfigException;
+use yii\caching\TagDependency;
 use yii\db\Schema;
+use yii\web\NotFoundHttpException;
 
 /**
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-class SeoSettings extends Field
+class SeoSettings extends Field implements PreviewableFieldInterface
 {
+    // Constants
+    // =========================================================================
+
+    const CACHE_KEY = 'seomatic_fieldmeta_';
+
     // Public Properties
     // =========================================================================
+
+    /**
+     * @var string
+     */
+    public $elementDisplayPreviewType = 'google';
 
     /**
      * @var bool
@@ -105,6 +120,30 @@ class SeoSettings extends Field
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
+            [
+                [
+                    'elementDisplayPreviewType',
+                ],
+                'string',
+            ],
+            [
+                [
+                    'generalTabEnabled',
+                    'twitterTabEnabled',
+                    'facebookTabEnabled',
+                    'sitemapTabEnabled',
+                ],
+                'boolean',
+            ],
+            [
+                [
+                    'generalEnabledFields',
+                    'twitterEnabledFields',
+                    'facebookEnabledFields',
+                    'sitemapEnabledFields',
+                ],
+                'each', 'rule' => ['string']],
+
         ]);
 
         return $rules;
@@ -212,6 +251,20 @@ class SeoSettings extends Field
     public function getSettingsHtml()
     {
         $variables = [];
+        // JS/CSS modules
+        try {
+            Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
+            $this->registerCssModules([
+                'styles.css',
+            ]);
+            $this->registerJsModules([
+                'vendors~seomatic-meta.js',
+                'seomatic-meta.js',
+                'seomatic.js',
+            ]);
+        } catch (InvalidConfigException $e) {
+            Craft::error($e->getMessage(), __METHOD__);
+        }
         // Asset bundle
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
@@ -237,12 +290,21 @@ class SeoSettings extends Field
     public function getInputHtml($value, ElementInterface $element = null): string
     {
         $variables = [];
-        // Asset bundle
+        // JS/CSS modules
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
+            $this->registerCssModules([
+                'styles.css',
+            ]);
+            $this->registerJsModules([
+                'vendors~seomatic-meta.js',
+                'seomatic-meta.js',
+                'seomatic.js',
+            ]);
         } catch (InvalidConfigException $e) {
             Craft::error($e->getMessage(), __METHOD__);
         }
+        // Asset bundle
         $variables['baseAssetsUrl'] = Craft::$app->assetManager->getPublishedUrl(
             '@nystudio107/seomatic/assetbundles/seomatic/dist',
             true
@@ -284,6 +346,54 @@ class SeoSettings extends Field
             'seomatic/_components/fields/SeoSettings_input',
             $variables
         );
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getTableAttributeHtml($value, ElementInterface $element): string
+    {
+        $html = '';
+        /** @var Element $element */
+        if ($element !== null && $element->uri !== null) {
+            $siteId = $element->siteId;
+            $uri = $element->uri;
+            $cacheKey = self::CACHE_KEY.$uri.$siteId.$this->elementDisplayPreviewType;
+            $dependency = new TagDependency([
+                'tags' => [
+                    MetaContainers::GLOBAL_METACONTAINER_CACHE_TAG,
+                    MetaContainers::METACONTAINER_CACHE_TAG.$uri.$siteId,
+                ],
+            ]);
+            $cache = Craft::$app->getCache();
+            $cacheDuration = null;
+            $html = $cache->getOrSet(
+                $this::CACHE_KEY.$cacheKey,
+                function () use ($uri, $siteId, $element) {
+                    Seomatic::$plugin->metaContainers->previewMetaContainers($uri, $siteId, true);
+                    $variables = [
+                        'previewTypes' => [
+                            $this->elementDisplayPreviewType ?? ''
+                        ],
+                        'previewElementId' => $element->id,
+                    ];
+                    // Render our preview table template
+                    if (Seomatic::$matchedElement) {
+                        return Craft::$app->getView()->renderTemplate(
+                            'seomatic/_includes/table-preview.twig',
+                            $variables
+                        );
+                    }
+
+                    return '';
+                },
+                $cacheDuration,
+                $dependency
+            );
+        }
+
+        // Render the input template
+        return $html;
     }
 
     // Protected Methods
@@ -329,5 +439,49 @@ class SeoSettings extends Field
                 false
             )
         );
+    }
+
+    /**
+     * Register CSS modules so they can be run through webpack-dev-server
+     *
+     * @param array $modules
+     */
+    protected function registerCssModules(array $modules)
+    {
+        foreach ($modules as $moduleName) {
+            try {
+                $module = Seomatic::$seomaticVariable->manifest->getModuleUri($moduleName);
+            } catch (NotFoundHttpException $e) {
+                Craft::error($e->getMessage(), __METHOD__);
+                $module = null;
+            }
+            if ($module) {
+                Seomatic::$view->registerCssFile($module, [
+                    'depends' => CpAsset::class,
+                ]);
+            }
+        }
+    }
+
+    /**
+     * Register JavaScript modules so they can be run through webpack-dev-server
+     *
+     * @param array $modules
+     */
+    protected function registerJsModules(array $modules)
+    {
+        foreach ($modules as $moduleName) {
+            try {
+                $module = Seomatic::$seomaticVariable->manifest->getModuleUri($moduleName);
+            } catch (NotFoundHttpException $e) {
+                Craft::error($e->getMessage(), __METHOD__);
+                $module = null;
+            }
+            if ($module) {
+                Seomatic::$view->registerJsFile($module, [
+                    'depends' => CpAsset::class,
+                ]);
+            }
+        }
     }
 }

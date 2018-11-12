@@ -24,6 +24,7 @@ use nystudio107\seomatic\services\Tag;
 use nystudio107\seomatic\services\Title;
 use nystudio107\seomatic\services\MetaContainers;
 use nystudio107\seomatic\services\MetaBundles;
+use nystudio107\seomatic\variables\ManifestVariable as Manifest;
 
 use yii\di\ServiceLocator;
 
@@ -36,6 +37,7 @@ use yii\di\ServiceLocator;
  * @property Script     script
  * @property Tag        tag
  * @property Title      title
+ * @property Manifest   manifest
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -92,6 +94,7 @@ class SeomaticVariable extends ServiceLocator
             'script' => Script::class,
             'tag' => Tag::class,
             'title' => Title::class,
+            'manifest' => ManifestVariable::class
         ];
 
         $config['components'] = $components;
