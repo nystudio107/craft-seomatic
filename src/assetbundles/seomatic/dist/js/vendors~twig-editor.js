@@ -2,8 +2,8 @@
  * @project        SEOmatic
  * @name           vendors~twig-editor.js
  * @author         Andrew Welch
- * @build          Sat, Nov 10, 2018 3:06 AM ET
- * @release        c132949dc965348ad261988156f2e77ed582c97e [feature/modernize-webpack]
+ * @build          Mon, Nov 12, 2018 3:33 AM ET
+ * @release        0e3e3920098e71fbbbbd328c12ab60c57814e24e [develop]
  * @copyright      Copyright (c) 2018 nystudio107
  *
  */
