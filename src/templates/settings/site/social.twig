@@ -37,6 +37,6 @@
     {% endif %}
     
     {% include "seomatic/_includes/footer-message.twig" with {
-        message: "Any text fields can include single-bracket tags that output Seomatic properties, such as `{seomatic.meta.seoTitle}`."
+        message: "Any text fields can include double-bracket tags that output Seomatic properties, such as `{{ seomatic.meta.seoTitle }}`."
     } %}
 {% endblock %}

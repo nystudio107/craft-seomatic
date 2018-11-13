@@ -53,6 +53,13 @@
         },
     }) %}
 {% endif %}
+{% if currentUser.can("seomatic:global-meta:ads") %}
+    {% set navItems = navItems |merge({
+        ads: {
+            title: "Ads"|t("seomatic"),
+        },
+    }) %}
+{% endif %}
 
 {% set selectedItem = craft.app.request.getSegment(3)|default("general") %}
 
