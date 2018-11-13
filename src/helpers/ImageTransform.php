@@ -32,7 +32,7 @@ class ImageTransform
 
     static private $transforms = [
         'base' => [
-            'format' => 'jpg',
+            'format' => null,
             'quality' => self::SOCIAL_TRANSFORM_QUALITY,
             'width' => 1200,
             'height' => 630,
