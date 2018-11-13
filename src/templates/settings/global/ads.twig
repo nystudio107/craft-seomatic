@@ -1,6 +1,7 @@
-{% requirePermission "seomatic:global-meta:facebook" %}
+{% requirePermission "seomatic:global-meta:ads" %}
 
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
+{% from 'seomatic/_includes/macros.twig' import registerJsModules %}
 
 {% extends "seomatic/_layouts/globalSettings.twig" %}
 
@@ -14,6 +15,16 @@
     {{ block('actionButton') }}
 {% endblock %}
 
+{% block foot %}
+    {{ parent() }}
+    {% set jsModules = [
+        'vendors~javascript-editor~twig-editor.js',
+        'vendors~twig-editor.js',
+        'twig-editor.js',
+    ] %}
+    {{ registerJsModules(jsModules) }}
+{% endblock %}
+
 {% block contextMenu %}
     {% include "seomatic/settings/_includes/sites-menu.twig" %}
 {% endblock %}
@@ -24,10 +35,10 @@
     <input type="hidden" name="siteId" value="{{ currentSiteId }}">
     {{ redirectInput("seomatic/global/#{currentSubSection}/#{currentSiteHandle}") }}
 
-    {% if currentUser.can("seomatic:global-meta:facebook") %}
-        <div id="tab-content-facebook">
+    {% if currentUser.can("seomatic:global-meta:ads") %}
+        <div id="tab-content-ads">
             <h2>{{ subSectionTitle ~ " Settings"|t("seomatic") }}</h2>
-            {% include "seomatic/settings/_includes/tab-facebook.twig" with {"pageContext": "global"} %}
+            {% include "seomatic/settings/_includes/tab-ads.twig" with {"pageContext": "global"} %}
         </div>
     {% endif %}
     
