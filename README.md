@@ -140,7 +140,7 @@ If you are running Nginx, make sure that you don't have a line like:
     
 ...in your config file.  A directive like this will prevent SEOmatic from being able to service the request for `/robots.txt`.  If you do have a line like this in your config file, just comment it out, and restart Nginx with `sudo nginx -s reload`.
 
-The **View robots.txt** button lets you view your `robots.txt`.
+The **View robots.txt** button lets you view your rendered `robots.txt`.
 
 #### Humans
 
@@ -149,6 +149,18 @@ The **View robots.txt** button lets you view your `robots.txt`.
 [Humans.txt](http://humanstxt.org/) is an initiative for knowing the people behind a website. It's a text file that contains information about the different people who have contributed to building the website. By adding a text file, you can prove your authorship (not your property) in an external, fast, easy and accessible way.
 
 Feel free to edit the default `humans.txt` Template to your heart's content.
+
+The **View humans.txt** button lets you view your rendered `humans.txt`.
+
+#### Ads
+
+![Screenshot](resources/screenshots/seomatic-global-ads.png)
+
+The [ads.txt](https://iabtechlab.com/ads-txt/) project is simple: Increase transparency in the programmatic advertising ecosystem. ads.txt stands for Authorized Digital Sellers and is a simple, flexible and secure method that publishers and distributors can use to publicly declare the companies they authorize to sell their digital inventory.
+
+Feel free to edit the default `ads.txt` Template to your heart's content.
+
+The **View ads.txt** button lets you view your rendered `ads.txt`.
 
 #### Global SEO AdminCP Fields
 
@@ -460,6 +472,7 @@ SEOmatic allows you to restrict access to various parts of the plugin based on U
   * Facebook
   * Robots
   * Humans
+  * Ads
 * Edit Content SEO
   * General
   * Twitter
