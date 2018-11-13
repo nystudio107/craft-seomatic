@@ -266,6 +266,7 @@ class SettingsController extends Controller
             $templateContainers = $metaBundle->frontendTemplatesContainer->data;
             $variables['robotsTemplate'] = $templateContainers[FrontendTemplates::ROBOTS_TXT_HANDLE];
             $variables['humansTemplate'] = $templateContainers[FrontendTemplates::HUMANS_TXT_HANDLE];
+            $variables['adsTemplate'] = $templateContainers[FrontendTemplates::ADS_TXT_HANDLE];
             // Image selectors
             $bundleSettings = $metaBundle->metaBundleSettings;
             $variables['elementType'] = Asset::class;
@@ -306,6 +307,7 @@ class SettingsController extends Controller
         $bundleSettings = $request->getParam('metaBundleSettings');
         $robotsTemplate = $request->getParam('robotsTemplate');
         $humansTemplate = $request->getParam('humansTemplate');
+        $adsTemplate = $request->getParam('adsTemplate');
 
         // Set the element type in the template
         $elementName = '';
@@ -330,6 +332,10 @@ class SettingsController extends Controller
             $humansContainer = $templateContainers[FrontendTemplates::HUMANS_TXT_HANDLE];
             if ($humansContainer !== null && \is_array($humansTemplate)) {
                 $humansContainer->setAttributes($humansTemplate);
+            }
+            $adsContainer = $templateContainers[FrontendTemplates::ADS_TXT_HANDLE];
+            if ($adsContainer !== null && \is_array($adsTemplate)) {
+                $adsContainer->setAttributes($adsTemplate);
             }
 
             Seomatic::$plugin->metaBundles->syncBundleWithConfig($metaBundle, true);

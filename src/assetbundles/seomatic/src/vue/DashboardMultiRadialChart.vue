@@ -1,5 +1,5 @@
 <template>
-    <apexcharts class="cursor-pointer" width="100%" height="410px" type="radialBar" :options="chartOptions" :series="series"></apexcharts>
+    <apexcharts class="cursor-pointer" width="100%" height="310px" type="radialBar" :options="chartOptions" :series="series"></apexcharts>
 </template>
 
 <script>

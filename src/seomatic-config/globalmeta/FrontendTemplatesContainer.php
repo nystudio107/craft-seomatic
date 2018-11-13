@@ -41,5 +41,13 @@ return [
             'action'          => 'robots',
             'templateString'  => '',
         ],
+        FrontendTemplates::ADS_TXT_HANDLE => [
+            'handle'          => FrontendTemplates::ADS_TXT_HANDLE,
+            'path'            => 'ads.txt',
+            'template'        => '_frontend/pages/ads.twig',
+            'controller'      => 'frontend-template',
+            'action'          => 'ads',
+            'templateString'  => '',
+        ],
     ],
 ];
