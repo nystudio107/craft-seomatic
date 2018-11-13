@@ -1,5 +1,15 @@
 # SEOmatic Changelog
 
+## 3.1.30 - 2018.11.13
+### Added
+* Added support for the [ads.txt](https://iabtechlab.com/ads-txt/) Authorized Digital Sellers standard
+
+### Changed
+* Clear FastCGI Caches upon sitemap generation
+* If `runQueueAutomatically` is `true` return the generated sitemap immediately via http request
+* Adjusted AdminCP dashboard charts
+* Fixed an issue where the Content SEO settings would display sections that are not enabled for a given site
+
 ## 3.1.29 - 2018.11.11
 ### Changed
 * Added the ability to show SEO Settings fields in the Element Index's Table Columns

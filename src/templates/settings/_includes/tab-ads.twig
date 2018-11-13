@@ -1,0 +1,30 @@
+{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
+{% import "_includes/forms" as forms %}
+
+<div class="flex">
+    <div class="flex-grow"></div>
+    <a href="{{ siteUrl("/ads.txt") }}" class="btn livepreviewbtn" rel="noopener" target="_blank">{{ 'View ads.txt'|t("seomatic") }}</a>
+</div>
+
+{% namespace "adsTemplate" %}
+    {{ forms.lightswitchField({
+        label: "Ads.txt Enabled"|t("seomatic"),
+        instructions: "Whether the `ads.txt` template should be rendered"|t("seomatic"),
+        id: "include",
+        name: "include",
+        on: adsTemplate.include,
+        warning: false,
+        errors: adsTemplate.getErrors("include"),
+    }) }}
+
+    {{ forms.textAreaField({
+        label: "Ads.txt Template"|t("seomatic"),
+        instructions: "The [ads.txt](https://iabtechlab.com/ads-txt/) project is simple: Increase transparency in the programmatic advertising ecosystem. ads.txt stands for Authorized Digital Sellers and is a simple, flexible and secure method that publishers and distributors can use to publicly declare the companies they authorize to sell their digital inventory."|t("seomatic") |raw,
+        id: "templateString",
+        name: "templateString",
+        value: adsTemplate.templateString,
+        class: "seomatic-twig-editor",
+        warning: false,
+        errors: adsTemplate.getErrors("templateString"),
+    }) }}
+{% endnamespace %}

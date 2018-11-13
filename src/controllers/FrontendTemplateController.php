@@ -32,7 +32,8 @@ class FrontendTemplateController extends Controller
      */
     protected $allowAnonymous = [
         'humans',
-        'robots'
+        'robots',
+        'ads',
     ];
 
     // Public Methods
@@ -61,6 +62,21 @@ class FrontendTemplateController extends Controller
     public function actionRobots(): Response
     {
         $text = Seomatic::$plugin->frontendTemplates->renderTemplate(FrontendTemplates::ROBOTS_TXT_HANDLE);
+
+        $headers = Craft::$app->response->headers;
+        $headers->add('Content-Type', 'text/plain; charset=utf-8');
+
+        return $this->asRaw($text);
+    }
+
+    /**
+     * Returns the rendered humans.txt
+     *
+     * @return Response
+     */
+    public function actionAds(): Response
+    {
+        $text = Seomatic::$plugin->frontendTemplates->renderTemplate(FrontendTemplates::ADS_TXT_HANDLE);
 
         $headers = Craft::$app->response->headers;
         $headers->add('Content-Type', 'text/plain; charset=utf-8');

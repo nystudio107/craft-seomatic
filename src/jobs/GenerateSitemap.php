@@ -20,6 +20,8 @@ use nystudio107\seomatic\helpers\UrlHelper;
 use nystudio107\seomatic\models\SitemapTemplate;
 use nystudio107\seomatic\services\MetaBundles;
 
+use nystudio107\fastcgicachebust\FastcgiCacheBust;
+
 use Craft;
 use craft\base\Element;
 use craft\console\Application as ConsoleApplication;
@@ -339,6 +341,11 @@ class GenerateSitemap extends BaseJob
             : null;
         $result = $cache->set($cacheKey, $lines, $cacheDuration, $dependency);
         Craft::debug('Sitemap cache result: '.print_r($result, true).' for cache key: '.$cacheKey, __METHOD__);
+        // If the FastCGI Cache Bust plugin is installed, clear its caches too
+        $plugin = Craft::$app->getPlugins()->getPlugin('fastcgi-cache-bust');
+        if ($plugin !== null) {
+            FastcgiCacheBust::$plugin->cache->clearAll();
+        }
     }
 
     // Protected Methods

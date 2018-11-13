@@ -935,6 +935,9 @@ class Seomatic extends Plugin
                     'seomatic:global-meta:humans' => [
                         'label' => Craft::t('seomatic', 'Humans'),
                     ],
+                    'seomatic:global-meta:ads' => [
+                        'label' => Craft::t('seomatic', 'Ads'),
+                    ],
                 ],
             ],
             'seomatic:content-meta' => [

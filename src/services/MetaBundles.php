@@ -695,12 +695,13 @@ class MetaBundles extends Component
                     if ($category === null) {
                         $unsetMetaBundle = true;
                     } else {
+                        $unsetMetaBundle = true;
                         $siteSettings = $category->getSiteSettings();
                         if (!empty($siteSettings)) {
                             /** @var CategoryGroup_SiteSettings $siteSetting */
                             foreach ($siteSettings as $siteSetting) {
-                                if ($siteSetting->siteId == $metaBundle->sourceSiteId && !$siteSetting->hasUrls) {
-                                    $unsetMetaBundle = true;
+                                if ($siteSetting->siteId == $metaBundle->sourceSiteId && $siteSetting->hasUrls) {
+                                    $unsetMetaBundle = false;
                                 }
                             }
                         }
@@ -711,12 +712,13 @@ class MetaBundles extends Component
                     if ($section === null) {
                         $unsetMetaBundle = true;
                     } else {
+                        $unsetMetaBundle = true;
                         $siteSettings = $section->getSiteSettings();
                         if (!empty($siteSettings)) {
                             /** @var Section_SiteSettings $siteSetting */
                             foreach ($siteSettings as $siteSetting) {
-                                if ($siteSetting->siteId == $metaBundle->sourceSiteId && !$siteSetting->hasUrls) {
-                                    $unsetMetaBundle = true;
+                                if ($siteSetting->siteId == $metaBundle->sourceSiteId && $siteSetting->hasUrls) {
+                                    $unsetMetaBundle = false;
                                 }
                             }
                         }
@@ -730,12 +732,13 @@ class MetaBundles extends Component
                             if ($productType === null) {
                                 $unsetMetaBundle = true;
                             } else {
+                                $unsetMetaBundle = true;
                                 $siteSettings = $productType->getSiteSettings();
                                 if (!empty($siteSettings)) {
                                     /** @var Section_SiteSettings $siteSetting */
                                     foreach ($siteSettings as $siteSetting) {
-                                        if ($siteSetting->siteId == $metaBundle->sourceSiteId && !$siteSetting->hasUrls) {
-                                            $unsetMetaBundle = true;
+                                        if ($siteSetting->siteId == $metaBundle->sourceSiteId && $siteSetting->hasUrls) {
+                                            $unsetMetaBundle = false;
                                         }
                                     }
                                 }
@@ -878,8 +881,8 @@ class MetaBundles extends Component
                             $metaBundle->sourceSiteId,
                             $metaBundle
                         );
-                        break;
                     }
+                    break;
                 case self::PRODUCT_META_BUNDLE:
                     if (Seomatic::$commerceInstalled) {
                         $commerce = CommercePlugin::getInstance();
@@ -1210,9 +1213,10 @@ class MetaBundles extends Component
                 $metaBundle->metaSiteVars->creator->setAttributes($attributes);
             }
         }
-        // Preserve the Frontend Templates
-        $attributes = $baseConfig->frontendTemplatesContainer->getAttributes();
-        $metaBundle->frontendTemplatesContainer->setAttributes($attributes);
+        // Preserve the Frontend Templates, but add in any new containers
+        foreach ($baseConfig->frontendTemplatesContainer->data as $key => $value) {
+            $metaBundle->frontendTemplatesContainer->data[$key] = $value;
+        }
         // Preserve the metaSitemapVars
         $attributes = $baseConfig->metaSitemapVars->getAttributes();
         $metaBundle->metaSitemapVars->setAttributes($attributes);

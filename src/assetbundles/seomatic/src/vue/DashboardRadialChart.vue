@@ -1,5 +1,5 @@
 <template>
-    <apexcharts class="cursor-pointer" width="100%" height="400px" type="radialBar" :options="chartOptions" :series="series"></apexcharts>
+    <apexcharts class="cursor-pointer" width="100%" height="300px" type="radialBar" :options="chartOptions" :series="series"></apexcharts>
 </template>
 
 <script>
@@ -43,6 +43,7 @@
                                 },
                                 value: {
                                     fontSize: '24px',
+                                    offsetY: 5,
                                     color: undefined,
                                     formatter: function (val) {
                                         return val + "%";

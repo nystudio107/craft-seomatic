@@ -39,6 +39,7 @@ class FrontendTemplates extends Component
 
     const HUMANS_TXT_HANDLE = 'humans';
     const ROBOTS_TXT_HANDLE = 'robots';
+    const ADS_TXT_HANDLE = 'ads';
 
     const GLOBAL_FRONTENDTEMPLATE_CACHE_TAG = 'seomatic_frontendtemplate';
     const FRONTENDTEMPLATE_CACHE_TAG = 'seomatic_frontendtemplate_';

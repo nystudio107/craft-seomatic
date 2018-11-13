@@ -140,7 +140,7 @@ If you are running Nginx, make sure that you don't have a line like:
     
 ...in your config file.  A directive like this will prevent SEOmatic from being able to service the request for `/robots.txt`.  If you do have a line like this in your config file, just comment it out, and restart Nginx with `sudo nginx -s reload`.
 
-The **View robots.txt** button lets you view your `robots.txt`.
+The **View robots.txt** button lets you view your rendered `robots.txt`.
 
 #### Humans
 
@@ -149,6 +149,18 @@ The **View robots.txt** button lets you view your `robots.txt`.
 [Humans.txt](http://humanstxt.org/) is an initiative for knowing the people behind a website. It's a text file that contains information about the different people who have contributed to building the website. By adding a text file, you can prove your authorship (not your property) in an external, fast, easy and accessible way.
 
 Feel free to edit the default `humans.txt` Template to your heart's content.
+
+The **View humans.txt** button lets you view your rendered `humans.txt`.
+
+#### Ads
+
+![Screenshot](resources/screenshots/seomatic-global-ads.png)
+
+The [ads.txt](https://iabtechlab.com/ads-txt/) project is simple: Increase transparency in the programmatic advertising ecosystem. ads.txt stands for Authorized Digital Sellers and is a simple, flexible and secure method that publishers and distributors can use to publicly declare the companies they authorize to sell their digital inventory.
+
+Feel free to edit the default `ads.txt` Template to your heart's content.
+
+The **View ads.txt** button lets you view your rendered `ads.txt`.
 
 #### Global SEO AdminCP Fields
 
@@ -219,6 +231,8 @@ SEOmatic can automatically include files such as `.pdf`, `.xls`, `.doc` and othe
 In addition, SEOmatic can automatically create [Image sitemaps](https://support.google.com/webmasters/answer/178636?hl=en) and [Video sitemaps](https://developers.google.com/webmasters/videosearch/sitemaps) from images & videos in Asset fields or Asset fields in matrix blocks
 
 Because XML sitemaps can be quite time-intensive to generate as the number of entries scales up, SEOmatic creates your sitemaps via a Queue job, and caches the result. The cache is automatically broken whenever something in that sitemap is changed, and a new Queue job is created to regenerate it.
+
+If `runQueueAutomatically` is set to `false` in [General Config Settings](https://docs.craftcms.com/v3/config/config-settings.html#runqueueautomatically) the Queue job to create the sitemap will not be run during the http request for the sitemap. You'll need to run it manually via whatever means you use to run the Queue.
 
 Sitemap Indexes are automatically submitted to search engines whenever a new Section, Category Group, or Commerce Product Type is added.
 
@@ -458,6 +472,7 @@ SEOmatic allows you to restrict access to various parts of the plugin based on U
   * Facebook
   * Robots
   * Humans
+  * Ads
 * Edit Content SEO
   * General
   * Twitter
