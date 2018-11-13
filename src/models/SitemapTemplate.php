@@ -136,6 +136,11 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             // If the queue should be run automatically, do it now
             if (Craft::$app->getConfig()->getGeneral()->runQueueAutomatically) {
                 $queue->run();
+                // Try it again now
+                $result = $cache->get($cacheKey);
+                if ($result !== false) {
+                    return $result;
+                }
             }
             // Return an empty XML document
             $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
