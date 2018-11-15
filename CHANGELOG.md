@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.31 - 2018.11.15
+### Changed
+* Fix division by zero error if no sections exist
+
 ## 3.1.30 - 2018.11.13
 ### Added
 * Added support for the [ads.txt](https://iabtechlab.com/ads-txt/) Authorized Digital Sellers standard
