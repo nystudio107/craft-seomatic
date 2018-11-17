@@ -159,7 +159,7 @@ class PullField
                 $transformName = '"'.$transformName.'"';
                 $transformMode = '"'.$transformMode.'"';
                 // Special-case Twitter transforms
-                if ($transformName === 'twitter') {
+                if ($fieldName === 'twitterImage') {
                     $transformName = 'seomatic.helper.twitterTransform()';
                 }
                 // Reset the fields to empty by default
