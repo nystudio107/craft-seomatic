@@ -3,6 +3,7 @@
 ## 3.1.31 - 2018.11.15
 ### Changed
 * Fix division by zero error if no sections exist
+* Dynamically base the Twitter transform type from the current evaluated type, rather than hardcoding it
 
 ## 3.1.30 - 2018.11.13
 ### Added
