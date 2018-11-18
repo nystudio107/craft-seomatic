@@ -418,29 +418,31 @@ class Sitemaps extends Component implements SitemapInterface
             'Sitemap cache cleared: '.$handle,
             __METHOD__
         );
-        $sites = Craft::$app->getSites();
-        if ($siteId === null) {
-            $siteId = $sites->currentSite->id ?? 1;
+        if (Seomatic::$settings->regenerateSitemapsAutomatically) {
+            $sites = Craft::$app->getSites();
+            if ($siteId === null) {
+                $siteId = $sites->currentSite->id ?? 1;
+            }
+            $site = $sites->getSiteById($siteId);
+            // Start up a job to generate the sitemap
+            $queue = Craft::$app->getQueue();
+            $jobId = $queue->push(new GenerateSitemap([
+                'groupId' => $site->groupId,
+                'type' => $type,
+                'handle' => $handle,
+                'siteId' => $siteId,
+            ]));
+            Craft::debug(
+                Craft::t(
+                    'seomatic',
+                    'Started GenerateSitemap queue job id: {jobId}',
+                    [
+                        'jobId' => $jobId,
+                    ]
+                ),
+                __METHOD__
+            );
         }
-        $site = $sites->getSiteById($siteId);
-        // Start up a job to generate the sitemap
-        $queue = Craft::$app->getQueue();
-        $jobId = $queue->push(new GenerateSitemap([
-            'groupId' => $site->groupId,
-            'type' => $type,
-            'handle' => $handle,
-            'siteId' => $siteId,
-        ]));
-        Craft::debug(
-            Craft::t(
-                'seomatic',
-                'Started GenerateSitemap queue job id: {jobId}',
-                [
-                    'jobId' => $jobId,
-                ]
-            ),
-            __METHOD__
-        );
     }
 
     /**
