@@ -94,7 +94,7 @@ class SeomaticVariable extends ServiceLocator
             'script' => Script::class,
             'tag' => Tag::class,
             'title' => Title::class,
-            'manifest' => ManifestVariable::class
+            'manifest' => Manifest::class
         ];
 
         $config['components'] = $components;
