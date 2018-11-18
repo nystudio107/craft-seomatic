@@ -39,6 +39,9 @@ return [
     // Should SEOmatic render frontend sitemaps?
     'sitemapsEnabled' => true,
 
+    // Should sitemaps be regenerated automatically?
+    'regenerateSitemapsAutomatically' => true,
+
     // Should SEOmatic add to the http response headers?
     'headersEnabled' => true,
 

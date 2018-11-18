@@ -1,5 +1,14 @@
 # SEOmatic Changelog
 
+## 3.1.31 - 2018.11.18
+### Added
+* Added a console command `./craft seomatic/sitemap/generate` to generate sitemaps via the CLI
+* Added the SEOmatic->Plugin setting **Regenerate Sitemaps Automatically** to control the automatic regenerate of sitemaps
+
+### Changed
+* Fix division by zero error if no sections exist
+* Dynamically base the Twitter transform type from the current evaluated type, rather than hardcoding it
+
 ## 3.1.30 - 2018.11.13
 ### Added
 * Added support for the [ads.txt](https://iabtechlab.com/ads-txt/) Authorized Digital Sellers standard

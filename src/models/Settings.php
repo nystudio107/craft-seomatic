@@ -39,6 +39,10 @@ class Settings extends VarsModel
     public $sitemapsEnabled = true;
 
     /**
+     * @var bool Should sitwmaps be regenerated automatically?
+     */
+    public $regenerateSitemapsAutomatically = true;
+    /**
      * @var bool Should SEOmatic add to the http response headers?
      */
     public $headersEnabled = true;
@@ -108,6 +112,7 @@ class Settings extends VarsModel
                 [
                     'renderEnabled',
                     'sitemapsEnabled',
+                    'regenerateSitemapsAutomatically',
                     'headersEnabled',
                     'generatorEnabled',
                     'addHrefLang',

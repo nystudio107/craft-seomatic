@@ -155,12 +155,12 @@ class PullField
                 $seoFieldWidth = $fields['seoField'].'Width';
                 $seoFieldHeight = $fields['seoField'].'Height';
                 $transformName = $fields['transformName'];
+                // Quote all the things here for clarity
+                $transformName = '"'.$transformName.'"';
+                $transformMode = '"'.$transformMode.'"';
                 // Special-case Twitter transforms
-                if ($transformName === 'twitter') {
-                    $transformName = 'twitter-summary';
-                    if (!empty($globalsSettings['twitterCard']) && $globalsSettings['twitterCard'] === 'summary_large_image') {
-                        $transformName = 'twitter-large';
-                    }
+                if ($fieldName === 'twitterImage') {
+                    $transformName = 'seomatic.helper.twitterTransform()';
                 }
                 // Reset the fields to empty by default
                 if ($source !== 'fromUrl') {
@@ -181,21 +181,21 @@ class PullField
                                         if (!empty($seoSourceField)) {
                                             $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
                                                 .$objectPrefix.$elementName.$seoSourceField.'[0]'
-                                                .', "'.$transformName.'"'
+                                                .', '.$transformName
                                                 .', '.$siteId
-                                                .', "'.$transformMode.'"'
+                                                .', '.$transformMode
                                                 .')}';
                                             $globalsSettings[$fieldNameWidth] = '{seomatic.helper.socialTransformWidth('
                                                 .$objectPrefix.$elementName.$seoSourceField.'[0]'
-                                                .', "'.$transformName.'"'
+                                                .', '.$transformName
                                                 .', '.$siteId
-                                                .', "'.$transformMode.'"'
+                                                .', '.$transformMode
                                                 .')}';
                                             $globalsSettings[$fieldNameHeight] = '{seomatic.helper.socialTransformHeight('
                                                 .$objectPrefix.$elementName.$seoSourceField.'[0]'
-                                                .', "'.$transformName.'"'
+                                                .', '.$transformName
                                                 .', '.$siteId
-                                                .', "'.$transformMode.'"'
+                                                .', '.$transformMode
                                                 .')}';
                                         }
                                         break;
@@ -203,21 +203,21 @@ class PullField
                                         if (!empty($seoIds)) {
                                             $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
                                                 .$seoIds[0]
-                                                .', "'.$transformName.'"'
+                                                .', '.$transformName
                                                 .', '.$siteId
-                                                .', "'.$transformMode.'"'
+                                                .', '.$transformMode
                                                 .')}';
                                             $globalsSettings[$fieldNameWidth] = '{seomatic.helper.socialTransformWidth('
                                                 .$seoIds[0]
-                                                .', "'.$transformName.'"'
+                                                .', '.$transformName
                                                 .', '.$siteId
-                                                .', "'.$transformMode.'"'
+                                                .', '.$transformMode
                                                 .')}';
                                             $globalsSettings[$fieldNameHeight] = '{seomatic.helper.socialTransformHeight('
                                                 .$seoIds[0]
-                                                .', "'.$transformName.'"'
+                                                .', '.$transformName
                                                 .', '.$siteId
-                                                .', "'.$transformMode.'"'
+                                                .', '.$transformMode
                                                 .')}';
                                         }
                                         break;
@@ -233,21 +233,21 @@ class PullField
                             if (!empty($sourceField)) {
                                 $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
                                     .$objectPrefix.$elementName.$sourceField.'[0]'
-                                    .', "'.$transformName.'"'
+                                    .', '.$transformName
                                     .', '.$siteId
-                                    .', "'.$transformMode.'"'
+                                    .', '.$transformMode
                                     .')}';
                                 $globalsSettings[$fieldNameWidth] = '{seomatic.helper.socialTransformWidth('
                                     .$objectPrefix.$elementName.$sourceField.'[0]'
-                                    .', "'.$transformName.'"'
+                                    .', '.$transformName
                                     .', '.$siteId
-                                    .', "'.$transformMode.'"'
+                                    .', '.$transformMode
                                     .')}';
                                 $globalsSettings[$fieldNameHeight] = '{seomatic.helper.socialTransformHeight('
                                     .$objectPrefix.$elementName.$sourceField.'[0]'
-                                    .', "'.$transformName.'"'
+                                    .', '.$transformName
                                     .', '.$siteId
-                                    .', "'.$transformMode.'"'
+                                    .', '.$transformMode
                                     .')}';
                             }
                             break;
@@ -255,21 +255,21 @@ class PullField
                             if (!empty($ids)) {
                                 $globalsSettings[$fieldName] = '{seomatic.helper.socialTransform('
                                     .$ids[0]
-                                    .', "'.$transformName.'"'
+                                    .', '.$transformName
                                     .', '.$siteId
-                                    .', "'.$transformMode.'"'
+                                    .', '.$transformMode
                                     .')}';
                                 $globalsSettings[$fieldNameWidth] = '{seomatic.helper.socialTransformWidth('
                                     .$ids[0]
-                                    .', "'.$transformName.'"'
+                                    .', '.$transformName
                                     .', '.$siteId
-                                    .', "'.$transformMode.'"'
+                                    .', '.$transformMode
                                     .')}';
                                 $globalsSettings[$fieldNameHeight] = '{seomatic.helper.socialTransformHeight('
                                     .$ids[0]
-                                    .', "'.$transformName.'"'
+                                    .', '.$transformName
                                     .', '.$siteId
-                                    .', "'.$transformMode.'"'
+                                    .', '.$transformMode
                                     .')}';
                             }
                             break;

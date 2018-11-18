@@ -38,8 +38,31 @@ class Helper extends Component
     // Constants
     // =========================================================================
 
+    const TWITTER_TRANSFORM_MAP = [
+            'summary' => 'twitter-summary',
+            'summary_large_image' => 'twitter-large',
+            'app' => 'twitter-large',
+            'player' => 'twitter-large',
+        ];
+
     // Public Methods
     // =========================================================================
+
+    /**
+     * Return the appropriate Twitter Transform based on the current $metaGlobalVars->twitterCard
+     *
+     * @return string
+     */
+    public static function twitterTransform(): string
+    {
+        $transform = 'twitter-summary';
+        $metaGlobalVars = Seomatic::$plugin->metaContainers->metaGlobalVars;
+        if ($metaGlobalVars) {
+            $transform = self::TWITTER_TRANSFORM_MAP[$metaGlobalVars->twitterCard] ?? $transform;
+        }
+
+        return $transform;
+    }
 
     /**
      * Return the canonical URL for the request, with the query string stripped

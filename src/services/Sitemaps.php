@@ -52,7 +52,7 @@ class Sitemaps extends Component implements SitemapInterface
 
     const SEARCH_ENGINE_SUBMISSION_URLS = [
         'google' => 'http://www.google.com/webmasters/sitemaps/ping?sitemap=',
-        'bing'   => 'http://www.bing.com/webmaster/ping.aspx?siteMap=',
+        'bing' => 'http://www.bing.com/webmaster/ping.aspx?siteMap=',
     ];
 
     // Protected Properties
@@ -137,7 +137,7 @@ class Sitemaps extends Component implements SitemapInterface
             .'/'
             .'sitemap-index';
         $rules['sitemap.xml'] = [
-            'route'    => $route,
+            'route' => $route,
             'defaults' => ['groupId' => $groupId],
         ];
         foreach ($this->sitemapTemplateContainer->data as $sitemapTemplate) {
@@ -413,6 +413,7 @@ class Sitemaps extends Component implements SitemapInterface
     public function invalidateSitemapCache(string $handle, int $siteId, string $type)
     {
         $cache = Craft::$app->getCache();
+        // If the queue should be run automatically, do it now
         TagDependency::invalidate($cache, SitemapTemplate::SITEMAP_CACHE_TAG.$handle.$siteId);
         Craft::info(
             'Sitemap cache cleared: '.$handle,

@@ -230,13 +230,44 @@ SEOmatic can automatically include files such as `.pdf`, `.xls`, `.doc` and othe
 
 In addition, SEOmatic can automatically create [Image sitemaps](https://support.google.com/webmasters/answer/178636?hl=en) and [Video sitemaps](https://developers.google.com/webmasters/videosearch/sitemaps) from images & videos in Asset fields or Asset fields in matrix blocks
 
+Sitemap Indexes are automatically submitted to search engines whenever a new Section, Category Group, or Commerce Product Type is added.
+
+Section Sitemaps are automatically submitted to search engines whenever a new Element in that Section, Category Group, or Commerce Product Type is added.
+
+##### Sitemap Generation
+
 Because XML sitemaps can be quite time-intensive to generate as the number of entries scales up, SEOmatic creates your sitemaps via a Queue job, and caches the result. The cache is automatically broken whenever something in that sitemap is changed, and a new Queue job is created to regenerate it.
 
 If `runQueueAutomatically` is set to `false` in [General Config Settings](https://docs.craftcms.com/v3/config/config-settings.html#runqueueautomatically) the Queue job to create the sitemap will not be run during the http request for the sitemap. You'll need to run it manually via whatever means you use to run the Queue.
 
-Sitemap Indexes are automatically submitted to search engines whenever a new Section, Category Group, or Commerce Product Type is added.
+Normally SEOmatic will regenerate the sitemap for a Section, Category Group, or Product any time you save an element. However, if you are importing a large number of elements, or prefer to regenerate the sitemap manually you can set disable the **Regenerate Sitemaps Automatically** option in SEOmatic's Plugin Settings.
 
-Section Sitemaps are automatically submitted to search engines whenever a new Element in that Section, Category Group, or Commerce Product Type is added.
+You can then regenerate the sitemap via CLI. This will regenerate all sitemaps:
+
+```bash
+./craft seomatic/sitemap/generate
+```
+
+You can also limit it to a specific Section, Category Group, or Product handle:
+
+```bash
+./craft seomatic/sitemap/generate --handle=blog
+```
+
+...or you can regenerate all sitemaps for a specific `siteId`:
+
+```bash
+./craft seomatic/sitemap/generate --siteId=1
+```
+
+...or both:
+
+```bash
+./craft seomatic/sitemap/generate --handle=blog --siteId=1
+```
+**N.B.:** If you do disable **Regenerate Sitemaps Automatically** sitemaps will _not_ be updated unless you do so manually via the CLI, or clear SEOmatic's sitemap caches via Utilities->Clear Caches.
+
+##### Additional Sitemap URLS
 
 If you have custom URLs that are not in the CMS, you can manually add them to their own Sitemap Index via **Site Settings** → **Miscellaneous**.
 
@@ -424,6 +455,9 @@ return [
 
     // Should SEOmatic render frontend sitemaps?
     'sitemapsEnabled' => true,
+
+    // Should sitemaps be regenerated automatically?
+    'regenerateSitemapsAutomatically' => true,
 
     // The server environment, either `live`, `staging`, or `local`
     'environment' => 'live',
