@@ -419,7 +419,9 @@ class MetaBundles extends Component
                     $metaBundle->sourceDateUpdated = $dateUpdated;
                     // Update the meta bundle data
                     $this->updateMetaBundle($metaBundle, $sourceSiteId);
-                    if ($metaBundle && $element->scenario !== Element::SCENARIO_ESSENTIALS) {
+                    if ($metaBundle
+                        && $element->scenario !== Element::SCENARIO_ESSENTIALS
+                        && Seomatic::$settings->regenerateSitemapsAutomatically) {
                         Seomatic::$plugin->sitemaps->invalidateSitemapCache(
                             $metaBundle->sourceHandle,
                             $metaBundle->sourceSiteId,
