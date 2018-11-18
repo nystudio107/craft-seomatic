@@ -32,7 +32,7 @@
             warning: configWarning("renderEnabled", "seomatic"),
             errors: settings.getErrors("renderEnabled"),
         }) }}
-    
+
         {{ forms.lightswitchField({
             label: "Sitemaps Enabled"|t("seomatic"),
             instructions: "Controls whether SEOmatic will automatically render frontend sitemaps for your website."|t("seomatic"),
@@ -42,7 +42,17 @@
             warning: configWarning("sitemapsEnabled", "seomatic"),
             errors: settings.getErrors("sitemapsEnabled"),
         }) }}
-    
+
+        {{ forms.lightswitchField({
+            label: "Regenerate Sitemaps Automatically"|t("seomatic"),
+            instructions: "Controls whether sitemaps will automatically be regenerated when entries are saved."|t("seomatic"),
+            id: "regenerateSitemapsAutomatically",
+            name: "regenerateSitemapsAutomatically",
+            on: settings.regenerateSitemapsAutomatically,
+            warning: configWarning("regenerateSitemapsAutomatically", "seomatic"),
+            errors: settings.getErrors("regenerateSitemapsAutomatically"),
+        }) }}
+
         {{ forms.lightswitchField({
             label: "HTTP Headers Enabled"|t("seomatic"),
             instructions: "Controls whether SEOmatic will automatically add `X-Robots-Tag`, `canonical`, & `Referrer-Policy` to the http response headers."|t("seomatic"),
@@ -52,7 +62,7 @@
             warning: configWarning("headersEnabled", "seomatic"),
             errors: settings.getErrors("headersEnabled"),
         }) }}
-    
+
         {{ forms.selectField({
             label: "Environment"|t("seomatic"),
             instructions: "The server environment, either `live`, `staging`, or `local`. If `devMode` is on, SEOmatic will override this setting to `local` Development."|t("seomatic"),
@@ -77,7 +87,7 @@
             warning: configWarning("displayPreviewSidebar", "seomatic"),
             errors: settings.getErrors("displayPreviewSidebar"),
         }) }}
-        
+
 {# @TODO: This will be added an upcoming "pro" edition
 
         {{ forms.lightswitchField({
@@ -136,7 +146,7 @@
             warning: configWarning("maxDescriptionLength", "seomatic"),
             errors: settings.getErrors("maxDescriptionLength"),
         }) }}
-    
+
         {{ forms.lightswitchField({
             label: "Site Groups define logically separate sites"|t("seomatic"),
             instructions: "If you are using Site Groups to logically separate 'sister sites', turn this on."|t("seomatic"),
@@ -146,7 +156,7 @@
             warning: configWarning("siteGroupsSeparate", "seomatic"),
             errors: settings.getErrors("siteGroupsSeparate"),
         }) }}
-    
+
         {{ forms.lightswitchField({
             label: "Add `hreflang` Tags"|t("seomatic"),
             instructions: "Controls whether SEOmatic will automatically add `hreflang` and `og:locale:alternate` tags."|t("seomatic"),
