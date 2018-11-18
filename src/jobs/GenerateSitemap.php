@@ -158,7 +158,7 @@ class GenerateSitemap extends BaseJob
                 $this->setProgress($queue, $currentElement++ / $totalElements);
                 // Output some info if this is a console app
                 if (Craft::$app instanceof ConsoleApplication) {
-                    echo "Processing element {$currentElement}/{$totalElements}".PHP_EOL;
+                    echo "Processing element {$currentElement}/{$totalElements} - {$element->title}".PHP_EOL;
                 }
                 $metaBundle->metaSitemapVars->setAttributes($stashedSitemapAttrs, false);
                 // Make sure this entry isn't disabled
