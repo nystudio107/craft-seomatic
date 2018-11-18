@@ -409,8 +409,9 @@ class Sitemaps extends Component implements SitemapInterface
      * @param string $handle
      * @param int    $siteId
      * @param string $type
+     * @param bool   $force
      */
-    public function invalidateSitemapCache(string $handle, int $siteId, string $type)
+    public function invalidateSitemapCache(string $handle, int $siteId, string $type, bool $force = false)
     {
         $cache = Craft::$app->getCache();
         TagDependency::invalidate($cache, SitemapTemplate::SITEMAP_CACHE_TAG.$handle.$siteId);
@@ -418,7 +419,7 @@ class Sitemaps extends Component implements SitemapInterface
             'Sitemap cache cleared: '.$handle,
             __METHOD__
         );
-        if (Seomatic::$settings->regenerateSitemapsAutomatically) {
+        if (Seomatic::$settings->regenerateSitemapsAutomatically || $force) {
             $sites = Craft::$app->getSites();
             if ($siteId === null) {
                 $siteId = $sites->currentSite->id ?? 1;
