@@ -425,6 +425,9 @@ return [
     // Should SEOmatic render frontend sitemaps?
     'sitemapsEnabled' => true,
 
+    // Should sitemaps be regenerated automatically?
+    'regenerateSitemapsAutomatically' => true,
+
     // The server environment, either `live`, `staging`, or `local`
     'environment' => 'live',
 
