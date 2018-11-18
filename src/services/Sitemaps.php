@@ -52,7 +52,7 @@ class Sitemaps extends Component implements SitemapInterface
 
     const SEARCH_ENGINE_SUBMISSION_URLS = [
         'google' => 'http://www.google.com/webmasters/sitemaps/ping?sitemap=',
-        'bing'   => 'http://www.bing.com/webmaster/ping.aspx?siteMap=',
+        'bing' => 'http://www.bing.com/webmaster/ping.aspx?siteMap=',
     ];
 
     // Protected Properties
@@ -137,7 +137,7 @@ class Sitemaps extends Component implements SitemapInterface
             .'/'
             .'sitemap-index';
         $rules['sitemap.xml'] = [
-            'route'    => $route,
+            'route' => $route,
             'defaults' => ['groupId' => $groupId],
         ];
         foreach ($this->sitemapTemplateContainer->data as $sitemapTemplate) {
@@ -409,41 +409,39 @@ class Sitemaps extends Component implements SitemapInterface
      * @param string $handle
      * @param int    $siteId
      * @param string $type
-     * @param bool   $force
      */
-    public function invalidateSitemapCache(string $handle, int $siteId, string $type, bool $force = false)
+    public function invalidateSitemapCache(string $handle, int $siteId, string $type)
     {
         $cache = Craft::$app->getCache();
+        // If the queue should be run automatically, do it now
         TagDependency::invalidate($cache, SitemapTemplate::SITEMAP_CACHE_TAG.$handle.$siteId);
         Craft::info(
             'Sitemap cache cleared: '.$handle,
             __METHOD__
         );
-        if (Seomatic::$settings->regenerateSitemapsAutomatically || $force) {
-            $sites = Craft::$app->getSites();
-            if ($siteId === null) {
-                $siteId = $sites->currentSite->id ?? 1;
-            }
-            $site = $sites->getSiteById($siteId);
-            // Start up a job to generate the sitemap
-            $queue = Craft::$app->getQueue();
-            $jobId = $queue->push(new GenerateSitemap([
-                'groupId' => $site->groupId,
-                'type' => $type,
-                'handle' => $handle,
-                'siteId' => $siteId,
-            ]));
-            Craft::debug(
-                Craft::t(
-                    'seomatic',
-                    'Started GenerateSitemap queue job id: {jobId}',
-                    [
-                        'jobId' => $jobId,
-                    ]
-                ),
-                __METHOD__
-            );
+        $sites = Craft::$app->getSites();
+        if ($siteId === null) {
+            $siteId = $sites->currentSite->id ?? 1;
         }
+        $site = $sites->getSiteById($siteId);
+        // Start up a job to generate the sitemap
+        $queue = Craft::$app->getQueue();
+        $jobId = $queue->push(new GenerateSitemap([
+            'groupId' => $site->groupId,
+            'type' => $type,
+            'handle' => $handle,
+            'siteId' => $siteId,
+        ]));
+        Craft::debug(
+            Craft::t(
+                'seomatic',
+                'Started GenerateSitemap queue job id: {jobId}',
+                [
+                    'jobId' => $jobId,
+                ]
+            ),
+            __METHOD__
+        );
     }
 
     /**
