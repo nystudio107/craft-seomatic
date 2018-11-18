@@ -43,7 +43,6 @@ use craft\elements\User;
 use craft\errors\SiteNotFoundException;
 use craft\events\CategoryGroupEvent;
 use craft\events\ElementEvent;
-use craft\events\ExceptionEvent;
 use craft\events\DeleteTemplateCachesEvent;
 use craft\events\PluginEvent;
 use craft\events\RegisterCacheOptionsEvent;
@@ -61,14 +60,11 @@ use craft\services\TemplateCaches;
 use craft\services\UserPermissions;
 use craft\helpers\UrlHelper;
 use craft\utilities\ClearCaches;
-use craft\web\ErrorHandler;
-use yii\web\HttpException;
 use craft\web\UrlManager;
 use craft\web\View;
 
 use craft\commerce\Plugin as CommercePlugin;
 use craft\commerce\elements\Product;
-use craft\commerce\models\ProductType;
 
 use yii\base\Event;
 
@@ -200,6 +196,11 @@ class Seomatic extends Plugin
     {
         parent::init();
         self::$plugin = $this;
+        // Handle any console commands
+        $request = Craft::$app->getRequest();
+        if ($request->getIsConsoleRequest()) {
+            $this->controllerNamespace = 'nystudio107\seomatic\console\controllers';
+        }
         // Initialize properties
         self::$settings = Seomatic::$plugin->getSettings();
         self::$devMode = Craft::$app->getConfig()->getGeneral()->devMode;
