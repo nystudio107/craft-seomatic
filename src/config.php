@@ -57,6 +57,12 @@ return [
     // If `devMode` is on, prefix the <title> with this string
     'devModeTitlePrefix' => '&#x1f6a7; ',
 
+     //  Prefix the AdminCP <title> with this string
+    'cpTitlePrefix' => '&#x2699; ',
+
+    // If `devMode` is on, prefix the AdminCP <title> with this string
+    'devModeCpTitlePrefix' => '&#x2622; ',
+
     // The separator character to use for the `<title>` tag
     'separatorChar' => '|',
 
