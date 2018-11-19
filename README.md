@@ -434,6 +434,8 @@ The Plugin Settings lets you control various SEOmatic settings globally (across 
 * **Environment** - The server environment, either `live`, `staging`, or `local`. If `devMode` is on, SEOmatic will override this setting to local Development. This setting controls whether certain things render; for instance only in the `live` production environment will Google Analytics and other tracking tags send analytics data. SEOmatic also automatically sets the `robots` tag to `none` for everything but the `live` production environment.
 * **Display Sidebar SEO Preview** - Controls whether to display the Google, Twitter, and Facebook social media previews in the sidebar on entry. category, and product pages.
 * **devMode `<title>` prefix** - If devMode is on, prefix the `<title>` with this string
+* **AdminCP `<title>` prefix** - Prefix the AdminCP `<title>` with this string
+* **devMode AdminCP `<title>` prefix** - If devMode is on, prefix the AdminCP `<title>` with this string
 * **Separator Character** - The separator character to use for the `<title>` tag
 * **Max SEO Title Length** - The max number of characters in the <title> tag; anything beyond this will be truncated on word boundaries
 * **Max SEO Description Length** - The max number of characters in the `meta description` tag
