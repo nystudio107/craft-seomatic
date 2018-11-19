@@ -68,6 +68,16 @@ class Settings extends VarsModel
     public $devModeTitlePrefix = '&#x1f6a7; ';
 
     /**
+     * @var string Prefix the AdminCP <title> with this string
+     */
+    public $cpTitlePrefix = '&#x2699; ';
+
+    /**
+     * @var string If `devMode` is on, prefix the AdminCP <title> with this string
+     */
+    public $devModeCpTitlePrefix = '&#x2622; ';
+
+    /**
      * @var string The separator character to use for the `<title>` tag
      */
     public $separatorChar = '|';
@@ -127,7 +137,7 @@ class Settings extends VarsModel
             ]],
             ['displayPreviewSidebar', 'boolean'],
             ['displayAnalysisSidebar', 'boolean'],
-            ['devModeTitlePrefix', 'string'],
+            [['devModeTitlePrefix', 'cpTitlePrefix', 'devModeCpTitlePrefix'], 'string'],
             ['separatorChar', 'string'],
             ['separatorChar', 'default', 'value' => '|'],
             ['maxTitleLength', 'integer', 'min' => 10],
