@@ -334,7 +334,7 @@ class GenerateSitemap extends BaseJob
         ]);
         $lines = implode("\r\n", $lines);
         // Cache sitemap cache; we use this instead of Seomatic::$cacheDuration because for
-        // AdminCP requests, we set Seomatic::$cacheDuration = 1 so that they are never
+        // Control Panel requests, we set Seomatic::$cacheDuration = 1 so that they are never
         // cached
         $cacheDuration = Seomatic::$devMode
             ? Seomatic::DEVMODE_CACHE_DURATION
