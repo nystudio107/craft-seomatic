@@ -2,7 +2,7 @@
 
 ## 3.1.32 - 2018.11.19
 ### Added
-* Added `<title>` prefixes for the AdminCP and `devMode` AdminCP
+* Added `<title>` prefixes for the Control Panel and `devMode` Control Panel
 * Allow social media images to be either `.jpg` or `.png` formats
 
 ## 3.1.31 - 2018.11.18
@@ -21,7 +21,7 @@
 ### Changed
 * Clear FastCGI Caches upon sitemap generation
 * If `runQueueAutomatically` is `true` return the generated sitemap immediately via http request
-* Adjusted AdminCP dashboard charts
+* Adjusted Control Panel dashboard charts
 * Fixed an issue where the Content SEO settings would display sections that are not enabled for a given site
 
 ## 3.1.29 - 2018.11.11
@@ -39,7 +39,7 @@
 
 ## 3.1.27 - 2018.11.07
 ### Changed
-* Fixed an issue where sitemaps generated in the AdminCP did not have the proper cache duration set, so they were always invalidated
+* Fixed an issue where sitemaps generated in the Control Panel did not have the proper cache duration set, so they were always invalidated
 * Disabled tracking scripts from sending Page View data during Live Preview
 * Ensure background image values are quoted for the SEO previews
 * If `runQueueAutomatically` is set, start running the queue job to generate the sitemap immediately
@@ -97,7 +97,7 @@
 
 ### Changed
 * SEOmatic will now automatically take the `dataLayer` property into account for the script container's cache key
-* Better document titles for SEOmatic AdminCP pages
+* Better document titles for SEOmatic Control Panel pages
 * Remove vestigial Redirects classes
 * Don't check the response `statusCode` for console requests
 
@@ -196,12 +196,12 @@
 
 ## 3.1.8 - 2018.08.03
 ### Changed
-* Fixed a regression that caused you to be unable to save **Custom URL** for an image source in the AdminCP
+* Fixed a regression that caused you to be unable to save **Custom URL** for an image source in the Control Panel
 
 ## 3.1.7 - 2018.08.02
 ### Changed
-* Fixed an issue where Content SEO permissions were not respected properly in the AdminCP
-* Display the Tracking Scripts status in the AdminCP regardless of `devMode` setting
+* Fixed an issue where Content SEO permissions were not respected properly in the Control Panel
+* Display the Tracking Scripts status in the Control Panel regardless of `devMode` setting
 
 ### Added
 * Don't render a canonical url for http status codes >= 400
@@ -334,7 +334,7 @@
 
 ## 3.0.15 - 2018.05.17
 ### Changed
-* Fixed a regression that caused per-environment settings to be applied in the AdminCP
+* Fixed a regression that caused per-environment settings to be applied in the Control Panel
 * Fixed an issue that caused `seomatic.xxx.get()` to not return `null` if no matching item was found
 
 ## 3.0.14 - 2018.05.17
@@ -411,10 +411,10 @@
 
 ## 3.0.3 - 2018.04.25
 ### Changed
-* Fixed an issue where re-using the same Field handle from other Field types would cause an exception to be thrown in the AdminCP
+* Fixed an issue where re-using the same Field handle from other Field types would cause an exception to be thrown in the Control Panel
 * Improved the way SEOmatic matches the current element
-* Bypass the data cache entirely in the AdminCP, to avoid refresh issues
-* Fixed an issue where sometimes the correct data is not what is previewed in the AdminCP
+* Bypass the data cache entirely in the Control Panel, to avoid refresh issues
+* Fixed an issue where sometimes the correct data is not what is previewed in the Control Panel
 * Fixed an issue where the `canonicalUrl` seemed immutable on the Global SEO pages
 
 ## 3.0.2 - 2018.04.24
@@ -459,7 +459,7 @@
 
 ### Changed
 * Fixed an issue with the Field improperly saving values as objects
-* Removed caching from AdminCP requests, which fixes improperly displayed social media previews
+* Removed caching from Control Panel requests, which fixes improperly displayed social media previews
 * Fixed a deprecation error with `.iso8601()`
 
 ### Changed
@@ -480,7 +480,7 @@
 ## 3.0.0-beta.20 - 2018.04.02
 ### Changed
 * Added additional fields for the `mainEntityOfPage` JSON-LD
-* Clicking on Settings on from the AdminCP now redirects to the appropriate SEOmatic sub-nav
+* Clicking on Settings on from the Control Panel now redirects to the appropriate SEOmatic sub-nav
 
 ### Added
 * Added an **SEO Settings** Field that allows you to override SEO settings on a per-entry basis
@@ -573,7 +573,7 @@
 
 ## 3.0.0-beta.9 - 2018.03.18
 ### Added
-* Added `Schema` helper class & controller in preparation for dynamic schema types displayed in the AdminCP
+* Added `Schema` helper class & controller in preparation for dynamic schema types displayed in the Control Panel
 
 ### Changed
 * Fixed incorrect `moz-transform` vendor prefix that caused the sidebar SEO preview to look weird in FireFox
@@ -616,7 +616,7 @@
 * Added a migration for older Craft 2.x sites that had SEOmatic installed already, so that SEOmatic for Craft 3 can install its base tables
 
 ### Changed
-* Fixed an issue with an incorrect redirect destination after saving a Tracking Scripts setting in the AdminCP
+* Fixed an issue with an incorrect redirect destination after saving a Tracking Scripts setting in the Control Panel
 * Optimized the images used in the documentation
 
 ## 3.0.0-beta.2 - 2018.03.13

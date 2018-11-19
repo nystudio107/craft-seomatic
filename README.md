@@ -30,7 +30,7 @@ To install SEOmatic, follow these steps:
 1. Install with Composer via `composer require nystudio107/craft-seomatic`
 2. Install plugin in the Craft Control Panel under Settings > Plugins
 
-You can also install SEOmatic via the **Plugin Store** in the Craft AdminCP.
+You can also install SEOmatic via the **Plugin Store** in the Craft Control Panel.
 
 SEOmatic works on Craft 3.x.
 
@@ -162,11 +162,11 @@ Feel free to edit the default `ads.txt` Template to your heart's content.
 
 The **View ads.txt** button lets you view your rendered `ads.txt`.
 
-#### Global SEO AdminCP Fields
+#### Global SEO Control Panel Fields
 
-The fields in the AdminCP Global SEO settings are parsed as Twig object templates, so in addition to plain old text, you can also put single and double bracket Twig expressions.
+The fields in the Control Panel Global SEO settings are parsed as Twig object templates, so in addition to plain old text, you can also put single and double bracket Twig expressions.
 
-This is entirely optional; in typical usage the controls you have in the AdminCP for pulling from other fields will be all you need. But the ability is there if you need it.
+This is entirely optional; in typical usage the controls you have in the Control Panel for pulling from other fields will be all you need. But the ability is there if you need it.
 
 For example, the following will output the contents of the **companyInfo** field from the **siteInfo** Global:
 
@@ -289,11 +289,11 @@ $e->sitemapUrls[] = [
  });
 ```
 
-#### Content SEO AdminCP Fields
+#### Content SEO Control Panel Fields
 
-The fields in the AdminCP Content SEO settings are parsed as Twig object templates, so in addition to plain old text, you can also put single and double bracket Twig expressions.
+The fields in the Control Panel Content SEO settings are parsed as Twig object templates, so in addition to plain old text, you can also put single and double bracket Twig expressions.
 
-This is entirely optional; in typical usage the controls you have in the AdminCP for pulling from other fields will be all you need. But the ability is there if you need it.
+This is entirely optional; in typical usage the controls you have in the Control Panel for pulling from other fields will be all you need. But the ability is there if you need it.
 
 For example, the following will output the contents of the **description** field from the current **Entry**:
 
@@ -429,15 +429,15 @@ If you want to include the Facebook Pixel script despite `devMode` being enabled
 
 The Plugin Settings lets you control various SEOmatic settings globally (across all sites/languages).
 
-* **Plugin name** - This is the name that will be used for the plugin everywhere it is referenced in the AdminCP GUI
+* **Plugin name** - This is the name that will be used for the plugin everywhere it is referenced in the Control Panel GUI
 * **Automatic Render Enabled** - Controls whether SEOmatic will automatically render metadata on your pages. If you turn this off, you will need to manually render the metadata via `{{ seomatic.tag.render() }}`, `{{ seomatic.link.render() }}`, etc. You can selectively disable rendering via Twig with `{% do seomatic.config.renderEnabled(false) %}
 * **Sitemaps Enabled** - Controls whether SEOmatic will automatically render frontend sitemaps for your website.
 * **HTTP Headers Enabled** - Controls whether SEOmatic will automatically add `X-Robots-Tag`, `canonical`, & `Referrer-Policy` to the http response headers.
 * **Environment** - The server environment, either `live`, `staging`, or `local`. If `devMode` is on, SEOmatic will override this setting to local Development. This setting controls whether certain things render; for instance only in the `live` production environment will Google Analytics and other tracking tags send analytics data. SEOmatic also automatically sets the `robots` tag to `none` for everything but the `live` production environment.
 * **Display Sidebar SEO Preview** - Controls whether to display the Google, Twitter, and Facebook social media previews in the sidebar on entry. category, and product pages.
 * **devMode `<title>` prefix** - If devMode is on, prefix the `<title>` with this string
-* **AdminCP `<title>` prefix** - Prefix the AdminCP `<title>` with this string
-* **devMode AdminCP `<title>` prefix** - If devMode is on, prefix the AdminCP `<title>` with this string
+* **Control Panel `<title>` prefix** - Prefix the Control Panel `<title>` with this string
+* **devMode Control Panel `<title>` prefix** - If devMode is on, prefix the Control Panel `<title>` with this string
 * **Separator Character** - The separator character to use for the `<title>` tag
 * **Max SEO Title Length** - The max number of characters in the <title> tag; anything beyond this will be truncated on word boundaries
 * **Max SEO Description Length** - The max number of characters in the `meta description` tag
@@ -801,7 +801,7 @@ This parsing is done automatically by SEOmatic just before the meta information 
 
 #### Meta Variables: `seomatic.meta`
 
-The `seomatic.meta` variable contains all of the meta variables that control the SEO that will be rendered on the site. They are pre-populated from your settings and content in the AdminCP, but you can change them as you see fit.
+The `seomatic.meta` variable contains all of the meta variables that control the SEO that will be rendered on the site. They are pre-populated from your settings and content in the Control Panel, but you can change them as you see fit.
 
 ##### General Variables:
 
@@ -1163,7 +1163,7 @@ Create a new [Article](http://schema.org/Article) JSON-LD meta object:
 }) %}
 ```
 
-Get the existing **MainEntityOfPage** as set in the Global SEO or Content SEO AdminCP section to modify it (schema.org: [mainEntityOfPage](http://schema.org/docs/datamodel.html#mainEntityBackground)):
+Get the existing **MainEntityOfPage** as set in the Global SEO or Content SEO Control Panel section to modify it (schema.org: [mainEntityOfPage](http://schema.org/docs/datamodel.html#mainEntityBackground)):
 ```twig
 {% set mainEntity = seomatic.jsonLd.get('mainEntityOfPage') %}
 ```
@@ -1196,7 +1196,7 @@ Display the breadcrumbs on the page:
 {% endfor %}
 ```
 
-Get the existing **Identity** as set in the Site Settings AdminCP section to modify it:
+Get the existing **Identity** as set in the Site Settings Control Panel section to modify it:
 ```twig
 {% set identity = seomatic.jsonLd.get('identity') %}
 ```
@@ -1215,7 +1215,7 @@ Let's say you want to add a [Brand](https://schema.org/Brand) to the **Identity*
 {% do identity.brand(brand) %}
 ```
 
-Get the existing **Creator** as set in the Site Settings AdminCP section to modify it:
+Get the existing **Creator** as set in the Site Settings Control Panel section to modify it:
 ```twig
 {% set identity = seomatic.jsonLd.get('creator') %}
 ```
@@ -1362,7 +1362,7 @@ or just:
 
 SEOmatic supports the standard `config.php` multi-environment friendly config file for the plugin settings. Just copy the `config.php` to your Craft `config/` directory as `seomatic.php` and you can configure the settings in a multi-environment friendly way.
 
-These are the same settings that are configured in the **Plugin Settings** in the AdminCP.
+These are the same settings that are configured in the **Plugin Settings** in the Control Panel.
 
 ### Meta Bundle / Container Settings
 
