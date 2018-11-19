@@ -242,6 +242,8 @@ If `runQueueAutomatically` is set to `false` in [General Config Settings](https:
 
 Normally SEOmatic will regenerate the sitemap for a Section, Category Group, or Product any time you save an element. However, if you are importing a large number of elements, or prefer to regenerate the sitemap manually you can set disable the **Regenerate Sitemaps Automatically** option in SEOmatic's Plugin Settings.
 
+![Screenshot](resources/screenshots/seomatic-sitemap-console-command.png)
+
 You can then regenerate the sitemap via CLI. This will regenerate all sitemaps:
 
 ```bash
