@@ -112,6 +112,26 @@
         }) }}
 
         {{ forms.textField({
+            label: "AdminCP &lt;title&gt; prefix"|t("seomatic"),
+            instructions: "Prefix the AdminCP &lt;title&gt; with this string"|t("seomatic"),
+            id: "cpTitlePrefix",
+            name: "cpTitlePrefix",
+            value: settings.cpTitlePrefix,
+            warning: configWarning("cpTitlePrefix", "seomatic"),
+            errors: settings.getErrors("cpTitlePrefix"),
+        }) }}
+
+        {{ forms.textField({
+            label: "devMode AdminCP &lt;title&gt; prefix"|t("seomatic"),
+            instructions: "If `devMode` is on, prefix the AdminCP &lt;title&gt; with this string"|t("seomatic"),
+            id: "devModeCpTitlePrefix",
+            name: "devModeCpTitlePrefix",
+            value: settings.devModeCpTitlePrefix,
+            warning: configWarning("devModeCpTitlePrefix", "seomatic"),
+            errors: settings.getErrors("devModeCpTitlePrefix"),
+        }) }}
+
+        {{ forms.textField({
             label: "Separator Character"|t("seomatic"),
             instructions: "The separator character to use for the `&lt;title&gt;` tag"|t("seomatic"),
             id: "separatorChar",
