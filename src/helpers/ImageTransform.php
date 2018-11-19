@@ -27,12 +27,19 @@ class ImageTransform
 
     const SOCIAL_TRANSFORM_QUALITY = 82;
 
+    const ALLOWED_SOCIAL_MIME_TYPES = [
+        'image/jpeg',
+        'image/png',
+    ];
+
+    const DEFAULT_SOCIAL_FORMAT = 'jpg';
+
     // Static Properties
     // =========================================================================
 
     static private $transforms = [
         'base' => [
-            'format' => 'jpg',
+            'format' => null,
             'quality' => self::SOCIAL_TRANSFORM_QUALITY,
             'width' => 1200,
             'height' => 630,
@@ -51,10 +58,10 @@ class ImageTransform
             'height' => 418,
         ],
         'schema-logo' => [
+            'format' => 'png',
             'width' => 600,
             'height' => 60,
             'mode' => 'fit',
-            'format' => 'png'
         ],
     ];
 
@@ -86,6 +93,11 @@ class ImageTransform
         }
         $asset = self::assetFromAssetOrId($asset, $siteId);
         if (($asset !== null) && ($asset instanceof Asset)) {
+            // Make sure the format is an allowed format, otherwise explicitly change it
+            $mimeType = $asset->getMimeType();
+            if (!\in_array($mimeType, self::ALLOWED_SOCIAL_MIME_TYPES, false)) {
+                $transform->format = self::DEFAULT_SOCIAL_FORMAT;
+            }
             // Generate a transformed image
             $assets = Craft::$app->getAssets();
             $url = $assets->getAssetUrl($asset, $transform);
