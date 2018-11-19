@@ -68,14 +68,14 @@ class Settings extends VarsModel
     public $devModeTitlePrefix = '&#x1f6a7; ';
 
     /**
-     * @var string Prefix the AdminCP <title> with this string
+     * @var string Prefix the Control Panel <title> with this string
      */
     public $cpTitlePrefix = '&#x2699; ';
 
     /**
-     * @var string If `devMode` is on, prefix the AdminCP <title> with this string
+     * @var string If `devMode` is on, prefix the Control Panel <title> with this string
      */
-    public $devModeCpTitlePrefix = '&#x2622; ';
+    public $devModeCpTitlePrefix = '&#x1f6a7;&#x2699; ';
 
     /**
      * @var string The separator character to use for the `<title>` tag
