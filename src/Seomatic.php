@@ -722,6 +722,14 @@ class Seomatic extends Plugin
     {
         // Don't cache AdminCP requests
         self::$cacheDuration = 1;
+        // Prefix the AdminCP title
+        self::$view->hook('cp.layouts.base', function (&$context) {
+            if (self::$devMode) {
+                $context['docTitle'] = self::$settings->devModeCpTitlePrefix.$context['docTitle'];
+            } else {
+                $context['docTitle'] = self::$settings->cpTitlePrefix.$context['docTitle'];
+            }
+        });
         // Entries sidebar
         self::$view->hook('cp.entries.edit.details', function (&$context) {
             $html = '';
