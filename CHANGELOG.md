@@ -3,6 +3,7 @@
 ## 3.1.32 - 2018.11.19
 ### Added
 * Added `<title>` prefixes for the AdminCP and `devMode` AdminCP
+* Allow social media images to be either `.jpg` or `.png` formats
 
 ## 3.1.31 - 2018.11.18
 ### Added
