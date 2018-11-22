@@ -81,7 +81,7 @@ class ImageTransform
      */
     public static function socialTransform(
         $asset,
-        string $transformName = '',
+        $transformName = '',
         $siteId = null,
         $transformMode = null
     ): string {
@@ -119,7 +119,7 @@ class ImageTransform
      */
     public static function socialTransformWidth(
         $asset,
-        string $transformName = '',
+        $transformName = '',
         $siteId = null,
         $transformMode = null
     ): string {
@@ -150,7 +150,7 @@ class ImageTransform
      */
     public static function socialTransformHeight(
         $asset,
-        string $transformName = '',
+        $transformName = '',
         $siteId = null,
         $transformMode = null
     ): string {
@@ -223,7 +223,7 @@ class ImageTransform
      *
      * @return AssetTransform|null
      */
-    protected static function createSocialTransform(string $transformName = '')
+    protected static function createSocialTransform($transformName = 'base')
     {
         $transform = null;
         if (!empty($transformName)) {
