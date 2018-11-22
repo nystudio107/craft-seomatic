@@ -346,7 +346,7 @@ class Helper extends Component
      */
     public function socialTransformWidth(
         $asset,
-        string $transformName = '',
+        $transformName = '',
         $siteId = null,
         $transformMode = null
     ): string {
@@ -366,7 +366,7 @@ class Helper extends Component
      */
     public function socialTransformHeight(
         $asset,
-        string $transformName = '',
+        $transformName = '',
         $siteId = null,
         $transformMode = null
     ): string {
