@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.1.33 - 2018.11.21
+## 3.1.33 - 2018.11.22
 ### Changed
 * Fixed an issue with socialTransform() throwing a Twig exception
 
