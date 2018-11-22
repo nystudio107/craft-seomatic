@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.33 - 2018.11.21
+### Changed
+* Fixed an issue with socialTransform() throwing a Twig exception
+
 ## 3.1.32 - 2018.11.19
 ### Added
 * Added `<title>` prefixes for the Control Panel and `devMode` Control Panel
