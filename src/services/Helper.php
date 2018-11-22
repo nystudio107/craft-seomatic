@@ -328,7 +328,7 @@ class Helper extends Component
      *
      * @return string URL to the transformed image
      */
-    public function socialTransform($asset, string $transformName = '', $siteId = null, $transformMode = null): string
+    public function socialTransform($asset, $transformName = '', $siteId = null, $transformMode = null): string
     {
         return ImageTransformHelper::socialTransform($asset, $transformName, $siteId, $transformMode);
     }

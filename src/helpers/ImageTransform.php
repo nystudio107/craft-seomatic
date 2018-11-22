@@ -81,11 +81,14 @@ class ImageTransform
      */
     public static function socialTransform(
         $asset,
-        string $transformName = '',
+        $transformName = '',
         $siteId = null,
         $transformMode = null
     ): string {
         $url = '';
+        if (empty($transformName)) {
+            $transformName = 'base';
+        }
         $transform = self::createSocialTransform($transformName);
         // Let them override the mode
         if ($transform !== null) {
