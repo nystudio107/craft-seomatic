@@ -113,6 +113,13 @@ return [
                 'name'      => '',
                 'property'  => 'og:locale:alternate',
             ],
+            'og:site_name' => [
+                'charset'   => '',
+                'content'   => '{seomatic.site.siteName}',
+                'httpEquiv' => '',
+                'name'      => '',
+                'property'  => 'og:site_name',
+            ],
             'og:type'             => [
                 'charset'   => '',
                 'content'   => '{seomatic.meta.ogType}',
