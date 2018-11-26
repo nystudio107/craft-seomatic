@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.34 - 2018.11.26
+### Changed
+* Added the Open Graph tag `og:site_name`
+
 ## 3.1.33 - 2018.11.22
 ### Changed
 * Fixed an issue with socialTransform() throwing a Twig exception
