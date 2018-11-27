@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.1.34 - 2018.11.26
+### Added
+* Added a level 2 cache on the controller-based API requests for meta containers to improve "headless" performance
+
 ### Changed
 * Added the Open Graph tag `og:site_name`
 
