@@ -292,6 +292,35 @@ return [
                     ],
                 ],
             ],
+            'hubSpot' => [
+                'include' => false,
+                'environment' => [
+                    'staging' => [
+                        'include' => false,
+                    ],
+                    'local' => [
+                        'include' => false,
+                    ],
+                ],
+                'name' => 'HubSpot',
+                'description' => 'If you\'re not hosting your entire website on HubSpot, or have pages on your website that are not hosted on HubSpot, you\'ll need to install the HubSpot tracking code on your non-HubSpot pages in order to capture those analytics.',
+                'bodyTemplatePath' => '_frontend/scripts/hubSpotBody.twig',
+                'bodyPosition' => View::POS_END,
+                'vars' => [
+                    'hubSpotId' => [
+                        'title' => 'HubSpot ID',
+                        'instructions' => 'Only enter the ID, e.g.: `XXXXXXXXXX`, not the entire script code. [Learn More](https://knowledge.hubspot.com/articles/kcs_article/reports/install-the-hubspot-tracking-code)',
+                        'type' => 'string',
+                        'value' => '',
+                    ],
+                    'hubSpotUrl' => [
+                        'title' => 'HubSpot Script URL',
+                        'instructions' => 'The URL to the HubSpot script. Normally this should not be changed, unless you locally cache it.',
+                        'type' => 'string',
+                        'value' => '//js.hs-scripts.com/',
+                    ],
+                ],
+            ],
         ],
     ],
 ];
