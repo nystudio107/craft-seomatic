@@ -13,6 +13,7 @@ use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\Seomatic;
 
 use Craft;
+use craft\helpers\App;
 
 use yii\console\Controller;
 
@@ -77,6 +78,9 @@ class SitemapController extends Controller
                 $siteIds = [$siteIds];
             }
         }
+        // This might take a while
+        App::maxPowerCaptain();
+        // Process the sitemap generation
         foreach ($siteIds as $siteId) {
             $metaBundles = Seomatic::$plugin->metaBundles->getContentMetaBundlesForSiteId($siteId);
             Seomatic::$plugin->metaBundles->pruneVestigialMetaBundles($metaBundles);
