@@ -99,7 +99,7 @@
                             errors: scriptData.getErrors("position"),
                         }) }}
                         
-                        {% if bodyTemplatePath is defined and bodyTemplatePath | length %}
+                        {% if scriptData.bodyTemplatePath is defined and scriptData.bodyTemplatePath | length %}
                             {{ forms.textAreaField({
                                 label: "Body Script Template"|t("seomatic"),
                                 instructions: "The script that will render in the `<body>`. Note that this script will not render in `local` development or `staging` environments."|t("seomatic"),
