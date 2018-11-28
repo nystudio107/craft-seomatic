@@ -98,6 +98,32 @@
                             value: scriptData.position,
                             errors: scriptData.getErrors("position"),
                         }) }}
+                        
+                        {% if bodyTemplatePath is defined and bodyTemplatePath | length %}
+                            {{ forms.textAreaField({
+                                label: "Body Script Template"|t("seomatic"),
+                                instructions: "The script that will render in the `<body>`. Note that this script will not render in `local` development or `staging` environments."|t("seomatic"),
+                                id: "bodyTemplateString",
+                                name: "bodyTemplateString",
+                                value: scriptData.bodyTemplateString,
+                                class: "seomatic-javascript-editor",
+                                warning: false,
+                                errors: scriptData.getErrors("bodyTemplateString"),
+                            }) }}
+    
+                            {{ forms.selectField({
+                                label: "Body Script Render Location"|t("seomatic"),
+                                instructions: "Determaines where in the `<body>` the script renders."|t("seomatic"),
+                                id: "bodyPosition",
+                                name: "bodyPosition",
+                                options: {
+                                    2: "Body Begin - after the <body> tag "|t("seomatic"),
+                                    3: "Body End - before the </body> tag"|t("seomatic"),
+                                },
+                                value: scriptData.bodyPosition,
+                                errors: scriptData.getErrors("bodyPosition"),
+                            }) }}
+                        {% endif %}
                     </div>
                 {% endnamespace %}
             </div>

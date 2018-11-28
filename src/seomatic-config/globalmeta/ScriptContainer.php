@@ -255,6 +255,43 @@ return [
                     ],
                 ],
             ],
+            'linkedInInsight' => [
+                'include' => false,
+                'environment' => [
+                    'staging' => [
+                        'include' => false,
+                    ],
+                    'local' => [
+                        'include' => false,
+                    ],
+                ],
+                'name' => 'LinkedIn Insight',
+                'description' => 'The LinkedIn Insight Tag is a lightweight JavaScript tag that powers conversion tracking, retargeting, and web analytics for LinkedIn ad campaigns.',
+                'templatePath' => '_frontend/scripts/linkedInInsightHead.twig',
+                'bodyTemplatePath' => '_frontend/scripts/linkedInInsightBody.twig',
+                'position' => View::POS_HEAD,
+                'bodyPosition' => View::POS_END,
+                'vars' => [
+                    'dataPartnerId' => [
+                        'title' => 'LinkedIn Data Partner ID',
+                        'instructions' => 'Only enter the ID, e.g.: `XXXXXXXXXX`, not the entire script code. [Learn More](https://www.linkedin.com/help/lms/answer/65513/adding-the-linkedin-insight-tag-to-your-website?lang=en)',
+                        'type' => 'string',
+                        'value' => '',
+                    ],
+                    'linkedInInsightUrl' => [
+                        'title' => 'LinkedIn Insight Script URL',
+                        'instructions' => 'The URL to the LinkedIn Insight script. Normally this should not be changed, unless you locally cache it.',
+                        'type' => 'string',
+                        'value' => 'https://snap.licdn.com/li.lms-analytics/insight.min.js',
+                    ],
+                    'linkedInInsightNoScriptUrl' => [
+                        'title' => 'LinkedIn Insight &lt;noscript&gt; URL',
+                        'instructions' => 'The URL to the LinkedIn Insight `&lt;noscript&gt;`. Normally this should not be changed, unless you locally cache it.',
+                        'type' => 'string',
+                        'value' => 'https://dc.ads.linkedin.com/collect/',
+                    ],
+                ],
+            ],
         ],
     ],
 ];
