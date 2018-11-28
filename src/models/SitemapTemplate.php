@@ -17,6 +17,7 @@ use nystudio107\seomatic\base\SitemapInterface;
 use nystudio107\seomatic\jobs\GenerateSitemap;
 
 use Craft;
+use craft\helpers\App;
 
 use yii\caching\TagDependency;
 use yii\web\NotFoundHttpException;
@@ -135,6 +136,8 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             );
             // If the queue should be run automatically, do it now
             if (Craft::$app->getConfig()->getGeneral()->runQueueAutomatically) {
+                // This might take a while
+                App::maxPowerCaptain();
                 $queue->run();
                 // Try it again now
                 $result = $cache->get($cacheKey);

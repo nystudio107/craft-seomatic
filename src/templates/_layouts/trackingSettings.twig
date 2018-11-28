@@ -23,6 +23,7 @@
         {% set navItems = navItems |merge({
             (scriptHandle): {
                 title: "#{scriptData.name}"|t("seomatic"),
+                enabled: scriptData.include
             },
         }) %}
     {% endif %}
@@ -37,7 +38,7 @@
                 {% if item.heading is defined %}
                     <li class="heading"><span>{{ item.heading }}</span></li>
                 {% else %}
-                    <li><a href="{{ url("seomatic/tracking/#{id}/#{currentSiteHandle}") }}"{% if id == selectedItem %} class="sel"{% endif %}>{{ item.title }}</a></li>
+                    <li><a href="{{ url("seomatic/tracking/#{id}/#{currentSiteHandle}") }}"{% if id == selectedItem %} class="sel"{% endif %}><span class="status {% if item.enabled %}enabled{% endif %}"></span>{{ item.title }}</a></li>
                 {% endif %}
             {% endfor %}
         </ul>

@@ -237,7 +237,8 @@ class MetaContainers extends Component
                     if ($scriptContainer->prepForInclusion()) {
                         foreach ($scriptContainer->data as $metaScript) {
                             /** @var MetaScript $metaScript */
-                            if (!empty($metaScript->bodyTemplatePath) && ($metaScript->bodyPosition === $bodyPosition)) {
+                            if (!empty($metaScript->bodyTemplatePath)
+                                && ((int)$metaScript->bodyPosition === $bodyPosition)) {
                                 $scriptData[] = $metaScript->renderBodyHtml();
                             }
                         }

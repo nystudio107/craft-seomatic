@@ -1,5 +1,18 @@
 # SEOmatic Changelog
 
+## 3.1.34 - 2018.11.28
+### Added
+* Added a level 2 cache on the controller-based API requests for meta containers to improve "headless" performance
+* Added support for LinkedIn Insight analytics in Tracking Scripts
+* Added support for HubSpot analytics in Tracking Scripts
+* Display the status of tracking scripts in the listing section
+* Allow editing of the tracking scripts body scripts
+
+### Changed
+* Added the Open Graph tag `og:site_name`
+* Removed `craftcms/vue-asset` composer dependency
+* Call `App::maxPowerCaptain()` whenever a queue is manually run (both via web and console request)
+
 ## 3.1.33 - 2018.11.22
 ### Changed
 * Fixed an issue with socialTransform() throwing a Twig exception

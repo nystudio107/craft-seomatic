@@ -255,6 +255,72 @@ return [
                     ],
                 ],
             ],
+            'linkedInInsight' => [
+                'include' => false,
+                'environment' => [
+                    'staging' => [
+                        'include' => false,
+                    ],
+                    'local' => [
+                        'include' => false,
+                    ],
+                ],
+                'name' => 'LinkedIn Insight',
+                'description' => 'The LinkedIn Insight Tag is a lightweight JavaScript tag that powers conversion tracking, retargeting, and web analytics for LinkedIn ad campaigns.',
+                'templatePath' => '_frontend/scripts/linkedInInsightHead.twig',
+                'bodyTemplatePath' => '_frontend/scripts/linkedInInsightBody.twig',
+                'position' => View::POS_HEAD,
+                'bodyPosition' => View::POS_END,
+                'vars' => [
+                    'dataPartnerId' => [
+                        'title' => 'LinkedIn Data Partner ID',
+                        'instructions' => 'Only enter the ID, e.g.: `XXXXXXXXXX`, not the entire script code. [Learn More](https://www.linkedin.com/help/lms/answer/65513/adding-the-linkedin-insight-tag-to-your-website?lang=en)',
+                        'type' => 'string',
+                        'value' => '',
+                    ],
+                    'linkedInInsightUrl' => [
+                        'title' => 'LinkedIn Insight Script URL',
+                        'instructions' => 'The URL to the LinkedIn Insight script. Normally this should not be changed, unless you locally cache it.',
+                        'type' => 'string',
+                        'value' => 'https://snap.licdn.com/li.lms-analytics/insight.min.js',
+                    ],
+                    'linkedInInsightNoScriptUrl' => [
+                        'title' => 'LinkedIn Insight &lt;noscript&gt; URL',
+                        'instructions' => 'The URL to the LinkedIn Insight `&lt;noscript&gt;`. Normally this should not be changed, unless you locally cache it.',
+                        'type' => 'string',
+                        'value' => 'https://dc.ads.linkedin.com/collect/',
+                    ],
+                ],
+            ],
+            'hubSpot' => [
+                'include' => false,
+                'environment' => [
+                    'staging' => [
+                        'include' => false,
+                    ],
+                    'local' => [
+                        'include' => false,
+                    ],
+                ],
+                'name' => 'HubSpot',
+                'description' => 'If you\'re not hosting your entire website on HubSpot, or have pages on your website that are not hosted on HubSpot, you\'ll need to install the HubSpot tracking code on your non-HubSpot pages in order to capture those analytics.',
+                'bodyTemplatePath' => '_frontend/scripts/hubSpotBody.twig',
+                'bodyPosition' => View::POS_END,
+                'vars' => [
+                    'hubSpotId' => [
+                        'title' => 'HubSpot ID',
+                        'instructions' => 'Only enter the ID, e.g.: `XXXXXXXXXX`, not the entire script code. [Learn More](https://knowledge.hubspot.com/articles/kcs_article/reports/install-the-hubspot-tracking-code)',
+                        'type' => 'string',
+                        'value' => '',
+                    ],
+                    'hubSpotUrl' => [
+                        'title' => 'HubSpot Script URL',
+                        'instructions' => 'The URL to the HubSpot script. Normally this should not be changed, unless you locally cache it.',
+                        'type' => 'string',
+                        'value' => '//js.hs-scripts.com/',
+                    ],
+                ],
+            ],
         ],
     ],
 ];
