@@ -94,7 +94,7 @@ class MetaScript extends MetaItem
     {
         $model = new MetaScript($config);
         // Load $templateString from the source template if it's not set
-        if (empty($model->templateString)) {
+        if (empty($model->templateString) && !empty($model->templatePath)) {
             $model->templateString = $model->loadTemplate($model->templatePath);
         }
 
@@ -250,16 +250,17 @@ class MetaScript extends MetaItem
     public function render(array $params = []): string
     {
         $html = '';
-        if ($this->prepForRender($params)) {
+        if (!empty($this->templatePath) && $this->prepForRender($params)) {
             $variables = array_merge($this->vars, [
                 'dataLayer' => $this->dataLayer,
             ]);
             $html = PluginTemplateHelper::renderStringTemplate($this->templateString, $variables);
         }
 
-        if (empty($html)) {
+        if (empty($html) && !empty($this->templatePath)) {
             $html = '/* '.$this->name.Craft::t('seomatic', ' script did not render').' */'.PHP_EOL;
         }
+
         return $html;
     }
 
