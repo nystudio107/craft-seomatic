@@ -98,7 +98,7 @@
                             value: scriptData.position,
                             errors: scriptData.getErrors("position"),
                         }) }}
-                        
+
                         {% if scriptData.bodyTemplatePath is defined and scriptData.bodyTemplatePath | length %}
                             {{ forms.textAreaField({
                                 label: "Body Script Template"|t("seomatic"),
@@ -106,11 +106,11 @@
                                 id: "bodyTemplateString",
                                 name: "bodyTemplateString",
                                 value: scriptData.bodyTemplateString,
-                                class: "seomatic-javascript-editor",
+                                class: "seomatic-twig-editor",
                                 warning: false,
                                 errors: scriptData.getErrors("bodyTemplateString"),
                             }) }}
-    
+
                             {{ forms.selectField({
                                 label: "Body Script Render Location"|t("seomatic"),
                                 instructions: "Determaines where in the `<body>` the script renders."|t("seomatic"),
