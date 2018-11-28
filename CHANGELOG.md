@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.1.34 - 2018.11.26
+## 3.1.34 - 2018.11.28
 ### Added
 * Added a level 2 cache on the controller-based API requests for meta containers to improve "headless" performance
 * Added support for LinkedIn Insight analytics in Tracking Scripts
@@ -11,6 +11,7 @@
 ### Changed
 * Added the Open Graph tag `og:site_name`
 * Removed `craftcms/vue-asset` composer dependency
+* Call `App::maxPowerCaptain()` whenever a queue is manually run (both via web and console request)
 
 ## 3.1.33 - 2018.11.22
 ### Changed
