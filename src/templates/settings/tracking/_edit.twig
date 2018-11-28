@@ -74,30 +74,58 @@
                             {% endswitch %}
                         {% endfor %}
 
-                        {{ forms.textAreaField({
-                            label: "Script Template"|t("seomatic"),
-                            instructions: "The script that will render on the page. Note that this script will not render in `local` development or `staging` environments."|t("seomatic"),
-                            id: "templateString",
-                            name: "templateString",
-                            value: scriptData.templateString,
-                            class: "seomatic-javascript-editor",
-                            warning: false,
-                            errors: scriptData.getErrors("templateString"),
-                        }) }}
+                        {% if scriptData.templatePath is defined and scriptData.templatePath | length %}
+                            {{ forms.textAreaField({
+                                label: "Script Template"|t("seomatic"),
+                                instructions: "The script that will render on the page. Note that this script will not render in `local` development or `staging` environments."|t("seomatic"),
+                                id: "templateString",
+                                name: "templateString",
+                                value: scriptData.templateString,
+                                class: "seomatic-javascript-editor",
+                                warning: false,
+                                errors: scriptData.getErrors("templateString"),
+                            }) }}
 
-                        {{ forms.selectField({
-                            label: "Script Render Location"|t("seomatic"),
-                            instructions: "Determaines where in the HTML document the script renders."|t("seomatic"),
-                            id: "position",
-                            name: "position",
-                            options: {
-                                1: "Head - in the <head> tag"|t("seomatic"),
-                                2: "Body Begin - after the <body> tag "|t("seomatic"),
-                                3: "Body End - before the </body> tag"|t("seomatic"),
-                            },
-                            value: scriptData.position,
-                            errors: scriptData.getErrors("position"),
-                        }) }}
+                            {{ forms.selectField({
+                                label: "Script Render Location"|t("seomatic"),
+                                instructions: "Determaines where in the HTML document the script renders."|t("seomatic"),
+                                id: "position",
+                                name: "position",
+                                options: {
+                                    1: "Head - in the <head> tag"|t("seomatic"),
+                                    2: "Body Begin - after the <body> tag "|t("seomatic"),
+                                    3: "Body End - before the </body> tag"|t("seomatic"),
+                                },
+                                value: scriptData.position,
+                                errors: scriptData.getErrors("position"),
+                            }) }}
+                        {% endif %}
+
+                        {% if scriptData.bodyTemplatePath is defined and scriptData.bodyTemplatePath | length %}
+                            {{ forms.textAreaField({
+                                label: "Body Script Template"|t("seomatic"),
+                                instructions: "The script that will render in the `<body>`. Note that this script will not render in `local` development or `staging` environments."|t("seomatic"),
+                                id: "bodyTemplateString",
+                                name: "bodyTemplateString",
+                                value: scriptData.bodyTemplateString,
+                                class: "seomatic-javascript-editor",
+                                warning: false,
+                                errors: scriptData.getErrors("bodyTemplateString"),
+                            }) }}
+
+                            {{ forms.selectField({
+                                label: "Body Script Render Location"|t("seomatic"),
+                                instructions: "Determaines where in the `<body>` the script renders."|t("seomatic"),
+                                id: "bodyPosition",
+                                name: "bodyPosition",
+                                options: {
+                                    2: "Body Begin - after the <body> tag "|t("seomatic"),
+                                    3: "Body End - before the </body> tag"|t("seomatic"),
+                                },
+                                value: scriptData.bodyPosition,
+                                errors: scriptData.getErrors("bodyPosition"),
+                            }) }}
+                        {% endif %}
                     </div>
                 {% endnamespace %}
             </div>

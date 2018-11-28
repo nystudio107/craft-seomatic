@@ -66,6 +66,11 @@ class MetaScript extends MetaItem
     public $bodyTemplatePath;
 
     /**
+     * @var
+     */
+    public $bodyTemplateString;
+
+    /**
      * @var int
      */
     public $bodyPosition = View::POS_BEGIN;
@@ -89,8 +94,13 @@ class MetaScript extends MetaItem
     {
         $model = new MetaScript($config);
         // Load $templateString from the source template if it's not set
-        if (empty($model->templateString)) {
-            $model->loadTemplate();
+        if (empty($model->templateString) && !empty($model->templatePath)) {
+            $model->templateString = $model->loadTemplate($model->templatePath);
+        }
+
+        // Load $templateString from the source template if it's not set
+        if (empty($model->bodyTemplateString) && !empty($model->bodyTemplatePath)) {
+            $model->bodyTemplateString = $model->loadTemplate($model->bodyTemplatePath);
         }
 
         return $model;
@@ -111,23 +121,29 @@ class MetaScript extends MetaItem
 
     /**
      * Load the existing template into a string
+     *
+     * @param string $templatePath
+     *
+     * @return string
      */
-    public function loadTemplate()
+    public function loadTemplate(string $templatePath): string
     {
-        $this->templateString = '';
+        $result = '';
         // Try it from our plugin directory first
         $path = Craft::getAlias('@nystudio107/seomatic/templates/')
-            .$this->templatePath;
+            .$templatePath;
         if (file_exists($path)) {
-            $this->templateString = @file_get_contents($path);
+            $result = @file_get_contents($path);
         } else {
             // Next try it from the Craft template directory
             $path = Craft::getAlias('@templates/')
-                .$this->templatePath;
+                .$templatePath;
             if (file_exists($path)) {
-                $this->templateString = @file_get_contents($path);
+                $result = @file_get_contents($path);
             }
         }
+
+        return $result;
     }
 
     /**
@@ -144,6 +160,7 @@ class MetaScript extends MetaItem
                     'templatePath',
                     'templateString',
                     'bodyTemplatePath',
+                    'bodyTemplateString',
                 ],
                 'string',
             ],
@@ -160,6 +177,7 @@ class MetaScript extends MetaItem
                     'templatePath',
                     'templateString',
                     'bodyTemplatePath',
+                    'bodyTemplateString',
                     'position',
                 ],
                 'required',
@@ -220,7 +238,7 @@ class MetaScript extends MetaItem
             $variables = array_merge($this->vars, [
                 'dataLayer' => $this->dataLayer,
             ]);
-            $html = PluginTemplateHelper::renderPluginTemplate($this->bodyTemplatePath, $variables);
+            $html = PluginTemplateHelper::renderStringTemplate($this->bodyTemplateString, $variables);
         }
 
         return $html;
@@ -232,16 +250,17 @@ class MetaScript extends MetaItem
     public function render(array $params = []): string
     {
         $html = '';
-        if ($this->prepForRender($params)) {
+        if (!empty($this->templatePath) && $this->prepForRender($params)) {
             $variables = array_merge($this->vars, [
                 'dataLayer' => $this->dataLayer,
             ]);
             $html = PluginTemplateHelper::renderStringTemplate($this->templateString, $variables);
         }
 
-        if (empty($html)) {
+        if (empty($html) && !empty($this->templatePath)) {
             $html = '/* '.$this->name.Craft::t('seomatic', ' script did not render').' */'.PHP_EOL;
         }
+
         return $html;
     }
 
@@ -256,7 +275,10 @@ class MetaScript extends MetaItem
             $variables = array_merge($this->vars, [
                 'dataLayer' => $this->dataLayer,
             ]);
-            $attributes = ['script' => PluginTemplateHelper::renderStringTemplate($this->templateString, $variables)];
+            $attributes = [
+                'script' => PluginTemplateHelper::renderStringTemplate($this->templateString, $variables),
+                'bodyScript' => PluginTemplateHelper::renderStringTemplate($this->bodyTemplateString, $variables)
+            ];
         }
 
         return $attributes;

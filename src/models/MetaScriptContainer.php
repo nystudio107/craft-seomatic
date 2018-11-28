@@ -73,15 +73,17 @@ class MetaScriptContainer extends MetaContainer
                     foreach ($this->data as $metaScriptModel) {
                         if ($metaScriptModel->include) {
                             $js = $metaScriptModel->render();
-                            $tagData[] = [
-                                'js' => $js,
-                                'position' => $metaScriptModel->position ?? $this->position
-                            ];
-                            // If `devMode` is enabled, validate the Meta Script and output any model errors
-                            if (Seomatic::$devMode) {
-                                $metaScriptModel->debugMetaItem(
-                                    'Script attribute: '
-                                );
+                            if (!empty($js)) {
+                                $tagData[] = [
+                                    'js' => $js,
+                                    'position' => $metaScriptModel->position ?? $this->position
+                                ];
+                                // If `devMode` is enabled, validate the Meta Script and output any model errors
+                                if (Seomatic::$devMode) {
+                                    $metaScriptModel->debugMetaItem(
+                                        'Script attribute: '
+                                    );
+                                }
                             }
                         }
                     }
