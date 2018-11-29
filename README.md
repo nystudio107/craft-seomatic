@@ -1176,10 +1176,12 @@ If you want to add something to the existing **MainEntityOfPage** (in this case 
     'type': 'Offer',
     'name': 'Some prop',
     'url': 'Some url',
-}) %}
+}, false) %}
 
 {% do mainEntity.offers(offerJsonLd) %}
 ```
+
+The `, false` parameter tells it to create the JSON-LD object, but to _not_ automatically add it to the JSON-LD container. We do this because we don't want it rendered on its own, we want it as part of the existing `mainEntityOfPage` JSON-LD object.
 
 Get the existing **BreadcrumbList** as generated automatically by SEOmatic to modify them (schema.org: [BreadcrumbList](http://schema.org/BreadcrumbList)):
 ```twig
@@ -1210,10 +1212,12 @@ Let's say you want to add a [Brand](https://schema.org/Brand) to the **Identity*
     'type': 'Brand',
     'name': 'Some prop',
     'url': 'Some url',
-}) %}
+}, false) %}
 
 {% do identity.brand(brand) %}
 ```
+
+The `, false` parameter tells it to create the JSON-LD object, but to _not_ automatically add it to the JSON-LD container. We do this because we don't want it rendered on its own, we want it as part of the existing `mainEntityOfPage` JSON-LD object.
 
 Get the existing **Creator** as set in the Site Settings Control Panel section to modify it:
 ```twig
