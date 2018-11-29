@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.35 - 2018.11.29
+### Changed
+* Fixed an issue where the `potentialAction` JSON-LD for the Site Links Search was rendered even if it was left empty
+
 ## 3.1.34 - 2018.11.28
 ### Added
 * Added a level 2 cache on the controller-based API requests for meta containers to improve "headless" performance
