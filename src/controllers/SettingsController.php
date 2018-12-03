@@ -79,12 +79,6 @@ class SettingsController extends Controller
         'genericImage',
     ];
 
-    const SCHEMA_TYPES = [
-        'siteSpecificType',
-        'siteSubType',
-        'siteType',
-    ];
-
     // Protected Properties
     // =========================================================================
 
@@ -320,7 +314,7 @@ class SettingsController extends Controller
             if (\is_array($globalsSettings) && \is_array($bundleSettings)) {
                 PullFieldHelper::parseTextSources($elementName, $globalsSettings, $bundleSettings);
                 PullFieldHelper::parseImageSources($elementName, $globalsSettings, $bundleSettings, $siteId);
-                $globalsSettings['mainEntityOfPage'] = $this->getSpecificEntityType($bundleSettings);
+                $globalsSettings['mainEntityOfPage'] = PullFieldHelper::getSpecificEntityType($bundleSettings);
                 $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
                 $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
             }
@@ -560,7 +554,7 @@ class SettingsController extends Controller
             if (\is_array($globalsSettings) && \is_array($bundleSettings)) {
                 PullFieldHelper::parseTextSources($elementName, $globalsSettings, $bundleSettings);
                 PullFieldHelper::parseImageSources($elementName, $globalsSettings, $bundleSettings, $siteId);
-                $globalsSettings['mainEntityOfPage'] = $this->getSpecificEntityType($bundleSettings);
+                $globalsSettings['mainEntityOfPage'] = PullFieldHelper::getSpecificEntityType($bundleSettings);
                 $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
                 $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
             }
@@ -1111,27 +1105,6 @@ class SettingsController extends Controller
     }
 
     /**
-     * Return the most specific schema.org type possible from the $settings
-     *
-     * @param $settings
-     *
-     * @return string
-     */
-    protected function getSpecificEntityType($settings): string
-    {
-        if (!empty($settings)) {
-            // Go from most specific type to least specific type
-            foreach (self::SCHEMA_TYPES as $schemaType) {
-                if (!empty($settings[$schemaType]) && ($settings[$schemaType] !== 'none')) {
-                    return $settings[$schemaType];
-                }
-            }
-        }
-
-        return 'WebPage';
-    }
-
-    /**
      * Return a siteId from a siteHandle
      *
      * @param string $siteHandle
@@ -1163,7 +1136,7 @@ class SettingsController extends Controller
     protected function prepEntitySettings(&$settings)
     {
         DynamicMetaHelper::normalizeTimes($settings['localBusinessOpeningHours']);
-        $settings['computedType'] = $this->getSpecificEntityType($settings);
+        $settings['computedType'] = PullFieldHelper::getSpecificEntityType($settings);
         if (!empty($settings['genericImageIds'])) {
             $asset = Craft::$app->getAssets()->getAssetById($settings['genericImageIds'][0]);
             if ($asset !== null) {

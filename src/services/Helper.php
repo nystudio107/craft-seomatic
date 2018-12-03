@@ -65,6 +65,23 @@ class Helper extends Component
     }
 
     /**
+     * Return the proper content for the `query-input` JSON-LD property
+     *
+     * @return string
+     */
+    public static function siteLinksQueryInput(): string
+    {
+        $result = '';
+
+        $metaSiteVars = Seomatic::$plugin->metaContainers->metaSiteVars;
+        if ($metaSiteVars && !empty($metaSiteVars->siteLinksQueryInput)) {
+            $result = 'required name='.$metaSiteVars->siteLinksQueryInput;
+        }
+
+        return $result;
+    }
+
+    /**
      * Return the canonical URL for the request, with the query string stripped
      *
      * @return string
