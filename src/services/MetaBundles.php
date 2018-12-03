@@ -663,6 +663,10 @@ class MetaBundles extends Component
         $attributes = array_merge($attributes, $emptyValues);
         $metaBundle->metaGlobalVars->setAttributes($attributes, false);
         */
+        // Handle the mainEntityOfPage
+        if (!\in_array('mainEntityOfPage', $seoSettingsField->generalEnabledFields, false)) {
+            $metaBundle->metaGlobalVars->mainEntityOfPage = '';
+        }
         // metaSiteVars
         $attributes = $metaBundle->metaSiteVars->getAttributes();
         $emptyValues = array_fill_keys(array_keys(array_diff_key($attributes, $seoSettingsEnabledFields)), '');

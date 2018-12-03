@@ -47,9 +47,35 @@ class PullField
         ['fieldName' => 'twitterImage', 'seoField' => 'seoImage', 'transformModeField' => 'twitterImageTransformMode', 'transformName' => 'twitter'],
     ];
 
+    const SCHEMA_TYPES = [
+        'siteSpecificType',
+        'siteSubType',
+        'siteType',
+    ];
+
     // Static Methods
     // =========================================================================
 
+    /**
+     * Return the most specific schema.org type possible from the $settings
+     *
+     * @param $settings
+     *
+     * @return string
+     */
+    public static function getSpecificEntityType($settings): string
+    {
+        if (!empty($settings)) {
+            // Go from most specific type to least specific type
+            foreach (self::SCHEMA_TYPES as $schemaType) {
+                if (!empty($settings[$schemaType]) && ($settings[$schemaType] !== 'none')) {
+                    return $settings[$schemaType];
+                }
+            }
+        }
+
+        return 'WebPage';
+    }
 
     /**
      * Set the text sources depending on the field settings
