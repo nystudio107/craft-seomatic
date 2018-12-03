@@ -1,8 +1,9 @@
 # SEOmatic Changelog
 
-## 3.1.35 - 2018.11.29
+## 3.1.35 - 2018.12.03
 ### Changed
 * Fixed an issue where the `potentialAction` JSON-LD for the Site Links Search was rendered even if it was left empty
+* Fixed an issue where the SEO Settings field did not properly override the `mainEntityOfPage`
 
 ## 3.1.34 - 2018.11.28
 ### Added
