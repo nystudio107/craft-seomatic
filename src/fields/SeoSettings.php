@@ -212,6 +212,12 @@ class SeoSettings extends Field implements PreviewableFieldInterface
                     null
                 );
             }
+            // Handle the mainEntityOfPage
+            $mainEntity = '';
+            if (\in_array('mainEntityOfPage', $this->generalEnabledFields, false)) {
+                $mainEntity = PullFieldHelper::getSpecificEntityType($config['metaBundleSettings']);
+            }
+            $config['metaGlobalVars']['mainEntityOfPage'] = $mainEntity;
         }
         // Create a new meta bundle with propagated defaults
         $metaBundleDefaults = ArrayHelper::merge(

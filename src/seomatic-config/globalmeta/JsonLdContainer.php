@@ -52,7 +52,7 @@ return [
                 'potentialAction'  => [
                     'type'        => 'SearchAction',
                     'target'      => '{seomatic.site.siteLinksSearchTarget}',
-                    'query-input' => 'required name={seomatic.site.siteLinksQueryInput}',
+                    'query-input' => '{seomatic.helper.siteLinksQueryInput()}',
                 ],
             ],
             'identity'         => [
