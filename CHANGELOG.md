@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.36 - 2018.12.04
+### Changed
+* Fixed an issue where `LocalBusiness` JSON-LD type didn't inherit all of the properties from `Place` that it should
+
 ## 3.1.35 - 2018.12.03
 ### Changed
 * Fixed an issue where the `potentialAction` JSON-LD for the Site Links Search was rendered even if it was left empty
