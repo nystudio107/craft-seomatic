@@ -1,8 +1,9 @@
 # SEOmatic Changelog
 
-## 3.1.36 - 2018.12.04
+## 3.1.36 - 2018.12.06
 ### Changed
 * Fixed an issue where `LocalBusiness` JSON-LD type didn't inherit all of the properties from `Place` that it should
+* Fixed an issue with `seomatic.helper.getLocalizedUrls` not working as expected for routes other than the current request
 
 ## 3.1.35 - 2018.12.03
 ### Changed
