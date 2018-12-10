@@ -156,11 +156,11 @@ class SitemapCustomTemplate extends FrontendTemplate implements SitemapInterface
                 $additionalSitemapUrls = empty($additionalSitemapUrls) ? [] : $additionalSitemapUrls;
                 // Allow plugins/modules to add custom URLs
                 $event = new RegisterSitemapUrlsEvent([
-                    'sitemapUrls' => $additionalSitemapUrls,
+                    'sitemaps' => $additionalSitemapUrls,
                     'siteId' => $metaBundle->sourceSiteId,
                 ]);
                 $this->trigger(self::EVENT_REGISTER_SITEMAP_URLS, $event);
-                $additionalSitemapUrls = array_filter($event->sitemapUrls);
+                $additionalSitemapUrls = array_filter($event->sitemaps);
                 // Output the sitemap entry
                 foreach ($additionalSitemapUrls as $additionalSitemapUrl) {
                     $url = UrlHelper::siteUrl(

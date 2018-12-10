@@ -15,6 +15,7 @@ use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\base\SitemapInterface;
 use nystudio107\seomatic\events\RegisterSitemapUrlsEvent;
+use nystudio107\seomatic\events\RegisterSitemapsEvent;
 use nystudio107\seomatic\models\SitemapCustomTemplate;
 
 use Craft;
@@ -35,6 +36,25 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
     // Constants
     // =========================================================================
 
+    /**
+     * @event RegisterSitemapsEvent The event that is triggered when registering
+     * additional sitemaps for the sitemap index.
+     *
+     * ---
+     * ```php
+     * use nystudio107\seomatic\events\RegisterSitemapsEvent;
+     * use nystudio107\seomatic\models\SitemapIndexTemplate;
+     * use yii\base\Event;
+     * Event::on(SitemapIndexTemplate::class, SitemapIndexTemplate::EVENT_REGISTER_SITEMAPS, function(RegisterSitemapsEvent $e) {
+     *     $e->sitemaps[] = [
+     *         'loc' => $url,
+     *         'lastmod' => $lastMod,
+     *     ];
+     * });
+     * ```
+     */
+    const EVENT_REGISTER_SITEMAPS = 'registerSitemaps';
+
     const TEMPLATE_TYPE = 'SitemapIndexTemplate';
 
     const CACHE_KEY = 'seomatic_sitemap_index';
@@ -52,10 +72,10 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
     public static function create(array $config = [])
     {
         $defaults = [
-            'path'       => 'sitemaps/<groupId:\d+>/sitemap.xml',
-            'template'   => '',
+            'path' => 'sitemaps/<groupId:\d+>/sitemap.xml',
+            'template' => '',
             'controller' => 'sitemap',
-            'action'     => 'sitemap-index',
+            'action' => 'sitemap-index',
         ];
         $config = array_merge($config, $defaults);
 
@@ -154,40 +174,8 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             foreach ($groupSiteIds as $groupSiteId) {
                 $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($groupSiteId, false);
                 if ($metaBundle !== null) {
-                    $additionalSitemapUrls = $metaBundle->metaSiteVars->additionalSitemapUrls;
-                    $additionalSitemapUrls = empty($additionalSitemapUrls) ? [] : $additionalSitemapUrls;
-                    // Allow plugins/modules to add custom URLs
-                    $event = new RegisterSitemapUrlsEvent([
-                        'sitemapUrls' => $additionalSitemapUrls,
-                        'siteId' => $groupSiteId,
-                    ]);
-                    Event::trigger(SitemapCustomTemplate::class, SitemapCustomTemplate::EVENT_REGISTER_SITEMAP_URLS, $event);
-                    $additionalSitemapUrls = array_filter($event->sitemapUrls);
-                    // Output the sitemap index
-                    if (!empty($additionalSitemapUrls)) {
-                        $sitemapUrl = Seomatic::$plugin->sitemaps->sitemapCustomUrlForSiteId(
-                            $groupSiteId
-                        );
-                        $lines[] = '  <sitemap>';
-                        $lines[] = '    <loc>';
-                        $lines[] = '      '.Html::encode($sitemapUrl);
-                        $lines[] = '    </loc>';
-                        // Find the most recent date
-                        $dateUpdated = $metaBundle->metaSiteVars->additionalSitemapUrlsDateUpdated
-                            ?? new \DateTime;
-                        foreach ($additionalSitemapUrls as $additionalSitemapUrl) {
-                            if (!empty($additionalSitemapUrl['lastmod']) && $additionalSitemapUrl['lastmod'] > $dateUpdated) {
-                                $dateUpdated = $additionalSitemapUrl['lastmod'];
-                            }
-                        }
-                        $dateUpdated = $metaBundle->metaSiteVars->additionalSitemapUrlsDateUpdated;
-                        if ($dateUpdated !== null) {
-                            $lines[] = '    <lastmod>';
-                            $lines[] = '      '.$dateUpdated->format(\DateTime::W3C);
-                            $lines[] = '    </lastmod>';
-                        }
-                        $lines[] = '  </sitemap>';
-                    }
+                    $this->addAdditionalSitemapUrls($metaBundle, $groupSiteId, $lines);
+                    $this->addAdditionalSitemaps($metaBundle, $groupSiteId, $lines);
                 }
             }
             // Sitemap index closing tag
@@ -208,5 +196,99 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             'Sitemap index cache cleared',
             __METHOD__
         );
+    }
+
+    // Protected Methods
+    // =========================================================================
+
+    /**
+     * Add an additional sitemaps to the sitemap index, coming from the global
+     * meta bundle metaSiteVars->additionalSitemaps
+     *
+     * @param MetaBundle $metaBundle
+     * @param int        $groupSiteId
+     * @param array      $lines
+     *
+     * @throws \Exception
+     */
+    protected function addAdditionalSitemaps(MetaBundle $metaBundle, int $groupSiteId, array &$lines)
+    {
+        $additionalSitemaps = $metaBundle->metaSiteVars->additionalSitemaps;
+        $additionalSitemaps = empty($additionalSitemaps) ? [] : $additionalSitemaps;
+        // Allow plugins/modules to add custom URLs
+        $event = new RegisterSitemapsEvent([
+            'sitemaps' => $additionalSitemaps,
+            'siteId' => $groupSiteId,
+        ]);
+        Event::trigger(SitemapCustomTemplate::class, SitemapCustomTemplate::EVENT_REGISTER_SITEMAP_URLS, $event);
+        $additionalSitemaps = array_filter($event->sitemaps);
+        // Output the sitemap index
+        if (!empty($additionalSitemaps)) {
+            foreach ($additionalSitemaps as $additionalSitemap) {
+                if (!empty($additionalSitemap['loc'])) {
+                    $lines[] = '  <sitemap>';
+                    $lines[] = '    <loc>';
+                    $lines[] = '      '.Html::encode($additionalSitemap['loc']);
+                    $lines[] = '    </loc>';
+                    // Find the most recent date
+                    $dateUpdated = !empty($additionalSitemap['lastmod'])
+                        ? $additionalSitemap['lastmod']
+                        : new \DateTime;
+                    $lines[] = '    <lastmod>';
+                    $lines[] = '      '.$dateUpdated->format(\DateTime::W3C);
+                    $lines[] = '    </lastmod>';
+                    $lines[] = '  </sitemap>';
+                }
+            }
+        }
+    }
+
+    /**
+     * Add an additional "custom" sitemap to the sitemap index, with URLs coming from
+     * the global meta bundle metaSiteVars->additionalSitemapUrls
+     *
+     * @param MetaBundle $metaBundle
+     * @param int        $groupSiteId
+     * @param array      $lines
+     *
+     * @throws \Exception
+     */
+    protected function addAdditionalSitemapUrls(MetaBundle $metaBundle, int $groupSiteId, array &$lines)
+    {
+        $additionalSitemapUrls = $metaBundle->metaSiteVars->additionalSitemapUrls;
+        $additionalSitemapUrls = empty($additionalSitemapUrls) ? [] : $additionalSitemapUrls;
+        // Allow plugins/modules to add custom URLs
+        $event = new RegisterSitemapUrlsEvent([
+            'sitemaps' => $additionalSitemapUrls,
+            'siteId' => $groupSiteId,
+        ]);
+        Event::trigger(SitemapCustomTemplate::class, SitemapCustomTemplate::EVENT_REGISTER_SITEMAP_URLS, $event);
+        $additionalSitemapUrls = array_filter($event->sitemaps);
+        // Output the sitemap index
+        if (!empty($additionalSitemapUrls)) {
+            $sitemapUrl = Seomatic::$plugin->sitemaps->sitemapCustomUrlForSiteId(
+                $groupSiteId
+            );
+            $lines[] = '  <sitemap>';
+            $lines[] = '    <loc>';
+            $lines[] = '      '.Html::encode($sitemapUrl);
+            $lines[] = '    </loc>';
+            // Find the most recent date
+            $dateUpdated = $metaBundle->metaSiteVars->additionalSitemapUrlsDateUpdated
+                ?? new \DateTime;
+            foreach ($additionalSitemapUrls as $additionalSitemapUrl) {
+                if (!empty($additionalSitemapUrl['lastmod'])) {
+                    if ($additionalSitemapUrl['lastmod'] > $dateUpdated) {
+                        $dateUpdated = $additionalSitemapUrl['lastmod'];
+                    }
+                }
+            }
+            if ($dateUpdated !== null) {
+                $lines[] = '    <lastmod>';
+                $lines[] = '      '.$dateUpdated->format(\DateTime::W3C);
+                $lines[] = '    </lastmod>';
+            }
+            $lines[] = '  </sitemap>';
+        }
     }
 }
