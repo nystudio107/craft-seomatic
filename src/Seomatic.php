@@ -978,6 +978,9 @@ class Seomatic extends Plugin
                     'seomatic:site-settings:social' => [
                         'label' => Craft::t('seomatic', 'Social Media'),
                     ],
+                    'seomatic:site-settings:sitemap' => [
+                        'label' => Craft::t('seomatic', 'Sitemap'),
+                    ],
                     'seomatic:site-settings:miscellaneous' => [
                         'label' => Craft::t('seomatic', 'Miscellaneous'),
                     ],
