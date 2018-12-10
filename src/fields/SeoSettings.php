@@ -218,7 +218,9 @@ class SeoSettings extends Field implements PreviewableFieldInterface
                 !empty($config['metaBundleSettings'])) {
                 $mainEntity = PullFieldHelper::getSpecificEntityType($config['metaBundleSettings']);
             }
-            $config['metaGlobalVars']['mainEntityOfPage'] = $mainEntity;
+            if (!empty($config['metaGlobalVars'])) {
+                $config['metaGlobalVars']['mainEntityOfPage'] = $mainEntity;
+            }
         }
         // Create a new meta bundle with propagated defaults
         $metaBundleDefaults = ArrayHelper::merge(
