@@ -1,0 +1,103 @@
+{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
+{% import "_includes/forms" as forms %}
+
+{% namespace "site" %}
+    <div class="field">
+        <div class="heading">
+            <h2>{{ "Additional Sitemaps"|t("seomatic") }}</h2>
+            <div class="instructions">
+                <p>
+                    {{ "Add sitemaps exist outside of the CMS here. They will be added to the sitemap index."|t("seomatic") |md }}
+                </p>
+            </div>
+        </div>
+        {{ forms.editableTableField({
+            label: "Sitemaps"|t("seomatic"),
+            instructions: "Add the custom sitemaps below."|t("seomatic"),
+            id: 'additionalSitemaps',
+            name: 'additionalSitemaps',
+            required: false,
+            defaultValues: {
+                loc: "",
+            },
+            cols: {
+                loc: {
+                    heading: "Sitemap URL"|t("seomatic"),
+                    type: "singleline",
+                    width: "70%",
+                },
+                lastmod: {
+                    heading: "Last Modification Date"|t("seomatic"),
+                    type: "date",
+                    width: "30%",
+                },
+            },
+            rows: site.additionalSitemaps,
+            errors: site.getErrors("additionalSitemaps"),
+        }) }}
+    </div>
+    <div class="field">
+        <div class="heading">
+            <h2>{{ "Additional Sitemap URLs"|t("seomatic") }}</h2>
+            <div class="instructions">
+                <p>
+                    {{ "Add any additional individual URLs to web pages that exist outside of the CMS here. They will be placed in a separate `custom` sitemap."|t("seomatic") |md }}
+                </p>
+            </div>
+        </div>
+    {{ forms.editableTableField({
+        label: "Sitemap URLs"|t("seomatic"),
+        instructions: "Add the custom sitemap URLs below."|t("seomatic"),
+        id: 'additionalSitemapUrls',
+        name: 'additionalSitemapUrls',
+        required: false,
+        defaultValues: {
+            loc: "",
+            changefreq: "weekly",
+            priority: "0.5",
+        },
+        cols: {
+            loc: {
+                heading: "URL"|t("seomatic"),
+                type: "singleline",
+                width: "70%",
+            },
+            changefreq: {
+                heading: "Change Frequency"|t("seomatic"),
+                type: "select",
+                width: "20%",
+                options: {
+                    always: "Always"|t("seomatic"),
+                    hourly: "Hourly"|t("seomatic"),
+                    daily: "Daily"|t("seomatic"),
+                    weekly: "Weekly"|t("seomatic"),
+                    monthly: "Monthly"|t("seomatic"),
+                    yearly: "Yearly"|t("seomatic"),
+                    never : "Never"|t("seomatic"),
+                },
+            },
+            priority: {
+                heading: "Priority"|t("seomatic"),
+                type: "select",
+                width: "10%",
+                options: {
+                    "1.0": "1.0",
+                    "0.9": "0.9",
+                    "0.8": "0.8",
+                    "0.7": "0.7",
+                    "0.6": "0.6",
+                    "0.5": "0.5",
+                    "0.4": "0.4",
+                    "0.3": "0.3",
+                    "0.2": "0.2",
+                    "0.1": "0.1",
+                    "0.0": "0.0",
+                },
+            },
+        },
+        rows: site.additionalSitemapUrls,
+        errors: site.getErrors("additionalSitemapUrls"),
+    }) }}
+
+</div>
+{% endnamespace %}

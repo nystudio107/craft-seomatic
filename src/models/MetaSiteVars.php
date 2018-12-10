@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\models;
 
+use craft\helpers\DateTimeHelper;
 use nystudio107\seomatic\base\VarsModel;
 use nystudio107\seomatic\helpers\Json as JsonHelper;
 
@@ -109,7 +110,7 @@ class MetaSiteVars extends VarsModel
     public $siteLinksQueryInput = '';
 
     /**
-     * @var array Array of additional sitemap URLs
+     * @var array Array of additional custom sitemap URLs
      */
     public $additionalSitemapUrls = [];
 
@@ -117,6 +118,11 @@ class MetaSiteVars extends VarsModel
      * @var \DateTime
      */
     public $additionalSitemapUrlsDateUpdated;
+
+    /**
+     * @var array Array of additional sitemaps
+     */
+    public $additionalSitemaps = [];
 
     // Public Methods
     // =========================================================================
@@ -173,6 +179,7 @@ class MetaSiteVars extends VarsModel
                 [
                     'sameAsLinks',
                     'additionalSitemapUrls',
+                    'additionalSitemaps',
                 ],
                 ArrayValidator::class,
             ],
@@ -203,6 +210,17 @@ class MetaSiteVars extends VarsModel
         foreach ($properties as $property => $value) {
             if (!empty($value) && \is_string($value)) {
                 $this->$property = JsonHelper::decodeIfJson($value);
+            }
+        }
+        // Convert our date attributes in the additionalSitemaps array
+        if (!empty($this->additionalSitemaps)) {
+            $index = 0;
+            foreach ($this->additionalSitemaps as $additionalSitemap) {
+                if (!empty($additionalSitemap['lastmod'])) {
+                    $this->additionalSitemaps[$index]['lastmod']
+                        = DateTimeHelper::toDateTime($additionalSitemap['lastmod']);
+                }
+                $index++;
             }
         }
         // Make sure these are strings

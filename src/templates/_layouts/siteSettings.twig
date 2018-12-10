@@ -39,6 +39,13 @@
         },
     }) %}
 {% endif %}
+{% if currentUser.can("seomatic:site-settings:sitemap") %}
+    {% set navItems = navItems |merge({
+        sitemap: {
+            title: "Sitemap"|t("seomatic"),
+        },
+    }) %}
+{% endif %}
 {% if currentUser.can("seomatic:site-settings:miscellaneous") %}
     {% set navItems = navItems |merge({
         miscellaneous: {

@@ -488,8 +488,9 @@ class DynamicMeta
         $elements = Craft::$app->getElements();
         foreach ($sites as $site) {
             $includeUrl = true;
-            if (Seomatic::$matchedElement) {
-                $url = $elements->getElementUriForSite(Seomatic::$matchedElement->getId(), $site->id);
+            $matchedElement = $elements->getElementByUri($requestUri, $site->id);
+            if ($matchedElement) {
+                $url = $elements->getElementUriForSite($matchedElement->getId(), $site->id);
                 // See if they have disabled sitemaps or robots for this entry,
                 // and if so, don't include it in the hreflang
                 /** @var Element $element */
