@@ -1,9 +1,14 @@
 # SEOmatic Changelog
 
-## 3.1.36 - 2018.12.06
+## 3.1.36 - 2018.12.10
+### Added
+* Added the ability to add additional sitemaps that exist out of the CMS into the `sitemap.xml` via Site Settings -> Sitemap as well as via plugin
+
 ### Changed
 * Fixed an issue where `LocalBusiness` JSON-LD type didn't inherit all of the properties from `Place` that it should
 * Fixed an issue with `seomatic.helper.getLocalizedUrls` not working as expected for routes other than the current request
+* Fixed an issue where plugin-generated custom sitemap URLs didn't have their `lastmod` respected for the sitemap index
+* Fixed an issue accessing `metaBundleSettings` in the Field when it doesn't exist
 
 ## 3.1.35 - 2018.12.03
 ### Changed
