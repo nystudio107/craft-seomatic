@@ -269,9 +269,27 @@ You can also limit it to a specific Section, Category Group, or Product handle:
 ```
 **N.B.:** If you do disable **Regenerate Sitemaps Automatically** sitemaps will _not_ be updated unless you do so manually via the CLI, or clear SEOmatic's sitemap caches via Utilities->Clear Caches.
 
+##### Additional Sitemaps
+
+If you have custom sitemaps that are not in the CMS, you can manually add them to their own Sitemap Index via **Site Settings** → **Sitemap**.
+
+You can also add to it via a plugin:
+
+```php
+use nystudio107\seomatic\events\RegisterSitemapsEvent;
+use nystudio107\seomatic\models\SitemapIndexTemplate;
+use yii\base\Event;
+Event::on(SitemapIndexTemplate::class, SitemapIndexTemplate::EVENT_REGISTER_SITEMAPS, function(RegisterSitemapsEvent $e) {
+    $e->sitemaps[] = [
+        'loc' => $url,
+        'lastmod' => $lastMod,
+    ];
+});
+```
+
 ##### Additional Sitemap URLS
 
-If you have custom URLs that are not in the CMS, you can manually add them to their own Sitemap Index via **Site Settings** → **Miscellaneous**.
+If you have custom URLs that are not in the CMS, you can manually add them to their own Sitemap Index via **Site Settings** → **Sitemap**.
 
 You can also add to it via a plugin:
 
@@ -280,7 +298,7 @@ use nystudio107\seomatic\events\RegisterSitemapUrlsEvent;
 use nystudio107\seomatic\models\SitemapCustomTemplate;
 use yii\base\Event;
 Event::on(SitemapCustomTemplate::class, SitemapCustomTemplate::EVENT_REGISTER_SITEMAP_URLS, function(RegisterSitemapUrlsEvent $e) {
-$e->sitemapUrls[] = [
+    $e->sitemapUrls[] = [
          'loc' => $url,
          'changefreq' => $changeFreq,
          'priority' => $priority,
