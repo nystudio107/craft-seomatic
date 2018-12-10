@@ -18,13 +18,13 @@ use yii\base\Event;
  * @package   Seomatic
  * @since     3.1.0
  */
-class RegisterSitemapUrlsEvent extends Event
+class RegisterSitemapsEvent extends Event
 {
     // Properties
     // =========================================================================
 
     /**
-     * @var array The registered sitemap URLs.
+     * @var array The registered sitemaps.
      */
     public $sitemaps = [];
 
