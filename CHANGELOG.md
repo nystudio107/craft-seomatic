@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.37 - 2018.12.17
+### Changed
+* Ensure that title truncation handles edge cases gracefully
+
 ## 3.1.36 - 2018.12.10
 ### Added
 * Added the ability to add additional sitemaps that exist out of the CMS into the `sitemap.xml` via Site Settings -> Sitemap as well as via plugin
