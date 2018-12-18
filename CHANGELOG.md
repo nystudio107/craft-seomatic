@@ -3,6 +3,8 @@
 ## 3.1.37 - 2018.12.17
 ### Changed
 * Ensure that title truncation handles edge cases gracefully
+* Breadcrumbs in the CP now maintain the selected site
+* Parse sitemaps and sitemap URLs for aliases and as Twig templates
 
 ## 3.1.36 - 2018.12.10
 ### Added
