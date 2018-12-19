@@ -1,5 +1,12 @@
 # SEOmatic Changelog
 
+## 3.1.37 - 2018.12.19
+### Changed
+* Ensure that title truncation handles edge cases gracefully
+* Breadcrumbs in the CP now maintain the selected site
+* Parse sitemaps and sitemap URLs for aliases and as Twig templates
+* Don't try to add assets with null URLs to sitemaps
+
 ## 3.1.36 - 2018.12.10
 ### Added
 * Added the ability to add additional sitemaps that exist out of the CMS into the `sitemap.xml` via Site Settings -> Sitemap as well as via plugin

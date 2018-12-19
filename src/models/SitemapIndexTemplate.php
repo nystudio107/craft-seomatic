@@ -16,7 +16,7 @@ use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\base\SitemapInterface;
 use nystudio107\seomatic\events\RegisterSitemapUrlsEvent;
 use nystudio107\seomatic\events\RegisterSitemapsEvent;
-use nystudio107\seomatic\models\SitemapCustomTemplate;
+use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
 use Craft;
 use craft\models\SiteGroup;
@@ -225,10 +225,11 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
         // Output the sitemap index
         if (!empty($additionalSitemaps)) {
             foreach ($additionalSitemaps as $additionalSitemap) {
+                $loc = MetaValueHelper::parseString($additionalSitemap['loc']);
                 if (!empty($additionalSitemap['loc'])) {
                     $lines[] = '  <sitemap>';
                     $lines[] = '    <loc>';
-                    $lines[] = '      '.Html::encode($additionalSitemap['loc']);
+                    $lines[] = '      '.Html::encode($loc);
                     $lines[] = '    </loc>';
                     // Find the most recent date
                     $dateUpdated = !empty($additionalSitemap['lastmod'])

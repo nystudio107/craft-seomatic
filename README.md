@@ -287,7 +287,7 @@ Event::on(SitemapIndexTemplate::class, SitemapIndexTemplate::EVENT_REGISTER_SITE
 });
 ```
 
-##### Additional Sitemap URLS
+##### Additional Sitemap URLs
 
 If you have custom URLs that are not in the CMS, you can manually add them to their own Sitemap Index via **Site Settings** → **Sitemap**.
 
