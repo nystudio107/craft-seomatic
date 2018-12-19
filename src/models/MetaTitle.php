@@ -153,9 +153,13 @@ class MetaTitle extends MetaItem
             $this->setScenario('render');
             $data = MetaValueHelper::parseString($data);
             $this->setScenario($scenario);
-            // Special-case scenarios
+            // Handle truncating the title
+            $truncLen = Seomatic::$settings->maxTitleLength - $lengthAdjust;
+            if ($truncLen < 0) {
+                $truncLen = 0;
+            }
             $data = (string)Stringy::create($data)->safeTruncate(
-                Seomatic::$settings->maxTitleLength - $lengthAdjust,
+                $truncLen,
                 '…'
             );
             $data = $prefix.$data.$suffix;

@@ -15,6 +15,7 @@ use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\base\SitemapInterface;
 use nystudio107\seomatic\events\RegisterSitemapUrlsEvent;
+use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\helpers\UrlHelper;
 
 use Craft;
@@ -163,8 +164,9 @@ class SitemapCustomTemplate extends FrontendTemplate implements SitemapInterface
                 $additionalSitemapUrls = array_filter($event->sitemaps);
                 // Output the sitemap entry
                 foreach ($additionalSitemapUrls as $additionalSitemapUrl) {
+                    $loc = MetaValueHelper::parseString($additionalSitemapUrl['loc']);
                     $url = UrlHelper::siteUrl(
-                        $additionalSitemapUrl['loc'],
+                        $loc,
                         null,
                         null,
                         $metaBundle->sourceSiteId
