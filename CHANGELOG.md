@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.38 - 2018.12.22
+### Changed
+* Register cache options for every type of request
+
 ## 3.1.37 - 2018.12.19
 ### Changed
 * Ensure that title truncation handles edge cases gracefully
