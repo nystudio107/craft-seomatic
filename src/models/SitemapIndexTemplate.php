@@ -72,7 +72,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
     public static function create(array $config = [])
     {
         $defaults = [
-            'path' => 'sitemaps/<groupId:\d+>/sitemap.xml',
+            'path' => 'sitemaps_<groupId:\d+>_sitemap.xml',
             'template' => '',
             'controller' => 'sitemap',
             'action' => 'sitemap-index',
