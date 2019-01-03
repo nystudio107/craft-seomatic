@@ -386,6 +386,22 @@ class Seomatic extends Plugin
                 }
             }
         );
+        // Handler: ClearCaches::EVENT_REGISTER_CACHE_OPTIONS
+        Event::on(
+            ClearCaches::class,
+            ClearCaches::EVENT_REGISTER_CACHE_OPTIONS,
+            function (RegisterCacheOptionsEvent $event) {
+                Craft::debug(
+                    'ClearCaches::EVENT_REGISTER_CACHE_OPTIONS',
+                    __METHOD__
+                );
+                // Register our Control Panel routes
+                $event->options = array_merge(
+                    $event->options,
+                    $this->customAdminCpCacheOptions()
+                );
+            }
+        );
         // Handler: EVENT_BEFORE_SAVE_PLUGIN_SETTINGS
         Event::on(
             Plugins::class,
@@ -639,22 +655,6 @@ class Seomatic extends Plugin
                 );
                 // Register our custom permissions
                 $event->permissions[Craft::t('seomatic', 'SEOmatic')] = $this->customAdminCpPermissions();
-            }
-        );
-        // Handler: ClearCaches::EVENT_REGISTER_CACHE_OPTIONS
-        Event::on(
-            ClearCaches::class,
-            ClearCaches::EVENT_REGISTER_CACHE_OPTIONS,
-            function (RegisterCacheOptionsEvent $event) {
-                Craft::debug(
-                    'ClearCaches::EVENT_REGISTER_CACHE_OPTIONS',
-                    __METHOD__
-                );
-                // Register our Control Panel routes
-                $event->options = array_merge(
-                    $event->options,
-                    $this->customAdminCpCacheOptions()
-                );
             }
         );
     }

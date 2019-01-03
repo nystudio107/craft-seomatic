@@ -31,6 +31,7 @@ class EmbeddedModelValidator extends Validator
      */
     public function validateAttribute($model, $attribute)
     {
+        /** @var Model $model */
         $value = $model->$attribute;
 
         if (!empty($value) && \is_object($value) && $value instanceof Model) {

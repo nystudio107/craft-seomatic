@@ -294,9 +294,9 @@ class Sitemaps extends Component implements SitemapInterface
         if ($site !== null) {
             try {
                 $url = UrlHelper::siteUrl(
-                    '/sitemaps/'
+                    '/sitemaps_'
                     .$site->groupId
-                    .'/sitemap.xml',
+                    .'_sitemap.xml',
                     null,
                     null,
                     $siteId
@@ -369,15 +369,15 @@ class Sitemaps extends Component implements SitemapInterface
         if ($site && $metaBundle) {
             try {
                 $url = UrlHelper::siteUrl(
-                    '/sitemaps/'
+                    '/sitemaps_'
                     .$site->groupId
-                    .'/'
+                    .'_'
                     .$metaBundle->sourceBundleType
-                    .'/'
+                    .'_'
                     .$metaBundle->sourceHandle
-                    .'/'
+                    .'_'
                     .$metaBundle->sourceSiteId
-                    .'/sitemap.xml',
+                    .'_sitemap.xml',
                     null,
                     null,
                     $siteId
