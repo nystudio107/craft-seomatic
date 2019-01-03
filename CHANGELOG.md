@@ -1,9 +1,9 @@
 # SEOmatic Changelog
 
-## 3.1.38 - 2018.12.22
+## 3.1.38 - 2019.01.03
 ### Changed
 * Register cache options for every type of request
-* Refactored the sitemaps and sitemap indexes to always be in the server root, as per spec
+* Refactored the sitemaps and sitemap indexes to always be in the server root, as per the [sitemaps spec](https://www.sitemaps.org/protocol.html#location)
 
 ## 3.1.37 - 2018.12.19
 ### Changed
