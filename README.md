@@ -1216,7 +1216,7 @@ Display the breadcrumbs on the page:
 {% endfor %}
 ```
 
-To entirely replace the existing **BreadcrumList** on a page:
+To entirely replace the existing **BreadcrumbList** on a page:
 ```twig
 {% set crumbList = seomatic.jsonLd.create({
     'type': 'BreadcrumbList',
