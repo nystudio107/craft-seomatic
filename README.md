@@ -1216,6 +1216,38 @@ Display the breadcrumbs on the page:
 {% endfor %}
 ```
 
+To entirely replace the existing **BreadcrumList** on a page:
+```twig
+{% set crumbList = seomatic.jsonLd.create({
+    'type': 'BreadcrumbList',
+    'name': 'Breadcrumbs',
+    'description': 'Breadcrumbs list',
+    'itemListElement': [
+        {
+            'type': 'ListItem',
+            'item': {
+                '@id': 'http://start.test/',
+                'name': 'Testing 123'
+            },
+        },
+        {
+            'type': 'ListItem',
+            'item': {
+                '@id': 'http://start.test/',
+                'name': 'gdsgsdgsd123'
+            },
+        },
+        {
+            'type': 'ListItem',
+            'item': {
+                '@id': 'http://start.test/',
+                'name': 'Fake'
+            },
+        },
+    ]
+}) %}
+```
+
 Get the existing **Identity** as set in the Site Settings Control Panel section to modify it:
 ```twig
 {% set identity = seomatic.jsonLd.get('identity') %}
