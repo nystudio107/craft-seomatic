@@ -1226,22 +1226,22 @@ To entirely replace the existing **BreadcrumList** on a page:
         {
             'type': 'ListItem',
             'item': {
-                '@id': 'http://start.test/',
-                'name': 'Testing 123'
+                '@id': 'http://example.com/',
+                'name': 'Homepage'
             },
         },
         {
             'type': 'ListItem',
             'item': {
-                '@id': 'http://start.test/',
-                'name': 'gdsgsdgsd123'
+                '@id': 'http://example.com/blog/',
+                'name': 'Our blog'
             },
         },
         {
             'type': 'ListItem',
             'item': {
-                '@id': 'http://start.test/',
-                'name': 'Fake'
+                '@id': 'http://example.com/blog/tech',
+                'name': 'Technology blogs'
             },
         },
     ]
