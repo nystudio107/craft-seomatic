@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.39 - 2019.01.16
+### Changed
+* Fixed an issue where the generated `hreflang` URLs were wrong if you had localized slugs
+
 ## 3.1.38 - 2019.01.03
 ### Changed
 * Register cache options for every type of request
