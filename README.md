@@ -448,7 +448,7 @@ If you want to include the Facebook Pixel script despite `devMode` being enabled
 The Plugin Settings lets you control various SEOmatic settings globally (across all sites/languages).
 
 * **Plugin name** - This is the name that will be used for the plugin everywhere it is referenced in the Control Panel GUI
-* **Automatic Render Enabled** - Controls whether SEOmatic will automatically render metadata on your pages. If you turn this off, you will need to manually render the metadata via `{{ seomatic.tag.render() }}`, `{{ seomatic.link.render() }}`, etc. You can selectively disable rendering via Twig with `{% do seomatic.config.renderEnabled(false) %}
+* **Automatic Render Enabled** - Controls whether SEOmatic will automatically render metadata on your pages. If you turn this off, you will need to manually render the metadata via `{{ seomatic.tag.render() }}`, `{{ seomatic.link.render() }}`, etc. You can selectively disable rendering via Twig with `{% do seomatic.config.renderEnabled(false)` %}
 * **Sitemaps Enabled** - Controls whether SEOmatic will automatically render frontend sitemaps for your website.
 * **HTTP Headers Enabled** - Controls whether SEOmatic will automatically add `X-Robots-Tag`, `canonical`, & `Referrer-Policy` to the http response headers.
 * **Environment** - The server environment, either `live`, `staging`, or `local`. If `devMode` is on, SEOmatic will override this setting to local Development. This setting controls whether certain things render; for instance only in the `live` production environment will Google Analytics and other tracking tags send analytics data. SEOmatic also automatically sets the `robots` tag to `none` for everything but the `live` production environment.
@@ -806,6 +806,17 @@ or
 ```twig
  {% do seomatic.meta.seoTitle("{category.title}") %}
 ```
+
+But most of the time, you'll want to just set them like you would regular variables:
+
+ ```twig
+ {% do seomatic.meta.seoTitle(entry.title) %}
+ ```
+or
+```twig
+ {% do seomatic.meta.seoTitle(category.title) %}
+```
+...so that there is no additional Twig parsing that needs to be done.
 
 There may be occasions where you want to output the final parsed value of an SEOmatic variable on the frontend. You can do that via `seomatic.meta.parsedValue()`. For example:
 
