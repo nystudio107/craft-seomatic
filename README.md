@@ -94,6 +94,8 @@ All of SEOmatic's settings are multi-site aware, allowing you to have different 
 
 For SEOmatic to be truly useful, you need to configure it so that it knows where to _pull_ SEO content from.
 
+**N.B.** Please ensure that you set up your [Multi-Environment Config Settings](#multi-environment-config-settings) if you will be using SEOmatic across multiple environments.
+
 ### Dashboard
 
 ![Screenshot](resources/screenshots/seomatic-dashboard.png)
@@ -462,6 +464,8 @@ The Plugin Settings lets you control various SEOmatic settings globally (across 
 * **Site Groups define logically separate sites** - If you are using Site Groups to logically separate 'sister sites', turn this on.
 * **Add `hreflang` Tags** - Controls whether SEOmatic will automatically add `hreflang` and `og:locale:alternate` tags.
 * **Generator Enabled** - Controls whether SEOmatic will include the meta `generator` tag and `X-Powered-By` header
+
+##### Multi-Environment Config Settings
 
 If you're using a multi-environment config, you can map your environment settings using SEOmatic's `config.php` something like this:
 
