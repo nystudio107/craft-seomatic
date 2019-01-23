@@ -3,6 +3,7 @@
 ## 3.1.39 - 2019.01.16
 ### Changed
 * Fixed an issue where the generated `hreflang` URLs were wrong if you had localized slugs
+* Sitemaps now return a 503 Service Unavailable an a `Retry-After` so bots will try back later if for some reason they can't be rendered for the current request (Async Queue generation, etc.)
 
 ## 3.1.38 - 2019.01.03
 ### Changed
