@@ -11,16 +11,17 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use nystudio107\seomatic\fields\SeoSettings;
-use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\models\Entity;
+use nystudio107\seomatic\fields\SeoSettings;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
+use nystudio107\seomatic\helpers\UrlHelper;
 use nystudio107\seomatic\models\jsonld\ContactPoint;
 use nystudio107\seomatic\models\jsonld\LocalBusiness;
 use nystudio107\seomatic\models\jsonld\Organization;
 use nystudio107\seomatic\models\jsonld\BreadcrumbList;
 use nystudio107\seomatic\models\jsonld\Thing;
+use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 
