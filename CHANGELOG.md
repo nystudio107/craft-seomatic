@@ -1,5 +1,16 @@
 # SEOmatic Changelog
 
+## 3.1.39 - 2019.01.24
+### Added
+* Added a SEO Setup checklist to the Dashboard
+* Added support for pulling content from [Neo](https://github.com/spicywebau/craft-neo) fields
+
+### Changed
+* Fixed an issue where the generated `hreflang` URLs were wrong if you had localized slugs
+* Sitemaps now return a 503 Service Unavailable an a `Retry-After` so bots will try back later if for some reason they can't be rendered for the current request (Async Queue generation, etc.)
+* Fixed a namespacing issue with `UrlHelper`
+* Handle the case where no sections have been set up yet more gracefully
+
 ## 3.1.38 - 2019.01.03
 ### Changed
 * Register cache options for every type of request

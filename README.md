@@ -94,6 +94,8 @@ All of SEOmatic's settings are multi-site aware, allowing you to have different 
 
 For SEOmatic to be truly useful, you need to configure it so that it knows where to _pull_ SEO content from.
 
+**N.B.** Please ensure that you set up your [Multi-Environment Config Settings](#multi-environment-config-settings) if you will be using SEOmatic across multiple environments.
+
 ### Dashboard
 
 ![Screenshot](resources/screenshots/seomatic-dashboard.png)
@@ -448,7 +450,7 @@ If you want to include the Facebook Pixel script despite `devMode` being enabled
 The Plugin Settings lets you control various SEOmatic settings globally (across all sites/languages).
 
 * **Plugin name** - This is the name that will be used for the plugin everywhere it is referenced in the Control Panel GUI
-* **Automatic Render Enabled** - Controls whether SEOmatic will automatically render metadata on your pages. If you turn this off, you will need to manually render the metadata via `{{ seomatic.tag.render() }}`, `{{ seomatic.link.render() }}`, etc. You can selectively disable rendering via Twig with `{% do seomatic.config.renderEnabled(false) %}
+* **Automatic Render Enabled** - Controls whether SEOmatic will automatically render metadata on your pages. If you turn this off, you will need to manually render the metadata via `{{ seomatic.tag.render() }}`, `{{ seomatic.link.render() }}`, etc. You can selectively disable rendering via Twig with `{% do seomatic.config.renderEnabled(false)` %}
 * **Sitemaps Enabled** - Controls whether SEOmatic will automatically render frontend sitemaps for your website.
 * **HTTP Headers Enabled** - Controls whether SEOmatic will automatically add `X-Robots-Tag`, `canonical`, & `Referrer-Policy` to the http response headers.
 * **Environment** - The server environment, either `live`, `staging`, or `local`. If `devMode` is on, SEOmatic will override this setting to local Development. This setting controls whether certain things render; for instance only in the `live` production environment will Google Analytics and other tracking tags send analytics data. SEOmatic also automatically sets the `robots` tag to `none` for everything but the `live` production environment.
@@ -462,6 +464,8 @@ The Plugin Settings lets you control various SEOmatic settings globally (across 
 * **Site Groups define logically separate sites** - If you are using Site Groups to logically separate 'sister sites', turn this on.
 * **Add `hreflang` Tags** - Controls whether SEOmatic will automatically add `hreflang` and `og:locale:alternate` tags.
 * **Generator Enabled** - Controls whether SEOmatic will include the meta `generator` tag and `X-Powered-By` header
+
+##### Multi-Environment Config Settings
 
 If you're using a multi-environment config, you can map your environment settings using SEOmatic's `config.php` something like this:
 
@@ -513,6 +517,10 @@ return [
     ],
 ];
 ```
+Just copy the `config.php` to your Craft `config/` directory as `seomatic.php` and you can configure the settings in a multi-environment friendly way. See the [Craft Environments](https://docs.craftcms.com/v3/config/environments.html#config-files) page for details, and **N.B.:**
+
+> The `'*'` key is required here so Craft knows to treat it as a multi-environment key, but the other keys are up to you
+
 This is how you can make your multi-environment nomenclature to SEOmatic's. This works exactly like Craft's [multi-environment config](https://docs.craftcms.com/v3/configuration.html#application-config) files such as `general.php` and `db.php`. See SEOmatic's `config.php` for details.
 
 ### Access Permissions
@@ -806,6 +814,17 @@ or
 ```twig
  {% do seomatic.meta.seoTitle("{category.title}") %}
 ```
+
+But most of the time, you'll want to just set them like you would regular variables:
+
+ ```twig
+ {% do seomatic.meta.seoTitle(entry.title) %}
+ ```
+or
+```twig
+ {% do seomatic.meta.seoTitle(category.title) %}
+```
+...so that there is no additional Twig parsing that needs to be done.
 
 There may be occasions where you want to output the final parsed value of an SEOmatic variable on the frontend. You can do that via `seomatic.meta.parsedValue()`. For example:
 
@@ -1214,6 +1233,38 @@ Display the breadcrumbs on the page:
     <a href="{{ crumb.item['@id'] }}">{{ crumb.item['name'] }}</a>
     {% if not loop.last %}&raquo;{% endif %}
 {% endfor %}
+```
+
+To entirely replace the existing **BreadcrumbList** on a page:
+```twig
+{% set crumbList = seomatic.jsonLd.create({
+    'type': 'BreadcrumbList',
+    'name': 'Breadcrumbs',
+    'description': 'Breadcrumbs list',
+    'itemListElement': [
+        {
+            'type': 'ListItem',
+            'item': {
+                '@id': 'http://example.com/',
+                'name': 'Homepage'
+            },
+        },
+        {
+            'type': 'ListItem',
+            'item': {
+                '@id': 'http://example.com/blog/',
+                'name': 'Our blog'
+            },
+        },
+        {
+            'type': 'ListItem',
+            'item': {
+                '@id': 'http://example.com/blog/tech',
+                'name': 'Technology blogs'
+            },
+        },
+    ]
+}) %}
 ```
 
 Get the existing **Identity** as set in the Site Settings Control Panel section to modify it:

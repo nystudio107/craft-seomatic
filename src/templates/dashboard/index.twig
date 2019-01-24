@@ -79,8 +79,9 @@
                         <p>We hope you love it! For more information, please <a href="{{ docsUrl }}" target="_blank" rel="noopener">see the documentation</a>.</p>
                     </div>
                 {% endif %}
-            <div class="flex" style="text-align:center; margin:0 auto; padding: 5% 0;">
+            <div class="flex" style="align-items: flex-start; text-align:center; margin:0 auto; padding: 5% 0;">
                 <div class="flex-grow">
+                    {% if globalSetupStat is defined and globalSetupStat | length %}
                     <h2 class="centeralign" style="font-weight: 200;">Global SEO Setup</h2>
                     <div id="GlobalSEOChart" style="width: 300px; margin: 0 auto;">
                         {% set colors = [
@@ -97,8 +98,24 @@
 
                         </dashboard-radial-chart>
                     </div>
+                    <div style="text-align: left; margin: 0 auto; display: inline-block; padding-top: 10px;">
+                        <h4>Global SEO Setup Checklist:</h4>
+                        <ul>
+                            <li>Main Entity of Page</li>
+                            <li>SEO Title</li>
+                            <li>SEO Description</li>
+                            <li>SEO Image</li>
+                            <li>SEO Image Description</li>
+                        </ul>
+                    </div>
+                    {% else %}
+                        <div class="field readable" style="text-align:center; margin:0 auto; padding: 0 10%;">
+                            <p class="warning">No data to display.</p>
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="flex-grow">
+                    {% if contentSetupStats is defined and contentSetupStats | length %}
                     <h2 class="centeralign" style="font-weight: 200;">Content SEO Setup</h2>
                     <div id="ContentSEOChart" style="width: 300px; margin: 0 auto;">
                         {% set colors = [
@@ -126,8 +143,24 @@
 
                         </dashboard-multi-radial-chart>
                     </div>
+                    <div style="text-align: left; margin: 0 auto; display: inline-block;">
+                        <h4>Content SEO Setup Checklist:</h4>
+                        <ul>
+                            <li>Main Entity of Page</li>
+                            <li>SEO Title</li>
+                            <li>SEO Description</li>
+                            <li>SEO Image</li>
+                            <li>SEO Image Description</li>
+                        </ul>
+                    </div>
+                    {% else %}
+                        <div class="field readable" style="text-align:center; margin:0 auto; padding: 0 10%;">
+                            <p class="warning">No data to display.</p>
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="flex-grow">
+                    {% if siteSetupStat is defined and siteSetupStat | length %}
                     <h2 class="centeralign" style="font-weight: 200;">Site Settings Setup</h2>
                     <div id="SiteSettingsChart" style="width: 300px; margin: 0 auto;">
                         {% set colors = [
@@ -144,10 +177,30 @@
 
                         </dashboard-radial-chart>
                     </div>
+                    <div style="text-align: left; margin: 0 auto; display: inline-block; padding-top: 10px;">
+                        <h4>Site Settings Setup Checklist:</h4>
+                        <ul>
+                            <li>Site Name</li>
+                            <li>Twitter Handle</li>
+                            <li>Facebook Profile ID</li>
+                            <li>Identity Main Entity of Page</li>
+                            <li>Identity Entity Name</li>
+                            <li>Identity Entity Description</li>
+                            <li>Identity Entity URL</li>
+                            <li>Identity Entity Brand</li>
+                        </ul>
+                    </div>
+                    {% else %}
+                        <div class="field readable" style="text-align:center; margin:0 auto; padding: 0 10%;">
+                            <p class="warning">No data to display.</p>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
             <div class="field readable" style="text-align:center; margin:0 auto; padding: 0 10%;">
-                <p>This Dashboard shows you how set up your SEO implementation is; you can click on any part of the graphs to go to the settings that need your attention.</p>
+                <div class="heading">
+                    <p class="instructions" style="font-size: 1rem;">This Dashboard shows you how set up your SEO implementation is. <br />You can click on any part of the graphs to go to the settings that need your attention.</p>
+                </div>
             </div>
         </div>
     </div>
