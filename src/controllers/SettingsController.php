@@ -186,8 +186,8 @@ class SettingsController extends Controller
                 $stat += (int)!empty($metaBundle->metaSiteVars->identity[$setupField]);
             }
             $stat = round(($stat / $numFields) * 100);
+            $variables['siteSetupStat'] = $stat;
         }
-        $variables['siteSetupStat'] = $stat;
 
         // Render the template
         return $this->renderTemplate('seomatic/dashboard/index', $variables);
