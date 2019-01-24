@@ -22,6 +22,9 @@ use craft\elements\Tag;
 
 use yii\base\InvalidConfigException;
 
+use benf\neo\elements\db\BlockQuery as NeoBlockQuery;
+use benf\neo\elements\Block as NeoBlock;
+
 use Stringy\Stringy;
 
 use PhpScience\TextRank\TextRankFacade;
@@ -111,6 +114,9 @@ class Text
         if ($field instanceof MatrixBlockQuery
             || (\is_array($field) && $field[0] instanceof MatrixBlock)) {
             $result = self::extractTextFromMatrix($field);
+        } elseif ($field instanceof NeoBlockQuery
+            || (\is_array($field) && $field[0] instanceof NeoBlock)) {
+            $result = self::extractTextFromNeo($field);
         } elseif ($field instanceof TagQuery
             || (\is_array($field) && $field[0] instanceof Tag)) {
             $result = self::extractTextFromTags($field);
@@ -180,6 +186,52 @@ class Text
             if ($matrixBlockTypeModel) {
                 $fieldClasses = FieldHelper::FIELD_CLASSES[FieldHelper::TEXT_FIELD_CLASS_KEY];
                 $fields = $matrixBlockTypeModel->getFields();
+
+                foreach ($fields as $field) {
+                    /** @var array $fieldClasses */
+                    foreach ($fieldClasses as $fieldClassKey) {
+                        if ($field instanceof $fieldClassKey) {
+                            if ($field->handle === $fieldHandle || empty($fieldHandle)) {
+                                $result .= self::extractTextFromField($block[$field->handle]).' ';
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * Extract text from all of the blocks in a Neo field, concatenating it
+     * together.
+     *
+     * @param NeoBlockQuery|NeoBlock[] $blocks
+     * @param string                         $fieldHandle
+     *
+     * @return string
+     */
+    public static function extractTextFromNeo($blocks, $fieldHandle = ''): string
+    {
+        if (empty($blocks)) {
+            return '';
+        }
+        $result = '';
+        // Iterate through all of the matrix blocks
+        if ($blocks instanceof NeoBlockQuery) {
+            $blocks = $blocks->all();
+        }
+        foreach ($blocks as $block) {
+            try {
+                $neoBlockTypeModel = $block->getType();
+            } catch (InvalidConfigException $e) {
+                $neoBlockTypeModel = null;
+            }
+            // Find any text fields inside of the matrix block
+            if ($neoBlockTypeModel) {
+                $fieldClasses = FieldHelper::FIELD_CLASSES[FieldHelper::TEXT_FIELD_CLASS_KEY];
+                $fields = $neoBlockTypeModel->getFields();
 
                 foreach ($fields as $field) {
                     /** @var array $fieldClasses */
