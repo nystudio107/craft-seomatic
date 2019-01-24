@@ -145,6 +145,10 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                     return $result;
                 }
             }
+            // Return a 503 Service Unavailable an a Retry-After so bots will try back later
+            $response = Craft::$app->getResponse();
+            $response->setStatusCode(503);
+            $response->headers->add('Retry-After', 60);
             // Return an empty XML document
             $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
             $lines[] = '<!-- ' . Craft::t('seomatic', 'This sitemap has not been generated yet.') . ' -->';

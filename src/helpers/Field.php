@@ -35,6 +35,8 @@ use craft\redactor\Field as RedactorField;
 use craft\commerce\Plugin as CommercePlugin;
 use craft\commerce\elements\Product;
 
+use benf\neo\Field as NeoField;
+
 use yii\base\InvalidConfigException;
 
 /**
@@ -60,12 +62,14 @@ class Field
             MatrixField::class,
             RedactorField::class,
             TagsField::class,
+            NeoField::class,
         ],
         self::ASSET_FIELD_CLASS_KEY => [
             AssetsField::class,
         ],
         self::BLOCK_FIELD_CLASS_KEY => [
             MatrixField::class,
+            NeoField::class,
         ],
         self::SEO_SETTINGS_CLASS_KEY => [
             SeoSettingsField::class,
