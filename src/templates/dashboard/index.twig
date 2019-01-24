@@ -81,6 +81,7 @@
                 {% endif %}
             <div class="flex" style="text-align:center; margin:0 auto; padding: 5% 0;">
                 <div class="flex-grow">
+                    {% if globalSetupStat is defined and globalSetupStat | length %}
                     <h2 class="centeralign" style="font-weight: 200;">Global SEO Setup</h2>
                     <div id="GlobalSEOChart" style="width: 300px; margin: 0 auto;">
                         {% set colors = [
@@ -97,8 +98,14 @@
 
                         </dashboard-radial-chart>
                     </div>
+                    {% else %}
+                        <div class="field readable" style="text-align:center; margin:0 auto; padding: 0 10%;">
+                            <p class="warning">No data to display.</p>
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="flex-grow">
+                    {% if contentSetupStats is defined and contentSetupStats | length %}
                     <h2 class="centeralign" style="font-weight: 200;">Content SEO Setup</h2>
                     <div id="ContentSEOChart" style="width: 300px; margin: 0 auto;">
                         {% set colors = [
@@ -126,8 +133,14 @@
 
                         </dashboard-multi-radial-chart>
                     </div>
+                    {% else %}
+                        <div class="field readable" style="text-align:center; margin:0 auto; padding: 0 10%;">
+                            <p class="warning">No data to display.</p>
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="flex-grow">
+                    {% if siteSetupStat is defined and siteSetupStat | length %}
                     <h2 class="centeralign" style="font-weight: 200;">Site Settings Setup</h2>
                     <div id="SiteSettingsChart" style="width: 300px; margin: 0 auto;">
                         {% set colors = [
@@ -144,6 +157,11 @@
 
                         </dashboard-radial-chart>
                     </div>
+                    {% else %}
+                        <div class="field readable" style="text-align:center; margin:0 auto; padding: 0 10%;">
+                            <p class="warning">No data to display.</p>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
             <div class="field readable" style="text-align:center; margin:0 auto; padding: 0 10%;">
