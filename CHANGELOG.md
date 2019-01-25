@@ -1,5 +1,10 @@
 # SEOmatic Changelog
 
+## 3.1.40 - 2019.01.28
+### Changed
+* Fixed an issue with sitemap generation if your Section had a Neo field in it
+* Removed errant error logging
+
 ## 3.1.39 - 2019.01.24
 ### Added
 * Added a SEO Setup checklist to the Dashboard
