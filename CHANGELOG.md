@@ -1,8 +1,9 @@
 # SEOmatic Changelog
 
-## 3.1.40 - 2019.01.28
+## 3.1.40 - 2019.01.29
 ### Changed
 * Fixed an issue with sitemap generation if your Section had a Neo field in it
+* Fixed an issue if you passed in no parameters to `seomatic.helper.getLocalizedUrls()` could cause the incorrect localized URLs to be returned
 * Removed errant error logging
 
 ## 3.1.39 - 2019.01.24
