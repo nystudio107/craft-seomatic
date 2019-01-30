@@ -36,6 +36,7 @@ use craft\commerce\Plugin as CommercePlugin;
 use craft\commerce\elements\Product;
 
 use benf\neo\Field as NeoField;
+use benf\neo\elements\Block as NeoBlock;
 
 use yii\base\InvalidConfigException;
 
@@ -91,6 +92,11 @@ class Field
      * @var array Memoization cache
      */
     public static $matrixFieldsOfTypeCache = [];
+
+    /**
+     * @var array Memoization cache
+     */
+    public static $neoFieldsOfTypeCache = [];
 
     // Static Methods
     // =========================================================================
@@ -349,6 +355,49 @@ class Field
             }
             // Cache for future use
             self::$matrixFieldsOfTypeCache[$memoKey] = $foundFields;
+        }
+
+        return $foundFields;
+    }
+
+
+    /**
+     * Return all of the fields in the $neoBlock of the type $fieldType class
+     *
+     * @param NeoBlock $neoBlock
+     * @param string   $fieldType
+     * @param bool     $keysOnly
+     *
+     * @return array
+     */
+    public static function neoFieldsOfType(NeoBlock $neoBlock, string $fieldType, bool $keysOnly = true): array
+    {
+        $foundFields = [];
+
+        try {
+            $neoBlockTypeModel = $neoBlock->getType();
+        } catch (InvalidConfigException $e) {
+            $neoBlockTypeModel = null;
+        }
+        if ($neoBlockTypeModel) {
+            // Cache me if you can
+            $memoKey = $fieldType.$neoBlock->id.($keysOnly ? 'keys' : 'nokeys');
+            if (!empty(self::$neoFieldsOfTypeCache[$memoKey])) {
+                return self::$neoFieldsOfTypeCache[$memoKey];
+            }
+            $fields = $neoBlockTypeModel->getFields();
+            /** @var  $field BaseField */
+            foreach ($fields as $field) {
+                if ($field instanceof $fieldType) {
+                    $foundFields[$field->handle] = $field->name;
+                }
+            }
+            // Return only the keys if asked
+            if ($keysOnly) {
+                $foundFields = array_keys($foundFields);
+            }
+            // Cache for future use
+            self::$neoFieldsOfTypeCache[$memoKey] = $foundFields;
         }
 
         return $foundFields;

@@ -446,12 +446,7 @@ class DynamicMeta
         }
         // Get the request URI
         if ($uri === null) {
-            try {
-                $requestUri = Craft::$app->getRequest()->getUrl();
-            } catch (InvalidConfigException $e) {
-                $requestUri = '';
-                Craft::error($e->getMessage(), __METHOD__);
-            }
+            $requestUri = Craft::$app->getRequest()->pathInfo;
         } else {
             $requestUri = $uri;
         }

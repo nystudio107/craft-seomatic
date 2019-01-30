@@ -36,6 +36,8 @@ use craft\queue\BaseJob;
 use craft\commerce\Plugin as CommercePlugin;
 use craft\commerce\elements\Product;
 
+use benf\neo\elements\Block as NeoBlock;
+
 use yii\base\Exception;
 use yii\caching\TagDependency;
 use yii\helpers\Html;
@@ -265,19 +267,25 @@ class GenerateSitemap extends BaseJob
                                 $this->assetSitemapItem($asset, $metaBundle, $lines);
                             }
                         }
-                        // Assets embeded in Matrix fields
-                        $matrixFields = FieldHelper::fieldsOfTypeFromElement(
+                        // Assets embeded in Block fields
+                        $blockFields = FieldHelper::fieldsOfTypeFromElement(
                             $element,
                             FieldHelper::BLOCK_FIELD_CLASS_KEY,
                             true
                         );
-                        foreach ($matrixFields as $matrixField) {
-                            $matrixBlocks = $element[$matrixField]->all();
-                            /** @var MatrixBlock[] $matrixBlocks */
-                            foreach ($matrixBlocks as $matrixBlock) {
-                                $assetFields = FieldHelper::matrixFieldsOfType($matrixBlock, AssetsField::class);
+                        foreach ($blockFields as $blockField) {
+                            $blocks = $element[$blockField]->all();
+                            /** @var MatrixBlock[]|NeoBlock[] $blocks */
+                            foreach ($blocks as $block) {
+                                $assetFields = [];
+                                if ($block instanceof MatrixBlock) {
+                                    $assetFields = FieldHelper::matrixFieldsOfType($block, AssetsField::class);
+                                }
+                                if ($block instanceof NeoBlock) {
+                                    $assetFields = FieldHelper::neoFieldsOfType($block, AssetsField::class);
+                                }
                                 foreach ($assetFields as $assetField) {
-                                    foreach ($matrixBlock[$assetField]->all() as $asset) {
+                                    foreach ($block[$assetField]->all() as $asset) {
                                         $this->assetSitemapItem($asset, $metaBundle, $lines);
                                     }
                                 }
@@ -300,19 +308,25 @@ class GenerateSitemap extends BaseJob
                             $this->assetFilesSitemapLink($asset, $metaBundle, $lines);
                         }
                     }
-                    // Assets embeded in Matrix fields
-                    $matrixFields = FieldHelper::fieldsOfTypeFromElement(
+                    // Assets embeded in Block fields
+                    $blockFields = FieldHelper::fieldsOfTypeFromElement(
                         $element,
                         FieldHelper::BLOCK_FIELD_CLASS_KEY,
                         true
                     );
-                    foreach ($matrixFields as $matrixField) {
-                        $matrixBlocks = $element[$matrixField]->all();
-                        /** @var MatrixBlock $matrixBlock */
-                        foreach ($matrixBlocks as $matrixBlock) {
-                            $assetFields = FieldHelper::matrixFieldsOfType($matrixBlock, AssetsField::class);
+                    foreach ($blockFields as $blockField) {
+                        $blocks = $element[$blockField]->all();
+                        /** @var MatrixBlock $block */
+                        foreach ($blocks as $block) {
+                            $assetFields = [];
+                            if ($block instanceof MatrixBlock) {
+                                $assetFields = FieldHelper::matrixFieldsOfType($block, AssetsField::class);
+                            }
+                            if ($block instanceof NeoBlock) {
+                                $assetFields = FieldHelper::neoFieldsOfType($block, AssetsField::class);
+                            }
                             foreach ($assetFields as $assetField) {
-                                foreach ($matrixBlock[$assetField]->all() as $asset) {
+                                foreach ($block[$assetField]->all() as $asset) {
                                     $this->assetFilesSitemapLink($asset, $metaBundle, $lines);
                                 }
                             }
@@ -388,8 +402,6 @@ class GenerateSitemap extends BaseJob
                 if ($fieldMetaBundle !== null && $seoSettingsField !== null && $seoSettingsField->sitemapTabEnabled) {
                     // Combine the meta sitemap vars
                     $attributes = $fieldMetaBundle->metaSitemapVars->getAttributes();
-                    Craft::error(print_r($attributes, true), 'seomatic');
-                    Craft::error(print_r($seoSettingsField->sitemapEnabledFields, true), 'seomatic');
                     $attributes = \array_intersect_key(
                         $attributes,
                         array_flip($seoSettingsField->sitemapEnabledFields)
