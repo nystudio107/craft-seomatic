@@ -168,6 +168,8 @@ The **View ads.txt** button lets you view your rendered `ads.txt`.
 
 The fields in the Control Panel Global SEO settings are parsed as Twig object templates, so in addition to plain old text, you can also put single and double bracket Twig expressions.
 
+SEOmatic fields are also parsed for aliases, and in Craft 3.1, for [environment variables](https://docs.craftcms.com/v3/config/environments.html#control-panel-settings) as well.
+
 This is entirely optional; in typical usage the controls you have in the Control Panel for pulling from other fields will be all you need. But the ability is there if you need it.
 
 For example, the following will output the contents of the **companyInfo** field from the **siteInfo** Global:
@@ -312,6 +314,8 @@ Event::on(SitemapCustomTemplate::class, SitemapCustomTemplate::EVENT_REGISTER_SI
 #### Content SEO Control Panel Fields
 
 The fields in the Control Panel Content SEO settings are parsed as Twig object templates, so in addition to plain old text, you can also put single and double bracket Twig expressions.
+
+SEOmatic fields are also parsed for aliases, and in Craft 3.1, for [environment variables](https://docs.craftcms.com/v3/config/environments.html#control-panel-settings) as well.
 
 This is entirely optional; in typical usage the controls you have in the Control Panel for pulling from other fields will be all you need. But the ability is there if you need it.
 
@@ -787,7 +791,6 @@ You can also set multiple variables at once using array syntax:
 
 Or you can chain them together:
 
-
 ```twig
 {% do seomatic.meta
   .seoTitle("Some Title")
@@ -825,6 +828,8 @@ or
  {% do seomatic.meta.seoTitle(category.title) %}
 ```
 ...so that there is no additional Twig parsing that needs to be done.
+
+SEOmatic variables are also parsed for aliases, and in Craft 3.1, for [environment variables](https://docs.craftcms.com/v3/config/environments.html#control-panel-settings) as well.
 
 There may be occasions where you want to output the final parsed value of an SEOmatic variable on the frontend. You can do that via `seomatic.meta.parsedValue()`. For example:
 
