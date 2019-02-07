@@ -1,5 +1,10 @@
 # SEOmatic Changelog
 
+## 3.1.41 - 2019.02.07
+### Changed
+* If you're using Craft 3.1, SEOmatic variables/fields are parsed for [environment variables](https://docs.craftcms.com/v3/config/environments.html#control-panel-settings) as well as aliases
+* All tracking fields auto-complete `.env` [environment variables](https://docs.craftcms.com/v3/config/environments.html#control-panel-settings)
+
 ## 3.1.40 - 2019.01.30
 ### Changed
 * Fixed an issue with sitemap generation if your Section had a Neo field in it
