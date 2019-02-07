@@ -209,7 +209,11 @@ class MetaValue
         if (\is_string($metaValue)) {
             if ($resolveAliases) {
                 // Resolve it as an alias
-                $alias = Craft::getAlias($metaValue, false);
+                if (Seomatic::$craft31) {
+                    $alias = Craft::parseEnv($metaValue);
+                } else {
+                    $alias = Craft::getAlias($metaValue, false);
+                }
                 if (\is_string($alias)) {
                     $metaValue = $alias;
                 }
