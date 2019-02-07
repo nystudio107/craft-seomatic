@@ -60,15 +60,26 @@
                                     }) }}
 
                                 {% case "string" %}
-                                    {{ forms.textField({
-                                        label: "#{varData.title}"|t("seomatic"),
-                                        instructions: "#{varData.instructions}"|t("seomatic"),
-                                        id: "vars-#{varHandle}",
-                                        name: "vars[#{varHandle}]",
-                                        value: varData.value ?? "",
-                                        warning: false,
-                                    }) }}
-
+                                    {% if seomatic.helper.craft31 %}
+                                        {{ forms.autosuggestField({
+                                            label: "#{varData.title}"|t("seomatic"),
+                                            instructions: "#{varData.instructions}"|t("seomatic"),
+                                            suggestEnvVars: true,
+                                            id: "vars-#{varHandle}",
+                                            name: "vars[#{varHandle}]",
+                                            value: varData.value ?? "",
+                                            warning: false,
+                                        }) }}
+                                    {% else %}
+                                        {{ forms.textField({
+                                            label: "#{varData.title}"|t("seomatic"),
+                                            instructions: "#{varData.instructions}"|t("seomatic"),
+                                            id: "vars-#{varHandle}",
+                                            name: "vars[#{varHandle}]",
+                                            value: varData.value ?? "",
+                                            warning: false,
+                                        }) }}
+                                    {% endif %}
                                 {% default %}
 
                             {% endswitch %}
