@@ -158,6 +158,11 @@ class Seomatic extends Plugin
      */
     public static $savingSettings = false;
 
+    /**
+     * @var bool
+     */
+    public static $craft31 = false;
+
     // Static Methods
     // =========================================================================
 
@@ -213,6 +218,7 @@ class Seomatic extends Plugin
         if (self::$devMode) {
             self::$settings->environment = 'local';
         }
+        self::$craft31 = version_compare(Craft::$app->getVersion(), '3.1', '>=');
         $this->name = Seomatic::$settings->pluginName;
         // Determine whether Craft Commerce exists
         self::$commerceInstalled = class_exists(CommercePlugin::class);
