@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\models;
 
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\helpers\PluginTemplate as PluginTemplateHelper;
 
@@ -238,6 +239,13 @@ class MetaScript extends MetaItem
             $variables = array_merge($this->vars, [
                 'dataLayer' => $this->dataLayer,
             ]);
+            if (Seomatic::$craft31) {
+                foreach ($variables as $key => $value) {
+                    if (\is_string($value)) {
+                        $variables[$key] = Craft::parseEnv($value);
+                    }
+                }
+            }
             $html = PluginTemplateHelper::renderStringTemplate($this->bodyTemplateString, $variables);
         }
 
@@ -254,6 +262,13 @@ class MetaScript extends MetaItem
             $variables = array_merge($this->vars, [
                 'dataLayer' => $this->dataLayer,
             ]);
+            if (Seomatic::$craft31) {
+                foreach ($variables as $key => $value) {
+                    if (\is_string($value)) {
+                        $variables[$key] = Craft::parseEnv($value);
+                    }
+                }
+            }
             $html = PluginTemplateHelper::renderStringTemplate($this->templateString, $variables);
         }
 
@@ -275,6 +290,13 @@ class MetaScript extends MetaItem
             $variables = array_merge($this->vars, [
                 'dataLayer' => $this->dataLayer,
             ]);
+            if (Seomatic::$craft31) {
+                foreach ($variables as $key => $value) {
+                    if (\is_string($value)) {
+                        $variables[$key] = Craft::parseEnv($value);
+                    }
+                }
+            }
             $attributes = [
                 'script' => PluginTemplateHelper::renderStringTemplate($this->templateString, $variables),
                 'bodyScript' => PluginTemplateHelper::renderStringTemplate($this->bodyTemplateString, $variables)
