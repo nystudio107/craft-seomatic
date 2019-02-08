@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.42 - 2019.02.07
+### Changed
+* Fixed an issue where `.env` vars were not actually parsed for the Tracking settings
+
 ## 3.1.41 - 2019.02.07
 ### Changed
 * If you're using Craft 3.1, SEOmatic variables/fields are parsed for [environment variables](https://docs.craftcms.com/v3/config/environments.html#control-panel-settings) as well as aliases
