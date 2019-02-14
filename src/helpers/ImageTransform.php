@@ -30,6 +30,7 @@ class ImageTransform
     const ALLOWED_SOCIAL_MIME_TYPES = [
         'image/jpeg',
         'image/png',
+        'image/svg+xml',
     ];
 
     const DEFAULT_SOCIAL_FORMAT = 'jpg';
