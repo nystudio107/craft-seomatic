@@ -446,7 +446,7 @@ class DynamicMeta
         }
         // Get the request URI
         if ($uri === null) {
-            $requestUri = Craft::$app->getRequest()->pathInfo;
+            $requestUri = Craft::$app->getRequest()->fullPath;
         } else {
             $requestUri = $uri;
         }
