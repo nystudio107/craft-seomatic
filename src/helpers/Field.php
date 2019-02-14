@@ -204,6 +204,7 @@ class Field
                 $layout = null;
             }
             if ($layout) {
+                /** @noinspection SlowArrayOperationsInLoopInspection */
                 $foundFields = array_merge(
                     $foundFields,
                     self::fieldsOfTypeFromLayout($fieldClassKey, $layout, $keysOnly)
@@ -240,6 +241,7 @@ class Field
                     $fields
                 );
                 // Merge with any fields we've already found
+                /** @noinspection SlowArrayOperationsInLoopInspection */
                 $foundFields = array_merge(
                     $foundFields,
                     $fields
@@ -275,15 +277,24 @@ class Field
                 break;
 
             case MetaBundles::SECTION_META_BUNDLE:
-                $entryTypes = Craft::$app->getSections()->getSectionByHandle($sourceHandle)->getEntryTypes();
-                foreach ($entryTypes as $entryType) {
-                    $layouts[] = Craft::$app->getFields()->getLayoutById($entryType->fieldLayoutId);
+                $section = Craft::$app->getSections()->getSectionByHandle($sourceHandle);
+                if ($section) {
+                    $entryTypes = $section->getEntryTypes();
+                    foreach ($entryTypes as $entryType) {
+                        if ($entryType->fieldLayoutId) {
+                            $layouts[] = Craft::$app->getFields()->getLayoutById($entryType->fieldLayoutId);
+                        }
+                    }
                 }
                 break;
 
             case MetaBundles::CATEGORYGROUP_META_BUNDLE:
+                $layoutId = null;
                 try {
-                    $layoutId = Craft::$app->getCategories()->getGroupByHandle($sourceHandle)->getFieldLayoutId();
+                    $category = Craft::$app->getCategories()->getGroupByHandle($sourceHandle);
+                    if ($category) {
+                        $layoutId = $category->getFieldLayoutId();
+                    }
                 } catch (InvalidConfigException $e) {
                     $layoutId = null;
                 }
@@ -295,8 +306,12 @@ class Field
                 if (Seomatic::$commerceInstalled) {
                     $commerce = CommercePlugin::getInstance();
                     if ($commerce !== null) {
+                        $layoutId = null;
                         try {
-                            $layoutId = $commerce->productTypes->getProductTypeByHandle($sourceHandle)->getFieldLayoutId();
+                            $product = $commerce->productTypes->getProductTypeByHandle($sourceHandle);
+                            if ($product) {
+                                $layoutId = $product->getFieldLayoutId();
+                            }
                         } catch (InvalidConfigException $e) {
                             $layoutId = null;
                         }
@@ -309,6 +324,7 @@ class Field
         }
         // Iterate through the layouts looking for the fields of the type $fieldType
         foreach ($layouts as $layout) {
+            /** @noinspection SlowArrayOperationsInLoopInspection */
             $foundFields = array_merge(
                 $foundFields,
                 self::fieldsOfTypeFromLayout($fieldClassKey, $layout, $keysOnly)
