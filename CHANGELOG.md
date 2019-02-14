@@ -3,6 +3,7 @@
 ## 3.1.43 - 2019.02.15
 ### Changed
 * Fixed an issue in Content SEO if no field layouts are yet defined
+* Fixed a regression where pagination info is stripped from hreflang
 
 ## 3.1.42 - 2019.02.07
 ### Changed
