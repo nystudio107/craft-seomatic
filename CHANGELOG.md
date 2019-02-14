@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.43 - 2019.02.15
+### Changed
+* Fixed an issue in Content SEO if no field layouts are yet defined
+
 ## 3.1.42 - 2019.02.07
 ### Changed
 * Fixed an issue where `.env` vars were not actually parsed for the Tracking settings
