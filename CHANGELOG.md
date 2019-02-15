@@ -4,6 +4,7 @@
 ### Changed
 * Fixed an issue in Content SEO if no field layouts are yet defined
 * Fixed a regression where pagination info is stripped from hreflang
+* Add `JSON_HEX_TAG` flag for encoding JSON-LD to ensure that `<` & `>` are escaped
 
 ## 3.1.42 - 2019.02.07
 ### Changed
