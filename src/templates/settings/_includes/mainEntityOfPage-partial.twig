@@ -7,7 +7,7 @@
         <div class="instructions"><p>{{ mainEntityDescription ~ " Choose as general or specific of an type as you wish.  Leave a sub-type blank if you don't want to specify a sub-type." |t("seomatic") |raw}}</p></div>
     </div>
     {% set mainEntityOfPageRootOptions = seomatic.helper.getSingleTypeMenu('') %}
-    {% if pageContext is defined and pageContext == "field" %}
+    {% if pageContext is defined and (pageContext == "field" or pageContext == "content") %}
         {% set mainEntityOfPageRootOptions = { "": ""} | merge(mainEntityOfPageRootOptions) %}
     {% endif %}
     <div>
