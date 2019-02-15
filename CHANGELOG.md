@@ -1,5 +1,12 @@
 # SEOmatic Changelog
 
+## 3.1.43 - 2019.02.15
+### Changed
+* Fixed an issue in Content SEO if no field layouts are yet defined
+* Fixed a regression where pagination info is stripped from hreflang
+* Add `JSON_HEX_TAG` flag for encoding JSON-LD to ensure that `<` & `>` are escaped
+* Addressed an issue where you couldn't set the Main Entity of Page to nothing in Content SEO settings
+
 ## 3.1.42 - 2019.02.07
 ### Changed
 * Fixed an issue where `.env` vars were not actually parsed for the Tracking settings
