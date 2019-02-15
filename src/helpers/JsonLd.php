@@ -54,6 +54,7 @@ class JsonLd extends \craft\helpers\Json
         $options =
         JSON_UNESCAPED_UNICODE
         | JSON_UNESCAPED_SLASHES
+        | JSON_HEX_TAG
     ) {
         // If `devMode` is enabled, make the JSON-LD human-readable
         if (Seomatic::$devMode) {
