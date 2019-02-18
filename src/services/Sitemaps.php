@@ -325,15 +325,15 @@ class Sitemaps extends Component implements SitemapInterface
         if ($site) {
             try {
                 $url = UrlHelper::siteUrl(
-                    '/sitemaps/'
+                    '/sitemaps_'
                     .$site->groupId
-                    .'/'
+                    .'_'
                     .SitemapCustomTemplate::CUSTOM_SCOPE
-                    .'/'
+                    .'_'
                     .SitemapCustomTemplate::CUSTOM_HANDLE
-                    .'/'
+                    .'_'
                     .$siteId
-                    .'/sitemap.xml',
+                    .'_sitemap.xml',
                     null,
                     null,
                     $siteId
