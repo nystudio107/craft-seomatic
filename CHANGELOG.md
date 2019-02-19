@@ -3,6 +3,7 @@
 ## 3.1.44 - 2019.02.18
 ### Changed
 * Fixed an issue with the URL in the sitemap index to the custom sitemap was invalid
+* Fixed an issue when using the meta containers controller with tracking scripts `and asArray=true`
 
 ## 3.1.43 - 2019.02.15
 ### Changed
