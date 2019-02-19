@@ -246,7 +246,9 @@ class MetaScript extends MetaItem
                     }
                 }
             }
-            $html = PluginTemplateHelper::renderStringTemplate($this->bodyTemplateString, $variables);
+            if (!empty($this->bodyTemplateString)) {
+                $html = PluginTemplateHelper::renderStringTemplate($this->bodyTemplateString, $variables);
+            }
         }
 
         return $html;
@@ -297,10 +299,14 @@ class MetaScript extends MetaItem
                     }
                 }
             }
-            $attributes = [
-                'script' => PluginTemplateHelper::renderStringTemplate($this->templateString, $variables),
-                'bodyScript' => PluginTemplateHelper::renderStringTemplate($this->bodyTemplateString, $variables)
-            ];
+            if (!empty($this->templateString)) {
+                $attributes['script']
+                    = PluginTemplateHelper::renderStringTemplate($this->templateString, $variables);
+            }
+            if (!empty($this->bodyTemplateString)) {
+                $attributes['bodyScript']
+                    = PluginTemplateHelper::renderStringTemplate($this->bodyTemplateString, $variables);
+            }
         }
 
         return $attributes;
