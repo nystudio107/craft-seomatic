@@ -51,7 +51,7 @@ class MetaTagContainer extends MetaContainer
         $uniqueKey = $this->handle.$this->handle.$dependency->tags[3];
         $cache = Craft::$app->getCache();
         if ($this->clearCache) {
-            TagDependency::invalidate($cache, $this::CONTAINER_TYPE.$uniqueKey);
+            TagDependency::invalidate($cache, $uniqueKey);
         }
         $tagData = $cache->getOrSet(
             $this::CONTAINER_TYPE.$uniqueKey,
