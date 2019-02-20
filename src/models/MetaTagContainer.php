@@ -56,7 +56,6 @@ class MetaTagContainer extends MetaContainer
         $tagData = $cache->getOrSet(
             $this::CONTAINER_TYPE.$uniqueKey,
             function () use ($uniqueKey) {
-                Craft::dd('cache miss');
                 Craft::info(
                     $this::CONTAINER_TYPE.' cache miss: '.$uniqueKey,
                     __METHOD__
