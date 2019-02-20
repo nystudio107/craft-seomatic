@@ -55,10 +55,10 @@ class MetaScriptContainer extends MetaContainer
     public function includeMetaData($dependency)
     {
         Craft::beginProfile('MetaScriptContainer::includeMetaData', __METHOD__);
-        $uniqueKey = $this->handle.$dependency->tags[3] . $this->dataLayerHash();
+        $uniqueKey = $this->handle.$dependency->tags[3].$this->dataLayerHash();
         $cache = Craft::$app->getCache();
         if ($this->clearCache) {
-            TagDependency::invalidate($cache, $uniqueKey);
+            TagDependency::invalidate($cache, $dependency->tags[3]);
         }
         $tagData = $cache->getOrSet(
             $this::CONTAINER_TYPE.$uniqueKey,

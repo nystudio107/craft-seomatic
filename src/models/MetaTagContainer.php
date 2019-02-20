@@ -48,14 +48,15 @@ class MetaTagContainer extends MetaContainer
     public function includeMetaData($dependency)
     {
         Craft::beginProfile('MetaTagContainer::includeMetaData', __METHOD__);
-        $uniqueKey = $this->handle.$this->handle.$dependency->tags[3];
+        $uniqueKey = $this->handle.$dependency->tags[3];
         $cache = Craft::$app->getCache();
         if ($this->clearCache) {
-            TagDependency::invalidate($cache, $uniqueKey);
+            TagDependency::invalidate($cache, $dependency->tags[3]);
         }
         $tagData = $cache->getOrSet(
             $this::CONTAINER_TYPE.$uniqueKey,
             function () use ($uniqueKey) {
+                Craft::dd('cache miss');
                 Craft::info(
                     $this::CONTAINER_TYPE.' cache miss: '.$uniqueKey,
                     __METHOD__
