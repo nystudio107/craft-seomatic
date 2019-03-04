@@ -1,5 +1,10 @@
 # SEOmatic Changelog
 
+## 3.1.45 - 2019.03.04
+### Changed
+* Fixed an issue where `container.clearCache` wasn't using the correct cache key to invalidate the cache
+* Fixed an issue where Google Tag Manager would render in Live Preview
+
 ## 3.1.44 - 2019.02.18
 ### Changed
 * Fixed an issue with the URL in the sitemap index to the custom sitemap was invalid
