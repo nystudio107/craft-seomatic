@@ -1,4 +1,4 @@
-{% if googleTagManagerId.value is defined and googleTagManagerId.value %}
+{% if googleTagManagerId.value is defined and googleTagManagerId.value and not craft.app.request.isLivePreview %}
 {{ dataLayerVariableName.value }} = [{% if dataLayer is defined and dataLayer %}{{ dataLayer |json_encode() |raw }}{% endif %}];
 (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
