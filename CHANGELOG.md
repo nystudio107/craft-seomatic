@@ -4,6 +4,7 @@
 ### Changed
 * Fixed an issue where `container.clearCache` wasn't using the correct cache key to invalidate the cache
 * Fixed an issue where Google Tag Manager would render in Live Preview
+* Added try/catch around alias/parseEnv to try to catch errors that shouldn't happen
 
 ## 3.1.44 - 2019.02.18
 ### Changed
