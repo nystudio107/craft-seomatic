@@ -1,4 +1,4 @@
-{% if googleTagManagerId.value is defined and googleTagManagerId.value %}
+{% if googleTagManagerId.value is defined and googleTagManagerId.value and not craft.app.request.isLivePreview %}
 <noscript><iframe src="{{ googleTagManagerNoScriptUrl.value }}?id={{ googleTagManagerId.value }}"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 {% endif %}
