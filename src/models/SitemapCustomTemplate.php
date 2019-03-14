@@ -76,11 +76,11 @@ class SitemapCustomTemplate extends FrontendTemplate implements SitemapInterface
     public static function create(array $config = [])
     {
         $defaults = [
-            'path' => 'sitemaps_<groupId:\d+>_'
+            'path' => 'sitemaps-<groupId:\d+>-'
                 .self::CUSTOM_SCOPE
-                .'_'
+                .'-'
                 .self::CUSTOM_HANDLE
-                .'_<siteId:\d+>_<file:[-\w\.*]+>',
+                .'-<siteId:\d+>-<file:[-\w\.*]+>',
             'template' => '',
             'controller' => 'sitemap',
             'action' => 'sitemap-custom',
