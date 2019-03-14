@@ -59,7 +59,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
     public static function create(array $config = [])
     {
         $defaults = [
-            'path' => 'sitemaps_<groupId:\d+>_<type:[-\w\.*]+>_<handle:[-\w\.*]+>_<siteId:\d+>_<file:[-\w\.*]+>',
+            'path' => 'sitemaps-<groupId:\d+>-<type:[\w\.*]+>-<handle:[\w\.*]+>-<siteId:\d+>-<file:[-\w\.*]+>',
             'template' => '',
             'controller' => 'sitemap',
             'action' => 'sitemap',
