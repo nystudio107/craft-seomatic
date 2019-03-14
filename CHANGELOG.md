@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.46 - 2019.03.14
+### Changed
+* Use dash instead of underscore for sitemap urls
+
 ## 3.1.45 - 2019.03.04
 ### Changed
 * Fixed an issue where `container.clearCache` wasn't using the correct cache key to invalidate the cache
