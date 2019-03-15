@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.1.46 - 2019.03.14
+## 3.1.46 - 2019.03.15
 ### Changed
 * Use dash instead of underscore for sitemap urls
 * Don't allow editing of the plugin settings if `allowAdminChanges` is false
