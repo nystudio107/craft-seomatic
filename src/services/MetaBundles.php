@@ -761,6 +761,7 @@ class MetaBundles extends Component
                 unset($metaBundles[$key]);
             }
         }
+        ArrayHelper::multisort($metaBundles, 'sourceName');
     }
 
     /**
