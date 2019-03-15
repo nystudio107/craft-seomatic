@@ -4,6 +4,7 @@
 ### Changed
 * Use dash instead of underscore for sitemap urls
 * Don't allow editing of the plugin settings if `allowAdminChanges` is false
+* Sort Content SEO listings by name to make things easier to find
 
 ## 3.1.45 - 2019.03.04
 ### Changed
