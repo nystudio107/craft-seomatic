@@ -306,7 +306,12 @@ class Seomatic extends Plugin
                 'url' => 'seomatic/tracking',
             ];
         }
-        if ($currentUser->can('seomatic:plugin-settings')) {
+        $editableSettings = true;
+        $general = Craft::$app->getConfig()->getGeneral();
+        if (self::$craft31 && !$general->allowAdminChanges) {
+            $editableSettings = false;
+        }
+        if ($currentUser->can('seomatic:plugin-settings') && $editableSettings) {
             $subNavs['plugin'] = [
                 'label' => 'Plugin Settings',
                 'url' => 'seomatic/plugin',
