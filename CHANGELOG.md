@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.47 - 2019.03.31
+### Changed
+* Added `Environment::determineEnvironment()` so SEOmatic is can be smarter about automatically mapping environments
+
 ## 3.1.46 - 2019.03.15
 ### Changed
 * Use dash instead of underscore for sitemap urls

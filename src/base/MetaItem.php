@@ -50,7 +50,7 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
         if (!Seomatic::$previewingMetaContainers) {
             // Set any per-environment attributes
             $attributes = [];
-            $envVars = ArrayHelper::getValue($this->environment, Seomatic::$settings->environment);
+            $envVars = ArrayHelper::getValue($this->environment, Seomatic::$environment);
             if (\is_array($envVars)) {
                 foreach ($envVars as $key => $value) {
                     $attributes[$key] = $value;

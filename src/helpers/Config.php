@@ -61,14 +61,14 @@ class Config
         }
 
         // If no environment was specified, just look in the '*' array
-        if (Seomatic::$settings->environment === null) {
+        if (Seomatic::$environment === null) {
             return $config['*'];
         }
 
         $mergedConfig = [];
         /** @var array $config */
         foreach ($config as $env => $envConfig) {
-            if ($env === '*' || StringHelper::contains(Seomatic::$settings->environment, $env)) {
+            if ($env === '*' || StringHelper::contains(Seomatic::$environment, $env)) {
                 $mergedConfig = ArrayHelper::merge($mergedConfig, $envConfig);
             }
         }
