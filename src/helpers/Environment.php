@@ -13,6 +13,8 @@ namespace nystudio107\seomatic\helpers;
 
 use nystudio107\seomatic\Seomatic;
 
+use Craft;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -66,6 +68,9 @@ class Environment
     {
         // Default to whatever they have the environment set to
         $env = Seomatic::$settings->environment;
+        if (Seomatic::$craft31) {
+            $env = Craft::parseEnv($env);
+        }
         // Try to also check the `ENVIRONMENT` env var
         $environment = getenv('ENVIRONMENT');
         if (!empty($environment)) {
