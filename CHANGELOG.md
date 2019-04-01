@@ -3,7 +3,8 @@
 ## 3.1.47 - 2019.03.31
 ### Changed
 * Added `Environment::determineEnvironment()` so SEOmatic is can be smarter about automatically mapping environments
-
+* Allow the **SEOmatic Environment** plugin setting to be an Environment Variable in Craft 3.1 or higher
+ 
 ## 3.1.46 - 2019.03.15
 ### Changed
 * Use dash instead of underscore for sitemap urls
