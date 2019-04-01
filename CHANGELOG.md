@@ -4,6 +4,7 @@
 ### Changed
 * Added `Environment::determineEnvironment()` so SEOmatic is can be smarter about automatically mapping environments
 * Allow the **SEOmatic Environment** plugin setting to be an Environment Variable in Craft 3.1 or higher
+ * Allow for Section handles that are longer than 64 characters
  
 ## 3.1.46 - 2019.03.15
 ### Changed
