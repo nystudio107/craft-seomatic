@@ -26,6 +26,8 @@ use nystudio107\seomatic\services\MetaContainers;
 use nystudio107\seomatic\services\MetaBundles;
 use nystudio107\seomatic\variables\ManifestVariable as Manifest;
 
+use Craft;
+
 use yii\di\ServiceLocator;
 
 /**
@@ -119,8 +121,12 @@ class SeomaticVariable extends ServiceLocator
         if ($this->sitemap === null || $replaceVars) {
             $this->sitemap = Seomatic::$plugin->metaContainers->metaSitemapVars;
         }
-
-        $this->config = Seomatic::$settings;
+        // Set the config settings, parsing the environment if its a frontend request
+        $configSettings = Seomatic::$settings;
+        if (!$replaceVars && !Craft::$app->getRequest()->getIsCpRequest()) {
+            $configSettings->environment = Seomatic::$environment;
+        }
+        $this->config = $configSettings;
     }
 
     /**
