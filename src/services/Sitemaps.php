@@ -174,7 +174,7 @@ class Sitemaps extends Component implements SitemapInterface
      */
     public function submitSitemapIndex()
     {
-        if (Seomatic::$settings->sitemapsEnabled && Seomatic::$settings->environment === 'live') {
+        if (Seomatic::$settings->sitemapsEnabled && Seomatic::$environment === 'live') {
             // Submit the sitemap to each search engine
             $searchEngineUrls = $this::SEARCH_ENGINE_SUBMISSION_URLS;
             foreach ($searchEngineUrls as &$url) {
@@ -212,7 +212,7 @@ class Sitemaps extends Component implements SitemapInterface
      */
     public function submitSitemapForElement(ElementInterface $element)
     {
-        if (Seomatic::$settings->sitemapsEnabled && Seomatic::$settings->environment === 'live') {
+        if (Seomatic::$settings->sitemapsEnabled && Seomatic::$environment === 'live') {
             /** @var Element $element */
             list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
                 = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
@@ -249,7 +249,7 @@ class Sitemaps extends Component implements SitemapInterface
      */
     public function submitCustomSitemap(int $siteId)
     {
-        if (Seomatic::$settings->sitemapsEnabled && Seomatic::$settings->environment === 'live') {
+        if (Seomatic::$settings->sitemapsEnabled && Seomatic::$environment === 'live') {
             // Submit the sitemap to each search engine
             $searchEngineUrls = $this::SEARCH_ENGINE_SUBMISSION_URLS;
             foreach ($searchEngineUrls as &$url) {

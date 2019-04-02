@@ -62,22 +62,41 @@
             warning: configWarning("headersEnabled", "seomatic"),
             errors: settings.getErrors("headersEnabled"),
         }) }}
-
-        {{ forms.selectField({
-            label: "Environment"|t("seomatic"),
-            instructions: "The server environment, either `live`, `staging`, or `local`. If `devMode` is on, SEOmatic will override this setting to `local` Development."|t("seomatic"),
-            id: "environment",
-            name: "environment",
-            options: {
-                live: "Live Production"|t("seomatic"),
-                staging: "Staging"|t("seomatic"),
-                local: "Local Development"|t("seomatic"),
-            },
-            value: settings.environment,
-            warning: configWarning("environment", "seomatic"),
-            errors: settings.getErrors("environment"),
-        }) }}
-
+        {% if seomatic.helper.craft31 %}
+            {{ forms.autosuggestField({
+                label: "Environment"|t("seomatic"),
+                instructions: "The server environment, either `live`, `staging`, or `local`. If `devMode` is on, SEOmatic will override this setting to `local` Development."|t("seomatic"),
+                suggestions: [{
+                    label: "SEOmatic Environment",
+                    data: [
+                        {name: "live", hint: "Live Production"|t("seomatic")},
+                        {name: "staging", hint: "Staging"|t("seomatic")},
+                        {name: "local", hint: "Local Development"|t("seomatic")},
+                    ]
+                }] | merge(craft.cp.getEnvSuggestions(false)),
+                suggestEnvVars: true,
+                id: "environment",
+                name: "environment",
+                value: settings.environment,
+                warning: configWarning("environment", "seomatic"),
+                errors: settings.getErrors("environment"),
+            }) }}
+        {% else %}
+            {{ forms.selectField({
+                label: "Environment"|t("seomatic"),
+                instructions: "The server environment, either `live`, `staging`, or `local`. If `devMode` is on, SEOmatic will override this setting to `local` Development."|t("seomatic"),
+                id: "environment",
+                name: "environment",
+                options: {
+                    live: "Live Production"|t("seomatic"),
+                    staging: "Staging"|t("seomatic"),
+                    local: "Local Development"|t("seomatic"),
+                },
+                value: settings.environment,
+                warning: configWarning("environment", "seomatic"),
+                errors: settings.getErrors("environment"),
+            }) }}
+        {% endif %}
         {{ forms.lightswitchField({
             label: "Display Sidebar SEO Preview"|t("seomatic"),
             instructions: "Controls whether to display the Google, Twitter, and Facebook social media previews in the sidebar on entry, category, and product pages."|t("seomatic"),

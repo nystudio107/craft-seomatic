@@ -1,5 +1,13 @@
 # SEOmatic Changelog
 
+## 3.1.47 - 2019.04.02
+### Changed
+* Added `Environment::determineEnvironment()` so SEOmatic is can be smarter about automatically mapping environments
+* Allow the **SEOmatic Environment** plugin setting to be an Environment Variable in Craft 3.1 or higher
+ * Allow for Section handles that are longer than 64 characters
+ * Fixed an issue where the `mainEntityOfPage` could reset to the default `WebPage` if you saved the settings on panes other than General
+ * Fixed an issue with paginated `rel="alternate"` links on a multi-site setup where the slugs differed from site to site
+ 
 ## 3.1.46 - 2019.03.15
 ### Changed
 * Use dash instead of underscore for sitemap urls
