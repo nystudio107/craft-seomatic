@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.1.47 - 2019.03.31
+## 3.1.47 - 2019.04.02
 ### Changed
 * Added `Environment::determineEnvironment()` so SEOmatic is can be smarter about automatically mapping environments
 * Allow the **SEOmatic Environment** plugin setting to be an Environment Variable in Craft 3.1 or higher
