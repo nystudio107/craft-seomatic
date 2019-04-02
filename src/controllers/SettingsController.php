@@ -316,7 +316,9 @@ class SettingsController extends Controller
             if (\is_array($globalsSettings) && \is_array($bundleSettings)) {
                 PullFieldHelper::parseTextSources($elementName, $globalsSettings, $bundleSettings);
                 PullFieldHelper::parseImageSources($elementName, $globalsSettings, $bundleSettings, $siteId);
-                $globalsSettings['mainEntityOfPage'] = PullFieldHelper::getSpecificEntityType($bundleSettings);
+                if (!empty($bundleSettings['siteType'])) {
+                    $globalsSettings['mainEntityOfPage'] = PullFieldHelper::getSpecificEntityType($bundleSettings);
+                }
                 $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
                 $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
             }
@@ -558,7 +560,9 @@ class SettingsController extends Controller
             if (\is_array($globalsSettings) && \is_array($bundleSettings)) {
                 PullFieldHelper::parseTextSources($elementName, $globalsSettings, $bundleSettings);
                 PullFieldHelper::parseImageSources($elementName, $globalsSettings, $bundleSettings, $siteId);
-                $globalsSettings['mainEntityOfPage'] = PullFieldHelper::getSpecificEntityType($bundleSettings);
+                if (!empty($bundleSettings['siteType'])) {
+                    $globalsSettings['mainEntityOfPage'] = PullFieldHelper::getSpecificEntityType($bundleSettings);
+                }
                 $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
                 $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
             }
@@ -1142,7 +1146,11 @@ class SettingsController extends Controller
     protected function prepEntitySettings(&$settings)
     {
         DynamicMetaHelper::normalizeTimes($settings['localBusinessOpeningHours']);
-        $settings['computedType'] = PullFieldHelper::getSpecificEntityType($settings);
+        if (!empty($settings['siteType'])) {
+            $settings['computedType'] = PullFieldHelper::getSpecificEntityType($settings);
+        } else {
+            $settings['computedType'] = 'WebPage';
+        }
         if (!empty($settings['genericImageIds'])) {
             $asset = Craft::$app->getAssets()->getAssetById($settings['genericImageIds'][0]);
             if ($asset !== null) {

@@ -14,6 +14,7 @@ namespace nystudio107\seomatic;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
 use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
+use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\helpers\PluginTemplate;
 use nystudio107\seomatic\models\MetaScriptContainer;
@@ -129,9 +130,14 @@ class Seomatic extends Plugin
     public static $view;
 
     /**
-     * @var
+     * @var string
      */
     public static $language;
+
+    /**
+     * @var string
+     */
+    public static $environment;
 
     /**
      * @var int
@@ -189,7 +195,7 @@ class Seomatic extends Plugin
     /**
      * @var string
      */
-    public $schemaVersion = '3.0.6';
+    public $schemaVersion = '3.0.7';
 
     // Public Methods
     // =========================================================================
@@ -213,11 +219,8 @@ class Seomatic extends Plugin
         self::$cacheDuration = Seomatic::$devMode
             ? $this::DEVMODE_CACHE_DURATION
             : null;
+        self::$environment = EnvironmentHelper::determineEnvironment();
         MetaValueHelper::cache();
-        // If devMode is on, always force the environment to be 'local'
-        if (self::$devMode) {
-            self::$settings->environment = 'local';
-        }
         self::$craft31 = version_compare(Craft::$app->getVersion(), '3.1', '>=');
         $this->name = Seomatic::$settings->pluginName;
         // Determine whether Craft Commerce exists
