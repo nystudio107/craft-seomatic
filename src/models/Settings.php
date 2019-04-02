@@ -130,11 +130,6 @@ class Settings extends VarsModel
                 'boolean'],
             ['environment', 'string'],
             ['environment', 'default', 'value' => 'live'],
-            ['environment', 'in', 'range' => [
-                'live',
-                'staging',
-                'local',
-            ]],
             ['displayPreviewSidebar', 'boolean'],
             ['displayAnalysisSidebar', 'boolean'],
             [['devModeTitlePrefix', 'cpTitlePrefix', 'devModeCpTitlePrefix'], 'string'],
