@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.1.48 - 2019.04.10
+### Changed
+* Added `/cache/` to the default paths excluded in `robots.txt` to auto-exclude the default Blitz `/cache/blitz/` path
+
 ## 3.1.47 - 2019.04.02
 ### Changed
 * Added `Environment::determineEnvironment()` so SEOmatic is can be smarter about automatically mapping environments
