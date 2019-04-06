@@ -23,6 +23,21 @@ interface ContainerInterface
     // =========================================================================
 
     const CONTAINER_TYPE = 'GenericContainer';
+
+    /**
+     * @event IncludeContainerEvent The event that is triggered when a container is
+     * about to be included.
+     *
+     * ---
+     * ```php
+     * use nystudio107\seomatic\events\IncludeContainerEvent;
+     * use nystudio107\seomatic\base\Container;
+     * use yii\base\Event;
+     * Event::on(Container::class, Container::EVENT_INCLUDE_CONTAINER, function(IncludeContainerEvent $e) {
+     *     $e->include = false;
+     * });
+     * ```
+     */
     const EVENT_INCLUDE_CONTAINER = 'includeContainer';
 
     // Static Methods
