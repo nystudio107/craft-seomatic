@@ -3,6 +3,8 @@
 ## 3.1.48 - 2019.04.10
 ### Changed
 * Added `/cache/` to the default paths excluded in `robots.txt` to auto-exclude the default Blitz `/cache/blitz/` path
+* SEOmatic now throws a `AddDynamicMetaEvent` event to give modules/plugins a chance to add any dynamic meta items to SEOmatic's containers
+* SEOmatic now throws a `InvalidateContainerCachesEvent` event whenever it clears its meta container caches, so other plugins/modules can listen in for it
 
 ## 3.1.47 - 2019.04.02
 ### Changed
