@@ -12,10 +12,10 @@
 namespace nystudio107\seomatic\helpers;
 
 use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\models\Entity;
+use nystudio107\seomatic\events\AddDynamicMetaEvent;
 use nystudio107\seomatic\fields\SeoSettings;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
-use nystudio107\seomatic\helpers\UrlHelper;
+use nystudio107\seomatic\models\Entity;
 use nystudio107\seomatic\models\jsonld\ContactPoint;
 use nystudio107\seomatic\models\jsonld\LocalBusiness;
 use nystudio107\seomatic\models\jsonld\Organization;
@@ -31,6 +31,7 @@ use craft\errors\SiteNotFoundException;
 use craft\helpers\DateTimeHelper;
 use craft\web\twig\variables\Paginate;
 
+use yii\base\Event;
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
 
@@ -43,6 +44,23 @@ class DynamicMeta
 {
     // Constants
     // =========================================================================
+
+    /**
+     * @event AddDynamicMetaEvent The event that is triggered when SEOmatic has
+     *        included the standard meta containers, and gives your plugin/module
+     *        the chance to add whatever custom dynamic meta items you like
+     *
+     * ---
+     * ```php
+     * use nystudio107\seomatic\events\AddDynamicMetaEvent;
+     * use nystudio107\seomatic\helpers\DynamicMeta;
+     * use yii\base\Event;
+     * Event::on(DynamicMeta::class, DynamicMeta::EVENT_INCLUDE_CONTAINER, function(AddDynamicMetaEvent $e) {
+     *     // Add whatever dynamic meta items to the containers as you like
+     * });
+     * ```
+     */
+    const EVENT_ADD_DYNAMIC_META = 'addDynamicMeta';
 
     // Static Methods
     // =========================================================================
@@ -158,8 +176,8 @@ class DynamicMeta
     /**
      * Add any custom/dynamic meta to the containers
      *
-     * @param string|null $uri
-     * @param int|null    $siteId
+     * @param string|null $uri     The URI of the route to add dynamic metadata for
+     * @param int|null    $siteId  The siteId of the current site
      */
     public static function addDynamicMetaToContainers(string $uri = null, int $siteId = null)
     {
@@ -185,6 +203,12 @@ class DynamicMeta
                     self::addOpeningHours($jsonLd, $metaSiteVars->creator);
                     self::addContactPoints($jsonLd, $metaSiteVars->creator);
                 }
+                // Allow modules/plugins a chance to add dynamic meta
+                $event = new AddDynamicMetaEvent([
+                    'uri' => $uri,
+                    'siteId' => $siteId,
+                ]);
+                Event::trigger(static::class, self::EVENT_ADD_DYNAMIC_META, $event);
             }
         }
         Craft::endProfile('DynamicMeta::addDynamicMetaToContainers', __METHOD__);
@@ -209,14 +233,22 @@ class DynamicMeta
                 $closeTime = '';
                 if (!empty($hours['open'])) {
                     /** @var \DateTime $dateTime */
-                    $dateTime = DateTimeHelper::toDateTime($hours['open']['date'], false, false);
+                    try {
+                        $dateTime = DateTimeHelper::toDateTime($hours['open']['date'], false, false);
+                    } catch (\Exception $e) {
+                        $dateTime = false;
+                    }
                     if ($dateTime !== false) {
                         $openTime = $dateTime->format('H:i:s');
                     }
                 }
                 if (!empty($hours['close'])) {
                     /** @var \DateTime $dateTime */
-                    $dateTime = DateTimeHelper::toDateTime($hours['close']['date'], false, false);
+                    try {
+                        $dateTime = DateTimeHelper::toDateTime($hours['close']['date'], false, false);
+                    } catch (\Exception $e) {
+                        $dateTime = false;
+                    }
                     if ($dateTime !== false) {
                         $closeTime = $dateTime->format('H:i:s');
                     }
