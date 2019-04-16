@@ -2,6 +2,7 @@
 
 ## 3.1.49 - 2019.04.19
 * Don't create `rel=alternate` links for sections that aren't enabled for a site
+* Added a new `addXDefaultHrefLang` setting (which defaults to `true`) to control whether the `x-default` `hreflang` tag is included
 
 ## 3.1.48 - 2019.04.16
 ### Changed
