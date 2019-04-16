@@ -1,5 +1,8 @@
 # SEOmatic Changelog
 
+## 3.1.49 - 2019.04.19
+* Don't create `rel=alternate` links for sections that aren't enabled for a site
+
 ## 3.1.48 - 2019.04.16
 ### Changed
 * Added `/cache/` to the default paths excluded in `robots.txt` to auto-exclude the default Blitz `/cache/blitz/` path
