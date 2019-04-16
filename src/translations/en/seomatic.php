@@ -378,5 +378,7 @@ return [
     'Sitemaps' => 'Sitemaps',
     'Additional Sitemaps' => 'Additional Sitemaps',
     'Determaines where in the `<body>` the script renders.' => 'Determaines where in the `<body>` the script renders.',
-    'Add sitemaps that exist outside of the CMS here. They will be added to the sitemap index.' => 'Add sitemaps that exist outside of the CMS here. They will be added to the sitemap index.'
+    'Add sitemaps that exist outside of the CMS here. They will be added to the sitemap index.' => 'Add sitemaps that exist outside of the CMS here. They will be added to the sitemap index.',
+    'Include `x-default` `hreflang` Tag' => 'Include `x-default` `hreflang` Tag',
+    'Controls whether SEOmatic will automatically add an `x-default` `hreflang` tag.' => 'Controls whether SEOmatic will automatically add an `x-default` `hreflang` tag.'
 ];

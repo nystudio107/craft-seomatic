@@ -207,6 +207,16 @@
         }) }}
 
         {{ forms.lightswitchField({
+            label: "Include `x-default` `hreflang` Tag"|t("seomatic"),
+            instructions: "Controls whether SEOmatic will automatically include an `x-default` `hreflang` tag."|t("seomatic"),
+            id: "addXDefaultHrefLang",
+            name: "addXDefaultHrefLang",
+            on: settings.addXDefaultHrefLang,
+            warning: configWarning("addXDefaultHrefLang", "seomatic"),
+            errors: settings.getErrors("addXDefaultHrefLang"),
+        }) }}
+
+        {{ forms.lightswitchField({
             label: "Generator Enabled"|t("seomatic"),
             instructions: "Controls whether SEOmatic will include the meta `generator` tag and `X-Powered-By` header."|t("seomatic"),
             id: "generatorEnabled",

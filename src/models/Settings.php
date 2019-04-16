@@ -108,6 +108,11 @@ class Settings extends VarsModel
     public $addHrefLang = true;
 
     /**
+     * @var bool Whether to dynamically include the `x-default` hreflang tags
+     */
+    public $addXDefaultHrefLang = true;
+
+    /**
      * @var bool Should the meta generator tag and X-Powered-By header be included?
      */
     public $generatorEnabled = true;
@@ -131,6 +136,7 @@ class Settings extends VarsModel
                     'headersEnabled',
                     'generatorEnabled',
                     'addHrefLang',
+                    'addXDefaultHrefLang',
                 ],
                 'boolean'],
             ['environment', 'string'],
