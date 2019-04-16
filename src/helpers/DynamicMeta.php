@@ -526,9 +526,12 @@ class DynamicMeta
                 /** @var Element $element */
                 $element = null;
                 if ($url !== null) {
-                    $element = $elements->getElementByUri($url, $site->id, true);
+                    $element = $elements->getElementByUri($url, $site->id, false);
                 }
                 if ($element !== null) {
+                    if (!empty($element->enabledForSite) && !$element->enabledForSite) {
+                        $includeUrl = false;
+                    }
                     /** @var MetaBundle $metaBundle */
                     list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
                         = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
