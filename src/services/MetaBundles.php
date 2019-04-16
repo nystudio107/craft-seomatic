@@ -345,12 +345,14 @@ class MetaBundles extends Component
                         case self::CATEGORYGROUP_META_BUNDLE:
                             $category = $categories->getGroupById($sourceId);
                             if ($category !== null) {
+                                $metaBundle->sourceName = $category->name;
                                 $metaBundle->sourceHandle = $category->handle;
                             }
                             break;
                         case self::SECTION_META_BUNDLE:
                             $section = $sections->getSectionById($sourceId);
                             if ($section !== null) {
+                                $metaBundle->sourceName = $section->name;
                                 $metaBundle->sourceHandle = $section->handle;
                             }
                             break;
@@ -360,6 +362,7 @@ class MetaBundles extends Component
                                 if ($commerce !== null) {
                                     $productType = $commerce->getProductTypes()->getProductTypeById($sourceId);
                                     if ($productType !== null) {
+                                        $metaBundle->sourceName = $productType->name;
                                         $metaBundle->sourceHandle = $productType->handle;
                                     }
                                 }
