@@ -1,5 +1,13 @@
 # SEOmatic Changelog
 
+## 3.1.48 - 2019.04.16
+### Changed
+* Added `/cache/` to the default paths excluded in `robots.txt` to auto-exclude the default Blitz `/cache/blitz/` path
+* SEOmatic now throws a `AddDynamicMetaEvent` event to give modules/plugins a chance to add any dynamic meta items to SEOmatic's containers
+* SEOmatic now throws a `InvalidateContainerCachesEvent` event whenever it clears its meta container caches, so other plugins/modules can listen in for it
+* No longer regenerate sitemaps when a Section is edited and `'regenerateSitemapsAutomatically' => false`
+* Update the display name of sections, category groups, and products in Content SEO when they are edited
+
 ## 3.1.47 - 2019.04.02
 ### Changed
 * Added `Environment::determineEnvironment()` so SEOmatic is can be smarter about automatically mapping environments

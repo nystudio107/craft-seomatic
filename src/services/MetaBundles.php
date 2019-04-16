@@ -345,12 +345,14 @@ class MetaBundles extends Component
                         case self::CATEGORYGROUP_META_BUNDLE:
                             $category = $categories->getGroupById($sourceId);
                             if ($category !== null) {
+                                $metaBundle->sourceName = $category->name;
                                 $metaBundle->sourceHandle = $category->handle;
                             }
                             break;
                         case self::SECTION_META_BUNDLE:
                             $section = $sections->getSectionById($sourceId);
                             if ($section !== null) {
+                                $metaBundle->sourceName = $section->name;
                                 $metaBundle->sourceHandle = $section->handle;
                             }
                             break;
@@ -360,6 +362,7 @@ class MetaBundles extends Component
                                 if ($commerce !== null) {
                                     $productType = $commerce->getProductTypes()->getProductTypeById($sourceId);
                                     if ($productType !== null) {
+                                        $metaBundle->sourceName = $productType->name;
                                         $metaBundle->sourceHandle = $productType->handle;
                                     }
                                 }
@@ -368,11 +371,13 @@ class MetaBundles extends Component
                     }
                     // Invalidate caches after an existing section is saved
                     Seomatic::$plugin->metaContainers->invalidateContainerCacheById($sourceId);
-                    Seomatic::$plugin->sitemaps->invalidateSitemapCache(
-                        $metaBundle->sourceHandle,
-                        $metaBundle->sourceSiteId,
-                        $metaBundle->sourceBundleType
-                    );
+                    if (Seomatic::$settings->regenerateSitemapsAutomatically) {
+                        Seomatic::$plugin->sitemaps->invalidateSitemapCache(
+                            $metaBundle->sourceHandle,
+                            $metaBundle->sourceSiteId,
+                            $metaBundle->sourceBundleType
+                        );
+                    }
                     // Update the meta bundle data
                     $this->updateMetaBundle($metaBundle, $site->id);
                 }

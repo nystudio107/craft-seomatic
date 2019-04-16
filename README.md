@@ -80,6 +80,10 @@ SEOmatic also caches each unique SEO Meta request so that your website performan
 
 * [Crafting Modern SEO slide deck](https://speakerdeck.com/nystudio107/crafting-modern-seo)
 
+### Articles on SEO/SEOmatic:
+
+* [Advanced SEOmatic Tips](https://nystudio107.com/blog/tips-for-using-seomatic-effectively)
+
 * [Modern SEO: Snake Oil vs. Substance](https://nystudio107.com/blog/modern-seo-snake-oil-vs-substance)
 
 * [JSON-LD, Structured Data and Erotica](https://nystudio107.com/blog/json-ld-structured-data-and-erotica)
