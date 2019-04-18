@@ -22,7 +22,7 @@ use yii\base\InvalidConfigException;
  * @package   Seomatic
  * @since     3.0.0
  */
-class SeomaticTwigExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
+class SeomaticTwigExtension extends \Twig\Extension implements \Twig\Extension\GlobalsInterface
 {
     /**
      * @inheritdoc
