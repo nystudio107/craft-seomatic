@@ -196,8 +196,9 @@ return [
                         'title' => 'DataLayer Variable Name',
                         'instructions' => 'The name to use for the JavaScript DataLayer variable. The value of this variable will be set to the `dataLayer` Twig template variable.',
                         'type' => 'string',
-                        'value' => 'dl',
-                    ],                    'googleTagManagerUrl' => [
+                        'value' => 'dataLayer',
+                    ],
+                    'googleTagManagerUrl' => [
                         'title' => 'Google Tag Manager Script URL',
                         'instructions' => 'The URL to the Google Tag Manager script. Normally this should not be changed, unless you locally cache it.',
                         'type' => 'string',
