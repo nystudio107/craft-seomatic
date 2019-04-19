@@ -15,6 +15,7 @@ use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\variables\SeomaticVariable;
 
 use Craft;
+
 use yii\base\InvalidConfigException;
 
 /**
@@ -22,7 +23,7 @@ use yii\base\InvalidConfigException;
  * @package   Seomatic
  * @since     3.0.0
  */
-class SeomaticTwigExtension extends \Twig\Extension implements \Twig\Extension\GlobalsInterface
+class SeomaticTwigExtension extends \Twig\Extension\AbstractExtension implements \Twig\Extension\GlobalsInterface
 {
     /**
      * @inheritdoc
