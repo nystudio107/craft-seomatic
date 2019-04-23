@@ -179,10 +179,10 @@ class Helper extends Component
      * @param string $canonical
      * @param bool   $inline
      *
-     * @return \Twig_Markup
+     * @return \Twig\Markup
      * @throws \yii\base\Exception
      */
-    public static function seoFileLink($url, $robots = '', $canonical = '', $inline = true): \Twig_Markup
+    public static function seoFileLink($url, $robots = '', $canonical = '', $inline = true): \Twig\Markup
     {
         // Get the file name
         $path = parse_url($url, PHP_URL_PATH);

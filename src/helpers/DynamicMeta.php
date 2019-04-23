@@ -401,13 +401,15 @@ class DynamicMeta
         $siteLocalizedUrls = self::getLocalizedUrls($uri, $siteId);
 
         if (!empty($siteLocalizedUrls)) {
-            // Add the x-default hreflang
             $siteLocalizedUrl = $siteLocalizedUrls[0];
-            $metaTag = Seomatic::$plugin->link->create([
-                'rel' => 'alternate',
-                'hreflang' => ['x-default'],
-                'href' => [$siteLocalizedUrl['url']],
-            ]);
+            if (Seomatic::$settings->addXDefaultHrefLang) {
+                // Add the x-default hreflang
+                $metaTag = Seomatic::$plugin->link->create([
+                    'rel' => 'alternate',
+                    'hreflang' => ['x-default'],
+                    'href' => [$siteLocalizedUrl['url']],
+                ]);
+            }
             // Add the alternate language link rel's
             if (\count($siteLocalizedUrls) > 1) {
                 foreach ($siteLocalizedUrls as $siteLocalizedUrl) {
@@ -526,9 +528,12 @@ class DynamicMeta
                 /** @var Element $element */
                 $element = null;
                 if ($url !== null) {
-                    $element = $elements->getElementByUri($url, $site->id, true);
+                    $element = $elements->getElementByUri($url, $site->id, false);
                 }
                 if ($element !== null) {
+                    if (!empty($element->enabledForSite) && !$element->enabledForSite) {
+                        $includeUrl = false;
+                    }
                     /** @var MetaBundle $metaBundle */
                     list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
                         = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);

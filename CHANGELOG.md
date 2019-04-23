@@ -1,5 +1,12 @@
 # SEOmatic Changelog
 
+## 3.1.49 - 2019.04.22
+* Don't create `rel=alternate` links for sections that aren't enabled for a site
+* Added a new `addXDefaultHrefLang` setting (which defaults to `true`) to control whether the `x-default` `hreflang` tag is included
+* Updated Twig namespacing to be compliant with deprecated class aliases in 2.7.x
+* Changed the default Google Tag Manager data layer variable back to the default `dataLayer` (which it should have been all along)
+* Fixed `SoftwareApplication` JSON-LD object model
+
 ## 3.1.48 - 2019.04.16
 ### Changed
 * Added `/cache/` to the default paths excluded in `robots.txt` to auto-exclude the default Blitz `/cache/blitz/` path
