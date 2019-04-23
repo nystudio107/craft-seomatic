@@ -1324,6 +1324,20 @@ Note that you can achieve the same result with:
 
 ...since the `canonicalUrl` populates the `<link rel="canonical">` Link meta object
 
+If you want to check what `alternate` links are rendered:
+
+```twig
+    {% set alt = seomatic.link.get('alternate') %}
+    {% do alt.href([
+            'http://example.com',
+            'http://example.com/es'
+        ]).hreflang([
+            'x-default',
+            'es',
+        ])
+    %}
+```
+
 #### Script Meta Object Functions `seomatic.script`
 
 * **`seomatic.script.get(META_HANDLE)`** Returns the Script meta object of the handle `META_HANDLE` or `null` if it is not found 
