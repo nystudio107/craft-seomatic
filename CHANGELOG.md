@@ -1,5 +1,8 @@
 # SEOmatic Changelog
 
+## 3.1.50 - 2019.04.28
+### Changed
+
 ## 3.1.49 - 2019.04.22
 ### Changed
 * Don't create `rel=alternate` links for sections that aren't enabled for a site
