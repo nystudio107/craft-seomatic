@@ -402,13 +402,16 @@ class DynamicMeta
 
         if (!empty($siteLocalizedUrls)) {
             $siteLocalizedUrl = $siteLocalizedUrls[0];
+            // Add the rel=alternate tag
+            $metaTag = Seomatic::$plugin->link->create([
+                'rel' => 'alternate',
+                'hreflang' => [],
+                'href' => [],
+            ]);
+            // Add the x-default hreflang
             if (Seomatic::$settings->addXDefaultHrefLang) {
-                // Add the x-default hreflang
-                $metaTag = Seomatic::$plugin->link->create([
-                    'rel' => 'alternate',
-                    'hreflang' => ['x-default'],
-                    'href' => [$siteLocalizedUrl['url']],
-                ]);
+                $metaTag->hreflang[] = 'x-default';
+                $metaTag->href[] = $siteLocalizedUrl['url'];
             }
             // Add the alternate language link rel's
             if (\count($siteLocalizedUrls) > 1) {
