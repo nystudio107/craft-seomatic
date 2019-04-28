@@ -2,6 +2,7 @@
 
 ## 3.1.50 - 2019.04.28
 ### Changed
+* Fix the `addXDefaultHrefLang` so it doesn’t throw an error if enabled
 
 ## 3.1.49 - 2019.04.22
 ### Changed
