@@ -188,7 +188,7 @@ You can even do complex expressions, such as the following which outputs the fir
 {{ siteInfo.companyInfo ??? siteInfo.companySummary ??? "Some default text" }}
 ```
 
-The above uses the `???` empty coalesce operator that comes with SEOmatic; check out [SEOmatic's ??? Empty Coalesce operator](#seomatic's-empty-coalesce-operator) for details.
+The above uses the `???` empty coalesce operator that comes with SEOmatic; check out [SEOmatic's ??? Empty Coalesce operator](#seomatics--empty-coalesce-operator) for details.
 
 You can also access SEOmatic global variables (discussed below):
 
@@ -359,7 +359,7 @@ Is the same as:
 {{ object.entry.description ??? object.entry.summary ??? "Some default text" }}
 ```
 
-The above uses the `???` empty coalesce operator that comes with SEOmatic; check out [SEOmatic's ??? Empty Coalesce operator](#seomatic's-empty-coalesce-operator) for details.
+The above uses the `???` empty coalesce operator that comes with SEOmatic; check out [SEOmatic's ??? Empty Coalesce operator](#seomatics--empty-coalesce-operator) for details.
 
 ### Site Settings
 
@@ -744,7 +744,7 @@ Then you can include Google AMP Analytics as per [Adding Analytics to your AMP p
 </amp-analytics>
 ```
 
-The above uses the `???` empty coalesce operator that comes with SEOmatic; check out [SEOmatic's ??? Empty Coalesce operator](#seomatic's-empty-coalesce-operator) for details.
+The above uses the `???` empty coalesce operator that comes with SEOmatic; check out [SEOmatic's ??? Empty Coalesce operator](#seomatics--empty-coalesce-operator) for details.
 
 ## Single Page App (SPA) Support
 
