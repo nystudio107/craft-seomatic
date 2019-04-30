@@ -11,11 +11,13 @@
 
 namespace nystudio107\seomatic\twigextensions;
 
+use nystudio107\seomatic\Node\Expression\EmptyCoalesceExpression;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\variables\SeomaticVariable;
 
 use Craft;
 
+use Twig\ExpressionParser;
 use yii\base\InvalidConfigException;
 
 /**
@@ -80,4 +82,24 @@ class SeomaticTwigExtension extends \Twig\Extension\AbstractExtension implements
     {
         return [];
     }
+
+    /**
+     * @return array
+     */
+    public function getOperators(): array
+    {
+        return [
+            // Unary operators
+            [],
+            // Binary operators
+            [
+                '???' => [
+                    'precedence' => 300,
+                    'class' => EmptyCoalesceExpression::class,
+                    'associativity' => ExpressionParser::OPERATOR_RIGHT
+                ],
+            ],
+        ];
+    }
+
 }
