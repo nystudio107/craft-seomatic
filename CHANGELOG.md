@@ -1,9 +1,11 @@
 # SEOmatic Changelog
 
 ## 3.1.50 - 2019.04.28
+### Added
+* * Added the `???` Empty Coalesce operator to allow for the easy cascading of default text/image SEO values
+
 ### Changed
 * Fix the `addXDefaultHrefLang` so it doesn’t throw an error if enabled
-* Added the `???` Empty Coalesce operator
 
 ## 3.1.49 - 2019.04.22
 ### Changed
