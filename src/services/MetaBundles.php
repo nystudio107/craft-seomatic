@@ -1235,30 +1235,12 @@ class MetaBundles extends Component
         // Preserve the metaBundleSettings
         $attributes = $baseConfig->metaBundleSettings->getAttributes();
         $metaBundle->metaBundleSettings->setAttributes($attributes);
-        // Preserve the vars from each Tracking Script
-        $scripts = Seomatic::$plugin->metaBundles->getContainerDataFromBundle(
-            $baseConfig,
-            MetaScriptContainer::CONTAINER_TYPE
-        );
-        foreach ($scripts as $scriptHandle => $scriptData) {
-            foreach ($metaBundle->metaContainers as $metaContainer) {
-                if ($metaContainer::CONTAINER_TYPE === MetaScriptContainer::CONTAINER_TYPE) {
-                    $data = $metaContainer->getData($scriptHandle);
-                    if ($data) {
-                        /** @var array $scriptData */
-                        foreach ($scriptData as $key => $value) {
-                            if (\is_array($value)) {
-                                foreach ($value as $varsKey => $varsValue) {
-                                    if (isset($varsValue['value'])) {
-                                        $data->$key[$varsKey]['value'] = $varsValue['value'];
-                                    }
-                                }
-                            } else {
-                                if ($key === 'include') {
-                                    $data->$key = $value;
-                                }
-                            }
-                        }
+        // Preserve the Script containers, but add in any new containers
+        foreach ($baseConfig->metaContainers as $baseMetaContainerName => $baseMetaContainer) {
+            if ($baseMetaContainer::CONTAINER_TYPE === MetaScriptContainer::CONTAINER_TYPE) {
+                foreach ($baseMetaContainer->data as $key => $value) {
+                    if (!empty($metaBundle->metaContainers[$baseMetaContainerName])) {
+                        $metaBundle->metaContainers[$baseMetaContainerName]->data[$key] = $value;
                     }
                 }
             }
