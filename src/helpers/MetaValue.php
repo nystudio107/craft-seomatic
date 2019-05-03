@@ -120,6 +120,9 @@ class MetaValue
             }
             if (\in_array($key, self::PARSE_ONCE, true)) {
                 $tries = 1;
+                if (is_string($value) && $value[0] !=='{') {
+                    $shouldParse = false;
+                }
             }
             if ($value !== null) {
                 $metaArray[$key] = self::parseString($value, $shouldAlias, $shouldParse, $tries);
