@@ -2,7 +2,7 @@
 
 ## 3.1.51 - 2019.05.03
 ### Changed
-* 
+* Changed paginated `rel="alternate"` URLs to always point to the first page in other languages, not the paginated page (that may or may not exist)
 
 ## 3.1.50 - 2019.04.30
 ### Added
