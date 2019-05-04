@@ -11,6 +11,8 @@
 
 namespace nystudio107\seomatic\seoelements;
 
+use craft\models\EntryDraft;
+use craft\models\EntryVersion;
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\models\MetaBundle;
 
@@ -29,6 +31,11 @@ class SeoEntry implements SeoElementInterface
     // =========================================================================
 
     const META_BUNDLE_TYPE = 'section';
+    const ELEMENT_CLASSES = [
+        Entry::class,
+        EntryDraft::class,
+        EntryVersion::class,
+    ];
     const REQUIRED_PLUGIN_HANDLE = null;
 
     // Static Methods
@@ -42,6 +49,26 @@ class SeoEntry implements SeoElementInterface
     public static function getMetaBundleType(): string
     {
         return self::META_BUNDLE_TYPE;
+    }
+
+    /**
+     * Returns an array of the element classes that are handled by this SeoElement
+     *
+     * @return array
+     */
+    public static function getElementClasses(): array
+    {
+        return self::ELEMENT_CLASSES;
+    }
+
+    /**
+     * Return the refHandle (e.g.: `entry` or `category`) for the SeoElement
+     *
+     * @return string
+     */
+    public static function getElementRefHandle(): string
+    {
+        return Entry::refHandle();
     }
 
     /**

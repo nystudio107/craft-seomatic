@@ -532,21 +532,11 @@ class SettingsController extends Controller
         $globalsSettings = $request->getParam('metaGlobalVars');
         $bundleSettings = $request->getParam('metaBundleSettings');
         $sitemapSettings = $request->getParam('metaSitemapVars');
-
         // Set the element type in the template
-        switch ($sourceBundleType) {
-            case MetaBundles::SECTION_META_BUNDLE:
-                $elementName = 'entry';
-                break;
-            case MetaBundles::CATEGORYGROUP_META_BUNDLE:
-                $elementName = 'category';
-                break;
-            case MetaBundles::PRODUCT_META_BUNDLE:
-                $elementName = 'product';
-                break;
-            default:
-                $elementName = '';
-                break;
+        $elementName = '';
+        $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
+        if ($seoElement !== null) {
+            $elementName = $seoElement::getElementRefHandle();
         }
         // The site settings for the appropriate meta bundle
         Seomatic::$previewingMetaContainers = true;

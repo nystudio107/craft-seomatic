@@ -18,6 +18,8 @@ use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\helpers\PluginTemplate;
 use nystudio107\seomatic\models\MetaScriptContainer;
+use nystudio107\seomatic\seoelements\SeoEntry;
+use nystudio107\seomatic\seoelements\SeoCategory;
 use nystudio107\seomatic\models\Settings;
 use nystudio107\seomatic\services\FrontendTemplates as FrontendTemplatesService;
 use nystudio107\seomatic\services\Helper as HelperService;
@@ -494,7 +496,7 @@ class Seomatic extends Plugin
                 );
                 if ($event->section !== null && $event->section->id !== null) {
                     Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
-                        MetaBundlesService::SECTION_META_BUNDLE,
+                        SeoEntry::getMetaBundleType(),
                         $event->section->id,
                         $event->isNew
                     );
@@ -517,13 +519,13 @@ class Seomatic extends Plugin
                 );
                 if ($event->section !== null && $event->section->id !== null) {
                     Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
-                        MetaBundlesService::SECTION_META_BUNDLE,
+                        SeoEntry::getMetaBundleType(),
                         $event->section->id,
                         false
                     );
                     // Delete the meta bundles for this section
                     Seomatic::$plugin->metaBundles->deleteMetaBundleBySourceId(
-                        MetaBundlesService::SECTION_META_BUNDLE,
+                        SeoEntry::getMetaBundleType(),
                         $event->section->id
                     );
                 }
@@ -540,7 +542,7 @@ class Seomatic extends Plugin
                 );
                 if ($event->categoryGroup !== null && $event->categoryGroup->id !== null) {
                     Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
-                        MetaBundlesService::CATEGORYGROUP_META_BUNDLE,
+                        SeoCategory::getMetaBundleType(),
                         $event->categoryGroup->id,
                         $event->isNew
                     );
@@ -563,13 +565,13 @@ class Seomatic extends Plugin
                 );
                 if ($event->categoryGroup !== null && $event->categoryGroup->id !== null) {
                     Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
-                        MetaBundlesService::CATEGORYGROUP_META_BUNDLE,
+                        SeoCategory::getMetaBundleType(),
                         $event->categoryGroup->id,
                         false
                     );
                     // Delete the meta bundles for this category
                     Seomatic::$plugin->metaBundles->deleteMetaBundleBySourceId(
-                        MetaBundlesService::CATEGORYGROUP_META_BUNDLE,
+                        SeoCategory::getMetaBundleType(),
                         $event->categoryGroup->id
                     );
                 }
