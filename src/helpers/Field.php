@@ -418,29 +418,4 @@ class Field
 
         return $foundFields;
     }
-
-    /**
-     * Get the root class of a passed in Element
-     *
-     * @param Element $element
-     *
-     * @return string
-     */
-    public static function getElementRootClass(Element $element): string
-    {
-        // By default, just use the class name
-        $className = \get_class($element);
-        // Handle sub-classes of specific types we know about
-        if ($element instanceof Entry) {
-            $className = Entry::class;
-        }
-        if ($element instanceof Category) {
-            $className = Category::class;
-        }
-        if ($element instanceof Product) {
-            $className = Product::class;
-        }
-
-        return $className;
-    }
 }

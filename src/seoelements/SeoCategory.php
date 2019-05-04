@@ -30,6 +30,9 @@ class SeoCategory implements SeoElementInterface
     // =========================================================================
 
     const META_BUNDLE_TYPE = 'categorygroup';
+    const ELEMENT_CLASSES = [
+        Category::class,
+    ];
     const REQUIRED_PLUGIN_HANDLE = null;
 
     // Static Methods
@@ -43,6 +46,26 @@ class SeoCategory implements SeoElementInterface
     public static function getMetaBundleType(): string
     {
         return self::META_BUNDLE_TYPE;
+    }
+
+    /**
+     * Returns an array of the element classes that are handled by this SeoElement
+     *
+     * @return array
+     */
+    public static function getElementClasses(): array
+    {
+        return self::ELEMENT_CLASSES;
+    }
+
+    /**
+     * Return the refHandle (e.g.: `entry` or `category`) for the SeoElement
+     *
+     * @return string
+     */
+    public static function getElementRefHandle(): string
+    {
+        return Category::refHandle();
     }
 
     /**

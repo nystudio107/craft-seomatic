@@ -34,6 +34,20 @@ interface SeoElementInterface
     public static function getMetaBundleType(): string;
 
     /**
+     * Returns an array of the element classes that are handled by this SeoElement
+     *
+     * @return array
+     */
+    public static function getElementClasses(): array;
+
+    /**
+     * Return the refHandle (e.g.: `entry` or `category`) for the SeoElement
+     *
+     * @return string
+     */
+    public static function getElementRefHandle(): string;
+
+    /**
      * Return the handle to a required plugin for this SeoElement type
      *
      * @return null|string

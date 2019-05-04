@@ -19,6 +19,7 @@ use nystudio107\seomatic\seoelements\SeoProduct;
 
 use Craft;
 use craft\base\Component;
+use craft\base\ElementInterface;
 use craft\events\RegisterComponentTypesEvent;
 
 /**
@@ -79,13 +80,36 @@ class SeoElements extends Component
     }
 
     /**
-     * @param string $type
+     * @param string $metaBundleType
      *
      * @return SeoElementInterface|null
      */
-    public function getSeoElementByMetaBundleType(string $type)
+    public function getSeoElementByMetaBundleType(string $metaBundleType)
     {
-        return $this->seoElements[$type] ?? null;
+        $seoElements = $this->getAllSeoElementTypes();
+        return $seoElements[$metaBundleType] ?? null;
+    }
+
+    /**
+     * Return the Meta Bundle type for a given element
+     *
+     * @param ElementInterface $element
+     *
+     * @return string|null
+     */
+    public function getMetaBundleTypeFromElement(ElementInterface $element)
+    {
+        $seoElements = $this->getAllSeoElementTypes();
+        foreach ($seoElements as $metaBundleType => $seoElement) {
+            /** @var SeoElementInterface $seoElement */
+            foreach ($seoElement::getElementClasses() as $elementClass) {
+                if ($element instanceof $elementClass) {
+                    return $metaBundleType;
+                }
+            }
+        }
+
+        return null;
     }
 
     /**

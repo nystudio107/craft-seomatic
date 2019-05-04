@@ -181,14 +181,8 @@ class MetaValue
         $element = Seomatic::$matchedElement;
         /** @var Element $element */
         if ($element !== null) {
-            try {
-                $reflector = new \ReflectionClass(FieldHelper::getElementRootClass($element));
-            } catch (\ReflectionException $e) {
-                $reflector = null;
-                Craft::error($e->getMessage(), __METHOD__);
-            }
-            if ($reflector) {
-                $matchedElementType = strtolower($reflector->getShortName());
+            $matchedElementType = $element::refHandle();
+            if ($matchedElementType) {
                 self::$templateObjectVars[$matchedElementType] = $element;
             }
         }
@@ -249,7 +243,7 @@ class MetaValue
                 if ($oldTemplateMode !== self::$view::TEMPLATE_MODE_SITE) {
                     self::$view->setTemplateMode($oldTemplateMode);
                 }
-            } catch (\Exception $e) {
+            } catch (\Throwable $e) {
                 $metaValue = Craft::t(
                     'seomatic',
                     'Error rendering `{template}` -> {error}',
