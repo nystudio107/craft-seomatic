@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.1.51 - 2019.05.03
+## 3.2.0 - 2019.05.06
 ### Changed
 * Changed paginated `rel="alternate"` URLs to always point to the first page in other languages, not the paginated page (that may or may not exist)
 * If a meta value with the key of `target` (used for schema.org `SearchAction`s) doesn't have a `{` as the first character, it is not parsed as Twig
