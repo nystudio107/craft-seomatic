@@ -107,44 +107,11 @@ class GenerateSitemap extends BaseJob
             }
             $urlsetLine .= '>';
             $lines[] = $urlsetLine;
-            // Handle each element type separately
-            switch ($metaBundle->sourceBundleType) {
-                case MetaBundles::SECTION_META_BUNDLE:
-                    $query = Entry::find()
-                        ->section($metaBundle->sourceHandle)
-                        ->siteId($metaBundle->sourceSiteId)
-                        ->enabledForSite(true)
-                        ->limit($metaBundle->metaSitemapVars->sitemapLimit);
-                    if ($metaBundle->sourceType === 'structure'
-                        && !empty($metaBundle->metaSitemapVars->structureDepth)) {
-                        $query->level($metaBundle->metaSitemapVars->structureDepth.'<=');
-                    }
-                    $elements = $query->all();
-                    break;
-                case MetaBundles::CATEGORYGROUP_META_BUNDLE:
-                    $query = Category::find()
-                        ->group($metaBundle->sourceHandle)
-                        ->siteId($metaBundle->sourceSiteId)
-                        ->limit($metaBundle->metaSitemapVars->sitemapLimit)
-                        ->enabledForSite(true);
-                    if (!empty($metaBundle->metaSitemapVars->structureDepth)) {
-                        $query->level($metaBundle->metaSitemapVars->structureDepth.'<=');
-                    }
-                    $elements = $query->all();
-                    break;
-                case MetaBundles::PRODUCT_META_BUNDLE:
-                    if (Seomatic::$commerceInstalled) {
-                        $commerce = CommercePlugin::getInstance();
-                        if ($commerce !== null) {
-                            $elements = Product::find()
-                                ->type($metaBundle->sourceHandle)
-                                ->siteId($metaBundle->sourceSiteId)
-                                ->limit($metaBundle->metaSitemapVars->sitemapLimit)
-                                ->enabledForSite(true)
-                                ->all();
-                        }
-                    }
-                    break;
+            // Get all of the elements for this meta bundle type
+            $elements = null;
+            $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundle->sourceBundleType);
+            if ($seoElement !== null) {
+                $elements = $seoElement::sitemapElementsQuery($metaBundle)->all();
             }
             // If no elements exist, just exit
             if ($elements === null) {
@@ -194,39 +161,12 @@ class GenerateSitemap extends BaseJob
                         foreach ($metaBundle->sourceAltSiteSettings as $altSiteSettings) {
                             if (\in_array($altSiteSettings['siteId'], $groupSiteIds, false)) {
                                 $altElement = null;
-                                // Handle each element type separately
-                                switch ($metaBundle->sourceBundleType) {
-                                    case MetaBundles::SECTION_META_BUNDLE:
-                                        $altElement = Entry::find()
-                                            ->section($metaBundle->sourceHandle)
-                                            ->id($element->id)
-                                            ->siteId($altSiteSettings['siteId'])
-                                            ->enabledForSite(true)
-                                            ->limit(1)
-                                            ->one();
-                                        break;
-
-                                    case MetaBundles::CATEGORYGROUP_META_BUNDLE:
-                                        $altElement = Category::find()
-                                            ->id($element->id)
-                                            ->siteId($altSiteSettings['siteId'])
-                                            ->limit(1)
-                                            ->enabledForSite(true)
-                                            ->one();
-                                        break;
-                                    case MetaBundles::PRODUCT_META_BUNDLE:
-                                        if (Seomatic::$commerceInstalled) {
-                                            $commerce = CommercePlugin::getInstance();
-                                            if ($commerce !== null) {
-                                                $altElement = Product::find()
-                                                    ->id($element->id)
-                                                    ->siteId($altSiteSettings['siteId'])
-                                                    ->limit(1)
-                                                    ->enabledForSite(true)
-                                                    ->one();
-                                            }
-                                        }
-                                        break;
+                                if ($seoElement !== null) {
+                                    $altElement = $seoElement::sitemapAltElement(
+                                        $metaBundle,
+                                        $element->id,
+                                        $altSiteSettings['siteId']
+                                    );
                                 }
                                 // Make sure to only include the `hreflang` if the element exists,
                                 // and sitemaps are on for it
