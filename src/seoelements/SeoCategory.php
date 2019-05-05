@@ -14,9 +14,12 @@ namespace nystudio107\seomatic\seoelements;
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\models\MetaBundle;
 
+use Craft;
 use craft\base\ElementInterface;
 use craft\elements\db\ElementQueryInterface;
 use craft\elements\Category;
+
+use yii\base\InvalidConfigException;
 
 /**
  * @author    nystudio107
@@ -120,5 +123,54 @@ class SeoCategory implements SeoElementInterface
             ->limit(1)
             ->enabledForSite(true)
             ->one();
+    }
+
+    /**
+     * Return a preview URI for a given $sourceHandle and $siteId
+     * This just returns the first element
+     *
+     * @param string    $sourceHandle
+     * @param int|null  $siteId
+     *
+     * @return string|null
+     */
+    public static function previewUri(string $sourceHandle, $siteId)
+    {
+        $uri = null;
+        $element = Category::find()
+            ->group($sourceHandle)
+            ->siteId($siteId)
+            ->one();
+        if ($element) {
+            $uri = $element->uri;
+        }
+
+        return $uri;
+    }
+
+    /**
+     * Return an array of FieldLayouts from the $sourceHandle
+     *
+     * @param string $sourceHandle
+     *
+     * @return array
+     */
+    public static function fieldLayouts(string $sourceHandle): array
+    {
+        $layouts = [];
+        $layoutId = null;
+        try {
+            $category = Craft::$app->getCategories()->getGroupByHandle($sourceHandle);
+            if ($category) {
+                $layoutId = $category->getFieldLayoutId();
+            }
+        } catch (InvalidConfigException $e) {
+            $layoutId = null;
+        }
+        if ($layoutId) {
+            $layouts[] = Craft::$app->getFields()->getLayoutById($layoutId);
+        }
+
+        return $layouts;
     }
 }

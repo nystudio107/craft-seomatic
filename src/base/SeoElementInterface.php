@@ -78,4 +78,24 @@ interface SeoElementInterface
         int $elementId,
         int $siteId
     ): ElementInterface;
+
+    /**
+     * Return a preview URI for a given $sourceHandle and $siteId
+     * This just returns the first element
+     *
+     * @param string    $sourceHandle
+     * @param int|null  $siteId
+     *
+     * @return string|null
+     */
+    public static function previewUri(string $sourceHandle, $siteId);
+
+    /**
+     * Return an array of FieldLayouts from the $sourceHandle
+     *
+     * @param string $sourceHandle
+     *
+     * @return array
+     */
+    public static function fieldLayouts(string $sourceHandle): array;
 }

@@ -272,55 +272,11 @@ class Field
         $foundFields = [];
         $layouts = [];
         // Get the layouts
-        switch ($sourceBundleType) {
-            case MetaBundles::GLOBAL_META_BUNDLE:
-                break;
-
-            case MetaBundles::SECTION_META_BUNDLE:
-                $section = Craft::$app->getSections()->getSectionByHandle($sourceHandle);
-                if ($section) {
-                    $entryTypes = $section->getEntryTypes();
-                    foreach ($entryTypes as $entryType) {
-                        if ($entryType->fieldLayoutId) {
-                            $layouts[] = Craft::$app->getFields()->getLayoutById($entryType->fieldLayoutId);
-                        }
-                    }
-                }
-                break;
-
-            case MetaBundles::CATEGORYGROUP_META_BUNDLE:
-                $layoutId = null;
-                try {
-                    $category = Craft::$app->getCategories()->getGroupByHandle($sourceHandle);
-                    if ($category) {
-                        $layoutId = $category->getFieldLayoutId();
-                    }
-                } catch (InvalidConfigException $e) {
-                    $layoutId = null;
-                }
-                if ($layoutId) {
-                    $layouts[] = Craft::$app->getFields()->getLayoutById($layoutId);
-                }
-                break;
-            case MetaBundles::PRODUCT_META_BUNDLE:
-                if (Seomatic::$commerceInstalled) {
-                    $commerce = CommercePlugin::getInstance();
-                    if ($commerce !== null) {
-                        $layoutId = null;
-                        try {
-                            $product = $commerce->productTypes->getProductTypeByHandle($sourceHandle);
-                            if ($product) {
-                                $layoutId = $product->getFieldLayoutId();
-                            }
-                        } catch (InvalidConfigException $e) {
-                            $layoutId = null;
-                        }
-                        if ($layoutId) {
-                            $layouts[] = Craft::$app->getFields()->getLayoutById($layoutId);
-                        }
-                    }
-                }
-                break;
+        if ($sourceBundleType !== MetaBundles::GLOBAL_META_BUNDLE) {
+            $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
+            if ($seoElement !== null) {
+                $layouts = $seoElement::fieldLayouts($sourceHandle);
+            }
         }
         // Iterate through the layouts looking for the fields of the type $fieldType
         foreach ($layouts as $layout) {
