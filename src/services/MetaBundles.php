@@ -1117,7 +1117,6 @@ class MetaBundles extends Component
         return $metaBundle;
     }
 
-
     /**
      * @param ProductType     $productType
      * @param int             $siteId
