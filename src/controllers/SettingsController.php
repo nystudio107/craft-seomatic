@@ -987,38 +987,17 @@ class SettingsController extends Controller
      */
     protected function uriFromSourceBundle(string $sourceBundleType, string $sourceHandle, $siteId): string
     {
-        $uri = '';
+        $uri = null;
         // Pick an Element to be used for the preview
-        switch ($sourceBundleType) {
-            case MetaBundles::GLOBAL_META_BUNDLE:
-                $uri = MetaBundles::GLOBAL_META_BUNDLE;
-                break;
-
-            case MetaBundles::SECTION_META_BUNDLE:
-                $entry = Entry::find()->section($sourceHandle)->siteId($siteId)->one();
-                if ($entry) {
-                    $uri = $entry->uri;
-                }
-                break;
-
-            case MetaBundles::CATEGORYGROUP_META_BUNDLE:
-                $category = Category::find()->group($sourceHandle)->siteId($siteId)->one();
-                if ($category) {
-                    $uri = $category->uri;
-                }
-                break;
-            case MetaBundles::PRODUCT_META_BUNDLE:
-                if (Seomatic::$commerceInstalled) {
-                    $commerce = CommercePlugin::getInstance();
-                    if ($commerce !== null) {
-                        $product = Product::find()->type($sourceHandle)->siteId($siteId)->one();
-                        if ($product) {
-                            $uri = $product->uri;
-                        }
-                    }
-                }
-                break;
+        if ($sourceBundleType === MetaBundles::GLOBAL_META_BUNDLE) {
+            $uri = MetaBundles::GLOBAL_META_BUNDLE;
+        } else {
+            $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
+            if ($seoElement !== null) {
+                $uri = $seoElement::previewUri($sourceHandle, $siteId);
+            }
         }
+        // Special-case for the __home__ slug, and default to /
         if (($uri === '__home__') || ($uri === null)) {
             $uri = '/';
         }

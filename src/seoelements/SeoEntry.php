@@ -11,14 +11,15 @@
 
 namespace nystudio107\seomatic\seoelements;
 
-use craft\models\EntryDraft;
-use craft\models\EntryVersion;
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\models\MetaBundle;
 
+use Craft;
 use craft\base\ElementInterface;
 use craft\elements\db\ElementQueryInterface;
 use craft\elements\Entry;
+use craft\models\EntryDraft;
+use craft\models\EntryVersion;
 
 /**
  * @author    nystudio107
@@ -125,5 +126,51 @@ class SeoEntry implements SeoElementInterface
             ->enabledForSite(true)
             ->limit(1)
             ->one();
+    }
+
+    /**
+     * Return a preview URI for a given $sourceHandle and $siteId
+     * This just returns the first element
+     *
+     * @param string    $sourceHandle
+     * @param int|null  $siteId
+     *
+     * @return string|null
+     */
+    public static function previewUri(string $sourceHandle, $siteId)
+    {
+        $uri = null;
+        $element = Entry::find()
+            ->section($sourceHandle)
+            ->siteId($siteId)
+            ->one();
+        if ($element) {
+            $uri = $element->uri;
+        }
+
+        return $uri;
+    }
+
+    /**
+     * Return an array of FieldLayouts from the $sourceHandle
+     *
+     * @param string $sourceHandle
+     *
+     * @return array
+     */
+    public static function fieldLayouts(string $sourceHandle): array
+    {
+        $layouts = [];
+        $section = Craft::$app->getSections()->getSectionByHandle($sourceHandle);
+        if ($section) {
+            $entryTypes = $section->getEntryTypes();
+            foreach ($entryTypes as $entryType) {
+                if ($entryType->fieldLayoutId) {
+                    $layouts[] = Craft::$app->getFields()->getLayoutById($entryType->fieldLayoutId);
+                }
+            }
+        }
+
+        return $layouts;
     }
 }
