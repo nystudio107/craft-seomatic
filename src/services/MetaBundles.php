@@ -11,7 +11,6 @@
 
 namespace nystudio107\seomatic\services;
 
-use craft\base\Model;
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\fields\SeoSettings;
 use nystudio107\seomatic\Seomatic;
@@ -26,6 +25,7 @@ use nystudio107\seomatic\records\MetaBundle as MetaBundleRecord;
 use Craft;
 use craft\base\Component;
 use craft\base\Element;
+use craft\base\Model;
 use craft\db\Query;
 use craft\elements\Category;
 use craft\elements\Entry;
@@ -40,7 +40,6 @@ use craft\models\Site;
 use craft\commerce\Plugin as CommercePlugin;
 use craft\commerce\elements\Product;
 use craft\commerce\models\ProductType;
-use craft\commerce\models\ProductTypeSite;
 
 use yii\base\InvalidConfigException;
 use yii\db\StaleObjectException;
@@ -215,32 +214,12 @@ class MetaBundles extends Component
             $this->metaBundlesBySourceId[$sourceBundleType][$sourceId][$sourceSiteId] = $id;
         } else {
             // If it doesn't exist, create it
-            switch ($sourceBundleType) {
-                case self::SECTION_META_BUNDLE:
-                    /** @var  $section Section */
-                    $section = Craft::$app->getSections()->getSectionById($sourceId);
-                    if ($section !== null) {
-                        $metaBundle = $this->createMetaBundleFromSection($section, $sourceSiteId);
-                    }
-                    break;
-
-                case self::CATEGORYGROUP_META_BUNDLE:
-                    $category = Craft::$app->getCategories()->getGroupById($sourceId);
-                    if ($category !== null) {
-                        $metaBundle = $this->createMetaBundleFromCategory($category, $sourceSiteId);
-                    }
-                    break;
-                case self::PRODUCT_META_BUNDLE:
-                    if (Seomatic::$commerceInstalled) {
-                        $commerce = CommercePlugin::getInstance();
-                        if ($commerce !== null) {
-                            $productType = $commerce->getProductTypes()->getProductTypeById($sourceId);
-                            if ($productType !== null) {
-                                $metaBundle = $this->createMetaBundleFromProductType($productType, $sourceSiteId);
-                            }
-                        }
-                    }
-                    break;
+            $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
+            if ($seoElement !== null) {
+                $sourceModel = $seoElement::sourceModelFromId($sourceId);
+                if ($sourceModel) {
+                    $metaBundle = $this->createMetaBundleFromSeoElement($seoElement, $sourceModel, $sourceSiteId);
+                }
             }
         }
 
@@ -248,18 +227,18 @@ class MetaBundles extends Component
     }
 
     /**
-     * @param string $sourceType
+     * @param string $sourceBundleType
      * @param string $sourceHandle
      * @param int    $sourceSiteId
      *
      * @return null|MetaBundle
      */
-    public function getMetaBundleBySourceHandle(string $sourceType, string $sourceHandle, int $sourceSiteId)
+    public function getMetaBundleBySourceHandle(string $sourceBundleType, string $sourceHandle, int $sourceSiteId)
     {
         $metaBundle = null;
         // See if we have the meta bundle cached
-        if (!empty($this->metaBundlesBySourceHandle[$sourceType][$sourceHandle][$sourceSiteId])) {
-            $id = $this->metaBundlesBySourceHandle[$sourceType][$sourceHandle][$sourceSiteId];
+        if (!empty($this->metaBundlesBySourceHandle[$sourceBundleType][$sourceHandle][$sourceSiteId])) {
+            $id = $this->metaBundlesBySourceHandle[$sourceBundleType][$sourceHandle][$sourceSiteId];
             if (!empty($this->metaBundles[$id])) {
                 return $this->metaBundles[$id];
             }
@@ -268,7 +247,7 @@ class MetaBundles extends Component
         $metaBundleArray = (new Query())
             ->from(['{{%seomatic_metabundles}}'])
             ->where([
-                'sourceBundleType' => $sourceType,
+                'sourceBundleType' => $sourceBundleType,
                 'sourceHandle' => $sourceHandle,
                 'sourceSiteId' => $sourceSiteId,
             ])
@@ -278,35 +257,15 @@ class MetaBundles extends Component
             $metaBundle = MetaBundle::create($metaBundleArray);
             $id = \count($this->metaBundles);
             $this->metaBundles[$id] = $metaBundle;
-            $this->metaBundlesBySourceHandle[$sourceType][$sourceHandle][$sourceSiteId] = $id;
+            $this->metaBundlesBySourceHandle[$sourceBundleType][$sourceHandle][$sourceSiteId] = $id;
         } else {
             // If it doesn't exist, create it
-            switch ($sourceType) {
-                case self::SECTION_META_BUNDLE:
-                    /** @var  $section Section */
-                    $section = Craft::$app->getSections()->getSectionByHandle($sourceHandle);
-                    if ($section !== null) {
-                        $metaBundle = $this->createMetaBundleFromSection($section, $sourceSiteId);
-                    }
-                    break;
-
-                case self::CATEGORYGROUP_META_BUNDLE:
-                    $category = Craft::$app->getCategories()->getGroupByHandle($sourceHandle);
-                    if ($category !== null) {
-                        $metaBundle = $this->createMetaBundleFromCategory($category, $sourceSiteId);
-                    }
-                    break;
-                case self::PRODUCT_META_BUNDLE:
-                    if (Seomatic::$commerceInstalled) {
-                        $commerce = CommercePlugin::getInstance();
-                        if ($commerce !== null) {
-                            $productType = $commerce->getProductTypes()->getProductTypeByHandle($sourceHandle);
-                            if ($productType !== null) {
-                                $metaBundle = $this->createMetaBundleFromProductType($productType, $sourceSiteId);
-                            }
-                        }
-                    }
-                    break;
+            $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
+            if ($seoElement !== null) {
+                $sourceModel = $seoElement::sourceModelFromHandle($sourceHandle);
+                if ($sourceModel) {
+                    $metaBundle = $this->createMetaBundleFromSeoElement($seoElement, $sourceModel, $sourceSiteId);
+                }
             }
         }
 
@@ -316,17 +275,17 @@ class MetaBundles extends Component
     /**
      * Invalidate the caches and data structures associated with this MetaBundle
      *
-     * @param string   $sourceType
+     * @param string   $sourceBundleType
      * @param int|null $sourceId
      * @param bool     $isNew
      */
-    public function invalidateMetaBundleById(string $sourceType, int $sourceId, bool $isNew = false)
+    public function invalidateMetaBundleById(string $sourceBundleType, int $sourceId, bool $isNew = false)
     {
         $metaBundleInvalidated = false;
         $sites = Craft::$app->getSites()->getAllSites();
         foreach ($sites as $site) {
             // See if this is a section we are tracking
-            $metaBundle = $this->getMetaBundleBySourceId($sourceType, $sourceId, $site->id);
+            $metaBundle = $this->getMetaBundleBySourceId($sourceBundleType, $sourceId, $site->id);
             if ($metaBundle) {
                 Craft::info(
                     'Invalidating meta bundle: '
@@ -339,37 +298,16 @@ class MetaBundles extends Component
                 if (!$isNew) {
                     $metaBundleInvalidated = true;
                     // Handle syncing up the sourceHandle
-                    $categories = Craft::$app->getCategories();
-                    $sections = Craft::$app->getSections();
-                    switch ($sourceType) {
-                        case self::GLOBAL_META_BUNDLE:
-                            break;
-                        case self::CATEGORYGROUP_META_BUNDLE:
-                            $category = $categories->getGroupById($sourceId);
-                            if ($category !== null) {
-                                $metaBundle->sourceName = $category->name;
-                                $metaBundle->sourceHandle = $category->handle;
+                    if ($sourceBundleType !== self::GLOBAL_META_BUNDLE) {
+                        $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
+                        if ($seoElement !== null) {
+                            /** @var Section|CategoryGroup|ProductType $sourceModel */
+                            $sourceModel = $seoElement::sourceModelFromId($sourceId);
+                            if ($sourceModel !== null) {
+                                $metaBundle->sourceName = $sourceModel->name;
+                                $metaBundle->sourceHandle = $sourceModel->handle;
                             }
-                            break;
-                        case self::SECTION_META_BUNDLE:
-                            $section = $sections->getSectionById($sourceId);
-                            if ($section !== null) {
-                                $metaBundle->sourceName = $section->name;
-                                $metaBundle->sourceHandle = $section->handle;
-                            }
-                            break;
-                        case self::PRODUCT_META_BUNDLE:
-                            if (Seomatic::$commerceInstalled) {
-                                $commerce = CommercePlugin::getInstance();
-                                if ($commerce !== null) {
-                                    $productType = $commerce->getProductTypes()->getProductTypeById($sourceId);
-                                    if ($productType !== null) {
-                                        $metaBundle->sourceName = $productType->name;
-                                        $metaBundle->sourceHandle = $productType->handle;
-                                    }
-                                }
-                            }
-                            break;
+                        }
                     }
                     // Invalidate caches after an existing section is saved
                     Seomatic::$plugin->metaContainers->invalidateContainerCacheById($sourceId);
@@ -942,8 +880,10 @@ class MetaBundles extends Component
         // The computedType must be set before creating the bundle
         if ($baseConfig !== null) {
             $metaBundleDefaults['metaGlobalVars']['mainEntityOfPage'] = $baseConfig->metaGlobalVars->mainEntityOfPage;
-            $metaBundleDefaults['metaSiteVars']['identity']['computedType'] = $baseConfig->metaSiteVars->identity->computedType;
-            $metaBundleDefaults['metaSiteVars']['creator']['computedType'] = $baseConfig->metaSiteVars->creator->computedType;
+            $metaBundleDefaults['metaSiteVars']['identity']['computedType'] =
+                $baseConfig->metaSiteVars->identity->computedType;
+            $metaBundleDefaults['metaSiteVars']['creator']['computedType'] =
+                $baseConfig->metaSiteVars->creator->computedType;
         }
         $metaBundle = MetaBundle::create($metaBundleDefaults);
         if ($metaBundle !== null) {
@@ -956,6 +896,14 @@ class MetaBundles extends Component
         return $metaBundle;
     }
 
+    /**
+     * @param SeoElementInterface $seoElement
+     * @param Model               $sourceModel
+     * @param int                 $sourceSiteId
+     * @param null                $baseConfig
+     *
+     * @return MetaBundle|null
+     */
     protected function createMetaBundleFromSeoElement(
         SeoElementInterface $seoElement,
         Model $sourceModel,
@@ -965,7 +913,7 @@ class MetaBundles extends Component
         $metaBundle = null;
         // Get the site settings and turn them into arrays
         /** @var Section|CategoryGroup|ProductType $sourceModel */
-        $siteSettings = $sourceModel->getSiteSettings();
+            $siteSettings = $sourceModel->getSiteSettings();
         if (!empty($siteSettings[$sourceSiteId])) {
             $siteSettingsArray = [];
             /** @var  $siteSetting Section_SiteSettings */
@@ -983,6 +931,7 @@ class MetaBundles extends Component
             if ($siteSetting->hasUrls) {
                 // Get the most recent dateUpdated
                 $element = $seoElement::mostRecentElement($sourceModel, $sourceSiteId);
+                /** @var Element $element */
                 if ($element) {
                     $dateUpdated = $element->dateUpdated ?? $element->dateCreated;
                 } else {
@@ -1005,7 +954,6 @@ class MetaBundles extends Component
                 }
                 // Merge in any migrated settings from an old Seomatic_Meta Field
                 if ($element !== null) {
-                    /** @var Element $element */
                     /** @var Element $elementFromSite */
                     $elementFromSite = Craft::$app->getElements()->getElementById($element->id, null, $sourceSiteId);
                     if ($element instanceof Element) {
@@ -1024,250 +972,6 @@ class MetaBundles extends Component
                     $this->mergeMetaBundleSettings($metaBundle, $baseConfig);
                 }
                 $this->updateMetaBundle($metaBundle, $sourceSiteId);
-            }
-        }
-
-        return $metaBundle;
-    }
-
-    /**
-     * @param Section         $section
-     * @param int             $siteId
-     * @param MetaBundle|null $baseConfig
-     *
-     * @return null|MetaBundle
-     */
-    protected function createMetaBundleFromSection(Section $section, int $siteId, $baseConfig = null)
-    {
-        $metaBundle = null;
-        // Get the site settings and turn them into arrays
-        $siteSettings = $section->getSiteSettings();
-        if (!empty($siteSettings[$siteId])) {
-            $siteSettingsArray = [];
-            /** @var  $siteSetting Section_SiteSettings */
-            foreach ($siteSettings as $siteSetting) {
-                if ($siteSetting->hasUrls) {
-                    $siteSettingArray = $siteSetting->toArray();
-                    // Get the site language
-                    $siteSettingArray['language'] = MetaValueHelper::getSiteLanguage($siteSetting->siteId);
-                    $siteSettingsArray[] = $siteSettingArray;
-                }
-            }
-            $siteSettingsArray = ArrayHelper::index($siteSettingsArray, 'siteId');
-            // Create a MetaBundle for this site
-            $siteSetting = $siteSettings[$siteId];
-            if ($siteSetting->hasUrls) {
-                // Get the most recent dateUpdated
-                $element = Entry::find()
-                    ->section($section->handle)
-                    ->siteId($siteSetting->siteId)
-                    ->limit(1)
-                    ->orderBy(['elements.dateUpdated' => SORT_DESC])
-                    ->one();
-                if ($element) {
-                    $dateUpdated = $element->dateUpdated ?? $element->dateCreated;
-                } else {
-                    $dateUpdated = new \DateTime();
-                }
-                // Create a new meta bundle with propagated defaults
-                $metaBundleDefaults = ArrayHelper::merge(
-                    ConfigHelper::getConfigFromFile('entrymeta/Bundle'),
-                    [
-                        'sourceId' => $section->id,
-                        'sourceName' => $section->name,
-                        'sourceHandle' => $section->handle,
-                        'sourceType' => $section->type,
-                        'sourceTemplate' => $siteSetting->template,
-                        'sourceSiteId' => $siteSetting->siteId,
-                        'sourceAltSiteSettings' => $siteSettingsArray,
-                        'sourceDateUpdated' => $dateUpdated,
-                    ]
-                );
-                // The mainEntityOfPage computedType must be set before creating the bundle
-                if ($baseConfig !== null && !empty($baseConfig->metaGlobalVars->mainEntityOfPage)) {
-                    $metaBundleDefaults['metaGlobalVars']['mainEntityOfPage'] = $baseConfig->metaGlobalVars->mainEntityOfPage;
-                }
-                // Merge in any migrated settings from an old Seomatic_Meta Field
-                if (!empty($element)) {
-                    $element = Craft::$app->getElements()->getElementById($element->id, null, $siteId);
-                    if ($element instanceof Element) {
-                        $config = MigrationHelper::configFromSeomaticMeta(
-                            $element,
-                            MigrationHelper::SECTION_MIGRATION_CONTEXT
-                        );
-                        $metaBundleDefaults = ArrayHelper::merge(
-                            $metaBundleDefaults,
-                            $config
-                        );
-                    }
-                }
-                $metaBundle = MetaBundle::create($metaBundleDefaults);
-                if ($baseConfig !== null) {
-                    $this->mergeMetaBundleSettings($metaBundle, $baseConfig);
-                }
-                $this->updateMetaBundle($metaBundle, $siteId);
-            }
-        }
-
-        return $metaBundle;
-    }
-
-    /**
-     * @param CategoryGroup   $category
-     * @param int             $siteId
-     * @param MetaBundle|null $baseConfig
-     *
-     * @return null|MetaBundle
-     */
-    protected function createMetaBundleFromCategory(CategoryGroup $category, int $siteId, $baseConfig = null)
-    {
-        $metaBundle = null;
-        // Get the site settings and turn them into arrays
-        $siteSettings = $category->getSiteSettings();
-        if (!empty($siteSettings[$siteId])) {
-            $siteSettingsArray = [];
-            /** @var  $siteSetting CategoryGroup_SiteSettings */
-            foreach ($siteSettings as $siteSetting) {
-                if ($siteSetting->hasUrls) {
-                    $siteSettingArray = $siteSetting->toArray();
-                    // Get the site language
-                    $siteSettingArray['language'] = MetaValueHelper::getSiteLanguage($siteSetting->siteId);
-                    $siteSettingsArray[] = $siteSettingArray;
-                }
-            }
-            $siteSettingsArray = ArrayHelper::index($siteSettingsArray, 'siteId');
-            // Create a MetaBundle for this site
-            $siteSetting = $siteSettings[$siteId];
-            if ($siteSetting->hasUrls) {
-                // Get the most recent dateUpdated
-                $element = Category::find()
-                    ->group($category->handle)
-                    ->siteId($siteSetting->siteId)
-                    ->limit(1)
-                    ->orderBy(['elements.dateUpdated' => SORT_DESC])
-                    ->one();
-                if ($element) {
-                    $dateUpdated = $element->dateUpdated ?? $element->dateCreated;
-                } else {
-                    $dateUpdated = new \DateTime();
-                }
-                // Create a new meta bundle with propagated defaults
-                $metaBundleDefaults = ArrayHelper::merge(
-                    ConfigHelper::getConfigFromFile('categorymeta/Bundle'),
-                    [
-                        'sourceId' => $category->id,
-                        'sourceName' => $category->name,
-                        'sourceHandle' => $category->handle,
-                        'sourceTemplate' => $siteSetting->template,
-                        'sourceSiteId' => $siteSetting->siteId,
-                        'sourceAltSiteSettings' => $siteSettingsArray,
-                        'sourceDateUpdated' => $dateUpdated,
-                    ]
-                );
-                // The mainEntityOfPage computedType must be set before creating the bundle
-                if ($baseConfig !== null && !empty($baseConfig->metaGlobalVars->mainEntityOfPage)) {
-                    $metaBundleDefaults['metaGlobalVars']['mainEntityOfPage'] = $baseConfig->metaGlobalVars->mainEntityOfPage;
-                }
-                // Merge in any migrated settings from an old Seomatic_Meta Field
-                if (!empty($element)) {
-                    $element = Craft::$app->getElements()->getElementById($element->id, null, $siteId);
-                    if ($element instanceof Element) {
-                        $config = MigrationHelper::configFromSeomaticMeta(
-                            $element,
-                            MigrationHelper::SECTION_MIGRATION_CONTEXT
-                        );
-                        $metaBundleDefaults = ArrayHelper::merge(
-                            $metaBundleDefaults,
-                            $config
-                        );
-                    }
-                }
-                $metaBundle = MetaBundle::create($metaBundleDefaults);
-                if ($baseConfig !== null) {
-                    $this->mergeMetaBundleSettings($metaBundle, $baseConfig);
-                }
-                $this->updateMetaBundle($metaBundle, $siteId);
-            }
-        }
-
-        return $metaBundle;
-    }
-
-    /**
-     * @param ProductType     $productType
-     * @param int             $siteId
-     * @param MetaBundle|null $baseConfig
-     *
-     * @return null|MetaBundle
-     */
-    protected function createMetaBundleFromProductType(ProductType $productType, int $siteId, $baseConfig = null)
-    {
-        $metaBundle = null;
-        // Get the site settings and turn them into arrays
-        $siteSettings = $productType->getSiteSettings();
-        if (!empty($siteSettings[$siteId])) {
-            $siteSettingsArray = [];
-            /** @var  $siteSetting ProductTypeSite */
-            foreach ($siteSettings as $siteSetting) {
-                if ($siteSetting->hasUrls) {
-                    $siteSettingArray = $siteSetting->toArray();
-                    // Get the site language
-                    $siteSettingArray['language'] = MetaValueHelper::getSiteLanguage($siteSetting->siteId);
-                    $siteSettingsArray[] = $siteSettingArray;
-                }
-            }
-            $siteSettingsArray = ArrayHelper::index($siteSettingsArray, 'siteId');
-            // Create a MetaBundle for this site
-            $siteSetting = $siteSettings[$siteId];
-            if ($siteSetting->hasUrls) {
-                // Get the most recent dateUpdated
-                $element = Product::find()
-                    ->type($productType->handle)
-                    ->siteId($siteSetting->siteId)
-                    ->limit(1)
-                    ->orderBy(['elements.dateUpdated' => SORT_DESC])
-                    ->one();
-                if ($element) {
-                    $dateUpdated = $element->dateUpdated ?? $element->dateCreated;
-                } else {
-                    $dateUpdated = new \DateTime();
-                }
-                // Create a new meta bundle with propagated defaults
-                $metaBundleDefaults = ArrayHelper::merge(
-                    ConfigHelper::getConfigFromFile('productmeta/Bundle'),
-                    [
-                        'sourceId' => $productType->id,
-                        'sourceName' => $productType->name,
-                        'sourceHandle' => $productType->handle,
-                        'sourceTemplate' => $siteSetting->template,
-                        'sourceSiteId' => $siteSetting->siteId,
-                        'sourceAltSiteSettings' => $siteSettingsArray,
-                        'sourceDateUpdated' => $dateUpdated,
-                    ]
-                );
-                // The mainEntityOfPage computedType must be set before creating the bundle
-                if ($baseConfig !== null && !empty($baseConfig->metaGlobalVars->mainEntityOfPage)) {
-                    $metaBundleDefaults['metaGlobalVars']['mainEntityOfPage'] = $baseConfig->metaGlobalVars->mainEntityOfPage;
-                }
-                // Merge in any migrated settings from an old Seomatic_Meta Field
-                if (!empty($element)) {
-                    $element = Craft::$app->getElements()->getElementById($element->id, null, $siteId);
-                    if ($element instanceof Element) {
-                        $config = MigrationHelper::configFromSeomaticMeta(
-                            $element,
-                            MigrationHelper::SECTION_MIGRATION_CONTEXT
-                        );
-                        $metaBundleDefaults = ArrayHelper::merge(
-                            $metaBundleDefaults,
-                            $config
-                        );
-                    }
-                }
-                $metaBundle = MetaBundle::create($metaBundleDefaults);
-                if ($baseConfig !== null) {
-                    $this->mergeMetaBundleSettings($metaBundle, $baseConfig);
-                }
-                $this->updateMetaBundle($metaBundle, $siteId);
             }
         }
 

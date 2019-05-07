@@ -42,6 +42,7 @@ class SeoEntry implements SeoElementInterface
         EntryVersion::class,
     ];
     const REQUIRED_PLUGIN_HANDLE = null;
+    const CONFIG_FILE_PATH = 'entrymeta/Bundle';
 
     // Public Static Methods
     // =========================================================================
@@ -222,6 +223,18 @@ class SeoEntry implements SeoElementInterface
     }
 
     /**
+     * Return the path to the config file directory
+     *
+     * @return string
+     */
+    public static function configFilePath(): string
+    {
+        return self::CONFIG_FILE_PATH;
+    }
+
+    /**
+     * Return a meta bundle config array for the given $sourceModel
+     *
      * @param Model $sourceModel
      *
      * @return array
@@ -230,7 +243,7 @@ class SeoEntry implements SeoElementInterface
     {
         /** @var Section $sourceModel */
         return ArrayHelper::merge(
-            ConfigHelper::getConfigFromFile('entrymeta/Bundle'),
+            ConfigHelper::getConfigFromFile(self::configFilePath()),
             [
                 'sourceId' => $sourceModel->id,
                 'sourceName' => $sourceModel->name,

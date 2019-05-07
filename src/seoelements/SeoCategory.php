@@ -23,8 +23,6 @@ use craft\elements\db\ElementQueryInterface;
 use craft\elements\Category;
 use craft\models\CategoryGroup;
 
-use yii\base\InvalidConfigException;
-
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -41,6 +39,7 @@ class SeoCategory implements SeoElementInterface
         Category::class,
     ];
     const REQUIRED_PLUGIN_HANDLE = null;
+    const CONFIG_FILE_PATH = 'categorymeta/Bundle';
 
     // Public Static Methods
     // =========================================================================
@@ -168,7 +167,7 @@ class SeoCategory implements SeoElementInterface
             if ($categoryGroup) {
                 $layoutId = $categoryGroup->getFieldLayoutId();
             }
-        } catch (InvalidConfigException $e) {
+        } catch (\Exception $e) {
             $layoutId = null;
         }
         if ($layoutId) {
@@ -222,6 +221,18 @@ class SeoCategory implements SeoElementInterface
     }
 
     /**
+     * Return the path to the config file directory
+     *
+     * @return string
+     */
+    public static function configFilePath(): string
+    {
+        return self::CONFIG_FILE_PATH;
+    }
+
+    /**
+     * Return a meta bundle config array for the given $sourceModel
+     *
      * @param Model $sourceModel
      *
      * @return array
@@ -230,7 +241,7 @@ class SeoCategory implements SeoElementInterface
     {
         /** @var CategoryGroup $sourceModel */
         return ArrayHelper::merge(
-            ConfigHelper::getConfigFromFile('categorymeta/Bundle'),
+            ConfigHelper::getConfigFromFile(self::configFilePath()),
             [
                 'sourceId' => $sourceModel->id,
                 'sourceName' => $sourceModel->name,
