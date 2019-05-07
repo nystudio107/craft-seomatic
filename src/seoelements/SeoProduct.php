@@ -39,7 +39,7 @@ class SeoProduct implements SeoElementInterface
     ];
     const REQUIRED_PLUGIN_HANDLE = 'commerce';
 
-    // Static Methods
+    // Public Static Methods
     // =========================================================================
 
     /**

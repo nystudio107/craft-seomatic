@@ -38,7 +38,7 @@ class SeoCategory implements SeoElementInterface
     ];
     const REQUIRED_PLUGIN_HANDLE = null;
 
-    // Static Methods
+    // Public Static Methods
     // =========================================================================
 
     /**

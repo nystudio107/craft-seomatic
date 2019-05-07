@@ -39,7 +39,7 @@ class SeoEntry implements SeoElementInterface
     ];
     const REQUIRED_PLUGIN_HANDLE = null;
 
-    // Static Methods
+    // Public Static Methods
     // =========================================================================
 
     /**
