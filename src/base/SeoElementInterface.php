@@ -23,7 +23,7 @@ use craft\elements\db\ElementQueryInterface;
  */
 interface SeoElementInterface
 {
-    // Static Methods
+    // Public Static Methods
     // =========================================================================
 
     /**
