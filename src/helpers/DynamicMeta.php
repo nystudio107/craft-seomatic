@@ -528,7 +528,7 @@ class DynamicMeta
                 // and if so, don't include it in the hreflang
                 /** @var Element $element */
                 $element = null;
-                if ($url !== null && $url !== false) {
+                if ($url) {
                     $element = $elements->getElementByUri($url, $site->id, false);
                 }
                 if ($element !== null) {
