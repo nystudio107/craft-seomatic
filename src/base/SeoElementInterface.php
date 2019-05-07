@@ -129,6 +129,15 @@ interface SeoElementInterface
     public static function mostRecentElement(Model $sourceModel, int $sourceSiteId): ElementInterface;
 
     /**
+     * Return the path to the config file directory
+     *
+     * @return string
+     */
+    public static function configFilePath(): string;
+
+    /**
+     * Return a meta bundle config array for the given $sourceModel
+     *
      * @param Model $sourceModel
      *
      * @return array

@@ -25,8 +25,6 @@ use craft\commerce\Plugin as CommercePlugin;
 use craft\commerce\elements\Product;
 use craft\commerce\models\ProductType;
 
-use yii\base\InvalidConfigException;
-
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -42,6 +40,7 @@ class SeoProduct implements SeoElementInterface
         Product::class,
     ];
     const REQUIRED_PLUGIN_HANDLE = 'commerce';
+    const CONFIG_FILE_PATH = 'productmeta/Bundle';
 
     // Public Static Methods
     // =========================================================================
@@ -168,7 +167,7 @@ class SeoProduct implements SeoElementInterface
                 if ($productType) {
                     $layoutId = $productType->getFieldLayoutId();
                 }
-            } catch (InvalidConfigException $e) {
+            } catch (\Exception $e) {
                 $layoutId = null;
             }
             if ($layoutId) {
@@ -235,6 +234,18 @@ class SeoProduct implements SeoElementInterface
     }
 
     /**
+     * Return the path to the config file directory
+     *
+     * @return string
+     */
+    public static function configFilePath(): string
+    {
+        return self::CONFIG_FILE_PATH;
+    }
+
+    /**
+     * Return a meta bundle config array for the given $sourceModel
+     *
      * @param Model $sourceModel
      *
      * @return array
@@ -243,7 +254,7 @@ class SeoProduct implements SeoElementInterface
     {
         /** @var ProductType $sourceModel */
         return ArrayHelper::merge(
-            ConfigHelper::getConfigFromFile('productmeta/Bundle'),
+            ConfigHelper::getConfigFromFile(self::configFilePath()),
             [
                 'sourceId' => $sourceModel->id,
                 'sourceName' => $sourceModel->name,
@@ -251,5 +262,4 @@ class SeoProduct implements SeoElementInterface
             ]
         );
     }
-
 }
