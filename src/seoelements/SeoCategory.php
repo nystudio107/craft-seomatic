@@ -12,19 +12,23 @@
 namespace nystudio107\seomatic\seoelements;
 
 use nystudio107\seomatic\base\SeoElementInterface;
+use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\helpers\Config as ConfigHelper;
 use nystudio107\seomatic\models\MetaBundle;
 
 use Craft;
 use craft\base\ElementInterface;
+use craft\base\Model;
 use craft\elements\db\ElementQueryInterface;
 use craft\elements\Category;
+use craft\models\CategoryGroup;
 
 use yii\base\InvalidConfigException;
 
 /**
  * @author    nystudio107
  * @package   Seomatic
- * @since     3.0.0
+ * @since     3.2.0
  */
 class SeoCategory implements SeoElementInterface
 {
@@ -160,9 +164,9 @@ class SeoCategory implements SeoElementInterface
         $layouts = [];
         $layoutId = null;
         try {
-            $category = Craft::$app->getCategories()->getGroupByHandle($sourceHandle);
-            if ($category) {
-                $layoutId = $category->getFieldLayoutId();
+            $categoryGroup = Craft::$app->getCategories()->getGroupByHandle($sourceHandle);
+            if ($categoryGroup) {
+                $layoutId = $categoryGroup->getFieldLayoutId();
             }
         } catch (InvalidConfigException $e) {
             $layoutId = null;
@@ -172,5 +176,66 @@ class SeoCategory implements SeoElementInterface
         }
 
         return $layouts;
+    }
+
+    /**
+     * Return the source model of the given $sourceId
+     *
+     * @param int $sourceId
+     *
+     * @return CategoryGroup|null
+     */
+    public static function sourceModelFromId(int $sourceId)
+    {
+        return Craft::$app->getCategories()->getGroupById($sourceId);
+    }
+
+    /**
+     * Return the source model of the given $sourceId
+     *
+     * @param string $sourceHandle
+     *
+     * @return CategoryGroup|null
+     */
+    public static function sourceModelFromHandle(string $sourceHandle)
+    {
+        return Craft::$app->getCategories()->getGroupByHandle($sourceHandle);
+    }
+
+    /**
+     * Return the most recently updated Element from a given source model
+     *
+     * @param Model $sourceModel
+     * @param int   $sourceSiteId
+     *
+     * @return ElementInterface
+     */
+    public static function mostRecentElement(Model $sourceModel, int $sourceSiteId): ElementInterface
+    {
+        /** @var CategoryGroup $sourceModel */
+        return Category::find()
+            ->group($sourceModel->handle)
+            ->siteId($sourceSiteId)
+            ->limit(1)
+            ->orderBy(['elements.dateUpdated' => SORT_DESC])
+            ->one();
+    }
+
+    /**
+     * @param Model $sourceModel
+     *
+     * @return array
+     */
+    public static function metaBundleConfig(Model $sourceModel): array
+    {
+        /** @var CategoryGroup $sourceModel */
+        return ArrayHelper::merge(
+            ConfigHelper::getConfigFromFile('categorymeta/Bundle'),
+            [
+                'sourceId' => $sourceModel->id,
+                'sourceName' => $sourceModel->name,
+                'sourceHandle' => $sourceModel->handle,
+            ]
+        );
     }
 }

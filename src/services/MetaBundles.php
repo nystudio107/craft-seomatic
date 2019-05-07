@@ -11,6 +11,8 @@
 
 namespace nystudio107\seomatic\services;
 
+use craft\base\Model;
+use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\fields\SeoSettings;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\ArrayHelper;
@@ -949,6 +951,80 @@ class MetaBundles extends Component
                 $this->mergeMetaBundleSettings($metaBundle, $baseConfig);
             }
             $this->updateMetaBundle($metaBundle, $siteId);
+        }
+
+        return $metaBundle;
+    }
+
+    protected function createMetaBundleFromSeoElement(
+        SeoElementInterface $seoElement,
+        Model $sourceModel,
+        int $sourceSiteId,
+        $baseConfig = null
+    ) {
+        $metaBundle = null;
+        // Get the site settings and turn them into arrays
+        /** @var Section|CategoryGroup|ProductType $sourceModel */
+        $siteSettings = $sourceModel->getSiteSettings();
+        if (!empty($siteSettings[$sourceSiteId])) {
+            $siteSettingsArray = [];
+            /** @var  $siteSetting Section_SiteSettings */
+            foreach ($siteSettings as $siteSetting) {
+                if ($siteSetting->hasUrls) {
+                    $siteSettingArray = $siteSetting->toArray();
+                    // Get the site language
+                    $siteSettingArray['language'] = MetaValueHelper::getSiteLanguage($siteSetting->siteId);
+                    $siteSettingsArray[] = $siteSettingArray;
+                }
+            }
+            $siteSettingsArray = ArrayHelper::index($siteSettingsArray, 'siteId');
+            // Create a MetaBundle for this site
+            $siteSetting = $siteSettings[$sourceSiteId];
+            if ($siteSetting->hasUrls) {
+                // Get the most recent dateUpdated
+                $element = $seoElement::mostRecentElement($sourceModel, $sourceSiteId);
+                if ($element) {
+                    $dateUpdated = $element->dateUpdated ?? $element->dateCreated;
+                } else {
+                    $dateUpdated = new \DateTime();
+                }
+                // Create a new meta bundle with propagated defaults
+                $metaBundleDefaults = ArrayHelper::merge(
+                    $seoElement::metaBundleConfig($sourceModel),
+                    [
+                        'sourceTemplate' => $siteSetting->template,
+                        'sourceSiteId' => $siteSetting->siteId,
+                        'sourceAltSiteSettings' => $siteSettingsArray,
+                        'sourceDateUpdated' => $dateUpdated,
+                    ]
+                );
+                // The mainEntityOfPage computedType must be set before creating the bundle
+                if ($baseConfig !== null && !empty($baseConfig->metaGlobalVars->mainEntityOfPage)) {
+                    $metaBundleDefaults['metaGlobalVars']['mainEntityOfPage'] =
+                        $baseConfig->metaGlobalVars->mainEntityOfPage;
+                }
+                // Merge in any migrated settings from an old Seomatic_Meta Field
+                if ($element !== null) {
+                    /** @var Element $element */
+                    /** @var Element $elementFromSite */
+                    $elementFromSite = Craft::$app->getElements()->getElementById($element->id, null, $sourceSiteId);
+                    if ($element instanceof Element) {
+                        $config = MigrationHelper::configFromSeomaticMeta(
+                            $elementFromSite,
+                            MigrationHelper::SECTION_MIGRATION_CONTEXT
+                        );
+                        $metaBundleDefaults = ArrayHelper::merge(
+                            $metaBundleDefaults,
+                            $config
+                        );
+                    }
+                }
+                $metaBundle = MetaBundle::create($metaBundleDefaults);
+                if ($baseConfig !== null) {
+                    $this->mergeMetaBundleSettings($metaBundle, $baseConfig);
+                }
+                $this->updateMetaBundle($metaBundle, $sourceSiteId);
+            }
         }
 
         return $metaBundle;

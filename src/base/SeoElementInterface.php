@@ -14,6 +14,7 @@ namespace nystudio107\seomatic\base;
 use nystudio107\seomatic\models\MetaBundle;
 
 use craft\base\ElementInterface;
+use craft\base\Model;
 use craft\elements\db\ElementQueryInterface;
 
 /**
@@ -98,4 +99,39 @@ interface SeoElementInterface
      * @return array
      */
     public static function fieldLayouts(string $sourceHandle): array;
+
+    /**
+     * Return the source model of the given $sourceId
+     *
+     * @param int $sourceId
+     *
+     * @return Model|null
+     */
+    public static function sourceModelFromId(int $sourceId);
+
+    /**
+     * Return the source model of the given $sourceId
+     *
+     * @param string $sourceHandle
+     *
+     * @return Model|null
+     */
+    public static function sourceModelFromHandle(string $sourceHandle);
+
+    /**
+     * Return the most recently updated Element from a given source model
+     *
+     * @param Model $sourceModel
+     * @param int   $sourceSiteId
+     *
+     * @return ElementInterface
+     */
+    public static function mostRecentElement(Model $sourceModel, int $sourceSiteId): ElementInterface;
+
+    /**
+     * @param Model $sourceModel
+     *
+     * @return array
+     */
+    public static function metaBundleConfig(Model $sourceModel): array;
 }
