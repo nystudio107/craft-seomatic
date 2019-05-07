@@ -12,19 +12,23 @@
 namespace nystudio107\seomatic\seoelements;
 
 use nystudio107\seomatic\base\SeoElementInterface;
+use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\helpers\Config as ConfigHelper;
 use nystudio107\seomatic\models\MetaBundle;
 
 use Craft;
 use craft\base\ElementInterface;
+use craft\base\Model;
 use craft\elements\db\ElementQueryInterface;
 use craft\elements\Entry;
 use craft\models\EntryDraft;
 use craft\models\EntryVersion;
+use craft\models\Section;
 
 /**
  * @author    nystudio107
  * @package   Seomatic
- * @since     3.0.0
+ * @since     3.2.0
  */
 class SeoEntry implements SeoElementInterface
 {
@@ -173,4 +177,67 @@ class SeoEntry implements SeoElementInterface
 
         return $layouts;
     }
+
+    /**
+     * Return the source model of the given $sourceId
+     *
+     * @param int $sourceId
+     *
+     * @return Section|null
+     */
+    public static function sourceModelFromId(int $sourceId)
+    {
+        return Craft::$app->getSections()->getSectionById($sourceId);
+    }
+
+    /**
+     * Return the source model of the given $sourceId
+     *
+     * @param string $sourceHandle
+     *
+     * @return Section|null
+     */
+    public static function sourceModelFromHandle(string $sourceHandle)
+    {
+        return Craft::$app->getSections()->getSectionByHandle($sourceHandle);
+    }
+
+    /**
+     * Return the most recently updated Element from a given source model
+     *
+     * @param Model $sourceModel
+     * @param int   $sourceSiteId
+     *
+     * @return ElementInterface
+     */
+    public static function mostRecentElement(Model $sourceModel, int $sourceSiteId): ElementInterface
+    {
+        /** @var Section $sourceModel */
+        return Entry::find()
+            ->section($sourceModel->handle)
+            ->siteId($sourceSiteId)
+            ->limit(1)
+            ->orderBy(['elements.dateUpdated' => SORT_DESC])
+            ->one();
+    }
+
+    /**
+     * @param Model $sourceModel
+     *
+     * @return array
+     */
+    public static function metaBundleConfig(Model $sourceModel): array
+    {
+        /** @var Section $sourceModel */
+        return ArrayHelper::merge(
+            ConfigHelper::getConfigFromFile('entrymeta/Bundle'),
+            [
+                'sourceId' => $sourceModel->id,
+                'sourceName' => $sourceModel->name,
+                'sourceHandle' => $sourceModel->handle,
+                'sourceType' => $sourceModel->type,
+            ]
+        );
+    }
+
 }

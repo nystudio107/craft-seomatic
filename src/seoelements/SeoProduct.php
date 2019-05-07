@@ -12,21 +12,25 @@
 namespace nystudio107\seomatic\seoelements;
 
 use nystudio107\seomatic\base\SeoElementInterface;
+use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\helpers\Config as ConfigHelper;
 use nystudio107\seomatic\models\MetaBundle;
 
 use Craft;
 use craft\base\ElementInterface;
+use craft\base\Model;
 use craft\elements\db\ElementQueryInterface;
 
 use craft\commerce\Plugin as CommercePlugin;
 use craft\commerce\elements\Product;
+use craft\commerce\models\ProductType;
 
 use yii\base\InvalidConfigException;
 
 /**
  * @author    nystudio107
  * @package   Seomatic
- * @since     3.0.0
+ * @since     3.2.0
  */
 class SeoProduct implements SeoElementInterface
 {
@@ -160,9 +164,9 @@ class SeoProduct implements SeoElementInterface
         if ($commerce !== null) {
             $layoutId = null;
             try {
-                $product = $commerce->productTypes->getProductTypeByHandle($sourceHandle);
-                if ($product) {
-                    $layoutId = $product->getFieldLayoutId();
+                $productType = $commerce->productTypes->getProductTypeByHandle($sourceHandle);
+                if ($productType) {
+                    $layoutId = $productType->getFieldLayoutId();
                 }
             } catch (InvalidConfigException $e) {
                 $layoutId = null;
@@ -174,4 +178,78 @@ class SeoProduct implements SeoElementInterface
 
         return $layouts;
     }
+
+    /**
+     * Return the source model of the given $sourceId
+     *
+     * @param int $sourceId
+     *
+     * @return ProductType|null
+     */
+    public static function sourceModelFromId(int $sourceId)
+    {
+        $productType = null;
+        $commerce = CommercePlugin::getInstance();
+        if ($commerce !== null) {
+            $productType = $commerce->productTypes->getProductTypeById($sourceId);
+        }
+
+        return $productType;
+    }
+
+    /**
+     * Return the source model of the given $sourceId
+     *
+     * @param string $sourceHandle
+     *
+     * @return ProductType|null
+     */
+    public static function sourceModelFromHandle(string $sourceHandle)
+    {
+        $productType = null;
+        $commerce = CommercePlugin::getInstance();
+        if ($commerce !== null) {
+            $productType = $commerce->productTypes->getProductTypeByHandle($sourceHandle);
+        }
+
+        return $productType;
+    }
+
+    /**
+     * Return the most recently updated Element from a given source model
+     *
+     * @param Model $sourceModel
+     * @param int   $sourceSiteId
+     *
+     * @return ElementInterface
+     */
+    public static function mostRecentElement(Model $sourceModel, int $sourceSiteId): ElementInterface
+    {
+        /** @var ProductType $sourceModel */
+        return Product::find()
+            ->type($sourceModel->handle)
+            ->siteId($sourceSiteId)
+            ->limit(1)
+            ->orderBy(['elements.dateUpdated' => SORT_DESC])
+            ->one();
+    }
+
+    /**
+     * @param Model $sourceModel
+     *
+     * @return array
+     */
+    public static function metaBundleConfig(Model $sourceModel): array
+    {
+        /** @var ProductType $sourceModel */
+        return ArrayHelper::merge(
+            ConfigHelper::getConfigFromFile('productmeta/Bundle'),
+            [
+                'sourceId' => $sourceModel->id,
+                'sourceName' => $sourceModel->name,
+                'sourceHandle' => $sourceModel->handle,
+            ]
+        );
+    }
+
 }
