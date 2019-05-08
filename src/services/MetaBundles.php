@@ -27,21 +27,13 @@ use craft\base\Component;
 use craft\base\Element;
 use craft\base\Model;
 use craft\db\Query;
-use craft\elements\Category;
-use craft\elements\Entry;
-use craft\models\EntryDraft;
-use craft\models\EntryVersion;
 use craft\models\Section_SiteSettings;
-use craft\models\CategoryGroup_SiteSettings;
 use craft\models\CategoryGroup;
 use craft\models\Section;
 use craft\models\Site;
 
 use craft\commerce\Plugin as CommercePlugin;
-use craft\commerce\elements\Product;
 use craft\commerce\models\ProductType;
-
-use yii\base\InvalidConfigException;
 
 /**
  * @author    nystudio107
@@ -598,39 +590,19 @@ class MetaBundles extends Component
      */
     public function pruneVestigialMetaBundles(array &$metaBundles)
     {
-        $categories = Craft::$app->getCategories();
-        $sections = Craft::$app->getSections();
         foreach ($metaBundles as $key => $metaBundle) {
             $unsetMetaBundle = false;
-            /** @var MetaBundle $metaBundle */
-            switch ($metaBundle->sourceBundleType) {
-                case self::GLOBAL_META_BUNDLE:
-                    $unsetMetaBundle = false;
-                    break;
-                case self::CATEGORYGROUP_META_BUNDLE:
-                    $category = $categories->getGroupByHandle($metaBundle->sourceHandle);
-                    if ($category === null) {
+            $sourceBundleType = $metaBundle->sourceBundleType;
+            if ($sourceBundleType !== self::GLOBAL_META_BUNDLE) {
+                $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
+                if ($seoElement) {
+                    $sourceModel = $seoElement::sourceModelFromHandle($metaBundle->sourceHandle);
+                    /** @var Section|CategoryGroup|ProductType $sourceModel */
+                    if ($sourceModel === null) {
                         $unsetMetaBundle = true;
                     } else {
                         $unsetMetaBundle = true;
-                        $siteSettings = $category->getSiteSettings();
-                        if (!empty($siteSettings)) {
-                            /** @var CategoryGroup_SiteSettings $siteSetting */
-                            foreach ($siteSettings as $siteSetting) {
-                                if ($siteSetting->siteId == $metaBundle->sourceSiteId && $siteSetting->hasUrls) {
-                                    $unsetMetaBundle = false;
-                                }
-                            }
-                        }
-                    }
-                    break;
-                case self::SECTION_META_BUNDLE:
-                    $section = $sections->getSectionByHandle($metaBundle->sourceHandle);
-                    if ($section === null) {
-                        $unsetMetaBundle = true;
-                    } else {
-                        $unsetMetaBundle = true;
-                        $siteSettings = $section->getSiteSettings();
+                        $siteSettings = $sourceModel->getSiteSettings();
                         if (!empty($siteSettings)) {
                             /** @var Section_SiteSettings $siteSetting */
                             foreach ($siteSettings as $siteSetting) {
@@ -640,34 +612,11 @@ class MetaBundles extends Component
                             }
                         }
                     }
-                    break;
-                case self::PRODUCT_META_BUNDLE:
-                    if (Seomatic::$commerceInstalled) {
-                        $commerce = CommercePlugin::getInstance();
-                        if ($commerce !== null) {
-                            $productType = $commerce->getProductTypes()->getProductTypeByHandle($metaBundle->sourceHandle);
-                            if ($productType === null) {
-                                $unsetMetaBundle = true;
-                            } else {
-                                $unsetMetaBundle = true;
-                                $siteSettings = $productType->getSiteSettings();
-                                if (!empty($siteSettings)) {
-                                    /** @var Section_SiteSettings $siteSetting */
-                                    foreach ($siteSettings as $siteSetting) {
-                                        if ($siteSetting->siteId == $metaBundle->sourceSiteId && $siteSetting->hasUrls) {
-                                            $unsetMetaBundle = false;
-                                        }
-                                    }
-                                }
-                            }
-                        } else {
-                            $unsetMetaBundle = true;
-                        }
-                    } else {
-                        $unsetMetaBundle = true;
-                    }
-                    break;
+                } else {
+                    $unsetMetaBundle = true;
+                }
             }
+            /** @var MetaBundle $metaBundle */
             if ($unsetMetaBundle) {
                 unset($metaBundles[$key]);
             }
@@ -840,7 +789,7 @@ class MetaBundles extends Component
             $siteSettings = $sourceModel->getSiteSettings();
         if (!empty($siteSettings[$sourceSiteId])) {
             $siteSettingsArray = [];
-            /** @var  $siteSetting Section_SiteSettings */
+            /** @var Section_SiteSettings $siteSetting  */
             foreach ($siteSettings as $siteSetting) {
                 if ($siteSetting->hasUrls) {
                     $siteSettingArray = $siteSetting->toArray();
