@@ -13,6 +13,9 @@ namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\fields\SeoSettings;
+use nystudio107\seomatic\seoelements\SeoCategory;
+use nystudio107\seomatic\seoelements\SeoEntry;
+use nystudio107\seomatic\seoelements\SeoProduct;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
@@ -421,21 +424,25 @@ class MetaBundles extends Component
         $sites = Craft::$app->getSites()->getAllSites();
         /** @var  $site Site */
         foreach ($sites as $site) {
-            $this->createMetaBundleFromSection($section, $site->id);
+            $seoElement = SeoEntry::class;
+            /** @var SeoElementInterface $seoElement */
+            $metaBundle = $this->createMetaBundleFromSeoElement($seoElement, $section, $site->id);
         }
     }
 
     /**
      * Create a new meta bundle from the $category
      *
-     * @param CategoryGroup $category
+     * @param CategoryGroup $categoryGroup
      */
-    public function createContentMetaBundleForCategoryGroup(CategoryGroup $category)
+    public function createContentMetaBundleForCategoryGroup(CategoryGroup $categoryGroup)
     {
         $sites = Craft::$app->getSites()->getAllSites();
         /** @var  $site Site */
         foreach ($sites as $site) {
-            $this->createMetaBundleFromCategory($category, $site->id);
+            $seoElement = SeoCategory::class;
+            /** @var SeoElementInterface $seoElement */
+            $metaBundle = $this->createMetaBundleFromSeoElement($seoElement, $categoryGroup, $site->id);
         }
     }
 
@@ -449,7 +456,9 @@ class MetaBundles extends Component
         $sites = Craft::$app->getSites()->getAllSites();
         /** @var  $site Site */
         foreach ($sites as $site) {
-            $this->createMetaBundleFromProductType($productType, $site->id);
+            $seoElement = SeoProduct::class;
+            /** @var SeoElementInterface $seoElement */
+            $metaBundle = $this->createMetaBundleFromSeoElement($seoElement, $productType, $site->id);
         }
     }
 
