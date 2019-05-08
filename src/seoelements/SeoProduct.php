@@ -25,6 +25,8 @@ use craft\commerce\Plugin as CommercePlugin;
 use craft\commerce\elements\Product;
 use craft\commerce\models\ProductType;
 
+use yii\base\InvalidConfigException;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -261,5 +263,37 @@ class SeoProduct implements SeoElementInterface
                 'sourceHandle' => $sourceModel->handle,
             ]
         );
+    }
+
+    /**
+     * Return the source id from the $element
+     *
+     * @param ElementInterface $element
+     *
+     * @return int|null
+     */
+    public static function sourceIdFromElement(ElementInterface $element)
+    {
+        /** @var Product $element */
+        return $element->typeId;
+    }
+
+    /**
+     * Return the source handle from the $element
+     *
+     * @param ElementInterface $element
+     *
+     * @return string|null
+     */
+    public static function sourceHandleFromElement(ElementInterface $element)
+    {
+        $sourceHandle = '';
+        /** @var Product $element */
+        try {
+            $sourceHandle = $element->getType()->handle;
+        } catch (InvalidConfigException $e) {
+        }
+
+        return $sourceHandle;
     }
 }
