@@ -23,6 +23,8 @@ use craft\elements\db\ElementQueryInterface;
 use craft\elements\Category;
 use craft\models\CategoryGroup;
 
+use yii\base\InvalidConfigException;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -248,5 +250,37 @@ class SeoCategory implements SeoElementInterface
                 'sourceHandle' => $sourceModel->handle,
             ]
         );
+    }
+
+    /**
+     * Return the source id from the $element
+     *
+     * @param ElementInterface $element
+     *
+     * @return int|null
+     */
+    public static function sourceIdFromElement(ElementInterface $element)
+    {
+        /** @var Category $element */
+        return $element->groupId;
+    }
+
+    /**
+     * Return the source handle from the $element
+     *
+     * @param ElementInterface $element
+     *
+     * @return string|null
+     */
+    public static function sourceHandleFromElement(ElementInterface $element)
+    {
+        $sourceHandle = '';
+        /** @var Category $element */
+        try {
+            $sourceHandle = $element->getGroup()->handle;
+        } catch (InvalidConfigException $e) {
+        }
+
+        return $sourceHandle;
     }
 }

@@ -25,6 +25,8 @@ use craft\models\EntryDraft;
 use craft\models\EntryVersion;
 use craft\models\Section;
 
+use yii\base\InvalidConfigException;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -253,4 +255,35 @@ class SeoEntry implements SeoElementInterface
         );
     }
 
+    /**
+     * Return the source id from the $element
+     *
+     * @param ElementInterface $element
+     *
+     * @return int|null
+     */
+    public static function sourceIdFromElement(ElementInterface $element)
+    {
+        /** @var Entry $element */
+        return $element->sectionId;
+    }
+
+    /**
+     * Return the source handle from the $element
+     *
+     * @param ElementInterface $element
+     *
+     * @return string|null
+     */
+    public static function sourceHandleFromElement(ElementInterface $element)
+    {
+        $sourceHandle = '';
+        /** @var Entry $element */
+        try {
+            $sourceHandle = $element->getSection()->handle;
+        } catch (InvalidConfigException $e) {
+        }
+
+        return $sourceHandle;
+    }
 }

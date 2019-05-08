@@ -42,7 +42,6 @@ use craft\commerce\elements\Product;
 use craft\commerce\models\ProductType;
 
 use yii\base\InvalidConfigException;
-use yii\db\StaleObjectException;
 
 /**
  * @author    nystudio107
@@ -209,7 +208,7 @@ class MetaBundles extends Component
             $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
             $metaBundle = MetaBundle::create($metaBundleArray);
             $this->syncBundleWithConfig($metaBundle);
-            $id = \count($this->metaBundles);
+            $id = count($this->metaBundles);
             $this->metaBundles[$id] = $metaBundle;
             $this->metaBundlesBySourceId[$sourceBundleType][$sourceId][$sourceSiteId] = $id;
         } else {
@@ -255,7 +254,7 @@ class MetaBundles extends Component
         if (!empty($metaBundleArray)) {
             $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
             $metaBundle = MetaBundle::create($metaBundleArray);
-            $id = \count($this->metaBundles);
+            $id = count($this->metaBundles);
             $this->metaBundles[$id] = $metaBundle;
             $this->metaBundlesBySourceHandle[$sourceBundleType][$sourceHandle][$sourceSiteId] = $id;
         } else {
@@ -359,7 +358,10 @@ class MetaBundles extends Component
                     if ($element) {
                         $dateUpdated = $element->dateUpdated ?? $element->dateCreated;
                     } else {
-                        $dateUpdated = new \DateTime();
+                        try {
+                            $dateUpdated = new \DateTime();
+                        } catch (\Exception $e) {
+                        }
                     }
                     $metaBundle->sourceDateUpdated = $dateUpdated;
                     // Update the meta bundle data
@@ -403,10 +405,6 @@ class MetaBundles extends Component
             if ($metaBundleRecord) {
                 try {
                     $metaBundleRecord->delete();
-                } catch (StaleObjectException $e) {
-                    Craft::error($e->getMessage(), __METHOD__);
-                } catch (\Exception $e) {
-                    Craft::error($e->getMessage(), __METHOD__);
                 } catch (\Throwable $e) {
                     Craft::error($e->getMessage(), __METHOD__);
                 }
@@ -472,48 +470,16 @@ class MetaBundles extends Component
     {
         $sourceId = 0;
         $sourceSiteId = 0;
-        $sourceBundleType = '';
         $sourceHandle = '';
         // See if this is a section we are tracking
-        switch (\get_class($element)) {
-            case Entry::class:
-            case EntryDraft::class:
-            case EntryVersion::class:
-                /** @var  $element Entry */
-                $sourceId = $element->sectionId;
+        $sourceBundleType = Seomatic::$plugin->seoElements->getMetaBundleTypeFromElement($element);
+        if ($sourceBundleType) {
+            $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
+            if ($seoElement) {
+                $sourceId = $seoElement::sourceIdFromElement($element);
+                $sourceHandle = $seoElement::sourceHandleFromElement($element);
                 $sourceSiteId = $element->siteId;
-                $sourceHandle = $element->section->handle;
-                $sourceBundleType = self::SECTION_META_BUNDLE;
-                break;
-
-            case Category::class:
-                /** @var  $element Category */
-                $sourceId = $element->groupId;
-                $sourceSiteId = $element->siteId;
-                try {
-                    $sourceHandle = $element->getGroup()->handle;
-                } catch (InvalidConfigException $e) {
-                    Craft::error($e->getMessage(), __METHOD__);
-                }
-                $sourceBundleType = self::CATEGORYGROUP_META_BUNDLE;
-                break;
-
-            case Product::class:
-                if (Seomatic::$commerceInstalled) {
-                    $commerce = CommercePlugin::getInstance();
-                    if ($commerce !== null) {
-                        /** @var  $element Product */
-                        $sourceId = $element->typeId;
-                        $sourceSiteId = $element->siteId;
-                        try {
-                            $sourceHandle = $element->getType()->handle;
-                        } catch (InvalidConfigException $e) {
-                            Craft::error($e->getMessage(), __METHOD__);
-                        }
-                        $sourceBundleType = self::PRODUCT_META_BUNDLE;
-                    }
-                }
-                break;
+            }
         }
 
         return [$sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId];
@@ -771,7 +737,6 @@ class MetaBundles extends Component
         }
     }
 
-
     /**
      * Synchronize the passed in metaBundle with the seomatic-config files if
      * there is a newer version of the MetaBundle bundleVersion in the config
@@ -784,72 +749,31 @@ class MetaBundles extends Component
     {
         $prevMetaBundle = $metaBundle;
         $config = [];
-        $sourceType = $metaBundle->sourceBundleType;
-        switch ($sourceType) {
-            case self::GLOBAL_META_BUNDLE:
-                $config = ConfigHelper::getConfigFromFile('globalmeta/Bundle');
-                break;
-            case self::CATEGORYGROUP_META_BUNDLE:
-                $config = ConfigHelper::getConfigFromFile('categorymeta/Bundle');
-                break;
-            case self::SECTION_META_BUNDLE:
-                $config = ConfigHelper::getConfigFromFile('entrymeta/Bundle');
-                break;
-            case self::PRODUCT_META_BUNDLE:
-                if (Seomatic::$commerceInstalled) {
-                    $commerce = CommercePlugin::getInstance();
-                    if ($commerce !== null) {
-                        $config = ConfigHelper::getConfigFromFile('productmeta/Bundle');
-                    }
-                }
-                break;
+        $sourceBundleType = $metaBundle->sourceBundleType;
+        $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
+        if ($seoElement) {
+            $configPath = $seoElement::configFilePath();
+            $config = ConfigHelper::getConfigFromFile($configPath);
         }
         // If the config file has a newer version than the $metaBundleArray, merge them
         $shouldUpdate = !empty($config) && version_compare($config['bundleVersion'], $metaBundle->bundleVersion, '>');
         if ($shouldUpdate || $forceUpdate) {
             // Create a new meta bundle
-            switch ($sourceType) {
-                case self::GLOBAL_META_BUNDLE:
-                    $metaBundle = $this->createGlobalMetaBundleForSite(
+            if ($sourceBundleType === self::GLOBAL_META_BUNDLE) {
+                $metaBundle = $this->createGlobalMetaBundleForSite(
+                    $metaBundle->sourceSiteId,
+                    $metaBundle
+                );
+            } else {
+                $sourceModel = $seoElement::sourceModelFromId($metaBundle->sourceSiteId);
+                if ($sourceModel) {
+                    $metaBundle = $this->createMetaBundleFromSeoElement(
+                        $seoElement,
+                        $sourceModel,
                         $metaBundle->sourceSiteId,
                         $metaBundle
                     );
-                    break;
-                case self::CATEGORYGROUP_META_BUNDLE:
-                    $category = Craft::$app->getCategories()->getGroupById($metaBundle->sourceId);
-                    if ($category !== null) {
-                        $metaBundle = $this->createMetaBundleFromCategory(
-                            $category,
-                            $metaBundle->sourceSiteId,
-                            $metaBundle
-                        );
-                    }
-                    break;
-                case self::SECTION_META_BUNDLE:
-                    $section = Craft::$app->getSections()->getSectionById($metaBundle->sourceId);
-                    if ($section !== null) {
-                        $metaBundle = $this->createMetaBundleFromSection(
-                            $section,
-                            $metaBundle->sourceSiteId,
-                            $metaBundle
-                        );
-                    }
-                    break;
-                case self::PRODUCT_META_BUNDLE:
-                    if (Seomatic::$commerceInstalled) {
-                        $commerce = CommercePlugin::getInstance();
-                        if ($commerce !== null) {
-                            $productType = $commerce->getProductTypes()->getProductTypeById($metaBundle->sourceId);
-                            if ($productType !== null) {
-                                $metaBundle = $this->createMetaBundleFromProductType(
-                                    $productType,
-                                    $metaBundle->sourceSiteId,
-                                    $metaBundle
-                                );
-                            }
-                        }
-                    }
-                    break;
+                }
             }
         }
 
@@ -900,7 +824,7 @@ class MetaBundles extends Component
      * @param SeoElementInterface $seoElement
      * @param Model               $sourceModel
      * @param int                 $sourceSiteId
-     * @param null                $baseConfig
+     * @param MetaBundle|null     $baseConfig
      *
      * @return MetaBundle|null
      */
@@ -935,7 +859,10 @@ class MetaBundles extends Component
                 if ($element) {
                     $dateUpdated = $element->dateUpdated ?? $element->dateCreated;
                 } else {
-                    $dateUpdated = new \DateTime();
+                    try {
+                        $dateUpdated = new \DateTime();
+                    } catch (\Exception $e) {
+                    }
                 }
                 // Create a new meta bundle with propagated defaults
                 $metaBundleDefaults = ArrayHelper::merge(

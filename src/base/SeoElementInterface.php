@@ -143,4 +143,22 @@ interface SeoElementInterface
      * @return array
      */
     public static function metaBundleConfig(Model $sourceModel): array;
+
+    /**
+     * Return the source id from the $element
+     *
+     * @param ElementInterface $element
+     *
+     * @return int|null
+     */
+    public static function sourceIdFromElement(ElementInterface $element);
+
+    /**
+     * Return the source handle from the $element
+     *
+     * @param ElementInterface $element
+     *
+     * @return string|null
+     */
+    public static function sourceHandleFromElement(ElementInterface $element);
 }
