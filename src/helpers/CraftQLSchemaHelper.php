@@ -110,9 +110,11 @@ class CraftQLSchemaHelper
             })
             ->type($seomaticField)
             ->resolve(function ($root, $args, $context, $info) {
+                $uri = trim($args['uri'] === '/' ? '__home__' : $args['uri'], '/');
+
                 // Return an entry that meets the passed in criteria.
                 $criteria = Entry::find()
-                    ->uri($args['uri']);
+                    ->uri($uri);
                 if (!empty($args['siteId'])) {
                     $criteria->siteId($args['siteId']);
                 }
