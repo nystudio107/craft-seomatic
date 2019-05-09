@@ -1755,6 +1755,21 @@ You can narrow this down to a specific sub-type list by passing in a `path` of s
 }
 ```
 
+## CraftQL Query support
+
+To retrieve SEOmatic data through the CraftQL plugin, use the `seoMatic` field in your graphql query. Each option will return it's own JSON-LD data.
+Use the following field inside a query:
+
+```gql
+seoMatic {
+    MetaTitleContainer
+    MetaTagContainer
+    MetaLinkContainer
+    MetaScriptContainer
+    MetaJsonLdContainer
+}
+```
+
 ## SEOmatic Roadmap
 
 Some things to do, and ideas for potential features:
