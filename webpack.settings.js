@@ -30,6 +30,9 @@ module.exports = {
     vars: {
         cssName: "styles"
     },
+    babelLoaderConfig: {
+        exclude: '',
+    },
     entries: {
         "dashboard": "dashboard.js",
         "seomatic": "seomatic.js",

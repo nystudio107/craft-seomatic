@@ -484,10 +484,8 @@ class DynamicMeta
         // Get the request URI
         if ($uri === null) {
             $requestUri = Craft::$app->getRequest()->pathInfo;
-            $appendUri = str_replace($requestUri, '', Craft::$app->getRequest()->fullPath);
         } else {
             $requestUri = $uri;
-            $appendUri = '';
         }
         // Get the site to use
         if ($siteId === null) {
@@ -530,7 +528,7 @@ class DynamicMeta
                 // and if so, don't include it in the hreflang
                 /** @var Element $element */
                 $element = null;
-                if ($url !== null) {
+                if ($url) {
                     $element = $elements->getElementByUri($url, $site->id, false);
                 }
                 if ($element !== null) {
@@ -583,7 +581,6 @@ class DynamicMeta
                 } else {
                     $includeUrl = false;
                 }
-                $url = $url.$appendUri;
                 $url = ($url === '__home__') ? '' : $url;
             } else {
                 try {
