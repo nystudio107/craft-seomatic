@@ -478,6 +478,8 @@ class MetaBundles extends Component
                 $sourceHandle = $seoElement::sourceHandleFromElement($element);
                 $sourceSiteId = $element->siteId;
             }
+        } else {
+            $sourceBundleType = '';
         }
 
         return [$sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId];
