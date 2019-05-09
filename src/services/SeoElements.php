@@ -6,7 +6,7 @@
  * and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2017 nystudio107
+ * @copyright Copyright (c) 2019 nystudio107
  */
 
 namespace nystudio107\seomatic\services;
@@ -25,7 +25,7 @@ use craft\events\RegisterComponentTypesEvent;
 /**
  * @author    nystudio107
  * @package   Seomatic
- * @since     3.0.0
+ * @since     3.2.0
  */
 class SeoElements extends Component
 {

@@ -6,7 +6,7 @@
  * and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2017 nystudio107
+ * @copyright Copyright (c) 2019 nystudio107
  */
 
 namespace nystudio107\seomatic\base;
