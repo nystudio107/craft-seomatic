@@ -1,5 +1,8 @@
 # SEOmatic Changelog
 
+### Added
+* Added CraftQL support for entries. Use the graphql `seoMatic` field.
+
 ## 3.1.50 - 2019.04.30
 ### Added
 * Added the `???` Empty Coalesce operator to allow for the easy cascading of default text/image SEO values
