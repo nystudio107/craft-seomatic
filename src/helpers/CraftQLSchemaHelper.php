@@ -32,7 +32,13 @@ class CraftQLSchemaHelper
     // Constants
     // =========================================================================
 
-    const CACHE_KEY = 'seomatic_metacontroller_';
+    const CRAFT_QL_FIELDS = [
+        'metaTitleContainer' => MetaTitleContainer::CONTAINER_TYPE,
+        'metaTagContainer' => MetaTagContainer::CONTAINER_TYPE,
+        'metaLinkContainer' => MetaLinkContainer::CONTAINER_TYPE,
+        'metaScriptContainer' => MetaScriptContainer::CONTAINER_TYPE,
+        'metaJsonLdContainer' => MetaJsonLdContainer::CONTAINER_TYPE,
+    ];
 
     // Public Methods
     // =========================================================================
@@ -41,68 +47,21 @@ class CraftQLSchemaHelper
     {
         // Create the root object
         $seomaticField = $event->schema->createObjectType('seomaticData');
-        // Add metaTitleContainer
-        $seomaticField->addStringField('metaTitleContainer')->resolve(function (Element $element) {
-            // $root contains the data returned by the field below
-            $result = ContainerHelper::getContainerArrays(
-                [MetaTitleContainer::CONTAINER_TYPE],
-                $element->uri,
-                $element->siteId,
-                false
-            );
+        // Add in the CraftQL fields
+        foreach (self::CRAFT_QL_FIELDS as $containerHandle => $containerType) {
+            $seomaticField->addStringField($containerHandle)->resolve(function (Element $element) use ($containerType) {
+                // $root contains the data returned by the field below
+                $result = ContainerHelper::getContainerArrays(
+                    [$containerType],
+                    $element->uri,
+                    $element->siteId,
+                    false
+                );
 
-            return $result[MetaTitleContainer::CONTAINER_TYPE];
-        });
-        // Add metaTagContainer
-        $seomaticField->addStringField('metaTagContainer')->resolve(function (Element $element) {
-            // $root contains the data returned by the field below
-            $result = ContainerHelper::getContainerArrays(
-                [MetaTagContainer::CONTAINER_TYPE],
-                $element->uri,
-                $element->siteId,
-                false
-            );
-
-            return $result[MetaTagContainer::CONTAINER_TYPE];
-        });
-        // Add metaLinkContainer
-        $seomaticField->addStringField('metaLinkContainer')->resolve(function (Element $element) {
-            // $root contains the data returned by the field below
-            $result = ContainerHelper::getContainerArrays(
-                [MetaLinkContainer::CONTAINER_TYPE],
-                $element->uri,
-                $element->siteId,
-                false
-            );
-
-            return $result[MetaLinkContainer::CONTAINER_TYPE];
-        });
-        // Add metaScriptContainer
-        $seomaticField->addStringField('metaScriptContainer')->resolve(function (Element $element) {
-            // $root contains the data returned by the field below
-            $result = ContainerHelper::getContainerArrays(
-                [MetaScriptContainer::CONTAINER_TYPE],
-                $element->uri,
-                $element->siteId,
-                false
-            );
-            Craft::dd($result);
-
-            return $result[MetaScriptContainer::CONTAINER_TYPE];
-        });
-        // Add metaJsonLdContainer
-        $seomaticField->addStringField('metaJsonLdContainer')->resolve(function (Element $element) {
-            // $root contains the data returned by the field below
-            $result = ContainerHelper::getContainerArrays(
-                [MetaJsonLdContainer::CONTAINER_TYPE],
-                $element->uri,
-                $element->siteId,
-                false
-            );
-
-            return $result[MetaJsonLdContainer::CONTAINER_TYPE];
-        });
-
+                return $result[$containerType];
+            });
+        }
+        // Add the root
         $event->schema->addField('seomatic')
             ->arguments(function (\markhuot\CraftQL\Builders\Field $field) {
                 $field->addIntArgument('siteId');
