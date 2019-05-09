@@ -36,22 +36,22 @@ return [
                 'description'      => '{seomatic.meta.seoDescription}',
                 'url'              => '{seomatic.meta.canonicalUrl}',
                 'mainEntityOfPage' => '{seomatic.meta.canonicalUrl}',
-                'dateCreated'      => '{event.dateCreated|atom}',
-                'dateModified'     => '{event.dateUpdated|atom}',
-                'datePublished'    => '{event.postDate|atom}',
-                'copyrightYear'    => '{event.postDate|atom}',
+                'startDate'        => '{event.startDate|atom}',
+                'endDate'          => '{event.endDate|atom}',
                 'inLanguage'       => '{seomatic.meta.language}',
-                'copyrightHolder'  => [
+                'location'         => [
+                    'type' => 'Place',
+                    'address'  => '{seomatic.meta.seoTitle}',
+                    'name'     => '{seomatic.meta.seoTitle}',
+                ],
+                'organizer'  => [
                     'id' => '{seomatic.site.identity.genericUrl}#identity',
                 ],
-                'author'           => [
+                'contributor'      => [
+                    'id' => '{seomatic.site.identity.genericUrl}#creator',
+                ],
+                'funder'           => [
                     'id' => '{seomatic.site.identity.genericUrl}#identity',
-                ],
-                'creator'          => [
-                    'id' => '{seomatic.site.identity.genericUrl}#creator',
-                ],
-                'publisher'        => [
-                    'id' => '{seomatic.site.identity.genericUrl}#creator',
                 ],
                 'image'            => [
                     'type' => 'ImageObject',
