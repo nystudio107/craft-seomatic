@@ -10,7 +10,7 @@
  */
 
 use nystudio107\seomatic\helpers\Config;
-use nystudio107\seomatic\services\MetaBundles;
+use nystudio107\seomatic\seoelements\SeoEntry;
 
 /**
  * @author    nystudio107
@@ -20,7 +20,7 @@ use nystudio107\seomatic\services\MetaBundles;
 
 return [
     'bundleVersion'              => '1.0.28',
-    'sourceBundleType'           => MetaBundles::SECTION_META_BUNDLE,
+    'sourceBundleType'           => SeoEntry::getMetaBundleType(),
     'sourceId'                   => null,
     'sourceName'                 => null,
     'sourceHandle'               => null,

@@ -22,8 +22,6 @@ use craft\base\Field as BaseField;
 use craft\base\Volume;
 use craft\elements\User;
 use craft\ckeditor\Field as CKEditorField;
-use craft\elements\Category;
-use craft\elements\Entry;
 use craft\elements\MatrixBlock;
 use craft\fields\Assets as AssetsField;
 use craft\fields\Matrix as MatrixField;
@@ -31,9 +29,6 @@ use craft\fields\PlainText as PlainTextField;
 use craft\fields\Tags as TagsField;
 use craft\models\FieldLayout;
 use craft\redactor\Field as RedactorField;
-
-use craft\commerce\Plugin as CommercePlugin;
-use craft\commerce\elements\Product;
 
 use benf\neo\Field as NeoField;
 use benf\neo\elements\Block as NeoBlock;
@@ -272,55 +267,11 @@ class Field
         $foundFields = [];
         $layouts = [];
         // Get the layouts
-        switch ($sourceBundleType) {
-            case MetaBundles::GLOBAL_META_BUNDLE:
-                break;
-
-            case MetaBundles::SECTION_META_BUNDLE:
-                $section = Craft::$app->getSections()->getSectionByHandle($sourceHandle);
-                if ($section) {
-                    $entryTypes = $section->getEntryTypes();
-                    foreach ($entryTypes as $entryType) {
-                        if ($entryType->fieldLayoutId) {
-                            $layouts[] = Craft::$app->getFields()->getLayoutById($entryType->fieldLayoutId);
-                        }
-                    }
-                }
-                break;
-
-            case MetaBundles::CATEGORYGROUP_META_BUNDLE:
-                $layoutId = null;
-                try {
-                    $category = Craft::$app->getCategories()->getGroupByHandle($sourceHandle);
-                    if ($category) {
-                        $layoutId = $category->getFieldLayoutId();
-                    }
-                } catch (InvalidConfigException $e) {
-                    $layoutId = null;
-                }
-                if ($layoutId) {
-                    $layouts[] = Craft::$app->getFields()->getLayoutById($layoutId);
-                }
-                break;
-            case MetaBundles::PRODUCT_META_BUNDLE:
-                if (Seomatic::$commerceInstalled) {
-                    $commerce = CommercePlugin::getInstance();
-                    if ($commerce !== null) {
-                        $layoutId = null;
-                        try {
-                            $product = $commerce->productTypes->getProductTypeByHandle($sourceHandle);
-                            if ($product) {
-                                $layoutId = $product->getFieldLayoutId();
-                            }
-                        } catch (InvalidConfigException $e) {
-                            $layoutId = null;
-                        }
-                        if ($layoutId) {
-                            $layouts[] = Craft::$app->getFields()->getLayoutById($layoutId);
-                        }
-                    }
-                }
-                break;
+        if ($sourceBundleType !== MetaBundles::GLOBAL_META_BUNDLE) {
+            $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
+            if ($seoElement !== null) {
+                $layouts = $seoElement::fieldLayouts($sourceHandle);
+            }
         }
         // Iterate through the layouts looking for the fields of the type $fieldType
         foreach ($layouts as $layout) {
@@ -417,30 +368,5 @@ class Field
         }
 
         return $foundFields;
-    }
-
-    /**
-     * Get the root class of a passed in Element
-     *
-     * @param Element $element
-     *
-     * @return string
-     */
-    public static function getElementRootClass(Element $element): string
-    {
-        // By default, just use the class name
-        $className = \get_class($element);
-        // Handle sub-classes of specific types we know about
-        if ($element instanceof Entry) {
-            $className = Entry::class;
-        }
-        if ($element instanceof Category) {
-            $className = Category::class;
-        }
-        if ($element instanceof Product) {
-            $className = Product::class;
-        }
-
-        return $className;
     }
 }

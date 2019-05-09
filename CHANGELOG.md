@@ -1,7 +1,15 @@
 # SEOmatic Changelog
 
+## 3.2.0 - 2019.05.06
 ### Added
-* Added CraftQL support for entries. Use the graphql `seoMatic` field.
+* Added CraftQL support for entries. Use the graphql `seoMatic` field
+* Added a `SeoElementInterface` to abstract out the support for custom elements
+* Added support for Solspace Calendar events for custom metadata, JSON-LD, etc.
+
+### Changed
+* Changed paginated `rel="alternate"` URLs to always point to the first page in other languages, not the paginated page (that may or may not exist)
+* Fixed an issue in `getLocalizedUrls()` so that it handles `getElementUriForSite()` returning both `null` and `false`
+* If a meta value with the key of `target` (used for schema.org `SearchAction`s) doesn't have a `{` as the first character, it is not parsed as Twig
 
 ## 3.1.50 - 2019.04.30
 ### Added
