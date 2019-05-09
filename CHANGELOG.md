@@ -1,6 +1,10 @@
 # SEOmatic Changelog
 
 ## 3.2.0 - 2019.05.06
+### Added
+* Added a `SeoElementInterface` to abstract out the support for custom elements
+* Added support for Solspace Calendar events for custom metadata, JSON-LD, etc.
+
 ### Changed
 * Changed paginated `rel="alternate"` URLs to always point to the first page in other languages, not the paginated page (that may or may not exist)
 * Fixed an issue in `getLocalizedUrls()` so that it handles `getElementUriForSite()` returning both `null` and `false`
