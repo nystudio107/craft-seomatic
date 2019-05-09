@@ -18,7 +18,6 @@ use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\helpers\UrlHelper;
 use nystudio107\seomatic\models\SitemapTemplate;
-use nystudio107\seomatic\services\MetaBundles;
 
 use nystudio107\fastcgicachebust\FastcgiCacheBust;
 
@@ -27,14 +26,10 @@ use craft\base\Element;
 use craft\console\Application as ConsoleApplication;
 use craft\elements\Asset;
 use craft\elements\Entry;
-use craft\elements\Category;
 use craft\elements\MatrixBlock;
 use craft\fields\Assets as AssetsField;
 use craft\models\SiteGroup;
 use craft\queue\BaseJob;
-
-use craft\commerce\Plugin as CommercePlugin;
-use craft\commerce\elements\Product;
 
 use benf\neo\elements\Block as NeoBlock;
 

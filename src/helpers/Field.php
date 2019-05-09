@@ -22,8 +22,6 @@ use craft\base\Field as BaseField;
 use craft\base\Volume;
 use craft\elements\User;
 use craft\ckeditor\Field as CKEditorField;
-use craft\elements\Category;
-use craft\elements\Entry;
 use craft\elements\MatrixBlock;
 use craft\fields\Assets as AssetsField;
 use craft\fields\Matrix as MatrixField;
@@ -31,9 +29,6 @@ use craft\fields\PlainText as PlainTextField;
 use craft\fields\Tags as TagsField;
 use craft\models\FieldLayout;
 use craft\redactor\Field as RedactorField;
-
-use craft\commerce\Plugin as CommercePlugin;
-use craft\commerce\elements\Product;
 
 use benf\neo\Field as NeoField;
 use benf\neo\elements\Block as NeoBlock;

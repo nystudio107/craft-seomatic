@@ -23,14 +23,9 @@ use nystudio107\seomatic\services\MetaBundles;
 
 use Craft;
 use craft\elements\Asset;
-use craft\elements\Category;
-use craft\elements\Entry;
 use craft\helpers\UrlHelper;
 use craft\models\Site;
 use craft\web\Controller;
-
-use craft\commerce\Plugin as CommercePlugin;
-use craft\commerce\elements\Product;
 
 use yii\base\InvalidConfigException;
 use yii\web\NotFoundHttpException;
