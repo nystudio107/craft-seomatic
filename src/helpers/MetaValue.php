@@ -181,7 +181,19 @@ class MetaValue
         $element = Seomatic::$matchedElement;
         /** @var Element $element */
         if ($element !== null) {
-            $matchedElementType = $element::refHandle();
+            $refHandle = null;
+            // Get a fallback from the element's root class name
+            try {
+                $reflector = new \ReflectionClass($element);
+            } catch (\ReflectionException $e) {
+                $reflector = null;
+                Craft::error($e->getMessage(), __METHOD__);
+            }
+            if ($reflector) {
+                $refHandle = strtolower($reflector->getShortName());
+            }
+            // Prefer $element::refHandle()
+            $matchedElementType = $element::refHandle() ?? $refHandle ?? 'entry';
             if ($matchedElementType) {
                 self::$templateObjectVars[$matchedElementType] = $element;
             }
