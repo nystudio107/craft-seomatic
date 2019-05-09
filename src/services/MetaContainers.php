@@ -34,12 +34,7 @@ use nystudio107\seomatic\variables\SeomaticVariable;
 use Craft;
 use craft\base\Component;
 use craft\base\Element;
-use craft\elements\Category;
-use craft\elements\Entry;
 use craft\helpers\UrlHelper;
-
-use craft\commerce\Plugin as CommercePlugin;
-use craft\commerce\elements\Product;
 
 use yii\base\Exception;
 use yii\base\InvalidConfigException;

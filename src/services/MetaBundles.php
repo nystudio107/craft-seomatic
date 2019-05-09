@@ -49,9 +49,6 @@ class MetaBundles extends Component
     // =========================================================================
 
     const GLOBAL_META_BUNDLE = '__GLOBAL_BUNDLE__';
-    const SECTION_META_BUNDLE = 'section';
-    const CATEGORYGROUP_META_BUNDLE = 'categorygroup';
-    const PRODUCT_META_BUNDLE = 'product';
     const FIELD_META_BUNDLE = 'field';
 
     const IGNORE_DB_ATTRIBUTES = [
@@ -787,8 +784,8 @@ class MetaBundles extends Component
      * @return MetaBundle|null
      */
     protected function createMetaBundleFromSeoElement(
-        SeoElementInterface $seoElement,
-        Model $sourceModel,
+        $seoElement,
+        $sourceModel,
         int $sourceSiteId,
         $baseConfig = null
     ) {
