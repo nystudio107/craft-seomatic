@@ -27,7 +27,7 @@ class CraftQLSchemaHelper
     {
         $seoMaticField = $event->schema->createObjectType('SEOMaticData');
 
-        $seoMaticField->addStringField('MetaTitleContainer')->resolve(function (Element $element) {
+        $seoMaticField->addStringField('metaTitleContainer')->resolve(function (Element $element) {
             // $root contains the data returned by the field below
             $result = $this->getContainerArrays(
                 [
@@ -38,7 +38,7 @@ class CraftQLSchemaHelper
             return $result['MetaTitleContainer'];
         });
 
-        $seoMaticField->addStringField('MetaTagContainer')->resolve(function (Element $element) {
+        $seoMaticField->addStringField('metaTagContainer')->resolve(function (Element $element) {
             // $root contains the data returned by the field below
             $result = $this->getContainerArrays(
                 [
@@ -49,7 +49,7 @@ class CraftQLSchemaHelper
             return $result['MetaTagContainer'];
         });
 
-        $seoMaticField->addStringField('MetaLinkContainer')->resolve(function (Element $element) {
+        $seoMaticField->addStringField('metaLinkContainer')->resolve(function (Element $element) {
             // $root contains the data returned by the field below
             $result = $this->getContainerArrays(
                 [
@@ -60,7 +60,7 @@ class CraftQLSchemaHelper
             return $result['MetaLinkContainer'];
         });
 
-        $seoMaticField->addStringField('MetaScriptContainer')->resolve(function (Element $element) {
+        $seoMaticField->addStringField('metaScriptContainer')->resolve(function (Element $element) {
             // $root contains the data returned by the field below
             $result = $this->getContainerArrays(
                 [
@@ -71,7 +71,7 @@ class CraftQLSchemaHelper
             return $result['MetaScriptContainer'];
         });
 
-        $seoMaticField->addStringField('MetaJsonLdContainer')->resolve(function (Element $element) {
+        $seoMaticField->addStringField('metaJsonLdContainer')->resolve(function (Element $element) {
             // $root contains the data returned by the field below
             $result = $this->getContainerArrays(
                 [

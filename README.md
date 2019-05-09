@@ -1762,11 +1762,11 @@ Use the following field inside a query:
 
 ```gql
 seoMatic {
-    MetaTitleContainer
-    MetaTagContainer
-    MetaLinkContainer
-    MetaScriptContainer
-    MetaJsonLdContainer
+    metaTitleContainer
+    metaTagContainer
+    metaLinkContainer
+    metaScriptContainer
+    metaJsonLdContainer
 }
 ```
 
