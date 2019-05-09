@@ -2,7 +2,7 @@
 
 ## 3.2.0 - 2019.05.06
 ### Added
-* Added CraftQL support for entries. Use the graphql `seoMatic` field
+* Added CraftQL support for fetching SEOmatic container data
 * Added a `SeoElementInterface` to abstract out the support for custom elements
 * Added support for Solspace Calendar events for custom metadata, JSON-LD, etc.
 
