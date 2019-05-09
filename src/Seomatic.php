@@ -14,6 +14,7 @@ namespace nystudio107\seomatic;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
 use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
+use nystudio107\seomatic\helpers\CraftQLSchemaHelper;
 use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\helpers\PluginTemplate;
@@ -69,6 +70,10 @@ use craft\web\View;
 
 use craft\commerce\Plugin as CommercePlugin;
 use craft\commerce\elements\Product;
+
+use markhuot\CraftQL\Builders\Schema;
+use markhuot\CraftQL\CraftQL;
+use markhuot\CraftQL\Events\AlterSchemaFields;
 
 use yii\base\Event;
 
@@ -449,11 +454,11 @@ class Seomatic extends Plugin
         );
 
         // CraftQL Support
-        if (class_exists(\markhuot\CraftQL\CraftQL::class)) {
+        if (class_exists(CraftQL::class)) {
             Event::on(
-                \markhuot\CraftQL\Types\EntryInterface::class,
-                \markhuot\CraftQL\Events\AlterSchemaFields::EVENT,
-                [new \nystudio107\seomatic\helpers\CraftQLSchemaHelper, 'handle']
+                Schema::class,
+                AlterSchemaFields::EVENT,
+                [CraftQLSchemaHelper::class, 'handle']
             );
         }
     }
