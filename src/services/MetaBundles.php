@@ -35,7 +35,6 @@ use craft\models\CategoryGroup;
 use craft\models\Section;
 use craft\models\Site;
 
-use craft\commerce\Plugin as CommercePlugin;
 use craft\commerce\models\ProductType;
 
 /**
