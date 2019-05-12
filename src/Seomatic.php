@@ -14,10 +14,10 @@ namespace nystudio107\seomatic;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
 use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
-use nystudio107\seomatic\helpers\CraftQLSchemaHelper;
 use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\helpers\PluginTemplate;
+use nystudio107\seomatic\listeners\GetCraftQLSchema;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\seoelements\SeoEntry;
 use nystudio107\seomatic\seoelements\SeoCategory;
@@ -458,7 +458,7 @@ class Seomatic extends Plugin
             Event::on(
                 Schema::class,
                 AlterSchemaFields::EVENT,
-                [CraftQLSchemaHelper::class, 'handle']
+                [GetCraftQLSchema::class, 'handle']
             );
         }
     }

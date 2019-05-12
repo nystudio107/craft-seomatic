@@ -7,7 +7,7 @@
  * @license   https://nystudio107.com/license
  */
 
-namespace nystudio107\seomatic\helpers;
+namespace nystudio107\seomatic\listeners;
 
 use craft\base\Element;
 use craft\elements\Entry;
@@ -26,7 +26,7 @@ use markhuot\CraftQL\Events\AlterSchemaFields;
  * @package   Seomatic
  * @since     3.2.0
  */
-class CraftQLSchemaHelper
+class GetCraftQLSchema
 {
     // Constants
     // =========================================================================
