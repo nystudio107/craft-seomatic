@@ -48,18 +48,20 @@ class CraftQLSchemaHelper
         // Create the root object
         $seomaticField = $event->schema->createObjectType('seomaticData');
         // Add in the CraftQL fields
-        foreach (self::CRAFT_QL_FIELDS as $containerHandle => $containerType) {
-            $seomaticField->addStringField($containerHandle)->resolve(function (Element $element) use ($containerType) {
-                // $root contains the data returned by the field below
-                $result = ContainerHelper::getContainerArrays(
-                    [$containerType],
-                    $element->uri,
-                    $element->siteId,
-                    false
-                );
+        foreach (self::CRAFT_QL_FIELDS as $fieldHandle => $containerType) {
+            $seomaticField
+                ->addStringField($fieldHandle)
+                ->resolve(function (Element $element) use ($containerType) {
+                    // $root contains the data returned by the field below
+                    $result = ContainerHelper::getContainerArrays(
+                        [$containerType],
+                        $element->uri,
+                        $element->siteId,
+                        false
+                    );
 
-                return $result[$containerType];
-            });
+                    return $result[$containerType];
+                });
         }
         // Add the root
         $event->schema->addField('seomatic')
