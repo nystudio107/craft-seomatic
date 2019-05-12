@@ -519,7 +519,7 @@ class Seomatic extends Plugin
                     );
                     // Create the meta bundles for this section if it's new
                     if ($event->isNew) {
-                        self::$plugin->metaBundles->createContentMetaBundleForSection($event->section);
+                        SeoEntry::createContentMetaBundle($event->section);
                         self::$plugin->sitemaps->submitSitemapIndex();
                     }
                 }
@@ -565,7 +565,7 @@ class Seomatic extends Plugin
                     );
                     // Create the meta bundles for this category if it's new
                     if ($event->isNew) {
-                        self::$plugin->metaBundles->createContentMetaBundleForCategoryGroup($event->categoryGroup);
+                        SeoCategory::createContentMetaBundle($event->categoryGroup);
                         self::$plugin->sitemaps->submitSitemapIndex();
                     }
                 }
