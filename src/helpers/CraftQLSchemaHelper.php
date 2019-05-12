@@ -9,7 +9,6 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use Craft;
 use craft\base\Element;
 use craft\elements\Entry;
 
@@ -43,6 +42,11 @@ class CraftQLSchemaHelper
     // Public Methods
     // =========================================================================
 
+    /**
+     * Add the `seomatic` root GraphQL field
+     *
+     * @param AlterSchemaFields $event
+     */
     public static function handle(AlterSchemaFields $event)
     {
         // Create the root object
