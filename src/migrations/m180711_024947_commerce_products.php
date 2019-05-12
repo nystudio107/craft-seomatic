@@ -2,10 +2,9 @@
 
 namespace nystudio107\seomatic\migrations;
 
-use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\seoelements\SeoProduct;
 
 use craft\db\Migration;
-
 use craft\commerce\Plugin as CommercePlugin;
 
 /**
@@ -23,10 +22,7 @@ class m180711_024947_commerce_products extends Migration
         if ($commerceInstalled) {
             $commerce = CommercePlugin::getInstance();
             if ($commerce !== null) {
-                $productTypes = $commerce->getProductTypes()->getAllProductTypes();
-                foreach ($productTypes as $productType) {
-                    Seomatic::$plugin->metaBundles->createContentMetaBundleForProductType($productType);
-                }
+                SeoProduct::createAllContentMetaBundles();
             }
         }
     }

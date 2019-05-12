@@ -161,4 +161,16 @@ interface SeoElementInterface
      * @return string|null
      */
     public static function sourceHandleFromElement(ElementInterface $element);
+
+    /**
+     * Create a MetaBundle in the db for each site, from the passed in $sourceModel
+     *
+     * @param Model $sourceModel
+     */
+    public static function createContentMetaBundle(Model $sourceModel);
+
+    /**
+     * Create all the MetaBundles in the db for this Seo Element
+     */
+    public static function createAllContentMetaBundles();
 }

@@ -412,54 +412,6 @@ class MetaBundles extends Component
     }
 
     /**
-     * Create a new meta bundle from the $section
-     *
-     * @param Section $section
-     */
-    public function createContentMetaBundleForSection(Section $section)
-    {
-        $sites = Craft::$app->getSites()->getAllSites();
-        /** @var  $site Site */
-        foreach ($sites as $site) {
-            $seoElement = SeoEntry::class;
-            /** @var SeoElementInterface $seoElement */
-            $metaBundle = $this->createMetaBundleFromSeoElement($seoElement, $section, $site->id);
-        }
-    }
-
-    /**
-     * Create a new meta bundle from the $category
-     *
-     * @param CategoryGroup $categoryGroup
-     */
-    public function createContentMetaBundleForCategoryGroup(CategoryGroup $categoryGroup)
-    {
-        $sites = Craft::$app->getSites()->getAllSites();
-        /** @var  $site Site */
-        foreach ($sites as $site) {
-            $seoElement = SeoCategory::class;
-            /** @var SeoElementInterface $seoElement */
-            $metaBundle = $this->createMetaBundleFromSeoElement($seoElement, $categoryGroup, $site->id);
-        }
-    }
-
-    /**
-     * Create a new meta bundle from the $productType
-     *
-     * @param ProductType $productType
-     */
-    public function createContentMetaBundleForProductType(ProductType $productType)
-    {
-        $sites = Craft::$app->getSites()->getAllSites();
-        /** @var  $site Site */
-        foreach ($sites as $site) {
-            $seoElement = SeoProduct::class;
-            /** @var SeoElementInterface $seoElement */
-            $metaBundle = $this->createMetaBundleFromSeoElement($seoElement, $productType, $site->id);
-        }
-    }
-
-    /**
      * @param Element $element
      *
      * @return array
@@ -659,27 +611,10 @@ class MetaBundles extends Component
      */
     public function createContentMetaBundles()
     {
-        // Get all of the sections with URLs
-        $sections = Craft::$app->getSections()->getAllSections();
-        foreach ($sections as $section) {
-            $this->createContentMetaBundleForSection($section);
-        }
-
-        // Get all of the category groups with URLs
-        $categories = Craft::$app->getCategories()->getAllGroups();
-        foreach ($categories as $category) {
-            $this->createContentMetaBundleForCategoryGroup($category);
-        }
-
-        // Get all of the Commerce ProductTypes with URLs
-        if (Seomatic::$commerceInstalled) {
-            $commerce = CommercePlugin::getInstance();
-            if ($commerce !== null) {
-                $productTypes = $commerce->getProductTypes()->getAllProductTypes();
-                foreach ($productTypes as $productType) {
-                    $this->createContentMetaBundleForProductType($productType);
-                }
-            }
+        $seoElements = Seomatic::$plugin->seoElements->getAllSeoElementTypes();
+        foreach ($seoElements as $seoElement) {
+            /** @var SeoElementInterface $seoElement */
+            $seoElement::createAllContentMetaBundles();
         }
     }
 
@@ -740,43 +675,6 @@ class MetaBundles extends Component
         }
     }
 
-    // Protected Methods
-    // =========================================================================
-
-    /**
-     * @param int             $siteId
-     * @param MetaBundle|null $baseConfig
-     *
-     * @return MetaBundle
-     */
-    protected function createGlobalMetaBundleForSite(int $siteId, $baseConfig = null): MetaBundle
-    {
-        // Create a new meta bundle with propagated defaults
-        $metaBundleDefaults = ArrayHelper::merge(
-            ConfigHelper::getConfigFromFile('globalmeta/Bundle'),
-            [
-                'sourceSiteId' => $siteId,
-            ]
-        );
-        // The computedType must be set before creating the bundle
-        if ($baseConfig !== null) {
-            $metaBundleDefaults['metaGlobalVars']['mainEntityOfPage'] = $baseConfig->metaGlobalVars->mainEntityOfPage;
-            $metaBundleDefaults['metaSiteVars']['identity']['computedType'] =
-                $baseConfig->metaSiteVars->identity->computedType;
-            $metaBundleDefaults['metaSiteVars']['creator']['computedType'] =
-                $baseConfig->metaSiteVars->creator->computedType;
-        }
-        $metaBundle = MetaBundle::create($metaBundleDefaults);
-        if ($metaBundle !== null) {
-            if ($baseConfig !== null) {
-                $this->mergeMetaBundleSettings($metaBundle, $baseConfig);
-            }
-            $this->updateMetaBundle($metaBundle, $siteId);
-        }
-
-        return $metaBundle;
-    }
-
     /**
      * @param SeoElementInterface $seoElement
      * @param Model               $sourceModel
@@ -785,7 +683,7 @@ class MetaBundles extends Component
      *
      * @return MetaBundle|null
      */
-    protected function createMetaBundleFromSeoElement(
+    public function createMetaBundleFromSeoElement(
         $seoElement,
         $sourceModel,
         int $sourceSiteId,
@@ -794,7 +692,7 @@ class MetaBundles extends Component
         $metaBundle = null;
         // Get the site settings and turn them into arrays
         /** @var Section|CategoryGroup|ProductType $sourceModel */
-            $siteSettings = $sourceModel->getSiteSettings();
+        $siteSettings = $sourceModel->getSiteSettings();
         if (!empty($siteSettings[$sourceSiteId])) {
             $siteSettingsArray = [];
             /** @var Section_SiteSettings $siteSetting  */
@@ -857,6 +755,43 @@ class MetaBundles extends Component
                 }
                 $this->updateMetaBundle($metaBundle, $sourceSiteId);
             }
+        }
+
+        return $metaBundle;
+    }
+
+    // Protected Methods
+    // =========================================================================
+
+    /**
+     * @param int             $siteId
+     * @param MetaBundle|null $baseConfig
+     *
+     * @return MetaBundle
+     */
+    protected function createGlobalMetaBundleForSite(int $siteId, $baseConfig = null): MetaBundle
+    {
+        // Create a new meta bundle with propagated defaults
+        $metaBundleDefaults = ArrayHelper::merge(
+            ConfigHelper::getConfigFromFile('globalmeta/Bundle'),
+            [
+                'sourceSiteId' => $siteId,
+            ]
+        );
+        // The computedType must be set before creating the bundle
+        if ($baseConfig !== null) {
+            $metaBundleDefaults['metaGlobalVars']['mainEntityOfPage'] = $baseConfig->metaGlobalVars->mainEntityOfPage;
+            $metaBundleDefaults['metaSiteVars']['identity']['computedType'] =
+                $baseConfig->metaSiteVars->identity->computedType;
+            $metaBundleDefaults['metaSiteVars']['creator']['computedType'] =
+                $baseConfig->metaSiteVars->creator->computedType;
+        }
+        $metaBundle = MetaBundle::create($metaBundleDefaults);
+        if ($metaBundle !== null) {
+            if ($baseConfig !== null) {
+                $this->mergeMetaBundleSettings($metaBundle, $baseConfig);
+            }
+            $this->updateMetaBundle($metaBundle, $siteId);
         }
 
         return $metaBundle;

@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\seoelements;
 
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
@@ -24,6 +25,7 @@ use craft\elements\Entry;
 use craft\models\EntryDraft;
 use craft\models\EntryVersion;
 use craft\models\Section;
+use craft\models\Site;
 
 use yii\base\InvalidConfigException;
 
@@ -285,5 +287,34 @@ class SeoEntry implements SeoElementInterface
         }
 
         return $sourceHandle;
+    }
+
+    /**
+     * Create a MetaBundle in the db for each site, from the passed in $sourceModel
+     *
+     * @param Model $sourceModel
+     */
+    public static function createContentMetaBundle(Model $sourceModel)
+    {
+        /** @var Section $sourceModel */
+        $sites = Craft::$app->getSites()->getAllSites();
+        /** @var Site $site */
+        foreach ($sites as $site) {
+            $seoElement = self::class;
+            /** @var SeoElementInterface $seoElement */
+            Seomatic::$plugin->metaBundles->createMetaBundleFromSeoElement($seoElement, $sourceModel, $site->id);
+        }
+    }
+
+    /**
+     * Create all the MetaBundles in the db for this Seo Element
+     */
+    public static function createAllContentMetaBundles()
+    {
+        // Get all of the sections with URLs
+        $sections = Craft::$app->getSections()->getAllSections();
+        foreach ($sections as $section) {
+            self::createContentMetaBundle($section);
+        }
     }
 }
