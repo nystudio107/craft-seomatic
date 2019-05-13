@@ -33,15 +33,14 @@ class Config
 
     /**
      * Loads a config file from, trying @craft/config first, then the plugin's
-     *
      * @nystudio107/seomatic
      *
      * @param string $filePath
-     * @param null   $additionalAlias
+     * @param null   $alias
      *
      * @return array
      */
-    public static function getConfigFromFile(string $filePath, $additionalAlias = null): array
+    public static function getConfigFromFile(string $filePath, $alias = null): array
     {
         // Try craft/config first
         $path = self::getConfigFilePath('@config', $filePath);
@@ -49,11 +48,11 @@ class Config
             // Now try our own internal config
             $path = self::getConfigFilePath('@nystudio107/seomatic', $filePath);
             if (!file_exists($path)) {
-                if (!$additionalAlias) {
+                if (!$alias) {
                     return [];
                 }
                 // Now the additional alias config
-                $path = self::getConfigFilePath($additionalAlias, $filePath);
+                $path = self::getConfigFilePath($alias, $filePath);
                 if (!file_exists($path)) {
                     return [];
                 }
