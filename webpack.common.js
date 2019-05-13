@@ -5,7 +5,7 @@ const merge = require('webpack-merge');
 // webpack plugins
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
-const { VueLoaderPlugin } = require('vue-loader');
+const {VueLoaderPlugin} = require('vue-loader');
 const WebpackNotifierPlugin = require('webpack-notifier');
 
 // config files
@@ -20,14 +20,15 @@ const configureBabelLoader = (browserList) => {
         use: {
             loader: 'babel-loader',
             options: {
+                cacheDirectory: true,
                 presets: [
                     [
                         '@babel/preset-env', {
-                        useBuiltIns: 'usage',
-                        targets: {
-                            browsers: browserList,
-                        },
-                    }
+                            useBuiltIns: 'usage',
+                            targets: {
+                                browsers: browserList,
+                            },
+                        }
                     ],
                 ],
                 plugins: [],
