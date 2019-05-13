@@ -31,7 +31,7 @@ module.exports = {
         cssName: "styles"
     },
     babelLoaderConfig: {
-        exclude: '',
+        exclude: [],
     },
     entries: {
         "dashboard": "dashboard.js",
