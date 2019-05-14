@@ -11,6 +11,8 @@
 
 namespace nystudio107\seomatic\seoelements;
 
+use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
+use nystudio107\seomatic\helpers\PluginTemplate;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\helpers\ArrayHelper;
@@ -158,6 +160,28 @@ class SeoEvent implements SeoElementInterface
 
         // Install only for non-console Control Panel requests
         if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
+            // Events sidebar
+            Seomatic::$view->hook('cp.solspace.calendar.events.edit.details', function (&$context) {
+                $html = '';
+                Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
+                /** @var Event $event */
+                $event = $context[self::getElementRefHandle()];
+                if ($event !== null && $event->uri !== null) {
+                    Seomatic::$plugin->metaContainers->previewMetaContainers($event->uri, $event->siteId, true);
+                    // Render our preview sidebar template
+                    if (Seomatic::$settings->displayPreviewSidebar) {
+                        $html .= PluginTemplate::renderPluginTemplate('_sidebars/event-preview.twig');
+                    }
+                    // Render our analysis sidebar template
+// @TODO: This will be added an upcoming 'pro' edition
+//                if (Seomatic::$settings->displayAnalysisSidebar) {
+//                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/event-analysis.twig');
+//                }
+                }
+
+                return $html;
+            });
+
         }
     }
 

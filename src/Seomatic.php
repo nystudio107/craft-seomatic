@@ -434,15 +434,6 @@ class Seomatic extends Plugin
                 }
             }
         );
-
-        // CraftQL Support
-        if (class_exists(CraftQL::class)) {
-            Event::on(
-                Schema::class,
-                AlterSchemaFields::EVENT,
-                [GetCraftQLSchema::class, 'handle']
-            );
-        }
     }
 
     /**
@@ -450,8 +441,6 @@ class Seomatic extends Plugin
      */
     protected function installGlobalEventListeners()
     {
-        // Allow the SeoElements to register their own event handlers
-        self::$plugin->seoElements->getAllSeoElementTypes();
         // Handler: Plugins::EVENT_AFTER_LOAD_PLUGINS
         Event::on(
             Plugins::class,
@@ -459,6 +448,8 @@ class Seomatic extends Plugin
             function () {
                 // Install these only after all other plugins have loaded
                 $request = Craft::$app->getRequest();
+                // Allow the SeoElements to register their own event handlers
+                self::$plugin->seoElements->getAllSeoElementTypes();
                 // Only respond to non-console site requests
                 if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
                     $this->handleSiteRequest();
@@ -523,6 +514,14 @@ class Seomatic extends Plugin
                 );
             }
         );
+        // CraftQL Support
+        if (class_exists(CraftQL::class)) {
+            Event::on(
+                Schema::class,
+                AlterSchemaFields::EVENT,
+                [GetCraftQLSchema::class, 'handle']
+            );
+        }
     }
 
     /**
