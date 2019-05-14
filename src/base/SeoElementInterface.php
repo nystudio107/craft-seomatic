@@ -56,6 +56,11 @@ interface SeoElementInterface
     public static function getRequiredPluginHandle();
 
     /**
+     * Install any event handlers for this SeoElement type
+     */
+    public static function installEventHandlers();
+
+    /**
      * Return an ElementQuery for the sitemap elements for the given MetaBundle
      *
      * @param MetaBundle $metaBundle

@@ -90,6 +90,26 @@ class SeoEvent implements SeoElementInterface
     }
 
     /**
+     * Install any event handlers for this SeoElement type
+     */
+    public static function installEventHandlers()
+    {
+        $request = Craft::$app->getRequest();
+
+        // Install for all non-console requests
+        if (!$request->getIsConsoleRequest()) {
+        }
+
+        // Install only for non-console site requests
+        if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
+        }
+
+        // Install only for non-console Control Panel requests
+        if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
+        }
+    }
+
+    /**
      * Return an ElementQuery for the sitemap elements for the given MetaBundle
      *
      * @param MetaBundle $metaBundle

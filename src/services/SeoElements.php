@@ -141,6 +141,7 @@ class SeoElements extends Component
             $requiredPlugin = $seoElement::getRequiredPluginHandle();
             if ($requiredPlugin === null || Craft::$app->getPlugins()->getPlugin($requiredPlugin)) {
                 $this->seoElements[$seoElement::getMetaBundleType()] = $seoElement;
+                $seoElement::installEventHandlers();
             }
         }
 

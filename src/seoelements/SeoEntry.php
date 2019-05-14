@@ -12,9 +12,11 @@
 namespace nystudio107\seomatic\seoelements;
 
 use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
+use nystudio107\seomatic\helpers\PluginTemplate;
 use nystudio107\seomatic\models\MetaBundle;
 
 use Craft;
@@ -22,11 +24,14 @@ use craft\base\ElementInterface;
 use craft\base\Model;
 use craft\elements\db\ElementQueryInterface;
 use craft\elements\Entry;
+use craft\events\SectionEvent;
 use craft\models\EntryDraft;
 use craft\models\EntryVersion;
 use craft\models\Section;
 use craft\models\Site;
+use craft\services\Sections;
 
+use yii\base\Event;
 use yii\base\InvalidConfigException;
 
 /**
@@ -89,6 +94,93 @@ class SeoEntry implements SeoElementInterface
     public static function getRequiredPluginHandle()
     {
         return self::REQUIRED_PLUGIN_HANDLE;
+    }
+
+    /**
+     * Install any event handlers for this SeoElement type
+     */
+    public static function installEventHandlers()
+    {
+        $request = Craft::$app->getRequest();
+
+        // Install for all non-console requests
+        if (!$request->getIsConsoleRequest()) {
+            // Handler: Sections::EVENT_AFTER_SAVE_SECTION
+            Event::on(
+                Sections::class,
+                Sections::EVENT_AFTER_SAVE_SECTION,
+                function (SectionEvent $event) {
+                    Craft::debug(
+                        'Sections::EVENT_AFTER_SAVE_SECTION',
+                        __METHOD__
+                    );
+                    if ($event->section !== null && $event->section->id !== null) {
+                        Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
+                            SeoEntry::getMetaBundleType(),
+                            $event->section->id,
+                            $event->isNew
+                        );
+                        // Create the meta bundles for this section if it's new
+                        if ($event->isNew) {
+                            SeoEntry::createContentMetaBundle($event->section);
+                            Seomatic::$plugin->sitemaps->submitSitemapIndex();
+                        }
+                    }
+                }
+            );
+            // Handler: Sections::EVENT_AFTER_DELETE_SECTION
+            Event::on(
+                Sections::class,
+                Sections::EVENT_AFTER_DELETE_SECTION,
+                function (SectionEvent $event) {
+                    Craft::debug(
+                        'Sections::EVENT_AFTER_DELETE_SECTION',
+                        __METHOD__
+                    );
+                    if ($event->section !== null && $event->section->id !== null) {
+                        Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
+                            SeoEntry::getMetaBundleType(),
+                            $event->section->id,
+                            false
+                        );
+                        // Delete the meta bundles for this section
+                        Seomatic::$plugin->metaBundles->deleteMetaBundleBySourceId(
+                            SeoEntry::getMetaBundleType(),
+                            $event->section->id
+                        );
+                    }
+                }
+            );
+        }
+
+        // Install only for non-console site requests
+        if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
+        }
+
+        // Install only for non-console Control Panel requests
+        if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
+            // Entries sidebar
+            Seomatic::$view->hook('cp.entries.edit.details', function (&$context) {
+                $html = '';
+                Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
+                /** @var  $entry Entry */
+                $entry = $context['entry'];
+                if ($entry !== null && $entry->uri !== null) {
+                    Seomatic::$plugin->metaContainers->previewMetaContainers($entry->uri, $entry->siteId, true);
+                    // Render our preview sidebar template
+                    if (Seomatic::$settings->displayPreviewSidebar && Seomatic::$matchedElement) {
+                        $html .= PluginTemplate::renderPluginTemplate('_sidebars/entry-preview.twig');
+                    }
+                    // Render our analysis sidebar template
+// @TODO: This will be added an upcoming 'pro' edition
+//                if (Seomatic::$settings->displayAnalysisSidebar && Seomatic::$matchedElement) {
+//                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/entry-analysis.twig');
+//                }
+                }
+
+                return $html;
+            });
+        }
     }
 
     /**

@@ -12,9 +12,11 @@
 namespace nystudio107\seomatic\seoelements;
 
 use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
+use nystudio107\seomatic\helpers\PluginTemplate;
 use nystudio107\seomatic\models\MetaBundle;
 
 use Craft;
@@ -22,9 +24,12 @@ use craft\base\ElementInterface;
 use craft\base\Model;
 use craft\elements\db\ElementQueryInterface;
 use craft\elements\Category;
+use craft\events\CategoryGroupEvent;
 use craft\models\CategoryGroup;
 use craft\models\Site;
+use craft\services\Categories;
 
+use yii\base\Event;
 use yii\base\InvalidConfigException;
 
 /**
@@ -86,6 +91,93 @@ class SeoCategory implements SeoElementInterface
     public static function getRequiredPluginHandle()
     {
         return self::REQUIRED_PLUGIN_HANDLE;
+    }
+
+    /**
+     * Install any event handlers for this SeoElement type
+     */
+    public static function installEventHandlers()
+    {
+        $request = Craft::$app->getRequest();
+
+        // Install for all non-console requests
+        if (!$request->getIsConsoleRequest()) {
+            // Handler: Categories::EVENT_AFTER_SAVE_GROUP
+            Event::on(
+                Categories::class,
+                Categories::EVENT_AFTER_SAVE_GROUP,
+                function (CategoryGroupEvent $event) {
+                    Craft::debug(
+                        'Categories::EVENT_AFTER_SAVE_GROUP',
+                        __METHOD__
+                    );
+                    if ($event->categoryGroup !== null && $event->categoryGroup->id !== null) {
+                        Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
+                            SeoCategory::getMetaBundleType(),
+                            $event->categoryGroup->id,
+                            $event->isNew
+                        );
+                        // Create the meta bundles for this category if it's new
+                        if ($event->isNew) {
+                            SeoCategory::createContentMetaBundle($event->categoryGroup);
+                            Seomatic::$plugin->sitemaps->submitSitemapIndex();
+                        }
+                    }
+                }
+            );
+            // Handler: Categories::EVENT_AFTER_DELETE_GROUP
+            Event::on(
+                Categories::class,
+                Categories::EVENT_AFTER_DELETE_GROUP,
+                function (CategoryGroupEvent $event) {
+                    Craft::debug(
+                        'Categories::EVENT_AFTER_DELETE_GROUP',
+                        __METHOD__
+                    );
+                    if ($event->categoryGroup !== null && $event->categoryGroup->id !== null) {
+                        Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
+                            SeoCategory::getMetaBundleType(),
+                            $event->categoryGroup->id,
+                            false
+                        );
+                        // Delete the meta bundles for this category
+                        Seomatic::$plugin->metaBundles->deleteMetaBundleBySourceId(
+                            SeoCategory::getMetaBundleType(),
+                            $event->categoryGroup->id
+                        );
+                    }
+                }
+            );
+        }
+
+        // Install only for non-console site requests
+        if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
+        }
+
+        // Install only for non-console Control Panel requests
+        if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
+            // Category Groups sidebar
+            Seomatic::$view->hook('cp.categories.edit.details', function (&$context) {
+                $html = '';
+                Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
+                /** @var  $category Category */
+                $category = $context['category'];
+                if ($category !== null && $category->uri !== null) {
+                    Seomatic::$plugin->metaContainers->previewMetaContainers($category->uri, $category->siteId, true);
+                    // Render our preview sidebar template
+                    if (Seomatic::$settings->displayPreviewSidebar) {
+                        $html .= PluginTemplate::renderPluginTemplate('_sidebars/category-preview.twig');
+                    }
+                    // Render our analysis sidebar template
+// @TODO: This will be added an upcoming 'pro' edition
+//                if (Seomatic::$settings->displayAnalysisSidebar) {
+//                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/category-analysis.twig');
+//                }
+                }
+
+                return $html;
+            });
+        }
     }
 
     /**

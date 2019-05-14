@@ -11,16 +11,12 @@
 
 namespace nystudio107\seomatic;
 
-use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
 use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
 use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
-use nystudio107\seomatic\helpers\PluginTemplate;
 use nystudio107\seomatic\listeners\GetCraftQLSchema;
 use nystudio107\seomatic\models\MetaScriptContainer;
-use nystudio107\seomatic\seoelements\SeoEntry;
-use nystudio107\seomatic\seoelements\SeoCategory;
 use nystudio107\seomatic\models\Settings;
 use nystudio107\seomatic\services\FrontendTemplates as FrontendTemplatesService;
 use nystudio107\seomatic\services\Helper as HelperService;
@@ -42,11 +38,8 @@ use Craft;
 use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\base\Plugin;
-use craft\elements\Entry;
-use craft\elements\Category;
 use craft\elements\User;
 use craft\errors\SiteNotFoundException;
-use craft\events\CategoryGroupEvent;
 use craft\events\ElementEvent;
 use craft\events\DeleteTemplateCachesEvent;
 use craft\events\PluginEvent;
@@ -54,13 +47,10 @@ use craft\events\RegisterCacheOptionsEvent;
 use craft\events\RegisterComponentTypesEvent;
 use craft\events\RegisterUrlRulesEvent;
 use craft\events\RegisterUserPermissionsEvent;
-use craft\events\SectionEvent;
 use craft\helpers\StringHelper;
-use craft\services\Categories;
 use craft\services\Elements;
 use craft\services\Fields;
 use craft\services\Plugins;
-use craft\services\Sections;
 use craft\services\TemplateCaches;
 use craft\services\UserPermissions;
 use craft\helpers\UrlHelper;
@@ -68,14 +58,13 @@ use craft\utilities\ClearCaches;
 use craft\web\UrlManager;
 use craft\web\View;
 
-use craft\commerce\Plugin as CommercePlugin;
-use craft\commerce\elements\Product;
-
 use markhuot\CraftQL\Builders\Schema;
 use markhuot\CraftQL\CraftQL;
 use markhuot\CraftQL\Events\AlterSchemaFields;
 
 use yii\base\Event;
+
+/** @noinspection MissingPropertyAnnotationsInspection */
 
 /**
  * Class Seomatic
@@ -84,17 +73,17 @@ use yii\base\Event;
  * @package   Seomatic
  * @since     3.0.0
  *
- * @property  FrontendTemplatesService frontendTemplates
- * @property  HelperService            helper
- * @property  JsonLdService            jsonLd
- * @property  LinkService              link
- * @property  MetaBundlesService       metaBundles
- * @property  MetaContainersService    metaContainers
- * @property  ScriptService            script
- * @property  SeoElementsService       seoElements
- * @property  SitemapsService          sitemaps
- * @property  TagService               tag
- * @property  TitleService             title
+ * @property  FrontendTemplatesService $frontendTemplates
+ * @property  HelperService            $helper
+ * @property  JsonLdService            $jsonLd
+ * @property  LinkService              $link
+ * @property  MetaBundlesService       $metaBundles
+ * @property  MetaContainersService    $metaContainers
+ * @property  ScriptService            $script
+ * @property  SeoElementsService       $seoElements
+ * @property  SitemapsService          $sitemaps
+ * @property  TagService               $tag
+ * @property  TitleService             $title
  */
 class Seomatic extends Plugin
 {
@@ -152,11 +141,6 @@ class Seomatic extends Plugin
      * @var int
      */
     public static $cacheDuration;
-
-    /**
-     * @var bool
-     */
-    public static $commerceInstalled = false;
 
     /**
      * @var bool
@@ -232,8 +216,6 @@ class Seomatic extends Plugin
         MetaValueHelper::cache();
         self::$craft31 = version_compare(Craft::$app->getVersion(), '3.1', '>=');
         $this->name = self::$settings->pluginName;
-        // Determine whether Craft Commerce exists
-        self::$commerceInstalled = class_exists(CommercePlugin::class);
         // Install our event listeners
         $this->installEventListeners();
         // We're loaded
@@ -468,6 +450,8 @@ class Seomatic extends Plugin
      */
     protected function installGlobalEventListeners()
     {
+        // Allow the SeoElements to register their own event handlers
+        self::$plugin->seoElements->getAllSeoElementTypes();
         // Handler: Plugins::EVENT_AFTER_LOAD_PLUGINS
         Event::on(
             Plugins::class,
@@ -500,98 +484,6 @@ class Seomatic extends Plugin
             TemplateCaches::EVENT_AFTER_DELETE_CACHES,
             function (DeleteTemplateCachesEvent $event) {
                 self::$plugin->metaContainers->invalidateCaches();
-            }
-        );
-        // Handler: Sections::EVENT_AFTER_SAVE_SECTION
-        Event::on(
-            Sections::class,
-            Sections::EVENT_AFTER_SAVE_SECTION,
-            function (SectionEvent $event) {
-                Craft::debug(
-                    'Sections::EVENT_AFTER_SAVE_SECTION',
-                    __METHOD__
-                );
-                if ($event->section !== null && $event->section->id !== null) {
-                    self::$plugin->metaBundles->invalidateMetaBundleById(
-                        SeoEntry::getMetaBundleType(),
-                        $event->section->id,
-                        $event->isNew
-                    );
-                    // Create the meta bundles for this section if it's new
-                    if ($event->isNew) {
-                        SeoEntry::createContentMetaBundle($event->section);
-                        self::$plugin->sitemaps->submitSitemapIndex();
-                    }
-                }
-            }
-        );
-        // Handler: Sections::EVENT_AFTER_DELETE_SECTION
-        Event::on(
-            Sections::class,
-            Sections::EVENT_AFTER_DELETE_SECTION,
-            function (SectionEvent $event) {
-                Craft::debug(
-                    'Sections::EVENT_AFTER_DELETE_SECTION',
-                    __METHOD__
-                );
-                if ($event->section !== null && $event->section->id !== null) {
-                    self::$plugin->metaBundles->invalidateMetaBundleById(
-                        SeoEntry::getMetaBundleType(),
-                        $event->section->id,
-                        false
-                    );
-                    // Delete the meta bundles for this section
-                    self::$plugin->metaBundles->deleteMetaBundleBySourceId(
-                        SeoEntry::getMetaBundleType(),
-                        $event->section->id
-                    );
-                }
-            }
-        );
-        // Handler: Categories::EVENT_AFTER_SAVE_GROUP
-        Event::on(
-            Categories::class,
-            Categories::EVENT_AFTER_SAVE_GROUP,
-            function (CategoryGroupEvent $event) {
-                Craft::debug(
-                    'Categories::EVENT_AFTER_SAVE_GROUP',
-                    __METHOD__
-                );
-                if ($event->categoryGroup !== null && $event->categoryGroup->id !== null) {
-                    self::$plugin->metaBundles->invalidateMetaBundleById(
-                        SeoCategory::getMetaBundleType(),
-                        $event->categoryGroup->id,
-                        $event->isNew
-                    );
-                    // Create the meta bundles for this category if it's new
-                    if ($event->isNew) {
-                        SeoCategory::createContentMetaBundle($event->categoryGroup);
-                        self::$plugin->sitemaps->submitSitemapIndex();
-                    }
-                }
-            }
-        );
-        // Handler: Categories::EVENT_AFTER_DELETE_GROUP
-        Event::on(
-            Categories::class,
-            Categories::EVENT_AFTER_DELETE_GROUP,
-            function (CategoryGroupEvent $event) {
-                Craft::debug(
-                    'Categories::EVENT_AFTER_DELETE_GROUP',
-                    __METHOD__
-                );
-                if ($event->categoryGroup !== null && $event->categoryGroup->id !== null) {
-                    self::$plugin->metaBundles->invalidateMetaBundleById(
-                        SeoCategory::getMetaBundleType(),
-                        $event->categoryGroup->id,
-                        false
-                    );
-                    // Delete the meta bundles for this category
-                    self::$plugin->metaBundles->deleteMetaBundleBySourceId(
-                        SeoCategory::getMetaBundleType(),
-                        $event->categoryGroup->id
-                    );
-                }
             }
         );
         // Handler: Elements::EVENT_AFTER_SAVE_ELEMENT
@@ -765,74 +657,6 @@ class Seomatic extends Plugin
                 $context['docTitle'] = self::$settings->cpTitlePrefix.$context['docTitle'];
             }
         });
-        // Entries sidebar
-        self::$view->hook('cp.entries.edit.details', function (&$context) {
-            $html = '';
-            self::$view->registerAssetBundle(SeomaticAsset::class);
-            /** @var  $entry Entry */
-            $entry = $context['entry'];
-            if ($entry !== null && $entry->uri !== null) {
-                self::$plugin->metaContainers->previewMetaContainers($entry->uri, $entry->siteId, true);
-                // Render our preview sidebar template
-                if (self::$settings->displayPreviewSidebar && self::$matchedElement) {
-                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/entry-preview.twig');
-                }
-                // Render our analysis sidebar template
-// @TODO: This will be added an upcoming 'pro' edition
-//                if (self::$settings->displayAnalysisSidebar && self::$matchedElement) {
-//                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/entry-analysis.twig');
-//                }
-            }
-
-            return $html;
-        });
-        // Category Groups sidebar
-        self::$view->hook('cp.categories.edit.details', function (&$context) {
-            $html = '';
-            self::$view->registerAssetBundle(SeomaticAsset::class);
-            /** @var  $category Category */
-            $category = $context['category'];
-            if ($category !== null && $category->uri !== null) {
-                self::$plugin->metaContainers->previewMetaContainers($category->uri, $category->siteId, true);
-                // Render our preview sidebar template
-                if (self::$settings->displayPreviewSidebar) {
-                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/category-preview.twig');
-                }
-                // Render our analysis sidebar template
-// @TODO: This will be added an upcoming 'pro' edition
-//                if (self::$settings->displayAnalysisSidebar) {
-//                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/category-analysis.twig');
-//                }
-            }
-
-            return $html;
-        });
-        // Commerce Product Types sidebar
-        if (self::$commerceInstalled) {
-            $commerce = CommercePlugin::getInstance();
-            if ($commerce !== null) {
-                self::$view->hook('cp.commerce.product.edit.details', function (&$context) {
-                    $html = '';
-                    self::$view->registerAssetBundle(SeomaticAsset::class);
-                    /** @var  $product Product */
-                    $product = $context['product'];
-                    if ($product !== null && $product->uri !== null) {
-                        self::$plugin->metaContainers->previewMetaContainers($product->uri, $product->siteId, true);
-                        // Render our preview sidebar template
-                        if (self::$settings->displayPreviewSidebar) {
-                            $html .= PluginTemplate::renderPluginTemplate('_sidebars/product-preview.twig');
-                        }
-                        // Render our analysis sidebar template
-// @TODO: This will be added an upcoming 'pro' edition
-//                if (self::$settings->displayAnalysisSidebar) {
-//                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/product-analysis.twig');
-//                }
-                    }
-
-                    return $html;
-                });
-            }
-        }
     }
 
     /**
