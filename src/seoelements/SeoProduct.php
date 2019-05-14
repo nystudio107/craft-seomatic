@@ -27,8 +27,11 @@ use craft\models\Site;
 
 use craft\commerce\Plugin as CommercePlugin;
 use craft\commerce\elements\Product;
+use craft\commerce\events\ProductTypeEvent;
 use craft\commerce\models\ProductType;
+use craft\commerce\services\ProductTypes;
 
+use yii\base\Event;
 use yii\base\InvalidConfigException;
 
 /**
@@ -100,6 +103,55 @@ class SeoProduct implements SeoElementInterface
 
         // Install for all non-console requests
         if (!$request->getIsConsoleRequest()) {
+            // Handler: ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE
+            Event::on(
+                ProductTypes::class,
+                ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE,
+                function (ProductTypeEvent $event) {
+                    Craft::debug(
+                        'ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE',
+                        __METHOD__
+                    );
+                    if ($event->productType !== null && $event->productType->id !== null) {
+                        Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
+                            SeoProduct::getMetaBundleType(),
+                            $event->productType->id,
+                            $event->isNew
+                        );
+                        // Create the meta bundles for this Product Type if it's new
+                        if ($event->isNew) {
+                            SeoProduct::createContentMetaBundle($event->productType);
+                            Seomatic::$plugin->sitemaps->submitSitemapIndex();
+                        }
+                    }
+                }
+            );
+            /*
+             * @TODO Sadly this event doesn't exist yet
+            // Handler: ProductTypes::EVENT_AFTER_DELETE_PRODUCTTYPE
+            Event::on(
+                ProductTypes::class,
+                ProductTypes::EVENT_AFTER_DELETE_PRODUCTTYPE,
+                function (ProductTypeEvent $event) {
+                    Craft::debug(
+                        'ProductTypes::EVENT_AFTER_DELETE_PRODUCTTYPE',
+                        __METHOD__
+                    );
+                    if ($event->productType !== null && $event->productType->id !== null) {
+                        Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
+                            SeoProduct::getMetaBundleType(),
+                            $event->productType->id,
+                            false
+                        );
+                        // Delete the meta bundles for this Product Type
+                        Seomatic::$plugin->metaBundles->deleteMetaBundleBySourceId(
+                            SeoProduct::getMetaBundleType(),
+                            $event->productType->id
+                        );
+                    }
+                }
+            );
+            */
         }
 
         // Install only for non-console site requests
