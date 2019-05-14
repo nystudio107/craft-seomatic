@@ -25,9 +25,11 @@ use craft\models\Site;
 
 use Solspace\Calendar\Calendar as CalendarPlugin;
 use Solspace\Calendar\Elements\Event;
+use Solspace\Calendar\Events\SaveModelEvent;
 use Solspace\Calendar\Models\CalendarModel;
+use Solspace\Calendar\Services\CalendarsService;
 
-use yii\base\InvalidConfigException;
+use yii\base\Event as BaseEvent;
 
 /**
  * @author    nystudio107
@@ -98,6 +100,56 @@ class SeoEvent implements SeoElementInterface
 
         // Install for all non-console requests
         if (!$request->getIsConsoleRequest()) {
+            // Handler: CalendarsService::EVENT_AFTER_SAVE
+            BaseEvent::on(
+                CalendarsService::class,
+                CalendarsService::EVENT_AFTER_SAVE,
+                function (SaveModelEvent $event) {
+                    Craft::debug(
+                        'CalendarsService::EVENT_AFTER_SAVE',
+                        __METHOD__
+                    );
+                    /** @var CalendarModel $calendarModel */
+                    $calendarModel = $event->getModel();
+                    if ($calendarModel !== null && $calendarModel->id !== null) {
+                        Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
+                            SeoEvent::getMetaBundleType(),
+                            $calendarModel->id,
+                            $event->isNew()
+                        );
+                        // Create the meta bundles for this Event if it's new
+                        if ($event->isNew()) {
+                            SeoEvent::createContentMetaBundle($calendarModel);
+                            Seomatic::$plugin->sitemaps->submitSitemapIndex();
+                        }
+                    }
+                }
+            );
+            // Handler: CalendarsService::EVENT_AFTER_DELETE
+            BaseEvent::on(
+                CalendarsService::class,
+                CalendarsService::EVENT_AFTER_DELETE,
+                function (SaveModelEvent $event) {
+                    Craft::debug(
+                        'CalendarsService::EVENT_AFTER_DELETE',
+                        __METHOD__
+                    );
+                    /** @var CalendarModel $calendarModel */
+                    $calendarModel = $event->getModel();
+                    if ($calendarModel !== null && $calendarModel->id !== null) {
+                        Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
+                            SeoEvent::getMetaBundleType(),
+                            $calendarModel->id,
+                            false
+                        );
+                        // Delete the meta bundles for this Event
+                        Seomatic::$plugin->metaBundles->deleteMetaBundleBySourceId(
+                            SeoEvent::getMetaBundleType(),
+                            $calendarModel->id
+                        );
+                    }
+                }
+            );
         }
 
         // Install only for non-console site requests
@@ -313,7 +365,7 @@ class SeoEvent implements SeoElementInterface
         /** @var Event $element */
         try {
             $sourceHandle = $element->getCalendar()->handle;
-        } catch (InvalidConfigException $e) {
+        } catch (\Exception $e) {
         }
 
         return $sourceHandle;
