@@ -12,9 +12,11 @@
 namespace nystudio107\seomatic\seoelements;
 
 use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
+use nystudio107\seomatic\helpers\PluginTemplate;
 use nystudio107\seomatic\models\MetaBundle;
 
 use Craft;
@@ -87,6 +89,50 @@ class SeoProduct implements SeoElementInterface
     public static function getRequiredPluginHandle()
     {
         return self::REQUIRED_PLUGIN_HANDLE;
+    }
+
+    /**
+     * Install any event handlers for this SeoElement type
+     */
+    public static function installEventHandlers()
+    {
+        $request = Craft::$app->getRequest();
+
+        // Install for all non-console requests
+        if (!$request->getIsConsoleRequest()) {
+        }
+
+        // Install only for non-console site requests
+        if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
+        }
+
+        // Install only for non-console Control Panel requests
+        if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
+            // Commerce Product Types sidebar
+            $commerce = CommercePlugin::getInstance();
+            if ($commerce !== null) {
+                Seomatic::$view->hook('cp.commerce.product.edit.details', function (&$context) {
+                    $html = '';
+                    Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
+                    /** @var  $product Product */
+                    $product = $context['product'];
+                    if ($product !== null && $product->uri !== null) {
+                        Seomatic::$plugin->metaContainers->previewMetaContainers($product->uri, $product->siteId, true);
+                        // Render our preview sidebar template
+                        if (Seomatic::$settings->displayPreviewSidebar) {
+                            $html .= PluginTemplate::renderPluginTemplate('_sidebars/product-preview.twig');
+                        }
+                        // Render our analysis sidebar template
+// @TODO: This will be added an upcoming 'pro' edition
+//                if (Seomatic::$settings->displayAnalysisSidebar) {
+//                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/product-analysis.twig');
+//                }
+                    }
+
+                    return $html;
+                });
+            }
+        }
     }
 
     /**
