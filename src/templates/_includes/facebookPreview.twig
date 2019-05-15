@@ -12,35 +12,26 @@ set previewFacebook = seomatic.site.facebookAppId |length or seomatic.site.faceb
 <div class="preview-column">
     <div class="displaypreview" style="{{ displayPreviewInlineStyles ?? '' }}">
         {% if showSeoTitleNames %}
-            <h1>Facebook:</h1>
+            <h4 class="metadata-title-separator"><span>Facebook</span></h4>
         {% endif %}
         {% if previewFacebook %}
-            <div class="Facebook-container">
-                <div class="">
-                    <a href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
-                        <div class="Facebook-image-wrap">
-                            <div class="{{ previewElementId }}-Facebook-post-image Facebook-post-image" style="width:470px;height:246px;">
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="facebook-text-wrap">
-                    <div class="Facebook-text-container">
-                        <div class="Facebook-headline">
-                            <a class="Facebook-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">{{ (ogTitleArray.content ?? "") }}</a>
-                        </div>
-                        <div class="Facebook-text">
-                            {{ (ogDescriptionArray.content ?? "") }}
-                        </div>
-                        <div class="Facebook-site-url-wrapper">
-                            <div>
-                                <div class="Facebook-site-url">
-                                    {{ siteUrl | replace({'http://': ''}) | replace({'https://': ''})  | replace({'/': ''}) }}
+            <div class="card-seo-facebook">
+                <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
+                    <div class="card-seo-facebook__image js-preview-image {{ previewElementId }}-Facebook-post-image"></div>
+                    <div class="card-seo-facebook__text">
+                        <span class="card-seo-facebook__link js-preview-domain">
+                            {{ siteUrl | replace({'http://': ''}) | replace({'https://': ''})  | replace({'/': ''}) }}
+                        </span>
+                        <div class="card-seo-facebook__content">
+                            <div style="margin-top:5px">
+                                <div class="card-seo-facebook__title js-preview-title">
+                                    {{ (ogTitleArray.content ?? "") }}
                                 </div>
                             </div>
+                            <span class="card-seo-facebook__description js-preview-description">{{ (ogDescriptionArray.content ?? "") }}</span>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
 
             <script type="text/javascript">

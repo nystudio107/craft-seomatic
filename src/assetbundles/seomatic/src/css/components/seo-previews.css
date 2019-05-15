@@ -5,6 +5,66 @@
  *
  */
 
+a.googleDisplay {
+    text-decoration: none;
+}
+
+a.googleDisplay:link {
+    cursor: pointer;
+    color: #1a0dab;
+}
+
+a.googleDisplay:visited {
+    color: #609;
+}
+
+a.googleDisplay:hover {
+    text-decoration: underline;
+}
+
+a.seo-card-wrapper-link {
+    -webkit-transition-delay: 0s;
+    -webkit-transition-duration: 0.1s;
+    -webkit-transition-property: color;
+    -webkit-transition-timing-function: ease-in-out;
+    color: rgb(20, 24, 35);
+    cursor: pointer;
+    direction: ltr;
+    display: inline;
+    text-decoration: none;
+    transition-delay: 0s;
+    transition-duration: 0.1s;
+    transition-property: color;
+    transition-timing-function: ease-in-out;
+    width: auto;
+    word-wrap: break-word;
+}
+
+h4.metadata-title-separator {
+    font-size: 18px;
+    font-weight: normal;
+    letter-spacing: 0.015em;
+    color: #A3B3CA;
+    position: relative;
+    margin: 1.75em 0 1em;
+}
+
+h4.metadata-title-separator:before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    right: 0;
+    width: 100%;
+    height: 1px;
+    background: #E0E7F1
+}
+
+h4.metadata-title-separator span {
+    position: relative;
+    background: #fff;
+    padding-right: 12px
+}
+
 .card-seo-google {
     position: relative;
     display: block;
@@ -20,7 +80,7 @@
 
 @media only screen and (min-width: 770px) {
     .card-seo-google {
-        width:600px;
+        width: 524px;
         box-shadow: none;
         margin: 0;
         padding: 0
@@ -242,8 +302,8 @@
     display: block;
     font-family: Helvetica, Arial, sans-serif;
     font-size: 12px;
-    height: 11px;
-    line-height: 11px;
+    height: 12px;
+    line-height: 15px;
     overflow-x: hidden;
     overflow-y: hidden;
     text-align: left;
@@ -312,7 +372,7 @@
     background-repeat: no-repeat;
     background-position: center;
     border-style: solid;
-    border-color: inherit;
+    border-color: #e1e8ed;
     border-top-width: 0;
     border-left-width: 0;
     border-right-width: 0;
@@ -324,7 +384,7 @@
 
 @media only screen and (min-width: 770px) {
     .card-seo-twitter__image {
-        width:504px;
+        width:506px;
         height: 252px;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
@@ -332,13 +392,43 @@
     }
 }
 
+.card-seo-twitter__image-summary {
+    width: 123px;
+    height: 123px;
+    float: left;
+}
+
+@media only screen and (min-width: 770px) {
+    .card-seo-twitter__image-summary {
+        width: 123px;
+        height: 123px;
+        float: left;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        overflow: hidden
+    }
+}
+
 .card-seo-twitter__text {
-    padding: 9px
+    padding: 9px;
 }
 
 @media only screen and (min-width: 770px) {
     .card-seo-twitter__text {
-        padding:0.75em 1em
+        padding:0.75em 1em;
+    }
+}
+
+.card-seo-twitter__text-summary {
+    padding: 9px;
+    float: left;
+}
+
+@media only screen and (min-width: 770px) {
+    .card-seo-twitter__text-summary {
+        padding: 0.75em 1em;
+        width: 350px;
+        float: left;
     }
 }
 
@@ -380,6 +470,16 @@
     .card-seo-twitter__description {
         display:block;
         display: -webkit-box
+    }
+}
+
+.card-seo-twitter__description-summary {
+    height: 3.9em;
+    max-height: 3.9em;
+}
+
+@media only screen and (min-width: 770px) {
+    .card-seo-twitter__description-summary {
     }
 }
 
