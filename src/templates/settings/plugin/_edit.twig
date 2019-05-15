@@ -103,12 +103,12 @@
             id: "displayPreviewSidebar",
             name: "displayPreviewSidebar",
             on: settings.displayPreviewSidebar,
-            toggle: "woofer",
+            toggle: "sidebarDisplayPreviewTypes-wrapper",
             warning: configWarning("displayPreviewSidebar", "seomatic"),
             errors: settings.getErrors("displayPreviewSidebar"),
         }) }}
 
-        <div id="woofer" class="{% if not settings.displayPreviewSidebar %}hidden{% endif %}">
+        <div id="sidebarDisplayPreviewTypes-wrapper" class="{% if not settings.displayPreviewSidebar %}hidden{% endif %}">
             {{ forms.checkboxSelectField({
                 label: "Sidebar SEO Preview Sites"|t("seomatic"),
                 instructions: "The social media platforms that should be displayed in the SEO Preview sidebar"|t,
