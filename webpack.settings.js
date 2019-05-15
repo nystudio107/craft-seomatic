@@ -31,7 +31,9 @@ module.exports = {
         cssName: "styles"
     },
     babelLoaderConfig: {
-        exclude: [],
+        exclude: [
+            /(node_modules|bower_components)/
+        ],
     },
     entries: {
         "dashboard": "dashboard.js",
