@@ -241,8 +241,8 @@ class MetaScript extends MetaItem
             ]);
             if (Seomatic::$craft31) {
                 foreach ($variables as $key => $value) {
-                    if (\is_string($value)) {
-                        $variables[$key] = Craft::parseEnv($value);
+                    if (!empty($value['value']) && \is_string($value['value'])) {
+                        $variables[$key]['value'] = Craft::parseEnv($value['value']);
                     }
                 }
             }
@@ -266,8 +266,8 @@ class MetaScript extends MetaItem
             ]);
             if (Seomatic::$craft31) {
                 foreach ($variables as $key => $value) {
-                    if (\is_string($value)) {
-                        $variables[$key] = Craft::parseEnv($value);
+                    if (!empty($value['value']) && \is_string($value['value'])) {
+                        $variables[$key]['value'] = Craft::parseEnv($value['value']);
                     }
                 }
             }
