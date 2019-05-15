@@ -9,6 +9,8 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
+use nystudio107\seomatic\base\SeoElementInterface;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -80,4 +82,8 @@ return [
 
     // Should the meta generator tag and X-Powered-By header be included?
     'generatorEnabled' => true,
+
+    // SeoElementInterface[] The default SeoElement type classes
+    'defaultSeoElementTypes' => [
+    ],
 ];

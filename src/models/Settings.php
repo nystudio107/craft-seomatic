@@ -12,9 +12,11 @@
 namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\base\VarsModel;
 
 use craft\behaviors\EnvAttributeParserBehavior;
+use craft\validators\ArrayValidator;
 
 use yii\behaviors\AttributeTypecastBehavior;
 
@@ -117,6 +119,12 @@ class Settings extends VarsModel
      */
     public $generatorEnabled = true;
 
+    /**
+     * @var SeoElementInterface[] The default SeoElement type classes
+     */
+    public $defaultSeoElementTypes = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -150,6 +158,13 @@ class Settings extends VarsModel
             ['maxTitleLength', 'default', 'value' => 70],
             ['maxDescriptionLength', 'integer', 'min' => 10],
             ['maxDescriptionLength', 'default', 'value' => 155],
+            [
+                [
+                    'defaultSeoElementTypes',
+                ],
+                ArrayValidator::class,
+            ],
+
         ];
     }
 
