@@ -259,7 +259,7 @@ class MetaValue
                 $metaValue = Craft::t(
                     'seomatic',
                     'Error rendering `{template}` -> {error}',
-                    ['template' => $metaValue, 'error' => $e->getMessage()]
+                    ['template' => $metaValue, 'error' => $e->getMessage().' - '.print_r($metaValue, true)]
                 );
                 Craft::error($metaValue, __METHOD__);
                 // Restore the template mode
