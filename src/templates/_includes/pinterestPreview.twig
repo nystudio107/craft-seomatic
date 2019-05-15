@@ -1,0 +1,46 @@
+{% set ogTitleArray = seomatic.tag.get('og:title').renderAttributes() %}
+{% set ogDescriptionArray = seomatic.tag.get('og:description').renderAttributes() %}
+{% set ogImageArray = seomatic.tag.get('og:image').renderAttributes() %}
+{% set canonicalArray = seomatic.link.get('canonical').renderAttributes() %}
+
+{% set showSeoTitleNames = showSeoTitleNames ?? true %}
+{% set previewElementId = previewElementId ?? 0 %}
+<div class="preview-column">
+    <div class="displaypreview" style="{{ displayPreviewInlineStyles ?? '' }}">
+        {% if showSeoTitleNames %}
+            <h4 class="metadata-title-separator"><span>Pinterest</span></h4>
+        {% endif %}
+        <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
+            <div class="card-seo-pinterest">
+                <div class="card-seo-pinterest__image {{ previewElementId }}-Pinterest-post-image">
+                    <div class="js-preview-img ">
+                    </div>
+                </div>
+
+                <div class="card-seo-pinterest__content">
+                    <div class="card-seo-pinterest__title js-preview-title">{{ (ogTitleArray.content ?? "") }}</div>
+                    <div class="card-seo-pinterest__dots">
+                        <div class="card-seo-pinterest__dot"></div>
+                        <div class="card-seo-pinterest__dot"></div>
+                        <div class="card-seo-pinterest__dot"></div>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <script type="text/javascript">
+            var x = document.getElementsByClassName("{{ previewElementId }}-Pinterest-post-image");
+            var i;
+            for (i = 0; i < x.length; i++) {
+                x[i].style.backgroundImage = "url('" + "{{ baseAssetsUrl ~ '/img/no_image_set.png' }}" + "')";
+                {% if ogImageArray.content is defined and ogImageArray.content |length %}
+                {% set cacheBustString = "" %}
+                {% if "?" not in ogImageArray.content %}
+                    {% set cacheBustString = "?mtime=" ~ now|date('U') %}
+                {% endif %}
+                x[i].style.backgroundImage = "url('" + "{{ (ogImageArray.content ~ cacheBustString) | raw }}" + "')";
+                {% endif %}
+            }
+        </script>
+    </div>
+</div>

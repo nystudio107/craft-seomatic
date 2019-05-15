@@ -65,6 +65,15 @@ class Settings extends VarsModel
     public $displayPreviewSidebar = true;
 
     /**
+     * @var array The social media platforms that should be displayed in the SEO Preview sidebar
+     */
+    public $sidebarDisplayPreviewTypes = [
+        'google',
+        'twitter',
+        'facebook'
+    ];
+
+    /**
      * @var bool Should SEOmatic display the SEO Analysis sidebar?
      */
     public $displayAnalysisSidebar = true;
@@ -160,6 +169,7 @@ class Settings extends VarsModel
             ['maxDescriptionLength', 'default', 'value' => 155],
             [
                 [
+                    'sidebarDisplayPreviewTypes',
                     'defaultSeoElementTypes',
                 ],
                 ArrayValidator::class,

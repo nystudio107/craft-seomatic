@@ -103,9 +103,30 @@
             id: "displayPreviewSidebar",
             name: "displayPreviewSidebar",
             on: settings.displayPreviewSidebar,
+            toggle: "woofer",
             warning: configWarning("displayPreviewSidebar", "seomatic"),
             errors: settings.getErrors("displayPreviewSidebar"),
         }) }}
+
+        <div id="woofer" class="{% if not settings.displayPreviewSidebar %}hidden{% endif %}">
+            {{ forms.checkboxSelectField({
+                label: "Sidebar SEO Preview Sites"|t("seomatic"),
+                instructions: "The social media platforms that should be displayed in the SEO Preview sidebar"|t,
+                id: 'sidebarDisplayPreviewTypes',
+                name: 'sidebarDisplayPreviewTypes',
+                options: {
+                    'google': 'Google'|t('seomatic'),
+                    'twitter': 'Twitter'|t('seomatic'),
+                    'facebook': 'Facebook'|t('seomatic'),
+                    'linkedin': 'LinkedIn'|t('seomatic'),
+                    'pinterest': 'Pinterest'|t('seomatic'),
+                    'slack': 'Slack'|t('seomatic'),
+                },
+                values: settings.sidebarDisplayPreviewTypes,
+                warning: false,
+                errors: settings.getErrors("sidebarDisplayPreviewTypes"),
+            }) }}
+        </div>
 
 {# @TODO: This will be added an upcoming "pro" edition
 

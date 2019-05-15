@@ -53,6 +53,13 @@ return [
     // Should SEOmatic display the SEO Preview sidebar?
     'displayPreviewSidebar' => true,
 
+    // The social media platforms that should be displayed in the SEO Preview sidebar
+    'sidebarDisplayPreviewTypes' => [
+        'google',
+        'twitter',
+        'facebook'
+    ],
+
     // Should SEOmatic display the SEO Analysis sidebar?
     'displayAnalysisSidebar' => true,
 
