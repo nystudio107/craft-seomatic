@@ -735,3 +735,53 @@ h4.metadata-title-separator span {
     background-size: cover;
     background-position: 50%
 }
+
+
+.card-seo-discord {
+    display: flex;
+    font-family: 'Whitney', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    font-size: 15px;
+    line-height: 1.46666667;
+    word-wrap: break-word;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility
+}
+
+.card-seo-discord__bar {
+    flex-shrink: 0;
+    width: 4px;
+    background-color: #e8e8e8;
+    border-radius: 8px
+}
+
+.card-seo-discord__content {
+    padding: 0 12px;
+    max-width: 520px
+}
+
+.card-seo-discord__link {
+    color: #717274;
+    flex: 1;
+    overflow: hidden;
+    word-wrap: break-word
+}
+
+.card-seo-discord__title {
+    color: #0576b9;
+    font-weight: 700;
+    font-variant-ligatures: common-ligatures
+}
+
+.card-seo-discord__description {
+    color: #2c2d30
+}
+
+.card-seo-discord__image {
+    border-radius: 8px;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
+    margin-top: 5px;
+    max-width: 360px;
+    height: 189px;
+    background-size: cover;
+    background-position: 50%
+}
