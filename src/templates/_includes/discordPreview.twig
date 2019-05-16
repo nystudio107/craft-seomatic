@@ -2,6 +2,7 @@
 {% set ogDescriptionArray = seomatic.tag.get('og:description').renderAttributes() %}
 {% set ogImageArray = seomatic.tag.get('og:image').renderAttributes() %}
 {% set canonicalArray = seomatic.link.get('canonical').renderAttributes() %}
+{% set ogSiteNameArray = seomatic.tag.get('og:site_name').renderAttributes() %}
 
 {% set lg = false %}
 {% if seomatic.meta.twitterCard == "summary_large_image" %}
@@ -13,32 +14,29 @@
 <div class="preview-column">
     <div class="displaypreview" style="{{ displayPreviewInlineStyles ?? '' }}">
         {% if showSeoTitleNames %}
-            <h4 class="metadata-title-separator"><span>Slack</span></h4>
+            <h4 class="metadata-title-separator"><span>Discord</span></h4>
         {% endif %}
         <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
-            <div class="card-seo-slack">
-                <div class="card-seo-slack__bar"></div>
-                <div class="card-seo-slack__content">
+            <div class="card-seo-discord">
+                <div class="card-seo-discord__bar"></div>
+                <div class="card-seo-discord__content">
                     <div class="flex">
-                        {#
-                        <img class="card-seo-slack__favicon js-preview-favicon" src="">
-                        #}
-                        <span class="card-seo-slack__link js-preview-site-name">
-                            {{ siteUrl | replace({'http://': ''}) | replace({'https://': ''})  | replace({'/': ''}) }}
+                        <span class="card-seo-discord__link js-preview-site-name">
+                            {{ (ogSiteNameArray.content ?? "") }}
                         </span>
                     </div>
-                    <div class="card-seo-slack__title js-preview-title">
+                    <div class="card-seo-discord__title js-preview-title">
                         {{ (ogTitleArray.content ?? "") }}
                     </div>
-                    <span class="card-seo-slack__description js-preview-description">
+                    <span class="card-seo-discord__description js-preview-description">
                         {{ (ogDescriptionArray.content ?? "") }}
                     </span>
-                    <div class="card-seo-slack__image js-preview-image js-slack-image {{ previewElementId }}-Slack-post-image"></div>
+                    <div class="card-seo-discord__image js-preview-image js-discord-image {{ previewElementId }}-Discord-post-image"></div>
                 </div>
             </div>
         </a>
         <script type="text/javascript">
-            var x = document.getElementsByClassName("{{ previewElementId }}-Slack-post-image");
+            var x = document.getElementsByClassName("{{ previewElementId }}-Discord-post-image");
             var i;
             for (i = 0; i < x.length; i++) {
                 x[i].style.backgroundImage = "url('" + "{{ baseAssetsUrl ~ '/img/no_image_set.png' }}" + "')";

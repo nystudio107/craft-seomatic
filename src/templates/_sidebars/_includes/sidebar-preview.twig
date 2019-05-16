@@ -42,5 +42,9 @@
             {% include "seomatic/_includes/slackPreview.twig" %}
         {% endif %}
 
+        {% if 'discord' in previewTypes %}
+            {% include "seomatic/_includes/discordPreview.twig" %}
+        {% endif %}
+
     </div>
 </div>
