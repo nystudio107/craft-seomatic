@@ -736,6 +736,14 @@ h4.metadata-title-separator span {
     background-position: 50%
 }
 
+.card-seo-slack__image-summary {
+    float: right;
+    width: 150px;
+    height: auto;
+    min-height: 84px;
+    max-height: 150px;
+    margin: 4px;
+}
 
 .card-seo-discord {
     display: flex;
@@ -784,4 +792,13 @@ h4.metadata-title-separator span {
     height: 189px;
     background-size: cover;
     background-position: 50%
+}
+
+.card-seo-discord__image-summary {
+    float: right;
+    width: 150px;
+    height: auto;
+    min-height: 84px;
+    max-height: 150px;
+    margin: 4px;
 }
