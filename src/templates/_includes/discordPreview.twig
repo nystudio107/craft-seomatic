@@ -16,25 +16,47 @@
         {% if showSeoTitleNames %}
             <h4 class="metadata-title-separator"><span>Discord</span></h4>
         {% endif %}
-        <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
-            <div class="card-seo-discord">
-                <div class="card-seo-discord__bar"></div>
-                <div class="card-seo-discord__content">
-                    <div class="flex">
-                        <span class="card-seo-discord__link js-preview-site-name">
-                            {{ (ogSiteNameArray.content ?? "") }}
+        {% if lg %}
+            <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
+                <div class="card-seo-discord">
+                    <div class="card-seo-discord__bar"></div>
+                    <div class="card-seo-discord__content">
+                        <div class="flex">
+                            <span class="card-seo-discord__link js-preview-site-name">
+                                {{ (ogSiteNameArray.content ?? "") }}
+                            </span>
+                        </div>
+                        <div class="card-seo-discord__title js-preview-title">
+                            {{ (ogTitleArray.content ?? "") }}
+                        </div>
+                        <span class="card-seo-discord__description js-preview-description">
+                            {{ (ogDescriptionArray.content ?? "") }}
+                        </span>
+                        <div class="card-seo-discord__image js-preview-image js-discord-image {{ previewElementId }}-Discord-post-image"></div>
+                    </div>
+                </div>
+            </a>
+        {% else %}
+            <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
+                <div class="card-seo-discord">
+                    <div class="card-seo-discord__bar"></div>
+                    <div class="card-seo-discord__content">
+                        <div class="flex">
+                            <span class="card-seo-discord__link js-preview-site-name">
+                                {{ (ogSiteNameArray.content ?? "") }}
+                            </span>
+                        </div>
+                        <div class="card-seo-discord__title js-preview-title">
+                            {{ (ogTitleArray.content ?? "") }}
+                        </div>
+                        <div class="card-seo-discord__image card-seo-discord__image-summary js-preview-image js-discord-image {{ previewElementId }}-Discord-post-image"></div>
+                        <span class="card-seo-discord__description js-preview-description">
+                            {{ (ogDescriptionArray.content ?? "") }}
                         </span>
                     </div>
-                    <div class="card-seo-discord__title js-preview-title">
-                        {{ (ogTitleArray.content ?? "") }}
-                    </div>
-                    <span class="card-seo-discord__description js-preview-description">
-                        {{ (ogDescriptionArray.content ?? "") }}
-                    </span>
-                    <div class="card-seo-discord__image js-preview-image js-discord-image {{ previewElementId }}-Discord-post-image"></div>
                 </div>
-            </div>
-        </a>
+            </a>
+        {% endif %}
         <script type="text/javascript">
             var x = document.getElementsByClassName("{{ previewElementId }}-Discord-post-image");
             var i;

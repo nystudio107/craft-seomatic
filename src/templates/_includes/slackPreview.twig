@@ -15,28 +15,53 @@
         {% if showSeoTitleNames %}
             <h4 class="metadata-title-separator"><span>Slack</span></h4>
         {% endif %}
-        <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
-            <div class="card-seo-slack">
-                <div class="card-seo-slack__bar"></div>
-                <div class="card-seo-slack__content">
-                    <div class="flex">
-                        {#
-                        <img class="card-seo-slack__favicon js-preview-favicon" src="">
-                        #}
-                        <span class="card-seo-slack__link js-preview-site-name">
-                            {{ siteUrl | replace({'http://': ''}) | replace({'https://': ''})  | replace({'/': ''}) }}
+        {% if lg %}
+            <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
+                <div class="card-seo-slack">
+                    <div class="card-seo-slack__bar"></div>
+                    <div class="card-seo-slack__content">
+                        <div class="flex">
+                            {#
+                            <img class="card-seo-slack__favicon js-preview-favicon" src="">
+                            #}
+                            <span class="card-seo-slack__link js-preview-site-name">
+                                {{ siteUrl | replace({'http://': ''}) | replace({'https://': ''})  | replace({'/': ''}) }}
+                            </span>
+                        </div>
+                        <div class="card-seo-slack__title js-preview-title">
+                            {{ (ogTitleArray.content ?? "") }}
+                        </div>
+                        <span class="card-seo-slack__description js-preview-description">
+                            {{ (ogDescriptionArray.content ?? "") }}
+                        </span>
+                        <div class="card-seo-slack__image js-preview-image js-slack-image {{ previewElementId }}-Slack-post-image"></div>
+                    </div>
+                </div>
+            </a>
+        {% else %}
+            <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
+                <div class="card-seo-slack">
+                    <div class="card-seo-slack__bar"></div>
+                    <div class="card-seo-slack__content">
+                        <div class="flex">
+                            {#
+                            <img class="card-seo-slack__favicon js-preview-favicon" src="">
+                            #}
+                            <span class="card-seo-slack__link js-preview-site-name">
+                                {{ siteUrl | replace({'http://': ''}) | replace({'https://': ''})  | replace({'/': ''}) }}
+                            </span>
+                        </div>
+                        <div class="card-seo-slack__title js-preview-title">
+                            {{ (ogTitleArray.content ?? "") }}
+                        </div>
+                        <div class="card-seo-slack__image card-seo-slack__image-summary js-preview-image js-slack-image {{ previewElementId }}-Slack-post-image"></div>
+                        <span class="card-seo-slack__description js-preview-description">
+                            {{ (ogDescriptionArray.content ?? "") }}
                         </span>
                     </div>
-                    <div class="card-seo-slack__title js-preview-title">
-                        {{ (ogTitleArray.content ?? "") }}
-                    </div>
-                    <span class="card-seo-slack__description js-preview-description">
-                        {{ (ogDescriptionArray.content ?? "") }}
-                    </span>
-                    <div class="card-seo-slack__image js-preview-image js-slack-image {{ previewElementId }}-Slack-post-image"></div>
                 </div>
-            </div>
-        </a>
+            </a>
+        {% endif %}
         <script type="text/javascript">
             var x = document.getElementsByClassName("{{ previewElementId }}-Slack-post-image");
             var i;
