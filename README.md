@@ -1764,7 +1764,7 @@ You must as least pass in the URI you want metadata for:
 
 ```gql
 {
-  seoMatic (uri: "/") {
+  seomatic (uri: "/") {
       metaTitleContainer
       metaTagContainer
       metaLinkContainer
@@ -1780,7 +1780,7 @@ You must as least pass in the URI you want metadata for:
 
 ```gql
 {
-  seoMatic (uri: "/", siteId: 1) {
+  seomatic (uri: "/", siteId: 1) {
       metaTitleContainer
       metaTagContainer
       metaLinkContainer
@@ -1791,6 +1791,24 @@ You must as least pass in the URI you want metadata for:
 ```
 
 ![Screenshot](resources/screenshots/seomatic-craftql-query.png)
+
+You can also piggyback on an entries query, to return all of your data for an entry as well as the SEOmatic metadata in one request:
+```gql
+{
+  entry(section: homepage) {
+    title
+    seomatic {
+      metaTitleContainer
+      metaTagContainer
+      metaLinkContainer
+      metaScriptContainer
+      metaJsonLdContainer
+    }
+  }
+}
+```
+
+In this case, no arguments are passed in, because the URI and siteId will be taken from the parent Entry element.
 
 ## SEOmatic Roadmap
 
