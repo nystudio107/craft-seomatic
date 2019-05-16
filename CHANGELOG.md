@@ -5,6 +5,7 @@
 * Added CraftQL support for fetching SEOmatic container data
 * Added a `SeoElementInterface` to abstract out the support for custom elements
 * Added support for Solspace Calendar events for custom metadata, JSON-LD, etc.
+* SEO Settings fields now default to whatever the parent element's Content SEO settings are when instantiating it
 
 ### Changed
 * Changed paginated `rel="alternate"` URLs to always point to the first page in other languages, not the paginated page (that may or may not exist)
