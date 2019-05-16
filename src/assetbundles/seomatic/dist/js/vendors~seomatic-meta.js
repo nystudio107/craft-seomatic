@@ -2,8 +2,8 @@
  * @project        SEOmatic
  * @name           vendors~seomatic-meta.js
  * @author         Andrew Welch
- * @build          Wed, May 15, 2019 6:30 PM ET
- * @release        5b104298cd8e4a6a6e2bc12bb33a54908c7e9f99 [develop]
+ * @build          Thu, May 16, 2019 2:47 PM ET
+ * @release        c1dc2829de1299a4a4d3e0154cc86b61785bfd9d [develop]
  * @copyright      Copyright (c) 2019 nystudio107
  *
  */
