@@ -222,6 +222,22 @@ class SeoSettings extends Field implements PreviewableFieldInterface
                 $config['metaGlobalVars']['mainEntityOfPage'] = $mainEntity;
             }
         }
+        // Try to get a meta bundle for this elements's section, and use its defaults
+        if ($element !== null) {
+            list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
+                = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
+            $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
+                $sourceBundleType,
+                $sourceId,
+                $sourceSiteId
+            );
+            if ($metaBundle) {
+                $config = ArrayHelper::merge(
+                    $metaBundle->getAttributes(),
+                    $config
+                );
+            }
+        }
         // Create a new meta bundle with propagated defaults
         $metaBundleDefaults = ArrayHelper::merge(
             ConfigHelper::getConfigFromFile('fieldmeta/Bundle'),
