@@ -1796,13 +1796,16 @@ You can also piggyback on an entries query, to return all of your data for an en
 ```gql
 {
   entry(section: homepage) {
+    id
     title
-    seomatic {
-      metaTitleContainer
-      metaTagContainer
-      metaLinkContainer
-      metaScriptContainer
-      metaJsonLdContainer
+    ... on Homepage {
+      seomatic {
+        metaTitleContainer
+        metaTagContainer
+        metaLinkContainer
+        metaScriptContainer
+        metaJsonLdContainer
+      }
     }
   }
 }
