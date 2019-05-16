@@ -2,8 +2,8 @@
  * @project        SEOmatic
  * @name           vendors~javascript-editor~twig-editor.js
  * @author         Andrew Welch
- * @build          Thu, May 16, 2019 2:47 PM ET
- * @release        c1dc2829de1299a4a4d3e0154cc86b61785bfd9d [develop]
+ * @build          Thu, May 16, 2019 7:11 PM ET
+ * @release        a6a604eeba24a44732770f80e544b70dcf398a95 [develop]
  * @copyright      Copyright (c) 2019 nystudio107
  *
  */
