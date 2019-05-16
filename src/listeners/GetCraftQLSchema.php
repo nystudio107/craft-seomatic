@@ -9,9 +9,6 @@
 
 namespace nystudio107\seomatic\listeners;
 
-use craft\base\Element;
-use craft\elements\Entry;
-
 use nystudio107\seomatic\helpers\Container as ContainerHelper;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 use nystudio107\seomatic\models\MetaLinkContainer;
@@ -19,7 +16,10 @@ use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\MetaTitleContainer;
 use nystudio107\seomatic\models\MetaTagContainer;
 
+use craft\base\Element;
+
 use markhuot\CraftQL\Events\AlterSchemaFields;
+use markhuot\CraftQL\Builders\Field as FieldBuilder;
 
 /**
  * @author    nystudio107
@@ -55,12 +55,12 @@ class GetCraftQLSchema
         foreach (self::CRAFT_QL_FIELDS as $fieldHandle => $containerType) {
             $seomaticField
                 ->addStringField($fieldHandle)
-                ->resolve(function (Element $element) use ($containerType) {
+                ->resolve(function (array $data) use ($containerType) {
                     // $root contains the data returned by the field below
                     $result = ContainerHelper::getContainerArrays(
                         [$containerType],
-                        $element->uri,
-                        $element->siteId,
+                        $data['uri'],
+                        $data['siteId'],
                         false
                     );
 
@@ -69,22 +69,28 @@ class GetCraftQLSchema
         }
         // Add the root
         $event->schema->addField('seomatic')
-            ->arguments(function (\markhuot\CraftQL\Builders\Field $field) {
+            ->arguments(function (FieldBuilder $field) {
                 $field->addIntArgument('siteId');
-                $field->addStringArgument('uri')->nonNull();
+                $field->addStringArgument('uri');
             })
             ->type($seomaticField)
             ->resolve(function ($root, $args, $context, $info) {
-                $uri = trim($args['uri'] === '/' ? '__home__' : $args['uri'], '/');
-
-                // Return an entry that meets the passed in criteria.
-                $criteria = Entry::find()
-                    ->uri($uri);
-                if (!empty($args['siteId'])) {
-                    $criteria->siteId($args['siteId']);
+                // If our root is an Element, extract the URI and siteId from it
+                if ($root instanceof Element) {
+                    /** Element $root */
+                    $uri = $root->uri;
+                    $siteId = $root->siteId;
+                } else {
+                    // Otherwise use the passed in arguments, or defaults
+                    $uri = $args['uri'] ?? '/';
+                    $siteId = $args['siteId'] ?? null;
                 }
+                $uri = trim($uri === '/' ? '__home__' : $uri, '/');
 
-                return $criteria->one();
+                return [
+                    'uri' => $uri,
+                    'siteId' => $siteId
+                ];
             });
     }
 }
