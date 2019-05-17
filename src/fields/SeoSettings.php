@@ -233,7 +233,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             );
             if ($metaBundle) {
                 $config = ArrayHelper::merge(
-                    $metaBundle->getAttributes(),
+                    $metaBundle->toArray(),
                     $config
                 );
             }
