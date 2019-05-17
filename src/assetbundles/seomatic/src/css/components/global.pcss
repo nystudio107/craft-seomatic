@@ -228,3 +228,44 @@ div.displaypreview {
   border: 1px solid #EEE;
   padding: 30px;
 }
+
+ul.checkboxChecklist {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li.checkboxChecklist {
+  position: relative;
+  list-style-type: none!important;
+  color: #8B0100;
+}
+
+li.checkboxChecklist.checked {
+  color: #008002;
+}
+
+li.checkboxChecklist label {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  top: 3px;
+  left: -22px;
+  background: transparent;
+  border:1px solid;
+}
+
+li.checkboxChecklist.checked label:after {
+  content: '';
+  position: absolute;
+  width: 9px;
+  height: 5px;
+  background: transparent;
+  top: 2px;
+  left: 2px;
+  border: 2px solid;
+  border-top: none;
+  border-right: none;
+
+  transform: rotate(-45deg);
+}
