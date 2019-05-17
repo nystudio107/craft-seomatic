@@ -51,27 +51,26 @@ class SettingsController extends Controller
     ];
 
     const SEO_SETUP_FIELDS = [
-        'mainEntityOfPage',
-        'seoTitle',
-        'seoDescription',
-        'seoKeywords',
-        'seoImage',
-        'seoImageDescription',
+        'mainEntityOfPage' => 'Main Entity of Page',
+        'seoTitle' => 'SEO Title',
+        'seoDescription' => 'SEO Description',
+        'seoKeywords' => 'SEO Keywords',
+        'seoImage' => 'SEO Image',
+        'seoImageDescription' => 'SEO Image Description',
     ];
 
     const SITE_SETUP_FIELDS = [
-        'siteName',
-        'twitterHandle',
-        'facebookProfileId',
+        'siteName' => 'Site Name',
+        'twitterHandle' => 'Twitter Handle',
+        'facebookProfileId' => 'Facebook Profile ID',
     ];
 
     const IDENTITY_SETUP_FIELDS = [
-        'siteType',
-        'computedType',
-        'genericName',
-        'genericDescription',
-        'genericUrl',
-        'genericImage',
+        'computedType' => 'Identity Entity Type',
+        'genericName' => 'Identity Entity Name',
+        'genericDescription' => 'Identity Entity Description',
+        'genericUrl' => 'Identity Entity URL',
+        'genericImage' => 'Identity Entity Brand',
     ];
 
     // Protected Properties
@@ -147,12 +146,19 @@ class SettingsController extends Controller
         $numGrades = \count(self::SETUP_GRADES);
         // Content SEO grades
         $variables['metaBundles'] = Seomatic::$plugin->metaBundles->getContentMetaBundlesForSiteId($siteId);
+        $variables['contentSetupChecklistCutoff'] = floor($numFields / 2);
+        $variables['contentSetupChecklist'] = [];
         Seomatic::$plugin->metaBundles->pruneVestigialMetaBundles($variables['metaBundles']);
         /** @var MetaBundle $metaBundle */
         foreach ($variables['metaBundles'] as $metaBundle) {
             $stat = 0;
-            foreach (self::SEO_SETUP_FIELDS as $setupField) {
+            foreach (self::SEO_SETUP_FIELDS as $setupField => $setupLabel) {
                 $stat += (int)!empty($metaBundle->metaGlobalVars[$setupField]);
+                $value = $variables['contentSetupChecklist'][$setupField]['value'] ?? 0;
+                $variables['contentSetupChecklist'][$setupField] = [
+                    'label' => $setupLabel,
+                    'value' => $value + (int)!empty($metaBundle->metaGlobalVars[$setupField]),
+                ];
             }
             $stat = round($numGrades - (($stat * $numGrades) / $numFields));
             if ($stat >= $numGrades) {
@@ -164,21 +170,35 @@ class SettingsController extends Controller
         Seomatic::$previewingMetaContainers = true;
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle((int)$siteId);
         Seomatic::$previewingMetaContainers = false;
-        $stat = 0;
         if ($metaBundle !== null) {
-            foreach (self::SEO_SETUP_FIELDS as $setupField) {
+            $stat = 0;
+            $variables['globalSetupChecklist'] = [];
+            foreach (self::SEO_SETUP_FIELDS as $setupField => $setupLabel) {
                 $stat += (int)!empty($metaBundle->metaGlobalVars[$setupField]);
+                $variables['globalSetupChecklist'][$setupField] = [
+                    'label' => $setupLabel,
+                    'value' => (int)!empty($metaBundle->metaGlobalVars[$setupField]),
+                ];
             }
             $stat = round(($stat / $numFields) * 100);
             $variables['globalSetupStat'] = $stat;
             // Site Settings grades
             $numFields = \count(self::SITE_SETUP_FIELDS) + \count(self::IDENTITY_SETUP_FIELDS);
             $stat = 0;
-            foreach (self::SITE_SETUP_FIELDS as $setupField) {
+            $variables['siteSetupChecklist'] = [];
+            foreach (self::SITE_SETUP_FIELDS as $setupField => $setupLabel) {
                 $stat += (int)!empty($metaBundle->metaSiteVars[$setupField]);
+                $variables['siteSetupChecklist'][$setupField] = [
+                    'label' => $setupLabel,
+                    'value' => (int)!empty($metaBundle->metaSiteVars[$setupField]),
+                ];
             }
-            foreach (self::IDENTITY_SETUP_FIELDS as $setupField) {
+            foreach (self::IDENTITY_SETUP_FIELDS as $setupField => $setupLabel) {
                 $stat += (int)!empty($metaBundle->metaSiteVars->identity[$setupField]);
+                $variables['siteSetupChecklist'][$setupField] = [
+                    'label' => $setupLabel,
+                    'value' => (int)!empty($metaBundle->metaSiteVars[$setupField]),
+                ];
             }
             $stat = round(($stat / $numFields) * 100);
             $variables['siteSetupStat'] = $stat;

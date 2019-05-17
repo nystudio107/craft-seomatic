@@ -100,12 +100,10 @@
                     </div>
                     <div style="text-align: left; margin: 0 auto; display: inline-block; padding-top: 10px;">
                         <h4>Global SEO Setup Checklist:</h4>
-                        <ul>
-                            <li>Main Entity of Page</li>
-                            <li>SEO Title</li>
-                            <li>SEO Description</li>
-                            <li>SEO Image</li>
-                            <li>SEO Image Description</li>
+                        <ul class="checkboxChecklist">
+                            {% for item in globalSetupChecklist %}
+                                <li class="checkboxChecklist {% if item.value %}checked{% endif %}"><label></label>{{ item.label }}</li>
+                            {% endfor %}
                         </ul>
                     </div>
                     {% else %}
@@ -145,12 +143,10 @@
                     </div>
                     <div style="text-align: left; margin: 0 auto; display: inline-block;">
                         <h4>Content SEO Setup Checklist:</h4>
-                        <ul>
-                            <li>Main Entity of Page</li>
-                            <li>SEO Title</li>
-                            <li>SEO Description</li>
-                            <li>SEO Image</li>
-                            <li>SEO Image Description</li>
+                        <ul class="checkboxChecklist">
+                            {% for item in contentSetupChecklist %}
+                                <li class="checkboxChecklist {% if item.value > contentSetupChecklistCutoff %}checked{% endif %}"><label></label>{{ item.label }}</li>
+                            {% endfor %}
                         </ul>
                     </div>
                     {% else %}
@@ -179,15 +175,10 @@
                     </div>
                     <div style="text-align: left; margin: 0 auto; display: inline-block; padding-top: 10px;">
                         <h4>Site Settings Setup Checklist:</h4>
-                        <ul>
-                            <li>Site Name</li>
-                            <li>Twitter Handle</li>
-                            <li>Facebook Profile ID</li>
-                            <li>Identity Main Entity of Page</li>
-                            <li>Identity Entity Name</li>
-                            <li>Identity Entity Description</li>
-                            <li>Identity Entity URL</li>
-                            <li>Identity Entity Brand</li>
+                        <ul class="checkboxChecklist">
+                            {% for item in siteSetupChecklist %}
+                                <li class="checkboxChecklist {% if item.value %}checked{% endif %}"><label></label>{{ item.label }}</li>
+                            {% endfor %}
                         </ul>
                     </div>
                     {% else %}
