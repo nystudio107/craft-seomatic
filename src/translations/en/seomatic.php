@@ -380,5 +380,11 @@ return [
     'Miscellaneous site-wide SEO settings.' => 'Miscellaneous site-wide SEO settings.',
     'Determines where in the HTML document the script renders.' => 'Determines where in the HTML document the script renders.',
     'Determines where in the `<body>` the script renders.' => 'Determines where in the `<body>` the script renders.',
-    'Miscallaneous site-wide SEO settings.' => 'Miscallaneous site-wide SEO settings.'
+    'Miscallaneous site-wide SEO settings.' => 'Miscallaneous site-wide SEO settings.',
+    'LinkedIn' => 'LinkedIn',
+    'Sidebar SEO Preview Sites' => 'Sidebar SEO Preview Sites',
+    'The social media platforms that should be displayed in the SEO Preview sidebar' => 'The social media platforms that should be displayed in the SEO Preview sidebar',
+    'Slack' => 'Slack',
+    'Pinterest' => 'Pinterest',
+    'Discord' => 'Discord',
 ];
