@@ -138,10 +138,12 @@ class MetaBundles extends Component
                 'sourceId' => $metaBundle->sourceId,
                 'sourceSiteId' => $siteId,
             ]);
+
             if (!$metaBundleRecord) {
                 $metaBundleRecord = new MetaBundleRecord();
             }
             $metaBundleRecord->setAttributes($metaBundle->getAttributes(), false);
+
             if ($metaBundleRecord->save()) {
                 Craft::info(
                     'Meta bundle updated: '
@@ -656,7 +658,7 @@ class MetaBundles extends Component
                     $metaBundle
                 );
             } else {
-                $sourceModel = $seoElement::sourceModelFromId($metaBundle->sourceSiteId);
+                $sourceModel = $seoElement::sourceModelFromId($metaBundle->sourceId);
                 if ($sourceModel) {
                     $metaBundle = $this->createMetaBundleFromSeoElement(
                         $seoElement,
