@@ -82,6 +82,7 @@
             <div class="flex" style="align-items: flex-start; text-align:center; margin:0 auto; padding: 5% 0;">
                 <div class="flex-grow">
                     {% if globalSetupStat is defined and globalSetupStat | length %}
+                    {% set checklistLink = cpUrl('seomatic/global/general/' ~ currentSiteHandle) %}
                     <h2 class="centeralign" style="font-weight: 200;">Global SEO Setup</h2>
                     <div id="GlobalSEOChart" style="width: 300px; margin: 0 auto;">
                         {% set colors = [
@@ -93,7 +94,7 @@
                         <dashboard-radial-chart :series="[{{ globalSetupStat }}]"
                                                 :colors="[{{ colors | join(',') | raw }}]"
                                                 :labels="[{{ grades | join(',') | raw }}]"
-                                                :url="'{{ cpUrl('seomatic/global/general/' ~ currentSiteHandle) | raw }}'"
+                                                :url="'{{ checklistLink | raw }}'"
                         >
 
                         </dashboard-radial-chart>
@@ -102,7 +103,12 @@
                         <h4>Global SEO Setup Checklist:</h4>
                         <ul class="checkboxChecklist">
                             {% for item in globalSetupChecklist %}
-                                <li class="checkboxChecklist {% if item.value %}checked{% endif %}"><label></label>{{ item.label }}</li>
+                                <li class="checkboxChecklist {% if item.value %}checked{% endif %}">
+                                    <label></label>
+                                    <a href="{{ checklistLink }}">
+                                        {{ item.label }}
+                                    </a>
+                                </li>
                             {% endfor %}
                         </ul>
                     </div>
@@ -114,6 +120,7 @@
                 </div>
                 <div class="flex-grow">
                     {% if contentSetupStats is defined and contentSetupStats | length %}
+                    {% set checklistLink = cpUrl('seomatic/content/' ~ currentSiteHandle) %}
                     <h2 class="centeralign" style="font-weight: 200;">Content SEO Setup</h2>
                     <div id="ContentSEOChart" style="width: 300px; margin: 0 auto;">
                         {% set colors = [
@@ -136,7 +143,7 @@
                         <dashboard-multi-radial-chart :series="[{{ contentStats | join(',')  }}]"
                                                       :colors="[{{ colors | join(',') | raw }}]"
                                                       :labels="['A', 'B', 'C', 'D']"
-                                                      :url="'{{ cpUrl('seomatic/content/' ~ currentSiteHandle) | raw }}'"
+                                                      :url="'{{ checklistLink | raw }}'"
                         >
 
                         </dashboard-multi-radial-chart>
@@ -145,7 +152,12 @@
                         <h4>Content SEO Setup Checklist:</h4>
                         <ul class="checkboxChecklist">
                             {% for item in contentSetupChecklist %}
-                                <li class="checkboxChecklist {% if item.value > contentSetupChecklistCutoff %}checked{% endif %}"><label></label>{{ item.label }}</li>
+                                <li class="checkboxChecklist {% if item.value > contentSetupChecklistCutoff %}checked{% endif %}">
+                                    <label></label>
+                                    <a href="{{ checklistLink }}">
+                                        {{ item.label }}
+                                    </a>
+                                </li>
                             {% endfor %}
                         </ul>
                     </div>
@@ -157,6 +169,8 @@
                 </div>
                 <div class="flex-grow">
                     {% if siteSetupStat is defined and siteSetupStat | length %}
+                    {% set checklistLink = cpUrl('seomatic/site/identity/' ~ currentSiteHandle) %}
+                    {% set checklistSocialLink = cpUrl('seomatic/site/social/' ~ currentSiteHandle) %}
                     <h2 class="centeralign" style="font-weight: 200;">Site Settings Setup</h2>
                     <div id="SiteSettingsChart" style="width: 300px; margin: 0 auto;">
                         {% set colors = [
@@ -168,7 +182,7 @@
                         <dashboard-radial-chart :series="[{{ siteSetupStat }}]"
                                                 :colors="[{{ colors | join(',') | raw }}]"
                                                 :labels="[{{ grades | join(',') | raw }}]"
-                                                :url="'{{ cpUrl('seomatic/site/identity/' ~ currentSiteHandle) | raw }}'"
+                                                :url="'{{ checklistLink | raw }}'"
                         >
 
                         </dashboard-radial-chart>
@@ -176,8 +190,17 @@
                     <div style="text-align: left; margin: 0 auto; display: inline-block; padding-top: 10px;">
                         <h4>Site Settings Setup Checklist:</h4>
                         <ul class="checkboxChecklist">
-                            {% for item in siteSetupChecklist %}
-                                <li class="checkboxChecklist {% if item.value %}checked{% endif %}"><label></label>{{ item.label }}</li>
+                            {% for key,item in siteSetupChecklist %}
+                                {% set thisLink = checklistLink %}
+                                {% if key == "twitterHandle" or key == "facebookProfileId" %}
+                                    {% set thisLink = checklistSocialLink %}
+                                {% endif %}
+                                <li class="checkboxChecklist {% if item.value %}checked{% endif %}">
+                                    <label></label>
+                                    <a href="{{ thisLink }}">
+                                        {{ item.label }}
+                                    </a>
+                                </li>
                             {% endfor %}
                         </ul>
                     </div>
