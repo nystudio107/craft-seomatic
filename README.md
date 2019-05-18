@@ -467,7 +467,7 @@ The Plugin Settings lets you control various SEOmatic settings globally (across 
 * **HTTP Headers Enabled** - Controls whether SEOmatic will automatically add `X-Robots-Tag`, `canonical`, & `Referrer-Policy` to the http response headers.
 * **Environment** - The server environment, either `live`, `staging`, or `local`. If `devMode` is on, SEOmatic will override this setting to local Development. This setting controls whether certain things render; for instance only in the `live` production environment will Google Analytics and other tracking tags send analytics data. SEOmatic also automatically sets the `robots` tag to `none` for everything but the `live` production environment.
 * **Display Sidebar SEO Preview** - Controls whether to display the Google, Twitter, and Facebook social media previews in the sidebar on entry. category, and product pages.
-* **** - 
+* **Sidebar SEO Preview Sites** - The social media platforms that should be displayed in the SEO Preview sidebar
 * **devMode `<title>` prefix** - If devMode is on, prefix the `<title>` with this string
 * **Control Panel `<title>` prefix** - Prefix the Control Panel `<title>` with this string
 * **devMode Control Panel `<title>` prefix** - If devMode is on, prefix the Control Panel `<title>` with this string
@@ -485,7 +485,6 @@ If you're using a multi-environment config, you can map your environment setting
 ```php
 <?php 
 return [
-    '*' => [
     // The public-facing name of the plugin
     'pluginName' => 'SEOmatic',
 
@@ -498,17 +497,33 @@ return [
     // Should sitemaps be regenerated automatically?
     'regenerateSitemapsAutomatically' => true,
 
+    // Should SEOmatic add to the http response headers?
+    'headersEnabled' => true,
+
     // The server environment, either `live`, `staging`, or `local`
     'environment' => 'live',
 
     // Should SEOmatic display the SEO Preview sidebar?
     'displayPreviewSidebar' => true,
 
+    // The social media platforms that should be displayed in the SEO Preview sidebar
+    'sidebarDisplayPreviewTypes' => [
+        'google',
+        'twitter',
+        'facebook'
+    ],
+
     // Should SEOmatic display the SEO Analysis sidebar?
     'displayAnalysisSidebar' => true,
 
     // If `devMode` is on, prefix the <title> with this string
     'devModeTitlePrefix' => '&#x1f6a7; ',
+
+     //  Prefix the Control Panel <title> with this string
+    'cpTitlePrefix' => '&#x2699; ',
+
+    // If `devMode` is on, prefix the Control Panel <title> with this string
+    'devModeCpTitlePrefix' => '&#x1f6a7;&#x2699; ',
 
     // The separator character to use for the `<title>` tag
     'separatorChar' => '|',
@@ -518,15 +533,18 @@ return [
 
     // The max number of characters in the `<meta name="description">` tag
     'maxDescriptionLength' => 155,
-    ],
-    'local' => [
-        'environment' => 'local',
-    ],
-    'staging' => [
-        'environment' => 'staging',
-    ],
-    'live' => [
-        'environment' => 'live',
+
+    // Site Groups define logically separate sites
+    'siteGroupsSeparate' => true,
+
+    // Whether to dynamically include the hreflang tags
+    'addHrefLang' => true,
+
+    // Should the meta generator tag and X-Powered-By header be included?
+    'generatorEnabled' => true,
+
+    // SeoElementInterface[] The default SeoElement type classes
+    'defaultSeoElementTypes' => [
     ],
 ];
 ```
@@ -579,7 +597,7 @@ Modern SEO works best if it actually reflects what is on the page, visible to th
 
 However, in some cases you may want more control over page SEO for specific entries. That's where the SEO Settings field comes in. Add it to your Section's Field Layout, and you can override specific SEO settings on a per-entry basis.
 
-Any setting that you leave blank or empty in the SEO Settings field will just default to the Content SEO and/or Global SEO setting.
+When a new entry is created with an SEO Settings field in it, the field values will default to the Content SEO settings for the Section that the field is in. Any setting that you leave blank or empty in the SEO Settings field will just default to the Content SEO and/or Global SEO setting.
 
 The Field settings let you control exactly what fields will appear and be visible for you or your client to override:
 
