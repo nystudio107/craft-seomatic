@@ -2,6 +2,8 @@
 
 ## 3.2.0 - 2019.05.20
 ### Added
+* Added SEO Previews for LinkedIn, Pinterest, Slack, and Discord
+* Added the ability to control what SEO Previews appear in the sidebar
 * Added CraftQL support for fetching SEOmatic container meta data
 * Added support for Solspace Calendar events for custom metadata, JSON-LD, etc.
 * SEO Settings fields now default to whatever the parent element's Content SEO settings are when instantiating it
