@@ -120,6 +120,9 @@ class MetaValue
             }
             if (\in_array($key, self::PARSE_ONCE, true)) {
                 $tries = 1;
+                if (is_string($value) && $value[0] !=='{') {
+                    $shouldParse = false;
+                }
             }
             if ($value !== null) {
                 $metaArray[$key] = self::parseString($value, $shouldAlias, $shouldParse, $tries);
@@ -178,14 +181,20 @@ class MetaValue
         $element = Seomatic::$matchedElement;
         /** @var Element $element */
         if ($element !== null) {
+            $refHandle = null;
+            // Get a fallback from the element's root class name
             try {
-                $reflector = new \ReflectionClass(FieldHelper::getElementRootClass($element));
+                $reflector = new \ReflectionClass($element);
             } catch (\ReflectionException $e) {
                 $reflector = null;
                 Craft::error($e->getMessage(), __METHOD__);
             }
             if ($reflector) {
-                $matchedElementType = strtolower($reflector->getShortName());
+                $refHandle = strtolower($reflector->getShortName());
+            }
+            // Prefer $element::refHandle()
+            $matchedElementType = $element::refHandle() ?? $refHandle ?? 'entry';
+            if ($matchedElementType) {
                 self::$templateObjectVars[$matchedElementType] = $element;
             }
         }
@@ -246,11 +255,11 @@ class MetaValue
                 if ($oldTemplateMode !== self::$view::TEMPLATE_MODE_SITE) {
                     self::$view->setTemplateMode($oldTemplateMode);
                 }
-            } catch (\Exception $e) {
+            } catch (\Throwable $e) {
                 $metaValue = Craft::t(
                     'seomatic',
                     'Error rendering `{template}` -> {error}',
-                    ['template' => $metaValue, 'error' => $e->getMessage()]
+                    ['template' => $metaValue, 'error' => $e->getMessage().' - '.print_r($metaValue, true)]
                 );
                 Craft::error($metaValue, __METHOD__);
                 // Restore the template mode

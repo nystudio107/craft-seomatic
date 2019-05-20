@@ -10,7 +10,7 @@
  */
 
 use nystudio107\seomatic\helpers\Config;
-use nystudio107\seomatic\services\MetaBundles;
+use nystudio107\seomatic\seoelements\SeoCategory;
 
 /**
  * @author    nystudio107
@@ -20,7 +20,7 @@ use nystudio107\seomatic\services\MetaBundles;
 
 return [
     'bundleVersion'              => '1.0.25',
-    'sourceBundleType'           => MetaBundles::CATEGORYGROUP_META_BUNDLE,
+    'sourceBundleType'           => SeoCategory::getMetaBundleType(),
     'sourceId'                   => null,
     'sourceName'                 => null,
     'sourceHandle'               => null,

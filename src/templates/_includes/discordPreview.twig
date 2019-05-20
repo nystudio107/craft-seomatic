@@ -1,0 +1,75 @@
+{% set ogTitleArray = seomatic.tag.get('og:title').renderAttributes() %}
+{% set ogDescriptionArray = seomatic.tag.get('og:description').renderAttributes() %}
+{% set ogImageArray = seomatic.tag.get('og:image').renderAttributes() %}
+{% set canonicalArray = seomatic.link.get('canonical').renderAttributes() %}
+{% set ogSiteNameArray = seomatic.tag.get('og:site_name').renderAttributes() %}
+
+{% set lg = false %}
+{% if seomatic.meta.twitterCard == "summary_large_image" %}
+    {% set lg = true %}
+{% endif %}
+
+{% set showSeoTitleNames = showSeoTitleNames ?? true %}
+{% set previewElementId = previewElementId ?? 0 %}
+<div class="preview-column">
+    <div class="displaypreview" style="{{ displayPreviewInlineStyles ?? '' }}">
+        {% if showSeoTitleNames %}
+            <h4 class="metadata-title-separator"><span>Discord</span></h4>
+        {% endif %}
+        {% if lg %}
+            <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
+                <div class="card-seo-discord">
+                    <div class="card-seo-discord__bar"></div>
+                    <div class="card-seo-discord__content">
+                        <div class="flex">
+                            <span class="card-seo-discord__link js-preview-site-name">
+                                {{ (ogSiteNameArray.content ?? "") }}
+                            </span>
+                        </div>
+                        <div class="card-seo-discord__title js-preview-title">
+                            {{ (ogTitleArray.content ?? "") }}
+                        </div>
+                        <span class="card-seo-discord__description js-preview-description">
+                            {{ (ogDescriptionArray.content ?? "") }}
+                        </span>
+                        <div class="card-seo-discord__image js-preview-image js-discord-image {{ previewElementId }}-Discord-post-image"></div>
+                    </div>
+                </div>
+            </a>
+        {% else %}
+            <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
+                <div class="card-seo-discord">
+                    <div class="card-seo-discord__bar"></div>
+                    <div class="card-seo-discord__content">
+                        <div class="flex">
+                            <span class="card-seo-discord__link js-preview-site-name">
+                                {{ (ogSiteNameArray.content ?? "") }}
+                            </span>
+                        </div>
+                        <div class="card-seo-discord__title js-preview-title">
+                            {{ (ogTitleArray.content ?? "") }}
+                        </div>
+                        <div class="card-seo-discord__image card-seo-discord__image-summary js-preview-image js-discord-image {{ previewElementId }}-Discord-post-image"></div>
+                        <span class="card-seo-discord__description js-preview-description">
+                            {{ (ogDescriptionArray.content ?? "") }}
+                        </span>
+                    </div>
+                </div>
+            </a>
+        {% endif %}
+        <script type="text/javascript">
+            var x = document.getElementsByClassName("{{ previewElementId }}-Discord-post-image");
+            var i;
+            for (i = 0; i < x.length; i++) {
+                x[i].style.backgroundImage = "url('" + "{{ baseAssetsUrl ~ '/img/no_image_set.png' }}" + "')";
+                {% if ogImageArray.content is defined and ogImageArray.content |length %}
+                {% set cacheBustString = "" %}
+                {% if "?" not in ogImageArray.content %}
+                {% set cacheBustString = "?mtime=" ~ now|date('U') %}
+                {% endif %}
+                x[i].style.backgroundImage = "url('" + "{{ (ogImageArray.content ~ cacheBustString) | raw }}" + "')";
+                {% endif %}
+            }
+        </script>
+    </div>
+</div>

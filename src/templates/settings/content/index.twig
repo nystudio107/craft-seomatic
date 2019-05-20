@@ -39,7 +39,7 @@
             {% set num_entries = 0 %}
             {% set stat = 0 %}
             {% set numFields = seoSetupFields |length %}
-            {% for fieldName in seoSetupFields %}
+            {% for fieldName,fieldContent in seoSetupFields %}
                 {% if metaBundle.metaGlobalVars[fieldName] is defined and metaBundle.metaGlobalVars[fieldName] |length %}
                     {% set stat = stat + 1 %}
                 {% endif %}
@@ -49,9 +49,9 @@
                 {% set stat = numGrades - 1 %}
             {% endif %}
             <tr>
-                
+
                 {############### Name ###############}
-                
+
                 <td>
                     {% set sourcePrefix =  '' %}
                     {% switch metaBundle.sourceBundleType %}
@@ -65,9 +65,9 @@
                     <a href="{{ cpUrl("seomatic/edit-content/general/#{metaBundle.sourceBundleType}/#{metaBundle.sourceHandle}/#{currentSiteHandle}") }}">{{ metaBundle.sourceName }}</a>
                     <a class="go" href="{{ url(sourcePrefix ~ metaBundle.sourceId) }}"></a>
                 </td>
-                
+
                 {############### Entries ###############}
-    
+
                 <td class="centeralign">
                     {% switch metaBundle.sourceBundleType %}
                     {% case "section" %}
@@ -79,7 +79,7 @@
                     {% default %}
                         {% set numEntries = 0 %}
                     {% endswitch %}
-                    
+
                     {{ numEntries }}
                 </td>
 
@@ -88,37 +88,37 @@
                 <td>
                     {{ metaBundle.sourceType }}
                 </td>
-    
+
                 {############### SEO Title ###############}
-    
+
                 <td class="centeralign">
                     {% set status = (metaBundle.metaGlobalVars.seoTitle |length) ? "enabled" : "disabled" %}
                     <span class='{{ "status #{status} inline-item"}}'></span>
                 </td>
-    
+
                 {############### SEO Description ###############}
-    
+
                 <td class="centeralign">
                     {% set status = (metaBundle.metaGlobalVars.seoDescription |length) ? "enabled" : "disabled" %}
                     <span class='{{ "status #{status} inline-item"}}'></span>
                 </td>
-    
+
                 {############### SEO Image ###############}
-    
+
                 <td class="centeralign">
                     {% set status = (metaBundle.metaGlobalVars.seoImage |length) ? "enabled" : "disabled" %}
                     <span class='{{ "status #{status} inline-item"}}'></span>
                 </td>
-    
+
                 {############### Sitemap ###############}
-    
+
                 <td class="centeralign">
                     {% set status = metaBundle.metaSitemapVars.sitemapUrls ? "enabled" : "disabled" %}
                     <span class='{{ "status #{status} inline-item"}}'></span>
                 </td>
-    
+
                 {############### Robots ###############}
-    
+
                 <td>
                     {{ metaBundle.metaGlobalVars.robots }}
                 </td>

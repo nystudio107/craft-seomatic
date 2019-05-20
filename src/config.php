@@ -9,6 +9,8 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
+use nystudio107\seomatic\base\SeoElementInterface;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -51,6 +53,13 @@ return [
     // Should SEOmatic display the SEO Preview sidebar?
     'displayPreviewSidebar' => true,
 
+    // The social media platforms that should be displayed in the SEO Preview sidebar
+    'sidebarDisplayPreviewTypes' => [
+        'google',
+        'twitter',
+        'facebook'
+    ],
+
     // Should SEOmatic display the SEO Analysis sidebar?
     'displayAnalysisSidebar' => true,
 
@@ -80,4 +89,8 @@ return [
 
     // Should the meta generator tag and X-Powered-By header be included?
     'generatorEnabled' => true,
+
+    // SeoElementInterface[] The default SeoElement type classes
+    'defaultSeoElementTypes' => [
+    ],
 ];

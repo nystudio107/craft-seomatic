@@ -6,25 +6,17 @@
 <div class="preview-column">
     <div class="displaypreview" style="{{ displayPreviewInlineStyles ?? '' }}">
         {% if showSeoTitleNames %}
-            <h1>Google:</h1>
+            <h4 class="metadata-title-separator"><span>Google</span></h4>
         {% endif %}
-        <div class="googleWrapper">
-            <div class="rc" data-hveid="27">
-                <h3 class="googleDisplay">
-                    <a class="googleDisplay" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">{{ (titleArray.title ?? "") }}</a>
-                </h3>
-                <div class="googleDisplay1">
-                    <div>
-                        <div class="googleDisplay2" style="white-space:nowrap">
-                            <cite class="googleDisplay">{{ (canonicalArray.href ?? siteUrl("/")) | replace({'http://': ''}) | replace({'https://': ''}) }}</cite>
-                            <div class="googleDisplay3">
-                                <span class="googleDisplay1"></span>
-                            </div>
-                        </div>
-                        <span class="googleDisplay2">{{ (descriptionArray.content ?? "") }}</span>
-                    </div>
-                </div>
+        <div class="card-seo-google">
+            <span class="card-seo-google__title js-preview-title"><a class="googleDisplay" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">{{ (titleArray.title ?? "") }}</a></span>
+            <div class="card-seo-google__url">
+                <span class="card-seo-google__url-title js-preview-domain">{{ (canonicalArray.href ?? siteUrl("/")) | replace({'http://': ''}) | replace({'https://': ''}) }}</span>
+                <span class="card-seo-google__url-arrow"></span>
             </div>
+            <span class="card-seo-google__description js-preview-description">
+              {{ (descriptionArray.content ?? "") }}
+            </span>
         </div>
     </div>
 </div>

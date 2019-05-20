@@ -23,14 +23,9 @@ use nystudio107\seomatic\services\MetaBundles;
 
 use Craft;
 use craft\elements\Asset;
-use craft\elements\Category;
-use craft\elements\Entry;
 use craft\helpers\UrlHelper;
 use craft\models\Site;
 use craft\web\Controller;
-
-use craft\commerce\Plugin as CommercePlugin;
-use craft\commerce\elements\Product;
 
 use yii\base\InvalidConfigException;
 use yii\web\NotFoundHttpException;
@@ -56,27 +51,26 @@ class SettingsController extends Controller
     ];
 
     const SEO_SETUP_FIELDS = [
-        'mainEntityOfPage',
-        'seoTitle',
-        'seoDescription',
-        'seoKeywords',
-        'seoImage',
-        'seoImageDescription',
+        'mainEntityOfPage' => 'Main Entity of Page',
+        'seoTitle' => 'SEO Title',
+        'seoDescription' => 'SEO Description',
+        'seoKeywords' => 'SEO Keywords',
+        'seoImage' => 'SEO Image',
+        'seoImageDescription' => 'SEO Image Description',
     ];
 
     const SITE_SETUP_FIELDS = [
-        'siteName',
-        'twitterHandle',
-        'facebookProfileId',
+        'siteName' => 'Site Name',
+        'twitterHandle' => 'Twitter Handle',
+        'facebookProfileId' => 'Facebook Profile ID',
     ];
 
     const IDENTITY_SETUP_FIELDS = [
-        'siteType',
-        'computedType',
-        'genericName',
-        'genericDescription',
-        'genericUrl',
-        'genericImage',
+        'computedType' => 'Identity Entity Type',
+        'genericName' => 'Identity Entity Name',
+        'genericDescription' => 'Identity Entity Description',
+        'genericUrl' => 'Identity Entity URL',
+        'genericImage' => 'Identity Entity Brand',
     ];
 
     // Protected Properties
@@ -152,12 +146,19 @@ class SettingsController extends Controller
         $numGrades = \count(self::SETUP_GRADES);
         // Content SEO grades
         $variables['metaBundles'] = Seomatic::$plugin->metaBundles->getContentMetaBundlesForSiteId($siteId);
+        $variables['contentSetupChecklistCutoff'] = floor($numFields / 2);
+        $variables['contentSetupChecklist'] = [];
         Seomatic::$plugin->metaBundles->pruneVestigialMetaBundles($variables['metaBundles']);
         /** @var MetaBundle $metaBundle */
         foreach ($variables['metaBundles'] as $metaBundle) {
             $stat = 0;
-            foreach (self::SEO_SETUP_FIELDS as $setupField) {
+            foreach (self::SEO_SETUP_FIELDS as $setupField => $setupLabel) {
                 $stat += (int)!empty($metaBundle->metaGlobalVars[$setupField]);
+                $value = $variables['contentSetupChecklist'][$setupField]['value'] ?? 0;
+                $variables['contentSetupChecklist'][$setupField] = [
+                    'label' => $setupLabel,
+                    'value' => $value + (int)!empty($metaBundle->metaGlobalVars[$setupField]),
+                ];
             }
             $stat = round($numGrades - (($stat * $numGrades) / $numFields));
             if ($stat >= $numGrades) {
@@ -169,21 +170,35 @@ class SettingsController extends Controller
         Seomatic::$previewingMetaContainers = true;
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle((int)$siteId);
         Seomatic::$previewingMetaContainers = false;
-        $stat = 0;
         if ($metaBundle !== null) {
-            foreach (self::SEO_SETUP_FIELDS as $setupField) {
+            $stat = 0;
+            $variables['globalSetupChecklist'] = [];
+            foreach (self::SEO_SETUP_FIELDS as $setupField => $setupLabel) {
                 $stat += (int)!empty($metaBundle->metaGlobalVars[$setupField]);
+                $variables['globalSetupChecklist'][$setupField] = [
+                    'label' => $setupLabel,
+                    'value' => (int)!empty($metaBundle->metaGlobalVars[$setupField]),
+                ];
             }
             $stat = round(($stat / $numFields) * 100);
             $variables['globalSetupStat'] = $stat;
             // Site Settings grades
             $numFields = \count(self::SITE_SETUP_FIELDS) + \count(self::IDENTITY_SETUP_FIELDS);
             $stat = 0;
-            foreach (self::SITE_SETUP_FIELDS as $setupField) {
+            $variables['siteSetupChecklist'] = [];
+            foreach (self::SITE_SETUP_FIELDS as $setupField => $setupLabel) {
                 $stat += (int)!empty($metaBundle->metaSiteVars[$setupField]);
+                $variables['siteSetupChecklist'][$setupField] = [
+                    'label' => $setupLabel,
+                    'value' => (int)!empty($metaBundle->metaSiteVars[$setupField]),
+                ];
             }
-            foreach (self::IDENTITY_SETUP_FIELDS as $setupField) {
+            foreach (self::IDENTITY_SETUP_FIELDS as $setupField => $setupLabel) {
                 $stat += (int)!empty($metaBundle->metaSiteVars->identity[$setupField]);
+                $variables['siteSetupChecklist'][$setupField] = [
+                    'label' => $setupLabel,
+                    'value' => (int)!empty($metaBundle->metaSiteVars[$setupField]),
+                ];
             }
             $stat = round(($stat / $numFields) * 100);
             $variables['siteSetupStat'] = $stat;
@@ -532,21 +547,11 @@ class SettingsController extends Controller
         $globalsSettings = $request->getParam('metaGlobalVars');
         $bundleSettings = $request->getParam('metaBundleSettings');
         $sitemapSettings = $request->getParam('metaSitemapVars');
-
         // Set the element type in the template
-        switch ($sourceBundleType) {
-            case MetaBundles::SECTION_META_BUNDLE:
-                $elementName = 'entry';
-                break;
-            case MetaBundles::CATEGORYGROUP_META_BUNDLE:
-                $elementName = 'category';
-                break;
-            case MetaBundles::PRODUCT_META_BUNDLE:
-                $elementName = 'product';
-                break;
-            default:
-                $elementName = '';
-                break;
+        $elementName = '';
+        $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
+        if ($seoElement !== null) {
+            $elementName = $seoElement::getElementRefHandle();
         }
         // The site settings for the appropriate meta bundle
         Seomatic::$previewingMetaContainers = true;
@@ -997,38 +1002,17 @@ class SettingsController extends Controller
      */
     protected function uriFromSourceBundle(string $sourceBundleType, string $sourceHandle, $siteId): string
     {
-        $uri = '';
+        $uri = null;
         // Pick an Element to be used for the preview
-        switch ($sourceBundleType) {
-            case MetaBundles::GLOBAL_META_BUNDLE:
-                $uri = MetaBundles::GLOBAL_META_BUNDLE;
-                break;
-
-            case MetaBundles::SECTION_META_BUNDLE:
-                $entry = Entry::find()->section($sourceHandle)->siteId($siteId)->one();
-                if ($entry) {
-                    $uri = $entry->uri;
-                }
-                break;
-
-            case MetaBundles::CATEGORYGROUP_META_BUNDLE:
-                $category = Category::find()->group($sourceHandle)->siteId($siteId)->one();
-                if ($category) {
-                    $uri = $category->uri;
-                }
-                break;
-            case MetaBundles::PRODUCT_META_BUNDLE:
-                if (Seomatic::$commerceInstalled) {
-                    $commerce = CommercePlugin::getInstance();
-                    if ($commerce !== null) {
-                        $product = Product::find()->type($sourceHandle)->siteId($siteId)->one();
-                        if ($product) {
-                            $uri = $product->uri;
-                        }
-                    }
-                }
-                break;
+        if ($sourceBundleType === MetaBundles::GLOBAL_META_BUNDLE) {
+            $uri = MetaBundles::GLOBAL_META_BUNDLE;
+        } else {
+            $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
+            if ($seoElement !== null) {
+                $uri = $seoElement::previewUri($sourceHandle, $siteId);
+            }
         }
+        // Special-case for the __home__ slug, and default to /
         if (($uri === '__home__') || ($uri === null)) {
             $uri = '/';
         }

@@ -1,5 +1,21 @@
 # SEOmatic Changelog
 
+## 3.2.0 - 2019.05.20
+### Added
+* Added SEO Previews for LinkedIn, Pinterest, Slack, and Discord
+* Added the ability to control what SEO Previews appear in the sidebar
+* Added CraftQL support for fetching SEOmatic container meta data
+* Added support for Solspace Calendar events for custom metadata, JSON-LD, etc.
+* SEO Settings fields now default to whatever the parent element's Content SEO settings are when instantiating it
+* The Dashboard setup checklists now display checkboxes for items have have been set up properly
+* Added a `SeoElementInterface` to abstract out the support for custom elements
+
+### Changed
+* Changed paginated `rel="alternate"` URLs to always point to the first page in other languages, not the paginated page (that may or may not exist)
+* Fixed an issue in `getLocalizedUrls()` so that it handles `getElementUriForSite()` returning both `null` and `false`
+* If a meta value with the key of `target` (used for schema.org `SearchAction`s) doesn't have a `{` as the first character, it is not parsed as Twig
+* Fixed an issue where environment variables in tracking scripts were not parsed
+
 ## 3.1.50 - 2019.04.30
 ### Added
 * Added the `???` Empty Coalesce operator to allow for the easy cascading of default text/image SEO values
