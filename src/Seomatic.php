@@ -11,12 +11,11 @@
 
 namespace nystudio107\seomatic;
 
-use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
 use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
 use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
-use nystudio107\seomatic\helpers\PluginTemplate;
+use nystudio107\seomatic\listeners\GetCraftQLSchema;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\Settings;
 use nystudio107\seomatic\services\FrontendTemplates as FrontendTemplatesService;
@@ -26,6 +25,7 @@ use nystudio107\seomatic\services\Link as LinkService;
 use nystudio107\seomatic\services\MetaBundles as MetaBundlesService;
 use nystudio107\seomatic\services\MetaContainers as MetaContainersService;
 use nystudio107\seomatic\services\Script as ScriptService;
+use nystudio107\seomatic\services\SeoElements as SeoElementsService;
 use nystudio107\seomatic\services\Sitemaps as SitemapsService;
 use nystudio107\seomatic\services\Tag as TagService;
 use nystudio107\seomatic\services\Title as TitleService;
@@ -38,11 +38,8 @@ use Craft;
 use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\base\Plugin;
-use craft\elements\Entry;
-use craft\elements\Category;
 use craft\elements\User;
 use craft\errors\SiteNotFoundException;
-use craft\events\CategoryGroupEvent;
 use craft\events\ElementEvent;
 use craft\events\DeleteTemplateCachesEvent;
 use craft\events\PluginEvent;
@@ -50,13 +47,10 @@ use craft\events\RegisterCacheOptionsEvent;
 use craft\events\RegisterComponentTypesEvent;
 use craft\events\RegisterUrlRulesEvent;
 use craft\events\RegisterUserPermissionsEvent;
-use craft\events\SectionEvent;
 use craft\helpers\StringHelper;
-use craft\services\Categories;
 use craft\services\Elements;
 use craft\services\Fields;
 use craft\services\Plugins;
-use craft\services\Sections;
 use craft\services\TemplateCaches;
 use craft\services\UserPermissions;
 use craft\helpers\UrlHelper;
@@ -64,10 +58,13 @@ use craft\utilities\ClearCaches;
 use craft\web\UrlManager;
 use craft\web\View;
 
-use craft\commerce\Plugin as CommercePlugin;
-use craft\commerce\elements\Product;
+use markhuot\CraftQL\Builders\Schema;
+use markhuot\CraftQL\CraftQL;
+use markhuot\CraftQL\Events\AlterSchemaFields;
 
 use yii\base\Event;
+
+/** @noinspection MissingPropertyAnnotationsInspection */
 
 /**
  * Class Seomatic
@@ -76,16 +73,17 @@ use yii\base\Event;
  * @package   Seomatic
  * @since     3.0.0
  *
- * @property  FrontendTemplatesService frontendTemplates
- * @property  HelperService            helper
- * @property  JsonLdService            jsonLd
- * @property  LinkService              link
- * @property  MetaBundlesService       metaBundles
- * @property  MetaContainersService    metaContainers
- * @property  ScriptService            script
- * @property  SitemapsService          sitemaps
- * @property  TagService               tag
- * @property  TitleService             title
+ * @property  FrontendTemplatesService $frontendTemplates
+ * @property  HelperService            $helper
+ * @property  JsonLdService            $jsonLd
+ * @property  LinkService              $link
+ * @property  MetaBundlesService       $metaBundles
+ * @property  MetaContainersService    $metaContainers
+ * @property  ScriptService            $script
+ * @property  SeoElementsService       $seoElements
+ * @property  SitemapsService          $sitemaps
+ * @property  TagService               $tag
+ * @property  TitleService             $title
  */
 class Seomatic extends Plugin
 {
@@ -147,11 +145,6 @@ class Seomatic extends Plugin
     /**
      * @var bool
      */
-    public static $commerceInstalled = false;
-
-    /**
-     * @var bool
-     */
     public static $previewingMetaContainers = false;
 
     /**
@@ -195,7 +188,7 @@ class Seomatic extends Plugin
     /**
      * @var string
      */
-    public $schemaVersion = '3.0.7';
+    public $schemaVersion = '3.0.8';
 
     // Public Methods
     // =========================================================================
@@ -213,18 +206,16 @@ class Seomatic extends Plugin
             $this->controllerNamespace = 'nystudio107\seomatic\console\controllers';
         }
         // Initialize properties
-        self::$settings = Seomatic::$plugin->getSettings();
+        self::$settings = self::$plugin->getSettings();
         self::$devMode = Craft::$app->getConfig()->getGeneral()->devMode;
         self::$view = Craft::$app->getView();
-        self::$cacheDuration = Seomatic::$devMode
+        self::$cacheDuration = self::$devMode
             ? $this::DEVMODE_CACHE_DURATION
             : null;
         self::$environment = EnvironmentHelper::determineEnvironment();
         MetaValueHelper::cache();
         self::$craft31 = version_compare(Craft::$app->getVersion(), '3.1', '>=');
-        $this->name = Seomatic::$settings->pluginName;
-        // Determine whether Craft Commerce exists
-        self::$commerceInstalled = class_exists(CommercePlugin::class);
+        $this->name = self::$settings->pluginName;
         // Install our event listeners
         $this->installEventListeners();
         // We're loaded
@@ -245,16 +236,20 @@ class Seomatic extends Plugin
     {
         // For all the emojis
         $settingsModel = parent::getSettings();
-        if ($settingsModel !== null && !Seomatic::$savingSettings) {
+        if ($settingsModel !== null && !self::$savingSettings) {
             $attributes = $settingsModel->attributes();
             if ($attributes !== null) {
                 foreach ($attributes as $attribute) {
-                    if (\is_string($settingsModel->$attribute)) {
-                        $settingsModel->$attribute = html_entity_decode($settingsModel->$attribute, ENT_NOQUOTES, 'UTF-8');
+                    if (is_string($settingsModel->$attribute)) {
+                        $settingsModel->$attribute = html_entity_decode(
+                            $settingsModel->$attribute,
+                            ENT_NOQUOTES,
+                            'UTF-8'
+                        );
                     }
                 }
             }
-            Seomatic::$savingSettings = false;
+            self::$savingSettings = false;
         }
 
         return $settingsModel;
@@ -333,9 +328,9 @@ class Seomatic extends Plugin
     public function clearAllCaches()
     {
         // Clear all of SEOmatic's caches
-        Seomatic::$plugin->frontendTemplates->invalidateCaches();
-        Seomatic::$plugin->metaContainers->invalidateCaches();
-        Seomatic::$plugin->sitemaps->invalidateCaches();
+        self::$plugin->frontendTemplates->invalidateCaches();
+        self::$plugin->metaContainers->invalidateCaches();
+        self::$plugin->sitemaps->invalidateCaches();
         // If the FastCGI Cache Bust plugin is installed, clear its caches too
         $plugin = Craft::$app->getPlugins()->getPlugin('fastcgi-cache-bust');
         if ($plugin !== null) {
@@ -366,7 +361,7 @@ class Seomatic extends Plugin
         // Install our event listeners only if our table schema exists
         if ($this->tableSchemaExists()) {
             // Add in our Twig extensions
-            Seomatic::$view->registerTwigExtension(new SeomaticTwigExtension);
+            self::$view->registerTwigExtension(new SeomaticTwigExtension);
             $request = Craft::$app->getRequest();
             // Add in our event listeners that are needed for every request
             $this->installGlobalEventListeners();
@@ -421,18 +416,17 @@ class Seomatic extends Plugin
             Plugins::class,
             Plugins::EVENT_BEFORE_SAVE_PLUGIN_SETTINGS,
             function (PluginEvent $event) {
-                if ($event->plugin === $this) {
+                if ($event->plugin === $this && !Craft::$app->getDb()->getSupportsMb4()) {
                     // For all the emojis
-                    if (!Craft::$app->getDb()->getSupportsMb4()) {
-                        $settingsModel = $this->getSettings();
-                        Seomatic::$savingSettings = true;
-                        if ($settingsModel !== null) {
-                            $attributes = $settingsModel->attributes();
-                            if ($attributes !== null) {
-                                foreach ($attributes as $attribute) {
-                                    if (\is_string($settingsModel->$attribute)) {
-                                        $settingsModel->$attribute = StringHelper::encodeMb4($settingsModel->$attribute);
-                                    }
+                    $settingsModel = $this->getSettings();
+                    self::$savingSettings = true;
+                    if ($settingsModel !== null) {
+                        $attributes = $settingsModel->attributes();
+                        if ($attributes !== null) {
+                            foreach ($attributes as $attribute) {
+                                if (is_string($settingsModel->$attribute)) {
+                                    $settingsModel->$attribute =
+                                        StringHelper::encodeMb4($settingsModel->$attribute);
                                 }
                             }
                         }
@@ -454,6 +448,8 @@ class Seomatic extends Plugin
             function () {
                 // Install these only after all other plugins have loaded
                 $request = Craft::$app->getRequest();
+                // Allow the SeoElements to register their own event handlers
+                self::$plugin->seoElements->getAllSeoElementTypes();
                 // Only respond to non-console site requests
                 if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
                     $this->handleSiteRequest();
@@ -478,99 +474,7 @@ class Seomatic extends Plugin
             TemplateCaches::class,
             TemplateCaches::EVENT_AFTER_DELETE_CACHES,
             function (DeleteTemplateCachesEvent $event) {
-                Seomatic::$plugin->metaContainers->invalidateCaches();
-            }
-        );
-        // Handler: Sections::EVENT_AFTER_SAVE_SECTION
-        Event::on(
-            Sections::class,
-            Sections::EVENT_AFTER_SAVE_SECTION,
-            function (SectionEvent $event) {
-                Craft::debug(
-                    'Sections::EVENT_AFTER_SAVE_SECTION',
-                    __METHOD__
-                );
-                if ($event->section !== null && $event->section->id !== null) {
-                    Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
-                        MetaBundlesService::SECTION_META_BUNDLE,
-                        $event->section->id,
-                        $event->isNew
-                    );
-                    // Create the meta bundles for this section if it's new
-                    if ($event->isNew) {
-                        Seomatic::$plugin->metaBundles->createContentMetaBundleForSection($event->section);
-                        Seomatic::$plugin->sitemaps->submitSitemapIndex();
-                    }
-                }
-            }
-        );
-        // Handler: Sections::EVENT_AFTER_DELETE_SECTION
-        Event::on(
-            Sections::class,
-            Sections::EVENT_AFTER_DELETE_SECTION,
-            function (SectionEvent $event) {
-                Craft::debug(
-                    'Sections::EVENT_AFTER_DELETE_SECTION',
-                    __METHOD__
-                );
-                if ($event->section !== null && $event->section->id !== null) {
-                    Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
-                        MetaBundlesService::SECTION_META_BUNDLE,
-                        $event->section->id,
-                        false
-                    );
-                    // Delete the meta bundles for this section
-                    Seomatic::$plugin->metaBundles->deleteMetaBundleBySourceId(
-                        MetaBundlesService::SECTION_META_BUNDLE,
-                        $event->section->id
-                    );
-                }
-            }
-        );
-        // Handler: Categories::EVENT_AFTER_SAVE_GROUP
-        Event::on(
-            Categories::class,
-            Categories::EVENT_AFTER_SAVE_GROUP,
-            function (CategoryGroupEvent $event) {
-                Craft::debug(
-                    'Categories::EVENT_AFTER_SAVE_GROUP',
-                    __METHOD__
-                );
-                if ($event->categoryGroup !== null && $event->categoryGroup->id !== null) {
-                    Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
-                        MetaBundlesService::CATEGORYGROUP_META_BUNDLE,
-                        $event->categoryGroup->id,
-                        $event->isNew
-                    );
-                    // Create the meta bundles for this category if it's new
-                    if ($event->isNew) {
-                        Seomatic::$plugin->metaBundles->createContentMetaBundleForCategoryGroup($event->categoryGroup);
-                        Seomatic::$plugin->sitemaps->submitSitemapIndex();
-                    }
-                }
-            }
-        );
-        // Handler: Categories::EVENT_AFTER_DELETE_GROUP
-        Event::on(
-            Categories::class,
-            Categories::EVENT_AFTER_DELETE_GROUP,
-            function (CategoryGroupEvent $event) {
-                Craft::debug(
-                    'Categories::EVENT_AFTER_DELETE_GROUP',
-                    __METHOD__
-                );
-                if ($event->categoryGroup !== null && $event->categoryGroup->id !== null) {
-                    Seomatic::$plugin->metaBundles->invalidateMetaBundleById(
-                        MetaBundlesService::CATEGORYGROUP_META_BUNDLE,
-                        $event->categoryGroup->id,
-                        false
-                    );
-                    // Delete the meta bundles for this category
-                    Seomatic::$plugin->metaBundles->deleteMetaBundleBySourceId(
-                        MetaBundlesService::CATEGORYGROUP_META_BUNDLE,
-                        $event->categoryGroup->id
-                    );
-                }
+                self::$plugin->metaContainers->invalidateCaches();
             }
         );
         // Handler: Elements::EVENT_AFTER_SAVE_ELEMENT
@@ -584,12 +488,12 @@ class Seomatic extends Plugin
                 );
                 /** @var  $element Element */
                 $element = $event->element;
-                Seomatic::$plugin->metaBundles->invalidateMetaBundleByElement(
+                self::$plugin->metaBundles->invalidateMetaBundleByElement(
                     $element,
                     $event->isNew
                 );
                 if ($event->isNew) {
-                    Seomatic::$plugin->sitemaps->submitSitemapForElement($element);
+                    self::$plugin->sitemaps->submitSitemapForElement($element);
                 }
             }
         );
@@ -604,12 +508,20 @@ class Seomatic extends Plugin
                 );
                 /** @var  $element Element */
                 $element = $event->element;
-                Seomatic::$plugin->metaBundles->invalidateMetaBundleByElement(
+                self::$plugin->metaBundles->invalidateMetaBundleByElement(
                     $element,
                     false
                 );
             }
         );
+        // CraftQL Support
+        if (class_exists(CraftQL::class)) {
+            Event::on(
+                Schema::class,
+                AlterSchemaFields::EVENT,
+                [GetCraftQLSchema::class, 'handle']
+            );
+        }
     }
 
     /**
@@ -618,9 +530,9 @@ class Seomatic extends Plugin
     protected function installSiteEventListeners()
     {
         // Load the sitemap containers
-        Seomatic::$plugin->sitemaps->loadSitemapContainers();
+        self::$plugin->sitemaps->loadSitemapContainers();
         // Load the frontend template containers
-        Seomatic::$plugin->frontendTemplates->loadFrontendTemplateContainers();
+        self::$plugin->frontendTemplates->loadFrontendTemplateContainers();
         // Handler: UrlManager::EVENT_REGISTER_SITE_URL_RULES
         Event::on(
             UrlManager::class,
@@ -631,7 +543,7 @@ class Seomatic extends Plugin
                     __METHOD__
                 );
                 $path = 'seomatic/seo-file-link/<url:[^\/]+>/<robots:[^\/]+>/<canonical:[^\/]+>/<inline:\d+>/<fileName:[-\w\.*]+>';
-                $route = Seomatic::$plugin->handle.'/file/seo-file-link';
+                $route = self::$plugin->handle.'/file/seo-file-link';
                 $event->rules[$path] = ['route' => $route];
             }
         );
@@ -690,8 +602,8 @@ class Seomatic extends Plugin
                     __METHOD__
                 );
                 // The <body> placeholder tag has just rendered, include any script HTML
-                if (Seomatic::$settings->renderEnabled && Seomatic::$seomaticVariable) {
-                    Seomatic::$plugin->metaContainers->includeScriptBodyHtml(View::POS_BEGIN);
+                if (self::$settings->renderEnabled && self::$seomaticVariable) {
+                    self::$plugin->metaContainers->includeScriptBodyHtml(View::POS_BEGIN);
                 }
             }
         );
@@ -705,8 +617,8 @@ class Seomatic extends Plugin
                     __METHOD__
                 );
                 // The </body> placeholder tag is about to be rendered, include any script HTML
-                if (Seomatic::$settings->renderEnabled && Seomatic::$seomaticVariable) {
-                    Seomatic::$plugin->metaContainers->includeScriptBodyHtml(View::POS_END);
+                if (self::$settings->renderEnabled && self::$seomaticVariable) {
+                    self::$plugin->metaContainers->includeScriptBodyHtml(View::POS_END);
                 }
             }
         );
@@ -720,8 +632,8 @@ class Seomatic extends Plugin
                     __METHOD__
                 );
                 // The page is done rendering, include our meta containers
-                if (Seomatic::$settings->renderEnabled && Seomatic::$seomaticVariable) {
-                    Seomatic::$plugin->metaContainers->includeMetaContainers();
+                if (self::$settings->renderEnabled && self::$seomaticVariable) {
+                    self::$plugin->metaContainers->includeMetaContainers();
                 }
             }
         );
@@ -744,74 +656,6 @@ class Seomatic extends Plugin
                 $context['docTitle'] = self::$settings->cpTitlePrefix.$context['docTitle'];
             }
         });
-        // Entries sidebar
-        self::$view->hook('cp.entries.edit.details', function (&$context) {
-            $html = '';
-            self::$view->registerAssetBundle(SeomaticAsset::class);
-            /** @var  $entry Entry */
-            $entry = $context['entry'];
-            if ($entry !== null && $entry->uri !== null) {
-                Seomatic::$plugin->metaContainers->previewMetaContainers($entry->uri, $entry->siteId, true);
-                // Render our preview sidebar template
-                if (self::$settings->displayPreviewSidebar && self::$matchedElement) {
-                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/entry-preview.twig');
-                }
-                // Render our analysis sidebar template
-// @TODO: This will be added an upcoming 'pro' edition
-//                if (self::$settings->displayAnalysisSidebar && self::$matchedElement) {
-//                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/entry-analysis.twig');
-//                }
-            }
-
-            return $html;
-        });
-        // Category Groups sidebar
-        self::$view->hook('cp.categories.edit.details', function (&$context) {
-            $html = '';
-            self::$view->registerAssetBundle(SeomaticAsset::class);
-            /** @var  $category Category */
-            $category = $context['category'];
-            if ($category !== null && $category->uri !== null) {
-                Seomatic::$plugin->metaContainers->previewMetaContainers($category->uri, $category->siteId, true);
-                // Render our preview sidebar template
-                if (self::$settings->displayPreviewSidebar) {
-                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/category-preview.twig');
-                }
-                // Render our analysis sidebar template
-// @TODO: This will be added an upcoming 'pro' edition
-//                if (self::$settings->displayAnalysisSidebar) {
-//                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/category-analysis.twig');
-//                }
-            }
-
-            return $html;
-        });
-        // Commerce Product Types sidebar
-        if (Seomatic::$commerceInstalled) {
-            $commerce = CommercePlugin::getInstance();
-            if ($commerce !== null) {
-                self::$view->hook('cp.commerce.product.edit.details', function (&$context) {
-                    $html = '';
-                    self::$view->registerAssetBundle(SeomaticAsset::class);
-                    /** @var  $product Product */
-                    $product = $context['product'];
-                    if ($product !== null && $product->uri !== null) {
-                        Seomatic::$plugin->metaContainers->previewMetaContainers($product->uri, $product->siteId, true);
-                        // Render our preview sidebar template
-                        if (self::$settings->displayPreviewSidebar) {
-                            $html .= PluginTemplate::renderPluginTemplate('_sidebars/product-preview.twig');
-                        }
-                        // Render our analysis sidebar template
-// @TODO: This will be added an upcoming 'pro' edition
-//                if (self::$settings->displayAnalysisSidebar) {
-//                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/product-analysis.twig');
-//                }
-                    }
-
-                    return $html;
-                });
-            }
-        }
     }
 
     /**
@@ -891,19 +735,19 @@ class Seomatic extends Plugin
             [
                 'key' => 'seomatic-frontendtemplate-caches',
                 'label' => Craft::t('seomatic', 'SEOmatic frontend template caches'),
-                'action' => [Seomatic::$plugin->frontendTemplates, 'invalidateCaches'],
+                'action' => [self::$plugin->frontendTemplates, 'invalidateCaches'],
             ],
             // Meta bundle caches
             [
                 'key' => 'seomatic-metabundle-caches',
                 'label' => Craft::t('seomatic', 'SEOmatic metadata caches'),
-                'action' => [Seomatic::$plugin->metaContainers, 'invalidateCaches'],
+                'action' => [self::$plugin->metaContainers, 'invalidateCaches'],
             ],
             // Sitemap caches
             [
                 'key' => 'seomatic-sitemap-caches',
                 'label' => Craft::t('seomatic', 'SEOmatic sitemap caches'),
-                'action' => [Seomatic::$plugin->sitemaps, 'invalidateCaches'],
+                'action' => [self::$plugin->sitemaps, 'invalidateCaches'],
             ],
         ];
     }
@@ -922,10 +766,10 @@ class Seomatic extends Plugin
             $currentSiteId = 1;
         }
         // Dynamic permissions for the scripts
-        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($currentSiteId);
+        $metaBundle = self::$plugin->metaBundles->getGlobalMetaBundle($currentSiteId);
         $scriptsPerms = [];
         if ($metaBundle !== null) {
-            $scripts = Seomatic::$plugin->metaBundles->getContainerDataFromBundle(
+            $scripts = self::$plugin->metaBundles->getContainerDataFromBundle(
                 $metaBundle,
                 MetaScriptContainer::CONTAINER_TYPE
             );

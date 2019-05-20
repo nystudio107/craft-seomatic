@@ -1,0 +1,40 @@
+{% set ogTitleArray = seomatic.tag.get('og:title').renderAttributes() %}
+{% set ogDescriptionArray = seomatic.tag.get('og:description').renderAttributes() %}
+{% set ogImageArray = seomatic.tag.get('og:image').renderAttributes() %}
+{% set canonicalArray = seomatic.link.get('canonical').renderAttributes() %}
+
+{% set showSeoTitleNames = showSeoTitleNames ?? true %}
+{% set previewElementId = previewElementId ?? 0 %}
+<div class="preview-column">
+    <div class="displaypreview" style="{{ displayPreviewInlineStyles ?? '' }}">
+        {% if showSeoTitleNames %}
+            <h4 class="metadata-title-separator"><span>LinkedIn</span></h4>
+        {% endif %}
+        <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
+            <div class="card-seo-linkedin">
+                <div class="card-seo-linkedin__image js-preview-image {{ previewElementId }}-LinkedIn-post-image" ></div>
+                <div class="card-seo-linkedin__text">
+                    <div class="card-seo-linkedin__content">
+                        <div class="card-seo-linkedin__title js-preview-title">{{ (ogTitleArray.content ?? "") }}</div>
+                        <span class="card-seo-linkedin__link js-preview-domain">{{ siteUrl | replace({'http://': ''}) | replace({'https://': ''})  | replace({'/': ''}) }}</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <script type="text/javascript">
+            var x = document.getElementsByClassName("{{ previewElementId }}-LinkedIn-post-image");
+            var i;
+            for (i = 0; i < x.length; i++) {
+                x[i].style.backgroundImage = "url('" + "{{ baseAssetsUrl ~ '/img/no_image_set.png' }}" + "')";
+                {% if ogImageArray.content is defined and ogImageArray.content |length %}
+                {% set cacheBustString = "" %}
+                {% if "?" not in ogImageArray.content %}
+                    {% set cacheBustString = "?mtime=" ~ now|date('U') %}
+                {% endif %}
+                x[i].style.backgroundImage = "url('" + "{{ (ogImageArray.content ~ cacheBustString) | raw }}" + "')";
+                {% endif %}
+            }
+        </script>
+    </div>
+</div>

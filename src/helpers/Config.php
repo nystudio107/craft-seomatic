@@ -36,10 +36,11 @@ class Config
      * @nystudio107/seomatic
      *
      * @param string $filePath
+     * @param null   $alias
      *
      * @return array
      */
-    public static function getConfigFromFile(string $filePath): array
+    public static function getConfigFromFile(string $filePath, $alias = null): array
     {
         // Try craft/config first
         $path = self::getConfigFilePath('@config', $filePath);
@@ -47,7 +48,14 @@ class Config
             // Now try our own internal config
             $path = self::getConfigFilePath('@nystudio107/seomatic', $filePath);
             if (!file_exists($path)) {
-                return [];
+                if (!$alias) {
+                    return [];
+                }
+                // Now the additional alias config
+                $path = self::getConfigFilePath($alias, $filePath);
+                if (!file_exists($path)) {
+                    return [];
+                }
             }
         }
 

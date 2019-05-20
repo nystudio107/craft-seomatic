@@ -2,10 +2,10 @@
 
 namespace nystudio107\seomatic\migrations;
 
-use nystudio107\seomatic\Seomatic;
+use Craft;
+use nystudio107\seomatic\seoelements\SeoProduct;
 
 use craft\db\Migration;
-
 use craft\commerce\Plugin as CommercePlugin;
 
 /**
@@ -19,14 +19,11 @@ class m180711_024947_commerce_products extends Migration
     public function safeUp()
     {
         // Get all of the Commerce ProductTypes with URLs
-        $commerceInstalled = class_exists(CommercePlugin::class);
-        if ($commerceInstalled) {
+        $requiredPlugin = SeoProduct::getRequiredPluginHandle();
+        if ($requiredPlugin !== null && Craft::$app->getPlugins()->getPlugin($requiredPlugin)) {
             $commerce = CommercePlugin::getInstance();
             if ($commerce !== null) {
-                $productTypes = $commerce->getProductTypes()->getAllProductTypes();
-                foreach ($productTypes as $productType) {
-                    Seomatic::$plugin->metaBundles->createContentMetaBundleForProductType($productType);
-                }
+                SeoProduct::createAllContentMetaBundles();
             }
         }
     }

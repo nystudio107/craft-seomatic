@@ -34,12 +34,7 @@ use nystudio107\seomatic\variables\SeomaticVariable;
 use Craft;
 use craft\base\Component;
 use craft\base\Element;
-use craft\elements\Category;
-use craft\elements\Entry;
 use craft\helpers\UrlHelper;
-
-use craft\commerce\Plugin as CommercePlugin;
-use craft\commerce\elements\Product;
 
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
@@ -565,33 +560,16 @@ class MetaContainers extends Component
         /** @var Element $element */
         $element = Seomatic::$matchedElement;
         if ($element) {
-            $sourceType = '';
-            switch (FieldHelper::getElementRootClass($element)) {
-                case Entry::class:
-                    /** @var  $element Entry */
-                    $sourceType = MetaBundles::SECTION_META_BUNDLE;
-                    break;
-
-                case Category::class:
-                    /** @var  $element Category */
-                    $sourceType = MetaBundles::CATEGORYGROUP_META_BUNDLE;
-                    break;
-                case Product::class:
-                    if (Seomatic::$commerceInstalled) {
-                        $commerce = CommercePlugin::getInstance();
-                        if ($commerce !== null) {
-                            $sourceType = MetaBundles::PRODUCT_META_BUNDLE;
-                        }
-                    }
-                    break;
+            $sourceType = Seomatic::$plugin->seoElements->getMetaBundleTypeFromElement($element);
+            if ($sourceType) {
+                list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
+                    = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
+                $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
+                    $sourceType,
+                    $sourceId,
+                    $sourceSiteId
+                );
             }
-            list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
-                = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
-            $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
-                $sourceType,
-                $sourceId,
-                $sourceSiteId
-            );
         }
         $this->matchedMetaBundle = $metaBundle;
 

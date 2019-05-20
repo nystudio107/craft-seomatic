@@ -2,7 +2,7 @@
     "name": "nystudio107/craft-seomatic",
     "description": "SEOmatic facilitates modern SEO best practices & implementation for Craft CMS 3. It is a turnkey SEO system that is comprehensive, powerful, and flexible.",
     "type": "craft-plugin",
-    "version": "3.1.50",
+    "version": "3.2.0",
     "keywords": [
         "craft",
         "cms",
@@ -18,8 +18,8 @@
         "facebook"
     ],
     "support": {
-        "docs": "https://github.com/nystudio107/craft-seomatic/blob/v3/README.md",
-        "issues": "https://github.com/nystudio107/craft-seomatic/issues"
+        "docs": "https://nystudio107.com/plugins/seomatic/documentation",
+        "issues": "https://nystudio107.com/plugins/seomatic/support"
     },
     "license": "proprietary",
     "authors": [
@@ -62,6 +62,7 @@
             "link": "nystudio107\\seomatic\\services\\Link",
             "metaBundles": "nystudio107\\seomatic\\services\\MetaBundles",
             "metaContainers": "nystudio107\\seomatic\\services\\MetaContainers",
+            "seoElements": "nystudio107\\seomatic\\services\\SeoElements",
             "script": "nystudio107\\seomatic\\services\\Script",
             "sitemaps": "nystudio107\\seomatic\\services\\Sitemaps",
             "tag": "nystudio107\\seomatic\\services\\Tag",

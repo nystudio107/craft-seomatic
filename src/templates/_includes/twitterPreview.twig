@@ -8,33 +8,48 @@
 <div class="preview-column">
     <div class="displaypreview" style="{{ displayPreviewInlineStyles ?? '' }}">
         {% if showSeoTitleNames %}
-            <h1>Twitter:</h1>
+            <h4 class="metadata-title-separator"><span>Twitter</span></h4>
         {% endif %}
         {% if seomatic.site.twitterHandle |length %}
             {% set lg = false %}
             {% if seomatic.meta.twitterCard == "summary_large_image" %}
                 {% set lg = true %}
             {% endif %}
-            <div class="TwitterCardsGrid{% if lg %} TwitterCardsGrid-Large{% endif %}">
-                <div class="TwitterCardGrid-col{% if lg %} TwitterCardGrid-col-Large{% endif %}">
-                    <a class="TwitterCard-container{% if lg %} TwitterCard-container-Large{% endif %}" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
-                        <div class="TwitterCard-summary-image{% if lg %} TwitterCard-summary-image-Large{% endif %}">
-                            <div class="TwitterCard-image-container{% if lg %} TwitterCard-image-container-Large{% endif %}">
-                                <div class="{{ previewElementId }}-TwitterCard-image-wrapper TwitterCard-image-wrapper{% if lg %} TwitterCard-image-wrapper-Large{% endif %}">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="TwitterCard-summary-content-container{% if lg %} TwitterCard-summary-content-container-Large{% endif %}">
-                            <div class="TwitterCard-summary-content{% if lg %} TwitterCard-summary-content-Large{% endif %}">
-                                <h2 class="TwitterCard-title">{{ (twitterTitleArray.content ?? "") }}</h2>
-                                <p class="TwitterCard-text{% if lg %} TwitterCard-text-Large{% endif %}">{{ (twitterDescriptionArray.content ?? "") }}</p>
-                                <span class="TwitterCard-destination">{{ siteUrl | replace({'http://': ''}) | replace({'https://': ''})  | replace({'/': ''}) }}</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+            {% if lg %}
+            <div class="card-seo-twitter">
+                <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
+                    <div class="card-seo-twitter__image js-preview-image {{ previewElementId }}-TwitterCard-image-wrapper"></div>
+                    <div class="card-seo-twitter__text">
+                        <span class="card-seo-twitter__title js-preview-title">
+                            {{ (twitterTitleArray.content ?? "") }}
+                        </span>
+                        <span class="card-seo-twitter__description js-preview-description">
+                            {{ (twitterDescriptionArray.content ?? "") }}
+                        </span>
+                        <span class="card-seo-twitter__link js-preview-domain">
+                            {{ siteUrl | replace({'http://': ''}) | replace({'https://': ''})  | replace({'/': ''}) }}
+                        </span>
+                    </div>
+                </a>
             </div>
-
+            {% else %}
+            <div class="card-seo-twitter">
+                <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
+                    <div class="card-seo-twitter__image js-preview-image card-seo-twitter__image-summary {{ previewElementId }}-TwitterCard-image-wrapper"></div>
+                    <div class="card-seo-twitter__text card-seo-twitter__text-summary">
+                        <span class="card-seo-twitter__title js-preview-title">
+                            {{ (twitterTitleArray.content ?? "") }}
+                        </span>
+                        <span class="card-seo-twitter__description card-seo-twitter__description-summary js-preview-description">
+                            {{ (twitterDescriptionArray.content ?? "") }}
+                        </span>
+                        <span class="card-seo-twitter__link js-preview-domain">
+                            {{ siteUrl | replace({'http://': ''}) | replace({'https://': ''})  | replace({'/': ''}) }}
+                        </span>
+                    </div>
+                </a>
+            </div>
+        {% endif %}
             <script type="text/javascript">
                 var x = document.getElementsByClassName("{{ previewElementId }}-TwitterCard-image-wrapper");
                 var i;
