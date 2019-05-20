@@ -1,12 +1,12 @@
 {
     "name": "seomatic",
-    "version": "3.0.0",
+    "version": "3.2.0",
     "description": "A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible",
     "keywords": [],
-    "homepage": "https://github.com/nystudio107/craft-seomatic",
+    "homepage": "https://nystudio107.com/plugins/seomatic",
     "bugs": {
         "email": "info@nystudio107.com",
-        "url": "https://github.com/nystudio107/craft-seomatic/issues"
+        "url": "https://nystudio107.com/plugins/seomatic/support"
     },
     "license": "SEE LICENSE IN LICENSE.md",
     "author": {
