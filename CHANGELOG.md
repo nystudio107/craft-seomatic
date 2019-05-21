@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.1 - 2019.05.21
+### Changed
+* Fixed an issue where the Site Setup checklist wasn't accurately reflecting the site settings
+
 ## 3.2.0 - 2019.05.20
 ### Added
 * Added SEO Previews for LinkedIn, Pinterest, Slack, and Discord
