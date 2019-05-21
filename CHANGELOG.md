@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.2 - 2019.05.25
+### Changed
+* Fix Slack & Discord “summary card” CSS
+
 ## 3.2.1 - 2019.05.21
 ### Changed
 * Fixed an issue where the Site Setup checklist wasn't accurately reflecting the site settings
