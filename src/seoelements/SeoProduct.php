@@ -219,7 +219,7 @@ class SeoProduct implements SeoElementInterface
         MetaBundle $metaBundle,
         int $elementId,
         int $siteId
-    ): ElementInterface {
+    ) {
         return Product::find()
             ->id($elementId)
             ->siteId($siteId)

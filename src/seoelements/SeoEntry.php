@@ -219,7 +219,7 @@ class SeoEntry implements SeoElementInterface
         MetaBundle $metaBundle,
         int $elementId,
         int $siteId
-    ): ElementInterface {
+    ) {
         return Entry::find()
             ->section($metaBundle->sourceHandle)
             ->id($elementId)

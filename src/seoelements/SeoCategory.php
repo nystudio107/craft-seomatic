@@ -215,7 +215,7 @@ class SeoCategory implements SeoElementInterface
         MetaBundle $metaBundle,
         int $elementId,
         int $siteId
-    ): ElementInterface {
+    ) {
         return Category::find()
             ->id($elementId)
             ->siteId($siteId)
