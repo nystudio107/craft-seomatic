@@ -83,7 +83,7 @@ interface SeoElementInterface
         MetaBundle $metaBundle,
         int $elementId,
         int $siteId
-    ): ElementInterface;
+    );
 
     /**
      * Return a preview URI for a given $sourceHandle and $siteId
