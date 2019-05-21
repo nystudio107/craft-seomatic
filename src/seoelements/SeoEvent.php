@@ -217,7 +217,7 @@ class SeoEvent implements SeoElementInterface
         MetaBundle $metaBundle,
         int $elementId,
         int $siteId
-    ): ElementInterface {
+    ) {
         return Event::find()
             ->id($elementId)
             ->siteId($siteId)
