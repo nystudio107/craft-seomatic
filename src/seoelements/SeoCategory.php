@@ -303,9 +303,9 @@ class SeoCategory implements SeoElementInterface
      * @param Model $sourceModel
      * @param int   $sourceSiteId
      *
-     * @return ElementInterface
+     * @return null|ElementInterface
      */
-    public static function mostRecentElement(Model $sourceModel, int $sourceSiteId): ElementInterface
+    public static function mostRecentElement(Model $sourceModel, int $sourceSiteId)
     {
         /** @var CategoryGroup $sourceModel */
         return Category::find()

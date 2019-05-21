@@ -197,7 +197,7 @@ class SettingsController extends Controller
                 $stat += (int)!empty($metaBundle->metaSiteVars->identity[$setupField]);
                 $variables['siteSetupChecklist'][$setupField] = [
                     'label' => $setupLabel,
-                    'value' => (int)!empty($metaBundle->metaSiteVars[$setupField]),
+                    'value' => (int)!empty($metaBundle->metaSiteVars->identity[$setupField]),
                 ];
             }
             $stat = round(($stat / $numFields) * 100);
