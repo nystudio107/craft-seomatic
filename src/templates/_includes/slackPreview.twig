@@ -43,6 +43,7 @@
                 <div class="card-seo-slack">
                     <div class="card-seo-slack__bar"></div>
                     <div class="card-seo-slack__content">
+                        <div class="card-seo-slack__image card-seo-slack__image-summary js-preview-image js-slack-image {{ previewElementId }}-Slack-post-image"></div>
                         <div class="flex">
                             {#
                             <img class="card-seo-slack__favicon js-preview-favicon" src="">
@@ -54,7 +55,6 @@
                         <div class="card-seo-slack__title js-preview-title">
                             {{ (ogTitleArray.content ?? "") }}
                         </div>
-                        <div class="card-seo-slack__image card-seo-slack__image-summary js-preview-image js-slack-image {{ previewElementId }}-Slack-post-image"></div>
                         <span class="card-seo-slack__description js-preview-description">
                             {{ (ogDescriptionArray.content ?? "") }}
                         </span>

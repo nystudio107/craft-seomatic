@@ -1,5 +1,10 @@
 # SEOmatic Changelog
 
+## 3.2.2 - 2019.05.21
+### Changed
+* Fixed an issue where a Section with no elements in it could cause the Sitemaps queue job to stall
+* Fixed Slack & Discord “summary card” CSS
+
 ## 3.2.1 - 2019.05.21
 ### Changed
 * Fixed an issue where the Site Setup checklist wasn't accurately reflecting the site settings

@@ -2,8 +2,8 @@
  * @project        SEOmatic
  * @name           vendors~dashboard.js
  * @author         Andrew Welch
- * @build          Sat, May 18, 2019 3:14 AM ET
- * @release        52c0a0c30f65b83b54fdeb51732a158b004f43a8 [develop]
+ * @build          Tue, May 21, 2019 4:27 PM ET
+ * @release        ee945b719549145359093365d9e3d1757a19aeda [develop]
  * @copyright      Copyright (c) 2019 nystudio107
  *
  */
