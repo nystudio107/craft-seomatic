@@ -30,17 +30,17 @@ module.exports = {
     vars: {
         cssName: "styles"
     },
-    babelLoaderConfig: {
-        exclude: [
-            /(node_modules|bower_components)/
-        ],
-    },
     entries: {
         "dashboard": "dashboard.js",
         "seomatic": "seomatic.js",
         "seomatic-meta": "seomatic-meta.js",
         "twig-editor": "twig-editor.js",
         "javascript-editor": "javascript-editor.js",
+    },
+    babelLoaderConfig: {
+        exclude: [
+            /(node_modules|bower_components)/
+        ],
     },
     copyWebpackConfig: [
     ],
