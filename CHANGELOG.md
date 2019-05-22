@@ -1,8 +1,10 @@
 # SEOmatic Changelog
 
-## 3.2.3 - 2019.05.27
+## 3.2.3 - 2019.05.22
 ### Changed
-*
+* Fixed an issue where the new SEO Settings Field implementation could cause images to be duplicated
+* Fixed an issue where JSON-LD schema could not be properly overridden via an SEO Settings field
+* Fixed an issue where the dynamically populated schema menu would have improper padding in the `value`s
 
 ## 3.2.2 - 2019.05.21
 ### Changed
