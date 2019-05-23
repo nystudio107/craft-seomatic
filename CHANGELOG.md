@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.4 - 2019.05.23
+### Changed
+* Fixed a typecasting issue that caused `link rel="alternate"` to render for entries that were disabled for a particular site
+
 ## 3.2.3 - 2019.05.22
 ### Changed
 * Fixed an issue where the new SEO Settings Field implementation could cause images to be duplicated
