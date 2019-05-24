@@ -474,13 +474,8 @@ class DynamicMeta
     public static function getLocalizedUrls(string $uri = null, int $siteId = null): array
     {
         $localizedUrls = [];
-        // Set the pagination URL params, if they exist
+        // No pagination params for URLs
         $urlParams = null;
-        list($pageTrigger, $pageTriggerValue) = UrlHelper::pageTriggerValue();
-        if ($pageTriggerValue !== null) {
-            $urlParams = [];
-            $urlParams[$pageTrigger] = $pageTriggerValue;
-        }
         // Get the request URI
         if ($uri === null) {
             $requestUri = Craft::$app->getRequest()->pathInfo;
