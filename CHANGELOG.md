@@ -3,6 +3,7 @@
 ## 3.2.4 - 2019.05.23
 ### Changed
 * Fixed a typecasting issue that caused `link rel="alternate"` to render for entries that were disabled for a particular site
+* Remove pagination via query string for `link rel="alternate"`
 * Remove the pointless `Twig_Node_Expression_EmptyCoalesce` class
 
 ## 3.2.3 - 2019.05.22
