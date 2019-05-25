@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.2.4 - 2019.05.23
+## 3.2.4 - 2019.05.24
 ### Changed
 * Fixed a typecasting issue that caused `link rel="alternate"` to render for entries that were disabled for a particular site
 * Remove pagination via query string for `link rel="alternate"`
