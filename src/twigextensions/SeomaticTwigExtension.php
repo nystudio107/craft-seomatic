@@ -18,6 +18,9 @@ use nystudio107\seomatic\variables\SeomaticVariable;
 use Craft;
 
 use Twig\ExpressionParser;
+use Twig\Extension\AbstractExtension;
+use Twig\Extension\GlobalsInterface;
+
 use yii\base\InvalidConfigException;
 
 /**
@@ -25,7 +28,7 @@ use yii\base\InvalidConfigException;
  * @package   Seomatic
  * @since     3.0.0
  */
-class SeomaticTwigExtension extends \Twig\Extension\AbstractExtension implements \Twig\Extension\GlobalsInterface
+class SeomaticTwigExtension extends AbstractExtension implements GlobalsInterface
 {
     /**
      * @inheritdoc

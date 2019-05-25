@@ -76,5 +76,3 @@ class EmptyCoalesceExpression extends AbstractExpression
         ;
     }
 }
-
-class_alias('nystudio107\seomatic\Node\Expression\EmptyCoalesceExpression', 'Twig_Node_Expression_EmptyCoalesce');
