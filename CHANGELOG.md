@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.5 - 2019.05.28
+### Changed
+* Added `FAQPage` schema type from [schema.org](https://schema.org/FAQPage)
+
 ## 3.2.4 - 2019.05.24
 ### Changed
 * Fixed a typecasting issue that caused `link rel="alternate"` to render for entries that were disabled for a particular site
