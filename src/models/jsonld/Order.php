@@ -149,7 +149,10 @@ class Order extends Intangible
     public $discountCode;
 
     /**
-     * The currency (in 3-letter ISO 4217 format) of the discount.
+     * The currency of the discount. Use standard formats: ISO 4217 currency
+     * format e.g. "USD"; Ticker symbol for cryptocurrencies e.g. "BTC"; well
+     * known names for Local Exchange Tradings Systems (LETS) and other currency
+     * types e.g. "Ithaca HOUR".
      *
      * @var mixed|string [schema.org types: Text]
      */
@@ -193,7 +196,7 @@ class Order extends Intangible
     /**
      * The item ordered.
      *
-     * @var mixed|OrderItem|Product [schema.org types: OrderItem, Product]
+     * @var mixed|OrderItem|Product|Service [schema.org types: OrderItem, Product, Service]
      */
     public $orderedItem;
 
@@ -291,7 +294,7 @@ class Order extends Intangible
         'orderDelivery' => ['ParcelDelivery'],
         'orderNumber' => ['Text'],
         'orderStatus' => ['OrderStatus'],
-        'orderedItem' => ['OrderItem','Product'],
+        'orderedItem' => ['OrderItem','Product','Service'],
         'partOfInvoice' => ['Invoice'],
         'paymentDueDate' => ['DateTime'],
         'paymentMethod' => ['PaymentMethod'],
@@ -313,7 +316,7 @@ class Order extends Intangible
         'customer' => 'Party placing the order or paying the invoice.',
         'discount' => 'Any discount applied (to an Order).',
         'discountCode' => 'Code used to redeem a discount.',
-        'discountCurrency' => 'The currency (in 3-letter ISO 4217 format) of the discount.',
+        'discountCurrency' => 'The currency of the discount. Use standard formats: ISO 4217 currency format e.g. "USD"; Ticker symbol for cryptocurrencies e.g. "BTC"; well known names for Local Exchange Tradings Systems (LETS) and other currency types e.g. "Ithaca HOUR".',
         'isGift' => 'Was the offer accepted as a gift for someone other than the buyer.',
         'orderDate' => 'Date order was placed.',
         'orderDelivery' => 'The delivery of the parcel related to this order or order item.',

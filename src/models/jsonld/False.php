@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\Boolean;
+use nystudio107\seomatic\models\jsonld\DataType;
 
 /**
  * False - The boolean value false.
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\Boolean;
  * @since     3.0.0
  * @see       http://schema.org/False
  */
-class False extends Boolean
+class False extends DataType
 {
     // Static Public Properties
     // =========================================================================
@@ -52,7 +52,7 @@ class False extends Boolean
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'Boolean';
+    static public $schemaTypeExtends = 'DataType';
 
     /**
      * The Schema.org composed Property Names

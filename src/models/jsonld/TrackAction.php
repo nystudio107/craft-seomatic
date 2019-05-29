@@ -14,9 +14,9 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\jsonld\FindAction;
 
 /**
- * TrackAction - An agent tracks an object for updates. Related actions:
- * FollowAction: Unlike FollowAction, TrackAction refers to the interest on
- * the location of innanimates objects. SubscribeAction: Unlike
+ * TrackAction - An agent tracks an object for updates. Related
+ * actions:FollowAction: Unlike FollowAction, TrackAction refers to the
+ * interest on the location of innanimates objects. SubscribeAction: Unlike
  * SubscribeAction, TrackAction refers to the interest on the location of
  * innanimate objects.
  *
@@ -49,7 +49,7 @@ class TrackAction extends FindAction
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'An agent tracks an object for updates. Related actions: FollowAction: Unlike FollowAction, TrackAction refers to the interest on the location of innanimates objects. SubscribeAction: Unlike SubscribeAction, TrackAction refers to the interest on the location of innanimate objects.';
+    static public $schemaTypeDescription = 'An agent tracks an object for updates. Related actions:FollowAction: Unlike FollowAction, TrackAction refers to the interest on the location of innanimates objects. SubscribeAction: Unlike SubscribeAction, TrackAction refers to the interest on the location of innanimate objects.';
 
     /**
      * The Schema.org Type Extends

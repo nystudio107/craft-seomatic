@@ -15,7 +15,7 @@ use nystudio107\seomatic\models\jsonld\PlanAction;
 
 /**
  * ScheduleAction - Scheduling future actions, events, or tasks. Related
- * actions: ReserveAction: Unlike ReserveAction, ScheduleAction allocates
+ * actions:ReserveAction: Unlike ReserveAction, ScheduleAction allocates
  * future actions (e.g. an event, a task, etc) towards a time slot / spatial
  * allocation.
  *
@@ -48,7 +48,7 @@ class ScheduleAction extends PlanAction
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'Scheduling future actions, events, or tasks. Related actions: ReserveAction: Unlike ReserveAction, ScheduleAction allocates future actions (e.g. an event, a task, etc) towards a time slot / spatial allocation.';
+    static public $schemaTypeDescription = 'Scheduling future actions, events, or tasks. Related actions:ReserveAction: Unlike ReserveAction, ScheduleAction allocates future actions (e.g. an event, a task, etc) towards a time slot / spatial allocation.';
 
     /**
      * The Schema.org Type Extends

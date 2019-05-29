@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\Thing;
+use nystudio107\seomatic\models\jsonld\Enumeration;
 
 /**
  * BookFormatType - The publication format of the book.
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\Thing;
  * @since     3.0.0
  * @see       http://schema.org/BookFormatType
  */
-class BookFormatType extends Thing
+class BookFormatType extends Enumeration
 {
     // Static Public Properties
     // =========================================================================
@@ -52,7 +52,7 @@ class BookFormatType extends Thing
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'JsonLdType';
+    static public $schemaTypeExtends = 'Enumeration';
 
     /**
      * The Schema.org composed Property Names

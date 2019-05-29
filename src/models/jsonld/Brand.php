@@ -115,6 +115,13 @@ class Brand extends Intangible
      */
     public $review;
 
+    /**
+     * A slogan or motto associated with the item.
+     *
+     * @var mixed|string [schema.org types: Text]
+     */
+    public $slogan;
+
     // Static Protected Properties
     // =========================================================================
 
@@ -126,7 +133,8 @@ class Brand extends Intangible
     static protected $_schemaPropertyNames = [
         'aggregateRating',
         'logo',
-        'review'
+        'review',
+        'slogan'
     ];
 
     /**
@@ -137,7 +145,8 @@ class Brand extends Intangible
     static protected $_schemaPropertyExpectedTypes = [
         'aggregateRating' => ['AggregateRating'],
         'logo' => ['ImageObject','URL'],
-        'review' => ['Review']
+        'review' => ['Review'],
+        'slogan' => ['Text']
     ];
 
     /**
@@ -148,7 +157,8 @@ class Brand extends Intangible
     static protected $_schemaPropertyDescriptions = [
         'aggregateRating' => 'The overall rating, based on a collection of reviews or ratings, of the item.',
         'logo' => 'An associated logo.',
-        'review' => 'A review of the item. Supersedes reviews.'
+        'review' => 'A review of the item. Supersedes reviews.',
+        'slogan' => 'A slogan or motto associated with the item.'
     ];
 
     /**
@@ -209,7 +219,7 @@ class Brand extends Intangible
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['aggregateRating','logo','review'], 'validateJsonSchema'],
+            [['aggregateRating','logo','review','slogan'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

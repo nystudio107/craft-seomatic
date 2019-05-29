@@ -52,7 +52,7 @@ class WebPageElement extends CreativeWork
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'JsonLdType';
+    static public $schemaTypeExtends = 'CreativeWork';
 
     /**
      * The Schema.org composed Property Names
@@ -92,6 +92,24 @@ class WebPageElement extends CreativeWork
     // Public Properties
     // =========================================================================
 
+    /**
+     * A CSS selector, e.g. of a SpeakableSpecification or WebPageElement. In the
+     * latter case, multiple matches within a page can constitute a single
+     * conceptual "Web page element".
+     *
+     * @var CssSelectorType [schema.org types: CssSelectorType]
+     */
+    public $cssSelector;
+
+    /**
+     * An XPath, e.g. of a SpeakableSpecification or WebPageElement. In the latter
+     * case, multiple matches within a page can constitute a single conceptual
+     * "Web page element".
+     *
+     * @var XPathType [schema.org types: XPathType]
+     */
+    public $xpath;
+
     // Static Protected Properties
     // =========================================================================
 
@@ -101,7 +119,8 @@ class WebPageElement extends CreativeWork
      * @var array
      */
     static protected $_schemaPropertyNames = [
-
+        'cssSelector',
+        'xpath'
     ];
 
     /**
@@ -110,7 +129,8 @@ class WebPageElement extends CreativeWork
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-
+        'cssSelector' => ['CssSelectorType'],
+        'xpath' => ['XPathType']
     ];
 
     /**
@@ -119,7 +139,8 @@ class WebPageElement extends CreativeWork
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-
+        'cssSelector' => 'A CSS selector, e.g. of a SpeakableSpecification or WebPageElement. In the latter case, multiple matches within a page can constitute a single conceptual "Web page element".',
+        'xpath' => 'An XPath, e.g. of a SpeakableSpecification or WebPageElement. In the latter case, multiple matches within a page can constitute a single conceptual "Web page element".'
     ];
 
     /**
@@ -180,7 +201,7 @@ class WebPageElement extends CreativeWork
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [[], 'validateJsonSchema'],
+            [['cssSelector','xpath'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

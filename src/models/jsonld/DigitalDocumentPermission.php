@@ -14,7 +14,8 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\jsonld\Intangible;
 
 /**
- * DigitalDocumentPermission - No comment
+ * DigitalDocumentPermission - A permission for a particular person or group
+ * to access a particular file.
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -45,7 +46,7 @@ class DigitalDocumentPermission extends Intangible
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'No comment';
+    static public $schemaTypeDescription = 'A permission for a particular person or group to access a particular file.';
 
     /**
      * The Schema.org Type Extends

@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\jsonld\CreativeWork;
 
 /**
- * Book - No comment
+ * Book - A book.
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -45,14 +45,14 @@ class Book extends CreativeWork
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'No comment';
+    static public $schemaTypeDescription = 'A book.';
 
     /**
      * The Schema.org Type Extends
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'JsonLdType';
+    static public $schemaTypeExtends = 'CreativeWork';
 
     /**
      * The Schema.org composed Property Names
@@ -92,6 +92,48 @@ class Book extends CreativeWork
     // Public Properties
     // =========================================================================
 
+    /**
+     * Indicates whether the book is an abridged edition.
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $abridged;
+
+    /**
+     * The edition of the book.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $bookEdition;
+
+    /**
+     * The format of the book.
+     *
+     * @var BookFormatType [schema.org types: BookFormatType]
+     */
+    public $bookFormat;
+
+    /**
+     * The illustrator of the book.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $illustrator;
+
+    /**
+     * The ISBN of the book.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $isbn;
+
+    /**
+     * The number of pages in the book.
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $numberOfPages;
+
     // Static Protected Properties
     // =========================================================================
 
@@ -101,7 +143,12 @@ class Book extends CreativeWork
      * @var array
      */
     static protected $_schemaPropertyNames = [
-
+        'abridged',
+        'bookEdition',
+        'bookFormat',
+        'illustrator',
+        'isbn',
+        'numberOfPages'
     ];
 
     /**
@@ -110,7 +157,12 @@ class Book extends CreativeWork
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-
+        'abridged' => ['Boolean'],
+        'bookEdition' => ['Text'],
+        'bookFormat' => ['BookFormatType'],
+        'illustrator' => ['Person'],
+        'isbn' => ['Text'],
+        'numberOfPages' => ['Integer']
     ];
 
     /**
@@ -119,7 +171,12 @@ class Book extends CreativeWork
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-
+        'abridged' => 'Indicates whether the book is an abridged edition.',
+        'bookEdition' => 'The edition of the book.',
+        'bookFormat' => 'The format of the book.',
+        'illustrator' => 'The illustrator of the book.',
+        'isbn' => 'The ISBN of the book.',
+        'numberOfPages' => 'The number of pages in the book.'
     ];
 
     /**
@@ -180,7 +237,7 @@ class Book extends CreativeWork
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [[], 'validateJsonSchema'],
+            [['abridged','bookEdition','bookFormat','illustrator','isbn','numberOfPages'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

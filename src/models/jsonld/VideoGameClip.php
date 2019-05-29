@@ -118,6 +118,14 @@ class VideoGameClip extends Clip
     public $director;
 
     /**
+     * The end time of the clip expressed as the number of seconds from the
+     * beginning of the work.
+     *
+     * @var mixed|float [schema.org types: Number]
+     */
+    public $endOffset;
+
+    /**
      * The composer of the soundtrack.
      *
      * @var mixed|MusicGroup|Person [schema.org types: MusicGroup, Person]
@@ -146,6 +154,14 @@ class VideoGameClip extends Clip
      */
     public $partOfSeries;
 
+    /**
+     * The start time of the clip expressed as the number of seconds from the
+     * beginning of the work.
+     *
+     * @var mixed|float [schema.org types: Number]
+     */
+    public $startOffset;
+
     // Static Protected Properties
     // =========================================================================
 
@@ -158,10 +174,12 @@ class VideoGameClip extends Clip
         'actor',
         'clipNumber',
         'director',
+        'endOffset',
         'musicBy',
         'partOfEpisode',
         'partOfSeason',
-        'partOfSeries'
+        'partOfSeries',
+        'startOffset'
     ];
 
     /**
@@ -173,10 +191,12 @@ class VideoGameClip extends Clip
         'actor' => ['Person'],
         'clipNumber' => ['Integer','Text'],
         'director' => ['Person'],
+        'endOffset' => ['Number'],
         'musicBy' => ['MusicGroup','Person'],
         'partOfEpisode' => ['Episode'],
         'partOfSeason' => ['CreativeWorkSeason'],
-        'partOfSeries' => ['CreativeWorkSeries']
+        'partOfSeries' => ['CreativeWorkSeries'],
+        'startOffset' => ['Number']
     ];
 
     /**
@@ -188,10 +208,12 @@ class VideoGameClip extends Clip
         'actor' => 'An actor, e.g. in tv, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip. Supersedes actors.',
         'clipNumber' => 'Position of the clip within an ordered group of clips.',
         'director' => 'A director of e.g. tv, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip. Supersedes directors.',
+        'endOffset' => 'The end time of the clip expressed as the number of seconds from the beginning of the work.',
         'musicBy' => 'The composer of the soundtrack.',
         'partOfEpisode' => 'The episode to which this clip belongs.',
         'partOfSeason' => 'The season to which this episode belongs.',
-        'partOfSeries' => 'The series to which this episode or season belongs. Supersedes partOfTVSeries.'
+        'partOfSeries' => 'The series to which this episode or season belongs. Supersedes partOfTVSeries.',
+        'startOffset' => 'The start time of the clip expressed as the number of seconds from the beginning of the work.'
     ];
 
     /**
@@ -252,7 +274,7 @@ class VideoGameClip extends Clip
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['actor','clipNumber','director','musicBy','partOfEpisode','partOfSeason','partOfSeries'], 'validateJsonSchema'],
+            [['actor','clipNumber','director','endOffset','musicBy','partOfEpisode','partOfSeason','partOfSeries','startOffset'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

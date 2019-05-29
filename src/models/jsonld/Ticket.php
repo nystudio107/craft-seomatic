@@ -107,8 +107,11 @@ class Ticket extends Intangible
     public $issuedBy;
 
     /**
-     * The currency (in 3-letter ISO 4217 format) of the price or a price
-     * component, when attached to PriceSpecification and its subtypes.
+     * The currency of the price, or a price component when attached to
+     * PriceSpecification and its subtypes. Use standard formats: ISO 4217
+     * currency format e.g. "USD"; Ticker symbol for cryptocurrencies e.g. "BTC";
+     * well known names for Local Exchange Tradings Systems (LETS) and other
+     * currency types e.g. "Ithaca HOUR".
      *
      * @var string [schema.org types: Text]
      */
@@ -138,7 +141,11 @@ class Ticket extends Intangible
 
     /**
      * The total price for the reservation or ticket, including applicable taxes,
-     * shipping, etc.
+     * shipping, etc. Usage guidelines:Use values from 0123456789 (Unicode 'DIGIT
+     * ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially similiar
+     * Unicode symbols. Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to
+     * indicate a decimal point. Avoid using these symbols as a readability
+     * separator.
      *
      * @var mixed|float|PriceSpecification|string [schema.org types: Number, PriceSpecification, Text]
      */
@@ -194,11 +201,11 @@ class Ticket extends Intangible
     static protected $_schemaPropertyDescriptions = [
         'dateIssued' => 'The date the ticket was issued.',
         'issuedBy' => 'The organization issuing the ticket or permit.',
-        'priceCurrency' => 'The currency (in 3-letter ISO 4217 format) of the price or a price component, when attached to PriceSpecification and its subtypes.',
+        'priceCurrency' => 'The currency of the price, or a price component when attached to PriceSpecification and its subtypes. Use standard formats: ISO 4217 currency format e.g. "USD"; Ticker symbol for cryptocurrencies e.g. "BTC"; well known names for Local Exchange Tradings Systems (LETS) and other currency types e.g. "Ithaca HOUR".',
         'ticketNumber' => 'The unique identifier for the ticket.',
         'ticketToken' => 'Reference to an asset (e.g., Barcode, QR code image or PDF) usable for entrance.',
         'ticketedSeat' => 'The seat associated with the ticket.',
-        'totalPrice' => 'The total price for the reservation or ticket, including applicable taxes, shipping, etc.',
+        'totalPrice' => 'The total price for the reservation or ticket, including applicable taxes, shipping, etc. Usage guidelines:Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.',
         'underName' => 'The person or organization the reservation or ticket is for.'
     ];
 

@@ -53,7 +53,7 @@ class PresentationDigitalDocument extends DigitalDocument
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'JsonLdType';
+    static public $schemaTypeExtends = 'DigitalDocument';
 
     /**
      * The Schema.org composed Property Names

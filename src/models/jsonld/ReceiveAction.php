@@ -16,10 +16,10 @@ use nystudio107\seomatic\models\jsonld\TransferAction;
 /**
  * ReceiveAction - The act of physically/electronically taking delivery of an
  * object thathas been transferred from an origin to a destination. Reciprocal
- * of SendAction. Related actions: SendAction: The reciprocal of
- * ReceiveAction. TakeAction: Unlike TakeAction, ReceiveAction does not imply
- * that the ownership has been transfered (e.g. I can receive a package, but
- * it does not mean the package is now mine).
+ * of SendAction. Related actions:SendAction: The reciprocal of ReceiveAction.
+ * TakeAction: Unlike TakeAction, ReceiveAction does not imply that the
+ * ownership has been transfered (e.g. I can receive a package, but it does
+ * not mean the package is now mine).
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -50,7 +50,7 @@ class ReceiveAction extends TransferAction
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'The act of physically/electronically taking delivery of an object thathas been transferred from an origin to a destination. Reciprocal of SendAction. Related actions: SendAction: The reciprocal of ReceiveAction. TakeAction: Unlike TakeAction, ReceiveAction does not imply that the ownership has been transfered (e.g. I can receive a package, but it does not mean the package is now mine).';
+    static public $schemaTypeDescription = 'The act of physically/electronically taking delivery of an object thathas been transferred from an origin to a destination. Reciprocal of SendAction. Related actions:SendAction: The reciprocal of ReceiveAction. TakeAction: Unlike TakeAction, ReceiveAction does not imply that the ownership has been transfered (e.g. I can receive a package, but it does not mean the package is now mine).';
 
     /**
      * The Schema.org Type Extends

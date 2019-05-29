@@ -143,18 +143,39 @@ class MediaObject extends CreativeWork
     public $embedUrl;
 
     /**
-     * The CreativeWork encoded by this media object.
+     * The CreativeWork encoded by this media object. Inverse property: encoding.
      *
      * @var CreativeWork [schema.org types: CreativeWork]
      */
     public $encodesCreativeWork;
 
     /**
-     * mp3, mpeg4, etc.
+     * Media type typically expressed using a MIME format (see IANA site and MDN
+     * reference) e.g. application/zip for a SoftwareApplication binary,
+     * audio/mpeg for .mp3 etc.). In cases where a CreativeWork has several media
+     * type representations, encoding can be used to indicate each MediaObject
+     * alongside particular encodingFormat information. Unregistered or niche
+     * encoding and file formats can be indicated instead via the most appropriate
+     * URL, e.g. defining Web page or a Wikipedia/Wikidata entry. Supersedes
+     * fileFormat.
      *
-     * @var string [schema.org types: Text]
+     * @var mixed|string|string [schema.org types: Text, URL]
      */
     public $encodingFormat;
+
+    /**
+     * The endTime of something. For a reserved event or service (e.g.
+     * FoodEstablishmentReservation), the time that it is expected to end. For
+     * actions that span a period of time, when the action was performed. e.g.
+     * John wrote a book from January to December. For media, including audio and
+     * video, it's the time offset of the end of a clip within a larger file. Note
+     * that Event uses startDate/endDate instead of startTime/endTime, even when
+     * describing dates with times. This situation may be clarified in future
+     * revisions.
+     *
+     * @var mixed|DateTime [schema.org types: DateTime]
+     */
+    public $endTime;
 
     /**
      * The height of the item.
@@ -191,9 +212,23 @@ class MediaObject extends CreativeWork
      * Allowed values are true or false (note that an earlier version had 'yes',
      * 'no').
      *
-     * @var mixed|bool [schema.org types: Boolean]
+     * @var mixed|bool|MediaSubscription [schema.org types: Boolean, MediaSubscription]
      */
     public $requiresSubscription;
+
+    /**
+     * The startTime of something. For a reserved event or service (e.g.
+     * FoodEstablishmentReservation), the time that it is expected to start. For
+     * actions that span a period of time, when the action was performed. e.g.
+     * John wrote a book from January to December. For media, including audio and
+     * video, it's the time offset of the start of a clip within a larger file.
+     * Note that Event uses startDate/endDate instead of startTime/endTime, even
+     * when describing dates with times. This situation may be clarified in future
+     * revisions.
+     *
+     * @var mixed|DateTime [schema.org types: DateTime]
+     */
+    public $startTime;
 
     /**
      * Date when this media object was uploaded to this site.
@@ -226,11 +261,13 @@ class MediaObject extends CreativeWork
         'embedUrl',
         'encodesCreativeWork',
         'encodingFormat',
+        'endTime',
         'height',
         'playerType',
         'productionCompany',
         'regionsAllowed',
         'requiresSubscription',
+        'startTime',
         'uploadDate',
         'width'
     ];
@@ -248,12 +285,14 @@ class MediaObject extends CreativeWork
         'duration' => ['Duration'],
         'embedUrl' => ['URL'],
         'encodesCreativeWork' => ['CreativeWork'],
-        'encodingFormat' => ['Text'],
+        'encodingFormat' => ['Text','URL'],
+        'endTime' => ['DateTime'],
         'height' => ['Distance','QuantitativeValue'],
         'playerType' => ['Text'],
         'productionCompany' => ['Organization'],
         'regionsAllowed' => ['Place'],
-        'requiresSubscription' => ['Boolean'],
+        'requiresSubscription' => ['Boolean','MediaSubscription'],
+        'startTime' => ['DateTime'],
         'uploadDate' => ['Date'],
         'width' => ['Distance','QuantitativeValue']
     ];
@@ -270,13 +309,15 @@ class MediaObject extends CreativeWork
         'contentUrl' => 'Actual bytes of the media object, for example the image file or video file.',
         'duration' => 'The duration of the item (movie, audio recording, event, etc.) in ISO 8601 date format.',
         'embedUrl' => 'A URL pointing to a player for a specific video. In general, this is the information in the src element of an embed tag and should not be the same as the content of the loc tag.',
-        'encodesCreativeWork' => 'The CreativeWork encoded by this media object.',
-        'encodingFormat' => 'mp3, mpeg4, etc.',
+        'encodesCreativeWork' => 'The CreativeWork encoded by this media object. Inverse property: encoding.',
+        'encodingFormat' => 'Media type typically expressed using a MIME format (see IANA site and MDN reference) e.g. application/zip for a SoftwareApplication binary, audio/mpeg for .mp3 etc.). In cases where a CreativeWork has several media type representations, encoding can be used to indicate each MediaObject alongside particular encodingFormat information. Unregistered or niche encoding and file formats can be indicated instead via the most appropriate URL, e.g. defining Web page or a Wikipedia/Wikidata entry. Supersedes fileFormat.',
+        'endTime' => 'The endTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to end. For actions that span a period of time, when the action was performed. e.g. John wrote a book from January to December. For media, including audio and video, it\'s the time offset of the end of a clip within a larger file. Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.',
         'height' => 'The height of the item.',
         'playerType' => 'Player type required—for example, Flash or Silverlight.',
         'productionCompany' => 'The production company or studio responsible for the item e.g. series, video game, episode etc.',
         'regionsAllowed' => 'The regions where the media is allowed. If not specified, then it\'s assumed to be allowed everywhere. Specify the countries in ISO 3166 format.',
         'requiresSubscription' => 'Indicates if use of the media require a subscription (either paid or free). Allowed values are true or false (note that an earlier version had \'yes\', \'no\').',
+        'startTime' => 'The startTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to start. For actions that span a period of time, when the action was performed. e.g. John wrote a book from January to December. For media, including audio and video, it\'s the time offset of the start of a clip within a larger file. Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.',
         'uploadDate' => 'Date when this media object was uploaded to this site.',
         'width' => 'The width of the item.'
     ];
@@ -339,7 +380,7 @@ class MediaObject extends CreativeWork
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['associatedArticle','bitrate','contentSize','contentUrl','duration','embedUrl','encodesCreativeWork','encodingFormat','height','playerType','productionCompany','regionsAllowed','requiresSubscription','uploadDate','width'], 'validateJsonSchema'],
+            [['associatedArticle','bitrate','contentSize','contentUrl','duration','embedUrl','encodesCreativeWork','encodingFormat','endTime','height','playerType','productionCompany','regionsAllowed','requiresSubscription','startTime','uploadDate','width'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

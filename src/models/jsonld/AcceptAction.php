@@ -15,7 +15,7 @@ use nystudio107\seomatic\models\jsonld\AllocateAction;
 
 /**
  * AcceptAction - The act of committing to/adopting an object. Related
- * actions: RejectAction: The antonym of AcceptAction.
+ * actions:RejectAction: The antonym of AcceptAction.
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -46,7 +46,7 @@ class AcceptAction extends AllocateAction
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'The act of committing to/adopting an object. Related actions: RejectAction: The antonym of AcceptAction.';
+    static public $schemaTypeDescription = 'The act of committing to/adopting an object. Related actions:RejectAction: The antonym of AcceptAction.';
 
     /**
      * The Schema.org Type Extends

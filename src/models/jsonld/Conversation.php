@@ -95,7 +95,7 @@ class Conversation extends CreativeWork
     // =========================================================================
 
     /**
-     * The subject matter of the content.
+     * The subject matter of the content. Inverse property: subjectOf.
      *
      * @var Thing [schema.org types: Thing]
      */
@@ -206,7 +206,7 @@ class Conversation extends CreativeWork
     /**
      * An embedded audio object.
      *
-     * @var AudioObject [schema.org types: AudioObject]
+     * @var mixed|AudioObject|Clip [schema.org types: AudioObject, Clip]
      */
     public $audio;
 
@@ -268,7 +268,7 @@ class Conversation extends CreativeWork
     /**
      * Official rating of a piece of content—for example,'MPAA PG-13'.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var mixed|Rating|string [schema.org types: Rating, Text]
      */
     public $contentRating;
 
@@ -301,6 +301,14 @@ class Conversation extends CreativeWork
      * @var mixed|float [schema.org types: Number]
      */
     public $copyrightYear;
+
+    /**
+     * Indicates a correction to a CreativeWork, either via a CorrectionComment,
+     * textually or in another document.
+     *
+     * @var mixed|CorrectionComment|string|string [schema.org types: CorrectionComment, Text, URL]
+     */
+    public $correction;
 
     /**
      * The creator/author of this CreativeWork. This is the same as the Author
@@ -364,11 +372,26 @@ class Conversation extends CreativeWork
 
     /**
      * A media object that encodes this CreativeWork. This property is a synonym
-     * for associatedMedia. Supersedes encodings.
+     * for associatedMedia. Supersedes encodings. Inverse property:
+     * encodesCreativeWork.
      *
      * @var mixed|MediaObject [schema.org types: MediaObject]
      */
     public $encoding;
+
+    /**
+     * Media type typically expressed using a MIME format (see IANA site and MDN
+     * reference) e.g. application/zip for a SoftwareApplication binary,
+     * audio/mpeg for .mp3 etc.). In cases where a CreativeWork has several media
+     * type representations, encoding can be used to indicate each MediaObject
+     * alongside particular encodingFormat information. Unregistered or niche
+     * encoding and file formats can be indicated instead via the most appropriate
+     * URL, e.g. defining Web page or a Wikipedia/Wikidata entry. Supersedes
+     * fileFormat.
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $encodingFormat;
 
     /**
      * A creative work that this work is an
@@ -390,18 +413,6 @@ class Conversation extends CreativeWork
     public $expires;
 
     /**
-     * Media type, typically MIME format (see IANA site) of the content e.g.
-     * application/zip of a SoftwareApplication binary. In cases where a
-     * CreativeWork has several media type representations, 'encoding' can be used
-     * to indicate each MediaObject alongside particular fileFormat information.
-     * Unregistered or niche file formats can be indicated instead via the most
-     * appropriate URL, e.g. defining Web page or a Wikipedia entry.
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $fileFormat;
-
-    /**
      * A person or organization that supports (sponsors) something through some
      * kind of financial contribution.
      *
@@ -417,8 +428,8 @@ class Conversation extends CreativeWork
     public $genre;
 
     /**
-     * Indicates a CreativeWork that is (in some sense) a part of this
-     * CreativeWork. Inverse property: isPartOf.
+     * Indicates an item or CreativeWork that is part of this item, or
+     * CreativeWork (in some sense). Inverse property: isPartOf.
      *
      * @var mixed|CreativeWork [schema.org types: CreativeWork]
      */
@@ -483,8 +494,8 @@ class Conversation extends CreativeWork
     public $isFamilyFriendly;
 
     /**
-     * Indicates a CreativeWork that this CreativeWork is (in some sense) part of.
-     * Inverse property: hasPart.
+     * Indicates an item or CreativeWork that this item, or CreativeWork (in some
+     * sense), is part of. Inverse property: hasPart.
      *
      * @var mixed|CreativeWork [schema.org types: CreativeWork]
      */
@@ -536,6 +547,14 @@ class Conversation extends CreativeWork
      * @var mixed|Product|string|string [schema.org types: Product, Text, URL]
      */
     public $material;
+
+    /**
+     * The quantity of the materials being described or an expression of the
+     * physical space they occupy.
+     *
+     * @var mixed|QuantitativeValue|string [schema.org types: QuantitativeValue, Text]
+     */
+    public $materialExtent;
 
     /**
      * Indicates that the CreativeWork contains a reference to, but is not
@@ -647,6 +666,34 @@ class Conversation extends CreativeWork
     public $schemaVersion;
 
     /**
+     * Indicates the date on which the current structured data was generated /
+     * published. Typically used alongside sdPublisher
+     *
+     * @var mixed|Date [schema.org types: Date]
+     */
+    public $sdDatePublished;
+
+    /**
+     * A license document that applies to this structured data, typically
+     * indicated by URL.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
+     */
+    public $sdLicense;
+
+    /**
+     * Indicates the party responsible for generating and publishing the current
+     * structured data markup, typically in cases where the structured data is
+     * derived automatically from existing published content but published on a
+     * different site. For example, student projects and open data initiatives
+     * often re-publish existing content with more explicitly structured metadata.
+     * The sdPublisher property helps make such practices more explicit.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $sdPublisher;
+
+    /**
      * The Organization on whose behalf the creator was working.
      *
      * @var mixed|Organization [schema.org types: Organization]
@@ -654,12 +701,21 @@ class Conversation extends CreativeWork
     public $sourceOrganization;
 
     /**
+     * The "spatial" property can be used in cases when more specific properties
+     * (e.g. locationCreated, spatialCoverage, contentLocation) are not known to
+     * be appropriate.
+     *
+     * @var mixed|Place [schema.org types: Place]
+     */
+    public $spatial;
+
+    /**
      * The spatialCoverage of a CreativeWork indicates the place(s) which are the
      * focus of the content. It is a subproperty of contentLocation intended
      * primarily for more technical and detailed materials. For example with a
      * Dataset, it indicates areas that the dataset describes: a dataset of New
      * York weather would have spatialCoverage which was the place: the state of
-     * New York. Supersedes spatial.
+     * New York.
      *
      * @var mixed|Place [schema.org types: Place]
      */
@@ -675,6 +731,15 @@ class Conversation extends CreativeWork
     public $sponsor;
 
     /**
+     * The "temporal" property can be used in cases where more specific properties
+     * (e.g. temporalCoverage, dateCreated, dateModified, datePublished) are not
+     * known to be appropriate.
+     *
+     * @var mixed|DateTime|string [schema.org types: DateTime, Text]
+     */
+    public $temporal;
+
+    /**
      * The temporalCoverage of a CreativeWork indicates the period that the
      * content applies to, i.e. that it describes, either as a DateTime or as a
      * textual string indicating a time period in ISO 8601 time interval format.
@@ -685,7 +750,11 @@ class Conversation extends CreativeWork
      * temporalCoverage in broader terms - textually or via well-known URL.
      * Written works such as books may sometimes have precise temporal coverage
      * too, e.g. a work set in 1939 - 1945 can be indicated in ISO 8601 interval
-     * format format via "1939/1945". Supersedes datasetTimeInterval, temporal.
+     * format format via "1939/1945". Open-ended date ranges can be written with
+     * ".." in place of the end date. For example, "2015-11/.." indicates a range
+     * beginning in November 2015 and with no specified final date. This is
+     * tentative and might be updated in future when ISO 8601 is officially
+     * updated. Supersedes datasetTimeInterval.
      *
      * @var mixed|DateTime|string|string [schema.org types: DateTime, Text, URL]
      */
@@ -707,7 +776,7 @@ class Conversation extends CreativeWork
 
     /**
      * Approximate or typical time it takes to work with or through this learning
-     * resource for the typical intended target audience, e.g. 'P30M', 'P1H25M'.
+     * resource for the typical intended target audience, e.g. 'PT30M', 'PT1H25M'.
      *
      * @var mixed|Duration [schema.org types: Duration]
      */
@@ -748,7 +817,7 @@ class Conversation extends CreativeWork
     /**
      * An embedded video object.
      *
-     * @var mixed|VideoObject [schema.org types: VideoObject]
+     * @var mixed|Clip|VideoObject [schema.org types: Clip, VideoObject]
      */
     public $video;
 
@@ -806,6 +875,7 @@ class Conversation extends CreativeWork
         'contributor',
         'copyrightHolder',
         'copyrightYear',
+        'correction',
         'creator',
         'dateCreated',
         'dateModified',
@@ -815,9 +885,9 @@ class Conversation extends CreativeWork
         'educationalAlignment',
         'educationalUse',
         'encoding',
+        'encodingFormat',
         'exampleOfWork',
         'expires',
-        'fileFormat',
         'funder',
         'genre',
         'hasPart',
@@ -835,6 +905,7 @@ class Conversation extends CreativeWork
         'locationCreated',
         'mainEntity',
         'material',
+        'materialExtent',
         'mentions',
         'offers',
         'position',
@@ -848,9 +919,14 @@ class Conversation extends CreativeWork
         'releasedEvent',
         'review',
         'schemaVersion',
+        'sdDatePublished',
+        'sdLicense',
+        'sdPublisher',
         'sourceOrganization',
+        'spatial',
         'spatialCoverage',
         'sponsor',
+        'temporal',
         'temporalCoverage',
         'text',
         'thumbnailUrl',
@@ -883,7 +959,7 @@ class Conversation extends CreativeWork
         'alternativeHeadline' => ['Text'],
         'associatedMedia' => ['MediaObject'],
         'audience' => ['Audience'],
-        'audio' => ['AudioObject'],
+        'audio' => ['AudioObject','Clip'],
         'author' => ['Organization','Person'],
         'award' => ['Text'],
         'character' => ['Person'],
@@ -891,11 +967,12 @@ class Conversation extends CreativeWork
         'comment' => ['Comment'],
         'commentCount' => ['Integer'],
         'contentLocation' => ['Place'],
-        'contentRating' => ['Text'],
+        'contentRating' => ['Rating','Text'],
         'contentReferenceTime' => ['DateTime'],
         'contributor' => ['Organization','Person'],
         'copyrightHolder' => ['Organization','Person'],
         'copyrightYear' => ['Number'],
+        'correction' => ['CorrectionComment','Text','URL'],
         'creator' => ['Organization','Person'],
         'dateCreated' => ['Date','DateTime'],
         'dateModified' => ['Date','DateTime'],
@@ -905,9 +982,9 @@ class Conversation extends CreativeWork
         'educationalAlignment' => ['AlignmentObject'],
         'educationalUse' => ['Text'],
         'encoding' => ['MediaObject'],
+        'encodingFormat' => ['Text','URL'],
         'exampleOfWork' => ['CreativeWork'],
         'expires' => ['Date'],
-        'fileFormat' => ['Text','URL'],
         'funder' => ['Organization','Person'],
         'genre' => ['Text','URL'],
         'hasPart' => ['CreativeWork'],
@@ -925,6 +1002,7 @@ class Conversation extends CreativeWork
         'locationCreated' => ['Place'],
         'mainEntity' => ['Thing'],
         'material' => ['Product','Text','URL'],
+        'materialExtent' => ['QuantitativeValue','Text'],
         'mentions' => ['Thing'],
         'offers' => ['Offer'],
         'position' => ['Integer','Text'],
@@ -938,9 +1016,14 @@ class Conversation extends CreativeWork
         'releasedEvent' => ['PublicationEvent'],
         'review' => ['Review'],
         'schemaVersion' => ['Text','URL'],
+        'sdDatePublished' => ['Date'],
+        'sdLicense' => ['CreativeWork','URL'],
+        'sdPublisher' => ['Organization','Person'],
         'sourceOrganization' => ['Organization'],
+        'spatial' => ['Place'],
         'spatialCoverage' => ['Place'],
         'sponsor' => ['Organization','Person'],
+        'temporal' => ['DateTime','Text'],
         'temporalCoverage' => ['DateTime','Text','URL'],
         'text' => ['Text'],
         'thumbnailUrl' => ['URL'],
@@ -949,7 +1032,7 @@ class Conversation extends CreativeWork
         'translator' => ['Organization','Person'],
         'typicalAgeRange' => ['Text'],
         'version' => ['Number','Text'],
-        'video' => ['VideoObject'],
+        'video' => ['Clip','VideoObject'],
         'workExample' => ['CreativeWork'],
         'workTranslation' => ['CreativeWork']
     ];
@@ -960,7 +1043,7 @@ class Conversation extends CreativeWork
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'about' => 'The subject matter of the content.',
+        'about' => 'The subject matter of the content. Inverse property: subjectOf.',
         'accessMode' => 'The human sensory perceptual system or cognitive faculty through which a person may process or perceive information. Expected values include: auditory, tactile, textual, visual, colorDependent, chartOnVisual, chemOnVisual, diagramOnVisual, mathOnVisual, musicOnVisual, textOnVisual.',
         'accessModeSufficient' => 'A list of single or combined accessModes that are sufficient to understand all the intellectual content of a resource. Expected values include: auditory, tactile, textual, visual.',
         'accessibilityAPI' => 'Indicates that the resource is compatible with the referenced accessibility API (WebSchemas wiki lists possible values).',
@@ -986,6 +1069,7 @@ class Conversation extends CreativeWork
         'contributor' => 'A secondary contributor to the CreativeWork or Event.',
         'copyrightHolder' => 'The party holding the legal copyright to the CreativeWork.',
         'copyrightYear' => 'The year during which the claimed copyright for the CreativeWork was first asserted.',
+        'correction' => 'Indicates a correction to a CreativeWork, either via a CorrectionComment, textually or in another document.',
         'creator' => 'The creator/author of this CreativeWork. This is the same as the Author property for CreativeWork.',
         'dateCreated' => 'The date on which the CreativeWork was created or the item was added to a DataFeed.',
         'dateModified' => 'The date on which the CreativeWork was most recently modified or when the item\'s entry was modified within a DataFeed.',
@@ -994,13 +1078,13 @@ class Conversation extends CreativeWork
         'editor' => 'Specifies the Person who edited the CreativeWork.',
         'educationalAlignment' => 'An alignment to an established educational framework.',
         'educationalUse' => 'The purpose of a work in the context of education; for example, \'assignment\', \'group work\'.',
-        'encoding' => 'A media object that encodes this CreativeWork. This property is a synonym for associatedMedia. Supersedes encodings.',
+        'encoding' => 'A media object that encodes this CreativeWork. This property is a synonym for associatedMedia. Supersedes encodings. Inverse property: encodesCreativeWork.',
+        'encodingFormat' => 'Media type typically expressed using a MIME format (see IANA site and MDN reference) e.g. application/zip for a SoftwareApplication binary, audio/mpeg for .mp3 etc.). In cases where a CreativeWork has several media type representations, encoding can be used to indicate each MediaObject alongside particular encodingFormat information. Unregistered or niche encoding and file formats can be indicated instead via the most appropriate URL, e.g. defining Web page or a Wikipedia/Wikidata entry. Supersedes fileFormat.',
         'exampleOfWork' => 'A creative work that this work is an example/instance/realization/derivation of. Inverse property: workExample.',
         'expires' => 'Date the content expires and is no longer useful or available. For example a VideoObject or NewsArticle whose availability or relevance is time-limited, or a ClaimReview fact check whose publisher wants to indicate that it may no longer be relevant (or helpful to highlight) after some date.',
-        'fileFormat' => 'Media type, typically MIME format (see IANA site) of the content e.g. application/zip of a SoftwareApplication binary. In cases where a CreativeWork has several media type representations, \'encoding\' can be used to indicate each MediaObject alongside particular fileFormat information. Unregistered or niche file formats can be indicated instead via the most appropriate URL, e.g. defining Web page or a Wikipedia entry.',
         'funder' => 'A person or organization that supports (sponsors) something through some kind of financial contribution.',
         'genre' => 'Genre of the creative work, broadcast channel or group.',
-        'hasPart' => 'Indicates a CreativeWork that is (in some sense) a part of this CreativeWork. Inverse property: isPartOf.',
+        'hasPart' => 'Indicates an item or CreativeWork that is part of this item, or CreativeWork (in some sense). Inverse property: isPartOf.',
         'headline' => 'Headline of the article.',
         'inLanguage' => 'The language of the content or performance or used in an action. Please use one of the language codes from the IETF BCP 47 standard. See also availableLanguage. Supersedes language.',
         'interactionStatistic' => 'The number of interactions for the CreativeWork using the WebSite or SoftwareApplication. The most specific child type of InteractionCounter should be used. Supersedes interactionCount.',
@@ -1008,13 +1092,14 @@ class Conversation extends CreativeWork
         'isAccessibleForFree' => 'A flag to signal that the item, event, or place is accessible for free. Supersedes free.',
         'isBasedOn' => 'A resource that was used in the creation of this resource. This term can be repeated for multiple sources. For example, http://example.com/great-multiplication-intro.html. Supersedes isBasedOnUrl.',
         'isFamilyFriendly' => 'Indicates whether this content is family friendly.',
-        'isPartOf' => 'Indicates a CreativeWork that this CreativeWork is (in some sense) part of. Inverse property: hasPart.',
+        'isPartOf' => 'Indicates an item or CreativeWork that this item, or CreativeWork (in some sense), is part of. Inverse property: hasPart.',
         'keywords' => 'Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.',
         'learningResourceType' => 'The predominant type or kind characterizing the learning resource. For example, \'presentation\', \'handout\'.',
         'license' => 'A license document that applies to this content, typically indicated by URL.',
         'locationCreated' => 'The location where the CreativeWork was created, which may not be the same as the location depicted in the CreativeWork.',
         'mainEntity' => 'Indicates the primary entity described in some page or other CreativeWork. Inverse property: mainEntityOfPage.',
         'material' => 'A material that something is made from, e.g. leather, wool, cotton, paper.',
+        'materialExtent' => 'The quantity of the materials being described or an expression of the physical space they occupy.',
         'mentions' => 'Indicates that the CreativeWork contains a reference to, but is not necessarily about a concept.',
         'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event.',
         'position' => 'The position of an item in a series or sequence of items.',
@@ -1028,13 +1113,18 @@ class Conversation extends CreativeWork
         'releasedEvent' => 'The place and time the release was issued, expressed as a PublicationEvent.',
         'review' => 'A review of the item. Supersedes reviews.',
         'schemaVersion' => 'Indicates (by URL or string) a particular version of a schema used in some CreativeWork. For example, a document could declare a schemaVersion using an URL such as http://schema.org/version/2.0/ if precise indication of schema version was required by some application.',
+        'sdDatePublished' => 'Indicates the date on which the current structured data was generated / published. Typically used alongside sdPublisher',
+        'sdLicense' => 'A license document that applies to this structured data, typically indicated by URL.',
+        'sdPublisher' => 'Indicates the party responsible for generating and publishing the current structured data markup, typically in cases where the structured data is derived automatically from existing published content but published on a different site. For example, student projects and open data initiatives often re-publish existing content with more explicitly structured metadata. The sdPublisher property helps make such practices more explicit.',
         'sourceOrganization' => 'The Organization on whose behalf the creator was working.',
-        'spatialCoverage' => 'The spatialCoverage of a CreativeWork indicates the place(s) which are the focus of the content. It is a subproperty of contentLocation intended primarily for more technical and detailed materials. For example with a Dataset, it indicates areas that the dataset describes: a dataset of New York weather would have spatialCoverage which was the place: the state of New York. Supersedes spatial.',
+        'spatial' => 'The "spatial" property can be used in cases when more specific properties (e.g. locationCreated, spatialCoverage, contentLocation) are not known to be appropriate.',
+        'spatialCoverage' => 'The spatialCoverage of a CreativeWork indicates the place(s) which are the focus of the content. It is a subproperty of contentLocation intended primarily for more technical and detailed materials. For example with a Dataset, it indicates areas that the dataset describes: a dataset of New York weather would have spatialCoverage which was the place: the state of New York.',
         'sponsor' => 'A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.',
-        'temporalCoverage' => 'The temporalCoverage of a CreativeWork indicates the period that the content applies to, i.e. that it describes, either as a DateTime or as a textual string indicating a time period in ISO 8601 time interval format. In the case of a Dataset it will typically indicate the relevant time period in a precise notation (e.g. for a 2011 census dataset, the year 2011 would be written "2011/2012"). Other forms of content e.g. ScholarlyArticle, Book, TVSeries or TVEpisode may indicate their temporalCoverage in broader terms - textually or via well-known URL. Written works such as books may sometimes have precise temporal coverage too, e.g. a work set in 1939 - 1945 can be indicated in ISO 8601 interval format format via "1939/1945". Supersedes datasetTimeInterval, temporal.',
+        'temporal' => 'The "temporal" property can be used in cases where more specific properties (e.g. temporalCoverage, dateCreated, dateModified, datePublished) are not known to be appropriate.',
+        'temporalCoverage' => 'The temporalCoverage of a CreativeWork indicates the period that the content applies to, i.e. that it describes, either as a DateTime or as a textual string indicating a time period in ISO 8601 time interval format. In the case of a Dataset it will typically indicate the relevant time period in a precise notation (e.g. for a 2011 census dataset, the year 2011 would be written "2011/2012"). Other forms of content e.g. ScholarlyArticle, Book, TVSeries or TVEpisode may indicate their temporalCoverage in broader terms - textually or via well-known URL. Written works such as books may sometimes have precise temporal coverage too, e.g. a work set in 1939 - 1945 can be indicated in ISO 8601 interval format format via "1939/1945". Open-ended date ranges can be written with ".." in place of the end date. For example, "2015-11/.." indicates a range beginning in November 2015 and with no specified final date. This is tentative and might be updated in future when ISO 8601 is officially updated. Supersedes datasetTimeInterval.',
         'text' => 'The textual content of this CreativeWork.',
         'thumbnailUrl' => 'A thumbnail image relevant to the Thing.',
-        'timeRequired' => 'Approximate or typical time it takes to work with or through this learning resource for the typical intended target audience, e.g. \'P30M\', \'P1H25M\'.',
+        'timeRequired' => 'Approximate or typical time it takes to work with or through this learning resource for the typical intended target audience, e.g. \'PT30M\', \'PT1H25M\'.',
         'translationOfWork' => 'The work that this work has been translated from. e.g. 物种起源 is a translationOf “On the Origin of Species” Inverse property: workTranslation.',
         'translator' => 'Organization or person who adapts a creative work to different languages, regional differences and technical requirements of a target market, or that translates during some event.',
         'typicalAgeRange' => 'The typical expected age range, e.g. \'7-9\', \'11-\'.',
@@ -1102,7 +1192,7 @@ class Conversation extends CreativeWork
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['about','accessMode','accessModeSufficient','accessibilityAPI','accessibilityControl','accessibilityFeature','accessibilityHazard','accessibilitySummary','accountablePerson','aggregateRating','alternativeHeadline','associatedMedia','audience','audio','author','award','character','citation','comment','commentCount','contentLocation','contentRating','contentReferenceTime','contributor','copyrightHolder','copyrightYear','creator','dateCreated','dateModified','datePublished','discussionUrl','editor','educationalAlignment','educationalUse','encoding','exampleOfWork','expires','fileFormat','funder','genre','hasPart','headline','inLanguage','interactionStatistic','interactivityType','isAccessibleForFree','isBasedOn','isFamilyFriendly','isPartOf','keywords','learningResourceType','license','locationCreated','mainEntity','material','mentions','offers','position','producer','provider','publication','publisher','publisherImprint','publishingPrinciples','recordedAt','releasedEvent','review','schemaVersion','sourceOrganization','spatialCoverage','sponsor','temporalCoverage','text','thumbnailUrl','timeRequired','translationOfWork','translator','typicalAgeRange','version','video','workExample','workTranslation'], 'validateJsonSchema'],
+            [['about','accessMode','accessModeSufficient','accessibilityAPI','accessibilityControl','accessibilityFeature','accessibilityHazard','accessibilitySummary','accountablePerson','aggregateRating','alternativeHeadline','associatedMedia','audience','audio','author','award','character','citation','comment','commentCount','contentLocation','contentRating','contentReferenceTime','contributor','copyrightHolder','copyrightYear','correction','creator','dateCreated','dateModified','datePublished','discussionUrl','editor','educationalAlignment','educationalUse','encoding','encodingFormat','exampleOfWork','expires','funder','genre','hasPart','headline','inLanguage','interactionStatistic','interactivityType','isAccessibleForFree','isBasedOn','isFamilyFriendly','isPartOf','keywords','learningResourceType','license','locationCreated','mainEntity','material','materialExtent','mentions','offers','position','producer','provider','publication','publisher','publisherImprint','publishingPrinciples','recordedAt','releasedEvent','review','schemaVersion','sdDatePublished','sdLicense','sdPublisher','sourceOrganization','spatial','spatialCoverage','sponsor','temporal','temporalCoverage','text','thumbnailUrl','timeRequired','translationOfWork','translator','typicalAgeRange','version','video','workExample','workTranslation'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

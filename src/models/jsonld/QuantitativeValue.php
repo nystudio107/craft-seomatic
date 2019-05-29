@@ -138,10 +138,14 @@ class QuantitativeValue extends StructuredValue
     public $unitText;
 
     /**
-     * The value of the quantitative value or property value node. For
+     * The value of the quantitative value or property value node.For
      * QuantitativeValue and MonetaryAmount, the recommended type for values is
      * 'Number'. For PropertyValue, it can be 'Text;', 'Number', 'Boolean', or
-     * 'StructuredValue'.
+     * 'StructuredValue'. Use values from 0123456789 (Unicode 'DIGIT ZERO'
+     * (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially similiar
+     * Unicode symbols. Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to
+     * indicate a decimal point. Avoid using these symbols as a readability
+     * separator.
      *
      * @var mixed|bool|float|StructuredValue|string [schema.org types: Boolean, Number, StructuredValue, Text]
      */
@@ -199,7 +203,7 @@ class QuantitativeValue extends StructuredValue
         'minValue' => 'The lower value of some characteristic or property.',
         'unitCode' => 'The unit of measurement given using the UN/CEFACT Common Code (3 characters) or a URL. Other codes than the UN/CEFACT Common Code may be used with a prefix followed by a colon.',
         'unitText' => 'A string or text indicating the unit of measurement. Useful if you cannot provide a standard unit code for unitCode.',
-        'value' => 'The value of the quantitative value or property value node. For QuantitativeValue and MonetaryAmount, the recommended type for values is \'Number\'. For PropertyValue, it can be \'Text;\', \'Number\', \'Boolean\', or \'StructuredValue\'.',
+        'value' => 'The value of the quantitative value or property value node.For QuantitativeValue and MonetaryAmount, the recommended type for values is \'Number\'. For PropertyValue, it can be \'Text;\', \'Number\', \'Boolean\', or \'StructuredValue\'. Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.',
         'valueReference' => 'A pointer to a secondary value that provides additional information on the original value, e.g. a reference temperature.'
     ];
 

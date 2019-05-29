@@ -14,10 +14,18 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\jsonld\Accommodation;
 
 /**
- * CampingPitch - A camping pitch is an individual place for overnight stay in
- * the outdoors, typically being part of a larger camping site. See also the
- * dedicated document on the use of schema.org for marking up hotels and other
- * forms of accommodations.
+ * CampingPitch - A CampingPitch is an individual place for overnight stay in
+ * the outdoors, typically being part of a larger camping site, or Campground.
+ * In British English a campsite, or campground, is an area, usually divided
+ * into a number of pitches, where people can camp overnight using tents or
+ * camper vans or caravans; this British English use of the word is synonymous
+ * with the American English expression campground. In American English the
+ * term campsite generally means an area where an individual, family, group,
+ * or military unit can pitch a tent or park a camper; a campground may
+ * contain many campsites. (Source: Wikipedia see
+ * https://en.wikipedia.org/wiki/Campsite). See also the dedicated document on
+ * the use of schema.org for marking up hotels and other forms of
+ * accommodations.
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -48,7 +56,7 @@ class CampingPitch extends Accommodation
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'A camping pitch is an individual place for overnight stay in the outdoors, typically being part of a larger camping site. See also the dedicated document on the use of schema.org for marking up hotels and other forms of accommodations.';
+    static public $schemaTypeDescription = 'A CampingPitch is an individual place for overnight stay in the outdoors, typically being part of a larger camping site, or Campground. In British English a campsite, or campground, is an area, usually divided into a number of pitches, where people can camp overnight using tents or camper vans or caravans; this British English use of the word is synonymous with the American English expression campground. In American English the term campsite generally means an area where an individual, family, group, or military unit can pitch a tent or park a camper; a campground may contain many campsites. (Source: Wikipedia see https://en.wikipedia.org/wiki/Campsite). See also the dedicated document on the use of schema.org for marking up hotels and other forms of accommodations.';
 
     /**
      * The Schema.org Type Extends
@@ -115,7 +123,7 @@ class CampingPitch extends Accommodation
     public $floorSize;
 
     /**
-     * The number of rooms (excluding bathrooms and closets) of the acccommodation
+     * The number of rooms (excluding bathrooms and closets) of the accommodation
      * or lodging business. Typical unit code(s): ROM for room or C62 for no unit.
      * The type of room can be put in the unitText property of the
      * QuantitativeValue.
@@ -176,7 +184,7 @@ class CampingPitch extends Accommodation
     static protected $_schemaPropertyDescriptions = [
         'amenityFeature' => 'An amenity feature (e.g. a characteristic or service) of the Accommodation. This generic property does not make a statement about whether the feature is included in an offer for the main accommodation or available at extra costs.',
         'floorSize' => 'The size of the accommodation, e.g. in square meter or squarefoot. Typical unit code(s): MTK for square meter, FTK for square foot, or YDK for square yard',
-        'numberOfRooms' => 'The number of rooms (excluding bathrooms and closets) of the acccommodation or lodging business. Typical unit code(s): ROM for room or C62 for no unit. The type of room can be put in the unitText property of the QuantitativeValue.',
+        'numberOfRooms' => 'The number of rooms (excluding bathrooms and closets) of the accommodation or lodging business. Typical unit code(s): ROM for room or C62 for no unit. The type of room can be put in the unitText property of the QuantitativeValue.',
         'permittedUsage' => 'Indications regarding the permitted usage of the accommodation.',
         'petsAllowed' => 'Indicates whether pets are allowed to enter the accommodation or lodging business. More detailed information can be put in a text value.'
     ];

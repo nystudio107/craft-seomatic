@@ -53,7 +53,7 @@ class TechArticle extends Article
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'JsonLdType';
+    static public $schemaTypeExtends = 'Article';
 
     /**
      * The Schema.org composed Property Names

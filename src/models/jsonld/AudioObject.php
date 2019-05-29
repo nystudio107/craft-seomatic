@@ -93,10 +93,18 @@ class AudioObject extends MediaObject
     // =========================================================================
 
     /**
+     * The caption for this object. For downloadable machine formats (closed
+     * caption, subtitles etc.) use MediaObject and indicate the encodingFormat.
+     *
+     * @var mixed|MediaObject|string [schema.org types: MediaObject, Text]
+     */
+    public $caption;
+
+    /**
      * If this MediaObject is an AudioObject or VideoObject, the transcript of
      * that object.
      *
-     * @var string [schema.org types: Text]
+     * @var mixed|string [schema.org types: Text]
      */
     public $transcript;
 
@@ -109,6 +117,7 @@ class AudioObject extends MediaObject
      * @var array
      */
     static protected $_schemaPropertyNames = [
+        'caption',
         'transcript'
     ];
 
@@ -118,6 +127,7 @@ class AudioObject extends MediaObject
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
+        'caption' => ['MediaObject','Text'],
         'transcript' => ['Text']
     ];
 
@@ -127,6 +137,7 @@ class AudioObject extends MediaObject
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
+        'caption' => 'The caption for this object. For downloadable machine formats (closed caption, subtitles etc.) use MediaObject and indicate the encodingFormat.',
         'transcript' => 'If this MediaObject is an AudioObject or VideoObject, the transcript of that object.'
     ];
 
@@ -188,7 +199,7 @@ class AudioObject extends MediaObject
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['transcript'], 'validateJsonSchema'],
+            [['caption','transcript'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

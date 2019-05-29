@@ -106,6 +106,16 @@ class CourseInstance extends Event
     public $courseMode;
 
     /**
+     * The amount of work expected of students taking the course, often provided
+     * as a figure per week or per month, and may be broken down by type. For
+     * example, "2 hours of lectures, 1 hour of lab work and 3 hours of
+     * independent study per week".
+     *
+     * @var mixed|string [schema.org types: Text]
+     */
+    public $courseWorkload;
+
+    /**
      * A person assigned to instruct or provide instructional assistance for the
      * CourseInstance.
      *
@@ -123,6 +133,7 @@ class CourseInstance extends Event
      */
     static protected $_schemaPropertyNames = [
         'courseMode',
+        'courseWorkload',
         'instructor'
     ];
 
@@ -133,6 +144,7 @@ class CourseInstance extends Event
      */
     static protected $_schemaPropertyExpectedTypes = [
         'courseMode' => ['Text','URL'],
+        'courseWorkload' => ['Text'],
         'instructor' => ['Person']
     ];
 
@@ -143,6 +155,7 @@ class CourseInstance extends Event
      */
     static protected $_schemaPropertyDescriptions = [
         'courseMode' => 'The medium or means of delivery of the course instance or the mode of study, either as a text label (e.g. "online", "onsite" or "blended"; "synchronous" or "asynchronous"; "full-time" or "part-time") or as a URL reference to a term from a controlled vocabulary (e.g. https://ceds.ed.gov/element/001311#Asynchronous ).',
+        'courseWorkload' => 'The amount of work expected of students taking the course, often provided as a figure per week or per month, and may be broken down by type. For example, "2 hours of lectures, 1 hour of lab work and 3 hours of independent study per week".',
         'instructor' => 'A person assigned to instruct or provide instructional assistance for the CourseInstance.'
     ];
 
@@ -204,7 +217,7 @@ class CourseInstance extends Event
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['courseMode','instructor'], 'validateJsonSchema'],
+            [['courseMode','courseWorkload','instructor'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
