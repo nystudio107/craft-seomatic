@@ -4,6 +4,7 @@
 ### Changed
 * Added `FAQPage` schema type from [schema.org](https://schema.org/FAQPage)
 * Ensure that URLs with spaces or other non-RFC1738 compliant characters are encoded
+* Replace "steps" by "step" in HowTo JSON-LD
 
 ## 3.2.4 - 2019.05.24
 ### Changed
