@@ -1,5 +1,10 @@
 # SEOmatic Changelog
 
+
+## 3.2.6 - 2019.05.29
+### Changed
+* Updated to [schema.org 3.6](http://schema.org/version/3.6/) with over 900 JSON-LD Structured Data schemas!
+
 ## 3.2.5 - 2019.05.29
 ### Changed
 * Added `FAQPage` schema type from [schema.org](https://schema.org/FAQPage)
