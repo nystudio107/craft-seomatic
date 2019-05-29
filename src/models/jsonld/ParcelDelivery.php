@@ -53,7 +53,7 @@ class ParcelDelivery extends Intangible
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'JsonLdType';
+    static public $schemaTypeExtends = 'Intangible';
 
     /**
      * The Schema.org composed Property Names

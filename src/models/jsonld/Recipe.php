@@ -14,7 +14,9 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\jsonld\HowTo;
 
 /**
- * Recipe - No comment
+ * Recipe - A recipe. For dietary restrictions covered by the recipe, a few
+ * common restrictions are enumerated via suitableForDiet. The keywords
+ * property can also be used to add more detail.
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -45,7 +47,7 @@ class Recipe extends HowTo
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'No comment';
+    static public $schemaTypeDescription = 'A recipe. For dietary restrictions covered by the recipe, a few common restrictions are enumerated via suitableForDiet. The keywords property can also be used to add more detail.';
 
     /**
      * The Schema.org Type Extends

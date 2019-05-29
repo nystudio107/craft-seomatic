@@ -15,10 +15,10 @@ use nystudio107\seomatic\models\jsonld\TransferAction;
 
 /**
  * SendAction - The act of physically/electronically dispatching an object for
- * transfer from an origin to a destination.Related actions: ReceiveAction:
- * The reciprocal of SendAction. GiveAction: Unlike GiveAction, SendAction
- * does not imply the transfer of ownership (e.g. I can send you my laptop,
- * but I'm not necessarily giving it to you).
+ * transfer from an origin to a destination.Related actions:ReceiveAction: The
+ * reciprocal of SendAction. GiveAction: Unlike GiveAction, SendAction does
+ * not imply the transfer of ownership (e.g. I can send you my laptop, but I'm
+ * not necessarily giving it to you).
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -49,7 +49,7 @@ class SendAction extends TransferAction
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'The act of physically/electronically dispatching an object for transfer from an origin to a destination.Related actions: ReceiveAction: The reciprocal of SendAction. GiveAction: Unlike GiveAction, SendAction does not imply the transfer of ownership (e.g. I can send you my laptop, but I\'m not necessarily giving it to you).';
+    static public $schemaTypeDescription = 'The act of physically/electronically dispatching an object for transfer from an origin to a destination.Related actions:ReceiveAction: The reciprocal of SendAction. GiveAction: Unlike GiveAction, SendAction does not imply the transfer of ownership (e.g. I can send you my laptop, but I\'m not necessarily giving it to you).';
 
     /**
      * The Schema.org Type Extends

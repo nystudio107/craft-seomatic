@@ -53,7 +53,7 @@ class HowTo extends CreativeWork
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'JsonLdType';
+    static public $schemaTypeExtends = 'CreativeWork';
 
     /**
      * The Schema.org composed Property Names
@@ -118,10 +118,10 @@ class HowTo extends CreativeWork
     public $prepTime;
 
     /**
-     * The steps in the form of a single item (text, document, video, etc.) or an
-     * ordered list with HowToStep and/or HowToSection items.
+     * A single step item (as HowToStep, text, document, video, etc.) or a
+     * HowToSection. Supersedes steps.
      *
-     * @var mixed|CreativeWork|ItemList|string [schema.org types: CreativeWork, ItemList, Text]
+     * @var mixed|CreativeWork|HowToSection|HowToStep|string [schema.org types: CreativeWork, HowToSection, HowToStep, Text]
      */
     public $step;
 
@@ -185,7 +185,7 @@ class HowTo extends CreativeWork
         'estimatedCost' => ['MonetaryAmount','Text'],
         'performTime' => ['Duration'],
         'prepTime' => ['Duration'],
-        'step' => ['CreativeWork','ItemList','Text'],
+        'step' => ['CreativeWork','HowToSection','HowToStep','Text'],
         'supply' => ['HowToSupply','Text'],
         'tool' => ['HowToTool','Text'],
         'totalTime' => ['Duration'],
@@ -201,7 +201,7 @@ class HowTo extends CreativeWork
         'estimatedCost' => 'The estimated cost of the supply or supplies consumed when performing instructions.',
         'performTime' => 'The length of time it takes to perform instructions or a direction (not including time to prepare the supplies), in ISO 8601 duration format.',
         'prepTime' => 'The length of time it takes to prepare the items to be used in instructions or a direction, in ISO 8601 duration format.',
-        'step' => 'The steps in the form of a single item (text, document, video, etc.) or an ordered list with HowToStep and/or HowToSection items.',
+        'step' => 'A single step item (as HowToStep, text, document, video, etc.) or a HowToSection. Supersedes steps.',
         'supply' => 'A sub-property of instrument. A supply consumed when performing instructions or a direction.',
         'tool' => 'A sub property of instrument. An object used (but not consumed) when performing instructions or a direction.',
         'totalTime' => 'The total time required to perform instructions or a direction (including time to prepare the supplies), in ISO 8601 duration format.',

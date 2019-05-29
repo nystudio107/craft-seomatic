@@ -101,6 +101,14 @@ class Review extends CreativeWork
     public $itemReviewed;
 
     /**
+     * This Review or Rating is relevant to this part or facet of the
+     * itemReviewed.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $reviewAspect;
+
+    /**
      * The actual body of the review.
      *
      * @var string [schema.org types: Text]
@@ -126,6 +134,7 @@ class Review extends CreativeWork
      */
     static protected $_schemaPropertyNames = [
         'itemReviewed',
+        'reviewAspect',
         'reviewBody',
         'reviewRating'
     ];
@@ -137,6 +146,7 @@ class Review extends CreativeWork
      */
     static protected $_schemaPropertyExpectedTypes = [
         'itemReviewed' => ['Thing'],
+        'reviewAspect' => ['Text'],
         'reviewBody' => ['Text'],
         'reviewRating' => ['Rating']
     ];
@@ -148,6 +158,7 @@ class Review extends CreativeWork
      */
     static protected $_schemaPropertyDescriptions = [
         'itemReviewed' => 'The item that is being reviewed/rated.',
+        'reviewAspect' => 'This Review or Rating is relevant to this part or facet of the itemReviewed.',
         'reviewBody' => 'The actual body of the review.',
         'reviewRating' => 'The rating given in this review. Note that reviews can themselves be rated. The reviewRating applies to rating given by the review. The aggregateRating property applies to the review itself, as a creative work.'
     ];
@@ -210,7 +221,7 @@ class Review extends CreativeWork
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['itemReviewed','reviewBody','reviewRating'], 'validateJsonSchema'],
+            [['itemReviewed','reviewAspect','reviewBody','reviewRating'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

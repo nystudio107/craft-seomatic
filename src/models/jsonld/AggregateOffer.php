@@ -95,14 +95,22 @@ class AggregateOffer extends Offer
     // =========================================================================
 
     /**
-     * The highest price of all offers available.
+     * The highest price of all offers available. Usage guidelines:Use values from
+     * 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather
+     * than superficially similiar Unicode symbols. Use '.' (Unicode 'FULL STOP'
+     * (U+002E)) rather than ',' to indicate a decimal point. Avoid using these
+     * symbols as a readability separator.
      *
      * @var mixed|float|string [schema.org types: Number, Text]
      */
     public $highPrice;
 
     /**
-     * The lowest price of all offers available.
+     * The lowest price of all offers available. Usage guidelines:Use values from
+     * 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather
+     * than superficially similiar Unicode symbols. Use '.' (Unicode 'FULL STOP'
+     * (U+002E)) rather than ',' to indicate a decimal point. Avoid using these
+     * symbols as a readability separator.
      *
      * @var mixed|float|string [schema.org types: Number, Text]
      */
@@ -157,8 +165,8 @@ class AggregateOffer extends Offer
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'highPrice' => 'The highest price of all offers available.',
-        'lowPrice' => 'The lowest price of all offers available.',
+        'highPrice' => 'The highest price of all offers available. Usage guidelines:Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.',
+        'lowPrice' => 'The lowest price of all offers available. Usage guidelines:Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.',
         'offerCount' => 'The number of offers for the product.',
         'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event.'
     ];

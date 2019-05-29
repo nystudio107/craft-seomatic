@@ -14,9 +14,10 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\jsonld\PlanAction;
 
 /**
- * ReserveAction - Reserving a concrete object. Related actions:
- * ScheduleAction: Unlike ScheduleAction, ReserveAction reserves concrete
- * objects (e.g. a table, a hotel) towards a time slot / spatial allocation.
+ * ReserveAction - Reserving a concrete object. Related
+ * actions:ScheduleAction: Unlike ScheduleAction, ReserveAction reserves
+ * concrete objects (e.g. a table, a hotel) towards a time slot / spatial
+ * allocation.
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -47,7 +48,7 @@ class ReserveAction extends PlanAction
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'Reserving a concrete object. Related actions: ScheduleAction: Unlike ScheduleAction, ReserveAction reserves concrete objects (e.g. a table, a hotel) towards a time slot / spatial allocation.';
+    static public $schemaTypeDescription = 'Reserving a concrete object. Related actions:ScheduleAction: Unlike ScheduleAction, ReserveAction reserves concrete objects (e.g. a table, a hotel) towards a time slot / spatial allocation.';
 
     /**
      * The Schema.org Type Extends

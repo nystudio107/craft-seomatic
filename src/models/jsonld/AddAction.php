@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\jsonld\UpdateAction;
 
 /**
- * AddAction - No comment
+ * AddAction - The act of editing by adding an object to a collection.
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -45,14 +45,14 @@ class AddAction extends UpdateAction
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'No comment';
+    static public $schemaTypeDescription = 'The act of editing by adding an object to a collection.';
 
     /**
      * The Schema.org Type Extends
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'JsonLdType';
+    static public $schemaTypeExtends = 'UpdateAction';
 
     /**
      * The Schema.org composed Property Names
@@ -92,6 +92,14 @@ class AddAction extends UpdateAction
     // Public Properties
     // =========================================================================
 
+    /**
+     * A sub property of object. The collection target of the action. Supersedes
+     * collection.
+     *
+     * @var Thing [schema.org types: Thing]
+     */
+    public $targetCollection;
+
     // Static Protected Properties
     // =========================================================================
 
@@ -101,7 +109,7 @@ class AddAction extends UpdateAction
      * @var array
      */
     static protected $_schemaPropertyNames = [
-
+        'targetCollection'
     ];
 
     /**
@@ -110,7 +118,7 @@ class AddAction extends UpdateAction
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-
+        'targetCollection' => ['Thing']
     ];
 
     /**
@@ -119,7 +127,7 @@ class AddAction extends UpdateAction
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-
+        'targetCollection' => 'A sub property of object. The collection target of the action. Supersedes collection.'
     ];
 
     /**
@@ -180,7 +188,7 @@ class AddAction extends UpdateAction
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [[], 'validateJsonSchema'],
+            [['targetCollection'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

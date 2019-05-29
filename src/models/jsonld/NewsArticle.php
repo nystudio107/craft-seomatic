@@ -97,7 +97,15 @@ class NewsArticle extends Article
     /**
      * A dateline is a brief piece of text included in news articles that
      * describes where and when the story was written or filed though the date is
-     * often omitted. Sometimes only a placename is provided.
+     * often omitted. Sometimes only a placename is provided. Structured
+     * representations of dateline-related information can also be expressed more
+     * explicitly using locationCreated (which represents where a work was created
+     * e.g. where a news report was written). For location depicted or described
+     * in the content, use contentLocation. Dateline summaries are oriented more
+     * towards human readers than towards automated processing, and can vary
+     * substantially. Some examples: "BEIRUT, Lebanon, June 2.", "Paris, France",
+     * "December 19, 2017 11:43AM Reporting from Washington", "Beijing/Moscow",
+     * "QUEZON CITY, Philippines".
      *
      * @var string [schema.org types: Text]
      */
@@ -170,7 +178,7 @@ class NewsArticle extends Article
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'dateline' => 'A dateline is a brief piece of text included in news articles that describes where and when the story was written or filed though the date is often omitted. Sometimes only a placename is provided.',
+        'dateline' => 'A dateline is a brief piece of text included in news articles that describes where and when the story was written or filed though the date is often omitted. Sometimes only a placename is provided. Structured representations of dateline-related information can also be expressed more explicitly using locationCreated (which represents where a work was created e.g. where a news report was written). For location depicted or described in the content, use contentLocation. Dateline summaries are oriented more towards human readers than towards automated processing, and can vary substantially. Some examples: "BEIRUT, Lebanon, June 2.", "Paris, France", "December 19, 2017 11:43AM Reporting from Washington", "Beijing/Moscow", "QUEZON CITY, Philippines".',
         'printColumn' => 'The number of the column in which the NewsArticle appears in the print edition.',
         'printEdition' => 'The edition of the print product in which the NewsArticle appears.',
         'printPage' => 'If this NewsArticle appears in print, this field indicates the name of the page on which the article is found. Please note that this field is intended for the exact page name (e.g. A5, B18).',

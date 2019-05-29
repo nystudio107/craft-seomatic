@@ -15,7 +15,7 @@ use nystudio107\seomatic\models\jsonld\InteractAction;
 
 /**
  * LeaveAction - An agent leaves an event / group with participants/friends at
- * a location. Related actions: JoinAction: The antonym of LeaveAction.
+ * a location. Related actions:JoinAction: The antonym of LeaveAction.
  * UnRegisterAction: Unlike UnRegisterAction, LeaveAction implies leaving a
  * group/team of people rather than a service.
  *
@@ -48,7 +48,7 @@ class LeaveAction extends InteractAction
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'An agent leaves an event / group with participants/friends at a location. Related actions: JoinAction: The antonym of LeaveAction. UnRegisterAction: Unlike UnRegisterAction, LeaveAction implies leaving a group/team of people rather than a service.';
+    static public $schemaTypeDescription = 'An agent leaves an event / group with participants/friends at a location. Related actions:JoinAction: The antonym of LeaveAction. UnRegisterAction: Unlike UnRegisterAction, LeaveAction implies leaving a group/team of people rather than a service.';
 
     /**
      * The Schema.org Type Extends

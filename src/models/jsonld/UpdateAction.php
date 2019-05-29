@@ -53,7 +53,7 @@ class UpdateAction extends Action
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'JsonLdType';
+    static public $schemaTypeExtends = 'Action';
 
     /**
      * The Schema.org composed Property Names

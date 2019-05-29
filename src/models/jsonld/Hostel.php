@@ -136,6 +136,16 @@ class Hostel extends LodgingBusiness
     public $checkoutTime;
 
     /**
+     * The number of rooms (excluding bathrooms and closets) of the accommodation
+     * or lodging business. Typical unit code(s): ROM for room or C62 for no unit.
+     * The type of room can be put in the unitText property of the
+     * QuantitativeValue.
+     *
+     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
+     */
+    public $numberOfRooms;
+
+    /**
      * Indicates whether pets are allowed to enter the accommodation or lodging
      * business. More detailed information can be put in a text value.
      *
@@ -167,6 +177,7 @@ class Hostel extends LodgingBusiness
         'availableLanguage',
         'checkinTime',
         'checkoutTime',
+        'numberOfRooms',
         'petsAllowed',
         'starRating'
     ];
@@ -182,6 +193,7 @@ class Hostel extends LodgingBusiness
         'availableLanguage' => ['Language','Text'],
         'checkinTime' => ['DateTime'],
         'checkoutTime' => ['DateTime'],
+        'numberOfRooms' => ['Number','QuantitativeValue'],
         'petsAllowed' => ['Boolean','Text'],
         'starRating' => ['Rating']
     ];
@@ -197,6 +209,7 @@ class Hostel extends LodgingBusiness
         'availableLanguage' => 'A language someone may use with or at the item, service or place. Please use one of the language codes from the IETF BCP 47 standard. See also inLanguage',
         'checkinTime' => 'The earliest someone may check into a lodging establishment.',
         'checkoutTime' => 'The latest someone may check out of a lodging establishment.',
+        'numberOfRooms' => 'The number of rooms (excluding bathrooms and closets) of the accommodation or lodging business. Typical unit code(s): ROM for room or C62 for no unit. The type of room can be put in the unitText property of the QuantitativeValue.',
         'petsAllowed' => 'Indicates whether pets are allowed to enter the accommodation or lodging business. More detailed information can be put in a text value.',
         'starRating' => 'An official rating for a lodging business or food establishment, e.g. from national associations or standards bodies. Use the author property to indicate the rating organization, e.g. as an Organization with name such as (e.g. HOTREC, DEHOGA, WHR, or Hotelstars).'
     ];
@@ -259,7 +272,7 @@ class Hostel extends LodgingBusiness
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['amenityFeature','audience','availableLanguage','checkinTime','checkoutTime','petsAllowed','starRating'], 'validateJsonSchema'],
+            [['amenityFeature','audience','availableLanguage','checkinTime','checkoutTime','numberOfRooms','petsAllowed','starRating'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

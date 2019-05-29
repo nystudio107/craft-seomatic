@@ -15,7 +15,7 @@ use nystudio107\seomatic\models\jsonld\CommunicateAction;
 
 /**
  * ReplyAction - The act of responding to a question/message asked/sent by the
- * object. Related to AskAction Related actions: AskAction: Appears generally
+ * object. Related to AskAction Related actions:AskAction: Appears generally
  * as an origin of a ReplyAction.
  *
  * @author    nystudio107
@@ -47,7 +47,7 @@ class ReplyAction extends CommunicateAction
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'The act of responding to a question/message asked/sent by the object. Related to AskAction Related actions: AskAction: Appears generally as an origin of a ReplyAction.';
+    static public $schemaTypeDescription = 'The act of responding to a question/message asked/sent by the object. Related to AskAction Related actions:AskAction: Appears generally as an origin of a ReplyAction.';
 
     /**
      * The Schema.org Type Extends

@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\CreativeWork;
+use nystudio107\seomatic\models\jsonld\DigitalDocument;
 
 /**
  * NoteDigitalDocument - A file containing a note, primarily for the author.
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\CreativeWork;
  * @since     3.0.0
  * @see       http://schema.org/NoteDigitalDocument
  */
-class NoteDigitalDocument extends CreativeWork
+class NoteDigitalDocument extends DigitalDocument
 {
     // Static Public Properties
     // =========================================================================
@@ -52,7 +52,7 @@ class NoteDigitalDocument extends CreativeWork
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'JsonLdType';
+    static public $schemaTypeExtends = 'DigitalDocument';
 
     /**
      * The Schema.org composed Property Names

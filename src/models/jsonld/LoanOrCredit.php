@@ -101,8 +101,10 @@ class LoanOrCredit extends FinancialProduct
     public $amount;
 
     /**
-     * The currency in which the monetary amount is expressed (in 3-letter ISO
-     * 4217 format).
+     * The currency in which the monetary amount is expressed. Use standard
+     * formats: ISO 4217 currency format e.g. "USD"; Ticker symbol for
+     * cryptocurrencies e.g. "BTC"; well known names for Local Exchange Tradings
+     * Systems (LETS) and other currency types e.g. "Ithaca HOUR".
      *
      * @var mixed|string [schema.org types: Text]
      */
@@ -208,7 +210,7 @@ class LoanOrCredit extends FinancialProduct
      */
     static protected $_schemaPropertyDescriptions = [
         'amount' => 'The amount of money.',
-        'currency' => 'The currency in which the monetary amount is expressed (in 3-letter ISO 4217 format).',
+        'currency' => 'The currency in which the monetary amount is expressed. Use standard formats: ISO 4217 currency format e.g. "USD"; Ticker symbol for cryptocurrencies e.g. "BTC"; well known names for Local Exchange Tradings Systems (LETS) and other currency types e.g. "Ithaca HOUR".',
         'gracePeriod' => 'The period of time after any due date that the borrower has to fulfil its obligations before a default (failure to pay) is deemed to have occurred.',
         'loanRepaymentForm' => 'A form of paying back money previously borrowed from a lender. Repayment usually takes the form of periodic payments that normally include part principal plus interest in each payment.',
         'loanTerm' => 'The duration of the loan or credit agreement.',
