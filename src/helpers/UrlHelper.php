@@ -89,6 +89,8 @@ class UrlHelper extends CraftUrlHelper
                 }
             }
         }
+        // Ensure that the URL is properly encoded
+        $url = rawurlencode($url);
 
         return $url;
     }
