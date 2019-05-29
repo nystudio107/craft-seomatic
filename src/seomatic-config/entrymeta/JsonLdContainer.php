@@ -39,7 +39,7 @@ return [
                 'dateCreated'      => '{entry.dateCreated |atom}',
                 'dateModified'     => '{entry.dateUpdated |atom}',
                 'datePublished'    => '{entry.postDate |atom}',
-                'copyrightYear'    => '{entry.postDate |atom}',
+                'copyrightYear'    => '{entry.postDate | date("Y")}',
                 'inLanguage'       => '{seomatic.meta.language}',
                 'copyrightHolder'  => [
                     'id' => '{seomatic.site.identity.genericUrl}#identity',
