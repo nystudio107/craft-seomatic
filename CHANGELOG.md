@@ -1,5 +1,14 @@
 # SEOmatic Changelog
 
+## 3.2.5 - 2019.05.29
+### Changed
+* Added `FAQPage` schema type from [schema.org](https://schema.org/FAQPage)
+* Ensure that URLs with spaces or other non-RFC1738 compliant characters are encoded
+* Replace "steps" by "step" in HowTo JSON-LD
+* Changed `copyrightYear` to output just the year
+* Fixed an issue with the JavaScript bundle not instantiating for SEO Settings fields
+* Updated to latest npm deps
+
 ## 3.2.4 - 2019.05.24
 ### Changed
 * Fixed a typecasting issue that caused `link rel="alternate"` to render for entries that were disabled for a particular site

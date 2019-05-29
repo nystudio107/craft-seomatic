@@ -89,6 +89,8 @@ class UrlHelper extends CraftUrlHelper
                 }
             }
         }
+        // Ensure that any spaces in the URL are encoded
+        $url = str_replace(' ', '%20', $url);
 
         return $url;
     }

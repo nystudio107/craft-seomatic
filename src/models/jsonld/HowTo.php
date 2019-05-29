@@ -123,7 +123,7 @@ class HowTo extends CreativeWork
      *
      * @var mixed|CreativeWork|ItemList|string [schema.org types: CreativeWork, ItemList, Text]
      */
-    public $steps;
+    public $step;
 
     /**
      * A sub-property of instrument. A supply consumed when performing
@@ -169,7 +169,7 @@ class HowTo extends CreativeWork
         'estimatedCost',
         'performTime',
         'prepTime',
-        'steps',
+        'step',
         'supply',
         'tool',
         'totalTime',
@@ -185,7 +185,7 @@ class HowTo extends CreativeWork
         'estimatedCost' => ['MonetaryAmount','Text'],
         'performTime' => ['Duration'],
         'prepTime' => ['Duration'],
-        'steps' => ['CreativeWork','ItemList','Text'],
+        'step' => ['CreativeWork','ItemList','Text'],
         'supply' => ['HowToSupply','Text'],
         'tool' => ['HowToTool','Text'],
         'totalTime' => ['Duration'],
@@ -201,7 +201,7 @@ class HowTo extends CreativeWork
         'estimatedCost' => 'The estimated cost of the supply or supplies consumed when performing instructions.',
         'performTime' => 'The length of time it takes to perform instructions or a direction (not including time to prepare the supplies), in ISO 8601 duration format.',
         'prepTime' => 'The length of time it takes to prepare the items to be used in instructions or a direction, in ISO 8601 duration format.',
-        'steps' => 'The steps in the form of a single item (text, document, video, etc.) or an ordered list with HowToStep and/or HowToSection items.',
+        'step' => 'The steps in the form of a single item (text, document, video, etc.) or an ordered list with HowToStep and/or HowToSection items.',
         'supply' => 'A sub-property of instrument. A supply consumed when performing instructions or a direction.',
         'tool' => 'A sub property of instrument. An object used (but not consumed) when performing instructions or a direction.',
         'totalTime' => 'The total time required to perform instructions or a direction (including time to prepare the supplies), in ISO 8601 duration format.',
@@ -266,7 +266,7 @@ class HowTo extends CreativeWork
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['estimatedCost','performTime','prepTime','steps','supply','tool','totalTime','yield'], 'validateJsonSchema'],
+            [['estimatedCost','performTime','prepTime','step','supply','tool','totalTime','yield'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
