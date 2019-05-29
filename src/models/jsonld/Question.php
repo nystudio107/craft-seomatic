@@ -53,7 +53,7 @@ class Question extends CreativeWork
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'JsonLdType';
+    static public $schemaTypeExtends = 'CreativeWork';
 
     /**
      * The Schema.org composed Property Names
@@ -94,18 +94,18 @@ class Question extends CreativeWork
     // =========================================================================
 
     /**
-     * The answer(s) that has been accepted as best, typically on a Question/Answer
-     * site. Sites vary in their selection mechanisms, e.g. drawing on community
-     * opinion and/or the view of the Question author.
+     * The answer(s) that has been accepted as best, typically on a
+     * Question/Answer site. Sites vary in their selection mechanisms, e.g.
+     * drawing on community opinion and/or the view of the Question author.
      *
-     * @var mixed|Answer|ItemList [schema.org types: Answer]
+     * @var mixed|Answer|ItemList [schema.org types: Answer, ItemList]
      */
     public $acceptedAnswer;
 
     /**
      * The number of answers this question has received.
      *
-     * @var int [schema.org types: Integer]
+     * @var mixed|int [schema.org types: Integer]
      */
     public $answerCount;
 
@@ -113,15 +113,15 @@ class Question extends CreativeWork
      * The number of downvotes this question, answer or comment has received from
      * the community.
      *
-     * @var int [schema.org types: Integer]
+     * @var mixed|int [schema.org types: Integer]
      */
     public $downvoteCount;
 
     /**
-     * An answer (possibly one of several, possibly incorrect) to a Question,
-     * e.g. on a Question/Answer site.
+     * An answer (possibly one of several, possibly incorrect) to a Question, e.g.
+     * on a Question/Answer site.
      *
-     * @var mixed|Answer|ItemList [schema.org types: Answer]
+     * @var mixed|Answer|ItemList [schema.org types: Answer, ItemList]
      */
     public $suggestedAnswer;
 
@@ -129,7 +129,7 @@ class Question extends CreativeWork
      * The number of upvotes this question, answer or comment has received from
      * the community.
      *
-     * @var int [schema.org types: Integer]
+     * @var mixed|int [schema.org types: Integer]
      */
     public $upvoteCount;
 
@@ -155,10 +155,10 @@ class Question extends CreativeWork
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'acceptedAnswer' => ['Answer'],
+        'acceptedAnswer' => ['Answer','ItemList'],
         'answerCount' => ['Integer'],
         'downvoteCount' => ['Integer'],
-        'suggestedAnswer' => ['Answer'],
+        'suggestedAnswer' => ['Answer','ItemList'],
         'upvoteCount' => ['Integer']
     ];
 
@@ -170,11 +170,9 @@ class Question extends CreativeWork
     static protected $_schemaPropertyDescriptions = [
         'acceptedAnswer' => 'The answer(s) that has been accepted as best, typically on a Question/Answer site. Sites vary in their selection mechanisms, e.g. drawing on community opinion and/or the view of the Question author.',
         'answerCount' => 'The number of answers this question has received.',
-        'downvoteCount' => 'The number of downvotes this question, answer or comment has received from the community.
-',
+        'downvoteCount' => 'The number of downvotes this question, answer or comment has received from the community.',
         'suggestedAnswer' => 'An answer (possibly one of several, possibly incorrect) to a Question, e.g. on a Question/Answer site.',
-        'upvoteCount' => 'The number of upvotes this question, answer or comment has received from the community.
-'
+        'upvoteCount' => 'The number of upvotes this question, answer or comment has received from the community.'
     ];
 
     /**
@@ -235,7 +233,7 @@ class Question extends CreativeWork
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['acceptedAnswer', 'answerCount', 'downvoteCount', 'suggestedAnswer', 'upvoteCount'], 'validateJsonSchema'],
+            [['acceptedAnswer','answerCount','downvoteCount','suggestedAnswer','upvoteCount'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

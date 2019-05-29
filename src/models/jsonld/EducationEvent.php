@@ -93,7 +93,7 @@ class EducationEvent extends Event
     // =========================================================================
 
     /**
-     * The subject matter of the content.
+     * The subject matter of the content. Inverse property: subjectOf.
      *
      * @var Thing [schema.org types: Thing]
      */
@@ -438,7 +438,7 @@ class EducationEvent extends Event
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'about' => 'The subject matter of the content.',
+        'about' => 'The subject matter of the content. Inverse property: subjectOf.',
         'actor' => 'An actor, e.g. in tv, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip. Supersedes actors.',
         'aggregateRating' => 'The overall rating, based on a collection of reviews or ratings, of the item.',
         'attendee' => 'A person or organization attending the event. Supersedes attendees.',

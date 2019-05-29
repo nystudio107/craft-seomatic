@@ -14,7 +14,8 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\jsonld\FinancialProduct;
 
 /**
- * BankAccount - No comment
+ * BankAccount - A product or service offered by a bank whereby one may
+ * deposit, withdraw or transfer money and in some cases be paid interest.
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -45,7 +46,7 @@ class BankAccount extends FinancialProduct
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'No comment';
+    static public $schemaTypeDescription = 'A product or service offered by a bank whereby one may deposit, withdraw or transfer money and in some cases be paid interest.';
 
     /**
      * The Schema.org Type Extends

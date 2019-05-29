@@ -15,8 +15,8 @@ use nystudio107\seomatic\models\jsonld\Reservation;
 
 /**
  * FoodEstablishmentReservation - A reservation to dine at a food-related
- * business.Note: This type is for information about actual reservations, e.g.
- * in confirmation emails or HTML pages with individual confirmations of
+ * business. Note: This type is for information about actual reservations,
+ * e.g. in confirmation emails or HTML pages with individual confirmations of
  * reservations.
  *
  * @author    nystudio107
@@ -48,14 +48,14 @@ class FoodEstablishmentReservation extends Reservation
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'A reservation to dine at a food-related business.Note: This type is for information about actual reservations, e.g. in confirmation emails or HTML pages with individual confirmations of reservations.';
+    static public $schemaTypeDescription = 'A reservation to dine at a food-related business. Note: This type is for information about actual reservations, e.g. in confirmation emails or HTML pages with individual confirmations of reservations.';
 
     /**
      * The Schema.org Type Extends
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'JsonLdType';
+    static public $schemaTypeExtends = 'Reservation';
 
     /**
      * The Schema.org composed Property Names
@@ -95,6 +95,41 @@ class FoodEstablishmentReservation extends Reservation
     // Public Properties
     // =========================================================================
 
+    /**
+     * The endTime of something. For a reserved event or service (e.g.
+     * FoodEstablishmentReservation), the time that it is expected to end. For
+     * actions that span a period of time, when the action was performed. e.g.
+     * John wrote a book from January to December. For media, including audio and
+     * video, it's the time offset of the end of a clip within a larger file. Note
+     * that Event uses startDate/endDate instead of startTime/endTime, even when
+     * describing dates with times. This situation may be clarified in future
+     * revisions.
+     *
+     * @var DateTime [schema.org types: DateTime]
+     */
+    public $endTime;
+
+    /**
+     * Number of people the reservation should accommodate.
+     *
+     * @var mixed|int|QuantitativeValue [schema.org types: Integer, QuantitativeValue]
+     */
+    public $partySize;
+
+    /**
+     * The startTime of something. For a reserved event or service (e.g.
+     * FoodEstablishmentReservation), the time that it is expected to start. For
+     * actions that span a period of time, when the action was performed. e.g.
+     * John wrote a book from January to December. For media, including audio and
+     * video, it's the time offset of the start of a clip within a larger file.
+     * Note that Event uses startDate/endDate instead of startTime/endTime, even
+     * when describing dates with times. This situation may be clarified in future
+     * revisions.
+     *
+     * @var mixed|DateTime [schema.org types: DateTime]
+     */
+    public $startTime;
+
     // Static Protected Properties
     // =========================================================================
 
@@ -104,7 +139,9 @@ class FoodEstablishmentReservation extends Reservation
      * @var array
      */
     static protected $_schemaPropertyNames = [
-
+        'endTime',
+        'partySize',
+        'startTime'
     ];
 
     /**
@@ -113,7 +150,9 @@ class FoodEstablishmentReservation extends Reservation
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-
+        'endTime' => ['DateTime'],
+        'partySize' => ['Integer','QuantitativeValue'],
+        'startTime' => ['DateTime']
     ];
 
     /**
@@ -122,7 +161,9 @@ class FoodEstablishmentReservation extends Reservation
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-
+        'endTime' => 'The endTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to end. For actions that span a period of time, when the action was performed. e.g. John wrote a book from January to December. For media, including audio and video, it\'s the time offset of the end of a clip within a larger file. Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.',
+        'partySize' => 'Number of people the reservation should accommodate.',
+        'startTime' => 'The startTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to start. For actions that span a period of time, when the action was performed. e.g. John wrote a book from January to December. For media, including audio and video, it\'s the time offset of the start of a clip within a larger file. Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.'
     ];
 
     /**
@@ -183,7 +224,7 @@ class FoodEstablishmentReservation extends Reservation
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [[], 'validateJsonSchema'],
+            [['endTime','partySize','startTime'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\jsonld\Enumeration;
 
 /**
- * ItemAvailability - No comment
+ * ItemAvailability - A list of possible product availability options.
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -45,7 +45,7 @@ class ItemAvailability extends Enumeration
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'No comment';
+    static public $schemaTypeDescription = 'A list of possible product availability options.';
 
     /**
      * The Schema.org Type Extends

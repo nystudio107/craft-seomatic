@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\Intangible;
+use nystudio107\seomatic\models\jsonld\Trip;
 
 /**
  * TrainTrip - A trip on a commercial train line.
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\Intangible;
  * @since     3.0.0
  * @see       http://schema.org/TrainTrip
  */
-class TrainTrip extends Intangible
+class TrainTrip extends Trip
 {
     // Static Public Properties
     // =========================================================================
@@ -52,7 +52,7 @@ class TrainTrip extends Intangible
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'Intangible';
+    static public $schemaTypeExtends = 'Trip';
 
     /**
      * The Schema.org composed Property Names
@@ -107,13 +107,6 @@ class TrainTrip extends Intangible
     public $arrivalStation;
 
     /**
-     * The expected arrival time.
-     *
-     * @var DateTime [schema.org types: DateTime]
-     */
-    public $arrivalTime;
-
-    /**
      * The platform from which the train departs.
      *
      * @var string [schema.org types: Text]
@@ -128,33 +121,16 @@ class TrainTrip extends Intangible
     public $departureStation;
 
     /**
-     * The expected departure time.
-     *
-     * @var DateTime [schema.org types: DateTime]
-     */
-    public $departureTime;
-
-    /**
-     * The service provider, service operator, or service performer; the goods
-     * producer. Another party (a seller) may offer those services or goods on
-     * behalf of the provider. A provider may also serve as the seller. Supersedes
-     * carrier.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $provider;
-
-    /**
      * The name of the train (e.g. The Orient Express).
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $trainName;
 
     /**
      * The unique identifier for the train.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $trainNumber;
 
@@ -169,11 +145,8 @@ class TrainTrip extends Intangible
     static protected $_schemaPropertyNames = [
         'arrivalPlatform',
         'arrivalStation',
-        'arrivalTime',
         'departurePlatform',
         'departureStation',
-        'departureTime',
-        'provider',
         'trainName',
         'trainNumber'
     ];
@@ -186,11 +159,8 @@ class TrainTrip extends Intangible
     static protected $_schemaPropertyExpectedTypes = [
         'arrivalPlatform' => ['Text'],
         'arrivalStation' => ['TrainStation'],
-        'arrivalTime' => ['DateTime'],
         'departurePlatform' => ['Text'],
         'departureStation' => ['TrainStation'],
-        'departureTime' => ['DateTime'],
-        'provider' => ['Organization','Person'],
         'trainName' => ['Text'],
         'trainNumber' => ['Text']
     ];
@@ -203,11 +173,8 @@ class TrainTrip extends Intangible
     static protected $_schemaPropertyDescriptions = [
         'arrivalPlatform' => 'The platform where the train arrives.',
         'arrivalStation' => 'The station where the train trip ends.',
-        'arrivalTime' => 'The expected arrival time.',
         'departurePlatform' => 'The platform from which the train departs.',
         'departureStation' => 'The station from which the train departs.',
-        'departureTime' => 'The expected departure time.',
-        'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller. Supersedes carrier.',
         'trainName' => 'The name of the train (e.g. The Orient Express).',
         'trainNumber' => 'The unique identifier for the train.'
     ];
@@ -270,7 +237,7 @@ class TrainTrip extends Intangible
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['arrivalPlatform','arrivalStation','arrivalTime','departurePlatform','departureStation','departureTime','provider','trainName','trainNumber'], 'validateJsonSchema'],
+            [['arrivalPlatform','arrivalStation','departurePlatform','departureStation','trainName','trainNumber'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

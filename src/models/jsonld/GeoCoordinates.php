@@ -108,7 +108,9 @@ class GeoCoordinates extends StructuredValue
     public $addressCountry;
 
     /**
-     * The elevation of a location (WGS 84).
+     * The elevation of a location (WGS 84). Values may be of the form 'NUMBER
+     * UNITOFMEASUREMENT' (e.g., '1,000 m', '3,200 ft') while numbers alone should
+     * be assumed to be a value in meters.
      *
      * @var mixed|float|string [schema.org types: Number, Text]
      */
@@ -174,7 +176,7 @@ class GeoCoordinates extends StructuredValue
     static protected $_schemaPropertyDescriptions = [
         'address' => 'Physical address of the item.',
         'addressCountry' => 'The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.',
-        'elevation' => 'The elevation of a location (WGS 84).',
+        'elevation' => 'The elevation of a location (WGS 84). Values may be of the form \'NUMBER UNITOFMEASUREMENT\' (e.g., \'1,000 m\', \'3,200 ft\') while numbers alone should be assumed to be a value in meters.',
         'latitude' => 'The latitude of a location. For example 37.42242 (WGS 84).',
         'longitude' => 'The longitude of a location. For example -122.08585 (WGS 84).',
         'postalCode' => 'The postal code. For example, 94043.'

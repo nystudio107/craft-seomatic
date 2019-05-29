@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\Boolean;
+use nystudio107\seomatic\models\jsonld\DataType;
 
 /**
  * True - The boolean value true.
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\Boolean;
  * @since     3.0.0
  * @see       http://schema.org/True
  */
-class True extends Boolean
+class True extends DataType
 {
     // Static Public Properties
     // =========================================================================
@@ -52,7 +52,7 @@ class True extends Boolean
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'Boolean';
+    static public $schemaTypeExtends = 'DataType';
 
     /**
      * The Schema.org composed Property Names

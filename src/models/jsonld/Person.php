@@ -258,6 +258,14 @@ class Person extends Thing
     public $globalLocationNumber;
 
     /**
+     * The Person's occupation. For past professions, use Role for expressing
+     * dates.
+     *
+     * @var mixed|Occupation [schema.org types: Occupation]
+     */
+    public $hasOccupation;
+
+    /**
      * Indicates an OfferCatalog listing for this Organization, Person, or
      * Service.
      *
@@ -322,6 +330,26 @@ class Person extends Thing
      * @var mixed|Person [schema.org types: Person]
      */
     public $knows;
+
+    /**
+     * Of a Person, and less typically of an Organization, to indicate a topic
+     * that is known about - suggesting possible expertise but not implying it. We
+     * do not distinguish skill levels here, or yet relate this to educational
+     * content, events, objectives or JobPosting descriptions.
+     *
+     * @var mixed|string|Thing|string [schema.org types: Text, Thing, URL]
+     */
+    public $knowsAbout;
+
+    /**
+     * Of a Person, and less typically of an Organization, to indicate a known
+     * language. We do not distinguish skill levels or
+     * reading/writing/speaking/signing here. Use language codes from the IETF BCP
+     * 47 standard.
+     *
+     * @var mixed|Language|string [schema.org types: Language, Text]
+     */
+    public $knowsLanguage;
 
     /**
      * A pointer to products or services offered by the organization or person.
@@ -509,6 +537,7 @@ class Person extends Thing
         'gender',
         'givenName',
         'globalLocationNumber',
+        'hasOccupation',
         'hasOfferCatalog',
         'hasPOS',
         'height',
@@ -518,6 +547,8 @@ class Person extends Thing
         'isicV4',
         'jobTitle',
         'knows',
+        'knowsAbout',
+        'knowsLanguage',
         'makesOffer',
         'memberOf',
         'naics',
@@ -568,6 +599,7 @@ class Person extends Thing
         'gender' => ['GenderType','Text'],
         'givenName' => ['Text'],
         'globalLocationNumber' => ['Text'],
+        'hasOccupation' => ['Occupation'],
         'hasOfferCatalog' => ['OfferCatalog'],
         'hasPOS' => ['Place'],
         'height' => ['Distance','QuantitativeValue'],
@@ -577,6 +609,8 @@ class Person extends Thing
         'isicV4' => ['Text'],
         'jobTitle' => ['Text'],
         'knows' => ['Person'],
+        'knowsAbout' => ['Text','Thing','URL'],
+        'knowsLanguage' => ['Language','Text'],
         'makesOffer' => ['Offer'],
         'memberOf' => ['Organization','ProgramMembership'],
         'naics' => ['Text'],
@@ -627,6 +661,7 @@ class Person extends Thing
         'gender' => 'Gender of the person. While http://schema.org/Male and http://schema.org/Female may be used, text strings are also acceptable for people who do not identify as a binary gender.',
         'givenName' => 'Given name. In the U.S., the first name of a Person. This can be used along with familyName instead of the name property.',
         'globalLocationNumber' => 'The Global Location Number (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations.',
+        'hasOccupation' => 'The Person\'s occupation. For past professions, use Role for expressing dates.',
         'hasOfferCatalog' => 'Indicates an OfferCatalog listing for this Organization, Person, or Service.',
         'hasPOS' => 'Points-of-Sales operated by the organization or person.',
         'height' => 'The height of the item.',
@@ -636,6 +671,8 @@ class Person extends Thing
         'isicV4' => 'The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code for a particular organization, business person, or place.',
         'jobTitle' => 'The job title of the person (for example, Financial Manager).',
         'knows' => 'The most generic bi-directional social/work relation.',
+        'knowsAbout' => 'Of a Person, and less typically of an Organization, to indicate a topic that is known about - suggesting possible expertise but not implying it. We do not distinguish skill levels here, or yet relate this to educational content, events, objectives or JobPosting descriptions.',
+        'knowsLanguage' => 'Of a Person, and less typically of an Organization, to indicate a known language. We do not distinguish skill levels or reading/writing/speaking/signing here. Use language codes from the IETF BCP 47 standard.',
         'makesOffer' => 'A pointer to products or services offered by the organization or person. Inverse property: offeredBy.',
         'memberOf' => 'An Organization (or ProgramMembership) to which this Person or Organization belongs. Inverse property: member.',
         'naics' => 'The North American Industry Classification System (NAICS) code for a particular organization or business person.',
@@ -716,7 +753,7 @@ class Person extends Thing
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['additionalName','address','affiliation','alumniOf','award','birthDate','birthPlace','brand','children','colleague','contactPoint','deathDate','deathPlace','duns','email','familyName','faxNumber','follows','funder','gender','givenName','globalLocationNumber','hasOfferCatalog','hasPOS','height','homeLocation','honorificPrefix','honorificSuffix','isicV4','jobTitle','knows','makesOffer','memberOf','naics','nationality','netWorth','owns','parent','performerIn','publishingPrinciples','relatedTo','seeks','sibling','sponsor','spouse','taxID','telephone','vatID','weight','workLocation','worksFor'], 'validateJsonSchema'],
+            [['additionalName','address','affiliation','alumniOf','award','birthDate','birthPlace','brand','children','colleague','contactPoint','deathDate','deathPlace','duns','email','familyName','faxNumber','follows','funder','gender','givenName','globalLocationNumber','hasOccupation','hasOfferCatalog','hasPOS','height','homeLocation','honorificPrefix','honorificSuffix','isicV4','jobTitle','knows','knowsAbout','knowsLanguage','makesOffer','memberOf','naics','nationality','netWorth','owns','parent','performerIn','publishingPrinciples','relatedTo','seeks','sibling','sponsor','spouse','taxID','telephone','vatID','weight','workLocation','worksFor'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

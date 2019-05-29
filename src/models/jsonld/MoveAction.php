@@ -14,9 +14,9 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\jsonld\Action;
 
 /**
- * MoveAction - The act of an agent relocating to a place. Related actions:
- * TransferAction: Unlike TransferAction, the subject of the move is a living
- * Person or Organization rather than an inanimate object.
+ * MoveAction - The act of an agent relocating to a place. Related
+ * actions:TransferAction: Unlike TransferAction, the subject of the move is a
+ * living Person or Organization rather than an inanimate object.
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -47,7 +47,7 @@ class MoveAction extends Action
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'The act of an agent relocating to a place. Related actions: TransferAction: Unlike TransferAction, the subject of the move is a living Person or Organization rather than an inanimate object.';
+    static public $schemaTypeDescription = 'The act of an agent relocating to a place. Related actions:TransferAction: Unlike TransferAction, the subject of the move is a living Person or Organization rather than an inanimate object.';
 
     /**
      * The Schema.org Type Extends

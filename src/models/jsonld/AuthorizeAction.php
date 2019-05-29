@@ -52,7 +52,7 @@ class AuthorizeAction extends AllocateAction
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'JsonLdType';
+    static public $schemaTypeExtends = 'AllocateAction';
 
     /**
      * The Schema.org composed Property Names

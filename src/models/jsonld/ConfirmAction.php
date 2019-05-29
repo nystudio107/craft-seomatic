@@ -15,7 +15,7 @@ use nystudio107\seomatic\models\jsonld\InformAction;
 
 /**
  * ConfirmAction - The act of notifying someone that a future event/action is
- * going to happen as expected. Related actions: CancelAction: The antonym of
+ * going to happen as expected. Related actions:CancelAction: The antonym of
  * ConfirmAction.
  *
  * @author    nystudio107
@@ -47,7 +47,7 @@ class ConfirmAction extends InformAction
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'The act of notifying someone that a future event/action is going to happen as expected. Related actions: CancelAction: The antonym of ConfirmAction.';
+    static public $schemaTypeDescription = 'The act of notifying someone that a future event/action is going to happen as expected. Related actions:CancelAction: The antonym of ConfirmAction.';
 
     /**
      * The Schema.org Type Extends

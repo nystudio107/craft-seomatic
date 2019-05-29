@@ -119,6 +119,15 @@ class ProgramMembership extends Intangible
     public $membershipNumber;
 
     /**
+     * The number of membership points earned by the member. If necessary, the
+     * unitText can be used to express the units the points are issued in. (e.g.
+     * stars, miles, etc.)
+     *
+     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
+     */
+    public $membershipPointsEarned;
+
+    /**
      * The program providing the membership.
      *
      * @var mixed|string [schema.org types: Text]
@@ -137,6 +146,7 @@ class ProgramMembership extends Intangible
         'hostingOrganization',
         'member',
         'membershipNumber',
+        'membershipPointsEarned',
         'programName'
     ];
 
@@ -149,6 +159,7 @@ class ProgramMembership extends Intangible
         'hostingOrganization' => ['Organization'],
         'member' => ['Organization','Person'],
         'membershipNumber' => ['Text'],
+        'membershipPointsEarned' => ['Number','QuantitativeValue'],
         'programName' => ['Text']
     ];
 
@@ -161,6 +172,7 @@ class ProgramMembership extends Intangible
         'hostingOrganization' => 'The organization (airline, travelers\' club, etc.) the membership is made with.',
         'member' => 'A member of an Organization or a ProgramMembership. Organizations can be members of organizations; ProgramMembership is typically for individuals. Supersedes members, musicGroupMember. Inverse property: memberOf.',
         'membershipNumber' => 'A unique identifier for the membership.',
+        'membershipPointsEarned' => 'The number of membership points earned by the member. If necessary, the unitText can be used to express the units the points are issued in. (e.g. stars, miles, etc.)',
         'programName' => 'The program providing the membership.'
     ];
 
@@ -222,7 +234,7 @@ class ProgramMembership extends Intangible
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['hostingOrganization','member','membershipNumber','programName'], 'validateJsonSchema'],
+            [['hostingOrganization','member','membershipNumber','membershipPointsEarned','programName'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

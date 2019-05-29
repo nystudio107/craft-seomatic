@@ -53,7 +53,7 @@ class OwnershipInfo extends StructuredValue
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'JsonLdType';
+    static public $schemaTypeExtends = 'StructuredValue';
 
     /**
      * The Schema.org composed Property Names

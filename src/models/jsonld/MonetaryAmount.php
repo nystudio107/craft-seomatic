@@ -97,8 +97,10 @@ class MonetaryAmount extends StructuredValue
     // =========================================================================
 
     /**
-     * The currency in which the monetary amount is expressed (in 3-letter ISO
-     * 4217 format).
+     * The currency in which the monetary amount is expressed. Use standard
+     * formats: ISO 4217 currency format e.g. "USD"; Ticker symbol for
+     * cryptocurrencies e.g. "BTC"; well known names for Local Exchange Tradings
+     * Systems (LETS) and other currency types e.g. "Ithaca HOUR".
      *
      * @var string [schema.org types: Text]
      */
@@ -134,10 +136,14 @@ class MonetaryAmount extends StructuredValue
     public $validThrough;
 
     /**
-     * The value of the quantitative value or property value node. For
+     * The value of the quantitative value or property value node.For
      * QuantitativeValue and MonetaryAmount, the recommended type for values is
      * 'Number'. For PropertyValue, it can be 'Text;', 'Number', 'Boolean', or
-     * 'StructuredValue'.
+     * 'StructuredValue'. Use values from 0123456789 (Unicode 'DIGIT ZERO'
+     * (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially similiar
+     * Unicode symbols. Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to
+     * indicate a decimal point. Avoid using these symbols as a readability
+     * separator.
      *
      * @var mixed|bool|float|StructuredValue|string [schema.org types: Boolean, Number, StructuredValue, Text]
      */
@@ -180,12 +186,12 @@ class MonetaryAmount extends StructuredValue
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'currency' => 'The currency in which the monetary amount is expressed (in 3-letter ISO 4217 format).',
+        'currency' => 'The currency in which the monetary amount is expressed. Use standard formats: ISO 4217 currency format e.g. "USD"; Ticker symbol for cryptocurrencies e.g. "BTC"; well known names for Local Exchange Tradings Systems (LETS) and other currency types e.g. "Ithaca HOUR".',
         'maxValue' => 'The upper value of some characteristic or property.',
         'minValue' => 'The lower value of some characteristic or property.',
         'validFrom' => 'The date when the item becomes valid.',
         'validThrough' => 'The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.',
-        'value' => 'The value of the quantitative value or property value node. For QuantitativeValue and MonetaryAmount, the recommended type for values is \'Number\'. For PropertyValue, it can be \'Text;\', \'Number\', \'Boolean\', or \'StructuredValue\'.'
+        'value' => 'The value of the quantitative value or property value node.For QuantitativeValue and MonetaryAmount, the recommended type for values is \'Number\'. For PropertyValue, it can be \'Text;\', \'Number\', \'Boolean\', or \'StructuredValue\'. Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.'
     ];
 
     /**

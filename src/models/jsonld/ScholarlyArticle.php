@@ -108,6 +108,16 @@ class ScholarlyArticle extends Article
     public $articleSection;
 
     /**
+     * For an Article, typically a NewsArticle, the backstory property provides a
+     * textual summary giving a brief explanation of why and how an article was
+     * created. In a journalistic setting this could include information about
+     * reporting process, methods, interviews, data sources, etc.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, Text]
+     */
+    public $backstory;
+
+    /**
      * The page on which the work ends; for example "138" or "xvi".
      *
      * @var mixed|int|string [schema.org types: Integer, Text]
@@ -170,6 +180,7 @@ class ScholarlyArticle extends Article
     static protected $_schemaPropertyNames = [
         'articleBody',
         'articleSection',
+        'backstory',
         'pageEnd',
         'pageStart',
         'pagination',
@@ -185,6 +196,7 @@ class ScholarlyArticle extends Article
     static protected $_schemaPropertyExpectedTypes = [
         'articleBody' => ['Text'],
         'articleSection' => ['Text'],
+        'backstory' => ['CreativeWork','Text'],
         'pageEnd' => ['Integer','Text'],
         'pageStart' => ['Integer','Text'],
         'pagination' => ['Text'],
@@ -200,6 +212,7 @@ class ScholarlyArticle extends Article
     static protected $_schemaPropertyDescriptions = [
         'articleBody' => 'The actual body of the article.',
         'articleSection' => 'Articles may belong to one or more \'sections\' in a magazine or newspaper, such as Sports, Lifestyle, etc.',
+        'backstory' => 'For an Article, typically a NewsArticle, the backstory property provides a textual summary giving a brief explanation of why and how an article was created. In a journalistic setting this could include information about reporting process, methods, interviews, data sources, etc.',
         'pageEnd' => 'The page on which the work ends; for example "138" or "xvi".',
         'pageStart' => 'The page on which the work starts; for example "135" or "xiii".',
         'pagination' => 'Any description of pages that is not separated into pageStart and pageEnd; for example, "1-6, 9, 55" or "10-12, 46-49".',
@@ -265,7 +278,7 @@ class ScholarlyArticle extends Article
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['articleBody','articleSection','pageEnd','pageStart','pagination','speakable','wordCount'], 'validateJsonSchema'],
+            [['articleBody','articleSection','backstory','pageEnd','pageStart','pagination','speakable','wordCount'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

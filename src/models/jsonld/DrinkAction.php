@@ -93,6 +93,15 @@ class DrinkAction extends ConsumeAction
     // =========================================================================
 
     /**
+     * A set of requirements that a must be fulfilled in order to perform an
+     * Action. If more than one value is specied, fulfilling one set of
+     * requirements will allow the Action to be performed.
+     *
+     * @var ActionAccessSpecification [schema.org types: ActionAccessSpecification]
+     */
+    public $actionAccessibilityRequirement;
+
+    /**
      * An Offer which must be accepted before the user can perform the Action. For
      * example, the user may need to buy a movie before being able to watch it.
      *
@@ -109,6 +118,7 @@ class DrinkAction extends ConsumeAction
      * @var array
      */
     static protected $_schemaPropertyNames = [
+        'actionAccessibilityRequirement',
         'expectsAcceptanceOf'
     ];
 
@@ -118,6 +128,7 @@ class DrinkAction extends ConsumeAction
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
+        'actionAccessibilityRequirement' => ['ActionAccessSpecification'],
         'expectsAcceptanceOf' => ['Offer']
     ];
 
@@ -127,6 +138,7 @@ class DrinkAction extends ConsumeAction
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
+        'actionAccessibilityRequirement' => 'A set of requirements that a must be fulfilled in order to perform an Action. If more than one value is specied, fulfilling one set of requirements will allow the Action to be performed.',
         'expectsAcceptanceOf' => 'An Offer which must be accepted before the user can perform the Action. For example, the user may need to buy a movie before being able to watch it.'
     ];
 
@@ -188,7 +200,7 @@ class DrinkAction extends ConsumeAction
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['expectsAcceptanceOf'], 'validateJsonSchema'],
+            [['actionAccessibilityRequirement','expectsAcceptanceOf'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

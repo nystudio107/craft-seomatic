@@ -283,6 +283,13 @@ class Product extends Thing
     public $mpn;
 
     /**
+     * Indicates the NATO stock number (nsn) of a Product.
+     *
+     * @var mixed|string [schema.org types: Text]
+     */
+    public $nsn;
+
+    /**
      * An offer to provide this item—for example, an offer to sell a product,
      * rent the DVD of a movie, perform a service, or give away tickets to an
      * event.
@@ -337,6 +344,13 @@ class Product extends Thing
     public $sku;
 
     /**
+     * A slogan or motto associated with the item.
+     *
+     * @var mixed|string [schema.org types: Text]
+     */
+    public $slogan;
+
+    /**
      * The weight of the product or person.
      *
      * @var mixed|QuantitativeValue [schema.org types: QuantitativeValue]
@@ -382,6 +396,7 @@ class Product extends Thing
         'material',
         'model',
         'mpn',
+        'nsn',
         'offers',
         'productID',
         'productionDate',
@@ -389,6 +404,7 @@ class Product extends Thing
         'releaseDate',
         'review',
         'sku',
+        'slogan',
         'weight',
         'width'
     ];
@@ -422,6 +438,7 @@ class Product extends Thing
         'material' => ['Product','Text','URL'],
         'model' => ['ProductModel','Text'],
         'mpn' => ['Text'],
+        'nsn' => ['Text'],
         'offers' => ['Offer'],
         'productID' => ['Text'],
         'productionDate' => ['Date'],
@@ -429,6 +446,7 @@ class Product extends Thing
         'releaseDate' => ['Date'],
         'review' => ['Review'],
         'sku' => ['Text'],
+        'slogan' => ['Text'],
         'weight' => ['QuantitativeValue'],
         'width' => ['Distance','QuantitativeValue']
     ];
@@ -462,6 +480,7 @@ class Product extends Thing
         'material' => 'A material that something is made from, e.g. leather, wool, cotton, paper.',
         'model' => 'The model of the product. Use with the URL of a ProductModel or a textual representation of the model identifier. The URL of the ProductModel can be from an external source. It is recommended to additionally provide strong product identifiers via the gtin8/gtin13/gtin14 and mpn properties.',
         'mpn' => 'The Manufacturer Part Number (MPN) of the product, or the product to which the offer refers.',
+        'nsn' => 'Indicates the NATO stock number (nsn) of a Product.',
         'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event.',
         'productID' => 'The product identifier, such as ISBN. For example: meta itemprop="productID" content="isbn:123-456-789".',
         'productionDate' => 'The date of production of the item, e.g. vehicle.',
@@ -469,6 +488,7 @@ class Product extends Thing
         'releaseDate' => 'The release date of a product or product model. This can be used to distinguish the exact variant of a product.',
         'review' => 'A review of the item. Supersedes reviews.',
         'sku' => 'The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a product or service, or the product to which the offer refers.',
+        'slogan' => 'A slogan or motto associated with the item.',
         'weight' => 'The weight of the product or person.',
         'width' => 'The width of the item.'
     ];
@@ -531,7 +551,7 @@ class Product extends Thing
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['additionalProperty','aggregateRating','audience','award','brand','category','color','depth','gtin12','gtin13','gtin14','gtin8','height','isAccessoryOrSparePartFor','isConsumableFor','isRelatedTo','isSimilarTo','itemCondition','logo','manufacturer','material','model','mpn','offers','productID','productionDate','purchaseDate','releaseDate','review','sku','weight','width'], 'validateJsonSchema'],
+            [['additionalProperty','aggregateRating','audience','award','brand','category','color','depth','gtin12','gtin13','gtin14','gtin8','height','isAccessoryOrSparePartFor','isConsumableFor','isRelatedTo','isSimilarTo','itemCondition','logo','manufacturer','material','model','mpn','nsn','offers','productID','productionDate','purchaseDate','releaseDate','review','sku','slogan','weight','width'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

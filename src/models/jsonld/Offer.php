@@ -338,23 +338,28 @@ class Offer extends Intangible
 
     /**
      * The offer price of a product, or of a price component when attached to
-     * PriceSpecification and its subtypes. Usage guidelines: Use the
-     * priceCurrency property (with ISO 4217 codes e.g. "USD") instead of
-     * including ambiguous symbols such as '$' in the value. Use '.' (Unicode
-     * 'FULL STOP' (U+002E)) rather than ',' to indicate a decimal point. Avoid
-     * using these symbols as a readability separator. Note that both RDFa and
-     * Microdata syntax allow the use of a "content=" attribute for publishing
-     * simple machine-readable values alongside more human-friendly formatting.
-     * Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE'
-     * (U+0039)) rather than superficially similiar Unicode symbols.
+     * PriceSpecification and its subtypes. Usage guidelines:Use the priceCurrency
+     * property (with standard formats: ISO 4217 currency format e.g. "USD";
+     * Ticker symbol for cryptocurrencies e.g. "BTC"; well known names for Local
+     * Exchange Tradings Systems (LETS) and other currency types e.g. "Ithaca
+     * HOUR") instead of including ambiguous symbols such as '$' in the value. Use
+     * '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to indicate a decimal
+     * point. Avoid using these symbols as a readability separator. Note that both
+     * RDFa and Microdata syntax allow the use of a "content=" attribute for
+     * publishing simple machine-readable values alongside more human-friendly
+     * formatting. Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to
+     * 'DIGIT NINE' (U+0039)) rather than superficially similiar Unicode symbols.
      *
      * @var mixed|float|string [schema.org types: Number, Text]
      */
     public $price;
 
     /**
-     * The currency (in 3-letter ISO 4217 format) of the price or a price
-     * component, when attached to PriceSpecification and its subtypes.
+     * The currency of the price, or a price component when attached to
+     * PriceSpecification and its subtypes. Use standard formats: ISO 4217
+     * currency format e.g. "USD"; Ticker symbol for cryptocurrencies e.g. "BTC";
+     * well known names for Local Exchange Tradings Systems (LETS) and other
+     * currency types e.g. "Ithaca HOUR".
      *
      * @var mixed|string [schema.org types: Text]
      */
@@ -563,8 +568,8 @@ class Offer extends Intangible
         'itemOffered' => 'The item being offered.',
         'mpn' => 'The Manufacturer Part Number (MPN) of the product, or the product to which the offer refers.',
         'offeredBy' => 'A pointer to the organization or person making the offer. Inverse property: makesOffer.',
-        'price' => 'The offer price of a product, or of a price component when attached to PriceSpecification and its subtypes. Usage guidelines: Use the priceCurrency property (with ISO 4217 codes e.g. "USD") instead of including ambiguous symbols such as \'$\' in the value. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator. Note that both RDFa and Microdata syntax allow the use of a "content=" attribute for publishing simple machine-readable values alongside more human-friendly formatting. Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols.',
-        'priceCurrency' => 'The currency (in 3-letter ISO 4217 format) of the price or a price component, when attached to PriceSpecification and its subtypes.',
+        'price' => 'The offer price of a product, or of a price component when attached to PriceSpecification and its subtypes. Usage guidelines:Use the priceCurrency property (with standard formats: ISO 4217 currency format e.g. "USD"; Ticker symbol for cryptocurrencies e.g. "BTC"; well known names for Local Exchange Tradings Systems (LETS) and other currency types e.g. "Ithaca HOUR") instead of including ambiguous symbols such as \'$\' in the value. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator. Note that both RDFa and Microdata syntax allow the use of a "content=" attribute for publishing simple machine-readable values alongside more human-friendly formatting. Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols.',
+        'priceCurrency' => 'The currency of the price, or a price component when attached to PriceSpecification and its subtypes. Use standard formats: ISO 4217 currency format e.g. "USD"; Ticker symbol for cryptocurrencies e.g. "BTC"; well known names for Local Exchange Tradings Systems (LETS) and other currency types e.g. "Ithaca HOUR".',
         'priceSpecification' => 'One or more detailed price specifications, indicating the unit price and delivery or payment charges.',
         'priceValidUntil' => 'The date after which the price is no longer available.',
         'review' => 'A review of the item. Supersedes reviews.',

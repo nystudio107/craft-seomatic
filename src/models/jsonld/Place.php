@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\jsonld\Thing;
 
 /**
- * Place - No comment
+ * Place - Entities that have a somewhat fixed, physical extension.
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -45,7 +45,7 @@ class Place extends Thing
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'No comment';
+    static public $schemaTypeDescription = 'Entities that have a somewhat fixed, physical extension.';
 
     /**
      * The Schema.org Type Extends
@@ -188,7 +188,7 @@ class Place extends Thing
      *
      * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
      */
-    public $geospatiallyContains;
+    public $geoContains;
 
     /**
      * Represents a relationship between two geometries (or the places they
@@ -197,7 +197,7 @@ class Place extends Thing
      *
      * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
      */
-    public $geospatiallyCoveredBy;
+    public $geoCoveredBy;
 
     /**
      * Represents a relationship between two geometries (or the places they
@@ -207,7 +207,7 @@ class Place extends Thing
      *
      * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
      */
-    public $geospatiallyCovers;
+    public $geoCovers;
 
     /**
      * Represents a relationship between two geometries (or the places they
@@ -218,7 +218,7 @@ class Place extends Thing
      *
      * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
      */
-    public $geospatiallyCrosses;
+    public $geoCrosses;
 
     /**
      * Represents spatial relations in which two geometries (or the places they
@@ -228,7 +228,7 @@ class Place extends Thing
      *
      * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
      */
-    public $geospatiallyDisjoint;
+    public $geoDisjoint;
 
     /**
      * Represents spatial relations in which two geometries (or the places they
@@ -239,7 +239,7 @@ class Place extends Thing
      *
      * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
      */
-    public $geospatiallyEquals;
+    public $geoEquals;
 
     /**
      * Represents spatial relations in which two geometries (or the places they
@@ -247,7 +247,7 @@ class Place extends Thing
      *
      * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
      */
-    public $geospatiallyIntersects;
+    public $geoIntersects;
 
     /**
      * Represents a relationship between two geometries (or the places they
@@ -256,7 +256,7 @@ class Place extends Thing
      *
      * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
      */
-    public $geospatiallyOverlaps;
+    public $geoOverlaps;
 
     /**
      * Represents spatial relations in which two geometries (or the places they
@@ -265,7 +265,7 @@ class Place extends Thing
      *
      * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
      */
-    public $geospatiallyTouches;
+    public $geoTouches;
 
     /**
      * Represents a relationship between two geometries (or the places they
@@ -274,7 +274,7 @@ class Place extends Thing
      *
      * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
      */
-    public $geospatiallyWithin;
+    public $geoWithin;
 
     /**
      * The Global Location Number (GLN, sometimes also referred to as
@@ -354,6 +354,13 @@ class Place extends Thing
     public $review;
 
     /**
+     * A slogan or motto associated with the item.
+     *
+     * @var mixed|string [schema.org types: Text]
+     */
+    public $slogan;
+
+    /**
      * Indicates whether it is allowed to smoke in the place, e.g. in the
      * restaurant, hotel or hotel room.
      *
@@ -396,16 +403,16 @@ class Place extends Thing
         'event',
         'faxNumber',
         'geo',
-        'geospatiallyContains',
-        'geospatiallyCoveredBy',
-        'geospatiallyCovers',
-        'geospatiallyCrosses',
-        'geospatiallyDisjoint',
-        'geospatiallyEquals',
-        'geospatiallyIntersects',
-        'geospatiallyOverlaps',
-        'geospatiallyTouches',
-        'geospatiallyWithin',
+        'geoContains',
+        'geoCoveredBy',
+        'geoCovers',
+        'geoCrosses',
+        'geoDisjoint',
+        'geoEquals',
+        'geoIntersects',
+        'geoOverlaps',
+        'geoTouches',
+        'geoWithin',
         'globalLocationNumber',
         'hasMap',
         'isAccessibleForFree',
@@ -416,6 +423,7 @@ class Place extends Thing
         'photo',
         'publicAccess',
         'review',
+        'slogan',
         'smokingAllowed',
         'specialOpeningHoursSpecification',
         'telephone'
@@ -437,16 +445,16 @@ class Place extends Thing
         'event' => ['Event'],
         'faxNumber' => ['Text'],
         'geo' => ['GeoCoordinates','GeoShape'],
-        'geospatiallyContains' => ['GeospatialGeometry','Place'],
-        'geospatiallyCoveredBy' => ['GeospatialGeometry','Place'],
-        'geospatiallyCovers' => ['GeospatialGeometry','Place'],
-        'geospatiallyCrosses' => ['GeospatialGeometry','Place'],
-        'geospatiallyDisjoint' => ['GeospatialGeometry','Place'],
-        'geospatiallyEquals' => ['GeospatialGeometry','Place'],
-        'geospatiallyIntersects' => ['GeospatialGeometry','Place'],
-        'geospatiallyOverlaps' => ['GeospatialGeometry','Place'],
-        'geospatiallyTouches' => ['GeospatialGeometry','Place'],
-        'geospatiallyWithin' => ['GeospatialGeometry','Place'],
+        'geoContains' => ['GeospatialGeometry','Place'],
+        'geoCoveredBy' => ['GeospatialGeometry','Place'],
+        'geoCovers' => ['GeospatialGeometry','Place'],
+        'geoCrosses' => ['GeospatialGeometry','Place'],
+        'geoDisjoint' => ['GeospatialGeometry','Place'],
+        'geoEquals' => ['GeospatialGeometry','Place'],
+        'geoIntersects' => ['GeospatialGeometry','Place'],
+        'geoOverlaps' => ['GeospatialGeometry','Place'],
+        'geoTouches' => ['GeospatialGeometry','Place'],
+        'geoWithin' => ['GeospatialGeometry','Place'],
         'globalLocationNumber' => ['Text'],
         'hasMap' => ['Map','URL'],
         'isAccessibleForFree' => ['Boolean'],
@@ -457,6 +465,7 @@ class Place extends Thing
         'photo' => ['ImageObject','Photograph'],
         'publicAccess' => ['Boolean'],
         'review' => ['Review'],
+        'slogan' => ['Text'],
         'smokingAllowed' => ['Boolean'],
         'specialOpeningHoursSpecification' => ['OpeningHoursSpecification'],
         'telephone' => ['Text']
@@ -478,16 +487,16 @@ class Place extends Thing
         'event' => 'Upcoming or past event associated with this place, organization, or action. Supersedes events.',
         'faxNumber' => 'The fax number.',
         'geo' => 'The geo coordinates of the place.',
-        'geospatiallyContains' => 'Represents a relationship between two geometries (or the places they represent), relating a containing geometry to a contained geometry. "a contains b iff no points of b lie in the exterior of a, and at least one point of the interior of b lies in the interior of a". As defined in DE-9IM.',
-        'geospatiallyCoveredBy' => 'Represents a relationship between two geometries (or the places they represent), relating a geometry to another that covers it. As defined in DE-9IM.',
-        'geospatiallyCovers' => 'Represents a relationship between two geometries (or the places they represent), relating a covering geometry to a covered geometry. "Every point of b is a point of (the interior or boundary of) a". As defined in DE-9IM.',
-        'geospatiallyCrosses' => 'Represents a relationship between two geometries (or the places they represent), relating a geometry to another that crosses it: "a crosses b: they have some but not all interior points in common, and the dimension of the intersection is less than that of at least one of them". As defined in DE-9IM.',
-        'geospatiallyDisjoint' => 'Represents spatial relations in which two geometries (or the places they represent) are topologically disjoint: they have no point in common. They form a set of disconnected geometries." (a symmetric relationship, as defined in DE-9IM)',
-        'geospatiallyEquals' => 'Represents spatial relations in which two geometries (or the places they represent) are topologically equal, as defined in DE-9IM. "Two geometries are topologically equal if their interiors intersect and no part of the interior or boundary of one geometry intersects the exterior of the other" (a symmetric relationship)',
-        'geospatiallyIntersects' => 'Represents spatial relations in which two geometries (or the places they represent) have at least one point in common. As defined in DE-9IM.',
-        'geospatiallyOverlaps' => 'Represents a relationship between two geometries (or the places they represent), relating a geometry to another that geospatially overlaps it, i.e. they have some but not all points in common. As defined in DE-9IM.',
-        'geospatiallyTouches' => 'Represents spatial relations in which two geometries (or the places they represent) touch: they have at least one boundary point in common, but no interior points." (a symmetric relationship, as defined in DE-9IM )',
-        'geospatiallyWithin' => 'Represents a relationship between two geometries (or the places they represent), relating a geometry to one that contains it, i.e. it is inside (i.e. within) its interior. As defined in DE-9IM.',
+        'geoContains' => 'Represents a relationship between two geometries (or the places they represent), relating a containing geometry to a contained geometry. "a contains b iff no points of b lie in the exterior of a, and at least one point of the interior of b lies in the interior of a". As defined in DE-9IM.',
+        'geoCoveredBy' => 'Represents a relationship between two geometries (or the places they represent), relating a geometry to another that covers it. As defined in DE-9IM.',
+        'geoCovers' => 'Represents a relationship between two geometries (or the places they represent), relating a covering geometry to a covered geometry. "Every point of b is a point of (the interior or boundary of) a". As defined in DE-9IM.',
+        'geoCrosses' => 'Represents a relationship between two geometries (or the places they represent), relating a geometry to another that crosses it: "a crosses b: they have some but not all interior points in common, and the dimension of the intersection is less than that of at least one of them". As defined in DE-9IM.',
+        'geoDisjoint' => 'Represents spatial relations in which two geometries (or the places they represent) are topologically disjoint: they have no point in common. They form a set of disconnected geometries." (a symmetric relationship, as defined in DE-9IM)',
+        'geoEquals' => 'Represents spatial relations in which two geometries (or the places they represent) are topologically equal, as defined in DE-9IM. "Two geometries are topologically equal if their interiors intersect and no part of the interior or boundary of one geometry intersects the exterior of the other" (a symmetric relationship)',
+        'geoIntersects' => 'Represents spatial relations in which two geometries (or the places they represent) have at least one point in common. As defined in DE-9IM.',
+        'geoOverlaps' => 'Represents a relationship between two geometries (or the places they represent), relating a geometry to another that geospatially overlaps it, i.e. they have some but not all points in common. As defined in DE-9IM.',
+        'geoTouches' => 'Represents spatial relations in which two geometries (or the places they represent) touch: they have at least one boundary point in common, but no interior points." (a symmetric relationship, as defined in DE-9IM )',
+        'geoWithin' => 'Represents a relationship between two geometries (or the places they represent), relating a geometry to one that contains it, i.e. it is inside (i.e. within) its interior. As defined in DE-9IM.',
         'globalLocationNumber' => 'The Global Location Number (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations.',
         'hasMap' => 'A URL to a map of the place. Supersedes map, maps.',
         'isAccessibleForFree' => 'A flag to signal that the item, event, or place is accessible for free. Supersedes free.',
@@ -498,6 +507,7 @@ class Place extends Thing
         'photo' => 'A photograph of this place. Supersedes photos.',
         'publicAccess' => 'A flag to signal that the Place is open to public visitors. If this property is omitted there is no assumed default boolean value',
         'review' => 'A review of the item. Supersedes reviews.',
+        'slogan' => 'A slogan or motto associated with the item.',
         'smokingAllowed' => 'Indicates whether it is allowed to smoke in the place, e.g. in the restaurant, hotel or hotel room.',
         'specialOpeningHoursSpecification' => 'The special opening hours of a certain place. Use this to explicitly override general opening hours brought in scope by openingHoursSpecification or openingHours.',
         'telephone' => 'The telephone number.'
@@ -561,7 +571,7 @@ class Place extends Thing
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['additionalProperty','address','aggregateRating','amenityFeature','branchCode','containedInPlace','containsPlace','event','faxNumber','geo','geospatiallyContains','geospatiallyCoveredBy','geospatiallyCovers','geospatiallyCrosses','geospatiallyDisjoint','geospatiallyEquals','geospatiallyIntersects','geospatiallyOverlaps','geospatiallyTouches','geospatiallyWithin','globalLocationNumber','hasMap','isAccessibleForFree','isicV4','logo','maximumAttendeeCapacity','openingHoursSpecification','photo','publicAccess','review','smokingAllowed','specialOpeningHoursSpecification','telephone'], 'validateJsonSchema'],
+            [['additionalProperty','address','aggregateRating','amenityFeature','branchCode','containedInPlace','containsPlace','event','faxNumber','geo','geoContains','geoCoveredBy','geoCovers','geoCrosses','geoDisjoint','geoEquals','geoIntersects','geoOverlaps','geoTouches','geoWithin','globalLocationNumber','hasMap','isAccessibleForFree','isicV4','logo','maximumAttendeeCapacity','openingHoursSpecification','photo','publicAccess','review','slogan','smokingAllowed','specialOpeningHoursSpecification','telephone'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

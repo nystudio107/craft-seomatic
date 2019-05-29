@@ -192,6 +192,15 @@ class Organization extends Thing
     public $diversityPolicy;
 
     /**
+     * For an Organization (often but not necessarily a NewsMediaOrganization), a
+     * report on staffing diversity issues. In a news context this might be for
+     * example ASNE or RTDNA (US) reports, or self-reported.
+     *
+     * @var mixed|Article|string [schema.org types: Article, URL]
+     */
+    public $diversityStaffingReport;
+
+    /**
      * The Dun & Bradstreet DUNS number for identifying an organization or
      * business person.
      *
@@ -304,6 +313,26 @@ class Organization extends Thing
     public $isicV4;
 
     /**
+     * Of a Person, and less typically of an Organization, to indicate a topic
+     * that is known about - suggesting possible expertise but not implying it. We
+     * do not distinguish skill levels here, or yet relate this to educational
+     * content, events, objectives or JobPosting descriptions.
+     *
+     * @var mixed|string|Thing|string [schema.org types: Text, Thing, URL]
+     */
+    public $knowsAbout;
+
+    /**
+     * Of a Person, and less typically of an Organization, to indicate a known
+     * language. We do not distinguish skill levels or
+     * reading/writing/speaking/signing here. Use language codes from the IETF BCP
+     * 47 standard.
+     *
+     * @var mixed|Language|string [schema.org types: Language, Text]
+     */
+    public $knowsLanguage;
+
+    /**
      * The official name of the organization, e.g. the registered company name.
      *
      * @var mixed|string [schema.org types: Text]
@@ -374,6 +403,17 @@ class Organization extends Thing
     public $numberOfEmployees;
 
     /**
+     * For an Organization (often but not necessarily a NewsMediaOrganization), a
+     * description of organizational ownership structure; funding and grants. In a
+     * news/media setting, this is with particular reference to editorial
+     * independence. Note that the funder is also available and can be used to
+     * make basic funder information machine-readable.
+     *
+     * @var mixed|AboutPage|CreativeWork|string|string [schema.org types: AboutPage, CreativeWork, Text, URL]
+     */
+    public $ownershipFundingInfo;
+
+    /**
      * Products owned by the organization or person.
      *
      * @var mixed|OwnershipInfo|Product [schema.org types: OwnershipInfo, Product]
@@ -416,6 +456,13 @@ class Organization extends Thing
      * @var mixed|Demand [schema.org types: Demand]
      */
     public $seeks;
+
+    /**
+     * A slogan or motto associated with the item.
+     *
+     * @var mixed|string [schema.org types: Text]
+     */
+    public $slogan;
 
     /**
      * A person or organization that supports a thing through a pledge, promise,
@@ -486,6 +533,7 @@ class Organization extends Thing
         'department',
         'dissolutionDate',
         'diversityPolicy',
+        'diversityStaffingReport',
         'duns',
         'email',
         'employee',
@@ -500,6 +548,8 @@ class Organization extends Thing
         'hasOfferCatalog',
         'hasPOS',
         'isicV4',
+        'knowsAbout',
+        'knowsLanguage',
         'legalName',
         'leiCode',
         'location',
@@ -509,11 +559,13 @@ class Organization extends Thing
         'memberOf',
         'naics',
         'numberOfEmployees',
+        'ownershipFundingInfo',
         'owns',
         'parentOrganization',
         'publishingPrinciples',
         'review',
         'seeks',
+        'slogan',
         'sponsor',
         'subOrganization',
         'taxID',
@@ -540,6 +592,7 @@ class Organization extends Thing
         'department' => ['Organization'],
         'dissolutionDate' => ['Date'],
         'diversityPolicy' => ['CreativeWork','URL'],
+        'diversityStaffingReport' => ['Article','URL'],
         'duns' => ['Text'],
         'email' => ['Text'],
         'employee' => ['Person'],
@@ -554,6 +607,8 @@ class Organization extends Thing
         'hasOfferCatalog' => ['OfferCatalog'],
         'hasPOS' => ['Place'],
         'isicV4' => ['Text'],
+        'knowsAbout' => ['Text','Thing','URL'],
+        'knowsLanguage' => ['Language','Text'],
         'legalName' => ['Text'],
         'leiCode' => ['Text'],
         'location' => ['Place','PostalAddress','Text'],
@@ -563,11 +618,13 @@ class Organization extends Thing
         'memberOf' => ['Organization','ProgramMembership'],
         'naics' => ['Text'],
         'numberOfEmployees' => ['QuantitativeValue'],
+        'ownershipFundingInfo' => ['AboutPage','CreativeWork','Text','URL'],
         'owns' => ['OwnershipInfo','Product'],
         'parentOrganization' => ['Organization'],
         'publishingPrinciples' => ['CreativeWork','URL'],
         'review' => ['Review'],
         'seeks' => ['Demand'],
+        'slogan' => ['Text'],
         'sponsor' => ['Organization','Person'],
         'subOrganization' => ['Organization'],
         'taxID' => ['Text'],
@@ -594,6 +651,7 @@ class Organization extends Thing
         'department' => 'A relationship between an organization and a department of that organization, also described as an organization (allowing different urls, logos, opening hours). For example: a store with a pharmacy, or a bakery with a cafe.',
         'dissolutionDate' => 'The date that this organization was dissolved.',
         'diversityPolicy' => 'Statement on diversity policy by an Organization e.g. a NewsMediaOrganization. For a NewsMediaOrganization, a statement describing the newsroom’s diversity policy on both staffing and sources, typically providing staffing data.',
+        'diversityStaffingReport' => 'For an Organization (often but not necessarily a NewsMediaOrganization), a report on staffing diversity issues. In a news context this might be for example ASNE or RTDNA (US) reports, or self-reported.',
         'duns' => 'The Dun & Bradstreet DUNS number for identifying an organization or business person.',
         'email' => 'Email address.',
         'employee' => 'Someone working for this organization. Supersedes employees.',
@@ -608,6 +666,8 @@ class Organization extends Thing
         'hasOfferCatalog' => 'Indicates an OfferCatalog listing for this Organization, Person, or Service.',
         'hasPOS' => 'Points-of-Sales operated by the organization or person.',
         'isicV4' => 'The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code for a particular organization, business person, or place.',
+        'knowsAbout' => 'Of a Person, and less typically of an Organization, to indicate a topic that is known about - suggesting possible expertise but not implying it. We do not distinguish skill levels here, or yet relate this to educational content, events, objectives or JobPosting descriptions.',
+        'knowsLanguage' => 'Of a Person, and less typically of an Organization, to indicate a known language. We do not distinguish skill levels or reading/writing/speaking/signing here. Use language codes from the IETF BCP 47 standard.',
         'legalName' => 'The official name of the organization, e.g. the registered company name.',
         'leiCode' => 'An organization identifier that uniquely identifies a legal entity as defined in ISO 17442.',
         'location' => 'The location of for example where the event is happening, an organization is located, or where an action takes place.',
@@ -617,11 +677,13 @@ class Organization extends Thing
         'memberOf' => 'An Organization (or ProgramMembership) to which this Person or Organization belongs. Inverse property: member.',
         'naics' => 'The North American Industry Classification System (NAICS) code for a particular organization or business person.',
         'numberOfEmployees' => 'The number of employees in an organization e.g. business.',
+        'ownershipFundingInfo' => 'For an Organization (often but not necessarily a NewsMediaOrganization), a description of organizational ownership structure; funding and grants. In a news/media setting, this is with particular reference to editorial independence. Note that the funder is also available and can be used to make basic funder information machine-readable.',
         'owns' => 'Products owned by the organization or person.',
         'parentOrganization' => 'The larger organization that this organization is a subOrganization of, if any. Supersedes branchOf. Inverse property: subOrganization.',
         'publishingPrinciples' => 'The publishingPrinciples property indicates (typically via URL) a document describing the editorial principles of an Organization (or individual e.g. a Person writing a blog) that relate to their activities as a publisher, e.g. ethics or diversity policies. When applied to a CreativeWork (e.g. NewsArticle) the principles are those of the party primarily responsible for the creation of the CreativeWork. While such policies are most typically expressed in natural language, sometimes related information (e.g. indicating a funder) can be expressed using schema.org terminology.',
         'review' => 'A review of the item. Supersedes reviews.',
         'seeks' => 'A pointer to products or services sought by the organization or person (demand).',
+        'slogan' => 'A slogan or motto associated with the item.',
         'sponsor' => 'A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.',
         'subOrganization' => 'A relationship between two organizations where the first includes the second, e.g., as a subsidiary. See also: the more specific \'department\' property. Inverse property: parentOrganization.',
         'taxID' => 'The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US or the CIF/NIF in Spain.',
@@ -688,7 +750,7 @@ class Organization extends Thing
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['actionableFeedbackPolicy','address','aggregateRating','alumni','areaServed','award','brand','contactPoint','correctionsPolicy','department','dissolutionDate','diversityPolicy','duns','email','employee','ethicsPolicy','event','faxNumber','founder','foundingDate','foundingLocation','funder','globalLocationNumber','hasOfferCatalog','hasPOS','isicV4','legalName','leiCode','location','logo','makesOffer','member','memberOf','naics','numberOfEmployees','owns','parentOrganization','publishingPrinciples','review','seeks','sponsor','subOrganization','taxID','telephone','unnamedSourcesPolicy','vatID'], 'validateJsonSchema'],
+            [['actionableFeedbackPolicy','address','aggregateRating','alumni','areaServed','award','brand','contactPoint','correctionsPolicy','department','dissolutionDate','diversityPolicy','diversityStaffingReport','duns','email','employee','ethicsPolicy','event','faxNumber','founder','foundingDate','foundingLocation','funder','globalLocationNumber','hasOfferCatalog','hasPOS','isicV4','knowsAbout','knowsLanguage','legalName','leiCode','location','logo','makesOffer','member','memberOf','naics','numberOfEmployees','ownershipFundingInfo','owns','parentOrganization','publishingPrinciples','review','seeks','slogan','sponsor','subOrganization','taxID','telephone','unnamedSourcesPolicy','vatID'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

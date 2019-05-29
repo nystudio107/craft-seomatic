@@ -15,9 +15,9 @@ use nystudio107\seomatic\models\jsonld\InteractAction;
 
 /**
  * JoinAction - An agent joins an event/group with participants/friends at a
- * location. Related actions: RegisterAction: Unlike RegisterAction,
- * JoinAction refers to joining a group/team of people. SubscribeAction:
- * Unlike SubscribeAction, JoinAction does not imply that you'll be receiving
+ * location. Related actions:RegisterAction: Unlike RegisterAction, JoinAction
+ * refers to joining a group/team of people. SubscribeAction: Unlike
+ * SubscribeAction, JoinAction does not imply that you'll be receiving
  * updates. FollowAction: Unlike FollowAction, JoinAction does not imply that
  * you'll be polling for updates.
  *
@@ -50,7 +50,7 @@ class JoinAction extends InteractAction
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'An agent joins an event/group with participants/friends at a location. Related actions: RegisterAction: Unlike RegisterAction, JoinAction refers to joining a group/team of people. SubscribeAction: Unlike SubscribeAction, JoinAction does not imply that you\'ll be receiving updates. FollowAction: Unlike FollowAction, JoinAction does not imply that you\'ll be polling for updates.';
+    static public $schemaTypeDescription = 'An agent joins an event/group with participants/friends at a location. Related actions:RegisterAction: Unlike RegisterAction, JoinAction refers to joining a group/team of people. SubscribeAction: Unlike SubscribeAction, JoinAction does not imply that you\'ll be receiving updates. FollowAction: Unlike FollowAction, JoinAction does not imply that you\'ll be polling for updates.';
 
     /**
      * The Schema.org Type Extends

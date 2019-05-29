@@ -119,7 +119,7 @@ class Course extends CreativeWork
      * educational credential awarded as a consequence of successful completion of
      * this course.
      *
-     * @var mixed|string|string [schema.org types: Text, URL]
+     * @var mixed|EducationalOccupationalCredential|string|string [schema.org types: EducationalOccupationalCredential, Text, URL]
      */
     public $educationalCredentialAwarded;
 
@@ -154,7 +154,7 @@ class Course extends CreativeWork
     static protected $_schemaPropertyExpectedTypes = [
         'courseCode' => ['Text'],
         'coursePrerequisites' => ['AlignmentObject','Course','Text'],
-        'educationalCredentialAwarded' => ['Text','URL'],
+        'educationalCredentialAwarded' => ['EducationalOccupationalCredential','Text','URL'],
         'hasCourseInstance' => ['CourseInstance']
     ];
 

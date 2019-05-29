@@ -121,8 +121,11 @@ class EventReservation extends Reservation
     public $modifiedTime;
 
     /**
-     * The currency (in 3-letter ISO 4217 format) of the price or a price
-     * component, when attached to PriceSpecification and its subtypes.
+     * The currency of the price, or a price component when attached to
+     * PriceSpecification and its subtypes. Use standard formats: ISO 4217
+     * currency format e.g. "USD"; Ticker symbol for cryptocurrencies e.g. "BTC";
+     * well known names for Local Exchange Tradings Systems (LETS) and other
+     * currency types e.g. "Ithaca HOUR".
      *
      * @var mixed|string [schema.org types: Text]
      */
@@ -176,7 +179,11 @@ class EventReservation extends Reservation
 
     /**
      * The total price for the reservation or ticket, including applicable taxes,
-     * shipping, etc.
+     * shipping, etc. Usage guidelines:Use values from 0123456789 (Unicode 'DIGIT
+     * ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially similiar
+     * Unicode symbols. Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to
+     * indicate a decimal point. Avoid using these symbols as a readability
+     * separator.
      *
      * @var mixed|float|PriceSpecification|string [schema.org types: Number, PriceSpecification, Text]
      */
@@ -241,14 +248,14 @@ class EventReservation extends Reservation
         'bookingTime' => 'The date and time the reservation was booked.',
         'broker' => 'An entity that arranges for an exchange between a buyer and a seller. In most cases a broker never acquires or releases ownership of a product or service involved in an exchange. If it is not clear whether an entity is a broker, seller, or buyer, the latter two terms are preferred. Supersedes bookingAgent.',
         'modifiedTime' => 'The date and time the reservation was modified.',
-        'priceCurrency' => 'The currency (in 3-letter ISO 4217 format) of the price or a price component, when attached to PriceSpecification and its subtypes.',
+        'priceCurrency' => 'The currency of the price, or a price component when attached to PriceSpecification and its subtypes. Use standard formats: ISO 4217 currency format e.g. "USD"; Ticker symbol for cryptocurrencies e.g. "BTC"; well known names for Local Exchange Tradings Systems (LETS) and other currency types e.g. "Ithaca HOUR".',
         'programMembershipUsed' => 'Any membership in a frequent flyer, hotel loyalty program, etc. being applied to the reservation.',
         'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller. Supersedes carrier.',
         'reservationFor' => 'The thing -- flight, event, restaurant,etc. being reserved.',
         'reservationId' => 'A unique identifier for the reservation.',
         'reservationStatus' => 'The current status of the reservation.',
         'reservedTicket' => 'A ticket associated with the reservation.',
-        'totalPrice' => 'The total price for the reservation or ticket, including applicable taxes, shipping, etc.',
+        'totalPrice' => 'The total price for the reservation or ticket, including applicable taxes, shipping, etc. Usage guidelines:Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.',
         'underName' => 'The person or organization the reservation or ticket is for.'
     ];
 

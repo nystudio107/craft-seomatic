@@ -16,7 +16,7 @@ use nystudio107\seomatic\models\jsonld\CreativeWork;
 /**
  * PublicationIssue - A part of a successively published publication such as a
  * periodical or publication volume, often numbered, usually containing a
- * grouping of works such as articles. blog post.
+ * grouping of works such as articles.blog post.
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -47,7 +47,7 @@ class PublicationIssue extends CreativeWork
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'A part of a successively published publication such as a periodical or publication volume, often numbered, usually containing a grouping of works such as articles. blog post.';
+    static public $schemaTypeDescription = 'A part of a successively published publication such as a periodical or publication volume, often numbered, usually containing a grouping of works such as articles.blog post.';
 
     /**
      * The Schema.org Type Extends
