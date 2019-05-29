@@ -94,9 +94,10 @@ class Barcode extends ImageObject
     // =========================================================================
 
     /**
-     * The caption for this object.
+     * The caption for this object. For downloadable machine formats (closed
+     * caption, subtitles etc.) use MediaObject and indicate the encodingFormat.
      *
-     * @var string [schema.org types: Text]
+     * @var mixed|MediaObject|string [schema.org types: MediaObject, Text]
      */
     public $caption;
 
@@ -142,7 +143,7 @@ class Barcode extends ImageObject
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'caption' => ['Text'],
+        'caption' => ['MediaObject','Text'],
         'exifData' => ['PropertyValue','Text'],
         'representativeOfPage' => ['Boolean'],
         'thumbnail' => ['ImageObject']
@@ -154,7 +155,7 @@ class Barcode extends ImageObject
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'caption' => 'The caption for this object.',
+        'caption' => 'The caption for this object. For downloadable machine formats (closed caption, subtitles etc.) use MediaObject and indicate the encodingFormat.',
         'exifData' => 'exif data for this object.',
         'representativeOfPage' => 'Indicates whether this image is representative of the content of the page.',
         'thumbnail' => 'Thumbnail image for an image or video.'

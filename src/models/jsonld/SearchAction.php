@@ -14,8 +14,8 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\jsonld\Action;
 
 /**
- * SearchAction - The act of searching for an object. Related actions:
- * FindAction: SearchAction generally leads to a FindAction, but not
+ * SearchAction - The act of searching for an object. Related
+ * actions:FindAction: SearchAction generally leads to a FindAction, but not
  * necessarily.
  *
  * @author    nystudio107
@@ -47,7 +47,7 @@ class SearchAction extends Action
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'The act of searching for an object. Related actions: FindAction: SearchAction generally leads to a FindAction, but not necessarily.';
+    static public $schemaTypeDescription = 'The act of searching for an object. Related actions:FindAction: SearchAction generally leads to a FindAction, but not necessarily.';
 
     /**
      * The Schema.org Type Extends

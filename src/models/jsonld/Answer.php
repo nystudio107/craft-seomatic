@@ -14,7 +14,8 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\jsonld\Comment;
 
 /**
- * Answer - No comment
+ * Answer - An answer offered to a question; perhaps correct, perhaps
+ * opinionated or wrong.
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -45,7 +46,7 @@ class Answer extends Comment
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'No comment';
+    static public $schemaTypeDescription = 'An answer offered to a question; perhaps correct, perhaps opinionated or wrong.';
 
     /**
      * The Schema.org Type Extends

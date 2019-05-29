@@ -52,7 +52,7 @@ class VideoObject extends MediaObject
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'JsonLdType';
+    static public $schemaTypeExtends = 'MediaObject';
 
     /**
      * The Schema.org composed Property Names
@@ -102,9 +102,10 @@ class VideoObject extends MediaObject
     public $actor;
 
     /**
-     * The caption for this object.
+     * The caption for this object. For downloadable machine formats (closed
+     * caption, subtitles etc.) use MediaObject and indicate the encodingFormat.
      *
-     * @var string [schema.org types: Text]
+     * @var mixed|MediaObject|string [schema.org types: MediaObject, Text]
      */
     public $caption;
 
@@ -113,7 +114,7 @@ class VideoObject extends MediaObject
      * event. Directors can be associated with individual items or with a series,
      * episode, clip. Supersedes directors.
      *
-     * @var Person [schema.org types: Person]
+     * @var mixed|Person [schema.org types: Person]
      */
     public $director;
 
@@ -179,7 +180,7 @@ class VideoObject extends MediaObject
      */
     static protected $_schemaPropertyExpectedTypes = [
         'actor' => ['Person'],
-        'caption' => ['Text'],
+        'caption' => ['MediaObject','Text'],
         'director' => ['Person'],
         'musicBy' => ['MusicGroup','Person'],
         'thumbnail' => ['ImageObject'],
@@ -195,7 +196,7 @@ class VideoObject extends MediaObject
      */
     static protected $_schemaPropertyDescriptions = [
         'actor' => 'An actor, e.g. in tv, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip. Supersedes actors.',
-        'caption' => 'The caption for this object.',
+        'caption' => 'The caption for this object. For downloadable machine formats (closed caption, subtitles etc.) use MediaObject and indicate the encodingFormat.',
         'director' => 'A director of e.g. tv, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip. Supersedes directors.',
         'musicBy' => 'The composer of the soundtrack.',
         'thumbnail' => 'Thumbnail image for an image or video.',

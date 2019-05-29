@@ -52,7 +52,7 @@ class Date extends DataType
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'JsonLdType';
+    static public $schemaTypeExtends = 'DataType';
 
     /**
      * The Schema.org composed Property Names

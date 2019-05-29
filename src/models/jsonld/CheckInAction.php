@@ -17,8 +17,8 @@ use nystudio107\seomatic\models\jsonld\CommunicateAction;
  * CheckInAction - The act of an agent communicating (service provider, social
  * media, etc) their arrival by registering/confirming for a previously
  * reserved service (e.g. flight check in) or at a place (e.g. hotel),
- * possibly resulting in a result (boarding pass, etc). Related actions:
- * CheckOutAction: The antonym of CheckInAction. ArriveAction: Unlike
+ * possibly resulting in a result (boarding pass, etc). Related
+ * actions:CheckOutAction: The antonym of CheckInAction. ArriveAction: Unlike
  * ArriveAction, CheckInAction implies that the agent is informing/confirming
  * the start of a previously reserved service. ConfirmAction: Unlike
  * ConfirmAction, CheckInAction implies that the agent is informing/confirming
@@ -54,7 +54,7 @@ class CheckInAction extends CommunicateAction
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'The act of an agent communicating (service provider, social media, etc) their arrival by registering/confirming for a previously reserved service (e.g. flight check in) or at a place (e.g. hotel), possibly resulting in a result (boarding pass, etc). Related actions: CheckOutAction: The antonym of CheckInAction. ArriveAction: Unlike ArriveAction, CheckInAction implies that the agent is informing/confirming the start of a previously reserved service. ConfirmAction: Unlike ConfirmAction, CheckInAction implies that the agent is informing/confirming the start of a previously reserved service rather than its validity/existence.';
+    static public $schemaTypeDescription = 'The act of an agent communicating (service provider, social media, etc) their arrival by registering/confirming for a previously reserved service (e.g. flight check in) or at a place (e.g. hotel), possibly resulting in a result (boarding pass, etc). Related actions:CheckOutAction: The antonym of CheckInAction. ArriveAction: Unlike ArriveAction, CheckInAction implies that the agent is informing/confirming the start of a previously reserved service. ConfirmAction: Unlike ConfirmAction, CheckInAction implies that the agent is informing/confirming the start of a previously reserved service rather than its validity/existence.';
 
     /**
      * The Schema.org Type Extends
@@ -102,7 +102,7 @@ class CheckInAction extends CommunicateAction
     // =========================================================================
 
     /**
-     * The subject matter of the content.
+     * The subject matter of the content. Inverse property: subjectOf.
      *
      * @var Thing [schema.org types: Thing]
      */
@@ -156,7 +156,7 @@ class CheckInAction extends CommunicateAction
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'about' => 'The subject matter of the content.',
+        'about' => 'The subject matter of the content. Inverse property: subjectOf.',
         'inLanguage' => 'The language of the content or performance or used in an action. Please use one of the language codes from the IETF BCP 47 standard. See also availableLanguage. Supersedes language.',
         'recipient' => 'A sub property of participant. The participant who is at the receiving end of the action.'
     ];

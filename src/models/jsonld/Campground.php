@@ -14,17 +14,18 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\jsonld\CivicStructure;
 
 /**
- * Campground - A camping site, campsite, or campground is a place used for
- * overnight stay in the outdoors. In British English a campsite is an area,
- * usually divided into a number of pitches, where people can camp overnight
- * using tents or camper vans or caravans; this British English use of the
- * word is synonymous with the American English expression campground. In
- * American English the term campsite generally means an area where an
- * individual, family, group, or military unit can pitch a tent or parks a
- * camper; a campground may contain many campsites (Source: Wikipedia, the
- * free encyclopedia, see http://en.wikipedia.org/wiki/Campsite). See also the
- * dedicated document on the use of schema.org for marking up hotels and other
- * forms of accommodations.
+ * Campground - A camping site, campsite, or Campground is a place used for
+ * overnight stay in the outdoors, typically containing individual
+ * CampingPitch locations. In British English a campsite is an area, usually
+ * divided into a number of pitches, where people can camp overnight using
+ * tents or camper vans or caravans; this British English use of the word is
+ * synonymous with the American English expression campground. In American
+ * English the term campsite generally means an area where an individual,
+ * family, group, or military unit can pitch a tent or park a camper; a
+ * campground may contain many campsites (Source: Wikipedia see
+ * https://en.wikipedia.org/wiki/Campsite). See also the dedicated document on
+ * the use of schema.org for marking up hotels and other forms of
+ * accommodations.
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -55,7 +56,7 @@ class Campground extends CivicStructure
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'A camping site, campsite, or campground is a place used for overnight stay in the outdoors. In British English a campsite is an area, usually divided into a number of pitches, where people can camp overnight using tents or camper vans or caravans; this British English use of the word is synonymous with the American English expression campground. In American English the term campsite generally means an area where an individual, family, group, or military unit can pitch a tent or parks a camper; a campground may contain many campsites (Source: Wikipedia, the free encyclopedia, see http://en.wikipedia.org/wiki/Campsite). See also the dedicated document on the use of schema.org for marking up hotels and other forms of accommodations.';
+    static public $schemaTypeDescription = 'A camping site, campsite, or Campground is a place used for overnight stay in the outdoors, typically containing individual CampingPitch locations. In British English a campsite is an area, usually divided into a number of pitches, where people can camp overnight using tents or camper vans or caravans; this British English use of the word is synonymous with the American English expression campground. In American English the term campsite generally means an area where an individual, family, group, or military unit can pitch a tent or park a camper; a campground may contain many campsites (Source: Wikipedia see https://en.wikipedia.org/wiki/Campsite). See also the dedicated document on the use of schema.org for marking up hotels and other forms of accommodations.';
 
     /**
      * The Schema.org Type Extends
@@ -103,63 +104,20 @@ class Campground extends CivicStructure
     // =========================================================================
 
     /**
-     * An amenity feature (e.g. a characteristic or service) of the Accommodation.
-     * This generic property does not make a statement about whether the feature
-     * is included in an offer for the main accommodation or available at extra
-     * costs.
+     * The general opening hours for a business. Opening hours can be specified as
+     * a weekly time range, starting with days, then times per day. Multiple days
+     * can be listed with commas ',' separating each day. Day or time ranges are
+     * specified using a hyphen '-'.Days are specified using the following
+     * two-letter combinations: Mo, Tu, We, Th, Fr, Sa, Su. Times are specified
+     * using 24:00 time. For example, 3pm is specified as 15:00. Here is an
+     * example: <time itemprop="openingHours" datetime="Tu,Th
+     * 16:00-20:00">Tuesdays and Thursdays 4-8pm</time>. If a business is open 7
+     * days a week, then it can be specified as <time itemprop="openingHours"
+     * datetime="Mo-Su">Monday through Sunday, all day</time>.
      *
-     * @var LocationFeatureSpecification [schema.org types: LocationFeatureSpecification]
+     * @var string [schema.org types: Text]
      */
-    public $amenityFeature;
-
-    /**
-     * An intended audience, i.e. a group for whom something was created.
-     * Supersedes serviceAudience.
-     *
-     * @var Audience [schema.org types: Audience]
-     */
-    public $audience;
-
-    /**
-     * A language someone may use with or at the item, service or place. Please
-     * use one of the language codes from the IETF BCP 47 standard. See also
-     * inLanguage
-     *
-     * @var mixed|Language|string [schema.org types: Language, Text]
-     */
-    public $availableLanguage;
-
-    /**
-     * The earliest someone may check into a lodging establishment.
-     *
-     * @var mixed|DateTime [schema.org types: DateTime]
-     */
-    public $checkinTime;
-
-    /**
-     * The latest someone may check out of a lodging establishment.
-     *
-     * @var mixed|DateTime [schema.org types: DateTime]
-     */
-    public $checkoutTime;
-
-    /**
-     * Indicates whether pets are allowed to enter the accommodation or lodging
-     * business. More detailed information can be put in a text value.
-     *
-     * @var mixed|bool|string [schema.org types: Boolean, Text]
-     */
-    public $petsAllowed;
-
-    /**
-     * An official rating for a lodging business or food establishment, e.g. from
-     * national associations or standards bodies. Use the author property to
-     * indicate the rating organization, e.g. as an Organization with name such as
-     * (e.g. HOTREC, DEHOGA, WHR, or Hotelstars).
-     *
-     * @var mixed|Rating [schema.org types: Rating]
-     */
-    public $starRating;
+    public $openingHours;
 
     // Static Protected Properties
     // =========================================================================
@@ -170,13 +128,7 @@ class Campground extends CivicStructure
      * @var array
      */
     static protected $_schemaPropertyNames = [
-        'amenityFeature',
-        'audience',
-        'availableLanguage',
-        'checkinTime',
-        'checkoutTime',
-        'petsAllowed',
-        'starRating'
+        'openingHours'
     ];
 
     /**
@@ -185,13 +137,7 @@ class Campground extends CivicStructure
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'amenityFeature' => ['LocationFeatureSpecification'],
-        'audience' => ['Audience'],
-        'availableLanguage' => ['Language','Text'],
-        'checkinTime' => ['DateTime'],
-        'checkoutTime' => ['DateTime'],
-        'petsAllowed' => ['Boolean','Text'],
-        'starRating' => ['Rating']
+        'openingHours' => ['Text']
     ];
 
     /**
@@ -200,13 +146,7 @@ class Campground extends CivicStructure
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'amenityFeature' => 'An amenity feature (e.g. a characteristic or service) of the Accommodation. This generic property does not make a statement about whether the feature is included in an offer for the main accommodation or available at extra costs.',
-        'audience' => 'An intended audience, i.e. a group for whom something was created. Supersedes serviceAudience.',
-        'availableLanguage' => 'A language someone may use with or at the item, service or place. Please use one of the language codes from the IETF BCP 47 standard. See also inLanguage',
-        'checkinTime' => 'The earliest someone may check into a lodging establishment.',
-        'checkoutTime' => 'The latest someone may check out of a lodging establishment.',
-        'petsAllowed' => 'Indicates whether pets are allowed to enter the accommodation or lodging business. More detailed information can be put in a text value.',
-        'starRating' => 'An official rating for a lodging business or food establishment, e.g. from national associations or standards bodies. Use the author property to indicate the rating organization, e.g. as an Organization with name such as (e.g. HOTREC, DEHOGA, WHR, or Hotelstars).'
+        'openingHours' => 'The general opening hours for a business. Opening hours can be specified as a weekly time range, starting with days, then times per day. Multiple days can be listed with commas \',\' separating each day. Day or time ranges are specified using a hyphen \'-\'.Days are specified using the following two-letter combinations: Mo, Tu, We, Th, Fr, Sa, Su. Times are specified using 24:00 time. For example, 3pm is specified as 15:00. Here is an example: <time itemprop="openingHours" datetime="Tu,Th 16:00-20:00">Tuesdays and Thursdays 4-8pm</time>. If a business is open 7 days a week, then it can be specified as <time itemprop="openingHours" datetime="Mo-Su">Monday through Sunday, all day</time>.'
     ];
 
     /**
@@ -267,7 +207,7 @@ class Campground extends CivicStructure
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['amenityFeature','audience','availableLanguage','checkinTime','checkoutTime','petsAllowed','starRating'], 'validateJsonSchema'],
+            [['openingHours'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -94,11 +94,28 @@ class DepositAccount extends InvestmentOrDeposit
     // =========================================================================
 
     /**
-     * The amount of money.
+     * A minimum amount that has to be paid in every month.
      *
-     * @var mixed|MonetaryAmount|float [schema.org types: MonetaryAmount, Number]
+     * @var MonetaryAmount [schema.org types: MonetaryAmount]
      */
-    public $amount;
+    public $accountMinimumInflow;
+
+    /**
+     * An overdraft is an extension of credit from a lending institution when an
+     * account reaches zero. An overdraft allows the individual to continue
+     * withdrawing money even if the account has no funds in it. Basically the
+     * bank allows people to borrow a set amount of money.
+     *
+     * @var MonetaryAmount [schema.org types: MonetaryAmount]
+     */
+    public $accountOverdraftLimit;
+
+    /**
+     * The type of a bank account.
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $bankAccountType;
 
     // Static Protected Properties
     // =========================================================================
@@ -109,7 +126,9 @@ class DepositAccount extends InvestmentOrDeposit
      * @var array
      */
     static protected $_schemaPropertyNames = [
-        'amount'
+        'accountMinimumInflow',
+        'accountOverdraftLimit',
+        'bankAccountType'
     ];
 
     /**
@@ -118,7 +137,9 @@ class DepositAccount extends InvestmentOrDeposit
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'amount' => ['MonetaryAmount','Number']
+        'accountMinimumInflow' => ['MonetaryAmount'],
+        'accountOverdraftLimit' => ['MonetaryAmount'],
+        'bankAccountType' => ['Text','URL']
     ];
 
     /**
@@ -127,7 +148,9 @@ class DepositAccount extends InvestmentOrDeposit
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'amount' => 'The amount of money.'
+        'accountMinimumInflow' => 'A minimum amount that has to be paid in every month.',
+        'accountOverdraftLimit' => 'An overdraft is an extension of credit from a lending institution when an account reaches zero. An overdraft allows the individual to continue withdrawing money even if the account has no funds in it. Basically the bank allows people to borrow a set amount of money.',
+        'bankAccountType' => 'The type of a bank account.'
     ];
 
     /**
@@ -188,7 +211,7 @@ class DepositAccount extends InvestmentOrDeposit
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['amount'], 'validateJsonSchema'],
+            [['accountMinimumInflow','accountOverdraftLimit','bankAccountType'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

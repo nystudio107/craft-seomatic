@@ -95,7 +95,7 @@ class MusicRecording extends CreativeWork
     /**
      * The artist that performed this album or recording.
      *
-     * @var MusicGroup [schema.org types: MusicGroup]
+     * @var mixed|MusicGroup|Person [schema.org types: MusicGroup, Person]
      */
     public $byArtist;
 
@@ -103,35 +103,35 @@ class MusicRecording extends CreativeWork
      * The duration of the item (movie, audio recording, event, etc.) in ISO 8601
      * date format.
      *
-     * @var Duration [schema.org types: Duration]
+     * @var mixed|Duration [schema.org types: Duration]
      */
     public $duration;
 
     /**
      * The album to which this recording belongs.
      *
-     * @var MusicAlbum [schema.org types: MusicAlbum]
+     * @var mixed|MusicAlbum [schema.org types: MusicAlbum]
      */
     public $inAlbum;
 
     /**
      * The playlist to which this recording belongs.
      *
-     * @var MusicPlaylist [schema.org types: MusicPlaylist]
+     * @var mixed|MusicPlaylist [schema.org types: MusicPlaylist]
      */
     public $inPlaylist;
 
     /**
      * The International Standard Recording Code for the recording.
      *
-     * @var string [schema.org types: Text]
+     * @var mixed|string [schema.org types: Text]
      */
     public $isrcCode;
 
     /**
      * The composition this track is a recording of. Inverse property: recordedAs.
      *
-     * @var MusicComposition [schema.org types: MusicComposition]
+     * @var mixed|MusicComposition [schema.org types: MusicComposition]
      */
     public $recordingOf;
 
@@ -158,7 +158,7 @@ class MusicRecording extends CreativeWork
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'byArtist' => ['MusicGroup'],
+        'byArtist' => ['MusicGroup','Person'],
         'duration' => ['Duration'],
         'inAlbum' => ['MusicAlbum'],
         'inPlaylist' => ['MusicPlaylist'],

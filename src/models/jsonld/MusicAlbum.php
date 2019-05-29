@@ -52,7 +52,7 @@ class MusicAlbum extends MusicPlaylist
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'JsonLdType';
+    static public $schemaTypeExtends = 'MusicPlaylist';
 
     /**
      * The Schema.org composed Property Names
@@ -117,7 +117,7 @@ class MusicAlbum extends MusicPlaylist
     /**
      * The artist that performed this album or recording.
      *
-     * @var MusicGroup [schema.org types: MusicGroup]
+     * @var mixed|MusicGroup|Person [schema.org types: MusicGroup, Person]
      */
     public $byArtist;
 
@@ -145,7 +145,7 @@ class MusicAlbum extends MusicPlaylist
         'albumProductionType' => ['MusicAlbumProductionType'],
         'albumRelease' => ['MusicRelease'],
         'albumReleaseType' => ['MusicAlbumReleaseType'],
-        'byArtist' => ['MusicGroup']
+        'byArtist' => ['MusicGroup','Person']
     ];
 
     /**

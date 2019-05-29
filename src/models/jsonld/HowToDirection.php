@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\ListItem;
+use nystudio107\seomatic\models\jsonld\CreativeWork;
 
 /**
  * HowToDirection - A direction indicating a single action to do in the
@@ -22,7 +22,7 @@ use nystudio107\seomatic\models\jsonld\ListItem;
  * @since     3.0.0
  * @see       http://schema.org/HowToDirection
  */
-class HowToDirection extends ListItem
+class HowToDirection extends CreativeWork
 {
     // Static Public Properties
     // =========================================================================
@@ -53,7 +53,7 @@ class HowToDirection extends ListItem
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'ListItem';
+    static public $schemaTypeExtends = 'CreativeWork';
 
     /**
      * The Schema.org composed Property Names
@@ -97,7 +97,7 @@ class HowToDirection extends ListItem
      * A media object representing the circumstances after performing this
      * direction.
      *
-     * @var MediaObject [schema.org types: MediaObject]
+     * @var mixed|MediaObject|string [schema.org types: MediaObject, URL]
      */
     public $afterMedia;
 
@@ -105,7 +105,7 @@ class HowToDirection extends ListItem
      * A media object representing the circumstances before performing this
      * direction.
      *
-     * @var MediaObject [schema.org types: MediaObject]
+     * @var mixed|MediaObject|string [schema.org types: MediaObject, URL]
      */
     public $beforeMedia;
 
@@ -113,7 +113,7 @@ class HowToDirection extends ListItem
      * A media object representing the circumstances while performing this
      * direction.
      *
-     * @var MediaObject [schema.org types: MediaObject]
+     * @var mixed|MediaObject|string [schema.org types: MediaObject, URL]
      */
     public $duringMedia;
 
@@ -121,7 +121,7 @@ class HowToDirection extends ListItem
      * The length of time it takes to perform instructions or a direction (not
      * including time to prepare the supplies), in ISO 8601 duration format.
      *
-     * @var Duration [schema.org types: Duration]
+     * @var mixed|Duration [schema.org types: Duration]
      */
     public $performTime;
 
@@ -129,7 +129,7 @@ class HowToDirection extends ListItem
      * The length of time it takes to prepare the items to be used in instructions
      * or a direction, in ISO 8601 duration format.
      *
-     * @var Duration [schema.org types: Duration]
+     * @var mixed|Duration [schema.org types: Duration]
      */
     public $prepTime;
 
@@ -182,9 +182,9 @@ class HowToDirection extends ListItem
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'afterMedia' => ['MediaObject'],
-        'beforeMedia' => ['MediaObject'],
-        'duringMedia' => ['MediaObject'],
+        'afterMedia' => ['MediaObject','URL'],
+        'beforeMedia' => ['MediaObject','URL'],
+        'duringMedia' => ['MediaObject','URL'],
         'performTime' => ['Duration'],
         'prepTime' => ['Duration'],
         'supply' => ['HowToSupply','Text'],

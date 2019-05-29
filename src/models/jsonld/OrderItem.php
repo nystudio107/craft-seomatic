@@ -125,7 +125,7 @@ class OrderItem extends Intangible
     /**
      * The item ordered.
      *
-     * @var mixed|OrderItem|Product [schema.org types: OrderItem, Product]
+     * @var mixed|OrderItem|Product|Service [schema.org types: OrderItem, Product, Service]
      */
     public $orderedItem;
 
@@ -155,7 +155,7 @@ class OrderItem extends Intangible
         'orderItemNumber' => ['Text'],
         'orderItemStatus' => ['OrderStatus'],
         'orderQuantity' => ['Number'],
-        'orderedItem' => ['OrderItem','Product']
+        'orderedItem' => ['OrderItem','Product','Service']
     ];
 
     /**

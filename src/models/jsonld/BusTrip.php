@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\Intangible;
+use nystudio107\seomatic\models\jsonld\Trip;
 
 /**
  * BusTrip - A trip on a commercial bus line.
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\Intangible;
  * @since     3.0.0
  * @see       http://schema.org/BusTrip
  */
-class BusTrip extends Intangible
+class BusTrip extends Trip
 {
     // Static Public Properties
     // =========================================================================
@@ -52,7 +52,7 @@ class BusTrip extends Intangible
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'Intangible';
+    static public $schemaTypeExtends = 'Trip';
 
     /**
      * The Schema.org composed Property Names
@@ -100,13 +100,6 @@ class BusTrip extends Intangible
     public $arrivalBusStop;
 
     /**
-     * The expected arrival time.
-     *
-     * @var mixed|DateTime [schema.org types: DateTime]
-     */
-    public $arrivalTime;
-
-    /**
      * The name of the bus (e.g. Bolt Express).
      *
      * @var mixed|string [schema.org types: Text]
@@ -127,23 +120,6 @@ class BusTrip extends Intangible
      */
     public $departureBusStop;
 
-    /**
-     * The expected departure time.
-     *
-     * @var mixed|DateTime [schema.org types: DateTime]
-     */
-    public $departureTime;
-
-    /**
-     * The service provider, service operator, or service performer; the goods
-     * producer. Another party (a seller) may offer those services or goods on
-     * behalf of the provider. A provider may also serve as the seller. Supersedes
-     * carrier.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $provider;
-
     // Static Protected Properties
     // =========================================================================
 
@@ -154,12 +130,9 @@ class BusTrip extends Intangible
      */
     static protected $_schemaPropertyNames = [
         'arrivalBusStop',
-        'arrivalTime',
         'busName',
         'busNumber',
-        'departureBusStop',
-        'departureTime',
-        'provider'
+        'departureBusStop'
     ];
 
     /**
@@ -169,12 +142,9 @@ class BusTrip extends Intangible
      */
     static protected $_schemaPropertyExpectedTypes = [
         'arrivalBusStop' => ['BusStation','BusStop'],
-        'arrivalTime' => ['DateTime'],
         'busName' => ['Text'],
         'busNumber' => ['Text'],
-        'departureBusStop' => ['BusStation','BusStop'],
-        'departureTime' => ['DateTime'],
-        'provider' => ['Organization','Person']
+        'departureBusStop' => ['BusStation','BusStop']
     ];
 
     /**
@@ -184,12 +154,9 @@ class BusTrip extends Intangible
      */
     static protected $_schemaPropertyDescriptions = [
         'arrivalBusStop' => 'The stop or station from which the bus arrives.',
-        'arrivalTime' => 'The expected arrival time.',
         'busName' => 'The name of the bus (e.g. Bolt Express).',
         'busNumber' => 'The unique identifier for the bus.',
-        'departureBusStop' => 'The stop or station from which the bus departs.',
-        'departureTime' => 'The expected departure time.',
-        'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller. Supersedes carrier.'
+        'departureBusStop' => 'The stop or station from which the bus departs.'
     ];
 
     /**
@@ -250,7 +217,7 @@ class BusTrip extends Intangible
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['arrivalBusStop','arrivalTime','busName','busNumber','departureBusStop','departureTime','provider'], 'validateJsonSchema'],
+            [['arrivalBusStop','busName','busNumber','departureBusStop'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

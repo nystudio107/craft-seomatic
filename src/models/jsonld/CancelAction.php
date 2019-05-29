@@ -15,7 +15,7 @@ use nystudio107\seomatic\models\jsonld\PlanAction;
 
 /**
  * CancelAction - The act of asserting that a future event/action is no longer
- * going to happen. Related actions: ConfirmAction: The antonym of
+ * going to happen. Related actions:ConfirmAction: The antonym of
  * CancelAction.
  *
  * @author    nystudio107
@@ -47,7 +47,7 @@ class CancelAction extends PlanAction
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'The act of asserting that a future event/action is no longer going to happen. Related actions: ConfirmAction: The antonym of CancelAction.';
+    static public $schemaTypeDescription = 'The act of asserting that a future event/action is no longer going to happen. Related actions:ConfirmAction: The antonym of CancelAction.';
 
     /**
      * The Schema.org Type Extends

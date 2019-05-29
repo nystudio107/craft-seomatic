@@ -114,7 +114,7 @@ class GovernmentPermit extends Permit
     public $permitAudience;
 
     /**
-     * The time validity of the permit.
+     * The duration of validity of a permit or similar thing.
      *
      * @var Duration [schema.org types: Duration]
      */
@@ -128,7 +128,7 @@ class GovernmentPermit extends Permit
     public $validFrom;
 
     /**
-     * The geographic area where the permit is valid.
+     * The geographic area where a permit or similar thing is valid.
      *
      * @var AdministrativeArea [schema.org types: AdministrativeArea]
      */
@@ -183,9 +183,9 @@ class GovernmentPermit extends Permit
         'issuedBy' => 'The organization issuing the ticket or permit.',
         'issuedThrough' => 'The service through with the permit was granted.',
         'permitAudience' => 'The target audience for this permit.',
-        'validFor' => 'The time validity of the permit.',
+        'validFor' => 'The duration of validity of a permit or similar thing.',
         'validFrom' => 'The date when the item becomes valid.',
-        'validIn' => 'The geographic area where the permit is valid.',
+        'validIn' => 'The geographic area where a permit or similar thing is valid.',
         'validUntil' => 'The date when the item is no longer valid.'
     ];
 

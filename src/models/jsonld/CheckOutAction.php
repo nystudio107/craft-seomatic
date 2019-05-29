@@ -16,7 +16,7 @@ use nystudio107\seomatic\models\jsonld\CommunicateAction;
 /**
  * CheckOutAction - The act of an agent communicating (service provider,
  * social media, etc) their departure of a previously reserved service (e.g.
- * flight check in) or place (e.g. hotel). Related actions: CheckInAction: The
+ * flight check in) or place (e.g. hotel). Related actions:CheckInAction: The
  * antonym of CheckOutAction. DepartAction: Unlike DepartAction,
  * CheckOutAction implies that the agent is informing/confirming the end of a
  * previously reserved service. CancelAction: Unlike CancelAction,
@@ -52,7 +52,7 @@ class CheckOutAction extends CommunicateAction
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'The act of an agent communicating (service provider, social media, etc) their departure of a previously reserved service (e.g. flight check in) or place (e.g. hotel). Related actions: CheckInAction: The antonym of CheckOutAction. DepartAction: Unlike DepartAction, CheckOutAction implies that the agent is informing/confirming the end of a previously reserved service. CancelAction: Unlike CancelAction, CheckOutAction implies that the agent is informing/confirming the end of a previously reserved service.';
+    static public $schemaTypeDescription = 'The act of an agent communicating (service provider, social media, etc) their departure of a previously reserved service (e.g. flight check in) or place (e.g. hotel). Related actions:CheckInAction: The antonym of CheckOutAction. DepartAction: Unlike DepartAction, CheckOutAction implies that the agent is informing/confirming the end of a previously reserved service. CancelAction: Unlike CancelAction, CheckOutAction implies that the agent is informing/confirming the end of a previously reserved service.';
 
     /**
      * The Schema.org Type Extends
@@ -100,7 +100,7 @@ class CheckOutAction extends CommunicateAction
     // =========================================================================
 
     /**
-     * The subject matter of the content.
+     * The subject matter of the content. Inverse property: subjectOf.
      *
      * @var Thing [schema.org types: Thing]
      */
@@ -154,7 +154,7 @@ class CheckOutAction extends CommunicateAction
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'about' => 'The subject matter of the content.',
+        'about' => 'The subject matter of the content. Inverse property: subjectOf.',
         'inLanguage' => 'The language of the content or performance or used in an action. Please use one of the language codes from the IETF BCP 47 standard. See also availableLanguage. Supersedes language.',
         'recipient' => 'A sub property of participant. The participant who is at the receiving end of the action.'
     ];

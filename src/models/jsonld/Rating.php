@@ -111,11 +111,23 @@ class Rating extends Intangible
     public $bestRating;
 
     /**
-     * The rating for the content.
+     * The rating for the content. Usage guidelines:Use values from 0123456789
+     * (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than
+     * superficially similiar Unicode symbols. Use '.' (Unicode 'FULL STOP'
+     * (U+002E)) rather than ',' to indicate a decimal point. Avoid using these
+     * symbols as a readability separator.
      *
      * @var mixed|float|string [schema.org types: Number, Text]
      */
     public $ratingValue;
+
+    /**
+     * This Review or Rating is relevant to this part or facet of the
+     * itemReviewed.
+     *
+     * @var mixed|string [schema.org types: Text]
+     */
+    public $reviewAspect;
 
     /**
      * The lowest value allowed in this rating system. If worstRating is omitted,
@@ -137,6 +149,7 @@ class Rating extends Intangible
         'author',
         'bestRating',
         'ratingValue',
+        'reviewAspect',
         'worstRating'
     ];
 
@@ -149,6 +162,7 @@ class Rating extends Intangible
         'author' => ['Organization','Person'],
         'bestRating' => ['Number','Text'],
         'ratingValue' => ['Number','Text'],
+        'reviewAspect' => ['Text'],
         'worstRating' => ['Number','Text']
     ];
 
@@ -160,7 +174,8 @@ class Rating extends Intangible
     static protected $_schemaPropertyDescriptions = [
         'author' => 'The author of this content or rating. Please note that author is special in that HTML 5 provides a special mechanism for indicating authorship via the rel tag. That is equivalent to this and may be used interchangeably.',
         'bestRating' => 'The highest value allowed in this rating system. If bestRating is omitted, 5 is assumed.',
-        'ratingValue' => 'The rating for the content.',
+        'ratingValue' => 'The rating for the content. Usage guidelines:Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.',
+        'reviewAspect' => 'This Review or Rating is relevant to this part or facet of the itemReviewed.',
         'worstRating' => 'The lowest value allowed in this rating system. If worstRating is omitted, 1 is assumed.'
     ];
 
@@ -222,7 +237,7 @@ class Rating extends Intangible
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['author','bestRating','ratingValue','worstRating'], 'validateJsonSchema'],
+            [['author','bestRating','ratingValue','reviewAspect','worstRating'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\Intangible;
+use nystudio107\seomatic\models\jsonld\Trip;
 
 /**
  * Flight - An airline flight.
@@ -21,7 +21,7 @@ use nystudio107\seomatic\models\jsonld\Intangible;
  * @since     3.0.0
  * @see       http://schema.org/Flight
  */
-class Flight extends Intangible
+class Flight extends Trip
 {
     // Static Public Properties
     // =========================================================================
@@ -52,7 +52,7 @@ class Flight extends Intangible
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'Intangible';
+    static public $schemaTypeExtends = 'Trip';
 
     /**
      * The Schema.org composed Property Names
@@ -121,13 +121,6 @@ class Flight extends Intangible
     public $arrivalTerminal;
 
     /**
-     * The expected arrival time.
-     *
-     * @var mixed|DateTime [schema.org types: DateTime]
-     */
-    public $arrivalTime;
-
-    /**
      * The type of boarding policy used by the airline (e.g. zone-based or
      * group-based).
      *
@@ -155,13 +148,6 @@ class Flight extends Intangible
      * @var mixed|string [schema.org types: Text]
      */
     public $departureTerminal;
-
-    /**
-     * The expected departure time.
-     *
-     * @var mixed|DateTime [schema.org types: DateTime]
-     */
-    public $departureTime;
 
     /**
      * The estimated time the flight will take.
@@ -194,16 +180,6 @@ class Flight extends Intangible
     public $mealService;
 
     /**
-     * The service provider, service operator, or service performer; the goods
-     * producer. Another party (a seller) may offer those services or goods on
-     * behalf of the provider. A provider may also serve as the seller. Supersedes
-     * carrier.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $provider;
-
-    /**
      * An entity which offers (sells / leases / lends / loans) the services /
      * goods. A seller may also be a provider. Supersedes merchant, vendor.
      *
@@ -231,17 +207,14 @@ class Flight extends Intangible
         'arrivalAirport',
         'arrivalGate',
         'arrivalTerminal',
-        'arrivalTime',
         'boardingPolicy',
         'departureAirport',
         'departureGate',
         'departureTerminal',
-        'departureTime',
         'estimatedFlightDuration',
         'flightDistance',
         'flightNumber',
         'mealService',
-        'provider',
         'seller',
         'webCheckinTime'
     ];
@@ -256,17 +229,14 @@ class Flight extends Intangible
         'arrivalAirport' => ['Airport'],
         'arrivalGate' => ['Text'],
         'arrivalTerminal' => ['Text'],
-        'arrivalTime' => ['DateTime'],
         'boardingPolicy' => ['BoardingPolicyType'],
         'departureAirport' => ['Airport'],
         'departureGate' => ['Text'],
         'departureTerminal' => ['Text'],
-        'departureTime' => ['DateTime'],
         'estimatedFlightDuration' => ['Duration','Text'],
         'flightDistance' => ['Distance','Text'],
         'flightNumber' => ['Text'],
         'mealService' => ['Text'],
-        'provider' => ['Organization','Person'],
         'seller' => ['Organization','Person'],
         'webCheckinTime' => ['DateTime']
     ];
@@ -281,17 +251,14 @@ class Flight extends Intangible
         'arrivalAirport' => 'The airport where the flight terminates.',
         'arrivalGate' => 'Identifier of the flight\'s arrival gate.',
         'arrivalTerminal' => 'Identifier of the flight\'s arrival terminal.',
-        'arrivalTime' => 'The expected arrival time.',
         'boardingPolicy' => 'The type of boarding policy used by the airline (e.g. zone-based or group-based).',
         'departureAirport' => 'The airport where the flight originates.',
         'departureGate' => 'Identifier of the flight\'s departure gate.',
         'departureTerminal' => 'Identifier of the flight\'s departure terminal.',
-        'departureTime' => 'The expected departure time.',
         'estimatedFlightDuration' => 'The estimated time the flight will take.',
         'flightDistance' => 'The distance of the flight.',
         'flightNumber' => 'The unique identifier for a flight including the airline IATA code. For example, if describing United flight 110, where the IATA code for United is \'UA\', the flightNumber is \'UA110\'.',
         'mealService' => 'Description of the meals that will be provided or available for purchase.',
-        'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller. Supersedes carrier.',
         'seller' => 'An entity which offers (sells / leases / lends / loans) the services / goods. A seller may also be a provider. Supersedes merchant, vendor.',
         'webCheckinTime' => 'The time when a passenger can check into the flight online.'
     ];
@@ -354,7 +321,7 @@ class Flight extends Intangible
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['aircraft','arrivalAirport','arrivalGate','arrivalTerminal','arrivalTime','boardingPolicy','departureAirport','departureGate','departureTerminal','departureTime','estimatedFlightDuration','flightDistance','flightNumber','mealService','provider','seller','webCheckinTime'], 'validateJsonSchema'],
+            [['aircraft','arrivalAirport','arrivalGate','arrivalTerminal','boardingPolicy','departureAirport','departureGate','departureTerminal','estimatedFlightDuration','flightDistance','flightNumber','mealService','seller','webCheckinTime'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

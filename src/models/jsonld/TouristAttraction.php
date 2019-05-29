@@ -17,8 +17,8 @@ use nystudio107\seomatic\models\jsonld\Place;
  * TouristAttraction - A tourist attraction. In principle any Thing can be a
  * TouristAttraction, from a Mountain and LandmarksOrHistoricalBuildings to a
  * LocalBusiness. This Type can be used on its own to describe a general
- * TourstAttraction, or be used as an additionalType to add tourist attraction
- * properties to any other type. (See examples below)
+ * TouristAttraction, or be used as an additionalType to add tourist
+ * attraction properties to any other type. (See examples below)
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -49,7 +49,7 @@ class TouristAttraction extends Place
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'A tourist attraction. In principle any Thing can be a TouristAttraction, from a Mountain and LandmarksOrHistoricalBuildings to a LocalBusiness. This Type can be used on its own to describe a general TourstAttraction, or be used as an additionalType to add tourist attraction properties to any other type. (See examples below)';
+    static public $schemaTypeDescription = 'A tourist attraction. In principle any Thing can be a TouristAttraction, from a Mountain and LandmarksOrHistoricalBuildings to a LocalBusiness. This Type can be used on its own to describe a general TouristAttraction, or be used as an additionalType to add tourist attraction properties to any other type. (See examples below)';
 
     /**
      * The Schema.org Type Extends

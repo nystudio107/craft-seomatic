@@ -15,7 +15,7 @@ use nystudio107\seomatic\models\jsonld\CommunicateAction;
 
 /**
  * AskAction - The act of posing a question / favor to someone. Related
- * actions: ReplyAction: Appears generally as a response to AskAction.
+ * actions:ReplyAction: Appears generally as a response to AskAction.
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -46,7 +46,7 @@ class AskAction extends CommunicateAction
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'The act of posing a question / favor to someone. Related actions: ReplyAction: Appears generally as a response to AskAction.';
+    static public $schemaTypeDescription = 'The act of posing a question / favor to someone. Related actions:ReplyAction: Appears generally as a response to AskAction.';
 
     /**
      * The Schema.org Type Extends

@@ -53,7 +53,7 @@ class BroadcastService extends Service
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'JsonLdType';
+    static public $schemaTypeExtends = 'Service';
 
     /**
      * The Schema.org composed Property Names

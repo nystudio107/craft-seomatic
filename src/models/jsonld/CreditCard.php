@@ -11,13 +11,13 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\LoanOrCredit;
+use nystudio107\seomatic\models\jsonld\PaymentCard;
 
 /**
  * CreditCard - A card payment method of a particular brand or name. Used to
  * mark up a particular payment method and/or the financial product/service
- * that supplies the card account. Commonly used values:
- * http://purl.org/goodrelations/v1#AmericanExpress
+ * that supplies the card account. Commonly used
+ * values:http://purl.org/goodrelations/v1#AmericanExpress
  * http://purl.org/goodrelations/v1#DinersClub
  * http://purl.org/goodrelations/v1#Discover
  * http://purl.org/goodrelations/v1#JCB
@@ -29,7 +29,7 @@ use nystudio107\seomatic\models\jsonld\LoanOrCredit;
  * @since     3.0.0
  * @see       http://schema.org/CreditCard
  */
-class CreditCard extends LoanOrCredit
+class CreditCard extends PaymentCard
 {
     // Static Public Properties
     // =========================================================================
@@ -53,14 +53,14 @@ class CreditCard extends LoanOrCredit
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'A card payment method of a particular brand or name. Used to mark up a particular payment method and/or the financial product/service that supplies the card account. Commonly used values: http://purl.org/goodrelations/v1#AmericanExpress http://purl.org/goodrelations/v1#DinersClub http://purl.org/goodrelations/v1#Discover http://purl.org/goodrelations/v1#JCB http://purl.org/goodrelations/v1#MasterCard http://purl.org/goodrelations/v1#VISA';
+    static public $schemaTypeDescription = 'A card payment method of a particular brand or name. Used to mark up a particular payment method and/or the financial product/service that supplies the card account. Commonly used values:http://purl.org/goodrelations/v1#AmericanExpress http://purl.org/goodrelations/v1#DinersClub http://purl.org/goodrelations/v1#Discover http://purl.org/goodrelations/v1#JCB http://purl.org/goodrelations/v1#MasterCard http://purl.org/goodrelations/v1#VISA';
 
     /**
      * The Schema.org Type Extends
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'JsonLdType';
+    static public $schemaTypeExtends = 'PaymentCard';
 
     /**
      * The Schema.org composed Property Names

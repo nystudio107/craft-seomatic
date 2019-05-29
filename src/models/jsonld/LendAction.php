@@ -15,8 +15,8 @@ use nystudio107\seomatic\models\jsonld\TransferAction;
 
 /**
  * LendAction - The act of providing an object under an agreement that it will
- * be returned at a later date. Reciprocal of BorrowAction. Related actions:
- * BorrowAction: Reciprocal of LendAction.
+ * be returned at a later date. Reciprocal of BorrowAction. Related
+ * actions:BorrowAction: Reciprocal of LendAction.
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -47,7 +47,7 @@ class LendAction extends TransferAction
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'The act of providing an object under an agreement that it will be returned at a later date. Reciprocal of BorrowAction. Related actions: BorrowAction: Reciprocal of LendAction.';
+    static public $schemaTypeDescription = 'The act of providing an object under an agreement that it will be returned at a later date. Reciprocal of BorrowAction. Related actions:BorrowAction: Reciprocal of LendAction.';
 
     /**
      * The Schema.org Type Extends

@@ -95,7 +95,7 @@ class CommunicateAction extends InteractAction
     // =========================================================================
 
     /**
-     * The subject matter of the content.
+     * The subject matter of the content. Inverse property: subjectOf.
      *
      * @var Thing [schema.org types: Thing]
      */
@@ -149,7 +149,7 @@ class CommunicateAction extends InteractAction
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'about' => 'The subject matter of the content.',
+        'about' => 'The subject matter of the content. Inverse property: subjectOf.',
         'inLanguage' => 'The language of the content or performance or used in an action. Please use one of the language codes from the IETF BCP 47 standard. See also availableLanguage. Supersedes language.',
         'recipient' => 'A sub property of participant. The participant who is at the receiving end of the action.'
     ];

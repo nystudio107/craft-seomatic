@@ -14,8 +14,8 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\jsonld\AllocateAction;
 
 /**
- * RejectAction - The act of rejecting to/adopting an object. Related actions:
- * AcceptAction: The antonym of RejectAction.
+ * RejectAction - The act of rejecting to/adopting an object. Related
+ * actions:AcceptAction: The antonym of RejectAction.
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -46,7 +46,7 @@ class RejectAction extends AllocateAction
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'The act of rejecting to/adopting an object. Related actions: AcceptAction: The antonym of RejectAction.';
+    static public $schemaTypeDescription = 'The act of rejecting to/adopting an object. Related actions:AcceptAction: The antonym of RejectAction.';
 
     /**
      * The Schema.org Type Extends
