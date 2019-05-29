@@ -404,7 +404,7 @@ class Seomatic extends Plugin
                     'ClearCaches::EVENT_REGISTER_CACHE_OPTIONS',
                     __METHOD__
                 );
-                // Register our Control Panel routes
+                // Register our Cache Options
                 $event->options = array_merge(
                     $event->options,
                     $this->customAdminCpCacheOptions()
