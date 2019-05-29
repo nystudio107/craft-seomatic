@@ -81,6 +81,7 @@ function seomaticTabChangeHandler() {
 
 window.fillDynamicSchemaMenu = fillDynamicSchemaMenu;
 window.seomaticTabChangeHandler = seomaticTabChangeHandler;
+window.seomaticTabChangeHandler();
 
 $(function() {
     // Tokenize any seomatic-keywords fields
