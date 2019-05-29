@@ -2485,7 +2485,7 @@
             "@type": "rdfs:Class", "rdfs:subClassOf": "schema:WebPage",  "description": "A FAQPage is a WebPage presenting one or more \"Frequently asked questions\" (see also QAPage).",
             "name": "FAQPage",
             "@id": "schema:FAQPage",
-            "layer": "pending"
+            "layer": "core"
 
             },
 
