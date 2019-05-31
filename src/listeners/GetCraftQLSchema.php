@@ -9,6 +9,8 @@
 
 namespace nystudio107\seomatic\listeners;
 
+use Craft;
+use craft\helpers\Json;
 use nystudio107\seomatic\helpers\Container as ContainerHelper;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 use nystudio107\seomatic\models\MetaLinkContainer;
@@ -61,8 +63,11 @@ class GetCraftQLSchema
                         [$containerType],
                         $data['uri'],
                         $data['siteId'],
-                        false
+                        $data['asArray']
                     );
+                    if (!empty($result[$containerType]) && is_array($result[$containerType])) {
+                        $result[$containerType] = Json::encode($result[$containerType]);
+                    }
 
                     return $result[$containerType];
                 });
@@ -72,6 +77,7 @@ class GetCraftQLSchema
             ->arguments(function (FieldBuilder $field) {
                 $field->addIntArgument('siteId');
                 $field->addStringArgument('uri');
+                $field->addBooleanArgument('asArray');
             })
             ->type($seomaticField)
             ->resolve(function ($root, $args, $context, $info) {
@@ -85,11 +91,13 @@ class GetCraftQLSchema
                     $uri = $args['uri'] ?? '/';
                     $siteId = $args['siteId'] ?? null;
                 }
+                $asArray = $args['asArray'] ?? false;
                 $uri = trim($uri === '/' ? '__home__' : $uri, '/');
 
                 return [
                     'uri' => $uri,
-                    'siteId' => $siteId
+                    'siteId' => $siteId,
+                    'asArray' => $asArray,
                 ];
             });
     }
