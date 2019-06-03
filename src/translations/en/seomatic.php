@@ -134,7 +134,7 @@ return [
     'Adding OpenGraph tags to your website influences the performance of your links on social media by allowing you to control what appears when a user posts a link to your content on Facebook.' => 'Adding OpenGraph tags to your website influences the performance of your links on social media by allowing you to control what appears when a user posts a link to your content on Facebook.',
     'Same as SEO Title' => 'Same as SEO Title',
     'With Google Sitelinks search box, from search results. Search users sometimes use navigational queries, typing in the brand name or URL of a known site or app, only to do a more detailed search once they reach their destination. [Learn More](https://developers.google.com/search/docs/data-types/sitelinks-searchbox)' => 'With Google Sitelinks search box, from search results. Search users sometimes use navigational queries, typing in the brand name or URL of a known site or app, only to do a more detailed search once they reach their destination. [Learn More](https://developers.google.com/search/docs/data-types/sitelinks-searchbox)',
-    'The public name of the website; this is appened to the page title by default.' => 'The public name of the website; this is appened to the page title by default.',
+    'The public name of the website; this is appended to the page title by default.' => 'The public name of the website; this is appended to the page title by default.',
     'General' => 'General',
     'Entity Telephone' => 'Entity Telephone',
     'Music Song' => 'Music Song',

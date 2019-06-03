@@ -710,7 +710,7 @@ SEOmatic automatically works with the following plugins:
 
 This means that SEOmatic will treat the Elements that these plugins provide as first class citizens, just like Craft Entries & Categories.
 
-SEOmatic will generate metadata, sitemaps, and have a Craft CP UI for them. If you have a custom Element provided by a plugin or module, you can integrate it using the [SeoElementInterface](https://github.com/nystudio107/craft-seomatic/blob/v1/src/base/SeoElementInterface.php)
+SEOmatic will generate metadata, sitemaps, and have a Craft CP UI for them. If you have a custom Element provided by a plugin or module, you can integrate it using the [SeoElementInterface](https://github.com/nystudio107/craft-seomatic/blob/v3/src/base/SeoElementInterface.php).
 
 ## Emoji Support
 
@@ -1563,7 +1563,6 @@ SEOmatic allows you to fetch the meta information for any page via a controller 
 
 To retrieve SEOmatic container data through the [CraftQL](https://github.com/markhuot/craftql) plugin, use the `seomatic` field in your graphql query. Each parameter will return that container's data, ready for insertion into the DOM.
 
-
 You must as least pass in the URI you want metadata for:
 
 ```gql
@@ -1580,8 +1579,6 @@ You must as least pass in the URI you want metadata for:
 
 ...and you can also pass in an optional `siteId`:
 
-You must as least pass in the URI you want metadata for:
-
 ```gql
 {
   seomatic (uri: "/", siteId: 1) {
@@ -1593,6 +1590,23 @@ You must as least pass in the URI you want metadata for:
   }
 }
 ```
+
+...and you can also pass in an optional `asArray` parameter:
+
+```gql
+{
+  seomatic (uri: "/", asArray: true) {
+      metaTitleContainer
+      metaTagContainer
+      metaLinkContainer
+      metaScriptContainer
+      metaJsonLdContainer
+  }
+}
+```
+This defaults to `false` which returns to you HTML ready to be inserted into the DOM. If you set it to `true` then it will return a JSON-encoded array of the container data.
+
+This is useful if you're using Next.js, Nuxt.js, Gatsby, Gridsome, or anything else that uses a library to insert the various tags. In this case, you want the raw data to pass along.
 
 ![Screenshot](resources/screenshots/seomatic-craftql-query.png)
 
