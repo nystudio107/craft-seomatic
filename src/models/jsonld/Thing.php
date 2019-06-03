@@ -179,6 +179,13 @@ class Thing extends MetaJsonLd
     public $sameAs;
 
     /**
+     * A CreativeWork or Event about this Thing.. Inverse property: about.
+     *
+     * @var mixed|CreativeWork|Event [schema.org types: CreativeWork, Event]
+     */
+    public $subjectOf;
+
+    /**
      * URL of the item.
      *
      * @var mixed|string [schema.org types: URL]
@@ -204,6 +211,7 @@ class Thing extends MetaJsonLd
         'name',
         'potentialAction',
         'sameAs',
+        'subjectOf',
         'url'
     ];
 
@@ -223,6 +231,7 @@ class Thing extends MetaJsonLd
         'name' => ['Text'],
         'potentialAction' => ['Action'],
         'sameAs' => ['URL'],
+        'subjectOf' => ['CreativeWork','Event'],
         'url' => ['URL']
     ];
 
@@ -242,6 +251,7 @@ class Thing extends MetaJsonLd
         'name' => 'The name of the item.',
         'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
         'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
+        'subjectOf' => 'A CreativeWork or Event about this Thing.. Inverse property: about.',
         'url' => 'URL of the item.'
     ];
 
@@ -269,8 +279,8 @@ class Thing extends MetaJsonLd
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -301,13 +311,13 @@ class Thing extends MetaJsonLd
     }
 
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function rules()
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['additionalType','alternateName','description','disambiguatingDescription','identifier','image','mainEntityOfPage','name','potentialAction','sameAs','url'], 'validateJsonSchema'],
+            [['additionalType','alternateName','description','disambiguatingDescription','identifier','image','mainEntityOfPage','name','potentialAction','sameAs','subjectOf','url'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

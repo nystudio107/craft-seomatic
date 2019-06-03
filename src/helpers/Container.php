@@ -80,7 +80,6 @@ class Container
                 );
                 // Load the meta containers and parse our globals
                 Seomatic::$plugin->metaContainers->previewMetaContainers($uri, $siteId, true);
-
                 // Iterate through the desired $containerKeys
                 foreach ($containerKeys as $containerKey) {
                     if ($asArray) {

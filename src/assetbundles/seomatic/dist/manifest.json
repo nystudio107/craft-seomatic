@@ -25,5 +25,7 @@
   "css/styles.css.map": "css/styles.css.map",
   "img/Seomatic-icon.svg": "img/Seomatic-icon.svg",
   "img/missing_image.png": "img/missing_image.png",
-  "img/no_image_set.png": "img/no_image_set.png"
+  "img/missing_image.webp": "img/missing_image.webp",
+  "img/no_image_set.png": "img/no_image_set.png",
+  "img/no_image_set.webp": "img/no_image_set.webp"
 }
