@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.2.7 - 2019.05.31
+## 3.2.7 - 2019.06.03
 ### Changed
 * Added the ability to pass in `asArray` as a parameter for CraftQL queries to a JSON-encoded array of data back
 * Updated build system
