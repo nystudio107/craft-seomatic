@@ -735,7 +735,7 @@ Add the following to the non-AMP template to tell Google where the AMP version o
 ```twig
 {% set linkTag = seomatic.link.create({
   "rel": "amphtml",
-  "content": yourAmpPageLink
+  "href": yourAmpPageLink
   })
 %}
 ```
@@ -1169,7 +1169,7 @@ To create a new meta object, you pass in a key:value array of the attributes to 
 ```twig
 {% set linkTag = seomatic.link.create({
   "rel": "canonical",
-  "content": "https://nystudio107.com"
+  "href": "https://nystudio107.com"
   })
 %}
 ```
@@ -1179,7 +1179,7 @@ By default, newly created meta objects are added to the appropriate meta contain
 ```twig
 {% set linkTag = seomatic.link.create({
   "rel": "canonical",
-  "content": "https://nystudio107.com"
+  "href": "https://nystudio107.com"
   }, false)
 %}
 ```
