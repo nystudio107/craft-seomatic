@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.8 - 2019.06.10
+### Changed
+* Switched over to `startDateLocalized` & `endDateLocalized` for Solspace Calendar defaults
+
 ## 3.2.7 - 2019.06.03
 ### Changed
 * Added the ability to pass in `asArray` as a parameter for CraftQL queries to a JSON-encoded array of data back
