@@ -277,6 +277,12 @@ class SettingsController extends Controller
             $templateContainers = $metaBundle->frontendTemplatesContainer->data;
             $variables['robotsTemplate'] = $templateContainers[FrontendTemplates::ROBOTS_TXT_HANDLE];
             $variables['humansTemplate'] = $templateContainers[FrontendTemplates::HUMANS_TXT_HANDLE];
+            // Handle an edge-case where a migration didn't work properly to add ADS_TXT_HANDLE
+            if (!isset($templateContainers[FrontendTemplates::ADS_TXT_HANDLE])) {
+                $globalMetaBundle = Seomatic::$plugin->metaBundles->createGlobalMetaBundleForSite($siteId);
+                $templateContainers[FrontendTemplates::ADS_TXT_HANDLE] =
+                    $globalMetaBundle->frontendTemplatesContainer->data[FrontendTemplates::ADS_TXT_HANDLE];
+            }
             $variables['adsTemplate'] = $templateContainers[FrontendTemplates::ADS_TXT_HANDLE];
             // Image selectors
             $bundleSettings = $metaBundle->metaBundleSettings;
