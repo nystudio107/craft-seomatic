@@ -1,8 +1,9 @@
 # SEOmatic Changelog
 
-## 3.2.8 - 2019.06.10
+## 3.2.8 - 2019.06.13
 ### Changed
 * Switched over to `startDateLocalized` & `endDateLocalized` for Solspace Calendar defaults
+* Fixed an issue with the Breadcrumbs JSON-LD not being generated properly for sites that has a path as part of their URL (e.g. `example.com/us/`)
 
 ## 3.2.7 - 2019.06.03
 ### Changed
