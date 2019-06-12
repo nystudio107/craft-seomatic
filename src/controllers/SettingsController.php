@@ -279,7 +279,7 @@ class SettingsController extends Controller
             $variables['humansTemplate'] = $templateContainers[FrontendTemplates::HUMANS_TXT_HANDLE];
             // Handle an edge-case where a migration didn't work properly to add ADS_TXT_HANDLE
             if (!isset($templateContainers[FrontendTemplates::ADS_TXT_HANDLE])) {
-                $globalMetaBundle = Seomatic::$plugin->metaBundles->createGlobalMetaBundleForSite($siteId);
+                $globalMetaBundle = Seomatic::$plugin->metaBundles->createGlobalMetaBundleForSite($siteId, $metaBundle);
                 $templateContainers[FrontendTemplates::ADS_TXT_HANDLE] =
                     $globalMetaBundle->frontendTemplatesContainer->data[FrontendTemplates::ADS_TXT_HANDLE];
             }
