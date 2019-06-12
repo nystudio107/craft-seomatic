@@ -180,24 +180,27 @@ class Sitemaps extends Component implements SitemapInterface
             foreach ($searchEngineUrls as &$url) {
                 $groups = Craft::$app->getSites()->getAllGroups();
                 foreach ($groups as $group) {
-                    $siteId = $group->getSiteIds()[0];
-                    $sitemapIndexUrl = $this->sitemapIndexUrlForSiteId($siteId);
-                    if (!empty($sitemapIndexUrl)) {
-                        $submissionUrl = $url.$sitemapIndexUrl;
-                        // create new guzzle client
-                        $guzzleClient = Craft::createGuzzleClient(['timeout' => 120, 'connect_timeout' => 120]);
-                        // Submit the sitemap index to each search engine
-                        try {
-                            $guzzleClient->post($submissionUrl);
-                            Craft::info(
-                                'Sitemap index submitted to: '.$submissionUrl,
-                                __METHOD__
-                            );
-                        } catch (\Exception $e) {
-                            Craft::error(
-                                'Error submitting sitemap index to: '.$submissionUrl.' - '.$e->getMessage(),
-                                __METHOD__
-                            );
+                    $groupSiteIds = $group->getSiteIds();
+                    if (!empty($groupSiteIds)) {
+                        $siteId = $groupSiteIds[0];
+                        $sitemapIndexUrl = $this->sitemapIndexUrlForSiteId($siteId);
+                        if (!empty($sitemapIndexUrl)) {
+                            $submissionUrl = $url.$sitemapIndexUrl;
+                            // create new guzzle client
+                            $guzzleClient = Craft::createGuzzleClient(['timeout' => 120, 'connect_timeout' => 120]);
+                            // Submit the sitemap index to each search engine
+                            try {
+                                $guzzleClient->post($submissionUrl);
+                                Craft::info(
+                                    'Sitemap index submitted to: '.$submissionUrl,
+                                    __METHOD__
+                                );
+                            } catch (\Exception $e) {
+                                Craft::error(
+                                    'Error submitting sitemap index to: '.$submissionUrl.' - '.$e->getMessage(),
+                                    __METHOD__
+                                );
+                            }
                         }
                     }
                 }
