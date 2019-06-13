@@ -357,9 +357,10 @@ class DynamicMeta
         $lastElement = Seomatic::$matchedElement;
         if ($lastElement && $element) {
             if ($lastElement->uri !== '__home__' && $element->uri) {
-                $path = parse_url($lastElement->url, PHP_URL_PATH);
-                $path = trim($path, '/');
-                $segments = explode('/', $path);
+                $path = $lastElement->uri;
+                $segments = array_values(array_filter(explode('/', $path), function ($segment) {
+                    return $segment !== '';
+                }));
             }
         }
         // Parse through the segments looking for elements that match
