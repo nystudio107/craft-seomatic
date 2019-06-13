@@ -10,6 +10,7 @@
 {% block foot %}
     {{ parent() }}
     {% set jsModules = [
+        'styles.js',
         'seomatic.js',
     ] %}
     {{ registerJsModules(jsModules) }}

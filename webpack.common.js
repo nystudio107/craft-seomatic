@@ -24,14 +24,22 @@ const configureBabelLoader = (browserList) => {
                 presets: [
                     [
                         '@babel/preset-env', {
-                            useBuiltIns: 'usage',
+                            modules: false,
+                            corejs:  {
+                                version: 2,
+                                proposals: true
+                            },
+                            useBuiltIns: 'entry',
                             targets: {
                                 browsers: browserList,
                             },
                         }
                     ],
                 ],
-                plugins: [],
+                plugins: [
+                    '@babel/plugin-syntax-dynamic-import',
+                    '@babel/plugin-transform-runtime',
+                ],
             },
         },
     };
