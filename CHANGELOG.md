@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.9 - 2019.06.13
+### Changed
+* Fixed an issue where the built JS bundles would error inside of webpack
+
 ## 3.2.8 - 2019.06.13
 ### Changed
 * Switched over to `startDateLocalized` & `endDateLocalized` for Solspace Calendar defaults
