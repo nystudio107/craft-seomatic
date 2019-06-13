@@ -2,8 +2,8 @@
  * @project        SEOmatic
  * @name           vendors~javascript-editor.js
  * @author         Andrew Welch
- * @build          Fri, May 31, 2019 11:06 PM ET
- * @release        bef409446b59921d879374912f76b53260cb80d9 [develop]
+ * @build          Thu, Jun 13, 2019 3:24 AM ET
+ * @release        7f256f328658e8db821767b293a8a2816ea2321f [develop]
  * @copyright      Copyright (c) 2019 nystudio107
  *
  */
