@@ -519,23 +519,6 @@
 {% js %}
     // Handle looking up the lattitude/longitude
     $('#{{ "geolookup" |namespaceInputId }}').on('click', function(e) {
-        address = $('#{{ "genericStreetAddress" |namespaceInputId }}').val() + ", "
-                    + $('#{{ "genericAddressLocality" |namespaceInputId }}').val() + ", "
-                    + $('#{{ "genericAddressRegion" |namespaceInputId }}').val() + ", "
-                    + $('#{{ "genericPostalCode" |namespaceInputId }}').val() + ", "
-                    + $('#{{ "genericAddressCountry" |namespaceInputId }}').val();
-        $.ajax({
-            url:"//maps.googleapis.com/maps/api/geocode/json?address="+address+"&sensor=false",
-            type: "POST",
-            success:function(res) {
-                $('#{{ "geolookup-errors" |namespaceInputId }}').hide();
-                if (res.results.length) {
-                    $('#{{ "genericGeoLatitude" |namespaceInputId }}').val(res.results[0].geometry.location.lat);
-                    $('#{{ "genericGeoLongitude" |namespaceInputId }}').val(res.results[0].geometry.location.lng);
-                } else {
-                    $('#{{ "geolookup-errors" |namespaceInputId }}').show();
-                }
-            }
-        });
+        window.open('https://www.latlong.net/convert-address-to-lat-long.html','_blank');
     });
 {% endjs %}
