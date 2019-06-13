@@ -7,6 +7,7 @@
 * Handle an edge-case where a migration didn't work properly to add `ADS_TXT_HANDLE`
 * Fixed an issue where an error would be thrown if a new Section was created, and you had a site group that had no sites in it
 * Fixed an issue where the SEOmatic CSS was affecting the CP CSS
+* Fixed the **Look up Latitude/Longitude** button; it now opens [www.latlong.net](https://www.latlong.net/convert-address-to-lat-long.html) because Google requires an API key now
 
 ## 3.2.7 - 2019.06.03
 ### Changed
