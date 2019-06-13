@@ -6,6 +6,7 @@
 * Fixed an issue with the Breadcrumbs JSON-LD not being generated properly for sites that has a path as part of their URL (e.g. `example.com/us/`)
 * Handle an edge-case where a migration didn't work properly to add `ADS_TXT_HANDLE`
 * Fixed an issue where an error would be thrown if a new Section was created, and you had a site group that had no sites in it
+* Fixed an issue where the SEOmatic CSS was affecting the CP CSS
 
 ## 3.2.7 - 2019.06.03
 ### Changed
