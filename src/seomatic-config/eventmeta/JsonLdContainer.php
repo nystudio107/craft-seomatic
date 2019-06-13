@@ -36,8 +36,8 @@ return [
                 'description'      => '{seomatic.meta.seoDescription}',
                 'url'              => '{seomatic.meta.canonicalUrl}',
                 'mainEntityOfPage' => '{seomatic.meta.canonicalUrl}',
-                'startDate'        => '{event.startDate|atom}',
-                'endDate'          => '{event.endDate|atom}',
+                'startDate'        => '{event.startDateLocalized|atom}',
+                'endDate'          => '{event.endDateLocalized|atom}',
                 'inLanguage'       => '{seomatic.meta.language}',
                 'location'         => [
                     'type' => 'Place',

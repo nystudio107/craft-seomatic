@@ -761,16 +761,13 @@ class MetaBundles extends Component
         return $metaBundle;
     }
 
-    // Protected Methods
-    // =========================================================================
-
     /**
      * @param int             $siteId
      * @param MetaBundle|null $baseConfig
      *
      * @return MetaBundle
      */
-    protected function createGlobalMetaBundleForSite(int $siteId, $baseConfig = null): MetaBundle
+    public function createGlobalMetaBundleForSite(int $siteId, $baseConfig = null): MetaBundle
     {
         // Create a new meta bundle with propagated defaults
         $metaBundleDefaults = ArrayHelper::merge(
@@ -797,6 +794,9 @@ class MetaBundles extends Component
 
         return $metaBundle;
     }
+
+    // Protected Methods
+    // =========================================================================
 
     /**
      * Preserve user settings from the meta bundle when updating it from the
