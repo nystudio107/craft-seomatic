@@ -1,5 +1,10 @@
 # SEOmatic Changelog
 
+## 3.2.10 - 2019.06.16
+### Changed
+* Fixed an issue where headers were sent when the corresponding tags were not present
+* Fixed an issue that caused SEOmatic to throw an error after you deleted a Solspace Calender calendar
+
 ## 3.2.9 - 2019.06.13
 ### Changed
 * Fixed an issue where the built JS bundles would error inside of webpack
