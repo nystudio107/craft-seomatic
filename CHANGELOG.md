@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.11 - 2019.06.24
+### Changed
+* If we're not in local dev, tell it to generate the transform immediately so that urls like `actions/assets/generate-transform` don't get cached
+
 ## 3.2.10 - 2019.06.16
 ### Changed
 * Fixed an issue where headers were sent when the corresponding tags were not present
