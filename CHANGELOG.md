@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
-## 3.2.11 - 2019.06.24
+## 3.2.11 - 2019.06.26
+### Added
+* The generated JSON-LD now uses a single root JSON-LD object with the JSON-LD types included in the `@graph` array
+
 ### Changed
 * If we're not in local dev, tell it to generate the transform immediately so that urls like `actions/assets/generate-transform` don't get cached
 * Add an `mtime` cache busting URL param to all social media images
