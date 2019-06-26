@@ -3,6 +3,7 @@
 ## 3.2.11 - 2019.06.24
 ### Changed
 * If we're not in local dev, tell it to generate the transform immediately so that urls like `actions/assets/generate-transform` don't get cached
+* Add an `mtime` cache busting URL param to all social media images
 
 ## 3.2.10 - 2019.06.16
 ### Changed
