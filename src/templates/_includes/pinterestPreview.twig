@@ -35,9 +35,6 @@
                 x[i].style.backgroundImage = "url('" + "{{ baseAssetsUrl ~ '/img/no_image_set.png' }}" + "')";
                 {% if ogImageArray.content is defined and ogImageArray.content |length %}
                 {% set cacheBustString = "" %}
-                {% if "?" not in ogImageArray.content %}
-                    {% set cacheBustString = "?mtime=" ~ now|date('U') %}
-                {% endif %}
                 x[i].style.backgroundImage = "url('" + "{{ (ogImageArray.content ~ cacheBustString) | raw }}" + "')";
                 {% endif %}
             }

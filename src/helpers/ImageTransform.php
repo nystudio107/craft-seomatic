@@ -110,6 +110,12 @@ class ImageTransform
             if ($url === null) {
                 $url = '';
             }
+            // If we have a url, add an `mtime` param to cache bust
+            if (!empty($url)) {
+                $url = UrlHelper::url($url, [
+                    'mtime' => $asset->dateModified->getTimestamp(),
+                ]);
+            }
         }
 
         return $url;
