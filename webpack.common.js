@@ -29,7 +29,7 @@ const configureBabelLoader = (browserList) => {
                                 version: 3,
                                 proposals: true
                             },
-                            useBuiltIns: 'usage',
+                            useBuiltIns: 'entry',
                             targets: {
                                 browsers: browserList,
                             },
