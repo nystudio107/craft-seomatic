@@ -9,6 +9,7 @@
 * Fixed an issue that caused SEOmatic to throw an error after you deleted a Solspace Calender calendar
 * If we're not in local dev, tell it to generate the transform immediately so that urls like `actions/assets/generate-transform` don't get cached
 * Add an `mtime` cache busting URL param to all social media images
+* The Facebook and Twitter Transform and Transform Mode settings are now visible even if "Same As SEO Image" is selected
 
 ## 3.2.9 - 2019.06.13
 ### Changed
