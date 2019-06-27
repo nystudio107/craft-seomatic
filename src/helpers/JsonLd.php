@@ -28,6 +28,13 @@ class JsonLd extends \craft\helpers\Json
         '@context',
     ];
 
+    const AT_PREFIXED_ATTRIBUTES = [
+        'id',
+        'context',
+        'type',
+        'graph',
+    ];
+
     const IGNORE_ALWAYS_ATTRIBUTES = [
         'include',
         'key',
@@ -94,9 +101,9 @@ class JsonLd extends \craft\helpers\Json
         // Remove any empty values
         $array = array_filter($array);
         // Rename keys as appropriate
-        $array = self::changeKey($array, 'id', '@id');
-        $array = self::changeKey($array, 'context', '@context');
-        $array = self::changeKey($array, 'type', '@type');
+        foreach (self::AT_PREFIXED_ATTRIBUTES as $key) {
+            $array = self::changeKey($array, $key, '@'.$key);
+        }
         if ($depth > 1) {
             foreach (self::IGNORE_ATTRIBUTES as $attribute) {
                 unset($array[$attribute]);

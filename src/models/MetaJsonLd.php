@@ -160,6 +160,13 @@ class MetaJsonLd extends MetaItem
      */
     public $id;
 
+    /**
+     * The JSON-LD graph https://json-ld.org/spec/latest/json-ld/#named-graphs
+     *
+     * @var null|array
+     */
+    public $graph;
+
     // Static Methods
     // =========================================================================
 

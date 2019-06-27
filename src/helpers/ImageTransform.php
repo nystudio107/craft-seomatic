@@ -11,6 +11,9 @@
 
 namespace nystudio107\seomatic\helpers;
 
+use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
+
 use Craft;
 use craft\elements\Asset;
 use craft\models\AssetTransform;
@@ -100,9 +103,18 @@ class ImageTransform
             }
             // Generate a transformed image
             $assets = Craft::$app->getAssets();
-            $url = $assets->getAssetUrl($asset, $transform);
+            // If we're not in local dev, tell it to generate the transform immediately so that
+            // urls like `actions/assets/generate-transform` don't get cached
+            $generateNow = Seomatic::$environment === EnvironmentHelper::SEOMATIC_DEV_ENV ? null : true;
+            $url = $assets->getAssetUrl($asset, $transform, $generateNow);
             if ($url === null) {
                 $url = '';
+            }
+            // If we have a url, add an `mtime` param to cache bust
+            if (!empty($url)) {
+                $url = UrlHelper::url($url, [
+                    'mtime' => $asset->dateModified->getTimestamp(),
+                ]);
             }
         }
 

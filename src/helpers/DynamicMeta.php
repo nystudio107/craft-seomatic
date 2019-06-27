@@ -112,7 +112,7 @@ class DynamicMeta
             $robots = Seomatic::$seomaticVariable->tag->get('robots');
             if ($robots !== null && $robots->include) {
                 $robotsArray = $robots->renderAttributes();
-                $content = $robotsArray['content'] ?? $robots->content;
+                $content = $robotsArray['content'] ?? '';
                 if (!empty($content)) {
                     // The content property can be a string or an array
                     if (\is_array($content)) {
@@ -131,7 +131,7 @@ class DynamicMeta
             $canonical = Seomatic::$seomaticVariable->link->get('canonical');
             if ($canonical !== null && $canonical->include) {
                 $canonicalArray = $canonical->renderAttributes();
-                $href = $canonicalArray['href'] ?? $canonical->href;
+                $href = $canonicalArray['href'] ?? '';
                 if (!empty($href)) {
                     // The href property can be a string or an array
                     if (\is_array($href)) {
@@ -151,7 +151,7 @@ class DynamicMeta
             $referrer = Seomatic::$seomaticVariable->tag->get('referrer');
             if ($referrer !== null && $referrer->include) {
                 $referrerArray = $referrer->renderAttributes();
-                $content = $referrerArray['content'] ?? $referrer->content;
+                $content = $referrerArray['content'] ?? '';
                 if (!empty($content)) {
                     // The content property can be a string or an array
                     if (\is_array($content)) {

@@ -76,7 +76,7 @@ class MetaJsonLdContainer extends MetaContainer
                                     'array'            => false,
                                 ]);
                                 $tagData[] = [
-                                    'jsonLd' => $jsonLd,
+                                    'jsonLd' => $metaJsonLdModel,
                                     'position' => View::POS_END
                                 ];
                                 // If `devMode` is enabled, validate the JSON-LD and output any model errors
@@ -99,14 +99,27 @@ class MetaJsonLdContainer extends MetaContainer
             Seomatic::$cacheDuration,
             $dependency
         );
-        // Register the tags
+        // Create a root JSON-LD object
+        $jsonLdGraph = MetaJsonLd::create('jsonLd', [
+            'graph'        => [],
+        ]);
+        $jsonLdGraph->type = null;
+        // Add the JSON-LD objects to our root JSON-LD's graph
         foreach ($tagData as $config) {
-            Seomatic::$view->registerScript(
-                $config['jsonLd'],
-                $config['position'],
-                ['type' => 'application/ld+json']
-            );
+            $jsonLdGraph->graph[] = $config['jsonLd'];
         }
+        // Render the JSON-LD object
+        $jsonLd = $jsonLdGraph->render([
+            'renderRaw'        => true,
+            'renderScriptTags' => false,
+            'array'            => false,
+        ]);
+        // Register the tags
+        Seomatic::$view->registerScript(
+            $jsonLd,
+            View::POS_END,
+            ['type' => 'application/ld+json']
+        );
         Craft::endProfile('MetaJsonLdContainer::includeMetaData', __METHOD__);
     }
 

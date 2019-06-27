@@ -84,6 +84,8 @@ SEOmatic also caches each unique SEO Meta request so that your website performan
 
 * [Advanced SEOmatic Tips](https://nystudio107.com/blog/tips-for-using-seomatic-effectively)
 
+* [Annotated JSON-LD Structured Data Examples](https://nystudio107.com/blog/annotated-json-ld-structured-data-examples)
+
 * [Modern SEO: Snake Oil vs. Substance](https://nystudio107.com/blog/modern-seo-snake-oil-vs-substance)
 
 * [JSON-LD, Structured Data and Erotica](https://nystudio107.com/blog/json-ld-structured-data-and-erotica)
