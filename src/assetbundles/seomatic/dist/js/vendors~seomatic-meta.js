@@ -2,12 +2,12 @@
  * @project        SEOmatic
  * @name           vendors~seomatic-meta.js
  * @author         Andrew Welch
- * @build          Thu, Jun 13, 2019 6:16 PM ET
- * @release        23b7de5f3c9b585eb06b41f0421807d3836f74e4 [develop]
+ * @build          Thu, Jun 27, 2019 3:43 PM ET
+ * @release        ffd91c12d692439dc58ebe11db895dcb6ca4f6c6 [develop]
  * @copyright      Copyright (c) 2019 nystudio107
  *
  */
-(window.webpackJsonp=window.webpackJsonp||[]).push([[9],{1:function(t,e){var i;i=function(){return this}();try{i=i||new Function("return this")()}catch(t){"object"==typeof window&&(i=window)}t.exports=i},22:function(t,e,i){(function(e){var i;
+(window.webpackJsonp=window.webpackJsonp||[]).push([[9],{1:function(t,e){var i;i=function(){return this}();try{i=i||new Function("return this")()}catch(t){"object"==typeof window&&(i=window)}t.exports=i},21:function(t,e,i){(function(e){var i;
 /*!
  * bootstrap-tokenfield
  * https://github.com/sliptree/bootstrap-tokenfield

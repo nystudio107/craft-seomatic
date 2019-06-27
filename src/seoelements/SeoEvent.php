@@ -27,6 +27,7 @@ use craft\models\Site;
 
 use Solspace\Calendar\Calendar as CalendarPlugin;
 use Solspace\Calendar\Elements\Event;
+use Solspace\Calendar\Events\DeleteModelEvent;
 use Solspace\Calendar\Events\SaveModelEvent;
 use Solspace\Calendar\Models\CalendarModel;
 use Solspace\Calendar\Services\CalendarsService;
@@ -131,7 +132,7 @@ class SeoEvent implements SeoElementInterface
             BaseEvent::on(
                 CalendarsService::class,
                 CalendarsService::EVENT_AFTER_DELETE,
-                function (SaveModelEvent $event) {
+                function (DeleteModelEvent $event) {
                     Craft::debug(
                         'CalendarsService::EVENT_AFTER_DELETE',
                         __METHOD__
