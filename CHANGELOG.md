@@ -1,8 +1,9 @@
 # SEOmatic Changelog
 
-## 3.2.11 - 2019.07.01
+## 3.2.11 - 2019.07.08
 ### Changed
 * If an entry has its robots set to `none` or `noindex`, don't add it to the sitemap
+* Only append `mtime` to an SEO image if there are no query params already
 
 ## 3.2.10 - 2019.06.27
 ### Added
