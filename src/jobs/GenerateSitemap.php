@@ -129,7 +129,14 @@ class GenerateSitemap extends BaseJob
                 $this->combineFieldSettings($element, $metaBundle);
                 // Special case for the __home__ URI
                 $path = ($element->uri === '__home__') ? '' : $element->uri;
-                if ($path !== null && $metaBundle->metaSitemapVars->sitemapUrls) {
+                // Check to see if robots is `none` or `no index`
+                $robotsEnabled = true;
+                if (!empty($metaBundle->metaGlobalVars->robots)) {
+                    $robotsEnabled = $metaBundle->metaGlobalVars->robots !== 'none' &&
+                        $metaBundle->metaGlobalVars->robots !== 'noindex';
+                }
+                // Only add in a sitemap entry if it meets our criteria
+                if ($path !== null && $metaBundle->metaSitemapVars->sitemapUrls && $robotsEnabled) {
                     try {
                         $url = UrlHelper::siteUrl($path, null, null, $metaBundle->sourceSiteId);
                     } catch (Exception $e) {
