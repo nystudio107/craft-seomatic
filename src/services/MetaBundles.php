@@ -330,7 +330,7 @@ class MetaBundles extends Component
     public function invalidateMetaBundleByElement($element, bool $isNew = false)
     {
         $metaBundleInvalidated = false;
-        if ($element) {
+        if ($element && !$element->getIsDraft() && !$element->getIsRevision()) {
             $uri = $element->uri ?? '';
             // Invalidate sitemap caches after an existing element is saved
             list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
