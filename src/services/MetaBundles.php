@@ -330,7 +330,13 @@ class MetaBundles extends Component
     public function invalidateMetaBundleByElement($element, bool $isNew = false)
     {
         $metaBundleInvalidated = false;
-        if ($element && !$element->getIsDraft() && !$element->getIsRevision()) {
+        $invalidateMetaBundle = true;
+        if (Seomatic::$craft32) {
+            if ($element->getIsDraft() || $element->getIsRevision()) {
+                $invalidateMetaBundle = false;
+            }
+        }
+        if ($element && $invalidateMetaBundle) {
             $uri = $element->uri ?? '';
             // Invalidate sitemap caches after an existing element is saved
             list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
