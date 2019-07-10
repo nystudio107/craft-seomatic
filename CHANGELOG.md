@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.12 - 2019.07.10
+### Changed
+* Do not invalidate meta bundle for drafts and revisions in Craft 3.2 or later
+
 ## 3.2.11 - 2019.07.09
 ### Changed
 * If an entry has its robots set to `none` or `noindex`, don't add it to the sitemap
