@@ -400,4 +400,13 @@ class Helper extends Component
         return Seomatic::$craft31;
     }
 
+    /**
+     * Return whether we are running Craft 3.2 or later
+     *
+     * @return bool
+     */
+    public function craft32(): bool
+    {
+        return Seomatic::$craft32;
+    }
 }
