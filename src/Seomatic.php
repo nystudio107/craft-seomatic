@@ -39,12 +39,14 @@ use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\base\Plugin;
 use craft\elements\User;
+use craft\elements\Entry;
 use craft\errors\SiteNotFoundException;
 use craft\events\ElementEvent;
 use craft\events\DeleteTemplateCachesEvent;
 use craft\events\PluginEvent;
 use craft\events\RegisterCacheOptionsEvent;
 use craft\events\RegisterComponentTypesEvent;
+use craft\events\RegisterPreviewTargetsEvent;
 use craft\events\RegisterUrlRulesEvent;
 use craft\events\RegisterUserPermissionsEvent;
 use craft\helpers\StringHelper;
@@ -93,6 +95,10 @@ class Seomatic extends Plugin
     const SEOMATIC_HANDLE = 'Seomatic';
 
     const DEVMODE_CACHE_DURATION = 30;
+
+    const FRONTEND_SEO_FILE_LINK = 'seomatic/seo-file-link/<url:[^\/]+>/<robots:[^\/]+>/<canonical:[^\/]+>/<inline:\d+>/<fileName:[-\w\.*]+>';
+
+    const FRONTEND_PREVIEW_PATH = 'seomatic/preview-social-media';
 
     // Static Properties
     // =========================================================================
@@ -521,6 +527,24 @@ class Seomatic extends Plugin
                 );
             }
         );
+        if (self::$craft32) {
+            // Handler: Entry::EVENT_REGISTER_PREVIEW_TARGETS
+            Event::on(
+                Entry::class,
+                Entry::EVENT_REGISTER_PREVIEW_TARGETS,
+                function (RegisterPreviewTargetsEvent $e) {
+                    /** @var Element $element */
+                    $element = $e->sender;
+                    $e->previewTargets[] = [
+                        'label' => Craft::t('seomatic', 'Social Media Preview'),
+                        'url' => UrlHelper::siteUrl(self::FRONTEND_PREVIEW_PATH, [
+                            'elementId' => $element->id,
+                            'siteId' => $element->siteId,
+                        ]),
+                    ];
+                }
+            );
+        }
         // CraftQL Support
         if (class_exists(CraftQL::class)) {
             Event::on(
@@ -549,9 +573,13 @@ class Seomatic extends Plugin
                     'UrlManager::EVENT_REGISTER_SITE_URL_RULES',
                     __METHOD__
                 );
-                $path = 'seomatic/seo-file-link/<url:[^\/]+>/<robots:[^\/]+>/<canonical:[^\/]+>/<inline:\d+>/<fileName:[-\w\.*]+>';
+                // FileController
                 $route = self::$plugin->handle.'/file/seo-file-link';
-                $event->rules[$path] = ['route' => $route];
+                $event->rules[self::FRONTEND_SEO_FILE_LINK] = ['route' => $route];
+                // PreviewController
+                $route = self::$plugin->handle.'/preview/social-media';
+                $event->rules[self::FRONTEND_PREVIEW_PATH] = ['route' => $route];
+
             }
         );
     }

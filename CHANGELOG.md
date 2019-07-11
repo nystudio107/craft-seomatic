@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.13 - 2019.07.11
+### Added
+* Added **Social Media Preview** as a Live Preview target on Craft 3.2 or later
+
 ## 3.2.12 - 2019.07.10
 ### Changed
 * Do not invalidate meta bundle for drafts and revisions in Craft 3.2 or later
