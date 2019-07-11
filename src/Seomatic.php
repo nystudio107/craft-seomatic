@@ -536,7 +536,7 @@ class Seomatic extends Plugin
                     /** @var Element $element */
                     $element = $e->sender;
                     $e->previewTargets[] = [
-                        'label' => '📣 '.Craft::t('seomatic', 'Social Media Preview'),
+                        'label' => '💞 '.Craft::t('seomatic', 'Social Media Preview'),
                         'url' => UrlHelper::siteUrl(self::FRONTEND_PREVIEW_PATH, [
                             'elementId' => $element->id,
                             'siteId' => $element->siteId,
