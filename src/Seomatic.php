@@ -100,6 +100,8 @@ class Seomatic extends Plugin
 
     const FRONTEND_PREVIEW_PATH = 'seomatic/preview-social-media';
 
+    const SEOMATIC_PREVIEW_AUTHORIZATION_KEY = 'seomaticPreviewAuthorizationKey';
+
     // Static Properties
     // =========================================================================
 
@@ -536,12 +538,14 @@ class Seomatic extends Plugin
                     /** @var Element $element */
                     $element = $e->sender;
                     $e->previewTargets[] = [
-                        'label' => '💞 '.Craft::t('seomatic', 'Social Media Preview'),
+                        'label' => '📣 '.Craft::t('seomatic', 'Social Media Preview'),
                         'url' => UrlHelper::siteUrl(self::FRONTEND_PREVIEW_PATH, [
                             'elementId' => $element->id,
                             'siteId' => $element->siteId,
                         ]),
                     ];
+                    // Don't allow the preview to be accessed publicly
+                    Craft::$app->getSession()->authorize(self::SEOMATIC_PREVIEW_AUTHORIZATION_KEY . $element->id);
                 }
             );
         }
