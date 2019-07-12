@@ -9,8 +9,6 @@
 
 namespace nystudio107\seomatic\fields;
 
-use craft\base\PreviewableFieldInterface;
-use craft\web\assets\cp\CpAsset;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\helpers\ArrayHelper;
@@ -20,16 +18,19 @@ use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
 use nystudio107\seomatic\helpers\Migration as MigrationHelper;
 use nystudio107\seomatic\helpers\PullField as PullFieldHelper;
 use nystudio107\seomatic\models\MetaBundle;
+use nystudio107\seomatic\seoelements\SeoEntry;
+use nystudio107\seomatic\services\MetaContainers;
 
 use Craft;
 use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\base\Field;
+use craft\base\PreviewableFieldInterface;
 use craft\elements\Asset;
 use craft\helpers\Json;
 use craft\helpers\StringHelper;
+use craft\web\assets\cp\CpAsset;
 
-use nystudio107\seomatic\services\MetaContainers;
 use yii\base\InvalidConfigException;
 use yii\caching\TagDependency;
 use yii\db\Schema;
@@ -401,9 +402,17 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             $siteId = $element->siteId;
             $uri = $element->uri;
             $cacheKey = self::CACHE_KEY.$uri.$siteId.$this->elementDisplayPreviewType;
+            $metaBundleSourceType = Seomatic::$plugin->seoElements->getMetaBundleTypeFromElement($element);
+            $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundleSourceType);
+            $metaBundleSourceType = SeoEntry::getMetaBundleType();
+            $metaBundleSourceId = '';
+            if ($seoElement !== null) {
+                $metaBundleSourceId = $seoElement::sourceIdFromElement($element);
+            }
             $dependency = new TagDependency([
                 'tags' => [
                     MetaContainers::GLOBAL_METACONTAINER_CACHE_TAG,
+                    MetaContainers::METACONTAINER_CACHE_TAG.$metaBundleSourceId.$metaBundleSourceType.$siteId,
                     MetaContainers::METACONTAINER_CACHE_TAG.$uri.$siteId,
                 ],
             ]);
