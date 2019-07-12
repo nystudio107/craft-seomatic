@@ -302,7 +302,7 @@ class MetaBundles extends Component
                         }
                     }
                     // Invalidate caches after an existing section is saved
-                    Seomatic::$plugin->metaContainers->invalidateContainerCacheById($sourceId);
+                    Seomatic::$plugin->metaContainers->invalidateContainerCacheById($sourceId, $sourceBundleType);
                     if (Seomatic::$settings->regenerateSitemapsAutomatically) {
                         Seomatic::$plugin->sitemaps->invalidateSitemapCache(
                             $metaBundle->sourceHandle,
