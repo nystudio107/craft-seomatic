@@ -46,10 +46,14 @@ class PreviewController extends Controller
      * @return \yii\web\Response
      * @throws \yii\web\BadRequestHttpException
      * @throws \yii\base\InvalidConfigException
+     * @throws \yii\web\ForbiddenHttpException
      */
-    public function actionSocialMedia($elementId, $siteId)
+    public function actionSocialMedia($elementId, $siteId = null)
     {
         $html = '';
+
+        // Don't allow the preview to be accessed publicly
+        $this->requireAuthorization(Seomatic::SEOMATIC_PREVIEW_AUTHORIZATION_KEY . $elementId);
 
         /** @var Element $element */
         $element = Craft::$app->getElements()->getElementById($elementId, null, $siteId);

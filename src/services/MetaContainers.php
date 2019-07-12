@@ -153,8 +153,10 @@ class MetaContainers extends Component
             // Get the cache tag for the matched meta bundle
             $metaBundle = $this->getMatchedMetaBundle();
             $metaBundleSourceId = '';
+            $metaBundleSourceType = '';
             if ($metaBundle) {
                 $metaBundleSourceId = $metaBundle->sourceId;
+                $metaBundleSourceType = $metaBundle->sourceBundleType;
             }
             // We need an actual $siteId here for the cache key
             if ($siteId === null) {
@@ -187,7 +189,7 @@ class MetaContainers extends Component
             $dependency = new TagDependency([
                 'tags' => [
                     $this::GLOBAL_METACONTAINER_CACHE_TAG,
-                    $this::METACONTAINER_CACHE_TAG.$metaBundleSourceId,
+                    $this::METACONTAINER_CACHE_TAG.$metaBundleSourceId.$metaBundleSourceType.$siteId,
                     $this::METACONTAINER_CACHE_TAG.$uri.$siteId,
                     $this::METACONTAINER_CACHE_TAG.$cacheKey,
                 ],
@@ -642,6 +644,7 @@ class MetaContainers extends Component
             'uri' => null,
             'siteId' => null,
             'sourceId' => null,
+            'sourceType' => null,
         ]);
         $this->trigger(self::EVENT_INVALIDATE_CONTAINER_CACHES, $event);
     }
@@ -649,25 +652,38 @@ class MetaContainers extends Component
     /**
      * Invalidate a meta bundle cache
      *
-     * @param int $sourceId
+     * @param int          $sourceId
+     * @param null|string  $sourceType
+     * @param null|int     $siteId
      */
-    public function invalidateContainerCacheById(int $sourceId)
+    public function invalidateContainerCacheById(int $sourceId, $sourceType = null, $siteId = null)
     {
         $metaBundleSourceId = '';
         if ($sourceId) {
             $metaBundleSourceId = $sourceId;
         }
+        $metaBundleSourceType = '';
+        if ($sourceType) {
+            $metaBundleSourceType = $sourceType;
+        }
+        if ($siteId === null) {
+            $siteId = Craft::$app->getSites()->currentSite->id ?? 1;
+        }
         $cache = Craft::$app->getCache();
-        TagDependency::invalidate($cache, $this::METACONTAINER_CACHE_TAG.$metaBundleSourceId);
+        TagDependency::invalidate(
+            $cache,
+            $this::METACONTAINER_CACHE_TAG.$metaBundleSourceId.$metaBundleSourceType.$siteId
+        );
         Craft::info(
-            'Meta bundle cache cleared: '.$metaBundleSourceId,
+            'Meta bundle cache cleared: '.$metaBundleSourceId.' / '.$metaBundleSourceType.' / '.$siteId,
             __METHOD__
         );
         // Trigger an event to let other plugins/modules know we've cleared our caches
         $event = new InvalidateContainerCachesEvent([
             'uri' => null,
-            'siteId' => null,
+            'siteId' => $siteId,
             'sourceId' => $sourceId,
+            'sourceType' => $metaBundleSourceType,
         ]);
         $this->trigger(self::EVENT_INVALIDATE_CONTAINER_CACHES, $event);
     }
@@ -675,15 +691,18 @@ class MetaContainers extends Component
     /**
      * Invalidate a meta bundle cache
      *
-     * @param string $uri
-     * @param int    $siteId
+     * @param string   $uri
+     * @param null|int $siteId
      */
-    public function invalidateContainerCacheByPath(string $uri, int $siteId)
+    public function invalidateContainerCacheByPath(string $uri, $siteId = null)
     {
         $cache = Craft::$app->getCache();
+        if ($siteId === null) {
+            $siteId = Craft::$app->getSites()->currentSite->id ?? 1;
+        }
         TagDependency::invalidate($cache, $this::METACONTAINER_CACHE_TAG.$uri.$siteId);
         Craft::info(
-            'Meta container cache cleared: '.$uri.'/'.$siteId,
+            'Meta container cache cleared: '.$uri.' / '.$siteId,
             __METHOD__
         );
         // Trigger an event to let other plugins/modules know we've cleared our caches
@@ -691,6 +710,7 @@ class MetaContainers extends Component
             'uri' => $uri,
             'siteId' => $siteId,
             'sourceId' => null,
+            'sourceType' => null,
         ]);
         $this->trigger(self::EVENT_INVALIDATE_CONTAINER_CACHES, $event);
     }
