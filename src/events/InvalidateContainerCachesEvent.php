@@ -51,4 +51,10 @@ class InvalidateContainerCachesEvent extends Event
      *                           cache that is being invalidated
      */
     public $sourceId;
+
+    /**
+     * @var string|null $sourceType The sourceType of the meta container (e.g. `section`,
+     *                              `product`, etc.) cache that is being invalidated
+     */
+    public $sourceType;
 }
