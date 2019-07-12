@@ -670,9 +670,12 @@ class MetaContainers extends Component
             $siteId = Craft::$app->getSites()->currentSite->id ?? 1;
         }
         $cache = Craft::$app->getCache();
-        TagDependency::invalidate($cache, $this::METACONTAINER_CACHE_TAG.$metaBundleSourceId.$metaBundleSourceType.$siteId);
+        TagDependency::invalidate(
+            $cache,
+            $this::METACONTAINER_CACHE_TAG.$metaBundleSourceId.$metaBundleSourceType.$siteId
+        );
         Craft::info(
-            'Meta bundle cache cleared: '.$metaBundleSourceId,
+            'Meta bundle cache cleared: '.$metaBundleSourceId.' / '.$metaBundleSourceType.' / '.$siteId,
             __METHOD__
         );
         // Trigger an event to let other plugins/modules know we've cleared our caches
@@ -699,7 +702,7 @@ class MetaContainers extends Component
         }
         TagDependency::invalidate($cache, $this::METACONTAINER_CACHE_TAG.$uri.$siteId);
         Craft::info(
-            'Meta container cache cleared: '.$uri.'/'.$siteId,
+            'Meta container cache cleared: '.$uri.' / '.$siteId,
             __METHOD__
         );
         // Trigger an event to let other plugins/modules know we've cleared our caches
