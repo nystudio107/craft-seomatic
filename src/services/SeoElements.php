@@ -139,7 +139,7 @@ class SeoElements extends Component
         /** @var SeoElementInterface $seoElement */
         foreach ($event->types as $seoElement) {
             $requiredPlugin = $seoElement::getRequiredPluginHandle();
-            if ($requiredPlugin === null || Craft::$app->getPlugins()->getPlugin($requiredPlugin)) {
+            if ($requiredPlugin === null || Craft::$app->getPlugins()->isPluginEnabled($requiredPlugin)) {
                 $this->seoElements[$seoElement::getMetaBundleType()] = $seoElement;
                 $seoElement::installEventHandlers();
             }
