@@ -64,7 +64,7 @@ class Container
         $dependency = new TagDependency([
             'tags' => [
                 $metaContainers::GLOBAL_METACONTAINER_CACHE_TAG,
-                $metaContainers::METACONTAINER_CACHE_TAG.$sourceBundleType.$sourceId,
+                $metaContainers::METACONTAINER_CACHE_TAG.$sourceId.$sourceBundleType.$siteId,
                 $metaContainers::METACONTAINER_CACHE_TAG.$uri.$siteId,
                 $metaContainers::METACONTAINER_CACHE_TAG.$cacheKey,
             ],

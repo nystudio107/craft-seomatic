@@ -412,7 +412,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             $dependency = new TagDependency([
                 'tags' => [
                     MetaContainers::GLOBAL_METACONTAINER_CACHE_TAG,
-                    MetaContainers::METACONTAINER_CACHE_TAG.$metaBundleSourceType.$metaBundleSourceId,
+                    MetaContainers::METACONTAINER_CACHE_TAG.$metaBundleSourceId.$metaBundleSourceType.$siteId,
                     MetaContainers::METACONTAINER_CACHE_TAG.$uri.$siteId,
                 ],
             ]);
