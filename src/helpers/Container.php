@@ -51,6 +51,7 @@ class Container
         $sourceId = '';
         /** @var Element $element */
         $element = Craft::$app->getElements()->getElementByUri($uri, $siteId, false);
+        $sourceBundleType = '';
         if ($element !== null) {
             list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
                 = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
@@ -63,7 +64,7 @@ class Container
         $dependency = new TagDependency([
             'tags' => [
                 $metaContainers::GLOBAL_METACONTAINER_CACHE_TAG,
-                $metaContainers::METACONTAINER_CACHE_TAG.$sourceId,
+                $metaContainers::METACONTAINER_CACHE_TAG.$sourceBundleType.$sourceId,
                 $metaContainers::METACONTAINER_CACHE_TAG.$uri.$siteId,
                 $metaContainers::METACONTAINER_CACHE_TAG.$cacheKey,
             ],

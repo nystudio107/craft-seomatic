@@ -153,8 +153,10 @@ class MetaContainers extends Component
             // Get the cache tag for the matched meta bundle
             $metaBundle = $this->getMatchedMetaBundle();
             $metaBundleSourceId = '';
+            $metaBundleSourceType = '';
             if ($metaBundle) {
                 $metaBundleSourceId = $metaBundle->sourceId;
+                $metaBundleSourceType = $metaBundle->sourceBundleType;
             }
             // We need an actual $siteId here for the cache key
             if ($siteId === null) {
@@ -187,7 +189,7 @@ class MetaContainers extends Component
             $dependency = new TagDependency([
                 'tags' => [
                     $this::GLOBAL_METACONTAINER_CACHE_TAG,
-                    $this::METACONTAINER_CACHE_TAG.$metaBundleSourceId,
+                    $this::METACONTAINER_CACHE_TAG.$metaBundleSourceType.$metaBundleSourceId,
                     $this::METACONTAINER_CACHE_TAG.$uri.$siteId,
                     $this::METACONTAINER_CACHE_TAG.$cacheKey,
                 ],
@@ -649,16 +651,21 @@ class MetaContainers extends Component
     /**
      * Invalidate a meta bundle cache
      *
-     * @param int $sourceId
+     * @param int          $sourceId
+     * @param null|string  $sourceType
      */
-    public function invalidateContainerCacheById(int $sourceId)
+    public function invalidateContainerCacheById(int $sourceId, $sourceType = null)
     {
         $metaBundleSourceId = '';
         if ($sourceId) {
             $metaBundleSourceId = $sourceId;
         }
+        $metaBundleSourceType = '';
+        if ($sourceType) {
+            $metaBundleSourceType = $sourceType;
+        }
         $cache = Craft::$app->getCache();
-        TagDependency::invalidate($cache, $this::METACONTAINER_CACHE_TAG.$metaBundleSourceId);
+        TagDependency::invalidate($cache, $this::METACONTAINER_CACHE_TAG.$metaBundleSourceType.$metaBundleSourceId);
         Craft::info(
             'Meta bundle cache cleared: '.$metaBundleSourceId,
             __METHOD__
