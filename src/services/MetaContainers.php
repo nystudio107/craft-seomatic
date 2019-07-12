@@ -189,7 +189,7 @@ class MetaContainers extends Component
             $dependency = new TagDependency([
                 'tags' => [
                     $this::GLOBAL_METACONTAINER_CACHE_TAG,
-                    $this::METACONTAINER_CACHE_TAG.$metaBundleSourceType.$metaBundleSourceId,
+                    $this::METACONTAINER_CACHE_TAG.$metaBundleSourceId.$metaBundleSourceType.$siteId,
                     $this::METACONTAINER_CACHE_TAG.$uri.$siteId,
                     $this::METACONTAINER_CACHE_TAG.$cacheKey,
                 ],
@@ -644,6 +644,7 @@ class MetaContainers extends Component
             'uri' => null,
             'siteId' => null,
             'sourceId' => null,
+            'sourceType' => null,
         ]);
         $this->trigger(self::EVENT_INVALIDATE_CONTAINER_CACHES, $event);
     }
@@ -653,8 +654,9 @@ class MetaContainers extends Component
      *
      * @param int          $sourceId
      * @param null|string  $sourceType
+     * @param null|int     $siteId
      */
-    public function invalidateContainerCacheById(int $sourceId, $sourceType = null)
+    public function invalidateContainerCacheById(int $sourceId, $sourceType = null, $siteId = null)
     {
         $metaBundleSourceId = '';
         if ($sourceId) {
@@ -664,8 +666,11 @@ class MetaContainers extends Component
         if ($sourceType) {
             $metaBundleSourceType = $sourceType;
         }
+        if ($siteId === null) {
+            $siteId = Craft::$app->getSites()->currentSite->id ?? 1;
+        }
         $cache = Craft::$app->getCache();
-        TagDependency::invalidate($cache, $this::METACONTAINER_CACHE_TAG.$metaBundleSourceType.$metaBundleSourceId);
+        TagDependency::invalidate($cache, $this::METACONTAINER_CACHE_TAG.$metaBundleSourceId.$metaBundleSourceType.$siteId);
         Craft::info(
             'Meta bundle cache cleared: '.$metaBundleSourceId,
             __METHOD__
@@ -673,8 +678,9 @@ class MetaContainers extends Component
         // Trigger an event to let other plugins/modules know we've cleared our caches
         $event = new InvalidateContainerCachesEvent([
             'uri' => null,
-            'siteId' => null,
+            'siteId' => $siteId,
             'sourceId' => $sourceId,
+            'sourceType' => $metaBundleSourceType,
         ]);
         $this->trigger(self::EVENT_INVALIDATE_CONTAINER_CACHES, $event);
     }
@@ -682,12 +688,15 @@ class MetaContainers extends Component
     /**
      * Invalidate a meta bundle cache
      *
-     * @param string $uri
-     * @param int    $siteId
+     * @param string   $uri
+     * @param null|int $siteId
      */
-    public function invalidateContainerCacheByPath(string $uri, int $siteId)
+    public function invalidateContainerCacheByPath(string $uri, $siteId = null)
     {
         $cache = Craft::$app->getCache();
+        if ($siteId === null) {
+            $siteId = Craft::$app->getSites()->currentSite->id ?? 1;
+        }
         TagDependency::invalidate($cache, $this::METACONTAINER_CACHE_TAG.$uri.$siteId);
         Craft::info(
             'Meta container cache cleared: '.$uri.'/'.$siteId,
@@ -698,6 +707,7 @@ class MetaContainers extends Component
             'uri' => $uri,
             'siteId' => $siteId,
             'sourceId' => null,
+            'sourceType' => null,
         ]);
         $this->trigger(self::EVENT_INVALIDATE_CONTAINER_CACHES, $event);
     }
