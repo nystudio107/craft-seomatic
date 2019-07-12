@@ -1,6 +1,11 @@
 # SEOmatic Changelog
 
 ## 3.2.14 - 2019.07.11
+### Added
+* Added to the cache tag dependencies for the Field's preview data
+* Added `sourceType` to the `InvalidateContainerCachesEvent` event
+* Added `siteId` and `sourceType` to the source cache tag dependencies
+
 ### Changed
 * Prevented public accessing of the Social Media Preview
 * Added a 📣 in front of the Social Media Preview
