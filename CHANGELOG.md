@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.15 - 2019.07.15
+### Changed
+* Fixed an issue where assigning a Rich Text field to a JSON-LD property didn't work
+
 ## 3.2.14 - 2019.07.12
 ### Added
 * Added to the cache tag dependencies for the Field's preview data
