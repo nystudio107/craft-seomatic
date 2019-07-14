@@ -11,12 +11,9 @@
 
 namespace nystudio107\seomatic\services;
 
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\fields\SeoSettings;
-use nystudio107\seomatic\seoelements\SeoCategory;
-use nystudio107\seomatic\seoelements\SeoEntry;
-use nystudio107\seomatic\seoelements\SeoProduct;
-use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
@@ -296,7 +293,7 @@ class MetaBundles extends Component
                             /** @var Section|CategoryGroup|ProductType $sourceModel */
                             $sourceModel = $seoElement::sourceModelFromId($sourceId);
                             if ($sourceModel !== null) {
-                                $metaBundle->sourceName = $sourceModel->name;
+                                $metaBundle->sourceName = (string)$sourceModel->name;
                                 $metaBundle->sourceHandle = $sourceModel->handle;
                             }
                         }
