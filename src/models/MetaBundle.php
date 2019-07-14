@@ -18,9 +18,12 @@ use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\base\FluentModel;
 use nystudio107\seomatic\variables\SeomaticVariable;
 
+use craft\behaviors\EnvAttributeParserBehavior;
 use craft\helpers\Json as JsonHelper;
 use craft\validators\ArrayValidator;
 use craft\validators\DateTimeValidator;
+
+use yii\behaviors\AttributeTypecastBehavior;
 
 /**
  * @author    nystudio107
@@ -286,6 +289,31 @@ class MetaBundle extends FluentModel
                 'safe'
             ],
         ];
+
         return $rules;
+    }
+
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        $craft31Behaviors = [];
+        if (Seomatic::$craft31) {
+            $craft31Behaviors = [
+                'parser' => [
+                    'class' => EnvAttributeParserBehavior::class,
+                    'attributes' => [
+                    ],
+                ]
+            ];
+        }
+
+        return array_merge($craft31Behaviors, [
+            'typecast' => [
+                'class' => AttributeTypecastBehavior::class,
+                // 'attributeTypes' will be composed automatically according to `rules()`
+            ],
+        ]);
     }
 }
