@@ -14,6 +14,8 @@ namespace nystudio107\seomatic\base;
 use Craft;
 use craft\base\Model;
 
+use twig\Markup;
+
 use yii\base\InvalidArgumentException;
 
 /**
@@ -74,7 +76,11 @@ abstract class FluentModel extends Model
             return $property->getValue();
         }
         // Set the property
-        $property->setValue($this, $args[0]);
+        $value = $args[0];
+        if (\is_object($value) && $value instanceof Markup) {
+                $value = (string)$value;
+        }
+        $property->setValue($this, $value);
 
         // Make it chainable
         return $this;

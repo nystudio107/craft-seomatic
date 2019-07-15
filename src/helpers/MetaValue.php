@@ -12,7 +12,6 @@
 namespace nystudio107\seomatic\helpers;
 
 use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\helpers\Field as FieldHelper;
 
 use Craft;
 use craft\base\Element;
@@ -20,6 +19,8 @@ use craft\elements\Asset;
 use craft\errors\SiteNotFoundException;
 use craft\helpers\StringHelper;
 use craft\web\View;
+
+use Twig\Markup;
 
 use yii\base\Exception;
 
@@ -63,9 +64,11 @@ class MetaValue
 
     /**
      * @param string $metaValue
-     * @param bool   $resolveAliases Whether @ aliases should be resolved in this string
-     * @param bool   $parseAsTwig    Whether items should be parsed as a Twig template in this string
-     * @param int    $tries The number of times to parse the string
+     * @param bool   $resolveAliases Whether @ aliases should be resolved in
+     *                               this string
+     * @param bool   $parseAsTwig    Whether items should be parsed as a Twig
+     *                               template in this string
+     * @param int    $tries          The number of times to parse the string
      *
      * @return string
      */
@@ -92,8 +95,10 @@ class MetaValue
 
     /**
      * @param array $metaArray
-     * @param bool  $resolveAliases Whether @ aliases should be resolved in this array
-     * @param bool  $parseAsTwig    Whether items should be parsed as a Twig template in this array
+     * @param bool  $resolveAliases Whether @ aliases should be resolved in
+     *                              this array
+     * @param bool  $parseAsTwig    Whether items should be parsed as a Twig
+     *                              template in this array
      */
     public static function parseArray(array &$metaArray, bool $resolveAliases = true, bool $parseAsTwig = true)
     {
@@ -120,7 +125,7 @@ class MetaValue
             }
             if (\in_array($key, self::PARSE_ONCE, true)) {
                 $tries = 1;
-                if (is_string($value) && $value[0] !=='{') {
+                if (is_string($value) && $value[0] !== '{') {
                     $shouldParse = false;
                 }
             }
@@ -207,8 +212,10 @@ class MetaValue
 
     /**
      * @param string|Asset $metaValue
-     * @param bool   $resolveAliases Whether @ aliases should be resolved in this string
-     * @param bool   $parseAsTwig    Whether items should be parsed as a Twig template in this string
+     * @param bool         $resolveAliases Whether @ aliases should be resolved
+     *                                     in this string
+     * @param bool         $parseAsTwig    Whether items should be parsed as a
+     *                                     Twig template in this string
      *
      * @return null|string
      */
@@ -275,9 +282,14 @@ class MetaValue
             }
         }
         // Handle being passed in an object
-        if (\is_object($metaValue) && $metaValue instanceof Asset) {
-            /** @var Asset $metaValue */
-            return $metaValue->uri;
+        if (\is_object($metaValue)) {
+            if ($metaValue instanceof Markup) {
+                return trim(html_entity_decode((string)$metaValue, ENT_NOQUOTES, 'UTF-8'));
+            }
+            if ($metaValue instanceof Asset) {
+                /** @var Asset $metaValue */
+                return $metaValue->uri;
+            }
         }
 
         return $metaValue;
