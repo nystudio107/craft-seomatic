@@ -106,7 +106,11 @@ class ImageTransform
             // If we're not in local dev, tell it to generate the transform immediately so that
             // urls like `actions/assets/generate-transform` don't get cached
             $generateNow = Seomatic::$environment === EnvironmentHelper::SEOMATIC_DEV_ENV ? null : true;
-            $url = $assets->getAssetUrl($asset, $transform, $generateNow);
+            try {
+                $url = $assets->getAssetUrl($asset, $transform, $generateNow);
+            } catch (\Exception $e) {
+                $url = $asset->getUrl();
+            }
             if ($url === null) {
                 $url = '';
             }
