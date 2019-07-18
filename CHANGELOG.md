@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.2.16 - 2019.07.18
+### Added
+* Added Social Media Preview Target plugin setting
+
 ### Changed
 * Fixed an issue with the sitemap generation not respecting an already running queue
 
