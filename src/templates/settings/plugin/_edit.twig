@@ -99,12 +99,22 @@
         {% endif %}
         {{ forms.lightswitchField({
             label: "Display Sidebar SEO Preview"|t("seomatic"),
-            instructions: "Controls whether to display the Google, Twitter, and Facebook social media previews in the sidebar on entry, category, and product pages."|t("seomatic"),
+            instructions: "Controls whether to display the Google, Twitter, Facebook, etc. social media previews in the sidebar on entry, category, and product pages."|t("seomatic"),
             id: "displayPreviewSidebar",
             name: "displayPreviewSidebar",
             on: settings.displayPreviewSidebar,
             warning: configWarning("displayPreviewSidebar", "seomatic"),
             errors: settings.getErrors("displayPreviewSidebar"),
+        }) }}
+
+        {{ forms.lightswitchField({
+            label: "Add Social Media Preview Target"|t("seomatic"),
+            instructions: "Controls whether to add the Google, Twitter, Facebook, etc. social media previews as a Preview Target."|t("seomatic"),
+            id: "socialMediaPreviewTarget",
+            name: "socialMediaPreviewTarget",
+            on: settings.socialMediaPreviewTarget,
+            warning: configWarning("socialMediaPreviewTarget", "seomatic"),
+            errors: settings.getErrors("socialMediaPreviewTarget"),
         }) }}
 
         <div id="sidebarDisplayPreviewTypes-wrapper">

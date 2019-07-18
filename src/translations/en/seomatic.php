@@ -425,5 +425,9 @@ return [
     'Transform Facebook OpenGraph Image' => 'Transform Facebook OpenGraph Image',
     'Video Sitemap Property' => 'Video Sitemap Property',
     'Same as Site Twitter Handle' => 'Same as Site Twitter Handle',
-    'If you are seeing this in local dev or an' => 'If you are seeing this in local dev or an'
+    'If you are seeing this in local dev or an' => 'If you are seeing this in local dev or an',
+    'Add Social Media Preview Target' => 'Add Social Media Preview Target',
+    'Controls whether to add the Google, Twitter, Facebook, etc. social media previews as a Preview Target.' => 'Controls whether to add the Google, Twitter, Facebook, etc. social media previews as a Preview Target.',
+    'Controls whether to display the Google, Twitter, Facebook, etc. social media previews in the sidebar on entry, category, and product pages.' => 'Controls whether to display the Google, Twitter, Facebook, etc. social media previews in the sidebar on entry, category, and product pages.',
+    'Controls whether to add the Google, Twitter, and Facebook social media previews as a Preview Target.' => 'Controls whether to add the Google, Twitter, and Facebook social media previews as a Preview Target.'
 ];
