@@ -65,6 +65,11 @@ class Settings extends VarsModel
     public $displayPreviewSidebar = true;
 
     /**
+     * @var bool Should SEOmatic add a Social Media Preview Target?
+     */
+    public $socialMediaPreviewTarget = true;
+
+    /**
      * @var array The social media platforms that should be displayed in the SEO Preview sidebar
      */
     public $sidebarDisplayPreviewTypes = [
@@ -159,6 +164,7 @@ class Settings extends VarsModel
             ['environment', 'string'],
             ['environment', 'default', 'value' => 'live'],
             ['displayPreviewSidebar', 'boolean'],
+            ['socialMediaPreviewTarget', 'boolean'],
             ['displayAnalysisSidebar', 'boolean'],
             [['devModeTitlePrefix', 'cpTitlePrefix', 'devModeCpTitlePrefix'], 'string'],
             ['separatorChar', 'string'],
