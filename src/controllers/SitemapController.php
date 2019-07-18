@@ -57,6 +57,7 @@ class SitemapController extends Controller
         );
         $headers = Craft::$app->response->headers;
         $headers->add('Content-Type', 'text/xml; charset=utf-8');
+        $headers->add('X-Robots-Tag', 'noindex');
 
         return $this->asRaw($xml);
     }
@@ -84,6 +85,7 @@ class SitemapController extends Controller
         );
         $headers = Craft::$app->response->headers;
         $headers->add('Content-Type', 'text/xml; charset=utf-8');
+        $headers->add('X-Robots-Tag', 'noindex');
 
         return $this->asRaw($xml);
     }
@@ -107,6 +109,7 @@ class SitemapController extends Controller
         );
         $headers = Craft::$app->response->headers;
         $headers->add('Content-Type', 'text/xml; charset=utf-8');
+        $headers->add('X-Robots-Tag', 'noindex');
 
         return $this->asRaw($xml);
     }
