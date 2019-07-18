@@ -14,10 +14,10 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\base\SitemapInterface;
+use nystudio107\seomatic\helpers\Queue as QueueHelper;
 use nystudio107\seomatic\jobs\GenerateSitemap;
 
 use Craft;
-use craft\helpers\App;
 
 use yii\caching\TagDependency;
 use yii\web\NotFoundHttpException;
@@ -134,16 +134,12 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 ),
                 __METHOD__
             );
-            // If the queue should be run automatically, do it now
-            if (Craft::$app->getConfig()->getGeneral()->runQueueAutomatically) {
-                // This might take a while
-                App::maxPowerCaptain();
-                $queue->run();
-                // Try it again now
-                $result = $cache->get($cacheKey);
-                if ($result !== false) {
-                    return $result;
-                }
+            // Try to run the queue immediately
+            QueueHelper::run();
+            // Try it again now
+            $result = $cache->get($cacheKey);
+            if ($result !== false) {
+                return $result;
             }
             // Return a 503 Service Unavailable an a Retry-After so bots will try back later
             $response = Craft::$app->getResponse();
