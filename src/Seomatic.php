@@ -529,7 +529,7 @@ class Seomatic extends Plugin
                 );
             }
         );
-        if (self::$craft32) {
+        if (self::$craft32 && Seomatic::$settings->socialMediaPreviewTarget) {
             // Handler: Entry::EVENT_REGISTER_PREVIEW_TARGETS
             Event::on(
                 Entry::class,

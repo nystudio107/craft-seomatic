@@ -1,5 +1,13 @@
 # SEOmatic Changelog
 
+## 3.2.16 - 2019.07.18
+### Added
+* Added **Social Media Preview Target** plugin setting
+* Added `X-Robots-Tag: noindex` header to the sitemaps to prevent the sitemaps themselves from appearing in the SERP
+
+### Changed
+* Fixed an issue with the sitemap generation not respecting an already running queue
+
 ## 3.2.15 - 2019.07.15
 ### Changed
 * Fixed an issue where assigning a Rich Text field to a JSON-LD property didn't work
