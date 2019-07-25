@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.17 - 2019.07.25
+### Added
+* Typecast the `sourceName` and `sourceTemplate` to a string everywhere, to handle numeric section/template names
+
 ## 3.2.16 - 2019.07.18
 ### Added
 * Added **Social Media Preview Target** plugin setting
