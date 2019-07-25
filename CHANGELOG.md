@@ -1,8 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.2.17 - 2019.07.25
-### Added
+### Changed
 * Typecast the `sourceName` and `sourceTemplate` to a string everywhere, to handle numeric section/template names
+* No longer use `error` and `warning` log levels for MetaItem debug messages
 
 ## 3.2.16 - 2019.07.18
 ### Added
