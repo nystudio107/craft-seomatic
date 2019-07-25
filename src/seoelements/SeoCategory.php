@@ -340,7 +340,7 @@ class SeoCategory implements SeoElementInterface
             ConfigHelper::getConfigFromFile(self::configFilePath()),
             [
                 'sourceId' => $sourceModel->id,
-                'sourceName' => $sourceModel->name,
+                'sourceName' => (string)$sourceModel->name,
                 'sourceHandle' => $sourceModel->handle,
             ]
         );

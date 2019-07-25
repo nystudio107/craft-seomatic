@@ -157,7 +157,7 @@ class MetaTag extends MetaItem
                         '{tagtype} tag `{key}` did not render because it is missing attributes. '.print_r($data, true),
                         ['tagtype' => 'Meta', 'key' => $this->key]
                     );
-                    Craft::error($error, __METHOD__);
+                    Craft::info('WARNING - '.$error, __METHOD__);
                 }
                 $shouldRender = false;
             }
