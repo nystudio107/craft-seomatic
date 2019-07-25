@@ -178,7 +178,7 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
                             }
                         }
                     }
-                    Craft::$logLevel($errorMsg, __METHOD__);
+                    Craft::info(strtoupper($logLevel).' - '.$errorMsg, __METHOD__);
                     // Extra debugging info for MetaJsonLd objects
                     if ($isMetaJsonLdModel) {
                         /** @var MetaJsonLd $className  */
