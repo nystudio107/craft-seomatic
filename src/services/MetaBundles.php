@@ -731,7 +731,7 @@ class MetaBundles extends Component
                 $metaBundleDefaults = ArrayHelper::merge(
                     $seoElement::metaBundleConfig($sourceModel),
                     [
-                        'sourceTemplate' => $siteSetting->template,
+                        'sourceTemplate' => (string)$siteSetting->template,
                         'sourceSiteId' => $siteSetting->siteId,
                         'sourceAltSiteSettings' => $siteSettingsArray,
                         'sourceDateUpdated' => $dateUpdated,
