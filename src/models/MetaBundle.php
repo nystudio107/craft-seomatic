@@ -266,7 +266,6 @@ class MetaBundle extends FluentModel
             [['sourceDateUpdated'], DateTimeValidator::class],
             [
                 [
-                    'sourceTemplate',
                     'sourceAltSiteSettings',
                 ],
                 'safe'
