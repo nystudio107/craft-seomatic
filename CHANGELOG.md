@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.18 - 2019.07.26
+### Changed
+* Typecast the `sourceName` and `sourceTemplate` to a string before validation
+
 ## 3.2.17 - 2019.07.25
 ### Changed
 * Typecast the `sourceName` and `sourceTemplate` to a string everywhere, to handle numeric section/template names

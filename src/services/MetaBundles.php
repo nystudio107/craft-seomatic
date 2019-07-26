@@ -35,7 +35,7 @@ use craft\models\Site;
 use craft\commerce\models\ProductType;
 
 /**
- * @author    nystudio107
+ * @author    nystudio107Meta bundle failed validation
  * @package   Seomatic
  * @since     3.0.0
  */
@@ -127,6 +127,8 @@ class MetaBundles extends Component
      */
     public function updateMetaBundle(MetaBundle $metaBundle, int $siteId)
     {
+        $metaBundle->sourceName = (string)$metaBundle->sourceName;
+        $metaBundle->sourceTemplate = (string)$metaBundle->sourceTemplate;
         // Make sure it validates
         if ($metaBundle->validate(null, true)) {
             // Save it out to a record
