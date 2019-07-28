@@ -583,7 +583,11 @@ class Seomatic extends Plugin
                 // PreviewController
                 $route = self::$plugin->handle.'/preview/social-media';
                 $event->rules[self::FRONTEND_PREVIEW_PATH] = ['route' => $route];
-
+                // Register our Control Panel routes
+                $event->rules = array_merge(
+                    $event->rules,
+                    $this->customFrontendRoutes()
+                );
             }
         );
     }
@@ -759,6 +763,19 @@ class Seomatic extends Plugin
 
             'seomatic/plugin' =>
                 'seomatic/settings/plugin',
+        ];
+    }
+
+    /**
+     * Return the custom frontend routes
+     *
+     * @return array
+     */
+    protected function customFrontendRoutes(): array
+    {
+        return [
+            // Tables
+            '/seomatic/content-seo/meta-bundles' => 'seomatic/content-seo/meta-bundles',
         ];
     }
 

@@ -1,0 +1,43 @@
+/**
+ * components/tables.css
+ *
+ * Project Tables.
+ *
+ */
+
+table.vuetable {
+  width: 100%;
+  table-layout: fixed;
+  overflow: hidden;
+}
+
+.seomatic-menubtn-asc::after {
+  content: 'downangle';
+}
+
+.seomatic-menubtn-desc::after {
+  content: 'upangle';
+}
+
+/**
+ * Dashboard chart
+ */
+
+table.seomatic-content-seo th.vuetable-th-sourceName {
+  width: 34%!important;
+}
+
+th.vuetable-th-sourcetype {
+  width: 20%!important;
+}
+
+/**
+ * Column alignment
+ */
+td.text-center {
+  text-align: center!important;
+}
+
+td.text-right {
+  text-align: right!important;
+}

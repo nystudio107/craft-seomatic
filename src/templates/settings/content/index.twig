@@ -6,11 +6,27 @@
 {% extends "_layouts/cp" %}
 {% import '_includes/forms' as forms %}
 
+{% from 'seomatic/_includes/macros.twig' import registerJsModules %}
+
 {% block contextMenu %}
     {% include "seomatic/settings/_includes/sites-menu.twig" %}
 {% endblock %}
 
+{% block foot %}
+    {{ parent() }}
+    {% set jsModules = [
+        'content-seo.js',
+    ] %}
+    {{ registerJsModules(jsModules) }}
+{% endblock %}
+
 {% set content %}
+<div id="cp-nav-content">
+    <content-seo-table
+            :site-id="{{ currentSiteId }}"
+    >
+    </content-seo-table>
+</div>
 <div class="readable">
 
     <input type="hidden" name="action" value="seomatic/saveContent" />

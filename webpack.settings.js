@@ -30,6 +30,7 @@ module.exports = {
     },
     entries: {
         "dashboard": "dashboard.js",
+        "content-seo": "content-seo.js",
         "seomatic": "seomatic.js",
         "seomatic-meta": "seomatic-meta.js",
         "twig-editor": "twig-editor.js",
