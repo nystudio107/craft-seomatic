@@ -121,32 +121,11 @@
                 <a class="go" href="${value}" title="${value}" target="_blank" rel="noopener">${value}</a>
                 `;
             },
-            ipFormatter(value) {
-                if (value === '') {
-                    return '';
-                }
+            settingFormatter(value) {
                 return `
-                <a class="go" href="https://www.ipaddressguide.com/ip-geolocation?ip=${value}" title="Lookup ${value}" target="_blank" rel="noopener">${value}</a>
+                <span class='status ${value} inline-item'></span>
                 `;
             },
-            boolFormatter(value) {
-                if (value == 1) {
-                    return `
-                <span style="color: green;">&#x2714;</span>
-                `;
-                }
-                return `
-                <span style="color: red;">&#x2716;</span>
-                `;
-            },
-            addUrlFormatter(value) {
-                if (value === '') {
-                    return '';
-                }
-                return `
-                <a class="add icon" href="${value}" title="Add"></a>
-                `;
-            }
         }
     }
 </script>

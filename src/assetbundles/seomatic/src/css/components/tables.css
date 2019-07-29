@@ -23,21 +23,32 @@ table.vuetable {
  * Dashboard chart
  */
 
-table.seomatic-content-seo th.vuetable-th-sourceName {
-  width: 34%!important;
+table.seomatic-content-seo th.vuetable-th-component-id {
+  width: 20%!important;
+}
+
+th.vuetable-th-entries {
+  width: 6%!important;
 }
 
 th.vuetable-th-sourcetype {
-  width: 20%!important;
+  width: 10%!important;
 }
 
 /**
  * Column alignment
  */
+th.text-center,
 td.text-center {
   text-align: center!important;
 }
 
+th.text-right,
 td.text-right {
   text-align: right!important;
+}
+
+th.text-left,
+td.text-left {
+  text-align: left!important;
 }

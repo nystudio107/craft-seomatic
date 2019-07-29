@@ -64,6 +64,7 @@ class ContentSeoController extends Controller
         $data = [];
         $sortField = 'sourceName';
         $sortType = 'ASC';
+        $additionalSort = '';
         // Figure out the sorting type
         if ($sort !== '') {
             if (strpos($sort, '|') === false) {
@@ -72,6 +73,9 @@ class ContentSeoController extends Controller
                 list($sortField, $sortType) = explode('|', $sort);
             }
         }
+        if ($sortField !== 'sourceName') {
+            $additionalSort = ', sourceName ASC';
+        }
         // Query the db table
         $offset = ($page - 1) * $per_page;
 
@@ -79,7 +83,7 @@ class ContentSeoController extends Controller
             ->from(['{{%seomatic_metabundles}}'])
             ->offset($offset)
             ->limit($per_page)
-            ->orderBy("{$sortField} {$sortType}")
+            ->orderBy("{$sortField} {$sortType}".$additionalSort)
             ->where(['!=', 'sourceBundleType', Seomatic::$plugin->metaBundles::GLOBAL_META_BUNDLE])
             ;
         $currentSiteHandle = '';
@@ -109,14 +113,42 @@ class ContentSeoController extends Controller
                     $dataItem['contentSeoUrl'] = UrlHelper::cpUrl(
                         "seomatic/edit-content/general/{$sourceBundleType}/{$sourceHandle}/{$currentSiteHandle}"
                     );
+                    // Fill in the number of entries
                     $entries = 0;
-                    $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($bundle['sourceType']);
+                    $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType(
+                        $metaBundle->sourceBundleType
+                    );
                     /** @var SeoElementInterface $seoElement */
                     if ($seoElement !== null) {
                         $query = $seoElement::sitemapElementsQuery($metaBundle);
                         $entries = $query->count();
+                        Craft::error('shit: ' . print_r($entries, true), __METHOD__);
                     }
                     $dataItem['entries'] = $entries;
+                    // Basic configuration setup
+                    $dataItem['title'] = $metaBundle->metaGlobalVars->seoTitle !== '' ? 'enabled' : 'disabled';
+                    $dataItem['description'] = $metaBundle->metaGlobalVars->seoDescription !== '' ? 'enabled' : 'disabled';
+                    $dataItem['image'] = $metaBundle->metaGlobalVars->seoImage !== '' ? 'enabled' : 'disabled';
+                    $dataItem['sitemap'] = $metaBundle->metaSitemapVars->sitemapUrls ? 'enabled' : 'disabled';
+                    $dataItem['robots'] = $metaBundle->metaGlobalVars->robots;
+                    // Calculate the setup stat
+                    $stat = 0;
+                    $numGrades = \count(SettingsController::SETUP_GRADES);
+                    $numFields = \count(SettingsController::SEO_SETUP_FIELDS);
+                    foreach (SettingsController::SEO_SETUP_FIELDS as $setupField => $setupLabel) {
+                        $stat += (int)!empty($metaBundle->metaGlobalVars[$setupField]);
+                        $value = $variables['contentSetupChecklist'][$setupField]['value'] ?? 0;
+                        $variables['contentSetupChecklist'][$setupField] = [
+                            'label' => $setupLabel,
+                            'value' => $value + (int)!empty($metaBundle->metaGlobalVars[$setupField]),
+                        ];
+                    }
+                    $stat = round($numGrades - (($stat * $numGrades) / $numFields));
+                    if ($stat >= $numGrades) {
+                        $stat = $numGrades - 1;
+                    }
+                    $dataItem['setup'] = SettingsController::SETUP_GRADES[$stat];
+
                     $dataArray[] = $dataItem;
                 }
             }
