@@ -3,7 +3,7 @@
 
 {% requirePermission "seomatic:content-meta" %}
 
-{% extends "_layouts/cp" %}
+{% extends 'seomatic/_layouts/seomatic-cp.twig' %}
 {% import '_includes/forms' as forms %}
 
 {% from 'seomatic/_includes/macros.twig' import registerJsModules %}
@@ -21,11 +21,13 @@
 {% endblock %}
 
 {% set content %}
-<div id="cp-nav-content">
-    <content-seo-table
-            :site-id="{{ currentSiteId }}"
-    >
-    </content-seo-table>
+<div class="readable">
+    <div id="cp-nav-content">
+        <content-seo-table
+                :site-id="{{ currentSiteId }}"
+        >
+        </content-seo-table>
+    </div>
 </div>
 <div class="readable">
 
