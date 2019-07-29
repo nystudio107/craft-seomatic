@@ -95,7 +95,7 @@ class ContentSeoController extends Controller
             }
         }
         if ($filter !== '') {
-            $query->where(['like', 'sourceName', $filter]);
+            $query->andWhere(['like', 'sourceName', $filter]);
             $query->orWhere(['like', 'sourceType', $filter]);
         }
         $bundles = $query->all();

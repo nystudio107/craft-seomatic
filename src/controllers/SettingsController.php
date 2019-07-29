@@ -414,12 +414,8 @@ class SettingsController extends Controller
         $this->setMultiSiteVariables($siteHandle, $siteId, $variables);
         $variables['controllerHandle'] = 'content';
         $variables['selectedSubnavItem'] = 'content';
-        $variables['metaBundles'] = Seomatic::$plugin->metaBundles->getContentMetaBundlesForSiteId($siteId);
-        Seomatic::$plugin->metaBundles->pruneVestigialMetaBundles($variables['metaBundles']);
-
-        // For the grades
-        $variables['seoSetupGrades'] = self::SETUP_GRADES;
-        $variables['seoSetupFields'] = self::SEO_SETUP_FIELDS;
+        $metaBundles = Seomatic::$plugin->metaBundles->getContentMetaBundlesForSiteId($siteId);
+        Seomatic::$plugin->metaBundles->deleteVestigialMetaBundles($metaBundles);
 
         // Render the template
         return $this->renderTemplate('seomatic/settings/content/index', $variables);
