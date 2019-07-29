@@ -2,8 +2,8 @@
  * @project        SEOmatic
  * @name           vendors~twig-editor.js
  * @author         Andrew Welch
- * @build          Mon, Jul 29, 2019 7:16 PM ET
- * @release        2d41fd39bb807d2d8380a34c406686afb4a3979a [feature/refactor-content-seo-page]
+ * @build          Mon, Jul 29, 2019 7:38 PM ET
+ * @release        16cf0f9fbaa3bac777cdac480dde3f7565ea63f7 [feature/refactor-content-seo-page]
  * @copyright      Copyright (c) 2019 nystudio107
  *
  */
