@@ -9,14 +9,16 @@
 
 namespace nystudio107\seomatic\controllers;
 
-use Craft;
+use nystudio107\seomatic\base\SeoElementInterface;
+use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\services\SeoElements;
 
+use Craft;
 use craft\db\Query;
 use craft\helpers\UrlHelper;
 use craft\web\Controller;
 
-use yii\web\ForbiddenHttpException;
 use yii\web\Response;
 
 /**
@@ -98,14 +100,25 @@ class ContentSeoController extends Controller
             // Add in the `addLink` field
             foreach ($bundles as $bundle) {
                 $dataItem = [];
-                $sourceBundleType = $bundle['sourceBundleType'];
-                $sourceHandle = $bundle['sourceHandle'];
-                $dataItem['sourceName'] = $bundle['sourceName'];
-                $dataItem['sourceType'] = $bundle['sourceType'];
-                $dataItem['contentSeoUrl'] = UrlHelper::cpUrl(
-                    "seomatic/edit-content/general/{$sourceBundleType}/{$sourceHandle}/{$currentSiteHandle}"
-                );
-                $dataArray[] = $dataItem;
+                $metaBundle = MetaBundle::create($bundle);
+                if ($metaBundle !== null) {
+                    $sourceBundleType = $metaBundle->sourceBundleType;
+                    $sourceHandle = $metaBundle->sourceHandle;
+                    $dataItem['sourceName'] = $metaBundle->sourceName;
+                    $dataItem['sourceType'] = $metaBundle->sourceType;
+                    $dataItem['contentSeoUrl'] = UrlHelper::cpUrl(
+                        "seomatic/edit-content/general/{$sourceBundleType}/{$sourceHandle}/{$currentSiteHandle}"
+                    );
+                    $entries = 0;
+                    $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($bundle['sourceType']);
+                    /** @var SeoElementInterface $seoElement */
+                    if ($seoElement !== null) {
+                        $query = $seoElement::sitemapElementsQuery($metaBundle);
+                        $entries = $query->count();
+                    }
+                    $dataItem['entries'] = $entries;
+                    $dataArray[] = $dataItem;
+                }
             }
             // Format the data for the API
             $data['data'] = $dataArray;
