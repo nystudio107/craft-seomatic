@@ -24,14 +24,14 @@ table.vuetable {
  */
 
 table.seomatic-content-seo th.vuetable-th-component-id {
-  width: 20%!important;
+  width: 25%!important;
 }
 
-th.vuetable-th-entries {
+table.seomatic-content-seo th.vuetable-th-entries {
   width: 6%!important;
 }
 
-th.vuetable-th-sourcetype {
+table.seomatic-content-seo th.vuetable-th-sourcetype {
   width: 10%!important;
 }
 
