@@ -60,7 +60,7 @@ module.exports = {
         ],
         whitelist: [
             "./src/assetbundles/seomatic/src/css/components/**/*.{css}",
-            "./node_modules/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.css"
+            "./node_modules/tokenfield/dist/tokenfield.css"
         ],
         whitelistPatterns: [],
         extensions: [
