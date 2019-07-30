@@ -15,7 +15,7 @@
  */
 
 // JavaScript
-import tokenfield from 'bootstrap-tokenfield/js/bootstrap-tokenfield.js';
+import Tokenfield from 'tokenfield';
 
 /**
  * Fill a dynamic schema.org type menu with the schema hierarchy in path
@@ -85,8 +85,11 @@ window.seomaticTabChangeHandler();
 
 $(function() {
     // Tokenize any seomatic-keywords fields
-    $('.seomatic-keywords').tokenfield({
-        createTokensOnBlur: true,
+    var tf = new Tokenfield({
+        el: document.querySelector('.seomatic-keywords'),
+        addItemOnBlur: true,
+        addItemsOnPaste: true,
+        delimiters: [','],
     });
 
     // Show/hide the script settings containers
