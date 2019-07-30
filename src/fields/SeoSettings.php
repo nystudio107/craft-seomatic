@@ -301,6 +301,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
                 'styles.css',
             ]);
             $this->registerJsModules([
+                'styles.js',
                 'vendors~seomatic-meta.js',
                 'seomatic-meta.js',
                 'seomatic.js',
@@ -340,6 +341,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
                 'styles.css',
             ]);
             $this->registerJsModules([
+                'styles.js',
                 'vendors~seomatic-meta.js',
                 'seomatic-meta.js',
                 'seomatic.js',
