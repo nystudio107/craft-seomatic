@@ -85,11 +85,14 @@ window.seomaticTabChangeHandler();
 
 $(function() {
     // Tokenize any seomatic-keywords fields
-    var tf = new Tokenfield({
+    let tf = new Tokenfield({
         el: document.querySelector('.seomatic-keywords'),
         addItemOnBlur: true,
         addItemsOnPaste: true,
         delimiters: [','],
+    });
+    tf.on('change', (data) => {
+        console.log(data);
     });
 
     // Show/hide the script settings containers
