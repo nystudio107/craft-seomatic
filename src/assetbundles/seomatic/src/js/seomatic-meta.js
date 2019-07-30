@@ -85,14 +85,22 @@ window.seomaticTabChangeHandler();
 
 $(function() {
     // Tokenize any seomatic-keywords fields
+    let el = document.querySelector('.seomatic-keywords');
+    let keywords = el.value.split(',').map((value, index) => {
+        return { id: index, name: value };
+    });
     let tf = new Tokenfield({
-        el: document.querySelector('.seomatic-keywords'),
+        el: el,
         addItemOnBlur: true,
         addItemsOnPaste: true,
         delimiters: [','],
+        setItems: keywords || [],
     });
-    tf.on('change', (data) => {
-        console.log(data);
+    tf.on('change', (tokenField) => {
+        let values = tokenField._vars.setItems.map((value) => {
+            return value.name;
+        });
+        tokenField.el.value = values.join(',');
     });
 
     // Show/hide the script settings containers
