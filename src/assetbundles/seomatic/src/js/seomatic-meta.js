@@ -14,9 +14,6 @@
  * @since     3.0.0
  */
 
-// JavaScript
-import Tokenfield from 'tokenfield';
-
 /**
  * Fill a dynamic schema.org type menu with the schema hierarchy in path
  *
@@ -84,25 +81,6 @@ window.seomaticTabChangeHandler = seomaticTabChangeHandler;
 window.seomaticTabChangeHandler();
 
 $(function() {
-    // Tokenize any seomatic-keywords fields
-    let el = document.querySelector('.seomatic-keywords');
-    let keywords = el.value.split(',').map((value, index) => {
-        return { id: index, name: value };
-    });
-    let tf = new Tokenfield({
-        el: el,
-        addItemOnBlur: true,
-        addItemsOnPaste: true,
-        delimiters: [','],
-        setItems: keywords || [],
-    });
-    tf.on('change', (tokenField) => {
-        let values = tokenField._vars.setItems.map((value) => {
-            return value.name;
-        });
-        tokenField.el.value = values.join(',');
-    });
-
     // Show/hide the script settings containers
     var selector = $('.seomatic-script-lightswitch').find('.lightswitch');
     $(selector).each(function(index, value) {
