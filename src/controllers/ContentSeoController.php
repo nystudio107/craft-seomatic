@@ -96,7 +96,6 @@ class ContentSeoController extends Controller
         }
         if ($filter !== '') {
             $query->andWhere(['like', 'sourceName', $filter]);
-            $query->orWhere(['like', 'sourceType', $filter]);
         }
         $bundles = $query->all();
         if ($bundles) {
@@ -160,11 +159,10 @@ class ContentSeoController extends Controller
                 ->where(['!=', 'sourceBundleType', Seomatic::$plugin->metaBundles::GLOBAL_META_BUNDLE])
             ;
             if ((int)$siteId !== 0) {
-                $query->where(['sourceSiteId' => $siteId]);
+                $query->andWhere(['sourceSiteId' => $siteId]);
             }
             if ($filter !== '') {
-                $query->where(['like', 'sourceName', $filter]);
-                $query->orWhere(['like', 'sourceType', $filter]);
+                $query->andWhere(['like', 'sourceName', $filter]);
             }
             $count = $query->count();
             $data['links']['pagination'] = [
