@@ -30,7 +30,6 @@
                         },
                         events: {
                             click: (event, chartContext, config) => {
-                                console.log(this.url);
                                 window.location = this.url;
                             }
                         },
