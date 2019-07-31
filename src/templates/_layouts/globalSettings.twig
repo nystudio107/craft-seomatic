@@ -9,7 +9,8 @@
 {% block foot %}
     {{ parent() }}
     {% set jsModules = [
-        'vendors~seomatic-meta.js',
+        'vendors~seomatic-tokens.js',
+        'seomatic-tokens.js',
         'seomatic-meta.js',
     ] %}
     {{ registerJsModules(jsModules) }}

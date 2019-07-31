@@ -242,12 +242,12 @@
         {% endif %}
 
         {% namespace "metaGlobalVars" %}
-            <div class="heading seomatic-textSourceFromUrl">
-                {{ forms.textArea({
+            <div class="heading seomatic-textSourceFromUrl" style="box-sizing: border-box;">
+                {{ forms.textField({
                     id: "seoKeywords",
                     name: "seoKeywords",
                     value: metaGlobalVars.seoKeywords,
-                    class: "seomatic-keywords nicetext",
+                    class: "seomatic-keywords",
                     maxlength: seomatic.config.maxDescriptionLength,
                     showCharsLeft: true,
                     warning: false,
@@ -279,7 +279,7 @@
 {% if field is not defined %}
     <div style="display: none;">
         {############### Twitter Card Type ###############}
-    
+
         {# This has to be here because different Twitter Card types have different sizes for image transforms#}
         {% set twitterCardTypes = {
             summary: "Summary Card"|t("seomatic"),
@@ -290,7 +290,7 @@
         {% if pageContext == "field" %}
             {% set twitterCardTypes = { "": ""} | merge(twitterCardTypes) %}
         {% endif %}
-    
+
         {% namespace "metaGlobalVars" %}
             {{ forms.selectField({
                 label: "Twitter Card Type"|t("seomatic"),
