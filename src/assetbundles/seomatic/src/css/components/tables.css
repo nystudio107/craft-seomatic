@@ -20,7 +20,7 @@ table.vuetable {
 }
 
 /**
- * Dashboard chart
+ * Content SEO table
  */
 
 table.seomatic-content-seo th.vuetable-th-component-id {
@@ -33,6 +33,10 @@ table.seomatic-content-seo th.vuetable-th-entries {
 
 table.seomatic-content-seo th.vuetable-th-sourcetype {
   width: 10%!important;
+}
+
+table.seomatic-content-seo th.sortable {
+  cursor: pointer;
 }
 
 /**
