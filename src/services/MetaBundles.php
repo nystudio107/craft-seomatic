@@ -35,7 +35,7 @@ use craft\models\Site;
 use craft\commerce\models\ProductType;
 
 /**
- * @author    nystudio107
+ * @author    nystudio107Meta bundle failed validation
  * @package   Seomatic
  * @since     3.0.0
  */
@@ -127,6 +127,8 @@ class MetaBundles extends Component
      */
     public function updateMetaBundle(MetaBundle $metaBundle, int $siteId)
     {
+        $metaBundle->sourceName = (string)$metaBundle->sourceName;
+        $metaBundle->sourceTemplate = (string)$metaBundle->sourceTemplate;
         // Make sure it validates
         if ($metaBundle->validate(null, true)) {
             // Save it out to a record
@@ -389,10 +391,16 @@ class MetaBundles extends Component
      *
      * @param string $sourceBundleType
      * @param int    $sourceId
+     * @param null   $siteId
      */
-    public function deleteMetaBundleBySourceId(string $sourceBundleType, int $sourceId)
+    public function deleteMetaBundleBySourceId(string $sourceBundleType, int $sourceId, $siteId = null)
     {
-        $sites = Craft::$app->getSites()->getAllSites();
+        $sites = [];
+        if ($siteId === null) {
+            $sites = Craft::$app->getSites()->getAllSites();
+        } else {
+            $sites[] = Craft::$app->getSites()->getSiteById($siteId);
+        }
         /** @var  $site Site */
         foreach ($sites as $site) {
             // Look for a matching meta bundle in the db
@@ -552,44 +560,79 @@ class MetaBundles extends Component
 
     /**
      * Remove any meta bundles from the $metaBundles array that no longer
-     * correspond with a category group or section
+     * correspond with an SeoElement
      *
      * @param array $metaBundles
      */
     public function pruneVestigialMetaBundles(array &$metaBundles)
     {
         foreach ($metaBundles as $key => $metaBundle) {
-            $unsetMetaBundle = false;
-            $sourceBundleType = $metaBundle->sourceBundleType;
-            if ($sourceBundleType !== self::GLOBAL_META_BUNDLE) {
-                $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
-                if ($seoElement) {
-                    $sourceModel = $seoElement::sourceModelFromHandle($metaBundle->sourceHandle);
-                    /** @var Section|CategoryGroup|ProductType $sourceModel */
-                    if ($sourceModel === null) {
-                        $unsetMetaBundle = true;
-                    } else {
-                        $unsetMetaBundle = true;
-                        $siteSettings = $sourceModel->getSiteSettings();
-                        if (!empty($siteSettings)) {
-                            /** @var Section_SiteSettings $siteSetting */
-                            foreach ($siteSettings as $siteSetting) {
-                                if ($siteSetting->siteId == $metaBundle->sourceSiteId && $siteSetting->hasUrls) {
-                                    $unsetMetaBundle = false;
-                                }
-                            }
-                        }
-                    }
-                } else {
-                    $unsetMetaBundle = true;
-                }
-            }
+            $prune = $this->pruneVestigialMetaBundle($metaBundle);
             /** @var MetaBundle $metaBundle */
-            if ($unsetMetaBundle) {
+            if ($prune) {
                 unset($metaBundles[$key]);
             }
         }
         ArrayHelper::multisort($metaBundles, 'sourceName');
+    }
+
+    /**
+     * Delete any meta bundles from the $metaBundles array that no longer
+     * correspond with an SeoElement
+     *
+     * @param array $metaBundles
+     */
+    public function deleteVestigialMetaBundles(array $metaBundles)
+    {
+        foreach ($metaBundles as $key => $metaBundle) {
+            $prune = $this->pruneVestigialMetaBundle($metaBundle);
+            /** @var MetaBundle $metaBundle */
+            if ($prune) {
+                $this->deleteMetaBundleBySourceId(
+                    $metaBundle->sourceBundleType,
+                    $metaBundle->sourceId,
+                    $metaBundle->sourceSiteId
+                );
+            }
+        }
+    }
+
+    /**
+     * Determine whether a given MetaBundle is vestigial or not
+     *
+     * @param $metaBundle
+     *
+     * @return bool
+     */
+    public function pruneVestigialMetaBundle($metaBundle): bool
+    {
+        $prune = false;
+        $sourceBundleType = $metaBundle->sourceBundleType;
+        if ($sourceBundleType !== self::GLOBAL_META_BUNDLE) {
+            $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
+            if ($seoElement) {
+                $sourceModel = $seoElement::sourceModelFromHandle($metaBundle->sourceHandle);
+                /** @var Section|CategoryGroup|ProductType $sourceModel */
+                if ($sourceModel === null) {
+                    $prune = true;
+                } else {
+                    $prune = true;
+                    $siteSettings = $sourceModel->getSiteSettings();
+                    if (!empty($siteSettings)) {
+                        /** @var Section_SiteSettings $siteSetting */
+                        foreach ($siteSettings as $siteSetting) {
+                            if ($siteSetting->siteId == $metaBundle->sourceSiteId && $siteSetting->hasUrls) {
+                                $prune = false;
+                            }
+                        }
+                    }
+                }
+            } else {
+                $prune = true;
+            }
+        }
+
+        return $prune;
     }
 
     /**
