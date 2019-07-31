@@ -2,10 +2,10 @@
  * @project        SEOmatic
  * @name           styles.js
  * @author         Andrew Welch
- * @build          Thu, Jun 27, 2019 3:43 PM ET
- * @release        ffd91c12d692439dc58ebe11db895dcb6ca4f6c6 [develop]
+ * @build          Wed, Jul 31, 2019 4:44 PM ET
+ * @release        57f14111c8199864d98345fb124b3fd59aada30a [feature/refactor-content-seo-page]
  * @copyright      Copyright (c) 2019 nystudio107
  *
  */
-(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{16:function(n,w,o){}}]);
+(window.webpackJsonp=window.webpackJsonp||[]).push([[8],{47:function(n,w,o){}}]);
 //# sourceMappingURL=styles.js.map

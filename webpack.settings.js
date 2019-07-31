@@ -30,8 +30,10 @@ module.exports = {
     },
     entries: {
         "dashboard": "dashboard.js",
+        "content-seo": "content-seo.js",
         "seomatic": "seomatic.js",
         "seomatic-meta": "seomatic-meta.js",
+        "seomatic-tokens": "seomatic-tokens.js",
         "twig-editor": "twig-editor.js",
         "javascript-editor": "javascript-editor.js",
     },
@@ -58,8 +60,8 @@ module.exports = {
             "./src/assetbundles/seomatic/src/vue/**/*.{vue,html}"
         ],
         whitelist: [
-            "./src/assetbundles/seomatic/src/css/components/**/*.{css}",
-            "./node_modules/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.css"
+            "./src/assetbundles/seomatic/src/css/components/*.css",
+            "./node_modules/tokenfield/dist/tokenfield.css"
         ],
         whitelistPatterns: [],
         extensions: [

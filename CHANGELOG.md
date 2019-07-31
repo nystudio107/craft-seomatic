@@ -1,8 +1,12 @@
 # SEOmatic Changelog
 
-## 3.2.18 - 2019.07.29
+## 3.2.18 - 2019.07.31
+### Added
+* Added searching, sorting, and pagination to the Content SEO pages
+
 ### Changed
 * Typecast the `sourceName` and `sourceTemplate` to a string before validation
+* Moved over to a more modern tokenfield library for SEO Keywords
 
 ## 3.2.17 - 2019.07.25
 ### Changed

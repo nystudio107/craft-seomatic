@@ -14,9 +14,6 @@
  * @since     3.0.0
  */
 
-// JavaScript
-import tokenfield from 'bootstrap-tokenfield/js/bootstrap-tokenfield.js';
-
 /**
  * Fill a dynamic schema.org type menu with the schema hierarchy in path
  *
@@ -84,11 +81,6 @@ window.seomaticTabChangeHandler = seomaticTabChangeHandler;
 window.seomaticTabChangeHandler();
 
 $(function() {
-    // Tokenize any seomatic-keywords fields
-    $('.seomatic-keywords').tokenfield({
-        createTokensOnBlur: true,
-    });
-
     // Show/hide the script settings containers
     var selector = $('.seomatic-script-lightswitch').find('.lightswitch');
     $(selector).each(function(index, value) {
