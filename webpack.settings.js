@@ -33,6 +33,7 @@ module.exports = {
         "content-seo": "content-seo.js",
         "seomatic": "seomatic.js",
         "seomatic-meta": "seomatic-meta.js",
+        "seomatic-tokens": "seomatic-tokens.js",
         "twig-editor": "twig-editor.js",
         "javascript-editor": "javascript-editor.js",
     },
