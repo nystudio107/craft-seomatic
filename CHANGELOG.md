@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.19 - 2019.08.06
+### Changed
+* 
+
 ## 3.2.18 - 2019.07.31
 ### Added
 * Added searching, sorting, and pagination to the Content SEO pages
