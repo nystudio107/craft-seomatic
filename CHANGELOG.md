@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.19 - 2019.08.06
+### Changed
+* Strip the query string at render time for the `canonical` link, to ensure any Craft 3.2 `token` params are stripped
+
 ## 3.2.18 - 2019.07.31
 ### Added
 * Added searching, sorting, and pagination to the Content SEO pages
