@@ -70,9 +70,13 @@ class CanonicalLink extends MetaLink
                 return false;
             }
             if (!empty($data['href'])) {
-                $data['href'] = UrlHelper::absoluteUrlWithProtocol(
+                $url = UrlHelper::absoluteUrlWithProtocol(
                     StringHelper::toLowerCase($data['href'])
                 );
+                // The URL should be stripped of its query string already, but because
+                // Craft adds the `token` URL param back in via UrlHelper, strip it again
+                $url = preg_replace('/\?.*/', '', $url);
+                $data['href'] = $url;
             }
         }
 
