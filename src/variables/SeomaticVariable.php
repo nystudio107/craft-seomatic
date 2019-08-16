@@ -180,9 +180,20 @@ class SeomaticVariable extends ServiceLocator
         $envVar = getenv('ENVIRONMENT');
         if (!empty($envVar)) {
             $env = EnvironmentHelper::determineEnvironment();
+            switch ($env) {
+                case EnvironmentHelper::SEOMATIC_STAGING_ENV:
+                    $additionalMessage = 'The `robots` tag is set to `none` to prevent search engine indexing.';
+                    break;
+                case EnvironmentHelper::SEOMATIC_PRODUCTION_ENV:
+                    $additionalMessage = 'Tracking scripts are disabled, and the `robots` tag is set to `none` to prevent search engine indexing.';
+                    break;
+                default:
+                    $additionalMessage = '';
+                    break;
+            }
             if ($settings->environment !== $env) {
-                return Craft::t('seomatic', 'The `{settingsEnv}` [SEOmatic Environment]({settingsUrl}) setting has been overriden to `{env}`, because the `.env` setting `ENVIRONMENT` is set to `{envVar}`. Tracking scripts are disabled, and the `robots` tag is set to `none` to prevent search engine indexing.',
-                    ['env' => $env, 'settingsEnv' => $settingsEnv, 'settingsUrl' => $settingsUrl, 'envVar' => $envVar]
+                return Craft::t('seomatic', 'The `{settingsEnv}` [SEOmatic Environment]({settingsUrl}) setting has been overriden to `{env}`, because the `.env` setting `ENVIRONMENT` is set to `{envVar}`. {additionalMessage}',
+                    ['env' => $env, 'settingsEnv' => $settingsEnv, 'settingsUrl' => $settingsUrl, 'envVar' => $envVar, 'additionalMessage' => $additionalMessage]
                 );
             }
         }
