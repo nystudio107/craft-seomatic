@@ -2,7 +2,7 @@
 
 ## 3.2.20 - 2019.08.16
 ### Changed
-* Added a **Environment** label on the Dashboard, with explanations for why the environment setting is overriden (if it is)
+* Added a **Environment** label on the Dashboard, with explanations for why the environment setting is overridden (if it is)
 
 ## 3.2.19 - 2019.08.06
 ### Changed
