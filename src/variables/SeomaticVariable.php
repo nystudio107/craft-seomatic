@@ -11,7 +11,9 @@
 
 namespace nystudio107\seomatic\variables;
 
+use craft\helpers\UrlHelper;
 use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
 use nystudio107\seomatic\models\MetaGlobalVars;
 use nystudio107\seomatic\models\MetaSiteVars;
 use nystudio107\seomatic\models\MetaSitemapVars;
@@ -149,5 +151,42 @@ class SeomaticVariable extends ServiceLocator
     public function getContentMetaBundles(bool $allSites = true): array
     {
         return Seomatic::$plugin->metaBundles->getContentMetaBundles($allSites);
+    }
+
+    /**
+     * @return string
+     */
+    public function getEnvironment()
+    {
+        return Seomatic::$environment;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEnvironmentMessage()
+    {
+        $result = '';
+        /** @var Settings $settings */
+        $settings = Seomatic::$plugin->getSettings();
+        $settingsEnv = $settings->environment;
+        $env = Seomatic::$environment;
+        $settingsUrl = UrlHelper::cpUrl('seomatic/plugin');
+        if (Seomatic::$devMode) {
+            return Craft::t('seomatic', 'The `{settingsEnv}` [SEOmatic Environment]({settingsUrl}) setting has been overriden to `{env}`, because the `devMode` config setting is enabled. Tracking scripts are disabled, and the `robots` tag is set to `none` to prevent search engine indexing.',
+                ['env' => $env, 'settingsEnv' => $settingsEnv, 'settingsUrl' => $settingsUrl]
+            );
+        }
+        $envVar = getenv('ENVIRONMENT');
+        if (!empty($envVar)) {
+            $env = EnvironmentHelper::determineEnvironment();
+            if ($settings->environment !== $env) {
+                return Craft::t('seomatic', 'The `{settingsEnv}` [SEOmatic Environment]({settingsUrl}) setting has been overriden to `{env}`, because the `.env` setting `ENVIRONMENT` is set to `{envVar}`. Tracking scripts are disabled, and the `robots` tag is set to `none` to prevent search engine indexing.',
+                    ['env' => $env, 'settingsEnv' => $settingsEnv, 'settingsUrl' => $settingsUrl, 'envVar' => $envVar]
+                );
+            }
+        }
+
+        return $result;
     }
 }
