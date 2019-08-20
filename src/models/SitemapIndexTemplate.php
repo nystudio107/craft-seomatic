@@ -220,7 +220,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             'sitemaps' => $additionalSitemaps,
             'siteId' => $groupSiteId,
         ]);
-        Event::trigger(SitemapCustomTemplate::class, SitemapCustomTemplate::EVENT_REGISTER_SITEMAP_URLS, $event);
+        Event::trigger(SitemapIndexTemplate::class, SitemapIndexTemplate::EVENT_REGISTER_SITEMAPS, $event);
         $additionalSitemaps = array_filter($event->sitemaps);
         // Output the sitemap index
         if (!empty($additionalSitemaps)) {
