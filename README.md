@@ -43,7 +43,7 @@ SEOmatic works on Craft 3.x.
 
 ## Documentation
 
-Click here -> [Eager Beaver Documentation](https://nystudio107.com/plugins/seomatic/documentation)
+Click here -> [SEOmatic Documentation](https://nystudio107.com/plugins/seomatic/documentation)
 
 ## SEOmatic Roadmap
 
