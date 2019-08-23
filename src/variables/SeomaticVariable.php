@@ -170,6 +170,9 @@ class SeomaticVariable extends ServiceLocator
         /** @var Settings $settings */
         $settings = Seomatic::$plugin->getSettings();
         $settingsEnv = $settings->environment;
+        if (Seomatic::$craft31) {
+            $settingsEnv = Craft::parseEnv($settingsEnv);
+        }
         $env = Seomatic::$environment;
         $settingsUrl = UrlHelper::cpUrl('seomatic/plugin');
         if (Seomatic::$devMode) {
@@ -181,11 +184,14 @@ class SeomaticVariable extends ServiceLocator
         if (!empty($envVar)) {
             $env = EnvironmentHelper::determineEnvironment();
             switch ($env) {
+                case EnvironmentHelper::SEOMATIC_DEV_ENV:
+                    $additionalMessage = 'Tracking scripts are disabled, and the `robots` tag is set to `none` to prevent search engine indexing.';
+                    break;
                 case EnvironmentHelper::SEOMATIC_STAGING_ENV:
                     $additionalMessage = 'The `robots` tag is set to `none` to prevent search engine indexing.';
                     break;
                 case EnvironmentHelper::SEOMATIC_PRODUCTION_ENV:
-                    $additionalMessage = 'Tracking scripts are disabled, and the `robots` tag is set to `none` to prevent search engine indexing.';
+                    $additionalMessage = '';
                     break;
                 default:
                     $additionalMessage = '';
