@@ -297,6 +297,10 @@ class GenerateSitemap extends BaseJob
             : null;
         $result = $cache->set($cacheKey, $lines, $cacheDuration, $dependency);
         Craft::debug('Sitemap cache result: '.print_r($result, true).' for cache key: '.$cacheKey, __METHOD__);
+        // Output some info if this is a console app
+        if (Craft::$app instanceof ConsoleApplication) {
+            echo 'Sitemap cache result: '.print_r($result, true).' for cache key: '.$cacheKey.PHP_EOL;
+        }
         // If the FastCGI Cache Bust plugin is installed, clear its caches too
         $plugin = Craft::$app->getPlugins()->getPlugin('fastcgi-cache-bust');
         if ($plugin !== null) {

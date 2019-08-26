@@ -5,7 +5,7 @@
 
 SEOmatic facilitates [modern SEO best practices](https://nystudio107.com/blog/modern-seo-snake-oil-vs-substance) & implementation for Craft CMS 3. It is a turnkey SEO system that is comprehensive, powerful, and flexible.
 
-![Screenshot](./docs/docs/resources/img/plugin-banner.jpg)
+![Screenshot](./resources/img/plugin-banner.jpg)
 
 Related: [SEOmatic for Craft 2.x](https://github.com/nystudio107/seomatic). SEOmatic for Craft CMS 3 is a complete re-write & re-architecture from scratch.
 
@@ -15,7 +15,7 @@ One SEO-related topic that SEOmatic _does not_ cover is 404 redirects; for that 
 
 ## Used By
 
-![Screenshot](./docs/docs/resources/img/moz-logo-blue.png)![Screenshot](./docs/docs/resources/img/craft-cms-logo.png)
+![Screenshot](./resources/img/moz-logo-blue.png)![Screenshot](./resources/img/craft-cms-logo.png)
 
 SEOmatic is the SEO tool that the SEO experts at [Moz.com](https://moz.com/) and the creators of Craft CMS, Pixel & Tonic, rely on to handle their SEO!
 
@@ -40,15 +40,5 @@ To install SEOmatic, follow these steps:
 You can also install SEOmatic via the **Plugin Store** in the Craft Control Panel.
 
 SEOmatic works on Craft 3.x.
-
-## Documentation
-
-Click here -> [SEOmatic Documentation](https://nystudio107.com/plugins/seomatic/documentation)
-
-## SEOmatic Roadmap
-
-Some things to do, and ideas for potential features:
-
-* **Content Analytics** - Add content analytics, potentially in the "Pro" edition
 
 Brought to you by [nystudio107](https://nystudio107.com/)
