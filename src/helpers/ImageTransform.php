@@ -17,6 +17,7 @@ use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
 use Craft;
 use craft\elements\Asset;
 use craft\models\AssetTransform;
+use yii\base\InvalidConfigException;
 
 /**
  * @author    nystudio107
@@ -81,6 +82,7 @@ class ImageTransform
      * @param string    $transformMode
      *
      * @return string URL to the transformed image
+     * @throws \yii\base\InvalidConfigException
      */
     public static function socialTransform(
         $asset,
@@ -103,9 +105,18 @@ class ImageTransform
             }
             // Generate a transformed image
             $assets = Craft::$app->getAssets();
+            try {
+                $volume = $asset->getVolume();
+            } catch (InvalidConfigException $e) {
+                $volume = null;
+            }
             // If we're not in local dev, tell it to generate the transform immediately so that
             // urls like `actions/assets/generate-transform` don't get cached
             $generateNow = Seomatic::$environment === EnvironmentHelper::SEOMATIC_DEV_ENV ? null : true;
+            // Preflight to ensure that the source asset actually exists to avoid Craft hanging
+            if ($volume !== null && !$volume->fileExists($asset->getPath())) {
+                $generateNow = null;
+            }
             try {
                 $url = $assets->getAssetUrl($asset, $transform, $generateNow);
             } catch (\Exception $e) {
