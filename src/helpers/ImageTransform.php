@@ -17,6 +17,7 @@ use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
 use Craft;
 use craft\elements\Asset;
 use craft\models\AssetTransform;
+
 use yii\base\InvalidConfigException;
 
 /**
@@ -82,7 +83,6 @@ class ImageTransform
      * @param string    $transformMode
      *
      * @return string URL to the transformed image
-     * @throws \yii\base\InvalidConfigException
      */
     public static function socialTransform(
         $asset,
