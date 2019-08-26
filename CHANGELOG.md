@@ -1,9 +1,10 @@
 # SEOmatic Changelog
 
-## 3.2.21 - 2019.08.23
+## 3.2.21 - 2019.08.26
 ### Changed
 * Fixed an issue where SEOmatic would errantly say the environment was disabled
 * Parse the SEOmatic environment variable in the environment check
+* Preflight to ensure that the source asset actually exists to avoid Craft hanging
 
 ## 3.2.20 - 2019.08.16
 ### Changed
