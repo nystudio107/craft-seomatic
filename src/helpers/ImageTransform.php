@@ -18,6 +18,8 @@ use Craft;
 use craft\elements\Asset;
 use craft\models\AssetTransform;
 
+use yii\base\InvalidConfigException;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -103,9 +105,18 @@ class ImageTransform
             }
             // Generate a transformed image
             $assets = Craft::$app->getAssets();
+            try {
+                $volume = $asset->getVolume();
+            } catch (InvalidConfigException $e) {
+                $volume = null;
+            }
             // If we're not in local dev, tell it to generate the transform immediately so that
             // urls like `actions/assets/generate-transform` don't get cached
             $generateNow = Seomatic::$environment === EnvironmentHelper::SEOMATIC_DEV_ENV ? null : true;
+            // Preflight to ensure that the source asset actually exists to avoid Craft hanging
+            if ($volume !== null && !$volume->fileExists($asset->getPath())) {
+                $generateNow = null;
+            }
             try {
                 $url = $assets->getAssetUrl($asset, $transform, $generateNow);
             } catch (\Exception $e) {
