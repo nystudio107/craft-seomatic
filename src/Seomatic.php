@@ -287,36 +287,46 @@ class Seomatic extends Plugin
         $subNavs = [];
         $navItem = parent::getCpNavItem();
         /** @var User $currentUser */
+        $request = Craft::$app->getRequest();
+        $siteSuffix = '';
+        if ($request->getSegment(1) === 'seomatic') {
+            $segments = $request->getSegments();
+            $lastSegment = end($segments);
+            $site = Craft::$app->getSites()->getSiteByHandle($lastSegment);
+            if ($site !== null) {
+                $siteSuffix = '/'.$lastSegment;
+            }
+        }
         $currentUser = Craft::$app->getUser()->getIdentity();
         // Only show sub-navs the user has permission to view
         if ($currentUser->can('seomatic:dashboard')) {
             $subNavs['dashboard'] = [
                 'label' => 'Dashboard',
-                'url' => 'seomatic/dashboard',
+                'url' => 'seomatic/dashboard'.$siteSuffix,
             ];
         }
         if ($currentUser->can('seomatic:global-meta')) {
             $subNavs['global'] = [
                 'label' => 'Global SEO',
-                'url' => 'seomatic/global',
+                'url' => 'seomatic/global/general'.$siteSuffix,
             ];
         }
         if ($currentUser->can('seomatic:content-meta')) {
             $subNavs['content'] = [
                 'label' => 'Content SEO',
-                'url' => 'seomatic/content',
+                'url' => 'seomatic/content'.$siteSuffix,
             ];
         }
         if ($currentUser->can('seomatic:site-settings')) {
             $subNavs['site'] = [
                 'label' => 'Site Settings',
-                'url' => 'seomatic/site',
+                'url' => 'seomatic/site/identity'.$siteSuffix,
             ];
         }
         if ($currentUser->can('seomatic:tracking-scripts')) {
             $subNavs['tracking'] = [
                 'label' => 'Tracking Scripts',
-                'url' => 'seomatic/tracking',
+                'url' => 'seomatic/tracking/googleAnalytics'.$siteSuffix,
             ];
         }
         $editableSettings = true;

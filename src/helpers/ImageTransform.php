@@ -115,7 +115,7 @@ class ImageTransform
             $generateNow = Seomatic::$environment === EnvironmentHelper::SEOMATIC_DEV_ENV ? null : true;
             // Preflight to ensure that the source asset actually exists to avoid Craft hanging
             if ($volume !== null && !$volume->fileExists($asset->getPath())) {
-                $generateNow = null;
+                $generateNow = false;
             }
             try {
                 $url = $assets->getAssetUrl($asset, $transform, $generateNow);
