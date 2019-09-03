@@ -147,6 +147,9 @@ class MetaTitle extends MetaItem
                     $suffix = '';
                     break;
             }
+            // Remove potential double spaces
+            $prefix = preg_replace('/\s+/', ' ', $prefix);;
+            $suffix = preg_replace('/\s+/', ' ', $suffix);;
             $lengthAdjust = mb_strlen($prefix.$suffix);
             // Parse the data
             $scenario = $this->scenario;
@@ -158,11 +161,15 @@ class MetaTitle extends MetaItem
             if ($truncLen < 0) {
                 $truncLen = 0;
             }
-            $data = (string)Stringy::create($data)->safeTruncate(
-                $truncLen,
-                '…'
-            );
+            if (!empty($data)) {
+                $data = (string)Stringy::create($data)->safeTruncate(
+                    $truncLen,
+                    '…'
+                );
+            }
             $data = $prefix.$data.$suffix;
+            // Trim whitespace
+            $data = trim($data);
             // devMode
             if (Seomatic::$devMode) {
                 $data = Seomatic::$settings->devModeTitlePrefix . $data;

@@ -1,5 +1,11 @@
 # SEOmatic Changelog
 
+## 3.2.22 - 2019.09.03
+### Changed
+* Cleaned up the `title` parsing to allow for `siteName` only titles more cleanly
+* If the source asset file is missing, set `generateNow` to `false` rather than `null`, overriding `generateTransformsBeforePageLoad`
+* Maintain the currently selected site between global nav items in the CP sidebar
+
 ## 3.2.21 - 2019.08.26
 ### Changed
 * Fixed an issue where SEOmatic would errantly say the environment was disabled
