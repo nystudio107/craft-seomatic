@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.22 - 2019.09.03
+### Changed
+* Cleaned up the `title` parsing to allow for `siteName` only titles more cleanly
+
 ## 3.2.21 - 2019.08.26
 ### Changed
 * Fixed an issue where SEOmatic would errantly say the environment was disabled
