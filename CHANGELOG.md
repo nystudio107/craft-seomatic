@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.2.23 - 2019.09.03
+## 3.2.23 - 2019.09.06
 ### Changed
 * Fixed a typo in the environment info popup
 * If the SEO image is not on a local volume, avoid a potentially long round-trip by being paranoid, and defaulting to not generating the image transform immediately
