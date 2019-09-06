@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.23 - 2019.09.03
+### Changed
+* Fixed a typo in the environment info popup
+
 ## 3.2.22 - 2019.09.03
 ### Changed
 * Cleaned up the `title` parsing to allow for `siteName` only titles more cleanly
