@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.24 - 2019.09.09
+### Changed
+* Replaced frontend api route with an actionUrl()
+
 ## 3.2.23 - 2019.09.06
 ### Changed
 * Fixed a typo in the environment info popup
