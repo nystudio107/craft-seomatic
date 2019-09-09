@@ -66,6 +66,28 @@ class DynamicMeta
     // =========================================================================
 
     /**
+     * Return a sanitized URL with the query string stripped
+     * @param string $url
+     *
+     * @return string
+     */
+    public static function sanitizeUrl(string $url): string
+    {
+        // Remove the query string
+        $url = UrlHelper::stripQueryString($url);
+        // HTML decode the entities, then strip out any tags
+        $url = html_entity_decode($url, ENT_NOQUOTES, 'UTF-8');
+        $url = strip_tags($url);
+
+        // If this is a >= 400 status code, set the canonical URL to nothing
+        if (Craft::$app->getResponse()->statusCode >= 400) {
+            $url = '';
+        }
+
+        return UrlHelper::absoluteUrlWithProtocol($url);
+    }
+
+    /**
      * Paginate based on the passed in Paginate variable as returned from the
      * Twig {% paginate %} tag:
      * https://docs.craftcms.com/v3/templating/tags/paginate.html#the-pageInfo-variable
@@ -79,6 +101,7 @@ class DynamicMeta
             Seomatic::$plugin->metaContainers->paginationPage = (string)$pageInfo->currentPage;
             // Set the current page
             $url = $pageInfo->getPageUrl($pageInfo->currentPage);
+            $url = self::sanitizeUrl($url);
             if (!empty($url)) {
                 Seomatic::$seomaticVariable->meta->canonicalUrl = $url;
             }

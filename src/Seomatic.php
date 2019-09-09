@@ -784,8 +784,6 @@ class Seomatic extends Plugin
     protected function customFrontendRoutes(): array
     {
         return [
-            // Tables
-            '/seomatic/content-seo/meta-bundles' => 'seomatic/content-seo/meta-bundles',
         ];
     }
 
