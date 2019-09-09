@@ -2,8 +2,8 @@
  * @project        SEOmatic
  * @name           vendors~dashboard.js
  * @author         Andrew Welch
- * @build          Wed, Jul 31, 2019 4:44 PM ET
- * @release        57f14111c8199864d98345fb124b3fd59aada30a [feature/refactor-content-seo-page]
+ * @build          Sat, Sep 7, 2019 7:58 PM ET
+ * @release        d07c1002ee212961041dede4246969e4b60338b9 [develop]
  * @copyright      Copyright (c) 2019 nystudio107
  *
  */
