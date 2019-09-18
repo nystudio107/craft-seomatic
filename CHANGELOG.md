@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.2.25 - 2019.09.17
+## 3.2.25 - 2019.09.18
 ### Changed
 * Fixed an issue where `mainEntityOfPage` overrides via an SEO Settings field could be the wrong model type
 
