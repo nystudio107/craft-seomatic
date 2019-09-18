@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\base\MetaItem;
@@ -29,6 +30,7 @@ use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\MetaScript;
 use nystudio107\seomatic\models\MetaTagContainer;
 use nystudio107\seomatic\models\MetaTitleContainer;
+use nystudio107\seomatic\services\JsonLd as JsonLdService;
 use nystudio107\seomatic\variables\SeomaticVariable;
 
 use Craft;
@@ -772,8 +774,22 @@ class MetaContainers extends Component
             $fieldHandles = FieldHelper::fieldsOfTypeFromElement($element, FieldHelper::SEO_SETTINGS_CLASS_KEY, true);
             foreach ($fieldHandles as $fieldHandle) {
                 if (!empty($element->$fieldHandle)) {
+                    /** @var MetaBundle $metaBundle */
                     $metaBundle = $element->$fieldHandle;
                     Seomatic::$plugin->metaBundles->pruneFieldMetaBundleSettings($metaBundle, $fieldHandle);
+                    // Handle re-creating the `mainEntityOfPage` so that the model injected into the
+                    // templates has the appropriate attributes
+                    $generalContainerKey = MetaJsonLdContainer::CONTAINER_TYPE.JsonLdService::GENERAL_HANDLE;
+                    $generalContainer = $this->metaContainers[$generalContainerKey];
+                    if (($generalContainer !== null) && !empty($generalContainer->data['mainEntityOfPage'])) {
+                        /** @var MetaJsonLd $jsonLdModel */
+                        $jsonLdModel = $generalContainer->data['mainEntityOfPage'];
+                        $config = $jsonLdModel->getAttributes();
+                        $schemaType = $metaBundle->metaGlobalVars->mainEntityOfPage ?? $config['type'] ?? 'WebPage';
+                        $config['key'] = 'mainEntityOfPage';
+                        $schemaType = MetaValueHelper::parseString($schemaType);
+                        $generalContainer->data['mainEntityOfPage'] = MetaJsonLd::create($schemaType, $config);
+                    }
                     $this->addMetaBundleToContainers($metaBundle);
                 }
             }
