@@ -197,6 +197,7 @@ class SeoEvent implements SeoElementInterface
     {
         $query = Event::find()
             ->setCalendar($metaBundle->sourceHandle)
+            ->setLoadOccurrences(false)
             ->siteId($metaBundle->sourceSiteId)
             ->limit($metaBundle->metaSitemapVars->sitemapLimit)
             ->enabledForSite(true);
