@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.25 - 2019.09.18
+### Changed
+* Fixed an issue where `mainEntityOfPage` overrides via an SEO Settings field could be the wrong model type
+
 ## 3.2.24 - 2019.09.09
 ### Changed
 * Fixed a potential XSS issue if you used `{% do seomatic.helper.paginate() %}` and there was a malformed query string
