@@ -785,10 +785,16 @@ class MetaContainers extends Component
                         /** @var MetaJsonLd $jsonLdModel */
                         $jsonLdModel = $generalContainer->data['mainEntityOfPage'];
                         $config = $jsonLdModel->getAttributes();
-                        $schemaType = $metaBundle->metaGlobalVars->mainEntityOfPage ?? $config['type'] ?? 'WebPage';
-                        $config['key'] = 'mainEntityOfPage';
-                        $schemaType = MetaValueHelper::parseString($schemaType);
-                        $generalContainer->data['mainEntityOfPage'] = MetaJsonLd::create($schemaType, $config);
+                        $schemaType = $metaBundle->metaGlobalVars->mainEntityOfPage ?? $config['type'] ?? null;
+                        // If the schemaType is '' we should fall back on whatever the mainEntityOfPage already is
+                        if (empty($schemaType)) {
+                            $schemaType = null;
+                        }
+                        if ($schemaType !== null) {
+                            $config['key'] = 'mainEntityOfPage';
+                            $schemaType = MetaValueHelper::parseString($schemaType);
+                            $generalContainer->data['mainEntityOfPage'] = MetaJsonLd::create($schemaType, $config);
+                        }
                     }
                     $this->addMetaBundleToContainers($metaBundle);
                 }
