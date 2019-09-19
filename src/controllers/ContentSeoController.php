@@ -121,7 +121,6 @@ class ContentSeoController extends Controller
                     if ($seoElement !== null) {
                         $query = $seoElement::sitemapElementsQuery($metaBundle);
                         $entries = $query->count();
-                        Craft::error('shit: ' . print_r($entries, true), __METHOD__);
                     }
                     $dataItem['entries'] = $entries;
                     // Basic configuration setup
