@@ -3,6 +3,7 @@
 ## 3.2.26 - 2019.09.24
 ### Changed
 * Fixed an issue where SEOmatic would put multiple sitemap entries for recurring Solspace Calendar events
+* Removed errant logging in the Content SEO controller
 
 ## 3.2.25 - 2019.09.18
 ### Changed
