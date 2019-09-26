@@ -390,6 +390,18 @@ The Plugin Settings lets you control various SEOmatic settings globally (across 
 
 #### Multi-Environment Config Settings
 
+SEOmatic does different things depending on the SEOmatic environment it is running in. This is a separate setting from your Craft environment, because you can name those anything you like.
+
+SEOmatic needs some way to map what you call your local, staging, and production environments to a normalized representation.
+
+In `local` dev and `staging` environments, the following things change:
+
+1. `<meta name="robots">` tags are rendered with `none` to prevent Google from indexing the pages
+2. The `robots.txt` page is rendered to disallow all indexing
+3. No scripts are loaded on the page, to prevent errant data being sent to endpoints
+
+You can override all of these things as you see fit, but they are automatically changed in this manner to help protect you from having pages indexed or sending data from environments where you should not.
+
 If you're using a multi-environment config, you can map your environment settings using SEOmatic's `config.php` something like this:
 
 ```php
