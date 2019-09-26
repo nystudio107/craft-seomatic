@@ -238,7 +238,8 @@ class MetaContainers extends Component
     {
         Craft::beginProfile('MetaContainers::includeScriptBodyHtml', __METHOD__);
         $dependency = $this->containerDependency;
-        $uniqueKey = $dependency->tags[3].$bodyPosition ?? $bodyPosition;
+        $uniqueKey = $dependency->tags[3] ?? $this::GLOBALS_CACHE_KEY;
+        $uniqueKey .= $bodyPosition;
         $scriptData = Craft::$app->getCache()->getOrSet(
             $this::GLOBALS_CACHE_KEY.$uniqueKey,
             function () use ($uniqueKey, $bodyPosition) {
@@ -268,7 +269,9 @@ class MetaContainers extends Component
         );
         // Output the script HTML
         foreach ($scriptData as $script) {
-            echo $script;
+            if (is_string($script) && !empty($script)) {
+                echo $script;
+            }
         }
         Craft::endProfile('MetaContainers::includeScriptBodyHtml', __METHOD__);
     }
