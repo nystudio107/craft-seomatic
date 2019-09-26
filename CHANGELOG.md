@@ -1,5 +1,13 @@
 # SEOmatic Changelog
 
+## 3.2.26 - 2019.09.26
+### Changed
+* Fixed an issue where SEOmatic would put multiple sitemap entries for recurring Solspace Calendar events
+* Removed errant logging in the Content SEO controller
+* Fixed an issue where the script tag caches could be outputting something other than a string
+* Updated the Breadcrumbs format to match Google's new format requirements
+* More specifically list what happens in `local` dev & `staging` environments
+
 ## 3.2.25 - 2019.09.18
 ### Changed
 * Fixed an issue where `mainEntityOfPage` overrides via an SEO Settings field could be the wrong model type
