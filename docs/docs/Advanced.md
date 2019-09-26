@@ -187,10 +187,8 @@ Which will return the data in array form:
             "itemListElement": [
                 {
                     "@type": "ListItem",
-                    "item": {
-                        "@id": "http://craft3.test/",
-                        "name": "Homepage"
-                    },
+                    "name": "Homepage",
+                    "item": "http://craft3.test/",
                     "position": 1
                 }
             ],

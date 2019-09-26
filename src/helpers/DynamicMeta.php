@@ -358,19 +358,17 @@ class DynamicMeta
             }
             $listItem = MetaJsonLd::create('ListItem', [
                 'position' => $position,
-                'item' => [
-                    '@id' => $id,
-                    'name' => $element->title,
-                ],
+                'name' => $element->title,
+                'item' => $id,
+                '@id' => $id,
             ]);
             $crumbs->itemListElement[] = $listItem;
         } else {
             $crumbs->itemListElement[] = MetaJsonLd::create('ListItem', [
                 'position' => $position,
-                'item' => [
-                    '@id' => $siteUrl,
-                    'name' => 'Homepage',
-                ],
+                'name' => 'Homepage',
+                'item' => $siteUrl,
+                '@id' => $siteUrl,
             ]);
         }
         // Build up the segments, and look for elements that match

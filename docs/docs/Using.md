@@ -538,7 +538,7 @@ Display the breadcrumbs on the page:
 ```twig
 {% set crumbList = seomatic.jsonLd.get('breadcrumbList').itemListElement %}
 {% for crumb in crumbList %}
-    <a href="{{ crumb.item['@id'] }}">{{ crumb.item['name'] }}</a>
+    <a href="{{ crumb.item }}">{{ crumb.name }}</a>
     {% if not loop.last %}&raquo;{% endif %}
 {% endfor %}
 ```
@@ -552,24 +552,21 @@ To entirely replace the existing **BreadcrumbList** on a page:
     'itemListElement': [
         {
             'type': 'ListItem',
-            'item': {
-                '@id': 'http://example.com/',
-                'name': 'Homepage'
-            },
+            'position': 1,
+            'name': 'Homepage',
+            'item': 'http://example.com/'
         },
         {
             'type': 'ListItem',
-            'item': {
-                '@id': 'http://example.com/blog/',
-                'name': 'Our blog'
-            },
+            'position': 2,
+            'name': 'Our blog',
+            'item': 'http://example.com/blog/'
         },
         {
             'type': 'ListItem',
-            'item': {
-                '@id': 'http://example.com/blog/tech',
-                'name': 'Technology blogs'
-            },
+            'position': 3,
+            'name': 'Technology blogs',
+            'item': 'http://example.com/blog/tech'
         },
     ]
 }) %}
