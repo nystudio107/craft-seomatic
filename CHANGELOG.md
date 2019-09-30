@@ -2,6 +2,7 @@
 
 ## 3.2.27 - 2019.10.01
 ### Changed
+* Fixed an issue with breadcrumbs beyond the first one
 
 ## 3.2.26 - 2019.09.26
 ### Changed
