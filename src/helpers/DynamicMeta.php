@@ -400,10 +400,9 @@ class DynamicMeta
                 }
                 $crumbs->itemListElement[] = MetaJsonLd::create('ListItem', [
                     'position' => $position,
-                    'item' => [
-                        '@id' => $id,
-                        'name' => $element->title,
-                    ],
+                    'name' => $element->title,
+                    'item' => $id,
+                    '@id' => $id,
                 ]);
             }
             $uri .= '/';
