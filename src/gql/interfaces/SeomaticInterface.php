@@ -19,6 +19,11 @@ use craft\gql\GqlEntityRegistry;
 
 use GraphQL\Type\Definition\InterfaceType;
 use GraphQL\Type\Definition\Type;
+use nystudio107\seomatic\models\MetaJsonLdContainer;
+use nystudio107\seomatic\models\MetaLinkContainer;
+use nystudio107\seomatic\models\MetaScriptContainer;
+use nystudio107\seomatic\models\MetaTagContainer;
+use nystudio107\seomatic\models\MetaTitleContainer;
 
 /**
  * Class SeomaticInterface
@@ -29,6 +34,17 @@ use GraphQL\Type\Definition\Type;
  */
 class SeomaticInterface extends BaseInterfaceType
 {
+    // Constants
+    // =========================================================================
+
+    const GRAFT_QL_FIELDS = [
+        'metaTitleContainer' => MetaTitleContainer::CONTAINER_TYPE,
+        'metaTagContainer' => MetaTagContainer::CONTAINER_TYPE,
+        'metaLinkContainer' => MetaLinkContainer::CONTAINER_TYPE,
+        'metaScriptContainer' => MetaScriptContainer::CONTAINER_TYPE,
+        'metaJsonLdContainer' => MetaJsonLdContainer::CONTAINER_TYPE,
+    ];
+
     /**
      * @inheritdoc
      */
@@ -77,67 +93,14 @@ class SeomaticInterface extends BaseInterfaceType
      */
     public static function getFieldDefinitions(): array
     {
-        return array_merge(parent::getFieldDefinitions(), [
-            'id' => [
-                'name' => 'id',
-                'type' => Type::int(),
-                'description' => 'The id of the redirect.',
-            ],
-            'siteId' => [
-                'name' => 'siteId',
-                'type' => Type::int(),
-                'description' => 'The siteId of the redirect (0 or null for all sites).',
-            ],
-            'associatedElementId' => [
-                'name' => 'associatedElementId',
-                'type' => Type::int(),
-                'description' => 'The id of the Element associated with this redirect (unused/vestigial).',
-            ],
-            'enabled' => [
-                'name' => 'enabled',
-                'type' => Type::boolean(),
-                'description' => 'Whether the redirect is enabled or not.',
-            ],
-            'redirectSrcUrl' => [
-                'name' => 'redirectSrcUrl',
+        $fields = [];
+        foreach (self::GRAFT_QL_FIELDS as $key => $value) {
+            $fields[$key] = [
+                'name' => $key,
                 'type' => Type::string(),
-                'description' => 'The unparsed URL pattern that Retour should match.',
-            ],
-            'redirectSrcUrlParsed' => [
-                'name' => 'redirectSrcUrlParsed',
-                'type' => Type::string(),
-                'description' => 'The parsed URL pattern that Retour should match.',
-            ],
-            'redirectSrcMatch' => [
-                'name' => 'redirectSrcMatch',
-                'type' => Type::string(),
-                'description' => 'Should the legacy URL be matched by path or by full URL?',
-            ],
-            'redirectMatchType' => [
-                'name' => 'redirectMatchType',
-                'type' => Type::string(),
-                'description' => 'Whether an `exactmatch` or `regexmatch` should be used when matching the URL.',
-            ],
-            'redirectDestUrl' => [
-                'name' => 'redirectDestUrl',
-                'type' => Type::string(),
-                'description' => 'The URL that should be redirected to.',
-            ],
-            'redirectHttpCode' => [
-                'name' => 'redirectHttpCode',
-                'type' => Type::int(),
-                'description' => 'The http status code that should be used for the redirect.',
-            ],
-            'hitCount' => [
-                'name' => 'hitCount',
-                'type' => Type::int(),
-                'description' => 'The number of times this redirect has been hit.',
-            ],
-            'hitLastTime' => [
-                'name' => 'hitLastTime',
-                'type' => Type::string(),
-                'description' => 'A datetime string of when this redirect was last hit.',
-            ],
-        ]);
+                'description' => 'The '.$value.' SEOmatic container.',
+            ];
+        }
+        return $fields;
     }
 }
