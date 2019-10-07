@@ -32,12 +32,17 @@ class SeomaticArguments extends Arguments
             'uri' => [
                 'name' => 'uri',
                 'type' => Type::string(),
-                'description' => 'The URI to resolve a redirect for.'
+                'description' => 'The URI to resolve the SEOmatic metdata for.'
             ],
             'siteId' => [
                 'name' => 'siteId',
                 'type' => Type::int(),
-                'description' => 'The siteId to resolve a redirect for.'
+                'description' => 'The siteId to resolve the SEOmatic metdata for.'
+            ],
+            'asArray' => [
+                'name' => 'asArray',
+                'type' => Type::boolean(),
+                'description' => 'Whether the meta items should be returned as an array or as pre-rendered tag text.'
             ],
         ];
     }
