@@ -158,16 +158,16 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
                         $metaBundle->sourceHandle,
                         $metaBundle->sourceSiteId
                     );
-                    $lines[] = '  <sitemap>';
-                    $lines[] = '    <loc>';
-                    $lines[] = '      '.Html::encode($sitemapUrl);
-                    $lines[] = '    </loc>';
+                    $lines[] = '<sitemap>';
+                    $lines[] = '<loc>';
+                    $lines[] = Html::encode($sitemapUrl);
+                    $lines[] = '</loc>';
                     if ($metaBundle->sourceDateUpdated !== null) {
-                        $lines[] = '    <lastmod>';
-                        $lines[] = '      '.$metaBundle->sourceDateUpdated->format(\DateTime::W3C);
-                        $lines[] = '    </lastmod>';
+                        $lines[] = '<lastmod>';
+                        $lines[] = $metaBundle->sourceDateUpdated->format(\DateTime::W3C);
+                        $lines[] = '</lastmod>';
                     }
-                    $lines[] = '  </sitemap>';
+                    $lines[] = '</sitemap>';
                 }
             }
             // Custom sitemap entries
@@ -181,7 +181,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             // Sitemap index closing tag
             $lines[] = '</sitemapindex>';
 
-            return implode("\r\n", $lines);
+            return implode('', $lines);
         }, Seomatic::$cacheDuration, $dependency);
     }
 

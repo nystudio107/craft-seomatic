@@ -143,20 +143,20 @@ class GenerateSitemap extends BaseJob
                         $url = '';
                     }
                     $dateUpdated = $element->dateUpdated ?? $element->dateCreated ?? new \DateTime;
-                    $lines[] = '  <url>';
+                    $lines[] = '<url>';
                     // Standard sitemap key/values
-                    $lines[] = '    <loc>';
-                    $lines[] = '      '.Html::encode($url);
-                    $lines[] = '    </loc>';
-                    $lines[] = '    <lastmod>';
-                    $lines[] = '      '.$dateUpdated->format(\DateTime::W3C);
-                    $lines[] = '    </lastmod>';
-                    $lines[] = '    <changefreq>';
-                    $lines[] = '      '.$metaBundle->metaSitemapVars->sitemapChangeFreq;
-                    $lines[] = '    </changefreq>';
-                    $lines[] = '    <priority>';
-                    $lines[] = '      '.$metaBundle->metaSitemapVars->sitemapPriority;
-                    $lines[] = '    </priority>';
+                    $lines[] = '<loc>';
+                    $lines[] = Html::encode($url);
+                    $lines[] = '</loc>';
+                    $lines[] = '<lastmod>';
+                    $lines[] = $dateUpdated->format(\DateTime::W3C);
+                    $lines[] = '</lastmod>';
+                    $lines[] = '<changefreq>';
+                    $lines[] = $metaBundle->metaSitemapVars->sitemapChangeFreq;
+                    $lines[] = '</changefreq>';
+                    $lines[] = '<priority>';
+                    $lines[] = $metaBundle->metaSitemapVars->sitemapPriority;
+                    $lines[] = '</priority>';
                     // Handle alternate URLs if this is multi-site
                     if ($multiSite && $metaBundle->metaSitemapVars->sitemapAltLinks) {
                         /** @var  $altSiteSettings */
@@ -184,7 +184,7 @@ class GenerateSitemap extends BaseJob
                                         // Make sure this entry isn't disabled
                                         $this->combineFieldSettings($altElement, $altMetaBundle);
                                         if ($altMetaBundle->metaSitemapVars->sitemapUrls) {
-                                            $lines[] = '    <xhtml:link rel="alternate"'
+                                            $lines[] = '<xhtml:link rel="alternate"'
                                                 .' hreflang="'.$altSiteSettings['language'].'"'
                                                 .' href="'.Html::encode($altElement->url).'"'
                                                 .' />';
@@ -234,7 +234,7 @@ class GenerateSitemap extends BaseJob
                             }
                         }
                     }
-                    $lines[] = '  </url>';
+                    $lines[] = '</url>';
                 }
                 // Include links to any known file types in the assets fields
                 if ($metaBundle->metaSitemapVars->sitemapFiles) {
@@ -288,7 +288,7 @@ class GenerateSitemap extends BaseJob
                 SitemapTemplate::SITEMAP_CACHE_TAG.$this->handle.$this->siteId,
             ],
         ]);
-        $lines = implode("\r\n", $lines);
+        $lines = implode('', $lines);
         // Cache sitemap cache; we use this instead of Seomatic::$cacheDuration because for
         // Control Panel requests, we set Seomatic::$cacheDuration = 1 so that they are never
         // cached
@@ -372,39 +372,39 @@ class GenerateSitemap extends BaseJob
         if ((bool)$asset->enabledForSite && $asset->getUrl() !== null) {
             switch ($asset->kind) {
                 case 'image':
-                    $lines[] = '    <image:image>';
-                    $lines[] = '      <image:loc>';
-                    $lines[] = '        '.Html::encode(UrlHelper::absoluteUrlWithProtocol($asset->getUrl()));
-                    $lines[] = '      </image:loc>';
+                    $lines[] = '<image:image>';
+                    $lines[] = '<image:loc>';
+                    $lines[] = Html::encode(UrlHelper::absoluteUrlWithProtocol($asset->getUrl()));
+                    $lines[] = '</image:loc>';
                     // Handle the dynamic field => property mappings
                     foreach ($metaBundle->metaSitemapVars->sitemapImageFieldMap as $row) {
                         $fieldName = $row['field'] ?? '';
                         $propName = $row['property'] ?? '';
                         if (!empty($asset[$fieldName]) && !empty($propName)) {
-                            $lines[] = '      <image:'.$propName.'>';
-                            $lines[] = '        '.Html::encode($asset[$fieldName]);
-                            $lines[] = '      </image:'.$propName.'>';
+                            $lines[] = '<image:'.$propName.'>';
+                            $lines[] = Html::encode($asset[$fieldName]);
+                            $lines[] = '</image:'.$propName.'>';
                         }
                     }
-                    $lines[] = '    </image:image>';
+                    $lines[] = '</image:image>';
                     break;
 
                 case 'video':
-                    $lines[] = '    <video:video>';
-                    $lines[] = '      <video:content_loc>';
-                    $lines[] = '        '.Html::encode(UrlHelper::absoluteUrlWithProtocol($asset->getUrl()));
-                    $lines[] = '      </video:content_loc>';
+                    $lines[] = '<video:video>';
+                    $lines[] = '<video:content_loc>';
+                    $lines[] = Html::encode(UrlHelper::absoluteUrlWithProtocol($asset->getUrl()));
+                    $lines[] = '</video:content_loc>';
                     // Handle the dynamic field => property mappings
                     foreach ($metaBundle->metaSitemapVars->sitemapVideoFieldMap as $row) {
                         $fieldName = $row['field'] ?? '';
                         $propName = $row['property'] ?? '';
                         if (!empty($asset[$fieldName]) && !empty($propName)) {
-                            $lines[] = '      <video:'.$propName.'>';
-                            $lines[] = '        '.Html::encode($asset[$fieldName]);
-                            $lines[] = '      </video:'.$propName.'>';
+                            $lines[] = '<video:'.$propName.'>';
+                            $lines[] = Html::encode($asset[$fieldName]);
+                            $lines[] = '</video:'.$propName.'>';
                         }
                     }
-                    $lines[] = '    </video:video>';
+                    $lines[] = '</video:video>';
                     break;
             }
         }
@@ -420,20 +420,20 @@ class GenerateSitemap extends BaseJob
         if ((bool)$asset->enabledForSite && $asset->getUrl() !== null) {
             if (\in_array($asset->kind, SitemapTemplate::FILE_TYPES, false)) {
                 $dateUpdated = $asset->dateUpdated ?? $asset->dateCreated ?? new \DateTime;
-                $lines[] = '  <url>';
-                $lines[] = '    <loc>';
-                $lines[] = '      '.Html::encode(UrlHelper::absoluteUrlWithProtocol($asset->getUrl()));
-                $lines[] = '    </loc>';
-                $lines[] = '    <lastmod>';
-                $lines[] = '      '.$dateUpdated->format(\DateTime::W3C);
-                $lines[] = '    </lastmod>';
-                $lines[] = '    <changefreq>';
-                $lines[] = '      '.$metaBundle->metaSitemapVars->sitemapChangeFreq;
-                $lines[] = '    </changefreq>';
-                $lines[] = '    <priority>';
-                $lines[] = '      '.$metaBundle->metaSitemapVars->sitemapPriority;
-                $lines[] = '    </priority>';
-                $lines[] = '  </url>';
+                $lines[] = '<url>';
+                $lines[] = '<loc>';
+                $lines[] = Html::encode(UrlHelper::absoluteUrlWithProtocol($asset->getUrl()));
+                $lines[] = '</loc>';
+                $lines[] = '<lastmod>';
+                $lines[] = $dateUpdated->format(\DateTime::W3C);
+                $lines[] = '</lastmod>';
+                $lines[] = '<changefreq>';
+                $lines[] = $metaBundle->metaSitemapVars->sitemapChangeFreq;
+                $lines[] = '</changefreq>';
+                $lines[] = '<priority>';
+                $lines[] = $metaBundle->metaSitemapVars->sitemapPriority;
+                $lines[] = '</priority>';
+                $lines[] = '</url>';
             }
         }
     }
