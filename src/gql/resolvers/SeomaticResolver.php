@@ -50,11 +50,12 @@ class SeomaticResolver extends Resolver
         $uri = trim($uri === '/' ? '__home__' : $uri, '/');
 
         $result = ContainerHelper::getContainerArrays(
-            SeomaticInterface::GRAFT_QL_FIELDS,
+            array_values(SeomaticInterface::GRAPH_QL_FIELDS),
             $uri,
             $siteId,
             $asArray
         );
+
         foreach ($result as $key => $value) {
             if (!empty($value) && is_array($value)) {
                 $result[$key] = Json::encode($value);
