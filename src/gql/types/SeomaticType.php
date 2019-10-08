@@ -43,7 +43,7 @@ class SeomaticType extends ObjectType
      */
     protected function resolve($source, $arguments, $context, ResolveInfo $resolveInfo)
     {
-        $fieldName = $resolveInfo->fieldName;
+        $fieldName = SeomaticInterface::GRAPH_QL_FIELDS[$resolveInfo->fieldName];
 
         return $source[$fieldName];
     }
