@@ -37,7 +37,7 @@ class SeomaticInterface extends BaseInterfaceType
     // Constants
     // =========================================================================
 
-    const GRAFT_QL_FIELDS = [
+    const GRAPH_QL_FIELDS = [
         'metaTitleContainer' => MetaTitleContainer::CONTAINER_TYPE,
         'metaTagContainer' => MetaTagContainer::CONTAINER_TYPE,
         'metaLinkContainer' => MetaLinkContainer::CONTAINER_TYPE,
@@ -94,13 +94,14 @@ class SeomaticInterface extends BaseInterfaceType
     public static function getFieldDefinitions(): array
     {
         $fields = [];
-        foreach (self::GRAFT_QL_FIELDS as $key => $value) {
+        foreach (self::GRAPH_QL_FIELDS as $key => $value) {
             $fields[$key] = [
                 'name' => $key,
                 'type' => Type::string(),
                 'description' => 'The '.$value.' SEOmatic container.',
             ];
         }
+
         return $fields;
     }
 }
