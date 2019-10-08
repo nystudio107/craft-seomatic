@@ -105,6 +105,7 @@ class Container
                     }
                 }
 
+
                 return $result;
             },
             Seomatic::$cacheDuration,
