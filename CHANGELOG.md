@@ -1,8 +1,9 @@
 # SEOmatic Changelog
 
-## 3.2.28 - 2019.10.06
+## 3.2.28 - 2019.10.08
 ### Changed
 * The sitemaps and sitemap indexes that SEOmatic generates are now automatically minified
+* Added native GraphQL support
 
 ## 3.2.27 - 2019.09.30
 ### Changed
