@@ -35,6 +35,11 @@ class Dependency
     // Static Methods
     // =========================================================================
 
+    /**
+     * @param $dependencies
+     *
+     * @return bool
+     */
     public static function validateDependencies($dependencies): bool
     {
         // No dependencies means we validate

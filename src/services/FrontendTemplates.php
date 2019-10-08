@@ -184,10 +184,12 @@ class FrontendTemplates extends Component
     public function getFrontendTemplateByKey(string $key, string $type = '')
     {
         $frontendTemplate = null;
-        /** @var  $frontendTemplate EditableTemplate */
-        foreach ($this->frontendTemplateContainer->data as $frontendTemplate) {
-            if ($key === $frontendTemplate->handle) {
-                return $frontendTemplate;
+        if (!empty($this->frontendTemplateContainer) && !empty($this->frontendTemplateContainer->data)) {
+            /** @var  $frontendTemplate EditableTemplate */
+            foreach ($this->frontendTemplateContainer->data as $frontendTemplate) {
+                if ($key === $frontendTemplate->handle) {
+                    return $frontendTemplate;
+                }
             }
         }
 
