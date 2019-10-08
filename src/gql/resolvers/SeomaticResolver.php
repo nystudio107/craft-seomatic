@@ -13,14 +13,11 @@ namespace nystudio107\seomatic\gql\resolvers;
 
 use craft\base\Element;
 use craft\gql\base\Resolver;
-use craft\helpers\Gql as GqlHelper;
 
 use craft\helpers\Json;
-use craft\helpers\UrlHelper;
 use GraphQL\Type\Definition\ResolveInfo;
 use nystudio107\seomatic\gql\interfaces\SeomaticInterface;
 use nystudio107\seomatic\helpers\Container as ContainerHelper;
-use nystudio107\seomatic\Seomatic;
 
 /**
  * Class SeomaticResolver
@@ -55,9 +52,8 @@ class SeomaticResolver extends Resolver
             $siteId,
             $asArray
         );
-
         foreach ($result as $key => $value) {
-            if (!empty($value) && is_array($value)) {
+            if (isset($value) && is_array($value)) {
                 $result[$key] = Json::encode($value);
             }
         }
