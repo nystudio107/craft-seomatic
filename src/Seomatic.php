@@ -648,6 +648,8 @@ class Seomatic extends Plugin
      */
     protected function installCpEventListeners()
     {
+        // Load the frontend template containers
+        self::$plugin->frontendTemplates->loadFrontendTemplateContainers();
         // Handler: UrlManager::EVENT_REGISTER_CP_URL_RULES
         Event::on(
             UrlManager::class,
