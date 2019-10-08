@@ -9,8 +9,6 @@
 
 namespace nystudio107\seomatic\listeners;
 
-use Craft;
-use craft\helpers\Json;
 use nystudio107\seomatic\helpers\Container as ContainerHelper;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 use nystudio107\seomatic\models\MetaLinkContainer;
@@ -19,6 +17,7 @@ use nystudio107\seomatic\models\MetaTitleContainer;
 use nystudio107\seomatic\models\MetaTagContainer;
 
 use craft\base\Element;
+use craft\helpers\Json;
 
 use markhuot\CraftQL\Events\AlterSchemaFields;
 use markhuot\CraftQL\Builders\Field as FieldBuilder;
@@ -65,7 +64,7 @@ class GetCraftQLSchema
                         $data['siteId'],
                         $data['asArray']
                     );
-                    if (!empty($result[$containerType]) && is_array($result[$containerType])) {
+                    if (isset($result[$containerType]) && is_array($result[$containerType])) {
                         $result[$containerType] = Json::encode($result[$containerType]);
                     }
 
