@@ -13,6 +13,8 @@ namespace nystudio107\seomatic;
 
 use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
 use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
+use nystudio107\seomatic\gql\interfaces\SeomaticInterface;
+use nystudio107\seomatic\gql\queries\SeomaticQuery;
 use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\listeners\GetCraftQLSchema;
@@ -46,12 +48,15 @@ use craft\events\DeleteTemplateCachesEvent;
 use craft\events\PluginEvent;
 use craft\events\RegisterCacheOptionsEvent;
 use craft\events\RegisterComponentTypesEvent;
+use craft\events\RegisterGqlQueriesEvent;
+use craft\events\RegisterGqlTypesEvent;
 use craft\events\RegisterPreviewTargetsEvent;
 use craft\events\RegisterUrlRulesEvent;
 use craft\events\RegisterUserPermissionsEvent;
 use craft\helpers\StringHelper;
 use craft\services\Elements;
 use craft\services\Fields;
+use craft\services\Gql;
 use craft\services\Plugins;
 use craft\services\TemplateCaches;
 use craft\services\UserPermissions;
@@ -175,6 +180,12 @@ class Seomatic extends Plugin
      */
     public static $craft32 = false;
 
+    /**
+     * @var bool
+     */
+    public static $craft33 = false;
+
+
     // Static Methods
     // =========================================================================
 
@@ -230,6 +241,7 @@ class Seomatic extends Plugin
         // Version helpers
         self::$craft31 = version_compare(Craft::$app->getVersion(), '3.1', '>=');
         self::$craft32 = version_compare(Craft::$app->getVersion(), '3.2', '>=');
+        self::$craft33 = version_compare(Craft::$app->getVersion(), '3.3', '>=');
         $this->name = self::$settings->pluginName;
         // Install our event listeners
         $this->installEventListeners();
@@ -559,6 +571,35 @@ class Seomatic extends Plugin
                 }
             );
         }
+        if (self::$craft33) {
+            // Handler: Gql::EVENT_REGISTER_GQL_TYPES
+            Event::on(
+                Gql::class,
+                Gql::EVENT_REGISTER_GQL_TYPES,
+                function (RegisterGqlTypesEvent $event) {
+                    Craft::debug(
+                        'Gql::EVENT_REGISTER_GQL_TYPES',
+                        __METHOD__
+                    );
+                    $event->types[] = SeomaticInterface::class;
+                }
+            );
+            // Handler: Gql::EVENT_REGISTER_GQL_QUERIES
+            Event::on(
+                Gql::class,
+                Gql::EVENT_REGISTER_GQL_QUERIES,
+                function (RegisterGqlQueriesEvent $event) {
+                    Craft::debug(
+                        'Gql::EVENT_REGISTER_GQL_QUERIES',
+                        __METHOD__
+                    );
+                    $queries = SeomaticQuery::getQueries();
+                    foreach ($queries as $key => $value) {
+                        $event->queries[$key] = $value;
+                    }
+                }
+            );
+        }
         // CraftQL Support
         if (class_exists(CraftQL::class)) {
             Event::on(
@@ -607,6 +648,8 @@ class Seomatic extends Plugin
      */
     protected function installCpEventListeners()
     {
+        // Load the frontend template containers
+        self::$plugin->frontendTemplates->loadFrontendTemplateContainers();
         // Handler: UrlManager::EVENT_REGISTER_CP_URL_RULES
         Event::on(
             UrlManager::class,
