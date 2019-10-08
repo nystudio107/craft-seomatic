@@ -32,6 +32,17 @@ class Container
 
     // Static Methods
     // =========================================================================
+
+    /**
+     * Return an array of meta containers for the given array of keys
+     *
+     * @param array    $containerKeys
+     * @param string   $uri
+     * @param int|null $siteId
+     * @param bool     $asArray
+     *
+     * @return array
+     */
     public static function getContainerArrays(
         array $containerKeys,
         string $uri,
@@ -99,7 +110,7 @@ class Container
             Seomatic::$cacheDuration,
             $dependency
         );
-
+        
         return $result;
     }
 }
