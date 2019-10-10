@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.29 - 2019.10.11
+### Changed
+* If an section has its robots set to `none` or `noindex` in Content SEO, don't add it to the sitemap index
+
 ## 3.2.28 - 2019.10.08
 ### Changed
 * The sitemaps and sitemap indexes that SEOmatic generates are now automatically minified
