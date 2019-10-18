@@ -129,6 +129,11 @@ class Settings extends VarsModel
     public $addXDefaultHrefLang = true;
 
     /**
+     * @var bool Should the Canonical URL be automatically lower-cased?
+     */
+    public $lowercaseCanonicalUrl = true;
+
+    /**
      * @var bool Should the meta generator tag and X-Powered-By header be included?
      */
     public $generatorEnabled = true;
@@ -185,27 +190,27 @@ class Settings extends VarsModel
     }
 
     /**
-     * @return array
+     * @inheritdoc
      */
     public function behaviors()
     {
-        $craft31Behaviors = [];
+        // Keep any parent behaviors
+        $behaviors = parent::behaviors();
+        // Add in the AttributeTypecastBehavior
+        $behaviors['typecast'] = [
+            'class' => AttributeTypecastBehavior::class,
+            // 'attributeTypes' will be composed automatically according to `rules()`
+        ];
+        // If we're running Craft 3.1 or later, add in the EnvAttributeParserBehavior
         if (Seomatic::$craft31) {
-            $craft31Behaviors = [
-                'parser' => [
-                    'class' => EnvAttributeParserBehavior::class,
-                    'attributes' => [
-                        'environment',
-                    ],
-                ]
+            $behaviors['parser'] = [
+                'class' => EnvAttributeParserBehavior::class,
+                'attributes' => [
+                    'environment',
+                ],
             ];
         }
 
-        return array_merge($craft31Behaviors, [
-            'typecast' => [
-                'class' => AttributeTypecastBehavior::class,
-                // 'attributeTypes' will be composed automatically according to `rules()`
-            ],
-        ]);
+        return $behaviors;
     }
 }

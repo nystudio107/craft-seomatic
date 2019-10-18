@@ -246,7 +246,17 @@
             warning: configWarning("addXDefaultHrefLang", "seomatic"),
             errors: settings.getErrors("addXDefaultHrefLang"),
         }) }}
-
+    
+        {{ forms.lightswitchField({
+            label: "Lowercase Canonical URL"|t("seomatic")|md,
+            instructions: "Should the Canonical URL be automatically lower-cased?"|t("seomatic"),
+            id: "lowercaseCanonicalUrl",
+            name: "lowercaseCanonicalUrl",
+            on: settings.lowercaseCanonicalUrl,
+            warning: configWarning("lowercaseCanonicalUrl", "seomatic"),
+            errors: settings.getErrors("lowercaseCanonicalUrl"),
+        }) }}
+    
         {{ forms.lightswitchField({
             label: "Generator Enabled"|t("seomatic"),
             instructions: "Controls whether SEOmatic will include the meta `generator` tag and `X-Powered-By` header."|t("seomatic"),

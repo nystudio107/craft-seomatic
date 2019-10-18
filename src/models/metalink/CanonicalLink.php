@@ -16,6 +16,7 @@ use nystudio107\seomatic\helpers\UrlHelper;
 
 use Craft;
 use craft\helpers\StringHelper;
+use nystudio107\seomatic\Seomatic;
 
 /**
  * @author    nystudio107
@@ -70,9 +71,10 @@ class CanonicalLink extends MetaLink
                 return false;
             }
             if (!empty($data['href'])) {
-                $url = UrlHelper::absoluteUrlWithProtocol(
-                    StringHelper::toLowerCase($data['href'])
-                );
+                if (Seomatic::$settings->lowercaseCanonicalUrl) {
+                    $data['href'] = StringHelper::toLowerCase($data['href']);
+                }
+                $url = UrlHelper::absoluteUrlWithProtocol($data['href']);
                 // The URL should be stripped of its query string already, but because
                 // Craft adds the `token` URL param back in via UrlHelper, strip it again
                 $url = preg_replace('/\?.*/', '', $url);
