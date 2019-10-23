@@ -70,12 +70,7 @@ class SeomaticInterface extends BaseInterfaceType
                 return GqlEntityRegistry::getEntity(SeomaticGenerator::getName());
             },
         ]));
-
-        foreach (SeomaticGenerator::generateTypes() as $typeName => $generatedType) {
-            TypeLoader::registerType($typeName, function () use ($generatedType) {
-                return $generatedType;
-            });
-        }
+        SeomaticGenerator::generateTypes();
 
         return $type;
     }
