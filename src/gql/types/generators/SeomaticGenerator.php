@@ -28,12 +28,12 @@ use craft\gql\TypeLoader;
  */
 class SeomaticGenerator implements GeneratorInterface
 {
-
     /**
      * @inheritdoc
      */
     public static function generateTypes($context = null): array
     {
+        $gqlTypes = [];
         $seomaticFields = SeomaticInterface::getFieldDefinitions();
         $seomaticArgs = SeomaticArguments::getArguments();
         $typeName = self::getName();
@@ -49,11 +49,12 @@ class SeomaticGenerator implements GeneratorInterface
                 'description' => 'This entity has all the SEOmatic fields',
             ]));
 
+        $gqlTypes[$typeName] = $seomaticType;
         TypeLoader::registerType($typeName, function () use ($seomaticType) {
             return $seomaticType;
         });
 
-        return [$seomaticType];
+        return $gqlTypes;
     }
 
     /**
@@ -61,6 +62,6 @@ class SeomaticGenerator implements GeneratorInterface
      */
     public static function getName($context = null): string
     {
-        return 'seomatic';
+        return 'SeomaticType';
     }
 }

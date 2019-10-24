@@ -52,7 +52,7 @@ class Thing extends MetaJsonLd
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'JsonLdType';
+    static public $schemaTypeExtends = 'MetaJsonLd';
 
     /**
      * The Schema.org composed Property Names
