@@ -90,6 +90,9 @@ return [
     // Whether to dynamically include the hreflang tags
     'addHrefLang' => true,
 
+    // Should the Canonical URL be automatically lower-cased?
+    'lowercaseCanonicalUrl' => true,
+
     // Should the meta generator tag and X-Powered-By header be included?
     'generatorEnabled' => true,
 
