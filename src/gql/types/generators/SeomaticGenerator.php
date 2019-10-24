@@ -28,7 +28,6 @@ use craft\gql\TypeLoader;
  */
 class SeomaticGenerator implements GeneratorInterface
 {
-
     /**
      * @inheritdoc
      */
