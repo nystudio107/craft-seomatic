@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
+use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
 
 use Craft;
 use yii\caching\TagDependency;
@@ -90,6 +91,10 @@ class MetaTagContainer extends MetaContainer
             Seomatic::$cacheDuration,
             $dependency
         );
+        // Invalidate the cache we just created if there were pending image transforms in it
+        if (ImageTransformHelper::$pendingImageTransforms) {
+            TagDependency::invalidate($cache, $dependency->tags[3]);
+        }
         // Register the tags
         foreach ($tagData as $config) {
             Seomatic::$view->registerMetaTag($config);

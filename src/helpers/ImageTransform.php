@@ -16,6 +16,7 @@ use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
 
 use Craft;
 use craft\elements\Asset;
+use craft\helpers\StringHelper;
 use craft\models\AssetTransform;
 use craft\volumes\Local;
 
@@ -40,7 +41,12 @@ class ImageTransform
 
     const DEFAULT_SOCIAL_FORMAT = 'jpg';
 
-    // Static Properties
+    // Static Public Properties
+    // =========================================================================
+
+    static public $pendingImageTransforms = false;
+
+    // Static Private Properties
     // =========================================================================
 
     static private $transforms = [
@@ -138,6 +144,10 @@ class ImageTransform
                     'mtime' => $asset->dateModified->getTimestamp(),
                 ]);
             }
+        }
+        // Check to see if the $url contains a pending image transform
+        if (!empty($url) && StringHelper::contains($url, 'assets/generate-transform')) {
+            self::$pendingImageTransforms = true;
         }
 
         return $url;
