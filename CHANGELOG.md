@@ -2,7 +2,7 @@
 
 ## 3.2.30 - 2019.10.28
 ### Changed
-* 
+* SEOmatic will now invalidate container caches if they contain pending image transforms
 
 ## 3.2.29 - 2019.10.24
 ### Changed
