@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\helpers;
 
 use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
 
 use Craft;
 use craft\base\Element;
@@ -111,6 +112,10 @@ class Container
             Seomatic::$cacheDuration,
             $dependency
         );
+        // Invalidate the cache we just created if there were pending image transforms in it
+        if (ImageTransformHelper::$pendingImageTransforms) {
+            TagDependency::invalidate($cache, $dependency->tags[3]);
+        }
 
         return $result;
     }
