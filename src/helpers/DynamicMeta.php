@@ -15,6 +15,7 @@ use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\events\AddDynamicMetaEvent;
 use nystudio107\seomatic\fields\SeoSettings;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
+use nystudio107\seomatic\helpers\Localization as LocalizationHelper;
 use nystudio107\seomatic\models\Entity;
 use nystudio107\seomatic\models\jsonld\ContactPoint;
 use nystudio107\seomatic\models\jsonld\LocalBusiness;
@@ -627,7 +628,7 @@ class DynamicMeta
 
             $url = $url ?? '';
             $language = $site->language;
-            $ogLanguage = str_replace('-', '_', $language);
+            $ogLanguage = LocalizationHelper::normalizeOgLocaleLanguage($language);
             $hreflangLanguage = $language;
             $hreflangLanguage = strtolower($hreflangLanguage);
             $hreflangLanguage = str_replace('_', '-', $hreflangLanguage);
