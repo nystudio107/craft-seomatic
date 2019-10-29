@@ -3,6 +3,7 @@
 ## 3.2.30 - 2019.10.28
 ### Changed
 * SEOmatic will now invalidate container caches if they contain pending image transforms
+* Enforce the `og:locale` and `og:locale:alternaate` formats of `xx_XX` even for two-character language codes
 
 ## 3.2.29 - 2019.10.24
 ### Changed
