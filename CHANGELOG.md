@@ -1,5 +1,11 @@
 # SEOmatic Changelog
 
+## 3.2.30 - 2019.10.31
+### Changed
+* SEOmatic will now invalidate container caches if they contain pending image transforms
+* Enforce the `og:locale` and `og:locale:alternaate` formats of `xx_XX` even for two-character language codes
+* Set `'position' => 'null'` for the base image transforms
+
 ## 3.2.29 - 2019.10.24
 ### Changed
 * If an section has its robots set to `none` or `noindex` in Content SEO, don't add it to the sitemap index

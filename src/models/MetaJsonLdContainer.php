@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
+use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
 use Craft;
@@ -99,6 +100,10 @@ class MetaJsonLdContainer extends MetaContainer
             Seomatic::$cacheDuration,
             $dependency
         );
+        // Invalidate the cache we just created if there were pending image transforms in it
+        if (ImageTransformHelper::$pendingImageTransforms) {
+            TagDependency::invalidate($cache, $dependency->tags[3]);
+        }
         // Create a root JSON-LD object
         $jsonLdGraph = MetaJsonLd::create('jsonLd', [
             'graph'        => [],
