@@ -1,10 +1,9 @@
 # SEOmatic Changelog
 
-## 3.2.30 - 2019.10.30
+## 3.2.30 - 2019.10.31
 ### Changed
 * SEOmatic will now invalidate container caches if they contain pending image transforms
 * Enforce the `og:locale` and `og:locale:alternaate` formats of `xx_XX` even for two-character language codes
-* SEO Settings fields No longer defaults to whatever the parent element's Content SEO settings are when instantiating it
 
 ## 3.2.29 - 2019.10.24
 ### Changed
