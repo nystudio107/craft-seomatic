@@ -56,6 +56,7 @@ class ImageTransform
             'width' => 1200,
             'height' => 630,
             'mode' => 'crop',
+            'position' => 'null',
         ],
         'facebook' => [
             'width' => 1200,
