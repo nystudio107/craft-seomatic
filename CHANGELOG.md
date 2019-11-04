@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.31 - 2019.11.04
+### Changed
+* Fixed the base image transform to be `'position' => null`
+
 ## 3.2.30 - 2019.10.31
 ### Changed
 * SEOmatic will now invalidate container caches if they contain pending image transforms
