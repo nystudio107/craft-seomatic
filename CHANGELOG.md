@@ -3,6 +3,8 @@
 ## 3.2.33 - 2019.11.06
 ### Changed
 * Renamed several JSON-LD core types that were using reserved PHP 7 class names
+* Added `MAX_TEMPLATE_LENGTH` to prevent rendering super
+* Ensure we aren't passed in an absurdly large object template to parse
 
 ## 3.2.32 - 2019.11.05
 ### Changed
