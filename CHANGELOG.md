@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.33 - 2019.11.06
+### Changed
+* Renamed several JSON-LD core types that were using reserved PHP 7 class names
+
 ## 3.2.32 - 2019.11.05
 ### Changed
 * Rolled back a change that could cause the CP and site to slow down on uncached requests
