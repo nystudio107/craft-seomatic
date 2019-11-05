@@ -14,14 +14,14 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\jsonld\DataType;
 
 /**
- * False - The boolean value false.
+ * True - The boolean value true.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/False
+ * @see       http://schema.org/True
  */
-class False extends DataType
+class TrueType extends DataType
 {
     // Static Public Properties
     // =========================================================================
@@ -31,21 +31,21 @@ class False extends DataType
      *
      * @var string
      */
-    static public $schemaTypeName = 'False';
+    static public $schemaTypeName = 'True';
 
     /**
      * The Schema.org Type Scope
      *
      * @var string
      */
-    static public $schemaTypeScope = 'https://schema.org/False';
+    static public $schemaTypeScope = 'https://schema.org/True';
 
     /**
      * The Schema.org Type Description
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'The boolean value false.';
+    static public $schemaTypeDescription = 'The boolean value true.';
 
     /**
      * The Schema.org Type Extends
