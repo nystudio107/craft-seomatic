@@ -11,17 +11,17 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\DataType;
+use nystudio107\seomatic\models\jsonld\Number;
 
 /**
- * True - The boolean value true.
+ * Float - Data type: Floating number.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/True
+ * @see       http://schema.org/Float
  */
-class True extends DataType
+class FloatType extends Number
 {
     // Static Public Properties
     // =========================================================================
@@ -31,28 +31,28 @@ class True extends DataType
      *
      * @var string
      */
-    static public $schemaTypeName = 'True';
+    static public $schemaTypeName = 'Float';
 
     /**
      * The Schema.org Type Scope
      *
      * @var string
      */
-    static public $schemaTypeScope = 'https://schema.org/True';
+    static public $schemaTypeScope = 'https://schema.org/Float';
 
     /**
      * The Schema.org Type Description
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'The boolean value true.';
+    static public $schemaTypeDescription = 'Data type: Floating number.';
 
     /**
      * The Schema.org Type Extends
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'DataType';
+    static public $schemaTypeExtends = 'Number';
 
     /**
      * The Schema.org composed Property Names
