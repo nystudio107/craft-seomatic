@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.32 - 2019.11.05
+### Changed
+* Rolled back a change that could cause the CP and site to slow down on uncached requests
+
 ## 3.2.31 - 2019.11.04
 ### Changed
 * Fixed the base image transform to be `'position' => null`
