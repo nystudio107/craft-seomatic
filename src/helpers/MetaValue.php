@@ -34,6 +34,7 @@ class MetaValue
     // Constants
     // =========================================================================
 
+    const MAX_TEMPLATE_LENGTH = 4096;
     const MAX_PARSE_TRIES = 5;
     const NO_ALIASES = [
         'twitter:site',
@@ -241,6 +242,10 @@ class MetaValue
                 if (\is_string($alias)) {
                     $metaValue = $alias;
                 }
+            }
+            // Ensure we aren't passed in an absurdly large object template to parse
+            if (strlen($metaValue) > self::MAX_TEMPLATE_LENGTH) {
+                $metaValue = substr($metaValue, 0, self::MAX_TEMPLATE_LENGTH);
             }
             // If there are no dynamic tags, just return the template
             if (!$parseAsTwig || !StringHelper::contains($metaValue, '{')) {

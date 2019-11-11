@@ -1,5 +1,13 @@
 # SEOmatic Changelog
 
+## 3.2.33 - 2019.11.11
+### Added
+* Added `MAX_TEMPLATE_LENGTH` to prevent rendering super large object templates
+
+### Changed
+* Renamed several JSON-LD core types that were using reserved PHP 7 class names
+* No longer match disabled elements unless we’re previewing
+
 ## 3.2.32 - 2019.11.05
 ### Changed
 * Rolled back a change that could cause the CP and site to slow down on uncached requests
