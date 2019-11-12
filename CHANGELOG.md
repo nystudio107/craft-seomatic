@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.34 - 2019.11.13
+### Changed
+* Made the `robots` default to an empty value for SEO Settings fields
+
 ## 3.2.33 - 2019.11.11
 ### Added
 * Added `MAX_TEMPLATE_LENGTH` to prevent rendering super large object templates
