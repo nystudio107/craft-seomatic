@@ -27,7 +27,7 @@ return [
         'seoImageHeight'          => '',
         'seoImageDescription'     => '',
         'canonicalUrl'            => '{entry.url}',
-        'robots'                  => 'all',
+        'robots'                  => '',
         'ogType'                  => 'website',
         'ogTitle'                 => '{seomatic.meta.seoTitle}',
         'ogSiteNamePosition'      => '',
