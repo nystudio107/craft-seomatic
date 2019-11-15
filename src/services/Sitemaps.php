@@ -52,7 +52,7 @@ class Sitemaps extends Component implements SitemapInterface
 
     const SEARCH_ENGINE_SUBMISSION_URLS = [
         'google' => 'http://www.google.com/webmasters/sitemaps/ping?sitemap=',
-        'bing' => 'http://www.bing.com/webmaster/ping.aspx?siteMap=',
+        'bing' => 'http://www.bing.com/ping?sitemap=',
     ];
 
     // Protected Properties
@@ -185,7 +185,7 @@ class Sitemaps extends Component implements SitemapInterface
                         $siteId = $groupSiteIds[0];
                         $sitemapIndexUrl = $this->sitemapIndexUrlForSiteId($siteId);
                         if (!empty($sitemapIndexUrl)) {
-                            $submissionUrl = $url.$sitemapIndexUrl;
+                            $submissionUrl = $url.urlencode($sitemapIndexUrl);
                             // create new guzzle client
                             $guzzleClient = Craft::createGuzzleClient(['timeout' => 120, 'connect_timeout' => 120]);
                             // Submit the sitemap index to each search engine
@@ -224,7 +224,7 @@ class Sitemaps extends Component implements SitemapInterface
             foreach ($searchEngineUrls as &$url) {
                 $sitemapUrl = $this->sitemapUrlForBundle($sourceBundleType, $sourceHandle, $sourceSiteId);
                 if (!empty($sitemapUrl)) {
-                    $submissionUrl = $url.$sitemapUrl;
+                    $submissionUrl = $url.urlencode($sitemapUrl);
                     // create new guzzle client
                     $guzzleClient = Craft::createGuzzleClient(['timeout' => 120, 'connect_timeout' => 120]);
                     // Submit the sitemap index to each search engine
@@ -258,7 +258,7 @@ class Sitemaps extends Component implements SitemapInterface
             foreach ($searchEngineUrls as &$url) {
                 $sitemapUrl = $this->sitemapCustomUrlForSiteId($siteId);
                 if (!empty($sitemapUrl)) {
-                    $submissionUrl = $url.$sitemapUrl;
+                    $submissionUrl = $url.urlencode($sitemapUrl);
                     // create new guzzle client
                     $guzzleClient = Craft::createGuzzleClient(['timeout' => 120, 'connect_timeout' => 120]);
                     // Submit the sitemap index to each search engine
