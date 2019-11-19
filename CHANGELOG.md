@@ -1,5 +1,11 @@
 # SEOmatic Changelog
 
+## 3.2.34 - 2019.11.19
+### Changed
+* Made the `robots` default to an empty value for SEO Settings fields
+* Updated the URL for sitemap submissions to the Bing search engine
+* URL encode the query part of the sitemap submissions to search engines
+
 ## 3.2.33 - 2019.11.11
 ### Added
 * Added `MAX_TEMPLATE_LENGTH` to prevent rendering super large object templates
