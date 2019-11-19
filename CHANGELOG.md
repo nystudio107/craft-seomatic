@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.2.34 - 2019.11.13
+## 3.2.34 - 2019.11.19
 ### Changed
 * Made the `robots` default to an empty value for SEO Settings fields
 * Updated the URL for sitemap submissions to the Bing search engine
