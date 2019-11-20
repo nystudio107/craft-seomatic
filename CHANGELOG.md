@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.35 - 2019.11.22
+### Changed
+* If a `config/seomatic.php` file is present, use that as the source of truth for the `'environment'` setting
+
 ## 3.2.34 - 2019.11.19
 ### Changed
 * Made the `robots` default to an empty value for SEO Settings fields
