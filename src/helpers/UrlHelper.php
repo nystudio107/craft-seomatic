@@ -31,6 +31,14 @@ class UrlHelper extends CraftUrlHelper
     // =========================================================================
 
     /**
+     * @inheritDoc
+     */
+    public static function siteUrl(string $path = '', $params = null, string $scheme = null, int $siteId = null): string
+    {
+        return parent::siteUrl($path, $params, $scheme, $siteId);
+    }
+
+    /**
      * Return the page trigger and the value of the page trigger (null if it doesn't exist)
      *
      * @return array
