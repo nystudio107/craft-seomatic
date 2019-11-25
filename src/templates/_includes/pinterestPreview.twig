@@ -10,7 +10,7 @@
         {% if showSeoTitleNames %}
             <h4 class="metadata-title-separator"><span>Pinterest</span></h4>
         {% endif %}
-        <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
+        <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? seomatic.helper.siteUrl("/") }}" rel="noopener" target="_blank">
             <div class="card-seo-pinterest">
                 <div class="card-seo-pinterest__image {{ previewElementId }}-Pinterest-post-image">
                     <div class="js-preview-img ">

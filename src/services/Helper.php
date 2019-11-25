@@ -26,6 +26,7 @@ use craft\elements\db\TagQuery;
 use craft\helpers\Template;
 use craft\web\twig\variables\Paginate;
 
+use yii\base\Exception;
 use yii\base\InvalidConfigException;
 
 /**
@@ -96,6 +97,21 @@ class Helper extends Component
         }
 
         return DynamicMetaHelper::sanitizeUrl($url);
+    }
+
+    /**
+     * Return the site URL for a given URL. This gives SEOmatic a chance to override it
+     *
+     * @param string $path
+     * @param array|string|null $params
+     * @param string|null $scheme
+     * @param int|null $siteId
+     * @return string
+     * @throws Exception if|null $siteId is invalid
+     */
+    public static function siteUrl(string $path = '', $params = null, string $scheme = null, int $siteId = null): string
+    {
+        return UrlHelper::siteUrl($path);
     }
 
     /**

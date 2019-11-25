@@ -16,7 +16,7 @@ set previewFacebook = seomatic.site.facebookAppId |length or seomatic.site.faceb
         {% endif %}
         {% if previewFacebook %}
             <div class="card-seo-facebook">
-                <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
+                <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? seomatic.helper.siteUrl("/") }}" rel="noopener" target="_blank">
                     <div class="card-seo-facebook__image js-preview-image {{ previewElementId }}-Facebook-post-image"></div>
                     <div class="card-seo-facebook__text">
                         <span class="card-seo-facebook__link js-preview-domain">

@@ -20,6 +20,7 @@ use nystudio107\seomatic\events\InvalidateContainerCachesEvent;
 use nystudio107\seomatic\helpers\DynamicMeta as DynamicMetaHelper;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
+use nystudio107\seomatic\helpers\UrlHelper;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaGlobalVars;
 use nystudio107\seomatic\models\MetaSiteVars;
@@ -36,7 +37,6 @@ use nystudio107\seomatic\variables\SeomaticVariable;
 use Craft;
 use craft\base\Component;
 use craft\base\Element;
-use craft\helpers\UrlHelper;
 
 use yii\base\Exception;
 use yii\base\InvalidConfigException;

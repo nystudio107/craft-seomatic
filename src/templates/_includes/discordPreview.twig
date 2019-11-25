@@ -17,7 +17,7 @@
             <h4 class="metadata-title-separator"><span>Discord</span></h4>
         {% endif %}
         {% if lg %}
-            <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
+            <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? seomatic.helper.siteUrl("/") }}" rel="noopener" target="_blank">
                 <div class="card-seo-discord">
                     <div class="card-seo-discord__bar"></div>
                     <div class="card-seo-discord__content">
@@ -37,7 +37,7 @@
                 </div>
             </a>
         {% else %}
-            <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
+            <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? seomatic.helper.siteUrl("/") }}" rel="noopener" target="_blank">
                 <div class="card-seo-discord">
                     <div class="card-seo-discord__bar"></div>
                     <div class="card-seo-discord__content">

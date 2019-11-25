@@ -15,6 +15,7 @@ use nystudio107\seomatic\jobs\GenerateSitemap;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\base\SitemapInterface;
+use nystudio107\seomatic\helpers\UrlHelper;
 use nystudio107\seomatic\models\FrontendTemplateContainer;
 use nystudio107\seomatic\models\SitemapIndexTemplate;
 use nystudio107\seomatic\models\SitemapTemplate;
@@ -26,7 +27,6 @@ use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\errors\SiteNotFoundException;
 use craft\events\RegisterUrlRulesEvent;
-use craft\helpers\UrlHelper;
 use craft\web\UrlManager;
 
 use yii\base\Event;
