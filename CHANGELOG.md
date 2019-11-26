@@ -1,8 +1,10 @@
 # SEOmatic Changelog
 
-## 3.2.35 - 2019.11.22
+## 3.2.35 - 2019.11.26
 ### Changed
 * If a `config/seomatic.php` file is present, use that as the source of truth for the `'environment'` setting
+* Refactored the plugin settings into separate tabs to make them easier to use
+* Added a `siteUrlOverride` config setting for when you need to override the `siteUrl`, for instance in a headless GraphQL or ElementAPI setup
 
 ## 3.2.34 - 2019.11.19
 ### Changed
