@@ -11,10 +11,9 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use nystudio107\seomatic\helpers\UrlHelper;
-
 use Craft;
 use craft\helpers\Json as JsonHelper;
+use craft\helpers\UrlHelper;
 
 use yii\base\Exception;
 use yii\caching\TagDependency;

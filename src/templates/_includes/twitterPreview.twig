@@ -17,7 +17,7 @@
             {% endif %}
             {% if lg %}
             <div class="card-seo-twitter">
-                <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
+                <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? seomatic.helper.siteUrl("/") }}" rel="noopener" target="_blank">
                     <div class="card-seo-twitter__image js-preview-image {{ previewElementId }}-TwitterCard-image-wrapper"></div>
                     <div class="card-seo-twitter__text">
                         <span class="card-seo-twitter__title js-preview-title">
@@ -34,7 +34,7 @@
             </div>
             {% else %}
             <div class="card-seo-twitter">
-                <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
+                <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? seomatic.helper.siteUrl("/") }}" rel="noopener" target="_blank">
                     <div class="card-seo-twitter__image js-preview-image card-seo-twitter__image-summary {{ previewElementId }}-TwitterCard-image-wrapper"></div>
                     <div class="card-seo-twitter__text card-seo-twitter__text-summary">
                         <span class="card-seo-twitter__title js-preview-title">

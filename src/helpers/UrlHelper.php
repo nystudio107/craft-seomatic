@@ -11,6 +11,8 @@
 
 namespace nystudio107\seomatic\helpers;
 
+use nystudio107\seomatic\Seomatic;
+
 use Craft;
 use craft\errors\SiteNotFoundException;
 use craft\helpers\UrlHelper as CraftUrlHelper;
@@ -29,6 +31,19 @@ class UrlHelper extends CraftUrlHelper
 
     // Public Static Methods
     // =========================================================================
+
+    /**
+     * @inheritDoc
+     */
+    public static function siteUrl(string $path = '', $params = null, string $scheme = null, int $siteId = null): string
+    {
+        $siteUrl = Seomatic::$settings->siteUrlOverride;
+        if (!empty($siteUrl)) {
+            return rtrim($siteUrl, '/').'/'.ltrim($path, '/');
+        }
+
+        return parent::siteUrl($path, $params, $scheme, $siteId);
+    }
 
     /**
      * Return the page trigger and the value of the page trigger (null if it doesn't exist)

@@ -53,7 +53,7 @@ return [
                     Dependency::FRONTEND_TEMPLATE_DEPENDENCY => [FrontendTemplates::HUMANS_TXT_HANDLE],
                 ],
                 'crossorigin' => '',
-                'href'        => '{{ url("/humans.txt") }}',
+                'href'        => '{{ seomatic.helper.siteUrl("/humans.txt") }}',
                 'hreflang'    => '',
                 'media'       => '',
                 'rel'         => 'author',

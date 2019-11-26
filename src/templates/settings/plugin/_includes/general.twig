@@ -1,0 +1,141 @@
+{% import "_includes/forms" as forms %}
+{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
+
+<div id="general">
+    {% namespace "settings" %}
+
+        {{ forms.textField({
+            label: "Plugin name"|t("seomatic"),
+            instructions: "The public-facing name of the plugin"|t("seomatic"),
+            id: "pluginName",
+            name: "pluginName",
+            value: settings.pluginName,
+            warning: configWarning("pluginName", "seomatic"),
+            errors: settings.getErrors("pluginName"),
+        }) }}
+
+        {{ forms.lightswitchField({
+            label: "Automatic Render Enabled"|t("seomatic"),
+            instructions: "Controls whether SEOmatic will automatically render metadata on your pages. If you turn this off, you will need to manually render the metadata."|t("seomatic"),
+            id: "renderEnabled",
+            name: "renderEnabled",
+            on: settings.renderEnabled,
+            warning: configWarning("renderEnabled", "seomatic"),
+            errors: settings.getErrors("renderEnabled"),
+        }) }}
+
+        {{ forms.lightswitchField({
+            label: "Sitemaps Enabled"|t("seomatic"),
+            instructions: "Controls whether SEOmatic will automatically render frontend sitemaps for your website."|t("seomatic"),
+            id: "sitemapsEnabled",
+            name: "sitemapsEnabled",
+            on: settings.sitemapsEnabled,
+            warning: configWarning("sitemapsEnabled", "seomatic"),
+            errors: settings.getErrors("sitemapsEnabled"),
+        }) }}
+
+        {{ forms.lightswitchField({
+            label: "Regenerate Sitemaps Automatically"|t("seomatic"),
+            instructions: "Controls whether sitemaps will automatically be regenerated when entries are saved."|t("seomatic"),
+            id: "regenerateSitemapsAutomatically",
+            name: "regenerateSitemapsAutomatically",
+            on: settings.regenerateSitemapsAutomatically,
+            warning: configWarning("regenerateSitemapsAutomatically", "seomatic"),
+            errors: settings.getErrors("regenerateSitemapsAutomatically"),
+        }) }}
+
+        {% if seomatic.helper.craft31 %}
+            {{ forms.autosuggestField({
+                label: "Environment"|t("seomatic"),
+                instructions: "The server environment, either `live`, `staging`, or `local`. If `devMode` is on, SEOmatic will override this setting to `local` Development."|t("seomatic"),
+                suggestions: [{
+                    label: "SEOmatic Environment",
+                    data: [
+                        {name: "live", hint: "Live Production"|t("seomatic")},
+                        {name: "staging", hint: "Staging"|t("seomatic")},
+                        {name: "local", hint: "Local Development"|t("seomatic")},
+                    ]
+                }] | merge(craft.cp.getEnvSuggestions(false)),
+                suggestEnvVars: true,
+                id: "environment",
+                name: "environment",
+                value: settings.environment,
+                warning: configWarning("environment", "seomatic"),
+                errors: settings.getErrors("environment"),
+            }) }}
+        {% else %}
+            {{ forms.selectField({
+                label: "Environment"|t("seomatic"),
+                instructions: "The server environment, either `live`, `staging`, or `local`. If `devMode` is on, SEOmatic will override this setting to `local` Development."|t("seomatic"),
+                id: "environment",
+                name: "environment",
+                options: {
+                    live: "Live Production"|t("seomatic"),
+                    staging: "Staging"|t("seomatic"),
+                    local: "Local Development"|t("seomatic"),
+                },
+                value: settings.environment,
+                warning: configWarning("environment", "seomatic"),
+                errors: settings.getErrors("environment"),
+            }) }}
+        {% endif %}
+
+        {# @TODO: This will be added an upcoming "pro" edition
+
+                {{ forms.lightswitchField({
+                    label: "Display Sidebar SEO Analysis"|t("seomatic"),
+                    instructions: "Controls whether to display the SEO and content analysis in the sidebar on entry and category pages."|t("seomatic"),
+                    id: "displayAnalysisSidebar",
+                    name: "displayAnalysisSidebar",
+                    on: settings.displayAnalysisSidebar,
+                    warning: configWarning("displayAnalysisSidebar", "seomatic"),
+                    errors: settings.getErrors("displayAnalysisSidebar"),
+                }) }}
+
+        #}
+
+        {{ forms.lightswitchField({
+            label: "Site Groups define logically separate sites"|t("seomatic"),
+            instructions: "If you are using Site Groups to logically separate 'sister sites', turn this on."|t("seomatic"),
+            id: "siteGroupsSeparate",
+            name: "siteGroupsSeparate",
+            on: settings.siteGroupsSeparate,
+            warning: configWarning("siteGroupsSeparate", "seomatic"),
+            errors: settings.getErrors("siteGroupsSeparate"),
+        }) }}
+
+        {{ forms.lightswitchField({
+            label: "Lowercase Canonical URL"|t("seomatic")|md,
+            instructions: "Should the Canonical URL be automatically lower-cased?"|t("seomatic"),
+            id: "lowercaseCanonicalUrl",
+            name: "lowercaseCanonicalUrl",
+            on: settings.lowercaseCanonicalUrl,
+            warning: configWarning("lowercaseCanonicalUrl", "seomatic"),
+            errors: settings.getErrors("lowercaseCanonicalUrl"),
+        }) }}
+
+        {% if seomatic.helper.craft31 %}
+            {{ forms.autosuggestField({
+                label: "Site URL Override"|t("seomatic"),
+                instructions: "SEOmatic uses the Craft `siteUrl` to generate the external URLs.  If you are using it in a non-standard environment, such as a headless GraphQL or ElementAPI server, you can override what it uses for the `siteUrl` below."|t("seomatic"),
+                suggestEnvVars: true,
+                id: "siteUrlOverride",
+                name: "siteUrlOverride",
+                value: settings.siteUrlOverride,
+                warning: configWarning("siteUrlOverride", "seomatic"),
+                errors: settings.getErrors("siteUrlOverride"),
+            }) }}
+        {% else %}
+            {{ forms.textField({
+                label: "Site URL Override"|t("seomatic"),
+                instructions: "SEOmatic uses the Craft `siteUrl` to generate the external URLs.  If you are using it in a non-standard environment, such as a headless GraphQL or ElementAPI server, you can override what it uses for the `siteUrl` below."|t("seomatic"),
+                id: "siteUrlOverride",
+                name: "siteUrlOverride",
+                value: settings.siteUrlOverride,
+                warning: configWarning("siteUrlOverride", "seomatic"),
+                errors: settings.getErrors("siteUrlOverride"),
+            }) }}
+        {% endif %}
+
+    {% endnamespace %}
+</div>
