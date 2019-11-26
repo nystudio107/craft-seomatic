@@ -138,6 +138,11 @@ class Settings extends VarsModel
      */
     public $generatorEnabled = true;
 
+    // SEOmatic uses the Craft `siteUrl` to generate the external URLs.  If you
+    // are using it in a non-standard environment, such as a headless GraphQL or
+    // ElementAPI server, you can override what it uses for the `siteUrl` below.
+    public $siteUrlOverride = '';
+
     /**
      * @var SeoElementInterface[] The default SeoElement type classes
      */
@@ -178,6 +183,8 @@ class Settings extends VarsModel
             ['maxTitleLength', 'default', 'value' => 70],
             ['maxDescriptionLength', 'integer', 'min' => 10],
             ['maxDescriptionLength', 'default', 'value' => 155],
+            ['siteUrlOverride', 'string'],
+            ['siteUrlOverride', 'default', 'value' => ''],
             [
                 [
                     'sidebarDisplayPreviewTypes',
