@@ -1,0 +1,50 @@
+{% import "_includes/forms" as forms %}
+{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
+
+<div id="appearance" class="hidden">
+    {% namespace "settings" %}
+
+
+        {{ forms.lightswitchField({
+            label: "Display Sidebar SEO Preview"|t("seomatic"),
+            instructions: "Controls whether to display the Google, Twitter, Facebook, etc. social media previews in the sidebar on entry, category, and product pages."|t("seomatic"),
+            id: "displayPreviewSidebar",
+            name: "displayPreviewSidebar",
+            on: settings.displayPreviewSidebar,
+            warning: configWarning("displayPreviewSidebar", "seomatic"),
+            errors: settings.getErrors("displayPreviewSidebar"),
+        }) }}
+
+        {{ forms.lightswitchField({
+            label: "Add Social Media Preview Target"|t("seomatic"),
+            instructions: "Controls whether to add the Google, Twitter, Facebook, etc. social media previews as a Preview Target."|t("seomatic"),
+            id: "socialMediaPreviewTarget",
+            name: "socialMediaPreviewTarget",
+            on: settings.socialMediaPreviewTarget,
+            warning: configWarning("socialMediaPreviewTarget", "seomatic"),
+            errors: settings.getErrors("socialMediaPreviewTarget"),
+        }) }}
+
+        <div id="sidebarDisplayPreviewTypes-wrapper">
+            {{ forms.checkboxSelectField({
+                label: "SEO Preview Sites"|t("seomatic"),
+                instructions: "The social media platforms that should be displayed in the SEO Preview"|t,
+                id: 'sidebarDisplayPreviewTypes',
+                name: 'sidebarDisplayPreviewTypes',
+                options: {
+                    'google': 'Google'|t('seomatic'),
+                    'twitter': 'Twitter'|t('seomatic'),
+                    'facebook': 'Facebook'|t('seomatic'),
+                    'linkedin': 'LinkedIn'|t('seomatic'),
+                    'pinterest': 'Pinterest'|t('seomatic'),
+                    'slack': 'Slack'|t('seomatic'),
+                    'discord': 'Discord'|t('seomatic'),
+                },
+                values: settings.sidebarDisplayPreviewTypes,
+                warning: false,
+                errors: settings.getErrors("sidebarDisplayPreviewTypes"),
+            }) }}
+        </div>
+
+    {% endnamespace %}
+</div>

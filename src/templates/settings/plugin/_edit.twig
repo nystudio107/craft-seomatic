@@ -6,267 +6,31 @@
 
 {% import "_includes/forms" as forms %}
 
+{% set tabs = {
+    "general": {label: "General"|t('seomatic'), url: "#general"},
+    "appearance": {label: "Appearance"|t('seomatic'), url: "#appearance"},
+    "titles": {label: "Titles"|t('seomatic'), url: "#titles"},
+    "tags": {label: "Tags"|t('webperf'), url: "#tags"},
+} %}
+
 {% block content %}
 
     <input type="hidden" name="action" value="seomatic/settings/save-plugin-settings">
     <input type="hidden" name="pluginHandle" value="seomatic">
 
     {{ redirectInput("seomatic/plugin") }}
-    {% namespace "settings" %}
-        {{ forms.textField({
-            label: "Plugin name"|t("seomatic"),
-            instructions: "The public-facing name of the plugin"|t("seomatic"),
-            id: "pluginName",
-            name: "pluginName",
-            value: settings.pluginName,
-            warning: configWarning("pluginName", "seomatic"),
-            errors: settings.getErrors("pluginName"),
-        }) }}
 
-        {{ forms.lightswitchField({
-            label: "Automatic Render Enabled"|t("seomatic"),
-            instructions: "Controls whether SEOmatic will automatically render metadata on your pages. If you turn this off, you will need to manually render the metadata."|t("seomatic"),
-            id: "renderEnabled",
-            name: "renderEnabled",
-            on: settings.renderEnabled,
-            warning: configWarning("renderEnabled", "seomatic"),
-            errors: settings.getErrors("renderEnabled"),
-        }) }}
+    {# -- General settings -- #}
+    {% include "seomatic/settings/plugin/_includes/general.twig" %}
 
-        {{ forms.lightswitchField({
-            label: "Sitemaps Enabled"|t("seomatic"),
-            instructions: "Controls whether SEOmatic will automatically render frontend sitemaps for your website."|t("seomatic"),
-            id: "sitemapsEnabled",
-            name: "sitemapsEnabled",
-            on: settings.sitemapsEnabled,
-            warning: configWarning("sitemapsEnabled", "seomatic"),
-            errors: settings.getErrors("sitemapsEnabled"),
-        }) }}
+    {# -- Appearance settings -- #}
+    {% include "seomatic/settings/plugin/_includes/appearance.twig" %}
 
-        {{ forms.lightswitchField({
-            label: "Regenerate Sitemaps Automatically"|t("seomatic"),
-            instructions: "Controls whether sitemaps will automatically be regenerated when entries are saved."|t("seomatic"),
-            id: "regenerateSitemapsAutomatically",
-            name: "regenerateSitemapsAutomatically",
-            on: settings.regenerateSitemapsAutomatically,
-            warning: configWarning("regenerateSitemapsAutomatically", "seomatic"),
-            errors: settings.getErrors("regenerateSitemapsAutomatically"),
-        }) }}
+    {# -- Title settings -- #}
+    {% include "seomatic/settings/plugin/_includes/titles.twig" %}
 
-        {{ forms.lightswitchField({
-            label: "HTTP Headers Enabled"|t("seomatic"),
-            instructions: "Controls whether SEOmatic will automatically add `X-Robots-Tag`, `canonical`, & `Referrer-Policy` to the http response headers."|t("seomatic"),
-            id: "headersEnabled",
-            name: "headersEnabled",
-            on: settings.headersEnabled,
-            warning: configWarning("headersEnabled", "seomatic"),
-            errors: settings.getErrors("headersEnabled"),
-        }) }}
-        {% if seomatic.helper.craft31 %}
-            {{ forms.autosuggestField({
-                label: "Environment"|t("seomatic"),
-                instructions: "The server environment, either `live`, `staging`, or `local`. If `devMode` is on, SEOmatic will override this setting to `local` Development."|t("seomatic"),
-                suggestions: [{
-                    label: "SEOmatic Environment",
-                    data: [
-                        {name: "live", hint: "Live Production"|t("seomatic")},
-                        {name: "staging", hint: "Staging"|t("seomatic")},
-                        {name: "local", hint: "Local Development"|t("seomatic")},
-                    ]
-                }] | merge(craft.cp.getEnvSuggestions(false)),
-                suggestEnvVars: true,
-                id: "environment",
-                name: "environment",
-                value: settings.environment,
-                warning: configWarning("environment", "seomatic"),
-                errors: settings.getErrors("environment"),
-            }) }}
-        {% else %}
-            {{ forms.selectField({
-                label: "Environment"|t("seomatic"),
-                instructions: "The server environment, either `live`, `staging`, or `local`. If `devMode` is on, SEOmatic will override this setting to `local` Development."|t("seomatic"),
-                id: "environment",
-                name: "environment",
-                options: {
-                    live: "Live Production"|t("seomatic"),
-                    staging: "Staging"|t("seomatic"),
-                    local: "Local Development"|t("seomatic"),
-                },
-                value: settings.environment,
-                warning: configWarning("environment", "seomatic"),
-                errors: settings.getErrors("environment"),
-            }) }}
-        {% endif %}
-        {{ forms.lightswitchField({
-            label: "Display Sidebar SEO Preview"|t("seomatic"),
-            instructions: "Controls whether to display the Google, Twitter, Facebook, etc. social media previews in the sidebar on entry, category, and product pages."|t("seomatic"),
-            id: "displayPreviewSidebar",
-            name: "displayPreviewSidebar",
-            on: settings.displayPreviewSidebar,
-            warning: configWarning("displayPreviewSidebar", "seomatic"),
-            errors: settings.getErrors("displayPreviewSidebar"),
-        }) }}
+    {# -- Tag settings -- #}
+    {% include "seomatic/settings/plugin/_includes/tags.twig" %}
 
-        {{ forms.lightswitchField({
-            label: "Add Social Media Preview Target"|t("seomatic"),
-            instructions: "Controls whether to add the Google, Twitter, Facebook, etc. social media previews as a Preview Target."|t("seomatic"),
-            id: "socialMediaPreviewTarget",
-            name: "socialMediaPreviewTarget",
-            on: settings.socialMediaPreviewTarget,
-            warning: configWarning("socialMediaPreviewTarget", "seomatic"),
-            errors: settings.getErrors("socialMediaPreviewTarget"),
-        }) }}
-
-        <div id="sidebarDisplayPreviewTypes-wrapper">
-            {{ forms.checkboxSelectField({
-                label: "SEO Preview Sites"|t("seomatic"),
-                instructions: "The social media platforms that should be displayed in the SEO Preview"|t,
-                id: 'sidebarDisplayPreviewTypes',
-                name: 'sidebarDisplayPreviewTypes',
-                options: {
-                    'google': 'Google'|t('seomatic'),
-                    'twitter': 'Twitter'|t('seomatic'),
-                    'facebook': 'Facebook'|t('seomatic'),
-                    'linkedin': 'LinkedIn'|t('seomatic'),
-                    'pinterest': 'Pinterest'|t('seomatic'),
-                    'slack': 'Slack'|t('seomatic'),
-                    'discord': 'Discord'|t('seomatic'),
-                },
-                values: settings.sidebarDisplayPreviewTypes,
-                warning: false,
-                errors: settings.getErrors("sidebarDisplayPreviewTypes"),
-            }) }}
-        </div>
-
-{# @TODO: This will be added an upcoming "pro" edition
-
-        {{ forms.lightswitchField({
-            label: "Display Sidebar SEO Analysis"|t("seomatic"),
-            instructions: "Controls whether to display the SEO and content analysis in the sidebar on entry and category pages."|t("seomatic"),
-            id: "displayAnalysisSidebar",
-            name: "displayAnalysisSidebar",
-            on: settings.displayAnalysisSidebar,
-            warning: configWarning("displayAnalysisSidebar", "seomatic"),
-            errors: settings.getErrors("displayAnalysisSidebar"),
-        }) }}
-
-#}
-        {{ forms.textField({
-            label: "devMode &lt;title&gt; prefix"|t("seomatic"),
-            instructions: "If `devMode` is on, prefix the &lt;title&gt; with this string"|t("seomatic"),
-            id: "devModeTitlePrefix",
-            name: "devModeTitlePrefix",
-            value: settings.devModeTitlePrefix,
-            warning: configWarning("devModeTitlePrefix", "seomatic"),
-            errors: settings.getErrors("devModeTitlePrefix"),
-        }) }}
-
-        {{ forms.textField({
-            label: "Control Panel &lt;title&gt; prefix"|t("seomatic"),
-            instructions: "Prefix the Control Panel &lt;title&gt; with this string"|t("seomatic"),
-            id: "cpTitlePrefix",
-            name: "cpTitlePrefix",
-            value: settings.cpTitlePrefix,
-            warning: configWarning("cpTitlePrefix", "seomatic"),
-            errors: settings.getErrors("cpTitlePrefix"),
-        }) }}
-
-        {{ forms.textField({
-            label: "devMode Control Panel &lt;title&gt; prefix"|t("seomatic"),
-            instructions: "If `devMode` is on, prefix the Control Panel &lt;title&gt; with this string"|t("seomatic"),
-            id: "devModeCpTitlePrefix",
-            name: "devModeCpTitlePrefix",
-            value: settings.devModeCpTitlePrefix,
-            warning: configWarning("devModeCpTitlePrefix", "seomatic"),
-            errors: settings.getErrors("devModeCpTitlePrefix"),
-        }) }}
-
-        {{ forms.textField({
-            label: "Separator Character"|t("seomatic"),
-            instructions: "The separator character to use for the `&lt;title&gt;` tag"|t("seomatic"),
-            id: "separatorChar",
-            name: "separatorChar",
-            size: 5,
-            maxlength: 5,
-            value: settings.separatorChar,
-            warning: configWarning("separatorChar", "seomatic"),
-            errors: settings.getErrors("separatorChar"),
-        }) }}
-
-        {{ forms.textField({
-            label: "Max SEO Title Length"|t("seomatic"),
-            instructions: "The max number of characters in the `&lt;title&gt;` tag"|t("seomatic"),
-            id: "maxTitleLength",
-            name: "maxTitleLength",
-            size: 5,
-            maxlength: 5,
-            value: settings.maxTitleLength,
-            warning: configWarning("maxTitleLength", "seomatic"),
-            errors: settings.getErrors("maxTitleLength"),
-        }) }}
-
-        {{ forms.textField({
-            label: "Max SEO Description Length"|t("seomatic"),
-            instructions: "The max number of characters in the `meta description` tag"|t("seomatic"),
-            id: "maxDescriptionLength",
-            name: "maxDescriptionLength",
-            size: 5,
-            maxlength: 5,
-            value: settings.maxDescriptionLength,
-            warning: configWarning("maxDescriptionLength", "seomatic"),
-            errors: settings.getErrors("maxDescriptionLength"),
-        }) }}
-
-        {{ forms.lightswitchField({
-            label: "Site Groups define logically separate sites"|t("seomatic"),
-            instructions: "If you are using Site Groups to logically separate 'sister sites', turn this on."|t("seomatic"),
-            id: "siteGroupsSeparate",
-            name: "siteGroupsSeparate",
-            on: settings.siteGroupsSeparate,
-            warning: configWarning("siteGroupsSeparate", "seomatic"),
-            errors: settings.getErrors("siteGroupsSeparate"),
-        }) }}
-
-        {{ forms.lightswitchField({
-            label: "Add `hreflang` Tags"|t("seomatic")|md,
-            instructions: "Controls whether SEOmatic will automatically add `hreflang` and `og:locale:alternate` tags. [Learn More](https://support.google.com/webmasters/answer/189077)"|t("seomatic"),
-            id: "addHrefLang",
-            name: "addHrefLang",
-            on: settings.addHrefLang,
-            warning: configWarning("addHrefLang", "seomatic"),
-            errors: settings.getErrors("addHrefLang"),
-        }) }}
-
-        {{ forms.lightswitchField({
-            label: "Include `x-default` `hreflang` Tag"|t("seomatic")|md,
-            instructions: "Controls whether SEOmatic will automatically include an `x-default` `hreflang` tag. [Learn More](https://webmasters.googleblog.com/2013/04/x-default-hreflang-for-international-pages.html)"|t("seomatic"),
-            id: "addXDefaultHrefLang",
-            name: "addXDefaultHrefLang",
-            on: settings.addXDefaultHrefLang,
-            warning: configWarning("addXDefaultHrefLang", "seomatic"),
-            errors: settings.getErrors("addXDefaultHrefLang"),
-        }) }}
-    
-        {{ forms.lightswitchField({
-            label: "Lowercase Canonical URL"|t("seomatic")|md,
-            instructions: "Should the Canonical URL be automatically lower-cased?"|t("seomatic"),
-            id: "lowercaseCanonicalUrl",
-            name: "lowercaseCanonicalUrl",
-            on: settings.lowercaseCanonicalUrl,
-            warning: configWarning("lowercaseCanonicalUrl", "seomatic"),
-            errors: settings.getErrors("lowercaseCanonicalUrl"),
-        }) }}
-    
-        {{ forms.lightswitchField({
-            label: "Generator Enabled"|t("seomatic"),
-            instructions: "Controls whether SEOmatic will include the meta `generator` tag and `X-Powered-By` header."|t("seomatic"),
-            id: "generatorEnabled",
-            name: "generatorEnabled",
-            on: settings.generatorEnabled,
-            warning: configWarning("generatorEnabled", "seomatic"),
-            errors: settings.getErrors("generatorEnabled"),
-        }) }}
-
-    {% endnamespace %}
 {% endblock %}
 

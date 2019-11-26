@@ -1,0 +1,48 @@
+{% import "_includes/forms" as forms %}
+{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
+
+<div id="tags" class="hidden">
+    {% namespace "settings" %}
+
+        {{ forms.lightswitchField({
+            label: "Add `hreflang` Tags"|t("seomatic")|md,
+            instructions: "Controls whether SEOmatic will automatically add `hreflang` and `og:locale:alternate` tags. [Learn More](https://support.google.com/webmasters/answer/189077)"|t("seomatic"),
+            id: "addHrefLang",
+            name: "addHrefLang",
+            on: settings.addHrefLang,
+            warning: configWarning("addHrefLang", "seomatic"),
+            errors: settings.getErrors("addHrefLang"),
+        }) }}
+
+        {{ forms.lightswitchField({
+            label: "Include `x-default` `hreflang` Tag"|t("seomatic")|md,
+            instructions: "Controls whether SEOmatic will automatically include an `x-default` `hreflang` tag. [Learn More](https://webmasters.googleblog.com/2013/04/x-default-hreflang-for-international-pages.html)"|t("seomatic"),
+            id: "addXDefaultHrefLang",
+            name: "addXDefaultHrefLang",
+            on: settings.addXDefaultHrefLang,
+            warning: configWarning("addXDefaultHrefLang", "seomatic"),
+            errors: settings.getErrors("addXDefaultHrefLang"),
+        }) }}
+
+        {{ forms.lightswitchField({
+            label: "Generator Enabled"|t("seomatic"),
+            instructions: "Controls whether SEOmatic will include the meta `generator` tag and `X-Powered-By` header."|t("seomatic"),
+            id: "generatorEnabled",
+            name: "generatorEnabled",
+            on: settings.generatorEnabled,
+            warning: configWarning("generatorEnabled", "seomatic"),
+            errors: settings.getErrors("generatorEnabled"),
+        }) }}
+
+        {{ forms.lightswitchField({
+            label: "HTTP Headers Enabled"|t("seomatic"),
+            instructions: "Controls whether SEOmatic will automatically add `X-Robots-Tag`, `canonical`, & `Referrer-Policy` to the http response headers."|t("seomatic"),
+            id: "headersEnabled",
+            name: "headersEnabled",
+            on: settings.headersEnabled,
+            warning: configWarning("headersEnabled", "seomatic"),
+            errors: settings.getErrors("headersEnabled"),
+        }) }}
+
+    {% endnamespace %}
+</div>

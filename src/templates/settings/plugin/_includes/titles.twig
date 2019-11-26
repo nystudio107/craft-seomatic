@@ -1,0 +1,74 @@
+{% import "_includes/forms" as forms %}
+{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
+
+<div id="titles" class="hidden">
+    {% namespace "settings" %}
+
+        {{ forms.textField({
+            label: "devMode &lt;title&gt; prefix"|t("seomatic"),
+            instructions: "If `devMode` is on, prefix the &lt;title&gt; with this string"|t("seomatic"),
+            id: "devModeTitlePrefix",
+            name: "devModeTitlePrefix",
+            value: settings.devModeTitlePrefix,
+            warning: configWarning("devModeTitlePrefix", "seomatic"),
+            errors: settings.getErrors("devModeTitlePrefix"),
+        }) }}
+
+        {{ forms.textField({
+            label: "Control Panel &lt;title&gt; prefix"|t("seomatic"),
+            instructions: "Prefix the Control Panel &lt;title&gt; with this string"|t("seomatic"),
+            id: "cpTitlePrefix",
+            name: "cpTitlePrefix",
+            value: settings.cpTitlePrefix,
+            warning: configWarning("cpTitlePrefix", "seomatic"),
+            errors: settings.getErrors("cpTitlePrefix"),
+        }) }}
+
+        {{ forms.textField({
+            label: "devMode Control Panel &lt;title&gt; prefix"|t("seomatic"),
+            instructions: "If `devMode` is on, prefix the Control Panel &lt;title&gt; with this string"|t("seomatic"),
+            id: "devModeCpTitlePrefix",
+            name: "devModeCpTitlePrefix",
+            value: settings.devModeCpTitlePrefix,
+            warning: configWarning("devModeCpTitlePrefix", "seomatic"),
+            errors: settings.getErrors("devModeCpTitlePrefix"),
+        }) }}
+
+        {{ forms.textField({
+            label: "Separator Character"|t("seomatic"),
+            instructions: "The separator character to use for the `&lt;title&gt;` tag"|t("seomatic"),
+            id: "separatorChar",
+            name: "separatorChar",
+            size: 5,
+            maxlength: 5,
+            value: settings.separatorChar,
+            warning: configWarning("separatorChar", "seomatic"),
+            errors: settings.getErrors("separatorChar"),
+        }) }}
+
+        {{ forms.textField({
+            label: "Max SEO Title Length"|t("seomatic"),
+            instructions: "The max number of characters in the `&lt;title&gt;` tag"|t("seomatic"),
+            id: "maxTitleLength",
+            name: "maxTitleLength",
+            size: 5,
+            maxlength: 5,
+            value: settings.maxTitleLength,
+            warning: configWarning("maxTitleLength", "seomatic"),
+            errors: settings.getErrors("maxTitleLength"),
+        }) }}
+
+        {{ forms.textField({
+            label: "Max SEO Description Length"|t("seomatic"),
+            instructions: "The max number of characters in the `meta description` tag"|t("seomatic"),
+            id: "maxDescriptionLength",
+            name: "maxDescriptionLength",
+            size: 5,
+            maxlength: 5,
+            value: settings.maxDescriptionLength,
+            warning: configWarning("maxDescriptionLength", "seomatic"),
+            errors: settings.getErrors("maxDescriptionLength"),
+        }) }}
+
+    {% endnamespace %}
+</div>
