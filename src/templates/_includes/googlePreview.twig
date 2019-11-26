@@ -9,9 +9,9 @@
             <h4 class="metadata-title-separator"><span>Google</span></h4>
         {% endif %}
         <div class="card-seo-google">
-            <span class="card-seo-google__title js-preview-title"><a class="googleDisplay" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">{{ (titleArray.title ?? "") }}</a></span>
+            <span class="card-seo-google__title js-preview-title"><a class="googleDisplay" href="{{ canonicalArray.href ?? seomatic.helper.siteUrl("/") }}" rel="noopener" target="_blank">{{ (titleArray.title ?? "") }}</a></span>
             <div class="card-seo-google__url">
-                <span class="card-seo-google__url-title js-preview-domain">{{ (canonicalArray.href ?? siteUrl("/")) | replace({'http://': ''}) | replace({'https://': ''}) }}</span>
+                <span class="card-seo-google__url-title js-preview-domain">{{ (canonicalArray.href ?? seomatic.helper.siteUrl("/")) | replace({'http://': ''}) | replace({'https://': ''}) }}</span>
                 <span class="card-seo-google__url-arrow"></span>
             </div>
             <span class="card-seo-google__description js-preview-description">

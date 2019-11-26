@@ -73,6 +73,8 @@ This is useful if you're using Next.js, Nuxt.js, Gatsby, Gridsome, or anything e
 
 ![Screenshot](./resources/screenshots/seomatic-craftql-query.png)
 
+**N.B.:** The "piggyback" method described below only works with the CraftQL plugin. It can't work with the built-in GraphQL until Pixel & Tonic makes [changes to the GraphQL support](https://github.com/nystudio107/craft-seomatic/issues/483#issuecomment-540763829).
+
 You can also piggyback on an entries query, to return all of your data for an entry as well as the SEOmatic metadata in one request:
 
 ```graphql

@@ -71,6 +71,10 @@ class Environment
         if (Seomatic::$craft31) {
             $env = Craft::parseEnv($env);
         }
+        // If they've manually overridden the environment, just return it
+        if (self::environmentOverriddenByConfig()) {
+            return $env;
+        }
         // Try to also check the `ENVIRONMENT` env var
         $environment = getenv('ENVIRONMENT');
         if (!empty($environment)) {
@@ -94,5 +98,23 @@ class Environment
         }
 
         return $env;
+    }
+
+    /**
+     * Determine whether the user has overridden the `environment` setting via
+     * a `config/seomatic.php` file
+     *
+     * @return bool
+     */
+    public static function environmentOverriddenByConfig(): bool
+    {
+        $result = false;
+
+        $config = Craft::$app->getConfig()->getConfigFromFile('seomatic');
+        if (!empty($config['environment'])) {
+            $result = true;
+        }
+
+        return $result;
     }
 }

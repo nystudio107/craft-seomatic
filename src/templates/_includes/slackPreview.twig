@@ -16,7 +16,7 @@
             <h4 class="metadata-title-separator"><span>Slack</span></h4>
         {% endif %}
         {% if lg %}
-            <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
+            <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? seomatic.helper.siteUrl("/") }}" rel="noopener" target="_blank">
                 <div class="card-seo-slack">
                     <div class="card-seo-slack__bar"></div>
                     <div class="card-seo-slack__content">
@@ -39,7 +39,7 @@
                 </div>
             </a>
         {% else %}
-            <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
+            <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? seomatic.helper.siteUrl("/") }}" rel="noopener" target="_blank">
                 <div class="card-seo-slack">
                     <div class="card-seo-slack__bar"></div>
                     <div class="card-seo-slack__content">

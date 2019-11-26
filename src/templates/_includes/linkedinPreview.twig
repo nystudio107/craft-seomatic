@@ -10,7 +10,7 @@
         {% if showSeoTitleNames %}
             <h4 class="metadata-title-separator"><span>LinkedIn</span></h4>
         {% endif %}
-        <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? siteUrl("/") }}" rel="noopener" target="_blank">
+        <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? seomatic.helper.siteUrl("/") }}" rel="noopener" target="_blank">
             <div class="card-seo-linkedin">
                 <div class="card-seo-linkedin__image js-preview-image {{ previewElementId }}-LinkedIn-post-image" ></div>
                 <div class="card-seo-linkedin__text">
