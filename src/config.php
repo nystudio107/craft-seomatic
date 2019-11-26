@@ -96,6 +96,11 @@ return [
     // Should the meta generator tag and X-Powered-By header be included?
     'generatorEnabled' => true,
 
+    // SEOmatic uses the Craft `siteUrl` to generate the external URLs.  If you
+    // are using it in a non-standard environment, such as a headless GraphQL or
+    // ElementAPI server, you can override what it uses for the `siteUrl` below.
+    'siteUrlOverride' => '',
+
     // SeoElementInterface[] The default SeoElement type classes
     'defaultSeoElementTypes' => [
     ],
