@@ -1,7 +1,7 @@
 # SEOmatic Changelog
 
-## 3.2.36 - 2019.12.06
-### Fixed
+## 3.2.36 - 2019.12.10
+### Security
 * Fixed a low-impact SQL injection vulnerability
 
 ## 3.2.35 - 2019.11.26
