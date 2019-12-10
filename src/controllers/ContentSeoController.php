@@ -31,6 +31,11 @@ class ContentSeoController extends Controller
     // Constants
     // =========================================================================
 
+    const SORT_MAP = [
+        'DESC' => SORT_DESC,
+        'ASC' => SORT_ASC,
+    ];
+
     // Protected Properties
     // =========================================================================
 
@@ -64,7 +69,6 @@ class ContentSeoController extends Controller
         $data = [];
         $sortField = 'sourceName';
         $sortType = 'ASC';
-        $additionalSort = '';
         // Figure out the sorting type
         if ($sort !== '') {
             if (strpos($sort, '|') === false) {
@@ -73,17 +77,23 @@ class ContentSeoController extends Controller
                 list($sortField, $sortType) = explode('|', $sort);
             }
         }
+        $sortType = strtoupper($sortType);
+        $sortType = self::SORT_MAP[$sortType] ?? self::SORT_MAP['DESC'];
+        $sortParams = [
+            $sortField => $sortType,
+        ];
         if ($sortField !== 'sourceName') {
-            $additionalSort = ', sourceName ASC';
+            $sortParams = array_merge($sortParams, [
+                'sourceName' => self::SORT_MAP['ASC'],
+            ]);
         }
         // Query the db table
         $offset = ($page - 1) * $per_page;
-
         $query = (new Query())
             ->from(['{{%seomatic_metabundles}}'])
             ->offset($offset)
             ->limit($per_page)
-            ->orderBy("{$sortField} {$sortType}".$additionalSort)
+            ->orderBy($sortParams)
             ->where(['!=', 'sourceBundleType', Seomatic::$plugin->metaBundles::GLOBAL_META_BUNDLE])
             ;
         $currentSiteHandle = '';
@@ -154,7 +164,7 @@ class ContentSeoController extends Controller
             $data['data'] = $dataArray;
             $query = (new Query())
                 ->from(['{{%seomatic_metabundles}}'])
-                ->orderBy("{$sortField} {$sortType}")
+                ->orderBy($sortParams)
                 ->where(['!=', 'sourceBundleType', Seomatic::$plugin->metaBundles::GLOBAL_META_BUNDLE])
             ;
             if ((int)$siteId !== 0) {
