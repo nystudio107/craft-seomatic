@@ -19,6 +19,7 @@ use craft\db\Query;
 use craft\helpers\UrlHelper;
 use craft\web\Controller;
 
+use yii\web\BadRequestHttpException;
 use yii\web\Response;
 
 /**
@@ -34,6 +35,11 @@ class ContentSeoController extends Controller
     const SORT_MAP = [
         'DESC' => SORT_DESC,
         'ASC' => SORT_ASC,
+    ];
+
+    const ALLOWED_SORT_FIELDS = [
+        'sourceName',
+        'sourceType',
     ];
 
     // Protected Properties
@@ -58,6 +64,7 @@ class ContentSeoController extends Controller
      * @param null|int $siteId
      *
      * @return Response
+     * @throws BadRequestHttpException
      */
     public function actionMetaBundles(
         string $sort = 'sourceName|asc',
@@ -82,6 +89,10 @@ class ContentSeoController extends Controller
         $sortParams = [
             $sortField => $sortType,
         ];
+        // Validate untrusted data
+        if (!in_array($sortField, self::ALLOWED_SORT_FIELDS, true)) {
+            throw new BadRequestHttpException(Craft::t('seomatic', 'Invalid sort field specified.'));
+        }
         if ($sortField !== 'sourceName') {
             $sortParams = array_merge($sortParams, [
                 'sourceName' => self::SORT_MAP['ASC'],
