@@ -462,5 +462,8 @@ return [
     'This is overridden by the `config/seomatic.php` config settings' => 'This is overridden by the `config/seomatic.php` config settings',
     'SEOmatic uses the Craft `siteUrl` to generate the external URLs.  If you are using it in a non-standard environment, such as a headless GraphQL or ElementAPI server, you can override what it uses for the `siteUrl` below.' => 'SEOmatic uses the Craft `siteUrl` to generate the external URLs.  If you are using it in a non-standard environment, such as a headless GraphQL or ElementAPI server, you can override what it uses for the `siteUrl` below.',
     'Appearance' => 'Appearance',
-    'Titles' => 'Titles'
+    'Titles' => 'Titles',
+    'Invalid sort field specified.' => 'Invalid sort field specified.',
+    'Only name and status are allowed to order by.' => 'Only name and status are allowed to order by.',
+    'Tags' => 'Tags'
 ];
