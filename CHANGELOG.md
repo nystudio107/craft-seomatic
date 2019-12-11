@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.37 - 2019.12.11
+### Security
+* Throw an exception if an invalid sort field is passed into the `actionMetaBundles()` controller method, to eliminate a low-impact SQL injection vulnerability
+
 ## 3.2.36 - 2019.12.10
 ### Security
 * Fixed a low-impact SQL injection vulnerability
