@@ -1,5 +1,8 @@
 # SEOmatic Changelog
 
+## 3.2.38 - 2019.12.16
+* Saving changes to the SEOmatic settings will now also clear the GraphQL caches on Craft 3.3 or later
+
 ## 3.2.37 - 2019.12.11
 ### Security
 * Throw an exception if an invalid sort field is passed into the `actionMetaBundles()` controller method, to eliminate a low-impact SQL injection vulnerability
