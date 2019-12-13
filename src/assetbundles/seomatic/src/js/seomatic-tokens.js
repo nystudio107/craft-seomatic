@@ -19,11 +19,14 @@ import Tokenfield from 'tokenfield';
 
 // Tokenize any seomatic-keywords fields
 let el = document.querySelector('.seomatic-keywords');
-let keywords = el.value.split(',').map((value, index) => {
-    if (value !== '') {
-        return { id: index, name: value };
-    }
-});
+let keywords = undefined;
+if (el.value) {
+    keywords = el.value.split(',').map((value, index) => {
+        if (value !== '') {
+            return {id: index, name: value};
+        }
+    });
+}
 let options = {
     el: el,
     addItemOnBlur: true,
