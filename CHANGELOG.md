@@ -1,7 +1,11 @@
 # SEOmatic Changelog
 
 ## 3.2.38 - 2019.12.16
+### Changed
 * Saving changes to the SEOmatic settings will now also clear the GraphQL caches on Craft 3.3 or later
+
+### Fixed
+* Fixed an issue where the JavaScript console could have an error logged if there were no keywords
 
 ## 3.2.37 - 2019.12.11
 ### Security
