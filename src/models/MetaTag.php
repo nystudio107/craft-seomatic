@@ -20,6 +20,7 @@ use Craft;
 
 use yii\helpers\Html;
 use yii\helpers\Inflector;
+use function in_array;
 
 /**
  * @author    nystudio107
@@ -144,7 +145,13 @@ class MetaTag extends MetaItem
     {
         $shouldRender = parent::prepForRender($data);
         if ($shouldRender) {
-            MetaValueHelper::parseArray($data);
+            // MetaValueHelper::parseArray by default resolves aliases
+            $shouldResolveAliases = true;
+            if (in_array($data['name'] ?? $data['property'] ?? '', MetaValueHelper::NO_ALIASES, true)) {
+                // Most tags use `name`-property, Facebook uses `property`-property
+                $shouldResolveAliases = false;
+            }
+            MetaValueHelper::parseArray($data, $shouldResolveAliases);
             // Only render if there's more than one attribute
             if (\count($data) > 1) {
                 // devMode
