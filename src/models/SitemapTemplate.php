@@ -36,6 +36,8 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
 
     const CACHE_KEY = 'seomatic_sitemap_';
 
+    const QUEUE_JOB_CACHE_KEY = 'seomatic_sitemap_queue_job_';
+
     const SITEMAP_CACHE_TAG = 'seomatic_sitemap_';
 
     const FILE_TYPES = [
@@ -112,17 +114,37 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         }
 
         $cache = Craft::$app->getCache();
-        $cacheKey = $this::CACHE_KEY.$groupId.$type.$handle.$siteId;
+        $uniqueKey = $groupId.$type.$handle.$siteId;
+        $cacheKey = $this::CACHE_KEY.$uniqueKey;
+        $queueJobCacheKey = $this::QUEUE_JOB_CACHE_KEY.$uniqueKey;
         $result = $cache->get($cacheKey);
         // If the sitemap isn't cached, start a job to create it
         if ($result === false) {
+            // If there's an existing queue job, release it so queue jobs don't stack
+            $existingJobId = $cache->get($queueJobCacheKey);
+            if ($existingJobId) {
+                $queue = Craft::$app->getQueue();
+                $queue->release($existingJobId);
+                $cache->delete($queueJobCacheKey);
+            }
+            // Push a new queue job
             $queue = Craft::$app->getQueue();
             $jobId = $queue->push(new GenerateSitemap([
                 'groupId' => $groupId,
                 'type' => $type,
                 'handle' => $handle,
                 'siteId' => $siteId,
+                'queueJobCacheKey' => $queueJobCacheKey,
             ]));
+            // Stash the queue job id in the cache for future reference
+            $cacheDuration = 3600;
+            $dependency = new TagDependency([
+                'tags' => [
+                    $this::GLOBAL_SITEMAP_CACHE_TAG,
+                    $this::CACHE_KEY.$uniqueKey,
+                ],
+            ]);
+            $cache->set($queueJobCacheKey, $jobId, $cacheDuration, $dependency);
             Craft::debug(
                 Craft::t(
                     'seomatic',

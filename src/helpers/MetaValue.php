@@ -36,9 +36,13 @@ class MetaValue
 
     const MAX_TEMPLATE_LENGTH = 4096;
     const MAX_PARSE_TRIES = 5;
+    // Semicolon because that is the resolved config key when rendering tags,
+    // kebab-case because that is the config keys as defined in the config files.
     const NO_ALIASES = [
         'twitter:site',
         'twitter:creator',
+        'twitterSite',
+        'twitterCreator',
     ];
     const NO_PARSING = [
         'siteLinksSearchTarget',

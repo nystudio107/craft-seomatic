@@ -55,6 +55,8 @@ class GenerateSitemap extends BaseJob
 
     public $siteId;
 
+    public $queueJobCacheKey;
+
     // Public Methods
     // =========================================================================
 
@@ -296,6 +298,8 @@ class GenerateSitemap extends BaseJob
             ? Seomatic::DEVMODE_CACHE_DURATION
             : null;
         $result = $cache->set($cacheKey, $lines, $cacheDuration, $dependency);
+        // Remove the queue job id from the cache too
+        $cache->delete($this->queueJobCacheKey);
         Craft::debug('Sitemap cache result: '.print_r($result, true).' for cache key: '.$cacheKey, __METHOD__);
         // Output some info if this is a console app
         if (Craft::$app instanceof ConsoleApplication) {

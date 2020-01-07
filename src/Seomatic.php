@@ -368,6 +368,10 @@ class Seomatic extends Plugin
         self::$plugin->frontendTemplates->invalidateCaches();
         self::$plugin->metaContainers->invalidateCaches();
         self::$plugin->sitemaps->invalidateCaches();
+        // If they are using Craft 3.3 or later, clear the GraphQL caches too
+        if (self::$craft33) {
+            Craft::$app->getGql()->invalidateCaches();
+        }
         // If the FastCGI Cache Bust plugin is installed, clear its caches too
         $plugin = Craft::$app->getPlugins()->getPlugin('fastcgi-cache-bust');
         if ($plugin !== null) {

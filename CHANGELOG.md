@@ -1,5 +1,14 @@
 # SEOmatic Changelog
 
+## 3.2.38 - 2020.01.07
+### Changed
+* Saving changes to the SEOmatic settings will now also clear the GraphQL caches on Craft 3.3 or later
+* SEOmatic now tracks if sitemap jobs are pushed into the queue, and will release old sitemap queue jobs so that they don't stack up
+
+### Fixed
+* Fixed an issue where the JavaScript console could have an error logged if there were no keywords
+* Make sure `twitter:creator` and `twitter:site` are not resolve as aliases
+
 ## 3.2.37 - 2019.12.11
 ### Security
 * Throw an exception if an invalid sort field is passed into the `actionMetaBundles()` controller method, to eliminate a low-impact SQL injection vulnerability
