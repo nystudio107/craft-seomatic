@@ -1,5 +1,8 @@
 # SEOmatic Changelog
 
+### Fixed
+* Make sure `twitter:creator` and `twitter:site` are not resolve as aliases
+
 ## 3.2.38 - 2019.12.16
 ### Changed
 * Saving changes to the SEOmatic settings will now also clear the GraphQL caches on Craft 3.3 or later
