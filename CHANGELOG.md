@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.39 - 2020.01.14
+### Fixed
+* Fixed an issue where you couldn't change the Facebook OpenGraph Type in Content SEO if you had an SEO Settings field added to that section
+
 ## 3.2.38 - 2020.01.07
 ### Changed
 * Saving changes to the SEOmatic settings will now also clear the GraphQL caches on Craft 3.3 or later
