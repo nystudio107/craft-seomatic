@@ -54,6 +54,18 @@ class MetaBundles extends Component
         'uid',
     ];
 
+    const ALWAYS_INCLUDED_SEO_SETTINGS_FIELDS = [
+        'twitterTitle',
+        'twitterDescription',
+        'twitterImage',
+        'twitterImageDescription',
+
+        'ogTitle',
+        'ogDescription',
+        'ogImage',
+        'ogImageDescription',
+    ];
+
     // Protected Properties
     // =========================================================================
 
@@ -535,13 +547,16 @@ class MetaBundles extends Component
             $seoSettingsField->facebookEnabledFields,
             $seoSettingsField->sitemapEnabledFields
         ));
+        // Always include some fields, as they are calculated even if not explicitly included
+        $seoSettingsEnabledFields = array_merge(
+            $seoSettingsEnabledFields,
+            self::ALWAYS_INCLUDED_SEO_SETTINGS_FIELDS
+        );
         // metaGlobalVars
-        /* Don't prune the metaGlobalVars
         $attributes = $metaBundle->metaGlobalVars->getAttributes();
         $emptyValues = array_fill_keys(array_keys(array_diff_key($attributes, $seoSettingsEnabledFields)), '');
         $attributes = array_merge($attributes, $emptyValues);
         $metaBundle->metaGlobalVars->setAttributes($attributes, false);
-        */
         // Handle the mainEntityOfPage
         if (!\in_array('mainEntityOfPage', $seoSettingsField->generalEnabledFields, false)) {
             $metaBundle->metaGlobalVars->mainEntityOfPage = '';
