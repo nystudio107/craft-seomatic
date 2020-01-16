@@ -1,8 +1,12 @@
 # SEOmatic Changelog
 
-## 3.2.39 - 2020.01.14
+## 3.2.39 - 2020.01.16
+### Added
+* SEOmatic will now send back an array of data in the `metaScriptContainer` for GraphQL, etc. so that you can get at both the `script` and `bodyScript` even if `isArray` is false
+
 ### Fixed
 * Fixed an issue where you couldn't change the Facebook OpenGraph Type in Content SEO if you had an SEO Settings field added to that section
+
 
 ## 3.2.38 - 2020.01.07
 ### Changed
