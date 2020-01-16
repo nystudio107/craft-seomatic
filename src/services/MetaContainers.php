@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\helpers\Json;
 use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
@@ -495,11 +496,31 @@ class MetaContainers extends Component
         /** @var  $metaContainer MetaContainer */
         foreach ($this->metaContainers as $metaContainer) {
             if ($metaContainer::CONTAINER_TYPE === $type && $metaContainer->include) {
-                $html .= $metaContainer->render([
+                $result = $metaContainer->render([
                     'renderRaw'        => true,
                     'renderScriptTags' => true,
                     'array'            => true,
                 ]);
+                // Special case for script containers, because they can have body scripts too
+                if ($metaContainer::CONTAINER_TYPE === MetaScriptContainer::CONTAINER_TYPE) {
+                    $bodyScript = '';
+                    /** @var MetaScriptContainer $metaContainer */
+                    if ($metaContainer->prepForInclusion()) {
+                        foreach ($metaContainer->data as $metaScript) {
+                            /** @var MetaScript $metaScript */
+                            if (!empty($metaScript->bodyTemplatePath)) {
+                                $bodyScript .= $metaScript->renderBodyHtml();
+                            }
+                        }
+                    }
+
+                    $result = Json::encode([
+                        'script' => $result,
+                        'bodyScript' => $bodyScript,
+                    ]);
+                }
+
+                $html .= $result;
             }
         }
 
