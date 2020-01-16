@@ -6,7 +6,7 @@
 
 ### Fixed
 * Fixed an issue where you couldn't change the Facebook OpenGraph Type in Content SEO if you had an SEO Settings field added to that section
-
+* SEO Settings fields now default to whatever the parent element's Content SEO settings, which fixes the override cascade
 
 ## 3.2.38 - 2020.01.07
 ### Changed
