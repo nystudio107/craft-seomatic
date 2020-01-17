@@ -112,6 +112,23 @@ class MetaScriptContainer extends MetaContainer
     /**
      * @inheritdoc
      */
+    public function render(array $params = []): string
+    {
+        $html = parent::render($params);
+        if ($params['renderScriptTags']) {
+            $html =
+                '<script>'
+                .$html
+                .'</script>'
+            ;
+        }
+
+        return $html;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function normalizeContainerData()
     {
         parent::normalizeContainerData();
