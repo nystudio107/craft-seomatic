@@ -48,6 +48,10 @@ class SeoSettings extends Field implements PreviewableFieldInterface
 
     const CACHE_KEY = 'seomatic_fieldmeta_';
 
+    const BUNDLE_COMPARE_FIELDS = [
+        'metaGlobalVars',
+    ];
+
     // Public Properties
     // =========================================================================
 
@@ -224,38 +228,6 @@ class SeoSettings extends Field implements PreviewableFieldInterface
                 $config['metaGlobalVars']['mainEntityOfPage'] = $mainEntity;
             }
         }
-        // Try to get a meta bundle for this elements's section, and use its defaults
-        if ($element !== null) {
-            list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
-                = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
-            $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
-                $sourceBundleType,
-                $sourceId,
-                $sourceSiteId
-            );
-            if ($metaBundle) {
-                // Merge in the metaGlobalVars
-                if (empty($config['metaGlobalVars'])) {
-                    $config['metaGlobalVars'] = [];
-                }
-                $attributes = $metaBundle->metaGlobalVars->getAttributes();
-                $attributes = array_filter(
-                    $attributes,
-                    [ArrayHelper::class, 'preserveBools']
-                );
-                $config['metaGlobalVars'] = array_merge($attributes, $config['metaGlobalVars']);
-                // Merge in the metaSiteVars
-                if (empty($config['metaBundleSettings'])) {
-                    $config['metaBundleSettings'] = [];
-                }
-                $attributes = $metaBundle->metaBundleSettings->getAttributes();
-                $attributes = array_filter(
-                    $attributes,
-                    [ArrayHelper::class, 'preserveBools']
-                );
-                $config['metaBundleSettings'] = array_merge($attributes, $config['metaBundleSettings']);
-            }
-        }
         // Create a new meta bundle with propagated defaults
         $metaBundleDefaults = ArrayHelper::merge(
             ConfigHelper::getConfigFromFile('fieldmeta/Bundle'),
@@ -270,6 +242,32 @@ class SeoSettings extends Field implements PreviewableFieldInterface
      */
     public function serializeValue($value, ElementInterface $element = null)
     {
+        // If the field replicates values from the Content SEO settings, nullify them
+        if ($element !== null && $value instanceof MetaBundle) {
+            list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
+                = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
+            $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
+                $sourceBundleType,
+                $sourceId,
+                $sourceSiteId
+            );
+            if ($metaBundle) {
+                foreach (self::BUNDLE_COMPARE_FIELDS as $fieldName) {
+                    $bundleAttributes = $metaBundle->$fieldName->getAttributes();
+                    $fieldAttributes = $value->$fieldName->getAttributes();
+                    if (!empty($bundleAttributes) && !empty($fieldAttributes)) {
+                        $intersect = array_intersect($bundleAttributes, $fieldAttributes);
+                        $intersect = array_filter(
+                            $intersect,
+                            [ArrayHelper::class, 'preserveBools']
+                        );
+                        foreach ($intersect as $intersectKey => $intersectValue) {
+                            $value->$fieldName[$intersectKey] = '';
+                        }
+                    }
+                }
+            }
+        }
         $value = parent::serializeValue($value, $element);
         if (!Craft::$app->getDb()->getSupportsMb4()) {
             if (\is_string($value)) {
