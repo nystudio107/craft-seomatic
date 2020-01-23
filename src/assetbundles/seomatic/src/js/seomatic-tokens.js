@@ -20,7 +20,7 @@ import Tokenfield from 'tokenfield';
 // Tokenize any seomatic-keywords fields
 let el = document.querySelector('.seomatic-keywords');
 let keywords = undefined;
-if (el.value) {
+if (el && el.value) {
     keywords = el.value.split(',').map((value, index) => {
         if (value !== '') {
             return {id: index, name: value};
