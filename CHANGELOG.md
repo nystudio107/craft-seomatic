@@ -4,6 +4,9 @@
 ### Added
 * Added rules to `MetaJsonLd` to allow for mass-setting via `.setAttributes()` of `id`, `type`, and `context`
 
+### Changed
+* Eliminated harmless JavaScript errors if a keywords element doesn't exist
+
 ## 3.2.39 - 2020.01.17
 ### Added
 * SEOmatic will now send back an array of data in the `metaScriptContainer` for GraphQL, etc. so that you can get at both the `script` and `bodyScript` even if `isArray` is false
