@@ -26,20 +26,20 @@ if (el && el.value) {
             return {id: index, name: value};
         }
     });
-}
-let options = {
-    el: el,
-    addItemOnBlur: true,
-    addItemsOnPaste: true,
-    delimiters: [','],
-};
-if (keywords !== undefined && keywords[0] !== undefined) {
-    options.setItems = keywords;
-}
-let tf = new Tokenfield(options);
-tf.on('change', (tokenField) => {
-    let values = tokenField._vars.setItems.map((value) => {
-        return value.name;
+    let options = {
+        el: el,
+        addItemOnBlur: true,
+        addItemsOnPaste: true,
+        delimiters: [','],
+    };
+    if (keywords !== undefined && keywords[0] !== undefined) {
+        options.setItems = keywords;
+    }
+    let tf = new Tokenfield(options);
+    tf.on('change', (tokenField) => {
+        let values = tokenField._vars.setItems.map((value) => {
+            return value.name;
+        });
+        tokenField.el.value = values.join(',');
     });
-    tokenField.el.value = values.join(',');
-});
+}
