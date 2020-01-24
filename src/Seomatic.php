@@ -563,15 +563,17 @@ class Seomatic extends Plugin
                 function (RegisterPreviewTargetsEvent $e) {
                     /** @var Element $element */
                     $element = $e->sender;
-                    $e->previewTargets[] = [
-                        'label' => '📣 '.Craft::t('seomatic', 'Social Media Preview'),
-                        'url' => UrlHelper::siteUrl(self::FRONTEND_PREVIEW_PATH, [
-                            'elementId' => $element->id,
-                            'siteId' => $element->siteId,
-                        ]),
-                    ];
-                    // Don't allow the preview to be accessed publicly
-                    Craft::$app->getSession()->authorize(self::SEOMATIC_PREVIEW_AUTHORIZATION_KEY . $element->id);
+                    if ($element->uri !== null) {
+                        $e->previewTargets[] = [
+                            'label' => '📣 '.Craft::t('seomatic', 'Social Media Preview'),
+                            'url' => UrlHelper::siteUrl(self::FRONTEND_PREVIEW_PATH, [
+                                'elementId' => $element->id,
+                                'siteId' => $element->siteId,
+                            ]),
+                        ];
+                        // Don't allow the preview to be accessed publicly
+                        Craft::$app->getSession()->authorize(self::SEOMATIC_PREVIEW_AUTHORIZATION_KEY.$element->id);
+                    }
                 }
             );
         }
