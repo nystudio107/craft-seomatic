@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.41 - 2020.01.28
+### Fixed
+* Fixed a regression that caused you to no longer be able to put an array of values in the `content` field of an `og:image` tag for multiple OpenGraph images
+
 ## 3.2.40 - 2020.01.23
 ### Added
 * Added rules to `MetaJsonLd` to allow for mass-setting via `.setAttributes()` of `id`, `type`, and `context`
