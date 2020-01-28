@@ -3,6 +3,7 @@
 ## 3.2.41 - 2020.01.28
 ### Fixed
 * Fixed a regression that caused you to no longer be able to put an array of values in the `content` field of an `og:image` tag for multiple OpenGraph images
+* Fixed a regression that could cause SEO Settings fields to not propagate images properly
 
 ## 3.2.40 - 2020.01.23
 ### Added
