@@ -685,6 +685,22 @@ Note that you can achieve the same result with:
 
 ...since the `robots` populates the `<meta name="robots">` Tag meta object by default.
 
+You can have multiple OpenGraph tags of the same time, for example `og:image`:
+
+```twig
+{% set ogImage = seomatic.tag.get('og:image') %}
+{% do ogImage.content([
+    'http://example.com/image1.jpg',
+    'http://example.com/image2.jpg',
+]) %}
+```
+
+...and it'll generate a tag for each image:
+```html
+<meta content="http://example.com/image2.jpg" property="og:image">
+<meta content="http://example.com/image1.jpg" property="og:image">
+ ```
+
 ## Title Meta Object Functions `seomatic.title`
 
 * **`seomatic.title.get(META_HANDLE)`** Returns the Title meta object of the handle `META_HANDLE` or `null` if it is not found
