@@ -337,6 +337,14 @@ class MetaJsonLd extends MetaItem
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
+            [
+                [
+                    'id',
+                    'type',
+                    'context',
+                ],
+                'string',
+            ],
         ]);
 
         return $rules;

@@ -65,7 +65,14 @@ class OgImageTag extends MetaTag
         $shouldRender = parent::prepForRender($data);
         if ($shouldRender) {
             if (!empty($data['content'])) {
-                $data['content'] = UrlHelper::absoluteUrlWithProtocol($data['content']);
+                if (is_array($data['content'])) {
+                    foreach ($data['content'] as $key => $value) {
+                        $data['content'][$key] = UrlHelper::absoluteUrlWithProtocol($value);
+                    }
+                }
+                if (is_string($data['content'])) {
+                    $data['content'] = UrlHelper::absoluteUrlWithProtocol($data['content']);
+                }
             }
         }
 
