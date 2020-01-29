@@ -30,6 +30,9 @@ use craft\fields\Tags as TagsField;
 use craft\models\FieldLayout;
 use craft\redactor\Field as RedactorField;
 
+use verbb\supertable\fields\SuperTableField;
+use verbb\supertable\elements\SuperTableBlockElement as SuperTableBlock;
+
 use benf\neo\Field as NeoField;
 use benf\neo\elements\Block as NeoBlock;
 
@@ -59,6 +62,7 @@ class Field
             RedactorField::class,
             TagsField::class,
             NeoField::class,
+            SuperTableField::class,
         ],
         self::ASSET_FIELD_CLASS_KEY => [
             AssetsField::class,
@@ -66,6 +70,7 @@ class Field
         self::BLOCK_FIELD_CLASS_KEY => [
             MatrixField::class,
             NeoField::class,
+            SuperTableField::class,
         ],
         self::SEO_SETTINGS_CLASS_KEY => [
             SeoSettingsField::class,
@@ -92,6 +97,11 @@ class Field
      * @var array Memoization cache
      */
     public static $neoFieldsOfTypeCache = [];
+
+    /**
+     * @var array Memoization cache
+     */
+    public static $superTableFieldsOfTypeCache = [];
 
     // Static Methods
     // =========================================================================
@@ -369,4 +379,47 @@ class Field
 
         return $foundFields;
     }
+
+    /**
+     * Return all of the fields in the $superTableBlock of the type $fieldType class
+     *
+     * @param SuperTableBlock $superTableBlock
+     * @param string          $fieldType
+     * @param bool            $keysOnly
+     *
+     * @return array
+     */
+    public static function superTableFieldsOfType(SuperTableBlock $superTableBlock, string $fieldType, bool $keysOnly = true): array
+    {
+        $foundFields = [];
+
+        try {
+            $superTableBlockTypeModel = $superTableBlock->getType();
+        } catch (InvalidConfigException $e) {
+            $superTableBlockTypeModel = null;
+        }
+        if ($superTableBlockTypeModel) {
+            // Cache me if you can
+            $memoKey = $fieldType.$superTableBlock->id.($keysOnly ? 'keys' : 'nokeys');
+            if (!empty(self::$superTableFieldsOfTypeCache[$memoKey])) {
+                return self::$superTableFieldsOfTypeCache[$memoKey];
+            }
+            $fields = $superTableBlockTypeModel->getFields();
+            /** @var  $field BaseField */
+            foreach ($fields as $field) {
+                if ($field instanceof $fieldType) {
+                    $foundFields[$field->handle] = $field->name;
+                }
+            }
+            // Return only the keys if asked
+            if ($keysOnly) {
+                $foundFields = array_keys($foundFields);
+            }
+            // Cache for future use
+            self::$superTableFieldsOfTypeCache[$memoKey] = $foundFields;
+        }
+
+        return $foundFields;
+    }
+
 }

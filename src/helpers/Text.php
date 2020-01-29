@@ -22,6 +22,9 @@ use craft\elements\Tag;
 
 use yii\base\InvalidConfigException;
 
+use verbb\supertable\elements\SuperTableBlockElement as SuperTableBlock;
+use verbb\supertable\elements\db\SuperTableBlockQuery;
+
 use benf\neo\elements\db\BlockQuery as NeoBlockQuery;
 use benf\neo\elements\Block as NeoBlock;
 
@@ -117,6 +120,9 @@ class Text
         } elseif ($field instanceof NeoBlockQuery
             || (\is_array($field) && $field[0] instanceof NeoBlock)) {
             $result = self::extractTextFromNeo($field);
+        } elseif ($field instanceof SuperTableBlockQuery
+            || (\is_array($field) && $field[0] instanceof SuperTableBlock)) {
+            $result = self::extractTextFromSuperTable($field);
         } elseif ($field instanceof TagQuery
             || (\is_array($field) && $field[0] instanceof Tag)) {
             $result = self::extractTextFromTags($field);
@@ -232,6 +238,52 @@ class Text
             if ($neoBlockTypeModel) {
                 $fieldClasses = FieldHelper::FIELD_CLASSES[FieldHelper::TEXT_FIELD_CLASS_KEY];
                 $fields = $neoBlockTypeModel->getFields();
+
+                foreach ($fields as $field) {
+                    /** @var array $fieldClasses */
+                    foreach ($fieldClasses as $fieldClassKey) {
+                        if ($field instanceof $fieldClassKey) {
+                            if ($field->handle === $fieldHandle || empty($fieldHandle)) {
+                                $result .= self::extractTextFromField($block[$field->handle]).' ';
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * Extract text from all of the blocks in a matrix field, concatenating it
+     * together.
+     *
+     * @param SuperTableBlockQuery|SuperTableBlock[] $blocks
+     * @param string                         $fieldHandle
+     *
+     * @return string
+     */
+    public static function extractTextFromSuperTable($blocks, $fieldHandle = ''): string
+    {
+        if (empty($blocks)) {
+            return '';
+        }
+        $result = '';
+        // Iterate through all of the matrix blocks
+        if ($blocks instanceof SuperTableBlockQuery) {
+            $blocks = $blocks->all();
+        }
+        foreach ($blocks as $block) {
+            try {
+                $superTableBlockTypeModel = $block->getType();
+            } catch (InvalidConfigException $e) {
+                $superTableBlockTypeModel = null;
+            }
+            // Find any text fields inside of the matrix block
+            if ($superTableBlockTypeModel) {
+                $fieldClasses = FieldHelper::FIELD_CLASSES[FieldHelper::TEXT_FIELD_CLASS_KEY];
+                $fields = $superTableBlockTypeModel->getFields();
 
                 foreach ($fields as $field) {
                     /** @var array $fieldClasses */
