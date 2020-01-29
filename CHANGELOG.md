@@ -1,5 +1,24 @@
 # SEOmatic Changelog
 
+## 3.2.41 - 2020.01.29
+### Added
+* Added the ability for sitemaps to extract images & video from SuperTable fields
+* Added the ability for text to be pulled from SuperTable fields for SEO Descriptions, etc.
+
+### Fixed
+* Fixed a regression that caused you to no longer be able to put an array of values in the `content` field of an `og:image` tag for multiple OpenGraph images
+* Fixed a regression that could cause SEO Settings fields to not propagate images properly
+
+## 3.2.40 - 2020.01.23
+### Added
+* Added rules to `MetaJsonLd` to allow for mass-setting via `.setAttributes()` of `id`, `type`, and `context`
+
+### Changed
+* Eliminated harmless JavaScript errors if a keywords element doesn't exist
+
+### Fixed
+* Social Media preview targets are now only added if the element has a `uri` that is not `null`
+
 ## 3.2.39 - 2020.01.17
 ### Added
 * SEOmatic will now send back an array of data in the `metaScriptContainer` for GraphQL, etc. so that you can get at both the `script` and `bodyScript` even if `isArray` is false

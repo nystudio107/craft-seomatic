@@ -31,6 +31,8 @@ use craft\fields\Assets as AssetsField;
 use craft\models\SiteGroup;
 use craft\queue\BaseJob;
 
+use verbb\supertable\elements\SuperTableBlockElement as SuperTableBlock;
+
 use benf\neo\elements\Block as NeoBlock;
 
 use yii\base\Exception;
@@ -219,7 +221,7 @@ class GenerateSitemap extends BaseJob
                         );
                         foreach ($blockFields as $blockField) {
                             $blocks = $element[$blockField]->all();
-                            /** @var MatrixBlock[]|NeoBlock[] $blocks */
+                            /** @var MatrixBlock[]|NeoBlock[]|SuperTableBlock[] $blocks */
                             foreach ($blocks as $block) {
                                 $assetFields = [];
                                 if ($block instanceof MatrixBlock) {
@@ -227,6 +229,9 @@ class GenerateSitemap extends BaseJob
                                 }
                                 if ($block instanceof NeoBlock) {
                                     $assetFields = FieldHelper::neoFieldsOfType($block, AssetsField::class);
+                                }
+                                if ($block instanceof SuperTableBlock) {
+                                    $assetFields = FieldHelper::superTableFieldsOfType($block, AssetsField::class);
                                 }
                                 foreach ($assetFields as $assetField) {
                                     foreach ($block[$assetField]->all() as $asset) {

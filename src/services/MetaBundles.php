@@ -550,7 +550,7 @@ class MetaBundles extends Component
         // Always include some fields, as they are calculated even if not explicitly included
         $seoSettingsEnabledFields = array_merge(
             $seoSettingsEnabledFields,
-            self::ALWAYS_INCLUDED_SEO_SETTINGS_FIELDS
+            array_flip(self::ALWAYS_INCLUDED_SEO_SETTINGS_FIELDS)
         );
         // metaGlobalVars
         $attributes = $metaBundle->metaGlobalVars->getAttributes();

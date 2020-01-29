@@ -20,26 +20,26 @@ import Tokenfield from 'tokenfield';
 // Tokenize any seomatic-keywords fields
 let el = document.querySelector('.seomatic-keywords');
 let keywords = undefined;
-if (el.value) {
+if (el && el.value) {
     keywords = el.value.split(',').map((value, index) => {
         if (value !== '') {
             return {id: index, name: value};
         }
     });
-}
-let options = {
-    el: el,
-    addItemOnBlur: true,
-    addItemsOnPaste: true,
-    delimiters: [','],
-};
-if (keywords !== undefined && keywords[0] !== undefined) {
-    options.setItems = keywords;
-}
-let tf = new Tokenfield(options);
-tf.on('change', (tokenField) => {
-    let values = tokenField._vars.setItems.map((value) => {
-        return value.name;
+    let options = {
+        el: el,
+        addItemOnBlur: true,
+        addItemsOnPaste: true,
+        delimiters: [','],
+    };
+    if (keywords !== undefined && keywords[0] !== undefined) {
+        options.setItems = keywords;
+    }
+    let tf = new Tokenfield(options);
+    tf.on('change', (tokenField) => {
+        let values = tokenField._vars.setItems.map((value) => {
+            return value.name;
+        });
+        tokenField.el.value = values.join(',');
     });
-    tokenField.el.value = values.join(',');
-});
+}
