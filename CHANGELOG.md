@@ -1,6 +1,10 @@
 # SEOmatic Changelog
 
 ## 3.2.41 - 2020.01.28
+### Added
+* Added the ability for sitemaps to extract images & video from SuperTable fields
+* Added the ability for text to be pulled from SuperTable fields for SEO Descriptions, etc.
+
 ### Fixed
 * Fixed a regression that caused you to no longer be able to put an array of values in the `content` field of an `og:image` tag for multiple OpenGraph images
 * Fixed a regression that could cause SEO Settings fields to not propagate images properly
