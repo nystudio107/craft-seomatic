@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.2.41 - 2020.01.28
+## 3.2.41 - 2020.01.29
 ### Added
 * Added the ability for sitemaps to extract images & video from SuperTable fields
 * Added the ability for text to be pulled from SuperTable fields for SEO Descriptions, etc.
