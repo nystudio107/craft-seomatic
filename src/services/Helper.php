@@ -83,6 +83,21 @@ class Helper extends Component
     }
 
     /**
+     * Return whether this is a preview request of any kind
+     *
+     * @return bool
+     */
+    public static function isPreview(): bool
+    {
+        $request = Craft::$app->getRequest();
+        if (Seomatic::$craft32) {
+            return $request->getIsPreview();
+        }
+
+        return $request->getIsLivePreview();
+    }
+
+    /**
      * Return the canonical URL for the request, with the query string stripped
      *
      * @return string
@@ -414,5 +429,15 @@ class Helper extends Component
     public function craft32(): bool
     {
         return Seomatic::$craft32;
+    }
+
+    /**
+     * Return whether we are running Craft 3.3 or later
+     *
+     * @return bool
+     */
+    public function craft33(): bool
+    {
+        return Seomatic::$craft33;
     }
 }
