@@ -3,6 +3,8 @@
 ## 3.2.42 - 2020.02.06
 ### Added
 * Added `seomatic.helper.isPreview` and updated the tracking scripts to utilize it, to handle Craft 3.2 deprecation of `craft.app.request.isLivePreview`
+* Added an `account` column to the **Same As URLs** so you can store the social media account (if any) along with the URL
+* Added `seomatic.helper.sameAsByHandle(HANDLE)` to retrieve information about one of the **Same As URLs** by handle
 
 ## 3.2.41 - 2020.01.29
 ### Added
