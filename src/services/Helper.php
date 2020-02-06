@@ -98,6 +98,29 @@ class Helper extends Component
     }
 
     /**
+     * Return the Same As Links info as an array or null
+     *
+     * @param string $handle
+     * @return array|null
+     */
+    public static function sameAsByHandle(string $handle) {
+        $result = null;
+
+        $sameAs = Seomatic::$plugin->metaContainers->metaSiteVars->sameAsLinks;
+        if (!empty($sameAs) && !empty($handle)) {
+            foreach ($sameAs as $sameAsInfo) {
+                if (!empty($sameAsInfo) && is_array($sameAsInfo) && !empty($sameAsInfo['handle'])) {
+                    if ($sameAsInfo['handle'] === $handle) {
+                        return $sameAsInfo;
+                    }
+                }
+            }
+        }
+
+        return $result;
+    }
+
+    /**
      * Return the canonical URL for the request, with the query string stripped
      *
      * @return string
