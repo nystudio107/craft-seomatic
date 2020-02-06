@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.42 - 2020.02.06
+### Added
+* Added `seomatic.helper.isPreview` and updated the tracking scripts to utilize it, to handle Craft 3.2 deprecation of `craft.app.request.isLivePreview`
+
 ## 3.2.41 - 2020.01.29
 ### Added
 * Added the ability for sitemaps to extract images & video from SuperTable fields
