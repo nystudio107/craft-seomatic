@@ -1,5 +1,5 @@
-{# @var craft \craft\web\twig\variables\CraftVariable #}
-{# @var metaBundle \nystudio107\seomatic\models\MetaBundle #}
+{% requirePermission "seomatic:dashboard" %}
+
 {% extends 'seomatic/_layouts/seomatic-cp.twig' %}
 
 {% from 'seomatic/_includes/macros.twig' import registerJsModules %}
