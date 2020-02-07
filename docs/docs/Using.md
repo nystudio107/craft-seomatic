@@ -299,6 +299,15 @@ The `seomatic.config` variables are the global plugin configuration variables se
 ## Helper Functions `seomatic.helper`
 
 * **`seomatic.helper.paginate(PAGEINFO)`** - Given the `PAGEINFO` variable from the `{% paginate %}` tag as [described here](https://docs.craftcms.com/v3/templating/tags/paginate.html#the-pageInfo-variable), this will properly set the `canonicalUrl`, as well as adding the `<link rel='prev'>` and `<link rel='next'>` tags for you.
+* **`seomatic.helper.isPreview()`** - returns `true` if the current request is a preview, `false` if it is not
+* **`seomatic.helper.sameAsByHandle(HANDLE)`** - returns an array of information about the **Same As URLs** site specified in `HANDLE`. Here's an example of the information in the returned array:
+```
+array (size=4)
+  'siteName' => string 'Twitter'
+  'handle' => string 'twitter'
+  'url' => string 'https://twitter.com/nystudio107'
+  'account' => string 'nystudio107'
+```
 * **`seomatic.helper.truncate(TEXT, LENGTH, SUBSTR)`** - Truncates the `TEXT` to a given `LENGTH`. If `SUBSTR` is provided, and truncating occurs, the string is further truncated so that the substring may be appended without exceeding the desired length.
 * **`seomatic.helper.truncateOnWord(TEXT, LENGTH, SUBSTR)`** - Truncates the `TEXT` to a given `LENGTH`, while ensuring that it does not split words. If `SUBSTR` is provided, and truncating occurs, the string is further truncated so that the substring may be appended without exceeding the desired length.
 * **`seomatic.helper.getLocalizedUrls(URI, SITE_ID)`** - Return a list of localized URLs for a given `URI` that are in the `SITE_ID` site's group. Both `URI` and `SITE_ID` are optional, and will use the current request's `URI` and the current site's `SITE_ID` if omitted.
