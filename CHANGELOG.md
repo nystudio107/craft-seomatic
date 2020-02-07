@@ -6,6 +6,9 @@
 * Added an `account` column to the **Same As URLs** so you can store the social media account (if any) along with the URL
 * Added `seomatic.helper.sameAsByHandle(HANDLE)` to retrieve information about one of the **Same As URLs** by handle
 
+### Fixed
+* `seomatic:dashboard` permission is now required for the displaying of the Dashboard
+
 ## 3.2.41 - 2020.01.29
 ### Added
 * Added the ability for sitemaps to extract images & video from SuperTable fields
