@@ -22,7 +22,7 @@ ga('require', 'linkid');
 {% if enhancedLinkAttribution.value %}
 ga('require', 'linker');
 {% endif %}
-{% set pageView = (sendPageView.value and not craft.app.request.isLivePreview) %}
+{% set pageView = (sendPageView.value and not seomatic.helper.isPreview) %}
 {% if pageView %}
 ga('send', 'pageview');
 {% endif %}
