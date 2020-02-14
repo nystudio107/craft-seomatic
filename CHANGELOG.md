@@ -1,5 +1,12 @@
 # SEOmatic Changelog
 
+## 3.2.43 - 2020.02.13
+### Changed
+* Make sure that the `BreadCrumbsList` JSON-LD and `link rel="home"` tags respect the `siteUrlOverride` setting
+
+### Fixed
+* Fixed some minor UX spacing issues on Craft CMS 3.4
+
 ## 3.2.42 - 2020.02.06
 ### Added
 * Added `seomatic.helper.isPreview` and updated the tracking scripts to utilize it, to handle Craft 3.2 deprecation of `craft.app.request.isLivePreview`
