@@ -41,7 +41,7 @@ return [
             ],
             'home' => [
                 'crossorigin' => '',
-                'href'        => '{{ siteUrl }}',
+                'href'        => '{{ seomatic.helper.siteUrl("/") }}',
                 'hreflang'    => '',
                 'media'       => '',
                 'rel'         => 'home',

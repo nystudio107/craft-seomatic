@@ -341,6 +341,9 @@ class DynamicMeta
             $siteUrl = Craft::$app->getConfig()->general->siteUrl;
             Craft::error($e->getMessage(), __METHOD__);
         }
+        if (!empty(Seomatic::$settings->siteUrlOverride)) {
+            $siteUrl = Seomatic::$settings->siteUrlOverride;
+        }
         /** @var  $crumbs BreadcrumbList */
         $crumbs = Seomatic::$plugin->jsonLd->create([
             'type' => 'BreadcrumbList',
