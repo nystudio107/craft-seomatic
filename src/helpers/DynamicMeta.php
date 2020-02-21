@@ -84,6 +84,8 @@ class DynamicMeta
         if (Craft::$app->getResponse()->statusCode >= 400) {
             $url = '';
         }
+        // Remove any Twig tags that somehow are present in the incoming URL
+        $url = preg_replace("/({{|}}|{%|%})/", "", $url);
 
         return UrlHelper::absoluteUrlWithProtocol($url);
     }
