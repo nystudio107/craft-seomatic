@@ -1,5 +1,10 @@
 # SEOmatic Changelog
 
+## 3.2.44 - 2020.02.21
+### Security
+* Don't include headers for any response code >= 400
+* Remove any Twig tags that somehow are present in the incoming URL
+
 ## 3.2.43 - 2020.02.13
 ### Changed
 * Make sure that the `BreadCrumbsList` JSON-LD and `link rel="home"` tags respect the `siteUrlOverride` setting
