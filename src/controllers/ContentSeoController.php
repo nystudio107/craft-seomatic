@@ -140,6 +140,10 @@ class ContentSeoController extends Controller
                     );
                     /** @var SeoElementInterface $seoElement */
                     if ($seoElement !== null) {
+                        // Ensure `null` so that the resulting element query is correct
+                        if (empty($metaBundle->metaSitemapVars->sitemapLimit)) {
+                            $metaBundle->metaSitemapVars->sitemapLimit = null;
+                        }
                         $query = $seoElement::sitemapElementsQuery($metaBundle);
                         $entries = $query->count();
                     }
