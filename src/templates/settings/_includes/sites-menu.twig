@@ -5,7 +5,7 @@
 
 {% if showSites %}
     <div id="sites-btn" class="btn menubtn" data-icon="world">{{ sitesMenuLabel }}</div>
-    
+
     <div class="menu">
         {% set siteGroups = craft.app.sites.getAllGroups() %}
         {% for group in siteGroups %}
@@ -28,8 +28,8 @@
                                     <div class="status {{ status }}"></div>{{ site.name|t('site') }}
                                 </a>
                                 {%  else %}
-                                    <div style="padding-left: 10px; color: #b9bfc6">
-                                    <div class="status {{ status }}"></div>{{ site.name|t('site') }}
+                                    <div style="color: #b9bfc6; margin: 0 -14px; padding: 10px 14px 10px 24px;">
+                                        <div class="status {{ status }}"></div>{{ site.name|t('site') }}
                                     </div>
                                 {% endif %}
                             {% endif %}

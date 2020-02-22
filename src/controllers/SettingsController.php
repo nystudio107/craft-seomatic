@@ -592,12 +592,13 @@ class SettingsController extends Controller
      *
      * @param string $subSection
      * @param string $siteHandle
+     * @param null $loadFromSiteHandle
      *
      * @return Response The rendered result
      * @throws NotFoundHttpException
      * @throws \yii\web\ForbiddenHttpException
      */
-    public function actionSite(string $subSection = 'identity', string $siteHandle = null): Response
+    public function actionSite(string $subSection = 'identity', string $siteHandle = null, $loadFromSiteHandle = null): Response
     {
         $variables = [];
         // Get the site to edit
@@ -651,7 +652,12 @@ class SettingsController extends Controller
 
         // The site settings for the appropriate meta bundle
         Seomatic::$previewingMetaContainers = true;
-        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle((int)$variables['currentSiteId']);
+        // Get the site to copy the settings from, if any
+        $variables['loadFromSiteHandle'] = $loadFromSiteHandle;
+        $loadFromSiteId = $this->getSiteIdFromHandle($loadFromSiteHandle);
+        $siteIdToLoad = $loadFromSiteHandle === null ? (int)$variables['currentSiteId'] : $loadFromSiteId;
+        // Load the metabundle
+        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteIdToLoad);
         Seomatic::$previewingMetaContainers = false;
         if ($metaBundle !== null) {
             $variables['site'] = $metaBundle->metaSiteVars;
