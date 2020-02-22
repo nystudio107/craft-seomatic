@@ -7,6 +7,7 @@
 
 ### Fixed
 * Fixed an issue where if you changed the **Sitemap Limit** to something other than None, then switched it back, you'd get an empty but non-null value for the limit, which didn't play nice with element queries from third party elements
+* Preserve numeric `0` values in JSON-LD properties
 
 ### Security
 * Don't include headers for any response code >= 400
