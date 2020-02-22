@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.2.44 - 2020.02.21
+### Added
+* Added the ability to copy any of the SEOmatic settings from one site to another, to make setup easier
+
 ### Security
 * Don't include headers for any response code >= 400
 * Remove any Twig tags that somehow are present in the incoming URL
