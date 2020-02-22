@@ -366,6 +366,13 @@ class GenerateSitemap extends BaseJob
                         [ArrayHelper::class, 'preserveBools']
                     );
                     $metaBundle->metaSitemapVars->setAttributes($attributes, false);
+                    // Combine the meta global vars
+                    $attributes = $fieldMetaBundle->metaGlobalVars->getAttributes();
+                    $attributes = array_filter(
+                        $attributes,
+                        [ArrayHelper::class, 'preserveBools']
+                    );
+                    $metaBundle->metaGlobalVars->setAttributes($attributes, false);
                 }
             }
         }
