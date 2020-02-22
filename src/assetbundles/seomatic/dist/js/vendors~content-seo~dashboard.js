@@ -2,8 +2,8 @@
  * @project        SEOmatic
  * @name           vendors~content-seo~dashboard.js
  * @author         Andrew Welch
- * @build          Fri, Feb 14, 2020 3:11 AM ET
- * @release        523567996cb9b0293d940d6ca164c8678ddaa89d [develop]
+ * @build          Sat, Feb 22, 2020 4:37 AM ET
+ * @release        29c2e1df7c9cc89ae1ce45a76718bf736b977dd1 [develop]
  * @copyright      Copyright (c) 2020 nystudio107
  *
  */
