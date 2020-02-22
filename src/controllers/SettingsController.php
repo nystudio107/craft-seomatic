@@ -211,14 +211,15 @@ class SettingsController extends Controller
     /**
      * Global settings
      *
-     * @param string      $subSection
+     * @param string $subSection
      * @param string|null $siteHandle
+     * @param null $loadFromSiteHandle
      *
      * @return Response The rendered result
      * @throws NotFoundHttpException
      * @throws \yii\web\ForbiddenHttpException
      */
-    public function actionGlobal(string $subSection = 'general', string $siteHandle = null): Response
+    public function actionGlobal(string $subSection = 'general', string $siteHandle = null, $loadFromSiteHandle = null): Response
     {
         $variables = [];
         $siteId = $this->getSiteIdFromHandle($siteHandle);
@@ -267,7 +268,12 @@ class SettingsController extends Controller
         $variables['currentSubSection'] = $subSection;
         // Meta bundle settings
         Seomatic::$previewingMetaContainers = true;
-        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle((int)$variables['currentSiteId']);
+        // Get the site to copy the settings from, if any
+        $variables['loadFromSiteHandle'] = $loadFromSiteHandle;
+        $loadFromSiteId = $this->getSiteIdFromHandle($loadFromSiteHandle);
+        $siteIdToLoad = $loadFromSiteHandle === null ? (int)$variables['currentSiteId'] : $loadFromSiteId;
+        // Load the metabundle
+        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteIdToLoad);
         Seomatic::$previewingMetaContainers = false;
         if ($metaBundle !== null) {
             $variables['metaGlobalVars'] = $metaBundle->metaGlobalVars;
@@ -424,10 +430,11 @@ class SettingsController extends Controller
     /**
      * Global settings
      *
-     * @param string      $subSection
-     * @param string      $sourceBundleType
-     * @param string      $sourceHandle
+     * @param string $subSection
+     * @param string $sourceBundleType
+     * @param string $sourceHandle
      * @param string|null $siteHandle
+     * @param null $loadFromSiteHandle
      *
      * @return Response The rendered result
      * @throws NotFoundHttpException
@@ -437,7 +444,8 @@ class SettingsController extends Controller
         string $subSection,
         string $sourceBundleType,
         string $sourceHandle,
-        string $siteHandle = null
+        string $siteHandle = null,
+        $loadFromSiteHandle = null
     ): Response {
         $variables = [];
         // @TODO: Let people choose an entry/categorygroup/product as the preview
@@ -460,10 +468,15 @@ class SettingsController extends Controller
         $this->cullDisabledSites($sourceBundleType, $sourceHandle, $variables);
         // Meta Bundle settings
         Seomatic::$previewingMetaContainers = true;
+        // Get the site to copy the settings from, if any
+        $variables['loadFromSiteHandle'] = $loadFromSiteHandle;
+        $loadFromSiteId = $this->getSiteIdFromHandle($loadFromSiteHandle);
+        $siteIdToLoad = $loadFromSiteHandle === null ? (int)$variables['currentSiteId'] : $loadFromSiteId;
+        // Load the metabundle
         $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
             $sourceBundleType,
             $sourceHandle,
-            (int)$variables['currentSiteId']
+            $siteIdToLoad
         );
         Seomatic::$previewingMetaContainers = false;
         $templateTitle = '';
@@ -779,12 +792,13 @@ class SettingsController extends Controller
      *
      * @param string $subSection
      * @param string $siteHandle
+     * @param null $loadFromSiteHandle
      *
      * @return Response The rendered result
      * @throws NotFoundHttpException
      * @throws \yii\web\ForbiddenHttpException
      */
-    public function actionTracking(string $subSection = 'googleAnalytics', string $siteHandle = null): Response
+    public function actionTracking(string $subSection = 'googleAnalytics', string $siteHandle = null, $loadFromSiteHandle = null): Response
     {
         $variables = [];
         // Get the site to edit
@@ -796,7 +810,12 @@ class SettingsController extends Controller
 
         // The script meta containers for the global meta bundle
         Seomatic::$previewingMetaContainers = true;
-        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle((int)$variables['currentSiteId']);
+        // Get the site to copy the settings from, if any
+        $variables['loadFromSiteHandle'] = $loadFromSiteHandle;
+        $loadFromSiteId = $this->getSiteIdFromHandle($loadFromSiteHandle);
+        $siteIdToLoad = $loadFromSiteHandle === null ? (int)$variables['currentSiteId'] : $loadFromSiteId;
+        // Load the metabundle
+        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteIdToLoad);
         Seomatic::$previewingMetaContainers = false;
         if ($metaBundle !== null) {
             $variables['scripts'] = Seomatic::$plugin->metaBundles->getContainerDataFromBundle(
