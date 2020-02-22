@@ -110,6 +110,10 @@ class GenerateSitemap extends BaseJob
             $elements = null;
             $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundle->sourceBundleType);
             if ($seoElement !== null) {
+                // Ensure `null` so that the resulting element query is correct
+                if (empty($metaBundle->metaSitemapVars->sitemapLimit)) {
+                    $metaBundle->metaSitemapVars->sitemapLimit = null;
+                }
                 $elements = $seoElement::sitemapElementsQuery($metaBundle)->all();
             }
             // If no elements exist, just exit
