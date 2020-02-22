@@ -11,11 +11,16 @@
     {{ block('contextMenu') }}
     <div class="flex-grow"></div>
     <div class="flex-grow"></div>
+    {{ block('copyFromMenu') }}
     {{ block('actionButton') }}
 {% endblock %}
 
 {% block contextMenu %}
     {% include "seomatic/settings/_includes/sites-menu.twig" %}
+{% endblock %}
+
+{% block copyFromMenu %}
+    {% include "seomatic/settings/_includes/copy-settings-menu.twig" %}
 {% endblock %}
 
 {% block content %}
@@ -29,7 +34,7 @@
             {% include "seomatic/settings/_includes/tab-general.twig" with {"pageContext": "global"} %}
         </div>
     {% endif %}
-    
+
     {% include "seomatic/_includes/footer-message.twig" with {
         message: "Any text fields can include double-bracket tags that output Seomatic properties, such as `{{ seomatic.meta.seoTitle }}`."
     } %}
