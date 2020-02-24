@@ -147,7 +147,11 @@ class MetaValue
             }
         }
 
-        $metaArray = array_filter($metaArray);
+        // Remove any empty values
+        $metaArray = array_filter(
+            $metaArray,
+            [ArrayHelper::class, 'preserveNumerics']
+        );
     }
 
     /**

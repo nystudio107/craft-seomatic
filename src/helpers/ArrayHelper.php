@@ -56,6 +56,19 @@ class ArrayHelper extends \craft\helpers\ArrayHelper
     }
 
     /**
+     * Used as a callback for array_filter to preserve any numeric values
+     * that are in the array being filtered
+     *
+     * @param $value
+     *
+     * @return bool
+     */
+    public static function preserveNumerics($value): bool
+    {
+        return \is_numeric($value) ? true : !empty($value);
+    }
+
+    /**
      * @param $value
      * @param $key
      *

@@ -111,7 +111,7 @@
             id: "sitemapLimit",
             name: "sitemapLimit",
             options: {
-                "": "None",
+                null: "None",
                 "1000": "1000",
                 "500": "500",
                 "200": "200",
@@ -124,7 +124,7 @@
             errors: metaSitemapVars.getErrors("sitemapLimit"),
         }) }}
     {% endif %}
-    
+
     {% if (field is not defined or 'structureDepth' in field.sitemapEnabledFields) and sourceType == 'structure' %}
         {{ forms.selectField({
             label: "Structure Depth"|t("seomatic"),
@@ -143,7 +143,7 @@
             errors: metaSitemapVars.getErrors("structureDepth"),
         }) }}
     {% endif %}
-    
+
     {% if (field is not defined or 'structureDepth' in field.sitemapEnabledFields) and sourceType == 'category' %}
         {{ forms.selectField({
             label: "Category Depth"|t("seomatic"),
@@ -162,7 +162,7 @@
             errors: metaSitemapVars.getErrors("structureDepth"),
         }) }}
     {% endif %}
-    
+
     {% if field is not defined or 'sitemapImageFieldMap' in field.sitemapEnabledFields %}
         {{ forms.editableTableField({
             label: "Image Sitemap Fields"|t("seomatic"),
