@@ -1,5 +1,18 @@
 # SEOmatic Changelog
 
+## 3.2.44 - 2020.02.24
+### Added
+* Added the ability to copy any of the SEOmatic settings from one site to another, to make setup easier
+* If `robots` is set to `none` in an SEO Settings field, the entry won't appear in the sitemap
+
+### Fixed
+* Fixed an issue where if you changed the **Sitemap Limit** to something other than None, then switched it back, you'd get an empty but non-null value for the limit, which didn't play nice with element queries from third party elements
+* Preserve numeric `0` values in JSON-LD properties
+
+### Security
+* Don't include headers for any response code >= 400
+* Remove any Twig tags that somehow are present in the incoming URL
+
 ## 3.2.43 - 2020.02.13
 ### Changed
 * Make sure that the `BreadCrumbsList` JSON-LD and `link rel="home"` tags respect the `siteUrlOverride` setting

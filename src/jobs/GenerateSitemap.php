@@ -110,6 +110,10 @@ class GenerateSitemap extends BaseJob
             $elements = null;
             $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundle->sourceBundleType);
             if ($seoElement !== null) {
+                // Ensure `null` so that the resulting element query is correct
+                if (empty($metaBundle->metaSitemapVars->sitemapLimit)) {
+                    $metaBundle->metaSitemapVars->sitemapLimit = null;
+                }
                 $elements = $seoElement::sitemapElementsQuery($metaBundle)->all();
             }
             // If no elements exist, just exit
@@ -366,6 +370,13 @@ class GenerateSitemap extends BaseJob
                         [ArrayHelper::class, 'preserveBools']
                     );
                     $metaBundle->metaSitemapVars->setAttributes($attributes, false);
+                    // Combine the meta global vars
+                    $attributes = $fieldMetaBundle->metaGlobalVars->getAttributes();
+                    $attributes = array_filter(
+                        $attributes,
+                        [ArrayHelper::class, 'preserveBools']
+                    );
+                    $metaBundle->metaGlobalVars->setAttributes($attributes, false);
                 }
             }
         }

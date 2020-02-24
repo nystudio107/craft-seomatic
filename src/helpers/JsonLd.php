@@ -99,7 +99,10 @@ class JsonLd extends \craft\helpers\Json
     protected static function normalizeJsonLdArray(array &$array, int $depth)
     {
         // Remove any empty values
-        $array = array_filter($array);
+        $array = array_filter(
+            $array,
+            [ArrayHelper::class, 'preserveNumerics']
+        );
         // Rename keys as appropriate
         foreach (self::AT_PREFIXED_ATTRIBUTES as $key) {
             $array = self::changeKey($array, $key, '@'.$key);

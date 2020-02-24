@@ -1,0 +1,57 @@
+{% import "_includes/forms" as forms %}
+
+{% set baseUrl = "seomatic/#{controllerHandle}/" %}
+{% set params = [
+] %}
+
+{% if showSites %}
+    {% if loadFromSiteHandle is defined and loadFromSiteHandle | length %}
+        {% js on ready %}
+        {# I am not proud, but this needs to happen after Craft has determined #}
+        {# the "clean" state of the form, so... setTimeout() #}
+            setTimeout( function() {
+                var input = document.createElement("input");
+                input.setAttribute("type", "hidden");
+                input.setAttribute("name", "dirty");
+                input.setAttribute("value", "form");
+                document.getElementById("main-form").appendChild(input);
+            }, 1000);
+        {% endjs %}
+    {%  endif %}
+    <div class="pr-2">
+        <div id="sites-btn" class="btn menubtn" data-icon="copy">{{ 'Copy Settings From:' }}</div>
+
+        <div class="menu">
+            {% set siteGroups = craft.app.sites.getAllGroups() %}
+            {% for group in siteGroups %}
+                {% set groupSiteIds = group.getSiteIds()|intersect(siteIds) %}
+                {% if groupSiteIds %}
+                    {% if siteGroups|length > 1 %}<h6>{{ group.name|t('site') }}</h6>{% endif %}
+                    <ul class="padded">
+                        {% for siteId in groupSiteIds %}
+                            {% set site = craft.app.sites.getSiteById(siteId) %}
+                            {% set status = siteId in enabledSiteIds ? 'enabled' : 'disabled' %}
+                            <li>
+                                {% if siteId == currentSiteId %}
+                                    {% set status = 'disabled' %}
+                                {% endif %}
+                                {% set url = url(baseUrl ~ currentSiteHandle, {
+                                    'loadFromSiteHandle': site.handle,
+                                }) %}
+                                {% if status == "enabled" %}
+                                <a href="{{ url }}">
+                                    <div class="status {{ status }}"></div>{{ site.name|t('site') }}
+                                </a>
+                                {%  else %}
+                                    <div style="color: #b9bfc6; margin: 0 -14px; padding: 10px 14px 10px 24px;">
+                                        <div class="status {{ status }}"></div>{{ site.name|t('site') }}
+                                    </div>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

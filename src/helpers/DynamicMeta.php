@@ -84,6 +84,9 @@ class DynamicMeta
         if (Craft::$app->getResponse()->statusCode >= 400) {
             $url = '';
         }
+        // Remove any Twig tags that somehow are present in the incoming URL
+        /** @noinspection CallableParameterUseCaseInTypeContextInspection */
+        $url = preg_replace('{.*}', '', $url);
 
         return UrlHelper::absoluteUrlWithProtocol($url);
     }
@@ -130,6 +133,15 @@ class DynamicMeta
      */
     public static function includeHttpHeaders()
     {
+        // Don't include headers for any response code >= 400
+        $request = Craft::$app->getRequest();
+        if (!$request->isConsoleRequest) {
+            $response = Craft::$app->getResponse();
+            if ($response->statusCode >= 400) {
+                return;
+            }
+        }
+        // Assuming they have headersEnabled, add the response code to the headers
         if (Seomatic::$settings->headersEnabled) {
             $response = Craft::$app->getResponse();
             // X-Robots-Tag header
