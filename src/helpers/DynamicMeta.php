@@ -438,23 +438,23 @@ class DynamicMeta
         $siteLocalizedUrls = self::getLocalizedUrls($uri, $siteId);
 
         if (!empty($siteLocalizedUrls)) {
-            $siteLocalizedUrl = $siteLocalizedUrls[0];
             // Add the rel=alternate tag
             $metaTag = Seomatic::$plugin->link->create([
                 'rel' => 'alternate',
                 'hreflang' => [],
                 'href' => [],
             ]);
-            // Add the x-default hreflang
-            if (Seomatic::$settings->addXDefaultHrefLang) {
-                $metaTag->hreflang[] = 'x-default';
-                $metaTag->href[] = $siteLocalizedUrl['url'];
-            }
             // Add the alternate language link rel's
             if (\count($siteLocalizedUrls) > 1) {
                 foreach ($siteLocalizedUrls as $siteLocalizedUrl) {
                     $metaTag->hreflang[] = $siteLocalizedUrl['hreflangLanguage'];
                     $metaTag->href[] = $siteLocalizedUrl['url'];
+                    // Add the x-default hreflang
+                    if ($siteLocalizedUrl['primary']) {
+                        $metaTag->hreflang[] = 'x-default';
+                        $metaTag->href[] = $siteLocalizedUrl['url'];
+
+                    }
                 }
                 Seomatic::$plugin->link->add($metaTag);
             }
@@ -654,6 +654,7 @@ class DynamicMeta
                     'ogLanguage' => $ogLanguage,
                     'hreflangLanguage' => $hreflangLanguage,
                     'url' => $url,
+                    'primary' => $site->primary,
                 ];
             }
         }
