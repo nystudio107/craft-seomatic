@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.45 - 2020.02.27
+### Changed
+* 
+
 ## 3.2.44 - 2020.02.24
 ### Added
 * Added the ability to copy any of the SEOmatic settings from one site to another, to make setup easier
