@@ -4,6 +4,9 @@
 ### Changed
 * Ensure that the `x-default` `hreflang` is set to the primary site, not just the first site
 
+### Fixed
+* Ensure that the GraphQL service has the `invalidateCaches()` method before attempting to call it (it wasn't added until 3.3.12)
+
 ## 3.2.44 - 2020.02.24
 ### Added
 * Added the ability to copy any of the SEOmatic settings from one site to another, to make setup easier
