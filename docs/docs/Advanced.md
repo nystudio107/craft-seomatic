@@ -44,7 +44,21 @@ You must as least pass in the URI you want metadata for:
 
 ```graphql
 {
-  seomatic (uri: "/", siteId: 1) {
+  seomatic (uri: "/", siteId: 2) {
+      metaTitleContainer
+      metaTagContainer
+      metaLinkContainer
+      metaScriptContainer
+      metaJsonLdContainer
+  }
+}
+```
+
+...or you can also pass in an optional `site` handle:
+
+```graphql
+{
+  seomatic (uri: "/", site: "french") {
       metaTitleContainer
       metaTagContainer
       metaLinkContainer
