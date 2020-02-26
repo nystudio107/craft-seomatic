@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.2.45 - 2020.02.27
+### Added
+* Added the ability to query by site handle via GraphQL (in addition to `siteId`)
+
 ### Changed
 * Ensure that the `x-default` `hreflang` is set to the primary site, not just the first site
 
