@@ -2,7 +2,7 @@
 
 ## 3.2.45 - 2020.02.27
 ### Changed
-* 
+* Ensure that the `x-default` `hreflang` is set to the primary site, not just the first site
 
 ## 3.2.44 - 2020.02.24
 ### Added
