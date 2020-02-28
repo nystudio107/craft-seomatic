@@ -37,7 +37,12 @@ class SeomaticArguments extends Arguments
             'siteId' => [
                 'name' => 'siteId',
                 'type' => Type::int(),
-                'description' => 'The siteId to resolve the SEOmatic metdata for.'
+                'description' => 'Optional - The site ID to resolve the SEOmatic metdata for.'
+            ],
+            'site' => [
+                'name' => 'site',
+                'type' => Type::string(),
+                'description' => 'Optional - The site handle to resolve the SEOmatic metdata for.'
             ],
             'asArray' => [
                 'name' => 'asArray',

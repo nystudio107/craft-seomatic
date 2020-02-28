@@ -11,13 +11,15 @@
 
 namespace nystudio107\seomatic\gql\resolvers;
 
-use craft\base\Element;
-use craft\gql\base\Resolver;
-
-use craft\helpers\Json;
-use GraphQL\Type\Definition\ResolveInfo;
 use nystudio107\seomatic\gql\interfaces\SeomaticInterface;
 use nystudio107\seomatic\helpers\Container as ContainerHelper;
+
+use Craft;
+use craft\base\Element;
+use craft\gql\base\Resolver;
+use craft\helpers\Json;
+
+use GraphQL\Type\Definition\ResolveInfo;
 
 /**
  * Class SeomaticResolver
@@ -28,6 +30,10 @@ use nystudio107\seomatic\helpers\Container as ContainerHelper;
  */
 class SeomaticResolver extends Resolver
 {
+
+    // Public Methods
+    // =========================================================================
+
     /**
      * @inheritDoc
      */
@@ -42,6 +48,9 @@ class SeomaticResolver extends Resolver
             // Otherwise use the passed in arguments, or defaults
             $uri = $arguments['uri'] ?? '/';
             $siteId = $arguments['siteId'] ?? null;
+            if (!empty($arguments['site'])) {
+                $siteId = self::getSiteIdFromHandle($arguments['site']) ?? $siteId;
+            }
         }
         $asArray = $arguments['asArray'] ?? false;
         $uri = trim($uri === '/' ? '__home__' : $uri, '/');
@@ -59,5 +68,30 @@ class SeomaticResolver extends Resolver
         }
 
         return $result;
+    }
+
+    // Protected Methods
+    // =========================================================================
+
+    /**
+     * Return a siteId from a siteHandle
+     *
+     * @param string $siteHandle
+     *
+     * @return int|null
+     */
+    protected static function getSiteIdFromHandle($siteHandle)
+    {
+        // Get the site to edit
+        if ($siteHandle !== null) {
+            $site = Craft::$app->getSites()->getSiteByHandle($siteHandle);
+            if (!$site) {
+                return null;
+            }
+
+            return $site->id;
+        }
+
+        return Craft::$app->getSites()->currentSite->id;
     }
 }
