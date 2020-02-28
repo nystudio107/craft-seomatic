@@ -38,8 +38,8 @@ return [
                 'mainEntityOfPage' => '{seomatic.meta.canonicalUrl}',
                 'dateCreated'      => '{category.dateCreated |atom}',
                 'dateModified'     => '{category.dateUpdated |atom}',
-                'datePublished'    => '{category.postDate |atom}',
-                'copyrightYear'    => '{category.postDate |date("Y")}',
+                'datePublished'    => '{category.dateCreated |atom}',
+                'copyrightYear'    => '{category.dateCreated |date("Y")}',
                 'inLanguage'       => '{seomatic.meta.language}',
                 'copyrightHolder'  => [
                     'id' => '{seomatic.site.identity.genericUrl}#identity',
