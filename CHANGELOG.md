@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.2.45 - 2020.02.27
+## 3.2.45 - 2020.02.28
 ### Added
 * Added the ability to query by site handle via GraphQL (in addition to `siteId`)
 
