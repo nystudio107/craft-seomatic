@@ -68,6 +68,7 @@ class DynamicMeta
 
     /**
      * Return a sanitized URL with the query string stripped
+     *
      * @param string $url
      *
      * @return string
