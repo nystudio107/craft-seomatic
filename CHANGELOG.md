@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.2.46 - 2020.03.02
+## 3.2.46 - 2020.03.03
 ### Changed
 * Fixed some dates to dateCreated as categories doesn't have postDate
 
