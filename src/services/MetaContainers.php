@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\helpers\DynamicMeta;
 use nystudio107\seomatic\helpers\Json;
 use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\Seomatic;
@@ -360,7 +361,7 @@ class MetaContainers extends Component
         }
         // Get the homeUrl and canonicalUrl
         $homeUrl = '/';
-        $canonicalUrl = $uri;
+        $canonicalUrl = DynamicMeta::sanitizeUrl($uri);
         // Special-case the global bundle
         if ($uri === MetaBundles::GLOBAL_META_BUNDLE || $uri === '__home__') {
             $canonicalUrl = '/';
