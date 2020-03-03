@@ -5,7 +5,7 @@
 * Fixed some dates to dateCreated as categories doesn't have postDate
 
 ### Security
-* Fixed an issue where malformed data passed to the metacontainers controller could result in XSS
+* Fixed an issue where malformed data passed to the metacontainers controller could result in SSTI which leads to information disclosure
 
 ## 3.2.45 - 2020.02.28
 ### Added
