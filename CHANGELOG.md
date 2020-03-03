@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.2.46 - 2020.03.02
+### Changed
+* Fixed some dates to dateCreated as categories doesn't have postDate
+
 ### Security
 * Fixed an issue where malformed data passed to the metacontainers controller could result in XSS
 
