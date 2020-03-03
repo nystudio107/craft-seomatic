@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.46 - 2020.03.02
+### Security
+* Fixed an issue where malformed data passed to the metacontainers controller could result in XSS
+
 ## 3.2.45 - 2020.02.28
 ### Added
 * Added the ability to query by site handle via GraphQL (in addition to `siteId`)
