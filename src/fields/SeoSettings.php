@@ -256,7 +256,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
                     $bundleAttributes = $metaBundle->$fieldName->getAttributes();
                     $fieldAttributes = $value->$fieldName->getAttributes();
                     if (!empty($bundleAttributes) && !empty($fieldAttributes)) {
-                        $intersect = array_intersect($bundleAttributes, $fieldAttributes);
+                        $intersect = array_intersect_assoc($bundleAttributes, $fieldAttributes);
                         $intersect = array_filter(
                             $intersect,
                             [ArrayHelper::class, 'preserveBools']
