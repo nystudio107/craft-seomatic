@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.47 - 2020.03.06
+### Changed
+* Fixed an issue where hreflang URLs were incorrect if you had different localized URIs per entry
+
 ## 3.2.46 - 2020.03.03
 ### Changed
 * Fixed some dates to dateCreated as categories doesn't have postDate
