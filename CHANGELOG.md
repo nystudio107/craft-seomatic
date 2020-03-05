@@ -4,6 +4,7 @@
 ### Fixed
 * Fixed an issue where hreflang URLs were incorrect if you had different localized URIs per entry
 * Take keys into account when comparing defaults with values in SEO Settings fields
+* Fixed a regression with the canonical URL when fetched via GraphQL/XHR
 
 ## 3.2.46 - 2020.03.03
 ### Changed
