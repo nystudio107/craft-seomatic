@@ -1,8 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.2.47 - 2020.03.06
-### Changed
+### Fixed
 * Fixed an issue where hreflang URLs were incorrect if you had different localized URIs per entry
+* Take keys into account when comparing defaults with values in SEO Settings fields
 
 ## 3.2.46 - 2020.03.03
 ### Changed
