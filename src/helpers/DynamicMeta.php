@@ -70,10 +70,11 @@ class DynamicMeta
      * Return a sanitized URL with the query string stripped
      *
      * @param string $url
+     * @param bool $checkStatus
      *
      * @return string
      */
-    public static function sanitizeUrl(string $url): string
+    public static function sanitizeUrl(string $url, bool $checkStatus = true): string
     {
         // Remove the query string
         $url = UrlHelper::stripQueryString($url);
@@ -82,12 +83,15 @@ class DynamicMeta
         $url = strip_tags($url);
 
         // If this is a >= 400 status code, set the canonical URL to nothing
-        if (Craft::$app->getResponse()->statusCode >= 400) {
+        if ($checkStatus && Craft::$app->getResponse()->statusCode >= 400) {
             $url = '';
         }
         // Remove any Twig tags that somehow are present in the incoming URL
         /** @noinspection CallableParameterUseCaseInTypeContextInspection */
-        $url = preg_replace('{.*}', '', $url);
+        $result = preg_replace('{.*}', '', $url);
+        if (!empty($result) && $result) {
+            $url = $result;
+        }
 
         return UrlHelper::absoluteUrlWithProtocol($url);
     }
