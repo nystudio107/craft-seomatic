@@ -60,6 +60,11 @@ class MetaValue
     public static $templateObjectVars;
 
     /**
+     * @var array
+     */
+    public static $templatePreviewVars = [];
+
+    /**
      * @var View
      */
     public static $view;
@@ -267,7 +272,7 @@ class MetaValue
                 }
                 // Render the template out
                 $metaValue = trim(html_entity_decode(
-                    self::$view->renderObjectTemplate($metaValue, self::$templateObjectVars),
+                    self::$view->renderObjectTemplate($metaValue, self::$templateObjectVars, self::$templatePreviewVars),
                     ENT_NOQUOTES,
                     'UTF-8'
                 ));

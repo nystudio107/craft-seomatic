@@ -39,6 +39,7 @@ use nystudio107\seomatic\variables\SeomaticVariable;
 use Craft;
 use craft\base\Component;
 use craft\base\Element;
+use craft\elements\GlobalSet;
 
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
@@ -356,12 +357,22 @@ class MetaContainers extends Component
         Seomatic::$previewingMetaContainers = true;
         $this->includeMatchedElement = $includeElement;
         $this->loadMetaContainers($uri, $siteId);
+        // Load in the right globals
+        $twig = Craft::$app->getView()->getTwig();
+        $globalSets = GlobalSet::findAll([
+            'siteId' => $siteId,
+        ]);
+        MetaValueHelper::$templatePreviewVars = [];
+        foreach ($globalSets as $globalSet) {
+            MetaValueHelper::$templatePreviewVars[$globalSet->handle] = $globalSet;
+        }
+        // Parse the global vars
         if ($parseVariables) {
             $this->parseGlobalVars();
         }
         // Get the homeUrl and canonicalUrl
         $homeUrl = '/';
-        $canonicalUrl = DynamicMeta::sanitizeUrl($uri);
+        $canonicalUrl = DynamicMeta::sanitizeUrl($uri, false);
         // Special-case the global bundle
         if ($uri === MetaBundles::GLOBAL_META_BUNDLE || $uri === '__home__') {
             $canonicalUrl = '/';
