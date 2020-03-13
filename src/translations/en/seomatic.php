@@ -292,7 +292,7 @@ return [
     'Organization DUNS Number' => 'Organization DUNS Number',
     'SEO Preview Sites' => 'SEO Preview Sites',
     'Crop' => 'Crop',
-    'No Archive - Do not archived a cached version of this page' => 'No Archive - Do not archived a cached version of this page',
+    'No Archive - Do not archive a cached version of this page' => 'No Archive - Do not archive a cached version of this page',
     'Weekly' => 'Weekly',
     'Summary From Field' => 'Summary From Field',
     'Include `x-default` `hreflang` Tag' => 'Include `x-default` `hreflang` Tag',
