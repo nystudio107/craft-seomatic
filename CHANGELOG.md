@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.48 - 2020.03.18
+### Fixed
+* Fixed regex in `sanitizeUrl()`
+
 ## 3.2.47 - 2020.03.06
 ### Fixed
 * Fixed an issue where hreflang URLs were incorrect if you had different localized URIs per entry
