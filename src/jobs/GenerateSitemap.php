@@ -107,7 +107,6 @@ class GenerateSitemap extends BaseJob
             $urlsetLine .= '>';
             $lines[] = $urlsetLine;
             // Get all of the elements for this meta bundle type
-            $totalElements = null;
             $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundle->sourceBundleType);
             if ($seoElement !== null) {
                 // Ensure `null` so that the resulting element query is correct
