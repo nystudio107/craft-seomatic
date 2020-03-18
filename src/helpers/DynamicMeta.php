@@ -88,7 +88,7 @@ class DynamicMeta
         }
         // Remove any Twig tags that somehow are present in the incoming URL
         /** @noinspection CallableParameterUseCaseInTypeContextInspection */
-        $result = preg_replace('{.*}', '', $url);
+        $result = preg_replace('/{.*}/', '', $url);
         if (!empty($result) && $result) {
             $url = $result;
         }
