@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.2.48 - 2020.03.18
+### Added
+* Added a `Cache-Control` header of `no-cache, no-store` to the `503` w/`Retry-After` that SEOmatic returns for sitemaps that are still being generated
+
 ### Fixed
 * Fixed regex in `sanitizeUrl()`
 
