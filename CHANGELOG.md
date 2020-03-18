@@ -1,5 +1,13 @@
 # SEOmatic Changelog
 
+## 3.2.48 - 2020.03.18
+### Added
+* Added batching to sitemap generation so that the memory used is fixed, and no longer dependent on how many sitemap entries are being processed
+* Added a `Cache-Control` header of `no-cache, no-store` to the `503` w/`Retry-After` that SEOmatic returns for sitemaps that are still being generated
+
+### Fixed
+* Fixed regex in `sanitizeUrl()`
+
 ## 3.2.47 - 2020.03.06
 ### Fixed
 * Fixed an issue where hreflang URLs were incorrect if you had different localized URIs per entry

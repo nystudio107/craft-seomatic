@@ -94,7 +94,7 @@ class GenerateSitemap extends BaseJob
             return;
         }
         $multiSite = \count($metaBundle->sourceAltSiteSettings) > 1;
-        $elements = null;
+        $totalElements = null;
         if ($metaBundle) {
             $urlsetLine = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"';
             if ($metaBundle->metaSitemapVars->sitemapAssets) {
@@ -107,26 +107,24 @@ class GenerateSitemap extends BaseJob
             $urlsetLine .= '>';
             $lines[] = $urlsetLine;
             // Get all of the elements for this meta bundle type
-            $elements = null;
             $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundle->sourceBundleType);
             if ($seoElement !== null) {
                 // Ensure `null` so that the resulting element query is correct
                 if (empty($metaBundle->metaSitemapVars->sitemapLimit)) {
                     $metaBundle->metaSitemapVars->sitemapLimit = null;
                 }
-                $elements = $seoElement::sitemapElementsQuery($metaBundle)->all();
+                $totalElements = $seoElement::sitemapElementsQuery($metaBundle)->count();
             }
             // If no elements exist, just exit
-            if ($elements === null) {
+            if (!$totalElements) {
                 return;
             }
             // Stash the sitemap attributes so they can be modified on a per-entry basis
             $stashedSitemapAttrs = $metaBundle->metaSitemapVars->getAttributes();
             $currentElement = 0;
-            $totalElements = \count($elements);
             // Output the sitemap entry
             /** @var  $element Entry */
-            foreach ($elements as $element) {
+            foreach ($seoElement::sitemapElementsQuery($metaBundle)->each(10) as $element) {
                 $this->setProgress($queue, $currentElement++ / $totalElements);
                 // Output some info if this is a console app
                 if (Craft::$app instanceof ConsoleApplication) {
