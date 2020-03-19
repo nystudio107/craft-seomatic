@@ -1,5 +1,12 @@
 # SEOmatic Changelog
 
+## 3.2.49 - 2020.03.19
+### Added
+* Aliases will now auto-suggest in the Site URL Override settings field
+
+### Fixed
+* The Site URL Override is now parsed for both aliases and environment variables
+
 ## 3.2.48 - 2020.03.18
 ### Added
 * Added batching to sitemap generation so that the memory used is fixed, and no longer dependent on how many sitemap entries are being processed
