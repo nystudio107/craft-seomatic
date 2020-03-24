@@ -7,6 +7,9 @@
 ### Fixed
 * The Site URL Override is now parsed for both aliases and environment variables
 
+### Security
+* Ensure that URLs are `urldecode`d before attempting to use a RegEx to strip tags from them
+
 ## 3.2.48 - 2020.03.18
 ### Added
 * Added batching to sitemap generation so that the memory used is fixed, and no longer dependent on how many sitemap entries are being processed
