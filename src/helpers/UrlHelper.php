@@ -39,6 +39,7 @@ class UrlHelper extends CraftUrlHelper
     {
         $siteUrl = Seomatic::$settings->siteUrlOverride;
         if (!empty($siteUrl)) {
+            $siteUrl = MetaValue::parseString($siteUrl);
             return rtrim($siteUrl, '/').'/'.ltrim($path, '/');
         }
 
