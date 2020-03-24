@@ -80,6 +80,7 @@ class DynamicMeta
         $url = UrlHelper::stripQueryString($url);
         // HTML decode the entities, then strip out any tags
         $url = html_entity_decode($url, ENT_NOQUOTES, 'UTF-8');
+        $url = urldecode($url);
         $url = strip_tags($url);
 
         // If this is a >= 400 status code, set the canonical URL to nothing
