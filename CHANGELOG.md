@@ -1,8 +1,9 @@
 # SEOmatic Changelog
 
-## 3.2.49 - 2020.03.19
+## 3.2.49 - 2020.03.24
 ### Added
 * Aliases will now auto-suggest in the Site URL Override settings field
+* SEOmatic now will replace any stripped HTML tags with a space, so that the text is more readable
 
 ### Fixed
 * The Site URL Override is now parsed for both aliases and environment variables
