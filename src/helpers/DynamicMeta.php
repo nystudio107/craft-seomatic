@@ -648,6 +648,7 @@ class DynamicMeta
             $url = UrlHelper::absoluteUrlWithProtocol($url);
 
             $url = $url ?? '';
+            $url = self::sanitizeUrl($url);
             $language = $site->language;
             $ogLanguage = LocalizationHelper::normalizeOgLocaleLanguage($language);
             $hreflangLanguage = $language;
