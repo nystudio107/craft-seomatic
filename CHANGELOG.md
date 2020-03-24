@@ -1,5 +1,16 @@
 # SEOmatic Changelog
 
+## 3.2.49 - 2020.03.24
+### Added
+* Aliases will now auto-suggest in the Site URL Override settings field
+* SEOmatic now will replace any stripped HTML tags with a space, so that the text is more readable
+
+### Fixed
+* The Site URL Override is now parsed for both aliases and environment variables
+
+### Security
+* Ensure that URLs are `urldecode`d before attempting to use a RegEx to strip tags from them
+
 ## 3.2.48 - 2020.03.18
 ### Added
 * Added batching to sitemap generation so that the memory used is fixed, and no longer dependent on how many sitemap entries are being processed

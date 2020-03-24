@@ -128,13 +128,28 @@ class Text
             $result = self::extractTextFromTags($field);
         } else {
             if (\is_array($field)) {
-                $result = strip_tags((string)$field[0]);
+                $result = self::smartStripTags((string)$field[0]);
             } else {
-                $result = strip_tags((string)$field);
+                $result = self::smartStripTags((string)$field);
             }
         }
 
         return $result;
+    }
+
+    /**
+     * Strip HTML tags, but replace them with a space rather than just eliminating them
+     *
+     * @param $str
+     * @return string
+     */
+    public static function smartStripTags($str)
+    {
+        $str = str_replace('<', ' <', $str);
+        $str = strip_tags($str);
+        $str = str_replace('  ', ' ', $str);
+
+        return $str;
     }
 
     /**
