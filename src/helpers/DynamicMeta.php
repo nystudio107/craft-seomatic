@@ -686,13 +686,13 @@ class DynamicMeta
                 if (isset($value[$day][$time])
                     && ($date = DateTimeHelper::toDateTime($value[$day][$time])) !== false
                 ) {
-                    $normalized[$day][$time] = $date;
+                    $normalized[$day][$time] = (array)($date);
                 } else {
                     $normalized[$day][$time] = null;
                 }
             }
         }
-
+        
         $value = $normalized;
     }
 }
