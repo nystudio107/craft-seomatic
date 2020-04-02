@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.51 - 2020.04.05
+### Added
+* Added updated Event JSON-LD type with `eventAttendanceMode` property
+
 ## 3.2.50 - 2020.04.02
 ### Fixed
 * Fixed an issue that appears to be a regression in Yii2, which would cause the Opening Hours to be unable to be saved
