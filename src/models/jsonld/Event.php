@@ -130,7 +130,7 @@ class Event extends Thing
      * An intended audience, i.e. a group for whom something was created.
      * Supersedes serviceAudience.
      *
-     * @var mixed|Audience [schema.org types: Audience]
+     * @var Audience [schema.org types: Audience]
      */
     public $audience;
 
@@ -154,14 +154,14 @@ class Event extends Thing
      * event. Directors can be associated with individual items or with a series,
      * episode, clip. Supersedes directors.
      *
-     * @var mixed|Person [schema.org types: Person]
+     * @var Person [schema.org types: Person]
      */
     public $director;
 
     /**
      * The time admission will commence.
      *
-     * @var mixed|DateTime [schema.org types: DateTime]
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
      */
     public $doorTime;
 
@@ -169,7 +169,7 @@ class Event extends Thing
      * The duration of the item (movie, audio recording, event, etc.) in ISO 8601
      * date format.
      *
-     * @var mixed|Duration [schema.org types: Duration]
+     * @var Duration [schema.org types: Duration]
      */
     public $duration;
 
@@ -181,10 +181,35 @@ class Event extends Thing
     public $endDate;
 
     /**
+     * The eventAttendanceMode of an event indicates whether it occurs online,
+     * offline, or a mix.
+     *
+     * @var EventAttendanceModeEnumeration [schema.org types: EventAttendanceModeEnumeration]
+     */
+    public $eventAttendanceMode;
+
+    /**
+     * Associates an Event with a Schedule. There are circumstances where it is
+     * preferable to share a schedule for a series of repeating events rather than
+     * data on the individual events themselves. For example, a website or
+     * application might prefer to publish a schedule for a weekly gym class
+     * rather than provide data on every event. A schedule could be processed by
+     * applications to add forthcoming events to a calendar. An Event that is
+     * associated with a Schedule using this property should not have startDate or
+     * endDate properties. These are instead defined within the associated
+     * Schedule, this avoids any ambiguity for clients using the data. The
+     * property might have repeated values to specify different schedules, e.g.
+     * for different months or seasons.
+     *
+     * @var Schedule [schema.org types: Schedule]
+     */
+    public $eventSchedule;
+
+    /**
      * An eventStatus of an event represents its status; particularly useful when
      * an event is cancelled or rescheduled.
      *
-     * @var mixed|EventStatusType [schema.org types: EventStatusType]
+     * @var EventStatusType [schema.org types: EventStatusType]
      */
     public $eventStatus;
 
@@ -209,7 +234,7 @@ class Event extends Thing
      * A flag to signal that the item, event, or place is accessible for free.
      * Supersedes free.
      *
-     * @var mixed|bool [schema.org types: Boolean]
+     * @var bool [schema.org types: Boolean]
      */
     public $isAccessibleForFree;
 
@@ -217,23 +242,46 @@ class Event extends Thing
      * The location of for example where the event is happening, an organization
      * is located, or where an action takes place.
      *
-     * @var mixed|Place|PostalAddress|string [schema.org types: Place, PostalAddress, Text]
+     * @var mixed|Place|PostalAddress|string|VirtualLocation [schema.org types: Place, PostalAddress, Text, VirtualLocation]
      */
     public $location;
 
     /**
      * The total number of individuals that may attend an event or venue.
      *
-     * @var mixed|int [schema.org types: Integer]
+     * @var int [schema.org types: Integer]
      */
     public $maximumAttendeeCapacity;
 
     /**
+     * The maximum physical attendee capacity of an Event whose
+     * eventAttendanceMode is OfflineEventAttendanceMode (or the offline aspects,
+     * in the case of a MixedEventAttendanceMode).
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $maximumPhysicalAttendeeCapacity;
+
+    /**
+     * The maximum physical attendee capacity of an Event whose
+     * eventAttendanceMode is OnlineEventAttendanceMode (or the online aspects, in
+     * the case of a MixedEventAttendanceMode).
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $maximumVirtualAttendeeCapacity;
+
+    /**
      * An offer to provide this item—for example, an offer to sell a product,
      * rent the DVD of a movie, perform a service, or give away tickets to an
-     * event.
+     * event. Use businessFunction to indicate the kind of transaction offered,
+     * i.e. sell, lease, etc. This property can also be used to describe a Demand.
+     * While this property is listed as expected on a number of common types, it
+     * can be used in others. In that case, using a second type, such as Product
+     * or a subtype of Product, can clarify the nature of the offer. Inverse
+     * property: itemOffered.
      *
-     * @var mixed|Offer [schema.org types: Offer]
+     * @var mixed|Demand|Offer [schema.org types: Demand, Offer]
      */
     public $offers;
 
@@ -259,7 +307,7 @@ class Event extends Thing
      * date. In the (rare) case of an event that has been postponed and
      * rescheduled multiple times, this field may be repeated.
      *
-     * @var mixed|Date [schema.org types: Date]
+     * @var Date [schema.org types: Date]
      */
     public $previousStartDate;
 
@@ -267,21 +315,21 @@ class Event extends Thing
      * The CreativeWork that captured all or part of this Event. Inverse property:
      * recordedAt.
      *
-     * @var mixed|CreativeWork [schema.org types: CreativeWork]
+     * @var CreativeWork [schema.org types: CreativeWork]
      */
     public $recordedIn;
 
     /**
      * The number of attendee places for an event that remain unallocated.
      *
-     * @var mixed|int [schema.org types: Integer]
+     * @var int [schema.org types: Integer]
      */
     public $remainingAttendeeCapacity;
 
     /**
      * A review of the item. Supersedes reviews.
      *
-     * @var mixed|Review [schema.org types: Review]
+     * @var Review [schema.org types: Review]
      */
     public $review;
 
@@ -306,7 +354,7 @@ class Event extends Thing
      * includes many presentations, each of which is a subEvent of the conference.
      * Supersedes subEvents. Inverse property: superEvent.
      *
-     * @var mixed|Event [schema.org types: Event]
+     * @var Event [schema.org types: Event]
      */
     public $subEvent;
 
@@ -315,7 +363,7 @@ class Event extends Thing
      * individual music performances might each have a music festival as their
      * superEvent. Inverse property: subEvent.
      *
-     * @var mixed|Event [schema.org types: Event]
+     * @var Event [schema.org types: Event]
      */
     public $superEvent;
 
@@ -331,7 +379,7 @@ class Event extends Thing
     /**
      * The typical expected age range, e.g. '7-9', '11-'.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $typicalAgeRange;
 
@@ -340,7 +388,7 @@ class Event extends Thing
      * Specific subproperties are available for workPerformed (e.g. a play), or a
      * workPresented (a Movie at a ScreeningEvent).
      *
-     * @var mixed|CreativeWork [schema.org types: CreativeWork]
+     * @var CreativeWork [schema.org types: CreativeWork]
      */
     public $workFeatured;
 
@@ -348,7 +396,7 @@ class Event extends Thing
      * A work performed in some event, for example a play performed in a
      * TheaterEvent.
      *
-     * @var mixed|CreativeWork [schema.org types: CreativeWork]
+     * @var CreativeWork [schema.org types: CreativeWork]
      */
     public $workPerformed;
 
@@ -372,12 +420,16 @@ class Event extends Thing
         'doorTime',
         'duration',
         'endDate',
+        'eventAttendanceMode',
+        'eventSchedule',
         'eventStatus',
         'funder',
         'inLanguage',
         'isAccessibleForFree',
         'location',
         'maximumAttendeeCapacity',
+        'maximumPhysicalAttendeeCapacity',
+        'maximumVirtualAttendeeCapacity',
         'offers',
         'organizer',
         'performer',
@@ -409,16 +461,20 @@ class Event extends Thing
         'composer' => ['Organization','Person'],
         'contributor' => ['Organization','Person'],
         'director' => ['Person'],
-        'doorTime' => ['DateTime'],
+        'doorTime' => ['DateTime','Time'],
         'duration' => ['Duration'],
         'endDate' => ['Date','DateTime'],
+        'eventAttendanceMode' => ['EventAttendanceModeEnumeration'],
+        'eventSchedule' => ['Schedule'],
         'eventStatus' => ['EventStatusType'],
         'funder' => ['Organization','Person'],
         'inLanguage' => ['Language','Text'],
         'isAccessibleForFree' => ['Boolean'],
-        'location' => ['Place','PostalAddress','Text'],
+        'location' => ['Place','PostalAddress','Text','VirtualLocation'],
         'maximumAttendeeCapacity' => ['Integer'],
-        'offers' => ['Offer'],
+        'maximumPhysicalAttendeeCapacity' => ['Integer'],
+        'maximumVirtualAttendeeCapacity' => ['Integer'],
+        'offers' => ['Demand','Offer'],
         'organizer' => ['Organization','Person'],
         'performer' => ['Organization','Person'],
         'previousStartDate' => ['Date'],
@@ -452,13 +508,17 @@ class Event extends Thing
         'doorTime' => 'The time admission will commence.',
         'duration' => 'The duration of the item (movie, audio recording, event, etc.) in ISO 8601 date format.',
         'endDate' => 'The end date and time of the item (in ISO 8601 date format).',
+        'eventAttendanceMode' => 'The eventAttendanceMode of an event indicates whether it occurs online, offline, or a mix.',
+        'eventSchedule' => 'Associates an Event with a Schedule. There are circumstances where it is preferable to share a schedule for a series of repeating events rather than data on the individual events themselves. For example, a website or application might prefer to publish a schedule for a weekly gym class rather than provide data on every event. A schedule could be processed by applications to add forthcoming events to a calendar. An Event that is associated with a Schedule using this property should not have startDate or endDate properties. These are instead defined within the associated Schedule, this avoids any ambiguity for clients using the data. The property might have repeated values to specify different schedules, e.g. for different months or seasons.',
         'eventStatus' => 'An eventStatus of an event represents its status; particularly useful when an event is cancelled or rescheduled.',
         'funder' => 'A person or organization that supports (sponsors) something through some kind of financial contribution.',
         'inLanguage' => 'The language of the content or performance or used in an action. Please use one of the language codes from the IETF BCP 47 standard. See also availableLanguage. Supersedes language.',
         'isAccessibleForFree' => 'A flag to signal that the item, event, or place is accessible for free. Supersedes free.',
         'location' => 'The location of for example where the event is happening, an organization is located, or where an action takes place.',
         'maximumAttendeeCapacity' => 'The total number of individuals that may attend an event or venue.',
-        'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event.',
+        'maximumPhysicalAttendeeCapacity' => 'The maximum physical attendee capacity of an Event whose eventAttendanceMode is OfflineEventAttendanceMode (or the offline aspects, in the case of a MixedEventAttendanceMode).',
+        'maximumVirtualAttendeeCapacity' => 'The maximum physical attendee capacity of an Event whose eventAttendanceMode is OnlineEventAttendanceMode (or the online aspects, in the case of a MixedEventAttendanceMode).',
+        'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use businessFunction to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a Demand. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer. Inverse property: itemOffered.',
         'organizer' => 'An organizer of an Event.',
         'performer' => 'A performer at the event—for example, a presenter, musician, musical group or actor. Supersedes performers.',
         'previousStartDate' => 'Used in conjunction with eventStatus for rescheduled or cancelled events. This property contains the previously scheduled start date. For rescheduled events, the startDate property should be used for the newly scheduled start date. In the (rare) case of an event that has been postponed and rescheduled multiple times, this field may be repeated.',
@@ -495,8 +555,8 @@ class Event extends Thing
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -527,13 +587,13 @@ class Event extends Thing
     }
 
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function rules()
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['about','actor','aggregateRating','attendee','audience','composer','contributor','director','doorTime','duration','endDate','eventStatus','funder','inLanguage','isAccessibleForFree','location','maximumAttendeeCapacity','offers','organizer','performer','previousStartDate','recordedIn','remainingAttendeeCapacity','review','sponsor','startDate','subEvent','superEvent','translator','typicalAgeRange','workFeatured','workPerformed'], 'validateJsonSchema'],
+            [['about','actor','aggregateRating','attendee','audience','composer','contributor','director','doorTime','duration','endDate','eventAttendanceMode','eventSchedule','eventStatus','funder','inLanguage','isAccessibleForFree','location','maximumAttendeeCapacity','maximumPhysicalAttendeeCapacity','maximumVirtualAttendeeCapacity','offers','organizer','performer','previousStartDate','recordedIn','remainingAttendeeCapacity','review','sponsor','startDate','subEvent','superEvent','translator','typicalAgeRange','workFeatured','workPerformed'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
