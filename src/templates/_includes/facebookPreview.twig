@@ -20,7 +20,7 @@ set previewFacebook = seomatic.site.facebookAppId |length or seomatic.site.faceb
                     <div class="card-seo-facebook__image js-preview-image {{ previewElementId }}-Facebook-post-image"></div>
                     <div class="card-seo-facebook__text">
                         <span class="card-seo-facebook__link js-preview-domain">
-                            {{ siteUrl | replace({'http://': ''}) | replace({'https://': ''})  | replace({'/': ''}) }}
+                            {{ seomatic.helper.siteUrl("/") | replace({'http://': ''}) | replace({'https://': ''})  | replace({'/': ''}) }}
                         </span>
                         <div class="card-seo-facebook__content">
                             <div style="margin-top:5px">

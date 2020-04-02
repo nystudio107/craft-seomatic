@@ -27,7 +27,7 @@
                             {{ (twitterDescriptionArray.content ?? "") }}
                         </span>
                         <span class="card-seo-twitter__link js-preview-domain">
-                            {{ siteUrl | replace({'http://': ''}) | replace({'https://': ''})  | replace({'/': ''}) }}
+                            {{ seomatic.helper.siteUrl("/") | replace({'http://': ''}) | replace({'https://': ''})  | replace({'/': ''}) }}
                         </span>
                     </div>
                 </a>
@@ -44,7 +44,7 @@
                             {{ (twitterDescriptionArray.content ?? "") }}
                         </span>
                         <span class="card-seo-twitter__link js-preview-domain">
-                            {{ siteUrl | replace({'http://': ''}) | replace({'https://': ''})  | replace({'/': ''}) }}
+                            {{ seomatic.helper.siteUrl("/") | replace({'http://': ''}) | replace({'https://': ''})  | replace({'/': ''}) }}
                         </span>
                     </div>
                 </a>
