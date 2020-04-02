@@ -16,7 +16,7 @@
                 <div class="card-seo-linkedin__text">
                     <div class="card-seo-linkedin__content">
                         <div class="card-seo-linkedin__title js-preview-title">{{ (ogTitleArray.content ?? "") }}</div>
-                        <span class="card-seo-linkedin__link js-preview-domain">{{ siteUrl | replace({'http://': ''}) | replace({'https://': ''})  | replace({'/': ''}) }}</span>
+                        <span class="card-seo-linkedin__link js-preview-domain">{{ seomatic.helper.siteUrl("/") | replace({'http://': ''}) | replace({'https://': ''})  | replace({'/': ''}) }}</span>
                     </div>
                 </div>
             </div>

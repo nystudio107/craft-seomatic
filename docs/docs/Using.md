@@ -532,7 +532,7 @@ If you want to add something to the existing **MainEntityOfPage** (in this case 
     'url': 'Some url',
 }, false) %}
 
-{% do mainEntity.offers(offerJsonLd) %}
+{% do mainEntity.offers(offersJsonLd) %}
 ```
 
 The `, false` parameter tells it to create the JSON-LD object, but to _not_ automatically add it to the JSON-LD container. We do this because we don't want it rendered on its own, we want it as part of the existing `mainEntityOfPage` JSON-LD object.

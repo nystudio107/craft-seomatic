@@ -1,5 +1,14 @@
 # SEOmatic Changelog
 
+## 3.2.50 - 2020.04.02
+### Fixed
+* Fixed an issue that appears to be a regression in Yii2, which would cause the Opening Hours to be unable to be saved
+* Fixed an issue with the **Site URL Override** feature that could result in a malformed URL
+
+### Changed
+* Updated to latest npm dependencies via `npm audit fix` for both the primary app and the docs
+* Have the SEO Preview displayed URL reflect the **Site URL Override**
+
 ## 3.2.49 - 2020.03.24
 ### Added
 * Aliases will now auto-suggest in the Site URL Override settings field
