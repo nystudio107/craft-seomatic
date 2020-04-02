@@ -7,6 +7,7 @@
 
 ### Changed
 * Updated to latest npm dependencies via `npm audit fix` for both the primary app and the docs
+* Have the SEO Preview displayed URL reflect the **Site URL Override**
 
 ## 3.2.49 - 2020.03.24
 ### Added
