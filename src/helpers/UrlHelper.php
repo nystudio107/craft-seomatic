@@ -40,6 +40,9 @@ class UrlHelper extends CraftUrlHelper
         $siteUrl = Seomatic::$settings->siteUrlOverride;
         if (!empty($siteUrl)) {
             $siteUrl = MetaValue::parseString($siteUrl);
+            // Extract out just the path part
+            $parts = self::decomposeUrl($path);
+            $path = $parts['path'].$parts['suffix'];
             return rtrim($siteUrl, '/').'/'.ltrim($path, '/');
         }
 
@@ -109,5 +112,35 @@ class UrlHelper extends CraftUrlHelper
         $url = str_replace(' ', '%20', $url);
 
         return $url;
+    }
+
+    // Protected Methods
+    // =========================================================================
+
+    /**
+     * Decompose a url into a prefix, path, and suffix
+     *
+     * @param $pathOrUrl
+     *
+     * @return array
+     */
+    protected static function decomposeUrl($pathOrUrl): array
+    {
+        $result = array();
+
+        if (filter_var($pathOrUrl, FILTER_VALIDATE_URL)) {
+            $url_parts = parse_url($pathOrUrl);
+            $result['prefix'] = $url_parts['scheme'] . '://' . $url_parts['host'];
+            $result['path'] = $url_parts['path'];
+            $result['suffix'] = '';
+            $result['suffix'] .= empty($url_parts['query']) ? '' : '?' . $url_parts['query'];
+            $result['suffix'] .= empty($url_parts['fragment']) ? '' : '#' . $url_parts['fragment'];
+        } else {
+            $result['prefix'] = '';
+            $result['path'] = $pathOrUrl;
+            $result['suffix'] = '';
+        }
+
+        return $result;
     }
 }
