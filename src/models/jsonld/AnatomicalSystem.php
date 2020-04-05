@@ -118,7 +118,7 @@ class AnatomicalSystem extends MedicalEntity
     /**
      * A medical condition associated with this anatomy.
      *
-     * @var mixed|MedicalCondition [schema.org types: MedicalCondition]
+     * @var MedicalCondition [schema.org types: MedicalCondition]
      */
     public $relatedCondition;
 
@@ -126,14 +126,14 @@ class AnatomicalSystem extends MedicalEntity
      * Related anatomical structure(s) that are not part of the system but relate
      * or connect to it, such as vascular bundles associated with an organ system.
      *
-     * @var mixed|AnatomicalStructure [schema.org types: AnatomicalStructure]
+     * @var AnatomicalStructure [schema.org types: AnatomicalStructure]
      */
     public $relatedStructure;
 
     /**
      * A medical therapy related to this anatomy.
      *
-     * @var mixed|MedicalTherapy [schema.org types: MedicalTherapy]
+     * @var MedicalTherapy [schema.org types: MedicalTherapy]
      */
     public $relatedTherapy;
 

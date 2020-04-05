@@ -120,7 +120,7 @@ class Game extends CreativeWork
     /**
      * Indicate how many people can play this game (minimum, maximum, or range).
      *
-     * @var mixed|QuantitativeValue [schema.org types: QuantitativeValue]
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
      */
     public $numberOfPlayers;
 
@@ -128,7 +128,7 @@ class Game extends CreativeWork
      * The task that a player-controlled character, or group of characters may
      * complete in order to gain a reward.
      *
-     * @var mixed|Thing [schema.org types: Thing]
+     * @var Thing [schema.org types: Thing]
      */
     public $quest;
 

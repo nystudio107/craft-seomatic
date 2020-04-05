@@ -106,14 +106,14 @@ class Occupation extends Intangible
      * Estimated salaries are often computed by outside organizations rather than
      * the hiring organization, who may not have committed to the estimated value.
      *
-     * @var mixed|MonetaryAmountDistribution [schema.org types: MonetaryAmountDistribution]
+     * @var mixed|MonetaryAmount|MonetaryAmountDistribution|float [schema.org types: MonetaryAmount, MonetaryAmountDistribution, Number]
      */
     public $estimatedSalary;
 
     /**
      * Description of skills and experience needed for the position or Occupation.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $experienceRequirements;
 
@@ -122,16 +122,19 @@ class Occupation extends Intangible
      * Note that educational requirements and qualifications can vary between
      * jurisdictions.
      *
-     * @var mixed|AdministrativeArea [schema.org types: AdministrativeArea]
+     * @var AdministrativeArea [schema.org types: AdministrativeArea]
      */
     public $occupationLocation;
 
     /**
-     * Category or categories describing the job. Use BLS O*NET-SOC taxonomy:
-     * http://www.onetcenter.org/taxonomy.html. Ideally includes textual label and
-     * formal code, with the property repeated for each applicable value.
+     * A category describing the job, preferably using a term from a taxonomy such
+     * as BLS O*NET-SOC, ISCO-08 or similar, with the property repeated for each
+     * applicable value. Ideally the taxonomy should be identified, and both the
+     * textual label and formal code for the category should be provided. Note:
+     * for historical reasons, any textual label and formal code provided as a
+     * literal may be assumed to be from O*NET-SOC.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var mixed|CategoryCode|string [schema.org types: CategoryCode, Text]
      */
     public $occupationalCategory;
 
@@ -145,14 +148,16 @@ class Occupation extends Intangible
     /**
      * Responsibilities associated with this role or Occupation.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $responsibilities;
 
     /**
-     * Skills required to fulfill this role or in this Occupation.
+     * A statement of knowledge, skill, ability, task or any other assertion
+     * expressing a competency that is desired or required to fulfill this role or
+     * to work in this occupation.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var mixed|DefinedTerm|string [schema.org types: DefinedTerm, Text]
      */
     public $skills;
 
@@ -182,13 +187,13 @@ class Occupation extends Intangible
      */
     static protected $_schemaPropertyExpectedTypes = [
         'educationRequirements' => ['EducationalOccupationalCredential','Text'],
-        'estimatedSalary' => ['MonetaryAmountDistribution'],
+        'estimatedSalary' => ['MonetaryAmount','MonetaryAmountDistribution','Number'],
         'experienceRequirements' => ['Text'],
         'occupationLocation' => ['AdministrativeArea'],
-        'occupationalCategory' => ['Text'],
+        'occupationalCategory' => ['CategoryCode','Text'],
         'qualifications' => ['EducationalOccupationalCredential','Text'],
         'responsibilities' => ['Text'],
-        'skills' => ['Text']
+        'skills' => ['DefinedTerm','Text']
     ];
 
     /**
@@ -201,10 +206,10 @@ class Occupation extends Intangible
         'estimatedSalary' => 'An estimated salary for a job posting or occupation, based on a variety of variables including, but not limited to industry, job title, and location. Estimated salaries are often computed by outside organizations rather than the hiring organization, who may not have committed to the estimated value.',
         'experienceRequirements' => 'Description of skills and experience needed for the position or Occupation.',
         'occupationLocation' => 'The region/country for which this occupational description is appropriate. Note that educational requirements and qualifications can vary between jurisdictions.',
-        'occupationalCategory' => 'Category or categories describing the job. Use BLS O*NET-SOC taxonomy: http://www.onetcenter.org/taxonomy.html. Ideally includes textual label and formal code, with the property repeated for each applicable value.',
+        'occupationalCategory' => 'A category describing the job, preferably using a term from a taxonomy such as BLS O*NET-SOC, ISCO-08 or similar, with the property repeated for each applicable value. Ideally the taxonomy should be identified, and both the textual label and formal code for the category should be provided. Note: for historical reasons, any textual label and formal code provided as a literal may be assumed to be from O*NET-SOC.',
         'qualifications' => 'Specific qualifications required for this role or Occupation.',
         'responsibilities' => 'Responsibilities associated with this role or Occupation.',
-        'skills' => 'Skills required to fulfill this role or in this Occupation.'
+        'skills' => 'A statement of knowledge, skill, ability, task or any other assertion expressing a competency that is desired or required to fulfill this role or to work in this occupation.'
     ];
 
     /**

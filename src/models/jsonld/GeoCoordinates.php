@@ -133,7 +133,7 @@ class GeoCoordinates extends StructuredValue
     /**
      * The postal code. For example, 94043.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $postalCode;
 

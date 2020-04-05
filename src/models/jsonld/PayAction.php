@@ -93,13 +93,6 @@ class PayAction extends TradeAction
     // =========================================================================
 
     /**
-     * A goal towards an action is taken. Can be concrete or abstract.
-     *
-     * @var mixed|MedicalDevicePurpose|Thing [schema.org types: MedicalDevicePurpose, Thing]
-     */
-    public $purpose;
-
-    /**
      * A sub property of participant. The participant who is at the receiving end
      * of the action.
      *
@@ -116,7 +109,6 @@ class PayAction extends TradeAction
      * @var array
      */
     static protected $_schemaPropertyNames = [
-        'purpose',
         'recipient'
     ];
 
@@ -126,7 +118,6 @@ class PayAction extends TradeAction
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'purpose' => ['MedicalDevicePurpose','Thing'],
         'recipient' => ['Audience','ContactPoint','Organization','Person']
     ];
 
@@ -136,7 +127,6 @@ class PayAction extends TradeAction
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'purpose' => 'A goal towards an action is taken. Can be concrete or abstract.',
         'recipient' => 'A sub property of participant. The participant who is at the receiving end of the action.'
     ];
 
@@ -198,7 +188,7 @@ class PayAction extends TradeAction
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['purpose','recipient'], 'validateJsonSchema'],
+            [['recipient'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -94,13 +94,6 @@ class Muscle extends AnatomicalStructure
     // =========================================================================
 
     /**
-     * Obsolete term for muscleAction. Not to be confused with potentialAction.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $action;
-
-    /**
      * The muscle whose action counteracts the specified muscle.
      *
      * @var Muscle [schema.org types: Muscle]
@@ -135,13 +128,6 @@ class Muscle extends AnatomicalStructure
      */
     public $nerve;
 
-    /**
-     * The place or point where a muscle arises.
-     *
-     * @var AnatomicalStructure [schema.org types: AnatomicalStructure]
-     */
-    public $origin;
-
     // Static Protected Properties
     // =========================================================================
 
@@ -151,13 +137,11 @@ class Muscle extends AnatomicalStructure
      * @var array
      */
     static protected $_schemaPropertyNames = [
-        'action',
         'antagonist',
         'bloodSupply',
         'insertion',
         'muscleAction',
-        'nerve',
-        'origin'
+        'nerve'
     ];
 
     /**
@@ -166,13 +150,11 @@ class Muscle extends AnatomicalStructure
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'action' => ['Text'],
         'antagonist' => ['Muscle'],
         'bloodSupply' => ['Vessel'],
         'insertion' => ['AnatomicalStructure'],
         'muscleAction' => ['Text'],
-        'nerve' => ['Nerve'],
-        'origin' => ['AnatomicalStructure']
+        'nerve' => ['Nerve']
     ];
 
     /**
@@ -181,13 +163,11 @@ class Muscle extends AnatomicalStructure
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'action' => 'Obsolete term for muscleAction. Not to be confused with potentialAction.',
         'antagonist' => 'The muscle whose action counteracts the specified muscle.',
         'bloodSupply' => 'The blood vessel that carries blood from the heart to the muscle.',
         'insertion' => 'The place of attachment of a muscle, or what the muscle moves.',
         'muscleAction' => 'The movement the muscle generates.',
-        'nerve' => 'The underlying innervation associated with the muscle.',
-        'origin' => 'The place or point where a muscle arises.'
+        'nerve' => 'The underlying innervation associated with the muscle.'
     ];
 
     /**
@@ -248,7 +228,7 @@ class Muscle extends AnatomicalStructure
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['action','antagonist','bloodSupply','insertion','muscleAction','nerve','origin'], 'validateJsonSchema'],
+            [['antagonist','bloodSupply','insertion','muscleAction','nerve'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -104,6 +104,13 @@ class JobPosting extends Intangible
     public $applicantLocationRequirements;
 
     /**
+     * Contact details for further information relevant to this job posting.
+     *
+     * @var ContactPoint [schema.org types: ContactPoint]
+     */
+    public $applicationContact;
+
+    /**
      * The base salary of the job or of an employee in an EmployeeRole.
      *
      * @var mixed|MonetaryAmount|float|PriceSpecification [schema.org types: MonetaryAmount, Number, PriceSpecification]
@@ -111,9 +118,9 @@ class JobPosting extends Intangible
     public $baseSalary;
 
     /**
-     * Publication date for the job posting.
+     * Publication date of an online listing.
      *
-     * @var mixed|Date [schema.org types: Date]
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
      */
     public $datePosted;
 
@@ -125,12 +132,28 @@ class JobPosting extends Intangible
     public $educationRequirements;
 
     /**
+     * A description of the employer, career opportunities and work environment
+     * for this position.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $employerOverview;
+
+    /**
      * Type of employment (e.g. full-time, part-time, contract, temporary,
      * seasonal, internship).
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $employmentType;
+
+    /**
+     * Indicates the department, unit and/or facility where the employee reports
+     * and/or in which the job is to be performed.
+     *
+     * @var Organization [schema.org types: Organization]
+     */
+    public $employmentUnit;
 
     /**
      * An estimated salary for a job posting or occupation, based on a variety of
@@ -138,21 +161,21 @@ class JobPosting extends Intangible
      * Estimated salaries are often computed by outside organizations rather than
      * the hiring organization, who may not have committed to the estimated value.
      *
-     * @var mixed|MonetaryAmountDistribution [schema.org types: MonetaryAmountDistribution]
+     * @var mixed|MonetaryAmount|MonetaryAmountDistribution|float [schema.org types: MonetaryAmount, MonetaryAmountDistribution, Number]
      */
     public $estimatedSalary;
 
     /**
      * Description of skills and experience needed for the position or Occupation.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $experienceRequirements;
 
     /**
      * Organization offering the job position.
      *
-     * @var mixed|Organization [schema.org types: Organization]
+     * @var Organization [schema.org types: Organization]
      */
     public $hiringOrganization;
 
@@ -160,46 +183,76 @@ class JobPosting extends Intangible
      * Description of bonus and commission compensation aspects of the job.
      * Supersedes incentives.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $incentiveCompensation;
 
     /**
      * The industry associated with the job position.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var mixed|DefinedTerm|string [schema.org types: DefinedTerm, Text]
      */
     public $industry;
 
     /**
      * Description of benefits associated with the job. Supersedes benefits.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $jobBenefits;
 
     /**
+     * An indicator as to whether a position is available for an immediate start.
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $jobImmediateStart;
+
+    /**
      * A (typically single) geographic location associated with the job position.
      *
-     * @var mixed|Place [schema.org types: Place]
+     * @var Place [schema.org types: Place]
      */
     public $jobLocation;
 
     /**
      * A description of the job location (e.g TELECOMMUTE for telecommute jobs).
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $jobLocationType;
 
     /**
-     * Category or categories describing the job. Use BLS O*NET-SOC taxonomy:
-     * http://www.onetcenter.org/taxonomy.html. Ideally includes textual label and
-     * formal code, with the property repeated for each applicable value.
+     * The date on which a successful applicant for this job would be expected to
+     * start work. Choose a specific date in the future or use the
+     * jobImmediateStart property to indicate the position is to be filled as soon
+     * as possible.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var mixed|Date|string [schema.org types: Date, Text]
+     */
+    public $jobStartDate;
+
+    /**
+     * A category describing the job, preferably using a term from a taxonomy such
+     * as BLS O*NET-SOC, ISCO-08 or similar, with the property repeated for each
+     * applicable value. Ideally the taxonomy should be identified, and both the
+     * textual label and formal code for the category should be provided. Note:
+     * for historical reasons, any textual label and formal code provided as a
+     * literal may be assumed to be from O*NET-SOC.
+     *
+     * @var mixed|CategoryCode|string [schema.org types: CategoryCode, Text]
      */
     public $occupationalCategory;
+
+    /**
+     * A description of the types of physical activity associated with the job.
+     * Defined terms such as those in O*net may be used, but note that there is no
+     * way to specify the level of ability as well as its nature when using a
+     * defined term.
+     *
+     * @var mixed|DefinedTerm|string|string [schema.org types: DefinedTerm, Text, URL]
+     */
+    public $physicalRequirement;
 
     /**
      * Specific qualifications required for this role or Occupation.
@@ -211,14 +264,14 @@ class JobPosting extends Intangible
     /**
      * The Occupation for the JobPosting.
      *
-     * @var mixed|Occupation [schema.org types: Occupation]
+     * @var Occupation [schema.org types: Occupation]
      */
     public $relevantOccupation;
 
     /**
      * Responsibilities associated with this role or Occupation.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $responsibilities;
 
@@ -226,14 +279,33 @@ class JobPosting extends Intangible
      * The currency (coded using ISO 4217 ) used for the main salary information
      * in this job posting or for this employee.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $salaryCurrency;
 
     /**
-     * Skills required to fulfill this role or in this Occupation.
+     * A description of any security clearance requirements of the job.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $securityClearanceRequirement;
+
+    /**
+     * A description of any sensory requirements and levels necessary to function
+     * on the job, including hearing and vision. Defined terms such as those in
+     * O*net may be used, but note that there is no way to specify the level of
+     * ability as well as its nature when using a defined term.
+     *
+     * @var mixed|DefinedTerm|string|string [schema.org types: DefinedTerm, Text, URL]
+     */
+    public $sensoryRequirement;
+
+    /**
+     * A statement of knowledge, skill, ability, task or any other assertion
+     * expressing a competency that is desired or required to fulfill this role or
+     * to work in this occupation.
+     *
+     * @var mixed|DefinedTerm|string [schema.org types: DefinedTerm, Text]
      */
     public $skills;
 
@@ -241,22 +313,30 @@ class JobPosting extends Intangible
      * Any special commitments associated with this job posting. Valid entries
      * include VeteranCommit, MilitarySpouseCommit, etc.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $specialCommitments;
 
     /**
      * The title of the job.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $title;
+
+    /**
+     * The number of positions open for this job posting. Use a positive integer.
+     * Do not use if the number of positions is unclear or not known.
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $totalJobOpenings;
 
     /**
      * The date after when the item is not valid. For example the end of an offer,
      * salary period, or a period of opening hours.
      *
-     * @var mixed|DateTime [schema.org types: DateTime]
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
      */
     public $validThrough;
 
@@ -264,7 +344,7 @@ class JobPosting extends Intangible
      * The typical working hours for this job (e.g. 1st shift, night shift,
      * 8am-5pm).
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $workHours;
 
@@ -278,26 +358,35 @@ class JobPosting extends Intangible
      */
     static protected $_schemaPropertyNames = [
         'applicantLocationRequirements',
+        'applicationContact',
         'baseSalary',
         'datePosted',
         'educationRequirements',
+        'employerOverview',
         'employmentType',
+        'employmentUnit',
         'estimatedSalary',
         'experienceRequirements',
         'hiringOrganization',
         'incentiveCompensation',
         'industry',
         'jobBenefits',
+        'jobImmediateStart',
         'jobLocation',
         'jobLocationType',
+        'jobStartDate',
         'occupationalCategory',
+        'physicalRequirement',
         'qualifications',
         'relevantOccupation',
         'responsibilities',
         'salaryCurrency',
+        'securityClearanceRequirement',
+        'sensoryRequirement',
         'skills',
         'specialCommitments',
         'title',
+        'totalJobOpenings',
         'validThrough',
         'workHours'
     ];
@@ -309,27 +398,36 @@ class JobPosting extends Intangible
      */
     static protected $_schemaPropertyExpectedTypes = [
         'applicantLocationRequirements' => ['AdministrativeArea'],
+        'applicationContact' => ['ContactPoint'],
         'baseSalary' => ['MonetaryAmount','Number','PriceSpecification'],
-        'datePosted' => ['Date'],
+        'datePosted' => ['Date','DateTime'],
         'educationRequirements' => ['EducationalOccupationalCredential','Text'],
+        'employerOverview' => ['Text'],
         'employmentType' => ['Text'],
-        'estimatedSalary' => ['MonetaryAmountDistribution'],
+        'employmentUnit' => ['Organization'],
+        'estimatedSalary' => ['MonetaryAmount','MonetaryAmountDistribution','Number'],
         'experienceRequirements' => ['Text'],
         'hiringOrganization' => ['Organization'],
         'incentiveCompensation' => ['Text'],
-        'industry' => ['Text'],
+        'industry' => ['DefinedTerm','Text'],
         'jobBenefits' => ['Text'],
+        'jobImmediateStart' => ['Boolean'],
         'jobLocation' => ['Place'],
         'jobLocationType' => ['Text'],
-        'occupationalCategory' => ['Text'],
+        'jobStartDate' => ['Date','Text'],
+        'occupationalCategory' => ['CategoryCode','Text'],
+        'physicalRequirement' => ['DefinedTerm','Text','URL'],
         'qualifications' => ['EducationalOccupationalCredential','Text'],
         'relevantOccupation' => ['Occupation'],
         'responsibilities' => ['Text'],
         'salaryCurrency' => ['Text'],
-        'skills' => ['Text'],
+        'securityClearanceRequirement' => ['Text','URL'],
+        'sensoryRequirement' => ['DefinedTerm','Text','URL'],
+        'skills' => ['DefinedTerm','Text'],
         'specialCommitments' => ['Text'],
         'title' => ['Text'],
-        'validThrough' => ['DateTime'],
+        'totalJobOpenings' => ['Integer'],
+        'validThrough' => ['Date','DateTime'],
         'workHours' => ['Text']
     ];
 
@@ -340,26 +438,35 @@ class JobPosting extends Intangible
      */
     static protected $_schemaPropertyDescriptions = [
         'applicantLocationRequirements' => 'The location(s) applicants can apply from. This is usually used for telecommuting jobs where the applicant does not need to be in a physical office. Note: This should not be used for citizenship or work visa requirements.',
+        'applicationContact' => 'Contact details for further information relevant to this job posting.',
         'baseSalary' => 'The base salary of the job or of an employee in an EmployeeRole.',
-        'datePosted' => 'Publication date for the job posting.',
+        'datePosted' => 'Publication date of an online listing.',
         'educationRequirements' => 'Educational background needed for the position or Occupation.',
+        'employerOverview' => 'A description of the employer, career opportunities and work environment for this position.',
         'employmentType' => 'Type of employment (e.g. full-time, part-time, contract, temporary, seasonal, internship).',
+        'employmentUnit' => 'Indicates the department, unit and/or facility where the employee reports and/or in which the job is to be performed.',
         'estimatedSalary' => 'An estimated salary for a job posting or occupation, based on a variety of variables including, but not limited to industry, job title, and location. Estimated salaries are often computed by outside organizations rather than the hiring organization, who may not have committed to the estimated value.',
         'experienceRequirements' => 'Description of skills and experience needed for the position or Occupation.',
         'hiringOrganization' => 'Organization offering the job position.',
         'incentiveCompensation' => 'Description of bonus and commission compensation aspects of the job. Supersedes incentives.',
         'industry' => 'The industry associated with the job position.',
         'jobBenefits' => 'Description of benefits associated with the job. Supersedes benefits.',
+        'jobImmediateStart' => 'An indicator as to whether a position is available for an immediate start.',
         'jobLocation' => 'A (typically single) geographic location associated with the job position.',
         'jobLocationType' => 'A description of the job location (e.g TELECOMMUTE for telecommute jobs).',
-        'occupationalCategory' => 'Category or categories describing the job. Use BLS O*NET-SOC taxonomy: http://www.onetcenter.org/taxonomy.html. Ideally includes textual label and formal code, with the property repeated for each applicable value.',
+        'jobStartDate' => 'The date on which a successful applicant for this job would be expected to start work. Choose a specific date in the future or use the jobImmediateStart property to indicate the position is to be filled as soon as possible.',
+        'occupationalCategory' => 'A category describing the job, preferably using a term from a taxonomy such as BLS O*NET-SOC, ISCO-08 or similar, with the property repeated for each applicable value. Ideally the taxonomy should be identified, and both the textual label and formal code for the category should be provided. Note: for historical reasons, any textual label and formal code provided as a literal may be assumed to be from O*NET-SOC.',
+        'physicalRequirement' => 'A description of the types of physical activity associated with the job. Defined terms such as those in O*net may be used, but note that there is no way to specify the level of ability as well as its nature when using a defined term.',
         'qualifications' => 'Specific qualifications required for this role or Occupation.',
         'relevantOccupation' => 'The Occupation for the JobPosting.',
         'responsibilities' => 'Responsibilities associated with this role or Occupation.',
         'salaryCurrency' => 'The currency (coded using ISO 4217 ) used for the main salary information in this job posting or for this employee.',
-        'skills' => 'Skills required to fulfill this role or in this Occupation.',
+        'securityClearanceRequirement' => 'A description of any security clearance requirements of the job.',
+        'sensoryRequirement' => 'A description of any sensory requirements and levels necessary to function on the job, including hearing and vision. Defined terms such as those in O*net may be used, but note that there is no way to specify the level of ability as well as its nature when using a defined term.',
+        'skills' => 'A statement of knowledge, skill, ability, task or any other assertion expressing a competency that is desired or required to fulfill this role or to work in this occupation.',
         'specialCommitments' => 'Any special commitments associated with this job posting. Valid entries include VeteranCommit, MilitarySpouseCommit, etc.',
         'title' => 'The title of the job.',
+        'totalJobOpenings' => 'The number of positions open for this job posting. Use a positive integer. Do not use if the number of positions is unclear or not known.',
         'validThrough' => 'The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.',
         'workHours' => 'The typical working hours for this job (e.g. 1st shift, night shift, 8am-5pm).'
     ];
@@ -422,7 +529,7 @@ class JobPosting extends Intangible
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['applicantLocationRequirements','baseSalary','datePosted','educationRequirements','employmentType','estimatedSalary','experienceRequirements','hiringOrganization','incentiveCompensation','industry','jobBenefits','jobLocation','jobLocationType','occupationalCategory','qualifications','relevantOccupation','responsibilities','salaryCurrency','skills','specialCommitments','title','validThrough','workHours'], 'validateJsonSchema'],
+            [['applicantLocationRequirements','applicationContact','baseSalary','datePosted','educationRequirements','employerOverview','employmentType','employmentUnit','estimatedSalary','experienceRequirements','hiringOrganization','incentiveCompensation','industry','jobBenefits','jobImmediateStart','jobLocation','jobLocationType','jobStartDate','occupationalCategory','physicalRequirement','qualifications','relevantOccupation','responsibilities','salaryCurrency','securityClearanceRequirement','sensoryRequirement','skills','specialCommitments','title','totalJobOpenings','validThrough','workHours'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

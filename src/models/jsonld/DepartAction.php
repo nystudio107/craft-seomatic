@@ -95,7 +95,8 @@ class DepartAction extends MoveAction
 
     /**
      * A sub property of location. The original location of the object or the
-     * agent before the action.
+     * agent before the action. A sub property of location. The original location
+     * of the object or the agent before the action.
      *
      * @var Place [schema.org types: Place]
      */
@@ -138,7 +139,7 @@ class DepartAction extends MoveAction
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'fromLocation' => 'A sub property of location. The original location of the object or the agent before the action.',
+        'fromLocation' => 'A sub property of location. The original location of the object or the agent before the action. A sub property of location. The original location of the object or the agent before the action.',
         'toLocation' => 'A sub property of location. The final location of the object or the agent after the action.'
     ];
 

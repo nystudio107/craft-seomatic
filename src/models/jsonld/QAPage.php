@@ -106,7 +106,7 @@ class QAPage extends WebPage
      * Date on which the content on this web page was last reviewed for accuracy
      * and/or completeness.
      *
-     * @var mixed|Date [schema.org types: Date]
+     * @var Date [schema.org types: Date]
      */
     public $lastReviewed;
 
@@ -114,21 +114,21 @@ class QAPage extends WebPage
      * Indicates if this web page element is the main subject of the page.
      * Supersedes aspect.
      *
-     * @var mixed|WebPageElement [schema.org types: WebPageElement]
+     * @var WebPageElement [schema.org types: WebPageElement]
      */
     public $mainContentOfPage;
 
     /**
      * Indicates the main image on the page.
      *
-     * @var mixed|ImageObject [schema.org types: ImageObject]
+     * @var ImageObject [schema.org types: ImageObject]
      */
     public $primaryImageOfPage;
 
     /**
      * A link related to this web page, for example to other related web pages.
      *
-     * @var mixed|string [schema.org types: URL]
+     * @var string [schema.org types: URL]
      */
     public $relatedLink;
 
@@ -145,7 +145,7 @@ class QAPage extends WebPage
      * non-navigation links that are clicked on the most. Supersedes
      * significantLinks.
      *
-     * @var mixed|string [schema.org types: URL]
+     * @var string [schema.org types: URL]
      */
     public $significantLink;
 
@@ -175,7 +175,7 @@ class QAPage extends WebPage
     /**
      * One of the domain specialities to which this web page's content applies.
      *
-     * @var mixed|Specialty [schema.org types: Specialty]
+     * @var Specialty [schema.org types: Specialty]
      */
     public $specialty;
 

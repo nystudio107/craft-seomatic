@@ -122,14 +122,14 @@ class MovieSeries extends CreativeWorkSeries
      * The production company or studio responsible for the item e.g. series,
      * video game, episode etc.
      *
-     * @var mixed|Organization [schema.org types: Organization]
+     * @var Organization [schema.org types: Organization]
      */
     public $productionCompany;
 
     /**
      * The trailer of a movie or tv/radio series, season, episode, etc.
      *
-     * @var mixed|VideoObject [schema.org types: VideoObject]
+     * @var VideoObject [schema.org types: VideoObject]
      */
     public $trailer;
 

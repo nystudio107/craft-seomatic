@@ -103,63 +103,63 @@ class MusicComposition extends CreativeWork
     /**
      * The date and place the work was first performed.
      *
-     * @var mixed|Event [schema.org types: Event]
+     * @var Event [schema.org types: Event]
      */
     public $firstPerformance;
 
     /**
      * Smaller compositions included in this work (e.g. a movement in a symphony).
      *
-     * @var mixed|MusicComposition [schema.org types: MusicComposition]
+     * @var MusicComposition [schema.org types: MusicComposition]
      */
     public $includedComposition;
 
     /**
      * The International Standard Musical Work Code for the composition.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $iswcCode;
 
     /**
      * The person who wrote the words.
      *
-     * @var mixed|Person [schema.org types: Person]
+     * @var Person [schema.org types: Person]
      */
     public $lyricist;
 
     /**
      * The words in the song.
      *
-     * @var mixed|CreativeWork [schema.org types: CreativeWork]
+     * @var CreativeWork [schema.org types: CreativeWork]
      */
     public $lyrics;
 
     /**
      * An arrangement derived from the composition.
      *
-     * @var mixed|MusicComposition [schema.org types: MusicComposition]
+     * @var MusicComposition [schema.org types: MusicComposition]
      */
     public $musicArrangement;
 
     /**
      * The type of composition (e.g. overture, sonata, symphony, etc.).
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $musicCompositionForm;
 
     /**
      * The key, mode, or scale this composition uses.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $musicalKey;
 
     /**
      * An audio recording of the work. Inverse property: recordingOf.
      *
-     * @var mixed|MusicRecording [schema.org types: MusicRecording]
+     * @var MusicRecording [schema.org types: MusicRecording]
      */
     public $recordedAs;
 

@@ -117,7 +117,7 @@ class ListItem extends Intangible
     /**
      * A link to the ListItem that preceeds the current one.
      *
-     * @var mixed|ListItem [schema.org types: ListItem]
+     * @var ListItem [schema.org types: ListItem]
      */
     public $previousItem;
 

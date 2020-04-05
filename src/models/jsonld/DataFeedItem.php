@@ -103,7 +103,7 @@ class DataFeedItem extends Intangible
     /**
      * The datetime the item was removed from the DataFeed.
      *
-     * @var mixed|DateTime [schema.org types: DateTime]
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
      */
     public $dateDeleted;
 
@@ -119,7 +119,7 @@ class DataFeedItem extends Intangible
      * An entity represented by an entry in a list or data feed (e.g. an 'artist'
      * in a list of 'artists')’.
      *
-     * @var mixed|Thing [schema.org types: Thing]
+     * @var Thing [schema.org types: Thing]
      */
     public $item;
 
@@ -145,7 +145,7 @@ class DataFeedItem extends Intangible
      */
     static protected $_schemaPropertyExpectedTypes = [
         'dateCreated' => ['Date','DateTime'],
-        'dateDeleted' => ['DateTime'],
+        'dateDeleted' => ['Date','DateTime'],
         'dateModified' => ['Date','DateTime'],
         'item' => ['Thing']
     ];

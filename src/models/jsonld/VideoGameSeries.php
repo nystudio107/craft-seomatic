@@ -172,21 +172,21 @@ class VideoGameSeries extends CreativeWorkSeries
     /**
      * The number of episodes in this season or series.
      *
-     * @var mixed|int [schema.org types: Integer]
+     * @var int [schema.org types: Integer]
      */
     public $numberOfEpisodes;
 
     /**
      * Indicate how many people can play this game (minimum, maximum, or range).
      *
-     * @var mixed|QuantitativeValue [schema.org types: QuantitativeValue]
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
      */
     public $numberOfPlayers;
 
     /**
      * The number of seasons in this series.
      *
-     * @var mixed|int [schema.org types: Integer]
+     * @var int [schema.org types: Integer]
      */
     public $numberOfSeasons;
 
@@ -195,7 +195,7 @@ class VideoGameSeries extends CreativeWorkSeries
      * game can be marked as multi-player, co-op and single-player at the same
      * time.
      *
-     * @var mixed|GamePlayMode [schema.org types: GamePlayMode]
+     * @var GamePlayMode [schema.org types: GamePlayMode]
      */
     public $playMode;
 
@@ -203,7 +203,7 @@ class VideoGameSeries extends CreativeWorkSeries
      * The production company or studio responsible for the item e.g. series,
      * video game, episode etc.
      *
-     * @var mixed|Organization [schema.org types: Organization]
+     * @var Organization [schema.org types: Organization]
      */
     public $productionCompany;
 
@@ -211,14 +211,14 @@ class VideoGameSeries extends CreativeWorkSeries
      * The task that a player-controlled character, or group of characters may
      * complete in order to gain a reward.
      *
-     * @var mixed|Thing [schema.org types: Thing]
+     * @var Thing [schema.org types: Thing]
      */
     public $quest;
 
     /**
      * The trailer of a movie or tv/radio series, season, episode, etc.
      *
-     * @var mixed|VideoObject [schema.org types: VideoObject]
+     * @var VideoObject [schema.org types: VideoObject]
      */
     public $trailer;
 

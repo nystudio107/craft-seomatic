@@ -106,7 +106,7 @@ class LoanOrCredit extends FinancialProduct
      * cryptocurrencies e.g. "BTC"; well known names for Local Exchange Tradings
      * Systems (LETS) and other currency types e.g. "Ithaca HOUR".
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $currency;
 
@@ -114,7 +114,7 @@ class LoanOrCredit extends FinancialProduct
      * The period of time after any due date that the borrower has to fulfil its
      * obligations before a default (failure to pay) is deemed to have occurred.
      *
-     * @var mixed|Duration [schema.org types: Duration]
+     * @var Duration [schema.org types: Duration]
      */
     public $gracePeriod;
 
@@ -123,14 +123,14 @@ class LoanOrCredit extends FinancialProduct
      * usually takes the form of periodic payments that normally include part
      * principal plus interest in each payment.
      *
-     * @var mixed|RepaymentSpecification [schema.org types: RepaymentSpecification]
+     * @var RepaymentSpecification [schema.org types: RepaymentSpecification]
      */
     public $loanRepaymentForm;
 
     /**
      * The duration of the loan or credit agreement.
      *
-     * @var mixed|QuantitativeValue [schema.org types: QuantitativeValue]
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
      */
     public $loanTerm;
 
@@ -146,7 +146,7 @@ class LoanOrCredit extends FinancialProduct
      * security. Recourse is where you still have the opportunity to go back to
      * the borrower for the rest of the money.
      *
-     * @var mixed|bool [schema.org types: Boolean]
+     * @var bool [schema.org types: Boolean]
      */
     public $recourseLoan;
 
@@ -154,7 +154,7 @@ class LoanOrCredit extends FinancialProduct
      * Whether the terms for payment of interest can be renegotiated during the
      * life of the loan.
      *
-     * @var mixed|bool [schema.org types: Boolean]
+     * @var bool [schema.org types: Boolean]
      */
     public $renegotiableLoan;
 
