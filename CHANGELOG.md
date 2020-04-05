@@ -1,8 +1,10 @@
 # SEOmatic Changelog
 
-## 3.2.51 - 2020.04.05
+## 3.2.51 - 2020.04.06
 ### Added
-* Added updated Event JSON-LD type with `eventAttendanceMode` property
+* Updated to [Schema.org 7.0.3](https://schema.org/version/7.03/schema-all.html) including [SpecialAnnouncement](https://webmasters.googleblog.com/2020/04/highlight-covid-19-announcements-search.html) and other types/changes to handle the COVID-19 crisis
+* Added several optional properties to the [Event](https://developers.google.com/search/docs/data-types/event) schema.org type: `eventStatus`, `eventAttendanceMode`, and `previousStartDate`
+* Included the `extension` schema.org types as well as `core` schema.org types
 
 ## 3.2.50 - 2020.04.02
 ### Fixed
