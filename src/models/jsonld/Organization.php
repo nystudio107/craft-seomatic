@@ -114,14 +114,14 @@ class Organization extends Thing
      * The overall rating, based on a collection of reviews or ratings, of the
      * item.
      *
-     * @var mixed|AggregateRating [schema.org types: AggregateRating]
+     * @var AggregateRating [schema.org types: AggregateRating]
      */
     public $aggregateRating;
 
     /**
      * Alumni of an organization. Inverse property: alumniOf.
      *
-     * @var mixed|Person [schema.org types: Person]
+     * @var Person [schema.org types: Person]
      */
     public $alumni;
 
@@ -136,7 +136,7 @@ class Organization extends Thing
     /**
      * An award won by or for this item. Supersedes awards.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $award;
 
@@ -151,7 +151,7 @@ class Organization extends Thing
     /**
      * A contact point for a person or organization. Supersedes contactPoints.
      *
-     * @var mixed|ContactPoint [schema.org types: ContactPoint]
+     * @var ContactPoint [schema.org types: ContactPoint]
      */
     public $contactPoint;
 
@@ -170,14 +170,14 @@ class Organization extends Thing
      * logos, opening hours). For example: a store with a pharmacy, or a bakery
      * with a cafe.
      *
-     * @var mixed|Organization [schema.org types: Organization]
+     * @var Organization [schema.org types: Organization]
      */
     public $department;
 
     /**
      * The date that this organization was dissolved.
      *
-     * @var mixed|Date [schema.org types: Date]
+     * @var Date [schema.org types: Date]
      */
     public $dissolutionDate;
 
@@ -204,21 +204,21 @@ class Organization extends Thing
      * The Dun & Bradstreet DUNS number for identifying an organization or
      * business person.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $duns;
 
     /**
      * Email address.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $email;
 
     /**
      * Someone working for this organization. Supersedes employees.
      *
-     * @var mixed|Person [schema.org types: Person]
+     * @var Person [schema.org types: Person]
      */
     public $employee;
 
@@ -238,35 +238,35 @@ class Organization extends Thing
      * Upcoming or past event associated with this place, organization, or action.
      * Supersedes events.
      *
-     * @var mixed|Event [schema.org types: Event]
+     * @var Event [schema.org types: Event]
      */
     public $event;
 
     /**
      * The fax number.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $faxNumber;
 
     /**
      * A person who founded this organization. Supersedes founders.
      *
-     * @var mixed|Person [schema.org types: Person]
+     * @var Person [schema.org types: Person]
      */
     public $founder;
 
     /**
      * The date that this organization was founded.
      *
-     * @var mixed|Date [schema.org types: Date]
+     * @var Date [schema.org types: Date]
      */
     public $foundingDate;
 
     /**
      * The place where the Organization was founded.
      *
-     * @var mixed|Place [schema.org types: Place]
+     * @var Place [schema.org types: Place]
      */
     public $foundingLocation;
 
@@ -284,38 +284,62 @@ class Organization extends Thing
      * person, or place. The GLN is a 13-digit number used to identify parties and
      * physical locations.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $globalLocationNumber;
+
+    /**
+     * A credential awarded to the Person or Organization.
+     *
+     * @var EducationalOccupationalCredential [schema.org types: EducationalOccupationalCredential]
+     */
+    public $hasCredential;
+
+    /**
+     * Indicates a MerchantReturnPolicy that may be applicable. Supersedes
+     * hasProductReturnPolicy.
+     *
+     * @var MerchantReturnPolicy [schema.org types: MerchantReturnPolicy]
+     */
+    public $hasMerchantReturnPolicy;
 
     /**
      * Indicates an OfferCatalog listing for this Organization, Person, or
      * Service.
      *
-     * @var mixed|OfferCatalog [schema.org types: OfferCatalog]
+     * @var OfferCatalog [schema.org types: OfferCatalog]
      */
     public $hasOfferCatalog;
 
     /**
      * Points-of-Sales operated by the organization or person.
      *
-     * @var mixed|Place [schema.org types: Place]
+     * @var Place [schema.org types: Place]
      */
     public $hasPOS;
+
+    /**
+     * The number of interactions for the CreativeWork using the WebSite or
+     * SoftwareApplication. The most specific child type of InteractionCounter
+     * should be used. Supersedes interactionCount.
+     *
+     * @var InteractionCounter [schema.org types: InteractionCounter]
+     */
+    public $interactionStatistic;
 
     /**
      * The International Standard of Industrial Classification of All Economic
      * Activities (ISIC), Revision 4 code for a particular organization, business
      * person, or place.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $isicV4;
 
     /**
      * Of a Person, and less typically of an Organization, to indicate a topic
      * that is known about - suggesting possible expertise but not implying it. We
-     * do not distinguish skill levels here, or yet relate this to educational
+     * do not distinguish skill levels here, or relate this to educational
      * content, events, objectives or JobPosting descriptions.
      *
      * @var mixed|string|Thing|string [schema.org types: Text, Thing, URL]
@@ -335,7 +359,7 @@ class Organization extends Thing
     /**
      * The official name of the organization, e.g. the registered company name.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $legalName;
 
@@ -343,7 +367,7 @@ class Organization extends Thing
      * An organization identifier that uniquely identifies a legal entity as
      * defined in ISO 17442.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $leiCode;
 
@@ -351,7 +375,7 @@ class Organization extends Thing
      * The location of for example where the event is happening, an organization
      * is located, or where an action takes place.
      *
-     * @var mixed|Place|PostalAddress|string [schema.org types: Place, PostalAddress, Text]
+     * @var mixed|Place|PostalAddress|string|VirtualLocation [schema.org types: Place, PostalAddress, Text, VirtualLocation]
      */
     public $location;
 
@@ -366,7 +390,7 @@ class Organization extends Thing
      * A pointer to products or services offered by the organization or person.
      * Inverse property: offeredBy.
      *
-     * @var mixed|Offer [schema.org types: Offer]
+     * @var Offer [schema.org types: Offer]
      */
     public $makesOffer;
 
@@ -391,14 +415,14 @@ class Organization extends Thing
      * The North American Industry Classification System (NAICS) code for a
      * particular organization or business person.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $naics;
 
     /**
      * The number of employees in an organization e.g. business.
      *
-     * @var mixed|QuantitativeValue [schema.org types: QuantitativeValue]
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
      */
     public $numberOfEmployees;
 
@@ -424,7 +448,7 @@ class Organization extends Thing
      * The larger organization that this organization is a subOrganization of, if
      * any. Supersedes branchOf. Inverse property: subOrganization.
      *
-     * @var mixed|Organization [schema.org types: Organization]
+     * @var Organization [schema.org types: Organization]
      */
     public $parentOrganization;
 
@@ -445,7 +469,7 @@ class Organization extends Thing
     /**
      * A review of the item. Supersedes reviews.
      *
-     * @var mixed|Review [schema.org types: Review]
+     * @var Review [schema.org types: Review]
      */
     public $review;
 
@@ -453,14 +477,14 @@ class Organization extends Thing
      * A pointer to products or services sought by the organization or person
      * (demand).
      *
-     * @var mixed|Demand [schema.org types: Demand]
+     * @var Demand [schema.org types: Demand]
      */
     public $seeks;
 
     /**
      * A slogan or motto associated with the item.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $slogan;
 
@@ -478,7 +502,7 @@ class Organization extends Thing
      * second, e.g., as a subsidiary. See also: the more specific 'department'
      * property. Inverse property: parentOrganization.
      *
-     * @var mixed|Organization [schema.org types: Organization]
+     * @var Organization [schema.org types: Organization]
      */
     public $subOrganization;
 
@@ -486,14 +510,14 @@ class Organization extends Thing
      * The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US
      * or the CIF/NIF in Spain.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $taxID;
 
     /**
      * The telephone number.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $telephone;
 
@@ -508,7 +532,7 @@ class Organization extends Thing
     /**
      * The Value-added Tax ID of the organization or person.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $vatID;
 
@@ -545,8 +569,11 @@ class Organization extends Thing
         'foundingLocation',
         'funder',
         'globalLocationNumber',
+        'hasCredential',
+        'hasMerchantReturnPolicy',
         'hasOfferCatalog',
         'hasPOS',
+        'interactionStatistic',
         'isicV4',
         'knowsAbout',
         'knowsLanguage',
@@ -604,14 +631,17 @@ class Organization extends Thing
         'foundingLocation' => ['Place'],
         'funder' => ['Organization','Person'],
         'globalLocationNumber' => ['Text'],
+        'hasCredential' => ['EducationalOccupationalCredential'],
+        'hasMerchantReturnPolicy' => ['MerchantReturnPolicy'],
         'hasOfferCatalog' => ['OfferCatalog'],
         'hasPOS' => ['Place'],
+        'interactionStatistic' => ['InteractionCounter'],
         'isicV4' => ['Text'],
         'knowsAbout' => ['Text','Thing','URL'],
         'knowsLanguage' => ['Language','Text'],
         'legalName' => ['Text'],
         'leiCode' => ['Text'],
-        'location' => ['Place','PostalAddress','Text'],
+        'location' => ['Place','PostalAddress','Text','VirtualLocation'],
         'logo' => ['ImageObject','URL'],
         'makesOffer' => ['Offer'],
         'member' => ['Organization','Person'],
@@ -663,10 +693,13 @@ class Organization extends Thing
         'foundingLocation' => 'The place where the Organization was founded.',
         'funder' => 'A person or organization that supports (sponsors) something through some kind of financial contribution.',
         'globalLocationNumber' => 'The Global Location Number (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations.',
+        'hasCredential' => 'A credential awarded to the Person or Organization.',
+        'hasMerchantReturnPolicy' => 'Indicates a MerchantReturnPolicy that may be applicable. Supersedes hasProductReturnPolicy.',
         'hasOfferCatalog' => 'Indicates an OfferCatalog listing for this Organization, Person, or Service.',
         'hasPOS' => 'Points-of-Sales operated by the organization or person.',
+        'interactionStatistic' => 'The number of interactions for the CreativeWork using the WebSite or SoftwareApplication. The most specific child type of InteractionCounter should be used. Supersedes interactionCount.',
         'isicV4' => 'The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code for a particular organization, business person, or place.',
-        'knowsAbout' => 'Of a Person, and less typically of an Organization, to indicate a topic that is known about - suggesting possible expertise but not implying it. We do not distinguish skill levels here, or yet relate this to educational content, events, objectives or JobPosting descriptions.',
+        'knowsAbout' => 'Of a Person, and less typically of an Organization, to indicate a topic that is known about - suggesting possible expertise but not implying it. We do not distinguish skill levels here, or relate this to educational content, events, objectives or JobPosting descriptions.',
         'knowsLanguage' => 'Of a Person, and less typically of an Organization, to indicate a known language. We do not distinguish skill levels or reading/writing/speaking/signing here. Use language codes from the IETF BCP 47 standard.',
         'legalName' => 'The official name of the organization, e.g. the registered company name.',
         'leiCode' => 'An organization identifier that uniquely identifies a legal entity as defined in ISO 17442.',
@@ -750,7 +783,7 @@ class Organization extends Thing
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['actionableFeedbackPolicy','address','aggregateRating','alumni','areaServed','award','brand','contactPoint','correctionsPolicy','department','dissolutionDate','diversityPolicy','diversityStaffingReport','duns','email','employee','ethicsPolicy','event','faxNumber','founder','foundingDate','foundingLocation','funder','globalLocationNumber','hasOfferCatalog','hasPOS','isicV4','knowsAbout','knowsLanguage','legalName','leiCode','location','logo','makesOffer','member','memberOf','naics','numberOfEmployees','ownershipFundingInfo','owns','parentOrganization','publishingPrinciples','review','seeks','slogan','sponsor','subOrganization','taxID','telephone','unnamedSourcesPolicy','vatID'], 'validateJsonSchema'],
+            [['actionableFeedbackPolicy','address','aggregateRating','alumni','areaServed','award','brand','contactPoint','correctionsPolicy','department','dissolutionDate','diversityPolicy','diversityStaffingReport','duns','email','employee','ethicsPolicy','event','faxNumber','founder','foundingDate','foundingLocation','funder','globalLocationNumber','hasCredential','hasMerchantReturnPolicy','hasOfferCatalog','hasPOS','interactionStatistic','isicV4','knowsAbout','knowsLanguage','legalName','leiCode','location','logo','makesOffer','member','memberOf','naics','numberOfEmployees','ownershipFundingInfo','owns','parentOrganization','publishingPrinciples','review','seeks','slogan','sponsor','subOrganization','taxID','telephone','unnamedSourcesPolicy','vatID'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

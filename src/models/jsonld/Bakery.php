@@ -112,7 +112,7 @@ class Bakery extends FoodEstablishment
     /**
      * The cuisine of the restaurant.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $servesCuisine;
 
@@ -122,7 +122,7 @@ class Bakery extends FoodEstablishment
      * indicate the rating organization, e.g. as an Organization with name such as
      * (e.g. HOTREC, DEHOGA, WHR, or Hotelstars).
      *
-     * @var mixed|Rating [schema.org types: Rating]
+     * @var Rating [schema.org types: Rating]
      */
     public $starRating;
 

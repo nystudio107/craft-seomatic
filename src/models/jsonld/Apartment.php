@@ -112,7 +112,7 @@ class Apartment extends Accommodation
      * agreement (e.g. a double room used by a single person). Typical unit
      * code(s): C62 for person
      *
-     * @var mixed|QuantitativeValue [schema.org types: QuantitativeValue]
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
      */
     public $occupancy;
 

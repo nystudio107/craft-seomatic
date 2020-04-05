@@ -16,7 +16,10 @@ use nystudio107\seomatic\models\jsonld\Offer;
 /**
  * AggregateOffer - When a single product is associated with multiple offers
  * (for example, the same pair of shoes is offered by different merchants),
- * then AggregateOffer can be used.
+ * then AggregateOffer can be used. Note: AggregateOffers are normally
+ * expected to associate multiple offers that all share the same defined
+ * businessFunction value, or default to http://purl.org/goodrelations/v1#Sell
+ * if businessFunction is not explicitly defined.
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -47,7 +50,7 @@ class AggregateOffer extends Offer
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'When a single product is associated with multiple offers (for example, the same pair of shoes is offered by different merchants), then AggregateOffer can be used.';
+    static public $schemaTypeDescription = 'When a single product is associated with multiple offers (for example, the same pair of shoes is offered by different merchants), then AggregateOffer can be used. Note: AggregateOffers are normally expected to associate multiple offers that all share the same defined businessFunction value, or default to http://purl.org/goodrelations/v1#Sell if businessFunction is not explicitly defined.';
 
     /**
      * The Schema.org Type Extends
@@ -95,18 +98,18 @@ class AggregateOffer extends Offer
     // =========================================================================
 
     /**
-     * The highest price of all offers available. Usage guidelines:Use values from
-     * 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather
-     * than superficially similiar Unicode symbols. Use '.' (Unicode 'FULL STOP'
-     * (U+002E)) rather than ',' to indicate a decimal point. Avoid using these
-     * symbols as a readability separator.
+     * The highest price of all offers available. Usage guidelines: Use values
+     * from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039))
+     * rather than superficially similiar Unicode symbols. Use '.' (Unicode 'FULL
+     * STOP' (U+002E)) rather than ',' to indicate a decimal point. Avoid using
+     * these symbols as a readability separator.
      *
      * @var mixed|float|string [schema.org types: Number, Text]
      */
     public $highPrice;
 
     /**
-     * The lowest price of all offers available. Usage guidelines:Use values from
+     * The lowest price of all offers available. Usage guidelines: Use values from
      * 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather
      * than superficially similiar Unicode symbols. Use '.' (Unicode 'FULL STOP'
      * (U+002E)) rather than ',' to indicate a decimal point. Avoid using these
@@ -119,16 +122,21 @@ class AggregateOffer extends Offer
     /**
      * The number of offers for the product.
      *
-     * @var mixed|int [schema.org types: Integer]
+     * @var int [schema.org types: Integer]
      */
     public $offerCount;
 
     /**
      * An offer to provide this item—for example, an offer to sell a product,
      * rent the DVD of a movie, perform a service, or give away tickets to an
-     * event.
+     * event. Use businessFunction to indicate the kind of transaction offered,
+     * i.e. sell, lease, etc. This property can also be used to describe a Demand.
+     * While this property is listed as expected on a number of common types, it
+     * can be used in others. In that case, using a second type, such as Product
+     * or a subtype of Product, can clarify the nature of the offer. Inverse
+     * property: itemOffered.
      *
-     * @var mixed|Offer [schema.org types: Offer]
+     * @var mixed|Demand|Offer [schema.org types: Demand, Offer]
      */
     public $offers;
 
@@ -156,7 +164,7 @@ class AggregateOffer extends Offer
         'highPrice' => ['Number','Text'],
         'lowPrice' => ['Number','Text'],
         'offerCount' => ['Integer'],
-        'offers' => ['Offer']
+        'offers' => ['Demand','Offer']
     ];
 
     /**
@@ -165,10 +173,10 @@ class AggregateOffer extends Offer
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'highPrice' => 'The highest price of all offers available. Usage guidelines:Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.',
-        'lowPrice' => 'The lowest price of all offers available. Usage guidelines:Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.',
+        'highPrice' => 'The highest price of all offers available. Usage guidelines: Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.',
+        'lowPrice' => 'The lowest price of all offers available. Usage guidelines: Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.',
         'offerCount' => 'The number of offers for the product.',
-        'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event.'
+        'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use businessFunction to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a Demand. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer. Inverse property: itemOffered.'
     ];
 
     /**

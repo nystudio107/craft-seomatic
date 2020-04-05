@@ -107,6 +107,20 @@ class SportsTeam extends SportsOrganization
      */
     public $coach;
 
+    /**
+     * Gender of something, typically a Person, but possibly also fictional
+     * characters, animals, etc. While http://schema.org/Male and
+     * http://schema.org/Female may be used, text strings are also acceptable for
+     * people who do not identify as a binary gender. The gender property can also
+     * be used in an extended sense to cover e.g. the gender of sports teams. As
+     * with the gender of individuals, we do not try to enumerate all
+     * possibilities. A mixed-gender SportsTeam can be indicated with a text value
+     * of "Mixed".
+     *
+     * @var mixed|GenderType|string [schema.org types: GenderType, Text]
+     */
+    public $gender;
+
     // Static Protected Properties
     // =========================================================================
 
@@ -117,7 +131,8 @@ class SportsTeam extends SportsOrganization
      */
     static protected $_schemaPropertyNames = [
         'athlete',
-        'coach'
+        'coach',
+        'gender'
     ];
 
     /**
@@ -127,7 +142,8 @@ class SportsTeam extends SportsOrganization
      */
     static protected $_schemaPropertyExpectedTypes = [
         'athlete' => ['Person'],
-        'coach' => ['Person']
+        'coach' => ['Person'],
+        'gender' => ['GenderType','Text']
     ];
 
     /**
@@ -137,7 +153,8 @@ class SportsTeam extends SportsOrganization
      */
     static protected $_schemaPropertyDescriptions = [
         'athlete' => 'A person that acts as performing member of a sports team; a player as opposed to a coach.',
-        'coach' => 'A person that acts in a coaching role for a sports team.'
+        'coach' => 'A person that acts in a coaching role for a sports team.',
+        'gender' => 'Gender of something, typically a Person, but possibly also fictional characters, animals, etc. While http://schema.org/Male and http://schema.org/Female may be used, text strings are also acceptable for people who do not identify as a binary gender. The gender property can also be used in an extended sense to cover e.g. the gender of sports teams. As with the gender of individuals, we do not try to enumerate all possibilities. A mixed-gender SportsTeam can be indicated with a text value of "Mixed".'
     ];
 
     /**
@@ -198,7 +215,7 @@ class SportsTeam extends SportsOrganization
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['athlete','coach'], 'validateJsonSchema'],
+            [['athlete','coach','gender'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

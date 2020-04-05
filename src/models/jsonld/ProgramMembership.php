@@ -114,7 +114,7 @@ class ProgramMembership extends Intangible
     /**
      * A unique identifier for the membership.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $membershipNumber;
 
@@ -130,7 +130,7 @@ class ProgramMembership extends Intangible
     /**
      * The program providing the membership.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $programName;
 

@@ -117,7 +117,7 @@ class Course extends CreativeWork
     /**
      * A description of the qualification, award, certificate, diploma or other
      * educational credential awarded as a consequence of successful completion of
-     * this course.
+     * this course or program.
      *
      * @var mixed|EducationalOccupationalCredential|string|string [schema.org types: EducationalOccupationalCredential, Text, URL]
      */
@@ -127,9 +127,26 @@ class Course extends CreativeWork
      * An offering of the course at a specific time and place or through specific
      * media or mode of study or to a specific section of students.
      *
-     * @var mixed|CourseInstance [schema.org types: CourseInstance]
+     * @var CourseInstance [schema.org types: CourseInstance]
      */
     public $hasCourseInstance;
+
+    /**
+     * The number of credits or units awarded by a Course or required to complete
+     * an EducationalOccupationalProgram.
+     *
+     * @var mixed|int|StructuredValue [schema.org types: Integer, StructuredValue]
+     */
+    public $numberOfCredits;
+
+    /**
+     * A description of the qualification, award, certificate, diploma or other
+     * occupational credential awarded as a consequence of successful completion
+     * of this course or program.
+     *
+     * @var mixed|EducationalOccupationalCredential|string|string [schema.org types: EducationalOccupationalCredential, Text, URL]
+     */
+    public $occupationalCredentialAwarded;
 
     // Static Protected Properties
     // =========================================================================
@@ -143,7 +160,9 @@ class Course extends CreativeWork
         'courseCode',
         'coursePrerequisites',
         'educationalCredentialAwarded',
-        'hasCourseInstance'
+        'hasCourseInstance',
+        'numberOfCredits',
+        'occupationalCredentialAwarded'
     ];
 
     /**
@@ -155,7 +174,9 @@ class Course extends CreativeWork
         'courseCode' => ['Text'],
         'coursePrerequisites' => ['AlignmentObject','Course','Text'],
         'educationalCredentialAwarded' => ['EducationalOccupationalCredential','Text','URL'],
-        'hasCourseInstance' => ['CourseInstance']
+        'hasCourseInstance' => ['CourseInstance'],
+        'numberOfCredits' => ['Integer','StructuredValue'],
+        'occupationalCredentialAwarded' => ['EducationalOccupationalCredential','Text','URL']
     ];
 
     /**
@@ -166,8 +187,10 @@ class Course extends CreativeWork
     static protected $_schemaPropertyDescriptions = [
         'courseCode' => 'The identifier for the Course used by the course provider (e.g. CS101 or 6.001).',
         'coursePrerequisites' => 'Requirements for taking the Course. May be completion of another Course or a textual description like "permission of instructor". Requirements may be a pre-requisite competency, referenced using AlignmentObject.',
-        'educationalCredentialAwarded' => 'A description of the qualification, award, certificate, diploma or other educational credential awarded as a consequence of successful completion of this course.',
-        'hasCourseInstance' => 'An offering of the course at a specific time and place or through specific media or mode of study or to a specific section of students.'
+        'educationalCredentialAwarded' => 'A description of the qualification, award, certificate, diploma or other educational credential awarded as a consequence of successful completion of this course or program.',
+        'hasCourseInstance' => 'An offering of the course at a specific time and place or through specific media or mode of study or to a specific section of students.',
+        'numberOfCredits' => 'The number of credits or units awarded by a Course or required to complete an EducationalOccupationalProgram.',
+        'occupationalCredentialAwarded' => 'A description of the qualification, award, certificate, diploma or other occupational credential awarded as a consequence of successful completion of this course or program.'
     ];
 
     /**
@@ -228,7 +251,7 @@ class Course extends CreativeWork
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['courseCode','coursePrerequisites','educationalCredentialAwarded','hasCourseInstance'], 'validateJsonSchema'],
+            [['courseCode','coursePrerequisites','educationalCredentialAwarded','hasCourseInstance','numberOfCredits','occupationalCredentialAwarded'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

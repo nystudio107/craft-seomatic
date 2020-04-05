@@ -123,7 +123,7 @@ class VisualArtwork extends CreativeWork
      * line art--for example, if the primary artwork is done in watercolors or
      * digital paints.
      *
-     * @var mixed|Person [schema.org types: Person]
+     * @var Person [schema.org types: Person]
      */
     public $artist;
 
@@ -138,7 +138,7 @@ class VisualArtwork extends CreativeWork
     /**
      * The individual who adds color to inked drawings.
      *
-     * @var mixed|Person [schema.org types: Person]
+     * @var Person [schema.org types: Person]
      */
     public $colorist;
 
@@ -160,7 +160,7 @@ class VisualArtwork extends CreativeWork
      * The individual who traces over the pencil drawings in ink after pencils are
      * complete.
      *
-     * @var mixed|Person [schema.org types: Person]
+     * @var Person [schema.org types: Person]
      */
     public $inker;
 
@@ -168,14 +168,14 @@ class VisualArtwork extends CreativeWork
      * The individual who adds lettering, including speech balloons and sound
      * effects, to artwork.
      *
-     * @var mixed|Person [schema.org types: Person]
+     * @var Person [schema.org types: Person]
      */
     public $letterer;
 
     /**
      * The individual who draws the primary narrative artwork.
      *
-     * @var mixed|Person [schema.org types: Person]
+     * @var Person [schema.org types: Person]
      */
     public $penciler;
 

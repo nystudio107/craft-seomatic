@@ -103,35 +103,35 @@ class MusicRecording extends CreativeWork
      * The duration of the item (movie, audio recording, event, etc.) in ISO 8601
      * date format.
      *
-     * @var mixed|Duration [schema.org types: Duration]
+     * @var Duration [schema.org types: Duration]
      */
     public $duration;
 
     /**
      * The album to which this recording belongs.
      *
-     * @var mixed|MusicAlbum [schema.org types: MusicAlbum]
+     * @var MusicAlbum [schema.org types: MusicAlbum]
      */
     public $inAlbum;
 
     /**
      * The playlist to which this recording belongs.
      *
-     * @var mixed|MusicPlaylist [schema.org types: MusicPlaylist]
+     * @var MusicPlaylist [schema.org types: MusicPlaylist]
      */
     public $inPlaylist;
 
     /**
      * The International Standard Recording Code for the recording.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $isrcCode;
 
     /**
      * The composition this track is a recording of. Inverse property: recordedAs.
      *
-     * @var mixed|MusicComposition [schema.org types: MusicComposition]
+     * @var MusicComposition [schema.org types: MusicComposition]
      */
     public $recordingOf;
 

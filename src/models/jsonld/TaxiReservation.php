@@ -105,14 +105,14 @@ class TaxiReservation extends Reservation
     /**
      * Where a taxi will pick up a passenger or a rental car can be picked up.
      *
-     * @var mixed|Place [schema.org types: Place]
+     * @var Place [schema.org types: Place]
      */
     public $pickupLocation;
 
     /**
      * When a taxi will pickup a passenger or a rental car can be picked up.
      *
-     * @var mixed|DateTime [schema.org types: DateTime]
+     * @var DateTime [schema.org types: DateTime]
      */
     public $pickupTime;
 

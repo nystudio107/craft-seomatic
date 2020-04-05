@@ -107,6 +107,14 @@ class BroadcastEvent extends PublicationEvent
     public $isLiveBroadcast;
 
     /**
+     * Languages in which subtitles/captions are available, in IETF BCP 47
+     * standard format.
+     *
+     * @var mixed|Language|string [schema.org types: Language, Text]
+     */
+    public $subtitleLanguage;
+
+    /**
      * The type of screening or video broadcast used (e.g. IMAX, 3D, SD, HD,
      * etc.).
      *
@@ -125,6 +133,7 @@ class BroadcastEvent extends PublicationEvent
     static protected $_schemaPropertyNames = [
         'broadcastOfEvent',
         'isLiveBroadcast',
+        'subtitleLanguage',
         'videoFormat'
     ];
 
@@ -136,6 +145,7 @@ class BroadcastEvent extends PublicationEvent
     static protected $_schemaPropertyExpectedTypes = [
         'broadcastOfEvent' => ['Event'],
         'isLiveBroadcast' => ['Boolean'],
+        'subtitleLanguage' => ['Language','Text'],
         'videoFormat' => ['Text']
     ];
 
@@ -147,6 +157,7 @@ class BroadcastEvent extends PublicationEvent
     static protected $_schemaPropertyDescriptions = [
         'broadcastOfEvent' => 'The event being broadcast such as a sporting event or awards ceremony.',
         'isLiveBroadcast' => 'True is the broadcast is of a live event.',
+        'subtitleLanguage' => 'Languages in which subtitles/captions are available, in IETF BCP 47 standard format.',
         'videoFormat' => 'The type of screening or video broadcast used (e.g. IMAX, 3D, SD, HD, etc.).'
     ];
 
@@ -208,7 +219,7 @@ class BroadcastEvent extends PublicationEvent
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['broadcastOfEvent','isLiveBroadcast','videoFormat'], 'validateJsonSchema'],
+            [['broadcastOfEvent','isLiveBroadcast','subtitleLanguage','videoFormat'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

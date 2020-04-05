@@ -129,14 +129,14 @@ class SuperficialAnatomy extends MedicalEntity
     /**
      * A medical condition associated with this anatomy.
      *
-     * @var mixed|MedicalCondition [schema.org types: MedicalCondition]
+     * @var MedicalCondition [schema.org types: MedicalCondition]
      */
     public $relatedCondition;
 
     /**
      * A medical therapy related to this anatomy.
      *
-     * @var mixed|MedicalTherapy [schema.org types: MedicalTherapy]
+     * @var MedicalTherapy [schema.org types: MedicalTherapy]
      */
     public $relatedTherapy;
 
@@ -145,7 +145,7 @@ class SuperficialAnatomy extends MedicalEntity
      * how characteristics of the superficial anatomy can suggest underlying
      * medical conditions or courses of treatment.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $significance;
 

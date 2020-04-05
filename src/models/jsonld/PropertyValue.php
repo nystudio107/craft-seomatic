@@ -127,7 +127,7 @@ class PropertyValue extends StructuredValue
     /**
      * The lower value of some characteristic or property.
      *
-     * @var mixed|float [schema.org types: Number]
+     * @var float [schema.org types: Number]
      */
     public $minValue;
 
@@ -159,12 +159,12 @@ class PropertyValue extends StructuredValue
      * A string or text indicating the unit of measurement. Useful if you cannot
      * provide a standard unit code for unitCode.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $unitText;
 
     /**
-     * The value of the quantitative value or property value node.For
+     * The value of the quantitative value or property value node. For
      * QuantitativeValue and MonetaryAmount, the recommended type for values is
      * 'Number'. For PropertyValue, it can be 'Text;', 'Number', 'Boolean', or
      * 'StructuredValue'. Use values from 0123456789 (Unicode 'DIGIT ZERO'
@@ -232,7 +232,7 @@ class PropertyValue extends StructuredValue
         'propertyID' => 'A commonly used identifier for the characteristic represented by the property, e.g. a manufacturer or a standard code for a property. propertyID can be (1) a prefixed string, mainly meant to be used with standards for product properties; (2) a site-specific, non-prefixed string (e.g. the primary key of the property or the vendor-specific id of the property), or (3) a URL indicating the type of the property, either pointing to an external vocabulary, or a Web resource that describes the property (e.g. a glossary entry). Standards bodies should promote a standard prefix for the identifiers of properties from their standards.',
         'unitCode' => 'The unit of measurement given using the UN/CEFACT Common Code (3 characters) or a URL. Other codes than the UN/CEFACT Common Code may be used with a prefix followed by a colon.',
         'unitText' => 'A string or text indicating the unit of measurement. Useful if you cannot provide a standard unit code for unitCode.',
-        'value' => 'The value of the quantitative value or property value node.For QuantitativeValue and MonetaryAmount, the recommended type for values is \'Number\'. For PropertyValue, it can be \'Text;\', \'Number\', \'Boolean\', or \'StructuredValue\'. Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.',
+        'value' => 'The value of the quantitative value or property value node. For QuantitativeValue and MonetaryAmount, the recommended type for values is \'Number\'. For PropertyValue, it can be \'Text;\', \'Number\', \'Boolean\', or \'StructuredValue\'. Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.',
         'valueReference' => 'A pointer to a secondary value that provides additional information on the original value, e.g. a reference temperature.'
     ];
 

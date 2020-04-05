@@ -102,14 +102,14 @@ class Physician extends MedicalBusiness
     /**
      * A hospital with which the physician or office is affiliated.
      *
-     * @var mixed|Hospital [schema.org types: Hospital]
+     * @var Hospital [schema.org types: Hospital]
      */
     public $hospitalAffiliation;
 
     /**
      * A medical specialty of the provider.
      *
-     * @var mixed|MedicalSpecialty [schema.org types: MedicalSpecialty]
+     * @var MedicalSpecialty [schema.org types: MedicalSpecialty]
      */
     public $medicalSpecialty;
 

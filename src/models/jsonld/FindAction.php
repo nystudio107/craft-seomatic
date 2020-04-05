@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\jsonld\Action;
 
 /**
- * FindAction - The act of finding an object. Related actions:SearchAction:
+ * FindAction - The act of finding an object. Related actions: SearchAction:
  * FindAction is generally lead by a SearchAction, but not necessarily.
  *
  * @author    nystudio107
@@ -46,7 +46,7 @@ class FindAction extends Action
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'The act of finding an object. Related actions:SearchAction: FindAction is generally lead by a SearchAction, but not necessarily.';
+    static public $schemaTypeDescription = 'The act of finding an object. Related actions: SearchAction: FindAction is generally lead by a SearchAction, but not necessarily.';
 
     /**
      * The Schema.org Type Extends
@@ -118,14 +118,14 @@ class FindAction extends Action
      * describing dates with times. This situation may be clarified in future
      * revisions.
      *
-     * @var mixed|DateTime [schema.org types: DateTime]
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
      */
     public $endTime;
 
     /**
      * For failed actions, more information on the cause of the failure.
      *
-     * @var mixed|Thing [schema.org types: Thing]
+     * @var Thing [schema.org types: Thing]
      */
     public $error;
 
@@ -133,7 +133,7 @@ class FindAction extends Action
      * The object that helped the agent perform the action. e.g. John wrote a book
      * with a pen.
      *
-     * @var mixed|Thing [schema.org types: Thing]
+     * @var Thing [schema.org types: Thing]
      */
     public $instrument;
 
@@ -141,7 +141,7 @@ class FindAction extends Action
      * The location of for example where the event is happening, an organization
      * is located, or where an action takes place.
      *
-     * @var mixed|Place|PostalAddress|string [schema.org types: Place, PostalAddress, Text]
+     * @var mixed|Place|PostalAddress|string|VirtualLocation [schema.org types: Place, PostalAddress, Text, VirtualLocation]
      */
     public $location;
 
@@ -150,7 +150,7 @@ class FindAction extends Action
      * or changed. Also known as the semantic roles patient, affected or undergoer
      * (which change their state) or theme (which doesn't). e.g. John read a book.
      *
-     * @var mixed|Thing [schema.org types: Thing]
+     * @var Thing [schema.org types: Thing]
      */
     public $object;
 
@@ -165,7 +165,7 @@ class FindAction extends Action
     /**
      * The result produced in the action. e.g. John wrote a book.
      *
-     * @var mixed|Thing [schema.org types: Thing]
+     * @var Thing [schema.org types: Thing]
      */
     public $result;
 
@@ -179,14 +179,14 @@ class FindAction extends Action
      * when describing dates with times. This situation may be clarified in future
      * revisions.
      *
-     * @var mixed|DateTime [schema.org types: DateTime]
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
      */
     public $startTime;
 
     /**
      * Indicates a target EntryPoint for an Action.
      *
-     * @var mixed|EntryPoint [schema.org types: EntryPoint]
+     * @var EntryPoint [schema.org types: EntryPoint]
      */
     public $target;
 
@@ -220,14 +220,14 @@ class FindAction extends Action
     static protected $_schemaPropertyExpectedTypes = [
         'actionStatus' => ['ActionStatusType'],
         'agent' => ['Organization','Person'],
-        'endTime' => ['DateTime'],
+        'endTime' => ['DateTime','Time'],
         'error' => ['Thing'],
         'instrument' => ['Thing'],
-        'location' => ['Place','PostalAddress','Text'],
+        'location' => ['Place','PostalAddress','Text','VirtualLocation'],
         'object' => ['Thing'],
         'participant' => ['Organization','Person'],
         'result' => ['Thing'],
-        'startTime' => ['DateTime'],
+        'startTime' => ['DateTime','Time'],
         'target' => ['EntryPoint']
     ];
 

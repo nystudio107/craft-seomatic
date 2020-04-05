@@ -15,12 +15,19 @@ use nystudio107\seomatic\models\jsonld\InteractAction;
 
 /**
  * RegisterAction - The act of registering to be a user of a service, product
- * or web page. Related actions:JoinAction: Unlike JoinAction, RegisterAction
+ * or web page. Related actions: JoinAction: Unlike JoinAction, RegisterAction
  * implies you are registering to be a user of a service, not a group/team of
  * people. [FollowAction]]: Unlike FollowAction, RegisterAction doesn't imply
  * that the agent is expecting to poll for updates from the object.
  * SubscribeAction: Unlike SubscribeAction, RegisterAction doesn't imply that
- * the agent is expecting updates from the object.
+ * the agent is expecting updates from the object. The act of registering to
+ * be a user of a service, product or web page. Related actions: JoinAction:
+ * Unlike JoinAction, RegisterAction implies you are registering to be a user
+ * of a service, not a group/team of people. [FollowAction]]: Unlike
+ * FollowAction, RegisterAction doesn't imply that the agent is expecting to
+ * poll for updates from the object. SubscribeAction: Unlike SubscribeAction,
+ * RegisterAction doesn't imply that the agent is expecting updates from the
+ * object.
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -51,7 +58,7 @@ class RegisterAction extends InteractAction
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'The act of registering to be a user of a service, product or web page. Related actions:JoinAction: Unlike JoinAction, RegisterAction implies you are registering to be a user of a service, not a group/team of people. [FollowAction]]: Unlike FollowAction, RegisterAction doesn\'t imply that the agent is expecting to poll for updates from the object. SubscribeAction: Unlike SubscribeAction, RegisterAction doesn\'t imply that the agent is expecting updates from the object.';
+    static public $schemaTypeDescription = 'The act of registering to be a user of a service, product or web page. Related actions: JoinAction: Unlike JoinAction, RegisterAction implies you are registering to be a user of a service, not a group/team of people. [FollowAction]]: Unlike FollowAction, RegisterAction doesn\'t imply that the agent is expecting to poll for updates from the object. SubscribeAction: Unlike SubscribeAction, RegisterAction doesn\'t imply that the agent is expecting updates from the object. The act of registering to be a user of a service, product or web page. Related actions: JoinAction: Unlike JoinAction, RegisterAction implies you are registering to be a user of a service, not a group/team of people. [FollowAction]]: Unlike FollowAction, RegisterAction doesn\'t imply that the agent is expecting to poll for updates from the object. SubscribeAction: Unlike SubscribeAction, RegisterAction doesn\'t imply that the agent is expecting updates from the object.';
 
     /**
      * The Schema.org Type Extends
@@ -106,14 +113,6 @@ class RegisterAction extends InteractAction
     public $actionStatus;
 
     /**
-     * The direct performer or driver of the action (animate or inanimate). e.g.
-     * John wrote a book.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $agent;
-
-    /**
      * The endTime of something. For a reserved event or service (e.g.
      * FoodEstablishmentReservation), the time that it is expected to end. For
      * actions that span a period of time, when the action was performed. e.g.
@@ -123,22 +122,15 @@ class RegisterAction extends InteractAction
      * describing dates with times. This situation may be clarified in future
      * revisions.
      *
-     * @var mixed|DateTime [schema.org types: DateTime]
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
      */
     public $endTime;
-
-    /**
-     * For failed actions, more information on the cause of the failure.
-     *
-     * @var mixed|Thing [schema.org types: Thing]
-     */
-    public $error;
 
     /**
      * The object that helped the agent perform the action. e.g. John wrote a book
      * with a pen.
      *
-     * @var mixed|Thing [schema.org types: Thing]
+     * @var Thing [schema.org types: Thing]
      */
     public $instrument;
 
@@ -146,7 +138,7 @@ class RegisterAction extends InteractAction
      * The location of for example where the event is happening, an organization
      * is located, or where an action takes place.
      *
-     * @var mixed|Place|PostalAddress|string [schema.org types: Place, PostalAddress, Text]
+     * @var mixed|Place|PostalAddress|string|VirtualLocation [schema.org types: Place, PostalAddress, Text, VirtualLocation]
      */
     public $location;
 
@@ -155,7 +147,7 @@ class RegisterAction extends InteractAction
      * or changed. Also known as the semantic roles patient, affected or undergoer
      * (which change their state) or theme (which doesn't). e.g. John read a book.
      *
-     * @var mixed|Thing [schema.org types: Thing]
+     * @var Thing [schema.org types: Thing]
      */
     public $object;
 
@@ -168,9 +160,10 @@ class RegisterAction extends InteractAction
     public $participant;
 
     /**
-     * The result produced in the action. e.g. John wrote a book.
+     * The result produced in the action. e.g. John wrote a book. The result
+     * produced in the action. e.g. John wrote a book.
      *
-     * @var mixed|Thing [schema.org types: Thing]
+     * @var Thing [schema.org types: Thing]
      */
     public $result;
 
@@ -184,14 +177,14 @@ class RegisterAction extends InteractAction
      * when describing dates with times. This situation may be clarified in future
      * revisions.
      *
-     * @var mixed|DateTime [schema.org types: DateTime]
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
      */
     public $startTime;
 
     /**
      * Indicates a target EntryPoint for an Action.
      *
-     * @var mixed|EntryPoint [schema.org types: EntryPoint]
+     * @var EntryPoint [schema.org types: EntryPoint]
      */
     public $target;
 
@@ -205,9 +198,7 @@ class RegisterAction extends InteractAction
      */
     static protected $_schemaPropertyNames = [
         'actionStatus',
-        'agent',
         'endTime',
-        'error',
         'instrument',
         'location',
         'object',
@@ -224,15 +215,13 @@ class RegisterAction extends InteractAction
      */
     static protected $_schemaPropertyExpectedTypes = [
         'actionStatus' => ['ActionStatusType'],
-        'agent' => ['Organization','Person'],
-        'endTime' => ['DateTime'],
-        'error' => ['Thing'],
+        'endTime' => ['DateTime','Time'],
         'instrument' => ['Thing'],
-        'location' => ['Place','PostalAddress','Text'],
+        'location' => ['Place','PostalAddress','Text','VirtualLocation'],
         'object' => ['Thing'],
         'participant' => ['Organization','Person'],
         'result' => ['Thing'],
-        'startTime' => ['DateTime'],
+        'startTime' => ['DateTime','Time'],
         'target' => ['EntryPoint']
     ];
 
@@ -243,14 +232,12 @@ class RegisterAction extends InteractAction
      */
     static protected $_schemaPropertyDescriptions = [
         'actionStatus' => 'Indicates the current disposition of the Action.',
-        'agent' => 'The direct performer or driver of the action (animate or inanimate). e.g. John wrote a book.',
         'endTime' => 'The endTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to end. For actions that span a period of time, when the action was performed. e.g. John wrote a book from January to December. For media, including audio and video, it\'s the time offset of the end of a clip within a larger file. Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.',
-        'error' => 'For failed actions, more information on the cause of the failure.',
         'instrument' => 'The object that helped the agent perform the action. e.g. John wrote a book with a pen.',
         'location' => 'The location of for example where the event is happening, an organization is located, or where an action takes place.',
         'object' => 'The object upon which the action is carried out, whose state is kept intact or changed. Also known as the semantic roles patient, affected or undergoer (which change their state) or theme (which doesn\'t). e.g. John read a book.',
         'participant' => 'Other co-agents that participated in the action indirectly. e.g. John wrote a book with Steve.',
-        'result' => 'The result produced in the action. e.g. John wrote a book.',
+        'result' => 'The result produced in the action. e.g. John wrote a book. The result produced in the action. e.g. John wrote a book.',
         'startTime' => 'The startTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to start. For actions that span a period of time, when the action was performed. e.g. John wrote a book from January to December. For media, including audio and video, it\'s the time offset of the start of a clip within a larger file. Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.',
         'target' => 'Indicates a target EntryPoint for an Action.'
     ];
@@ -313,7 +300,7 @@ class RegisterAction extends InteractAction
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['actionStatus','agent','endTime','error','instrument','location','object','participant','result','startTime','target'], 'validateJsonSchema'],
+            [['actionStatus','endTime','instrument','location','object','participant','result','startTime','target'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

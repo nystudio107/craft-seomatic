@@ -128,7 +128,7 @@ class Invoice extends Intangible
     /**
      * A number that confirms the given order or payment has been received.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $confirmationNumber;
 
@@ -149,14 +149,14 @@ class Invoice extends Intangible
     /**
      * The date that payment is due. Supersedes paymentDue.
      *
-     * @var mixed|DateTime [schema.org types: DateTime]
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
      */
     public $paymentDueDate;
 
     /**
      * The name of the credit card or other method of payment for the order.
      *
-     * @var mixed|PaymentMethod [schema.org types: PaymentMethod]
+     * @var PaymentMethod [schema.org types: PaymentMethod]
      */
     public $paymentMethod;
 
@@ -164,7 +164,7 @@ class Invoice extends Intangible
      * An identifier for the method of payment used (e.g. the last 4 digits of the
      * credit card).
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $paymentMethodId;
 
@@ -189,14 +189,14 @@ class Invoice extends Intangible
      * The Order(s) related to this Invoice. One or more Orders may be combined
      * into a single Invoice.
      *
-     * @var mixed|Order [schema.org types: Order]
+     * @var Order [schema.org types: Order]
      */
     public $referencesOrder;
 
     /**
      * The date the invoice is scheduled to be paid.
      *
-     * @var mixed|Date [schema.org types: Date]
+     * @var Date [schema.org types: Date]
      */
     public $scheduledPaymentDate;
 
@@ -246,7 +246,7 @@ class Invoice extends Intangible
         'confirmationNumber' => ['Text'],
         'customer' => ['Organization','Person'],
         'minimumPaymentDue' => ['MonetaryAmount','PriceSpecification'],
-        'paymentDueDate' => ['DateTime'],
+        'paymentDueDate' => ['Date','DateTime'],
         'paymentMethod' => ['PaymentMethod'],
         'paymentMethodId' => ['Text'],
         'paymentStatus' => ['PaymentStatusType','Text'],

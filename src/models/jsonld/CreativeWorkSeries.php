@@ -118,7 +118,7 @@ class CreativeWorkSeries extends CreativeWork
      * publication. You can repeat this property to identify different formats of,
      * or the linking ISSN (ISSN-L) for, this serial publication.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $issn;
 

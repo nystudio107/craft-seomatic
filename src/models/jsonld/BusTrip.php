@@ -102,14 +102,14 @@ class BusTrip extends Trip
     /**
      * The name of the bus (e.g. Bolt Express).
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $busName;
 
     /**
      * The unique identifier for the bus.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $busNumber;
 

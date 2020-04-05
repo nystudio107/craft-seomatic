@@ -110,7 +110,7 @@ class Person extends Thing
      * An organization that this person is affiliated with. For example, a
      * school/university, a club, or a team.
      *
-     * @var mixed|Organization [schema.org types: Organization]
+     * @var Organization [schema.org types: Organization]
      */
     public $affiliation;
 
@@ -124,21 +124,21 @@ class Person extends Thing
     /**
      * An award won by or for this item. Supersedes awards.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $award;
 
     /**
      * Date of birth.
      *
-     * @var mixed|Date [schema.org types: Date]
+     * @var Date [schema.org types: Date]
      */
     public $birthDate;
 
     /**
      * The place where the person was born.
      *
-     * @var mixed|Place [schema.org types: Place]
+     * @var Place [schema.org types: Place]
      */
     public $birthPlace;
 
@@ -151,9 +151,17 @@ class Person extends Thing
     public $brand;
 
     /**
+     * A callsign, as used in broadcasting and radio communications to identify
+     * people, radio and TV stations, or vehicles.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $callSign;
+
+    /**
      * A child of the person.
      *
-     * @var mixed|Person [schema.org types: Person]
+     * @var Person [schema.org types: Person]
      */
     public $children;
 
@@ -167,21 +175,21 @@ class Person extends Thing
     /**
      * A contact point for a person or organization. Supersedes contactPoints.
      *
-     * @var mixed|ContactPoint [schema.org types: ContactPoint]
+     * @var ContactPoint [schema.org types: ContactPoint]
      */
     public $contactPoint;
 
     /**
      * Date of death.
      *
-     * @var mixed|Date [schema.org types: Date]
+     * @var Date [schema.org types: Date]
      */
     public $deathDate;
 
     /**
      * The place where the person died.
      *
-     * @var mixed|Place [schema.org types: Place]
+     * @var Place [schema.org types: Place]
      */
     public $deathPlace;
 
@@ -189,14 +197,14 @@ class Person extends Thing
      * The Dun & Bradstreet DUNS number for identifying an organization or
      * business person.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $duns;
 
     /**
      * Email address.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $email;
 
@@ -204,21 +212,21 @@ class Person extends Thing
      * Family name. In the U.S., the last name of an Person. This can be used
      * along with givenName instead of the name property.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $familyName;
 
     /**
      * The fax number.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $faxNumber;
 
     /**
      * The most generic uni-directional social relation.
      *
-     * @var mixed|Person [schema.org types: Person]
+     * @var Person [schema.org types: Person]
      */
     public $follows;
 
@@ -231,9 +239,14 @@ class Person extends Thing
     public $funder;
 
     /**
-     * Gender of the person. While http://schema.org/Male and
+     * Gender of something, typically a Person, but possibly also fictional
+     * characters, animals, etc. While http://schema.org/Male and
      * http://schema.org/Female may be used, text strings are also acceptable for
-     * people who do not identify as a binary gender.
+     * people who do not identify as a binary gender. The gender property can also
+     * be used in an extended sense to cover e.g. the gender of sports teams. As
+     * with the gender of individuals, we do not try to enumerate all
+     * possibilities. A mixed-gender SportsTeam can be indicated with a text value
+     * of "Mixed".
      *
      * @var mixed|GenderType|string [schema.org types: GenderType, Text]
      */
@@ -243,7 +256,7 @@ class Person extends Thing
      * Given name. In the U.S., the first name of a Person. This can be used along
      * with familyName instead of the name property.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $givenName;
 
@@ -253,15 +266,22 @@ class Person extends Thing
      * person, or place. The GLN is a 13-digit number used to identify parties and
      * physical locations.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $globalLocationNumber;
+
+    /**
+     * A credential awarded to the Person or Organization.
+     *
+     * @var EducationalOccupationalCredential [schema.org types: EducationalOccupationalCredential]
+     */
+    public $hasCredential;
 
     /**
      * The Person's occupation. For past professions, use Role for expressing
      * dates.
      *
-     * @var mixed|Occupation [schema.org types: Occupation]
+     * @var Occupation [schema.org types: Occupation]
      */
     public $hasOccupation;
 
@@ -269,14 +289,14 @@ class Person extends Thing
      * Indicates an OfferCatalog listing for this Organization, Person, or
      * Service.
      *
-     * @var mixed|OfferCatalog [schema.org types: OfferCatalog]
+     * @var OfferCatalog [schema.org types: OfferCatalog]
      */
     public $hasOfferCatalog;
 
     /**
      * Points-of-Sales operated by the organization or person.
      *
-     * @var mixed|Place [schema.org types: Place]
+     * @var Place [schema.org types: Place]
      */
     public $hasPOS;
 
@@ -297,44 +317,53 @@ class Person extends Thing
     /**
      * An honorific prefix preceding a Person's name such as Dr/Mrs/Mr.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $honorificPrefix;
 
     /**
      * An honorific suffix preceding a Person's name such as M.D. /PhD/MSCSW.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $honorificSuffix;
+
+    /**
+     * The number of interactions for the CreativeWork using the WebSite or
+     * SoftwareApplication. The most specific child type of InteractionCounter
+     * should be used. Supersedes interactionCount.
+     *
+     * @var InteractionCounter [schema.org types: InteractionCounter]
+     */
+    public $interactionStatistic;
 
     /**
      * The International Standard of Industrial Classification of All Economic
      * Activities (ISIC), Revision 4 code for a particular organization, business
      * person, or place.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $isicV4;
 
     /**
      * The job title of the person (for example, Financial Manager).
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var mixed|DefinedTerm|string [schema.org types: DefinedTerm, Text]
      */
     public $jobTitle;
 
     /**
      * The most generic bi-directional social/work relation.
      *
-     * @var mixed|Person [schema.org types: Person]
+     * @var Person [schema.org types: Person]
      */
     public $knows;
 
     /**
      * Of a Person, and less typically of an Organization, to indicate a topic
      * that is known about - suggesting possible expertise but not implying it. We
-     * do not distinguish skill levels here, or yet relate this to educational
+     * do not distinguish skill levels here, or relate this to educational
      * content, events, objectives or JobPosting descriptions.
      *
      * @var mixed|string|Thing|string [schema.org types: Text, Thing, URL]
@@ -355,7 +384,7 @@ class Person extends Thing
      * A pointer to products or services offered by the organization or person.
      * Inverse property: offeredBy.
      *
-     * @var mixed|Offer [schema.org types: Offer]
+     * @var Offer [schema.org types: Offer]
      */
     public $makesOffer;
 
@@ -371,14 +400,14 @@ class Person extends Thing
      * The North American Industry Classification System (NAICS) code for a
      * particular organization or business person.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $naics;
 
     /**
      * Nationality of the person.
      *
-     * @var mixed|Country [schema.org types: Country]
+     * @var Country [schema.org types: Country]
      */
     public $nationality;
 
@@ -400,14 +429,14 @@ class Person extends Thing
     /**
      * A parent of this person. Supersedes parents.
      *
-     * @var mixed|Person [schema.org types: Person]
+     * @var Person [schema.org types: Person]
      */
     public $parent;
 
     /**
      * Event that this person is a performer or participant in.
      *
-     * @var mixed|Event [schema.org types: Event]
+     * @var Event [schema.org types: Event]
      */
     public $performerIn;
 
@@ -428,7 +457,7 @@ class Person extends Thing
     /**
      * The most generic familial relation.
      *
-     * @var mixed|Person [schema.org types: Person]
+     * @var Person [schema.org types: Person]
      */
     public $relatedTo;
 
@@ -436,14 +465,14 @@ class Person extends Thing
      * A pointer to products or services sought by the organization or person
      * (demand).
      *
-     * @var mixed|Demand [schema.org types: Demand]
+     * @var Demand [schema.org types: Demand]
      */
     public $seeks;
 
     /**
      * A sibling of the person. Supersedes siblings.
      *
-     * @var mixed|Person [schema.org types: Person]
+     * @var Person [schema.org types: Person]
      */
     public $sibling;
 
@@ -459,7 +488,7 @@ class Person extends Thing
     /**
      * The person's spouse.
      *
-     * @var mixed|Person [schema.org types: Person]
+     * @var Person [schema.org types: Person]
      */
     public $spouse;
 
@@ -467,28 +496,28 @@ class Person extends Thing
      * The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US
      * or the CIF/NIF in Spain.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $taxID;
 
     /**
      * The telephone number.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $telephone;
 
     /**
      * The Value-added Tax ID of the organization or person.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $vatID;
 
     /**
      * The weight of the product or person.
      *
-     * @var mixed|QuantitativeValue [schema.org types: QuantitativeValue]
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
      */
     public $weight;
 
@@ -502,7 +531,7 @@ class Person extends Thing
     /**
      * Organizations that the person works for.
      *
-     * @var mixed|Organization [schema.org types: Organization]
+     * @var Organization [schema.org types: Organization]
      */
     public $worksFor;
 
@@ -523,6 +552,7 @@ class Person extends Thing
         'birthDate',
         'birthPlace',
         'brand',
+        'callSign',
         'children',
         'colleague',
         'contactPoint',
@@ -537,6 +567,7 @@ class Person extends Thing
         'gender',
         'givenName',
         'globalLocationNumber',
+        'hasCredential',
         'hasOccupation',
         'hasOfferCatalog',
         'hasPOS',
@@ -544,6 +575,7 @@ class Person extends Thing
         'homeLocation',
         'honorificPrefix',
         'honorificSuffix',
+        'interactionStatistic',
         'isicV4',
         'jobTitle',
         'knows',
@@ -585,6 +617,7 @@ class Person extends Thing
         'birthDate' => ['Date'],
         'birthPlace' => ['Place'],
         'brand' => ['Brand','Organization'],
+        'callSign' => ['Text'],
         'children' => ['Person'],
         'colleague' => ['Person','URL'],
         'contactPoint' => ['ContactPoint'],
@@ -599,6 +632,7 @@ class Person extends Thing
         'gender' => ['GenderType','Text'],
         'givenName' => ['Text'],
         'globalLocationNumber' => ['Text'],
+        'hasCredential' => ['EducationalOccupationalCredential'],
         'hasOccupation' => ['Occupation'],
         'hasOfferCatalog' => ['OfferCatalog'],
         'hasPOS' => ['Place'],
@@ -606,8 +640,9 @@ class Person extends Thing
         'homeLocation' => ['ContactPoint','Place'],
         'honorificPrefix' => ['Text'],
         'honorificSuffix' => ['Text'],
+        'interactionStatistic' => ['InteractionCounter'],
         'isicV4' => ['Text'],
-        'jobTitle' => ['Text'],
+        'jobTitle' => ['DefinedTerm','Text'],
         'knows' => ['Person'],
         'knowsAbout' => ['Text','Thing','URL'],
         'knowsLanguage' => ['Language','Text'],
@@ -647,6 +682,7 @@ class Person extends Thing
         'birthDate' => 'Date of birth.',
         'birthPlace' => 'The place where the person was born.',
         'brand' => 'The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.',
+        'callSign' => 'A callsign, as used in broadcasting and radio communications to identify people, radio and TV stations, or vehicles.',
         'children' => 'A child of the person.',
         'colleague' => 'A colleague of the person. Supersedes colleagues.',
         'contactPoint' => 'A contact point for a person or organization. Supersedes contactPoints.',
@@ -658,9 +694,10 @@ class Person extends Thing
         'faxNumber' => 'The fax number.',
         'follows' => 'The most generic uni-directional social relation.',
         'funder' => 'A person or organization that supports (sponsors) something through some kind of financial contribution.',
-        'gender' => 'Gender of the person. While http://schema.org/Male and http://schema.org/Female may be used, text strings are also acceptable for people who do not identify as a binary gender.',
+        'gender' => 'Gender of something, typically a Person, but possibly also fictional characters, animals, etc. While http://schema.org/Male and http://schema.org/Female may be used, text strings are also acceptable for people who do not identify as a binary gender. The gender property can also be used in an extended sense to cover e.g. the gender of sports teams. As with the gender of individuals, we do not try to enumerate all possibilities. A mixed-gender SportsTeam can be indicated with a text value of "Mixed".',
         'givenName' => 'Given name. In the U.S., the first name of a Person. This can be used along with familyName instead of the name property.',
         'globalLocationNumber' => 'The Global Location Number (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations.',
+        'hasCredential' => 'A credential awarded to the Person or Organization.',
         'hasOccupation' => 'The Person\'s occupation. For past professions, use Role for expressing dates.',
         'hasOfferCatalog' => 'Indicates an OfferCatalog listing for this Organization, Person, or Service.',
         'hasPOS' => 'Points-of-Sales operated by the organization or person.',
@@ -668,10 +705,11 @@ class Person extends Thing
         'homeLocation' => 'A contact location for a person\'s residence.',
         'honorificPrefix' => 'An honorific prefix preceding a Person\'s name such as Dr/Mrs/Mr.',
         'honorificSuffix' => 'An honorific suffix preceding a Person\'s name such as M.D. /PhD/MSCSW.',
+        'interactionStatistic' => 'The number of interactions for the CreativeWork using the WebSite or SoftwareApplication. The most specific child type of InteractionCounter should be used. Supersedes interactionCount.',
         'isicV4' => 'The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code for a particular organization, business person, or place.',
         'jobTitle' => 'The job title of the person (for example, Financial Manager).',
         'knows' => 'The most generic bi-directional social/work relation.',
-        'knowsAbout' => 'Of a Person, and less typically of an Organization, to indicate a topic that is known about - suggesting possible expertise but not implying it. We do not distinguish skill levels here, or yet relate this to educational content, events, objectives or JobPosting descriptions.',
+        'knowsAbout' => 'Of a Person, and less typically of an Organization, to indicate a topic that is known about - suggesting possible expertise but not implying it. We do not distinguish skill levels here, or relate this to educational content, events, objectives or JobPosting descriptions.',
         'knowsLanguage' => 'Of a Person, and less typically of an Organization, to indicate a known language. We do not distinguish skill levels or reading/writing/speaking/signing here. Use language codes from the IETF BCP 47 standard.',
         'makesOffer' => 'A pointer to products or services offered by the organization or person. Inverse property: offeredBy.',
         'memberOf' => 'An Organization (or ProgramMembership) to which this Person or Organization belongs. Inverse property: member.',
@@ -753,7 +791,7 @@ class Person extends Thing
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['additionalName','address','affiliation','alumniOf','award','birthDate','birthPlace','brand','children','colleague','contactPoint','deathDate','deathPlace','duns','email','familyName','faxNumber','follows','funder','gender','givenName','globalLocationNumber','hasOccupation','hasOfferCatalog','hasPOS','height','homeLocation','honorificPrefix','honorificSuffix','isicV4','jobTitle','knows','knowsAbout','knowsLanguage','makesOffer','memberOf','naics','nationality','netWorth','owns','parent','performerIn','publishingPrinciples','relatedTo','seeks','sibling','sponsor','spouse','taxID','telephone','vatID','weight','workLocation','worksFor'], 'validateJsonSchema'],
+            [['additionalName','address','affiliation','alumniOf','award','birthDate','birthPlace','brand','callSign','children','colleague','contactPoint','deathDate','deathPlace','duns','email','familyName','faxNumber','follows','funder','gender','givenName','globalLocationNumber','hasCredential','hasOccupation','hasOfferCatalog','hasPOS','height','homeLocation','honorificPrefix','honorificSuffix','interactionStatistic','isicV4','jobTitle','knows','knowsAbout','knowsLanguage','makesOffer','memberOf','naics','nationality','netWorth','owns','parent','performerIn','publishingPrinciples','relatedTo','seeks','sibling','sponsor','spouse','taxID','telephone','vatID','weight','workLocation','worksFor'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
