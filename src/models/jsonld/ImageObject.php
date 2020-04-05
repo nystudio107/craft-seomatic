@@ -110,14 +110,14 @@ class ImageObject extends MediaObject
     /**
      * Indicates whether this image is representative of the content of the page.
      *
-     * @var mixed|bool [schema.org types: Boolean]
+     * @var bool [schema.org types: Boolean]
      */
     public $representativeOfPage;
 
     /**
      * Thumbnail image for an image or video.
      *
-     * @var mixed|ImageObject [schema.org types: ImageObject]
+     * @var ImageObject [schema.org types: ImageObject]
      */
     public $thumbnail;
 

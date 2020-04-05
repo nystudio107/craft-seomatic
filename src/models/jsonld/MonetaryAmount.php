@@ -123,7 +123,7 @@ class MonetaryAmount extends StructuredValue
     /**
      * The date when the item becomes valid.
      *
-     * @var DateTime [schema.org types: DateTime]
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
      */
     public $validFrom;
 
@@ -131,12 +131,12 @@ class MonetaryAmount extends StructuredValue
      * The date after when the item is not valid. For example the end of an offer,
      * salary period, or a period of opening hours.
      *
-     * @var DateTime [schema.org types: DateTime]
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
      */
     public $validThrough;
 
     /**
-     * The value of the quantitative value or property value node.For
+     * The value of the quantitative value or property value node. For
      * QuantitativeValue and MonetaryAmount, the recommended type for values is
      * 'Number'. For PropertyValue, it can be 'Text;', 'Number', 'Boolean', or
      * 'StructuredValue'. Use values from 0123456789 (Unicode 'DIGIT ZERO'
@@ -175,8 +175,8 @@ class MonetaryAmount extends StructuredValue
         'currency' => ['Text'],
         'maxValue' => ['Number'],
         'minValue' => ['Number'],
-        'validFrom' => ['DateTime'],
-        'validThrough' => ['DateTime'],
+        'validFrom' => ['Date','DateTime'],
+        'validThrough' => ['Date','DateTime'],
         'value' => ['Boolean','Number','StructuredValue','Text']
     ];
 
@@ -191,7 +191,7 @@ class MonetaryAmount extends StructuredValue
         'minValue' => 'The lower value of some characteristic or property.',
         'validFrom' => 'The date when the item becomes valid.',
         'validThrough' => 'The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.',
-        'value' => 'The value of the quantitative value or property value node.For QuantitativeValue and MonetaryAmount, the recommended type for values is \'Number\'. For PropertyValue, it can be \'Text;\', \'Number\', \'Boolean\', or \'StructuredValue\'. Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.'
+        'value' => 'The value of the quantitative value or property value node. For QuantitativeValue and MonetaryAmount, the recommended type for values is \'Number\'. For PropertyValue, it can be \'Text;\', \'Number\', \'Boolean\', or \'StructuredValue\'. Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.'
     ];
 
     /**

@@ -104,7 +104,7 @@ class CookAction extends CreateAction
      * A sub property of location. The specific food event where the action
      * occurred.
      *
-     * @var mixed|FoodEvent [schema.org types: FoodEvent]
+     * @var FoodEvent [schema.org types: FoodEvent]
      */
     public $foodEvent;
 
@@ -112,7 +112,7 @@ class CookAction extends CreateAction
      * A sub property of instrument. The recipe/instructions used to perform the
      * action.
      *
-     * @var mixed|Recipe [schema.org types: Recipe]
+     * @var Recipe [schema.org types: Recipe]
      */
     public $recipe;
 

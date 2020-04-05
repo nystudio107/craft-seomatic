@@ -113,14 +113,14 @@ class FlightReservation extends Reservation
     /**
      * The passenger's sequence number as assigned by the airline.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $passengerSequenceNumber;
 
     /**
      * The type of security screening the passenger is subject to.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $securityScreening;
 

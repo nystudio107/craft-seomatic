@@ -110,7 +110,7 @@ class SoftwareApplication extends CreativeWork
      * The name of the application suite to which the application belongs (e.g.
      * Excel belongs to Office).
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $applicationSuite;
 
@@ -118,7 +118,7 @@ class SoftwareApplication extends CreativeWork
      * Device required to run the application. Used in cases where a specific
      * make/model is required to run the application. Supersedes device.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $availableOnDevice;
 
@@ -126,7 +126,7 @@ class SoftwareApplication extends CreativeWork
      * Countries for which the application is not supported. You can also provide
      * the two-letter ISO 3166-1 alpha-2 country code.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $countriesNotSupported;
 
@@ -134,14 +134,14 @@ class SoftwareApplication extends CreativeWork
      * Countries for which the application is supported. You can also provide the
      * two-letter ISO 3166-1 alpha-2 country code.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $countriesSupported;
 
     /**
      * If the file can be downloaded, URL to download the binary.
      *
-     * @var mixed|string [schema.org types: URL]
+     * @var string [schema.org types: URL]
      */
     public $downloadUrl;
 
@@ -157,7 +157,7 @@ class SoftwareApplication extends CreativeWork
      * Size of the application / package (e.g. 18MB). In the absence of a unit
      * (MB, KB etc.), KB will be assumed.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $fileSize;
 
@@ -165,7 +165,7 @@ class SoftwareApplication extends CreativeWork
      * URL at which the app may be installed, if different from the URL of the
      * item.
      *
-     * @var mixed|string [schema.org types: URL]
+     * @var string [schema.org types: URL]
      */
     public $installUrl;
 
@@ -179,7 +179,7 @@ class SoftwareApplication extends CreativeWork
     /**
      * Operating systems supported (Windows 7, OSX 10.6, Android 1.6).
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $operatingSystem;
 
@@ -187,14 +187,14 @@ class SoftwareApplication extends CreativeWork
      * Permission(s) required to run the app (for example, a mobile app may
      * require full internet access or may run only on wifi).
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $permissions;
 
     /**
      * Processor architecture required to run the application (e.g. IA64).
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $processorRequirements;
 
@@ -215,14 +215,14 @@ class SoftwareApplication extends CreativeWork
     /**
      * Additional content for a software application.
      *
-     * @var mixed|SoftwareApplication [schema.org types: SoftwareApplication]
+     * @var SoftwareApplication [schema.org types: SoftwareApplication]
      */
     public $softwareAddOn;
 
     /**
      * Software application help.
      *
-     * @var mixed|CreativeWork [schema.org types: CreativeWork]
+     * @var CreativeWork [schema.org types: CreativeWork]
      */
     public $softwareHelp;
 
@@ -239,7 +239,7 @@ class SoftwareApplication extends CreativeWork
     /**
      * Version of the software instance.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $softwareVersion;
 
@@ -253,7 +253,7 @@ class SoftwareApplication extends CreativeWork
     /**
      * Supporting data for a SoftwareApplication.
      *
-     * @var mixed|DataFeed [schema.org types: DataFeed]
+     * @var DataFeed [schema.org types: DataFeed]
      */
     public $supportingData;
 

@@ -105,7 +105,7 @@ class Question extends CreativeWork
     /**
      * The number of answers this question has received.
      *
-     * @var mixed|int [schema.org types: Integer]
+     * @var int [schema.org types: Integer]
      */
     public $answerCount;
 
@@ -113,7 +113,7 @@ class Question extends CreativeWork
      * The number of downvotes this question, answer or comment has received from
      * the community.
      *
-     * @var mixed|int [schema.org types: Integer]
+     * @var int [schema.org types: Integer]
      */
     public $downvoteCount;
 
@@ -129,7 +129,7 @@ class Question extends CreativeWork
      * The number of upvotes this question, answer or comment has received from
      * the community.
      *
-     * @var mixed|int [schema.org types: Integer]
+     * @var int [schema.org types: Integer]
      */
     public $upvoteCount;
 

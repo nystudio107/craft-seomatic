@@ -14,8 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\jsonld\ItemAvailability;
 
 /**
- * PreOrder - Indicates that the item is available for pre-order, but will be
- * delivered when generally available.
+ * PreOrder - Indicates that the item is available for pre-order.
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -46,7 +45,7 @@ class PreOrder extends ItemAvailability
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'Indicates that the item is available for pre-order, but will be delivered when generally available.';
+    static public $schemaTypeDescription = 'Indicates that the item is available for pre-order.';
 
     /**
      * The Schema.org Type Extends
@@ -93,6 +92,14 @@ class PreOrder extends ItemAvailability
     // Public Properties
     // =========================================================================
 
+    /**
+     * Relates a term (i.e. a property, class or enumeration) to one that
+     * supersedes it.
+     *
+     * @var mixed|Class|Enumeration|Property [schema.org types: Class, Enumeration, Property]
+     */
+    public $supersededBy;
+
     // Static Protected Properties
     // =========================================================================
 
@@ -102,7 +109,7 @@ class PreOrder extends ItemAvailability
      * @var array
      */
     static protected $_schemaPropertyNames = [
-
+        'supersededBy'
     ];
 
     /**
@@ -111,7 +118,7 @@ class PreOrder extends ItemAvailability
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-
+        'supersededBy' => ['Class','Enumeration','Property']
     ];
 
     /**
@@ -120,7 +127,7 @@ class PreOrder extends ItemAvailability
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-
+        'supersededBy' => 'Relates a term (i.e. a property, class or enumeration) to one that supersedes it.'
     ];
 
     /**
@@ -181,7 +188,7 @@ class PreOrder extends ItemAvailability
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [[], 'validateJsonSchema'],
+            [['supersededBy'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

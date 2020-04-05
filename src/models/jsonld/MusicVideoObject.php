@@ -168,12 +168,12 @@ class MusicVideoObject extends MediaObject
      * describing dates with times. This situation may be clarified in future
      * revisions.
      *
-     * @var mixed|DateTime [schema.org types: DateTime]
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
      */
     public $endTime;
 
     /**
-     * The height of the item.
+     * The height of the item. The height of the item.
      *
      * @var mixed|Distance|QuantitativeValue [schema.org types: Distance, QuantitativeValue]
      */
@@ -182,7 +182,7 @@ class MusicVideoObject extends MediaObject
     /**
      * Player type required—for example, Flash or Silverlight.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $playerType;
 
@@ -190,7 +190,7 @@ class MusicVideoObject extends MediaObject
      * The production company or studio responsible for the item e.g. series,
      * video game, episode etc.
      *
-     * @var mixed|Organization [schema.org types: Organization]
+     * @var Organization [schema.org types: Organization]
      */
     public $productionCompany;
 
@@ -198,7 +198,7 @@ class MusicVideoObject extends MediaObject
      * The regions where the media is allowed. If not specified, then it's assumed
      * to be allowed everywhere. Specify the countries in ISO 3166 format.
      *
-     * @var mixed|Place [schema.org types: Place]
+     * @var Place [schema.org types: Place]
      */
     public $regionsAllowed;
 
@@ -221,14 +221,14 @@ class MusicVideoObject extends MediaObject
      * when describing dates with times. This situation may be clarified in future
      * revisions.
      *
-     * @var mixed|DateTime [schema.org types: DateTime]
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
      */
     public $startTime;
 
     /**
      * Date when this media object was uploaded to this site.
      *
-     * @var mixed|Date [schema.org types: Date]
+     * @var Date [schema.org types: Date]
      */
     public $uploadDate;
 
@@ -281,13 +281,13 @@ class MusicVideoObject extends MediaObject
         'embedUrl' => ['URL'],
         'encodesCreativeWork' => ['CreativeWork'],
         'encodingFormat' => ['Text','URL'],
-        'endTime' => ['DateTime'],
+        'endTime' => ['DateTime','Time'],
         'height' => ['Distance','QuantitativeValue'],
         'playerType' => ['Text'],
         'productionCompany' => ['Organization'],
         'regionsAllowed' => ['Place'],
         'requiresSubscription' => ['Boolean','MediaSubscription'],
-        'startTime' => ['DateTime'],
+        'startTime' => ['DateTime','Time'],
         'uploadDate' => ['Date'],
         'width' => ['Distance','QuantitativeValue']
     ];
@@ -307,7 +307,7 @@ class MusicVideoObject extends MediaObject
         'encodesCreativeWork' => 'The CreativeWork encoded by this media object. Inverse property: encoding.',
         'encodingFormat' => 'Media type typically expressed using a MIME format (see IANA site and MDN reference) e.g. application/zip for a SoftwareApplication binary, audio/mpeg for .mp3 etc.). In cases where a CreativeWork has several media type representations, encoding can be used to indicate each MediaObject alongside particular encodingFormat information. Unregistered or niche encoding and file formats can be indicated instead via the most appropriate URL, e.g. defining Web page or a Wikipedia/Wikidata entry. Supersedes fileFormat.',
         'endTime' => 'The endTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to end. For actions that span a period of time, when the action was performed. e.g. John wrote a book from January to December. For media, including audio and video, it\'s the time offset of the end of a clip within a larger file. Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.',
-        'height' => 'The height of the item.',
+        'height' => 'The height of the item. The height of the item.',
         'playerType' => 'Player type required—for example, Flash or Silverlight.',
         'productionCompany' => 'The production company or studio responsible for the item e.g. series, video game, episode etc.',
         'regionsAllowed' => 'The regions where the media is allowed. If not specified, then it\'s assumed to be allowed everywhere. Specify the countries in ISO 3166 format.',

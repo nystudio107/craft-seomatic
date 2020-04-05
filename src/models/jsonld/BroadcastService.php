@@ -120,30 +120,47 @@ class BroadcastService extends Service
     /**
      * The timezone in ISO 8601 format for which the service bases its broadcasts
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $broadcastTimezone;
 
     /**
      * The organization owning or operating the broadcast service.
      *
-     * @var mixed|Organization [schema.org types: Organization]
+     * @var Organization [schema.org types: Organization]
      */
     public $broadcaster;
+
+    /**
+     * A callsign, as used in broadcasting and radio communications to identify
+     * people, radio and TV stations, or vehicles.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $callSign;
 
     /**
      * A broadcast channel of a broadcast service. Inverse property:
      * providesBroadcastService.
      *
-     * @var mixed|BroadcastChannel [schema.org types: BroadcastChannel]
+     * @var BroadcastChannel [schema.org types: BroadcastChannel]
      */
     public $hasBroadcastChannel;
+
+    /**
+     * The language of the content or performance or used in an action. Please use
+     * one of the language codes from the IETF BCP 47 standard. See also
+     * availableLanguage. Supersedes language.
+     *
+     * @var mixed|Language|string [schema.org types: Language, Text]
+     */
+    public $inLanguage;
 
     /**
      * A broadcast service to which the broadcast service may belong to such as
      * regional variations of a national channel.
      *
-     * @var mixed|BroadcastService [schema.org types: BroadcastService]
+     * @var BroadcastService [schema.org types: BroadcastService]
      */
     public $parentService;
 
@@ -151,7 +168,7 @@ class BroadcastService extends Service
      * The type of screening or video broadcast used (e.g. IMAX, 3D, SD, HD,
      * etc.).
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $videoFormat;
 
@@ -169,7 +186,9 @@ class BroadcastService extends Service
         'broadcastFrequency',
         'broadcastTimezone',
         'broadcaster',
+        'callSign',
         'hasBroadcastChannel',
+        'inLanguage',
         'parentService',
         'videoFormat'
     ];
@@ -185,7 +204,9 @@ class BroadcastService extends Service
         'broadcastFrequency' => ['BroadcastFrequencySpecification','Text'],
         'broadcastTimezone' => ['Text'],
         'broadcaster' => ['Organization'],
+        'callSign' => ['Text'],
         'hasBroadcastChannel' => ['BroadcastChannel'],
+        'inLanguage' => ['Language','Text'],
         'parentService' => ['BroadcastService'],
         'videoFormat' => ['Text']
     ];
@@ -201,7 +222,9 @@ class BroadcastService extends Service
         'broadcastFrequency' => 'The frequency used for over-the-air broadcasts. Numeric values or simple ranges e.g. 87-99. In addition a shortcut idiom is supported for frequences of AM and FM radio channels, e.g. "87 FM".',
         'broadcastTimezone' => 'The timezone in ISO 8601 format for which the service bases its broadcasts',
         'broadcaster' => 'The organization owning or operating the broadcast service.',
+        'callSign' => 'A callsign, as used in broadcasting and radio communications to identify people, radio and TV stations, or vehicles.',
         'hasBroadcastChannel' => 'A broadcast channel of a broadcast service. Inverse property: providesBroadcastService.',
+        'inLanguage' => 'The language of the content or performance or used in an action. Please use one of the language codes from the IETF BCP 47 standard. See also availableLanguage. Supersedes language.',
         'parentService' => 'A broadcast service to which the broadcast service may belong to such as regional variations of a national channel.',
         'videoFormat' => 'The type of screening or video broadcast used (e.g. IMAX, 3D, SD, HD, etc.).'
     ];
@@ -264,7 +287,7 @@ class BroadcastService extends Service
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['broadcastAffiliateOf','broadcastDisplayName','broadcastFrequency','broadcastTimezone','broadcaster','hasBroadcastChannel','parentService','videoFormat'], 'validateJsonSchema'],
+            [['broadcastAffiliateOf','broadcastDisplayName','broadcastFrequency','broadcastTimezone','broadcaster','callSign','hasBroadcastChannel','inLanguage','parentService','videoFormat'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

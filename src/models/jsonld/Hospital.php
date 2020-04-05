@@ -100,9 +100,17 @@ class Hospital extends CivicStructure
     public $availableService;
 
     /**
+     * Indicates data describing a hospital, e.g. a CDC CDCPMDRecord or as some
+     * kind of Dataset.
+     *
+     * @var mixed|CDCPMDRecord|Dataset [schema.org types: CDCPMDRecord, Dataset]
+     */
+    public $healthcareReportingData;
+
+    /**
      * A medical specialty of the provider.
      *
-     * @var mixed|MedicalSpecialty [schema.org types: MedicalSpecialty]
+     * @var MedicalSpecialty [schema.org types: MedicalSpecialty]
      */
     public $medicalSpecialty;
 
@@ -116,6 +124,7 @@ class Hospital extends CivicStructure
      */
     static protected $_schemaPropertyNames = [
         'availableService',
+        'healthcareReportingData',
         'medicalSpecialty'
     ];
 
@@ -126,6 +135,7 @@ class Hospital extends CivicStructure
      */
     static protected $_schemaPropertyExpectedTypes = [
         'availableService' => ['MedicalProcedure','MedicalTest','MedicalTherapy'],
+        'healthcareReportingData' => ['CDCPMDRecord','Dataset'],
         'medicalSpecialty' => ['MedicalSpecialty']
     ];
 
@@ -136,6 +146,7 @@ class Hospital extends CivicStructure
      */
     static protected $_schemaPropertyDescriptions = [
         'availableService' => 'A medical service available from this provider.',
+        'healthcareReportingData' => 'Indicates data describing a hospital, e.g. a CDC CDCPMDRecord or as some kind of Dataset.',
         'medicalSpecialty' => 'A medical specialty of the provider.'
     ];
 
@@ -197,7 +208,7 @@ class Hospital extends CivicStructure
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['availableService','medicalSpecialty'], 'validateJsonSchema'],
+            [['availableService','healthcareReportingData','medicalSpecialty'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

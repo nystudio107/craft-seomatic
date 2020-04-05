@@ -149,7 +149,7 @@ class Product extends Thing
     /**
      * The color of the product.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $color;
 
@@ -161,12 +161,28 @@ class Product extends Thing
     public $depth;
 
     /**
+     * A Global Trade Item Number (GTIN). GTINs identify trade items, including
+     * products and services, using numeric identification codes. The gtin
+     * property generalizes the earlier gtin8, gtin12, gtin13, and gtin14
+     * properties. The GS1 digital link specifications express GTINs as URLs. A
+     * correct gtin value should be a valid GTIN, which means that it should be an
+     * all-numeric string of either 8, 12, 13 or 14 digits, or a "GS1 Digital
+     * Link" URL based on such a string. The numeric component should also have a
+     * valid GS1 check digit and meet the other rules for valid GTINs. See also
+     * GS1's GTIN Summary and Wikipedia for more details. Left-padding of the gtin
+     * values is not required or encouraged.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $gtin;
+
+    /**
      * The GTIN-12 code of the product, or the product to which the offer refers.
      * The GTIN-12 is the 12-digit GS1 Identification Key composed of a U.P.C.
      * Company Prefix, Item Reference, and Check Digit used to identify trade
      * items. See GS1 GTIN Summary for more details.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $gtin12;
 
@@ -176,7 +192,7 @@ class Product extends Thing
      * UPC codes can be converted into a GTIN-13 code by simply adding a
      * preceeding zero. See GS1 GTIN Summary for more details.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $gtin13;
 
@@ -184,7 +200,7 @@ class Product extends Thing
      * The GTIN-14 code of the product, or the product to which the offer refers.
      * See GS1 GTIN Summary for more details.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $gtin14;
 
@@ -193,9 +209,17 @@ class Product extends Thing
      * This code is also known as EAN/UCC-8 or 8-digit EAN. See GS1 GTIN Summary
      * for more details.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $gtin8;
+
+    /**
+     * Indicates a MerchantReturnPolicy that may be applicable. Supersedes
+     * hasProductReturnPolicy.
+     *
+     * @var MerchantReturnPolicy [schema.org types: MerchantReturnPolicy]
+     */
+    public $hasMerchantReturnPolicy;
 
     /**
      * The height of the item.
@@ -208,7 +232,7 @@ class Product extends Thing
      * A pointer to another product (or multiple products) for which this product
      * is an accessory or spare part.
      *
-     * @var mixed|Product [schema.org types: Product]
+     * @var Product [schema.org types: Product]
      */
     public $isAccessoryOrSparePartFor;
 
@@ -216,7 +240,7 @@ class Product extends Thing
      * A pointer to another product (or multiple products) for which this product
      * is a consumable.
      *
-     * @var mixed|Product [schema.org types: Product]
+     * @var Product [schema.org types: Product]
      */
     public $isConsumableFor;
 
@@ -239,7 +263,7 @@ class Product extends Thing
      * condition of the product or service, or the products or services included
      * in the offer.
      *
-     * @var mixed|OfferItemCondition [schema.org types: OfferItemCondition]
+     * @var OfferItemCondition [schema.org types: OfferItemCondition]
      */
     public $itemCondition;
 
@@ -253,7 +277,7 @@ class Product extends Thing
     /**
      * The manufacturer of the product.
      *
-     * @var mixed|Organization [schema.org types: Organization]
+     * @var Organization [schema.org types: Organization]
      */
     public $manufacturer;
 
@@ -278,23 +302,28 @@ class Product extends Thing
      * The Manufacturer Part Number (MPN) of the product, or the product to which
      * the offer refers.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $mpn;
 
     /**
      * Indicates the NATO stock number (nsn) of a Product.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $nsn;
 
     /**
      * An offer to provide this item—for example, an offer to sell a product,
      * rent the DVD of a movie, perform a service, or give away tickets to an
-     * event.
+     * event. Use businessFunction to indicate the kind of transaction offered,
+     * i.e. sell, lease, etc. This property can also be used to describe a Demand.
+     * While this property is listed as expected on a number of common types, it
+     * can be used in others. In that case, using a second type, such as Product
+     * or a subtype of Product, can clarify the nature of the offer. Inverse
+     * property: itemOffered.
      *
-     * @var mixed|Offer [schema.org types: Offer]
+     * @var mixed|Demand|Offer [schema.org types: Demand, Offer]
      */
     public $offers;
 
@@ -302,21 +331,21 @@ class Product extends Thing
      * The product identifier, such as ISBN. For example: meta
      * itemprop="productID" content="isbn:123-456-789".
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $productID;
 
     /**
      * The date of production of the item, e.g. vehicle.
      *
-     * @var mixed|Date [schema.org types: Date]
+     * @var Date [schema.org types: Date]
      */
     public $productionDate;
 
     /**
      * The date the item e.g. vehicle was purchased by the current owner.
      *
-     * @var mixed|Date [schema.org types: Date]
+     * @var Date [schema.org types: Date]
      */
     public $purchaseDate;
 
@@ -324,14 +353,14 @@ class Product extends Thing
      * The release date of a product or product model. This can be used to
      * distinguish the exact variant of a product.
      *
-     * @var mixed|Date [schema.org types: Date]
+     * @var Date [schema.org types: Date]
      */
     public $releaseDate;
 
     /**
      * A review of the item. Supersedes reviews.
      *
-     * @var mixed|Review [schema.org types: Review]
+     * @var Review [schema.org types: Review]
      */
     public $review;
 
@@ -339,21 +368,21 @@ class Product extends Thing
      * The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a
      * product or service, or the product to which the offer refers.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $sku;
 
     /**
      * A slogan or motto associated with the item.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $slogan;
 
     /**
      * The weight of the product or person.
      *
-     * @var mixed|QuantitativeValue [schema.org types: QuantitativeValue]
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
      */
     public $weight;
 
@@ -381,10 +410,12 @@ class Product extends Thing
         'category',
         'color',
         'depth',
+        'gtin',
         'gtin12',
         'gtin13',
         'gtin14',
         'gtin8',
+        'hasMerchantReturnPolicy',
         'height',
         'isAccessoryOrSparePartFor',
         'isConsumableFor',
@@ -423,10 +454,12 @@ class Product extends Thing
         'category' => ['PhysicalActivityCategory','Text','Thing'],
         'color' => ['Text'],
         'depth' => ['Distance','QuantitativeValue'],
+        'gtin' => ['Text'],
         'gtin12' => ['Text'],
         'gtin13' => ['Text'],
         'gtin14' => ['Text'],
         'gtin8' => ['Text'],
+        'hasMerchantReturnPolicy' => ['MerchantReturnPolicy'],
         'height' => ['Distance','QuantitativeValue'],
         'isAccessoryOrSparePartFor' => ['Product'],
         'isConsumableFor' => ['Product'],
@@ -439,7 +472,7 @@ class Product extends Thing
         'model' => ['ProductModel','Text'],
         'mpn' => ['Text'],
         'nsn' => ['Text'],
-        'offers' => ['Offer'],
+        'offers' => ['Demand','Offer'],
         'productID' => ['Text'],
         'productionDate' => ['Date'],
         'purchaseDate' => ['Date'],
@@ -465,10 +498,12 @@ class Product extends Thing
         'category' => 'A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.',
         'color' => 'The color of the product.',
         'depth' => 'The depth of the item.',
+        'gtin' => 'A Global Trade Item Number (GTIN). GTINs identify trade items, including products and services, using numeric identification codes. The gtin property generalizes the earlier gtin8, gtin12, gtin13, and gtin14 properties. The GS1 digital link specifications express GTINs as URLs. A correct gtin value should be a valid GTIN, which means that it should be an all-numeric string of either 8, 12, 13 or 14 digits, or a "GS1 Digital Link" URL based on such a string. The numeric component should also have a valid GS1 check digit and meet the other rules for valid GTINs. See also GS1\'s GTIN Summary and Wikipedia for more details. Left-padding of the gtin values is not required or encouraged.',
         'gtin12' => 'The GTIN-12 code of the product, or the product to which the offer refers. The GTIN-12 is the 12-digit GS1 Identification Key composed of a U.P.C. Company Prefix, Item Reference, and Check Digit used to identify trade items. See GS1 GTIN Summary for more details.',
         'gtin13' => 'The GTIN-13 code of the product, or the product to which the offer refers. This is equivalent to 13-digit ISBN codes and EAN UCC-13. Former 12-digit UPC codes can be converted into a GTIN-13 code by simply adding a preceeding zero. See GS1 GTIN Summary for more details.',
         'gtin14' => 'The GTIN-14 code of the product, or the product to which the offer refers. See GS1 GTIN Summary for more details.',
         'gtin8' => 'The GTIN-8 code of the product, or the product to which the offer refers. This code is also known as EAN/UCC-8 or 8-digit EAN. See GS1 GTIN Summary for more details.',
+        'hasMerchantReturnPolicy' => 'Indicates a MerchantReturnPolicy that may be applicable. Supersedes hasProductReturnPolicy.',
         'height' => 'The height of the item.',
         'isAccessoryOrSparePartFor' => 'A pointer to another product (or multiple products) for which this product is an accessory or spare part.',
         'isConsumableFor' => 'A pointer to another product (or multiple products) for which this product is a consumable.',
@@ -481,7 +516,7 @@ class Product extends Thing
         'model' => 'The model of the product. Use with the URL of a ProductModel or a textual representation of the model identifier. The URL of the ProductModel can be from an external source. It is recommended to additionally provide strong product identifiers via the gtin8/gtin13/gtin14 and mpn properties.',
         'mpn' => 'The Manufacturer Part Number (MPN) of the product, or the product to which the offer refers.',
         'nsn' => 'Indicates the NATO stock number (nsn) of a Product.',
-        'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event.',
+        'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use businessFunction to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a Demand. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer. Inverse property: itemOffered.',
         'productID' => 'The product identifier, such as ISBN. For example: meta itemprop="productID" content="isbn:123-456-789".',
         'productionDate' => 'The date of production of the item, e.g. vehicle.',
         'purchaseDate' => 'The date the item e.g. vehicle was purchased by the current owner.',
@@ -551,7 +586,7 @@ class Product extends Thing
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['additionalProperty','aggregateRating','audience','award','brand','category','color','depth','gtin12','gtin13','gtin14','gtin8','height','isAccessoryOrSparePartFor','isConsumableFor','isRelatedTo','isSimilarTo','itemCondition','logo','manufacturer','material','model','mpn','nsn','offers','productID','productionDate','purchaseDate','releaseDate','review','sku','slogan','weight','width'], 'validateJsonSchema'],
+            [['additionalProperty','aggregateRating','audience','award','brand','category','color','depth','gtin','gtin12','gtin13','gtin14','gtin8','hasMerchantReturnPolicy','height','isAccessoryOrSparePartFor','isConsumableFor','isRelatedTo','isSimilarTo','itemCondition','logo','manufacturer','material','model','mpn','nsn','offers','productID','productionDate','purchaseDate','releaseDate','review','sku','slogan','weight','width'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

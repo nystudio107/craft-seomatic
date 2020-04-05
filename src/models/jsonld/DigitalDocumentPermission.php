@@ -104,7 +104,7 @@ class DigitalDocumentPermission extends Intangible
     /**
      * The type of permission granted the person, organization, or audience.
      *
-     * @var mixed|DigitalDocumentPermissionType [schema.org types: DigitalDocumentPermissionType]
+     * @var DigitalDocumentPermissionType [schema.org types: DigitalDocumentPermissionType]
      */
     public $permissionType;
 

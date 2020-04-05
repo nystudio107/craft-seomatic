@@ -128,7 +128,7 @@ class Episode extends CreativeWork
     /**
      * The season to which this episode belongs.
      *
-     * @var mixed|CreativeWorkSeason [schema.org types: CreativeWorkSeason]
+     * @var CreativeWorkSeason [schema.org types: CreativeWorkSeason]
      */
     public $partOfSeason;
 
@@ -136,7 +136,7 @@ class Episode extends CreativeWork
      * The series to which this episode or season belongs. Supersedes
      * partOfTVSeries.
      *
-     * @var mixed|CreativeWorkSeries [schema.org types: CreativeWorkSeries]
+     * @var CreativeWorkSeries [schema.org types: CreativeWorkSeries]
      */
     public $partOfSeries;
 
@@ -144,14 +144,14 @@ class Episode extends CreativeWork
      * The production company or studio responsible for the item e.g. series,
      * video game, episode etc.
      *
-     * @var mixed|Organization [schema.org types: Organization]
+     * @var Organization [schema.org types: Organization]
      */
     public $productionCompany;
 
     /**
      * The trailer of a movie or tv/radio series, season, episode, etc.
      *
-     * @var mixed|VideoObject [schema.org types: VideoObject]
+     * @var VideoObject [schema.org types: VideoObject]
      */
     public $trailer;
 

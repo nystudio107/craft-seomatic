@@ -137,7 +137,7 @@ class Article extends CreativeWork
      * Any description of pages that is not separated into pageStart and pageEnd;
      * for example, "1-6, 9, 55" or "10-12, 46-49".
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $pagination;
 
@@ -167,7 +167,7 @@ class Article extends CreativeWork
     /**
      * The number of words in the text of the Article.
      *
-     * @var mixed|int [schema.org types: Integer]
+     * @var int [schema.org types: Integer]
      */
     public $wordCount;
 

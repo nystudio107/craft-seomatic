@@ -112,7 +112,7 @@ class MusicRelease extends MusicPlaylist
      * The duration of the item (movie, audio recording, event, etc.) in ISO 8601
      * date format.
      *
-     * @var mixed|Duration [schema.org types: Duration]
+     * @var Duration [schema.org types: Duration]
      */
     public $duration;
 
@@ -120,21 +120,21 @@ class MusicRelease extends MusicPlaylist
      * Format of this release (the type of recording media used, ie. compact disc,
      * digital media, LP, etc.).
      *
-     * @var mixed|MusicReleaseFormatType [schema.org types: MusicReleaseFormatType]
+     * @var MusicReleaseFormatType [schema.org types: MusicReleaseFormatType]
      */
     public $musicReleaseFormat;
 
     /**
      * The label that issued the release.
      *
-     * @var mixed|Organization [schema.org types: Organization]
+     * @var Organization [schema.org types: Organization]
      */
     public $recordLabel;
 
     /**
      * The album this is a release of. Inverse property: albumRelease.
      *
-     * @var mixed|MusicAlbum [schema.org types: MusicAlbum]
+     * @var MusicAlbum [schema.org types: MusicAlbum]
      */
     public $releaseOf;
 

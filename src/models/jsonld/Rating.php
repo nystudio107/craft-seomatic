@@ -111,7 +111,17 @@ class Rating extends Intangible
     public $bestRating;
 
     /**
-     * The rating for the content. Usage guidelines:Use values from 0123456789
+     * A short explanation (e.g. one to two sentences) providing background
+     * context and other information that led to the conclusion expressed in the
+     * rating. This is particularly applicable to ratings associated with "fact
+     * check" markup using ClaimReview.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $ratingExplanation;
+
+    /**
+     * The rating for the content. Usage guidelines: Use values from 0123456789
      * (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than
      * superficially similiar Unicode symbols. Use '.' (Unicode 'FULL STOP'
      * (U+002E)) rather than ',' to indicate a decimal point. Avoid using these
@@ -125,7 +135,7 @@ class Rating extends Intangible
      * This Review or Rating is relevant to this part or facet of the
      * itemReviewed.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $reviewAspect;
 
@@ -148,6 +158,7 @@ class Rating extends Intangible
     static protected $_schemaPropertyNames = [
         'author',
         'bestRating',
+        'ratingExplanation',
         'ratingValue',
         'reviewAspect',
         'worstRating'
@@ -161,6 +172,7 @@ class Rating extends Intangible
     static protected $_schemaPropertyExpectedTypes = [
         'author' => ['Organization','Person'],
         'bestRating' => ['Number','Text'],
+        'ratingExplanation' => ['Text'],
         'ratingValue' => ['Number','Text'],
         'reviewAspect' => ['Text'],
         'worstRating' => ['Number','Text']
@@ -174,7 +186,8 @@ class Rating extends Intangible
     static protected $_schemaPropertyDescriptions = [
         'author' => 'The author of this content or rating. Please note that author is special in that HTML 5 provides a special mechanism for indicating authorship via the rel tag. That is equivalent to this and may be used interchangeably.',
         'bestRating' => 'The highest value allowed in this rating system. If bestRating is omitted, 5 is assumed.',
-        'ratingValue' => 'The rating for the content. Usage guidelines:Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.',
+        'ratingExplanation' => 'A short explanation (e.g. one to two sentences) providing background context and other information that led to the conclusion expressed in the rating. This is particularly applicable to ratings associated with "fact check" markup using ClaimReview.',
+        'ratingValue' => 'The rating for the content. Usage guidelines: Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.',
         'reviewAspect' => 'This Review or Rating is relevant to this part or facet of the itemReviewed.',
         'worstRating' => 'The lowest value allowed in this rating system. If worstRating is omitted, 1 is assumed.'
     ];
@@ -237,7 +250,7 @@ class Rating extends Intangible
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['author','bestRating','ratingValue','reviewAspect','worstRating'], 'validateJsonSchema'],
+            [['author','bestRating','ratingExplanation','ratingValue','reviewAspect','worstRating'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

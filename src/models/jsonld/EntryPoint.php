@@ -111,14 +111,14 @@ class EntryPoint extends Intangible
     /**
      * The supported content type(s) for an EntryPoint response.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $contentType;
 
     /**
      * The supported encoding type(s) for an EntryPoint request.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $encodingType;
 
@@ -126,7 +126,7 @@ class EntryPoint extends Intangible
      * An HTTP method that specifies the appropriate HTTP method for a request to
      * an HTTP EntryPoint. Values are capitalized strings as used in HTTP.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $httpMethod;
 
@@ -134,7 +134,7 @@ class EntryPoint extends Intangible
      * An url template (RFC6570) that will be used to construct the target of the
      * execution of the action.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $urlTemplate;
 

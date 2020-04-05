@@ -95,14 +95,14 @@ class Trip extends Intangible
     /**
      * The expected arrival time.
      *
-     * @var DateTime [schema.org types: DateTime]
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
      */
     public $arrivalTime;
 
     /**
      * The expected departure time.
      *
-     * @var DateTime [schema.org types: DateTime]
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
      */
     public $departureTime;
 
@@ -117,9 +117,14 @@ class Trip extends Intangible
     /**
      * An offer to provide this item—for example, an offer to sell a product,
      * rent the DVD of a movie, perform a service, or give away tickets to an
-     * event.
+     * event. Use businessFunction to indicate the kind of transaction offered,
+     * i.e. sell, lease, etc. This property can also be used to describe a Demand.
+     * While this property is listed as expected on a number of common types, it
+     * can be used in others. In that case, using a second type, such as Product
+     * or a subtype of Product, can clarify the nature of the offer. Inverse
+     * property: itemOffered.
      *
-     * @var mixed|Offer [schema.org types: Offer]
+     * @var mixed|Demand|Offer [schema.org types: Demand, Offer]
      */
     public $offers;
 
@@ -127,7 +132,7 @@ class Trip extends Intangible
      * Identifies that this Trip is a subTrip of another Trip. For example Day 1,
      * Day 2, etc. of a multi-day trip. Inverse property: subTrip.
      *
-     * @var mixed|Trip [schema.org types: Trip]
+     * @var Trip [schema.org types: Trip]
      */
     public $partOfTrip;
 
@@ -145,7 +150,7 @@ class Trip extends Intangible
      * Identifies a Trip that is a subTrip of this Trip. For example Day 1, Day 2,
      * etc. of a multi-day trip. Inverse property: partOfTrip.
      *
-     * @var mixed|Trip [schema.org types: Trip]
+     * @var Trip [schema.org types: Trip]
      */
     public $subTrip;
 
@@ -173,10 +178,10 @@ class Trip extends Intangible
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'arrivalTime' => ['DateTime'],
-        'departureTime' => ['DateTime'],
+        'arrivalTime' => ['DateTime','Time'],
+        'departureTime' => ['DateTime','Time'],
         'itinerary' => ['ItemList','Place'],
-        'offers' => ['Offer'],
+        'offers' => ['Demand','Offer'],
         'partOfTrip' => ['Trip'],
         'provider' => ['Organization','Person'],
         'subTrip' => ['Trip']
@@ -191,7 +196,7 @@ class Trip extends Intangible
         'arrivalTime' => 'The expected arrival time.',
         'departureTime' => 'The expected departure time.',
         'itinerary' => 'Destination(s) ( Place ) that make up a trip. For a trip where destination order is important use ItemList to specify that order (see examples).',
-        'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event.',
+        'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use businessFunction to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a Demand. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer. Inverse property: itemOffered.',
         'partOfTrip' => 'Identifies that this Trip is a subTrip of another Trip. For example Day 1, Day 2, etc. of a multi-day trip. Inverse property: subTrip.',
         'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller. Supersedes carrier.',
         'subTrip' => 'Identifies a Trip that is a subTrip of this Trip. For example Day 1, Day 2, etc. of a multi-day trip. Inverse property: partOfTrip.'

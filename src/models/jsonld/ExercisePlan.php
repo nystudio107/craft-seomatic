@@ -114,7 +114,7 @@ class ExercisePlan extends CreativeWork
      * number of repetitions of movement, quantitative distance, progressions over
      * time, etc.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $additionalVariable;
 
@@ -122,7 +122,7 @@ class ExercisePlan extends CreativeWork
      * Type(s) of exercise or activity, such as strength training, flexibility
      * training, aerobics, cardiac rehabilitation, etc.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $exerciseType;
 

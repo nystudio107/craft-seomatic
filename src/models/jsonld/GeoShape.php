@@ -116,7 +116,7 @@ class GeoShape extends StructuredValue
      * point is the lower corner, the second point is the upper corner. A box is
      * expressed as two points separated by a space character.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $box;
 
@@ -125,7 +125,7 @@ class GeoShape extends StructuredValue
      * specified latitude and longitude. A circle is expressed as a pair followed
      * by a radius in meters.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $circle;
 
@@ -142,7 +142,7 @@ class GeoShape extends StructuredValue
      * A line is a point-to-point path consisting of two or more points. A line is
      * expressed as a series of two or more point objects separated by space.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $line;
 
@@ -152,14 +152,14 @@ class GeoShape extends StructuredValue
      * of four or more space delimited points where the first and final points are
      * identical.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $polygon;
 
     /**
      * The postal code. For example, 94043.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $postalCode;
 

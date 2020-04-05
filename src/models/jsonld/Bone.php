@@ -125,13 +125,6 @@ class Bone extends AnatomicalStructure
     public $diagram;
 
     /**
-     * Function of the anatomical structure.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $function;
-
-    /**
      * The anatomical or organ system that this structure is part of.
      *
      * @var AnatomicalSystem [schema.org types: AnatomicalSystem]
@@ -172,7 +165,6 @@ class Bone extends AnatomicalStructure
         'bodyLocation',
         'connectedTo',
         'diagram',
-        'function',
         'partOfSystem',
         'relatedCondition',
         'relatedTherapy',
@@ -189,7 +181,6 @@ class Bone extends AnatomicalStructure
         'bodyLocation' => ['Text'],
         'connectedTo' => ['AnatomicalStructure'],
         'diagram' => ['ImageObject'],
-        'function' => ['Text'],
         'partOfSystem' => ['AnatomicalSystem'],
         'relatedCondition' => ['MedicalCondition'],
         'relatedTherapy' => ['MedicalTherapy'],
@@ -206,7 +197,6 @@ class Bone extends AnatomicalStructure
         'bodyLocation' => 'Location in the body of the anatomical structure.',
         'connectedTo' => 'Other anatomical structures to which this structure is connected.',
         'diagram' => 'An image containing a diagram that illustrates the structure and/or its component substructures and/or connections with other structures.',
-        'function' => 'Function of the anatomical structure.',
         'partOfSystem' => 'The anatomical or organ system that this structure is part of.',
         'relatedCondition' => 'A medical condition associated with this anatomy.',
         'relatedTherapy' => 'A medical therapy related to this anatomy.',
@@ -271,7 +261,7 @@ class Bone extends AnatomicalStructure
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['associatedPathophysiology','bodyLocation','connectedTo','diagram','function','partOfSystem','relatedCondition','relatedTherapy','subStructure'], 'validateJsonSchema'],
+            [['associatedPathophysiology','bodyLocation','connectedTo','diagram','partOfSystem','relatedCondition','relatedTherapy','subStructure'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -173,7 +173,7 @@ class MediaObject extends CreativeWork
      * describing dates with times. This situation may be clarified in future
      * revisions.
      *
-     * @var mixed|DateTime [schema.org types: DateTime]
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
      */
     public $endTime;
 
@@ -187,7 +187,7 @@ class MediaObject extends CreativeWork
     /**
      * Player type required—for example, Flash or Silverlight.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $playerType;
 
@@ -195,7 +195,7 @@ class MediaObject extends CreativeWork
      * The production company or studio responsible for the item e.g. series,
      * video game, episode etc.
      *
-     * @var mixed|Organization [schema.org types: Organization]
+     * @var Organization [schema.org types: Organization]
      */
     public $productionCompany;
 
@@ -203,7 +203,7 @@ class MediaObject extends CreativeWork
      * The regions where the media is allowed. If not specified, then it's assumed
      * to be allowed everywhere. Specify the countries in ISO 3166 format.
      *
-     * @var mixed|Place [schema.org types: Place]
+     * @var Place [schema.org types: Place]
      */
     public $regionsAllowed;
 
@@ -226,14 +226,14 @@ class MediaObject extends CreativeWork
      * when describing dates with times. This situation may be clarified in future
      * revisions.
      *
-     * @var mixed|DateTime [schema.org types: DateTime]
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
      */
     public $startTime;
 
     /**
      * Date when this media object was uploaded to this site.
      *
-     * @var mixed|Date [schema.org types: Date]
+     * @var Date [schema.org types: Date]
      */
     public $uploadDate;
 
@@ -286,13 +286,13 @@ class MediaObject extends CreativeWork
         'embedUrl' => ['URL'],
         'encodesCreativeWork' => ['CreativeWork'],
         'encodingFormat' => ['Text','URL'],
-        'endTime' => ['DateTime'],
+        'endTime' => ['DateTime','Time'],
         'height' => ['Distance','QuantitativeValue'],
         'playerType' => ['Text'],
         'productionCompany' => ['Organization'],
         'regionsAllowed' => ['Place'],
         'requiresSubscription' => ['Boolean','MediaSubscription'],
-        'startTime' => ['DateTime'],
+        'startTime' => ['DateTime','Time'],
         'uploadDate' => ['Date'],
         'width' => ['Distance','QuantitativeValue']
     ];

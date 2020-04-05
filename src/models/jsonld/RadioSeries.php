@@ -136,14 +136,14 @@ class RadioSeries extends CreativeWorkSeries
     /**
      * The number of episodes in this season or series.
      *
-     * @var mixed|int [schema.org types: Integer]
+     * @var int [schema.org types: Integer]
      */
     public $numberOfEpisodes;
 
     /**
      * The number of seasons in this series.
      *
-     * @var mixed|int [schema.org types: Integer]
+     * @var int [schema.org types: Integer]
      */
     public $numberOfSeasons;
 
@@ -151,14 +151,14 @@ class RadioSeries extends CreativeWorkSeries
      * The production company or studio responsible for the item e.g. series,
      * video game, episode etc.
      *
-     * @var mixed|Organization [schema.org types: Organization]
+     * @var Organization [schema.org types: Organization]
      */
     public $productionCompany;
 
     /**
      * The trailer of a movie or tv/radio series, season, episode, etc.
      *
-     * @var mixed|VideoObject [schema.org types: VideoObject]
+     * @var VideoObject [schema.org types: VideoObject]
      */
     public $trailer;
 

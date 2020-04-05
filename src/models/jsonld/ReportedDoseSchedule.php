@@ -110,7 +110,7 @@ class ReportedDoseSchedule extends DoseSchedule
     /**
      * How often the dose is taken, e.g. 'daily'.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $frequency;
 
@@ -118,7 +118,7 @@ class ReportedDoseSchedule extends DoseSchedule
      * Characteristics of the population for which this is intended, or which
      * typically uses it, e.g. 'adults'.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $targetPopulation;
 

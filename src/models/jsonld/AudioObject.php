@@ -104,7 +104,7 @@ class AudioObject extends MediaObject
      * If this MediaObject is an AudioObject or VideoObject, the transcript of
      * that object.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $transcript;
 
