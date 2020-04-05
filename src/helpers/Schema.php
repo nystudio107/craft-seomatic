@@ -261,7 +261,7 @@ class Schema
                 $value = self::makeSchemaAssociative($value);
             }
             if (isset($value['layer']) && \is_string($value['layer'])) {
-                if ($value['layer'] === 'core') {
+                if ($value['layer'] === 'core' || $value['layer'] === 'pending') {
                     $result[$key] = $value;
                 }
             } else {
