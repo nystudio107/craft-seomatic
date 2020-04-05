@@ -98,6 +98,21 @@ class MeetingRoom extends Room
     // =========================================================================
 
     /**
+     * Category of an Accommodation, following real estate conventions e.g. RESO
+     * (see PropertySubType, and PropertyType fields for suggested values).
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $accommodationCategory;
+
+    /**
+     * A floorplan of some Accommodation.
+     *
+     * @var FloorPlan [schema.org types: FloorPlan]
+     */
+    public $accommodationFloorPlan;
+
+    /**
      * An amenity feature (e.g. a characteristic or service) of the Accommodation.
      * This generic property does not make a statement about whether the feature
      * is included in an offer for the main accommodation or available at extra
@@ -108,6 +123,15 @@ class MeetingRoom extends Room
     public $amenityFeature;
 
     /**
+     * The floor level for an Accommodation in a multi-storey building. Since
+     * counting systems vary internationally, the local system should be used
+     * where possible.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $floorLevel;
+
+    /**
      * The size of the accommodation, e.g. in square meter or squarefoot. Typical
      * unit code(s): MTK for square meter, FTK for square foot, or YDK for square
      * yard
@@ -115,6 +139,49 @@ class MeetingRoom extends Room
      * @var QuantitativeValue [schema.org types: QuantitativeValue]
      */
     public $floorSize;
+
+    /**
+     * Length of the lease for some Accommodation, either particular to some Offer
+     * or in some cases intrinsic to the property.
+     *
+     * @var mixed|Duration|QuantitativeValue [schema.org types: Duration, QuantitativeValue]
+     */
+    public $leaseLength;
+
+    /**
+     * The total integer number of bathrooms in a some Accommodation, following
+     * real estate conventions as documented in RESO: "The simple sum of the
+     * number of bathrooms. For example for a property with two Full Bathrooms and
+     * one Half Bathroom, the Bathrooms Total Integer will be 3.". See also
+     * numberOfRooms.
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $numberOfBathroomsTotal;
+
+    /**
+     * The total integer number of bedrooms in a some Accommodation,
+     * ApartmentComplex or FloorPlan.
+     *
+     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
+     */
+    public $numberOfBedrooms;
+
+    /**
+     * Number of full bathrooms - The total number of full and ¾ bathrooms in an
+     * Accommodation. This corresponds to the BathroomsFull field in RESO.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $numberOfFullBathrooms;
+
+    /**
+     * Number of partial bathrooms - The total number of half and ¼ bathrooms in
+     * an Accommodation. This corresponds to the BathroomsPartial field in RESO.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $numberOfPartialBathrooms;
 
     /**
      * The number of rooms (excluding bathrooms and closets) of the accommodation
@@ -129,7 +196,7 @@ class MeetingRoom extends Room
     /**
      * Indications regarding the permitted usage of the accommodation.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $permittedUsage;
 
@@ -141,6 +208,23 @@ class MeetingRoom extends Room
      */
     public $petsAllowed;
 
+    /**
+     * A page providing information on how to book a tour of some Place, such as
+     * an Accommodation or ApartmentComplex in a real estate setting, as well as
+     * other kinds of tours as appropriate.
+     *
+     * @var string [schema.org types: URL]
+     */
+    public $tourBookingPage;
+
+    /**
+     * The year an Accommodation was constructed. This corresponds to the
+     * YearBuilt field in RESO.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $yearBuilt;
+
     // Static Protected Properties
     // =========================================================================
 
@@ -150,11 +234,21 @@ class MeetingRoom extends Room
      * @var array
      */
     static protected $_schemaPropertyNames = [
+        'accommodationCategory',
+        'accommodationFloorPlan',
         'amenityFeature',
+        'floorLevel',
         'floorSize',
+        'leaseLength',
+        'numberOfBathroomsTotal',
+        'numberOfBedrooms',
+        'numberOfFullBathrooms',
+        'numberOfPartialBathrooms',
         'numberOfRooms',
         'permittedUsage',
-        'petsAllowed'
+        'petsAllowed',
+        'tourBookingPage',
+        'yearBuilt'
     ];
 
     /**
@@ -163,11 +257,21 @@ class MeetingRoom extends Room
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
+        'accommodationCategory' => ['Text'],
+        'accommodationFloorPlan' => ['FloorPlan'],
         'amenityFeature' => ['LocationFeatureSpecification'],
+        'floorLevel' => ['Text'],
         'floorSize' => ['QuantitativeValue'],
+        'leaseLength' => ['Duration','QuantitativeValue'],
+        'numberOfBathroomsTotal' => ['Integer'],
+        'numberOfBedrooms' => ['Number','QuantitativeValue'],
+        'numberOfFullBathrooms' => ['Number'],
+        'numberOfPartialBathrooms' => ['Number'],
         'numberOfRooms' => ['Number','QuantitativeValue'],
         'permittedUsage' => ['Text'],
-        'petsAllowed' => ['Boolean','Text']
+        'petsAllowed' => ['Boolean','Text'],
+        'tourBookingPage' => ['URL'],
+        'yearBuilt' => ['Number']
     ];
 
     /**
@@ -176,11 +280,21 @@ class MeetingRoom extends Room
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
+        'accommodationCategory' => 'Category of an Accommodation, following real estate conventions e.g. RESO (see PropertySubType, and PropertyType fields for suggested values).',
+        'accommodationFloorPlan' => 'A floorplan of some Accommodation.',
         'amenityFeature' => 'An amenity feature (e.g. a characteristic or service) of the Accommodation. This generic property does not make a statement about whether the feature is included in an offer for the main accommodation or available at extra costs.',
+        'floorLevel' => 'The floor level for an Accommodation in a multi-storey building. Since counting systems vary internationally, the local system should be used where possible.',
         'floorSize' => 'The size of the accommodation, e.g. in square meter or squarefoot. Typical unit code(s): MTK for square meter, FTK for square foot, or YDK for square yard',
+        'leaseLength' => 'Length of the lease for some Accommodation, either particular to some Offer or in some cases intrinsic to the property.',
+        'numberOfBathroomsTotal' => 'The total integer number of bathrooms in a some Accommodation, following real estate conventions as documented in RESO: "The simple sum of the number of bathrooms. For example for a property with two Full Bathrooms and one Half Bathroom, the Bathrooms Total Integer will be 3.". See also numberOfRooms.',
+        'numberOfBedrooms' => 'The total integer number of bedrooms in a some Accommodation, ApartmentComplex or FloorPlan.',
+        'numberOfFullBathrooms' => 'Number of full bathrooms - The total number of full and ¾ bathrooms in an Accommodation. This corresponds to the BathroomsFull field in RESO.',
+        'numberOfPartialBathrooms' => 'Number of partial bathrooms - The total number of half and ¼ bathrooms in an Accommodation. This corresponds to the BathroomsPartial field in RESO.',
         'numberOfRooms' => 'The number of rooms (excluding bathrooms and closets) of the accommodation or lodging business. Typical unit code(s): ROM for room or C62 for no unit. The type of room can be put in the unitText property of the QuantitativeValue.',
         'permittedUsage' => 'Indications regarding the permitted usage of the accommodation.',
-        'petsAllowed' => 'Indicates whether pets are allowed to enter the accommodation or lodging business. More detailed information can be put in a text value.'
+        'petsAllowed' => 'Indicates whether pets are allowed to enter the accommodation or lodging business. More detailed information can be put in a text value.',
+        'tourBookingPage' => 'A page providing information on how to book a tour of some Place, such as an Accommodation or ApartmentComplex in a real estate setting, as well as other kinds of tours as appropriate.',
+        'yearBuilt' => 'The year an Accommodation was constructed. This corresponds to the YearBuilt field in RESO.'
     ];
 
     /**
@@ -241,7 +355,7 @@ class MeetingRoom extends Room
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['amenityFeature','floorSize','numberOfRooms','permittedUsage','petsAllowed'], 'validateJsonSchema'],
+            [['accommodationCategory','accommodationFloorPlan','amenityFeature','floorLevel','floorSize','leaseLength','numberOfBathroomsTotal','numberOfBedrooms','numberOfFullBathrooms','numberOfPartialBathrooms','numberOfRooms','permittedUsage','petsAllowed','tourBookingPage','yearBuilt'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

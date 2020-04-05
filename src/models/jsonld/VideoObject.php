@@ -114,7 +114,7 @@ class VideoObject extends MediaObject
      * event. Directors can be associated with individual items or with a series,
      * episode, clip. Supersedes directors.
      *
-     * @var mixed|Person [schema.org types: Person]
+     * @var Person [schema.org types: Person]
      */
     public $director;
 
@@ -128,7 +128,7 @@ class VideoObject extends MediaObject
     /**
      * Thumbnail image for an image or video.
      *
-     * @var mixed|ImageObject [schema.org types: ImageObject]
+     * @var ImageObject [schema.org types: ImageObject]
      */
     public $thumbnail;
 
@@ -136,21 +136,21 @@ class VideoObject extends MediaObject
      * If this MediaObject is an AudioObject or VideoObject, the transcript of
      * that object.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $transcript;
 
     /**
      * The frame size of the video.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $videoFrameSize;
 
     /**
      * The quality of the video.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $videoQuality;
 

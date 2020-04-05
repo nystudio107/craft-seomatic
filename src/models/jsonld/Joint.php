@@ -109,7 +109,7 @@ class Joint extends AnatomicalStructure
     /**
      * The name given to how bone physically connects to each other.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $structuralClass;
 

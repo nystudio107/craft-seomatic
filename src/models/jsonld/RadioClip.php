@@ -113,7 +113,7 @@ class RadioClip extends Clip
      * event. Directors can be associated with individual items or with a series,
      * episode, clip. Supersedes directors.
      *
-     * @var mixed|Person [schema.org types: Person]
+     * @var Person [schema.org types: Person]
      */
     public $director;
 
@@ -121,7 +121,7 @@ class RadioClip extends Clip
      * The end time of the clip expressed as the number of seconds from the
      * beginning of the work.
      *
-     * @var mixed|float [schema.org types: Number]
+     * @var float [schema.org types: Number]
      */
     public $endOffset;
 
@@ -135,14 +135,14 @@ class RadioClip extends Clip
     /**
      * The episode to which this clip belongs.
      *
-     * @var mixed|Episode [schema.org types: Episode]
+     * @var Episode [schema.org types: Episode]
      */
     public $partOfEpisode;
 
     /**
      * The season to which this episode belongs.
      *
-     * @var mixed|CreativeWorkSeason [schema.org types: CreativeWorkSeason]
+     * @var CreativeWorkSeason [schema.org types: CreativeWorkSeason]
      */
     public $partOfSeason;
 
@@ -150,7 +150,7 @@ class RadioClip extends Clip
      * The series to which this episode or season belongs. Supersedes
      * partOfTVSeries.
      *
-     * @var mixed|CreativeWorkSeries [schema.org types: CreativeWorkSeries]
+     * @var CreativeWorkSeries [schema.org types: CreativeWorkSeries]
      */
     public $partOfSeries;
 
@@ -158,7 +158,7 @@ class RadioClip extends Clip
      * The start time of the clip expressed as the number of seconds from the
      * beginning of the work.
      *
-     * @var mixed|float [schema.org types: Number]
+     * @var float [schema.org types: Number]
      */
     public $startOffset;
 

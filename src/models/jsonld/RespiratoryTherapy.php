@@ -94,6 +94,32 @@ class RespiratoryTherapy extends MedicalTherapy
     // Public Properties
     // =========================================================================
 
+    /**
+     * A contraindication for this therapy.
+     *
+     * @var mixed|MedicalContraindication|string [schema.org types: MedicalContraindication, Text]
+     */
+    public $contraindication;
+
+    /**
+     * A therapy that duplicates or overlaps this one.
+     *
+     * @var MedicalTherapy [schema.org types: MedicalTherapy]
+     */
+    public $duplicateTherapy;
+
+    /**
+     * A possible serious complication and/or serious side effect of this therapy.
+     * Serious adverse outcomes include those that are life-threatening; result in
+     * death, disability, or permanent damage; require hospitalization or prolong
+     * existing hospitalization; cause congenital anomalies or birth defects; or
+     * jeopardize the patient and may require medical or surgical intervention to
+     * prevent one of the outcomes in this definition.
+     *
+     * @var MedicalEntity [schema.org types: MedicalEntity]
+     */
+    public $seriousAdverseOutcome;
+
     // Static Protected Properties
     // =========================================================================
 
@@ -103,7 +129,9 @@ class RespiratoryTherapy extends MedicalTherapy
      * @var array
      */
     static protected $_schemaPropertyNames = [
-
+        'contraindication',
+        'duplicateTherapy',
+        'seriousAdverseOutcome'
     ];
 
     /**
@@ -112,7 +140,9 @@ class RespiratoryTherapy extends MedicalTherapy
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-
+        'contraindication' => ['MedicalContraindication','Text'],
+        'duplicateTherapy' => ['MedicalTherapy'],
+        'seriousAdverseOutcome' => ['MedicalEntity']
     ];
 
     /**
@@ -121,7 +151,9 @@ class RespiratoryTherapy extends MedicalTherapy
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-
+        'contraindication' => 'A contraindication for this therapy.',
+        'duplicateTherapy' => 'A therapy that duplicates or overlaps this one.',
+        'seriousAdverseOutcome' => 'A possible serious complication and/or serious side effect of this therapy. Serious adverse outcomes include those that are life-threatening; result in death, disability, or permanent damage; require hospitalization or prolong existing hospitalization; cause congenital anomalies or birth defects; or jeopardize the patient and may require medical or surgical intervention to prevent one of the outcomes in this definition.'
     ];
 
     /**
@@ -182,7 +214,7 @@ class RespiratoryTherapy extends MedicalTherapy
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [[], 'validateJsonSchema'],
+            [['contraindication','duplicateTherapy','seriousAdverseOutcome'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

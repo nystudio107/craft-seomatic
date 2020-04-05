@@ -174,7 +174,8 @@ class Event extends Thing
     public $duration;
 
     /**
-     * The end date and time of the item (in ISO 8601 date format).
+     * The end date and time of the item (in ISO 8601 date format). The end date
+     * and time of the item (in ISO 8601 date format).
      *
      * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
      */
@@ -207,7 +208,8 @@ class Event extends Thing
 
     /**
      * An eventStatus of an event represents its status; particularly useful when
-     * an event is cancelled or rescheduled.
+     * an event is cancelled or rescheduled. An eventStatus of an event represents
+     * its status; particularly useful when an event is cancelled or rescheduled.
      *
      * @var EventStatusType [schema.org types: EventStatusType]
      */
@@ -240,14 +242,17 @@ class Event extends Thing
 
     /**
      * The location of for example where the event is happening, an organization
-     * is located, or where an action takes place.
+     * is located, or where an action takes place. The location of for example
+     * where the event is happening, an organization is located, or where an
+     * action takes place.
      *
      * @var mixed|Place|PostalAddress|string|VirtualLocation [schema.org types: Place, PostalAddress, Text, VirtualLocation]
      */
     public $location;
 
     /**
-     * The total number of individuals that may attend an event or venue.
+     * The total number of individuals that may attend an event or venue. The
+     * total number of individuals that may attend an event or venue.
      *
      * @var int [schema.org types: Integer]
      */
@@ -256,7 +261,10 @@ class Event extends Thing
     /**
      * The maximum physical attendee capacity of an Event whose
      * eventAttendanceMode is OfflineEventAttendanceMode (or the offline aspects,
-     * in the case of a MixedEventAttendanceMode).
+     * in the case of a MixedEventAttendanceMode). The maximum physical attendee
+     * capacity of an Event whose eventAttendanceMode is
+     * OfflineEventAttendanceMode (or the offline aspects, in the case of a
+     * MixedEventAttendanceMode).
      *
      * @var int [schema.org types: Integer]
      */
@@ -312,8 +320,8 @@ class Event extends Thing
     public $previousStartDate;
 
     /**
-     * The CreativeWork that captured all or part of this Event. Inverse property:
-     * recordedAt.
+     * The CreativeWork that captured all or part of this Event. The CreativeWork
+     * that captured all or part of this Event. Inverse property: recordedAt.
      *
      * @var CreativeWork [schema.org types: CreativeWork]
      */
@@ -377,7 +385,8 @@ class Event extends Thing
     public $translator;
 
     /**
-     * The typical expected age range, e.g. '7-9', '11-'.
+     * The typical expected age range, e.g. '7-9', '11-'. The typical expected age
+     * range, e.g. '7-9', '11-'.
      *
      * @var string [schema.org types: Text]
      */
@@ -507,22 +516,22 @@ class Event extends Thing
         'director' => 'A director of e.g. tv, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip. Supersedes directors.',
         'doorTime' => 'The time admission will commence.',
         'duration' => 'The duration of the item (movie, audio recording, event, etc.) in ISO 8601 date format.',
-        'endDate' => 'The end date and time of the item (in ISO 8601 date format).',
+        'endDate' => 'The end date and time of the item (in ISO 8601 date format). The end date and time of the item (in ISO 8601 date format).',
         'eventAttendanceMode' => 'The eventAttendanceMode of an event indicates whether it occurs online, offline, or a mix.',
         'eventSchedule' => 'Associates an Event with a Schedule. There are circumstances where it is preferable to share a schedule for a series of repeating events rather than data on the individual events themselves. For example, a website or application might prefer to publish a schedule for a weekly gym class rather than provide data on every event. A schedule could be processed by applications to add forthcoming events to a calendar. An Event that is associated with a Schedule using this property should not have startDate or endDate properties. These are instead defined within the associated Schedule, this avoids any ambiguity for clients using the data. The property might have repeated values to specify different schedules, e.g. for different months or seasons.',
-        'eventStatus' => 'An eventStatus of an event represents its status; particularly useful when an event is cancelled or rescheduled.',
+        'eventStatus' => 'An eventStatus of an event represents its status; particularly useful when an event is cancelled or rescheduled. An eventStatus of an event represents its status; particularly useful when an event is cancelled or rescheduled.',
         'funder' => 'A person or organization that supports (sponsors) something through some kind of financial contribution.',
         'inLanguage' => 'The language of the content or performance or used in an action. Please use one of the language codes from the IETF BCP 47 standard. See also availableLanguage. Supersedes language.',
         'isAccessibleForFree' => 'A flag to signal that the item, event, or place is accessible for free. Supersedes free.',
-        'location' => 'The location of for example where the event is happening, an organization is located, or where an action takes place.',
-        'maximumAttendeeCapacity' => 'The total number of individuals that may attend an event or venue.',
-        'maximumPhysicalAttendeeCapacity' => 'The maximum physical attendee capacity of an Event whose eventAttendanceMode is OfflineEventAttendanceMode (or the offline aspects, in the case of a MixedEventAttendanceMode).',
+        'location' => 'The location of for example where the event is happening, an organization is located, or where an action takes place. The location of for example where the event is happening, an organization is located, or where an action takes place.',
+        'maximumAttendeeCapacity' => 'The total number of individuals that may attend an event or venue. The total number of individuals that may attend an event or venue.',
+        'maximumPhysicalAttendeeCapacity' => 'The maximum physical attendee capacity of an Event whose eventAttendanceMode is OfflineEventAttendanceMode (or the offline aspects, in the case of a MixedEventAttendanceMode). The maximum physical attendee capacity of an Event whose eventAttendanceMode is OfflineEventAttendanceMode (or the offline aspects, in the case of a MixedEventAttendanceMode).',
         'maximumVirtualAttendeeCapacity' => 'The maximum physical attendee capacity of an Event whose eventAttendanceMode is OnlineEventAttendanceMode (or the online aspects, in the case of a MixedEventAttendanceMode).',
         'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use businessFunction to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a Demand. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer. Inverse property: itemOffered.',
         'organizer' => 'An organizer of an Event.',
         'performer' => 'A performer at the event—for example, a presenter, musician, musical group or actor. Supersedes performers.',
         'previousStartDate' => 'Used in conjunction with eventStatus for rescheduled or cancelled events. This property contains the previously scheduled start date. For rescheduled events, the startDate property should be used for the newly scheduled start date. In the (rare) case of an event that has been postponed and rescheduled multiple times, this field may be repeated.',
-        'recordedIn' => 'The CreativeWork that captured all or part of this Event. Inverse property: recordedAt.',
+        'recordedIn' => 'The CreativeWork that captured all or part of this Event. The CreativeWork that captured all or part of this Event. Inverse property: recordedAt.',
         'remainingAttendeeCapacity' => 'The number of attendee places for an event that remain unallocated.',
         'review' => 'A review of the item. Supersedes reviews.',
         'sponsor' => 'A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.',
@@ -530,7 +539,7 @@ class Event extends Thing
         'subEvent' => 'An Event that is part of this event. For example, a conference event includes many presentations, each of which is a subEvent of the conference. Supersedes subEvents. Inverse property: superEvent.',
         'superEvent' => 'An event that this event is a part of. For example, a collection of individual music performances might each have a music festival as their superEvent. Inverse property: subEvent.',
         'translator' => 'Organization or person who adapts a creative work to different languages, regional differences and technical requirements of a target market, or that translates during some event.',
-        'typicalAgeRange' => 'The typical expected age range, e.g. \'7-9\', \'11-\'.',
+        'typicalAgeRange' => 'The typical expected age range, e.g. \'7-9\', \'11-\'. The typical expected age range, e.g. \'7-9\', \'11-\'.',
         'workFeatured' => 'A work featured in some event, e.g. exhibited in an ExhibitionEvent. Specific subproperties are available for workPerformed (e.g. a play), or a workPresented (a Movie at a ScreeningEvent).',
         'workPerformed' => 'A work performed in some event, for example a play performed in a TheaterEvent.'
     ];
@@ -555,8 +564,8 @@ class Event extends Thing
     // =========================================================================
 
     /**
-     * @inheritdoc
-     */
+    * @inheritdoc
+    */
     public function init()
     {
         parent::init();
@@ -587,8 +596,8 @@ class Event extends Thing
     }
 
     /**
-     * @inheritdoc
-     */
+    * @inheritdoc
+    */
     public function rules()
     {
         $rules = parent::rules();

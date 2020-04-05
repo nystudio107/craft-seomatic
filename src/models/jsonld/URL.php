@@ -92,6 +92,14 @@ class URL extends Text
     // Public Properties
     // =========================================================================
 
+    /**
+     * A category for the item. Greater signs or slashes can be used to informally
+     * indicate a category hierarchy.
+     *
+     * @var mixed|PhysicalActivityCategory|string|Thing [schema.org types: PhysicalActivityCategory, Text, Thing]
+     */
+    public $category;
+
     // Static Protected Properties
     // =========================================================================
 
@@ -101,7 +109,7 @@ class URL extends Text
      * @var array
      */
     static protected $_schemaPropertyNames = [
-
+        'category'
     ];
 
     /**
@@ -110,7 +118,7 @@ class URL extends Text
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-
+        'category' => ['PhysicalActivityCategory','Text','Thing']
     ];
 
     /**
@@ -119,7 +127,7 @@ class URL extends Text
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-
+        'category' => 'A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.'
     ];
 
     /**
@@ -180,7 +188,7 @@ class URL extends Text
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [[], 'validateJsonSchema'],
+            [['category'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

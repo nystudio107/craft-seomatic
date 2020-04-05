@@ -123,7 +123,7 @@ class Permit extends Intangible
     /**
      * The date when the item becomes valid.
      *
-     * @var DateTime [schema.org types: DateTime]
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
      */
     public $validFrom;
 
@@ -169,7 +169,7 @@ class Permit extends Intangible
         'issuedThrough' => ['Service'],
         'permitAudience' => ['Audience'],
         'validFor' => ['Duration'],
-        'validFrom' => ['DateTime'],
+        'validFrom' => ['Date','DateTime'],
         'validIn' => ['AdministrativeArea'],
         'validUntil' => ['Date']
     ];

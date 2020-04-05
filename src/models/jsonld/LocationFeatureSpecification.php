@@ -104,7 +104,7 @@ class LocationFeatureSpecification extends PropertyValue
     /**
      * The date when the item becomes valid.
      *
-     * @var DateTime [schema.org types: DateTime]
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
      */
     public $validFrom;
 
@@ -112,7 +112,7 @@ class LocationFeatureSpecification extends PropertyValue
      * The date after when the item is not valid. For example the end of an offer,
      * salary period, or a period of opening hours.
      *
-     * @var DateTime [schema.org types: DateTime]
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
      */
     public $validThrough;
 
@@ -137,8 +137,8 @@ class LocationFeatureSpecification extends PropertyValue
      */
     static protected $_schemaPropertyExpectedTypes = [
         'hoursAvailable' => ['OpeningHoursSpecification'],
-        'validFrom' => ['DateTime'],
-        'validThrough' => ['DateTime']
+        'validFrom' => ['Date','DateTime'],
+        'validThrough' => ['Date','DateTime']
     ];
 
     /**

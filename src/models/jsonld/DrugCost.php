@@ -138,7 +138,7 @@ class DrugCost extends MedicalEnumeration
     /**
      * The unit in which the drug is measured, e.g. '5 mg tablet'.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $drugUnit;
 

@@ -161,7 +161,7 @@ class Language extends Intangible
     /**
      * The name of the item.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $name;
 
@@ -169,7 +169,7 @@ class Language extends Intangible
      * Indicates a potential Action, which describes an idealized action in which
      * this thing would play an 'object' role.
      *
-     * @var mixed|Action [schema.org types: Action]
+     * @var Action [schema.org types: Action]
      */
     public $potentialAction;
 
@@ -178,12 +178,12 @@ class Language extends Intangible
      * identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or
      * official website.
      *
-     * @var mixed|string [schema.org types: URL]
+     * @var string [schema.org types: URL]
      */
     public $sameAs;
 
     /**
-     * A CreativeWork or Event about this Thing.. Inverse property: about.
+     * A CreativeWork or Event about this Thing. Inverse property: about.
      *
      * @var mixed|CreativeWork|Event [schema.org types: CreativeWork, Event]
      */
@@ -192,7 +192,7 @@ class Language extends Intangible
     /**
      * URL of the item.
      *
-     * @var mixed|string [schema.org types: URL]
+     * @var string [schema.org types: URL]
      */
     public $url;
 
@@ -255,7 +255,7 @@ class Language extends Intangible
         'name' => 'The name of the item.',
         'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
         'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
-        'subjectOf' => 'A CreativeWork or Event about this Thing.. Inverse property: about.',
+        'subjectOf' => 'A CreativeWork or Event about this Thing. Inverse property: about.',
         'url' => 'URL of the item.'
     ];
 

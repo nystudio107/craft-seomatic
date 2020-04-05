@@ -114,7 +114,7 @@ class PhysicalActivity extends LifestyleModification
     /**
      * The characteristics of associated patients, such as age, gender, race etc.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $epidemiology;
 
@@ -122,7 +122,7 @@ class PhysicalActivity extends LifestyleModification
      * Changes in the normal mechanical, physical, and biochemical functions that
      * are associated with this activity or condition.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $pathophysiology;
 

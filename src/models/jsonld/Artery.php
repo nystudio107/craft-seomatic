@@ -101,13 +101,6 @@ class Artery extends Vessel
     public $arterialBranch;
 
     /**
-     * The anatomical or organ system that the artery originates from.
-     *
-     * @var AnatomicalStructure [schema.org types: AnatomicalStructure]
-     */
-    public $source;
-
-    /**
      * The area to which the artery supplies blood.
      *
      * @var AnatomicalStructure [schema.org types: AnatomicalStructure]
@@ -124,7 +117,6 @@ class Artery extends Vessel
      */
     static protected $_schemaPropertyNames = [
         'arterialBranch',
-        'source',
         'supplyTo'
     ];
 
@@ -135,7 +127,6 @@ class Artery extends Vessel
      */
     static protected $_schemaPropertyExpectedTypes = [
         'arterialBranch' => ['AnatomicalStructure'],
-        'source' => ['AnatomicalStructure'],
         'supplyTo' => ['AnatomicalStructure']
     ];
 
@@ -146,7 +137,6 @@ class Artery extends Vessel
      */
     static protected $_schemaPropertyDescriptions = [
         'arterialBranch' => 'The branches that comprise the arterial structure. Supersedes branch.',
-        'source' => 'The anatomical or organ system that the artery originates from.',
         'supplyTo' => 'The area to which the artery supplies blood.'
     ];
 
@@ -208,7 +198,7 @@ class Artery extends Vessel
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['arterialBranch','source','supplyTo'], 'validateJsonSchema'],
+            [['arterialBranch','supplyTo'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

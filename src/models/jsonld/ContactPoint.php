@@ -114,7 +114,7 @@ class ContactPoint extends StructuredValue
      * An option available on this contact point (e.g. a toll-free number or
      * support for hearing-impaired callers).
      *
-     * @var mixed|ContactPointOption [schema.org types: ContactPointOption]
+     * @var ContactPointOption [schema.org types: ContactPointOption]
      */
     public $contactOption;
 
@@ -123,28 +123,28 @@ class ContactPoint extends StructuredValue
      * purposes. For example, a sales contact point, a PR contact point and so on.
      * This property is used to specify the kind of contact point.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $contactType;
 
     /**
      * Email address.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $email;
 
     /**
      * The fax number.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $faxNumber;
 
     /**
      * The hours during which this service or contact is available.
      *
-     * @var mixed|OpeningHoursSpecification [schema.org types: OpeningHoursSpecification]
+     * @var OpeningHoursSpecification [schema.org types: OpeningHoursSpecification]
      */
     public $hoursAvailable;
 
@@ -161,7 +161,7 @@ class ContactPoint extends StructuredValue
     /**
      * The telephone number.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $telephone;
 

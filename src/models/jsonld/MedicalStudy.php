@@ -109,21 +109,6 @@ class MedicalStudy extends MedicalEntity
     public $healthCondition;
 
     /**
-     * Expected or actual outcomes of the study.
-     *
-     * @var mixed|MedicalEntity|string [schema.org types: MedicalEntity, Text]
-     */
-    public $outcome;
-
-    /**
-     * Any characteristics of the population used in the study, e.g. 'males under
-     * 65'.
-     *
-     * @var mixed|string [schema.org types: Text]
-     */
-    public $population;
-
-    /**
      * A person or organization that supports a thing through a pledge, promise,
      * or financial contribution. e.g. a sponsor of a Medical Study or a corporate
      * sponsor of an event.
@@ -142,7 +127,7 @@ class MedicalStudy extends MedicalEntity
     /**
      * The location in which the study is taking/took place.
      *
-     * @var mixed|AdministrativeArea [schema.org types: AdministrativeArea]
+     * @var AdministrativeArea [schema.org types: AdministrativeArea]
      */
     public $studyLocation;
 
@@ -150,7 +135,7 @@ class MedicalStudy extends MedicalEntity
      * A subject of the study, i.e. one of the medical conditions, therapies,
      * devices, drugs, etc. investigated by the study.
      *
-     * @var mixed|MedicalEntity [schema.org types: MedicalEntity]
+     * @var MedicalEntity [schema.org types: MedicalEntity]
      */
     public $studySubject;
 
@@ -164,8 +149,6 @@ class MedicalStudy extends MedicalEntity
      */
     static protected $_schemaPropertyNames = [
         'healthCondition',
-        'outcome',
-        'population',
         'sponsor',
         'status',
         'studyLocation',
@@ -179,8 +162,6 @@ class MedicalStudy extends MedicalEntity
      */
     static protected $_schemaPropertyExpectedTypes = [
         'healthCondition' => ['MedicalCondition'],
-        'outcome' => ['MedicalEntity','Text'],
-        'population' => ['Text'],
         'sponsor' => ['Organization','Person'],
         'status' => ['EventStatusType','MedicalStudyStatus','Text'],
         'studyLocation' => ['AdministrativeArea'],
@@ -194,8 +175,6 @@ class MedicalStudy extends MedicalEntity
      */
     static protected $_schemaPropertyDescriptions = [
         'healthCondition' => 'Specifying the health condition(s) of a patient, medical study, or other target audience.',
-        'outcome' => 'Expected or actual outcomes of the study.',
-        'population' => 'Any characteristics of the population used in the study, e.g. \'males under 65\'.',
         'sponsor' => 'A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.',
         'status' => 'The status of the study (enumerated).',
         'studyLocation' => 'The location in which the study is taking/took place.',
@@ -260,7 +239,7 @@ class MedicalStudy extends MedicalEntity
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['healthCondition','outcome','population','sponsor','status','studyLocation','studySubject'], 'validateJsonSchema'],
+            [['healthCondition','sponsor','status','studyLocation','studySubject'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

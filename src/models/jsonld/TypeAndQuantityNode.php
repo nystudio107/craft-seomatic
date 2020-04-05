@@ -129,7 +129,7 @@ class TypeAndQuantityNode extends StructuredValue
      * A string or text indicating the unit of measurement. Useful if you cannot
      * provide a standard unit code for unitCode.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $unitText;
 

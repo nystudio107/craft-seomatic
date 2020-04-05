@@ -113,6 +113,13 @@ class SportsEvent extends Event
      */
     public $homeTeam;
 
+    /**
+     * A type of sport (e.g. Baseball).
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $sport;
+
     // Static Protected Properties
     // =========================================================================
 
@@ -124,7 +131,8 @@ class SportsEvent extends Event
     static protected $_schemaPropertyNames = [
         'awayTeam',
         'competitor',
-        'homeTeam'
+        'homeTeam',
+        'sport'
     ];
 
     /**
@@ -135,7 +143,8 @@ class SportsEvent extends Event
     static protected $_schemaPropertyExpectedTypes = [
         'awayTeam' => ['Person','SportsTeam'],
         'competitor' => ['Person','SportsTeam'],
-        'homeTeam' => ['Person','SportsTeam']
+        'homeTeam' => ['Person','SportsTeam'],
+        'sport' => ['Text','URL']
     ];
 
     /**
@@ -146,7 +155,8 @@ class SportsEvent extends Event
     static protected $_schemaPropertyDescriptions = [
         'awayTeam' => 'The away team in a sports event.',
         'competitor' => 'A competitor in a sports event.',
-        'homeTeam' => 'The home team in a sports event.'
+        'homeTeam' => 'The home team in a sports event.',
+        'sport' => 'A type of sport (e.g. Baseball).'
     ];
 
     /**
@@ -207,7 +217,7 @@ class SportsEvent extends Event
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['awayTeam','competitor','homeTeam'], 'validateJsonSchema'],
+            [['awayTeam','competitor','homeTeam','sport'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

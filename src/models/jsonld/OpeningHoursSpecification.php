@@ -120,7 +120,7 @@ class OpeningHoursSpecification extends StructuredValue
     /**
      * The date when the item becomes valid.
      *
-     * @var DateTime [schema.org types: DateTime]
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
      */
     public $validFrom;
 
@@ -128,7 +128,7 @@ class OpeningHoursSpecification extends StructuredValue
      * The date after when the item is not valid. For example the end of an offer,
      * salary period, or a period of opening hours.
      *
-     * @var DateTime [schema.org types: DateTime]
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
      */
     public $validThrough;
 
@@ -157,8 +157,8 @@ class OpeningHoursSpecification extends StructuredValue
         'closes' => ['Time'],
         'dayOfWeek' => ['DayOfWeek'],
         'opens' => ['Time'],
-        'validFrom' => ['DateTime'],
-        'validThrough' => ['DateTime']
+        'validFrom' => ['Date','DateTime'],
+        'validThrough' => ['Date','DateTime']
     ];
 
     /**

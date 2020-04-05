@@ -95,7 +95,7 @@ class Ticket extends Intangible
     /**
      * The date the ticket was issued.
      *
-     * @var DateTime [schema.org types: DateTime]
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
      */
     public $dateIssued;
 
@@ -135,13 +135,13 @@ class Ticket extends Intangible
     /**
      * The seat associated with the ticket.
      *
-     * @var mixed|Seat [schema.org types: Seat]
+     * @var Seat [schema.org types: Seat]
      */
     public $ticketedSeat;
 
     /**
      * The total price for the reservation or ticket, including applicable taxes,
-     * shipping, etc. Usage guidelines:Use values from 0123456789 (Unicode 'DIGIT
+     * shipping, etc. Usage guidelines: Use values from 0123456789 (Unicode 'DIGIT
      * ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially similiar
      * Unicode symbols. Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to
      * indicate a decimal point. Avoid using these symbols as a readability
@@ -183,7 +183,7 @@ class Ticket extends Intangible
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'dateIssued' => ['DateTime'],
+        'dateIssued' => ['Date','DateTime'],
         'issuedBy' => ['Organization'],
         'priceCurrency' => ['Text'],
         'ticketNumber' => ['Text'],
@@ -205,7 +205,7 @@ class Ticket extends Intangible
         'ticketNumber' => 'The unique identifier for the ticket.',
         'ticketToken' => 'Reference to an asset (e.g., Barcode, QR code image or PDF) usable for entrance.',
         'ticketedSeat' => 'The seat associated with the ticket.',
-        'totalPrice' => 'The total price for the reservation or ticket, including applicable taxes, shipping, etc. Usage guidelines:Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.',
+        'totalPrice' => 'The total price for the reservation or ticket, including applicable taxes, shipping, etc. Usage guidelines: Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.',
         'underName' => 'The person or organization the reservation or ticket is for.'
     ];
 

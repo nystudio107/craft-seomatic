@@ -111,14 +111,14 @@ class Brand extends Intangible
     /**
      * A review of the item. Supersedes reviews.
      *
-     * @var mixed|Review [schema.org types: Review]
+     * @var Review [schema.org types: Review]
      */
     public $review;
 
     /**
      * A slogan or motto associated with the item.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $slogan;
 

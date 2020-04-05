@@ -16,7 +16,7 @@ use nystudio107\seomatic\models\jsonld\CommunicateAction;
 /**
  * CheckOutAction - The act of an agent communicating (service provider,
  * social media, etc) their departure of a previously reserved service (e.g.
- * flight check in) or place (e.g. hotel). Related actions:CheckInAction: The
+ * flight check in) or place (e.g. hotel). Related actions: CheckInAction: The
  * antonym of CheckOutAction. DepartAction: Unlike DepartAction,
  * CheckOutAction implies that the agent is informing/confirming the end of a
  * previously reserved service. CancelAction: Unlike CancelAction,
@@ -52,7 +52,7 @@ class CheckOutAction extends CommunicateAction
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'The act of an agent communicating (service provider, social media, etc) their departure of a previously reserved service (e.g. flight check in) or place (e.g. hotel). Related actions:CheckInAction: The antonym of CheckOutAction. DepartAction: Unlike DepartAction, CheckOutAction implies that the agent is informing/confirming the end of a previously reserved service. CancelAction: Unlike CancelAction, CheckOutAction implies that the agent is informing/confirming the end of a previously reserved service.';
+    static public $schemaTypeDescription = 'The act of an agent communicating (service provider, social media, etc) their departure of a previously reserved service (e.g. flight check in) or place (e.g. hotel). Related actions: CheckInAction: The antonym of CheckOutAction. DepartAction: Unlike DepartAction, CheckOutAction implies that the agent is informing/confirming the end of a previously reserved service. CancelAction: Unlike CancelAction, CheckOutAction implies that the agent is informing/confirming the end of a previously reserved service.';
 
     /**
      * The Schema.org Type Extends

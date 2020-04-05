@@ -103,14 +103,14 @@ class OwnershipInfo extends StructuredValue
     /**
      * The date and time of obtaining the product.
      *
-     * @var mixed|DateTime [schema.org types: DateTime]
+     * @var DateTime [schema.org types: DateTime]
      */
     public $ownedFrom;
 
     /**
      * The date and time of giving up ownership on the product.
      *
-     * @var mixed|DateTime [schema.org types: DateTime]
+     * @var DateTime [schema.org types: DateTime]
      */
     public $ownedThrough;
 

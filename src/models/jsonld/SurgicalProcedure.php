@@ -115,24 +115,6 @@ class SurgicalProcedure extends MedicalProcedure
     public $howPerformed;
 
     /**
-     * A factor that indicates use of this therapy for treatment and/or prevention
-     * of a condition, symptom, etc. For therapies such as drugs, indications can
-     * include both officially-approved indications as well as off-label uses.
-     * These can be distinguished by using the ApprovedIndication subtype of
-     * MedicalIndication.
-     *
-     * @var MedicalIndication [schema.org types: MedicalIndication]
-     */
-    public $indication;
-
-    /**
-     * Expected or actual outcomes of the study.
-     *
-     * @var mixed|MedicalEntity|string [schema.org types: MedicalEntity, Text]
-     */
-    public $outcome;
-
-    /**
      * Typical preparation that a patient must undergo before having the procedure
      * performed.
      *
@@ -143,7 +125,7 @@ class SurgicalProcedure extends MedicalProcedure
     /**
      * The type of procedure, for example Surgical, Noninvasive, or Percutaneous.
      *
-     * @var mixed|MedicalProcedureType [schema.org types: MedicalProcedureType]
+     * @var MedicalProcedureType [schema.org types: MedicalProcedureType]
      */
     public $procedureType;
 
@@ -166,8 +148,6 @@ class SurgicalProcedure extends MedicalProcedure
         'bodyLocation',
         'followup',
         'howPerformed',
-        'indication',
-        'outcome',
         'preparation',
         'procedureType',
         'status'
@@ -182,8 +162,6 @@ class SurgicalProcedure extends MedicalProcedure
         'bodyLocation' => ['Text'],
         'followup' => ['Text'],
         'howPerformed' => ['Text'],
-        'indication' => ['MedicalIndication'],
-        'outcome' => ['MedicalEntity','Text'],
         'preparation' => ['MedicalEntity','Text'],
         'procedureType' => ['MedicalProcedureType'],
         'status' => ['EventStatusType','MedicalStudyStatus','Text']
@@ -198,8 +176,6 @@ class SurgicalProcedure extends MedicalProcedure
         'bodyLocation' => 'Location in the body of the anatomical structure.',
         'followup' => 'Typical or recommended followup care after the procedure is performed.',
         'howPerformed' => 'How the procedure is performed.',
-        'indication' => 'A factor that indicates use of this therapy for treatment and/or prevention of a condition, symptom, etc. For therapies such as drugs, indications can include both officially-approved indications as well as off-label uses. These can be distinguished by using the ApprovedIndication subtype of MedicalIndication.',
-        'outcome' => 'Expected or actual outcomes of the study.',
         'preparation' => 'Typical preparation that a patient must undergo before having the procedure performed.',
         'procedureType' => 'The type of procedure, for example Surgical, Noninvasive, or Percutaneous.',
         'status' => 'The status of the study (enumerated).'
@@ -263,7 +239,7 @@ class SurgicalProcedure extends MedicalProcedure
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['bodyLocation','followup','howPerformed','indication','outcome','preparation','procedureType','status'], 'validateJsonSchema'],
+            [['bodyLocation','followup','howPerformed','preparation','procedureType','status'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
