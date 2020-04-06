@@ -105,7 +105,7 @@ class RentAction extends TradeAction
      * A sub property of participant. The real estate agent involved in the
      * action.
      *
-     * @var mixed|RealEstateAgent [schema.org types: RealEstateAgent]
+     * @var RealEstateAgent [schema.org types: RealEstateAgent]
      */
     public $realEstateAgent;
 

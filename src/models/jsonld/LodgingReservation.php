@@ -98,14 +98,14 @@ class LodgingReservation extends Reservation
     /**
      * The earliest someone may check into a lodging establishment.
      *
-     * @var DateTime [schema.org types: DateTime]
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
      */
     public $checkinTime;
 
     /**
      * The latest someone may check out of a lodging establishment.
      *
-     * @var DateTime [schema.org types: DateTime]
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
      */
     public $checkoutTime;
 
@@ -161,8 +161,8 @@ class LodgingReservation extends Reservation
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'checkinTime' => ['DateTime'],
-        'checkoutTime' => ['DateTime'],
+        'checkinTime' => ['DateTime','Time'],
+        'checkoutTime' => ['DateTime','Time'],
         'lodgingUnitDescription' => ['Text'],
         'lodgingUnitType' => ['QualitativeValue','Text'],
         'numAdults' => ['Integer','QuantitativeValue'],

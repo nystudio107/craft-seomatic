@@ -117,7 +117,7 @@ class Reservoir extends BodyOfWater
      * The overall rating, based on a collection of reviews or ratings, of the
      * item.
      *
-     * @var mixed|AggregateRating [schema.org types: AggregateRating]
+     * @var AggregateRating [schema.org types: AggregateRating]
      */
     public $aggregateRating;
 
@@ -127,7 +127,7 @@ class Reservoir extends BodyOfWater
      * is included in an offer for the main accommodation or available at extra
      * costs.
      *
-     * @var mixed|LocationFeatureSpecification [schema.org types: LocationFeatureSpecification]
+     * @var LocationFeatureSpecification [schema.org types: LocationFeatureSpecification]
      */
     public $amenityFeature;
 
@@ -138,7 +138,7 @@ class Reservoir extends BodyOfWater
      * http://www.starbucks.co.uk/store-locator/etc/detail/3047 the code "3047" is
      * a branchCode for a particular branch.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $branchCode;
 
@@ -146,7 +146,7 @@ class Reservoir extends BodyOfWater
      * The basic containment relation between a place and one that contains it.
      * Supersedes containedIn. Inverse property: containsPlace.
      *
-     * @var mixed|Place [schema.org types: Place]
+     * @var Place [schema.org types: Place]
      */
     public $containedInPlace;
 
@@ -154,7 +154,7 @@ class Reservoir extends BodyOfWater
      * The basic containment relation between a place and another that it
      * contains. Inverse property: containedInPlace.
      *
-     * @var mixed|Place [schema.org types: Place]
+     * @var Place [schema.org types: Place]
      */
     public $containsPlace;
 
@@ -162,14 +162,14 @@ class Reservoir extends BodyOfWater
      * Upcoming or past event associated with this place, organization, or action.
      * Supersedes events.
      *
-     * @var mixed|Event [schema.org types: Event]
+     * @var Event [schema.org types: Event]
      */
     public $event;
 
     /**
      * The fax number.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $faxNumber;
 
@@ -283,9 +283,20 @@ class Reservoir extends BodyOfWater
      * person, or place. The GLN is a 13-digit number used to identify parties and
      * physical locations.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $globalLocationNumber;
+
+    /**
+     * Indicates whether some facility (e.g. FoodEstablishment,
+     * CovidTestingFacility) offers a service that can be used by driving through
+     * in a car. In the case of CovidTestingFacility such facilities could
+     * potentially help with social distancing from other potentially-infected
+     * users.
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $hasDriveThroughService;
 
     /**
      * A URL to a map of the place. Supersedes map, maps.
@@ -298,7 +309,7 @@ class Reservoir extends BodyOfWater
      * A flag to signal that the item, event, or place is accessible for free.
      * Supersedes free.
      *
-     * @var mixed|bool [schema.org types: Boolean]
+     * @var bool [schema.org types: Boolean]
      */
     public $isAccessibleForFree;
 
@@ -307,9 +318,16 @@ class Reservoir extends BodyOfWater
      * Activities (ISIC), Revision 4 code for a particular organization, business
      * person, or place.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $isicV4;
+
+    /**
+     * The latitude of a location. For example 37.42242 (WGS 84).
+     *
+     * @var mixed|float|string [schema.org types: Number, Text]
+     */
+    public $latitude;
 
     /**
      * An associated logo.
@@ -319,16 +337,23 @@ class Reservoir extends BodyOfWater
     public $logo;
 
     /**
+     * The longitude of a location. For example -122.08585 (WGS 84).
+     *
+     * @var mixed|float|string [schema.org types: Number, Text]
+     */
+    public $longitude;
+
+    /**
      * The total number of individuals that may attend an event or venue.
      *
-     * @var mixed|int [schema.org types: Integer]
+     * @var int [schema.org types: Integer]
      */
     public $maximumAttendeeCapacity;
 
     /**
      * The opening hours of a certain place.
      *
-     * @var mixed|OpeningHoursSpecification [schema.org types: OpeningHoursSpecification]
+     * @var OpeningHoursSpecification [schema.org types: OpeningHoursSpecification]
      */
     public $openingHoursSpecification;
 
@@ -343,21 +368,21 @@ class Reservoir extends BodyOfWater
      * A flag to signal that the Place is open to public visitors. If this
      * property is omitted there is no assumed default boolean value
      *
-     * @var mixed|bool [schema.org types: Boolean]
+     * @var bool [schema.org types: Boolean]
      */
     public $publicAccess;
 
     /**
      * A review of the item. Supersedes reviews.
      *
-     * @var mixed|Review [schema.org types: Review]
+     * @var Review [schema.org types: Review]
      */
     public $review;
 
     /**
      * A slogan or motto associated with the item.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $slogan;
 
@@ -365,7 +390,7 @@ class Reservoir extends BodyOfWater
      * Indicates whether it is allowed to smoke in the place, e.g. in the
      * restaurant, hotel or hotel room.
      *
-     * @var mixed|bool [schema.org types: Boolean]
+     * @var bool [schema.org types: Boolean]
      */
     public $smokingAllowed;
 
@@ -374,16 +399,25 @@ class Reservoir extends BodyOfWater
      * override general opening hours brought in scope by
      * openingHoursSpecification or openingHours.
      *
-     * @var mixed|OpeningHoursSpecification [schema.org types: OpeningHoursSpecification]
+     * @var OpeningHoursSpecification [schema.org types: OpeningHoursSpecification]
      */
     public $specialOpeningHoursSpecification;
 
     /**
      * The telephone number.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $telephone;
+
+    /**
+     * A page providing information on how to book a tour of some Place, such as
+     * an Accommodation or ApartmentComplex in a real estate setting, as well as
+     * other kinds of tours as appropriate.
+     *
+     * @var string [schema.org types: URL]
+     */
+    public $tourBookingPage;
 
     // Static Protected Properties
     // =========================================================================
@@ -415,10 +449,13 @@ class Reservoir extends BodyOfWater
         'geoTouches',
         'geoWithin',
         'globalLocationNumber',
+        'hasDriveThroughService',
         'hasMap',
         'isAccessibleForFree',
         'isicV4',
+        'latitude',
         'logo',
+        'longitude',
         'maximumAttendeeCapacity',
         'openingHoursSpecification',
         'photo',
@@ -427,7 +464,8 @@ class Reservoir extends BodyOfWater
         'slogan',
         'smokingAllowed',
         'specialOpeningHoursSpecification',
-        'telephone'
+        'telephone',
+        'tourBookingPage'
     ];
 
     /**
@@ -457,10 +495,13 @@ class Reservoir extends BodyOfWater
         'geoTouches' => ['GeospatialGeometry','Place'],
         'geoWithin' => ['GeospatialGeometry','Place'],
         'globalLocationNumber' => ['Text'],
+        'hasDriveThroughService' => ['Boolean'],
         'hasMap' => ['Map','URL'],
         'isAccessibleForFree' => ['Boolean'],
         'isicV4' => ['Text'],
+        'latitude' => ['Number','Text'],
         'logo' => ['ImageObject','URL'],
+        'longitude' => ['Number','Text'],
         'maximumAttendeeCapacity' => ['Integer'],
         'openingHoursSpecification' => ['OpeningHoursSpecification'],
         'photo' => ['ImageObject','Photograph'],
@@ -469,7 +510,8 @@ class Reservoir extends BodyOfWater
         'slogan' => ['Text'],
         'smokingAllowed' => ['Boolean'],
         'specialOpeningHoursSpecification' => ['OpeningHoursSpecification'],
-        'telephone' => ['Text']
+        'telephone' => ['Text'],
+        'tourBookingPage' => ['URL']
     ];
 
     /**
@@ -499,10 +541,13 @@ class Reservoir extends BodyOfWater
         'geoTouches' => 'Represents spatial relations in which two geometries (or the places they represent) touch: they have at least one boundary point in common, but no interior points." (a symmetric relationship, as defined in DE-9IM )',
         'geoWithin' => 'Represents a relationship between two geometries (or the places they represent), relating a geometry to one that contains it, i.e. it is inside (i.e. within) its interior. As defined in DE-9IM.',
         'globalLocationNumber' => 'The Global Location Number (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations.',
+        'hasDriveThroughService' => 'Indicates whether some facility (e.g. FoodEstablishment, CovidTestingFacility) offers a service that can be used by driving through in a car. In the case of CovidTestingFacility such facilities could potentially help with social distancing from other potentially-infected users.',
         'hasMap' => 'A URL to a map of the place. Supersedes map, maps.',
         'isAccessibleForFree' => 'A flag to signal that the item, event, or place is accessible for free. Supersedes free.',
         'isicV4' => 'The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code for a particular organization, business person, or place.',
+        'latitude' => 'The latitude of a location. For example 37.42242 (WGS 84).',
         'logo' => 'An associated logo.',
+        'longitude' => 'The longitude of a location. For example -122.08585 (WGS 84).',
         'maximumAttendeeCapacity' => 'The total number of individuals that may attend an event or venue.',
         'openingHoursSpecification' => 'The opening hours of a certain place.',
         'photo' => 'A photograph of this place. Supersedes photos.',
@@ -511,7 +556,8 @@ class Reservoir extends BodyOfWater
         'slogan' => 'A slogan or motto associated with the item.',
         'smokingAllowed' => 'Indicates whether it is allowed to smoke in the place, e.g. in the restaurant, hotel or hotel room.',
         'specialOpeningHoursSpecification' => 'The special opening hours of a certain place. Use this to explicitly override general opening hours brought in scope by openingHoursSpecification or openingHours.',
-        'telephone' => 'The telephone number.'
+        'telephone' => 'The telephone number.',
+        'tourBookingPage' => 'A page providing information on how to book a tour of some Place, such as an Accommodation or ApartmentComplex in a real estate setting, as well as other kinds of tours as appropriate.'
     ];
 
     /**
@@ -572,7 +618,7 @@ class Reservoir extends BodyOfWater
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['additionalProperty','address','aggregateRating','amenityFeature','branchCode','containedInPlace','containsPlace','event','faxNumber','geo','geoContains','geoCoveredBy','geoCovers','geoCrosses','geoDisjoint','geoEquals','geoIntersects','geoOverlaps','geoTouches','geoWithin','globalLocationNumber','hasMap','isAccessibleForFree','isicV4','logo','maximumAttendeeCapacity','openingHoursSpecification','photo','publicAccess','review','slogan','smokingAllowed','specialOpeningHoursSpecification','telephone'], 'validateJsonSchema'],
+            [['additionalProperty','address','aggregateRating','amenityFeature','branchCode','containedInPlace','containsPlace','event','faxNumber','geo','geoContains','geoCoveredBy','geoCovers','geoCrosses','geoDisjoint','geoEquals','geoIntersects','geoOverlaps','geoTouches','geoWithin','globalLocationNumber','hasDriveThroughService','hasMap','isAccessibleForFree','isicV4','latitude','logo','longitude','maximumAttendeeCapacity','openingHoursSpecification','photo','publicAccess','review','slogan','smokingAllowed','specialOpeningHoursSpecification','telephone','tourBookingPage'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

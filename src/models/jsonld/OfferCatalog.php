@@ -120,7 +120,7 @@ class OfferCatalog extends ItemList
      * fully describe all items in a list (e.g., multi-page pagination); in such
      * cases, the numberOfItems would be for the entire list.
      *
-     * @var mixed|int [schema.org types: Integer]
+     * @var int [schema.org types: Integer]
      */
     public $numberOfItems;
 

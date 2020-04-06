@@ -125,14 +125,14 @@ class Hotel extends LodgingBusiness
     /**
      * The earliest someone may check into a lodging establishment.
      *
-     * @var mixed|DateTime [schema.org types: DateTime]
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
      */
     public $checkinTime;
 
     /**
      * The latest someone may check out of a lodging establishment.
      *
-     * @var mixed|DateTime [schema.org types: DateTime]
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
      */
     public $checkoutTime;
 
@@ -160,7 +160,7 @@ class Hotel extends LodgingBusiness
      * indicate the rating organization, e.g. as an Organization with name such as
      * (e.g. HOTREC, DEHOGA, WHR, or Hotelstars).
      *
-     * @var mixed|Rating [schema.org types: Rating]
+     * @var Rating [schema.org types: Rating]
      */
     public $starRating;
 
@@ -192,8 +192,8 @@ class Hotel extends LodgingBusiness
         'amenityFeature' => ['LocationFeatureSpecification'],
         'audience' => ['Audience'],
         'availableLanguage' => ['Language','Text'],
-        'checkinTime' => ['DateTime'],
-        'checkoutTime' => ['DateTime'],
+        'checkinTime' => ['DateTime','Time'],
+        'checkoutTime' => ['DateTime','Time'],
         'numberOfRooms' => ['Number','QuantitativeValue'],
         'petsAllowed' => ['Boolean','Text'],
         'starRating' => ['Rating']

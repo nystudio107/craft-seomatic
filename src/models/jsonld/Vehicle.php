@@ -95,8 +95,8 @@ class Vehicle extends Product
 
     /**
      * The time needed to accelerate the vehicle from a given start velocity to a
-     * given target velocity. Typical unit code(s): SEC for secondsNote: There are
-     * unfortunately no standard unit codes for seconds/0..100 km/h or
+     * given target velocity. Typical unit code(s): SEC for seconds Note: There
+     * are unfortunately no standard unit codes for seconds/0..100 km/h or
      * seconds/0..60 mph. Simply use "SEC" for seconds and indicate the velocities
      * in the name of the QuantitativeValue, or use valueReference with a
      * QuantitativeValue of 0..60 mph or 0..100 km/h to specify the reference
@@ -115,11 +115,19 @@ class Vehicle extends Product
     public $bodyType;
 
     /**
+     * A callsign, as used in broadcasting and radio communications to identify
+     * people, radio and TV stations, or vehicles.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $callSign;
+
+    /**
      * The available volume for cargo or luggage. For automobiles, this is usually
      * the trunk volume. Typical unit code(s): LTR for liters, FTQ for cubic
      * foot/feet Note: You can use minValue and maxValue to indicate ranges.
      *
-     * @var mixed|QuantitativeValue [schema.org types: QuantitativeValue]
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
      */
     public $cargoVolume;
 
@@ -127,7 +135,7 @@ class Vehicle extends Product
      * The date of the first registration of the vehicle with the respective
      * public authorities.
      *
-     * @var mixed|Date [schema.org types: Date]
+     * @var Date [schema.org types: Date]
      */
     public $dateVehicleFirstRegistered;
 
@@ -144,7 +152,7 @@ class Vehicle extends Product
      * QuantitativeValue, put "g/km" into the unitText property of that value,
      * since there is no UN/CEFACT Common Code for "g/km".
      *
-     * @var mixed|float [schema.org types: Number]
+     * @var float [schema.org types: Number]
      */
     public $emissionsCO2;
 
@@ -155,13 +163,13 @@ class Vehicle extends Product
      * liters, GLL of US gallons, GLI for UK / imperial gallons, AMH for
      * ampere-hours (for electrical vehicles).
      *
-     * @var mixed|QuantitativeValue [schema.org types: QuantitativeValue]
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
      */
     public $fuelCapacity;
 
     /**
      * The amount of fuel consumed for traveling a particular distance or temporal
-     * duration with the given vehicle (e.g. liters per 100 km).Note 1: There are
+     * duration with the given vehicle (e.g. liters per 100 km). Note 1: There are
      * unfortunately no standard unit codes for liters per 100 km. Use unitText to
      * indicate the unit of measurement, e.g. L/100 km. Note 2: There are two ways
      * of indicating the fuel consumption, fuelConsumption (e.g. 8 liters per 100
@@ -170,13 +178,13 @@ class Vehicle extends Product
      * speed ("at 80 km/h") or usage pattern ("city traffic"). You can use
      * valueReference to link the value for the fuel consumption to another value.
      *
-     * @var mixed|QuantitativeValue [schema.org types: QuantitativeValue]
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
      */
     public $fuelConsumption;
 
     /**
      * The distance traveled per unit of fuel used; most commonly miles per gallon
-     * (mpg) or kilometers per liter (km/L).Note 1: There are unfortunately no
+     * (mpg) or kilometers per liter (km/L). Note 1: There are unfortunately no
      * standard unit codes for miles per gallon or kilometers per liter. Use
      * unitText to indicate the unit of measurement, e.g. mpg or km/L. Note 2:
      * There are two ways of indicating the fuel consumption, fuelConsumption
@@ -186,7 +194,7 @@ class Vehicle extends Product
      * You can use valueReference to link the value for the fuel economy to
      * another value.
      *
-     * @var mixed|QuantitativeValue [schema.org types: QuantitativeValue]
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
      */
     public $fuelEfficiency;
 
@@ -202,7 +210,7 @@ class Vehicle extends Product
     /**
      * A textual description of known damages, both repaired and unrepaired.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $knownVehicleDamages;
 
@@ -218,7 +226,7 @@ class Vehicle extends Product
      * production, as read from its odometer. Typical unit code(s): KMT for
      * kilometers, SMI for statute miles
      *
-     * @var mixed|QuantitativeValue [schema.org types: QuantitativeValue]
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
      */
     public $mileageFromOdometer;
 
@@ -226,7 +234,7 @@ class Vehicle extends Product
      * The release date of a vehicle model (often used to differentiate versions
      * of the same make and model).
      *
-     * @var mixed|Date [schema.org types: Date]
+     * @var Date [schema.org types: Date]
      */
     public $modelDate;
 
@@ -269,29 +277,29 @@ class Vehicle extends Product
 
     /**
      * The permitted weight of passengers and cargo, EXCLUDING the weight of the
-     * empty vehicle. Typical unit code(s): KGM for kilogram, LBR for poundNote 1:
-     * Many databases specify the permitted TOTAL weight instead, which is the sum
-     * of weight and payload Note 2: You can indicate additional information in
-     * the name of the QuantitativeValue node. Note 3: You may also link to a
+     * empty vehicle. Typical unit code(s): KGM for kilogram, LBR for pound Note
+     * 1: Many databases specify the permitted TOTAL weight instead, which is the
+     * sum of weight and payload Note 2: You can indicate additional information
+     * in the name of the QuantitativeValue node. Note 3: You may also link to a
      * QualitativeValue node that provides additional information using
      * valueReference. Note 4: Note that you can use minValue and maxValue to
      * indicate ranges.
      *
-     * @var mixed|QuantitativeValue [schema.org types: QuantitativeValue]
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
      */
     public $payload;
 
     /**
      * The date of production of the item, e.g. vehicle.
      *
-     * @var mixed|Date [schema.org types: Date]
+     * @var Date [schema.org types: Date]
      */
     public $productionDate;
 
     /**
      * The date the item e.g. vehicle was purchased by the current owner.
      *
-     * @var mixed|Date [schema.org types: Date]
+     * @var Date [schema.org types: Date]
      */
     public $purchaseDate;
 
@@ -314,27 +322,27 @@ class Vehicle extends Product
      * range. You can link to information about how the given value has been
      * determined using the valueReference property.
      *
-     * @var mixed|QuantitativeValue [schema.org types: QuantitativeValue]
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
      */
     public $speed;
 
     /**
      * The position of the steering wheel or similar device (mostly for cars).
      *
-     * @var mixed|SteeringPositionValue [schema.org types: SteeringPositionValue]
+     * @var SteeringPositionValue [schema.org types: SteeringPositionValue]
      */
     public $steeringPosition;
 
     /**
      * The permitted vertical load (TWR) of a trailer attached to the vehicle.
      * Also referred to as Tongue Load Rating (TLR) or Vertical Load Rating (VLR)
-     * Typical unit code(s): KGM for kilogram, LBR for poundNote 1: You can
+     * Typical unit code(s): KGM for kilogram, LBR for pound Note 1: You can
      * indicate additional information in the name of the QuantitativeValue node.
      * Note 2: You may also link to a QualitativeValue node that provides
      * additional information using valueReference. Note 3: Note that you can use
      * minValue and maxValue to indicate ranges.
      *
-     * @var mixed|QuantitativeValue [schema.org types: QuantitativeValue]
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
      */
     public $tongueWeight;
 
@@ -346,7 +354,7 @@ class Vehicle extends Product
      * information using valueReference. * Note 3: Note that you can use minValue
      * and maxValue to indicate ranges.
      *
-     * @var mixed|QuantitativeValue [schema.org types: QuantitativeValue]
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
      */
     public $trailerWeight;
 
@@ -354,14 +362,14 @@ class Vehicle extends Product
      * A short text indicating the configuration of the vehicle, e.g. '5dr
      * hatchback ST 2.5 MT 225 hp' or 'limited edition'.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $vehicleConfiguration;
 
     /**
      * Information about the engine or engines of the vehicle.
      *
-     * @var mixed|EngineSpecification [schema.org types: EngineSpecification]
+     * @var EngineSpecification [schema.org types: EngineSpecification]
      */
     public $vehicleEngine;
 
@@ -369,14 +377,14 @@ class Vehicle extends Product
      * The Vehicle Identification Number (VIN) is a unique serial number used by
      * the automotive industry to identify individual motor vehicles.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $vehicleIdentificationNumber;
 
     /**
      * The color or color combination of the interior of the vehicle.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $vehicleInteriorColor;
 
@@ -386,7 +394,7 @@ class Vehicle extends Product
      * material used, an interior type can also be based on vehicle usage or
      * target audience.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $vehicleInteriorType;
 
@@ -394,7 +402,7 @@ class Vehicle extends Product
      * The release date of a vehicle model (often used to differentiate versions
      * of the same make and model).
      *
-     * @var mixed|Date [schema.org types: Date]
+     * @var Date [schema.org types: Date]
      */
     public $vehicleModelDate;
 
@@ -428,13 +436,13 @@ class Vehicle extends Product
     /**
      * The permitted total weight of the loaded vehicle, including passengers and
      * cargo and the weight of the empty vehicle. Typical unit code(s): KGM for
-     * kilogram, LBR for poundNote 1: You can indicate additional information in
+     * kilogram, LBR for pound Note 1: You can indicate additional information in
      * the name of the QuantitativeValue node. Note 2: You may also link to a
      * QualitativeValue node that provides additional information using
      * valueReference. Note 3: Note that you can use minValue and maxValue to
      * indicate ranges.
      *
-     * @var mixed|QuantitativeValue [schema.org types: QuantitativeValue]
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
      */
     public $weightTotal;
 
@@ -443,7 +451,7 @@ class Vehicle extends Product
      * code(s): CMT for centimeters, MTR for meters, INH for inches, FOT for
      * foot/feet
      *
-     * @var mixed|QuantitativeValue [schema.org types: QuantitativeValue]
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
      */
     public $wheelbase;
 
@@ -458,6 +466,7 @@ class Vehicle extends Product
     static protected $_schemaPropertyNames = [
         'accelerationTime',
         'bodyType',
+        'callSign',
         'cargoVolume',
         'dateVehicleFirstRegistered',
         'driveWheelConfiguration',
@@ -504,6 +513,7 @@ class Vehicle extends Product
     static protected $_schemaPropertyExpectedTypes = [
         'accelerationTime' => ['QuantitativeValue'],
         'bodyType' => ['QualitativeValue','Text','URL'],
+        'callSign' => ['Text'],
         'cargoVolume' => ['QuantitativeValue'],
         'dateVehicleFirstRegistered' => ['Date'],
         'driveWheelConfiguration' => ['DriveWheelConfigurationValue','Text'],
@@ -548,15 +558,16 @@ class Vehicle extends Product
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'accelerationTime' => 'The time needed to accelerate the vehicle from a given start velocity to a given target velocity. Typical unit code(s): SEC for secondsNote: There are unfortunately no standard unit codes for seconds/0..100 km/h or seconds/0..60 mph. Simply use "SEC" for seconds and indicate the velocities in the name of the QuantitativeValue, or use valueReference with a QuantitativeValue of 0..60 mph or 0..100 km/h to specify the reference speeds.',
+        'accelerationTime' => 'The time needed to accelerate the vehicle from a given start velocity to a given target velocity. Typical unit code(s): SEC for seconds Note: There are unfortunately no standard unit codes for seconds/0..100 km/h or seconds/0..60 mph. Simply use "SEC" for seconds and indicate the velocities in the name of the QuantitativeValue, or use valueReference with a QuantitativeValue of 0..60 mph or 0..100 km/h to specify the reference speeds.',
         'bodyType' => 'Indicates the design and body style of the vehicle (e.g. station wagon, hatchback, etc.).',
+        'callSign' => 'A callsign, as used in broadcasting and radio communications to identify people, radio and TV stations, or vehicles.',
         'cargoVolume' => 'The available volume for cargo or luggage. For automobiles, this is usually the trunk volume. Typical unit code(s): LTR for liters, FTQ for cubic foot/feet Note: You can use minValue and maxValue to indicate ranges.',
         'dateVehicleFirstRegistered' => 'The date of the first registration of the vehicle with the respective public authorities.',
         'driveWheelConfiguration' => 'The drive wheel configuration, i.e. which roadwheels will receive torque from the vehicle\'s engine via the drivetrain.',
         'emissionsCO2' => 'The CO2 emissions in g/km. When used in combination with a QuantitativeValue, put "g/km" into the unitText property of that value, since there is no UN/CEFACT Common Code for "g/km".',
         'fuelCapacity' => 'The capacity of the fuel tank or in the case of electric cars, the battery. If there are multiple components for storage, this should indicate the total of all storage of the same type. Typical unit code(s): LTR for liters, GLL of US gallons, GLI for UK / imperial gallons, AMH for ampere-hours (for electrical vehicles).',
-        'fuelConsumption' => 'The amount of fuel consumed for traveling a particular distance or temporal duration with the given vehicle (e.g. liters per 100 km).Note 1: There are unfortunately no standard unit codes for liters per 100 km. Use unitText to indicate the unit of measurement, e.g. L/100 km. Note 2: There are two ways of indicating the fuel consumption, fuelConsumption (e.g. 8 liters per 100 km) and fuelEfficiency (e.g. 30 miles per gallon). They are reciprocal. Note 3: Often, the absolute value is useful only when related to driving speed ("at 80 km/h") or usage pattern ("city traffic"). You can use valueReference to link the value for the fuel consumption to another value.',
-        'fuelEfficiency' => 'The distance traveled per unit of fuel used; most commonly miles per gallon (mpg) or kilometers per liter (km/L).Note 1: There are unfortunately no standard unit codes for miles per gallon or kilometers per liter. Use unitText to indicate the unit of measurement, e.g. mpg or km/L. Note 2: There are two ways of indicating the fuel consumption, fuelConsumption (e.g. 8 liters per 100 km) and fuelEfficiency (e.g. 30 miles per gallon). They are reciprocal. Note 3: Often, the absolute value is useful only when related to driving speed ("at 80 km/h") or usage pattern ("city traffic"). You can use valueReference to link the value for the fuel economy to another value.',
+        'fuelConsumption' => 'The amount of fuel consumed for traveling a particular distance or temporal duration with the given vehicle (e.g. liters per 100 km). Note 1: There are unfortunately no standard unit codes for liters per 100 km. Use unitText to indicate the unit of measurement, e.g. L/100 km. Note 2: There are two ways of indicating the fuel consumption, fuelConsumption (e.g. 8 liters per 100 km) and fuelEfficiency (e.g. 30 miles per gallon). They are reciprocal. Note 3: Often, the absolute value is useful only when related to driving speed ("at 80 km/h") or usage pattern ("city traffic"). You can use valueReference to link the value for the fuel consumption to another value.',
+        'fuelEfficiency' => 'The distance traveled per unit of fuel used; most commonly miles per gallon (mpg) or kilometers per liter (km/L). Note 1: There are unfortunately no standard unit codes for miles per gallon or kilometers per liter. Use unitText to indicate the unit of measurement, e.g. mpg or km/L. Note 2: There are two ways of indicating the fuel consumption, fuelConsumption (e.g. 8 liters per 100 km) and fuelEfficiency (e.g. 30 miles per gallon). They are reciprocal. Note 3: Often, the absolute value is useful only when related to driving speed ("at 80 km/h") or usage pattern ("city traffic"). You can use valueReference to link the value for the fuel economy to another value.',
         'fuelType' => 'The type of fuel suitable for the engine or engines of the vehicle. If the vehicle has only one engine, this property can be attached directly to the vehicle.',
         'knownVehicleDamages' => 'A textual description of known damages, both repaired and unrepaired.',
         'meetsEmissionStandard' => 'Indicates that the vehicle meets the respective emission standard.',
@@ -567,13 +578,13 @@ class Vehicle extends Product
         'numberOfDoors' => 'The number of doors. Typical unit code(s): C62',
         'numberOfForwardGears' => 'The total number of forward gears available for the transmission system of the vehicle. Typical unit code(s): C62',
         'numberOfPreviousOwners' => 'The number of owners of the vehicle, including the current one. Typical unit code(s): C62',
-        'payload' => 'The permitted weight of passengers and cargo, EXCLUDING the weight of the empty vehicle. Typical unit code(s): KGM for kilogram, LBR for poundNote 1: Many databases specify the permitted TOTAL weight instead, which is the sum of weight and payload Note 2: You can indicate additional information in the name of the QuantitativeValue node. Note 3: You may also link to a QualitativeValue node that provides additional information using valueReference. Note 4: Note that you can use minValue and maxValue to indicate ranges.',
+        'payload' => 'The permitted weight of passengers and cargo, EXCLUDING the weight of the empty vehicle. Typical unit code(s): KGM for kilogram, LBR for pound Note 1: Many databases specify the permitted TOTAL weight instead, which is the sum of weight and payload Note 2: You can indicate additional information in the name of the QuantitativeValue node. Note 3: You may also link to a QualitativeValue node that provides additional information using valueReference. Note 4: Note that you can use minValue and maxValue to indicate ranges.',
         'productionDate' => 'The date of production of the item, e.g. vehicle.',
         'purchaseDate' => 'The date the item e.g. vehicle was purchased by the current owner.',
         'seatingCapacity' => 'The number of persons that can be seated (e.g. in a vehicle), both in terms of the physical space available, and in terms of limitations set by law. Typical unit code(s): C62 for persons',
         'speed' => 'The speed range of the vehicle. If the vehicle is powered by an engine, the upper limit of the speed range (indicated by maxValue should be the maximum speed achievable under regular conditions. Typical unit code(s): KMH for km/h, HM for mile per hour (0.447 04 m/s), KNT for knot *Note 1: Use minValue and maxValue to indicate the range. Typically, the minimal value is zero. * Note 2: There are many different ways of measuring the speed range. You can link to information about how the given value has been determined using the valueReference property.',
         'steeringPosition' => 'The position of the steering wheel or similar device (mostly for cars).',
-        'tongueWeight' => 'The permitted vertical load (TWR) of a trailer attached to the vehicle. Also referred to as Tongue Load Rating (TLR) or Vertical Load Rating (VLR) Typical unit code(s): KGM for kilogram, LBR for poundNote 1: You can indicate additional information in the name of the QuantitativeValue node. Note 2: You may also link to a QualitativeValue node that provides additional information using valueReference. Note 3: Note that you can use minValue and maxValue to indicate ranges.',
+        'tongueWeight' => 'The permitted vertical load (TWR) of a trailer attached to the vehicle. Also referred to as Tongue Load Rating (TLR) or Vertical Load Rating (VLR) Typical unit code(s): KGM for kilogram, LBR for pound Note 1: You can indicate additional information in the name of the QuantitativeValue node. Note 2: You may also link to a QualitativeValue node that provides additional information using valueReference. Note 3: Note that you can use minValue and maxValue to indicate ranges.',
         'trailerWeight' => 'The permitted weight of a trailer attached to the vehicle. Typical unit code(s): KGM for kilogram, LBR for pound * Note 1: You can indicate additional information in the name of the QuantitativeValue node. * Note 2: You may also link to a QualitativeValue node that provides additional information using valueReference. * Note 3: Note that you can use minValue and maxValue to indicate ranges.',
         'vehicleConfiguration' => 'A short text indicating the configuration of the vehicle, e.g. \'5dr hatchback ST 2.5 MT 225 hp\' or \'limited edition\'.',
         'vehicleEngine' => 'Information about the engine or engines of the vehicle.',
@@ -584,7 +595,7 @@ class Vehicle extends Product
         'vehicleSeatingCapacity' => 'The number of passengers that can be seated in the vehicle, both in terms of the physical space available, and in terms of limitations set by law. Typical unit code(s): C62 for persons.',
         'vehicleSpecialUsage' => 'Indicates whether the vehicle has been used for special purposes, like commercial rental, driving school, or as a taxi. The legislation in many countries requires this information to be revealed when offering a car for sale.',
         'vehicleTransmission' => 'The type of component used for transmitting the power from a rotating power source to the wheels or other relevant component(s) ("gearbox" for cars).',
-        'weightTotal' => 'The permitted total weight of the loaded vehicle, including passengers and cargo and the weight of the empty vehicle. Typical unit code(s): KGM for kilogram, LBR for poundNote 1: You can indicate additional information in the name of the QuantitativeValue node. Note 2: You may also link to a QualitativeValue node that provides additional information using valueReference. Note 3: Note that you can use minValue and maxValue to indicate ranges.',
+        'weightTotal' => 'The permitted total weight of the loaded vehicle, including passengers and cargo and the weight of the empty vehicle. Typical unit code(s): KGM for kilogram, LBR for pound Note 1: You can indicate additional information in the name of the QuantitativeValue node. Note 2: You may also link to a QualitativeValue node that provides additional information using valueReference. Note 3: Note that you can use minValue and maxValue to indicate ranges.',
         'wheelbase' => 'The distance between the centers of the front and rear wheels. Typical unit code(s): CMT for centimeters, MTR for meters, INH for inches, FOT for foot/feet'
     ];
 
@@ -646,7 +657,7 @@ class Vehicle extends Product
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['accelerationTime','bodyType','cargoVolume','dateVehicleFirstRegistered','driveWheelConfiguration','emissionsCO2','fuelCapacity','fuelConsumption','fuelEfficiency','fuelType','knownVehicleDamages','meetsEmissionStandard','mileageFromOdometer','modelDate','numberOfAirbags','numberOfAxles','numberOfDoors','numberOfForwardGears','numberOfPreviousOwners','payload','productionDate','purchaseDate','seatingCapacity','speed','steeringPosition','tongueWeight','trailerWeight','vehicleConfiguration','vehicleEngine','vehicleIdentificationNumber','vehicleInteriorColor','vehicleInteriorType','vehicleModelDate','vehicleSeatingCapacity','vehicleSpecialUsage','vehicleTransmission','weightTotal','wheelbase'], 'validateJsonSchema'],
+            [['accelerationTime','bodyType','callSign','cargoVolume','dateVehicleFirstRegistered','driveWheelConfiguration','emissionsCO2','fuelCapacity','fuelConsumption','fuelEfficiency','fuelType','knownVehicleDamages','meetsEmissionStandard','mileageFromOdometer','modelDate','numberOfAirbags','numberOfAxles','numberOfDoors','numberOfForwardGears','numberOfPreviousOwners','payload','productionDate','purchaseDate','seatingCapacity','speed','steeringPosition','tongueWeight','trailerWeight','vehicleConfiguration','vehicleEngine','vehicleIdentificationNumber','vehicleInteriorColor','vehicleInteriorType','vehicleModelDate','vehicleSeatingCapacity','vehicleSpecialUsage','vehicleTransmission','weightTotal','wheelbase'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

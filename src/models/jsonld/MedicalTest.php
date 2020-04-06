@@ -110,21 +110,21 @@ class MedicalTest extends MedicalEntity
     /**
      * A sign detected by the test.
      *
-     * @var mixed|MedicalSign [schema.org types: MedicalSign]
+     * @var MedicalSign [schema.org types: MedicalSign]
      */
     public $signDetected;
 
     /**
      * A condition the test is used to diagnose.
      *
-     * @var mixed|MedicalCondition [schema.org types: MedicalCondition]
+     * @var MedicalCondition [schema.org types: MedicalCondition]
      */
     public $usedToDiagnose;
 
     /**
      * Device used to perform the test.
      *
-     * @var mixed|MedicalDevice [schema.org types: MedicalDevice]
+     * @var MedicalDevice [schema.org types: MedicalDevice]
      */
     public $usesDevice;
 

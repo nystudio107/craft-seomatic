@@ -122,14 +122,14 @@ class RadioSeason extends CreativeWorkSeason
      * An episode of a tv, radio or game media within a series or season.
      * Supersedes episodes.
      *
-     * @var mixed|Episode [schema.org types: Episode]
+     * @var Episode [schema.org types: Episode]
      */
     public $episode;
 
     /**
      * The number of episodes in this season or series.
      *
-     * @var mixed|int [schema.org types: Integer]
+     * @var int [schema.org types: Integer]
      */
     public $numberOfEpisodes;
 
@@ -137,7 +137,7 @@ class RadioSeason extends CreativeWorkSeason
      * The series to which this episode or season belongs. Supersedes
      * partOfTVSeries.
      *
-     * @var mixed|CreativeWorkSeries [schema.org types: CreativeWorkSeries]
+     * @var CreativeWorkSeries [schema.org types: CreativeWorkSeries]
      */
     public $partOfSeries;
 
@@ -145,7 +145,7 @@ class RadioSeason extends CreativeWorkSeason
      * The production company or studio responsible for the item e.g. series,
      * video game, episode etc.
      *
-     * @var mixed|Organization [schema.org types: Organization]
+     * @var Organization [schema.org types: Organization]
      */
     public $productionCompany;
 
@@ -166,7 +166,7 @@ class RadioSeason extends CreativeWorkSeason
     /**
      * The trailer of a movie or tv/radio series, season, episode, etc.
      *
-     * @var mixed|VideoObject [schema.org types: VideoObject]
+     * @var VideoObject [schema.org types: VideoObject]
      */
     public $trailer;
 

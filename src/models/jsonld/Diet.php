@@ -113,30 +113,21 @@ class Diet extends CreativeWork
     /**
      * Medical expert advice related to the plan.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $expertConsiderations;
 
     /**
-     * Descriptive information establishing the overarching theory/philosophy of
-     * the plan. May include the rationale for the name, the population where the
-     * plan first came to prominence, etc.
-     *
-     * @var mixed|string [schema.org types: Text]
-     */
-    public $overview;
-
-    /**
      * Specific physiologic benefits associated to the plan.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $physiologicalBenefits;
 
     /**
      * Specific physiologic risks associated to the diet plan.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $risks;
 
@@ -152,7 +143,6 @@ class Diet extends CreativeWork
         'dietFeatures',
         'endorsers',
         'expertConsiderations',
-        'overview',
         'physiologicalBenefits',
         'risks'
     ];
@@ -166,7 +156,6 @@ class Diet extends CreativeWork
         'dietFeatures' => ['Text'],
         'endorsers' => ['Organization','Person'],
         'expertConsiderations' => ['Text'],
-        'overview' => ['Text'],
         'physiologicalBenefits' => ['Text'],
         'risks' => ['Text']
     ];
@@ -180,7 +169,6 @@ class Diet extends CreativeWork
         'dietFeatures' => 'Nutritional information specific to the dietary plan. May include dietary recommendations on what foods to avoid, what foods to consume, and specific alterations/deviations from the USDA or other regulatory body\'s approved dietary guidelines.',
         'endorsers' => 'People or organizations that endorse the plan.',
         'expertConsiderations' => 'Medical expert advice related to the plan.',
-        'overview' => 'Descriptive information establishing the overarching theory/philosophy of the plan. May include the rationale for the name, the population where the plan first came to prominence, etc.',
         'physiologicalBenefits' => 'Specific physiologic benefits associated to the plan.',
         'risks' => 'Specific physiologic risks associated to the diet plan.'
     ];
@@ -243,7 +231,7 @@ class Diet extends CreativeWork
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['dietFeatures','endorsers','expertConsiderations','overview','physiologicalBenefits','risks'], 'validateJsonSchema'],
+            [['dietFeatures','endorsers','expertConsiderations','physiologicalBenefits','risks'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

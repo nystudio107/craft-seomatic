@@ -104,7 +104,7 @@ class PalliativeProcedure extends MedicalProcedure
     /**
      * A therapy that duplicates or overlaps this one.
      *
-     * @var mixed|MedicalTherapy [schema.org types: MedicalTherapy]
+     * @var MedicalTherapy [schema.org types: MedicalTherapy]
      */
     public $duplicateTherapy;
 
@@ -116,7 +116,7 @@ class PalliativeProcedure extends MedicalProcedure
      * jeopardize the patient and may require medical or surgical intervention to
      * prevent one of the outcomes in this definition.
      *
-     * @var mixed|MedicalEntity [schema.org types: MedicalEntity]
+     * @var MedicalEntity [schema.org types: MedicalEntity]
      */
     public $seriousAdverseOutcome;
 

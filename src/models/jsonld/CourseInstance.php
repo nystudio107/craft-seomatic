@@ -111,7 +111,7 @@ class CourseInstance extends Event
      * example, "2 hours of lectures, 1 hour of lab work and 3 hours of
      * independent study per week".
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $courseWorkload;
 
@@ -119,7 +119,7 @@ class CourseInstance extends Event
      * A person assigned to instruct or provide instructional assistance for the
      * CourseInstance.
      *
-     * @var mixed|Person [schema.org types: Person]
+     * @var Person [schema.org types: Person]
      */
     public $instructor;
 

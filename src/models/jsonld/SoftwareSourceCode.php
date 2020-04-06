@@ -120,7 +120,7 @@ class SoftwareSourceCode extends CreativeWork
      * Runtime platform or script interpreter dependencies (Example - Java v1,
      * Python2.3, .Net Framework 3.0). Supersedes runtime.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $runtimePlatform;
 
@@ -128,7 +128,7 @@ class SoftwareSourceCode extends CreativeWork
      * Target Operating System / Product to which the code applies. If applies to
      * several versions, just the product name can be used.
      *
-     * @var mixed|SoftwareApplication [schema.org types: SoftwareApplication]
+     * @var SoftwareApplication [schema.org types: SoftwareApplication]
      */
     public $targetProduct;
 

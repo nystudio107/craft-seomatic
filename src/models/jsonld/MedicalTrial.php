@@ -97,13 +97,6 @@ class MedicalTrial extends MedicalStudy
     // =========================================================================
 
     /**
-     * The phase of the clinical trial.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $phase;
-
-    /**
      * Specifics about the trial design (enumerated).
      *
      * @var MedicalTrialDesign [schema.org types: MedicalTrialDesign]
@@ -119,7 +112,6 @@ class MedicalTrial extends MedicalStudy
      * @var array
      */
     static protected $_schemaPropertyNames = [
-        'phase',
         'trialDesign'
     ];
 
@@ -129,7 +121,6 @@ class MedicalTrial extends MedicalStudy
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'phase' => ['Text'],
         'trialDesign' => ['MedicalTrialDesign']
     ];
 
@@ -139,7 +130,6 @@ class MedicalTrial extends MedicalStudy
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'phase' => 'The phase of the clinical trial.',
         'trialDesign' => 'Specifics about the trial design (enumerated).'
     ];
 
@@ -201,7 +191,7 @@ class MedicalTrial extends MedicalStudy
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['phase','trialDesign'], 'validateJsonSchema'],
+            [['trialDesign'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

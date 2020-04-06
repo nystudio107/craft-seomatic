@@ -111,14 +111,14 @@ class ParcelDelivery extends Intangible
     /**
      * The earliest date the package may arrive.
      *
-     * @var DateTime [schema.org types: DateTime]
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
      */
     public $expectedArrivalFrom;
 
     /**
      * The latest date the package may arrive.
      *
-     * @var DateTime [schema.org types: DateTime]
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
      */
     public $expectedArrivalUntil;
 
@@ -163,14 +163,14 @@ class ParcelDelivery extends Intangible
     /**
      * Shipper tracking number.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $trackingNumber;
 
     /**
      * Tracking url for the parcel delivery.
      *
-     * @var mixed|string [schema.org types: URL]
+     * @var string [schema.org types: URL]
      */
     public $trackingUrl;
 
@@ -204,8 +204,8 @@ class ParcelDelivery extends Intangible
     static protected $_schemaPropertyExpectedTypes = [
         'deliveryAddress' => ['PostalAddress'],
         'deliveryStatus' => ['DeliveryEvent'],
-        'expectedArrivalFrom' => ['DateTime'],
-        'expectedArrivalUntil' => ['DateTime'],
+        'expectedArrivalFrom' => ['Date','DateTime'],
+        'expectedArrivalUntil' => ['Date','DateTime'],
         'hasDeliveryMethod' => ['DeliveryMethod'],
         'itemShipped' => ['Product'],
         'originAddress' => ['PostalAddress'],

@@ -110,7 +110,7 @@ class BroadcastFrequencySpecification extends Intangible
     /**
      * The subchannel used for the broadcast.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $broadcastSubChannel;
 

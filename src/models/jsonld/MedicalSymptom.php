@@ -95,15 +95,6 @@ class MedicalSymptom extends MedicalSignOrSymptom
     // =========================================================================
 
     /**
-     * Specifying a cause of something in general. e.g in medicine , one of the
-     * causative agent(s) that are most directly responsible for the
-     * pathophysiologic process that eventually results in the occurrence.
-     *
-     * @var MedicalCause [schema.org types: MedicalCause]
-     */
-    public $cause;
-
-    /**
      * A possible treatment to address this condition, sign or symptom.
      *
      * @var MedicalTherapy [schema.org types: MedicalTherapy]
@@ -119,7 +110,6 @@ class MedicalSymptom extends MedicalSignOrSymptom
      * @var array
      */
     static protected $_schemaPropertyNames = [
-        'cause',
         'possibleTreatment'
     ];
 
@@ -129,7 +119,6 @@ class MedicalSymptom extends MedicalSignOrSymptom
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'cause' => ['MedicalCause'],
         'possibleTreatment' => ['MedicalTherapy']
     ];
 
@@ -139,7 +128,6 @@ class MedicalSymptom extends MedicalSignOrSymptom
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'cause' => 'Specifying a cause of something in general. e.g in medicine , one of the causative agent(s) that are most directly responsible for the pathophysiologic process that eventually results in the occurrence.',
         'possibleTreatment' => 'A possible treatment to address this condition, sign or symptom.'
     ];
 
@@ -201,7 +189,7 @@ class MedicalSymptom extends MedicalSignOrSymptom
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['cause','possibleTreatment'], 'validateJsonSchema'],
+            [['possibleTreatment'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

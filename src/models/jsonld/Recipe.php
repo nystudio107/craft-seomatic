@@ -157,7 +157,7 @@ class Recipe extends HowTo
      * Indicates a dietary restriction or guideline for which this recipe or menu
      * item is suitable, e.g. diabetic, halal etc.
      *
-     * @var mixed|RestrictedDiet [schema.org types: RestrictedDiet]
+     * @var RestrictedDiet [schema.org types: RestrictedDiet]
      */
     public $suitableForDiet;
 

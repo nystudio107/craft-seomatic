@@ -101,37 +101,40 @@ class PostalAddress extends ContactPoint
     public $addressCountry;
 
     /**
-     * The locality. For example, Mountain View.
+     * The locality in which the street address is, and which is in the region.
+     * For example, Mountain View.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $addressLocality;
 
     /**
-     * The region. For example, CA.
+     * The region in which the locality is, and which is in the country. For
+     * example, California or another appropriate first-level Administrative
+     * division
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $addressRegion;
 
     /**
      * The post office box number for PO box addresses.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $postOfficeBoxNumber;
 
     /**
      * The postal code. For example, 94043.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $postalCode;
 
     /**
      * The street address. For example, 1600 Amphitheatre Pkwy.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $streetAddress;
 
@@ -173,8 +176,8 @@ class PostalAddress extends ContactPoint
      */
     static protected $_schemaPropertyDescriptions = [
         'addressCountry' => 'The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.',
-        'addressLocality' => 'The locality. For example, Mountain View.',
-        'addressRegion' => 'The region. For example, CA.',
+        'addressLocality' => 'The locality in which the street address is, and which is in the region. For example, Mountain View.',
+        'addressRegion' => 'The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division',
         'postOfficeBoxNumber' => 'The post office box number for PO box addresses.',
         'postalCode' => 'The postal code. For example, 94043.',
         'streetAddress' => 'The street address. For example, 1600 Amphitheatre Pkwy.'

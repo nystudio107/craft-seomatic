@@ -111,7 +111,7 @@ class Nerve extends AnatomicalStructure
     /**
      * The neurological pathway that originates the neurons.
      *
-     * @var mixed|BrainStructure [schema.org types: BrainStructure]
+     * @var BrainStructure [schema.org types: BrainStructure]
      */
     public $sourcedFrom;
 

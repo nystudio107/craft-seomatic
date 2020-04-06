@@ -130,14 +130,14 @@ class VideoGame extends SoftwareApplication
      * The server on which it is possible to play the game. Inverse property:
      * game.
      *
-     * @var mixed|GameServer [schema.org types: GameServer]
+     * @var GameServer [schema.org types: GameServer]
      */
     public $gameServer;
 
     /**
      * Links to tips, tactics, etc.
      *
-     * @var mixed|CreativeWork [schema.org types: CreativeWork]
+     * @var CreativeWork [schema.org types: CreativeWork]
      */
     public $gameTip;
 
@@ -153,14 +153,14 @@ class VideoGame extends SoftwareApplication
      * game can be marked as multi-player, co-op and single-player at the same
      * time.
      *
-     * @var mixed|GamePlayMode [schema.org types: GamePlayMode]
+     * @var GamePlayMode [schema.org types: GamePlayMode]
      */
     public $playMode;
 
     /**
      * The trailer of a movie or tv/radio series, season, episode, etc.
      *
-     * @var mixed|VideoObject [schema.org types: VideoObject]
+     * @var VideoObject [schema.org types: VideoObject]
      */
     public $trailer;
 

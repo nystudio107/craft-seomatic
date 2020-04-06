@@ -105,7 +105,7 @@ class HowTo extends CreativeWork
      * The length of time it takes to perform instructions or a direction (not
      * including time to prepare the supplies), in ISO 8601 duration format.
      *
-     * @var mixed|Duration [schema.org types: Duration]
+     * @var Duration [schema.org types: Duration]
      */
     public $performTime;
 
@@ -113,7 +113,7 @@ class HowTo extends CreativeWork
      * The length of time it takes to prepare the items to be used in instructions
      * or a direction, in ISO 8601 duration format.
      *
-     * @var mixed|Duration [schema.org types: Duration]
+     * @var Duration [schema.org types: Duration]
      */
     public $prepTime;
 
@@ -145,7 +145,7 @@ class HowTo extends CreativeWork
      * The total time required to perform instructions or a direction (including
      * time to prepare the supplies), in ISO 8601 duration format.
      *
-     * @var mixed|Duration [schema.org types: Duration]
+     * @var Duration [schema.org types: Duration]
      */
     public $totalTime;
 

@@ -105,7 +105,7 @@ class MedicalClinic extends MedicalBusiness
     /**
      * A medical specialty of the provider.
      *
-     * @var mixed|MedicalSpecialty [schema.org types: MedicalSpecialty]
+     * @var MedicalSpecialty [schema.org types: MedicalSpecialty]
      */
     public $medicalSpecialty;
 

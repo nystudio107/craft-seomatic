@@ -111,7 +111,7 @@ class OnDemandEvent extends PublicationEvent
     /**
      * A broadcast service associated with the publication event.
      *
-     * @var mixed|BroadcastService [schema.org types: BroadcastService]
+     * @var BroadcastService [schema.org types: BroadcastService]
      */
     public $publishedOn;
 

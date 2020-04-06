@@ -105,7 +105,7 @@ class PaymentCard extends FinancialProduct
      * A secure method for consumers to purchase products or services via debit,
      * credit or smartcards by using RFID or NFC technology.
      *
-     * @var mixed|bool [schema.org types: Boolean]
+     * @var bool [schema.org types: Boolean]
      */
     public $contactlessPayment;
 
@@ -113,7 +113,7 @@ class PaymentCard extends FinancialProduct
      * A floor limit is the amount of money above which credit card transactions
      * must be authorized.
      *
-     * @var mixed|MonetaryAmount [schema.org types: MonetaryAmount]
+     * @var MonetaryAmount [schema.org types: MonetaryAmount]
      */
     public $floorLimit;
 
