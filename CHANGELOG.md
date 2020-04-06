@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.2.52 - 2020.04.08
+### Added
+* Added a validator for the `Duration` schema.org type
+
 ## 3.2.51 - 2020.04.06
 ### Added
 * Updated to [Schema.org 7.0.3](https://schema.org/version/7.03/schema-all.html) including [SpecialAnnouncement](https://webmasters.googleblog.com/2020/04/highlight-covid-19-announcements-search.html) and other types/changes to handle the COVID-19 crisis
