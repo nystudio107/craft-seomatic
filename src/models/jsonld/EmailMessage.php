@@ -110,28 +110,28 @@ class EmailMessage extends Message
      * The date/time at which the message has been read by the recipient if a
      * single recipient exists.
      *
-     * @var mixed|DateTime [schema.org types: DateTime]
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
      */
     public $dateRead;
 
     /**
      * The date/time the message was received if a single recipient exists.
      *
-     * @var mixed|DateTime [schema.org types: DateTime]
+     * @var DateTime [schema.org types: DateTime]
      */
     public $dateReceived;
 
     /**
      * The date/time at which the message was sent.
      *
-     * @var mixed|DateTime [schema.org types: DateTime]
+     * @var DateTime [schema.org types: DateTime]
      */
     public $dateSent;
 
     /**
      * A CreativeWork attached to the message.
      *
-     * @var mixed|CreativeWork [schema.org types: CreativeWork]
+     * @var CreativeWork [schema.org types: CreativeWork]
      */
     public $messageAttachment;
 
@@ -187,7 +187,7 @@ class EmailMessage extends Message
     static protected $_schemaPropertyExpectedTypes = [
         'bccRecipient' => ['ContactPoint','Organization','Person'],
         'ccRecipient' => ['ContactPoint','Organization','Person'],
-        'dateRead' => ['DateTime'],
+        'dateRead' => ['Date','DateTime'],
         'dateReceived' => ['DateTime'],
         'dateSent' => ['DateTime'],
         'messageAttachment' => ['CreativeWork'],

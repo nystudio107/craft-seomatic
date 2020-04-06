@@ -105,7 +105,7 @@ class FoodEstablishmentReservation extends Reservation
      * describing dates with times. This situation may be clarified in future
      * revisions.
      *
-     * @var DateTime [schema.org types: DateTime]
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
      */
     public $endTime;
 
@@ -126,7 +126,7 @@ class FoodEstablishmentReservation extends Reservation
      * when describing dates with times. This situation may be clarified in future
      * revisions.
      *
-     * @var mixed|DateTime [schema.org types: DateTime]
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
      */
     public $startTime;
 
@@ -150,9 +150,9 @@ class FoodEstablishmentReservation extends Reservation
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'endTime' => ['DateTime'],
+        'endTime' => ['DateTime','Time'],
         'partySize' => ['Integer','QuantitativeValue'],
-        'startTime' => ['DateTime']
+        'startTime' => ['DateTime','Time']
     ];
 
     /**

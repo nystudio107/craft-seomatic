@@ -113,7 +113,7 @@ class FMRadioChannel extends RadioChannel
      * The type of service required to have access to the channel (e.g. Standard
      * or Premium).
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $broadcastServiceTier;
 
@@ -127,7 +127,7 @@ class FMRadioChannel extends RadioChannel
     /**
      * The CableOrSatelliteService offering the channel.
      *
-     * @var mixed|CableOrSatelliteService [schema.org types: CableOrSatelliteService]
+     * @var CableOrSatelliteService [schema.org types: CableOrSatelliteService]
      */
     public $inBroadcastLineup;
 
@@ -135,7 +135,7 @@ class FMRadioChannel extends RadioChannel
      * The BroadcastService offered on this channel. Inverse property:
      * hasBroadcastChannel.
      *
-     * @var mixed|BroadcastService [schema.org types: BroadcastService]
+     * @var BroadcastService [schema.org types: BroadcastService]
      */
     public $providesBroadcastService;
 

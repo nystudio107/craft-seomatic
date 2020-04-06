@@ -94,6 +94,14 @@ class AudiobookFormat extends BookFormatType
     // Public Properties
     // =========================================================================
 
+    /**
+     * Relates a term (i.e. a property, class or enumeration) to one that
+     * supersedes it.
+     *
+     * @var mixed|Class|Enumeration|Property [schema.org types: Class, Enumeration, Property]
+     */
+    public $supersededBy;
+
     // Static Protected Properties
     // =========================================================================
 
@@ -103,7 +111,7 @@ class AudiobookFormat extends BookFormatType
      * @var array
      */
     static protected $_schemaPropertyNames = [
-
+        'supersededBy'
     ];
 
     /**
@@ -112,7 +120,7 @@ class AudiobookFormat extends BookFormatType
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-
+        'supersededBy' => ['Class','Enumeration','Property']
     ];
 
     /**
@@ -121,7 +129,7 @@ class AudiobookFormat extends BookFormatType
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-
+        'supersededBy' => 'Relates a term (i.e. a property, class or enumeration) to one that supersedes it.'
     ];
 
     /**
@@ -182,7 +190,7 @@ class AudiobookFormat extends BookFormatType
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [[], 'validateJsonSchema'],
+            [['supersededBy'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

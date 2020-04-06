@@ -143,13 +143,6 @@ class Drug extends Substance
     public $clinicalPharmacology;
 
     /**
-     * Cost per unit of the drug, as reported by the source being tagged.
-     *
-     * @var DrugCost [schema.org types: DrugCost]
-     */
-    public $cost;
-
-    /**
      * A dosage form in which this drug/supplement is available, e.g. 'tablet',
      * 'suspension', 'injection'.
      *
@@ -235,7 +228,7 @@ class Drug extends Substance
     /**
      * The manufacturer of the product.
      *
-     * @var mixed|Organization [schema.org types: Organization]
+     * @var Organization [schema.org types: Organization]
      */
     public $manufacturer;
 
@@ -243,7 +236,7 @@ class Drug extends Substance
      * Recommended intake of this supplement for a given population as defined by
      * a specific recommending authority.
      *
-     * @var mixed|MaximumDoseSchedule [schema.org types: MaximumDoseSchedule]
+     * @var MaximumDoseSchedule [schema.org types: MaximumDoseSchedule]
      */
     public $maximumIntake;
 
@@ -251,14 +244,14 @@ class Drug extends Substance
      * The specific biochemical interaction through which this drug or supplement
      * produces its pharmacological effect.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $mechanismOfAction;
 
     /**
      * The generic name of this drug or supplement.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $nonProprietaryName;
 
@@ -266,14 +259,14 @@ class Drug extends Substance
      * Any information related to overdose on a drug, including signs or symptoms,
      * treatments, contact information for emergency response.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $overdosage;
 
     /**
      * Pregnancy category of this drug.
      *
-     * @var mixed|DrugPregnancyCategory [schema.org types: DrugPregnancyCategory]
+     * @var DrugPregnancyCategory [schema.org types: DrugPregnancyCategory]
      */
     public $pregnancyCategory;
 
@@ -281,14 +274,14 @@ class Drug extends Substance
      * Any precaution, guidance, contraindication, etc. related to this drug's use
      * during pregnancy.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $pregnancyWarning;
 
     /**
      * Link to prescribing information for the drug.
      *
-     * @var mixed|string [schema.org types: URL]
+     * @var string [schema.org types: URL]
      */
     public $prescribingInfo;
 
@@ -305,7 +298,7 @@ class Drug extends Substance
      * Proprietary name given to the diet plan, typically by its originator or
      * creator.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $proprietaryName;
 
@@ -313,14 +306,14 @@ class Drug extends Substance
      * Any other drug related to this one, for example commonly-prescribed
      * alternatives.
      *
-     * @var mixed|Drug [schema.org types: Drug]
+     * @var Drug [schema.org types: Drug]
      */
     public $relatedDrug;
 
     /**
      * The RxCUI drug identifier from RXNORM.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $rxcui;
 
@@ -346,7 +339,6 @@ class Drug extends Substance
         'availableStrength',
         'breastfeedingWarning',
         'clinicalPharmacology',
-        'cost',
         'dosageForm',
         'doseSchedule',
         'drugClass',
@@ -385,7 +377,6 @@ class Drug extends Substance
         'availableStrength' => ['DrugStrength'],
         'breastfeedingWarning' => ['Text'],
         'clinicalPharmacology' => ['Text'],
-        'cost' => ['DrugCost'],
         'dosageForm' => ['Text'],
         'doseSchedule' => ['DoseSchedule'],
         'drugClass' => ['DrugClass'],
@@ -424,7 +415,6 @@ class Drug extends Substance
         'availableStrength' => 'An available dosage strength for the drug.',
         'breastfeedingWarning' => 'Any precaution, guidance, contraindication, etc. related to this drug\'s use by breastfeeding mothers.',
         'clinicalPharmacology' => 'Description of the absorption and elimination of drugs, including their concentration (pharmacokinetics, pK) and biological effects (pharmacodynamics, pD). Supersedes clincalPharmacology.',
-        'cost' => 'Cost per unit of the drug, as reported by the source being tagged.',
         'dosageForm' => 'A dosage form in which this drug/supplement is available, e.g. \'tablet\', \'suspension\', \'injection\'.',
         'doseSchedule' => 'A dosing schedule for the drug for a given population, either observed, recommended, or maximum dose based on the type used.',
         'drugClass' => 'The class of drug this belongs to (e.g., statins).',
@@ -509,7 +499,7 @@ class Drug extends Substance
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['activeIngredient','administrationRoute','alcoholWarning','availableStrength','breastfeedingWarning','clinicalPharmacology','cost','dosageForm','doseSchedule','drugClass','drugUnit','foodWarning','includedInHealthInsurancePlan','interactingDrug','isAvailableGenerically','isProprietary','labelDetails','legalStatus','manufacturer','maximumIntake','mechanismOfAction','nonProprietaryName','overdosage','pregnancyCategory','pregnancyWarning','prescribingInfo','prescriptionStatus','proprietaryName','relatedDrug','rxcui','warning'], 'validateJsonSchema'],
+            [['activeIngredient','administrationRoute','alcoholWarning','availableStrength','breastfeedingWarning','clinicalPharmacology','dosageForm','doseSchedule','drugClass','drugUnit','foodWarning','includedInHealthInsurancePlan','interactingDrug','isAvailableGenerically','isProprietary','labelDetails','legalStatus','manufacturer','maximumIntake','mechanismOfAction','nonProprietaryName','overdosage','pregnancyCategory','pregnancyWarning','prescribingInfo','prescriptionStatus','proprietaryName','relatedDrug','rxcui','warning'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

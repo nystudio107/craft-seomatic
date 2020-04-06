@@ -104,14 +104,14 @@ class ScreeningEvent extends Event
      * The type of screening or video broadcast used (e.g. IMAX, 3D, SD, HD,
      * etc.).
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $videoFormat;
 
     /**
      * The movie presented during this event.
      *
-     * @var mixed|Movie [schema.org types: Movie]
+     * @var Movie [schema.org types: Movie]
      */
     public $workPresented;
 

@@ -119,17 +119,6 @@ class TherapeuticProcedure extends MedicalProcedure
      */
     public $drug;
 
-    /**
-     * A factor that indicates use of this therapy for treatment and/or prevention
-     * of a condition, symptom, etc. For therapies such as drugs, indications can
-     * include both officially-approved indications as well as off-label uses.
-     * These can be distinguished by using the ApprovedIndication subtype of
-     * MedicalIndication.
-     *
-     * @var MedicalIndication [schema.org types: MedicalIndication]
-     */
-    public $indication;
-
     // Static Protected Properties
     // =========================================================================
 
@@ -141,8 +130,7 @@ class TherapeuticProcedure extends MedicalProcedure
     static protected $_schemaPropertyNames = [
         'adverseOutcome',
         'doseSchedule',
-        'drug',
-        'indication'
+        'drug'
     ];
 
     /**
@@ -153,8 +141,7 @@ class TherapeuticProcedure extends MedicalProcedure
     static protected $_schemaPropertyExpectedTypes = [
         'adverseOutcome' => ['MedicalEntity'],
         'doseSchedule' => ['DoseSchedule'],
-        'drug' => ['Drug'],
-        'indication' => ['MedicalIndication']
+        'drug' => ['Drug']
     ];
 
     /**
@@ -165,8 +152,7 @@ class TherapeuticProcedure extends MedicalProcedure
     static protected $_schemaPropertyDescriptions = [
         'adverseOutcome' => 'A possible complication and/or side effect of this therapy. If it is known that an adverse outcome is serious (resulting in death, disability, or permanent damage; requiring hospitalization; or is otherwise life-threatening or requires immediate medical attention), tag it as a seriouseAdverseOutcome instead.',
         'doseSchedule' => 'A dosing schedule for the drug for a given population, either observed, recommended, or maximum dose based on the type used.',
-        'drug' => 'Specifying a drug or medicine used in a medication procedure',
-        'indication' => 'A factor that indicates use of this therapy for treatment and/or prevention of a condition, symptom, etc. For therapies such as drugs, indications can include both officially-approved indications as well as off-label uses. These can be distinguished by using the ApprovedIndication subtype of MedicalIndication.'
+        'drug' => 'Specifying a drug or medicine used in a medication procedure'
     ];
 
     /**
@@ -227,7 +213,7 @@ class TherapeuticProcedure extends MedicalProcedure
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['adverseOutcome','doseSchedule','drug','indication'], 'validateJsonSchema'],
+            [['adverseOutcome','doseSchedule','drug'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

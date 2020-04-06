@@ -105,14 +105,14 @@ class ServiceChannel extends Intangible
     /**
      * Estimated processing time for the service using this channel.
      *
-     * @var mixed|Duration [schema.org types: Duration]
+     * @var Duration [schema.org types: Duration]
      */
     public $processingTime;
 
     /**
      * The service provided by this channel.
      *
-     * @var mixed|Service [schema.org types: Service]
+     * @var Service [schema.org types: Service]
      */
     public $providesService;
 
@@ -120,35 +120,35 @@ class ServiceChannel extends Intangible
      * The location (e.g. civic structure, local business, etc.) where a person
      * can go to access the service.
      *
-     * @var mixed|Place [schema.org types: Place]
+     * @var Place [schema.org types: Place]
      */
     public $serviceLocation;
 
     /**
      * The phone number to use to access the service.
      *
-     * @var mixed|ContactPoint [schema.org types: ContactPoint]
+     * @var ContactPoint [schema.org types: ContactPoint]
      */
     public $servicePhone;
 
     /**
      * The address for accessing the service by mail.
      *
-     * @var mixed|PostalAddress [schema.org types: PostalAddress]
+     * @var PostalAddress [schema.org types: PostalAddress]
      */
     public $servicePostalAddress;
 
     /**
      * The number to access the service by text message.
      *
-     * @var mixed|ContactPoint [schema.org types: ContactPoint]
+     * @var ContactPoint [schema.org types: ContactPoint]
      */
     public $serviceSmsNumber;
 
     /**
      * The website to access the service.
      *
-     * @var mixed|string [schema.org types: URL]
+     * @var string [schema.org types: URL]
      */
     public $serviceUrl;
 

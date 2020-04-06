@@ -106,7 +106,7 @@ class InteractionCounter extends StructuredValue
      * use LikeAction. For down votes use DislikeAction. Otherwise, use the most
      * specific Action.
      *
-     * @var mixed|Action [schema.org types: Action]
+     * @var Action [schema.org types: Action]
      */
     public $interactionType;
 
@@ -114,7 +114,7 @@ class InteractionCounter extends StructuredValue
      * The number of interactions for the CreativeWork using the WebSite or
      * SoftwareApplication.
      *
-     * @var mixed|int [schema.org types: Integer]
+     * @var int [schema.org types: Integer]
      */
     public $userInteractionCount;
 

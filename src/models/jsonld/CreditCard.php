@@ -16,8 +16,8 @@ use nystudio107\seomatic\models\jsonld\PaymentCard;
 /**
  * CreditCard - A card payment method of a particular brand or name. Used to
  * mark up a particular payment method and/or the financial product/service
- * that supplies the card account. Commonly used
- * values:http://purl.org/goodrelations/v1#AmericanExpress
+ * that supplies the card account. Commonly used values:
+ * http://purl.org/goodrelations/v1#AmericanExpress
  * http://purl.org/goodrelations/v1#DinersClub
  * http://purl.org/goodrelations/v1#Discover
  * http://purl.org/goodrelations/v1#JCB
@@ -53,7 +53,7 @@ class CreditCard extends PaymentCard
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'A card payment method of a particular brand or name. Used to mark up a particular payment method and/or the financial product/service that supplies the card account. Commonly used values:http://purl.org/goodrelations/v1#AmericanExpress http://purl.org/goodrelations/v1#DinersClub http://purl.org/goodrelations/v1#Discover http://purl.org/goodrelations/v1#JCB http://purl.org/goodrelations/v1#MasterCard http://purl.org/goodrelations/v1#VISA';
+    static public $schemaTypeDescription = 'A card payment method of a particular brand or name. Used to mark up a particular payment method and/or the financial product/service that supplies the card account. Commonly used values: http://purl.org/goodrelations/v1#AmericanExpress http://purl.org/goodrelations/v1#DinersClub http://purl.org/goodrelations/v1#Discover http://purl.org/goodrelations/v1#JCB http://purl.org/goodrelations/v1#MasterCard http://purl.org/goodrelations/v1#VISA';
 
     /**
      * The Schema.org Type Extends

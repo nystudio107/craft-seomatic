@@ -104,15 +104,6 @@ class DietarySupplement extends Substance
     public $activeIngredient;
 
     /**
-     * Descriptive information establishing a historical perspective on the
-     * supplement. May include the rationale for the name, the population where
-     * the supplement first came to prominence, etc.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $background;
-
-    /**
      * True if this item's name is a proprietary/brand name (vs. generic name).
      *
      * @var bool [schema.org types: Boolean]
@@ -130,7 +121,7 @@ class DietarySupplement extends Substance
     /**
      * The manufacturer of the product.
      *
-     * @var mixed|Organization [schema.org types: Organization]
+     * @var Organization [schema.org types: Organization]
      */
     public $manufacturer;
 
@@ -138,7 +129,7 @@ class DietarySupplement extends Substance
      * Recommended intake of this supplement for a given population as defined by
      * a specific recommending authority.
      *
-     * @var mixed|MaximumDoseSchedule [schema.org types: MaximumDoseSchedule]
+     * @var MaximumDoseSchedule [schema.org types: MaximumDoseSchedule]
      */
     public $maximumIntake;
 
@@ -146,14 +137,14 @@ class DietarySupplement extends Substance
      * The specific biochemical interaction through which this drug or supplement
      * produces its pharmacological effect.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $mechanismOfAction;
 
     /**
      * The generic name of this drug or supplement.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $nonProprietaryName;
 
@@ -161,7 +152,7 @@ class DietarySupplement extends Substance
      * Proprietary name given to the diet plan, typically by its originator or
      * creator.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $proprietaryName;
 
@@ -169,7 +160,7 @@ class DietarySupplement extends Substance
      * Recommended intake of this supplement for a given population as defined by
      * a specific recommending authority.
      *
-     * @var mixed|RecommendedDoseSchedule [schema.org types: RecommendedDoseSchedule]
+     * @var RecommendedDoseSchedule [schema.org types: RecommendedDoseSchedule]
      */
     public $recommendedIntake;
 
@@ -178,7 +169,7 @@ class DietarySupplement extends Substance
      * interactions with other drugs and foods, pregnancy, breastfeeding, known
      * adverse reactions, and documented efficacy of the supplement.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $safetyConsideration;
 
@@ -186,7 +177,7 @@ class DietarySupplement extends Substance
      * Characteristics of the population for which this is intended, or which
      * typically uses it, e.g. 'adults'.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $targetPopulation;
 
@@ -200,7 +191,6 @@ class DietarySupplement extends Substance
      */
     static protected $_schemaPropertyNames = [
         'activeIngredient',
-        'background',
         'isProprietary',
         'legalStatus',
         'manufacturer',
@@ -220,7 +210,6 @@ class DietarySupplement extends Substance
      */
     static protected $_schemaPropertyExpectedTypes = [
         'activeIngredient' => ['Text'],
-        'background' => ['Text'],
         'isProprietary' => ['Boolean'],
         'legalStatus' => ['DrugLegalStatus','MedicalEnumeration','Text'],
         'manufacturer' => ['Organization'],
@@ -240,7 +229,6 @@ class DietarySupplement extends Substance
      */
     static protected $_schemaPropertyDescriptions = [
         'activeIngredient' => 'An active ingredient, typically chemical compounds and/or biologic substances.',
-        'background' => 'Descriptive information establishing a historical perspective on the supplement. May include the rationale for the name, the population where the supplement first came to prominence, etc.',
         'isProprietary' => 'True if this item\'s name is a proprietary/brand name (vs. generic name).',
         'legalStatus' => 'The drug or supplement\'s legal status, including any controlled substance schedules that apply.',
         'manufacturer' => 'The manufacturer of the product.',
@@ -311,7 +299,7 @@ class DietarySupplement extends Substance
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['activeIngredient','background','isProprietary','legalStatus','manufacturer','maximumIntake','mechanismOfAction','nonProprietaryName','proprietaryName','recommendedIntake','safetyConsideration','targetPopulation'], 'validateJsonSchema'],
+            [['activeIngredient','isProprietary','legalStatus','manufacturer','maximumIntake','mechanismOfAction','nonProprietaryName','proprietaryName','recommendedIntake','safetyConsideration','targetPopulation'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

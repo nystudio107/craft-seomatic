@@ -15,6 +15,7 @@ use nystudio107\seomatic\models\jsonld\Rating;
 
 /**
  * AggregateRating - The average rating based on multiple ratings or reviews.
+ * The average rating based on multiple ratings or reviews.
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -45,7 +46,7 @@ class AggregateRating extends Rating
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'The average rating based on multiple ratings or reviews.';
+    static public $schemaTypeDescription = 'The average rating based on multiple ratings or reviews. The average rating based on multiple ratings or reviews.';
 
     /**
      * The Schema.org Type Extends

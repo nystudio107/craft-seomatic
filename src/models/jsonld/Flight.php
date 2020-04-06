@@ -102,21 +102,21 @@ class Flight extends Trip
     /**
      * The airport where the flight terminates.
      *
-     * @var mixed|Airport [schema.org types: Airport]
+     * @var Airport [schema.org types: Airport]
      */
     public $arrivalAirport;
 
     /**
      * Identifier of the flight's arrival gate.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $arrivalGate;
 
     /**
      * Identifier of the flight's arrival terminal.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $arrivalTerminal;
 
@@ -124,28 +124,28 @@ class Flight extends Trip
      * The type of boarding policy used by the airline (e.g. zone-based or
      * group-based).
      *
-     * @var mixed|BoardingPolicyType [schema.org types: BoardingPolicyType]
+     * @var BoardingPolicyType [schema.org types: BoardingPolicyType]
      */
     public $boardingPolicy;
 
     /**
      * The airport where the flight originates.
      *
-     * @var mixed|Airport [schema.org types: Airport]
+     * @var Airport [schema.org types: Airport]
      */
     public $departureAirport;
 
     /**
      * Identifier of the flight's departure gate.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $departureGate;
 
     /**
      * Identifier of the flight's departure terminal.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $departureTerminal;
 
@@ -168,14 +168,14 @@ class Flight extends Trip
      * example, if describing United flight 110, where the IATA code for United is
      * 'UA', the flightNumber is 'UA110'.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $flightNumber;
 
     /**
      * Description of the meals that will be provided or available for purchase.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $mealService;
 
@@ -190,7 +190,7 @@ class Flight extends Trip
     /**
      * The time when a passenger can check into the flight online.
      *
-     * @var mixed|DateTime [schema.org types: DateTime]
+     * @var DateTime [schema.org types: DateTime]
      */
     public $webCheckinTime;
 

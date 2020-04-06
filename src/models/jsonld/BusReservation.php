@@ -116,7 +116,7 @@ class BusReservation extends Reservation
     /**
      * The date and time the reservation was modified.
      *
-     * @var mixed|DateTime [schema.org types: DateTime]
+     * @var DateTime [schema.org types: DateTime]
      */
     public $modifiedTime;
 
@@ -127,7 +127,7 @@ class BusReservation extends Reservation
      * well known names for Local Exchange Tradings Systems (LETS) and other
      * currency types e.g. "Ithaca HOUR".
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $priceCurrency;
 
@@ -135,7 +135,7 @@ class BusReservation extends Reservation
      * Any membership in a frequent flyer, hotel loyalty program, etc. being
      * applied to the reservation.
      *
-     * @var mixed|ProgramMembership [schema.org types: ProgramMembership]
+     * @var ProgramMembership [schema.org types: ProgramMembership]
      */
     public $programMembershipUsed;
 
@@ -152,34 +152,34 @@ class BusReservation extends Reservation
     /**
      * The thing -- flight, event, restaurant,etc. being reserved.
      *
-     * @var mixed|Thing [schema.org types: Thing]
+     * @var Thing [schema.org types: Thing]
      */
     public $reservationFor;
 
     /**
      * A unique identifier for the reservation.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $reservationId;
 
     /**
      * The current status of the reservation.
      *
-     * @var mixed|ReservationStatusType [schema.org types: ReservationStatusType]
+     * @var ReservationStatusType [schema.org types: ReservationStatusType]
      */
     public $reservationStatus;
 
     /**
      * A ticket associated with the reservation.
      *
-     * @var mixed|Ticket [schema.org types: Ticket]
+     * @var Ticket [schema.org types: Ticket]
      */
     public $reservedTicket;
 
     /**
      * The total price for the reservation or ticket, including applicable taxes,
-     * shipping, etc. Usage guidelines:Use values from 0123456789 (Unicode 'DIGIT
+     * shipping, etc. Usage guidelines: Use values from 0123456789 (Unicode 'DIGIT
      * ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially similiar
      * Unicode symbols. Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to
      * indicate a decimal point. Avoid using these symbols as a readability
@@ -255,7 +255,7 @@ class BusReservation extends Reservation
         'reservationId' => 'A unique identifier for the reservation.',
         'reservationStatus' => 'The current status of the reservation.',
         'reservedTicket' => 'A ticket associated with the reservation.',
-        'totalPrice' => 'The total price for the reservation or ticket, including applicable taxes, shipping, etc. Usage guidelines:Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.',
+        'totalPrice' => 'The total price for the reservation or ticket, including applicable taxes, shipping, etc. Usage guidelines: Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.',
         'underName' => 'The person or organization the reservation or ticket is for.'
     ];
 

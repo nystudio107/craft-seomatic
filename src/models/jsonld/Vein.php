@@ -111,7 +111,7 @@ class Vein extends Vessel
      * The anatomical or organ system that the vein flows into; a larger structure
      * that the vein connects to.
      *
-     * @var mixed|AnatomicalStructure [schema.org types: AnatomicalStructure]
+     * @var AnatomicalStructure [schema.org types: AnatomicalStructure]
      */
     public $tributary;
 

@@ -122,7 +122,7 @@ class ApprovedIndication extends MedicalIndication
      * The system of medicine that includes this MedicalEntity, for example
      * 'evidence-based', 'homeopathic', 'chiropractic', etc.
      *
-     * @var mixed|MedicineSystem [schema.org types: MedicineSystem]
+     * @var MedicineSystem [schema.org types: MedicineSystem]
      */
     public $medicineSystem;
 
@@ -130,21 +130,21 @@ class ApprovedIndication extends MedicalIndication
      * If applicable, the organization that officially recognizes this entity as
      * part of its endorsed system of medicine.
      *
-     * @var mixed|Organization [schema.org types: Organization]
+     * @var Organization [schema.org types: Organization]
      */
     public $recognizingAuthority;
 
     /**
      * If applicable, a medical specialty in which this entity is relevant.
      *
-     * @var mixed|MedicalSpecialty [schema.org types: MedicalSpecialty]
+     * @var MedicalSpecialty [schema.org types: MedicalSpecialty]
      */
     public $relevantSpecialty;
 
     /**
      * A medical study or trial related to this entity.
      *
-     * @var mixed|MedicalStudy [schema.org types: MedicalStudy]
+     * @var MedicalStudy [schema.org types: MedicalStudy]
      */
     public $study;
 

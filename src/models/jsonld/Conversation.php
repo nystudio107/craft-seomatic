@@ -102,6 +102,13 @@ class Conversation extends CreativeWork
     public $about;
 
     /**
+     * An abstract is a short description that summarizes a CreativeWork.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $abstract;
+
+    /**
      * The human sensory perceptual system or cognitive faculty through which a
      * person may process or perceive information. Expected values include:
      * auditory, tactile, textual, visual, colorDependent, chartOnVisual,
@@ -116,7 +123,7 @@ class Conversation extends CreativeWork
      * all the intellectual content of a resource. Expected values include:
      * auditory, tactile, textual, visual.
      *
-     * @var string [schema.org types: Text]
+     * @var ItemList [schema.org types: ItemList]
      */
     public $accessModeSufficient;
 
@@ -173,6 +180,14 @@ class Conversation extends CreativeWork
     public $accountablePerson;
 
     /**
+     * Indicates a page documenting how licenses can be purchased or otherwise
+     * acquired, for the current item.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
+     */
+    public $acquireLicensePage;
+
+    /**
      * The overall rating, based on a collection of reviews or ratings, of the
      * item.
      *
@@ -206,7 +221,7 @@ class Conversation extends CreativeWork
     /**
      * An embedded audio object.
      *
-     * @var mixed|AudioObject|Clip [schema.org types: AudioObject, Clip]
+     * @var mixed|AudioObject|Clip|MusicRecording [schema.org types: AudioObject, Clip, MusicRecording]
      */
     public $audio;
 
@@ -222,14 +237,14 @@ class Conversation extends CreativeWork
     /**
      * An award won by or for this item. Supersedes awards.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $award;
 
     /**
      * Fictional person connected with a creative work.
      *
-     * @var mixed|Person [schema.org types: Person]
+     * @var Person [schema.org types: Person]
      */
     public $character;
 
@@ -244,7 +259,7 @@ class Conversation extends CreativeWork
     /**
      * Comments, typically from users.
      *
-     * @var mixed|Comment [schema.org types: Comment]
+     * @var Comment [schema.org types: Comment]
      */
     public $comment;
 
@@ -253,15 +268,27 @@ class Conversation extends CreativeWork
      * has received. This is most applicable to works published in Web sites with
      * commenting system; additional comments may exist elsewhere.
      *
-     * @var mixed|int [schema.org types: Integer]
+     * @var int [schema.org types: Integer]
      */
     public $commentCount;
+
+    /**
+     * Conditions that affect the availability of, or method(s) of access to, an
+     * item. Typically used for real world items such as an ArchiveComponent held
+     * by an ArchiveOrganization. This property is not suitable for use as a
+     * general Web access control mechanism. It is expressed only in natural
+     * language. For example "Available by appointment from the Reading Room" or
+     * "Accessible only from logged-in accounts ".
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $conditionsOfAccess;
 
     /**
      * The location depicted or described in the content. For example, the
      * location in a photograph or painting.
      *
-     * @var mixed|Place [schema.org types: Place]
+     * @var Place [schema.org types: Place]
      */
     public $contentLocation;
 
@@ -276,7 +303,7 @@ class Conversation extends CreativeWork
      * The specific time described by a creative work, for works (e.g. articles,
      * video objects etc.) that emphasise a particular moment within an Event.
      *
-     * @var mixed|DateTime [schema.org types: DateTime]
+     * @var DateTime [schema.org types: DateTime]
      */
     public $contentReferenceTime;
 
@@ -298,7 +325,7 @@ class Conversation extends CreativeWork
      * The year during which the claimed copyright for the CreativeWork was first
      * asserted.
      *
-     * @var mixed|float [schema.org types: Number]
+     * @var float [schema.org types: Number]
      */
     public $copyrightYear;
 
@@ -309,6 +336,15 @@ class Conversation extends CreativeWork
      * @var mixed|CorrectionComment|string|string [schema.org types: CorrectionComment, Text, URL]
      */
     public $correction;
+
+    /**
+     * The status of a creative work in terms of its stage in a lifecycle. Example
+     * terms include Incomplete, Draft, Published, Obsolete. Some organizations
+     * define a set of terms for the stages of their publication lifecycle.
+     *
+     * @var mixed|DefinedTerm|string [schema.org types: DefinedTerm, Text]
+     */
+    public $creativeWorkStatus;
 
     /**
      * The creator/author of this CreativeWork. This is the same as the Author
@@ -337,28 +373,28 @@ class Conversation extends CreativeWork
     /**
      * Date of first broadcast/publication.
      *
-     * @var mixed|Date [schema.org types: Date]
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
      */
     public $datePublished;
 
     /**
      * A link to the page containing the comments of the CreativeWork.
      *
-     * @var mixed|string [schema.org types: URL]
+     * @var string [schema.org types: URL]
      */
     public $discussionUrl;
 
     /**
      * Specifies the Person who edited the CreativeWork.
      *
-     * @var mixed|Person [schema.org types: Person]
+     * @var Person [schema.org types: Person]
      */
     public $editor;
 
     /**
      * An alignment to an established educational framework.
      *
-     * @var mixed|AlignmentObject [schema.org types: AlignmentObject]
+     * @var AlignmentObject [schema.org types: AlignmentObject]
      */
     public $educationalAlignment;
 
@@ -366,7 +402,7 @@ class Conversation extends CreativeWork
      * The purpose of a work in the context of education; for example,
      * 'assignment', 'group work'.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $educationalUse;
 
@@ -375,7 +411,7 @@ class Conversation extends CreativeWork
      * for associatedMedia. Supersedes encodings. Inverse property:
      * encodesCreativeWork.
      *
-     * @var mixed|MediaObject [schema.org types: MediaObject]
+     * @var MediaObject [schema.org types: MediaObject]
      */
     public $encoding;
 
@@ -397,7 +433,7 @@ class Conversation extends CreativeWork
      * A creative work that this work is an
      * example/instance/realization/derivation of. Inverse property: workExample.
      *
-     * @var mixed|CreativeWork [schema.org types: CreativeWork]
+     * @var CreativeWork [schema.org types: CreativeWork]
      */
     public $exampleOfWork;
 
@@ -408,7 +444,7 @@ class Conversation extends CreativeWork
      * that it may no longer be relevant (or helpful to highlight) after some
      * date.
      *
-     * @var mixed|Date [schema.org types: Date]
+     * @var Date [schema.org types: Date]
      */
     public $expires;
 
@@ -431,14 +467,14 @@ class Conversation extends CreativeWork
      * Indicates an item or CreativeWork that is part of this item, or
      * CreativeWork (in some sense). Inverse property: isPartOf.
      *
-     * @var mixed|CreativeWork [schema.org types: CreativeWork]
+     * @var CreativeWork [schema.org types: CreativeWork]
      */
     public $hasPart;
 
     /**
      * Headline of the article.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $headline;
 
@@ -454,9 +490,11 @@ class Conversation extends CreativeWork
     /**
      * The number of interactions for the CreativeWork using the WebSite or
      * SoftwareApplication. The most specific child type of InteractionCounter
-     * should be used. Supersedes interactionCount.
+     * should be used. The number of interactions for the CreativeWork using the
+     * WebSite or SoftwareApplication. The most specific child type of
+     * InteractionCounter should be used. Supersedes interactionCount.
      *
-     * @var mixed|InteractionCounter [schema.org types: InteractionCounter]
+     * @var InteractionCounter [schema.org types: InteractionCounter]
      */
     public $interactionStatistic;
 
@@ -464,7 +502,7 @@ class Conversation extends CreativeWork
      * The predominant mode of learning supported by the learning resource.
      * Acceptable values are 'active', 'expositive', or 'mixed'.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $interactivityType;
 
@@ -472,15 +510,13 @@ class Conversation extends CreativeWork
      * A flag to signal that the item, event, or place is accessible for free.
      * Supersedes free.
      *
-     * @var mixed|bool [schema.org types: Boolean]
+     * @var bool [schema.org types: Boolean]
      */
     public $isAccessibleForFree;
 
     /**
-     * A resource that was used in the creation of this resource. This term can be
-     * repeated for multiple sources. For example,
-     * http://example.com/great-multiplication-intro.html. Supersedes
-     * isBasedOnUrl.
+     * A resource from which this work is derived or from which it is a
+     * modification or adaption. Supersedes isBasedOnUrl.
      *
      * @var mixed|CreativeWork|Product|string [schema.org types: CreativeWork, Product, URL]
      */
@@ -489,7 +525,7 @@ class Conversation extends CreativeWork
     /**
      * Indicates whether this content is family friendly.
      *
-     * @var mixed|bool [schema.org types: Boolean]
+     * @var bool [schema.org types: Boolean]
      */
     public $isFamilyFriendly;
 
@@ -497,7 +533,7 @@ class Conversation extends CreativeWork
      * Indicates an item or CreativeWork that this item, or CreativeWork (in some
      * sense), is part of. Inverse property: hasPart.
      *
-     * @var mixed|CreativeWork [schema.org types: CreativeWork]
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
      */
     public $isPartOf;
 
@@ -505,7 +541,7 @@ class Conversation extends CreativeWork
      * Keywords or tags used to describe this content. Multiple entries in a
      * keywords list are typically delimited by commas.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $keywords;
 
@@ -513,7 +549,7 @@ class Conversation extends CreativeWork
      * The predominant type or kind characterizing the learning resource. For
      * example, 'presentation', 'handout'.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $learningResourceType;
 
@@ -529,7 +565,7 @@ class Conversation extends CreativeWork
      * The location where the CreativeWork was created, which may not be the same
      * as the location depicted in the CreativeWork.
      *
-     * @var mixed|Place [schema.org types: Place]
+     * @var Place [schema.org types: Place]
      */
     public $locationCreated;
 
@@ -537,9 +573,27 @@ class Conversation extends CreativeWork
      * Indicates the primary entity described in some page or other CreativeWork.
      * Inverse property: mainEntityOfPage.
      *
-     * @var mixed|Thing [schema.org types: Thing]
+     * @var Thing [schema.org types: Thing]
      */
     public $mainEntity;
+
+    /**
+     * A maintainer of a Dataset, software package (SoftwareApplication), or other
+     * Project. A maintainer is a Person or Organization that manages
+     * contributions to, and/or publication of, some (typically complex) artifact.
+     * It is common for distributions of software and data to be based on
+     * "upstream" sources. When maintainer is applied to a specific version of
+     * something e.g. a particular version or packaging of a Dataset, it is always
+     * possible that the upstream source has a different maintainer. The isBasedOn
+     * property can be used to indicate such relationships between datasets to
+     * make the different maintenance roles clear. Similarly in the case of
+     * software, a package may have dedicated maintainers working on integration
+     * into software distributions such as Ubuntu, as well as upstream maintainers
+     * of the underlying work.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $maintainer;
 
     /**
      * A material that something is made from, e.g. leather, wool, cotton, paper.
@@ -560,16 +614,21 @@ class Conversation extends CreativeWork
      * Indicates that the CreativeWork contains a reference to, but is not
      * necessarily about a concept.
      *
-     * @var mixed|Thing [schema.org types: Thing]
+     * @var Thing [schema.org types: Thing]
      */
     public $mentions;
 
     /**
      * An offer to provide this item—for example, an offer to sell a product,
      * rent the DVD of a movie, perform a service, or give away tickets to an
-     * event.
+     * event. Use businessFunction to indicate the kind of transaction offered,
+     * i.e. sell, lease, etc. This property can also be used to describe a Demand.
+     * While this property is listed as expected on a number of common types, it
+     * can be used in others. In that case, using a second type, such as Product
+     * or a subtype of Product, can clarify the nature of the offer. Inverse
+     * property: itemOffered.
      *
-     * @var mixed|Offer [schema.org types: Offer]
+     * @var mixed|Demand|Offer [schema.org types: Demand, Offer]
      */
     public $offers;
 
@@ -601,7 +660,7 @@ class Conversation extends CreativeWork
     /**
      * A publication event associated with the item.
      *
-     * @var mixed|PublicationEvent [schema.org types: PublicationEvent]
+     * @var PublicationEvent [schema.org types: PublicationEvent]
      */
     public $publication;
 
@@ -615,7 +674,7 @@ class Conversation extends CreativeWork
     /**
      * The publishing division which published the comic.
      *
-     * @var mixed|Organization [schema.org types: Organization]
+     * @var Organization [schema.org types: Organization]
      */
     public $publisherImprint;
 
@@ -637,21 +696,21 @@ class Conversation extends CreativeWork
      * The Event where the CreativeWork was recorded. The CreativeWork may capture
      * all or part of the event. Inverse property: recordedIn.
      *
-     * @var mixed|Event [schema.org types: Event]
+     * @var Event [schema.org types: Event]
      */
     public $recordedAt;
 
     /**
      * The place and time the release was issued, expressed as a PublicationEvent.
      *
-     * @var mixed|PublicationEvent [schema.org types: PublicationEvent]
+     * @var PublicationEvent [schema.org types: PublicationEvent]
      */
     public $releasedEvent;
 
     /**
      * A review of the item. Supersedes reviews.
      *
-     * @var mixed|Review [schema.org types: Review]
+     * @var Review [schema.org types: Review]
      */
     public $review;
 
@@ -669,7 +728,7 @@ class Conversation extends CreativeWork
      * Indicates the date on which the current structured data was generated /
      * published. Typically used alongside sdPublisher
      *
-     * @var mixed|Date [schema.org types: Date]
+     * @var Date [schema.org types: Date]
      */
     public $sdDatePublished;
 
@@ -696,7 +755,7 @@ class Conversation extends CreativeWork
     /**
      * The Organization on whose behalf the creator was working.
      *
-     * @var mixed|Organization [schema.org types: Organization]
+     * @var Organization [schema.org types: Organization]
      */
     public $sourceOrganization;
 
@@ -705,7 +764,7 @@ class Conversation extends CreativeWork
      * (e.g. locationCreated, spatialCoverage, contentLocation) are not known to
      * be appropriate.
      *
-     * @var mixed|Place [schema.org types: Place]
+     * @var Place [schema.org types: Place]
      */
     public $spatial;
 
@@ -717,7 +776,7 @@ class Conversation extends CreativeWork
      * York weather would have spatialCoverage which was the place: the state of
      * New York.
      *
-     * @var mixed|Place [schema.org types: Place]
+     * @var Place [schema.org types: Place]
      */
     public $spatialCoverage;
 
@@ -763,14 +822,14 @@ class Conversation extends CreativeWork
     /**
      * The textual content of this CreativeWork.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $text;
 
     /**
      * A thumbnail image relevant to the Thing.
      *
-     * @var mixed|string [schema.org types: URL]
+     * @var string [schema.org types: URL]
      */
     public $thumbnailUrl;
 
@@ -778,7 +837,7 @@ class Conversation extends CreativeWork
      * Approximate or typical time it takes to work with or through this learning
      * resource for the typical intended target audience, e.g. 'PT30M', 'PT1H25M'.
      *
-     * @var mixed|Duration [schema.org types: Duration]
+     * @var Duration [schema.org types: Duration]
      */
     public $timeRequired;
 
@@ -787,7 +846,7 @@ class Conversation extends CreativeWork
      * translationOf “On the Origin of Species” Inverse property:
      * workTranslation.
      *
-     * @var mixed|CreativeWork [schema.org types: CreativeWork]
+     * @var CreativeWork [schema.org types: CreativeWork]
      */
     public $translationOfWork;
 
@@ -803,9 +862,27 @@ class Conversation extends CreativeWork
     /**
      * The typical expected age range, e.g. '7-9', '11-'.
      *
-     * @var mixed|string [schema.org types: Text]
+     * @var string [schema.org types: Text]
      */
     public $typicalAgeRange;
+
+    /**
+     * The schema.org usageInfo property indicates further information about a
+     * CreativeWork. This property is applicable both to works that are freely
+     * available and to those that require payment or other transactions. It can
+     * reference additional information e.g. community expectations on preferred
+     * linking and citation conventions, as well as purchasing details. For
+     * something that can be commercially licensed, usageInfo can provide
+     * detailed, resource-specific information about licensing options. This
+     * property can be used alongside the license property which indicates
+     * license(s) applicable to some piece of content. The usageInfo property can
+     * provide information about other licensing options, e.g. acquiring
+     * commercial usage rights for an image that is also available under
+     * non-commercial creative commons licenses.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
+     */
+    public $usageInfo;
 
     /**
      * The version of the CreativeWork embodied by a specified resource.
@@ -826,7 +903,7 @@ class Conversation extends CreativeWork
      * work. eg. The paperback edition, first edition, or eBook. Inverse property:
      * exampleOfWork.
      *
-     * @var mixed|CreativeWork [schema.org types: CreativeWork]
+     * @var CreativeWork [schema.org types: CreativeWork]
      */
     public $workExample;
 
@@ -836,7 +913,7 @@ class Conversation extends CreativeWork
      * workTranslation “Monkeys Pilgerfahrt” and a Vietnamese translation Tây
      * du ký bình khảo. Inverse property: translationOfWork.
      *
-     * @var mixed|CreativeWork [schema.org types: CreativeWork]
+     * @var CreativeWork [schema.org types: CreativeWork]
      */
     public $workTranslation;
 
@@ -850,6 +927,7 @@ class Conversation extends CreativeWork
      */
     static protected $_schemaPropertyNames = [
         'about',
+        'abstract',
         'accessMode',
         'accessModeSufficient',
         'accessibilityAPI',
@@ -858,6 +936,7 @@ class Conversation extends CreativeWork
         'accessibilityHazard',
         'accessibilitySummary',
         'accountablePerson',
+        'acquireLicensePage',
         'aggregateRating',
         'alternativeHeadline',
         'associatedMedia',
@@ -869,6 +948,7 @@ class Conversation extends CreativeWork
         'citation',
         'comment',
         'commentCount',
+        'conditionsOfAccess',
         'contentLocation',
         'contentRating',
         'contentReferenceTime',
@@ -876,6 +956,7 @@ class Conversation extends CreativeWork
         'copyrightHolder',
         'copyrightYear',
         'correction',
+        'creativeWorkStatus',
         'creator',
         'dateCreated',
         'dateModified',
@@ -904,6 +985,7 @@ class Conversation extends CreativeWork
         'license',
         'locationCreated',
         'mainEntity',
+        'maintainer',
         'material',
         'materialExtent',
         'mentions',
@@ -934,6 +1016,7 @@ class Conversation extends CreativeWork
         'translationOfWork',
         'translator',
         'typicalAgeRange',
+        'usageInfo',
         'version',
         'video',
         'workExample',
@@ -947,25 +1030,28 @@ class Conversation extends CreativeWork
      */
     static protected $_schemaPropertyExpectedTypes = [
         'about' => ['Thing'],
+        'abstract' => ['Text'],
         'accessMode' => ['Text'],
-        'accessModeSufficient' => ['Text'],
+        'accessModeSufficient' => ['ItemList'],
         'accessibilityAPI' => ['Text'],
         'accessibilityControl' => ['Text'],
         'accessibilityFeature' => ['Text'],
         'accessibilityHazard' => ['Text'],
         'accessibilitySummary' => ['Text'],
         'accountablePerson' => ['Person'],
+        'acquireLicensePage' => ['CreativeWork','URL'],
         'aggregateRating' => ['AggregateRating'],
         'alternativeHeadline' => ['Text'],
         'associatedMedia' => ['MediaObject'],
         'audience' => ['Audience'],
-        'audio' => ['AudioObject','Clip'],
+        'audio' => ['AudioObject','Clip','MusicRecording'],
         'author' => ['Organization','Person'],
         'award' => ['Text'],
         'character' => ['Person'],
         'citation' => ['CreativeWork','Text'],
         'comment' => ['Comment'],
         'commentCount' => ['Integer'],
+        'conditionsOfAccess' => ['Text'],
         'contentLocation' => ['Place'],
         'contentRating' => ['Rating','Text'],
         'contentReferenceTime' => ['DateTime'],
@@ -973,10 +1059,11 @@ class Conversation extends CreativeWork
         'copyrightHolder' => ['Organization','Person'],
         'copyrightYear' => ['Number'],
         'correction' => ['CorrectionComment','Text','URL'],
+        'creativeWorkStatus' => ['DefinedTerm','Text'],
         'creator' => ['Organization','Person'],
         'dateCreated' => ['Date','DateTime'],
         'dateModified' => ['Date','DateTime'],
-        'datePublished' => ['Date'],
+        'datePublished' => ['Date','DateTime'],
         'discussionUrl' => ['URL'],
         'editor' => ['Person'],
         'educationalAlignment' => ['AlignmentObject'],
@@ -995,16 +1082,17 @@ class Conversation extends CreativeWork
         'isAccessibleForFree' => ['Boolean'],
         'isBasedOn' => ['CreativeWork','Product','URL'],
         'isFamilyFriendly' => ['Boolean'],
-        'isPartOf' => ['CreativeWork'],
+        'isPartOf' => ['CreativeWork','URL'],
         'keywords' => ['Text'],
         'learningResourceType' => ['Text'],
         'license' => ['CreativeWork','URL'],
         'locationCreated' => ['Place'],
         'mainEntity' => ['Thing'],
+        'maintainer' => ['Organization','Person'],
         'material' => ['Product','Text','URL'],
         'materialExtent' => ['QuantitativeValue','Text'],
         'mentions' => ['Thing'],
-        'offers' => ['Offer'],
+        'offers' => ['Demand','Offer'],
         'position' => ['Integer','Text'],
         'producer' => ['Organization','Person'],
         'provider' => ['Organization','Person'],
@@ -1031,6 +1119,7 @@ class Conversation extends CreativeWork
         'translationOfWork' => ['CreativeWork'],
         'translator' => ['Organization','Person'],
         'typicalAgeRange' => ['Text'],
+        'usageInfo' => ['CreativeWork','URL'],
         'version' => ['Number','Text'],
         'video' => ['Clip','VideoObject'],
         'workExample' => ['CreativeWork'],
@@ -1044,6 +1133,7 @@ class Conversation extends CreativeWork
      */
     static protected $_schemaPropertyDescriptions = [
         'about' => 'The subject matter of the content. Inverse property: subjectOf.',
+        'abstract' => 'An abstract is a short description that summarizes a CreativeWork.',
         'accessMode' => 'The human sensory perceptual system or cognitive faculty through which a person may process or perceive information. Expected values include: auditory, tactile, textual, visual, colorDependent, chartOnVisual, chemOnVisual, diagramOnVisual, mathOnVisual, musicOnVisual, textOnVisual.',
         'accessModeSufficient' => 'A list of single or combined accessModes that are sufficient to understand all the intellectual content of a resource. Expected values include: auditory, tactile, textual, visual.',
         'accessibilityAPI' => 'Indicates that the resource is compatible with the referenced accessibility API (WebSchemas wiki lists possible values).',
@@ -1052,6 +1142,7 @@ class Conversation extends CreativeWork
         'accessibilityHazard' => 'A characteristic of the described resource that is physiologically dangerous to some users. Related to WCAG 2.0 guideline 2.3 (WebSchemas wiki lists possible values).',
         'accessibilitySummary' => 'A human-readable summary of specific accessibility features or deficiencies, consistent with the other accessibility metadata but expressing subtleties such as "short descriptions are present but long descriptions will be needed for non-visual users" or "short descriptions are present and no long descriptions are needed."',
         'accountablePerson' => 'Specifies the Person that is legally accountable for the CreativeWork.',
+        'acquireLicensePage' => 'Indicates a page documenting how licenses can be purchased or otherwise acquired, for the current item.',
         'aggregateRating' => 'The overall rating, based on a collection of reviews or ratings, of the item.',
         'alternativeHeadline' => 'A secondary title of the CreativeWork.',
         'associatedMedia' => 'A media object that encodes this CreativeWork. This property is a synonym for encoding.',
@@ -1063,6 +1154,7 @@ class Conversation extends CreativeWork
         'citation' => 'A citation or reference to another creative work, such as another publication, web page, scholarly article, etc.',
         'comment' => 'Comments, typically from users.',
         'commentCount' => 'The number of comments this CreativeWork (e.g. Article, Question or Answer) has received. This is most applicable to works published in Web sites with commenting system; additional comments may exist elsewhere.',
+        'conditionsOfAccess' => 'Conditions that affect the availability of, or method(s) of access to, an item. Typically used for real world items such as an ArchiveComponent held by an ArchiveOrganization. This property is not suitable for use as a general Web access control mechanism. It is expressed only in natural language. For example "Available by appointment from the Reading Room" or "Accessible only from logged-in accounts ".',
         'contentLocation' => 'The location depicted or described in the content. For example, the location in a photograph or painting.',
         'contentRating' => 'Official rating of a piece of content—for example,\'MPAA PG-13\'.',
         'contentReferenceTime' => 'The specific time described by a creative work, for works (e.g. articles, video objects etc.) that emphasise a particular moment within an Event.',
@@ -1070,6 +1162,7 @@ class Conversation extends CreativeWork
         'copyrightHolder' => 'The party holding the legal copyright to the CreativeWork.',
         'copyrightYear' => 'The year during which the claimed copyright for the CreativeWork was first asserted.',
         'correction' => 'Indicates a correction to a CreativeWork, either via a CorrectionComment, textually or in another document.',
+        'creativeWorkStatus' => 'The status of a creative work in terms of its stage in a lifecycle. Example terms include Incomplete, Draft, Published, Obsolete. Some organizations define a set of terms for the stages of their publication lifecycle.',
         'creator' => 'The creator/author of this CreativeWork. This is the same as the Author property for CreativeWork.',
         'dateCreated' => 'The date on which the CreativeWork was created or the item was added to a DataFeed.',
         'dateModified' => 'The date on which the CreativeWork was most recently modified or when the item\'s entry was modified within a DataFeed.',
@@ -1087,10 +1180,10 @@ class Conversation extends CreativeWork
         'hasPart' => 'Indicates an item or CreativeWork that is part of this item, or CreativeWork (in some sense). Inverse property: isPartOf.',
         'headline' => 'Headline of the article.',
         'inLanguage' => 'The language of the content or performance or used in an action. Please use one of the language codes from the IETF BCP 47 standard. See also availableLanguage. Supersedes language.',
-        'interactionStatistic' => 'The number of interactions for the CreativeWork using the WebSite or SoftwareApplication. The most specific child type of InteractionCounter should be used. Supersedes interactionCount.',
+        'interactionStatistic' => 'The number of interactions for the CreativeWork using the WebSite or SoftwareApplication. The most specific child type of InteractionCounter should be used. The number of interactions for the CreativeWork using the WebSite or SoftwareApplication. The most specific child type of InteractionCounter should be used. Supersedes interactionCount.',
         'interactivityType' => 'The predominant mode of learning supported by the learning resource. Acceptable values are \'active\', \'expositive\', or \'mixed\'.',
         'isAccessibleForFree' => 'A flag to signal that the item, event, or place is accessible for free. Supersedes free.',
-        'isBasedOn' => 'A resource that was used in the creation of this resource. This term can be repeated for multiple sources. For example, http://example.com/great-multiplication-intro.html. Supersedes isBasedOnUrl.',
+        'isBasedOn' => 'A resource from which this work is derived or from which it is a modification or adaption. Supersedes isBasedOnUrl.',
         'isFamilyFriendly' => 'Indicates whether this content is family friendly.',
         'isPartOf' => 'Indicates an item or CreativeWork that this item, or CreativeWork (in some sense), is part of. Inverse property: hasPart.',
         'keywords' => 'Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.',
@@ -1098,10 +1191,11 @@ class Conversation extends CreativeWork
         'license' => 'A license document that applies to this content, typically indicated by URL.',
         'locationCreated' => 'The location where the CreativeWork was created, which may not be the same as the location depicted in the CreativeWork.',
         'mainEntity' => 'Indicates the primary entity described in some page or other CreativeWork. Inverse property: mainEntityOfPage.',
+        'maintainer' => 'A maintainer of a Dataset, software package (SoftwareApplication), or other Project. A maintainer is a Person or Organization that manages contributions to, and/or publication of, some (typically complex) artifact. It is common for distributions of software and data to be based on "upstream" sources. When maintainer is applied to a specific version of something e.g. a particular version or packaging of a Dataset, it is always possible that the upstream source has a different maintainer. The isBasedOn property can be used to indicate such relationships between datasets to make the different maintenance roles clear. Similarly in the case of software, a package may have dedicated maintainers working on integration into software distributions such as Ubuntu, as well as upstream maintainers of the underlying work.',
         'material' => 'A material that something is made from, e.g. leather, wool, cotton, paper.',
         'materialExtent' => 'The quantity of the materials being described or an expression of the physical space they occupy.',
         'mentions' => 'Indicates that the CreativeWork contains a reference to, but is not necessarily about a concept.',
-        'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event.',
+        'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use businessFunction to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a Demand. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer. Inverse property: itemOffered.',
         'position' => 'The position of an item in a series or sequence of items.',
         'producer' => 'The person or organization who produced the work (e.g. music album, movie, tv/radio series etc.).',
         'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller. Supersedes carrier.',
@@ -1128,6 +1222,7 @@ class Conversation extends CreativeWork
         'translationOfWork' => 'The work that this work has been translated from. e.g. 物种起源 is a translationOf “On the Origin of Species” Inverse property: workTranslation.',
         'translator' => 'Organization or person who adapts a creative work to different languages, regional differences and technical requirements of a target market, or that translates during some event.',
         'typicalAgeRange' => 'The typical expected age range, e.g. \'7-9\', \'11-\'.',
+        'usageInfo' => 'The schema.org usageInfo property indicates further information about a CreativeWork. This property is applicable both to works that are freely available and to those that require payment or other transactions. It can reference additional information e.g. community expectations on preferred linking and citation conventions, as well as purchasing details. For something that can be commercially licensed, usageInfo can provide detailed, resource-specific information about licensing options. This property can be used alongside the license property which indicates license(s) applicable to some piece of content. The usageInfo property can provide information about other licensing options, e.g. acquiring commercial usage rights for an image that is also available under non-commercial creative commons licenses.',
         'version' => 'The version of the CreativeWork embodied by a specified resource.',
         'video' => 'An embedded video object.',
         'workExample' => 'Example/instance/realization/derivation of the concept of this creative work. eg. The paperback edition, first edition, or eBook. Inverse property: exampleOfWork.',
@@ -1192,7 +1287,7 @@ class Conversation extends CreativeWork
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['about','accessMode','accessModeSufficient','accessibilityAPI','accessibilityControl','accessibilityFeature','accessibilityHazard','accessibilitySummary','accountablePerson','aggregateRating','alternativeHeadline','associatedMedia','audience','audio','author','award','character','citation','comment','commentCount','contentLocation','contentRating','contentReferenceTime','contributor','copyrightHolder','copyrightYear','correction','creator','dateCreated','dateModified','datePublished','discussionUrl','editor','educationalAlignment','educationalUse','encoding','encodingFormat','exampleOfWork','expires','funder','genre','hasPart','headline','inLanguage','interactionStatistic','interactivityType','isAccessibleForFree','isBasedOn','isFamilyFriendly','isPartOf','keywords','learningResourceType','license','locationCreated','mainEntity','material','materialExtent','mentions','offers','position','producer','provider','publication','publisher','publisherImprint','publishingPrinciples','recordedAt','releasedEvent','review','schemaVersion','sdDatePublished','sdLicense','sdPublisher','sourceOrganization','spatial','spatialCoverage','sponsor','temporal','temporalCoverage','text','thumbnailUrl','timeRequired','translationOfWork','translator','typicalAgeRange','version','video','workExample','workTranslation'], 'validateJsonSchema'],
+            [['about','abstract','accessMode','accessModeSufficient','accessibilityAPI','accessibilityControl','accessibilityFeature','accessibilityHazard','accessibilitySummary','accountablePerson','acquireLicensePage','aggregateRating','alternativeHeadline','associatedMedia','audience','audio','author','award','character','citation','comment','commentCount','conditionsOfAccess','contentLocation','contentRating','contentReferenceTime','contributor','copyrightHolder','copyrightYear','correction','creativeWorkStatus','creator','dateCreated','dateModified','datePublished','discussionUrl','editor','educationalAlignment','educationalUse','encoding','encodingFormat','exampleOfWork','expires','funder','genre','hasPart','headline','inLanguage','interactionStatistic','interactivityType','isAccessibleForFree','isBasedOn','isFamilyFriendly','isPartOf','keywords','learningResourceType','license','locationCreated','mainEntity','maintainer','material','materialExtent','mentions','offers','position','producer','provider','publication','publisher','publisherImprint','publishingPrinciples','recordedAt','releasedEvent','review','schemaVersion','sdDatePublished','sdLicense','sdPublisher','sourceOrganization','spatial','spatialCoverage','sponsor','temporal','temporalCoverage','text','thumbnailUrl','timeRequired','translationOfWork','translator','typicalAgeRange','usageInfo','version','video','workExample','workTranslation'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
