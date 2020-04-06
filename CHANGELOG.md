@@ -4,6 +4,9 @@
 ### Added
 * Added a validator for the `Duration` schema.org type
 
+### Changed
+* The MetaLink error `...did not render because it is missing attributes` is no longer render as an error, but rather via the `info` log level, with `WARNING - ` proceeding it
+
 ## 3.2.51 - 2020.04.06
 ### Added
 * Updated to [Schema.org 7.0.3](https://schema.org/version/7.03/schema-all.html) including [SpecialAnnouncement](https://webmasters.googleblog.com/2020/04/highlight-covid-19-announcements-search.html) and other types/changes to handle the COVID-19 crisis
