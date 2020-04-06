@@ -189,7 +189,7 @@ class MetaLink extends MetaItem
                         '{tagtype} tag `{key}` did not render because it is missing attributes.',
                         ['tagtype' => 'Link', 'key' => $this->key]
                     );
-                    Craft::error($error, __METHOD__);
+                    Craft::info('WARNING - '.$error, __METHOD__);
                 }
                 $shouldRender = false;
             }
