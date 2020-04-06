@@ -30,34 +30,36 @@ return [
         ],
         'data'         => [
             'mainEntityOfPage' => [
-                'type'             => '{seomatic.meta.mainEntityOfPage}',
-                'name'             => '{seomatic.meta.seoTitle}',
-                'headline'         => '{seomatic.meta.seoTitle}',
-                'description'      => '{seomatic.meta.seoDescription}',
-                'url'              => '{seomatic.meta.canonicalUrl}',
-                'mainEntityOfPage' => '{seomatic.meta.canonicalUrl}',
-                'startDate'        => '{event.startDateLocalized|atom}',
-                'endDate'          => '{event.endDateLocalized|atom}',
-                'inLanguage'       => '{seomatic.meta.language}',
-                'location'         => [
-                    'type' => 'Place',
+                'type'                => '{seomatic.meta.mainEntityOfPage}',
+                'name'                => '{seomatic.meta.seoTitle}',
+                'headline'            => '{seomatic.meta.seoTitle}',
+                'description'         => '{seomatic.meta.seoDescription}',
+                'url'                 => '{seomatic.meta.canonicalUrl}',
+                'mainEntityOfPage'    => '{seomatic.meta.canonicalUrl}',
+                'startDate'           => '{event.startDateLocalized|atom}',
+                'endDate'             => '{event.endDateLocalized|atom}',
+                'eventAttendanceMode' => 'https://schema.org/OfflineEventAttendanceMode',
+                'eventStatus'         => 'https://schema.org/EventScheduled',
+                'inLanguage'          => '{seomatic.meta.language}',
+                'location'            => [
+                    'type'     => 'Place',
                     'address'  => '{seomatic.meta.seoTitle}',
                     'name'     => '{seomatic.meta.seoTitle}',
                 ],
-                'organizer'  => [
+                'organizer'           => [
                     'id' => '{seomatic.site.identity.genericUrl}#identity',
                 ],
-                'contributor'      => [
+                'contributor'         => [
                     'id' => '{seomatic.site.identity.genericUrl}#creator',
                 ],
-                'funder'           => [
+                'funder'              => [
                     'id' => '{seomatic.site.identity.genericUrl}#identity',
                 ],
-                'image'            => [
+                'image'               => [
                     'type' => 'ImageObject',
                     'url'  => '{seomatic.meta.seoImage}',
                 ],
-                'potentialAction'  => [
+                'potentialAction'     => [
                     'type'        => 'SearchAction',
                     'target'      => '{seomatic.site.siteLinksSearchTarget}',
                     'query-input' => '{seomatic.helper.siteLinksQueryInput()}',
