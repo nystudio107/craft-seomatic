@@ -6,6 +6,7 @@
 
 ### Changed
 * The MetaLink error `...did not render because it is missing attributes` is no longer render as an error, but rather via the `info` log level, with `WARNING - ` proceeding it
+* You can now pass in `@type` or `type` for the schema type
 
 ## 3.2.51 - 2020.04.06
 ### Added
