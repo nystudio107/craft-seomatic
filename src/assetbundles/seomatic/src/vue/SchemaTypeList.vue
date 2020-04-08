@@ -3,9 +3,11 @@
     <div>
         <treeselect
                 v-model="value"
+                ref="treeselect"
+                name="schemaType"
                 :multiple="false"
-                :flat="true"
-                :default-expand-level="1"
+                :flat="false"
+                :default-expand-level="0"
                 :options="options"
         />
     </div>
@@ -20,21 +22,29 @@
 
     Vue.use(VueAxios, axios);
 
-    let action = 'get-single-type-menu';
-    let path = '';
-    const api = Craft.getActionUrl('seomatic/json-ld/' + action + '?path=' + path);
+    let action = 'get-type-tree';
+    const api = Craft.getActionUrl('seomatic/json-ld/' + action);
     export default {
         // register the component
         components: { Treeselect },
+        props: {
+            entity: {type: String, default: null},
+        },
         mounted() {
             this.axios.get(api).then((response) => {
-                console.log(response.data);
-                this.options = Object.entries(response.data).map(([key, value]) => ({
-                    'id': key,
-                    'label': value
-                }));
-                console.log(this.options);
-
+                if (response.data) {
+                    this.options = response.data;
+                    this.value = this.entity;
+                }
+            });
+            console.log(this.$refs);
+            this.$refs.treeselect.$on('input', (value, instance) => {
+                let collection = document.getElementsByClassName('vue-treeselect__input');
+                for (let item of collection) {
+                    //console.log(item);
+                    //item.value = value;
+                    $(document).trigger('schema-value-changed', value);
+                }
             });
         },
         data() {
@@ -42,23 +52,7 @@
                 // define the default value
                 value: null,
                 // define options
-                options: [ {
-                    id: 'a',
-                    label: 'a',
-                    children: [ {
-                        id: 'aa',
-                        label: 'aa',
-                    }, {
-                        id: 'ab',
-                        label: 'ab',
-                    } ],
-                }, {
-                    id: 'b',
-                    label: 'b',
-                }, {
-                    id: 'c',
-                    label: 'c',
-                } ],
+                options: [],
             }
         },
     }

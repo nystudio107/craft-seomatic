@@ -34,6 +34,8 @@ class Schema
 
     protected static $schemaTypes = [];
 
+    protected static $schemaTree = [];
+
     // Static Methods
     // =========================================================================
 
@@ -147,6 +149,27 @@ class Schema
     }
 
     /**
+     * Return a flattened, indented menu of the given $path
+     *
+     * @param string $path
+     *
+     * @return array
+     */
+    public static function getTypeTree(): array
+    {
+        try {
+            $schemaTypes = self::getSchemaTree();
+        } catch (\Exception $e) {
+            Craft::error($e->getMessage(), __METHOD__);
+            return [];
+        }
+        $schemaTypes = self::pruneSchemaTree($schemaTypes);
+
+        // Ignore the top level "Thing" base schema
+        return $schemaTypes['children'] ?? [];
+    }
+
+    /**
      * Return a hierarchical array of schema types, starting at $path. The $path
      * is specified as SchemaType.SubSchemaType using SCHEMA_PATH_DELIMITER as
      * the delimiter.
@@ -177,6 +200,27 @@ class Schema
                 }
             }
         }
+        if (!\is_array($typesArray)) {
+            $typesArray = [];
+        }
+
+        return $typesArray;
+    }
+
+    /**
+     * @return array
+     * @throws \Exception
+     */
+    public static function getSchemaTree()
+    {
+        if (empty(self::$schemaTree)) {
+            $filePath = Craft::getAlias('@nystudio107/seomatic/resources/schema/tree.jsonld');
+            self::$schemaTree = JsonHelper::decode(@file_get_contents($filePath));
+            if (empty(self::$schemaTree)) {
+                throw new \Exception(Craft::t('seomatic', 'Schema tree file not found'));
+            }
+        }
+        $typesArray = self::$schemaTree;
         if (!\is_array($typesArray)) {
             $typesArray = [];
         }
@@ -271,4 +315,31 @@ class Schema
 
         return $result;
     }
+
+    protected static function pruneSchemaTree(array $typesArray): array
+    {
+        $result = [];
+
+        if (isset($typesArray['layer']) && \is_string($typesArray['layer'])) {
+            if ($typesArray['layer'] === 'core' || $typesArray['layer'] === 'pending') {
+                if (isset($typesArray['name']) && \is_string($typesArray['name'])) {
+                    $children = [];
+                    if (!empty($typesArray['children'])) {
+                        foreach ($typesArray['children'] as $child) {
+                            $childResult = self::pruneSchemaTree($child);
+                            if (!empty($childResult)) {
+                                $children[] = $childResult;
+                            }
+                        }
+                        $result['children'] = $children;
+                    }
+                    $result['label'] = $typesArray['name'];
+                    $result['id'] = $typesArray['name'];
+                }
+            }
+        }
+
+        return $result;
+    }
+
 }
