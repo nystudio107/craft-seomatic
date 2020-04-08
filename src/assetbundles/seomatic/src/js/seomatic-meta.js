@@ -8,11 +8,33 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
+import Vue from "vue";
+import SchemaTypeList from "../vue/SchemaTypeList.vue";
+
 /**
  * @author    nystudio107
  * @package   SEOmatic
  * @since     3.0.0
  */
+
+// Create our vue instance
+const vm = new Vue({
+    el: "#treeselect-wrapper",
+    components: {
+        'schema-type-list': SchemaTypeList,
+    },
+    data: {
+    },
+    methods: {
+    },
+    mounted() {
+    },
+});
+
+// Accept HMR as per: https://webpack.js.org/api/hot-module-replacement#accept
+if (module.hot) {
+    module.hot.accept();
+}
 
 /**
  * Fill a dynamic schema.org type menu with the schema hierarchy in path

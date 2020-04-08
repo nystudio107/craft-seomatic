@@ -8,6 +8,9 @@
 
 {############### Main Entity of Page ###############}
 
+<div id="treeselect-wrapper">
+    <schema-type-list></schema-type-list>
+</div>
 {% if field is not defined or 'mainEntityOfPage' in field.generalEnabledFields %}
     {% namespace "metaBundleSettings" %}
         {% include "seomatic/settings/_includes/mainEntityOfPage-partial.twig" with {
