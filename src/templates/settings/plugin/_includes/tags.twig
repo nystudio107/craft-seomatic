@@ -25,6 +25,16 @@
         }) }}
 
         {{ forms.lightswitchField({
+            label: "Include Paginated `hreflang` Tags"|t("seomatic")|md,
+            instructions: "Controls whether SEOmatic will automatically include `hreflang` tags on paginated pages. [Learn More](https://moz.com/community/q/hreflang-alternate-pagination)"|t("seomatic"),
+            id: "addPaginatedHreflang",
+            name: "addPaginatedHreflang",
+            on: settings.addPaginatedHreflang,
+            warning: configWarning("addPaginatedHreflang", "seomatic"),
+            errors: settings.getErrors("addPaginatedHreflang"),
+        }) }}
+
+        {{ forms.lightswitchField({
             label: "Generator Enabled"|t("seomatic"),
             instructions: "Controls whether SEOmatic will include the meta `generator` tag and `X-Powered-By` header."|t("seomatic"),
             id: "generatorEnabled",

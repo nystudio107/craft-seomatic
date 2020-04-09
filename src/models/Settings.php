@@ -129,6 +129,11 @@ class Settings extends VarsModel
     public $addXDefaultHrefLang = true;
 
     /**
+     * @var bool Whether to dynamically include hreflang tags on paginated pages
+     */
+    public $addPaginatedHreflang = true;
+
+    /**
      * @var bool Should the Canonical URL be automatically lower-cased?
      */
     public $lowercaseCanonicalUrl = true;
@@ -169,6 +174,7 @@ class Settings extends VarsModel
                     'generatorEnabled',
                     'addHrefLang',
                     'addXDefaultHrefLang',
+                    'addPaginatedHreflang'
                 ],
                 'boolean'],
             ['environment', 'string'],

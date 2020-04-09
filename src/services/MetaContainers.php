@@ -137,7 +137,7 @@ class MetaContainers extends Component
         parent::init();
         // Get the page number of this request
         $request = Craft::$app->getRequest();
-        if (!$request->isConsoleRequest) {
+        if (!$request->isConsoleRequest && Seomatic::$settings->addPaginatedHreflang) {
             $this->paginationPage = (string)$request->pageNum;
         }
     }
