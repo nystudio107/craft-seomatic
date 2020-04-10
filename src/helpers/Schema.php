@@ -29,6 +29,12 @@ class Schema
     const SCHEMA_PATH_DELIMITER = '.';
     const MENU_INDENT_STEP = 4;
 
+    const SCHEMA_TYPES = [
+        'siteSpecificType',
+        'siteSubType',
+        'siteType',
+    ];
+
     // Static Properties
     // =========================================================================
 
@@ -38,6 +44,49 @@ class Schema
 
     // Static Methods
     // =========================================================================
+
+    /**
+     * Return the most specific schema.org type possible from the $settings
+     *
+     * @param $settings
+     *
+     * @return string
+     */
+    public static function getSpecificEntityType($settings): string
+    {
+        if (!empty($settings)) {
+            // Go from most specific type to least specific type
+            foreach (self::SCHEMA_TYPES as $schemaType) {
+                if (!empty($settings[$schemaType]) && ($settings[$schemaType] !== 'none')) {
+                    return $settings[$schemaType];
+                }
+            }
+        }
+
+        return 'WebPage';
+    }
+
+    /**
+     * Return a period-delimited schema.org path from the $settings
+     *
+     * @param $settings
+     *
+     * @return string
+     */
+    public static function getEntityPath($settings): string
+    {
+        $result = '';
+        if (!empty($settings)) {
+            // Go from most specific type to least specific type
+            foreach (self::SCHEMA_TYPES as $schemaType) {
+                if (!empty($settings[$schemaType]) && ($settings[$schemaType] !== 'none')) {
+                    $result = $settings[$schemaType].self::SCHEMA_PATH_DELIMITER.$result;
+                }
+            }
+        }
+
+        return rtrim($result, self::SCHEMA_PATH_DELIMITER);
+    }
 
     /**
      * Get the fully composed schema type
@@ -317,6 +366,11 @@ class Schema
     }
 
     /**
+     * Prune the schema tree by removing everything but `label`, `id`, and `children`
+     * in preparation for use by the treeselect component. Also make the id a namespaced
+     * path to the schema, with the first two higher level schema types, and then the
+     * third final type (skipping any in between)
+     *
      * @param array $typesArray
      * @param string $path
      * @return array
@@ -330,8 +384,18 @@ class Schema
                 if (isset($typesArray['name']) && \is_string($typesArray['name'])) {
                     $children = [];
                     $name = $typesArray['name'];
-                    $id = implode('.', [$path, $name]);
-                    $id = str_replace('.Thing.', '', $id);
+                    // Construct a path-based $id, excluding the top-level `Thing` schema
+                    $id = $name === 'Thing' ? '' : $path.self::SCHEMA_PATH_DELIMITER.$name;
+                    $id = ltrim($id, self::SCHEMA_PATH_DELIMITER);
+                    // Make sure we have at most 3 specifiers in the schema path
+                    $parts = explode(self::SCHEMA_PATH_DELIMITER, $id);
+                    if (count($parts) > 3) {
+                        $id = implode(self::SCHEMA_PATH_DELIMITER, [
+                            $parts[0],
+                            $parts[1],
+                            end($parts)
+                        ]);
+                    }
                     if (!empty($typesArray['children'])) {
                         foreach ($typesArray['children'] as $child) {
                             $childResult = self::pruneSchemaTree($child, $id);
@@ -349,5 +413,4 @@ class Schema
 
         return $result;
     }
-
 }
