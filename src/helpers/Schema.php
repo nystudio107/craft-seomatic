@@ -163,7 +163,7 @@ class Schema
             Craft::error($e->getMessage(), __METHOD__);
             return [];
         }
-        $schemaTypes = self::pruneSchemaTree($schemaTypes);
+        $schemaTypes = self::pruneSchemaTree($schemaTypes, '');
 
         // Ignore the top level "Thing" base schema
         return $schemaTypes['children'] ?? [];
@@ -316,7 +316,12 @@ class Schema
         return $result;
     }
 
-    protected static function pruneSchemaTree(array $typesArray): array
+    /**
+     * @param array $typesArray
+     * @param string $path
+     * @return array
+     */
+    protected static function pruneSchemaTree(array $typesArray, string $path): array
     {
         $result = [];
 
@@ -324,17 +329,20 @@ class Schema
             if ($typesArray['layer'] === 'core' || $typesArray['layer'] === 'pending') {
                 if (isset($typesArray['name']) && \is_string($typesArray['name'])) {
                     $children = [];
+                    $name = $typesArray['name'];
+                    $id = implode('.', [$path, $name]);
+                    $id = str_replace('.Thing.', '', $id);
                     if (!empty($typesArray['children'])) {
                         foreach ($typesArray['children'] as $child) {
-                            $childResult = self::pruneSchemaTree($child);
+                            $childResult = self::pruneSchemaTree($child, $id);
                             if (!empty($childResult)) {
                                 $children[] = $childResult;
                             }
                         }
                         $result['children'] = $children;
                     }
-                    $result['label'] = $typesArray['name'];
-                    $result['id'] = $typesArray['name'];
+                    $result['label'] = $name;
+                    $result['id'] = $id;
                 }
             }
         }
