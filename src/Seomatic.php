@@ -513,14 +513,6 @@ class Seomatic extends Plugin
                 $event->types[] = Seomatic_MetaField::class;
             }
         );
-        // Handler: TemplateCaches::EVENT_AFTER_DELETE_CACHES
-        Event::on(
-            TemplateCaches::class,
-            TemplateCaches::EVENT_AFTER_DELETE_CACHES,
-            function (DeleteTemplateCachesEvent $event) {
-                self::$plugin->metaContainers->invalidateCaches();
-            }
-        );
         // Handler: Elements::EVENT_AFTER_SAVE_ELEMENT
         Event::on(
             Elements::class,
