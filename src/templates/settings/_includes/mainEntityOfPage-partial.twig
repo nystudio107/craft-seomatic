@@ -13,14 +13,12 @@
     {% if pageContext is defined and (pageContext == "field" or pageContext == "content") %}
         {% set mainEntityOfPageRootOptions = { "": ""} | merge(mainEntityOfPageRootOptions) %}
     {% endif %}
-    <div>
-        {% namespace "metaBundleSettings" %}
+    <div style="display: none;">
         <div class="inline-item">
-            {{ forms.selectField({
+            {{ forms.textField({
                 id: "siteType",
                 class: "inline-item",
                 fieldClass: "inline-item",
-                options: mainEntityOfPageRootOptions,
                 name: "siteType",
                 value: mainEntityOfPage.siteType,
                 required: true,
@@ -28,12 +26,11 @@
             }) }}
         </div>
         <div class="inline-item">
-            {{ forms.selectField({
+            {{ forms.textField({
                 id: "siteSubType",
                 label: "&rarr;",
                 class: "inline-item",
                 fieldClass: "inline-item",
-                options: {"none": ""} |merge(seomatic.helper.getSingleTypeMenu(mainEntityOfPage.siteType ?? '')),
                 name: "siteSubType",
                 value: mainEntityOfPage.siteSubType,
                 required: false,
@@ -41,12 +38,11 @@
             }) }}
         </div>
         <div class="inline-item">
-            {{ forms.selectField({
+            {{ forms.textField({
                 id: "siteSpecificType",
                 label: "&rarr;",
                 class: "inline-item",
                 fieldClass: "inline-item",
-                options: {"none": ""} |merge(seomatic.helper.getTypeMenu((mainEntityOfPage.siteType ?? '') ~ '.' ~ (mainEntityOfPage.siteSubType ?? ''))),
                 name: "siteSpecificType",
                 value: mainEntityOfPage.siteSpecificType,
                 required: false,
@@ -58,19 +54,21 @@
             </div>
         </div>
     </div>
-    {% endnamespace %}
 </div>
 
-{% namespace "metaBundleSettings" %}
-
-    {% js on ready %}
+    {% js %}
+        window.schemaSelectId = '{{ "treeselect-wrapper" |namespaceInputId }}';
         $(document).on('schema-value-changed', function(e, v) {
         var siteTypeId = '{{ "siteType" |namespaceInputId }}';
         var siteSubTypeId = '{{ "siteSubType" |namespaceInputId }}';
         var siteSpecificTypeId = '{{ "siteSpecificType" |namespaceInputId }}';
-        let parts = v.split('.');
-        console.table(parts);
-        $('#'+siteTypeId).val(parts[0]);
+        let parts = [];
+        if (v !== undefined) {
+            parts = v.split('.');
+        }
+        $('#'+siteTypeId).val(parts[0] || 'none');
+        $('#'+siteSubTypeId).val(parts[1] || 'none');
+        $('#'+siteSpecificTypeId).val(parts[2] || 'none');
         });
 
     {% endjs %}
@@ -80,19 +78,10 @@
     var siteSubTypeId = '{{ "siteSubType" |namespaceInputId }}';
     var siteSpecificTypeId = '{{ "siteSpecificType" |namespaceInputId }}';
 
-    // Update the Schema.org info link
-    function updateInfoLink() {
-        var selectValue = $('#'+siteSpecificTypeId + ' option:selected').text() || $('#'+siteSubTypeId + ' option:selected').text() || $('#'+siteTypeId + ' option:selected').text();
-        // Remove any whitepsace, including encoded &nbsp; characters
-        selectValue = selectValue.replace(/\s/g, '');
-        $('.seomaticSchemaInfo').html("<a href='http://schema.org/" + selectValue + "' rel='noopener' target='_blank'>" + selectValue + " info...</a>");
-    }
-
     // Initially hide all of the meta panes
     $('.metaPane').hide();
     $('.metaSubPane').hide();
     $('.metaSpecificPane').hide();
-    updateInfoLink();
 
     // Show any panes that should be visible based on the chosen type
     {% if mainEntityOfPage.siteType |length %}
@@ -107,11 +96,9 @@
 
     // Hide the sub-type menus as appropriate
     if ($('#' + siteSubTypeId + ' option').length <= 1) {
-        $('#'+siteSubTypeId+'-field').hide();
         $('#'+siteSubTypeId).val('none');
     }
     if ($('#' + siteSpecificTypeId + ' option').length <= 1) {
-        $('#'+siteSpecificTypeId+'-field').hide();
         $('#'+siteSpecificTypeId).val('none');
     }
 
@@ -121,18 +108,7 @@
         var value = $('#'+siteTypeId).val();
         $('.metaPane').hide();
         $('.metaPane.' + value).show();
-        fillDynamicSchemaMenu(siteSubTypeId, '', path, false, true, function() {
-            if ($('#' + siteSubTypeId + ' option').length <= 1) {
-                $('#'+siteSubTypeId+'-field').hide();
-                $('#'+siteSubTypeId).val('none');
-            } else {
-                $('#'+siteSubTypeId+'-field').show();
-            }
-            $('#'+siteSpecificTypeId+'-field').hide();
-            $('#'+siteSpecificTypeId).val('none');
-        });
         $('#'+siteSpecificTypeId).val('none');
-        updateInfoLink();
     });
 
     // Handle clicks on the siteSubType schema menu
@@ -141,15 +117,6 @@
         var value = $('#'+siteSubTypeId).val();
         $('.metaSubPane').hide();
         $('.metaSubPane.' + value).show();
-        fillDynamicSchemaMenu(siteSpecificTypeId, '', path, true, true, function() {
-            if ($('#' + siteSpecificTypeId + ' option').length <= 1) {
-                $('#'+siteSpecificTypeId+'-field').hide();
-                $('#'+siteSpecificTypeId).val('none');
-            } else {
-                $('#'+siteSpecificTypeId+'-field').show();
-            }
-        });
-        updateInfoLink();
     });
 
     // Handle clicks on the siteSpecificType schema menu
@@ -157,7 +124,5 @@
         var value = $('#'+siteSpecificTypeId).val();
         $('.metaSpecificPane').hide();
         $('.metaSpecificPane.' + value).show();
-        updateInfoLink();
     });
 {% endjs %}
-{% endnamespace %}

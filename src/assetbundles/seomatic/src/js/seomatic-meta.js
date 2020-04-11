@@ -17,73 +17,26 @@ import SchemaTypeList from "../vue/SchemaTypeList.vue";
  * @since     3.0.0
  */
 
-// Create our vue instance
-const vm = new Vue({
-    el: "#treeselect-wrapper",
-    components: {
-        'schema-type-list': SchemaTypeList,
-    },
-    data: {
-    },
-    methods: {
-    },
-    mounted() {
-    },
+$(document).ready(function() {
+    console.log('#'+window.schemaSelectId);
+    // Create our vue instance
+    const vm = new Vue({
+        el: '#'+window.schemaSelectId,
+        components: {
+            'schema-type-list': SchemaTypeList,
+        },
+        data: {
+        },
+        methods: {
+        },
+        mounted() {
+        },
+    });
 });
 
 // Accept HMR as per: https://webpack.js.org/api/hot-module-replacement#accept
 if (module.hot) {
     module.hot.accept();
-}
-
-/**
- * Fill a dynamic schema.org type menu with the schema hierarchy in path
- *
- * @param menuId
- * @param menuValue
- * @param path
- * @param subTypes
- * @param blankItem
- * @param callback
- */
-function fillDynamicSchemaMenu(menuId, menuValue, path, subTypes, blankItem, callback) {
-    var menu = $('#' + menuId);
-
-    if (menu.length) {
-        menu.empty();
-        var action = 'get-single-type-menu';
-        if (subTypes) {
-            action = 'get-type-menu';
-        }
-        $.ajax({
-                url: Craft.getActionUrl('seomatic/json-ld/' + action + '?path=' + path)
-            })
-            .done(function(data) {
-                if (blankItem) {
-                    $('<option />')
-                        .attr('value', 'none')
-                        .html('')
-                        .appendTo(menu);
-                }
-                $.each(data, function() {
-                    // Strip out any &nbsp; characters, char code 160
-                    var re = new RegExp(String.fromCharCode(160), "g");
-                    var val = this.replace(re, '');
-                    $('<option />')
-                        .attr('value', val)
-                        .html(this)
-                        .appendTo(menu);
-                });
-                menu.val(menuValue);
-                if (callback !== undefined) {
-                    callback();
-                }
-            })
-            .fail(function(data) {
-                console.log('Error loading schema data');
-            })
-    }
-
 }
 
 function seomaticTabChangeHandler() {
@@ -98,7 +51,6 @@ function seomaticTabChangeHandler() {
     });
 }
 
-window.fillDynamicSchemaMenu = fillDynamicSchemaMenu;
 window.seomaticTabChangeHandler = seomaticTabChangeHandler;
 window.seomaticTabChangeHandler();
 
