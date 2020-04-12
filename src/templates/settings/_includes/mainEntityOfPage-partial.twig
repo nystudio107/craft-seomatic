@@ -13,65 +13,70 @@
     {% if pageContext is defined and (pageContext == "field" or pageContext == "content") %}
         {% set mainEntityOfPageRootOptions = { "": ""} | merge(mainEntityOfPageRootOptions) %}
     {% endif %}
-    <div style="display: none;">
-        <div class="inline-item">
-            {{ forms.textField({
-                id: "siteType",
-                class: "inline-item",
-                fieldClass: "inline-item",
-                name: "siteType",
-                value: mainEntityOfPage.siteType,
-                required: true,
-                errors: mainEntityOfPage.getErrors("siteType"),
-            }) }}
-        </div>
-        <div class="inline-item">
-            {{ forms.textField({
-                id: "siteSubType",
-                label: "&rarr;",
-                class: "inline-item",
-                fieldClass: "inline-item",
-                name: "siteSubType",
-                value: mainEntityOfPage.siteSubType,
-                required: false,
-                errors: mainEntityOfPage.getErrors("siteSubType"),
-            }) }}
-        </div>
-        <div class="inline-item">
-            {{ forms.textField({
-                id: "siteSpecificType",
-                label: "&rarr;",
-                class: "inline-item",
-                fieldClass: "inline-item",
-                name: "siteSpecificType",
-                value: mainEntityOfPage.siteSpecificType,
-                required: false,
-                errors: mainEntityOfPage.getErrors("siteSpecificType"),
-            }) }}
-        </div>
-        <div class="inline-item">
-            <div class="inline-item inline-item-padding seomaticSchemaInfo">
-            </div>
-        </div>
-    </div>
+    {{ forms.hidden({
+        id: "siteType",
+        class: "inline-item",
+        fieldClass: "inline-item",
+        name: "siteType",
+        value: mainEntityOfPage.siteType,
+        required: true,
+        errors: mainEntityOfPage.getErrors("siteType"),
+    }) }}
+    {{ forms.hidden({
+        id: "siteSubType",
+        label: "&rarr;",
+        class: "inline-item",
+        fieldClass: "inline-item",
+        name: "siteSubType",
+        value: mainEntityOfPage.siteSubType,
+        required: false,
+        errors: mainEntityOfPage.getErrors("siteSubType"),
+    }) }}
+    {{ forms.hidden({
+        id: "siteSpecificType",
+        label: "&rarr;",
+        class: "inline-item",
+        fieldClass: "inline-item",
+        name: "siteSpecificType",
+        value: mainEntityOfPage.siteSpecificType,
+        required: false,
+        errors: mainEntityOfPage.getErrors("siteSpecificType"),
+    }) }}
 </div>
 
-    {% js %}
-        window.schemaSelectId = '{{ "treeselect-wrapper" |namespaceInputId }}';
-        $(document).on('schema-value-changed', function(e, v) {
-        var siteTypeId = '{{ "siteType" |namespaceInputId }}';
-        var siteSubTypeId = '{{ "siteSubType" |namespaceInputId }}';
-        var siteSpecificTypeId = '{{ "siteSpecificType" |namespaceInputId }}';
+{% js %}
+    window.schemaSelectId = '{{ "treeselect-wrapper" |namespaceInputId }}';
+    $(document).on('schema-value-changed', function(e, v) {
+        let siteTypeId = '{{ "siteType" |namespaceInputId }}';
+        let siteSubTypeId = '{{ "siteSubType" |namespaceInputId }}';
+        let siteSpecificTypeId = '{{ "siteSpecificType" |namespaceInputId }}';
         let parts = [];
         if (v !== undefined) {
             parts = v.split('.');
         }
-        $('#'+siteTypeId).val(parts[0] || 'none');
-        $('#'+siteSubTypeId).val(parts[1] || 'none');
-        $('#'+siteSpecificTypeId).val(parts[2] || 'none');
-        });
+        // Update the hidden fields
+        let siteTypeIdVal = parts[0] || 'none';
+        let siteSubTypeIdVal = parts[1] || 'none';
+        let siteSpecificTypeIdVal = parts[2] || 'none';
+        $('#'+siteTypeId).val(siteTypeIdVal);
+        $('#'+siteSubTypeId).val(siteSubTypeIdVal);
+        $('#'+siteSpecificTypeId).val(siteSpecificTypeIdVal);
+        // Show any panes that should be visible based on the chosen type
+        if (siteTypeIdVal !== 'none') {
+            $('.metaPane').hide();
+            $('.metaPane.' + siteTypeIdVal).show();
+        }
+        if (siteSubTypeIdVal !== 'none') {
+            $('.metaSubPane').hide();
+            $('.metaSubPane.' + siteSubTypeIdVal).show();
+        }
+        if (siteSpecificTypeIdVal !== 'none') {
+            $('.metaSpecificPane').hide();
+            $('.metaSpecificPane.' + siteSpecificTypeIdVal).show();
+        }
+    });
 
-    {% endjs %}
+{% endjs %}
 {% js %}
     // Fill in the dynamic schema menus
     var siteTypeId = '{{ "siteType" |namespaceInputId }}';
@@ -102,27 +107,4 @@
         $('#'+siteSpecificTypeId).val('none');
     }
 
-    // Handle clicks on the siteType schema menu
-    $('#'+siteTypeId).on('change', function(e) {
-        var path = $('#'+siteTypeId).val();
-        var value = $('#'+siteTypeId).val();
-        $('.metaPane').hide();
-        $('.metaPane.' + value).show();
-        $('#'+siteSpecificTypeId).val('none');
-    });
-
-    // Handle clicks on the siteSubType schema menu
-    $('#'+siteSubTypeId).on('change', function(e) {
-        var path = $('#'+siteTypeId).val() + '.' + $('#'+siteSubTypeId).val();
-        var value = $('#'+siteSubTypeId).val();
-        $('.metaSubPane').hide();
-        $('.metaSubPane.' + value).show();
-    });
-
-    // Handle clicks on the siteSpecificType schema menu
-    $('#'+siteSpecificTypeId).on('change', function(e) {
-        var value = $('#'+siteSpecificTypeId).val();
-        $('.metaSpecificPane').hide();
-        $('.metaSpecificPane.' + value).show();
-    });
 {% endjs %}
