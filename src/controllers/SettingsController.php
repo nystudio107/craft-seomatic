@@ -277,7 +277,6 @@ class SettingsController extends Controller
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteIdToLoad);
         Seomatic::$previewingMetaContainers = false;
         if ($metaBundle !== null) {
-            $variables['entitySchemaPath'] = SchemaHelper::getEntityPath($metaBundle->metaBundleSettings);
             $variables['metaGlobalVars'] = $metaBundle->metaGlobalVars;
             $variables['metaSitemapVars'] = $metaBundle->metaSitemapVars;
             $variables['metaBundleSettings'] = $metaBundle->metaBundleSettings;
@@ -483,7 +482,6 @@ class SettingsController extends Controller
         Seomatic::$previewingMetaContainers = false;
         $templateTitle = '';
         if ($metaBundle !== null) {
-            $variables['entitySchemaPath'] = SchemaHelper::getEntityPath($metaBundle->metaBundleSettings);
             $variables['metaGlobalVars'] = $metaBundle->metaGlobalVars;
             $variables['metaSitemapVars'] = $metaBundle->metaSitemapVars;
             $variables['metaBundleSettings'] = $metaBundle->metaBundleSettings;
@@ -676,7 +674,6 @@ class SettingsController extends Controller
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteIdToLoad);
         Seomatic::$previewingMetaContainers = false;
         if ($metaBundle !== null) {
-            $variables['entitySchemaPath'] = SchemaHelper::getEntityPath($metaBundle->metaBundleSettings);
             $variables['site'] = $metaBundle->metaSiteVars;
             $variables['identityImageElements'] = ImageTransformHelper::assetElementsFromIds(
                 $variables['site']->identity->genericImageIds,

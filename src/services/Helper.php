@@ -355,6 +355,18 @@ class Helper extends Component
     }
 
     /**
+     * Return a period-delimited schema.org path from the $settings
+     *
+     * @param $settings
+     *
+     * @return string
+     */
+    public static function getEntityPath($settings): string
+    {
+        return SchemaHelper::getEntityPath($settings);
+    }
+
+    /**
      * Return a flattened, indented menu of the given $path
      *
      * @param string $path

@@ -12,6 +12,7 @@
     {% namespace "metaBundleSettings" %}
         {% include "seomatic/settings/_includes/mainEntityOfPage-partial.twig" with {
             "mainEntityOfPage": metaBundleSettings,
+            "entitySchemaPath": seomatic.helper.entityPath(metaBundleSettings),
             "mainEntityTitle": "Main Entity of Page",
             "mainEntityDescription": "The primary topic, some entity or thing that the page describes.",
         } %}
