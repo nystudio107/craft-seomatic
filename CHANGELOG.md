@@ -1,12 +1,15 @@
 # SEOmatic Changelog
 
-## 3.2.52 - 2020.04.08
+## 3.3.0 - 2020.04.15
 ### Added
+* Added a new searchable Schema UI selector for finding Main Entity of Page types quickly
 * Added a validator for the `Duration` schema.org type
+* Added a “Include Paginated `hreflang` Tags” setting
 
 ### Changed
 * The MetaLink error `...did not render because it is missing attributes` is no longer render as an error, but rather via the `info` log level, with `WARNING - ` proceeding it
 * You can now pass in `@type` or `type` for the schema type
+* No longer delete caches  in response to `TemplateCaches::EVENT_AFTER_DELETE_CACHES`
 
 ## 3.2.51 - 2020.04.06
 ### Added
