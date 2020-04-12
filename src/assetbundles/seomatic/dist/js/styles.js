@@ -2,10 +2,10 @@
  * @project        SEOmatic
  * @name           styles.js
  * @author         Andrew Welch
- * @build          Thu, Apr 2, 2020 4:12 PM ET
- * @release        56b09e9b4374efa4fb286c07b675dac7753202d3 [develop]
+ * @build          Sun, Apr 12, 2020 4:35 AM ET
+ * @release        5cdc668d3004ef8d0e36f5c09ef7ca5658584bfd [develop]
  * @copyright      Copyright (c) 2020 nystudio107
  *
  */
-(window.webpackJsonp=window.webpackJsonp||[]).push([[8],{47:function(n,w,o){}}]);
+(window.webpackJsonp=window.webpackJsonp||[]).push([[1],{113:function(n,o,w){},63:function(n,o,w){}}]);
 //# sourceMappingURL=styles.js.map
