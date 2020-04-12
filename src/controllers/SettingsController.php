@@ -13,6 +13,7 @@ use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\helpers\PullField as PullFieldHelper;
+use nystudio107\seomatic\helpers\Schema as SchemaHelper;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\DynamicMeta as DynamicMetaHelper;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
@@ -344,7 +345,7 @@ class SettingsController extends Controller
                 PullFieldHelper::parseTextSources($elementName, $globalsSettings, $bundleSettings);
                 PullFieldHelper::parseImageSources($elementName, $globalsSettings, $bundleSettings, $siteId);
                 if (!empty($bundleSettings['siteType'])) {
-                    $globalsSettings['mainEntityOfPage'] = PullFieldHelper::getSpecificEntityType($bundleSettings);
+                    $globalsSettings['mainEntityOfPage'] = SchemaHelper::getSpecificEntityType($bundleSettings);
                 }
                 $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
                 $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
@@ -581,7 +582,7 @@ class SettingsController extends Controller
                 PullFieldHelper::parseTextSources($elementName, $globalsSettings, $bundleSettings);
                 PullFieldHelper::parseImageSources($elementName, $globalsSettings, $bundleSettings, $siteId);
                 if (!empty($bundleSettings['siteType'])) {
-                    $globalsSettings['mainEntityOfPage'] = PullFieldHelper::getSpecificEntityType($bundleSettings);
+                    $globalsSettings['mainEntityOfPage'] = SchemaHelper::getSpecificEntityType($bundleSettings);
                 }
                 $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
                 $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
@@ -1158,7 +1159,7 @@ class SettingsController extends Controller
     {
         DynamicMetaHelper::normalizeTimes($settings['localBusinessOpeningHours']);
         if (!empty($settings['siteType'])) {
-            $settings['computedType'] = PullFieldHelper::getSpecificEntityType($settings);
+            $settings['computedType'] = SchemaHelper::getSpecificEntityType($settings);
         } else {
             $settings['computedType'] = 'WebPage';
         }
