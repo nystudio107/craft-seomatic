@@ -5,7 +5,6 @@
             <treeselect
                     v-model="value"
                     ref="treeselect"
-                    name="schemaType"
                     :multiple="false"
                     :flat="false"
                     :default-expand-level="0"
