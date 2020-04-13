@@ -61,7 +61,8 @@ module.exports = {
         ],
         whitelist: [
             "./src/assetbundles/seomatic/src/css/components/*.css",
-            "./node_modules/tokenfield/dist/tokenfield.css"
+            "./node_modules/tokenfield/dist/tokenfield.css",
+            "./node_modules/@riophae/vue-treeselect/dist/vue-treeselect.css"
         ],
         whitelistPatterns: [],
         extensions: [
