@@ -92,6 +92,8 @@ class DynamicMeta
         $result = preg_replace('/{.*}/', '', $url);
         if (!empty($result) && $result) {
             $url = $result;
+        } else {
+            $url = '';
         }
 
         return UrlHelper::absoluteUrlWithProtocol($url);
@@ -692,7 +694,7 @@ class DynamicMeta
                 }
             }
         }
-        
+
         $value = $normalized;
     }
 }
