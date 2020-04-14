@@ -9,6 +9,9 @@
 ### Changed
 * The MetaLink error `...did not render because it is missing attributes` is no longer render as an error, but rather via the `info` log level, with `WARNING - ` proceeding it
 * You can now pass in `@type` or `type` for the schema type
+
+### Fixed
+* If a page has a `robots` tag that marks it as `noindex` or `none`, don't include a canonical URL
 * No longer delete caches  in response to `TemplateCaches::EVENT_AFTER_DELETE_CACHES`
 
 ## 3.2.51 - 2020.04.06
