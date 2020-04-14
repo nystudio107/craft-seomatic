@@ -44,6 +44,16 @@
             errors: settings.getErrors("regenerateSitemapsAutomatically"),
         }) }}
 
+        {{ forms.lightswitchField({
+            label: "Submit Sitemap Changes"|t("seomatic"),
+            instructions: "Should sitemaps be submitted to search engines automatically whenever there are changes?"|t("seomatic"),
+            id: "submitSitemaps",
+            name: "submitSitemaps",
+            on: settings.submitSitemaps,
+            warning: configWarning("submitSitemaps", "seomatic"),
+            errors: settings.getErrors("submitSitemaps"),
+        }) }}
+
         {% if seomatic.helper.craft31 %}
             {{ forms.autosuggestField({
                 label: "Environment"|t("seomatic"),

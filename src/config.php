@@ -44,6 +44,9 @@ return [
     // Should sitemaps be regenerated automatically?
     'regenerateSitemapsAutomatically' => true,
 
+    // Should sitemaps be submitted to search engines automatically whenever there are changes?
+    'submitSitemaps' => true,
+
     // Should SEOmatic add to the http response headers?
     'headersEnabled' => true,
 
