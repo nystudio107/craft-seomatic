@@ -439,5 +439,10 @@ return [
     'Invalid sort field specified.' => 'Invalid sort field specified.',
     'Tags' => 'Tags',
     'Account' => 'Account',
-    'No Archive - Do not archived a cached version of this page' => 'No Archive - Do not archived a cached version of this page'
+    'No Archive - Do not archived a cached version of this page' => 'No Archive - Do not archived a cached version of this page',
+    'Should sitemaps be submitted to search engines automatically whenever there are changes?' => 'Should sitemaps be submitted to search engines automatically whenever there are changes?',
+    'Controls whether SEOmatic will automatically include `hreflang` tags on paginated pages. [Learn More](https://webmasters.googleblog.com/2013/04/x-default-hreflang-for-international-pages.html)' => 'Controls whether SEOmatic will automatically include `hreflang` tags on paginated pages. [Learn More](https://webmasters.googleblog.com/2013/04/x-default-hreflang-for-international-pages.html)',
+    'Controls whether SEOmatic will automatically include `hreflang` tags on paginated pages. [Learn More](https://moz.com/community/q/hreflang-alternate-pagination)' => 'Controls whether SEOmatic will automatically include `hreflang` tags on paginated pages. [Learn More](https://moz.com/community/q/hreflang-alternate-pagination)',
+    'Submit Sitemap Changes' => 'Submit Sitemap Changes',
+    'Include Paginated `hreflang` Tags' => 'Include Paginated `hreflang` Tags'
 ];
