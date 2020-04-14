@@ -5,6 +5,7 @@
 * Added a new searchable Schema UI selector for finding Main Entity of Page types quickly
 * Added a validator for the `Duration` schema.org type
 * Added a “Include Paginated `hreflang` Tags” setting
+* Added a **Submit Sitemap Changes** plugin setting
 
 ### Changed
 * The MetaLink error `...did not render because it is missing attributes` is no longer render as an error, but rather via the `info` log level, with `WARNING - ` proceeding it
