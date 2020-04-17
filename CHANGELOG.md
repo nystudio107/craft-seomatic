@@ -6,6 +6,7 @@
 * Added a validator for the `Duration` schema.org type
 * Added a “Include Paginated `hreflang` Tags” setting
 * Added a **Submit Sitemap Changes** plugin setting
+* Added emoji support for Sections
 
 ### Changed
 * The MetaLink error `...did not render because it is missing attributes` is no longer render as an error, but rather via the `info` log level, with `WARNING - ` proceeding it
