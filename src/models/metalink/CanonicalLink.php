@@ -67,13 +67,13 @@ class CanonicalLink extends MetaLink
         $shouldRender = parent::prepForRender($data);
         if ($shouldRender) {
             // Don't render a canonical url for http status codes >= 400
-            if (Craft::$app->getResponse()->statusCode >= 400) {
+            if (Craft::$app->getResponse()->statusCode >= 400 && !Seomatic::$previewingMetaContainers) {
                 return false;
             }
             // Don't render a canonical URL if this page isn't meant to be indexed as per:
             // https://www.reddit.com/r/TechSEO/comments/8yahdr/2_questions_about_the_canonical_tag/e2dey9i/?context=1
             $robots = Seomatic::$seomaticVariable->tag->get('robots');
-            if ($robots !== null && $robots->include) {
+            if ($robots !== null && $robots->include && !Seomatic::$previewingMetaContainers) {
                 $robotsArray = $robots->renderAttributes();
                 $content = $robotsArray['content'] ?? '';
                 if (!empty($content)) {

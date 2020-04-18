@@ -133,8 +133,9 @@ class Helper extends Component
         } catch (InvalidConfigException $e) {
             Craft::error($e->getMessage(), __METHOD__);
         }
+        $url = DynamicMetaHelper::sanitizeUrl($url);
 
-        return DynamicMetaHelper::sanitizeUrl($url);
+        return UrlHelper::absoluteUrlWithProtocol($url);
     }
 
     /**
