@@ -96,7 +96,7 @@ class DynamicMeta
             $url = '';
         }
 
-        return UrlHelper::absoluteUrlWithProtocol($url);
+        return $url;
     }
 
     /**
