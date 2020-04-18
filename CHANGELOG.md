@@ -15,6 +15,7 @@
 ### Fixed
 * If a page has a `robots` tag that marks it as `noindex` or `none`, don't include a canonical URL
 * No longer delete caches  in response to `TemplateCaches::EVENT_AFTER_DELETE_CACHES`
+* Fixed an issue where SEO previews could have the wrong URLs for multi-site setups
 
 ## 3.2.51 - 2020.04.06
 ### Added
