@@ -17,6 +17,7 @@ use nystudio107\seomatic\gql\interfaces\SeomaticInterface;
 use nystudio107\seomatic\gql\queries\SeomaticQuery;
 use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
+use nystudio107\seomatic\integrations\feedme\SeoSettings as SeoSettingsFeedMe;
 use nystudio107\seomatic\listeners\GetCraftQLSchema;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\Settings;
@@ -621,7 +622,7 @@ class Seomatic extends Plugin
                         'FeedMeFields::EVENT_REGISTER_FEED_ME_FIELDS',
                         __METHOD__
                     );
-                    $e->fields[] = DataType::class;
+                    $e->fields[] = SeoSettingsFeedMe::class;
                 }
             );
         }
