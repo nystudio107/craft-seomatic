@@ -215,7 +215,7 @@ class Seomatic extends Plugin
     /**
      * @var string
      */
-    public $schemaVersion = '3.0.8';
+    public $schemaVersion = '3.0.9';
 
     // Public Methods
     // =========================================================================
