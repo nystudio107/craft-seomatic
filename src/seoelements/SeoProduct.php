@@ -299,7 +299,7 @@ class SeoProduct implements SeoElementInterface
     }
 
     /**
-     * Return the source model of the given $sourceId
+     * Return the source model of the given $sourceHandle
      *
      * @param string $sourceHandle
      *
