@@ -435,6 +435,7 @@ class SettingsController extends Controller
      * @param string $sourceBundleType
      * @param string $sourceHandle
      * @param string|null $siteHandle
+     * @param int|null $typeId
      * @param null $loadFromSiteHandle
      *
      * @return Response The rendered result
@@ -446,6 +447,7 @@ class SettingsController extends Controller
         string $sourceBundleType,
         string $sourceHandle,
         string $siteHandle = null,
+        int    $typeId = null,
         $loadFromSiteHandle = null
     ): Response {
         $variables = [];
@@ -477,8 +479,17 @@ class SettingsController extends Controller
         $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
             $sourceBundleType,
             $sourceHandle,
-            $siteIdToLoad
+            $siteIdToLoad,
+            $typeId
         );
+        // If it doesn't exist, create it
+        $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
+        if ($seoElement !== null) {
+            $sourceModel = $seoElement::sourceModelFromHandle($sourceHandle);
+            if ($sourceModel) {
+            }
+        }
+
         Seomatic::$previewingMetaContainers = false;
         $templateTitle = '';
         if ($metaBundle !== null) {

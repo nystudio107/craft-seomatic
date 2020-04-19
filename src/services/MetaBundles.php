@@ -148,6 +148,7 @@ class MetaBundles extends Component
                 'sourceBundleType' => $metaBundle->sourceBundleType,
                 'sourceId' => $metaBundle->sourceId,
                 'sourceSiteId' => $siteId,
+                'typeId' => $metaBundle->typeId,
             ]);
 
             if (!$metaBundleRecord) {
@@ -200,19 +201,26 @@ class MetaBundles extends Component
             }
         }
         // Look for a matching meta bundle in the db
-        $query = (new Query())
+        $metaBundleArray = (new Query())
             ->from(['{{%seomatic_metabundles}}'])
             ->where([
                 'sourceBundleType' => $sourceBundleType,
                 'sourceId' => $sourceId,
                 'sourceSiteId' => $sourceSiteId,
-            ]);
-        if ($typeId !== null && $typeId) {
-            $query->andWhere([
                 'typeId' => $typeId,
-            ]);
+            ])
+            ->one();
+        // If the specific query with a `typeId` returned nothing, try a more general query without `typeId`
+        if (empty($metaBundleArray)) {
+            $metaBundleArray = (new Query())
+                ->from(['{{%seomatic_metabundles}}'])
+                ->where([
+                    'sourceBundleType' => $sourceBundleType,
+                    'sourceId' => $sourceId,
+                    'sourceSiteId' => $sourceSiteId,
+                ])
+                ->one();
         }
-        $metaBundleArray = $query->one();
         if (!empty($metaBundleArray)) {
             // Get the attributes from the db
             $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
@@ -239,10 +247,11 @@ class MetaBundles extends Component
      * @param string $sourceBundleType
      * @param string $sourceHandle
      * @param int    $sourceSiteId
+     * @param int|null $typeId
      *
      * @return null|MetaBundle
      */
-    public function getMetaBundleBySourceHandle(string $sourceBundleType, string $sourceHandle, int $sourceSiteId)
+    public function getMetaBundleBySourceHandle(string $sourceBundleType, string $sourceHandle, int $sourceSiteId, $typeId = null)
     {
         $metaBundle = null;
         // See if we have the meta bundle cached
@@ -259,8 +268,20 @@ class MetaBundles extends Component
                 'sourceBundleType' => $sourceBundleType,
                 'sourceHandle' => $sourceHandle,
                 'sourceSiteId' => $sourceSiteId,
+                'typeId' => $typeId,
             ])
             ->one();
+        // If the specific query with a `typeId` returned nothing, try a more general query without `typeId`
+        if (empty($metaBundleArray)) {
+            $metaBundleArray = (new Query())
+                ->from(['{{%seomatic_metabundles}}'])
+                ->where([
+                    'sourceBundleType' => $sourceBundleType,
+                    'sourceHandle' => $sourceHandle,
+                    'sourceSiteId' => $sourceSiteId,
+                ])
+                ->one();
+        }
         if (!empty($metaBundleArray)) {
             $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
             $metaBundle = MetaBundle::create($metaBundleArray);
