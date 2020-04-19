@@ -1,8 +1,9 @@
 # SEOmatic Changelog
 
-## 3.3.0 - 2020.04.15
+## 3.3.0 - 2020.04.20
 ### Added
 * Added a new searchable Schema UI selector for finding Main Entity of Page types quickly
+* Added support for importing SEO meta info into SEOmatic via FeedMe
 * Added a validator for the `Duration` schema.org type
 * Added a “Include Paginated `hreflang` Tags” setting
 * Added a **Submit Sitemap Changes** plugin setting
