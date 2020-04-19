@@ -576,7 +576,7 @@ class DynamicMeta
                         $includeUrl = false;
                     }
                     /** @var MetaBundle $metaBundle */
-                    list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
+                    list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId, $typeId)
                         = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
                     $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
                         $sourceBundleType,

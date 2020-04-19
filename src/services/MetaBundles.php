@@ -185,10 +185,11 @@ class MetaBundles extends Component
      * @param string   $sourceBundleType
      * @param int      $sourceId
      * @param int|null $sourceSiteId
+     * @param int|null $typeId
      *
      * @return null|MetaBundle
      */
-    public function getMetaBundleBySourceId(string $sourceBundleType, int $sourceId, int $sourceSiteId)
+    public function getMetaBundleBySourceId(string $sourceBundleType, int $sourceId, int $sourceSiteId, $typeId = null)
     {
         $metaBundle = null;
         // See if we have the meta bundle cached
@@ -199,14 +200,19 @@ class MetaBundles extends Component
             }
         }
         // Look for a matching meta bundle in the db
-        $metaBundleArray = (new Query())
+        $query = (new Query())
             ->from(['{{%seomatic_metabundles}}'])
             ->where([
                 'sourceBundleType' => $sourceBundleType,
                 'sourceId' => $sourceId,
                 'sourceSiteId' => $sourceSiteId,
-            ])
-            ->one();
+            ]);
+        if ($typeId !== null && $typeId) {
+            $query->andWhere([
+                'typeId' => $typeId,
+            ]);
+        }
+        $metaBundleArray = $query->one();
         if (!empty($metaBundleArray)) {
             // Get the attributes from the db
             $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
@@ -354,7 +360,7 @@ class MetaBundles extends Component
         if ($element && $invalidateMetaBundle) {
             $uri = $element->uri ?? '';
             // Invalidate sitemap caches after an existing element is saved
-            list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
+            list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId, $typeId)
                 = $this->getMetaSourceFromElement($element);
             if ($sourceId) {
                 Craft::info(
@@ -455,6 +461,7 @@ class MetaBundles extends Component
             $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
             if ($seoElement) {
                 $sourceId = $seoElement::sourceIdFromElement($element);
+                $typeId = $seoElement::typeIdFromElement($element);
                 $sourceHandle = $seoElement::sourceHandleFromElement($element);
                 $sourceSiteId = $element->siteId;
             }
@@ -462,7 +469,7 @@ class MetaBundles extends Component
             $sourceBundleType = '';
         }
 
-        return [$sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId];
+        return [$sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId, $typeId];
     }
 
     /**
