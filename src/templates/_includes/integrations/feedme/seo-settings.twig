@@ -1,0 +1,286 @@
+{# ------------------------ #}
+{# Available Variables #}
+{# ------------------------ #}
+{# Attributes: #}
+{# type, name, handle, instructions, attribute, default, feed, feedData #}
+{# ------------------------ #}
+{# Fields: #}
+{# name, handle, instructions, feed, feedData, field, fieldClass #}
+{# ------------------------ #}
+
+{% import 'feed-me/_macros' as feedMeMacro %}
+{% import '_includes/forms' as forms %}
+
+{# Special case when inside another complex field (Matrix) #}
+{% if parentPath is defined %}
+    {% set prefixPath = parentPath %}
+{% else %}
+    {% set prefixPath = [handle] %}
+{% endif %}
+
+{% set classes = ['complex-field'] %}
+
+<tr class="complex-field complex-field-header">
+    <td class="col-field" colspan="3">
+        <div class="field">
+            <div class="heading">
+                <label class="">{{ name }}</label>
+            </div>
+
+            <div class="additional-mapping-fields">
+                {% namespace 'fieldMapping[' ~ prefixPath | join('][') ~ ']' %}
+                    <input type="text" name="field" value="{{ className(field) }}">
+                {% endnamespace %}
+            </div>
+        </div>
+    </td>
+</tr>
+
+
+{#
+fields[seoMeta][metaGlobalVars][seoTitle]
+fields[seoMeta][metaGlobalVars][seoDescription]
+fields[seoMeta][metaGlobalVars][seoKeywords]
+
+fields[seoMeta][metaGlobalVars][seoImage]
+fields[seoMeta][metaGlobalVars][seoImageDescription]
+
+fields[seoMeta][metaGlobalVars][robots]
+
+fields[seoMeta][metaGlobalVars][canonicalUrl]
+#}
+
+{% set groups = [{
+    label: 'General',
+    handle: 'metaGlobalVars',
+    fields: [
+        {
+            label: 'SEO Title',
+            handle: 'seoTitle',
+        },
+        {
+            label: 'SEO Description',
+            handle: 'seoDescription',
+        },
+        {
+            label: 'SEO Keywords',
+            handle: 'seoKeywords',
+        },
+        {
+            label: 'SEO Image',
+            handle: 'seoImage',
+            type: 'assets-create',
+        },
+        {
+            label: 'SEO Image Description',
+            handle: 'seoImageDescription',
+        },
+        {
+            label: 'Robots',
+            handle: 'robots',
+            default: {
+            type: 'select',
+            options: [
+                {
+                    label: 'Don\'t import',
+                    value: '',
+                },
+                {
+                    label: 'All - Index this page and follow links (default)',
+                    value: 'all',
+                },
+                {
+                    label: 'None - Do not index or follow links on this page',
+                    value: 'none',
+                },
+                {
+                    label: 'No Index - Do not index this page',
+                    value: 'noindex',
+                },
+                {
+                    label: 'No Follow - Do not follow links on this page',
+                    value: 'nofollow',
+                },
+                {
+                    label: 'No Snippet - Do not show rich snippets from this page',
+                    value: 'nosnippet',
+                },
+                {
+                    label: 'No Archive - Do not archive a cached version of this page',
+                    value: 'noarchive',
+                },
+                {
+                    label: 'No Image Index - Do not index images on this page',
+                    value: 'noimageindex',
+                },
+            ],
+        },
+        },
+        {
+            label: 'Canonical URL',
+            handle: 'canonicalUrl',
+        },
+        {
+            label: 'Twitter Title',
+            handle: 'twitterTitle',
+        },
+        {
+            label: 'Twitter Description',
+            handle: 'twitterDescription',
+        },
+        {
+            label: 'Twitter Image',
+            handle: 'twitterImage',
+            type: 'assets-create',
+        },
+        {
+            label: 'Twitter Image Description',
+            handle: 'twitterImageDescription',
+        },
+        {
+            label: 'Facebook Title',
+            handle: 'ogTitle',
+        },
+        {
+            label: 'Facebook Description',
+            handle: 'ogDescription',
+        },
+        {
+            label: 'Facebook Image',
+            handle: 'ogImage',
+            type: 'assets-create',
+        },
+        {
+            label: 'Facebook Image Description',
+            handle: 'ogImageDescription',
+        },
+    ],
+}, {
+    label: 'Sitemap',
+    handle: 'metaSitemapVars',
+    fields: [
+        {
+            label: 'Change Frequency',
+            handle: 'sitemapChangeFreq',
+            default: {
+            type: 'select',
+            options: [
+                {
+                    label: 'Don\'t import',
+                    value: '',
+                },
+                {
+                    label: 'Always',
+                    value: 'always',
+                },
+                {
+                    label: 'Hourly',
+                    value: 'hourly',
+                },
+                {
+                    label: 'Daily',
+                    value: 'daily',
+                },
+                {
+                    label: 'Weekly',
+                    value: 'weekly',
+                },
+                {
+                    label: 'Monthly',
+                    value: 'monthly',
+                },
+                {
+                    label: 'Yearly',
+                    value: 'yearly',
+                },
+                {
+                    label: 'Never',
+                    value: 'never',
+                },
+            ],
+        },
+        },
+        {
+            label: 'Priority',
+            handle: 'sitemapPriority',
+            default: {
+            type: 'select',
+            options: [
+                {
+                    label: 'Don\'t import',
+                    value: '',
+                },
+                {
+                    label: '1.0',
+                    value: '1.0',
+                },
+                {
+                    label: '0.9',
+                    value: '0.9',
+                },
+                {
+                    label: '0.8',
+                    value: '0.8',
+                },
+                {
+                    label: '0.7',
+                    value: '0.7',
+                },
+                {
+                    label: '0.6',
+                    value: '0.6',
+                },
+                {
+                    label: '0.5',
+                    value: '0.5',
+                },
+                {
+                    label: '0.4',
+                    value: '0.4',
+                },
+                {
+                    label: '0.3',
+                    value: '0.3',
+                },
+                {
+                    label: '0.2',
+                    value: '0.2',
+                },
+                {
+                    label: '0.1',
+                    value: '0.1',
+                },
+                {
+                    label: '0.0',
+                    value: '0.0',
+                },
+            ],
+        },
+        },
+    ],
+}] %}
+
+{% for group in groups %}
+    {% for subField in group.fields %}
+        {% set nameLabel = group.label ~ ' - ' ~ subField.label %}
+        {% set instructionsHandle = handle ~ '[' ~ group.handle ~ ']' ~ '[' ~ subField.handle ~ ']' %}
+
+        {% set path = prefixPath | merge ([ 'fields', group.handle, subField.handle ]) %}
+
+        {% set default = subField.default ?? {
+            type: 'text',
+        } %}
+
+        {% set type = subField.type ?? '_base' %}
+
+        {% embed 'feed-me/_includes/fields/' ~ type %}
+            {% block additionalFieldSettings %}
+
+            {% endblock %}
+
+            {% block fieldSettings %}
+
+            {% endblock %}
+        {% endembed %}
+    {% endfor %}
+{% endfor %}

@@ -22,4 +22,18 @@ If feasible, we think the best way to update sites using SEOmatic is to start fr
 
 **N.B.:** The Twig templating syntax has changed (but you may not need to use Twig at all with the new version), so give the docs a once-over.
 
+## Importing Data to SEOmatic
+
+It is highly recommended that you set up mappings from existing content to your SEO via the **Content SEO** settings as described above. Usually this obviates the need to import data into SEOmatic, instead _pulling_ it from your content.
+
+In addition to that, however, if you also have custom SEO data that you need to import, you can import that into an SEO Settings field using the [FeedMe plugin](https://plugins.craftcms.com/feed-me) from Pixel & Tonic.
+
+**N.B.:** The SEO Settings field is intended to be used as a custom override for your Content SEO Settings. In many cases, you won't need or want an SEO Settings field at all.
+
+Once you have added an SEO Settings field added to a Section, it will show up as an import target in FeedMe:
+
+![Screenshot](./resources/screenshots/seomatic-feedme-import.png)
+
+See the [FeedMe documentation](https://docs.craftcms.com/feed-me/v4/) for more information on importing data into Craft CMS.
+
 Brought to you by [nystudio107](https://nystudio107.com/)

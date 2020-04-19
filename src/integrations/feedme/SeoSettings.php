@@ -7,9 +7,11 @@
  * @license   https://nystudio107.com/license
  */
 
-namespace nystudio107\integrations\feedme;
+namespace nystudio107\seomatic\integrations\feedme;
 
 use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
+
+use Craft;
 
 use craft\feedme\base\Field as FeedMeField;
 use craft\feedme\base\FieldInterface as FeedMeFieldInterface;
@@ -54,8 +56,10 @@ class SeoSettings extends FeedMeField implements FeedMeFieldInterface
             return null;
         }
 
-        foreach ($fields as $subFieldHandle => $subFieldInfo) {
-            $preppedData[$subFieldHandle] = DataHelper::fetchValue($this->feedData, $subFieldInfo);
+        foreach ($fields as $subGroupHandle => $subGroup) {
+            foreach ($subGroup as $subFieldHandle => $subFieldInfo) {
+                $preppedData[$subGroupHandle][$subFieldHandle] = DataHelper::fetchValue($this->feedData, $subFieldInfo);
+            }
         }
 
         // Protect against sending an empty array
