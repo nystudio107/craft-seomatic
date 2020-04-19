@@ -65,7 +65,7 @@ class Container
         $element = Craft::$app->getElements()->getElementByUri($uri, $siteId, false);
         $sourceBundleType = '';
         if ($element !== null) {
-            list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
+            list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId, $typeId)
                 = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
         }
         $metaContainers = Seomatic::$plugin->metaContainers;

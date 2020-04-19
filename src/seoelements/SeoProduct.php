@@ -379,6 +379,19 @@ class SeoProduct implements SeoElementInterface
     }
 
     /**
+     * Return the (product) type id from the $element
+     *
+     * @param ElementInterface $element
+     *
+     * @return int|null
+     */
+    public static function typeIdFromElement(ElementInterface $element)
+    {
+        /** @var Product $element */
+        return null;
+    }
+
+    /**
      * Return the source handle from the $element
      *
      * @param ElementInterface $element

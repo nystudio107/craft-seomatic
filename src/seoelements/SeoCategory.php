@@ -360,6 +360,19 @@ class SeoCategory implements SeoElementInterface
     }
 
     /**
+     * Return the (entry) type id from the $element
+     *
+     * @param ElementInterface $element
+     *
+     * @return int|null
+     */
+    public static function typeIdFromElement(ElementInterface $element)
+    {
+        /** @var Category $element */
+        return null;
+    }
+
+    /**
      * Return the source handle from the $element
      *
      * @param ElementInterface $element
