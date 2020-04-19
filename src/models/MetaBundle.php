@@ -66,6 +66,11 @@ class MetaBundle extends FluentModel
     public $sourceType;
 
     /**
+     * @var int
+     */
+    public $typeId;
+
+    /**
      * @var string
      */
     public $sourceTemplate;
@@ -262,8 +267,21 @@ class MetaBundle extends FluentModel
                 ],
                 'string',
             ],
-            [['sourceId', 'sourceSiteId'], 'number', 'min' => 1],
-            [['sourceDateUpdated'], DateTimeValidator::class],
+            [
+                [
+                    'sourceId',
+                    'sourceSiteId',
+                    'typeId'
+                ],
+                'number',
+                'min' => 1
+            ],
+            [
+                [
+                    'sourceDateUpdated'
+                ],
+                DateTimeValidator::class
+            ],
             [
                 [
                     'sourceAltSiteSettings',
