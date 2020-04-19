@@ -17,6 +17,7 @@ use nystudio107\seomatic\gql\interfaces\SeomaticInterface;
 use nystudio107\seomatic\gql\queries\SeomaticQuery;
 use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
+use nystudio107\seomatic\integrations\feedme\SeoSettings as SeoSettingsFeedMe;
 use nystudio107\seomatic\listeners\GetCraftQLSchema;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\Settings;
@@ -44,7 +45,6 @@ use craft\elements\User;
 use craft\elements\Entry;
 use craft\errors\SiteNotFoundException;
 use craft\events\ElementEvent;
-use craft\events\DeleteTemplateCachesEvent;
 use craft\events\PluginEvent;
 use craft\events\RegisterCacheOptionsEvent;
 use craft\events\RegisterComponentTypesEvent;
@@ -58,12 +58,15 @@ use craft\services\Elements;
 use craft\services\Fields;
 use craft\services\Gql;
 use craft\services\Plugins;
-use craft\services\TemplateCaches;
 use craft\services\UserPermissions;
 use craft\helpers\UrlHelper;
 use craft\utilities\ClearCaches;
 use craft\web\UrlManager;
 use craft\web\View;
+
+use craft\feedme\Plugin as FeedMe;
+use craft\feedme\events\RegisterFeedMeFieldsEvent;
+use craft\feedme\services\Fields as FeedMeFields;
 
 use markhuot\CraftQL\Builders\Schema;
 use markhuot\CraftQL\CraftQL;
@@ -607,6 +610,20 @@ class Seomatic extends Plugin
                 Schema::class,
                 AlterSchemaFields::EVENT,
                 [GetCraftQLSchema::class, 'handle']
+            );
+        }
+        // FeedMe Support
+        if (class_exists(FeedMe::class)) {
+            Event::on(
+                FeedMeFields::class,
+                FeedMeFields::EVENT_REGISTER_FEED_ME_FIELDS,
+                function(RegisterFeedMeFieldsEvent $e) {
+                    Craft::debug(
+                        'FeedMeFields::EVENT_REGISTER_FEED_ME_FIELDS',
+                        __METHOD__
+                    );
+                    $e->fields[] = SeoSettingsFeedMe::class;
+                }
             );
         }
     }
