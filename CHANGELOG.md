@@ -14,6 +14,7 @@
 * You can now pass in `@type` or `type` for the schema type
 
 ### Fixed
+* Fixed an issue where the Robots setting could be "sticky" when generating sitemaps with SEO Settings fields involved
 * If a page has a `robots` tag that marks it as `noindex` or `none`, don't include a canonical URL
 * No longer delete caches  in response to `TemplateCaches::EVENT_AFTER_DELETE_CACHES`
 * Fixed an issue where SEO previews could have the wrong URLs for multi-site setups
