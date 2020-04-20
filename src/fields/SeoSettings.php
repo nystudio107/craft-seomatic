@@ -301,6 +301,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             ]);
             $this->registerJsModules([
                 'styles.js',
+                'vendors~content-seo~dashboard~seomatic-meta.js',
                 'vendors~seomatic-tokens.js',
                 'seomatic-tokens.js',
                 'seomatic-meta.js',
