@@ -482,14 +482,12 @@ class SettingsController extends Controller
             $siteIdToLoad,
             $typeId
         );
-        // If it doesn't exist, create it
+        // Get the (entry) type menu
+        $typeMenu = [];
         $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
         if ($seoElement !== null) {
-            $sourceModel = $seoElement::sourceModelFromHandle($sourceHandle);
-            if ($sourceModel) {
-            }
+            $typeMenu = $seoElement::typeMenuFromHandle($sourceHandle);
         }
-
         Seomatic::$previewingMetaContainers = false;
         $templateTitle = '';
         if ($metaBundle !== null) {
@@ -498,6 +496,7 @@ class SettingsController extends Controller
             $variables['metaBundleSettings'] = $metaBundle->metaBundleSettings;
             $variables['currentSourceHandle'] = $metaBundle->sourceHandle;
             $variables['currentSourceBundleType'] = $metaBundle->sourceBundleType;
+            $variables['typeMenu'] = $typeMenu;
             $templateTitle = $metaBundle->sourceName;
         }
         // Basic variables
