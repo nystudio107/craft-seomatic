@@ -289,8 +289,11 @@ class SeoEntry implements SeoElementInterface
         $section = self::sourceModelFromHandle($sourceHandle);
         if ($section !== null) {
             $entryTypes = $section->getEntryTypes();
-            foreach ($entryTypes as $entryType) {
-                $typeMenu[$entryType->id] = $entryType->name;
+            // Only create a menu if there's more than 1 entry type
+            if (count($entryTypes) > 1) {
+                foreach ($entryTypes as $entryType) {
+                    $typeMenu[$entryType->id] = $entryType->name;
+                }
             }
         }
 
