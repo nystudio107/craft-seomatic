@@ -1,0 +1,27 @@
+{% import "_includes/forms" as forms %}
+
+{% set baseUrl = "seomatic/#{controllerHandle}/" %}
+{% set params = [] %}
+
+{% if typeMenu | length %}
+    <div id="types-btn" class="btn menubtn" data-icon="world">{{ 'woof' }}</div>
+
+    <div class="menu">
+                <ul class="padded">
+                    {% for id,name in typeMenu %}
+                        <li>
+                            {% if id == 1 %}
+                                <a class="sel">
+                                    {{ name }}
+                                </a>
+                            {% else %}
+                                {% set url = url(baseUrl~id, params) %}
+                                <a href="{{ url }}">
+                                    {{ name }}
+                                </a>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+    </div>
+{% endif %}
