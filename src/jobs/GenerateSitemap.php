@@ -121,6 +121,7 @@ class GenerateSitemap extends BaseJob
             }
             // Stash the sitemap attributes so they can be modified on a per-entry basis
             $stashedSitemapAttrs = $metaBundle->metaSitemapVars->getAttributes();
+            $stashedGlobalVarsAttrs = $metaBundle->metaGlobalVars->getAttributes();
             $currentElement = 0;
             // Output the sitemap entry
             /** @var  $element Entry */
@@ -131,6 +132,7 @@ class GenerateSitemap extends BaseJob
                     echo "Processing element {$currentElement}/{$totalElements} - {$element->title}".PHP_EOL;
                 }
                 $metaBundle->metaSitemapVars->setAttributes($stashedSitemapAttrs, false);
+                $metaBundle->metaGlobalVars->setAttributes($stashedGlobalVarsAttrs, false);
                 // Make sure this entry isn't disabled
                 $this->combineFieldSettings($element, $metaBundle);
                 // Special case for the __home__ URI
