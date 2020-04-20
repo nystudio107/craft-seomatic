@@ -488,6 +488,12 @@ class SettingsController extends Controller
         if ($seoElement !== null) {
             $typeMenu = $seoElement::typeMenuFromHandle($sourceHandle);
         }
+        $variables['typeMenu'] = $typeMenu;
+        if (!empty($typeMenu)) {
+            $currentType = reset($typeMenu);
+            $variables['currentType'] = $typeMenu[$typeId] ?? $currentType;
+            $variables['currentTypeId'] = $typeId ?? key($typeMenu);
+        }
         Seomatic::$previewingMetaContainers = false;
         $templateTitle = '';
         if ($metaBundle !== null) {
@@ -496,7 +502,6 @@ class SettingsController extends Controller
             $variables['metaBundleSettings'] = $metaBundle->metaBundleSettings;
             $variables['currentSourceHandle'] = $metaBundle->sourceHandle;
             $variables['currentSourceBundleType'] = $metaBundle->sourceBundleType;
-            $variables['typeMenu'] = $typeMenu;
             $templateTitle = $metaBundle->sourceName;
         }
         // Basic variables
@@ -508,6 +513,7 @@ class SettingsController extends Controller
         $variables['subSectionTitle'] = $subSectionTitle;
         $variables['docTitle'] = "{$pluginName} - Content SEO - {$templateTitle} - {$subSectionTitle}";
         $siteHandleUri = Craft::$app->isMultiSite ? '/'.$siteHandle : '';
+        $variables['siteHandleUri'] = $siteHandleUri;
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
