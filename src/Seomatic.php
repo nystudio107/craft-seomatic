@@ -395,9 +395,17 @@ class Seomatic extends Plugin
      *
      * @return bool
      */
-    protected function tableSchemaExists(): bool
+    protected function migrationsAndSchemaReady(): bool
     {
-        return (Craft::$app->db->schema->getTableSchema('{{%seomatic_metabundles}}') !== null);
+        $pluginsService = Craft::$app->getPlugins();
+        if ($pluginsService->doesPluginRequireDatabaseUpdate(self::$plugin)) {
+            return false;
+        }
+        if (Craft::$app->db->schema->getTableSchema('{{%seomatic_metabundles}}') === null) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -406,7 +414,7 @@ class Seomatic extends Plugin
     protected function installEventListeners()
     {
         // Install our event listeners only if our table schema exists
-        if ($this->tableSchemaExists()) {
+        if ($this->migrationsAndSchemaReady()) {
             // Add in our Twig extensions
             self::$view->registerTwigExtension(new SeomaticTwigExtension);
             $request = Craft::$app->getRequest();
