@@ -489,6 +489,7 @@ class SettingsController extends Controller
             $typeMenu = $seoElement::typeMenuFromHandle($sourceHandle);
         }
         $variables['typeMenu'] = $typeMenu;
+        $variables['currentTypeId'] = null;
         if (!empty($typeMenu)) {
             $currentType = reset($typeMenu);
             $variables['currentType'] = $typeMenu[$typeId] ?? $currentType;
@@ -576,6 +577,7 @@ class SettingsController extends Controller
         $sourceBundleType = $request->getParam('sourceBundleType');
         $sourceHandle = $request->getParam('sourceHandle');
         $siteId = $request->getParam('siteId');
+        $typeId = $request->getParam('typeId') ?? null;
         $globalsSettings = $request->getParam('metaGlobalVars');
         $bundleSettings = $request->getParam('metaBundleSettings');
         $sitemapSettings = $request->getParam('metaSitemapVars');
@@ -590,7 +592,8 @@ class SettingsController extends Controller
         $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
             $sourceBundleType,
             $sourceHandle,
-            $siteId
+            $siteId,
+            $typeId
         );
         Seomatic::$previewingMetaContainers = false;
         if ($metaBundle) {
@@ -608,6 +611,7 @@ class SettingsController extends Controller
             }
 
             Seomatic::$plugin->metaBundles->syncBundleWithConfig($metaBundle, true);
+            $metaBundle->typeId = $typeId;
             Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
 
             Seomatic::$plugin->clearAllCaches();

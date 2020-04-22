@@ -3,27 +3,29 @@
 {% set baseUrl = "seomatic/#{controllerHandle}#{siteHandleUri}" %}
 
 {% if typeMenu | length %}
-    <div id="types-btn" class="btn menubtn">{{ currentType }}</div>
+    <div class="pr-2">
+        <div id="types-btn" class="btn menubtn">{{ currentType }}</div>
 
-    <div class="menu">
-        <ul class="padded">
-            {% for id,name in typeMenu %}
-                <li>
-                    {% if id == currentTypeId %}
-                        <a class="sel">
-                            {{ name }}
-                        </a>
-                    {% else %}
-                        {% set params = {
-                            'typeId': id
-                        } %}
-                        {% set url = url(baseUrl, params) %}
-                        <a href="{{ url }}">
-                            {{ name }}
-                        </a>
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
+        <div class="menu">
+            <ul class="padded">
+                {% for id,name in typeMenu %}
+                    <li>
+                        {% if id == currentTypeId %}
+                            <a class="sel">
+                                {{ name }}
+                            </a>
+                        {% else %}
+                            {% set params = {
+                                'typeId': id
+                            } %}
+                            {% set url = url(baseUrl, params) %}
+                            <a href="{{ url }}">
+                                {{ name }}
+                            </a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 {% endif %}
