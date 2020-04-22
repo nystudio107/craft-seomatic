@@ -5,14 +5,14 @@
 {% block head %}
     {{ parent() }}
     {{ seomatic.manifest.includeCssModule("styles.css", false) }}
-{% endblock %}
-
-{% block foot %}
-    {{ parent() }}
     {% set jsModules = [
         'styles.js',
         'seomatic.js',
         'vendors~content-seo~dashboard~seomatic-meta.js'
     ] %}
     {{ registerJsModules(jsModules) }}
+{% endblock %}
+
+{% block foot %}
+    {{ parent() }}
 {% endblock %}

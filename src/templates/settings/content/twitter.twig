@@ -28,7 +28,8 @@
     <input type="hidden" name="siteId" value="{{ currentSiteId }}">
     <input type="hidden" name="sourceHandle" value="{{ currentSourceHandle }}">
     <input type="hidden" name="sourceBundleType" value="{{ currentSourceBundleType }}">
-    {{ redirectInput("seomatic/edit-content/#{currentSubSection}/#{currentSourceBundleType}/#{currentSourceHandle}/#{currentSiteHandle}") }}
+    <input type="hidden" name="typeId" value="{{ currentTypeId }}">
+    {{ redirectInput("seomatic/edit-content/#{currentSubSection}/#{currentSourceBundleType}/#{currentSourceHandle}/#{currentSiteHandle}?typeId=#{currentTypeId}") }}
 
     {% if currentUser.can("seomatic:content-meta:twitter") %}
         <div id="tab-content-twitter">
