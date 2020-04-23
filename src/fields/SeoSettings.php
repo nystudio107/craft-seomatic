@@ -301,11 +301,11 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             ]);
             $this->registerJsModules([
                 'styles.js',
+                'seomatic.js',
                 'vendors~content-seo~dashboard~seomatic-meta.js',
                 'vendors~seomatic-tokens.js',
                 'seomatic-tokens.js',
                 'seomatic-meta.js',
-                'seomatic.js',
             ]);
         } catch (InvalidConfigException $e) {
             Craft::error($e->getMessage(), __METHOD__);
@@ -343,10 +343,11 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             ]);
             $this->registerJsModules([
                 'styles.js',
+                'seomatic.js',
+                'vendors~content-seo~dashboard~seomatic-meta.js',
                 'vendors~seomatic-tokens.js',
                 'seomatic-tokens.js',
                 'seomatic-meta.js',
-                'seomatic.js',
             ]);
         } catch (InvalidConfigException $e) {
             Craft::error($e->getMessage(), __METHOD__);
