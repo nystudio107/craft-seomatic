@@ -105,6 +105,7 @@ class ContentSeoController extends Controller
             ->offset($offset)
             ->limit($per_page)
             ->orderBy($sortParams)
+            ->groupBy('sourceId')
             ->where(['!=', 'sourceBundleType', Seomatic::$plugin->metaBundles::GLOBAL_META_BUNDLE])
             ;
         $currentSiteHandle = '';
