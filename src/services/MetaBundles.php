@@ -474,6 +474,7 @@ class MetaBundles extends Component
     public function getMetaSourceFromElement(Element $element): array
     {
         $sourceId = 0;
+        $typeId = null;
         $sourceSiteId = 0;
         $sourceHandle = '';
         // See if this is a section we are tracking
