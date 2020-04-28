@@ -1,5 +1,10 @@
 # SEOmatic Changelog
 
+## 3.3.1 - 2020.04.28
+### Fixed
+* Fixed an issue with the Content SEO listing not appearing if you are using Postgres
+* Ensure that the Content SEO listing paginates property if you have multiple entry types
+
 ## 3.3.0 - 2020.04.28
 ### Added
 * Added a new searchable Schema UI selector for finding Main Entity of Page types quickly
