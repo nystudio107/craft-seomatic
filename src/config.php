@@ -44,6 +44,9 @@ return [
     // Should sitemaps be regenerated automatically?
     'regenerateSitemapsAutomatically' => true,
 
+    // Should sitemaps be submitted to search engines automatically whenever there are changes?
+    'submitSitemaps' => true,
+
     // Should SEOmatic add to the http response headers?
     'headersEnabled' => true,
 
@@ -89,6 +92,12 @@ return [
 
     // Whether to dynamically include the hreflang tags
     'addHrefLang' => true,
+
+    // Whether to dynamically include the `x-default` hreflang tags
+    'addXDefaultHrefLang' => true,
+
+    // Whether to dynamically include hreflang tags on paginated pages
+    'addPaginatedHreflang' => true,
 
     // Should the Canonical URL be automatically lower-cased?
     'lowercaseCanonicalUrl' => true,

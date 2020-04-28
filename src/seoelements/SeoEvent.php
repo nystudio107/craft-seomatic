@@ -281,6 +281,18 @@ class SeoEvent implements SeoElementInterface
     }
 
     /**
+     * Return the (entry) type menu as a $id => $name associative array
+     *
+     * @param string $sourceHandle
+     *
+     * @return array
+     */
+    public static function typeMenuFromHandle(string $sourceHandle): array
+    {
+        return [];
+    }
+
+    /**
      * Return the source model of the given $sourceId
      *
      * @param int $sourceId
@@ -376,6 +388,19 @@ class SeoEvent implements SeoElementInterface
     {
         /** @var Event $element */
         return $element->calendarId;
+    }
+
+    /**
+     * Return the (entry) type id from the $element
+     *
+     * @param ElementInterface $element
+     *
+     * @return int|null
+     */
+    public static function typeIdFromElement(ElementInterface $element)
+    {
+        /** @var Event $element */
+        return null;
     }
 
     /**

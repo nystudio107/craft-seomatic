@@ -437,6 +437,12 @@ class MetaJsonLd extends MetaItem
                                 $validated = true;
                             }
                             break;
+                        // Match an ISO 8601 duration as per: https://stackoverflow.com/questions/32044846/regex-for-iso-8601-durations
+                        case 'Duration':
+                            if (preg_match('/^P(?!$)((\d+Y)|(\d+\.\d+Y$))?((\d+M)|(\d+\.\d+M$))?((\d+W)|(\d+\.\d+W$))?((\d+D)|(\d+\.\d+D$))?(T(?=\d)((\d+H)|(\d+\.\d+H$))?((\d+M)|(\d+\.\d+M$))?(\d+(\.\d+)?S)?)??$/', $data) === 1) {
+                                $validated = true;
+                            }
+                            break;
 
                         // By default, assume it's a schema.org JSON-LD object, and validate that
                         default:

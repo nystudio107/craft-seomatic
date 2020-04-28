@@ -36,6 +36,7 @@ class JsonLdController extends Controller
         'get-type-array',
         'get-type-menu',
         'get-single-type-menu',
+        'get-type-tree',
     ];
 
     // Public Methods
@@ -105,5 +106,15 @@ class JsonLdController extends Controller
     public function actionGetSingleTypeMenu($path): Response
     {
         return $this->asJson(SchemaHelper::getSingleTypeMenu($path));
+    }
+
+    /**
+     * Return a full nested tree of Schema.org types, pre-formatted for the treeselect component
+     *
+     * @return Response
+     */
+    public function actionGetTypeTree(): Response
+    {
+        return $this->asJson(SchemaHelper::getTypeTree());
     }
 }

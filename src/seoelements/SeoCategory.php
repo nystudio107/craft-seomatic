@@ -274,6 +274,18 @@ class SeoCategory implements SeoElementInterface
     }
 
     /**
+     * Return the (entry) type menu as a $id => $name associative array
+     *
+     * @param string $sourceHandle
+     *
+     * @return array
+     */
+    public static function typeMenuFromHandle(string $sourceHandle): array
+    {
+        return [];
+    }
+
+    /**
      * Return the source model of the given $sourceId
      *
      * @param int $sourceId
@@ -357,6 +369,19 @@ class SeoCategory implements SeoElementInterface
     {
         /** @var Category $element */
         return $element->groupId;
+    }
+
+    /**
+     * Return the (entry) type id from the $element
+     *
+     * @param ElementInterface $element
+     *
+     * @return int|null
+     */
+    public static function typeIdFromElement(ElementInterface $element)
+    {
+        /** @var Category $element */
+        return null;
     }
 
     /**

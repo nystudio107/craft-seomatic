@@ -133,8 +133,9 @@ class Helper extends Component
         } catch (InvalidConfigException $e) {
             Craft::error($e->getMessage(), __METHOD__);
         }
+        $url = DynamicMetaHelper::sanitizeUrl($url);
 
-        return DynamicMetaHelper::sanitizeUrl($url);
+        return UrlHelper::absoluteUrlWithProtocol($url);
     }
 
     /**
@@ -352,6 +353,18 @@ class Helper extends Component
     public static function extractSummary($text = '', $useStopWords = true): string
     {
         return TextHelper::extractSummary($text, $useStopWords);
+    }
+
+    /**
+     * Return a period-delimited schema.org path from the $settings
+     *
+     * @param $settings
+     *
+     * @return string
+     */
+    public static function getEntityPath($settings): string
+    {
+        return SchemaHelper::getEntityPath($settings);
     }
 
     /**

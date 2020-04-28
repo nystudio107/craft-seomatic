@@ -1,5 +1,28 @@
 # SEOmatic Changelog
 
+## 3.3.0 - 2020.04.28
+### Added
+* Added a new searchable Schema UI selector for finding Main Entity of Page types quickly
+* Added support for importing SEO meta info into SEOmatic via FeedMe
+* Added support for multie Entry Types, each of which can have its own SEOmatic settings in Content SEO
+* Added a validator for the `Duration` schema.org type
+* Added a “Include Paginated `hreflang` Tags” setting
+* Added a **Submit Sitemap Changes** plugin setting
+* Added emoji support for Sections
+
+### Changed
+* The MetaLink error `...did not render because it is missing attributes` is no longer render as an error, but rather via the `info` log level, with `WARNING - ` proceeding it
+* You can now pass in `@type` or `type` for the schema type
+
+### Fixed
+* Fixed an issue where the Robots setting could be "sticky" when generating sitemaps with SEO Settings fields involved
+* If a page has a `robots` tag that marks it as `noindex` or `none`, don't include a canonical URL
+* No longer delete caches  in response to `TemplateCaches::EVENT_AFTER_DELETE_CACHES`
+* Fixed an issue where SEO previews could have the wrong URLs for multi-site setups
+
+### Security
+* Fixed a regression where malformed data passed to the metacontainers controller could result in SSTI which leads to information disclosure
+
 ## 3.2.51 - 2020.04.06
 ### Added
 * Updated to [Schema.org 7.0.3](https://schema.org/version/7.03/schema-all.html) including [SpecialAnnouncement](https://webmasters.googleblog.com/2020/04/highlight-covid-19-announcements-search.html) and other types/changes to handle the COVID-19 crisis

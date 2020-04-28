@@ -92,9 +92,11 @@ class DynamicMeta
         $result = preg_replace('/{.*}/', '', $url);
         if (!empty($result) && $result) {
             $url = $result;
+        } else {
+            $url = '';
         }
 
-        return UrlHelper::absoluteUrlWithProtocol($url);
+        return $url;
     }
 
     /**
@@ -574,7 +576,7 @@ class DynamicMeta
                         $includeUrl = false;
                     }
                     /** @var MetaBundle $metaBundle */
-                    list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
+                    list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId, $typeId)
                         = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
                     $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
                         $sourceBundleType,
@@ -692,7 +694,7 @@ class DynamicMeta
                 }
             }
         }
-        
+
         $value = $normalized;
     }
 }

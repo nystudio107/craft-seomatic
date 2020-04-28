@@ -17,6 +17,7 @@ use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
 use nystudio107\seomatic\helpers\Migration as MigrationHelper;
 use nystudio107\seomatic\helpers\PullField as PullFieldHelper;
+use nystudio107\seomatic\helpers\Schema as SchemaHelper;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\seoelements\SeoEntry;
 use nystudio107\seomatic\services\MetaContainers;
@@ -222,7 +223,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             $mainEntity = '';
             if (\in_array('mainEntityOfPage', $this->generalEnabledFields, false) &&
                 !empty($config['metaBundleSettings'])) {
-                $mainEntity = PullFieldHelper::getSpecificEntityType($config['metaBundleSettings']);
+                $mainEntity = SchemaHelper::getSpecificEntityType($config['metaBundleSettings']);
             }
             if (!empty($config['metaGlobalVars'])) {
                 $config['metaGlobalVars']['mainEntityOfPage'] = $mainEntity;
@@ -244,7 +245,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
     {
         // If the field replicates values from the Content SEO settings, nullify them
         if ($element !== null && $value instanceof MetaBundle) {
-            list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
+            list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId, $typeId)
                 = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
             $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
                 $sourceBundleType,
@@ -300,10 +301,11 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             ]);
             $this->registerJsModules([
                 'styles.js',
+                'seomatic.js',
+                'vendors~content-seo~dashboard~seomatic-meta.js',
                 'vendors~seomatic-tokens.js',
                 'seomatic-tokens.js',
                 'seomatic-meta.js',
-                'seomatic.js',
             ]);
         } catch (InvalidConfigException $e) {
             Craft::error($e->getMessage(), __METHOD__);
@@ -341,10 +343,11 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             ]);
             $this->registerJsModules([
                 'styles.js',
+                'seomatic.js',
+                'vendors~content-seo~dashboard~seomatic-meta.js',
                 'vendors~seomatic-tokens.js',
                 'seomatic-tokens.js',
                 'seomatic-meta.js',
-                'seomatic.js',
             ]);
         } catch (InvalidConfigException $e) {
             Craft::error($e->getMessage(), __METHOD__);
@@ -359,6 +362,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
         $variables['value'] = $value;
         $variables['field'] = $this;
         $variables['currentSourceBundleType'] = 'entry';
+        $variables['entitySchemaPath'] = SchemaHelper::getEntityPath($value->metaBundleSettings);
 
         // Get our id and namespace
         $id = Craft::$app->getView()->formatInputId($this->handle);
