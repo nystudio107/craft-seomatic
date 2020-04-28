@@ -136,12 +136,12 @@ class MetaJsonLdContainer extends MetaContainer
         parent::normalizeContainerData();
 
         foreach ($this->data as $key => $config) {
-            $schemaType = $config['type'];
+            $schemaType = $config['type'] ?? $config['@type'];
             $config['key'] = $key;
             $schemaType = MetaValueHelper::parseString($schemaType);
             $jsonLd = MetaJsonLd::create($schemaType, $config);
             // Retain the intended type
-            $jsonLd->type = $config['type'];
+            $jsonLd->type = $config['type'] ?? $config['@type'];
             $this->data[$key] = $jsonLd;
         }
     }

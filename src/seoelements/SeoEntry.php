@@ -276,6 +276,31 @@ class SeoEntry implements SeoElementInterface
     }
 
     /**
+     * Return the (entry) type menu as a $id => $name associative array
+     *
+     * @param string $sourceHandle
+     *
+     * @return array
+     */
+    public static function typeMenuFromHandle(string $sourceHandle): array
+    {
+        $typeMenu = [];
+
+        $section = self::sourceModelFromHandle($sourceHandle);
+        if ($section !== null) {
+            $entryTypes = $section->getEntryTypes();
+            // Only create a menu if there's more than 1 entry type
+            if (count($entryTypes) > 1) {
+                foreach ($entryTypes as $entryType) {
+                    $typeMenu[$entryType->id] = $entryType->name;
+                }
+            }
+        }
+
+        return $typeMenu;
+    }
+
+    /**
      * Return the source model of the given $sourceId
      *
      * @param int $sourceId
@@ -360,6 +385,19 @@ class SeoEntry implements SeoElementInterface
     {
         /** @var Entry $element */
         return $element->sectionId;
+    }
+
+    /**
+     * Return the (entry) type id from the $element
+     *
+     * @param ElementInterface $element
+     *
+     * @return int|null
+     */
+    public static function typeIdFromElement(ElementInterface $element)
+    {
+        /** @var Entry $element */
+        return $element->typeId;
     }
 
     /**

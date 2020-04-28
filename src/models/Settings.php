@@ -46,9 +46,15 @@ class Settings extends VarsModel
     public $sitemapsEnabled = true;
 
     /**
-     * @var bool Should sitwmaps be regenerated automatically?
+     * @var bool Should sitemaps be regenerated automatically?
      */
     public $regenerateSitemapsAutomatically = true;
+
+    /**
+     * @var bool Should sitemaps be submitted to search engines automatically whenever there are changes?
+     */
+    public $submitSitemaps = true;
+
     /**
      * @var bool Should SEOmatic add to the http response headers?
      */
@@ -129,6 +135,11 @@ class Settings extends VarsModel
     public $addXDefaultHrefLang = true;
 
     /**
+     * @var bool Whether to dynamically include hreflang tags on paginated pages
+     */
+    public $addPaginatedHreflang = true;
+
+    /**
      * @var bool Should the Canonical URL be automatically lower-cased?
      */
     public $lowercaseCanonicalUrl = true;
@@ -165,10 +176,12 @@ class Settings extends VarsModel
                     'renderEnabled',
                     'sitemapsEnabled',
                     'regenerateSitemapsAutomatically',
+                    'submitSitemaps',
                     'headersEnabled',
                     'generatorEnabled',
                     'addHrefLang',
                     'addXDefaultHrefLang',
+                    'addPaginatedHreflang'
                 ],
                 'boolean'],
             ['environment', 'string'],

@@ -105,6 +105,7 @@ class ContentSeoController extends Controller
             ->offset($offset)
             ->limit($per_page)
             ->orderBy($sortParams)
+            ->groupBy('sourceId')
             ->where(['!=', 'sourceBundleType', Seomatic::$plugin->metaBundles::GLOBAL_META_BUNDLE])
             ;
         $currentSiteHandle = '';
@@ -128,7 +129,8 @@ class ContentSeoController extends Controller
                 if ($metaBundle !== null) {
                     $sourceBundleType = $metaBundle->sourceBundleType;
                     $sourceHandle = $metaBundle->sourceHandle;
-                    $dataItem['sourceName'] = $metaBundle->sourceName;
+                    // For all the emojis
+                    $dataItem['sourceName'] = html_entity_decode($metaBundle->sourceName, ENT_NOQUOTES, 'UTF-8');
                     $dataItem['sourceType'] = $metaBundle->sourceType;
                     $dataItem['contentSeoUrl'] = UrlHelper::cpUrl(
                         "seomatic/edit-content/general/{$sourceBundleType}/{$sourceHandle}/{$currentSiteHandle}"
