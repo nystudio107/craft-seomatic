@@ -105,7 +105,7 @@ class ContentSeoController extends Controller
             ->offset($offset)
             ->limit($per_page)
             ->orderBy($sortParams)
-            ->groupBy('sourceId')
+            ->groupBy(['sourceId', 'id'])
             ->where(['!=', 'sourceBundleType', Seomatic::$plugin->metaBundles::GLOBAL_META_BUNDLE])
             ;
         $currentSiteHandle = '';
@@ -182,6 +182,7 @@ class ContentSeoController extends Controller
             $query = (new Query())
                 ->from(['{{%seomatic_metabundles}}'])
                 ->orderBy($sortParams)
+                ->groupBy(['sourceId', 'id'])
                 ->where(['!=', 'sourceBundleType', Seomatic::$plugin->metaBundles::GLOBAL_META_BUNDLE])
             ;
             if ((int)$siteId !== 0) {
