@@ -19,6 +19,9 @@
 * No longer delete caches  in response to `TemplateCaches::EVENT_AFTER_DELETE_CACHES`
 * Fixed an issue where SEO previews could have the wrong URLs for multi-site setups
 
+### Security
+* Fixed a regression where malformed data passed to the metacontainers controller could result in SSTI which leads to information disclosure
+
 ## 3.2.51 - 2020.04.06
 ### Added
 * Updated to [Schema.org 7.0.3](https://schema.org/version/7.03/schema-all.html) including [SpecialAnnouncement](https://webmasters.googleblog.com/2020/04/highlight-covid-19-announcements-search.html) and other types/changes to handle the COVID-19 crisis

@@ -106,6 +106,15 @@ interface SeoElementInterface
     public static function fieldLayouts(string $sourceHandle): array;
 
     /**
+     * Return the (entry) type menu as a $id => $name associative array
+     *
+     * @param string $sourceHandle
+     *
+     * @return array
+     */
+    public static function typeMenuFromHandle(string $sourceHandle): array;
+
+    /**
      * Return the source model of the given $sourceId
      *
      * @param int $sourceId
@@ -157,6 +166,15 @@ interface SeoElementInterface
      * @return int|null
      */
     public static function sourceIdFromElement(ElementInterface $element);
+
+    /**
+     * Return the (entry) type id from the $element
+     *
+     * @param ElementInterface $element
+     *
+     * @return int|null
+     */
+    public static function typeIdFromElement(ElementInterface $element);
 
     /**
      * Return the source handle from the $element
