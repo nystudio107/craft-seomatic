@@ -602,12 +602,13 @@ class MetaContainers extends Component
         if ($element) {
             $sourceType = Seomatic::$plugin->seoElements->getMetaBundleTypeFromElement($element);
             if ($sourceType) {
-                list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId)
+                list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId, $typeId)
                     = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
                 $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
                     $sourceType,
                     $sourceId,
-                    $sourceSiteId
+                    $sourceSiteId,
+                    $typeId
                 );
             }
         }

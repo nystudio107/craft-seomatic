@@ -435,6 +435,7 @@ class SettingsController extends Controller
      * @param string $sourceBundleType
      * @param string $sourceHandle
      * @param string|null $siteHandle
+     * @param int|null $typeId
      * @param null $loadFromSiteHandle
      *
      * @return Response The rendered result
@@ -446,6 +447,7 @@ class SettingsController extends Controller
         string $sourceBundleType,
         string $sourceHandle,
         string $siteHandle = null,
+        int    $typeId = null,
         $loadFromSiteHandle = null
     ): Response {
         $variables = [];
@@ -477,8 +479,22 @@ class SettingsController extends Controller
         $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
             $sourceBundleType,
             $sourceHandle,
-            $siteIdToLoad
+            $siteIdToLoad,
+            $typeId
         );
+        // Get the (entry) type menu
+        $typeMenu = [];
+        $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
+        if ($seoElement !== null) {
+            $typeMenu = $seoElement::typeMenuFromHandle($sourceHandle);
+        }
+        $variables['typeMenu'] = $typeMenu;
+        $variables['currentTypeId'] = null;
+        if (!empty($typeMenu)) {
+            $currentType = reset($typeMenu);
+            $variables['currentType'] = $typeMenu[$typeId] ?? $currentType;
+            $variables['currentTypeId'] = $typeId ?? key($typeMenu);
+        }
         Seomatic::$previewingMetaContainers = false;
         $templateTitle = '';
         if ($metaBundle !== null) {
@@ -498,6 +514,7 @@ class SettingsController extends Controller
         $variables['subSectionTitle'] = $subSectionTitle;
         $variables['docTitle'] = "{$pluginName} - Content SEO - {$templateTitle} - {$subSectionTitle}";
         $siteHandleUri = Craft::$app->isMultiSite ? '/'.$siteHandle : '';
+        $variables['siteHandleUri'] = $siteHandleUri;
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -560,6 +577,7 @@ class SettingsController extends Controller
         $sourceBundleType = $request->getParam('sourceBundleType');
         $sourceHandle = $request->getParam('sourceHandle');
         $siteId = $request->getParam('siteId');
+        $typeId = $request->getParam('typeId') ?? null;
         $globalsSettings = $request->getParam('metaGlobalVars');
         $bundleSettings = $request->getParam('metaBundleSettings');
         $sitemapSettings = $request->getParam('metaSitemapVars');
@@ -574,7 +592,8 @@ class SettingsController extends Controller
         $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
             $sourceBundleType,
             $sourceHandle,
-            $siteId
+            $siteId,
+            $typeId
         );
         Seomatic::$previewingMetaContainers = false;
         if ($metaBundle) {
@@ -592,6 +611,7 @@ class SettingsController extends Controller
             }
 
             Seomatic::$plugin->metaBundles->syncBundleWithConfig($metaBundle, true);
+            $metaBundle->typeId = $typeId;
             Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
 
             Seomatic::$plugin->clearAllCaches();

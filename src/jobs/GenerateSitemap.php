@@ -181,7 +181,7 @@ class GenerateSitemap extends BaseJob
                                 // Make sure to only include the `hreflang` if the element exists,
                                 // and sitemaps are on for it
                                 if ($altElement) {
-                                    list($altSourceId, $altSourceBundleType, $altSourceHandle, $altSourceSiteId)
+                                    list($altSourceId, $altSourceBundleType, $altSourceHandle, $altSourceSiteId, $altTypeId)
                                         = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($altElement);
                                     $altMetaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
                                         $altSourceBundleType,
