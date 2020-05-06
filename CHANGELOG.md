@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.2 - 2020.05.06
+### Fixed
+* Fixed an issue where the Main Entity of Page could retain stale values in the SEO Settings field
+
 ## 3.3.1 - 2020.04.28
 ### Fixed
 * Fixed an issue with the Content SEO listing not appearing if you are using Postgres
