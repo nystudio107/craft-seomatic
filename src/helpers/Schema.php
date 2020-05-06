@@ -50,9 +50,10 @@ class Schema
      *
      * @param $settings
      *
+     * @param bool $allowEmpty
      * @return string
      */
-    public static function getSpecificEntityType($settings): string
+    public static function getSpecificEntityType($settings, bool $allowEmpty = false): string
     {
         if (!empty($settings)) {
             // Go from most specific type to least specific type
@@ -63,7 +64,7 @@ class Schema
             }
         }
 
-        return 'WebPage';
+        return $allowEmpty ? '' : 'WebPage';
     }
 
     /**
