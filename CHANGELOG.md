@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.3.2 - 2020.05.06
+## 3.3.2 - 2020.05.09
 ### Fixed
 * Fixed an issue where the Main Entity of Page could retain stale values in the SEO Settings field
 * Fixed an issue with duplicate entries appearing in the Content SEO listing
