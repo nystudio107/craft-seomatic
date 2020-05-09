@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.3 - 2020.05.14
+### Changed
+* Wrap the JSON-LD encoding in try/catch to handle malformed characters
+
 ## 3.3.2 - 2020.05.09
 ### Fixed
 * Fixed an issue where the Main Entity of Page could retain stale values in the SEO Settings field
