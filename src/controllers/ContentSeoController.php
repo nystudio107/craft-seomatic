@@ -73,6 +73,7 @@ class ContentSeoController extends Controller
         $filter = '',
         $siteId = 0
     ): Response {
+        $db = Craft::$app->getDb();
         $data = [];
         $sortField = 'sourceName';
         $sortType = 'ASC';
@@ -105,9 +106,16 @@ class ContentSeoController extends Controller
             ->offset($offset)
             ->limit($per_page)
             ->orderBy($sortParams)
-            ->groupBy(['sourceId', 'id'])
             ->where(['!=', 'sourceBundleType', Seomatic::$plugin->metaBundles::GLOBAL_META_BUNDLE])
             ;
+        if ($db->getIsMysql()) {
+            $query
+                ->groupBy(['sourceId']);
+        }
+        if ($db->getIsPgsql()) {
+            $query
+                ->select('distinct on ([[sourceName]]) *');
+        }
         $currentSiteHandle = '';
         if ((int)$siteId !== 0) {
             $query->andWhere(['sourceSiteId' => $siteId]);
@@ -182,9 +190,16 @@ class ContentSeoController extends Controller
             $query = (new Query())
                 ->from(['{{%seomatic_metabundles}}'])
                 ->orderBy($sortParams)
-                ->groupBy(['sourceId', 'id'])
                 ->where(['!=', 'sourceBundleType', Seomatic::$plugin->metaBundles::GLOBAL_META_BUNDLE])
             ;
+            if ($db->getIsMysql()) {
+                $query
+                    ->groupBy(['sourceId']);
+            }
+            if ($db->getIsPgsql()) {
+                $query
+                    ->select('distinct on ([[sourceName]]) *');
+            }
             if ((int)$siteId !== 0) {
                 $query->andWhere(['sourceSiteId' => $siteId]);
             }
