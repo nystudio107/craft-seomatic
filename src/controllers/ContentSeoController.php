@@ -118,36 +118,39 @@ class ContentSeoController extends Controller
                 'sourceName' => self::SORT_MAP['ASC'],
             ]);
         }
-        // Hack to emulate Postgres's DISTINCT ON
-        $selectColumns = [];
-        foreach(self::CONTENT_SEO_COLUMNS as $column) {
-            $selectColumns[] = "MIN([[{$column}]]) as [[{$column}]]";
-        }
+
         // Query the db table
         $offset = ($page - 1) * $per_page;
-        $query = (new Query())
-            ->select($selectColumns)
+        $subQuery = (new Query())
             ->from(['{{%seomatic_metabundles}}'])
-            ->offset($offset)
-            ->limit($per_page)
-            ->orderBy($sortParams)
-            ->groupBy(['sourceId'])
-            ->where(['!=', 'sourceBundleType', Seomatic::$plugin->metaBundles::GLOBAL_META_BUNDLE])
-            ;
-        $query
-            ->groupBy(['sourceId']);
+            ->where(['!=', 'sourceBundleType', Seomatic::$plugin->metaBundles::GLOBAL_META_BUNDLE]);
+
         $currentSiteHandle = '';
         if ((int)$siteId !== 0) {
-            $query->andWhere(['sourceSiteId' => $siteId]);
+            $subQuery->andWhere(['sourceSiteId' => $siteId]);
             $site = Craft::$app->getSites()->getSiteById($siteId);
             if ($site !== null) {
                 $currentSiteHandle = $site->handle;
             }
         }
         if ($filter !== '') {
-            $query->andWhere(['like', 'sourceName', $filter]);
+            $subQuery->andWhere(['like', 'sourceName', $filter]);
         }
-        $bundles = $query->all();
+        $bundleQuery = (new Query())
+            ->select(['mb.*'])
+            ->from(['mb' => $subQuery])
+            ->leftJoin(['mb2' => $subQuery], [
+                'and',
+                '[[mb.sourceId]] = [[mb2.sourceId]]',
+                '[[mb.id]] < [[mb2.id]]'
+            ])
+            ->where(['mb2.id' => null])
+            ->offset($offset)
+            ->limit($per_page)
+            ->orderBy($sortParams)
+            ;
+
+        $bundles = $bundleQuery->all();
         if ($bundles) {
             $dataArray = [];
             // Add in the `addLink` field
@@ -210,20 +213,7 @@ class ContentSeoController extends Controller
             }
             // Format the data for the API
             $data['data'] = $dataArray;
-            $query = (new Query())
-                ->select($selectColumns)
-                ->from(['{{%seomatic_metabundles}}'])
-                ->orderBy($sortParams)
-                ->groupBy(['sourceId'])
-                ->where(['!=', 'sourceBundleType', Seomatic::$plugin->metaBundles::GLOBAL_META_BUNDLE])
-            ;
-            if ((int)$siteId !== 0) {
-                $query->andWhere(['sourceSiteId' => $siteId]);
-            }
-            if ($filter !== '') {
-                $query->andWhere(['like', 'sourceName', $filter]);
-            }
-            $count = $query->count();
+            $count = $bundleQuery->count();
             $data['links']['pagination'] = [
                 'total' => $count,
                 'per_page' => $per_page,
