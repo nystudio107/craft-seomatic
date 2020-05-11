@@ -42,6 +42,26 @@ class ContentSeoController extends Controller
         'sourceType',
     ];
 
+    const CONTENT_SEO_COLUMNS = [
+        'bundleVersion',
+        'sourceType',
+        'sourceName',
+        'sourceHandle',
+        'sourceTemplate',
+        'sourceSiteId',
+        'sourceId',
+        'typeId',
+        'sourceDateUpdated',
+        'sourceAltSiteSettings',
+        'metaContainers',
+        'redirectsContainer',
+        'metaGlobalVars',
+        'metaSiteVars',
+        'metaSitemapVars',
+        'metaBundleSettings',
+        'frontendTemplatesContainer',
+    ];
+
     // Protected Properties
     // =========================================================================
 
@@ -73,7 +93,6 @@ class ContentSeoController extends Controller
         $filter = '',
         $siteId = 0
     ): Response {
-        $db = Craft::$app->getDb();
         $data = [];
         $sortField = 'sourceName';
         $sortType = 'ASC';
@@ -99,23 +118,24 @@ class ContentSeoController extends Controller
                 'sourceName' => self::SORT_MAP['ASC'],
             ]);
         }
+        // Hack to emulate Postgres's DISTINCT ON
+        $selectColumns = [];
+        foreach(self::CONTENT_SEO_COLUMNS as $column) {
+            $selectColumns[] = "MIN([[{$column}]]) as [[{$column}]]";
+        }
         // Query the db table
         $offset = ($page - 1) * $per_page;
         $query = (new Query())
+            ->select($selectColumns)
             ->from(['{{%seomatic_metabundles}}'])
             ->offset($offset)
             ->limit($per_page)
             ->orderBy($sortParams)
+            ->groupBy(['sourceId'])
             ->where(['!=', 'sourceBundleType', Seomatic::$plugin->metaBundles::GLOBAL_META_BUNDLE])
             ;
-        if ($db->getIsMysql()) {
-            $query
-                ->groupBy(['sourceId']);
-        }
-        if ($db->getIsPgsql()) {
-            $query
-                ->select('distinct on ([[sourceName]]) *');
-        }
+        $query
+            ->groupBy(['sourceId']);
         $currentSiteHandle = '';
         if ((int)$siteId !== 0) {
             $query->andWhere(['sourceSiteId' => $siteId]);
@@ -145,9 +165,12 @@ class ContentSeoController extends Controller
                     );
                     // Fill in the number of entries
                     $entries = 0;
-                    $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType(
-                        $metaBundle->sourceBundleType
-                    );
+                    $seoElement = null;
+                    if ($metaBundle->sourceBundleType) {
+                        $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType(
+                            $metaBundle->sourceBundleType
+                        );
+                    }
                     /** @var SeoElementInterface $seoElement */
                     if ($seoElement !== null) {
                         // Ensure `null` so that the resulting element query is correct
@@ -188,18 +211,12 @@ class ContentSeoController extends Controller
             // Format the data for the API
             $data['data'] = $dataArray;
             $query = (new Query())
+                ->select($selectColumns)
                 ->from(['{{%seomatic_metabundles}}'])
                 ->orderBy($sortParams)
+                ->groupBy(['sourceId'])
                 ->where(['!=', 'sourceBundleType', Seomatic::$plugin->metaBundles::GLOBAL_META_BUNDLE])
             ;
-            if ($db->getIsMysql()) {
-                $query
-                    ->groupBy(['sourceId']);
-            }
-            if ($db->getIsPgsql()) {
-                $query
-                    ->select('distinct on ([[sourceName]]) *');
-            }
             if ((int)$siteId !== 0) {
                 $query->andWhere(['sourceSiteId' => $siteId]);
             }
