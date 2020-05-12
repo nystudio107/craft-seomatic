@@ -287,7 +287,7 @@ class MetaValue
                     ['template' => $metaValue, 'error' => $e->getMessage().' - '.print_r($metaValue, true)]
                 );
                 Craft::error($metaValue, __METHOD__);
-                Craft::$app->errorHandler->logException($e);
+                Craft::$app->getErrorHandler()->logException($e);
                 // Restore the template mode
                 if ($oldTemplateMode !== self::$view::TEMPLATE_MODE_SITE) {
                     try {
