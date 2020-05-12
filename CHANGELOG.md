@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.4 - 2020.05.14
+### Changed
+* 
+
 ## 3.3.3 - 2020.05.12
 ### Changed
 * Wrap the JSON-LD encoding in try/catch to handle malformed characters
