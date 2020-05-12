@@ -15,6 +15,7 @@ use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\helpers\JsonLd as JsonLdHelper;
 
+use Craft;
 use craft\helpers\Json;
 use craft\helpers\Template;
 
@@ -269,7 +270,12 @@ class MetaJsonLd extends MetaItem
             // Render the resulting JSON-LD
             $scenario = $this->scenario;
             $this->setScenario('render');
-            $html = JsonLdHelper::encode($this);
+            try {
+                $html = JsonLdHelper::encode($this);
+            } catch (\Exception $e) {
+                Craft::error($e, __METHOD__);
+                Craft::$app->getErrorHandler()->logException($e);
+            }
             $this->setScenario($scenario);
             if ($params['array'] === true) {
                 Seomatic::$devMode = $oldDevMode;
