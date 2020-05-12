@@ -2,7 +2,10 @@
 
 ## 3.3.4 - 2020.05.14
 ### Changed
-* 
+*
+
+### Fixed
+* Fixed a namespacing issue for UrlHelper on certain versions of PHP
 
 ## 3.3.3 - 2020.05.12
 ### Changed
