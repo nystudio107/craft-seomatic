@@ -1,12 +1,13 @@
 # SEOmatic Changelog
 
-## 3.3.3 - 2020.05.14
+## 3.3.3 - 2020.05.12
 ### Changed
 * Wrap the JSON-LD encoding in try/catch to handle malformed characters
 * Added exception logging to `MetaValue::parseMetaString()` to make debugging the error source easier
 
 ### Fixed
 * Fix Content SEO settings display for MySQL with `sql_mode=only_full_group_by`
+* Fixed an issue where the sitemap index could show duplicate section sitemaps
 
 ## 3.3.2 - 2020.05.09
 ### Fixed
