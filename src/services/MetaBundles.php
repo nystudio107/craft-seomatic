@@ -540,13 +540,24 @@ class MetaBundles extends Component
     public function getContentMetaBundlesForSiteId(int $sourceSiteId): array
     {
         $metaBundles = [];
-        $metaBundleArrays = (new Query())
+        $subQuery = (new Query())
             ->from(['{{%seomatic_metabundles}}'])
             ->where([
                 'sourceSiteId' => $sourceSiteId,
             ])
             ->andWhere(['!=', 'sourceBundleType', self::GLOBAL_META_BUNDLE])
-            ->all();
+        ;
+        $bundleQuery = (new Query())
+            ->select(['mb.*'])
+            ->from(['mb' => $subQuery])
+            ->leftJoin(['mb2' => $subQuery], [
+                'and',
+                '[[mb.sourceId]] = [[mb2.sourceId]]',
+                '[[mb.id]] < [[mb2.id]]'
+            ])
+            ->where(['mb2.id' => null])
+        ;
+        $metaBundleArrays = $bundleQuery->all();
         /** @var  $metaBundleArray array */
         foreach ($metaBundleArrays as $metaBundleArray) {
             $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));

@@ -42,6 +42,26 @@ class ContentSeoController extends Controller
         'sourceType',
     ];
 
+    const CONTENT_SEO_COLUMNS = [
+        'bundleVersion',
+        'sourceType',
+        'sourceName',
+        'sourceHandle',
+        'sourceTemplate',
+        'sourceSiteId',
+        'sourceId',
+        'typeId',
+        'sourceDateUpdated',
+        'sourceAltSiteSettings',
+        'metaContainers',
+        'redirectsContainer',
+        'metaGlobalVars',
+        'metaSiteVars',
+        'metaSitemapVars',
+        'metaBundleSettings',
+        'frontendTemplatesContainer',
+    ];
+
     // Protected Properties
     // =========================================================================
 
@@ -73,7 +93,6 @@ class ContentSeoController extends Controller
         $filter = '',
         $siteId = 0
     ): Response {
-        $db = Craft::$app->getDb();
         $data = [];
         $sortField = 'sourceName';
         $sortType = 'ASC';
@@ -99,35 +118,39 @@ class ContentSeoController extends Controller
                 'sourceName' => self::SORT_MAP['ASC'],
             ]);
         }
+
         // Query the db table
         $offset = ($page - 1) * $per_page;
-        $query = (new Query())
+        $subQuery = (new Query())
             ->from(['{{%seomatic_metabundles}}'])
-            ->offset($offset)
-            ->limit($per_page)
-            ->orderBy($sortParams)
-            ->where(['!=', 'sourceBundleType', Seomatic::$plugin->metaBundles::GLOBAL_META_BUNDLE])
-            ;
-        if ($db->getIsMysql()) {
-            $query
-                ->groupBy(['sourceId']);
-        }
-        if ($db->getIsPgsql()) {
-            $query
-                ->select('distinct on ([[sourceName]]) *');
-        }
+            ->where(['!=', 'sourceBundleType', Seomatic::$plugin->metaBundles::GLOBAL_META_BUNDLE]);
+
         $currentSiteHandle = '';
         if ((int)$siteId !== 0) {
-            $query->andWhere(['sourceSiteId' => $siteId]);
+            $subQuery->andWhere(['sourceSiteId' => $siteId]);
             $site = Craft::$app->getSites()->getSiteById($siteId);
             if ($site !== null) {
                 $currentSiteHandle = $site->handle;
             }
         }
         if ($filter !== '') {
-            $query->andWhere(['like', 'sourceName', $filter]);
+            $subQuery->andWhere(['like', 'sourceName', $filter]);
         }
-        $bundles = $query->all();
+        $bundleQuery = (new Query())
+            ->select(['mb.*'])
+            ->from(['mb' => $subQuery])
+            ->leftJoin(['mb2' => $subQuery], [
+                'and',
+                '[[mb.sourceId]] = [[mb2.sourceId]]',
+                '[[mb.id]] < [[mb2.id]]'
+            ])
+            ->where(['mb2.id' => null])
+            ->offset($offset)
+            ->limit($per_page)
+            ->orderBy($sortParams)
+            ;
+
+        $bundles = $bundleQuery->all();
         if ($bundles) {
             $dataArray = [];
             // Add in the `addLink` field
@@ -145,9 +168,12 @@ class ContentSeoController extends Controller
                     );
                     // Fill in the number of entries
                     $entries = 0;
-                    $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType(
-                        $metaBundle->sourceBundleType
-                    );
+                    $seoElement = null;
+                    if ($metaBundle->sourceBundleType) {
+                        $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType(
+                            $metaBundle->sourceBundleType
+                        );
+                    }
                     /** @var SeoElementInterface $seoElement */
                     if ($seoElement !== null) {
                         // Ensure `null` so that the resulting element query is correct
@@ -187,26 +213,7 @@ class ContentSeoController extends Controller
             }
             // Format the data for the API
             $data['data'] = $dataArray;
-            $query = (new Query())
-                ->from(['{{%seomatic_metabundles}}'])
-                ->orderBy($sortParams)
-                ->where(['!=', 'sourceBundleType', Seomatic::$plugin->metaBundles::GLOBAL_META_BUNDLE])
-            ;
-            if ($db->getIsMysql()) {
-                $query
-                    ->groupBy(['sourceId']);
-            }
-            if ($db->getIsPgsql()) {
-                $query
-                    ->select('distinct on ([[sourceName]]) *');
-            }
-            if ((int)$siteId !== 0) {
-                $query->andWhere(['sourceSiteId' => $siteId]);
-            }
-            if ($filter !== '') {
-                $query->andWhere(['like', 'sourceName', $filter]);
-            }
-            $count = $query->count();
+            $count = $bundleQuery->count();
             $data['links']['pagination'] = [
                 'total' => $count,
                 'per_page' => $per_page,
