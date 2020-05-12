@@ -274,6 +274,7 @@ class MetaJsonLd extends MetaItem
                 $html = JsonLdHelper::encode($this);
             } catch (\Exception $e) {
                 Craft::error($e, __METHOD__);
+                Craft::$app->getErrorHandler()->logException($e);
             }
             $this->setScenario($scenario);
             if ($params['array'] === true) {
