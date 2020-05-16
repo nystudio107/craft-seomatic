@@ -2,10 +2,11 @@
 
 ## 3.3.4 - 2020.05.14
 ### Changed
-*
+* 
 
 ### Fixed
 * Fixed a namespacing issue for UrlHelper on certain versions of PHP
+* Don't call `metaBundles->getMetaBundleBySourceId()` unless there are no pending plugin migrations
 
 ## 3.3.3 - 2020.05.12
 ### Changed
