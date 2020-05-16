@@ -385,9 +385,6 @@ class Seomatic extends Plugin
         }
     }
 
-    // Protected Methods
-    // =========================================================================
-
     /**
      * Determine whether our table schema exists or not; this is needed because
      * migrations such as the install migration and base_install migration may
@@ -395,7 +392,7 @@ class Seomatic extends Plugin
      *
      * @return bool
      */
-    protected function migrationsAndSchemaReady(): bool
+    public function migrationsAndSchemaReady(): bool
     {
         $pluginsService = Craft::$app->getPlugins();
         if ($pluginsService->doesPluginRequireDatabaseUpdate(self::$plugin)) {
@@ -407,6 +404,9 @@ class Seomatic extends Plugin
 
         return true;
     }
+
+    // Protected Methods
+    // =========================================================================
 
     /**
      * Install our event listeners.

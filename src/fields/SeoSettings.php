@@ -244,7 +244,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
     public function serializeValue($value, ElementInterface $element = null)
     {
         // If the field replicates values from the Content SEO settings, nullify them
-        if ($element !== null && $value instanceof MetaBundle) {
+        if ($element !== null && $value instanceof MetaBundle && Seomatic::$plugin->migrationsAndSchemaReady()) {
             list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId, $typeId)
                 = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
             $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
