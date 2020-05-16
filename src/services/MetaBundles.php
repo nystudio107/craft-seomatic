@@ -380,6 +380,9 @@ class MetaBundles extends Component
         }
         if ($element && $invalidateMetaBundle) {
             $uri = $element->uri ?? '';
+            if ($uri === self::GLOBAL_META_BUNDLE || $uri === '__home__') {
+                $uri = '/';
+            }
             // Invalidate sitemap caches after an existing element is saved
             list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId, $typeId)
                 = $this->getMetaSourceFromElement($element);
