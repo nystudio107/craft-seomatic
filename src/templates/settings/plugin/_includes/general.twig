@@ -104,49 +104,5 @@
 
         #}
 
-        {{ forms.lightswitchField({
-            label: "Site Groups define logically separate sites"|t("seomatic"),
-            instructions: "If you are using Site Groups to logically separate 'sister sites', turn this on."|t("seomatic"),
-            id: "siteGroupsSeparate",
-            name: "siteGroupsSeparate",
-            on: settings.siteGroupsSeparate,
-            warning: configWarning("siteGroupsSeparate", "seomatic"),
-            errors: settings.getErrors("siteGroupsSeparate"),
-        }) }}
-
-        {{ forms.lightswitchField({
-            label: "Lowercase Canonical URL"|t("seomatic")|md,
-            instructions: "Should the Canonical URL be automatically lower-cased?"|t("seomatic"),
-            id: "lowercaseCanonicalUrl",
-            name: "lowercaseCanonicalUrl",
-            on: settings.lowercaseCanonicalUrl,
-            warning: configWarning("lowercaseCanonicalUrl", "seomatic"),
-            errors: settings.getErrors("lowercaseCanonicalUrl"),
-        }) }}
-
-        {% if seomatic.helper.craft31 %}
-            {{ forms.autosuggestField({
-                label: "Site URL Override"|t("seomatic"),
-                instructions: "SEOmatic uses the Craft `siteUrl` to generate the external URLs.  If you are using it in a non-standard environment, such as a headless GraphQL or ElementAPI server, you can override what it uses for the `siteUrl` below."|t("seomatic"),
-                suggestEnvVars: true,
-                suggestAliases: true,
-                id: "siteUrlOverride",
-                name: "siteUrlOverride",
-                value: settings.siteUrlOverride,
-                warning: configWarning("siteUrlOverride", "seomatic"),
-                errors: settings.getErrors("siteUrlOverride"),
-            }) }}
-        {% else %}
-            {{ forms.textField({
-                label: "Site URL Override"|t("seomatic"),
-                instructions: "SEOmatic uses the Craft `siteUrl` to generate the external URLs.  If you are using it in a non-standard environment, such as a headless GraphQL or ElementAPI server, you can override what it uses for the `siteUrl` below."|t("seomatic"),
-                id: "siteUrlOverride",
-                name: "siteUrlOverride",
-                value: settings.siteUrlOverride,
-                warning: configWarning("siteUrlOverride", "seomatic"),
-                errors: settings.getErrors("siteUrlOverride"),
-            }) }}
-        {% endif %}
-
     {% endnamespace %}
 </div>
