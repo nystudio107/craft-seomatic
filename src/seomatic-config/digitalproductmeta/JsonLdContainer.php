@@ -62,11 +62,11 @@ return [
                     'target'      => '{seomatic.site.siteLinksSearchTarget}',
                     'query-input' => '{seomatic.helper.siteLinksQueryInput()}',
                 ],
-                'sku'              => '{product.getDefaultVariant().getSku()}',
+                'sku'              => '{product.getSku()}',
                 'offers'           => [
                     'type'          => 'Offer',
                     'url'           => '{seomatic.meta.canonicalUrl}',
-                    'price'         => '{product.getDefaultVariant().getPrice()|number_format(2, ".", "")}',
+                    'price'         => '{product.getPrice()|number_format(2, ".", "")}',
                     'priceCurrency' => '{{craft.commerce.paymentCurrencies.primaryPaymentCurrencyIso()}}',
                     'offeredBy'     => [
                         'id' => '{seomatic.site.identity.genericUrl}#identity',
@@ -74,7 +74,7 @@ return [
                     'seller'        => [
                         'id' => '{seomatic.site.identity.genericUrl}#identity',
                     ],
-                    'availability'  => 'http://schema.org/{% if object.product.getDefaultVariant().getIsAvailable() %}InStock{% else %}OutOfStock{% endif %}',
+                    'availability'  => 'http://schema.org/{% if object.product.getIsAvailable() %}InStock{% else %}OutOfStock{% endif %}',
                 ],
             ],
         ],
