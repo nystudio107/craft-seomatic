@@ -3,6 +3,7 @@
 ## 3.3.4 - 2020.05.18
 ### Added
 * Added support for Digital Products
+* Added a **Meta Cache Duration** setting under Plugin Settings → Advanced
 
 ### Fixed
 * Fixed a namespacing issue for UrlHelper on certain versions of PHP
