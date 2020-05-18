@@ -1,8 +1,8 @@
 # SEOmatic Changelog
 
-## 3.3.4 - 2020.05.14
-### Changed
-* 
+## 3.3.4 - 2020.05.18
+### Added
+* Added support for Digital Products
 
 ### Fixed
 * Fixed a namespacing issue for UrlHelper on certain versions of PHP
