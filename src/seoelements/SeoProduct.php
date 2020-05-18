@@ -107,7 +107,7 @@ class SeoProduct implements SeoElementInterface
             Event::on(
                 ProductTypes::class,
                 ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE,
-                function (ProductTypeEvent $event) {
+                static function (ProductTypeEvent $event) {
                     Craft::debug(
                         'ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE',
                         __METHOD__
@@ -163,7 +163,7 @@ class SeoProduct implements SeoElementInterface
             // Commerce Product Types sidebar
             $commerce = CommercePlugin::getInstance();
             if ($commerce !== null) {
-                Seomatic::$view->hook('cp.commerce.product.edit.details', function (&$context) {
+                Seomatic::$view->hook('cp.commerce.product.edit.details', static function (&$context) {
                     $html = '';
                     Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
                     /** @var  $product Product */
@@ -200,7 +200,8 @@ class SeoProduct implements SeoElementInterface
             ->type($metaBundle->sourceHandle)
             ->siteId($metaBundle->sourceSiteId)
             ->limit($metaBundle->metaSitemapVars->sitemapLimit)
-            ->enabledForSite(true);
+            ->enabledForSite(true)
+        ;
 
         return $query;
     }
@@ -265,7 +266,7 @@ class SeoProduct implements SeoElementInterface
         if ($commerce !== null) {
             $layoutId = null;
             try {
-                $productType = $commerce->productTypes->getProductTypeByHandle($sourceHandle);
+                $productType = $commerce->getProductTypes()->getProductTypeByHandle($sourceHandle);
                 if ($productType) {
                     $layoutId = $productType->getFieldLayoutId();
                 }
@@ -304,7 +305,7 @@ class SeoProduct implements SeoElementInterface
         $productType = null;
         $commerce = CommercePlugin::getInstance();
         if ($commerce !== null) {
-            $productType = $commerce->productTypes->getProductTypeById($sourceId);
+            $productType = $commerce->getProductTypes()->getProductTypeById($sourceId);
         }
 
         return $productType;
@@ -322,7 +323,7 @@ class SeoProduct implements SeoElementInterface
         $productType = null;
         $commerce = CommercePlugin::getInstance();
         if ($commerce !== null) {
-            $productType = $commerce->productTypes->getProductTypeByHandle($sourceHandle);
+            $productType = $commerce->getProductTypes()->getProductTypeByHandle($sourceHandle);
         }
 
         return $productType;
@@ -447,7 +448,7 @@ class SeoProduct implements SeoElementInterface
         $commerce = CommercePlugin::getInstance();
         if ($commerce !== null) {
             // Get all of the calendars with URLs
-            $productTypes = $commerce->productTypes->getAllProductTypes();
+            $productTypes = $commerce->getProductTypes()->getAllProductTypes();
             foreach ($productTypes as $productType) {
                 self::createContentMetaBundle($productType);
             }
