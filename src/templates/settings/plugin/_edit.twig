@@ -11,6 +11,7 @@
     "appearance": {label: "Appearance"|t('seomatic'), url: "#appearance"},
     "titles": {label: "Titles"|t('seomatic'), url: "#titles"},
     "tags": {label: "Tags"|t('seomatic'), url: "#tags"},
+    "advanced": {label: "Advanced"|t('seomatic'), url: "#advanced"},
 } %}
 
 {% block content %}
@@ -31,6 +32,9 @@
 
     {# -- Tag settings -- #}
     {% include "seomatic/settings/plugin/_includes/tags.twig" %}
+
+    {# -- Advanced settings -- #}
+    {% include "seomatic/settings/plugin/_includes/advanced.twig" %}
 
 {% endblock %}
 

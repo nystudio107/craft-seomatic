@@ -110,6 +110,10 @@ return [
     // ElementAPI server, you can override what it uses for the `siteUrl` below.
     'siteUrlOverride' => '',
 
+    // The duration of the SEOmatic meta cache in seconds. Null means always cached until explicitly broken
+    // If devMode is on, caches last 30 seconds.
+    'metaCacheDuration' => null,
+
     // SeoElementInterface[] The default SeoElement type classes
     'defaultSeoElementTypes' => [
     ],
