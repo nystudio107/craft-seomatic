@@ -14,6 +14,7 @@ namespace nystudio107\seomatic\services;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\seoelements\SeoCategory;
+use nystudio107\seomatic\seoelements\SeoDigitalProduct;
 use nystudio107\seomatic\seoelements\SeoEntry;
 use nystudio107\seomatic\seoelements\SeoEvent;
 use nystudio107\seomatic\seoelements\SeoProduct;
@@ -56,6 +57,7 @@ class SeoElements extends Component
 
     const DEFAULT_SEO_ELEMENT_TYPES = [
         SeoCategory::class,
+        SeoDigitalProduct::class,
         SeoEntry::class,
         SeoEvent::class,
         SeoProduct::class,

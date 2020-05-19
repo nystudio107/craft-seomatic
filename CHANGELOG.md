@@ -1,5 +1,16 @@
 # SEOmatic Changelog
 
+## 3.3.4 - 2020.05.18
+### Added
+* Added support for Digital Products
+* Added a **Meta Cache Duration** setting under Plugin Settings → Advanced
+* Added the ability to control anonymous access to the Meta Container & JSON-LD endpoints (with both **off** by default)
+
+### Fixed
+* Fixed a namespacing issue for UrlHelper on certain versions of PHP
+* Don't call `metaBundles->getMetaBundleBySourceId()` unless there are no pending plugin migrations
+* Fixed an issue where element caches were not broken on element save for elements with `__home__` for the URI
+
 ## 3.3.3 - 2020.05.12
 ### Changed
 * Wrap the JSON-LD encoding in try/catch to handle malformed characters

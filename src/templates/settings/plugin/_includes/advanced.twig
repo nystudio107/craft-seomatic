@@ -1,0 +1,70 @@
+{% import "_includes/forms" as forms %}
+{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
+
+<div id="advanced" class="hidden">
+    {% namespace "settings" %}
+
+        {{ forms.lightswitchField({
+            label: "Site Groups define logically separate sites"|t("seomatic"),
+            instructions: "If you are using Site Groups to logically separate 'sister sites', turn this on."|t("seomatic"),
+            id: "siteGroupsSeparate",
+            name: "siteGroupsSeparate",
+            on: settings.siteGroupsSeparate,
+            warning: configWarning("siteGroupsSeparate", "seomatic"),
+            errors: settings.getErrors("siteGroupsSeparate"),
+        }) }}
+
+        {{ forms.lightswitchField({
+            label: "Lowercase Canonical URL"|t("seomatic")|md,
+            instructions: "Should the Canonical URL be automatically lower-cased?"|t("seomatic"),
+            id: "lowercaseCanonicalUrl",
+            name: "lowercaseCanonicalUrl",
+            on: settings.lowercaseCanonicalUrl,
+            warning: configWarning("lowercaseCanonicalUrl", "seomatic"),
+            errors: settings.getErrors("lowercaseCanonicalUrl"),
+        }) }}
+
+        {% if seomatic.helper.craft31 %}
+            {{ forms.autosuggestField({
+                label: "Site URL Override"|t("seomatic"),
+                instructions: "SEOmatic uses the Craft `siteUrl` to generate the external URLs.  If you are using it in a non-standard environment, such as a headless GraphQL or ElementAPI server, you can override what it uses for the `siteUrl` below."|t("seomatic"),
+                suggestEnvVars: true,
+                suggestAliases: true,
+                id: "siteUrlOverride",
+                name: "siteUrlOverride",
+                value: settings.siteUrlOverride,
+                warning: configWarning("siteUrlOverride", "seomatic"),
+                errors: settings.getErrors("siteUrlOverride"),
+            }) }}
+        {% else %}
+            {{ forms.textField({
+                label: "Site URL Override"|t("seomatic"),
+                instructions: "SEOmatic uses the Craft `siteUrl` to generate the external URLs.  If you are using it in a non-standard environment, such as a headless GraphQL or ElementAPI server, you can override what it uses for the `siteUrl` below."|t("seomatic"),
+                id: "siteUrlOverride",
+                name: "siteUrlOverride",
+                value: settings.siteUrlOverride,
+                warning: configWarning("siteUrlOverride", "seomatic"),
+                errors: settings.getErrors("siteUrlOverride"),
+            }) }}
+        {% endif %}
+
+        {{ forms.selectField({
+            label: "Meta Cache Duration"|t("seomatic"),
+            instructions: "The duration of the SEOmatic meta cache. The default Unlimited setting is typically desired, as SEOmatic will break the cache as needed. If `devMode` is on, caches last 30 seconds."|t("seomatic"),
+            id: "metaCacheDuration",
+            name: "metaCacheDuration",
+            value: settings.metaCacheDuration,
+            options: {
+                null: "Unlimited"|t("seomatic"),
+                31556952: "1 year"|t("seomatic"),
+                2592000: "1 month"|t("seomatic"),
+                604800: "1 week"|t("seomatic"),
+                86400: "1 day"|t("seomatic"),
+                3600: "1 hour"|t("seomatic"),
+            },
+            warning: configWarning("metaCacheDuration", "seomatic"),
+            errors: settings.getErrors("metaCacheDuration"),
+        }) }}
+
+    {% endnamespace %}
+</div>

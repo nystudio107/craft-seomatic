@@ -25,6 +25,7 @@ return [
     'sourceName'                 => null,
     'sourceHandle'               => null,
     'sourceType'                 => 'event',
+    'typeId'                     => null,
     'sourceTemplate'             => '',
     'sourceSiteId'               => null,
     'sourceAltSiteSettings'      => [

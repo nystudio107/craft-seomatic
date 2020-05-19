@@ -13,7 +13,7 @@ namespace nystudio107\seomatic\helpers;
 
 use Craft;
 use craft\helpers\Json as JsonHelper;
-use craft\helpers\UrlHelper;
+use craft\helpers\UrlHelper as CraftUrlHelper;
 
 use yii\base\Exception;
 use yii\caching\TagDependency;
@@ -186,7 +186,7 @@ EOT;
                 ? $config['devServer']['publicPath']
                 : $config['server']['publicPath'];
             // If the module isn't a full URL, prefix it
-            if (!UrlHelper::isAbsoluteUrl($module)) {
+            if (!CraftUrlHelper::isAbsoluteUrl($module)) {
                 $module = self::combinePaths($prefix, $module);
             }
             // Resolve any aliases
@@ -195,9 +195,9 @@ EOT;
                 $module = $alias;
             }
             // Make sure it's a full URL
-            if (!UrlHelper::isAbsoluteUrl($module) && !is_file($module)) {
+            if (!CraftUrlHelper::isAbsoluteUrl($module) && !is_file($module)) {
                 try {
-                    $module = UrlHelper::siteUrl($module);
+                    $module = CraftUrlHelper::siteUrl($module);
                 } catch (Exception $e) {
                     Craft::error($e->getMessage(), __METHOD__);
                 }
@@ -365,9 +365,9 @@ EOT;
             $path = $alias;
         }
         // Make sure it's a full URL
-        if (!UrlHelper::isAbsoluteUrl($path) && !is_file($path)) {
+        if (!CraftUrlHelper::isAbsoluteUrl($path) && !is_file($path)) {
             try {
-                $path = UrlHelper::siteUrl($path);
+                $path = CraftUrlHelper::siteUrl($path);
             } catch (Exception $e) {
                 Craft::error($e->getMessage(), __METHOD__);
             }
