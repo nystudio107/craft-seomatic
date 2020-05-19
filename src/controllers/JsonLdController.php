@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\controllers;
 
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\Schema as SchemaHelper;
 
 use craft\web\Controller;
@@ -41,6 +42,18 @@ class JsonLdController extends Controller
 
     // Public Methods
     // =========================================================================
+
+    /**
+     * @inheritDoc
+     */
+    public function beforeAction($action)
+    {
+        if (!Seomatic::$settings->enableJsonLdEndpoint) {
+            $this->allowAnonymous = false;
+        }
+
+        return parent::beforeAction($action);
+    }
 
     /**
      * Get the fully composed schema type

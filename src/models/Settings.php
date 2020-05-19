@@ -165,6 +165,16 @@ class Settings extends VarsModel
     public $metaCacheDuration = null;
 
     /**
+     * @var bool Determines whether the meta container endpoint should be enabled for anonymous frontend access
+     */
+    public $enableMetaContainerEndpoint = false;
+
+    /**
+     * @var bool Determines whether the JSON-LD endpoint should be enabled for anonymous frontend access
+     */
+    public $enableJsonLdEndpoint = false;
+
+    /**
      * @var SeoElementInterface[] The default SeoElement type classes
      */
     public $defaultSeoElementTypes = [
