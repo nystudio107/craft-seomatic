@@ -444,5 +444,20 @@ return [
     'Controls whether SEOmatic will automatically include `hreflang` tags on paginated pages. [Learn More](https://webmasters.googleblog.com/2013/04/x-default-hreflang-for-international-pages.html)' => 'Controls whether SEOmatic will automatically include `hreflang` tags on paginated pages. [Learn More](https://webmasters.googleblog.com/2013/04/x-default-hreflang-for-international-pages.html)',
     'Controls whether SEOmatic will automatically include `hreflang` tags on paginated pages. [Learn More](https://moz.com/community/q/hreflang-alternate-pagination)' => 'Controls whether SEOmatic will automatically include `hreflang` tags on paginated pages. [Learn More](https://moz.com/community/q/hreflang-alternate-pagination)',
     'Submit Sitemap Changes' => 'Submit Sitemap Changes',
-    'Include Paginated `hreflang` Tags' => 'Include Paginated `hreflang` Tags'
+    'Include Paginated `hreflang` Tags' => 'Include Paginated `hreflang` Tags',
+    '1 hour' => '1 hour',
+    'Advanced' => 'Advanced',
+    'Meta Cache Duration' => 'Meta Cache Duration',
+    'The duration of the SEOmatic meta cache. The default Unlimited setting is typically desired, as SEOmatic will break the cache as needed. If `devMode` is on, caches last 30 seconds.' => 'The duration of the SEOmatic meta cache. The default Unlimited setting is typically desired, as SEOmatic will break the cache as needed. If `devMode` is on, caches last 30 seconds.',
+    'Whether anonymous access to the Meta Container endpoint should be allowed' => 'Whether anonymous access to the Meta Container endpoint should be allowed',
+    '1 day' => '1 day',
+    'Endpoints' => 'Endpoints',
+    '1 month' => '1 month',
+    'Meta Container Endpoint Access' => 'Meta Container Endpoint Access',
+    '1 year' => '1 year',
+    'Whether URLs to alternate translations should be included in the sitemap' => 'Whether URLs to alternate translations should be included in the sitemap',
+    'Whether anonymous access to the JSON-LD endpoint should be allowed' => 'Whether anonymous access to the JSON-LD endpoint should be allowed',
+    'Unlimited' => 'Unlimited',
+    'JSON-LD Endpoint Access' => 'JSON-LD Endpoint Access',
+    '1 week' => '1 week'
 ];
