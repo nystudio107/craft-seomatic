@@ -6,7 +6,7 @@
  * and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2019 nystudio107
+ * @copyright Copyright (c) 2020 nystudio107
  */
 
 namespace nystudio107\seomatic\seoelements;
@@ -25,31 +25,30 @@ use craft\base\Model;
 use craft\elements\db\ElementQueryInterface;
 use craft\models\Site;
 
-use craft\commerce\Plugin as CommercePlugin;
-use craft\commerce\elements\Product;
-use craft\commerce\events\ProductTypeEvent;
-use craft\commerce\models\ProductType;
-use craft\commerce\services\ProductTypes;
+use craft\digitalproducts\Plugin as DigitalProductsPlugin;
+use craft\digitalproducts\elements\Product;
+use craft\digitalproducts\events\ProductTypeEvent;
+use craft\digitalproducts\models\ProductType;
+use craft\digitalproducts\services\ProductTypes;
 
 use yii\base\Event;
-use yii\base\InvalidConfigException;
 
 /**
  * @author    nystudio107
  * @package   Seomatic
- * @since     3.2.0
+ * @since     3.3.4
  */
-class SeoProduct implements SeoElementInterface
+class SeoDigitalProduct implements SeoElementInterface
 {
     // Constants
     // =========================================================================
 
-    const META_BUNDLE_TYPE = 'product';
+    const META_BUNDLE_TYPE = 'digitalproduct';
     const ELEMENT_CLASSES = [
         Product::class,
     ];
-    const REQUIRED_PLUGIN_HANDLE = 'commerce';
-    const CONFIG_FILE_PATH = 'productmeta/Bundle';
+    const REQUIRED_PLUGIN_HANDLE = 'digital-products';
+    const CONFIG_FILE_PATH = 'digitalproductmeta/Bundle';
 
     // Public Static Methods
     // =========================================================================
@@ -107,7 +106,8 @@ class SeoProduct implements SeoElementInterface
             Event::on(
                 ProductTypes::class,
                 ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE,
-                static function (ProductTypeEvent $event) {
+                /** @var ProductTypeEvent $event */
+                static function ($event) {
                     Craft::debug(
                         'ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE',
                         __METHOD__
@@ -160,10 +160,10 @@ class SeoProduct implements SeoElementInterface
 
         // Install only for non-console Control Panel requests
         if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
-            // Commerce Product Types sidebar
-            $commerce = CommercePlugin::getInstance();
-            if ($commerce !== null) {
-                Seomatic::$view->hook('cp.commerce.product.edit.details', static function (&$context) {
+            // Digital Product Types sidebar
+            $digitalProducts = DigitalProductsPlugin::getInstance();
+            if ($digitalProducts !== null) {
+                Seomatic::$view->hook('cp.digital-products.product.edit.details', static function (&$context) {
                     $html = '';
                     Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
                     /** @var  $product Product */
@@ -262,11 +262,11 @@ class SeoProduct implements SeoElementInterface
     public static function fieldLayouts(string $sourceHandle): array
     {
         $layouts = [];
-        $commerce = CommercePlugin::getInstance();
-        if ($commerce !== null) {
+        $digitalProducts = DigitalProductsPlugin::getInstance();
+        if ($digitalProducts !== null) {
             $layoutId = null;
             try {
-                $productType = $commerce->getProductTypes()->getProductTypeByHandle($sourceHandle);
+                $productType = $digitalProducts->getProductTypes()->getProductTypeByHandle($sourceHandle);
                 if ($productType) {
                     $layoutId = $productType->getFieldLayoutId();
                 }
@@ -303,9 +303,9 @@ class SeoProduct implements SeoElementInterface
     public static function sourceModelFromId(int $sourceId)
     {
         $productType = null;
-        $commerce = CommercePlugin::getInstance();
-        if ($commerce !== null) {
-            $productType = $commerce->getProductTypes()->getProductTypeById($sourceId);
+        $digitalProducts = DigitalProductsPlugin::getInstance();
+        if ($digitalProducts !== null) {
+            $productType = $digitalProducts->getProductTypes()->getProductTypeById($sourceId);
         }
 
         return $productType;
@@ -321,9 +321,9 @@ class SeoProduct implements SeoElementInterface
     public static function sourceModelFromHandle(string $sourceHandle)
     {
         $productType = null;
-        $commerce = CommercePlugin::getInstance();
-        if ($commerce !== null) {
-            $productType = $commerce->getProductTypes()->getProductTypeByHandle($sourceHandle);
+        $digitalProducts = DigitalProductsPlugin::getInstance();
+        if ($digitalProducts !== null) {
+            $productType = $digitalProducts->getProductTypes()->getProductTypeByHandle($sourceHandle);
         }
 
         return $productType;
@@ -417,7 +417,7 @@ class SeoProduct implements SeoElementInterface
         /** @var Product $element */
         try {
             $sourceHandle = $element->getType()->handle;
-        } catch (InvalidConfigException $e) {
+        } catch (\Exception $e) {
         }
 
         return $sourceHandle;
@@ -445,10 +445,10 @@ class SeoProduct implements SeoElementInterface
      */
     public static function createAllContentMetaBundles()
     {
-        $commerce = CommercePlugin::getInstance();
-        if ($commerce !== null) {
+        $digitslProducts = DigitalProductsPlugin::getInstance();
+        if ($digitslProducts !== null) {
             // Get all of the calendars with URLs
-            $productTypes = $commerce->getProductTypes()->getAllProductTypes();
+            $productTypes = $digitslProducts->getProductTypes()->getAllProductTypes();
             foreach ($productTypes as $productType) {
                 self::createContentMetaBundle($productType);
             }

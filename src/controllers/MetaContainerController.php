@@ -9,6 +9,7 @@
 
 namespace nystudio107\seomatic\controllers;
 
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\Container as ContainerHelper;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 use nystudio107\seomatic\models\MetaLinkContainer;
@@ -46,6 +47,18 @@ class MetaContainerController extends Controller
 
     // Public Methods
     // =========================================================================
+
+    /**
+     * @inheritDoc
+     */
+    public function beforeAction($action)
+    {
+        if (!Seomatic::$settings->enableMetaContainerEndpoint) {
+            $this->allowAnonymous = false;
+        }
+
+        return parent::beforeAction($action);
+    }
 
     /**
      * Return all of the containers

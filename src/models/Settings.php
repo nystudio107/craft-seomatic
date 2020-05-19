@@ -149,10 +149,30 @@ class Settings extends VarsModel
      */
     public $generatorEnabled = true;
 
-    // SEOmatic uses the Craft `siteUrl` to generate the external URLs.  If you
-    // are using it in a non-standard environment, such as a headless GraphQL or
-    // ElementAPI server, you can override what it uses for the `siteUrl` below.
+    /**
+     * @var string
+     * SEOmatic uses the Craft `siteUrl` to generate the external URLs.  If you
+     * are using it in a non-standard environment, such as a headless GraphQL or
+     * ElementAPI server, you can override what it uses for the `siteUrl` below.
+     */
     public $siteUrlOverride = '';
+
+    /**
+     * @var int|null
+     * The duration of the SEOmatic meta cache in seconds.  Null means always cached until explicitly broken
+     * If devMode is on, caches last 30 seconds.
+     */
+    public $metaCacheDuration = null;
+
+    /**
+     * @var bool Determines whether the meta container endpoint should be enabled for anonymous frontend access
+     */
+    public $enableMetaContainerEndpoint = false;
+
+    /**
+     * @var bool Determines whether the JSON-LD endpoint should be enabled for anonymous frontend access
+     */
+    public $enableJsonLdEndpoint = false;
 
     /**
      * @var SeoElementInterface[] The default SeoElement type classes

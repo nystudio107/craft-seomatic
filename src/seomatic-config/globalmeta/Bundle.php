@@ -25,6 +25,7 @@ return [
     'sourceName'                 => MetaBundles::GLOBAL_META_BUNDLE,
     'sourceHandle'               => MetaBundles::GLOBAL_META_BUNDLE,
     'sourceType'                 => MetaBundles::GLOBAL_META_BUNDLE,
+    'typeId'                     => null,
     'sourceTemplate'             => '',
     'sourceSiteId'               => null,
     'sourceAltSiteSettings'      => [

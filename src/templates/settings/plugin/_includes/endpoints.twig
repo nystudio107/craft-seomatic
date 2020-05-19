@@ -1,0 +1,28 @@
+{% import "_includes/forms" as forms %}
+{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
+
+<div id="endpoints" class="hidden">
+    {% namespace "settings" %}
+
+        {{ forms.lightswitchField({
+            label: "Meta Container Endpoint Access"|t("seomatic"),
+            instructions: "Whether anonymous access to the Meta Container endpoint should be allowed"|t("seomatic"),
+            id: "enableMetaContainerEndpoint",
+            name: "enableMetaContainerEndpoint",
+            on: settings.enableMetaContainerEndpoint,
+            warning: configWarning("enableMetaContainerEndpoint", "seomatic"),
+            errors: settings.getErrors("enableMetaContainerEndpoint"),
+        }) }}
+
+        {{ forms.lightswitchField({
+            label: "JSON-LD Endpoint Access"|t("seomatic"),
+            instructions: "Whether anonymous access to the JSON-LD endpoint should be allowed"|t("seomatic"),
+            id: "enableJsonLdEndpoint",
+            name: "enableJsonLdEndpoint",
+            on: settings.enableJsonLdEndpoint,
+            warning: configWarning("enableJsonLdEndpoint", "seomatic"),
+            errors: settings.getErrors("enableJsonLdEndpoint"),
+        }) }}
+
+    {% endnamespace %}
+</div>

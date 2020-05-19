@@ -262,10 +262,6 @@ Is the same as:
 You can even do complex expressions, such as the following which outputs the first field that isn't empty, or a default text:
 
 ```twig
-{entry.description ??? entry.summary ??? "Some default text"}
-```
-Is the same as:
-```twig
 {{ object.entry.description ??? object.entry.summary ??? "Some default text" }}
 ```
 
