@@ -4,6 +4,7 @@
 ### Added
 * Added support for Digital Products
 * Added a **Meta Cache Duration** setting under Plugin Settings → Advanced
+* Added the ability to control anonymous access to the Meta Container & JSON-LD endpoints (with both **off** by default)
 
 ### Fixed
 * Fixed a namespacing issue for UrlHelper on certain versions of PHP
