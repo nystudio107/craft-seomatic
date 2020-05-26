@@ -42,26 +42,6 @@ class ContentSeoController extends Controller
         'sourceType',
     ];
 
-    const CONTENT_SEO_COLUMNS = [
-        'bundleVersion',
-        'sourceType',
-        'sourceName',
-        'sourceHandle',
-        'sourceTemplate',
-        'sourceSiteId',
-        'sourceId',
-        'typeId',
-        'sourceDateUpdated',
-        'sourceAltSiteSettings',
-        'metaContainers',
-        'redirectsContainer',
-        'metaGlobalVars',
-        'metaSiteVars',
-        'metaSitemapVars',
-        'metaBundleSettings',
-        'frontendTemplatesContainer',
-    ];
-
     // Protected Properties
     // =========================================================================
 

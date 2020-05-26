@@ -20,7 +20,9 @@ Click on any of the graphs to jump to the section in question to fill things out
 
 ## Global SEO
 
-**Global SEO** is where you set all of the default site-wide settings.
+**Global SEO** is where you set all of the default site-wide settings. The **Copy Settings From:** dropdown allows you to easily copy settings from one site to another.
+
+SEOmatic allows you to have different Global SEO settings on a per-site basis.
 
 ### General
 
@@ -117,6 +119,8 @@ The single bracket syntax is just a shortcut that automatically prefixes any var
 ![Screenshot](./resources/screenshots/seomatic-content.png)
 
 **Content SEO** is where you can configure each Section, Category Group and Commerce Product Type that has public URLs. You'll see a list of all of your Sections, Category Groups, and Commerce Product Types that have public URLs, with status indicators letting you know what has been configured for each.
+
+SEOmatic allows you to have different Content SEO settings on a per-site basis, and also on a per-[Entry Type](https://docs.craftcms.com/v3/sections-and-entries.html#entry-types) basis.
 
 Click on a Section, Category Group, or Commerce Product Type name to edit its settings.
 
@@ -299,7 +303,17 @@ Leave any fields blank that aren't applicable or which you do not want as part o
 
 The social media settings connect your website to its other points of pressence on the Internet. They also facilitate attaching your branding to social media posts via Twitter Cards and Facebook OpenGraph.
 
+### Sitemap
 
+![Screenshot](./resources/screenshots/seomatic-site-sitemap.png)
+
+SEOmatic will automatically create a sitemap for each of your sections, but if you have additional sitemaps or individual URLs that are outside of the CMS that you want to include, you can add them here.
+
+### Miscellaneous
+
+![Screenshot](./resources/screenshots/seomatic-site-misc.png)
+
+Miscellaneous site-wide SEO settings.
 
 ## Tracking Scripts
 
@@ -361,6 +375,30 @@ If you want to include the Facebook Pixel script despite `devMode` being enabled
 {% do seomatic.script.get('facebookPixel').include(true) %}
 ```
 
+### LinkedIn Insight
+
+![Screenshot](./resources/screenshots/seomatic-tracking-li.png)
+
+The LinkedIn Insight Tag is a lightweight JavaScript tag that powers conversion tracking, retargeting, and web analytics for LinkedIn ad campaigns.
+
+If you want to include the LinkedIn Insight script despite `devMode` being enabled, you can do:
+
+```twig
+{% do seomatic.script.get('linkedInInsight').include(true) %}
+```
+
+### HubSpot
+
+![Screenshot](./resources/screenshots/seomatic-tracking-hs.png)
+
+If you're not hosting your entire website on HubSpot, or have pages on your website that are not hosted on HubSpot, you'll need to install the HubSpot tracking code on your non-HubSpot pages in order to capture those analytics.
+
+If you want to include the HubSpot script despite `devMode` being enabled, you can do:
+
+```twig
+{% do seomatic.script.get('hubSpot').include(true) %}
+```
+
 ### Plugin Settings
 
 ![Screenshot](./resources/screenshots/seomatic-plugin-settings.png)
@@ -415,6 +453,9 @@ return [
     // Should sitemaps be regenerated automatically?
     'regenerateSitemapsAutomatically' => true,
 
+    // Should sitemaps be submitted to search engines automatically whenever there are changes?
+    'submitSitemaps' => true,
+
     // Should SEOmatic add to the http response headers?
     'headersEnabled' => true,
 
@@ -461,8 +502,32 @@ return [
     // Whether to dynamically include the hreflang tags
     'addHrefLang' => true,
 
+    // Whether to dynamically include the `x-default` hreflang tags
+    'addXDefaultHrefLang' => true,
+
+    // Whether to dynamically include hreflang tags on paginated pages
+    'addPaginatedHreflang' => true,
+
+    // Should the Canonical URL be automatically lower-cased?
+    'lowercaseCanonicalUrl' => true,
+
     // Should the meta generator tag and X-Powered-By header be included?
     'generatorEnabled' => true,
+
+    // SEOmatic uses the Craft `siteUrl` to generate the external URLs.  If you
+    // are using it in a non-standard environment, such as a headless GraphQL or
+    // ElementAPI server, you can override what it uses for the `siteUrl` below.
+    'siteUrlOverride' => '',
+
+    // The duration of the SEOmatic meta cache in seconds. Null means always cached until explicitly broken
+    // If devMode is on, caches last 30 seconds.
+    'metaCacheDuration' => null,
+
+    // Determines whether the meta container endpoint should be enabled for anonymous frontend access
+    'enableMetaContainerEndpoint' => false,
+
+    // Determines whether the JSON-LD endpoint should be enabled for anonymous frontend access
+    'enableJsonLdEndpoint' => false,
 
     // SeoElementInterface[] The default SeoElement type classes
     'defaultSeoElementTypes' => [

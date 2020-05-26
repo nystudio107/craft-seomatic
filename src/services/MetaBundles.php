@@ -144,12 +144,15 @@ class MetaBundles extends Component
         // Make sure it validates
         if ($metaBundle->validate(null, true)) {
             // Save it out to a record
-            $metaBundleRecord = MetaBundleRecord::findOne([
+            $params = [
                 'sourceBundleType' => $metaBundle->sourceBundleType,
                 'sourceId' => $metaBundle->sourceId,
                 'sourceSiteId' => $siteId,
-                'typeId' => $metaBundle->typeId,
-            ]);
+            ];
+            if (!empty($metaBundle->typeId)) {
+                $params['typeId'] = $metaBundle->typeId;
+            }
+            $metaBundleRecord = MetaBundleRecord::findOne($params);
 
             if (!$metaBundleRecord) {
                 $metaBundleRecord = new MetaBundleRecord();
@@ -201,14 +204,21 @@ class MetaBundles extends Component
             }
         }
         // Look for a matching meta bundle in the db
-        $metaBundleArray = (new Query())
+        $query = (new Query())
             ->from(['{{%seomatic_metabundles}}'])
             ->where([
                 'sourceBundleType' => $sourceBundleType,
                 'sourceId' => $sourceId,
                 'sourceSiteId' => $sourceSiteId,
-                'typeId' => $typeId,
             ])
+            ;
+        if (!empty($typeId)) {
+            $query
+                ->andWhere([
+                    'typeId' => $typeId,
+                ]);
+        }
+        $metaBundleArray = $query
             ->one();
         // If the specific query with a `typeId` returned nothing, try a more general query without `typeId`
         if (empty($metaBundleArray)) {
@@ -262,14 +272,21 @@ class MetaBundles extends Component
             }
         }
         // Look for a matching meta bundle in the db
-        $metaBundleArray = (new Query())
+        $query = (new Query())
             ->from(['{{%seomatic_metabundles}}'])
             ->where([
                 'sourceBundleType' => $sourceBundleType,
                 'sourceHandle' => $sourceHandle,
                 'sourceSiteId' => $sourceSiteId,
-                'typeId' => $typeId,
             ])
+            ;
+        if (!empty($typeId)) {
+            $query
+                ->andWhere([
+                    'typeId' => $typeId,
+                ]);
+        }
+        $metaBundleArray = $query
             ->one();
         // If the specific query with a `typeId` returned nothing, try a more general query without `typeId`
         if (empty($metaBundleArray)) {
