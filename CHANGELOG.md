@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.3.5 - 2020.05.27
+## 3.3.5 - 2020.05.26
 ### Fixed
 * Fixed an issue with Digital Products throwing an error on saving SEOmatic Content SEO settings
 * Fixed an issue that could cause an SQL error when saving Content SEO settings on Postgres
