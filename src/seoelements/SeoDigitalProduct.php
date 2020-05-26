@@ -80,7 +80,7 @@ class SeoDigitalProduct implements SeoElementInterface
      */
     public static function getElementRefHandle(): string
     {
-        return Product::refHandle();
+        return Product::refHandle() ?? 'product';
     }
 
     /**
