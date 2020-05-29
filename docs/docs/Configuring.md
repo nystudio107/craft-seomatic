@@ -433,6 +433,7 @@ In `local` dev and `staging` environments, the following things change:
 1. `<meta name="robots">` tags are rendered with `none` to prevent Google from indexing the pages
 2. The `robots.txt` page is rendered to disallow all indexing
 3. No scripts are loaded on the page, to prevent errant data being sent to endpoints
+4. Because the `<meta name="robots">` tag is set to `none`, the `<link rel="canonical">` is not rendered
 
 You can override all of these things as you see fit, but they are automatically changed in this manner to help protect you from having pages indexed or sending data from environments where you should not.
 
