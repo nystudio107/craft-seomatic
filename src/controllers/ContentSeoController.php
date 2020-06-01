@@ -101,35 +101,44 @@ class ContentSeoController extends Controller
 
         // Query the db table
         $offset = ($page - 1) * $per_page;
-        $subQuery = (new Query())
-            ->from(['{{%seomatic_metabundles}}'])
-            ->where(['!=', 'sourceBundleType', Seomatic::$plugin->metaBundles::GLOBAL_META_BUNDLE]);
 
         $currentSiteHandle = '';
         if ((int)$siteId !== 0) {
-            $subQuery->andWhere(['sourceSiteId' => $siteId]);
             $site = Craft::$app->getSites()->getSiteById($siteId);
             if ($site !== null) {
                 $currentSiteHandle = $site->handle;
             }
         }
-        if ($filter !== '') {
-            $subQuery->andWhere(['like', 'sourceName', $filter]);
-        }
         $bundleQuery = (new Query())
             ->select(['mb.*'])
-            ->from(['mb' => $subQuery])
-            ->leftJoin(['mb2' => $subQuery], [
-                'and',
-                '[[mb.sourceId]] = [[mb2.sourceId]]',
-                '[[mb.id]] < [[mb2.id]]'
-            ])
-            ->where(['mb2.id' => null])
             ->offset($offset)
             ->limit($per_page)
             ->orderBy($sortParams)
             ;
 
+        // Since sectionIds, CategoryIds, etc. are not unique, we need to special case for them
+        $seoElements = Seomatic::$plugin->seoElements->getAllSeoElementTypes();
+        $tableIndex = 1;
+        foreach ($seoElements as $seoElement) {
+            $tableIndex++;
+            $subQuery = (new Query())
+                ->from(['{{%seomatic_metabundles}}'])
+                ->where(['=', 'sourceBundleType', $seoElement::META_BUNDLE_TYPE]);
+            if ((int)$siteId !== 0) {
+                $subQuery->andWhere(['sourceSiteId' => $siteId]);
+            }
+            if ($filter !== '') {
+                $subQuery->andWhere(['like', 'sourceName', $filter]);
+            }
+            $bundleQuery
+                ->where(['mb'.$tableIndex.'.id' => null])
+                ->from(['mb' => $subQuery])
+                ->leftJoin(['mb'.$tableIndex => $subQuery], [
+                    'and',
+                    '[[mb.sourceId]] = [[mb'.$tableIndex.'.sourceId]]',
+                    '[[mb.id]] < [[mb'.$tableIndex.'.id]]'
+                ]);
+        }
         $bundles = $bundleQuery->all();
         if ($bundles) {
             $dataArray = [];
