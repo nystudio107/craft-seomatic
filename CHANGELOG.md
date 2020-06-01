@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.6 - 2020.06.01
+### Fixed
+* Fixed an issue where some Sections might not appear in Content SEO if they had overlapping ids
+
 ## 3.3.5 - 2020.05.26
 ### Fixed
 * Fixed an issue with Digital Products throwing an error on saving SEOmatic Content SEO settings
