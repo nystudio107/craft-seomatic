@@ -74,7 +74,6 @@ class ContentSeoController extends Controller
         $filter = '',
         $siteId = 0
     ): Response {
-        $per_page = 2;
         $data = [];
         $sortField = 'sourceName';
         $sortType = 'ASC';
