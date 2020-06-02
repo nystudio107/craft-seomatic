@@ -2,7 +2,26 @@
 {% import "_includes/forms" as forms %}
 
 {% namespace "site" %}
-<div class="field">
+    {{ forms.selectField({
+        label: "Referrer"|t("seomatic"),
+        instructions: "The Referrer setting controls how much referrer information (sent via the Referer header) should be included with requests. [Learn More](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy)"|t("seomatic"),
+        id: "referrer",
+        name: "referrer",
+        options: {
+            "no-referrer": "no-referrer",
+            "no-referrer-when-downgrade": "no-referrer-when-downgrade",
+            "origin": "origin",
+            "origin-when-cross-origin": "origin-when-cross-origin",
+            "same-origin": "same-origin",
+            "strict-origin": "strict-origin",
+            "strict-origin-when-cross-origin": "strict-origin-when-cross-origin",
+            "unsafe-url": "unsafe-url",
+        },
+        value: site.referrer,
+        errors: site.getErrors("referrer"),
+    }) }}
+
+    <div class="field">
     <div class="heading">
         <h2>{{ "SiteLinks Search Box"|t("seomatic") }}</h2>
         <div class="instructions">
