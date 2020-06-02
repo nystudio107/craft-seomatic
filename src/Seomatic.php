@@ -647,7 +647,7 @@ class Seomatic extends Plugin
                         'name' => 'seomatic',
                         'type' => SeomaticInterface::getType(),
                         'args' => SeomaticArguments::getArguments(),
-                        'resolve' => SeomaticResolver::resolve(),
+                        'resolve' => SeomaticResolver::class . '::resolve',
                         'description' => Craft::t('seomatic', 'This query is used to query for SEOmatic meta data.')
                     ];
                 }
