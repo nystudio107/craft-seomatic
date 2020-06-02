@@ -53,7 +53,7 @@ return [
             ],
             'referrer'    => [
                 'charset'   => '',
-                'content'   => 'no-referrer-when-downgrade',
+                'content'   => '{seomatic.site.referrer}',
                 'httpEquiv' => '',
                 'name'      => 'referrer',
             ],
