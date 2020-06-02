@@ -35,7 +35,7 @@ class SeomaticQuery extends Query
             'seomatic' => [
                 'type' => SeomaticInterface::getType(),
                 'args' => SeomaticArguments::getArguments(),
-                'resolve' => SeomaticResolver::resolve(),
+                'resolve' => SeomaticResolver::class . '::resolve',
                 'description' => 'This query is used to query for SEOmatic meta data.'
             ],
         ];
