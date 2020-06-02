@@ -10,6 +10,7 @@
 namespace nystudio107\seomatic\controllers;
 
 use nystudio107\seomatic\base\SeoElementInterface;
+use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\services\SeoElements;
@@ -73,6 +74,7 @@ class ContentSeoController extends Controller
         $filter = '',
         $siteId = 0
     ): Response {
+        $per_page = 2;
         $data = [];
         $sortField = 'sourceName';
         $sortType = 'ASC';
@@ -101,7 +103,6 @@ class ContentSeoController extends Controller
 
         // Query the db table
         $offset = ($page - 1) * $per_page;
-
         $currentSiteHandle = '';
         if ((int)$siteId !== 0) {
             $site = Craft::$app->getSites()->getSiteById($siteId);
@@ -109,38 +110,38 @@ class ContentSeoController extends Controller
                 $currentSiteHandle = $site->handle;
             }
         }
-        $bundleQuery = (new Query())
-            ->select(['mb.*'])
-            ->offset($offset)
-            ->limit($per_page)
-            ->orderBy($sortParams)
-            ;
 
-        // Since sectionIds, CategoryIds, etc. are not unique, we need to special case for them
+        $bundles = [];
+        // Since sectionIds, CategoryIds, etc. are not unique, we need to do separate queries and combine them
         $seoElements = Seomatic::$plugin->seoElements->getAllSeoElementTypes();
-        $tableIndex = 1;
         foreach ($seoElements as $seoElement) {
-            $tableIndex++;
+
             $subQuery = (new Query())
                 ->from(['{{%seomatic_metabundles}}'])
                 ->where(['=', 'sourceBundleType', $seoElement::META_BUNDLE_TYPE]);
+
             if ((int)$siteId !== 0) {
                 $subQuery->andWhere(['sourceSiteId' => $siteId]);
             }
             if ($filter !== '') {
                 $subQuery->andWhere(['like', 'sourceName', $filter]);
             }
-            $bundleQuery
-                ->where(['mb'.$tableIndex.'.id' => null])
+            $bundleQuery = (new Query())
+                ->select(['mb.*'])
                 ->from(['mb' => $subQuery])
-                ->leftJoin(['mb'.$tableIndex => $subQuery], [
+                ->leftJoin(['mb2' => $subQuery], [
                     'and',
-                    '[[mb.sourceId]] = [[mb'.$tableIndex.'.sourceId]]',
-                    '[[mb.id]] < [[mb'.$tableIndex.'.id]]'
-                ]);
+                    '[[mb.sourceId]] = [[mb2.sourceId]]',
+                    '[[mb.id]] < [[mb2.id]]'
+                ])
+                ->where(['mb2.id' => null])
+            ;
+            $bundles = array_merge($bundles, $bundleQuery->all());
         }
-        $bundles = $bundleQuery->all();
         if ($bundles) {
+            // Sort it manually
+            ArrayHelper::multisort($bundles, $sortField, $sortType);
+            $bundles = array_slice($bundles, $offset, $per_page);
             $dataArray = [];
             // Add in the `addLink` field
             foreach ($bundles as $bundle) {
