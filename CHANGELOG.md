@@ -2,6 +2,7 @@
 
 ## 3.3.6 - 2020.06.02
 ### Added
+* Added support for querying for SEOmatic metadata via GraphQL inside of Entry, Category, and Product queries
 * Added environment variable & alias auto-complete for **Canonical URL** and **Entity URL** settings
 * Added a **Referrer** setting under Site Settings → Miscellaneous
 
