@@ -3,6 +3,7 @@
 ## 3.3.6 - 2020.06.02
 ### Added
 * Added environment variable & alias auto-complete for **Canonical URL** and **Entity URL** settings
+* Added a **Referrer** setting under Site Settings → Miscellaneous
 
 ### Fixed
 * Fixed an issue where some Sections might not appear in Content SEO if they had overlapping ids
