@@ -87,9 +87,29 @@ This is useful if you're using Next.js, Nuxt.js, Gatsby, Gridsome, or anything e
 
 ![Screenshot](./resources/screenshots/seomatic-craftql-query.png)
 
-**N.B.:** The "piggyback" method described below only works with the CraftQL plugin. It can't work with the built-in GraphQL until Pixel & Tonic makes [changes to the GraphQL support](https://github.com/nystudio107/craft-seomatic/issues/483#issuecomment-540763829).
+You can also piggyback on an entries query, to return all of your data for an entry as well as the SEOmatic metadata in one request.
 
-You can also piggyback on an entries query, to return all of your data for an entry as well as the SEOmatic metadata in one request:
+**N.B.:** This requires using either Craft CMS 3.4 or later, or the CraftQL plugin to work.
+
+Native Craft CMS GraphQL:
+
+```graphql
+{
+  entry(section: "homepage") {
+    id
+    title
+    seomatic {
+      metaTitleContainer
+      metaTagContainer
+      metaLinkContainer
+      metaScriptContainer
+      metaJsonLdContainer
+    }
+  }
+}
+```
+
+CraftQL Plugin:
 
 ```graphql
 {
@@ -109,7 +129,46 @@ You can also piggyback on an entries query, to return all of your data for an en
 }
 ```
 
-In this case, no arguments are passed in, because the URI and siteId will be taken from the parent Entry element.
+In this case, no arguments are passed in, because the URI and siteId will be taken from the parent Entry element. But you can pass in the `asArray` argument too:
+
+Native Craft CMS GraphQL:
+
+```graphql
+{
+  entry(section: "homepage") {
+    id
+    title
+    seomatic(asArray: true) {
+      metaTitleContainer
+      metaTagContainer
+      metaLinkContainer
+      metaScriptContainer
+      metaJsonLdContainer
+    }
+  }
+}
+```
+
+CraftQL Plugin:
+
+```graphql
+{
+  entry(section: homepage) {
+    id
+    title
+    ... on Homepage {
+      seomatic(asArray: true) {
+        metaTitleContainer
+        metaTagContainer
+        metaLinkContainer
+        metaScriptContainer
+        metaJsonLdContainer
+      }
+    }
+  }
+}
+```
+
 
 ### Meta Container API Endpoints
 

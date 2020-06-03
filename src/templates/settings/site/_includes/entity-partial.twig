@@ -58,16 +58,31 @@
     }) }}
 </div>
 
-{{ forms.textField({
-    label: "Entity URL"|t("seomatic"),
-    instructions: "A URL for the entity that #{websiteVerb} the website" |t("seomatic"),
-    id: "genericUrl",
-    class: "nicetext",
-    name: "genericUrl",
-    value: entity.genericUrl,
-    required: false,
-    errors: entity.getErrors("genericUrl"),
-}) }}
+{% if seomatic.helper.craft31 %}
+    {{ forms.autosuggestField({
+        label: "Entity URL"|t("seomatic"),
+        instructions: "A URL for the entity that #{websiteVerb} the website" |t("seomatic"),
+        suggestEnvVars: true,
+        suggestAliases: true,
+        id: "genericUrl",
+        class: "nicetext",
+        name: "genericUrl",
+        value: entity.genericUrl,
+        required: false,
+        errors: entity.getErrors("genericUrl"),
+    }) }}
+{% else %}
+    {{ forms.textField({
+        label: "Entity URL"|t("seomatic"),
+        instructions: "A URL for the entity that #{websiteVerb} the website" |t("seomatic"),
+        id: "genericUrl",
+        class: "nicetext",
+        name: "genericUrl",
+        value: entity.genericUrl,
+        required: false,
+        errors: entity.getErrors("genericUrl"),
+    }) }}
+{% endif %}
 
 {{ forms.elementSelectfield({
     label: "Entity Brand"|t("seomatic"),
@@ -191,7 +206,7 @@
             errors: entity.getErrors("genericGeoLatitude"),
         }) }}
     </div>
-    
+
     <div class="half-width-field">
         {{ forms.textField({
             label: "Entity Longitude"|t("seomatic"),
@@ -260,7 +275,7 @@
 
 <div class="metaPane field Organization">
     <h2>{{ "Organization Info" |t("seomatic") }}</h2>
-    
+
     <div class="field">
         <div class="half-width-field half-width-field-left">
             {{ forms.textField({
@@ -287,7 +302,7 @@
             }) }}
         </div>
     </div>
-    
+
     <div class="field">
         <div class="half-width-field half-width-field-left">
             {{ forms.textField({
@@ -314,9 +329,9 @@
             }) }}
         </div>
     </div>
-    
+
     <h2>{{ "Organization Contact Points" |t("seomatic") }}</h2>
-    
+
     {{ forms.editableTableField({
         label: "Contact Points"|t("seomatic"),
         instructions: "Use organization contact points to add your organizations's contact information to the Google Knowledge panel in some searches.  The Telephone Number **must be** an internationalized version of the phone number, starting with the '+' symbol and country code (+1 in the US and Canada).  e.g.: `+1-800-555-1212` or `+44-2078225951`. [Learn More](https://developers.google.com/structured-data/customize/contact-points)"|t("seomatic") |md,
@@ -389,7 +404,7 @@
 
 <div class="metaSubPane field LocalBusiness">
     <h2>{{ "Local Business Info" |t("seomatic") }}</h2>
-    
+
     {{ forms.selectField({
         label: "Price Range"|t("seomatic"),
         instructions: "The approximate price range of the goods or services offered by this local business."|t("seomatic"),
@@ -411,7 +426,7 @@
             <label for="localBusinessOpeningHours">{{ "Opening Hours"|t("seomatic")}}</label>
             <div class="instructions"><p>{{ "The opening hours for this local business.  If the business is closed on a given day, just leave the hours for that day blank.  If you leave everything blank, no opening hours will be listed. [Learn More](https://developers.google.com/search/docs/data-types/local-business)" |t("seomatic") |md}}</p></div>
         </div>
-    
+
         {% macro day(id, name, value, day) %}
             {% from "_includes/forms" import time %}
             <tr>
@@ -434,16 +449,16 @@
                 </td>
             </tr>
         {% endmacro %}
-    
+
         {% from _self import day %}
-    
+
         {% set startDay = currentUser.getPreference("weekStartDay") ?? craft.app.config.general.defaultWeekStartDay %}
         {% set days = (startDay..6) %}
-    
+
         {% if startDay != 0 %}
             {% set days = days|merge(0..(startDay -1)) %}
         {% endif %}
-    
+
         <table class="data">
             <thead>
             <tr>
@@ -492,7 +507,7 @@
         required: false,
         errors: entity.getErrors("restaurantServesCuisine"),
     }) }}
-    
+
     {{ forms.textField({
         label: "Food Establishment Menu URL"|t("seomatic"),
         instructions: "URL to the food establishment's menu" |t("seomatic"),
@@ -503,7 +518,7 @@
         required: false,
         errors: entity.getErrors("restaurantMenuUrl"),
     }) }}
-    
+
     {{ forms.textField({
         label: "Food Establishment Reservations URL"|t("seomatic"),
         instructions: "URL to the food establishment's reservations page" |t("seomatic"),

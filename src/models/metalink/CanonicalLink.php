@@ -11,12 +11,12 @@
 
 namespace nystudio107\seomatic\models\metalink;
 
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\models\MetaLink;
 use nystudio107\seomatic\helpers\UrlHelper;
 
 use Craft;
 use craft\helpers\StringHelper;
-use nystudio107\seomatic\Seomatic;
 
 /**
  * @author    nystudio107
