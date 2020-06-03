@@ -1,5 +1,15 @@
 # SEOmatic Changelog
 
+## 3.3.6 - 2020.06.03
+### Added
+* Added support for querying for SEOmatic metadata via GraphQL inside of Entry, Category, and Product queries
+* Added environment variable & alias auto-complete for **Canonical URL** and **Entity URL** settings
+* Added a **Referrer** setting under Site Settings → Miscellaneous
+
+### Fixed
+* Fixed an issue where some Sections might not appear in Content SEO if they had overlapping ids
+* Display “Select…” instead of “(unknown)” when no Main Entity of Page has been selected
+
 ## 3.3.5 - 2020.05.26
 ### Fixed
 * Fixed an issue with Digital Products throwing an error on saving SEOmatic Content SEO settings

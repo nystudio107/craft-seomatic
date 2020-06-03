@@ -82,6 +82,7 @@ return [
         ],
         'siteLinksSearchTarget' => '',
         'siteLinksQueryInput' => '',
+        'referrer' => 'no-referrer-when-downgrade',
         'additionalSitemapUrls' => [
         ],
         'additionalSitemaps' => [

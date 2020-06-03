@@ -110,6 +110,11 @@ class MetaSiteVars extends VarsModel
     public $siteLinksQueryInput = '';
 
     /**
+     * @var string Default referrer tag setting
+     */
+    public $referrer = 'no-referrer-when-downgrade';
+
+    /**
      * @var array Array of additional custom sitemap URLs
      */
     public $additionalSitemapUrls = [];
@@ -166,6 +171,7 @@ class MetaSiteVars extends VarsModel
                     'pinterestSiteVerification',
                     'siteLinksSearchTarget',
                     'siteLinksQueryInput',
+                    'referrer',
                 ],
                 'string'
             ],
