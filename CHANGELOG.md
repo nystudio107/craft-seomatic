@@ -1,5 +1,10 @@
 # SEOmatic Changelog
 
+## 3.3.7 - 2020.06.04
+### Fixed
+* Fixed an issue where the Dashboard wasn't showing the Content SEO Checklist properly
+* Fixed an issue where a sitemap might not show up if there were overlapping Section/other ids
+
 ## 3.3.6 - 2020.06.03
 ### Added
 * Added support for querying for SEOmatic metadata via GraphQL inside of Entry, Category, and Product queries
