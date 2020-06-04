@@ -151,6 +151,8 @@ class MetaBundles extends Component
             ];
             if (!empty($metaBundle->typeId)) {
                 $params['typeId'] = $metaBundle->typeId;
+            } else {
+                $metaBundle->typeId = null;
             }
             $metaBundleRecord = MetaBundleRecord::findOne($params);
 
@@ -514,73 +516,45 @@ class MetaBundles extends Component
     }
 
     /**
-     * Return all of the content meta bundles
-     *
-     * @param bool $allSites
-     *
-     * @return array
-     */
-    public function getContentMetaBundles(bool $allSites = true): array
-    {
-        $metaBundles = [];
-        $metaBundleSourceHandles = [];
-        $metaBundleArrays = (new Query())
-            ->from(['{{%seomatic_metabundles}}'])
-            ->where(['!=', 'sourceBundleType', self::GLOBAL_META_BUNDLE])
-            ->all();
-        /** @var  $metaBundleArray array */
-        foreach ($metaBundleArrays as $metaBundleArray) {
-            $addToMetaBundles = true;
-            if (!$allSites) {
-                if (\in_array($metaBundleArray['sourceHandle'], $metaBundleSourceHandles, true)) {
-                    $addToMetaBundles = false;
-                }
-                $metaBundleSourceHandles[] = $metaBundleArray['sourceHandle'];
-            }
-            if ($addToMetaBundles) {
-                $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
-                $metaBundle = MetaBundle::create($metaBundleArray);
-                if ($metaBundle) {
-                    $metaBundles[] = $metaBundle;
-                }
-            }
-        }
-
-        return $metaBundles;
-    }
-
-    /**
      * Get all of the meta bundles for a given $sourceSiteId
      *
-     * @param int $sourceSiteId
+     * @param int|null $sourceSiteId
      *
      * @return array
      */
-    public function getContentMetaBundlesForSiteId(int $sourceSiteId): array
+    public function getContentMetaBundlesForSiteId($sourceSiteId, $filter = ''): array
     {
         $metaBundles = [];
-        $subQuery = (new Query())
-            ->from(['{{%seomatic_metabundles}}'])
-            ->where([
-                'sourceSiteId' => $sourceSiteId,
-            ])
-            ->andWhere(['!=', 'sourceBundleType', self::GLOBAL_META_BUNDLE])
-        ;
-        $bundleQuery = (new Query())
-            ->select(['mb.*'])
-            ->from(['mb' => $subQuery])
-            ->leftJoin(['mb2' => $subQuery], [
-                'and',
-                '[[mb.sourceId]] = [[mb2.sourceId]]',
-                '[[mb.id]] < [[mb2.id]]'
-            ])
-            ->where(['mb2.id' => null])
-        ;
-        $metaBundleArrays = $bundleQuery->all();
-        /** @var  $metaBundleArray array */
-        foreach ($metaBundleArrays as $metaBundleArray) {
-            $metaBundleArray = array_diff_key($metaBundleArray, array_flip(self::IGNORE_DB_ATTRIBUTES));
-            $metaBundle = MetaBundle::create($metaBundleArray);
+        $bundles = [];
+        // Since sectionIds, CategoryIds, etc. are not unique, we need to do separate queries and combine them
+        $seoElements = Seomatic::$plugin->seoElements->getAllSeoElementTypes();
+        foreach ($seoElements as $seoElement) {
+
+            $subQuery = (new Query())
+                ->from(['{{%seomatic_metabundles}}'])
+                ->where(['=', 'sourceBundleType', $seoElement::META_BUNDLE_TYPE]);
+
+            if ((int)$sourceSiteId !== 0) {
+                $subQuery->andWhere(['sourceSiteId' => $sourceSiteId]);
+            }
+            if ($filter !== '') {
+                $subQuery->andWhere(['like', 'sourceName', $filter]);
+            }
+            $bundleQuery = (new Query())
+                ->select(['mb.*'])
+                ->from(['mb' => $subQuery])
+                ->leftJoin(['mb2' => $subQuery], [
+                    'and',
+                    '[[mb.sourceId]] = [[mb2.sourceId]]',
+                    '[[mb.id]] < [[mb2.id]]'
+                ])
+                ->where(['mb2.id' => null])
+            ;
+            $bundles = array_merge($bundles, $bundleQuery->all());
+        }
+        foreach ($bundles as $bundle) {
+            $bundle = array_diff_key($bundle, array_flip(self::IGNORE_DB_ATTRIBUTES));
+            $metaBundle = MetaBundle::create($bundle);
             if ($metaBundle) {
                 $metaBundles[] = $metaBundle;
             }

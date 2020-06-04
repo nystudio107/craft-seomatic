@@ -109,43 +109,17 @@ class ContentSeoController extends Controller
                 $currentSiteHandle = $site->handle;
             }
         }
-
-        $bundles = [];
-        // Since sectionIds, CategoryIds, etc. are not unique, we need to do separate queries and combine them
-        $seoElements = Seomatic::$plugin->seoElements->getAllSeoElementTypes();
-        foreach ($seoElements as $seoElement) {
-
-            $subQuery = (new Query())
-                ->from(['{{%seomatic_metabundles}}'])
-                ->where(['=', 'sourceBundleType', $seoElement::META_BUNDLE_TYPE]);
-
-            if ((int)$siteId !== 0) {
-                $subQuery->andWhere(['sourceSiteId' => $siteId]);
-            }
-            if ($filter !== '') {
-                $subQuery->andWhere(['like', 'sourceName', $filter]);
-            }
-            $bundleQuery = (new Query())
-                ->select(['mb.*'])
-                ->from(['mb' => $subQuery])
-                ->leftJoin(['mb2' => $subQuery], [
-                    'and',
-                    '[[mb.sourceId]] = [[mb2.sourceId]]',
-                    '[[mb.id]] < [[mb2.id]]'
-                ])
-                ->where(['mb2.id' => null])
-            ;
-            $bundles = array_merge($bundles, $bundleQuery->all());
-        }
-        if ($bundles) {
+        $metaBundles = Seomatic::$plugin->metaBundles->getContentMetaBundlesForSiteId($siteId, $filter);
+        $count = 0;
+        if ($metaBundles) {
+            $count = count($metaBundles);
             // Sort it manually
-            ArrayHelper::multisort($bundles, $sortField, $sortType);
-            $bundles = array_slice($bundles, $offset, $per_page);
+            ArrayHelper::multisort($metaBundles, $sortField, $sortType);
+            $metaBundles = array_slice($metaBundles, $offset, $per_page);
             $dataArray = [];
             // Add in the `addLink` field
-            foreach ($bundles as $bundle) {
+            foreach ($metaBundles as $metaBundle) {
                 $dataItem = [];
-                $metaBundle = MetaBundle::create($bundle);
                 if ($metaBundle !== null) {
                     $sourceBundleType = $metaBundle->sourceBundleType;
                     $sourceHandle = $metaBundle->sourceHandle;
@@ -202,7 +176,6 @@ class ContentSeoController extends Controller
             }
             // Format the data for the API
             $data['data'] = $dataArray;
-            $count = $bundleQuery->count();
             $data['links']['pagination'] = [
                 'total' => $count,
                 'per_page' => $per_page,
