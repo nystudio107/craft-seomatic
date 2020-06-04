@@ -140,19 +140,7 @@ class SeomaticVariable extends ServiceLocator
     {
         return Seomatic::$plugin->name;
     }
-
-    /**
-     * Get all of the meta bundles
-     *
-     * @param bool $allSites
-     *
-     * @return array
-     */
-    public function getContentMetaBundles(bool $allSites = true): array
-    {
-        return Seomatic::$plugin->metaBundles->getContentMetaBundles($allSites);
-    }
-
+    
     /**
      * @return string
      */
