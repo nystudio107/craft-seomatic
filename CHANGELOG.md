@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.8 - 2020.06.06
+### Changed
+* Strip the query string from breadcrumb URLs
+
 ## 3.3.7 - 2020.06.04
 ### Fixed
 * Fixed an issue where the Dashboard wasn't showing the Content SEO Checklist properly
