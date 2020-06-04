@@ -149,6 +149,9 @@ class MetaBundles extends Component
                 'sourceId' => $metaBundle->sourceId,
                 'sourceSiteId' => $siteId,
             ];
+            if ($metaBundle->typeId !== null) {
+                $metaBundle->typeId = (int)$metaBundle->typeId;
+            }
             if (!empty($metaBundle->typeId)) {
                 $params['typeId'] = $metaBundle->typeId;
             } else {
@@ -214,6 +217,9 @@ class MetaBundles extends Component
                 'sourceSiteId' => $sourceSiteId,
             ])
             ;
+        if ($typeId !== null) {
+            $typeId = (int)$typeId;
+        }
         if (!empty($typeId)) {
             $query
                 ->andWhere([
@@ -282,6 +288,9 @@ class MetaBundles extends Component
                 'sourceSiteId' => $sourceSiteId,
             ])
             ;
+        if ($typeId !== null) {
+            $typeId = (int)$typeId;
+        }
         if (!empty($typeId)) {
             $query
                 ->andWhere([
