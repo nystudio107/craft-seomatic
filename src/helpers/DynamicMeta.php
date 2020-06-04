@@ -383,7 +383,7 @@ class DynamicMeta
             $listItem = MetaJsonLd::create('ListItem', [
                 'position' => $position,
                 'name' => $element->title,
-                'item' => $id,
+                'item' => UrlHelper::stripQueryString($id),
                 '@id' => $id,
             ]);
             $crumbs->itemListElement[] = $listItem;
@@ -391,7 +391,7 @@ class DynamicMeta
             $crumbs->itemListElement[] = MetaJsonLd::create('ListItem', [
                 'position' => $position,
                 'name' => 'Homepage',
-                'item' => $siteUrl,
+                'item' => UrlHelper::stripQueryString($siteUrl),
                 '@id' => $siteUrl,
             ]);
         }
@@ -425,7 +425,7 @@ class DynamicMeta
                 $crumbs->itemListElement[] = MetaJsonLd::create('ListItem', [
                     'position' => $position,
                     'name' => $element->title,
-                    'item' => $id,
+                    'item' => UrlHelper::stripQueryString($id),
                     '@id' => $id,
                 ]);
             }
