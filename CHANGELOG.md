@@ -1,5 +1,11 @@
 # SEOmatic Changelog
 
+## 3.3.8 - 2020.06.04
+### Changed
+* Strip the query string from breadcrumb URLs
+* Marked the 3.3.0 update as `critical`
+* Ensure that `typeId` is explicitly typecast, to avoid it being treated as a string
+
 ## 3.3.7 - 2020.06.04
 ### Fixed
 * Fixed an issue where the Dashboard wasn't showing the Content SEO Checklist properly
@@ -50,7 +56,7 @@
 * Fixed an issue with the Content SEO listing not appearing if you are using Postgres
 * Ensure that the Content SEO listing paginates property if you have multiple entry types
 
-## 3.3.0 - 2020.04.28
+## 3.3.0 - 2020.04.28 [CRITICAL]
 ### Added
 * Added a new searchable Schema UI selector for finding Main Entity of Page types quickly
 * Added support for importing SEO meta info into SEOmatic via FeedMe
