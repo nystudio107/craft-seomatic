@@ -1,8 +1,10 @@
 # SEOmatic Changelog
 
-## 3.3.8 - 2020.06.06
+## 3.3.8 - 2020.06.04
 ### Changed
 * Strip the query string from breadcrumb URLs
+* Marked the 3.3.0 update as `critical`
+* Ensure that `typeId` is explicitly typecast, to avoid it being treated as a string
 
 ## 3.3.7 - 2020.06.04
 ### Fixed
