@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.9 - 2020.06.12
+### Changed
+* Make entity’s a `VarsModel` so they have access to `.parsedValue()`
+
 ## 3.3.8 - 2020.06.04
 ### Changed
 * Strip the query string from breadcrumb URLs
