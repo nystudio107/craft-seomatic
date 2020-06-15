@@ -12,14 +12,14 @@
 namespace nystudio107\seomatic\models;
 
 use craft\validators\ArrayValidator;
-use nystudio107\seomatic\base\FluentModel;
+use nystudio107\seomatic\base\VarsModel;
 
 /**
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
  */
-class Entity extends FluentModel
+class Entity extends VarsModel
 {
     // Public Properties
     // =========================================================================
