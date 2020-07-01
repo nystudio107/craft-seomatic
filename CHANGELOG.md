@@ -1,8 +1,11 @@
 # SEOmatic Changelog
 
-## 3.3.9 - 2020.06.12
+## 3.3.9 - 2020.07.02
 ### Changed
 * Make entity’s a `VarsModel` so they have access to `.parsedValue()`
+
+### Fixed
+* Fixed an issue where additional sitemap entries with empty location settings would throw an error
 
 ## 3.3.8 - 2020.06.04
 ### Changed
