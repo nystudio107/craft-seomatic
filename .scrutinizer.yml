@@ -28,15 +28,14 @@ build:
           - 'true'
       tests:
         override:
-          - php vendor/bin/codecept run unit --coverage-xml
+          - command: php vendor/bin/codecept run unit --coverage-xml
+            coverage:
+              file: _output/coverage.xml
+              format: clover
           - php-scrutinizer-run
-          -
-            command: 'phpcs-run ./src'
+          - command: 'phpcs-run ./src'
             use_website_config: false
           - js-scrutinizer-run
-          coverage:
-            file: _output/coverage.xml
-            format: clover
     tests: true
 checks:
   php: true
