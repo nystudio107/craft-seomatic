@@ -28,7 +28,7 @@ build:
           - 'true'
       tests:
         override:
-          - php vendor/bin/codecept unit run
+          - php vendor/bin/codecept run unit
           - php-scrutinizer-run
           -
             command: 'phpcs-run ./src'
