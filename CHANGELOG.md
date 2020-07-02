@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.3.9 - 2020.07.02
+### Added
+* Added the Codeception testing framework to SEOmatic
+
 ### Changed
 * Make entity’s a `VarsModel` so they have access to `.parsedValue()`
 
