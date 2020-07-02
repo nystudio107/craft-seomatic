@@ -25,7 +25,7 @@ build:
     analysis:
       project_setup:
         override:
-          - 'true'
+          - true
       tests:
         override:
           -
@@ -38,6 +38,7 @@ build:
             command: 'phpcs-run ./src'
             use_website_config: false
           - js-scrutinizer-run
+          - true
     tests: true
 checks:
   php: true
