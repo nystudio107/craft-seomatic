@@ -30,7 +30,7 @@ build:
         override:
           - command: php vendor/bin/codecept run unit --coverage-xml
             coverage:
-              file: _output/coverage.xml
+              file: tests/_output/coverage.xml
               format: clover
           - php-scrutinizer-run
           - command: 'phpcs-run ./src'
