@@ -39,7 +39,6 @@ build:
             use_website_config: false
           - js-scrutinizer-run
           - true
-    tests: true
 checks:
   php: true
   javascript: true
