@@ -31,9 +31,9 @@ modules:
       projectConfig: {}
       migrations: []
       plugins:
-        woof:
-          class: '\nystudio107\woof\Woof'
-          handle: woof
+        seomatic:
+          class: '\nystudio107\seomatic\Seomatic'
+          handle: seomatic
       cleanup: true
       transaction: true
       dbSetup: {clean: true, setupCraft: true}

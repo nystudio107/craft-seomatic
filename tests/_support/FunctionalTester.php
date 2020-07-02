@@ -1,8 +1,9 @@
 <?php
 /**
- * Woof plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS 3.x
  *
- * Woof
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
  *
  * @link      https://nystudio107.com
  * @copyright Copyright (c) 2020 nystudio107
