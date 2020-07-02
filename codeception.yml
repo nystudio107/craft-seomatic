@@ -23,6 +23,7 @@ coverage:
     - vendor/*
 params:
   - tests/.env
+  - env
 modules:
   config:
     \craft\test\Craft:
