@@ -28,7 +28,8 @@ build:
           - 'true'
       tests:
         override:
-          - php vendor/bin/codecept run unit --coverage-xml
+          -
+            command: 'php vendor/bin/codecept run unit --coverage-xml'
             coverage:
               file: tests/_output/coverage.xml
               format: clover
