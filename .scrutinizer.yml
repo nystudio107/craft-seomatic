@@ -13,6 +13,11 @@ build:
       DB_SCHEMA: ''
       DB_TABLE_PREFIX: ''
       SECURITY_KEY: 'abcde12345'
+  cache:
+    directories:
+      - node_modules/
+      - vendor/
+      - ~/.composer/cache/
   dependencies:
     before:
       - mysql -uroot -e 'CREATE DATABASE testcraft'
