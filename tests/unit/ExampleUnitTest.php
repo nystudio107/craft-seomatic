@@ -1,27 +1,27 @@
 <?php
 /**
- * Woof plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS 3.x
  *
- * Woof
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
  *
  * @link      https://nystudio107.com
  * @copyright Copyright (c) 2020 nystudio107
  */
 
-namespace nystudio107\wooftests\unit;
+namespace nystudio107\seomatictests\unit;
 
 use Codeception\Test\Unit;
 use UnitTester;
 use Craft;
-use nystudio107\woof\Woof;
+use nystudio107\seomatic\Seomatic;
 
 /**
  * ExampleUnitTest
  *
- *
  * @author    nystudio107
- * @package   Woof
- * @since     1.0.0
+ * @package   Seomatic
+ * @since     3.3.9
  */
 class ExampleUnitTest extends Unit
 {
@@ -45,8 +45,8 @@ class ExampleUnitTest extends Unit
     public function testPluginInstance()
     {
         $this->assertInstanceOf(
-            Woof::class,
-            Woof::$plugin
+            Seomatic::class,
+            Seomatic::$plugin
         );
     }
 

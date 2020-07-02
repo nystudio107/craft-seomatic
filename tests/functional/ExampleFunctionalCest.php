@@ -1,6 +1,6 @@
 <?php
 
-namespace nystudio107\wooftests\acceptance;
+namespace nystudio107\seomatictests\acceptance;
 
 use Craft;
 use FunctionalTester;
