@@ -1,5 +1,16 @@
 # SEOmatic Changelog
 
+## 3.3.9 - 2020.07.03
+### Added
+* Added the Codeception testing framework to SEOmatic
+* Added a SSTI Unit Test to SEOmatic that executes on every push to GitHub to verify there are no regressions for [CVE-2020-12790](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-12790)
+
+### Changed
+* Make entity’s a `VarsModel` so they have access to `.parsedValue()`
+
+### Fixed
+* Fixed an issue where additional sitemap entries with empty location settings would throw an error
+
 ## 3.3.8 - 2020.06.04
 ### Changed
 * Strip the query string from breadcrumb URLs
