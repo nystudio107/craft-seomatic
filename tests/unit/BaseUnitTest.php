@@ -23,7 +23,7 @@ use nystudio107\seomatic\Seomatic;
  * @package   Seomatic
  * @since     3.3.9
  */
-class ExampleUnitTest extends Unit
+class BaseUnitTest extends Unit
 {
     // Properties
     // =========================================================================
