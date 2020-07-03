@@ -233,8 +233,8 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
         // Output the sitemap index
         if (!empty($additionalSitemaps)) {
             foreach ($additionalSitemaps as $additionalSitemap) {
-                $loc = MetaValueHelper::parseString($additionalSitemap['loc']);
                 if (!empty($additionalSitemap['loc'])) {
+                    $loc = MetaValueHelper::parseString($additionalSitemap['loc']);
                     $lines[] = '  <sitemap>';
                     $lines[] = '    <loc>';
                     $lines[] = '      '.Html::encode($loc);
