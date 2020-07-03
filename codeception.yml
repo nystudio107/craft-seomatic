@@ -28,7 +28,7 @@ modules:
   config:
     \craft\test\Craft:
       configFile: 'tests/_craft/config/test.php'
-      entryUrl: 'http://craft.test/index.php'
+      entryUrl: 'http://testcraft.test/index.php'
       projectConfig: {}
       migrations: []
       plugins:
