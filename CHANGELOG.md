@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.10 - 2020.07.07
+### Fixed
+* Handle trailing slashes properly for generated URLs
+
 ## 3.3.9 - 2020.07.03
 ### Added
 * Added the Codeception testing framework to SEOmatic
