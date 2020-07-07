@@ -2,7 +2,8 @@
 
 ## 3.3.10 - 2020.07.07
 ### Fixed
-* Handle trailing slashes properly for generated URLs
+* Handle trailing slashes properly for generated URLs such as the `canonicalUrl`
+* Fixed an issue where URLs that depended on the `canonicalUrl` (such as `og:url`) would be wrong in the Craft CP or via MetaContainer endpoint or GraphQL
 
 ## 3.3.9 - 2020.07.03
 ### Added
