@@ -388,6 +388,10 @@ class Text
      */
     public static function sanitizeFieldData($str): string
     {
+        // Do some general cleanup
+        $str = html_entity_decode($str, ENT_NOQUOTES, 'UTF-8');
+        $str = urldecode($str);
+        $str = strip_tags($str);
         // Remove any embedded Twig code
         $str = preg_replace('/{{.*?}}/', '', $str);
         $str = preg_replace('/{%.*?%}/', '', $str);
