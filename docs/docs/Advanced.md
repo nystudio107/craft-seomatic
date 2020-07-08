@@ -6,6 +6,83 @@ SEOmatic supports the standard `config.php` multi-environment friendly config fi
 
 These are the same settings that are configured in the **Plugin Settings** in the Control Panel.
 
+## Events
+
+    /**
+     * @event IncludeContainerEvent The event that is triggered when a container is
+     * about to be included.
+     *
+     * ---
+     * ```php
+     * use nystudio107\seomatic\events\IncludeContainerEvent;
+     * use nystudio107\seomatic\base\Container;
+     * use yii\base\Event;
+     * Event::on(Container::class, Container::EVENT_INCLUDE_CONTAINER, function(IncludeContainerEvent $e) {
+     *     $e->include = false;
+     * });
+     * ```
+     */
+    const EVENT_INCLUDE_CONTAINER = 'includeContainer';
+
+
+    /**
+     * @event InvalidateContainerCachesEvent The event that is triggered when SEOmatic
+     *        is about to clear its meta container caches
+     *
+     * ---
+     * ```php
+     * use nystudio107\seomatic\events\InvalidateContainerCachesEvent;
+     * use nystudio107\seomatic\services\MetaContainers;
+     * use yii\base\Event;
+     * Event::on(MetaContainers::class, MetaContainers::EVENT_INVALIDATE_CONTAINER_CACHES, function(InvalidateContainerCachesEvent $e) {
+     *     // Container caches are about to be cleared
+     * });
+     * ```
+     */
+    const EVENT_INVALIDATE_CONTAINER_CACHES = 'invalidateContainerCaches';
+
+    /**
+     * @event RegisterSitemapUrlsEvent The event that is triggered when registering
+     * additional URLs for a sitemap.
+     *
+     * ---
+     * ```php
+     * use nystudio107\seomatic\events\RegisterSitemapUrlsEvent;
+     * use nystudio107\seomatic\models\SitemapCustomTemplate;
+     * use yii\base\Event;
+     * Event::on(SitemapCustomTemplate::class, SitemapCustomTemplate::EVENT_REGISTER_SITEMAP_URLS, function(RegisterSitemapUrlsEvent $e) {
+     *     $e->sitemaps[] = [
+     *         'loc' => $url,
+     *         'changefreq' => $changeFreq,
+     *         'priority' => $priority,
+     *         'lastmod' => $lastMod,
+     *     ];
+     * });
+     * ```
+     */
+    const EVENT_REGISTER_SITEMAP_URLS = 'registerSitemapUrls';
+
+    /**
+     * @event RegisterComponentTypesEvent The event that is triggered when
+     *        registering SeoElement types
+     *
+     * SeoElement types must implement [[SeoElementInterface]]
+     *
+     * ```php
+     * use nystudio107\seomatic\services\SeoElements;
+     * use craft\events\RegisterComponentTypesEvent;
+     * use yii\base\Event;
+     *
+     * Event::on(SeoElements::class,
+     *     SeoElements::EVENT_REGISTER_SEO_ELEMENT_TYPES,
+     *     function(RegisterComponentTypesEvent $event) {
+     *         $event->types[] = MySeoElement::class;
+     *     }
+     * );
+     * ```
+     */
+    const EVENT_REGISTER_SEO_ELEMENT_TYPES = 'registerSeoElementTypes';
+
 ## Meta Bundle / Container Settings
 
 The directory `vendor/nystudio107/seomatic/src/seomatic-config` contains a number of files that are used when initially configuring SEOmatic.
