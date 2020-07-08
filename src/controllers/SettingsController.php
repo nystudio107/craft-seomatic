@@ -447,7 +447,7 @@ class SettingsController extends Controller
         string $sourceBundleType,
         string $sourceHandle,
         string $siteHandle = null,
-        int    $typeId = null,
+        $typeId = null,
         $loadFromSiteHandle = null
     ): Response {
         $variables = [];
