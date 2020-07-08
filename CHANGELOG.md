@@ -1,5 +1,11 @@
 # SEOmatic Changelog
 
+## 3.3.10 - 2020.07.07
+### Fixed
+* Handle trailing slashes properly for generated URLs such as the `canonicalUrl`
+* Fixed an issue where URLs that depended on the `canonicalUrl` (such as `og:url`) would be wrong in the Craft CP or via MetaContainer endpoint or GraphQL
+* Fixed an issue where an error could be thrown editing Content SEO settings
+
 ## 3.3.9 - 2020.07.03
 ### Added
 * Added the Codeception testing framework to SEOmatic

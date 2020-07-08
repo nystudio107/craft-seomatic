@@ -391,6 +391,8 @@ class MetaContainers extends Component
         if ($home !== null) {
             $home->href = $homeUrl;
         }
+        // Update seomatic.meta.canonicalUrl when previewing meta containers
+        $this->metaGlobalVars->canonicalUrl = $canonicalUrl;
     }
 
     /**
