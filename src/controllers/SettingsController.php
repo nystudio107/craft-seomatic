@@ -457,7 +457,7 @@ class SettingsController extends Controller
         if ($typeId !== null && is_string($typeId)) {
             $typeId = (int)$typeId;
         }
-        
+
         $pluginName = Seomatic::$settings->pluginName;
         // Asset bundle
         try {
