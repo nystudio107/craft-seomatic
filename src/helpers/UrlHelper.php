@@ -43,7 +43,14 @@ class UrlHelper extends CraftUrlHelper
             // Extract out just the path part
             $parts = self::decomposeUrl($path);
             $path = $parts['path'].$parts['suffix'];
-            return rtrim($siteUrl, '/').'/'.ltrim($path, '/');
+            $url = rtrim($siteUrl, '/').'/'.ltrim($path, '/');
+            // Handle trailing slashes properly for generated URLs
+            $generalConfig = Craft::$app->getConfig()->getGeneral();
+            if ($generalConfig->addTrailingSlashesToUrls && !preg_match('/\.[^\/]+$/', $url)) {
+                $url = rtrim($url, '/') . '/';
+            }
+
+            return $url;
         }
 
         return parent::siteUrl($path, $params, $scheme, $siteId);
@@ -110,6 +117,12 @@ class UrlHelper extends CraftUrlHelper
         }
         // Ensure that any spaces in the URL are encoded
         $url = str_replace(' ', '%20', $url);
+
+        // Handle trailing slashes properly for generated URLs
+        $generalConfig = Craft::$app->getConfig()->getGeneral();
+        if ($generalConfig->addTrailingSlashesToUrls && !preg_match('/\.[^\/]+$/', $url)) {
+            $url = rtrim($url, '/') . '/';
+        }
 
         return $url;
     }

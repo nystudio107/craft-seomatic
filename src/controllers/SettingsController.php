@@ -447,13 +447,16 @@ class SettingsController extends Controller
         string $sourceBundleType,
         string $sourceHandle,
         string $siteHandle = null,
-        int    $typeId = null,
+        $typeId = null,
         $loadFromSiteHandle = null
     ): Response {
         $variables = [];
         // @TODO: Let people choose an entry/categorygroup/product as the preview
         // Get the site to edit
         $siteId = $this->getSiteIdFromHandle($siteHandle);
+        if ($typeId !== null && is_string($typeId)) {
+            $typeId = (int)$typeId;
+        }
 
         $pluginName = Seomatic::$settings->pluginName;
         // Asset bundle
