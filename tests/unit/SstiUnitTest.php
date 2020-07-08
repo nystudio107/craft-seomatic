@@ -88,6 +88,11 @@ class SstiUnitTest extends Unit
             '/woof/hello',
             DynamicMetaHelper::sanitizeUrl('/woof/<blockquote>hello</blockquote>')
         );
+        // Proper text is returned, without the Twig code
+        $this->assertSame(
+            'The sum is: ',
+            TextHelper::sanitizeFieldData('The sum is: {{ 2 + 2 }}')
+        );
     }
 
     /**
@@ -127,8 +132,13 @@ class SstiUnitTest extends Unit
         );
         // Strip HTML
         $this->assertSame(
-            '/woof/hello',
-            DynamicMetaHelper::sanitizeUrl('/woof/<blockquote>hello</blockquote>')
+            'hello',
+            DynamicMetaHelper::sanitizeUrl('<blockquote>hello</blockquote>')
+        );
+        // Proper text is returned, without the Twig code
+        $this->assertSame(
+            'The sum is: ',
+            TextHelper::sanitizeFieldData('The sum is: {{ 2 + 2 }}')
         );
     }
 }
