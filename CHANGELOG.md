@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.11 - 2020.07.09
+### Added
+* Added a `sanitizeFieldData()` that's called when pulling from other Craft fields, to ensure no executable Twig code exists
+
 ## 3.3.10 - 2020.07.07
 ### Fixed
 * Handle trailing slashes properly for generated URLs such as the `canonicalUrl`
