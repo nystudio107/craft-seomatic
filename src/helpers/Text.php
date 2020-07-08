@@ -134,22 +134,8 @@ class Text
             }
         }
 
-        return $result;
-    }
-
-    /**
-     * Strip HTML tags, but replace them with a space rather than just eliminating them
-     *
-     * @param $str
-     * @return string
-     */
-    public static function smartStripTags($str)
-    {
-        $str = str_replace('<', ' <', $str);
-        $str = strip_tags($str);
-        $str = str_replace('  ', ' ', $str);
-
-        return $str;
+        //return $result;
+        return self::sanitizeFieldData($result);
     }
 
     /**
@@ -348,9 +334,11 @@ class Text
             return $text;
         }
 
-        return \is_array($keywords)
+        $result = \is_array($keywords)
             ? implode(', ', \array_slice(array_keys($keywords), 0, $limit))
             : (string)$keywords;
+
+        return self::sanitizeFieldData($result);
     }
 
     /**
@@ -384,9 +372,48 @@ class Text
             return $text;
         }
 
-        return \is_array($sentences)
+        $result = \is_array($sentences)
             ? implode(' ', $sentences)
             : (string)$sentences;
+
+        return self::sanitizeFieldData($result);
+    }
+
+
+    /**
+     * Sanitize Twig code out of any extracted field values
+     *
+     * @param $str
+     * @return string
+     */
+    public static function sanitizeFieldData($str): string
+    {
+        // Remove any embedded Twig code
+        $str = preg_replace('/{{.*?}}/', '', $str);
+        $str = preg_replace('/{%.*?%}/', '', $str);
+        // Change single brackets to parenthesis
+        $str = preg_replace('/{/', '(', $str);
+        $str = preg_replace('/}/', ')', $str);
+        if (empty($str) || is_array($str)) {
+            $str = '';
+        }
+
+        return $str;
+    }
+
+    /**
+     * Strip HTML tags, but replace them with a space rather than just eliminating them
+     *
+     * @param $str
+     * @return string
+     */
+    public static function smartStripTags($str)
+    {
+        $str = str_replace('<', ' <', $str);
+        $str = strip_tags($str);
+        $str = str_replace('  ', ' ', $str);
+
+        return $str;
     }
 
     /**
