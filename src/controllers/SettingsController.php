@@ -454,7 +454,10 @@ class SettingsController extends Controller
         // @TODO: Let people choose an entry/categorygroup/product as the preview
         // Get the site to edit
         $siteId = $this->getSiteIdFromHandle($siteHandle);
-
+        if ($typeId !== null && is_string($typeId)) {
+            $typeId = (int)$typeId;
+        }
+        
         $pluginName = Seomatic::$settings->pluginName;
         // Asset bundle
         try {
