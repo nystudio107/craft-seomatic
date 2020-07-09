@@ -140,6 +140,14 @@ class Settings extends VarsModel
     public $addPaginatedHreflang = true;
 
     /**
+     * @var string Whether to include a Content Security Policy "nonce" for inline
+     *      CSS or JavaScript. Valid values are 'header' or 'tag' for how the CSP
+     *      should be included. c.f.:
+     *      https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#Unsafe_inline_script
+     */
+    public $cspNonce = '';
+
+    /**
      * @var bool Should the Canonical URL be automatically lower-cased?
      */
     public $lowercaseCanonicalUrl = true;
@@ -203,7 +211,14 @@ class Settings extends VarsModel
                     'addXDefaultHrefLang',
                     'addPaginatedHreflang'
                 ],
-                'boolean'],
+                'boolean'
+            ],
+            ['cspNonce', 'string'],
+            ['cspNonce', 'in', 'range' => [
+                '',
+                'header',
+                'tag',
+            ]],
             ['environment', 'string'],
             ['environment', 'default', 'value' => 'live'],
             ['displayPreviewSidebar', 'boolean'],
