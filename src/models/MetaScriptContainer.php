@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\base\MetaContainer;
+use nystudio107\seomatic\base\NonceContainer;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
 
 use Craft;
@@ -25,7 +25,7 @@ use yii\web\View;
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaScriptContainer extends MetaContainer
+class MetaScriptContainer extends NonceContainer
 {
     // Constants
     // =========================================================================

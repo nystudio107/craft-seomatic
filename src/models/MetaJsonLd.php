@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\base\MetaItem;
+use nystudio107\seomatic\base\NonceItem;
 use nystudio107\seomatic\helpers\JsonLd as JsonLdHelper;
 
 use Craft;
@@ -29,7 +29,7 @@ use yii\validators\DateValidator;
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaJsonLd extends MetaItem
+class MetaJsonLd extends NonceItem
 {
     // Constants
     // =========================================================================
