@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\base\MetaContainer;
+use nystudio107\seomatic\base\NonceContainer;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
@@ -26,7 +26,7 @@ use yii\web\View;
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaJsonLdContainer extends MetaContainer
+class MetaJsonLdContainer extends NonceContainer
 {
     // Constants
     // =========================================================================
