@@ -102,8 +102,9 @@ class MetaJsonLd extends NonceItem
      */
     static public $googleRecommendedSchema = [];
 
-    // Public Properties
+    // Static Protected Properties
     // =========================================================================
+
     /**
      * The Schema.org Property Names
      *
@@ -111,6 +112,7 @@ class MetaJsonLd extends NonceItem
      */
     static protected $_schemaPropertyNames = [
     ];
+
     /**
      * The Schema.org Property Expected Types
      *
@@ -118,6 +120,7 @@ class MetaJsonLd extends NonceItem
      */
     static protected $_schemaPropertyExpectedTypes = [
     ];
+
     /**
      * The Schema.org Property Descriptions
      *
@@ -126,8 +129,6 @@ class MetaJsonLd extends NonceItem
     static protected $_schemaPropertyDescriptions = [
     ];
 
-    // Static Protected Properties
-    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -142,18 +143,24 @@ class MetaJsonLd extends NonceItem
      */
     static protected $_googleRecommendedSchema = [
     ];
+
+    // Public Properties
+    // =========================================================================
+
     /**
      * The schema context.
      *
      * @var string [schema.org types: Text]
      */
     public $context;
+
     /**
      * The item's type.
      *
      * @var string [schema.org types: Text]
      */
     public $type;
+
     /**
      * The item's id.
      *
@@ -167,6 +174,7 @@ class MetaJsonLd extends NonceItem
      * @var null|array
      */
     public $graph;
+
 
     // Static Methods
     // =========================================================================
@@ -463,6 +471,21 @@ class MetaJsonLd extends NonceItem
                 }
             }
         }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function generateNonce()
+    {
+        $result = parent::generateNonce();
+        if (Seomatic::$plugin->metaContainers->cachedJsonLdNonce !== null) {
+            return Seomatic::$plugin->metaContainers->cachedJsonLdNonce;
+        }
+
+        Seomatic::$plugin->metaContainers->cachedJsonLdNonce = $result;
+
+        return $result;
     }
 
 // Private Methods

@@ -53,6 +53,26 @@ abstract class NonceItem extends MetaItem implements NonceItemInterface
     }
 
     /**
+     * @inheritdoc
+     */
+    public function fields()
+    {
+        $fields = parent::fields();
+        switch ($this->scenario) {
+            case 'render':
+                $fields = array_diff_key(
+                    $fields,
+                    array_flip([
+                        'nonce',
+                    ])
+                );
+                break;
+        }
+
+        return $fields;
+    }
+
+    /**
      * Generate a random "nonce" for use Content Security Policy implementations as per:
      * https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src
      *

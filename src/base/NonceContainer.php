@@ -48,16 +48,15 @@ abstract class NonceContainer extends MetaContainer implements NonceContainerInt
     public function addNonceTags()
     {
         if (!empty(Seomatic::$settings->cspNonce) && Seomatic::$settings->cspNonce === 'tag') {
-            /** @var NonceItem $metaItemModel */
-            foreach ($this->data as $metaItemModel) {
-                if ($metaItemModel->include) {
-                    $cspValue = $this->getCspValue($metaItemModel->nonce, self::CSP_DIRECTIVE);
-                    $cspHeader = self::CSP_HEADERS[0];
-                    $metaTag = Seomatic::$plugin->tag->create([
-                        'httpEquiv' => $cspHeader,
-                        'content' => $cspValue,
-                    ]);
-                }
+            $cspNonces = $this->getCspNonces();
+            foreach($cspNonces as $cspNonce) {
+                $cspValue = $this->getCspValue($cspNonce, self::CSP_DIRECTIVE);
+                $cspHeader = self::CSP_HEADERS[0];
+                $metaTag = Seomatic::$plugin->tag->create([
+                    'key' => $cspValue,
+                    'httpEquiv' => $cspHeader,
+                    'content' => $cspValue,
+                ]);
             }
         }
     }
@@ -68,16 +67,35 @@ abstract class NonceContainer extends MetaContainer implements NonceContainerInt
     public function addNonceHeaders()
     {
         if (!empty(Seomatic::$settings->cspNonce) && Seomatic::$settings->cspNonce === 'header') {
-            /** @var NonceItem $metaItemModel */
-            foreach ($this->data as $metaItemModel) {
-                if ($metaItemModel->include) {
-                    $cspValue = $this->getCspValue($metaItemModel->nonce, self::CSP_DIRECTIVE);
-                    foreach(self::CSP_HEADERS as $cspHeader) {
-                        Craft::$app->getResponse()->getHeaders()->add($cspHeader, $cspValue . ';');
-                    }
+            $cspNonces = $this->getCspNonces();
+            foreach($cspNonces as $cspNonce) {
+                $cspValue = $this->getCspValue($cspNonce, self::CSP_DIRECTIVE);
+                foreach(self::CSP_HEADERS as $cspHeader) {
+                    Craft::$app->getResponse()->getHeaders()->add($cspHeader, $cspValue . ';');
                 }
             }
         }
+    }
+
+    // Protected Methods
+    // =========================================================================
+
+    /**
+     * Return an array of all of the unique nonces
+     *
+     * @return array
+     */
+    protected function getCspNonces()
+    {
+        $cspNonces = [];
+        /** @var NonceItem $metaItemModel */
+        foreach ($this->data as $metaItemModel) {
+            if ($metaItemModel->include && !empty($metaItemModel->nonce)) {
+                $cspNonces[] = $metaItemModel->nonce;
+            }
+        }
+
+        return array_unique($cspNonces);
     }
 
     /**

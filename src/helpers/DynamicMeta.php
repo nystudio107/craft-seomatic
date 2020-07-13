@@ -141,6 +141,15 @@ class DynamicMeta
      */
     public static function includeHttpHeaders()
     {
+        // Add in any CSP nonce headers
+        $container = Seomatic::$plugin->script->container();
+        if ($container !== null) {
+            $container->addNonceHeaders();
+        }
+        $container = Seomatic::$plugin->jsonLd->container();
+        if ($container !== null) {
+            $container->addNonceHeaders();
+        }
         // Don't include headers for any response code >= 400
         $request = Craft::$app->getRequest();
         if (!$request->isConsoleRequest) {
@@ -229,6 +238,15 @@ class DynamicMeta
         $request = Craft::$app->getRequest();
         // Don't add dynamic meta to console requests, they have no concept of a URI or segments
         if (!$request->getIsConsoleRequest()) {
+            // Add in any CSP nonce meta tags
+            $container = Seomatic::$plugin->script->container();
+            if ($container !== null) {
+                $container->addNonceTags();
+            }
+            $container = Seomatic::$plugin->jsonLd->container();
+            if ($container !== null) {
+                $container->addNonceTags();
+            }
             $response = Craft::$app->getResponse();
             if ($response->statusCode < 400) {
                 self::addMetaJsonLdBreadCrumbs($siteId);

@@ -110,8 +110,12 @@ class MetaJsonLdContainer extends NonceContainer
         ]);
         $jsonLdGraph->type = null;
         // Add the JSON-LD objects to our root JSON-LD's graph
+        $cspNonce = null;
         foreach ($tagData as $config) {
             $jsonLdGraph->graph[] = $config['jsonLd'];
+            if (!empty($config['jsonLd']->nonce)) {
+                $cspNonce = $config['jsonLd']->nonce;
+            }
         }
         // Render the JSON-LD object
         $jsonLd = $jsonLdGraph->render([
@@ -119,11 +123,18 @@ class MetaJsonLdContainer extends NonceContainer
             'renderScriptTags' => false,
             'array'            => false,
         ]);
+
         // Register the tags
+        $attrs = ['type' => 'application/ld+json'];
+        if (!empty($cspNonce)) {
+            $attrs = array_merge($attrs, [
+                'nonce' => $cspNonce,
+            ]);
+        }
         Seomatic::$view->registerScript(
             $jsonLd,
             View::POS_END,
-            ['type' => 'application/ld+json']
+            $attrs
         );
         Craft::endProfile('MetaJsonLdContainer::includeMetaData', __METHOD__);
     }
