@@ -11,7 +11,10 @@
 
 namespace nystudio107\seomatic\base;
 
+use nystudio107\seomatic\models\MetaJsonLdContainer;
+use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\helpers\Dependency;
 
 use Craft;
 
@@ -49,13 +52,25 @@ abstract class NonceContainer extends MetaContainer implements NonceContainerInt
     {
         if (!empty(Seomatic::$settings->cspNonce) && Seomatic::$settings->cspNonce === 'tag') {
             $cspNonces = $this->getCspNonces();
-            foreach($cspNonces as $cspNonce) {
+            foreach($cspNonces as $cspNonce => $scriptTagHandle) {
                 $cspValue = $this->getCspValue($cspNonce, self::CSP_DIRECTIVE);
                 $cspHeader = self::CSP_HEADERS[0];
+                $dependencies = [];
+                if ($this instanceof MetaScriptContainer) {
+                    $dependencies = [
+                        Dependency::SCRIPT_DEPENDENCY => [$scriptTagHandle],
+                    ];
+                }
+                if ($this instanceof MetaJsonLdContainer) {
+                    $dependencies = [
+                        Dependency::JSONLD_DEPENDENCY => [$scriptTagHandle],
+                    ];
+                }
                 $metaTag = Seomatic::$plugin->tag->create([
                     'key' => $cspValue,
                     'httpEquiv' => $cspHeader,
                     'content' => $cspValue,
+                    'dependencies' => $dependencies,
                 ]);
             }
         }
@@ -68,7 +83,7 @@ abstract class NonceContainer extends MetaContainer implements NonceContainerInt
     {
         if (!empty(Seomatic::$settings->cspNonce) && Seomatic::$settings->cspNonce === 'header') {
             $cspNonces = $this->getCspNonces();
-            foreach($cspNonces as $cspNonce) {
+            foreach($cspNonces as $cspNonce => $scriptTagHandle) {
                 $cspValue = $this->getCspValue($cspNonce, self::CSP_DIRECTIVE);
                 foreach(self::CSP_HEADERS as $cspHeader) {
                     Craft::$app->getResponse()->getHeaders()->add($cspHeader, $cspValue . ';');
@@ -91,7 +106,7 @@ abstract class NonceContainer extends MetaContainer implements NonceContainerInt
         /** @var NonceItem $metaItemModel */
         foreach ($this->data as $metaItemModel) {
             if ($metaItemModel->include && !empty($metaItemModel->nonce)) {
-                $cspNonces[] = $metaItemModel->nonce;
+                $cspNonces[$metaItemModel->nonce] = $metaItemModel->key;
             }
         }
 
