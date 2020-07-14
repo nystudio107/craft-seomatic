@@ -105,6 +105,13 @@ return [
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#Unsafe_inline_script
     'cspNonce' => '',
 
+    // Fixed Content Security Policies to be added before any CSP nonces
+    'cspScriptSrcPolicies' => [
+        0 => [
+            'policy' => "'self'",
+        ],
+    ],
+
     // Should the Canonical URL be automatically lower-cased?
     'lowercaseCanonicalUrl' => true,
 

@@ -148,6 +148,15 @@ class Settings extends VarsModel
     public $cspNonce = '';
 
     /**
+     * @var array Fixed Content Security Policies to be added before any CSP nonces
+     */
+    public $cspScriptSrcPolicies = [
+        0 => [
+            'policy' => "'self'",
+        ],
+    ];
+
+    /**
      * @var bool Should the Canonical URL be automatically lower-cased?
      */
     public $lowercaseCanonicalUrl = true;
@@ -237,6 +246,7 @@ class Settings extends VarsModel
                 [
                     'sidebarDisplayPreviewTypes',
                     'defaultSeoElementTypes',
+                    'cspScriptSrcPolicies',
                 ],
                 ArrayValidator::class,
             ],

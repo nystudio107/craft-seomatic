@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\base\MetaItem;
+use nystudio107\seomatic\base\NonceItem;
 use nystudio107\seomatic\helpers\PluginTemplate as PluginTemplateHelper;
 
 use Craft;
@@ -24,7 +24,7 @@ use yii\web\View;
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaScript extends MetaItem
+class MetaScript extends NonceItem
 {
     // Constants
     // =========================================================================
