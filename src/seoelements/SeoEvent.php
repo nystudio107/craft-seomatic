@@ -199,8 +199,7 @@ class SeoEvent implements SeoElementInterface
             ->setCalendar($metaBundle->sourceHandle)
             ->setLoadOccurrences(false)
             ->siteId($metaBundle->sourceSiteId)
-            ->limit($metaBundle->metaSitemapVars->sitemapLimit)
-            ->enabledForSite(true);
+            ->limit($metaBundle->metaSitemapVars->sitemapLimit);
 
         return $query;
     }
@@ -224,7 +223,6 @@ class SeoEvent implements SeoElementInterface
             ->id($elementId)
             ->siteId($siteId)
             ->limit(1)
-            ->enabledForSite(true)
             ->one();
     }
 

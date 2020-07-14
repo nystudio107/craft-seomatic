@@ -572,7 +572,7 @@ class DynamicMeta
                     $element = $elements->getElementByUri($url, $site->id, false);
                 }
                 if ($element !== null) {
-                    if (isset($element->enabledForSite) && !(bool)$element->enabledForSite) {
+                    if (!(bool)$element->enabled) {
                         $includeUrl = false;
                     }
                     /** @var MetaBundle $metaBundle */

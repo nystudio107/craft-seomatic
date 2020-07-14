@@ -195,7 +195,6 @@ class SeoEntry implements SeoElementInterface
         $query = Entry::find()
             ->section($metaBundle->sourceHandle)
             ->siteId($metaBundle->sourceSiteId)
-            ->enabledForSite(true)
             ->limit($metaBundle->metaSitemapVars->sitemapLimit);
         if ($metaBundle->sourceType === 'structure'
             && !empty($metaBundle->metaSitemapVars->structureDepth)) {
@@ -224,7 +223,6 @@ class SeoEntry implements SeoElementInterface
             ->section($metaBundle->sourceHandle)
             ->id($elementId)
             ->siteId($siteId)
-            ->enabledForSite(true)
             ->limit(1)
             ->one();
     }

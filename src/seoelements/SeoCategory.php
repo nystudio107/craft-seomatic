@@ -192,8 +192,7 @@ class SeoCategory implements SeoElementInterface
         $query = Category::find()
             ->group($metaBundle->sourceHandle)
             ->siteId($metaBundle->sourceSiteId)
-            ->limit($metaBundle->metaSitemapVars->sitemapLimit)
-            ->enabledForSite(true);
+            ->limit($metaBundle->metaSitemapVars->sitemapLimit);
         if (!empty($metaBundle->metaSitemapVars->structureDepth)) {
             $query->level($metaBundle->metaSitemapVars->structureDepth.'<=');
         }
@@ -220,7 +219,6 @@ class SeoCategory implements SeoElementInterface
             ->id($elementId)
             ->siteId($siteId)
             ->limit(1)
-            ->enabledForSite(true)
             ->one();
     }
 

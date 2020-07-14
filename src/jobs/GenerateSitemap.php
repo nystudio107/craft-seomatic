@@ -389,7 +389,7 @@ class GenerateSitemap extends BaseJob
      */
     protected function assetSitemapItem(Asset $asset, MetaBundle $metaBundle, array &$lines)
     {
-        if ((bool)$asset->enabledForSite && $asset->getUrl() !== null) {
+        if ((bool)$asset->enabled && $asset->getUrl() !== null) {
             switch ($asset->kind) {
                 case 'image':
                     $lines[] = '<image:image>';
@@ -437,7 +437,7 @@ class GenerateSitemap extends BaseJob
      */
     protected function assetFilesSitemapLink(Asset $asset, MetaBundle $metaBundle, array &$lines)
     {
-        if ((bool)$asset->enabledForSite && $asset->getUrl() !== null) {
+        if ((bool)$asset->enabled && $asset->getUrl() !== null) {
             if (\in_array($asset->kind, SitemapTemplate::FILE_TYPES, false)) {
                 $dateUpdated = $asset->dateUpdated ?? $asset->dateCreated ?? new \DateTime;
                 $lines[] = '<url>';

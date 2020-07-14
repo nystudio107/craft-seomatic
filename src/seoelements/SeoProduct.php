@@ -199,9 +199,7 @@ class SeoProduct implements SeoElementInterface
         $query = Product::find()
             ->type($metaBundle->sourceHandle)
             ->siteId($metaBundle->sourceSiteId)
-            ->limit($metaBundle->metaSitemapVars->sitemapLimit)
-            ->enabledForSite(true)
-        ;
+            ->limit($metaBundle->metaSitemapVars->sitemapLimit);
 
         return $query;
     }
@@ -225,7 +223,6 @@ class SeoProduct implements SeoElementInterface
             ->id($elementId)
             ->siteId($siteId)
             ->limit(1)
-            ->enabledForSite(true)
             ->one();
     }
 
