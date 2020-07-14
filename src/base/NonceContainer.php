@@ -52,27 +52,14 @@ abstract class NonceContainer extends MetaContainer implements NonceContainerInt
     {
         if (!empty(Seomatic::$settings->cspNonce) && Seomatic::$settings->cspNonce === 'tag') {
             $cspNonces = $this->getCspNonces();
-            foreach($cspNonces as $cspNonce => $scriptTagHandle) {
-                $cspValue = $this->getCspValue($cspNonce, self::CSP_DIRECTIVE);
-                $cspHeader = self::CSP_HEADERS[0];
-                $dependencies = [];
-                if ($this instanceof MetaScriptContainer) {
-                    $dependencies = [
-                        Dependency::SCRIPT_DEPENDENCY => [$scriptTagHandle],
-                    ];
-                }
-                if ($this instanceof MetaJsonLdContainer) {
-                    $dependencies = [
-                        Dependency::JSONLD_DEPENDENCY => [$scriptTagHandle],
-                    ];
-                }
-                $metaTag = Seomatic::$plugin->tag->create([
-                    'key' => $cspValue,
-                    'httpEquiv' => $cspHeader,
-                    'content' => $cspValue,
-                    'dependencies' => $dependencies,
-                ]);
-            }
+            $cspHeader = self::CSP_HEADERS[0];
+            $cspDirective = self::CSP_DIRECTIVE;
+            $cspValue = "{$cspDirective} {$cspNonces};";
+            $metaTag = Seomatic::$plugin->tag->create([
+                'key' => $cspNonces,
+                'httpEquiv' => $cspHeader,
+                'content' => $cspValue,
+            ]);
         }
     }
 
@@ -83,11 +70,10 @@ abstract class NonceContainer extends MetaContainer implements NonceContainerInt
     {
         if (!empty(Seomatic::$settings->cspNonce) && Seomatic::$settings->cspNonce === 'header') {
             $cspNonces = $this->getCspNonces();
-            foreach($cspNonces as $cspNonce => $scriptTagHandle) {
-                $cspValue = $this->getCspValue($cspNonce, self::CSP_DIRECTIVE);
-                foreach(self::CSP_HEADERS as $cspHeader) {
-                    Craft::$app->getResponse()->getHeaders()->add($cspHeader, $cspValue . ';');
-                }
+            $cspDirective = self::CSP_DIRECTIVE;
+            $cspValue = "{$cspDirective} {$cspNonces};";
+            foreach(self::CSP_HEADERS as $cspHeader) {
+                Craft::$app->getResponse()->getHeaders()->add($cspHeader, $cspValue);
             }
         }
     }
@@ -98,19 +84,33 @@ abstract class NonceContainer extends MetaContainer implements NonceContainerInt
     /**
      * Return an array of all of the unique nonces
      *
-     * @return array
+     * @return string
      */
     protected function getCspNonces()
     {
-        $cspNonces = [];
+        $cspNonces = "";
         /** @var NonceItem $metaItemModel */
         foreach ($this->data as $metaItemModel) {
             if ($metaItemModel->include && !empty($metaItemModel->nonce)) {
-                $cspNonces[$metaItemModel->nonce] = $metaItemModel->key;
+                $dependencies = [];
+                $nonce = $metaItemModel->nonce;
+                if ($this instanceof MetaScriptContainer) {
+                    $dependencies = [
+                        Dependency::SCRIPT_DEPENDENCY => [$metaItemModel->key],
+                    ];
+                }
+                if ($this instanceof MetaJsonLdContainer) {
+                    $dependencies = [
+                        Dependency::JSONLD_DEPENDENCY => [$metaItemModel->key],
+                    ];
+                }
+                if (Dependency::validateDependencies($dependencies) && strpos($cspNonces, $nonce) === false) {
+                    $cspNonces .= "'nonce-{$nonce}' ";
+                }
             }
         }
 
-        return array_unique($cspNonces);
+        return trim($cspNonces);
     }
 
     /**
