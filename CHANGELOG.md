@@ -1,7 +1,9 @@
 # SEOmatic Changelog
 
-## 3.3.11 - 2020.07.09
+## 3.3.11 - 2020.07.14
 ### Added
+* Added support for automatically adding [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) (CSP) nonces to <script> tags (including JSON-LD)
+* Added Fixed [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) (CSP) script-src policies that should be added before the nonces
 * Added a `sanitizeFieldData()` that's called when pulling from other Craft fields, to ensure no executable Twig code exists
 * Added a unit test for `sanitizeFieldData()`
 
