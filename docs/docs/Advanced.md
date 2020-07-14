@@ -8,116 +8,109 @@ These are the same settings that are configured in the **Plugin Settings** in th
 
 ## Events
 
-    /**
-     * @event IncludeContainerEvent The event that is triggered when a container is
-     * about to be included.
-     *
-     * ---
-     * ```php
-     * use nystudio107\seomatic\events\IncludeContainerEvent;
-     * use nystudio107\seomatic\base\Container;
-     * use yii\base\Event;
-     * Event::on(Container::class, Container::EVENT_INCLUDE_CONTAINER, function(IncludeContainerEvent $e) {
-     *     $e->include = false;
-     * });
-     * ```
-     */
+### IncludeContainerEvent
+
     const EVENT_INCLUDE_CONTAINER = 'includeContainer';
 
+The event that is triggered when a container is about to be included.
 
-    /**
-     * @event InvalidateContainerCachesEvent The event that is triggered when SEOmatic
-     *        is about to clear its meta container caches
-     *
-     * ---
-     * ```php
-     * use nystudio107\seomatic\events\InvalidateContainerCachesEvent;
-     * use nystudio107\seomatic\services\MetaContainers;
-     * use yii\base\Event;
-     * Event::on(MetaContainers::class, MetaContainers::EVENT_INVALIDATE_CONTAINER_CACHES, function(InvalidateContainerCachesEvent $e) {
-     *     // Container caches are about to be cleared
-     * });
-     * ```
-     */
+```php
+use nystudio107\seomatic\events\IncludeContainerEvent;
+use nystudio107\seomatic\base\Container;
+use yii\base\Event;
+Event::on(Container::class, Container::EVENT_INCLUDE_CONTAINER, function(IncludeContainerEvent $e) {
+    $e->include = false;
+});
+```
+
+### InvalidateContainerCachesEvent
+
     const EVENT_INVALIDATE_CONTAINER_CACHES = 'invalidateContainerCaches';
 
-    /**
-     * @event RegisterSitemapUrlsEvent The event that is triggered when registering
-     * additional URLs for a sitemap.
-     *
-     * ---
-     * ```php
-     * use nystudio107\seomatic\events\RegisterSitemapUrlsEvent;
-     * use nystudio107\seomatic\models\SitemapCustomTemplate;
-     * use yii\base\Event;
-     * Event::on(SitemapCustomTemplate::class, SitemapCustomTemplate::EVENT_REGISTER_SITEMAP_URLS, function(RegisterSitemapUrlsEvent $e) {
-     *     $e->sitemaps[] = [
-     *         'loc' => $url,
-     *         'changefreq' => $changeFreq,
-     *         'priority' => $priority,
-     *         'lastmod' => $lastMod,
-     *     ];
-     * });
-     * ```
-     */
+The event that is triggered when SEOmatic is about to clear its meta container caches
+
+```php
+use nystudio107\seomatic\events\InvalidateContainerCachesEvent;
+use nystudio107\seomatic\services\MetaContainers;
+use yii\base\Event;
+Event::on(MetaContainers::class, MetaContainers::EVENT_INVALIDATE_CONTAINER_CACHES, function(InvalidateContainerCachesEvent $e) {
+    // Container caches are about to be cleared
+});
+```
+
+### RegisterSitemapUrlsEvent
+
     const EVENT_REGISTER_SITEMAP_URLS = 'registerSitemapUrls';
 
-    /**
-     * @event RegisterSitemapsEvent The event that is triggered when registering
-     * additional sitemaps for the sitemap index.
-     *
-     * ---
-     * ```php
-     * use nystudio107\seomatic\events\RegisterSitemapsEvent;
-     * use nystudio107\seomatic\models\SitemapIndexTemplate;
-     * use yii\base\Event;
-     * Event::on(SitemapIndexTemplate::class, SitemapIndexTemplate::EVENT_REGISTER_SITEMAPS, function(RegisterSitemapsEvent $e) {
-     *     $e->sitemaps[] = [
-     *         'loc' => $url,
-     *         'lastmod' => $lastMod,
-     *     ];
-     * });
-     * ```
-     */
+The event that is triggered when registering additional URLs for a sitemap.
+
+```php
+use nystudio107\seomatic\events\RegisterSitemapUrlsEvent;
+use nystudio107\seomatic\models\SitemapCustomTemplate;
+use yii\base\Event;
+Event::on(SitemapCustomTemplate::class, SitemapCustomTemplate::EVENT_REGISTER_SITEMAP_URLS, function(RegisterSitemapUrlsEvent $e) {
+    $e->sitemaps[] = [
+        'loc' => $url,
+        'changefreq' => $changeFreq,
+        'priority' => $priority,
+        'lastmod' => $lastMod,
+    ];
+});
+```
+
+### RegisterSitemapsEvent
+
     const EVENT_REGISTER_SITEMAPS = 'registerSitemaps';
 
-    /**
-     * @event RegisterComponentTypesEvent The event that is triggered when
-     *        registering SeoElement types
-     *
-     * SeoElement types must implement [[SeoElementInterface]]
-     *
-     * ```php
-     * use nystudio107\seomatic\services\SeoElements;
-     * use craft\events\RegisterComponentTypesEvent;
-     * use yii\base\Event;
-     *
-     * Event::on(SeoElements::class,
-     *     SeoElements::EVENT_REGISTER_SEO_ELEMENT_TYPES,
-     *     function(RegisterComponentTypesEvent $event) {
-     *         $event->types[] = MySeoElement::class;
-     *     }
-     * );
-     * ```
-     */
+The event that is triggered when registering additional sitemaps for the sitemap index.
+
+```php
+use nystudio107\seomatic\events\RegisterSitemapsEvent;
+use nystudio107\seomatic\models\SitemapIndexTemplate;
+use yii\base\Event;
+Event::on(SitemapIndexTemplate::class, SitemapIndexTemplate::EVENT_REGISTER_SITEMAPS, function(RegisterSitemapsEvent $e) {
+    $e->sitemaps[] = [
+        'loc' => $url,
+        'lastmod' => $lastMod,
+    ];
+});
+```
+
+### RegisterComponentTypesEvent
+
     const EVENT_REGISTER_SEO_ELEMENT_TYPES = 'registerSeoElementTypes';
 
-    /**
-     * @event AddDynamicMetaEvent The event that is triggered when SEOmatic has
-     *        included the standard meta containers, and gives your plugin/module
-     *        the chance to add whatever custom dynamic meta items you like
-     *
-     * ---
-     * ```php
-     * use nystudio107\seomatic\events\AddDynamicMetaEvent;
-     * use nystudio107\seomatic\helpers\DynamicMeta;
-     * use yii\base\Event;
-     * Event::on(DynamicMeta::class, DynamicMeta::EVENT_INCLUDE_CONTAINER, function(AddDynamicMetaEvent $e) {
-     *     // Add whatever dynamic meta items to the containers as you like
-     * });
-     * ```
-     */
+The event that is triggered when registering SeoElement types
+
+SeoElement types must implement [[SeoElementInterface]]
+
+```php
+use nystudio107\seomatic\services\SeoElements;
+use craft\events\RegisterComponentTypesEvent;
+use yii\base\Event;
+
+Event::on(SeoElements::class,
+    SeoElements::EVENT_REGISTER_SEO_ELEMENT_TYPES,
+    function(RegisterComponentTypesEvent $event) {
+        $event->types[] = MySeoElement::class;
+    }
+);
+```
+
+### AddDynamicMetaEvent
+
     const EVENT_ADD_DYNAMIC_META = 'addDynamicMeta';
+
+The event that is triggered when SEOmatic has included the standard meta containers, and gives your plugin/module the chance to add whatever custom dynamic meta items you like
+
+```php
+use nystudio107\seomatic\events\AddDynamicMetaEvent;
+use nystudio107\seomatic\helpers\DynamicMeta;
+use yii\base\Event;
+Event::on(DynamicMeta::class, DynamicMeta::EVENT_INCLUDE_CONTAINER, function(AddDynamicMetaEvent $e) {
+    // Add whatever dynamic meta items to the containers as you like
+});
+```
 
 ## Meta Bundle / Container Settings
 
