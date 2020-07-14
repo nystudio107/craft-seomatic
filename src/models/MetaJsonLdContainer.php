@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\base\MetaContainer;
+use nystudio107\seomatic\base\NonceContainer;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
@@ -26,7 +26,7 @@ use yii\web\View;
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaJsonLdContainer extends MetaContainer
+class MetaJsonLdContainer extends NonceContainer
 {
     // Constants
     // =========================================================================
@@ -110,8 +110,12 @@ class MetaJsonLdContainer extends MetaContainer
         ]);
         $jsonLdGraph->type = null;
         // Add the JSON-LD objects to our root JSON-LD's graph
+        $cspNonce = null;
         foreach ($tagData as $config) {
             $jsonLdGraph->graph[] = $config['jsonLd'];
+            if (!empty($config['jsonLd']->nonce)) {
+                $cspNonce = $config['jsonLd']->nonce;
+            }
         }
         // Render the JSON-LD object
         $jsonLd = $jsonLdGraph->render([
@@ -119,11 +123,18 @@ class MetaJsonLdContainer extends MetaContainer
             'renderScriptTags' => false,
             'array'            => false,
         ]);
+
         // Register the tags
+        $attrs = ['type' => 'application/ld+json'];
+        if (!empty($cspNonce)) {
+            $attrs = array_merge($attrs, [
+                'nonce' => $cspNonce,
+            ]);
+        }
         Seomatic::$view->registerScript(
             $jsonLd,
             View::POS_END,
-            ['type' => 'application/ld+json']
+            $attrs
         );
         Craft::endProfile('MetaJsonLdContainer::includeMetaData', __METHOD__);
     }

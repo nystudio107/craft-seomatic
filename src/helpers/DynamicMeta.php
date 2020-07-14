@@ -141,6 +141,7 @@ class DynamicMeta
      */
     public static function includeHttpHeaders()
     {
+        self::addCspHeaders();
         // Don't include headers for any response code >= 400
         $request = Craft::$app->getRequest();
         if (!$request->isConsoleRequest) {
@@ -214,6 +215,59 @@ class DynamicMeta
             if (Seomatic::$settings->generatorEnabled) {
                 $response->headers->add('X-Powered-By', 'SEOmatic');
             }
+        }
+    }
+
+    /**
+     * Get all of the CSP Nonces from containers that can have them
+     *
+     * @return array
+     */
+    public static function getCspNonces(): array
+    {
+        $cspNonces = [];
+        // Add in any fixed policies from Settings
+        if (!empty(Seomatic::$settings->cspScriptSrcPolicies)) {
+            $fixedCsps = Seomatic::$settings->cspScriptSrcPolicies;
+            $iterator = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($fixedCsps));
+            foreach($iterator as $value) {
+                $cspNonces[] = $value;
+            }
+        }
+        // Add in any CSP nonce headers
+        $container = Seomatic::$plugin->jsonLd->container();
+        if ($container !== null) {
+            $cspNonces = array_merge($cspNonces, $container->getCspNonces());
+        }
+        $container = Seomatic::$plugin->script->container();
+        if ($container !== null) {
+            $cspNonces = array_merge($cspNonces, $container->getCspNonces());
+        }
+
+        return $cspNonces;
+    }
+
+    /**
+     * Add the Content-Security-Policy script-src headers
+     */
+    public static function addCspHeaders()
+    {
+        $cspNonces = self::getCspNonces();
+        $container = Seomatic::$plugin->script->container();
+        if ($container !== null) {
+            $container->addNonceHeaders($cspNonces);
+        }
+    }
+
+    /**
+     * Add the Content-Security-Policy script-src tags
+     */
+    public static function addCspTags()
+    {
+        $cspNonces = self::getCspNonces();
+        $container = Seomatic::$plugin->script->container();
+        if ($container !== null) {
+            $container->addNonceTags($cspNonces);
         }
     }
 
