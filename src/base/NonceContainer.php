@@ -45,18 +45,17 @@ abstract class NonceContainer extends MetaContainer implements NonceContainerInt
     // =========================================================================
 
     /**
-     * Add nonce <meta http-equiv="Content-Security-Policy" content="script-src 'nonce-XXXXX'">
-     * tags to the $container
+     * @inheritDoc
      */
-    public function addNonceTags()
+    public function addNonceTags(array $cspNonces)
     {
-        if (!empty(Seomatic::$settings->cspNonce) && Seomatic::$settings->cspNonce === 'tag') {
-            $cspNonces = $this->getCspNonces();
+        if (!empty(Seomatic::$settings->cspNonce) && Seomatic::$settings->cspNonce === 'tag' && !empty($cspNonces)) {
+            $serializedNonces = implode(" ", $cspNonces);
             $cspHeader = self::CSP_HEADERS[0];
             $cspDirective = self::CSP_DIRECTIVE;
-            $cspValue = "{$cspDirective} {$cspNonces};";
+            $cspValue = "{$cspDirective} {$serializedNonces};";
             $metaTag = Seomatic::$plugin->tag->create([
-                'key' => $cspNonces,
+                'key' => md5($cspValue),
                 'httpEquiv' => $cspHeader,
                 'content' => $cspValue,
             ]);
@@ -64,31 +63,26 @@ abstract class NonceContainer extends MetaContainer implements NonceContainerInt
     }
 
     /**
-     * Add nonce "Content-Security-Policy: script-src 'nonce-XXXXX'" headers to the $response
+     * @inheritDoc
      */
-    public function addNonceHeaders()
+    public function addNonceHeaders(array $cspNonces)
     {
-        if (!empty(Seomatic::$settings->cspNonce) && Seomatic::$settings->cspNonce === 'header') {
-            $cspNonces = $this->getCspNonces();
+        if (!empty(Seomatic::$settings->cspNonce) && Seomatic::$settings->cspNonce === 'header' && !empty($cspNonces)) {
+            $serializedNonces = implode(" ", $cspNonces);
             $cspDirective = self::CSP_DIRECTIVE;
-            $cspValue = "{$cspDirective} {$cspNonces};";
+            $cspValue = "{$cspDirective} {$serializedNonces};";
             foreach(self::CSP_HEADERS as $cspHeader) {
                 Craft::$app->getResponse()->getHeaders()->add($cspHeader, $cspValue);
             }
         }
     }
 
-    // Protected Methods
-    // =========================================================================
-
     /**
-     * Return an array of all of the unique nonces
-     *
-     * @return string
+     * @inheritDoc
      */
-    protected function getCspNonces()
+    public function getCspNonces(): array
     {
-        $cspNonces = "";
+        $cspNonces = [];
         /** @var NonceItem $metaItemModel */
         foreach ($this->data as $metaItemModel) {
             if ($metaItemModel->include && !empty($metaItemModel->nonce)) {
@@ -104,14 +98,19 @@ abstract class NonceContainer extends MetaContainer implements NonceContainerInt
                         Dependency::JSONLD_DEPENDENCY => [$metaItemModel->key],
                     ];
                 }
-                if (Dependency::validateDependencies($dependencies) && strpos($cspNonces, $nonce) === false) {
-                    $cspNonces .= "'nonce-{$nonce}' ";
+                $cspNonce = "'nonce-{$nonce}'";
+                if (Dependency::validateDependencies($dependencies) && !in_array($cspNonce, $cspNonces, true)) {
+                    $cspNonces[] = $cspNonce;
                 }
             }
         }
 
-        return trim($cspNonces);
+        return $cspNonces;
     }
+
+    // Protected Methods
+    // =========================================================================
+
 
     /**
      * Return a CSP value for inclusion in header or meta tag

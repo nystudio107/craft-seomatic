@@ -298,6 +298,7 @@ class MetaContainers extends Component
         }
         // Add in our http headers
         DynamicMetaHelper::includeHttpHeaders();
+        DynamicMetaHelper::addCspTags();
         $this->parseGlobalVars();
         foreach ($this->metaContainers as $metaContainer) {
             /** @var $metaContainer MetaContainer */

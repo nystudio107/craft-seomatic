@@ -24,11 +24,22 @@ interface NonceContainerInterface
     /**
      * Add nonce <meta http-equiv="Content-Security-Policy" content="script-src 'nonce-XXXXX'">
      * tags to the $container
+     *
+     * @param array $cspNonces the array of nonces to add
      */
-    public function addNonceTags();
+    public function addNonceTags(array $cspNonces);
 
     /**
      * Add nonce "Content-Security-Policy: script-src 'nonce-XXXXX'" headers to the $response
+     *
+     * @param array $cspNonces the array of nonces to add
      */
-    public function addNonceHeaders();
+    public function addNonceHeaders(array $cspNonces);
+
+    /**
+     * Return an array of all of the unique nonces
+     *
+     * @return array
+     */
+    public function getCspNonces(): array;
 }
