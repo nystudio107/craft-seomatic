@@ -69,5 +69,26 @@
             errors: settings.getErrors("cspNonce"),
         }) }}
 
+        {{ forms.editableTableField({
+            label: "Fixed `script-src` Content Security Policies"|md|t("seomatic"),
+            instructions: "Fixed [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) `script-src` policies that should be added before the Nonces"|md|t("seomatic"),
+            id: 'cspScriptSrcPolicies',
+            name: 'cspScriptSrcPolicies',
+            required: false,
+            defaultValues: {
+                policy: "",
+            },
+            cols: {
+                policy: {
+                    heading: "Content Security Policy"|t("seomatic"),
+                    type: "singleline",
+                    width: "100%",
+                    code: true,
+                },
+            },
+            rows: settings.cspScriptSrcPolicies,
+            errors: settings.getErrors("cspScriptSrcPolicies"),
+        }) }}
+
     {% endnamespace %}
 </div>
