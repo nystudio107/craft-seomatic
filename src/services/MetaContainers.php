@@ -12,7 +12,6 @@
 namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\helpers\ArrayHelper;
-use nystudio107\seomatic\helpers\DynamicMeta;
 use nystudio107\seomatic\helpers\Json;
 use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\Seomatic;
@@ -101,6 +100,11 @@ class MetaContainers extends Component
      * @var string The current page number of paginated pages
      */
     public $paginationPage = '1';
+
+    /**
+     * @var null|string Cached nonce to be shared by all JSON-LD entities
+     */
+    public $cachedJsonLdNonce;
 
     // Protected Properties
     // =========================================================================
@@ -294,6 +298,7 @@ class MetaContainers extends Component
         }
         // Add in our http headers
         DynamicMetaHelper::includeHttpHeaders();
+        DynamicMetaHelper::addCspTags();
         $this->parseGlobalVars();
         foreach ($this->metaContainers as $metaContainer) {
             /** @var $metaContainer MetaContainer */
@@ -372,7 +377,7 @@ class MetaContainers extends Component
         }
         // Get the homeUrl and canonicalUrl
         $homeUrl = '/';
-        $canonicalUrl = DynamicMeta::sanitizeUrl($uri, false);
+        $canonicalUrl = DynamicMetaHelper::sanitizeUrl($uri, false);
         // Special-case the global bundle
         if ($uri === MetaBundles::GLOBAL_META_BUNDLE || $uri === '__home__') {
             $canonicalUrl = '/';

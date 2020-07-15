@@ -99,6 +99,19 @@ return [
     // Whether to dynamically include hreflang tags on paginated pages
     'addPaginatedHreflang' => true,
 
+    // Whether to include a Content Security Policy "nonce" for inline
+    // CSS or JavaScript. Valid values are 'header' or 'tag' for how the CSP
+    // should be included. c.f.:
+    // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#Unsafe_inline_script
+    'cspNonce' => '',
+
+    // Fixed Content Security Policies to be added before any CSP nonces
+    'cspScriptSrcPolicies' => [
+        0 => [
+            'policy' => "'self'",
+        ],
+    ],
+
     // Should the Canonical URL be automatically lower-cased?
     'lowercaseCanonicalUrl' => true,
 

@@ -38,6 +38,7 @@ class JsonLd extends \craft\helpers\Json
     const IGNORE_ALWAYS_ATTRIBUTES = [
         'include',
         'key',
+        'nonce',
     ];
 
     const FULLY_QUALIFIED_URL_KEYS = [
