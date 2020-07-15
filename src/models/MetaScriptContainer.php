@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models;
 
 use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\base\MetaContainer;
+use nystudio107\seomatic\base\NonceContainer;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
 
 use Craft;
@@ -25,7 +25,7 @@ use yii\web\View;
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaScriptContainer extends MetaContainer
+class MetaScriptContainer extends NonceContainer
 {
     // Constants
     // =========================================================================
@@ -77,7 +77,8 @@ class MetaScriptContainer extends MetaContainer
                             if (!empty($js)) {
                                 $tagData[] = [
                                     'js' => $js,
-                                    'position' => $metaScriptModel->position ?? $this->position
+                                    'position' => $metaScriptModel->position ?? $this->position,
+                                    'nonce' => $metaScriptModel->nonce ?? null,
                                 ];
                                 // If `devMode` is enabled, validate the Meta Script and output any model errors
                                 if (Seomatic::$devMode) {
@@ -101,11 +102,21 @@ class MetaScriptContainer extends MetaContainer
         }
         // Register the tags
         foreach ($tagData as $config) {
-            Seomatic::$view->registerJs(
+            // Register the tags
+            $attrs = ['type' => 'text/javascript'];
+            if (!empty($config['nonce'])) {
+                /** @noinspection SlowArrayOperationsInLoopInspection */
+                $attrs = array_merge($attrs, [
+                    'nonce' => $config['nonce'],
+                ]);
+            }
+            Seomatic::$view->registerScript(
                 $config['js'],
-                $config['position']
+                $config['position'],
+                $attrs
             );
         }
+
         Craft::endProfile('MetaScriptContainer::includeMetaData', __METHOD__);
     }
 

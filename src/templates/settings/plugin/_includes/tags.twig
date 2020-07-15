@@ -54,5 +54,41 @@
             errors: settings.getErrors("headersEnabled"),
         }) }}
 
+        {{ forms.selectField({
+            label: "Nonces for `<script>` tags"|md|t("seomatic"),
+            instructions: "Whether SEOmatic should automatically add `script-src` [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) nonces to `<script>` tags (including JSON-LD)."|md|t("seomatic"),
+            id: "cspNonce",
+            name: "cspNonce",
+            value: settings.cspNonce,
+            options: {
+                "": "None"|t("seomatic"),
+                "tag": "Meta Tags"|t("seomatic"),
+                "header": "Response Headers"|t("seomatic"),
+            },
+            warning: configWarning("cspNonce", "seomatic"),
+            errors: settings.getErrors("cspNonce"),
+        }) }}
+
+        {{ forms.editableTableField({
+            label: "Fixed `script-src` Content Security Policies"|md|t("seomatic"),
+            instructions: "Fixed [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) `script-src` policies that should be added before the Nonces"|md|t("seomatic"),
+            id: 'cspScriptSrcPolicies',
+            name: 'cspScriptSrcPolicies',
+            required: false,
+            defaultValues: {
+                policy: "",
+            },
+            cols: {
+                policy: {
+                    heading: "Content Security Policy"|t("seomatic"),
+                    type: "singleline",
+                    width: "100%",
+                    code: true,
+                },
+            },
+            rows: settings.cspScriptSrcPolicies,
+            errors: settings.getErrors("cspScriptSrcPolicies"),
+        }) }}
+
     {% endnamespace %}
 </div>
