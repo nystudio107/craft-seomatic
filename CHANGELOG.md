@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.12 - 2020.07.18
+### Changed
+* Check for `null` to ensure that the SEO Settings field exists when trying to prune properties from from it in `pruneFieldMetaBundleSettings()`
+
 ## 3.3.11 - 2020.07.14
 ### Added
 * Added support for automatically adding [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) (CSP) nonces to <script> tags (including JSON-LD)
