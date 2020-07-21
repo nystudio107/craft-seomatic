@@ -24,6 +24,7 @@ use nystudio107\seomatic\models\jsonld\BreadcrumbList;
 use nystudio107\seomatic\models\jsonld\Thing;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaJsonLd;
+use nystudio107\seomatic\services\Helper as SeomaticHelper;
 
 
 use Craft;
@@ -146,7 +147,7 @@ class DynamicMeta
         $request = Craft::$app->getRequest();
         if (!$request->isConsoleRequest) {
             $response = Craft::$app->getResponse();
-            if ($response->statusCode >= 400) {
+            if ($response->statusCode >= 400 || SeomaticHelper::isPreview()) {
                 return;
             }
         }
