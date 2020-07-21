@@ -4,6 +4,7 @@
 ### Fixed
 * Fixed an issue where `null` could be passed into `groupId` for the sitemap generation job, causing it to fail
 * If a request is a preview request of any kind, set the `robots` tag to `none`
+* Don’t send any headers for preview requests
 
 ### Changed
 * Check for `null` to ensure that the SEO Settings field exists when trying to prune properties from from it in `pruneFieldMetaBundleSettings()`
