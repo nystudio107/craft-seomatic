@@ -583,36 +583,38 @@ class MetaBundles extends Component
     {
         /** @var SeoSettings $seoSettingsField */
         $seoSettingsField = Craft::$app->getFields()->getFieldByHandle($fieldHandle);
-        $seoSettingsEnabledFields = array_flip(array_merge(
-            $seoSettingsField->generalEnabledFields,
-            $seoSettingsField->twitterEnabledFields,
-            $seoSettingsField->facebookEnabledFields,
-            $seoSettingsField->sitemapEnabledFields
-        ));
-        // Always include some fields, as they are calculated even if not explicitly included
-        $seoSettingsEnabledFields = array_merge(
-            $seoSettingsEnabledFields,
-            array_flip(self::ALWAYS_INCLUDED_SEO_SETTINGS_FIELDS)
-        );
-        // metaGlobalVars
-        $attributes = $metaBundle->metaGlobalVars->getAttributes();
-        $emptyValues = array_fill_keys(array_keys(array_diff_key($attributes, $seoSettingsEnabledFields)), '');
-        $attributes = array_merge($attributes, $emptyValues);
-        $metaBundle->metaGlobalVars->setAttributes($attributes, false);
-        // Handle the mainEntityOfPage
-        if (!\in_array('mainEntityOfPage', $seoSettingsField->generalEnabledFields, false)) {
-            $metaBundle->metaGlobalVars->mainEntityOfPage = '';
+        if ($seoSettingsField) {
+            $seoSettingsEnabledFields = array_flip(array_merge(
+                $seoSettingsField->generalEnabledFields,
+                $seoSettingsField->twitterEnabledFields,
+                $seoSettingsField->facebookEnabledFields,
+                $seoSettingsField->sitemapEnabledFields
+            ));
+            // Always include some fields, as they are calculated even if not explicitly included
+            $seoSettingsEnabledFields = array_merge(
+                $seoSettingsEnabledFields,
+                array_flip(self::ALWAYS_INCLUDED_SEO_SETTINGS_FIELDS)
+            );
+            // metaGlobalVars
+            $attributes = $metaBundle->metaGlobalVars->getAttributes();
+            $emptyValues = array_fill_keys(array_keys(array_diff_key($attributes, $seoSettingsEnabledFields)), '');
+            $attributes = array_merge($attributes, $emptyValues);
+            $metaBundle->metaGlobalVars->setAttributes($attributes, false);
+            // Handle the mainEntityOfPage
+            if (!\in_array('mainEntityOfPage', $seoSettingsField->generalEnabledFields, false)) {
+                $metaBundle->metaGlobalVars->mainEntityOfPage = '';
+            }
+            // metaSiteVars
+            $attributes = $metaBundle->metaSiteVars->getAttributes();
+            $emptyValues = array_fill_keys(array_keys(array_diff_key($attributes, $seoSettingsEnabledFields)), '');
+            $attributes = array_merge($attributes, $emptyValues);
+            $metaBundle->metaSiteVars->setAttributes($attributes, false);
+            // metaSitemapVars
+            $attributes = $metaBundle->metaSitemapVars->getAttributes();
+            $emptyValues = array_fill_keys(array_keys(array_diff_key($attributes, $seoSettingsEnabledFields)), '');
+            $attributes = array_merge($attributes, $emptyValues);
+            $metaBundle->metaSitemapVars->setAttributes($attributes, false);
         }
-        // metaSiteVars
-        $attributes = $metaBundle->metaSiteVars->getAttributes();
-        $emptyValues = array_fill_keys(array_keys(array_diff_key($attributes, $seoSettingsEnabledFields)), '');
-        $attributes = array_merge($attributes, $emptyValues);
-        $metaBundle->metaSiteVars->setAttributes($attributes, false);
-        // metaSitemapVars
-        $attributes = $metaBundle->metaSitemapVars->getAttributes();
-        $emptyValues = array_fill_keys(array_keys(array_diff_key($attributes, $seoSettingsEnabledFields)), '');
-        $attributes = array_merge($attributes, $emptyValues);
-        $metaBundle->metaSitemapVars->setAttributes($attributes, false);
     }
 
     /**
