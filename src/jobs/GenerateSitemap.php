@@ -67,8 +67,13 @@ class GenerateSitemap extends BaseJob
      */
     public function execute($queue)
     {
+        Craft::error(print_r($this, true), __METHOD__);
         if (Seomatic::$settings->siteGroupsSeparate) {
             /** @var SiteGroup $siteGroup */
+            if (empty($this->groupId)) {
+                $group = Craft::$app->getSites()->getSiteById($this->siteId)->getGroup();
+                $this->groupId = $group->id;
+            }
             $siteGroup = Craft::$app->getSites()->getGroupById($this->groupId);
             $groupSiteIds = $siteGroup->getSiteIds();
         } else {
