@@ -7,7 +7,7 @@
 * Don’t send any headers for preview requests
 
 ### Changed
-* Check for `null` to ensure that the SEO Settings field exists when trying to prune properties from from it in `pruneFieldMetaBundleSettings()`
+* Check for `null` to ensure that the SEO Settings field exists when trying to prune properties from it in `pruneFieldMetaBundleSettings()`
 
 ## 3.3.11 - 2020.07.14
 ### Added
