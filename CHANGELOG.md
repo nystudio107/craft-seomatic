@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.13 - 2020.07.24
+### Fixed
+* Fixed deprecation errors with Craft CMS 3.5RC1
+
 ## 3.3.12 - 2020.07.21
 ### Fixed
 * Fixed an issue where `null` could be passed into `groupId` for the sitemap generation job, causing it to fail
