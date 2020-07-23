@@ -3,6 +3,7 @@
 ## 3.3.13 - 2020.07.24
 ### Fixed
 * Fixed deprecation errors with Craft CMS 3.5RC1
+* Fixed an issue where a regression caused the **Include `x-default hreflang` Tag** setting was not respected
 
 ## 3.3.12 - 2020.07.21
 ### Fixed
