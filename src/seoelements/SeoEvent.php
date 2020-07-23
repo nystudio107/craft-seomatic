@@ -200,7 +200,7 @@ class SeoEvent implements SeoElementInterface
             ->setLoadOccurrences(false)
             ->siteId($metaBundle->sourceSiteId)
             ->limit($metaBundle->metaSitemapVars->sitemapLimit)
-            ->enabledForSite(true);
+            ;
 
         return $query;
     }
@@ -224,8 +224,8 @@ class SeoEvent implements SeoElementInterface
             ->id($elementId)
             ->siteId($siteId)
             ->limit(1)
-            ->enabledForSite(true)
-            ->one();
+            ->one()
+            ;
     }
 
     /**
@@ -243,7 +243,8 @@ class SeoEvent implements SeoElementInterface
         $element = Event::find()
             ->setCalendar($sourceHandle)
             ->siteId($siteId)
-            ->one();
+            ->one()
+        ;
         if ($element) {
             $uri = $element->uri;
         }
@@ -344,7 +345,8 @@ class SeoEvent implements SeoElementInterface
             ->siteId($sourceSiteId)
             ->limit(1)
             ->orderBy(['elements.dateUpdated' => SORT_DESC])
-            ->one();
+            ->one()
+            ;
     }
 
     /**

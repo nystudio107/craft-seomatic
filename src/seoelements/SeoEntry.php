@@ -195,8 +195,8 @@ class SeoEntry implements SeoElementInterface
         $query = Entry::find()
             ->section($metaBundle->sourceHandle)
             ->siteId($metaBundle->sourceSiteId)
-            ->enabledForSite(true)
-            ->limit($metaBundle->metaSitemapVars->sitemapLimit);
+            ->limit($metaBundle->metaSitemapVars->sitemapLimit)
+        ;
         if ($metaBundle->sourceType === 'structure'
             && !empty($metaBundle->metaSitemapVars->structureDepth)) {
             $query->level($metaBundle->metaSitemapVars->structureDepth.'<=');
@@ -224,9 +224,9 @@ class SeoEntry implements SeoElementInterface
             ->section($metaBundle->sourceHandle)
             ->id($elementId)
             ->siteId($siteId)
-            ->enabledForSite(true)
             ->limit(1)
-            ->one();
+            ->one()
+            ;
     }
 
     /**
@@ -244,7 +244,8 @@ class SeoEntry implements SeoElementInterface
         $element = Entry::find()
             ->section($sourceHandle)
             ->siteId($siteId)
-            ->one();
+            ->one()
+        ;
         if ($element) {
             $uri = $element->uri;
         }
@@ -340,7 +341,8 @@ class SeoEntry implements SeoElementInterface
             ->siteId($sourceSiteId)
             ->limit(1)
             ->orderBy(['elements.dateUpdated' => SORT_DESC])
-            ->one();
+            ->one()
+            ;
     }
 
     /**
