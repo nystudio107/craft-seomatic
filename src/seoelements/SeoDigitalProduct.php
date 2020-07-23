@@ -200,7 +200,6 @@ class SeoDigitalProduct implements SeoElementInterface
             ->type($metaBundle->sourceHandle)
             ->siteId($metaBundle->sourceSiteId)
             ->limit($metaBundle->metaSitemapVars->sitemapLimit)
-            ->enabledForSite(true)
         ;
 
         return $query;
@@ -225,8 +224,8 @@ class SeoDigitalProduct implements SeoElementInterface
             ->id($elementId)
             ->siteId($siteId)
             ->limit(1)
-            ->enabledForSite(true)
-            ->one();
+            ->one()
+            ;
     }
 
     /**
@@ -244,7 +243,8 @@ class SeoDigitalProduct implements SeoElementInterface
         $element = Product::find()
             ->type($sourceHandle)
             ->siteId($siteId)
-            ->one();
+            ->one()
+        ;
         if ($element) {
             $uri = $element->uri;
         }
@@ -345,7 +345,8 @@ class SeoDigitalProduct implements SeoElementInterface
             ->siteId($sourceSiteId)
             ->limit(1)
             ->orderBy(['elements.dateUpdated' => SORT_DESC])
-            ->one();
+            ->one()
+            ;
     }
 
     /**
