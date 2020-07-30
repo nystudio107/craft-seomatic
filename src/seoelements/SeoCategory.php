@@ -193,7 +193,7 @@ class SeoCategory implements SeoElementInterface
             ->group($metaBundle->sourceHandle)
             ->siteId($metaBundle->sourceSiteId)
             ->limit($metaBundle->metaSitemapVars->sitemapLimit)
-            ->enabledForSite(true);
+            ;
         if (!empty($metaBundle->metaSitemapVars->structureDepth)) {
             $query->level($metaBundle->metaSitemapVars->structureDepth.'<=');
         }
@@ -220,8 +220,8 @@ class SeoCategory implements SeoElementInterface
             ->id($elementId)
             ->siteId($siteId)
             ->limit(1)
-            ->enabledForSite(true)
-            ->one();
+            ->one()
+            ;
     }
 
     /**
@@ -239,7 +239,8 @@ class SeoCategory implements SeoElementInterface
         $element = Category::find()
             ->group($sourceHandle)
             ->siteId($siteId)
-            ->one();
+            ->one()
+        ;
         if ($element) {
             $uri = $element->uri;
         }
@@ -325,7 +326,8 @@ class SeoCategory implements SeoElementInterface
             ->siteId($sourceSiteId)
             ->limit(1)
             ->orderBy(['elements.dateUpdated' => SORT_DESC])
-            ->one();
+            ->one()
+            ;
     }
 
     /**
