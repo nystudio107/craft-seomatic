@@ -1,5 +1,11 @@
 # SEOmatic Changelog
 
+## 3.3.13 - 2020.07.30
+### Fixed
+* Added `craftcms/cms` back in as a dependency so Craft sees updates to the plugin again
+* Fixed deprecation errors with Craft CMS 3.5RC1
+* Fixed an issue where a regression caused the **Include `x-default hreflang` Tag** setting was not respected
+
 ## 3.3.12 - 2020.07.21
 ### Fixed
 * Fixed an issue where `null` could be passed into `groupId` for the sitemap generation job, causing it to fail

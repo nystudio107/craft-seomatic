@@ -513,7 +513,7 @@ class DynamicMeta
                     $metaTag->hreflang[] = $siteLocalizedUrl['hreflangLanguage'];
                     $metaTag->href[] = $siteLocalizedUrl['url'];
                     // Add the x-default hreflang
-                    if ($siteLocalizedUrl['primary']) {
+                    if ($siteLocalizedUrl['primary'] && Seomatic::$settings->addXDefaultHrefLang) {
                         $metaTag->hreflang[] = 'x-default';
                         $metaTag->href[] = $siteLocalizedUrl['url'];
 
