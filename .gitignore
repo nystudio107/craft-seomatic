@@ -18,9 +18,6 @@
 .env
 
 # COMPOSER
-composer.lock
-
-# COMPOSER
 /vendor
 
 # BUILD FILES
