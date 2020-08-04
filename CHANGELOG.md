@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.14 - 2020.08.04
+### Fixed
+* Fixed an issue that caused sitemap generation to fail if you're using a non-native queue runner
+
 ## 3.3.13 - 2020.07.30
 ### Fixed
 * Added `craftcms/cms` back in as a dependency so Craft sees updates to the plugin again
