@@ -18,6 +18,7 @@ use nystudio107\seomatic\helpers\Queue as QueueHelper;
 use nystudio107\seomatic\jobs\GenerateSitemap;
 
 use Craft;
+use craft\queue\QueueInterface;
 
 use yii\caching\TagDependency;
 use yii\web\NotFoundHttpException;
@@ -120,15 +121,16 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         $result = $cache->get($cacheKey);
         // If the sitemap isn't cached, start a job to create it
         if ($result === false) {
+            $queue = Craft::$app->getQueue();
             // If there's an existing queue job, release it so queue jobs don't stack
             $existingJobId = $cache->get($queueJobCacheKey);
-            if ($existingJobId) {
+            // Make sure the queue uses the Craft web interface
+            if ($existingJobId && $queue instanceof QueueInterface) {
                 $queue = Craft::$app->getQueue();
                 $queue->release($existingJobId);
                 $cache->delete($queueJobCacheKey);
             }
             // Push a new queue job
-            $queue = Craft::$app->getQueue();
             $jobId = $queue->push(new GenerateSitemap([
                 'groupId' => $groupId,
                 'type' => $type,
