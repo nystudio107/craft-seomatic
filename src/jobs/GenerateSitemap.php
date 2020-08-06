@@ -67,23 +67,32 @@ class GenerateSitemap extends BaseJob
      */
     public function execute($queue)
     {
+        // Get an array of site ids for this site group
+        $groupSiteIds = [];
         if (Seomatic::$settings->siteGroupsSeparate) {
             /** @var SiteGroup $siteGroup */
             if (empty($this->groupId)) {
-                $group = Craft::$app->getSites()->getSiteById($this->siteId)->getGroup();
-                $this->groupId = $group->id;
+                try {
+                    $thisSite = Craft::$app->getSites()->getSiteById($this->siteId);
+                    if ($thisSite !== null) {
+                        $group = $thisSite->getGroup();
+                        $this->groupId = $group->id;
+                    }
+                } catch (\Throwable $e) {
+                }
             }
             $siteGroup = Craft::$app->getSites()->getGroupById($this->groupId);
-            $groupSiteIds = $siteGroup->getSiteIds();
-        } else {
+            if ($siteGroup !== null) {
+                $groupSiteIds = $siteGroup->getSiteIds();
+            }
+        }
+        if (empty($groupSiteIds)) {
             $groupSiteIds = Craft::$app->getSites()->allSiteIds;
         }
-
         // Output some info if this is a console app
         if (Craft::$app instanceof ConsoleApplication) {
             echo $this->description.PHP_EOL;
         }
-
         $lines = [];
         // Sitemap index XML header and opening tag
         $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
