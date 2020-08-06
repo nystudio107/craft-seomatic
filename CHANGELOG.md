@@ -1,8 +1,9 @@
 # SEOmatic Changelog
 
-## 3.3.14 - 2020.08.04
+## 3.3.14 - 2020.08.06
 ### Fixed
 * Fixed an issue that caused sitemap generation to fail if you're using a non-native queue runner
+* Handle invalid sites that have no site group without throwing an exception
 
 ## 3.3.13 - 2020.07.30
 ### Fixed
