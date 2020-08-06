@@ -79,6 +79,7 @@ class GenerateSitemap extends BaseJob
                         $this->groupId = $group->id;
                     }
                 } catch (\Throwable $e) {
+                    Craft::error($e->getMessage(), __METHOD__);
                 }
             }
             $siteGroup = Craft::$app->getSites()->getGroupById($this->groupId);
