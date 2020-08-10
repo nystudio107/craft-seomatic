@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.3.14 - 2020.08.10
+### Changed
+* Handle empty titles and empty site names by not including the separator character
+
 ### Fixed
 * Fixed an issue that caused sitemap generation to fail if you're using a non-native queue runner
 * Handle invalid sites that have no site group without throwing an exception
