@@ -277,7 +277,7 @@ class SettingsController extends Controller
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteIdToLoad);
         Seomatic::$previewingMetaContainers = false;
         if ($metaBundle !== null) {
-            $variables['metaGlobalVars'] = $metaBundle->metaGlobalVars;
+            $variables['metaGlobalVars'] = clone $metaBundle->metaGlobalVars;
             $variables['metaSitemapVars'] = $metaBundle->metaSitemapVars;
             $variables['metaBundleSettings'] = $metaBundle->metaBundleSettings;
             // Template container settings
@@ -312,7 +312,6 @@ class SettingsController extends Controller
             MetaBundles::GLOBAL_META_BUNDLE,
             (int)$variables['currentSiteId']
         );
-
         // Render the template
         return $this->renderTemplate('seomatic/settings/global/'.$subSection, $variables);
     }
@@ -501,7 +500,7 @@ class SettingsController extends Controller
         Seomatic::$previewingMetaContainers = false;
         $templateTitle = '';
         if ($metaBundle !== null) {
-            $variables['metaGlobalVars'] = $metaBundle->metaGlobalVars;
+            $variables['metaGlobalVars'] = clone $metaBundle->metaGlobalVars;
             $variables['metaSitemapVars'] = $metaBundle->metaSitemapVars;
             $variables['metaBundleSettings'] = $metaBundle->metaBundleSettings;
             $variables['currentSourceHandle'] = $metaBundle->sourceHandle;
