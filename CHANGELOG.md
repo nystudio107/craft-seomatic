@@ -3,6 +3,7 @@
 ## 3.3.14 - 2020.08.10
 ### Changed
 * Handle empty titles and empty site names by not including the separator character
+* Trim trailing slashes from absolute URLs unless `addTrailingSlashesToUrls` is true
 
 ### Fixed
 * Fixed an issue that caused sitemap generation to fail if you're using a non-native queue runner
