@@ -1,5 +1,15 @@
 # SEOmatic Changelog
 
+## 3.3.14 - 2020.08.10
+### Changed
+* Handle empty titles and empty site names by not including the separator character
+* Trim trailing slashes from absolute URLs unless `addTrailingSlashesToUrls` is true
+
+### Fixed
+* Fixed an issue that caused sitemap generation to fail if you're using a non-native queue runner
+* Handle invalid sites that have no site group without throwing an exception
+* Fixed an issue where you were unable to set the Canonical URL to an environment variable
+
 ## 3.3.13 - 2020.07.30
 ### Fixed
 * Added `craftcms/cms` back in as a dependency so Craft sees updates to the plugin again

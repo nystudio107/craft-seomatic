@@ -126,19 +126,20 @@ class MetaTitle extends MetaItem
         $shouldRender = parent::prepForRender($data);
         if ($shouldRender) {
             // handle the site name
+            $separator = MetaValueHelper::parseString($this->separatorChar);
             $position = MetaValueHelper::parseString($this->siteNamePosition);
             switch ($position) {
                 case 'before':
                     $prefix = MetaValueHelper::parseString($this->siteName)
                         . ' '
-                        . MetaValueHelper::parseString($this->separatorChar)
+                        . $separator
                         . ' ';
                     $suffix = '';
                     break;
                 case 'after':
                     $prefix = '';
                     $suffix = ' '
-                        . MetaValueHelper::parseString($this->separatorChar)
+                        . $separator
                         . ' '
                         . MetaValueHelper::parseString($this->siteName);
                     break;
@@ -146,6 +147,13 @@ class MetaTitle extends MetaItem
                     $prefix = '';
                     $suffix = '';
                     break;
+            }
+            // Handle the case of empty titles
+            if ($prefix === (' '.$separator.' ')) {
+                $prefix = '';
+            }
+            if ($suffix === (' '.$separator)) {
+                $suffix = '';
             }
             // Remove potential double spaces
             $prefix = preg_replace('/\s+/', ' ', $prefix);;
@@ -166,8 +174,8 @@ class MetaTitle extends MetaItem
                     $truncLen,
                     '…'
                 );
+                $data = $prefix.$data.$suffix;
             }
-            $data = $prefix.$data.$suffix;
             // Trim whitespace
             $data = trim($data);
             // devMode

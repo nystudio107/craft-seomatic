@@ -644,7 +644,7 @@ class DynamicMeta
                             $includeUrl = false;
                         }
                         // If robots is set tp 'none' don't include the URL
-                        if ($metaBundle->metaGlobalVars->robots === 'none') {
+                        if ($metaBundle->metaGlobalVars->robots === 'none' || $metaBundle->metaGlobalVars->robots === 'noindex') {
                             $includeUrl = false;
                         }
                     }
@@ -667,7 +667,7 @@ class DynamicMeta
                                     $includeUrl = false;
                                 }
                                 // If robots is set to 'none' don't include the URL
-                                if ($fieldMetaBundle->metaGlobalVars->robots === 'none') {
+                                if ($fieldMetaBundle->metaGlobalVars->robots === 'none' || $fieldMetaBundle->metaGlobalVars->robots === 'noindex') {
                                     $includeUrl = false;
                                 }
                             }
