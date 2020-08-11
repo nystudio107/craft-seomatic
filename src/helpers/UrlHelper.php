@@ -49,6 +49,9 @@ class UrlHelper extends CraftUrlHelper
             if ($generalConfig->addTrailingSlashesToUrls && !preg_match('/\.[^\/]+$/', $url)) {
                 $url = rtrim($url, '/') . '/';
             }
+            if (!$generalConfig->addTrailingSlashesToUrls) {
+                $url = rtrim($url, '/');
+            }
 
             return $url;
         }
@@ -122,6 +125,9 @@ class UrlHelper extends CraftUrlHelper
         $generalConfig = Craft::$app->getConfig()->getGeneral();
         if ($generalConfig->addTrailingSlashesToUrls && !preg_match('/\.[^\/]+$/', $url)) {
             $url = rtrim($url, '/') . '/';
+        }
+        if (!$generalConfig->addTrailingSlashesToUrls) {
+            $url = rtrim($url, '/');
         }
 
         return $url;
