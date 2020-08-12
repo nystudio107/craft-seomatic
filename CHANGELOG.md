@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.15 - 2020.08.12
+### Changed
+* Social image transforms for remote volumes no longer default to not generating the image transforms immediately (they fall back on whatever your system setting is)
+
 ## 3.3.14 - 2020.08.10
 ### Changed
 * Handle empty titles and empty site names by not including the separator character
