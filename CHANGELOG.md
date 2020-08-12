@@ -3,6 +3,7 @@
 ## 3.3.15 - 2020.08.12
 ### Changed
 * Social image transforms for remote volumes no longer default to not generating the image transforms immediately (they fall back on whatever your system setting is)
+* If no title is provided, just use the site name
 
 ## 3.3.14 - 2020.08.10
 ### Changed
