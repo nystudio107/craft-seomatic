@@ -48,6 +48,11 @@ class SstiUnitTest extends Unit
      */
     public function testSanitizeUrl()
     {
+        // Handle newline-injected in the URI
+        $this->assertSame(
+            '',
+            DynamicMetaHelper::sanitizeUrl("{{\ncraft.app.config.general.actionTrigger\n}}")
+        );
         // Strip Twig code
         $this->assertSame(
             '',
