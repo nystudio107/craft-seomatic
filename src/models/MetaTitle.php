@@ -175,6 +175,9 @@ class MetaTitle extends MetaItem
                     '…'
                 );
                 $data = $prefix.$data.$suffix;
+            } else {
+                // If no title is provided, just use the site name
+                $data = MetaValueHelper::parseString($this->siteName);
             }
             // Trim whitespace
             $data = trim($data);
