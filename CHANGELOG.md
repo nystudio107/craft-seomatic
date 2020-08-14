@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.3.15 - 2020.08.14
+## 3.3.15 - 2020.08.14  [CRITICAL]
 ### Added
 * Add unit tests for the Meta Title tag
 * Added a unit test for newline insertion in the GraphQL query payload
@@ -10,7 +10,7 @@
 * If no title is provided, just use the site name
 
 ### Security
-* Fixed a potential SSTI if the GraphQL API is enabled in Craft, and a specially crafted request is sent to it
+* Fixed a potential SSTI if the GraphQL API is enabled in Craft, is open to the public, and a specially crafted request is sent to it
 
 ## 3.3.14 - 2020.08.10
 ### Changed
