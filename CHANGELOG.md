@@ -1,12 +1,16 @@
 # SEOmatic Changelog
 
-## 3.3.15 - 2020.08.12
+## 3.3.15 - 2020.08.14
 ### Added
 * Add unit tests for the Meta Title tag
+* Added a unit test for newline insertion in the GraphQL query payload
 
 ### Changed
 * Social image transforms for remote volumes no longer default to not generating the image transforms immediately (they fall back on whatever your system setting is)
 * If no title is provided, just use the site name
+
+### Security
+* Fixed a potential SSTI if the GraphQL API is enabled in Craft, and a specially crafted request is sent to it
 
 ## 3.3.14 - 2020.08.10
 ### Changed
