@@ -16,8 +16,8 @@
     <div class="field seomatic-imageSourceWrapper" id="metaBundleSettings-ogImageSource-field">
         <div class="heading">
             <label id="metaBundleSettings-ogImageSource-label" for="metaBundleSettings-ogImageSource">{{ "Facebook OpenGraph Image Source"|t("seomatic") }}</label>
-            <div class="instructions"><p>{{ "This is the image that will be used for display on Facebook posts that link to the web page."|t("seomatic") }}</p>
-            </div>
+        </div>
+        <div class="instructions"><p>{{ "This is the image that will be used for display on Facebook posts that link to the web page."|t("seomatic") }}</p>
         </div>
         {% namespace "metaBundleSettings" %}
             <div class="heading">
@@ -31,7 +31,7 @@
                 }) }}
             </div>
         {% endnamespace %}
-        
+
         {% if assetFieldSources is defined and assetFieldSources |length %}
             {% namespace "metaBundleSettings" %}
                 <div class="heading seomatic-imageSourceFromField">
@@ -46,7 +46,7 @@
                 </div>
             {% endnamespace %}
         {% endif %}
-        
+
         {% namespace "metaBundleSettings" %}
             <div class="heading seomatic-imageSourceFromAsset">
                 {{ forms.elementSelect({
@@ -67,7 +67,7 @@
                 }) }}
             </div>
         {% endnamespace %}
-        
+
         {% namespace "metaGlobalVars" %}
             <div class="heading seomatic-imageSourceFromUrl">
                 {{ forms.text({
