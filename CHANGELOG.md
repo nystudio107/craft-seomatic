@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.16 - 2020.08.16
+### Fixed
+* Fixed a formatting issue introduced in Craft CMS 3.5.4 that caused the layout in some of SEOmatic's settings to be incorrect
+
 ## 3.3.15 - 2020.08.14  [CRITICAL]
 ### Added
 * Add unit tests for the Meta Title tag
