@@ -12,7 +12,7 @@ const pkg = require('./package.json');
 const settings = require('./webpack.settings.js');
 
 // Configure the webpack-dev-server
-const configureDevServer = (buildType) => {
+const configureDevServer = () => {
     return {
         public: settings.devServerConfig.public(),
         contentBase: path.resolve(__dirname, settings.paths.templates),
@@ -90,33 +90,31 @@ const configurePostcssLoader = () => {
 };
 
 // Development module exports
-module.exports = [
-    merge(
-        common.legacyConfig,
-        {
-            output: {
-                filename: path.join('./js', '[name].js'),
-                publicPath: settings.devServerConfig.public() + '/',
-            },
-            resolve: {
-                alias: {
-                    'vue$': 'vue/dist/vue.js'
-                }
-            },
-            mode: 'development',
-            devtool: 'inline-source-map',
-            optimization: configureOptimization(),
-            devServer: configureDevServer(),
-            module: {
-                rules: [
-                    configurePostcssLoader(),
-                    configureImageLoader(),
-                ],
-            },
-            plugins: [
-                new webpack.HotModuleReplacementPlugin(),
-                new DashboardPlugin(),
+module.exports = merge(
+    common.legacyConfig,
+    {
+        output: {
+            filename: path.join('./js', '[name].js'),
+            publicPath: settings.devServerConfig.public() + '/',
+        },
+        resolve: {
+            alias: {
+                'vue$': 'vue/dist/vue.js'
+            }
+        },
+        mode: 'development',
+        devtool: 'inline-source-map',
+        optimization: configureOptimization(),
+        devServer: configureDevServer(),
+        module: {
+            rules: [
+                configurePostcssLoader(),
+                configureImageLoader(),
             ],
-        }
-    ),
-];
+        },
+        plugins: [
+            new webpack.HotModuleReplacementPlugin(),
+            new DashboardPlugin(),
+        ],
+    }
+);
