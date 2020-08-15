@@ -14,8 +14,8 @@
 <div class="field seomatic-imageSourceWrapper" id="metaBundleSettings-seoImageSource-field">
     <div class="heading">
         <label id="metaBundleSettings-seoImageSource-label" for="metaBundleSettings-seoImageSource">{{ "SEO Image Source"|t("seomatic") }}</label>
-        <div class="instructions"><p>{{ "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified."|t("seomatic") }}</p>
-        </div>
+    </div>
+    <div class="instructions"><p>{{ "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified."|t("seomatic") }}</p>
     </div>
     {% namespace "metaBundleSettings" %}
         <div class="heading">
@@ -29,7 +29,7 @@
             }) }}
         </div>
     {% endnamespace %}
-    
+
     {% if assetFieldSources is defined and assetFieldSources |length %}
         {% namespace "metaBundleSettings" %}
             <div class="heading seomatic-imageSourceFromField">
@@ -44,7 +44,7 @@
             </div>
         {% endnamespace %}
     {% endif %}
-    
+
     {% namespace "metaBundleSettings" %}
         <div class="heading seomatic-imageSourceFromAsset">
             {{ forms.elementSelect({
@@ -65,7 +65,7 @@
             }) }}
         </div>
     {% endnamespace %}
-    
+
     {% namespace "metaGlobalVars" %}
         <div class="heading seomatic-imageSourceFromUrl">
             {{ forms.text({
@@ -80,7 +80,7 @@
     {% endnamespace %}
 
 {############### SEO Image Transform ###############}
-    
+
     <div class="field seomatic-imageSourceNotFromUrl">
         <div class="field" {% if field is defined and 'seoImageTransform' not in field.generalEnabledFields %}style="display: none;"{% endif %}>
             {% namespace "metaBundleSettings" %}

@@ -42,8 +42,8 @@
 <div class="field" id="genericDescription-field">
     <div class="heading">
         <label for="genericDescription">{{ "Entity Description"|t("seomatic")}}</label>
-        <div class="instructions"><p>{{ "A description of the entity that #{websiteVerb} the website" |t("seomatic") }}</p></div>
     </div>
+    <div class="instructions"><p>{{ "A description of the entity that #{websiteVerb} the website" |t("seomatic") }}</p></div>
     {{ forms.textarea({
         label: "Entity Description"|t("seomatic"),
         instructions: "A description of the entity that #{websiteVerb} the website" |t("seomatic"),
@@ -424,8 +424,8 @@
     <div class="field" id="localBusinessOpeningHours-field">
         <div class="heading">
             <label for="localBusinessOpeningHours">{{ "Opening Hours"|t("seomatic")}}</label>
-            <div class="instructions"><p>{{ "The opening hours for this local business.  If the business is closed on a given day, just leave the hours for that day blank.  If you leave everything blank, no opening hours will be listed. [Learn More](https://developers.google.com/search/docs/data-types/local-business)" |t("seomatic") |md}}</p></div>
         </div>
+        <div class="instructions"><p>{{ "The opening hours for this local business.  If the business is closed on a given day, just leave the hours for that day blank.  If you leave everything blank, no opening hours will be listed. [Learn More](https://developers.google.com/search/docs/data-types/local-business)" |t("seomatic") |md}}</p></div>
 
         {% macro day(id, name, value, day) %}
             {% from "_includes/forms" import time %}
