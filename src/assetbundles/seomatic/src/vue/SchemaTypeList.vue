@@ -23,7 +23,6 @@
 </template>
 
 <script>
-    import Vue from 'vue'
     import axios from 'axios'
     import VueAxios from 'vue-axios'
     import Treeselect from '@riophae/vue-treeselect'
@@ -53,10 +52,10 @@
         mounted() {
             let action = 'get-type-tree';
             const api = Craft.getActionUrl('seomatic/json-ld/' + action);
+            this.value = this.entity;
             this.axios.get(api).then((response) => {
                 if (response.data) {
                     this.options = response.data;
-                    this.value = this.entity;
                 }
             });
             this.$refs.treeselect.$on('input', (value, instance) => {

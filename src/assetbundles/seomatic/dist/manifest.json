@@ -1,6 +1,4 @@
 {
-  "vendors~content-seo~dashboard~seomatic-meta.js": "js/vendors~content-seo~dashboard~seomatic-meta.js",
-  "vendors~content-seo~dashboard~seomatic-meta.js.map": "js/vendors~content-seo~dashboard~seomatic-meta.js.map",
   "styles.css": "css/styles.css",
   "styles.js": "js/styles.js",
   "styles.js.map": "js/styles.js.map",
@@ -27,6 +25,8 @@
   "vendors~dashboard.js.map": "js/vendors~dashboard.js.map",
   "vendors~javascript-editor.js": "js/vendors~javascript-editor.js",
   "vendors~javascript-editor.js.map": "js/vendors~javascript-editor.js.map",
+  "vendors~seomatic-meta.js": "js/vendors~seomatic-meta.js",
+  "vendors~seomatic-meta.js.map": "js/vendors~seomatic-meta.js.map",
   "vendors~seomatic-tokens.js": "js/vendors~seomatic-tokens.js",
   "vendors~seomatic-tokens.js.map": "js/vendors~seomatic-tokens.js.map",
   "vendors~twig-editor.js": "js/vendors~twig-editor.js",
