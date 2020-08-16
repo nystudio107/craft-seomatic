@@ -3,6 +3,7 @@
 ## 3.3.16 - 2020.08.16
 ### Fixed
 * Fixed a formatting issue introduced in Craft CMS 3.5.4 that caused the layout in some of SEOmatic's settings to be incorrect
+* Fixed an issue where the "Leave Site?" dialog would come up on the General Settings page, regardless of whether the page changed or not
 
 ## 3.3.15 - 2020.08.14  [CRITICAL]
 ### Added
