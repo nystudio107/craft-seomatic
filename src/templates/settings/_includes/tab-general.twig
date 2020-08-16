@@ -108,7 +108,8 @@
         <div class="instructions">{{ ("Where the Site Name is placed relative to the Title in the &lt;title&gt; tag. The Site Name is set in [Site Settings](" ~ cpUrl('seomatic/site') ~ ")")|t("seomatic") |md }}
         </div>
         {% namespace "metaBundleSettings" %}
-            <div class="heading" {% if pageContext == "global" %}style="display: none;"{% endif %}#}>
+            <div class="heading">
+                <div {% if pageContext == "global" %}style="display: none;"{% endif %}#}>
                 {{ forms.select({
                     id: "siteNamePositionSource",
                     name: "siteNamePositionSource",
@@ -117,6 +118,7 @@
                     class: "seomatic-textSourceSelect",
                     errors: metaBundleSettings.getErrors("siteNamePositionSource"),
                 }) }}
+                </div>
             </div>
         {% endnamespace %}
 

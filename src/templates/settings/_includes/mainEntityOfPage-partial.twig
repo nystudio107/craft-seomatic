@@ -44,6 +44,9 @@
     }) }}
 </div>
 
+<script>
+    window.schemaSelectId = '{{ "treeselect-wrapper" |namespaceInputId }}';
+</script>
 {% js %}
     window.schemaSelectId = '{{ "treeselect-wrapper" |namespaceInputId }}';
     $(document).on('schema-value-changed', function(e, v) {

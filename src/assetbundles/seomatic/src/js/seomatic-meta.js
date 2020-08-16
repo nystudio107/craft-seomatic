@@ -8,7 +8,6 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-import Vue from "vue";
 import SchemaTypeList from "../vue/SchemaTypeList.vue";
 
 /**
@@ -17,7 +16,6 @@ import SchemaTypeList from "../vue/SchemaTypeList.vue";
  * @since     3.0.0
  */
 
-$(document).ready(function() {
     if (window.schemaSelectId !== undefined) {
         // Create our vue instance
         const vm = new Vue({
@@ -31,7 +29,6 @@ $(document).ready(function() {
             },
         });
     }
-});
 
 // Accept HMR as per: https://webpack.js.org/api/hot-module-replacement#accept
 if (module.hot) {
