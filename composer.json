@@ -44,6 +44,9 @@
             "url": "https://asset-packagist.org"
         }
     ],
+    "scripts": {
+        "test": "codecept run unit --coverage-xml"
+    },
     "autoload": {
         "psr-4": {
           "nystudio107\\seomatic\\": "src/"
