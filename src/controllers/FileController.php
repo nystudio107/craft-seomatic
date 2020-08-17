@@ -11,11 +11,13 @@
 
 namespace nystudio107\seomatic\controllers;
 
+use nystudio107\seomatic\helpers\UrlHelper;
+use nystudio107\seomatic\Seomatic;
+
 use Craft;
 use craft\helpers\FileHelper;
 use craft\web\Controller;
 
-use nystudio107\seomatic\helpers\UrlHelper;
 use yii\web\NotFoundHttpException;
 use yii\web\HttpException;
 use yii\web\Response;
@@ -39,6 +41,18 @@ class FileController extends Controller
 
     // Public Methods
     // =========================================================================
+
+    /**
+     * @inheritDoc
+     */
+    public function beforeAction($action)
+    {
+        if (!Seomatic::$settings->enableSeoFileLinkEndpoint) {
+            $this->allowAnonymous = false;
+        }
+
+        return parent::beforeAction($action);
+    }
 
     /**
      * Allow setting the X-Robots-Tag and Link headers on static files as per:
