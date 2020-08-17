@@ -53,6 +53,16 @@ class SstiUnitTest extends Unit
             '',
             DynamicMetaHelper::sanitizeUrl("{{\ncraft.app.config.general.actionTrigger\n}}")
         );
+        // Handle newline-injected in the URI that's encoded
+        $this->assertSame(
+            '',
+            DynamicMetaHelper::sanitizeUrl("{{%250acraft.app.config.general.actionTrigger%250a}}")
+        );
+        // Handle newline-injected in the URI that's encoded
+        $this->assertSame(
+            '',
+            DynamicMetaHelper::sanitizeUrl("%7B%7B%5Cncraft.app.config.general.actionTrigger%5Cn%7D%7D")
+        );
         // Strip Twig code
         $this->assertSame(
             '',
