@@ -24,5 +24,15 @@
             errors: settings.getErrors("enableJsonLdEndpoint"),
         }) }}
 
+        {{ forms.lightswitchField({
+            label: "SEO File Link Endpoint Access"|t("seomatic"),
+            instructions: "Determines whether the SEO File Link endpoint should be enabled for anonymous frontend access"|t("seomatic"),
+            id: "enableSeoFileLinkEndpoint",
+            name: "enableSeoFileLinkEndpoint",
+            on: settings.enableSeoFileLinkEndpoint,
+            warning: configWarning("enableSeoFileLinkEndpoint", "seomatic"),
+            errors: settings.getErrors("enableSeoFileLinkEndpoint"),
+        }) }}
+
     {% endnamespace %}
 </div>

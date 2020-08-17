@@ -459,5 +459,13 @@ return [
     'Whether anonymous access to the JSON-LD endpoint should be allowed' => 'Whether anonymous access to the JSON-LD endpoint should be allowed',
     'Unlimited' => 'Unlimited',
     'JSON-LD Endpoint Access' => 'JSON-LD Endpoint Access',
-    '1 week' => '1 week'
+    '1 week' => '1 week',
+    'SEO File Link Endpoint Access' => 'SEO File Link Endpoint Access',
+    'The Referrer setting controls how much referrer information (sent via the Referer header) should be included with requests. [Learn More](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy)' => 'The Referrer setting controls how much referrer information (sent via the Referer header) should be included with requests. [Learn More](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy)',
+    'This query is used to query for SEOmatic meta data.' => 'This query is used to query for SEOmatic meta data.',
+    'Referrer' => 'Referrer',
+    'Content Security Policy' => 'Content Security Policy',
+    'Response Headers' => 'Response Headers',
+    'Determines whether the SEO File Link endpoint should be enabled for anonymous frontend access' => 'Determines whether the SEO File Link endpoint should be enabled for anonymous frontend access',
+    'Meta Tags' => 'Meta Tags'
 ];
