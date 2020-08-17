@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
-## 3.3.16 - 2020.08.16
+## 3.3.16 - 2020.08.17
+### Changed
+* Adjusted the logic in the `seomatic.helper.isPreview()` function to make it more correct
+
 ### Fixed
 * Fixed a formatting issue introduced in Craft CMS 3.5.4 that caused the layout in some of SEOmatic's settings to be incorrect
 * Fixed an issue where the "Leave Site?" dialog would come up on the General Settings page, regardless of whether the page changed or not
