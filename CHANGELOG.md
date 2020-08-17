@@ -1,12 +1,19 @@
 # SEOmatic Changelog
 
 ## 3.3.16 - 2020.08.17
+### Added
+* Added additional unit tests for URL/entity decoding
+* Added a new **SEO File Link Endpoint Access** setting (off by default) to make the feature opt-in
+
 ### Changed
 * Adjusted the logic in the `seomatic.helper.isPreview()` function to make it more correct
 
 ### Fixed
 * Fixed a formatting issue introduced in Craft CMS 3.5.4 that caused the layout in some of SEOmatic's settings to be incorrect
 * Fixed an issue where the "Leave Site?" dialog would come up on the General Settings page, regardless of whether the page changed or not
+
+### Security
+* Refactored the GraphQL SSTI code to normalize the string via URL/entity decoding it before stripping tags or Twig
 
 ## 3.3.15 - 2020.08.14  [CRITICAL]
 ### Added
