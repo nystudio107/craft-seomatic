@@ -28,7 +28,6 @@
 </template>
 
 <script>
-    import Vue from 'vue';
     import FieldDefs from './ContentSeoFieldDefs.js';
     import ContentSeoUrl from './ContentSeoUrl.vue';
     import VueTable from 'vuetable-2/src/components/Vuetable.vue';

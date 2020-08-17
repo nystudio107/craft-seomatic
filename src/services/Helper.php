@@ -89,12 +89,14 @@ class Helper extends Component
      */
     public static function isPreview(): bool
     {
+        $isPreview = false;
         $request = Craft::$app->getRequest();
         if (Seomatic::$craft32) {
-            return $request->getIsPreview();
+            $isPreview = $request->getIsPreview();
         }
+        $isLivePreview = $request->getIsLivePreview();
 
-        return $request->getIsLivePreview();
+        return ($isPreview || $isLivePreview);
     }
 
     /**

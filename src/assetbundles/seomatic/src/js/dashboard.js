@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import Confetti from '../vue/Confetti.vue';
 import DashboardMultiRadialChart from '../vue/DashboardMultiRadialChart.vue';
 import DashboardRadialChart from '../vue/DashboardRadialChart.vue';

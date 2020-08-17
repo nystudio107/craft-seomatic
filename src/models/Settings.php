@@ -192,6 +192,11 @@ class Settings extends VarsModel
     public $enableJsonLdEndpoint = false;
 
     /**
+     * @var bool Determines whether the SEO File Link endpoint should be enabled for anonymous frontend access
+     */
+    public $enableSeoFileLinkEndpoint = false;
+
+    /**
      * @var SeoElementInterface[] The default SeoElement type classes
      */
     public $defaultSeoElementTypes = [
@@ -230,9 +235,18 @@ class Settings extends VarsModel
             ]],
             ['environment', 'string'],
             ['environment', 'default', 'value' => 'live'],
-            ['displayPreviewSidebar', 'boolean'],
-            ['socialMediaPreviewTarget', 'boolean'],
-            ['displayAnalysisSidebar', 'boolean'],
+            [
+                [
+                    'displayPreviewSidebar',
+                    'socialMediaPreviewTarget',
+                    'displayAnalysisSidebar',
+                    'enableMetaContainerEndpoint',
+                    'enableJsonLdEndpoint',
+                    'enableSeoFileLinkEndpoint',
+
+                ],
+                'boolean'
+            ],
             [['devModeTitlePrefix', 'cpTitlePrefix', 'devModeCpTitlePrefix'], 'string'],
             ['separatorChar', 'string'],
             ['separatorChar', 'default', 'value' => '|'],
