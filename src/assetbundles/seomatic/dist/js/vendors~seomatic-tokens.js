@@ -2,8 +2,8 @@
  * @project        SEOmatic
  * @name           vendors~seomatic-tokens.js
  * @author         Andrew Welch
- * @build          Tue, Aug 18, 2020 3:25 PM ET
- * @release        eedfee1988501c79e5a4b7d59c6eb5a7bbee0295 [develop]
+ * @build          Tue, Aug 18, 2020 3:33 PM ET
+ * @release        cb074f5752887bb7ecf89a6c5ced0f5f3f153c41 [develop]
  * @copyright      Copyright (c) 2020 nystudio107
  *
  */
