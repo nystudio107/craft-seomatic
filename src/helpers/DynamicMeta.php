@@ -15,6 +15,7 @@ use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\events\AddDynamicMetaEvent;
 use nystudio107\seomatic\fields\SeoSettings;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
+use nystudio107\seomatic\helpers\Text as TextHelper;
 use nystudio107\seomatic\helpers\Localization as LocalizationHelper;
 use nystudio107\seomatic\models\Entity;
 use nystudio107\seomatic\models\jsonld\ContactPoint;
@@ -67,6 +68,7 @@ class DynamicMeta
     // Static Methods
     // =========================================================================
 
+
     /**
      * Return a sanitized URL with the query string stripped
      *
@@ -79,23 +81,10 @@ class DynamicMeta
     {
         // Remove the query string
         $url = UrlHelper::stripQueryString($url);
-        // HTML decode the entities, then strip out any tags
-        $url = html_entity_decode($url, ENT_NOQUOTES, 'UTF-8');
-        $url = urldecode($url);
-        // Remove any linebreaks
-        $url = preg_replace( "/\r|\n/", "", $url );
-        $url = strip_tags($url);
+        $url = TextHelper::sanitizeUserInput($url);
 
         // If this is a >= 400 status code, set the canonical URL to nothing
         if ($checkStatus && Craft::$app->getResponse()->statusCode >= 400) {
-            $url = '';
-        }
-        // Remove any Twig tags that somehow are present in the incoming URL
-        /** @noinspection CallableParameterUseCaseInTypeContextInspection */
-        $result = preg_replace('/{.*}/', '', $url);
-        if (!empty($result) && $result) {
-            $url = $result;
-        } else {
             $url = '';
         }
 
