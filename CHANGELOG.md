@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.3.17 - 2020.08.24
+### Added
+* Added `seomatic.helper.sanitizeUserInput()` in cases where you want to manually sanitize user input
+
 ### Fixed
 * Fixed a formatting issue for fields in the SEOmatic Settings pages that showed the number of characters left
 * Fixed an issue where the token field wouldn’t be created if keywords had no value
