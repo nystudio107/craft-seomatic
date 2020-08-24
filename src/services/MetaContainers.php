@@ -184,6 +184,10 @@ class MetaContainers extends Component
                 } catch (InvalidConfigException $e) {
                     Craft::error($e->getMessage(), __METHOD__);
                 }
+                // If this is any type of a preview, ensure that it's not cached
+                if (Seomatic::$plugin->helper::isPreview()) {
+                    Seomatic::$previewingMetaContainers = true;
+                }
             }
             // Get our cache key
             $cacheKey = $uri.$siteId.$paginationPage.$requestPath;
@@ -303,6 +307,10 @@ class MetaContainers extends Component
         foreach ($this->metaContainers as $metaContainer) {
             /** @var $metaContainer MetaContainer */
             if ($metaContainer->include) {
+                // Don't cache the rendered result if we're previewing meta containers
+                if (Seomatic::$previewingMetaContainers) {
+                    $metaContainer->clearCache = true;
+                }
                 $metaContainer->includeMetaData($this->containerDependency);
             }
         }
