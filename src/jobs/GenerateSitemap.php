@@ -164,6 +164,7 @@ class GenerateSitemap extends BaseJob
                     } catch (Exception $e) {
                         $url = '';
                     }
+                    $url = UrlHelper::absoluteUrlWithProtocol($url);
                     $dateUpdated = $element->dateUpdated ?? $element->dateCreated ?? new \DateTime;
                     $lines[] = '<url>';
                     // Standard sitemap key/values
