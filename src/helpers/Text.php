@@ -135,7 +135,7 @@ class Text
         }
 
         //return $result;
-        return self::sanitizeFieldData($result);
+        return self::sanitizeUserInput($result);
     }
 
     /**
@@ -338,7 +338,7 @@ class Text
             ? implode(', ', \array_slice(array_keys($keywords), 0, $limit))
             : (string)$keywords;
 
-        return self::sanitizeFieldData($result);
+        return self::sanitizeUserInput($result);
     }
 
     /**
@@ -376,21 +376,25 @@ class Text
             ? implode(' ', $sentences)
             : (string)$sentences;
 
-        return self::sanitizeFieldData($result);
+        return self::sanitizeUserInput($result);
     }
 
 
     /**
-     * Sanitize Twig code out of any extracted field values
+     * Sanitize user input by decoding any HTML Entities, URL decoding the text,
+     * then removing any newlines, stripping tags, stripping Twig tags, and changing
+     * single {}'s into ()'s
      *
      * @param $str
      * @return string
      */
-    public static function sanitizeFieldData($str): string
+    public static function sanitizeUserInput($str): string
     {
         // Do some general cleanup
         $str = html_entity_decode($str, ENT_NOQUOTES, 'UTF-8');
         $str = urldecode($str);
+        // Remove any linebreaks
+        $str = (string)preg_replace("/\r|\n/", "", $str);
         $str = strip_tags($str);
         // Remove any embedded Twig code
         $str = preg_replace('/{{.*?}}/', '', $str);
