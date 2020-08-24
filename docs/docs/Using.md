@@ -318,6 +318,7 @@ array (size=4)
 * **`seomatic.helper.extractSummary(TEXT)`** - Extract the most important 3 sentences from `TEXT`
 * **`seomatic.helper.socialTransform(ASSET, TRANSFORMNAME)`** - Transform the `ASSET` (either an Asset or an Asset ID) for social media sites in `TRANSFORMNAME`; valid values are `base`, `facebook`, `twitter-summary`, and `twitter-large`
 * **`seomatic.helper.seoFileLink(FILE_URL, ROBOTS, CANONICAL, INLINE)`** - Generates a link to a local or remote file that allows you to set the `X-Robots-Tag` header via `ROBOTS` (defaults to `all`) and `Link` canonical header via `CANONICAL` (defaults to `''`) as per [Advanced rel="canonical" HTTP Headers](https://moz.com/blog/how-to-advanced-relcanonical-http-headers). `INLINE` controls whether the file will be displayed inline or downloaded. If any values are empty `''`, the headers will not be included.
+* **`seomatic.helper.sanitizeUserInput(TEXT)`** - Sanitize the `TEXT` by decoding any HTML Entities, URL decoding the text, then removing any newlines, stripping HTML tags, stripping Twig tags, and changing single {}'s into ()'s
 
 ## SEOmatic Tags & Containers
 

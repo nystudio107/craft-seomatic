@@ -1,5 +1,16 @@
 # SEOmatic Changelog
 
+## 3.3.17 - 2020.08.24
+### Added
+* Added `seomatic.helper.sanitizeUserInput()` in cases where you want to manually sanitize user input
+
+### Fixed
+* Fixed a formatting issue for fields in the SEOmatic Settings pages that showed the number of characters left
+* Fixed an issue where the token field wouldn’t be created if keywords had no value
+* Fixed an issue where the previews in an SEO Settings field wouldn't match what they should be previewing
+* Live Preview and Preview requests now never have their metadata cached
+* Ensure that sitemap URLs also do not include trailing slashes on root website URLs if `addTrailingSlashesToUrls` is false
+
 ## 3.3.16 - 2020.08.17
 ### Added
 * Added additional unit tests for URL/entity decoding

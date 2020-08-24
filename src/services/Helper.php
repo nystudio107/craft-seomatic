@@ -50,6 +50,19 @@ class Helper extends Component
     // =========================================================================
 
     /**
+     * Sanitize user input by decoding any HTML Entities, URL decoding the text,
+     * then removing any newlines, stripping tags, stripping Twig tags, and changing
+     * single {}'s into ()'s
+     *
+     * @param $str
+     * @return string
+     */
+    public static function sanitizeUserInput($str): string
+    {
+        return TextHelper::sanitizeUserInput($str);
+    }
+
+    /**
      * Return the appropriate Twitter Transform based on the current $metaGlobalVars->twitterCard
      *
      * @return string
