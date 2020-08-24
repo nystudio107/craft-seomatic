@@ -70,7 +70,7 @@ class SstiUnitTest extends Unit
         );
         // Strip object syntax Twig code
         $this->assertSame(
-            '',
+            '( craft.app.config.general.actionTrigger )',
             DynamicMetaHelper::sanitizeUrl('{ craft.app.config.general.actionTrigger }')
         );
         // Strip URL-encoded Twig code
@@ -80,7 +80,7 @@ class SstiUnitTest extends Unit
         );
         // Strip URL-encoded object syntax Twig code
         $this->assertSame(
-            '',
+            '( craft.app.config.general.actionTrigger )',
             DynamicMetaHelper::sanitizeUrl('%7B%20craft.app.config.general.actionTrigger%20%7D')
         );
         // Strip HTML entity-encoded Twig code
