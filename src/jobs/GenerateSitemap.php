@@ -206,10 +206,11 @@ class GenerateSitemap extends BaseJob
                                     if ($altMetaBundle) {
                                         // Make sure this entry isn't disabled
                                         $this->combineFieldSettings($altElement, $altMetaBundle);
+                                        $altUrl = UrlHelper::absoluteUrlWithProtocol($altElement->url);
                                         if ($altMetaBundle->metaSitemapVars->sitemapUrls) {
                                             $lines[] = '<xhtml:link rel="alternate"'
                                                 .' hreflang="'.$altSiteSettings['language'].'"'
-                                                .' href="'.Html::encode($altElement->url).'"'
+                                                .' href="'.Html::encode($altUrl).'"'
                                                 .' />';
                                         }
                                     }
