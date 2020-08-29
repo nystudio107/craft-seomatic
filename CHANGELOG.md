@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.3.18 - 2020.08.28
+### Added
+* Added `hreflang="x-default"` to sitemaps if the **Include `x-default` `hreflang` Tag** setting is enabled
+
 ### Changed
 * Ensure that sitemap `alternate` URLs also do not include trailing slashes on root website URLs if `addTrailingSlashesToUrls` is false
 * Requests for `sitemap.xml` are now 302 redirected to the actual sitemap rather than serving the same content from both
