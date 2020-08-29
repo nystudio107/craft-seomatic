@@ -135,10 +135,9 @@ class Sitemaps extends Component implements SitemapInterface
             .'/'
             .'sitemap'
             .'/'
-            .'sitemap-index';
+            .'sitemap-index-redirect';
         $rules['sitemap.xml'] = [
             'route' => $route,
-            'defaults' => ['groupId' => $groupId],
         ];
         foreach ($this->sitemapTemplateContainer->data as $sitemapTemplate) {
             /** @var $sitemapTemplate FrontendTemplate */
