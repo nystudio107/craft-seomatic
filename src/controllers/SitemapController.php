@@ -32,6 +32,7 @@ class SitemapController extends Controller
      */
     protected $allowAnonymous = [
         'sitemap-index',
+        'sitemap-index-redirect',
         'sitemap',
         'sitemap-custom',
     ];
@@ -60,6 +61,18 @@ class SitemapController extends Controller
         $headers->add('X-Robots-Tag', 'noindex');
 
         return $this->asRaw($xml);
+    }
+
+    /**
+     * Redirect from `sitemap.xml` to the actual sitemap for this site
+     *
+     * @return Response
+     */
+    public function actionSitemapIndexRedirect(): Response
+    {
+        $url = Seomatic::$plugin->sitemaps->sitemapIndexUrlForSiteId();
+
+        return $this->redirect($url, 302);
     }
 
     /**
