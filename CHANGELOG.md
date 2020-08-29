@@ -3,6 +3,7 @@
 ## 3.3.18 - 2020.08.28
 ### Changed
 * Ensure that sitemap `alternate` URLs also do not include trailing slashes on root website URLs if `addTrailingSlashesToUrls` is false
+* Requests for `sitemap.xml` are now 302 redirected to the actual sitemap rather than serving the same content from both
 
 ## 3.3.17 - 2020.08.24
 ### Added
