@@ -182,6 +182,7 @@ class GenerateSitemap extends BaseJob
                     $lines[] = '</priority>';
                     // Handle alternate URLs if this is multi-site
                     if ($multiSite && $metaBundle->metaSitemapVars->sitemapAltLinks) {
+                        $primarySiteId = Craft::$app->getSites()->getPrimarySite()->id;
                         /** @var  $altSiteSettings */
                         foreach ($metaBundle->sourceAltSiteSettings as $altSiteSettings) {
                             if (\in_array($altSiteSettings['siteId'], $groupSiteIds, false)) {
@@ -208,6 +209,13 @@ class GenerateSitemap extends BaseJob
                                         $this->combineFieldSettings($altElement, $altMetaBundle);
                                         $altUrl = UrlHelper::absoluteUrlWithProtocol($altElement->url);
                                         if ($altMetaBundle->metaSitemapVars->sitemapUrls) {
+                                            // If this is the primary site, add it as x-default, too
+                                            if ($primarySiteId === $altSourceSiteId && Seomatic::$settings->addXDefaultHrefLang) {
+                                                $lines[] = '<xhtml:link rel="alternate"'
+                                                    .' hreflang="x-default"'
+                                                    .' href="'.Html::encode($altUrl).'"'
+                                                    .' />';
+                                            }
                                             $lines[] = '<xhtml:link rel="alternate"'
                                                 .' hreflang="'.$altSiteSettings['language'].'"'
                                                 .' href="'.Html::encode($altUrl).'"'
