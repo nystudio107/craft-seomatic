@@ -130,6 +130,7 @@ class Sitemaps extends Component implements SitemapInterface
                 Craft::error($e->getMessage(), __METHOD__);
             }
         }
+        // Add the route to redirect sitemap.xml to the actual sitemap
         $route =
             Seomatic::$plugin->handle
             .'/'
@@ -139,6 +140,27 @@ class Sitemaps extends Component implements SitemapInterface
         $rules['sitemap.xml'] = [
             'route' => $route,
         ];
+        // Add the route for the sitemap.xsl styles
+        $route =
+            Seomatic::$plugin->handle
+            .'/'
+            .'sitemap'
+            .'/'
+            .'sitemap-styles';
+        $rules['sitemap.xsl'] = [
+            'route' => $route,
+        ];
+        // Add the route for the sitemap-empty.xsl styles
+        $route =
+            Seomatic::$plugin->handle
+            .'/'
+            .'sitemap'
+            .'/'
+            .'sitemap-empty-styles';
+        $rules['sitemap-empty.xsl'] = [
+            'route' => $route,
+        ];
+        // Add all of the frontend container routes
         foreach ($this->sitemapTemplateContainer->data as $sitemapTemplate) {
             /** @var $sitemapTemplate FrontendTemplate */
             $rules = array_merge(

@@ -10,6 +10,7 @@
 namespace nystudio107\seomatic\controllers;
 
 use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\helpers\PluginTemplate;
 use nystudio107\seomatic\services\Sitemaps;
 
 use Craft;
@@ -34,6 +35,8 @@ class SitemapController extends Controller
         'sitemap-index',
         'sitemap-index-redirect',
         'sitemap',
+        'sitemap-styles',
+        'sitemap-empty-styles',
         'sitemap-custom',
     ];
 
@@ -73,6 +76,38 @@ class SitemapController extends Controller
         $url = Seomatic::$plugin->sitemaps->sitemapIndexUrlForSiteId();
 
         return $this->redirect($url, 302);
+    }
+
+    /**
+     * Render the sitemap-style.xsl template
+     *
+     * @return Response
+     */
+    public function actionSitemapStyles(): Response
+    {
+        $xml = PluginTemplate::renderPluginTemplate('_frontend/pages/sitemap-styles.twig', []);
+
+        $headers = Craft::$app->response->headers;
+        $headers->add('Content-Type', 'text/xml; charset=utf-8');
+        $headers->add('X-Robots-Tag', 'noindex');
+
+        return $this->asRaw($xml);
+    }
+
+    /**
+     * Render the sitemap-empty-styles.xsl template
+     *
+     * @return Response
+     */
+    public function actionSitemapEmptyStyles(): Response
+    {
+        $xml = PluginTemplate::renderPluginTemplate('_frontend/pages/sitemap-empty-styles.twig', []);
+
+        $headers = Craft::$app->response->headers;
+        $headers->add('Content-Type', 'text/xml; charset=utf-8');
+        $headers->add('X-Robots-Tag', 'noindex');
+
+        return $this->asRaw($xml);
     }
 
     /**

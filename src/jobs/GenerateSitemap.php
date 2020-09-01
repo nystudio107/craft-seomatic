@@ -97,6 +97,7 @@ class GenerateSitemap extends BaseJob
         $lines = [];
         // Sitemap index XML header and opening tag
         $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
+        $lines[] = '<?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>';
         // One sitemap entry for each element
         $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
             $this->type,
