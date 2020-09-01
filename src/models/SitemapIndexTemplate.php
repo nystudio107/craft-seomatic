@@ -145,6 +145,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             $lines = [];
             // Sitemap index XML header and opening tag
             $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
+            $lines[] = '<?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>';
             $lines[] = '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
             // One sitemap entry for each MeteBundle
             $metaBundles = Seomatic::$plugin->metaBundles->getContentMetaBundlesForSiteId($siteId);
@@ -235,18 +236,18 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             foreach ($additionalSitemaps as $additionalSitemap) {
                 if (!empty($additionalSitemap['loc'])) {
                     $loc = MetaValueHelper::parseString($additionalSitemap['loc']);
-                    $lines[] = '  <sitemap>';
-                    $lines[] = '    <loc>';
-                    $lines[] = '      '.Html::encode($loc);
-                    $lines[] = '    </loc>';
+                    $lines[] = '<sitemap>';
+                    $lines[] = '<loc>';
+                    $lines[] = Html::encode($loc);
+                    $lines[] = '</loc>';
                     // Find the most recent date
                     $dateUpdated = !empty($additionalSitemap['lastmod'])
                         ? $additionalSitemap['lastmod']
                         : new \DateTime;
-                    $lines[] = '    <lastmod>';
-                    $lines[] = '      '.$dateUpdated->format(\DateTime::W3C);
-                    $lines[] = '    </lastmod>';
-                    $lines[] = '  </sitemap>';
+                    $lines[] = '<lastmod>';
+                    $lines[] = $dateUpdated->format(\DateTime::W3C);
+                    $lines[] = '</lastmod>';
+                    $lines[] = '</sitemap>';
                 }
             }
         }
@@ -278,10 +279,10 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             $sitemapUrl = Seomatic::$plugin->sitemaps->sitemapCustomUrlForSiteId(
                 $groupSiteId
             );
-            $lines[] = '  <sitemap>';
-            $lines[] = '    <loc>';
-            $lines[] = '      '.Html::encode($sitemapUrl);
-            $lines[] = '    </loc>';
+            $lines[] = '<sitemap>';
+            $lines[] = '<loc>';
+            $lines[] = Html::encode($sitemapUrl);
+            $lines[] = '</loc>';
             // Find the most recent date
             $dateUpdated = $metaBundle->metaSiteVars->additionalSitemapUrlsDateUpdated
                 ?? new \DateTime;
@@ -293,11 +294,11 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
                 }
             }
             if ($dateUpdated !== null) {
-                $lines[] = '    <lastmod>';
-                $lines[] = '      '.$dateUpdated->format(\DateTime::W3C);
-                $lines[] = '    </lastmod>';
+                $lines[] = '<lastmod>';
+                $lines[] = $dateUpdated->format(\DateTime::W3C);
+                $lines[] = '</lastmod>';
             }
-            $lines[] = '  </sitemap>';
+            $lines[] = '</sitemap>';
         }
     }
 }
