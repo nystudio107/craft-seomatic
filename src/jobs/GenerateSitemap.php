@@ -97,6 +97,7 @@ class GenerateSitemap extends BaseJob
         $lines = [];
         // Sitemap index XML header and opening tag
         $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
+        $lines[] = '<?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>';
         // One sitemap entry for each element
         $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
             $this->type,
@@ -182,6 +183,7 @@ class GenerateSitemap extends BaseJob
                     $lines[] = '</priority>';
                     // Handle alternate URLs if this is multi-site
                     if ($multiSite && $metaBundle->metaSitemapVars->sitemapAltLinks) {
+                        $primarySiteId = Craft::$app->getSites()->getPrimarySite()->id;
                         /** @var  $altSiteSettings */
                         foreach ($metaBundle->sourceAltSiteSettings as $altSiteSettings) {
                             if (\in_array($altSiteSettings['siteId'], $groupSiteIds, false)) {
@@ -206,10 +208,18 @@ class GenerateSitemap extends BaseJob
                                     if ($altMetaBundle) {
                                         // Make sure this entry isn't disabled
                                         $this->combineFieldSettings($altElement, $altMetaBundle);
+                                        $altUrl = UrlHelper::absoluteUrlWithProtocol($altElement->url);
                                         if ($altMetaBundle->metaSitemapVars->sitemapUrls) {
+                                            // If this is the primary site, add it as x-default, too
+                                            if ($primarySiteId === $altSourceSiteId && Seomatic::$settings->addXDefaultHrefLang) {
+                                                $lines[] = '<xhtml:link rel="alternate"'
+                                                    .' hreflang="x-default"'
+                                                    .' href="'.Html::encode($altUrl).'"'
+                                                    .' />';
+                                            }
                                             $lines[] = '<xhtml:link rel="alternate"'
                                                 .' hreflang="'.$altSiteSettings['language'].'"'
-                                                .' href="'.Html::encode($altElement->url).'"'
+                                                .' href="'.Html::encode($altUrl).'"'
                                                 .' />';
                                         }
                                     }

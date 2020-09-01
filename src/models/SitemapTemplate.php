@@ -172,6 +172,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             $response->headers->add('Cache-Control', 'no-cache, no-store');
             // Return an empty XML document
             $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
+            $lines[] = '<?xml-stylesheet type="text/xsl" href="sitemap-empty.xsl"?>';
             $lines[] = '<!-- ' . Craft::t('seomatic', 'This sitemap has not been generated yet.') . ' -->';
             $lines[] = '<!-- ' . Craft::t('seomatic', 'If you are seeing this in local dev or an') . ' -->';
             $lines[] = '<!-- ' . Craft::t('seomatic', 'environment with `devMode` on, caches only') . ' -->';
