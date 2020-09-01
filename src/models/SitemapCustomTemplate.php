@@ -143,6 +143,7 @@ class SitemapCustomTemplate extends FrontendTemplate implements SitemapInterface
             $lines = [];
             // Sitemap index XML header and opening tag
             $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
+            $lines[] = '<?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>';
             // One sitemap entry for each element
             $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId, false);
             // If it's disabled, just throw a 404
