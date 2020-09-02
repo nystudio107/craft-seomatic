@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.19 - 2020.09.03
+### Changed
+* Improved the user-visible sitemap .xsl stylesheet
+
 ## 3.3.18 - 2020.08.31
 ### Added
 * Added styling to create human-readable sitemaps via `.xsl` files
