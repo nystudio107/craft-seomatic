@@ -6,6 +6,7 @@
 
 ### Fixed
 * Fixed an error that could occur if your primary site has no BaseUrl
+* Fixed an issue that could result in multiple `X-Robots-Tag` headers if Craft is setting the header itself (as it does in 3.5.10 or later)
 
 ## 3.3.18 - 2020.08.31
 ### Added
