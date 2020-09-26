@@ -1,8 +1,11 @@
 # SEOmatic Changelog
 
-## 3.3.19 - 2020.09.03
+## 3.3.19 - 2020.09.26
 ### Changed
 * Improved the user-visible sitemap .xsl stylesheet
+
+### Fixed
+* Fixed an error that could occur if your primary site has no BaseUrl
 
 ## 3.3.18 - 2020.08.31
 ### Added
