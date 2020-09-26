@@ -410,6 +410,7 @@ class DynamicMeta
         if (!empty(Seomatic::$settings->siteUrlOverride)) {
             $siteUrl = Seomatic::$settings->siteUrlOverride;
         }
+        $siteUrl = $siteUrl ?: '/';
         /** @var  $crumbs BreadcrumbList */
         $crumbs = Seomatic::$plugin->jsonLd->create([
             'type' => 'BreadcrumbList',
@@ -437,7 +438,7 @@ class DynamicMeta
             $crumbs->itemListElement[] = MetaJsonLd::create('ListItem', [
                 'position' => $position,
                 'name' => 'Homepage',
-                'item' => UrlHelper::stripQueryString($siteUrl),
+                'item' => UrlHelper::stripQueryString($siteUrl ?? '/'),
                 '@id' => $siteUrl,
             ]);
         }
