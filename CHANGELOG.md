@@ -3,6 +3,7 @@
 ## 3.3.19 - 2020.09.26
 ### Changed
 * Improved the user-visible sitemap .xsl stylesheet
+* Removed SEOmatic name & link from the user-visible Sitemap footer
 
 ### Fixed
 * Fixed an error that could occur if your primary site has no BaseUrl
