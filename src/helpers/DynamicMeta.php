@@ -161,7 +161,7 @@ class DynamicMeta
                     } else {
                         $headerValue = $content;
                     }
-                    $response->headers->add('X-Robots-Tag', $headerValue);
+                    $response->headers->set('X-Robots-Tag', $headerValue);
                 }
             }
             // Link canonical header
