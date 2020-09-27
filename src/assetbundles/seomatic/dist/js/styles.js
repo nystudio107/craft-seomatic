@@ -2,8 +2,8 @@
  * @project        SEOmatic
  * @name           styles.js
  * @author         Andrew Welch
- * @build          Tue, Aug 18, 2020 3:33 PM ET
- * @release        cb074f5752887bb7ecf89a6c5ced0f5f3f153c41 [develop]
+ * @build          Sun, Sep 27, 2020 3:53 AM ET
+ * @release        b6ad668cb3d6b33fdc04b45f99b83121acf38f28 [develop]
  * @copyright      Copyright (c) 2020 nystudio107
  *
  */
