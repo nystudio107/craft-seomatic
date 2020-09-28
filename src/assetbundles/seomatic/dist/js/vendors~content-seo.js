@@ -2,8 +2,8 @@
  * @project        SEOmatic
  * @name           vendors~content-seo.js
  * @author         Andrew Welch
- * @build          Sun, Sep 27, 2020 3:53 AM ET
- * @release        b6ad668cb3d6b33fdc04b45f99b83121acf38f28 [develop]
+ * @build          Mon, Sep 28, 2020 12:58 AM ET
+ * @release        926d570b88419cd74ac0dba990a272c2b23e122f [develop]
  * @copyright      Copyright (c) 2020 nystudio107
  *
  */
