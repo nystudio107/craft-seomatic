@@ -1,5 +1,15 @@
 # SEOmatic Changelog
 
+## 3.3.19 - 2020.09.28
+### Changed
+* Improved the user-visible sitemap .xsl stylesheet
+* Removed SEOmatic name & link from the user-visible Sitemap footer
+
+### Fixed
+* Fixed an error that could occur if your primary site has no BaseUrl
+* Fixed an issue that could result in multiple `X-Robots-Tag` headers if Craft is setting the header itself (as it does in 3.5.10 or later)
+* Fixed an issue where changing Entry Types would cause the SEO Settings field to not display properly
+
 ## 3.3.18 - 2020.08.31
 ### Added
 * Added styling to create human-readable sitemaps via `.xsl` files
