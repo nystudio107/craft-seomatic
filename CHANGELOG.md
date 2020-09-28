@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.3.19 - 2020.09.26
+## 3.3.19 - 2020.09.28
 ### Changed
 * Improved the user-visible sitemap .xsl stylesheet
 * Removed SEOmatic name & link from the user-visible Sitemap footer
