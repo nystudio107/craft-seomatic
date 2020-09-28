@@ -50,7 +50,7 @@ function seomaticTabChangeHandler() {
 window.seomaticTabChangeHandler = seomaticTabChangeHandler;
 window.seomaticTabChangeHandler();
 
-$(function() {
+function initFieldSettings() {
     // Show/hide the script settings containers
     var selector = $('.seomatic-script-lightswitch').find('.lightswitch');
     $(selector).each(function(index, value) {
@@ -185,4 +185,12 @@ $(function() {
                 break;
         }
     });
+}
+
+Garnish.on(Craft.EntryTypeSwitcher, 'typeChange', () => {
+    initFieldSettings();
+});
+
+$(function() {
+    initFieldSettings();
 });
