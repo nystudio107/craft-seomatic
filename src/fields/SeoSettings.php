@@ -429,7 +429,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             $cache = Craft::$app->getCache();
             $cacheDuration = null;
             $html = $cache->getOrSet(
-                $this::CACHE_KEY.$cacheKey,
+                self::CACHE_KEY.$cacheKey,
                 function () use ($uri, $siteId, $element) {
                     Seomatic::$plugin->metaContainers->previewMetaContainers($uri, $siteId, true);
                     $variables = [
