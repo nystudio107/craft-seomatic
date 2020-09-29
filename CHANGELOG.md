@@ -1,5 +1,10 @@
 # SEOmatic Changelog
 
+## 3.3.20 - 2020.09.29
+### Changed
+* Don’t trigger `EVENT_INVALIDATE_CONTAINER_CACHES` in a console command
+* Replace `$this::` (??) with `self::` globally in the codebase
+
 ## 3.3.19 - 2020.09.28
 ### Changed
 * Improved the user-visible sitemap .xsl stylesheet
