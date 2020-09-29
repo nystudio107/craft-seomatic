@@ -197,7 +197,7 @@ class Sitemaps extends Component implements SitemapInterface
     {
         if (Seomatic::$settings->sitemapsEnabled && Seomatic::$environment === 'live' && Seomatic::$settings->submitSitemaps) {
             // Submit the sitemap to each search engine
-            $searchEngineUrls = $this::SEARCH_ENGINE_SUBMISSION_URLS;
+            $searchEngineUrls = self::SEARCH_ENGINE_SUBMISSION_URLS;
             foreach ($searchEngineUrls as &$url) {
                 $groups = Craft::$app->getSites()->getAllGroups();
                 foreach ($groups as $group) {
@@ -241,7 +241,7 @@ class Sitemaps extends Component implements SitemapInterface
             list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId, $typeId)
                 = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
             // Submit the sitemap to each search engine
-            $searchEngineUrls = $this::SEARCH_ENGINE_SUBMISSION_URLS;
+            $searchEngineUrls = self::SEARCH_ENGINE_SUBMISSION_URLS;
             foreach ($searchEngineUrls as &$url) {
                 $sitemapUrl = $this->sitemapUrlForBundle($sourceBundleType, $sourceHandle, $sourceSiteId);
                 if (!empty($sitemapUrl)) {
@@ -275,7 +275,7 @@ class Sitemaps extends Component implements SitemapInterface
     {
         if (Seomatic::$settings->sitemapsEnabled && Seomatic::$environment === 'live' && Seomatic::$settings->submitSitemaps) {
             // Submit the sitemap to each search engine
-            $searchEngineUrls = $this::SEARCH_ENGINE_SUBMISSION_URLS;
+            $searchEngineUrls = self::SEARCH_ENGINE_SUBMISSION_URLS;
             foreach ($searchEngineUrls as &$url) {
                 $sitemapUrl = $this->sitemapCustomUrlForSiteId($siteId);
                 if (!empty($sitemapUrl)) {
@@ -420,7 +420,7 @@ class Sitemaps extends Component implements SitemapInterface
     public function invalidateCaches()
     {
         $cache = Craft::$app->getCache();
-        TagDependency::invalidate($cache, $this::GLOBAL_SITEMAP_CACHE_TAG);
+        TagDependency::invalidate($cache, self::GLOBAL_SITEMAP_CACHE_TAG);
         Craft::info(
             'All sitemap caches cleared',
             __METHOD__

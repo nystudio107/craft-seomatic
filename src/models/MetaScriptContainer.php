@@ -62,10 +62,10 @@ class MetaScriptContainer extends NonceContainer
             TagDependency::invalidate($cache, $dependency->tags[3]);
         }
         $tagData = $cache->getOrSet(
-            $this::CONTAINER_TYPE.$uniqueKey,
+            self::CONTAINER_TYPE.$uniqueKey,
             function () use ($uniqueKey) {
                 Craft::info(
-                    $this::CONTAINER_TYPE.' cache miss: '.$uniqueKey,
+                    self::CONTAINER_TYPE.' cache miss: '.$uniqueKey,
                     __METHOD__
                 );
                 $tagData = [];
