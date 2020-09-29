@@ -38,6 +38,7 @@ use nystudio107\seomatic\variables\SeomaticVariable;
 use Craft;
 use craft\base\Component;
 use craft\base\Element;
+use craft\console\Application as ConsoleApplication;
 use craft\elements\GlobalSet;
 
 use yii\base\Exception;
@@ -195,16 +196,16 @@ class MetaContainers extends Component
             if (!$request->isConsoleRequest) {
                 $response = Craft::$app->getResponse();
                 if ($response->statusCode >= 400) {
-                    $cacheKey = $siteId.$this::INVALID_RESPONSE_CACHE_KEY.$response->statusCode;
+                    $cacheKey = $siteId.self::INVALID_RESPONSE_CACHE_KEY.$response->statusCode;
                 }
             }
             // Load the meta containers
             $dependency = new TagDependency([
                 'tags' => [
-                    $this::GLOBAL_METACONTAINER_CACHE_TAG,
-                    $this::METACONTAINER_CACHE_TAG.$metaBundleSourceId.$metaBundleSourceType.$siteId,
-                    $this::METACONTAINER_CACHE_TAG.$uri.$siteId,
-                    $this::METACONTAINER_CACHE_TAG.$cacheKey,
+                    self::GLOBAL_METACONTAINER_CACHE_TAG,
+                    self::METACONTAINER_CACHE_TAG.$metaBundleSourceId.$metaBundleSourceType.$siteId,
+                    self::METACONTAINER_CACHE_TAG.$uri.$siteId,
+                    self::METACONTAINER_CACHE_TAG.$cacheKey,
                 ],
             ]);
             $this->containerDependency = $dependency;
@@ -216,7 +217,7 @@ class MetaContainers extends Component
             } else {
                 $cache = Craft::$app->getCache();
                 list($this->metaGlobalVars, $this->metaSiteVars, $this->metaSitemapVars, $this->metaContainers) = $cache->getOrSet(
-                    $this::CACHE_KEY.$cacheKey,
+                    self::CACHE_KEY.$cacheKey,
                     function () use ($uri, $siteId) {
                         Craft::info(
                             'Meta container cache miss: '.$uri.'/'.$siteId,
@@ -249,13 +250,13 @@ class MetaContainers extends Component
     {
         Craft::beginProfile('MetaContainers::includeScriptBodyHtml', __METHOD__);
         $dependency = $this->containerDependency;
-        $uniqueKey = $dependency->tags[3] ?? $this::GLOBALS_CACHE_KEY;
+        $uniqueKey = $dependency->tags[3] ?? self::GLOBALS_CACHE_KEY;
         $uniqueKey .= $bodyPosition;
         $scriptData = Craft::$app->getCache()->getOrSet(
-            $this::GLOBALS_CACHE_KEY.$uniqueKey,
+            self::GLOBALS_CACHE_KEY.$uniqueKey,
             function () use ($uniqueKey, $bodyPosition) {
                 Craft::info(
-                    $this::SCRIPTS_CACHE_KEY.' cache miss: '.$uniqueKey,
+                    self::SCRIPTS_CACHE_KEY.' cache miss: '.$uniqueKey,
                     __METHOD__
                 );
                 $scriptData = [];
@@ -323,12 +324,12 @@ class MetaContainers extends Component
     public function parseGlobalVars()
     {
         $dependency = $this->containerDependency;
-        $uniqueKey = $dependency->tags[3] ?? $this::GLOBALS_CACHE_KEY;
+        $uniqueKey = $dependency->tags[3] ?? self::GLOBALS_CACHE_KEY;
         list($this->metaGlobalVars, $this->metaSiteVars) = Craft::$app->getCache()->getOrSet(
-            $this::GLOBALS_CACHE_KEY.$uniqueKey,
+            self::GLOBALS_CACHE_KEY.$uniqueKey,
             function () use ($uniqueKey) {
                 Craft::info(
-                    $this::GLOBALS_CACHE_KEY.' cache miss: '.$uniqueKey,
+                    self::GLOBALS_CACHE_KEY.' cache miss: '.$uniqueKey,
                     __METHOD__
                 );
 
@@ -688,7 +689,7 @@ class MetaContainers extends Component
     public function invalidateCaches()
     {
         $cache = Craft::$app->getCache();
-        TagDependency::invalidate($cache, $this::GLOBAL_METACONTAINER_CACHE_TAG);
+        TagDependency::invalidate($cache, self::GLOBAL_METACONTAINER_CACHE_TAG);
         Craft::info(
             'All meta container caches cleared',
             __METHOD__
@@ -700,7 +701,9 @@ class MetaContainers extends Component
             'sourceId' => null,
             'sourceType' => null,
         ]);
-        $this->trigger(self::EVENT_INVALIDATE_CONTAINER_CACHES, $event);
+        if (!Craft::$app instanceof ConsoleApplication) {
+            $this->trigger(self::EVENT_INVALIDATE_CONTAINER_CACHES, $event);
+        }
     }
 
     /**
@@ -726,7 +729,7 @@ class MetaContainers extends Component
         $cache = Craft::$app->getCache();
         TagDependency::invalidate(
             $cache,
-            $this::METACONTAINER_CACHE_TAG.$metaBundleSourceId.$metaBundleSourceType.$siteId
+            self::METACONTAINER_CACHE_TAG.$metaBundleSourceId.$metaBundleSourceType.$siteId
         );
         Craft::info(
             'Meta bundle cache cleared: '.$metaBundleSourceId.' / '.$metaBundleSourceType.' / '.$siteId,
@@ -739,7 +742,9 @@ class MetaContainers extends Component
             'sourceId' => $sourceId,
             'sourceType' => $metaBundleSourceType,
         ]);
-        $this->trigger(self::EVENT_INVALIDATE_CONTAINER_CACHES, $event);
+        if (!Craft::$app instanceof ConsoleApplication) {
+            $this->trigger(self::EVENT_INVALIDATE_CONTAINER_CACHES, $event);
+        }
     }
 
     /**
@@ -754,7 +759,7 @@ class MetaContainers extends Component
         if ($siteId === null) {
             $siteId = Craft::$app->getSites()->currentSite->id ?? 1;
         }
-        TagDependency::invalidate($cache, $this::METACONTAINER_CACHE_TAG.$uri.$siteId);
+        TagDependency::invalidate($cache, self::METACONTAINER_CACHE_TAG.$uri.$siteId);
         Craft::info(
             'Meta container cache cleared: '.$uri.' / '.$siteId,
             __METHOD__
@@ -766,7 +771,9 @@ class MetaContainers extends Component
             'sourceId' => null,
             'sourceType' => null,
         ]);
-        $this->trigger(self::EVENT_INVALIDATE_CONTAINER_CACHES, $event);
+        if (!Craft::$app instanceof ConsoleApplication) {
+            $this->trigger(self::EVENT_INVALIDATE_CONTAINER_CACHES, $event);
+        }
     }
 
     // Protected Methods

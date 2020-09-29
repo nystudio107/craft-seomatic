@@ -127,12 +127,12 @@ class SitemapCustomTemplate extends FrontendTemplate implements SitemapInterface
         $siteId = $params['siteId'];
         $dependency = new TagDependency([
             'tags' => [
-                $this::GLOBAL_SITEMAP_CACHE_TAG,
-                $this::SITEMAP_CACHE_TAG.$handle.$siteId,
+                self::GLOBAL_SITEMAP_CACHE_TAG,
+                self::SITEMAP_CACHE_TAG.$handle.$siteId,
             ],
         ]);
 
-        return $cache->getOrSet($this::CACHE_KEY.$groupId.self::CUSTOM_SCOPE.$handle.$siteId, function () use (
+        return $cache->getOrSet(self::CACHE_KEY.$groupId.self::CUSTOM_SCOPE.$handle.$siteId, function () use (
             $handle,
             $siteId
         ) {
@@ -212,7 +212,7 @@ class SitemapCustomTemplate extends FrontendTemplate implements SitemapInterface
     {
         $handle = self::CUSTOM_HANDLE;
         $cache = Craft::$app->getCache();
-        TagDependency::invalidate($cache, $this::SITEMAP_CACHE_TAG.$handle.$siteId);
+        TagDependency::invalidate($cache, self::SITEMAP_CACHE_TAG.$handle.$siteId);
         Craft::info(
             'Sitemap Custom cache cleared: '.$handle,
             __METHOD__
