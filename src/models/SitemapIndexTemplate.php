@@ -132,12 +132,12 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
         }
         $dependency = new TagDependency([
             'tags' => [
-                $this::GLOBAL_SITEMAP_CACHE_TAG,
-                $this::SITEMAP_INDEX_CACHE_TAG,
+                self::GLOBAL_SITEMAP_CACHE_TAG,
+                self::SITEMAP_INDEX_CACHE_TAG,
             ],
         ]);
 
-        return $cache->getOrSet($this::CACHE_KEY.$groupId.'.'.$siteId, function () use ($groupSiteIds, $siteId) {
+        return $cache->getOrSet(self::CACHE_KEY.$groupId.'.'.$siteId, function () use ($groupSiteIds, $siteId) {
             Craft::info(
                 'Sitemap index cache miss',
                 __METHOD__
@@ -200,7 +200,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
     public function invalidateCache()
     {
         $cache = Craft::$app->getCache();
-        TagDependency::invalidate($cache, $this::SITEMAP_INDEX_CACHE_TAG);
+        TagDependency::invalidate($cache, self::SITEMAP_INDEX_CACHE_TAG);
         Craft::info(
             'Sitemap index cache cleared',
             __METHOD__

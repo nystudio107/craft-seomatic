@@ -144,14 +144,14 @@ class FrontendTemplates extends Component
         }
         $dependency = new TagDependency([
             'tags' => [
-                $this::GLOBAL_FRONTENDTEMPLATE_CACHE_TAG,
-                $this::FRONTENDTEMPLATE_CACHE_TAG . $template,
-                $this::FRONTENDTEMPLATE_CACHE_TAG . $template . $siteId,
+                self::GLOBAL_FRONTENDTEMPLATE_CACHE_TAG,
+                self::FRONTENDTEMPLATE_CACHE_TAG . $template,
+                self::FRONTENDTEMPLATE_CACHE_TAG . $template . $siteId,
             ],
         ]);
         $cache = Craft::$app->getCache();
         $html = $cache->getOrSet(
-            $this::CACHE_KEY . $template . $siteId,
+            self::CACHE_KEY . $template . $siteId,
             function () use ($template, $params) {
                 Craft::info(
                     'Frontend template cache miss: ' . $template,
@@ -202,7 +202,7 @@ class FrontendTemplates extends Component
     public function invalidateCaches()
     {
         $cache = Craft::$app->getCache();
-        TagDependency::invalidate($cache, $this::GLOBAL_FRONTENDTEMPLATE_CACHE_TAG);
+        TagDependency::invalidate($cache, self::GLOBAL_FRONTENDTEMPLATE_CACHE_TAG);
         Craft::info(
             'All frontend template caches cleared',
             __METHOD__
@@ -217,7 +217,7 @@ class FrontendTemplates extends Component
     public function invalidateFrontendTemplateCache(string $template)
     {
         $cache = Craft::$app->getCache();
-        TagDependency::invalidate($cache, $this::FRONTENDTEMPLATE_CACHE_TAG . $template);
+        TagDependency::invalidate($cache, self::FRONTENDTEMPLATE_CACHE_TAG . $template);
         Craft::info(
             'Frontend template cache cleared: ' . $template,
             __METHOD__

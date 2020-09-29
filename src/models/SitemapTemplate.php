@@ -116,8 +116,8 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
 
         $cache = Craft::$app->getCache();
         $uniqueKey = $groupId.$type.$handle.$siteId;
-        $cacheKey = $this::CACHE_KEY.$uniqueKey;
-        $queueJobCacheKey = $this::QUEUE_JOB_CACHE_KEY.$uniqueKey;
+        $cacheKey = self::CACHE_KEY.$uniqueKey;
+        $queueJobCacheKey = self::QUEUE_JOB_CACHE_KEY.$uniqueKey;
         $result = $cache->get($cacheKey);
         // If the sitemap isn't cached, start a job to create it
         if ($result === false) {
@@ -142,8 +142,8 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             $cacheDuration = 3600;
             $dependency = new TagDependency([
                 'tags' => [
-                    $this::GLOBAL_SITEMAP_CACHE_TAG,
-                    $this::CACHE_KEY.$uniqueKey,
+                    self::GLOBAL_SITEMAP_CACHE_TAG,
+                    self::CACHE_KEY.$uniqueKey,
                 ],
             ]);
             $cache->set($queueJobCacheKey, $jobId, $cacheDuration, $dependency);
@@ -197,7 +197,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
     public function invalidateCache(string $handle, int $siteId)
     {
         $cache = Craft::$app->getCache();
-        TagDependency::invalidate($cache, $this::SITEMAP_CACHE_TAG.$handle.$siteId);
+        TagDependency::invalidate($cache, self::SITEMAP_CACHE_TAG.$handle.$siteId);
         Craft::info(
             'Sitemap cache cleared: '.$handle,
             __METHOD__
