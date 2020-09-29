@@ -38,6 +38,7 @@ use nystudio107\seomatic\variables\SeomaticVariable;
 use Craft;
 use craft\base\Component;
 use craft\base\Element;
+use craft\console\Application as ConsoleApplication;
 use craft\elements\GlobalSet;
 
 use yii\base\Exception;
@@ -700,7 +701,9 @@ class MetaContainers extends Component
             'sourceId' => null,
             'sourceType' => null,
         ]);
-        $this->trigger(self::EVENT_INVALIDATE_CONTAINER_CACHES, $event);
+        if (!Craft::$app instanceof ConsoleApplication) {
+            $this->trigger(self::EVENT_INVALIDATE_CONTAINER_CACHES, $event);
+        }
     }
 
     /**
@@ -739,7 +742,9 @@ class MetaContainers extends Component
             'sourceId' => $sourceId,
             'sourceType' => $metaBundleSourceType,
         ]);
-        $this->trigger(self::EVENT_INVALIDATE_CONTAINER_CACHES, $event);
+        if (!Craft::$app instanceof ConsoleApplication) {
+            $this->trigger(self::EVENT_INVALIDATE_CONTAINER_CACHES, $event);
+        }
     }
 
     /**
@@ -766,7 +771,9 @@ class MetaContainers extends Component
             'sourceId' => null,
             'sourceType' => null,
         ]);
-        $this->trigger(self::EVENT_INVALIDATE_CONTAINER_CACHES, $event);
+        if (!Craft::$app instanceof ConsoleApplication) {
+            $this->trigger(self::EVENT_INVALIDATE_CONTAINER_CACHES, $event);
+        }
     }
 
     // Protected Methods
