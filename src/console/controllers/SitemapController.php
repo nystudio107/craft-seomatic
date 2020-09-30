@@ -30,14 +30,19 @@ class SitemapController extends Controller
     // =========================================================================
 
     /**
-     * @var null|string
+     * @var null|string The handle of the section to generate a sitemap for
      */
     public $handle;
 
     /**
-     * @var null|int
+     * @var null|int The siteId to generate a sitemap for
      */
     public $siteId;
+
+    /**
+     * @var bool Should the sitemap generation simply be queued, rather than run immediately?
+     */
+    public $queue = false;
 
     // Protected Properties
     // =========================================================================
@@ -61,6 +66,7 @@ class SitemapController extends Controller
         return [
             'handle',
             'siteId',
+            'queue',
         ];
     }
 
@@ -100,10 +106,11 @@ class SitemapController extends Controller
                     Seomatic::$plugin->sitemaps->invalidateSitemapCache(
                         $metaBundle->sourceHandle,
                         $siteId,
-                        $metaBundle->sourceBundleType,
-                        true
+                        $metaBundle->sourceBundleType
                     );
-                    Craft::$app->getQueue()->run();
+                    if (!$this->queue) {
+                        Craft::$app->getQueue()->run();
+                    }
                     echo '---'.PHP_EOL;
                 }
             }
