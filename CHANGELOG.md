@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.21 - 2020.09.30
+### Fixed
+* Fixed a regression that would cause a Garnish error on some SEOmatic pages, causing the JavaScript to not operate property
+
 ## 3.3.20 - 2020.09.29
 ### Changed
 * Don’t trigger `EVENT_INVALIDATE_CONTAINER_CACHES` in a console command
