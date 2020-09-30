@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.22 - 2020.09.30
+### Added
+* Added a `--queue` flag that can be passed to the `seomatic/sitemap/generate` flag to cause the sitemap generation jobs to be queued, but not run
+
 ## 3.3.21 - 2020.09.30
 ### Fixed
 * Fixed a regression that would cause a Garnish error on some SEOmatic pages, causing the JavaScript to not operate property
