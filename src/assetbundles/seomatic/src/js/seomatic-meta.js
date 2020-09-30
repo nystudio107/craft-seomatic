@@ -187,9 +187,11 @@ function initFieldSettings() {
     });
 }
 
-Garnish.on(Craft.EntryTypeSwitcher, 'typeChange', () => {
-    initFieldSettings();
-});
+if (typeof Craft.EntryTypeSwitcher !== 'undefined') {
+    Garnish.on(Craft.EntryTypeSwitcher, 'typeChange', () => {
+        initFieldSettings();
+    });
+}
 
 $(function() {
     initFieldSettings();
