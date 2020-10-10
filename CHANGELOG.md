@@ -1,8 +1,11 @@
 # SEOmatic Changelog
 
-## 3.3.22 - 2020.09.30
+## 3.3.22 - 2020.10.10
 ### Added
 * Added a `--queue` flag that can be passed to the `seomatic/sitemap/generate` flag to cause the sitemap generation jobs to be queued, but not run
+
+### Changed
+* Ensure that `canonicalUrl` is always a string
 
 ## 3.3.21 - 2020.09.30
 ### Fixed
