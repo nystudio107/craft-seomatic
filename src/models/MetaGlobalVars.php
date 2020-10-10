@@ -207,7 +207,12 @@ class MetaGlobalVars extends VarsModel
         parent::init();
         // If we have potentially unsafe Twig code, strip it out
         if (!empty($this->canonicalUrl)) {
-            if (strpos($this->canonicalUrl, 'craft.app.request.pathInfo') !== false) {
+            if (is_string($this->canonicalUrl)) {
+                if (strpos($this->canonicalUrl, 'craft.app.request.pathInfo') !== false) {
+                    $this->canonicalUrl = '{seomatic.helper.safeCanonicalUrl()}';
+                }
+            } else {
+                // Ensure that `canonicalUrl` is always a string
                 $this->canonicalUrl = '{seomatic.helper.safeCanonicalUrl()}';
             }
         }
