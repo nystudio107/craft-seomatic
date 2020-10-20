@@ -8,7 +8,7 @@
 </div>
 {% set message = seomatic.getEnvironmentMessage() %}
 {% if  message | length %}
-    <div class="field" style="margin-bottom: 0;">
+    <div class="field">
         <p class="warning">{{ message | md | striptags('<code><br><a>') | raw }}</p>
     </div>
 {% endif %}
