@@ -1,11 +1,12 @@
 # SEOmatic Changelog
 
-## 3.3.22 - 2020.10.10
+## 3.3.22 - 2020.10.20
 ### Added
 * Added a `--queue` flag that can be passed to the `seomatic/sitemap/generate` flag to cause the sitemap generation jobs to be queued, but not run
 
 ### Fixed
 * Fixed an issue in sitemap generation if an alternate site element had `null` for a URL
+* Fixed awkward spacing on Tracking Scripts environment warning
 
 ### Changed
 * Ensure that `canonicalUrl` is always a string
