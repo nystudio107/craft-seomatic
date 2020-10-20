@@ -46,4 +46,14 @@ If you need to access your SEOmatic field's data directly in a template, you can
 
 All of the variables listed in the [General Variables](#general-variables) can be accessed in this manner.
 
+There may be occasions where you want to output the final parsed value of an SEOmatic variable on the frontend. You can do that via `entry.mySeoSettingsField.metaGlobalVars.parsedValue()`. For example:
+
+```twig
+{{ entry.mySeoSettingsField.metaGlobalVars.parsedValue('seoDescription') }}
+```
+
+This will output the final parsed value of the `entry.mySeoSettingsField.metaGlobalVars.seoDescription` variable.
+
+This parsing is done automatically by SEOmatic just before the meta information is added to your page.
+
 Brought to you by [nystudio107](https://nystudio107.com/)

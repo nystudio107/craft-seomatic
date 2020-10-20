@@ -1,5 +1,17 @@
 # SEOmatic Changelog
 
+## 3.3.22 - 2020.10.20
+### Added
+* Added a `--queue` flag that can be passed to the `seomatic/sitemap/generate` flag to cause the sitemap generation jobs to be queued, but not run
+
+### Fixed
+* Fixed an issue in sitemap generation if an alternate site element had `null` for a URL
+* Fixed awkward spacing on Tracking Scripts environment warning
+* Handle clearing caches properly when the homepage is in a structure via `__home__` in the slug
+
+### Changed
+* Ensure that `canonicalUrl` is always a string
+
 ## 3.3.21 - 2020.09.30
 ### Fixed
 * Fixed a regression that would cause a Garnish error on some SEOmatic pages, causing the JavaScript to not operate property
