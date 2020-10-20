@@ -7,7 +7,7 @@
 ### Fixed
 * Fixed an issue in sitemap generation if an alternate site element had `null` for a URL
 * Fixed awkward spacing on Tracking Scripts environment warning
-* Handle clearing caches properly when the homepage is in a structured via `__home__` in the slug
+* Handle clearing caches properly when the homepage is in a structure via `__home__` in the slug
 
 ### Changed
 * Ensure that `canonicalUrl` is always a string
