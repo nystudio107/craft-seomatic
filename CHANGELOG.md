@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+### 3.3.23 - 2020.10.29
+### Changed
+* Revert "Social image transforms for remote volumes no longer default to not generating the image transforms immediately (they fall back on whatever your system setting is)" because it caused slowdown when working with remote volumes
+
 ## 3.3.22 - 2020.10.20
 ### Added
 * Added a `--queue` flag that can be passed to the `seomatic/sitemap/generate` flag to cause the sitemap generation jobs to be queued, but not run
