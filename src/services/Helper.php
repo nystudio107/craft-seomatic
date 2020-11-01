@@ -491,4 +491,23 @@ class Helper extends Component
     {
         return Seomatic::$craft33;
     }
+
+    /**
+     * Return whether puppeteer is installed
+     *
+     * @return bool
+     */
+    public function puppeteer(): bool
+    {
+        try {
+            if ($dir = Seomatic::getInstance()->getSettings()->socialImagesNodeModulePath) {
+                $dir = escapeshellarg($dir);
+                return preg_match('/.*puppeteer@.*/i', `cd {$dir}; npm ls puppeteer`);
+            } else {
+                return preg_match('/.*puppeteer@.*/i', `npm ls puppeteer`);
+            }
+        } catch (\Throwable $exception) {
+            return false;
+        }
+    }
 }
