@@ -1,0 +1,47 @@
+{% import "_includes/forms" as forms %}
+{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
+
+<div id="social-images" class="hidden">
+    {% namespace "settings" %}
+
+        {{ forms.lightswitchField({
+            label: "Enable Social Images"|t("seomatic"),
+            instructions: "Whether Social Images should be enabled. Only enable this, if the environment is property configured."|t("seomatic"),
+            id: "enableSocialImages",
+            name: "enableSocialImages",
+            on: settings.enableSocialImages,
+            warning: configWarning("enableSocialImages", "seomatic"),
+            errors: settings.getErrors("enableSocialImages"),
+        }) }}
+
+        {{ forms.textField({
+            label: "Social Images node module path"|t("seomatic"),
+            instructions: "The node module location, if different from the include path"|t("seomatic"),
+            id: "socialImagesNodeModulePath",
+            name: "socialImagesNodeModulePath",
+            value: settings.socialImagesNodeModulePath,
+            warning: configWarning("socialImagesNodeModulePath", "seomatic"),
+            errors: settings.getErrors("socialImagesNodeModulePath"),
+        }) }}
+
+        {{ forms.textField({
+            label: "Social Images Chromium executable path"|t("seomatic"),
+            instructions: "Path to the Chrome/Chromium executable, if you don't want to use the one installed by Puppeteer"|t("seomatic"),
+            id: "socialImagesChromePath",
+            name: "socialImagesChromePath",
+            value: settings.socialImagesChromePath,
+            warning: configWarning("socialImagesChromePath", "seomatic"),
+            errors: settings.getErrors("socialImagesChromePath"),
+        }) }}
+
+        {{ forms.lightswitchField({
+            label: "Enable Chromium sandbox."|t("seomatic"),
+            instructions: "Whether to enable the sandbox for Chromium, when rendering the template. Required to be disabled in some virtualization environments, but should be enabled, if possible, as this setting allows pages rendered on Chromium to access the system."|t("seomatic"),
+            id: "socialImagesEnableSandbox",
+            name: "socialImagesEnableSandbox",
+            on: settings.socialImagesEnableSandbox,
+            warning: configWarning("socialImagesEnableSandbox", "seomatic"),
+            errors: settings.getErrors("socialImagesEnableSandbox"),
+        }) }}
+    {% endnamespace %}
+</div>

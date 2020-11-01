@@ -202,6 +202,29 @@ class Settings extends VarsModel
     public $defaultSeoElementTypes = [
     ];
 
+    /**
+     * @var string The node module location, if different from the include path.
+     */
+    public $socialImagesNodeModulePath = '';
+
+    /**
+     * @var string Path to the Chrome/Chromium executable, if you don't want to use the one installed by Puppeteer
+     */
+    public $socialImagesChromePath = '';
+
+    /**
+     * @var bool
+     * Whether to enable the sandbox for Chromium, when rendering the template.
+     * Required to be disabled in some virtualization environments, but should be enabled,
+     * if possible, as this setting allows pages rendered on Chromium to access the system.
+     */
+    public $socialImagesEnableSandbox = true;
+
+    /**
+     * @var bool Whether or not social images should be enabled.
+     */
+    public $enableSocialImages = false;
+
     // Public Methods
     // =========================================================================
 
