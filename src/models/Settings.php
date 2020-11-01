@@ -221,6 +221,16 @@ class Settings extends VarsModel
     public $socialImagesEnableSandbox = true;
 
     /**
+     * @var string The UID of the volume that's holding the social images.
+     */
+    public $socialImageVolumeUid = '';
+
+    /**
+     * @var string The subpath on the social image volume.
+     */
+    public $socialImageSubpath = '';
+
+    /**
      * @var bool Whether or not social images should be enabled.
      */
     public $enableSocialImages = false;

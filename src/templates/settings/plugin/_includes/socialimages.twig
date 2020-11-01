@@ -1,5 +1,36 @@
 {% import "_includes/forms" as forms %}
+{% from _self import assetLocationInput %}
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
+
+{% set allVolumes = craft.app.volumes.getAllVolumes() %}
+{% set volumeList = [] %}
+{% for volume in allVolumes %}
+    {% set volumeList = volumeList|merge([{'value': volume.uid, 'label': volume.name}]) %}
+{% endfor %}
+
+
+{% macro assetLocationInput(volumeOptions, volumeUid, subpath) %}
+    {% from "_includes/forms" import select, text %}
+    <div class="flex">
+        <div>
+            {{ select({
+                id: 'socialImageVolumeUid',
+                name: 'socialImageVolumeUid',
+                options: volumeOptions,
+                value: volumeUid,
+            }) }}
+        </div>
+        <div class="flex-grow">
+            {{ text({
+                id: 'socialImageSubpath',
+                class: 'ltr',
+                name: 'socialImageSubpath',
+                value: subpath,
+                placeholder: "path/to/subfolder"|t('app')
+            }) }}
+        </div>
+    </div>
+{% endmacro %}
 
 <div id="social-images" class="hidden">
     {% namespace "settings" %}
@@ -17,6 +48,19 @@
             warning: configWarning("enableSocialImages", "seomatic"),
             errors: settings.getErrors("enableSocialImages"),
         }) }}
+
+        {% if volumeList %}
+            {{ forms.field({
+                first: true,
+                label: "Social Image Location"|t('app'),
+                instructions: "Where do you want to store the social images?"|t('app')
+            }, assetLocationInput(volumeList, settings.socialImageVolumeUid, settings.socialImageSubpath)) }}
+        {% else %}
+            {{ forms.field({
+                first: true,
+                label: "Social Image Volume"|t('app')
+            }, '<p class="error">' ~ "No volumes exist yet."|t('app') ~ '</p>') }}
+        {% endif %}
 
         {{ forms.textField({
             label: "Social Images node module path"|t("seomatic"),
