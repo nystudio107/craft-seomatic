@@ -277,6 +277,7 @@ class Seomatic extends Plugin
 
     /**
      * @inheritdoc
+     * @return Settings
      */
     public function getSettings()
     {
