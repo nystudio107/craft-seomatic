@@ -4,6 +4,10 @@
 <div id="social-images" class="hidden">
     {% namespace "settings" %}
 
+        {% if not seomatic.helper.puppeteer %}
+            <div class="error">{{ 'Puppeteer cannot be detected. Either it is not installed correctly, or the <code>socialImagesNodeModulePath</code> setting is incorrect.'|t('seomatic')|raw }}</div>
+        {%  endif %}
+
         {{ forms.lightswitchField({
             label: "Enable Social Images"|t("seomatic"),
             instructions: "Whether Social Images should be enabled. Only enable this, if the environment is property configured."|t("seomatic"),
@@ -20,6 +24,7 @@
             id: "socialImagesNodeModulePath",
             name: "socialImagesNodeModulePath",
             value: settings.socialImagesNodeModulePath,
+            placeholder: "/path/to/node_modules",
             warning: configWarning("socialImagesNodeModulePath", "seomatic"),
             errors: settings.getErrors("socialImagesNodeModulePath"),
         }) }}
@@ -30,6 +35,7 @@
             id: "socialImagesChromePath",
             name: "socialImagesChromePath",
             value: settings.socialImagesChromePath,
+            placeholder: "/path/to/chromium",
             warning: configWarning("socialImagesChromePath", "seomatic"),
             errors: settings.getErrors("socialImagesChromePath"),
         }) }}
