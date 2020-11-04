@@ -104,6 +104,11 @@ class MetaBundleSettings extends VarsModel
     public $seoImageField = '';
 
     /**
+     * @var string The Twig template that is used to render the SEO Image.
+     */
+    public $seoImageTemplate = '';
+
+    /**
      * @var bool Whether the SEO image should be automatically transformed into an appropriate format
      */
     public $seoImageTransform = true;
@@ -174,6 +179,11 @@ class MetaBundleSettings extends VarsModel
     public $twitterImageField = '';
 
     /**
+     * @var string The Twig template that is used to render the Twiter Image.
+     */
+    public $twitterImageTemplate = '';
+
+    /**
      * @var bool Whether the Twitter image should be automatically transformed into an appropriate format
      */
     public $twitterImageTransform = true;
@@ -234,6 +244,12 @@ class MetaBundleSettings extends VarsModel
     public $ogImageField = '';
 
     /**
+     * @var string The Twig template that is used to render the OpenGraph Image.
+     */
+    public $ogImageTemplate = '';
+
+
+    /**
      * @var bool Whether the OpenGraph image should be automatically transformed into an appropriate format
      */
     public $ogImageTransform = true;
@@ -284,6 +300,7 @@ class MetaBundleSettings extends VarsModel
                     'seoKeywordsSource',
                     'seoKeywordsField',
                     'seoImageSource',
+                    'seoImageTemplate',
                     'seoImageField',
                     'seoImageDescriptionSource',
                     'seoImageDescriptionField',
@@ -296,6 +313,7 @@ class MetaBundleSettings extends VarsModel
                     'twitterDescriptionSource',
                     'twitterDescriptionField',
                     'twitterImageSource',
+                    'twitterImageTemplate',
                     'twitterImageField',
                     'twitterImageDescriptionSource',
                     'twitterImageDescriptionField',
@@ -306,6 +324,7 @@ class MetaBundleSettings extends VarsModel
                     'ogDescriptionSource',
                     'ogDescriptionField',
                     'ogImageSource',
+                    'ogImageTemplate',
                     'ogImageField',
                     'ogImageDescriptionSource',
                     'ogImageDescriptionField',
