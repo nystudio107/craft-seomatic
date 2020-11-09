@@ -258,7 +258,7 @@ class MetaValue
             }
             // Ensure we aren't passed in an absurdly large object template to parse
             if (strlen($metaValue) > self::MAX_TEMPLATE_LENGTH) {
-                $metaValue = substr($metaValue, 0, self::MAX_TEMPLATE_LENGTH);
+                $metaValue = mb_substr($metaValue, 0, self::MAX_TEMPLATE_LENGTH);
             }
             // If there are no dynamic tags, just return the template
             if (!$parseAsTwig || !StringHelper::contains($metaValue, '{')) {
