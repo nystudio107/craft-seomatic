@@ -1,8 +1,11 @@
 # SEOmatic Changelog
 
-### 3.3.23 - 2020.10.29
+### 3.3.23 - Unreleased
 ### Changed
 * Revert "Social image transforms for remote volumes no longer default to not generating the image transforms immediately (they fall back on whatever your system setting is)" because it caused slowdown when working with remote volumes
+
+### Fixed
+* Use unicode safe string functions to truncate meta values > 4096 characters before parsing them
 
 ## 3.3.22 - 2020.10.20
 ### Added
