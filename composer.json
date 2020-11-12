@@ -69,6 +69,7 @@
             "metaContainers": "nystudio107\\seomatic\\services\\MetaContainers",
             "seoElements": "nystudio107\\seomatic\\services\\SeoElements",
             "script": "nystudio107\\seomatic\\services\\Script",
+            "socialImages": "nystudio107\\seomatic\\services\\SocialImages",
             "sitemaps": "nystudio107\\seomatic\\services\\Sitemaps",
             "tag": "nystudio107\\seomatic\\services\\Tag",
             "title": "nystudio107\\seomatic\\services\\Title"

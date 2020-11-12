@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\services;
 
+use craft\base\Element;
 use nystudio107\seomatic\helpers\UrlHelper;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\DynamicMeta as DynamicMetaHelper;
@@ -421,6 +422,21 @@ class Helper extends Component
     {
         return ImageTransformHelper::socialTransform($asset, $transformName, $siteId, $transformMode);
     }
+
+    /**
+     * Output the URL for the social image in $transformName
+     *
+     * @param Element  $element the Element
+     * @param string   $transformName the name of the transform to apply
+     * @param string   $templatePath the template to use if different from configured.
+     *
+     * @return string URL to the social image
+     */
+    public function socialImage(Element $element, $transformName = 'base', $templatePath = ''): string
+    {
+        return Seomatic::getInstance()->socialImages->getSocialImageUrl($element, $transformName, $templatePath);
+    }
+
 
     /**
      * Get the width of the transformed social image for $transformName and
