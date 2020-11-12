@@ -36,7 +36,8 @@
         "craftcms/cms": "^3.0.0",
         "php-science/textrank": "^1.0.3",
         "davechild/textstatistics": "1.0.2",
-        "sunra/php-simple-html-dom-parser": "^1.5.2"
+        "sunra/php-simple-html-dom-parser": "^1.5.2",
+        "spatie/browsershot": "^3.20"
     },
     "repositories": [
         {
@@ -68,6 +69,7 @@
             "metaContainers": "nystudio107\\seomatic\\services\\MetaContainers",
             "seoElements": "nystudio107\\seomatic\\services\\SeoElements",
             "script": "nystudio107\\seomatic\\services\\Script",
+            "socialImages": "nystudio107\\seomatic\\services\\SocialImages",
             "sitemaps": "nystudio107\\seomatic\\services\\Sitemaps",
             "tag": "nystudio107\\seomatic\\services\\Tag",
             "title": "nystudio107\\seomatic\\services\\Title"

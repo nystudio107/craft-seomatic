@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\services;
 
+use craft\base\Element;
 use nystudio107\seomatic\helpers\UrlHelper;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\DynamicMeta as DynamicMetaHelper;
@@ -423,6 +424,21 @@ class Helper extends Component
     }
 
     /**
+     * Output the URL for the social image in $transformName
+     *
+     * @param Element  $element the Element
+     * @param string   $transformName the name of the transform to apply
+     * @param string   $templatePath the template to use if different from configured.
+     *
+     * @return string URL to the social image
+     */
+    public function socialImage(Element $element, $transformName = 'base', $templatePath = ''): string
+    {
+        return Seomatic::getInstance()->socialImages->getSocialImageUrl($element, $transformName, $templatePath);
+    }
+
+
+    /**
      * Get the width of the transformed social image for $transformName and
      * optional $siteId
      *
@@ -490,5 +506,24 @@ class Helper extends Component
     public function craft33(): bool
     {
         return Seomatic::$craft33;
+    }
+
+    /**
+     * Return whether puppeteer is installed
+     *
+     * @return bool
+     */
+    public function puppeteer(): bool
+    {
+        try {
+            if ($dir = Seomatic::getInstance()->getSettings()->socialImagesNodeModulePath) {
+                $dir = escapeshellarg($dir);
+                return preg_match('/puppeteer@/i', shell_exec("cd {\$dir}; npm ls puppeteer"));
+            } else {
+                return preg_match('/puppeteer@/i', shell_exec("npm ls puppeteer"));
+            }
+        } catch (\Throwable $exception) {
+            return false;
+        }
     }
 }

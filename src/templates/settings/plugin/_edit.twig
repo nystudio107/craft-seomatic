@@ -12,6 +12,7 @@
     "titles": {label: "Titles"|t('seomatic'), url: "#titles"},
     "tags": {label: "Tags"|t('seomatic'), url: "#tags"},
     "endpoints": {label: "Endpoints"|t('seomatic'), url: "#endpoints"},
+    "socialimages": {label: "Social Images"|t('seomatic'), url: "#social-images"},
     "advanced": {label: "Advanced"|t('seomatic'), url: "#advanced"},
 } %}
 
@@ -36,6 +37,9 @@
 
     {# -- Endpoints settings -- #}
     {% include "seomatic/settings/plugin/_includes/endpoints.twig" %}
+
+    {# -- Social image settings -- #}
+    {% include "seomatic/settings/plugin/_includes/socialimages.twig" %}
 
     {# -- Advanced settings -- #}
     {% include "seomatic/settings/plugin/_includes/advanced.twig" %}

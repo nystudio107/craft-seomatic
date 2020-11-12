@@ -7,6 +7,14 @@
     fromAsset: "Custom Image"|t("seomatic"),
     fromUrl: "Custom URL"|t("seomatic"),
 } %}
+
+{% set puppeteer = seomatic.helper.puppeteer %}
+
+{% if puppeteer %}
+    {% set imageOptions = { fromTemplate: "Generate from Twig Template"|t("seomatic"), } | merge(imageOptions) %}
+    {%- do view.registerAssetBundle("craft\\web\\assets\\vue\\VueAsset") %}
+{% endif %}
+
 {% if assetFieldSources is defined and assetFieldSources |length %}
     {% set imageOptions = { fromField: "From Asset Field"|t('seomatic'), } | merge(imageOptions) %}
 {% endif %}
@@ -80,6 +88,21 @@
                 }) }}
             </div>
         {% endnamespace %}
+
+        {% if puppeteer %}
+            {% namespace "metaBundleSettings" %}
+                <div class="heading seomatic-imageSourceFromTemplate seomatic-imageSourcePicker">
+                    {% include "_includes/forms/autosuggest" with {
+                        name: "twitterImageTemplate",
+                        suggestions: craft.cp.getTemplateSuggestions(),
+                        value: metaBundleSettings.twitterImageTemplate,
+                        disabled: static,
+                        placeholder: "Pick a template"|t("seomatic")
+                    } only %}
+
+                </div>
+            {% endnamespace %}
+        {% endif %}
 
 
         {############### Twitter Image Transform ###############}

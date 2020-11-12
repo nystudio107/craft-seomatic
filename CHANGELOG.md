@@ -1,5 +1,10 @@
 # SEOmatic Changelog
 
+## Unreleased
+
+### Added
+- Added `nystudio107\seomatic\services\Helper::puppeteer().`
+
 ## 3.3.22 - 2020.10.20
 ### Added
 * Added a `--queue` flag that can be passed to the `seomatic/sitemap/generate` flag to cause the sitemap generation jobs to be queued, but not run

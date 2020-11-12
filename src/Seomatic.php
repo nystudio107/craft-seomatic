@@ -30,6 +30,7 @@ use nystudio107\seomatic\services\Link as LinkService;
 use nystudio107\seomatic\services\MetaBundles as MetaBundlesService;
 use nystudio107\seomatic\services\MetaContainers as MetaContainersService;
 use nystudio107\seomatic\services\Script as ScriptService;
+use nystudio107\seomatic\services\SocialImages as SocialImagesService;
 use nystudio107\seomatic\services\SeoElements as SeoElementsService;
 use nystudio107\seomatic\services\Sitemaps as SitemapsService;
 use nystudio107\seomatic\services\Tag as TagService;
@@ -93,6 +94,7 @@ use yii\base\Event;
  * @property  LinkService              $link
  * @property  MetaBundlesService       $metaBundles
  * @property  MetaContainersService    $metaContainers
+ * @property  SocialImagesService      $socialImages
  * @property  ScriptService            $script
  * @property  SeoElementsService       $seoElements
  * @property  SitemapsService          $sitemaps
@@ -277,6 +279,7 @@ class Seomatic extends Plugin
 
     /**
      * @inheritdoc
+     * @return Settings
      */
     public function getSettings()
     {
