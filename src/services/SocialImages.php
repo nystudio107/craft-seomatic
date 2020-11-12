@@ -39,8 +39,15 @@ class SocialImages extends Component
      * @param string $template
      * @return string
      */
-    public function getSocialImageUrl(Element $element, $transformName, $template = ''): string
+    public function getSocialImageUrl(Element $element, $transformName = 'base', $template = ''): string
     {
+        $transformParameters = ImageTransform::getTransformParametersByName($transformName);
+
+        if (empty($transformParameters)) {
+            Craft::error(Craft::t('seomatic', 'Cannot find the transform parameters for ' . $transformName), 'seomatic');
+            return '';
+        }
+
         $filename = $this->getSocialImageFilename($element, $transformName, $template);
 
         /** @var Seomatic $seomatic */
@@ -48,7 +55,8 @@ class SocialImages extends Component
         $volume = Craft::$app->getVolumes()->getVolumeByUid($seomatic->getSettings()->socialImageVolumeUid);
 
         if (!$volume) {
-            Craft::error(Craft::t('seomatic', 'Cannot find the specified social image volume.'));
+            Craft::error(Craft::t('seomatic', 'Cannot find the specified social image volume.', 'seomatic'));
+            return '';
         }
 
         $path = $seomatic->getSettings()->socialImageSubpath;
@@ -63,7 +71,7 @@ class SocialImages extends Component
                 $template = $metaBundle->metaBundleSettings->seoImageTemplate ?? null;
 
                 if (!$template) {
-                    Craft::error(Craft::t('seomatic', 'Cannot find social image template ' . $template));
+                    Craft::error(Craft::t('seomatic', 'Cannot find social image template ' . $template), 'seomatic');
                     return '';
                 }
             }
@@ -74,7 +82,11 @@ class SocialImages extends Component
                 $html = $view->renderObjectTemplate($templateContent, $element);
 
                 $tempPath = Assets::tempFilePath(ImageTransform::DEFAULT_SOCIAL_FORMAT);
-                Browsershot::html($html)->save($tempPath);
+                Browsershot::html($html)
+                    ->width($transformParameters['width'])
+                    ->height($transformParameters['height'])
+                    ->quality(ImageTransform::SOCIAL_TRANSFORM_QUALITY)
+                    ->save($tempPath);
 
                 $fileStream = fopen($tempPath, 'rb');
                 $volume->createFileByStream($fullPath, $fileStream, [
