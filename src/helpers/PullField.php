@@ -147,6 +147,8 @@ class PullField
             $source = $bundleSettings[$fieldName.'Source'] ?? '';
             $ids = $bundleSettings[$fieldName.'Ids'] ?? [];
             $sourceField = $bundleSettings[$fieldName.'Field'] ?? '';
+            $template = $bundleSettings[$fieldName.'Template'] ?? '';
+
             if (!empty($source)) {
                 $transformImage = $bundleSettings[$fieldName.'Transform'] ?? true;
                 $seoField = $fields['seoField'];
@@ -305,6 +307,13 @@ class PullField
                                 $globalsSettings[$fieldNameHeight] = '{{ craft.app.assets.assetById('
                                     .$ids[0]
                                     .', '.$siteId.').height }}';
+                            }
+                            break;
+                        case 'fromTemplate':
+                            if (!empty($template)) {
+                                $globalsSettings[$fieldName] = '{{ seomatic.helper.socialImage('
+                                    .rtrim($objectPrefix.$elementName, '.')
+                                    .', ' . $transformName . ') }}';
                             }
                             break;
                     }
