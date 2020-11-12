@@ -237,6 +237,17 @@ class ImageTransform
         return $assets;
     }
 
+    /**
+     * Return transform parameters by name or null, if can't be found.
+     *
+     * @param string $transformName
+     * @return mixed|null
+     */
+    public static function getTransformParametersByName(string $transformName)
+    {
+        return self::$transforms[$transformName] ?? null;
+    }
+
     // Protected Static Methods
     // =========================================================================
 
