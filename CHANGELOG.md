@@ -3,7 +3,10 @@
 ## Unreleased
 
 ### Added
+- Added Social Image SEO settings.
+- Added `nystudio107\seomatic\helpers\ImageTransform:: getTransformParametersByName()`.
 - Added `nystudio107\seomatic\services\Helper::puppeteer().`
+- Added `nystudio107\seomatic\services::SocialImages` service.
 
 ## 3.3.22 - 2020.10.20
 ### Added
