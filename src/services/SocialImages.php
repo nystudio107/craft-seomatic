@@ -116,6 +116,6 @@ class SocialImages extends Component
     protected function getSocialImageSubpath(Element $element, string $transformName, string $templatePath = ''): string
     {
         $templateHash = !empty($templatePath) ? '_' . substr(sha1($templatePath), 0, 7) : '';
-        return $element->getGqlTypeName() . '/' . $transformName . $templateHash . '.' . ImageTransform::DEFAULT_SOCIAL_FORMAT;
+        return $element->getGqlTypeName() . DIRECTORY_SEPARATOR . $element->id . '-' . $element->siteId . DIRECTORY_SEPARATOR . $transformName . $templateHash . '.' . ImageTransform::DEFAULT_SOCIAL_FORMAT;
     }
 }
