@@ -15,9 +15,13 @@ use Craft;
 use craft\base\Component;
 use craft\base\Element;
 use craft\base\VolumeInterface;
+use craft\errors\VolumeException;
 use craft\helpers\Assets;
 use craft\helpers\FileHelper;
 use nystudio107\seomatic\helpers\ImageTransform;
+use nystudio107\seomatic\helpers\PullField;
+use nystudio107\seomatic\models\MetaBundle;
+use nystudio107\seomatic\models\MetaBundleSettings;
 use nystudio107\seomatic\Seomatic;
 use Spatie\Browsershot\Browsershot;
 
@@ -44,6 +48,9 @@ class SocialImages extends Component
             Craft::error(Craft::t('seomatic', 'Cannot find the transform parameters for ' . $transformName), 'seomatic');
             return '';
         }
+
+        $width = $transformParameters['width'];
+        $height = $transformParameters['height'];
 
         $imagePath = $this->getSocialImageSubpath($element, $transformName, $template);
 
@@ -78,24 +85,7 @@ class SocialImages extends Component
             }
 
             try {
-                $view = Craft::$app->getView();
-                $templateContent = file_get_contents($view->resolveTemplate($template));
-                $html = $view->renderObjectTemplate($templateContent, $element);
-
-                $tempPath = Assets::tempFilePath(ImageTransform::DEFAULT_SOCIAL_FORMAT);
-                Browsershot::html($html)
-                    ->width($transformParameters['width'])
-                    ->height($transformParameters['height'])
-                    ->quality(ImageTransform::SOCIAL_TRANSFORM_QUALITY)
-                    ->save($tempPath);
-
-                $fileStream = fopen($tempPath, 'rb');
-                $volume->createFileByStream($fullPath, $fileStream, [
-                    'mimetype' => FileHelper::getMimeType($tempPath)
-                ]);
-
-                fclose($fileStream);
-                unlink($tempPath);
+                $this->createSocialImage($template, $element, $width, $height, $volume, $fullPath);
             } catch (\Exception $exception) {
                 Craft::$app->getErrorHandler()->logException($exception);
 
@@ -104,6 +94,75 @@ class SocialImages extends Component
         }
 
         return rtrim($volume->getRootUrl(), '/\\') . '/' . $fullPath;
+    }
+
+    /**
+     * Update the social images for an element.
+     *
+     * @param Element $element
+     * @throws \craft\errors\VolumeException
+     * @throws \yii\base\Exception
+     */
+    public function updateSocialImages(Element $element) {
+        if ($element->getIsRevision() || $element->getIsDraft()) {
+            return;
+        }
+
+        $metaBundle = $this->getMetaBundleByElement($element);
+
+        if (!$metaBundle) {
+            return;
+        }
+
+        $volume = $this->getSocialImageVolume();
+        $volumePath = $this->getSocialImageVolumePath();
+
+        if ($volume) {
+            $folder = $this->getSocialImageSubfolder($element);
+
+            try {
+                $volume->deleteDir($volumePath . DIRECTORY_SEPARATOR . $folder);
+            } catch (VolumeException $exception) {
+                // eh.
+            }
+
+            $types = ['seoImage', 'ogImage', 'twitterImage'];
+
+            foreach ($types as $imageType) {
+                $settings = $this->extractSeoImageSettings($metaBundle->metaBundleSettings, $imageType);
+
+                if (is_array($settings)) {
+                    $twigString = '{{ seomatic.helper.socialImage(object, "' . $settings['transformName'] . '", "' . $settings['template'] . '") }}';
+                    Craft::$app->getView()->renderObjectTemplate($twigString, $element);
+                }
+            }
+
+        }
+    }
+
+    /**
+     * Extract seo image settings from bundle settings by the setting type name.
+     *
+     * @param MetaBundleSettings $settings
+     * @param string $settingName
+     * @return array|null
+     */
+    protected function extractSeoImageSettings(MetaBundleSettings $settings, string $settingName)
+    {
+        $source = $settings->{$settingName.'Source'};
+
+        if ($source === 'sameAsSeo') {
+            return $this->extractSeoImageSettings($settings, 'seoImage');
+        }
+
+        if ($source !== 'fromTemplate') {
+            return null;
+        }
+
+        return [
+            'transformName' => $settingName === 'twitterImage' ? Helper::twitterTransform() : PullField::PULL_ASSET_FIELDS[$settingName]['transformName'],
+            'template' => $settings->{$settingName.'Template'}
+        ];
     }
 
     /**
@@ -149,13 +208,51 @@ class SocialImages extends Component
     /**
      * @param Seomatic $seomatic
      * @param Element $element
-     * @return \nystudio107\seomatic\models\MetaBundle|null
+     * @return MetaBundle|null
      */
-    protected function getMetaBundleByElement(Element $element): \nystudio107\seomatic\models\MetaBundle
+    protected function getMetaBundleByElement(Element $element)
     {
         $seomatic = Seomatic::getInstance();
         $source =  $seomatic->metaBundles->getMetaSourceFromElement($element);
         $metaBundle = $seomatic->metaBundles->getMetaBundleBySourceId($source[1], $source[0], $source[3], $source[4]);
         return $metaBundle;
+    }
+
+    /**
+     * @param string $template
+     * @param Element $element
+     * @param $width
+     * @param $height
+     * @param VolumeInterface $volume
+     * @param string $fullPath
+     * @throws \Spatie\Browsershot\Exceptions\CouldNotTakeBrowsershot
+     * @throws \Spatie\Image\Exceptions\InvalidManipulation
+     * @throws \Throwable
+     * @throws \Twig\Error\LoaderError
+     * @throws \craft\errors\VolumeException
+     * @throws \craft\errors\VolumeObjectExistsException
+     * @throws \yii\base\Exception
+     * @throws \yii\base\InvalidConfigException
+     */
+    protected function createSocialImage(string $template, Element $element, $width, $height, VolumeInterface $volume, string $fullPath)
+    {
+        $view = Craft::$app->getView();
+        $templateContent = file_get_contents($view->resolveTemplate($template));
+        $html = $view->renderObjectTemplate($templateContent, $element);
+
+        $tempPath = Assets::tempFilePath(ImageTransform::DEFAULT_SOCIAL_FORMAT);
+        Browsershot::html($html)
+            ->width($width)
+            ->height($height)
+            ->quality(ImageTransform::SOCIAL_TRANSFORM_QUALITY)
+            ->save($tempPath);
+
+        $fileStream = fopen($tempPath, 'rb');
+        $volume->createFileByStream($fullPath, $fileStream, [
+            'mimetype' => FileHelper::getMimeType($tempPath)
+        ]);
+
+        fclose($fileStream);
+        unlink($tempPath);
     }
 }
