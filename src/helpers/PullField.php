@@ -160,6 +160,7 @@ class PullField
                 // Quote all the things here for clarity
                 $transformName = '"'.$transformName.'"';
                 $transformMode = '"'.$transformMode.'"';
+                $template = '"'.$template.'"';
                 // Special-case Twitter transforms
                 if ($fieldName === 'twitterImage') {
                     $transformName = 'seomatic.helper.twitterTransform()';
@@ -313,7 +314,8 @@ class PullField
                             if (!empty($template)) {
                                 $globalsSettings[$fieldName] = '{{ seomatic.helper.socialImage('
                                     .rtrim($objectPrefix.$elementName, '.')
-                                    .', ' . $transformName . ') }}';
+                                    .', ' . $transformName . ''
+                                    .', ' . $template . ') }}';
                             }
                             break;
                     }
