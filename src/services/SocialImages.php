@@ -48,7 +48,7 @@ class SocialImages extends Component
             return '';
         }
 
-        $filename = $this->getSocialImageFilename($element, $transformName, $template);
+        $imagePath = $this->getSocialImageSubpath($element, $transformName, $template);
 
         /** @var Seomatic $seomatic */
         $seomatic = Seomatic::getInstance();
@@ -59,9 +59,9 @@ class SocialImages extends Component
             return '';
         }
 
-        $path = $seomatic->getSettings()->socialImageSubpath;
+        $volumePath = $seomatic->getSettings()->socialImageSubpath;
 
-        $fullPath = rtrim($path, '/\\') . DIRECTORY_SEPARATOR  . $filename;
+        $fullPath = rtrim($volumePath, '/\\') . DIRECTORY_SEPARATOR  . $imagePath;
 
         if (!$volume->fileExists($fullPath)) {
             if (empty($template)) {
@@ -113,9 +113,9 @@ class SocialImages extends Component
      * @param string $templatePath
      * @return string
      */
-    protected function getSocialImageFilename(Element $element, string $transformName, string $templatePath = ''): string
+    protected function getSocialImageSubpath(Element $element, string $transformName, string $templatePath = ''): string
     {
         $templateHash = !empty($templatePath) ? '_' . substr(sha1($templatePath), 0, 7) : '';
-        return $element->getGqlTypeName() . '_' . $transformName . $templateHash . '.' . ImageTransform::DEFAULT_SOCIAL_FORMAT;
+        return $element->getGqlTypeName() . '/' . $transformName . $templateHash . '.' . ImageTransform::DEFAULT_SOCIAL_FORMAT;
     }
 }
