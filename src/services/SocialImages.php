@@ -14,15 +14,12 @@ namespace nystudio107\seomatic\services;
 use Craft;
 use craft\base\Component;
 use craft\base\Element;
+use craft\base\VolumeInterface;
 use craft\helpers\Assets;
 use craft\helpers\FileHelper;
-use craft\helpers\StringHelper;
 use nystudio107\seomatic\helpers\ImageTransform;
 use nystudio107\seomatic\Seomatic;
 use Spatie\Browsershot\Browsershot;
-use Spatie\Browsershot\Exceptions\CouldNotTakeBrowsershot;
-use Symfony\Component\Process\Exception\ProcessFailedException;
-use yii\base\InvalidConfigException;
 
 /**
  * @author    nystudio107
@@ -52,26 +49,30 @@ class SocialImages extends Component
 
         /** @var Seomatic $seomatic */
         $seomatic = Seomatic::getInstance();
-        $volume = Craft::$app->getVolumes()->getVolumeByUid($seomatic->getSettings()->socialImageVolumeUid);
 
+        $volume = $this->getSocialImageVolume();
         if (!$volume) {
             Craft::error(Craft::t('seomatic', 'Cannot find the specified social image volume.', 'seomatic'));
             return '';
         }
 
-        $volumePath = $seomatic->getSettings()->socialImageSubpath;
+        $volumePath = $this->getSocialImageVolumePath($seomatic);
 
-        $fullPath = rtrim($volumePath, '/\\') . DIRECTORY_SEPARATOR  . $imagePath;
+        $fullPath =  $volumePath. DIRECTORY_SEPARATOR  . $imagePath;
 
         if (!$volume->fileExists($fullPath)) {
             if (empty($template)) {
-                $source = $seomatic->metaBundles->getMetaSourceFromElement($element);
-                $metaBundle = $seomatic->metaBundles->getMetaBundleBySourceId($source[1], $source[0], $source[3], $source[4]);
+                $metaBundle = $this->getMetaBundleByElement($element);
 
-                $template = $metaBundle->metaBundleSettings->seoImageTemplate ?? null;
+                if (!$metaBundle) {
+                    Craft::error(Craft::t('seomatic', 'Cannot resolve meta bundle for element ' . $element->id), 'seomatic');
+                    return '';
+                }
 
-                if (!$template) {
-                    Craft::error(Craft::t('seomatic', 'Cannot find social image template ' . $template), 'seomatic');
+                $template = $metaBundle->metaBundleSettings->seoImageTemplate ?? '';
+
+                if (empty($template)) {
+                    Craft::error(Craft::t('seomatic', 'Cannot resolve social image template for element ' . $element->id), 'seomatic');
                     return '';
                 }
             }
@@ -116,6 +117,45 @@ class SocialImages extends Component
     protected function getSocialImageSubpath(Element $element, string $transformName, string $templatePath = ''): string
     {
         $templateHash = !empty($templatePath) ? '_' . substr(sha1($templatePath), 0, 7) : '';
-        return $element->getGqlTypeName() . DIRECTORY_SEPARATOR . $element->id . '-' . $element->siteId . DIRECTORY_SEPARATOR . $transformName . $templateHash . '.' . ImageTransform::DEFAULT_SOCIAL_FORMAT;
+        return $this->getSocialImageSubfolder($element) . DIRECTORY_SEPARATOR . $transformName . $templateHash . '.' . ImageTransform::DEFAULT_SOCIAL_FORMAT;
+    }
+
+    /**
+     * @param Element $element
+     * @return string
+     */
+    protected function getSocialImageSubfolder(Element $element): string
+    {
+        return $element->getGqlTypeName() . DIRECTORY_SEPARATOR . $element->id . '-' . $element->siteId;
+    }
+
+    /**
+     * @return VolumeInterface|null
+     */
+    protected function getSocialImageVolume(): VolumeInterface
+    {
+        $volume = Craft::$app->getVolumes()->getVolumeByUid(Seomatic::getInstance()->getSettings()->socialImageVolumeUid);
+        return $volume;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getSocialImageVolumePath(): string
+    {
+        return rtrim(Seomatic::getInstance()->getSettings()->socialImageSubpath, '/\\');
+    }
+
+    /**
+     * @param Seomatic $seomatic
+     * @param Element $element
+     * @return \nystudio107\seomatic\models\MetaBundle|null
+     */
+    protected function getMetaBundleByElement(Element $element): \nystudio107\seomatic\models\MetaBundle
+    {
+        $seomatic = Seomatic::getInstance();
+        $source =  $seomatic->metaBundles->getMetaSourceFromElement($element);
+        $metaBundle = $seomatic->metaBundles->getMetaBundleBySourceId($source[1], $source[0], $source[3], $source[4]);
+        return $metaBundle;
     }
 }
