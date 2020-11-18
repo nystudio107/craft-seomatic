@@ -47,17 +47,6 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
     public function init()
     {
         parent::init();
-        if (!Seomatic::$previewingMetaContainers) {
-            // Set any per-environment attributes
-            $attributes = [];
-            $envVars = ArrayHelper::getValue($this->environment, Seomatic::$environment);
-            if (\is_array($envVars)) {
-                foreach ($envVars as $key => $value) {
-                    $attributes[$key] = $value;
-                }
-            }
-            $this->setAttributes($attributes, false);
-        }
     }
 
     /**
@@ -105,6 +94,21 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
      */
     public function prepForRender(&$data): bool
     {
+        // Set any per-environment attributes
+        if (!Seomatic::$previewingMetaContainers) {
+            $attributes = [];
+            $envVars = null;
+            try {
+                $envVars = ArrayHelper::getValue($this->environment, Seomatic::$environment);
+            } catch (\Exception $e) {
+            }
+            if (\is_array($envVars)) {
+                foreach ($envVars as $key => $value) {
+                    $attributes[$key] = $value;
+                }
+            }
+            $this->setAttributes($attributes, false);
+        }
         if ($this->include) {
             return Dependency::validateDependencies($this->dependencies);
         }

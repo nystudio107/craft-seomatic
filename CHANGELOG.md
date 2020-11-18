@@ -1,5 +1,16 @@
 # SEOmatic Changelog
 
+### 3.3.23 - 2020.11.18
+### Changed
+* Revert "Social image transforms for remote volumes no longer default to not generating the image transforms immediately (they fall back on whatever your system setting is)" because it caused slowdown when working with remote volumes
+* Ensure the URLs in the breadcrumbs JSON-LD adheres to the `addTrailingSlashesToURls` general config setting
+* Added better checks for `InStock` for Product JSON-LD schema
+
+### Fixed
+* Fixed an issue where SEOmatic could permanently change "robots" to "none" inadvertently in edge-case circumstances
+* Fixed an issue where the **Main Entity of Page** could reset to undesired values
+* Use unicode safe string functions to truncate meta values > 4096 characters before parsing them
+
 ## 3.3.22 - 2020.10.20
 ### Added
 * Added a `--queue` flag that can be passed to the `seomatic/sitemap/generate` flag to cause the sitemap generation jobs to be queued, but not run

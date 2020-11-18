@@ -176,7 +176,7 @@ class Seomatic extends Plugin
     /**
      * @var bool
      */
-    public static $loadingContainers = false;
+    public static $loadingMetaContainers = false;
 
     /**
      * @var bool
