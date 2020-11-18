@@ -6,6 +6,8 @@
 * Ensure the URLs in the breadcrumbs JSON-LD adheres to the `addTrailingSlashesToURls` general config setting
 
 ### Fixed
+* Fixed an issue where SEOmatic could permanently change "robots" to "none" inadvertently in edge-case circumstances
+
 * Use unicode safe string functions to truncate meta values > 4096 characters before parsing them
 
 ## 3.3.22 - 2020.10.20
