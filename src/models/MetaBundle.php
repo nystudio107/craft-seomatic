@@ -195,9 +195,9 @@ class MetaBundle extends FluentModel
             }
             $oldMeta = Seomatic::$seomaticVariable->meta;
             $oldSite = Seomatic::$seomaticVariable->site;
-            $oldLoadingContainers = Seomatic::$loadingContainers;
+            $oldLoadingContainers = Seomatic::$loadingMetaContainers;
             $oldPreviewingMetaContainers = Seomatic::$previewingMetaContainers;
-            Seomatic::$loadingContainers = false;
+            Seomatic::$loadingMetaContainers = false;
             Seomatic::$previewingMetaContainers = false;
             // Merge these global vars with the MetaContainers global vars
             $globalVars = [];
@@ -230,7 +230,7 @@ class MetaBundle extends FluentModel
                 }
             }
             // Restore the $seomaticVariable
-            Seomatic::$loadingContainers = $oldLoadingContainers;
+            Seomatic::$loadingMetaContainers = $oldLoadingContainers;
             Seomatic::$seomaticVariable->meta = $oldMeta;
             Seomatic::$seomaticVariable->site = $oldSite;
             Seomatic::$seomaticVariable = $oldSeomaticVariable;
