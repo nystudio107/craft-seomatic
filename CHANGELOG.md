@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-### 3.3.23 - 2020.11.18
+## 3.3.23 - 2020.11.18
 ### Changed
 * Revert "Social image transforms for remote volumes no longer default to not generating the image transforms immediately (they fall back on whatever your system setting is)" because it caused slowdown when working with remote volumes
 * Ensure the URLs in the breadcrumbs JSON-LD adheres to the `addTrailingSlashesToURls` general config setting
