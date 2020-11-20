@@ -3,6 +3,7 @@
 ## 3.3.24 - UNRELEASED
 ### Changed
 * Moved the environment swapping functionality back to `MetaItem::init()`
+* Removed `type="text/javascript"` from the `<script>` tags that SEOmatic injects for tracking scripts
 
 ## 3.3.23 - 2020.11.18
 ### Changed
