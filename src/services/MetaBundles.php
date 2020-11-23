@@ -20,7 +20,9 @@ use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\helpers\Migration as MigrationHelper;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaScriptContainer;
+use nystudio107\seomatic\models\MetaTagContainer;
 use nystudio107\seomatic\records\MetaBundle as MetaBundleRecord;
+use nystudio107\seomatic\services\Tag as TagService;
 
 use Craft;
 use craft\base\Component;
@@ -162,6 +164,14 @@ class MetaBundles extends Component
             if (!$metaBundleRecord) {
                 $metaBundleRecord = new MetaBundleRecord();
             }
+
+            // @TODO remove this hack that doesn't allow environment-transformed settings to be saved in a meta bundle with a proper system to address it
+            // The issue was that the containers were getting saved to the db with a hard-coded setting in them, because they'd
+            // been set that way by the environment, whereas to be changeable via the GUI, it needs to be set to {seomatic.meta.robots}
+            if (!empty($metaBundle->metaContainers[MetaTagContainer::CONTAINER_TYPE.TagService::GENERAL_HANDLE]->data['robots'])) {
+                $metaBundle->metaContainers[MetaTagContainer::CONTAINER_TYPE.TagService::GENERAL_HANDLE]->data['robots']->content = '{seomatic.meta.robots}';
+            }
+
             $metaBundleRecord->setAttributes($metaBundle->getAttributes(), false);
 
             if ($metaBundleRecord->save()) {
