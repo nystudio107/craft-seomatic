@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.25 - UNRELEASED
+### Changed
+* Normalize the script variables by parsing them as environment variables, and trimming whitespace
+
 ## 3.3.24 - 2020.11.23
 ### Changed
 * Moved the environment swapping functionality back to `MetaItem::init()`
