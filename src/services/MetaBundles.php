@@ -168,8 +168,9 @@ class MetaBundles extends Component
             // @TODO remove this hack that doesn't allow environment-transformed settings to be saved in a meta bundle with a proper system to address it
             // The issue was that the containers were getting saved to the db with a hard-coded setting in them, because they'd
             // been set that way by the environment, whereas to be changeable via the GUI, it needs to be set to {seomatic.meta.robots}
-            if (!empty($metaBundle->metaContainers[MetaTagContainer::CONTAINER_TYPE.TagService::GENERAL_HANDLE]->data['robots'])) {
-                $metaBundle->metaContainers[MetaTagContainer::CONTAINER_TYPE.TagService::GENERAL_HANDLE]->data['robots']->content = '{seomatic.meta.robots}';
+            $robotsTag = $metaBundle->metaContainers[MetaTagContainer::CONTAINER_TYPE.TagService::GENERAL_HANDLE]->data['robots'] ?? null;
+            if (!empty($robotsTag)) {
+                $robotsTag->content = $robotsTag->environment['live']['content'] ?? '{seomatic.meta.robots}';
             }
 
             $metaBundleRecord->setAttributes($metaBundle->getAttributes(), false);
