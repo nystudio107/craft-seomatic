@@ -42,11 +42,11 @@ class RobotsTag extends MetaTag
      */
     public function init()
     {
-        parent::init();
         // Handle a bug where 'content' could be permanently set to 'none'
         if ($this->content === 'none') {
             $this->content = $this->environment['live']['content'] ?? '{seomatic.meta.robots}';
         }
+        parent::init();
     }
 
     /**
