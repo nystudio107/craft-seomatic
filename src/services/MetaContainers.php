@@ -551,6 +551,11 @@ class MetaContainers extends Component
                 $html .= $result;
             }
         }
+        // Special-case for requests for the MetaSiteVars "container"
+        if ($type === MetaSiteVars::CONTAINER_TYPE) {
+            $result = Json::encode($this->metaSiteVars->toArray());
+            $html .= $result;
+        }
 
         return $html;
     }
@@ -571,6 +576,11 @@ class MetaContainers extends Component
                 /** @noinspection SlowArrayOperationsInLoopInspection */
                 $htmlArray = array_merge($htmlArray, $metaContainer->renderArray());
             }
+        }
+        // Special-case for requests for the MetaSiteVars "container"
+        if ($type === MetaSiteVars::CONTAINER_TYPE) {
+            $result = Json::encode($this->metaSiteVars->toArray());
+            $htmlArray = array_merge($htmlArray, $this->metaSiteVars->toArray());
         }
 
         return $htmlArray;
