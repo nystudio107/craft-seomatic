@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.3.25 - UNRELEASED
+### Added
+* Added the ability to query the `MetaSiteVarsContainer` via GraphQL or Meta Container endpoint, to allow accessing things such as the social media sites/urls, and other site-wide information
+
 ### Changed
 * Normalize the script variables by parsing them as environment variables, and trimming whitespace
 
