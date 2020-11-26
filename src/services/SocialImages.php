@@ -33,6 +33,11 @@ use Spatie\Browsershot\Browsershot;
 class SocialImages extends Component
 {
     /**
+     * @var MetaBundle[]
+     */
+    private $_memoizedBundles = [];
+
+    /**
      * Get social image URL.
      *
      * @param Element $element
@@ -65,7 +70,7 @@ class SocialImages extends Component
 
         $volumePath = $this->getSocialImageVolumePath($seomatic);
 
-        $fullPath =  $volumePath. DIRECTORY_SEPARATOR  . $imagePath;
+        $fullPath = $volumePath . DIRECTORY_SEPARATOR . $imagePath;
 
         if (!$volume->fileExists($fullPath)) {
             if (empty($template)) {
@@ -103,7 +108,8 @@ class SocialImages extends Component
      * @throws \craft\errors\VolumeException
      * @throws \yii\base\Exception
      */
-    public function updateSocialImages(Element $element) {
+    public function updateSocialImages(Element $element)
+    {
         if ($element->getIsRevision() || $element->getIsDraft()) {
             return;
         }
@@ -114,6 +120,28 @@ class SocialImages extends Component
             return;
         }
 
+        $this->invalidateSocialImagesForElement($element);
+
+        $types = ['seoImage', 'ogImage', 'twitterImage'];
+
+        foreach ($types as $imageType) {
+            $settings = $this->extractSeoImageSettings($metaBundle->metaBundleSettings, $imageType);
+
+            if (is_array($settings)) {
+                $twigString = '{{ seomatic.helper.socialImage(object, "' . $settings['transformName'] . '", "' . $settings['template'] . '") }}';
+                Craft::$app->getView()->renderObjectTemplate($twigString, $element);
+            }
+        }
+    }
+
+    /**
+     * Invalidate social images for an element.
+     *
+     * @param Element $element
+     */
+    public function invalidateSocialImagesForElement(Element $element)
+    {
+
         $volume = $this->getSocialImageVolume();
         $volumePath = $this->getSocialImageVolumePath();
 
@@ -123,20 +151,8 @@ class SocialImages extends Component
             try {
                 $volume->deleteDir($volumePath . DIRECTORY_SEPARATOR . $folder);
             } catch (VolumeException $exception) {
-                // eh.
+                // Consider invalidated.
             }
-
-            $types = ['seoImage', 'ogImage', 'twitterImage'];
-
-            foreach ($types as $imageType) {
-                $settings = $this->extractSeoImageSettings($metaBundle->metaBundleSettings, $imageType);
-
-                if (is_array($settings)) {
-                    $twigString = '{{ seomatic.helper.socialImage(object, "' . $settings['transformName'] . '", "' . $settings['template'] . '") }}';
-                    Craft::$app->getView()->renderObjectTemplate($twigString, $element);
-                }
-            }
-
         }
     }
 
@@ -149,7 +165,7 @@ class SocialImages extends Component
      */
     protected function extractSeoImageSettings(MetaBundleSettings $settings, string $settingName)
     {
-        $source = $settings->{$settingName.'Source'};
+        $source = $settings->{$settingName . 'Source'};
 
         if ($source === 'sameAsSeo') {
             return $this->extractSeoImageSettings($settings, 'seoImage');
@@ -161,7 +177,7 @@ class SocialImages extends Component
 
         return [
             'transformName' => $settingName === 'twitterImage' ? Helper::twitterTransform() : PullField::PULL_ASSET_FIELDS[$settingName]['transformName'],
-            'template' => $settings->{$settingName.'Template'}
+            'template' => $settings->{$settingName . 'Template'}
         ];
     }
 
@@ -185,7 +201,8 @@ class SocialImages extends Component
      */
     protected function getSocialImageSubfolder(Element $element): string
     {
-        return $element->getGqlTypeName() . DIRECTORY_SEPARATOR . $element->id . '-' . $element->siteId;
+        $metaBundle = $this->getMetaBundleByElement($element);
+        return "{$metaBundle->sourceType}_{$metaBundle->sourceId}" . (!empty($metaBundle->typeId) ? "_{$metaBundle->typeId}" : '') . DIRECTORY_SEPARATOR . $element->id . '-' . $element->siteId;
     }
 
     /**
@@ -212,10 +229,13 @@ class SocialImages extends Component
      */
     protected function getMetaBundleByElement(Element $element)
     {
-        $seomatic = Seomatic::getInstance();
-        $source =  $seomatic->metaBundles->getMetaSourceFromElement($element);
-        $metaBundle = $seomatic->metaBundles->getMetaBundleBySourceId($source[1], $source[0], $source[3], $source[4]);
-        return $metaBundle;
+        if (empty($this->_memoizedBundles[$element->uid])) {
+            $seomatic = Seomatic::getInstance();
+            $source = $seomatic->metaBundles->getMetaSourceFromElement($element);
+            $this->_memoizedBundles[$element->uid] = $seomatic->metaBundles->getMetaBundleBySourceId($source[1], $source[0], $source[3], $source[4]);
+        }
+
+        return $this->_memoizedBundles[$element->uid];
     }
 
     /**
@@ -225,14 +245,7 @@ class SocialImages extends Component
      * @param $height
      * @param VolumeInterface $volume
      * @param string $fullPath
-     * @throws \Spatie\Browsershot\Exceptions\CouldNotTakeBrowsershot
-     * @throws \Spatie\Image\Exceptions\InvalidManipulation
      * @throws \Throwable
-     * @throws \Twig\Error\LoaderError
-     * @throws \craft\errors\VolumeException
-     * @throws \craft\errors\VolumeObjectExistsException
-     * @throws \yii\base\Exception
-     * @throws \yii\base\InvalidConfigException
      */
     protected function createSocialImage(string $template, Element $element, $width, $height, VolumeInterface $volume, string $fullPath)
     {
