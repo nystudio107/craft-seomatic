@@ -135,13 +135,33 @@ class SocialImages extends Component
     }
 
     /**
+     * Invalidate all social images for a meta bundle.
+     *
+     * @param MetaBundle $metaBundle
+     */
+    public function invalidateSocialImagesForMetaBundle(MetaBundle $metaBundle)
+    {
+        $volume = $this->getSocialImageVolume();
+        $volumePath = $this->getSocialImageVolumePath();
+
+        if ($volume) {
+            $folder = $this->getSocialImageMetaBundleSubfolder($metaBundle);
+
+            try {
+                $volume->deleteDir($volumePath . DIRECTORY_SEPARATOR . $folder);
+            } catch (VolumeException $exception) {
+                // Consider invalidated.
+            }
+        }
+    }
+
+    /**
      * Invalidate social images for an element.
      *
      * @param Element $element
      */
     public function invalidateSocialImagesForElement(Element $element)
     {
-
         $volume = $this->getSocialImageVolume();
         $volumePath = $this->getSocialImageVolumePath();
 
@@ -201,8 +221,7 @@ class SocialImages extends Component
      */
     protected function getSocialImageSubfolder(Element $element): string
     {
-        $metaBundle = $this->getMetaBundleByElement($element);
-        return "{$metaBundle->sourceType}_{$metaBundle->sourceId}" . (!empty($metaBundle->typeId) ? "_{$metaBundle->typeId}" : '') . DIRECTORY_SEPARATOR . $element->id . '-' . $element->siteId;
+        return $this->getSocialImageMetaBundleSubfolder($this->getMetaBundleByElement($element)) . DIRECTORY_SEPARATOR . $element->id . '-' . $element->siteId;
     }
 
     /**
@@ -267,5 +286,16 @@ class SocialImages extends Component
 
         fclose($fileStream);
         unlink($tempPath);
+    }
+
+    /**
+     * Get the social image meta bundle subpath for a meta bundle.
+     *
+     * @param MetaBundle $metaBundle
+     * @return string
+     */
+    protected function getSocialImageMetaBundleSubfolder(MetaBundle $metaBundle): string
+    {
+        return "{$metaBundle->sourceType}_{$metaBundle->sourceId}" . (!empty($metaBundle->typeId) ? "_{$metaBundle->typeId}" : '');
     }
 }
