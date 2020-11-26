@@ -75,7 +75,9 @@ function initFieldSettings() {
         var popupValue = $(this).val();
         switch (popupValue) {
             case 'sameAsSeo':
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').show();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').not('.seomatic-imageSourceNotSameAsSeo').show();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl.seomatic-imageSourceNotSameAsSeo').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.imageSourceNotSameAsSeo').show();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').hide();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').hide();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromTemplate').hide();
@@ -119,7 +121,8 @@ function initFieldSettings() {
     $('.seomatic-imageSourceSelect > select').on('change', function(e) {
         switch (this.value) {
             case 'sameAsSeo':
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').slideDown();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').not('.seomatic-imageSourceNotSameAsSeo').slideDown();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl.seomatic-imageSourceNotSameAsSeo').slideUp();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').slideUp();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').slideUp();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromTemplate').slideUp();

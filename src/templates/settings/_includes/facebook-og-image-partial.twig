@@ -106,7 +106,7 @@
 
         {############### Facebook OpenGraph Image Transform ###############}
 
-        <div class="field seomatic-imageSourceNotFromUrl">
+        <div class="field seomatic-imageSourceNotFromUrl {% if metaBundleSettings.seoImageSource == "fromTemplate" %}seomatic-imageSourceNotSameAsSeo{% endif %}">
             <div class="field" {% if field is defined and 'ogImageTransform' not in field.facebookEnabledFields %}style="display: none;"{% endif %}>
                 {% namespace "metaBundleSettings" %}
                     {{ forms.lightswitchField({
@@ -132,7 +132,7 @@
         {% if pageContext == "field" %}
             {% set imageCropModes = { "": ""} | merge(imageCropModes) %}
         {% endif %}
-        <div class="field seomatic-imageSourceNotFromUrl">
+        <div class="field seomatic-imageSourceNotFromUrl {% if metaBundleSettings.seoImageSource == "fromTemplate" %}seomatic-imageSourceNotSameAsSeo{% endif %}">
             <div class="field" {% if field is defined and 'ogImageTransformMode' not in field.facebookEnabledFields %}style="display: none;"{% endif %}>
                 {% namespace "metaBundleSettings" %}
                     {{ forms.selectField({

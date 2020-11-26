@@ -2,8 +2,8 @@
  * @project        SEOmatic
  * @name           vendors~javascript-editor~twig-editor.js
  * @author         Andrew Welch
- * @build          Thu, Nov 12, 2020 10:57 PM ET
- * @release        5ed6119465e45c4d0fd09a21dd15d1b3ccd03387 [feature/social-images]
+ * @build          Thu, Nov 26, 2020 10:29 PM ET
+ * @release        63a6bc07f499627c5a2a6e95d0694f300a082215 [feature/social-images]
  * @copyright      Copyright (c) 2020 nystudio107
  *
  */

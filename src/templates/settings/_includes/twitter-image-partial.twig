@@ -107,7 +107,7 @@
 
         {############### Twitter Image Transform ###############}
 
-        <div class="field seomatic-imageSourceNotFromUrl">
+        <div class="field seomatic-imageSourceNotFromUrl {% if metaBundleSettings.seoImageSource == "fromTemplate" %}seomatic-imageSourceNotSameAsSeo{% endif %}">
             <div class="field" {% if field is defined and 'transformTwitterImage' not in field.twitterEnabledFields %}style="display: none;"{% endif %}>
                 {% namespace "metaBundleSettings" %}
                     {{ forms.lightswitchField({
@@ -133,7 +133,7 @@
         {% if pageContext == "field" %}
             {% set imageCropModes = { "": ""} | merge(imageCropModes) %}
         {% endif %}
-        <div class="field seomatic-imageSourceNotFromUrl">
+        <div class="field seomatic-imageSourceNotFromUrl {% if metaBundleSettings.seoImageSource == "fromTemplate" %}seomatic-imageSourceNotSameAsSeo{% endif %}">
             <div class="field" {% if field is defined and 'twitterImageTransformMode' not in field.twitterEnabledFields %}style="display: none;"{% endif %}>
                 {% namespace "metaBundleSettings" %}
                     {{ forms.selectField({
