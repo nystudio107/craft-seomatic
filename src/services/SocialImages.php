@@ -17,6 +17,7 @@ use craft\base\Element;
 use craft\base\VolumeInterface;
 use craft\errors\VolumeException;
 use craft\helpers\Assets;
+use craft\helpers\ElementHelper;
 use craft\helpers\FileHelper;
 use nystudio107\seomatic\helpers\ImageTransform;
 use nystudio107\seomatic\helpers\PullField;
@@ -159,19 +160,32 @@ class SocialImages extends Component
      * Invalidate social images for an element.
      *
      * @param Element $element
+     * @param bool $allSites whether elements in all sites should be invalidated
      */
-    public function invalidateSocialImagesForElement(Element $element)
+    public function invalidateSocialImagesForElement(Element $element, $allSites = false)
     {
         $volume = $this->getSocialImageVolume();
         $volumePath = $this->getSocialImageVolumePath();
 
         if ($volume) {
-            $folder = $this->getSocialImageSubfolder($element);
+            if ($allSites) {
+                foreach (ElementHelper::supportedSitesForElement($element) as $site) {
+                    $folder = $this->getSocialImageSubfolder($element, $site['siteId']);
 
-            try {
-                $volume->deleteDir($volumePath . DIRECTORY_SEPARATOR . $folder);
-            } catch (VolumeException $exception) {
-                // Consider invalidated.
+                    try {
+                        $volume->deleteDir($volumePath . DIRECTORY_SEPARATOR . $folder);
+                    } catch (VolumeException $exception) {
+                        // Consider invalidated.
+                    }
+                }
+            } else {
+                $folder = $this->getSocialImageSubfolder($element, $element->siteId);
+
+                try {
+                    $volume->deleteDir($volumePath . DIRECTORY_SEPARATOR . $folder);
+                } catch (VolumeException $exception) {
+                    // Consider invalidated.
+                }
             }
         }
     }
@@ -212,16 +226,17 @@ class SocialImages extends Component
     protected function getSocialImageSubpath(Element $element, string $transformName, string $templatePath = ''): string
     {
         $templateHash = !empty($templatePath) ? '_' . substr(sha1($templatePath), 0, 7) : '';
-        return $this->getSocialImageSubfolder($element) . DIRECTORY_SEPARATOR . $transformName . $templateHash . '.' . ImageTransform::DEFAULT_SOCIAL_FORMAT;
+        return $this->getSocialImageSubfolder($element, $element->siteId) . DIRECTORY_SEPARATOR . $transformName . $templateHash . '.' . ImageTransform::DEFAULT_SOCIAL_FORMAT;
     }
 
     /**
      * @param Element $element
+     * @param int $siteId
      * @return string
      */
-    protected function getSocialImageSubfolder(Element $element): string
+    protected function getSocialImageSubfolder(Element $element, int $siteId): string
     {
-        return $this->getSocialImageMetaBundleSubfolder($this->getMetaBundleByElement($element)) . DIRECTORY_SEPARATOR . $element->id . '-' . $element->siteId;
+        return $this->getSocialImageMetaBundleSubfolder($this->getMetaBundleByElement($element)) . DIRECTORY_SEPARATOR . $element->id . '-' . $siteId;
     }
 
     /**
