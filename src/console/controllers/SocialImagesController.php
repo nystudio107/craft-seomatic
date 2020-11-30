@@ -62,7 +62,7 @@ class SocialImagesController extends Controller
         switch ($actionID) {
             case 'invalidate-bundle':
                 return ['bundleId', 'siteId'];
-            case 'invalidate-element':
+            case 'update-element':
                 return ['elementId'];
         }
 
@@ -123,7 +123,7 @@ class SocialImagesController extends Controller
     /**
      * Invalidate social images for an element. You can provide `siteId` option, otherwise all sites will be invalidated.
      */
-    public function actionInvalidateElement()
+    public function actionUpdateElement()
     {
         if (empty($this->elementId)) {
             $this->stdout('You must provide an element ID.' . PHP_EOL, Console::FG_RED);
@@ -141,10 +141,10 @@ class SocialImagesController extends Controller
             return ExitCode::CONFIG;
         }
 
-        $this->stdout('Invalidating social images for element ', Console::FG_GREEN);
+        $this->stdout('Updating social images for element ', Console::FG_GREEN);
         $this->stdout($element->id . PHP_EOL, Console::FG_YELLOW);
+        $socialImages->updateSocialImages($element, true);
 
-        $socialImages->invalidateSocialImagesForElement($element, true);
         $this->stdout('done' . PHP_EOL, Console::FG_GREEN);
 
         return ExitCode::OK;
