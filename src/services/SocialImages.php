@@ -106,10 +106,11 @@ class SocialImages extends Component
      * Update the social images for an element.
      *
      * @param Element $element
-     * @throws \craft\errors\VolumeException
+     * @param bool $allSites
+     * @throws \Throwable
      * @throws \yii\base\Exception
      */
-    public function updateSocialImages(Element $element)
+    public function updateSocialImages(Element $element, $allSites = false)
     {
         if ($element->getIsRevision() || $element->getIsDraft()) {
             return;
@@ -117,20 +118,48 @@ class SocialImages extends Component
 
         $metaBundle = $this->getMetaBundleByElement($element);
 
+        // No vagrants beyond this point
         if (!$metaBundle) {
             return;
         }
 
-        $this->invalidateSocialImagesForElement($element);
+        $this->invalidateSocialImagesForElement($element, $allSites);
+
+        $metaBundles = [];
+
+        if ($allSites) {
+            // Load up all meta bundles for all sites this element can work with
+            foreach (ElementHelper::supportedSitesForElement($element) as $site) {
+                $siteId = $site['siteId'];
+                $element->siteId = $siteId;
+                $metaBundles[$siteId] = $this->getMetaBundleByElement($element);
+            }
+        } else {
+            $metaBundles[$element->siteId] = $this->getMetaBundleByElement($element);
+        }
 
         $types = ['seoImage', 'ogImage', 'twitterImage'];
 
-        foreach ($types as $imageType) {
-            $settings = $this->extractSeoImageSettings($metaBundle->metaBundleSettings, $imageType);
+        foreach ($metaBundles as $siteId => $metaBundle) {
+            if (!$metaBundle) {
+                continue;
+            }
 
-            if (is_array($settings)) {
-                $twigString = '{{ seomatic.helper.socialImage(object, "' . $settings['transformName'] . '", "' . $settings['template'] . '") }}';
-                Craft::$app->getView()->renderObjectTemplate($twigString, $element);
+            $element->siteId = $siteId;
+            $processedSettings = [];
+            foreach ($types as $imageType) {
+                $settings = $this->extractSeoImageSettings($metaBundle->metaBundleSettings, $imageType);
+                if (is_array($settings)) {
+                    $hash = md5(json_encode($settings) . $siteId);
+
+                    if (!empty($processedSettings[$hash])) {
+                        continue;
+                    }
+
+                    $twigString = '{{ seomatic.helper.socialImage(object, "' . $settings['transformName'] . '", "' . $settings['template'] . '") }}';
+                    Craft::$app->getView()->renderObjectTemplate($twigString, $element);
+                    $processedSettings[$hash] = true;
+                }
             }
         }
     }
@@ -263,13 +292,14 @@ class SocialImages extends Component
      */
     protected function getMetaBundleByElement(Element $element)
     {
-        if (empty($this->_memoizedBundles[$element->uid])) {
+        $memoizedKey = $element->uid . '-' . $element->siteId;
+        if (empty($this->_memoizedBundles[$memoizedKey])) {
             $seomatic = Seomatic::getInstance();
             $source = $seomatic->metaBundles->getMetaSourceFromElement($element);
-            $this->_memoizedBundles[$element->uid] = $seomatic->metaBundles->getMetaBundleBySourceId($source[1], $source[0], $source[3], $source[4]);
+            $this->_memoizedBundles[$memoizedKey] = $seomatic->metaBundles->getMetaBundleBySourceId($source[1], $source[0], $source[3], $source[4]);
         }
 
-        return $this->_memoizedBundles[$element->uid];
+        return $this->_memoizedBundles[$memoizedKey];
     }
 
     /**
