@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.3.25 - UNRELEASED
+## 3.3.25 - 2020.12.04
 ### Added
 * Added the ability to query the `MetaSiteVarsContainer` via GraphQL or Meta Container endpoint, to allow accessing things such as the social media sites/urls, and other site-wide information
 
