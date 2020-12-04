@@ -85,11 +85,7 @@ class SeomaticResolver extends Resolver
         // Get the site to edit
         if ($siteHandle !== null) {
             $site = Craft::$app->getSites()->getSiteByHandle($siteHandle);
-            if (!$site) {
-                return null;
-            }
-
-            return $site->id;
+            return $site->id ?? null;
         }
 
         return Craft::$app->getSites()->currentSite->id;
