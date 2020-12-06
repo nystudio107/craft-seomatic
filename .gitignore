@@ -13,18 +13,16 @@
 # Craft CMS project root directory
 
 # CRAFT ENVIRONMENT
-.env.php
-.env.sh
 .env
 
 # COMPOSER
 /vendor
 
 # BUILD FILES
-/bower_components/*
-/node_modules/*
-/build/*
-/yarn-error.log
+bower_components
+node_modules
+yarn-error.log
+npm-error.log
 
 # MISC FILES
 .cache
