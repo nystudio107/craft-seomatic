@@ -20,7 +20,7 @@ module.exports = {
     extensions: ['.ts', '.js', '.vue', '.json'],
     name: 'devMode.fm',
     paths: {
-        dist: '../src/assetbundles/seomatic/dist/',
+        dist: '../../src/assetbundles/seomatic/dist/',
     },
     urls: {
         publicPath: () => process.env.PUBLIC_PATH || '',

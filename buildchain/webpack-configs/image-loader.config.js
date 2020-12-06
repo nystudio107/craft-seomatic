@@ -47,7 +47,7 @@ module.exports = (type = 'modern', settings) => {
                                 {
                                     loader: 'file-loader',
                                     options: {
-                                        name: 'img/[name].[contenthash].[ext]'
+                                        name: 'img/[name].[ext]'
                                     }
                                 },
                                 {

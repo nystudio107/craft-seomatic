@@ -35,7 +35,7 @@ module.exports = (type = 'modern', settings) => {
         production: {
             // legacy production config
             legacy: {
-                ...common('manifest-legacy.json'),
+                ...common('manifest.json'),
             },
             // modern production config
             modern: {

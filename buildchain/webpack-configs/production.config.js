@@ -58,11 +58,11 @@ module.exports = (type = 'modern', settings) => {
                     },
                 },
                 output: {
-                    filename: path.join('./js', '[name]-legacy.[contenthash].js'),
+                    filename: path.join('./js', '[name].js'),
                 },
                 plugins: [
                     new MiniCssExtractPlugin({
-                        filename: path.join('./css', '[name].[contenthash].css'),
+                        filename: path.join('./css', '[name].css'),
                     }),
                 ],
             },
@@ -81,7 +81,7 @@ module.exports = (type = 'modern', settings) => {
                     },
                 },
                 output: {
-                    filename: path.join('./js', '[name].[contenthash].js'),
+                    filename: path.join('./js', '[name].js'),
                 },
             },
         }
