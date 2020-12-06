@@ -81,7 +81,7 @@
     "cssnano": "^4.1.0",
     "dotenv": "^6.1.0",
     "eslint": "^7.4.0",
-    "eslint-plugin-vue": "^7.1.0",
+    "eslint-plugin-vue": "^7.2.0",
     "favicons-webpack-plugin": "^5.0.0-alpha.3",
     "file-loader": "^6.0.0",
     "glob-all": "^3.1.0",
@@ -114,11 +114,11 @@
     "vue-loader": "^15.9.5",
     "vue-template-compiler": "^2.6.12",
     "webpack": "^5.3.0",
-    "webpack-bundle-analyzer": "^4.0.0-rc1",
+    "webpack-bundle-analyzer": "^4.2.0",
     "webpack-cli": "^4.1.0",
     "webpack-dev-server": "^v4.0.0-beta.0",
-    "webpack-manifest-plugin": "^3.0.0-rc.0",
-    "webpack-merge": "^5.3.0"
+    "webpack-manifest-plugin": "^3.0.0",
+    "webpack-merge": "^5.4.0"
   },
   "homepage": "https://devMode.fm",
   "keywords": [

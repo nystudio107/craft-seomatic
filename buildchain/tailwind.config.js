@@ -2,9 +2,8 @@
 module.exports = {
   purge: {
     content: [
-      '../cms/templates/**/*.{twig,html}',
-      '../src/vue/**/*.{vue,html}',
-      "./node_modules/vuetable-2/src/components/**/*.{vue,html}",
+      '../src/templates/**/*.{twig,html}',
+      '../src/assetbundles/seomatic/src/vue/**/*.{vue,html}',
     ],
     layers: [
       'base',
@@ -14,7 +13,9 @@ module.exports = {
     mode: 'layers',
     options: {
       whitelist: [
-        '../src/css/components/**/*.{css}',
+        '../src/assetbundles/seomatic/src/css/components/*.css',
+        './node_modules/tokenfield/dist/tokenfield.css',
+        './node_modules/@riophae/vue-treeselect/dist/vue-treeselect.css'
       ],
     }
   },
