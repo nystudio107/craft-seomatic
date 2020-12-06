@@ -32,7 +32,7 @@ module.exports = (type = 'modern', settings) => {
                 directory: path.resolve(__dirname, settings.contentBase()),
                 publicPath: '/',
                 watch: {
-                    poll: parseInt(settings.poll()),
+                    poll: settings.poll() | 0,
                     ignored: /node_modules/,
                 },
             },
@@ -56,7 +56,7 @@ module.exports = (type = 'modern', settings) => {
             }),
         ],
         watchOptions: {
-            poll: parseInt(settings.poll()),
+            poll: settings.poll() | 0,
         },
     });
     // configs
