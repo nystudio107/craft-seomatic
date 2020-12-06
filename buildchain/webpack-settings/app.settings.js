@@ -18,7 +18,7 @@ module.exports = {
         'javascript-editor': '../src/assetbundles/seomatic/src/js/javascript-editor.js',
     },
     extensions: ['.ts', '.js', '.vue', '.json'],
-    name: 'devMode.fm',
+    name: 'seomatic',
     paths: {
         dist: '../../src/assetbundles/seomatic/dist/',
     },
