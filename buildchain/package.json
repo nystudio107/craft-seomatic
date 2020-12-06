@@ -134,8 +134,8 @@
   "scripts": {
     "build": "webpack --config webpack.prod.js --progress",
     "check-types": "tsc",
-    "debug": "nodemon",
-    "dev": "nodemon",
+    "debug": "nodemon -L",
+    "dev": "nodemon -L",
     "lint": "tsc --noEmit && eslint '../../src/**/*.{js,ts,vue}' --fix"
   },
   "version": "3.3.0"

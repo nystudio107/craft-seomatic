@@ -32,7 +32,7 @@ module.exports = (type = 'modern', settings) => {
                 directory: path.resolve(__dirname, settings.contentBase()),
                 publicPath: '/',
                 watch: {
-                    poll: !!parseInt(settings.poll()),
+                    poll: parseInt(settings.poll()),
                     ignored: /node_modules/,
                 },
             },
@@ -55,6 +55,9 @@ module.exports = (type = 'modern', settings) => {
                 exclude: /\.(pcss|css)($|\?)/i,
             }),
         ],
+        watchOptions: {
+            poll: parseInt(settings.poll()),
+        },
     });
     // configs
     const configs = {
