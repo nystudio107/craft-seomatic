@@ -1,8 +1,8 @@
 /*!
- * @project        devMode.fm
+ * @project        seomatic
  * @name           javascript-editor.js
  * @author         Andrew Welch
- * @build          Sun Dec 06 2020 03:37:48 GMT+0000 (Coordinated Universal Time)
+ * @build          Sun Dec 06 2020 05:31:05 GMT+0000 (Coordinated Universal Time)
  * @copyright      Copyright (c) 2020 ©2020 nystudio107.com
  *
  */
