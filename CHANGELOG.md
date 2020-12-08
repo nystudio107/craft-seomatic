@@ -3,6 +3,7 @@
 ## 3.3.26 - UNRELEASED
 ### Changed
 * Moved the CSS/JS buildchain over to webpack 5
+* Updated to latest npm deps
 
 ## 3.3.25 - 2020.12.04
 ### Added
