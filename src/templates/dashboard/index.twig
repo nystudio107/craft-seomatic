@@ -12,7 +12,6 @@
 {% block foot %}
     {{ parent() }}
     {% set jsModules = [
-        'vendors~dashboard.js',
         'dashboard.js',
     ] %}
     {{ registerJsModules(jsModules) }}

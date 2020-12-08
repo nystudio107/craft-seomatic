@@ -19,8 +19,6 @@
 {% block foot %}
     {{ parent() }}
     {% set jsModules = [
-        'vendors~javascript-editor~twig-editor.js',
-        'vendors~twig-editor.js',
         'twig-editor.js',
     ] %}
     {{ registerJsModules(jsModules) }}
