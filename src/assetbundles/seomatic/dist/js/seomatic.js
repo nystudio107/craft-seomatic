@@ -2,7 +2,7 @@
  * @project        seomatic
  * @name           seomatic.js
  * @author         Andrew Welch
- * @build          Tue Dec 08 2020 20:39:52 GMT+0000 (Coordinated Universal Time)
+ * @build          Wed Dec 09 2020 04:47:21 GMT+0000 (Coordinated Universal Time)
  * @copyright      Copyright (c) 2020 ©2020 nystudio107.com
  *
  */
