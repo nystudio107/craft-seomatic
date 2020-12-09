@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.27 - UNRELEASED
+### Changed
+* Split out vendors & commons chunks
+
 ## 3.3.26 - 2020.12.08
 ### Changed
 * Moved the CSS/JS buildchain over to webpack 5
