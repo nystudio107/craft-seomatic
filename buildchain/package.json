@@ -42,6 +42,7 @@
     "regenerator-runtime": "^0.13.2",
     "tailwindcss": "^1.0.0",
     "tokenfield": "^1.2.2",
+    "vue": "^2.6.0",
     "vue-apexcharts": "^1.3.6",
     "vue-axios": "^2.1.5",
     "vue-confetti": "^0.4.2",
