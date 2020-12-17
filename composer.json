@@ -37,7 +37,7 @@
         "php-science/textrank": "^1.0.3",
         "davechild/textstatistics": "1.0.2",
         "sunra/php-simple-html-dom-parser": "^1.5.2",
-        "spatie/browsershot": "^3.20"
+        "spatie/browsershot": "3.40.2"
     },
     "repositories": [
         {
