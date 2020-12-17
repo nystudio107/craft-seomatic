@@ -318,11 +318,26 @@ class SocialImages extends Component
         $html = $view->renderObjectTemplate($templateContent, $element);
 
         $tempPath = Assets::tempFilePath(ImageTransform::DEFAULT_SOCIAL_FORMAT);
-        Browsershot::html($html)
+        $browserShot = Browsershot::html($html)
             ->width($width)
             ->height($height)
-            ->quality(ImageTransform::SOCIAL_TRANSFORM_QUALITY)
-            ->save($tempPath);
+            ->quality(ImageTransform::SOCIAL_TRANSFORM_QUALITY);
+
+        $seomaticSettings = Seomatic::getInstance()->getSettings();
+
+        if (!$seomaticSettings->socialImagesEnableSandbox) {
+            $browserShot->noSandbox();
+        }
+
+        if ($seomaticSettings->socialImagesChromePath) {
+            $browserShot->setChromePath($seomaticSettings->socialImagesChromePath);
+        }
+
+        if ($seomaticSettings->socialImagesNodeModulePath) {
+            $browserShot->setNodeModulePath($seomaticSettings->socialImagesNodeModulePath);
+        }
+
+        $browserShot->save($tempPath);
 
         $fileStream = fopen($tempPath, 'rb');
         $volume->createFileByStream($fullPath, $fileStream, [
