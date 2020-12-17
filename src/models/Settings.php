@@ -230,11 +230,6 @@ class Settings extends VarsModel
      */
     public $socialImageSubpath = '';
 
-    /**
-     * @var bool Whether or not social images should be enabled.
-     */
-    public $enableSocialImages = false;
-
     // Public Methods
     // =========================================================================
 

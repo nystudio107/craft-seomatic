@@ -39,16 +39,6 @@
             <div class="error">{{ 'Puppeteer cannot be detected. Either it is not installed correctly, or the <code>socialImagesNodeModulePath</code> setting is incorrect.'|t('seomatic')|raw }}</div>
         {%  endif %}
 
-        {{ forms.lightswitchField({
-            label: "Enable Social Images"|t("seomatic"),
-            instructions: "Whether Social Images should be enabled. Only enable this, if the environment is property configured."|t("seomatic"),
-            id: "enableSocialImages",
-            name: "enableSocialImages",
-            on: settings.enableSocialImages,
-            warning: configWarning("enableSocialImages", "seomatic"),
-            errors: settings.getErrors("enableSocialImages"),
-        }) }}
-
         {% if volumeList %}
             {{ forms.field({
                 first: true,
