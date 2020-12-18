@@ -4,6 +4,9 @@
 ### Changed
 * Split out vendors & commons chunks
 
+### Fixed
+* Changed `unlimitedStock` to `hasUnlimitedStock` for the Product JSON-LD defaults
+
 ## 3.3.26 - 2020.12.08
 ### Changed
 * Moved the CSS/JS buildchain over to webpack 5
