@@ -6,6 +6,7 @@
 
 ### Fixed
 * Changed `unlimitedStock` to `hasUnlimitedStock` for the Product JSON-LD defaults
+* Ensure that the `runtime.js` is included in the Field Settings and Field
 
 ## 3.3.26 - 2020.12.08
 ### Changed
