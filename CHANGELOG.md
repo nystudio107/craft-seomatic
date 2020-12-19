@@ -1,5 +1,8 @@
 # SEOmatic Changelog
 
+## 3.3.28 - UNRELEASED
+### Changed
+
 ## 3.3.27 - 2020.12.18
 ### Changed
 * Split out vendors & commons chunks
