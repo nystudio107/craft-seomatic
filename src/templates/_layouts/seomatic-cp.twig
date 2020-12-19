@@ -4,6 +4,7 @@
 
 {% block head %}
     {{ parent() }}
+    {{ seomatic.manifest.includeCssModule("vendors.css", false) }}
     {{ seomatic.manifest.includeCssModule("styles.css", false) }}
 {% endblock %}
 
@@ -11,6 +12,8 @@
     {{ parent() }}
     {% set jsModules = [
         'runtime.js',
+        'vendors.js',
+        'common.js',
         'seomatic.js',
     ] %}
     {{ registerJsModules(jsModules) }}

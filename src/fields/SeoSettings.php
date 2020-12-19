@@ -298,12 +298,13 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
             $this->registerCssModules([
                 'styles.css',
+                'vendors.css',
             ]);
             $this->registerJsModules([
-                'styles.js',
+                'runtime.js',
+                'vendors.js',
+                'common.js',
                 'seomatic.js',
-                'vendors~seomatic-meta.js',
-                'vendors~seomatic-tokens.js',
                 'seomatic-tokens.js',
                 'seomatic-meta.js',
             ]);
@@ -340,12 +341,13 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
             $this->registerCssModules([
                 'styles.css',
+                'vendors.css',
             ]);
             $this->registerJsModules([
-                'styles.js',
+                'runtime.js',
+                'vendors.js',
+                'common.js',
                 'seomatic.js',
-                'vendors~seomatic-meta.js',
-                'vendors~seomatic-tokens.js',
                 'seomatic-tokens.js',
                 'seomatic-meta.js',
             ]);
