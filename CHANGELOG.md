@@ -1,7 +1,8 @@
 # SEOmatic Changelog
 
 ## 3.3.28 - UNRELEASED
-### Changed
+### Fixed
+* Fixed a regression that caused Script variables to not be parsed as environment variables
 
 ## 3.3.27 - 2020.12.18
 ### Changed
