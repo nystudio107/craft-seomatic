@@ -299,7 +299,7 @@ class MetaScript extends NonceItem
             foreach ($variables as $key => $value) {
                 if (!empty($value['value']) && \is_string($value['value'])) {
                     $variables[$key]['value'] = Craft::parseEnv($value['value']);
-                    $variables[$key]['value'] = trim($value['value']);
+                    $variables[$key]['value'] = trim($variables[$key]['value']);
                 }
             }
         }
