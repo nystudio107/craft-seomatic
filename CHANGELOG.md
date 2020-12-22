@@ -3,6 +3,7 @@
 ## 3.3.28 - UNRELEASED
 ### Fixed
 * Fixed a regression that caused Script variables to not be parsed as environment variables
+* Fixed a bug that could cause Content SEO image settings to not override the global settings properly
 
 ## 3.3.27 - 2020.12.18
 ### Changed
