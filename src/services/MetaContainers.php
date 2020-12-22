@@ -651,6 +651,8 @@ class MetaContainers extends Component
      */
     public function addMetaBundleToContainers(MetaBundle $metaBundle)
     {
+        // Ensure the variable is synced properly first
+        Seomatic::$seomaticVariable->init();
         // Meta global vars
         $attributes = $metaBundle->metaGlobalVars->getAttributes();
         // Parse the meta values so we can filter out any blank or empty attributes
