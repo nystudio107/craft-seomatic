@@ -142,7 +142,7 @@ class MetaContainers extends Component
         parent::init();
         // Get the page number of this request
         $request = Craft::$app->getRequest();
-        if (!$request->isConsoleRequest && Seomatic::$settings->addPaginatedHreflang) {
+        if (!$request->isConsoleRequest) {
             $this->paginationPage = (string)$request->pageNum;
         }
     }
@@ -297,7 +297,7 @@ class MetaContainers extends Component
         // If this page is paginated, we need to factor that into the cache key
         // We also need to re-add the hreflangs
         if ($this->paginationPage !== '1') {
-            if (Seomatic::$settings->addHrefLang) {
+            if (Seomatic::$settings->addHrefLang && Seomatic::$settings->addPaginatedHreflang) {
                 DynamicMetaHelper::addMetaLinkHrefLang();
             }
         }
@@ -651,6 +651,8 @@ class MetaContainers extends Component
      */
     public function addMetaBundleToContainers(MetaBundle $metaBundle)
     {
+        // Ensure the variable is synced properly first
+        Seomatic::$seomaticVariable->init();
         // Meta global vars
         $attributes = $metaBundle->metaGlobalVars->getAttributes();
         // Parse the meta values so we can filter out any blank or empty attributes
