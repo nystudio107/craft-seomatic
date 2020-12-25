@@ -9,15 +9,12 @@
 
 namespace nystudio107\seomatic\console\controllers;
 
+use Craft;
 use craft\base\Element;
 use craft\helpers\Console;
 use craft\helpers\StringHelper;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\Seomatic;
-
-use Craft;
-use craft\helpers\App;
-
 use yii\console\Controller;
 use yii\console\ExitCode;
 
@@ -143,7 +140,7 @@ class SocialImagesController extends Controller
 
         $this->stdout('Updating social images for element ', Console::FG_GREEN);
         $this->stdout($element->id . PHP_EOL, Console::FG_YELLOW);
-        $socialImages->updateSocialImages($element, true);
+        $socialImages->updateSocialImages($element, true, true);
 
         $this->stdout('done' . PHP_EOL, Console::FG_GREEN);
 

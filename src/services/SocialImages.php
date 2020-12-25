@@ -21,7 +21,8 @@ use craft\helpers\ElementHelper;
 use craft\helpers\FileHelper;
 use nystudio107\seomatic\helpers\ImageTransform;
 use nystudio107\seomatic\helpers\PullField;
-use nystudio107\seomatic\jobs\GenerateSocialImages;
+use nystudio107\seomatic\helpers\Queue as QueueHelper;
+use nystudio107\seomatic\jobs\GenerateElementSocialImages;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaBundleSettings;
 use nystudio107\seomatic\Seomatic;
@@ -103,10 +104,12 @@ class SocialImages extends Component
      *
      * @param Element $element
      * @param bool $allSites
+     * @param bool $instant
+     *
      * @throws \Throwable
      * @throws \yii\base\Exception
      */
-    public function updateSocialImages(Element $element, $allSites = false)
+    public function updateSocialImages(Element $element, $allSites = false, $instant = false)
     {
         if ($element->getIsRevision() || $element->getIsDraft()) {
             return;
@@ -121,10 +124,15 @@ class SocialImages extends Component
 
         $queue = Craft::$app->getQueue();
 
-        $queue->push(new GenerateSocialImages([
+        $queue->push(new GenerateElementSocialImages([
             'elementId' => $element->id,
-            'allSites' => $allSites
+            'allSites' => $allSites,
+            'title' => $element->title,
         ]));
+
+        if ($instant) {
+            QueueHelper::run();
+        }
     }
 
     /**
@@ -180,31 +188,6 @@ class SocialImages extends Component
                 }
             }
         }
-    }
-
-    /**
-     * Extract seo image settings from bundle settings by the setting type name.
-     *
-     * @param MetaBundleSettings $settings
-     * @param string $settingName
-     * @return array|null
-     */
-    protected function extractSeoImageSettings(MetaBundleSettings $settings, string $settingName)
-    {
-        $source = $settings->{$settingName . 'Source'};
-
-        if ($source === 'sameAsSeo') {
-            return $this->extractSeoImageSettings($settings, 'seoImage');
-        }
-
-        if ($source !== 'fromTemplate') {
-            return null;
-        }
-
-        return [
-            'transformName' => $settingName === 'twitterImage' ? Helper::twitterTransform() : PullField::PULL_ASSET_FIELDS[$settingName]['transformName'],
-            'template' => $settings->{$settingName . 'Template'}
-        ];
     }
 
     /**
