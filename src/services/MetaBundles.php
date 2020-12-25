@@ -89,6 +89,11 @@ class MetaBundles extends Component
      */
     protected $globalMetaBundles = [];
 
+    /**
+     * @var MetaBundle[]
+     */
+    private $_memoizedBundles = [];
+
     // Public Methods
     // =========================================================================
 
@@ -259,6 +264,24 @@ class MetaBundles extends Component
         }
 
         return $metaBundle;
+    }
+
+    /**
+     * Get a meta bundle by an element.
+     *
+     * @param Element $element
+     * @return MetaBundle|null
+     */
+    public function getMetaBundleByElement(Element $element)
+    {
+        $memoizedKey = $element->uid . '-' . $element->siteId;
+
+        if (empty($this->_memoizedBundles[$memoizedKey])) {
+            $source = $this->getMetaSourceFromElement($element);
+            $this->_memoizedBundles[$memoizedKey] = $this->getMetaBundleBySourceId($source[1], $source[0], $source[3], $source[4]);
+        }
+
+        return $this->_memoizedBundles[$memoizedKey];
     }
 
     /**

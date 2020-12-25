@@ -21,6 +21,7 @@ use craft\helpers\ElementHelper;
 use craft\helpers\FileHelper;
 use nystudio107\seomatic\helpers\ImageTransform;
 use nystudio107\seomatic\helpers\PullField;
+use nystudio107\seomatic\jobs\GenerateSocialImages;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaBundleSettings;
 use nystudio107\seomatic\Seomatic;
@@ -33,11 +34,6 @@ use Spatie\Browsershot\Browsershot;
  */
 class SocialImages extends Component
 {
-    /**
-     * @var MetaBundle[]
-     */
-    private $_memoizedBundles = [];
-
     /**
      * Get social image URL.
      *
@@ -75,7 +71,7 @@ class SocialImages extends Component
 
         if (!$volume->fileExists($fullPath)) {
             if (empty($template)) {
-                $metaBundle = $this->getMetaBundleByElement($element);
+                $metaBundle = $seomatic->metaBundles->getMetaBundleByElement($element);
 
                 if (!$metaBundle) {
                     Craft::error(Craft::t('seomatic', 'Cannot resolve meta bundle for element ' . $element->id), 'seomatic');
@@ -116,52 +112,19 @@ class SocialImages extends Component
             return;
         }
 
-        $metaBundle = $this->getMetaBundleByElement($element);
+        $metaBundle = Seomatic::getInstance()->metaBundles->getMetaBundleByElement($element);
 
         // No vagrants beyond this point
         if (!$metaBundle) {
             return;
         }
 
-        $this->invalidateSocialImagesForElement($element, $allSites);
+        $queue = Craft::$app->getQueue();
 
-        $metaBundles = [];
-
-        if ($allSites) {
-            // Load up all meta bundles for all sites this element can work with
-            foreach (ElementHelper::supportedSitesForElement($element) as $site) {
-                $siteId = $site['siteId'];
-                $element->siteId = $siteId;
-                $metaBundles[$siteId] = $this->getMetaBundleByElement($element);
-            }
-        } else {
-            $metaBundles[$element->siteId] = $this->getMetaBundleByElement($element);
-        }
-
-        $types = ['seoImage', 'ogImage', 'twitterImage'];
-
-        foreach ($metaBundles as $siteId => $metaBundle) {
-            if (!$metaBundle) {
-                continue;
-            }
-
-            $element->siteId = $siteId;
-            $processedSettings = [];
-            foreach ($types as $imageType) {
-                $settings = $this->extractSeoImageSettings($metaBundle->metaBundleSettings, $imageType);
-                if (is_array($settings)) {
-                    $hash = md5(json_encode($settings) . $siteId);
-
-                    if (!empty($processedSettings[$hash])) {
-                        continue;
-                    }
-
-                    $twigString = '{{ seomatic.helper.socialImage(object, "' . $settings['transformName'] . '", "' . $settings['template'] . '") }}';
-                    Craft::$app->getView()->renderObjectTemplate($twigString, $element);
-                    $processedSettings[$hash] = true;
-                }
-            }
-        }
+        $queue->push(new GenerateSocialImages([
+            'elementId' => $element->id,
+            'allSites' => $allSites
+        ]));
     }
 
     /**
@@ -265,7 +228,7 @@ class SocialImages extends Component
      */
     protected function getSocialImageSubfolder(Element $element, int $siteId): string
     {
-        return $this->getSocialImageMetaBundleSubfolder($this->getMetaBundleByElement($element)) . DIRECTORY_SEPARATOR . $element->id . '-' . $siteId;
+        return $this->getSocialImageMetaBundleSubfolder(Seomatic::getInstance()->metaBundles->getMetaBundleByElement($element)) . DIRECTORY_SEPARATOR . $element->id . '-' . $siteId;
     }
 
     /**
@@ -283,23 +246,6 @@ class SocialImages extends Component
     protected function getSocialImageVolumePath(): string
     {
         return rtrim(Seomatic::getInstance()->getSettings()->socialImageSubpath, '/\\');
-    }
-
-    /**
-     * @param Seomatic $seomatic
-     * @param Element $element
-     * @return MetaBundle|null
-     */
-    protected function getMetaBundleByElement(Element $element)
-    {
-        $memoizedKey = $element->uid . '-' . $element->siteId;
-        if (empty($this->_memoizedBundles[$memoizedKey])) {
-            $seomatic = Seomatic::getInstance();
-            $source = $seomatic->metaBundles->getMetaSourceFromElement($element);
-            $this->_memoizedBundles[$memoizedKey] = $seomatic->metaBundles->getMetaBundleBySourceId($source[1], $source[0], $source[3], $source[4]);
-        }
-
-        return $this->_memoizedBundles[$memoizedKey];
     }
 
     /**
