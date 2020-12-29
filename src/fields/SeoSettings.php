@@ -303,7 +303,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             $this->registerJsModules([
                 'runtime.js',
                 'vendors.js',
-                'common.js',
+                'commons.js',
                 'seomatic.js',
                 'seomatic-tokens.js',
                 'seomatic-meta.js',
@@ -346,7 +346,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             $this->registerJsModules([
                 'runtime.js',
                 'vendors.js',
-                'common.js',
+                'commons.js',
                 'seomatic.js',
                 'seomatic-tokens.js',
                 'seomatic-meta.js',
