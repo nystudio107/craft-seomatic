@@ -2,7 +2,7 @@
 
 ## 3.3.29 - UNRELEASED
 ### Changed
-*
+* Renamed `common.js` -> `commons.js`, which is the correct name, and also will suppress it from appearing in the error logs
 
 ## 3.3.28 - 2020.12.22
 ### Fixed
