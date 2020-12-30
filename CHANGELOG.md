@@ -3,6 +3,7 @@
 ## 3.3.29 - UNRELEASED
 ### Changed
 * Renamed `common.js` -> `commons.js`, which is the correct name, and also will suppress it from appearing in the error logs
+* Switch from using `->each()` to using `craft\db\Paginator` to paginate asset query results, to address out of memory issues on massive queries
 
 ## 3.3.28 - 2020.12.22
 ### Fixed
