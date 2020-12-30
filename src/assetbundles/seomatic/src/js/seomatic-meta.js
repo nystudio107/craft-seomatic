@@ -75,9 +75,12 @@ function initFieldSettings() {
         var popupValue = $(this).val();
         switch (popupValue) {
             case 'sameAsSeo':
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').show();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').not('.seomatic-imageSourceNotSameAsSeo').show();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl.seomatic-imageSourceNotSameAsSeo').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.imageSourceNotSameAsSeo').show();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').hide();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromTemplate').hide();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').hide();
                 break;
 
@@ -85,6 +88,7 @@ function initFieldSettings() {
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').show();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').show();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromTemplate').hide();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').hide();
                 break;
 
@@ -92,6 +96,15 @@ function initFieldSettings() {
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').show();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').hide();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').show();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromTemplate').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').hide();
+                break;
+
+            case 'fromTemplate':
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromTemplate').show();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').hide();
                 break;
 
@@ -99,6 +112,7 @@ function initFieldSettings() {
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').hide();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').hide();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromTemplate').hide();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').show();
                 break;
         }
@@ -107,15 +121,18 @@ function initFieldSettings() {
     $('.seomatic-imageSourceSelect > select').on('change', function(e) {
         switch (this.value) {
             case 'sameAsSeo':
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').slideDown();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').not('.seomatic-imageSourceNotSameAsSeo').slideDown();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl.seomatic-imageSourceNotSameAsSeo').slideUp();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').slideUp();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromTemplate').slideUp();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').slideUp();
                 break;
 
             case 'fromField':
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').slideDown();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').slideDown();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromTemplate').slideUp();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').slideUp();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').slideUp();
                 break;
@@ -124,6 +141,15 @@ function initFieldSettings() {
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').slideDown();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').slideUp();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').slideDown();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromTemplate').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').slideUp();
+                break;
+
+            case 'fromTemplate':
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromTemplate').slideDown();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').slideUp();
                 break;
 
@@ -131,6 +157,7 @@ function initFieldSettings() {
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').slideUp();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').slideUp();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromTemplate').slideUp();
                 $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').slideDown();
                 break;
         }
