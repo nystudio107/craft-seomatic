@@ -33,7 +33,7 @@
         "vlucas/phpdotenv": "^3.0"
     },
     "require": {
-        "craftcms/cms": "^3.0.0",
+        "craftcms/cms": "^3.1.19",
         "php-science/textrank": "^1.0.3",
         "davechild/textstatistics": "1.0.2",
         "sunra/php-simple-html-dom-parser": "^1.5.2"
