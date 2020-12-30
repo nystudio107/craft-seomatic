@@ -14,6 +14,7 @@ use nystudio107\seomatic\helpers\Container as ContainerHelper;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 use nystudio107\seomatic\models\MetaLinkContainer;
 use nystudio107\seomatic\models\MetaScriptContainer;
+use nystudio107\seomatic\models\MetaSiteVars;
 use nystudio107\seomatic\models\MetaTitleContainer;
 use nystudio107\seomatic\models\MetaTagContainer;
 
@@ -43,6 +44,7 @@ class MetaContainerController extends Controller
         'meta-link-container',
         'meta-script-container',
         'meta-json-ld-container',
+        'meta-site-vars-container',
     ];
 
     // Public Methods
@@ -62,7 +64,7 @@ class MetaContainerController extends Controller
 
     /**
      * Return all of the containers
-     * URI: /actions/seomatic/meta-container/all-meta-containers?path=&siteId=
+     * URI: /actions/seomatic/meta-container/all-meta-containers?uri=/
      *
      * @param string $uri
      * @param int    $siteId
@@ -79,6 +81,7 @@ class MetaContainerController extends Controller
                 MetaLinkContainer::CONTAINER_TYPE,
                 MetaScriptContainer::CONTAINER_TYPE,
                 MetaJsonLdContainer::CONTAINER_TYPE,
+                MetaSiteVars::CONTAINER_TYPE,
             ],
             $uri,
             $siteId,
@@ -95,7 +98,7 @@ class MetaContainerController extends Controller
 
     /**
      * Return the MetaTitleContainer
-     * URI: /actions/seomatic/meta-container/meta-title-container?path=&siteId=
+     * URI: /actions/seomatic/meta-container/meta-title-container?uri=/
      *
      * @param string $uri
      * @param int    $siteId
@@ -124,7 +127,7 @@ class MetaContainerController extends Controller
 
     /**
      * Return the MetaTagContainer
-     * URI: /actions/seomatic/meta-container/meta-tag-container?path=&siteId=
+     * URI: /actions/seomatic/meta-container/meta-tag-container?uri=/
      *
      * @param string $uri
      * @param int    $siteId
@@ -153,7 +156,7 @@ class MetaContainerController extends Controller
 
     /**
      * Return the MetaLinkContainer
-     * URI: /actions/seomatic/meta-container/meta-link-container?path=&siteId=
+     * URI: /actions/seomatic/meta-container/meta-link-container?uri=/
      *
      * @param string $uri
      * @param int    $siteId
@@ -182,7 +185,7 @@ class MetaContainerController extends Controller
 
     /**
      * Return the MetaScriptContainer
-     * URI: /actions/seomatic/meta-container/meta-script-container?path=&siteId=
+     * URI: /actions/seomatic/meta-container/meta-script-container?uri=/
      *
      * @param string $uri
      * @param int    $siteId
@@ -211,7 +214,7 @@ class MetaContainerController extends Controller
 
     /**
      * Return the MetaJsonLdContainer
-     * URI: /actions/seomatic/meta-container/meta-json-ld-container?path=&siteId=
+     * URI: /actions/seomatic/meta-container/meta-json-ld-container?uri=/
      *
      * @param string $uri
      * @param int    $siteId
@@ -237,4 +240,34 @@ class MetaContainerController extends Controller
 
         return $this->asJson($result);
     }
+
+    /**
+     * Return the MetaSiteVars "container"
+     * URI: /actions/seomatic/meta-container/meta-site-vars-container?uri=/
+     *
+     * @param string $uri
+     * @param int    $siteId
+     * @param bool   $asArray
+     *
+     * @return Response
+     */
+    public function actionMetaSiteVarsContainer(string $uri, int $siteId = null, bool $asArray = false): Response
+    {
+        $result = ContainerHelper::getContainerArrays(
+            [
+                MetaSiteVars::CONTAINER_TYPE,
+            ],
+            $uri,
+            $siteId,
+            $asArray
+        );
+        // use "pretty" output in debug mode
+        Craft::$app->response->formatters[Response::FORMAT_JSON] = [
+            'class' => JsonResponseFormatter::class,
+            'prettyPrint' => YII_DEBUG,
+        ];
+
+        return $this->asJson($result);
+    }
+
 }

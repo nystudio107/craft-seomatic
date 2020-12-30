@@ -13,17 +13,18 @@ namespace nystudio107\seomatic\gql\interfaces;
 
 use nystudio107\seomatic\gql\types\generators\SeomaticGenerator;
 
+use nystudio107\seomatic\models\MetaJsonLdContainer;
+use nystudio107\seomatic\models\MetaLinkContainer;
+use nystudio107\seomatic\models\MetaScriptContainer;
+use nystudio107\seomatic\models\MetaSiteVars;
+use nystudio107\seomatic\models\MetaTagContainer;
+use nystudio107\seomatic\models\MetaTitleContainer;
+
 use craft\gql\base\InterfaceType as BaseInterfaceType;
-use craft\gql\TypeLoader;
 use craft\gql\GqlEntityRegistry;
 
 use GraphQL\Type\Definition\InterfaceType;
 use GraphQL\Type\Definition\Type;
-use nystudio107\seomatic\models\MetaJsonLdContainer;
-use nystudio107\seomatic\models\MetaLinkContainer;
-use nystudio107\seomatic\models\MetaScriptContainer;
-use nystudio107\seomatic\models\MetaTagContainer;
-use nystudio107\seomatic\models\MetaTitleContainer;
 
 /**
  * Class SeomaticInterface
@@ -43,6 +44,7 @@ class SeomaticInterface extends BaseInterfaceType
         'metaLinkContainer' => MetaLinkContainer::CONTAINER_TYPE,
         'metaScriptContainer' => MetaScriptContainer::CONTAINER_TYPE,
         'metaJsonLdContainer' => MetaJsonLdContainer::CONTAINER_TYPE,
+        'metaSiteVarsContainer' => MetaSiteVars::CONTAINER_TYPE,
     ];
 
     /**

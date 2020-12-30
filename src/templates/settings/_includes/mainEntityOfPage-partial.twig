@@ -102,12 +102,4 @@
         $('.metaSpecificPane.{{ mainEntityOfPage.siteSpecificType }}').show();
     {% endif %}
 
-    // Hide the sub-type menus as appropriate
-    if ($('#' + siteSubTypeId + ' option').length <= 1) {
-        $('#'+siteSubTypeId).val('none');
-    }
-    if ($('#' + siteSpecificTypeId + ' option').length <= 1) {
-        $('#'+siteSpecificTypeId).val('none');
-    }
-
 {% endjs %}

@@ -427,18 +427,22 @@ class DynamicMeta
                 $id = $siteUrl;
                 Craft::error($e->getMessage(), __METHOD__);
             }
+            $item = UrlHelper::stripQueryString($id);
+            $item = UrlHelper::absoluteUrlWithProtocol($item);
             $listItem = MetaJsonLd::create('ListItem', [
                 'position' => $position,
                 'name' => $element->title,
-                'item' => UrlHelper::stripQueryString($id),
+                'item' => $item,
                 '@id' => $id,
             ]);
             $crumbs->itemListElement[] = $listItem;
         } else {
+            $item = UrlHelper::stripQueryString($siteUrl ?? '/');
+            $item = UrlHelper::absoluteUrlWithProtocol($item);
             $crumbs->itemListElement[] = MetaJsonLd::create('ListItem', [
                 'position' => $position,
                 'name' => 'Homepage',
-                'item' => UrlHelper::stripQueryString($siteUrl ?? '/'),
+                'item' => $item,
                 '@id' => $siteUrl,
             ]);
         }
@@ -469,10 +473,12 @@ class DynamicMeta
                     $id = $siteUrl;
                     Craft::error($e->getMessage(), __METHOD__);
                 }
+                $item = UrlHelper::stripQueryString($id);
+                $item = UrlHelper::absoluteUrlWithProtocol($item);
                 $crumbs->itemListElement[] = MetaJsonLd::create('ListItem', [
                     'position' => $position,
                     'name' => $element->title,
-                    'item' => UrlHelper::stripQueryString($id),
+                    'item' => $item,
                     '@id' => $id,
                 ]);
             }

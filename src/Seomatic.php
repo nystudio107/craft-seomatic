@@ -178,7 +178,7 @@ class Seomatic extends Plugin
     /**
      * @var bool
      */
-    public static $loadingContainers = false;
+    public static $loadingMetaContainers = false;
 
     /**
      * @var bool
@@ -335,31 +335,31 @@ class Seomatic extends Plugin
         // Only show sub-navs the user has permission to view
         if ($currentUser->can('seomatic:dashboard')) {
             $subNavs['dashboard'] = [
-                'label' => 'Dashboard',
+                'label' => Craft::t('seomatic', 'Dashboard'),
                 'url' => 'seomatic/dashboard'.$siteSuffix,
             ];
         }
         if ($currentUser->can('seomatic:global-meta')) {
             $subNavs['global'] = [
-                'label' => 'Global SEO',
+                'label' => Craft::t('seomatic', 'Global SEO'),
                 'url' => 'seomatic/global/general'.$siteSuffix,
             ];
         }
         if ($currentUser->can('seomatic:content-meta')) {
             $subNavs['content'] = [
-                'label' => 'Content SEO',
+                'label' => Craft::t('seomatic', 'Content SEO'),
                 'url' => 'seomatic/content'.$siteSuffix,
             ];
         }
         if ($currentUser->can('seomatic:site-settings')) {
             $subNavs['site'] = [
-                'label' => 'Site Settings',
+                'label' => Craft::t('seomatic', 'Site Settings'),
                 'url' => 'seomatic/site/identity'.$siteSuffix,
             ];
         }
         if ($currentUser->can('seomatic:tracking-scripts')) {
             $subNavs['tracking'] = [
-                'label' => 'Tracking Scripts',
+                'label' => Craft::t('seomatic', 'Tracking Scripts'),
                 'url' => 'seomatic/tracking/googleAnalytics'.$siteSuffix,
             ];
         }
@@ -370,7 +370,7 @@ class Seomatic extends Plugin
         }
         if ($currentUser->can('seomatic:plugin-settings') && $editableSettings) {
             $subNavs['plugin'] = [
-                'label' => 'Plugin Settings',
+                'label' => Craft::t('seomatic', 'Plugin Settings'),
                 'url' => 'seomatic/plugin',
             ];
         }

@@ -113,7 +113,7 @@ class SeomaticVariable extends ServiceLocator
     {
         parent::init();
 
-        $replaceVars = Seomatic::$loadingContainers || Seomatic::$previewingMetaContainers;
+        $replaceVars = Seomatic::$loadingMetaContainers || Seomatic::$previewingMetaContainers;
         if ($this->meta === null || $replaceVars) {
             $this->meta = Seomatic::$plugin->metaContainers->metaGlobalVars;
         }
@@ -140,7 +140,7 @@ class SeomaticVariable extends ServiceLocator
     {
         return Seomatic::$plugin->name;
     }
-    
+
     /**
      * @return string
      */

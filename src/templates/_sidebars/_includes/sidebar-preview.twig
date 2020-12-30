@@ -3,10 +3,13 @@
 
 {% from 'seomatic/_includes/macros.twig' import registerJsModules %}
 
+{{ seomatic.manifest.includeCssModule("vendors.css", false) }}
 {{ seomatic.manifest.includeCssModule("styles.css", false) }}
 
 {% set jsModules = [
-    'styles.js',
+    'runtime.js',
+    'vendors.js',
+    'common.js',
     'seomatic.js',
 ] %}
 {{ registerJsModules(jsModules) }}

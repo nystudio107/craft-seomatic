@@ -30,6 +30,11 @@ use yii\web\ServerErrorHttpException;
  */
 class MetaSiteVars extends VarsModel
 {
+    // Constants
+    // =========================================================================
+
+    const CONTAINER_TYPE = 'MetaSiteVarsContainer';
+
     // Static Methods
     // =========================================================================
 

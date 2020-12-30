@@ -120,11 +120,15 @@ class ImageTransform
             // If we're not in local dev, tell it to generate the transform immediately so that
             // urls like `actions/assets/generate-transform` don't get cached
             $generateNow = Seomatic::$environment === EnvironmentHelper::SEOMATIC_DEV_ENV ? null : true;
-            if ($generateNow && $volume !== null) {
+            if ($volume instanceof Local) {
                 // Preflight to ensure that the source asset actually exists to avoid Craft hanging
-                if (!$volume->fileExists($asset->getPath())) {
+                if ($volume !== null && !$volume->fileExists($asset->getPath())) {
                     $generateNow = false;
                 }
+            } else {
+                // If this is not a local volume, avoid a potentially long round-trip by
+                // being paranoid, and defaulting to not generating the image now
+                $generateNow = false;
             }
             try {
                 $url = $assets->getAssetUrl($asset, $transform, $generateNow);
@@ -235,17 +239,6 @@ class ImageTransform
         }
 
         return $assets;
-    }
-
-    /**
-     * Return transform parameters by name or null, if can't be found.
-     *
-     * @param string $transformName
-     * @return mixed|null
-     */
-    public static function getTransformParametersByName(string $transformName)
-    {
-        return self::$transforms[$transformName] ?? null;
     }
 
     // Protected Static Methods

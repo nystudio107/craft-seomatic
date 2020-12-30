@@ -1,14 +1,39 @@
 # SEOmatic Changelog
 
-## Unreleased
+## 3.3.27 - UNRELEASED
+### Changed
+* Split out vendors & commons chunks
 
+## 3.3.26 - 2020.12.08
+### Changed
+* Moved the CSS/JS buildchain over to webpack 5
+* Updated to latest npm deps
+
+## 3.3.25 - 2020.12.04
 ### Added
-- Added Social Image SEO settings.
-- Added `nystudio107\seomatic\helpers\ImageTransform:: getTransformParametersByName()`.
-- Added `nystudio107\seomatic\jobs\GenerateElementSocialImages`.
-- Added `nystudio107\seomatic\services\Helper::puppeteer().`
-- Added `nystudio107\seomatic\services\MetaBundles::getMetaBundleByElement()`.
-- Added `nystudio107\seomatic\services\SocialImages` service.
+* Added the ability to query the `MetaSiteVarsContainer` via GraphQL or Meta Container endpoint, to allow accessing things such as the social media sites/urls, and other site-wide information
+
+### Changed
+* Normalize the script variables by parsing them as environment variables, and trimming whitespace
+
+## 3.3.24 - 2020.11.23
+### Changed
+* Moved the environment swapping functionality back to `MetaItem::init()`
+* Removed `type="text/javascript"` from the `<script>` tags that SEOmatic injects for tracking scripts
+
+###  Fixed
+* Ensured environment settings for `robots` are not saved to the db
+
+## 3.3.23 - 2020.11.18
+### Changed
+* Revert "Social image transforms for remote volumes no longer default to not generating the image transforms immediately (they fall back on whatever your system setting is)" because it caused slowdown when working with remote volumes
+* Ensure the URLs in the breadcrumbs JSON-LD adheres to the `addTrailingSlashesToURls` general config setting
+* Added better checks for `InStock` for Product JSON-LD schema
+
+### Fixed
+* Fixed an issue where SEOmatic could permanently change "robots" to "none" inadvertently in edge-case circumstances
+* Fixed an issue where the **Main Entity of Page** could reset to undesired values
+* Use unicode safe string functions to truncate meta values > 4096 characters before parsing them
 
 ## 3.3.22 - 2020.10.20
 ### Added

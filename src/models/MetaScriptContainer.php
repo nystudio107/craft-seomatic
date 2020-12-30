@@ -103,7 +103,7 @@ class MetaScriptContainer extends NonceContainer
         // Register the tags
         foreach ($tagData as $config) {
             // Register the tags
-            $attrs = ['type' => 'text/javascript'];
+            $attrs = [];
             if (!empty($config['nonce'])) {
                 /** @noinspection SlowArrayOperationsInLoopInspection */
                 $attrs = array_merge($attrs, [

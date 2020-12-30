@@ -236,16 +236,7 @@ class MetaScript extends NonceItem
     {
         $html = '';
         if (!empty($this->bodyTemplatePath) && $this->prepForRender($params)) {
-            $variables = array_merge($this->vars, [
-                'dataLayer' => $this->dataLayer,
-            ]);
-            if (Seomatic::$craft31) {
-                foreach ($variables as $key => $value) {
-                    if (!empty($value['value']) && \is_string($value['value'])) {
-                        $variables[$key]['value'] = Craft::parseEnv($value['value']);
-                    }
-                }
-            }
+            $variables = $this->normalizeScriptVars();
             if (!empty($this->bodyTemplateString)) {
                 $html = PluginTemplateHelper::renderStringTemplate($this->bodyTemplateString, $variables);
             }
@@ -261,16 +252,7 @@ class MetaScript extends NonceItem
     {
         $html = '';
         if (!empty($this->templatePath) && $this->prepForRender($params)) {
-            $variables = array_merge($this->vars, [
-                'dataLayer' => $this->dataLayer,
-            ]);
-            if (Seomatic::$craft31) {
-                foreach ($variables as $key => $value) {
-                    if (!empty($value['value']) && \is_string($value['value'])) {
-                        $variables[$key]['value'] = Craft::parseEnv($value['value']);
-                    }
-                }
-            }
+            $variables = $this->normalizeScriptVars();
             $html = PluginTemplateHelper::renderStringTemplate($this->templateString, $variables);
         }
 
@@ -289,16 +271,7 @@ class MetaScript extends NonceItem
         $attributes = [];
 
         if ($this->prepForRender($options)) {
-            $variables = array_merge($this->vars, [
-                'dataLayer' => $this->dataLayer,
-            ]);
-            if (Seomatic::$craft31) {
-                foreach ($variables as $key => $value) {
-                    if (\is_string($value)) {
-                        $variables[$key] = Craft::parseEnv($value);
-                    }
-                }
-            }
+            $variables = $this->normalizeScriptVars();
             if (!empty($this->templateString)) {
                 $attributes['script']
                     = PluginTemplateHelper::renderStringTemplate($this->templateString, $variables);
@@ -310,5 +283,27 @@ class MetaScript extends NonceItem
         }
 
         return $attributes;
+    }
+
+    /**
+     * Normalize the script variables by parsing them as environment variables, and trimming whitespace
+     *
+     * @return array
+     */
+    private function normalizeScriptVars(): array
+    {
+        $variables = array_merge($this->vars, [
+            'dataLayer' => $this->dataLayer,
+        ]);
+        if (Seomatic::$craft31) {
+            foreach ($variables as $key => $value) {
+                if (!empty($value['value']) && \is_string($value['value'])) {
+                    $variables[$key]['value'] = Craft::parseEnv($value['value']);
+                    $variables[$key]['value'] = trim($value['value']);
+                }
+            }
+        }
+
+        return $variables;
     }
 }

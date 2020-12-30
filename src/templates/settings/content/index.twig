@@ -14,13 +14,11 @@
 
 {% block head %}
     {{ parent() }}
-    {{ seomatic.manifest.includeCssModule("vendors~content-seo.css", false) }}
 {% endblock %}
 
 {% block foot %}
     {{ parent() }}
     {% set jsModules = [
-        'vendors~content-seo.js',
         'content-seo.js',
     ] %}
     {{ registerJsModules(jsModules) }}

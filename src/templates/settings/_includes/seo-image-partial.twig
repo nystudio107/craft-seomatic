@@ -7,18 +7,9 @@
     fromAsset: "Custom Image"|t("seomatic"),
     fromUrl: "Custom URL"|t("seomatic"),
 } %}
-
-{% set puppeteer = seomatic.helper.puppeteer %}
-
-{% if puppeteer %}
-    {% set imageOptions = { fromTemplate: "Generate from Twig Template"|t("seomatic"), } | merge(imageOptions) %}
-    {%- do view.registerAssetBundle("craft\\web\\assets\\vue\\VueAsset") %}
-{% endif %}
-
 {% if assetFieldSources is defined and assetFieldSources |length %}
     {% set imageOptions = { fromField: "From Asset Field"|t("seomatic"), } | merge(imageOptions) %}
 {% endif %}
-
 
 <div class="field seomatic-imageSourceWrapper" id="metaBundleSettings-seoImageSource-field">
     <div class="heading">
@@ -41,7 +32,7 @@
 
     {% if assetFieldSources is defined and assetFieldSources |length %}
         {% namespace "metaBundleSettings" %}
-            <div class="heading seomatic-imageSourceFromField seomatic-imageSourcePicker">
+            <div class="heading seomatic-imageSourceFromField">
                 <label id="metaBundleSettings-seoImageField-label" for="metaBundleSettings-seoImageField">{{ "Source Field: "|t("seomatic") }}</label>
                 {{ forms.select({
                     id: "seoImageField",
@@ -55,7 +46,7 @@
     {% endif %}
 
     {% namespace "metaBundleSettings" %}
-        <div class="heading seomatic-imageSourceFromAsset seomatic-imageSourcePicker">
+        <div class="heading seomatic-imageSourceFromAsset">
             {{ forms.elementSelect({
                 id: "seoImageIds",
                 name: "seoImageIds",
@@ -76,7 +67,7 @@
     {% endnamespace %}
 
     {% namespace "metaGlobalVars" %}
-        <div class="heading seomatic-imageSourceFromUrl seomatic-imageSourcePicker">
+        <div class="heading seomatic-imageSourceFromUrl">
             {{ forms.text({
                 id: "seoImage",
                 name: "seoImage",
@@ -88,24 +79,9 @@
         </div>
     {% endnamespace %}
 
-    {% if puppeteer %}
-        {% namespace "metaBundleSettings" %}
-            <div class="heading seomatic-imageSourceFromTemplate seomatic-imageSourcePicker">
-                {% include "_includes/forms/autosuggest" with {
-                    name: "seoImageTemplate",
-                    suggestions: craft.cp.getTemplateSuggestions(),
-                    value: metaBundleSettings.seoImageTemplate,
-                    disabled: false,
-                    placeholder: "Pick a template"|t("seomatic")
-                } only %}
+{############### SEO Image Transform ###############}
 
-            </div>
-        {% endnamespace %}
-    {% endif %}
-
-    {############### SEO Image Transform ###############}
-
-    <div class="field seomatic-imageSourceNotFromUrl seomatic-imageSourcePicker">
+    <div class="field seomatic-imageSourceNotFromUrl">
         <div class="field" {% if field is defined and 'seoImageTransform' not in field.generalEnabledFields %}style="display: none;"{% endif %}>
             {% namespace "metaBundleSettings" %}
                 {{ forms.lightswitchField({
@@ -132,7 +108,7 @@
     {% if pageContext == "field" %}
         {% set imageCropModes = { "": ""} | merge(imageCropModes) %}
     {% endif %}
-    <div class="field seomatic-imageSourceNotFromUrl seomatic-imageSourcePicker">
+    <div class="field seomatic-imageSourceNotFromUrl">
         <div class="field" {% if field is defined and 'seoImageTransformMode' not in field.generalEnabledFields %}style="display: none;"{% endif %}>
             {% namespace "metaBundleSettings" %}
                 {{ forms.selectField({
