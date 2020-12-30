@@ -14,8 +14,7 @@ namespace nystudio107\seomatic\jobs;
 use Craft;
 use craft\base\Element;
 use craft\helpers\ElementHelper;
-use craft\queue\BaseJob;
-use nystudio107\fastcgicachebust\FastcgiCacheBust;
+use nystudio107\seomatic\queue\SingletonJob;
 use nystudio107\seomatic\helpers\PullField;
 use nystudio107\seomatic\models\MetaBundleSettings;
 use nystudio107\seomatic\Seomatic;
@@ -26,7 +25,7 @@ use nystudio107\seomatic\services\Helper;
  * @package   Seomatic
  * @since     3.4.0
  */
-class GenerateElementSocialImages extends BaseJob
+class GenerateElementSocialImages extends SingletonJob
 {
     // Properties
     // =========================================================================
@@ -97,6 +96,8 @@ class GenerateElementSocialImages extends BaseJob
                 }
             }
         }
+
+        $this->finishJob();
     }
 
     // Protected Methods

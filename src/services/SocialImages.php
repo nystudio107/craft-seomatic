@@ -19,12 +19,11 @@ use craft\errors\VolumeException;
 use craft\helpers\Assets;
 use craft\helpers\ElementHelper;
 use craft\helpers\FileHelper;
+use nystudio107\seomatic\queue\SingletonJob;
 use nystudio107\seomatic\helpers\ImageTransform;
-use nystudio107\seomatic\helpers\PullField;
 use nystudio107\seomatic\helpers\Queue as QueueHelper;
 use nystudio107\seomatic\jobs\GenerateElementSocialImages;
 use nystudio107\seomatic\models\MetaBundle;
-use nystudio107\seomatic\models\MetaBundleSettings;
 use nystudio107\seomatic\Seomatic;
 use Spatie\Browsershot\Browsershot;
 
@@ -109,7 +108,7 @@ class SocialImages extends Component
      * @throws \Throwable
      * @throws \yii\base\Exception
      */
-    public function updateSocialImages(Element $element, $allSites = false, $instant = false)
+    public function updateSocialImagesForElement(Element $element, $allSites = false, $instant = false)
     {
         if ($element->getIsRevision() || $element->getIsDraft()) {
             return;
@@ -122,13 +121,14 @@ class SocialImages extends Component
             return;
         }
 
-        $queue = Craft::$app->getQueue();
+        $jobSignature = $element->id.'|'.(int)$allSites.'|'.$element->title;
 
-        $queue->push(new GenerateElementSocialImages([
+        $jobConfig = [
             'elementId' => $element->id,
             'allSites' => $allSites,
             'title' => $element->title,
-        ]));
+        ];
+        SingletonJob::enqueueJob(GenerateElementSocialImages::class, $jobConfig, $jobSignature);
 
         if ($instant) {
             QueueHelper::run();

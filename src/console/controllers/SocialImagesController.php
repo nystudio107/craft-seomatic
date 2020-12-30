@@ -140,7 +140,7 @@ class SocialImagesController extends Controller
 
         $this->stdout('Updating social images for element ', Console::FG_GREEN);
         $this->stdout($element->id . PHP_EOL, Console::FG_YELLOW);
-        $socialImages->updateSocialImages($element, true, true);
+        $socialImages->updateSocialImagesForElement($element, true, true);
 
         $this->stdout('done' . PHP_EOL, Console::FG_GREEN);
 
