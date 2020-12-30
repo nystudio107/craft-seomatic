@@ -147,8 +147,9 @@ class GenerateSitemap extends BaseJob
             // Stash the sitemap attributes so they can be modified on a per-entry basis
             $stashedSitemapAttrs = $metaBundle->metaSitemapVars->getAttributes();
             $stashedGlobalVarsAttrs = $metaBundle->metaGlobalVars->getAttributes();
-            // Use ActiveDataProvider to paginate the results so we don't exceed any memory limits
+            // Use craft\db\Paginator to paginate the results so we don't exceed any memory limits
             // See batch() and each() discussion here: https://github.com/yiisoft/yii2/issues/8420
+            // and here: https://github.com/craftcms/cms/issues/7338
             $paginator = new Paginator($seoElement::sitemapElementsQuery($metaBundle), [
                     'pageSize' => self::SITEMAP_QUERY_PAGE_SIZE,
             ]);
@@ -157,8 +158,7 @@ class GenerateSitemap extends BaseJob
             while ($currentElement < $totalElements) {
                 $elements = $paginator->getPageResults();
                 if (Craft::$app instanceof ConsoleApplication) {
-                    $pageNum = $paginator->getCurrentPage();
-                    echo 'Query ' . $pageNum . '/' . $paginator->getTotalPages()
+                    echo 'Query ' . $paginator->getCurrentPage() . '/' . $paginator->getTotalPages()
                         . ' - elements: ' . $paginator->getTotalResults()
                         . PHP_EOL;
                 }
