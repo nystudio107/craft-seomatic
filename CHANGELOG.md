@@ -1,5 +1,11 @@
 # SEOmatic Changelog
 
+## 3.3.29 - 2020.12.31
+### Changed
+* Renamed `common.js` -> `commons.js`, which is the correct name, and also will suppress it from appearing in the error logs
+* Switch from using `->each()` to using `craft\db\Paginator` to paginate asset query results, to address out of memory issues on massive queries
+* SEOmatic now requires Craft CMS 3.1.19 or later
+
 ## 3.3.28 - 2020.12.22
 ### Fixed
 * Fixed a regression that caused Script variables to not be parsed as environment variables
