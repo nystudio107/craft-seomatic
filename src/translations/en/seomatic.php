@@ -18,7 +18,6 @@ return [
     'Scenario: "' => 'Scenario: "',
     'The script that will render on the page. Note that this script will not render in `local` development or `staging` environments.' => 'The script that will render on the page. Note that this script will not render in `local` development or `staging` environments.',
     'App Card' => 'App Card',
-    'Twitter Site Name Position' => 'Twitter Site Name Position',
     'Controls whether SEOmatic will automatically add `X-Robots-Tag`, `canonical`, & `Referrer-Policy` to the http response headers.' => 'Controls whether SEOmatic will automatically add `X-Robots-Tag`, `canonical`, & `Referrer-Policy` to the http response headers.',
     'Product' => 'Product',
     'No Snippet - Do not show rich snippets from this page' => 'No Snippet - Do not show rich snippets from this page',
@@ -467,5 +466,6 @@ return [
     'Content Security Policy' => 'Content Security Policy',
     'Response Headers' => 'Response Headers',
     'Determines whether the SEO File Link endpoint should be enabled for anonymous frontend access' => 'Determines whether the SEO File Link endpoint should be enabled for anonymous frontend access',
-    'Meta Tags' => 'Meta Tags'
+    'Meta Tags' => 'Meta Tags',
+    'Twitter Site Name Position' => 'Twitter Site Name Position'
 ];
