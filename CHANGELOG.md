@@ -3,6 +3,7 @@
 ## 3.3.30 - UNRELEASED
 ### Changed
 * Make the canonical URL point to the current page for paginated links [ref](https://github.com/nystudio107/craft-seomatic/issues/804)
+* Run the queue via CLI command via `QueueHelper::runConsole()` to handle queues that don't conform to Craft's `QueueInterface`
 
 ## 3.3.29 - 2020.12.31
 ### Changed
