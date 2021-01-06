@@ -11,6 +11,7 @@ namespace nystudio107\seomatic\console\controllers;
 
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\helpers\Queue as QueueHelper;
 
 use Craft;
 use craft\helpers\App;
@@ -109,7 +110,7 @@ class SitemapController extends Controller
                         $metaBundle->sourceBundleType
                     );
                     if (!$this->queue) {
-                        Craft::$app->getQueue()->run();
+                        QueueHelper::runConsole();
                     }
                     echo '---'.PHP_EOL;
                 }
