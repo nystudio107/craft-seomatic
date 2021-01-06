@@ -57,7 +57,7 @@ class SocialImagesController extends Controller
     public function options($actionID): array
     {
         switch ($actionID) {
-            case 'invalidate-bundle':
+            case 'invalidate-bundle-images':
                 return ['bundleId', 'siteId'];
             case 'update-element':
                 return ['elementId'];
@@ -69,42 +69,21 @@ class SocialImagesController extends Controller
     /**
      * Invalidate social images for a meta bundle. You must provide the `bundleId` option, however, `siteId` is optional.
      */
-    public function actionInvalidateBundle()
+    public function actionInvalidateBundleImages()
     {
-        $all = false;
-        $matches = [];
+       $bundles = $this->_gatherBundles();
 
-        if (empty($this->bundleId)) {
-            $this->stdout('You must provide a bundle ID.' . PHP_EOL, Console::FG_RED);
-            return ExitCode::CONFIG;
-        }
-
-
-        if (StringHelper::toLowerCase($this->bundleId) === 'all') {
-            $siteMessage = $this->siteId ? ' in site ' . $this->siteId : '';
-            $this->stdout('Invalidating social images for all meta bundles' . $siteMessage . PHP_EOL, Console::FG_GREEN);
-            $all = true;
-        } else if (!preg_match('/([\w]+):([\d]+):([\d]+)(?::([\d]+))?/', $this->bundleId, $matches)) {
-            $this->stdout('Bundle ID is not in the correct form of `bundleType:sourceId:siteId:typeId`' . PHP_EOL, Console::FG_RED);
-            return ExitCode::CONFIG;
-        }
-
-        $seomatic = Seomatic::getInstance();
-        $metaBundles = $seomatic->metaBundles;
-        $socialImages = $seomatic->socialImages;
-
-        /** @var MetaBundle[] $bundles */
-        if ($all) {
-            $bundles = $metaBundles->getContentMetaBundlesForSiteId($this->siteId);
-        } else {
-            $bundle = $metaBundles->getMetaBundleBySourceId($matches[1], (int)$matches[2], (int)$matches[3], $matches[4] ?? null);
-            $bundles = $bundle ? [$bundle] : [];
-        }
+       // If it's actually an exit code
+       if (!is_array($bundles)) {
+           return $bundles;
+       }
 
         if (empty($bundles)) {
             $this->stdout('No matching bundles found.' . PHP_EOL, Console::FG_YELLOW);
             return ExitCode::CONFIG;
         }
+
+        $socialImages = Seomatic::getInstance()->socialImages;
 
         foreach ($bundles as $bundle) {
             $bundleId = $bundle->sourceBundleType . ':' . $bundle->sourceId . ':' . $bundle->sourceSiteId . ($bundle->typeId ? ':' . $bundle->typeId : '');
@@ -117,6 +96,44 @@ class SocialImagesController extends Controller
 
         return ExitCode::OK;
     }
+
+    /**
+     * Gather bundles based on CLI command options
+     *
+     * @return int|MetaBundle[]
+     */
+    private function _gatherBundles()
+    {
+        $all = false;
+        $matches = [];
+
+        if (empty($this->bundleId)) {
+            $this->stdout('You must provide a bundle ID.' . PHP_EOL, Console::FG_RED);
+            return ExitCode::CONFIG;
+        }
+
+        if (StringHelper::toLowerCase($this->bundleId) === 'all') {
+            $siteMessage = $this->siteId ? ' in site ' . $this->siteId : '';
+            $this->stdout('Invalidating social images for all meta bundles' . $siteMessage . PHP_EOL, Console::FG_GREEN);
+            $all = true;
+        } else if (!preg_match('/([\w]+):([\d]+):([\d]+)(?::([\d]+))?/', $this->bundleId, $matches)) {
+            $this->stdout('Bundle ID is not in the correct form of `bundleType:sourceId:siteId:typeId`' . PHP_EOL, Console::FG_RED);
+            return ExitCode::CONFIG;
+        }
+
+        $metaBundles = Seomatic::getInstance()->metaBundles;
+
+        /** @var MetaBundle[] $bundles */
+        if ($all) {
+            $bundles = $metaBundles->getContentMetaBundlesForSiteId($this->siteId);
+        } else {
+            $bundle = $metaBundles->getMetaBundleBySourceId($matches[1], (int)$matches[2], (int)$matches[3], $matches[4] ?? null);
+            $bundles = $bundle ? [$bundle] : [];
+        }
+
+        return $bundles;
+    }
+
     /**
      * Invalidate social images for an element. You can provide `siteId` option, otherwise all sites will be invalidated.
      */
