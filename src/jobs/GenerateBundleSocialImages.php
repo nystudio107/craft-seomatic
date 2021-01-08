@@ -14,6 +14,7 @@ namespace nystudio107\seomatic\jobs;
 use Craft;
 use craft\base\Element;
 use craft\helpers\ElementHelper;
+use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\queue\SingletonJob;
 use nystudio107\seomatic\helpers\PullField;
 use nystudio107\seomatic\models\MetaBundleSettings;
@@ -25,19 +26,14 @@ use nystudio107\seomatic\services\Helper;
  * @package   Seomatic
  * @since     3.4.0
  */
-class GenerateElementSocialImages extends SingletonJob
+class GenerateBundleSocialImages extends SingletonJob
 {
     // Properties
     // =========================================================================
     /**
-     * @var int Element id
+     * @var MetaBundle Meta bundle
      */
-    public $elementId;
-
-    /**
-     * @var bool Whether all sites for elements should have images re-generated.
-     */
-    public $allSites = false;
+    public $metaBundle;
 
     /**
      * @var string title for the job description
@@ -52,8 +48,6 @@ class GenerateElementSocialImages extends SingletonJob
      */
     public function execute($queue)
     {
-        $element = Craft::$app->getElements()->getElementById($this->elementId);
-        Seomatic::getInstance()->socialImages->updateSocialImagesForElement($element, $this->allSites);
 
         $this->finishJob();
     }

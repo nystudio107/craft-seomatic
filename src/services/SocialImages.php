@@ -19,6 +19,9 @@ use craft\errors\VolumeException;
 use craft\helpers\Assets;
 use craft\helpers\ElementHelper;
 use craft\helpers\FileHelper;
+use nystudio107\seomatic\helpers\PullField;
+use nystudio107\seomatic\jobs\GenerateBundleSocialImages;
+use nystudio107\seomatic\models\MetaBundleSettings;
 use nystudio107\seomatic\queue\SingletonJob;
 use nystudio107\seomatic\helpers\ImageTransform;
 use nystudio107\seomatic\helpers\Queue as QueueHelper;
@@ -99,16 +102,15 @@ class SocialImages extends Component
     }
 
     /**
-     * Update the social images for an element.
+     * Enqueue updating the social images for an element.
      *
      * @param Element $element
      * @param bool $allSites
-     * @param bool $instant
      *
      * @throws \Throwable
      * @throws \yii\base\Exception
      */
-    public function updateSocialImagesForElement(Element $element, $allSites = false, $instant = false)
+    public function enqueueUpdatingSocialImagesForElement(Element $element, $allSites = false)
     {
         if ($element->getIsRevision() || $element->getIsDraft()) {
             return;
@@ -121,18 +123,96 @@ class SocialImages extends Component
             return;
         }
 
-        $jobSignature = $element->id.'|'.(int)$allSites.'|'.$element->title;
+        $jobSignature = 'GenerateElementSocialImages' . $element->id.'|'.(int)$allSites.'|'.$element->title;
 
         $jobConfig = [
             'elementId' => $element->id,
             'allSites' => $allSites,
             'title' => $element->title,
         ];
-        SingletonJob::enqueueJob(GenerateElementSocialImages::class, $jobConfig, $jobSignature);
 
-        if ($instant) {
-            QueueHelper::run();
+        SingletonJob::enqueueJob(GenerateElementSocialImages::class, $jobConfig, $jobSignature);
+    }
+
+    /**
+     * Immediately update the social images for an element.
+     *
+     * @param Element $element
+     * @param bool $allSites
+     *
+     * @throws \Throwable
+     * @throws \yii\base\Exception
+     */
+    public function updateSocialImagesForElement(Element $element, $allSites = false)
+    {
+        $metaBundles = [];
+        /** @var Seomatic $seomatic */
+        $seomatic = Seomatic::getInstance();
+
+        if ($allSites) {
+            // Load up all meta bundles for all sites this element can work with
+            foreach (ElementHelper::supportedSitesForElement($element) as $site) {
+                $siteId = $site['siteId'];
+                $element->siteId = $siteId;
+                $metaBundles[$siteId] = $seomatic->metaBundles->getMetaBundleByElement($element);
+            }
+        } else {
+            $metaBundles[$element->siteId] = $seomatic->metaBundles->getMetaBundleByElement($element);
         }
+
+        $types = ['seoImage', 'ogImage', 'twitterImage'];
+
+        foreach ($metaBundles as $siteId => $metaBundle) {
+            if (!$metaBundle) {
+                continue;
+            }
+
+            $element->siteId = $siteId;
+            $processedSettings = [];
+
+            foreach ($types as $imageType) {
+                $settings = $this->extractSeoImageSettings($metaBundle->metaBundleSettings, $imageType);
+                if (is_array($settings)) {
+                    $hash = md5(json_encode($settings) . $siteId);
+
+                    if (!empty($processedSettings[$hash])) {
+                        continue;
+                    }
+
+                    $twigString = '{{ seomatic.helper.socialImage(object, "' . $settings['transformName'] . '", "' . $settings['template'] . '") }}';
+                    Craft::$app->getView()->renderObjectTemplate($twigString, $element);
+                    $processedSettings[$hash] = true;
+                }
+            }
+        }
+    }
+
+    /**
+     * Immediately update the social images for a meta bundle.
+     *
+     * @param MetaBundle $metaBundle
+     * @param bool $instant
+     *
+     * @throws \Throwable
+     * @throws \yii\base\Exception
+     */
+    public function updateSocialImagesForMetaBundle(MetaBundle $metaBundle, $instant = false)
+    {
+        // TODO
+    }
+
+    /**
+     * Enqueue updating the social images for a meta bundle.
+     *
+     * @param MetaBundle $metaBundle
+     * @param bool $instant
+     *
+     * @throws \Throwable
+     * @throws \yii\base\Exception
+     */
+    public function enqueueUpdatingSocialImagesForMetaBundle(MetaBundle $metaBundle, $instant = false)
+    {
+        // TODO
     }
 
     /**
@@ -286,5 +366,30 @@ class SocialImages extends Component
     protected function getSocialImageMetaBundleSubfolder(MetaBundle $metaBundle): string
     {
         return "{$metaBundle->sourceType}_{$metaBundle->sourceId}" . (!empty($metaBundle->typeId) ? "_{$metaBundle->typeId}" : '');
+    }
+
+    /**
+     * Extract seo image settings from bundle settings by the setting type name.
+     *
+     * @param MetaBundleSettings $settings
+     * @param string $settingName
+     * @return array|null
+     */
+    protected function extractSeoImageSettings(MetaBundleSettings $settings, string $settingName)
+    {
+        $source = $settings->{$settingName . 'Source'};
+
+        if ($source === 'sameAsSeo') {
+            return $this->extractSeoImageSettings($settings, 'seoImage');
+        }
+
+        if ($source !== 'fromTemplate') {
+            return null;
+        }
+
+        return [
+            'transformName' => $settingName === 'twitterImage' ? Helper::twitterTransform() : PullField::PULL_ASSET_FIELDS[$settingName]['transformName'],
+            'template' => $settings->{$settingName . 'Template'}
+        ];
     }
 }

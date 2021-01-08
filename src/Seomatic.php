@@ -561,7 +561,7 @@ class Seomatic extends Plugin
                 if ($event->isNew) {
                     self::$plugin->sitemaps->submitSitemapForElement($element);
                 }
-                self::$plugin->socialImages->updateSocialImagesForElement($element);
+                self::$plugin->socialImages->enqueueUpdatingSocialImagesForElement($element);
             }
         );
         // Handler: Elements::EVENT_AFTER_DELETE_ELEMENT
