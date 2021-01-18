@@ -60,8 +60,8 @@ Sites that are grouped together under the same Site Group will have `<link rel="
 
 If you want to disable SEOmatic's automatic rendering of these tags, you can do:
 ```twig
-{% do seomatic.link.get('alternate').include(false) %}
-{% do seomatic.link.get('og:locale:alternate').include(false) %}
+{% do seomatic.tag.get('alternate').include(false) %}
+{% do seomatic.tag.get('og:locale:alternate').include(false) %}
 ```
 
 Sites that are grouped together under the same Site Group will also be included in the appropriate sitemap indexes, and have `<xhtml:link rel="alternate" hreflang="xx-xx">` tags added to the respective sitemaps.
