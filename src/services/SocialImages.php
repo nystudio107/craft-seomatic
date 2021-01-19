@@ -297,7 +297,7 @@ class SocialImages extends Component
     /**
      * @return VolumeInterface|null
      */
-    protected function getSocialImageVolume(): VolumeInterface
+    protected function getSocialImageVolume()
     {
         $volume = Craft::$app->getVolumes()->getVolumeByUid(Seomatic::getInstance()->getSettings()->socialImageVolumeUid);
         return $volume;
