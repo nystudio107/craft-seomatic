@@ -167,7 +167,6 @@ class SocialImagesController extends Controller
      */
     private function _gatherBundles()
     {
-        $all = false;
         $matches = [];
 
         if (empty($this->bundleId)) {
@@ -175,25 +174,12 @@ class SocialImagesController extends Controller
             return ExitCode::CONFIG;
         }
 
-        if (StringHelper::toLowerCase($this->bundleId) === 'all') {
-            $siteMessage = $this->siteId ? ' in site ' . $this->siteId : '';
-            $this->stdout('Invalidating social images for all meta bundles' . $siteMessage . PHP_EOL, Console::FG_GREEN);
-            $all = true;
-        } else if (!preg_match('/([\w]+):([\d]+):([\d]+)(?::([\d]+))?/', $this->bundleId, $matches)) {
+        if (!preg_match('/([\w]+):([\d]+):([\d]+)(?::([\d]+))?/', $this->bundleId, $matches)) {
             $this->stdout('Bundle ID is not in the correct form of `bundleType:sourceId:siteId:typeId`' . PHP_EOL, Console::FG_RED);
             return ExitCode::CONFIG;
         }
 
         $metaBundles = Seomatic::getInstance()->metaBundles;
-
-        /** @var MetaBundle[] $bundles */
-        if ($all) {
-            $bundles = $metaBundles->getContentMetaBundlesForSiteId($this->siteId);
-        } else {
-            $bundle = $metaBundles->getMetaBundleBySourceId($matches[1], (int)$matches[2], (int)$matches[3], $matches[4] ?? null);
-            $bundles = $bundle ? [$bundle] : [];
-        }
-
-        return $bundles;
+        return [$metaBundles->getMetaBundleBySourceId($matches[1], (int)$matches[2], (int)$matches[3], $matches[4] ?? null)];
     }
 }

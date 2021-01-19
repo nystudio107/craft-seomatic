@@ -196,9 +196,16 @@ class SocialImages extends Component
      * @throws \Throwable
      * @throws \yii\base\Exception
      */
-    public function updateSocialImagesForMetaBundle(MetaBundle $metaBundle, $instant = false)
+    public function updateSocialImagesForMetaBundle(MetaBundle $metaBundle)
     {
-        // TODO
+        $seoElement = Seomatic::getInstance()->seoElements->getSeoElementByMetaBundleType($metaBundle->sourceBundleType);
+        $query = $seoElement::sitemapElementsQuery($metaBundle)->limit(null);
+        $elements = $query->all();
+
+        /** @var Element $element */
+        foreach ($elements as $element) {
+            $this->updateSocialImagesForElement($element);
+        }
     }
 
     /**
@@ -210,9 +217,23 @@ class SocialImages extends Component
      * @throws \Throwable
      * @throws \yii\base\Exception
      */
-    public function enqueueUpdatingSocialImagesForMetaBundle(MetaBundle $metaBundle, $instant = false)
+    public function enqueueUpdatingSocialImagesForMetaBundle(MetaBundle $metaBundle)
     {
-        // TODO
+        $sourceBundleType = $metaBundle->sourceBundleType;
+        $sourceId = $metaBundle->sourceId;
+        $sourceSiteId = $metaBundle->sourceSiteId;
+        $typeId = $metaBundle->typeId;
+        $jobSignature = 'GenerateBundleSocialImages' . $sourceBundleType .'|'.(int)$sourceId .'|'.(int)$sourceSiteId .'|'.(int)$typeId;
+
+        $jobConfig = [
+            'sourceBundleType' => $sourceBundleType,
+            'sourceId' => $sourceId,
+            'sourceSiteId' => $sourceSiteId,
+            'typeId' => $typeId,
+            'title' => $metaBundle->sourceName,
+        ];
+
+        SingletonJob::enqueueJob(GenerateBundleSocialImages::class, $jobConfig, $jobSignature);
     }
 
     /**

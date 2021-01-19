@@ -31,9 +31,24 @@ class GenerateBundleSocialImages extends SingletonJob
     // Properties
     // =========================================================================
     /**
-     * @var MetaBundle Meta bundle
+     * @var string
      */
-    public $metaBundle;
+    public $sourceBundleType;
+
+    /**
+     * @var int
+     */
+    public $sourceId;
+
+    /**
+     * @var int
+     */
+    public $sourceSiteId;
+
+    /**
+     * @var int
+     */
+    public $typeId;
 
     /**
      * @var string title for the job description
@@ -48,6 +63,12 @@ class GenerateBundleSocialImages extends SingletonJob
      */
     public function execute($queue)
     {
+        $seomatic = Seomatic::getInstance();
+        $metaBundle = $seomatic->metaBundles->getMetaBundleBySourceId($this->sourceBundleType, $this->sourceId, $this->sourceSiteId, $this->typeId);
+
+        if ($metaBundle) {
+            $seomatic->socialImages->updateSocialImagesForMetaBundle($metaBundle);
+        }
 
         $this->finishJob();
     }
