@@ -43,9 +43,11 @@ class SocialImages extends Component
      * @param Element $element
      * @param string $transformName
      * @param string $template
+     * @param bool $forceUpdate
      * @return string
+     * @throws \Throwable
      */
-    public function getSocialImageUrl(Element $element, $transformName = 'base', $template = ''): string
+    public function getSocialImageUrl(Element $element, $transformName = 'base', $template = '', $forceUpdate = false): string
     {
         $transformParameters = ImageTransform::getTransformParametersByName($transformName);
 
@@ -72,7 +74,7 @@ class SocialImages extends Component
 
         $fullPath = $volumePath . DIRECTORY_SEPARATOR . $imagePath;
 
-        if (!$volume->fileExists($fullPath)) {
+        if ($forceUpdate || !$volume->fileExists($fullPath)) {
             if (empty($template)) {
                 $metaBundle = $seomatic->metaBundles->getMetaBundleByElement($element);
 
@@ -179,7 +181,7 @@ class SocialImages extends Component
                         continue;
                     }
 
-                    $twigString = '{{ seomatic.helper.socialImage(object, "' . $settings['transformName'] . '", "' . $settings['template'] . '") }}';
+                    $twigString = '{{ seomatic.helper.socialImage(object, "' . $settings['transformName'] . '", "' . $settings['template'] . '", true) }}';
                     Craft::$app->getView()->renderObjectTemplate($twigString, $element);
                     $processedSettings[$hash] = true;
                 }
@@ -373,6 +375,8 @@ class SocialImages extends Component
             Craft::error($exception->getMessage(), 'seomatic');
             throw $exception;
         }
+
+        $volume->deleteFile($fullPath);
 
         $fileStream = fopen($tempPath, 'rb');
         $volume->createFileByStream($fullPath, $fileStream, [

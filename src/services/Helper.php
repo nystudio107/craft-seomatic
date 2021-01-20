@@ -429,12 +429,13 @@ class Helper extends Component
      * @param Element  $element the Element
      * @param string   $transformName the name of the transform to apply
      * @param string   $templatePath the template to use if different from configured.
+     * @param bool     $forceUpdate whether the image should be generated even if it exists already.
      *
      * @return string URL to the social image
      */
-    public function socialImage(Element $element, $transformName = 'base', $templatePath = ''): string
+    public function socialImage(Element $element, $transformName = 'base', $templatePath = '', $forceUpdate = false): string
     {
-        return Seomatic::getInstance()->socialImages->getSocialImageUrl($element, $transformName, $templatePath);
+        return Seomatic::getInstance()->socialImages->getSocialImageUrl($element, $transformName, $templatePath, $forceUpdate);
     }
 
 
