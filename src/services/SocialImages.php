@@ -367,7 +367,12 @@ class SocialImages extends Component
             $browserShot->setNodeModulePath($seomaticSettings->socialImagesNodeModulePath);
         }
 
-        $browserShot->save($tempPath);
+        try {
+            $browserShot->save($tempPath);
+        } catch (\Throwable $exception) {
+            Craft::error($exception->getMessage(), 'seomatic');
+            throw $exception;
+        }
 
         $fileStream = fopen($tempPath, 'rb');
         $volume->createFileByStream($fullPath, $fileStream, [
