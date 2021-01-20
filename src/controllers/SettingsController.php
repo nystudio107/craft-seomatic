@@ -623,7 +623,7 @@ class SettingsController extends Controller
             Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
 
             if (isset($existingSettings) && json_encode($existingSettings) !== json_encode($updatedSettings)) {
-                Seomatic::getInstance()->socialImages->invalidateSocialImagesForMetaBundle($metaBundle);
+                Seomatic::getInstance()->socialImages->enqueueUpdatingSocialImagesForMetaBundle($metaBundle);
             }
             Seomatic::$plugin->clearAllCaches();
             Craft::$app->getSession()->setNotice(Craft::t('seomatic', 'SEOmatic content settings saved.'));
