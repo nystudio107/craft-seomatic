@@ -29,6 +29,7 @@ use nystudio107\seomatic\jobs\GenerateElementSocialImages;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\Seomatic;
 use Spatie\Browsershot\Browsershot;
+use yii\base\InvalidConfigException;
 
 /**
  * @author    nystudio107
@@ -346,7 +347,13 @@ class SocialImages extends Component
     protected function createSocialImage(string $template, Element $element, $width, $height, VolumeInterface $volume, string $fullPath)
     {
         $view = Craft::$app->getView();
-        $templateContent = file_get_contents($view->resolveTemplate($template));
+        $templatePath = $view->resolveTemplate($template);
+
+        if (empty($templatePath)) {
+            throw new InvalidConfigException("Error creating social image - the template `$template` cannot be resolved");
+        }
+
+        $templateContent = file_get_contents($templatePath);
         $html = $view->renderObjectTemplate($templateContent, $element);
 
         $tempPath = Assets::tempFilePath(ImageTransform::DEFAULT_SOCIAL_FORMAT);
