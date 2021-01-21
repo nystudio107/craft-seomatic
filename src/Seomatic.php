@@ -579,6 +579,21 @@ class Seomatic extends Plugin
                     $element,
                     false
                 );
+                self::$plugin->socialImages->invalidateSocialImagesForElement($element);
+            }
+        );
+        // Handler: Elements::EVENT_AFTER_RESTORE_ELEMENT
+        Event::on(
+            Elements::class,
+            Elements::EVENT_AFTER_RESTORE_ELEMENT,
+            function (ElementEvent $event) {
+                Craft::debug(
+                    'Elements::EVENT_AFTER_RESTORE_ELEMENT',
+                    __METHOD__
+                );
+                /** @var  $element Element */
+                $element = $event->element;
+                self::$plugin->socialImages->enqueueUpdatingSocialImagesForElement($element);
             }
         );
         // Add social media preview targets on Craft 3.2 or later
