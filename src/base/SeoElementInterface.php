@@ -70,6 +70,15 @@ interface SeoElementInterface
     public static function sitemapElementsQuery(MetaBundle $metaBundle): ElementQueryInterface;
 
     /**
+     * Return an ElementQuery for the  elements in the given MetaBundle, narrowed down as much as possible.
+     *
+     * @param MetaBundle $metaBundle
+     *
+     * @return ElementQueryInterface
+     */
+    public static function metaBundleElementsQuery(MetaBundle  $metaBundle): ElementQueryInterface;
+
+    /**
      * Return an ElementInterface for the sitemap alt element for the given MetaBundle
      * and Element ID
      *

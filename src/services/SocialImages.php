@@ -202,7 +202,7 @@ class SocialImages extends Component
     public function updateSocialImagesForMetaBundle(MetaBundle $metaBundle)
     {
         $seoElement = Seomatic::getInstance()->seoElements->getSeoElementByMetaBundleType($metaBundle->sourceBundleType);
-        $query = $seoElement::sitemapElementsQuery($metaBundle)->limit(null);
+        $query = $seoElement::metaBundleElementsQuery($metaBundle);
         $elements = $query->all();
 
         /** @var Element $element */
