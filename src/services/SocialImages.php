@@ -163,30 +163,11 @@ class SocialImages extends Component
             $metaBundles[$element->siteId] = $seomatic->metaBundles->getMetaBundleByElement($element);
         }
 
-        $types = ['seoImage', 'ogImage', 'twitterImage'];
-
         foreach ($metaBundles as $siteId => $metaBundle) {
-            if (!$metaBundle) {
-                continue;
-            }
-
-            $element->siteId = $siteId;
-            $processedSettings = [];
-
-            foreach ($types as $imageType) {
-                $settings = $this->extractSeoImageSettings($metaBundle->metaBundleSettings, $imageType);
-                if (is_array($settings)) {
-                    $hash = md5(json_encode($settings) . $siteId);
-
-                    if (!empty($processedSettings[$hash])) {
-                        continue;
-                    }
-
-                    $twigString = '{{ seomatic.helper.socialImage(object, "' . $settings['transformName'] . '", "' . $settings['template'] . '", true) }}';
-                    Craft::$app->getView()->renderObjectTemplate($twigString, $element);
-                    $processedSettings[$hash] = true;
-                }
-            }
+            // Fetch element as many times as there are sites.
+            $element = Craft::$app->getElements()->getElementById($element->id, get_class($element), $siteId);
+            // Render the twig code to get this done.
+            $seomatic->metaContainers->previewMetaContainers($element->uri, $siteId, true);
         }
     }
 
