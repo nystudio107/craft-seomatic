@@ -106,7 +106,6 @@ class DynamicMeta
             // Set the the canonical URL to be the first page of the paginated pages
             // see: https://github.com/nystudio107/craft-seomatic/issues/375#issuecomment-488369209
             $url = $pageInfo->getPageUrl($pageInfo->currentPage);
-            $url = self::sanitizeUrl($url);
             if (!empty($url)) {
                 Seomatic::$seomaticVariable->meta->canonicalUrl = $url;
             }
