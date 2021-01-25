@@ -525,7 +525,8 @@ class DynamicMeta
             if (\count($siteLocalizedUrls) > 1 && $ogLocaleAlternate) {
                 $ogContentArray = [];
                 foreach ($siteLocalizedUrls as $siteLocalizedUrl) {
-                    if (!\in_array($siteLocalizedUrl['ogLanguage'], $ogContentArray, true)) {
+                    if (!\in_array($siteLocalizedUrl['ogLanguage'], $ogContentArray, true) &&
+                    Craft::$app->language !== $siteLocalizedUrl['language']) {
                         $ogContentArray[] = $siteLocalizedUrl['ogLanguage'];
                     }
                 }
