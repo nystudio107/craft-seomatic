@@ -105,8 +105,7 @@ class DynamicMeta
             Seomatic::$plugin->metaContainers->paginationPage = (string)$pageInfo->currentPage;
             // Set the the canonical URL to be the first page of the paginated pages
             // see: https://github.com/nystudio107/craft-seomatic/issues/375#issuecomment-488369209
-            $url = $pageInfo->getFirstUrl();
-            $url = self::sanitizeUrl($url);
+            $url = $pageInfo->getPageUrl($pageInfo->currentPage);
             if (!empty($url)) {
                 Seomatic::$seomaticVariable->meta->canonicalUrl = $url;
             }
@@ -525,7 +524,8 @@ class DynamicMeta
             if (\count($siteLocalizedUrls) > 1 && $ogLocaleAlternate) {
                 $ogContentArray = [];
                 foreach ($siteLocalizedUrls as $siteLocalizedUrl) {
-                    if (!\in_array($siteLocalizedUrl['ogLanguage'], $ogContentArray, true)) {
+                    if (!\in_array($siteLocalizedUrl['ogLanguage'], $ogContentArray, true) &&
+                    Craft::$app->language !== $siteLocalizedUrl['language']) {
                         $ogContentArray[] = $siteLocalizedUrl['ogLanguage'];
                     }
                 }
