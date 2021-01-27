@@ -166,6 +166,15 @@ class SeoSettings extends Field implements PreviewableFieldInterface
 
     /**
      * @inheritdoc
+     * @since 2.0.0
+     */
+    public function useFieldset(): bool
+    {
+        return true;
+    }
+
+    /**
+     * @inheritdoc
      */
     public function normalizeValue($value, ElementInterface $element = null)
     {
