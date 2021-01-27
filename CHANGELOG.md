@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.31 - UNRELEASED
+### Changed
+* Implemented `useFieldset` for Craft 3.6
+
 ## 3.3.30 - 2021.01.26
 ### Changed
 * Make the canonical URL point to the current page for paginated links [ref](https://github.com/nystudio107/craft-seomatic/issues/804)
