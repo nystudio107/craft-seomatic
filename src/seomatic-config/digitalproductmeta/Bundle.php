@@ -19,7 +19,7 @@ use nystudio107\seomatic\seoelements\SeoDigitalProduct;
  */
 
 return [
-    'bundleVersion'              => '1.0.31',
+    'bundleVersion'              => '1.0.32',
     'sourceBundleType'           => SeoDigitalProduct::getMetaBundleType(),
     'sourceId'                   => null,
     'sourceName'                 => null,
