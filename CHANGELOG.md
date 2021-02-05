@@ -5,6 +5,7 @@
 * Implemented `useFieldset` for Craft 3.6
 
 ### Fixed
+* Explicitly parse the seomatic.site.identity.genericUrl so that aliases & environment variables are parsed
 * Fixed an issue with PHP 8 and `array_walk_recursive()` wanting the second parameter to _not_ be passed by reference (opposite of what the error message states)
 
 ## 3.3.30 - 2021.01.26
