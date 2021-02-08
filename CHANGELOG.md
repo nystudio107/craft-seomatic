@@ -1,5 +1,14 @@
 # SEOmatic Changelog
 
+## 3.3.31 - 2021.02.08
+### Changed
+* Implemented `useFieldset` for Craft 3.6
+
+### Fixed
+* Explicitly parse the `seomatic.site.identity.genericUrl` so that aliases & environment variables are parsed
+* Fixed an issue with PHP 8 and `array_walk_recursive()` wanting the second parameter to _not_ be passed by reference (opposite of what the error message states)
+* Fix Feed Me mapping and asset-creation
+
 ## 3.3.30 - 2021.01.26
 ### Changed
 * Make the canonical URL point to the current page for paginated links [ref](https://github.com/nystudio107/craft-seomatic/issues/804)

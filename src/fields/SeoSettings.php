@@ -166,6 +166,15 @@ class SeoSettings extends Field implements PreviewableFieldInterface
 
     /**
      * @inheritdoc
+     * @since 2.0.0
+     */
+    public function useFieldset(): bool
+    {
+        return true;
+    }
+
+    /**
+     * @inheritdoc
      */
     public function normalizeValue($value, ElementInterface $element = null)
     {
@@ -276,7 +285,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
                 $value = StringHelper::encodeMb4($value);
             }
             if (\is_array($value)) {
-                array_walk_recursive($value, function (&$arrayValue, &$arrayKey) {
+                array_walk_recursive($value, function (&$arrayValue, $arrayKey) {
                     if ($arrayValue !== null && \is_string($arrayValue)) {
                         $arrayValue = StringHelper::encodeMb4($arrayValue);
                     }

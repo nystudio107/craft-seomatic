@@ -37,13 +37,13 @@ return [
                 'mainEntityOfPage' => '{seomatic.meta.canonicalUrl}',
                 'inLanguage'       => '{seomatic.meta.language}',
                 'copyrightHolder'  => [
-                    'id' => '{seomatic.site.identity.genericUrl}#identity',
+                    'id' => '{parseEnv(seomatic.site.identity.genericUr)l}#identity',
                 ],
                 'author'           => [
-                    'id' => '{seomatic.site.identity.genericUrl}#identity',
+                    'id' => '{parseEnv(seomatic.site.identity.genericUrl)}#identity',
                 ],
                 'creator'          => [
-                    'id' => '{seomatic.site.creator.genericUrl}#creator',
+                    'id' => '{parseEnv(seomatic.site.creator.genericUrl)}#creator',
                 ],
                 'image'            => [
                     'type' => 'ImageObject',
@@ -57,7 +57,7 @@ return [
             ],
             'identity'         => [
                 'type'          => '{seomatic.site.identity.computedType}',
-                'id'            => '{seomatic.site.identity.genericUrl}#identity',
+                'id'            => '{parseEnv(seomatic.site.identity.genericUrl)}#identity',
                 'name'          => '{seomatic.site.identity.genericName}',
                 'alternateName' => '{seomatic.site.identity.genericAlternateName}',
                 'description'   => '{seomatic.site.identity.genericDescription}',
@@ -114,7 +114,7 @@ return [
             ],
             'creator'          => [
                 'type'          => '{seomatic.site.creator.computedType}',
-                'id'            => '{seomatic.site.creator.genericUrl}#creator',
+                'id'            => '{parseEnv(seomatic.site.creator.genericUrl)}#creator',
                 'name'          => '{seomatic.site.creator.genericName}',
                 'alternateName' => '{seomatic.site.creator.genericAlternateName}',
                 'description'   => '{seomatic.site.creator.genericDescription}',
