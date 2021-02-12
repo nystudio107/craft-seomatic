@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.33 - UNRELEASED
+### Fixed
+* No longer include any `<body>` script tags (as in Google Tag Manager) if the entire script meta container is excluded
+
 ## 3.3.32 - 2021.02.12
 ### Fixed
 * Fixed a typo in the global JsonLDContainer that caused errors to be generated
