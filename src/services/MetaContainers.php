@@ -263,12 +263,14 @@ class MetaContainers extends Component
                 $scriptContainers = $this->getContainersOfType(MetaScriptContainer::CONTAINER_TYPE);
                 foreach ($scriptContainers as $scriptContainer) {
                     /** @var MetaScriptContainer $scriptContainer */
-                    if ($scriptContainer->prepForInclusion()) {
-                        foreach ($scriptContainer->data as $metaScript) {
-                            /** @var MetaScript $metaScript */
-                            if (!empty($metaScript->bodyTemplatePath)
-                                && ((int)$metaScript->bodyPosition === $bodyPosition)) {
-                                $scriptData[] = $metaScript->renderBodyHtml();
+                    if ($scriptContainer->include) {
+                        if ($scriptContainer->prepForInclusion()) {
+                            foreach ($scriptContainer->data as $metaScript) {
+                                /** @var MetaScript $metaScript */
+                                if (!empty($metaScript->bodyTemplatePath)
+                                    && ((int)$metaScript->bodyPosition === $bodyPosition)) {
+                                    $scriptData[] = $metaScript->renderBodyHtml();
+                                }
                             }
                         }
                     }
