@@ -37,7 +37,7 @@ return [
                 'mainEntityOfPage' => '{seomatic.meta.canonicalUrl}',
                 'inLanguage'       => '{seomatic.meta.language}',
                 'copyrightHolder'  => [
-                    'id' => '{parseEnv(seomatic.site.identity.genericUr)l}#identity',
+                    'id' => '{parseEnv(seomatic.site.identity.genericUrl)}#identity',
                 ],
                 'author'           => [
                     'id' => '{parseEnv(seomatic.site.identity.genericUrl)}#identity',

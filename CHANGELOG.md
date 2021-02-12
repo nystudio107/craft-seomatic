@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.32 - 2021.02.12
+### Fixed
+* Fixed a typo in the global JsonLDContainer that caused errors to be generated
+
 ## 3.3.31 - 2021.02.08
 ### Changed
 * Implemented `useFieldset` for Craft 3.6
