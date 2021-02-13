@@ -3,6 +3,7 @@
 ## 3.3.33 - UNRELEASED
 ### Fixed
 * No longer include any `<body>` script tags (as in Google Tag Manager) if the entire script meta container is excluded
+* The `og:locale` tag no longer shows the wrong language for headless requests
 
 ## 3.3.32 - 2021.02.12
 ### Fixed
