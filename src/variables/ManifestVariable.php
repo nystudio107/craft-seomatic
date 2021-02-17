@@ -2,12 +2,14 @@
 
 namespace nystudio107\seomatic\variables;
 
-use craft\helpers\Template;
 use nystudio107\seomatic\helpers\Manifest as ManifestHelper;
 
-use Twig\Markup;
+use craft\helpers\Template;
+
 use yii\base\InvalidConfigException;
 use yii\web\NotFoundHttpException;
+
+use Twig\Markup;
 
 class ManifestVariable
 {
