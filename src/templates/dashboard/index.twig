@@ -2,8 +2,6 @@
 
 {% extends 'seomatic/_layouts/seomatic-cp.twig' %}
 
-{% from 'seomatic/_includes/macros.twig' import registerJsModules %}
-
 {% set linkGetStarted = url('seomatic/global') %}
 
 {% do view.registerAssetBundle("nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset") %}
@@ -11,10 +9,9 @@
 
 {% block foot %}
     {{ parent() }}
-    {% set jsModules = [
+    {{ seomatic.manifest.registerJsModules([
         'dashboard.js',
-    ] %}
-    {{ registerJsModules(jsModules) }}
+    ]) }}
 {% endblock %}
 
 {% block contextMenu %}

@@ -1,20 +1,19 @@
 {% extends "_layouts/cp" %}
 
-{% from 'seomatic/_includes/macros.twig' import registerJsModules %}
-
 {% block head %}
     {{ parent() }}
-    {{ seomatic.manifest.includeCssModule("vendors.css", false) }}
-    {{ seomatic.manifest.includeCssModule("styles.css", false) }}
+    {{ seomatic.manifest.registerCssModules([
+        'vendors.css',
+        'styles.css',
+    ]) }}
 {% endblock %}
 
 {% block foot %}
     {{ parent() }}
-    {% set jsModules = [
+    {{ seomatic.manifest.registerJsModules([
         'runtime.js',
         'vendors.js',
         'commons.js',
         'seomatic.js',
-    ] %}
-    {{ registerJsModules(jsModules) }}
+    ]) }}
 {% endblock %}
