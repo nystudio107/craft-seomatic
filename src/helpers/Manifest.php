@@ -147,6 +147,8 @@ class Manifest
     }
 
     /**
+     * Get the passed in JS module from the manifest, then output a `<script src="">` tag for it in the HTML
+     *
      * @param string $moduleName
      * @param bool   $async
      *
@@ -177,6 +179,8 @@ class Manifest
     }
 
     /**
+     * Get the passed in CS module from the manifest, then output a `<link>` tag for it in the HTML
+     *
      * @param string $moduleName
      * @param bool   $async
      *
