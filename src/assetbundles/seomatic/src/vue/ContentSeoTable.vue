@@ -28,12 +28,12 @@
 </template>
 
 <script>
-    import FieldDefs from './ContentSeoFieldDefs.js';
-    import ContentSeoUrl from './ContentSeoUrl.vue';
+    import FieldDefs from '@vue/ContentSeoFieldDefs.js';
+    import ContentSeoUrl from '@vue/ContentSeoUrl.vue';
     import VueTable from 'vuetable-2/src/components/Vuetable.vue';
-    import VueTablePagination from './VuetablePagination.vue';
-    import VueTablePaginationInfo from './VuetablePaginationInfo.vue';
-    import VueTableFilterBar from './VuetableFilterBar.vue';
+    import VueTablePagination from '@vue/VuetablePagination.vue';
+    import VueTablePaginationInfo from '@vue/VuetablePaginationInfo.vue';
+    import VueTableFilterBar from '@vue/VuetableFilterBar.vue';
 
     Vue.component('content-seo-url', ContentSeoUrl);
     // Our component exports

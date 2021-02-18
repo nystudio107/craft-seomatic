@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import PaginationInfoMixin from './VuetablePaginationInfoMixin.vue'
+import PaginationInfoMixin from '@vue/VuetablePaginationInfoMixin.vue'
 
 export default {
   mixins: [PaginationInfoMixin],

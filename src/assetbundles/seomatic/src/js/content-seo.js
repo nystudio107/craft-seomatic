@@ -1,5 +1,5 @@
 import VueEvents from 'vue-events';
-import ContentSeoTable from '../vue/ContentSeoTable.vue';
+import ContentSeoTable from '@vue/ContentSeoTable.vue';
 
 Vue.use(VueEvents);
 // Create our vue instance
