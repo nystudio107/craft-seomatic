@@ -25,7 +25,7 @@ module.exports = {
     extensions: ['.ts', '.js', '.vue', '.json'],
     name: 'seomatic',
     paths: {
-        dist: path.resolve('../../src/assetbundles/seomatic/dist/'),
+        dist: path.resolve('../src/assetbundles/seomatic/dist/'),
     },
     urls: {
         publicPath: () => process.env.PUBLIC_PATH || '',
