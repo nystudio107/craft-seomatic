@@ -1,6 +1,6 @@
-import Confetti from '../vue/Confetti.vue';
-import DashboardMultiRadialChart from '../vue/DashboardMultiRadialChart.vue';
-import DashboardRadialChart from '../vue/DashboardRadialChart.vue';
+import Confetti from '@/vue/Confetti.vue';
+import DashboardMultiRadialChart from '@/vue/DashboardMultiRadialChart.vue';
+import DashboardRadialChart from '@/vue/DashboardRadialChart.vue';
 
 // Create our vue instance
 const vm = new Vue({

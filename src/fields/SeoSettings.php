@@ -15,6 +15,7 @@ use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
+use nystudio107\seomatic\helpers\Manifest as ManifestHelper;
 use nystudio107\seomatic\helpers\Migration as MigrationHelper;
 use nystudio107\seomatic\helpers\PullField as PullFieldHelper;
 use nystudio107\seomatic\helpers\Schema as SchemaHelper;
@@ -30,12 +31,10 @@ use craft\base\PreviewableFieldInterface;
 use craft\elements\Asset;
 use craft\helpers\Json;
 use craft\helpers\StringHelper;
-use craft\web\assets\cp\CpAsset;
 
 use yii\base\InvalidConfigException;
 use yii\caching\TagDependency;
 use yii\db\Schema;
-use yii\web\NotFoundHttpException;
 
 /**
  * @author    nystudio107
@@ -305,11 +304,11 @@ class SeoSettings extends Field implements PreviewableFieldInterface
         // JS/CSS modules
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
-            $this->registerCssModules([
+            ManifestHelper::registerCssModules([
                 'styles.css',
                 'vendors.css',
             ]);
-            $this->registerJsModules([
+            ManifestHelper::registerJsModules([
                 'runtime.js',
                 'vendors.js',
                 'commons.js',
@@ -348,11 +347,11 @@ class SeoSettings extends Field implements PreviewableFieldInterface
         // JS/CSS modules
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
-            $this->registerCssModules([
+            ManifestHelper::registerCssModules([
                 'styles.css',
                 'vendors.css',
             ]);
-            $this->registerJsModules([
+            ManifestHelper::registerJsModules([
                 'runtime.js',
                 'vendors.js',
                 'commons.js',
@@ -511,49 +510,5 @@ class SeoSettings extends Field implements PreviewableFieldInterface
                 false
             )
         );
-    }
-
-    /**
-     * Register CSS modules so they can be run through webpack-dev-server
-     *
-     * @param array $modules
-     */
-    protected function registerCssModules(array $modules)
-    {
-        foreach ($modules as $moduleName) {
-            try {
-                $module = Seomatic::$seomaticVariable->manifest->getModuleUri($moduleName);
-            } catch (NotFoundHttpException $e) {
-                Craft::error($e->getMessage(), __METHOD__);
-                $module = null;
-            }
-            if ($module) {
-                Seomatic::$view->registerCssFile($module, [
-                    'depends' => CpAsset::class,
-                ]);
-            }
-        }
-    }
-
-    /**
-     * Register JavaScript modules so they can be run through webpack-dev-server
-     *
-     * @param array $modules
-     */
-    protected function registerJsModules(array $modules)
-    {
-        foreach ($modules as $moduleName) {
-            try {
-                $module = Seomatic::$seomaticVariable->manifest->getModuleUri($moduleName);
-            } catch (NotFoundHttpException $e) {
-                Craft::error($e->getMessage(), __METHOD__);
-                $module = null;
-            }
-            if ($module) {
-                Seomatic::$view->registerJsFile($module, [
-                    'depends' => CpAsset::class,
-                ]);
-            }
-        }
     }
 }

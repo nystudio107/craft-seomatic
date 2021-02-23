@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Json;
+use nystudio107\seomatic\helpers\Localization as LocalizationHelper;
 use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
@@ -263,12 +264,14 @@ class MetaContainers extends Component
                 $scriptContainers = $this->getContainersOfType(MetaScriptContainer::CONTAINER_TYPE);
                 foreach ($scriptContainers as $scriptContainer) {
                     /** @var MetaScriptContainer $scriptContainer */
-                    if ($scriptContainer->prepForInclusion()) {
-                        foreach ($scriptContainer->data as $metaScript) {
-                            /** @var MetaScript $metaScript */
-                            if (!empty($metaScript->bodyTemplatePath)
-                                && ((int)$metaScript->bodyPosition === $bodyPosition)) {
-                                $scriptData[] = $metaScript->renderBodyHtml();
+                    if ($scriptContainer->include) {
+                        if ($scriptContainer->prepForInclusion()) {
+                            foreach ($scriptContainer->data as $metaScript) {
+                                /** @var MetaScript $metaScript */
+                                if (!empty($metaScript->bodyTemplatePath)
+                                    && ((int)$metaScript->bodyPosition === $bodyPosition)) {
+                                    $scriptData[] = $metaScript->renderBodyHtml();
+                                }
                             }
                         }
                     }
@@ -404,6 +407,14 @@ class MetaContainers extends Component
         $home = Seomatic::$seomaticVariable->link->get('home');
         if ($home !== null) {
             $home->href = $homeUrl;
+        }
+        // The current language may _not_ match the current site, if we're headless
+        $ogLocale = Seomatic::$seomaticVariable->tag->get('og:locale');
+        if ($ogLocale !== null && $siteId !== null) {
+            $site = Craft::$app->getSites()->getSiteById($siteId);
+            if ($site !== null) {
+                $ogLocale->content = LocalizationHelper::normalizeOgLocaleLanguage($site->language);
+            }
         }
         // Update seomatic.meta.canonicalUrl when previewing meta containers
         $this->metaGlobalVars->canonicalUrl = $canonicalUrl;
