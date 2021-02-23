@@ -146,7 +146,7 @@ class SeomaticVariable extends ServiceLocator
      */
     public function getEnvironment()
     {
-        return Seomatic::$environment;
+        return Craft::parseEnv(Seomatic::$environment);
     }
 
     /**
@@ -163,6 +163,10 @@ class SeomaticVariable extends ServiceLocator
         }
         $env = Seomatic::$environment;
         $settingsUrl = UrlHelper::cpUrl('seomatic/plugin');
+        $general = Craft::$app->getConfig()->getGeneral();
+        if (!$general->allowAdminChanges) {
+            $settingsUrl = '';
+        }
         // If they've manually overridden the environment, just return it
         if (EnvironmentHelper::environmentOverriddenByConfig()) {
             return Craft::t('seomatic', 'This is overridden by the `config/seomatic.php` config setting',
