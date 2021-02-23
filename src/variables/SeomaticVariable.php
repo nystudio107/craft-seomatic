@@ -181,6 +181,9 @@ class SeomaticVariable extends ServiceLocator
         }
         // Try to also check the `ENVIRONMENT` env var
         $envVar = getenv('ENVIRONMENT');
+        if (Seomatic::$settings->manuallySetEnvironment) {
+            $envVar = $settingsEnv;
+        }
         if (!empty($envVar)) {
             $env = EnvironmentHelper::determineEnvironment();
             switch ($env) {

@@ -77,6 +77,9 @@ class Environment
         }
         // Try to also check the `ENVIRONMENT` env var
         $environment = getenv('ENVIRONMENT');
+        if (Seomatic::$settings->manuallySetEnvironment) {
+            $environment = '';
+        }
         if (!empty($environment)) {
             $environment = strtolower($environment);
             // See if the environment matches a development environment

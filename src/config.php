@@ -50,6 +50,9 @@ return [
     // Should SEOmatic add to the http response headers?
     'headersEnabled' => true,
 
+    // Whether the environment should be manually set, or automatically determined
+    'manuallySetEnvironment' => false,
+
     // The server environment, either `live`, `staging`, or `local`
     'environment' => 'live',
 
