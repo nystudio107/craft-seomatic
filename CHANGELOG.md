@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
-## 3.3.33 - UNRELEASED
+## 3.3.33 - 2021.02.23
+### Added
+* Added a **Manually Set SEOmatic Environment** setting (defaults to off) for people who want to manually set the SEOmatic environment via environment variable
+
 ### Changed
 * Updated build system infra
 * Parse the SEOmatic Environment as a variable before displaying it on the dashboard
