@@ -3,10 +3,12 @@
 ## 3.3.33 - UNRELEASED
 ### Changed
 * Updated build system infra
+* Parse the SEOmatic Environment as a variable before displaying it on the dashboard
 
 ### Fixed
 * No longer include any `<body>` script tags (as in Google Tag Manager) if the entire script meta container is excluded
 * The `og:locale` tag no longer shows the wrong language for headless requests
+* Don't link to the settings page if `allowAdminChanges` is `false`
 
 ## 3.3.32 - 2021.02.12
 ### Fixed
