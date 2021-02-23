@@ -5,7 +5,7 @@
             <vuetable-pagination-info ref="paginationInfoTop"
             ></vuetable-pagination-info>
             <vuetable-pagination ref="paginationTop"
-                                 @/vuetable-pagination:change-page="onChangePage"
+                                 @vuetable-pagination:change-page="onChangePage"
             ></vuetable-pagination>
         </div>
         <vuetable ref="vuetable"
@@ -15,13 +15,13 @@
                   :css="css"
                   :sort-order="sortOrder"
                   :append-params="moreParams"
-                  @/vuetable:pagination-data="onPaginationData"
+                  @vuetable:pagination-data="onPaginationData"
         ></vuetable>
         <div class="vuetable-pagination clearafter">
             <vuetable-pagination-info ref="paginationInfo"
             ></vuetable-pagination-info>
             <vuetable-pagination ref="pagination"
-                                 @/vuetable-pagination:change-page="onChangePage"
+                                 @vuetable-pagination:change-page="onChangePage"
             ></vuetable-pagination>
         </div>
     </div>
