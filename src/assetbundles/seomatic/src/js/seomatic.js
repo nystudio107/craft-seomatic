@@ -15,9 +15,9 @@
  */
 
 // CSS
-import '@css/app.pcss';
+import '@/css/app.pcss';
 
 // Images
-import '@img/Seomatic-icon.svg';
-import '@img/missing_image.png';
-import '@img/no_image_set.png';
+import '@/img/Seomatic-icon.svg';
+import '@/img/missing_image.png';
+import '@/img/no_image_set.png';
