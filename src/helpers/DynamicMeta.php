@@ -615,7 +615,7 @@ class DynamicMeta
         $elements = Craft::$app->getElements();
         foreach ($sites as $site) {
             $includeUrl = true;
-            $matchedElement = $elements->getElementByUri($requestUri, $thisSite->id);
+            $matchedElement = $elements->getElementByUri($requestUri, $thisSite->id, true);
             if ($matchedElement) {
                 $url = $elements->getElementUriForSite($matchedElement->getId(), $site->id);
                 // See if they have disabled sitemaps or robots for this entry,
