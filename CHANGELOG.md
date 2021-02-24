@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.34 - UNRELEASED
+### Changed
+* Only include localized versions of elements that are enabled for hreflang tags
+
 ## 3.3.33 - 2021.02.23
 ### Added
 * Added a **Manually Set SEOmatic Environment** setting (defaults to off) for people who want to manually set the SEOmatic environment via environment variable
