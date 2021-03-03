@@ -15,7 +15,6 @@ use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
-use nystudio107\seomatic\helpers\Manifest as ManifestHelper;
 use nystudio107\seomatic\helpers\Migration as MigrationHelper;
 use nystudio107\seomatic\helpers\PullField as PullFieldHelper;
 use nystudio107\seomatic\helpers\Schema as SchemaHelper;
@@ -304,11 +303,11 @@ class SeoSettings extends Field implements PreviewableFieldInterface
         // JS/CSS modules
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
-            ManifestHelper::registerCssModules([
+            Seomatic::$plugin->manifest->registerCssModules([
                 'styles.css',
                 'vendors.css',
             ]);
-            ManifestHelper::registerJsModules([
+            Seomatic::$plugin->manifest->registerJsModules([
                 'runtime.js',
                 'vendors.js',
                 'commons.js',
@@ -347,11 +346,11 @@ class SeoSettings extends Field implements PreviewableFieldInterface
         // JS/CSS modules
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
-            ManifestHelper::registerCssModules([
+            Seomatic::$plugin->manifest->registerCssModules([
                 'styles.css',
                 'vendors.css',
             ]);
-            ManifestHelper::registerJsModules([
+            Seomatic::$plugin->manifest->registerJsModules([
                 'runtime.js',
                 'vendors.js',
                 'commons.js',
