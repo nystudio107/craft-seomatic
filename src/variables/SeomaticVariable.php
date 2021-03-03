@@ -127,6 +127,12 @@ class SeomaticVariable extends ServiceLocator
         if ($this->sitemap === null || $replaceVars) {
             $this->sitemap = Seomatic::$plugin->metaContainers->metaSitemapVars;
         }
+        if ($this->containers === null || $replaceVars) {
+            $this->containers = Seomatic::$plugin->metaContainers;
+        }
+        if ($this->bundles === null || $replaceVars) {
+            $this->bundles = Seomatic::$plugin->metaBundles;
+        }
         // Set the config settings, parsing the environment if its a frontend request
         $configSettings = Seomatic::$settings;
         if (!$replaceVars && !Craft::$app->getRequest()->getIsCpRequest()) {
