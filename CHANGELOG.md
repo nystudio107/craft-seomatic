@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.35 - 2021.03.03
+### Fixed
+* Fixed a regression with SEO Settings fields using the old `ManifestHelper`
+
 ## 3.3.34 - 2021.03.03
 ### Added
 * Added `seomatic.containers` to allow access to the `MetaContainers` service via Twig
