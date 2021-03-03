@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.3.34 - UNRELEASED
+## 3.3.34 - 2021.03.03
 ### Added
 * Added `seomatic.containers` to allow access to the `MetaContainers` service via Twig
 * Added `seomatic.bundles` to allow access to the `MetaBundles` service via Twig
