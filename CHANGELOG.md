@@ -1,6 +1,10 @@
 # SEOmatic Changelog
 
 ## 3.3.34 - UNRELEASED
+### Added
+* Added `seomatic.containers` to allow access to the `MetaContainers` service via Twig
+* Added `seomatic.bundles` to allow access to the `MetaBundles` service via Twig
+
 ### Changed
 * Only include localized versions of elements that are enabled for hreflang tags
 * Dockerized the buildchain, using `craft-plugin-manifest` for the webpack HMR bridge
