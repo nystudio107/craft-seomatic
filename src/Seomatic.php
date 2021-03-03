@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic;
 
+use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
 use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
 use nystudio107\seomatic\gql\arguments\SeomaticArguments;
@@ -36,6 +37,8 @@ use nystudio107\seomatic\services\Tag as TagService;
 use nystudio107\seomatic\services\Title as TitleService;
 use nystudio107\seomatic\twigextensions\SeomaticTwigExtension;
 use nystudio107\seomatic\variables\SeomaticVariable;
+
+use nystudio107\pluginmanifest\services\ManifestService;
 
 use nystudio107\fastcgicachebust\FastcgiCacheBust;
 
@@ -98,6 +101,7 @@ use yii\base\Event;
  * @property  SitemapsService          $sitemaps
  * @property  TagService               $tag
  * @property  TitleService             $title
+ * @property ManifestService           $manifest
  */
 class Seomatic extends Plugin
 {
@@ -429,6 +433,14 @@ class Seomatic extends Plugin
      */
     protected function installEventListeners()
     {
+        // Register the manifest service
+        $this->set('manifest', [
+            'class' => ManifestService::class,
+            'assetClass' => SeomaticAsset::class,
+            'devServerManifestPath' => 'http://seomatic-buildchain:8080/',
+            'devServerPublicPath' => 'http://seomatic-buildchain:8080/',
+        ]);
+
         // Install our event listeners only if our table schema exists
         if ($this->migrationsAndSchemaReady()) {
             // Add in our Twig extensions

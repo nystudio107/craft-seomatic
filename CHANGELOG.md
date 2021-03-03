@@ -3,6 +3,7 @@
 ## 3.3.34 - UNRELEASED
 ### Changed
 * Only include localized versions of elements that are enabled for hreflang tags
+* Dockerized the buildchain, using `craft-plugin-manifest` for the webpack HMR bridge
 
 ## 3.3.33 - 2021.02.23
 ### Added
