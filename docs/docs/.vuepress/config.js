@@ -2,7 +2,6 @@ module.exports = {
     title: 'SEOmatic Documentation',
     description: 'Documentation for the SEOmatic plugin',
     base: '/docs/seomatic/',
-    dest: '../../../sites/nystudio107/web/docs/seomatic',
     themeConfig: {
         displayAllHeaders: true,
         sidebar: [
