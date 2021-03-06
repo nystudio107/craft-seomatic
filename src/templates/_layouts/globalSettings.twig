@@ -1,20 +1,17 @@
 {% extends "seomatic/_layouts/seomatic-cp.twig" %}
 
-{% from 'seomatic/_includes/macros.twig' import registerJsModules %}
-
 {% block head %}
     {{ parent() }}
 {% endblock %}
 
 {% block foot %}
     {{ parent() }}
-    {% set jsModules = [
+    {{ seomatic.manifest.registerJsModules([
         'vendors~seomatic-tokens.js',
         'vendors~seomatic-meta.js',
         'seomatic-tokens.js',
         'seomatic-meta.js',
-    ] %}
-    {{ registerJsModules(jsModules) }}
+    ]) }}
 {% endblock %}
 
 {% set navItems = {

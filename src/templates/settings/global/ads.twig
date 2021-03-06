@@ -1,7 +1,6 @@
 {% requirePermission "seomatic:global-meta:ads" %}
 
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
-{% from 'seomatic/_includes/macros.twig' import registerJsModules %}
 
 {% extends "seomatic/_layouts/globalSettings.twig" %}
 
@@ -18,10 +17,9 @@
 
 {% block foot %}
     {{ parent() }}
-    {% set jsModules = [
+    {{ seomatic.manifest.registerJsModules([
         'twig-editor.js',
-    ] %}
-    {{ registerJsModules(jsModules) }}
+    ]) }}
 {% endblock %}
 
 {% block contextMenu %}

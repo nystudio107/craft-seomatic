@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Json;
+use nystudio107\seomatic\helpers\Localization as LocalizationHelper;
 use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
@@ -142,7 +143,7 @@ class MetaContainers extends Component
         parent::init();
         // Get the page number of this request
         $request = Craft::$app->getRequest();
-        if (!$request->isConsoleRequest && Seomatic::$settings->addPaginatedHreflang) {
+        if (!$request->isConsoleRequest) {
             $this->paginationPage = (string)$request->pageNum;
         }
     }
@@ -263,12 +264,14 @@ class MetaContainers extends Component
                 $scriptContainers = $this->getContainersOfType(MetaScriptContainer::CONTAINER_TYPE);
                 foreach ($scriptContainers as $scriptContainer) {
                     /** @var MetaScriptContainer $scriptContainer */
-                    if ($scriptContainer->prepForInclusion()) {
-                        foreach ($scriptContainer->data as $metaScript) {
-                            /** @var MetaScript $metaScript */
-                            if (!empty($metaScript->bodyTemplatePath)
-                                && ((int)$metaScript->bodyPosition === $bodyPosition)) {
-                                $scriptData[] = $metaScript->renderBodyHtml();
+                    if ($scriptContainer->include) {
+                        if ($scriptContainer->prepForInclusion()) {
+                            foreach ($scriptContainer->data as $metaScript) {
+                                /** @var MetaScript $metaScript */
+                                if (!empty($metaScript->bodyTemplatePath)
+                                    && ((int)$metaScript->bodyPosition === $bodyPosition)) {
+                                    $scriptData[] = $metaScript->renderBodyHtml();
+                                }
                             }
                         }
                     }
@@ -297,7 +300,7 @@ class MetaContainers extends Component
         // If this page is paginated, we need to factor that into the cache key
         // We also need to re-add the hreflangs
         if ($this->paginationPage !== '1') {
-            if (Seomatic::$settings->addHrefLang) {
+            if (Seomatic::$settings->addHrefLang && Seomatic::$settings->addPaginatedHreflang) {
                 DynamicMetaHelper::addMetaLinkHrefLang();
             }
         }
@@ -404,6 +407,14 @@ class MetaContainers extends Component
         $home = Seomatic::$seomaticVariable->link->get('home');
         if ($home !== null) {
             $home->href = $homeUrl;
+        }
+        // The current language may _not_ match the current site, if we're headless
+        $ogLocale = Seomatic::$seomaticVariable->tag->get('og:locale');
+        if ($ogLocale !== null && $siteId !== null) {
+            $site = Craft::$app->getSites()->getSiteById($siteId);
+            if ($site !== null) {
+                $ogLocale->content = LocalizationHelper::normalizeOgLocaleLanguage($site->language);
+            }
         }
         // Update seomatic.meta.canonicalUrl when previewing meta containers
         $this->metaGlobalVars->canonicalUrl = $canonicalUrl;
@@ -651,6 +662,8 @@ class MetaContainers extends Component
      */
     public function addMetaBundleToContainers(MetaBundle $metaBundle)
     {
+        // Ensure the variable is synced properly first
+        Seomatic::$seomaticVariable->init();
         // Meta global vars
         $attributes = $metaBundle->metaGlobalVars->getAttributes();
         // Parse the meta values so we can filter out any blank or empty attributes

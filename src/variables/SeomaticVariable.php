@@ -26,7 +26,8 @@ use nystudio107\seomatic\services\Tag;
 use nystudio107\seomatic\services\Title;
 use nystudio107\seomatic\services\MetaContainers;
 use nystudio107\seomatic\services\MetaBundles;
-use nystudio107\seomatic\variables\ManifestVariable as Manifest;
+
+use nystudio107\pluginmanifest\variables\ManifestVariable as Manifest;
 
 use Craft;
 
@@ -98,7 +99,10 @@ class SeomaticVariable extends ServiceLocator
             'script' => Script::class,
             'tag' => Tag::class,
             'title' => Title::class,
-            'manifest' => Manifest::class
+            'manifest' => [
+                'class' => Manifest::class,
+                'manifestService' => Seomatic::$plugin->manifest,
+            ]
         ];
 
         $config['components'] = $components;
@@ -123,6 +127,12 @@ class SeomaticVariable extends ServiceLocator
         if ($this->sitemap === null || $replaceVars) {
             $this->sitemap = Seomatic::$plugin->metaContainers->metaSitemapVars;
         }
+        if ($this->containers === null || $replaceVars) {
+            $this->containers = Seomatic::$plugin->metaContainers;
+        }
+        if ($this->bundles === null || $replaceVars) {
+            $this->bundles = Seomatic::$plugin->metaBundles;
+        }
         // Set the config settings, parsing the environment if its a frontend request
         $configSettings = Seomatic::$settings;
         if (!$replaceVars && !Craft::$app->getRequest()->getIsCpRequest()) {
@@ -146,7 +156,7 @@ class SeomaticVariable extends ServiceLocator
      */
     public function getEnvironment()
     {
-        return Seomatic::$environment;
+        return Craft::parseEnv(Seomatic::$environment);
     }
 
     /**
@@ -163,6 +173,10 @@ class SeomaticVariable extends ServiceLocator
         }
         $env = Seomatic::$environment;
         $settingsUrl = UrlHelper::cpUrl('seomatic/plugin');
+        $general = Craft::$app->getConfig()->getGeneral();
+        if (!$general->allowAdminChanges) {
+            $settingsUrl = '';
+        }
         // If they've manually overridden the environment, just return it
         if (EnvironmentHelper::environmentOverriddenByConfig()) {
             return Craft::t('seomatic', 'This is overridden by the `config/seomatic.php` config setting',
@@ -177,6 +191,9 @@ class SeomaticVariable extends ServiceLocator
         }
         // Try to also check the `ENVIRONMENT` env var
         $envVar = getenv('ENVIRONMENT');
+        if (Seomatic::$settings->manuallySetEnvironment) {
+            $envVar = $settingsEnv;
+        }
         if (!empty($envVar)) {
             $env = EnvironmentHelper::determineEnvironment();
             switch ($env) {

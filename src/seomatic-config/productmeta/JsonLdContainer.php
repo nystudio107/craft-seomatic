@@ -42,16 +42,16 @@ return [
                 'copyrightYear'    => '{product.postDate|date("Y")}',
                 'inLanguage'       => '{seomatic.meta.language}',
                 'copyrightHolder'  => [
-                    'id' => '{seomatic.site.identity.genericUrl}#identity',
+                    'id' => '{parseEnv(seomatic.site.identity.genericUrl)}#identity',
                 ],
                 'author'           => [
-                    'id' => '{seomatic.site.identity.genericUrl}#identity',
+                    'id' => '{parseEnv(seomatic.site.identity.genericUrl)}#identity',
                 ],
                 'creator'          => [
-                    'id' => '{seomatic.site.identity.genericUrl}#creator',
+                    'id' => '{parseEnv(seomatic.site.identity.genericUrl)}#creator',
                 ],
                 'publisher'        => [
-                    'id' => '{seomatic.site.identity.genericUrl}#creator',
+                    'id' => '{parseEnv(seomatic.site.identity.genericUrl)}#creator',
                 ],
                 'image'            => [
                     'type' => 'ImageObject',
@@ -69,12 +69,12 @@ return [
                     'price'         => '{product.getDefaultVariant().getPrice()|number_format(2, ".", "")}',
                     'priceCurrency' => '{{craft.commerce.paymentCurrencies.primaryPaymentCurrencyIso()}}',
                     'offeredBy'     => [
-                        'id' => '{seomatic.site.identity.genericUrl}#identity',
+                        'id' => '{parseEnv(seomatic.site.identity.genericUrl)}#identity',
                     ],
                     'seller'        => [
-                        'id' => '{seomatic.site.identity.genericUrl}#identity',
+                        'id' => '{parseEnv(seomatic.site.identity.genericUrl)}#identity',
                     ],
-                    'availability'  => 'http://schema.org/{% if object.product.unlimitedStock or object.product.totalStock > 0 %}InStock{% else %}OutOfStock{% endif %}',
+                    'availability'  => 'http://schema.org/{% if object.product.hasUnlimitedStock or object.product.totalStock > 0 %}InStock{% else %}OutOfStock{% endif %}',
                 ],
             ],
         ],

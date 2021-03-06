@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-import SchemaTypeList from "../vue/SchemaTypeList.vue";
+import SchemaTypeList from "@/vue/SchemaTypeList.vue";
 
 /**
  * @author    nystudio107

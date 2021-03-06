@@ -1,18 +1,17 @@
 {% do view.registerAssetBundle("nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset") %}
 {% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/assetbundles/seomatic/dist', true) %}
 
-{% from 'seomatic/_includes/macros.twig' import registerJsModules %}
+{{ seomatic.manifest.registerCssModules([
+    'vendors.css',
+    'styles.css',
+]) }}
 
-{{ seomatic.manifest.includeCssModule("vendors.css", false) }}
-{{ seomatic.manifest.includeCssModule("styles.css", false) }}
-
-{% set jsModules = [
+{{ seomatic.manifest.registerJsModules([
     'runtime.js',
     'vendors.js',
-    'common.js',
+    'commons.js',
     'seomatic.js',
-] %}
-{{ registerJsModules(jsModules) }}
+]) }}
 
 {% set displayPreviewInlineStyles = "border: none; padding-left: 0;" %}
 {% set previewTypes = previewTypes ?? seomatic.config.sidebarDisplayPreviewTypes ?? ['google', 'twitter', 'facebook'] %}

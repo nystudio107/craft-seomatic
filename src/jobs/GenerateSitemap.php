@@ -23,7 +23,9 @@ use nystudio107\fastcgicachebust\FastcgiCacheBust;
 
 use Craft;
 use craft\base\Element;
+use craft\base\ElementInterface;
 use craft\console\Application as ConsoleApplication;
+use craft\db\Paginator;
 use craft\elements\Asset;
 use craft\elements\Entry;
 use craft\elements\MatrixBlock;
@@ -46,6 +48,11 @@ use yii\helpers\Html;
  */
 class GenerateSitemap extends BaseJob
 {
+    /**
+     * @const The number of assets to return in a single paginated query
+     */
+    const SITEMAP_QUERY_PAGE_SIZE = 100;
+
     // Properties
     // =========================================================================
 
@@ -129,6 +136,9 @@ class GenerateSitemap extends BaseJob
                     $metaBundle->metaSitemapVars->sitemapLimit = null;
                 }
                 $totalElements = $seoElement::sitemapElementsQuery($metaBundle)->count();
+                if  ($metaBundle->metaSitemapVars->sitemapLimit && ($totalElements > $metaBundle->metaSitemapVars->sitemapLimit)) {
+                    $totalElements = $metaBundle->metaSitemapVars->sitemapLimit;
+                }
             }
             // If no elements exist, just exit
             if (!$totalElements) {
@@ -137,98 +147,156 @@ class GenerateSitemap extends BaseJob
             // Stash the sitemap attributes so they can be modified on a per-entry basis
             $stashedSitemapAttrs = $metaBundle->metaSitemapVars->getAttributes();
             $stashedGlobalVarsAttrs = $metaBundle->metaGlobalVars->getAttributes();
+            // Use craft\db\Paginator to paginate the results so we don't exceed any memory limits
+            // See batch() and each() discussion here: https://github.com/yiisoft/yii2/issues/8420
+            // and here: https://github.com/craftcms/cms/issues/7338
+            $paginator = new Paginator($seoElement::sitemapElementsQuery($metaBundle), [
+                    'pageSize' => self::SITEMAP_QUERY_PAGE_SIZE,
+            ]);
             $currentElement = 0;
-            // Output the sitemap entry
-            /** @var  $element Entry */
-            foreach ($seoElement::sitemapElementsQuery($metaBundle)->each(10) as $element) {
-                $this->setProgress($queue, $currentElement++ / $totalElements);
-                // Output some info if this is a console app
+            // Iterate through the paginated results
+            while ($currentElement < $totalElements) {
+                $elements = $paginator->getPageResults();
                 if (Craft::$app instanceof ConsoleApplication) {
-                    echo "Processing element {$currentElement}/{$totalElements} - {$element->title}".PHP_EOL;
+                    echo 'Query ' . $paginator->getCurrentPage() . '/' . $paginator->getTotalPages()
+                        . ' - elements: ' . $paginator->getTotalResults()
+                        . PHP_EOL;
                 }
-                $metaBundle->metaSitemapVars->setAttributes($stashedSitemapAttrs, false);
-                $metaBundle->metaGlobalVars->setAttributes($stashedGlobalVarsAttrs, false);
-                // Make sure this entry isn't disabled
-                $this->combineFieldSettings($element, $metaBundle);
-                // Special case for the __home__ URI
-                $path = ($element->uri === '__home__') ? '' : $element->uri;
-                // Check to see if robots is `none` or `no index`
-                $robotsEnabled = true;
-                if (!empty($metaBundle->metaGlobalVars->robots)) {
-                    $robotsEnabled = $metaBundle->metaGlobalVars->robots !== 'none' &&
-                        $metaBundle->metaGlobalVars->robots !== 'noindex';
-                }
-                // Only add in a sitemap entry if it meets our criteria
-                if ($path !== null && $metaBundle->metaSitemapVars->sitemapUrls && $robotsEnabled) {
-                    try {
-                        $url = UrlHelper::siteUrl($path, null, null, $metaBundle->sourceSiteId);
-                    } catch (Exception $e) {
-                        $url = '';
+                /** @var ElementInterface $element */
+                foreach ($elements as $element) {
+                    $this->setProgress($queue, $currentElement++ / $totalElements);
+                    // Output some info if this is a console app
+                    if (Craft::$app instanceof ConsoleApplication) {
+                        echo "Processing element {$currentElement}/{$totalElements} - {$element->title}".PHP_EOL;
                     }
-                    $url = UrlHelper::absoluteUrlWithProtocol($url);
-                    $dateUpdated = $element->dateUpdated ?? $element->dateCreated ?? new \DateTime;
-                    $lines[] = '<url>';
-                    // Standard sitemap key/values
-                    $lines[] = '<loc>';
-                    $lines[] = Html::encode($url);
-                    $lines[] = '</loc>';
-                    $lines[] = '<lastmod>';
-                    $lines[] = $dateUpdated->format(\DateTime::W3C);
-                    $lines[] = '</lastmod>';
-                    $lines[] = '<changefreq>';
-                    $lines[] = $metaBundle->metaSitemapVars->sitemapChangeFreq;
-                    $lines[] = '</changefreq>';
-                    $lines[] = '<priority>';
-                    $lines[] = $metaBundle->metaSitemapVars->sitemapPriority;
-                    $lines[] = '</priority>';
-                    // Handle alternate URLs if this is multi-site
-                    if ($multiSite && $metaBundle->metaSitemapVars->sitemapAltLinks) {
-                        $primarySiteId = Craft::$app->getSites()->getPrimarySite()->id;
-                        /** @var  $altSiteSettings */
-                        foreach ($metaBundle->sourceAltSiteSettings as $altSiteSettings) {
-                            if (\in_array($altSiteSettings['siteId'], $groupSiteIds, false)) {
-                                $altElement = null;
-                                if ($seoElement !== null) {
-                                    $altElement = $seoElement::sitemapAltElement(
-                                        $metaBundle,
-                                        $element->id,
-                                        $altSiteSettings['siteId']
-                                    );
-                                }
-                                // Make sure to only include the `hreflang` if the element exists,
-                                // and sitemaps are on for it
-                                if ($altElement && $altElement->url) {
-                                    list($altSourceId, $altSourceBundleType, $altSourceHandle, $altSourceSiteId, $altTypeId)
-                                        = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($altElement);
-                                    $altMetaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
-                                        $altSourceBundleType,
-                                        $altSourceId,
-                                        $altSourceSiteId
-                                    );
-                                    if ($altMetaBundle) {
-                                        // Make sure this entry isn't disabled
-                                        $this->combineFieldSettings($altElement, $altMetaBundle);
-                                        $altUrl = UrlHelper::absoluteUrlWithProtocol($altElement->url);
-                                        if ($altMetaBundle->metaSitemapVars->sitemapUrls) {
-                                            // If this is the primary site, add it as x-default, too
-                                            if ($primarySiteId === $altSourceSiteId && Seomatic::$settings->addXDefaultHrefLang) {
+                    $metaBundle->metaSitemapVars->setAttributes($stashedSitemapAttrs, false);
+                    $metaBundle->metaGlobalVars->setAttributes($stashedGlobalVarsAttrs, false);
+                    // Make sure this entry isn't disabled
+                    $this->combineFieldSettings($element, $metaBundle);
+                    // Special case for the __home__ URI
+                    $path = ($element->uri === '__home__') ? '' : $element->uri;
+                    // Check to see if robots is `none` or `no index`
+                    $robotsEnabled = true;
+                    if (!empty($metaBundle->metaGlobalVars->robots)) {
+                        $robotsEnabled = $metaBundle->metaGlobalVars->robots !== 'none' &&
+                            $metaBundle->metaGlobalVars->robots !== 'noindex';
+                    }
+                    // Only add in a sitemap entry if it meets our criteria
+                    if ($path !== null && $metaBundle->metaSitemapVars->sitemapUrls && $robotsEnabled) {
+                        try {
+                            $url = UrlHelper::siteUrl($path, null, null, $metaBundle->sourceSiteId);
+                        } catch (Exception $e) {
+                            $url = '';
+                        }
+                        $url = UrlHelper::absoluteUrlWithProtocol($url);
+                        $dateUpdated = $element->dateUpdated ?? $element->dateCreated ?? new \DateTime;
+                        $lines[] = '<url>';
+                        // Standard sitemap key/values
+                        $lines[] = '<loc>';
+                        $lines[] = Html::encode($url);
+                        $lines[] = '</loc>';
+                        $lines[] = '<lastmod>';
+                        $lines[] = $dateUpdated->format(\DateTime::W3C);
+                        $lines[] = '</lastmod>';
+                        $lines[] = '<changefreq>';
+                        $lines[] = $metaBundle->metaSitemapVars->sitemapChangeFreq;
+                        $lines[] = '</changefreq>';
+                        $lines[] = '<priority>';
+                        $lines[] = $metaBundle->metaSitemapVars->sitemapPriority;
+                        $lines[] = '</priority>';
+                        // Handle alternate URLs if this is multi-site
+                        if ($multiSite && $metaBundle->metaSitemapVars->sitemapAltLinks) {
+                            $primarySiteId = Craft::$app->getSites()->getPrimarySite()->id;
+                            /** @var  $altSiteSettings */
+                            foreach ($metaBundle->sourceAltSiteSettings as $altSiteSettings) {
+                                if (\in_array($altSiteSettings['siteId'], $groupSiteIds, false)) {
+                                    $altElement = null;
+                                    if ($seoElement !== null) {
+                                        $altElement = $seoElement::sitemapAltElement(
+                                            $metaBundle,
+                                            $element->id,
+                                            $altSiteSettings['siteId']
+                                        );
+                                    }
+                                    // Make sure to only include the `hreflang` if the element exists,
+                                    // and sitemaps are on for it
+                                    if ($altElement && $altElement->url) {
+                                        list($altSourceId, $altSourceBundleType, $altSourceHandle, $altSourceSiteId, $altTypeId)
+                                            = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($altElement);
+                                        $altMetaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
+                                            $altSourceBundleType,
+                                            $altSourceId,
+                                            $altSourceSiteId
+                                        );
+                                        if ($altMetaBundle) {
+                                            // Make sure this entry isn't disabled
+                                            $this->combineFieldSettings($altElement, $altMetaBundle);
+                                            $altUrl = UrlHelper::absoluteUrlWithProtocol($altElement->url);
+                                            if ($altMetaBundle->metaSitemapVars->sitemapUrls) {
+                                                // If this is the primary site, add it as x-default, too
+                                                if ($primarySiteId === $altSourceSiteId && Seomatic::$settings->addXDefaultHrefLang) {
+                                                    $lines[] = '<xhtml:link rel="alternate"'
+                                                        .' hreflang="x-default"'
+                                                        .' href="'.Html::encode($altUrl).'"'
+                                                        .' />';
+                                                }
                                                 $lines[] = '<xhtml:link rel="alternate"'
-                                                    .' hreflang="x-default"'
+                                                    .' hreflang="'.$altSiteSettings['language'].'"'
                                                     .' href="'.Html::encode($altUrl).'"'
                                                     .' />';
                                             }
-                                            $lines[] = '<xhtml:link rel="alternate"'
-                                                .' hreflang="'.$altSiteSettings['language'].'"'
-                                                .' href="'.Html::encode($altUrl).'"'
-                                                .' />';
                                         }
                                     }
                                 }
                             }
                         }
+                        // Handle any Assets
+                        if ($metaBundle->metaSitemapVars->sitemapAssets) {
+                            // Regular Assets fields
+                            $assetFields = FieldHelper::fieldsOfTypeFromElement(
+                                $element,
+                                FieldHelper::ASSET_FIELD_CLASS_KEY,
+                                true
+                            );
+                            foreach ($assetFields as $assetField) {
+                                $assets = $element[$assetField]->all();
+                                /** @var Asset[] $assets */
+                                foreach ($assets as $asset) {
+                                    $this->assetSitemapItem($asset, $metaBundle, $lines);
+                                }
+                            }
+                            // Assets embeded in Block fields
+                            $blockFields = FieldHelper::fieldsOfTypeFromElement(
+                                $element,
+                                FieldHelper::BLOCK_FIELD_CLASS_KEY,
+                                true
+                            );
+                            foreach ($blockFields as $blockField) {
+                                $blocks = $element[$blockField]->all();
+                                /** @var MatrixBlock[]|NeoBlock[]|SuperTableBlock[] $blocks */
+                                foreach ($blocks as $block) {
+                                    $assetFields = [];
+                                    if ($block instanceof MatrixBlock) {
+                                        $assetFields = FieldHelper::matrixFieldsOfType($block, AssetsField::class);
+                                    }
+                                    if ($block instanceof NeoBlock) {
+                                        $assetFields = FieldHelper::neoFieldsOfType($block, AssetsField::class);
+                                    }
+                                    if ($block instanceof SuperTableBlock) {
+                                        $assetFields = FieldHelper::superTableFieldsOfType($block, AssetsField::class);
+                                    }
+                                    foreach ($assetFields as $assetField) {
+                                        foreach ($block[$assetField]->all() as $asset) {
+                                            $this->assetSitemapItem($asset, $metaBundle, $lines);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        $lines[] = '</url>';
                     }
-                    // Handle any Assets
-                    if ($metaBundle->metaSitemapVars->sitemapAssets) {
+                    // Include links to any known file types in the assets fields
+                    if ($metaBundle->metaSitemapVars->sitemapFiles) {
                         // Regular Assets fields
                         $assetFields = FieldHelper::fieldsOfTypeFromElement(
                             $element,
@@ -237,9 +305,8 @@ class GenerateSitemap extends BaseJob
                         );
                         foreach ($assetFields as $assetField) {
                             $assets = $element[$assetField]->all();
-                            /** @var Asset[] $assets */
                             foreach ($assets as $asset) {
-                                $this->assetSitemapItem($asset, $metaBundle, $lines);
+                                $this->assetFilesSitemapLink($asset, $metaBundle, $lines);
                             }
                         }
                         // Assets embeded in Block fields
@@ -250,7 +317,7 @@ class GenerateSitemap extends BaseJob
                         );
                         foreach ($blockFields as $blockField) {
                             $blocks = $element[$blockField]->all();
-                            /** @var MatrixBlock[]|NeoBlock[]|SuperTableBlock[] $blocks */
+                            /** @var MatrixBlock $block */
                             foreach ($blocks as $block) {
                                 $assetFields = [];
                                 if ($block instanceof MatrixBlock) {
@@ -259,60 +326,18 @@ class GenerateSitemap extends BaseJob
                                 if ($block instanceof NeoBlock) {
                                     $assetFields = FieldHelper::neoFieldsOfType($block, AssetsField::class);
                                 }
-                                if ($block instanceof SuperTableBlock) {
-                                    $assetFields = FieldHelper::superTableFieldsOfType($block, AssetsField::class);
-                                }
                                 foreach ($assetFields as $assetField) {
                                     foreach ($block[$assetField]->all() as $asset) {
-                                        $this->assetSitemapItem($asset, $metaBundle, $lines);
+                                        $this->assetFilesSitemapLink($asset, $metaBundle, $lines);
                                     }
                                 }
                             }
                         }
                     }
-                    $lines[] = '</url>';
                 }
-                // Include links to any known file types in the assets fields
-                if ($metaBundle->metaSitemapVars->sitemapFiles) {
-                    // Regular Assets fields
-                    $assetFields = FieldHelper::fieldsOfTypeFromElement(
-                        $element,
-                        FieldHelper::ASSET_FIELD_CLASS_KEY,
-                        true
-                    );
-                    foreach ($assetFields as $assetField) {
-                        $assets = $element[$assetField]->all();
-                        foreach ($assets as $asset) {
-                            $this->assetFilesSitemapLink($asset, $metaBundle, $lines);
-                        }
-                    }
-                    // Assets embeded in Block fields
-                    $blockFields = FieldHelper::fieldsOfTypeFromElement(
-                        $element,
-                        FieldHelper::BLOCK_FIELD_CLASS_KEY,
-                        true
-                    );
-                    foreach ($blockFields as $blockField) {
-                        $blocks = $element[$blockField]->all();
-                        /** @var MatrixBlock $block */
-                        foreach ($blocks as $block) {
-                            $assetFields = [];
-                            if ($block instanceof MatrixBlock) {
-                                $assetFields = FieldHelper::matrixFieldsOfType($block, AssetsField::class);
-                            }
-                            if ($block instanceof NeoBlock) {
-                                $assetFields = FieldHelper::neoFieldsOfType($block, AssetsField::class);
-                            }
-                            foreach ($assetFields as $assetField) {
-                                foreach ($block[$assetField]->all() as $asset) {
-                                    $this->assetFilesSitemapLink($asset, $metaBundle, $lines);
-                                }
-                            }
-                        }
-                    }
-                }
+                $paginator->currentPage++;
             }
-            // Sitemap index closing tag
+            // Sitemap closing tag
             $lines[] = '</urlset>';
         }
 

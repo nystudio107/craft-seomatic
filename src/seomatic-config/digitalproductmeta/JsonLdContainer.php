@@ -42,16 +42,16 @@ return [
                 'copyrightYear'    => '{product.postDate|date("Y")}',
                 'inLanguage'       => '{seomatic.meta.language}',
                 'copyrightHolder'  => [
-                    'id' => '{seomatic.site.identity.genericUrl}#identity',
+                    'id' => '{parseEnv(seomatic.site.identity.genericUrl)}#identity',
                 ],
                 'author'           => [
-                    'id' => '{seomatic.site.identity.genericUrl}#identity',
+                    'id' => '{parseEnv(seomatic.site.identity.genericUrl)}#identity',
                 ],
                 'creator'          => [
-                    'id' => '{seomatic.site.identity.genericUrl}#creator',
+                    'id' => '{parseEnv(seomatic.site.identity.genericUrl)}#creator',
                 ],
                 'publisher'        => [
-                    'id' => '{seomatic.site.identity.genericUrl}#creator',
+                    'id' => '{parseEnv(seomatic.site.identity.genericUrl)}#creator',
                 ],
                 'image'            => [
                     'type' => 'ImageObject',
@@ -69,10 +69,10 @@ return [
                     'price'         => '{product.getPrice()|number_format(2, ".", "")}',
                     'priceCurrency' => '{{craft.commerce.paymentCurrencies.primaryPaymentCurrencyIso()}}',
                     'offeredBy'     => [
-                        'id' => '{seomatic.site.identity.genericUrl}#identity',
+                        'id' => '{parseEnv(seomatic.site.identity.genericUrl)}#identity',
                     ],
                     'seller'        => [
-                        'id' => '{seomatic.site.identity.genericUrl}#identity',
+                        'id' => '{parseEnv(seomatic.site.identity.genericUrl)}#identity',
                     ],
                     'availability'  => 'http://schema.org/{% if object.product.getIsAvailable() %}InStock{% else %}OutOfStock{% endif %}',
                 ],

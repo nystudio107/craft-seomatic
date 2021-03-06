@@ -47,13 +47,13 @@ return [
                     'name'     => '{seomatic.meta.seoTitle}',
                 ],
                 'organizer'           => [
-                    'id' => '{seomatic.site.identity.genericUrl}#identity',
+                    'id' => '{parseEnv(seomatic.site.identity.genericUrl)}#identity',
                 ],
                 'contributor'         => [
-                    'id' => '{seomatic.site.identity.genericUrl}#creator',
+                    'id' => '{parseEnv(seomatic.site.identity.genericUrl)}#creator',
                 ],
                 'funder'              => [
-                    'id' => '{seomatic.site.identity.genericUrl}#identity',
+                    'id' => '{parseEnv(seomatic.site.identity.genericUrl)}#identity',
                 ],
                 'image'               => [
                     'type' => 'ImageObject',

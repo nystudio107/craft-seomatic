@@ -36,7 +36,7 @@
   "dependencies": {
     "@riophae/vue-treeselect": "^0.4.0",
     "apexcharts": "^3.8.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "brace": "~0.11.1",
     "core-js": "^3.0.0",
     "regenerator-runtime": "^0.13.2",
@@ -80,6 +80,7 @@
     "eslint": "^7.4.0",
     "eslint-plugin-vue": "^7.2.0",
     "file-loader": "^6.0.0",
+    "get-webpack-config": "^1.0.0",
     "glob-all": "^3.1.0",
     "ignore-loader": "^0.1.2",
     "imagemin": "^7.0.0",
@@ -137,6 +138,7 @@
     "check-types": "tsc",
     "debug": "nodemon -L",
     "dev": "nodemon -L",
+    "docs": "cd ../docs && rm -f package-lock.json && npm install && npm run docs:build",
     "lint": "tsc --noEmit && eslint '../../src/**/*.{js,ts,vue}' --fix"
   },
   "version": "3.3.0"

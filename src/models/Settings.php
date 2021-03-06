@@ -61,6 +61,11 @@ class Settings extends VarsModel
     public $headersEnabled = true;
 
     /**
+     * @var bool Whether the environment should be manually set, or automatically determined
+     */
+    public $manuallySetEnvironment = false;
+
+    /**
      * @var string The server environment, either `live`, `staging`, or `local`
      */
     public $environment = 'live';
@@ -251,7 +256,8 @@ class Settings extends VarsModel
                     'generatorEnabled',
                     'addHrefLang',
                     'addXDefaultHrefLang',
-                    'addPaginatedHreflang'
+                    'addPaginatedHreflang',
+                    'manuallySetEnvironment',
                 ],
                 'boolean'
             ],

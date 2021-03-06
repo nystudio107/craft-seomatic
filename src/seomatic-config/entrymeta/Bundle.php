@@ -19,7 +19,7 @@ use nystudio107\seomatic\seoelements\SeoEntry;
  */
 
 return [
-    'bundleVersion'              => '1.0.28',
+    'bundleVersion'              => '1.0.29',
     'sourceBundleType'           => SeoEntry::getMetaBundleType(),
     'sourceId'                   => null,
     'sourceName'                 => null,

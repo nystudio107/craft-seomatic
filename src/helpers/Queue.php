@@ -56,4 +56,22 @@ class Queue
         App::maxPowerCaptain();
         $queue->run();
     }
+
+    /**
+     * Run the queue via CLI command
+     *
+     * @return void
+     */
+    public static function runConsole()
+    {
+        $queue = Craft::$app->getQueue();
+        // Make sure the queue uses the Craft web interface
+        if (!$queue instanceof QueueInterface) {
+            return;
+        }
+
+        // Run the queue
+        App::maxPowerCaptain();
+        $queue->run();
+    }
 }

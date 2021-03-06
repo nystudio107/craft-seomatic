@@ -19,7 +19,7 @@ use nystudio107\seomatic\seoelements\SeoCategory;
  */
 
 return [
-    'bundleVersion'              => '1.0.25',
+    'bundleVersion'              => '1.0.26',
     'sourceBundleType'           => SeoCategory::getMetaBundleType(),
     'sourceId'                   => null,
     'sourceName'                 => null,

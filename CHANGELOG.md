@@ -1,8 +1,73 @@
 # SEOmatic Changelog
 
-## 3.3.27 - UNRELEASED
+## 3.3.35 - 2021.03.03
+### Fixed
+* Fixed a regression with SEO Settings fields using the old `ManifestHelper`
+
+## 3.3.34 - 2021.03.03
+### Added
+* Added `seomatic.containers` to allow access to the `MetaContainers` service via Twig
+* Added `seomatic.bundles` to allow access to the `MetaBundles` service via Twig
+
+### Changed
+* Only include localized versions of elements that are enabled for hreflang tags
+* Dockerized the buildchain, using `craft-plugin-manifest` for the webpack HMR bridge
+
+## 3.3.33 - 2021.02.23
+### Added
+* Added a **Manually Set SEOmatic Environment** setting (defaults to off) for people who want to manually set the SEOmatic environment via environment variable
+
+### Changed
+* Updated build system infra
+* Parse the SEOmatic Environment as a variable before displaying it on the dashboard
+
+### Fixed
+* No longer include any `<body>` script tags (as in Google Tag Manager) if the entire script meta container is excluded
+* The `og:locale` tag no longer shows the wrong language for headless requests
+* Don't link to the settings page if `allowAdminChanges` is `false`
+* No longer URL decode text that is pulled from another field in SEOmatic
+
+## 3.3.32 - 2021.02.12
+### Fixed
+* Fixed a typo in the global JsonLDContainer that caused errors to be generated
+
+## 3.3.31 - 2021.02.08
+### Changed
+* Implemented `useFieldset` for Craft 3.6
+
+### Fixed
+* Explicitly parse the `seomatic.site.identity.genericUrl` so that aliases & environment variables are parsed
+* Fixed an issue with PHP 8 and `array_walk_recursive()` wanting the second parameter to _not_ be passed by reference (opposite of what the error message states)
+* Fix Feed Me mapping and asset-creation
+
+## 3.3.30 - 2021.01.26
+### Changed
+* Make the canonical URL point to the current page for paginated links [ref](https://github.com/nystudio107/craft-seomatic/issues/804)
+* Run the queue via CLI command via `QueueHelper::runConsole()` to handle queues that don't conform to Craft's `QueueInterface`
+* Updated Axios to `^0.21.1`
+* Removed unneeded duplicate `og:locale:alternate` if it matches the current `og:locale`
+* Don't strip query strings from `link rel="canonical"` for paginated pages
+
+## 3.3.29 - 2020.12.31
+### Changed
+* Renamed `common.js` -> `commons.js`, which is the correct name, and also will suppress it from appearing in the error logs
+* Switch from using `->each()` to using `craft\db\Paginator` to paginate asset query results, to address out of memory issues on massive queries
+* SEOmatic now requires Craft CMS 3.1.19 or later
+
+## 3.3.28 - 2020.12.22
+### Fixed
+* Fixed a regression that caused Script variables to not be parsed as environment variables
+* Fixed a bug that could cause Content SEO image settings to not override the global settings properly
+* Set the the canonical URL to be the first page of the paginated pages
+* Ensure that paginated pages are cached individually, regardless of the `addPaginatedHreflang` setting
+
+## 3.3.27 - 2020.12.18
 ### Changed
 * Split out vendors & commons chunks
+
+### Fixed
+* Changed `unlimitedStock` to `hasUnlimitedStock` for the Product JSON-LD defaults
+* Ensure that the `runtime.js` is included in the Field Settings and Field
 
 ## 3.3.26 - 2020.12.08
 ### Changed

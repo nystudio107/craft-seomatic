@@ -42,16 +42,16 @@ return [
                 'copyrightYear'    => '{category.dateCreated |date("Y")}',
                 'inLanguage'       => '{seomatic.meta.language}',
                 'copyrightHolder'  => [
-                    'id' => '{seomatic.site.identity.genericUrl}#identity',
+                    'id' => '{parseEnv(seomatic.site.identity.genericUrl)}#identity',
                 ],
                 'author'           => [
-                    'id' => '{seomatic.site.identity.genericUrl}#identity',
+                    'id' => '{parseEnv(seomatic.site.identity.genericUrl)}#identity',
                 ],
                 'creator'          => [
-                    'id' => '{seomatic.site.identity.genericUrl}#creator',
+                    'id' => '{parseEnv(seomatic.site.identity.genericUrl)}#creator',
                 ],
                 'publisher'        => [
-                    'id' => '{seomatic.site.identity.genericUrl}#creator',
+                    'id' => '{parseEnv(seomatic.site.identity.genericUrl)}#creator',
                 ],
                 'image'            => [
                     'type' => 'ImageObject',

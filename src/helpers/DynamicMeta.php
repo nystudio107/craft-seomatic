@@ -103,9 +103,9 @@ class DynamicMeta
         if ($pageInfo !== null && $pageInfo->currentPage !== null) {
             // Let the meta containers know that this page is paginated
             Seomatic::$plugin->metaContainers->paginationPage = (string)$pageInfo->currentPage;
-            // Set the current page
+            // Set the the canonical URL to be the first page of the paginated pages
+            // see: https://github.com/nystudio107/craft-seomatic/issues/375#issuecomment-488369209
             $url = $pageInfo->getPageUrl($pageInfo->currentPage);
-            $url = self::sanitizeUrl($url);
             if (!empty($url)) {
                 Seomatic::$seomaticVariable->meta->canonicalUrl = $url;
             }
@@ -524,7 +524,8 @@ class DynamicMeta
             if (\count($siteLocalizedUrls) > 1 && $ogLocaleAlternate) {
                 $ogContentArray = [];
                 foreach ($siteLocalizedUrls as $siteLocalizedUrl) {
-                    if (!\in_array($siteLocalizedUrl['ogLanguage'], $ogContentArray, true)) {
+                    if (!\in_array($siteLocalizedUrl['ogLanguage'], $ogContentArray, true) &&
+                    Craft::$app->language !== $siteLocalizedUrl['language']) {
                         $ogContentArray[] = $siteLocalizedUrl['ogLanguage'];
                     }
                 }
@@ -614,7 +615,7 @@ class DynamicMeta
         $elements = Craft::$app->getElements();
         foreach ($sites as $site) {
             $includeUrl = true;
-            $matchedElement = $elements->getElementByUri($requestUri, $thisSite->id);
+            $matchedElement = $elements->getElementByUri($requestUri, $thisSite->id, true);
             if ($matchedElement) {
                 $url = $elements->getElementUriForSite($matchedElement->getId(), $site->id);
                 // See if they have disabled sitemaps or robots for this entry,

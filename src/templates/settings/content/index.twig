@@ -6,8 +6,6 @@
 {% extends 'seomatic/_layouts/seomatic-cp.twig' %}
 {% import '_includes/forms' as forms %}
 
-{% from 'seomatic/_includes/macros.twig' import registerJsModules %}
-
 {% block contextMenu %}
     {% include "seomatic/settings/_includes/sites-menu.twig" %}
 {% endblock %}
@@ -18,10 +16,9 @@
 
 {% block foot %}
     {{ parent() }}
-    {% set jsModules = [
+    {{ seomatic.manifest.registerJsModules([
         'content-seo.js',
-    ] %}
-    {{ registerJsModules(jsModules) }}
+    ]) }}
 {% endblock %}
 
 {% set content %}

@@ -14,7 +14,7 @@
     "outDir": "./src/assetbundles/seomatic/dist/",
     "paths": {
       "@/*": [
-        "./src/*"
+        "./src/assetbundles/seomatic/src/*"
       ]
     },
     "resolveJsonModule": true,
@@ -30,8 +30,8 @@
     ]
   },
   "include": [
-    "./src/**/*.ts",
-    "./src/**/*.vue"
+    "./src/assetbundles/seomatic/src/**/*.ts",
+    "./src/assetbundles/seomatic/src/**/*.vue"
   ],
   "exclude": [
     "./node_modules"

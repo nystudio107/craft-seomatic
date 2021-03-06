@@ -30,12 +30,10 @@ use craft\base\PreviewableFieldInterface;
 use craft\elements\Asset;
 use craft\helpers\Json;
 use craft\helpers\StringHelper;
-use craft\web\assets\cp\CpAsset;
 
 use yii\base\InvalidConfigException;
 use yii\caching\TagDependency;
 use yii\db\Schema;
-use yii\web\NotFoundHttpException;
 
 /**
  * @author    nystudio107
@@ -166,6 +164,15 @@ class SeoSettings extends Field implements PreviewableFieldInterface
 
     /**
      * @inheritdoc
+     * @since 2.0.0
+     */
+    public function useFieldset(): bool
+    {
+        return true;
+    }
+
+    /**
+     * @inheritdoc
      */
     public function normalizeValue($value, ElementInterface $element = null)
     {
@@ -276,7 +283,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
                 $value = StringHelper::encodeMb4($value);
             }
             if (\is_array($value)) {
-                array_walk_recursive($value, function (&$arrayValue, &$arrayKey) {
+                array_walk_recursive($value, function (&$arrayValue, $arrayKey) {
                     if ($arrayValue !== null && \is_string($arrayValue)) {
                         $arrayValue = StringHelper::encodeMb4($arrayValue);
                     }
@@ -296,14 +303,15 @@ class SeoSettings extends Field implements PreviewableFieldInterface
         // JS/CSS modules
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
-            $this->registerCssModules([
+            Seomatic::$plugin->manifest->registerCssModules([
                 'styles.css',
+                'vendors.css',
             ]);
-            $this->registerJsModules([
-                'styles.js',
+            Seomatic::$plugin->manifest->registerJsModules([
+                'runtime.js',
+                'vendors.js',
+                'commons.js',
                 'seomatic.js',
-                'vendors~seomatic-meta.js',
-                'vendors~seomatic-tokens.js',
                 'seomatic-tokens.js',
                 'seomatic-meta.js',
             ]);
@@ -338,14 +346,15 @@ class SeoSettings extends Field implements PreviewableFieldInterface
         // JS/CSS modules
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
-            $this->registerCssModules([
+            Seomatic::$plugin->manifest->registerCssModules([
                 'styles.css',
+                'vendors.css',
             ]);
-            $this->registerJsModules([
-                'styles.js',
+            Seomatic::$plugin->manifest->registerJsModules([
+                'runtime.js',
+                'vendors.js',
+                'commons.js',
                 'seomatic.js',
-                'vendors~seomatic-meta.js',
-                'vendors~seomatic-tokens.js',
                 'seomatic-tokens.js',
                 'seomatic-meta.js',
             ]);
@@ -500,49 +509,5 @@ class SeoSettings extends Field implements PreviewableFieldInterface
                 false
             )
         );
-    }
-
-    /**
-     * Register CSS modules so they can be run through webpack-dev-server
-     *
-     * @param array $modules
-     */
-    protected function registerCssModules(array $modules)
-    {
-        foreach ($modules as $moduleName) {
-            try {
-                $module = Seomatic::$seomaticVariable->manifest->getModuleUri($moduleName);
-            } catch (NotFoundHttpException $e) {
-                Craft::error($e->getMessage(), __METHOD__);
-                $module = null;
-            }
-            if ($module) {
-                Seomatic::$view->registerCssFile($module, [
-                    'depends' => CpAsset::class,
-                ]);
-            }
-        }
-    }
-
-    /**
-     * Register JavaScript modules so they can be run through webpack-dev-server
-     *
-     * @param array $modules
-     */
-    protected function registerJsModules(array $modules)
-    {
-        foreach ($modules as $moduleName) {
-            try {
-                $module = Seomatic::$seomaticVariable->manifest->getModuleUri($moduleName);
-            } catch (NotFoundHttpException $e) {
-                Craft::error($e->getMessage(), __METHOD__);
-                $module = null;
-            }
-            if ($module) {
-                Seomatic::$view->registerJsFile($module, [
-                    'depends' => CpAsset::class,
-                ]);
-            }
-        }
     }
 }
