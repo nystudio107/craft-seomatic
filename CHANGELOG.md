@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.36 - UNRELEASED
+### Fixed
+* Ensure really long titles are cropped in the sidebar preview
+
 ## 3.3.35 - 2021.03.03
 ### Fixed
 * Fixed a regression with SEO Settings fields using the old `ManifestHelper`
