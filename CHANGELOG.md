@@ -3,6 +3,7 @@
 ## 3.3.36 - UNRELEASED
 ### Fixed
 * Ensure really long titles are cropped in the sidebar preview
+* Fixed the documentation for the `EVENT_ADD_DYNAMIC_META` event
 
 ## 3.3.35 - 2021.03.03
 ### Fixed
