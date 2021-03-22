@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.3.36 - UNRELEASED
+### Changed
+* More consistent `makefile` build commands
+
 ### Fixed
 * Ensure really long titles are cropped in the sidebar preview
 * Fixed the documentation for the `EVENT_ADD_DYNAMIC_META` event
