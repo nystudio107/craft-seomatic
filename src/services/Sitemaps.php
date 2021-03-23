@@ -334,6 +334,38 @@ class Sitemaps extends Component implements SitemapInterface
     }
 
     /**
+     * @return string
+     */
+    public function siteGroupSitemaps(): string
+    {
+        $result = '';
+        $sites = [];
+        if (Seomatic::$settings->siteGroupsSeparate) {
+            // Get only the sites that are in the current site's group
+            try {
+                $siteGroup = Craft::$app->getSites()->getCurrentSite()->getGroup();
+            } catch (InvalidConfigException $e) {
+                $siteGroup = null;
+                Craft::error($e->getMessage(), __METHOD__);
+            }
+            // If we can't get a group, just use the current site
+            if ($siteGroup === null) {
+                $sites = [Craft::$app->getSites()->getCurrentSite()];
+            } else  {
+                $sites = $siteGroup->getSites();
+            }
+        } else {
+            $sites = Craft::$app->getSites()->getAllSites();
+        }
+
+        foreach($sites as $site) {
+            $result .= 'sitemap: ' . $site->getBaseUrl(true) . PHP_EOL;
+        }
+
+        return $result;
+    }
+
+    /**
      * @param int|null $siteId
      *
      * @return string

@@ -291,6 +291,16 @@ class Helper extends Component
     }
 
     /**
+     * Return a sitemap for each site in the same site group
+     *
+     * @return string
+     */
+    public static function siteGroupSitemaps(): string
+    {
+        return Seomatic::$plugin->sitemaps->siteGroupSitemaps();
+    }
+
+    /**
      * @param string   $sourceType
      * @param string   $sourceHandle
      * @param int|null $siteId
