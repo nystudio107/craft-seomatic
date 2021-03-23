@@ -437,8 +437,8 @@ class Seomatic extends Plugin
         $this->set('manifest', [
             'class' => ManifestService::class,
             'assetClass' => SeomaticAsset::class,
-            'devServerManifestPath' => 'http://seomatic-buildchain:8080/',
-            'devServerPublicPath' => 'http://seomatic-buildchain:8080/',
+            'devServerManifestPath' => 'http://craft-seomatic-buildchain:8080/',
+            'devServerPublicPath' => 'http://craft-seomatic-buildchain:8080/',
         ]);
 
         // Install our event listeners only if our table schema exists
