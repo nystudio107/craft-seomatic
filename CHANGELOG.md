@@ -4,6 +4,9 @@
 ### Changed
 * More consistent `makefile` build commands
 * Use Tailwind 2.x & `@tailwindcss/jit`
+* Move settings from the `composer.json` “extra” to the plugin main class
+* Don't register any frontend templates if this site has a sub-directory as part of the URL [\#859](https://github.com/nystudio107/craft-seomatic/issues/859)
+* List all sites sitemaps in the `robots.txt` [\#859](https://github.com/nystudio107/craft-seomatic/issues/859)
 
 ### Fixed
 * Ensure really long titles are cropped in the sidebar preview
