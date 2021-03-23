@@ -56,22 +56,7 @@
     "extra": {
         "name": "SEOmatic",
         "handle": "seomatic",
-        "hasCpSettings": true,
-        "hasCpSection": true,
         "changelogUrl": "https://raw.githubusercontent.com/nystudio107/craft-seomatic/v3/CHANGELOG.md",
-        "class": "nystudio107\\seomatic\\Seomatic",
-        "components": {
-            "frontendTemplates": "nystudio107\\seomatic\\services\\FrontendTemplates",
-            "helper": "nystudio107\\seomatic\\services\\Helper",
-            "jsonLd": "nystudio107\\seomatic\\services\\JsonLd",
-            "link": "nystudio107\\seomatic\\services\\Link",
-            "metaBundles": "nystudio107\\seomatic\\services\\MetaBundles",
-            "metaContainers": "nystudio107\\seomatic\\services\\MetaContainers",
-            "seoElements": "nystudio107\\seomatic\\services\\SeoElements",
-            "script": "nystudio107\\seomatic\\services\\Script",
-            "sitemaps": "nystudio107\\seomatic\\services\\Sitemaps",
-            "tag": "nystudio107\\seomatic\\services\\Tag",
-            "title": "nystudio107\\seomatic\\services\\Title"
-        }
+        "class": "nystudio107\\seomatic\\Seomatic"
     }
 }
