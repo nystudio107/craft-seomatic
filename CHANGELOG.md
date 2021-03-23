@@ -3,6 +3,7 @@
 ## 3.3.36 - UNRELEASED
 ### Changed
 * More consistent `makefile` build commands
+* Use Tailwind 2.x & `@tailwindcss/jit`
 
 ### Fixed
 * Ensure really long titles are cropped in the sidebar preview
