@@ -84,7 +84,7 @@ class FrontendTemplates extends Component
         if ($siteId === null) {
             $siteId = $sites->getCurrentSite()->id ?? 1;
         }
-        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId, true);
+        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId, false);
         if ($metaBundle === null) {
             return;
         }
