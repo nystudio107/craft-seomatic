@@ -334,9 +334,11 @@ class Sitemaps extends Component implements SitemapInterface
     }
 
     /**
+     * Return all of the sitemap indexes the current group of sites
+     *
      * @return string
      */
-    public function siteGroupSitemaps(): string
+    public function sitemapIndex(): string
     {
         $result = '';
         $sites = [];
