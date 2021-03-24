@@ -765,6 +765,9 @@ class MetaBundles extends Component
         $prevMetaBundle = $metaBundle;
         $config = [];
         $sourceBundleType = $metaBundle->sourceBundleType;
+        if ($sourceBundleType === self::GLOBAL_META_BUNDLE) {
+            $config = ConfigHelper::getConfigFromFile('globalmeta/Bundle');
+        }
         $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
         if ($seoElement) {
             $configPath = $seoElement::configFilePath();
