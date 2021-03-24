@@ -359,10 +359,10 @@ class Sitemaps extends Component implements SitemapInterface
         }
 
         foreach($sites as $site) {
-            $result .= 'sitemap: ' . $site->getBaseUrl(true) . PHP_EOL;
+            $result .= 'sitemap: ' . $this->sitemapIndexUrlForSiteId($site->id) . PHP_EOL;
         }
 
-        return $result;
+        return rtrim($result, PHP_EOL);
     }
 
     /**
