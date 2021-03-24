@@ -12,6 +12,7 @@
 * Ensure really long titles are cropped in the sidebar preview
 * Fixed the documentation for the `EVENT_ADD_DYNAMIC_META` event
 * If **Manually Set SEOmatic Environment** is on, ignore `devMode` in determining the environment
+* Fixed issue with global meta bundles not being updated when their version is changed
 
 ## 3.3.35 - 2021.03.03
 ### Fixed
