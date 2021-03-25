@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.3.36 - UNRELEASED
+## 3.3.36 - 2021.03.25
 ### Changed
 * More consistent `makefile` build commands
 * Use Tailwind 2.x & `@tailwindcss/jit`
