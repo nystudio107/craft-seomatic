@@ -11,14 +11,14 @@
 
 namespace nystudio107\seomatic\services;
 
-use craft\errors\SiteNotFoundException;
+use nystudio107\seomatic\helpers\UrlHelper;
 use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\models\EditableTemplate;
 use nystudio107\seomatic\models\FrontendTemplateContainer;
 
 use Craft;
 use craft\base\Component;
+use craft\errors\SiteNotFoundException;
 use craft\events\RegisterUrlRulesEvent;
 use craft\web\UrlManager;
 
@@ -79,11 +79,16 @@ class FrontendTemplates extends Component
      */
     public function loadFrontendTemplateContainers(int $siteId = null)
     {
+        $sites = Craft::$app->getSites();
         if ($siteId === null) {
-            $siteId = Craft::$app->getSites()->currentSite->id ?? 1;
+            $siteId = $sites->getCurrentSite()->id ?? 1;
         }
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId, false);
         if ($metaBundle === null) {
+            return;
+        }
+        // Don't register any frontend templates if this site has a sub-directory as part of the URL
+        if (UrlHelper::urlHasSubDir($sites->getCurrentSite()->getBaseUrl(true))) {
             return;
         }
         $this->frontendTemplateContainer = $metaBundle->frontendTemplatesContainer;
@@ -113,7 +118,7 @@ class FrontendTemplates extends Component
         $rules = [];
         foreach ($this->frontendTemplateContainer->data as $frontendTemplate) {
             if ($frontendTemplate->include) {
-                /** @var $frontendTemplate FrontendTemplate */
+                /** @var $frontendTemplate EditableTemplate */
                 $rules = array_merge(
                     $rules,
                     $frontendTemplate->routeRules()
@@ -159,8 +164,16 @@ class FrontendTemplates extends Component
                 );
                 $html = '';
                 if (!empty($this->frontendTemplateContainer->data[$template])) {
-                    /** @var $frontendTemplate FrontendTemplate */
+                    /** @var $frontendTemplate EditableTemplate */
                     $frontendTemplate = $this->frontendTemplateContainer->data[$template];
+                    // Special-case for the Robots.text template, to upgrade it
+                    if ($template === FrontendTemplates::ROBOTS_TXT_HANDLE) {
+                        $frontendTemplate->templateString = str_replace(
+                            'Sitemap: {{ seomatic.helper.sitemapIndexForSiteId() }}',
+                            '{{ seomatic.helper.sitemapIndex() }}',
+                            $frontendTemplate->templateString
+                        );
+                    }
                     $html = $frontendTemplate->render($params);
                 }
 

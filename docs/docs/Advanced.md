@@ -107,7 +107,7 @@ The event that is triggered when SEOmatic has included the standard meta contain
 use nystudio107\seomatic\events\AddDynamicMetaEvent;
 use nystudio107\seomatic\helpers\DynamicMeta;
 use yii\base\Event;
-Event::on(DynamicMeta::class, DynamicMeta::EVENT_INCLUDE_CONTAINER, function(AddDynamicMetaEvent $e) {
+Event::on(DynamicMeta::class, DynamicMeta::EVENT_ADD_DYNAMIC_META, function(AddDynamicMetaEvent $e) {
     // Add whatever dynamic meta items to the containers as you like
 });
 ```

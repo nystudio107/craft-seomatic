@@ -90,18 +90,18 @@ use yii\base\Event;
  * @package   Seomatic
  * @since     3.0.0
  *
- * @property  FrontendTemplatesService $frontendTemplates
- * @property  HelperService            $helper
- * @property  JsonLdService            $jsonLd
- * @property  LinkService              $link
- * @property  MetaBundlesService       $metaBundles
- * @property  MetaContainersService    $metaContainers
- * @property  ScriptService            $script
- * @property  SeoElementsService       $seoElements
- * @property  SitemapsService          $sitemaps
- * @property  TagService               $tag
- * @property  TitleService             $title
+ * @property FrontendTemplatesService $frontendTemplates
+ * @property HelperService            $helper
+ * @property JsonLdService            $jsonLd
+ * @property LinkService              $link
  * @property ManifestService           $manifest
+ * @property MetaBundlesService       $metaBundles
+ * @property MetaContainersService    $metaContainers
+ * @property ScriptService            $script
+ * @property SeoElementsService       $seoElements
+ * @property SitemapsService          $sitemaps
+ * @property TagService               $tag
+ * @property TitleService             $title
  */
 class Seomatic extends Plugin
 {
@@ -211,6 +211,29 @@ class Seomatic extends Plugin
     // =========================================================================
 
     /**
+     * @inheritdoc
+     */
+    public function __construct($id, $parent = null, array $config = [])
+    {
+        $config['components'] = [
+            'frontendTemplates' => FrontendTemplatesService::class,
+            'helper' => HelperService::class,
+            'jsonLd' => JsonLdService::class,
+            'link' => LinkService::class,
+            'manifest' => ManifestService::class,
+            'metaBundles' => MetaBundlesService::class,
+            'metaContainers' => MetaContainersService::class,
+            'script' => ScriptService::class,
+            'seoElements' => SeoElementsService::class,
+            'sitemaps' => SitemapsService::class,
+            'tag' => TagService::class,
+            'title' => TitleService::class,
+        ];
+
+        parent::__construct($id, $parent, $config);
+    }
+
+    /**
      * Set the matched element
      *
      * @param $element null|ElementInterface
@@ -234,6 +257,16 @@ class Seomatic extends Plugin
      * @var string
      */
     public $schemaVersion = '3.0.9';
+
+    /**
+     * @var bool
+     */
+    public $hasCpSection = true;
+
+    /**
+     * @var bool
+     */
+    public $hasCpSettings = true;
 
     // Public Methods
     // =========================================================================
@@ -437,8 +470,8 @@ class Seomatic extends Plugin
         $this->set('manifest', [
             'class' => ManifestService::class,
             'assetClass' => SeomaticAsset::class,
-            'devServerManifestPath' => 'http://seomatic-buildchain:8080/',
-            'devServerPublicPath' => 'http://seomatic-buildchain:8080/',
+            'devServerManifestPath' => 'http://craft-seomatic-buildchain:8080/',
+            'devServerPublicPath' => 'http://craft-seomatic-buildchain:8080/',
         ]);
 
         // Install our event listeners only if our table schema exists

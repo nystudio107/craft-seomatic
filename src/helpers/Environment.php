@@ -78,7 +78,7 @@ class Environment
         // Try to also check the `ENVIRONMENT` env var
         $environment = getenv('ENVIRONMENT');
         if (Seomatic::$settings->manuallySetEnvironment) {
-            $environment = '';
+            return $env;
         }
         if (!empty($environment)) {
             $environment = strtolower($environment);

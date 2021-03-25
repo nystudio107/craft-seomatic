@@ -1,5 +1,19 @@
 # SEOmatic Changelog
 
+## 3.3.36 - 2021.03.25
+### Changed
+* More consistent `makefile` build commands
+* Use Tailwind 2.x & `@tailwindcss/jit`
+* Move settings from the `composer.json` “extra” to the plugin main class
+* Don't register any frontend templates if this site has a sub-directory as part of the URL (https://github.com/nystudio107/craft-seomatic/issues/859)
+* List all sites sitemaps in the `robots.txt` (https://github.com/nystudio107/craft-seomatic/issues/859)
+
+### Fixed
+* Ensure really long titles are cropped in the sidebar preview
+* Fixed the documentation for the `EVENT_ADD_DYNAMIC_META` event
+* If **Manually Set SEOmatic Environment** is on, ignore `devMode` in determining the environment
+* Fixed issue with global meta bundles not being updated when their version is changed
+
 ## 3.3.35 - 2021.03.03
 ### Fixed
 * Fixed a regression with SEO Settings fields using the old `ManifestHelper`

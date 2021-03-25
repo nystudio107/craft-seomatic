@@ -133,6 +133,17 @@ class UrlHelper extends CraftUrlHelper
         return $url;
     }
 
+    /**
+     * Return whether this URL has a sub-directory as part of it
+     *
+     * @param string $url
+     * @return bool
+     */
+    public static function urlHasSubDir(string $url): bool
+    {
+        return !empty(parse_url(trim($url, '/'), PHP_URL_PATH));
+    }
+
     // Protected Methods
     // =========================================================================
 

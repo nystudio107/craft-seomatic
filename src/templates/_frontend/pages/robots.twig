@@ -1,6 +1,6 @@
 # robots.txt for {{ siteUrl }}
 
-Sitemap: {{ seomatic.helper.sitemapIndexForSiteId() }}
+{{ seomatic.helper.sitemapIndex() }}
 {% switch seomatic.config.environment %}
 
 {% case "live" %}
