@@ -1,5 +1,8 @@
 # SEOmatic Changelog
 
+## 3.3.37 - UNRELEASED
+### Changed
+
 ## 3.3.36 - 2021.03.25
 ### Changed
 * More consistent `makefile` build commands
