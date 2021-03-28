@@ -94,7 +94,6 @@ use yii\base\Event;
  * @property HelperService            $helper
  * @property JsonLdService            $jsonLd
  * @property LinkService              $link
- * @property ManifestService          $manifest
  * @property MetaBundlesService       $metaBundles
  * @property MetaContainersService    $metaContainers
  * @property ScriptService            $script
@@ -102,6 +101,7 @@ use yii\base\Event;
  * @property SitemapsService          $sitemaps
  * @property TagService               $tag
  * @property TitleService             $title
+ * @property ManifestService          $manifest
  */
 class Seomatic extends Plugin
 {
@@ -227,6 +227,13 @@ class Seomatic extends Plugin
             'sitemaps' => SitemapsService::class,
             'tag' => TagService::class,
             'title' => TitleService::class,
+            // Register the manifest service
+            'manifest' => [
+                'class' => ManifestService::class,
+                'assetClass' => SeomaticAsset::class,
+                'devServerManifestPath' => 'http://craft-seomatic-buildchain:8080/',
+                'devServerPublicPath' => 'http://craft-seomatic-buildchain:8080/',
+            ],
         ];
 
         parent::__construct($id, $parent, $config);
@@ -465,14 +472,6 @@ class Seomatic extends Plugin
      */
     protected function installEventListeners()
     {
-        // Register the manifest service
-        $this->set('manifest', [
-            'class' => ManifestService::class,
-            'assetClass' => SeomaticAsset::class,
-            'devServerManifestPath' => 'http://craft-seomatic-buildchain:8080/',
-            'devServerPublicPath' => 'http://craft-seomatic-buildchain:8080/',
-        ]);
-
         // Install our event listeners only if our table schema exists
         if ($this->migrationsAndSchemaReady()) {
             // Add in our Twig extensions
