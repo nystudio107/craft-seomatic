@@ -94,7 +94,7 @@ use yii\base\Event;
  * @property HelperService            $helper
  * @property JsonLdService            $jsonLd
  * @property LinkService              $link
- * @property ManifestService           $manifest
+ * @property ManifestService          $manifest
  * @property MetaBundlesService       $metaBundles
  * @property MetaContainersService    $metaContainers
  * @property ScriptService            $script
@@ -220,7 +220,6 @@ class Seomatic extends Plugin
             'helper' => HelperService::class,
             'jsonLd' => JsonLdService::class,
             'link' => LinkService::class,
-            'manifest' => ManifestService::class,
             'metaBundles' => MetaBundlesService::class,
             'metaContainers' => MetaContainersService::class,
             'script' => ScriptService::class,
