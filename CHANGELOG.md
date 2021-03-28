@@ -2,6 +2,7 @@
 
 ## 3.3.37 - UNRELEASED
 ### Changed
+* Move the manifest service registration to the constructor
 
 ## 3.3.36 - 2021.03.25
 ### Changed
