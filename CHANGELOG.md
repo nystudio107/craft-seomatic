@@ -3,6 +3,7 @@
 ## 3.3.37 - UNRELEASED
 ### Changed
 * Move the manifest service registration to the constructor
+* Guard against a Site that has a `null` Base URL in `loadFrontendTemplateContainers()`
 
 ## 3.3.36 - 2021.03.25
 ### Changed
