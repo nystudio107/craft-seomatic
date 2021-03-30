@@ -87,7 +87,7 @@ class FrontendTemplates extends Component
         if ($metaBundle === null) {
             return;
         }
-        // Don't register any frontend templates if this site has a sub-directory as part of the URL
+        // Don't register any frontend templates if this site has no Base URL or a sub-directory as part of the URL
         try {
             $baseUrl = $sites->getCurrentSite()->getBaseUrl(true);
         } catch (SiteNotFoundException $e) {
