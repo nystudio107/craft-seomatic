@@ -88,7 +88,12 @@ class FrontendTemplates extends Component
             return;
         }
         // Don't register any frontend templates if this site has a sub-directory as part of the URL
-        if (UrlHelper::urlHasSubDir($sites->getCurrentSite()->getBaseUrl(true))) {
+        try {
+            $baseUrl = $sites->getCurrentSite()->getBaseUrl(true);
+        } catch (SiteNotFoundException $e) {
+            $baseUrl = null;
+        }
+        if ($baseUrl === null || UrlHelper::urlHasSubDir($baseUrl)) {
             return;
         }
         $this->frontendTemplateContainer = $metaBundle->frontendTemplatesContainer;
