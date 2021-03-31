@@ -5,6 +5,9 @@
 * Move the manifest service registration to the constructor
 * Guard against a Site that has a `null` Base URL in `loadFrontendTemplateContainers()` (https://github.com/nystudio107/craft-seomatic/issues/861)
 
+### Fixed
+* Fixed an issue where the default settings for Content SEO for sections with multiple entry types was set incorrectly
+
 ## 3.3.36 - 2021.03.25
 ### Changed
 * More consistent `makefile` build commands
