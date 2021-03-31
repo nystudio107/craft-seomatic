@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.3.37 - UNRELEASED
+### Added
+* Added the `.tagAttrs` property to all meta items, so you can dynamically add attributes like `data-` to any of the meta item tags
+
 ### Changed
 * Move the manifest service registration to the constructor
 * Guard against a Site that has a `null` Base URL in `loadFrontendTemplateContainers()` (https://github.com/nystudio107/craft-seomatic/issues/861)
