@@ -9,7 +9,8 @@
 * Guard against a Site that has a `null` Base URL in `loadFrontendTemplateContainers()` (https://github.com/nystudio107/craft-seomatic/issues/861)
 
 ### Fixed
-* Fixed an issue where the default settings for Content SEO for sections with multiple entry types was set incorrectly
+* Fixed an issue where the default settings for Content SEO for sections with multiple entry types was set incorrectly (https://github.com/nystudio107/craft-seomatic/issues/814) & (https://github.com/nystudio107/craft-seomatic/issues/794)
+* Fixed the GTag script to use the `???` empty coalescing operator, to prevent empty strings from being used in `gtagProperty` (https://github.com/nystudio107/craft-seomatic/issues/860)
 
 ## 3.3.36 - 2021.03.25
 ### Changed
