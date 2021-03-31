@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.3.37 - UNRELEASED
+## 3.3.37 - 2021.03.31
 ### Added
 * Added the `.tagAttrs` property to all meta items, so you can dynamically add attributes like `data-` to any of the meta item tags
 
