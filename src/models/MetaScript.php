@@ -203,8 +203,14 @@ class MetaScript extends NonceItem
                     array_flip([
                         'name',
                         'description',
-                        'environment',
-                        'dependencies',
+                        'templatePath',
+                        'templateString',
+                        'position',
+                        'bodyTemplatePath',
+                        'bodyTemplateString',
+                        'bodyPosition',
+                        'vars',
+                        'dataLayer',
                     ])
                 );
                 break;

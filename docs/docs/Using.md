@@ -388,6 +388,51 @@ Which is the same as doing:
 
 So use whatever you like better.
 
+### Extra Tag Attributes
+
+Should you need to add extra tag attributes to a Meta Item, such as the various `data-` tags, you can do that with the `.tagAttrs` property:
+
+```twig
+{% set tag = seomatic.tag.get('description') %}
+{% if tag | length %}
+    {% do tag.tagAttrs({
+        "data-type": "lazy-description",
+    }) %}
+{% endif %}
+```
+
+This will generate a tag that looks like this:
+```html
+<meta name="description" content="Here is my description!" data-type="lazy-description">
+```
+
+A more practical example would be using [Klaro](https://heyklaro.com/) to manage Cookie consent, etc. to not activate Google Analytics until consent is given:
+
+```twig
+{% set tag = seomatic.script.get('googleAnalytics') %}
+{% if tag | length %}
+    {% do tag.tagAttrs({
+        "type": "text/plain",
+        "data-type": "application/javascript",
+        "data-name": "google-analytics",
+    }) %}
+{% endif %}
+```
+
+Then when the page renders in production, it'll look like this:
+```html
+<script type="text/plain" data-name="google-analytics" data-type="application/javascript">(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-XXXXXXXXX', 'auto');
+ga('send', 'pageview');
+</script>
+
+```
+
+For a complete list of the Script handles SEOmatic uses can be found in [ScriptContainer.php](https://github.com/nystudio107/craft-seomatic/blob/v3/src/seomatic-config/globalmeta/ScriptContainer.php)
+
 ### Meta Object `.create()`
 
 To create a new meta object, you pass in a key:value array of the attributes to use when creating it:
@@ -658,6 +703,8 @@ Don't include the Google Analytics script on the page:
 ```twig
 {% do seomatic.script.get("googleAnalytics").include(false) %}
 ```
+
+For a complete list of the Script handles SEOmatic uses can be found in [ScriptContainer.php](https://github.com/nystudio107/craft-seomatic/blob/v3/src/seomatic-config/globalmeta/ScriptContainer.php)
 
 ## Tag Meta Object Functions `seomatic.tag`
 
