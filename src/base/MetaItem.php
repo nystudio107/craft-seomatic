@@ -76,6 +76,7 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
             [['key'], 'string'],
             [['environment'], 'safe'],
             [['dependencies'], 'safe'],
+            [['tagAttrs'], 'safe'],
         ]);
 
         return $rules;
@@ -96,6 +97,7 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
                         'key',
                         'environment',
                         'dependencies',
+                        'tagAttrs',
                     ])
                 );
                 break;
@@ -206,7 +208,7 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
      */
     public function tagAttributes(): array
     {
-        $tagAttributes = $this->toArray();
+        $tagAttributes = array_merge($this->toArray(), $this->tagAttrs);
         $tagAttributes = array_filter($tagAttributes);
         foreach ($tagAttributes as $key => $value) {
             ArrayHelper::rename($tagAttributes, $key, Inflector::slug(Inflector::titleize($key)));
