@@ -456,7 +456,20 @@ class SettingsController extends Controller
         if ($typeId !== null && is_string($typeId)) {
             $typeId = (int)$typeId;
         }
-
+        // Get the (entry) type menu
+        $typeMenu = [];
+        $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
+        if ($seoElement !== null) {
+            $typeMenu = $seoElement::typeMenuFromHandle($sourceHandle);
+        }
+        $variables['typeMenu'] = $typeMenu;
+        $variables['currentTypeId'] = null;
+        if (!empty($typeMenu)) {
+            $currentType = reset($typeMenu);
+            $variables['currentType'] = $typeMenu[$typeId] ?? $currentType;
+            $variables['currentTypeId'] = $typeId ?? key($typeMenu);
+            $typeId = (int)$variables['currentTypeId'];
+        }
         $pluginName = Seomatic::$settings->pluginName;
         // Asset bundle
         try {
@@ -484,19 +497,6 @@ class SettingsController extends Controller
             $siteIdToLoad,
             $typeId
         );
-        // Get the (entry) type menu
-        $typeMenu = [];
-        $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
-        if ($seoElement !== null) {
-            $typeMenu = $seoElement::typeMenuFromHandle($sourceHandle);
-        }
-        $variables['typeMenu'] = $typeMenu;
-        $variables['currentTypeId'] = null;
-        if (!empty($typeMenu)) {
-            $currentType = reset($typeMenu);
-            $variables['currentType'] = $typeMenu[$typeId] ?? $currentType;
-            $variables['currentTypeId'] = $typeId ?? key($typeMenu);
-        }
         Seomatic::$previewingMetaContainers = false;
         $templateTitle = '';
         if ($metaBundle !== null) {
