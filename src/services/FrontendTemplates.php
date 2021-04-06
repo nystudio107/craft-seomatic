@@ -88,31 +88,41 @@ class FrontendTemplates extends Component
             return;
         }
         // Don't register any frontend templates if this site has no Base URL or a sub-directory as part of the URL
+        $shouldRegister = false;
         try {
             $baseUrl = $sites->getCurrentSite()->getBaseUrl(true);
         } catch (SiteNotFoundException $e) {
             $baseUrl = null;
         }
-        if ($baseUrl === null || UrlHelper::urlHasSubDir($baseUrl)) {
-            return;
+        if ($baseUrl !== null && !UrlHelper::urlHasSubDir($baseUrl)) {
+            $shouldRegister = true;
         }
-        $this->frontendTemplateContainer = $metaBundle->frontendTemplatesContainer;
-        // Handler: UrlManager::EVENT_REGISTER_SITE_URL_RULES
-        Event::on(
-            UrlManager::class,
-            UrlManager::EVENT_REGISTER_SITE_URL_RULES,
-            function (RegisterUrlRulesEvent $event) {
-                Craft::debug(
-                    'UrlManager::EVENT_REGISTER_SITE_URL_RULES',
-                    __METHOD__
-                );
-                // Register our sitemap routes
-                $event->rules = array_merge(
-                    $event->rules,
-                    $this->frontendTemplateRouteRules()
-                );
-            }
-        );
+        // See if the path for this request is the domain root, and the request has a file extension
+        $request = Craft::$app->getRequest();
+        $fullPath = $request->getFullPath();
+        if ((strpos($fullPath, '/') === false) && (strpos($fullPath, '.') !== false)) {
+            $shouldRegister = true;
+        }
+        // Register the frontend template only if we pass the various tests
+        if ($shouldRegister) {
+            $this->frontendTemplateContainer = $metaBundle->frontendTemplatesContainer;
+            // Handler: UrlManager::EVENT_REGISTER_SITE_URL_RULES
+            Event::on(
+                UrlManager::class,
+                UrlManager::EVENT_REGISTER_SITE_URL_RULES,
+                function (RegisterUrlRulesEvent $event) {
+                    Craft::debug(
+                        'UrlManager::EVENT_REGISTER_SITE_URL_RULES',
+                        __METHOD__
+                    );
+                    // Register our sitemap routes
+                    $event->rules = array_merge(
+                        $event->rules,
+                        $this->frontendTemplateRouteRules()
+                    );
+                }
+            );
+        }
     }
 
     /**
