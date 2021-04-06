@@ -1,5 +1,14 @@
 # SEOmatic Changelog
 
+## 3.3.38 - 2021.04.06
+### Added
+* Added `make update` to update NPM packages
+* Added `make update-clean` to completely remove `node_modules/`, then update NPM packages
+
+### Changed
+* SEOmatic will now register frontend templates even if they request matches no Craft site, but the request is for a document in the root domain that has a file extension, e.g. `robots.txt`
+* Use Tailwind CSS `^2.1.0` with JIT
+
 ## 3.3.37 - 2021.03.31
 ### Added
 * Added the `.tagAttrs` property to all meta items, so you can dynamically add attributes like `data-` to any of the meta item tags
