@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.3.38 - UNRELEASED
+## 3.3.38 - 2021.04.06
 ### Added
 * Added `make update` to update NPM packages
 * Added `make update-clean` to completely remove `node_modules/`, then update NPM packages
