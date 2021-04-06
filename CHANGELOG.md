@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.38 - UNRELEASED
+### Changed
+* SEOmatic will now register frontend templates even if they request matches no Craft site, but the request is for a document in the root domain that has a file extension, e.g. `robots.txt`
+
 ## 3.3.37 - 2021.03.31
 ### Added
 * Added the `.tagAttrs` property to all meta items, so you can dynamically add attributes like `data-` to any of the meta item tags
