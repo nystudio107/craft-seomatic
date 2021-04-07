@@ -7,6 +7,9 @@
 ### Changed
 * Changed how we determine whether environment mappings should be applied to meta items so GraphQL requests will have them applied
 
+### Fixed
+* For pagination, adjust the canonical URL tag as well as the variable
+
 ## 3.3.38 - 2021.04.06
 ### Added
 * Added `make update` to update NPM packages
