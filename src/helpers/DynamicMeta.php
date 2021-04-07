@@ -108,10 +108,6 @@ class DynamicMeta
             $url = $pageInfo->getPageUrl($pageInfo->currentPage);
             if (!empty($url)) {
                 Seomatic::$seomaticVariable->meta->canonicalUrl = $url;
-                $canonical = Seomatic::$seomaticVariable->link->get('canonical');
-                if ($canonical !== null) {
-                    $canonical->href = $url;
-                }
             }
             // Set the previous URL
             $url = $pageInfo->getPrevUrl();
