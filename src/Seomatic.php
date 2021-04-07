@@ -190,6 +190,11 @@ class Seomatic extends Plugin
     /**
      * @var bool
      */
+    public static $headlessRequest = false;
+
+    /**
+     * @var bool
+     */
     public static $craft31 = false;
 
     /**

@@ -48,7 +48,7 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
     {
         parent::init();
         // Set any per-environment attributes
-        if (!Seomatic::$previewingMetaContainers) {
+        if (!Seomatic::$previewingMetaContainers || Seomatic::$headlessRequest) {
             $attributes = [];
             $envVars = null;
             try {
