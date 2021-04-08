@@ -67,9 +67,38 @@ fields[seoMeta][metaGlobalVars][canonicalUrl]
             handle: 'seoKeywords',
         },
         {
-            label: 'SEO Image',
-            handle: 'seoImage',
+            label: 'SEO Image Source',
+            handle: 'seoImageSource',
+            default: {
+                type: 'select',
+                options: [
+                    {
+                        label: 'From Asset Field',
+                        value: 'fromField',
+                    },
+                    {
+                        label: 'Custom Image',
+                        value: 'fromAsset',
+                    },
+                    {
+                        label: 'Custom URL',
+                        value: 'fromUrl',
+                    },
+                ],
+            },
+        },
+        {
+            label: 'SEO Asset Field',
+            handle: 'seoImageField',
+        },
+        {
+            label: 'SEO Custom Image',
+            handle: 'seoImageIds',
             type: 'assets',
+        },
+        {
+            label: 'SEO Custom URL',
+            handle: 'seoImage',
         },
         {
             label: 'SEO Image Description',
@@ -79,42 +108,42 @@ fields[seoMeta][metaGlobalVars][canonicalUrl]
             label: 'Robots',
             handle: 'robots',
             default: {
-            type: 'select',
-            options: [
-                {
-                    label: 'Don\'t import',
-                    value: '',
-                },
-                {
-                    label: 'All - Index this page and follow links (default)',
-                    value: 'all',
-                },
-                {
-                    label: 'None - Do not index or follow links on this page',
-                    value: 'none',
-                },
-                {
-                    label: 'No Index - Do not index this page',
-                    value: 'noindex',
-                },
-                {
-                    label: 'No Follow - Do not follow links on this page',
-                    value: 'nofollow',
-                },
-                {
-                    label: 'No Snippet - Do not show rich snippets from this page',
-                    value: 'nosnippet',
-                },
-                {
-                    label: 'No Archive - Do not archive a cached version of this page',
-                    value: 'noarchive',
-                },
-                {
-                    label: 'No Image Index - Do not index images on this page',
-                    value: 'noimageindex',
-                },
-            ],
-        },
+                type: 'select',
+                options: [
+                    {
+                        label: 'Don\'t import',
+                        value: '',
+                    },
+                    {
+                        label: 'All - Index this page and follow links (default)',
+                        value: 'all',
+                    },
+                    {
+                        label: 'None - Do not index or follow links on this page',
+                        value: 'none',
+                    },
+                    {
+                        label: 'No Index - Do not index this page',
+                        value: 'noindex',
+                    },
+                    {
+                        label: 'No Follow - Do not follow links on this page',
+                        value: 'nofollow',
+                    },
+                    {
+                        label: 'No Snippet - Do not show rich snippets from this page',
+                        value: 'nosnippet',
+                    },
+                    {
+                        label: 'No Archive - Do not archive a cached version of this page',
+                        value: 'noarchive',
+                    },
+                    {
+                        label: 'No Image Index - Do not index images on this page',
+                        value: 'noimageindex',
+                    },
+                ],
+            },
         },
         {
             label: 'Canonical URL',
@@ -129,9 +158,38 @@ fields[seoMeta][metaGlobalVars][canonicalUrl]
             handle: 'twitterDescription',
         },
         {
-            label: 'Twitter Image',
-            handle: 'twitterImage',
+            label: 'Twitter Image Source',
+            handle: 'twitterImageSource',
+            default: {
+                type: 'select',
+                options: [
+                    {
+                        label: 'From Asset Field',
+                        value: 'fromField',
+                    },
+                    {
+                        label: 'Custom Image',
+                        value: 'fromAsset',
+                    },
+                    {
+                        label: 'Custom URL',
+                        value: 'fromUrl',
+                    },
+                ],
+            },
+        },
+        {
+            label: 'Twitter Asset Field',
+            handle: 'twitterImageField',
+        },
+        {
+            label: 'Twitter Custom Image',
+            handle: 'twitterImageIds',
             type: 'assets',
+        },
+        {
+            label: 'Twitter Custom URL',
+            handle: 'twitterImage',
         },
         {
             label: 'Twitter Image Description',
@@ -146,9 +204,38 @@ fields[seoMeta][metaGlobalVars][canonicalUrl]
             handle: 'ogDescription',
         },
         {
-            label: 'Facebook Image',
-            handle: 'ogImage',
+            label: 'Facebook Image Source',
+            handle: 'ogImageSource',
+            default: {
+                type: 'select',
+                options: [
+                    {
+                        label: 'From Asset Field',
+                        value: 'fromField',
+                    },
+                    {
+                        label: 'Custom Image',
+                        value: 'fromAsset',
+                    },
+                    {
+                        label: 'Custom URL',
+                        value: 'fromUrl',
+                    },
+                ],
+            },
+        },
+        {
+            label: 'Facebook Asset Field',
+            handle: 'togImageField',
+        },
+        {
+            label: 'Facebook Custom Image',
+            handle: 'ogImageIds',
             type: 'assets',
+        },
+        {
+            label: 'Facebook Custom URL',
+            handle: 'ogImage',
         },
         {
             label: 'Facebook Image Description',

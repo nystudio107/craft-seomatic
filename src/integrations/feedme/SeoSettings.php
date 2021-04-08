@@ -74,26 +74,26 @@ class SeoSettings extends FeedMeField implements FeedMeFieldInterface
             return null;
         }
 
-        // Rip out the asset images to put them in the right place
-        $assetMappings = array_filter([
-            'seoImage' => ArrayHelper::remove($preppedData['metaGlobalVars'], 'seoImage'),
-            'twitterImage' => ArrayHelper::remove($preppedData['metaGlobalVars'], 'twitterImage'),
-            'ogImage' => ArrayHelper::remove($preppedData['metaGlobalVars'], 'ogImage'),
+        // Rip out asset related settings to place in `metaBundleSettings`
+        $preppedData['metaBundleSettings'] = array_filter([
+            'seoImageSource' => ArrayHelper::remove($preppedData['metaGlobalVars'], 'seoImageSource'),
+            'twitterImageSource' => ArrayHelper::remove($preppedData['metaGlobalVars'], 'twitterImageSource'),
+            'ogImageSource' => ArrayHelper::remove($preppedData['metaGlobalVars'], 'ogImageSource'),
         ]);
 
-        // Provide the respective mapping key to the destination property name. Done this way for
-        // backward compatibility. This is because asset IDs are stored on `metaGlobalVars`.
-        $assetPropertyMapping = [
-            'seoImage' => 'seoImageIds',
-            'twitterImage' => 'twitterImageIds',
-            'ogImage' => 'ogImageIds',
-        ];
+        // Rip out asset images we need to upload or fetch as actual IDs
+        $assetMappings = array_filter([
+            'seoImageIds' => ArrayHelper::remove($preppedData['metaGlobalVars'], 'seoImageIds'),
+            'twitterImageIds' => ArrayHelper::remove($preppedData['metaGlobalVars'], 'twitterImageIds'),
+            'ogImageIds' => ArrayHelper::remove($preppedData['metaGlobalVars'], 'ogImageIds'),
+        ]);
 
+        // Handle image uploads
         foreach ($assetMappings as $key => $assetMapping) {
             $fieldInfo = Hash::get($this->fieldInfo, "fields.metaGlobalVars.{$key}");
 
             if ($assetIds = $this->parseImage($assetMapping, $fieldInfo)) {
-                $preppedData['metaBundleSettings'][$assetPropertyMapping[$key]] = $assetIds;
+                $preppedData['metaBundleSettings'][$key] = $assetIds;
             }
         }
 
