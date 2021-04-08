@@ -93,7 +93,7 @@ class SeoSettings extends FeedMeField implements FeedMeFieldInterface
             $fieldInfo = Hash::get($this->fieldInfo, "fields.metaGlobalVars.{$key}");
 
             if ($assetIds = $this->parseImage($assetMapping, $fieldInfo)) {
-                $preppedData['metaBundleSettings'][$assetPropertyMapping[$key]] = [$assetIds];
+                $preppedData['metaBundleSettings'][$assetPropertyMapping[$key]] = $assetIds;
             }
         }
 
@@ -130,34 +130,29 @@ class SeoSettings extends FeedMeField implements FeedMeFieldInterface
             return $value[0];
         }
 
-        // Just get the first available folder. SEOMatic doesn't really support a nominated folder.
-        $folderId = (new Query())
+        // Fetch all folders to search for an existing asset with the provided name
+        $folderIds = (new Query())
             ->select(['id'])
             ->from([Table::VOLUMEFOLDERS])
-            ->limit(1)
             ->column();
 
         // Search anywhere in Craft
         $foundElement = AssetElement::find()
             ->filename($value)
-            ->folderId($folderId)
+            ->folderId($folderIds)
             ->one();
 
         // Do we want to match existing elements, and was one found?
         if ($foundElement && $conflict === AssetElement::SCENARIO_INDEX) {
-            // If so, we still need to make a copy temporarily, as the Users service needs to add it in properly
-            return $foundElement->id;
+            return [$foundElement->id];
         }
 
         // We can't find an existing asset, we need to download it, or plain ignore it
         if ($urlToUpload) {
-            $uploadedElementIds = AssetHelper::fetchRemoteImage([$urlToUpload], $fieldInfo, $this->feed, null, $this->element, $folderId);
+            // Just get the first available folder. SEOMatic doesn't really support a nominated folder.
+            $folderId = $folderIds[0];
 
-            if ($uploadedElementIds) {
-
-                // We still need to make a copy temporarily, as the Users service needs to add it in properly
-                return $uploadedElementIds[0];
-            }
+            return AssetHelper::fetchRemoteImage([$urlToUpload], $fieldInfo, $this->feed, null, $this->element, $folderId);
         }
     }
 }
