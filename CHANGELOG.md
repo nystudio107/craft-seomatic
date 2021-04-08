@@ -10,6 +10,7 @@
 
 ### Fixed
 * For pagination, adjust the canonical URL tag as well as the variable
+* Don't strip the query string from paginated canonical URLs
 
 ## 3.3.38 - 2021.04.06
 ### Added
