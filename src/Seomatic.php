@@ -405,7 +405,7 @@ class Seomatic extends Plugin
         if ($currentUser->can('seomatic:tracking-scripts')) {
             $subNavs['tracking'] = [
                 'label' => Craft::t('seomatic', 'Tracking Scripts'),
-                'url' => 'seomatic/tracking/googleAnalytics'.$siteSuffix,
+                'url' => 'seomatic/tracking/gtag'.$siteSuffix,
             ];
         }
         $editableSettings = true;

@@ -49,8 +49,8 @@ return [
                 'bodyPosition' => View::POS_BEGIN,
                 'vars' => [
                     'googleAnalyticsId' => [
-                        'title' => 'Google Analytics Tracking ID',
-                        'instructions' => 'Only enter the ID, e.g.: `UA-XXXXXX-XX`, not the entire script code. [Learn More](https://support.google.com/analytics/answer/1032385?hl=e)',
+                        'title' => 'Google Analytics Measurement/Tracking ID',
+                        'instructions' => 'Only enter the ID, e.g.: `G-XXXXXXXXXX` or `UA-XXXXXX-XX`, not the entire script code. [Learn More](https://support.google.com/analytics/answer/1032385?hl=e)',
                         'type' => 'string',
                         'value' => '',
                     ],

@@ -821,7 +821,7 @@ class SettingsController extends Controller
      * @throws NotFoundHttpException
      * @throws \yii\web\ForbiddenHttpException
      */
-    public function actionTracking(string $subSection = 'googleAnalytics', string $siteHandle = null, $loadFromSiteHandle = null): Response
+    public function actionTracking(string $subSection = 'gtag', string $siteHandle = null, $loadFromSiteHandle = null): Response
     {
         $variables = [];
         // Get the site to edit
