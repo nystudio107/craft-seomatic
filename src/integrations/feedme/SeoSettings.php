@@ -12,9 +12,16 @@ namespace nystudio107\seomatic\integrations\feedme;
 use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
 
 use Craft;
+use craft\db\Query;
+use craft\db\Table;
+use craft\elements\Asset as AssetElement;
+use craft\helpers\ArrayHelper;
+use craft\helpers\Db;
+use craft\helpers\UrlHelper;
 
 use craft\feedme\base\Field as FeedMeField;
 use craft\feedme\base\FieldInterface as FeedMeFieldInterface;
+use craft\feedme\helpers\AssetHelper;
 use craft\feedme\helpers\DataHelper;
 
 use Cake\Utility\Hash;
@@ -67,6 +74,90 @@ class SeoSettings extends FeedMeField implements FeedMeFieldInterface
             return null;
         }
 
+        // Rip out the asset images to put them in the right place
+        $assetMappings = array_filter([
+            'seoImage' => ArrayHelper::remove($preppedData['metaGlobalVars'], 'seoImage'),
+            'twitterImage' => ArrayHelper::remove($preppedData['metaGlobalVars'], 'twitterImage'),
+            'ogImage' => ArrayHelper::remove($preppedData['metaGlobalVars'], 'ogImage'),
+        ]);
+
+        // Provide the respective mapping key to the destination property name. Done this way for
+        // backward compatibility. This is because asset IDs are stored on `metaGlobalVars`.
+        $assetPropertyMapping = [
+            'seoImage' => 'seoImageIds',
+            'twitterImage' => 'twitterImageIds',
+            'ogImage' => 'ogImageIds',
+        ];
+
+        foreach ($assetMappings as $key => $assetMapping) {
+            $fieldInfo = Hash::get($this->fieldInfo, "fields.metaGlobalVars.{$key}");
+
+            if ($assetIds = $this->parseImage($assetMapping, $fieldInfo)) {
+                $preppedData['metaBundleSettings'][$assetPropertyMapping[$key]] = [$assetIds];
+            }
+        }
+
         return $preppedData;
+    }
+
+    /**
+     * @param $value
+     * @param $fieldInfo
+     * @return int|mixed|string|null
+     * @throws \yii\base\Exception
+     */
+    protected function parseImage($value, $fieldInfo)
+    {
+        $upload = Hash::get($fieldInfo, 'options.upload');
+        $conflict = Hash::get($fieldInfo, 'options.conflict');
+
+        // Try to find an existing element
+        $urlToUpload = null;
+
+        // If we're uploading files, this will need to be an absolute URL. If it is, save until later.
+        // We also don't check for existing assets here, so break out instantly.
+        if ($upload && is_string($value) && UrlHelper::isAbsoluteUrl($value)) {
+            $urlToUpload = $value;
+
+            // If we're opting to use the already uploaded asset, we can check here
+            if ($conflict === AssetElement::SCENARIO_INDEX) {
+                $value = AssetHelper::getRemoteUrlFilename($value);
+            }
+        }
+
+        // See if its a default asset
+        if (is_array($value) && isset($value[0])) {
+            return $value[0];
+        }
+
+        // Just get the first available folder. SEOMatic doesn't really support a nominated folder.
+        $folderId = (new Query())
+            ->select(['id'])
+            ->from([Table::VOLUMEFOLDERS])
+            ->limit(1)
+            ->column();
+
+        // Search anywhere in Craft
+        $foundElement = AssetElement::find()
+            ->filename($value)
+            ->folderId($folderId)
+            ->one();
+
+        // Do we want to match existing elements, and was one found?
+        if ($foundElement && $conflict === AssetElement::SCENARIO_INDEX) {
+            // If so, we still need to make a copy temporarily, as the Users service needs to add it in properly
+            return $foundElement->id;
+        }
+
+        // We can't find an existing asset, we need to download it, or plain ignore it
+        if ($urlToUpload) {
+            $uploadedElementIds = AssetHelper::fetchRemoteImage([$urlToUpload], $fieldInfo, $this->feed, null, $this->element, $folderId);
+
+            if ($uploadedElementIds) {
+
+                // We still need to make a copy temporarily, as the Users service needs to add it in properly
+                return $uploadedElementIds[0];
+            }
+        }
     }
 }
