@@ -6,6 +6,7 @@
 
 ### Changed
 * Changed how we determine whether environment mappings should be applied to meta items so GraphQL requests will have them applied
+* Google gtag.js is now the first and default option in Tracking Scripts, and a footnote to use it for Google Analytics 4 is included (https://github.com/nystudio107/craft-seomatic/issues/788)
 
 ### Fixed
 * For pagination, adjust the canonical URL tag as well as the variable
