@@ -251,6 +251,65 @@ return [
                     ],
                 ],
             ],
+            'fathom' => [
+                'include' => false,
+                'environment' => [
+                    'staging' => [
+                        'include' => false,
+                    ],
+                    'local' => [
+                        'include' => false,
+                    ],
+                ],
+                'name' => 'Fathom',
+                'description' => 'Fathom is a simple, light-weight, privacy-first alternative to Google Analytics. So, stop scrolling through pages of reports and collecting gobs of personal data about your visitors, both of which you probably don’t need. [Learn More](https://usefathom.com/)',
+                'templatePath' => '_frontend/scripts/fathomAnalytics.twig',
+                'position' => View::POS_HEAD,
+                'vars' => [
+                    'siteId' => [
+                        'title' => 'Site ID',
+                        'instructions' => 'Only enter the Site ID, not the entire script code. [Learn More](https://usefathom.com/support/tracking)',
+                        'type' => 'string',
+                        'value' => '',
+                    ],
+                    'honorDnt' => [
+                        'title' => 'Honoring Do Not Track (DNT)',
+                        'instructions' => 'By default we track every visitor to your website, regardless of them having DNT turned on or not. [Learn More](https://usefathom.com/support/tracking-advanced)',
+                        'type' => 'bool',
+                        'value' => false,
+                    ],
+                    'disableAutoTracking' => [
+                        'title' => 'Disable automatic tracking',
+                        'instructions' => 'By default, we track a page view every time a visitor to your website loads a page with our script on it. [Learn More](https://usefathom.com/support/tracking-advanced)',
+                        'type' => 'bool',
+                        'value' => false,
+                    ],
+                    'ignoreCanonicals' => [
+                        'title' => 'Ignore canonicals',
+                        'instructions' => 'If there’s a canonical URL in place, then by default we use it instead of the current URL. [Learn More](https://usefathom.com/support/tracking-advanced)',
+                        'type' => 'bool',
+                        'value' => false,
+                    ],
+                    'excludedDomains' => [
+                        'title' => 'Excluded Domains',
+                        'instructions' => 'You exclude one or several domains, so our tracker will track things on every domain, except the ones excluded. [Learn More](https://usefathom.com/support/tracking-advanced)',
+                        'type' => 'string',
+                        'value' => '',
+                    ],
+                    'includedDomains' => [
+                        'title' => 'Included Domains',
+                        'instructions' => 'If you want to go in the opposite direction and only track stats on a specific domain. [Learn More](https://usefathom.com/support/tracking-advanced)',
+                        'type' => 'string',
+                        'value' => '',
+                    ],
+                    'scriptUrl' => [
+                        'title' => 'Fathom Script URL',
+                        'instructions' => 'The URL to the Fathom tracking script. Normally this should not be changed, unless you locally cache it.',
+                        'type' => 'string',
+                        'value' => 'https://cdn.usefathom.com/script.js',
+                    ],
+                ],
+            ],
             'googleAnalytics' => [
                 'include' => false,
                 'environment' => [
