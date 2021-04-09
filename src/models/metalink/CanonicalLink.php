@@ -94,8 +94,10 @@ class CanonicalLink extends MetaLink
                 $url = UrlHelper::absoluteUrlWithProtocol($data['href']);
                 // The URL should be stripped of its query string already, but because
                 // Craft adds the `token` URL param back in via UrlHelper, strip it again
-                $url = preg_replace('/\?.*/', '', $url);
-                $data['href'] = $url;
+                if (Seomatic::$plugin->metaContainers->paginationPage === '1') {
+                    $url = preg_replace('/\?.*/', '', $url);
+                    $data['href'] = $url;
+                }
             }
         }
 

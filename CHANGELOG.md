@@ -1,5 +1,20 @@
 # SEOmatic Changelog
 
+## 3.3.39 - 2021.04.09
+### Added
+ * Added support for Facebook domain verification via the `facebook-domain-verification` tag (https://github.com/nystudio107/craft-seomatic/issues/856)
+* Add proper support for importing assets via Feed Me (https://github.com/nystudio107/craft-seomatic/issues/840)
+* Google gtag.js is now the first and default option in Tracking Scripts, and a footnote to use it for Google Analytics 4 is included (https://github.com/nystudio107/craft-seomatic/issues/788)
+* Added support for Fathom Analytics in the Tracking Scripts section (https://github.com/nystudio107/craft-seomatic/issues/823)
+* Added support for Plausible Analytics in the Tracking Scripts section (https://github.com/nystudio107/craft-seomatic/issues/817)
+
+### Changed
+* Changed how we determine whether environment mappings should be applied to meta items so GraphQL requests will have them applied
+
+### Fixed
+* For pagination, adjust the canonical URL tag as well as the variable
+* Don't strip the query string from paginated canonical URLs
+
 ## 3.3.38 - 2021.04.06
 ### Added
 * Added `make update` to update NPM packages

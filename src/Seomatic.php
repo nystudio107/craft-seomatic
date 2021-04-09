@@ -190,6 +190,11 @@ class Seomatic extends Plugin
     /**
      * @var bool
      */
+    public static $headlessRequest = false;
+
+    /**
+     * @var bool
+     */
     public static $craft31 = false;
 
     /**
@@ -400,7 +405,7 @@ class Seomatic extends Plugin
         if ($currentUser->can('seomatic:tracking-scripts')) {
             $subNavs['tracking'] = [
                 'label' => Craft::t('seomatic', 'Tracking Scripts'),
-                'url' => 'seomatic/tracking/googleAnalytics'.$siteSuffix,
+                'url' => 'seomatic/tracking/gtag'.$siteSuffix,
             ];
         }
         $editableSettings = true;
