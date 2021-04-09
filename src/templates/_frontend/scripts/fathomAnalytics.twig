@@ -1,4 +1,5 @@
 {% if siteId.value is defined and siteId.value %}
+(function() {
 var tag = document.createElement('script');
 tag.src = "{{ scriptUrl.value }}";
 tag.defer = true;
@@ -20,4 +21,5 @@ tag.setAttribute("data-included-domains", "{{ includedDomains.value | raw }}");
 {% endif %}
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+})();
 {% endif %}
