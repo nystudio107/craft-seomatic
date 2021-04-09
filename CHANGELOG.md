@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.3.39 - UNRELEASED
+## 3.3.39 - 2021.04.09
 ### Added
  * Added support for Facebook domain verification via the `facebook-domain-verification` tag (https://github.com/nystudio107/craft-seomatic/issues/856)
 * Add proper support for importing assets via Feed Me (https://github.com/nystudio107/craft-seomatic/issues/840)
