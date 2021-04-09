@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.40 - UNRELEASED
+### Changed
+* 
+
 ## 3.3.39 - 2021.04.09
 ### Added
  * Added support for Facebook domain verification via the `facebook-domain-verification` tag (https://github.com/nystudio107/craft-seomatic/issues/856)
