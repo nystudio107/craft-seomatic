@@ -1,0 +1,8 @@
+{% if siteDomain.value is defined and siteDomain.value %}
+var tag = document.createElement('script');
+tag.src = "{{ scriptUrl.value }}";
+tag.defer = true;
+tag.setAttribute("data-domain", "{{ siteDomain.value | raw }}");
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+{% endif %}

@@ -310,6 +310,35 @@ return [
                     ],
                 ],
             ],
+            'plausible' => [
+                'include' => false,
+                'environment' => [
+                    'staging' => [
+                        'include' => false,
+                    ],
+                    'local' => [
+                        'include' => false,
+                    ],
+                ],
+                'name' => 'Plausible',
+                'description' => 'Plausible is a lightweight and open-source website analytics tool. No cookies and fully compliant with GDPR, CCPA and PECR. [Learn More](https://plausible.io/)',
+                'templatePath' => '_frontend/scripts/plausibleAnalytics.twig',
+                'position' => View::POS_HEAD,
+                'vars' => [
+                    'siteDomain' => [
+                        'title' => 'Site Domain',
+                        'instructions' => 'Only enter the site domain, not the entire script code. [Learn More](https://plausible.io/docs/plausible-script)',
+                        'type' => 'string',
+                        'value' => '',
+                    ],
+                    'scriptUrl' => [
+                        'title' => 'Plausible Script URL',
+                        'instructions' => 'The URL to the Plausible tracking script. Normally this should not be changed, unless you locally cache it.',
+                        'type' => 'string',
+                        'value' => 'https://plausible.io/js/plausible.js',
+                    ],
+                ],
+            ],
             'googleAnalytics' => [
                 'include' => false,
                 'environment' => [
