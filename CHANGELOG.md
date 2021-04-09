@@ -3,6 +3,7 @@
 ## 3.3.39 - UNRELEASED
 ### Added
  * Added support for Facebook domain verification via the `facebook-domain-verification` tag (https://github.com/nystudio107/craft-seomatic/issues/856)
+* Add proper support for importing assets via Feed Me (https://github.com/nystudio107/craft-seomatic/issues/840)
 
 ### Changed
 * Changed how we determine whether environment mappings should be applied to meta items so GraphQL requests will have them applied
