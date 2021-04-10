@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.3.40 - UNRELEASED
+### Added
+* * Added support for Matomo Analytics in the Tracking Scripts section
+
 ### Changed
 * Wrap tracking scripts in IFFYs
 
