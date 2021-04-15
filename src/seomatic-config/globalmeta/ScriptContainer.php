@@ -310,6 +310,47 @@ return [
                     ],
                 ],
             ],
+            'matomo' => [
+                'include' => false,
+                'environment' => [
+                    'staging' => [
+                        'include' => false,
+                    ],
+                    'local' => [
+                        'include' => false,
+                    ],
+                ],
+                'name' => 'Matomo',
+                'description' => 'Matomo is a Google Analytics alternative that protects your data and your customers\' privacy [Learn More](https://matomo.org/)',
+                'templatePath' => '_frontend/scripts/matomoAnalytics.twig',
+                'position' => View::POS_HEAD,
+                'vars' => [
+                    'siteId' => [
+                        'title' => 'Site ID',
+                        'instructions' => 'Only enter the Site ID, not the entire script code. [Learn More](https://developer.matomo.org/guides/tracking-javascript-guide)',
+                        'type' => 'string',
+                        'value' => '',
+                    ],
+                    'sendPageView' => [
+                        'title' => 'Automatically send Matomo PageView',
+                        'instructions' => 'Controls whether the Matomo script automatically sends a PageView when your pages are loaded. [Learn More](https://developer.matomo.org/api-reference/tracking-javascript)',
+                        'type' => 'bool',
+                        'value' => true,
+                    ],
+                    'enableLinkTracking' => [
+                        'title' => 'Enable Link Tracking',
+                        'instructions' => 'Install link tracking on all applicable link elements. [Learn More](https://developer.matomo.org/api-reference/tracking-javascript)',
+                        'type' => 'bool',
+                        'value' => true,
+                    ],
+                    'scriptUrl' => [
+                        'title' => 'Matomo Script URL',
+                        'instructions' => 'The URL to the Fathom tracking script. This will vary depending on whether you are using Matomo Cloud or Matomo On-Premise. [Learn More](https://developer.matomo.org/guides/tracking-javascript-guide)',
+                        'type' => 'string',
+                        'value' => '',
+                    ],
+                ],
+            ],
             'plausible' => [
                 'include' => false,
                 'environment' => [

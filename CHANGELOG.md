@@ -1,5 +1,15 @@
 # SEOmatic Changelog
 
+## 3.3.40 - 2021.04.15
+### Added
+* * Added support for Matomo Analytics in the Tracking Scripts section
+
+### Changed
+* Wrap tracking scripts in IFFYs
+
+### Fixed
+* Ensure assets imported via FeedMe don't end up in a `null` volume ID (https://github.com/nystudio107/craft-seomatic/issues/840)
+
 ## 3.3.39 - 2021.04.09
 ### Added
  * Added support for Facebook domain verification via the `facebook-domain-verification` tag (https://github.com/nystudio107/craft-seomatic/issues/856)

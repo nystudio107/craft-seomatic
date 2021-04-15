@@ -134,6 +134,7 @@ class SeoSettings extends FeedMeField implements FeedMeFieldInterface
         $folderIds = (new Query())
             ->select(['id'])
             ->from([Table::VOLUMEFOLDERS])
+            ->where(['not', ['volumeId' => null]])
             ->column();
 
         // Search anywhere in Craft
