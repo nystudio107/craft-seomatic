@@ -2,7 +2,7 @@
 
 ## 3.3.40 - 2021.04.15
 ### Added
-* * Added support for Matomo Analytics in the Tracking Scripts section
+* Added support for Matomo Analytics in the Tracking Scripts section
 
 ### Changed
 * Wrap tracking scripts in IFFYs
