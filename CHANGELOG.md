@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.41 - UNRELEASED
+### Added
+* Only add a sitemap to the sitemap index if there's at least 1 element in the resulting sitemap (https://github.com/nystudio107/craft-seomatic/issues/873)
+
 ## 3.3.40 - 2021.04.15
 ### Added
 * Added support for Matomo Analytics in the Tracking Scripts section
