@@ -103,11 +103,15 @@ class DynamicMeta
         if ($pageInfo !== null && $pageInfo->currentPage !== null) {
             // Let the meta containers know that this page is paginated
             Seomatic::$plugin->metaContainers->paginationPage = (string)$pageInfo->currentPage;
-            // Set the the canonical URL to be the first page of the paginated pages
+            // Set the the canonical URL to be the paginated URL
             // see: https://github.com/nystudio107/craft-seomatic/issues/375#issuecomment-488369209
             $url = $pageInfo->getPageUrl($pageInfo->currentPage);
             if (!empty($url)) {
                 Seomatic::$seomaticVariable->meta->canonicalUrl = $url;
+                $canonical = Seomatic::$seomaticVariable->link->get('canonical');
+                if ($canonical !== null) {
+                    $canonical->href = $url;
+                }
             }
             // Set the previous URL
             $url = $pageInfo->getPrevUrl();
