@@ -4,6 +4,10 @@
 ### Added
 * Only add a sitemap to the sitemap index if there's at least 1 element in the resulting sitemap (https://github.com/nystudio107/craft-seomatic/issues/873)
 
+### Changed
+* Have all of the Site Map settings in the SEO Settings field default to empty, so they fall back on the Content SEO value by default (https://github.com/nystudio107/craft-seomatic/issues/871)
+* Have the image transform modes all default to empty, so they will fall back on the Content SEO value by default
+
 ## 3.3.40 - 2021.04.15
 ### Added
 * Added support for Matomo Analytics in the Tracking Scripts section
