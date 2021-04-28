@@ -33,7 +33,7 @@ return [
         'seoImageSource'                => 'fromAsset',
         'seoImageField'                 => '',
         'seoImageTransform'             => true,
-        'seoImageTransformMode'         => 'crop',
+        'seoImageTransformMode'         => '',
         'seoImageDescriptionSource'     => 'fromCustom',
         'seoImageDescriptionField'      => '',
 
@@ -48,7 +48,7 @@ return [
         'twitterImageSource'            => 'sameAsSeo',
         'twitterImageField'             => '',
         'twitterImageTransform'         => true,
-        'twitterImageTransformMode'     => 'crop',
+        'twitterImageTransformMode'     => '',
         'twitterImageDescriptionSource' => 'sameAsSeo',
         'twitterImageDescriptionField'  => '',
 
@@ -61,7 +61,7 @@ return [
         'ogImageSource'                 => 'sameAsSeo',
         'ogImageField'                  => '',
         'ogImageTransform'              => true,
-        'ogImageTransformMode'          => 'crop',
+        'ogImageTransformMode'          => '',
         'ogImageDescriptionSource'      => 'sameAsSeo',
         'ogImageDescriptionField'       => '',
     ],
