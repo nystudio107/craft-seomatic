@@ -11,6 +11,7 @@
 ### Fixed
 * For paginated pages, re-apply the adjustment to the canonical URL tag as well (https://github.com/nystudio107/craft-seomatic/issues/875)
 * Handle the case of empty asset ids being passed in from a missing asset source (https://github.com/nystudio107/craft-seomatic/issues/882)
+* Fixed the verbiage in the Matomo script URL setting (https://github.com/nystudio107/craft-seomatic/issues/880)
 
 ## 3.3.40 - 2021.04.15
 ### Added
