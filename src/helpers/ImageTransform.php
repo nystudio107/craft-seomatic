@@ -230,11 +230,15 @@ class ImageTransform
         if (!empty($assetIds)) {
             if (\is_array($assetIds)) {
                 foreach ($assetIds as $assetId) {
-                    $assets[] = $elements->getElementById($assetId, Asset::class, $siteId);
+                    if (!empty($assetId)) {
+                        $assets[] = $elements->getElementById((int)$assetId, Asset::class, $siteId);
+                    }
                 }
             } else {
                 $assetId = $assetIds;
-                $assets[] = $elements->getElementById($assetId, Asset::class, $siteId);
+                if (!empty($assetId)) {
+                    $assets[] = $elements->getElementById((int)$assetId, Asset::class, $siteId);
+                }
             }
         }
 
