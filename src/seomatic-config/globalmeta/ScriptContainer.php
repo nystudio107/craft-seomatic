@@ -345,7 +345,7 @@ return [
                     ],
                     'scriptUrl' => [
                         'title' => 'Matomo Script URL',
-                        'instructions' => 'The URL to the Fathom tracking script. This will vary depending on whether you are using Matomo Cloud or Matomo On-Premise. [Learn More](https://developer.matomo.org/guides/tracking-javascript-guide)',
+                        'instructions' => 'The URL to the Matomo tracking script. This will vary depending on whether you are using Matomo Cloud or Matomo On-Premise. [Learn More](https://developer.matomo.org/guides/tracking-javascript-guide)',
                         'type' => 'string',
                         'value' => '',
                     ],
