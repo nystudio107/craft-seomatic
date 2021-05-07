@@ -1,8 +1,22 @@
 # SEOmatic Changelog
 
+## 3.3.41 - 2021.05.06
+### Added
+* Only add a sitemap to the sitemap index if there's at least 1 element in the resulting sitemap (https://github.com/nystudio107/craft-seomatic/issues/873)
+
+### Changed
+* Have all of the Site Map settings in the SEO Settings field default to empty, so they fall back on the Content SEO value by default (https://github.com/nystudio107/craft-seomatic/issues/871)
+* Have the image transform modes all default to empty, so they will fall back on the Content SEO value by default (https://github.com/nystudio107/craft-seomatic/issues/868)
+
+### Fixed
+* For paginated pages, re-apply the adjustment to the canonical URL tag as well (https://github.com/nystudio107/craft-seomatic/issues/875)
+* Handle the case of empty asset ids being passed in from a missing asset source (https://github.com/nystudio107/craft-seomatic/issues/882)
+* Fixed the verbiage in the Matomo script URL setting (https://github.com/nystudio107/craft-seomatic/issues/880)
+* Don't call any AssetManager methods in the component `init()` method during console requests (https://github.com/nystudio107/craft-seomatic/issues/885)
+
 ## 3.3.40 - 2021.04.15
 ### Added
-* * Added support for Matomo Analytics in the Tracking Scripts section
+* Added support for Matomo Analytics in the Tracking Scripts section
 
 ### Changed
 * Wrap tracking scripts in IFFYs
