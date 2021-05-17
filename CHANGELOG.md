@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.3.42 - UNRELEASED
+### Changed
+* Strip the query params from next/prev pagination meta tags if we're not using query-string based pagination (https://github.com/nystudio107/craft-seomatic/issues/896)
+
 ### Fixed
 * If sitemaps aren't enabled globally, return nothing for the sitemap index (https://github.com/nystudio107/craft-seomatic/issues/895)
 
