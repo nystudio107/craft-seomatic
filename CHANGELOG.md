@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.42 - UNRELEASED
+### Fixed
+* If sitemaps aren't enabled globally, return nothing for the sitemap index
+
 ## 3.3.41 - 2021.05.06
 ### Added
 * Only add a sitemap to the sitemap index if there's at least 1 element in the resulting sitemap (https://github.com/nystudio107/craft-seomatic/issues/873)
