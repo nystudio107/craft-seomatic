@@ -2,7 +2,7 @@
 
 ## 3.3.42 - UNRELEASED
 ### Fixed
-* If sitemaps aren't enabled globally, return nothing for the sitemap index
+* If sitemaps aren't enabled globally, return nothing for the sitemap index (https://github.com/nystudio107/craft-seomatic/issues/895)
 
 ## 3.3.41 - 2021.05.06
 ### Added
