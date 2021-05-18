@@ -152,6 +152,9 @@ class PullField
                 $seoField = $fields['seoField'];
                 $tranformModeField = $fields['transformModeField'];
                 $transformMode = $bundleSettings[$tranformModeField] ?? 'crop';
+                if (empty($transformMode)) {
+                    $transformMode =  'crop';
+                }
                 $seoFieldWidth = $fields['seoField'].'Width';
                 $seoFieldHeight = $fields['seoField'].'Height';
                 $transformName = $fields['transformName'] ?? 'base';

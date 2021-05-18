@@ -342,6 +342,10 @@ class Sitemaps extends Component implements SitemapInterface
     {
         $result = '';
         $sites = [];
+        // If sitemaps aren't enabled globally, return nothing for the sitemap index
+        if (!Seomatic::$settings->sitemapsEnabled) {
+            return '';
+        }
         if (Seomatic::$settings->siteGroupsSeparate) {
             // Get only the sites that are in the current site's group
             try {

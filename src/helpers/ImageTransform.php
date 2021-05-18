@@ -100,6 +100,9 @@ class ImageTransform
         $url = '';
         $transform = self::createSocialTransform($transformName);
         // Let them override the mode
+        if (empty($transformMode)) {
+            $transformMode = $transform->mode ?? 'crop';
+        }
         if ($transform !== null) {
             $transform->mode = $transformMode ?? $transform->mode;
         }

@@ -78,15 +78,15 @@ class EditableTemplate extends FrontendTemplate
     public function loadTemplate()
     {
         $this->templateString = '';
-        // Try it from our plugin directory first
-        $path = Craft::getAlias('@nystudio107/seomatic/templates/')
-            .$this->template;
+        // First try it from the Craft template directory
+        $path = Craft::getAlias('@templates/')
+            . $this->template;
         if (file_exists($path)) {
             $this->templateString = @file_get_contents($path);
         } else {
-            // Next try it from the Craft template directory
-            $path = Craft::getAlias('@templates/')
-                . $this->template;
+            // Next try from our plugin directory first
+            $path = Craft::getAlias('@nystudio107/seomatic/templates/')
+                .$this->template;
             if (file_exists($path)) {
                 $this->templateString = @file_get_contents($path);
             }

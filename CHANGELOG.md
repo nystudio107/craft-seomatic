@@ -1,5 +1,14 @@
 # SEOmatic Changelog
 
+## 3.3.42 - 2021.05.18
+### Changed
+* Strip the query params from next/prev pagination meta tags if we're not using query-string based pagination (https://github.com/nystudio107/craft-seomatic/issues/896)
+* Ensure that frontend templates are checked first, so things like `humans.twig` and `robots.twig` can be overridden (https://github.com/nystudio107/craft-seomatic/issues/891)
+
+### Fixed
+* If sitemaps aren't enabled globally, return nothing for the sitemap index (https://github.com/nystudio107/craft-seomatic/issues/895)
+* Fixed an issue where an empty transform mode could cause errors generating social image transforms (https://github.com/nystudio107/craft-seomatic/issues/892)
+
 ## 3.3.41 - 2021.05.06
 ### Added
 * Only add a sitemap to the sitemap index if there's at least 1 element in the resulting sitemap (https://github.com/nystudio107/craft-seomatic/issues/873)

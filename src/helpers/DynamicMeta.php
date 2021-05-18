@@ -113,8 +113,19 @@ class DynamicMeta
                     $canonical->href = $url;
                 }
             }
+            // See if we should strip the query params
+            $stripQueryParams = true;
+            $pageTrigger = Craft::$app->getConfig()->getGeneral()->pageTrigger;
+            // Is this query string-based pagination?
+            if ($pageTrigger[0] === '?') {
+                $stripQueryParams = false;
+            }
+
             // Set the previous URL
             $url = $pageInfo->getPrevUrl();
+            if ($stripQueryParams) {
+                $url = preg_replace('/\?.*/', '', $url);
+            }
             if (!empty($url)) {
                 $metaTag = Seomatic::$plugin->link->create([
                     'rel' => 'prev',
@@ -123,6 +134,9 @@ class DynamicMeta
             }
             // Set the next URL
             $url = $pageInfo->getNextUrl();
+            if ($stripQueryParams) {
+                $url = preg_replace('/\?.*/', '', $url);
+            }
             if (!empty($url)) {
                 $metaTag = Seomatic::$plugin->link->create([
                     'rel' => 'next',
