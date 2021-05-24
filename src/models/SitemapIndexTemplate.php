@@ -195,12 +195,10 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
                 }
             }
             // Custom sitemap entries
-            foreach ($groupSiteIds as $groupSiteId) {
-                $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($groupSiteId, false);
-                if ($metaBundle !== null) {
-                    $this->addAdditionalSitemapUrls($metaBundle, $groupSiteId, $lines);
-                    $this->addAdditionalSitemaps($metaBundle, $groupSiteId, $lines);
-                }
+            $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId, false);
+            if ($metaBundle !== null) {
+                $this->addAdditionalSitemapUrls($metaBundle, $siteId, $lines);
+                $this->addAdditionalSitemaps($metaBundle, $siteId, $lines);
             }
             // Sitemap index closing tag
             $lines[] = '</sitemapindex>';
@@ -226,7 +224,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
     // =========================================================================
 
     /**
-     * Add an additional sitemaps to the sitemap index, coming from the global
+     * Add an additional sitemap to the sitemap index, coming from the global
      * meta bundle metaSiteVars->additionalSitemaps
      *
      * @param MetaBundle $metaBundle
