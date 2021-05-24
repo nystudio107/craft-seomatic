@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.43 - UNRELEASED
+### Fixed
+* Additional Sitemap URLs will now appear only in the Site's sitemap index where they are defined (https://github.com/nystudio107/craft-seomatic/issues/897)
+
 ## 3.3.42 - 2021.05.18
 ### Changed
 * Strip the query params from next/prev pagination meta tags if we're not using query-string based pagination (https://github.com/nystudio107/craft-seomatic/issues/896)
