@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic;
 
+use craft\events\RegisterGqlSchemaComponentsEvent;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
 use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
@@ -19,6 +20,7 @@ use nystudio107\seomatic\gql\interfaces\SeomaticInterface;
 use nystudio107\seomatic\gql\resolvers\SeomaticResolver;
 use nystudio107\seomatic\gql\queries\SeomaticQuery;
 use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
+use nystudio107\seomatic\helpers\Gql as GqlHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\integrations\feedme\SeoSettings as SeoSettingsFeedMe;
 use nystudio107\seomatic\listeners\GetCraftQLSchema;
@@ -233,7 +235,7 @@ class Seomatic extends Plugin
     /**
      * @var string
      */
-    public $schemaVersion = '3.0.9';
+    public $schemaVersion = '3.0.10';
 
     // Public Methods
     // =========================================================================
@@ -641,6 +643,19 @@ class Seomatic extends Plugin
                     }
                 }
             );
+            // Handler: Gql::EVENT_REGISTER_SCHEMA_COMPONENTS
+            Event::on(
+                Gql::class,
+                Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS,
+                function (RegisterGqlSchemaComponentsEvent $event) {
+                    Craft::debug(
+                        'Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS',
+                        __METHOD__
+                    );
+                    $label = Craft::t('seomatic', 'Seomatic');
+                    $event->queries[$label]['seomatic.all:read'] = ['label' => Craft::t('seomatic', 'Query Seomatic data')];
+                }
+            );
         }
         // Add support for querying for SEOmatic metadata inside of element queries
         if (self::$craft34) {
@@ -654,14 +669,17 @@ class Seomatic extends Plugin
                         'TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS',
                         __METHOD__
                     );
-                    // Make Seomatic tags available to all entries.
-                    $event->fields['seomatic'] = [
-                        'name' => 'seomatic',
-                        'type' => SeomaticInterface::getType(),
-                        'args' => SeomaticArguments::getArguments(),
-                        'resolve' => SeomaticResolver::class . '::resolve',
-                        'description' => Craft::t('seomatic', 'This query is used to query for SEOmatic meta data.')
-                    ];
+
+                    if (GqlHelper::canQuerySeo()) {
+                        // Make Seomatic tags available to all entries.
+                        $event->fields['seomatic'] = [
+                            'name' => 'seomatic',
+                            'type' => SeomaticInterface::getType(),
+                            'args' => SeomaticArguments::getArguments(),
+                            'resolve' => SeomaticResolver::class . '::resolve',
+                            'description' => Craft::t('seomatic', 'This query is used to query for SEOmatic meta data.')
+                        ];
+                    }
                 }
             });
         }

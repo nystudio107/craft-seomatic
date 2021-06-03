@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.3.36 - UNRELEASED
+### Added
+* Add GraphQL schema components for SEOmatic.
+
 ### Fixed
 * Ensure really long titles are cropped in the sidebar preview
 
