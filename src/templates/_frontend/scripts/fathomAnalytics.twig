@@ -1,0 +1,25 @@
+{% if siteId.value is defined and siteId.value %}
+(function() {
+var tag = document.createElement('script');
+tag.src = "{{ scriptUrl.value }}";
+tag.defer = true;
+tag.setAttribute("data-site", "{{ siteId.value | raw }}");
+{% if honorDnt.value %}
+tag.setAttribute("data-honor-dnt", "true");
+{% endif %}
+{% if disableAutoTracking.value %}
+tag.setAttribute("data-auto", "false");
+{% endif %}
+{% if ignoreCanonicals.value %}
+tag.setAttribute("data-canonical", "false");
+{% endif %}
+{% if excludedDomains.value | length %}
+tag.setAttribute("data-excluded-domains", "{{ excludedDomains.value | raw }}");
+{% endif %}
+{% if includedDomains.value | length %}
+tag.setAttribute("data-included-domains", "{{ includedDomains.value | raw }}");
+{% endif %}
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+})();
+{% endif %}

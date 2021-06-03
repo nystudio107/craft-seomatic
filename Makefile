@@ -1,50 +1,48 @@
-TAG?=12-alpine
-CONTAINER?=seomatic-buildchain
-DEST?=../../sites/nystudio107/web/docs/seomatic
+TAG?=14-alpine
+CONTAINER?=$(shell basename $(CURDIR))-buildchain
+DOCKERRUN=docker container run \
+	--name ${CONTAINER} \
+	--rm \
+	-t \
+	--network plugindev_default \
+	-p 8080:8080 \
+	-v `pwd`:/app \
+	${CONTAINER}:${TAG}
+DOCSDEST?=../../sites/nystudio107/web/docs/seomatic
 
-.PHONY: dist docker docs install npm
+.PHONY: build dev docker docs install npm
 
-dist: docker docs install
-	docker container run \
-		--name ${CONTAINER} \
-		--rm \
-		-t \
-		-v `pwd`:/app \
-		nystudio107/${CONTAINER}:${TAG} \
+build: docker install
+	${DOCKERRUN} \
 		run build
+dev: docker install
+	${DOCKERRUN} \
+		run dev
 docker:
 	docker build \
 		. \
-		-t nystudio107/${CONTAINER}:${TAG} \
+		-t ${CONTAINER}:${TAG} \
 		--build-arg TAG=${TAG} \
 		--no-cache
-docs:
-	docker container run \
-		--name ${CONTAINER} \
-		--rm \
-		-t \
-		-v `pwd`:/app \
-		nystudio107/${CONTAINER}:${TAG} \
+docs: docker
+	${DOCKERRUN} \
 		run docs
-	rm -rf ${DEST}
-	mv ./docs/docs/.vuepress/dist ${DEST}
-install:
-	docker container run \
-		--name ${CONTAINER} \
-		--rm \
-		-t \
-		-v `pwd`:/app \
-		nystudio107/${CONTAINER}:${TAG} \
+	rm -rf ${DOCSDEST}
+	mv ./docs/docs/.vuepress/dist ${DOCSDEST}
+install: docker
+	${DOCKERRUN} \
 		install
-npm:
-	docker container run \
-		--name ${CONTAINER} \
-		--network plugindev_default \
-		--rm \
-		-t \
-		-p 8080:8080 \
-		-v `pwd`:/app \
-		nystudio107/${CONTAINER}:${TAG} \
+update: docker
+	rm -f buildchain/package-lock.json
+	${DOCKERRUN} \
+		install
+update-clean: docker
+	rm -f buildchain/package-lock.json
+	rm -rf buildchain/node_modules/
+	${DOCKERRUN} \
+		install
+npm: docker
+	${DOCKERRUN} \
 		$(filter-out $@,$(MAKECMDGOALS))
 %:
 	@:

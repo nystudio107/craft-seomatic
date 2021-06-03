@@ -92,18 +92,18 @@ use yii\base\Event;
  * @package   Seomatic
  * @since     3.0.0
  *
- * @property  FrontendTemplatesService $frontendTemplates
- * @property  HelperService            $helper
- * @property  JsonLdService            $jsonLd
- * @property  LinkService              $link
- * @property  MetaBundlesService       $metaBundles
- * @property  MetaContainersService    $metaContainers
- * @property  ScriptService            $script
- * @property  SeoElementsService       $seoElements
- * @property  SitemapsService          $sitemaps
- * @property  TagService               $tag
- * @property  TitleService             $title
- * @property ManifestService           $manifest
+ * @property FrontendTemplatesService $frontendTemplates
+ * @property HelperService            $helper
+ * @property JsonLdService            $jsonLd
+ * @property LinkService              $link
+ * @property MetaBundlesService       $metaBundles
+ * @property MetaContainersService    $metaContainers
+ * @property ScriptService            $script
+ * @property SeoElementsService       $seoElements
+ * @property SitemapsService          $sitemaps
+ * @property TagService               $tag
+ * @property TitleService             $title
+ * @property ManifestService          $manifest
  */
 class Seomatic extends Plugin
 {
@@ -192,6 +192,11 @@ class Seomatic extends Plugin
     /**
      * @var bool
      */
+    public static $headlessRequest = false;
+
+    /**
+     * @var bool
+     */
     public static $craft31 = false;
 
     /**
@@ -211,6 +216,35 @@ class Seomatic extends Plugin
 
     // Static Methods
     // =========================================================================
+
+    /**
+     * @inheritdoc
+     */
+    public function __construct($id, $parent = null, array $config = [])
+    {
+        $config['components'] = [
+            'frontendTemplates' => FrontendTemplatesService::class,
+            'helper' => HelperService::class,
+            'jsonLd' => JsonLdService::class,
+            'link' => LinkService::class,
+            'metaBundles' => MetaBundlesService::class,
+            'metaContainers' => MetaContainersService::class,
+            'script' => ScriptService::class,
+            'seoElements' => SeoElementsService::class,
+            'sitemaps' => SitemapsService::class,
+            'tag' => TagService::class,
+            'title' => TitleService::class,
+            // Register the manifest service
+            'manifest' => [
+                'class' => ManifestService::class,
+                'assetClass' => SeomaticAsset::class,
+                'devServerManifestPath' => 'http://craft-seomatic-buildchain:8080/',
+                'devServerPublicPath' => 'http://craft-seomatic-buildchain:8080/',
+            ],
+        ];
+
+        parent::__construct($id, $parent, $config);
+    }
 
     /**
      * Set the matched element
@@ -236,6 +270,16 @@ class Seomatic extends Plugin
      * @var string
      */
     public $schemaVersion = '3.0.10';
+
+    /**
+     * @var bool
+     */
+    public $hasCpSection = true;
+
+    /**
+     * @var bool
+     */
+    public $hasCpSettings = true;
 
     // Public Methods
     // =========================================================================
@@ -363,7 +407,7 @@ class Seomatic extends Plugin
         if ($currentUser->can('seomatic:tracking-scripts')) {
             $subNavs['tracking'] = [
                 'label' => Craft::t('seomatic', 'Tracking Scripts'),
-                'url' => 'seomatic/tracking/googleAnalytics'.$siteSuffix,
+                'url' => 'seomatic/tracking/gtag'.$siteSuffix,
             ];
         }
         $editableSettings = true;
@@ -435,14 +479,6 @@ class Seomatic extends Plugin
      */
     protected function installEventListeners()
     {
-        // Register the manifest service
-        $this->set('manifest', [
-            'class' => ManifestService::class,
-            'assetClass' => SeomaticAsset::class,
-            'devServerManifestPath' => 'http://seomatic-buildchain:8080/',
-            'devServerPublicPath' => 'http://seomatic-buildchain:8080/',
-        ]);
-
         // Install our event listeners only if our table schema exists
         if ($this->migrationsAndSchemaReady()) {
             // Add in our Twig extensions

@@ -31,77 +31,6 @@ return [
         'dependencies' => [
         ],
         'data' => [
-            'googleAnalytics' => [
-                'include' => false,
-                'environment' => [
-                    'staging' => [
-                        'include' => false,
-                    ],
-                    'local' => [
-                        'include' => false,
-                    ],
-                ],
-                'name' => 'Google Analytics',
-                'description' => 'Google Analytics gives you the digital analytics tools you need to analyze data from all touchpoints in one place, for a deeper understanding of the customer experience. You can then share the insights that matter with your whole organization. [Learn More](https://www.google.com/analytics/analytics/)',
-                'templatePath' => '_frontend/scripts/googleAnalytics.twig',
-                'position' => View::POS_HEAD,
-                'vars' => [
-                    'trackingId' => [
-                        'title' => 'Google Analytics Tracking ID',
-                        'instructions' => 'Only enter the ID, e.g.: `UA-XXXXXX-XX`, not the entire script code. [Learn More](https://support.google.com/analytics/answer/1032385?hl=e)',
-                        'type' => 'string',
-                        'value' => '',
-                    ],
-                    'sendPageView' => [
-                        'title' => 'Automatically send Google Analytics PageView',
-                        'instructions' => 'Controls whether the Google Analytics script automatically sends a PageView to Google Analytics when your pages are loaded.',
-                        'type' => 'bool',
-                        'value' => true,
-                    ],
-                    'ipAnonymization' => [
-                        'title' => 'Google Analytics IP Anonymization',
-                        'instructions' => 'When a customer of Analytics requests IP address anonymization, Analytics anonymizes the address as soon as technically feasible at the earliest possible stage of the collection network.',
-                        'type' => 'bool',
-                        'value' => false,
-                    ],
-                    'displayFeatures' => [
-                        'title' => 'Display Features',
-                        'instructions' => 'The display features plugin for analytics.js can be used to enable Advertising Features in Google Analytics, such as Remarketing, Demographics and Interest Reporting, and more. [Learn More](https://developers.google.com/analytics/devguides/collection/analyticsjs/display-features)',
-                        'type' => 'bool',
-                        'value' => false,
-                    ],
-                    'ecommerce' => [
-                        'title' => 'Ecommerce',
-                        'instructions' => 'Ecommerce tracking allows you to measure the number of transactions and revenue that your website generates. [Learn More](https://developers.google.com/analytics/devguides/collection/analyticsjs/ecommerce)',
-                        'type' => 'bool',
-                        'value' => false,
-                    ],
-                    'enhancedEcommerce' => [
-                        'title' => 'Enhanced Ecommerce',
-                        'instructions' => 'The enhanced ecommerce plug-in for analytics.js enables the measurement of user interactions with products on ecommerce websites across the user\'s shopping experience, including: product impressions, product clicks, viewing product details, adding a product to a shopping cart, initiating the checkout process, transactions, and refunds. [Learn More](https://developers.google.com/analytics/devguides/collection/analyticsjs/enhanced-ecommerce)',
-                        'type' => 'bool',
-                        'value' => false,
-                    ],
-                    'enhancedLinkAttribution' => [
-                        'title' => 'Enhanced Link Attribution',
-                        'instructions' => 'Enhanced Link Attribution improves the accuracy of your In-Page Analytics report by automatically differentiating between multiple links to the same URL on a single page by using link element IDs. [Learn More](https://developers.google.com/analytics/devguides/collection/analyticsjs/enhanced-link-attribution)',
-                        'type' => 'bool',
-                        'value' => false,
-                    ],
-                    'linker' => [
-                        'title' => 'Linker',
-                        'instructions' => 'The linker plugin simplifies the process of implementing cross-domain tracking as described in the Cross-domain Tracking guide for analytics.js. [Learn More](https://developers.google.com/analytics/devguides/collection/analyticsjs/linker)',
-                        'type' => 'bool',
-                        'value' => false,
-                    ],
-                    'analyticsUrl' => [
-                        'title' => 'Google Analytics Script URL',
-                        'instructions' => 'The URL to the Google Analytics tracking script. Normally this should not be changed, unless you locally cache it.',
-                        'type' => 'string',
-                        'value' => 'https://www.google-analytics.com/analytics.js',
-                    ],
-                ],
-            ],
             'gtag' => [
                 'include' => false,
                 'environment' => [
@@ -120,8 +49,8 @@ return [
                 'bodyPosition' => View::POS_BEGIN,
                 'vars' => [
                     'googleAnalyticsId' => [
-                        'title' => 'Google Analytics Tracking ID',
-                        'instructions' => 'Only enter the ID, e.g.: `UA-XXXXXX-XX`, not the entire script code. [Learn More](https://support.google.com/analytics/answer/1032385?hl=e)',
+                        'title' => 'Google Analytics Measurement/Tracking ID',
+                        'instructions' => 'Only enter the ID, e.g.: `G-XXXXXXXXXX` or `UA-XXXXXX-XX`, not the entire script code. [Learn More](https://support.google.com/analytics/answer/1032385?hl=e)',
                         'type' => 'string',
                         'value' => '',
                     ],
@@ -319,6 +248,206 @@ return [
                         'instructions' => 'The URL to the HubSpot script. Normally this should not be changed, unless you locally cache it.',
                         'type' => 'string',
                         'value' => '//js.hs-scripts.com/',
+                    ],
+                ],
+            ],
+            'fathom' => [
+                'include' => false,
+                'environment' => [
+                    'staging' => [
+                        'include' => false,
+                    ],
+                    'local' => [
+                        'include' => false,
+                    ],
+                ],
+                'name' => 'Fathom',
+                'description' => 'Fathom is a simple, light-weight, privacy-first alternative to Google Analytics. So, stop scrolling through pages of reports and collecting gobs of personal data about your visitors, both of which you probably don’t need. [Learn More](https://usefathom.com/)',
+                'templatePath' => '_frontend/scripts/fathomAnalytics.twig',
+                'position' => View::POS_HEAD,
+                'vars' => [
+                    'siteId' => [
+                        'title' => 'Site ID',
+                        'instructions' => 'Only enter the Site ID, not the entire script code. [Learn More](https://usefathom.com/support/tracking)',
+                        'type' => 'string',
+                        'value' => '',
+                    ],
+                    'honorDnt' => [
+                        'title' => 'Honoring Do Not Track (DNT)',
+                        'instructions' => 'By default we track every visitor to your website, regardless of them having DNT turned on or not. [Learn More](https://usefathom.com/support/tracking-advanced)',
+                        'type' => 'bool',
+                        'value' => false,
+                    ],
+                    'disableAutoTracking' => [
+                        'title' => 'Disable automatic tracking',
+                        'instructions' => 'By default, we track a page view every time a visitor to your website loads a page with our script on it. [Learn More](https://usefathom.com/support/tracking-advanced)',
+                        'type' => 'bool',
+                        'value' => false,
+                    ],
+                    'ignoreCanonicals' => [
+                        'title' => 'Ignore canonicals',
+                        'instructions' => 'If there’s a canonical URL in place, then by default we use it instead of the current URL. [Learn More](https://usefathom.com/support/tracking-advanced)',
+                        'type' => 'bool',
+                        'value' => false,
+                    ],
+                    'excludedDomains' => [
+                        'title' => 'Excluded Domains',
+                        'instructions' => 'You exclude one or several domains, so our tracker will track things on every domain, except the ones excluded. [Learn More](https://usefathom.com/support/tracking-advanced)',
+                        'type' => 'string',
+                        'value' => '',
+                    ],
+                    'includedDomains' => [
+                        'title' => 'Included Domains',
+                        'instructions' => 'If you want to go in the opposite direction and only track stats on a specific domain. [Learn More](https://usefathom.com/support/tracking-advanced)',
+                        'type' => 'string',
+                        'value' => '',
+                    ],
+                    'scriptUrl' => [
+                        'title' => 'Fathom Script URL',
+                        'instructions' => 'The URL to the Fathom tracking script. Normally this should not be changed, unless you locally cache it.',
+                        'type' => 'string',
+                        'value' => 'https://cdn.usefathom.com/script.js',
+                    ],
+                ],
+            ],
+            'matomo' => [
+                'include' => false,
+                'environment' => [
+                    'staging' => [
+                        'include' => false,
+                    ],
+                    'local' => [
+                        'include' => false,
+                    ],
+                ],
+                'name' => 'Matomo',
+                'description' => 'Matomo is a Google Analytics alternative that protects your data and your customers\' privacy [Learn More](https://matomo.org/)',
+                'templatePath' => '_frontend/scripts/matomoAnalytics.twig',
+                'position' => View::POS_HEAD,
+                'vars' => [
+                    'siteId' => [
+                        'title' => 'Site ID',
+                        'instructions' => 'Only enter the Site ID, not the entire script code. [Learn More](https://developer.matomo.org/guides/tracking-javascript-guide)',
+                        'type' => 'string',
+                        'value' => '',
+                    ],
+                    'sendPageView' => [
+                        'title' => 'Automatically send Matomo PageView',
+                        'instructions' => 'Controls whether the Matomo script automatically sends a PageView when your pages are loaded. [Learn More](https://developer.matomo.org/api-reference/tracking-javascript)',
+                        'type' => 'bool',
+                        'value' => true,
+                    ],
+                    'enableLinkTracking' => [
+                        'title' => 'Enable Link Tracking',
+                        'instructions' => 'Install link tracking on all applicable link elements. [Learn More](https://developer.matomo.org/api-reference/tracking-javascript)',
+                        'type' => 'bool',
+                        'value' => true,
+                    ],
+                    'scriptUrl' => [
+                        'title' => 'Matomo Script URL',
+                        'instructions' => 'The URL to the Matomo tracking script. This will vary depending on whether you are using Matomo Cloud or Matomo On-Premise. [Learn More](https://developer.matomo.org/guides/tracking-javascript-guide)',
+                        'type' => 'string',
+                        'value' => '',
+                    ],
+                ],
+            ],
+            'plausible' => [
+                'include' => false,
+                'environment' => [
+                    'staging' => [
+                        'include' => false,
+                    ],
+                    'local' => [
+                        'include' => false,
+                    ],
+                ],
+                'name' => 'Plausible',
+                'description' => 'Plausible is a lightweight and open-source website analytics tool. No cookies and fully compliant with GDPR, CCPA and PECR. [Learn More](https://plausible.io/)',
+                'templatePath' => '_frontend/scripts/plausibleAnalytics.twig',
+                'position' => View::POS_HEAD,
+                'vars' => [
+                    'siteDomain' => [
+                        'title' => 'Site Domain',
+                        'instructions' => 'Only enter the site domain, not the entire script code. [Learn More](https://plausible.io/docs/plausible-script)',
+                        'type' => 'string',
+                        'value' => '',
+                    ],
+                    'scriptUrl' => [
+                        'title' => 'Plausible Script URL',
+                        'instructions' => 'The URL to the Plausible tracking script. Normally this should not be changed, unless you locally cache it.',
+                        'type' => 'string',
+                        'value' => 'https://plausible.io/js/plausible.js',
+                    ],
+                ],
+            ],
+            'googleAnalytics' => [
+                'include' => false,
+                'environment' => [
+                    'staging' => [
+                        'include' => false,
+                    ],
+                    'local' => [
+                        'include' => false,
+                    ],
+                ],
+                'name' => 'Google Analytics (old)',
+                'description' => 'Google Analytics gives you the digital analytics tools you need to analyze data from all touchpoints in one place, for a deeper understanding of the customer experience. You can then share the insights that matter with your whole organization. [Learn More](https://www.google.com/analytics/analytics/)',
+                'templatePath' => '_frontend/scripts/googleAnalytics.twig',
+                'position' => View::POS_HEAD,
+                'vars' => [
+                    'trackingId' => [
+                        'title' => 'Google Analytics Tracking ID',
+                        'instructions' => 'Only enter the ID, e.g.: `UA-XXXXXX-XX`, not the entire script code. [Learn More](https://support.google.com/analytics/answer/1032385?hl=e)',
+                        'type' => 'string',
+                        'value' => '',
+                    ],
+                    'sendPageView' => [
+                        'title' => 'Automatically send Google Analytics PageView',
+                        'instructions' => 'Controls whether the Google Analytics script automatically sends a PageView to Google Analytics when your pages are loaded.',
+                        'type' => 'bool',
+                        'value' => true,
+                    ],
+                    'ipAnonymization' => [
+                        'title' => 'Google Analytics IP Anonymization',
+                        'instructions' => 'When a customer of Analytics requests IP address anonymization, Analytics anonymizes the address as soon as technically feasible at the earliest possible stage of the collection network.',
+                        'type' => 'bool',
+                        'value' => false,
+                    ],
+                    'displayFeatures' => [
+                        'title' => 'Display Features',
+                        'instructions' => 'The display features plugin for analytics.js can be used to enable Advertising Features in Google Analytics, such as Remarketing, Demographics and Interest Reporting, and more. [Learn More](https://developers.google.com/analytics/devguides/collection/analyticsjs/display-features)',
+                        'type' => 'bool',
+                        'value' => false,
+                    ],
+                    'ecommerce' => [
+                        'title' => 'Ecommerce',
+                        'instructions' => 'Ecommerce tracking allows you to measure the number of transactions and revenue that your website generates. [Learn More](https://developers.google.com/analytics/devguides/collection/analyticsjs/ecommerce)',
+                        'type' => 'bool',
+                        'value' => false,
+                    ],
+                    'enhancedEcommerce' => [
+                        'title' => 'Enhanced Ecommerce',
+                        'instructions' => 'The enhanced ecommerce plug-in for analytics.js enables the measurement of user interactions with products on ecommerce websites across the user\'s shopping experience, including: product impressions, product clicks, viewing product details, adding a product to a shopping cart, initiating the checkout process, transactions, and refunds. [Learn More](https://developers.google.com/analytics/devguides/collection/analyticsjs/enhanced-ecommerce)',
+                        'type' => 'bool',
+                        'value' => false,
+                    ],
+                    'enhancedLinkAttribution' => [
+                        'title' => 'Enhanced Link Attribution',
+                        'instructions' => 'Enhanced Link Attribution improves the accuracy of your In-Page Analytics report by automatically differentiating between multiple links to the same URL on a single page by using link element IDs. [Learn More](https://developers.google.com/analytics/devguides/collection/analyticsjs/enhanced-link-attribution)',
+                        'type' => 'bool',
+                        'value' => false,
+                    ],
+                    'linker' => [
+                        'title' => 'Linker',
+                        'instructions' => 'The linker plugin simplifies the process of implementing cross-domain tracking as described in the Cross-domain Tracking guide for analytics.js. [Learn More](https://developers.google.com/analytics/devguides/collection/analyticsjs/linker)',
+                        'type' => 'bool',
+                        'value' => false,
+                    ],
+                    'analyticsUrl' => [
+                        'title' => 'Google Analytics Script URL',
+                        'instructions' => 'The URL to the Google Analytics tracking script. Normally this should not be changed, unless you locally cache it.',
+                        'type' => 'string',
+                        'value' => 'https://www.google-analytics.com/analytics.js',
                     ],
                 ],
             ],

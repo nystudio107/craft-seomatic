@@ -195,6 +195,15 @@ return [
                 'name'      => '',
                 'property'  => 'og:see_also',
             ],
+            'facebook-site-verification' => [
+                'dependencies' => [
+                    Dependency::SITE_DEPENDENCY => ['facebookSiteVerification'],
+                ],
+                'charset'      => '',
+                'content'      => '{seomatic.site.facebookSiteVerification}',
+                'httpEquiv'    => '',
+                'name'         => 'facebook-domain-verification',
+            ],
         ],
     ],
     MetaTagContainer::CONTAINER_TYPE.TagService::TWITTER_HANDLE  => [

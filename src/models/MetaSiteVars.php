@@ -100,6 +100,11 @@ class MetaSiteVars extends VarsModel
     public $pinterestSiteVerification = '';
 
     /**
+     * @var string The Facebook Site Verification code
+     */
+    public $facebookSiteVerification = '';
+
+    /**
      * @var array Array of links for Same As... sites, indexed by the handle
      */
     public $sameAsLinks = [];
@@ -174,6 +179,7 @@ class MetaSiteVars extends VarsModel
                     'googleSiteVerification',
                     'bingSiteVerification',
                     'pinterestSiteVerification',
+                    'facebookSiteVerification',
                     'siteLinksSearchTarget',
                     'siteLinksQueryInput',
                     'referrer',

@@ -60,44 +60,52 @@
     {% endif %}
 
     {% if field is not defined or 'sitemapChangeFreq' in field.sitemapEnabledFields %}
+        {% set sitemapChangeFreqOptions = {
+            always: "Always"|t("seomatic"),
+            hourly: "Hourly"|t("seomatic"),
+            daily: "Daily"|t("seomatic"),
+            weekly: "Weekly"|t("seomatic"),
+            monthly: "Monthly"|t("seomatic"),
+            yearly: "Yearly"|t("seomatic"),
+            never : "Never"|t("seomatic"),
+        } %}
+        {% if pageContext == "field" %}
+            {% set sitemapChangeFreqOptions = { "": ""} | merge(sitemapChangeFreqOptions) %}
+        {% endif %}
         {{ forms.selectField({
             label: "Change Frequency"|t("seomatic"),
             instructions: "How frequently the page is likely to change. This value provides general information to search engines and may not correlate exactly to how often they crawl the page."|t("seomatic"),
             id: "sitemapChangeFreq",
             name: "sitemapChangeFreq",
-            options: {
-                always: "Always"|t("seomatic"),
-                hourly: "Hourly"|t("seomatic"),
-                daily: "Daily"|t("seomatic"),
-                weekly: "Weekly"|t("seomatic"),
-                monthly: "Monthly"|t("seomatic"),
-                yearly: "Yearly"|t("seomatic"),
-                never : "Never"|t("seomatic"),
-            },
+            options: sitemapChangeFreqOptions,
             value: metaSitemapVars.sitemapChangeFreq,
             errors: metaSitemapVars.getErrors("sitemapChangeFreq"),
         }) }}
     {% endif %}
 
     {% if field is not defined or 'sitemapPriority' in field.sitemapEnabledFields %}
+        {% set sitemapPriorityOptions = {
+            "1.0": "1.0",
+            "0.9": "0.9",
+            "0.8": "0.8",
+            "0.7": "0.7",
+            "0.6": "0.6",
+            "0.5": "0.5",
+            "0.4": "0.4",
+            "0.3": "0.3",
+            "0.2": "0.2",
+            "0.1": "0.1",
+            "0.0": "0.0",
+        } %}
+        {% if pageContext == "field" %}
+            {% set sitemapPriorityOptions = { "": ""} | merge(sitemapPriorityOptions) %}
+        {% endif %}
         {{ forms.selectField({
             label: "Priority"|t("seomatic"),
             instructions: "The priority of this URL relative to other URLs on your site. This value does not affect how your pages are compared to pages on other sites—it only lets the search engines know which pages you deem most important for the crawlers."|t("seomatic"),
             id: "sitemapPriority",
             name: "sitemapPriority",
-            options: {
-                "1.0": "1.0",
-                "0.9": "0.9",
-                "0.8": "0.8",
-                "0.7": "0.7",
-                "0.6": "0.6",
-                "0.5": "0.5",
-                "0.4": "0.4",
-                "0.3": "0.3",
-                "0.2": "0.2",
-                "0.1": "0.1",
-                "0.0": "0.0",
-            },
+            options: sitemapPriorityOptions,
             value: metaSitemapVars.sitemapPriority,
             errors: metaSitemapVars.getErrors("sitemapPriority"),
         }) }}
@@ -105,21 +113,25 @@
 
 
     {% if field is not defined or 'sitemapLimit' in field.sitemapEnabledFields %}
+        {% set sitemapLimitOptions = {
+            null: "None",
+            "1000": "1000",
+            "500": "500",
+            "200": "200",
+            "100": "100",
+            "50": "50",
+            "10": "10",
+            "5": "5",
+        } %}
+        {% if pageContext == "field" %}
+            {% set sitemapLimitOptions = { "": ""} | merge(sitemapLimitOptions) %}
+        {% endif %}
         {{ forms.selectField({
             label: "Sitemap Limit"|t("seomatic"),
             instructions: "Controls a limit to how many entries will be in this sitemap. The sitemap entries will be sorted by modification date."|t("seomatic"),
             id: "sitemapLimit",
             name: "sitemapLimit",
-            options: {
-                null: "None",
-                "1000": "1000",
-                "500": "500",
-                "200": "200",
-                "100": "100",
-                "50": "50",
-                "10": "10",
-                "5": "5",
-            },
+            options: sitemapLimitOptions,
             value: metaSitemapVars.sitemapLimit,
             errors: metaSitemapVars.getErrors("sitemapLimit"),
         }) }}

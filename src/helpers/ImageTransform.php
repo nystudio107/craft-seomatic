@@ -100,6 +100,9 @@ class ImageTransform
         $url = '';
         $transform = self::createSocialTransform($transformName);
         // Let them override the mode
+        if (empty($transformMode)) {
+            $transformMode = $transform->mode ?? 'crop';
+        }
         if ($transform !== null) {
             $transform->mode = $transformMode ?? $transform->mode;
         }
@@ -230,11 +233,15 @@ class ImageTransform
         if (!empty($assetIds)) {
             if (\is_array($assetIds)) {
                 foreach ($assetIds as $assetId) {
-                    $assets[] = $elements->getElementById($assetId, Asset::class, $siteId);
+                    if (!empty($assetId)) {
+                        $assets[] = $elements->getElementById((int)$assetId, Asset::class, $siteId);
+                    }
                 }
             } else {
                 $assetId = $assetIds;
-                $assets[] = $elements->getElementById($assetId, Asset::class, $siteId);
+                if (!empty($assetId)) {
+                    $assets[] = $elements->getElementById((int)$assetId, Asset::class, $siteId);
+                }
             }
         }
 

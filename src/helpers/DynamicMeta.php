@@ -58,7 +58,7 @@ class DynamicMeta
      * use nystudio107\seomatic\events\AddDynamicMetaEvent;
      * use nystudio107\seomatic\helpers\DynamicMeta;
      * use yii\base\Event;
-     * Event::on(DynamicMeta::class, DynamicMeta::EVENT_INCLUDE_CONTAINER, function(AddDynamicMetaEvent $e) {
+     * Event::on(DynamicMeta::class, DynamicMeta::EVENT_ADD_DYNAMIC_META, function(AddDynamicMetaEvent $e) {
      *     // Add whatever dynamic meta items to the containers as you like
      * });
      * ```
@@ -103,14 +103,29 @@ class DynamicMeta
         if ($pageInfo !== null && $pageInfo->currentPage !== null) {
             // Let the meta containers know that this page is paginated
             Seomatic::$plugin->metaContainers->paginationPage = (string)$pageInfo->currentPage;
-            // Set the the canonical URL to be the first page of the paginated pages
+            // Set the the canonical URL to be the paginated URL
             // see: https://github.com/nystudio107/craft-seomatic/issues/375#issuecomment-488369209
             $url = $pageInfo->getPageUrl($pageInfo->currentPage);
             if (!empty($url)) {
                 Seomatic::$seomaticVariable->meta->canonicalUrl = $url;
+                $canonical = Seomatic::$seomaticVariable->link->get('canonical');
+                if ($canonical !== null) {
+                    $canonical->href = $url;
+                }
             }
+            // See if we should strip the query params
+            $stripQueryParams = true;
+            $pageTrigger = Craft::$app->getConfig()->getGeneral()->pageTrigger;
+            // Is this query string-based pagination?
+            if ($pageTrigger[0] === '?') {
+                $stripQueryParams = false;
+            }
+
             // Set the previous URL
             $url = $pageInfo->getPrevUrl();
+            if ($stripQueryParams) {
+                $url = preg_replace('/\?.*/', '', $url);
+            }
             if (!empty($url)) {
                 $metaTag = Seomatic::$plugin->link->create([
                     'rel' => 'prev',
@@ -119,6 +134,9 @@ class DynamicMeta
             }
             // Set the next URL
             $url = $pageInfo->getNextUrl();
+            if ($stripQueryParams) {
+                $url = preg_replace('/\?.*/', '', $url);
+            }
             if (!empty($url)) {
                 $metaTag = Seomatic::$plugin->link->create([
                     'rel' => 'next',

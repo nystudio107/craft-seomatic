@@ -40,4 +40,9 @@ trait MetaItemTrait
      * @var array
      */
     public $dependencies;
+
+    /**
+     * @var array Additional attributes that should be added to the tag before it is rendered
+     */
+    public $tagAttrs = [];
 }

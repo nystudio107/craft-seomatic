@@ -13,9 +13,12 @@ namespace nystudio107\seomatic\helpers;
 
 use nystudio107\seomatic\Seomatic;
 
+use nystudio107\minify\Minify;
+
 use Craft;
 use craft\helpers\Template;
 use craft\web\View;
+
 use yii\base\Exception;
 
 /**
@@ -25,6 +28,11 @@ use yii\base\Exception;
  */
 class PluginTemplate
 {
+    // Constants
+    // =========================================================================
+
+    const MINIFY_PLUGIN_HANDLE = 'minify';
+
     // Static Methods
     // =========================================================================
 
@@ -47,25 +55,41 @@ class PluginTemplate
     /**
      * Render a plugin template
      *
-     * @param $templatePath
-     * @param $params
+     * @param string      $templatePath
+     * @param array       $params
+     * @param string|null $minifier
      *
      * @return string
      */
-    public static function renderPluginTemplate(string $templatePath, array $params = []): string
-    {
-        // Stash the old template mode, and set it Control Panel template mode
+    public static function renderPluginTemplate(
+        string $templatePath,
+        array $params = [],
+        string $minifier = null
+    ): string {
+        $template = 'seomatic/' . $templatePath;
         $oldMode = Craft::$app->view->getTemplateMode();
+        // Look for the template on the frontend first
         try {
-            Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_CP);
+            $templateMode = View::TEMPLATE_MODE_CP;
+            if (Craft::$app->view->doesTemplateExist($template, View::TEMPLATE_MODE_SITE)) {
+                $templateMode = View::TEMPLATE_MODE_SITE;
+            }
+            Craft::$app->view->setTemplateMode($templateMode);
         } catch (Exception $e) {
             Craft::error($e->getMessage(), __METHOD__);
         }
 
         // Render the template with our vars passed in
         try {
-            $htmlText = Craft::$app->view->renderTemplate('seomatic/' . $templatePath, $params);
-            $templateRendered = true;
+            $htmlText = Craft::$app->view->renderTemplate($template, $params);
+            if ($minifier) {
+                // If Minify is installed, use it to minify the template
+                $minify = Craft::$app->getPlugins()->getPlugin(self::MINIFY_PLUGIN_HANDLE);
+                if ($minify) {
+                    $htmlText = Minify::$plugin->minify->$minifier($htmlText);
+                }
+
+            }
         } catch (\Exception $e) {
             $htmlText = Craft::t(
                 'seomatic',
@@ -73,29 +97,6 @@ class PluginTemplate
                 ['template' => $templatePath, 'error' => $e->getMessage()]
             );
             Craft::error($htmlText, __METHOD__);
-            $templateRendered = false;
-        }
-
-        // If we couldn't find a plugin template, look for a frontend template
-        if (!$templateRendered) {
-            try {
-                Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_SITE);
-            } catch (Exception $e) {
-                Craft::error($e->getMessage(), __METHOD__);
-            }
-            // Render the template with our vars passed in
-            try {
-                $htmlText = Craft::$app->view->renderTemplate($templatePath, $params);
-                $templateRendered = true;
-            } catch (\Exception $e) {
-                $htmlText = Craft::t(
-                    'seomatic',
-                    'Error rendering `{template}` -> {error}',
-                    ['template' => $templatePath, 'error' => $e->getMessage()]
-                );
-                Craft::error($htmlText, __METHOD__);
-                $templateRendered = false;
-            }
         }
 
         // Restore the old template mode

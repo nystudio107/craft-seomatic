@@ -75,10 +75,15 @@ class MetaScriptContainer extends NonceContainer
                         if ($metaScriptModel->include) {
                             $js = $metaScriptModel->render();
                             if (!empty($js)) {
+                                $scenario = $this->scenario;
+                                $metaScriptModel->setScenario('render');
+                                $options = $metaScriptModel->tagAttributes();
+                                $metaScriptModel->setScenario($scenario);
                                 $tagData[] = [
                                     'js' => $js,
                                     'position' => $metaScriptModel->position ?? $this->position,
                                     'nonce' => $metaScriptModel->nonce ?? null,
+                                    'tagAttrs' => $options,
                                 ];
                                 // If `devMode` is enabled, validate the Meta Script and output any model errors
                                 if (Seomatic::$devMode) {
@@ -103,7 +108,7 @@ class MetaScriptContainer extends NonceContainer
         // Register the tags
         foreach ($tagData as $config) {
             // Register the tags
-            $attrs = [];
+            $attrs = $config['tagAttrs'] ?? [];
             if (!empty($config['nonce'])) {
                 /** @noinspection SlowArrayOperationsInLoopInspection */
                 $attrs = array_merge($attrs, [

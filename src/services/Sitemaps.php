@@ -334,6 +334,44 @@ class Sitemaps extends Component implements SitemapInterface
     }
 
     /**
+     * Return all of the sitemap indexes the current group of sites
+     *
+     * @return string
+     */
+    public function sitemapIndex(): string
+    {
+        $result = '';
+        $sites = [];
+        // If sitemaps aren't enabled globally, return nothing for the sitemap index
+        if (!Seomatic::$settings->sitemapsEnabled) {
+            return '';
+        }
+        if (Seomatic::$settings->siteGroupsSeparate) {
+            // Get only the sites that are in the current site's group
+            try {
+                $siteGroup = Craft::$app->getSites()->getCurrentSite()->getGroup();
+            } catch (InvalidConfigException $e) {
+                $siteGroup = null;
+                Craft::error($e->getMessage(), __METHOD__);
+            }
+            // If we can't get a group, just use the current site
+            if ($siteGroup === null) {
+                $sites = [Craft::$app->getSites()->getCurrentSite()];
+            } else  {
+                $sites = $siteGroup->getSites();
+            }
+        } else {
+            $sites = Craft::$app->getSites()->getAllSites();
+        }
+
+        foreach($sites as $site) {
+            $result .= 'sitemap: ' . $this->sitemapIndexUrlForSiteId($site->id) . PHP_EOL;
+        }
+
+        return rtrim($result, PHP_EOL);
+    }
+
+    /**
      * @param int|null $siteId
      *
      * @return string

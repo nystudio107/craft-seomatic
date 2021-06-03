@@ -20,8 +20,8 @@ return [
     'sitemapAssets'        => true,
     'sitemapFiles'         => true,
     'sitemapAltLinks'      => true,
-    'sitemapChangeFreq'    => 'weekly',
-    'sitemapPriority'      => 0.5,
+    'sitemapChangeFreq'    => '',
+    'sitemapPriority'      => '',
     'sitemapLimit'         => null,
     'structureDepth'       => null,
     'sitemapImageFieldMap' => [

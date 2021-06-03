@@ -1,11 +1,94 @@
 # SEOmatic Changelog
 
-## 3.3.36 - UNRELEASED
+## 3.3.43 - UNRELEASED
 ### Added
 * Add GraphQL schema components for SEOmatic.
 
 ### Fixed
+* Additional Sitemap URLs will now appear only in the Site's sitemap index where they are defined (https://github.com/nystudio107/craft-seomatic/issues/897)
+
+## 3.3.42 - 2021.05.18
+### Changed
+* Strip the query params from next/prev pagination meta tags if we're not using query-string based pagination (https://github.com/nystudio107/craft-seomatic/issues/896)
+* Ensure that frontend templates are checked first, so things like `humans.twig` and `robots.twig` can be overridden (https://github.com/nystudio107/craft-seomatic/issues/891)
+
+### Fixed
+* If sitemaps aren't enabled globally, return nothing for the sitemap index (https://github.com/nystudio107/craft-seomatic/issues/895)
+* Fixed an issue where an empty transform mode could cause errors generating social image transforms (https://github.com/nystudio107/craft-seomatic/issues/892)
+
+## 3.3.41 - 2021.05.06
+### Added
+* Only add a sitemap to the sitemap index if there's at least 1 element in the resulting sitemap (https://github.com/nystudio107/craft-seomatic/issues/873)
+
+### Changed
+* Have all of the Site Map settings in the SEO Settings field default to empty, so they fall back on the Content SEO value by default (https://github.com/nystudio107/craft-seomatic/issues/871)
+* Have the image transform modes all default to empty, so they will fall back on the Content SEO value by default (https://github.com/nystudio107/craft-seomatic/issues/868)
+
+### Fixed
+* For paginated pages, re-apply the adjustment to the canonical URL tag as well (https://github.com/nystudio107/craft-seomatic/issues/875)
+* Handle the case of empty asset ids being passed in from a missing asset source (https://github.com/nystudio107/craft-seomatic/issues/882)
+* Fixed the verbiage in the Matomo script URL setting (https://github.com/nystudio107/craft-seomatic/issues/880)
+* Don't call any AssetManager methods in the component `init()` method during console requests (https://github.com/nystudio107/craft-seomatic/issues/885)
+
+## 3.3.40 - 2021.04.15
+### Added
+* Added support for Matomo Analytics in the Tracking Scripts section
+
+### Changed
+* Wrap tracking scripts in IFFYs
+
+### Fixed
+* Ensure assets imported via FeedMe don't end up in a `null` volume ID (https://github.com/nystudio107/craft-seomatic/issues/840)
+
+## 3.3.39 - 2021.04.09
+### Added
+ * Added support for Facebook domain verification via the `facebook-domain-verification` tag (https://github.com/nystudio107/craft-seomatic/issues/856)
+* Add proper support for importing assets via Feed Me (https://github.com/nystudio107/craft-seomatic/issues/840)
+* Google gtag.js is now the first and default option in Tracking Scripts, and a footnote to use it for Google Analytics 4 is included (https://github.com/nystudio107/craft-seomatic/issues/788)
+* Added support for Fathom Analytics in the Tracking Scripts section (https://github.com/nystudio107/craft-seomatic/issues/823)
+* Added support for Plausible Analytics in the Tracking Scripts section (https://github.com/nystudio107/craft-seomatic/issues/817)
+
+### Changed
+* Changed how we determine whether environment mappings should be applied to meta items so GraphQL requests will have them applied
+
+### Fixed
+* For pagination, adjust the canonical URL tag as well as the variable
+* Don't strip the query string from paginated canonical URLs
+
+## 3.3.38 - 2021.04.06
+### Added
+* Added `make update` to update NPM packages
+* Added `make update-clean` to completely remove `node_modules/`, then update NPM packages
+
+### Changed
+* SEOmatic will now register frontend templates even if they request matches no Craft site, but the request is for a document in the root domain that has a file extension, e.g. `robots.txt`
+* Use Tailwind CSS `^2.1.0` with JIT
+
+## 3.3.37 - 2021.03.31
+### Added
+* Added the `.tagAttrs` property to all meta items, so you can dynamically add attributes like `data-` to any of the meta item tags
+
+### Changed
+* Move the manifest service registration to the constructor
+* Guard against a Site that has a `null` Base URL in `loadFrontendTemplateContainers()` (https://github.com/nystudio107/craft-seomatic/issues/861)
+
+### Fixed
+* Fixed an issue where the default settings for Content SEO for sections with multiple entry types was set incorrectly (https://github.com/nystudio107/craft-seomatic/issues/814) & (https://github.com/nystudio107/craft-seomatic/issues/794)
+* Fixed the GTag script to use the `???` empty coalescing operator, to prevent empty strings from being used in `gtagProperty` (https://github.com/nystudio107/craft-seomatic/issues/860)
+
+## 3.3.36 - 2021.03.25
+### Changed
+* More consistent `makefile` build commands
+* Use Tailwind 2.x & `@tailwindcss/jit`
+* Move settings from the `composer.json` “extra” to the plugin main class
+* Don't register any frontend templates if this site has a sub-directory as part of the URL (https://github.com/nystudio107/craft-seomatic/issues/859)
+* List all sites sitemaps in the `robots.txt` (https://github.com/nystudio107/craft-seomatic/issues/859)
+
+### Fixed
 * Ensure really long titles are cropped in the sidebar preview
+* Fixed the documentation for the `EVENT_ADD_DYNAMIC_META` event
+* If **Manually Set SEOmatic Environment** is on, ignore `devMode` in determining the environment
+* Fixed issue with global meta bundles not being updated when their version is changed
 
 ## 3.3.35 - 2021.03.03
 ### Fixed

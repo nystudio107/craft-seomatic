@@ -167,25 +167,38 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
                         $metaBundle->sourceHandle,
                         $metaBundle->sourceSiteId
                     );
-                    $lines[] = '<sitemap>';
-                    $lines[] = '<loc>';
-                    $lines[] = Html::encode($sitemapUrl);
-                    $lines[] = '</loc>';
-                    if ($metaBundle->sourceDateUpdated !== null) {
-                        $lines[] = '<lastmod>';
-                        $lines[] = $metaBundle->sourceDateUpdated->format(\DateTime::W3C);
-                        $lines[] = '</lastmod>';
+                    // Get all of the elements for this meta bundle type
+                    $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundle->sourceBundleType);
+                    if ($seoElement !== null) {
+                        // Ensure `null` so that the resulting element query is correct
+                        if (empty($metaBundle->metaSitemapVars->sitemapLimit)) {
+                            $metaBundle->metaSitemapVars->sitemapLimit = null;
+                        }
+                        $totalElements = $seoElement::sitemapElementsQuery($metaBundle)->count();
+                        if ($metaBundle->metaSitemapVars->sitemapLimit && ($totalElements > $metaBundle->metaSitemapVars->sitemapLimit)) {
+                            $totalElements = $metaBundle->metaSitemapVars->sitemapLimit;
+                        }
                     }
-                    $lines[] = '</sitemap>';
+                    // Only add a sitemap to the sitemap index if there's at least 1 element in the resulting sitemap
+                    if ($totalElements > 0) {
+                        $lines[] = '<sitemap>';
+                        $lines[] = '<loc>';
+                        $lines[] = Html::encode($sitemapUrl);
+                        $lines[] = '</loc>';
+                        if ($metaBundle->sourceDateUpdated !== null) {
+                            $lines[] = '<lastmod>';
+                            $lines[] = $metaBundle->sourceDateUpdated->format(\DateTime::W3C);
+                            $lines[] = '</lastmod>';
+                        }
+                        $lines[] = '</sitemap>';
+                    }
                 }
             }
             // Custom sitemap entries
-            foreach ($groupSiteIds as $groupSiteId) {
-                $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($groupSiteId, false);
-                if ($metaBundle !== null) {
-                    $this->addAdditionalSitemapUrls($metaBundle, $groupSiteId, $lines);
-                    $this->addAdditionalSitemaps($metaBundle, $groupSiteId, $lines);
-                }
+            $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId, false);
+            if ($metaBundle !== null) {
+                $this->addAdditionalSitemapUrls($metaBundle, $siteId, $lines);
+                $this->addAdditionalSitemaps($metaBundle, $siteId, $lines);
             }
             // Sitemap index closing tag
             $lines[] = '</sitemapindex>';
@@ -211,7 +224,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
     // =========================================================================
 
     /**
-     * Add an additional sitemaps to the sitemap index, coming from the global
+     * Add an additional sitemap to the sitemap index, coming from the global
      * meta bundle metaSiteVars->additionalSitemaps
      *
      * @param MetaBundle $metaBundle

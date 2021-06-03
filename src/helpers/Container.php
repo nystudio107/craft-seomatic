@@ -92,6 +92,7 @@ class Container
                     __METHOD__
                 );
                 // Load the meta containers and parse our globals
+                Seomatic::$headlessRequest = true;
                 Seomatic::$plugin->metaContainers->previewMetaContainers($uri, $siteId, true);
                 // Iterate through the desired $containerKeys
                 foreach ($containerKeys as $containerKey) {
