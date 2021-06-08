@@ -11,7 +11,6 @@
 
 namespace nystudio107\seomatic;
 
-use craft\events\RegisterGqlSchemaComponentsEvent;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
 use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
@@ -57,6 +56,7 @@ use craft\events\DefineGqlTypeFieldsEvent;
 use craft\events\RegisterCacheOptionsEvent;
 use craft\events\RegisterComponentTypesEvent;
 use craft\events\RegisterGqlQueriesEvent;
+use craft\events\RegisterGqlSchemaComponentsEvent;
 use craft\events\RegisterGqlTypesEvent;
 use craft\events\RegisterPreviewTargetsEvent;
 use craft\events\RegisterUrlRulesEvent;
