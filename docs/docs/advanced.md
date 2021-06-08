@@ -118,7 +118,7 @@ The directory `vendor/nystudio107/seomatic/src/seomatic-config` contains a numbe
 
 ![Screenshot](./resources/screenshots/seomatic-seomatic-config.png)
 
-You can copy this entire directory to your Craft `config/` directory, and customize the files to your heart's content. SEOmatic will first look in the `config/` directory for any given file, and then fall back on its own internal `seomatic-config` files.
+You can copy this entire directory to your Craft `config/` directory, and customize the files to your heart’s content. SEOmatic will first look in the `config/` directory for any given file, and then fall back on its own internal `seomatic-config` files.
 
 Note that these files are only used when initially creating a meta bundle. That is, whenever the plugin is installed, or new Section, Category Groups, or Commerce Product Types are created. Once meta bundles have been created, changing the settings in the file will have no effect.
 
@@ -126,11 +126,11 @@ You can bump the `Bundle.php`'s `bundleVersion` setting if you want it to re-rea
 
 ## Headless SPA API
 
-SEOmatic allows you to fetch the meta information for any page via a controller API endpoint, so you can render the meta data via a frontend framework like VueJS or React.
+SEOmatic allows you to fetch the meta information for any page via a controller API endpoint, so you can render the metadata via a frontend framework like VueJS or React.
 
 ### GraphQL Query support
 
-To retrieve SEOmatic container data through the native [GraphQL in Craft CMS 3.3](https://docs.craftcms.com/v3/graphql.html#sending-api-requests) or the [CraftQL plugin](https://github.com/markhuot/craftql), use the `seomatic` field in your graphql query. Each parameter will return that container's data, ready for insertion into the DOM.
+To retrieve SEOmatic container data through the native [GraphQL in Craft CMS 3.3](https://docs.craftcms.com/v3/graphql.html#sending-api-requests) or the [CraftQL plugin](https://github.com/markhuot/craftql), use the `seomatic` field in your GraphQL query. Each parameter will return that container’s data, ready for insertion into the DOM.
 
 You must as least pass in the URI you want metadata for:
 
@@ -193,7 +193,7 @@ You must as least pass in the URI you want metadata for:
 ```
 This defaults to `false` which returns to you HTML ready to be inserted into the DOM. If you set it to `true` then it will return a JSON-encoded array of the container data.
 
-This is useful if you're using Next.js, Nuxt.js, Gatsby, Gridsome, or anything else that uses a library to insert the various tags. In this case, you want the raw data to pass along.
+This is useful if you’re using Next.js, Nuxt.js, Gatsby, Gridsome, or anything else that uses a library to insert the various tags. In this case, you want the raw data to pass along.
 
 ![Screenshot](./resources/screenshots/seomatic-craftql-query.png)
 
@@ -284,7 +284,7 @@ CraftQL Plugin:
 
 ### Meta Container API Endpoints
 
-**N.B.:** Anonymous access to the Meta Container endpoints are disabled by default; you'll need to enable them in SEOmatic → Plugin Settings → Endpoints
+**N.B.:** Anonymous access to the Meta Container endpoints are disabled by default; you’ll need to enable them in SEOmatic → Plugin Settings → Endpoints
 
 To get all of the meta containers for a given URI, the controller action is:
 
@@ -305,7 +305,7 @@ This will return to you an array of meta containers, with the render-ready meta 
     "MetaSiteVarsContainer": "{\"siteName\":\"woof\",\"identity\":{\"siteType\":\"Organization\",\"siteSubType\":\"LocalBusiness\",\"siteSpecificType\":\"none\",\"computedType\":\"LocalBusiness\",\"genericName\":\"\",\"genericAlternateName\":\"\",\"genericDescription\":\"\",\"genericUrl\":\"$HOME\",\"genericImage\":null,\"genericImageWidth\":\"229\",\"genericImageHeight\":\"220\",\"genericImageIds\":[\"25\"],\"genericTelephone\":\"\",\"genericEmail\":\"\",\"genericStreetAddress\":\"\",\"genericAddressLocality\":\"\",\"genericAddressRegion\":\"\",\"genericPostalCode\":\"\",\"genericAddressCountry\":\"\",\"genericGeoLatitude\":\"\",\"genericGeoLongitude\":\"\",\"personGender\":\"Male\",\"personBirthPlace\":\"\",\"organizationDuns\":\"\",\"organizationFounder\":\"\",\"organizationFoundingDate\":\"\",\"organizationFoundingLocation\":\"\",\"organizationContactPoints\":\"\",\"corporationTickerSymbol\":\"\",\"localBusinessPriceRange\":\"$\",\"localBusinessOpeningHours\":[{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null}],\"restaurantServesCuisine\":\"\",\"restaurantMenuUrl\":\"\",\"restaurantReservationsUrl\":\"\"},\"creator\":{\"siteType\":\"Organization\",\"siteSubType\":\"LocalBusiness\",\"siteSpecificType\":\"none\",\"computedType\":\"LocalBusiness\",\"genericName\":\"\",\"genericAlternateName\":\"\",\"genericDescription\":\"\",\"genericUrl\":\"\",\"genericImage\":null,\"genericImageWidth\":\"1340\",\"genericImageHeight\":\"596\",\"genericImageIds\":[\"24\"],\"genericTelephone\":\"\",\"genericEmail\":\"\",\"genericStreetAddress\":\"\",\"genericAddressLocality\":\"\",\"genericAddressRegion\":\"\",\"genericPostalCode\":\"\",\"genericAddressCountry\":\"\",\"genericGeoLatitude\":\"\",\"genericGeoLongitude\":\"\",\"personGender\":\"Male\",\"personBirthPlace\":\"\",\"organizationDuns\":\"\",\"organizationFounder\":\"\",\"organizationFoundingDate\":\"\",\"organizationFoundingLocation\":\"\",\"organizationContactPoints\":\"\",\"corporationTickerSymbol\":\"\",\"localBusinessPriceRange\":\"$\",\"localBusinessOpeningHours\":[{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null}],\"restaurantServesCuisine\":\"\",\"restaurantMenuUrl\":\"\",\"restaurantReservationsUrl\":\"\"},\"twitterHandle\":\"\",\"facebookProfileId\":\"\",\"facebookAppId\":\"\",\"googleSiteVerification\":\"\",\"bingSiteVerification\":\"\",\"pinterestSiteVerification\":\"\",\"sameAsLinks\":{\"twitter\":{\"siteName\":\"Twitter\",\"handle\":\"twitter\",\"url\":\"\"},\"facebook\":{\"siteName\":\"Facebook\",\"handle\":\"facebook\",\"url\":\"\"},\"wikipedia\":{\"siteName\":\"Wikipedia\",\"handle\":\"wikipedia\",\"url\":\"\"},\"linkedin\":{\"siteName\":\"LinkedIn\",\"handle\":\"linkedin\",\"url\":\"\"},\"googleplus\":{\"siteName\":\"Google+\",\"handle\":\"googleplus\",\"url\":\"\"},\"youtube\":{\"siteName\":\"YouTube\",\"handle\":\"youtube\",\"url\":\"\"},\"instagram\":{\"siteName\":\"Instagram\",\"handle\":\"instagram\",\"url\":\"\"},\"pinterest\":{\"siteName\":\"Pinterest\",\"handle\":\"pinterest\",\"url\":\"\"},\"github\":{\"siteName\":\"GitHub\",\"handle\":\"github\",\"url\":\"\"},\"vimeo\":{\"siteName\":\"Vimeo\",\"handle\":\"vimeo\",\"url\":\"\"}},\"siteLinksSearchTarget\":\"\",\"siteLinksQueryInput\":\"\",\"referrer\":\"no-referrer-when-downgrade\",\"additionalSitemapUrls\":[],\"additionalSitemapUrlsDateUpdated\":null,\"additionalSitemaps\":[]}"
 }
 ```
-If you need to request a URI from a specific site in a multi-site setup, you can do that with the optional `siteId=SITE_ID` parameter:
+To request a URI from a specific site in a multi-site setup, you can do that with the optional `siteId=SITE_ID` parameter:
 
 ```
 /actions/seomatic/meta-container/all-meta-containers/?uri=/&siteId=2
@@ -669,13 +669,13 @@ SiteVars container:
 }
 ```
 
-All of the individual container controller API endpoints also accept the `&asArray=true` parameter if you'd like the data in array form.
+All of the individual container controller API endpoints also accept the `&asArray=true` parameter if you’d like the data in array form.
  
 ### Schema.org API Endpoints
 
-**N.B.:** Anonymous access to the Schema.org JSON-LD endpoints are disabled by default; you'll need to enable them in SEOmatic → Plugin Settings → Endpoints
+**N.B.:** Anonymous access to the Schema.org JSON-LD endpoints are disabled by default; you’ll need to enable them in SEOmatic → Plugin Settings → Endpoints
 
-To get a key/value array of a given [Schema.org](http://schema.org/docs/full.html) type:
+To get a key-value array of a given [Schema.org](http://schema.org/docs/full.html) type:
 
 ```
 /actions/seomatic/json-ld/get-type?schemaType=Article
