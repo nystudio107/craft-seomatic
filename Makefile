@@ -8,7 +8,6 @@ DOCKERRUN=docker container run \
 	-p 8080:8080 \
 	-v `pwd`:/app \
 	${CONTAINER}:${TAG}
-DOCSDEST?=../../sites/nystudio107/web/docs/seomatic
 
 .PHONY: build dev docker install update update-clean npm
 
