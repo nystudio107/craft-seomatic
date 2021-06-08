@@ -2,7 +2,7 @@
 
 ## Pagination and SEO
 
-If you are using paginated entries, you'll want to add some additional markup to your templates to make Google et al aware of this. Fortunately, SEOmatic makes that easy, you simply do:
+If you are using paginated entries, you’ll want to add some additional markup to your templates to make Google et al aware of this. Fortunately, SEOmatic makes that easy, you simply do:
 
 ```twig
 {% do seomatic.helper.paginate(PAGEINFO) %}
@@ -32,7 +32,7 @@ More info: [SEO Guide to Google Webmaster Recommendations for Pagination](https:
 
 SEOmatic comes with multi-site support baked in. Each site has its own localized settings that can be different on a per-site basis.
 
-Craft CMS [defines Sites](https://docs.craftcms.com/v3/sites.html) as any combination of site settings and locale (language). But there needs to be some way to organize these sites to define a relationship between them. That's what [Site Groups](https://github.com/craftcms/cms/issues/1668) are for.
+Craft CMS [defines Sites](https://docs.craftcms.com/v3/sites.html) as any combination of site settings and locale (language). But there needs to be some way to organize these sites to define a relationship between them. That’s what [Site Groups](https://github.com/craftcms/cms/issues/1668) are for.
 
 SEOmatic treats each Site Group as a separate entity, and any sites contained in that site group are treated as localizations of the same site.
 
@@ -50,15 +50,15 @@ So for example, you might have:
 |   └── German Site
 ```
 
-While you technically don't have to organize your Site Groups in this manner, SEOmatic currently requires it so that it can understand the relationship between your sites.
+While you technically don’t have to organize your Site Groups in this manner, SEOmatic currently requires it so that it can understand the relationship between your sites.
 
 This is necessary because for a variety of SEO-related things, we need to tell search engines what is really just another localization/translation of the same thing.
 
-If you _don't_ want to organize your sites in this manner, you'll need to turn off the **Site Groups define logically separate sites** setting on the Plugin Settings page.
+If you _don’t_ want to organize your sites in this manner, you’ll need to turn off the **Site Groups define logically separate sites** setting on the Plugin Settings page.
 
 Sites that are grouped together under the same Site Group will have `<link rel="alternate" hreflang="XX">` & `<meta content="xx_XX" property="og:locale:alternate">` URLs added automatically in the HTML.
 
-If you want to disable SEOmatic's automatic rendering of these tags, you can do:
+To disable SEOmatic’s automatic rendering of these tags, you can do:
 ```twig
 {% do seomatic.tag.get('alternate').include(false) %}
 {% do seomatic.tag.get('og:locale:alternate').include(false) %}
@@ -66,7 +66,7 @@ If you want to disable SEOmatic's automatic rendering of these tags, you can do:
 
 Sites that are grouped together under the same Site Group will also be included in the appropriate sitemap indexes, and have `<xhtml:link rel="alternate" hreflang="xx-xx">` tags added to the respective sitemaps.
 
-If you want to disable the generation of the `<xhtml:link rel="alternate" hreflang="xx-xx">` on a per-Entry basis, you can do this by adding an SEO Settings to the Section/Category Group/Product in question, and turn off **Sitemap Enabled** on a per-entry basis.
+To disable the generation of the `<xhtml:link rel="alternate" hreflang="xx-xx">` on a per-Entry basis, you can do this by adding an SEO Settings to the Section/Category Group/Product in question, and turn off **Sitemap Enabled** on a per-entry basis.
 
 ## Plugin Support
 
@@ -86,7 +86,7 @@ SEOmatic supports using Emojis in any of the fields in SEOmatic, so you could us
 
 ![Screenshot](./resources/screenshots/seomatic-emoji-support.png)
 
-It's up to Google whether or not to display the emojis that you add to your SEO meta, but used effectively, they can help make your entries in the SERP stand out from others. Learn more: [Why Use Emojis in Your SEO / PPC Strategy?](https://www.jellyfish.net/en-us/news-and-views/why-use-emojis-in-your-seo-ppc-strategy)
+It’s up to Google whether or not to display the emojis that you add to your SEO meta, but used effectively, they can help make your entries in the SERP stand out from others. Learn more: [Why Use Emojis in Your SEO / PPC Strategy?](https://www.jellyfish.net/en-us/news-and-views/why-use-emojis-in-your-seo-ppc-strategy)
 
 ![Screenshot](./resources/screenshots/seomatic-mac-emoji-keyboard.png)
 
@@ -114,14 +114,14 @@ And this to the AMP template to tell Google where the canonical HTML page is:
 {% do seomatic.meta.canonicalUrl(entry.url) %}
 ```
 
-Since AMP [doesn't allow for third-party JavaScript](https://medium.com/google-developers/how-to-avoid-common-mistakes-when-publishing-accelerated-mobile-pages-9ea61abf530f), you might want to add this to your AMP templates:
+Since AMP [doesn’t allow for third-party JavaScript](https://medium.com/google-developers/how-to-avoid-common-mistakes-when-publishing-accelerated-mobile-pages-9ea61abf530f), you might want to add this to your AMP templates:
 ```twig
 {% do seomatic.script.container().include(false) %}
 ```
 
 This will cause SEOmatic to not render _any_ custom scripts you might have enabled (such as Google Analytics, gtag, etc.)
 
-Then you can include Google AMP Analytics as per [Adding Analytics to your AMP pages](https://developers.google.com/analytics/devguides/collection/amp-analytics/) (this assumes you're using `gtag`):
+Then you can include Google AMP Analytics as per [Adding Analytics to your AMP pages](https://developers.google.com/analytics/devguides/collection/amp-analytics/) (this assumes you’re using `gtag`):
 ```
 {% set script = seomatic.script.get('gtag') %}
 {% set analyticsId = script.vars.googleAnalyticsId.value ??? '' %}
@@ -142,7 +142,7 @@ Then you can include Google AMP Analytics as per [Adding Analytics to your AMP p
 </amp-analytics>
 ```
 
-The above uses the `???` empty coalesce operator that comes with SEOmatic; check out [SEOmatic's ??? Empty Coalesce operator](#seomatics--empty-coalesce-operator) for details.
+The above uses the `???` empty coalesce operator that comes with SEOmatic; check out [SEOmatic’s ??? Empty Coalesce operator](#seomatics--empty-coalesce-operator) for details.
 
 ## Single Page App (SPA) Support
 

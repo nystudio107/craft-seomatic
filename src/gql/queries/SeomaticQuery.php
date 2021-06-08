@@ -14,6 +14,7 @@ namespace nystudio107\seomatic\gql\queries;
 use nystudio107\seomatic\gql\arguments\SeomaticArguments;
 use nystudio107\seomatic\gql\interfaces\SeomaticInterface;
 use nystudio107\seomatic\gql\resolvers\SeomaticResolver;
+use nystudio107\seomatic\helpers\Gql as GqlHelper;
 
 use craft\gql\base\Query;
 
@@ -31,6 +32,10 @@ class SeomaticQuery extends Query
      */
     public static function getQueries($checkToken = true): array
     {
+        if ($checkToken && !GqlHelper::canQuerySeo()) {
+            return [];
+        }
+
         return [
             'seomatic' => [
                 'type' => SeomaticInterface::getType(),

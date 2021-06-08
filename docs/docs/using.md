@@ -1,12 +1,12 @@
 # Using SEOmatic
 
-## SEOmatic's ??? Empty Coalesce operator
+## SEOmatic’s ??? Empty Coalesce operator
 
 SEOmatic adds the `???` operator to Twig that will return the first thing that is defined, not null, and not empty. This allows you to safely "cascade" empty text/image values.
 
-This can be used both in Twig templates, and in any of SEOmatic's fields, which are parsed as Twig templates as well.
+This can be used both in Twig templates, and in any of SEOmatic’s fields, which are parsed as Twig templates as well.
 
-This is particularly useful for SEO fields (both text & images), where you're dealing with a number of fallback/default values that may or may not exist, and may or may not be empty.
+This is particularly useful for SEO fields (both text & images), where you’re dealing with a number of fallback/default values that may or may not exist, and may or may not be empty.
 
 The `???` Empty Coalescing operator is similar to the `??` [null coalescing operator](https://nystudio107.com/blog/handling-errors-gracefully-in-craft-cms#coalescing-the-night-away), but also ignores empty strings (`""`) and empty arrays (`[]`) as well.
 
@@ -30,7 +30,7 @@ You can use the [null coalescing operator](https://nystudio107.com/blog/handling
 {% set description = entry.description ?? category.description ?? global.description %}
 ```
 
-But the problem here is it'll _just_ pick the first thing that is defined and not `null`. So if `entry.description` is an empty string, it'll use that, which is rarely what you want.
+But the problem here is it’ll _just_ pick the first thing that is defined and not `null`. So if `entry.description` is an empty string, it’ll use that, which is rarely what you want.
 
 Enter the Empty Coalescing operator, and it becomes:
 
@@ -40,11 +40,11 @@ Enter the Empty Coalescing operator, and it becomes:
 
 Now the first thing that is defined, not null, _and_ not empty will be what `description` is set to.
 
-Nice. Simple. Readable. And most importantly, likely the result you're expecting.
+Nice. Simple. Readable. And most importantly, likely the result you’re expecting.
 
 The examples presented here use the `???` operator for SEOmatic functions, but you can use them for anything you like.
 
-We've submitted a [pull request](https://github.com/twigphp/Twig/pull/2787) in the hopes of making this part of Twig core. This functionality is also available separately in the [Empty Coalesce](https://nystudio107.com/plugins/empty-coalesce) plugin.
+We’ve submitted a [pull request](https://github.com/twigphp/Twig/pull/2787) in the hopes of making this part of Twig core. This functionality is also available separately in the [Empty Coalesce](https://nystudio107.com/plugins/empty-coalesce) plugin.
 
 ## Twig Templating
 
@@ -54,7 +54,7 @@ SEOmatic makes a global `seomatic` variable available in your Twig templates tha
 
 ## A Word About `{% cache %}` Tags
 
-If you use Craft's built-in `{% cache %}` tags, ensure that you don't have any of SEOmatic's tags (listed below) inside of them. The reason is that SEOmatic dynamically generates the tags on each request, using its own caching system for performance reasons.
+If you use Craft’s built-in `{% cache %}` tags, ensure that you don’t have any of SEOmatic’s tags (listed below) inside of them. The reason is that SEOmatic dynamically generates the tags on each request, using its own caching system for performance reasons.
 
 When you surround any Twig code in a `{% cache %}` tag, that code will only ever be executed once. On subsequent runs, the HTML result of what was inside of the `{% cache %}` tag is just returned, and the Twig code inside of it is never executed.
 
@@ -67,7 +67,7 @@ All of the SEOmatic variables can be accessed as you would any normal Twig varia
 ```twig
 {{ seomatic.meta.seoTitle }}
 ```
-or
+Or
 ```twig
 {% set title = seomatic.meta.seoTitle %}
 ```
@@ -77,7 +77,7 @@ They can also be changed by passing in a value with the Twig `{% do %}` syntax:
 ```twig
 {% do seomatic.meta.seoTitle("Some Title") %}
 ```
-or
+Or
 ```twig
 {% do seomatic.meta.seoDescription("This is my description. There are many like it, but this one is mine.") %}
 ```
@@ -116,17 +116,17 @@ You can also reference `entry`, `category`, or `product` Craft variables, if the
  ```twig
  {% do seomatic.meta.seoTitle("{entry.title}") %}
  ```
-or
+Or
 ```twig
  {% do seomatic.meta.seoTitle("{category.title}") %}
 ```
 
-But most of the time, you'll want to just set them like you would regular variables:
+But most of the time, you’ll want to just set them like you would regular variables:
 
  ```twig
  {% do seomatic.meta.seoTitle(entry.title) %}
  ```
-or
+Or
 ```twig
  {% do seomatic.meta.seoTitle(category.title) %}
 ```
@@ -160,7 +160,7 @@ The `seomatic.meta` variable contains all of the meta variables that control the
 * **`seomatic.meta.seoImageHeight`** - the height of the SEO image
 * **`seomatic.meta.seoImageDescription`** - a textual description of the SEO image
 * **`seomatic.meta.canonicalUrl`** - the URL used for the `<link rel="canonical">` tag. By default, this is set to `{seomatic.helper.safeCanonicalUrl()}` or `{entry.url}`/`{category.url}`/`{product.url}`, but you can change it as you see fit. This variable is also used to set the `link rel="canonical"` HTTP header.
-* **`seomatic.meta.robots`** - the setting used for the `<meta name="robots">` tag that controls how bots should index your website. This variable is also used to set the `X-Robots-Tag` HTTP header. [Learn More](https://developers.google.com/search/reference/robots_meta_tag)
+* **`seomatic.meta.robots`** - the setting used for the `<meta name="robots">` tag that controls how bots should index your site. This variable is also used to set the `X-Robots-Tag` HTTP header. [Learn More](https://developers.google.com/search/reference/robots_meta_tag)
 
 ### Facebook OpenGraph Variables:
 
@@ -189,14 +189,14 @@ The `seomatic.meta` variable contains all of the meta variables that control the
 
 The `seomatic.site` variable has site-wide settings that are available on a per-site basis for multi-site setups.
 
-* **`seomatic.site.siteName`** - The name of the website
+* **`seomatic.site.siteName`** - The name of the site
 * **`seomatic.site.twitterHandle`** - The site Twitter handle
 * **`seomatic.site.facebookProfileId`** - The site Facebook profile ID
 * **`seomatic.site.facebookAppId`** - The site Facebook app ID
 * **`seomatic.site.googleSiteVerification`** - The Google Site Verification code
 * **`seomatic.site.bingSiteVerification`** - The Bing Site Verification code
 * **`seomatic.site.pinterestSiteVerification`** - The Pinterest Site Verification code
-* **`seomatic.site.sameAsLinks`** - Array of links for Same As... sites, indexed by the handle. So for example you could access the site Facebook URL via `seomatic.site.sameAsLinks["facebook"]["url"]`. These links are used to generate the `<meta property="og:same_as">` tags, and are also used in the `sameAs` property in the `mainEntityOfPage` JSON-LD.
+* **`seomatic.site.sameAsLinks`** - Array of links for Same As... Sites, indexed by the handle. So for example you could access the site Facebook URL via `seomatic.site.sameAsLinks["facebook"]["url"]`. These links are used to generate the `<meta property="og:same_as">` tags, and are also used in the `sameAs` property in the `mainEntityOfPage` JSON-LD.
 * **`seomatic.site.siteLinksSearchTarget`** - Google Site Links search target. [Learn More](https://developers.google.com/search/docs/data-types/sitelinks-searchbox)
 * **`seomatic.site.siteLinksQueryInput`** - Google Site Links query input. [Learn More](https://developers.google.com/search/docs/data-types/sitelinks-searchbox)
 
@@ -204,83 +204,83 @@ The `seomatic.site` variable has site-wide settings that are available on a per-
 
 The `seomatic.site.identity` variable is used to create [JSON-LD Structured Data](https://developers.google.com/search/docs/guides/intro-structured-data) that _can_ appear as [Rich Snippets](https://developers.google.com/search/docs/guides/mark-up-content) on Google Search Engine Results Pages (SERP). JSON-LD Structured Data helps computers understand context and relationships, and is also read by other social media sites and apps.
 
-The `seomatic.site.identity` encapsulates all of the information associated with the owner of the website.
+The `seomatic.site.identity` encapsulates all of the information associated with the owner of the site.
 
 * **`seomatic.site.identity.siteType`** - The schema.org general type
 * **`seomatic.site.identity.siteSubType`** - The schema.org sub-type
 * **`seomatic.site.identity.siteSpecificType`** - The schema.org specific type
 * **`seomatic.site.identity.computedType`** - The computed most specific schema.org type
-* **`seomatic.site.identity.genericName`** - The name of the entity that owns the website
-* **`seomatic.site.identity.genericAlternateName`** - An alternate or nickname for the entity that owns the website
-* **`seomatic.site.identity.genericDescription`** - A description of the entity that owns the website
-* **`seomatic.site.identity.genericUrl`** - A URL for the entity that owns the website
-* **`seomatic.site.identity.genericImage`** - A URL to an image or logo that represents the entity that owns the website. The image must be in JPG, PNG, or GIF format.
+* **`seomatic.site.identity.genericName`** - The name of the entity that owns the site
+* **`seomatic.site.identity.genericAlternateName`** - An alternate or nickname for the entity that owns the site
+* **`seomatic.site.identity.genericDescription`** - A description of the entity that owns the site
+* **`seomatic.site.identity.genericUrl`** - A URL for the entity that owns the site
+* **`seomatic.site.identity.genericImage`** - A URL to an image or logo that represents the entity that owns the site. The image must be in JPG, PNG, or GIF format.
 * **`seomatic.site.identity.genericImageWidth`** - The width of the entity image
 * **`seomatic.site.identity.genericImageHeight`** - The height of the entity image
 * **`seomatic.site.identity.genericImageIds`** - Asset ID array for the entity image
-* **`seomatic.site.identity.genericTelephone`** - The primary contact telephone number for the entity that owns the website
-* **`seomatic.site.identity.genericEmail`** - The primary contact email address for the entity that owns the website
-* **`seomatic.site.identity.genericStreetAddress`** - The street address of the entity that owns the website, e.g.: 123 Main Street
-* **`seomatic.site.identity.genericAddressLocality`** -  locality of the entity that owns the website, e.g.: Portchester
-* **`seomatic.site.identity.genericAddressRegion`** - The region of the entity that owns the website, e.g.: New York or NY
-* **`seomatic.site.identity.genericPostalCode`** - The postal code of the entity that owns the website, e.g.: 14580
-* **`seomatic.site.identity.genericAddressCountry`** - The country in which the entity that owns the website is located, e.g.: US
-* **`seomatic.site.identity.genericGeoLatitude`** - The latitude of the location of the entity that owns the website, e.g.: -120.5436367
-* **`seomatic.site.identity.genericGeoLongitude`** - The longitude of the location of the entity that owns the website, e.g.: 80.6033588
+* **`seomatic.site.identity.genericTelephone`** - The primary contact telephone number for the entity that owns the site
+* **`seomatic.site.identity.genericEmail`** - The primary contact email address for the entity that owns the site
+* **`seomatic.site.identity.genericStreetAddress`** - The street address of the entity that owns the website, for example: 123 Main Street
+* **`seomatic.site.identity.genericAddressLocality`** -  locality of the entity that owns the website, for example: Portchester
+* **`seomatic.site.identity.genericAddressRegion`** - The region of the entity that owns the website, for example: New York or NY
+* **`seomatic.site.identity.genericPostalCode`** - The postal code of the entity that owns the website, for example: 14580
+* **`seomatic.site.identity.genericAddressCountry`** - The country in which the entity that owns the site is located, for example: US
+* **`seomatic.site.identity.genericGeoLatitude`** - The latitude of the location of the entity that owns the website, for example: -120.5436367
+* **`seomatic.site.identity.genericGeoLongitude`** - The longitude of the location of the entity that owns the website, for example: 80.6033588
 * **`seomatic.site.identity.personGender`** - Only for entities of the type Person, the gender of the person
 * **`seomatic.site.identity.personBirthPlace`** - Only for entities of the type Person, the place where the person was born
-* **`seomatic.site.identity.organizationDuns`** - Only for entities of the type Organization, the DUNS (Dunn & Bradstreet) number of the organization that owns the website
+* **`seomatic.site.identity.organizationDuns`** - Only for entities of the type Organization, the DUNS (Dunn & Bradstreet) number of the organization that owns the site
 * **`seomatic.site.identity.organizationFounder`** - Only for entities of the type Organization, the name of the founder of the organization
-* **`seomatic.site.identity.organizationFoundingDate`** - Only for entities of the type Organization, the date the organization/company/restaurant was founded in [ISO 8601 date format](http://schema.org/Date), e.g.: `2018-03-26`
+* **`seomatic.site.identity.organizationFoundingDate`** - Only for entities of the type Organization, the date the organization/company/restaurant was founded in [ISO 8601 date format](http://schema.org/Date), for example: `2018-03-26`
 * **`seomatic.site.identity.organizationFoundingLocation`** - Only for entities of the type Organization, the location where the organization was founded
 * **`seomatic.site.identity.organizationContactPoints`** - Only for entities of the type Organization, an array of contact points for the organization. [Learn More](https://developers.google.com/search/docs/guides/enhance-site#provide-business-contact-markup)
 * **`seomatic.site.identity.corporationTickerSymbol`** - Only for entities of the type Corporation, the exchange ticker symbol of the corporation
 * **`seomatic.site.identity.localBusinessPriceRange`** - Only for entities of the type LocalBusiness, the approximate price range of the goods or services offered by this local business
 * **`seomatic.site.identity.localBusinessOpeningHours`** - Only for entities of the type LocalBusiness, an array of the opening hours for this local business. [Learn More][https://developers.google.com/search/docs/data-types/local-business]
 * **`seomatic.site.identity.restaurantServesCuisine`** - Only for entities of the type Food Establishment, the primary type of cuisine that the food establishment serves
-* **`seomatic.site.identity.restaurantMenuUrl`** - Only for entities of the type Food Establishment, a URL to the food establishment's menu
-* **`seomatic.site.identity.restaurantReservationsUrl`** - Only for entities of the type Food Establishment, a URL to the food establishment's reservations page
+* **`seomatic.site.identity.restaurantMenuUrl`** - Only for entities of the type Food Establishment, a URL to the food establishment’s menu
+* **`seomatic.site.identity.restaurantReservationsUrl`** - Only for entities of the type Food Establishment, a URL to the food establishment’s reservations page
 
 ### Site Creator Variables `seomatic.site.creator`
 
 The `seomatic.site.creator` variable is used to create [JSON-LD Structured Data](https://developers.google.com/search/docs/guides/intro-structured-data) that _can_ appear as [Rich Snippets](https://developers.google.com/search/docs/guides/mark-up-content) on Google Search Engine Results Pages (SERP). JSON-LD Structured Data helps computers understand context and relationships, and is also read by other social media sites and apps.
 
-The `seomatic.site.creator` encapsulates all of the information associated with the creator of the website. This information is also used in the `humans.txt` page
+The `seomatic.site.creator` encapsulates all of the information associated with the creator of the site. This information is also used in the `humans.txt` page
 
 * **`seomatic.site.creator.siteType`** - The schema.org general type
 * **`seomatic.site.creator.siteSubType`** - The schema.org sub-type
 * **`seomatic.site.creator.siteSpecificType`** - The schema.org specific type
 * **`seomatic.site.creator.computedType`** - The computed most specific schema.org type
-* **`seomatic.site.creator.genericName`** - The name of the entity that created the website
-* **`seomatic.site.creator.genericAlternateName`** - An alternate or nickname for the entity that created the website
-* **`seomatic.site.creator.genericDescription`** - A description of the entity that created the website
-* **`seomatic.site.creator.genericUrl`** - A URL for the entity that created the website
-* **`seomatic.site.creator.genericImage`** - A URL to an image or logo that represents the entity that created the website. The image must be in JPG, PNG, or GIF format.
+* **`seomatic.site.creator.genericName`** - The name of the entity that created the site
+* **`seomatic.site.creator.genericAlternateName`** - An alternate or nickname for the entity that created the site
+* **`seomatic.site.creator.genericDescription`** - A description of the entity that created the site
+* **`seomatic.site.creator.genericUrl`** - A URL for the entity that created the site
+* **`seomatic.site.creator.genericImage`** - A URL to an image or logo that represents the entity that created the site. The image must be in JPG, PNG, or GIF format.
 * **`seomatic.site.creator.genericImageWidth`** - The width of the entity image
 * **`seomatic.site.creator.genericImageHeight`** - The height of the entity image
 * **`seomatic.site.creator.genericImageIds`** - Asset ID array for the entity image
-* **`seomatic.site.creator.genericTelephone`** - The primary contact telephone number for the entity that created the website
-* **`seomatic.site.creator.genericEmail`** - The primary contact email address for the entity that created the website
-* **`seomatic.site.creator.genericStreetAddress`** - The street address of the entity that created the website, e.g.: 123 Main Street
-* **`seomatic.site.creator.genericAddressLocality`** -  locality of the entity that created the website, e.g.: Portchester
-* **`seomatic.site.creator.genericAddressRegion`** - The region of the entity that created the website, e.g.: New York or NY
-* **`seomatic.site.creator.genericPostalCode`** - The postal code of the entity that created the website, e.g.: 14580
-* **`seomatic.site.creator.genericAddressCountry`** - The country in which the entity that created the website is located, e.g.: US
-* **`seomatic.site.creator.genericGeoLatitude`** - The latitude of the location of the entity that created the website, e.g.: -120.5436367
-* **`seomatic.site.creator.genericGeoLongitude`** - The longitude of the location of the entity that created the website, e.g.: 80.6033588
+* **`seomatic.site.creator.genericTelephone`** - The primary contact telephone number for the entity that created the site
+* **`seomatic.site.creator.genericEmail`** - The primary contact email address for the entity that created the site
+* **`seomatic.site.creator.genericStreetAddress`** - The street address of the entity that created the website, for example: 123 Main Street
+* **`seomatic.site.creator.genericAddressLocality`** -  locality of the entity that created the website, for example: Portchester
+* **`seomatic.site.creator.genericAddressRegion`** - The region of the entity that created the website, for example: New York or NY
+* **`seomatic.site.creator.genericPostalCode`** - The postal code of the entity that created the website, for example: 14580
+* **`seomatic.site.creator.genericAddressCountry`** - The country in which the entity that created the site is located, for example: US
+* **`seomatic.site.creator.genericGeoLatitude`** - The latitude of the location of the entity that created the website, for example: -120.5436367
+* **`seomatic.site.creator.genericGeoLongitude`** - The longitude of the location of the entity that created the website, for example: 80.6033588
 * **`seomatic.site.creator.personGender`** - Only for entities of the type Person, the gender of the person
 * **`seomatic.site.creator.personBirthPlace`** - Only for entities of the type Person, the place where the person was born
-* **`seomatic.site.creator.organizationDuns`** - Only for entities of the type Organization, the DUNS (Dunn & Bradstreet) number of the organization that created the website
+* **`seomatic.site.creator.organizationDuns`** - Only for entities of the type Organization, the DUNS (Dunn & Bradstreet) number of the organization that created the site
 * **`seomatic.site.creator.organizationFounder`** - Only for entities of the type Organization, the name of the founder of the organization
-* **`seomatic.site.creator.organizationFoundingDate`** - Only for entities of the type Organization, the date the organization/company/restaurant was founded in [ISO 8601 date format](http://schema.org/Date), e.g.: `2018-03-26`
+* **`seomatic.site.creator.organizationFoundingDate`** - Only for entities of the type Organization, the date the organization/company/restaurant was founded in [ISO 8601 date format](http://schema.org/Date), for example: `2018-03-26`
 * **`seomatic.site.creator.organizationFoundingLocation`** - Only for entities of the type Organization, the location where the organization was founded
 * **`seomatic.site.creator.organizationContactPoints`** - Only for entities of the type Organization, an array of contact points for the organization. [Learn More](https://developers.google.com/search/docs/guides/enhance-site#provide-business-contact-markup)
 * **`seomatic.site.creator.corporationTickerSymbol`** - Only for entities of the type Corporation, the exchange ticker symbol of the corporation
 * **`seomatic.site.creator.localBusinessPriceRange`** - Only for entities of the type LocalBusiness, the approximate price range of the goods or services offered by this local business
 * **`seomatic.site.creator.localBusinessOpeningHours`** - Only for entities of the type LocalBusiness, an array of the opening hours for this local business. [Learn More][https://developers.google.com/search/docs/data-types/local-business]
 * **`seomatic.site.creator.restaurantServesCuisine`** - Only for entities of the type Food Establishment, the primary type of cuisine that the food establishment serves
-* **`seomatic.site.creator.restaurantMenuUrl`** - Only for entities of the type Food Establishment, a URL to the food establishment's menu
-* **`seomatic.site.creator.restaurantReservationsUrl`** - Only for entities of the type Food Establishment, a URL to the food establishment's reservations page
+* **`seomatic.site.creator.restaurantMenuUrl`** - Only for entities of the type Food Establishment, a URL to the food establishment’s menu
+* **`seomatic.site.creator.restaurantReservationsUrl`** - Only for entities of the type Food Establishment, a URL to the food establishment’s reservations page
 
 ## Config Variables `seomatic.config`
 
@@ -300,7 +300,7 @@ The `seomatic.config` variables are the global plugin configuration variables se
 
 * **`seomatic.helper.paginate(PAGEINFO)`** - Given the `PAGEINFO` variable from the `{% paginate %}` tag as [described here](https://docs.craftcms.com/v3/templating/tags/paginate.html#the-pageInfo-variable), this will properly set the `canonicalUrl`, as well as adding the `<link rel='prev'>` and `<link rel='next'>` tags for you.
 * **`seomatic.helper.isPreview()`** - returns `true` if the current request is a preview, `false` if it is not
-* **`seomatic.helper.sameAsByHandle(HANDLE)`** - returns an array of information about the **Same As URLs** site specified in `HANDLE`. Here's an example of the information in the returned array:
+* **`seomatic.helper.sameAsByHandle(HANDLE)`** - returns an array of information about the **Same As URLs** site specified in `HANDLE`. Here’s an example of the information in the returned array:
 ```
 array (size=4)
   'siteName' => string 'Twitter'
@@ -310,7 +310,7 @@ array (size=4)
 ```
 * **`seomatic.helper.truncate(TEXT, LENGTH, SUBSTR)`** - Truncates the `TEXT` to a given `LENGTH`. If `SUBSTR` is provided, and truncating occurs, the string is further truncated so that the substring may be appended without exceeding the desired length.
 * **`seomatic.helper.truncateOnWord(TEXT, LENGTH, SUBSTR)`** - Truncates the `TEXT` to a given `LENGTH`, while ensuring that it does not split words. If `SUBSTR` is provided, and truncating occurs, the string is further truncated so that the substring may be appended without exceeding the desired length.
-* **`seomatic.helper.getLocalizedUrls(URI, SITE_ID)`** - Return a list of localized URLs for a given `URI` that are in the `SITE_ID` site's group. Both `URI` and `SITE_ID` are optional, and will use the current request's `URI` and the current site's `SITE_ID` if omitted.
+* **`seomatic.helper.getLocalizedUrls(URI, SITE_ID)`** - Return a list of localized URLs for a given `URI` that are in the `SITE_ID` site’s group. Both `URI` and `SITE_ID` are optional, and will use the current request’s `URI` and the current site’s `SITE_ID` if omitted.
 * **`seomatic.helper.loadMetadataForUri(URI, SITE_ID)`** - Load the appropriate meta containers for the given `URI` and optional `SITE_ID`
 * **`seomatic.helper.sitemapIndexForSiteId(SITE_ID)`** - Get the URL to the `SITE_ID`s sitemap index
 * **`seomatic.helper.extractTextFromField(FIELD)`** - Extract plain text from a PlainText, Redactor, CKEdtior, Tags, Matrix, or Neo field
@@ -324,9 +324,9 @@ array (size=4)
 
 All of the SEOmatic tags, links, scripts, title, and JSON-LD are meta objects that have their values set from the `seomatic.meta` variables.
 
-These meta objects know what properties they should have, and can self-validate. If `devMode` is on, you can check the Yii2 Debug Toolbar's Log to see any validation warnings or errors with your tags.
+These meta objects know what properties they should have, and can self-validate. If `devMode` is on, you can check the Yii2 Debug Toolbar’s Log to see any validation warnings or errors with your tags.
 
-All of SEOmatic's meta objects are stored in containers, and they can be accessed and manipulated directly. You can even dynamically create new tags via Twig at template render time.
+All of SEOmatic’s meta objects are stored in containers, and they can be accessed and manipulated directly. You can even dynamically create new tags via Twig at template render time.
 
 All of the meta object (tags, scripts, links, title, and JSON-LD) have the same API to make it easy to use.
 
@@ -343,7 +343,7 @@ You can access meta object properties just like you can any Twig variable:
 ```twig
 {{ descriptionTag.content }}
 ```
-or
+Or
 ```twig
 {% set myContent = seomatic.meta.seoTitle %}
 ```
@@ -419,7 +419,7 @@ A more practical example would be using [Klaro](https://heyklaro.com/) to manage
 {% endif %}
 ```
 
-Then when the page renders in production, it'll look like this:
+Then when the page renders in production, it’ll look like this:
 ```html
 <script type="text/plain" data-name="google-analytics" data-type="application/javascript">(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -487,7 +487,7 @@ All meta objects can self-validate:
 
 This will output:
 
-* url
+* URL
   * Must be one of these types: URL
 
 Which tells you that the `url` parameter is invalid.  The default validation just ensures that all of the properties are correct.
@@ -525,29 +525,29 @@ You can also set the _scenario_ to display properties that Google requires/recom
 
 This will output:
 
-* url
+* URL
   * Must be one of these types: URL
-* image
+* Image
   * This property is recommended by Google.
-* author
+* Author
   * This property is required by Google.
-* datePublished
+* DatePublished
   * This property is required by Google.
-* headline
+* Headline
   * This property is required by Google.
-* publisher
+* Publisher
   * This property is required by Google.
-* mainEntityOfPage
+* MainEntityOfPage
   * This property is recommended by Google.
-* dateModified
+* DateModified
   * This property is recommended by Google.
 
-If the website has `devMode` on, all of the meta objects are automatically validated as they are rendered, with the results displayed in the Yii Debug Toolbar. The Yii Debug Toolbar can be enabled in your account settings page.
+If the site has `devMode` on, all of the meta objects are automatically validated as they are rendered, with the results displayed in the Yii Debug Toolbar. The Yii Debug Toolbar can be enabled in your account settings page.
 
 ## JSON-LD Meta Object Functions `seomatic.jsonLd`
 
 * **`seomatic.jsonLd.get(META_HANDLE)`** Returns the JSON-LD meta object of the handle `META_HANDLE` or `null` if it is not found
-* **`seomatic.jsonLd.create()`** Creates a JSON-LD meta object from an array of key/value properties. The `type` can be any of the [Schema.org](http://schema.org/docs/full.html) types.
+* **`seomatic.jsonLd.create()`** Creates a JSON-LD meta object from an array of key-value properties. The `type` can be any of the [Schema.org](http://schema.org/docs/full.html) types.
 * **`seomatic.jsonLd.add(META_OBJECT)`** Adds the `META_OBJECT` to the JSON-LD container to be rendered
 * **`seomatic.jsonLd.render()`** Renders all of the JSON-LD meta objects to your template. This is only needed if you have turned off **Automatic Render** in Plugin Settings
 * **`seomatic.jsonLd.container()`** Returns the container that holds an array of all of the JSON-LD meta objects
@@ -568,7 +568,7 @@ Get the existing **MainEntityOfPage** as set in the Global SEO or Content SEO Co
 {% set mainEntity = seomatic.jsonLd.get('mainEntityOfPage') %}
 ```
 
-If you want to add something to the existing **MainEntityOfPage** (in this case an [Offer](https://schema.org/Offer)), you can do it like this:
+To add something to the existing **MainEntityOfPage** (in this case an [Offer](https://schema.org/Offer)), you can do it like this:
 ```twig
 {% set mainEntity = seomatic.jsonLd.get('mainEntityOfPage') %}
 
@@ -581,7 +581,7 @@ If you want to add something to the existing **MainEntityOfPage** (in this case 
 {% do mainEntity.offers(offersJsonLd) %}
 ```
 
-The `, false` parameter tells it to create the JSON-LD object, but to _not_ automatically add it to the JSON-LD container. We do this because we don't want it rendered on its own, we want it as part of the existing `mainEntityOfPage` JSON-LD object.
+The `, false` parameter tells it to create the JSON-LD object, but to _not_ automatically add it to the JSON-LD container. We do this because we don’t want it rendered on its own, we want it as part of the existing `mainEntityOfPage` JSON-LD object.
 
 Get the existing **BreadcrumbList** as generated automatically by SEOmatic to modify them (schema.org: [BreadcrumbList](http://schema.org/BreadcrumbList)):
 ```twig
@@ -632,7 +632,7 @@ Get the existing **Identity** as set in the Site Settings Control Panel section 
 {% set identity = seomatic.jsonLd.get('identity') %}
 ```
 
-Let's say you want to add a [Brand](https://schema.org/Brand) to the **Identity**, you'd do this:
+Let’s say you want to add a [Brand](https://schema.org/Brand) to the **Identity**, you’d do this:
 
 ```twig
 {% set identity = seomatic.jsonLd.get('identity') %}
@@ -646,7 +646,7 @@ Let's say you want to add a [Brand](https://schema.org/Brand) to the **Identity*
 {% do identity.brand(brand) %}
 ```
 
-The `, false` parameter tells it to create the JSON-LD object, but to _not_ automatically add it to the JSON-LD container. We do this because we don't want it rendered on its own, we want it as part of the existing `mainEntityOfPage` JSON-LD object.
+The `, false` parameter tells it to create the JSON-LD object, but to _not_ automatically add it to the JSON-LD container. We do this because we don’t want it rendered on its own, we want it as part of the existing `mainEntityOfPage` JSON-LD object.
 
 Get the existing **Creator** as set in the Site Settings Control Panel section to modify it:
 ```twig
@@ -656,7 +656,7 @@ Get the existing **Creator** as set in the Site Settings Control Panel section t
 ## Link Meta Object Functions `seomatic.link`
 
 * **`seomatic.link.get(META_HANDLE)`** Returns the Link meta object of the handle `META_HANDLE` or `null` if it is not found
-* **`seomatic.link.create(CONFIG_ARRAY)`** Creates a Link meta object from an array of key/value properties
+* **`seomatic.link.create(CONFIG_ARRAY)`** Creates a Link meta object from an array of key-value properties
 * **`seomatic.link.add(META_OBJECT)`** Adds the `META_OBJECT` to the Link container to be rendered
 * **`seomatic.link.render()`** Renders all of the Link meta objects to your template. This is only needed if you have turned off **Automatic Render** in Plugin Settings
 * **`seomatic.link.container()`** Returns the container that holds an array of all of the Link meta objects
@@ -675,7 +675,7 @@ Note that you can achieve the same result with:
 
 ...since the `canonicalUrl` populates the `<link rel="canonical">` Link meta object
 
-If you want to check what `alternate` links are rendered:
+To check what `alternate` links are rendered:
 
 ```twig
     {% set alt = seomatic.link.get('alternate') %}
@@ -692,14 +692,14 @@ If you want to check what `alternate` links are rendered:
 ## Script Meta Object Functions `seomatic.script`
 
 * **`seomatic.script.get(META_HANDLE)`** Returns the Script meta object of the handle `META_HANDLE` or `null` if it is not found 
-* **`seomatic.script.create()`** Creates a Script meta object from an array of key/value properties
+* **`seomatic.script.create()`** Creates a Script meta object from an array of key-value properties
 * **`seomatic.script.add(META_OBJECT)`** Adds the `META_OBJECT` to the Script container to be rendered
 * **`seomatic.script.render()`** Renders all of the Script meta objects to your template. This is only needed if you have turned off **Automatic Render** in Plugin Settings
 * **`seomatic.script.container()`** Returns the container that holds an array of all of the Script meta objects
 
 ### Script Meta Object Examples:
 
-Don't include the Google Analytics script on the page:
+Don’t include the Google Analytics script on the page:
 ```twig
 {% do seomatic.script.get("googleAnalytics").include(false) %}
 ```
@@ -709,7 +709,7 @@ For a complete list of the Script handles SEOmatic uses can be found in [ScriptC
 ## Tag Meta Object Functions `seomatic.tag`
 
 * **`seomatic.tag.get(META_HANDLE)`** Returns the Tag meta object of the handle `META_HANDLE` or `null` if it is not found
-* **`seomatic.tag.create()`** Creates a Tag meta object from an array of key/value properties
+* **`seomatic.tag.create()`** Creates a Tag meta object from an array of key-value properties
 * **`seomatic.tag.add(META_OBJECT)`** Adds the `META_OBJECT` to the Tag container to be rendered
 * **`seomatic.tag.render()`** Renders all of the Tag meta objects to your template. This is only needed if you have turned off **Automatic Render** in Plugin Settings
 * **`seomatic.tag.container()`** Returns the container that holds an array of all of the Tag meta objects
@@ -729,7 +729,7 @@ Note that you can achieve the same result with:
 
 ...since the `twitterTitle` populates the `<meta name="twitter:title">` Tag meta object by default.
 
-Let's say you didn't want Google et al to index a particular page or under certain conditions. You could do this:
+Let’s say you didn’t want Google et al to index a particular page or under certain conditions. You could do this:
 
 ```twig
 {% do seomatic.tag.get("robots").content("none") %}
@@ -752,7 +752,7 @@ You can have multiple OpenGraph tags of the same time, for example `og:image`:
 ]) %}
 ```
 
-...and it'll generate a tag for each image:
+...and it’ll generate a tag for each image:
 ```html
 <meta content="http://example.com/image2.jpg" property="og:image">
 <meta content="http://example.com/image1.jpg" property="og:image">
@@ -783,7 +783,7 @@ Note that you can achieve the same result with:
 
 ## Meta Containers
 
-Normally you don't need to work with meta containers directly, but SEOmatic gives you access to them if you need to.
+Normally you don’t need to work with meta containers directly, but SEOmatic gives you access to them to.
 
 You can get the meta container for each type of meta object by doing:
 
@@ -802,7 +802,7 @@ Then you can do things like tell an entire container to not render:
 {% do scriptContainer.include(false) %}
 ```
 
-or just:
+Or just:
 
 ```twig
 {% do seomatic.script.container().include(false) %}
@@ -815,7 +815,7 @@ Containers are also cached. Typically SEOmatic manages this cache for you, but s
 {% do scriptContainer.clearCache(true) %}
 ```
 
-or just:
+Or just:
 
 ```twig
 {% do seomatic.script.container().clearCache(true) %}
