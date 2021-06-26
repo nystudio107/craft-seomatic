@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.44 - UNRELEASED
+### Changed
+* Changed the Google & Bing sitemap submission URLs to `https` (https://github.com/nystudio107/craft-seomatic/issues/903)
+
 ## 3.3.43 - 2021.06.08
 ### Added
 * Add GraphQL schema components for SEOmatic.
