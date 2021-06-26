@@ -1,3 +1,7 @@
+---
+title: Configuring SEOmatic
+description: Configuring SEOmatic documentation for the SEOmatic plugin. The SEOmatic plugin facilitates modern SEO best practices & implementation for Craft CMS 3.
+---
 # Configuring SEOmatic
 
 As soon as you install SEOmatic, it automatically will render metadata on your web pages, and create sitemaps for all of your Sections, Category Groups, and Commerce Product Types that have public URLs. You don’t need to add any template code for this to happen.
