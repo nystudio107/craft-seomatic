@@ -13,7 +13,7 @@ module.exports = {
         docsDir: 'docs/docs',
         docsBranch: 'v3',
         algolia: {
-            apiKey: '',
+            apiKey: '3fbe33d2aa4969da7363ddfb8ab9ac8e',
             indexName: 'seomatic'
         },
         editLinks: true,
