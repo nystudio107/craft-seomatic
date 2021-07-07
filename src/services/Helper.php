@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\helpers\UrlHelper;
+use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\DynamicMeta as DynamicMetaHelper;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
@@ -511,5 +512,24 @@ class Helper extends Component
     public function craft33(): bool
     {
         return Seomatic::$craft33;
+    }
+
+    /**
+     * Given a list of meta bundles in order of descending distance, return the bundle that has inheritable value.
+     *
+     * @param array $inheritedValues
+     * @param string $settingName
+     * @return MetaBundle|null
+     */
+    public function findInheritableBundle(array $inheritedValues, string $settingName)
+    {
+        foreach ($inheritedValues as $bundle) {
+            /** @var $bundle MetaBundle */
+            if (!empty($bundle->metaGlobalVars[$settingName])) {
+                return $bundle;
+            }
+        }
+
+        return null;
     }
 }
