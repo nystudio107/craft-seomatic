@@ -403,6 +403,12 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             Seomatic::$plugin->metaContainers->previewMetaContainers($element->uri, $element->siteId, true);
         }
 
+        $source = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
+        $contentMeta = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId($source[1], $source[0], $element->siteId, $source[4]);
+        $globalMeta = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($element->siteId);
+
+        $variables['parentBundles'] = [$contentMeta, $globalMeta];
+
         // Render the input template
         return Craft::$app->getView()->renderTemplate(
             'seomatic/_components/fields/SeoSettings_input',
