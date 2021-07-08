@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.3.44 - UNRELEASED
+### Added
+* Added `truncateTitleTags` & `truncateDescriptionTags` settings to control whether the max title / description lengths should be enforced or not (on by default) (https://github.com/nystudio107/craft-seomatic/issues/922)
+
 ### Changed
 * Changed the Google & Bing sitemap submission URLs to `https` (https://github.com/nystudio107/craft-seomatic/issues/903)
 
