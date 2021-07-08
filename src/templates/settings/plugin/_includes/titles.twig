@@ -70,5 +70,25 @@
             errors: settings.getErrors("maxDescriptionLength"),
         }) }}
 
+        {{ forms.lightswitchField({
+            label: "Truncate Title Tags"|t("seomatic")|md,
+            instructions: "Should Title tags be truncated at the max length, on word boundaries?"|t("seomatic"),
+            id: "truncateTitleTags",
+            name: "truncateTitleTags",
+            on: settings.truncateTitleTags,
+            warning: configWarning("truncateTitleTags", "seomatic"),
+            errors: settings.getErrors("truncateTitleTags"),
+        }) }}
+
+        {{ forms.lightswitchField({
+            label: "Truncate Description Tags"|t("seomatic")|md,
+            instructions: "Should Description tags be truncated at the max length, on word boundaries?"|t("seomatic"),
+            id: "truncateDescriptionTags",
+            name: "truncateDescriptionTags",
+            on: settings.truncateDescriptionTags,
+            warning: configWarning("truncateDescriptionTags", "seomatic"),
+            errors: settings.getErrors("truncateDescriptionTags"),
+        }) }}
+
     {% endnamespace %}
 </div>
