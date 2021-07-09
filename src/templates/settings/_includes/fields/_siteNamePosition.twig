@@ -1,0 +1,59 @@
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" %}
+    {% block field %}
+        {% import "_includes/forms" as forms %}
+
+        {% set textOptions = {
+            fromCustom: "Custom Position"|t("seomatic"),
+        } %}
+        {% set positionSuffix = "" %}
+        {% if pageContext == "content" %}
+            {% set positionSuffix = " Source" %}
+            {% set textOptions = { sameAsGlobal: "Same as Global Site Name Position"|t("seomatic"), } | merge(textOptions) %}
+        {% endif %}
+
+        {% set customPositions = {
+            before: "Before"|t("seomatic"),
+            after: "After"|t("seomatic"),
+            none: "None"|t("seomatic"),
+        } %}
+        {% if pageContext == "field" %}
+            {% set customPositions = { "": ""} | merge(customPositions) %}
+        {% endif %}
+
+        <div class="field seomatic-textSourceWrapper" id="metaBundleSettings-siteNamePositionSource-field">
+            <div class="heading">
+                <label id="metaBundleSettings-siteNamePositionSource-label"
+                       for="metaBundleSettings-siteNamePositionSource">{{ "Site Name Position#{positionSuffix}"|t("seomatic") }}</label>
+            </div>
+            <div class="instructions">{{ ("Where the Site Name is placed relative to the Title in the &lt;title&gt; tag. The Site Name is set in [Site Settings](" ~ cpUrl('seomatic/site') ~ ")")|t("seomatic") |md }}
+            </div>
+            {% namespace "metaBundleSettings" %}
+                <div class="heading">
+                    <div {% if pageContext == "global" %}style="display: none;" {% endif %}#}>
+                        {{ forms.select({
+                            id: "siteNamePositionSource",
+                            name: "siteNamePositionSource",
+                            options: textOptions,
+                            value: metaBundleSettings.siteNamePositionSource,
+                            class: "seomatic-textSourceSelect",
+                            errors: metaBundleSettings.getErrors("siteNamePositionSource"),
+                        }) }}
+                    </div>
+                </div>
+            {% endnamespace %}
+
+            {% namespace "metaGlobalVars" %}
+                <div class="heading seomatic-textSourceFromUrl">
+                    {{ forms.selectField({
+                        id: "siteNamePosition",
+                        name: "siteNamePosition",
+                        options: customPositions,
+                        value: metaGlobalVars.siteNamePosition,
+                        warning: false,
+                        errors: metaGlobalVars.getErrors("siteNamePosition"),
+                    }) }}
+                </div>
+            {% endnamespace %}
+        </div>
+    {% endblock %}
+{% endembed %}

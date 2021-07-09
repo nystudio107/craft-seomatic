@@ -6,259 +6,36 @@
     {% include "seomatic/_includes/googlePreview.twig" %}
 {% endif %}
 
+{% if parentBundles is not defined %}
+    {% set parentBundles = [] %}
+{% endif %}
+
 {############### Main Entity of Page ###############}
 
 {% if field is not defined or 'mainEntityOfPage' in field.generalEnabledFields %}
-    {% namespace "metaBundleSettings" %}
-        {% include "seomatic/settings/_includes/mainEntityOfPage-partial.twig" with {
-            "mainEntityOfPage": metaBundleSettings,
-            "entitySchemaPath": seomatic.helper.entityPath(metaBundleSettings),
-            "mainEntityTitle": "Main Entity of Page",
-            "mainEntityDescription": "The primary topic, some entity or thing that the page describes.",
-        } %}
-    {% endnamespace %}
+    {% include "seomatic/settings/_includes/fields/_mainEntityOfPage.twig" %}
 {% endif %}
 
 {############### SEO Title ###############}
-
-{% set textOptions = {
-    fromCustom: "Custom Text"|t("seomatic"),
-} %}
-{% if textFieldSources is defined and textFieldSources |length %}
-    {% set textOptions = { fromField: "From Field"|t("seomatic"), } | merge(textOptions) %}
-{% endif %}
-
 {% if field is not defined or 'seoTitle' in field.generalEnabledFields %}
-    <div class="field seomatic-textSourceWrapper" id="metaBundleSettings-seoTitleSource-field">
-        <div class="heading">
-            <label id="metaBundleSettings-seoTitleSource-label" for="metaBundleSettings-seoTitleSource">{{ "SEO Title Source"|t("seomatic") }}</label>
-        </div>
-        <div class="instructions"><p>{{ "Make sure your title tag is explicit and contains your most important keywords. Be sure that each page has a unique title tag."|t("seomatic") }}</p>
-        </div>
-        {% namespace "metaBundleSettings" %}
-            <div class="heading">
-                {{ forms.select({
-                    id: "seoTitleSource",
-                    name: "seoTitleSource",
-                    options: textOptions,
-                    value: metaBundleSettings.seoTitleSource,
-                    class: "seomatic-textSourceSelect",
-                    errors: metaBundleSettings.getErrors("seoTitleSource"),
-                }) }}
-            </div>
-        {% endnamespace %}
-
-        {% if textFieldSources is defined and textFieldSources |length %}
-            {% namespace "metaBundleSettings" %}
-                <div class="heading seomatic-textSourceFromField">
-                    <label id="metaBundleSettings-seoTitleField-label" for="metaBundleSettings-seoTitleField">{{ "Source Field: "|t("seomatic") }}</label>
-                    {{ forms.select({
-                        id: "seoTitleField",
-                        name: "seoTitleField",
-                        options: textFieldSources,
-                        value: metaBundleSettings.seoTitleField,
-                        errors: metaBundleSettings.getErrors("seoTitleField"),
-                    }) }}
-                </div>
-            {% endnamespace %}
-        {% endif %}
-
-        {% namespace "metaGlobalVars" %}
-            <div class="input ltr seomatic-textSourceFromUrl">
-                {{ forms.text({
-                    id: "seoTitle",
-                    name: "seoTitle",
-                    value: metaGlobalVars.seoTitle,
-                    class: "nicetext",
-                    maxlength: seomatic.config.maxTitleLength,
-                    showCharsLeft: true,
-                    warning: false,
-                    errors: metaGlobalVars.getErrors("seoTitle"),
-                }) }}
-            </div>
-        {% endnamespace %}
-    </div>
+    {% include "seomatic/settings/_includes/fields/_seoTitle.twig" %}
 {% endif %}
 
 {############### Site Name Position ###############}
-
-{% set textOptions = {
-    fromCustom: "Custom Position"|t("seomatic"),
-} %}
-{% set positionSuffix = "" %}
-{% if pageContext == "content" %}
-    {% set positionSuffix = " Source" %}
-    {% set textOptions = { sameAsGlobal: "Same as Global Site Name Position"|t("seomatic"), } | merge(textOptions) %}
-{% endif %}
-
-{% set customPositions = {
-    before: "Before"|t("seomatic"),
-    after: "After"|t("seomatic"),
-    none: "None"|t("seomatic"),
-} %}
-{% if pageContext == "field" %}
-    {% set customPositions = { "": ""} | merge(customPositions) %}
-{% endif %}
-
 {% if field is not defined or 'siteNamePosition' in field.generalEnabledFields %}
-    <div class="field seomatic-textSourceWrapper" id="metaBundleSettings-siteNamePositionSource-field">
-        <div class="heading">
-            <label id="metaBundleSettings-siteNamePositionSource-label" for="metaBundleSettings-siteNamePositionSource">{{ "Site Name Position#{positionSuffix}"|t("seomatic") }}</label>
-        </div>
-        <div class="instructions">{{ ("Where the Site Name is placed relative to the Title in the &lt;title&gt; tag. The Site Name is set in [Site Settings](" ~ cpUrl('seomatic/site') ~ ")")|t("seomatic") |md }}
-        </div>
-        {% namespace "metaBundleSettings" %}
-            <div class="heading">
-                <div {% if pageContext == "global" %}style="display: none;"{% endif %}#}>
-                {{ forms.select({
-                    id: "siteNamePositionSource",
-                    name: "siteNamePositionSource",
-                    options: textOptions,
-                    value: metaBundleSettings.siteNamePositionSource,
-                    class: "seomatic-textSourceSelect",
-                    errors: metaBundleSettings.getErrors("siteNamePositionSource"),
-                }) }}
-                </div>
-            </div>
-        {% endnamespace %}
-
-        {% namespace "metaGlobalVars" %}
-        <div class="heading seomatic-textSourceFromUrl">
-            {{ forms.selectField({
-                id: "siteNamePosition",
-                name: "siteNamePosition",
-                options: customPositions,
-                value: metaGlobalVars.siteNamePosition,
-                warning: false,
-                errors: metaGlobalVars.getErrors("siteNamePosition"),
-            }) }}
-        </div>
-        {% endnamespace %}
-    </div>
+    {% include "seomatic/settings/_includes/fields/_siteNamePosition.twig" %}
 {% endif %}
 
 {############### SEO Description ###############}
 
-{% set textOptions = {
-    fromCustom: "Custom Text"|t("seomatic"),
-} %}
-{% if textFieldSources is defined and textFieldSources |length %}
-    {% set textOptions = { summaryFromField: "Summary From Field"|t("seomatic"), } | merge(textOptions) %}
-    {% set textOptions = { fromField: "From Field"|t("seomatic"), } | merge(textOptions) %}
-{% endif %}
-
 {% if field is not defined or 'seoDescription' in field.generalEnabledFields %}
-    <div class="field seomatic-textSourceWrapper" id="metaBundleSettings-seoDescriptionSource-field">
-        <div class="heading">
-            <label id="metaBundleSettings-seoDescriptionSource-label" for="metaBundleSettings-seoDescriptionSource">{{ "SEO Description Source"|t("seomatic") }}</label>
-        </div>
-        <div class="instructions"><p>{{ "SEO descriptions allow you to influence how your web pages are described and displayed in search results. Ensure that all of your web pages have a unique meta description that is explicit and contains your most important keywords."|t("seomatic") }}</p>
-        </div>
-        {% namespace "metaBundleSettings" %}
-            <div class="heading">
-                {{ forms.select({
-                    id: "seoDescriptionSource",
-                    name: "seoDescriptionSource",
-                    options: textOptions,
-                    value: metaBundleSettings.seoDescriptionSource,
-                    class: "seomatic-textSourceSelect",
-                    errors: metaBundleSettings.getErrors("seoDescriptionSource"),
-                }) }}
-            </div>
-        {% endnamespace %}
-
-        {% if textFieldSources is defined and textFieldSources |length %}
-            {% namespace "metaBundleSettings" %}
-                <div class="heading seomatic-textSourceFromField">
-                    <label id="metaBundleSettings-seoDescriptionField-label" for="metaBundleSettings-seoDescriptionField">{{ "Source Field: "|t("seomatic") }}</label>
-                    {{ forms.select({
-                        id: "seoDescriptionField",
-                        name: "seoDescriptionField",
-                        options: textFieldSources,
-                        value: metaBundleSettings.seoDescriptionField,
-                        errors: metaBundleSettings.getErrors("seoDescriptionField"),
-                    }) }}
-                </div>
-            {% endnamespace %}
-        {% endif %}
-
-        {% namespace "metaGlobalVars" %}
-            <div class="input ltr seomatic-textSourceFromUrl">
-                {{ forms.textArea({
-                    id: "seoDescription",
-                    name: "seoDescription",
-                    value: metaGlobalVars.seoDescription,
-                    class: "nicetext",
-                    maxlength: seomatic.config.maxDescriptionLength,
-                    showCharsLeft: true,
-                    warning: false,
-                    errors: metaGlobalVars.getErrors("seoDescription"),
-                }) }}
-            </div>
-        {% endnamespace %}
-    </div>
+    {% include "seomatic/settings/_includes/fields/_seoDescription.twig" %}
 {% endif %}
 
 {############### SEO Keywords ###############}
 
-{% set textOptions = {
-    fromCustom: "Custom Text"|t("seomatic"),
-} %}
-{% if textFieldSources is defined and textFieldSources |length %}
-    {% set textOptions = { keywordsFromField: "Keywords From Field"|t("seomatic"), } | merge(textOptions) %}
-    {% set textOptions = { fromField: "From Field"|t("seomatic"), } | merge(textOptions) %}
-{% endif %}
-
 {% if field is not defined or 'seoKeywords' in field.generalEnabledFields %}
-    <div class="field seomatic-textSourceWrapper" id="metaBundleSettings-seoKeywordsSource-field">
-        <div class="heading">
-            <label id="metaBundleSettings-seoKeywordsSource-label" for="metaBundleSettings-seoKeywordsSource">{{ "SEO Keywords Source"|t("seomatic") }}</label>
-        </div>
-        <div class="instructions"><p>{{ "Google ignores SEO Keywords tag; though other search engines do look at it. Utilize it carefully, as improper or spammy use most likely will hurt you, or even have your site marked as spam."|t("seomatic") }}</p>
-        </div>
-        {% namespace "metaBundleSettings" %}
-            <div class="heading">
-                {{ forms.select({
-                    id: "seoKeywordsSource",
-                    name: "seoKeywordsSource",
-                    options: textOptions,
-                    value: metaBundleSettings.seoKeywordsSource,
-                    class: "seomatic-textSourceSelect",
-                    errors: metaBundleSettings.getErrors("seoKeywordsSource"),
-                }) }}
-            </div>
-        {% endnamespace %}
-
-        {% if textFieldSources is defined and textFieldSources |length %}
-            {% namespace "metaBundleSettings" %}
-                <div class="heading seomatic-textSourceFromField">
-                    <label id="metaBundleSettings-seoKeywordsField-label" for="metaBundleSettings-seoKeywordsField">{{ "Source Field: "|t("seomatic") }}</label>
-                    {{ forms.select({
-                        id: "seoKeywordsField",
-                        name: "seoKeywordsField",
-                        options: textFieldSources,
-                        value: metaBundleSettings.seoKeywordsField,
-                        errors: metaBundleSettings.getErrors("seoKeywordsField"),
-                    }) }}
-                </div>
-            {% endnamespace %}
-        {% endif %}
-
-        {% namespace "metaGlobalVars" %}
-            <div class="input ltr seomatic-textSourceFromUrl" style="box-sizing: border-box;">
-                {{ forms.textField({
-                    id: "seoKeywords",
-                    name: "seoKeywords",
-                    value: metaGlobalVars.seoKeywords,
-                    class: "seomatic-keywords",
-                    maxlength: seomatic.config.maxDescriptionLength,
-                    showCharsLeft: true,
-                    warning: false,
-                    errors: metaGlobalVars.getErrors("seoKeywords"),
-                }) }}
-            </div>
-        {% endnamespace %}
-    </div>
+    {% include "seomatic/settings/_includes/fields/_seoKeywords.twig" %}
 {% endif %}
 
 {############### SEO Image ###############}
@@ -312,123 +89,18 @@
 
 {############### SEO Image Description ###############}
 
-{% set textOptions = {
-    fromCustom: "Custom Text"|t("seomatic"),
-} %}
-{% if textFieldSources is defined and textFieldSources |length %}
-    {% set textOptions = { summaryFromField: "Summary From Field"|t("seomatic"), } | merge(textOptions) %}
-    {% set textOptions = { fromField: "From Field"|t("seomatic"), } | merge(textOptions) %}
-{% endif %}
-
 {% if field is not defined or 'seoImageDescription' in field.generalEnabledFields %}
-    <div class="field seomatic-textSourceWrapper" id="metaBundleSettings-seoImageDescriptionSource-field">
-        <div class="heading">
-            <label id="metaBundleSettings-seoImageDescriptionSource-label" for="metaBundleSettings-seoImageDescriptionSource">{{ "SEO Image Description Source"|t("seomatic") }}</label>
-        </div>
-        <div class="instructions"><p>{{ "A text description of the image conveying the essential nature of an image to users who are visually impaired."|t("seomatic") }}</p>
-        </div>
-        {% namespace "metaBundleSettings" %}
-            <div class="heading">
-                {{ forms.select({
-                    id: "seoImageDescriptionSource",
-                    name: "seoImageDescriptionSource",
-                    options: textOptions,
-                    value: metaBundleSettings.seoImageDescriptionSource,
-                    class: "seomatic-textSourceSelect",
-                    errors: metaBundleSettings.getErrors("seoImageDescriptionSource"),
-                }) }}
-            </div>
-        {% endnamespace %}
-
-        {% if textFieldSources is defined and textFieldSources |length %}
-            {% namespace "metaBundleSettings" %}
-                <div class="heading seomatic-textSourceFromField">
-                    <label id="metaBundleSettings-seoImageDescriptionField-label" for="metaBundleSettings-seoImageDescriptionField">{{ "Source Field: "|t("seomatic") }}</label>
-                    {{ forms.select({
-                        id: "seoImageDescriptionField",
-                        name: "seoImageDescriptionField",
-                        options: textFieldSources,
-                        value: metaBundleSettings.seoImageDescriptionField,
-                        errors: metaBundleSettings.getErrors("seoImageDescriptionField"),
-                    }) }}
-                </div>
-            {% endnamespace %}
-        {% endif %}
-
-        {% namespace "metaGlobalVars" %}
-            <div class="input ltr seomatic-textSourceFromUrl">
-                {{ forms.textArea({
-                    id: "seoImageDescription",
-                    name: "seoImageDescription",
-                    value: metaGlobalVars.seoImageDescription,
-                    class: "nicetext",
-                    maxlength: seomatic.config.maxDescriptionLength,
-                    showCharsLeft: true,
-                    warning: false,
-                    errors: metaGlobalVars.getErrors("seoImageDescription"),
-                }) }}
-            </div>
-        {% endnamespace %}
-    </div>
+    {% include "seomatic/settings/_includes/fields/_seoDescription.twig" %}
 {% endif %}
 
 {############### Robots ###############}
 
-{% set robotOptions = {
-    all: "All - Index this page and follow links (default)"|t("seomatic"),
-    none: "None - Do not index or follow links on this page"|t("seomatic"),
-    noindex: "No Index - Do not index this page"|t("seomatic"),
-    nofollow: "No Follow - Do not follow links on this page"|t("seomatic"),
-    nosnippet: "No Snippet - Do not show rich snippets from this page"|t("seomatic"),
-    noarchive: "No Archive - Do not archive a cached version of this page"|t("seomatic"),
-    noimageindex : "No Image Index - Do not index images on this page"|t("seomatic"),
-} %}
-{% if pageContext == "field" %}
-    {% set robotOptions = { "": ""} | merge(robotOptions) %}
-{% endif %}
-
 {% if field is not defined or 'robots' in field.generalEnabledFields %}
-    {% namespace "metaGlobalVars" %}
-        {{ forms.selectField({
-            label: "Robots"|t("seomatic"),
-            instructions: "The robots meta tag lets you utilize a granular, page-specific approach to controlling how an individual page should be indexed and served to users in search results."|t("seomatic"),
-            id: "robots",
-            name: "robots",
-            options: robotOptions,
-            value: metaGlobalVars.robots,
-            errors: metaGlobalVars.getErrors("robots"),
-        }) }}
-    {% endnamespace %}
+    {% include "seomatic/settings/_includes/fields/_robots.twig" %}
 {% endif %}
 
 {############### Canonical URL ###############}
 
 {% if field is not defined or 'canonicalUrl' in field.generalEnabledFields %}
-    {% namespace "metaGlobalVars" %}
-        {% if seomatic.helper.craft31 %}
-            {{ forms.autosuggestField({
-                label: "Canonical URL"|t("seomatic"),
-                instructions: "The search engine friendly URL that you want the search engines to treat as authoritative. [Learn More](https://support.google.com/webmasters/answer/139066?hl=en)"|t("seomatic"),
-                suggestEnvVars: true,
-                suggestAliases: true,
-                id: "canonicalUrl",
-                name: "canonicalUrl",
-                value: metaGlobalVars.canonicalUrl,
-                class: "nicetext",
-                warning: false,
-                errors: metaGlobalVars.getErrors("canonicalUrl"),
-            }) }}
-        {% else %}
-            {{ forms.textField({
-                label: "Canonical URL"|t("seomatic"),
-                instructions: "The search engine friendly URL that you want the search engines to treat as authoritative. [Learn More](https://support.google.com/webmasters/answer/139066?hl=en)"|t("seomatic"),
-                id: "canonicalUrl",
-                name: "canonicalUrl",
-                value: metaGlobalVars.canonicalUrl,
-                class: "nicetext",
-                warning: false,
-                errors: metaGlobalVars.getErrors("canonicalUrl"),
-            }) }}
-        {% endif %}
-    {% endnamespace %}
+    {% include "seomatic/settings/_includes/fields/_canonicalUrl.twig" %}
 {% endif %}

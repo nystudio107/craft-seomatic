@@ -1,0 +1,33 @@
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" %}
+    {% block field %}
+        {% import "_includes/forms" as forms %}
+
+        {% namespace "metaGlobalVars" %}
+            {% if seomatic.helper.craft31 %}
+                {{ forms.autosuggestField({
+                    label: "Canonical URL"|t("seomatic"),
+                    instructions: "The search engine friendly URL that you want the search engines to treat as authoritative. [Learn More](https://support.google.com/webmasters/answer/139066?hl=en)"|t("seomatic"),
+                    suggestEnvVars: true,
+                    suggestAliases: true,
+                    id: "canonicalUrl",
+                    name: "canonicalUrl",
+                    value: metaGlobalVars.canonicalUrl,
+                    class: "nicetext",
+                    warning: false,
+                    errors: metaGlobalVars.getErrors("canonicalUrl"),
+                }) }}
+            {% else %}
+                {{ forms.textField({
+                    label: "Canonical URL"|t("seomatic"),
+                    instructions: "The search engine friendly URL that you want the search engines to treat as authoritative. [Learn More](https://support.google.com/webmasters/answer/139066?hl=en)"|t("seomatic"),
+                    id: "canonicalUrl",
+                    name: "canonicalUrl",
+                    value: metaGlobalVars.canonicalUrl,
+                    class: "nicetext",
+                    warning: false,
+                    errors: metaGlobalVars.getErrors("canonicalUrl"),
+                }) }}
+            {% endif %}
+        {% endnamespace %}
+    {% endblock %}
+{% endembed %}

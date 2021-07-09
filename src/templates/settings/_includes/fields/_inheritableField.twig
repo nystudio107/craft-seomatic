@@ -1,0 +1,31 @@
+{%  set hasInheritableValues = hasInheritableValues|default(false) %}
+{% set isInherited = isInherited|default(false) %}
+
+<div class="inheritable-field {{ isInherited ? 'inherited-settings' : 'defined-settings' }}">
+
+    {% if hasInheritableValues %}
+        <div class="inherited-settings">
+            {% block inheritedValues %}
+
+            {% endblock %}
+        </div>
+    {% endif %}
+
+    <div class="defined-settings">
+        {% block field %}
+
+        {% endblock %}
+    </div>
+
+    {% import "_includes/forms" as forms %}
+
+    {% if hasInheritableValues %}
+        {{ forms.lightswitchField({
+            instructions: "Inherit parent settings"|t("seomatic"),
+            className: "toggleInherit",
+            on: isInherited,
+            warning: false,
+        }) }}
+    {% endif %}
+</div>
+<hr />

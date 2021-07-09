@@ -51,6 +51,22 @@ window.seomaticTabChangeHandler = seomaticTabChangeHandler;
 window.seomaticTabChangeHandler();
 
 function initFieldSettings() {
+
+    const disableInputs = ($obj) => $obj.find('input, select, button').prop('disabled', true);
+    const enableInputs = ($obj) => $obj.find('input, select, button').prop('disabled', false);
+
+    $('.inheritable-field .inherited-settings').find('input, select, button').prop('disabled', true);
+
+    $('.inheritable-field .lightswitch').on('change', function (ev) {
+        if ($(this).hasClass('on')) {
+            $(this).parents('.inheritable-field').removeClass('defined-settings').addClass('inherited-settings');
+            disableInputs($(this).parents('.inheritable-field').find('.defined-settings'));
+        } else {
+            $(this).parents('.inheritable-field').addClass('defined-settings').removeClass('inherited-settings');
+            enableInputs($(this).parents('.inheritable-field').find('.defined-settings'));
+        }
+    });
+
     // Show/hide the script settings containers
     var selector = $('.seomatic-script-lightswitch').find('.lightswitch');
     $(selector).each(function(index, value) {
