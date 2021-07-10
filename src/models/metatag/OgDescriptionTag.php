@@ -12,9 +12,8 @@
 namespace nystudio107\seomatic\models\metatag;
 
 use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\helpers\Text as TextHelper;
 use nystudio107\seomatic\models\MetaTag;
-
-use Stringy\Stringy;
 
 /**
  * @author    nystudio107
@@ -68,10 +67,13 @@ class OgDescriptionTag extends MetaTag
         if ($shouldRender) {
             if (!empty($data['content'])) {
                 // Truncate the Description tag content
-                $data['content'] = (string)Stringy::create($data['content'])->safeTruncate(
-                    300,
-                    '…'
-                );
+                if (Seomatic::$settings->truncateTitleTags) {
+                    $data['content'] = TextHelper::truncateOnWord(
+                        $data['content'],
+                        300,
+                        '…'
+                    );
+                }
             }
         }
 

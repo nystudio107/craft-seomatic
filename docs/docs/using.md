@@ -1,3 +1,7 @@
+---
+title: Using SEOmatic
+description: Using SEOmatic documentation for the SEOmatic plugin. The SEOmatic plugin facilitates modern SEO best practices & implementation for Craft CMS 3.
+---
 # Using SEOmatic
 
 ## SEOmatic’s ??? Empty Coalesce operator

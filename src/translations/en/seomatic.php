@@ -467,5 +467,17 @@ return [
     'Response Headers' => 'Response Headers',
     'Determines whether the SEO File Link endpoint should be enabled for anonymous frontend access' => 'Determines whether the SEO File Link endpoint should be enabled for anonymous frontend access',
     'Meta Tags' => 'Meta Tags',
-    'Twitter Site Name Position' => 'Twitter Site Name Position'
+    'Twitter Site Name Position' => 'Twitter Site Name Position',
+    'For the `facebook-domain-verification` tag. Only enter the code in the `content=\'\'`, not the entire tag. [Learn More](https://developers.facebook.com/docs/sharing/domain-verification/verifying-your-domain/#meta-tags)' => 'For the `facebook-domain-verification` tag. Only enter the code in the `content=\'\'`, not the entire tag. [Learn More](https://developers.facebook.com/docs/sharing/domain-verification/verifying-your-domain/#meta-tags)',
+    'Seomatic' => 'Seomatic',
+    'Facebook Site Verification' => 'Facebook Site Verification',
+    'Should Title tags be truncated at the max length, on word boundaries?' => 'Should Title tags be truncated at the max length, on word boundaries?',
+    'If off, SEOmatic will automatically attempt to determine the current environment. Turn this on to manually set the environment.' => 'If off, SEOmatic will automatically attempt to determine the current environment. Turn this on to manually set the environment.',
+    'Query Seomatic data' => 'Query Seomatic data',
+    'Should Description tags be truncated on word boundaries?' => 'Should Description tags be truncated on word boundaries?',
+    'Should Title tags be truncated on word boundaries?' => 'Should Title tags be truncated on word boundaries?',
+    'Manually Set SEOmatic Environment' => 'Manually Set SEOmatic Environment',
+    'Should Description tags be truncated at the max length, on word boundaries?' => 'Should Description tags be truncated at the max length, on word boundaries?',
+    'Truncate Description Tags' => 'Truncate Description Tags',
+    'Truncate Title Tags' => 'Truncate Title Tags'
 ];

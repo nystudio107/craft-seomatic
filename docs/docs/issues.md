@@ -1,3 +1,7 @@
+---
+title: Issues & Upgrading
+description: Issues & Upgrading documentation for the SEOmatic plugin. The SEOmatic plugin facilitates modern SEO best practices & implementation for Craft CMS 3.
+---
 # Issues & Upgrading
 
 ## Issues

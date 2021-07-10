@@ -1,21 +1,19 @@
 module.exports = {
-    title: 'SEOmatic Documentation',
+    title: 'SEOmatic Plugin Documentation',
     description: 'Documentation for the SEOmatic plugin',
     base: '/docs/seomatic/',
     lang: 'en-US',
     head: [
-        [
-            'script',
-            {},
-            "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-69117511-1', 'auto');ga('require', 'displayfeatures');ga('send', 'pageview');"
-        ],
+        ['meta', { content: 'https://github.com/nystudio107', property: 'og:see_also', }],
+        ['meta', { content: 'https://www.youtube.com/channel/UCOZTZHQdC-unTERO7LRS6FA', property: 'og:see_also', }],
+        ['meta', { content: 'https://www.facebook.com/newyorkstudio107', property: 'og:see_also', }],
     ],
     themeConfig: {
         repo: 'nystudio107/craft-seomatic',
         docsDir: 'docs/docs',
         docsBranch: 'v3',
         algolia: {
-            apiKey: '',
+            apiKey: '3fbe33d2aa4969da7363ddfb8ab9ac8e',
             indexName: 'seomatic'
         },
         editLinks: true,
@@ -23,14 +21,14 @@ module.exports = {
         lastUpdated: 'Last Updated',
         sidebar: [
             { text: 'SEOmatic Plugin', link: '/' },
-            { text: 'SEOmatic Overview', link: '/overview' },
-            { text: 'Issues & Upgrading', link: '/issues' },
-            { text: 'SEO Resources', link: '/resources' },
-            { text: 'SEO Technologies', link: '/technologies' },
-            { text: 'Configuring SEOmatic', link: '/configuring' },
-            { text: 'SEOmatic Fields', link: '/fields' },
-            { text: 'Using SEOmatic', link: '/using' },
-            { text: 'Advanced Usage', link: '/advanced' },
+            { text: 'SEOmatic Overview', link: '/overview.html' },
+            { text: 'Issues & Upgrading', link: '/issues.html' },
+            { text: 'SEO Resources', link: '/resources.html' },
+            { text: 'SEO Technologies', link: '/technologies.html' },
+            { text: 'Configuring SEOmatic', link: '/configuring.html' },
+            { text: 'SEOmatic Fields', link: '/fields.html' },
+            { text: 'Using SEOmatic', link: '/using.html' },
+            { text: 'Advanced Usage', link: '/advanced.html' },
         ],
     },
 };

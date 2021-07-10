@@ -90,6 +90,12 @@ return [
     // The max number of characters in the `<meta name="description">` tag
     'maxDescriptionLength' => 155,
 
+    // Should Title tags be truncated at the max length, on word boundaries?
+    'truncateTitleTags' => true,
+
+    // Should Description tags be truncated at the max length, on word boundaries?
+    'truncateDescriptionTags' => true,
+
     // Site Groups define logically separate sites
     'siteGroupsSeparate' => true,
 

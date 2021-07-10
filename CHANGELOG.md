@@ -1,5 +1,15 @@
 # SEOmatic Changelog
 
+## 3.3.44 - 2021.07.09
+### Added
+* Added `truncateTitleTags` & `truncateDescriptionTags` settings to control whether the max title / description lengths should be enforced or not (on by default) (https://github.com/nystudio107/craft-seomatic/issues/922)
+
+### Changed
+* Changed the Google & Bing sitemap submission URLs to `https` (https://github.com/nystudio107/craft-seomatic/issues/903)
+
+### Fixed
+* Handle the case where `additionalSitemaps` isn't a zero-based index, due to items being deleted from it (https://github.com/nystudio107/craft-seomatic/issues/921)
+
 ## 3.3.43 - 2021.06.08
 ### Added
 * Add GraphQL schema components for SEOmatic.

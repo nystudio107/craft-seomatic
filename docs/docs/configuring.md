@@ -1,3 +1,7 @@
+---
+title: Configuring SEOmatic
+description: Configuring SEOmatic documentation for the SEOmatic plugin. The SEOmatic plugin facilitates modern SEO best practices & implementation for Craft CMS 3.
+---
 # Configuring SEOmatic
 
 As soon as you install SEOmatic, it automatically will render metadata on your web pages, and create sitemaps for all of your Sections, Category Groups, and Commerce Product Types that have public URLs. You don’t need to add any template code for this to happen.
@@ -428,6 +432,8 @@ The Plugin Settings lets you control various SEOmatic settings globally (across 
 * **Separator Character** - The separator character to use for the `<title>` tag
 * **Max SEO Title Length** - The max number of characters in the `<title>` tag; anything beyond this will be truncated on word boundaries
 * **Max SEO Description Length** - The max number of characters in the `meta description` tag
+* **Truncate Title Tags** - Should Title tags be truncated at the max length, on word boundaries?
+* **Truncate Description Tags** - Should Description tags be truncated at the max length, on word boundaries?
 
 ### Tags Plugin Settings
 
