@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.3.44 - UNRELEASED
+## 3.3.44 - 2021.07.09
 ### Added
 * Added `truncateTitleTags` & `truncateDescriptionTags` settings to control whether the max title / description lengths should be enforced or not (on by default) (https://github.com/nystudio107/craft-seomatic/issues/922)
 
