@@ -1,61 +1,56 @@
 {% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "seoTitle") %}
-
-{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with {'isInherited': metaGlobalVars.seoTitle is empty, 'hasInheritableValues': inheritedFrom is not null}%}
+{% set additionalVars = {
+    'isInherited': metaGlobalVars.seoTitle is empty,
+    'hasInheritableValues': inheritedFrom is not null,
+    'wrapperClass': 'field seomatic-textSourceWrapper',
+    'wrapperId': 'metaBundleSettings-seoTitleSource-field'
+} %}
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
     {% macro seoTitleField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars) %}
         {% import "_includes/forms" as forms %}
-
-        <div class="field seomatic-textSourceWrapper" id="metaBundleSettings-seoTitleSource-field">
+        {% namespace "metaBundleSettings" %}
             <div class="heading">
-                <label id="metaBundleSettings-seoTitleSource-label"
-                       for="metaBundleSettings-seoTitleSource">{{ "SEO Title Source"|t("seomatic") }}</label>
+                {{ forms.select({
+                    id: "seoTitleSource",
+                    name: "seoTitleSource",
+                    options: textOptions,
+                    value: metaBundleSettings.seoTitleSource,
+                    class: "seomatic-textSourceSelect",
+                    errors: metaBundleSettings.getErrors("seoTitleSource"),
+                }) }}
             </div>
-            <div class="instructions">
-                <p>{{ "Make sure your title tag is explicit and contains your most important keywords. Be sure that each page has a unique title tag."|t("seomatic") }}</p>
-            </div>
+        {% endnamespace %}
+
+        {% if textFieldSources is defined and textFieldSources |length %}
             {% namespace "metaBundleSettings" %}
-                <div class="heading">
+                <div class="heading seomatic-textSourceFromField">
+                    <label id="metaBundleSettings-seoTitleField-label"
+                           for="metaBundleSettings-seoTitleField">{{ "Source Field: "|t("seomatic") }}</label>
                     {{ forms.select({
-                        id: "seoTitleSource",
-                        name: "seoTitleSource",
-                        options: textOptions,
-                        value: metaBundleSettings.seoTitleSource,
-                        class: "seomatic-textSourceSelect",
-                        errors: metaBundleSettings.getErrors("seoTitleSource"),
+                        id: "seoTitleField",
+                        name: "seoTitleField",
+                        options: textFieldSources,
+                        value: metaBundleSettings.seoTitleField,
+                        errors: metaBundleSettings.getErrors("seoTitleField"),
                     }) }}
                 </div>
             {% endnamespace %}
+        {% endif %}
 
-            {% if textFieldSources is defined and textFieldSources |length %}
-                {% namespace "metaBundleSettings" %}
-                    <div class="heading seomatic-textSourceFromField">
-                        <label id="metaBundleSettings-seoTitleField-label"
-                               for="metaBundleSettings-seoTitleField">{{ "Source Field: "|t("seomatic") }}</label>
-                        {{ forms.select({
-                            id: "seoTitleField",
-                            name: "seoTitleField",
-                            options: textFieldSources,
-                            value: metaBundleSettings.seoTitleField,
-                            errors: metaBundleSettings.getErrors("seoTitleField"),
-                        }) }}
-                    </div>
-                {% endnamespace %}
-            {% endif %}
-
-            {% namespace "metaGlobalVars" %}
-                <div class="input ltr seomatic-textSourceFromUrl">
-                    {{ forms.text({
-                        id: "seoTitle",
-                        name: "seoTitle",
-                        value: metaGlobalVars.seoTitle,
-                        class: "nicetext",
-                        maxlength: seomaticConfig.maxTitleLength,
-                        showCharsLeft: true,
-                        warning: false,
-                        errors: metaGlobalVars.getErrors("seoTitle"),
-                    }) }}
-                </div>
-            {% endnamespace %}
-        </div>
+        {% namespace "metaGlobalVars" %}
+            <div class="input ltr seomatic-textSourceFromUrl">
+                {{ forms.text({
+                    id: "seoTitle",
+                    name: "seoTitle",
+                    value: metaGlobalVars.seoTitle,
+                    class: "nicetext",
+                    maxlength: seomaticConfig.maxTitleLength,
+                    showCharsLeft: true,
+                    warning: false,
+                    errors: metaGlobalVars.getErrors("seoTitle"),
+                }) }}
+            </div>
+        {% endnamespace %}
     {% endmacro %}
 
     {% set textOptions = {
@@ -66,6 +61,16 @@
     {% endif %}
 
     {% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "seoTitle") %}
+
+    {% block fieldHeader %}
+        <div class="heading">
+            <label id="metaBundleSettings-seoTitleSource-label"
+                   for="metaBundleSettings-seoTitleSource">{{ "SEO Title Source"|t("seomatic") }}</label>
+        </div>
+        <div class="instructions">
+            <p>{{ "Make sure your title tag is explicit and contains your most important keywords. Be sure that each page has a unique title tag."|t("seomatic") }}</p>
+        </div>
+    {% endblock %}
 
     {% block inheritedValues %}
         {% if inheritedFrom is not null %}

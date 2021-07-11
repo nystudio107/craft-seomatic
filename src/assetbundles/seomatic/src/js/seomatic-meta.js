@@ -55,15 +55,15 @@ function initFieldSettings() {
     const disableInputs = ($obj) => $obj.find('input, select, button').prop('disabled', true);
     const enableInputs = ($obj) => $obj.find('input, select, button').prop('disabled', false);
 
-    $('.inheritable-field .inherited-settings').find('input, select, button').prop('disabled', true);
+    disableInputs($('.inheritable-field .inherited'));
 
     $('.inheritable-field .lightswitch').on('change', function (ev) {
         if ($(this).hasClass('on')) {
             $(this).parents('.inheritable-field').removeClass('defined-settings').addClass('inherited-settings');
-            disableInputs($(this).parents('.inheritable-field').find('.defined-settings'));
+            disableInputs($(this).parents('.inheritable-field').find('.field-settings'));
         } else {
             $(this).parents('.inheritable-field').addClass('defined-settings').removeClass('inherited-settings');
-            enableInputs($(this).parents('.inheritable-field').find('.defined-settings'));
+            enableInputs($(this).parents('.inheritable-field').find('.field-settings'));
         }
     });
 
@@ -153,51 +153,51 @@ function initFieldSettings() {
     });
 
     // Show/hide the text source fields initially
-    $('.seomatic-textSourceSelect > select').each(function(index, value) {
+    $('.seomatic-textSourceSelect select').each(function(index, value) {
         var popupValue = $(this).val();
         switch (popupValue) {
             case 'sameAsSeo':
             case 'sameAsGlobal':
             case 'sameAsSiteTwitter':
-                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').hide();
-                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').hide();
+                $(this).closest('.value-wrapper').children('.seomatic-textSourceFromField').hide();
+                $(this).closest('.value-wrapper').children('.seomatic-textSourceFromUrl').hide();
                 break;
 
             case 'fromField':
             case 'summaryFromField':
             case 'keywordsFromField':
             case 'fromUserField':
-                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').show();
-                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').hide();
+                $(this).closest('.value-wrapper').children('.seomatic-textSourceFromField').show();
+                $(this).closest('.value-wrapper').children('.seomatic-textSourceFromUrl').hide();
                 break;
 
             case 'fromCustom':
-                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').hide();
-                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').show();
+                $(this).closest('.value-wrapper').children('.seomatic-textSourceFromField').hide();
+                $(this).closest('.value-wrapper').children('.seomatic-textSourceFromUrl').show();
                 break;
         }
     });
     // Handle hiding/showing the image source fields based on the selection
-    $('.seomatic-textSourceSelect > select').on('change', function(e) {
+    $('.field-settings .seomatic-textSourceSelect select').on('change', function(e) {
         switch (this.value) {
             case 'sameAsSeo':
             case 'sameAsGlobal':
             case 'sameAsSiteTwitter':
-                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').hide();
-                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').hide();
+                $(this).closest('.field-settings').children('.seomatic-textSourceFromField').hide();
+                $(this).closest('.field-settings').children('.seomatic-textSourceFromUrl').hide();
                 break;
 
             case 'fromField':
             case 'summaryFromField':
             case 'keywordsFromField':
             case 'fromUserField':
-                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').show();
-                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').hide();
+                $(this).closest('.field-settings').children('.seomatic-textSourceFromField').show();
+                $(this).closest('.field-settings').children('.seomatic-textSourceFromUrl').hide();
                 break;
 
             case 'fromCustom':
-                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').hide();
-                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').show();
+                $(this).closest('.field-settings').children('.seomatic-textSourceFromField').hide();
+                $(this).closest('.field-settings').children('.seomatic-textSourceFromUrl').show();
                 break;
         }
     });

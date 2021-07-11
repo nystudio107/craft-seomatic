@@ -280,9 +280,20 @@ div.vue-treeselect > div.vue-treeselect__control {
   background-color: #fbfcfe;
 }
 
-.inheritable-field.defined-settings .inherited-settings {
-  display: none;
+.inheritable-field.inherited-settings {
+  .inherited{
+    display: block;
+  }
+  .field-settings{
+    display: none;
+  }
 }
-.inheritable-field.inherited-settings .defined-settings {
-  display: none;
+
+.inheritable-field.defined-settings {
+  .inherited{
+    display: none;
+  }
+  .field-settings{
+    display: block;
+  }
 }
