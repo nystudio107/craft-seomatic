@@ -1,12 +1,16 @@
 {% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "seoTitle") %}
 {% set additionalVars = {
-    'isInherited': metaGlobalVars.seoTitle is empty,
+    'isInherited': metaGlobalVars.seoTitle is empty ,
     'hasInheritableValues': inheritedFrom is not null,
-    'wrapperClass': 'field seomatic-textSourceWrapper',
-    'wrapperId': 'metaBundleSettings-seoTitleSource-field'
+    'wrapperClass': 'seomatic-textSourceWrapper',
+    'fieldLabel': "SEO Title Source"|t("seomatic"),
+    'labelFor': 'metaBundleSettings-seoTitleSource'
 } %}
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
     {% macro seoTitleField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars) %}
+        <div class="instructions">
+            <p>{{ "Make sure your title tag is explicit and contains your most important keywords. Be sure that each page has a unique title tag."|t("seomatic") }}</p>
+        </div>
         {% import "_includes/forms" as forms %}
         {% namespace "metaBundleSettings" %}
             <div class="heading">
@@ -59,18 +63,6 @@
     {% if textFieldSources is defined and textFieldSources |length %}
         {% set textOptions = { fromField: "From Field"|t("seomatic"), } | merge(textOptions) %}
     {% endif %}
-
-    {% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "seoTitle") %}
-
-    {% block fieldHeader %}
-        <div class="heading">
-            <label id="metaBundleSettings-seoTitleSource-label"
-                   for="metaBundleSettings-seoTitleSource">{{ "SEO Title Source"|t("seomatic") }}</label>
-        </div>
-        <div class="instructions">
-            <p>{{ "Make sure your title tag is explicit and contains your most important keywords. Be sure that each page has a unique title tag."|t("seomatic") }}</p>
-        </div>
-    {% endblock %}
 
     {% block inheritedValues %}
         {% if inheritedFrom is not null %}
