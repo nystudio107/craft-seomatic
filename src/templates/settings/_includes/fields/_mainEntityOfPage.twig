@@ -1,12 +1,30 @@
-{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" %}
-    {% block field %}
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "mainEntityOfPage") %}
+
+{% set additionalVars = {
+    'isInherited': metaGlobalVars.mainEntityOfPage is empty ,
+    'hasInheritableValues': inheritedFrom is not null,
+    'fieldLabel': "Main Entity of Page"|t("seomatic"),
+    'labelFor': 'siteType'
+} %}
+
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro mainEntityField(metaBundleSettings, disableTreeSelect) %}
         {% namespace "metaBundleSettings" %}
             {% include "seomatic/settings/_includes/mainEntityOfPage-partial.twig" with {
                 "mainEntityOfPage": metaBundleSettings,
                 "entitySchemaPath": seomatic.helper.entityPath(metaBundleSettings),
-                "mainEntityTitle": "Main Entity of Page",
                 "mainEntityDescription": "The primary topic, some entity or thing that the page describes.",
+                "disableTreeSelect": disableTreeSelect
             } %}
         {% endnamespace %}
+    {% endmacro %}
+
+
+    {% block inheritedValues %}
+        {{ _self.mainEntityField(inheritedFrom.metaBundleSettings, true) }}
+    {% endblock %}
+
+    {% block field %}
+        {{ _self.mainEntityField(metaBundleSettings, false) }}
     {% endblock %}
 {% endembed %}
