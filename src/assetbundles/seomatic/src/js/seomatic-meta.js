@@ -59,11 +59,11 @@ function initFieldSettings() {
 
     $('.inheritable-field .lightswitch').on('change', function (ev) {
         if ($(this).hasClass('on')) {
-            $(this).parents('.inheritable-field').removeClass('defined-settings').addClass('inherited-settings');
-            disableInputs($(this).parents('.inheritable-field').find('.field-settings'));
-        } else {
             $(this).parents('.inheritable-field').addClass('defined-settings').removeClass('inherited-settings');
             enableInputs($(this).parents('.inheritable-field').find('.field-settings'));
+        } else {
+            $(this).parents('.inheritable-field').removeClass('defined-settings').addClass('inherited-settings');
+            disableInputs($(this).parents('.inheritable-field').find('.field-settings'));
         }
     });
 
