@@ -1,5 +1,18 @@
-{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" %}
-    {% block field %}
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "robots") %}
+{% set hasIneritableValues = inheritedFrom is not null %}
+
+{% set additionalVars = {
+    'isInherited': hasIneritableValues and metaGlobalVars.robots is empty ,
+    'hasInheritableValues': hasIneritableValues,
+    'fieldLabel': "Robots"|t("seomatic"),
+} %}
+
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro robotsField(metaGlobalVars, pageContext) %}
+        <div class="instructions">
+            <p>{{ "The robots meta tag lets you utilize a granular, page-specific approach to controlling how an individual page should be indexed and served to users in search results."|t("seomatic") }}</p>
+        </div>
+
         {% import "_includes/forms" as forms %}
 
         {% set robotOptions = {
@@ -11,14 +24,13 @@
             noarchive: "No Archive - Do not archive a cached version of this page"|t("seomatic"),
             noimageindex : "No Image Index - Do not index images on this page"|t("seomatic"),
         } %}
+
         {% if pageContext == "field" %}
             {% set robotOptions = { "": ""} | merge(robotOptions) %}
         {% endif %}
 
         {% namespace "metaGlobalVars" %}
             {{ forms.selectField({
-                label: "Robots"|t("seomatic"),
-                instructions: "The robots meta tag lets you utilize a granular, page-specific approach to controlling how an individual page should be indexed and served to users in search results."|t("seomatic"),
                 id: "robots",
                 name: "robots",
                 options: robotOptions,
@@ -26,5 +38,13 @@
                 errors: metaGlobalVars.getErrors("robots"),
             }) }}
         {% endnamespace %}
+    {% endmacro %}
+
+    {% block inheritedValues %}
+        {{ _self.robotsField(inheritedFrom.metaGlobalVars, pageContext) }}
+    {% endblock %}
+
+    {% block field %}
+        {{ _self.robotsField(metaGlobalVars, pageContext) }}
     {% endblock %}
 {% endembed %}
