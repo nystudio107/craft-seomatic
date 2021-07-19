@@ -1,12 +1,26 @@
-{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" %}
-    {% block field %}
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "canonicalUrl") %}
+{% set hasIneritableValues = inheritedFrom is not null %}
+
+{% set additionalVars = {
+    'isInherited': hasIneritableValues and metaGlobalVars.mainEntityOfPage is empty ,
+    'hasInheritableValues': hasIneritableValues,
+    'fieldLabel': "Canonical URL"|t("seomatic"),
+} %}
+
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro canonicalUrlField(metaGlobalVars, disabled) %}
+        <div class="instructions">
+            <p>
+                {{ "The search engine friendly URL that you want the search engines to treat as authoritative."|t("seomatic") }}
+                <a href="https://support.google.com/webmasters/answer/139066?hl=en" target="_blank">{{ "Learn More"|t("seomatic") }}</a>
+            </p>
+        </div>
+
         {% import "_includes/forms" as forms %}
 
         {% namespace "metaGlobalVars" %}
-            {% if seomatic.helper.craft31 %}
+            {% if seomatic.helper.craft31 and not disabled%}
                 {{ forms.autosuggestField({
-                    label: "Canonical URL"|t("seomatic"),
-                    instructions: "The search engine friendly URL that you want the search engines to treat as authoritative. [Learn More](https://support.google.com/webmasters/answer/139066?hl=en)"|t("seomatic"),
                     suggestEnvVars: true,
                     suggestAliases: true,
                     id: "canonicalUrl",
@@ -18,8 +32,6 @@
                 }) }}
             {% else %}
                 {{ forms.textField({
-                    label: "Canonical URL"|t("seomatic"),
-                    instructions: "The search engine friendly URL that you want the search engines to treat as authoritative. [Learn More](https://support.google.com/webmasters/answer/139066?hl=en)"|t("seomatic"),
                     id: "canonicalUrl",
                     name: "canonicalUrl",
                     value: metaGlobalVars.canonicalUrl,
@@ -29,5 +41,13 @@
                 }) }}
             {% endif %}
         {% endnamespace %}
+    {% endmacro %}
+
+    {% block inheritedValues %}
+        {{ _self.canonicalUrlField(inheritedFrom.metaGlobalVars, true) }}
+    {% endblock %}
+
+    {% block field %}
+        {{ _self.canonicalUrlField(metaGlobalVars, false) }}
     {% endblock %}
 {% endembed %}
