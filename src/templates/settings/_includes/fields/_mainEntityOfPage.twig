@@ -1,8 +1,9 @@
 {% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "mainEntityOfPage") %}
+{% set hasIneritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': metaGlobalVars.mainEntityOfPage is empty ,
-    'hasInheritableValues': inheritedFrom is not null,
+    'isInherited': hasIneritableValues and metaGlobalVars.mainEntityOfPage is empty ,
+    'hasInheritableValues': hasIneritableValues,
     'fieldLabel': "Main Entity of Page"|t("seomatic"),
     'labelFor': 'siteType'
 } %}
