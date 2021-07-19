@@ -10,6 +10,15 @@
     {% set parentBundles = [] %}
 {% endif %}
 
+{% set textOptions = {
+    fromCustom: "Custom Text"|t("seomatic"),
+} %}
+
+{% if textFieldSources is defined and textFieldSources |length %}
+    {% set textOptions = { keywordsFromField: "Keywords From Field"|t("seomatic"), } | merge(textOptions) %}
+    {% set textOptions = { fromField: "From Field"|t("seomatic"), } | merge(textOptions) %}
+{% endif %}
+
 {############### Main Entity of Page ###############}
 
 {% if field is not defined or 'mainEntityOfPage' in field.generalEnabledFields %}

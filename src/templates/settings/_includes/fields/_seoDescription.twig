@@ -61,14 +61,6 @@
         {% endnamespace %}
     {% endmacro %}
 
-    {% set textOptions = {
-        fromCustom: "Custom Text"|t("seomatic"),
-    } %}
-    {% if textFieldSources is defined and textFieldSources |length %}
-        {% set textOptions = { summaryFromField: "Summary From Field"|t("seomatic"), } | merge(textOptions) %}
-        {% set textOptions = { fromField: "From Field"|t("seomatic"), } | merge(textOptions) %}
-    {% endif %}
-
     {% block inheritedValues %}
         {% if inheritedFrom is not null %}
             {{ _self.seoDescriptionField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
