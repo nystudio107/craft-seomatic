@@ -2,7 +2,7 @@
 {% set hasIneritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasIneritableValues and metaGlobalVars.mainEntityOfPage is empty ,
+    'isInherited': hasIneritableValues and metaGlobalVars.canonicalUrl is empty ,
     'hasInheritableValues': hasIneritableValues,
     'fieldLabel': "Canonical URL"|t("seomatic"),
 } %}
