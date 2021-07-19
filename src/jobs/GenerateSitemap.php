@@ -111,8 +111,8 @@ class GenerateSitemap extends BaseJob
             $this->handle,
             $this->siteId
         );
-        // If it's disabled, just exit
-        if ($metaBundle === null || !$metaBundle->metaSitemapVars->sitemapUrls) {
+        // If it doesn't exist, exit
+        if ($metaBundle === null) {
             return;
         }
         $multiSite = \count($metaBundle->sourceAltSiteSettings) > 1;
@@ -394,11 +394,11 @@ class GenerateSitemap extends BaseJob
      * Combine any per-entry type field settings from $element with the passed in
      * $metaBundle
      *
-     * @param SeoElementInterface $seoElement
+     * @param SeoElementInterface|string $seoElement
      * @param Element $element
      * @param MetaBundle $metaBundle
      */
-    protected function combineEntryTypeSettings(SeoElementInterface $seoElement, Element $element, MetaBundle $metaBundle)
+    protected function combineEntryTypeSettings($seoElement, Element $element, MetaBundle $metaBundle)
     {
         if (!empty($seoElement::typeMenuFromHandle($metaBundle->sourceHandle))) {
             list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId, $typeId)
@@ -418,6 +418,7 @@ class GenerateSitemap extends BaseJob
                     [ArrayHelper::class, 'preserveBools']
                 );
                 $metaBundle->metaSitemapVars->setAttributes($attributes, false);
+
                 // Combine the meta global vars
                 $attributes = $entryTypeBundle->metaGlobalVars->getAttributes();
                 $attributes = array_filter(

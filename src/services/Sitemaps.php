@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\jobs\GenerateSitemap;
+use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\base\SitemapInterface;
@@ -170,6 +171,47 @@ class Sitemaps extends Component implements SitemapInterface
         }
 
         return $rules;
+    }
+
+    /**
+     * See if any of the entry types have robots enable and sitemap urls enabled
+     *
+     * @param MetaBundle $metaBundle
+     * @return bool
+     */
+    public function anyEntryTypeHasSitemapUrls(MetaBundle $metaBundle): bool
+    {
+        $result = false;
+        $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundle->sourceBundleType);
+        if ($seoElement) {
+            if (!empty($seoElement::typeMenuFromHandle($metaBundle->sourceHandle))) {
+                $section = $seoElement::sourceModelFromHandle($metaBundle->sourceHandle);
+                if ($section !== null) {
+                    $entryTypes = $section->getEntryTypes();
+                    // Fetch each meta bundle for each entry type to see if _any_ of them have sitemap URLs
+                    foreach ($entryTypes as $entryType) {
+                        $entryTypeBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
+                            $metaBundle->sourceBundleType,
+                            $metaBundle->sourceId,
+                            $metaBundle->sourceSiteId,
+                            $entryType->id
+                        );
+                        if ($entryTypeBundle) {
+                            $robotsEnabled = true;
+                            if (!empty($entryTypeBundle->metaGlobalVars->robots)) {
+                                $robotsEnabled = $entryTypeBundle->metaGlobalVars->robots !== 'none' &&
+                                    $entryTypeBundle->metaGlobalVars->robots !== 'noindex';
+                            }
+                            if ($entryTypeBundle->metaSitemapVars->sitemapUrls && $robotsEnabled) {
+                                $result = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return $result;
     }
 
     /**

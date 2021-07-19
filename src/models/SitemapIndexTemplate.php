@@ -152,15 +152,20 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             Seomatic::$plugin->metaBundles->pruneVestigialMetaBundles($metaBundles);
             /** @var  $metaBundle MetaBundle */
             foreach ($metaBundles as $metaBundle) {
+                $sitemapUrls = $metaBundle->metaSitemapVars->sitemapUrls;
                 // Check to see if robots is `none` or `no index`
                 $robotsEnabled = true;
                 if (!empty($metaBundle->metaGlobalVars->robots)) {
                     $robotsEnabled = $metaBundle->metaGlobalVars->robots !== 'none' &&
                         $metaBundle->metaGlobalVars->robots !== 'noindex';
                 }
+                if (Seomatic::$plugin->sitemaps->anyEntryTypeHasSitemapUrls($metaBundle)) {
+                    $robotsEnabled = true;
+                    $sitemapUrls = true;
+                }
                 // Only add in a sitemap entry if it meets our criteria
                 if (\in_array($metaBundle->sourceSiteId, $groupSiteIds, false)
-                    && $metaBundle->metaSitemapVars->sitemapUrls
+                    && $sitemapUrls
                     && $robotsEnabled) {
                     $sitemapUrl = Seomatic::$plugin->sitemaps->sitemapUrlForBundle(
                         $metaBundle->sourceBundleType,
