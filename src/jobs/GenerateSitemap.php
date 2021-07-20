@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\jobs;
 
+use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\fields\SeoSettings;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\Seomatic;
@@ -27,7 +28,6 @@ use craft\base\ElementInterface;
 use craft\console\Application as ConsoleApplication;
 use craft\db\Paginator;
 use craft\elements\Asset;
-use craft\elements\Entry;
 use craft\elements\MatrixBlock;
 use craft\fields\Assets as AssetsField;
 use craft\models\SiteGroup;
@@ -111,8 +111,8 @@ class GenerateSitemap extends BaseJob
             $this->handle,
             $this->siteId
         );
-        // If it's disabled, just exit
-        if ($metaBundle === null || !$metaBundle->metaSitemapVars->sitemapUrls) {
+        // If it doesn't exist, exit
+        if ($metaBundle === null) {
             return;
         }
         $multiSite = \count($metaBundle->sourceAltSiteSettings) > 1;
@@ -171,6 +171,8 @@ class GenerateSitemap extends BaseJob
                     }
                     $metaBundle->metaSitemapVars->setAttributes($stashedSitemapAttrs, false);
                     $metaBundle->metaGlobalVars->setAttributes($stashedGlobalVarsAttrs, false);
+                    // Combine in any per-entry type settings
+                    $this->combineEntryTypeSettings($seoElement, $element, $metaBundle);
                     // Make sure this entry isn't disabled
                     $this->combineFieldSettings($element, $metaBundle);
                     // Special case for the __home__ URI
@@ -387,6 +389,46 @@ class GenerateSitemap extends BaseJob
 
     // Protected Methods
     // =========================================================================
+
+    /**
+     * Combine any per-entry type field settings from $element with the passed in
+     * $metaBundle
+     *
+     * @param SeoElementInterface|string $seoElement
+     * @param Element $element
+     * @param MetaBundle $metaBundle
+     */
+    protected function combineEntryTypeSettings($seoElement, Element $element, MetaBundle $metaBundle)
+    {
+        if (!empty($seoElement::typeMenuFromHandle($metaBundle->sourceHandle))) {
+            list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId, $typeId)
+                = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
+            $entryTypeBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
+                $sourceBundleType,
+                $sourceId,
+                $sourceSiteId,
+                $typeId
+            );
+            // Combine in any settings for this entry type
+            if ($entryTypeBundle) {
+                // Combine the meta sitemap vars
+                $attributes = $entryTypeBundle->metaSitemapVars->getAttributes();
+                $attributes = array_filter(
+                    $attributes,
+                    [ArrayHelper::class, 'preserveBools']
+                );
+                $metaBundle->metaSitemapVars->setAttributes($attributes, false);
+
+                // Combine the meta global vars
+                $attributes = $entryTypeBundle->metaGlobalVars->getAttributes();
+                $attributes = array_filter(
+                    $attributes,
+                    [ArrayHelper::class, 'preserveBools']
+                );
+                $metaBundle->metaGlobalVars->setAttributes($attributes, false);
+            }
+        }
+    }
 
     /**
      * Combine any SEO Settings field settings from $element with the passed in

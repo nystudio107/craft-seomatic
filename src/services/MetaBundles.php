@@ -212,9 +212,10 @@ class MetaBundles extends Component
     public function getMetaBundleBySourceId(string $sourceBundleType, int $sourceId, int $sourceSiteId, $typeId = null)
     {
         $metaBundle = null;
+        $typeId = (int)$typeId;
         // See if we have the meta bundle cached
-        if (!empty($this->metaBundlesBySourceId[$sourceBundleType][$sourceId][$sourceSiteId])) {
-            $id = $this->metaBundlesBySourceId[$sourceBundleType][$sourceId][$sourceSiteId];
+        if (!empty($this->metaBundlesBySourceId[$sourceBundleType][$sourceId][$sourceSiteId][$typeId])) {
+            $id = $this->metaBundlesBySourceId[$sourceBundleType][$sourceId][$sourceSiteId][$typeId];
             if (!empty($this->metaBundles[$id])) {
                 return $this->metaBundles[$id];
             }
@@ -228,9 +229,6 @@ class MetaBundles extends Component
                 'sourceSiteId' => $sourceSiteId,
             ])
             ;
-        if ($typeId !== null) {
-            $typeId = (int)$typeId;
-        }
         if (!empty($typeId)) {
             $query
                 ->andWhere([
@@ -257,7 +255,7 @@ class MetaBundles extends Component
             $this->syncBundleWithConfig($metaBundle);
             $id = count($this->metaBundles);
             $this->metaBundles[$id] = $metaBundle;
-            $this->metaBundlesBySourceId[$sourceBundleType][$sourceId][$sourceSiteId] = $id;
+            $this->metaBundlesBySourceId[$sourceBundleType][$sourceId][$sourceSiteId][$typeId] = $id;
         } else {
             // If it doesn't exist, create it
             $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
@@ -283,9 +281,10 @@ class MetaBundles extends Component
     public function getMetaBundleBySourceHandle(string $sourceBundleType, string $sourceHandle, int $sourceSiteId, $typeId = null)
     {
         $metaBundle = null;
+        $typeId = (int)$typeId;
         // See if we have the meta bundle cached
-        if (!empty($this->metaBundlesBySourceHandle[$sourceBundleType][$sourceHandle][$sourceSiteId])) {
-            $id = $this->metaBundlesBySourceHandle[$sourceBundleType][$sourceHandle][$sourceSiteId];
+        if (!empty($this->metaBundlesBySourceHandle[$sourceBundleType][$sourceHandle][$sourceSiteId][$typeId])) {
+            $id = $this->metaBundlesBySourceHandle[$sourceBundleType][$sourceHandle][$sourceSiteId][$typeId];
             if (!empty($this->metaBundles[$id])) {
                 return $this->metaBundles[$id];
             }
@@ -299,9 +298,6 @@ class MetaBundles extends Component
                 'sourceSiteId' => $sourceSiteId,
             ])
             ;
-        if ($typeId !== null) {
-            $typeId = (int)$typeId;
-        }
         if (!empty($typeId)) {
             $query
                 ->andWhere([
@@ -326,7 +322,7 @@ class MetaBundles extends Component
             $metaBundle = MetaBundle::create($metaBundleArray);
             $id = count($this->metaBundles);
             $this->metaBundles[$id] = $metaBundle;
-            $this->metaBundlesBySourceHandle[$sourceBundleType][$sourceHandle][$sourceSiteId] = $id;
+            $this->metaBundlesBySourceHandle[$sourceBundleType][$sourceHandle][$sourceSiteId][$typeId] = $id;
         } else {
             // If it doesn't exist, create it
             $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);

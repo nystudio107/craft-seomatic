@@ -91,7 +91,7 @@ class MedicalBusiness extends LocalBusiness
      */
     static public $googleRecommendedSchema = [];
 
-    // Public Properties
+    // Public Properties from Self
     // =========================================================================
 
     /**
@@ -134,6 +134,31 @@ class MedicalBusiness extends LocalBusiness
      */
     public $priceRange;
 
+    // Public Properties from MedicalOrganization
+    // =========================================================================
+
+    /**
+     * Name or unique ID of network. (Networks are often reused across different
+     * insurance plans).
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $healthPlanNetworkId;
+
+    /**
+     * Whether the provider is accepting new patients.
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $isAcceptingNewPatients;
+
+    /**
+     * A medical specialty of the provider.
+     *
+     * @var MedicalSpecialty [schema.org types: MedicalSpecialty]
+     */
+    public $medicalSpecialty;
+
     // Static Protected Properties
     // =========================================================================
 
@@ -146,7 +171,10 @@ class MedicalBusiness extends LocalBusiness
         'currenciesAccepted',
         'openingHours',
         'paymentAccepted',
-        'priceRange'
+        'priceRange',
+        'healthPlanNetworkId',
+        'isAcceptingNewPatients',
+        'medicalSpecialty'
     ];
 
     /**
@@ -158,7 +186,10 @@ class MedicalBusiness extends LocalBusiness
         'currenciesAccepted' => ['Text'],
         'openingHours' => ['Text'],
         'paymentAccepted' => ['Text'],
-        'priceRange' => ['Text']
+        'priceRange' => ['Text'],
+        'healthPlanNetworkId' => ['Text'],
+        'isAcceptingNewPatients' => ['Boolean'],
+        'medicalSpecialty' => ['MedicalSpecialty']
     ];
 
     /**
@@ -170,7 +201,10 @@ class MedicalBusiness extends LocalBusiness
         'currenciesAccepted' => 'The currency accepted. Use standard formats: ISO 4217 currency format e.g. "USD"; Ticker symbol for cryptocurrencies e.g. "BTC"; well known names for Local Exchange Tradings Systems (LETS) and other currency types e.g. "Ithaca HOUR".',
         'openingHours' => 'The general opening hours for a business. Opening hours can be specified as a weekly time range, starting with days, then times per day. Multiple days can be listed with commas \',\' separating each day. Day or time ranges are specified using a hyphen \'-\'. Days are specified using the following two-letter combinations: Mo, Tu, We, Th, Fr, Sa, Su. Times are specified using 24:00 time. For example, 3pm is specified as 15:00. Here is an example: <time itemprop="openingHours" datetime="Tu,Th 16:00-20:00">Tuesdays and Thursdays 4-8pm</time>. If a business is open 7 days a week, then it can be specified as <time itemprop="openingHours" datetime="Mo-Su">Monday through Sunday, all day</time>.',
         'paymentAccepted' => 'Cash, Credit Card, Cryptocurrency, Local Exchange Tradings System, etc.',
-        'priceRange' => 'The price range of the business, for example $$$.'
+        'priceRange' => 'The price range of the business, for example $$$.',
+        'healthPlanNetworkId' => 'Name or unique ID of network. (Networks are often reused across different insurance plans).',
+        'isAcceptingNewPatients' => 'Whether the provider is accepting new patients.',
+        'medicalSpecialty' => 'A medical specialty of the provider.'
     ];
 
     /**
@@ -232,6 +266,7 @@ class MedicalBusiness extends LocalBusiness
         $rules = parent::rules();
         $rules = array_merge($rules, [
             [['currenciesAccepted','openingHours','paymentAccepted','priceRange'], 'validateJsonSchema'],
+            [['healthPlanNetworkId','isAcceptingNewPatients','medicalSpecialty'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
