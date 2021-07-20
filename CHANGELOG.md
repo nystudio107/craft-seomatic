@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.3.45 - UNRELEASED
+## 3.3.45 - 2021.07.20
 ### Fixed
 * Fixed an issue where `MedicalBusiness` JSON-LD type didn't inherit all of the properties from `MedicalOrganization` that it should
 * Handle per-entry type settings for the sitemap generation (https://github.com/nystudio107/craft-seomatic/issues/929)
