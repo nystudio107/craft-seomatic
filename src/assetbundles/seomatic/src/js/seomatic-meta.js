@@ -16,18 +16,23 @@ import SchemaTypeList from "@/vue/SchemaTypeList.vue";
  * @since     3.0.0
  */
 
-    if (window.schemaSelectId !== undefined) {
-        // Create our vue instance
-        const vm = new Vue({
-            el: '#' + window.schemaSelectId,
-            components: {
-                'schema-type-list': SchemaTypeList,
-            },
-            data: {},
-            methods: {},
-            mounted() {
-            },
-        });
+    if (window.schemaSelectClass !== undefined) {
+        // Create our vue instance(s)
+        for (const el of document.querySelectorAll('.' + window.schemaSelectClass)) {
+            let elementId = 'vue-' + Math.round(Math.random() * 1000);
+            el.setAttribute('id', elementId);
+
+            new Vue({
+                el: '#' + elementId,
+                components: {
+                    'schema-type-list': SchemaTypeList,
+                },
+                data: {},
+                methods: {},
+                mounted() {
+                },
+            });
+        }
     }
 
 // Accept HMR as per: https://webpack.js.org/api/hot-module-replacement#accept

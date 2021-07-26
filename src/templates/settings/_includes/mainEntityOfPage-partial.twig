@@ -1,114 +1,110 @@
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
 
-{% if disableTreeSelect %}
-    <h4>{{ mainEntityOfPage.siteType }}
-        {{ mainEntityOfPage.siteSubType|length > 0 ? "-> " ~ mainEntityOfPage.siteSubType : '' }}
-        {{ mainEntityOfPage.siteSpecificType|length > 0 ? "-> " ~ mainEntityOfPage.siteSpecificType : '' }}
-        </h4>
-    </h4>
-{% else %}
-    <div class="instructions">
-        <p>{{ mainEntityDescription ~ " Choose as general or specific of an type as you wish.  Leave a sub-type blank if you don't want to specify a sub-type." |t("seomatic") |raw }}</p>
-    </div>
+<div class="instructions">
+    <p>{{ mainEntityDescription ~ " Choose as general or specific of an type as you wish.  Leave a sub-type blank if you don't want to specify a sub-type." |t("seomatic") |raw }}</p>
+</div>
 
-    <div id="treeselect-wrapper">
-        <schema-type-list
-                {% if entitySchemaPath | length %}entity="{{ entitySchemaPath }}"{% endif %}></schema-type-list>
-    </div>
-    {% set mainEntityOfPageRootOptions = seomatic.helper.getSingleTypeMenu('') %}
-    {% if pageContext is defined and (pageContext == "field" or pageContext == "content") %}
-        {% set mainEntityOfPageRootOptions = { "": ""} | merge(mainEntityOfPageRootOptions) %}
-    {% endif %}
+<div class="treeselect-wrapper">
+    <schema-type-list
+            {% if entitySchemaPath | length %}entity="{{ entitySchemaPath }}"{% endif %}
+            {% if disableTreeSelect %}disabled="true"{% endif %}
+    >
 
-    {{ forms.hidden({
-        id: "siteType",
-        class: "inline-item",
-        fieldClass: "inline-item",
-        name: "siteType",
-        value: mainEntityOfPage.siteType,
-        required: true,
-        errors: mainEntityOfPage.getErrors("siteType"),
-    }) }}
-    {{ forms.hidden({
-        id: "siteSubType",
-        label: "&rarr;",
-        class: "inline-item",
-        fieldClass: "inline-item",
-        name: "siteSubType",
-        value: mainEntityOfPage.siteSubType,
-        required: false,
-        errors: mainEntityOfPage.getErrors("siteSubType"),
-    }) }}
-    {{ forms.hidden({
-        id: "siteSpecificType",
-        label: "&rarr;",
-        class: "inline-item",
-        fieldClass: "inline-item",
-        name: "siteSpecificType",
-        value: mainEntityOfPage.siteSpecificType,
-        required: false,
-        errors: mainEntityOfPage.getErrors("siteSpecificType"),
-    }) }}
-
-    <script>
-        window.schemaSelectId = '{{ "treeselect-wrapper" |namespaceInputId }}';
-    </script>
-    {% js %}
-        window.schemaSelectId = '{{ "treeselect-wrapper" |namespaceInputId }}';
-        $(document).on('schema-value-changed', function(e, v) {
-            let siteTypeId = '{{ "siteType" |namespaceInputId }}';
-            let siteSubTypeId = '{{ "siteSubType" |namespaceInputId }}';
-            let siteSpecificTypeId = '{{ "siteSpecificType" |namespaceInputId }}';
-            let parts = [];
-            if (v !== undefined) {
-                parts = v.split('.');
-            }
-            // Update the hidden fields
-            let siteTypeIdVal = parts[0] || 'none';
-            let siteSubTypeIdVal = parts[1] || 'none';
-            let siteSpecificTypeIdVal = parts[2] || 'none';
-            $('#'+siteTypeId).val(siteTypeIdVal);
-            $('#'+siteSubTypeId).val(siteSubTypeIdVal);
-            $('#'+siteSpecificTypeId).val(siteSpecificTypeIdVal);
-            // Show any panes that should be visible based on the chosen type
-            if (siteTypeIdVal !== 'none') {
-                $('.metaPane').hide();
-                $('.metaPane.' + siteTypeIdVal).show();
-            }
-            if (siteSubTypeIdVal !== 'none') {
-                $('.metaSubPane').hide();
-                $('.metaSubPane.' + siteSubTypeIdVal).show();
-            }
-            if (siteSpecificTypeIdVal !== 'none') {
-                $('.metaSpecificPane').hide();
-                $('.metaSpecificPane.' + siteSpecificTypeIdVal).show();
-            }
-        });
-    {% endjs %}
-
-    {% js %}
-    // Fill in the dynamic schema menus
-    var siteTypeId = '{{ "siteType" |namespaceInputId }}';
-            var siteSubTypeId = '{{ "siteSubType" |namespaceInputId }}';
-            var siteSpecificTypeId = '{{ "siteSpecificType" |namespaceInputId }}';
-
-            // Initially hide all of the meta panes
-            $('.metaPane').hide();
-            $('.metaSubPane').hide();
-            $('.metaSpecificPane').hide();
-
-            // Show any panes that should be visible based on the chosen type
-            {% if mainEntityOfPage.siteType |length %}
-                $('.metaPane.{{ mainEntityOfPage.siteType }}').show();
-            {% endif %}
-            {% if mainEntityOfPage.siteSubType |length %}
-                $('.metaSubPane.{{ mainEntityOfPage.siteSubType }}').show();
-            {% endif %}
-            {% if mainEntityOfPage.siteSpecificType |length %}
-                $('.metaSpecificPane.{{ mainEntityOfPage.siteSpecificType }}').show();
-            {% endif %}
-
-    {% endjs %}
+    </schema-type-list>
+</div>
+{% set mainEntityOfPageRootOptions = seomatic.helper.getSingleTypeMenu('') %}
+{% if pageContext is defined and (pageContext == "field" or pageContext == "content") %}
+    {% set mainEntityOfPageRootOptions = { "": ""} | merge(mainEntityOfPageRootOptions) %}
 {% endif %}
+
+{{ forms.hidden({
+    id: disableTreeSelect ? "dud" : "siteType",
+    class: "inline-item",
+    fieldClass: "inline-item",
+    name: "siteType",
+    value: mainEntityOfPage.siteType,
+    required: true,
+    errors: mainEntityOfPage.getErrors("siteType"),
+}) }}
+{{ forms.hidden({
+    id: disableTreeSelect ? "dud" : "siteSubType",
+    label: "&rarr;",
+    class: "inline-item",
+    fieldClass: "inline-item",
+    name: "siteSubType",
+    value: mainEntityOfPage.siteSubType,
+    required: false,
+    errors: mainEntityOfPage.getErrors("siteSubType"),
+}) }}
+{{ forms.hidden({
+    id: disableTreeSelect ? "dud" : "siteSpecificType",
+    label: "&rarr;",
+    class: "inline-item",
+    fieldClass: "inline-item",
+    name: "siteSpecificType",
+    value: mainEntityOfPage.siteSpecificType,
+    required: false,
+    errors: mainEntityOfPage.getErrors("siteSpecificType"),
+}) }}
+
+<script>
+    window.schemaSelectClass = '{{ "treeselect-wrapper" }}';
+</script>
+{% js %}
+    window.schemaSelectClass = '{{ "treeselect-wrapper" }}';
+    $(document).on('schema-value-changed', function(e, v) {
+        let siteTypeId = '{{ "siteType" |namespaceInputId }}';
+        let siteSubTypeId = '{{ "siteSubType" |namespaceInputId }}';
+        let siteSpecificTypeId = '{{ "siteSpecificType" |namespaceInputId }}';
+        let parts = [];
+        if (v !== undefined) {
+            parts = v.split('.');
+        }
+        // Update the hidden fields
+        let siteTypeIdVal = parts[0] || 'none';
+        let siteSubTypeIdVal = parts[1] || 'none';
+        let siteSpecificTypeIdVal = parts[2] || 'none';
+        $('#'+siteTypeId).val(siteTypeIdVal);
+        $('#'+siteSubTypeId).val(siteSubTypeIdVal);
+        $('#'+siteSpecificTypeId).val(siteSpecificTypeIdVal);
+        // Show any panes that should be visible based on the chosen type
+        if (siteTypeIdVal !== 'none') {
+            $('.metaPane').hide();
+            $('.metaPane.' + siteTypeIdVal).show();
+        }
+        if (siteSubTypeIdVal !== 'none') {
+            $('.metaSubPane').hide();
+            $('.metaSubPane.' + siteSubTypeIdVal).show();
+        }
+        if (siteSpecificTypeIdVal !== 'none') {
+            $('.metaSpecificPane').hide();
+            $('.metaSpecificPane.' + siteSpecificTypeIdVal).show();
+        }
+    });
+{% endjs %}
+
+{% js %}
+// Fill in the dynamic schema menus
+var siteTypeId = '{{ "siteType" |namespaceInputId }}';
+        var siteSubTypeId = '{{ "siteSubType" |namespaceInputId }}';
+        var siteSpecificTypeId = '{{ "siteSpecificType" |namespaceInputId }}';
+
+        // Initially hide all of the meta panes
+        $('.metaPane').hide();
+        $('.metaSubPane').hide();
+        $('.metaSpecificPane').hide();
+
+        // Show any panes that should be visible based on the chosen type
+        {% if mainEntityOfPage.siteType |length %}
+            $('.metaPane.{{ mainEntityOfPage.siteType }}').show();
+        {% endif %}
+        {% if mainEntityOfPage.siteSubType |length %}
+            $('.metaSubPane.{{ mainEntityOfPage.siteSubType }}').show();
+        {% endif %}
+        {% if mainEntityOfPage.siteSpecificType |length %}
+            $('.metaSpecificPane.{{ mainEntityOfPage.siteSpecificType }}').show();
+        {% endif %}
+
+{% endjs %}
 
