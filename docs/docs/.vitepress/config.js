@@ -13,7 +13,7 @@ module.exports = {
         docsDir: 'docs/docs',
         docsBranch: 'v3',
         algolia: {
-            apiKey: '',
+            apiKey: '3fbe33d2aa4969da7363ddfb8ab9ac8e',
             indexName: 'seomatic'
         },
         editLinks: true,
@@ -21,14 +21,14 @@ module.exports = {
         lastUpdated: 'Last Updated',
         sidebar: [
             { text: 'SEOmatic Plugin', link: '/' },
-            { text: 'SEOmatic Overview', link: '/overview' },
-            { text: 'Issues & Upgrading', link: '/issues' },
-            { text: 'SEO Resources', link: '/resources' },
-            { text: 'SEO Technologies', link: '/technologies' },
-            { text: 'Configuring SEOmatic', link: '/configuring' },
-            { text: 'SEOmatic Fields', link: '/fields' },
-            { text: 'Using SEOmatic', link: '/using' },
-            { text: 'Advanced Usage', link: '/advanced' },
+            { text: 'SEOmatic Overview', link: '/overview.html' },
+            { text: 'Issues & Upgrading', link: '/issues.html' },
+            { text: 'SEO Resources', link: '/resources.html' },
+            { text: 'SEO Technologies', link: '/technologies.html' },
+            { text: 'Configuring SEOmatic', link: '/configuring.html' },
+            { text: 'SEOmatic Fields', link: '/fields.html' },
+            { text: 'Using SEOmatic', link: '/using.html' },
+            { text: 'Advanced Usage', link: '/advanced.html' },
         ],
     },
 };

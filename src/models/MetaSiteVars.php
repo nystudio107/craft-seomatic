@@ -231,13 +231,11 @@ class MetaSiteVars extends VarsModel
         }
         // Convert our date attributes in the additionalSitemaps array
         if (!empty($this->additionalSitemaps)) {
-            $index = 0;
-            foreach ($this->additionalSitemaps as $additionalSitemap) {
+            foreach ($this->additionalSitemaps as $index => $additionalSitemap) {
                 if (!empty($additionalSitemap['lastmod'])) {
                     $this->additionalSitemaps[$index]['lastmod']
                         = DateTimeHelper::toDateTime($additionalSitemap['lastmod']);
                 }
-                $index++;
             }
         }
         // Make sure these are strings

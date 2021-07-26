@@ -13,11 +13,8 @@ namespace nystudio107\seomatic\models\metatag;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
+use nystudio107\seomatic\helpers\Text as TextHelper;
 use nystudio107\seomatic\models\MetaTag;
-
-use Craft;
-
-use Stringy\Stringy;
 
 /**
  * @author    nystudio107
@@ -130,10 +127,17 @@ class TwitterTitleTag extends MetaTag
             }
             $lengthAdjust = mb_strlen($prefix.$suffix);
             // Truncate the twitter:title tag content
-            $data['content'] = (string)Stringy::create($data['content'])->safeTruncate(
-                Seomatic::$settings->maxTitleLength - $lengthAdjust,
-                '…'
-            );
+            $truncLen = Seomatic::$settings->maxTitleLength - $lengthAdjust;
+            if ($truncLen < 0) {
+                $truncLen = 0;
+            }
+            if (Seomatic::$settings->truncateTitleTags) {
+                $data['content'] = TextHelper::truncateOnWord(
+                    $data['content'],
+                    $truncLen,
+                    '…'
+                );
+            }
             $data['content'] = $prefix.$data['content'].$suffix;
         }
 

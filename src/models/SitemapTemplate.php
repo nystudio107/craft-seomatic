@@ -109,8 +109,23 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         $siteId = $params['siteId'];
 
         $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle($type, $handle, $siteId);
+        // If it doesn't exist, throw a 404
+        if ($metaBundle === null ) {
+            throw new NotFoundHttpException(Craft::t('seomatic', 'Page not found.'));
+        }
+        // Check to see if robots is `none` or `no index`
+        $robotsEnabled = true;
+        if (!empty($metaBundle->metaGlobalVars->robots)) {
+            $robotsEnabled = $metaBundle->metaGlobalVars->robots !== 'none' &&
+                $metaBundle->metaGlobalVars->robots !== 'noindex';
+        }
+        $sitemapUrls = $metaBundle->metaSitemapVars->sitemapUrls;
+        if (Seomatic::$plugin->sitemaps->anyEntryTypeHasSitemapUrls($metaBundle)) {
+            $robotsEnabled = true;
+            $sitemapUrls = true;
+        }
         // If it's disabled, just throw a 404
-        if ($metaBundle === null || !$metaBundle->metaSitemapVars->sitemapUrls) {
+        if (!$sitemapUrls || !$robotsEnabled) {
             throw new NotFoundHttpException(Craft::t('seomatic', 'Page not found.'));
         }
 

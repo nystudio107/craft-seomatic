@@ -14,8 +14,7 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
-
-use Stringy\Stringy;
+use nystudio107\seomatic\helpers\Text as TextHelper;
 
 use yii\helpers\Html;
 
@@ -170,10 +169,13 @@ class MetaTitle extends MetaItem
                 $truncLen = 0;
             }
             if (!empty($data)) {
-                $data = (string)Stringy::create($data)->safeTruncate(
-                    $truncLen,
-                    '…'
-                );
+                if (Seomatic::$settings->truncateTitleTags) {
+                    $data = TextHelper::truncateOnWord(
+                        $data,
+                        $truncLen,
+                        '…'
+                    );
+                }
                 $data = $prefix.$data.$suffix;
             } else {
                 // If no title is provided, just use the site name

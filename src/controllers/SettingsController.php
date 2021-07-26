@@ -1189,6 +1189,10 @@ class SettingsController extends Controller
         } else {
             $settings['computedType'] = 'WebPage';
         }
+        // Empty out the entity image settings to ensure the image gets removed if it no longer exists
+        $settings['genericImage'] = '';
+        $settings['genericImageWidth'] = '';
+        $settings['genericImageHeight'] = '';
         if (!empty($settings['genericImageIds'])) {
             $asset = Craft::$app->getAssets()->getAssetById($settings['genericImageIds'][0]);
             if ($asset !== null) {

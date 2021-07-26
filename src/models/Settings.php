@@ -125,6 +125,16 @@ class Settings extends VarsModel
     public $maxDescriptionLength = 155;
 
     /**
+     * @var string Should Title tags be truncated at the max length, on word boundaries?
+     */
+    public $truncateTitleTags = true;
+
+    /**
+     * @var string Should Description tags be truncated at the max length, on word boundaries?
+     */
+    public $truncateDescriptionTags = true;
+
+    /**
      * @var bool Site Groups define logically separate sites
      */
     public $siteGroupsSeparate = true;
@@ -253,7 +263,7 @@ class Settings extends VarsModel
                 ],
                 'boolean'
             ],
-            [['devModeTitlePrefix', 'cpTitlePrefix', 'devModeCpTitlePrefix'], 'string'],
+            [['devModeTitlePrefix', 'cpTitlePrefix', 'devModeCpTitlePrefix', 'truncateTitleTags', 'truncateDescriptionTags'], 'string'],
             ['separatorChar', 'string'],
             ['separatorChar', 'default', 'value' => '|'],
             ['maxTitleLength', 'integer', 'min' => 10],
