@@ -1,5 +1,13 @@
 # SEOmatic Changelog
 
+## 3.3.46 - 2021.07.27
+### Added
+* Added support for pulling from Preparse fields for SEO fields (https://github.com/nystudio107/craft-seomatic/issues/927)
+
+### Fixed
+* Fix an issue where `Undefined class constant ‘EVENT_REGISTER_GQL_SCHEMA_COMPONENTS` would be thrown if you were running Craft CMS < `^3.5.0` (https://github.com/nystudio107/craft-seomatic/issues/933)
+* Empty out the entity image settings to ensure the image gets removed if it no longer exists (https://github.com/nystudio107/craft-seomatic/issues/760)
+
 ## 3.3.45 - 2021.07.20
 ### Fixed
 * Fixed an issue where `MedicalBusiness` JSON-LD type didn't inherit all of the properties from `MedicalOrganization` that it should

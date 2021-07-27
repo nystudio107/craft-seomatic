@@ -36,6 +36,8 @@ use verbb\supertable\elements\SuperTableBlockElement as SuperTableBlock;
 use benf\neo\Field as NeoField;
 use benf\neo\elements\Block as NeoBlock;
 
+use besteadfast\preparsefield\fields\PreparseFieldType;
+
 use yii\base\InvalidConfigException;
 
 /**
@@ -63,6 +65,7 @@ class Field
             TagsField::class,
             NeoField::class,
             SuperTableField::class,
+            PreparseFieldType::class,
         ],
         self::ASSET_FIELD_CLASS_KEY => [
             AssetsField::class,

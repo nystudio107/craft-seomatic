@@ -214,6 +214,11 @@ class Seomatic extends Plugin
      */
     public static $craft34 = false;
 
+    /**
+     * @var bool
+     */
+    public static $craft35 = false;
+
     // Static Methods
     // =========================================================================
 
@@ -311,6 +316,7 @@ class Seomatic extends Plugin
         self::$craft32 = version_compare(Craft::$app->getVersion(), '3.2', '>=');
         self::$craft33 = version_compare(Craft::$app->getVersion(), '3.3', '>=');
         self::$craft34 = version_compare(Craft::$app->getVersion(), '3.4', '>=');
+        self::$craft35 = version_compare(Craft::$app->getVersion(), '3.5', '>=');
         $this->name = self::$settings->pluginName;
         // Install our event listeners
         $this->installEventListeners();
@@ -679,19 +685,21 @@ class Seomatic extends Plugin
                     }
                 }
             );
-            // Handler: Gql::EVENT_REGISTER_SCHEMA_COMPONENTS
-            Event::on(
-                Gql::class,
-                Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS,
-                function (RegisterGqlSchemaComponentsEvent $event) {
-                    Craft::debug(
-                        'Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS',
-                        __METHOD__
-                    );
-                    $label = Craft::t('seomatic', 'Seomatic');
-                    $event->queries[$label]['seomatic.all:read'] = ['label' => Craft::t('seomatic', 'Query Seomatic data')];
-                }
-            );
+            if (self::$craft35) {
+                // Handler: Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS
+                Event::on(
+                    Gql::class,
+                    Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS,
+                    function (RegisterGqlSchemaComponentsEvent $event) {
+                        Craft::debug(
+                            'Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS',
+                            __METHOD__
+                        );
+                        $label = Craft::t('seomatic', 'Seomatic');
+                        $event->queries[$label]['seomatic.all:read'] = ['label' => Craft::t('seomatic', 'Query Seomatic data')];
+                    }
+                );
+            }
         }
         // Add support for querying for SEOmatic metadata inside of element queries
         if (self::$craft34) {
