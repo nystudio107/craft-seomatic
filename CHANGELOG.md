@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.3.46 - UNRELEASED
+## 3.3.46 - 2021.07.27
 ### Added
 * Added support for pulling from Preparse fields for SEO fields (https://github.com/nystudio107/craft-seomatic/issues/927)
 
