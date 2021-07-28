@@ -529,8 +529,8 @@ class Sitemaps extends Component implements SitemapInterface
         }
         $site = $sites->getSiteById($siteId);
         $groupId = $site->groupId;
-        $xml = Seomatic::$plugin->sitemaps->renderTemplate(
-            self::SEOMATIC_SITEMAP_CONTAINER,
+        $sitemapTemplate = SitemapTemplate::create();
+        $xml = $sitemapTemplate->render(
             [
                 'groupId' => $groupId,
                 'type' => $type,
