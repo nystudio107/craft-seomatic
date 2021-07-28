@@ -1,127 +1,17 @@
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
 
-{############### SEO Image ###############}
-
-{% set imageOptions = {
-    fromAsset: "Custom Image"|t("seomatic"),
-    fromUrl: "Custom URL"|t("seomatic"),
-} %}
-{% if assetFieldSources is defined and assetFieldSources |length %}
-    {% set imageOptions = { fromField: "From Asset Field"|t("seomatic"), } | merge(imageOptions) %}
-{% endif %}
-
 <div class="field seomatic-imageSourceWrapper" id="metaBundleSettings-seoImageSource-field">
-    <div class="heading">
-        <label id="metaBundleSettings-seoImageSource-label" for="metaBundleSettings-seoImageSource">{{ "SEO Image Source"|t("seomatic") }}</label>
-    </div>
-    <div class="instructions"><p>{{ "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified."|t("seomatic") }}</p>
-    </div>
-    {% namespace "metaBundleSettings" %}
-        <div class="heading">
-            {{ forms.select({
-                id: "seoImageSource",
-                name: "seoImageSource",
-                options: imageOptions,
-                value: metaBundleSettings.seoImageSource,
-                class: "seomatic-imageSourceSelect",
-                errors: metaBundleSettings.getErrors("seoImageSource"),
-            }) }}
-        </div>
-    {% endnamespace %}
+    {############### SEO Image ###############}
 
-    {% if assetFieldSources is defined and assetFieldSources |length %}
-        {% namespace "metaBundleSettings" %}
-            <div class="heading seomatic-imageSourceFromField">
-                <label id="metaBundleSettings-seoImageField-label" for="metaBundleSettings-seoImageField">{{ "Source Field: "|t("seomatic") }}</label>
-                {{ forms.select({
-                    id: "seoImageField",
-                    name: "seoImageField",
-                    options: assetFieldSources,
-                    value: metaBundleSettings.seoImageField,
-                    errors: metaBundleSettings.getErrors("seoImageField"),
-                }) }}
-            </div>
-        {% endnamespace %}
-    {% endif %}
+    {% include "seomatic/settings/_includes/fields/_seoImage.twig" %}
 
-    {% namespace "metaBundleSettings" %}
-        <div class="heading seomatic-imageSourceFromAsset">
-            {{ forms.elementSelect({
-                id: "seoImageIds",
-                name: "seoImageIds",
-                viewMode: "large",
-                elements: seoImageElements,
-                elementType: elementType,
-                criteria: {
-                    kind: ["image"],
-                },
-                jsClass: 'Craft.AssetSelectInput',
-                selectionLabel: "Select SEO Image"|t("seomatic"),
-                sources: [],
-                limit: 1,
-                warning: false,
-                errors: metaBundleSettings.getErrors("seoImageIds"),
-            }) }}
-        </div>
-    {% endnamespace %}
+    {############### SEO Image Transform ###############}
 
-    {% namespace "metaGlobalVars" %}
-        <div class="heading seomatic-imageSourceFromUrl">
-            {{ forms.text({
-                id: "seoImage",
-                name: "seoImage",
-                value: metaGlobalVars.seoImage,
-                class: "nicetext",
-                warning: false,
-                errors: metaBundleSettings.getErrors("seoImage"),
-            }) }}
-        </div>
-    {% endnamespace %}
+    {% include "seomatic/settings/_includes/fields/_seoImageTransform.twig" %}
 
-{############### SEO Image Transform ###############}
+    {############### SEO Image Transform Mode ###############}
 
-    <div class="field seomatic-imageSourceNotFromUrl">
-        <div class="field" {% if field is defined and 'seoImageTransform' not in field.generalEnabledFields %}style="display: none;"{% endif %}>
-            {% namespace "metaBundleSettings" %}
-                {{ forms.lightswitchField({
-                    label: "Transform SEO Image"|t("seomatic"),
-                    instructions: "Whether the SEO image should be automatically transformed to an appropriate file format and aspect ratio."|t("seomatic"),
-                    id: "seoImageTransform",
-                    name: "seoImageTransform",
-                    class: "",
-                    on: metaBundleSettings.seoImageTransform,
-                    warning: false,
-                    errors: metaBundleSettings.getErrors("seoImageTransform"),
-                }) }}
-            {% endnamespace %}
-        </div>
-    </div>
+    {% include "seomatic/settings/_includes/fields/_seoImageTransformMode.twig" %}
 
-{############### SEO Image Transform Mode ###############}
-
-    {% set imageCropModes = {
-        "crop": "Crop"|t("seomatic"),
-        "fit": "Fit"|t("seomatic"),
-        "stretch": "Stretch"|t("seomatic"),
-    } %}
-    {% if pageContext == "field" %}
-        {% set imageCropModes = { "": ""} | merge(imageCropModes) %}
-    {% endif %}
-    <div class="field seomatic-imageSourceNotFromUrl">
-        <div class="field" {% if field is defined and 'seoImageTransformMode' not in field.generalEnabledFields %}style="display: none;"{% endif %}>
-            {% namespace "metaBundleSettings" %}
-                {{ forms.selectField({
-                    label: "SEO Image Transform Mode"|t("seomatic"),
-                    instructions: "The transform mode to use for the SEO Image Transform."|t("seomatic"),
-                    id: "seoImageTransformMode",
-                    name: "seoImageTransformMode",
-                    options: imageCropModes,
-                    value: metaBundleSettings.seoImageTransformMode,
-                    warning: false,
-                    errors: metaBundleSettings.getErrors("seoImageTransformMode"),
-                }) }}
-            {% endnamespace %}
-        </div>
-    </div>
 </div>

@@ -8,13 +8,14 @@
 <div class="inheritable-field {{ isInherited ? 'inherited-settings' : 'defined-settings' }}">
     <div class="field {{ wrapperClass|default('') }}">
         {% if hasInheritableValues %}
-            {{ forms.lightswitchField({
-                className: "override",
-                on: not isInherited,
-                onLabel: "Override"|t("seomatic"),
-                offLabel: fieldLabel,
-                warning: false,
-            }) }}
+            <div class="override">
+                {{ forms.lightswitchField({
+                    on: not isInherited,
+                    onLabel: "Override"|t("seomatic"),
+                    offLabel: fieldLabel,
+                    warning: false,
+                }) }}
+            </div>
         {% else %}
             <div class="heading">
                 <label for="{{ labelFor|default('') }}">{{ fieldLabel }}</label>
