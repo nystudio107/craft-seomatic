@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.47 - UNRELEASED
+### Fixed
+* Fixed an issue where `Sitemaps::invalidateSitemapCache()` wasn't going through the same bottleneck as the sitemap render, and thus wasn't properly hitting the caching layer
+
 ## 3.3.46 - 2021.07.27
 ### Added
 * Added support for pulling from Preparse fields for SEO fields (https://github.com/nystudio107/craft-seomatic/issues/927)
