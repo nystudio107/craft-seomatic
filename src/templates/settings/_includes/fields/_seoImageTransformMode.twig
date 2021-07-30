@@ -16,7 +16,7 @@
         </div>
         {% import "_includes/forms" as forms %}
 
-        <div class="field" {% if field is defined and 'seoImageTransformMode' not in field.generalEnabledFields %}style="display: none;"{% endif %}>
+        <div class="field" {% if field is not null and 'seoImageTransformMode' not in field.generalEnabledFields %}style="display: none;"{% endif %}>
             {% namespace "metaBundleSettings" %}
                 {{ forms.selectField({
                     id: "seoImageTransformMode",
@@ -41,12 +41,12 @@
 
     {% block inheritedValues %}
         {% if inheritedFrom is not null %}
-            {{ _self.transformModeField(field, imageCropModes, inheritedFrom.metaBundleSettings) }}
+            {{ _self.transformModeField(field|default(null), imageCropModes, inheritedFrom.metaBundleSettings) }}
         {% endif %}
     {% endblock %}
 
     {% block field %}
-        {{ _self.transformModeField(field, imageCropModes, metaBundleSettings) }}
+        {{ _self.transformModeField(field|default(null), imageCropModes, metaBundleSettings) }}
     {% endblock %}
 {% endembed %}
 

@@ -13,7 +13,7 @@
     {% macro transformField(field, metaBundleSettings) %}
         {% import "_includes/forms" as forms %}
 
-        <div class="field" {% if field is defined and 'seoImageTransform' not in field.generalEnabledFields %}style="display: none;"{% endif %}>
+        <div class="field" {% if field is not null and 'seoImageTransform' not in field.generalEnabledFields %}style="display: none;"{% endif %}>
             {% namespace "metaBundleSettings" %}
                 {{ forms.lightswitchField({
                     id: "seoImageTransform",
@@ -30,12 +30,12 @@
 
     {% block inheritedValues %}
         {% if inheritedFrom is not null %}
-            {{ _self.transformField(field, inheritedFrom.metaBundleSettings) }}
+            {{ _self.transformField(field|default(null), inheritedFrom.metaBundleSettings) }}
         {% endif %}
     {% endblock %}
 
     {% block field %}
-        {{ _self.transformField(field, metaBundleSettings) }}
+        {{ _self.transformField(field|default(null), metaBundleSettings) }}
     {% endblock %}
 {% endembed %}
 
