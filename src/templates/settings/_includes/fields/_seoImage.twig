@@ -2,7 +2,7 @@
 {% set hasIneritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasIneritableValues and metaGlobalVars.seoKeywords is empty ,
+    'isInherited': hasIneritableValues and metaGlobalVars.seoImage is empty ,
     'hasInheritableValues': hasIneritableValues,
     'fieldLabel': "SEO Image Source"|t("seomatic"),
     'labelFor': 'metaBundleSettings-seoImageSource',
