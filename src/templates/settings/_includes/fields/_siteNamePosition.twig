@@ -4,10 +4,11 @@
 {% set positionSuffix = pageContext == "content" ? " Source" : "" %}
 
 {% set additionalVars = {
-    'isInherited': hasIneritableValues and  metaGlobalVars.siteNamePosition is empty ,
+    'isInherited': hasIneritableValues and seomatic.helper.isInherited(metaGlobalVars, "siteNamePosition"),
     'hasInheritableValues': hasIneritableValues,
     'fieldLabel': "Site Name Position#{positionSuffix}"|t("seomatic"),
-    'labelFor': 'metaBundleSettings-siteNamePositionSource'
+    'labelFor': 'metaBundleSettings-siteNamePositionSource',
+    'settingName': 'siteNamePosition'
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}

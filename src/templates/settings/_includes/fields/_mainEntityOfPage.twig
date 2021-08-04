@@ -2,10 +2,11 @@
 {% set hasIneritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasIneritableValues and metaGlobalVars.mainEntityOfPage is empty ,
+    'isInherited': hasIneritableValues and seomatic.helper.isInherited(metaGlobalVars, "mainEntityOfPage"),
     'hasInheritableValues': hasIneritableValues,
     'fieldLabel': "Main Entity of Page"|t("seomatic"),
-    'labelFor': 'siteType'
+    'labelFor': 'siteType',
+    'settingName': 'mainEntityOfPage'
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}

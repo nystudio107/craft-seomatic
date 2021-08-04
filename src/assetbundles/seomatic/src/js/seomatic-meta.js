@@ -58,17 +58,15 @@ window.seomaticTabChangeHandler();
 function initFieldSettings() {
 
     const disableInputs = ($obj) => $obj.find('input, select, button').prop('disabled', true);
-    const enableInputs = ($obj) => $obj.find('input, select, button').prop('disabled', false);
-
     disableInputs($('.inheritable-field .inherited'));
 
+    $('.inheritable-field .override .lightswitch:not(.on) input').val(0);
     $('.inheritable-field .override .lightswitch').on('change', function (ev) {
         if ($(this).hasClass('on')) {
             $(this).parents('.inheritable-field').addClass('defined-settings').removeClass('inherited-settings');
-            enableInputs($(this).parents('.inheritable-field').find('.field-settings'));
         } else {
             $(this).parents('.inheritable-field').removeClass('defined-settings').addClass('inherited-settings');
-            disableInputs($(this).parents('.inheritable-field').find('.field-settings'));
+            $(this).find('input').val(0);
         }
     });
 
@@ -94,7 +92,6 @@ function initFieldSettings() {
     // Show/hide the image source fields initially
     $('.seomatic-imageSourceSelect > select').each(function(index, value) {
         var popupValue = $(this).val();
-        console.log(popupValue);
         switch (popupValue) {
             case 'sameAsSeo':
                 $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceNotFromUrl').show();

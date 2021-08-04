@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\helpers\UrlHelper;
 use nystudio107\seomatic\models\MetaBundle;
+use nystudio107\seomatic\models\MetaGlobalVars;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\DynamicMeta as DynamicMetaHelper;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
@@ -535,5 +536,24 @@ class Helper extends Component
         }
 
         return null;
+    }
+
+    /**
+     * Return true if a setting is inherited.
+     *
+     * @param MetaGlobalVars $globalVars
+     * @param $settingName
+     * @return bool
+     */
+    public function isInherited(MetaGlobalVars $globalVars, $settingName)
+    {
+        $explicitInherit = array_key_exists($settingName, $globalVars->inherited);
+        $explicitOverride = array_key_exists($settingName, $globalVars->overrides);
+
+        if ($explicitInherit || $explicitOverride) {
+            return $explicitInherit && !$explicitOverride;
+        }
+
+        return empty($globalVars->{$settingName});
     }
 }

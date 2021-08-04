@@ -1,17 +1,69 @@
-{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
-{% import "_includes/forms" as forms %}
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "seoImage") %}
+{% set hasIneritableValues = inheritedFrom is not null %}
 
-<div class="field seomatic-imageSourceWrapper" id="metaBundleSettings-seoImageSource-field">
-    {############### SEO Image ###############}
+{% set additionalVars = {
+    'isInherited': hasIneritableValues and seomatic.helper.isInherited(metaGlobalVars, "seoImage"),
+    'hasInheritableValues': hasIneritableValues,
+    'fieldLabel': "SEO Image Source"|t("seomatic"),
+    'labelFor': 'metaBundleSettings-seoImageSource',
+    'wrapperClass': 'seomatic-imageSourceInnerWrapper',
+    'settingName': 'seoImage'
+} %}
 
-    {% include "seomatic/settings/_includes/fields/_seoImage.twig" %}
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% import "seomatic/settings/_includes/macros.twig" as macros %}
+    {% macro entireSeoImageField(seoImageElement, elementType, imageOptions, field, assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars) %}
+        <div class="field seomatic-imageSourceWrapper" id="metaBundleSettings-seoImageSource-field">
+            <div class="field">
+                {{ macros.seoImageField(seoImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars) }}
+            </div>
+            <div class="field seomatic-imageSourceNotFromUrl">
+                {{ macros.seoImageTransformField(field, metaBundleSettings) }}
+            </div>
+            <div class="field seomatic-imageSourceNotFromUrl">
+                {{ macros.seoImageTransformModeField(field, imageCropModes, metaBundleSettings) }}
+            </div>
+        </div>
+    {% endmacro %}
 
-    {############### SEO Image Transform ###############}
+    {% set imageOptions = {
+        fromAsset: "Custom Image"|t("seomatic"),
+        fromUrl: "Custom URL"|t("seomatic"),
+    } %}
 
-    {% include "seomatic/settings/_includes/fields/_seoImageTransform.twig" %}
+    {% if assetFieldSources is defined and assetFieldSources |length %}
+        {% set imageOptions = { fromField: "From Asset Field"|t("seomatic"), } | merge(imageOptions) %}
+    {% endif %}
 
-    {############### SEO Image Transform Mode ###############}
+    {% set imageCropModes = {
+        "crop": "Crop"|t("seomatic"),
+        "fit": "Fit"|t("seomatic"),
+        "stretch": "Stretch"|t("seomatic"),
+    } %}
 
-    {% include "seomatic/settings/_includes/fields/_seoImageTransformMode.twig" %}
+    {% if pageContext == "field" %}
+        {% set imageCropModes = { "": ""} | merge(imageCropModes) %}
+    {% endif %}
 
-</div>
+    {% block inheritedValues %}
+        {% if inheritedFrom is not null %}
+            {% if inheritedFrom.metaBundleSettings.seoImageIds|length > 0 %}
+                {%  set seoImageElement = craft.assets.id(inheritedFrom.metaBundleSettings.seoImageIds).limit(1).all() %}
+            {% else %}
+                {%  set seoImageElement = [] %}
+            {% endif %}
+
+            {{ _self.entireSeoImageField(seoImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
+        {% endif %}
+    {% endblock %}
+
+    {% block field %}
+        {% if metaBundleSettings.seoImageIds|length > 0 %}
+            {%  set seoImageElement = craft.assets.id(metaBundleSettings.seoImageIds).limit(1).all() %}
+        {% else %}
+            {%  set seoImageElement = [] %}
+        {% endif %}
+
+        {{ _self.entireSeoImageField(seoImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars) }}
+    {% endblock %}
+{% endembed %}

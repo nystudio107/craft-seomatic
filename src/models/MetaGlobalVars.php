@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\models;
 
+use craft\helpers\StringHelper;
 use nystudio107\seomatic\base\VarsModel;
 
 /**
@@ -186,6 +187,16 @@ class MetaGlobalVars extends VarsModel
      */
     public $twitterImageDescription;
 
+    /**
+     * @var array A list of all the settings for which the inherited values should be used.
+     */
+    public $inherited = [];
+
+    /**
+     * @var array A list of all the settings for which the inherited values are overridden.
+     */
+    public $overrides = [];
+
     // Public Methods
     // =========================================================================
 
@@ -197,6 +208,34 @@ class MetaGlobalVars extends VarsModel
         // Unset any deprecated properties
         //unset($config['siteNamePosition']);
         parent::__construct($config);
+    }
+
+    /**
+     * Keep track of which settings to use the override for.
+     *
+     * @param string $name
+     * @param mixed $value
+     * @throws \yii\base\UnknownPropertyException
+     */
+    public function __set($name, $value)
+    {
+        if (StringHelper::startsWith($name, 'override-')) {
+            $remainder = StringHelper::removeLeft($name, 'override-');
+
+            if ($remainder) {
+                if ($value) {
+                    $this->overrides[$remainder] = true;
+                    unset($this->inherited[$remainder]);
+                } else {
+                    $this->inherited[$remainder] = true;
+                    unset($this->overrides[$remainder]);
+                }
+            }
+
+            return;
+        }
+
+        parent::__set($name, $value);
     }
 
     /**

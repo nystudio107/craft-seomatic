@@ -606,7 +606,11 @@ class MetaBundles extends Component
             );
             // metaGlobalVars
             $attributes = $metaBundle->metaGlobalVars->getAttributes();
+            $inherited = ArrayHelper::remove($attributes, 'inherited', []);
+
             $emptyValues = array_fill_keys(array_keys(array_diff_key($attributes, $seoSettingsEnabledFields)), '');
+            $emptyValues = array_merge($emptyValues, array_fill_keys(array_keys($inherited), ''));
+
             $attributes = array_merge($attributes, $emptyValues);
             $metaBundle->metaGlobalVars->setAttributes($attributes, false);
             // Handle the mainEntityOfPage

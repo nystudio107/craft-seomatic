@@ -2,11 +2,12 @@
 {% set hasIneritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasIneritableValues and metaGlobalVars.seoImageDescription is empty ,
+    'isInherited': hasIneritableValues and seomatic.helper.isInherited(metaGlobalVars, "seoImageDescription"),
     'hasInheritableValues': hasIneritableValues,
     'wrapperClass': 'seomatic-textSourceWrapper',
     'fieldLabel': "SEO Image Description Source"|t("seomatic"),
-    'labelFor': 'metaBundleSettings-seoImageDescriptionSource'
+    'labelFor': 'metaBundleSettings-seoImageDescriptionSource',
+    'settingName': 'seoImageDescription'
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
