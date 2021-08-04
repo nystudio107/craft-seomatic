@@ -250,32 +250,6 @@ class SeoSettings extends Field implements PreviewableFieldInterface
      */
     public function serializeValue($value, ElementInterface $element = null)
     {
-        // If the field replicates values from the Content SEO settings, nullify them
-        if ($element !== null && $value instanceof MetaBundle && Seomatic::$plugin->migrationsAndSchemaReady()) {
-            list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId, $typeId)
-                = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
-            $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
-                $sourceBundleType,
-                $sourceId,
-                $sourceSiteId
-            );
-            if ($metaBundle) {
-                foreach (self::BUNDLE_COMPARE_FIELDS as $fieldName) {
-                    $bundleAttributes = $metaBundle->$fieldName->getAttributes();
-                    $fieldAttributes = $value->$fieldName->getAttributes();
-                    if (!empty($bundleAttributes) && !empty($fieldAttributes)) {
-                        $intersect = array_intersect_assoc($bundleAttributes, $fieldAttributes);
-                        $intersect = array_filter(
-                            $intersect,
-                            [ArrayHelper::class, 'preserveBools']
-                        );
-                        foreach ($intersect as $intersectKey => $intersectValue) {
-                            $value->$fieldName[$intersectKey] = '';
-                        }
-                    }
-                }
-            }
-        }
         $value = parent::serializeValue($value, $element);
         if (!Craft::$app->getDb()->getSupportsMb4()) {
             if (\is_string($value)) {
@@ -386,10 +360,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
 
         /** @var MetaBundle $value */
         $variables['elementType'] = Asset::class;
-        $variables['seoImageElements'] = ImageTransformHelper::assetElementsFromIds(
-            $value->metaBundleSettings->seoImageIds,
-            null
-        );
+
         $variables['twitterImageElements'] = ImageTransformHelper::assetElementsFromIds(
             $value->metaBundleSettings->twitterImageIds,
             null
