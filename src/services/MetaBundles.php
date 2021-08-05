@@ -68,6 +68,16 @@ class MetaBundles extends Component
         'ogImageDescription',
     ];
 
+    const COMPOSITE_INHERITANCE_CHILDREN = [
+        'seoImage' => [
+            'metaBundleSettings.seoImageTransformMode',
+            'metaBundleSettings.seoImageTransform',
+            'metaBundleSettings.seoImageSource',
+            'metaBundleSettings.seoImageField',
+            'metaBundleSettings.seoImageIds',
+        ]
+    ];
+
     // Protected Properties
     // =========================================================================
 
@@ -606,13 +616,25 @@ class MetaBundles extends Component
             );
             // metaGlobalVars
             $attributes = $metaBundle->metaGlobalVars->getAttributes();
-            $inherited = ArrayHelper::remove($attributes, 'inherited', []);
+
+            // Get a list of explicitly inherited values
+            $inherited = array_keys(ArrayHelper::remove($attributes, 'inherited', []));
 
             $emptyValues = array_fill_keys(array_keys(array_diff_key($attributes, $seoSettingsEnabledFields)), '');
-            $emptyValues = array_merge($emptyValues, array_fill_keys(array_keys($inherited), ''));
+
+            // Nullify the inherited values
+            $emptyValues = array_merge($emptyValues, array_fill_keys($inherited, ''));
+            foreach ($inherited as $inheritedAttribute) {
+                foreach (self::COMPOSITE_INHERITANCE_CHILDREN[$inheritedAttribute] ?? [] as $child) {
+                    list ($model, $attribute) = explode('.', $child);
+                    $metaBundle->{$model}->$attribute = '';
+                }
+            }
 
             $attributes = array_merge($attributes, $emptyValues);
             $metaBundle->metaGlobalVars->setAttributes($attributes, false);
+
+
             // Handle the mainEntityOfPage
             if (!\in_array('mainEntityOfPage', $seoSettingsField->generalEnabledFields, false)) {
                 $metaBundle->metaGlobalVars->mainEntityOfPage = '';
