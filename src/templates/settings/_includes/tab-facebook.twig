@@ -6,6 +6,21 @@
     {% include "seomatic/_includes/facebookPreview.twig" %}
 {% endif %}
 
+{% if parentBundles is not defined %}
+    {% set parentBundles = [] %}
+{% endif %}
+
+{% set textOptions = {
+  fromCustom: "Custom Text"|t("seomatic"),
+} %}
+
+{% if textFieldSources is defined and textFieldSources |length %}
+    {% set textOptions = { fromField: "From Field"|t("seomatic"), } | merge(textOptions) %}
+{% endif %}
+
+{% set textOptions = { sameAsSeo: "Same as SEO Title"|t("seomatic"), } | merge(textOptions) %}
+
+
 {############### Facebook OpenGraph Type ###############}
 
 {% if field is not defined or 'ogType' in field.facebookEnabledFields %}
@@ -20,51 +35,8 @@
 
 {############### Facebook OpenGraph Site Name Position ###############}
 
-{% set textOptions = {
-    fromCustom: "Custom Position"|t("seomatic"),
-} %}
-{% set textOptions = { sameAsSeo: "Same as Site Name Position"|t("seomatic"), } | merge(textOptions) %}
-{% if pageContext == "content" %}
-    {% set textOptions = { sameAsGlobal: "Same as Global Facebook OpenGraph Site Name Position"|t("seomatic"), } | merge(textOptions) %}
-{% endif %}
-
 {% if field is not defined or 'ogSiteNamePosition' in field.facebookEnabledFields %}
-    <div class="field seomatic-textSourceWrapper" id="metaBundleSettings-ogSiteNamePositionSource-field">
-        <div class="heading">
-            <label id="metaBundleSettings-ogSiteNamePositionSource-label" for="metaBundleSettings-ogSiteNamePositionSource">{{ "Facebook OpenGraph Site Name Position Source"|t("seomatic") }}</label>
-        </div>
-        <div class="instructions"><p>{{ "Where the Site Name is placed relative to the Facebook OpenGraph Title in the &lt;og:title&gt; tag"|t("seomatic") |raw }}</p>
-        </div>
-        {% namespace "metaBundleSettings" %}
-            <div class="heading">
-                {{ forms.select({
-                    id: "ogSiteNamePositionSource",
-                    name: "ogSiteNamePositionSource",
-                    options: textOptions,
-                    value: metaBundleSettings.ogSiteNamePositionSource,
-                    class: "seomatic-textSourceSelect",
-                    errors: metaBundleSettings.getErrors("ogSiteNamePositionSource"),
-                }) }}
-            </div>
-        {% endnamespace %}
-
-        {% namespace "metaGlobalVars" %}
-        <div class="heading seomatic-textSourceFromUrl">
-            {{ forms.selectField({
-                id: "ogSiteNamePosition",
-                name: "ogSiteNamePosition",
-                options: {
-                    before: "Before"|t("seomatic"),
-                    after: "After"|t("seomatic"),
-                    none: "None"|t("seomatic"),
-                },
-                value: metaGlobalVars.ogSiteNamePosition,
-                warning: false,
-                errors: metaGlobalVars.getErrors("ogSiteNamePosition"),
-            }) }}
-        </div>
-        {% endnamespace %}
-    </div>
+    {% include "seomatic/settings/_includes/fields/_siteNamePosition.twig" %}
 {% endif %}
 
 {############### Facebook OpenGraph Description ###############}
