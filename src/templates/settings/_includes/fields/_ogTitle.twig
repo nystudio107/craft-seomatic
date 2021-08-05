@@ -2,11 +2,12 @@
 {% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasInheritableValues and metaGlobalVars.ogTitle is empty,
+    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaGlobalVars, "ogTitle"),
     'hasInheritableValues': hasInheritableValues,
     'wrapperClass': 'seomatic-textSourceWrapper',
     'fieldLabel': "Facebook OpenGraph Title Source"|t("seomatic"),
-    'labelFor': 'metaBundleSettings-ogTitleSource'
+    'labelFor': 'metaBundleSettings-ogTitleSource',
+    'settingName': 'ogTitle'
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
@@ -58,17 +59,6 @@
             </div>
         {% endnamespace %}
     {% endmacro %}
-
-
-    {% set textOptions = {
-        fromCustom: "Custom Text"|t("seomatic"),
-    } %}
-
-    {% if textFieldSources is defined and textFieldSources |length %}
-        {% set textOptions = { fromField: "From Field"|t("seomatic"), } | merge(textOptions) %}
-    {% endif %}
-
-    {% set textOptions = { sameAsSeo: "Same as SEO Title"|t("seomatic"), } | merge(textOptions) %}
 
     {% block inheritedValues %}
         {% if inheritedFrom is not null %}
