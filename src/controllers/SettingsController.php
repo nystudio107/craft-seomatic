@@ -562,10 +562,6 @@ class SettingsController extends Controller
             false
         );
 
-        $globalMeta = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
-
-        $variables['parentBundles'] = [$globalMeta];
-
         // Render the template
         return $this->renderTemplate('seomatic/settings/content/'.$subSection, $variables);
     }
