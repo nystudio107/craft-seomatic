@@ -54,67 +54,6 @@
 
 {############### Twitter Image Description ###############}
 
-{% set textOptions = {
-    fromCustom: "Custom Text"|t("seomatic"),
-} %}
-{% if textFieldSources is defined and textFieldSources |length %}
-    {% set textOptions = { summaryFromField: "Summary From Field"|t("seomatic"), } | merge(textOptions) %}
-    {% set textOptions = { fromField: "From Field"|t("seomatic"), } | merge(textOptions) %}
-{% endif %}
-{% set textOptions = { sameAsSeo: "Same As SEO Image Description"|t("seomatic"), } | merge(textOptions) %}
-
-{% if pageContext == "field" %}
-    {% set textOptions = { "": ""} | merge(textOptions) %}
-{% endif %}
-
 {% if field is not defined or 'twitterImageDescription' in field.twitterEnabledFields %}
-    <div class="field seomatic-textSourceWrapper" id="metaBundleSettings-twitterImageDescriptionSource-field">
-        <div class="heading">
-            <label id="metaBundleSettings-twitterImageDescriptionSource-label" for="metaBundleSettings-twitterImageDescriptionSource">{{ "Twitter Image Description Source"|t("seomatic") }}</label>
-        </div>
-        <div class="instructions"><p>{{ "A text description of the image conveying the essential nature of an image to users who are visually impaired."|t("seomatic") }}</p>
-        </div>
-        {% namespace "metaBundleSettings" %}
-            <div class="heading">
-                {{ forms.select({
-                    id: "twitterImageDescriptionSource",
-                    name: "twitterImageDescriptionSource",
-                    options: textOptions,
-                    value: metaBundleSettings.twitterImageDescriptionSource,
-                    class: "seomatic-textSourceSelect",
-                    errors: metaBundleSettings.getErrors("twitterImageDescriptionSource"),
-                }) }}
-            </div>
-        {% endnamespace %}
-
-        {% if textFieldSources is defined and textFieldSources |length %}
-            {% namespace "metaBundleSettings" %}
-                <div class="heading seomatic-textSourceFromField">
-                    <label id="metaBundleSettings-twitterImageDescriptionField-label" for="metaBundleSettings-twitterImageDescriptionField">{{ "Source Field: "|t("seomatic") }}</label>
-                    {{ forms.select({
-                        id: "twitterImageDescriptionField",
-                        name: "twitterImageDescriptionField",
-                        options: textFieldSources,
-                        value: metaBundleSettings.twitterImageDescriptionField,
-                        errors: metaBundleSettings.getErrors("twitterImageDescriptionField"),
-                    }) }}
-                </div>
-            {% endnamespace %}
-        {% endif %}
-
-        {% namespace "metaGlobalVars" %}
-            <div class="input ltr seomatic-textSourceFromUrl">
-                {{ forms.textAreaField({
-                    id: "twitterImageDescription",
-                    name: "twitterImageDescription",
-                    value: metaGlobalVars.twitterImageDescription,
-                    class: "nicetext",
-                    maxlength: 420,
-                    showCharsLeft: true,
-                    warning: false,
-                    errors: metaGlobalVars.getErrors("twitterImageDescription"),
-                }) }}
-            </div>
-        {% endnamespace %}
-    </div>
+    {% include "seomatic/settings/_includes/fields/_twitterImageDescription.twig" %}
 {% endif %}
