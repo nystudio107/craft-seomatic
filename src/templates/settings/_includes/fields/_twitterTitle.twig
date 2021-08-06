@@ -1,30 +1,30 @@
-{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "ogTitle") %}
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "twitterTitle") %}
 {% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaGlobalVars, "ogTitle"),
+    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaGlobalVars, "twitterTitle"),
     'hasInheritableValues': hasInheritableValues,
     'wrapperClass': 'seomatic-textSourceWrapper',
-    'fieldLabel': "Facebook OpenGraph Title Source"|t("seomatic"),
-    'labelFor': 'metaBundleSettings-ogTitleSource',
-    'settingName': 'ogTitle'
+    'fieldLabel': "Twitter Title Source"|t("seomatic"),
+    'labelFor': 'metaBundleSettings-twitterTitleSource',
+    'settingName': 'twitterTitle'
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro ogTitleField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars) %}
+    {% macro twitterTitleField(textOptions, textFieldSources, metaBundleSettings, metaGlobalVars) %}
         <div class="instructions">
-            <p>{{ "The Facebook OpenGraph Title is displayed in bold at the top of your Facebook card. Make sure it is a pithy summary of your webpage."|t("seomatic") }}</p>
+            <p>{{ "The Twitter Title is displayed in bold at the top of your Twitter card. Make sure it is a pithy summary of your webpage."|t("seomatic") }}</p>
         </div>
         {% import "_includes/forms" as forms %}
         {% namespace "metaBundleSettings" %}
             <div class="heading">
                 {{ forms.select({
-                    id: "ogTitleSource",
-                    name: "ogTitleSource",
+                    id: "twitterTitleSource",
+                    name: "twitterTitleSource",
                     options: textOptions,
-                    value: metaBundleSettings.ogTitleSource,
+                    value: metaBundleSettings.twitterTitleSource,
                     class: "seomatic-textSourceSelect",
-                    errors: metaBundleSettings.getErrors("ogTitleSource"),
+                    errors: metaBundleSettings.getErrors("twitterTitleSource"),
                 }) }}
             </div>
         {% endnamespace %}
@@ -32,13 +32,13 @@
         {% if textFieldSources is defined and textFieldSources |length %}
             {% namespace "metaBundleSettings" %}
                 <div class="heading seomatic-textSourceFromField">
-                    <label id="metaBundleSettings-ogTitleField-label" for="metaBundleSettings-ogTitleField">{{ "Source Field: "|t("seomatic") }}</label>
+                    <label id="metaBundleSettings-twitterTitleField-label" for="metaBundleSettings-twitterTitleField">{{ "Source Field: "|t("seomatic") }}</label>
                     {{ forms.select({
-                        id: "ogTitleField",
-                        name: "ogTitleField",
+                        id: "twitterTitleField",
+                        name: "twitterTitleField",
                         options: textFieldSources,
-                        value: metaBundleSettings.ogTitleField,
-                        errors: metaBundleSettings.getErrors("ogTitleField"),
+                        value: metaBundleSettings.twitterTitleField,
+                        errors: metaBundleSettings.getErrors("twitterTitleField"),
                     }) }}
                 </div>
             {% endnamespace %}
@@ -47,14 +47,14 @@
         {% namespace "metaGlobalVars" %}
             <div class="input ltr seomatic-textSourceFromUrl">
                 {{ forms.text({
-                    id: "ogTitle",
-                    name: "ogTitle",
-                    value: metaGlobalVars.ogTitle,
+                    id: "twitterTitle",
+                    name: "twitterTitle",
+                    value: metaGlobalVars.twitterTitle,
                     class: "nicetext",
                     maxlength: seomatic.config.maxTitleLength,
                     showCharsLeft: true,
                     warning: false,
-                    errors: metaGlobalVars.getErrors("ogTitle"),
+                    errors: metaGlobalVars.getErrors("twitterTitle"),
                 }) }}
             </div>
         {% endnamespace %}
@@ -63,20 +63,20 @@
     {% set textOptions = {
         fromCustom: "Custom Text"|t("seomatic"),
     } %}
-
+    
     {% if textFieldSources is defined and textFieldSources |length %}
         {% set textOptions = { fromField: "From Field"|t("seomatic"), } | merge(textOptions) %}
     {% endif %}
-
+    
     {% set textOptions = { sameAsSeo: "Same as SEO Title"|t("seomatic"), } | merge(textOptions) %}
-
+    
     {% block inheritedValues %}
         {% if inheritedFrom is not null %}
-            {{ _self.ogTitleField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
+            {{ _self.twitterTitleField(textOptions, textFieldSources, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
         {% endif %}
     {% endblock %}
 
     {% block field %}
-        {{ _self.ogTitleField(textOptions, textFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars) }}
+        {{ _self.twitterTitleField(textOptions, textFieldSources, metaBundleSettings, metaGlobalVars) }}
     {% endblock %}
 {% endembed %}

@@ -1,0 +1,67 @@
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "twitterSiteNamePosition") %}
+{% set hasIneritableValues = inheritedFrom is not null %}
+
+{% set additionalVars = {
+    'isInherited': hasIneritableValues and seomatic.helper.isInherited(metaGlobalVars, "twitterSiteNamePosition"),
+    'hasInheritableValues': hasIneritableValues,
+    'fieldLabel': "Twitter Site Name Position Source"|t("seomatic"),
+    'labelFor': 'metaBundleSettings-twitterSiteNamePositionSource',
+    'wrapperClass': 'seomatic-textSourceWrapper',
+    'settingName': 'twitterSiteNamePosition'
+} %}
+
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro twitterSiteNamePositionField(textOptions, metaBundleSettings, metaGlobalVars) %}
+        {% import "_includes/forms" as forms %}
+
+        <div class="instructions">
+            {{ "Where the Site Name is placed relative to the Twitter Title in the &lt;twitter:title&gt; tag"|t("seomatic") |raw }}
+        </div>
+        {% namespace "metaBundleSettings" %}
+            <div class="heading">
+                {{ forms.select({
+                    id: "twitterSiteNamePositionSource",
+                    name: "twitterSiteNamePositionSource",
+                    options: textOptions,
+                    value: metaBundleSettings.twitterSiteNamePositionSource,
+                    class: "seomatic-textSourceSelect",
+                    errors: metaBundleSettings.getErrors("twitterSiteNamePositionSource"),
+                }) }}
+            </div>
+        {% endnamespace %}
+
+        {% namespace "metaGlobalVars" %}
+            <div class="heading seomatic-textSourceFromUrl">
+                {{ forms.selectField({
+                    id: "twitterSiteNamePosition",
+                    name: "twitterSiteNamePosition",
+                    options: {
+                        before: "Before"|t("seomatic"),
+                        after: "After"|t("seomatic"),
+                        none: "None"|t("seomatic"),
+                    },
+                    value: metaGlobalVars.twitterSiteNamePosition,
+                    warning: false,
+                    errors: metaGlobalVars.getErrors("twitterSiteNamePosition"),
+                }) }}
+            </div>
+        {% endnamespace %}
+    {% endmacro %}
+
+
+    {% set textOptions = {
+        fromCustom: "Custom Position"|t("seomatic"),
+    } %}
+    {% set textOptions = { sameAsSeo: "Same as Site Name Position"|t("seomatic"), } | merge(textOptions) %}
+    {% if pageContext == "content" %}
+        {% set textOptions = { sameAsGlobal: "Same as Global Twitter Site Name Position"|t("seomatic"), } | merge(textOptions) %}
+    {% endif %}
+
+    {% block inheritedValues %}
+        {{ _self.twitterSiteNamePositionField(textOptions, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
+    {% endblock %}
+
+    {% block field %}
+        {{ _self.twitterSiteNamePositionField(textOptions, metaBundleSettings, metaGlobalVars) }}
+    {% endblock %}
+{% endembed %}

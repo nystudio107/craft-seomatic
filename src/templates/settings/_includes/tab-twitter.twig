@@ -6,264 +6,37 @@
     {% include "seomatic/_includes/twitterPreview.twig" %}
 {% endif %}
 
-{############### Twitter Card Type ###############}
-
-{% set twitterCardTypes = {
-    summary: "Summary Card"|t("seomatic"),
-    summary_large_image: "Summary Card with Large Image"|t("seomatic"),
-    app: "App Card"|t("seomatic"),
-    player: "Player Card"|t("seomatic"),
-} %}
-{% if pageContext == "field" %}
-    {% set twitterCardTypes = { "": ""} | merge(twitterCardTypes) %}
+{% if parentBundles is not defined %}
+    {% set parentBundles = [] %}
 {% endif %}
 
+{############### Twitter Card Type ###############}
+
 {% if field is not defined or 'twitterCardType' in field.twitterEnabledFields %}
-    {% namespace "metaGlobalVars" %}
-        {{ forms.selectField({
-            label: "Twitter Card Type"|t("seomatic"),
-            instructions: "With Twitter Cards, you can attach rich photos and information to Tweets that drive traffic to your website. Users who Tweet links to your content will have a 'Card' added to the Tweet that’s visible to all of their followers."|t("seomatic"),
-            id: "twitterCard",
-            name: "twitterCard",
-            options: twitterCardTypes,
-            value: metaGlobalVars.twitterCard,
-            errors: metaGlobalVars.getErrors("twitterCard"),
-        }) }}
-    {% endnamespace %}
+    {% include "seomatic/settings/_includes/fields/_twitterCardTypes.twig" %}
 {% endif %}
 
 {############### Twitter Creator ###############}
 
-{% set textOptions = {
-    fromCustom: "Custom Text"|t("seomatic"),
-} %}
-{% if userFieldSources is defined and userFieldSources |length %}
-    {% set textOptions = { fromUserField: "From User Field"|t("seomatic"), } | merge(textOptions) %}
-{% endif %}
-{% set textOptions = { sameAsSiteTwitter: "Same as Site Twitter Handle"|t("seomatic"), } | merge(textOptions) %}
-
 {% if field is not defined or 'twitterCreator' in field.twitterEnabledFields %}
-    <div class="field seomatic-textSourceWrapper" id="metaBundleSettings-twitterCreatorSource-field">
-        <div class="heading">
-            <label id="metaBundleSettings-twitterCreatorSource-label" for="metaBundleSettings-twitterTitleSource">{{ "Twitter Creator Source"|t("seomatic") }}</label>
-        </div>
-        <div class="instructions"><p>{{ "Twitter username for the content creator / author, without the preceding @."|t("seomatic") }}</p>
-        </div>
-        {% namespace "metaBundleSettings" %}
-            <div class="heading">
-                {{ forms.select({
-                    id: "twitterCreatorSource",
-                    name: "twitterCreatorSource",
-                    options: textOptions,
-                    value: metaBundleSettings.twitterCreatorSource,
-                    class: "seomatic-textSourceSelect",
-                    errors: metaBundleSettings.getErrors("twitterCreatorSource"),
-                }) }}
-            </div>
-        {% endnamespace %}
-
-        {% if userFieldSources is defined and userFieldSources |length %}
-            {% namespace "metaBundleSettings" %}
-                <div class="heading seomatic-textSourceFromField">
-                    <label id="metaBundleSettings-twitterCreatorField-label" for="metaBundleSettings-twitterCreatorField">{{ "Source Field: "|t("seomatic") }}</label>
-                    {{ forms.select({
-                        id: "twitterCreatorField",
-                        name: "twitterCreatorField",
-                        options: userFieldSources,
-                        value: metaBundleSettings.twitterCreatorField,
-                        errors: metaBundleSettings.getErrors("twitterCreatorField"),
-                    }) }}
-                </div>
-            {% endnamespace %}
-        {% endif %}
-
-        {% namespace "metaGlobalVars" %}
-        <div class="heading seomatic-textSourceFromUrl">
-            {{ forms.text({
-                id: "twitterCreator",
-                name: "twitterCreator",
-                value: metaGlobalVars.twitterCreator,
-                class: "nicetext",
-                warning: false,
-                errors: metaGlobalVars.getErrors("twitterCreator"),
-            }) }}
-        </div>
-    {% endnamespace %}
-    </div>
+    {% include "seomatic/settings/_includes/fields/_twitterCreator.twig" %}
 {% endif %}
 
 {############### Twitter Title ###############}
-
-{% set textOptions = {
-    fromCustom: "Custom Text"|t("seomatic"),
-} %}
-{% if textFieldSources is defined and textFieldSources |length %}
-    {% set textOptions = { fromField: "From Field"|t("seomatic"), } | merge(textOptions) %}
-{% endif %}
-{% set textOptions = { sameAsSeo: "Same as SEO Title"|t("seomatic"), } | merge(textOptions) %}
-
 {% if field is not defined or 'twitterTitle' in field.twitterEnabledFields %}
-    <div class="field seomatic-textSourceWrapper" id="metaBundleSettings-twitterTitleSource-field">
-        <div class="heading">
-            <label id="metaBundleSettings-twitterTitleSource-label" for="metaBundleSettings-twitterTitleSource">{{ "Twitter Title Source"|t("seomatic") }}</label>
-        </div>
-        <div class="instructions"><p>{{ "The Twitter Title is displayed in bold at the top of your Twitter card. Make sure it is a pithy summary of your webpage."|t("seomatic") }}</p>
-        </div>
-        {% namespace "metaBundleSettings" %}
-            <div class="heading">
-                {{ forms.select({
-                    id: "twitterTitleSource",
-                    name: "twitterTitleSource",
-                    options: textOptions,
-                    value: metaBundleSettings.twitterTitleSource,
-                    class: "seomatic-textSourceSelect",
-                    errors: metaBundleSettings.getErrors("twitterTitleSource"),
-                }) }}
-            </div>
-        {% endnamespace %}
-
-        {% if textFieldSources is defined and textFieldSources |length %}
-            {% namespace "metaBundleSettings" %}
-                <div class="heading seomatic-textSourceFromField">
-                    <label id="metaBundleSettings-twitterTitleField-label" for="metaBundleSettings-twitterTitleField">{{ "Source Field: "|t("seomatic") }}</label>
-                    {{ forms.select({
-                        id: "twitterTitleField",
-                        name: "twitterTitleField",
-                        options: textFieldSources,
-                        value: metaBundleSettings.twitterTitleField,
-                        errors: metaBundleSettings.getErrors("twitterTitleField"),
-                    }) }}
-                </div>
-            {% endnamespace %}
-        {% endif %}
-
-        {% namespace "metaGlobalVars" %}
-            <div class="input ltr seomatic-textSourceFromUrl">
-                {{ forms.text({
-                    id: "twitterTitle",
-                    name: "twitterTitle",
-                    value: metaGlobalVars.twitterTitle,
-                    class: "nicetext",
-                    maxlength: seomatic.config.maxTitleLength,
-                    showCharsLeft: true,
-                    warning: false,
-                    errors: metaGlobalVars.getErrors("twitterTitle"),
-                }) }}
-            </div>
-        {% endnamespace %}
-    </div>
+    {% include "seomatic/settings/_includes/fields/_twitterTitle.twig" %}
 {% endif %}
 
 {############### Twitter Site Name Position ###############}
 
-{% set textOptions = {
-    fromCustom: "Custom Position"|t("seomatic"),
-} %}
-{% set textOptions = { sameAsSeo: "Same as Site Name Position"|t("seomatic"), } | merge(textOptions) %}
-{% if pageContext == "content" %}
-    {% set textOptions = { sameAsGlobal: "Same as Global Twitter Site Name Position"|t("seomatic"), } | merge(textOptions) %}
-{% endif %}
-
 {% if field is not defined or 'twitterSiteNamePosition' in field.twitterEnabledFields %}
-    <div class="field seomatic-textSourceWrapper" id="metaBundleSettings-twitterSiteNamePositionSource-field">
-        <div class="heading">
-            <label id="metaBundleSettings-twitterSiteNamePositionSource-label" for="metaBundleSettings-twitterSiteNamePositionSource">{{ "Twitter Site Name Position Source"|t("seomatic") }}</label>
-        </div>
-        <div class="instructions"><p>{{ "Where the Site Name is placed relative to the Twitter Title in the &lt;twitter:title&gt; tag"|t("seomatic") |raw }}</p>
-        </div>
-        {% namespace "metaBundleSettings" %}
-            <div class="heading">
-                {{ forms.select({
-                    id: "twitterSiteNamePositionSource",
-                    name: "twitterSiteNamePositionSource",
-                    options: textOptions,
-                    value: metaBundleSettings.twitterSiteNamePositionSource,
-                    class: "seomatic-textSourceSelect",
-                    errors: metaBundleSettings.getErrors("twitterSiteNamePositionSource"),
-                }) }}
-            </div>
-        {% endnamespace %}
-
-        {% namespace "metaGlobalVars" %}
-            <div class="heading seomatic-textSourceFromUrl">
-                {{ forms.selectField({
-                    id: "twitterSiteNamePosition",
-                    name: "twitterSiteNamePosition",
-                    options: {
-                        before: "Before"|t("seomatic"),
-                        after: "After"|t("seomatic"),
-                        none: "None"|t("seomatic"),
-                    },
-                    value: metaGlobalVars.twitterSiteNamePosition,
-                    warning: false,
-                    errors: metaGlobalVars.getErrors("twitterSiteNamePosition"),
-                }) }}
-            </div>
-        {% endnamespace %}
-    </div>
+    {% include "seomatic/settings/_includes/fields/_twitterSiteNamePosition.twig" %}
 {% endif %}
 
 {############### Twitter Description ###############}
 
-{% set textOptions = {
-    fromCustom: "Custom Text"|t("seomatic"),
-} %}
-{% if textFieldSources is defined and textFieldSources |length %}
-    {% set textOptions = { summaryFromField: "Summary From Field"|t("seomatic"), } | merge(textOptions) %}
-    {% set textOptions = { fromField: "From Field"|t("seomatic"), } | merge(textOptions) %}
-{% endif %}
-{% set textOptions = { sameAsSeo: "Same as SEO Description"|t("seomatic"), } | merge(textOptions) %}
-
 {% if field is not defined or 'twitterDescription' in field.twitterEnabledFields %}
-    <div class="field seomatic-textSourceWrapper" id="metaBundleSettings-twitterDescriptionSource-field">
-        <div class="heading">
-            <label id="metaBundleSettings-twitterDescriptionSource-label" for="metaBundleSettings-twitterDescriptionSource">{{ "Twitter Description Source"|t("seomatic") }}</label>
-        </div>
-        <div class="instructions"><p>{{ "Twitter descriptions are displayed below the Twitter Title in your Twitter Cards. Use them to provide a summary of what your page is about."|t("seomatic") }}</p>
-        </div>
-        {% namespace "metaBundleSettings" %}
-            <div class="heading">
-                {{ forms.select({
-                    id: "twitterDescriptionSource",
-                    name: "twitterDescriptionSource",
-                    options: textOptions,
-                    value: metaBundleSettings.twitterDescriptionSource,
-                    class: "seomatic-textSourceSelect",
-                    errors: metaBundleSettings.getErrors("twitterDescriptionSource"),
-                }) }}
-            </div>
-        {% endnamespace %}
-
-        {% if textFieldSources is defined and textFieldSources |length %}
-            {% namespace "metaBundleSettings" %}
-                <div class="heading seomatic-textSourceFromField">
-                    <label id="metaBundleSettings-twitterDescriptionField-label" for="metaBundleSettings-twitterDescriptionField">{{ "Source Field: "|t("seomatic") }}</label>
-                    {{ forms.select({
-                        id: "twitterDescriptionField",
-                        name: "twitterDescriptionField",
-                        options: textFieldSources,
-                        value: metaBundleSettings.twitterDescriptionField,
-                        errors: metaBundleSettings.getErrors("twitterDescriptionField"),
-                    }) }}
-                </div>
-            {% endnamespace %}
-        {% endif %}
-
-        {% namespace "metaGlobalVars" %}
-            <div class="input ltr seomatic-textSourceFromUrl">
-                {{ forms.textArea({
-                    id: "twitterDescription",
-                    name: "twitterDescription",
-                    value: metaGlobalVars.twitterDescription,
-                    class: "nicetext",
-                    maxlength: 200,
-                    showCharsLeft: true,
-                    warning: false,
-                    errors: metaGlobalVars.getErrors("twitterDescription"),
-                }) }}
-            </div>
-        {% endnamespace %}
-    </div>
+    {% include "seomatic/settings/_includes/fields/_twitterDescription.twig" %}
 {% endif %}
 
 {############### SEO Image ###############}
