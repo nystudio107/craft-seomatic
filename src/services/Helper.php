@@ -520,17 +520,13 @@ class Helper extends Component
      *
      * @param array $inheritedValues
      * @param string $settingName
-     * @param boolean $checkMetaBundleSettings
      * @return MetaBundle|null
      */
-    public function findInheritableBundle(array $inheritedValues, string $settingName, bool $checkMetaBundleSettings = false)
+    public function findInheritableBundle(array $inheritedValues, string $settingName)
     {
         foreach ($inheritedValues as $bundle) {
             /** @var $bundle MetaBundle */
-            if (
-                ($checkMetaBundleSettings && !empty($bundle->metaBundleSettings[$settingName]))
-                || (!$checkMetaBundleSettings && !empty($bundle->metaGlobalVars[$settingName])
-                )) {
+            if (!empty($bundle->metaGlobalVars[$settingName])) {
                 return $bundle;
             }
         }
