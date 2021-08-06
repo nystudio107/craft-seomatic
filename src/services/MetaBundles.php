@@ -75,7 +75,15 @@ class MetaBundles extends Component
             'metaBundleSettings.seoImageSource',
             'metaBundleSettings.seoImageField',
             'metaBundleSettings.seoImageIds',
-        ]
+        ],
+        'ogImage' => [
+            'metaBundleSettings.ogImageTransformMode',
+            'metaBundleSettings.ogImageTransform',
+            'metaBundleSettings.ogImageSource',
+            'metaBundleSettings.ogImageField',
+            'metaBundleSettings.ogImageIds',
+        ],
+        
     ];
 
     // Protected Properties
