@@ -10,18 +10,6 @@
     {% set parentBundles = [] %}
 {% endif %}
 
-{% set textOptions = {
-  fromCustom: "Custom Text"|t("seomatic"),
-} %}
-
-{% if textFieldSources is defined and textFieldSources |length %}
-    {% set textOptions = { fromField: "From Field"|t("seomatic"), } | merge(textOptions) %}
-{% endif %}
-
-{% set textOptions = { sameAsSeo: "Same as SEO Title"|t("seomatic"), } | merge(textOptions) %}
-
-
-
 {############### Facebook OpenGraph Type ###############}
 
 {% if field is not defined or 'ogType' in field.facebookEnabledFields %}
