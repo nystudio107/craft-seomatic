@@ -83,7 +83,13 @@ class MetaBundles extends Component
             'metaBundleSettings.ogImageField',
             'metaBundleSettings.ogImageIds',
         ],
-        
+        'twitterImage' => [
+            'metaBundleSettings.twitterImageTransformMode',
+            'metaBundleSettings.twitterImageTransform',
+            'metaBundleSettings.twitterImageSource',
+            'metaBundleSettings.twitterImageField',
+            'metaBundleSettings.twitterImageIds',
+        ],
     ];
 
     // Protected Properties
