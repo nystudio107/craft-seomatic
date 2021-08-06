@@ -365,10 +365,6 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             $value->metaBundleSettings->twitterImageIds,
             null
         );
-        $variables['ogImageElements'] = ImageTransformHelper::assetElementsFromIds(
-            $value->metaBundleSettings->ogImageIds,
-            null
-        );
         // Preview the containers so the preview is correct in the field
         if ($element !== null && $element->uri !== null) {
             Seomatic::$plugin->metaContainers->previewMetaContainers($element->uri, $element->siteId, true);

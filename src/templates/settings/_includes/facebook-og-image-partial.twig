@@ -1,129 +1,69 @@
-{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
-{% import "_includes/forms" as forms %}
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "ogImage") %}
+{% set hasIneritableValues = inheritedFrom is not null %}
 
-{############### Facebook OpenGraph Image ###############}
-
-{% set imageOptions = {
-    fromAsset: "Custom Image"|t("seomatic"),
-    fromUrl: "Custom URL"|t("seomatic"),
+{% set additionalVars = {
+    'isInherited': hasIneritableValues and seomatic.helper.isInherited(metaGlobalVars, "ogImage"),
+    'hasInheritableValues': hasIneritableValues,
+    'fieldLabel': "Facebook OpenGraph Image Source"|t("seomatic"),
+    'labelFor': 'metaBundleSettings-ogImageSource',
+    'wrapperClass': 'seomatic-imageSourceInnerWrapper',
+    'settingName': 'ogImage'
 } %}
-{% if assetFieldSources is defined and assetFieldSources |length %}
-    {% set imageOptions = { fromField: "From Asset Field"|t("seomatic"), } | merge(imageOptions) %}
-{% endif %}
-{% set imageOptions = { sameAsSeo: "Same As SEO Image"|t("seomatic"), } | merge(imageOptions) %}
 
-{% if field is not defined or 'ogImage' in field.facebookEnabledFields %}
-    <div class="field seomatic-imageSourceWrapper" id="metaBundleSettings-ogImageSource-field">
-        <div class="heading">
-            <label id="metaBundleSettings-ogImageSource-label" for="metaBundleSettings-ogImageSource">{{ "Facebook OpenGraph Image Source"|t("seomatic") }}</label>
-        </div>
-        <div class="instructions"><p>{{ "This is the image that will be used for display on Facebook posts that link to the web page."|t("seomatic") }}</p>
-        </div>
-        {% namespace "metaBundleSettings" %}
-            <div class="heading">
-                {{ forms.select({
-                    id: "ogImageSource",
-                    name: "ogImageSource",
-                    options: imageOptions,
-                    value: metaBundleSettings.ogImageSource,
-                    class: "seomatic-imageSourceSelect",
-                    errors: metaBundleSettings.getErrors("ogImageSource"),
-                }) }}
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% import "seomatic/settings/_includes/macros.twig" as macros %}
+    {% macro entireOgImageField(ogImageElement, elementType, imageOptions, field, assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars) %}
+        <div class="field seomatic-imageSourceWrapper" id="metaBundleSettings-seoImageSource-field">
+            <div class="field">
+                {{ macros.ogImageField(ogImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars) }}
             </div>
-        {% endnamespace %}
+            <div class="field seomatic-imageSourceNotFromUrl">
+                {{ macros.ogImageTransformField(field, metaBundleSettings) }}
+            </div>
+            <div class="field seomatic-imageSourceNotFromUrl">
+                {{ macros.ogImageTransformModeField(field, imageCropModes, metaBundleSettings) }}
+            </div>
+        </div>
+    {% endmacro %}
 
-        {% if assetFieldSources is defined and assetFieldSources |length %}
-            {% namespace "metaBundleSettings" %}
-                <div class="heading seomatic-imageSourceFromField">
-                    <label id="metaBundleSettings-ogImageField-label" for="metaBundleSettings-ogImageField">{{ "Asset Field: "|t("seomatic") }}</label>
-                    {{ forms.select({
-                        id: "ogImageField",
-                        name: "ogImageField",
-                        options: assetFieldSources,
-                        value: metaBundleSettings.ogImageField,
-                        errors: metaBundleSettings.getErrors("ogImageField"),
-                    }) }}
-                </div>
-            {% endnamespace %}
+    {% set imageOptions = {
+        fromAsset: "Custom Image"|t("seomatic"),
+        fromUrl: "Custom URL"|t("seomatic"),
+    } %}
+    {% if assetFieldSources is defined and assetFieldSources |length %}
+        {% set imageOptions = { fromField: "From Asset Field"|t("seomatic"), } | merge(imageOptions) %}
+    {% endif %}
+    {% set imageOptions = { sameAsSeo: "Same As SEO Image"|t("seomatic"), } | merge(imageOptions) %}
+
+    {% set imageCropModes = {
+        "crop": "Crop"|t("seomatic"),
+        "fit": "Fit"|t("seomatic"),
+        "stretch": "Stretch"|t("seomatic"),
+    } %}
+
+    {% if pageContext == "field" %}
+        {% set imageCropModes = { "": ""} | merge(imageCropModes) %}
+    {% endif %}
+
+    {% block inheritedValues %}
+        {% if inheritedFrom is not null %}
+            {% if inheritedFrom.metaBundleSettings.ogImageIds|length > 0 %}
+                {%  set ogImageElement = craft.assets.id(inheritedFrom.metaBundleSettings.ogImageIds).limit(1).all() %}
+            {% else %}
+                {%  set ogImageElement = [] %}
+            {% endif %}
+
+            {{ _self.entireOgImageField(ogImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
+        {% endif %}
+    {% endblock %}
+
+    {% block field %}
+        {% if metaBundleSettings.ogImageIds|length > 0 %}
+            {%  set ogImageElement = craft.assets.id(metaBundleSettings.ogImageIds).limit(1).all() %}
+        {% else %}
+            {%  set ogImageElement = [] %}
         {% endif %}
 
-        {% namespace "metaBundleSettings" %}
-            <div class="heading seomatic-imageSourceFromAsset">
-                {{ forms.elementSelect({
-                    id: "ogImageIds",
-                    name: "ogImageIds",
-                    viewMode: "large",
-                    elements: ogImageElements,
-                    elementType: elementType,
-                    criteria: {
-                        kind: ["image"],
-                    },
-                    jsClass: 'Craft.AssetSelectInput',
-                    selectionLabel: "Select Facebook OpenGraph Image"|t("seomatic"),
-                    sources: [],
-                    limit: 1,
-                    warning: false,
-                    errors: metaBundleSettings.getErrors("ogImageIds"),
-                }) }}
-            </div>
-        {% endnamespace %}
-
-        {% namespace "metaGlobalVars" %}
-            <div class="heading seomatic-imageSourceFromUrl">
-                {{ forms.text({
-                    id: "ogImage",
-                    name: "ogImage",
-                    value: metaGlobalVars.ogImage,
-                    class: "nicetext",
-                    warning: false,
-                    errors: metaGlobalVars.getErrors("ogImage"),
-                }) }}
-            </div>
-        {% endnamespace %}
-
-        {############### Facebook OpenGraph Image Transform ###############}
-
-        <div class="field seomatic-imageSourceNotFromUrl">
-            <div class="field" {% if field is defined and 'ogImageTransform' not in field.facebookEnabledFields %}style="display: none;"{% endif %}>
-                {% namespace "metaBundleSettings" %}
-                    {{ forms.lightswitchField({
-                        label: "Transform Facebook OpenGraph Image"|t("seomatic"),
-                        instructions: "Whether the Facebook OpenGraph image should be automatically transformed to an appropriate file format and aspect ratio for Facebook."|t("seomatic"),
-                        id: "ogImageTransform",
-                        name: "ogImageTransform",
-                        on: metaBundleSettings.ogImageTransform,
-                        warning: false,
-                        errors: metaBundleSettings.getErrors("ogImageTransform"),
-                    }) }}
-                {% endnamespace %}
-            </div>
-        </div>
-
-        {############### Facebook OpenGraph Transform Mode ###############}
-
-        {% set imageCropModes = {
-            "crop": "Crop"|t("seomatic"),
-            "fit": "Fit"|t("seomatic"),
-            "stretch": "Stretch"|t("seomatic"),
-        } %}
-        {% if pageContext == "field" %}
-            {% set imageCropModes = { "": ""} | merge(imageCropModes) %}
-        {% endif %}
-        <div class="field seomatic-imageSourceNotFromUrl">
-            <div class="field" {% if field is defined and 'ogImageTransformMode' not in field.facebookEnabledFields %}style="display: none;"{% endif %}>
-                {% namespace "metaBundleSettings" %}
-                    {{ forms.selectField({
-                        label: "Facebook OpenGraph Image Transform Mode"|t("seomatic"),
-                        instructions: "The transform mode to use for the Facebook OpenGraph Image Transform."|t("seomatic"),
-                        id: "ogImageTransformMode",
-                        name: "ogImageTransformMode",
-                        options: imageCropModes,
-                        value: metaBundleSettings.ogImageTransformMode,
-                        warning: false,
-                        errors: metaBundleSettings.getErrors("ogImageTransformMode"),
-                    }) }}
-                {% endnamespace %}
-            </div>
-        </div>
-    </div>
-{% endif %}
+        {{ _self.entireOgImageField(ogImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars) }}
+    {% endblock %}
+{% endembed %}
