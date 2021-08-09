@@ -633,7 +633,6 @@ class MetaBundles extends Component
 
             // Get a list of explicitly inherited values
             $inherited = array_keys(ArrayHelper::remove($attributes, 'inherited', []));
-
             $emptyValues = array_fill_keys(array_keys(array_diff_key($attributes, $seoSettingsEnabledFields)), '');
 
             // Nullify the inherited values
@@ -660,7 +659,14 @@ class MetaBundles extends Component
             $metaBundle->metaSiteVars->setAttributes($attributes, false);
             // metaSitemapVars
             $attributes = $metaBundle->metaSitemapVars->getAttributes();
+
+            // Get a list of explicitly inherited values
+            $inherited = array_keys(ArrayHelper::remove($attributes, 'inherited', []));
             $emptyValues = array_fill_keys(array_keys(array_diff_key($attributes, $seoSettingsEnabledFields)), '');
+
+            // Nullify the inherited values
+            $emptyValues = array_merge($emptyValues, array_fill_keys($inherited, ''));
+
             $attributes = array_merge($attributes, $emptyValues);
             $metaBundle->metaSitemapVars->setAttributes($attributes, false);
         }
