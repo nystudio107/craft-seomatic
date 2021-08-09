@@ -112,7 +112,7 @@ class Seomatic extends Plugin
 
     const SEOMATIC_HANDLE = 'Seomatic';
 
-    const DEVMODE_CACHE_DURATION = 1;
+    const DEVMODE_CACHE_DURATION = 30;
 
     const FRONTEND_SEO_FILE_LINK = 'seomatic/seo-file-link/<url:[^\/]+>/<robots:[^\/]+>/<canonical:[^\/]+>/<inline:\d+>/<fileName:[-\w\.*]+>';
 
