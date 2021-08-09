@@ -28,6 +28,7 @@ use craft\elements\db\TagQuery;
 use craft\helpers\Template;
 use craft\web\twig\variables\Paginate;
 
+use nystudio107\seomatic\base\InheritableSettingsModel;
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
 
@@ -537,19 +538,20 @@ class Helper extends Component
     /**
      * Return true if a setting is inherited.
      *
-     * @param MetaGlobalVars $globalVars
+     * @param InheritableSettingsModel $settingCollection
      * @param $settingName
      * @return bool
+     * @since 3.4.0
      */
-    public function isInherited(MetaGlobalVars $globalVars, $settingName)
+    public function isInherited(InheritableSettingsModel $settingCollection, $settingName)
     {
-        $explicitInherit = array_key_exists($settingName, $globalVars->inherited);
-        $explicitOverride = array_key_exists($settingName, $globalVars->overrides);
+        $explicitInherit = array_key_exists($settingName, $settingCollection->inherited);
+        $explicitOverride = array_key_exists($settingName, $settingCollection->overrides);
 
         if ($explicitInherit || $explicitOverride) {
             return $explicitInherit && !$explicitOverride;
         }
 
-        return empty($globalVars->{$settingName});
+        return empty($settingCollection->{$settingName});
     }
 }
