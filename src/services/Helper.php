@@ -521,14 +521,18 @@ class Helper extends Component
      *
      * @param array $inheritedValues
      * @param string $settingName
+     * @param string $collectionName The name off the collection to search
      * @return MetaBundle|null
+     * @since 3.4.0
      */
-    public function findInheritableBundle(array $inheritedValues, string $settingName)
+    public function findInheritableBundle(array $inheritedValues, string $settingName, string $collectionName = "metaGlobalVars")
     {
-        foreach ($inheritedValues as $bundle) {
-            /** @var $bundle MetaBundle */
-            if (!empty($bundle->metaGlobalVars[$settingName])) {
-                return $bundle;
+        if (in_array($collectionName, ['metaGlobalVars', 'metaSitemapVars'], true)) {
+            foreach ($inheritedValues as $bundle) {
+                /** @var $bundle MetaBundle */
+                if (is_bool($bundle->{$collectionName}[$settingName]) || !empty($bundle->{$collectionName}[$settingName])) {
+                    return $bundle;
+                }
             }
         }
 
