@@ -9,7 +9,7 @@
     <div class="field {{ wrapperClass|default('') }}">
         {% if hasInheritableValues %}
             <div class="override">
-                {% namespace "metaGlobalVars" %}
+                {% namespace overrideNamespace|default("metaGlobalVars") %}
                     {{ forms.lightswitchField({
                         on: not isInherited,
                         onLabel: "Override"|t("seomatic"),
