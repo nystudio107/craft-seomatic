@@ -361,10 +361,6 @@ class SeoSettings extends Field implements PreviewableFieldInterface
         /** @var MetaBundle $value */
         $variables['elementType'] = Asset::class;
 
-        $variables['twitterImageElements'] = ImageTransformHelper::assetElementsFromIds(
-            $value->metaBundleSettings->twitterImageIds,
-            null
-        );
         // Preview the containers so the preview is correct in the field
         if ($element !== null && $element->uri !== null) {
             Seomatic::$plugin->metaContainers->previewMetaContainers($element->uri, $element->siteId, true);
