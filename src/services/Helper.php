@@ -11,15 +11,6 @@
 
 namespace nystudio107\seomatic\services;
 
-use nystudio107\seomatic\helpers\UrlHelper;
-use nystudio107\seomatic\models\MetaBundle;
-use nystudio107\seomatic\models\MetaGlobalVars;
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\helpers\DynamicMeta as DynamicMetaHelper;
-use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
-use nystudio107\seomatic\helpers\Schema as SchemaHelper;
-use nystudio107\seomatic\helpers\Text as TextHelper;
-
 use Craft;
 use craft\base\Component;
 use craft\elements\Asset;
@@ -27,8 +18,14 @@ use craft\elements\db\MatrixBlockQuery;
 use craft\elements\db\TagQuery;
 use craft\helpers\Template;
 use craft\web\twig\variables\Paginate;
-
 use nystudio107\seomatic\base\InheritableSettingsModel;
+use nystudio107\seomatic\helpers\DynamicMeta as DynamicMetaHelper;
+use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
+use nystudio107\seomatic\helpers\Schema as SchemaHelper;
+use nystudio107\seomatic\helpers\Text as TextHelper;
+use nystudio107\seomatic\helpers\UrlHelper;
+use nystudio107\seomatic\models\MetaBundle;
+use nystudio107\seomatic\Seomatic;
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
 
