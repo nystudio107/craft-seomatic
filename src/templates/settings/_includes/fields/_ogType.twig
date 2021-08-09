@@ -42,10 +42,6 @@
         "website": "Website"|t("seomatic"),
     } %}
 
-    {% if pageContext == "field" %}
-        {% set facebookOpenGraphTypes = { "": ""} | merge(facebookOpenGraphTypes) %}
-    {% endif %}
-
     {% block inheritedValues %}
         {% if inheritedFrom is not null %}
             {{ _self.seoTitleField(facebookOpenGraphTypes, inheritedFrom.metaGlobalVars) }}

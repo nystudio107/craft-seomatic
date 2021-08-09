@@ -30,9 +30,7 @@
             after: "After"|t("seomatic"),
             none: "None"|t("seomatic"),
         } %}
-        {% if pageContext == "field" %}
-            {% set customPositions = { "": ""} | merge(customPositions) %}
-        {% endif %}
+
 
         <div class="instructions">
             {{ ("Where the Site Name is placed relative to the Title in the &lt;title&gt; tag. The Site Name is set in [Site Settings](" ~ cpUrl('seomatic/site') ~ ")")|t("seomatic") |md }}

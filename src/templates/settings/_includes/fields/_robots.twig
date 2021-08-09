@@ -26,10 +26,6 @@
             noimageindex : "No Image Index - Do not index images on this page"|t("seomatic"),
         } %}
 
-        {% if pageContext == "field" %}
-            {% set robotOptions = { "": ""} | merge(robotOptions) %}
-        {% endif %}
-
         {% namespace "metaGlobalVars" %}
             {{ forms.selectField({
                 id: "robots",

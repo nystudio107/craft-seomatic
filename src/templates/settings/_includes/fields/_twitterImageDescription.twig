@@ -72,10 +72,6 @@
 
     {% set textOptions = { sameAsSeo: "Same As SEO Image Description"|t("seomatic"), } | merge(textOptions) %}
 
-    {% if pageContext == "field" %}
-        {% set textOptions = { "": ""} | merge(textOptions) %}
-    {% endif %}
-
     {% block inheritedValues %}
         {% if inheritedFrom is not null %}
             {{ _self.twitterImageDescriptionField(textOptions, textFieldSources, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}

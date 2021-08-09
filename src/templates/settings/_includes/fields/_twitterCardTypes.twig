@@ -32,9 +32,6 @@
         app: "App Card"|t("seomatic"),
         player: "Player Card"|t("seomatic"),
     } %}
-    {% if pageContext == "field" %}
-        {% set twitterCardTypes = { "": ""} | merge(twitterCardTypes) %}
-    {% endif %}
 
     {% block inheritedValues %}
         {% if inheritedFrom is not null %}
