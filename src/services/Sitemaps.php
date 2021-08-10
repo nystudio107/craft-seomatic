@@ -528,23 +528,15 @@ class Sitemaps extends Component implements SitemapInterface
             $siteId = $sites->currentSite->id ?? 1;
         }
         $site = $sites->getSiteById($siteId);
-        // Start up a job to generate the sitemap
-        $queue = Craft::$app->getQueue();
-        $jobId = $queue->push(new GenerateSitemap([
-            'groupId' => $site->groupId,
-            'type' => $type,
-            'handle' => $handle,
-            'siteId' => $siteId,
-        ]));
-        Craft::debug(
-            Craft::t(
-                'seomatic',
-                'Started GenerateSitemap queue job id: {jobId}',
-                [
-                    'jobId' => $jobId,
-                ]
-            ),
-            __METHOD__
+        $groupId = $site->groupId;
+        $sitemapTemplate = SitemapTemplate::create();
+        $xml = $sitemapTemplate->render(
+            [
+                'groupId' => $groupId,
+                'type' => $type,
+                'handle' => $handle,
+                'siteId' => $siteId,
+            ]
         );
     }
 

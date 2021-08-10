@@ -66,8 +66,13 @@ class CanonicalLink extends MetaLink
     {
         $shouldRender = parent::prepForRender($data);
         if ($shouldRender) {
-            // Don't render a canonical url for http status codes >= 400
-            if (Craft::$app->getResponse()->statusCode >= 400 && !Seomatic::$previewingMetaContainers) {
+            $request = Craft::$app->getRequest();
+            $response = Craft::$app->getResponse();
+                // Don't render a canonical url for http status codes >= 400
+            if (!$request->isConsoleRequest
+                && !Seomatic::$previewingMetaContainers
+                && $response->statusCode >= 400
+            ) {
                 return false;
             }
             // Don't render a canonical URL if this page isn't meant to be indexed as per:
