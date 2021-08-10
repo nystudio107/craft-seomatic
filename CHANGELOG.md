@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.3.47 - UNRELEASED
+## 3.3.47 - 2021.08.10
 ### Fixed
 * Fixed an issue where `Sitemaps::invalidateSitemapCache()` wasn't going through the same bottleneck as the sitemap render, and thus wasn't properly hitting the caching layer
 * Don't access `Craft::$app->getResponse()->statusCode` during console requests ([#940](https://github.com/nystudio107/craft-seomatic/issues/940))
