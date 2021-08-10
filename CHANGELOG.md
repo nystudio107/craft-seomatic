@@ -4,7 +4,7 @@
 ### Fixed
 * Fixed an issue where `Sitemaps::invalidateSitemapCache()` wasn't going through the same bottleneck as the sitemap render, and thus wasn't properly hitting the caching layer
 * Don't access `Craft::$app->getResponse()->statusCode` during console requests ([#940](https://github.com/nystudio107/craft-seomatic/issues/940))
-* 
+
 ## 3.3.46 - 2021.07.27
 ### Added
 * Added support for pulling from Preparse fields for SEO fields ([#927](https://github.com/nystudio107/craft-seomatic/issues/927))
