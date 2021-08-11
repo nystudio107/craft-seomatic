@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.3.48 - 2021.08.11
+### Fixed
+* Fixed a regression that caused sitemap generation via console command to fail ([#943](https://github.com/nystudio107/craft-seomatic/issues/943))
+
 ## 3.3.47 - 2021.08.10
 ### Fixed
 * Fixed an issue where `Sitemaps::invalidateSitemapCache()` wasn't going through the same bottleneck as the sitemap render, and thus wasn't properly hitting the caching layer
