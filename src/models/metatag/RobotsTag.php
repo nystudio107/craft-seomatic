@@ -85,7 +85,15 @@ class RobotsTag extends MetaTag
         $shouldRender = parent::prepForRender($data);
         if ($shouldRender) {
             // Set meta robots tag to `none` for http status codes >= 400
-            if (Craft::$app->getResponse()->statusCode >= 400 || SeomaticHelper::isPreview()) {
+            $request = Craft::$app->getRequest();
+            $response = Craft::$app->getResponse();
+            // Don't render a canonical url for http status codes >= 400
+            if (!$request->isConsoleRequest
+                && $response->statusCode >= 400
+            ) {
+                $data['content'] = 'none';
+            }
+            if (SeomaticHelper::isPreview()) {
                 $data['content'] = 'none';
             }
         }

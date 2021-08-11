@@ -1,27 +1,32 @@
 # SEOmatic Changelog
 
-## 3.3.46 - UNRELEASED
+## 3.3.47 - 2021.08.10
+### Fixed
+* Fixed an issue where `Sitemaps::invalidateSitemapCache()` wasn't going through the same bottleneck as the sitemap render, and thus wasn't properly hitting the caching layer
+* Don't access `Craft::$app->getResponse()->statusCode` during console requests ([#940](https://github.com/nystudio107/craft-seomatic/issues/940))
+
+## 3.3.46 - 2021.07.27
 ### Added
-* Added support for pulling from Preparse fields for SEO fields (https://github.com/nystudio107/craft-seomatic/issues/927)
+* Added support for pulling from Preparse fields for SEO fields ([#927](https://github.com/nystudio107/craft-seomatic/issues/927))
 
 ### Fixed
-* Fix an issue where `Undefined class constant ‘EVENT_REGISTER_GQL_SCHEMA_COMPONENTS` would be thrown if you were running Craft CMS < `^3.5.0` (https://github.com/nystudio107/craft-seomatic/issues/933)
-* Empty out the entity image settings to ensure the image gets removed if it no longer exists (https://github.com/nystudio107/craft-seomatic/issues/760)
+* Fix an issue where `Undefined class constant ‘EVENT_REGISTER_GQL_SCHEMA_COMPONENTS` would be thrown if you were running Craft CMS < `^3.5.0` ([#933](https://github.com/nystudio107/craft-seomatic/issues/933))
+* Empty out the entity image settings to ensure the image gets removed if it no longer exists ([#760](https://github.com/nystudio107/craft-seomatic/issues/760))
 
 ## 3.3.45 - 2021.07.20
 ### Fixed
 * Fixed an issue where `MedicalBusiness` JSON-LD type didn't inherit all of the properties from `MedicalOrganization` that it should
-* Handle per-entry type settings for the sitemap generation (https://github.com/nystudio107/craft-seomatic/issues/929)
+* Handle per-entry type settings for the sitemap generation ([#929](https://github.com/nystudio107/craft-seomatic/issues/929))
 
 ## 3.3.44 - 2021.07.09
 ### Added
-* Added `truncateTitleTags` & `truncateDescriptionTags` settings to control whether the max title / description lengths should be enforced or not (on by default) (https://github.com/nystudio107/craft-seomatic/issues/922)
+* Added `truncateTitleTags` & `truncateDescriptionTags` settings to control whether the max title / description lengths should be enforced or not (on by default) ([#922](https://github.com/nystudio107/craft-seomatic/issues/922))
 
 ### Changed
-* Changed the Google & Bing sitemap submission URLs to `https` (https://github.com/nystudio107/craft-seomatic/issues/903)
+* Changed the Google & Bing sitemap submission URLs to `https` ([#903](https://github.com/nystudio107/craft-seomatic/issues/903))
 
 ### Fixed
-* Handle the case where `additionalSitemaps` isn't a zero-based index, due to items being deleted from it (https://github.com/nystudio107/craft-seomatic/issues/921)
+* Handle the case where `additionalSitemaps` isn't a zero-based index, due to items being deleted from it ([#921](https://github.com/nystudio107/craft-seomatic/issues/921))
 
 ## 3.3.43 - 2021.06.08
 ### Added
@@ -31,30 +36,30 @@
 * Switched documentation system to VitePress
 
 ### Fixed
-* Additional Sitemap URLs will now appear only in the Site's sitemap index where they are defined (https://github.com/nystudio107/craft-seomatic/issues/897)
+* Additional Sitemap URLs will now appear only in the Site's sitemap index where they are defined ([#897](https://github.com/nystudio107/craft-seomatic/issues/897))
 
 ## 3.3.42 - 2021.05.18
 ### Changed
-* Strip the query params from next/prev pagination meta tags if we're not using query-string based pagination (https://github.com/nystudio107/craft-seomatic/issues/896)
-* Ensure that frontend templates are checked first, so things like `humans.twig` and `robots.twig` can be overridden (https://github.com/nystudio107/craft-seomatic/issues/891)
+* Strip the query params from next/prev pagination meta tags if we're not using query-string based pagination ([#896](https://github.com/nystudio107/craft-seomatic/issues/896))
+* Ensure that frontend templates are checked first, so things like `humans.twig` and `robots.twig` can be overridden ([#891](https://github.com/nystudio107/craft-seomatic/issues/891))
 
 ### Fixed
-* If sitemaps aren't enabled globally, return nothing for the sitemap index (https://github.com/nystudio107/craft-seomatic/issues/895)
-* Fixed an issue where an empty transform mode could cause errors generating social image transforms (https://github.com/nystudio107/craft-seomatic/issues/892)
+* If sitemaps aren't enabled globally, return nothing for the sitemap index ([#895](https://github.com/nystudio107/craft-seomatic/issues/895))
+* Fixed an issue where an empty transform mode could cause errors generating social image transforms ([#892](https://github.com/nystudio107/craft-seomatic/issues/892))
 
 ## 3.3.41 - 2021.05.06
 ### Added
-* Only add a sitemap to the sitemap index if there's at least 1 element in the resulting sitemap (https://github.com/nystudio107/craft-seomatic/issues/873)
+* Only add a sitemap to the sitemap index if there's at least 1 element in the resulting sitemap ([#873](https://github.com/nystudio107/craft-seomatic/issues/873))
 
 ### Changed
-* Have all of the Site Map settings in the SEO Settings field default to empty, so they fall back on the Content SEO value by default (https://github.com/nystudio107/craft-seomatic/issues/871)
-* Have the image transform modes all default to empty, so they will fall back on the Content SEO value by default (https://github.com/nystudio107/craft-seomatic/issues/868)
+* Have all of the Site Map settings in the SEO Settings field default to empty, so they fall back on the Content SEO value by default ([#871](https://github.com/nystudio107/craft-seomatic/issues/871))
+* Have the image transform modes all default to empty, so they will fall back on the Content SEO value by default ([#868](https://github.com/nystudio107/craft-seomatic/issues/868))
 
 ### Fixed
-* For paginated pages, re-apply the adjustment to the canonical URL tag as well (https://github.com/nystudio107/craft-seomatic/issues/875)
-* Handle the case of empty asset ids being passed in from a missing asset source (https://github.com/nystudio107/craft-seomatic/issues/882)
-* Fixed the verbiage in the Matomo script URL setting (https://github.com/nystudio107/craft-seomatic/issues/880)
-* Don't call any AssetManager methods in the component `init()` method during console requests (https://github.com/nystudio107/craft-seomatic/issues/885)
+* For paginated pages, re-apply the adjustment to the canonical URL tag as well ([#875](https://github.com/nystudio107/craft-seomatic/issues/875))
+* Handle the case of empty asset ids being passed in from a missing asset source ([#882](https://github.com/nystudio107/craft-seomatic/issues/882))
+* Fixed the verbiage in the Matomo script URL setting ([#880](https://github.com/nystudio107/craft-seomatic/issues/880))
+* Don't call any AssetManager methods in the component `init()` method during console requests ([#885](https://github.com/nystudio107/craft-seomatic/issues/885))
 
 ## 3.3.40 - 2021.04.15
 ### Added
@@ -64,15 +69,15 @@
 * Wrap tracking scripts in IFFYs
 
 ### Fixed
-* Ensure assets imported via FeedMe don't end up in a `null` volume ID (https://github.com/nystudio107/craft-seomatic/issues/840)
+* Ensure assets imported via FeedMe don't end up in a `null` volume ID ([#840](https://github.com/nystudio107/craft-seomatic/issues/840))
 
 ## 3.3.39 - 2021.04.09
 ### Added
- * Added support for Facebook domain verification via the `facebook-domain-verification` tag (https://github.com/nystudio107/craft-seomatic/issues/856)
-* Add proper support for importing assets via Feed Me (https://github.com/nystudio107/craft-seomatic/issues/840)
-* Google gtag.js is now the first and default option in Tracking Scripts, and a footnote to use it for Google Analytics 4 is included (https://github.com/nystudio107/craft-seomatic/issues/788)
-* Added support for Fathom Analytics in the Tracking Scripts section (https://github.com/nystudio107/craft-seomatic/issues/823)
-* Added support for Plausible Analytics in the Tracking Scripts section (https://github.com/nystudio107/craft-seomatic/issues/817)
+ * Added support for Facebook domain verification via the `facebook-domain-verification` tag ([#856](https://github.com/nystudio107/craft-seomatic/issues/856))
+* Add proper support for importing assets via Feed Me ([#840](https://github.com/nystudio107/craft-seomatic/issues/840))
+* Google gtag.js is now the first and default option in Tracking Scripts, and a footnote to use it for Google Analytics 4 is included ([#788](https://github.com/nystudio107/craft-seomatic/issues/788))
+* Added support for Fathom Analytics in the Tracking Scripts section ([#823](https://github.com/nystudio107/craft-seomatic/issues/823))
+* Added support for Plausible Analytics in the Tracking Scripts section ([#817](https://github.com/nystudio107/craft-seomatic/issues/817))
 
 ### Changed
 * Changed how we determine whether environment mappings should be applied to meta items so GraphQL requests will have them applied
@@ -96,19 +101,19 @@
 
 ### Changed
 * Move the manifest service registration to the constructor
-* Guard against a Site that has a `null` Base URL in `loadFrontendTemplateContainers()` (https://github.com/nystudio107/craft-seomatic/issues/861)
+* Guard against a Site that has a `null` Base URL in `loadFrontendTemplateContainers()` ([#861](https://github.com/nystudio107/craft-seomatic/issues/861))
 
 ### Fixed
-* Fixed an issue where the default settings for Content SEO for sections with multiple entry types was set incorrectly (https://github.com/nystudio107/craft-seomatic/issues/814) & (https://github.com/nystudio107/craft-seomatic/issues/794)
-* Fixed the GTag script to use the `???` empty coalescing operator, to prevent empty strings from being used in `gtagProperty` (https://github.com/nystudio107/craft-seomatic/issues/860)
+* Fixed an issue where the default settings for Content SEO for sections with multiple entry types was set incorrectly ([#814](https://github.com/nystudio107/craft-seomatic/issues/814)) & ([#794](https://github.com/nystudio107/craft-seomatic/issues/794))
+* Fixed the GTag script to use the `???` empty coalescing operator, to prevent empty strings from being used in `gtagProperty` ([#860](https://github.com/nystudio107/craft-seomatic/issues/860))
 
 ## 3.3.36 - 2021.03.25
 ### Changed
 * More consistent `makefile` build commands
 * Use Tailwind 2.x & `@tailwindcss/jit`
 * Move settings from the `composer.json` “extra” to the plugin main class
-* Don't register any frontend templates if this site has a sub-directory as part of the URL (https://github.com/nystudio107/craft-seomatic/issues/859)
-* List all sites sitemaps in the `robots.txt` (https://github.com/nystudio107/craft-seomatic/issues/859)
+* Don't register any frontend templates if this site has a sub-directory as part of the URL ([#859](https://github.com/nystudio107/craft-seomatic/issues/859))
+* List all sites sitemaps in the `robots.txt` ([#859](https://github.com/nystudio107/craft-seomatic/issues/859))
 
 ### Fixed
 * Ensure really long titles are cropped in the sidebar preview
