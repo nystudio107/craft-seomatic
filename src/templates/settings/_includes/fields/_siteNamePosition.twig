@@ -1,0 +1,75 @@
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "siteNamePosition") %}
+{% set hasIneritableValues = inheritedFrom is not null %}
+
+{% set positionSuffix = pageContext == "content" ? " Source" : "" %}
+
+{% set additionalVars = {
+    'isInherited': hasIneritableValues and seomatic.helper.isInherited(metaGlobalVars, "siteNamePosition"),
+    'hasInheritableValues': hasIneritableValues,
+    'fieldLabel': "Site Name Position#{positionSuffix}"|t("seomatic"),
+    'labelFor': 'metaBundleSettings-siteNamePositionSource',
+    'wrapperClass': 'seomatic-textSourceWrapper',
+    'settingName': 'siteNamePosition'
+} %}
+
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro siteNamePositionField(metaBundleSettings, metaGlobalVars, pageContext) %}
+        {% import "_includes/forms" as forms %}
+
+        {% set textOptions = {
+            fromCustom: "Custom Position"|t("seomatic"),
+        } %}
+        {% set positionSuffix = "" %}
+
+        {% if pageContext == "content" %}
+            {% set textOptions = { sameAsGlobal: "Same as Global Site Name Position"|t("seomatic"), } | merge(textOptions) %}
+        {% endif %}
+
+        {% set customPositions = {
+            before: "Before"|t("seomatic"),
+            after: "After"|t("seomatic"),
+            none: "None"|t("seomatic"),
+        } %}
+
+
+        <div class="instructions">
+            {{ ("Where the Site Name is placed relative to the Title in the &lt;title&gt; tag. The Site Name is set in [Site Settings](" ~ cpUrl('seomatic/site') ~ ")")|t("seomatic") |md }}
+        </div>
+
+        {% namespace "metaBundleSettings" %}
+            <div class="heading">
+                <div {% if pageContext == "global" %}style="display: none;" {% endif %}#}>
+                    {{ forms.select({
+                        id: "siteNamePositionSource",
+                        name: "siteNamePositionSource",
+                        options: textOptions,
+                        value: metaBundleSettings.siteNamePositionSource,
+                        class: "seomatic-textSourceSelect",
+                        errors: metaBundleSettings.getErrors("siteNamePositionSource"),
+                    }) }}
+                </div>
+            </div>
+        {% endnamespace %}
+
+        {% namespace "metaGlobalVars" %}
+            <div class="heading seomatic-textSourceFromUrl">
+                {{ forms.selectField({
+                    id: "siteNamePosition",
+                    name: "siteNamePosition",
+                    options: customPositions,
+                    value: metaGlobalVars.siteNamePosition,
+                    warning: false,
+                    errors: metaGlobalVars.getErrors("siteNamePosition"),
+                }) }}
+            </div>
+        {% endnamespace %}
+    {% endmacro %}
+
+    {% block inheritedValues %}
+        {{ _self.siteNamePositionField(inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars, pageContext) }}
+    {% endblock %}
+
+    {% block field %}
+        {{ _self.siteNamePositionField(metaBundleSettings, metaGlobalVars, pageContext) }}
+    {% endblock %}
+{% endembed %}

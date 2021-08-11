@@ -1,0 +1,41 @@
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "sitemapUrls", "metaSitemapVars") %}
+{% set hasIneritableValues = inheritedFrom is not null %}
+
+{% set additionalVars = {
+    'isInherited': hasIneritableValues and seomatic.helper.isInherited(metaSitemapVars, "sitemapUrls"),
+    'hasInheritableValues': hasIneritableValues,
+    'fieldLabel': "Sitemap Enabled"|t("seomatic"),
+    'settingName': 'sitemapUrls',
+    'labelFor': 'metaSitemapVars-sitemapUrls',
+    'overrideNamespace': 'metaSitemapVars'
+} %}
+
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro sitemapUrlsField(currentSourceBundleType, metaSitemapVars) %}
+        <div class="instructions">
+            <p>
+                {{ "Whether URLs in this #{currentSourceBundleType} should be included in the sitemap"|t("seomatic") }}
+            </p>
+        </div>
+
+        {% import "_includes/forms" as forms %}
+        {% namespace "metaSitemapVars" %}
+            {{ forms.lightswitchField({
+                id: "sitemapUrls",
+                name: "sitemapUrls",
+                on: metaSitemapVars.sitemapUrls,
+                warning: false,
+                errors: metaSitemapVars.getErrors("sitemapUrls"),
+            }) }}
+
+        {% endnamespace %}
+    {% endmacro %}
+
+    {% block inheritedValues %}
+        {{ _self.sitemapUrlsField(currentSourceBundleType, inheritedFrom.metaSitemapVars) }}
+    {% endblock %}
+
+    {% block field %}
+        {{ _self.sitemapUrlsField(currentSourceBundleType, metaSitemapVars) }}
+    {% endblock %}
+{% endembed %}

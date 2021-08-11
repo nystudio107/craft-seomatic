@@ -453,6 +453,10 @@ class GenerateSitemap extends BaseJob
                 if ($fieldMetaBundle !== null && $seoSettingsField !== null && $seoSettingsField->sitemapTabEnabled) {
                     // Combine the meta sitemap vars
                     $attributes = $fieldMetaBundle->metaSitemapVars->getAttributes();
+
+                    // Get the explicity inherited attributes
+                    $inherited = array_keys(ArrayHelper::remove($attributes, 'inherited', []));
+
                     $attributes = \array_intersect_key(
                         $attributes,
                         array_flip($seoSettingsField->sitemapEnabledFields)
@@ -461,7 +465,13 @@ class GenerateSitemap extends BaseJob
                         $attributes,
                         [ArrayHelper::class, 'preserveBools']
                     );
+
+                    foreach ($inherited as $inheritedAttribute) {
+                        unset($attributes[$inheritedAttribute]);
+                    }
+
                     $metaBundle->metaSitemapVars->setAttributes($attributes, false);
+
                     // Combine the meta global vars
                     $attributes = $fieldMetaBundle->metaGlobalVars->getAttributes();
                     $attributes = array_filter(

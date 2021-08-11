@@ -1,0 +1,43 @@
+{% set hasInheritableValues = hasInheritableValues|default(false) %}
+{% set isInherited = isInherited|default(false) %}
+{% set wrapperClass = wrapperClass|default('') %}
+{% set wrapperId = wrapperId|default('') %}
+{% set fieldLabel = fieldLabel|default('') %}
+
+{% import "_includes/forms" as forms %}
+<div class="inheritable-field {{ isInherited ? 'inherited-settings' : 'defined-settings' }}">
+    <div class="field {{ wrapperClass|default('') }}">
+        {% if hasInheritableValues %}
+            <div class="override">
+                {% namespace overrideNamespace|default("metaGlobalVars") %}
+                    {{ forms.lightswitchField({
+                        on: not isInherited,
+                        onLabel: "Override"|t("seomatic"),
+                        offLabel: fieldLabel,
+                        warning: false,
+                        name: 'override-' ~ settingName|default('')
+                    }) }}
+                {% endnamespace %}
+            </div>
+        {% else %}
+            <div class="heading">
+                <label for="{{ labelFor|default('') }}">{{ fieldLabel }}</label>
+            </div>
+        {% endif %}
+
+        {% if hasInheritableValues %}
+            <div class="inherited value-wrapper">
+                {% block inheritedValues %}
+
+                {% endblock %}
+            </div>
+        {% endif %}
+
+        <div class="field-settings value-wrapper">
+            {% block field %}
+
+            {% endblock %}
+        </div>
+    </div>
+</div>
+<hr/>

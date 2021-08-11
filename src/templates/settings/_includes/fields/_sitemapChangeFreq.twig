@@ -1,0 +1,54 @@
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "sitemapChangeFreq", "metaSitemapVars") %}
+{% set hasIneritableValues = inheritedFrom is not null %}
+
+{% set additionalVars = {
+    'isInherited': hasIneritableValues and seomatic.helper.isInherited(metaSitemapVars, "sitemapChangeFreq"),
+    'hasInheritableValues': hasIneritableValues,
+    'fieldLabel': "Change Frequency"|t("seomatic"),
+    'settingName': 'sitemapChangeFreq',
+    'labelFor': 'metaSitemapVars-sitemapChangeFreq',
+    'overrideNamespace': 'metaSitemapVars'
+} %}
+
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro sitemapChangeFreqField(sitemapChangeFreqOptions, metaSitemapVars) %}
+        <div class="instructions">
+            <p>
+                {{ "How frequently the page is likely to change. This value provides general information to search engines and may not correlate exactly to how often they crawl the page."|t("seomatic") }}
+            </p>
+        </div>
+
+        {% import "_includes/forms" as forms %}
+        {% namespace "metaSitemapVars" %}
+
+            {{ forms.selectField({
+                id: "sitemapChangeFreq",
+                name: "sitemapChangeFreq",
+                options: sitemapChangeFreqOptions,
+                value: metaSitemapVars.sitemapChangeFreq,
+                errors: metaSitemapVars.getErrors("sitemapChangeFreq"),
+            }) }}
+
+        {% endnamespace %}
+    {% endmacro %}
+
+    {% if field is not defined or 'sitemapChangeFreq' in field.sitemapEnabledFields %}
+        {% set sitemapChangeFreqOptions = {
+            always: "Always"|t("seomatic"),
+            hourly: "Hourly"|t("seomatic"),
+            daily: "Daily"|t("seomatic"),
+            weekly: "Weekly"|t("seomatic"),
+            monthly: "Monthly"|t("seomatic"),
+            yearly: "Yearly"|t("seomatic"),
+            never : "Never"|t("seomatic"),
+        } %}
+    {% endif %}
+
+    {% block inheritedValues %}
+        {{ _self.sitemapChangeFreqField(sitemapChangeFreqOptions, inheritedFrom.metaSitemapVars) }}
+    {% endblock %}
+
+    {% block field %}
+        {{ _self.sitemapChangeFreqField(sitemapChangeFreqOptions, metaSitemapVars) }}
+    {% endblock %}
+{% endembed %}

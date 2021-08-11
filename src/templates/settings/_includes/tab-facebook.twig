@@ -6,211 +6,32 @@
     {% include "seomatic/_includes/facebookPreview.twig" %}
 {% endif %}
 
-{############### Facebook OpenGraph Type ###############}
-
-{% set facebookOpenGraphTypes = {
-    "article": "Article"|t("seomatic"),
-    "book": "Book"|t("seomatic"),
-    "business.business": "Business"|t("seomatic"),
-    "music.album": "Music Album"|t("seomatic"),
-    "music.song": "Music Song"|t("seomatic"),
-    "place": "Place"|t("seomatic"),
-    "product": "Product"|t("seomatic"),
-    "profile": "Profile"|t("seomatic"),
-    "restaurant.restaurant": "Restaurant"|t("seomatic"),
-    "video.other": "Video"|t("seomatic"),
-    "website": "Website"|t("seomatic"),
-} %}
-{% if pageContext == "field" %}
-    {% set facebookOpenGraphTypes = { "": ""} | merge(facebookOpenGraphTypes) %}
+{% if parentBundles is not defined %}
+    {% set parentBundles = [] %}
 {% endif %}
 
+{############### Facebook OpenGraph Type ###############}
+
 {% if field is not defined or 'ogType' in field.facebookEnabledFields %}
-    {% namespace "metaGlobalVars" %}
-        {{ forms.selectField({
-            label: "Facebook OpenGraph Type"|t("seomatic"),
-            instructions: "Adding OpenGraph tags to your website influences the performance of your links on social media by allowing you to control what appears when a user posts a link to your content on Facebook."|t("seomatic"),
-            id: "ogType",
-            name: "ogType",
-            options: facebookOpenGraphTypes,
-            value: metaGlobalVars.ogType,
-            errors: metaGlobalVars.getErrors("ogType"),
-        }) }}
-    {% endnamespace %}
+    {% include "seomatic/settings/_includes/fields/_ogType.twig" %}
 {% endif %}
 
 {############### Facebook OpenGraph Title ###############}
 
-{% set textOptions = {
-    fromCustom: "Custom Text"|t("seomatic"),
-} %}
-{% if textFieldSources is defined and textFieldSources |length %}
-    {% set textOptions = { fromField: "From Field"|t("seomatic"), } | merge(textOptions) %}
-{% endif %}
-{% set textOptions = { sameAsSeo: "Same as SEO Title"|t("seomatic"), } | merge(textOptions) %}
-
 {% if field is not defined or 'ogTitle' in field.facebookEnabledFields %}
-    <div class="field seomatic-textSourceWrapper" id="metaBundleSettings-ogTitleSource-field">
-        <div class="heading">
-            <label id="metaBundleSettings-ogTitleSource-label" for="metaBundleSettings-ogTitleSource">{{ "Facebook OpenGraph Title Source"|t("seomatic") }}</label>
-        </div>
-        <div class="instructions"><p>{{ "The Facebook OpenGraph Title is displayed in bold at the top of your Facebook card. Make sure it is a pithy summary of your webpage."|t("seomatic") }}</p>
-        </div>
-        {% namespace "metaBundleSettings" %}
-            <div class="heading">
-                {{ forms.select({
-                    id: "ogTitleSource",
-                    name: "ogTitleSource",
-                    options: textOptions,
-                    value: metaBundleSettings.ogTitleSource,
-                    class: "seomatic-textSourceSelect",
-                    errors: metaBundleSettings.getErrors("ogTitleSource"),
-                }) }}
-            </div>
-        {% endnamespace %}
-
-        {% if textFieldSources is defined and textFieldSources |length %}
-            {% namespace "metaBundleSettings" %}
-                <div class="heading seomatic-textSourceFromField">
-                    <label id="metaBundleSettings-ogTitleField-label" for="metaBundleSettings-ogTitleField">{{ "Source Field: "|t("seomatic") }}</label>
-                    {{ forms.select({
-                        id: "ogTitleField",
-                        name: "ogTitleField",
-                        options: textFieldSources,
-                        value: metaBundleSettings.ogTitleField,
-                        errors: metaBundleSettings.getErrors("ogTitleField"),
-                    }) }}
-                </div>
-            {% endnamespace %}
-        {% endif %}
-
-        {% namespace "metaGlobalVars" %}
-            <div class="input ltr seomatic-textSourceFromUrl">
-                {{ forms.text({
-                    id: "ogTitle",
-                    name: "ogTitle",
-                    value: metaGlobalVars.ogTitle,
-                    class: "nicetext",
-                    maxlength: seomatic.config.maxTitleLength,
-                    showCharsLeft: true,
-                    warning: false,
-                    errors: metaGlobalVars.getErrors("ogTitle"),
-                }) }}
-            </div>
-        {% endnamespace %}
-    </div>
+    {% include "seomatic/settings/_includes/fields/_ogTitle.twig" %}
 {% endif %}
 
 {############### Facebook OpenGraph Site Name Position ###############}
 
-{% set textOptions = {
-    fromCustom: "Custom Position"|t("seomatic"),
-} %}
-{% set textOptions = { sameAsSeo: "Same as Site Name Position"|t("seomatic"), } | merge(textOptions) %}
-{% if pageContext == "content" %}
-    {% set textOptions = { sameAsGlobal: "Same as Global Facebook OpenGraph Site Name Position"|t("seomatic"), } | merge(textOptions) %}
-{% endif %}
-
 {% if field is not defined or 'ogSiteNamePosition' in field.facebookEnabledFields %}
-    <div class="field seomatic-textSourceWrapper" id="metaBundleSettings-ogSiteNamePositionSource-field">
-        <div class="heading">
-            <label id="metaBundleSettings-ogSiteNamePositionSource-label" for="metaBundleSettings-ogSiteNamePositionSource">{{ "Facebook OpenGraph Site Name Position Source"|t("seomatic") }}</label>
-        </div>
-        <div class="instructions"><p>{{ "Where the Site Name is placed relative to the Facebook OpenGraph Title in the &lt;og:title&gt; tag"|t("seomatic") |raw }}</p>
-        </div>
-        {% namespace "metaBundleSettings" %}
-            <div class="heading">
-                {{ forms.select({
-                    id: "ogSiteNamePositionSource",
-                    name: "ogSiteNamePositionSource",
-                    options: textOptions,
-                    value: metaBundleSettings.ogSiteNamePositionSource,
-                    class: "seomatic-textSourceSelect",
-                    errors: metaBundleSettings.getErrors("ogSiteNamePositionSource"),
-                }) }}
-            </div>
-        {% endnamespace %}
-
-        {% namespace "metaGlobalVars" %}
-        <div class="heading seomatic-textSourceFromUrl">
-            {{ forms.selectField({
-                id: "ogSiteNamePosition",
-                name: "ogSiteNamePosition",
-                options: {
-                    before: "Before"|t("seomatic"),
-                    after: "After"|t("seomatic"),
-                    none: "None"|t("seomatic"),
-                },
-                value: metaGlobalVars.ogSiteNamePosition,
-                warning: false,
-                errors: metaGlobalVars.getErrors("ogSiteNamePosition"),
-            }) }}
-        </div>
-        {% endnamespace %}
-    </div>
+    {% include "seomatic/settings/_includes/fields/_ogSiteNamePosition.twig" %}
 {% endif %}
 
 {############### Facebook OpenGraph Description ###############}
 
-{% set textOptions = {
-    fromCustom: "Custom Text"|t("seomatic"),
-} %}
-{% if textFieldSources is defined and textFieldSources |length %}
-    {% set textOptions = { summaryFromField: "Summary From Field"|t("seomatic"), } | merge(textOptions) %}
-    {% set textOptions = { fromField: "From Field"|t("seomatic"), } | merge(textOptions) %}
-{% endif %}
-{% set textOptions = { sameAsSeo: "Same as SEO Description"|t("seomatic"), } | merge(textOptions) %}
-
 {% if field is not defined or 'ogDescription' in field.facebookEnabledFields %}
-    <div class="field seomatic-textSourceWrapper" id="metaBundleSettings-ogDescriptionSource-field">
-        <div class="heading">
-            <label id="metaBundleSettings-ogDescriptionSource-label" for="metaBundleSettings-ogDescriptionSource">{{ "Facebook OpenGraph Description Source"|t("seomatic") }}</label>
-        </div>
-        <div class="instructions"><p>{{ "Facebook OpenGraph descriptions are displayed below the Facebook OpenGraph Title in your Facebook Cards. Use them to provide a summary of what your page is about."|t("seomatic") }}</p>
-        </div>
-        {% namespace "metaBundleSettings" %}
-            <div class="heading">
-                {{ forms.select({
-                    id: "ogDescriptionSource",
-                    name: "ogDescriptionSource",
-                    options: textOptions,
-                    value: metaBundleSettings.ogDescriptionSource,
-                    class: "seomatic-textSourceSelect",
-                    errors: metaBundleSettings.getErrors("ogDescriptionSource"),
-                }) }}
-            </div>
-        {% endnamespace %}
-
-        {% if textFieldSources is defined and textFieldSources |length %}
-            {% namespace "metaBundleSettings" %}
-                <div class="heading seomatic-textSourceFromField">
-                    <label id="metaBundleSettings-ogDescriptionField-label" for="metaBundleSettings-ogDescriptionField">{{ "Source Field: "|t("seomatic") }}</label>
-                    {{ forms.select({
-                        id: "ogDescriptionField",
-                        name: "ogDescriptionField",
-                        options: textFieldSources,
-                        value: metaBundleSettings.ogDescriptionField,
-                        errors: metaBundleSettings.getErrors("ogDescriptionField"),
-                    }) }}
-                </div>
-            {% endnamespace %}
-        {% endif %}
-
-        {% namespace "metaGlobalVars" %}
-            <div class="input ltr seomatic-textSourceFromUrl">
-                {{ forms.textArea({
-                    id: "ogDescription",
-                    name: "ogDescription",
-                    value: metaGlobalVars.ogDescription,
-                    class: "nicetext",
-                    maxlength: 300,
-                    showCharsLeft: true,
-                    warning: false,
-                    errors: metaGlobalVars.getErrors("ogDescription"),
-                }) }}
-            </div>
-        {% endnamespace %}
-    </div>
+    {% include "seomatic/settings/_includes/fields/_ogDescription.twig" %}
 {% endif %}
 
 {############### SEO Image ###############}
@@ -228,63 +49,6 @@
 
 {############### Facebook OpenGraph Image Description ###############}
 
-{% set textOptions = {
-    fromCustom: "Custom Text"|t("seomatic"),
-} %}
-{% if textFieldSources is defined and textFieldSources |length %}
-    {% set textOptions = { summaryFromField: "Summary From Field"|t("seomatic"), } | merge(textOptions) %}
-    {% set textOptions = { fromField: "From Field"|t("seomatic"), } | merge(textOptions) %}
-{% endif %}
-{% set textOptions = { sameAsSeo: "Same As SEO Image Description"|t("seomatic"), } | merge(textOptions) %}
-
-{% if field is not defined or 'ogImageDescription' in field.facebookEnabledFields %}
-    <div class="field seomatic-textSourceWrapper" id="metaBundleSettings-ogImageDescriptionSource-field">
-        <div class="heading">
-            <label id="metaBundleSettings-ogImageDescriptionSource-label" for="metaBundleSettings-ogImageDescriptionSource">{{ "Facebook OpenGraph Image Description Source"|t("seomatic") }}</label>
-        </div>
-        <div class="instructions"><p>{{ "A text description of the image conveying the essential nature of an image to users who are visually impaired."|t("seomatic") }}</p>
-        </div>
-        {% namespace "metaBundleSettings" %}
-            <div class="heading">
-                {{ forms.select({
-                    id: "ogImageDescriptionSource",
-                    name: "ogImageDescriptionSource",
-                    options: textOptions,
-                    value: metaBundleSettings.ogImageDescriptionSource,
-                    class: "seomatic-textSourceSelect",
-                    errors: metaBundleSettings.getErrors("ogImageDescriptionSource"),
-                }) }}
-            </div>
-        {% endnamespace %}
-
-        {% if textFieldSources is defined and textFieldSources |length %}
-            {% namespace "metaBundleSettings" %}
-                <div class="heading seomatic-textSourceFromField">
-                    <label id="metaBundleSettings-ogImageDescriptionField-label" for="metaBundleSettings-ogImageDescriptionField">{{ "Source Field: "|t("seomatic") }}</label>
-                    {{ forms.select({
-                        id: "ogImageDescriptionField",
-                        name: "ogImageDescriptionField",
-                        options: textFieldSources,
-                        value: metaBundleSettings.ogImageDescriptionField,
-                        errors: metaBundleSettings.getErrors("ogImageDescriptionField"),
-                    }) }}
-                </div>
-            {% endnamespace %}
-        {% endif %}
-
-        {% namespace "metaGlobalVars" %}
-            <div class="input ltr seomatic-textSourceFromUrl">
-                {{ forms.textArea({
-                    id: "ogImageDescription",
-                    name: "ogImageDescription",
-                    value: metaGlobalVars.ogImageDescription,
-                    class: "nicetext",
-                    maxlength: 420,
-                    showCharsLeft: true,
-                    warning: false,
-                    errors: metaGlobalVars.getErrors("ogImageDescription"),
-                }) }}
-            </div>
-        {% endnamespace %}
-    </div>
+{% if field is not defined or 'seoImageDescription' in field.generalEnabledFields %}
+    {% include "seomatic/settings/_includes/fields/_ogImageDescription.twig" %}
 {% endif %}

@@ -1,0 +1,67 @@
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "ogSiteNamePosition") %}
+{% set hasIneritableValues = inheritedFrom is not null %}
+
+{% set additionalVars = {
+    'isInherited': hasIneritableValues and seomatic.helper.isInherited(metaGlobalVars, "ogSiteNamePosition"),
+    'hasInheritableValues': hasIneritableValues,
+    'fieldLabel': "Facebook OpenGraph Site Name Position Source"|t("seomatic"),
+    'labelFor': 'metaBundleSettings-siteNamePositionSource',
+    'wrapperClass': 'seomatic-textSourceWrapper',
+    'settingName': 'ogSiteNamePosition'
+} %}
+
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro ogSiteNamePositionField(metaBundleSettings, metaGlobalVars, pageContext) %}
+        {% import "_includes/forms" as forms %}
+
+        {% set textOptions = {
+            fromCustom: "Custom Position"|t("seomatic"),
+        } %}
+        {% if pageContext == "content" %}
+            {% set textOptions = { sameAsGlobal: "Same as Global Facebook OpenGraph Site Name Position"|t("seomatic"), } | merge(textOptions) %}
+        {% endif %}
+
+        {% set customPositions = {
+            before: "Before"|t("seomatic"),
+            after: "After"|t("seomatic"),
+            none: "None"|t("seomatic"),
+        } %}
+
+        <div class="instructions">
+            {{ "Where the Site Name is placed relative to the Facebook OpenGraph Title in the &lt;og:title&gt; tag"|t("seomatic") |raw }}
+        </div>
+        {% namespace "metaBundleSettings" %}
+            <div class="heading">
+                {{ forms.select({
+                    id: "ogSiteNamePositionSource",
+                    name: "ogSiteNamePositionSource",
+                    options: textOptions,
+                    value: metaBundleSettings.ogSiteNamePositionSource,
+                    class: "seomatic-textSourceSelect",
+                    errors: metaBundleSettings.getErrors("ogSiteNamePositionSource"),
+                }) }}
+            </div>
+        {% endnamespace %}
+
+        {% namespace "metaGlobalVars" %}
+            <div class="heading seomatic-textSourceFromUrl">
+                {{ forms.selectField({
+                    id: "ogSiteNamePosition",
+                    name: "ogSiteNamePosition",
+                    options: customPositions,
+                    value: metaGlobalVars.ogSiteNamePosition,
+                    warning: false,
+                    errors: metaGlobalVars.getErrors("ogSiteNamePosition"),
+                }) }}
+            </div>
+        {% endnamespace %}
+    {% endmacro %}
+
+    {% block inheritedValues %}
+        {{ _self.ogSiteNamePositionField(inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars, pageContext) }}
+    {% endblock %}
+
+    {% block field %}
+        {{ _self.ogSiteNamePositionField(metaBundleSettings, metaGlobalVars, pageContext) }}
+    {% endblock %}
+{% endembed %}

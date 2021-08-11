@@ -9,6 +9,7 @@
                     :flat="false"
                     :default-expand-level="0"
                     :options="options"
+                    :disabled="disabled"
             />
         </div>
         <div v-if="schemaName !== null" class="heading">
@@ -34,7 +35,8 @@
         // register the component
         components: { Treeselect },
         props: {
-            entity: {type: String, default: null},
+          entity: {type: String, default: null},
+          disabled: {type: Boolean, default: false}
         },
         watch: {
             schemaName: function(value) {
