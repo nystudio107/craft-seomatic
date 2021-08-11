@@ -526,9 +526,11 @@ class Helper extends Component
     {
         if (in_array($collectionName, ['metaGlobalVars', 'metaSitemapVars'], true)) {
             foreach ($inheritedValues as $bundle) {
-                /** @var $bundle MetaBundle */
-                if (is_bool($bundle->{$collectionName}[$settingName]) || !empty($bundle->{$collectionName}[$settingName])) {
-                    return $bundle;
+                if (isset($bundle->{$collectionName}[$settingName])) {
+                    /** @var $bundle MetaBundle */
+                    if (is_bool($bundle->{$collectionName}[$settingName]) || !empty($bundle->{$collectionName}[$settingName])) {
+                        return $bundle;
+                    }
                 }
             }
         }
