@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.0 - UNRELEASED
+### Added
+* Scripts are now rendered and checked for Twig errors before they can be saved ([#944](https://github.com/nystudio107/craft-seomatic/issues/944))
+
 ## 3.3.48 - 2021.08.11
 ### Fixed
 * Fixed a regression that caused sitemap generation via console command to fail ([#943](https://github.com/nystudio107/craft-seomatic/issues/943))
