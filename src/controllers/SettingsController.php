@@ -17,7 +17,9 @@ use nystudio107\seomatic\helpers\Schema as SchemaHelper;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\DynamicMeta as DynamicMetaHelper;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
+use nystudio107\seomatic\helpers\PluginTemplate;
 use nystudio107\seomatic\models\MetaBundle;
+use nystudio107\seomatic\models\MetaScript;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\services\FrontendTemplates;
 use nystudio107\seomatic\services\MetaBundles;
@@ -821,7 +823,7 @@ class SettingsController extends Controller
      * @throws NotFoundHttpException
      * @throws \yii\web\ForbiddenHttpException
      */
-    public function actionTracking(string $subSection = 'gtag', string $siteHandle = null, $loadFromSiteHandle = null): Response
+    public function actionTracking(string $subSection = 'gtag', string $siteHandle = null, $loadFromSiteHandle = null, $editedMetaBundle = null): Response
     {
         $variables = [];
         // Get the site to edit
@@ -839,6 +841,9 @@ class SettingsController extends Controller
         $siteIdToLoad = $loadFromSiteHandle === null ? (int)$variables['currentSiteId'] : $loadFromSiteId;
         // Load the metabundle
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteIdToLoad);
+        if ($editedMetaBundle) {
+            $metaBundle = $editedMetaBundle;
+        }
         Seomatic::$previewingMetaContainers = false;
         if ($metaBundle !== null) {
             $variables['scripts'] = Seomatic::$plugin->metaBundles->getContainerDataFromBundle(
@@ -894,7 +899,7 @@ class SettingsController extends Controller
      * @throws \yii\web\BadRequestHttpException
      * @throws \craft\errors\MissingComponentException
      */
-    public function actionSaveTracking(): Response
+    public function actionSaveTracking()
     {
         $this->requirePostRequest();
         $request = Craft::$app->getRequest();
@@ -905,13 +910,25 @@ class SettingsController extends Controller
         Seomatic::$previewingMetaContainers = true;
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         Seomatic::$previewingMetaContainers = false;
+        $hasErrors = false;
         if ($metaBundle) {
             /** @var array $scriptSettings */
             foreach ($scriptSettings as $scriptHandle => $scriptData) {
                 foreach ($metaBundle->metaContainers as $metaContainer) {
                     if ($metaContainer::CONTAINER_TYPE === MetaScriptContainer::CONTAINER_TYPE) {
                         $data = $metaContainer->getData($scriptHandle);
+                        /** @var MetaScript $data */
                         if ($data) {
+                            $error = PluginTemplate::isStringTemplateValid($scriptData['templateString'], []);
+                            if (!empty($error)) {
+                                $data->addError('templateString', $error);
+                                $hasErrors = true;
+                            }
+                            $error = PluginTemplate::isStringTemplateValid($scriptData['bodyTemplateString'], []);
+                            if (!empty($error)) {
+                                $data->addError('bodyTemplateString', $error);
+                                $hasErrors = true;
+                            }
                             /** @var array $scriptData */
                             foreach ($scriptData as $key => $value) {
                                 if (\is_array($value)) {
@@ -926,6 +943,16 @@ class SettingsController extends Controller
                     }
                 }
             }
+            if ($hasErrors) {
+                Craft::$app->getSession()->setError(Craft::t('app', "Couldn't save tracking settings due to a Twig error."));
+                // Send the redirect back to the template
+                Craft::$app->getUrlManager()->setRouteParams([
+                    'editedMetaBundle' => $metaBundle,
+                ]);
+
+                return null;
+            }
+
             Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
 
             Seomatic::$plugin->clearAllCaches();
