@@ -3,6 +3,7 @@
 ## 3.4.0 - UNRELEASED
 ### Added
 * Scripts are now rendered and checked for Twig errors before they can be saved ([#944](https://github.com/nystudio107/craft-seomatic/issues/944))
+* Added Pinterest Tag tracking script ([#936](https://github.com/nystudio107/craft-seomatic/issues/936))
 
 ### Changed
 * Switch from the shorthand format to object format for the search target JSON-LD ([#945](https://github.com/nystudio107/craft-seomatic/issues/945))
