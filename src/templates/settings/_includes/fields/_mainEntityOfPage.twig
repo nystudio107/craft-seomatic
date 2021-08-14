@@ -21,7 +21,9 @@
     {% endmacro %}
 
     {% block inheritedValues %}
-        {{ _self.mainEntityField(inheritedFrom.metaBundleSettings, true) }}
+        {% if hasInheritableValues %}
+            {{ _self.mainEntityField(inheritedFrom.metaBundleSettings, true) }}
+        {% endif %}
     {% endblock %}
 
     {% block field %}

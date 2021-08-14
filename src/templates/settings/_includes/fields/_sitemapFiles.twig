@@ -32,7 +32,9 @@
     {% endmacro %}
 
     {% block inheritedValues %}
-        {{ _self.sitemapFilesField(inheritedFrom.metaSitemapVars) }}
+        {% if hasInheritableValues %}
+            {{ _self.sitemapFilesField(inheritedFrom.metaSitemapVars) }}
+        {% endif %}
     {% endblock %}
 
     {% block field %}

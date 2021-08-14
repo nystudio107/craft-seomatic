@@ -44,7 +44,7 @@
     {% endif %}
 
     {% block inheritedValues %}
-        {% if inheritedFrom is not null %}
+        {% if hasInheritableValues %}
             {% if inheritedFrom.metaBundleSettings.seoImageIds|length > 0 %}
                 {%  set seoImageElement = craft.assets.id(inheritedFrom.metaBundleSettings.seoImageIds).limit(1).all() %}
             {% else %}

@@ -32,7 +32,9 @@
     {% endmacro %}
 
     {% block inheritedValues %}
-        {{ _self.sitemapAltLinksField(inheritedFrom.metaSitemapVars) }}
+        {% if hasInheritableValues %}
+            {{ _self.sitemapAltLinksField(inheritedFrom.metaSitemapVars) }}
+        {% endif %}
     {% endblock %}
 
     {% block field %}

@@ -44,7 +44,7 @@
     {% endif %}
 
     {% block inheritedValues %}
-        {% if inheritedFrom is not null %}
+        {% if hasInheritableValues %}
             {% if inheritedFrom.metaBundleSettings.twitterImageIds|length > 0 %}
                 {%  set twitterImageElement = craft.assets.id(inheritedFrom.metaBundleSettings.twitterImageIds).limit(1).all() %}
             {% else %}
