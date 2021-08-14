@@ -2,7 +2,7 @@
  * @project        seomatic
  * @name           vendors.js
  * @author         Andrew Welch
- * @build          Wed Aug 11 2021 16:43:00 GMT+0000 (Coordinated Universal Time)
+ * @build          Sat Aug 14 2021 20:52:01 GMT+0000 (Coordinated Universal Time)
  * @copyright      Copyright (c) 2021 ©2020 nystudio107.com
  *
  */
