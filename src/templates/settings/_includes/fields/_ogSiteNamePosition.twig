@@ -1,8 +1,8 @@
 {% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "ogSiteNamePosition") %}
-{% set hasIneritableValues = inheritedFrom is not null %}
+{% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasIneritableValues and seomatic.helper.isInherited(metaGlobalVars, "ogSiteNamePosition"),
+    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaGlobalVars, "ogSiteNamePosition"),
     'fieldLabel': "Facebook OpenGraph Site Name Position Source"|t("seomatic"),
     'labelFor': 'metaBundleSettings-siteNamePositionSource',
     'wrapperClass': 'seomatic-textSourceWrapper',
@@ -57,7 +57,9 @@
     {% endmacro %}
 
     {% block inheritedValues %}
-        {{ _self.ogSiteNamePositionField(inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars, pageContext) }}
+        {% if hasInheritableValues %}
+            {{ _self.ogSiteNamePositionField(inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars, pageContext) }}
+        {% endif %}
     {% endblock %}
 
     {% block field %}

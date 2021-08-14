@@ -1,8 +1,8 @@
 {% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "twitterImage") %}
-{% set hasIneritableValues = inheritedFrom is not null %}
+{% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasIneritableValues and seomatic.helper.isInherited(metaGlobalVars, "twitterImage"),
+    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaGlobalVars, "twitterImage"),
     'fieldLabel': "Twitter Image Source"|t("seomatic"),
     'labelFor': 'metaBundleSettings-twitterImageSource',
     'wrapperClass': 'seomatic-imageSourceInnerWrapper',
@@ -51,7 +51,9 @@
                 {%  set twitterImageElement = [] %}
             {% endif %}
 
-            {{ _self.entiretwitterImageField(twitterImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
+            {% if hasInheritableValues %}
+                {{ _self.entiretwitterImageField(twitterImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
+            {% endif %}
         {% endif %}
     {% endblock %}
 

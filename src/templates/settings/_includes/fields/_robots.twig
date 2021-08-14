@@ -1,8 +1,8 @@
 {% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "robots") %}
-{% set hasIneritableValues = inheritedFrom is not null %}
+{% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasIneritableValues and seomatic.helper.isInherited(metaGlobalVars, "robots"),
+    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaGlobalVars, "robots"),
     'fieldLabel': "Robots"|t("seomatic"),
     'settingName': 'robots'
 } %}
@@ -37,7 +37,9 @@
     {% endmacro %}
 
     {% block inheritedValues %}
-        {{ _self.robotsField(inheritedFrom.metaGlobalVars, pageContext) }}
+        {% if hasInheritableValues %}
+            {{ _self.robotsField(inheritedFrom.metaGlobalVars, pageContext) }}
+        {% endif %}
     {% endblock %}
 
     {% block field %}

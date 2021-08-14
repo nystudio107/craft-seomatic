@@ -1,8 +1,8 @@
 {% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "sitemapChangeFreq", "metaSitemapVars") %}
-{% set hasIneritableValues = inheritedFrom is not null %}
+{% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasIneritableValues and seomatic.helper.isInherited(metaSitemapVars, "sitemapChangeFreq"),
+    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaSitemapVars, "sitemapChangeFreq"),
     'fieldLabel': "Change Frequency"|t("seomatic"),
     'settingName': 'sitemapChangeFreq',
     'labelFor': 'metaSitemapVars-sitemapChangeFreq',
@@ -44,7 +44,9 @@
     {% endif %}
 
     {% block inheritedValues %}
-        {{ _self.sitemapChangeFreqField(sitemapChangeFreqOptions, inheritedFrom.metaSitemapVars) }}
+        {% if hasInheritableValues %}
+            {{ _self.sitemapChangeFreqField(sitemapChangeFreqOptions, inheritedFrom.metaSitemapVars) }}
+        {% endif %}
     {% endblock %}
 
     {% block field %}

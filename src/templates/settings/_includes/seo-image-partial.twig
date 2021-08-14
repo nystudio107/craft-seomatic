@@ -1,8 +1,8 @@
 {% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "seoImage") %}
-{% set hasIneritableValues = inheritedFrom is not null %}
+{% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasIneritableValues and seomatic.helper.isInherited(metaGlobalVars, "seoImage"),
+    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaGlobalVars, "seoImage"),
     'fieldLabel': "SEO Image Source"|t("seomatic"),
     'labelFor': 'metaBundleSettings-seoImageSource',
     'wrapperClass': 'seomatic-imageSourceInnerWrapper',
@@ -51,7 +51,9 @@
                 {%  set seoImageElement = [] %}
             {% endif %}
 
-            {{ _self.entireSeoImageField(seoImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
+            {% if hasInheritableValues %}
+                {{ _self.entireSeoImageField(seoImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
+            {% endif %}
         {% endif %}
     {% endblock %}
 

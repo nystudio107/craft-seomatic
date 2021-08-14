@@ -1,8 +1,8 @@
 {% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "seoDescription") %}
-{% set hasIneritableValues = inheritedFrom is not null %}
+{% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasIneritableValues and seomatic.helper.isInherited(metaGlobalVars, "seoDescription"),
+    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaGlobalVars, "seoDescription"),
     'wrapperClass': 'seomatic-textSourceWrapper',
     'fieldLabel': "SEO Description Source"|t("seomatic"),
     'labelFor': 'metaBundleSettings-seoDescriptionSource',
@@ -70,7 +70,7 @@
     {% endif %}
 
     {% block inheritedValues %}
-        {% if inheritedFrom is not null %}
+        {% if hasInheritableValues %}
             {{ _self.seoDescriptionField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
         {% endif %}
     {% endblock %}

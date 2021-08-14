@@ -1,8 +1,8 @@
 {% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "twitterImageDescription") %}
-{% set hasIneritableValues = inheritedFrom is not null %}
+{% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasIneritableValues and seomatic.helper.isInherited(metaGlobalVars, "twitterImageDescription"),
+    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaGlobalVars, "twitterImageDescription"),
     'wrapperClass': 'seomatic-textSourceWrapper',
     'fieldLabel': "Twitter Image Description Source"|t("seomatic"),
     'labelFor': 'metaBundleSettings-twitterImageDescriptionSource',
@@ -72,7 +72,7 @@
     {% set textOptions = { sameAsSeo: "Same As SEO Image Description"|t("seomatic"), } | merge(textOptions) %}
 
     {% block inheritedValues %}
-        {% if inheritedFrom is not null %}
+        {% if hasInheritableValues %}
             {{ _self.twitterImageDescriptionField(textOptions, textFieldSources, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
         {% endif %}
     {% endblock %}
