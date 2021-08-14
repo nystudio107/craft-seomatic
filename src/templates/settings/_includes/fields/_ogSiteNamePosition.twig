@@ -57,9 +57,7 @@
     {% endmacro %}
 
     {% block inheritedValues %}
-        {% if hasInheritableValues %}
-            {{ _self.ogSiteNamePositionField(inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars, pageContext) }}
-        {% endif %}
+        {{ _self.ogSiteNamePositionField(inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, pageContext) }}
     {% endblock %}
 
     {% block field %}

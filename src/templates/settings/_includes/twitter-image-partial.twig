@@ -44,24 +44,19 @@
     {% endif %}
 
     {% block inheritedValues %}
-        {% if hasInheritableValues %}
-            {% if inheritedFrom.metaBundleSettings.twitterImageIds|length > 0 %}
-                {%  set twitterImageElement = craft.assets.id(inheritedFrom.metaBundleSettings.twitterImageIds).limit(1).all() %}
-            {% else %}
-                {%  set twitterImageElement = [] %}
-            {% endif %}
-
-            {% if hasInheritableValues %}
-                {{ _self.entiretwitterImageField(twitterImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
-            {% endif %}
+        {% set twitterImageElement = [] %}
+        {% set imageIds = inheritedFrom.metaBundleSettings.twitterImageIds ?? metaBundleSettings.twitterImageIds ?? null %}
+        {% if imageIds %}
+            {% set twitterImageElement = craft.assets.id(imageIds).limit(1).all() %}
         {% endif %}
+
+        {{ _self.entiretwitterImageField(twitterImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars) }}
     {% endblock %}
 
     {% block field %}
-        {% if metaBundleSettings.twitterImageIds|length > 0 %}
-            {%  set twitterImageElement = craft.assets.id(metaBundleSettings.twitterImageIds).limit(1).all() %}
-        {% else %}
-            {%  set twitterImageElement = [] %}
+        {% set twitterImageElement = [] %}
+        {% if metaBundleSettings.twitterImageIds|length %}
+            {% set twitterImageElement = craft.assets.id(metaBundleSettings.twitterImageIds).limit(1).all() %}
         {% endif %}
 
         {{ _self.entireTwitterImageField(twitterImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars) }}

@@ -31,9 +31,7 @@
     {% endmacro %}
 
     {% block inheritedValues %}
-        {% if hasInheritableValues %}
-            {{ _self.sitemapUrlsField(currentSourceBundleType, inheritedFrom.metaSitemapVars) }}
-        {% endif %}
+        {{ _self.sitemapUrlsField(currentSourceBundleType, inheritedFrom.metaSitemapVars ?? metaSitemapVars) }}
     {% endblock %}
 
     {% block field %}

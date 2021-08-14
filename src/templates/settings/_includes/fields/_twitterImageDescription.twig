@@ -72,13 +72,11 @@
     {% set textOptions = { sameAsSeo: "Same As SEO Image Description"|t("seomatic"), } | merge(textOptions) %}
 
     {% block inheritedValues %}
-        {% if hasInheritableValues %}
-            {{ _self.twitterImageDescriptionField(textOptions, textFieldSources, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
-        {% endif %}
+        {{ _self.twitterImageDescriptionField(textOptions, textFieldSources, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars) }}
     {% endblock %}
 
     {% block field %}
         {{ _self.twitterImageDescriptionField(textOptions, textFieldSources,  metaBundleSettings, metaGlobalVars) }}
     {% endblock %}
 
-{%  endembed %}
+{% endembed %}
