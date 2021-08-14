@@ -89,9 +89,7 @@
     {% endif %}
 
     {% block inheritedValues %}
-        {% if hasInheritableValues %}
-            {{ _self.seoImageField(seoImageElements, elementType, imageOptions, assetFieldSources, seomatic.config, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
-        {% endif %}
+        {{ _self.seoImageField(seoImageElements, elementType, imageOptions, assetFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars) }}
     {% endblock %}
 
     {% block field %}

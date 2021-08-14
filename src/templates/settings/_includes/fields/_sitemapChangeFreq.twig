@@ -44,9 +44,7 @@
     {% endif %}
 
     {% block inheritedValues %}
-        {% if hasInheritableValues %}
-            {{ _self.sitemapChangeFreqField(sitemapChangeFreqOptions, inheritedFrom.metaSitemapVars) }}
-        {% endif %}
+        {{ _self.sitemapChangeFreqField(sitemapChangeFreqOptions, inheritedFrom.metaSitemapVars ?? metaSitemapVars) }}
     {% endblock %}
 
     {% block field %}

@@ -71,13 +71,11 @@
     {% set textOptions = { sameAsSeo: "Same As SEO Image Description"|t("seomatic"), } | merge(textOptions) %}
 
     {% block inheritedValues %}
-        {% if hasInheritableValues %}
-            {{ _self.ogImageDescriptionField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
-        {% endif %}
+        {{ _self.ogImageDescriptionField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars) }}
     {% endblock %}
 
     {% block field %}
         {{ _self.ogImageDescriptionField(textOptions, textFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars) }}
     {% endblock %}
 
-{%  endembed %}
+{% endembed %}

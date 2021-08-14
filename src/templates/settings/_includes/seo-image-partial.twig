@@ -44,24 +44,19 @@
     {% endif %}
 
     {% block inheritedValues %}
-        {% if hasInheritableValues %}
-            {% if inheritedFrom.metaBundleSettings.seoImageIds|length > 0 %}
-                {%  set seoImageElement = craft.assets.id(inheritedFrom.metaBundleSettings.seoImageIds).limit(1).all() %}
-            {% else %}
-                {%  set seoImageElement = [] %}
-            {% endif %}
-
-            {% if hasInheritableValues %}
-                {{ _self.entireSeoImageField(seoImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
-            {% endif %}
+        {% set seoImageElement = [] %}
+        {% set imageIds = inheritedFrom.metaBundleSettings.seoImageIds ?? metaBundleSettings.seoImageIds ?? null %}
+        {% if imageIds %}
+            {% set seoImageElement = craft.assets.id(imageIds).limit(1).all() %}
         {% endif %}
+
+        {{ _self.entireSeoImageField(seoImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars) }}
     {% endblock %}
 
     {% block field %}
-        {% if metaBundleSettings.seoImageIds|length > 0 %}
-            {%  set seoImageElement = craft.assets.id(metaBundleSettings.seoImageIds).limit(1).all() %}
-        {% else %}
-            {%  set seoImageElement = [] %}
+        {% set seoImageElement = [] %}
+        {% if metaBundleSettings.seoImageIds|length %}
+            {% set seoImageElement = craft.assets.id(metaBundleSettings.seoImageIds).limit(1).all() %}
         {% endif %}
 
         {{ _self.entireSeoImageField(seoImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars) }}

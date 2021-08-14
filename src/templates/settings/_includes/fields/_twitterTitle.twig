@@ -70,9 +70,7 @@
     {% set textOptions = { sameAsSeo: "Same as SEO Title"|t("seomatic"), } | merge(textOptions) %}
 
     {% block inheritedValues %}
-        {% if hasInheritableValues %}
-            {{ _self.twitterTitleField(textOptions, textFieldSources, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
-        {% endif %}
+        {{ _self.twitterTitleField(textOptions, textFieldSources, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars) }}
     {% endblock %}
 
     {% block field %}

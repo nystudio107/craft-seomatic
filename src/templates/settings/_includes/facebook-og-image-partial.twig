@@ -44,24 +44,19 @@
     {% endif %}
 
     {% block inheritedValues %}
-        {% if hasInheritableValues %}
-            {% if inheritedFrom.metaBundleSettings.ogImageIds|length > 0 %}
-                {%  set ogImageElement = craft.assets.id(inheritedFrom.metaBundleSettings.ogImageIds).limit(1).all() %}
-            {% else %}
-                {%  set ogImageElement = [] %}
-            {% endif %}
-
-            {% if hasInheritableValues %}
-                {{ _self.entireOgImageField(ogImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
-            {% endif %}
+        {% set ogImageElement = [] %}
+        {% set imageIds = inheritedFrom.metaBundleSettings.ogImageIds ?? metaBundleSettings.ogImageIds ?? null %}
+        {% if imageIds %}
+            {% set ogImageElement = craft.assets.id(imageIds).limit(1).all() %}
         {% endif %}
+
+        {{ _self.entireOgImageField(ogImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars) }}
     {% endblock %}
 
     {% block field %}
-        {% if metaBundleSettings.ogImageIds|length > 0 %}
-            {%  set ogImageElement = craft.assets.id(metaBundleSettings.ogImageIds).limit(1).all() %}
-        {% else %}
-            {%  set ogImageElement = [] %}
+        {% set ogImageElement = [] %}
+        {% if metaBundleSettings.ogImageIds|length %}
+            {% set ogImageElement = craft.assets.id(metaBundleSettings.ogImageIds).limit(1).all() %}
         {% endif %}
 
         {{ _self.entireOgImageField(ogImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars) }}

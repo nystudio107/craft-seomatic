@@ -37,9 +37,7 @@
     {% endmacro %}
 
     {% block inheritedValues %}
-        {% if hasInheritableValues %}
-            {{ _self.robotsField(inheritedFrom.metaGlobalVars, pageContext) }}
-        {% endif %}
+        {{ _self.robotsField(inheritedFrom.metaGlobalVars ?? metaGlobalVars, pageContext) }}
     {% endblock %}
 
     {% block field %}

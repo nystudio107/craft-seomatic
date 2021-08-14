@@ -44,9 +44,7 @@
     {% endmacro %}
 
     {% block inheritedValues %}
-        {% if hasInheritableValues %}
-            {{ _self.canonicalUrlField(inheritedFrom.metaGlobalVars, true) }}
-        {% endif %}
+        {{ _self.canonicalUrlField(inheritedFrom.metaGlobalVars ?? metaGlobalVars, true) }}
     {% endblock %}
 
     {% block field %}

@@ -46,9 +46,7 @@
     } %}
 
     {% block inheritedValues %}
-        {% if hasInheritableValues %}
-            {{ _self.sitemapFilesField(sitemapPriorityOptions, inheritedFrom.metaSitemapVars) }}
-        {% endif %}
+        {{ _self.sitemapFilesField(sitemapPriorityOptions, inheritedFrom.metaSitemapVars ?? metaSitemapVars) }}
     {% endblock %}
 
     {% block field %}

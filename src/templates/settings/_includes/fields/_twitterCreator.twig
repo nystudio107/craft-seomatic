@@ -66,9 +66,7 @@
     {% set textOptions = { sameAsSiteTwitter: "Same as Site Twitter Handle"|t("seomatic"), } | merge(textOptions) %}
 
     {% block inheritedValues %}
-        {% if hasInheritableValues %}
-            {{ _self.twitterCreatorField(textOptions, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
-        {% endif %}
+        {{ _self.twitterCreatorField(textOptions, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars) }}
     {% endblock %}
 
     {% block field %}

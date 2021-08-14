@@ -42,9 +42,7 @@
     } %}
 
     {% block inheritedValues %}
-        {% if hasInheritableValues %}
-            {{ _self.sitemapLimitField(sitemapLimitOptions, inheritedFrom.metaSitemapVars) }}
-        {% endif %}
+        {{ _self.sitemapLimitField(sitemapLimitOptions, inheritedFrom.metaSitemapVars ?? metaSitemapVars) }}
     {% endblock %}
 
     {% block field %}
