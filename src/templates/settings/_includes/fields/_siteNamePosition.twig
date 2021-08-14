@@ -1,10 +1,10 @@
 {% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "siteNamePosition") %}
-{% set hasIneritableValues = inheritedFrom is not null %}
+{% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set positionSuffix = pageContext == "content" ? " Source" : "" %}
 
 {% set additionalVars = {
-    'isInherited': hasIneritableValues and seomatic.helper.isInherited(metaGlobalVars, "siteNamePosition"),
+    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaGlobalVars, "siteNamePosition"),
     'fieldLabel': "Site Name Position#{positionSuffix}"|t("seomatic"),
     'labelFor': 'metaBundleSettings-siteNamePositionSource',
     'wrapperClass': 'seomatic-textSourceWrapper',
@@ -65,7 +65,9 @@
     {% endmacro %}
 
     {% block inheritedValues %}
-        {{ _self.siteNamePositionField(inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars, pageContext) }}
+        {% if hasInheritableValues %}
+            {{ _self.siteNamePositionField(inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars, pageContext) }}
+        {% endif %}
     {% endblock %}
 
     {% block field %}

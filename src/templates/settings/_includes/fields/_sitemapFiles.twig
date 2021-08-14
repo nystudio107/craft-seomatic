@@ -1,8 +1,8 @@
 {% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "sitemapFiles", "metaSitemapVars") %}
-{% set hasIneritableValues = inheritedFrom is not null %}
+{% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasIneritableValues and seomatic.helper.isInherited(metaSitemapVars, "sitemapFiles"),
+    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaSitemapVars, "sitemapFiles"),
     'fieldLabel': "Include Indexable Files in Sitemap"|t("seomatic"),
     'settingName': 'sitemapFiles',
     'labelFor': 'metaSitemapVars-sitemapFiles',
@@ -32,7 +32,9 @@
     {% endmacro %}
 
     {% block inheritedValues %}
-        {{ _self.sitemapFilesField(inheritedFrom.metaSitemapVars) }}
+        {% if hasInheritableValues %}
+            {{ _self.sitemapFilesField(inheritedFrom.metaSitemapVars) }}
+        {% endif %}
     {% endblock %}
 
     {% block field %}

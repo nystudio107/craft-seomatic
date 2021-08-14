@@ -1,8 +1,8 @@
 {% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "ogDescription") %}
-{% set hasIneritableValues = inheritedFrom is not null %}
+{% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasIneritableValues and seomatic.helper.isInherited(metaGlobalVars, "ogDescription"),
+    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaGlobalVars, "ogDescription"),
     'wrapperClass': 'seomatic-textSourceWrapper',
     'fieldLabel': "Facebook OpenGraph Description Source"|t("seomatic"),
     'labelFor': 'metaBundleSettings-ogDescriptionSource',
@@ -74,7 +74,7 @@
     {% set textOptions = { sameAsSeo: "Same as SEO Description"|t("seomatic"), } | merge(textOptions) %}
 
     {% block inheritedValues %}
-        {% if inheritedFrom is not null %}
+        {% if hasInheritableValues %}
             {{ _self.ogDescriptionField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
         {% endif %}
     {% endblock %}

@@ -1,8 +1,8 @@
 {% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "ogImage") %}
-{% set hasIneritableValues = inheritedFrom is not null %}
+{% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasIneritableValues and seomatic.helper.isInherited(metaGlobalVars, "ogImage"),
+    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaGlobalVars, "ogImage"),
     'fieldLabel': "Facebook OpenGraph Image Source"|t("seomatic"),
     'labelFor': 'metaBundleSettings-ogImageSource',
     'wrapperClass': 'seomatic-imageSourceInnerWrapper',
@@ -44,14 +44,16 @@
     {% endif %}
 
     {% block inheritedValues %}
-        {% if inheritedFrom is not null %}
+        {% if hasInheritableValues %}
             {% if inheritedFrom.metaBundleSettings.ogImageIds|length > 0 %}
                 {%  set ogImageElement = craft.assets.id(inheritedFrom.metaBundleSettings.ogImageIds).limit(1).all() %}
             {% else %}
                 {%  set ogImageElement = [] %}
             {% endif %}
 
-            {{ _self.entireOgImageField(ogImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
+            {% if hasInheritableValues %}
+                {{ _self.entireOgImageField(ogImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
+            {% endif %}
         {% endif %}
     {% endblock %}
 

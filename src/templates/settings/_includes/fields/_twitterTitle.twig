@@ -62,15 +62,15 @@
     {% set textOptions = {
         fromCustom: "Custom Text"|t("seomatic"),
     } %}
-    
+
     {% if textFieldSources is defined and textFieldSources |length %}
         {% set textOptions = { fromField: "From Field"|t("seomatic"), } | merge(textOptions) %}
     {% endif %}
-    
+
     {% set textOptions = { sameAsSeo: "Same as SEO Title"|t("seomatic"), } | merge(textOptions) %}
-    
+
     {% block inheritedValues %}
-        {% if inheritedFrom is not null %}
+        {% if hasInheritableValues %}
             {{ _self.twitterTitleField(textOptions, textFieldSources, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
         {% endif %}
     {% endblock %}

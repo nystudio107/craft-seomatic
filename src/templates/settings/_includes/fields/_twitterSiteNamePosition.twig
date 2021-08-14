@@ -1,8 +1,8 @@
 {% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "twitterSiteNamePosition") %}
-{% set hasIneritableValues = inheritedFrom is not null %}
+{% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasIneritableValues and seomatic.helper.isInherited(metaGlobalVars, "twitterSiteNamePosition"),
+    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaGlobalVars, "twitterSiteNamePosition"),
     'fieldLabel': "Twitter Site Name Position Source"|t("seomatic"),
     'labelFor': 'metaBundleSettings-twitterSiteNamePositionSource',
     'wrapperClass': 'seomatic-textSourceWrapper',
@@ -57,7 +57,9 @@
     {% endif %}
 
     {% block inheritedValues %}
-        {{ _self.twitterSiteNamePositionField(textOptions, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
+        {% if hasInheritableValues %}
+            {{ _self.twitterSiteNamePositionField(textOptions, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
+        {% endif %}
     {% endblock %}
 
     {% block field %}

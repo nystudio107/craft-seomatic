@@ -33,7 +33,7 @@
     } %}
 
     {% block inheritedValues %}
-        {% if inheritedFrom is not null %}
+        {% if hasInheritableValues %}
             {{ _self.twitterCardTypeField(twitterCardTypes, inheritedFrom.metaGlobalVars) }}
         {% endif %}
     {% endblock %}

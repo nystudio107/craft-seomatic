@@ -70,7 +70,7 @@
     {% set textOptions = { sameAsSeo: "Same as SEO Title"|t("seomatic"), } | merge(textOptions) %}
 
     {% block inheritedValues %}
-        {% if inheritedFrom is not null %}
+        {% if hasInheritableValues %}
             {{ _self.ogTitleField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
         {% endif %}
     {% endblock %}

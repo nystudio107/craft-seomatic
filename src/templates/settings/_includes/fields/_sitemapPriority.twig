@@ -1,8 +1,8 @@
 {% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "sitemapPriority", "metaSitemapVars") %}
-{% set hasIneritableValues = inheritedFrom is not null %}
+{% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasIneritableValues and seomatic.helper.isInherited(metaSitemapVars, "sitemapPriority"),
+    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaSitemapVars, "sitemapPriority"),
     'fieldLabel': "Priority"|t("seomatic"),
     'settingName': 'sitemapPriority',
     'labelFor': 'metaSitemapVars-sitemapPriority',
@@ -46,7 +46,9 @@
     } %}
 
     {% block inheritedValues %}
-        {{ _self.sitemapFilesField(sitemapPriorityOptions, inheritedFrom.metaSitemapVars) }}
+        {% if hasInheritableValues %}
+            {{ _self.sitemapFilesField(sitemapPriorityOptions, inheritedFrom.metaSitemapVars) }}
+        {% endif %}
     {% endblock %}
 
     {% block field %}

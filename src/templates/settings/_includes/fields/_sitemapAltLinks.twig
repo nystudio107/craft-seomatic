@@ -1,8 +1,8 @@
 {% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "sitemapAltLinks", "metaSitemapVars") %}
-{% set hasIneritableValues = inheritedFrom is not null %}
+{% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasIneritableValues and seomatic.helper.isInherited(metaSitemapVars, "sitemapAltLinks"),
+    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaSitemapVars, "sitemapAltLinks"),
     'fieldLabel': "Sitemap Alt URLs"|t("seomatic"),
     'settingName': 'sitemapAltLinks',
     'labelFor': 'metaSitemapVars-sitemapAltLinks',
@@ -32,7 +32,9 @@
     {% endmacro %}
 
     {% block inheritedValues %}
-        {{ _self.sitemapAltLinksField(inheritedFrom.metaSitemapVars) }}
+        {% if hasInheritableValues %}
+            {{ _self.sitemapAltLinksField(inheritedFrom.metaSitemapVars) }}
+        {% endif %}
     {% endblock %}
 
     {% block field %}

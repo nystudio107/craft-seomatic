@@ -42,7 +42,7 @@
     } %}
 
     {% block inheritedValues %}
-        {% if inheritedFrom is not null %}
+        {% if hasInheritableValues %}
             {{ _self.seoTitleField(facebookOpenGraphTypes, inheritedFrom.metaGlobalVars) }}
         {% endif %}
     {% endblock %}

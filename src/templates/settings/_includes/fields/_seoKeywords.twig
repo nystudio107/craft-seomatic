@@ -1,8 +1,8 @@
 {% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "seoKeywords") %}
-{% set hasIneritableValues = inheritedFrom is not null %}
+{% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasIneritableValues and seomatic.helper.isInherited(metaGlobalVars, "seoKeywords"),
+    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaGlobalVars, "seoKeywords"),
     'wrapperClass': 'seomatic-textSourceWrapper',
     'fieldLabel': "SEO Keywords Source"|t("seomatic"),
     'labelFor': 'metaBundleSettings-seoKeywordsSource',
@@ -70,7 +70,7 @@
     {% endif %}
 
     {% block inheritedValues %}
-        {% if inheritedFrom is not null %}
+        {% if hasInheritableValues %}
             {{ _self.seoKeywordsField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings, inheritedFrom.metaGlobalVars) }}
         {% endif %}
     {% endblock %}

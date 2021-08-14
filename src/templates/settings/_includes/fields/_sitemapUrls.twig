@@ -1,8 +1,8 @@
 {% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "sitemapUrls", "metaSitemapVars") %}
-{% set hasIneritableValues = inheritedFrom is not null %}
+{% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasIneritableValues and seomatic.helper.isInherited(metaSitemapVars, "sitemapUrls"),
+    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaSitemapVars, "sitemapUrls"),
     'fieldLabel': "Sitemap Enabled"|t("seomatic"),
     'settingName': 'sitemapUrls',
     'labelFor': 'metaSitemapVars-sitemapUrls',
@@ -31,7 +31,9 @@
     {% endmacro %}
 
     {% block inheritedValues %}
-        {{ _self.sitemapUrlsField(currentSourceBundleType, inheritedFrom.metaSitemapVars) }}
+        {% if hasInheritableValues %}
+            {{ _self.sitemapUrlsField(currentSourceBundleType, inheritedFrom.metaSitemapVars) }}
+        {% endif %}
     {% endblock %}
 
     {% block field %}
