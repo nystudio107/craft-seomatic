@@ -2,7 +2,7 @@
 {% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaSitemapVars, "sitemapUrls"),
+    'isInherited': seomatic.helper.isInherited(metaSitemapVars, "sitemapUrls"),
     'fieldLabel': "Sitemap Enabled"|t("seomatic"),
     'settingName': 'sitemapUrls',
     'labelFor': 'metaSitemapVars-sitemapUrls',

@@ -2,7 +2,7 @@
 {% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaGlobalVars, "ogType"),
+    'isInherited': seomatic.helper.isInherited(metaGlobalVars, "ogType"),
     'wrapperClass': '',
     'fieldLabel': "Facebook OpenGraph Type"|t("seomatic"),
     'labelFor': 'metaGlobalVars-ogType',

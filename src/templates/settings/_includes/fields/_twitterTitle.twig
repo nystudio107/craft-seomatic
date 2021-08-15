@@ -2,7 +2,7 @@
 {% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaGlobalVars, "twitterTitle"),
+    'isInherited': seomatic.helper.isInherited(metaGlobalVars, "twitterTitle"),
     'wrapperClass': 'seomatic-textSourceWrapper',
     'fieldLabel': "Twitter Title Source"|t("seomatic"),
     'labelFor': 'metaBundleSettings-twitterTitleSource',

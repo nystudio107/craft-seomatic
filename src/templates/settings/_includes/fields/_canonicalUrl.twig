@@ -2,7 +2,7 @@
 {% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaGlobalVars, "canonicalUrl"),
+    'isInherited': seomatic.helper.isInherited(metaGlobalVars, "canonicalUrl"),
     'fieldLabel': "Canonical URL"|t("seomatic"),
     'settingName': 'canonicalUrl'
 } %}
