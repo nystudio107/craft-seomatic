@@ -5,7 +5,8 @@
 
 {% import "_includes/forms" as forms %}
 <div class="inheritable-field {{ isInherited ? 'inherited-settings' : 'defined-settings' }}">
-    <div class="field {{ wrapperClass|default('') }}">
+    <div class="field {{ wrapperClass|default('') }}" style="margin-top: 18px!important;">
+        {% if pageContext == "field" %}
         <div class="override">
             {% namespace overrideNamespace|default("metaGlobalVars") %}
                 {{ forms.lightswitchField({
@@ -23,7 +24,14 @@
 
             {% endblock %}
         </div>
-
+        {% else %}
+            <div></div>
+            <div class="field width-100 mt-1 mb-0">
+                <div class="heading">
+                    <label>{{ fieldLabel }}</label>
+                </div>
+            </div>
+        {% endif %}
         <div class="field-settings value-wrapper">
             {% block field %}
 
