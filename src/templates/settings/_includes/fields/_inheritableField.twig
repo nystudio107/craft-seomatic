@@ -2,6 +2,9 @@
 {% set wrapperClass = wrapperClass|default('') %}
 {% set wrapperId = wrapperId|default('') %}
 {% set fieldLabel = fieldLabel|default('') %}
+{% if pageContext != "field" %}
+    {% set isInherited = false %}
+{% endif %}
 
 {% import "_includes/forms" as forms %}
 <div class="inheritable-field {{ isInherited ? 'inherited-settings' : 'defined-settings' }}">
