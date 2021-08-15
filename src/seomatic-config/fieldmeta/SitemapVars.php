@@ -16,10 +16,10 @@
  */
 
 return [
-    'sitemapUrls'          => true,
-    'sitemapAssets'        => true,
-    'sitemapFiles'         => true,
-    'sitemapAltLinks'      => true,
+    'sitemapUrls'          => null,
+    'sitemapAssets'        => null,
+    'sitemapFiles'         => null,
+    'sitemapAltLinks'      => null,
     'sitemapChangeFreq'    => '',
     'sitemapPriority'      => '',
     'sitemapLimit'         => null,

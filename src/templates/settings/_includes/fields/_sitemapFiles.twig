@@ -2,7 +2,7 @@
 {% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaSitemapVars, "sitemapFiles"),
+    'isInherited': seomatic.helper.isInherited(metaSitemapVars, "sitemapFiles"),
     'fieldLabel': "Include Indexable Files in Sitemap"|t("seomatic"),
     'settingName': 'sitemapFiles',
     'labelFor': 'metaSitemapVars-sitemapFiles',

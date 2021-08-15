@@ -2,7 +2,7 @@
 {% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaSitemapVars, "sitemapAssets"),
+    'isInherited': seomatic.helper.isInherited(metaSitemapVars, "sitemapAssets"),
     'fieldLabel': "Include Images & Videos in Sitemap"|t("seomatic"),
     'settingName': 'sitemapAssets',
     'labelFor': 'metaSitemapVars-sitemapAssets',

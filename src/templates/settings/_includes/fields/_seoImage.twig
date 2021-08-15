@@ -2,7 +2,7 @@
 {% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaGlobalVars, "seoImage"),
+    'isInherited': seomatic.helper.isInherited(metaGlobalVars, "seoImage"),
     'fieldLabel': "SEO Image Source"|t("seomatic"),
     'labelFor': 'metaBundleSettings-seoImageSource',
     'wrapperClass': 'seomatic-imageSourceInnerWrapper',

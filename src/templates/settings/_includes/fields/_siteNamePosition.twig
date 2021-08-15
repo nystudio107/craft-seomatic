@@ -4,7 +4,7 @@
 {% set positionSuffix = pageContext == "content" ? " Source" : "" %}
 
 {% set additionalVars = {
-    'isInherited': hasInheritableValues and seomatic.helper.isInherited(metaGlobalVars, "siteNamePosition"),
+    'isInherited': seomatic.helper.isInherited(metaGlobalVars, "siteNamePosition"),
     'fieldLabel': "Site Name Position#{positionSuffix}"|t("seomatic"),
     'labelFor': 'metaBundleSettings-siteNamePositionSource',
     'wrapperClass': 'seomatic-textSourceWrapper',
