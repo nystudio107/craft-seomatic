@@ -1,6 +1,7 @@
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
 
+<fieldset>
 {% if field is not defined or 'seoPreview' in field.twitterEnabledFields %}
     <h4 class="heading">{{ "SEO Preview:"|t('seomatic') }}</h4>
     {% include "seomatic/_includes/twitterPreview.twig" %}
@@ -57,3 +58,4 @@
 {% if field is not defined or 'twitterImageDescription' in field.twitterEnabledFields %}
     {% include "seomatic/settings/_includes/fields/_twitterImageDescription.twig" %}
 {% endif %}
+</fieldset>
