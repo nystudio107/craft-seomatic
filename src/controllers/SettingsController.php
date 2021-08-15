@@ -919,16 +919,6 @@ class SettingsController extends Controller
                         $data = $metaContainer->getData($scriptHandle);
                         /** @var MetaScript $data */
                         if ($data) {
-                            $error = PluginTemplate::isStringTemplateValid($scriptData['templateString'], []);
-                            if (!empty($error)) {
-                                $data->addError('templateString', $error);
-                                $hasErrors = true;
-                            }
-                            $error = PluginTemplate::isStringTemplateValid($scriptData['bodyTemplateString'], []);
-                            if (!empty($error)) {
-                                $data->addError('bodyTemplateString', $error);
-                                $hasErrors = true;
-                            }
                             /** @var array $scriptData */
                             foreach ($scriptData as $key => $value) {
                                 if (\is_array($value)) {
@@ -938,6 +928,9 @@ class SettingsController extends Controller
                                 } else {
                                     $data->$key = $value;
                                 }
+                            }
+                            if (!$data->validate()) {
+                                $hasErrors = true;
                             }
                         }
                     }
