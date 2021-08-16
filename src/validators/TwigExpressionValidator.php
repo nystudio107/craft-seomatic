@@ -11,6 +11,9 @@
 
 namespace nystudio107\seomatic\validators;
 
+use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\variables\SeomaticVariable;
+
 use Craft;
 
 use yii\base\Model;
@@ -36,7 +39,12 @@ class TwigExpressionValidator extends Validator
         $error = null;
         if (!empty($value) && \is_string($value)) {
             try {
-                Craft::$app->getView()->renderString($value, []);
+                if (Seomatic::$seomaticVariable === null) {
+                    Seomatic::$seomaticVariable = new SeomaticVariable();
+                }
+                Craft::$app->getView()->renderString($value, [
+                    'seomatic' => Seomatic::$seomaticVariable
+                ]);
             } catch (\Exception $e) {
                 $error = Craft::t(
                     'seomatic',
