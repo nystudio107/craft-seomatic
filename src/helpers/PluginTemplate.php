@@ -60,30 +60,6 @@ class PluginTemplate
     }
 
     /**
-     * Return an error if the Twig template is invalid, or an empty string if no errors
-     *
-     * @param string $templateString
-     * @param array $params
-     * @return string
-     */
-    public static function isStringTemplateValid(string $templateString, array $params = []): string
-    {
-        $error = '';
-        try {
-            $html = Seomatic::$view->renderString($templateString, $params);
-        } catch (\Exception $e) {
-            $error = Craft::t(
-                'seomatic',
-                'Error rendering template string -> {error}',
-                ['error' => $e->getMessage()]
-            );
-            Craft::error($error, __METHOD__);
-        }
-
-        return $error;
-    }
-
-    /**
      * Render a plugin template
      *
      * @param string      $templatePath

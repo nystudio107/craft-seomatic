@@ -11,8 +11,6 @@
 
 namespace nystudio107\seomatic\validators;
 
-use nystudio107\seomatic\helpers\PluginTemplate;
-
 use Craft;
 
 use yii\base\Model;
@@ -35,14 +33,24 @@ class TwigExpressionValidator extends Validator
     {
         /** @var Model $model */
         $value = $model->$attribute;
-
+        $error = null;
         if (!empty($value) && \is_string($value)) {
-            $error = PluginTemplate::isStringTemplateValid($value, []);
-            if (!empty($error)) {
-                $model->addError($attribute, $error);
+            try {
+                Craft::$app->getView()->renderString($value, []);
+            } catch (\Exception $e) {
+                $error = Craft::t(
+                    'seomatic',
+                    'Error rendering template string -> {error}',
+                    ['error' => $e->getMessage()]
+                );
             }
         } else {
-            $model->addError($attribute, Craft::t('seomatic', 'Is not a string.'));
+            $error = Craft::t('seomatic', 'Is not a string.');
+        }
+        // If there's an error, add it to the model, and log it
+        if ($error) {
+            $model->addError($attribute, $error);
+            Craft::error($error, __METHOD__);
         }
     }
 }
