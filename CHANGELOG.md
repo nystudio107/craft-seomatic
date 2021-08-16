@@ -2,6 +2,7 @@
 
 ## 3.4.0 - UNRELEASED
 ### Added
+* Improved the way overrides are handled & displayed in SEO Settings fields by having an explicit **Override** switch for each setting ([#535](https://github.com/nystudio107/craft-seomatic/issues/535))
 * Scripts are now rendered and checked for Twig errors before they can be saved ([#944](https://github.com/nystudio107/craft-seomatic/issues/944))
 * Robots, Humans, and Ads templates are now rendered and checked for Twig errors before they can be saved ([#944](https://github.com/nystudio107/craft-seomatic/issues/944))
 * Added Pinterest Tag tracking script ([#936](https://github.com/nystudio107/craft-seomatic/issues/936))
