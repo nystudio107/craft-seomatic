@@ -18,12 +18,12 @@
 return [
     '*' => [
         'siteType'                      => 'CreativeWork',
-        'siteSubType'                   => 'WebPage',
+        'siteSubType'                   => 'WebSite',
         'siteSpecificType'              => '',
 
-        'seoTitleSource'                => 'fromField',
-        'seoTitleField'                 => 'title',
-        'siteNamePositionSource'        => 'sameAsGlobal',
+        'seoTitleSource'                => 'fromCustom',
+        'seoTitleField'                 => '',
+        'siteNamePositionSource'        => 'fromCustom',
         'seoDescriptionSource'          => 'fromCustom',
         'seoDescriptionField'           => '',
         'seoKeywordsSource'             => 'fromCustom',
@@ -40,7 +40,7 @@ return [
         'twitterCreatorField'           => '',
         'twitterTitleSource'            => 'sameAsSeo',
         'twitterTitleField'             => '',
-        'twitterSiteNamePositionSource' => 'sameAsGlobal',
+        'twitterSiteNamePositionSource' => 'fromCustom',
         'twitterDescriptionSource'      => 'sameAsSeo',
         'twitterDescriptionField'       => '',
         'twitterImageIds'               => [],
@@ -53,7 +53,7 @@ return [
 
         'ogTitleSource'                 => 'sameAsSeo',
         'ogTitleField'                  => '',
-        'ogSiteNamePositionSource'      => 'sameAsGlobal',
+        'ogSiteNamePositionSource'      => 'fromCustom',
         'ogDescriptionSource'           => 'sameAsSeo',
         'ogDescriptionField'            => '',
         'ogImageIds'                    => [],

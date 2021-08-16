@@ -1,0 +1,53 @@
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "canonicalUrl") %}
+{% set hasInheritableValues = inheritedFrom is not null %}
+
+{% set additionalVars = {
+    'isInherited': seomatic.helper.isInherited(metaGlobalVars, "canonicalUrl"),
+    'fieldLabel': "Canonical URL"|t("seomatic"),
+    'settingName': 'canonicalUrl'
+} %}
+
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro canonicalUrlField(metaGlobalVars, disabled) %}
+        <div class="instructions">
+            <p>
+                {{ "The search engine friendly URL that you want the search engines to treat as authoritative."|t("seomatic") }}
+                <a href="https://support.google.com/webmasters/answer/139066?hl=en" target="_blank">{{ "Learn More"|t("seomatic") }}</a>
+            </p>
+        </div>
+
+        {% import "_includes/forms" as forms %}
+
+        {% namespace "metaGlobalVars" %}
+            {% if seomatic.helper.craft31 and not disabled%}
+                {{ forms.autosuggestField({
+                    suggestEnvVars: true,
+                    suggestAliases: true,
+                    id: "canonicalUrl",
+                    name: "canonicalUrl",
+                    value: metaGlobalVars.canonicalUrl,
+                    class: "nicetext",
+                    warning: false,
+                    errors: metaGlobalVars.getErrors("canonicalUrl"),
+                }) }}
+            {% else %}
+                {{ forms.textField({
+                    id: "canonicalUrl",
+                    name: "canonicalUrl",
+                    value: metaGlobalVars.canonicalUrl,
+                    class: "nicetext",
+                    warning: false,
+                    errors: metaGlobalVars.getErrors("canonicalUrl"),
+                }) }}
+            {% endif %}
+        {% endnamespace %}
+    {% endmacro %}
+
+    {% block inheritedValues %}
+        {{ _self.canonicalUrlField(inheritedFrom.metaGlobalVars ?? metaGlobalVars, true) }}
+    {% endblock %}
+
+    {% block field %}
+        {{ _self.canonicalUrlField(metaGlobalVars, false) }}
+    {% endblock %}
+{% endembed %}

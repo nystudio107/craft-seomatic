@@ -1,0 +1,84 @@
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "ogDescription") %}
+{% set hasInheritableValues = inheritedFrom is not null %}
+
+{% set additionalVars = {
+    'isInherited': seomatic.helper.isInherited(metaGlobalVars, "ogDescription"),
+    'wrapperClass': 'seomatic-textSourceWrapper',
+    'fieldLabel': "Facebook OpenGraph Description Source"|t("seomatic"),
+    'labelFor': 'metaBundleSettings-ogDescriptionSource',
+    'settingName': 'ogDescription'
+} %}
+
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro ogDescriptionField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars) %}
+        <div class="instructions">
+            <p>{{ "Facebook OpenGraph descriptions are displayed below the Facebook OpenGraph Title in your Facebook Cards. Use them to provide a summary of what your page is about."|t("seomatic") }}</p>
+        </div>
+
+        {% import "_includes/forms" as forms %}
+
+        {% namespace "metaBundleSettings" %}
+            <div class="heading">
+                {{ forms.select({
+                    id: "ogDescriptionSource",
+                    name: "ogDescriptionSource",
+                    options: textOptions,
+                    value: metaBundleSettings.ogDescriptionSource,
+                    class: "seomatic-textSourceSelect",
+                    errors: metaBundleSettings.getErrors("ogDescriptionSource"),
+                }) }}
+            </div>
+        {% endnamespace %}
+
+        {% if textFieldSources is defined and textFieldSources |length %}
+            {% namespace "metaBundleSettings" %}
+                <div class="heading seomatic-textSourceFromField">
+                    <label id="metaBundleSettings-ogDescriptionField-label" for="metaBundleSettings-ogDescriptionField">{{ "Source Field: "|t("seomatic") }}</label>
+                    {{ forms.select({
+                        id: "ogDescriptionField",
+                        name: "ogDescriptionField",
+                        options: textFieldSources,
+                        value: metaBundleSettings.ogDescriptionField,
+                        errors: metaBundleSettings.getErrors("ogDescriptionField"),
+                    }) }}
+                </div>
+            {% endnamespace %}
+        {% endif %}
+
+        {% namespace "metaGlobalVars" %}
+            <div class="input ltr seomatic-textSourceFromUrl">
+                {{ forms.textArea({
+                    id: "ogDescription",
+                    name: "ogDescription",
+                    value: metaGlobalVars.ogDescription,
+                    class: "nicetext",
+                    maxlength: 300,
+                    showCharsLeft: true,
+                    warning: false,
+                    errors: metaGlobalVars.getErrors("ogDescription"),
+                }) }}
+            </div>
+        {% endnamespace %}
+
+    {% endmacro %}
+
+
+    {% set textOptions = {
+        fromCustom: "Custom Text"|t("seomatic"),
+    } %}
+    {% if textFieldSources is defined and textFieldSources |length %}
+        {% set textOptions = { summaryFromField: "Summary From Field"|t("seomatic"), } | merge(textOptions) %}
+        {% set textOptions = { fromField: "From Field"|t("seomatic"), } | merge(textOptions) %}
+    {% endif %}
+
+    {% set textOptions = { sameAsSeo: "Same as SEO Description"|t("seomatic"), } | merge(textOptions) %}
+
+    {% block inheritedValues %}
+        {{ _self.ogDescriptionField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars) }}
+    {% endblock %}
+
+    {% block field %}
+        {{ _self.ogDescriptionField(textOptions, textFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars) }}
+    {% endblock %}
+
+{% endembed %}

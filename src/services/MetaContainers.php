@@ -816,16 +816,16 @@ class MetaContainers extends Component
         $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
         if ($metaBundle) {
             // Meta global vars
-            $this->metaGlobalVars = $metaBundle->metaGlobalVars;
+            $this->metaGlobalVars = clone $metaBundle->metaGlobalVars;
             // Meta site vars
-            $this->metaSiteVars = $metaBundle->metaSiteVars;
+            $this->metaSiteVars = clone $metaBundle->metaSiteVars;
             // Meta sitemap vars
-            $this->metaSitemapVars = $metaBundle->metaSitemapVars;
+            $this->metaSitemapVars = clone $metaBundle->metaSitemapVars;
             // Language
             $this->metaGlobalVars->language = Seomatic::$language;
             // Meta containers
             foreach ($metaBundle->metaContainers as $key => $metaContainer) {
-                $this->metaContainers[$key] = $metaContainer;
+                $this->metaContainers[$key] = clone $metaContainer;
             }
         }
         Craft::beginProfile('MetaContainers::loadGlobalMetaContainers', __METHOD__);

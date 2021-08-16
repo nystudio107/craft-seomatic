@@ -18,9 +18,9 @@
 import Tokenfield from 'tokenfield';
 
 // Tokenize any seomatic-keywords fields
-let el = document.querySelector('.seomatic-keywords');
-let keywords = undefined;
-if (el) {
+for (const el of document.querySelectorAll('.seomatic-keywords')) {
+    let keywords = undefined;
+
     if (el.value) {
         keywords = el.value.split(',').map((value, index) => {
             if (value !== '') {
@@ -38,10 +38,19 @@ if (el) {
         options.setItems = keywords;
     }
     let tf = new Tokenfield(options);
+    let resetting = false;
     tf.on('change', (tokenField) => {
+        if (!resetting && el.disabled) {
+            resetting = true;
+            tokenField._onReset();
+            resetting = false;
+            return;
+        }
+
         let values = tokenField._vars.setItems.map((value) => {
             return value.name;
         });
+        
         tokenField.el.value = values.join(',');
     });
 }

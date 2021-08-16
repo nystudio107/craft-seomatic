@@ -11,13 +11,6 @@
 
 namespace nystudio107\seomatic\services;
 
-use nystudio107\seomatic\helpers\UrlHelper;
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\helpers\DynamicMeta as DynamicMetaHelper;
-use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
-use nystudio107\seomatic\helpers\Schema as SchemaHelper;
-use nystudio107\seomatic\helpers\Text as TextHelper;
-
 use Craft;
 use craft\base\Component;
 use craft\elements\Asset;
@@ -25,7 +18,14 @@ use craft\elements\db\MatrixBlockQuery;
 use craft\elements\db\TagQuery;
 use craft\helpers\Template;
 use craft\web\twig\variables\Paginate;
-
+use nystudio107\seomatic\base\InheritableSettingsModel;
+use nystudio107\seomatic\helpers\DynamicMeta as DynamicMetaHelper;
+use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
+use nystudio107\seomatic\helpers\Schema as SchemaHelper;
+use nystudio107\seomatic\helpers\Text as TextHelper;
+use nystudio107\seomatic\helpers\UrlHelper;
+use nystudio107\seomatic\models\MetaBundle;
+use nystudio107\seomatic\Seomatic;
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
 
@@ -511,5 +511,50 @@ class Helper extends Component
     public function craft33(): bool
     {
         return Seomatic::$craft33;
+    }
+
+    /**
+     * Given a list of meta bundles in order of descending distance, return the bundle that has inheritable value.
+     *
+     * @param array $inheritedValues
+     * @param string $settingName
+     * @param string $collectionName The name off the collection to search
+     * @return MetaBundle|null
+     * @since 3.4.0
+     */
+    public function findInheritableBundle(array $inheritedValues, string $settingName, string $collectionName = "metaGlobalVars")
+    {
+        if (in_array($collectionName, ['metaGlobalVars', 'metaSitemapVars'], true)) {
+            foreach ($inheritedValues as $bundle) {
+                /** @var $bundle MetaBundle */
+                if (isset($bundle->{$collectionName}[$settingName])) {
+                    if (is_bool($bundle->{$collectionName}[$settingName]) || !empty($bundle->{$collectionName}[$settingName])) {
+                        return $bundle;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Return true if a setting is inherited.
+     *
+     * @param InheritableSettingsModel $settingCollection
+     * @param $settingName
+     * @return bool
+     * @since 3.4.0
+     */
+    public function isInherited(InheritableSettingsModel $settingCollection, $settingName)
+    {
+        $explicitInherit = array_key_exists($settingName, $settingCollection->inherited);
+        $explicitOverride = array_key_exists($settingName, $settingCollection->overrides);
+
+        if ($explicitInherit || $explicitOverride) {
+            return $explicitInherit && !$explicitOverride;
+        }
+
+        return empty($settingCollection->{$settingName});
     }
 }

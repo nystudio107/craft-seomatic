@@ -1,6 +1,7 @@
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
 
+<fieldset>
 {% if pageContext != "field" %}
 <div class="flex">
     <div class="flex-grow"></div>
@@ -9,134 +10,53 @@
 </div>
 {% endif %}
 
+{% if parentBundles is not defined %}
+    {% set parentBundles = [] %}
+{% endif %}
+
+{############### Sitemap Enabled ###############}
+
+{% if field is not defined or 'sitemapUrls' in field.sitemapEnabledFields %}
+    {% include "seomatic/settings/_includes/fields/_sitemapUrls.twig" %}
+{% endif %}
+
+{############### Sitemap Assets ###############}
+
+{% if field is not defined or 'sitemapUrls' in field.sitemapEnabledFields %}
+    {% include "seomatic/settings/_includes/fields/_sitemapAssets.twig" %}
+{% endif %}
+
+{############### Sitemap Files ###############}
+
+{% if field is not defined or 'sitemapFiles' in field.sitemapEnabledFields %}
+    {% include "seomatic/settings/_includes/fields/_sitemapFiles.twig" %}
+{% endif %}
+
+{############### Sitemap Alt URLS ###############}
+
+{% if field is not defined or 'sitemapAltLinks' in field.sitemapEnabledFields %}
+    {% include "seomatic/settings/_includes/fields/_sitemapAltLinks.twig" %}
+{% endif %}
+
+{############### Sitemap Change Frequency ###############}
+
+{% if field is not defined or 'sitemapChangeFreq' in field.sitemapEnabledFields %}
+    {% include "seomatic/settings/_includes/fields/_sitemapChangeFreq.twig" %}
+{% endif %}
+
+{############### Sitemap Priority ###############}
+
+{% if field is not defined or 'sitemapPriority' in field.sitemapEnabledFields %}
+    {% include "seomatic/settings/_includes/fields/_sitemapPriority.twig" %}
+{% endif %}
+
+{############### Sitemap Limit ###############}
+
+{% if field is not defined or 'sitemapLimit' in field.sitemapEnabledFields %}
+    {% include "seomatic/settings/_includes/fields/_sitemapLimit.twig" %}
+{% endif %}
+
 {% namespace "metaSitemapVars" %}
-
-    {% if field is not defined or 'sitemapUrls' in field.sitemapEnabledFields %}
-        {{ forms.lightswitchField({
-            label: "Sitemap Enabled"|t("seomatic"),
-            instructions: "Whether URLs in this #{currentSourceBundleType} should be included in the sitemap"|t("seomatic"),
-            id: "sitemapUrls",
-            name: "sitemapUrls",
-            on: metaSitemapVars.sitemapUrls,
-            warning: false,
-            errors: metaSitemapVars.getErrors("sitemapUrls"),
-        }) }}
-    {% endif %}
-
-    {% if field is not defined or 'sitemapAssets' in field.sitemapEnabledFields %}
-        {{ forms.lightswitchField({
-            label: "Include Images & Videos in Sitemap"|t("seomatic"),
-            instructions: "Whether the URLs to images & videos in Asset fields or Asset fields in matrix blocks should be included in the sitemap"|t("seomatic"),
-            id: "sitemapAssets",
-            name: "sitemapAssets",
-            on: metaSitemapVars.sitemapAssets,
-            warning: false,
-            errors: metaSitemapVars.getErrors("sitemapAssets"),
-        }) }}
-    {% endif %}
-
-    {% if field is not defined or 'sitemapFiles' in field.sitemapEnabledFields %}
-        {{ forms.lightswitchField({
-            label: "Include Indexable Files in Sitemap"|t("seomatic"),
-            instructions: "Whether the URLs to files such as `.pdf`, `.xls`, `.doc` and other indexable file types in Asset fields or Asset fields in matrix blocks should be included in the sitemap"|t("seomatic"),
-            id: "sitemapFiles",
-            name: "sitemapFiles",
-            on: metaSitemapVars.sitemapFiles,
-            warning: false,
-            errors: metaSitemapVars.getErrors("sitemapFiles"),
-        }) }}
-    {% endif %}
-
-    {% if field is not defined or 'sitemapAltLinks' in field.sitemapEnabledFields %}
-        {{ forms.lightswitchField({
-            label: "Sitemap Alt URLs"|t("seomatic"),
-            instructions: "Whether URLs to alternate translations should be included in the sitemap"|t("seomatic"),
-            id: "sitemapAltLinks",
-            name: "sitemapAltLinks",
-            on: metaSitemapVars.sitemapAltLinks,
-            warning: false,
-            errors: metaSitemapVars.getErrors("sitemapAltLinks"),
-        }) }}
-    {% endif %}
-
-    {% if field is not defined or 'sitemapChangeFreq' in field.sitemapEnabledFields %}
-        {% set sitemapChangeFreqOptions = {
-            always: "Always"|t("seomatic"),
-            hourly: "Hourly"|t("seomatic"),
-            daily: "Daily"|t("seomatic"),
-            weekly: "Weekly"|t("seomatic"),
-            monthly: "Monthly"|t("seomatic"),
-            yearly: "Yearly"|t("seomatic"),
-            never : "Never"|t("seomatic"),
-        } %}
-        {% if pageContext == "field" %}
-            {% set sitemapChangeFreqOptions = { "": ""} | merge(sitemapChangeFreqOptions) %}
-        {% endif %}
-        {{ forms.selectField({
-            label: "Change Frequency"|t("seomatic"),
-            instructions: "How frequently the page is likely to change. This value provides general information to search engines and may not correlate exactly to how often they crawl the page."|t("seomatic"),
-            id: "sitemapChangeFreq",
-            name: "sitemapChangeFreq",
-            options: sitemapChangeFreqOptions,
-            value: metaSitemapVars.sitemapChangeFreq,
-            errors: metaSitemapVars.getErrors("sitemapChangeFreq"),
-        }) }}
-    {% endif %}
-
-    {% if field is not defined or 'sitemapPriority' in field.sitemapEnabledFields %}
-        {% set sitemapPriorityOptions = {
-            "1.0": "1.0",
-            "0.9": "0.9",
-            "0.8": "0.8",
-            "0.7": "0.7",
-            "0.6": "0.6",
-            "0.5": "0.5",
-            "0.4": "0.4",
-            "0.3": "0.3",
-            "0.2": "0.2",
-            "0.1": "0.1",
-            "0.0": "0.0",
-        } %}
-        {% if pageContext == "field" %}
-            {% set sitemapPriorityOptions = { "": ""} | merge(sitemapPriorityOptions) %}
-        {% endif %}
-        {{ forms.selectField({
-            label: "Priority"|t("seomatic"),
-            instructions: "The priority of this URL relative to other URLs on your site. This value does not affect how your pages are compared to pages on other sites—it only lets the search engines know which pages you deem most important for the crawlers."|t("seomatic"),
-            id: "sitemapPriority",
-            name: "sitemapPriority",
-            options: sitemapPriorityOptions,
-            value: metaSitemapVars.sitemapPriority,
-            errors: metaSitemapVars.getErrors("sitemapPriority"),
-        }) }}
-    {% endif %}
-
-
-    {% if field is not defined or 'sitemapLimit' in field.sitemapEnabledFields %}
-        {% set sitemapLimitOptions = {
-            null: "None",
-            "1000": "1000",
-            "500": "500",
-            "200": "200",
-            "100": "100",
-            "50": "50",
-            "10": "10",
-            "5": "5",
-        } %}
-        {% if pageContext == "field" %}
-            {% set sitemapLimitOptions = { "": ""} | merge(sitemapLimitOptions) %}
-        {% endif %}
-        {{ forms.selectField({
-            label: "Sitemap Limit"|t("seomatic"),
-            instructions: "Controls a limit to how many entries will be in this sitemap. The sitemap entries will be sorted by modification date."|t("seomatic"),
-            id: "sitemapLimit",
-            name: "sitemapLimit",
-            options: sitemapLimitOptions,
-            value: metaSitemapVars.sitemapLimit,
-            errors: metaSitemapVars.getErrors("sitemapLimit"),
-        }) }}
-    {% endif %}
-
     {% if (field is not defined or 'structureDepth' in field.sitemapEnabledFields) and sourceType == 'structure' %}
         {{ forms.selectField({
             label: "Structure Depth"|t("seomatic"),
@@ -224,7 +144,6 @@
             errors: metaSitemapVars.getErrors("sitemapVideoFieldMap"),
         }) }}
     {% endif %}
-
 {% endnamespace %}
 
 {% include "seomatic/_includes/footer-message.twig" with {
@@ -233,3 +152,4 @@
 {% include "seomatic/_includes/footer-message.twig" with {
     message: "#{currentSourceBundleType |capitalize} Sitemaps are automatically submitted to search engines whenever a new Element in that Section/Category Group is added."
 } %}
+</fieldset>

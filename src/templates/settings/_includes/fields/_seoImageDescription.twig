@@ -1,0 +1,79 @@
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "seoImageDescription") %}
+{% set hasInheritableValues = inheritedFrom is not null %}
+
+{% set additionalVars = {
+    'isInherited': seomatic.helper.isInherited(metaGlobalVars, "seoImageDescription"),
+    'wrapperClass': 'seomatic-textSourceWrapper',
+    'fieldLabel': "SEO Image Description Source"|t("seomatic"),
+    'labelFor': 'metaBundleSettings-seoImageDescriptionSource',
+    'settingName': 'seoImageDescription'
+} %}
+
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro seoImageDescriptionField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars) %}
+        <div class="instructions">
+            <p>{{ "A text description of the image conveying the essential nature of an image to users who are visually impaired."|t("seomatic") }}</p>
+        </div>
+
+        {% import "_includes/forms" as forms %}
+        {% namespace "metaBundleSettings" %}
+            <div class="heading">
+                {{ forms.select({
+                    id: "seoImageDescriptionSource",
+                    name: "seoImageDescriptionSource",
+                    options: textOptions,
+                    value: metaBundleSettings.seoImageDescriptionSource,
+                    class: "seomatic-textSourceSelect",
+                    errors: metaBundleSettings.getErrors("seoImageDescriptionSource"),
+                }) }}
+            </div>
+        {% endnamespace %}
+
+        {% if textFieldSources is defined and textFieldSources |length %}
+            {% namespace "metaBundleSettings" %}
+                <div class="heading seomatic-textSourceFromField">
+                    <label id="metaBundleSettings-seoImageDescriptionField-label" for="metaBundleSettings-seoImageDescriptionField">{{ "Source Field: "|t("seomatic") }}</label>
+                    {{ forms.select({
+                        id: "seoImageDescriptionField",
+                        name: "seoImageDescriptionField",
+                        options: textFieldSources,
+                        value: metaBundleSettings.seoImageDescriptionField,
+                        errors: metaBundleSettings.getErrors("seoImageDescriptionField"),
+                    }) }}
+                </div>
+            {% endnamespace %}
+        {% endif %}
+
+        {% namespace "metaGlobalVars" %}
+            <div class="input ltr seomatic-textSourceFromUrl">
+                {{ forms.textArea({
+                    id: "seoImageDescription",
+                    name: "seoImageDescription",
+                    value: metaGlobalVars.seoImageDescription,
+                    class: "nicetext",
+                    maxlength: seomatic.config.maxDescriptionLength,
+                    showCharsLeft: true,
+                    warning: false,
+                    errors: metaGlobalVars.getErrors("seoImageDescription"),
+                }) }}
+            </div>
+        {% endnamespace %}
+    {% endmacro %}
+
+    {% set textOptions = {
+        fromCustom: "Custom Text"|t("seomatic"),
+    } %}
+    {% if textFieldSources is defined and textFieldSources |length %}
+        {% set textOptions = { summaryFromField: "Summary From Field"|t("seomatic"), } | merge(textOptions) %}
+        {% set textOptions = { fromField: "From Field"|t("seomatic"), } | merge(textOptions) %}
+    {% endif %}
+
+    {% block inheritedValues %}
+        {{ _self.seoImageDescriptionField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars) }}
+    {% endblock %}
+
+    {% block field %}
+        {{ _self.seoImageDescriptionField(textOptions, textFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars) }}
+    {% endblock %}
+
+{% endembed %}
