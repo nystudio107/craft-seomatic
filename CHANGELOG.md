@@ -12,6 +12,7 @@
 
 ### Fixed
 * Only default to not generating image transforms immediately if the image is remote and the environment is local dev ([#949](https://github.com/nystudio107/craft-seomatic/issues/949))
+* Fixed an issue where the Robots setting was ignored in SEO Settings fields for sitemap generation if the Sitemap tab was not enabled ([#947](https://github.com/nystudio107/craft-seomatic/issues/947))
 
 ## 3.3.48 - 2021.08.11
 ### Fixed
