@@ -168,7 +168,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
      */
     public function useFieldset(): bool
     {
-        return true;
+        return false;
     }
 
     /**
