@@ -10,7 +10,7 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro sitemapChangeFreqField(sitemapChangeFreqOptions, metaSitemapVars) %}
+    {% macro sitemapChangeFreqField(sitemapChangeFreqOptions, metaSitemapVars, suffix) %}
         <div class="instructions">
             <p>
                 {{ "How frequently the page is likely to change. This value provides general information to search engines and may not correlate exactly to how often they crawl the page."|t("seomatic") }}
@@ -21,7 +21,7 @@
         {% namespace "metaSitemapVars" %}
 
             {{ forms.selectField({
-                id: "sitemapChangeFreq",
+                id: "sitemapChangeFreq" ~ suffix,
                 name: "sitemapChangeFreq",
                 options: sitemapChangeFreqOptions,
                 value: metaSitemapVars.sitemapChangeFreq,
@@ -44,10 +44,10 @@
     {% endif %}
 
     {% block inheritedValues %}
-        {{ _self.sitemapChangeFreqField(sitemapChangeFreqOptions, inheritedFrom.metaSitemapVars ?? metaSitemapVars) }}
+        {{ _self.sitemapChangeFreqField(sitemapChangeFreqOptions, inheritedFrom.metaSitemapVars ?? metaSitemapVars, "-inherited") }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.sitemapChangeFreqField(sitemapChangeFreqOptions, metaSitemapVars) }}
+        {{ _self.sitemapChangeFreqField(sitemapChangeFreqOptions, metaSitemapVars, "") }}
     {% endblock %}
 {% endembed %}

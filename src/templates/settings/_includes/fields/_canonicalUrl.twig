@@ -8,7 +8,7 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro canonicalUrlField(metaGlobalVars, disabled) %}
+    {% macro canonicalUrlField(metaGlobalVars, disabled, suffix) %}
         <div class="instructions">
             <p>
                 {{ "The search engine friendly URL that you want the search engines to treat as authoritative."|t("seomatic") }}
@@ -23,7 +23,7 @@
                 {{ forms.autosuggestField({
                     suggestEnvVars: true,
                     suggestAliases: true,
-                    id: "canonicalUrl",
+                    id: "canonicalUrl" ~ suffix,
                     name: "canonicalUrl",
                     value: metaGlobalVars.canonicalUrl,
                     class: "nicetext",
@@ -32,7 +32,7 @@
                 }) }}
             {% else %}
                 {{ forms.textField({
-                    id: "canonicalUrl",
+                    id: "canonicalUrl" ~ suffix,
                     name: "canonicalUrl",
                     value: metaGlobalVars.canonicalUrl,
                     class: "nicetext",
@@ -44,10 +44,10 @@
     {% endmacro %}
 
     {% block inheritedValues %}
-        {{ _self.canonicalUrlField(inheritedFrom.metaGlobalVars ?? metaGlobalVars, true) }}
+        {{ _self.canonicalUrlField(inheritedFrom.metaGlobalVars ?? metaGlobalVars, true, "-inherited") }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.canonicalUrlField(metaGlobalVars, false) }}
+        {{ _self.canonicalUrlField(metaGlobalVars, false, "") }}
     {% endblock %}
 {% endembed %}

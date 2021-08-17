@@ -10,7 +10,7 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro sitemapLimitField(sitemapLimitOptions, metaSitemapVars) %}
+    {% macro sitemapLimitField(sitemapLimitOptions, metaSitemapVars, suffix) %}
         <div class="instructions">
             <p>
                 {{ "Controls a limit to how many entries will be in this sitemap. The sitemap entries will be sorted by modification date."|t("seomatic") }}
@@ -20,7 +20,7 @@
         {% import "_includes/forms" as forms %}
         {% namespace "metaSitemapVars" %}
         {{ forms.selectField({
-            id: "sitemapLimit",
+            id: "sitemapLimit" ~ suffix,
             name: "sitemapLimit",
             options: sitemapLimitOptions,
             value: metaSitemapVars.sitemapLimit,
@@ -42,10 +42,10 @@
     } %}
 
     {% block inheritedValues %}
-        {{ _self.sitemapLimitField(sitemapLimitOptions, inheritedFrom.metaSitemapVars ?? metaSitemapVars) }}
+        {{ _self.sitemapLimitField(sitemapLimitOptions, inheritedFrom.metaSitemapVars ?? metaSitemapVars, "-inherited") }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.sitemapLimitField(sitemapLimitOptions, metaSitemapVars) }}
+        {{ _self.sitemapLimitField(sitemapLimitOptions, metaSitemapVars, "") }}
     {% endblock %}
 {% endembed %}

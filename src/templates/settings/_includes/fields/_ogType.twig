@@ -10,7 +10,7 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro seoTitleField(facebookOpenGraphTypes, metaGlobalVars) %}
+    {% macro seoTitleField(facebookOpenGraphTypes, metaGlobalVars, suffix) %}
         <div class="instructions">
             <p>{{ "Adding OpenGraph tags to your website influences the performance of your links on social media by allowing you to control what appears when a user posts a link to your content on Facebook."|t("seomatic") }}</p>
         </div>
@@ -18,7 +18,7 @@
 
         {% namespace "metaGlobalVars" %}
             {{ forms.selectField({
-                id: "ogType",
+                id: "ogType" ~ suffix,
                 name: "ogType",
                 options: facebookOpenGraphTypes,
                 value: metaGlobalVars.ogType,
@@ -42,11 +42,11 @@
     } %}
 
     {% block inheritedValues %}
-        {{ _self.seoTitleField(facebookOpenGraphTypes, inheritedFrom.metaGlobalVars ?? metaGlobalVars) }}
+        {{ _self.seoTitleField(facebookOpenGraphTypes, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.seoTitleField(facebookOpenGraphTypes, metaGlobalVars) }}
+        {{ _self.seoTitleField(facebookOpenGraphTypes, metaGlobalVars, "") }}
     {% endblock %}
 {% endembed %}
 

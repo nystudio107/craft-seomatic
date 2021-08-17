@@ -10,7 +10,7 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro sitemapUrlsField(currentSourceBundleType, metaSitemapVars) %}
+    {% macro sitemapUrlsField(currentSourceBundleType, metaSitemapVars, suffix) %}
         <div class="instructions">
             <p>
                 {{ "Whether URLs in this #{currentSourceBundleType} should be included in the sitemap"|t("seomatic") }}
@@ -20,7 +20,7 @@
         {% import "_includes/forms" as forms %}
         {% namespace "metaSitemapVars" %}
             {{ forms.lightswitchField({
-                id: "sitemapUrls",
+                id: "sitemapUrls" ~ suffix,
                 name: "sitemapUrls",
                 on: metaSitemapVars.sitemapUrls,
                 warning: false,
@@ -31,10 +31,10 @@
     {% endmacro %}
 
     {% block inheritedValues %}
-        {{ _self.sitemapUrlsField(currentSourceBundleType, inheritedFrom.metaSitemapVars ?? metaSitemapVars) }}
+        {{ _self.sitemapUrlsField(currentSourceBundleType, inheritedFrom.metaSitemapVars ?? metaSitemapVars, "-inherited") }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.sitemapUrlsField(currentSourceBundleType, metaSitemapVars) }}
+        {{ _self.sitemapUrlsField(currentSourceBundleType, metaSitemapVars, "") }}
     {% endblock %}
 {% endembed %}

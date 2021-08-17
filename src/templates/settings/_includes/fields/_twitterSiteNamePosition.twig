@@ -10,7 +10,7 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro twitterSiteNamePositionField(textOptions, metaBundleSettings, metaGlobalVars) %}
+    {% macro twitterSiteNamePositionField(textOptions, metaBundleSettings, metaGlobalVars, suffix) %}
         {% import "_includes/forms" as forms %}
 
         <div class="instructions">
@@ -19,7 +19,7 @@
         {% namespace "metaBundleSettings" %}
             <div class="heading">
                 {{ forms.select({
-                    id: "twitterSiteNamePositionSource",
+                    id: "twitterSiteNamePositionSource" ~ suffix,
                     name: "twitterSiteNamePositionSource",
                     options: textOptions,
                     value: metaBundleSettings.twitterSiteNamePositionSource,
@@ -32,7 +32,7 @@
         {% namespace "metaGlobalVars" %}
             <div class="heading seomatic-textSourceFromUrl">
                 {{ forms.selectField({
-                    id: "twitterSiteNamePosition",
+                    id: "twitterSiteNamePosition" ~ suffix,
                     name: "twitterSiteNamePosition",
                     options: {
                         before: "Before"|t("seomatic"),
@@ -57,10 +57,10 @@
     {% endif %}
 
     {% block inheritedValues %}
-        {{ _self.twitterSiteNamePositionField(textOptions, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars) }}
+        {{ _self.twitterSiteNamePositionField(textOptions, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.twitterSiteNamePositionField(textOptions, metaBundleSettings, metaGlobalVars) }}
+        {{ _self.twitterSiteNamePositionField(textOptions, metaBundleSettings, metaGlobalVars, "") }}
     {% endblock %}
 {% endembed %}

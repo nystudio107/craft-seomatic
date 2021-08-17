@@ -10,7 +10,7 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro seoImageDescriptionField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars) %}
+    {% macro seoImageDescriptionField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars, suffix) %}
         <div class="instructions">
             <p>{{ "A text description of the image conveying the essential nature of an image to users who are visually impaired."|t("seomatic") }}</p>
         </div>
@@ -19,7 +19,7 @@
         {% namespace "metaBundleSettings" %}
             <div class="heading">
                 {{ forms.select({
-                    id: "seoImageDescriptionSource",
+                    id: "seoImageDescriptionSource" ~ suffix,
                     name: "seoImageDescriptionSource",
                     options: textOptions,
                     value: metaBundleSettings.seoImageDescriptionSource,
@@ -32,9 +32,9 @@
         {% if textFieldSources is defined and textFieldSources |length %}
             {% namespace "metaBundleSettings" %}
                 <div class="heading seomatic-textSourceFromField">
-                    <label id="metaBundleSettings-seoImageDescriptionField-label" for="metaBundleSettings-seoImageDescriptionField">{{ "Source Field: "|t("seomatic") }}</label>
+                    <label for="metaBundleSettings-seoImageDescriptionField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
                     {{ forms.select({
-                        id: "seoImageDescriptionField",
+                        id: "seoImageDescriptionField" ~ suffix,
                         name: "seoImageDescriptionField",
                         options: textFieldSources,
                         value: metaBundleSettings.seoImageDescriptionField,
@@ -47,7 +47,7 @@
         {% namespace "metaGlobalVars" %}
             <div class="input ltr seomatic-textSourceFromUrl">
                 {{ forms.textArea({
-                    id: "seoImageDescription",
+                    id: "seoImageDescription" ~ suffix,
                     name: "seoImageDescription",
                     value: metaGlobalVars.seoImageDescription,
                     class: "nicetext",
@@ -69,11 +69,11 @@
     {% endif %}
 
     {% block inheritedValues %}
-        {{ _self.seoImageDescriptionField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars) }}
+        {{ _self.seoImageDescriptionField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.seoImageDescriptionField(textOptions, textFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars) }}
+        {{ _self.seoImageDescriptionField(textOptions, textFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars, "") }}
     {% endblock %}
 
 {% endembed %}

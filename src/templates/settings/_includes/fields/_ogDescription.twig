@@ -10,7 +10,7 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro ogDescriptionField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars) %}
+    {% macro ogDescriptionField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars, suffix) %}
         <div class="instructions">
             <p>{{ "Facebook OpenGraph descriptions are displayed below the Facebook OpenGraph Title in your Facebook Cards. Use them to provide a summary of what your page is about."|t("seomatic") }}</p>
         </div>
@@ -20,7 +20,7 @@
         {% namespace "metaBundleSettings" %}
             <div class="heading">
                 {{ forms.select({
-                    id: "ogDescriptionSource",
+                    id: "ogDescriptionSource" ~ suffix,
                     name: "ogDescriptionSource",
                     options: textOptions,
                     value: metaBundleSettings.ogDescriptionSource,
@@ -33,9 +33,9 @@
         {% if textFieldSources is defined and textFieldSources |length %}
             {% namespace "metaBundleSettings" %}
                 <div class="heading seomatic-textSourceFromField">
-                    <label id="metaBundleSettings-ogDescriptionField-label" for="metaBundleSettings-ogDescriptionField">{{ "Source Field: "|t("seomatic") }}</label>
+                    <label for="metaBundleSettings-ogDescriptionField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
                     {{ forms.select({
-                        id: "ogDescriptionField",
+                        id: "ogDescriptionField" ~ suffix,
                         name: "ogDescriptionField",
                         options: textFieldSources,
                         value: metaBundleSettings.ogDescriptionField,
@@ -48,7 +48,7 @@
         {% namespace "metaGlobalVars" %}
             <div class="input ltr seomatic-textSourceFromUrl">
                 {{ forms.textArea({
-                    id: "ogDescription",
+                    id: "ogDescription" ~ suffix,
                     name: "ogDescription",
                     value: metaGlobalVars.ogDescription,
                     class: "nicetext",
@@ -74,11 +74,11 @@
     {% set textOptions = { sameAsSeo: "Same as SEO Description"|t("seomatic"), } | merge(textOptions) %}
 
     {% block inheritedValues %}
-        {{ _self.ogDescriptionField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars) }}
+        {{ _self.ogDescriptionField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.ogDescriptionField(textOptions, textFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars) }}
+        {{ _self.ogDescriptionField(textOptions, textFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars, "") }}
     {% endblock %}
 
 {% endembed %}

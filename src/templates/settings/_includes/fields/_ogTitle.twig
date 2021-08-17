@@ -10,7 +10,7 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro ogTitleField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars) %}
+    {% macro ogTitleField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars, suffix) %}
         <div class="instructions">
             <p>{{ "The Facebook OpenGraph Title is displayed in bold at the top of your Facebook card. Make sure it is a pithy summary of your webpage."|t("seomatic") }}</p>
         </div>
@@ -18,7 +18,7 @@
         {% namespace "metaBundleSettings" %}
             <div class="heading">
                 {{ forms.select({
-                    id: "ogTitleSource",
+                    id: "ogTitleSource" ~ suffix,
                     name: "ogTitleSource",
                     options: textOptions,
                     value: metaBundleSettings.ogTitleSource,
@@ -31,9 +31,9 @@
         {% if textFieldSources is defined and textFieldSources |length %}
             {% namespace "metaBundleSettings" %}
                 <div class="heading seomatic-textSourceFromField">
-                    <label id="metaBundleSettings-ogTitleField-label" for="metaBundleSettings-ogTitleField">{{ "Source Field: "|t("seomatic") }}</label>
+                    <label for="metaBundleSettings-ogTitleField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
                     {{ forms.select({
-                        id: "ogTitleField",
+                        id: "ogTitleField" ~ suffix,
                         name: "ogTitleField",
                         options: textFieldSources,
                         value: metaBundleSettings.ogTitleField,
@@ -46,7 +46,7 @@
         {% namespace "metaGlobalVars" %}
             <div class="input ltr seomatic-textSourceFromUrl">
                 {{ forms.text({
-                    id: "ogTitle",
+                    id: "ogTitle" ~ suffix,
                     name: "ogTitle",
                     value: metaGlobalVars.ogTitle,
                     class: "nicetext",
@@ -70,10 +70,10 @@
     {% set textOptions = { sameAsSeo: "Same as SEO Title"|t("seomatic"), } | merge(textOptions) %}
 
     {% block inheritedValues %}
-        {{ _self.ogTitleField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars) }}
+        {{ _self.ogTitleField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.ogTitleField(textOptions, textFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars) }}
+        {{ _self.ogTitleField(textOptions, textFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars, "") }}
     {% endblock %}
 {% endembed %}

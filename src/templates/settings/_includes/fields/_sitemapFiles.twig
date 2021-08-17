@@ -10,7 +10,7 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro sitemapFilesField(metaSitemapVars) %}
+    {% macro sitemapFilesField(metaSitemapVars, suffix) %}
         <div class="instructions">
             <p>
                 {{ "Whether the URLs to files such as `.pdf`, `.xls`, `.doc` and other indexable file types in Asset fields or Asset fields in matrix blocks should be included in the sitemap"|t("seomatic") }}
@@ -21,7 +21,7 @@
         {% namespace "metaSitemapVars" %}
 
             {{ forms.lightswitchField({
-                id: "sitemapFiles",
+                id: "sitemapFiles" ~ suffix,
                 name: "sitemapFiles",
                 on: metaSitemapVars.sitemapFiles,
                 warning: false,
@@ -32,10 +32,10 @@
     {% endmacro %}
 
     {% block inheritedValues %}
-        {{ _self.sitemapFilesField(inheritedFrom.metaSitemapVars ?? metaSitemapVars) }}
+        {{ _self.sitemapFilesField(inheritedFrom.metaSitemapVars ?? metaSitemapVars, "-inherited") }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.sitemapFilesField(metaSitemapVars) }}
+        {{ _self.sitemapFilesField(metaSitemapVars, "") }}
     {% endblock %}
 {% endembed %}

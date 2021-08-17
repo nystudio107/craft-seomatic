@@ -10,7 +10,7 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro ogSiteNamePositionField(metaBundleSettings, metaGlobalVars, pageContext) %}
+    {% macro ogSiteNamePositionField(metaBundleSettings, metaGlobalVars, pageContext, suffix) %}
         {% import "_includes/forms" as forms %}
 
         {% set textOptions = {
@@ -32,7 +32,7 @@
         {% namespace "metaBundleSettings" %}
             <div class="heading">
                 {{ forms.select({
-                    id: "ogSiteNamePositionSource",
+                    id: "ogSiteNamePositionSource" ~ suffix,
                     name: "ogSiteNamePositionSource",
                     options: textOptions,
                     value: metaBundleSettings.ogSiteNamePositionSource,
@@ -45,7 +45,7 @@
         {% namespace "metaGlobalVars" %}
             <div class="heading seomatic-textSourceFromUrl">
                 {{ forms.selectField({
-                    id: "ogSiteNamePosition",
+                    id: "ogSiteNamePosition" ~ suffix,
                     name: "ogSiteNamePosition",
                     options: customPositions,
                     value: metaGlobalVars.ogSiteNamePosition,
@@ -57,10 +57,10 @@
     {% endmacro %}
 
     {% block inheritedValues %}
-        {{ _self.ogSiteNamePositionField(inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, pageContext) }}
+        {{ _self.ogSiteNamePositionField(inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, pageContext, "-inherited") }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.ogSiteNamePositionField(metaBundleSettings, metaGlobalVars, pageContext) }}
+        {{ _self.ogSiteNamePositionField(metaBundleSettings, metaGlobalVars, pageContext, "") }}
     {% endblock %}
 {% endembed %}

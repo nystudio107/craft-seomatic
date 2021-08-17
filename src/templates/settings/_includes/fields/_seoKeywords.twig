@@ -10,7 +10,7 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro seoKeywordsField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars) %}
+    {% macro seoKeywordsField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars, suffix) %}
         <div class="instructions">
             <p>{{ "Google ignores SEO Keywords tag; though other search engines do look at it. Utilize it carefully, as improper or spammy use most likely will hurt you, or even have your site marked as spam."|t("seomatic") }}</p>
         </div>
@@ -19,7 +19,7 @@
         {% namespace "metaBundleSettings" %}
             <div class="heading">
                 {{ forms.select({
-                    id: "seoKeywordsSource",
+                    id: "seoKeywordsSource" ~ suffix,
                     name: "seoKeywordsSource",
                     options: textOptions,
                     value: metaBundleSettings.seoKeywordsSource,
@@ -32,10 +32,9 @@
         {% if textFieldSources is defined and textFieldSources |length %}
             {% namespace "metaBundleSettings" %}
                 <div class="heading seomatic-textSourceFromField">
-                    <label id="metaBundleSettings-seoKeywordsField-label"
-                           for="metaBundleSettings-seoKeywordsField">{{ "Source Field: "|t("seomatic") }}</label>
+                    <label for="metaBundleSettings-seoKeywordsField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
                     {{ forms.select({
-                        id: "seoKeywordsField",
+                        id: "seoKeywordsField" ~ suffix,
                         name: "seoKeywordsField",
                         options: textFieldSources,
                         value: metaBundleSettings.seoKeywordsField,
@@ -48,7 +47,7 @@
         {% namespace "metaGlobalVars" %}
             <div class="input ltr seomatic-textSourceFromUrl" style="box-sizing: border-box;">
                 {{ forms.textField({
-                    id: "seoKeywords",
+                    id: "seoKeywords" ~ suffix,
                     name: "seoKeywords",
                     value: metaGlobalVars.seoKeywords,
                     class: "seomatic-keywords",
@@ -70,10 +69,10 @@
     {% endif %}
 
     {% block inheritedValues %}
-        {{ _self.seoKeywordsField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars) }}
+        {{ _self.seoKeywordsField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.seoKeywordsField(textOptions, textFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars) }}
+        {{ _self.seoKeywordsField(textOptions, textFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars, "") }}
     {% endblock %}
 {% endembed %}

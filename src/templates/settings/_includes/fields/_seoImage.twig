@@ -10,7 +10,7 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro seoImageField(seoImageElements, elementType, imageOptions, assetFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars) %}
+    {% macro seoImageField(seoImageElements, elementType, imageOptions, assetFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars, suffix) %}
         <div class="instructions">
             <p>{{ "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified."|t("seomatic") }}</p>
         </div>
@@ -19,7 +19,7 @@
         {% namespace "metaBundleSettings" %}
             <div class="heading">
                 {{ forms.select({
-                    id: "seoImageSource",
+                    id: "seoImageSource" ~ suffix,
                     name: "seoImageSource",
                     options: imageOptions,
                     value: metaBundleSettings.seoImageSource,
@@ -32,9 +32,9 @@
         {% if assetFieldSources is defined and assetFieldSources |length %}
             {% namespace "metaBundleSettings" %}
                 <div class="heading seomatic-imageSourceFromField">
-                    <label id="metaBundleSettings-seoImageField-label" for="metaBundleSettings-seoImageField">{{ "Source Field: "|t("seomatic") }}</label>
+                    <label for="metaBundleSettings-seoImageField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
                     {{ forms.select({
-                        id: "seoImageField",
+                        id: "seoImageField" ~ suffix,
                         name: "seoImageField",
                         options: assetFieldSources,
                         value: metaBundleSettings.seoImageField,
@@ -47,7 +47,7 @@
         {% namespace "metaBundleSettings" %}
             <div class="heading seomatic-imageSourceFromAsset">
                 {{ forms.elementSelect({
-                    id: "seoImageIds",
+                    id: "seoImageIds" ~ suffix,
                     name: "seoImageIds",
                     viewMode: "large",
                     elements: seoImageElements,
@@ -68,7 +68,7 @@
         {% namespace "metaGlobalVars" %}
             <div class="heading seomatic-imageSourceFromUrl">
                 {{ forms.text({
-                    id: "seoImage",
+                    id: "seoImage" ~ suffix,
                     name: "seoImage",
                     value: metaGlobalVars.seoImage,
                     class: "nicetext",
@@ -89,11 +89,11 @@
     {% endif %}
 
     {% block inheritedValues %}
-        {{ _self.seoImageField(seoImageElements, elementType, imageOptions, assetFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars) }}
+        {{ _self.seoImageField(seoImageElements, elementType, imageOptions, assetFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.seoImageField(seoImageElements, elementType, imageOptions, assetFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars) }}
+        {{ _self.seoImageField(seoImageElements, elementType, imageOptions, assetFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars, "") }}
     {% endblock %}
 {% endembed %}
 

@@ -20,7 +20,7 @@
 {% endif %}
 
 {{ forms.hidden({
-    id: disableTreeSelect ? "dud" : "siteType",
+    id: disableTreeSelect ? "disabledType" : "siteType",
     class: "inline-item",
     fieldClass: "inline-item",
     name: "siteType",
@@ -29,7 +29,7 @@
     errors: mainEntityOfPage.getErrors("siteType"),
 }) }}
 {{ forms.hidden({
-    id: disableTreeSelect ? "dud" : "siteSubType",
+    id: disableTreeSelect ? "disabledSubType" : "siteSubType",
     label: "&rarr;",
     class: "inline-item",
     fieldClass: "inline-item",
@@ -39,7 +39,7 @@
     errors: mainEntityOfPage.getErrors("siteSubType"),
 }) }}
 {{ forms.hidden({
-    id: disableTreeSelect ? "dud" : "siteSpecificType",
+    id: disableTreeSelect ? "disabledSpecificType" : "siteSpecificType",
     label: "&rarr;",
     class: "inline-item",
     fieldClass: "inline-item",

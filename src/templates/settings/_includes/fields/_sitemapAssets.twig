@@ -10,7 +10,7 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro sitemapAssetsField(metaSitemapVars) %}
+    {% macro sitemapAssetsField(metaSitemapVars, suffix) %}
         <div class="instructions">
             <p>
                 {{ "Whether the URLs to images & videos in Asset fields or Asset fields in matrix blocks should be included in the sitemap"|t("seomatic") }}
@@ -21,7 +21,7 @@
         {% namespace "metaSitemapVars" %}
 
             {{ forms.lightswitchField({
-                id: "sitemapAssets",
+                id: "sitemapAssets" ~ suffix,
                 name: "sitemapAssets",
                 on: metaSitemapVars.sitemapAssets,
                 warning: false,
@@ -32,7 +32,7 @@
     {% endmacro %}
 
     {% block inheritedValues %}
-        {{ _self.sitemapAssetsField(inheritedFrom.metaSitemapVars ?? metaSitemapVars) }}
+        {{ _self.sitemapAssetsField(inheritedFrom.metaSitemapVars ?? metaSitemapVars, "-inherited") }}
     {% endblock %}
 
     {% block field %}

@@ -9,14 +9,14 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro twitterCardTypeField(twitterCardTypes, metaGlobalVars) %}
+    {% macro twitterCardTypeField(twitterCardTypes, metaGlobalVars, suffix) %}
         <div class="instructions">
             <p>{{ "With Twitter Cards, you can attach rich photos and information to Tweets that drive traffic to your website. Users who Tweet links to your content will have a 'Card' added to the Tweet that’s visible to all of their followers."|t("seomatic") }}</p>
         </div>
         {% import "_includes/forms" as forms %}
         {% namespace "metaGlobalVars" %}
             {{ forms.selectField({
-                id: "twitterCard",
+                id: "twitterCard" ~ suffix,
                 name: "twitterCard",
                 options: twitterCardTypes,
                 value: metaGlobalVars.twitterCard,
@@ -33,10 +33,10 @@
     } %}
 
     {% block inheritedValues %}
-        {{ _self.twitterCardTypeField(twitterCardTypes, inheritedFrom.metaGlobalVars ?? metaGlobalVars) }}
+        {{ _self.twitterCardTypeField(twitterCardTypes, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.twitterCardTypeField(twitterCardTypes, metaGlobalVars) }}
+        {{ _self.twitterCardTypeField(twitterCardTypes, metaGlobalVars, "") }}
     {% endblock %}
 {% endembed %}

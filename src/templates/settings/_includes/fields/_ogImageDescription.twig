@@ -10,7 +10,7 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro ogImageDescriptionField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars) %}
+    {% macro ogImageDescriptionField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars, suffix) %}
             <div class="instructions">
                 <p>{{ "A text description of the image conveying the essential nature of an image to users who are visually impaired."|t("seomatic") }}</p>
             </div>
@@ -19,7 +19,7 @@
             {% namespace "metaBundleSettings" %}
                 <div class="heading">
                     {{ forms.select({
-                        id: "ogImageDescriptionSource",
+                        id: "ogImageDescriptionSource" ~ suffix,
                         name: "ogImageDescriptionSource",
                         options: textOptions,
                         value: metaBundleSettings.ogImageDescriptionSource,
@@ -32,9 +32,9 @@
             {% if textFieldSources is defined and textFieldSources |length %}
                 {% namespace "metaBundleSettings" %}
                     <div class="heading seomatic-textSourceFromField">
-                        <label id="metaBundleSettings-ogImageDescriptionField-label" for="metaBundleSettings-ogImageDescriptionField">{{ "Source Field: "|t("seomatic") }}</label>
+                        <label for="metaBundleSettings-ogImageDescriptionField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
                         {{ forms.select({
-                            id: "ogImageDescriptionField",
+                            id: "ogImageDescriptionField" ~ suffix,
                             name: "ogImageDescriptionField",
                             options: textFieldSources,
                             value: metaBundleSettings.ogImageDescriptionField,
@@ -47,7 +47,7 @@
             {% namespace "metaGlobalVars" %}
                 <div class="input ltr seomatic-textSourceFromUrl">
                     {{ forms.textArea({
-                        id: "ogImageDescription",
+                        id: "ogImageDescription" ~ suffix,
                         name: "ogImageDescription",
                         value: metaGlobalVars.ogImageDescription,
                         class: "nicetext",
@@ -71,11 +71,11 @@
     {% set textOptions = { sameAsSeo: "Same As SEO Image Description"|t("seomatic"), } | merge(textOptions) %}
 
     {% block inheritedValues %}
-        {{ _self.ogImageDescriptionField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars) }}
+        {{ _self.ogImageDescriptionField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.ogImageDescriptionField(textOptions, textFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars) }}
+        {{ _self.ogImageDescriptionField(textOptions, textFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars, "") }}
     {% endblock %}
 
 {% endembed %}

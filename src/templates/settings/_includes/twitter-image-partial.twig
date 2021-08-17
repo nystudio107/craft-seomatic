@@ -10,16 +10,16 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro entireTwitterImageField(twitterImageElement, elementType, imageOptions, field, assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars) %}
-        <div class="field seomatic-imageSourceWrapper" id="metaBundleSettings-seoImageSource-field">
+    {% macro entireTwitterImageField(twitterImageElement, elementType, imageOptions, field, assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, suffix) %}
+        <div class="field seomatic-imageSourceWrapper">
             <div class="field">
-                {{ _self.twitterImageField(twitterImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars) }}
+                {{ _self.twitterImageField(twitterImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix) }}
             </div>
             <div class="field seomatic-imageSourceNotFromUrl">
-                {{ _self.twitterImageTransformField(field, metaBundleSettings) }}
+                {{ _self.twitterImageTransformField(field, metaBundleSettings, suffix) }}
             </div>
             <div class="field seomatic-imageSourceNotFromUrl">
-                {{ _self.twitterImageTransformModeField(field, imageCropModes, metaBundleSettings) }}
+                {{ _self.twitterImageTransformModeField(field, imageCropModes, metaBundleSettings, suffix) }}
             </div>
         </div>
     {% endmacro %}
@@ -50,7 +50,7 @@
             {% set twitterImageElement = craft.assets.id(imageIds).limit(1).all() %}
         {% endif %}
 
-        {{ _self.entiretwitterImageField(twitterImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars) }}
+        {{ _self.entiretwitterImageField(twitterImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
     {% endblock %}
 
     {% block field %}
@@ -59,17 +59,17 @@
             {% set twitterImageElement = craft.assets.id(metaBundleSettings.twitterImageIds).limit(1).all() %}
         {% endif %}
 
-        {{ _self.entireTwitterImageField(twitterImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars) }}
+        {{ _self.entireTwitterImageField(twitterImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, "") }}
     {% endblock %}
 
 
     {############### Twitter Image Macros ###############}
 
-    {% macro twitterImageTransformModeField(field, imageCropModes, metaBundleSettings) %}
+    {% macro twitterImageTransformModeField(field, imageCropModes, metaBundleSettings, suffix) %}
 
         <div class="field" {% if field is not null and 'twitterImageTransformMode' not in field.twitterEnabledFields %}style="display: none;"{% endif %}>
             <div class="heading">
-                <label for="metaBundleSettings-twitterImageTransformMode">
+                <label for="metaBundleSettings-twitterImageTransformMode{{ suffix }}">
                     {{ "Twitter Image Transform Mode"|t("seomatic") }}
                 </label>
             </div>
@@ -80,7 +80,7 @@
             {% import "_includes/forms" as forms %}
             {% namespace "metaBundleSettings" %}
                 {{ forms.selectField({
-                    id: "twitterImageTransformMode",
+                    id: "twitterImageTransformMode" ~ suffix,
                     name: "twitterImageTransformMode",
                     options: imageCropModes,
                     value: metaBundleSettings.twitterImageTransformMode,
@@ -91,19 +91,19 @@
         </div>
     {% endmacro %}
 
-    {% macro twitterImageTransformField(field, metaBundleSettings) %}
+    {% macro twitterImageTransformField(field, metaBundleSettings, suffix) %}
         {% import "_includes/forms" as forms %}
 
         <div class="field" {% if field is not null and 'transformTwitterImage' not in field.twitterEnabledFields %}style="display: none;"{% endif %}>
             <div class="heading">
-                <label for="metaBundleSettings-twitterImageTransform">
+                <label for="metaBundleSettings-twitterImageTransform{{ suffix }}">
                     {{ "Transform Twitter Image"|t("seomatic") }}
                 </label>
             </div>
             {% namespace "metaBundleSettings" %}
                 {{ forms.lightswitchField({
                     instructions: "Whether the Twitter image should be automatically transformed to an appropriate file format and aspect ratio for the chosen Twitter Card type."|t("seomatic"),
-                    id: "twitterImageTransform",
+                    id: "twitterImageTransform" ~ suffix,
                     name: "twitterImageTransform",
                     on: metaBundleSettings.twitterImageTransform,
                     warning: false,
@@ -113,7 +113,7 @@
         </div>
     {% endmacro %}
 
-    {% macro twitterImageField(twitterImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars) %}
+    {% macro twitterImageField(twitterImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix) %}
         <div class="instructions">
             <p>{{ "This is the image that will be used for display as Twitter Cards on tweets that link to the web page."|t("seomatic") }}</p>
         </div>
@@ -122,7 +122,7 @@
         {% namespace "metaBundleSettings" %}
             <div class="heading">
                 {{ forms.select({
-                    id: "twitterImageSource",
+                    id: "twitterImageSource" ~ suffix,
                     name: "twitterImageSource",
                     options: imageOptions,
                     value: metaBundleSettings.twitterImageSource,
@@ -135,9 +135,9 @@
         {% if assetFieldSources is defined and assetFieldSources |length %}
             {% namespace "metaBundleSettings" %}
                 <div class="heading seomatic-imageSourceFromField">
-                    <label id="metaBundleSettings-twitterImageField-label" for="metaBundleSettings-twitterImageField">{{ "Asset Field: "|t("seomatic") }}</label>
+                    <label for="metaBundleSettings-twitterImageField{{ suffix }}">{{ "Asset Field: "|t("seomatic") }}</label>
                     {{ forms.select({
-                        id: "twitterImageField",
+                        id: "twitterImageField" ~ suffix,
                         name: "twitterImageField",
                         options: assetFieldSources,
                         value: metaBundleSettings.twitterImageField,
@@ -171,7 +171,7 @@
         {% namespace "metaGlobalVars" %}
             <div class="heading seomatic-imageSourceFromUrl">
                 {{ forms.text({
-                    id: "twitterImage",
+                    id: "twitterImage" ~ suffix,
                     name: "twitterImage",
                     value: metaGlobalVars.twitterImage,
                     class: "nicetext",

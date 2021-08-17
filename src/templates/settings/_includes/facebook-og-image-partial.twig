@@ -10,16 +10,16 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro entireOgImageField(ogImageElement, elementType, imageOptions, field, assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars) %}
-        <div class="field seomatic-imageSourceWrapper" id="metaBundleSettings-seoImageSource-field">
+    {% macro entireOgImageField(ogImageElement, elementType, imageOptions, field, assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, suffix) %}
+        <div class="field seomatic-imageSourceWrapper">
             <div class="field">
-                {{ _self.ogImageField(ogImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars) }}
+                {{ _self.ogImageField(ogImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix) }}
             </div>
             <div class="field seomatic-imageSourceNotFromUrl">
-                {{ _self.ogImageTransformField(field, metaBundleSettings) }}
+                {{ _self.ogImageTransformField(field, metaBundleSettings, suffix) }}
             </div>
             <div class="field seomatic-imageSourceNotFromUrl">
-                {{ _self.ogImageTransformModeField(field, imageCropModes, metaBundleSettings) }}
+                {{ _self.ogImageTransformModeField(field, imageCropModes, metaBundleSettings, suffix) }}
             </div>
         </div>
     {% endmacro %}
@@ -50,7 +50,7 @@
             {% set ogImageElement = craft.assets.id(imageIds).limit(1).all() %}
         {% endif %}
 
-        {{ _self.entireOgImageField(ogImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars) }}
+        {{ _self.entireOgImageField(ogImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
     {% endblock %}
 
     {% block field %}
@@ -59,14 +59,14 @@
             {% set ogImageElement = craft.assets.id(metaBundleSettings.ogImageIds).limit(1).all() %}
         {% endif %}
 
-        {{ _self.entireOgImageField(ogImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars) }}
+        {{ _self.entireOgImageField(ogImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, "") }}
     {% endblock %}
 
     {############### OpenGraph Image Macros ###############}
 
-    {% macro ogImageTransformModeField(field, imageCropModes, metaBundleSettings) %}
+    {% macro ogImageTransformModeField(field, imageCropModes, metaBundleSettings, suffix) %}
         <div class="heading">
-            <label for="metaBundleSettings-ogImageTransformMode">
+            <label for="metaBundleSettings-ogImageTransformMode{{ suffix }}">
                 {{ "Facebook OpenGraph Image Transform Mode"|t("seomatic") }}
             </label>
         </div>
@@ -78,7 +78,7 @@
         <div class="field" {% if field is not null and 'ogImageTransformMode' not in field.facebookEnabledFields %}style="display: none;"{% endif %}>
             {% namespace "metaBundleSettings" %}
                 {{ forms.selectField({
-                    id: "ogImageTransformMode",
+                    id: "ogImageTransformMode" ~ suffix,
                     name: "ogImageTransformMode",
                     options: imageCropModes,
                     value: metaBundleSettings.ogImageTransformMode,
@@ -89,18 +89,18 @@
         </div>
     {% endmacro %}
 
-    {% macro ogImageTransformField(field, metaBundleSettings) %}
+    {% macro ogImageTransformField(field, metaBundleSettings, suffix) %}
         {% import "_includes/forms" as forms %}
 
         <div class="field" {% if field is not null and 'ogImageTransform' not in field.facebookEnabledFields %}style="display: none;"{% endif %}>
             <div class="heading">
-                <label for="metaBundleSettings-ogImageTransform">
+                <label for="metaBundleSettings-ogImageTransform{{ suffix }}">
                     {{ "Transform Facebook OpenGraph Image"|t("seomatic") }}
                 </label>
             </div>
             {% namespace "metaBundleSettings" %}
                 {{ forms.lightswitchField({
-                    id: "ogImageTransform",
+                    id: "ogImageTransform" ~ suffix,
                     name: "ogImageTransform",
                     instructions: "Whether the Facebook OpenGraph image should be automatically transformed to an appropriate file format and aspect ratio for Facebook."|t("seomatic"),
                     on: metaBundleSettings.ogImageTransform,
@@ -111,7 +111,7 @@
         </div>
     {% endmacro %}
 
-    {% macro ogImageField(ogImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars) %}
+    {% macro ogImageField(ogImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix) %}
         <div class="instructions">
             <p>{{ "This is the image that will be used for display on Facebook posts that link to the web page."|t("seomatic") }}</p>
         </div>
@@ -120,7 +120,7 @@
         {% namespace "metaBundleSettings" %}
             <div class="heading">
                 {{ forms.select({
-                    id: "ogImageSource",
+                    id: "ogImageSource" ~ suffix,
                     name: "ogImageSource",
                     options: imageOptions,
                     value: metaBundleSettings.ogImageSource,
@@ -133,9 +133,9 @@
         {% if assetFieldSources is defined and assetFieldSources |length %}
             {% namespace "metaBundleSettings" %}
                 <div class="heading seomatic-imageSourceFromField">
-                    <label id="metaBundleSettings-ogImageField-label" for="metaBundleSettings-ogImageField">{{ "Asset Field: "|t("seomatic") }}</label>
+                    <label for="metaBundleSettings-ogImageField{{ suffix }}">{{ "Asset Field: "|t("seomatic") }}</label>
                     {{ forms.select({
-                        id: "ogImageField",
+                        id: "ogImageField" ~ suffix,
                         name: "ogImageField",
                         options: assetFieldSources,
                         value: metaBundleSettings.ogImageField,
@@ -169,7 +169,7 @@
         {% namespace "metaGlobalVars" %}
             <div class="heading seomatic-imageSourceFromUrl">
                 {{ forms.text({
-                    id: "ogImage",
+                    id: "ogImage" ~ suffix,
                     name: "ogImage",
                     value: metaGlobalVars.ogImage,
                     class: "nicetext",
