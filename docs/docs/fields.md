@@ -14,7 +14,7 @@ Modern SEO works best if it actually reflects what is on the page, visible to th
 
 However, in some cases you may want more control over page SEO for specific entries. That’s where the SEO Settings field comes in. Add it to your Section’s Field Layout, and you can override specific SEO settings on a per-entry basis.
 
-When a new entry is created with an SEO Settings field in it, the field values will default to the Content SEO settings for the Section that the field is in. Any setting that you leave blank or empty in the SEO Settings field will just default to the Content SEO and/or Global SEO setting.
+When a new entry is created with an SEO Settings field in it, the field values will all have the **Override** light switch turned off.
 
 The Field settings let you control exactly what fields will appear and be visible for you or your client to override:
 
@@ -24,7 +24,13 @@ By default, just a few sensible settings are made visible in the Field:
 
 ![Screenshot](./resources/screenshots/seomatic-field-defaults.png)
 
-Any setting left blank will just fall back on the Content SEO settings for that Section, so you can use the Field only for the exceptional cases.
+With the **Override** light switch off, the settings will default to the Content SEO and/or Global SEO setting for that field, so you can use the Field only for the exceptional cases.
+
+If you turn the **Override** light switch on:
+
+![Screenshot](./resources/screenshots/seomatic-field-defaults-override.png)
+
+...you can override the given setting on a per-entry basis.
 
 You can enable every possible field to be displayed in the SEO Settings field if you like:
 
