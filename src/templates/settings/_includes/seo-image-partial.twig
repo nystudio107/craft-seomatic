@@ -10,16 +10,16 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro entireSeoImageField(seoImageElement, elementType, imageOptions, field, assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars) %}
-        <div class="field seomatic-imageSourceWrapper" id="metaBundleSettings-seoImageSource-field">
+    {% macro entireSeoImageField(seoImageElement, elementType, imageOptions, field, assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, suffix) %}
+        <div class="field seomatic-imageSourceWrapper">
             <div class="field">
-                {{ _self.seoImageField(seoImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars) }}
+                {{ _self.seoImageField(seoImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix) }}
             </div>
             <div class="field seomatic-imageSourceNotFromUrl">
-                {{ _self.seoImageTransformField(field, metaBundleSettings) }}
+                {{ _self.seoImageTransformField(field, metaBundleSettings, suffix) }}
             </div>
             <div class="field seomatic-imageSourceNotFromUrl">
-                {{ _self.seoImageTransformModeField(field, imageCropModes, metaBundleSettings) }}
+                {{ _self.seoImageTransformModeField(field, imageCropModes, metaBundleSettings, suffix) }}
             </div>
         </div>
     {% endmacro %}
@@ -50,7 +50,7 @@
             {% set seoImageElement = craft.assets.id(imageIds).limit(1).all() %}
         {% endif %}
 
-        {{ _self.entireSeoImageField(seoImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars) }}
+        {{ _self.entireSeoImageField(seoImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
     {% endblock %}
 
     {% block field %}
@@ -59,15 +59,15 @@
             {% set seoImageElement = craft.assets.id(metaBundleSettings.seoImageIds).limit(1).all() %}
         {% endif %}
 
-        {{ _self.entireSeoImageField(seoImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars) }}
+        {{ _self.entireSeoImageField(seoImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, "") }}
     {% endblock %}
 
 
     {############### SEO Image Macros ###############}
 
-    {% macro seoImageTransformModeField(field, imageCropModes, metaBundleSettings) %}
+    {% macro seoImageTransformModeField(field, imageCropModes, metaBundleSettings, suffix) %}
         <div class="heading">
-            <label for="metaBundleSettings-seoImageTransformMode">
+            <label for="metaBundleSettings-seoImageTransformMode{{ suffix }}">
                 {{ "SEO Image Transform Mode"|t("seomatic") }}
             </label>
         </div>
@@ -79,7 +79,7 @@
         <div class="field" {% if field is not null and 'seoImageTransformMode' not in field.generalEnabledFields %}style="display: none;"{% endif %}>
             {% namespace "metaBundleSettings" %}
                 {{ forms.selectField({
-                    id: "seoImageTransformMode",
+                    id: "seoImageTransformMode" ~ suffix,
                     name: "seoImageTransformMode",
                     options: imageCropModes,
                     value: metaBundleSettings.seoImageTransformMode,
@@ -90,18 +90,18 @@
         </div>
     {% endmacro %}
 
-    {% macro seoImageTransformField(field, metaBundleSettings) %}
+    {% macro seoImageTransformField(field, metaBundleSettings, suffix) %}
         {% import "_includes/forms" as forms %}
 
         <div class="field" {% if field is not null and 'seoImageTransform' not in field.generalEnabledFields %}style="display: none;"{% endif %}>
             <div class="heading">
-                <label for="metaBundleSettings-seoImageTransform">
+                <label for="metaBundleSettings-seoImageTransform{{ suffix }}">
                     {{ "Transform SEO Image"|t("seomatic") }}
                 </label>
             </div>
             {% namespace "metaBundleSettings" %}
                 {{ forms.lightswitchField({
-                    id: "seoImageTransform",
+                    id: "seoImageTransform" ~ suffix,
                     name: "seoImageTransform",
                     instructions: "Whether the SEO image should be automatically transformed to an appropriate file format and aspect ratio."|t("seomatic"),
                     on: metaBundleSettings.seoImageTransform,
@@ -112,7 +112,7 @@
         </div>
     {% endmacro %}
 
-    {% macro seoImageField(seoImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars) %}
+    {% macro seoImageField(seoImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix) %}
         <div class="instructions">
             <p>{{ "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified."|t("seomatic") }}</p>
         </div>
@@ -121,7 +121,7 @@
         {% namespace "metaBundleSettings" %}
             <div class="heading">
                 {{ forms.select({
-                    id: "seoImageSource",
+                    id: "seoImageSource" ~ suffix,
                     name: "seoImageSource",
                     options: imageOptions,
                     value: metaBundleSettings.seoImageSource,
@@ -134,9 +134,9 @@
         {% if assetFieldSources is defined and assetFieldSources |length %}
             {% namespace "metaBundleSettings" %}
                 <div class="heading seomatic-imageSourceFromField">
-                    <label id="metaBundleSettings-seoImageField-label" for="metaBundleSettings-seoImageField">{{ "Source Field: "|t("seomatic") }}</label>
+                    <label for="metaBundleSettings-seoImageField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
                     {{ forms.select({
-                        id: "seoImageField",
+                        id: "seoImageField" ~ suffix,
                         name: "seoImageField",
                         options: assetFieldSources,
                         value: metaBundleSettings.seoImageField,
@@ -170,7 +170,7 @@
         {% namespace "metaGlobalVars" %}
             <div class="heading seomatic-imageSourceFromUrl">
                 {{ forms.text({
-                    id: "seoImage",
+                    id: "seoImage" ~ suffix,
                     name: "seoImage",
                     value: metaGlobalVars.seoImage,
                     class: "nicetext",

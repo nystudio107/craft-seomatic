@@ -12,7 +12,7 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro siteNamePositionField(metaBundleSettings, metaGlobalVars, pageContext) %}
+    {% macro siteNamePositionField(metaBundleSettings, metaGlobalVars, pageContext, suffix) %}
         {% import "_includes/forms" as forms %}
 
         {% set textOptions = {
@@ -39,7 +39,7 @@
             <div class="heading">
                 <div {% if pageContext == "global" %}style="display: none;" {% endif %}#}>
                     {{ forms.select({
-                        id: "siteNamePositionSource",
+                        id: "siteNamePositionSource" ~ suffix,
                         name: "siteNamePositionSource",
                         options: textOptions,
                         value: metaBundleSettings.siteNamePositionSource,
@@ -53,7 +53,7 @@
         {% namespace "metaGlobalVars" %}
             <div class="heading seomatic-textSourceFromUrl">
                 {{ forms.selectField({
-                    id: "siteNamePosition",
+                    id: "siteNamePosition" ~ suffix,
                     name: "siteNamePosition",
                     options: customPositions,
                     value: metaGlobalVars.siteNamePosition,
@@ -65,10 +65,10 @@
     {% endmacro %}
 
     {% block inheritedValues %}
-        {{ _self.siteNamePositionField(inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, pageContext) }}
+        {{ _self.siteNamePositionField(inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, pageContext, "-inherited") }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.siteNamePositionField(metaBundleSettings, metaGlobalVars, pageContext) }}
+        {{ _self.siteNamePositionField(metaBundleSettings, metaGlobalVars, pageContext, "") }}
     {% endblock %}
 {% endembed %}

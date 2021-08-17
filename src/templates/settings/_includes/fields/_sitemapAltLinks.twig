@@ -10,7 +10,7 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro sitemapAltLinksField(metaSitemapVars) %}
+    {% macro sitemapAltLinksField(metaSitemapVars, suffix) %}
         <div class="instructions">
             <p>
                 {{ "Whether URLs to alternate translations should be included in the sitemap"|t("seomatic") }}
@@ -21,7 +21,7 @@
         {% namespace "metaSitemapVars" %}
 
             {{ forms.lightswitchField({
-                id: "sitemapAltLinks",
+                id: "sitemapAltLinks" ~ suffix,
                 name: "sitemapAltLinks",
                 on: metaSitemapVars.sitemapAltLinks,
                 warning: false,
@@ -32,10 +32,10 @@
     {% endmacro %}
 
     {% block inheritedValues %}
-        {{ _self.sitemapAltLinksField(inheritedFrom.metaSitemapVars ?? metaSitemapVars) }}
+        {{ _self.sitemapAltLinksField(inheritedFrom.metaSitemapVars ?? metaSitemapVars, "-inherited") }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.sitemapAltLinksField(metaSitemapVars) }}
+        {{ _self.sitemapAltLinksField(metaSitemapVars, "") }}
     {% endblock %}
 {% endembed %}

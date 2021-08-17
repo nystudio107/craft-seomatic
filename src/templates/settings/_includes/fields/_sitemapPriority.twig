@@ -10,7 +10,7 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro sitemapFilesField(sitemapPriorityOptions, metaSitemapVars) %}
+    {% macro sitemapFilesField(sitemapPriorityOptions, metaSitemapVars, suffix) %}
         <div class="instructions">
             <p>
                 {{ "The priority of this URL relative to other URLs on your site. This value does not affect how your pages are compared to pages on other sites—it only lets the search engines know which pages you deem most important for the crawlers."|t("seomatic") }}
@@ -21,7 +21,7 @@
         {% namespace "metaSitemapVars" %}
 
         {{ forms.selectField({
-            id: "sitemapPriority",
+            id: "sitemapPriority" ~ suffix,
             name: "sitemapPriority",
             options: sitemapPriorityOptions,
             value: metaSitemapVars.sitemapPriority,
@@ -46,10 +46,10 @@
     } %}
 
     {% block inheritedValues %}
-        {{ _self.sitemapFilesField(sitemapPriorityOptions, inheritedFrom.metaSitemapVars ?? metaSitemapVars) }}
+        {{ _self.sitemapFilesField(sitemapPriorityOptions, inheritedFrom.metaSitemapVars ?? metaSitemapVars, "-inherited") }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.sitemapFilesField(sitemapPriorityOptions, metaSitemapVars) }}
+        {{ _self.sitemapFilesField(sitemapPriorityOptions, metaSitemapVars, "") }}
     {% endblock %}
 {% endembed %}

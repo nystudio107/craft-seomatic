@@ -10,7 +10,7 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro twitterCreatorField(textOptions, metaBundleSettings, metaGlobalVars) %}
+    {% macro twitterCreatorField(textOptions, metaBundleSettings, metaGlobalVars, suffix) %}
         <div class="instructions">
             <p>{{ "Twitter username for the content creator / author, without the preceding @."|t("seomatic") }}</p>
         </div>
@@ -18,7 +18,7 @@
         {% namespace "metaBundleSettings" %}
             <div class="heading">
                 {{ forms.select({
-                    id: "twitterCreatorSource",
+                    id: "twitterCreatorSource" ~ suffix,
                     name: "twitterCreatorSource",
                     options: textOptions,
                     value: metaBundleSettings.twitterCreatorSource,
@@ -31,9 +31,9 @@
         {% if userFieldSources is defined and userFieldSources |length %}
             {% namespace "metaBundleSettings" %}
                 <div class="heading seomatic-textSourceFromField">
-                    <label id="metaBundleSettings-twitterCreatorField-label" for="metaBundleSettings-twitterCreatorField">{{ "Source Field: "|t("seomatic") }}</label>
+                    <label for="metaBundleSettings-twitterCreatorField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
                     {{ forms.select({
-                        id: "twitterCreatorField",
+                        id: "twitterCreatorField" ~ suffix,
                         name: "twitterCreatorField",
                         options: userFieldSources,
                         value: metaBundleSettings.twitterCreatorField,
@@ -46,7 +46,7 @@
         {% namespace "metaGlobalVars" %}
             <div class="heading seomatic-textSourceFromUrl">
                 {{ forms.text({
-                    id: "twitterCreator",
+                    id: "twitterCreator" ~ suffix,
                     name: "twitterCreator",
                     value: metaGlobalVars.twitterCreator,
                     class: "nicetext",
@@ -66,10 +66,10 @@
     {% set textOptions = { sameAsSiteTwitter: "Same as Site Twitter Handle"|t("seomatic"), } | merge(textOptions) %}
 
     {% block inheritedValues %}
-        {{ _self.twitterCreatorField(textOptions, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars) }}
+        {{ _self.twitterCreatorField(textOptions, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.twitterCreatorField(textOptions, metaBundleSettings, metaGlobalVars) }}
+        {{ _self.twitterCreatorField(textOptions, metaBundleSettings, metaGlobalVars, "") }}
     {% endblock %}
 {% endembed %}
