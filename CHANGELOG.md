@@ -10,6 +10,9 @@
 ### Changed
 * Switch from the shorthand format to object format for the search target JSON-LD ([#945](https://github.com/nystudio107/craft-seomatic/issues/945))
 
+### Fixed
+* Only default to not generating image transforms immediately if the image is remote and the environment is local dev ([#949](https://github.com/nystudio107/craft-seomatic/issues/949))
+
 ## 3.3.48 - 2021.08.11
 ### Fixed
 * Fixed a regression that caused sitemap generation via console command to fail ([#943](https://github.com/nystudio107/craft-seomatic/issues/943))
