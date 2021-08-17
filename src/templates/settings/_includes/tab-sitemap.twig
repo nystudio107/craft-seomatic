@@ -1,7 +1,6 @@
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
 
-<fieldset>
 {% if pageContext != "field" %}
 <div class="flex">
     <div class="flex-grow"></div>
@@ -152,4 +151,3 @@
 {% include "seomatic/_includes/footer-message.twig" with {
     message: "#{currentSourceBundleType |capitalize} Sitemaps are automatically submitted to search engines whenever a new Element in that Section/Category Group is added."
 } %}
-</fieldset>

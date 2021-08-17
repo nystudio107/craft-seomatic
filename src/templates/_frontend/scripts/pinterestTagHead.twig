@@ -1,0 +1,12 @@
+{% if pinterestTagId.value is defined and pinterestTagId.value %}
+!function(e){if(!window.pintrk){window.pintrk=function(){window.pintrk.queue.push(
+Array.prototype.slice.call(arguments))};var
+n=window.pintrk;n.queue=[],n.version="3.0";var
+t=document.createElement("script");t.async=!0,t.src=e;var
+r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r)}}("{{ pinterestTagUrl.value }}");
+pintrk('load', '{{ pinterestTagId.value }}');
+{% set pageView = (sendPageView.value and not seomatic.helper.isPreview) %}
+{% if pageView %}
+pintrk('page');
+{% endif %}
+{% endif %}

@@ -187,20 +187,23 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 return $result;
             }
             // Return a 503 Service Unavailable an a Retry-After so bots will try back later
+            $lines = [];
             $response = Craft::$app->getResponse();
-            $response->setStatusCode(503);
-            $response->headers->add('Retry-After', 60);
-            $response->headers->add('Cache-Control', 'no-cache, no-store');
-            // Return an empty XML document
-            $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
-            $lines[] = '<?xml-stylesheet type="text/xsl" href="sitemap-empty.xsl"?>';
-            $lines[] = '<!-- ' . Craft::t('seomatic', 'This sitemap has not been generated yet.') . ' -->';
-            $lines[] = '<!-- ' . Craft::t('seomatic', 'If you are seeing this in local dev or an') . ' -->';
-            $lines[] = '<!-- ' . Craft::t('seomatic', 'environment with `devMode` on, caches only') . ' -->';
-            $lines[] = '<!-- ' . Craft::t('seomatic', 'last for 30 seconds in local dev, so it is') . ' -->';
-            $lines[] = '<!-- ' . Craft::t('seomatic', 'normal for the sitemap to not be cached.') . ' -->';
-            $lines[] = '<urlset>';
-            $lines[] = '</urlset>';
+            if (!$request->isConsoleRequest) {
+                $response->setStatusCode(503);
+                $response->headers->add('Retry-After', 60);
+                $response->headers->add('Cache-Control', 'no-cache, no-store');
+                // Return an empty XML document
+                $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
+                $lines[] = '<?xml-stylesheet type="text/xsl" href="sitemap-empty.xsl"?>';
+                $lines[] = '<!-- ' . Craft::t('seomatic', 'This sitemap has not been generated yet.') . ' -->';
+                $lines[] = '<!-- ' . Craft::t('seomatic', 'If you are seeing this in local dev or an') . ' -->';
+                $lines[] = '<!-- ' . Craft::t('seomatic', 'environment with `devMode` on, caches only') . ' -->';
+                $lines[] = '<!-- ' . Craft::t('seomatic', 'last for 30 seconds in local dev, so it is') . ' -->';
+                $lines[] = '<!-- ' . Craft::t('seomatic', 'normal for the sitemap to not be cached.') . ' -->';
+                $lines[] = '<urlset>';
+                $lines[] = '</urlset>';
+            }
             $lines = implode("\r\n", $lines);
 
             return $lines;

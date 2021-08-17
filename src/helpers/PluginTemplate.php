@@ -36,6 +36,13 @@ class PluginTemplate
     // Static Methods
     // =========================================================================
 
+    /**
+     * Render the passed in Twig string template, catching any errors
+     *
+     * @param string $templateString
+     * @param array $params
+     * @return string
+     */
     public static function renderStringTemplate(string $templateString, array $params = []): string
     {
         try {

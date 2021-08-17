@@ -49,6 +49,7 @@ class MetaValue
     ];
     const PARSE_ONCE = [
         'target',
+        'urlTemplate',
     ];
 
     // Static Properties

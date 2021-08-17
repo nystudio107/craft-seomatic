@@ -51,7 +51,10 @@ return [
                 ],
                 'potentialAction'  => [
                     'type'        => 'SearchAction',
-                    'target'      => '{seomatic.site.siteLinksSearchTarget}',
+                    'target'      => [
+                        'type' => 'EntryPoint',
+                        'urlTemplate' => '{seomatic.site.siteLinksSearchTarget}',
+                    ],
                     'query-input' => '{seomatic.helper.siteLinksQueryInput()}',
                 ],
             ],

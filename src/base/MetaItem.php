@@ -71,7 +71,7 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['include', 'key'], 'required'],
+            [['key'], 'required'],
             [['include'], 'boolean'],
             [['key'], 'string'],
             [['environment'], 'safe'],
