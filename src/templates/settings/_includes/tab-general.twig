@@ -1,7 +1,6 @@
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
 
-<fieldset>
 {% if field is not defined or 'seoPreview' in field.generalEnabledFields %}
     <h4 class="heading">{{ "SEO Preview:"|t('seomatic') }}</h4>
     {% include "seomatic/_includes/googlePreview.twig" %}
@@ -105,4 +104,3 @@
 {% if field is not defined or 'canonicalUrl' in field.generalEnabledFields %}
     {% include "seomatic/settings/_includes/fields/_canonicalUrl.twig" %}
 {% endif %}
-</fieldset>
