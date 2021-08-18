@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\base\VarsModel;
+use nystudio107\seomatic\base\InheritableSettingsModel;
 
 /**
  * @inheritdoc
@@ -21,7 +21,7 @@ use nystudio107\seomatic\base\VarsModel;
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaGlobalVars extends VarsModel
+class MetaGlobalVars extends InheritableSettingsModel
 {
     // Static Methods
     // =========================================================================

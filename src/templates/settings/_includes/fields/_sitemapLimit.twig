@@ -1,0 +1,51 @@
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "sitemapLimit", "metaSitemapVars") %}
+{% set hasInheritableValues = inheritedFrom is not null %}
+
+{% set additionalVars = {
+    'isInherited': seomatic.helper.isInherited(metaSitemapVars, "sitemapLimit"),
+    'fieldLabel': "Sitemap Limit"|t("seomatic"),
+    'settingName': 'sitemapLimit',
+    'labelFor': 'metaSitemapVars-sitemapLimit',
+    'overrideNamespace': 'metaSitemapVars'
+} %}
+
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro sitemapLimitField(sitemapLimitOptions, metaSitemapVars, suffix) %}
+        <div class="instructions">
+            <p>
+                {{ "Controls a limit to how many entries will be in this sitemap. The sitemap entries will be sorted by modification date."|t("seomatic") }}
+            </p>
+        </div>
+
+        {% import "_includes/forms" as forms %}
+        {% namespace "metaSitemapVars" %}
+        {{ forms.selectField({
+            id: "sitemapLimit" ~ suffix,
+            name: "sitemapLimit",
+            options: sitemapLimitOptions,
+            value: metaSitemapVars.sitemapLimit,
+            errors: metaSitemapVars.getErrors("sitemapLimit"),
+        }) }}
+
+        {% endnamespace %}
+    {% endmacro %}
+
+    {% set sitemapLimitOptions = {
+        null: "None",
+        "1000": "1000",
+        "500": "500",
+        "200": "200",
+        "100": "100",
+        "50": "50",
+        "10": "10",
+        "5": "5",
+    } %}
+
+    {% block inheritedValues %}
+        {{ _self.sitemapLimitField(sitemapLimitOptions, inheritedFrom.metaSitemapVars ?? metaSitemapVars, "-inherited") }}
+    {% endblock %}
+
+    {% block field %}
+        {{ _self.sitemapLimitField(sitemapLimitOptions, metaSitemapVars, "") }}
+    {% endblock %}
+{% endembed %}

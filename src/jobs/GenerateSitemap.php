@@ -450,18 +450,29 @@ class GenerateSitemap extends BaseJob
                 $seoSettingsField = Craft::$app->getFields()->getFieldByHandle($fieldHandle);
                 /** @var MetaBundle $metaBundle */
                 $fieldMetaBundle = $element->$fieldHandle;
-                if ($fieldMetaBundle !== null && $seoSettingsField !== null && $seoSettingsField->sitemapTabEnabled) {
-                    // Combine the meta sitemap vars
-                    $attributes = $fieldMetaBundle->metaSitemapVars->getAttributes();
-                    $attributes = \array_intersect_key(
-                        $attributes,
-                        array_flip($seoSettingsField->sitemapEnabledFields)
-                    );
-                    $attributes = array_filter(
-                        $attributes,
-                        [ArrayHelper::class, 'preserveBools']
-                    );
-                    $metaBundle->metaSitemapVars->setAttributes($attributes, false);
+                if ($fieldMetaBundle !== null && $seoSettingsField !== null) {
+                    if ($seoSettingsField->sitemapTabEnabled) {
+                        // Combine the meta sitemap vars
+                        $attributes = $fieldMetaBundle->metaSitemapVars->getAttributes();
+
+                        // Get the explicitly inherited attributes
+                        $inherited = array_keys(ArrayHelper::remove($attributes, 'inherited', []));
+
+                        $attributes = \array_intersect_key(
+                            $attributes,
+                            array_flip($seoSettingsField->sitemapEnabledFields)
+                        );
+                        $attributes = array_filter(
+                            $attributes,
+                            [ArrayHelper::class, 'preserveBools']
+                        );
+
+                        foreach ($inherited as $inheritedAttribute) {
+                            unset($attributes[$inheritedAttribute]);
+                        }
+
+                        $metaBundle->metaSitemapVars->setAttributes($attributes, false);
+                    }
                     // Combine the meta global vars
                     $attributes = $fieldMetaBundle->metaGlobalVars->getAttributes();
                     $attributes = array_filter(

@@ -1,54 +1,59 @@
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
 
-<div class="field">
-    <div class="heading">
-        <label for="siteType">{{ mainEntityTitle|t("seomatic")}}</label>
-    </div>
-    <div class="instructions"><p>{{ mainEntityDescription ~ " Choose as general or specific of an type as you wish.  Leave a sub-type blank if you don't want to specify a sub-type." |t("seomatic") |raw}}</p></div>
-    <div id="treeselect-wrapper">
-        <schema-type-list {% if entitySchemaPath | length %}entity="{{ entitySchemaPath }}"{% endif %}></schema-type-list>
-    </div>
-    {% set mainEntityOfPageRootOptions = seomatic.helper.getSingleTypeMenu('') %}
-    {% if pageContext is defined and (pageContext == "field" or pageContext == "content") %}
-        {% set mainEntityOfPageRootOptions = { "": ""} | merge(mainEntityOfPageRootOptions) %}
-    {% endif %}
-    {{ forms.hidden({
-        id: "siteType",
-        class: "inline-item",
-        fieldClass: "inline-item",
-        name: "siteType",
-        value: mainEntityOfPage.siteType,
-        required: true,
-        errors: mainEntityOfPage.getErrors("siteType"),
-    }) }}
-    {{ forms.hidden({
-        id: "siteSubType",
-        label: "&rarr;",
-        class: "inline-item",
-        fieldClass: "inline-item",
-        name: "siteSubType",
-        value: mainEntityOfPage.siteSubType,
-        required: false,
-        errors: mainEntityOfPage.getErrors("siteSubType"),
-    }) }}
-    {{ forms.hidden({
-        id: "siteSpecificType",
-        label: "&rarr;",
-        class: "inline-item",
-        fieldClass: "inline-item",
-        name: "siteSpecificType",
-        value: mainEntityOfPage.siteSpecificType,
-        required: false,
-        errors: mainEntityOfPage.getErrors("siteSpecificType"),
-    }) }}
+<div class="instructions">
+    <p>{{ mainEntityDescription ~ " Choose as general or specific of an type as you wish.  Leave a sub-type blank if you don't want to specify a sub-type." |t("seomatic") |raw }}</p>
 </div>
 
+{% set disableTreeSelect = disableTreeSelect|default(false) %}
+<div class="treeselect-wrapper">
+    <schema-type-list
+            {% if entitySchemaPath | length %}entity="{{ entitySchemaPath }}"{% endif %}
+            {% if disableTreeSelect %}disabled="true"{% endif %}
+    >
+
+    </schema-type-list>
+</div>
+{% set mainEntityOfPageRootOptions = seomatic.helper.getSingleTypeMenu('') %}
+{% if pageContext is defined and (pageContext == "field" or pageContext == "content") %}
+    {% set mainEntityOfPageRootOptions = { "": ""} | merge(mainEntityOfPageRootOptions) %}
+{% endif %}
+
+{{ forms.hidden({
+    id: disableTreeSelect ? "disabledType" : "siteType",
+    class: "inline-item",
+    fieldClass: "inline-item",
+    name: "siteType",
+    value: mainEntityOfPage.siteType,
+    required: true,
+    errors: mainEntityOfPage.getErrors("siteType"),
+}) }}
+{{ forms.hidden({
+    id: disableTreeSelect ? "disabledSubType" : "siteSubType",
+    label: "&rarr;",
+    class: "inline-item",
+    fieldClass: "inline-item",
+    name: "siteSubType",
+    value: mainEntityOfPage.siteSubType,
+    required: false,
+    errors: mainEntityOfPage.getErrors("siteSubType"),
+}) }}
+{{ forms.hidden({
+    id: disableTreeSelect ? "disabledSpecificType" : "siteSpecificType",
+    label: "&rarr;",
+    class: "inline-item",
+    fieldClass: "inline-item",
+    name: "siteSpecificType",
+    value: mainEntityOfPage.siteSpecificType,
+    required: false,
+    errors: mainEntityOfPage.getErrors("siteSpecificType"),
+}) }}
+
 <script>
-    window.schemaSelectId = '{{ "treeselect-wrapper" |namespaceInputId }}';
+    window.schemaSelectClass = '{{ "treeselect-wrapper" }}';
 </script>
 {% js %}
-    window.schemaSelectId = '{{ "treeselect-wrapper" |namespaceInputId }}';
+    window.schemaSelectClass = '{{ "treeselect-wrapper" }}';
     $(document).on('schema-value-changed', function(e, v) {
         let siteTypeId = '{{ "siteType" |namespaceInputId }}';
         let siteSubTypeId = '{{ "siteSubType" |namespaceInputId }}';
@@ -78,28 +83,29 @@
             $('.metaSpecificPane.' + siteSpecificTypeIdVal).show();
         }
     });
-
 {% endjs %}
+
 {% js %}
-    // Fill in the dynamic schema menus
-    var siteTypeId = '{{ "siteType" |namespaceInputId }}';
-    var siteSubTypeId = '{{ "siteSubType" |namespaceInputId }}';
-    var siteSpecificTypeId = '{{ "siteSpecificType" |namespaceInputId }}';
+// Fill in the dynamic schema menus
+var siteTypeId = '{{ "siteType" |namespaceInputId }}';
+        var siteSubTypeId = '{{ "siteSubType" |namespaceInputId }}';
+        var siteSpecificTypeId = '{{ "siteSpecificType" |namespaceInputId }}';
 
-    // Initially hide all of the meta panes
-    $('.metaPane').hide();
-    $('.metaSubPane').hide();
-    $('.metaSpecificPane').hide();
+        // Initially hide all of the meta panes
+        $('.metaPane').hide();
+        $('.metaSubPane').hide();
+        $('.metaSpecificPane').hide();
 
-    // Show any panes that should be visible based on the chosen type
-    {% if mainEntityOfPage.siteType |length %}
-        $('.metaPane.{{ mainEntityOfPage.siteType }}').show();
-    {% endif %}
-    {% if mainEntityOfPage.siteSubType |length %}
-        $('.metaSubPane.{{ mainEntityOfPage.siteSubType }}').show();
-    {% endif %}
-    {% if mainEntityOfPage.siteSpecificType |length %}
-        $('.metaSpecificPane.{{ mainEntityOfPage.siteSpecificType }}').show();
-    {% endif %}
+        // Show any panes that should be visible based on the chosen type
+        {% if mainEntityOfPage.siteType |length %}
+            $('.metaPane.{{ mainEntityOfPage.siteType }}').show();
+        {% endif %}
+        {% if mainEntityOfPage.siteSubType |length %}
+            $('.metaSubPane.{{ mainEntityOfPage.siteSubType }}').show();
+        {% endif %}
+        {% if mainEntityOfPage.siteSpecificType |length %}
+            $('.metaSpecificPane.{{ mainEntityOfPage.siteSpecificType }}').show();
+        {% endif %}
 
 {% endjs %}
+

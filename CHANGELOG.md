@@ -1,5 +1,20 @@
 # SEOmatic Changelog
 
+## 3.4.0 - 2021.08.18
+### Added
+* Improved the way overrides are handled & displayed in SEO Settings fields by having an explicit **Override** switch for each setting ([#535](https://github.com/nystudio107/craft-seomatic/issues/535))
+* Scripts are now rendered and checked for Twig errors before they can be saved ([#944](https://github.com/nystudio107/craft-seomatic/issues/944))
+* Robots, Humans, and Ads templates are now rendered and checked for Twig errors before they can be saved ([#944](https://github.com/nystudio107/craft-seomatic/issues/944))
+* Added Pinterest Tag tracking script ([#936](https://github.com/nystudio107/craft-seomatic/issues/936))
+
+### Changed
+* Switch from the shorthand format to object format for the search target JSON-LD ([#945](https://github.com/nystudio107/craft-seomatic/issues/945))
+
+### Fixed
+* Only default to not generating image transforms immediately if the image is remote and the environment is local dev ([#949](https://github.com/nystudio107/craft-seomatic/issues/949))
+* Fixed an issue where the Robots setting was ignored in SEO Settings fields for sitemap generation if the Sitemap tab was not enabled ([#947](https://github.com/nystudio107/craft-seomatic/issues/947))
+* Don't have `useFieldset()` return true, as it causes a visual error when resizing the window in Craft CMS 3.7.x
+
 ## 3.3.48 - 2021.08.11
 ### Fixed
 * Fixed a regression that caused sitemap generation via console command to fail ([#943](https://github.com/nystudio107/craft-seomatic/issues/943))

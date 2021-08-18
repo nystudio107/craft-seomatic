@@ -11,9 +11,8 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\base\FluentModel;
-
 use craft\validators\ArrayValidator;
+use nystudio107\seomatic\base\InheritableSettingsModel;
 
 /**
  * @inheritdoc
@@ -22,7 +21,7 @@ use craft\validators\ArrayValidator;
  * @package   Seomatic
  * @since     3.0.0
  */
-class MetaSitemapVars extends FluentModel
+class MetaSitemapVars extends InheritableSettingsModel
 {
     // Static Methods
     // =========================================================================

@@ -1,0 +1,78 @@
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "seoDescription") %}
+{% set hasInheritableValues = inheritedFrom is not null %}
+
+{% set additionalVars = {
+    'isInherited': seomatic.helper.isInherited(metaGlobalVars, "seoDescription"),
+    'wrapperClass': 'seomatic-textSourceWrapper',
+    'fieldLabel': "SEO Description Source"|t("seomatic"),
+    'labelFor': 'metaBundleSettings-seoDescriptionSource',
+    'settingName': 'seoDescription'
+} %}
+
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro seoDescriptionField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars, suffix) %}
+        <div class="instructions">
+            <p>{{ "SEO descriptions allow you to influence how your web pages are described and displayed in search results. Ensure that all of your web pages have a unique meta description that is explicit and contains your most important keywords."|t("seomatic") }}</p>
+        </div>
+
+        {% import "_includes/forms" as forms %}
+        {% namespace "metaBundleSettings" %}
+            <div class="heading">
+                {{ forms.select({
+                    id: "seoDescriptionSource" ~ suffix,
+                    name: "seoDescriptionSource",
+                    options: textOptions,
+                    value: metaBundleSettings.seoDescriptionSource,
+                    class: "seomatic-textSourceSelect",
+                    errors: metaBundleSettings.getErrors("seoDescriptionSource"),
+                }) }}
+            </div>
+        {% endnamespace %}
+
+        {% if textFieldSources is defined and textFieldSources |length %}
+            {% namespace "metaBundleSettings" %}
+                <div class="heading seomatic-textSourceFromField">
+                    <label for="metaBundleSettings-seoDescriptionField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
+                    {{ forms.select({
+                        id: "seoDescriptionField" ~ suffix,
+                        name: "seoDescriptionField",
+                        options: textFieldSources,
+                        value: metaBundleSettings.seoDescriptionField,
+                        errors: metaBundleSettings.getErrors("seoDescriptionField"),
+                    }) }}
+                </div>
+            {% endnamespace %}
+        {% endif %}
+
+        {% namespace "metaGlobalVars" %}
+            <div class="input ltr seomatic-textSourceFromUrl">
+                {{ forms.textArea({
+                    id: "seoDescription" ~ suffix,
+                    name: "seoDescription",
+                    value: metaGlobalVars.seoDescription,
+                    class: "nicetext",
+                    maxlength: seomaticConfig.maxDescriptionLength,
+                    showCharsLeft: true,
+                    warning: false,
+                    errors: metaGlobalVars.getErrors("seoDescription"),
+                }) }}
+            </div>
+        {% endnamespace %}
+    {% endmacro %}
+
+    {% set textOptions = {
+        fromCustom: "Custom Text"|t("seomatic"),
+    } %}
+    {% if textFieldSources is defined and textFieldSources |length %}
+        {% set textOptions = { summaryFromField: "Summary From Field"|t("seomatic"), } | merge(textOptions) %}
+        {% set textOptions = { fromField: "From Field"|t("seomatic"), } | merge(textOptions) %}
+    {% endif %}
+
+    {% block inheritedValues %}
+        {{ _self.seoDescriptionField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
+    {% endblock %}
+
+    {% block field %}
+        {{ _self.seoDescriptionField(textOptions, textFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars, "") }}
+    {% endblock %}
+{% endembed %}

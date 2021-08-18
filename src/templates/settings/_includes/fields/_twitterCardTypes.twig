@@ -1,0 +1,42 @@
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "twitterCard") %}
+{% set hasInheritableValues = inheritedFrom is not null %}
+
+{% set additionalVars = {
+    'isInherited': seomatic.helper.isInherited(metaGlobalVars, "twitterCard"),
+    'fieldLabel': "Twitter Card Type"|t("seomatic"),
+    'labelFor': 'metaGlobalVars-twitterCard',
+    'settingName': 'twitterCard'
+} %}
+
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro twitterCardTypeField(twitterCardTypes, metaGlobalVars, suffix) %}
+        <div class="instructions">
+            <p>{{ "With Twitter Cards, you can attach rich photos and information to Tweets that drive traffic to your website. Users who Tweet links to your content will have a 'Card' added to the Tweet that’s visible to all of their followers."|t("seomatic") }}</p>
+        </div>
+        {% import "_includes/forms" as forms %}
+        {% namespace "metaGlobalVars" %}
+            {{ forms.selectField({
+                id: "twitterCard" ~ suffix,
+                name: "twitterCard",
+                options: twitterCardTypes,
+                value: metaGlobalVars.twitterCard,
+                errors: metaGlobalVars.getErrors("twitterCard"),
+            }) }}
+        {% endnamespace %}
+    {% endmacro %}
+
+    {% set twitterCardTypes = {
+        summary: "Summary Card"|t("seomatic"),
+        summary_large_image: "Summary Card with Large Image"|t("seomatic"),
+        app: "App Card"|t("seomatic"),
+        player: "Player Card"|t("seomatic"),
+    } %}
+
+    {% block inheritedValues %}
+        {{ _self.twitterCardTypeField(twitterCardTypes, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
+    {% endblock %}
+
+    {% block field %}
+        {{ _self.twitterCardTypeField(twitterCardTypes, metaGlobalVars, "") }}
+    {% endblock %}
+{% endembed %}

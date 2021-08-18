@@ -14,6 +14,7 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\NonceItem;
 use nystudio107\seomatic\helpers\PluginTemplate as PluginTemplateHelper;
+use nystudio107\seomatic\validators\TwigExpressionValidator;
 
 use Craft;
 
@@ -182,6 +183,13 @@ class MetaScript extends NonceItem
                     'position',
                 ],
                 'required',
+            ],
+            [
+                [
+                    'templateString',
+                    'bodyTemplateString',
+                ],
+                TwigExpressionValidator::class,
             ],
             [['vars'], 'safe'],
             [['dataLayer'], 'safe'],

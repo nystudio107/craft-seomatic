@@ -1,0 +1,82 @@
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "twitterImageDescription") %}
+{% set hasInheritableValues = inheritedFrom is not null %}
+
+{% set additionalVars = {
+    'isInherited': seomatic.helper.isInherited(metaGlobalVars, "twitterImageDescription"),
+    'wrapperClass': 'seomatic-textSourceWrapper',
+    'fieldLabel': "Twitter Image Description Source"|t("seomatic"),
+    'labelFor': 'metaBundleSettings-twitterImageDescriptionSource',
+    'settingName': 'twitterImageDescription'
+} %}
+
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro twitterImageDescriptionField(textOptions, textFieldSources, metaBundleSettings, metaGlobalVars, suffix) %}
+        <div class="instructions">
+            <p>{{ "A text description of the image conveying the essential nature of an image to users who are visually impaired."|t("seomatic") }}</p>
+        </div>
+
+        {% import "_includes/forms" as forms %}
+        {% namespace "metaBundleSettings" %}
+            <div class="heading">
+                {{ forms.select({
+                    id: "twitterImageDescriptionSource" ~ suffix,
+                    name: "twitterImageDescriptionSource",
+                    options: textOptions,
+                    value: metaBundleSettings.twitterImageDescriptionSource,
+                    class: "seomatic-textSourceSelect",
+                    errors: metaBundleSettings.getErrors("twitterImageDescriptionSource"),
+                }) }}
+            </div>
+        {% endnamespace %}
+
+        {% if textFieldSources is defined and textFieldSources |length %}
+            {% namespace "metaBundleSettings" %}
+                <div class="heading seomatic-textSourceFromField">
+                    <label for="metaBundleSettings-twitterImageDescriptionField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
+                    {{ forms.select({
+                        id: "twitterImageDescriptionField" ~ suffix,
+                        name: "twitterImageDescriptionField",
+                        options: textFieldSources,
+                        value: metaBundleSettings.twitterImageDescriptionField,
+                        errors: metaBundleSettings.getErrors("twitterImageDescriptionField"),
+                    }) }}
+                </div>
+            {% endnamespace %}
+        {% endif %}
+
+        {% namespace "metaGlobalVars" %}
+            <div class="input ltr seomatic-textSourceFromUrl">
+                {{ forms.textAreaField({
+                    id: "twitterImageDescription" ~ suffix,
+                    name: "twitterImageDescription",
+                    value: metaGlobalVars.twitterImageDescription,
+                    class: "nicetext",
+                    maxlength: 420,
+                    showCharsLeft: true,
+                    warning: false,
+                    errors: metaGlobalVars.getErrors("twitterImageDescription"),
+                }) }}
+            </div>
+        {% endnamespace %}
+    {% endmacro %}
+
+    {% set textOptions = {
+        fromCustom: "Custom Text"|t("seomatic"),
+    } %}
+
+    {% if textFieldSources is defined and textFieldSources |length %}
+        {% set textOptions = { summaryFromField: "Summary From Field"|t("seomatic"), } | merge(textOptions) %}
+        {% set textOptions = { fromField: "From Field"|t("seomatic"), } | merge(textOptions) %}
+    {% endif %}
+
+    {% set textOptions = { sameAsSeo: "Same As SEO Image Description"|t("seomatic"), } | merge(textOptions) %}
+
+    {% block inheritedValues %}
+        {{ _self.twitterImageDescriptionField(textOptions, textFieldSources, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
+    {% endblock %}
+
+    {% block field %}
+        {{ _self.twitterImageDescriptionField(textOptions, textFieldSources,  metaBundleSettings, metaGlobalVars, "") }}
+    {% endblock %}
+
+{% endembed %}

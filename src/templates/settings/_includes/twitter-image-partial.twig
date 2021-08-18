@@ -1,28 +1,128 @@
-{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
-{% import "_includes/forms" as forms %}
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "twitterImage") %}
+{% set hasInheritableValues = inheritedFrom is not null %}
 
-{############### Twitter Image ###############}
-
-{% set imageOptions = {
-    fromAsset: "Custom Image"|t("seomatic"),
-    fromUrl: "Custom URL"|t("seomatic"),
+{% set additionalVars = {
+    'isInherited': seomatic.helper.isInherited(metaGlobalVars, "twitterImage"),
+    'fieldLabel': "Twitter Image Source"|t("seomatic"),
+    'labelFor': 'metaBundleSettings-twitterImageSource',
+    'wrapperClass': 'seomatic-imageSourceInnerWrapper',
+    'settingName': 'twitterImage'
 } %}
-{% if assetFieldSources is defined and assetFieldSources |length %}
-    {% set imageOptions = { fromField: "From Asset Field"|t('seomatic'), } | merge(imageOptions) %}
-{% endif %}
-{% set imageOptions = { sameAsSeo: "Same As SEO Image"|t("seomatic"), } | merge(imageOptions) %}
 
-{% if field is not defined or 'twitterImage' in field.twitterEnabledFields %}
-    <div class="field seomatic-imageSourceWrapper" id="metaBundleSettings-twitterImageSource-field">
-        <div class="heading">
-            <label id="metaBundleSettings-twitterImageSource-label" for="metaBundleSettings-twitterImageSource">{{ "Twitter Image Source"|t("seomatic") }}</label>
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro entireTwitterImageField(twitterImageElement, elementType, imageOptions, field, assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, suffix) %}
+        <div class="field seomatic-imageSourceWrapper">
+            <div class="field">
+                {{ _self.twitterImageField(twitterImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix) }}
+            </div>
+            <div class="field seomatic-imageSourceNotFromUrl">
+                {{ _self.twitterImageTransformField(field, metaBundleSettings, suffix) }}
+            </div>
+            <div class="field seomatic-imageSourceNotFromUrl">
+                {{ _self.twitterImageTransformModeField(field, imageCropModes, metaBundleSettings, suffix) }}
+            </div>
         </div>
-        <div class="instructions"><p>{{ "This is the image that will be used for display as Twitter Cards on tweets that link to the web page."|t("seomatic") }}</p>
+    {% endmacro %}
+
+    {% set imageOptions = {
+        fromAsset: "Custom Image"|t("seomatic"),
+        fromUrl: "Custom URL"|t("seomatic"),
+    } %}
+    {% if assetFieldSources is defined and assetFieldSources |length %}
+        {% set imageOptions = { fromField: "From Asset Field"|t('seomatic'), } | merge(imageOptions) %}
+    {% endif %}
+    {% set imageOptions = { sameAsSeo: "Same As SEO Image"|t("seomatic"), } | merge(imageOptions) %}
+
+    {% set imageCropModes = {
+        "crop": "Crop"|t("seomatic"),
+        "fit": "Fit"|t("seomatic"),
+        "stretch": "Stretch"|t("seomatic"),
+    } %}
+
+    {% if pageContext == "field" %}
+        {% set imageCropModes = { "": ""} | merge(imageCropModes) %}
+    {% endif %}
+
+    {% block inheritedValues %}
+        {% set twitterImageElement = [] %}
+        {% set imageIds = inheritedFrom.metaBundleSettings.twitterImageIds ?? metaBundleSettings.twitterImageIds ?? null %}
+        {% if imageIds %}
+            {% set twitterImageElement = craft.assets.id(imageIds).limit(1).all() %}
+        {% endif %}
+
+        {{ _self.entiretwitterImageField(twitterImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
+    {% endblock %}
+
+    {% block field %}
+        {% set twitterImageElement = [] %}
+        {% if metaBundleSettings.twitterImageIds|length %}
+            {% set twitterImageElement = craft.assets.id(metaBundleSettings.twitterImageIds).limit(1).all() %}
+        {% endif %}
+
+        {{ _self.entireTwitterImageField(twitterImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, "") }}
+    {% endblock %}
+
+
+    {############### Twitter Image Macros ###############}
+
+    {% macro twitterImageTransformModeField(field, imageCropModes, metaBundleSettings, suffix) %}
+
+        <div class="field" {% if field is not null and 'twitterImageTransformMode' not in field.twitterEnabledFields %}style="display: none;"{% endif %}>
+            <div class="heading">
+                <label for="metaBundleSettings-twitterImageTransformMode{{ suffix }}">
+                    {{ "Twitter Image Transform Mode"|t("seomatic") }}
+                </label>
+            </div>
+            <div class="instructions">
+                <p>{{ "The transform mode to use for the Twitter Image Transform."|t("seomatic") }}</p>
+            </div>
+
+            {% import "_includes/forms" as forms %}
+            {% namespace "metaBundleSettings" %}
+                {{ forms.selectField({
+                    id: "twitterImageTransformMode" ~ suffix,
+                    name: "twitterImageTransformMode",
+                    options: imageCropModes,
+                    value: metaBundleSettings.twitterImageTransformMode,
+                    warning: false,
+                    errors: metaBundleSettings.getErrors("twitterImageTransformMode"),
+                }) }}
+            {% endnamespace %}
         </div>
+    {% endmacro %}
+
+    {% macro twitterImageTransformField(field, metaBundleSettings, suffix) %}
+        {% import "_includes/forms" as forms %}
+
+        <div class="field" {% if field is not null and 'transformTwitterImage' not in field.twitterEnabledFields %}style="display: none;"{% endif %}>
+            <div class="heading">
+                <label for="metaBundleSettings-twitterImageTransform{{ suffix }}">
+                    {{ "Transform Twitter Image"|t("seomatic") }}
+                </label>
+            </div>
+            {% namespace "metaBundleSettings" %}
+                {{ forms.lightswitchField({
+                    instructions: "Whether the Twitter image should be automatically transformed to an appropriate file format and aspect ratio for the chosen Twitter Card type."|t("seomatic"),
+                    id: "twitterImageTransform" ~ suffix,
+                    name: "twitterImageTransform",
+                    on: metaBundleSettings.twitterImageTransform,
+                    warning: false,
+                    errors: metaBundleSettings.getErrors("twitterImageTransform"),
+                }) }}
+            {% endnamespace %}
+        </div>
+    {% endmacro %}
+
+    {% macro twitterImageField(twitterImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix) %}
+        <div class="instructions">
+            <p>{{ "This is the image that will be used for display as Twitter Cards on tweets that link to the web page."|t("seomatic") }}</p>
+        </div>
+        {% import "_includes/forms" as forms %}
+
         {% namespace "metaBundleSettings" %}
             <div class="heading">
                 {{ forms.select({
-                    id: "twitterImageSource",
+                    id: "twitterImageSource" ~ suffix,
                     name: "twitterImageSource",
                     options: imageOptions,
                     value: metaBundleSettings.twitterImageSource,
@@ -35,9 +135,9 @@
         {% if assetFieldSources is defined and assetFieldSources |length %}
             {% namespace "metaBundleSettings" %}
                 <div class="heading seomatic-imageSourceFromField">
-                    <label id="metaBundleSettings-twitterImageField-label" for="metaBundleSettings-twitterImageField">{{ "Asset Field: "|t("seomatic") }}</label>
+                    <label for="metaBundleSettings-twitterImageField{{ suffix }}">{{ "Asset Field: "|t("seomatic") }}</label>
                     {{ forms.select({
-                        id: "twitterImageField",
+                        id: "twitterImageField" ~ suffix,
                         name: "twitterImageField",
                         options: assetFieldSources,
                         value: metaBundleSettings.twitterImageField,
@@ -50,10 +150,10 @@
         {% namespace "metaBundleSettings" %}
             <div class="heading seomatic-imageSourceFromAsset">
                 {{ forms.elementSelect({
-                    id: "twitterImageIds",
+                    id: "twitterImageIds" ~ metaBundleSettings.getHash(),
                     name: "twitterImageIds",
                     viewMode: "large",
-                    elements: twitterImageElements,
+                    elements: twitterImageElement,
                     elementType: elementType,
                     criteria: {
                         kind: ["image"],
@@ -71,7 +171,7 @@
         {% namespace "metaGlobalVars" %}
             <div class="heading seomatic-imageSourceFromUrl">
                 {{ forms.text({
-                    id: "twitterImage",
+                    id: "twitterImage" ~ suffix,
                     name: "twitterImage",
                     value: metaGlobalVars.twitterImage,
                     class: "nicetext",
@@ -80,52 +180,5 @@
                 }) }}
             </div>
         {% endnamespace %}
-
-
-        {############### Twitter Image Transform ###############}
-
-        <div class="field seomatic-imageSourceNotFromUrl">
-            <div class="field" {% if field is defined and 'transformTwitterImage' not in field.twitterEnabledFields %}style="display: none;"{% endif %}>
-                {% namespace "metaBundleSettings" %}
-                    {{ forms.lightswitchField({
-                        label: "Transform Twitter Image"|t("seomatic"),
-                        instructions: "Whether the Twitter image should be automatically transformed to an appropriate file format and aspect ratio for the chosen Twitter Card type."|t("seomatic"),
-                        id: "twitterImageTransform",
-                        name: "twitterImageTransform",
-                        on: metaBundleSettings.twitterImageTransform,
-                        warning: false,
-                        errors: metaBundleSettings.getErrors("twitterImageTransform"),
-                    }) }}
-                {% endnamespace %}
-            </div>
-        </div>
-
-        {############### Twitter Transform Mode ###############}
-
-        {% set imageCropModes = {
-            "crop": "Crop"|t("seomatic"),
-            "fit": "Fit"|t("seomatic"),
-            "stretch": "Stretch"|t("seomatic"),
-        } %}
-        {% if pageContext == "field" %}
-            {% set imageCropModes = { "": ""} | merge(imageCropModes) %}
-        {% endif %}
-        <div class="field seomatic-imageSourceNotFromUrl">
-            <div class="field" {% if field is defined and 'twitterImageTransformMode' not in field.twitterEnabledFields %}style="display: none;"{% endif %}>
-                {% namespace "metaBundleSettings" %}
-                    {{ forms.selectField({
-                        label: "Twitter Image Transform Mode"|t("seomatic"),
-                        instructions: "The transform mode to use for the Twitter Image Transform."|t("seomatic"),
-                        id: "twitterImageTransformMode",
-                        name: "twitterImageTransformMode",
-                        options: imageCropModes,
-                        value: metaBundleSettings.twitterImageTransformMode,
-                        warning: false,
-                        errors: metaBundleSettings.getErrors("twitterImageTransformMode"),
-                    }) }}
-                {% endnamespace %}
-            </div>
-        </div>
-
-    </div>
-{% endif %}
+    {% endmacro %}
+{% endembed %}

@@ -1,0 +1,77 @@
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "seoTitle") %}
+{% set hasInheritableValues = inheritedFrom is not null %}
+
+{% set additionalVars = {
+    'isInherited': seomatic.helper.isInherited(metaGlobalVars, "seoTitle"),
+    'wrapperClass': 'seomatic-textSourceWrapper',
+    'fieldLabel': "SEO Title Source"|t("seomatic"),
+    'labelFor': 'metaBundleSettings-seoTitleSource',
+    'settingName': 'seoTitle'
+} %}
+
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro seoTitleField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars, suffix) %}
+        <div class="instructions">
+            <p>{{ "Make sure your title tag is explicit and contains your most important keywords. Be sure that each page has a unique title tag."|t("seomatic") }}</p>
+        </div>
+        {% import "_includes/forms" as forms %}
+        {% namespace "metaBundleSettings" %}
+            <div class="heading">
+                {{ forms.select({
+                    id: "seoTitleSource" ~ suffix,
+                    name: "seoTitleSource",
+                    options: textOptions,
+                    value: metaBundleSettings.seoTitleSource,
+                    class: "seomatic-textSourceSelect",
+                    errors: metaBundleSettings.getErrors("seoTitleSource"),
+                }) }}
+            </div>
+        {% endnamespace %}
+
+        {% if textFieldSources is defined and textFieldSources |length %}
+            {% namespace "metaBundleSettings" %}
+                <div class="heading seomatic-textSourceFromField">
+                    <label for="metaBundleSettings-seoTitleField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
+                    {{ forms.select({
+                        id: "seoTitleField" ~ suffix,
+                        name: "seoTitleField",
+                        options: textFieldSources,
+                        value: metaBundleSettings.seoTitleField,
+                        errors: metaBundleSettings.getErrors("seoTitleField"),
+                    }) }}
+                </div>
+            {% endnamespace %}
+        {% endif %}
+
+        {% namespace "metaGlobalVars" %}
+            <div class="input ltr seomatic-textSourceFromUrl">
+                {{ forms.text({
+                    id: "seoTitle" ~ suffix,
+                    name: "seoTitle",
+                    value: metaGlobalVars.seoTitle,
+                    class: "nicetext",
+                    maxlength: seomaticConfig.maxTitleLength,
+                    showCharsLeft: true,
+                    warning: false,
+                    errors: metaGlobalVars.getErrors("seoTitle"),
+                }) }}
+            </div>
+        {% endnamespace %}
+    {% endmacro %}
+
+    {% set textOptions = {
+        fromCustom: "Custom Text"|t("seomatic"),
+    } %}
+    {% if textFieldSources is defined and textFieldSources |length %}
+        {% set textOptions = { keywordsFromField: "Keywords From Field"|t("seomatic"), } | merge(textOptions) %}
+        {% set textOptions = { fromField: "From Field"|t("seomatic"), } | merge(textOptions) %}
+    {% endif %}
+
+    {% block inheritedValues %}
+        {{ _self.seoTitleField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
+    {% endblock %}
+
+    {% block field %}
+        {{ _self.seoTitleField(textOptions, textFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars, "") }}
+    {% endblock %}
+{% endembed %}

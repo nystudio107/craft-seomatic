@@ -133,7 +133,7 @@
                         {% endfor %}
                         {% if totalStats %}
                             {% for contentSetupStat in contentSetupStats %}
-                                {% set percentage = (contentSetupStat * 100.0) / totalStats  %}
+                                {% set percentage = (contentSetupStat * 100.0) / totalStats %}
                                 {% set contentStats = contentStats | merge([percentage | number_format(2)]) %}
                             {% endfor %}
                         {% endif %}

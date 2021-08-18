@@ -1,0 +1,44 @@
+{% set isInherited = isInherited|default(false) %}
+{% set wrapperClass = wrapperClass|default('') %}
+{% set wrapperId = wrapperId|default('') %}
+{% set fieldLabel = fieldLabel|default('') %}
+{% if pageContext != "field" %}
+    {% set isInherited = false %}
+{% endif %}
+
+{% import "_includes/forms" as forms %}
+<div class="inheritable-field {{ isInherited ? 'inherited-settings' : 'defined-settings' }}">
+    <div class="field {{ wrapperClass|default('') }}" style="margin-top: 18px!important;">
+        {% if pageContext == "field" %}
+        <div class="override">
+            {% namespace overrideNamespace|default("metaGlobalVars") %}
+                {{ forms.lightswitchField({
+                    on: not isInherited,
+                    onLabel: "Override"|t("seomatic"),
+                    offLabel: fieldLabel,
+                    warning: false,
+                    name: 'override-' ~ settingName|default('')
+                }) }}
+            {% endnamespace %}
+        </div>
+
+        <div class="inherited value-wrapper">
+            {% block inheritedValues %}
+
+            {% endblock %}
+        </div>
+        {% else %}
+            <div></div>
+            <div class="field width-100 mt-1 mb-0">
+                <div class="heading">
+                    <label>{{ fieldLabel }}</label>
+                </div>
+            </div>
+        {% endif %}
+        <div class="field-settings value-wrapper">
+            {% block field %}
+
+            {% endblock %}
+        </div>
+    </div>
+</div>

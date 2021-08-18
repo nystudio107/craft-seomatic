@@ -1,0 +1,81 @@
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "ogImageDescription") %}
+{% set hasInheritableValues = inheritedFrom is not null %}
+
+{% set additionalVars = {
+    'isInherited': seomatic.helper.isInherited(metaGlobalVars, "ogImageDescription"),
+    'wrapperClass': 'seomatic-textSourceWrapper',
+    'fieldLabel': "Facebook OpenGraph Image Description Source"|t("seomatic"),
+    'labelFor': 'metaBundleSettings-ogImageDescriptionSource',
+    'settingName': 'ogImageDescription'
+} %}
+
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro ogImageDescriptionField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars, suffix) %}
+            <div class="instructions">
+                <p>{{ "A text description of the image conveying the essential nature of an image to users who are visually impaired."|t("seomatic") }}</p>
+            </div>
+
+            {% import "_includes/forms" as forms %}
+            {% namespace "metaBundleSettings" %}
+                <div class="heading">
+                    {{ forms.select({
+                        id: "ogImageDescriptionSource" ~ suffix,
+                        name: "ogImageDescriptionSource",
+                        options: textOptions,
+                        value: metaBundleSettings.ogImageDescriptionSource,
+                        class: "seomatic-textSourceSelect",
+                        errors: metaBundleSettings.getErrors("ogImageDescriptionSource"),
+                    }) }}
+                </div>
+            {% endnamespace %}
+
+            {% if textFieldSources is defined and textFieldSources |length %}
+                {% namespace "metaBundleSettings" %}
+                    <div class="heading seomatic-textSourceFromField">
+                        <label for="metaBundleSettings-ogImageDescriptionField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
+                        {{ forms.select({
+                            id: "ogImageDescriptionField" ~ suffix,
+                            name: "ogImageDescriptionField",
+                            options: textFieldSources,
+                            value: metaBundleSettings.ogImageDescriptionField,
+                            errors: metaBundleSettings.getErrors("ogImageDescriptionField"),
+                        }) }}
+                    </div>
+                {% endnamespace %}
+            {% endif %}
+
+            {% namespace "metaGlobalVars" %}
+                <div class="input ltr seomatic-textSourceFromUrl">
+                    {{ forms.textArea({
+                        id: "ogImageDescription" ~ suffix,
+                        name: "ogImageDescription",
+                        value: metaGlobalVars.ogImageDescription,
+                        class: "nicetext",
+                        maxlength: 420,
+                        showCharsLeft: true,
+                        warning: false,
+                        errors: metaGlobalVars.getErrors("ogImageDescription"),
+                    }) }}
+                </div>
+            {% endnamespace %}
+    {% endmacro %}
+
+    {% set textOptions = {
+        fromCustom: "Custom Text"|t("seomatic"),
+    } %}
+
+    {% if textFieldSources is defined and textFieldSources |length %}
+        {% set textOptions = { summaryFromField: "Summary From Field"|t("seomatic"), } | merge(textOptions) %}
+        {% set textOptions = { fromField: "From Field"|t("seomatic"), } | merge(textOptions) %}
+    {% endif %}
+    {% set textOptions = { sameAsSeo: "Same As SEO Image Description"|t("seomatic"), } | merge(textOptions) %}
+
+    {% block inheritedValues %}
+        {{ _self.ogImageDescriptionField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
+    {% endblock %}
+
+    {% block field %}
+        {{ _self.ogImageDescriptionField(textOptions, textFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars, "") }}
+    {% endblock %}
+
+{% endembed %}

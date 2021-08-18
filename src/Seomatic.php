@@ -219,6 +219,11 @@ class Seomatic extends Plugin
      */
     public static $craft35 = false;
 
+    /**
+     * @var bool
+     */
+    public static $craft37 = false;
+
     // Static Methods
     // =========================================================================
 
@@ -274,7 +279,7 @@ class Seomatic extends Plugin
     /**
      * @var string
      */
-    public $schemaVersion = '3.0.10';
+    public $schemaVersion = '3.0.11';
 
     /**
      * @var bool
@@ -317,6 +322,7 @@ class Seomatic extends Plugin
         self::$craft33 = version_compare(Craft::$app->getVersion(), '3.3', '>=');
         self::$craft34 = version_compare(Craft::$app->getVersion(), '3.4', '>=');
         self::$craft35 = version_compare(Craft::$app->getVersion(), '3.5', '>=');
+        self::$craft37 = version_compare(Craft::$app->getVersion(), '3.7', '>=');
         $this->name = self::$settings->pluginName;
         // Install our event listeners
         $this->installEventListeners();

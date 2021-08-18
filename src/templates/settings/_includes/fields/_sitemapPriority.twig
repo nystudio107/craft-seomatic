@@ -1,0 +1,55 @@
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "sitemapPriority", "metaSitemapVars") %}
+{% set hasInheritableValues = inheritedFrom is not null %}
+
+{% set additionalVars = {
+    'isInherited': seomatic.helper.isInherited(metaSitemapVars, "sitemapPriority"),
+    'fieldLabel': "Priority"|t("seomatic"),
+    'settingName': 'sitemapPriority',
+    'labelFor': 'metaSitemapVars-sitemapPriority',
+    'overrideNamespace': 'metaSitemapVars'
+} %}
+
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro sitemapFilesField(sitemapPriorityOptions, metaSitemapVars, suffix) %}
+        <div class="instructions">
+            <p>
+                {{ "The priority of this URL relative to other URLs on your site. This value does not affect how your pages are compared to pages on other sites—it only lets the search engines know which pages you deem most important for the crawlers."|t("seomatic") }}
+            </p>
+        </div>
+
+        {% import "_includes/forms" as forms %}
+        {% namespace "metaSitemapVars" %}
+
+        {{ forms.selectField({
+            id: "sitemapPriority" ~ suffix,
+            name: "sitemapPriority",
+            options: sitemapPriorityOptions,
+            value: metaSitemapVars.sitemapPriority,
+            errors: metaSitemapVars.getErrors("sitemapPriority"),
+        }) }}
+
+        {% endnamespace %}
+    {% endmacro %}
+
+    {% set sitemapPriorityOptions = {
+        "1.0": "1.0",
+        "0.9": "0.9",
+        "0.8": "0.8",
+        "0.7": "0.7",
+        "0.6": "0.6",
+        "0.5": "0.5",
+        "0.4": "0.4",
+        "0.3": "0.3",
+        "0.2": "0.2",
+        "0.1": "0.1",
+        "0.0": "0.0",
+    } %}
+
+    {% block inheritedValues %}
+        {{ _self.sitemapFilesField(sitemapPriorityOptions, inheritedFrom.metaSitemapVars ?? metaSitemapVars, "-inherited") }}
+    {% endblock %}
+
+    {% block field %}
+        {{ _self.sitemapFilesField(sitemapPriorityOptions, metaSitemapVars, "") }}
+    {% endblock %}
+{% endembed %}

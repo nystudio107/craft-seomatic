@@ -16,18 +16,23 @@ import SchemaTypeList from "@/vue/SchemaTypeList.vue";
  * @since     3.0.0
  */
 
-    if (window.schemaSelectId !== undefined) {
-        // Create our vue instance
-        const vm = new Vue({
-            el: '#' + window.schemaSelectId,
-            components: {
-                'schema-type-list': SchemaTypeList,
-            },
-            data: {},
-            methods: {},
-            mounted() {
-            },
-        });
+    if (window.schemaSelectClass !== undefined) {
+        // Create our vue instance(s)
+        for (const el of document.querySelectorAll('.' + window.schemaSelectClass)) {
+            let elementId = 'vue-' + Math.round(Math.random() * 1000);
+            el.setAttribute('id', elementId);
+
+            new Vue({
+                el: '#' + elementId,
+                components: {
+                    'schema-type-list': SchemaTypeList,
+                },
+                data: {},
+                methods: {},
+                mounted() {
+                },
+            });
+        }
     }
 
 // Accept HMR as per: https://webpack.js.org/api/hot-module-replacement#accept
@@ -51,6 +56,20 @@ window.seomaticTabChangeHandler = seomaticTabChangeHandler;
 window.seomaticTabChangeHandler();
 
 function initFieldSettings() {
+
+    const disableInputs = ($obj) => $obj.find('input, select, button').prop('disabled', true);
+    disableInputs($('.inheritable-field .inherited'));
+
+    $('.inheritable-field .override .lightswitch:not(.on) input').val(0);
+    $('.inheritable-field .override .lightswitch').on('change', function (ev) {
+        if ($(this).hasClass('on')) {
+            $(this).parents('.inheritable-field').addClass('defined-settings').removeClass('inherited-settings');
+        } else {
+            $(this).parents('.inheritable-field').removeClass('defined-settings').addClass('inherited-settings');
+            $(this).find('input').val(0);
+        }
+    });
+
     // Show/hide the script settings containers
     var selector = $('.seomatic-script-lightswitch').find('.lightswitch');
     $(selector).each(function(index, value) {
@@ -75,31 +94,31 @@ function initFieldSettings() {
         var popupValue = $(this).val();
         switch (popupValue) {
             case 'sameAsSeo':
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').show();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').hide();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').hide();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').hide();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceNotFromUrl').show();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromField').hide();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromAsset').hide();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromUrl').hide();
                 break;
 
             case 'fromField':
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').show();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').show();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').hide();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').hide();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceNotFromUrl').show();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromField').show();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromAsset').hide();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromUrl').hide();
                 break;
 
             case 'fromAsset':
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').show();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').hide();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').show();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').hide();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceNotFromUrl').show();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromField').hide();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromAsset').show();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromUrl').hide();
                 break;
 
             case 'fromUrl':
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').hide();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').hide();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').hide();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').show();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceNotFromUrl').hide();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromField').hide();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromAsset').hide();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromUrl').show();
                 break;
         }
     });
@@ -107,81 +126,81 @@ function initFieldSettings() {
     $('.seomatic-imageSourceSelect > select').on('change', function(e) {
         switch (this.value) {
             case 'sameAsSeo':
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').slideDown();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').slideUp();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').slideUp();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').slideUp();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceNotFromUrl').slideDown();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromField').slideUp();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromAsset').slideUp();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromUrl').slideUp();
                 break;
 
             case 'fromField':
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').slideDown();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').slideDown();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').slideUp();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').slideUp();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceNotFromUrl').slideDown();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromField').slideDown();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromAsset').slideUp();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromUrl').slideUp();
                 break;
 
             case 'fromAsset':
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').slideDown();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').slideUp();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').slideDown();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').slideUp();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceNotFromUrl').slideDown();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromField').slideUp();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromAsset').slideDown();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromUrl').slideUp();
                 break;
 
             case 'fromUrl':
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').slideUp();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').slideUp();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').slideUp();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').slideDown();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceNotFromUrl').slideUp();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromField').slideUp();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromAsset').slideUp();
+                $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromUrl').slideDown();
                 break;
         }
     });
 
     // Show/hide the text source fields initially
-    $('.seomatic-textSourceSelect > select').each(function(index, value) {
+    $('.seomatic-textSourceSelect select').each(function(index, value) {
         var popupValue = $(this).val();
         switch (popupValue) {
             case 'sameAsSeo':
             case 'sameAsGlobal':
             case 'sameAsSiteTwitter':
-                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').hide();
-                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').hide();
+                $(this).closest('.value-wrapper').children('.seomatic-textSourceFromField').hide();
+                $(this).closest('.value-wrapper').children('.seomatic-textSourceFromUrl').hide();
                 break;
 
             case 'fromField':
             case 'summaryFromField':
             case 'keywordsFromField':
             case 'fromUserField':
-                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').show();
-                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').hide();
+                $(this).closest('.value-wrapper').children('.seomatic-textSourceFromField').show();
+                $(this).closest('.value-wrapper').children('.seomatic-textSourceFromUrl').hide();
                 break;
 
             case 'fromCustom':
-                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').hide();
-                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').show();
+                $(this).closest('.value-wrapper').children('.seomatic-textSourceFromField').hide();
+                $(this).closest('.value-wrapper').children('.seomatic-textSourceFromUrl').show();
                 break;
         }
     });
     // Handle hiding/showing the image source fields based on the selection
-    $('.seomatic-textSourceSelect > select').on('change', function(e) {
+    $('.field-settings .seomatic-textSourceSelect select').on('change', function(e) {
         switch (this.value) {
             case 'sameAsSeo':
             case 'sameAsGlobal':
             case 'sameAsSiteTwitter':
-                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').hide();
-                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').hide();
+                $(this).closest('.field-settings').children('.seomatic-textSourceFromField').hide();
+                $(this).closest('.field-settings').children('.seomatic-textSourceFromUrl').hide();
                 break;
 
             case 'fromField':
             case 'summaryFromField':
             case 'keywordsFromField':
             case 'fromUserField':
-                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').show();
-                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').hide();
+                $(this).closest('.field-settings').children('.seomatic-textSourceFromField').show();
+                $(this).closest('.field-settings').children('.seomatic-textSourceFromUrl').hide();
                 break;
 
             case 'fromCustom':
-                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromField').hide();
-                $(this).closest('.seomatic-textSourceWrapper').children('.seomatic-textSourceFromUrl').show();
+                $(this).closest('.field-settings').children('.seomatic-textSourceFromField').hide();
+                $(this).closest('.field-settings').children('.seomatic-textSourceFromUrl').show();
                 break;
         }
     });

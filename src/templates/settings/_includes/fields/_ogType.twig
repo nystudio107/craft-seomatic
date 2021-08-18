@@ -1,0 +1,53 @@
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "ogType") %}
+{% set hasInheritableValues = inheritedFrom is not null %}
+
+{% set additionalVars = {
+    'isInherited': seomatic.helper.isInherited(metaGlobalVars, "ogType"),
+    'wrapperClass': '',
+    'fieldLabel': "Facebook OpenGraph Type"|t("seomatic"),
+    'labelFor': 'metaGlobalVars-ogType',
+    'settingName': 'ogType'
+} %}
+
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro seoTitleField(facebookOpenGraphTypes, metaGlobalVars, suffix) %}
+        <div class="instructions">
+            <p>{{ "Adding OpenGraph tags to your website influences the performance of your links on social media by allowing you to control what appears when a user posts a link to your content on Facebook."|t("seomatic") }}</p>
+        </div>
+        {% import "_includes/forms" as forms %}
+
+        {% namespace "metaGlobalVars" %}
+            {{ forms.selectField({
+                id: "ogType" ~ suffix,
+                name: "ogType",
+                options: facebookOpenGraphTypes,
+                value: metaGlobalVars.ogType,
+                errors: metaGlobalVars.getErrors("ogType"),
+            }) }}
+        {% endnamespace %}
+    {% endmacro %}
+
+    {% set facebookOpenGraphTypes = {
+        "article": "Article"|t("seomatic"),
+        "book": "Book"|t("seomatic"),
+        "business.business": "Business"|t("seomatic"),
+        "music.album": "Music Album"|t("seomatic"),
+        "music.song": "Music Song"|t("seomatic"),
+        "place": "Place"|t("seomatic"),
+        "product": "Product"|t("seomatic"),
+        "profile": "Profile"|t("seomatic"),
+        "restaurant.restaurant": "Restaurant"|t("seomatic"),
+        "video.other": "Video"|t("seomatic"),
+        "website": "Website"|t("seomatic"),
+    } %}
+
+    {% block inheritedValues %}
+        {{ _self.seoTitleField(facebookOpenGraphTypes, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
+    {% endblock %}
+
+    {% block field %}
+        {{ _self.seoTitleField(facebookOpenGraphTypes, metaGlobalVars, "") }}
+    {% endblock %}
+{% endembed %}
+
+

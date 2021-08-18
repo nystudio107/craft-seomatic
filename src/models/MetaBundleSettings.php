@@ -393,4 +393,13 @@ class MetaBundleSettings extends VarsModel
             ],
         ];
     }
+
+    /**
+     * Return a unique hash for this meta bundle settings model.
+     *
+     * @return string
+     */
+    public function getHash() {
+        return spl_object_hash($this);
+    }
 }

@@ -1,0 +1,75 @@
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "twitterCreator") %}
+{% set hasInheritableValues = inheritedFrom is not null %}
+
+{% set additionalVars = {
+    'isInherited': seomatic.helper.isInherited(metaGlobalVars, "twitterCreator"),
+    'fieldLabel': "Twitter Creator Source"|t("seomatic"),
+    'labelFor': 'metaGlobalVars-twitterCreatorSource',
+    'wrapperClass': 'seomatic-textSourceWrapper',
+    'settingName': 'twitterCreator'
+} %}
+
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro twitterCreatorField(textOptions, metaBundleSettings, metaGlobalVars, suffix) %}
+        <div class="instructions">
+            <p>{{ "Twitter username for the content creator / author, without the preceding @."|t("seomatic") }}</p>
+        </div>
+        {% import "_includes/forms" as forms %}
+        {% namespace "metaBundleSettings" %}
+            <div class="heading">
+                {{ forms.select({
+                    id: "twitterCreatorSource" ~ suffix,
+                    name: "twitterCreatorSource",
+                    options: textOptions,
+                    value: metaBundleSettings.twitterCreatorSource,
+                    class: "seomatic-textSourceSelect",
+                    errors: metaBundleSettings.getErrors("twitterCreatorSource"),
+                }) }}
+            </div>
+        {% endnamespace %}
+
+        {% if userFieldSources is defined and userFieldSources |length %}
+            {% namespace "metaBundleSettings" %}
+                <div class="heading seomatic-textSourceFromField">
+                    <label for="metaBundleSettings-twitterCreatorField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
+                    {{ forms.select({
+                        id: "twitterCreatorField" ~ suffix,
+                        name: "twitterCreatorField",
+                        options: userFieldSources,
+                        value: metaBundleSettings.twitterCreatorField,
+                        errors: metaBundleSettings.getErrors("twitterCreatorField"),
+                    }) }}
+                </div>
+            {% endnamespace %}
+        {% endif %}
+
+        {% namespace "metaGlobalVars" %}
+            <div class="heading seomatic-textSourceFromUrl">
+                {{ forms.text({
+                    id: "twitterCreator" ~ suffix,
+                    name: "twitterCreator",
+                    value: metaGlobalVars.twitterCreator,
+                    class: "nicetext",
+                    warning: false,
+                    errors: metaGlobalVars.getErrors("twitterCreator"),
+                }) }}
+            </div>
+        {% endnamespace %}
+    {% endmacro %}
+
+    {% set textOptions = {
+        fromCustom: "Custom Text"|t("seomatic"),
+    } %}
+    {% if userFieldSources is defined and userFieldSources |length %}
+        {% set textOptions = { fromUserField: "From User Field"|t("seomatic"), } | merge(textOptions) %}
+    {% endif %}
+    {% set textOptions = { sameAsSiteTwitter: "Same as Site Twitter Handle"|t("seomatic"), } | merge(textOptions) %}
+
+    {% block inheritedValues %}
+        {{ _self.twitterCreatorField(textOptions, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
+    {% endblock %}
+
+    {% block field %}
+        {{ _self.twitterCreatorField(textOptions, metaBundleSettings, metaGlobalVars, "") }}
+    {% endblock %}
+{% endembed %}

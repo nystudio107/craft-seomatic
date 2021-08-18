@@ -251,6 +251,49 @@ return [
                     ],
                 ],
             ],
+            'pinterestTag' => [
+                'include' => false,
+                'environment' => [
+                    'staging' => [
+                        'include' => false,
+                    ],
+                    'local' => [
+                        'include' => false,
+                    ],
+                ],
+                'name' => 'Pinterest Tag',
+                'description' => 'The Pinterest tag allows you to track actions people take on your website after viewing your Promoted Pin. You can use this information to measure return on ad spend (RoAS) and create audiences to target on your Promoted Pins. [Learn More](https://help.pinterest.com/en/business/article/track-conversions-with-pinterest-tag)',
+                'templatePath' => '_frontend/scripts/pinterestTagHead.twig',
+                'bodyTemplatePath' => '_frontend/scripts/pinterestTagBody.twig',
+                'position' => View::POS_HEAD,
+                'bodyPosition' => View::POS_BEGIN,
+                'vars' => [
+                    'pinterestTagId' => [
+                        'title' => 'Pinterest Tag ID',
+                        'instructions' => 'Only enter the ID, e.g.: `XXXXXXXXXX`, not the entire script code. [Learn More](https://developers.pinterest.com/docs/ad-tools/conversion-tag/)',
+                        'type' => 'string',
+                        'value' => '',
+                    ],
+                    'sendPageView' => [
+                        'title' => 'Automatically send Pinterest Tag PageView',
+                        'instructions' => 'Controls whether the Pinterest Tag script automatically sends a PageView to when your pages are loaded.',
+                        'type' => 'bool',
+                        'value' => true,
+                    ],
+                    'pinterestTagUrl' => [
+                        'title' => 'Pinterest Tag Script URL',
+                        'instructions' => 'The URL to the Pinterest Tag script. Normally this should not be changed, unless you locally cache it.',
+                        'type' => 'string',
+                        'value' => 'https://s.pinimg.com/ct/core.js',
+                    ],
+                    'pinterestTagNoScriptUrl' => [
+                        'title' => 'Pinterest Tag Script &lt;noscript&gt; URL',
+                        'instructions' => 'The URL to the Pinterest Tag `&lt;noscript&gt;`. Normally this should not be changed, unless you locally cache it.',
+                        'type' => 'string',
+                        'value' => 'https://ct.pinterest.com/v3/',
+                    ],
+                ],
+            ],
             'fathom' => [
                 'include' => false,
                 'environment' => [

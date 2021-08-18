@@ -1,0 +1,41 @@
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "sitemapFiles", "metaSitemapVars") %}
+{% set hasInheritableValues = inheritedFrom is not null %}
+
+{% set additionalVars = {
+    'isInherited': seomatic.helper.isInherited(metaSitemapVars, "sitemapFiles"),
+    'fieldLabel': "Include Indexable Files in Sitemap"|t("seomatic"),
+    'settingName': 'sitemapFiles',
+    'labelFor': 'metaSitemapVars-sitemapFiles',
+    'overrideNamespace': 'metaSitemapVars'
+} %}
+
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro sitemapFilesField(metaSitemapVars, suffix) %}
+        <div class="instructions">
+            <p>
+                {{ "Whether the URLs to files such as `.pdf`, `.xls`, `.doc` and other indexable file types in Asset fields or Asset fields in matrix blocks should be included in the sitemap"|t("seomatic") }}
+            </p>
+        </div>
+
+        {% import "_includes/forms" as forms %}
+        {% namespace "metaSitemapVars" %}
+
+            {{ forms.lightswitchField({
+                id: "sitemapFiles" ~ suffix,
+                name: "sitemapFiles",
+                on: metaSitemapVars.sitemapFiles,
+                warning: false,
+                errors: metaSitemapVars.getErrors("sitemapFiles"),
+            }) }}
+
+        {% endnamespace %}
+    {% endmacro %}
+
+    {% block inheritedValues %}
+        {{ _self.sitemapFilesField(inheritedFrom.metaSitemapVars ?? metaSitemapVars, "-inherited") }}
+    {% endblock %}
+
+    {% block field %}
+        {{ _self.sitemapFilesField(metaSitemapVars, "") }}
+    {% endblock %}
+{% endembed %}
