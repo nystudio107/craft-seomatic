@@ -536,6 +536,7 @@ class Sitemaps extends Component implements SitemapInterface
                 'type' => $type,
                 'handle' => $handle,
                 'siteId' => $siteId,
+                'throwException' => false,
             ]
         );
     }
