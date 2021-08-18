@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.4.0 - UNRELEASED
+## 3.4.0 - 2021.08.18
 ### Added
 * Improved the way overrides are handled & displayed in SEO Settings fields by having an explicit **Override** switch for each setting ([#535](https://github.com/nystudio107/craft-seomatic/issues/535))
 * Scripts are now rendered and checked for Twig errors before they can be saved ([#944](https://github.com/nystudio107/craft-seomatic/issues/944))
