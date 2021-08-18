@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.1 - UNRELEASED
+### Fixed
+* Fixed an exception that could be thrown on a frontend form submission ([#951](https://github.com/nystudio107/craft-seomatic/issues/951))
+
 ## 3.4.0 - 2021.08.18
 ### Added
 * Improved the way overrides are handled & displayed in SEO Settings fields by having an explicit **Override** switch for each setting ([#535](https://github.com/nystudio107/craft-seomatic/issues/535))
