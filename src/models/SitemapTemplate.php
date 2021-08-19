@@ -195,7 +195,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             // Return a 503 Service Unavailable an a Retry-After so bots will try back later
             $lines = [];
             $response = Craft::$app->getResponse();
-            if (!$request->isConsoleRequest) {
+            if (!$request->isConsoleRequest && $throwException) {
                 $response->setStatusCode(503);
                 $response->headers->add('Retry-After', 60);
                 $response->headers->add('Cache-Control', 'no-cache, no-store');
