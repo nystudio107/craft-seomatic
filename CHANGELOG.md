@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.4.1 - UNRELEASED
+## 3.4.1 - 2021.08.19
 ### Fixed
 * Fixed an exception that could be thrown on a frontend form submission ([#951](https://github.com/nystudio107/craft-seomatic/issues/951))
 * Fixed an issue where entry index pages wouldn't auto-refresh after deleting multiple entries ([#952](https://github.com/nystudio107/craft-seomatic/issues/952))
