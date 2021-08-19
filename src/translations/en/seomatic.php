@@ -479,5 +479,12 @@ return [
     'Manually Set SEOmatic Environment' => 'Manually Set SEOmatic Environment',
     'Should Description tags be truncated at the max length, on word boundaries?' => 'Should Description tags be truncated at the max length, on word boundaries?',
     'Truncate Description Tags' => 'Truncate Description Tags',
-    'Truncate Title Tags' => 'Truncate Title Tags'
+    'Truncate Title Tags' => 'Truncate Title Tags',
+    'SEO Settings fields' => 'SEO Settings fields',
+    'Learn More' => 'Learn More',
+    'Is not a string.' => 'Is not a string.',
+    'The [SEO Settings]({url}) fields now feature **Override** light switches next to each setting, letting you explicitly override SEO settings on a per-entry basis.' => 'The [SEO Settings]({url}) fields now feature **Override** light switches next to each setting, letting you explicitly override SEO settings on a per-entry basis.',
+    'The search engine friendly URL that you want the search engines to treat as authoritative.' => 'The search engine friendly URL that you want the search engines to treat as authoritative.',
+    'The [SEO Settings]({url}) fields now feature **Override** lightswitches next to each setting, letting you explicitly override SEO settings on a per-entry basis.' => 'The [SEO Settings]({url}) fields now feature **Override** lightswitches next to each setting, letting you explicitly override SEO settings on a per-entry basis.',
+    'Override' => 'Override'
 ];
