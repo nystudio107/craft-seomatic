@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.2 - 2021.08.20
+### Fixed
+* Fixed an issue that could cause an exception to be thrown or CSS to be broken for the Social Media Preview ([#953](https://github.com/nystudio107/craft-seomatic/issues/953))
+
 ## 3.4.1 - 2021.08.19
 ### Fixed
 * Fixed an exception that could be thrown on a frontend form submission ([#951](https://github.com/nystudio107/craft-seomatic/issues/951))
