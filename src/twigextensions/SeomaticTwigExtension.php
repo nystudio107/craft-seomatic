@@ -35,12 +35,12 @@ class SeomaticTwigExtension extends AbstractExtension implements GlobalsInterfac
      */
     public function getGlobals(): array
     {
+        $request = Craft::$app->getRequest();
         // Seomatic::$view->getIsRenderingPageTemplate() &&
         if (!Seomatic::$seomaticVariable && !Seomatic::$previewingMetaContainers) {
             // Create our variable and stash it in the plugin for global access
             Seomatic::$seomaticVariable = new SeomaticVariable();
             // Get the path for the current request
-            $request = Craft::$app->getRequest();
             $requestPath = '/';
             if (!$request->getIsConsoleRequest()) {
                 try {
@@ -49,8 +49,10 @@ class SeomaticTwigExtension extends AbstractExtension implements GlobalsInterfac
                     Craft::error($e->getMessage(), __METHOD__);
                 }
             }
-            // Load the meta containers for this page
-            Seomatic::$plugin->metaContainers->loadMetaContainers($requestPath, null);
+            if (!$request->getIsCpRequest()) {
+                // Load the meta containers for this page
+                Seomatic::$plugin->metaContainers->loadMetaContainers($requestPath, null);
+            }
         }
 
         return ['seomatic' => Seomatic::$seomaticVariable];
