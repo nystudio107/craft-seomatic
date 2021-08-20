@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.3 - UNRELEASED
+### Fixed
+* Don't call `loadMetaContainers()` explicitly for CP requests ([#954](https://github.com/nystudio107/craft-seomatic/issues/954))
+
 ## 3.4.2 - 2021.08.20
 ### Fixed
 * Fixed an issue that could cause an exception to be thrown or CSS to be broken for the Social Media Preview ([#953](https://github.com/nystudio107/craft-seomatic/issues/953))
