@@ -3,6 +3,7 @@
 ## 3.4.3 - UNRELEASED
 ### Fixed
 * Don't call `loadMetaContainers()` explicitly for CP requests ([#954](https://github.com/nystudio107/craft-seomatic/issues/954))
+* Fixed an issue where if you had an SEO Settings field with the Sitemap tab enabled, but did not have Override on, the `<link rel="alternate">` would not render ([#958](https://github.com/nystudio107/craft-seomatic/issues/958))
 
 ## 3.4.2 - 2021.08.20
 ### Fixed
