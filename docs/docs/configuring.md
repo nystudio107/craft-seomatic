@@ -416,6 +416,8 @@ The Plugin Settings lets you control various SEOmatic settings globally (across 
 * **Sitemaps Enabled** - Controls whether SEOmatic will automatically render frontend sitemaps for your site.
 * **Regenerate Sitemaps Automatically** - Controls whether sitemaps will automatically be regenerated when entries are saved.
 * **Submit Sitemap Changes** - Should sitemaps be submitted to search engines automatically whenever there are changes?
+* **Include Homepage in Breadcrumbs** - Should the homepage be included in the generated Breadcrumbs JSON-LD?
+* **Manually Set SEOmatic Environment** - If off, SEOmatic will automatically attempt to determine the current environment. Turn this on to manually set the environment.
 * **Environment** - The server environment, either `live`, `staging`, or `local`. If `devMode` is on, SEOmatic will override this setting to local Development. This setting controls whether certain things render; for instance only in the `live` production environment will Google Analytics and other tracking tags send analytics data. SEOmatic also automatically sets the `robots` tag to `none` for everything but the `live` production environment.
 
 ### Appearance Plugin Settings
