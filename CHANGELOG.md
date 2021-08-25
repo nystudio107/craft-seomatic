@@ -10,6 +10,7 @@
 ### Fixed
 * Don't call `loadMetaContainers()` explicitly for CP requests ([#954](https://github.com/nystudio107/craft-seomatic/issues/954))
 * Fixed an issue where if you had an SEO Settings field with the Sitemap tab enabled, but did not have Override on, the `<link rel="alternate">` would not render ([#958](https://github.com/nystudio107/craft-seomatic/issues/958))
+* Fixed a validation error that wouldn't allow you to save Tracking Scripts that didn't have a body script ([#959](https://github.com/nystudio107/craft-seomatic/issues/959))
 
 ## 3.4.2 - 2021.08.20
 ### Fixed
