@@ -434,7 +434,7 @@ class DynamicMeta
             'type' => 'BreadcrumbList',
             'name' => 'Breadcrumbs',
             'description' => 'Breadcrumbs list',
-        ]);
+        ], false);
         // Include the Homepage in the breadcrumbs, if includeHomepageInBreadcrumbs is true
         $element = null;
         if (Seomatic::$settings->includeHomepageInBreadcrumbs) {
