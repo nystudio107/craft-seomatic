@@ -409,7 +409,7 @@ class DynamicMeta
      */
     public static function addMetaJsonLdBreadCrumbs(int $siteId = null)
     {
-        $position = 1;
+        $position = 0;
         if ($siteId === null) {
             $siteId = Craft::$app->getSites()->currentSite->id
                 ?? Craft::$app->getSites()->primarySite->id
@@ -434,35 +434,40 @@ class DynamicMeta
             'type' => 'BreadcrumbList',
             'name' => 'Breadcrumbs',
             'description' => 'Breadcrumbs list',
-        ]);
-        /** @var Element $element */
-        $element = Craft::$app->getElements()->getElementByUri('__home__', $siteId);
-        if ($element) {
-            $uri = $element->uri === '__home__' ? '' : ($element->uri ?? '');
-            try {
-                $id = UrlHelper::siteUrl($uri, null, null, $siteId);
-            } catch (Exception $e) {
-                $id = $siteUrl;
-                Craft::error($e->getMessage(), __METHOD__);
+        ], false);
+        // Include the Homepage in the breadcrumbs, if includeHomepageInBreadcrumbs is true
+        $element = null;
+        if (Seomatic::$settings->includeHomepageInBreadcrumbs) {
+            /** @var Element $element */
+            $position++;
+            $element = Craft::$app->getElements()->getElementByUri('__home__', $siteId);
+            if ($element) {
+                $uri = $element->uri === '__home__' ? '' : ($element->uri ?? '');
+                try {
+                    $id = UrlHelper::siteUrl($uri, null, null, $siteId);
+                } catch (Exception $e) {
+                    $id = $siteUrl;
+                    Craft::error($e->getMessage(), __METHOD__);
+                }
+                $item = UrlHelper::stripQueryString($id);
+                $item = UrlHelper::absoluteUrlWithProtocol($item);
+                $listItem = MetaJsonLd::create('ListItem', [
+                    'position' => $position,
+                    'name' => $element->title,
+                    'item' => $item,
+                    '@id' => $id,
+                ]);
+                $crumbs->itemListElement[] = $listItem;
+            } else {
+                $item = UrlHelper::stripQueryString($siteUrl ?? '/');
+                $item = UrlHelper::absoluteUrlWithProtocol($item);
+                $crumbs->itemListElement[] = MetaJsonLd::create('ListItem', [
+                    'position' => $position,
+                    'name' => 'Homepage',
+                    'item' => $item,
+                    '@id' => $siteUrl,
+                ]);
             }
-            $item = UrlHelper::stripQueryString($id);
-            $item = UrlHelper::absoluteUrlWithProtocol($item);
-            $listItem = MetaJsonLd::create('ListItem', [
-                'position' => $position,
-                'name' => $element->title,
-                'item' => $item,
-                '@id' => $id,
-            ]);
-            $crumbs->itemListElement[] = $listItem;
-        } else {
-            $item = UrlHelper::stripQueryString($siteUrl ?? '/');
-            $item = UrlHelper::absoluteUrlWithProtocol($item);
-            $crumbs->itemListElement[] = MetaJsonLd::create('ListItem', [
-                'position' => $position,
-                'name' => 'Homepage',
-                'item' => $item,
-                '@id' => $siteUrl,
-            ]);
         }
         // Build up the segments, and look for elements that match
         $uri = '';
@@ -502,8 +507,9 @@ class DynamicMeta
             }
             $uri .= '/';
         }
-
-        Seomatic::$plugin->jsonLd->add($crumbs);
+        if (!empty($crumbs->itemListElement)) {
+            Seomatic::$plugin->jsonLd->add($crumbs);
+        }
     }
 
     /**
@@ -680,6 +686,7 @@ class DynamicMeta
                                 // If sitemaps are off for this entry, don't include the URL
                                 if (\in_array('sitemapUrls', $seoSettingsField->sitemapEnabledFields, false)
                                     && !$fieldMetaBundle->metaSitemapVars->sitemapUrls
+                                    && !Seomatic::$plugin->helper->isInherited($fieldMetaBundle->metaSitemapVars, 'sitemapUrls')
                                 ) {
                                     $includeUrl = false;
                                 }

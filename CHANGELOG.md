@@ -1,5 +1,18 @@
 # SEOmatic Changelog
 
+## 3.4.3 - 2021.08.25
+### Added
+* Added a **Include Homepage in Breadcrumbs** general plugin setting to control whether the generated JSON-LD for Breadcrumbs includes the homepage or not ([#957](https://github.com/nystudio107/craft-seomatic/issues/957)) & ([#747](https://github.com/nystudio107/craft-seomatic/issues/747))
+
+### Changed
+* Switch to `rawurldecode()` to avoid changing `+` signs into spaces in pull fields ([#785](https://github.com/nystudio107/craft-seomatic/issues/785))
+
+### Fixed
+* Don't call `loadMetaContainers()` explicitly for CP requests ([#954](https://github.com/nystudio107/craft-seomatic/issues/954))
+* Fixed an issue where if you had an SEO Settings field with the Sitemap tab enabled, but did not have Override on, the `<link rel="alternate">` would not render ([#958](https://github.com/nystudio107/craft-seomatic/issues/958))
+* Fixed a validation error that wouldn't allow you to save Tracking Scripts that didn't have a body script ([#959](https://github.com/nystudio107/craft-seomatic/issues/959))
+* Fixed a cosmetic issue with the human-readable display of custom sitemaps ([#955](https://github.com/nystudio107/craft-seomatic/issues/955))
+
 ## 3.4.2 - 2021.08.20
 ### Fixed
 * Fixed an issue that could cause an exception to be thrown or CSS to be broken for the Social Media Preview ([#953](https://github.com/nystudio107/craft-seomatic/issues/953))

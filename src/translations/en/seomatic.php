@@ -486,5 +486,12 @@ return [
     'The [SEO Settings]({url}) fields now feature **Override** light switches next to each setting, letting you explicitly override SEO settings on a per-entry basis.' => 'The [SEO Settings]({url}) fields now feature **Override** light switches next to each setting, letting you explicitly override SEO settings on a per-entry basis.',
     'The search engine friendly URL that you want the search engines to treat as authoritative.' => 'The search engine friendly URL that you want the search engines to treat as authoritative.',
     'The [SEO Settings]({url}) fields now feature **Override** lightswitches next to each setting, letting you explicitly override SEO settings on a per-entry basis.' => 'The [SEO Settings]({url}) fields now feature **Override** lightswitches next to each setting, letting you explicitly override SEO settings on a per-entry basis.',
-    'Override' => 'Override'
+    'Override' => 'Override',
+    'SEOmatic - SEO Settings fields' => 'SEOmatic - SEO Settings fields',
+    'The [SEO Settings]({url}) fields in SEOmatic 3.4 now feature **Override** light switches next to each setting, to make it easier to use effectively.' => 'The [SEO Settings]({url}) fields in SEOmatic 3.4 now feature **Override** light switches next to each setting, to make it easier to use effectively.',
+    'SEOmatic 3.4 - SEO Settings fields' => 'SEOmatic 3.4 - SEO Settings fields',
+    'The [SEO Settings]({url}) fields in SEOmatic now feature **Override** light switches next to each setting, to improve the content authoring experience.' => 'The [SEO Settings]({url}) fields in SEOmatic now feature **Override** light switches next to each setting, to improve the content authoring experience.',
+    'Body text with [link]({url}).' => 'Body text with [link]({url}).',
+    'Include Homepage in Breadcrumbs' => 'Include Homepage in Breadcrumbs',
+    'Should the homepage be included in the generated Breadcrumbs JSON-LD?' => 'Should the homepage be included in the generated Breadcrumbs JSON-LD?'
 ];
