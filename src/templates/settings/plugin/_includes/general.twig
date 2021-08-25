@@ -55,6 +55,16 @@
         }) }}
 
         {{ forms.lightswitchField({
+            label: "Include Homepage in Breadcrumbs"|t("seomatic"),
+            instructions: "Should the homepage be included in the generated Breadcrumbs JSON-LD?"|t("seomatic"),
+            id: "includeHomepageInBreadcrumbs",
+            name: "includeHomepageInBreadcrumbs",
+            on: settings.includeHomepageInBreadcrumbs,
+            warning: configWarning("includeHomepageInBreadcrumbs", "seomatic"),
+            errors: settings.getErrors("includeHomepageInBreadcrumbs"),
+        }) }}
+
+        {{ forms.lightswitchField({
             label: "Manually Set SEOmatic Environment"|t("seomatic"),
             instructions: "If off, SEOmatic will automatically attempt to determine the current environment. Turn this on to manually set the environment."|t("seomatic"),
             id: "manuallySetEnvironment",
