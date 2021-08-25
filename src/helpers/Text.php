@@ -392,7 +392,7 @@ class Text
     {
         // Do some general cleanup
         $str = html_entity_decode($str, ENT_NOQUOTES, 'UTF-8');
-        $str = urldecode($str);
+        $str = rawurldecode($str);
         // Remove any linebreaks
         $str = (string)preg_replace("/\r|\n/", "", $str);
         $str = strip_tags($str);
