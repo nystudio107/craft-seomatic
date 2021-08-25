@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.4.3 - UNRELEASED
+### Changed
+* Switch to `rawurldecode()` to avoid changing `+` signs into spaces in pull fields ([#785](https://github.com/nystudio107/craft-seomatic/issues/785))
+
 ### Fixed
 * Don't call `loadMetaContainers()` explicitly for CP requests ([#954](https://github.com/nystudio107/craft-seomatic/issues/954))
 * Fixed an issue where if you had an SEO Settings field with the Sitemap tab enabled, but did not have Override on, the `<link rel="alternate">` would not render ([#958](https://github.com/nystudio107/craft-seomatic/issues/958))
