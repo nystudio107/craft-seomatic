@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.4.3 - UNRELEASED
+### Added
+* Added a **Include Homepage in Breadcrumbs** general plugin setting to control whether the generated JSON-LD for Breadcrumbs includes the homepage or not ([#957](https://github.com/nystudio107/craft-seomatic/issues/957)) & ([#747](https://github.com/nystudio107/craft-seomatic/issues/747))
+
 ### Changed
 * Switch to `rawurldecode()` to avoid changing `+` signs into spaces in pull fields ([#785](https://github.com/nystudio107/craft-seomatic/issues/785))
 
