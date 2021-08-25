@@ -409,7 +409,7 @@ class DynamicMeta
      */
     public static function addMetaJsonLdBreadCrumbs(int $siteId = null)
     {
-        $position = 1;
+        $position = 0;
         if ($siteId === null) {
             $siteId = Craft::$app->getSites()->currentSite->id
                 ?? Craft::$app->getSites()->primarySite->id
@@ -439,6 +439,7 @@ class DynamicMeta
         $element = null;
         if (Seomatic::$settings->includeHomepageInBreadcrumbs) {
             /** @var Element $element */
+            $position++;
             $element = Craft::$app->getElements()->getElementByUri('__home__', $siteId);
             if ($element) {
                 $uri = $element->uri === '__home__' ? '' : ($element->uri ?? '');
