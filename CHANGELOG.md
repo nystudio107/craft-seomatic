@@ -1,5 +1,11 @@
 # SEOmatic Changelog
 
+## 3.4.4 - 2021.08.26
+### Fixed
+* Ensure metacontainers are loaded for new elements that have an SEO Settings field in their layout ([#960](https://github.com/nystudio107/craft-seomatic/issues/960))
+* Typecast the setting collection to an array to handle the case of an empty string being returned ([#961](https://github.com/nystudio107/craft-seomatic/issues/961))
+* Instantiate at least the global metacontainers for CP requests, to sidestep regression issues for code that depends on the metacontainers being present ([#954](https://github.com/nystudio107/craft-seomatic/issues/954)) ([#960](https://github.com/nystudio107/craft-seomatic/issues/960))
+
 ## 3.4.3 - 2021.08.25
 ### Added
 * Added a **Include Homepage in Breadcrumbs** general plugin setting to control whether the generated JSON-LD for Breadcrumbs includes the homepage or not ([#957](https://github.com/nystudio107/craft-seomatic/issues/957)) & ([#747](https://github.com/nystudio107/craft-seomatic/issues/747))

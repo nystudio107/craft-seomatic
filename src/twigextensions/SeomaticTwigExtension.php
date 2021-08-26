@@ -52,6 +52,11 @@ class SeomaticTwigExtension extends AbstractExtension implements GlobalsInterfac
             if (!$request->getIsCpRequest()) {
                 // Load the meta containers for this page
                 Seomatic::$plugin->metaContainers->loadMetaContainers($requestPath, null);
+            } else {
+                // If this is a CP request, load the bare minimum, which is the global container,
+                // and re-init the SEOmatic variable to ensure it points to the new settings
+                Seomatic::$plugin->metaContainers->loadGlobalMetaContainers();
+                Seomatic::$seomaticVariable->init();
             }
         }
 
