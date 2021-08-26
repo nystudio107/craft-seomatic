@@ -364,11 +364,6 @@ class SeoSettings extends Field implements PreviewableFieldInterface
         // Preview the containers so the preview is correct in the field
         if ($element !== null && $element->uri !== null) {
             Seomatic::$plugin->metaContainers->previewMetaContainers($element->uri, $element->siteId, true);
-        } else {
-            // Ensure metacontainers are loaded
-            if (empty(Seomatic::$plugin->metaContainers->metaGlobalVars)) {
-                Seomatic::$plugin->metaContainers->loadMetaContainers();
-            }
         }
 
         $source = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
