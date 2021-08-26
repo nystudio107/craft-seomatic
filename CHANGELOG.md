@@ -3,6 +3,7 @@
 ## 3.4.4 - UNRELEASED
 ### Fixed
 * Ensure metacontainers are loaded for new elements that have an SEO Settings field in their layout ([#960](https://github.com/nystudio107/craft-seomatic/issues/960))
+* Typecast the setting collection to an array to handle the case of an empty string being returned ([#961](https://github.com/nystudio107/craft-seomatic/issues/961))
 
 ## 3.4.3 - 2021.08.25
 ### Added
