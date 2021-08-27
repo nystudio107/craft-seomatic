@@ -64,6 +64,16 @@ class MetaContainers extends Component
     const GLOBALS_CACHE_KEY = 'parsed_globals_';
     const SCRIPTS_CACHE_KEY = 'body_scripts_';
 
+    /** @var array Rules for replacement values on arbitrary empty values */
+    const COMPOSITE_SETTING_LOOKUP = [
+        'ogImage' => [
+            'metaBundleSettings.ogImageSource' => 'sameAsSeo.seoImage',
+        ],
+        'twitterImage' => [
+            'metaBundleSettings.twitterImageSource' => 'sameAsSeo.seoImage',
+        ],
+    ];
+
     /**
      * @event InvalidateContainerCachesEvent The event that is triggered when SEOmatic
      *        is about to clear its meta container caches
@@ -859,6 +869,23 @@ class MetaContainers extends Component
                     /** @var MetaBundle $metaBundle */
                     $metaBundle = $element->$fieldHandle;
                     Seomatic::$plugin->metaBundles->pruneFieldMetaBundleSettings($metaBundle, $fieldHandle);
+
+                    // See which properties have to be overridden, because the parent bundle says so.
+                    foreach (self::COMPOSITE_SETTING_LOOKUP as $settingName => $rules) {
+                        if (empty($metaBundle->metaGlobalVars->{$settingName})) {
+                            $parentBundle = Seomatic::$plugin->metaBundles->getContentMetaBundleForElement($element);
+
+                            foreach ($rules as $settingPath => $action) {
+                                list ($container, $property) = explode('.', $settingPath);
+                                list ($testValue, $sourceSetting) = explode('.', $action);
+
+                                if ($parentBundle->{$container}->{$property} == $testValue) {
+                                    $metaBundle->metaGlobalVars->{$settingName}  = $metaBundle->metaGlobalVars->{$sourceSetting};
+                                }
+                            }
+                        }
+                    }
+
                     // Handle re-creating the `mainEntityOfPage` so that the model injected into the
                     // templates has the appropriate attributes
                     $generalContainerKey = MetaJsonLdContainer::CONTAINER_TYPE.JsonLdService::GENERAL_HANDLE;
