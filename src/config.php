@@ -47,6 +47,9 @@ return [
     // Should sitemaps be submitted to search engines automatically whenever there are changes?
     'submitSitemaps' => true,
 
+    // Should the homepage be included in the generated Breadcrumbs JSON-LD?
+    'includeHomepageInBreadcrumbs' => true,
+
     // Should SEOmatic add to the http response headers?
     'headersEnabled' => true,
 

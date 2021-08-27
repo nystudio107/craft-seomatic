@@ -56,6 +56,11 @@ class Settings extends VarsModel
     public $submitSitemaps = true;
 
     /**
+     * @var bool Should the homepage be included in the generated Breadcrumbs JSON-LD?
+     */
+    public $includeHomepageInBreadcrumbs = true;
+
+    /**
      * @var bool Should SEOmatic add to the http response headers?
      */
     public $headersEnabled = true;
@@ -234,6 +239,7 @@ class Settings extends VarsModel
                     'sitemapsEnabled',
                     'regenerateSitemapsAutomatically',
                     'submitSitemaps',
+                    'includeHomepageInBreadcrumbs',
                     'headersEnabled',
                     'generatorEnabled',
                     'addHrefLang',

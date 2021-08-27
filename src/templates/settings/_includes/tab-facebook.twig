@@ -1,6 +1,7 @@
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
 
+<fieldset>
 {% if field is not defined or 'seoPreview' in field.facebookEnabledFields %}
     <h4 class="heading">{{ "SEO Preview:"|t('seomatic') }}</h4>
     {% include "seomatic/_includes/facebookPreview.twig" %}
@@ -52,3 +53,4 @@
 {% if field is not defined or 'seoImageDescription' in field.generalEnabledFields %}
     {% include "seomatic/settings/_includes/fields/_ogImageDescription.twig" %}
 {% endif %}
+</fieldset>

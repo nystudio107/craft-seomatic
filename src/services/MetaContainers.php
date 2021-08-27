@@ -799,15 +799,12 @@ class MetaContainers extends Component
         }
     }
 
-    // Protected Methods
-    // =========================================================================
-
     /**
      * Load the global site meta containers
      *
      * @param int|null $siteId
      */
-    protected function loadGlobalMetaContainers(int $siteId = null)
+    public function loadGlobalMetaContainers(int $siteId = null)
     {
         Craft::beginProfile('MetaContainers::loadGlobalMetaContainers', __METHOD__);
         if ($siteId === null) {
@@ -830,6 +827,9 @@ class MetaContainers extends Component
         }
         Craft::beginProfile('MetaContainers::loadGlobalMetaContainers', __METHOD__);
     }
+
+    // Protected Methods
+    // =========================================================================
 
     /**
      * Load the meta containers specific to the matched meta bundle

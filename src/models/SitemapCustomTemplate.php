@@ -179,27 +179,27 @@ class SitemapCustomTemplate extends FrontendTemplate implements SitemapInterface
                     $dateUpdated = $additionalSitemapUrl['lastmod']
                         ?? $metaBundle->metaSiteVars->additionalSitemapUrlsDateUpdated
                         ?? new \DateTime;
-                    $lines[] = '  <url>';
+                    $lines[] = '<url>';
                     // Standard sitemap key/values
-                    $lines[] = '    <loc>';
-                    $lines[] = '      '.Html::encode($url);
-                    $lines[] = '    </loc>';
-                    $lines[] = '    <lastmod>';
-                    $lines[] = '      '.$dateUpdated->format(\DateTime::W3C);
-                    $lines[] = '    </lastmod>';
-                    $lines[] = '    <changefreq>';
-                    $lines[] = '      '.$additionalSitemapUrl['changefreq'];
-                    $lines[] = '    </changefreq>';
-                    $lines[] = '    <priority>';
-                    $lines[] = '      '.$additionalSitemapUrl['priority'];
-                    $lines[] = '    </priority>';
-                    $lines[] = '  </url>';
+                    $lines[] = '<loc>';
+                    $lines[] = Html::encode($url);
+                    $lines[] = '</loc>';
+                    $lines[] = '<lastmod>';
+                    $lines[] = $dateUpdated->format(\DateTime::W3C);
+                    $lines[] = '</lastmod>';
+                    $lines[] = '<changefreq>';
+                    $lines[] = $additionalSitemapUrl['changefreq'];
+                    $lines[] = '</changefreq>';
+                    $lines[] = '<priority>';
+                    $lines[] = $additionalSitemapUrl['priority'];
+                    $lines[] = '</priority>';
+                    $lines[] = '</url>';
                 }
                 // Sitemap index closing tag
                 $lines[] = '</urlset>';
             }
 
-            return implode("\r\n", $lines);
+            return implode('', $lines);
         }, Seomatic::$cacheDuration, $dependency);
     }
 

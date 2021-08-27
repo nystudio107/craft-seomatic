@@ -548,8 +548,8 @@ class Helper extends Component
      */
     public function isInherited(InheritableSettingsModel $settingCollection, $settingName)
     {
-        $explicitInherit = array_key_exists($settingName, $settingCollection->inherited);
-        $explicitOverride = array_key_exists($settingName, $settingCollection->overrides);
+        $explicitInherit = array_key_exists($settingName, (array)$settingCollection->inherited);
+        $explicitOverride = array_key_exists($settingName, (array)$settingCollection->overrides);
 
         if ($explicitInherit || $explicitOverride) {
             return $explicitInherit && !$explicitOverride;
