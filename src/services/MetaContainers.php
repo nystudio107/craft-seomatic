@@ -224,7 +224,10 @@ class MetaContainers extends Component
                 $this->loadGlobalMetaContainers($siteId);
                 $this->loadContentMetaContainers();
                 $this->loadFieldMetaContainers();
-                DynamicMetaHelper::addDynamicMetaToContainers($uri, $siteId);
+                // We only need the dynamic data for headless requests
+                if (Seomatic::$headlessRequest) {
+                    DynamicMetaHelper::addDynamicMetaToContainers($uri, $siteId);
+                }
             } else {
                 $cache = Craft::$app->getCache();
                 list($this->metaGlobalVars, $this->metaSiteVars, $this->metaSitemapVars, $this->metaContainers) = $cache->getOrSet(
@@ -376,6 +379,10 @@ class MetaContainers extends Component
         bool $parseVariables = false,
         bool $includeElement = true
     ) {
+        // If we've already previewed the containers for this request, there's no need to do it again
+        if (Seomatic::$previewingMetaContainers && !Seomatic::$headlessRequest) {
+            return;
+        }
         // It's possible this won't exist at this point
         if (!Seomatic::$seomaticVariable) {
             // Create our variable and stash it in the plugin for global access
