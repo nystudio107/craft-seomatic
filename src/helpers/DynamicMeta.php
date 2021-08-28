@@ -330,6 +330,7 @@ class DynamicMeta
      */
     public static function addOpeningHours(MetaJsonLd $jsonLd, Entity $entity)
     {
+        Craft::beginProfile('DynamicMeta::addOpeningHours', __METHOD__);
         if ($jsonLd instanceof LocalBusiness && $entity !== null) {
             /** @var LocalBusiness $jsonLd */
             $openingHours = [];
@@ -374,6 +375,7 @@ class DynamicMeta
             }
             $jsonLd->openingHoursSpecification = $openingHours;
         }
+        Craft::endProfile('DynamicMeta::addOpeningHours', __METHOD__);
     }
 
     /**
@@ -384,6 +386,7 @@ class DynamicMeta
      */
     public static function addContactPoints(MetaJsonLd $jsonLd, Entity $entity)
     {
+        Craft::beginProfile('DynamicMeta::addContactPoints', __METHOD__);
         if ($jsonLd instanceof Organization && $entity !== null) {
             /** @var Organization $jsonLd */
             $contactPoints = [];
@@ -400,6 +403,7 @@ class DynamicMeta
             }
             $jsonLd->contactPoint = $contactPoints;
         }
+        Craft::endProfile('DynamicMeta::addContactPoints', __METHOD__);
     }
 
     /**
@@ -409,6 +413,7 @@ class DynamicMeta
      */
     public static function addMetaJsonLdBreadCrumbs(int $siteId = null)
     {
+        Craft::beginProfile('DynamicMeta::addMetaJsonLdBreadCrumbs', __METHOD__);
         $position = 0;
         if ($siteId === null) {
             $siteId = Craft::$app->getSites()->currentSite->id
@@ -510,6 +515,7 @@ class DynamicMeta
         if (!empty($crumbs->itemListElement)) {
             Seomatic::$plugin->jsonLd->add($crumbs);
         }
+        Craft::endProfile('DynamicMeta::addMetaJsonLdBreadCrumbs', __METHOD__);
     }
 
     /**
@@ -520,6 +526,7 @@ class DynamicMeta
      */
     public static function addMetaLinkHrefLang(string $uri = null, int $siteId = null)
     {
+        Craft::beginProfile('DynamicMeta::addMetaLinkHrefLang', __METHOD__);
         $siteLocalizedUrls = self::getLocalizedUrls($uri, $siteId);
 
         if (!empty($siteLocalizedUrls)) {
@@ -556,6 +563,7 @@ class DynamicMeta
                 $ogLocaleAlternate->content = $ogContentArray;
             }
         }
+        Craft::endProfile('DynamicMeta::addMetaLinkHrefLang', __METHOD__);
     }
 
     /**
@@ -563,6 +571,7 @@ class DynamicMeta
      */
     public static function addSameAsMeta()
     {
+        Craft::beginProfile('DynamicMeta::addSameAsMeta', __METHOD__);
         $metaContainers = Seomatic::$plugin->metaContainers;
         $sameAsUrls = [];
         if (!empty($metaContainers->metaSiteVars->sameAsLinks)) {
@@ -580,6 +589,7 @@ class DynamicMeta
         if ($identity !== null && property_exists($identity, 'sameAs')) {
             $identity->sameAs = $sameAsUrls;
         }
+        Craft::endProfile('DynamicMeta::addSameAsMeta', __METHOD__);
     }
 
     /**
@@ -596,6 +606,7 @@ class DynamicMeta
      */
     public static function getLocalizedUrls(string $uri = null, int $siteId = null): array
     {
+        Craft::beginProfile('DynamicMeta::getLocalizedUrls', __METHOD__);
         $localizedUrls = [];
         // No pagination params for URLs
         $urlParams = null;
@@ -746,6 +757,7 @@ class DynamicMeta
                 ];
             }
         }
+        Craft::endProfile('DynamicMeta::getLocalizedUrls', __METHOD__);
 
         return $localizedUrls;
     }
