@@ -1,6 +1,10 @@
 # SEOmatic Changelog
 
 ## 3.4.5 - UNRELEASED
+### Changed
+* Further optimized the CP requests by eliminating redundant calls to `loadMetaContainers()` and also only calling `addDynamicMetaToContainers()` on headless requests
+* Added more fine-grained profiling to the `DynamicHelper` class
+
 ### Fixed
 * Fix a bug where SEO image settings could be inherited incorrectly ([#962](https://github.com/nystudio107/craft-seomatic/issues/962))
 * Fixed an issue where elements with newly added SEO Settings field wouldn't appear in the sitemap ([#964](https://github.com/nystudio107/craft-seomatic/issues/964))
