@@ -3,6 +3,7 @@
 ## 3.4.5 - UNRELEASED
 ### Fixed
 * Fix a bug where SEO image settings could be inherited incorrectly ([#962](https://github.com/nystudio107/craft-seomatic/issues/962))
+* Fixed an issue where elements with newly added SEO Settings field wouldn't appear in the sitemap ([#964](https://github.com/nystudio107/craft-seomatic/issues/964))
 
 ## 3.4.4 - 2021.08.26
 ### Fixed
