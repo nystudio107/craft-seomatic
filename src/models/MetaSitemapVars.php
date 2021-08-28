@@ -98,10 +98,18 @@ class MetaSitemapVars extends InheritableSettingsModel
     public function init()
     {
         // Enforce types
-        $this->sitemapUrls = (bool)$this->sitemapUrls;
-        $this->sitemapAssets = (bool)$this->sitemapAssets;
-        $this->sitemapFiles = (bool)$this->sitemapFiles;
-        $this->sitemapAltLinks = (bool)$this->sitemapAltLinks;
+        if ($this->sitemapUrls !== null) {
+            $this->sitemapUrls = (bool)$this->sitemapUrls;
+        }
+        if ($this->sitemapAssets !== null) {
+            $this->sitemapAssets = (bool)$this->sitemapAssets;
+        }
+        if ($this->sitemapFiles !== null) {
+            $this->sitemapFiles = (bool)$this->sitemapFiles;
+        }
+        if ($this->sitemapAltLinks !== null) {
+            $this->sitemapAltLinks = (bool)$this->sitemapAltLinks;
+        }
     }
 
     /**
