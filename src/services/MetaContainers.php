@@ -64,6 +64,16 @@ class MetaContainers extends Component
     const GLOBALS_CACHE_KEY = 'parsed_globals_';
     const SCRIPTS_CACHE_KEY = 'body_scripts_';
 
+    /** @var array Rules for replacement values on arbitrary empty values */
+    const COMPOSITE_SETTING_LOOKUP = [
+        'ogImage' => [
+            'metaBundleSettings.ogImageSource' => 'sameAsSeo.seoImage',
+        ],
+        'twitterImage' => [
+            'metaBundleSettings.twitterImageSource' => 'sameAsSeo.seoImage',
+        ],
+    ];
+
     /**
      * @event InvalidateContainerCachesEvent The event that is triggered when SEOmatic
      *        is about to clear its meta container caches
@@ -214,7 +224,10 @@ class MetaContainers extends Component
                 $this->loadGlobalMetaContainers($siteId);
                 $this->loadContentMetaContainers();
                 $this->loadFieldMetaContainers();
-                DynamicMetaHelper::addDynamicMetaToContainers($uri, $siteId);
+                // We only need the dynamic data for headless requests
+                if (Seomatic::$headlessRequest) {
+                    DynamicMetaHelper::addDynamicMetaToContainers($uri, $siteId);
+                }
             } else {
                 $cache = Craft::$app->getCache();
                 list($this->metaGlobalVars, $this->metaSiteVars, $this->metaSitemapVars, $this->metaContainers) = $cache->getOrSet(
@@ -366,6 +379,10 @@ class MetaContainers extends Component
         bool $parseVariables = false,
         bool $includeElement = true
     ) {
+        // If we've already previewed the containers for this request, there's no need to do it again
+        if (Seomatic::$previewingMetaContainers && !Seomatic::$headlessRequest) {
+            return;
+        }
         // It's possible this won't exist at this point
         if (!Seomatic::$seomaticVariable) {
             // Create our variable and stash it in the plugin for global access
@@ -859,6 +876,23 @@ class MetaContainers extends Component
                     /** @var MetaBundle $metaBundle */
                     $metaBundle = $element->$fieldHandle;
                     Seomatic::$plugin->metaBundles->pruneFieldMetaBundleSettings($metaBundle, $fieldHandle);
+
+                    // See which properties have to be overridden, because the parent bundle says so.
+                    foreach (self::COMPOSITE_SETTING_LOOKUP as $settingName => $rules) {
+                        if (empty($metaBundle->metaGlobalVars->{$settingName})) {
+                            $parentBundle = Seomatic::$plugin->metaBundles->getContentMetaBundleForElement($element);
+
+                            foreach ($rules as $settingPath => $action) {
+                                list ($container, $property) = explode('.', $settingPath);
+                                list ($testValue, $sourceSetting) = explode('.', $action);
+
+                                if ($parentBundle->{$container}->{$property} == $testValue) {
+                                    $metaBundle->metaGlobalVars->{$settingName}  = $metaBundle->metaGlobalVars->{$sourceSetting};
+                                }
+                            }
+                        }
+                    }
+
                     // Handle re-creating the `mainEntityOfPage` so that the model injected into the
                     // templates has the appropriate attributes
                     $generalContainerKey = MetaJsonLdContainer::CONTAINER_TYPE.JsonLdService::GENERAL_HANDLE;

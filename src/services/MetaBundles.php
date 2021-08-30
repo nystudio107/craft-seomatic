@@ -115,6 +115,11 @@ class MetaBundles extends Component
      */
     protected $globalMetaBundles = [];
 
+    /**
+     * @var array parent meta bundles for elements
+     */
+    protected $elementContentMetaBundles = [];
+
     // Public Methods
     // =========================================================================
 
@@ -603,6 +608,24 @@ class MetaBundles extends Component
         }
 
         return $metaBundles;
+    }
+
+    /**
+     * Get the parent content meta bundle for a given element.
+     *
+     * @param Element $element
+     * @return mixed|MetaBundle|null
+     */
+    public function getContentMetaBundleForElement(Element $element)
+    {
+        $source = $this->getMetaSourceFromElement($element);
+        $key = implode(".", $source) . '.' . $element->siteId;
+
+        if (empty($this->elementContentMetaBundles[$key])) {
+            $this->elementContentMetaBundles[$key] = $this->getMetaBundleBySourceId($source[1], $source[0], $element->siteId, $source[4]);
+        }
+
+        return $this->elementContentMetaBundles[$key];
     }
 
     /**
