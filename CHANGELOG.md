@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.4.5 - UNRELEASED
+## 3.4.5 - 2021.08.29
 ### Changed
 * Further optimized the CP requests by eliminating redundant calls to `loadMetaContainers()` and also only calling `addDynamicMetaToContainers()` on headless requests
 * Added more fine-grained profiling to the `DynamicHelper` class
