@@ -87,6 +87,7 @@
                         {% endfor %}
 
                         {% if scriptData.templatePath is defined and scriptData.templatePath | length %}
+                            <div id="monaco-editor" style="height: 100%"></div>
                             {{ forms.textAreaField({
                                 label: "Script Template"|t("seomatic"),
                                 instructions: "The script that will render on the page. Note that this script will not render in `local` development or `staging` environments."|t("seomatic"),

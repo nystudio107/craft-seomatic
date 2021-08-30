@@ -16,6 +16,7 @@ module.exports = [
         'babel-loader',
         'image-loader',
         'font-loader',
+        'monaco-editor',
         'postcss-loader',
         'typescript-loader',
         'vue-loader',
