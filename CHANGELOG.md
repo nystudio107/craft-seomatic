@@ -3,6 +3,7 @@
 ## Unreleased
 ### Fixed
 * Fix a bug where SEO image settings could be inherited incorrectly.
+* Fix a bug where the same ID would be re-used for multiple element select fields. ([#965](https://github.com/nystudio107/craft-seomatic/issues/965))
 
 ## 3.4.4 - 2021.08.26
 ### Fixed
