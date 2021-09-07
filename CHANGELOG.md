@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.7 - UNRELEASED
+### Fixed
+* Fixed an issue where dynamic meta information wasn't injected during Craft Previews of pages ([#954](https://github.com/nystudio107/craft-seomatic/issues/954))
+
 ## 3.4.6 - 2021.08.30
 ### Fixed
 * Fix a bug where the same ID would be re-used for multiple element select fields. ([#965](https://github.com/nystudio107/craft-seomatic/issues/965))
