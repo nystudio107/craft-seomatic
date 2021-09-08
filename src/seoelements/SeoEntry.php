@@ -83,7 +83,7 @@ class SeoEntry implements SeoElementInterface
      */
     public static function getElementRefHandle(): string
     {
-        return Entry::refHandle();
+        return Entry::refHandle() ?? 'entry';
     }
 
     /**
@@ -164,7 +164,7 @@ class SeoEntry implements SeoElementInterface
                 $html = '';
                 Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
                 /** @var  $entry Entry */
-                $entry = $context['entry'];
+                $entry = $context[self::getElementRefHandle()] ?? null;
                 if ($entry !== null && $entry->uri !== null) {
                     Seomatic::$plugin->metaContainers->previewMetaContainers($entry->uri, $entry->siteId, true);
                     // Render our preview sidebar template
