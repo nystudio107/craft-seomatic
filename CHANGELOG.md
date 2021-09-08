@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.4.7 - UNRELEASED
+## 3.4.7 - 2021.09.08
 ### Fixed
 * Fixed an issue where dynamic meta information wasn't injected during Craft Previews of pages ([#954](https://github.com/nystudio107/craft-seomatic/issues/954))
 * Fixed an issue where the SEO column would all display the same entry due to a caching issue ([#970](https://github.com/nystudio107/craft-seomatic/issues/970))
