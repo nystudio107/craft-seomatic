@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.8 - UNRELEASED
+### Fixed
+* Fixed an issue where an empty Category (or other element type) could throw an exception when creating the first category item ([#973](https://github.com/nystudio107/craft-seomatic/issues/973))
+
 ## 3.4.7 - 2021.09.08
 ### Fixed
 * Fixed an issue where dynamic meta information wasn't injected during Craft Previews of pages ([#954](https://github.com/nystudio107/craft-seomatic/issues/954))
