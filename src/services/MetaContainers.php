@@ -225,7 +225,7 @@ class MetaContainers extends Component
                 $this->loadContentMetaContainers();
                 $this->loadFieldMetaContainers();
                 // We only need the dynamic data for headless requests
-                if (Seomatic::$headlessRequest) {
+                if (Seomatic::$headlessRequest || Seomatic::$plugin->helper::isPreview()) {
                     DynamicMetaHelper::addDynamicMetaToContainers($uri, $siteId);
                 }
             } else {
