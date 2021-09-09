@@ -17,7 +17,7 @@
 // JavaScript
 var ace = require('brace');
 require('brace/mode/twig');
-require('brace/theme/github');
+require('brace/theme/tomorrow_night');
 
 $(function () {
     // Hook up ACE editor to all textareas with data-editor attribute
@@ -34,7 +34,7 @@ $(function () {
         editor.renderer.setShowGutter(textarea.data('gutter'));
         editor.getSession().setValue(textarea.val());
         editor.getSession().setMode("ace/mode/twig");
-        editor.setTheme("ace/theme/github");
+        editor.setTheme("ace/theme/tomorrow_night");
         editor.setFontSize(14);
         editor.setShowPrintMargin(false);
         editor.setDisplayIndentGuides(true);

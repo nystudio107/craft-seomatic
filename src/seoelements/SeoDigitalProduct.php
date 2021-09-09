@@ -167,7 +167,7 @@ class SeoDigitalProduct implements SeoElementInterface
                     $html = '';
                     Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
                     /** @var  $product Product */
-                    $product = $context['product'];
+                    $product = $context[self::getElementRefHandle()] ?? null;
                     if ($product !== null && $product->uri !== null) {
                         Seomatic::$plugin->metaContainers->previewMetaContainers($product->uri, $product->siteId, true);
                         // Render our preview sidebar template
