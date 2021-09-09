@@ -149,7 +149,7 @@
         {% namespace "metaBundleSettings" %}
             <div class="heading seomatic-imageSourceFromAsset">
                 {{ forms.elementSelect({
-                    id: "seoImageIds-" ~ metaBundleSettings.getHash(),
+                    id: "seoImageIds-" ~ random(),
                     name: "seoImageIds",
                     viewMode: "large",
                     elements: seoImageElement,

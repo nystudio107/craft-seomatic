@@ -384,6 +384,8 @@ class SeoSettings extends Field implements PreviewableFieldInterface
     public function getTableAttributeHtml($value, ElementInterface $element): string
     {
         $html = '';
+        // Reset this each time to avoid caching issues
+        Seomatic::$previewingMetaContainers = false;
         /** @var Element $element */
         if ($element !== null && $element->uri !== null) {
             $siteId = $element->siteId;

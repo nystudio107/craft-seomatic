@@ -150,7 +150,7 @@
         {% namespace "metaBundleSettings" %}
             <div class="heading seomatic-imageSourceFromAsset">
                 {{ forms.elementSelect({
-                    id: "twitterImageIds" ~ metaBundleSettings.getHash(),
+                    id: "twitterImageIds" ~ random(),
                     name: "twitterImageIds",
                     viewMode: "large",
                     elements: twitterImageElement,

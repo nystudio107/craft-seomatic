@@ -80,7 +80,7 @@ class SeoCategory implements SeoElementInterface
      */
     public static function getElementRefHandle(): string
     {
-        return Category::refHandle();
+        return Category::refHandle() ?? 'category';
     }
 
     /**
@@ -161,7 +161,7 @@ class SeoCategory implements SeoElementInterface
                 $html = '';
                 Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
                 /** @var  $category Category */
-                $category = $context['category'];
+                $category = $context[self::getElementRefHandle()] ?? null;
                 if ($category !== null && $category->uri !== null) {
                     Seomatic::$plugin->metaContainers->previewMetaContainers($category->uri, $category->siteId, true);
                     // Render our preview sidebar template

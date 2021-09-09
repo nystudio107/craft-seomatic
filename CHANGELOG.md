@@ -1,6 +1,19 @@
 # SEOmatic Changelog
 
-## 3.4.5 - UNRELEASED
+## 3.4.8 - UNRELEASED
+### Fixed
+* Fixed an issue where an empty Category (or other element type) could throw an exception when creating the first category item ([#973](https://github.com/nystudio107/craft-seomatic/issues/973))
+
+## 3.4.7 - 2021.09.08
+### Fixed
+* Fixed an issue where dynamic meta information wasn't injected during Craft Previews of pages ([#954](https://github.com/nystudio107/craft-seomatic/issues/954))
+* Fixed an issue where the SEO column would all display the same entry due to a caching issue ([#970](https://github.com/nystudio107/craft-seomatic/issues/970))
+
+## 3.4.6 - 2021.08.30
+### Fixed
+* Fix a bug where the same ID would be re-used for multiple element select fields. ([#965](https://github.com/nystudio107/craft-seomatic/issues/965))
+
+## 3.4.5 - 2021.08.29
 ### Changed
 * Further optimized the CP requests by eliminating redundant calls to `loadMetaContainers()` and also only calling `addDynamicMetaToContainers()` on headless requests
 * Added more fine-grained profiling to the `DynamicHelper` class
