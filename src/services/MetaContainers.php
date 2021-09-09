@@ -842,7 +842,7 @@ class MetaContainers extends Component
                 $this->metaContainers[$key] = clone $metaContainer;
             }
         }
-        Craft::beginProfile('MetaContainers::loadGlobalMetaContainers', __METHOD__);
+        Craft::endProfile('MetaContainers::loadGlobalMetaContainers', __METHOD__);
     }
 
     // Protected Methods
@@ -858,7 +858,7 @@ class MetaContainers extends Component
         if ($metaBundle) {
             $this->addMetaBundleToContainers($metaBundle);
         }
-        Craft::beginProfile('MetaContainers::loadContentMetaContainers', __METHOD__);
+        Craft::endProfile('MetaContainers::loadContentMetaContainers', __METHOD__);
     }
 
     /**
@@ -916,7 +916,7 @@ class MetaContainers extends Component
                 }
             }
         }
-        Craft::beginProfile('MetaContainers::loadFieldMetaContainers', __METHOD__);
+        Craft::endProfile('MetaContainers::loadFieldMetaContainers', __METHOD__);
     }
 
     /**
