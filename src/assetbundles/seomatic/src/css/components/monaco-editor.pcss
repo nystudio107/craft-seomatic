@@ -2,3 +2,12 @@
 .monaco-mouse-cursor-text:focus-visible {
     box-shadow: none!important;
 }
+
+@font-face {
+    font-family: "codicon-override";
+    src: url(./xxxx/codicon.ttf) format("truetype");
+}
+
+.codicon[class*='codicon-'] {
+    font-family: "codicon-override"!important;
+}
