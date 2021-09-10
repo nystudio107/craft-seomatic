@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\services;
 
+use craft\commerce\Plugin as CommercePlugin;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Json;
 use nystudio107\seomatic\helpers\Localization as LocalizationHelper;
@@ -202,7 +203,7 @@ class MetaContainers extends Component
                 }
             }
             // Get our cache key
-            $cacheKey = $uri.$siteId.$paginationPage.$requestPath;
+            $cacheKey = $uri.$siteId.$paginationPage.$requestPath.$this->getAllowedUrlParams();
             // For requests with a status code of >= 400, use one cache key
             if (!$request->isConsoleRequest) {
                 $response = Craft::$app->getResponse();
@@ -847,6 +848,31 @@ class MetaContainers extends Component
 
     // Protected Methods
     // =========================================================================
+
+    /**
+     * Return as key/value pairs any allowed parameters in the request
+     *
+     * @return string
+     */
+    protected function getAllowedUrlParams(): string
+    {
+        $result = '';
+        $allowedParams = Seomatic::$settings->allowedUrlParams;
+        $commerce = CommercePlugin::getInstance();
+        if ($commerce !== null) {
+            $allowedParams[] = 'variant';
+        }
+        // Iterate through the allowed parameters, adding the key/value pair to the $result string as found
+        $request = Craft::$app->getRequest();
+        foreach($allowedParams as $allowedParam) {
+            $value = $request->getParam($allowedParam);
+            if ($value !== null) {
+                $result .= "{$allowedParam}={$value}";
+            }
+        }
+
+        return $result;
+    }
 
     /**
      * Load the meta containers specific to the matched meta bundle
