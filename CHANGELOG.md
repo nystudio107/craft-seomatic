@@ -1,5 +1,10 @@
 # SEOmatic Changelog
 
+## 3.4.9 - UNRELEASED
+### Added
+* Added the ability to automatically include Commerce's `variant=XXX` URL parameter in the metadata cache key, allowing for unique values per variant ([#971](https://github.com/nystudio107/craft-seomatic/issues/971))
+* Added a `allowedUrlParams` config setting that allows URL parameters to be manually whitelisted for inclusiion in the metadata cache key ([#971](https://github.com/nystudio107/craft-seomatic/issues/971))
+
 ## 3.4.8 - 2021.09.09
 ### Added
 * Added a nicer looking theme for the Twig & JavaScript code editors, and a more pleasant font selection
