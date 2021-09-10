@@ -148,4 +148,8 @@ return [
     // SeoElementInterface[] The default SeoElement type classes
     'defaultSeoElementTypes' => [
     ],
+
+    // string[] URL params that are allowed to be considered part of the unique URL used for the metadata cache
+    'allowedUrlParams' => [
+    ]
 ];
