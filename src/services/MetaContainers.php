@@ -864,10 +864,12 @@ class MetaContainers extends Component
         }
         // Iterate through the allowed parameters, adding the key/value pair to the $result string as found
         $request = Craft::$app->getRequest();
-        foreach($allowedParams as $allowedParam) {
-            $value = $request->getParam($allowedParam);
-            if ($value !== null) {
-                $result .= "{$allowedParam}={$value}";
+        if (!$request->isConsoleRequest) {
+            foreach ($allowedParams as $allowedParam) {
+                $value = $request->getParam($allowedParam);
+                if ($value !== null) {
+                    $result .= "{$allowedParam}={$value}";
+                }
             }
         }
 
