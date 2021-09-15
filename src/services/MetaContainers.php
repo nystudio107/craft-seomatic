@@ -15,6 +15,7 @@ use craft\commerce\Plugin as CommercePlugin;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Json;
 use nystudio107\seomatic\helpers\Localization as LocalizationHelper;
+use nystudio107\seomatic\models\FrontendTemplateContainer;
 use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
@@ -550,6 +551,21 @@ class MetaContainers extends Component
     public function renderContainersByType(string $type): string
     {
         $html = '';
+        // Special-case for requests for the FrontendTemplateContainer "container"
+        if ($type === FrontendTemplateContainer::CONTAINER_TYPE) {
+            $renderedTemplates = [];
+            $frontendTemplateContainers = Seomatic::$plugin->frontendTemplates->frontendTemplateContainer['data'];
+            foreach ($frontendTemplateContainers as $name => $frontendTemplateContainer) {
+                if ($frontendTemplateContainer->include) {
+                    $result = $frontendTemplateContainer->render([
+                    ]);
+                    $renderedTemplates[] = [$name => $result];
+                }
+            }
+            $html .= Json::encode($renderedTemplates);
+
+            return $html;
+        }
         /** @var  $metaContainer MetaContainer */
         foreach ($this->metaContainers as $metaContainer) {
             if ($metaContainer::CONTAINER_TYPE === $type && $metaContainer->include) {
@@ -599,6 +615,20 @@ class MetaContainers extends Component
     public function renderContainersArrayByType(string $type): array
     {
         $htmlArray = [];
+        // Special-case for requests for the FrontendTemplateContainer "container"
+        if ($type === FrontendTemplateContainer::CONTAINER_TYPE) {
+            $renderedTemplates = [];
+            $frontendTemplateContainers = Seomatic::$plugin->frontendTemplates->frontendTemplateContainer['data'];
+            foreach ($frontendTemplateContainers as $name => $frontendTemplateContainer) {
+                if ($frontendTemplateContainer->include) {
+                    $result = $frontendTemplateContainer->render([
+                    ]);
+                    $renderedTemplates[] = [$name => $result];
+                }
+            }
+
+            return $renderedTemplates;
+        }
         /** @var  $metaContainer MetaContainer */
         foreach ($this->metaContainers as $metaContainer) {
             if ($metaContainer::CONTAINER_TYPE === $type && $metaContainer->include) {
