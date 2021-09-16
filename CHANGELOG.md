@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.10 - 2021.09.15
+### Fixed
+* Fixed a regression that would throw an exception if Commerce was not installed
+
 ## 3.4.9 - 2021.09.15
 ### Added
 * Added the ability to automatically include Commerce's `variant=XXX` URL parameter in the metadata cache key, allowing for unique values per variant ([#971](https://github.com/nystudio107/craft-seomatic/issues/971))

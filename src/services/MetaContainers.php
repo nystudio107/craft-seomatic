@@ -11,20 +11,18 @@
 
 namespace nystudio107\seomatic\services;
 
-use craft\commerce\Plugin as CommercePlugin;
-use nystudio107\seomatic\helpers\ArrayHelper;
-use nystudio107\seomatic\helpers\Json;
-use nystudio107\seomatic\helpers\Localization as LocalizationHelper;
-use nystudio107\seomatic\models\FrontendTemplateContainer;
-use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\events\InvalidateContainerCachesEvent;
+use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\helpers\Json;
+use nystudio107\seomatic\helpers\Localization as LocalizationHelper;
 use nystudio107\seomatic\helpers\DynamicMeta as DynamicMetaHelper;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\helpers\UrlHelper;
+use nystudio107\seomatic\models\FrontendTemplateContainer;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaGlobalVars;
 use nystudio107\seomatic\models\MetaSiteVars;
@@ -35,6 +33,8 @@ use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\MetaScript;
 use nystudio107\seomatic\models\MetaTagContainer;
 use nystudio107\seomatic\models\MetaTitleContainer;
+use nystudio107\seomatic\models\MetaJsonLd;
+use nystudio107\seomatic\seoelements\SeoProduct;
 use nystudio107\seomatic\services\JsonLd as JsonLdService;
 use nystudio107\seomatic\variables\SeomaticVariable;
 
@@ -43,6 +43,8 @@ use craft\base\Component;
 use craft\base\Element;
 use craft\console\Application as ConsoleApplication;
 use craft\elements\GlobalSet;
+
+use craft\commerce\Plugin as CommercePlugin;
 
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
@@ -888,9 +890,11 @@ class MetaContainers extends Component
     {
         $result = '';
         $allowedParams = Seomatic::$settings->allowedUrlParams;
-        $commerce = CommercePlugin::getInstance();
-        if ($commerce !== null) {
-            $allowedParams[] = 'variant';
+        if (Craft::$app->getPlugins()->getPlugin(SeoProduct::REQUIRED_PLUGIN_HANDLE)) {
+            $commerce = CommercePlugin::getInstance();
+            if ($commerce !== null) {
+                $allowedParams[] = 'variant';
+            }
         }
         // Iterate through the allowed parameters, adding the key/value pair to the $result string as found
         $request = Craft::$app->getRequest();
