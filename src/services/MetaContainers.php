@@ -11,9 +11,11 @@
 
 namespace nystudio107\seomatic\services;
 
+use craft\commerce\Plugin as CommercePlugin;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Json;
 use nystudio107\seomatic\helpers\Localization as LocalizationHelper;
+use nystudio107\seomatic\models\FrontendTemplateContainer;
 use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
@@ -202,7 +204,7 @@ class MetaContainers extends Component
                 }
             }
             // Get our cache key
-            $cacheKey = $uri.$siteId.$paginationPage.$requestPath;
+            $cacheKey = $uri.$siteId.$paginationPage.$requestPath.$this->getAllowedUrlParams();
             // For requests with a status code of >= 400, use one cache key
             if (!$request->isConsoleRequest) {
                 $response = Craft::$app->getResponse();
@@ -549,6 +551,21 @@ class MetaContainers extends Component
     public function renderContainersByType(string $type): string
     {
         $html = '';
+        // Special-case for requests for the FrontendTemplateContainer "container"
+        if ($type === FrontendTemplateContainer::CONTAINER_TYPE) {
+            $renderedTemplates = [];
+            $frontendTemplateContainers = Seomatic::$plugin->frontendTemplates->frontendTemplateContainer['data'];
+            foreach ($frontendTemplateContainers as $name => $frontendTemplateContainer) {
+                if ($frontendTemplateContainer->include) {
+                    $result = $frontendTemplateContainer->render([
+                    ]);
+                    $renderedTemplates[] = [$name => $result];
+                }
+            }
+            $html .= Json::encode($renderedTemplates);
+
+            return $html;
+        }
         /** @var  $metaContainer MetaContainer */
         foreach ($this->metaContainers as $metaContainer) {
             if ($metaContainer::CONTAINER_TYPE === $type && $metaContainer->include) {
@@ -598,6 +615,20 @@ class MetaContainers extends Component
     public function renderContainersArrayByType(string $type): array
     {
         $htmlArray = [];
+        // Special-case for requests for the FrontendTemplateContainer "container"
+        if ($type === FrontendTemplateContainer::CONTAINER_TYPE) {
+            $renderedTemplates = [];
+            $frontendTemplateContainers = Seomatic::$plugin->frontendTemplates->frontendTemplateContainer['data'];
+            foreach ($frontendTemplateContainers as $name => $frontendTemplateContainer) {
+                if ($frontendTemplateContainer->include) {
+                    $result = $frontendTemplateContainer->render([
+                    ]);
+                    $renderedTemplates[] = [$name => $result];
+                }
+            }
+
+            return $renderedTemplates;
+        }
         /** @var  $metaContainer MetaContainer */
         foreach ($this->metaContainers as $metaContainer) {
             if ($metaContainer::CONTAINER_TYPE === $type && $metaContainer->include) {
@@ -847,6 +878,33 @@ class MetaContainers extends Component
 
     // Protected Methods
     // =========================================================================
+
+    /**
+     * Return as key/value pairs any allowed parameters in the request
+     *
+     * @return string
+     */
+    protected function getAllowedUrlParams(): string
+    {
+        $result = '';
+        $allowedParams = Seomatic::$settings->allowedUrlParams;
+        $commerce = CommercePlugin::getInstance();
+        if ($commerce !== null) {
+            $allowedParams[] = 'variant';
+        }
+        // Iterate through the allowed parameters, adding the key/value pair to the $result string as found
+        $request = Craft::$app->getRequest();
+        if (!$request->isConsoleRequest) {
+            foreach ($allowedParams as $allowedParam) {
+                $value = $request->getParam($allowedParam);
+                if ($value !== null) {
+                    $result .= "{$allowedParam}={$value}";
+                }
+            }
+        }
+
+        return $result;
+    }
 
     /**
      * Load the meta containers specific to the matched meta bundle

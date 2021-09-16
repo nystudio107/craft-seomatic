@@ -53,13 +53,13 @@ class FrontendTemplates extends Component
         'uid',
     ];
 
-    // Protected Properties
+    // Public Properties
     // =========================================================================
 
     /**
      * @var FrontendTemplateContainer
      */
-    protected $frontendTemplateContainer;
+    public $frontendTemplateContainer;
 
     // Public Methods
     // =========================================================================
@@ -101,6 +101,10 @@ class FrontendTemplates extends Component
         $request = Craft::$app->getRequest();
         $fullPath = $request->getFullPath();
         if ((strpos($fullPath, '/') === false) && (strpos($fullPath, '.') !== false)) {
+            $shouldRegister = true;
+        }
+        // If this is a headless request, register them
+        if (Seomatic::$headlessRequest) {
             $shouldRegister = true;
         }
         // Register the frontend template only if we pass the various tests

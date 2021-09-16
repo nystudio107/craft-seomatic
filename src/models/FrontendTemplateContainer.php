@@ -20,6 +20,11 @@ use nystudio107\seomatic\base\Container as SeomaticContainer;
  */
 class FrontendTemplateContainer extends SeomaticContainer
 {
+    // Constants
+    // =========================================================================
+
+    const CONTAINER_TYPE = 'FrontendTemplateContainer';
+
     // Public Properties
     // =========================================================================
 

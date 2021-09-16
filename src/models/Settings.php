@@ -222,6 +222,12 @@ class Settings extends VarsModel
     public $defaultSeoElementTypes = [
     ];
 
+    /**
+     * @var string[] URL params that are allowed to be considered part of the unique URL used for the metadata cache
+     */
+    public $allowedUrlParams = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -283,6 +289,7 @@ class Settings extends VarsModel
                     'sidebarDisplayPreviewTypes',
                     'defaultSeoElementTypes',
                     'cspScriptSrcPolicies',
+                    'allowedUrlParams',
                 ],
                 ArrayValidator::class,
             ],
