@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.11 - UNRELEASED
+### Fixed
+* Fixed an issue where a tracking script that had no templateString or templatePath could not be saved, showing "Couldn't save tracking settings due to a Twig error." ([#981](https://github.com/nystudio107/craft-seomatic/issues/981))
+
 ## 3.4.10 - 2021.09.15
 ### Fixed
 * Fixed a regression that would throw an exception if Commerce was not installed
