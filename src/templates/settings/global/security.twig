@@ -1,0 +1,49 @@
+{% requirePermission "seomatic:global-meta:ads" %}
+
+{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
+
+{% extends "seomatic/_layouts/globalSettings.twig" %}
+
+{% import "_includes/forms" as forms %}
+
+{% block header %}
+    {{ block('pageTitle') }}
+    {{ block('contextMenu') }}
+    <div class="flex-grow"></div>
+    <div class="flex-grow"></div>
+    {{ block('copyFromMenu') }}
+    {{ block('actionButton') }}
+{% endblock %}
+
+{% block foot %}
+    {{ parent() }}
+    {{ seomatic.manifest.registerJsModules([
+        'twig-editor.js',
+    ]) }}
+{% endblock %}
+
+{% block contextMenu %}
+    {% include "seomatic/settings/_includes/sites-menu.twig" %}
+{% endblock %}
+
+{% block copyFromMenu %}
+    {% include "seomatic/settings/_includes/copy-settings-menu.twig" %}
+{% endblock %}
+
+{% block content %}
+
+    <input type="hidden" name="action" value="seomatic/settings/save-global">
+    <input type="hidden" name="siteId" value="{{ currentSiteId }}">
+    {{ redirectInput("seomatic/global/#{currentSubSection}/#{currentSiteHandle}") }}
+
+    {% if currentUser.can("seomatic:global-meta:ads") %}
+        <div id="tab-content-ads">
+            <h2>{{ subSectionTitle ~ " Settings"|t("seomatic") }}</h2>
+            {% include "seomatic/settings/_includes/tab-ads.twig" with {"pageContext": "global"} %}
+        </div>
+    {% endif %}
+
+    {% include "seomatic/_includes/footer-message.twig" with {
+        message: "Any text fields can include double-bracket tags that output Seomatic properties, such as `{{ seomatic.meta.seoTitle }}`."
+    } %}
+{% endblock %}

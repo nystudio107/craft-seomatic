@@ -49,5 +49,13 @@ return [
             'action'          => 'ads',
             'templateString'  => '',
         ],
+        FrontendTemplates::SECURITY_TXT_HANDLE => [
+            'handle'          => FrontendTemplates::SECURITY_TXT_HANDLE,
+            'path'            => 'security.txt',
+            'template'        => '_frontend/pages/security.twig',
+            'controller'      => 'frontend-template',
+            'action'          => 'security',
+            'templateString'  => '',
+        ],
     ],
 ];
