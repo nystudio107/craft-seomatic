@@ -84,6 +84,16 @@ Feel free to edit the default `ads.txt` Template to your heart’s content.
 
 The **View ads.txt** button lets you view your rendered `ads.txt`.
 
+### Security
+
+![Screenshot](./resources/screenshots/seomatic-global-security.png)
+
+The [security.txt](https://securitytxt.org/) defines a standard to help organizations define the process for security researchers to disclose security vulnerabilities securely
+
+Feel free to edit the default `security.txt` Template to your heart’s content.
+
+The **View security.txt** button lets you view your rendered `security.txt`.
+
 ### Global SEO Control Panel Fields
 
 The fields in the Control Panel Global SEO settings are parsed as Twig object templates, so in addition to plain old text, you can also put single and double bracket Twig expressions.
