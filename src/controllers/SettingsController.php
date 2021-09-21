@@ -296,6 +296,7 @@ class SettingsController extends Controller
                     $globalMetaBundle->frontendTemplatesContainer->data[FrontendTemplates::ADS_TXT_HANDLE];
             }
             $variables['adsTemplate'] = $templateContainers[FrontendTemplates::ADS_TXT_HANDLE];
+            $variables['securityTemplate'] = $templateContainers[FrontendTemplates::SECURITY_TXT_HANDLE];
             // Image selectors
             $bundleSettings = $metaBundle->metaBundleSettings;
             $variables['elementType'] = Asset::class;
