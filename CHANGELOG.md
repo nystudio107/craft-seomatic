@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.4.11 - UNRELEASED
+### Added
+* Added support for [security.txt](https://securitytxt.org/) in SEOmatic → Global settings
+
 ### Fixed
 * Fixed an issue where a tracking script that had no templateString or templatePath could not be saved, showing "Couldn't save tracking settings due to a Twig error." ([#981](https://github.com/nystudio107/craft-seomatic/issues/981))
 
