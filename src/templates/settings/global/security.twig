@@ -1,4 +1,4 @@
-{% requirePermission "seomatic:global-meta:ads" %}
+{% requirePermission "seomatic:global-meta:security" %}
 
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 
@@ -36,10 +36,10 @@
     <input type="hidden" name="siteId" value="{{ currentSiteId }}">
     {{ redirectInput("seomatic/global/#{currentSubSection}/#{currentSiteHandle}") }}
 
-    {% if currentUser.can("seomatic:global-meta:ads") %}
-        <div id="tab-content-ads">
+    {% if currentUser.can("seomatic:global-meta:security") %}
+        <div id="tab-content-security">
             <h2>{{ subSectionTitle ~ " Settings"|t("seomatic") }}</h2>
-            {% include "seomatic/settings/_includes/tab-ads.twig" with {"pageContext": "global"} %}
+            {% include "seomatic/settings/_includes/tab-security.twig" with {"pageContext": "global"} %}
         </div>
     {% endif %}
 

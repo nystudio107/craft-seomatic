@@ -1,12 +1,12 @@
 # security.txt file for {{ siteUrl }} - more info: https://securitytxt.org/
-# Our security address
-Contact:
+# Our security email address
+Contact: {% set adminUser = craft.app.getUsers().userById(1) %}{{ adminUser.email ?? 'user@example.com' }}
 
-#Our OpenPGP key:
-Encryption: {{ siteUrl }}/pgp-key.txt
+# Our OpenPGP key:
+Encryption: {{ siteUrl }}pgp-key.txt
 
 # Our security policy:
-Policy: {{ siteUrl }}/security-policy
+Policy: {{ siteUrl }}security-policy
 
 # Our security acknowledgements page:
-Acknowledgements: {{ siteUrl }}/hall-of-fame
+Acknowledgements: {{ siteUrl }}hall-of-fame
