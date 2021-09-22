@@ -56,6 +56,11 @@ class Settings extends VarsModel
     public $submitSitemaps = true;
 
     /**
+     * @var bool Should items where the entry URL doesn't match the canonical URL be excluded?
+     */
+    public $excludeNonCanonicalUrls = false;
+
+    /**
      * @var bool Should the homepage be included in the generated Breadcrumbs JSON-LD?
      */
     public $includeHomepageInBreadcrumbs = true;
@@ -245,6 +250,7 @@ class Settings extends VarsModel
                     'sitemapsEnabled',
                     'regenerateSitemapsAutomatically',
                     'submitSitemaps',
+                    'excludeNonCanonicalUrls',
                     'includeHomepageInBreadcrumbs',
                     'headersEnabled',
                     'generatorEnabled',

@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\jobs;
 
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\fields\SeoSettings;
+use nystudio107\seomatic\helpers\MetaValue;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\ArrayHelper;
@@ -192,16 +193,20 @@ class GenerateSitemap extends BaseJob
                             $url = '';
                         }
                         $url = UrlHelper::absoluteUrlWithProtocol($url);
-                        $path = $metaBundle->metaGlobalVars->parsedValue('canonicalUrl');
-                        try {
-                            $canonicalUrl = UrlHelper::siteUrl($path, null, null, $metaBundle->sourceSiteId);
-                        } catch (Exception $e) {
-                            $canonicalUrl = '';
-                        }
-                        $canonicalUrl = UrlHelper::absoluteUrlWithProtocol($canonicalUrl);
-                        if ($url !== $canonicalUrl) {
-                            Craft::info("Excluding URL: {$url} from the sitemap because it does not match the Canonical URL: {$canonicalUrl}");
-                            continue;
+                        if (Seomatic::$settings->excludeNonCanonicalUrls) {
+                            Seomatic::$matchedElement = $element;
+                            MetaValue::cache();
+                            $path = $metaBundle->metaGlobalVars->parsedValue('canonicalUrl');
+                            try {
+                                $canonicalUrl = UrlHelper::siteUrl($path, null, null, $metaBundle->sourceSiteId);
+                            } catch (Exception $e) {
+                                $canonicalUrl = '';
+                            }
+                            $canonicalUrl = UrlHelper::absoluteUrlWithProtocol($canonicalUrl);
+                            if ($url !== $canonicalUrl) {
+                                Craft::info("Excluding URL: {$url} from the sitemap because it does not match the Canonical URL: {$canonicalUrl} - " . $metaBundle->metaGlobalVars->canonicalUrl . " - " . $element->uri);
+                                continue;
+                            }
                         }
                         $dateUpdated = $element->dateUpdated ?? $element->dateCreated ?? new \DateTime;
                         $lines[] = '<url>';

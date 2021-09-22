@@ -11,6 +11,7 @@
     "appearance": {label: "Appearance"|t('seomatic'), url: "#appearance"},
     "titles": {label: "Titles"|t('seomatic'), url: "#titles"},
     "tags": {label: "Tags"|t('seomatic'), url: "#tags"},
+    "sitemaps": {label: "Sitemaps"|t('seomatic'), url: "#sitemaps"},
     "endpoints": {label: "Endpoints"|t('seomatic'), url: "#endpoints"},
     "advanced": {label: "Advanced"|t('seomatic'), url: "#advanced"},
 } %}
@@ -33,6 +34,9 @@
 
     {# -- Tag settings -- #}
     {% include "seomatic/settings/plugin/_includes/tags.twig" %}
+
+    {# -- Sitemap settings -- #}
+    {% include "seomatic/settings/plugin/_includes/sitemaps.twig" %}
 
     {# -- Endpoints settings -- #}
     {% include "seomatic/settings/plugin/_includes/endpoints.twig" %}
