@@ -185,12 +185,24 @@ class GenerateSitemap extends BaseJob
                     }
                     // Only add in a sitemap entry if it meets our criteria
                     if ($path !== null && $metaBundle->metaSitemapVars->sitemapUrls && $robotsEnabled) {
+                        // Get the url and canonicalUrl
                         try {
                             $url = UrlHelper::siteUrl($path, null, null, $metaBundle->sourceSiteId);
                         } catch (Exception $e) {
                             $url = '';
                         }
                         $url = UrlHelper::absoluteUrlWithProtocol($url);
+                        $path = $metaBundle->metaGlobalVars->parsedValue('canonicalUrl');
+                        try {
+                            $canonicalUrl = UrlHelper::siteUrl($path, null, null, $metaBundle->sourceSiteId);
+                        } catch (Exception $e) {
+                            $canonicalUrl = '';
+                        }
+                        $canonicalUrl = UrlHelper::absoluteUrlWithProtocol($canonicalUrl);
+                        if ($url !== $canonicalUrl) {
+                            Craft::info("Excluding URL: {$url} from the sitemap because it does not match the Canonical URL: {$canonicalUrl}");
+                            continue;
+                        }
                         $dateUpdated = $element->dateUpdated ?? $element->dateCreated ?? new \DateTime;
                         $lines[] = '<url>';
                         // Standard sitemap key/values
