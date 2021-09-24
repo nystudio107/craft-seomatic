@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.4.11 - UNRELEASED
+## 3.4.11 - 2021.09.24
 ### Added
 * Added support for [security.txt](https://securitytxt.org/) in SEOmatic → Global settings
 * Added an option to SEOmatic → Plugin Setting → Sitemaps to have items that have a different Canonical URL than the item URL excluded from the sitemap ([#983](https://github.com/nystudio107/craft-seomatic/issues/983))
