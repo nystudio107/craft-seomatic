@@ -9,6 +9,10 @@
 ### Fixed
 * Fixed an issue where a tracking script that had no templateString or templatePath could not be saved, showing "Couldn't save tracking settings due to a Twig error." ([#981](https://github.com/nystudio107/craft-seomatic/issues/981))
 * Fixed the default values for Entry meta bundles that were errantly changed to be empty
+* Fixed an issue with the SEO Settings field throwing an exception is no `$element` context was passed in
+
+### Security
+* Ensure that only files with the extensions listed in `allowedFileExtensions` General Config setting can be used with the SEO File Link controller
 
 ## 3.4.10 - 2021.09.15
 ### Fixed
