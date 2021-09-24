@@ -34,6 +34,7 @@ class FrontendTemplateController extends Controller
         'humans',
         'robots',
         'ads',
+        'security',
     ];
 
     // Public Methods
@@ -70,7 +71,7 @@ class FrontendTemplateController extends Controller
     }
 
     /**
-     * Returns the rendered humans.txt
+     * Returns the rendered ads.txt
      *
      * @return Response
      */
@@ -83,4 +84,20 @@ class FrontendTemplateController extends Controller
 
         return $this->asRaw($text);
     }
+
+    /**
+     * Returns the rendered security.txt
+     *
+     * @return Response
+     */
+    public function actionSecurity(): Response
+    {
+        $text = Seomatic::$plugin->frontendTemplates->renderTemplate(FrontendTemplates::SECURITY_TXT_HANDLE);
+
+        $headers = Craft::$app->response->headers;
+        $headers->add('Content-Type', 'text/plain; charset=utf-8');
+
+        return $this->asRaw($text);
+    }
+
 }

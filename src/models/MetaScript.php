@@ -176,8 +176,6 @@ class MetaScript extends NonceItem
                 [
                     'name',
                     'description',
-                    'templatePath',
-                    'templateString',
                     'position',
                 ],
                 'required',

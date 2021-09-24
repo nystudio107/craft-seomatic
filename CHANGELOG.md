@@ -1,5 +1,23 @@
 # SEOmatic Changelog
 
+## 3.4.11 - 2021.09.24
+### Added
+* Added support for [security.txt](https://securitytxt.org/) in SEOmatic → Global settings
+* Added an option to SEOmatic → Plugin Setting → Sitemaps to have items that have a different Canonical URL than the item URL excluded from the sitemap ([#983](https://github.com/nystudio107/craft-seomatic/issues/983))
+* Moved all the sitemap Plugin Settings to their own tab in SEOmatic → Plugin Setting → Sitemaps
+
+### Changed
+* Ensure that paginated self-referencing `hreflang` urls match the paginated canonical URL ([#984](https://github.com/nystudio107/craft-seomatic/issues/984))
+
+### Fixed
+* Fixed an issue where a tracking script that had no templateString or templatePath could not be saved, showing "Couldn't save tracking settings due to a Twig error." ([#981](https://github.com/nystudio107/craft-seomatic/issues/981))
+* Fixed the default values for Entry meta bundles that were errantly changed to be empty
+* Fixed an issue with the SEO Settings field throwing an exception is no `$element` context was passed in
+
+### Security
+* Ensure that only files with the extensions listed in `allowedFileExtensions` General Config setting can be used with the SEO File Link controller
+* Sanitize the canonical URL after the absolute URL has been returned, to mitigate poisoned `X-Forwarded-Host` headers
+
 ## 3.4.10 - 2021.09.15
 ### Fixed
 * Fixed a regression that would throw an exception if Commerce was not installed

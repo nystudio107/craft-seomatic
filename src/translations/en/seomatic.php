@@ -493,5 +493,13 @@ return [
     'The [SEO Settings]({url}) fields in SEOmatic now feature **Override** light switches next to each setting, to improve the content authoring experience.' => 'The [SEO Settings]({url}) fields in SEOmatic now feature **Override** light switches next to each setting, to improve the content authoring experience.',
     'Body text with [link]({url}).' => 'Body text with [link]({url}).',
     'Include Homepage in Breadcrumbs' => 'Include Homepage in Breadcrumbs',
-    'Should the homepage be included in the generated Breadcrumbs JSON-LD?' => 'Should the homepage be included in the generated Breadcrumbs JSON-LD?'
+    'Should the homepage be included in the generated Breadcrumbs JSON-LD?' => 'Should the homepage be included in the generated Breadcrumbs JSON-LD?',
+    'Exclude Non-Canonical URLs' => 'Exclude Non-Canonical URLs',
+    '[security.txt](https://securitytxt.org/) defines a standard to help organizations define the process for security researchers to disclose security vulnerabilities securely' => '[security.txt](https://securitytxt.org/) defines a standard to help organizations define the process for security researchers to disclose security vulnerabilities securely',
+    'Should items where the entry URL doesn\'t match the canonical URL be excluded?' => 'Should items where the entry URL doesn\'t match the canonical URL be excluded?',
+    'View security.txt' => 'View security.txt',
+    'Whether the `security.txt` template should be rendered' => 'Whether the `security.txt` template should be rendered',
+    'Security.txt Template' => 'Security.txt Template',
+    'Security.txt Enabled' => 'Security.txt Enabled',
+    'Security' => 'Security'
 ];
