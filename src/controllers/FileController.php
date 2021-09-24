@@ -96,7 +96,7 @@ class FileController extends Controller
             if (($ext = pathinfo($fileName, PATHINFO_EXTENSION)) !== '') {
                 $ext = strtolower($ext);
             }
-            if ($ext === '' || !in_array($ext, $allowedExtensions, true)) {
+            if ($ext === '' || $ext === 'svg' || !in_array($ext, $allowedExtensions, true)) {
                 throw new ServerErrorHttpException(Craft::t('seomatic', 'File format not allowed.'));
             }
             // Send the file as a stream, so it can exist anywhere
