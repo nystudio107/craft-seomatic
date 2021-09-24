@@ -16,6 +16,7 @@
 
 ### Security
 * Ensure that only files with the extensions listed in `allowedFileExtensions` General Config setting can be used with the SEO File Link controller
+* Sanitize the canonical URL after the absolute URL has been returned, to mitigate poisoned `X-Forwarded-Host` headers
 
 ## 3.4.10 - 2021.09.15
 ### Fixed
