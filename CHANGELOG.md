@@ -6,6 +6,9 @@
 * Added an option to SEOmatic → Plugin Setting → Sitemaps to have items that have a different Canonical URL than the item URL excluded from the sitemap ([#983](https://github.com/nystudio107/craft-seomatic/issues/983))
 * Moved all the sitemap Plugin Settings to their own tab in SEOmatic → Plugin Setting → Sitemaps
 
+### Changed
+* Ensure that paginated self-referencing `hreflang` urls match the paginated canonical URL ([#984](https://github.com/nystudio107/craft-seomatic/issues/984))
+
 ### Fixed
 * Fixed an issue where a tracking script that had no templateString or templatePath could not be saved, showing "Couldn't save tracking settings due to a Twig error." ([#981](https://github.com/nystudio107/craft-seomatic/issues/981))
 * Fixed the default values for Entry meta bundles that were errantly changed to be empty
