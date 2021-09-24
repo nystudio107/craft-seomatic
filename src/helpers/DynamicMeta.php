@@ -528,9 +528,9 @@ class DynamicMeta
     {
         Craft::beginProfile('DynamicMeta::addMetaLinkHrefLang', __METHOD__);
         $siteLocalizedUrls = self::getLocalizedUrls($uri, $siteId);
-        $primaryPaginationUrl = null;
+        $cuurentPaginationUrl = null;
         if (Seomatic::$plugin->metaContainers->paginationPage !== '1') {
-            $primaryPaginationUrl = Seomatic::$seomaticVariable->meta->canonicalUrl;
+            $cuurentPaginationUrl = Seomatic::$seomaticVariable->meta->canonicalUrl;
         }
         if (!empty($siteLocalizedUrls)) {
             // Add the rel=alternate tag
@@ -543,8 +543,8 @@ class DynamicMeta
             if (\count($siteLocalizedUrls) > 1) {
                 foreach ($siteLocalizedUrls as $siteLocalizedUrl) {
                     $url = $siteLocalizedUrl['url'];
-                    if ($siteLocalizedUrl['primary']) {
-                        $url = $primaryPaginationUrl ?? $siteLocalizedUrl['url'];
+                    if ($siteLocalizedUrl['current']) {
+                        $url = $cuurentPaginationUrl ?? $siteLocalizedUrl['url'];
                     }
                     $metaTag->hreflang[] = $siteLocalizedUrl['hreflangLanguage'];
                     $metaTag->href[] = $url;
@@ -761,6 +761,7 @@ class DynamicMeta
                     'hreflangLanguage' => $hreflangLanguage,
                     'url' => $url,
                     'primary' => $site->primary,
+                    'current' => $thisSite->id === $site->id,
                 ];
             }
         }
