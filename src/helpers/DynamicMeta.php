@@ -528,7 +528,10 @@ class DynamicMeta
     {
         Craft::beginProfile('DynamicMeta::addMetaLinkHrefLang', __METHOD__);
         $siteLocalizedUrls = self::getLocalizedUrls($uri, $siteId);
-
+        $primaryPaginationUrl = null;
+        if (Seomatic::$plugin->metaContainers->paginationPage !== '1') {
+            $primaryPaginationUrl = Seomatic::$seomaticVariable->meta->canonicalUrl;
+        }
         if (!empty($siteLocalizedUrls)) {
             // Add the rel=alternate tag
             $metaTag = Seomatic::$plugin->link->create([
@@ -539,8 +542,12 @@ class DynamicMeta
             // Add the alternate language link rel's
             if (\count($siteLocalizedUrls) > 1) {
                 foreach ($siteLocalizedUrls as $siteLocalizedUrl) {
+                    $url = $siteLocalizedUrl['url'];
+                    if ($siteLocalizedUrl['primary']) {
+                        $url = $primaryPaginationUrl ?? $siteLocalizedUrl['url'];
+                    }
                     $metaTag->hreflang[] = $siteLocalizedUrl['hreflangLanguage'];
-                    $metaTag->href[] = $siteLocalizedUrl['url'];
+                    $metaTag->href[] = $url;
                     // Add the x-default hreflang
                     if ($siteLocalizedUrl['primary'] && Seomatic::$settings->addXDefaultHrefLang) {
                         $metaTag->hreflang[] = 'x-default';
