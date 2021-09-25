@@ -1,5 +1,8 @@
 # SEOmatic Changelog
 
+## 3.4.12 - UNRELEASED
+### Changed
+
 ## 3.4.11 - 2021.09.24
 ### Added
 * Added support for [security.txt](https://securitytxt.org/) in SEOmatic → Global settings
