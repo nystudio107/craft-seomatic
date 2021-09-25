@@ -4,6 +4,9 @@
 ### Fixed
 * Fixed an issue where the preview in Content SEO would not display the correct information if "Summary from Field" was chosen ([#653](https://github.com/nystudio107/craft-seomatic/issues/653))
 
+### Security
+* Sanitize all rendered URLs in an effort to mitigate a potential attack vector on an [improperly configured](https://github.com/yiisoft/yii2/blob/master/docs/guide/security-best-practices.md#avoiding-host-header-attacks) site
+
 ## 3.4.11 - 2021.09.24
 ### Added
 * Added support for [security.txt](https://securitytxt.org/) in SEOmatic → Global settings
