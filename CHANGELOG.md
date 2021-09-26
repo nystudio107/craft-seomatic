@@ -3,6 +3,7 @@
 ## 3.4.13 - 2021.09.26
 ### Fixed
 * Fixed a regression that could cause sitemap generation via console command to throw an error ([#985](https://github.com/nystudio107/craft-seomatic/issues/985))
+* Fixed an exception that could be thrown on paginated pages that were not the first page
 
 ## 3.4.12 - 2021.09.26
 ### Fixed
