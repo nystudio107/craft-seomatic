@@ -84,7 +84,7 @@ class DynamicMeta
         $url = TextHelper::sanitizeUserInput($url);
 
         // If this is a >= 400 status code, set the canonical URL to nothing
-        if ($checkStatus && Craft::$app->getResponse()->statusCode >= 400) {
+        if ($checkStatus && !Craft::$app->getRequest()->getIsConsoleRequest() && Craft::$app->getResponse()->statusCode >= 400) {
             $url = '';
         }
 
