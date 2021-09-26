@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.4.12 - UNRELEASED
+## 3.4.12 - 2021.09.26
 ### Fixed
 * Fixed an issue where the preview in Content SEO would not display the correct information if "Summary from Field" was chosen ([#653](https://github.com/nystudio107/craft-seomatic/issues/653))
 
