@@ -56,7 +56,7 @@ class UrlHelper extends CraftUrlHelper
             return $url;
         }
 
-        return parent::siteUrl($path, $params, $scheme, $siteId);
+        return DynamicMeta::sanitizeUrl(parent::siteUrl($path, $params, $scheme, $siteId));
     }
 
     /**
@@ -130,7 +130,7 @@ class UrlHelper extends CraftUrlHelper
             $url = rtrim($url, '/');
         }
 
-        return $url;
+        return DynamicMeta::sanitizeUrl($url);
     }
 
     /**
