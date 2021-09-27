@@ -3,6 +3,8 @@
 ## 3.4.14 - UNRELEASED
 ### Changed
 * Changed the core MetaValue parsing method to be faster, also resolves (for real) ([#653](https://github.com/nystudio107/craft-seomatic/issues/653))
+* Remove all references to the now-deprecated `object.` syntax (though it still functions as usual)
+* Don't run the queue automatically if this is a CP request to avoid potential blocking on element save ([#989](https://github.com/nystudio107/craft-seomatic/issues/989))
 
 ### Fixed
 * Fixed an issue where the query string would be erroneously stripped from image URLs ([#987](https://github.com/nystudio107/craft-seomatic/issues/987))
