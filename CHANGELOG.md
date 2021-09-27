@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.4.14 - UNRELEASED
+### Changed
+* Changed the core MetaValue parsing method to be faster, also resolves (for real) ([#653](https://github.com/nystudio107/craft-seomatic/issues/653))
+
 ### Fixed
 * Fixed an issue where the query string would be erroneously stripped from image URLs ([#987](https://github.com/nystudio107/craft-seomatic/issues/987))
 
