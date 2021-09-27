@@ -1,5 +1,14 @@
 # SEOmatic Changelog
 
+## 3.4.14 - 2021.09.27
+### Changed
+* Substantial performance increase on element save, because we ensure the sitemap queue job doesn't attach itself to web-based queue runners ([#989](https://github.com/nystudio107/craft-seomatic/issues/989))
+* Changed the core MetaValue parsing method to be faster, also resolves (for real) ([#653](https://github.com/nystudio107/craft-seomatic/issues/653))
+* Remove all references to the now-deprecated `object.` syntax (though it still functions as usual)
+
+### Fixed
+* Fixed an issue where the query string would be erroneously stripped from image URLs ([#987](https://github.com/nystudio107/craft-seomatic/issues/987))
+
 ## 3.4.13 - 2021.09.26
 ### Fixed
 * Fixed a regression that could cause sitemap generation via console command to throw an error ([#985](https://github.com/nystudio107/craft-seomatic/issues/985))
