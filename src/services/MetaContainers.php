@@ -400,11 +400,9 @@ class MetaContainers extends Component
         $globalSets = GlobalSet::findAll([
             'siteId' => $siteId,
         ]);
-        MetaValueHelper::$templatePreviewVars = [];
         foreach ($globalSets as $globalSet) {
             MetaValueHelper::$templatePreviewVars[$globalSet->handle] = $globalSet;
         }
-        MetaValueHelper::$templatePreviewVars['seomatic'] = Seomatic::$seomaticVariable;
         // Parse the global vars
         if ($parseVariables) {
             $this->parseGlobalVars();
