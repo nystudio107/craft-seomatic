@@ -77,10 +77,12 @@ class DynamicMeta
      *
      * @return string
      */
-    public static function sanitizeUrl(string $url, bool $checkStatus = true): string
+    public static function sanitizeUrl(string $url, bool $checkStatus = true, bool $stripQueryString = true): string
     {
         // Remove the query string
-        $url = UrlHelper::stripQueryString($url);
+        if ($stripQueryString) {
+            $url = UrlHelper::stripQueryString($url);
+        }
         $url = TextHelper::sanitizeUserInput($url);
 
         // If this is a >= 400 status code, set the canonical URL to nothing
