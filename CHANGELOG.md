@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.15 - UNRELEASED
+### Fixed
+* Disable strict variables during meta value rendering, to mirror the functionality of `renderObjectTemplate()`. Resolves ([#990](https://github.com/nystudio107/craft-seomatic/issues/990))
+
 ## 3.4.14 - 2021.09.27
 ### Changed
 * Substantial performance increase on element save, because we ensure the sitemap queue job doesn't attach itself to web-based queue runners ([#989](https://github.com/nystudio107/craft-seomatic/issues/989))
