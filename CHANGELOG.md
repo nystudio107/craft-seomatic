@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.4.15 - UNRELEASED
+## 3.4.15 - 2021.09.28
 ### Fixed
 * Disable strict variables during meta value rendering, to mirror the functionality of `renderObjectTemplate()`. Resolves ([#990](https://github.com/nystudio107/craft-seomatic/issues/990))
 
