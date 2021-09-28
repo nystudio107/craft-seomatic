@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\jobs;
 
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\fields\SeoSettings;
+use nystudio107\seomatic\helpers\MetaValue;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\ArrayHelper;
@@ -185,12 +186,28 @@ class GenerateSitemap extends BaseJob
                     }
                     // Only add in a sitemap entry if it meets our criteria
                     if ($path !== null && $metaBundle->metaSitemapVars->sitemapUrls && $robotsEnabled) {
+                        // Get the url and canonicalUrl
                         try {
                             $url = UrlHelper::siteUrl($path, null, null, $metaBundle->sourceSiteId);
                         } catch (Exception $e) {
                             $url = '';
                         }
                         $url = UrlHelper::absoluteUrlWithProtocol($url);
+                        if (Seomatic::$settings->excludeNonCanonicalUrls) {
+                            Seomatic::$matchedElement = $element;
+                            MetaValue::cache();
+                            $path = $metaBundle->metaGlobalVars->parsedValue('canonicalUrl');
+                            try {
+                                $canonicalUrl = UrlHelper::siteUrl($path, null, null, $metaBundle->sourceSiteId);
+                            } catch (Exception $e) {
+                                $canonicalUrl = '';
+                            }
+                            $canonicalUrl = UrlHelper::absoluteUrlWithProtocol($canonicalUrl);
+                            if ($url !== $canonicalUrl) {
+                                Craft::info("Excluding URL: {$url} from the sitemap because it does not match the Canonical URL: {$canonicalUrl} - " . $metaBundle->metaGlobalVars->canonicalUrl . " - " . $element->uri);
+                                continue;
+                            }
+                        }
                         $dateUpdated = $element->dateUpdated ?? $element->dateCreated ?? new \DateTime;
                         $lines[] = '<url>';
                         // Standard sitemap key/values

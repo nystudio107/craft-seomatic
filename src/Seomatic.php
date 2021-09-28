@@ -1059,6 +1059,9 @@ class Seomatic extends Plugin
                     'seomatic:global-meta:ads' => [
                         'label' => Craft::t('seomatic', 'Ads'),
                     ],
+                    'seomatic:global-meta:security' => [
+                        'label' => Craft::t('seomatic', 'Security'),
+                    ],
                 ],
             ],
             'seomatic:content-meta' => [

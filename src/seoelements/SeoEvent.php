@@ -166,7 +166,7 @@ class SeoEvent implements SeoElementInterface
                 $html = '';
                 Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
                 /** @var Event $event */
-                $event = $context[self::getElementRefHandle()];
+                $event = $context[self::getElementRefHandle()] ?? null;
                 if ($event !== null && $event->uri !== null) {
                     Seomatic::$plugin->metaContainers->previewMetaContainers($event->uri, $event->siteId, true);
                     // Render our preview sidebar template

@@ -53,6 +53,11 @@ class Queue
             return;
         }
 
+        // Don't run the queue automatically if this is a CP request
+        if (Craft::$app->getRequest()->getIsCpRequest()) {
+            return;
+        }
+
         // Run the queue
         App::maxPowerCaptain();
         $queue->run();

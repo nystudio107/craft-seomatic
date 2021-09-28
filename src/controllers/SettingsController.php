@@ -296,6 +296,13 @@ class SettingsController extends Controller
                     $globalMetaBundle->frontendTemplatesContainer->data[FrontendTemplates::ADS_TXT_HANDLE];
             }
             $variables['adsTemplate'] = $templateContainers[FrontendTemplates::ADS_TXT_HANDLE];
+            // Handle an edge-case where a migration didn't work properly to add ADS_TXT_HANDLE
+            if (!isset($templateContainers[FrontendTemplates::ADS_TXT_HANDLE])) {
+                $globalMetaBundle = Seomatic::$plugin->metaBundles->createGlobalMetaBundleForSite($siteId, $metaBundle);
+                $templateContainers[FrontendTemplates::ADS_TXT_HANDLE] =
+                    $globalMetaBundle->frontendTemplatesContainer->data[FrontendTemplates::ADS_TXT_HANDLE];
+            }
+            $variables['securityTemplate'] = $templateContainers[FrontendTemplates::SECURITY_TXT_HANDLE];
             // Image selectors
             $bundleSettings = $metaBundle->metaBundleSettings;
             $variables['elementType'] = Asset::class;
@@ -317,6 +324,7 @@ class SettingsController extends Controller
             MetaBundles::GLOBAL_META_BUNDLE,
             (int)$variables['currentSiteId']
         );
+
         // Render the template
         return $this->renderTemplate('seomatic/settings/global/'.$subSection, $variables);
     }
@@ -336,6 +344,7 @@ class SettingsController extends Controller
         $robotsTemplate = $request->getParam('robotsTemplate');
         $humansTemplate = $request->getParam('humansTemplate');
         $adsTemplate = $request->getParam('adsTemplate');
+        $securityTemplate = $request->getParam('securityTemplate');
 
         // Set the element type in the template
         $elementName = '';
@@ -374,6 +383,13 @@ class SettingsController extends Controller
             if ($adsContainer !== null && \is_array($adsTemplate)) {
                 $adsContainer->setAttributes($adsTemplate);
                 if (!$adsContainer->validate()) {
+                    $hasErrors = true;
+                }
+            }
+            $securityContainer = $templateContainers[FrontendTemplates::SECURITY_TXT_HANDLE];
+            if ($securityContainer !== null && \is_array($securityTemplate)) {
+                $securityContainer->setAttributes($securityTemplate);
+                if (!$securityContainer->validate()) {
                     $hasErrors = true;
                 }
             }

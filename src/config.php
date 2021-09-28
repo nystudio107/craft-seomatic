@@ -47,6 +47,9 @@ return [
     // Should sitemaps be submitted to search engines automatically whenever there are changes?
     'submitSitemaps' => true,
 
+    // Should items where the entry URL doesn't match the canonical URL be excluded?
+    'excludeNonCanonicalUrls' => false,
+
     // Should the homepage be included in the generated Breadcrumbs JSON-LD?
     'includeHomepageInBreadcrumbs' => true,
 
@@ -148,4 +151,8 @@ return [
     // SeoElementInterface[] The default SeoElement type classes
     'defaultSeoElementTypes' => [
     ],
+
+    // string[] URL params that are allowed to be considered part of the unique URL used for the metadata cache
+    'allowedUrlParams' => [
+    ]
 ];

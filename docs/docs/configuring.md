@@ -84,6 +84,16 @@ Feel free to edit the default `ads.txt` Template to your heart’s content.
 
 The **View ads.txt** button lets you view your rendered `ads.txt`.
 
+### Security
+
+![Screenshot](./resources/screenshots/seomatic-global-security.png)
+
+The [security.txt](https://securitytxt.org/) defines a standard to help organizations define the process for security researchers to disclose security vulnerabilities securely
+
+Feel free to edit the default `security.txt` Template to your heart’s content.
+
+The **View security.txt** button lets you view your rendered `security.txt`.
+
 ### Global SEO Control Panel Fields
 
 The fields in the Control Panel Global SEO settings are parsed as Twig object templates, so in addition to plain old text, you can also put single and double bracket Twig expressions.
@@ -111,12 +121,12 @@ You can also access SEOmatic global variables (discussed below):
 ```twig
 {seomatic.meta.seoTitle}
 ```
-Normal Twig double bracket syntax is supported too, but you’ll need to preface it with `object.` for any `seomatic` variables:
+Normal Twig double bracket syntax is supported too:
 
 ```twig
-{{ object.seomatic.meta.seoTitle }}
+{{ seomatic.meta.seoTitle }}
 ```
-The single bracket syntax is just a shortcut that automatically prefixes any variables with `object.`, and it used for micro-template parsing.
+The single bracket syntax is just a shortcut, and provided for backwards compatibility with previous versions of SEOmatic.
 
 ## Content SEO
 
@@ -249,12 +259,12 @@ For example, the following will output the contents of the **description** field
 {entry.description}
 ```
 
-Normal Twig double bracket syntax is supported too, but you’ll need to preface it with `object.`:
+Normal Twig double bracket syntax is supported too:
 
 ```twig
-{{ object.entry.description }}
+{{ entry.description }}
 ```
-The single bracket syntax is just a shortcut that automatically prefixes any variables with `object.`, and it used for micro-template parsing.
+The single bracket syntax is just a shortcut, and provided for backwards compatibility with previous versions of SEOmatic.
 
 The same applies to any SEOmatic global variables (discussed below):
 
@@ -264,13 +274,13 @@ The same applies to any SEOmatic global variables (discussed below):
 Is the same as:
 
 ```twig
-{{ object.seomatic.meta.seoTitle }}
+{{ seomatic.meta.seoTitle }}
 ```
 
 You can even do complex expressions, such as the following which outputs the first field that isn’t empty, or a default text:
 
 ```twig
-{{ object.entry.description ??? object.entry.summary ??? "Some default text" }}
+{{ entry.description ??? entry.summary ??? "Some default text" }}
 ```
 
 The above uses the `???` empty coalesce operator that comes with SEOmatic; check out [SEOmatic’s ??? Empty Coalesce operator](#seomatics--empty-coalesce-operator) for details.
