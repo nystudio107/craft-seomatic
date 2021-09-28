@@ -330,14 +330,22 @@ class MetaValue
      */
     protected static function internalRenderObjectTemplate(string $template, array $variables = []): string
     {
+        $twig = self::$view->getTwig();
+        // Temporarily disable strict variables if it's enabled
+        $strictVariables = $twig->isStrictVariables();
+        if ($strictVariables) {
+            $twig->disableStrictVariables();
+        }
         // Swap out the remaining {xyz} tags with {{xyz}}
         $template = preg_replace_callback('/(?<!\{)\{\s*(\w+)([^\{]*?)\}/', function(array $match) {
             $replace = $match[1] . $match[2];
             return "{{ $replace|raw }}";
         }, $template);
-
-
         $result = self::$view->renderString($template, $variables);
+        // Re-enable strict variables
+        if ($strictVariables) {
+            $twig->enableStrictVariables();
+        }
 
         return $result;
     }

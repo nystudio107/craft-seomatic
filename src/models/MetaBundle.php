@@ -188,7 +188,7 @@ class MetaBundle extends FluentModel
         // Create our variable so that meta containers can be parsed based on dynamic values
         // Make sure Twig is loaded and instantiated first by priming the pump
         if ($parse) {
-            MetaValueHelper::parseString('{prime}');
+            MetaValueHelper::parseString('{{ "prime" }}');
             $oldSeomaticVariable = Seomatic::$seomaticVariable;
             if (Seomatic::$seomaticVariable === null) {
                 Seomatic::$seomaticVariable = new SeomaticVariable();
