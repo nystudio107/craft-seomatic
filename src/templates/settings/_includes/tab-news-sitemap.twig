@@ -1,0 +1,96 @@
+{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
+{% import "_includes/forms" as forms %}
+
+<fieldset>
+{% if pageContext != "field" %}
+<div class="flex">
+    <div class="flex-grow"></div>
+    <a href="{{ seomatic.helper.sitemapIndexForSiteId(currentSiteId) }}" class="btn livepreviewbtn" rel="noopener" target="_blank">{{ 'View News Sitemap Index'|t("seomatic") }}</a>
+    <a href="{{ seomatic.helper.sitemapUrlForBundle(currentSourceBundleType, currentSourceHandle, currentSiteId) }}" class="btn livepreviewbtn" rel="noopener" target="_blank">{{ "View #{currentSourceBundleType |capitalize} News Sitemap"|t("seomatic") }}</a>
+</div>
+{% endif %}
+
+{% if parentBundles is not defined %}
+    {% set parentBundles = [] %}
+{% endif %}
+
+{############### News Sitemap Enabled ###############}
+
+{% if field is not defined or 'newsSitemapEnabled' in field.newsSitemapEnabledFields %}
+    {% include "seomatic/settings/_includes/fields/_newsSitemapEnabled.twig" %}
+{% endif %}
+
+{% namespace "metaNewsSitemapVars" %}
+    {% if field is not defined or 'sitemapsitemapNewsFieldMap' in field.newsSitemapEnabledFields %}
+        {{ forms.editableTableField({
+            label: "News Sitemap Fields"|t("seomatic"),
+            instructions: "Choose what source fields from your Entry Type layout to map to the news sitemap properties. [Learn more](https://developers.google.com/search/docs/advanced/sitemaps/news-sitemap)"|t("seomatic"),
+            id: 'sitemapNewsFieldMap',
+            name: 'sitemapNewsFieldMap',
+            required: false,
+            cols: {
+                property: {
+                    heading: "News Sitemap Property"|t("seomatic"),
+                    type: "singleline",
+                    width: "30%",
+                },
+                field: {
+                    heading: "Field"|t("seomatic"),
+                    type: "select",
+                    width: "70%",
+                    options: textFieldSources,
+                },
+            },
+            rows: metaNewsSitemapVars.sitemapNewsFieldMap,
+            errors: metaNewsSitemapVars.getErrors("sitemapNewsFieldMap"),
+        }) }}
+    {% endif %}
+{% endnamespace %}
+
+{############### Sitemap Alt URLS ###############}
+
+{% if field is not defined or 'sitemapAltLinks' in field.newsSitemapEnabledFields %}
+    {% include "seomatic/settings/_includes/fields/_sitemapAltLinks.twig" with {
+        namespaceName: "metaNewsSitemapVars",
+        container: metaNewsSitemapVars,
+        containerName: "metaNewsSitemapVars"
+    }%}
+{% endif %}
+
+{############### Sitemap Change Frequency ###############}
+
+{% if field is not defined or 'sitemapChangeFreq' in field.newsSitemapEnabledFields %}
+    {% include "seomatic/settings/_includes/fields/_sitemapChangeFreq.twig" with {
+        namespaceName: "metaNewsSitemapVars",
+        container: metaNewsSitemapVars,
+        containerName: "metaNewsSitemapVars"
+    }%}
+{% endif %}
+
+{############### Sitemap Priority ###############}
+
+{% if field is not defined or 'sitemapPriority' in field.newsSitemapEnabledFields %}
+    {% include "seomatic/settings/_includes/fields/_sitemapPriority.twig" with {
+        namespaceName: "metaNewsSitemapVars",
+        container: metaNewsSitemapVars,
+        containerName: "metaNewsSitemapVars"
+    }%}
+{% endif %}
+
+{############### Sitemap Limit ###############}
+
+{% if field is not defined or 'sitemapLimit' in field.newsSitemapEnabledFields %}
+    {% include "seomatic/settings/_includes/fields/_sitemapLimit.twig" with {
+        namespaceName: "metaNewsSitemapVars",
+        container: metaNewsSitemapVars,
+        containerName: "metaNewsSitemapVars"
+    }%}
+{% endif %}
+
+{% include "seomatic/_includes/footer-message.twig" with {
+    message: "News Sitemap Indexes are automatically submitted to search engines whenever a new Section Group is added that has the setting enabled."
+} %}
+{% include "seomatic/_includes/footer-message.twig" with {
+    message: "#{currentSourceBundleType |capitalize} news sitemaps are automatically submitted to search engines whenever a new Element in that Section Group is added."
+} %}
+</fieldset>

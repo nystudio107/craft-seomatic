@@ -1,0 +1,41 @@
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "newsSitemapEnabled", "metaNewsSitemapVars") %}
+{% set hasInheritableValues = inheritedFrom is not null %}
+
+{% set additionalVars = {
+    'isInherited': seomatic.helper.isInherited(metaNewsSitemapVars, "newsSitemapEnabled"),
+    'fieldLabel': "News Sitemap Enabled"|t("seomatic"),
+    'settingName': 'newsSitemapEnabled',
+    'labelFor': 'metaNewsSitemapVars-newsSitemapEnabled',
+    'overrideNamespace': 'metaNewsSitemapVars'
+} %}
+
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro newsSitemapEnabledField(currentSourceBundleType, metaNewsSitemapVars, suffix) %}
+        <div class="instructions">
+            <p>
+                {{ "Whether entry URLs in this #{currentSourceBundleType} should be included in the news sitemap"|t("seomatic") }}
+            </p>
+        </div>
+
+        {% import "_includes/forms" as forms %}
+        {% namespace "metaNewsSitemapVars" %}
+            
+            {{ forms.lightswitchField({
+                id: "newsSitemapEnabled" ~ suffix,
+                name: "newsSitemapEnabled",
+                on: metaNewsSitemapVars.newsSitemapEnabled,
+                warning: false,
+                errors: metaNewsSitemapVars.getErrors("newsSitemapEnabled"),
+            }) }}
+
+        {% endnamespace %}
+    {% endmacro %}
+
+    {% block inheritedValues %}
+        {{ _self.newsSitemapEnabledField(currentSourceBundleType, inheritedFrom.metaNewsSitemapVars ?? metaNewsSitemapVars, "-inherited") }}
+    {% endblock %}
+
+    {% block field %}
+        {{ _self.newsSitemapEnabledField(currentSourceBundleType, metaNewsSitemapVars, "") }}
+    {% endblock %}
+{% endembed %}

@@ -1,16 +1,16 @@
-{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "sitemapLimit", "metaSitemapVars") %}
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "sitemapLimit", containerName) %}
 {% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': seomatic.helper.isInherited(metaSitemapVars, "sitemapLimit"),
+    'isInherited': seomatic.helper.isInherited(container, "sitemapLimit"),
     'fieldLabel': "Sitemap Limit"|t("seomatic"),
     'settingName': 'sitemapLimit',
-    'labelFor': 'metaSitemapVars-sitemapLimit',
-    'overrideNamespace': 'metaSitemapVars'
+    'labelFor': containerName ~ '-sitemapLimit',
+    'overrideNamespace': namespaceName
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro sitemapLimitField(sitemapLimitOptions, metaSitemapVars, suffix) %}
+    {% macro sitemapLimitField(sitemapLimitOptions, metaSitemapVars, suffix, namespaceName) %}
         <div class="instructions">
             <p>
                 {{ "Controls a limit to how many entries will be in this sitemap. The sitemap entries will be sorted by modification date."|t("seomatic") }}
@@ -18,14 +18,15 @@
         </div>
 
         {% import "_includes/forms" as forms %}
-        {% namespace "metaSitemapVars" %}
-        {{ forms.selectField({
-            id: "sitemapLimit" ~ suffix,
-            name: "sitemapLimit",
-            options: sitemapLimitOptions,
-            value: metaSitemapVars.sitemapLimit,
-            errors: metaSitemapVars.getErrors("sitemapLimit"),
-        }) }}
+        {% namespace namespaceName %}
+
+            {{ forms.selectField({
+                id: "sitemapLimit" ~ suffix,
+                name: "sitemapLimit",
+                options: sitemapLimitOptions,
+                value: metaSitemapVars.sitemapLimit,
+                errors: metaSitemapVars.getErrors("sitemapLimit"),
+            }) }}
 
         {% endnamespace %}
     {% endmacro %}
@@ -42,10 +43,10 @@
     } %}
 
     {% block inheritedValues %}
-        {{ _self.sitemapLimitField(sitemapLimitOptions, inheritedFrom.metaSitemapVars ?? metaSitemapVars, "-inherited") }}
+        {{ _self.sitemapLimitField(sitemapLimitOptions, attribute(inheritedFrom, containerName) ?? container, "-inherited", namespaceName) }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.sitemapLimitField(sitemapLimitOptions, metaSitemapVars, "") }}
+        {{ _self.sitemapLimitField(sitemapLimitOptions, container, "", namespaceName) }}
     {% endblock %}
 {% endembed %}

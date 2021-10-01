@@ -523,7 +523,7 @@ class Helper extends Component
      */
     public function findInheritableBundle(array $inheritedValues, string $settingName, string $collectionName = "metaGlobalVars")
     {
-        if (in_array($collectionName, ['metaGlobalVars', 'metaSitemapVars'], true)) {
+        if (in_array($collectionName, ['metaGlobalVars', 'metaSitemapVars', 'metaNewsSitemapVars'], true)) {
             foreach ($inheritedValues as $bundle) {
                 /** @var $bundle MetaBundle */
                 if (isset($bundle->{$collectionName}[$settingName])) {
