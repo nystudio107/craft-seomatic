@@ -43,6 +43,17 @@ class SitemapController extends Controller
     // Public Methods
     // =========================================================================
 
+    public function beforeAction($action)
+    {
+        if ($action->id !== 'sitemap-index-redirect') {
+            $headers = Craft::$app->response->headers;
+            $headers->add('Content-Type', 'text/xml; charset=utf-8');
+            $headers->add('X-Robots-Tag', 'noindex');
+        }
+
+        return parent::beforeAction($action);
+    }
+
     /**
      * Returns the rendered sitemap index.
      *
@@ -59,9 +70,6 @@ class SitemapController extends Controller
                 'siteId' => $siteId ?? Craft::$app->getSites()->currentSite->id,
             ]
         );
-        $headers = Craft::$app->response->headers;
-        $headers->add('Content-Type', 'text/xml; charset=utf-8');
-        $headers->add('X-Robots-Tag', 'noindex');
 
         return $this->asRaw($xml);
     }
@@ -87,10 +95,6 @@ class SitemapController extends Controller
     {
         $xml = PluginTemplate::renderPluginTemplate('_frontend/pages/sitemap-styles.twig', []);
 
-        $headers = Craft::$app->response->headers;
-        $headers->add('Content-Type', 'text/xml; charset=utf-8');
-        $headers->add('X-Robots-Tag', 'noindex');
-
         return $this->asRaw($xml);
     }
 
@@ -103,9 +107,6 @@ class SitemapController extends Controller
     {
         $xml = PluginTemplate::renderPluginTemplate('_frontend/pages/sitemap-empty-styles.twig', []);
 
-        $headers = Craft::$app->response->headers;
-        $headers->add('Content-Type', 'text/xml; charset=utf-8');
-        $headers->add('X-Robots-Tag', 'noindex');
 
         return $this->asRaw($xml);
     }
@@ -113,10 +114,10 @@ class SitemapController extends Controller
     /**
      * Returns a rendered sitemap.
      *
-     * @param int    $groupId Which Site Group the sitemap index is for
+     * @param int $groupId Which Site Group the sitemap index is for
      * @param string $type
      * @param string $handle
-     * @param int    $siteId
+     * @param int $siteId
      *
      * @return Response
      */
@@ -131,9 +132,6 @@ class SitemapController extends Controller
                 'siteId' => $siteId,
             ]
         );
-        $headers = Craft::$app->response->headers;
-        $headers->add('Content-Type', 'text/xml; charset=utf-8');
-        $headers->add('X-Robots-Tag', 'noindex');
 
         return $this->asRaw($xml);
     }
@@ -155,9 +153,6 @@ class SitemapController extends Controller
                 'siteId' => $siteId,
             ]
         );
-        $headers = Craft::$app->response->headers;
-        $headers->add('Content-Type', 'text/xml; charset=utf-8');
-        $headers->add('X-Robots-Tag', 'noindex');
 
         return $this->asRaw($xml);
     }
