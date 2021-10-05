@@ -75,6 +75,26 @@ class SitemapController extends Controller
     }
 
     /**
+     * Returns the rendered news sitemap index.
+     *
+     * @param int $groupId Which Site Group the sitemap index is for
+     *
+     * @return Response
+     */
+    public function actionNewsSitemapIndex(int $groupId, int $siteId = null): Response
+    {
+        $xml = Seomatic::$plugin->sitemaps->renderTemplate(
+            Sitemaps::SEOMATIC_NEWS_SITEMAPINDEX_CONTAINER,
+            [
+                'groupId' => $groupId,
+                'siteId' => $siteId ?? Craft::$app->getSites()->currentSite->id,
+            ]
+        );
+
+        return $this->asRaw($xml);
+    }
+
+    /**
      * Redirect from `sitemap.xml` to the actual sitemap for this site
      *
      * @return Response

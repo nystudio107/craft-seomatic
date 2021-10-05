@@ -80,12 +80,9 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
     {
         $config = array_merge($config, static::$defaultConfig);
 
-        return new SitemapIndexTemplate($config);
+        return new static($config);
     }
-
-    // Public Properties
-    // =========================================================================
-
+    
     // Public Methods
     // =========================================================================
 
@@ -202,34 +199,37 @@ SITEMAP;
         Seomatic::$plugin->metaBundles->pruneVestigialMetaBundles($metaBundles);
         /** @var  $metaBundle MetaBundle */
         foreach ($metaBundles as $metaBundle) {
-            $sitemapUrls = $metaBundle->metaSitemapVars->sitemapUrls;
+            $sitemapEnabled = $this->getIsSitemapEnabled($metaBundle);
+
             // Check to see if robots is `none` or `no index`
             $robotsEnabled = true;
             if (!empty($metaBundle->metaGlobalVars->robots)) {
                 $robotsEnabled = $metaBundle->metaGlobalVars->robots !== 'none' &&
                     $metaBundle->metaGlobalVars->robots !== 'noindex';
             }
-            if (Seomatic::$plugin->sitemaps->anyEntryTypeHasSitemapUrls($metaBundle)) {
+            if ($this->getForceCreatingSitemap($metaBundle)) {
                 $robotsEnabled = true;
-                $sitemapUrls = true;
+                $sitemapEnabled = true;
             }
+
             // Only add in a sitemap entry if it meets our criteria
             if (\in_array($metaBundle->sourceSiteId, $groupSiteIds, false)
-                && $sitemapUrls
+                && $sitemapEnabled
                 && $robotsEnabled) {
-                $sitemapUrl = Seomatic::$plugin->sitemaps->sitemapUrlForBundle(
-                    $metaBundle->sourceBundleType,
-                    $metaBundle->sourceHandle,
-                    $metaBundle->sourceSiteId
-                );
+
+                $sitemapUrl = $this->getSitemapUrlForBundle($metaBundle);
+
                 // Get all of the elements for this meta bundle type
                 $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundle->sourceBundleType);
+
                 if ($seoElement !== null) {
                     // Ensure `null` so that the resulting element query is correct
                     if (empty($metaBundle->metaSitemapVars->sitemapLimit)) {
                         $metaBundle->metaSitemapVars->sitemapLimit = null;
                     }
+
                     $totalElements = $seoElement::sitemapElementsQuery($metaBundle)->count();
+
                     if ($metaBundle->metaSitemapVars->sitemapLimit && ($totalElements > $metaBundle->metaSitemapVars->sitemapLimit)) {
                         $totalElements = $metaBundle->metaSitemapVars->sitemapLimit;
                     }
@@ -241,12 +241,9 @@ SITEMAP;
                 }
             }
         }
+
         // Custom sitemap entries
-        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId, false);
-        if ($metaBundle !== null) {
-            $sitemapData .= $this->additionalSitemapUrls($metaBundle, $siteId);
-            $sitemapData .= $this->additionalSitemaps($metaBundle, $siteId);
-        }
+        $sitemapData .= $this->getAdditionalSitemapData($siteId);
 
         return $this->wrapSitemapIndex($sitemapData);
     }
@@ -334,5 +331,56 @@ SITEMAP;
         }
 
         return $sitemapXml;
+    }
+
+    /**
+     * Get additional sitemap data.
+     *
+     * @param int|null $siteId
+     * @return string
+     * @throws \Exception
+     */
+    protected function getAdditionalSitemapData(int $siteId): string
+    {
+        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId, false);
+
+        $sitemapData = '';
+        if ($metaBundle !== null) {
+            $sitemapData .= $this->additionalSitemapUrls($metaBundle, $siteId);
+            $sitemapData .= $this->additionalSitemaps($metaBundle, $siteId);
+        }
+
+        return $sitemapData;
+    }
+
+    /**
+     * @param MetaBundle $metaBundle
+     * @return string
+     */
+    protected function getSitemapUrlForBundle(MetaBundle $metaBundle): string
+    {
+        return Seomatic::$plugin->sitemaps->sitemapUrlForBundle(
+            $metaBundle->sourceBundleType,
+            $metaBundle->sourceHandle,
+            $metaBundle->sourceSiteId
+        );
+    }
+
+    /**
+     * @param MetaBundle $metaBundle
+     * @return bool
+     */
+    protected function getIsSitemapEnabled(MetaBundle $metaBundle): bool
+    {
+        return $metaBundle->metaSitemapVars->sitemapUrls;
+    }
+
+    /**
+     * @param MetaBundle $metaBundle
+     * @return bool
+     */
+    protected function getForceCreatingSitemap(MetaBundle $metaBundle): bool
+    {
+        return Seomatic::$plugin->sitemaps->anyEntryTypeHasSitemapUrls($metaBundle);
     }
 }

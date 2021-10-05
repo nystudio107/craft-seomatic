@@ -331,7 +331,7 @@ class Helper extends Component
      */
     public static function newsSitemapIndexForSiteId(int $siteId = null): string
     {
-        return Seomatic::$plugin->sitemaps->sitemapIndexUrlForSiteId($siteId, Sitemaps::PREFIX_SITEMAP_NEWS);
+        return Seomatic::$plugin->sitemaps->sitemapIndexUrlForSiteId($siteId, Sitemaps::SITEMAP_TYPE_NEWS);
     }
 
     /**
@@ -343,7 +343,7 @@ class Helper extends Component
      */
     public static function newsSitemapUrlForBundle(string $sourceType, string $sourceHandle, int $siteId = null): string
     {
-        return Seomatic::$plugin->sitemaps->sitemapUrlForBundle($sourceType, $sourceHandle, $siteId, Sitemaps::PREFIX_SITEMAP_NEWS);
+        return Seomatic::$plugin->sitemaps->sitemapUrlForBundle($sourceType, $sourceHandle, $siteId, Sitemaps::SITEMAP_TYPE_NEWS);
     }
 
     /**

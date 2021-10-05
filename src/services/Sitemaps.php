@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\services;
 
 use nystudio107\seomatic\jobs\GenerateSitemap;
 use nystudio107\seomatic\models\MetaBundle;
+use nystudio107\seomatic\models\NewsSitemapIndexTemplate;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\base\SitemapInterface;
@@ -47,6 +48,8 @@ class Sitemaps extends Component implements SitemapInterface
 
     const SEOMATIC_SITEMAPINDEX_CONTAINER = Seomatic::SEOMATIC_HANDLE.SitemapIndexTemplate::TEMPLATE_TYPE;
 
+    const SEOMATIC_NEWS_SITEMAPINDEX_CONTAINER = Seomatic::SEOMATIC_HANDLE.NewsSitemapIndexTemplate::TEMPLATE_TYPE;
+
     const SEOMATIC_SITEMAP_CONTAINER = Seomatic::SEOMATIC_HANDLE.SitemapTemplate::TEMPLATE_TYPE;
 
     const SEOMATIC_SITEMAPCUSTOM_CONTAINER = Seomatic::SEOMATIC_HANDLE.SitemapCustomTemplate::TEMPLATE_TYPE;
@@ -56,7 +59,7 @@ class Sitemaps extends Component implements SitemapInterface
         'bing' => 'https://www.bing.com/ping?sitemap=',
     ];
 
-    const PREFIX_SITEMAP_NEWS = 'news';
+    const SITEMAP_TYPE_NEWS = 'news';
 
     // Protected Properties
     // =========================================================================
@@ -87,6 +90,9 @@ class Sitemaps extends Component implements SitemapInterface
             // The Sitemap Index
             $sitemapIndexTemplate = SitemapIndexTemplate::create();
             $this->sitemapTemplateContainer->addData($sitemapIndexTemplate, self::SEOMATIC_SITEMAPINDEX_CONTAINER);
+            // The News Sitemap Index
+            $newsSitemapIndexTemplate = NewsSitemapIndexTemplate::create();
+            $this->sitemapTemplateContainer->addData($newsSitemapIndexTemplate, self::SEOMATIC_NEWS_SITEMAPINDEX_CONTAINER);
             // A custom sitemap
             $sitemapCustomTemplate = SitemapCustomTemplate::create();
             $this->sitemapTemplateContainer->addData($sitemapCustomTemplate, self::SEOMATIC_SITEMAPCUSTOM_CONTAINER);
@@ -176,12 +182,12 @@ class Sitemaps extends Component implements SitemapInterface
     }
 
     /**
-     * See if any of the entry types have robots enable and sitemap urls enabled
+     * See if any of the entry types have robots enabled and sitemap urls enabled
      *
      * @param MetaBundle $metaBundle
      * @return bool
      */
-    public function anyEntryTypeHasSitemapUrls(MetaBundle $metaBundle): bool
+    public function anyEntryTypeHasSitemapUrls(MetaBundle $metaBundle, string $sitemapType = ''): bool
     {
         $result = false;
         $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundle->sourceBundleType);
@@ -204,8 +210,16 @@ class Sitemaps extends Component implements SitemapInterface
                                 $robotsEnabled = $entryTypeBundle->metaGlobalVars->robots !== 'none' &&
                                     $entryTypeBundle->metaGlobalVars->robots !== 'noindex';
                             }
-                            if ($entryTypeBundle->metaSitemapVars->sitemapUrls && $robotsEnabled) {
-                                $result = true;
+                            switch ($sitemapType) {
+                                case 'news':
+                                    if ($entryTypeBundle->metaNewsSitemapVars->newsSitemapEnabled && $robotsEnabled) {
+                                        $result = true;
+                                    }
+                                    break;
+                                default:
+                                    if ($entryTypeBundle->metaSitemapVars->sitemapUrls && $robotsEnabled) {
+                                        $result = true;
+                                    }
                             }
                         }
                     }
@@ -282,7 +296,7 @@ class Sitemaps extends Component implements SitemapInterface
     {
         if (Seomatic::$settings->sitemapsEnabled && Seomatic::$environment === 'live' && Seomatic::$settings->submitSitemaps) {
             /** @var Element $element */
-            list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId, $typeId)
+            [$sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId, $typeId]
                 = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
             // Submit the sitemap to each search engine
             $searchEngineUrls = self::SEARCH_ENGINE_SUBMISSION_URLS;
@@ -348,11 +362,11 @@ class Sitemaps extends Component implements SitemapInterface
      * Get the URL to the $siteId's sitemap index with an optional prefix
      *
      * @param int|null $siteId
-     * @param string $sitemapPrefix Sitemap prefix to use. Defaults to nothing.
+     * @param string $sitemapType Sitemap type.
      *
      * @return string
      */
-    public function sitemapIndexUrlForSiteId(int $siteId = null, string $sitemapPrefix = ''): string
+    public function sitemapIndexUrlForSiteId(int $siteId = null, string $sitemapType = ''): string
     {
         $url = '';
         $sites = Craft::$app->getSites();
@@ -365,7 +379,7 @@ class Sitemaps extends Component implements SitemapInterface
                 $url = UrlHelper::siteUrl(
                     '/sitemaps'
                     .'-'.$site->groupId
-                    .($sitemapPrefix ? '-'.$sitemapPrefix : '')
+                    .($sitemapType ? '-'.$sitemapType : '')
                     .'-sitemap.xml',
                     null,
                     null,
@@ -412,7 +426,7 @@ class Sitemaps extends Component implements SitemapInterface
 
         foreach($sites as $site) {
             $result .= 'sitemap: ' . $this->sitemapIndexUrlForSiteId($site->id) . PHP_EOL;
-            $result .= 'sitemap: ' . $this->sitemapIndexUrlForSiteId($site->id, self::PREFIX_SITEMAP_NEWS) . PHP_EOL;
+            $result .= 'sitemap: ' . $this->sitemapIndexUrlForSiteId($site->id, self::SITEMAP_TYPE_NEWS) . PHP_EOL;
         }
 
         return rtrim($result, PHP_EOL);
@@ -459,11 +473,11 @@ class Sitemaps extends Component implements SitemapInterface
      * @param string   $sourceBundleType
      * @param string   $sourceHandle
      * @param int|null $siteId
-     * @param string $sitemapPrefix Sitemap prefix to use. Defaults to nothing.
+     * @param string $sitemapType Sitemap type.
      *
      * @return string
      */
-    public function sitemapUrlForBundle(string $sourceBundleType, string $sourceHandle, int $siteId = null, string $sitemapPrefix = ''): string
+    public function sitemapUrlForBundle(string $sourceBundleType, string $sourceHandle, int $siteId = null, string $sitemapType = ''): string
     {
         $url = '';
         $sites = Craft::$app->getSites();
@@ -483,7 +497,7 @@ class Sitemaps extends Component implements SitemapInterface
                     .'-'.$site->groupId
                     .'-'.$metaBundle->sourceBundleType
                     .'-'.$metaBundle->sourceHandle
-                    .($sitemapPrefix ? '-'.$sitemapPrefix : '')
+                    .($sitemapType ? '-'.$sitemapType : '')
                     .'-'.$metaBundle->sourceSiteId
                     .'-sitemap.xml',
                     null,
