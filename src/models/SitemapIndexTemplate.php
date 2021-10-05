@@ -61,6 +61,13 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
 
     const SITEMAP_INDEX_CACHE_TAG = 'seomatic_sitemap_index';
 
+    protected static $defaultConfig = [
+        'path' => 'sitemaps-<groupId:\d+>-sitemap.xml',
+        'template' => '',
+        'controller' => 'sitemap',
+        'action' => 'sitemap-index',
+    ];
+
     // Static Methods
     // =========================================================================
 
@@ -71,13 +78,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
      */
     public static function create(array $config = [])
     {
-        $defaults = [
-            'path' => 'sitemaps-<groupId:\d+>-sitemap.xml',
-            'template' => '',
-            'controller' => 'sitemap',
-            'action' => 'sitemap-index',
-        ];
-        $config = array_merge($config, $defaults);
+        $config = array_merge($config, static::$defaultConfig);
 
         return new SitemapIndexTemplate($config);
     }
@@ -137,108 +138,131 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             ],
         ]);
 
-        return $cache->getOrSet(self::CACHE_KEY.$groupId.'.'.$siteId, function () use ($groupSiteIds, $siteId) {
-            Craft::info(
-                'Sitemap index cache miss',
-                __METHOD__
-            );
-            $lines = [];
-            // Sitemap index XML header and opening tag
-            $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
-            $lines[] = '<?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>';
-            $lines[] = '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-            // One sitemap entry for each MeteBundle
-            $metaBundles = Seomatic::$plugin->metaBundles->getContentMetaBundlesForSiteId($siteId);
-            Seomatic::$plugin->metaBundles->pruneVestigialMetaBundles($metaBundles);
-            /** @var  $metaBundle MetaBundle */
-            foreach ($metaBundles as $metaBundle) {
-                $sitemapUrls = $metaBundle->metaSitemapVars->sitemapUrls;
-                // Check to see if robots is `none` or `no index`
-                $robotsEnabled = true;
-                if (!empty($metaBundle->metaGlobalVars->robots)) {
-                    $robotsEnabled = $metaBundle->metaGlobalVars->robots !== 'none' &&
-                        $metaBundle->metaGlobalVars->robots !== 'noindex';
-                }
-                if (Seomatic::$plugin->sitemaps->anyEntryTypeHasSitemapUrls($metaBundle)) {
-                    $robotsEnabled = true;
-                    $sitemapUrls = true;
-                }
-                // Only add in a sitemap entry if it meets our criteria
-                if (\in_array($metaBundle->sourceSiteId, $groupSiteIds, false)
-                    && $sitemapUrls
-                    && $robotsEnabled) {
-                    $sitemapUrl = Seomatic::$plugin->sitemaps->sitemapUrlForBundle(
-                        $metaBundle->sourceBundleType,
-                        $metaBundle->sourceHandle,
-                        $metaBundle->sourceSiteId
-                    );
-                    // Get all of the elements for this meta bundle type
-                    $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundle->sourceBundleType);
-                    if ($seoElement !== null) {
-                        // Ensure `null` so that the resulting element query is correct
-                        if (empty($metaBundle->metaSitemapVars->sitemapLimit)) {
-                            $metaBundle->metaSitemapVars->sitemapLimit = null;
-                        }
-                        $totalElements = $seoElement::sitemapElementsQuery($metaBundle)->count();
-                        if ($metaBundle->metaSitemapVars->sitemapLimit && ($totalElements > $metaBundle->metaSitemapVars->sitemapLimit)) {
-                            $totalElements = $metaBundle->metaSitemapVars->sitemapLimit;
-                        }
-                    }
-                    // Only add a sitemap to the sitemap index if there's at least 1 element in the resulting sitemap
-                    if ($totalElements > 0) {
-                        $lines[] = '<sitemap>';
-                        $lines[] = '<loc>';
-                        $lines[] = Html::encode($sitemapUrl);
-                        $lines[] = '</loc>';
-                        if ($metaBundle->sourceDateUpdated !== null) {
-                            $lines[] = '<lastmod>';
-                            $lines[] = $metaBundle->sourceDateUpdated->format(\DateTime::W3C);
-                            $lines[] = '</lastmod>';
-                        }
-                        $lines[] = '</sitemap>';
-                    }
-                }
-            }
-            // Custom sitemap entries
-            $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId, false);
-            if ($metaBundle !== null) {
-                $this->addAdditionalSitemapUrls($metaBundle, $siteId, $lines);
-                $this->addAdditionalSitemaps($metaBundle, $siteId, $lines);
-            }
-            // Sitemap index closing tag
-            $lines[] = '</sitemapindex>';
-
-            return implode('', $lines);
+        return $cache->getOrSet(static::CACHE_KEY.$groupId.'.'.$siteId, function () use ($groupSiteIds, $siteId) {
+            return $this->generateSitemapIndex($groupSiteIds, $siteId);
         }, Seomatic::$cacheDuration, $dependency);
-    }
-
-    /**
-     * Invalidate the sitemap index cache
-     */
-    public function invalidateCache()
-    {
-        $cache = Craft::$app->getCache();
-        TagDependency::invalidate($cache, self::SITEMAP_INDEX_CACHE_TAG);
-        Craft::info(
-            'Sitemap index cache cleared',
-            __METHOD__
-        );
     }
 
     // Protected Methods
     // =========================================================================
 
     /**
-     * Add an additional sitemap to the sitemap index, coming from the global
+     * Wrap a collection of sitemaps in a sitemap index tag and return it.
+     *
+     * @param string $sitemap
+     * @return string
+     */
+    protected function wrapSitemapIndex(string $sitemap): string
+    {
+        return <<<SITEMAPINDEX
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">$sitemap
+</sitemapindex>
+SITEMAPINDEX;
+    }
+
+    /**
+     * Wrap a collection of sitemaps in a sitemap index tag and return it.
+     *
+     * @param string $sitemap
+     * @return string
+     */
+    protected function wrapSitemap(string $sitemapUrl, string $lastMod = ''): string
+    {
+        $lastModTag = !empty($lastMod) ? "<lastmod>$lastMod</lastmod>" : '';
+        return <<<SITEMAP
+
+    <sitemap>
+        <loc>$sitemapUrl</loc>
+        $lastModTag
+    </sitemap>
+SITEMAP;
+    }
+
+    /**
+     * Generate the sitemap index.
+     *
+     * @param array $groupSiteIds
+     * @param int|null $siteId
+     * @return string
+     * @throws \Exception
+     */
+    protected function generateSitemapIndex(array $groupSiteIds, int $siteId = null): string {
+        Craft::info(
+            'Sitemap index cache miss',
+            __METHOD__
+        );
+
+        $sitemapData = '';
+
+        // Sitemap index XML header and opening tag
+        // One sitemap entry for each MeteBundle
+        $metaBundles = Seomatic::$plugin->metaBundles->getContentMetaBundlesForSiteId($siteId);
+        Seomatic::$plugin->metaBundles->pruneVestigialMetaBundles($metaBundles);
+        /** @var  $metaBundle MetaBundle */
+        foreach ($metaBundles as $metaBundle) {
+            $sitemapUrls = $metaBundle->metaSitemapVars->sitemapUrls;
+            // Check to see if robots is `none` or `no index`
+            $robotsEnabled = true;
+            if (!empty($metaBundle->metaGlobalVars->robots)) {
+                $robotsEnabled = $metaBundle->metaGlobalVars->robots !== 'none' &&
+                    $metaBundle->metaGlobalVars->robots !== 'noindex';
+            }
+            if (Seomatic::$plugin->sitemaps->anyEntryTypeHasSitemapUrls($metaBundle)) {
+                $robotsEnabled = true;
+                $sitemapUrls = true;
+            }
+            // Only add in a sitemap entry if it meets our criteria
+            if (\in_array($metaBundle->sourceSiteId, $groupSiteIds, false)
+                && $sitemapUrls
+                && $robotsEnabled) {
+                $sitemapUrl = Seomatic::$plugin->sitemaps->sitemapUrlForBundle(
+                    $metaBundle->sourceBundleType,
+                    $metaBundle->sourceHandle,
+                    $metaBundle->sourceSiteId
+                );
+                // Get all of the elements for this meta bundle type
+                $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundle->sourceBundleType);
+                if ($seoElement !== null) {
+                    // Ensure `null` so that the resulting element query is correct
+                    if (empty($metaBundle->metaSitemapVars->sitemapLimit)) {
+                        $metaBundle->metaSitemapVars->sitemapLimit = null;
+                    }
+                    $totalElements = $seoElement::sitemapElementsQuery($metaBundle)->count();
+                    if ($metaBundle->metaSitemapVars->sitemapLimit && ($totalElements > $metaBundle->metaSitemapVars->sitemapLimit)) {
+                        $totalElements = $metaBundle->metaSitemapVars->sitemapLimit;
+                    }
+                }
+                // Only add a sitemap to the sitemap index if there's at least 1 element in the resulting sitemap
+                if ($totalElements > 0) {
+                    $lastMod = $metaBundle->sourceDateUpdated !== null ?  $metaBundle->sourceDateUpdated->format(\DateTime::W3C) : '';
+                    $sitemapData .= $this->wrapSitemap(Html::encode($sitemapUrl), $lastMod);
+                }
+            }
+        }
+        // Custom sitemap entries
+        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId, false);
+        if ($metaBundle !== null) {
+            $sitemapData .= $this->additionalSitemapUrls($metaBundle, $siteId);
+            $sitemapData .= $this->additionalSitemaps($metaBundle, $siteId);
+        }
+
+        return $this->wrapSitemapIndex($sitemapData);
+    }
+
+    /**
+     * Add additional sitemaps to the sitemap index, coming from the global
      * meta bundle metaSiteVars->additionalSitemaps
      *
      * @param MetaBundle $metaBundle
      * @param int        $groupSiteId
      * @param array      $lines
+     * @return string Additional sitemap XML.
      *
      * @throws \Exception
      */
-    protected function addAdditionalSitemaps(MetaBundle $metaBundle, int $groupSiteId, array &$lines)
+    protected function additionalSitemaps(MetaBundle $metaBundle, int $groupSiteId): string
     {
         $additionalSitemaps = $metaBundle->metaSiteVars->additionalSitemaps;
         $additionalSitemaps = empty($additionalSitemaps) ? [] : $additionalSitemaps;
@@ -249,39 +273,35 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
         ]);
         Event::trigger(SitemapIndexTemplate::class, SitemapIndexTemplate::EVENT_REGISTER_SITEMAPS, $event);
         $additionalSitemaps = array_filter($event->sitemaps);
+
+        $sitemapXml = '';
+
         // Output the sitemap index
         if (!empty($additionalSitemaps)) {
             foreach ($additionalSitemaps as $additionalSitemap) {
                 if (!empty($additionalSitemap['loc'])) {
                     $loc = MetaValueHelper::parseString($additionalSitemap['loc']);
-                    $lines[] = '<sitemap>';
-                    $lines[] = '<loc>';
-                    $lines[] = Html::encode($loc);
-                    $lines[] = '</loc>';
-                    // Find the most recent date
-                    $dateUpdated = !empty($additionalSitemap['lastmod'])
-                        ? $additionalSitemap['lastmod']
-                        : new \DateTime;
-                    $lines[] = '<lastmod>';
-                    $lines[] = $dateUpdated->format(\DateTime::W3C);
-                    $lines[] = '</lastmod>';
-                    $lines[] = '</sitemap>';
+                    $dateUpdated = !empty($additionalSitemap['lastmod']) ? $additionalSitemap['lastmod'] : new \DateTime;
+                    $lastMod = $dateUpdated->format(\DateTime::W3C);
+                    $sitemapXml .= $this->wrapSitemap( Html::encode($loc), $lastMod);
                 }
             }
         }
+
+        return $sitemapXml;
     }
 
     /**
-     * Add an additional "custom" sitemap to the sitemap index, with URLs coming from
+     * Add additional "custom" sitemaps to the sitemap index, with URLs coming from
      * the global meta bundle metaSiteVars->additionalSitemapUrls
      *
      * @param MetaBundle $metaBundle
      * @param int        $groupSiteId
      * @param array      $lines
-     *
+     * @return string Additional sitemap XML.
      * @throws \Exception
      */
-    protected function addAdditionalSitemapUrls(MetaBundle $metaBundle, int $groupSiteId, array &$lines)
+    protected function additionalSitemapUrls(MetaBundle $metaBundle, int $groupSiteId): string
     {
         $additionalSitemapUrls = $metaBundle->metaSiteVars->additionalSitemapUrls;
         $additionalSitemapUrls = empty($additionalSitemapUrls) ? [] : $additionalSitemapUrls;
@@ -292,18 +312,15 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
         ]);
         Event::trigger(SitemapCustomTemplate::class, SitemapCustomTemplate::EVENT_REGISTER_SITEMAP_URLS, $event);
         $additionalSitemapUrls = array_filter($event->sitemaps);
+
+        $sitemapXml = '';
+
         // Output the sitemap index
         if (!empty($additionalSitemapUrls)) {
-            $sitemapUrl = Seomatic::$plugin->sitemaps->sitemapCustomUrlForSiteId(
-                $groupSiteId
-            );
-            $lines[] = '<sitemap>';
-            $lines[] = '<loc>';
-            $lines[] = Html::encode($sitemapUrl);
-            $lines[] = '</loc>';
+            $sitemapUrl = Seomatic::$plugin->sitemaps->sitemapCustomUrlForSiteId($groupSiteId);
+
             // Find the most recent date
-            $dateUpdated = $metaBundle->metaSiteVars->additionalSitemapUrlsDateUpdated
-                ?? new \DateTime;
+            $dateUpdated = $metaBundle->metaSiteVars->additionalSitemapUrlsDateUpdated ?? new \DateTime;
             foreach ($additionalSitemapUrls as $additionalSitemapUrl) {
                 if (!empty($additionalSitemapUrl['lastmod'])) {
                     if ($additionalSitemapUrl['lastmod'] > $dateUpdated) {
@@ -311,12 +328,11 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
                     }
                 }
             }
-            if ($dateUpdated !== null) {
-                $lines[] = '<lastmod>';
-                $lines[] = $dateUpdated->format(\DateTime::W3C);
-                $lines[] = '</lastmod>';
-            }
-            $lines[] = '</sitemap>';
+            $lastMod = $dateUpdated->format(\DateTime::W3C);
+
+            $sitemapXml .= $this->wrapSitemap(Html::encode($sitemapUrl), $lastMod);
         }
+
+        return $sitemapXml;
     }
 }
