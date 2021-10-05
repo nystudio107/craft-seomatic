@@ -323,6 +323,30 @@ class Helper extends Component
     }
 
     /**
+     * Get the URL to the $siteId's sitemap index
+     *
+     * @param int|null $siteId
+     *
+     * @return string
+     */
+    public static function newsSitemapIndexForSiteId(int $siteId = null): string
+    {
+        return Seomatic::$plugin->sitemaps->sitemapIndexUrlForSiteId($siteId, Sitemaps::PREFIX_SITEMAP_NEWS);
+    }
+
+    /**
+     * @param string   $sourceType
+     * @param string   $sourceHandle
+     * @param int|null $siteId
+     *
+     * @return string
+     */
+    public static function newsSitemapUrlForBundle(string $sourceType, string $sourceHandle, int $siteId = null): string
+    {
+        return Seomatic::$plugin->sitemaps->sitemapUrlForBundle($sourceType, $sourceHandle, $siteId, Sitemaps::PREFIX_SITEMAP_NEWS);
+    }
+
+    /**
      * Extract plain old text from a field
      *
      * @param $field

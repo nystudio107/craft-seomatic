@@ -56,6 +56,8 @@ class Sitemaps extends Component implements SitemapInterface
         'bing' => 'https://www.bing.com/ping?sitemap=',
     ];
 
+    const PREFIX_SITEMAP_NEWS = 'news';
+
     // Protected Properties
     // =========================================================================
 
@@ -343,13 +345,14 @@ class Sitemaps extends Component implements SitemapInterface
     }
 
     /**
-     * Get the URL to the $siteId's sitemap index
+     * Get the URL to the $siteId's sitemap index with an optional prefix
      *
      * @param int|null $siteId
+     * @param string $sitemapPrefix Sitemap prefix to use. Defaults to nothing.
      *
      * @return string
      */
-    public function sitemapIndexUrlForSiteId(int $siteId = null): string
+    public function sitemapIndexUrlForSiteId(int $siteId = null, string $sitemapPrefix = ''): string
     {
         $url = '';
         $sites = Craft::$app->getSites();
@@ -360,8 +363,9 @@ class Sitemaps extends Component implements SitemapInterface
         if ($site !== null) {
             try {
                 $url = UrlHelper::siteUrl(
-                    '/sitemaps-'
-                    .$site->groupId
+                    '/sitemaps'
+                    .'-'.$site->groupId
+                    .($sitemapPrefix ? '-'.$sitemapPrefix : '')
                     .'-sitemap.xml',
                     null,
                     null,
@@ -376,11 +380,11 @@ class Sitemaps extends Component implements SitemapInterface
     }
 
     /**
-     * Return all of the sitemap indexes the current group of sites
+     * Return all the sitemap indexes the current group of sites
      *
      * @return string
      */
-    public function sitemapIndex(): string
+    public function sitemapIndex(string $sitemapPrefix = ''): string
     {
         $result = '';
         $sites = [];
@@ -408,6 +412,7 @@ class Sitemaps extends Component implements SitemapInterface
 
         foreach($sites as $site) {
             $result .= 'sitemap: ' . $this->sitemapIndexUrlForSiteId($site->id) . PHP_EOL;
+            $result .= 'sitemap: ' . $this->sitemapIndexUrlForSiteId($site->id, self::PREFIX_SITEMAP_NEWS) . PHP_EOL;
         }
 
         return rtrim($result, PHP_EOL);
@@ -454,10 +459,11 @@ class Sitemaps extends Component implements SitemapInterface
      * @param string   $sourceBundleType
      * @param string   $sourceHandle
      * @param int|null $siteId
+     * @param string $sitemapPrefix Sitemap prefix to use. Defaults to nothing.
      *
      * @return string
      */
-    public function sitemapUrlForBundle(string $sourceBundleType, string $sourceHandle, int $siteId = null): string
+    public function sitemapUrlForBundle(string $sourceBundleType, string $sourceHandle, int $siteId = null, string $sitemapPrefix = ''): string
     {
         $url = '';
         $sites = Craft::$app->getSites();
@@ -473,14 +479,12 @@ class Sitemaps extends Component implements SitemapInterface
         if ($site && $metaBundle) {
             try {
                 $url = UrlHelper::siteUrl(
-                    '/sitemaps-'
-                    .$site->groupId
-                    .'-'
-                    .$metaBundle->sourceBundleType
-                    .'-'
-                    .$metaBundle->sourceHandle
-                    .'-'
-                    .$metaBundle->sourceSiteId
+                    '/sitemaps'
+                    .'-'.$site->groupId
+                    .'-'.$metaBundle->sourceBundleType
+                    .'-'.$metaBundle->sourceHandle
+                    .($sitemapPrefix ? '-'.$sitemapPrefix : '')
+                    .'-'.$metaBundle->sourceSiteId
                     .'-sitemap.xml',
                     null,
                     null,
