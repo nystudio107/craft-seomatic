@@ -157,6 +157,31 @@ class SitemapController extends Controller
     }
 
     /**
+     * Returns a rendered sitemap.
+     *
+     * @param int $groupId Which Site Group the sitemap index is for
+     * @param string $type
+     * @param string $handle
+     * @param int $siteId
+     *
+     * @return Response
+     */
+    public function actionNewsSitemap(int $groupId, string $type, string $handle, int $siteId): Response
+    {
+        $xml = Seomatic::$plugin->sitemaps->renderTemplate(
+            Sitemaps::SEOMATIC_NEWS_SITEMAP_CONTAINER,
+            [
+                'groupId' => $groupId,
+                'type' => $type,
+                'handle' => $handle,
+                'siteId' => $siteId,
+            ]
+        );
+
+        return $this->asRaw($xml);
+    }
+
+    /**
      * Returns a rendered custom sitemap.
      *
      * @param int $groupId Which Site Group the sitemap index is for
