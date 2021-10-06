@@ -14,6 +14,7 @@ namespace nystudio107\seomatic\services;
 use nystudio107\seomatic\jobs\GenerateSitemap;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\NewsSitemapIndexTemplate;
+use nystudio107\seomatic\models\NewsSitemapTemplate;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\base\SitemapInterface;
@@ -51,6 +52,8 @@ class Sitemaps extends Component implements SitemapInterface
     const SEOMATIC_NEWS_SITEMAPINDEX_CONTAINER = Seomatic::SEOMATIC_HANDLE.NewsSitemapIndexTemplate::TEMPLATE_TYPE;
 
     const SEOMATIC_SITEMAP_CONTAINER = Seomatic::SEOMATIC_HANDLE.SitemapTemplate::TEMPLATE_TYPE;
+
+    const SEOMATIC_NEWS_SITEMAP_CONTAINER = Seomatic::SEOMATIC_HANDLE.NewsSitemapTemplate::TEMPLATE_TYPE;
 
     const SEOMATIC_SITEMAPCUSTOM_CONTAINER = Seomatic::SEOMATIC_HANDLE.SitemapCustomTemplate::TEMPLATE_TYPE;
 
@@ -99,6 +102,9 @@ class Sitemaps extends Component implements SitemapInterface
             // A generic sitemap
             $sitemapTemplate = SitemapTemplate::create();
             $this->sitemapTemplateContainer->addData($sitemapTemplate, self::SEOMATIC_SITEMAP_CONTAINER);
+            // A news sitemap
+            $sitemapTemplate = NewsSitemapTemplate::create();
+            $this->sitemapTemplateContainer->addData($sitemapTemplate, self::SEOMATIC_NEWS_SITEMAP_CONTAINER);
             // Handler: UrlManager::EVENT_REGISTER_SITE_URL_RULES
             Event::on(
                 UrlManager::class,
@@ -497,8 +503,8 @@ class Sitemaps extends Component implements SitemapInterface
                     .'-'.$site->groupId
                     .'-'.$metaBundle->sourceBundleType
                     .'-'.$metaBundle->sourceHandle
-                    .($sitemapType ? '-'.$sitemapType : '')
                     .'-'.$metaBundle->sourceSiteId
+                    .($sitemapType ? '-'.$sitemapType : '')
                     .'-sitemap.xml',
                     null,
                     null,

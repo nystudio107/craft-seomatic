@@ -51,6 +51,13 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         'xml',
     ];
 
+    protected static $defaultConfig = [
+        'path' => 'sitemaps-<groupId:\d+>-<type:[\w\.*]+>-<handle:[\w\.*]+>-<siteId:\d+>-sitemap.xml',
+        'template' => '',
+        'controller' => 'sitemap',
+        'action' => 'sitemap',
+    ];
+
     // Static Methods
     // =========================================================================
 
@@ -61,15 +68,10 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
      */
     public static function create(array $config = [])
     {
-        $defaults = [
-            'path' => 'sitemaps-<groupId:\d+>-<type:[\w\.*]+>-<handle:[\w\.*]+>-<siteId:\d+>-<file:[-\w\.*]+>',
-            'template' => '',
-            'controller' => 'sitemap',
-            'action' => 'sitemap',
-        ];
-        $config = array_merge($config, $defaults);
 
-        return new SitemapTemplate($config);
+        $config = array_merge($config, static::$defaultConfig);
+
+        return new static($config);
     }
 
     // Public Properties
@@ -126,13 +128,14 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             $robotsEnabled = $metaBundle->metaGlobalVars->robots !== 'none' &&
                 $metaBundle->metaGlobalVars->robots !== 'noindex';
         }
-        $sitemapUrls = $metaBundle->metaSitemapVars->sitemapUrls;
-        if (Seomatic::$plugin->sitemaps->anyEntryTypeHasSitemapUrls($metaBundle)) {
+        $sitemapEnabled = $this->getIsSitemapEnabled($metaBundle);
+        if ($this->getForceCreatingSitemap($metaBundle)) {
             $robotsEnabled = true;
-            $sitemapUrls = true;
+            $sitemapEnabled = true;
         }
+
         // If it's disabled, just throw a 404
-        if (!$sitemapUrls || !$robotsEnabled) {
+        if (!$sitemapEnabled || !$robotsEnabled) {
             if ($request->isCpRequest || $request->isConsoleRequest) {
                 return '';
             }
@@ -143,8 +146,8 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
 
         $cache = Craft::$app->getCache();
         $uniqueKey = $groupId.$type.$handle.$siteId;
-        $cacheKey = self::CACHE_KEY.$uniqueKey;
-        $queueJobCacheKey = self::QUEUE_JOB_CACHE_KEY.$uniqueKey;
+        $cacheKey = static::CACHE_KEY.$uniqueKey;
+        $queueJobCacheKey = static::QUEUE_JOB_CACHE_KEY.$uniqueKey;
         $result = $cache->get($cacheKey);
         // If the sitemap isn't cached, start a job to create it
         if ($result === false) {
@@ -192,7 +195,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             if ($result !== false) {
                 return $result;
             }
-            // Return a 503 Service Unavailable an a Retry-After so bots will try back later
+            // Return a 503 Service Unavailable and a Retry-After so bots will try back later
             $lines = [];
             $response = Craft::$app->getResponse();
             if (!$request->isConsoleRequest && $throwException) {
@@ -234,4 +237,21 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         );
     }
 
+    /**
+     * @param MetaBundle $metaBundle
+     * @return bool
+     */
+    protected function getIsSitemapEnabled(MetaBundle $metaBundle): bool
+    {
+        return $metaBundle->metaSitemapVars->sitemapUrls;
+    }
+
+    /**
+     * @param MetaBundle $metaBundle
+     * @return bool
+     */
+    protected function getForceCreatingSitemap(MetaBundle $metaBundle): bool
+    {
+        return Seomatic::$plugin->sitemaps->anyEntryTypeHasSitemapUrls($metaBundle);
+    }
 }

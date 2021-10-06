@@ -82,7 +82,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
 
         return new static($config);
     }
-    
+
     // Public Methods
     // =========================================================================
 
