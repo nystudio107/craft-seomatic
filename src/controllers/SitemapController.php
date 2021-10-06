@@ -32,9 +32,11 @@ class SitemapController extends Controller
      * @inheritdoc
      */
     protected $allowAnonymous = [
+        'news-sitemap-index',
         'sitemap-index',
         'sitemap-index-redirect',
         'sitemap',
+        'news-sitemap',
         'sitemap-styles',
         'sitemap-empty-styles',
         'sitemap-custom',
