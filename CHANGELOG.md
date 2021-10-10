@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.16 - UNRELEASED
+### Changed
+* Add an empty value to possible selections for the Robots setting, to allow it to fall back on global settings ([#996](https://github.com/nystudio107/craft-seomatic/issues/996))
+
 ## 3.4.15 - 2021.09.28
 ### Fixed
 * Disable strict variables during meta value rendering, to mirror the functionality of `renderObjectTemplate()`. Resolves ([#990](https://github.com/nystudio107/craft-seomatic/issues/990))
