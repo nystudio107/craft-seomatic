@@ -555,12 +555,14 @@ class MetaContainers extends Component
         // Special-case for requests for the FrontendTemplateContainer "container"
         if ($type === FrontendTemplateContainer::CONTAINER_TYPE) {
             $renderedTemplates = [];
-            $frontendTemplateContainers = Seomatic::$plugin->frontendTemplates->frontendTemplateContainer['data'];
-            foreach ($frontendTemplateContainers as $name => $frontendTemplateContainer) {
-                if ($frontendTemplateContainer->include) {
-                    $result = $frontendTemplateContainer->render([
-                    ]);
-                    $renderedTemplates[] = [$name => $result];
+            if (Seomatic::$plugin->frontendTemplates->frontendTemplateContainer['data'] ?? false) {
+                $frontendTemplateContainers = Seomatic::$plugin->frontendTemplates->frontendTemplateContainer['data'];
+                foreach ($frontendTemplateContainers as $name => $frontendTemplateContainer) {
+                    if ($frontendTemplateContainer->include) {
+                        $result = $frontendTemplateContainer->render([
+                        ]);
+                        $renderedTemplates[] = [$name => $result];
+                    }
                 }
             }
             $html .= Json::encode($renderedTemplates);
