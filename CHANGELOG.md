@@ -5,8 +5,9 @@
 * Add an empty value to possible selections for the Robots setting, to allow it to fall back on global settings ([#996](https://github.com/nystudio107/craft-seomatic/issues/996))
 
 ### Fixed
-* Ensure the FrontendTemplatesContainer exists before accessing it via GraphQL
+* Ensure the FrontendTemplatesContainer exists before accessing it via GraphQL ([#1000](https://github.com/nystudio107/craft-seomatic/issues/1000))
 * Render Canonical URL overrides from the SEO Settings field properly via GraphQL requests ([#1001](https://github.com/nystudio107/craft-seomatic/issues/1001))
+* Don't show the "SEO Image Transform Mode" text (sans controls) if it's not enabled in the Field Settings ([#995](https://github.com/nystudio107/craft-seomatic/issues/995))
 
 ## 3.4.15 - 2021.09.28
 ### Fixed
