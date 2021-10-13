@@ -409,7 +409,8 @@ class MetaContainers extends Component
         }
         // Get the homeUrl and canonicalUrl
         $homeUrl = '/';
-        $canonicalUrl = DynamicMetaHelper::sanitizeUrl($uri, false);
+        $canonicalUrl = $this->metaGlobalVars->parsedValue('canonicalUrl');
+        $canonicalUrl = DynamicMetaHelper::sanitizeUrl($canonicalUrl, false);
         // Special-case the global bundle
         if ($uri === MetaBundles::GLOBAL_META_BUNDLE || $uri === '__home__') {
             $canonicalUrl = '/';
@@ -555,12 +556,14 @@ class MetaContainers extends Component
         // Special-case for requests for the FrontendTemplateContainer "container"
         if ($type === FrontendTemplateContainer::CONTAINER_TYPE) {
             $renderedTemplates = [];
-            $frontendTemplateContainers = Seomatic::$plugin->frontendTemplates->frontendTemplateContainer['data'];
-            foreach ($frontendTemplateContainers as $name => $frontendTemplateContainer) {
-                if ($frontendTemplateContainer->include) {
-                    $result = $frontendTemplateContainer->render([
-                    ]);
-                    $renderedTemplates[] = [$name => $result];
+            if (Seomatic::$plugin->frontendTemplates->frontendTemplateContainer['data'] ?? false) {
+                $frontendTemplateContainers = Seomatic::$plugin->frontendTemplates->frontendTemplateContainer['data'];
+                foreach ($frontendTemplateContainers as $name => $frontendTemplateContainer) {
+                    if ($frontendTemplateContainer->include) {
+                        $result = $frontendTemplateContainer->render([
+                        ]);
+                        $renderedTemplates[] = [$name => $result];
+                    }
                 }
             }
             $html .= Json::encode($renderedTemplates);
@@ -619,12 +622,14 @@ class MetaContainers extends Component
         // Special-case for requests for the FrontendTemplateContainer "container"
         if ($type === FrontendTemplateContainer::CONTAINER_TYPE) {
             $renderedTemplates = [];
-            $frontendTemplateContainers = Seomatic::$plugin->frontendTemplates->frontendTemplateContainer['data'];
-            foreach ($frontendTemplateContainers as $name => $frontendTemplateContainer) {
-                if ($frontendTemplateContainer->include) {
-                    $result = $frontendTemplateContainer->render([
-                    ]);
-                    $renderedTemplates[] = [$name => $result];
+            if (Seomatic::$plugin->frontendTemplates->frontendTemplateContainer['data'] ?? false) {
+                $frontendTemplateContainers = Seomatic::$plugin->frontendTemplates->frontendTemplateContainer['data'];
+                foreach ($frontendTemplateContainers as $name => $frontendTemplateContainer) {
+                    if ($frontendTemplateContainer->include) {
+                        $result = $frontendTemplateContainer->render([
+                        ]);
+                        $renderedTemplates[] = [$name => $result];
+                    }
                 }
             }
 
