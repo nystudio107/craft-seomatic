@@ -160,12 +160,12 @@ SITEMAPINDEX;
     }
 
     /**
-     * Wrap a collection of sitemaps in a sitemap index tag and return it.
+     * Generate a sitemap entry based on the passed data.
      *
      * @param string $sitemap
      * @return string
      */
-    protected function wrapSitemap(string $sitemapUrl, string $lastMod = ''): string
+    protected function generateSitemapEntry(string $sitemapUrl, string $lastMod = ''): string
     {
         $lastModTag = !empty($lastMod) ? "<lastmod>$lastMod</lastmod>" : '';
         return <<<SITEMAP
@@ -237,7 +237,7 @@ SITEMAP;
                 // Only add a sitemap to the sitemap index if there's at least 1 element in the resulting sitemap
                 if ($totalElements > 0) {
                     $lastMod = $metaBundle->sourceDateUpdated !== null ?  $metaBundle->sourceDateUpdated->format(\DateTime::W3C) : '';
-                    $sitemapData .= $this->wrapSitemap(Html::encode($sitemapUrl), $lastMod);
+                    $sitemapData .= $this->generateSitemapEntry(Html::encode($sitemapUrl), $lastMod);
                 }
             }
         }
@@ -280,7 +280,7 @@ SITEMAP;
                     $loc = MetaValueHelper::parseString($additionalSitemap['loc']);
                     $dateUpdated = !empty($additionalSitemap['lastmod']) ? $additionalSitemap['lastmod'] : new \DateTime;
                     $lastMod = $dateUpdated->format(\DateTime::W3C);
-                    $sitemapXml .= $this->wrapSitemap( Html::encode($loc), $lastMod);
+                    $sitemapXml .= $this->generateSitemapEntry( Html::encode($loc), $lastMod);
                 }
             }
         }
@@ -327,7 +327,7 @@ SITEMAP;
             }
             $lastMod = $dateUpdated->format(\DateTime::W3C);
 
-            $sitemapXml .= $this->wrapSitemap(Html::encode($sitemapUrl), $lastMod);
+            $sitemapXml .= $this->generateSitemapEntry(Html::encode($sitemapUrl), $lastMod);
         }
 
         return $sitemapXml;

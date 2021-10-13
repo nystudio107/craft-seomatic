@@ -543,6 +543,7 @@ class Sitemaps extends Component implements SitemapInterface
         $cache = Craft::$app->getCache();
         // If the queue should be run automatically, do it now
         TagDependency::invalidate($cache, SitemapTemplate::SITEMAP_CACHE_TAG.$handle.$siteId);
+        TagDependency::invalidate($cache, NewsSitemapTemplate::SITEMAP_CACHE_TAG.$handle.$siteId);
         Craft::info(
             'Sitemap cache cleared: '.$handle,
             __METHOD__
@@ -554,7 +555,7 @@ class Sitemaps extends Component implements SitemapInterface
         $site = $sites->getSiteById($siteId);
         $groupId = $site->groupId;
         $sitemapTemplate = SitemapTemplate::create();
-        $xml = $sitemapTemplate->render(
+        $sitemapTemplate->render(
             [
                 'groupId' => $groupId,
                 'type' => $type,
@@ -563,6 +564,18 @@ class Sitemaps extends Component implements SitemapInterface
                 'throwException' => false,
             ]
         );
+
+        $newSitemapTemplate = NewsSitemapTemplate::create();
+        $newSitemapTemplate->render(
+            [
+                'groupId' => $groupId,
+                'type' => $type,
+                'handle' => $handle,
+                'siteId' => $siteId,
+                'throwException' => false,
+            ]
+        );
+
     }
 
     /**

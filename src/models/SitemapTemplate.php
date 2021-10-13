@@ -41,6 +41,8 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
 
     const SITEMAP_CACHE_TAG = 'seomatic_sitemap_';
 
+    const SITEMAP_JOB_CLASS = GenerateSitemap::class;
+
     const FILE_TYPES = [
         'excel',
         'pdf',
@@ -161,13 +163,15 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 $cache->delete($queueJobCacheKey);
             }
             // Push a new queue job
-            $jobId = $queue->push(new GenerateSitemap([
+            $class = static::SITEMAP_JOB_CLASS;
+            $jobId = $queue->push(new $class([
                 'groupId' => $groupId,
                 'type' => $type,
                 'handle' => $handle,
                 'siteId' => $siteId,
                 'queueJobCacheKey' => $queueJobCacheKey,
             ]));
+
             // Stash the queue job id in the cache for future reference
             $cacheDuration = 3600;
             $dependency = new TagDependency([

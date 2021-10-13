@@ -11,18 +11,9 @@
 
 namespace nystudio107\seomatic\models;
 
+use nystudio107\seomatic\jobs\GenerateNewsSitemap;
 use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\base\FrontendTemplate;
-use nystudio107\seomatic\base\SitemapInterface;
-use nystudio107\seomatic\helpers\Queue as QueueHelper;
-use nystudio107\seomatic\jobs\GenerateSitemap;
-
-use Craft;
-use craft\queue\QueueInterface;
-
 use nystudio107\seomatic\services\Sitemaps;
-use yii\caching\TagDependency;
-use yii\web\NotFoundHttpException;
 
 /**
  * @author    nystudio107
@@ -39,6 +30,8 @@ class NewsSitemapTemplate extends SitemapTemplate
     const CACHE_KEY = 'seomatic_news_sitemap_';
 
     const QUEUE_JOB_CACHE_KEY = 'seomatic_news_sitemap_queue_job_';
+
+    const SITEMAP_JOB_CLASS = GenerateNewsSitemap::class;
 
     protected static $defaultConfig = [
         'path' => 'sitemaps-<groupId:\d+>-<type:[\w\.*]+>-<handle:[\w\.*]+>-<siteId:\d+>-news-sitemap.xml',
