@@ -1,9 +1,12 @@
 # SEOmatic Changelog
 
-## 3.4.16 - UNRELEASED
+## 3.4.16 - 2021.10.13
 ### Changed
 * Add an empty value to possible selections for the Robots setting, to allow it to fall back on global settings ([#996](https://github.com/nystudio107/craft-seomatic/issues/996))
+
+### Fixed
 * Ensure the FrontendTemplatesContainer exists before accessing it via GraphQL
+* Render Canonical URL overrides from the SEO Settings field properly via GraphQL requests ([#1001](https://github.com/nystudio107/craft-seomatic/issues/1001))
 
 ## 3.4.15 - 2021.09.28
 ### Fixed
