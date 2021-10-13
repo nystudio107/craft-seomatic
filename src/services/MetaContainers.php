@@ -409,7 +409,8 @@ class MetaContainers extends Component
         }
         // Get the homeUrl and canonicalUrl
         $homeUrl = '/';
-        $canonicalUrl = DynamicMetaHelper::sanitizeUrl($uri, false);
+        $canonicalUrl = $this->metaGlobalVars->parsedValue('canonicalUrl');
+        $canonicalUrl = DynamicMetaHelper::sanitizeUrl($canonicalUrl, false);
         // Special-case the global bundle
         if ($uri === MetaBundles::GLOBAL_META_BUNDLE || $uri === '__home__') {
             $canonicalUrl = '/';
