@@ -352,6 +352,12 @@ class SeoSettings extends Field implements PreviewableFieldInterface
         $nameSpacedId = Craft::$app->getView()->namespaceInputId($id);
         $variables['id'] = $id;
         $variables['nameSpacedId'] = $nameSpacedId;
+
+        // Make sure the *Sources variables at least exist, for things like the QuickPost widget
+        $variables['textFieldSources'] = [];
+        $variables['assetFieldSources'] = [];
+        $variables['assetVolumeTextFieldSources'] = [];
+        $variables['userFieldSources'] = [];
         // Pull field sources
         if ($element !== null) {
             /** @var Element $element */
