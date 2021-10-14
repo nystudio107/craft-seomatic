@@ -42,8 +42,7 @@ class NewsSitemapTemplate extends SitemapTemplate
 
 
     /**
-     * @param MetaBundle $metaBundle
-     * @return bool
+     * @inheritdoc
      */
     protected function getIsSitemapEnabled(MetaBundle $metaBundle): bool
     {
@@ -51,8 +50,7 @@ class NewsSitemapTemplate extends SitemapTemplate
     }
 
     /**
-     * @param MetaBundle $metaBundle
-     * @return bool
+     * @inheritdoc
      */
     protected function getForceCreatingSitemap(MetaBundle $metaBundle): bool
     {

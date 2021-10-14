@@ -11,20 +11,18 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\base\FrontendTemplate;
-use nystudio107\seomatic\base\SitemapInterface;
-use nystudio107\seomatic\events\RegisterSitemapUrlsEvent;
-use nystudio107\seomatic\events\RegisterSitemapsEvent;
-use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
-
 use Craft;
 use craft\models\SiteGroup;
-
+use nystudio107\seomatic\base\FrontendTemplate;
+use nystudio107\seomatic\base\SitemapInterface;
+use nystudio107\seomatic\events\RegisterSitemapsEvent;
+use nystudio107\seomatic\events\RegisterSitemapUrlsEvent;
+use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
+use nystudio107\seomatic\Seomatic;
+use yii\base\Event;
 use yii\caching\TagDependency;
 use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
-use yii\base\Event;
 
 /**
  * @author    nystudio107
@@ -354,6 +352,8 @@ SITEMAP;
     }
 
     /**
+     * Get the sitemap URL for the bundle
+     *
      * @param MetaBundle $metaBundle
      * @return string
      */
@@ -367,6 +367,8 @@ SITEMAP;
     }
 
     /**
+     * Return true whether the sitemap is enabled at all.
+     *
      * @param MetaBundle $metaBundle
      * @return bool
      */
@@ -376,6 +378,8 @@ SITEMAP;
     }
 
     /**
+     * Return true whether sitemap should definitely be created for this section.
+     *
      * @param MetaBundle $metaBundle
      * @return bool
      */

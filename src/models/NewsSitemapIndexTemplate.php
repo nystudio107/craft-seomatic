@@ -46,8 +46,7 @@ class NewsSitemapIndexTemplate extends SitemapIndexTemplate
     }
 
     /**
-     * @param MetaBundle $metaBundle
-     * @return bool
+     * @inheritdoc
      */
     protected function getIsSitemapEnabled(MetaBundle $metaBundle): bool
     {
@@ -55,8 +54,7 @@ class NewsSitemapIndexTemplate extends SitemapIndexTemplate
     }
 
     /**
-     * @param MetaBundle $metaBundle
-     * @return bool
+     * @inheritdoc
      */
     protected function getForceCreatingSitemap(MetaBundle $metaBundle): bool
     {

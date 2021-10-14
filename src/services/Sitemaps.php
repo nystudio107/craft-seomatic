@@ -191,6 +191,8 @@ class Sitemaps extends Component implements SitemapInterface
      * See if any of the entry types have robots enabled and sitemap urls enabled
      *
      * @param MetaBundle $metaBundle
+     * @param string $sitemapType
+     *
      * @return bool
      */
     public function anyEntryTypeHasSitemapUrls(MetaBundle $metaBundle, string $sitemapType = ''): bool

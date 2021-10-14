@@ -11,39 +11,12 @@
 
 namespace nystudio107\seomatic\jobs;
 
-use nystudio107\seomatic\base\InheritableSettingsModel;
-use nystudio107\seomatic\base\SeoElementInterface;
-use nystudio107\seomatic\fields\SeoSettings;
-use nystudio107\seomatic\helpers\MetaValue;
-use nystudio107\seomatic\models\MetaBundle;
-use nystudio107\seomatic\models\MetaNewsSitemapVars;
-use nystudio107\seomatic\models\MetaSitemapVars;
-use nystudio107\seomatic\models\NewsSitemapTemplate;
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\helpers\ArrayHelper;
-use nystudio107\seomatic\helpers\Field as FieldHelper;
-use nystudio107\seomatic\helpers\UrlHelper;
-use nystudio107\seomatic\models\SitemapTemplate;
-
-use nystudio107\fastcgicachebust\FastcgiCacheBust;
-
 use Craft;
 use craft\base\Element;
-use craft\base\ElementInterface;
-use craft\console\Application as ConsoleApplication;
-use craft\db\Paginator;
-use craft\elements\Asset;
-use craft\elements\MatrixBlock;
-use craft\fields\Assets as AssetsField;
-use craft\models\SiteGroup;
-use craft\queue\BaseJob;
-
-use verbb\supertable\elements\SuperTableBlockElement as SuperTableBlock;
-
-use benf\neo\elements\Block as NeoBlock;
-
-use yii\base\Exception;
-use yii\caching\TagDependency;
+use nystudio107\seomatic\base\InheritableSettingsModel;
+use nystudio107\seomatic\models\MetaBundle;
+use nystudio107\seomatic\models\MetaNewsSitemapVars;
+use nystudio107\seomatic\models\NewsSitemapTemplate;
 use yii\helpers\Html;
 
 /**
@@ -66,9 +39,9 @@ class GenerateNewsSitemap extends GenerateSitemap
         ]);
     }
 
-    // Protected Methods
-    // =========================================================================
-
+    /**
+     * @inheritdoc
+     */
     protected function getXmlNs(MetaBundle $metaBundle, bool $multiSite): string
     {
         $xmlNs = 'xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"';
@@ -80,28 +53,7 @@ class GenerateNewsSitemap extends GenerateSitemap
     }
 
     /**
-     * @param MetaBundle $metaBundle
-     * @param $seoElement
-     * @return int|null
-     */
-    protected function getTotalElements(MetaBundle $metaBundle, $seoElement)
-    {
-        // Ensure `null` so that the resulting element query is correct
-        if (empty($metaBundle->metaNewsSitemapVars->sitemapLimit)) {
-            $metaBundle->metaNewsSitemapVars->sitemapLimit = null;
-        }
-        $totalElements = $seoElement::sitemapElementsQuery($metaBundle)->count();
-
-        if ($metaBundle->metaNewsSitemapVars->sitemapLimit && ($totalElements > $metaBundle->metaNewsSitemapVars->sitemapLimit)) {
-            $totalElements = $metaBundle->metaNewsSitemapVars->sitemapLimit;
-        }
-
-        return $totalElements;
-    }
-
-    /**
-     * @param MetaBundle $metaBundle
-     * @return bool
+     * @inheritdoc
      */
     protected function getIsSitemapEnabled(MetaBundle $metaBundle): bool
     {
@@ -109,14 +61,17 @@ class GenerateNewsSitemap extends GenerateSitemap
     }
 
     /**
-     * @param MetaBundle $metaBundle
-     * @return MetaSitemapVars
+     * @inheritdoc
+     * @return MetaNewsSitemapVars
      */
     protected function getSiteMapVars(MetaBundle $metaBundle): InheritableSettingsModel
     {
         return $metaBundle->metaNewsSitemapVars;
     }
 
+    /**
+     * @inheritdoc
+     */
     protected function getAdditionalDataForElement(MetaBundle $metaBundle, Element $element): string
     {
         $map = $metaBundle->metaNewsSitemapVars->sitemapNewsFieldMap;
@@ -146,6 +101,18 @@ PUBLICATION;
         return $sitemapItem;
     }
 
+    /**
+     * @inheritdoc
+     */
+    protected function generateAdditionalEntriesForElement(MetaBundle $metaBundle, Element $element): string
+    {
+        return '';
+    }
+
+
+    /**
+     * @inheritdoc
+     */
     protected function getCacheKey(): string
     {
         return NewsSitemapTemplate::CACHE_KEY . $this->groupId . $this->type . $this->handle . $this->siteId;

@@ -324,9 +324,13 @@ class GenerateSitemap extends BaseJob
         ]);
     }
 
-    // Protected Methods
-    // =========================================================================
-
+    /**
+     * Get the XML namespaces applicable to this sitemap.
+     *
+     * @param MetaBundle $metaBundle
+     * @param bool $multiSite
+     * @return string
+     */
     protected function getXmlNs(MetaBundle $metaBundle, bool $multiSite): string
     {
         $xmlNs = 'xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"';
@@ -341,6 +345,13 @@ class GenerateSitemap extends BaseJob
         return $xmlNs;
     }
 
+    /**
+     * Wrap the sitemap in the appropriate tags.
+     *
+     * @param string $sitemap
+     * @param string $xmlNs
+     * @return string
+     */
     protected function wrapSitemap(string $sitemap, string $xmlNs): string
     {
         return <<<SITEMAP
@@ -351,6 +362,17 @@ class GenerateSitemap extends BaseJob
 SITEMAP;
     }
 
+    /**
+     * Generate a sitemap entry.
+     *
+     * @param string $url
+     * @param string $lastMod
+     * @param string $changeFreq
+     * @param string $priority
+     * @param string $altLinks
+     * @param string $additionalData
+     * @return string
+     */
     protected function generateSitemapEntry(string $url, string $lastMod, string $changeFreq, string $priority, string $altLinks = '', string $additionalData = ''): string
     {
         return <<<ITEM
@@ -366,6 +388,8 @@ ITEM;
     }
 
     /**
+     * Get total elements, as truncated by the limit setting.
+     *
      * @param MetaBundle $metaBundle
      * @param $seoElement
      * @return int|null
@@ -373,17 +397,23 @@ ITEM;
     protected function getTotalElements(MetaBundle $metaBundle, $seoElement)
     {
         // Ensure `null` so that the resulting element query is correct
-        if (empty($metaBundle->metaSitemapVars->sitemapLimit)) {
-            $metaBundle->metaSitemapVars->sitemapLimit = null;
+        $sitemapVars = $this->getSiteMapVars($metaBundle);
+
+        if (empty($sitemapVars->sitemapLimit)) {
+            $sitemapVars->sitemapLimit = null;
         }
+
         $totalElements = $seoElement::sitemapElementsQuery($metaBundle)->count();
-        if ($metaBundle->metaSitemapVars->sitemapLimit && ($totalElements > $metaBundle->metaSitemapVars->sitemapLimit)) {
-            $totalElements = $metaBundle->metaSitemapVars->sitemapLimit;
+
+        if ($sitemapVars->sitemapLimit && ($totalElements > $sitemapVars->sitemapLimit)) {
+            $totalElements = $sitemapVars->sitemapLimit;
         }
         return $totalElements;
     }
 
     /**
+     * Return true if the sitemap is enabled, according to the settings.
+     *
      * @param MetaBundle $metaBundle
      * @return bool
      */
@@ -393,6 +423,8 @@ ITEM;
     }
 
     /**
+     * Return the appropriate sitemap variable container.
+     *
      * @param MetaBundle $metaBundle
      * @return MetaSitemapVars
      */
@@ -401,6 +433,13 @@ ITEM;
         return $metaBundle->metaSitemapVars;
     }
 
+    /**
+     * Return additional data that should be present in the sitemap entry for an element.
+     *
+     * @param MetaBundle $metaBundle
+     * @param Element $element
+     * @return string
+     */
     protected function getAdditionalDataForElement(MetaBundle $metaBundle, Element $element): string
     {
         $additionalData = '';
@@ -453,8 +492,7 @@ ITEM;
     }
 
     /**
-     * Combine any per-entry type field settings from $element with the passed in
-     * $metaBundle
+     * Combine any per-entry type field settings from $element with the passed in $metaBundle
      *
      * @param SeoElementInterface|string $seoElement
      * @param Element $element
@@ -495,8 +533,7 @@ ITEM;
     }
 
     /**
-     * Combine any SEO Settings field settings from $element with the passed in
-     * $metaBundle
+     * Combine any SEO Settings field settings from $element with the passed in $metaBundle
      *
      * @param Element $element
      * @param MetaBundle $metaBundle
@@ -550,6 +587,8 @@ ITEM;
     }
 
     /**
+     * Generate a sitemap item for a media file.
+     * s
      * @param Asset $asset
      * @param MetaBundle $metaBundle
      */
@@ -605,6 +644,13 @@ ITEM;
         return $sitemapItem;
     }
 
+    /**
+     * Generate any additional entries for this element for this sitemap.
+     *
+     * @param MetaBundle $metaBundle
+     * @param Element $element
+     * @return string
+     */
     protected function generateAdditionalEntriesForElement(MetaBundle $metaBundle, Element $element): string
     {
         $additionalEntries = '';
@@ -661,6 +707,8 @@ ITEM;
     }
 
     /**
+     * Return a sitemap entry for a file linked within an assets field.
+     *
      * @param Asset $asset
      * @param MetaBundle $metaBundle
      * @param array $lines
@@ -682,6 +730,8 @@ ITEM;
     }
 
     /**
+     * Get the cache key for this sitemap type
+     *
      * @return string
      */
     protected function getCacheKey(): string
