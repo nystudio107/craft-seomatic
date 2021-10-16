@@ -16,12 +16,12 @@
  */
 
 return [
-    'sitemapUrls'          => null,
-    'sitemapAssets'        => null,
-    'sitemapFiles'         => null,
-    'sitemapAltLinks'      => null,
-    'sitemapChangeFreq'    => null,
-    'sitemapPriority'      => null,
+    'sitemapUrls'          => true,
+    'sitemapAssets'        => true,
+    'sitemapFiles'         => true,
+    'sitemapAltLinks'      => true,
+    'sitemapChangeFreq'    => 'weekly',
+    'sitemapPriority'      => 0.5,
     'sitemapLimit'         => null,
     'structureDepth'       => null,
     'sitemapImageFieldMap' => [

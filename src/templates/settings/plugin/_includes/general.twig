@@ -25,36 +25,6 @@
         }) }}
 
         {{ forms.lightswitchField({
-            label: "Sitemaps Enabled"|t("seomatic"),
-            instructions: "Controls whether SEOmatic will automatically render frontend sitemaps for your website."|t("seomatic"),
-            id: "sitemapsEnabled",
-            name: "sitemapsEnabled",
-            on: settings.sitemapsEnabled,
-            warning: configWarning("sitemapsEnabled", "seomatic"),
-            errors: settings.getErrors("sitemapsEnabled"),
-        }) }}
-
-        {{ forms.lightswitchField({
-            label: "Regenerate Sitemaps Automatically"|t("seomatic"),
-            instructions: "Controls whether sitemaps will automatically be regenerated when entries are saved."|t("seomatic"),
-            id: "regenerateSitemapsAutomatically",
-            name: "regenerateSitemapsAutomatically",
-            on: settings.regenerateSitemapsAutomatically,
-            warning: configWarning("regenerateSitemapsAutomatically", "seomatic"),
-            errors: settings.getErrors("regenerateSitemapsAutomatically"),
-        }) }}
-
-        {{ forms.lightswitchField({
-            label: "Submit Sitemap Changes"|t("seomatic"),
-            instructions: "Should sitemaps be submitted to search engines automatically whenever there are changes?"|t("seomatic"),
-            id: "submitSitemaps",
-            name: "submitSitemaps",
-            on: settings.submitSitemaps,
-            warning: configWarning("submitSitemaps", "seomatic"),
-            errors: settings.getErrors("submitSitemaps"),
-        }) }}
-
-        {{ forms.lightswitchField({
             label: "Include Homepage in Breadcrumbs"|t("seomatic"),
             instructions: "Should the homepage be included in the generated Breadcrumbs JSON-LD?"|t("seomatic"),
             id: "includeHomepageInBreadcrumbs",

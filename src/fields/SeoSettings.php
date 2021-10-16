@@ -352,6 +352,12 @@ class SeoSettings extends Field implements PreviewableFieldInterface
         $nameSpacedId = Craft::$app->getView()->namespaceInputId($id);
         $variables['id'] = $id;
         $variables['nameSpacedId'] = $nameSpacedId;
+
+        // Make sure the *Sources variables at least exist, for things like the QuickPost widget
+        $variables['textFieldSources'] = [];
+        $variables['assetFieldSources'] = [];
+        $variables['assetVolumeTextFieldSources'] = [];
+        $variables['userFieldSources'] = [];
         // Pull field sources
         if ($element !== null) {
             /** @var Element $element */
@@ -361,15 +367,14 @@ class SeoSettings extends Field implements PreviewableFieldInterface
         /** @var MetaBundle $value */
         $variables['elementType'] = Asset::class;
 
+        $variables['parentBundles'] = [];
         // Preview the containers so the preview is correct in the field
         if ($element !== null && $element->uri !== null) {
             Seomatic::$plugin->metaContainers->previewMetaContainers($element->uri, $element->siteId, true);
+            $contentMeta = Seomatic::$plugin->metaBundles->getContentMetaBundleForElement($element);
+            $globalMeta = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($element->siteId);
+            $variables['parentBundles'] = [$contentMeta, $globalMeta];
         }
-
-        $contentMeta = Seomatic::$plugin->metaBundles->getContentMetaBundleForElement($element);
-        $globalMeta = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($element->siteId);
-
-        $variables['parentBundles'] = [$contentMeta, $globalMeta];
 
         // Render the input template
         return Craft::$app->getView()->renderTemplate(

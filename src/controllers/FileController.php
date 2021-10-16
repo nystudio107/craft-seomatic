@@ -15,12 +15,15 @@ use nystudio107\seomatic\helpers\UrlHelper;
 use nystudio107\seomatic\Seomatic;
 
 use Craft;
+use craft\elements\Asset;
 use craft\helpers\FileHelper;
+use craft\helpers\Assets as AssetsHelper;
 use craft\web\Controller;
 
 use yii\web\NotFoundHttpException;
 use yii\web\HttpException;
 use yii\web\Response;
+use yii\web\ServerErrorHttpException;
 
 /**
  * @author    nystudio107
@@ -86,6 +89,15 @@ class FileController extends Controller
             if (!empty($canonical)) {
                 $headerValue = '<'.$canonical.'>; rel="canonical"';
                 $response->headers->add('Link', $headerValue);
+            }
+            // Ensure the file type is allowed
+            // ref: https://craftcms.com/docs/3.x/config/config-settings.html#allowedfileextensions
+            $allowedExtensions = Craft::$app->getConfig()->getGeneral()->allowedFileExtensions;
+            if (($ext = pathinfo($fileName, PATHINFO_EXTENSION)) !== '') {
+                $ext = strtolower($ext);
+            }
+            if ($ext === '' || $ext === 'svg' || !in_array($ext, $allowedExtensions, true)) {
+                throw new ServerErrorHttpException(Craft::t('seomatic', 'File format not allowed.'));
             }
             // Send the file as a stream, so it can exist anywhere
             $response->sendContentAsFile(

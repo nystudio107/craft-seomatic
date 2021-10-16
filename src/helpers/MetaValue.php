@@ -216,8 +216,11 @@ class MetaValue
             $matchedElementType = $element::refHandle() ?? $refHandle ?? 'entry';
             if ($matchedElementType) {
                 self::$templateObjectVars[$matchedElementType] = $element;
+                self::$templatePreviewVars[$matchedElementType] = $element;
             }
         }
+        self::$templatePreviewVars['object'] = self::$templateObjectVars;
+        self::$templatePreviewVars['seomatic'] = Seomatic::$seomaticVariable;
 
         self::$view = Seomatic::$view;
     }
@@ -273,7 +276,7 @@ class MetaValue
                 }
                 // Render the template out
                 $metaValue = trim(html_entity_decode(
-                    self::$view->renderObjectTemplate($metaValue, self::$templateObjectVars, self::$templatePreviewVars),
+                    self::internalRenderObjectTemplate($metaValue, self::$templatePreviewVars),
                     ENT_NOQUOTES,
                     'UTF-8'
                 ));
@@ -313,5 +316,37 @@ class MetaValue
         }
 
         return $metaValue;
+    }
+
+    /**
+     * Replacement for self::$view->renderObjectTemplate that just handles changing { woof } into {{ woof }}
+     *
+     * @param string $template
+     * @param array $variables
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\SyntaxError
+     * @throws \yii\base\ExitException
+     */
+    protected static function internalRenderObjectTemplate(string $template, array $variables = []): string
+    {
+        $twig = self::$view->getTwig();
+        // Temporarily disable strict variables if it's enabled
+        $strictVariables = $twig->isStrictVariables();
+        if ($strictVariables) {
+            $twig->disableStrictVariables();
+        }
+        // Swap out the remaining {xyz} tags with {{xyz}}
+        $template = preg_replace_callback('/(?<!\{)\{\s*(\w+)([^\{]*?)\}/', function(array $match) {
+            $replace = $match[1] . $match[2];
+            return "{{ $replace|raw }}";
+        }, $template);
+        $result = self::$view->renderString($template, $variables);
+        // Re-enable strict variables
+        if ($strictVariables) {
+            $twig->enableStrictVariables();
+        }
+
+        return $result;
     }
 }

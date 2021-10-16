@@ -56,7 +56,7 @@ class UrlHelper extends CraftUrlHelper
             return $url;
         }
 
-        return parent::siteUrl($path, $params, $scheme, $siteId);
+        return DynamicMeta::sanitizeUrl(parent::siteUrl($path, $params, $scheme, $siteId), false, false);
     }
 
     /**
@@ -130,7 +130,7 @@ class UrlHelper extends CraftUrlHelper
             $url = rtrim($url, '/');
         }
 
-        return $url;
+        return DynamicMeta::sanitizeUrl($url, false, false);
     }
 
     /**
@@ -161,7 +161,7 @@ class UrlHelper extends CraftUrlHelper
         if (filter_var($pathOrUrl, FILTER_VALIDATE_URL)) {
             $url_parts = parse_url($pathOrUrl);
             $result['prefix'] = $url_parts['scheme'] . '://' . $url_parts['host'];
-            $result['path'] = $url_parts['path'];
+            $result['path'] = $url_parts['path'] ?? '';
             $result['suffix'] = '';
             $result['suffix'] .= empty($url_parts['query']) ? '' : '?' . $url_parts['query'];
             $result['suffix'] .= empty($url_parts['fragment']) ? '' : '#' . $url_parts['fragment'];

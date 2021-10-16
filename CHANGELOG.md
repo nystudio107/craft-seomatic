@@ -1,8 +1,79 @@
 # SEOmatic Changelog
 
-## 3.4.8 - UNRELEASED
+## 3.4.17 - UNRELEASED
+### Fixed
+* Ensure URLs with no `path` work in `decomposeUrl()` ([#1001](https://github.com/nystudio107/craft-seomatic/issues/1001))
+* Make sure the *Sources variables at least exist, for things like the QuickPost widget ([#1002](https://github.com/nystudio107/craft-seomatic/issues/1002))
+* 
+## 3.4.16 - 2021.10.13
+### Changed
+* Add an empty value to possible selections for the Robots setting, to allow it to fall back on global settings ([#996](https://github.com/nystudio107/craft-seomatic/issues/996))
+
+### Fixed
+* Ensure the FrontendTemplatesContainer exists before accessing it via GraphQL ([#1000](https://github.com/nystudio107/craft-seomatic/issues/1000))
+* Render Canonical URL overrides from the SEO Settings field properly via GraphQL requests ([#1001](https://github.com/nystudio107/craft-seomatic/issues/1001))
+* Don't show the "SEO Image Transform Mode" text (sans controls) if it's not enabled in the Field Settings ([#995](https://github.com/nystudio107/craft-seomatic/issues/995))
+
+## 3.4.15 - 2021.09.28
+### Fixed
+* Disable strict variables during meta value rendering, to mirror the functionality of `renderObjectTemplate()`. Resolves ([#990](https://github.com/nystudio107/craft-seomatic/issues/990))
+
+## 3.4.14 - 2021.09.27
+### Changed
+* Substantial performance increase on element save, because we ensure the sitemap queue job doesn't attach itself to web-based queue runners ([#989](https://github.com/nystudio107/craft-seomatic/issues/989))
+* Changed the core MetaValue parsing method to be faster, also resolves (for real) ([#653](https://github.com/nystudio107/craft-seomatic/issues/653))
+* Remove all references to the now-deprecated `object.` syntax (though it still functions as usual)
+
+### Fixed
+* Fixed an issue where the query string would be erroneously stripped from image URLs ([#987](https://github.com/nystudio107/craft-seomatic/issues/987))
+
+## 3.4.13 - 2021.09.26
+### Fixed
+* Fixed a regression that could cause sitemap generation via console command to throw an error ([#985](https://github.com/nystudio107/craft-seomatic/issues/985))
+* Fixed an exception that could be thrown on paginated pages that were not the first page
+
+## 3.4.12 - 2021.09.26
+### Fixed
+* Fixed an issue where the preview in Content SEO would not display the correct information if "Summary from Field" was chosen ([#653](https://github.com/nystudio107/craft-seomatic/issues/653))
+
+### Security
+* Sanitize all rendered URLs in an effort to mitigate a potential attack vector on an improperly configured site
+
+## 3.4.11 - 2021.09.24
+### Added
+* Added support for [security.txt](https://securitytxt.org/) in SEOmatic → Global settings
+* Added an option to SEOmatic → Plugin Setting → Sitemaps to have items that have a different Canonical URL than the item URL excluded from the sitemap ([#983](https://github.com/nystudio107/craft-seomatic/issues/983))
+* Moved all the sitemap Plugin Settings to their own tab in SEOmatic → Plugin Setting → Sitemaps
+
+### Changed
+* Ensure that paginated self-referencing `hreflang` urls match the paginated canonical URL ([#984](https://github.com/nystudio107/craft-seomatic/issues/984))
+
+### Fixed
+* Fixed an issue where a tracking script that had no templateString or templatePath could not be saved, showing "Couldn't save tracking settings due to a Twig error." ([#981](https://github.com/nystudio107/craft-seomatic/issues/981))
+* Fixed the default values for Entry meta bundles that were errantly changed to be empty
+* Fixed an issue with the SEO Settings field throwing an exception is no `$element` context was passed in
+
+### Security
+* Ensure that only files with the extensions listed in `allowedFileExtensions` General Config setting can be used with the SEO File Link controller
+* Sanitize the canonical URL after the absolute URL has been returned, to mitigate poisoned `X-Forwarded-Host` headers
+
+## 3.4.10 - 2021.09.15
+### Fixed
+* Fixed a regression that would throw an exception if Commerce was not installed
+
+## 3.4.9 - 2021.09.15
+### Added
+* Added the ability to automatically include Commerce's `variant=XXX` URL parameter in the metadata cache key, allowing for unique values per variant ([#971](https://github.com/nystudio107/craft-seomatic/issues/971))
+* Added a `allowedUrlParams` config setting that allows URL parameters to be manually whitelisted for inclusion in the metadata cache key ([#971](https://github.com/nystudio107/craft-seomatic/issues/971))
+* Added the ability to query for frontend template containers (`robots.txt`, etc.) via GraphQL or Meta Container API Endpoint
+
+## 3.4.8 - 2021.09.09
+### Added
+* Added a nicer looking theme for the Twig & JavaScript code editors, and a more pleasant font selection
+
 ### Fixed
 * Fixed an issue where an empty Category (or other element type) could throw an exception when creating the first category item ([#973](https://github.com/nystudio107/craft-seomatic/issues/973))
+* Fixed profiling on certain methods by using `endProfile()` in the `MetaContainers` service
 
 ## 3.4.7 - 2021.09.08
 ### Fixed

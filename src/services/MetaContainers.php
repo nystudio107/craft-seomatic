@@ -11,18 +11,18 @@
 
 namespace nystudio107\seomatic\services;
 
-use nystudio107\seomatic\helpers\ArrayHelper;
-use nystudio107\seomatic\helpers\Json;
-use nystudio107\seomatic\helpers\Localization as LocalizationHelper;
-use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\events\InvalidateContainerCachesEvent;
+use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\helpers\Json;
+use nystudio107\seomatic\helpers\Localization as LocalizationHelper;
 use nystudio107\seomatic\helpers\DynamicMeta as DynamicMetaHelper;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\helpers\UrlHelper;
+use nystudio107\seomatic\models\FrontendTemplateContainer;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaGlobalVars;
 use nystudio107\seomatic\models\MetaSiteVars;
@@ -33,6 +33,8 @@ use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\MetaScript;
 use nystudio107\seomatic\models\MetaTagContainer;
 use nystudio107\seomatic\models\MetaTitleContainer;
+use nystudio107\seomatic\models\MetaJsonLd;
+use nystudio107\seomatic\seoelements\SeoProduct;
 use nystudio107\seomatic\services\JsonLd as JsonLdService;
 use nystudio107\seomatic\variables\SeomaticVariable;
 
@@ -41,6 +43,8 @@ use craft\base\Component;
 use craft\base\Element;
 use craft\console\Application as ConsoleApplication;
 use craft\elements\GlobalSet;
+
+use craft\commerce\Plugin as CommercePlugin;
 
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
@@ -202,7 +206,7 @@ class MetaContainers extends Component
                 }
             }
             // Get our cache key
-            $cacheKey = $uri.$siteId.$paginationPage.$requestPath;
+            $cacheKey = $uri.$siteId.$paginationPage.$requestPath.$this->getAllowedUrlParams();
             // For requests with a status code of >= 400, use one cache key
             if (!$request->isConsoleRequest) {
                 $response = Craft::$app->getResponse();
@@ -396,7 +400,6 @@ class MetaContainers extends Component
         $globalSets = GlobalSet::findAll([
             'siteId' => $siteId,
         ]);
-        MetaValueHelper::$templatePreviewVars = [];
         foreach ($globalSets as $globalSet) {
             MetaValueHelper::$templatePreviewVars[$globalSet->handle] = $globalSet;
         }
@@ -406,7 +409,8 @@ class MetaContainers extends Component
         }
         // Get the homeUrl and canonicalUrl
         $homeUrl = '/';
-        $canonicalUrl = DynamicMetaHelper::sanitizeUrl($uri, false);
+        $canonicalUrl = $this->metaGlobalVars->parsedValue('canonicalUrl');
+        $canonicalUrl = DynamicMetaHelper::sanitizeUrl($canonicalUrl, false);
         // Special-case the global bundle
         if ($uri === MetaBundles::GLOBAL_META_BUNDLE || $uri === '__home__') {
             $canonicalUrl = '/';
@@ -549,6 +553,23 @@ class MetaContainers extends Component
     public function renderContainersByType(string $type): string
     {
         $html = '';
+        // Special-case for requests for the FrontendTemplateContainer "container"
+        if ($type === FrontendTemplateContainer::CONTAINER_TYPE) {
+            $renderedTemplates = [];
+            if (Seomatic::$plugin->frontendTemplates->frontendTemplateContainer['data'] ?? false) {
+                $frontendTemplateContainers = Seomatic::$plugin->frontendTemplates->frontendTemplateContainer['data'];
+                foreach ($frontendTemplateContainers as $name => $frontendTemplateContainer) {
+                    if ($frontendTemplateContainer->include) {
+                        $result = $frontendTemplateContainer->render([
+                        ]);
+                        $renderedTemplates[] = [$name => $result];
+                    }
+                }
+            }
+            $html .= Json::encode($renderedTemplates);
+
+            return $html;
+        }
         /** @var  $metaContainer MetaContainer */
         foreach ($this->metaContainers as $metaContainer) {
             if ($metaContainer::CONTAINER_TYPE === $type && $metaContainer->include) {
@@ -598,6 +619,22 @@ class MetaContainers extends Component
     public function renderContainersArrayByType(string $type): array
     {
         $htmlArray = [];
+        // Special-case for requests for the FrontendTemplateContainer "container"
+        if ($type === FrontendTemplateContainer::CONTAINER_TYPE) {
+            $renderedTemplates = [];
+            if (Seomatic::$plugin->frontendTemplates->frontendTemplateContainer['data'] ?? false) {
+                $frontendTemplateContainers = Seomatic::$plugin->frontendTemplates->frontendTemplateContainer['data'];
+                foreach ($frontendTemplateContainers as $name => $frontendTemplateContainer) {
+                    if ($frontendTemplateContainer->include) {
+                        $result = $frontendTemplateContainer->render([
+                        ]);
+                        $renderedTemplates[] = [$name => $result];
+                    }
+                }
+            }
+
+            return $renderedTemplates;
+        }
         /** @var  $metaContainer MetaContainer */
         foreach ($this->metaContainers as $metaContainer) {
             if ($metaContainer::CONTAINER_TYPE === $type && $metaContainer->include) {
@@ -842,11 +879,40 @@ class MetaContainers extends Component
                 $this->metaContainers[$key] = clone $metaContainer;
             }
         }
-        Craft::beginProfile('MetaContainers::loadGlobalMetaContainers', __METHOD__);
+        Craft::endProfile('MetaContainers::loadGlobalMetaContainers', __METHOD__);
     }
 
     // Protected Methods
     // =========================================================================
+
+    /**
+     * Return as key/value pairs any allowed parameters in the request
+     *
+     * @return string
+     */
+    protected function getAllowedUrlParams(): string
+    {
+        $result = '';
+        $allowedParams = Seomatic::$settings->allowedUrlParams;
+        if (Craft::$app->getPlugins()->getPlugin(SeoProduct::REQUIRED_PLUGIN_HANDLE)) {
+            $commerce = CommercePlugin::getInstance();
+            if ($commerce !== null) {
+                $allowedParams[] = 'variant';
+            }
+        }
+        // Iterate through the allowed parameters, adding the key/value pair to the $result string as found
+        $request = Craft::$app->getRequest();
+        if (!$request->isConsoleRequest) {
+            foreach ($allowedParams as $allowedParam) {
+                $value = $request->getParam($allowedParam);
+                if ($value !== null) {
+                    $result .= "{$allowedParam}={$value}";
+                }
+            }
+        }
+
+        return $result;
+    }
 
     /**
      * Load the meta containers specific to the matched meta bundle
@@ -858,7 +924,7 @@ class MetaContainers extends Component
         if ($metaBundle) {
             $this->addMetaBundleToContainers($metaBundle);
         }
-        Craft::beginProfile('MetaContainers::loadContentMetaContainers', __METHOD__);
+        Craft::endProfile('MetaContainers::loadContentMetaContainers', __METHOD__);
     }
 
     /**
@@ -916,7 +982,7 @@ class MetaContainers extends Component
                 }
             }
         }
-        Craft::beginProfile('MetaContainers::loadFieldMetaContainers', __METHOD__);
+        Craft::endProfile('MetaContainers::loadFieldMetaContainers', __METHOD__);
     }
 
     /**

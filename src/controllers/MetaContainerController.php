@@ -11,6 +11,7 @@ namespace nystudio107\seomatic\controllers;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\Container as ContainerHelper;
+use nystudio107\seomatic\models\FrontendTemplateContainer;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 use nystudio107\seomatic\models\MetaLinkContainer;
 use nystudio107\seomatic\models\MetaScriptContainer;
@@ -45,6 +46,7 @@ class MetaContainerController extends Controller
         'meta-script-container',
         'meta-json-ld-container',
         'meta-site-vars-container',
+        'frontend-template-container',
     ];
 
     // Public Methods
@@ -82,7 +84,9 @@ class MetaContainerController extends Controller
                 MetaScriptContainer::CONTAINER_TYPE,
                 MetaJsonLdContainer::CONTAINER_TYPE,
                 MetaSiteVars::CONTAINER_TYPE,
-            ],
+                MetaSiteVars::CONTAINER_TYPE,
+                FrontendTemplateContainer::CONTAINER_TYPE,
+                ],
             $uri,
             $siteId,
             $asArray
@@ -256,6 +260,35 @@ class MetaContainerController extends Controller
         $result = ContainerHelper::getContainerArrays(
             [
                 MetaSiteVars::CONTAINER_TYPE,
+            ],
+            $uri,
+            $siteId,
+            $asArray
+        );
+        // use "pretty" output in debug mode
+        Craft::$app->response->formatters[Response::FORMAT_JSON] = [
+            'class' => JsonResponseFormatter::class,
+            'prettyPrint' => YII_DEBUG,
+        ];
+
+        return $this->asJson($result);
+    }
+
+    /**
+     * Return the FrontendTemplateContainer "container"
+     * URI: /actions/seomatic/meta-container/frontend-template-container?uri=/
+     *
+     * @param string $uri
+     * @param int    $siteId
+     * @param bool   $asArray
+     *
+     * @return Response
+     */
+    public function actionFrontendTemplateContainer(string $uri, int $siteId = null, bool $asArray = false): Response
+    {
+        $result = ContainerHelper::getContainerArrays(
+            [
+                FrontendTemplateContainer::CONTAINER_TYPE,
             ],
             $uri,
             $siteId,

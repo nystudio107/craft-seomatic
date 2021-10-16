@@ -56,6 +56,11 @@ class Settings extends VarsModel
     public $submitSitemaps = true;
 
     /**
+     * @var bool Should items where the entry URL doesn't match the canonical URL be excluded?
+     */
+    public $excludeNonCanonicalUrls = false;
+
+    /**
      * @var bool Should the homepage be included in the generated Breadcrumbs JSON-LD?
      */
     public $includeHomepageInBreadcrumbs = true;
@@ -222,6 +227,12 @@ class Settings extends VarsModel
     public $defaultSeoElementTypes = [
     ];
 
+    /**
+     * @var string[] URL params that are allowed to be considered part of the unique URL used for the metadata cache
+     */
+    public $allowedUrlParams = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -239,6 +250,7 @@ class Settings extends VarsModel
                     'sitemapsEnabled',
                     'regenerateSitemapsAutomatically',
                     'submitSitemaps',
+                    'excludeNonCanonicalUrls',
                     'includeHomepageInBreadcrumbs',
                     'headersEnabled',
                     'generatorEnabled',
@@ -283,6 +295,7 @@ class Settings extends VarsModel
                     'sidebarDisplayPreviewTypes',
                     'defaultSeoElementTypes',
                     'cspScriptSrcPolicies',
+                    'allowedUrlParams',
                 ],
                 ArrayValidator::class,
             ],

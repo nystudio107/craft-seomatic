@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\gql\interfaces;
 
 use nystudio107\seomatic\gql\types\generators\SeomaticGenerator;
 
+use nystudio107\seomatic\models\FrontendTemplateContainer;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 use nystudio107\seomatic\models\MetaLinkContainer;
 use nystudio107\seomatic\models\MetaScriptContainer;
@@ -45,6 +46,7 @@ class SeomaticInterface extends BaseInterfaceType
         'metaScriptContainer' => MetaScriptContainer::CONTAINER_TYPE,
         'metaJsonLdContainer' => MetaJsonLdContainer::CONTAINER_TYPE,
         'metaSiteVarsContainer' => MetaSiteVars::CONTAINER_TYPE,
+        'frontendTemplateContainer' => FrontendTemplateContainer::CONTAINER_TYPE,
     ];
 
     /**
