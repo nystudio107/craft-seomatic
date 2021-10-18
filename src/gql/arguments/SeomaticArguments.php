@@ -11,9 +11,7 @@
 
 namespace nystudio107\seomatic\gql\arguments;
 
-use GraphQL\Type\Definition\EnumType;
 use nystudio107\seomatic\gql\types\SeomaticEnvironmentType;
-use nystudio107\seomatic\helpers\Environment;
 
 use craft\gql\base\Arguments;
 use GraphQL\Type\Definition\Type;
