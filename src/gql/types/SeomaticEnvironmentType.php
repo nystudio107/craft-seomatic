@@ -56,7 +56,7 @@ class SeomaticEnvironmentType extends EnumType
                 ],
                 Environment::SEOMATIC_PRODUCTION_ENV => [
                     'value' => Environment::SEOMATIC_PRODUCTION_ENV,
-                    'description' => 'Production environment, with indexing enabled'
+                    'description' => 'Live production environment, with indexing enabled'
                 ],
             ]
         ];
