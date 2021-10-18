@@ -677,6 +677,7 @@ class Seomatic extends Plugin
                         __METHOD__
                     );
                     $event->types[] = SeomaticInterface::class;
+                    $event->types[] = SeomaticEnvironmentType::class;
                 }
             );
             // Handler: Gql::EVENT_REGISTER_GQL_QUERIES
@@ -694,14 +695,6 @@ class Seomatic extends Plugin
                     }
                 }
             );
-            Event::on(
-                Gql::class,
-                Gql::EVENT_REGISTER_GQL_TYPES,
-                function(RegisterGqlTypesEvent $event) {
-                    $event->types[] = SeomaticEnvironmentType::class;
-                }
-            );
-
             if (self::$craft35) {
                 // Handler: Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS
                 Event::on(

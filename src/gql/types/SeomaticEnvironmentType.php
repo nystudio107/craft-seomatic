@@ -11,6 +11,10 @@
 
 namespace nystudio107\seomatic\gql\types;
 
+use nystudio107\seomatic\helpers\Environment;
+
+use craft\gql\GqlEntityRegistry;
+
 use GraphQL\Type\Definition\EnumType;
 
 /**
@@ -22,16 +26,51 @@ use GraphQL\Type\Definition\EnumType;
  */
 class SeomaticEnvironmentType extends EnumType
 {
+
+    /**
+     * @var string
+     */
+    public $name = 'SeomaticEnvironment';
+
+    /**
+     * @var string
+     */
+    public $description = 'SEOmatic environment.';
+
     /**
      * @inheritdoc
      */
-    public function __construct(array $config)
+    public function __construct()
     {
-        $config['interfaces'] = [
-            SeomaticEnvironmentType::getType(),
+        $config = [
+            'name' => self::getName(),
+            'description' => 'Optional - The SEOmatic environment that should be used',
+            'values' => [
+                Environment::SEOMATIC_DEV_ENV => [
+                    'value' => Environment::SEOMATIC_DEV_ENV,
+                    'description' => 'Local Development environment, with debugging enabled and indexing disabled'
+                ],
+                Environment::SEOMATIC_STAGING_ENV => [
+                    'value' => Environment::SEOMATIC_STAGING_ENV,
+                    'description' => 'Staging environment, with indexing disabled'
+                ],
+                Environment::SEOMATIC_PRODUCTION_ENV => [
+                    'value' => Environment::SEOMATIC_PRODUCTION_ENV,
+                    'description' => 'Production environment, with indexing enabled'
+                ],
+            ]
         ];
-
         parent::__construct($config);
+    }
+
+    /**
+     * Returns a singleton instance to ensure one type per schema.
+     *
+     * @return SeomaticEnvironmentType
+     */
+    public static function getType(): SeomaticEnvironmentType
+    {
+        return GqlEntityRegistry::getEntity(self::getName()) ?: GqlEntityRegistry::createEntity(self::getName(), new self());
     }
 
     /**

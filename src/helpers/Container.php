@@ -71,7 +71,7 @@ class Container
         $metaContainers = Seomatic::$plugin->metaContainers;
         // Get our cache key
         $asArrayKey = $asArray ? 'true' : 'false';
-        $cacheKey = $uri.$siteId.implode($containerKeys).$asArrayKey;
+        $cacheKey = $uri.$siteId.implode($containerKeys).$asArrayKey.Seomatic::$environment;
         // Load the meta containers
         $dependency = new TagDependency([
             'tags' => [

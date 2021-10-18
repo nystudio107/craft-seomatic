@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\gql\resolvers;
 
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\gql\interfaces\SeomaticInterface;
 use nystudio107\seomatic\helpers\Container as ContainerHelper;
 
@@ -20,7 +21,6 @@ use craft\gql\base\Resolver;
 use craft\helpers\Json;
 
 use GraphQL\Type\Definition\ResolveInfo;
-use nystudio107\seomatic\Seomatic;
 
 /**
  * Class SeomaticResolver
@@ -56,7 +56,7 @@ class SeomaticResolver extends Resolver
         // Change the environment if we need to
         $environment = $arguments['environment'] ?? null;
         if ($environment) {
-            Seomatic::$settings->environment = $environment;
+            Seomatic::$environment = $environment;
         }
         $asArray = $arguments['asArray'] ?? false;
         $uri = trim($uri === '/' ? '__home__' : $uri, '/');
