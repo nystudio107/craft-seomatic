@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic;
 
+use GraphQL\Type\Definition\EnumType;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
 use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
@@ -18,6 +19,8 @@ use nystudio107\seomatic\gql\arguments\SeomaticArguments;
 use nystudio107\seomatic\gql\interfaces\SeomaticInterface;
 use nystudio107\seomatic\gql\resolvers\SeomaticResolver;
 use nystudio107\seomatic\gql\queries\SeomaticQuery;
+use nystudio107\seomatic\gql\types\SeomaticEnvironmentType;
+use nystudio107\seomatic\helpers\Environment;
 use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
 use nystudio107\seomatic\helpers\Gql as GqlHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
@@ -691,6 +694,14 @@ class Seomatic extends Plugin
                     }
                 }
             );
+            Event::on(
+                Gql::class,
+                Gql::EVENT_REGISTER_GQL_TYPES,
+                function(RegisterGqlTypesEvent $event) {
+                    $event->types[] = SeomaticEnvironmentType::class;
+                }
+            );
+
             if (self::$craft35) {
                 // Handler: Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS
                 Event::on(

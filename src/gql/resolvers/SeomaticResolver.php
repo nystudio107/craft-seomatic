@@ -20,6 +20,7 @@ use craft\gql\base\Resolver;
 use craft\helpers\Json;
 
 use GraphQL\Type\Definition\ResolveInfo;
+use nystudio107\seomatic\Seomatic;
 
 /**
  * Class SeomaticResolver
@@ -51,6 +52,11 @@ class SeomaticResolver extends Resolver
             if (!empty($arguments['site'])) {
                 $siteId = self::getSiteIdFromHandle($arguments['site']) ?? $siteId;
             }
+        }
+        // Change the environment if we need to
+        $environment = $arguments['environment'] ?? null;
+        if ($environment) {
+            Seomatic::$settings->environment = $environment;
         }
         $asArray = $arguments['asArray'] ?? false;
         $uri = trim($uri === '/' ? '__home__' : $uri, '/');

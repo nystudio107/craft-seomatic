@@ -11,6 +11,9 @@
 
 namespace nystudio107\seomatic\gql\arguments;
 
+use GraphQL\Type\Definition\EnumType;
+use nystudio107\seomatic\helpers\Environment;
+
 use craft\gql\base\Arguments;
 use GraphQL\Type\Definition\Type;
 
@@ -28,6 +31,8 @@ class SeomaticArguments extends Arguments
      */
     public static function getArguments(): array
     {
+        $environment = new EnumType([]);
+
         return [
             'uri' => [
                 'name' => 'uri',
@@ -48,6 +53,25 @@ class SeomaticArguments extends Arguments
                 'name' => 'asArray',
                 'type' => Type::boolean(),
                 'description' => 'Whether the meta items should be returned as an array or as pre-rendered tag text.'
+            ],
+            'environment' => [
+                'name' => 'environment',
+                'type' => 'SeomaticEnvironment',
+                'description' => 'Optional - The SEOmatic environment that should be used',
+                'values' => [
+                    'dev' => [
+                        'value' => Environment::SEOMATIC_DEV_ENV,
+                        'description' => 'Local Development environment, with debugging enabled and indexing disabled'
+                    ],
+                    'staging' => [
+                        'value' => Environment::SEOMATIC_STAGING_ENV,
+                        'description' => 'Staging environment, with indexing disabled'
+                    ],
+                    'production' => [
+                        'value' => Environment::SEOMATIC_PRODUCTION_ENV,
+                        'description' => 'Production environment, with indexing enabled'
+                    ],
+                ]
             ],
         ];
     }
