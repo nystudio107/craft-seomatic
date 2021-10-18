@@ -55,6 +55,7 @@ class SeomaticResolver extends Resolver
         }
         // Change the environment if we need to
         $environment = $arguments['environment'] ?? null;
+        $oldEnvironment = Seomatic::$environment;
         if ($environment) {
             Seomatic::$environment = $environment;
         }
@@ -71,6 +72,9 @@ class SeomaticResolver extends Resolver
             if (isset($value) && is_array($value)) {
                 $result[$key] = Json::encode($value);
             }
+        }
+        if ($environment) {
+            Seomatic::$environment = $oldEnvironment;
         }
 
         return $result;
