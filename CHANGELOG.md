@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.4.17 - UNRELEASED
+## 3.4.17 - 2021.10.19
 ### Added
 * Added the ability to specify the SEOmatic environment to use with the GraphQL API (local, staging, production)
 
