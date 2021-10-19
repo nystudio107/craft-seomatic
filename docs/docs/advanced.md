@@ -203,6 +203,27 @@ This defaults to `false` which returns to you HTML ready to be inserted into the
 
 This is useful if you’re using Next.js, Nuxt.js, Gatsby, Gridsome, or anything else that uses a library to insert the various tags. In this case, you want the raw data to pass along.
 
+...and you can also pass in an optional `environment` parameter:
+
+```graphql
+{
+  seomatic (uri: "/", environment: staging) {
+      metaTitleContainer
+      metaTagContainer
+      metaLinkContainer
+      metaScriptContainer
+      metaJsonLdContainer
+      metaSiteVarsContainer
+      frontendTemplateContainer
+  }
+}
+```
+This will override whatever the current SEOmatic environment is set to, and allow you to get the appropriate meta information for any of the preset SEOmatic environments. So `robots` for example will be disabled in `local` developmand & `staging` environments.
+
+This is useful if you are using a single Craft CMS instance to render metadata for multiple environments like `staging` and `live` production.
+
+Valid values are `local` for local development, `staging` for staging, and `live` for live production.
+
 ![Screenshot](./resources/screenshots/seomatic-craftql-query.png)
 
 You can also piggyback on an entries query, to return all of your data for an entry as well as the SEOmatic metadata in one request.
