@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.18 - UNRELEASED
+### Fixed
+* Fix Matomo script URL value by removing the // and / that are in the Matomo docs ([#1004](https://github.com/nystudio107/craft-seomatic/issues/1004))
+
 ## 3.4.17 - 2021.10.19
 ### Added
 * Added the ability to specify the SEOmatic environment to use with the GraphQL API (local, staging, production)
