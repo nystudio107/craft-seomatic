@@ -1,5 +1,13 @@
 # SEOmatic Changelog
 
+## 3.4.17 - 2021.10.19
+### Added
+* Added the ability to specify the SEOmatic environment to use with the GraphQL API (local, staging, production)
+
+### Fixed
+* Ensure URLs with no `path` work in `decomposeUrl()` ([#1001](https://github.com/nystudio107/craft-seomatic/issues/1001))
+* Make sure the *Sources variables at least exist, for things like the QuickPost widget ([#1002](https://github.com/nystudio107/craft-seomatic/issues/1002))
+
 ## 3.4.16 - 2021.10.13
 ### Changed
 * Add an empty value to possible selections for the Robots setting, to allow it to fall back on global settings ([#996](https://github.com/nystudio107/craft-seomatic/issues/996))

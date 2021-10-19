@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\gql\resolvers;
 
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\gql\interfaces\SeomaticInterface;
 use nystudio107\seomatic\helpers\Container as ContainerHelper;
 
@@ -52,6 +53,12 @@ class SeomaticResolver extends Resolver
                 $siteId = self::getSiteIdFromHandle($arguments['site']) ?? $siteId;
             }
         }
+        // Change the environment if we need to
+        $environment = $arguments['environment'] ?? null;
+        $oldEnvironment = Seomatic::$environment;
+        if ($environment) {
+            Seomatic::$environment = $environment;
+        }
         $asArray = $arguments['asArray'] ?? false;
         $uri = trim($uri === '/' ? '__home__' : $uri, '/');
 
@@ -65,6 +72,9 @@ class SeomaticResolver extends Resolver
             if (isset($value) && is_array($value)) {
                 $result[$key] = Json::encode($value);
             }
+        }
+        if ($environment) {
+            Seomatic::$environment = $oldEnvironment;
         }
 
         return $result;

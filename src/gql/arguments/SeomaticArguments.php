@@ -11,6 +11,8 @@
 
 namespace nystudio107\seomatic\gql\arguments;
 
+use nystudio107\seomatic\gql\types\SeomaticEnvironmentType;
+
 use craft\gql\base\Arguments;
 use GraphQL\Type\Definition\Type;
 
@@ -49,6 +51,7 @@ class SeomaticArguments extends Arguments
                 'type' => Type::boolean(),
                 'description' => 'Whether the meta items should be returned as an array or as pre-rendered tag text.'
             ],
+            'environment' => SeomaticEnvironmentType::getType(),
         ];
     }
 }
