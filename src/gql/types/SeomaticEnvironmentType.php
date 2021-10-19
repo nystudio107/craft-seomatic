@@ -40,9 +40,9 @@ class SeomaticEnvironmentType extends EnumType
     /**
      * @inheritdoc
      */
-    public function __construct()
+    public function __construct($config)
     {
-        $config = [
+        $config = array_merge($config, [
             'name' => self::getName(),
             'description' => 'Optional - The SEOmatic environment that should be used',
             'values' => [
@@ -59,7 +59,7 @@ class SeomaticEnvironmentType extends EnumType
                     'description' => 'Live production environment, with indexing enabled'
                 ],
             ]
-        ];
+        ]);
         parent::__construct($config);
     }
 
@@ -70,7 +70,7 @@ class SeomaticEnvironmentType extends EnumType
      */
     public static function getType(): SeomaticEnvironmentType
     {
-        return GqlEntityRegistry::getEntity(self::getName()) ?: GqlEntityRegistry::createEntity(self::getName(), new self());
+        return GqlEntityRegistry::getEntity(self::getName()) ?: GqlEntityRegistry::createEntity(self::getName(), new self([]));
     }
 
     /**
