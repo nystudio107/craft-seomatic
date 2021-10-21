@@ -13,10 +13,14 @@ namespace nystudio107\seomatic\jobs;
 
 use Craft;
 use craft\base\Element;
+use craft\elements\db\ElementQueryInterface;
+use craft\elements\db\EntryQuery;
+use craft\helpers\DateTimeHelper;
 use nystudio107\seomatic\base\InheritableSettingsModel;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaNewsSitemapVars;
 use nystudio107\seomatic\models\NewsSitemapTemplate;
+use nystudio107\seomatic\Seomatic;
 use yii\helpers\Html;
 
 /**
@@ -118,5 +122,31 @@ PUBLICATION;
         return NewsSitemapTemplate::CACHE_KEY . $this->groupId . $this->type . $this->handle . $this->siteId;
     }
 
+    /**
+     * @return int|null
+     */
+    protected function getCacheDuration()
+    {
+        $cacheDuration = Seomatic::$devMode
+            ? Seomatic::DEVMODE_CACHE_DURATION
+            : 60 * 60 * 24 * 2;
+        return $cacheDuration;
+    }
+
+    /**
+     * @param string $seoElement
+     * @param MetaBundle $metaBundle
+     * @return ElementQueryInterface
+     */
+    protected function getSitemapElementsQuery(string $seoElement, MetaBundle $metaBundle): ElementQueryInterface
+    {
+        /** @var EntryQuery $query */
+        $query = $seoElement::sitemapElementsQuery($metaBundle);
+
+        $twoDaysAgo = DateTimeHelper::currentUTCDateTime()->sub(new \DateInterval('P2D'));
+        $query->postDate('>= ' . $twoDaysAgo->format(('Y-m-d H:i:s')));
+        
+        return $query;
+    }
 
 }

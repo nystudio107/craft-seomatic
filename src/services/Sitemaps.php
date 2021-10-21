@@ -566,7 +566,6 @@ class Sitemaps extends Component implements SitemapInterface
                 'throwException' => false,
             ]
         );
-
         $newSitemapTemplate = NewsSitemapTemplate::create();
         $newSitemapTemplate->render(
             [

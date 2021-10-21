@@ -17,6 +17,7 @@ use craft\base\Element;
 use craft\console\Application as ConsoleApplication;
 use craft\db\Paginator;
 use craft\elements\Asset;
+use craft\elements\db\ElementQueryInterface;
 use craft\elements\MatrixBlock;
 use craft\fields\Assets as AssetsField;
 use craft\models\SiteGroup;
@@ -137,7 +138,7 @@ class GenerateSitemap extends BaseJob
         // Use craft\db\Paginator to paginate the results so we don't exceed any memory limits
         // See batch() and each() discussion here: https://github.com/yiisoft/yii2/issues/8420
         // and here: https://github.com/craftcms/cms/issues/7338
-        $paginator = new Paginator($seoElement::sitemapElementsQuery($metaBundle), [
+        $paginator = new Paginator($this->getSitemapElementsQuery($seoElement, $metaBundle), [
             'pageSize' => self::SITEMAP_QUERY_PAGE_SIZE,
         ]);
         $currentElement = 0;
@@ -282,9 +283,7 @@ class GenerateSitemap extends BaseJob
         // Cache sitemap cache; we use this instead of Seomatic::$cacheDuration because for
         // Control Panel requests, we set Seomatic::$cacheDuration = 1 so that they are never
         // cached
-        $cacheDuration = Seomatic::$devMode
-            ? Seomatic::DEVMODE_CACHE_DURATION
-            : null;
+        $cacheDuration = $this->getCacheDuration();
         $cache = Craft::$app->getCache();
         $cacheKey = $this->getCacheKey();
         $dependency = new TagDependency([
@@ -391,10 +390,10 @@ ITEM;
      * Get total elements, as truncated by the limit setting.
      *
      * @param MetaBundle $metaBundle
-     * @param $seoElement
+     * @param string $seoElement
      * @return int|null
      */
-    protected function getTotalElements(MetaBundle $metaBundle, $seoElement)
+    protected function getTotalElements(MetaBundle $metaBundle, string $seoElement)
     {
         // Ensure `null` so that the resulting element query is correct
         $sitemapVars = $this->getSiteMapVars($metaBundle);
@@ -403,7 +402,7 @@ ITEM;
             $sitemapVars->sitemapLimit = null;
         }
 
-        $totalElements = $seoElement::sitemapElementsQuery($metaBundle)->count();
+        $totalElements = $this->getSitemapElementsQuery($seoElement, $metaBundle)->count();
 
         if ($sitemapVars->sitemapLimit && ($totalElements > $sitemapVars->sitemapLimit)) {
             $totalElements = $sitemapVars->sitemapLimit;
@@ -737,5 +736,27 @@ ITEM;
     protected function getCacheKey(): string
     {
         return SitemapTemplate::CACHE_KEY . $this->groupId . $this->type . $this->handle . $this->siteId;
+    }
+
+    /**
+     * @return int|null
+     */
+    protected function getCacheDuration()
+    {
+        $cacheDuration = Seomatic::$devMode
+            ? Seomatic::DEVMODE_CACHE_DURATION
+            : null;
+
+        return $cacheDuration;
+    }
+
+    /**
+     * @param string $seoElement
+     * @param MetaBundle $metaBundle
+     * @return ElementQueryInterface
+     */
+    protected function getSitemapElementsQuery(string $seoElement, MetaBundle $metaBundle): ElementQueryInterface
+    {
+        return $seoElement::sitemapElementsQuery($metaBundle);
     }
 }

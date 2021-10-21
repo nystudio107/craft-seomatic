@@ -162,6 +162,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             }
             // Push a new queue job
             $class = static::SITEMAP_JOB_CLASS;
+
             $jobId = $queue->push(new $class([
                 'groupId' => $groupId,
                 'type' => $type,
