@@ -123,17 +123,6 @@ PUBLICATION;
     }
 
     /**
-     * @return int|null
-     */
-    protected function getCacheDuration()
-    {
-        $cacheDuration = Seomatic::$devMode
-            ? Seomatic::DEVMODE_CACHE_DURATION
-            : 60 * 60 * 24 * 2;
-        return $cacheDuration;
-    }
-
-    /**
      * @param string $seoElement
      * @param MetaBundle $metaBundle
      * @return ElementQueryInterface

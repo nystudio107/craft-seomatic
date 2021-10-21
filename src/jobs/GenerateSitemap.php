@@ -283,7 +283,10 @@ class GenerateSitemap extends BaseJob
         // Cache sitemap cache; we use this instead of Seomatic::$cacheDuration because for
         // Control Panel requests, we set Seomatic::$cacheDuration = 1 so that they are never
         // cached
-        $cacheDuration = $this->getCacheDuration();
+        $cacheDuration =  $cacheDuration = Seomatic::$devMode
+            ? Seomatic::DEVMODE_CACHE_DURATION
+            : null;
+        
         $cache = Craft::$app->getCache();
         $cacheKey = $this->getCacheKey();
         $dependency = new TagDependency([
@@ -736,18 +739,6 @@ ITEM;
     protected function getCacheKey(): string
     {
         return SitemapTemplate::CACHE_KEY . $this->groupId . $this->type . $this->handle . $this->siteId;
-    }
-
-    /**
-     * @return int|null
-     */
-    protected function getCacheDuration()
-    {
-        $cacheDuration = Seomatic::$devMode
-            ? Seomatic::DEVMODE_CACHE_DURATION
-            : null;
-
-        return $cacheDuration;
     }
 
     /**
