@@ -182,6 +182,14 @@ class Settings extends VarsModel
     ];
 
     /**
+     * @var bool
+     * SEO [best practices](https://www.searchenginejournal.com/google-dont-mix-noindex-relcanonical/262607)
+     * are to have `canonical` links not appear on pages that are not intended to be indexed. SEOmatic does
+     * this for you by default, but you can override that behavior with this setting
+     */
+    public $alwaysIncludeCanonicalUrls = false;
+
+    /**
      * @var bool Should the Canonical URL be automatically lower-cased?
      */
     public $lowercaseCanonicalUrl = true;
@@ -277,7 +285,8 @@ class Settings extends VarsModel
                     'enableMetaContainerEndpoint',
                     'enableJsonLdEndpoint',
                     'enableSeoFileLinkEndpoint',
-
+                    'alwaysIncludeCanonicalUrls',
+                    'lowercaseCanonicalUrl',
                 ],
                 'boolean'
             ],
