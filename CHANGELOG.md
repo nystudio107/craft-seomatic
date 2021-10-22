@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.4.18 - UNRELEASED
+### Added
+* Added the **Always include `canonical` links regardless of environment** setting to Plugin Settings -> Advanced ([#1006](https://github.com/nystudio107/craft-seomatic/issues/1006))
+
 ### Fixed
 * Fix Matomo script URL value by removing the // and / that are in the Matomo docs ([#1004](https://github.com/nystudio107/craft-seomatic/issues/1004))
 
