@@ -6,6 +6,7 @@
 
 ### Fixed
 * Fix Matomo script URL value by removing the // and / that are in the Matomo docs ([#1004](https://github.com/nystudio107/craft-seomatic/issues/1004))
+* Fixed an issue where meta value parsing could fail with unquoted object keys passed in ([#1007](https://github.com/nystudio107/craft-seomatic/issues/1007))
 
 ## 3.4.17 - 2021.10.19
 ### Added
