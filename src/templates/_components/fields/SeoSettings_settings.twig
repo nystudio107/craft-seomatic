@@ -187,4 +187,38 @@
         </div>
     </div>
 
+
+    {############### News Sitemap tab settings ###############}
+
+    <div class="field seomatic-script-wrapper">
+        <div class="seomatic-script-lightswitch">
+            {{ forms.lightswitchField({
+                label: "News Sitemap Tab"|t("seomatic"),
+                instructions: "Controls whether to display the News Sitemap SEO settings tab"|t("seomatic"),
+                id: "newsSitemapTabEnabled",
+                name: "newsSitemapTabEnabled",
+                on: field.newsSitemapTabEnabled,
+                warning: false,
+                errors: field.getErrors("newsSitemapTabEnabled"),
+            }) }}
+        </div>
+        <div class="seomatic-script-container" {% if not field.newsSitemapTabEnabled %}style="display: none;"{% endif %}>
+            {{ forms.checkboxSelectField({
+                instructions: "Choose the News Sitemap SEO settings fields to display"|t,
+                id: 'newsSitemapEnabledFields',
+                name: 'newsSitemapEnabledFields',
+                options: {
+                    'newsSitemapEnabled': 'Sitemap Enabled'|t('seomatic'),
+                    'sitemapAltLinks': 'Sitemap Alt URLs'|t('seomatic'),
+                    'sitemapChangeFreq': 'Change Frequency'|t('seomatic'),
+                    'sitemapPriority': 'Priority'|t('seomatic'),
+                    'sitemapLimit': 'Sitemap Limit'|t('seomatic'),
+                },
+                values: field.newsSitemapEnabledFields,
+                warning: false,
+                errors: field.getErrors("newsSitemapEnabledFields"),
+            }) }}
+        </div>
+    </div>
+
 </div>

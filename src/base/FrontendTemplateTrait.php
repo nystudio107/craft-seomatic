@@ -32,7 +32,7 @@ trait FrontendTemplateTrait
     public $handle;
 
     /**
-     * @var string The the frontend URI to listen for
+     * @var string The frontend URI to listen for
      */
     public $path;
 

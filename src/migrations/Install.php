@@ -101,6 +101,7 @@ class Install extends Migration
                     'metaGlobalVars'             => $this->text(),
                     'metaSiteVars'               => $this->text(),
                     'metaSitemapVars'            => $this->text(),
+                    'metaNewsSitemapVars'        => $this->text()->null(),
                     'metaContainers'             => $this->text(),
                     'redirectsContainer'         => $this->text(),
                     'frontendTemplatesContainer' => $this->text(),

@@ -20,6 +20,7 @@
 {% set metaGlobalVars = value.metaGlobalVars %}
 {% set metaBundleSettings = value.metaBundleSettings %}
 {% set metaSitemapVars = value.metaSitemapVars %}
+{% set metaNewsSitemapVars = value.metaNewsSitemapVars %}
 {% namespace name %}
 <div id="{{ id }}" class="field seomatic-field">
     <nav id="{{ id ~ "tabs" }}" class="seomatic-tabs">
@@ -39,6 +40,10 @@
             {% endif %}
             {% if field.sitemapTabEnabled %}
                 <li><a id="{{ id ~ "-tabs-sitemap" }}" class="seomatic-tab-links tab {{ selClass }}" href="#{{ nameSpacedId ~ '-tab-sitemap' }}"  tabindex="0">Sitemap</a></li>
+                {% set selClass="" %}
+            {% endif %}
+            {% if field.newsSitemapTabEnabled %}
+                <li><a id="{{ id ~ "-tabs-news-sitemap" }}" class="seomatic-tab-links tab {{ selClass }}" href="#{{ nameSpacedId ~ '-tab-news-sitemap' }}"  tabindex="0">News Sitemap</a></li>
                 {% set selClass="" %}
             {% endif %}
         </ul>
@@ -77,6 +82,15 @@
     {% if field.sitemapTabEnabled %}
         <div id="{{ "tab-sitemap" }}" class="seomatic-tab-content {{ hiddenClass }}">
             {% include "seomatic/settings/_includes/tab-sitemap.twig" with {"pageContext": "field"} %}
+        </div>
+        {% set hiddenClass="hidden" %}
+    {% endif %}
+
+    {############### News Sitemap tab settings ###############}
+
+    {% if field.newsSitemapTabEnabled %}
+        <div id="{{ "tab-news-sitemap" }}" class="seomatic-tab-content {{ hiddenClass }}">
+            {% include "seomatic/settings/_includes/tab-news-sitemap.twig" with {"pageContext": "field"} %}
         </div>
         {% set hiddenClass="hidden" %}
     {% endif %}

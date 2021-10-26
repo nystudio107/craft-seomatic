@@ -1,16 +1,16 @@
-{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "sitemapAltLinks", "metaSitemapVars") %}
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "sitemapAltLinks", containerName) %}
 {% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': seomatic.helper.isInherited(metaSitemapVars, "sitemapAltLinks"),
+    'isInherited': seomatic.helper.isInherited(container, "sitemapAltLinks"),
     'fieldLabel': "Sitemap Alt URLs"|t("seomatic"),
     'settingName': 'sitemapAltLinks',
-    'labelFor': 'metaSitemapVars-sitemapAltLinks',
-    'overrideNamespace': 'metaSitemapVars'
+    'labelFor': containerName ~ '-sitemapAltLinks',
+    'overrideNamespace': namespaceName
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro sitemapAltLinksField(metaSitemapVars, suffix) %}
+    {% macro sitemapAltLinksField(metaSitemapVars, suffix, namespaceName) %}
         <div class="instructions">
             <p>
                 {{ "Whether URLs to alternate translations should be included in the sitemap"|t("seomatic") }}
@@ -18,7 +18,7 @@
         </div>
 
         {% import "_includes/forms" as forms %}
-        {% namespace "metaSitemapVars" %}
+        {% namespace namespaceName %}
 
             {{ forms.lightswitchField({
                 id: "sitemapAltLinks" ~ suffix,
@@ -32,10 +32,10 @@
     {% endmacro %}
 
     {% block inheritedValues %}
-        {{ _self.sitemapAltLinksField(inheritedFrom.metaSitemapVars ?? metaSitemapVars, "-inherited") }}
+        {{ _self.sitemapAltLinksField(attribute(inheritedFrom, containerName) ?? container, "-inherited", namespaceName) }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.sitemapAltLinksField(metaSitemapVars, "") }}
+        {{ _self.sitemapAltLinksField(container, "", namespaceName) }}
     {% endblock %}
 {% endembed %}

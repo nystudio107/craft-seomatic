@@ -35,25 +35,41 @@
 {############### Sitemap Alt URLS ###############}
 
 {% if field is not defined or 'sitemapAltLinks' in field.sitemapEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_sitemapAltLinks.twig" %}
+    {% include "seomatic/settings/_includes/fields/_sitemapAltLinks.twig" with {
+        namespaceName: "metaSitemapVars",
+        container: metaSitemapVars,
+        containerName: "metaSitemapVars"
+    }%}
 {% endif %}
 
 {############### Sitemap Change Frequency ###############}
 
 {% if field is not defined or 'sitemapChangeFreq' in field.sitemapEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_sitemapChangeFreq.twig" %}
+    {% include "seomatic/settings/_includes/fields/_sitemapChangeFreq.twig" with {
+        namespaceName: "metaSitemapVars",
+        container: metaSitemapVars,
+        containerName: "metaSitemapVars"
+    }%}
 {% endif %}
 
 {############### Sitemap Priority ###############}
 
 {% if field is not defined or 'sitemapPriority' in field.sitemapEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_sitemapPriority.twig" %}
+    {% include "seomatic/settings/_includes/fields/_sitemapPriority.twig" with {
+        namespaceName: "metaSitemapVars",
+        container: metaSitemapVars,
+        containerName: "metaSitemapVars"
+    }%}
 {% endif %}
 
 {############### Sitemap Limit ###############}
 
 {% if field is not defined or 'sitemapLimit' in field.sitemapEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_sitemapLimit.twig" %}
+    {% include "seomatic/settings/_includes/fields/_sitemapLimit.twig" with {
+        namespaceName: "metaSitemapVars",
+        container: metaSitemapVars,
+        containerName: "metaSitemapVars"
+    }%}
 {% endif %}
 
 {% namespace "metaSitemapVars" %}

@@ -1,0 +1,41 @@
+{% requirePermission "seomatic:content-meta:sitemap" %}
+
+{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
+
+{% extends "seomatic/_layouts/contentSettings.twig" %}
+
+{% block header %}
+    {{ block('pageTitle') }}
+    {{ block('contextMenu') }}
+    <div class="flex-grow"></div>
+    <div class="flex-grow"></div>
+    {{ block('copyFromMenu') }}
+    {{ block('actionButton') }}
+{% endblock %}
+
+{% block contextMenu %}
+    {% include "seomatic/settings/_includes/types-menu.twig" %}
+    {% include "seomatic/settings/_includes/sites-menu.twig" %}
+{% endblock %}
+
+{% block copyFromMenu %}
+    {% include "seomatic/settings/_includes/copy-settings-menu.twig" %}
+{% endblock %}
+
+{% block content %}
+
+    <input type="hidden" name="action" value="seomatic/settings/save-content">
+    <input type="hidden" name="siteId" value="{{ currentSiteId }}">
+    <input type="hidden" name="sourceHandle" value="{{ currentSourceHandle }}">
+    <input type="hidden" name="sourceBundleType" value="{{ currentSourceBundleType }}">
+    <input type="hidden" name="typeId" value="{{ currentTypeId }}">
+    {{ redirectInput("seomatic/edit-content/#{currentSubSection}/#{currentSourceBundleType}/#{currentSourceHandle}/#{currentSiteHandle}?typeId=#{currentTypeId}") }}
+
+    {% if currentUser.can("seomatic:content-meta:sitemap") %}
+        <div id="tab-content-news-sitemap">
+            <h2>{{ "News Sitemap Settings"|t("seomatic") }}</h2>
+            {% include "seomatic/settings/_includes/tab-news-sitemap.twig" with {"pageContext": "content"} %}
+        </div>
+    {% endif %}
+
+{% endblock %}

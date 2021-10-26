@@ -1021,6 +1021,9 @@ class MetaBundles extends Component
         // Preserve the metaSitemapVars
         $attributes = $baseConfig->metaSitemapVars->getAttributes();
         $metaBundle->metaSitemapVars->setAttributes($attributes);
+        // Preserve the metaNewsSitemapVars
+        $attributes = $baseConfig->metaNewsSitemapVars->getAttributes();
+        $metaBundle->metaNewsSitemapVars->setAttributes($attributes);
         // Preserve the metaBundleSettings
         $attributes = $baseConfig->metaBundleSettings->getAttributes();
         $metaBundle->metaBundleSettings->setAttributes($attributes);

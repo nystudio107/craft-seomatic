@@ -32,9 +32,11 @@ class SitemapController extends Controller
      * @inheritdoc
      */
     protected $allowAnonymous = [
+        'news-sitemap-index',
         'sitemap-index',
         'sitemap-index-redirect',
         'sitemap',
+        'news-sitemap',
         'sitemap-styles',
         'sitemap-empty-styles',
         'sitemap-custom',
@@ -42,6 +44,17 @@ class SitemapController extends Controller
 
     // Public Methods
     // =========================================================================
+
+    public function beforeAction($action)
+    {
+        if ($action->id !== 'sitemap-index-redirect') {
+            $headers = Craft::$app->response->headers;
+            $headers->add('Content-Type', 'text/xml; charset=utf-8');
+            $headers->add('X-Robots-Tag', 'noindex');
+        }
+
+        return parent::beforeAction($action);
+    }
 
     /**
      * Returns the rendered sitemap index.
@@ -59,9 +72,26 @@ class SitemapController extends Controller
                 'siteId' => $siteId ?? Craft::$app->getSites()->currentSite->id,
             ]
         );
-        $headers = Craft::$app->response->headers;
-        $headers->add('Content-Type', 'text/xml; charset=utf-8');
-        $headers->add('X-Robots-Tag', 'noindex');
+
+        return $this->asRaw($xml);
+    }
+
+    /**
+     * Returns the rendered news sitemap index.
+     *
+     * @param int $groupId Which Site Group the sitemap index is for
+     *
+     * @return Response
+     */
+    public function actionNewsSitemapIndex(int $groupId, int $siteId = null): Response
+    {
+        $xml = Seomatic::$plugin->sitemaps->renderTemplate(
+            Sitemaps::SEOMATIC_NEWS_SITEMAPINDEX_CONTAINER,
+            [
+                'groupId' => $groupId,
+                'siteId' => $siteId ?? Craft::$app->getSites()->currentSite->id,
+            ]
+        );
 
         return $this->asRaw($xml);
     }
@@ -87,10 +117,6 @@ class SitemapController extends Controller
     {
         $xml = PluginTemplate::renderPluginTemplate('_frontend/pages/sitemap-styles.twig', []);
 
-        $headers = Craft::$app->response->headers;
-        $headers->add('Content-Type', 'text/xml; charset=utf-8');
-        $headers->add('X-Robots-Tag', 'noindex');
-
         return $this->asRaw($xml);
     }
 
@@ -103,9 +129,6 @@ class SitemapController extends Controller
     {
         $xml = PluginTemplate::renderPluginTemplate('_frontend/pages/sitemap-empty-styles.twig', []);
 
-        $headers = Craft::$app->response->headers;
-        $headers->add('Content-Type', 'text/xml; charset=utf-8');
-        $headers->add('X-Robots-Tag', 'noindex');
 
         return $this->asRaw($xml);
     }
@@ -113,10 +136,10 @@ class SitemapController extends Controller
     /**
      * Returns a rendered sitemap.
      *
-     * @param int    $groupId Which Site Group the sitemap index is for
+     * @param int $groupId Which Site Group the sitemap index is for
      * @param string $type
      * @param string $handle
-     * @param int    $siteId
+     * @param int $siteId
      *
      * @return Response
      */
@@ -131,9 +154,31 @@ class SitemapController extends Controller
                 'siteId' => $siteId,
             ]
         );
-        $headers = Craft::$app->response->headers;
-        $headers->add('Content-Type', 'text/xml; charset=utf-8');
-        $headers->add('X-Robots-Tag', 'noindex');
+
+        return $this->asRaw($xml);
+    }
+
+    /**
+     * Returns a rendered sitemap.
+     *
+     * @param int $groupId Which Site Group the sitemap index is for
+     * @param string $type
+     * @param string $handle
+     * @param int $siteId
+     *
+     * @return Response
+     */
+    public function actionNewsSitemap(int $groupId, string $type, string $handle, int $siteId): Response
+    {
+        $xml = Seomatic::$plugin->sitemaps->renderTemplate(
+            Sitemaps::SEOMATIC_NEWS_SITEMAP_CONTAINER,
+            [
+                'groupId' => $groupId,
+                'type' => $type,
+                'handle' => $handle,
+                'siteId' => $siteId,
+            ]
+        );
 
         return $this->asRaw($xml);
     }
@@ -155,9 +200,6 @@ class SitemapController extends Controller
                 'siteId' => $siteId,
             ]
         );
-        $headers = Craft::$app->response->headers;
-        $headers->add('Content-Type', 'text/xml; charset=utf-8');
-        $headers->add('X-Robots-Tag', 'noindex');
 
         return $this->asRaw($xml);
     }

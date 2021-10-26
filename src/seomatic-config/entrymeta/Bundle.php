@@ -34,6 +34,7 @@ return [
     'metaGlobalVars'             => Config::getConfigFromFile('entrymeta/GlobalVars'),
     'metaSiteVars'               => Config::getConfigFromFile('entrymeta/SiteVars'),
     'metaSitemapVars'            => Config::getConfigFromFile('entrymeta/SitemapVars'),
+    'metaNewsSitemapVars'        => Config::getConfigFromFile('entrymeta/NewsSitemapVars'),
     'metaBundleSettings'         => Config::getConfigFromFile('entrymeta/BundleSettings'),
     'metaContainers'             => Config::getMergedConfigFromFiles([
         'entrymeta/TagContainer',

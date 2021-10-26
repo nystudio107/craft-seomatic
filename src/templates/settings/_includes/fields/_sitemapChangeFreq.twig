@@ -1,16 +1,16 @@
-{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "sitemapChangeFreq", "metaSitemapVars") %}
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "sitemapChangeFreq", containerName) %}
 {% set hasInheritableValues = inheritedFrom is not null %}
 
 {% set additionalVars = {
-    'isInherited': seomatic.helper.isInherited(metaSitemapVars, "sitemapChangeFreq"),
+    'isInherited': seomatic.helper.isInherited(container, "sitemapChangeFreq"),
     'fieldLabel': "Change Frequency"|t("seomatic"),
     'settingName': 'sitemapChangeFreq',
-    'labelFor': 'metaSitemapVars-sitemapChangeFreq',
-    'overrideNamespace': 'metaSitemapVars'
+    'labelFor': containerName ~ '-sitemapChangeFreq',
+    'overrideNamespace': namespaceName
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro sitemapChangeFreqField(sitemapChangeFreqOptions, metaSitemapVars, suffix) %}
+    {% macro sitemapChangeFreqField(sitemapChangeFreqOptions, metaSitemapVars, suffix, namespaceName) %}
         <div class="instructions">
             <p>
                 {{ "How frequently the page is likely to change. This value provides general information to search engines and may not correlate exactly to how often they crawl the page."|t("seomatic") }}
@@ -18,7 +18,7 @@
         </div>
 
         {% import "_includes/forms" as forms %}
-        {% namespace "metaSitemapVars" %}
+        {% namespace namespaceName %}
 
             {{ forms.selectField({
                 id: "sitemapChangeFreq" ~ suffix,
@@ -44,10 +44,10 @@
     {% endif %}
 
     {% block inheritedValues %}
-        {{ _self.sitemapChangeFreqField(sitemapChangeFreqOptions, inheritedFrom.metaSitemapVars ?? metaSitemapVars, "-inherited") }}
+        {{ _self.sitemapChangeFreqField(sitemapChangeFreqOptions, attribute(inheritedFrom, containerName) ?? container, "-inherited", namespaceName) }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.sitemapChangeFreqField(sitemapChangeFreqOptions, metaSitemapVars, "") }}
+        {{ _self.sitemapChangeFreqField(sitemapChangeFreqOptions, container, "", namespaceName) }}
     {% endblock %}
 {% endembed %}

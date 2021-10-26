@@ -543,6 +543,7 @@ class SettingsController extends Controller
         if ($metaBundle !== null) {
             $variables['metaGlobalVars'] = clone $metaBundle->metaGlobalVars;
             $variables['metaSitemapVars'] = $metaBundle->metaSitemapVars;
+            $variables['metaNewsSitemapVars'] = $metaBundle->metaNewsSitemapVars;
             $variables['metaBundleSettings'] = $metaBundle->metaBundleSettings;
             $variables['currentSourceHandle'] = $metaBundle->sourceHandle;
             $variables['currentSourceBundleType'] = $metaBundle->sourceBundleType;
@@ -624,6 +625,7 @@ class SettingsController extends Controller
         $globalsSettings = $request->getParam('metaGlobalVars');
         $bundleSettings = $request->getParam('metaBundleSettings');
         $sitemapSettings = $request->getParam('metaSitemapVars');
+        $newsSitemapSettings = $request->getParam('metaNewsSitemapVars');
         // Set the element type in the template
         $elementName = '';
         $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
@@ -651,6 +653,10 @@ class SettingsController extends Controller
             }
             if (\is_array($sitemapSettings)) {
                 $metaBundle->metaSitemapVars->setAttributes($sitemapSettings);
+            }
+
+            if (\is_array($newsSitemapSettings)) {
+                $metaBundle->metaNewsSitemapVars->setAttributes($newsSitemapSettings);
             }
 
             Seomatic::$plugin->metaBundles->syncBundleWithConfig($metaBundle, true);

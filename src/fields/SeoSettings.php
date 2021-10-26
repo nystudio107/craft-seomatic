@@ -103,6 +103,16 @@ class SeoSettings extends Field implements PreviewableFieldInterface
      */
     public $sitemapEnabledFields = [];
 
+    /**
+     * @var bool
+     */
+    public $newsSitemapTabEnabled = false;
+
+    /**
+     * @var array
+     */
+    public $newsSitemapEnabledFields = [];
+
     // Static Methods
     // =========================================================================
 
@@ -136,6 +146,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
                     'twitterTabEnabled',
                     'facebookTabEnabled',
                     'sitemapTabEnabled',
+                    'newsSitemapTabEnabled',
                 ],
                 'boolean',
             ],
@@ -145,6 +156,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
                     'twitterEnabledFields',
                     'facebookEnabledFields',
                     'sitemapEnabledFields',
+                    'newsSitemapEnabledFields',
                 ],
                 'each', 'rule' => ['string'],
             ],

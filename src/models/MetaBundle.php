@@ -106,6 +106,11 @@ class MetaBundle extends FluentModel
     public $metaSitemapVars;
 
     /**
+     * @var MetaNewsSitemapVars
+     */
+    public $metaNewsSitemapVars;
+
+    /**
      * @var MetaContainer[]
      */
     public $metaContainers;
@@ -165,6 +170,10 @@ class MetaBundle extends FluentModel
             }
         }
 
+        if ($this->metaNewsSitemapVars === null) {
+            $this->metaNewsSitemapVars = MetaNewsSitemapVars::create();
+        }
+
         // Meta global variables
         if ($this->metaGlobalVars !== null && \is_array($this->metaGlobalVars)) {
             $this->metaGlobalVars = MetaGlobalVars::create($this->metaGlobalVars);
@@ -176,6 +185,10 @@ class MetaBundle extends FluentModel
         // Meta sitemap variables
         if ($this->metaSitemapVars !== null && \is_array($this->metaSitemapVars)) {
             $this->metaSitemapVars = MetaSitemapVars::create($this->metaSitemapVars);
+        }
+        // Meta news sitemap variables
+        if ($this->metaNewsSitemapVars !== null && \is_array($this->metaNewsSitemapVars)) {
+            $this->metaNewsSitemapVars = MetaNewsSitemapVars::create($this->metaNewsSitemapVars);
         }
         // Meta bundle settings
         if ($this->metaBundleSettings !== null && \is_array($this->metaBundleSettings)) {
@@ -300,6 +313,7 @@ class MetaBundle extends FluentModel
                     'metaGlobalVars',
                     'metaSiteVars',
                     'metaSitemapVars',
+                    'metaNewsSitemapVars',
                     'metaBundleSettings',
                     'frontendTemplatesContainer',
                 ],
