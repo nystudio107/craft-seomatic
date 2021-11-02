@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\services;
 
+use craft\elements\Entry;
 use nystudio107\seomatic\jobs\GenerateSitemap;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\NewsSitemapIndexTemplate;
@@ -311,16 +312,17 @@ class Sitemaps extends Component implements SitemapInterface
     {
         if (Seomatic::$settings->sitemapsEnabled && Seomatic::$environment === 'live' && Seomatic::$settings->submitSitemaps) {
             /** @var Element $element */
-            [$sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId, $typeId]
-                = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
+            list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId, $typeId) = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
 
             // Submit the sitemaps to each search engine
             $searchEngineUrls = self::SEARCH_ENGINE_SUBMISSION_URLS;
-            $sitemapUrls = [];
-
             foreach ($searchEngineUrls as $url => $types) {
+                $sitemapUrls = [];
                 foreach ($types as $sitemapType) {
-                    $sitemapUrls[] = $this->sitemapUrlForBundle($sourceBundleType, $sourceHandle, $sourceSiteId, $sitemapType);
+                    // Submit news sitemap only for entry save.
+                    if ($sitemapType !== self::SITEMAP_TYPE_NEWS || $element instanceof Entry) {
+                        $sitemapUrls[] = $this->sitemapUrlForBundle($sourceBundleType, $sourceHandle, $sourceSiteId, $sitemapType);
+                    }
                 }
 
                 foreach ($sitemapUrls as $sitemapUrl) {
