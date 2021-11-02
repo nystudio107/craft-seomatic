@@ -57,12 +57,12 @@ class Sitemaps extends Component implements SitemapInterface
 
     const SEOMATIC_SITEMAPCUSTOM_CONTAINER = Seomatic::SEOMATIC_HANDLE.SitemapCustomTemplate::TEMPLATE_TYPE;
 
+    const SITEMAP_TYPE_NEWS = 'news';
+    const SITEMAP_TYPE_REGULAR = 'regular';
     const SEARCH_ENGINE_SUBMISSION_URLS = [
         'google' => 'https://www.google.com/ping?sitemap=',
         'bing' => 'https://www.bing.com/ping?sitemap=',
     ];
-
-    const SITEMAP_TYPE_NEWS = 'news';
 
     // Protected Properties
     // =========================================================================
@@ -195,7 +195,7 @@ class Sitemaps extends Component implements SitemapInterface
      *
      * @return bool
      */
-    public function anyEntryTypeHasSitemapUrls(MetaBundle $metaBundle, string $sitemapType = ''): bool
+    public function anyEntryTypeHasSitemapUrls(MetaBundle $metaBundle, string $sitemapType = self::SITEMAP_TYPE_REGULAR): bool
     {
         $result = false;
         $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundle->sourceBundleType);
@@ -219,7 +219,7 @@ class Sitemaps extends Component implements SitemapInterface
                                     $entryTypeBundle->metaGlobalVars->robots !== 'noindex';
                             }
                             switch ($sitemapType) {
-                                case 'news':
+                                case self::SITEMAP_TYPE_NEWS:
                                     if ($entryTypeBundle->metaNewsSitemapVars->newsSitemapEnabled && $robotsEnabled) {
                                         $result = true;
                                     }
@@ -374,7 +374,7 @@ class Sitemaps extends Component implements SitemapInterface
      *
      * @return string
      */
-    public function sitemapIndexUrlForSiteId(int $siteId = null, string $sitemapType = ''): string
+    public function sitemapIndexUrlForSiteId(int $siteId = null, string $sitemapType = self::SITEMAP_TYPE_REGULAR): string
     {
         $url = '';
         $sites = Craft::$app->getSites();
@@ -387,7 +387,7 @@ class Sitemaps extends Component implements SitemapInterface
                 $url = UrlHelper::siteUrl(
                     '/sitemaps'
                     .'-'.$site->groupId
-                    .($sitemapType ? '-'.$sitemapType : '')
+                    .($sitemapType !== self::SITEMAP_TYPE_REGULAR ? '-'.$sitemapType : '')
                     .'-sitemap.xml',
                     null,
                     null,
@@ -485,7 +485,7 @@ class Sitemaps extends Component implements SitemapInterface
      *
      * @return string
      */
-    public function sitemapUrlForBundle(string $sourceBundleType, string $sourceHandle, int $siteId = null, string $sitemapType = ''): string
+    public function sitemapUrlForBundle(string $sourceBundleType, string $sourceHandle, int $siteId = null, string $sitemapType = self::SITEMAP_TYPE_REGULAR): string
     {
         $url = '';
         $sites = Craft::$app->getSites();
@@ -506,7 +506,7 @@ class Sitemaps extends Component implements SitemapInterface
                     .'-'.$metaBundle->sourceBundleType
                     .'-'.$metaBundle->sourceHandle
                     .'-'.$metaBundle->sourceSiteId
-                    .($sitemapType ? '-'.$sitemapType : '')
+                    .($sitemapType !== self::SITEMAP_TYPE_REGULAR ? '-'.$sitemapType : '')
                     .'-sitemap.xml',
                     null,
                     null,
