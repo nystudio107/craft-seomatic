@@ -109,6 +109,17 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
     }
 
     /**
+     * Get the filename of the sitemap index.
+     *
+     * @param array $params
+     * @return string
+     */
+    public function getFilename(array $params = []): string
+    {
+        return 'sitemaps-' . $params['groupId'] . '-sitemap.xml';
+    }
+
+    /**
      * @inheritdoc
      *
      * @throws NotFoundHttpException if the sitemap.xml doesn't exist

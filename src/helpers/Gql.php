@@ -1,6 +1,7 @@
 <?php
 namespace nystudio107\seomatic\helpers;
 
+use Craft;
 use craft\helpers\Gql as GqlHelper;
 
 /**
@@ -18,5 +19,21 @@ class Gql extends GqlHelper
         $allowedEntities = self::extractAllowedEntitiesFromSchema();
 
         return isset($allowedEntities['seomatic']);
+    }
+
+    public static function getSiteIdFromGqlArguments(array $arguments)
+    {
+        $siteId = $arguments['siteId'] ?? null;
+
+        if (!empty($arguments['site'])) {
+            $site = Craft::$app->getSites()->getSiteByHandle($arguments['site']);
+            $siteId = $site->id ?? $siteId;
+        }
+
+        if (empty($siteId)) {
+            $siteId = Craft::$app->getSites()->getCurrentSite()->id;
+        }
+
+        return $siteId;
     }
 }
