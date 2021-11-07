@@ -14,6 +14,7 @@ namespace nystudio107\seomatic\gql\resolvers;
 use Craft;
 use GraphQL\Type\Definition\ResolveInfo;
 use nystudio107\seomatic\helpers\Gql as GqlHelper;
+use nystudio107\seomatic\helpers\PluginTemplate;
 use nystudio107\seomatic\models\SitemapIndexTemplate;
 use nystudio107\seomatic\models\SitemapTemplate;
 
@@ -33,8 +34,14 @@ class SitemapResolver
     /**
      * Get all the sitemaps.
      */
-    public static function getAllSitemaps($source, array $arguments, $context, ResolveInfo $resolveInfo)
+    public static function getSitemaps($source, array $arguments, $context, ResolveInfo $resolveInfo)
     {
+        // If there's a filename provided, return the sitemap.
+        if (!empty($arguments['filename'])) {
+            return [
+                self::getSitemapItemByFilename($arguments['filename'])
+            ];
+        }
         $siteId = GqlHelper::getSiteIdFromGqlArguments($arguments);
         $site = Craft::$app->getSites()->getSiteById($siteId);
 
@@ -42,17 +49,27 @@ class SitemapResolver
             return [];
         }
 
+        // If either of the source bundle arguments are present, get the sitemap
+        if (!empty($arguments['sourceBundleType']) || !empty($arguments['sourceBundleHandle']))  {
+            $filename = self::createFilenameFromComponents($site->groupId, $arguments['sourceBundleType'] ?? '', $arguments['sourceBundleHandle'] ?? '', $siteId);
+
+            return [
+                self::getSitemapItemByFilename($filename)
+            ];
+        }
+
+        // Otherwise, fetch the index and list all.
         // Get all the indexes as sitemap items
-        $sitemapIndexes = self::getSitemapIndexes([
+        $sitemapIndexArguments = [
             'groupId' => $site->groupId,
             'siteId' => $siteId,
-        ]);
+        ];
 
-        $sitemapList = array_merge([], $sitemapIndexes);
+        $sitemapIndexItems = [self::getSitemapIndexListEntry($siteId, $site->groupId)];
 
         // Scrape each index for individual entries
-        foreach ($sitemapIndexes as $sitemapIndex) {
-            $contents = $sitemapIndex['contents'];
+        foreach ($sitemapIndexItems as $sitemapIndexItem) {
+            $contents = $sitemapIndexItem['contents'];
             if (preg_match_all('/<loc>(.*?)<\/loc>/m', $contents, $matches)) {
 
                 foreach ($matches[1] as $url) {
@@ -73,33 +90,55 @@ class SitemapResolver
     }
 
     /**
-     * Return a single sitemap object
+     * Get all the sitemap index items by params.
      *
-     * @return mixed
+     * @return array
+     * @throws \yii\web\NotFoundHttpException
      */
-    public static function getSitemap($source, $arguments, $context, ResolveInfo $resolveInfo)
+    public static function getSitemapIndexes($source, $arguments, $context, ResolveInfo $resolveInfo): array
     {
-       return self::getSitemapItemByFilename($arguments['filename']);
+        $siteId = GqlHelper::getSiteIdFromGqlArguments($arguments);
+        $groupId = Craft::$app->getSites()->getSiteById($siteId)->groupId;
+
+        $sitemapIndexListEntry = self::getSitemapIndexListEntry($siteId, $groupId);
+
+        return [
+            $sitemapIndexListEntry
+        ];
     }
 
-    /**
+/**
      * Get all the sitemap index items by params.
      *
      * @param array $params
      * @return array
      * @throws \yii\web\NotFoundHttpException
      */
-    protected static function getSitemapIndexes(array $params): array
+    public static function getSitemapStyles($source, $arguments, $context, ResolveInfo $resolveInfo): array
     {
-        $indexes = [];
-        $sitemapIndex = SitemapIndexTemplate::create();
+        return [
+            'filename' => 'sitemap.xsl',
+            'contents' => $xml = PluginTemplate::renderPluginTemplate('_frontend/pages/sitemap-styles.twig', [])
+        ];
+    }
 
-        $indexes[] = [
-            'filename' => $sitemapIndex->getFilename($params),
-            'contents' => $sitemapIndex->render($params),
+    /**
+     * @param $siteId
+     * @return array
+     * @throws \yii\web\NotFoundHttpException
+     */
+    protected static function getSitemapIndexListEntry($siteId, $groupId): array
+    {
+        $sitemapIndex = SitemapIndexTemplate::create();
+        $sitemapIndexItem = [
+            'filename' => $sitemapIndex->getFilename($groupId),
+            'contents' => $sitemapIndex->render([
+                'siteId' => $siteId,
+                'groupId' => $groupId
+            ]),
         ];
 
-        return $indexes;
+        return $sitemapIndexItem;
     }
 
     /**
@@ -122,5 +161,19 @@ class SitemapResolver
             'filename' => $filename,
             'contents' => $sitemap->render(array_merge($matches, ['immediately' => true]))
         ];
+    }
+
+    /**
+     * Construct the expected sitemap filename from the components
+     *
+     * @param int $groupId
+     * @param string $bundleType
+     * @param string $bundleHandle
+     * @param int $siteId
+     * @return string
+     */
+    protected static function createFilenameFromComponents(int $groupId, string $bundleType, string $bundleHandle, int $siteId): string
+    {
+        return "sitemaps-$groupId-$bundleType-$bundleHandle-$siteId-sitemap.xml";
     }
 }

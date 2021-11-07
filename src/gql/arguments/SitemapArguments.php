@@ -29,15 +29,30 @@ class SitemapArguments extends Arguments
     public static function getArguments(): array
     {
         return [
+            'filename' => [
+                'name' => 'filename',
+                'type' => Type::string(),
+                'description' => 'Option - the sitemap filename.'
+            ],
             'siteId' => [
                 'name' => 'siteId',
                 'type' => Type::int(),
-                'description' => 'Optional - The site ID to resolve the SEOmatic metdata for.'
+                'description' => 'Optional - The site ID to list the sitemaps for.'
             ],
             'site' => [
                 'name' => 'site',
                 'type' => Type::string(),
-                'description' => 'Optional - The site handle to resolve the SEOmatic metdata for.'
+                'description' => 'Optional - The site handle to list the sitemaps for.'
+            ],
+            'sourceBundleType' => [
+                'name' => 'sourceBundleType',
+                'type' => Type::string(),
+                'description' => 'Optional - The source bundle type to get the sitemaps for.'
+            ],
+            'sourceBundleHandle' => [
+                'name' => 'sourceBundleHandle',
+                'type' => Type::string(),
+                'description' => 'Optional - The source bundles handle to get the  sitemap for.'
             ],
         ];
     }

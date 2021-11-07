@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\gql\interfaces;
 
 use nystudio107\seomatic\gql\arguments\SitemapArguments;
+use nystudio107\seomatic\gql\arguments\SitemapIndexArguments;
 use nystudio107\seomatic\gql\resolvers\SitemapResolver;
 use nystudio107\seomatic\gql\types\generators\SeomaticGenerator;
 
@@ -108,19 +109,20 @@ class SeomaticInterface extends BaseInterfaceType
             'name' => 'sitemaps',
             'args' => SitemapArguments::getArguments(),
             'type' => Type::listOf(SitemapType::getType()),
-            'resolve' => SitemapResolver::class .'::getAllSitemaps'
+            'resolve' => SitemapResolver::class .'::getSitemaps'
         ];
 
-        $fields['sitemap'] = [
-            'name' => 'sitemap',
-            'args' => array_merge(SitemapArguments::getArguments(), [
-                'filename' => [
-                    'name' => 'filename',
-                    'type' => Type::nonNull(Type::string())
-                ]
-            ]),
+        $fields['sitemapIndexes'] = [
+            'name' => 'sitemapIndexes',
+            'args' => SitemapIndexArguments::getArguments(),
+            'type' => Type::listOf(SitemapType::getType()),
+            'resolve' => SitemapResolver::class .'::getSitemapIndexes'
+        ];
+
+        $fields['sitemapStyles'] = [
+            'name' => 'sitemapStyles',
             'type' => SitemapType::getType(),
-            'resolve' => SitemapResolver::class .'::getSitemap'
+            'resolve' => SitemapResolver::class .'::getSitemapStyles'
         ];
 
         return $fields;
