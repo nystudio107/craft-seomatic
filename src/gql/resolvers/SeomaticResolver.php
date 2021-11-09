@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\gql\resolvers;
 
+use nystudio107\seomatic\helpers\Gql as GqlHelper;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\gql\interfaces\SeomaticInterface;
 use nystudio107\seomatic\helpers\Container as ContainerHelper;
@@ -48,11 +49,9 @@ class SeomaticResolver extends Resolver
         } else {
             // Otherwise use the passed in arguments, or defaults
             $uri = $arguments['uri'] ?? '/';
-            $siteId = $arguments['siteId'] ?? null;
-            if (!empty($arguments['site'])) {
-                $siteId = self::getSiteIdFromHandle($arguments['site']) ?? $siteId;
-            }
+            $siteId = GqlHelper::getSiteIdFromGqlArguments($arguments);
         }
+
         // Change the environment if we need to
         $environment = $arguments['environment'] ?? null;
         $oldEnvironment = Seomatic::$environment;
@@ -78,26 +77,5 @@ class SeomaticResolver extends Resolver
         }
 
         return $result;
-    }
-
-    // Protected Methods
-    // =========================================================================
-
-    /**
-     * Return a siteId from a siteHandle
-     *
-     * @param string $siteHandle
-     *
-     * @return int|null
-     */
-    protected static function getSiteIdFromHandle($siteHandle)
-    {
-        // Get the site to edit
-        if ($siteHandle !== null) {
-            $site = Craft::$app->getSites()->getSiteByHandle($siteHandle);
-            return $site->id ?? null;
-        }
-
-        return Craft::$app->getSites()->currentSite->id;
     }
 }
