@@ -2,6 +2,7 @@
 
 ## 3.4.18 - UNRELEASED
 ### Added
+* Added the ability to query for `sitemaps`, `sitemapIndexes`, and `sitemapStyles` via GraphQL ([#517](https://github.com/nystudio107/craft-seomatic/issues/517))
 * Added the **Always include `canonical` links regardless of environment** setting to Plugin Settings -> Advanced ([#1006](https://github.com/nystudio107/craft-seomatic/issues/1006))
 
 ### Fixed
