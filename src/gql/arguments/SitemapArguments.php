@@ -32,7 +32,7 @@ class SitemapArguments extends Arguments
             'filename' => [
                 'name' => 'filename',
                 'type' => Type::string(),
-                'description' => 'Option - the sitemap filename.'
+                'description' => 'Optional - the sitemap filename.'
             ],
             'siteId' => [
                 'name' => 'siteId',
