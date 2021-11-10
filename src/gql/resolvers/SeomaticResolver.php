@@ -11,12 +11,11 @@
 
 namespace nystudio107\seomatic\gql\resolvers;
 
-use nystudio107\seomatic\helpers\Gql as GqlHelper;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\gql\interfaces\SeomaticInterface;
+use nystudio107\seomatic\helpers\Gql as GqlHelper;
 use nystudio107\seomatic\helpers\Container as ContainerHelper;
 
-use Craft;
 use craft\base\Element;
 use craft\gql\base\Resolver;
 use craft\helpers\Json;

@@ -14,6 +14,7 @@ namespace nystudio107\seomatic\gql\types;
 use craft\gql\base\ObjectType;
 use craft\gql\GqlEntityRegistry;
 use craft\gql\TypeManager;
+
 use GraphQL\Type\Definition\Type;
 
 /**

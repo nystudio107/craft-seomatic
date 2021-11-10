@@ -11,9 +11,10 @@
 
 namespace nystudio107\seomatic\jobs;
 
+use nystudio107\seomatic\helpers\Sitemap;
+
 use Craft;
 use craft\queue\BaseJob;
-use nystudio107\seomatic\helpers\Sitemap;
 
 /**
  * @author    nystudio107

@@ -15,7 +15,6 @@ use nystudio107\seomatic\gql\arguments\SitemapArguments;
 use nystudio107\seomatic\gql\arguments\SitemapIndexArguments;
 use nystudio107\seomatic\gql\resolvers\SitemapResolver;
 use nystudio107\seomatic\gql\types\generators\SeomaticGenerator;
-
 use nystudio107\seomatic\gql\types\SitemapType;
 use nystudio107\seomatic\models\FrontendTemplateContainer;
 use nystudio107\seomatic\models\MetaJsonLdContainer;

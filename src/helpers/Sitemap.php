@@ -1,6 +1,15 @@
 <?php
 namespace nystudio107\seomatic\helpers;
 
+use nystudio107\seomatic\Seomatic;
+use nystudio107\fastcgicachebust\FastcgiCacheBust;
+use nystudio107\seomatic\base\SeoElementInterface;
+use nystudio107\seomatic\fields\SeoSettings;
+use nystudio107\seomatic\helpers\Field as FieldHelper;
+use nystudio107\seomatic\jobs\GenerateSitemap;
+use nystudio107\seomatic\models\MetaBundle;
+use nystudio107\seomatic\models\SitemapTemplate;
+
 use Craft;
 use craft\base\Element;
 use craft\base\ElementInterface;
@@ -10,14 +19,7 @@ use craft\elements\Asset;
 use craft\elements\MatrixBlock;
 use craft\fields\Assets as AssetsField;
 use craft\models\SiteGroup;
-use nystudio107\fastcgicachebust\FastcgiCacheBust;
-use nystudio107\seomatic\base\SeoElementInterface;
-use nystudio107\seomatic\fields\SeoSettings;
-use nystudio107\seomatic\helpers\Field as FieldHelper;
-use nystudio107\seomatic\jobs\GenerateSitemap;
-use nystudio107\seomatic\models\MetaBundle;
-use nystudio107\seomatic\models\SitemapTemplate;
-use nystudio107\seomatic\Seomatic;
+
 use yii\base\Exception;
 use yii\caching\TagDependency;
 use yii\helpers\Html;
@@ -35,7 +37,7 @@ class Sitemap
         $queue = $params['queue'] ?? null;
         /** @var GenerateSitemap $job */
         $job = $params['job'] ?? null;
-        
+
         if (!$job) {
             $groupId = $params['groupId'];
             $siteId = $params['siteId'];
@@ -49,7 +51,7 @@ class Sitemap
             $type = $job->type;
             $queueJobCacheKey = $job->queueJobCacheKey;
         }
-        
+
         // Get an array of site ids for this site group
         $groupSiteIds = [];
 
