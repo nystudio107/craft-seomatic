@@ -226,6 +226,73 @@ Valid values are `local` for local development, `staging` for staging, and `live
 
 ![Screenshot](./resources/screenshots/seomatic-craftql-query.png)
 
+#### Sitemap GraphQL queries
+
+SEOmatic allows you to query for `sitemapIndexes`:
+
+```graphql
+{
+  seomatic {
+    sitemapIndexes {
+      filename
+      contents
+    }
+  }
+}
+```
+
+Arguments:
+
+`sitemapIndexes(siteId: 1, site: mainSite)`
+
+`siteId:` Int - Optional - The site ID to resolve the sitemap for.
+
+`site:` String - Optional - The site handle to resolve the sitemap for.
+
+SEOmatic allows you to query for `sitemaps`:
+
+```graphql
+{
+  seomatic {
+    sitemaps {
+      filename
+      contents
+    }
+  }
+}
+```
+
+Arguments:
+
+`sitemaps(filename: some_sitemap, siteId: 1, site: mainSite, sourceBundleType: product, sourceBundleHandle: someHandle)`
+
+`filename:` String - Optional - the sitemap filename.
+
+`siteId:` Int - Optional - The site ID to resolve the sitemap for.
+
+`site:` String - Optional - The site handle to resolve the sitemap for.
+
+`sourceBundleType:` String - Optional - The source bundle type to get the sitemaps for.
+
+`sourceBundleHandle:` String - Optional - The source bundles handle to get the sitemap for.
+
+SEOmatic also allows you to query for `sitemapStyles`:
+
+```graphql
+{
+  seomatic {
+      sitemapStyles {
+      filename
+      contents
+    }
+  }
+}
+```
+
+This returns the [XSL stylesheet](https://www.w3.org/Style/XSL/WhatIsXSL.html) that SEOmatic uses to make the sitemaps pleasant for humans to read.
+
+#### Piggybacking GraphQL queries
+
 You can also piggyback on an entries query, to return all of your data for an entry as well as the SEOmatic metadata in one request.
 
 **N.B.:** This requires using either Craft CMS 3.4 or later, or the CraftQL plugin to work.
