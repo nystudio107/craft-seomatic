@@ -228,6 +228,10 @@ Valid values are `local` for local development, `staging` for staging, and `live
 
 #### Sitemap GraphQL queries
 
+SEOmatic can provide you with the sitemap data via GraphQL as well.
+
+![Screenshot](./resources/screenshots/seomatic-craftql-sitemaps-query.png)
+
 SEOmatic allows you to query for `sitemapIndexes`:
 
 ```graphql
