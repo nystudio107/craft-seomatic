@@ -15,6 +15,7 @@ use Craft;
 use GraphQL\Type\Definition\ResolveInfo;
 use nystudio107\seomatic\helpers\Gql as GqlHelper;
 use nystudio107\seomatic\helpers\PluginTemplate;
+use nystudio107\seomatic\models\SitemapCustomTemplate;
 use nystudio107\seomatic\models\SitemapIndexTemplate;
 use nystudio107\seomatic\models\SitemapTemplate;
 
@@ -155,7 +156,8 @@ class SitemapResolver
             return null;
         }
 
-        $sitemap = SitemapTemplate::create();
+        $isCustom = $matches['type'] == 'global' && $matches['handle'] == 'custom';
+        $sitemap = $isCustom ? SitemapCustomTemplate::create() : SitemapTemplate::create();
 
         return [
             'filename' => $filename,
