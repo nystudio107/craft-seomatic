@@ -11,8 +11,12 @@
 
 namespace nystudio107\seomatic\gql\interfaces;
 
+use nystudio107\seomatic\gql\arguments\SitemapArguments;
+use nystudio107\seomatic\gql\arguments\SitemapIndexArguments;
+use nystudio107\seomatic\gql\resolvers\SitemapResolver;
 use nystudio107\seomatic\gql\types\generators\SeomaticGenerator;
 
+use nystudio107\seomatic\gql\types\FileContentsType;
 use nystudio107\seomatic\models\FrontendTemplateContainer;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 use nystudio107\seomatic\models\MetaLinkContainer;
@@ -100,6 +104,26 @@ class SeomaticInterface extends BaseInterfaceType
                 'description' => 'The '.$value.' SEOmatic container.',
             ];
         }
+
+        $fields['sitemaps'] = [
+            'name' => 'sitemaps',
+            'args' => SitemapArguments::getArguments(),
+            'type' => Type::listOf(FileContentsType::getType()),
+            'resolve' => SitemapResolver::class .'::getSitemaps'
+        ];
+
+        $fields['sitemapIndexes'] = [
+            'name' => 'sitemapIndexes',
+            'args' => SitemapIndexArguments::getArguments(),
+            'type' => Type::listOf(FileContentsType::getType()),
+            'resolve' => SitemapResolver::class .'::getSitemapIndexes'
+        ];
+
+        $fields['sitemapStyles'] = [
+            'name' => 'sitemapStyles',
+            'type' => FileContentsType::getType(),
+            'resolve' => SitemapResolver::class .'::getSitemapStyles'
+        ];
 
         return $fields;
     }

@@ -11,13 +11,16 @@
 
 namespace nystudio107\seomatic\models;
 
-use Craft;
-use craft\queue\QueueInterface;
+use nystudio107\seomatic\helpers\Sitemap;
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\base\SitemapInterface;
 use nystudio107\seomatic\helpers\Queue as QueueHelper;
 use nystudio107\seomatic\jobs\GenerateSitemap;
-use nystudio107\seomatic\Seomatic;
+
+use Craft;
+use craft\queue\QueueInterface;
+
 use yii\caching\TagDependency;
 use yii\web\NotFoundHttpException;
 
@@ -39,8 +42,6 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
 
     const SITEMAP_CACHE_TAG = 'seomatic_sitemap_';
 
-    const SITEMAP_JOB_CLASS = GenerateSitemap::class;
-
     const FILE_TYPES = [
         'excel',
         'pdf',
@@ -49,13 +50,6 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         'text',
         'word',
         'xml',
-    ];
-
-    protected static $defaultConfig = [
-        'path' => 'sitemaps-<groupId:\d+>-<type:[\w\.*]+>-<handle:[\w\.*]+>-<siteId:\d+>-sitemap.xml',
-        'template' => '',
-        'controller' => 'sitemap',
-        'action' => 'sitemap',
     ];
 
     // Static Methods
@@ -68,10 +62,15 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
      */
     public static function create(array $config = [])
     {
+        $defaults = [
+            'path' => 'sitemaps-<groupId:\d+>-<type:[\w\.*]+>-<handle:[\w\.*]+>-<siteId:\d+>-<file:[-\w\.*]+>',
+            'template' => '',
+            'controller' => 'sitemap',
+            'action' => 'sitemap',
+        ];
+        $config = array_merge($config, $defaults);
 
-        $config = array_merge($config, static::$defaultConfig);
-
-        return new static($config);
+        return new SitemapTemplate($config);
     }
 
     // Public Properties
@@ -128,14 +127,13 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             $robotsEnabled = $metaBundle->metaGlobalVars->robots !== 'none' &&
                 $metaBundle->metaGlobalVars->robots !== 'noindex';
         }
-        $sitemapEnabled = $this->getIsSitemapEnabled($metaBundle);
-        if ($this->getForceCreatingSitemap($metaBundle)) {
+        $sitemapUrls = $metaBundle->metaSitemapVars->sitemapUrls;
+        if (Seomatic::$plugin->sitemaps->anyEntryTypeHasSitemapUrls($metaBundle)) {
             $robotsEnabled = true;
-            $sitemapEnabled = true;
+            $sitemapUrls = true;
         }
-
         // If it's disabled, just throw a 404
-        if (!$sitemapEnabled || !$robotsEnabled) {
+        if (!$sitemapUrls || !$robotsEnabled) {
             if ($request->isCpRequest || $request->isConsoleRequest) {
                 return '';
             }
@@ -146,8 +144,8 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
 
         $cache = Craft::$app->getCache();
         $uniqueKey = $groupId.$type.$handle.$siteId;
-        $cacheKey = static::CACHE_KEY.$uniqueKey;
-        $queueJobCacheKey = static::QUEUE_JOB_CACHE_KEY.$uniqueKey;
+        $cacheKey = self::CACHE_KEY.$uniqueKey;
+        $queueJobCacheKey = self::QUEUE_JOB_CACHE_KEY.$uniqueKey;
         $result = $cache->get($cacheKey);
         // If the sitemap isn't cached, start a job to create it
         if ($result === false) {
@@ -160,45 +158,59 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 $queue->release($existingJobId);
                 $cache->delete($queueJobCacheKey);
             }
-            // Push a new queue job
-            $class = static::SITEMAP_JOB_CLASS;
 
-            $jobId = $queue->push(new $class([
-                'groupId' => $groupId,
-                'type' => $type,
-                'handle' => $handle,
-                'siteId' => $siteId,
-                'queueJobCacheKey' => $queueJobCacheKey,
-            ]));
+            if (!empty($params['immediately'])) {
+                Sitemap::generateSitemap([
+                    'groupId' => $groupId,
+                    'type' => $type,
+                    'handle' => $handle,
+                    'siteId' => $siteId,
+                    'queueJobCacheKey' => $queueJobCacheKey,
+                ]);
+            } else {
+                // Push a new queue job
+                $jobId = $queue->push(new GenerateSitemap([
+                    'groupId' => $groupId,
+                    'type' => $type,
+                    'handle' => $handle,
+                    'siteId' => $siteId,
+                    'queueJobCacheKey' => $queueJobCacheKey,
+                ]));
 
-            // Stash the queue job id in the cache for future reference
-            $cacheDuration = 3600;
-            $dependency = new TagDependency([
-                'tags' => [
-                    self::GLOBAL_SITEMAP_CACHE_TAG,
-                    self::CACHE_KEY.$uniqueKey,
-                ],
-            ]);
-            $cache->set($queueJobCacheKey, $jobId, $cacheDuration, $dependency);
-            Craft::debug(
-                Craft::t(
-                    'seomatic',
-                    'Started GenerateSitemap queue job id: {jobId} with cache key {cacheKey}',
-                    [
-                        'jobId' => $jobId,
-                        'cacheKey' => $cacheKey,
-                    ]
-                ),
-                __METHOD__
-            );
-            // Try to run the queue immediately
-            QueueHelper::run();
+                // Stash the queue job id in the cache for future reference
+                $cacheDuration = 3600;
+                $dependency = new TagDependency([
+                    'tags' => [
+                        self::GLOBAL_SITEMAP_CACHE_TAG,
+                        self::CACHE_KEY.$uniqueKey,
+                    ],
+                ]);
+                $cache->set($queueJobCacheKey, $jobId, $cacheDuration, $dependency);
+                Craft::debug(
+                    Craft::t(
+                        'seomatic',
+                        'Started GenerateSitemap queue job id: {jobId} with cache key {cacheKey}',
+                        [
+                            'jobId' => $jobId,
+                            'cacheKey' => $cacheKey,
+                        ]
+                    ),
+                    __METHOD__
+                );
+                // Try to run the queue immediately
+                if ($throwException) {
+                    // If $throwException === false it means we're trying to regenerate the sitemap due to an invalidation
+                    // rather than a request for the actual sitemap, so don't try to run the queue immediately
+                    QueueHelper::run();
+                }
+            }
+
             // Try it again now
             $result = $cache->get($cacheKey);
             if ($result !== false) {
                 return $result;
             }
-            // Return a 503 Service Unavailable and a Retry-After so bots will try back later
+            // Return a 503 Service Unavailable an a Retry-After so bots will try back later
             $lines = [];
             $response = Craft::$app->getResponse();
             if (!$request->isConsoleRequest && $throwException) {
@@ -240,25 +252,4 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         );
     }
 
-    /**
-     * Return true whether the sitemap is enabled.
-     *
-     * @param MetaBundle $metaBundle
-     * @return bool
-     */
-    protected function getIsSitemapEnabled(MetaBundle $metaBundle): bool
-    {
-        return $metaBundle->metaSitemapVars->sitemapUrls;
-    }
-
-    /**
-     * Return whether sitemap should definitely be created for this section.
-     *
-     * @param MetaBundle $metaBundle
-     * @return bool
-     */
-    protected function getForceCreatingSitemap(MetaBundle $metaBundle): bool
-    {
-        return Seomatic::$plugin->sitemaps->anyEntryTypeHasSitemapUrls($metaBundle);
-    }
 }

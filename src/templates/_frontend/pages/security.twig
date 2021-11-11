@@ -3,7 +3,7 @@
 Contact: {% set adminUser = craft.app.getUsers().userById(1) %}{{ adminUser.email ?? 'user@example.com' }}
 
 # (required) Expiration date for the security information herein
-Expiration: {{ date|atom }}
+Expiration: {{ date('1year')|atom }}
 
 # (optional) OpenPGP key:
 Encryption: {{ siteUrl }}pgp-key.txt
