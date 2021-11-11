@@ -15,6 +15,16 @@
         }) }}
 
         {{ forms.lightswitchField({
+            label: "Always include `canonical` links regardless of environment"|t("seomatic"),
+            instructions: "SEO [best practices](https://www.searchenginejournal.com/google-dont-mix-noindex-relcanonical/262607) are to have `canonical` links not appear on pages that are not intended to be indexed. SEOmatic does this for you by default, but you can override that behavior with this setting"|t("seomatic"),
+            id: "alwaysIncludeCanonicalUrls",
+            name: "alwaysIncludeCanonicalUrls",
+            on: settings.alwaysIncludeCanonicalUrls,
+            warning: configWarning("alwaysIncludeCanonicalUrls", "seomatic"),
+            errors: settings.getErrors("alwaysIncludeCanonicalUrls"),
+        }) }}
+
+        {{ forms.lightswitchField({
             label: "Lowercase Canonical URL"|t("seomatic")|md,
             instructions: "Should the Canonical URL be automatically lower-cased?"|t("seomatic"),
             id: "lowercaseCanonicalUrl",

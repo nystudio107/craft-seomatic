@@ -337,10 +337,7 @@ class MetaValue
             $twig->disableStrictVariables();
         }
         // Swap out the remaining {xyz} tags with {{xyz}}
-        $template = preg_replace_callback('/(?<!\{)\{\s*(\w+)([^\{]*?)\}/', function(array $match) {
-            $replace = $match[1] . $match[2];
-            return "{{ $replace|raw }}";
-        }, $template);
+        $template = Seomatic::$view->normalizeObjectTemplate($template);
         $result = self::$view->renderString($template, $variables);
         // Re-enable strict variables
         if ($strictVariables) {

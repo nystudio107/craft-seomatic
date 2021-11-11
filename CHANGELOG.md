@@ -1,5 +1,16 @@
 # SEOmatic Changelog
 
+## 3.4.18 - 2021.11.11
+### Added
+* Added the ability to query for `sitemaps`, `sitemapIndexes`, and `sitemapStyles` via GraphQL ([#517](https://github.com/nystudio107/craft-seomatic/issues/517))
+* Added the **Always include `canonical` links regardless of environment** setting to Plugin Settings -> Advanced ([#1006](https://github.com/nystudio107/craft-seomatic/issues/1006))
+
+### Fixed
+* Don't try to run the sitemap queue job immediately if it's the result of an invalidation, only when the actual sitemap is requested via frontend request
+* Fix Matomo script URL value by removing the // and / that are in the Matomo docs ([#1004](https://github.com/nystudio107/craft-seomatic/issues/1004))
+* Fixed an issue where meta value parsing could fail with unquoted object keys passed in ([#1007](https://github.com/nystudio107/craft-seomatic/issues/1007))
+* Fixed the date in the `security.txt` template
+
 ## 3.4.17 - 2021.10.19
 ### Added
 * Added the ability to specify the SEOmatic environment to use with the GraphQL API (local, staging, production)

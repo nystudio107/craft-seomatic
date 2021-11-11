@@ -7,7 +7,7 @@ _paq.push(['trackPageView']);
 _paq.push(['enableLinkTracking']);
 {% endif %}
 (function() {
-var u="//{{ scriptUrl.value }}/";
+var u="{{ scriptUrl.value }}";
 _paq.push(['setTrackerUrl', u+'matomo.php']);
 _paq.push(['setSiteId', {{ siteId.value }}]);
 var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
