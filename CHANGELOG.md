@@ -6,6 +6,7 @@
 * Added the **Always include `canonical` links regardless of environment** setting to Plugin Settings -> Advanced ([#1006](https://github.com/nystudio107/craft-seomatic/issues/1006))
 
 ### Fixed
+* Don't try to run the sitemap queue job immediately if it's the result of an invalidation, only when the actual sitemap is requested via frontend request
 * Fix Matomo script URL value by removing the // and / that are in the Matomo docs ([#1004](https://github.com/nystudio107/craft-seomatic/issues/1004))
 * Fixed an issue where meta value parsing could fail with unquoted object keys passed in ([#1007](https://github.com/nystudio107/craft-seomatic/issues/1007))
 
