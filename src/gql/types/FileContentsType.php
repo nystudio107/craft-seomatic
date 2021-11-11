@@ -17,23 +17,23 @@ use craft\gql\TypeManager;
 use GraphQL\Type\Definition\Type;
 
 /**
- * Class SitemapType
+ * Class FileContentsType
  *
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.4.18
  */
-class SitemapType extends ObjectType
+class FileContentsType extends ObjectType
 {
     /**
      * @var string
      */
-    public $name = 'SeomaticSitemap';
+    public $name = 'FileContents';
 
     /**
      * @var string
      */
-    public $description = 'SEOmatic Sitemap.';
+    public $description = 'Contents of a file';
 
     /**
      * @inheritdoc
@@ -51,9 +51,9 @@ class SitemapType extends ObjectType
     /**
      * Returns a singleton instance to ensure one type per schema.
      *
-     * @return SitemapType
+     * @return FileContentsType
      */
-    public static function getType(): SitemapType
+    public static function getType(): FileContentsType
     {
         return GqlEntityRegistry::getEntity(self::getName()) ?: GqlEntityRegistry::createEntity(self::getName(), new self([]));
     }
@@ -64,7 +64,7 @@ class SitemapType extends ObjectType
      */
     public static function getName(): string
     {
-        return 'SeomaticSitemap';
+        return 'FileContents';
     }
 
     /**
