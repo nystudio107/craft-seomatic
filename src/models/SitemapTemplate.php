@@ -177,7 +177,6 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                     'queueJobCacheKey' => $queueJobCacheKey,
                 ]));
 
-
                 // Stash the queue job id in the cache for future reference
                 $cacheDuration = 3600;
                 $dependency = new TagDependency([
@@ -199,7 +198,11 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                     __METHOD__
                 );
                 // Try to run the queue immediately
-                QueueHelper::run();
+                if ($throwException) {
+                    // If $throwException === false it means we're trying to regenerate the sitemap due to an invalidation
+                    // rather than a request for the actual sitemap, so don't try to run the queue immediately
+                    QueueHelper::run();
+                }
             }
 
             // Try it again now
