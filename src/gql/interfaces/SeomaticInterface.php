@@ -11,8 +11,10 @@
 
 namespace nystudio107\seomatic\gql\interfaces;
 
+use nystudio107\seomatic\gql\arguments\FrontendContainerArguments;
 use nystudio107\seomatic\gql\arguments\SitemapArguments;
 use nystudio107\seomatic\gql\arguments\SitemapIndexArguments;
+use nystudio107\seomatic\gql\resolvers\FrontendContainerResolver;
 use nystudio107\seomatic\gql\resolvers\SitemapResolver;
 use nystudio107\seomatic\gql\types\generators\SeomaticGenerator;
 
@@ -123,6 +125,13 @@ class SeomaticInterface extends BaseInterfaceType
             'name' => 'sitemapStyles',
             'type' => FileContentsType::getType(),
             'resolve' => SitemapResolver::class .'::getSitemapStyles'
+        ];
+
+        $fields['frontendTemplateContainerFiles'] = [
+            'name' => 'frontendTemplateContainerFiles',
+            'args' => FrontendContainerArguments::getArguments(),
+            'type' => Type::listOf(FileContentsType::getType()),
+            'resolve' => FrontendContainerResolver::class .'::getContainerFiles'
         ];
 
         return $fields;
