@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.19 - 2021.11.13
+### Changed
+* Changed the `frontendTemplateContainers` GraphQL query to `frontendTemplates`, and made the query inline with the `sitemaps` queries, returning a `filename` and `contents`
+
 ## 3.4.18 - 2021.11.11
 ### Added
 * Added the ability to query for `sitemaps`, `sitemapIndexes`, and `sitemapStyles` via GraphQL ([#517](https://github.com/nystudio107/craft-seomatic/issues/517))

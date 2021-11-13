@@ -147,7 +147,6 @@ You must as least pass in the URI you want metadata for:
       metaScriptContainer
       metaJsonLdContainer
       metaSiteVarsContainer
-      frontendTemplateContainer
   }
 }
 ```
@@ -163,7 +162,6 @@ You must as least pass in the URI you want metadata for:
       metaScriptContainer
       metaJsonLdContainer
       metaSiteVarsContainer
-      frontendTemplateContainer
   }
 }
 ```
@@ -179,7 +177,6 @@ You must as least pass in the URI you want metadata for:
       metaScriptContainer
       metaJsonLdContainer
       metaSiteVarsContainer
-      frontendTemplateContainer
   }
 }
 ```
@@ -195,7 +192,6 @@ You must as least pass in the URI you want metadata for:
       metaScriptContainer
       metaJsonLdContainer
       metaSiteVarsContainer
-      frontendTemplateContainer
   }
 }
 ```
@@ -214,7 +210,6 @@ This is useful if you’re using Next.js, Nuxt.js, Gatsby, Gridsome, or anything
       metaScriptContainer
       metaJsonLdContainer
       metaSiteVarsContainer
-      frontendTemplateContainer
   }
 }
 ```
@@ -226,11 +221,38 @@ Valid values are `local` for local development, `staging` for staging, and `live
 
 ![Screenshot](./resources/screenshots/seomatic-craftql-query.png)
 
+### Frontend Templates GraphQL queries
+
+SEOmatic an provide you with the frontend templates such as `robots.txt`, `humans.txt`, etc. as well:
+
+![Screenshot](./resources/screenshots/seomatic-graphql-frontendtemplates-query.png)
+
+```graphql
+{
+  seomatic {
+    frontendTemplates {
+      filename,
+      contents
+    }
+  }
+}
+```
+
+Arguments:
+
+`frontendTemplates(siteId: 1, site: mainSite, type: robots)`
+
+`siteId:` Int - Optional - The site ID to resolve the sitemap for.
+
+`site:` String - Optional - The site handle to resolve the sitemap for.
+
+`type:` String - The frontend container type, which can be `robots`, `humans`, `security`, or `ads`
+
 #### Sitemap GraphQL queries
 
 SEOmatic can provide you with the sitemap data via GraphQL as well.
 
-![Screenshot](./resources/screenshots/seomatic-craftql-sitemaps-query.png)
+![Screenshot](./resources/screenshots/seomatic-graphql-sitemaps-query.png)
 
 SEOmatic allows you to query for `sitemapIndexes`:
 

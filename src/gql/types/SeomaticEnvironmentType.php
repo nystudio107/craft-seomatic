@@ -18,7 +18,7 @@ use craft\gql\GqlEntityRegistry;
 use GraphQL\Type\Definition\EnumType;
 
 /**
- * Class SeomaticType
+ * Class SeomaticEnvironmentType
  *
  * @author    nystudio107
  * @package   Seomatic
