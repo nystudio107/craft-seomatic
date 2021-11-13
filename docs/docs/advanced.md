@@ -225,6 +225,8 @@ Valid values are `local` for local development, `staging` for staging, and `live
 
 SEOmatic an provide you with the frontend templates such as `robots.txt`, `humans.txt`, etc. as well:
 
+![Screenshot](./resources/screenshots/seomatic-graphql-frontendtemplates-query.png)
+
 ```graphql
 {
   seomatic {
@@ -250,7 +252,7 @@ Arguments:
 
 SEOmatic can provide you with the sitemap data via GraphQL as well.
 
-![Screenshot](./resources/screenshots/seomatic-craftql-sitemaps-query.png)
+![Screenshot](./resources/screenshots/seomatic-graphql-sitemaps-query.png)
 
 SEOmatic allows you to query for `sitemapIndexes`:
 
