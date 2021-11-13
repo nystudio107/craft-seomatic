@@ -127,8 +127,8 @@ class SeomaticInterface extends BaseInterfaceType
             'resolve' => SitemapResolver::class .'::getSitemapStyles'
         ];
 
-        $fields['frontendTemplateContainerFiles'] = [
-            'name' => 'frontendTemplateContainerFiles',
+        $fields['frontendTemplates'] = [
+            'name' => 'frontendTemplates',
             'args' => FrontendContainerArguments::getArguments(),
             'type' => Type::listOf(FileContentsType::getType()),
             'resolve' => FrontendContainerResolver::class .'::getContainerFiles'

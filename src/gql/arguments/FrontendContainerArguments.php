@@ -13,7 +13,7 @@ namespace nystudio107\seomatic\gql\arguments;
 
 use craft\gql\base\Arguments;
 use GraphQL\Type\Definition\Type;
-use nystudio107\seomatic\gql\types\SeomaticFrontendContainerType;
+use nystudio107\seomatic\gql\types\SeomaticFrontendTemplateType;
 
 /**
  * Class SitemapArguments
@@ -42,7 +42,7 @@ class FrontendContainerArguments extends Arguments
             ],
             'type' => [
                 'name' => 'type',
-                'type' => SeomaticFrontendContainerType::getType(),
+                'type' => SeomaticFrontendTemplateType::getType(),
                 'description' => 'The frontend container type.'
             ],
         ];

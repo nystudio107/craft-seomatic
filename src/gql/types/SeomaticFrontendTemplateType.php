@@ -16,19 +16,19 @@ use GraphQL\Type\Definition\EnumType;
 use nystudio107\seomatic\services\FrontendTemplates;
 
 /**
- * Class SeomaticFrontendContainerType
+ * Class SeomaticFrontendTemplateType
  *
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.4.19
  */
-class SeomaticFrontendContainerType extends EnumType
+class SeomaticFrontendTemplateType extends EnumType
 {
 
     /**
      * @var string
      */
-    public $name = 'SeomaticFrontendContainer';
+    public $name = 'SeomaticFrontendTemplate';
 
     /**
      * @var string
@@ -67,9 +67,9 @@ class SeomaticFrontendContainerType extends EnumType
     /**
      * Returns a singleton instance to ensure one type per schema.
      *
-     * @return SeomaticFrontendContainerType
+     * @return SeomaticFrontendTemplateType
      */
-    public static function getType(): SeomaticFrontendContainerType
+    public static function getType(): SeomaticFrontendTemplateType
     {
         return GqlEntityRegistry::getEntity(self::getName()) ?: GqlEntityRegistry::createEntity(self::getName(), new self([]));
     }
@@ -80,6 +80,6 @@ class SeomaticFrontendContainerType extends EnumType
      */
     public static function getName(): string
     {
-        return 'SeomaticFrontendContainer';
+        return 'SeomaticFrontendTemplate';
     }
 }
