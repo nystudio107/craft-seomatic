@@ -246,7 +246,7 @@ Arguments:
 
 `site:` String - Optional - The site handle to resolve the sitemap for.
 
-`type:` The frontend container type, which can be `robots`, `humans`, `security`, or `ads`
+`type:` String - The frontend container type, which can be `robots`, `humans`, `security`, or `ads`
 
 #### Sitemap GraphQL queries
 
