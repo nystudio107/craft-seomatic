@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.20 - UNRELEASED
+### Changed
+* Deprecated the `frontendTemplateContainer` GraphQL field
+
 ## 3.4.19 - 2021.11.13
 ### Changed
 * Changed the `frontendTemplateContainers` GraphQL query to `frontendTemplates`, and made the query inline with the `sitemaps` queries, returning a `filename` and `contents`
