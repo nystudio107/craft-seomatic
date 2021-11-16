@@ -11,8 +11,10 @@
 
 namespace nystudio107\seomatic\gql\interfaces;
 
+use nystudio107\seomatic\gql\arguments\FrontendContainerArguments;
 use nystudio107\seomatic\gql\arguments\SitemapArguments;
 use nystudio107\seomatic\gql\arguments\SitemapIndexArguments;
+use nystudio107\seomatic\gql\resolvers\FrontendContainerResolver;
 use nystudio107\seomatic\gql\resolvers\SitemapResolver;
 use nystudio107\seomatic\gql\types\generators\SeomaticGenerator;
 
@@ -51,6 +53,10 @@ class SeomaticInterface extends BaseInterfaceType
         'metaJsonLdContainer' => MetaJsonLdContainer::CONTAINER_TYPE,
         'metaSiteVarsContainer' => MetaSiteVars::CONTAINER_TYPE,
         'frontendTemplateContainer' => FrontendTemplateContainer::CONTAINER_TYPE,
+    ];
+
+    const DEPRECATED_GRAPH_QL_FIELDS = [
+        'frontendTemplateContainer' => 'This query is deprecated and will be removed in the future. You should use `frontendTemplates` instead.',
     ];
 
     /**
@@ -98,11 +104,15 @@ class SeomaticInterface extends BaseInterfaceType
     {
         $fields = [];
         foreach (self::GRAPH_QL_FIELDS as $key => $value) {
+
             $fields[$key] = [
                 'name' => $key,
                 'type' => Type::string(),
                 'description' => 'The '.$value.' SEOmatic container.',
             ];
+            if (isset(self::DEPRECATED_GRAPH_QL_FIELDS[$key])) {
+                $fields[$key]['deprecationReason'] = self::DEPRECATED_GRAPH_QL_FIELDS[$key];
+            }
         }
 
         $fields['sitemaps'] = [
@@ -123,6 +133,13 @@ class SeomaticInterface extends BaseInterfaceType
             'name' => 'sitemapStyles',
             'type' => FileContentsType::getType(),
             'resolve' => SitemapResolver::class .'::getSitemapStyles'
+        ];
+
+        $fields['frontendTemplates'] = [
+            'name' => 'frontendTemplates',
+            'args' => FrontendContainerArguments::getArguments(),
+            'type' => Type::listOf(FileContentsType::getType()),
+            'resolve' => FrontendContainerResolver::class .'::getContainerFiles'
         ];
 
         return $fields;
