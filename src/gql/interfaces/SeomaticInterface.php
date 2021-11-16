@@ -55,6 +55,10 @@ class SeomaticInterface extends BaseInterfaceType
         'frontendTemplateContainer' => FrontendTemplateContainer::CONTAINER_TYPE,
     ];
 
+    const DEPRECATED_GRAPH_QL_FIELDS = [
+        'frontendTemplateContainer' => 'This query is deprecated and will be removed in the future. You should use `frontendTemplates` instead.',
+    ];
+
     /**
      * @inheritdoc
      */
@@ -100,11 +104,15 @@ class SeomaticInterface extends BaseInterfaceType
     {
         $fields = [];
         foreach (self::GRAPH_QL_FIELDS as $key => $value) {
+
             $fields[$key] = [
                 'name' => $key,
                 'type' => Type::string(),
                 'description' => 'The '.$value.' SEOmatic container.',
             ];
+            if (isset(self::DEPRECATED_GRAPH_QL_FIELDS[$key])) {
+                $fields[$key]['deprecationReason'] = self::DEPRECATED_GRAPH_QL_FIELDS[$key];
+            }
         }
 
         $fields['sitemaps'] = [
