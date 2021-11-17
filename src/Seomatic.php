@@ -129,6 +129,9 @@ class Seomatic extends Plugin
         'ProductInterface',
     ];
 
+    const EDITION_LITE = 'lite';
+    const EDITION_PRO = 'pro';
+
     // Static Properties
     // =========================================================================
 
@@ -274,6 +277,17 @@ class Seomatic extends Plugin
             self::$language = MetaValueHelper::getSiteLanguage(null);
         }
         MetaValueHelper::cache();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function editions(): array
+    {
+        return [
+            self::EDITION_LITE,
+            self::EDITION_PRO,
+        ];
     }
 
     // Public Properties
