@@ -15,6 +15,7 @@ use nystudio107\seomatic\helpers\Sitemap;
 
 use Craft;
 use craft\queue\BaseJob;
+use nystudio107\seomatic\models\SitemapTemplate;
 
 /**
  * @author    nystudio107
@@ -43,6 +44,7 @@ class GenerateSitemap extends BaseJob
 
     protected $queue;
 
+
     // Public Methods
     // =========================================================================
 
@@ -62,7 +64,16 @@ class GenerateSitemap extends BaseJob
         ];
 
         $this->queue = $queue;
-        Sitemap::generateSitemap($params);
+        $this->generateSitemap($params);
+    }
+
+    /**
+     * Generate the sitemap.
+     *
+     * @param array $params
+     */
+    protected function generateSitemap(array $params) {
+        Sitemap::generateSitemap($params, SitemapTemplate::class);
     }
 
     /**

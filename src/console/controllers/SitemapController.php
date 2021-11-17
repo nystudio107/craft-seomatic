@@ -97,7 +97,7 @@ class SitemapController extends Controller
                 if ($this->handle === null || $this->handle === $metaBundle->sourceHandle) {
                     $process = true;
                 }
-                if ($metaBundle->metaSitemapVars->sitemapUrls && $process) {
+                if (($metaBundle->metaSitemapVars->sitemapUrls || $metaBundle->metaNewsSitemapVars->newsSitemapEnabled) && $process) {
                     echo 'Generating sitemap for '
                         .$metaBundle->sourceType
                         .' '

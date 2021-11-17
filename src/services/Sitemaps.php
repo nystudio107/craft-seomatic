@@ -583,16 +583,18 @@ class Sitemaps extends Component implements SitemapInterface
                 'throwException' => false,
             ]
         );
-        $newSitemapTemplate = NewsSitemapTemplate::create();
-        $newSitemapTemplate->render(
-            [
-                'groupId' => $groupId,
-                'type' => $type,
-                'handle' => $handle,
-                'siteId' => $siteId,
-                'throwException' => false,
-            ]
-        );
+        if ($type == 'section') {
+            $newSitemapTemplate = NewsSitemapTemplate::create();
+            $newSitemapTemplate->render(
+                [
+                    'groupId' => $groupId,
+                    'type' => $type,
+                    'handle' => $handle,
+                    'siteId' => $siteId,
+                    'throwException' => false,
+                ]
+            );
+        }
 
     }
 

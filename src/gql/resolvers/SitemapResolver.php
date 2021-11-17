@@ -14,6 +14,7 @@ namespace nystudio107\seomatic\gql\resolvers;
 use nystudio107\seomatic\helpers\Gql as GqlHelper;
 use nystudio107\seomatic\helpers\PluginTemplate;
 use nystudio107\seomatic\models\NewsSitemapIndexTemplate;
+use nystudio107\seomatic\models\NewsSitemapTemplate;
 use nystudio107\seomatic\models\SitemapCustomTemplate;
 use nystudio107\seomatic\models\SitemapIndexTemplate;
 use nystudio107\seomatic\models\SitemapTemplate;
@@ -159,12 +160,20 @@ class SitemapResolver
      */
     protected static function getSitemapItemByFilename($filename)
     {
-        if (!preg_match('/sitemaps-(?P<groupId>\d+)-(?P<type>[\w\.*]+)-(?P<handle>[\w\.*]+)-(?P<siteId>\d+)/i', $filename, $matches)) {
+        if (!preg_match('/sitemaps-(?P<groupId>\d+)-(?P<type>[\w\.*]+)-(?P<handle>[\w\.*]+)-(?P<siteId>\d+)-((?P<sitemapType>[\w\.*]+)-)?/i', $filename, $matches)) {
             return null;
         }
 
-        $isCustom = $matches['type'] == 'global' && $matches['handle'] == 'custom';
-        $sitemap = $isCustom ? SitemapCustomTemplate::create() : SitemapTemplate::create();
+        $sitemap = null;
+
+        if (!empty($matches['sitemapType']) && $matches['sitemapType'] == Sitemaps::SITEMAP_TYPE_NEWS) {
+            $sitemap = NewsSitemapTemplate::create();
+        }
+
+        if (!$sitemap) {
+            $isCustom = $matches['type'] == 'global' && $matches['handle'] == 'custom';
+            $sitemap = $isCustom ? SitemapCustomTemplate::create() : SitemapTemplate::create();
+        }
 
         return [
             'filename' => $filename,
