@@ -53,6 +53,11 @@ class NewsSitemapIndexTemplate extends SitemapIndexTemplate
         return (bool)$metaBundle->metaNewsSitemapVars->newsSitemapEnabled;
     }
 
+    public function getFilename(int $groupId): string
+    {
+        return 'sitemaps-' . $groupId . '-news-sitemap.xml';
+    }
+
     /**
      * @inheritdoc
      */

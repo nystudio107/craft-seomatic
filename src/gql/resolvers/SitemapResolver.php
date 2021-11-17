@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\gql\resolvers;
 
 use nystudio107\seomatic\helpers\Gql as GqlHelper;
 use nystudio107\seomatic\helpers\PluginTemplate;
+use nystudio107\seomatic\models\NewsSitemapIndexTemplate;
 use nystudio107\seomatic\models\SitemapCustomTemplate;
 use nystudio107\seomatic\models\SitemapIndexTemplate;
 use nystudio107\seomatic\models\SitemapTemplate;
@@ -20,6 +21,8 @@ use nystudio107\seomatic\models\SitemapTemplate;
 use Craft;
 
 use GraphQL\Type\Definition\ResolveInfo;
+use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\services\Sitemaps;
 
 /**
  * Class SitemapResolver
@@ -61,14 +64,12 @@ class SitemapResolver
             ];
         }
 
-        // Otherwise, fetch the index and list all.
-        // Get all the indexes as sitemap items
-        $sitemapIndexArguments = [
-            'groupId' => $site->groupId,
-            'siteId' => $siteId,
-        ];
+        $sitemapIndexItems = [];
+        $sitemapIndexItems[] = self::getSitemapIndexListEntry($siteId, $site->groupId);
 
-        $sitemapIndexItems = [self::getSitemapIndexListEntry($siteId, $site->groupId)];
+        if (Seomatic::$plugin->is(Seomatic::EDITION_PRO)) {
+            $sitemapIndexItems[] = self::getSitemapIndexListEntry($siteId, $site->groupId, Sitemaps::SITEMAP_TYPE_NEWS);
+        }
 
         // Scrape each index for individual entries
         foreach ($sitemapIndexItems as $sitemapIndexItem) {
@@ -103,14 +104,17 @@ class SitemapResolver
         $siteId = GqlHelper::getSiteIdFromGqlArguments($arguments);
         $groupId = Craft::$app->getSites()->getSiteById($siteId)->groupId;
 
-        $sitemapIndexListEntry = self::getSitemapIndexListEntry($siteId, $groupId);
+        $sitemapIndexListEntries = [];
+        $sitemapIndexListEntries[] = self::getSitemapIndexListEntry($siteId, $groupId);
 
-        return [
-            $sitemapIndexListEntry
-        ];
+        if (Seomatic::$plugin->is(Seomatic::EDITION_PRO)) {
+            $sitemapIndexListEntries[] = self::getSitemapIndexListEntry($siteId, $groupId, Sitemaps::SITEMAP_TYPE_NEWS);
+        }
+
+        return $sitemapIndexListEntries;
     }
 
-/**
+    /**
      * Get all the sitemap index items by params.
      *
      * @param array $params
@@ -130,9 +134,10 @@ class SitemapResolver
      * @return array
      * @throws \yii\web\NotFoundHttpException
      */
-    protected static function getSitemapIndexListEntry($siteId, $groupId): array
+    protected static function getSitemapIndexListEntry($siteId, $groupId, $type = Sitemaps::SITEMAP_TYPE_REGULAR): array
     {
-        $sitemapIndex = SitemapIndexTemplate::create();
+        $sitemapIndex = ($type == Sitemaps::SITEMAP_TYPE_NEWS) ? NewsSitemapIndexTemplate::create() : SitemapIndexTemplate::create();
+
         $sitemapIndexItem = [
             'filename' => $sitemapIndex->getFilename($groupId),
             'contents' => $sitemapIndex->render([
