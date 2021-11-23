@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.4.20 - UNRELEASED
+## 3.4.20 - 2021.11.23
 ### Changed
 * Deprecated the `frontendTemplateContainer` GraphQL field
 
