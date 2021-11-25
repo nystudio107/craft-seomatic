@@ -1,6 +1,11 @@
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
 
+{% if not plugin('seomatic').is('pro') %}
+    <div class="requires-seomatic-pro">
+        <div class="pro-shade"></div>
+{% endif %}
+
 <fieldset>
 {% if pageContext != "field" %}
 <div class="flex">
@@ -94,3 +99,7 @@
     message: "#{currentSourceBundleType |capitalize} news sitemaps are automatically submitted to search engines whenever a new Element in that Section Group is added."
 } %}
 </fieldset>
+
+{% if not plugin('seomatic').is('pro') %}
+    </div>
+{% endif %}

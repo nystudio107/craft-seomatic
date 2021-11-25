@@ -655,7 +655,7 @@ class SettingsController extends Controller
                 $metaBundle->metaSitemapVars->setAttributes($sitemapSettings);
             }
 
-            if (\is_array($newsSitemapSettings)) {
+            if (\is_array($newsSitemapSettings) && Seomatic::getInstance()->is(Seomatic::EDITION_PRO)) {
                 $metaBundle->metaNewsSitemapVars->setAttributes($newsSitemapSettings);
             }
 

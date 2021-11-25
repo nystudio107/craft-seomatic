@@ -167,10 +167,14 @@ class SitemapResolver
         $sitemap = null;
 
         if (!empty($matches['sitemapType']) && $matches['sitemapType'] == Sitemaps::SITEMAP_TYPE_NEWS) {
+            if (!Seomatic::$plugin->is(Seomatic::EDITION_PRO)) {
+                return null;
+            }
+
             $sitemap = NewsSitemapTemplate::create();
         }
 
-        if (!$sitemap) {
+        if ($sitemap) {
             $isCustom = $matches['type'] == 'global' && $matches['handle'] == 'custom';
             $sitemap = $isCustom ? SitemapCustomTemplate::create() : SitemapTemplate::create();
         }

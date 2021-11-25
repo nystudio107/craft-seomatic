@@ -42,6 +42,10 @@ class GenerateNewsSitemap extends GenerateSitemap
      * @param array $params
      */
     protected function generateSitemap(array $params) {
+        if (!Seomatic::$plugin->is(Seomatic::EDITION_PRO)) {
+            return;
+        }
+
         Sitemap::generateSitemap($params, NewsSitemapTemplate::class);
     }
 
