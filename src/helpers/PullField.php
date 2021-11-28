@@ -42,9 +42,9 @@ class PullField
     ];
 
     const PULL_ASSET_FIELDS = [
-        ['fieldName' => 'seoImage', 'seoField' => 'seoImage', 'transformModeField' => 'seoImageTransformMode', 'transformName' => 'base'],
-        ['fieldName' => 'ogImage', 'seoField' => 'seoImage', 'transformModeField' => 'ogImageTransformMode', 'transformName' => 'facebook'],
-        ['fieldName' => 'twitterImage', 'seoField' => 'seoImage', 'transformModeField' => 'twitterImageTransformMode', 'transformName' => 'twitter'],
+        'seoImage' => ['fieldName' => 'seoImage', 'seoField' => 'seoImage', 'transformModeField' => 'seoImageTransformMode', 'transformName' => 'base'],
+        'ogImage' => ['fieldName' => 'ogImage', 'seoField' => 'seoImage', 'transformModeField' => 'ogImageTransformMode', 'transformName' => 'facebook'],
+        'twitterImage' => ['fieldName' => 'twitterImage', 'seoField' => 'seoImage', 'transformModeField' => 'twitterImageTransformMode', 'transformName' => 'twitter'],
     ];
 
 
@@ -147,6 +147,8 @@ class PullField
             $source = $bundleSettings[$fieldName.'Source'] ?? '';
             $ids = $bundleSettings[$fieldName.'Ids'] ?? [];
             $sourceField = $bundleSettings[$fieldName.'Field'] ?? '';
+            $template = $bundleSettings[$fieldName.'Template'] ?? '';
+
             if (!empty($source)) {
                 $transformImage = $bundleSettings[$fieldName.'Transform'] ?? true;
                 $seoField = $fields['seoField'];
@@ -161,6 +163,7 @@ class PullField
                 // Quote all the things here for clarity
                 $transformName = '"'.$transformName.'"';
                 $transformMode = '"'.$transformMode.'"';
+                $template = '"'.$template.'"';
                 // Special-case Twitter transforms
                 if ($fieldName === 'twitterImage') {
                     $transformName = 'seomatic.helper.twitterTransform()';
@@ -169,8 +172,14 @@ class PullField
                 if ($source !== 'fromUrl') {
                     $globalsSettings[$fieldName] = '';
                 }
+
+                if ($source === 'fromTemplate') {
+                    $transformImage = false;
+                }
+
                 $globalsSettings[$fieldNameWidth] = '';
                 $globalsSettings[$fieldNameHeight] = '';
+
                 // Handle transformed images
                 if ($transformImage) {
                     switch ($source) {
@@ -308,6 +317,14 @@ class PullField
                                 $globalsSettings[$fieldNameHeight] = '{{ craft.app.assets.assetById('
                                     .$ids[0]
                                     .', '.$siteId.').height }}';
+                            }
+                            break;
+                        case 'fromTemplate':
+                            if (!empty($template)) {
+                                $globalsSettings[$fieldName] = '{{ seomatic.helper.socialImage('
+                                    .rtrim($objectPrefix.$elementName, '.')
+                                    .', ' . $transformName . ''
+                                    .', ' . $template . ') }}';
                             }
                             break;
                     }

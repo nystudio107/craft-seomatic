@@ -202,6 +202,19 @@ class SeoCategory implements SeoElementInterface
     }
 
     /**
+     * @inheritdoc
+     */
+    public static function metaBundleElementsQuery(MetaBundle $metaBundle): ElementQueryInterface
+    {
+        $query = Category::find()
+            ->group($metaBundle->sourceHandle)
+            ->siteId($metaBundle->sourceSiteId)
+            ->limit(null);
+
+        return $query;
+    }
+
+    /**
      * Return an ElementInterface for the sitemap alt element for the given MetaBundle
      * and Element ID
      *

@@ -649,7 +649,13 @@ class SettingsController extends Controller
                     $globalsSettings['mainEntityOfPage'] = SchemaHelper::getSpecificEntityType($bundleSettings);
                 }
                 $metaBundle->metaGlobalVars->setAttributes($globalsSettings);
+
+                $existingSettings = $metaBundle->metaBundleSettings->toArray(['seoImageTemplate', 'twitterImageTemplate', 'ogImageTemplate']);
                 $metaBundle->metaBundleSettings->setAttributes($bundleSettings);
+                $updatedSettings = $metaBundle->metaBundleSettings->toArray(['seoImageTemplate', 'twitterImageTemplate', 'ogImageTemplate']);
+
+                ksort($existingSettings);
+                ksort($updatedSettings);
             }
             if (\is_array($sitemapSettings)) {
                 $metaBundle->metaSitemapVars->setAttributes($sitemapSettings);
@@ -663,6 +669,9 @@ class SettingsController extends Controller
             $metaBundle->typeId = $typeId;
             Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
 
+            if (isset($existingSettings) && json_encode($existingSettings) !== json_encode($updatedSettings)) {
+                Seomatic::getInstance()->socialImages->enqueueUpdatingSocialImagesForMetaBundle($metaBundle);
+            }
             Seomatic::$plugin->clearAllCaches();
             Craft::$app->getSession()->setNotice(Craft::t('seomatic', 'SEOmatic content settings saved.'));
         }

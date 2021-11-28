@@ -29,7 +29,6 @@ class Queue
 
     // Static Methods
     // =========================================================================
-
     /**
      * Run the queue if we can run it via the web interface
      *

@@ -1,0 +1,87 @@
+{% import "_includes/forms" as forms %}
+{% from _self import assetLocationInput %}
+{% from "seomatic/settings/_includes/macros.twig" import configWarning %}
+
+{% set allVolumes = craft.app.volumes.getAllVolumes() %}
+{% set volumeList = [] %}
+{% for volume in allVolumes %}
+    {% set volumeList = volumeList|merge([{'value': volume.uid, 'label': volume.name}]) %}
+{% endfor %}
+
+
+{% macro assetLocationInput(volumeOptions, volumeUid, subpath) %}
+    {% from "_includes/forms" import select, text %}
+    <div class="flex">
+        <div>
+            {{ select({
+                id: 'socialImageVolumeUid',
+                name: 'socialImageVolumeUid',
+                options: volumeOptions,
+                value: volumeUid,
+            }) }}
+        </div>
+        <div class="flex-grow">
+            {{ text({
+                id: 'socialImageSubpath',
+                class: 'ltr',
+                name: 'socialImageSubpath',
+                value: subpath,
+                placeholder: "path/to/subfolder"|t('app')
+            }) }}
+        </div>
+    </div>
+{% endmacro %}
+
+<div id="social-images" class="hidden">
+    {% namespace "settings" %}
+
+        {% if not seomatic.helper.puppeteer %}
+            <div class="error">{{ 'Puppeteer cannot be detected. Either it is not installed correctly, or the <code>socialImagesNodeModulePath</code> setting is incorrect.'|t('seomatic')|raw }}</div>
+        {%  endif %}
+
+        {% if volumeList %}
+            {{ forms.field({
+                first: true,
+                label: "Social Image Location"|t('app'),
+                instructions: "Where do you want to store the social images?"|t('app')
+            }, assetLocationInput(volumeList, settings.socialImageVolumeUid, settings.socialImageSubpath)) }}
+        {% else %}
+            {{ forms.field({
+                first: true,
+                label: "Social Image Volume"|t('app')
+            }, '<p class="error">' ~ "No volumes exist yet."|t('app') ~ '</p>') }}
+        {% endif %}
+
+        {{ forms.textField({
+            label: "Social Images node module path"|t("seomatic"),
+            instructions: "The node module location, if different from the include path"|t("seomatic"),
+            id: "socialImagesNodeModulePath",
+            name: "socialImagesNodeModulePath",
+            value: settings.socialImagesNodeModulePath,
+            placeholder: "/path/to/node_modules",
+            warning: configWarning("socialImagesNodeModulePath", "seomatic"),
+            errors: settings.getErrors("socialImagesNodeModulePath"),
+        }) }}
+
+        {{ forms.textField({
+            label: "Social Images Chromium executable path"|t("seomatic"),
+            instructions: "Path to the Chrome/Chromium executable, if you don't want to use the one installed by Puppeteer"|t("seomatic"),
+            id: "socialImagesChromePath",
+            name: "socialImagesChromePath",
+            value: settings.socialImagesChromePath,
+            placeholder: "/path/to/chromium",
+            warning: configWarning("socialImagesChromePath", "seomatic"),
+            errors: settings.getErrors("socialImagesChromePath"),
+        }) }}
+
+        {{ forms.lightswitchField({
+            label: "Enable Chromium sandbox."|t("seomatic"),
+            instructions: "Whether to enable the sandbox for Chromium, when rendering the template. Required to be disabled in some virtualization environments, but should be enabled, if possible, as this setting allows pages rendered on Chromium to access the system."|t("seomatic"),
+            id: "socialImagesEnableSandbox",
+            name: "socialImagesEnableSandbox",
+            on: settings.socialImagesEnableSandbox,
+            warning: configWarning("socialImagesEnableSandbox", "seomatic"),
+            errors: settings.getErrors("socialImagesEnableSandbox"),
+        }) }}
+    {% endnamespace %}
+</div>

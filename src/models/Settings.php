@@ -236,9 +236,38 @@ class Settings extends VarsModel
     ];
 
     /**
+     * @var string The node module location, if different from the include path.
+     */
+    public $socialImagesNodeModulePath = '';
+
+    /**
+     * @var string Path to the Chrome/Chromium executable, if you don't want to use the one installed by Puppeteer
+     */
+    public $socialImagesChromePath = '';
+
+    /**
+     * @var bool
+     * Whether to enable the sandbox for Chromium, when rendering the template.
+     * Required to be disabled in some virtualization environments, but should be enabled,
+     * if possible, as this setting allows pages rendered on Chromium to access the system.
+     */
+    public $socialImagesEnableSandbox = true;
+
+    /**
+     * @var string The UID of the volume that's holding the social images.
+     */
+    public $socialImageVolumeUid = '';
+
+    /**
+     * @var string The subpath on the social image volume.
+     */
+    public $socialImageSubpath = '';
+
+
+    /**
      * @var string[] URL params that are allowed to be considered part of the unique URL used for the metadata cache
      */
-    public $allowedUrlParams = [
+    public $socialImageSubpath = '';
     ];
 
     // Public Methods

@@ -206,6 +206,23 @@ class SeoEntry implements SeoElementInterface
     }
 
     /**
+     * @inheritdoc
+     */
+    public static function metaBundleElementsQuery(MetaBundle $metaBundle): ElementQueryInterface
+    {
+        $query = Entry::find()
+            ->section($metaBundle->sourceHandle)
+            ->siteId($metaBundle->sourceSiteId)
+            ->limit(null);
+
+        if (!empty($metaBundle->typeId)) {
+            $query->typeId($metaBundle->typeId);
+        }
+
+        return $query;
+    }
+
+    /**
      * Return an ElementInterface for the sitemap alt element for the given MetaBundle
      * and Element ID
      *

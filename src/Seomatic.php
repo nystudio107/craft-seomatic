@@ -35,6 +35,7 @@ use nystudio107\seomatic\services\Link as LinkService;
 use nystudio107\seomatic\services\MetaBundles as MetaBundlesService;
 use nystudio107\seomatic\services\MetaContainers as MetaContainersService;
 use nystudio107\seomatic\services\Script as ScriptService;
+use nystudio107\seomatic\services\SocialImages as SocialImagesService;
 use nystudio107\seomatic\services\SeoElements as SeoElementsService;
 use nystudio107\seomatic\services\Sitemaps as SitemapsService;
 use nystudio107\seomatic\services\Tag as TagService;
@@ -101,6 +102,7 @@ use yii\base\Event;
  * @property LinkService              $link
  * @property MetaBundlesService       $metaBundles
  * @property MetaContainersService    $metaContainers
+ * @property  SocialImagesService      $socialImages
  * @property ScriptService            $script
  * @property SeoElementsService       $seoElements
  * @property SitemapsService          $sitemaps
@@ -356,6 +358,7 @@ class Seomatic extends Plugin
 
     /**
      * @inheritdoc
+     * @return Settings
      */
     public function getSettings()
     {
@@ -637,6 +640,7 @@ class Seomatic extends Plugin
                 if ($event->isNew) {
                     self::$plugin->sitemaps->submitSitemapForElement($element);
                 }
+                self::$plugin->socialImages->enqueueUpdatingSocialImagesForElement($element);
             }
         );
         // Handler: Elements::EVENT_AFTER_DELETE_ELEMENT
@@ -654,6 +658,21 @@ class Seomatic extends Plugin
                     $element,
                     false
                 );
+                self::$plugin->socialImages->invalidateSocialImagesForElement($element);
+            }
+        );
+        // Handler: Elements::EVENT_AFTER_RESTORE_ELEMENT
+        Event::on(
+            Elements::class,
+            Elements::EVENT_AFTER_RESTORE_ELEMENT,
+            function (ElementEvent $event) {
+                Craft::debug(
+                    'Elements::EVENT_AFTER_RESTORE_ELEMENT',
+                    __METHOD__
+                );
+                /** @var  $element Element */
+                $element = $event->element;
+                self::$plugin->socialImages->enqueueUpdatingSocialImagesForElement($element);
             }
         );
         // Add social media preview targets on Craft 3.2 or later

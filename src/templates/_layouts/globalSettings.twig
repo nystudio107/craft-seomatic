@@ -7,6 +7,8 @@
 {% block foot %}
     {{ parent() }}
     {{ seomatic.manifest.registerJsModules([
+        'vendors~seomatic-tokens.js',
+        'vendors~seomatic-meta.js',
         'seomatic-tokens.js',
         'seomatic-meta.js',
     ]) }}
