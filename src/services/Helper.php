@@ -537,6 +537,25 @@ class Helper extends Component
     }
 
     /**
+     * Return whether puppeteer is installed
+     *
+     * @return bool
+     */
+    public function puppeteer(): bool
+    {
+        try {
+            if ($dir = Seomatic::getInstance()->getSettings()->socialImagesNodeModulePath) {
+                $dir = escapeshellarg($dir);
+                return preg_match('/puppeteer@/i', shell_exec("cd {\$dir}; npm ls puppeteer"));
+            } else {
+                return preg_match('/puppeteer@/i', shell_exec("npm ls puppeteer"));
+            }
+        } catch (\Throwable $exception) {
+            return false;
+        }
+    }
+
+    /**
      * Given a list of meta bundles in order of descending distance, return the bundle that has inheritable value.
      *
      * @param array $inheritedValues

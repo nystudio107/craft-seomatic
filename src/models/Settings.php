@@ -263,11 +263,10 @@ class Settings extends VarsModel
      */
     public $socialImageSubpath = '';
 
-
     /**
      * @var string[] URL params that are allowed to be considered part of the unique URL used for the metadata cache
      */
-    public $socialImageSubpath = '';
+    public $allowedUrlParams = [
     ];
 
     // Public Methods
