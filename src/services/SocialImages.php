@@ -24,7 +24,6 @@ use nystudio107\seomatic\jobs\GenerateBundleSocialImages;
 use nystudio107\seomatic\models\MetaBundleSettings;
 use nystudio107\seomatic\queue\SingletonJob;
 use nystudio107\seomatic\helpers\ImageTransform;
-use nystudio107\seomatic\helpers\Queue as QueueHelper;
 use nystudio107\seomatic\jobs\GenerateElementSocialImages;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\Seomatic;

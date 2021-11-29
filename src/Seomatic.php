@@ -250,6 +250,7 @@ class Seomatic extends Plugin
             'script' => ScriptService::class,
             'seoElements' => SeoElementsService::class,
             'sitemaps' => SitemapsService::class,
+            'socialImages' => SocialImagesService::class,
             'tag' => TagService::class,
             'title' => TitleService::class,
             // Register the manifest service
