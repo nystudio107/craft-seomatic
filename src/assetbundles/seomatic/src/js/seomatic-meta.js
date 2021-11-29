@@ -92,47 +92,48 @@ function initFieldSettings() {
     // Show/hide the image source fields initially
     $('.seomatic-imageSourceSelect > select').each(function(index, value) {
         var popupValue = $(this).val();
+        console.log(popupValue);
         switch (popupValue) {
             case 'sameAsSeo':
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').not('.seomatic-imageSourceNotSameAsSeo').show();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl.seomatic-imageSourceNotSameAsSeo').hide();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.imageSourceNotSameAsSeo').show();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromTemplate').hide();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').hide();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').hide();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceNotFromUrl').not('.seomatic-imageSourceNotSameAsSeo').show();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceNotFromUrl.seomatic-imageSourceNotSameAsSeo').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.imageSourceNotSameAsSeo').show();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromTemplate').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromField').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromAsset').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromUrl').hide();
                 break;
 
             case 'fromField':
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').show();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').show();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').hide();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').hide();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromTemplate').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceNotFromUrl').show();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromField').show();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromAsset').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromUrl').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromTemplate').hide();
                 break;
 
             case 'fromAsset':
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').show();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').hide();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').show();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').hide();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromTemplate').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceNotFromUrl').show();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromField').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromAsset').show();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromUrl').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromTemplate').hide();
                 break;
 
             case 'fromTemplate':
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').hide();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').hide();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').hide();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').hide();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromTemplate').show();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceNotFromUrl').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromField').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromAsset').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromUrl').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromTemplate').show();
                 break;
 
             case 'fromUrl':
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').hide();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').hide();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').hide();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').show();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromTemplate').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceNotFromUrl').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromField').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromAsset').hide();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromUrl').show();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromTemplate').hide();
                 break;
         }
     });
@@ -141,44 +142,44 @@ function initFieldSettings() {
     $('.seomatic-imageSourceSelect > select').on('change', function(e) {
         switch (this.value) {
             case 'sameAsSeo':
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').not('.seomatic-imageSourceNotSameAsSeo').slideDown();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').slideUp();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').slideUp();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').slideUp();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl.seomatic-imageSourceNotSameAsSeo').slideUp();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromTemplate').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceNotFromUrl').not('.seomatic-imageSourceNotSameAsSeo').slideDown();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromField').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromAsset').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromUrl').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceNotFromUrl.seomatic-imageSourceNotSameAsSeo').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromTemplate').slideUp();
                 break;
 
             case 'fromField':
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').slideDown();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').slideDown();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').slideUp();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').slideUp();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromTemplate').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceNotFromUrl').slideDown();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromField').slideDown();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromAsset').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromUrl').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromTemplate').slideUp();
                 break;
 
             case 'fromAsset':
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').slideDown();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').slideUp();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').slideDown();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').slideUp();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromTemplate').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceNotFromUrl').slideDown();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromField').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromAsset').slideDown();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromUrl').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromTemplate').slideUp();
                 break;
 
             case 'fromTemplate':
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').slideUp();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').slideUp();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').slideUp();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').slideUp();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromTemplate').slideDown();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceNotFromUrl').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromField').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromAsset').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromUrl').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromTemplate').slideDown();
                 break;
 
             case 'fromUrl':
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceNotFromUrl').slideUp();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromField').slideUp();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromAsset').slideUp();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromUrl').slideDown();
-                $(this).closest('.seomatic-imageSourceWrapper').children('.seomatic-imageSourceFromTemplate').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceNotFromUrl').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromField').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromAsset').slideUp();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromUrl').slideDown();
+                $(this).closest('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceFromTemplate').slideUp();
                 break;
         }
     });
