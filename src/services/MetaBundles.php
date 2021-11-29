@@ -116,6 +116,11 @@ class MetaBundles extends Component
     protected $globalMetaBundles = [];
 
     /**
+     * @var array parent meta bundles for elements
+     */
+    protected $elementContentMetaBundles = [];
+
+    /**
      * @var MetaBundle[]
      */
     private $_memoizedBundles = [];
