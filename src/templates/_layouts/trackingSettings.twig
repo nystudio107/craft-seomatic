@@ -3,9 +3,6 @@
 {% block foot %}
     {{ parent() }}
     {{ seomatic.manifest.registerJsModules([
-        'vendors~seomatic-meta.js',
-        'vendors~javascript-editor~twig-editor.js',
-        'vendors~javascript-editor.js',
         'javascript-editor.js',
         'seomatic-meta.js',
     ]) }}
