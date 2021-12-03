@@ -19,6 +19,7 @@ use craft\elements\db\MatrixBlockQuery;
 use craft\elements\db\TagQuery;
 use craft\elements\MatrixBlock;
 use craft\elements\Tag;
+use craft\helpers\HtmlPurifier;
 
 use yii\base\InvalidConfigException;
 
@@ -71,7 +72,7 @@ class Text
         $result = $string;
 
         if (!empty($string)) {
-            $string = strip_tags($string);
+            $string = HtmlPurifier::process($string, ['HTML.Allowed' => '']);
             $result = (string)Stringy::create($string)->truncate($length, $substring);
         }
 
@@ -95,7 +96,7 @@ class Text
         $result = $string;
 
         if (!empty($string)) {
-            $string = strip_tags($string);
+            $string = HtmlPurifier::process($string, ['HTML.Allowed' => '']);
             $result = (string)Stringy::create($string)->safeTruncate($length, $substring);
         }
 
@@ -395,7 +396,7 @@ class Text
         $str = rawurldecode($str);
         // Remove any linebreaks
         $str = (string)preg_replace("/\r|\n/", "", $str);
-        $str = strip_tags($str);
+        $str = HtmlPurifier::process($str, ['HTML.Allowed' => '']);
         // Remove any embedded Twig code
         $str = preg_replace('/{{.*?}}/', '', $str);
         $str = preg_replace('/{%.*?%}/', '', $str);
@@ -418,7 +419,7 @@ class Text
     public static function smartStripTags($str)
     {
         $str = str_replace('<', ' <', $str);
-        $str = strip_tags($str);
+        $str = HtmlPurifier::process($str, ['HTML.Allowed' => '']);
         $str = str_replace('  ', ' ', $str);
 
         return $str;
@@ -445,7 +446,7 @@ class Text
             $text = mb_convert_encoding($text, 'UTF-8', 'UTF-8');
         }
         // Strip HTML tags
-        $text = strip_tags($text);
+        $text = HtmlPurifier::process($text, ['HTML.Allowed' => '']);
         // Remove excess whitespace
         $text = preg_replace('/\s{2,}/u', ' ', $text);
         // Decode any HTML entities
