@@ -2,7 +2,7 @@
 
 ## 3.4.21 - UNRELEASED
 ### Changed
-* Check to see if a site is Enabled in Craft CMS > 3.5 to determine whether to generate sitemap URLs ([#1023](https://github.com/nystudio107/craft-seomatic/issues/1023))
+* Check to see if a site is Enabled in Craft CMS > 3.5 to determine whether to generate sitemap URLs & `rel="alternate"` links ([#1023](https://github.com/nystudio107/craft-seomatic/issues/1023))
 * Check to see if a site is Enabled in Craft CMS > 3.5 to determine whether to generate breadcrumbs ([#1023](https://github.com/nystudio107/craft-seomatic/issues/1023))
 * Check to see if a site is Enabled in Craft CMS > 3.5 to determine whether a metabundle should be generated/pruned or not ([#1023](https://github.com/nystudio107/craft-seomatic/issues/1023))
 
