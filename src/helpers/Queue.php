@@ -31,39 +31,6 @@ class Queue
     // =========================================================================
 
     /**
-     * Run the queue if we can run it via the web interface
-     *
-     * @return void
-     */
-    public static function run()
-    {
-        $queue = Craft::$app->getQueue();
-        // Make sure the queue uses the Craft web interface
-        if (!$queue instanceof QueueInterface) {
-            return;
-        }
-
-        // Make sure Craft is configured to run queues over the web
-        if (!Craft::$app->getConfig()->getGeneral()->runQueueAutomatically) {
-            return;
-        }
-
-        // Make sure the queue isn't already running, and there are waiting jobs
-        if ($queue->getHasReservedJobs() || !$queue->getHasWaitingJobs()) {
-            return;
-        }
-
-        // Don't run the queue automatically if this is a CP request
-        if (Craft::$app->getRequest()->getIsCpRequest()) {
-            return;
-        }
-
-        // Run the queue
-        App::maxPowerCaptain();
-        $queue->run();
-    }
-
-    /**
      * Run the queue via CLI command
      *
      * @return void

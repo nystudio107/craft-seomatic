@@ -16,7 +16,6 @@ use nystudio107\seomatic\helpers\Sitemap;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\base\SitemapInterface;
-use nystudio107\seomatic\helpers\Queue as QueueHelper;
 use nystudio107\seomatic\jobs\GenerateSitemap;
 
 use Craft;
@@ -201,12 +200,6 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                     ),
                     __METHOD__
                 );
-                // Try to run the queue immediately
-                if ($throwException) {
-                    // If $throwException === false it means we're trying to regenerate the sitemap due to an invalidation
-                    // rather than a request for the actual sitemap, so don't try to run the queue immediately
-                    QueueHelper::run();
-                }
             }
 
             // Try it again now
