@@ -18,6 +18,7 @@ use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\helpers\Migration as MigrationHelper;
+use nystudio107\seomatic\helpers\SiteHelper;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\MetaTagContainer;
@@ -758,7 +759,7 @@ class MetaBundles extends Component
                     if (!empty($siteSettings)) {
                         /** @var Section_SiteSettings $siteSetting */
                         foreach ($siteSettings as $siteSetting) {
-                            if ($siteSetting->siteId == $metaBundle->sourceSiteId && $siteSetting->hasUrls) {
+                            if ($siteSetting->siteId == $metaBundle->sourceSiteId && $siteSetting->hasUrls && SiteHelper::siteEnabledWithUrls($siteSetting->siteId)) {
                                 $prune = false;
                             }
                         }
@@ -888,7 +889,7 @@ class MetaBundles extends Component
             $siteSettingsArray = [];
             /** @var Section_SiteSettings $siteSetting  */
             foreach ($siteSettings as $siteSetting) {
-                if ($siteSetting->hasUrls) {
+                if ($siteSetting->hasUrls && SiteHelper::siteEnabledWithUrls($sourceSiteId)) {
                     $siteSettingArray = $siteSetting->toArray();
                     // Get the site language
                     $siteSettingArray['language'] = MetaValueHelper::getSiteLanguage($siteSetting->siteId);
@@ -898,7 +899,7 @@ class MetaBundles extends Component
             $siteSettingsArray = ArrayHelper::index($siteSettingsArray, 'siteId');
             // Create a MetaBundle for this site
             $siteSetting = $siteSettings[$sourceSiteId];
-            if ($siteSetting->hasUrls) {
+            if ($siteSetting->hasUrls && SiteHelper::siteEnabledWithUrls($sourceSiteId)) {
                 // Get the most recent dateUpdated
                 $element = $seoElement::mostRecentElement($sourceModel, $sourceSiteId);
                 /** @var Element $element */
