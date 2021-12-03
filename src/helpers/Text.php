@@ -73,6 +73,7 @@ class Text
 
         if (!empty($string)) {
             $string = HtmlPurifier::process($string, ['HTML.Allowed' => '']);
+            $string = html_entity_decode($string, ENT_NOQUOTES, 'UTF-8');
             $result = (string)Stringy::create($string)->truncate($length, $substring);
         }
 
@@ -97,6 +98,7 @@ class Text
 
         if (!empty($string)) {
             $string = HtmlPurifier::process($string, ['HTML.Allowed' => '']);
+            $string = html_entity_decode($string, ENT_NOQUOTES, 'UTF-8');
             $result = (string)Stringy::create($string)->safeTruncate($length, $substring);
         }
 
@@ -397,6 +399,7 @@ class Text
         // Remove any linebreaks
         $str = (string)preg_replace("/\r|\n/", "", $str);
         $str = HtmlPurifier::process($str, ['HTML.Allowed' => '']);
+        $str = html_entity_decode($str, ENT_NOQUOTES, 'UTF-8');
         // Remove any embedded Twig code
         $str = preg_replace('/{{.*?}}/', '', $str);
         $str = preg_replace('/{%.*?%}/', '', $str);
@@ -420,6 +423,7 @@ class Text
     {
         $str = str_replace('<', ' <', $str);
         $str = HtmlPurifier::process($str, ['HTML.Allowed' => '']);
+        $str = html_entity_decode($str, ENT_NOQUOTES, 'UTF-8');
         $str = str_replace('  ', ' ', $str);
 
         return $str;
@@ -447,8 +451,11 @@ class Text
         }
         // Strip HTML tags
         $text = HtmlPurifier::process($text, ['HTML.Allowed' => '']);
+        $text = html_entity_decode($text, ENT_NOQUOTES, 'UTF-8');
         // Remove excess whitespace
         $text = preg_replace('/\s{2,}/u', ' ', $text);
+        // Decode any HTML entities
+        $text = html_entity_decode($text);
 
         return $text;
     }
