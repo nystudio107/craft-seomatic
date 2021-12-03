@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.4.21 - UNRELEASED
+### Fixed
+* No longer ever attempt to run the queue immediately ([#10189](https://github.com/craftcms/cms/issues/10189))
+
 ### Changed
 * Use HtmlPurifier to remove HTML instead of `strip_tags` to prevent errant stripping of content like `I <3 Craft` ([#1024](https://github.com/nystudio107/craft-seomatic/issues/1024))
 * Check to see if a site is Enabled in Craft CMS > 3.5 to determine whether to generate sitemap URLs & `rel="alternate"` links ([#1023](https://github.com/nystudio107/craft-seomatic/issues/1023))
