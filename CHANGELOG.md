@@ -2,6 +2,7 @@
 
 ## 3.4.21 - UNRELEASED
 ### Changed
+* Use HtmlPurifier to remove HTML instead of `strip_tags` to prevent errant stripping of content like `I <3 Craft` ([#1024](https://github.com/nystudio107/craft-seomatic/issues/1024))
 * Check to see if a site is Enabled in Craft CMS > 3.5 to determine whether to generate sitemap URLs & `rel="alternate"` links ([#1023](https://github.com/nystudio107/craft-seomatic/issues/1023))
 * Check to see if a site is Enabled in Craft CMS > 3.5 to determine whether to generate breadcrumbs ([#1023](https://github.com/nystudio107/craft-seomatic/issues/1023))
 * Check to see if a site is Enabled in Craft CMS > 3.5 to determine whether a metabundle should be generated/pruned or not ([#1023](https://github.com/nystudio107/craft-seomatic/issues/1023))
