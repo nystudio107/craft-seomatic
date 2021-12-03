@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\models;
 
+use nystudio107\seomatic\helpers\SiteHelper;
 use nystudio107\seomatic\helpers\Sitemap;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
@@ -131,6 +132,9 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         if (Seomatic::$plugin->sitemaps->anyEntryTypeHasSitemapUrls($metaBundle)) {
             $robotsEnabled = true;
             $sitemapUrls = true;
+        }
+        if ($sitemapUrls && !SiteHelper::siteEnabledWithUrls($siteId)) {
+            $sitemapUrls = false;
         }
         // If it's disabled, just throw a 404
         if (!$sitemapUrls || !$robotsEnabled) {

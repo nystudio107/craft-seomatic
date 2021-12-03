@@ -215,7 +215,7 @@ class Sitemap
                             $primarySiteId = Craft::$app->getSites()->getPrimarySite()->id;
                             /** @var  $altSiteSettings */
                             foreach ($metaBundle->sourceAltSiteSettings as $altSiteSettings) {
-                                if (\in_array($altSiteSettings['siteId'], $groupSiteIds, false)) {
+                                if (\in_array($altSiteSettings['siteId'], $groupSiteIds, false) && SiteHelper::siteEnabledWithUrls($altSiteSettings['siteId'])) {
                                     $altElement = null;
                                     if ($seoElement !== null) {
                                         $altElement = $seoElement::sitemapAltElement(
