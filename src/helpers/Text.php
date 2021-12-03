@@ -449,8 +449,6 @@ class Text
         $text = HtmlPurifier::process($text, ['HTML.Allowed' => '']);
         // Remove excess whitespace
         $text = preg_replace('/\s{2,}/u', ' ', $text);
-        // Decode any HTML entities
-        $text = html_entity_decode($text);
 
         return $text;
     }
