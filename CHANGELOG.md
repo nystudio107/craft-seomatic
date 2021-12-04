@@ -3,6 +3,7 @@
 ## 3.4.21 - UNRELEASED
 ### Fixed
 * No longer attempt to run the Craft queue manually ([#10189](https://github.com/craftcms/cms/issues/10189))
+* Generate sitemaps immediately via console command, bypassing the queue job ([#10189](https://github.com/craftcms/cms/issues/10189))
 * Use HtmlPurifier to remove HTML instead of `strip_tags` to prevent errant stripping of content like `I <3 Craft` ([#1024](https://github.com/nystudio107/craft-seomatic/issues/1024))
 
 ### Changed
