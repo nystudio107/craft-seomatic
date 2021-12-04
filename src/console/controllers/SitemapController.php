@@ -10,6 +10,7 @@
 namespace nystudio107\seomatic\console\controllers;
 
 use nystudio107\seomatic\models\MetaBundle;
+use nystudio107\seomatic\models\SitemapTemplate;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\Queue as QueueHelper;
 
@@ -103,15 +104,27 @@ class SitemapController extends Controller
                         .' '
                         .$metaBundle->sourceName
                         .', siteId '
-                        .$siteId;
+                        .$siteId
+                        .PHP_EOL
+                    ;
                     Seomatic::$plugin->sitemaps->invalidateSitemapCache(
                         $metaBundle->sourceHandle,
                         $siteId,
                         $metaBundle->sourceBundleType
                     );
-                    if (!$this->queue) {
-                        QueueHelper::runConsole();
+                    // Generate the sitemap so it is in the cache
+                    $site = Craft::$app->getSites()->getSiteById($metaBundle->sourceSiteId);
+                    if ($site) {
+                        $sitemap = SitemapTemplate::create();
+                        $sitemap->render([
+                            'groupId' => $site->groupId,
+                            'siteId' => $metaBundle->sourceSiteId,
+                            'handle' => $metaBundle->sourceHandle,
+                            'type' => $metaBundle->sourceBundleType,
+                            'immediately' => true,
+                        ]);
                     }
+
                     echo '---'.PHP_EOL;
                 }
             }
