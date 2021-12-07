@@ -12,7 +12,6 @@ namespace nystudio107\seomatic\console\controllers;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\SitemapTemplate;
 use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\helpers\Queue as QueueHelper;
 
 use Craft;
 use craft\helpers\App;
