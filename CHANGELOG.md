@@ -1,10 +1,47 @@
 # SEOmatic Changelog
 
-## 3.4.17 - UNRELEASED
+## 3.4.21 - UNRELEASED
+### Fixed
+* No longer attempt to run the Craft queue manually ([#10189](https://github.com/craftcms/cms/issues/10189))
+* Generate sitemaps immediately via console command, bypassing the queue job ([#10189](https://github.com/craftcms/cms/issues/10189))
+* Use HtmlPurifier to remove HTML instead of `strip_tags` to prevent errant stripping of content like `I <3 Craft` ([#1024](https://github.com/nystudio107/craft-seomatic/issues/1024))
+
+### Changed
+* Check to see if a site is Enabled in Craft CMS > 3.5 to determine whether to generate sitemap URLs & `rel="alternate"` links ([#1023](https://github.com/nystudio107/craft-seomatic/issues/1023))
+* Check to see if a site is Enabled in Craft CMS > 3.5 to determine whether to generate breadcrumbs ([#1023](https://github.com/nystudio107/craft-seomatic/issues/1023))
+* Check to see if a site is Enabled in Craft CMS > 3.5 to determine whether a metabundle should be generated/pruned or not ([#1023](https://github.com/nystudio107/craft-seomatic/issues/1023))
+* Updated the buildchain to use Node 16
+
+## 3.4.20 - 2021.11.23
+### Changed
+* Deprecated the `frontendTemplateContainer` GraphQL field
+
+### Fixed
+* Eliminated multiple queries to the same asset via a memoization cache in ImageTransformHelper ([#1016](https://github.com/nystudio107/craft-seomatic/issues/1016))
+
+## 3.4.19 - 2021.11.13
+### Changed
+* Changed the `frontendTemplateContainers` GraphQL query to `frontendTemplates`, and made the query inline with the `sitemaps` queries, returning a `filename` and `contents`
+
+## 3.4.18 - 2021.11.11
+### Added
+* Added the ability to query for `sitemaps`, `sitemapIndexes`, and `sitemapStyles` via GraphQL ([#517](https://github.com/nystudio107/craft-seomatic/issues/517))
+* Added the **Always include `canonical` links regardless of environment** setting to Plugin Settings -> Advanced ([#1006](https://github.com/nystudio107/craft-seomatic/issues/1006))
+
+### Fixed
+* Don't try to run the sitemap queue job immediately if it's the result of an invalidation, only when the actual sitemap is requested via frontend request
+* Fix Matomo script URL value by removing the // and / that are in the Matomo docs ([#1004](https://github.com/nystudio107/craft-seomatic/issues/1004))
+* Fixed an issue where meta value parsing could fail with unquoted object keys passed in ([#1007](https://github.com/nystudio107/craft-seomatic/issues/1007))
+* Fixed the date in the `security.txt` template
+
+## 3.4.17 - 2021.10.19
+### Added
+* Added the ability to specify the SEOmatic environment to use with the GraphQL API (local, staging, production)
+
 ### Fixed
 * Ensure URLs with no `path` work in `decomposeUrl()` ([#1001](https://github.com/nystudio107/craft-seomatic/issues/1001))
 * Make sure the *Sources variables at least exist, for things like the QuickPost widget ([#1002](https://github.com/nystudio107/craft-seomatic/issues/1002))
-* 
+
 ## 3.4.16 - 2021.10.13
 ### Changed
 * Add an empty value to possible selections for the Robots setting, to allow it to fall back on global settings ([#996](https://github.com/nystudio107/craft-seomatic/issues/996))

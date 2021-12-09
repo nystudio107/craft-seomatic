@@ -427,7 +427,7 @@ class DynamicMeta
             return;
         }
         try {
-            $siteUrl = $site->hasUrls ? $site->baseUrl : Craft::$app->getSites()->getPrimarySite()->baseUrl;
+            $siteUrl = SiteHelper::siteEnabledWithUrls($siteId) ? $site->baseUrl : Craft::$app->getSites()->getPrimarySite()->baseUrl;
         } catch (SiteNotFoundException $e) {
             $siteUrl = Craft::$app->getConfig()->general->siteUrl;
             Craft::error($e->getMessage(), __METHOD__);
@@ -723,7 +723,7 @@ class DynamicMeta
                 $url = ($url === '__home__') ? '' : $url;
             } else {
                 try {
-                    $url = $site->hasUrls ? UrlHelper::siteUrl($requestUri, $urlParams, null, $site->id)
+                    $url = SiteHelper::siteEnabledWithUrls($site->id) ? UrlHelper::siteUrl($requestUri, $urlParams, null, $site->id)
                         : Craft::$app->getSites()->getPrimarySite()->baseUrl;
                 } catch (SiteNotFoundException $e) {
                     $url = '';

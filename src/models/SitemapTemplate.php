@@ -11,10 +11,11 @@
 
 namespace nystudio107\seomatic\models;
 
+use nystudio107\seomatic\helpers\SiteHelper;
+use nystudio107\seomatic\helpers\Sitemap;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\base\SitemapInterface;
-use nystudio107\seomatic\helpers\Queue as QueueHelper;
 use nystudio107\seomatic\jobs\GenerateSitemap;
 
 use Craft;
@@ -131,6 +132,9 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             $robotsEnabled = true;
             $sitemapUrls = true;
         }
+        if ($sitemapUrls && !SiteHelper::siteEnabledWithUrls($siteId)) {
+            $sitemapUrls = false;
+        }
         // If it's disabled, just throw a 404
         if (!$sitemapUrls || !$robotsEnabled) {
             if ($request->isCpRequest || $request->isConsoleRequest) {
@@ -157,36 +161,47 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 $queue->release($existingJobId);
                 $cache->delete($queueJobCacheKey);
             }
-            // Push a new queue job
-            $jobId = $queue->push(new GenerateSitemap([
-                'groupId' => $groupId,
-                'type' => $type,
-                'handle' => $handle,
-                'siteId' => $siteId,
-                'queueJobCacheKey' => $queueJobCacheKey,
-            ]));
-            // Stash the queue job id in the cache for future reference
-            $cacheDuration = 3600;
-            $dependency = new TagDependency([
-                'tags' => [
-                    self::GLOBAL_SITEMAP_CACHE_TAG,
-                    self::CACHE_KEY.$uniqueKey,
-                ],
-            ]);
-            $cache->set($queueJobCacheKey, $jobId, $cacheDuration, $dependency);
-            Craft::debug(
-                Craft::t(
-                    'seomatic',
-                    'Started GenerateSitemap queue job id: {jobId} with cache key {cacheKey}',
-                    [
-                        'jobId' => $jobId,
-                        'cacheKey' => $cacheKey,
-                    ]
-                ),
-                __METHOD__
-            );
-            // Try to run the queue immediately
-            QueueHelper::run();
+
+            if (!empty($params['immediately'])) {
+                Sitemap::generateSitemap([
+                    'groupId' => $groupId,
+                    'type' => $type,
+                    'handle' => $handle,
+                    'siteId' => $siteId,
+                    'queueJobCacheKey' => $queueJobCacheKey,
+                ]);
+            } else {
+                // Push a new queue job
+                $jobId = $queue->push(new GenerateSitemap([
+                    'groupId' => $groupId,
+                    'type' => $type,
+                    'handle' => $handle,
+                    'siteId' => $siteId,
+                    'queueJobCacheKey' => $queueJobCacheKey,
+                ]));
+
+                // Stash the queue job id in the cache for future reference
+                $cacheDuration = 3600;
+                $dependency = new TagDependency([
+                    'tags' => [
+                        self::GLOBAL_SITEMAP_CACHE_TAG,
+                        self::CACHE_KEY.$uniqueKey,
+                    ],
+                ]);
+                $cache->set($queueJobCacheKey, $jobId, $cacheDuration, $dependency);
+                Craft::debug(
+                    Craft::t(
+                        'seomatic',
+                        'Started GenerateSitemap queue job id: {jobId} with cache key {cacheKey}',
+                        [
+                            'jobId' => $jobId,
+                            'cacheKey' => $cacheKey,
+                        ]
+                    ),
+                    __METHOD__
+                );
+            }
+
             // Try it again now
             $result = $cache->get($cacheKey);
             if ($result !== false) {

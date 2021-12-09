@@ -11,10 +11,11 @@
 
 namespace nystudio107\seomatic\gql\resolvers;
 
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\gql\interfaces\SeomaticInterface;
+use nystudio107\seomatic\helpers\Gql as GqlHelper;
 use nystudio107\seomatic\helpers\Container as ContainerHelper;
 
-use Craft;
 use craft\base\Element;
 use craft\gql\base\Resolver;
 use craft\helpers\Json;
@@ -47,10 +48,14 @@ class SeomaticResolver extends Resolver
         } else {
             // Otherwise use the passed in arguments, or defaults
             $uri = $arguments['uri'] ?? '/';
-            $siteId = $arguments['siteId'] ?? null;
-            if (!empty($arguments['site'])) {
-                $siteId = self::getSiteIdFromHandle($arguments['site']) ?? $siteId;
-            }
+            $siteId = GqlHelper::getSiteIdFromGqlArguments($arguments);
+        }
+
+        // Change the environment if we need to
+        $environment = $arguments['environment'] ?? null;
+        $oldEnvironment = Seomatic::$environment;
+        if ($environment) {
+            Seomatic::$environment = $environment;
         }
         $asArray = $arguments['asArray'] ?? false;
         $uri = trim($uri === '/' ? '__home__' : $uri, '/');
@@ -66,28 +71,10 @@ class SeomaticResolver extends Resolver
                 $result[$key] = Json::encode($value);
             }
         }
-
-        return $result;
-    }
-
-    // Protected Methods
-    // =========================================================================
-
-    /**
-     * Return a siteId from a siteHandle
-     *
-     * @param string $siteHandle
-     *
-     * @return int|null
-     */
-    protected static function getSiteIdFromHandle($siteHandle)
-    {
-        // Get the site to edit
-        if ($siteHandle !== null) {
-            $site = Craft::$app->getSites()->getSiteByHandle($siteHandle);
-            return $site->id ?? null;
+        if ($environment) {
+            Seomatic::$environment = $oldEnvironment;
         }
 
-        return Craft::$app->getSites()->currentSite->id;
+        return $result;
     }
 }

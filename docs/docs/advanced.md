@@ -147,7 +147,6 @@ You must as least pass in the URI you want metadata for:
       metaScriptContainer
       metaJsonLdContainer
       metaSiteVarsContainer
-      frontendTemplateContainer
   }
 }
 ```
@@ -163,7 +162,6 @@ You must as least pass in the URI you want metadata for:
       metaScriptContainer
       metaJsonLdContainer
       metaSiteVarsContainer
-      frontendTemplateContainer
   }
 }
 ```
@@ -179,7 +177,6 @@ You must as least pass in the URI you want metadata for:
       metaScriptContainer
       metaJsonLdContainer
       metaSiteVarsContainer
-      frontendTemplateContainer
   }
 }
 ```
@@ -195,7 +192,6 @@ You must as least pass in the URI you want metadata for:
       metaScriptContainer
       metaJsonLdContainer
       metaSiteVarsContainer
-      frontendTemplateContainer
   }
 }
 ```
@@ -203,7 +199,125 @@ This defaults to `false` which returns to you HTML ready to be inserted into the
 
 This is useful if you’re using Next.js, Nuxt.js, Gatsby, Gridsome, or anything else that uses a library to insert the various tags. In this case, you want the raw data to pass along.
 
+...and you can also pass in an optional `environment` parameter:
+
+```graphql
+{
+  seomatic (uri: "/", environment: staging) {
+      metaTitleContainer
+      metaTagContainer
+      metaLinkContainer
+      metaScriptContainer
+      metaJsonLdContainer
+      metaSiteVarsContainer
+  }
+}
+```
+This will override whatever the current SEOmatic environment is set to, and allow you to get the appropriate meta information for any of the preset SEOmatic environments. So `robots` for example will be disabled in `local` developmand & `staging` environments.
+
+This is useful if you are using a single Craft CMS instance to render metadata for multiple environments like `staging` and `live` production.
+
+Valid values are `local` for local development, `staging` for staging, and `live` for live production.
+
 ![Screenshot](./resources/screenshots/seomatic-craftql-query.png)
+
+### Frontend Templates GraphQL queries
+
+SEOmatic an provide you with the frontend templates such as `robots.txt`, `humans.txt`, etc. as well:
+
+![Screenshot](./resources/screenshots/seomatic-graphql-frontendtemplates-query.png)
+
+```graphql
+{
+  seomatic {
+    frontendTemplates {
+      filename,
+      contents
+    }
+  }
+}
+```
+
+Arguments:
+
+`frontendTemplates(siteId: 1, site: mainSite, type: robots)`
+
+`siteId:` Int - Optional - The site ID to resolve the sitemap for.
+
+`site:` String - Optional - The site handle to resolve the sitemap for.
+
+`type:` String - The frontend container type, which can be `robots`, `humans`, `security`, or `ads`
+
+#### Sitemap GraphQL queries
+
+SEOmatic can provide you with the sitemap data via GraphQL as well.
+
+![Screenshot](./resources/screenshots/seomatic-graphql-sitemaps-query.png)
+
+SEOmatic allows you to query for `sitemapIndexes`:
+
+```graphql
+{
+  seomatic {
+    sitemapIndexes {
+      filename
+      contents
+    }
+  }
+}
+```
+
+Arguments:
+
+`sitemapIndexes(siteId: 1, site: mainSite)`
+
+`siteId:` Int - Optional - The site ID to resolve the sitemap for.
+
+`site:` String - Optional - The site handle to resolve the sitemap for.
+
+SEOmatic allows you to query for `sitemaps`:
+
+```graphql
+{
+  seomatic {
+    sitemaps {
+      filename
+      contents
+    }
+  }
+}
+```
+
+Arguments:
+
+`sitemaps(filename: some_sitemap, siteId: 1, site: mainSite, sourceBundleType: product, sourceBundleHandle: someHandle)`
+
+`filename:` String - Optional - the sitemap filename.
+
+`siteId:` Int - Optional - The site ID to resolve the sitemap for.
+
+`site:` String - Optional - The site handle to resolve the sitemap for.
+
+`sourceBundleType:` String - Optional - The source bundle type to get the sitemaps for.
+
+`sourceBundleHandle:` String - Optional - The source bundles handle to get the sitemap for.
+
+SEOmatic also allows you to query for `sitemapStyles`:
+
+```graphql
+{
+  seomatic {
+      sitemapStyles {
+      filename
+      contents
+    }
+  }
+}
+```
+
+This returns the [XSL stylesheet](https://www.w3.org/Style/XSL/WhatIsXSL.html) that SEOmatic uses to make the sitemaps pleasant for humans to read.
+
+#### Piggybacking GraphQL queries
 
 You can also piggyback on an entries query, to return all of your data for an entry as well as the SEOmatic metadata in one request.
 

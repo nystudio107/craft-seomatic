@@ -109,6 +109,17 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
     }
 
     /**
+     * Get the filename of the sitemap index.
+     *
+     * @param int $groupId
+     * @return string
+     */
+    public function getFilename(int $groupId): string
+    {
+        return 'sitemaps-' . $groupId . '-sitemap.xml';
+    }
+
+    /**
      * @inheritdoc
      *
      * @throws NotFoundHttpException if the sitemap.xml doesn't exist
@@ -130,6 +141,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
         } else {
             $groupSiteIds = Craft::$app->getSites()->allSiteIds;
         }
+
         $dependency = new TagDependency([
             'tags' => [
                 self::GLOBAL_SITEMAP_CACHE_TAG,
