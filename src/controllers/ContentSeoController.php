@@ -11,12 +11,9 @@ namespace nystudio107\seomatic\controllers;
 
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\helpers\ArrayHelper;
-use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\services\SeoElements;
 
 use Craft;
-use craft\db\Query;
 use craft\helpers\UrlHelper;
 use craft\web\Controller;
 
