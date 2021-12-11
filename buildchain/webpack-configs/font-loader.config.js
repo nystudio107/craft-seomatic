@@ -9,12 +9,6 @@ module.exports = (type = 'modern', settings) => {
         module: {
             rules: [
                 {
-                    test: /codicon\.ttf$/,
-                    use: [{
-                        loader: "ignore-loader"
-                    }]
-                },
-                {
                     test: /\.(ttf|eot|woff2?)$/i,
                     use: [
                         {

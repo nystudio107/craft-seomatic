@@ -25,6 +25,7 @@
 {% block content %}
 
     {% include "seomatic/settings/_includes/environment-warning.twig" %}
+    {% include "seomatic/settings/_includes/monaco-editor-css.twig" with {baseAssetsUrl: baseAssetsUrl} only %}
 
     <input type="hidden" name="action" value="seomatic/settings/save-tracking">
     <input type="hidden" name="siteId" value="{{ currentSiteId }}">
