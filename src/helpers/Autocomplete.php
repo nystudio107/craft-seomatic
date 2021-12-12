@@ -93,8 +93,10 @@ class Autocomplete
 
     /**
      * Core function that generates the autocomplete array
+     * @param null $additionalCompletionsCacheKey
+     * @return array
      */
-    public static function generate(): array
+    public static function generate($additionalCompletionsCacheKey = null): array
     {
         $completionList = [];
         // Iterate through the globals in the Twig context
@@ -134,6 +136,15 @@ class Autocomplete
                         break;
                 }
             }
+        }
+        // Add in additional completion items from the cache, if present
+        if ($additionalCompletionsCacheKey) {
+            $cache = Craft::$app->getCache();
+            $additionalCompletions = $cache->get([self::class, $additionalCompletionsCacheKey]);
+            if ($additionalCompletions !== false && is_array($additionalCompletions)) {
+                $completionList = array_merge($completionList, $additionalCompletions);
+            }
+
         }
 
         return $completionList;

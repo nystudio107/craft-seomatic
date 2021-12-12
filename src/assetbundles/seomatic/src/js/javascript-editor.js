@@ -13,17 +13,17 @@
  * @package   SEOmatic
  * @since     3.0.0
  */
-import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import('monaco-themes/themes/Night Owl.json')
     .then(data => {
-        monaco.editor.defineTheme('monokai', data);
-        monaco.editor.setTheme('monokai');
+        monaco.editor.defineTheme('night-owl', data);
+        monaco.editor.setTheme('night-owl');
     });
 import codicon from 'monaco-editor/esm/vs/base/browser/ui/codicons/codicon/codicon.ttf';
+import { getCompletionItemsFromEndpoint } from '@/js/autocomplete.js';
 
 // Create the editor
-function makeMonacoEditor(elementId) {
-    console.log(elementId);
+function makeMonacoEditor(elementId, additionalCompletionsCacheKey) {
     const textArea = document.getElementById(elementId);
     let container = document.createElement('div');
     container.id = elementId + '-monaco-editor';
@@ -48,12 +48,12 @@ function makeMonacoEditor(elementId) {
         },
     });
 
-    require("@/js/autocomplete.js");
+    // Get the autocompletion items
+    getCompletionItemsFromEndpoint(additionalCompletionsCacheKey);
 
     let ignoreEvent = false;
     const updateHeight = () => {
         const width = editor.getLayoutInfo().width;
-        console.log(width);
         const contentHeight = Math.min(1000, editor.getContentHeight());
         //container.style.width = `${width}px`;
         container.style.height = `${contentHeight}px`;
