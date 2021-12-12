@@ -4,7 +4,7 @@ module.exports = {
   purge: {
     content: [
       '../src/templates/**/*.{twig,html}',
-      '../src/assetbundles/seomatic/src/vue/**/*.{vue,html}',
+      '../src/assetbundles/seomatic/src/**/*.{vue,html,js}',
     ],
     layers: [
       'base',
