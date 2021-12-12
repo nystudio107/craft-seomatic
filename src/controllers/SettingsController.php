@@ -11,13 +11,13 @@ namespace nystudio107\seomatic\controllers;
 
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
+use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\helpers\Autocomplete as AutocompleteHelper;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\helpers\PullField as PullFieldHelper;
 use nystudio107\seomatic\helpers\Schema as SchemaHelper;
-use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\DynamicMeta as DynamicMetaHelper;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
-use nystudio107\seomatic\helpers\PluginTemplate;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaScript;
 use nystudio107\seomatic\models\MetaScriptContainer;
@@ -75,6 +75,8 @@ class SettingsController extends Controller
         'genericUrl' => 'Identity Entity URL',
         'genericImage' => 'Identity Entity Brand',
     ];
+
+    const AUTOCOMPLETE_CACHE_DURATION = 60;
 
     // Protected Properties
     // =========================================================================
@@ -890,6 +892,9 @@ class SettingsController extends Controller
                 MetaScriptContainer::CONTAINER_TYPE
             );
         }
+        // Add in the variables to the autocomplete cache
+        $subSectionSettings = $variables['scripts'][$subSection];
+        $this->addVarsToAutocompleteCache($subSectionSettings->name, $subSectionSettings->vars);
         // Plugin and section settings
         $pluginName = Seomatic::$settings->pluginName;
         $templateTitle = Craft::t('seomatic', 'Tracking Scripts');
@@ -1032,6 +1037,29 @@ class SettingsController extends Controller
 
     // Protected Methods
     // =========================================================================
+
+    /**
+     * @param string $additionalCompletionsCacheKey
+     * @param $vars
+     * @return void
+     */
+    protected function addVarsToAutocompleteCache(string $additionalCompletionsCacheKey, $vars)
+    {
+        $additionalCompletions = [];
+        foreach($vars as $key => $value) {
+            $additionalCompletions[$key] = [
+                '__completions' => [
+                    'detail' => $value['title'],
+                    'documentation' => $value['instructions'],
+                    'kind' => AutocompleteHelper::CompletionItemKind['Variable'],
+                    'label' => $key,
+                    'sortText' => $key,
+                ]
+            ];
+        }
+        $cache = Craft::$app->getCache();
+        $cache->set([AutocompleteHelper::class, $additionalCompletionsCacheKey], $additionalCompletions, self::AUTOCOMPLETE_CACHE_DURATION);
+    }
 
     /**
      * @param array $variables

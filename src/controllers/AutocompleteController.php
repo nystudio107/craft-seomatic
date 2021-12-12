@@ -22,11 +22,12 @@ use yii\web\Response;
 class AutocompleteController extends Controller
 {
     /**
+     * @param null $additionalCompletionsCacheKey
      * @return Response
      */
-    public function actionIndex(): Response
+    public function actionIndex($additionalCompletionsCacheKey = null): Response
     {
-        $result = AutocompleteHelper::generate();
+        $result = AutocompleteHelper::generate($additionalCompletionsCacheKey);
 
         return $this->asJson($result);
     }

@@ -99,7 +99,7 @@
                                 errors: scriptData.getErrors("templateString"),
                             }) }}
                             {% js %}
-                                makeMonacoEditor("{{ "templateString"|namespaceInputId }}");
+                                makeMonacoEditor("{{ "templateString"|namespaceInputId }}", "{{ scriptData.name }}");
                             {% endjs %}
                             {{ forms.selectField({
                                 label: "Script Render Location"|t("seomatic"),
@@ -128,7 +128,7 @@
                                 errors: scriptData.getErrors("bodyTemplateString"),
                             }) }}
                             {% js %}
-                                makeMonacoEditor("{{ "bodyTemplateString"|namespaceInputId }}");
+                                makeMonacoEditor("{{ "bodyTemplateString"|namespaceInputId }}", "{{ scriptData.name }}");
                             {% endjs %}
 
                             {{ forms.selectField({

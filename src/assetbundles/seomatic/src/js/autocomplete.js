@@ -15,8 +15,6 @@
  */
 const COMPLETION_KEY = '__completions';
 const AUTOCOMPLETE_CONTROLLER_ENDPOINT = 'seomatic/autocomplete/index';
-const AUTOCOMPLETE_CACHE_KEY = 'seomatic-autocomplete-cache';
-const AUTOCOMPLETE_CACHE_DURATION = 60 * 1000;
 
 /**
  * Get the last item from the array
@@ -26,48 +24,6 @@ const AUTOCOMPLETE_CACHE_DURATION = 60 * 1000;
  */
 function getLastItem(arr) {
     return arr[arr.length - 1];
-}
-
-/**
- * Store a value in local storage via a key, and with a duration in TTL
- *
- * @param key
- * @param value
- * @param ttl
- */
-function setWithExpiry(key, value, ttl) {
-    const now = new Date()
-    // `item` is an object which contains the original value
-    // as well as the time when it's supposed to expire
-    const item = {
-        value: value,
-        expiry: now.getTime() + ttl,
-    }
-    localStorage.setItem(key, JSON.stringify(item))
-}
-
-/**
- * Retrieve a value from local storage
- *
- * @param key
- * @returns {null|*}
- */
-function getWithExpiry(key) {
-    const itemStr = localStorage.getItem(key)
-    // if the item doesn't exist, return null
-    if (!itemStr) {
-        return null
-    }
-    const item = JSON.parse(itemStr)
-    const now = new Date()
-    // compare the expiry time of the item with the current time
-    if (now.getTime() > item.expiry) {
-        // If the item is expired, delete the item from storage
-        // and return null
-        localStorage.removeItem(key)
-        return null
-    }
-    return item.value
 }
 
 /**
@@ -189,22 +145,17 @@ function addHoverHandlerToMonaco(completionItems) {
 /**
  * Fetch the autocompletion items from local storage, or from the endpoint if they aren't cached in local storage
  */
-function getCompletionItemsFromEndpoint() {
-    // Try to get the completion items from local storage
-    let completionItems = getWithExpiry(AUTOCOMPLETE_CACHE_KEY);
-    if (completionItems !== null) {
-        addCompletionItemsToMonaco(completionItems);
-        addHoverHandlerToMonaco(completionItems);
-
-        return;
+function getCompletionItemsFromEndpoint(cacheKey) {
+    let urlParams = '';
+    if (typeof cacheKey !== 'undefined' && cacheKey !== null) {
+        urlParams = '?additionalCompletionsCacheKey=' + cacheKey;
     }
     // Ping the controller endpoint
     let request = new XMLHttpRequest();
-    request.open('GET', Craft.getActionUrl(AUTOCOMPLETE_CONTROLLER_ENDPOINT), true);
+    request.open('GET', Craft.getActionUrl(AUTOCOMPLETE_CONTROLLER_ENDPOINT + urlParams), true);
     request.onload = function () {
         if (request.status >= 200 && request.status < 400) {
-            completionItems = JSON.parse(request.responseText);
-            setWithExpiry(AUTOCOMPLETE_CACHE_KEY, completionItems, AUTOCOMPLETE_CACHE_DURATION);
+            const completionItems = JSON.parse(request.responseText);
             addCompletionItemsToMonaco(completionItems);
             addHoverHandlerToMonaco(completionItems);
         } else {
@@ -214,5 +165,4 @@ function getCompletionItemsFromEndpoint() {
     request.send();
 }
 
-// Make it go
-getCompletionItemsFromEndpoint();
+export { getCompletionItemsFromEndpoint };
