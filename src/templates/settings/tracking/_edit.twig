@@ -128,7 +128,7 @@
                                 errors: scriptData.getErrors("bodyTemplateString"),
                             }) }}
                             {% js %}
-                                makeMonacoEditor("{{ "bodyTemplateString"|namespaceInputId }}", "{{ scriptData.name }}");
+                                makeMonacoEditor("{{ "bodyTemplateString"|namespaceInputId }}");
                             {% endjs %}
 
                             {{ forms.selectField({
