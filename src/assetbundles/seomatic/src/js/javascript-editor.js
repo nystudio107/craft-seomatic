@@ -49,7 +49,9 @@ function makeMonacoEditor(elementId, additionalCompletionsCacheKey) {
     });
 
     // Get the autocompletion items
-    getCompletionItemsFromEndpoint(additionalCompletionsCacheKey);
+    if (typeof additionalCompletionsCacheKey !== 'undefined' && additionalCompletionsCacheKey !== null) {
+        getCompletionItemsFromEndpoint(additionalCompletionsCacheKey);
+    }
 
     let ignoreEvent = false;
     const updateHeight = () => {
