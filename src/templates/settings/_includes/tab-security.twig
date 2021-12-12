@@ -7,7 +7,9 @@
     <a href="{{ seomatic.helper.siteUrl("/security.txt") }}" class="btn livepreviewbtn" rel="noopener" target="_blank">{{ 'View security.txt'|t("seomatic") }}</a>
 </div>
 
-{% namespace "securityTemplate" %}
+    {% include "seomatic/settings/_includes/monaco-editor-css.twig" with {baseAssetsUrl: baseAssetsUrl} only %}
+
+    {% namespace "securityTemplate" %}
     {{ forms.lightswitchField({
         label: "Security.txt Enabled"|t("seomatic"),
         instructions: "Whether the `security.txt` template should be rendered"|t("seomatic"),
@@ -24,9 +26,12 @@
         id: "templateString",
         name: "templateString",
         value: securityTemplate.templateString,
-        class: "seomatic-twig-editor selectize-text",
+        class: "seomatic-javascript-editor selectize-text",
         warning: false,
         errors: securityTemplate.getErrors("templateString"),
     }) }}
+    {% js %}
+        makeMonacoEditor("{{ "templateString"|namespaceInputId }}", "");
+    {% endjs %}
 {% endnamespace %}
 </fieldset>
