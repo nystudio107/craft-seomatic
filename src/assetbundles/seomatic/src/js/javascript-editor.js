@@ -11,7 +11,7 @@
 /**
  * @author    nystudio107
  * @package   SEOmatic
- * @since     3.0.0
+ * @since     3.4.22
  */
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import('monaco-themes/themes/Night Owl.json')
@@ -26,10 +26,12 @@ import { getCompletionItemsFromEndpoint } from '@/js/autocomplete.js';
 function makeMonacoEditor(elementId, additionalCompletionsCacheKey) {
     const textArea = document.getElementById(elementId);
     let container = document.createElement('div');
+    // Make a sibling div for the Monaco editor to live in
     container.id = elementId + '-monaco-editor';
-    container.classList.add('py-4', 'bg-black', 'w-full', 'h-full');
+    container.classList.add('py-4', 'monaco-editor-background-frame', 'w-full', 'h-full');
     textArea.parentNode.insertBefore(container, textArea);
     textArea.style.display = 'none';
+    // Create the Monaco editor
     let editor = monaco.editor.create(container, {
         value: textArea.value,
         language: 'twig',
@@ -47,12 +49,15 @@ function makeMonacoEditor(elementId, additionalCompletionsCacheKey) {
             enabled: false
         },
     });
-
+    // Before the form is submitted, copy the changes from the editor to the field
+    document.querySelector("#main-form").addEventListener("submit", function(e) {
+        textArea.value = editor.getValue();
+    });
     // Get the autocompletion items
     if (typeof additionalCompletionsCacheKey !== 'undefined' && additionalCompletionsCacheKey !== null) {
         getCompletionItemsFromEndpoint(additionalCompletionsCacheKey);
     }
-
+    // Custom resizer to always keep the editor full-height, without needing to scroll
     let ignoreEvent = false;
     const updateHeight = () => {
         const width = editor.getLayoutInfo().width;
