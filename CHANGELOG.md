@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.4.21 - UNRELEASED
+### Added
+* Added in the Monaco editor, with autocomplete & hovers for the Craft APIs as well as variables available in the various SEOmatic templates, such as the tracking scripts
+
 ### Fixed
 * No longer attempt to run the Craft queue manually ([#10189](https://github.com/craftcms/cms/issues/10189))
 * Generate sitemaps immediately via console command, bypassing the queue job ([#10189](https://github.com/craftcms/cms/issues/10189))

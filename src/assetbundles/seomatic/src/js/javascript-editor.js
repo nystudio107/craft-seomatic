@@ -11,7 +11,7 @@
 /**
  * @author    nystudio107
  * @package   SEOmatic
- * @since     3.4.22
+ * @since     3.4.21
  */
 // Set the __webpack_public_path__ dynamically so we can work inside of cpresources's hashed dir name
 // https://stackoverflow.com/questions/39879680/example-of-setting-webpack-public-path-at-runtime

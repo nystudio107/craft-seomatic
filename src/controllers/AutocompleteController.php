@@ -17,7 +17,7 @@ use yii\web\Response;
 /**
  * @author    nystudio107
  * @package   Seomatic
- * @since     3.4.22
+ * @since     3.4.21
  */
 class AutocompleteController extends Controller
 {
