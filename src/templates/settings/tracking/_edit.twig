@@ -25,6 +25,7 @@
 {% block content %}
 
     {% include "seomatic/settings/_includes/environment-warning.twig" %}
+    {% include "seomatic/settings/_includes/monaco-editor-css.twig" with {baseAssetsUrl: baseAssetsUrl} only %}
 
     <input type="hidden" name="action" value="seomatic/settings/save-tracking">
     <input type="hidden" name="siteId" value="{{ currentSiteId }}">
@@ -93,11 +94,13 @@
                                 id: "templateString",
                                 name: "templateString",
                                 value: scriptData.templateString,
-                                class: "seomatic-javascript-editor selectize-text",
+                                class: "seomatic-javascript-editor selectize-text hidden",
                                 warning: false,
                                 errors: scriptData.getErrors("templateString"),
                             }) }}
-
+                            {% js %}
+                                makeMonacoEditor("{{ "templateString"|namespaceInputId }}", "{{ scriptData.name }}");
+                            {% endjs %}
                             {{ forms.selectField({
                                 label: "Script Render Location"|t("seomatic"),
                                 instructions: "Determines where in the HTML document the script renders."|t("seomatic"),
@@ -120,10 +123,13 @@
                                 id: "bodyTemplateString",
                                 name: "bodyTemplateString",
                                 value: scriptData.bodyTemplateString,
-                                class: "seomatic-javascript-editor selectize-text",
+                                class: "seomatic-javascript-editor selectize-text hidden",
                                 warning: false,
                                 errors: scriptData.getErrors("bodyTemplateString"),
                             }) }}
+                            {% js %}
+                                makeMonacoEditor("{{ "bodyTemplateString"|namespaceInputId }}");
+                            {% endjs %}
 
                             {{ forms.selectField({
                                 label: "Body Script Render Location"|t("seomatic"),

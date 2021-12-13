@@ -148,13 +148,12 @@ class Sitemap
                 foreach ($elements as $element) {
                     if ($job) {
                         $job->updateProgress($currentElement++ / $totalElements);
-
-                        // Output some info if this is a console app
-                        if (Craft::$app instanceof ConsoleApplication) {
-                            echo "Processing element {$currentElement}/{$totalElements} - {$element->title}".PHP_EOL;
-                        }
                     } else {
                         $currentElement++;
+                    }
+                    // Output some info if this is a console app
+                    if (Craft::$app instanceof ConsoleApplication) {
+                        echo "Processing element {$currentElement}/{$totalElements} - {$element->title}".PHP_EOL;
                     }
 
                     $metaBundle->metaSitemapVars->setAttributes($stashedSitemapAttrs, false);
@@ -215,7 +214,7 @@ class Sitemap
                             $primarySiteId = Craft::$app->getSites()->getPrimarySite()->id;
                             /** @var  $altSiteSettings */
                             foreach ($metaBundle->sourceAltSiteSettings as $altSiteSettings) {
-                                if (\in_array($altSiteSettings['siteId'], $groupSiteIds, false)) {
+                                if (\in_array($altSiteSettings['siteId'], $groupSiteIds, false) && SiteHelper::siteEnabledWithUrls($altSiteSettings['siteId'])) {
                                     $altElement = null;
                                     if ($seoElement !== null) {
                                         $altElement = $seoElement::sitemapAltElement(

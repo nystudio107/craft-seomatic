@@ -16,8 +16,10 @@ module.exports = {
         'seomatic': '@/js/seomatic.js',
         'seomatic-meta': '@/js/seomatic-meta.js',
         'seomatic-tokens': '@/js/seomatic-tokens.js',
-        'twig-editor': '@/js/twig-editor.js',
-        'javascript-editor': '@/js/javascript-editor.js',
+        'javascript-editor': [
+            '@/js/javascript-editor.js',
+            'monaco-editor/esm/vs/base/browser/ui/codicons/codicon/codicon.ttf'
+        ],
     },
     extensions: ['.ts', '.js', '.vue', '.json'],
     name: 'seomatic',
