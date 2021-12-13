@@ -36,9 +36,11 @@
   "dependencies": {
     "@riophae/vue-treeselect": "^0.4.0",
     "apexcharts": "^3.8.0",
-    "axios": "^0.24.0",
-    "brace": "~0.11.1",
+    "axios": "^0.21.1",
     "core-js": "^3.0.0",
+    "monaco-editor": "^0.26.0",
+    "monaco-themes": "^0.3.3",
+    "monaco-editor-webpack-plugin": "^4.1.2",
     "regenerator-runtime": "^0.13.2",
     "tailwindcss": "^2.2.7",
     "tokenfield": "^1.2.2",
@@ -115,7 +117,7 @@
     "webpack-bundle-analyzer": "^4.2.0",
     "webpack-cli": "^4.1.0",
     "webpack-dev-server": "^4.0.0-rc.0",
-    "webpack-manifest-plugin": "^4.0.2",
+    "webpack-manifest-plugin": "^3.0.0",
     "webpack-merge": "^5.4.0"
   },
   "homepage": "https://nystudio107.com",
