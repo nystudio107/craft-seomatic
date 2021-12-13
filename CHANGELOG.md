@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.4.21 - UNRELEASED
+## 3.4.21 - 2021.12.13
 ### Added
 * Added in the Monaco editor, with autocomplete & hovers for the Craft APIs as well as variables available in the various SEOmatic templates, such as the tracking scripts
 
@@ -14,6 +14,7 @@
 * Check to see if a site is Enabled in Craft CMS > 3.5 to determine whether to generate breadcrumbs ([#1023](https://github.com/nystudio107/craft-seomatic/issues/1023))
 * Check to see if a site is Enabled in Craft CMS > 3.5 to determine whether a metabundle should be generated/pruned or not ([#1023](https://github.com/nystudio107/craft-seomatic/issues/1023))
 * Updated the buildchain to use Node 16
+* Updated to Tailwind CSS `^3.0.0`
 
 ## 3.4.20 - 2021.11.23
 ### Changed
