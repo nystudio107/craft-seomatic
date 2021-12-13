@@ -13,13 +13,19 @@
  * @package   SEOmatic
  * @since     3.4.22
  */
+// Set the __webpack_public_path__ dynamically so we can work inside of cpresources's hashed dir name
+// https://stackoverflow.com/questions/39879680/example-of-setting-webpack-public-path-at-runtime
+if (typeof __webpack_public_path__ !== 'string' || __webpack_public_path__ === '') {
+    __webpack_public_path__ = window.seomaticBaseAssetsUrl;
+}
+
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
-import('monaco-themes/themes/Night Owl.json')
-    .then(data => {
-        monaco.editor.defineTheme('night-owl', data);
-        monaco.editor.setTheme('night-owl');
-    });
+import editorTheme from 'monaco-themes/themes/Night Owl.json';
 import { getCompletionItemsFromEndpoint } from '@/js/autocomplete.js';
+
+// Set the default theme
+monaco.editor.defineTheme('night-owl', editorTheme);
+monaco.editor.setTheme('night-owl');
 
 // Create the editor
 function makeMonacoEditor(elementId, additionalCompletionsCacheKey) {
