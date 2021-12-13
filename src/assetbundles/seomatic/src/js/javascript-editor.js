@@ -19,7 +19,6 @@ import('monaco-themes/themes/Night Owl.json')
         monaco.editor.defineTheme('night-owl', data);
         monaco.editor.setTheme('night-owl');
     });
-import codicon from 'monaco-editor/esm/vs/base/browser/ui/codicons/codicon/codicon.ttf';
 import { getCompletionItemsFromEndpoint } from '@/js/autocomplete.js';
 
 // Create the editor
