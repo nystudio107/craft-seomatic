@@ -952,7 +952,8 @@ class MetaContainers extends Component
                                 list ($container, $property) = explode('.', $settingPath);
                                 list ($testValue, $sourceSetting) = explode('.', $action);
 
-                                if ($parentBundle->{$container}->{$property} == $testValue) {
+                                $bundleProp = $parentBundle->{$container}->{$property} ?? null;
+                                if ($bundleProp == $testValue) {
                                     $metaBundle->metaGlobalVars->{$settingName}  = $metaBundle->metaGlobalVars->{$sourceSetting};
                                 }
                             }
