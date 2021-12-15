@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.22 - UNRELEASED
+### Fixed
+* Fixed an issue that would cause an exception to be thrown if an SEO Settings field was added to an unknown/custom Element's field layout ([#1031](https://github.com/nystudio107/craft-seomatic/issues/1031))
+
 ## 3.4.21 - 2021.12.13
 ### Added
 * Added in the Monaco editor, with autocomplete & hovers for the Craft APIs as well as variables available in the various SEOmatic templates, such as the tracking scripts
