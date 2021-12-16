@@ -1,8 +1,11 @@
 # SEOmatic Changelog
 
-## 3.4.20 - UNRELEASED
+## 3.4.20 - 2021.11.23
 ### Changed
 * Deprecated the `frontendTemplateContainer` GraphQL field
+
+### Fixed
+* Eliminated multiple queries to the same asset via a memoization cache in ImageTransformHelper ([#1016](https://github.com/nystudio107/craft-seomatic/issues/1016))
 
 ## 3.4.19 - 2021.11.13
 ### Changed

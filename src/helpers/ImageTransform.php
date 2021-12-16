@@ -44,6 +44,9 @@ class ImageTransform
     // Static Public Properties
     // =========================================================================
 
+    /**
+     * @var bool
+     */
     static public $pendingImageTransforms = false;
 
     // Static Private Properties
@@ -76,6 +79,8 @@ class ImageTransform
             'mode' => 'fit',
         ],
     ];
+
+    static private $cachedAssetsElements = [];
 
     // Static Methods
     // =========================================================================
@@ -278,7 +283,21 @@ class ImageTransform
         if (empty($asset)) {
             return null;
         }
-        return ($asset instanceof Asset) ? $asset : Craft::$app->getAssets()->getAssetById($asset, $siteId);
+
+        if ($asset instanceof Asset) {
+            return $asset;
+        }
+
+        $resolvedAssetId = (int)$asset;
+        $resolvedSiteId = $siteId ?? 0;
+        if (isset(self::$cachedAssetsElements[$resolvedAssetId][$resolvedSiteId])) {
+            return self::$cachedAssetsElements[$resolvedAssetId][$resolvedSiteId];
+        }
+
+        $asset = Craft::$app->getAssets()->getAssetById($asset, $siteId);
+        self::$cachedAssetsElements[$resolvedAssetId][$resolvedSiteId] = $asset;
+
+        return $asset;
     }
 
     /**
