@@ -546,7 +546,7 @@ class Helper extends Component
         try {
             if ($dir = Seomatic::getInstance()->getSettings()->socialImagesNodeModulePath) {
                 $dir = escapeshellarg($dir);
-                return preg_match('/puppeteer@/i', shell_exec("cd {\$dir}; npm ls puppeteer"));
+                return preg_match('/puppeteer@/i', shell_exec("cd {$dir}; npm ls puppeteer"));
             } else {
                 return preg_match('/puppeteer@/i', shell_exec("npm ls puppeteer"));
             }
