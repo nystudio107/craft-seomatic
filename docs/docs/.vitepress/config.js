@@ -12,7 +12,7 @@ module.exports = {
     themeConfig: {
         repo: 'nystudio107/craft-seomatic',
         docsDir: 'docs/docs',
-        docsBranch: 'v3',
+        docsBranch: 'develop',
         algolia: {
             apiKey: '3fbe33d2aa4969da7363ddfb8ab9ac8e',
             indexName: 'seomatic'
