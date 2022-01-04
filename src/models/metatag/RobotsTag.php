@@ -87,7 +87,6 @@ class RobotsTag extends MetaTag
             // Set meta robots tag to `none` for http status codes >= 400
             $request = Craft::$app->getRequest();
             $response = Craft::$app->getResponse();
-            // Don't render a canonical url for http status codes >= 400
             if (!$request->isConsoleRequest
                 && $response->statusCode >= 400
             ) {
