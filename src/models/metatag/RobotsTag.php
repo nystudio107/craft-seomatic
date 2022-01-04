@@ -92,6 +92,7 @@ class RobotsTag extends MetaTag
             ) {
                 $data['content'] = 'none';
             }
+            // Set meta robots tag to `none` if this is any kind of Craft preview
             if (SeomaticHelper::isPreview()) {
                 $data['content'] = 'none';
             }
