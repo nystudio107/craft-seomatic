@@ -24,6 +24,7 @@ build:
   dependencies:
     before:
       - mysql -uroot -e 'CREATE DATABASE testcraft'
+      - composer self-update --2
   nodes:
     analysis:
       project_setup:
@@ -45,7 +46,7 @@ checks:
   php: true
   javascript: true
 coding_style:
-  php: {  }
+  php: { }
 filter:
   excluded_paths:
     - '*/dist/*'
