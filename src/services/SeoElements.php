@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\services;
 
+use nystudio107\seomatic\base\GqlSeoElementInterface;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\seoelements\SeoCategory;
@@ -148,5 +149,24 @@ class SeoElements extends Component
         }
 
         return $this->seoElements;
+    }
+
+    /**
+     * Returns all available known GQL interfaces used by SEO elements.
+     *
+     * @return string[] List of known GQL interface names.
+     */
+    public function getAllSeoElementGqlInterfaceNames(): array
+    {
+        $seoElements = $this->getAllSeoElementTypes();
+        $interfaceNames = [];
+
+        foreach ($seoElements as $seoElement) {
+            if (is_subclass_of($seoElement, GqlSeoElementInterface::class)) {
+                $interfaceNames[] = $seoElement::getGqlInterfaceTypeName();
+            }
+        }
+
+        return $interfaceNames;
     }
 }

@@ -11,6 +11,8 @@
 
 namespace nystudio107\seomatic\seoelements;
 
+use craft\gql\interfaces\elements\Category as CategoryInterface;
+use nystudio107\seomatic\base\GqlSeoElementInterface;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\base\SeoElementInterface;
@@ -37,7 +39,7 @@ use yii\base\InvalidConfigException;
  * @package   Seomatic
  * @since     3.2.0
  */
-class SeoCategory implements SeoElementInterface
+class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
 {
 
     // Constants
@@ -432,5 +434,13 @@ class SeoCategory implements SeoElementInterface
         foreach ($categoryGroups as $categoryGroup) {
             self::createContentMetaBundle($categoryGroup);
         }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function getGqlInterfaceTypeName()
+    {
+        return CategoryInterface::getName();
     }
 }
