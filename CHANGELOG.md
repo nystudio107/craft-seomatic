@@ -8,6 +8,8 @@
   Element's field layout ([#1031](https://github.com/nystudio107/craft-seomatic/issues/1031))
 * Fixed an issue where you couldn't query for frontend containers from sites other than the current site request via
   GraphQL ([#1039](https://github.com/nystudio107/craft-seomatic/issues/1039))
+* Fixed an issue where Solspace Calendar events would not have the `seomatic` field on them when using the GraphQL
+  API ([#1037](https://github.com/nystudio107/craft-seomatic/issues/1037))
 
 ## 3.4.21 - 2021.12.13
 
