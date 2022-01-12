@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\seoelements;
 
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
+use nystudio107\seomatic\base\GqlSeoElementInterface;
 use nystudio107\seomatic\helpers\PluginTemplate;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\SeoElementInterface;
@@ -26,6 +27,7 @@ use craft\elements\db\ElementQueryInterface;
 use craft\models\Site;
 
 use Solspace\Calendar\Calendar as CalendarPlugin;
+use Solspace\Calendar\Bundles\GraphQL\Interfaces\EventInterface;
 use Solspace\Calendar\Elements\Event;
 use Solspace\Calendar\Events\DeleteModelEvent;
 use Solspace\Calendar\Events\SaveModelEvent;
@@ -39,7 +41,7 @@ use yii\base\Event as BaseEvent;
  * @package   Seomatic
  * @since     3.2.0
  */
-class SeoEvent implements SeoElementInterface
+class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
 {
     // Constants
     // =========================================================================
@@ -454,5 +456,13 @@ class SeoEvent implements SeoElementInterface
                 self::createContentMetaBundle($calendarModel);
             }
         }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function getGqlInterfaceTypeName()
+    {
+        return EventInterface::getName();
     }
 }
