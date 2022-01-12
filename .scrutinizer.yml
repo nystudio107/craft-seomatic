@@ -1,9 +1,9 @@
 build:
   environment:
     node:
-      version: v8.11.4
+      version: v16
     php:
-      version: 7.3
+      version: 7.4
     mysql:
       version: 5.7
     hosts:
@@ -45,7 +45,7 @@ checks:
   php: true
   javascript: true
 coding_style:
-  php: {  }
+  php: { }
 filter:
   excluded_paths:
     - '*/dist/*'
