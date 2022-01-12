@@ -3,6 +3,7 @@
 ## 3.4.22 - UNRELEASED
 ### Fixed
 * Fixed an issue that would cause an exception to be thrown if an SEO Settings field was added to an unknown/custom Element's field layout ([#1031](https://github.com/nystudio107/craft-seomatic/issues/1031))
+* Fixed an issue where Solspace Calendar events would not have the `seomatic` field on them when using the GraphQL API. ([#1037](https://github.com/nystudio107/craft-seomatic/issues/1037))
 
 ## 3.4.21 - 2021.12.13
 ### Added

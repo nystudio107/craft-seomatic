@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\seoelements;
 
+use nystudio107\seomatic\base\GqlSeoElementInterface;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\base\SeoElementInterface;
@@ -28,6 +29,7 @@ use craft\models\Site;
 use craft\commerce\Plugin as CommercePlugin;
 use craft\commerce\elements\Product;
 use craft\commerce\events\ProductTypeEvent;
+use craft\commerce\gql\interfaces\elements\Product as ProductInterface;
 use craft\commerce\models\ProductType;
 use craft\commerce\services\ProductTypes;
 
@@ -39,7 +41,7 @@ use yii\base\InvalidConfigException;
  * @package   Seomatic
  * @since     3.2.0
  */
-class SeoProduct implements SeoElementInterface
+class SeoProduct implements SeoElementInterface, GqlSeoElementInterface
 {
     // Constants
     // =========================================================================
@@ -454,5 +456,13 @@ class SeoProduct implements SeoElementInterface
                 self::createContentMetaBundle($productType);
             }
         }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function getGqlInterfaceTypeName()
+    {
+        return ProductInterface::getName();
     }
 }

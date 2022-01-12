@@ -714,27 +714,28 @@ class Seomatic extends Plugin
         // Add support for querying for SEOmatic metadata inside of element queries
         if (self::$craft34) {
             // Handler: TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS
+            $knownInterfaceNames = self::$plugin->seoElements->getAllSeoElementGqlInterfaceNames();
             Event::on(
                 TypeManager::class,
                 TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS,
-                function (DefineGqlTypeFieldsEvent $event) {
-                if (in_array($event->typeName, self::GQL_ELEMENT_INTERFACES, true)) {
-                    Craft::debug(
-                        'TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS',
-                        __METHOD__
-                    );
+                function (DefineGqlTypeFieldsEvent $event) use ($knownInterfaceNames) {
+                    if (in_array($event->typeName, $knownInterfaceNames, true)) {
+                        Craft::debug(
+                            'TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS',
+                            __METHOD__
+                        );
 
-                    if (GqlHelper::canQuerySeo()) {
-                        // Make Seomatic tags available to all entries.
-                        $event->fields['seomatic'] = [
-                            'name' => 'seomatic',
-                            'type' => SeomaticInterface::getType(),
-                            'args' => SeomaticArguments::getArguments(),
-                            'resolve' => SeomaticResolver::class . '::resolve',
-                            'description' => Craft::t('seomatic', 'This query is used to query for SEOmatic meta data.')
-                        ];
+                        if (GqlHelper::canQuerySeo()) {
+                            // Make Seomatic tags available to all entries.
+                            $event->fields['seomatic'] = [
+                                'name' => 'seomatic',
+                                'type' => SeomaticInterface::getType(),
+                                'args' => SeomaticArguments::getArguments(),
+                                'resolve' => SeomaticResolver::class . '::resolve',
+                                'description' => Craft::t('seomatic', 'This query is used to query for SEOmatic meta data.')
+                            ];
+                        }
                     }
-                }
             });
         }
         // CraftQL Support
