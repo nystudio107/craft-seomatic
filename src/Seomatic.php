@@ -11,14 +11,50 @@
 
 namespace nystudio107\seomatic;
 
-use GraphQL\Type\Definition\EnumType;
+use Craft;
+use craft\base\Element;
+use craft\base\ElementInterface;
+use craft\base\Plugin;
+use craft\elements\Entry;
+use craft\elements\User;
+use craft\errors\SiteNotFoundException;
+use craft\events\DefineGqlTypeFieldsEvent;
+use craft\events\ElementEvent;
+use craft\events\PluginEvent;
+use craft\events\RegisterCacheOptionsEvent;
+use craft\events\RegisterComponentTypesEvent;
+use craft\events\RegisterGqlQueriesEvent;
+use craft\events\RegisterGqlSchemaComponentsEvent;
+use craft\events\RegisterGqlTypesEvent;
+use craft\events\RegisterPreviewTargetsEvent;
+use craft\events\RegisterUrlRulesEvent;
+use craft\events\RegisterUserPermissionsEvent;
+use craft\feedme\events\RegisterFeedMeFieldsEvent;
+use craft\feedme\Plugin as FeedMe;
+use craft\feedme\services\Fields as FeedMeFields;
+use craft\gql\TypeManager;
+use craft\helpers\StringHelper;
+use craft\helpers\UrlHelper;
+use craft\services\Elements;
+use craft\services\Fields;
+use craft\services\Gql;
+use craft\services\Plugins;
+use craft\services\UserPermissions;
+use craft\utilities\ClearCaches;
+use craft\web\UrlManager;
+use craft\web\View;
+use markhuot\CraftQL\Builders\Schema;
+use markhuot\CraftQL\CraftQL;
+use markhuot\CraftQL\Events\AlterSchemaFields;
+use nystudio107\fastcgicachebust\FastcgiCacheBust;
+use nystudio107\pluginmanifest\services\ManifestService;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
-use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
 use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
+use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
 use nystudio107\seomatic\gql\arguments\SeomaticArguments;
 use nystudio107\seomatic\gql\interfaces\SeomaticInterface;
-use nystudio107\seomatic\gql\resolvers\SeomaticResolver;
 use nystudio107\seomatic\gql\queries\SeomaticQuery;
+use nystudio107\seomatic\gql\resolvers\SeomaticResolver;
 use nystudio107\seomatic\gql\types\SeomaticEnvironmentType;
 use nystudio107\seomatic\helpers\Environment;
 use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
@@ -41,49 +77,6 @@ use nystudio107\seomatic\services\Tag as TagService;
 use nystudio107\seomatic\services\Title as TitleService;
 use nystudio107\seomatic\twigextensions\SeomaticTwigExtension;
 use nystudio107\seomatic\variables\SeomaticVariable;
-
-use nystudio107\pluginmanifest\services\ManifestService;
-
-use nystudio107\fastcgicachebust\FastcgiCacheBust;
-
-use Craft;
-use craft\base\Element;
-use craft\base\ElementInterface;
-use craft\base\Plugin;
-use craft\elements\User;
-use craft\elements\Entry;
-use craft\errors\SiteNotFoundException;
-use craft\events\ElementEvent;
-use craft\events\PluginEvent;
-use craft\events\DefineGqlTypeFieldsEvent;
-use craft\events\RegisterCacheOptionsEvent;
-use craft\events\RegisterComponentTypesEvent;
-use craft\events\RegisterGqlQueriesEvent;
-use craft\events\RegisterGqlSchemaComponentsEvent;
-use craft\events\RegisterGqlTypesEvent;
-use craft\events\RegisterPreviewTargetsEvent;
-use craft\events\RegisterUrlRulesEvent;
-use craft\events\RegisterUserPermissionsEvent;
-use craft\gql\TypeManager;
-use craft\helpers\StringHelper;
-use craft\services\Elements;
-use craft\services\Fields;
-use craft\services\Gql;
-use craft\services\Plugins;
-use craft\services\UserPermissions;
-use craft\helpers\UrlHelper;
-use craft\utilities\ClearCaches;
-use craft\web\UrlManager;
-use craft\web\View;
-
-use craft\feedme\Plugin as FeedMe;
-use craft\feedme\events\RegisterFeedMeFieldsEvent;
-use craft\feedme\services\Fields as FeedMeFields;
-
-use markhuot\CraftQL\Builders\Schema;
-use markhuot\CraftQL\CraftQL;
-use markhuot\CraftQL\Events\AlterSchemaFields;
-
 use yii\base\Event;
 
 /** @noinspection MissingPropertyAnnotationsInspection */
@@ -96,17 +89,17 @@ use yii\base\Event;
  * @since     3.0.0
  *
  * @property FrontendTemplatesService $frontendTemplates
- * @property HelperService            $helper
- * @property JsonLdService            $jsonLd
- * @property LinkService              $link
- * @property MetaBundlesService       $metaBundles
- * @property MetaContainersService    $metaContainers
- * @property ScriptService            $script
- * @property SeoElementsService       $seoElements
- * @property SitemapsService          $sitemaps
- * @property TagService               $tag
- * @property TitleService             $title
- * @property ManifestService          $manifest
+ * @property HelperService $helper
+ * @property JsonLdService $jsonLd
+ * @property LinkService $link
+ * @property MetaBundlesService $metaBundles
+ * @property MetaContainersService $metaContainers
+ * @property ScriptService $script
+ * @property SeoElementsService $seoElements
+ * @property SitemapsService $sitemaps
+ * @property TagService $tag
+ * @property TitleService $title
+ * @property ManifestService $manifest
  */
 class Seomatic extends Plugin
 {
@@ -229,6 +222,21 @@ class Seomatic extends Plugin
 
     // Static Methods
     // =========================================================================
+    /**
+     * @var string
+     */
+    public $schemaVersion = '3.0.11';
+    /**
+     * @var bool
+     */
+    public $hasCpSection = true;
+
+    // Public Properties
+    // =========================================================================
+    /**
+     * @var bool
+     */
+    public $hasCpSettings = true;
 
     /**
      * @inheritdoc
@@ -275,24 +283,6 @@ class Seomatic extends Plugin
         }
         MetaValueHelper::cache();
     }
-
-    // Public Properties
-    // =========================================================================
-
-    /**
-     * @var string
-     */
-    public $schemaVersion = '3.0.11';
-
-    /**
-     * @var bool
-     */
-    public $hasCpSection = true;
-
-    /**
-     * @var bool
-     */
-    public $hasCpSettings = true;
 
     // Public Methods
     // =========================================================================
@@ -365,129 +355,6 @@ class Seomatic extends Plugin
 
         return $settingsModel;
     }
-
-    /**
-     * @inheritdoc
-     */
-    public function getSettingsResponse()
-    {
-        // Just redirect to the plugin settings page
-        Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('seomatic/plugin'));
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getCpNavItem()
-    {
-        $subNavs = [];
-        $navItem = parent::getCpNavItem();
-        /** @var User $currentUser */
-        $request = Craft::$app->getRequest();
-        $siteSuffix = '';
-        if ($request->getSegment(1) === 'seomatic') {
-            $segments = $request->getSegments();
-            $lastSegment = end($segments);
-            $site = Craft::$app->getSites()->getSiteByHandle($lastSegment);
-            if ($site !== null) {
-                $siteSuffix = '/'.$lastSegment;
-            }
-        }
-        $currentUser = Craft::$app->getUser()->getIdentity();
-        // Only show sub-navs the user has permission to view
-        if ($currentUser->can('seomatic:dashboard')) {
-            $subNavs['dashboard'] = [
-                'label' => Craft::t('seomatic', 'Dashboard'),
-                'url' => 'seomatic/dashboard'.$siteSuffix,
-            ];
-        }
-        if ($currentUser->can('seomatic:global-meta')) {
-            $subNavs['global'] = [
-                'label' => Craft::t('seomatic', 'Global SEO'),
-                'url' => 'seomatic/global/general'.$siteSuffix,
-            ];
-        }
-        if ($currentUser->can('seomatic:content-meta')) {
-            $subNavs['content'] = [
-                'label' => Craft::t('seomatic', 'Content SEO'),
-                'url' => 'seomatic/content'.$siteSuffix,
-            ];
-        }
-        if ($currentUser->can('seomatic:site-settings')) {
-            $subNavs['site'] = [
-                'label' => Craft::t('seomatic', 'Site Settings'),
-                'url' => 'seomatic/site/identity'.$siteSuffix,
-            ];
-        }
-        if ($currentUser->can('seomatic:tracking-scripts')) {
-            $subNavs['tracking'] = [
-                'label' => Craft::t('seomatic', 'Tracking Scripts'),
-                'url' => 'seomatic/tracking/gtag'.$siteSuffix,
-            ];
-        }
-        $editableSettings = true;
-        $general = Craft::$app->getConfig()->getGeneral();
-        if (self::$craft31 && !$general->allowAdminChanges) {
-            $editableSettings = false;
-        }
-        if ($currentUser->can('seomatic:plugin-settings') && $editableSettings) {
-            $subNavs['plugin'] = [
-                'label' => Craft::t('seomatic', 'Plugin Settings'),
-                'url' => 'seomatic/plugin',
-            ];
-        }
-        $navItem = array_merge($navItem, [
-            'subnav' => $subNavs,
-        ]);
-
-        return $navItem;
-    }
-
-    /**
-     * Clear all the caches!
-     */
-    public function clearAllCaches()
-    {
-        // Clear all of SEOmatic's caches
-        self::$plugin->frontendTemplates->invalidateCaches();
-        self::$plugin->metaContainers->invalidateCaches();
-        self::$plugin->sitemaps->invalidateCaches();
-        // If they are using Craft 3.3 or later, clear the GraphQL caches too
-        if (self::$craft33) {
-            $gql = Craft::$app->getGql();
-            if (method_exists($gql, 'invalidateCaches')) {
-                $gql->invalidateCaches();
-            }
-        }
-        // If the FastCGI Cache Bust plugin is installed, clear its caches too
-        $plugin = Craft::$app->getPlugins()->getPlugin('fastcgi-cache-bust');
-        if ($plugin !== null) {
-            FastcgiCacheBust::$plugin->cache->clearAll();
-        }
-    }
-
-    /**
-     * Determine whether our table schema exists or not; this is needed because
-     * migrations such as the install migration and base_install migration may
-     * not have been run by the time our init() method has been called
-     *
-     * @return bool
-     */
-    public function migrationsAndSchemaReady(): bool
-    {
-        $pluginsService = Craft::$app->getPlugins();
-        if ($pluginsService->doesPluginRequireDatabaseUpdate(self::$plugin)) {
-            return false;
-        }
-        if (Craft::$app->db->schema->getTableSchema('{{%seomatic_metabundles}}') === null) {
-            return false;
-        }
-
-        return true;
-    }
-
-    // Protected Methods
-    // =========================================================================
 
     /**
      * Install our event listeners.
@@ -573,6 +440,29 @@ class Seomatic extends Plugin
     }
 
     /**
+     * Determine whether our table schema exists or not; this is needed because
+     * migrations such as the install migration and base_install migration may
+     * not have been run by the time our init() method has been called
+     *
+     * @return bool
+     */
+    public function migrationsAndSchemaReady(): bool
+    {
+        $pluginsService = Craft::$app->getPlugins();
+        if ($pluginsService->doesPluginRequireDatabaseUpdate(self::$plugin)) {
+            return false;
+        }
+        if (Craft::$app->db->schema->getTableSchema('{{%seomatic_metabundles}}') === null) {
+            return false;
+        }
+
+        return true;
+    }
+
+    // Protected Methods
+    // =========================================================================
+
+    /**
      * Install global event listeners for all request types
      */
     protected function installGlobalEventListeners()
@@ -582,6 +472,8 @@ class Seomatic extends Plugin
             Plugins::class,
             Plugins::EVENT_AFTER_LOAD_PLUGINS,
             function () {
+                // Delay installing GQL handlers to give other plugins a chance to register their own first
+                $this->installGqlHandlers();
                 // Install these only after all other plugins have loaded
                 $request = Craft::$app->getRequest();
                 // Allow the SeoElements to register their own event handlers
@@ -653,18 +545,41 @@ class Seomatic extends Plugin
                     $element = $e->sender;
                     if ($element->uri !== null) {
                         $e->previewTargets[] = [
-                            'label' => '📣 '.Craft::t('seomatic', 'Social Media Preview'),
+                            'label' => '📣 ' . Craft::t('seomatic', 'Social Media Preview'),
                             'url' => UrlHelper::siteUrl(self::FRONTEND_PREVIEW_PATH, [
                                 'elementId' => $element->id,
                                 'siteId' => $element->siteId,
                             ]),
                         ];
                         // Don't allow the preview to be accessed publicly
-                        Craft::$app->getSession()->authorize(self::SEOMATIC_PREVIEW_AUTHORIZATION_KEY.$element->id);
+                        Craft::$app->getSession()->authorize(self::SEOMATIC_PREVIEW_AUTHORIZATION_KEY . $element->id);
                     }
                 }
             );
         }
+        // FeedMe Support
+        if (class_exists(FeedMe::class)) {
+            Event::on(
+                FeedMeFields::class,
+                FeedMeFields::EVENT_REGISTER_FEED_ME_FIELDS,
+                function (RegisterFeedMeFieldsEvent $e) {
+                    Craft::debug(
+                        'FeedMeFields::EVENT_REGISTER_FEED_ME_FIELDS',
+                        __METHOD__
+                    );
+                    $e->fields[] = SeoSettingsFeedMe::class;
+                }
+            );
+        }
+    }
+
+    /**
+     * Register our GraphQL handlers
+     *
+     * @return void
+     */
+    protected function installGqlHandlers()
+    {
         // Add native GraphQL support on Craft 3.3 or later
         if (self::$craft33) {
             // Handler: Gql::EVENT_REGISTER_GQL_TYPES
@@ -736,7 +651,7 @@ class Seomatic extends Plugin
                             ];
                         }
                     }
-            });
+                });
         }
         // CraftQL Support
         if (class_exists(CraftQL::class)) {
@@ -746,91 +661,6 @@ class Seomatic extends Plugin
                 [GetCraftQLSchema::class, 'handle']
             );
         }
-        // FeedMe Support
-        if (class_exists(FeedMe::class)) {
-            Event::on(
-                FeedMeFields::class,
-                FeedMeFields::EVENT_REGISTER_FEED_ME_FIELDS,
-                function(RegisterFeedMeFieldsEvent $e) {
-                    Craft::debug(
-                        'FeedMeFields::EVENT_REGISTER_FEED_ME_FIELDS',
-                        __METHOD__
-                    );
-                    $e->fields[] = SeoSettingsFeedMe::class;
-                }
-            );
-        }
-    }
-
-    /**
-     * Install site event listeners for site requests only
-     */
-    protected function installSiteEventListeners()
-    {
-        // Load the sitemap containers
-        self::$plugin->sitemaps->loadSitemapContainers();
-        // Load the frontend template containers
-        self::$plugin->frontendTemplates->loadFrontendTemplateContainers();
-        // Handler: UrlManager::EVENT_REGISTER_SITE_URL_RULES
-        Event::on(
-            UrlManager::class,
-            UrlManager::EVENT_REGISTER_SITE_URL_RULES,
-            function (RegisterUrlRulesEvent $event) {
-                Craft::debug(
-                    'UrlManager::EVENT_REGISTER_SITE_URL_RULES',
-                    __METHOD__
-                );
-                // FileController
-                $route = self::$plugin->handle.'/file/seo-file-link';
-                $event->rules[self::FRONTEND_SEO_FILE_LINK] = ['route' => $route];
-                // PreviewController
-                $route = self::$plugin->handle.'/preview/social-media';
-                $event->rules[self::FRONTEND_PREVIEW_PATH] = ['route' => $route];
-                // Register our Control Panel routes
-                $event->rules = array_merge(
-                    $event->rules,
-                    $this->customFrontendRoutes()
-                );
-            }
-        );
-    }
-
-    /**
-     * Install site event listeners for Control Panel requests only
-     */
-    protected function installCpEventListeners()
-    {
-        // Load the frontend template containers
-        self::$plugin->frontendTemplates->loadFrontendTemplateContainers();
-        // Handler: UrlManager::EVENT_REGISTER_CP_URL_RULES
-        Event::on(
-            UrlManager::class,
-            UrlManager::EVENT_REGISTER_CP_URL_RULES,
-            function (RegisterUrlRulesEvent $event) {
-                Craft::debug(
-                    'UrlManager::EVENT_REGISTER_CP_URL_RULES',
-                    __METHOD__
-                );
-                // Register our Control Panel routes
-                $event->rules = array_merge(
-                    $event->rules,
-                    $this->customAdminCpRoutes()
-                );
-            }
-        );
-        // Handler: UserPermissions::EVENT_REGISTER_PERMISSIONS
-        Event::on(
-            UserPermissions::class,
-            UserPermissions::EVENT_REGISTER_PERMISSIONS,
-            function (RegisterUserPermissionsEvent $event) {
-                Craft::debug(
-                    'UserPermissions::EVENT_REGISTER_PERMISSIONS',
-                    __METHOD__
-                );
-                // Register our custom permissions
-                $event->permissions[Craft::t('seomatic', 'SEOmatic')] = $this->customAdminCpPermissions();
-            }
-        );
     }
 
     /**
@@ -899,19 +729,93 @@ class Seomatic extends Plugin
         // Prefix the Control Panel title
         self::$view->hook('cp.layouts.base', function (&$context) {
             if (self::$devMode) {
-                $context['docTitle'] = self::$settings->devModeCpTitlePrefix.$context['docTitle'];
+                $context['docTitle'] = self::$settings->devModeCpTitlePrefix . $context['docTitle'];
             } else {
-                $context['docTitle'] = self::$settings->cpTitlePrefix.$context['docTitle'];
+                $context['docTitle'] = self::$settings->cpTitlePrefix . $context['docTitle'];
             }
         });
     }
 
     /**
-     * @inheritdoc
+     * Install site event listeners for site requests only
      */
-    protected function createSettingsModel()
+    protected function installSiteEventListeners()
     {
-        return new Settings();
+        // Load the sitemap containers
+        self::$plugin->sitemaps->loadSitemapContainers();
+        // Load the frontend template containers
+        self::$plugin->frontendTemplates->loadFrontendTemplateContainers();
+        // Handler: UrlManager::EVENT_REGISTER_SITE_URL_RULES
+        Event::on(
+            UrlManager::class,
+            UrlManager::EVENT_REGISTER_SITE_URL_RULES,
+            function (RegisterUrlRulesEvent $event) {
+                Craft::debug(
+                    'UrlManager::EVENT_REGISTER_SITE_URL_RULES',
+                    __METHOD__
+                );
+                // FileController
+                $route = self::$plugin->handle . '/file/seo-file-link';
+                $event->rules[self::FRONTEND_SEO_FILE_LINK] = ['route' => $route];
+                // PreviewController
+                $route = self::$plugin->handle . '/preview/social-media';
+                $event->rules[self::FRONTEND_PREVIEW_PATH] = ['route' => $route];
+                // Register our Control Panel routes
+                $event->rules = array_merge(
+                    $event->rules,
+                    $this->customFrontendRoutes()
+                );
+            }
+        );
+    }
+
+    /**
+     * Return the custom frontend routes
+     *
+     * @return array
+     */
+    protected function customFrontendRoutes(): array
+    {
+        return [
+        ];
+    }
+
+    /**
+     * Install site event listeners for Control Panel requests only
+     */
+    protected function installCpEventListeners()
+    {
+        // Load the frontend template containers
+        self::$plugin->frontendTemplates->loadFrontendTemplateContainers();
+        // Handler: UrlManager::EVENT_REGISTER_CP_URL_RULES
+        Event::on(
+            UrlManager::class,
+            UrlManager::EVENT_REGISTER_CP_URL_RULES,
+            function (RegisterUrlRulesEvent $event) {
+                Craft::debug(
+                    'UrlManager::EVENT_REGISTER_CP_URL_RULES',
+                    __METHOD__
+                );
+                // Register our Control Panel routes
+                $event->rules = array_merge(
+                    $event->rules,
+                    $this->customAdminCpRoutes()
+                );
+            }
+        );
+        // Handler: UserPermissions::EVENT_REGISTER_PERMISSIONS
+        Event::on(
+            UserPermissions::class,
+            UserPermissions::EVENT_REGISTER_PERMISSIONS,
+            function (RegisterUserPermissionsEvent $event) {
+                Craft::debug(
+                    'UserPermissions::EVENT_REGISTER_PERMISSIONS',
+                    __METHOD__
+                );
+                // Register our custom permissions
+                $event->permissions[Craft::t('seomatic', 'SEOmatic')] = $this->customAdminCpPermissions();
+            }
+        );
     }
 
     /**
@@ -968,46 +872,6 @@ class Seomatic extends Plugin
 
             'seomatic/plugin' =>
                 'seomatic/settings/plugin',
-        ];
-    }
-
-    /**
-     * Return the custom frontend routes
-     *
-     * @return array
-     */
-    protected function customFrontendRoutes(): array
-    {
-        return [
-        ];
-    }
-
-    /**
-     * Returns the custom Control Panel cache options.
-     *
-     * @return array
-     */
-    protected function customAdminCpCacheOptions(): array
-    {
-        return [
-            // Frontend template caches
-            [
-                'key' => 'seomatic-frontendtemplate-caches',
-                'label' => Craft::t('seomatic', 'SEOmatic frontend template caches'),
-                'action' => [self::$plugin->frontendTemplates, 'invalidateCaches'],
-            ],
-            // Meta bundle caches
-            [
-                'key' => 'seomatic-metabundle-caches',
-                'label' => Craft::t('seomatic', 'SEOmatic metadata caches'),
-                'action' => [self::$plugin->metaContainers, 'invalidateCaches'],
-            ],
-            // Sitemap caches
-            [
-                'key' => 'seomatic-sitemap-caches',
-                'label' => Craft::t('seomatic', 'SEOmatic sitemap caches'),
-                'action' => [self::$plugin->sitemaps, 'invalidateCaches'],
-            ],
         ];
     }
 
@@ -1114,5 +978,142 @@ class Seomatic extends Plugin
                 'label' => Craft::t('seomatic', 'Edit Plugin Settings'),
             ],
         ];
+    }
+
+    /**
+     * Clear all the caches!
+     */
+    public function clearAllCaches()
+    {
+        // Clear all of SEOmatic's caches
+        self::$plugin->frontendTemplates->invalidateCaches();
+        self::$plugin->metaContainers->invalidateCaches();
+        self::$plugin->sitemaps->invalidateCaches();
+        // If they are using Craft 3.3 or later, clear the GraphQL caches too
+        if (self::$craft33) {
+            $gql = Craft::$app->getGql();
+            if (method_exists($gql, 'invalidateCaches')) {
+                $gql->invalidateCaches();
+            }
+        }
+        // If the FastCGI Cache Bust plugin is installed, clear its caches too
+        $plugin = Craft::$app->getPlugins()->getPlugin('fastcgi-cache-bust');
+        if ($plugin !== null) {
+            FastcgiCacheBust::$plugin->cache->clearAll();
+        }
+    }
+
+    /**
+     * Returns the custom Control Panel cache options.
+     *
+     * @return array
+     */
+    protected function customAdminCpCacheOptions(): array
+    {
+        return [
+            // Frontend template caches
+            [
+                'key' => 'seomatic-frontendtemplate-caches',
+                'label' => Craft::t('seomatic', 'SEOmatic frontend template caches'),
+                'action' => [self::$plugin->frontendTemplates, 'invalidateCaches'],
+            ],
+            // Meta bundle caches
+            [
+                'key' => 'seomatic-metabundle-caches',
+                'label' => Craft::t('seomatic', 'SEOmatic metadata caches'),
+                'action' => [self::$plugin->metaContainers, 'invalidateCaches'],
+            ],
+            // Sitemap caches
+            [
+                'key' => 'seomatic-sitemap-caches',
+                'label' => Craft::t('seomatic', 'SEOmatic sitemap caches'),
+                'action' => [self::$plugin->sitemaps, 'invalidateCaches'],
+            ],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSettingsResponse()
+    {
+        // Just redirect to the plugin settings page
+        Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('seomatic/plugin'));
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getCpNavItem()
+    {
+        $subNavs = [];
+        $navItem = parent::getCpNavItem();
+        /** @var User $currentUser */
+        $request = Craft::$app->getRequest();
+        $siteSuffix = '';
+        if ($request->getSegment(1) === 'seomatic') {
+            $segments = $request->getSegments();
+            $lastSegment = end($segments);
+            $site = Craft::$app->getSites()->getSiteByHandle($lastSegment);
+            if ($site !== null) {
+                $siteSuffix = '/' . $lastSegment;
+            }
+        }
+        $currentUser = Craft::$app->getUser()->getIdentity();
+        // Only show sub-navs the user has permission to view
+        if ($currentUser->can('seomatic:dashboard')) {
+            $subNavs['dashboard'] = [
+                'label' => Craft::t('seomatic', 'Dashboard'),
+                'url' => 'seomatic/dashboard' . $siteSuffix,
+            ];
+        }
+        if ($currentUser->can('seomatic:global-meta')) {
+            $subNavs['global'] = [
+                'label' => Craft::t('seomatic', 'Global SEO'),
+                'url' => 'seomatic/global/general' . $siteSuffix,
+            ];
+        }
+        if ($currentUser->can('seomatic:content-meta')) {
+            $subNavs['content'] = [
+                'label' => Craft::t('seomatic', 'Content SEO'),
+                'url' => 'seomatic/content' . $siteSuffix,
+            ];
+        }
+        if ($currentUser->can('seomatic:site-settings')) {
+            $subNavs['site'] = [
+                'label' => Craft::t('seomatic', 'Site Settings'),
+                'url' => 'seomatic/site/identity' . $siteSuffix,
+            ];
+        }
+        if ($currentUser->can('seomatic:tracking-scripts')) {
+            $subNavs['tracking'] = [
+                'label' => Craft::t('seomatic', 'Tracking Scripts'),
+                'url' => 'seomatic/tracking/gtag' . $siteSuffix,
+            ];
+        }
+        $editableSettings = true;
+        $general = Craft::$app->getConfig()->getGeneral();
+        if (self::$craft31 && !$general->allowAdminChanges) {
+            $editableSettings = false;
+        }
+        if ($currentUser->can('seomatic:plugin-settings') && $editableSettings) {
+            $subNavs['plugin'] = [
+                'label' => Craft::t('seomatic', 'Plugin Settings'),
+                'url' => 'seomatic/plugin',
+            ];
+        }
+        $navItem = array_merge($navItem, [
+            'subnav' => $subNavs,
+        ]);
+
+        return $navItem;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function createSettingsModel()
+    {
+        return new Settings();
     }
 }
