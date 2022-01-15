@@ -1,5 +1,12 @@
 # SEOmatic Changelog
 
+## 3.4.23 - UNRELEASED
+
+### Fixed
+
+* Register GraphQL types after all plugins are loaded, so that we can work with plugins that register their own
+  types ([#1037](https://github.com/nystudio107/craft-seomatic/issues/1037))
+
 ## 3.4.22 - 2022.01.12
 
 ### Fixed
