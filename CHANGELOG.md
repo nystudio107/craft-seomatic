@@ -6,6 +6,7 @@
 
 * Register GraphQL types after all plugins are loaded, so that we can work with plugins that register their own
   types ([#1037](https://github.com/nystudio107/craft-seomatic/issues/1037))
+* Fix Bing's sitemap submission URL ([#1043](https://github.com/nystudio107/craft-seomatic/issues/1043))
 
 ## 3.4.22 - 2022.01.12
 
