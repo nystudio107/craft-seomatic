@@ -429,6 +429,30 @@ class MetaBundles extends Component
     }
 
     /**
+     * Resave all the meta bundles of a given type.
+     *
+     * @param string $metaBundleType
+     */
+    public function resaveMetaBundles(string $metaBundleType)
+    {
+        // For all meta bundles of a given type
+        $metaBundleRows = (new Query())
+            ->from(['{{%seomatic_metabundles}}'])
+            ->where(['sourceBundleType' => $metaBundleType])
+            ->all();
+
+        foreach ($metaBundleRows as $metaBundleRow) {
+            // Create it from the DB data
+            $metaBundleData = array_diff_key($metaBundleRow, array_flip(self::IGNORE_DB_ATTRIBUTES));
+            $metaBundle = MetaBundle::create($metaBundleData);
+
+            // Sync it and update it.
+            Seomatic::$plugin->metaBundles->syncBundleWithConfig($metaBundle, true);
+            Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $metaBundle->sourceSiteId);
+        }
+    }
+
+    /**
      * Invalidate the caches and data structures associated with this MetaBundle
      *
      * @param Element $element
