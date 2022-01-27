@@ -2,60 +2,62 @@
 {% import "_includes/forms" as forms %}
 
 <fieldset>
-{% if field is not defined or 'seoPreview' in field.twitterEnabledFields %}
-    <h4 class="heading">{{ "SEO Preview:"|t('seomatic') }}</h4>
-    {% include "seomatic/_includes/twitterPreview.twig" %}
-{% endif %}
+    {% if field is not defined or 'seoPreview' in field.twitterEnabledFields %}
+        <h4 class="heading">{{ "SEO Preview:"|t('seomatic') }}</h4>
+        {% include "seomatic/_includes/twitterPreview.twig" %}
+    {% endif %}
 
-{% if parentBundles is not defined %}
-    {% set parentBundles = [] %}
-{% endif %}
+    {% if parentBundles is not defined %}
+        {% set parentBundles = [] %}
+    {% endif %}
 
-{############### Twitter Card Type ###############}
+    {# ############## Twitter Card Type ############## #}
 
-{% if field is not defined or 'twitterCardType' in field.twitterEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_twitterCardTypes.twig" %}
-{% endif %}
+    {% if field is not defined or 'twitterCardType' in field.twitterEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_twitterCardTypes.twig" %}
+    {% endif %}
 
-{############### Twitter Creator ###############}
+    {# ############## Twitter Creator ############## #}
 
-{% if field is not defined or 'twitterCreator' in field.twitterEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_twitterCreator.twig" %}
-{% endif %}
+    {% if field is not defined or 'twitterCreator' in field.twitterEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_twitterCreator.twig" %}
+    {% endif %}
 
-{############### Twitter Title ###############}
-{% if field is not defined or 'twitterTitle' in field.twitterEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_twitterTitle.twig" %}
-{% endif %}
+    {# ############## Twitter Title ############## #}
+    {% if field is not defined or 'twitterTitle' in field.twitterEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_twitterTitle.twig" %}
+    {% endif %}
 
-{############### Twitter Site Name Position ###############}
+    {# ############## Twitter Site Name Position ############## #}
 
-{% if field is not defined or 'twitterSiteNamePosition' in field.twitterEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_twitterSiteNamePosition.twig" %}
-{% endif %}
+    {% if field is not defined or 'twitterSiteNamePosition' in field.twitterEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_twitterSiteNamePosition.twig" %}
+    {% endif %}
 
-{############### Twitter Description ###############}
+    {# ############## Twitter Description ############## #}
 
-{% if field is not defined or 'twitterDescription' in field.twitterEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_twitterDescription.twig" %}
-{% endif %}
+    {% if field is not defined or 'twitterDescription' in field.twitterEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_twitterDescription.twig" %}
+    {% endif %}
 
-{############### SEO Image ###############}
+    {# ############## SEO Image ############## #}
 
-{# These fields are added as hidden here so that "Same as SEO Image" changes can propagate down to them #}
-{% if field is not defined %}
-    <div style="display: none;">
-        {% include "seomatic/settings/_includes/seo-image-partial.twig" %}
-    </div>
-{% endif %}
+    {# These fields are added as hidden here so that "Same as SEO Image" changes can propagate down to them #}
+    {% if field is not defined %}
+        <div style="display: none;">
+            {% include "seomatic/settings/_includes/seo-image-partial.twig" %}
+        </div>
+    {% endif %}
 
-{############### Twitter Image ###############}
+    {# ############## Twitter Image ############## #}
 
-{% include "seomatic/settings/_includes/twitter-image-partial.twig" %}
+    {% if field is not defined or 'twitterImage' in field.twitterEnabledFields %}
+        {% include "seomatic/settings/_includes/twitter-image-partial.twig" %}
+    {% endif %}
 
-{############### Twitter Image Description ###############}
+    {# ############## Twitter Image Description ############## #}
 
-{% if field is not defined or 'twitterImageDescription' in field.twitterEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_twitterImageDescription.twig" %}
-{% endif %}
+    {% if field is not defined or 'twitterImageDescription' in field.twitterEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_twitterImageDescription.twig" %}
+    {% endif %}
 </fieldset>
