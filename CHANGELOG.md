@@ -4,6 +4,8 @@
 
 ### Fixed
 
+* Fixed an issue where the SEO Settings field would display the Twitter Image and Facebook Image even if they were
+  disabled in the field settings ([#1047](https://github.com/nystudio107/craft-seomatic/issues/1047))
 * Register GraphQL types after all plugins are loaded, so that we can work with plugins that register their own
   types ([#1037](https://github.com/nystudio107/craft-seomatic/issues/1037))
 * Fix Bing's sitemap submission URL ([#1043](https://github.com/nystudio107/craft-seomatic/issues/1043))
