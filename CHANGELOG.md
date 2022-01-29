@@ -4,6 +4,8 @@
 
 ### Fixed
 
+* Delay registering SEO Elements to give other plugins a chance to load
+  first ([#654](https://github.com/nystudio107/craft-seomatic/issues/654))
 * Fixed an issue where textarea fields aren't disabled, and ensure previously hidden fields work as
   expected ([#1049](https://github.com/nystudio107/craft-seomatic/issues/1049))
 * Fixed an issue where the SEO Settings field would display the Twitter Image and Facebook Image even if they were
