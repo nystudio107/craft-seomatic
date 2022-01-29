@@ -75,12 +75,14 @@ class SeoElements extends Component
     // =========================================================================
 
     /**
-     * @inheritDoc
+     * @param string $metaBundleType
+     *
+     * @return SeoElementInterface|null
      */
-    public function init()
+    public function getSeoElementByMetaBundleType(string $metaBundleType)
     {
-        parent::init();
-        $this->getAllSeoElementTypes();
+        $seoElements = $this->getAllSeoElementTypes();
+        return $seoElements[$metaBundleType] ?? null;
     }
 
     /**
@@ -115,17 +117,6 @@ class SeoElements extends Component
         }
 
         return $this->seoElements;
-    }
-
-    /**
-     * @param string $metaBundleType
-     *
-     * @return SeoElementInterface|null
-     */
-    public function getSeoElementByMetaBundleType(string $metaBundleType)
-    {
-        $seoElements = $this->getAllSeoElementTypes();
-        return $seoElements[$metaBundleType] ?? null;
     }
 
     /**
