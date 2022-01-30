@@ -478,8 +478,6 @@ class Seomatic extends Plugin
                 $this->installGqlHandlers();
                 // Install these only after all other plugins have loaded
                 $request = Craft::$app->getRequest();
-                // Allow the SeoElements to register their own event handlers
-                self::$plugin->seoElements->getAllSeoElementTypes();
                 // Only respond to non-console site requests
                 if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
                     $this->handleSiteRequest();
