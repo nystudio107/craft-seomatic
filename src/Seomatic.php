@@ -473,7 +473,7 @@ class Seomatic extends Plugin
             Plugins::EVENT_AFTER_LOAD_PLUGINS,
             function () {
                 // Delay registering SEO Elements to give other plugins a chance to load first
-                $this->seoElements->getAllSeoElementTypes();
+                $this->seoElements->getAllSeoElementTypes(false);
                 // Delay installing GQL handlers to give other plugins a chance to register their own first
                 $this->installGqlHandlers();
                 // Install these only after all other plugins have loaded

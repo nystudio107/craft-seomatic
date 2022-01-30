@@ -90,10 +90,10 @@ class SeoElements extends Component
      *
      * @return string[] The available field type classes
      */
-    public function getAllSeoElementTypes(): array
+    public function getAllSeoElementTypes(bool $useCache = true): array
     {
         // Return the memoized version if available
-        if (!empty($this->seoElements)) {
+        if ($useCache && !empty($this->seoElements)) {
             return $this->seoElements;
         }
         // Merge in the built-in types with the types defined in the config.php
