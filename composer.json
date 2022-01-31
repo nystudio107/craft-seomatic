@@ -1,62 +1,62 @@
 {
-    "name": "nystudio107/craft-seomatic",
-    "description": "SEOmatic facilitates modern SEO best practices & implementation for Craft CMS 3. It is a turnkey SEO system that is comprehensive, powerful, and flexible.",
-    "type": "craft-plugin",
-    "version": "3.4.22",
-    "keywords": [
-        "craft",
-        "cms",
-        "craftcms",
-        "craft-plugin",
-        "seomatic",
-        "seo",
-        "json-ld",
-        "meta",
-        "tags",
-        "sitemap",
-        "twitter",
-        "facebook"
-    ],
-    "support": {
-        "docs": "https://nystudio107.com/plugins/seomatic/documentation",
-        "issues": "https://nystudio107.com/plugins/seomatic/support"
-    },
-    "license": "proprietary",
-    "authors": [
-        {
-          "name": "nystudio107",
-          "homepage": "https://nystudio107.com"
-        }
-    ],
-    "require-dev": {
-        "codeception/codeception": "^3.0",
-        "vlucas/phpdotenv": "^3.0"
-    },
-    "require": {
-        "craftcms/cms": "^3.1.19",
-        "nystudio107/craft-plugin-manifest": "^1.0.4",
-        "php-science/textrank": "^1.0.3",
-        "davechild/textstatistics": "1.0.2",
-        "sunra/php-simple-html-dom-parser": "^1.5.2"
-    },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
-        }
-    ],
-    "scripts": {
-        "test": "codecept run unit --coverage-xml"
-    },
-    "autoload": {
-        "psr-4": {
-          "nystudio107\\seomatic\\": "src/"
-        }
-    },
-    "extra": {
-        "name": "SEOmatic",
-        "handle": "seomatic",
-        "changelogUrl": "https://raw.githubusercontent.com/nystudio107/craft-seomatic/v3/CHANGELOG.md",
-        "class": "nystudio107\\seomatic\\Seomatic"
+  "name": "nystudio107/craft-seomatic",
+  "description": "SEOmatic facilitates modern SEO best practices & implementation for Craft CMS 3. It is a turnkey SEO system that is comprehensive, powerful, and flexible.",
+  "type": "craft-plugin",
+  "version": "3.4.23",
+  "keywords": [
+    "craft",
+    "cms",
+    "craftcms",
+    "craft-plugin",
+    "seomatic",
+    "seo",
+    "json-ld",
+    "meta",
+    "tags",
+    "sitemap",
+    "twitter",
+    "facebook"
+  ],
+  "support": {
+    "docs": "https://nystudio107.com/plugins/seomatic/documentation",
+    "issues": "https://nystudio107.com/plugins/seomatic/support"
+  },
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "nystudio107",
+      "homepage": "https://nystudio107.com"
     }
+  ],
+  "require-dev": {
+    "codeception/codeception": "^3.0",
+    "vlucas/phpdotenv": "^3.0"
+  },
+  "require": {
+    "craftcms/cms": "^3.1.19",
+    "nystudio107/craft-plugin-manifest": "^1.0.4",
+    "php-science/textrank": "^1.0.3",
+    "davechild/textstatistics": "1.0.2",
+    "sunra/php-simple-html-dom-parser": "^1.5.2"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ],
+  "scripts": {
+    "test": "codecept run unit --coverage-xml"
+  },
+  "autoload": {
+    "psr-4": {
+      "nystudio107\\seomatic\\": "src/"
+    }
+  },
+  "extra": {
+    "name": "SEOmatic",
+    "handle": "seomatic",
+    "changelogUrl": "https://raw.githubusercontent.com/nystudio107/craft-seomatic/v3/CHANGELOG.md",
+    "class": "nystudio107\\seomatic\\Seomatic"
+  }
 }

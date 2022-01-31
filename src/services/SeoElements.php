@@ -11,19 +11,18 @@
 
 namespace nystudio107\seomatic\services;
 
+use Craft;
+use craft\base\Component;
+use craft\base\ElementInterface;
+use craft\events\RegisterComponentTypesEvent;
 use nystudio107\seomatic\base\GqlSeoElementInterface;
-use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\seoelements\SeoCategory;
 use nystudio107\seomatic\seoelements\SeoDigitalProduct;
 use nystudio107\seomatic\seoelements\SeoEntry;
 use nystudio107\seomatic\seoelements\SeoEvent;
 use nystudio107\seomatic\seoelements\SeoProduct;
-
-use Craft;
-use craft\base\Component;
-use craft\base\ElementInterface;
-use craft\events\RegisterComponentTypesEvent;
+use nystudio107\seomatic\Seomatic;
 
 /**
  * @author    nystudio107
@@ -76,15 +75,6 @@ class SeoElements extends Component
     // =========================================================================
 
     /**
-     * @inheritDoc
-     */
-    public function init()
-    {
-        parent::init();
-        $this->getAllSeoElementTypes();
-    }
-
-    /**
      * @param string $metaBundleType
      *
      * @return SeoElementInterface|null
@@ -96,36 +86,14 @@ class SeoElements extends Component
     }
 
     /**
-     * Return the Meta Bundle type for a given element
-     *
-     * @param ElementInterface $element
-     *
-     * @return string|null
-     */
-    public function getMetaBundleTypeFromElement(ElementInterface $element)
-    {
-        $seoElements = $this->getAllSeoElementTypes();
-        foreach ($seoElements as $metaBundleType => $seoElement) {
-            /** @var SeoElementInterface $seoElement */
-            foreach ($seoElement::getElementClasses() as $elementClass) {
-                if ($element instanceof $elementClass) {
-                    return $metaBundleType;
-                }
-            }
-        }
-
-        return null;
-    }
-
-    /**
      * Returns all available field type classes.
      *
      * @return string[] The available field type classes
      */
-    public function getAllSeoElementTypes(): array
+    public function getAllSeoElementTypes(bool $useCache = true): array
     {
         // Return the memoized version if available
-        if (!empty($this->seoElements)) {
+        if ($useCache && !empty($this->seoElements)) {
             return $this->seoElements;
         }
         // Merge in the built-in types with the types defined in the config.php
@@ -149,6 +117,28 @@ class SeoElements extends Component
         }
 
         return $this->seoElements;
+    }
+
+    /**
+     * Return the Meta Bundle type for a given element
+     *
+     * @param ElementInterface $element
+     *
+     * @return string|null
+     */
+    public function getMetaBundleTypeFromElement(ElementInterface $element)
+    {
+        $seoElements = $this->getAllSeoElementTypes();
+        foreach ($seoElements as $metaBundleType => $seoElement) {
+            /** @var SeoElementInterface $seoElement */
+            foreach ($seoElement::getElementClasses() as $elementClass) {
+                if ($element instanceof $elementClass) {
+                    return $metaBundleType;
+                }
+            }
+        }
+
+        return null;
     }
 
     /**

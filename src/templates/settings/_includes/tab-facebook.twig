@@ -2,55 +2,57 @@
 {% import "_includes/forms" as forms %}
 
 <fieldset>
-{% if field is not defined or 'seoPreview' in field.facebookEnabledFields %}
-    <h4 class="heading">{{ "SEO Preview:"|t('seomatic') }}</h4>
-    {% include "seomatic/_includes/facebookPreview.twig" %}
-{% endif %}
+    {% if field is not defined or 'seoPreview' in field.facebookEnabledFields %}
+        <h4 class="heading">{{ "SEO Preview:"|t('seomatic') }}</h4>
+        {% include "seomatic/_includes/facebookPreview.twig" %}
+    {% endif %}
 
-{% if parentBundles is not defined %}
-    {% set parentBundles = [] %}
-{% endif %}
+    {% if parentBundles is not defined %}
+        {% set parentBundles = [] %}
+    {% endif %}
 
-{############### Facebook OpenGraph Type ###############}
+    {# ############## Facebook OpenGraph Type ############## #}
 
-{% if field is not defined or 'ogType' in field.facebookEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_ogType.twig" %}
-{% endif %}
+    {% if field is not defined or 'ogType' in field.facebookEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_ogType.twig" %}
+    {% endif %}
 
-{############### Facebook OpenGraph Title ###############}
+    {# ############## Facebook OpenGraph Title ############## #}
 
-{% if field is not defined or 'ogTitle' in field.facebookEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_ogTitle.twig" %}
-{% endif %}
+    {% if field is not defined or 'ogTitle' in field.facebookEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_ogTitle.twig" %}
+    {% endif %}
 
-{############### Facebook OpenGraph Site Name Position ###############}
+    {# ############## Facebook OpenGraph Site Name Position ############## #}
 
-{% if field is not defined or 'ogSiteNamePosition' in field.facebookEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_ogSiteNamePosition.twig" %}
-{% endif %}
+    {% if field is not defined or 'ogSiteNamePosition' in field.facebookEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_ogSiteNamePosition.twig" %}
+    {% endif %}
 
-{############### Facebook OpenGraph Description ###############}
+    {# ############## Facebook OpenGraph Description ############## #}
 
-{% if field is not defined or 'ogDescription' in field.facebookEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_ogDescription.twig" %}
-{% endif %}
+    {% if field is not defined or 'ogDescription' in field.facebookEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_ogDescription.twig" %}
+    {% endif %}
 
-{############### SEO Image ###############}
+    {# ############## SEO Image ############## #}
 
-{# These fields are added as hidden here so that "Same as SEO Image" changes can propagate down to them #}
-{% if field is not defined %}
-    <div style="display: none;">
-        {% include "seomatic/settings/_includes/seo-image-partial.twig" %}
-    </div>
-{% endif %}
+    {# These fields are added as hidden here so that "Same as SEO Image" changes can propagate down to them #}
+    {% if field is not defined %}
+        <div style="display: none;">
+            {% include "seomatic/settings/_includes/seo-image-partial.twig" %}
+        </div>
+    {% endif %}
 
-{############### Facebook OpenGraph Image ###############}
+    {# ############## Facebook OpenGraph Image ############## #}
 
-{% include "seomatic/settings/_includes/facebook-og-image-partial.twig" %}
+    {% if field is not defined or 'ogImage' in field.facebookEnabledFields %}
+        {% include "seomatic/settings/_includes/facebook-og-image-partial.twig" %}
+    {% endif %}
 
-{############### Facebook OpenGraph Image Description ###############}
+    {# ############## Facebook OpenGraph Image Description ############## #}
 
-{% if field is not defined or 'seoImageDescription' in field.generalEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_ogImageDescription.twig" %}
-{% endif %}
+    {% if field is not defined or 'ogImageDescription' in field.facebookEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_ogImageDescription.twig" %}
+    {% endif %}
 </fieldset>

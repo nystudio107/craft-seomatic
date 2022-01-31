@@ -1,5 +1,19 @@
 # SEOmatic Changelog
 
+## 3.4.23 - 2022.01.31
+
+### Fixed
+
+* Delay registering SEO Elements to give other plugins a chance to load
+  first ([#654](https://github.com/nystudio107/craft-seomatic/issues/654))
+* Fixed an issue where textarea fields aren't disabled, and ensure previously hidden fields work as
+  expected ([#1049](https://github.com/nystudio107/craft-seomatic/issues/1049))
+* Fixed an issue where the SEO Settings field would display the Twitter Image and Facebook Image even if they were
+  disabled in the field settings ([#1047](https://github.com/nystudio107/craft-seomatic/issues/1047))
+* Register GraphQL types after all plugins are loaded, so that we can work with plugins that register their own
+  types ([#1037](https://github.com/nystudio107/craft-seomatic/issues/1037))
+* Fix Bing's sitemap submission URL ([#1043](https://github.com/nystudio107/craft-seomatic/issues/1043))
+
 ## 3.4.22 - 2022.01.12
 
 ### Fixed
