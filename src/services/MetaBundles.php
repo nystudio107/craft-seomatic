@@ -648,6 +648,94 @@ class MetaBundles extends Component
     /**
      * Invalidate the caches and data structures associated with this MetaBundle
      *
+<<<<<<< HEAD
+=======
+     * @param string   $sourceBundleType
+     * @param int|null $sourceId
+     * @param bool     $isNew
+     */
+    public function invalidateMetaBundleById(string $sourceBundleType, int $sourceId, bool $isNew = false)
+    {
+        $metaBundleInvalidated = false;
+        $sites = Craft::$app->getSites()->getAllSites();
+        foreach ($sites as $site) {
+            // See if this is a section we are tracking
+            $metaBundle = $this->getMetaBundleBySourceId($sourceBundleType, $sourceId, $site->id);
+            if ($metaBundle) {
+                Craft::info(
+                    'Invalidating meta bundle: '
+                    .$metaBundle->sourceHandle
+                    .' from siteId: '
+                    .$site->id,
+                    __METHOD__
+                );
+                // Is this a new source?
+                if (!$isNew) {
+                    $metaBundleInvalidated = true;
+                    // Handle syncing up the sourceHandle
+                    if ($sourceBundleType !== self::GLOBAL_META_BUNDLE) {
+                        $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
+                        if ($seoElement !== null) {
+                            /** @var Section|CategoryGroup|ProductType $sourceModel */
+                            $sourceModel = $seoElement::sourceModelFromId($sourceId);
+                            if ($sourceModel !== null) {
+                                $metaBundle->sourceName = (string)$sourceModel->name;
+                                $metaBundle->sourceHandle = $sourceModel->handle;
+                            }
+                        }
+                    }
+                    // Invalidate caches after an existing section is saved
+                    Seomatic::$plugin->metaContainers->invalidateContainerCacheById(
+                        $sourceId,
+                        $sourceBundleType,
+                        $metaBundle->sourceSiteId
+                    );
+                    if (Seomatic::$settings->regenerateSitemapsAutomatically) {
+                        Seomatic::$plugin->sitemaps->invalidateSitemapCache(
+                            $metaBundle->sourceHandle,
+                            $metaBundle->sourceSiteId,
+                            $metaBundle->sourceBundleType
+                        );
+                    }
+                    // Update the meta bundle data
+                    $this->updateMetaBundle($metaBundle, $site->id);
+                }
+            }
+        }
+        // If we've invalidated a meta bundle, we need to invalidate the sitemap index, too
+        if ($metaBundleInvalidated) {
+            Seomatic::$plugin->sitemaps->invalidateSitemapIndexCache();
+        }
+    }
+
+    /**
+     * Resave all the meta bundles of a given type.
+     *
+     * @param string $metaBundleType
+     */
+    public function resaveMetaBundles(string $metaBundleType)
+    {
+        // For all meta bundles of a given type
+        $metaBundleRows = (new Query())
+            ->from(['{{%seomatic_metabundles}}'])
+            ->where(['sourceBundleType' => $metaBundleType])
+            ->all();
+
+        foreach ($metaBundleRows as $metaBundleRow) {
+            // Create it from the DB data
+            $metaBundleData = array_diff_key($metaBundleRow, array_flip(self::IGNORE_DB_ATTRIBUTES));
+            $metaBundle = MetaBundle::create($metaBundleData);
+
+            // Sync it and update it.
+            Seomatic::$plugin->metaBundles->syncBundleWithConfig($metaBundle, true);
+            Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $metaBundle->sourceSiteId);
+        }
+    }
+
+    /**
+     * Invalidate the caches and data structures associated with this MetaBundle
+     *
+>>>>>>> private/feature/resave-metabundles
      * @param Element $element
      * @param bool $isNew
      */

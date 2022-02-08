@@ -102,6 +102,30 @@ class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
     {
         $request = Craft::$app->getRequest();
 
+        // Install for all requests
+        Event::on(
+            Categories::class,
+            Categories::EVENT_AFTER_SAVE_GROUP,
+            function(CategoryGroupEvent $event) {
+                Craft::debug(
+                    'Categories::EVENT_AFTER_SAVE_GROUP',
+                    __METHOD__
+                );
+                Seomatic::$plugin->metaBundles->resaveMetaBundles(self::META_BUNDLE_TYPE);
+            }
+        );
+        Event::on(
+            Categories::class,
+            Categories::EVENT_AFTER_DELETE_GROUP,
+            function(CategoryGroupEvent $event) {
+                Craft::debug(
+                    'Categories::EVENT_AFTER_DELETE_GROUP',
+                    __METHOD__
+                );
+                Seomatic::$plugin->metaBundles->resaveMetaBundles(self::META_BUNDLE_TYPE);
+            }
+        );
+
         // Install for all non-console requests
         if (!$request->getIsConsoleRequest()) {
             // Handler: Categories::EVENT_AFTER_SAVE_GROUP

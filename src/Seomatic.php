@@ -39,6 +39,7 @@ use craft\services\Elements;
 use craft\services\Fields;
 use craft\services\Gql;
 use craft\services\Plugins;
+use craft\services\Sites as SitesService;
 use craft\services\UserPermissions;
 use craft\utilities\ClearCaches;
 use craft\web\UrlManager;
@@ -571,6 +572,38 @@ class Seomatic extends Plugin
                 }
             );
         }
+        $updateMetaBundles = function ($message) {
+            Craft::debug(
+                $message,
+                __METHOD__
+            );
+            $seoElementTypes = Seomatic::$plugin->seoElements->getAllSeoElementTypes();
+            foreach ($seoElementTypes as $seoElementType) {
+                $metaBundleType = $seoElementType::META_BUNDLE_TYPE ?? '';
+
+                if ($metaBundleType) {
+                    Seomatic::$plugin->metaBundles->resaveMetaBundles($metaBundleType);
+                }
+            }
+        };
+
+        // Handler: Elements::EVENT_AFTER_SAVE_SITE
+        Event::on(
+            SitesService::class,
+            SitesService::EVENT_AFTER_SAVE_SITE,
+            function() use ($updateMetaBundles) {
+                $updateMetaBundles('SitesService::EVENT_AFTER_SAVE_SITE');
+            }
+        );
+
+        // Handler: Elements::EVENT_AFTER_DELETE_SITE
+        Event::on(
+            SitesService::class,
+            SitesService::EVENT_AFTER_DELETE_SITE,
+            function() use ($updateMetaBundles) {
+                $updateMetaBundles('SitesService::EVENT_AFTER_DELETE_SITE');
+            }
+        );
     }
 
     /**
