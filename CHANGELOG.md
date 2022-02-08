@@ -6,6 +6,8 @@
 
 * Fixed an issue that could cause an exception if a MetaBundle was
   malformed ([#1058](https://github.com/nystudio107/craft-seomatic/issues/1058))
+* Fix a bug where modifying sites or element containers would not update the corresponding meta bundle
+  settings. ([#979](https://github.com/nystudio107/craft-seomatic/issues/979))
 
 ## 3.4.23 - 2022.01.31
 
@@ -20,7 +22,6 @@
 * Register GraphQL types after all plugins are loaded, so that we can work with plugins that register their own
   types ([#1037](https://github.com/nystudio107/craft-seomatic/issues/1037))
 * Fix Bing's sitemap submission URL ([#1043](https://github.com/nystudio107/craft-seomatic/issues/1043))
-* Fix a bug where modifying sites or element containers would not update the corresponding meta bundle settings. ([#979](https://github.com/nystudio107/craft-seomatic/issues/979))
 
 ## 3.4.22 - 2022.01.12
 
