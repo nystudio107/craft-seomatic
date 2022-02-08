@@ -1,5 +1,12 @@
 # SEOmatic Changelog
 
+## 3.4.24 - UNRELEASED
+
+### Fixed
+
+* Fixed an issue that could cause an exception if a MetaBundle was
+  malformed ([#1058](https://github.com/nystudio107/craft-seomatic/issues/1058))
+
 ## 3.4.23 - 2022.01.31
 
 ### Fixed
