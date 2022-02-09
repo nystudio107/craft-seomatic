@@ -2,6 +2,10 @@
 
 ## 3.4.24 - UNRELEASED
 
+### Added
+
+* Build only the Monaco editor components needed, drastically reducing the assetbundles size
+
 ### Fixed
 
 * Fixed an issue that could cause an exception if a MetaBundle was
