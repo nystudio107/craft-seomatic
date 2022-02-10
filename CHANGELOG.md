@@ -1,5 +1,19 @@
 # SEOmatic Changelog
 
+## 3.4.24 - 2022.02.10
+
+### Added
+
+* Build only the Monaco editor components needed, drastically reducing the assetbundles size
+* Added the ability to set `<script>` tag attributes for tracking scripts
+
+### Fixed
+
+* Fixed an issue that could cause an exception if a MetaBundle was
+  malformed ([#1058](https://github.com/nystudio107/craft-seomatic/issues/1058))
+* Fix a bug where modifying sites or element containers would not update the corresponding meta bundle
+  settings. ([#979](https://github.com/nystudio107/craft-seomatic/issues/979))
+
 ## 3.4.23 - 2022.01.31
 
 ### Fixed

@@ -102,6 +102,19 @@ class SeoDigitalProduct implements SeoElementInterface, GqlSeoElementInterface
     {
         $request = Craft::$app->getRequest();
 
+        // Install for all requests
+        Event::on(
+            ProductTypes::class,
+            ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPES,
+            function(ProductTypeEvent $event) {
+                Craft::debug(
+                    'ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE',
+                    __METHOD__
+                );
+                Seomatic::$plugin->metaBundles->resaveMetaBundles(self::META_BUNDLE_TYPE);
+            }
+        );
+
         // Install for all non-console requests
         if (!$request->getIsConsoleRequest()) {
             // Handler: ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE

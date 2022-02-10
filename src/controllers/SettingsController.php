@@ -965,7 +965,7 @@ class SettingsController extends Controller
                         if ($data) {
                             /** @var array $scriptData */
                             foreach ($scriptData as $key => $value) {
-                                if (\is_array($value)) {
+                                if (\is_array($value) && $key !== 'tagAttrs') {
                                     foreach ($value as $varsKey => $varsValue) {
                                         $data->$key[$varsKey]['value'] = $varsValue;
                                     }

@@ -88,6 +88,34 @@
                         {% endfor %}
 
                         {% if scriptData.templatePath is defined and scriptData.templatePath | length %}
+                            {{ forms.editableTableField({
+                                label: "Script Tag Attributes"|t("seomatic"),
+                                instructions: "Additional attributes to add to the `<script>` tag"|t("seomatic"),
+                                id: 'tagAttrs',
+                                name: 'tagAttrs',
+                                required: false,
+                                defaultValues: {
+                                    name: "",
+                                    value: "",
+                                },
+                                cols: {
+                                    name: {
+                                        heading: "Attribute Name"|t("seomatic"),
+                                        type: "singleline",
+                                        width: "50%",
+                                        code: true,
+                                    },
+                                    value: {
+                                        heading: "Attribute Value"|t("seomatic"),
+                                        type: "singleline",
+                                        width: "50%",
+                                        code: true,
+                                    },
+                                },
+                                rows: scriptData.tagAttrs,
+                                errors: scriptData.getErrors("tagAttrs"),
+                            }) }}
+
                             {{ forms.textAreaField({
                                 label: "Script Template"|t("seomatic"),
                                 instructions: "The script that will render on the page. Note that this script will not render in `local` development or `staging` environments."|t("seomatic"),

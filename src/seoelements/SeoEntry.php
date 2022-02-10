@@ -105,6 +105,30 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
     {
         $request = Craft::$app->getRequest();
 
+        // Install for all requests
+        Event::on(
+            Sections::class,
+            Sections::EVENT_AFTER_SAVE_SECTION,
+            function(SectionEvent $event) {
+                Craft::debug(
+                    'Sections::EVENT_AFTER_SAVE_SECTION',
+                    __METHOD__
+                );
+                Seomatic::$plugin->metaBundles->resaveMetaBundles(self::META_BUNDLE_TYPE);
+            }
+        );
+        Event::on(
+            Sections::class,
+            Sections::EVENT_AFTER_DELETE_SECTION,
+            function(SectionEvent $event) {
+                Craft::debug(
+                    'Sections::EVENT_AFTER_DELETE_SECTION',
+                    __METHOD__
+                );
+                Seomatic::$plugin->metaBundles->resaveMetaBundles(self::META_BUNDLE_TYPE);
+            }
+        );
+
         // Install for all non-console requests
         if (!$request->getIsConsoleRequest()) {
             // Handler: Sections::EVENT_AFTER_SAVE_SECTION

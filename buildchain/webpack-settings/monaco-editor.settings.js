@@ -6,7 +6,7 @@ require('dotenv').config();
 // settings
 module.exports = {
     monacoConfig: {
-        languages: ['css','html', 'javascript', 'json', 'twig', 'typescript'],
+        languages: ['twig'],
         globalAPI: true,
     }
 };

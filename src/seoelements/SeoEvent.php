@@ -103,6 +103,30 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
     {
         $request = Craft::$app->getRequest();
 
+        // Install for all requests
+        BaseEvent::on(
+            CalendarsService::class,
+            CalendarsService::EVENT_AFTER_SAVE,
+            function(SaveModelEvent $event) {
+                Craft::debug(
+                    'CalendarsService::EVENT_AFTER_DELETE',
+                    __METHOD__
+                );
+                Seomatic::$plugin->metaBundles->resaveMetaBundles(self::META_BUNDLE_TYPE);
+            }
+        );
+        BaseEvent::on(
+            CalendarsService::class,
+            CalendarsService::EVENT_AFTER_DELETE,
+            function(SaveModelEvent $event) {
+                Craft::debug(
+                    'CalendarsService::EVENT_AFTER_DELETE',
+                    __METHOD__
+                );
+                Seomatic::$plugin->metaBundles->resaveMetaBundles(self::META_BUNDLE_TYPE);
+            }
+        );
+
         // Install for all non-console requests
         if (!$request->getIsConsoleRequest()) {
             // Handler: CalendarsService::EVENT_AFTER_SAVE
