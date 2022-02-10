@@ -106,7 +106,7 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
         // Install for all requests
         BaseEvent::on(
             CalendarsService::class,
-            CalendarsService::EVENT_AFTER_DELETE,
+            CalendarsService::EVENT_AFTER_SAVE,
             function(SaveModelEvent $event) {
                 Craft::debug(
                     'CalendarsService::EVENT_AFTER_DELETE',
