@@ -5,6 +5,7 @@
 ### Added
 
 * Build only the Monaco editor components needed, drastically reducing the assetbundles size
+* Added the ability to set `<script>` tag attributes for tracking scripts
 
 ### Fixed
 
