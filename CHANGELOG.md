@@ -5,6 +5,7 @@
 ### Fixed
 
 * Fixed a typo in the `EVENT_AFTER_SAVE_PRODUCTTYPE` event name
+* Fixed an issue with empty `tagAttrs` throwing an exception
 
 ## 3.4.24 - 2022.02.10
 
