@@ -1,5 +1,11 @@
 # SEOmatic Changelog
 
+## 3.4.25 - UNRELEASED
+
+### Fixed
+
+* Fixed a typo in the `EVENT_AFTER_SAVE_PRODUCTTYPE` event name
+
 ## 3.4.24 - 2022.02.10
 
 ### Added
