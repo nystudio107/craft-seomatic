@@ -105,7 +105,7 @@ class SeoDigitalProduct implements SeoElementInterface, GqlSeoElementInterface
         // Install for all requests
         Event::on(
             ProductTypes::class,
-            ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPES,
+            ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE,
             function(ProductTypeEvent $event) {
                 Craft::debug(
                     'ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE',

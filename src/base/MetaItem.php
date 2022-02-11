@@ -209,6 +209,9 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
     public function tagAttributes(): array
     {
         $attrs = $this->tagAttrs ?? [];
+        if (!is_array($attrs)) {
+            $attrs = [];
+        }
         if (!empty($attrs) && ArrayHelper::isIndexed($attrs, true)) {
             $attrs = [];
             foreach($this->tagAttrs as $attr) {
