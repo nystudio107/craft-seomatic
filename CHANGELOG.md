@@ -1,13 +1,18 @@
 # SEOmatic Changelog
 
-## 3.4.25 - UNRELEASED
+## 3.4.26 - UNRELEASED
+
+### Fixed
+
+* Handle an edge-case where a migration didn't work properly to
+  add `SECURITY_TXT_HANDLE` ([#1065](https://github.com/nystudio107/craft-seomatic/issues/1065))
+
+## 3.4.25 - 2022.02.11
 
 ### Fixed
 
 * Fixed a typo in the `EVENT_AFTER_SAVE_PRODUCTTYPE` event name
 * Fixed an issue with empty `tagAttrs` throwing an exception
-* Handle an edge-case where a migration didn't work properly to
-  add `SECURITY_TXT_HANDLE` ([#1065](https://github.com/nystudio107/craft-seomatic/issues/1065))
 
 ## 3.4.24 - 2022.02.10
 
