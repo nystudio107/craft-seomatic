@@ -4,6 +4,7 @@
 
 ### Fixed
 
+* If paginated URLs are not using a query string, strip the query string from the canonical URL
 * Handle an edge-case where a migration didn't work properly to
   add `SECURITY_TXT_HANDLE` ([#1065](https://github.com/nystudio107/craft-seomatic/issues/1065))
 
