@@ -11,32 +11,30 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\events\AddDynamicMetaEvent;
-use nystudio107\seomatic\fields\SeoSettings;
-use nystudio107\seomatic\helpers\Field as FieldHelper;
-use nystudio107\seomatic\helpers\Text as TextHelper;
-use nystudio107\seomatic\helpers\Localization as LocalizationHelper;
-use nystudio107\seomatic\models\Entity;
-use nystudio107\seomatic\models\jsonld\ContactPoint;
-use nystudio107\seomatic\models\jsonld\LocalBusiness;
-use nystudio107\seomatic\models\jsonld\Organization;
-use nystudio107\seomatic\models\jsonld\BreadcrumbList;
-use nystudio107\seomatic\models\jsonld\Thing;
-use nystudio107\seomatic\models\MetaBundle;
-use nystudio107\seomatic\models\MetaJsonLd;
-use nystudio107\seomatic\services\Helper as SeomaticHelper;
-
-
 use Craft;
 use craft\base\Element;
 use craft\errors\SiteNotFoundException;
 use craft\helpers\DateTimeHelper;
 use craft\web\twig\variables\Paginate;
-
+use nystudio107\seomatic\events\AddDynamicMetaEvent;
+use nystudio107\seomatic\fields\SeoSettings;
+use nystudio107\seomatic\helpers\Field as FieldHelper;
+use nystudio107\seomatic\helpers\Localization as LocalizationHelper;
+use nystudio107\seomatic\helpers\Text as TextHelper;
+use nystudio107\seomatic\models\Entity;
+use nystudio107\seomatic\models\jsonld\BreadcrumbList;
+use nystudio107\seomatic\models\jsonld\ContactPoint;
+use nystudio107\seomatic\models\jsonld\LocalBusiness;
+use nystudio107\seomatic\models\jsonld\Organization;
+use nystudio107\seomatic\models\jsonld\Thing;
+use nystudio107\seomatic\models\MetaBundle;
+use nystudio107\seomatic\models\MetaJsonLd;
+use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\services\Helper as SeomaticHelper;
 use yii\base\Event;
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
+
 
 /**
  * @author    nystudio107
@@ -68,31 +66,6 @@ class DynamicMeta
     // Static Methods
     // =========================================================================
 
-
-    /**
-     * Return a sanitized URL with the query string stripped
-     *
-     * @param string $url
-     * @param bool $checkStatus
-     *
-     * @return string
-     */
-    public static function sanitizeUrl(string $url, bool $checkStatus = true, bool $stripQueryString = true): string
-    {
-        // Remove the query string
-        if ($stripQueryString) {
-            $url = UrlHelper::stripQueryString($url);
-        }
-        $url = TextHelper::sanitizeUserInput($url);
-
-        // If this is a >= 400 status code, set the canonical URL to nothing
-        if ($checkStatus && !Craft::$app->getRequest()->getIsConsoleRequest() && Craft::$app->getResponse()->statusCode >= 400) {
-            $url = '';
-        }
-
-        return $url;
-    }
-
     /**
      * Paginate based on the passed in Paginate variable as returned from the
      * Twig {% paginate %} tag:
@@ -105,16 +78,6 @@ class DynamicMeta
         if ($pageInfo !== null && $pageInfo->currentPage !== null) {
             // Let the meta containers know that this page is paginated
             Seomatic::$plugin->metaContainers->paginationPage = (string)$pageInfo->currentPage;
-            // Set the the canonical URL to be the paginated URL
-            // see: https://github.com/nystudio107/craft-seomatic/issues/375#issuecomment-488369209
-            $url = $pageInfo->getPageUrl($pageInfo->currentPage);
-            if (!empty($url)) {
-                Seomatic::$seomaticVariable->meta->canonicalUrl = $url;
-                $canonical = Seomatic::$seomaticVariable->link->get('canonical');
-                if ($canonical !== null) {
-                    $canonical->href = $url;
-                }
-            }
             // See if we should strip the query params
             $stripQueryParams = true;
             $pageTrigger = Craft::$app->getConfig()->getGeneral()->pageTrigger;
@@ -122,7 +85,19 @@ class DynamicMeta
             if ($pageTrigger[0] === '?') {
                 $stripQueryParams = false;
             }
-
+            // Set the canonical URL to be the paginated URL
+            // see: https://github.com/nystudio107/craft-seomatic/issues/375#issuecomment-488369209
+            $url = $pageInfo->getPageUrl($pageInfo->currentPage);
+            if ($stripQueryParams) {
+                $url = preg_replace('/\?.*/', '', $url);
+            }
+            if (!empty($url)) {
+                Seomatic::$seomaticVariable->meta->canonicalUrl = $url;
+                $canonical = Seomatic::$seomaticVariable->link->get('canonical');
+                if ($canonical !== null) {
+                    $canonical->href = $url;
+                }
+            }
             // Set the previous URL
             $url = $pageInfo->getPrevUrl();
             if ($stripQueryParams) {
@@ -175,7 +150,7 @@ class DynamicMeta
                     if (\is_array($content)) {
                         $headerValue = '';
                         foreach ($content as $contentVal) {
-                            $headerValue .= ($contentVal.',');
+                            $headerValue .= ($contentVal . ',');
                         }
                         $headerValue = rtrim($headerValue, ',');
                     } else {
@@ -194,11 +169,11 @@ class DynamicMeta
                     if (\is_array($href)) {
                         $headerValue = '';
                         foreach ($href as $hrefVal) {
-                            $headerValue .= ('<'.$hrefVal.'>'.',');
+                            $headerValue .= ('<' . $hrefVal . '>' . ',');
                         }
                         $headerValue = rtrim($headerValue, ',');
                     } else {
-                        $headerValue = '<'.$href.'>';
+                        $headerValue = '<' . $href . '>';
                     }
                     $headerValue .= "; rel='canonical'";
                     $response->headers->add('Link', $headerValue);
@@ -214,7 +189,7 @@ class DynamicMeta
                     if (\is_array($content)) {
                         $headerValue = '';
                         foreach ($content as $contentVal) {
-                            $headerValue .= ($contentVal.',');
+                            $headerValue .= ($contentVal . ',');
                         }
                         $headerValue = rtrim($headerValue, ',');
                     } else {
@@ -231,6 +206,18 @@ class DynamicMeta
     }
 
     /**
+     * Add the Content-Security-Policy script-src headers
+     */
+    public static function addCspHeaders()
+    {
+        $cspNonces = self::getCspNonces();
+        $container = Seomatic::$plugin->script->container();
+        if ($container !== null) {
+            $container->addNonceHeaders($cspNonces);
+        }
+    }
+
+    /**
      * Get all of the CSP Nonces from containers that can have them
      *
      * @return array
@@ -242,7 +229,7 @@ class DynamicMeta
         if (!empty(Seomatic::$settings->cspScriptSrcPolicies)) {
             $fixedCsps = Seomatic::$settings->cspScriptSrcPolicies;
             $iterator = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($fixedCsps));
-            foreach($iterator as $value) {
+            foreach ($iterator as $value) {
                 $cspNonces[] = $value;
             }
         }
@@ -260,18 +247,6 @@ class DynamicMeta
     }
 
     /**
-     * Add the Content-Security-Policy script-src headers
-     */
-    public static function addCspHeaders()
-    {
-        $cspNonces = self::getCspNonces();
-        $container = Seomatic::$plugin->script->container();
-        if ($container !== null) {
-            $container->addNonceHeaders($cspNonces);
-        }
-    }
-
-    /**
      * Add the Content-Security-Policy script-src tags
      */
     public static function addCspTags()
@@ -286,8 +261,8 @@ class DynamicMeta
     /**
      * Add any custom/dynamic meta to the containers
      *
-     * @param string|null $uri     The URI of the route to add dynamic metadata for
-     * @param int|null    $siteId  The siteId of the current site
+     * @param string|null $uri The URI of the route to add dynamic metadata for
+     * @param int|null $siteId The siteId of the current site
      */
     public static function addDynamicMetaToContainers(string $uri = null, int $siteId = null)
     {
@@ -322,90 +297,6 @@ class DynamicMeta
             }
         }
         Craft::endProfile('DynamicMeta::addDynamicMetaToContainers', __METHOD__);
-    }
-
-    /**
-     * Add the OpeningHoursSpecific to the $jsonLd based on the Entity settings
-     *
-     * @param MetaJsonLd $jsonLd
-     * @param Entity     $entity
-     */
-    public static function addOpeningHours(MetaJsonLd $jsonLd, Entity $entity)
-    {
-        Craft::beginProfile('DynamicMeta::addOpeningHours', __METHOD__);
-        if ($jsonLd instanceof LocalBusiness && $entity !== null) {
-            /** @var LocalBusiness $jsonLd */
-            $openingHours = [];
-            $days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-            $times = $entity->localBusinessOpeningHours;
-            $index = 0;
-            foreach ($times as $hours) {
-                $openTime = '';
-                $closeTime = '';
-                if (!empty($hours['open'])) {
-                    /** @var \DateTime $dateTime */
-                    try {
-                        $dateTime = DateTimeHelper::toDateTime($hours['open']['date'], false, false);
-                    } catch (\Exception $e) {
-                        $dateTime = false;
-                    }
-                    if ($dateTime !== false) {
-                        $openTime = $dateTime->format('H:i:s');
-                    }
-                }
-                if (!empty($hours['close'])) {
-                    /** @var \DateTime $dateTime */
-                    try {
-                        $dateTime = DateTimeHelper::toDateTime($hours['close']['date'], false, false);
-                    } catch (\Exception $e) {
-                        $dateTime = false;
-                    }
-                    if ($dateTime !== false) {
-                        $closeTime = $dateTime->format('H:i:s');
-                    }
-                }
-                if ($openTime && $closeTime) {
-                    $hours = Seomatic::$plugin->jsonLd->create([
-                        'type' => 'OpeningHoursSpecification',
-                        'opens' => $openTime,
-                        'closes' => $closeTime,
-                        'dayOfWeek' => [$days[$index]],
-                    ], false);
-                    $openingHours[] = $hours;
-                }
-                $index++;
-            }
-            $jsonLd->openingHoursSpecification = $openingHours;
-        }
-        Craft::endProfile('DynamicMeta::addOpeningHours', __METHOD__);
-    }
-
-    /**
-     * Add the ContactPoint to the $jsonLd based on the Entity settings
-     *
-     * @param MetaJsonLd $jsonLd
-     * @param Entity     $entity
-     */
-    public static function addContactPoints(MetaJsonLd $jsonLd, Entity $entity)
-    {
-        Craft::beginProfile('DynamicMeta::addContactPoints', __METHOD__);
-        if ($jsonLd instanceof Organization && $entity !== null) {
-            /** @var Organization $jsonLd */
-            $contactPoints = [];
-            if ($entity->organizationContactPoints !== null && \is_array($entity->organizationContactPoints)) {
-                foreach ($entity->organizationContactPoints as $contacts) {
-                    /** @var ContactPoint $contact */
-                    $contact = Seomatic::$plugin->jsonLd->create([
-                        'type' => 'ContactPoint',
-                        'telephone' => $contacts['telephone'],
-                        'contactType' => $contacts['contactType'],
-                    ], false);
-                    $contactPoints[] = $contact;
-                }
-            }
-            $jsonLd->contactPoint = $contactPoints;
-        }
-        Craft::endProfile('DynamicMeta::addContactPoints', __METHOD__);
     }
 
     /**
@@ -523,7 +414,7 @@ class DynamicMeta
     /**
      * Add meta hreflang tags if there is more than one site
      *
-     * @param string   $uri
+     * @param string $uri
      * @param int|null $siteId
      */
     public static function addMetaLinkHrefLang(string $uri = null, int $siteId = null)
@@ -565,7 +456,7 @@ class DynamicMeta
                 $ogContentArray = [];
                 foreach ($siteLocalizedUrls as $siteLocalizedUrl) {
                     if (!\in_array($siteLocalizedUrl['ogLanguage'], $ogContentArray, true) &&
-                    Craft::$app->language !== $siteLocalizedUrl['language']) {
+                        Craft::$app->language !== $siteLocalizedUrl['language']) {
                         $ogContentArray[] = $siteLocalizedUrl['ogLanguage'];
                     }
                 }
@@ -576,32 +467,6 @@ class DynamicMeta
     }
 
     /**
-     * Add the Same As meta tags and JSON-LD
-     */
-    public static function addSameAsMeta()
-    {
-        Craft::beginProfile('DynamicMeta::addSameAsMeta', __METHOD__);
-        $metaContainers = Seomatic::$plugin->metaContainers;
-        $sameAsUrls = [];
-        if (!empty($metaContainers->metaSiteVars->sameAsLinks)) {
-            $sameAsUrls = ArrayHelper::getColumn($metaContainers->metaSiteVars->sameAsLinks, 'url', false);
-            $sameAsUrls = array_values(array_filter($sameAsUrls));
-        }
-        // Facebook OpenGraph
-        $ogSeeAlso = Seomatic::$plugin->tag->get('og:see_also');
-        if ($ogSeeAlso) {
-            $ogSeeAlso->content = $sameAsUrls;
-        }
-        // Site Identity JSON-LD
-        $identity = Seomatic::$plugin->jsonLd->get('identity');
-        /** @var Thing $identity */
-        if ($identity !== null && property_exists($identity, 'sameAs')) {
-            $identity->sameAs = $sameAsUrls;
-        }
-        Craft::endProfile('DynamicMeta::addSameAsMeta', __METHOD__);
-    }
-
-    /**
      * Return a list of localized URLs that are in the current site's group
      * The current URI is used if $uri is null. Similarly, the current site is
      * used if $siteId is null.
@@ -609,7 +474,7 @@ class DynamicMeta
      * `hreflangLanguage`, and `url` as keys.
      *
      * @param string|null $uri
-     * @param int|null    $siteId
+     * @param int|null $siteId
      *
      * @return array
      */
@@ -770,6 +635,140 @@ class DynamicMeta
         Craft::endProfile('DynamicMeta::getLocalizedUrls', __METHOD__);
 
         return $localizedUrls;
+    }
+
+    /**
+     * Return a sanitized URL with the query string stripped
+     *
+     * @param string $url
+     * @param bool $checkStatus
+     *
+     * @return string
+     */
+    public static function sanitizeUrl(string $url, bool $checkStatus = true, bool $stripQueryString = true): string
+    {
+        // Remove the query string
+        if ($stripQueryString) {
+            $url = UrlHelper::stripQueryString($url);
+        }
+        $url = TextHelper::sanitizeUserInput($url);
+
+        // If this is a >= 400 status code, set the canonical URL to nothing
+        if ($checkStatus && !Craft::$app->getRequest()->getIsConsoleRequest() && Craft::$app->getResponse()->statusCode >= 400) {
+            $url = '';
+        }
+
+        return $url;
+    }
+
+    /**
+     * Add the Same As meta tags and JSON-LD
+     */
+    public static function addSameAsMeta()
+    {
+        Craft::beginProfile('DynamicMeta::addSameAsMeta', __METHOD__);
+        $metaContainers = Seomatic::$plugin->metaContainers;
+        $sameAsUrls = [];
+        if (!empty($metaContainers->metaSiteVars->sameAsLinks)) {
+            $sameAsUrls = ArrayHelper::getColumn($metaContainers->metaSiteVars->sameAsLinks, 'url', false);
+            $sameAsUrls = array_values(array_filter($sameAsUrls));
+        }
+        // Facebook OpenGraph
+        $ogSeeAlso = Seomatic::$plugin->tag->get('og:see_also');
+        if ($ogSeeAlso) {
+            $ogSeeAlso->content = $sameAsUrls;
+        }
+        // Site Identity JSON-LD
+        $identity = Seomatic::$plugin->jsonLd->get('identity');
+        /** @var Thing $identity */
+        if ($identity !== null && property_exists($identity, 'sameAs')) {
+            $identity->sameAs = $sameAsUrls;
+        }
+        Craft::endProfile('DynamicMeta::addSameAsMeta', __METHOD__);
+    }
+
+    /**
+     * Add the OpeningHoursSpecific to the $jsonLd based on the Entity settings
+     *
+     * @param MetaJsonLd $jsonLd
+     * @param Entity $entity
+     */
+    public static function addOpeningHours(MetaJsonLd $jsonLd, Entity $entity)
+    {
+        Craft::beginProfile('DynamicMeta::addOpeningHours', __METHOD__);
+        if ($jsonLd instanceof LocalBusiness && $entity !== null) {
+            /** @var LocalBusiness $jsonLd */
+            $openingHours = [];
+            $days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            $times = $entity->localBusinessOpeningHours;
+            $index = 0;
+            foreach ($times as $hours) {
+                $openTime = '';
+                $closeTime = '';
+                if (!empty($hours['open'])) {
+                    /** @var \DateTime $dateTime */
+                    try {
+                        $dateTime = DateTimeHelper::toDateTime($hours['open']['date'], false, false);
+                    } catch (\Exception $e) {
+                        $dateTime = false;
+                    }
+                    if ($dateTime !== false) {
+                        $openTime = $dateTime->format('H:i:s');
+                    }
+                }
+                if (!empty($hours['close'])) {
+                    /** @var \DateTime $dateTime */
+                    try {
+                        $dateTime = DateTimeHelper::toDateTime($hours['close']['date'], false, false);
+                    } catch (\Exception $e) {
+                        $dateTime = false;
+                    }
+                    if ($dateTime !== false) {
+                        $closeTime = $dateTime->format('H:i:s');
+                    }
+                }
+                if ($openTime && $closeTime) {
+                    $hours = Seomatic::$plugin->jsonLd->create([
+                        'type' => 'OpeningHoursSpecification',
+                        'opens' => $openTime,
+                        'closes' => $closeTime,
+                        'dayOfWeek' => [$days[$index]],
+                    ], false);
+                    $openingHours[] = $hours;
+                }
+                $index++;
+            }
+            $jsonLd->openingHoursSpecification = $openingHours;
+        }
+        Craft::endProfile('DynamicMeta::addOpeningHours', __METHOD__);
+    }
+
+    /**
+     * Add the ContactPoint to the $jsonLd based on the Entity settings
+     *
+     * @param MetaJsonLd $jsonLd
+     * @param Entity $entity
+     */
+    public static function addContactPoints(MetaJsonLd $jsonLd, Entity $entity)
+    {
+        Craft::beginProfile('DynamicMeta::addContactPoints', __METHOD__);
+        if ($jsonLd instanceof Organization && $entity !== null) {
+            /** @var Organization $jsonLd */
+            $contactPoints = [];
+            if ($entity->organizationContactPoints !== null && \is_array($entity->organizationContactPoints)) {
+                foreach ($entity->organizationContactPoints as $contacts) {
+                    /** @var ContactPoint $contact */
+                    $contact = Seomatic::$plugin->jsonLd->create([
+                        'type' => 'ContactPoint',
+                        'telephone' => $contacts['telephone'],
+                        'contactType' => $contacts['contactType'],
+                    ], false);
+                    $contactPoints[] = $contact;
+                }
+            }
+            $jsonLd->contactPoint = $contactPoints;
+        }
+        Craft::endProfile('DynamicMeta::addContactPoints', __METHOD__);
     }
 
     /**
