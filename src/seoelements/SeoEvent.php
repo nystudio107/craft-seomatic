@@ -11,29 +11,26 @@
 
 namespace nystudio107\seomatic\seoelements;
 
-use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
-use nystudio107\seomatic\base\GqlSeoElementInterface;
-use nystudio107\seomatic\helpers\PluginTemplate;
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\base\SeoElementInterface;
-use nystudio107\seomatic\helpers\ArrayHelper;
-use nystudio107\seomatic\helpers\Config as ConfigHelper;
-use nystudio107\seomatic\models\MetaBundle;
-
 use Craft;
 use craft\base\ElementInterface;
 use craft\base\Model;
 use craft\elements\db\ElementQueryInterface;
 use craft\models\Site;
-
-use Solspace\Calendar\Calendar as CalendarPlugin;
+use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
+use nystudio107\seomatic\base\GqlSeoElementInterface;
+use nystudio107\seomatic\base\SeoElementInterface;
+use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\helpers\Config as ConfigHelper;
+use nystudio107\seomatic\helpers\PluginTemplate;
+use nystudio107\seomatic\models\MetaBundle;
+use nystudio107\seomatic\Seomatic;
 use Solspace\Calendar\Bundles\GraphQL\Interfaces\EventInterface;
+use Solspace\Calendar\Calendar as CalendarPlugin;
 use Solspace\Calendar\Elements\Event;
 use Solspace\Calendar\Events\DeleteModelEvent;
 use Solspace\Calendar\Events\SaveModelEvent;
 use Solspace\Calendar\Models\CalendarModel;
 use Solspace\Calendar\Services\CalendarsService;
-
 use yii\base\Event as BaseEvent;
 
 /**
@@ -57,16 +54,6 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
     // =========================================================================
 
     /**
-     * Return the sourceBundleType for that this SeoElement handles
-     *
-     * @return string
-     */
-    public static function getMetaBundleType(): string
-    {
-        return self::META_BUNDLE_TYPE;
-    }
-
-    /**
      * Returns an array of the element classes that are handled by this SeoElement
      *
      * @return array
@@ -74,16 +61,6 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
     public static function getElementClasses(): array
     {
         return self::ELEMENT_CLASSES;
-    }
-
-    /**
-     * Return the refHandle (e.g.: `entry` or `category`) for the SeoElement
-     *
-     * @return string
-     */
-    public static function getElementRefHandle(): string
-    {
-        return Event::refHandle() ?? 'event';
     }
 
     /**
@@ -107,7 +84,7 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
         BaseEvent::on(
             CalendarsService::class,
             CalendarsService::EVENT_AFTER_SAVE,
-            function(SaveModelEvent $event) {
+            function (SaveModelEvent $event) {
                 Craft::debug(
                     'CalendarsService::EVENT_AFTER_DELETE',
                     __METHOD__
@@ -118,7 +95,7 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
         BaseEvent::on(
             CalendarsService::class,
             CalendarsService::EVENT_AFTER_DELETE,
-            function(SaveModelEvent $event) {
+            function (SaveModelEvent $event) {
                 Craft::debug(
                     'CalendarsService::EVENT_AFTER_DELETE',
                     __METHOD__
@@ -213,6 +190,43 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
     }
 
     /**
+     * Return the sourceBundleType for that this SeoElement handles
+     *
+     * @return string
+     */
+    public static function getMetaBundleType(): string
+    {
+        return self::META_BUNDLE_TYPE;
+    }
+
+    /**
+     * Create a MetaBundle in the db for each site, from the passed in $sourceModel
+     *
+     * @param Model $sourceModel
+     */
+    public static function createContentMetaBundle(Model $sourceModel)
+    {
+        /** @var CalendarModel $sourceModel */
+        $sites = Craft::$app->getSites()->getAllSites();
+        /** @var Site $site */
+        foreach ($sites as $site) {
+            $seoElement = self::class;
+            /** @var SeoElementInterface $seoElement */
+            Seomatic::$plugin->metaBundles->createMetaBundleFromSeoElement($seoElement, $sourceModel, $site->id);
+        }
+    }
+
+    /**
+     * Return the refHandle (e.g.: `entry` or `category`) for the SeoElement
+     *
+     * @return string
+     */
+    public static function getElementRefHandle(): string
+    {
+        return Event::refHandle() ?? 'event';
+    }
+
+    /**
      * Return an ElementQuery for the sitemap elements for the given MetaBundle
      *
      * @param MetaBundle $metaBundle
@@ -224,9 +238,8 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
         $query = Event::find()
             ->setCalendar($metaBundle->sourceHandle)
             ->setLoadOccurrences(false)
-            ->siteId($metaBundle->sourceSiteId)
-            ->limit($metaBundle->metaSitemapVars->sitemapLimit)
-            ;
+            ->siteId((int)$metaBundle->sourceSiteId)
+            ->limit((int)$metaBundle->metaSitemapVars->sitemapLimit);
 
         return $query;
     }
@@ -236,30 +249,30 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
      * and Element ID
      *
      * @param MetaBundle $metaBundle
-     * @param int        $elementId
-     * @param int        $siteId
+     * @param int $elementId
+     * @param int $siteId
      *
      * @return null|ElementInterface
      */
     public static function sitemapAltElement(
         MetaBundle $metaBundle,
-        int $elementId,
-        int $siteId
-    ) {
+        int        $elementId,
+        int        $siteId
+    )
+    {
         return Event::find()
             ->id($elementId)
             ->siteId($siteId)
             ->limit(1)
-            ->one()
-            ;
+            ->one();
     }
 
     /**
      * Return a preview URI for a given $sourceHandle and $siteId
      * This just returns the first element
      *
-     * @param string    $sourceHandle
-     * @param int|null  $siteId
+     * @param string $sourceHandle
+     * @param int|null $siteId
      *
      * @return string|null
      */
@@ -269,8 +282,7 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
         $element = Event::find()
             ->setCalendar($sourceHandle)
             ->siteId($siteId)
-            ->one()
-        ;
+            ->one();
         if ($element) {
             $uri = $element->uri;
         }
@@ -359,7 +371,7 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
      * Return the most recently updated Element from a given source model
      *
      * @param Model $sourceModel
-     * @param int   $sourceSiteId
+     * @param int $sourceSiteId
      *
      * @return null|ElementInterface
      */
@@ -371,18 +383,7 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
             ->siteId($sourceSiteId)
             ->limit(1)
             ->orderBy(['elements.dateUpdated' => SORT_DESC])
-            ->one()
-            ;
-    }
-
-    /**
-     * Return the path to the config file directory
-     *
-     * @return string
-     */
-    public static function configFilePath(): string
-    {
-        return self::CONFIG_FILE_PATH;
+            ->one();
     }
 
     /**
@@ -403,6 +404,16 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
                 'sourceHandle' => $sourceModel->handle,
             ]
         );
+    }
+
+    /**
+     * Return the path to the config file directory
+     *
+     * @return string
+     */
+    public static function configFilePath(): string
+    {
+        return self::CONFIG_FILE_PATH;
     }
 
     /**
@@ -448,23 +459,6 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
         }
 
         return $sourceHandle;
-    }
-
-    /**
-     * Create a MetaBundle in the db for each site, from the passed in $sourceModel
-     *
-     * @param Model $sourceModel
-     */
-    public static function createContentMetaBundle(Model $sourceModel)
-    {
-        /** @var CalendarModel $sourceModel */
-        $sites = Craft::$app->getSites()->getAllSites();
-        /** @var Site $site */
-        foreach ($sites as $site) {
-            $seoElement = self::class;
-            /** @var SeoElementInterface $seoElement */
-            Seomatic::$plugin->metaBundles->createMetaBundleFromSeoElement($seoElement, $sourceModel, $site->id);
-        }
     }
 
     /**
