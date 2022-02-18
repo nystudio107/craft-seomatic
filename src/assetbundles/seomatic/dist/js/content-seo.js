@@ -2,7 +2,7 @@
  * @project        seomatic
  * @name           content-seo.js
  * @author         Andrew Welch
- * @build          Wed Feb 09 2022 21:02:05 GMT+0000 (Coordinated Universal Time)
+ * @build          Fri Feb 18 2022 21:06:31 GMT+0000 (Coordinated Universal Time)
  * @copyright      Copyright (c) 2022 ©2020 nystudio107.com
  *
  */
