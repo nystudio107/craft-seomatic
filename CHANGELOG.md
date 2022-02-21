@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.4.26 - UNRELEASED
+## 3.4.26 - 2022.02.21
 
 ### Changed
 
