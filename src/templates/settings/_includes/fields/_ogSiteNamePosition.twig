@@ -10,21 +10,8 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro ogSiteNamePositionField(metaBundleSettings, metaGlobalVars, pageContext, suffix) %}
+    {% macro ogSiteNamePositionField(textOptions, metaBundleSettings, metaGlobalVars, suffix) %}
         {% import "_includes/forms" as forms %}
-
-        {% set textOptions = {
-            fromCustom: "Custom Position"|t("seomatic"),
-        } %}
-        {% if pageContext == "content" %}
-            {% set textOptions = { sameAsGlobal: "Same as Global Facebook OpenGraph Site Name Position"|t("seomatic"), } | merge(textOptions) %}
-        {% endif %}
-
-        {% set customPositions = {
-            before: "Before"|t("seomatic"),
-            after: "After"|t("seomatic"),
-            none: "None"|t("seomatic"),
-        } %}
 
         <div class="instructions">
             {{ "Where the Site Name is placed relative to the Facebook OpenGraph Title in the &lt;og:title&gt; tag"|t("seomatic") |raw }}
@@ -47,7 +34,11 @@
                 {{ forms.selectField({
                     id: "ogSiteNamePosition" ~ suffix,
                     name: "ogSiteNamePosition",
-                    options: customPositions,
+                    options: {
+                        before: "Before"|t("seomatic"),
+                        after: "After"|t("seomatic"),
+                        none: "None"|t("seomatic"),
+                    },
                     value: metaGlobalVars.ogSiteNamePosition,
                     warning: false,
                     errors: metaGlobalVars.getErrors("ogSiteNamePosition"),
@@ -56,11 +47,19 @@
         {% endnamespace %}
     {% endmacro %}
 
+    {% set textOptions = {
+        fromCustom: "Custom Position"|t("seomatic"),
+    } %}
+    {% set textOptions = { sameAsSeo: "Same as Site Name Position"|t("seomatic"), } | merge(textOptions) %}
+    {% if pageContext == "content" %}
+        {% set textOptions = { sameAsGlobal: "Same as Global Facebook OpenGraph Site Name Position"|t("seomatic"), } | merge(textOptions) %}
+    {% endif %}
+    
     {% block inheritedValues %}
-        {{ _self.ogSiteNamePositionField(inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, pageContext, "-inherited") }}
+        {{ _self.ogSiteNamePositionField(textOptions, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.ogSiteNamePositionField(metaBundleSettings, metaGlobalVars, pageContext, "") }}
+        {{ _self.ogSiteNamePositionField(textOptions, metaBundleSettings, metaGlobalVars, "") }}
     {% endblock %}
 {% endembed %}

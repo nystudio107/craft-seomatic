@@ -1,6 +1,25 @@
 # SEOmatic Changelog
 
-## 3.4.25 - UNRELEASED
+## 3.4.26 - UNRELEASED
+
+### Changed
+
+* Add `parseEnv()` to the `humans.txt` template to parse environment
+  variables/aliases ([#1069](https://github.com/nystudio107/craft-seomatic/issues/1069))
+
+### Fixed
+
+* Fixed an issue where "Same as Site Name Position" did not appear on the Global -> Facebook settings for the Facebook
+  OpenGraph Site Name Position Source setting ([#1066](https://github.com/nystudio107/craft-seomatic/issues/1066))
+* If paginated URLs are not using a query string, strip the query string from the canonical URL
+* Handle an edge-case where a migration didn't work properly to
+  add `SECURITY_TXT_HANDLE` ([#1065](https://github.com/nystudio107/craft-seomatic/issues/1065))
+* Explicitly typecast `limit` to `(int)` for Solspace Calendar
+  queries ([#1064](https://github.com/nystudio107/craft-seomatic/issues/1064))
+* Fixed an issue where hitting Command-S wouldn't save any changes to edited template code (but clicking on the Save
+  button would) ([#1068](https://github.com/nystudio107/craft-seomatic/issues/1068))
+
+## 3.4.25 - 2022.02.11
 
 ### Fixed
 
