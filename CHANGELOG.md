@@ -2,6 +2,11 @@
 
 ## 3.4.26 - UNRELEASED
 
+### Changed
+
+* Add `parseEnv()` to the `humans.txt` template to parse environment
+  variables/aliases ([#1069](https://github.com/nystudio107/craft-seomatic/issues/1069))
+
 ### Fixed
 
 * Fixed an issue where "Same as Site Name Position" did not appear on the Global -> Facebook settings for the Facebook
