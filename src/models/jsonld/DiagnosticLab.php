@@ -92,17 +92,6 @@ class DiagnosticLab extends MedicalOrganization
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A diagnostic test or procedure offered by this lab.
-     *
-     * @var MedicalTest [schema.org types: MedicalTest]
-     */
-    public $availableTest;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -112,6 +101,8 @@ class DiagnosticLab extends MedicalOrganization
         'availableTest'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -120,7 +111,6 @@ class DiagnosticLab extends MedicalOrganization
     static protected $_schemaPropertyExpectedTypes = [
         'availableTest' => ['MedicalTest']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -129,7 +119,6 @@ class DiagnosticLab extends MedicalOrganization
     static protected $_schemaPropertyDescriptions = [
         'availableTest' => 'A diagnostic test or procedure offered by this lab.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -137,7 +126,6 @@ class DiagnosticLab extends MedicalOrganization
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -145,14 +133,20 @@ class DiagnosticLab extends MedicalOrganization
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A diagnostic test or procedure offered by this lab.
+     *
+     * @var MedicalTest [schema.org types: MedicalTest]
+     */
+    public $availableTest;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -182,9 +176,9 @@ class DiagnosticLab extends MedicalOrganization
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

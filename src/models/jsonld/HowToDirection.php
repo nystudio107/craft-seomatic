@@ -92,74 +92,6 @@ class HowToDirection extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A media object representing the circumstances after performing this
-     * direction.
-     *
-     * @var mixed|MediaObject|string [schema.org types: MediaObject, URL]
-     */
-    public $afterMedia;
-
-    /**
-     * A media object representing the circumstances before performing this
-     * direction.
-     *
-     * @var mixed|MediaObject|string [schema.org types: MediaObject, URL]
-     */
-    public $beforeMedia;
-
-    /**
-     * A media object representing the circumstances while performing this
-     * direction.
-     *
-     * @var mixed|MediaObject|string [schema.org types: MediaObject, URL]
-     */
-    public $duringMedia;
-
-    /**
-     * The length of time it takes to perform instructions or a direction (not
-     * including time to prepare the supplies), in ISO 8601 duration format.
-     *
-     * @var Duration [schema.org types: Duration]
-     */
-    public $performTime;
-
-    /**
-     * The length of time it takes to prepare the items to be used in instructions
-     * or a direction, in ISO 8601 duration format.
-     *
-     * @var Duration [schema.org types: Duration]
-     */
-    public $prepTime;
-
-    /**
-     * A sub-property of instrument. A supply consumed when performing
-     * instructions or a direction.
-     *
-     * @var mixed|HowToSupply|string [schema.org types: HowToSupply, Text]
-     */
-    public $supply;
-
-    /**
-     * A sub property of instrument. An object used (but not consumed) when
-     * performing instructions or a direction.
-     *
-     * @var mixed|HowToTool|string [schema.org types: HowToTool, Text]
-     */
-    public $tool;
-
-    /**
-     * The total time required to perform instructions or a direction (including
-     * time to prepare the supplies), in ISO 8601 duration format.
-     *
-     * @var Duration [schema.org types: Duration]
-     */
-    public $totalTime;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -175,23 +107,21 @@ class HowToDirection extends CreativeWork
         'tool',
         'totalTime'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'afterMedia' => ['MediaObject','URL'],
-        'beforeMedia' => ['MediaObject','URL'],
-        'duringMedia' => ['MediaObject','URL'],
+        'afterMedia' => ['MediaObject', 'URL'],
+        'beforeMedia' => ['MediaObject', 'URL'],
+        'duringMedia' => ['MediaObject', 'URL'],
         'performTime' => ['Duration'],
         'prepTime' => ['Duration'],
-        'supply' => ['HowToSupply','Text'],
-        'tool' => ['HowToTool','Text'],
+        'supply' => ['HowToSupply', 'Text'],
+        'tool' => ['HowToTool', 'Text'],
         'totalTime' => ['Duration']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -207,7 +137,6 @@ class HowToDirection extends CreativeWork
         'tool' => 'A sub property of instrument. An object used (but not consumed) when performing instructions or a direction.',
         'totalTime' => 'The total time required to perform instructions or a direction (including time to prepare the supplies), in ISO 8601 duration format.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -215,7 +144,6 @@ class HowToDirection extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -223,14 +151,73 @@ class HowToDirection extends CreativeWork
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A media object representing the circumstances after performing this
+     * direction.
+     *
+     * @var mixed|MediaObject|string [schema.org types: MediaObject, URL]
+     */
+    public $afterMedia;
+    /**
+     * A media object representing the circumstances before performing this
+     * direction.
+     *
+     * @var mixed|MediaObject|string [schema.org types: MediaObject, URL]
+     */
+    public $beforeMedia;
+    /**
+     * A media object representing the circumstances while performing this
+     * direction.
+     *
+     * @var mixed|MediaObject|string [schema.org types: MediaObject, URL]
+     */
+    public $duringMedia;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The length of time it takes to perform instructions or a direction (not
+     * including time to prepare the supplies), in ISO 8601 duration format.
+     *
+     * @var Duration [schema.org types: Duration]
+     */
+    public $performTime;
+    /**
+     * The length of time it takes to prepare the items to be used in instructions
+     * or a direction, in ISO 8601 duration format.
+     *
+     * @var Duration [schema.org types: Duration]
+     */
+    public $prepTime;
+    /**
+     * A sub-property of instrument. A supply consumed when performing
+     * instructions or a direction.
+     *
+     * @var mixed|HowToSupply|string [schema.org types: HowToSupply, Text]
+     */
+    public $supply;
+    /**
+     * A sub property of instrument. An object used (but not consumed) when
+     * performing instructions or a direction.
+     *
+     * @var mixed|HowToTool|string [schema.org types: HowToTool, Text]
+     */
+    public $tool;
+    /**
+     * The total time required to perform instructions or a direction (including
+     * time to prepare the supplies), in ISO 8601 duration format.
+     *
+     * @var Duration [schema.org types: Duration]
+     */
+    public $totalTime;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -260,13 +247,13 @@ class HowToDirection extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['afterMedia','beforeMedia','duringMedia','performTime','prepTime','supply','tool','totalTime'], 'validateJsonSchema'],
+            [['afterMedia', 'beforeMedia', 'duringMedia', 'performTime', 'prepTime', 'supply', 'tool', 'totalTime'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

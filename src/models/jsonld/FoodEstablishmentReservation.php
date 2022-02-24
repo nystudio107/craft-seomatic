@@ -94,7 +94,53 @@ class FoodEstablishmentReservation extends Reservation
 
     // Public Properties
     // =========================================================================
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'endTime',
+        'partySize',
+        'startTime'
+    ];
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'endTime' => ['DateTime', 'Time'],
+        'partySize' => ['Integer', 'QuantitativeValue'],
+        'startTime' => ['DateTime', 'Time']
+    ];
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'endTime' => 'The endTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to end. For actions that span a period of time, when the action was performed. e.g. John wrote a book from January to December. For media, including audio and video, it\'s the time offset of the end of a clip within a larger file. Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.',
+        'partySize' => 'Number of people the reservation should accommodate.',
+        'startTime' => 'The startTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to start. For actions that span a period of time, when the action was performed. e.g. John wrote a book from January to December. For media, including audio and video, it\'s the time offset of the start of a clip within a larger file. Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.'
+    ];
 
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
     /**
      * The endTime of something. For a reserved event or service (e.g.
      * FoodEstablishmentReservation), the time that it is expected to end. For
@@ -108,14 +154,12 @@ class FoodEstablishmentReservation extends Reservation
      * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
      */
     public $endTime;
-
     /**
      * Number of people the reservation should accommodate.
      *
      * @var mixed|int|QuantitativeValue [schema.org types: Integer, QuantitativeValue]
      */
     public $partySize;
-
     /**
      * The startTime of something. For a reserved event or service (e.g.
      * FoodEstablishmentReservation), the time that it is expected to start. For
@@ -130,65 +174,13 @@ class FoodEstablishmentReservation extends Reservation
      */
     public $startTime;
 
-    // Static Protected Properties
-    // =========================================================================
-
-    /**
-     * The Schema.org Property Names
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyNames = [
-        'endTime',
-        'partySize',
-        'startTime'
-    ];
-
-    /**
-     * The Schema.org Property Expected Types
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyExpectedTypes = [
-        'endTime' => ['DateTime','Time'],
-        'partySize' => ['Integer','QuantitativeValue'],
-        'startTime' => ['DateTime','Time']
-    ];
-
-    /**
-     * The Schema.org Property Descriptions
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyDescriptions = [
-        'endTime' => 'The endTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to end. For actions that span a period of time, when the action was performed. e.g. John wrote a book from January to December. For media, including audio and video, it\'s the time offset of the end of a clip within a larger file. Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.',
-        'partySize' => 'Number of people the reservation should accommodate.',
-        'startTime' => 'The startTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to start. For actions that span a period of time, when the action was performed. e.g. John wrote a book from January to December. For media, including audio and video, it\'s the time offset of the start of a clip within a larger file. Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.'
-    ];
-
-    /**
-     * The Schema.org Google Required Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRequiredSchema = [
-    ];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRecommendedSchema = [
-    ];
-
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -218,13 +210,13 @@ class FoodEstablishmentReservation extends Reservation
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['endTime','partySize','startTime'], 'validateJsonSchema'],
+            [['endTime', 'partySize', 'startTime'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

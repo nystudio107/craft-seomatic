@@ -93,26 +93,6 @@ class DDxElement extends MedicalIntangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * One or more alternative conditions considered in the differential diagnosis
-     * process as output of a diagnosis process.
-     *
-     * @var MedicalCondition [schema.org types: MedicalCondition]
-     */
-    public $diagnosis;
-
-    /**
-     * One of a set of signs and symptoms that can be used to distinguish this
-     * diagnosis from others in the differential diagnosis.
-     *
-     * @var MedicalSignOrSymptom [schema.org types: MedicalSignOrSymptom]
-     */
-    public $distinguishingSign;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -122,7 +102,6 @@ class DDxElement extends MedicalIntangible
         'diagnosis',
         'distinguishingSign'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -133,6 +112,8 @@ class DDxElement extends MedicalIntangible
         'distinguishingSign' => ['MedicalSignOrSymptom']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -142,7 +123,6 @@ class DDxElement extends MedicalIntangible
         'diagnosis' => 'One or more alternative conditions considered in the differential diagnosis process as output of a diagnosis process.',
         'distinguishingSign' => 'One of a set of signs and symptoms that can be used to distinguish this diagnosis from others in the differential diagnosis.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -150,7 +130,6 @@ class DDxElement extends MedicalIntangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -158,14 +137,28 @@ class DDxElement extends MedicalIntangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * One or more alternative conditions considered in the differential diagnosis
+     * process as output of a diagnosis process.
+     *
+     * @var MedicalCondition [schema.org types: MedicalCondition]
+     */
+    public $diagnosis;
+    /**
+     * One of a set of signs and symptoms that can be used to distinguish this
+     * diagnosis from others in the differential diagnosis.
+     *
+     * @var MedicalSignOrSymptom [schema.org types: MedicalSignOrSymptom]
+     */
+    public $distinguishingSign;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -195,13 +188,13 @@ class DDxElement extends MedicalIntangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['diagnosis','distinguishingSign'], 'validateJsonSchema'],
+            [['diagnosis', 'distinguishingSign'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -92,18 +92,6 @@ class PodcastSeries extends CreativeWorkSeries
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The URL for a feed, e.g. associated with a podcast series, blog, or series
-     * of date-stamped updates. This is usually RSS or Atom.
-     *
-     * @var mixed|DataFeed|string [schema.org types: DataFeed, URL]
-     */
-    public $webFeed;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -113,15 +101,16 @@ class PodcastSeries extends CreativeWorkSeries
         'webFeed'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'webFeed' => ['DataFeed','URL']
+        'webFeed' => ['DataFeed', 'URL']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -130,7 +119,6 @@ class PodcastSeries extends CreativeWorkSeries
     static protected $_schemaPropertyDescriptions = [
         'webFeed' => 'The URL for a feed, e.g. associated with a podcast series, blog, or series of date-stamped updates. This is usually RSS or Atom.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -138,7 +126,6 @@ class PodcastSeries extends CreativeWorkSeries
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -146,14 +133,21 @@ class PodcastSeries extends CreativeWorkSeries
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The URL for a feed, e.g. associated with a podcast series, blog, or series
+     * of date-stamped updates. This is usually RSS or Atom.
+     *
+     * @var mixed|DataFeed|string [schema.org types: DataFeed, URL]
+     */
+    public $webFeed;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -183,9 +177,9 @@ class PodcastSeries extends CreativeWorkSeries
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

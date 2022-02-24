@@ -91,25 +91,6 @@ class Audiobook extends Book
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The duration of the item (movie, audio recording, event, etc.) in ISO 8601
-     * date format.
-     *
-     * @var Duration [schema.org types: Duration]
-     */
-    public $duration;
-
-    /**
-     * A person who reads (performs) the audiobook.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $readBy;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -119,7 +100,6 @@ class Audiobook extends Book
         'duration',
         'readBy'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -130,6 +110,8 @@ class Audiobook extends Book
         'readBy' => ['Person']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -139,7 +121,6 @@ class Audiobook extends Book
         'duration' => 'The duration of the item (movie, audio recording, event, etc.) in ISO 8601 date format.',
         'readBy' => 'A person who reads (performs) the audiobook.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -147,7 +128,6 @@ class Audiobook extends Book
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -155,14 +135,27 @@ class Audiobook extends Book
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The duration of the item (movie, audio recording, event, etc.) in ISO 8601
+     * date format.
+     *
+     * @var Duration [schema.org types: Duration]
+     */
+    public $duration;
+    /**
+     * A person who reads (performs) the audiobook.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $readBy;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -192,13 +185,13 @@ class Audiobook extends Book
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['duration','readBy'], 'validateJsonSchema'],
+            [['duration', 'readBy'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -93,80 +93,6 @@ class VideoGame extends SoftwareApplication
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * An actor, e.g. in tv, radio, movie, video games etc., or in an event.
-     * Actors can be associated with individual items or with a series, episode,
-     * clip. Supersedes actors.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $actor;
-
-    /**
-     * Cheat codes to the game.
-     *
-     * @var CreativeWork [schema.org types: CreativeWork]
-     */
-    public $cheatCode;
-
-    /**
-     * A director of e.g. tv, radio, movie, video gaming etc. content, or of an
-     * event. Directors can be associated with individual items or with a series,
-     * episode, clip. Supersedes directors.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $director;
-
-    /**
-     * The electronic systems used to play video games.
-     *
-     * @var mixed|string|Thing|string [schema.org types: Text, Thing, URL]
-     */
-    public $gamePlatform;
-
-    /**
-     * The server on which it is possible to play the game. Inverse property:
-     * game.
-     *
-     * @var GameServer [schema.org types: GameServer]
-     */
-    public $gameServer;
-
-    /**
-     * Links to tips, tactics, etc.
-     *
-     * @var CreativeWork [schema.org types: CreativeWork]
-     */
-    public $gameTip;
-
-    /**
-     * The composer of the soundtrack.
-     *
-     * @var mixed|MusicGroup|Person [schema.org types: MusicGroup, Person]
-     */
-    public $musicBy;
-
-    /**
-     * Indicates whether this game is multi-player, co-op or single-player. The
-     * game can be marked as multi-player, co-op and single-player at the same
-     * time.
-     *
-     * @var GamePlayMode [schema.org types: GamePlayMode]
-     */
-    public $playMode;
-
-    /**
-     * The trailer of a movie or tv/radio series, season, episode, etc.
-     *
-     * @var VideoObject [schema.org types: VideoObject]
-     */
-    public $trailer;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -183,7 +109,6 @@ class VideoGame extends SoftwareApplication
         'playMode',
         'trailer'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -193,14 +118,13 @@ class VideoGame extends SoftwareApplication
         'actor' => ['Person'],
         'cheatCode' => ['CreativeWork'],
         'director' => ['Person'],
-        'gamePlatform' => ['Text','Thing','URL'],
+        'gamePlatform' => ['Text', 'Thing', 'URL'],
         'gameServer' => ['GameServer'],
         'gameTip' => ['CreativeWork'],
-        'musicBy' => ['MusicGroup','Person'],
+        'musicBy' => ['MusicGroup', 'Person'],
         'playMode' => ['GamePlayMode'],
         'trailer' => ['VideoObject']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -217,7 +141,6 @@ class VideoGame extends SoftwareApplication
         'playMode' => 'Indicates whether this game is multi-player, co-op or single-player. The game can be marked as multi-player, co-op and single-player at the same time.',
         'trailer' => 'The trailer of a movie or tv/radio series, season, episode, etc.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -225,7 +148,6 @@ class VideoGame extends SoftwareApplication
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -233,14 +155,78 @@ class VideoGame extends SoftwareApplication
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * An actor, e.g. in tv, radio, movie, video games etc., or in an event.
+     * Actors can be associated with individual items or with a series, episode,
+     * clip. Supersedes actors.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $actor;
+    /**
+     * Cheat codes to the game.
+     *
+     * @var CreativeWork [schema.org types: CreativeWork]
+     */
+    public $cheatCode;
+    /**
+     * A director of e.g. tv, radio, movie, video gaming etc. content, or of an
+     * event. Directors can be associated with individual items or with a series,
+     * episode, clip. Supersedes directors.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $director;
+    /**
+     * The electronic systems used to play video games.
+     *
+     * @var mixed|string|Thing|string [schema.org types: Text, Thing, URL]
+     */
+    public $gamePlatform;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The server on which it is possible to play the game. Inverse property:
+     * game.
+     *
+     * @var GameServer [schema.org types: GameServer]
+     */
+    public $gameServer;
+    /**
+     * Links to tips, tactics, etc.
+     *
+     * @var CreativeWork [schema.org types: CreativeWork]
+     */
+    public $gameTip;
+    /**
+     * The composer of the soundtrack.
+     *
+     * @var mixed|MusicGroup|Person [schema.org types: MusicGroup, Person]
+     */
+    public $musicBy;
+    /**
+     * Indicates whether this game is multi-player, co-op or single-player. The
+     * game can be marked as multi-player, co-op and single-player at the same
+     * time.
+     *
+     * @var GamePlayMode [schema.org types: GamePlayMode]
+     */
+    public $playMode;
+    /**
+     * The trailer of a movie or tv/radio series, season, episode, etc.
+     *
+     * @var VideoObject [schema.org types: VideoObject]
+     */
+    public $trailer;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -270,13 +256,13 @@ class VideoGame extends SoftwareApplication
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['actor','cheatCode','director','gamePlatform','gameServer','gameTip','musicBy','playMode','trailer'], 'validateJsonSchema'],
+            [['actor', 'cheatCode', 'director', 'gamePlatform', 'gameServer', 'gameTip', 'musicBy', 'playMode', 'trailer'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

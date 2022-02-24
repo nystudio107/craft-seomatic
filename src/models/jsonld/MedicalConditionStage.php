@@ -92,24 +92,6 @@ class MedicalConditionStage extends MedicalIntangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The stage represented as a number, e.g. 3.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $stageAsNumber;
-
-    /**
-     * The substage, e.g. 'a' for Stage IIIa.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $subStageSuffix;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -119,7 +101,6 @@ class MedicalConditionStage extends MedicalIntangible
         'stageAsNumber',
         'subStageSuffix'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -130,6 +111,8 @@ class MedicalConditionStage extends MedicalIntangible
         'subStageSuffix' => ['Text']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -139,7 +122,6 @@ class MedicalConditionStage extends MedicalIntangible
         'stageAsNumber' => 'The stage represented as a number, e.g. 3.',
         'subStageSuffix' => 'The substage, e.g. \'a\' for Stage IIIa.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -147,7 +129,6 @@ class MedicalConditionStage extends MedicalIntangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -155,14 +136,26 @@ class MedicalConditionStage extends MedicalIntangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The stage represented as a number, e.g. 3.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $stageAsNumber;
+    /**
+     * The substage, e.g. 'a' for Stage IIIa.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $subStageSuffix;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -192,13 +185,13 @@ class MedicalConditionStage extends MedicalIntangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['stageAsNumber','subStageSuffix'], 'validateJsonSchema'],
+            [['stageAsNumber', 'subStageSuffix'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

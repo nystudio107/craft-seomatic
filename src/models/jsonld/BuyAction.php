@@ -93,18 +93,6 @@ class BuyAction extends TradeAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * An entity which offers (sells / leases / lends / loans) the services /
-     * goods. A seller may also be a provider. Supersedes merchant, vendor.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $seller;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -114,15 +102,16 @@ class BuyAction extends TradeAction
         'seller'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'seller' => ['Organization','Person']
+        'seller' => ['Organization', 'Person']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -131,7 +120,6 @@ class BuyAction extends TradeAction
     static protected $_schemaPropertyDescriptions = [
         'seller' => 'An entity which offers (sells / leases / lends / loans) the services / goods. A seller may also be a provider. Supersedes merchant, vendor.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -139,7 +127,6 @@ class BuyAction extends TradeAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -147,14 +134,21 @@ class BuyAction extends TradeAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * An entity which offers (sells / leases / lends / loans) the services /
+     * goods. A seller may also be a provider. Supersedes merchant, vendor.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $seller;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -184,9 +178,9 @@ class BuyAction extends TradeAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

@@ -91,81 +91,6 @@ class MusicComposition extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The person or organization who wrote a composition, or who is the composer
-     * of a work performed at some event.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $composer;
-
-    /**
-     * The date and place the work was first performed.
-     *
-     * @var Event [schema.org types: Event]
-     */
-    public $firstPerformance;
-
-    /**
-     * Smaller compositions included in this work (e.g. a movement in a symphony).
-     *
-     * @var MusicComposition [schema.org types: MusicComposition]
-     */
-    public $includedComposition;
-
-    /**
-     * The International Standard Musical Work Code for the composition.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $iswcCode;
-
-    /**
-     * The person who wrote the words.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $lyricist;
-
-    /**
-     * The words in the song.
-     *
-     * @var CreativeWork [schema.org types: CreativeWork]
-     */
-    public $lyrics;
-
-    /**
-     * An arrangement derived from the composition.
-     *
-     * @var MusicComposition [schema.org types: MusicComposition]
-     */
-    public $musicArrangement;
-
-    /**
-     * The type of composition (e.g. overture, sonata, symphony, etc.).
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $musicCompositionForm;
-
-    /**
-     * The key, mode, or scale this composition uses.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $musicalKey;
-
-    /**
-     * An audio recording of the work. Inverse property: recordingOf.
-     *
-     * @var MusicRecording [schema.org types: MusicRecording]
-     */
-    public $recordedAs;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -183,14 +108,13 @@ class MusicComposition extends CreativeWork
         'musicalKey',
         'recordedAs'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'composer' => ['Organization','Person'],
+        'composer' => ['Organization', 'Person'],
         'firstPerformance' => ['Event'],
         'includedComposition' => ['MusicComposition'],
         'iswcCode' => ['Text'],
@@ -201,7 +125,6 @@ class MusicComposition extends CreativeWork
         'musicalKey' => ['Text'],
         'recordedAs' => ['MusicRecording']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -219,7 +142,6 @@ class MusicComposition extends CreativeWork
         'musicalKey' => 'The key, mode, or scale this composition uses.',
         'recordedAs' => 'An audio recording of the work. Inverse property: recordingOf.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -227,7 +149,6 @@ class MusicComposition extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -235,14 +156,78 @@ class MusicComposition extends CreativeWork
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The person or organization who wrote a composition, or who is the composer
+     * of a work performed at some event.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $composer;
+    /**
+     * The date and place the work was first performed.
+     *
+     * @var Event [schema.org types: Event]
+     */
+    public $firstPerformance;
+    /**
+     * Smaller compositions included in this work (e.g. a movement in a symphony).
+     *
+     * @var MusicComposition [schema.org types: MusicComposition]
+     */
+    public $includedComposition;
+    /**
+     * The International Standard Musical Work Code for the composition.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $iswcCode;
+    /**
+     * The person who wrote the words.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $lyricist;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The words in the song.
+     *
+     * @var CreativeWork [schema.org types: CreativeWork]
+     */
+    public $lyrics;
+    /**
+     * An arrangement derived from the composition.
+     *
+     * @var MusicComposition [schema.org types: MusicComposition]
+     */
+    public $musicArrangement;
+    /**
+     * The type of composition (e.g. overture, sonata, symphony, etc.).
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $musicCompositionForm;
+    /**
+     * The key, mode, or scale this composition uses.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $musicalKey;
+    /**
+     * An audio recording of the work. Inverse property: recordingOf.
+     *
+     * @var MusicRecording [schema.org types: MusicRecording]
+     */
+    public $recordedAs;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -272,13 +257,13 @@ class MusicComposition extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['composer','firstPerformance','includedComposition','iswcCode','lyricist','lyrics','musicArrangement','musicCompositionForm','musicalKey','recordedAs'], 'validateJsonSchema'],
+            [['composer', 'firstPerformance', 'includedComposition', 'iswcCode', 'lyricist', 'lyrics', 'musicArrangement', 'musicCompositionForm', 'musicalKey', 'recordedAs'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -93,25 +93,6 @@ class RentAction extends TradeAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A sub property of participant. The owner of the real estate property.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $landlord;
-
-    /**
-     * A sub property of participant. The real estate agent involved in the
-     * action.
-     *
-     * @var RealEstateAgent [schema.org types: RealEstateAgent]
-     */
-    public $realEstateAgent;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -121,17 +102,18 @@ class RentAction extends TradeAction
         'landlord',
         'realEstateAgent'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'landlord' => ['Organization','Person'],
+        'landlord' => ['Organization', 'Person'],
         'realEstateAgent' => ['RealEstateAgent']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -141,7 +123,6 @@ class RentAction extends TradeAction
         'landlord' => 'A sub property of participant. The owner of the real estate property.',
         'realEstateAgent' => 'A sub property of participant. The real estate agent involved in the action.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -149,7 +130,6 @@ class RentAction extends TradeAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -157,14 +137,27 @@ class RentAction extends TradeAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A sub property of participant. The owner of the real estate property.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $landlord;
+    /**
+     * A sub property of participant. The real estate agent involved in the
+     * action.
+     *
+     * @var RealEstateAgent [schema.org types: RealEstateAgent]
+     */
+    public $realEstateAgent;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -194,13 +187,13 @@ class RentAction extends TradeAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['landlord','realEstateAgent'], 'validateJsonSchema'],
+            [['landlord', 'realEstateAgent'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -93,53 +93,6 @@ class MedicalProcedure extends MedicalEntity
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Location in the body of the anatomical structure.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $bodyLocation;
-
-    /**
-     * Typical or recommended followup care after the procedure is performed.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $followup;
-
-    /**
-     * How the procedure is performed.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $howPerformed;
-
-    /**
-     * Typical preparation that a patient must undergo before having the procedure
-     * performed.
-     *
-     * @var mixed|MedicalEntity|string [schema.org types: MedicalEntity, Text]
-     */
-    public $preparation;
-
-    /**
-     * The type of procedure, for example Surgical, Noninvasive, or Percutaneous.
-     *
-     * @var MedicalProcedureType [schema.org types: MedicalProcedureType]
-     */
-    public $procedureType;
-
-    /**
-     * The status of the study (enumerated).
-     *
-     * @var mixed|EventStatusType|MedicalStudyStatus|string [schema.org types: EventStatusType, MedicalStudyStatus, Text]
-     */
-    public $status;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -153,7 +106,6 @@ class MedicalProcedure extends MedicalEntity
         'procedureType',
         'status'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -163,11 +115,10 @@ class MedicalProcedure extends MedicalEntity
         'bodyLocation' => ['Text'],
         'followup' => ['Text'],
         'howPerformed' => ['Text'],
-        'preparation' => ['MedicalEntity','Text'],
+        'preparation' => ['MedicalEntity', 'Text'],
         'procedureType' => ['MedicalProcedureType'],
-        'status' => ['EventStatusType','MedicalStudyStatus','Text']
+        'status' => ['EventStatusType', 'MedicalStudyStatus', 'Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -181,7 +132,6 @@ class MedicalProcedure extends MedicalEntity
         'procedureType' => 'The type of procedure, for example Surgical, Noninvasive, or Percutaneous.',
         'status' => 'The status of the study (enumerated).'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -189,7 +139,6 @@ class MedicalProcedure extends MedicalEntity
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -197,14 +146,54 @@ class MedicalProcedure extends MedicalEntity
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Location in the body of the anatomical structure.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $bodyLocation;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * Typical or recommended followup care after the procedure is performed.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $followup;
+    /**
+     * How the procedure is performed.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $howPerformed;
+    /**
+     * Typical preparation that a patient must undergo before having the procedure
+     * performed.
+     *
+     * @var mixed|MedicalEntity|string [schema.org types: MedicalEntity, Text]
+     */
+    public $preparation;
+    /**
+     * The type of procedure, for example Surgical, Noninvasive, or Percutaneous.
+     *
+     * @var MedicalProcedureType [schema.org types: MedicalProcedureType]
+     */
+    public $procedureType;
+    /**
+     * The status of the study (enumerated).
+     *
+     * @var mixed|EventStatusType|MedicalStudyStatus|string [schema.org types: EventStatusType, MedicalStudyStatus, Text]
+     */
+    public $status;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -234,13 +223,13 @@ class MedicalProcedure extends MedicalEntity
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['bodyLocation','followup','howPerformed','preparation','procedureType','status'], 'validateJsonSchema'],
+            [['bodyLocation', 'followup', 'howPerformed', 'preparation', 'procedureType', 'status'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

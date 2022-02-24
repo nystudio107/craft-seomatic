@@ -91,18 +91,6 @@ class AuthorizeAction extends AllocateAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A sub property of participant. The participant who is at the receiving end
-     * of the action.
-     *
-     * @var mixed|Audience|ContactPoint|Organization|Person [schema.org types: Audience, ContactPoint, Organization, Person]
-     */
-    public $recipient;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -112,15 +100,16 @@ class AuthorizeAction extends AllocateAction
         'recipient'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'recipient' => ['Audience','ContactPoint','Organization','Person']
+        'recipient' => ['Audience', 'ContactPoint', 'Organization', 'Person']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -129,7 +118,6 @@ class AuthorizeAction extends AllocateAction
     static protected $_schemaPropertyDescriptions = [
         'recipient' => 'A sub property of participant. The participant who is at the receiving end of the action.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -137,7 +125,6 @@ class AuthorizeAction extends AllocateAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -145,14 +132,21 @@ class AuthorizeAction extends AllocateAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A sub property of participant. The participant who is at the receiving end
+     * of the action.
+     *
+     * @var mixed|Audience|ContactPoint|Organization|Person [schema.org types: Audience, ContactPoint, Organization, Person]
+     */
+    public $recipient;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -182,9 +176,9 @@ class AuthorizeAction extends AllocateAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

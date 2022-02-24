@@ -92,18 +92,6 @@ class MobileApplication extends SoftwareApplication
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Specifies specific carrier(s) requirements for the application (e.g. an
-     * application may only work on a specific carrier network).
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $carrierRequirements;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -113,6 +101,8 @@ class MobileApplication extends SoftwareApplication
         'carrierRequirements'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -121,7 +111,6 @@ class MobileApplication extends SoftwareApplication
     static protected $_schemaPropertyExpectedTypes = [
         'carrierRequirements' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -130,7 +119,6 @@ class MobileApplication extends SoftwareApplication
     static protected $_schemaPropertyDescriptions = [
         'carrierRequirements' => 'Specifies specific carrier(s) requirements for the application (e.g. an application may only work on a specific carrier network).'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -138,7 +126,6 @@ class MobileApplication extends SoftwareApplication
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -146,14 +133,21 @@ class MobileApplication extends SoftwareApplication
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Specifies specific carrier(s) requirements for the application (e.g. an
+     * application may only work on a specific carrier network).
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $carrierRequirements;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -183,9 +177,9 @@ class MobileApplication extends SoftwareApplication
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

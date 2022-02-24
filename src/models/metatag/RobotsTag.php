@@ -40,7 +40,7 @@ class RobotsTag extends MetaTag
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         // Handle a bug where 'content' could be permanently set to 'none'
         if ($this->content === 'none') {
@@ -52,25 +52,25 @@ class RobotsTag extends MetaTag
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
             // Robots tags have specific content attributes
             [
                 'content', 'in', 'range' => [
-                    'all',
-                    'index',
-                    'noindex',
-                    'follow',
-                    'nofollow',
-                    'none',
-                    'noodp',
-                    'noarchive',
-                    'nosnippet',
-                    'noimageindex',
-                    'nocache',
-                ], 'on' => ['warning'],
+                'all',
+                'index',
+                'noindex',
+                'follow',
+                'nofollow',
+                'none',
+                'noodp',
+                'noarchive',
+                'nosnippet',
+                'noimageindex',
+                'nocache',
+            ], 'on' => ['warning'],
             ],
         ]);
 

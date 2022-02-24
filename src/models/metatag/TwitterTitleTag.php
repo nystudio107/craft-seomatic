@@ -11,10 +11,10 @@
 
 namespace nystudio107\seomatic\models\metatag;
 
-use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\helpers\Text as TextHelper;
 use nystudio107\seomatic\models\MetaTag;
+use nystudio107\seomatic\Seomatic;
 
 /**
  * @author    nystudio107
@@ -55,7 +55,7 @@ class TwitterTitleTag extends MetaTag
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
     }
@@ -63,7 +63,7 @@ class TwitterTitleTag extends MetaTag
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
@@ -77,7 +77,7 @@ class TwitterTitleTag extends MetaTag
     /**
      * @inheritdoc
      */
-    public function fields()
+    public function fields(): array
     {
         $fields = parent::fields();
         switch ($this->scenario) {
@@ -125,7 +125,7 @@ class TwitterTitleTag extends MetaTag
                     $suffix = '';
                     break;
             }
-            $lengthAdjust = mb_strlen($prefix.$suffix);
+            $lengthAdjust = mb_strlen($prefix . $suffix);
             // Truncate the twitter:title tag content
             $truncLen = Seomatic::$settings->maxTitleLength - $lengthAdjust;
             if ($truncLen < 0) {
@@ -138,7 +138,7 @@ class TwitterTitleTag extends MetaTag
                     '…'
                 );
             }
-            $data['content'] = $prefix.$data['content'].$suffix;
+            $data['content'] = $prefix . $data['content'] . $suffix;
         }
 
         return $shouldRender;

@@ -9,19 +9,6 @@
 
 namespace nystudio107\seomatic\fields;
 
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
-use nystudio107\seomatic\helpers\ArrayHelper;
-use nystudio107\seomatic\helpers\Config as ConfigHelper;
-use nystudio107\seomatic\helpers\Field as FieldHelper;
-use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
-use nystudio107\seomatic\helpers\Migration as MigrationHelper;
-use nystudio107\seomatic\helpers\PullField as PullFieldHelper;
-use nystudio107\seomatic\helpers\Schema as SchemaHelper;
-use nystudio107\seomatic\models\MetaBundle;
-use nystudio107\seomatic\seoelements\SeoEntry;
-use nystudio107\seomatic\services\MetaContainers;
-
 use Craft;
 use craft\base\Element;
 use craft\base\ElementInterface;
@@ -30,10 +17,26 @@ use craft\base\PreviewableFieldInterface;
 use craft\elements\Asset;
 use craft\helpers\Json;
 use craft\helpers\StringHelper;
-
+use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
+use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\helpers\Config as ConfigHelper;
+use nystudio107\seomatic\helpers\Field as FieldHelper;
+use nystudio107\seomatic\helpers\Migration as MigrationHelper;
+use nystudio107\seomatic\helpers\PullField as PullFieldHelper;
+use nystudio107\seomatic\helpers\Schema as SchemaHelper;
+use nystudio107\seomatic\models\MetaBundle;
+use nystudio107\seomatic\seoelements\SeoEntry;
+use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\services\MetaContainers;
+use ReflectionClass;
+use ReflectionException;
 use yii\base\InvalidConfigException;
 use yii\caching\TagDependency;
 use yii\db\Schema;
+use function in_array;
+use function is_array;
+use function is_object;
+use function is_string;
 
 /**
  * @author    nystudio107
@@ -120,7 +123,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
@@ -179,15 +182,15 @@ class SeoSettings extends Field implements PreviewableFieldInterface
         $config = [];
         // Handle incoming values potentially being JSON, an array, or an object
         if (!empty($value)) {
-            if (\is_string($value)) {
+            if (is_string($value)) {
                 // Decode any html entities
                 $value = html_entity_decode($value, ENT_NOQUOTES, 'UTF-8');
                 $config = Json::decodeIfJson($value);
             }
-            if (\is_array($value)) {
+            if (is_array($value)) {
                 $config = $value;
             }
-            if (\is_object($value) && $value instanceof MetaBundle) {
+            if (is_object($value) && $value instanceof MetaBundle) {
                 $config = $value->toArray();
             }
         } else {
@@ -203,8 +206,8 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             /** @var Element $element */
             if ($element !== null) {
                 try {
-                    $reflector = new \ReflectionClass($element);
-                } catch (\ReflectionException $e) {
+                    $reflector = new ReflectionClass($element);
+                } catch (ReflectionException $e) {
                     $reflector = null;
                     Craft::error($e->getMessage(), __METHOD__);
                 }
@@ -228,11 +231,12 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             }
             // Handle the mainEntityOfPage
             $mainEntity = '';
-            if (\in_array('mainEntityOfPage', $this->generalEnabledFields, false) &&
+            if (in_array('mainEntityOfPage', $this->generalEnabledFields, false) &&
                 !empty($config['metaBundleSettings'])) {
                 $mainEntity = SchemaHelper::getSpecificEntityType($config['metaBundleSettings'], true);
             }
             if (!empty($config['metaGlobalVars'])) {
+                /* @var array $config */
                 $config['metaGlobalVars']['mainEntityOfPage'] = $mainEntity;
             }
         }
@@ -252,13 +256,13 @@ class SeoSettings extends Field implements PreviewableFieldInterface
     {
         $value = parent::serializeValue($value, $element);
         if (!Craft::$app->getDb()->getSupportsMb4()) {
-            if (\is_string($value)) {
+            if (is_string($value)) {
                 // Encode any 4-byte UTF-8 characters.
                 $value = StringHelper::encodeMb4($value);
             }
-            if (\is_array($value)) {
+            if (is_array($value)) {
                 array_walk_recursive($value, function (&$arrayValue, $arrayKey) {
-                    if ($arrayValue !== null && \is_string($arrayValue)) {
+                    if ($arrayValue !== null && is_string($arrayValue)) {
                         $arrayValue = StringHelper::encodeMb4($arrayValue);
                     }
                 });
@@ -271,7 +275,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function getSettingsHtml()
+    public function getSettingsHtml(): ?string
     {
         $variables = [];
         // JS/CSS modules
@@ -395,7 +399,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
         if ($element !== null && $element->uri !== null) {
             $siteId = $element->siteId;
             $uri = $element->uri;
-            $cacheKey = self::CACHE_KEY.$uri.$siteId.$this->elementDisplayPreviewType;
+            $cacheKey = self::CACHE_KEY . $uri . $siteId . $this->elementDisplayPreviewType;
             $metaBundleSourceType = Seomatic::$plugin->seoElements->getMetaBundleTypeFromElement($element);
             $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundleSourceType);
             $metaBundleSourceType = SeoEntry::getMetaBundleType();
@@ -406,14 +410,14 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             $dependency = new TagDependency([
                 'tags' => [
                     MetaContainers::GLOBAL_METACONTAINER_CACHE_TAG,
-                    MetaContainers::METACONTAINER_CACHE_TAG.$metaBundleSourceId.$metaBundleSourceType.$siteId,
-                    MetaContainers::METACONTAINER_CACHE_TAG.$uri.$siteId,
+                    MetaContainers::METACONTAINER_CACHE_TAG . $metaBundleSourceId . $metaBundleSourceType . $siteId,
+                    MetaContainers::METACONTAINER_CACHE_TAG . $uri . $siteId,
                 ],
             ]);
             $cache = Craft::$app->getCache();
             $cacheDuration = null;
             $html = $cache->getOrSet(
-                self::CACHE_KEY.$cacheKey,
+                self::CACHE_KEY . $cacheKey,
                 function () use ($uri, $siteId, $element) {
                     Seomatic::$plugin->metaContainers->previewMetaContainers($uri, $siteId, true);
                     $variables = [
@@ -446,16 +450,17 @@ class SeoSettings extends Field implements PreviewableFieldInterface
 
     /**
      * @param Element $element
-     * @param string  $groupName
-     * @param array   $variables
+     * @param string $groupName
+     * @param array $variables
      */
     protected function setContentFieldSourceVariables(
         Element $element,
-        string $groupName,
-        array &$variables
-    ) {
+        string  $groupName,
+        array   &$variables
+    )
+    {
         $variables['textFieldSources'] = array_merge(
-            ['entryGroup' => ['optgroup' => $groupName.' Fields'], 'title' => 'Title'],
+            ['entryGroup' => ['optgroup' => $groupName . ' Fields'], 'title' => 'Title'],
             FieldHelper::fieldsOfTypeFromElement(
                 $element,
                 FieldHelper::TEXT_FIELD_CLASS_KEY,
@@ -463,7 +468,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             )
         );
         $variables['assetFieldSources'] = array_merge(
-            ['entryGroup' => ['optgroup' => $groupName.' Fields']],
+            ['entryGroup' => ['optgroup' => $groupName . ' Fields']],
             FieldHelper::fieldsOfTypeFromElement(
                 $element,
                 FieldHelper::ASSET_FIELD_CLASS_KEY,

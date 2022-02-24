@@ -93,18 +93,6 @@ class SellAction extends TradeAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A sub property of participant. The participant/person/organization that
-     * bought the object.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $buyer;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -114,6 +102,8 @@ class SellAction extends TradeAction
         'buyer'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -122,7 +112,6 @@ class SellAction extends TradeAction
     static protected $_schemaPropertyExpectedTypes = [
         'buyer' => ['Person']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -131,7 +120,6 @@ class SellAction extends TradeAction
     static protected $_schemaPropertyDescriptions = [
         'buyer' => 'A sub property of participant. The participant/person/organization that bought the object.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -139,7 +127,6 @@ class SellAction extends TradeAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -147,14 +134,21 @@ class SellAction extends TradeAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A sub property of participant. The participant/person/organization that
+     * bought the object.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $buyer;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -184,9 +178,9 @@ class SellAction extends TradeAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

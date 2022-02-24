@@ -91,72 +91,6 @@ class VideoObject extends MediaObject
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * An actor, e.g. in tv, radio, movie, video games etc., or in an event.
-     * Actors can be associated with individual items or with a series, episode,
-     * clip. Supersedes actors.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $actor;
-
-    /**
-     * The caption for this object. For downloadable machine formats (closed
-     * caption, subtitles etc.) use MediaObject and indicate the encodingFormat.
-     *
-     * @var mixed|MediaObject|string [schema.org types: MediaObject, Text]
-     */
-    public $caption;
-
-    /**
-     * A director of e.g. tv, radio, movie, video gaming etc. content, or of an
-     * event. Directors can be associated with individual items or with a series,
-     * episode, clip. Supersedes directors.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $director;
-
-    /**
-     * The composer of the soundtrack.
-     *
-     * @var mixed|MusicGroup|Person [schema.org types: MusicGroup, Person]
-     */
-    public $musicBy;
-
-    /**
-     * Thumbnail image for an image or video.
-     *
-     * @var ImageObject [schema.org types: ImageObject]
-     */
-    public $thumbnail;
-
-    /**
-     * If this MediaObject is an AudioObject or VideoObject, the transcript of
-     * that object.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $transcript;
-
-    /**
-     * The frame size of the video.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $videoFrameSize;
-
-    /**
-     * The quality of the video.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $videoQuality;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -172,7 +106,6 @@ class VideoObject extends MediaObject
         'videoFrameSize',
         'videoQuality'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -180,15 +113,14 @@ class VideoObject extends MediaObject
      */
     static protected $_schemaPropertyExpectedTypes = [
         'actor' => ['Person'],
-        'caption' => ['MediaObject','Text'],
+        'caption' => ['MediaObject', 'Text'],
         'director' => ['Person'],
-        'musicBy' => ['MusicGroup','Person'],
+        'musicBy' => ['MusicGroup', 'Person'],
         'thumbnail' => ['ImageObject'],
         'transcript' => ['Text'],
         'videoFrameSize' => ['Text'],
         'videoQuality' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -204,7 +136,6 @@ class VideoObject extends MediaObject
         'videoFrameSize' => 'The frame size of the video.',
         'videoQuality' => 'The quality of the video.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -212,7 +143,6 @@ class VideoObject extends MediaObject
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -220,14 +150,71 @@ class VideoObject extends MediaObject
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * An actor, e.g. in tv, radio, movie, video games etc., or in an event.
+     * Actors can be associated with individual items or with a series, episode,
+     * clip. Supersedes actors.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $actor;
+    /**
+     * The caption for this object. For downloadable machine formats (closed
+     * caption, subtitles etc.) use MediaObject and indicate the encodingFormat.
+     *
+     * @var mixed|MediaObject|string [schema.org types: MediaObject, Text]
+     */
+    public $caption;
+    /**
+     * A director of e.g. tv, radio, movie, video gaming etc. content, or of an
+     * event. Directors can be associated with individual items or with a series,
+     * episode, clip. Supersedes directors.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $director;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The composer of the soundtrack.
+     *
+     * @var mixed|MusicGroup|Person [schema.org types: MusicGroup, Person]
+     */
+    public $musicBy;
+    /**
+     * Thumbnail image for an image or video.
+     *
+     * @var ImageObject [schema.org types: ImageObject]
+     */
+    public $thumbnail;
+    /**
+     * If this MediaObject is an AudioObject or VideoObject, the transcript of
+     * that object.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $transcript;
+    /**
+     * The frame size of the video.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $videoFrameSize;
+    /**
+     * The quality of the video.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $videoQuality;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -257,13 +244,13 @@ class VideoObject extends MediaObject
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['actor','caption','director','musicBy','thumbnail','transcript','videoFrameSize','videoQuality'], 'validateJsonSchema'],
+            [['actor', 'caption', 'director', 'musicBy', 'thumbnail', 'transcript', 'videoFrameSize', 'videoQuality'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -92,47 +92,6 @@ class HealthPlanCostSharingSpecification extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Whether the coinsurance applies before or after deductible, etc. TODO: Is
-     * this a closed set?
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $healthPlanCoinsuranceOption;
-
-    /**
-     * Whether The rate of coinsurance expressed as a number between 0.0 and 1.0.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $healthPlanCoinsuranceRate;
-
-    /**
-     * Whether The copay amount.
-     *
-     * @var PriceSpecification [schema.org types: PriceSpecification]
-     */
-    public $healthPlanCopay;
-
-    /**
-     * Whether the copay is before or after deductible, etc. TODO: Is this a
-     * closed set?
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $healthPlanCopayOption;
-
-    /**
-     * The category or type of pharmacy associated with this cost sharing.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $healthPlanPharmacyCategory;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -145,7 +104,6 @@ class HealthPlanCostSharingSpecification extends Intangible
         'healthPlanCopayOption',
         'healthPlanPharmacyCategory'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -158,7 +116,6 @@ class HealthPlanCostSharingSpecification extends Intangible
         'healthPlanCopayOption' => ['Text'],
         'healthPlanPharmacyCategory' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -171,7 +128,6 @@ class HealthPlanCostSharingSpecification extends Intangible
         'healthPlanCopayOption' => 'Whether the copay is before or after deductible, etc. TODO: Is this a closed set?',
         'healthPlanPharmacyCategory' => 'The category or type of pharmacy associated with this cost sharing.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -179,7 +135,6 @@ class HealthPlanCostSharingSpecification extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -188,13 +143,48 @@ class HealthPlanCostSharingSpecification extends Intangible
     static protected $_googleRecommendedSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * Whether the coinsurance applies before or after deductible, etc. TODO: Is
+     * this a closed set?
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $healthPlanCoinsuranceOption;
+    /**
+     * Whether The rate of coinsurance expressed as a number between 0.0 and 1.0.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $healthPlanCoinsuranceRate;
+    /**
+     * Whether The copay amount.
+     *
+     * @var PriceSpecification [schema.org types: PriceSpecification]
+     */
+    public $healthPlanCopay;
+    /**
+     * Whether the copay is before or after deductible, etc. TODO: Is this a
+     * closed set?
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $healthPlanCopayOption;
+    /**
+     * The category or type of pharmacy associated with this cost sharing.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $healthPlanPharmacyCategory;
+
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -224,13 +214,13 @@ class HealthPlanCostSharingSpecification extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['healthPlanCoinsuranceOption','healthPlanCoinsuranceRate','healthPlanCopay','healthPlanCopayOption','healthPlanPharmacyCategory'], 'validateJsonSchema'],
+            [['healthPlanCoinsuranceOption', 'healthPlanCoinsuranceRate', 'healthPlanCopay', 'healthPlanCopayOption', 'healthPlanPharmacyCategory'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

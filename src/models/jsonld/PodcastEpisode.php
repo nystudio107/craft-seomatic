@@ -91,72 +91,6 @@ class PodcastEpisode extends Episode
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * An actor, e.g. in tv, radio, movie, video games etc., or in an event.
-     * Actors can be associated with individual items or with a series, episode,
-     * clip. Supersedes actors.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $actor;
-
-    /**
-     * A director of e.g. tv, radio, movie, video gaming etc. content, or of an
-     * event. Directors can be associated with individual items or with a series,
-     * episode, clip. Supersedes directors.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $director;
-
-    /**
-     * Position of the episode within an ordered group of episodes.
-     *
-     * @var mixed|int|string [schema.org types: Integer, Text]
-     */
-    public $episodeNumber;
-
-    /**
-     * The composer of the soundtrack.
-     *
-     * @var mixed|MusicGroup|Person [schema.org types: MusicGroup, Person]
-     */
-    public $musicBy;
-
-    /**
-     * The season to which this episode belongs.
-     *
-     * @var CreativeWorkSeason [schema.org types: CreativeWorkSeason]
-     */
-    public $partOfSeason;
-
-    /**
-     * The series to which this episode or season belongs. Supersedes
-     * partOfTVSeries.
-     *
-     * @var CreativeWorkSeries [schema.org types: CreativeWorkSeries]
-     */
-    public $partOfSeries;
-
-    /**
-     * The production company or studio responsible for the item e.g. series,
-     * video game, episode etc.
-     *
-     * @var Organization [schema.org types: Organization]
-     */
-    public $productionCompany;
-
-    /**
-     * The trailer of a movie or tv/radio series, season, episode, etc.
-     *
-     * @var VideoObject [schema.org types: VideoObject]
-     */
-    public $trailer;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -172,7 +106,6 @@ class PodcastEpisode extends Episode
         'productionCompany',
         'trailer'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -181,14 +114,13 @@ class PodcastEpisode extends Episode
     static protected $_schemaPropertyExpectedTypes = [
         'actor' => ['Person'],
         'director' => ['Person'],
-        'episodeNumber' => ['Integer','Text'],
-        'musicBy' => ['MusicGroup','Person'],
+        'episodeNumber' => ['Integer', 'Text'],
+        'musicBy' => ['MusicGroup', 'Person'],
         'partOfSeason' => ['CreativeWorkSeason'],
         'partOfSeries' => ['CreativeWorkSeries'],
         'productionCompany' => ['Organization'],
         'trailer' => ['VideoObject']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -204,7 +136,6 @@ class PodcastEpisode extends Episode
         'productionCompany' => 'The production company or studio responsible for the item e.g. series, video game, episode etc.',
         'trailer' => 'The trailer of a movie or tv/radio series, season, episode, etc.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -212,7 +143,6 @@ class PodcastEpisode extends Episode
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -220,14 +150,71 @@ class PodcastEpisode extends Episode
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * An actor, e.g. in tv, radio, movie, video games etc., or in an event.
+     * Actors can be associated with individual items or with a series, episode,
+     * clip. Supersedes actors.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $actor;
+    /**
+     * A director of e.g. tv, radio, movie, video gaming etc. content, or of an
+     * event. Directors can be associated with individual items or with a series,
+     * episode, clip. Supersedes directors.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $director;
+    /**
+     * Position of the episode within an ordered group of episodes.
+     *
+     * @var mixed|int|string [schema.org types: Integer, Text]
+     */
+    public $episodeNumber;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The composer of the soundtrack.
+     *
+     * @var mixed|MusicGroup|Person [schema.org types: MusicGroup, Person]
+     */
+    public $musicBy;
+    /**
+     * The season to which this episode belongs.
+     *
+     * @var CreativeWorkSeason [schema.org types: CreativeWorkSeason]
+     */
+    public $partOfSeason;
+    /**
+     * The series to which this episode or season belongs. Supersedes
+     * partOfTVSeries.
+     *
+     * @var CreativeWorkSeries [schema.org types: CreativeWorkSeries]
+     */
+    public $partOfSeries;
+    /**
+     * The production company or studio responsible for the item e.g. series,
+     * video game, episode etc.
+     *
+     * @var Organization [schema.org types: Organization]
+     */
+    public $productionCompany;
+    /**
+     * The trailer of a movie or tv/radio series, season, episode, etc.
+     *
+     * @var VideoObject [schema.org types: VideoObject]
+     */
+    public $trailer;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -257,13 +244,13 @@ class PodcastEpisode extends Episode
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['actor','director','episodeNumber','musicBy','partOfSeason','partOfSeries','productionCompany','trailer'], 'validateJsonSchema'],
+            [['actor', 'director', 'episodeNumber', 'musicBy', 'partOfSeason', 'partOfSeries', 'productionCompany', 'trailer'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

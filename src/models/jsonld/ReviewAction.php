@@ -93,18 +93,6 @@ class ReviewAction extends AssessAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A sub property of result. The review that resulted in the performing of the
-     * action.
-     *
-     * @var Review [schema.org types: Review]
-     */
-    public $resultReview;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -114,6 +102,8 @@ class ReviewAction extends AssessAction
         'resultReview'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -122,7 +112,6 @@ class ReviewAction extends AssessAction
     static protected $_schemaPropertyExpectedTypes = [
         'resultReview' => ['Review']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -131,7 +120,6 @@ class ReviewAction extends AssessAction
     static protected $_schemaPropertyDescriptions = [
         'resultReview' => 'A sub property of result. The review that resulted in the performing of the action.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -139,7 +127,6 @@ class ReviewAction extends AssessAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -147,14 +134,21 @@ class ReviewAction extends AssessAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A sub property of result. The review that resulted in the performing of the
+     * action.
+     *
+     * @var Review [schema.org types: Review]
+     */
+    public $resultReview;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -184,9 +178,9 @@ class ReviewAction extends AssessAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\base;
 
+use Exception;
 use nystudio107\seomatic\Seomatic;
 
 /**
@@ -31,7 +32,7 @@ abstract class NonceItem extends MetaItem implements NonceItemInterface
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
         if (!empty(Seomatic::$settings->cspNonce)) {
@@ -42,7 +43,7 @@ abstract class NonceItem extends MetaItem implements NonceItemInterface
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
@@ -55,7 +56,7 @@ abstract class NonceItem extends MetaItem implements NonceItemInterface
     /**
      * @inheritdoc
      */
-    public function fields()
+    public function fields(): array
     {
         $fields = parent::fields();
         switch ($this->scenario) {
@@ -81,11 +82,11 @@ abstract class NonceItem extends MetaItem implements NonceItemInterface
     public function generateNonce()
     {
         $result = null;
-            try {
-                $result = bin2hex(random_bytes(22));
-            } catch (\Exception $e) {
-                // That's okay
-            }
+        try {
+            $result = bin2hex(random_bytes(22));
+        } catch (Exception $e) {
+            // That's okay
+        }
 
         return $result;
     }

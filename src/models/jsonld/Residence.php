@@ -91,17 +91,6 @@ class Residence extends Place
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A floorplan of some Accommodation.
-     *
-     * @var FloorPlan [schema.org types: FloorPlan]
-     */
-    public $accommodationFloorPlan;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -111,6 +100,8 @@ class Residence extends Place
         'accommodationFloorPlan'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -119,7 +110,6 @@ class Residence extends Place
     static protected $_schemaPropertyExpectedTypes = [
         'accommodationFloorPlan' => ['FloorPlan']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -128,7 +118,6 @@ class Residence extends Place
     static protected $_schemaPropertyDescriptions = [
         'accommodationFloorPlan' => 'A floorplan of some Accommodation.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -136,7 +125,6 @@ class Residence extends Place
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -144,14 +132,20 @@ class Residence extends Place
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A floorplan of some Accommodation.
+     *
+     * @var FloorPlan [schema.org types: FloorPlan]
+     */
+    public $accommodationFloorPlan;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -181,9 +175,9 @@ class Residence extends Place
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

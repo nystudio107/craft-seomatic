@@ -92,17 +92,6 @@ class OrderAction extends TradeAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A sub property of instrument. The method of delivery.
-     *
-     * @var DeliveryMethod [schema.org types: DeliveryMethod]
-     */
-    public $deliveryMethod;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -112,6 +101,8 @@ class OrderAction extends TradeAction
         'deliveryMethod'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -120,7 +111,6 @@ class OrderAction extends TradeAction
     static protected $_schemaPropertyExpectedTypes = [
         'deliveryMethod' => ['DeliveryMethod']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -129,7 +119,6 @@ class OrderAction extends TradeAction
     static protected $_schemaPropertyDescriptions = [
         'deliveryMethod' => 'A sub property of instrument. The method of delivery.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -137,7 +126,6 @@ class OrderAction extends TradeAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -145,14 +133,20 @@ class OrderAction extends TradeAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A sub property of instrument. The method of delivery.
+     *
+     * @var DeliveryMethod [schema.org types: DeliveryMethod]
+     */
+    public $deliveryMethod;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -182,9 +176,9 @@ class OrderAction extends TradeAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

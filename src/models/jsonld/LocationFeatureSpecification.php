@@ -93,32 +93,6 @@ class LocationFeatureSpecification extends PropertyValue
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The hours during which this service or contact is available.
-     *
-     * @var OpeningHoursSpecification [schema.org types: OpeningHoursSpecification]
-     */
-    public $hoursAvailable;
-
-    /**
-     * The date when the item becomes valid.
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $validFrom;
-
-    /**
-     * The date after when the item is not valid. For example the end of an offer,
-     * salary period, or a period of opening hours.
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $validThrough;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -129,7 +103,6 @@ class LocationFeatureSpecification extends PropertyValue
         'validFrom',
         'validThrough'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -137,10 +110,9 @@ class LocationFeatureSpecification extends PropertyValue
      */
     static protected $_schemaPropertyExpectedTypes = [
         'hoursAvailable' => ['OpeningHoursSpecification'],
-        'validFrom' => ['Date','DateTime'],
-        'validThrough' => ['Date','DateTime']
+        'validFrom' => ['Date', 'DateTime'],
+        'validThrough' => ['Date', 'DateTime']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -152,6 +124,8 @@ class LocationFeatureSpecification extends PropertyValue
         'validThrough' => 'The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -159,7 +133,6 @@ class LocationFeatureSpecification extends PropertyValue
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -167,14 +140,33 @@ class LocationFeatureSpecification extends PropertyValue
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The hours during which this service or contact is available.
+     *
+     * @var OpeningHoursSpecification [schema.org types: OpeningHoursSpecification]
+     */
+    public $hoursAvailable;
+    /**
+     * The date when the item becomes valid.
+     *
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     */
+    public $validFrom;
+    /**
+     * The date after when the item is not valid. For example the end of an offer,
+     * salary period, or a period of opening hours.
+     *
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     */
+    public $validThrough;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -204,13 +196,13 @@ class LocationFeatureSpecification extends PropertyValue
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['hoursAvailable','validFrom','validThrough'], 'validateJsonSchema'],
+            [['hoursAvailable', 'validFrom', 'validThrough'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

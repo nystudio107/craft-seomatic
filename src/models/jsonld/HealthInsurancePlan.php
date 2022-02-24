@@ -92,77 +92,6 @@ class HealthInsurancePlan extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The URL that goes directly to the summary of benefits and coverage for the
-     * specific standard plan or plan variation.
-     *
-     * @var string [schema.org types: URL]
-     */
-    public $benefitsSummaryUrl;
-
-    /**
-     * A contact point for a person or organization. Supersedes contactPoints.
-     *
-     * @var ContactPoint [schema.org types: ContactPoint]
-     */
-    public $contactPoint;
-
-    /**
-     * TODO.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $healthPlanDrugOption;
-
-    /**
-     * The tier(s) of drugs offered by this formulary or insurance plan.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $healthPlanDrugTier;
-
-    /**
-     * The 14-character, HIOS-generated Plan ID number. (Plan IDs must be unique,
-     * even across different markets.)
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $healthPlanId;
-
-    /**
-     * The URL that goes directly to the plan brochure for the specific standard
-     * plan or plan variation.
-     *
-     * @var string [schema.org types: URL]
-     */
-    public $healthPlanMarketingUrl;
-
-    /**
-     * Formularies covered by this plan.
-     *
-     * @var HealthPlanFormulary [schema.org types: HealthPlanFormulary]
-     */
-    public $includesHealthPlanFormulary;
-
-    /**
-     * Networks covered by this plan.
-     *
-     * @var HealthPlanNetwork [schema.org types: HealthPlanNetwork]
-     */
-    public $includesHealthPlanNetwork;
-
-    /**
-     * The standard for interpreting thePlan ID. The preferred is "HIOS". See the
-     * Centers for Medicare & Medicaid Services for more details.
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $usesHealthPlanIdStandard;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -179,7 +108,6 @@ class HealthInsurancePlan extends Intangible
         'includesHealthPlanNetwork',
         'usesHealthPlanIdStandard'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -194,9 +122,8 @@ class HealthInsurancePlan extends Intangible
         'healthPlanMarketingUrl' => ['URL'],
         'includesHealthPlanFormulary' => ['HealthPlanFormulary'],
         'includesHealthPlanNetwork' => ['HealthPlanNetwork'],
-        'usesHealthPlanIdStandard' => ['Text','URL']
+        'usesHealthPlanIdStandard' => ['Text', 'URL']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -213,7 +140,6 @@ class HealthInsurancePlan extends Intangible
         'includesHealthPlanNetwork' => 'Networks covered by this plan.',
         'usesHealthPlanIdStandard' => 'The standard for interpreting thePlan ID. The preferred is "HIOS". See the Centers for Medicare & Medicaid Services for more details.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -221,7 +147,6 @@ class HealthInsurancePlan extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -229,14 +154,75 @@ class HealthInsurancePlan extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The URL that goes directly to the summary of benefits and coverage for the
+     * specific standard plan or plan variation.
+     *
+     * @var string [schema.org types: URL]
+     */
+    public $benefitsSummaryUrl;
+    /**
+     * A contact point for a person or organization. Supersedes contactPoints.
+     *
+     * @var ContactPoint [schema.org types: ContactPoint]
+     */
+    public $contactPoint;
+    /**
+     * TODO.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $healthPlanDrugOption;
+    /**
+     * The tier(s) of drugs offered by this formulary or insurance plan.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $healthPlanDrugTier;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The 14-character, HIOS-generated Plan ID number. (Plan IDs must be unique,
+     * even across different markets.)
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $healthPlanId;
+    /**
+     * The URL that goes directly to the plan brochure for the specific standard
+     * plan or plan variation.
+     *
+     * @var string [schema.org types: URL]
+     */
+    public $healthPlanMarketingUrl;
+    /**
+     * Formularies covered by this plan.
+     *
+     * @var HealthPlanFormulary [schema.org types: HealthPlanFormulary]
+     */
+    public $includesHealthPlanFormulary;
+    /**
+     * Networks covered by this plan.
+     *
+     * @var HealthPlanNetwork [schema.org types: HealthPlanNetwork]
+     */
+    public $includesHealthPlanNetwork;
+    /**
+     * The standard for interpreting thePlan ID. The preferred is "HIOS". See the
+     * Centers for Medicare & Medicaid Services for more details.
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $usesHealthPlanIdStandard;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -266,13 +252,13 @@ class HealthInsurancePlan extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['benefitsSummaryUrl','contactPoint','healthPlanDrugOption','healthPlanDrugTier','healthPlanId','healthPlanMarketingUrl','includesHealthPlanFormulary','includesHealthPlanNetwork','usesHealthPlanIdStandard'], 'validateJsonSchema'],
+            [['benefitsSummaryUrl', 'contactPoint', 'healthPlanDrugOption', 'healthPlanDrugTier', 'healthPlanId', 'healthPlanMarketingUrl', 'includesHealthPlanFormulary', 'includesHealthPlanNetwork', 'usesHealthPlanIdStandard'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

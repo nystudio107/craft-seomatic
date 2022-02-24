@@ -91,44 +91,6 @@ class Brewery extends FoodEstablishment
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Indicates whether a FoodEstablishment accepts reservations. Values can be
-     * Boolean, an URL at which reservations can be made or (for backwards
-     * compatibility) the strings Yes or No.
-     *
-     * @var mixed|bool|string|string [schema.org types: Boolean, Text, URL]
-     */
-    public $acceptsReservations;
-
-    /**
-     * Either the actual menu as a structured representation, as text, or a URL of
-     * the menu. Supersedes menu.
-     *
-     * @var mixed|Menu|string|string [schema.org types: Menu, Text, URL]
-     */
-    public $hasMenu;
-
-    /**
-     * The cuisine of the restaurant.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $servesCuisine;
-
-    /**
-     * An official rating for a lodging business or food establishment, e.g. from
-     * national associations or standards bodies. Use the author property to
-     * indicate the rating organization, e.g. as an Organization with name such as
-     * (e.g. HOTREC, DEHOGA, WHR, or Hotelstars).
-     *
-     * @var Rating [schema.org types: Rating]
-     */
-    public $starRating;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -140,19 +102,17 @@ class Brewery extends FoodEstablishment
         'servesCuisine',
         'starRating'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'acceptsReservations' => ['Boolean','Text','URL'],
-        'hasMenu' => ['Menu','Text','URL'],
+        'acceptsReservations' => ['Boolean', 'Text', 'URL'],
+        'hasMenu' => ['Menu', 'Text', 'URL'],
         'servesCuisine' => ['Text'],
         'starRating' => ['Rating']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -164,7 +124,6 @@ class Brewery extends FoodEstablishment
         'servesCuisine' => 'The cuisine of the restaurant.',
         'starRating' => 'An official rating for a lodging business or food establishment, e.g. from national associations or standards bodies. Use the author property to indicate the rating organization, e.g. as an Organization with name such as (e.g. HOTREC, DEHOGA, WHR, or Hotelstars).'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -173,6 +132,8 @@ class Brewery extends FoodEstablishment
     static protected $_googleRequiredSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -180,14 +141,44 @@ class Brewery extends FoodEstablishment
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Indicates whether a FoodEstablishment accepts reservations. Values can be
+     * Boolean, an URL at which reservations can be made or (for backwards
+     * compatibility) the strings Yes or No.
+     *
+     * @var mixed|bool|string|string [schema.org types: Boolean, Text, URL]
+     */
+    public $acceptsReservations;
+    /**
+     * Either the actual menu as a structured representation, as text, or a URL of
+     * the menu. Supersedes menu.
+     *
+     * @var mixed|Menu|string|string [schema.org types: Menu, Text, URL]
+     */
+    public $hasMenu;
+    /**
+     * The cuisine of the restaurant.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $servesCuisine;
+    /**
+     * An official rating for a lodging business or food establishment, e.g. from
+     * national associations or standards bodies. Use the author property to
+     * indicate the rating organization, e.g. as an Organization with name such as
+     * (e.g. HOTREC, DEHOGA, WHR, or Hotelstars).
+     *
+     * @var Rating [schema.org types: Rating]
+     */
+    public $starRating;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -217,13 +208,13 @@ class Brewery extends FoodEstablishment
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['acceptsReservations','hasMenu','servesCuisine','starRating'], 'validateJsonSchema'],
+            [['acceptsReservations', 'hasMenu', 'servesCuisine', 'starRating'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

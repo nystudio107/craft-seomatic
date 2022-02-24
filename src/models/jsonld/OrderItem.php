@@ -92,46 +92,6 @@ class OrderItem extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The delivery of the parcel related to this order or order item.
-     *
-     * @var ParcelDelivery [schema.org types: ParcelDelivery]
-     */
-    public $orderDelivery;
-
-    /**
-     * The identifier of the order item.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $orderItemNumber;
-
-    /**
-     * The current status of the order item.
-     *
-     * @var OrderStatus [schema.org types: OrderStatus]
-     */
-    public $orderItemStatus;
-
-    /**
-     * The number of the item ordered. If the property is not set, assume the
-     * quantity is one.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $orderQuantity;
-
-    /**
-     * The item ordered.
-     *
-     * @var mixed|OrderItem|Product|Service [schema.org types: OrderItem, Product, Service]
-     */
-    public $orderedItem;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -144,7 +104,6 @@ class OrderItem extends Intangible
         'orderQuantity',
         'orderedItem'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -155,9 +114,8 @@ class OrderItem extends Intangible
         'orderItemNumber' => ['Text'],
         'orderItemStatus' => ['OrderStatus'],
         'orderQuantity' => ['Number'],
-        'orderedItem' => ['OrderItem','Product','Service']
+        'orderedItem' => ['OrderItem', 'Product', 'Service']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -170,7 +128,6 @@ class OrderItem extends Intangible
         'orderQuantity' => 'The number of the item ordered. If the property is not set, assume the quantity is one.',
         'orderedItem' => 'The item ordered.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -178,7 +135,6 @@ class OrderItem extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -187,13 +143,47 @@ class OrderItem extends Intangible
     static protected $_googleRecommendedSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The delivery of the parcel related to this order or order item.
+     *
+     * @var ParcelDelivery [schema.org types: ParcelDelivery]
+     */
+    public $orderDelivery;
+    /**
+     * The identifier of the order item.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $orderItemNumber;
+    /**
+     * The current status of the order item.
+     *
+     * @var OrderStatus [schema.org types: OrderStatus]
+     */
+    public $orderItemStatus;
+    /**
+     * The number of the item ordered. If the property is not set, assume the
+     * quantity is one.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $orderQuantity;
+    /**
+     * The item ordered.
+     *
+     * @var mixed|OrderItem|Product|Service [schema.org types: OrderItem, Product, Service]
+     */
+    public $orderedItem;
+
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -223,13 +213,13 @@ class OrderItem extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['orderDelivery','orderItemNumber','orderItemStatus','orderQuantity','orderedItem'], 'validateJsonSchema'],
+            [['orderDelivery', 'orderItemNumber', 'orderItemStatus', 'orderQuantity', 'orderedItem'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

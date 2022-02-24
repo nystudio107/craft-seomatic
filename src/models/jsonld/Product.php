@@ -93,309 +93,6 @@ class Product extends Thing
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A property-value pair representing an additional characteristics of the
-     * entitity, e.g. a product feature or another characteristic for which there
-     * is no matching property in schema.org. Note: Publishers should be aware
-     * that applications designed to use specific schema.org properties (e.g.
-     * http://schema.org/width, http://schema.org/color, http://schema.org/gtin13,
-     * ...) will typically expect such data to be provided using those properties,
-     * rather than using the generic property/value mechanism.
-     *
-     * @var PropertyValue [schema.org types: PropertyValue]
-     */
-    public $additionalProperty;
-
-    /**
-     * The overall rating, based on a collection of reviews or ratings, of the
-     * item.
-     *
-     * @var AggregateRating [schema.org types: AggregateRating]
-     */
-    public $aggregateRating;
-
-    /**
-     * An intended audience, i.e. a group for whom something was created.
-     * Supersedes serviceAudience.
-     *
-     * @var Audience [schema.org types: Audience]
-     */
-    public $audience;
-
-    /**
-     * An award won by or for this item. Supersedes awards.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $award;
-
-    /**
-     * The brand(s) associated with a product or service, or the brand(s)
-     * maintained by an organization or business person.
-     *
-     * @var mixed|Brand|Organization [schema.org types: Brand, Organization]
-     */
-    public $brand;
-
-    /**
-     * A category for the item. Greater signs or slashes can be used to informally
-     * indicate a category hierarchy.
-     *
-     * @var mixed|PhysicalActivityCategory|string|Thing [schema.org types: PhysicalActivityCategory, Text, Thing]
-     */
-    public $category;
-
-    /**
-     * The color of the product.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $color;
-
-    /**
-     * The depth of the item.
-     *
-     * @var mixed|Distance|QuantitativeValue [schema.org types: Distance, QuantitativeValue]
-     */
-    public $depth;
-
-    /**
-     * A Global Trade Item Number (GTIN). GTINs identify trade items, including
-     * products and services, using numeric identification codes. The gtin
-     * property generalizes the earlier gtin8, gtin12, gtin13, and gtin14
-     * properties. The GS1 digital link specifications express GTINs as URLs. A
-     * correct gtin value should be a valid GTIN, which means that it should be an
-     * all-numeric string of either 8, 12, 13 or 14 digits, or a "GS1 Digital
-     * Link" URL based on such a string. The numeric component should also have a
-     * valid GS1 check digit and meet the other rules for valid GTINs. See also
-     * GS1's GTIN Summary and Wikipedia for more details. Left-padding of the gtin
-     * values is not required or encouraged.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $gtin;
-
-    /**
-     * The GTIN-12 code of the product, or the product to which the offer refers.
-     * The GTIN-12 is the 12-digit GS1 Identification Key composed of a U.P.C.
-     * Company Prefix, Item Reference, and Check Digit used to identify trade
-     * items. See GS1 GTIN Summary for more details.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $gtin12;
-
-    /**
-     * The GTIN-13 code of the product, or the product to which the offer refers.
-     * This is equivalent to 13-digit ISBN codes and EAN UCC-13. Former 12-digit
-     * UPC codes can be converted into a GTIN-13 code by simply adding a
-     * preceeding zero. See GS1 GTIN Summary for more details.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $gtin13;
-
-    /**
-     * The GTIN-14 code of the product, or the product to which the offer refers.
-     * See GS1 GTIN Summary for more details.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $gtin14;
-
-    /**
-     * The GTIN-8 code of the product, or the product to which the offer refers.
-     * This code is also known as EAN/UCC-8 or 8-digit EAN. See GS1 GTIN Summary
-     * for more details.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $gtin8;
-
-    /**
-     * Indicates a MerchantReturnPolicy that may be applicable. Supersedes
-     * hasProductReturnPolicy.
-     *
-     * @var MerchantReturnPolicy [schema.org types: MerchantReturnPolicy]
-     */
-    public $hasMerchantReturnPolicy;
-
-    /**
-     * The height of the item.
-     *
-     * @var mixed|Distance|QuantitativeValue [schema.org types: Distance, QuantitativeValue]
-     */
-    public $height;
-
-    /**
-     * A pointer to another product (or multiple products) for which this product
-     * is an accessory or spare part.
-     *
-     * @var Product [schema.org types: Product]
-     */
-    public $isAccessoryOrSparePartFor;
-
-    /**
-     * A pointer to another product (or multiple products) for which this product
-     * is a consumable.
-     *
-     * @var Product [schema.org types: Product]
-     */
-    public $isConsumableFor;
-
-    /**
-     * A pointer to another, somehow related product (or multiple products).
-     *
-     * @var mixed|Product|Service [schema.org types: Product, Service]
-     */
-    public $isRelatedTo;
-
-    /**
-     * A pointer to another, functionally similar product (or multiple products).
-     *
-     * @var mixed|Product|Service [schema.org types: Product, Service]
-     */
-    public $isSimilarTo;
-
-    /**
-     * A predefined value from OfferItemCondition or a textual description of the
-     * condition of the product or service, or the products or services included
-     * in the offer.
-     *
-     * @var OfferItemCondition [schema.org types: OfferItemCondition]
-     */
-    public $itemCondition;
-
-    /**
-     * An associated logo.
-     *
-     * @var mixed|ImageObject|string [schema.org types: ImageObject, URL]
-     */
-    public $logo;
-
-    /**
-     * The manufacturer of the product.
-     *
-     * @var Organization [schema.org types: Organization]
-     */
-    public $manufacturer;
-
-    /**
-     * A material that something is made from, e.g. leather, wool, cotton, paper.
-     *
-     * @var mixed|Product|string|string [schema.org types: Product, Text, URL]
-     */
-    public $material;
-
-    /**
-     * The model of the product. Use with the URL of a ProductModel or a textual
-     * representation of the model identifier. The URL of the ProductModel can be
-     * from an external source. It is recommended to additionally provide strong
-     * product identifiers via the gtin8/gtin13/gtin14 and mpn properties.
-     *
-     * @var mixed|ProductModel|string [schema.org types: ProductModel, Text]
-     */
-    public $model;
-
-    /**
-     * The Manufacturer Part Number (MPN) of the product, or the product to which
-     * the offer refers.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $mpn;
-
-    /**
-     * Indicates the NATO stock number (nsn) of a Product.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $nsn;
-
-    /**
-     * An offer to provide this item—for example, an offer to sell a product,
-     * rent the DVD of a movie, perform a service, or give away tickets to an
-     * event. Use businessFunction to indicate the kind of transaction offered,
-     * i.e. sell, lease, etc. This property can also be used to describe a Demand.
-     * While this property is listed as expected on a number of common types, it
-     * can be used in others. In that case, using a second type, such as Product
-     * or a subtype of Product, can clarify the nature of the offer. Inverse
-     * property: itemOffered.
-     *
-     * @var mixed|Demand|Offer [schema.org types: Demand, Offer]
-     */
-    public $offers;
-
-    /**
-     * The product identifier, such as ISBN. For example: meta
-     * itemprop="productID" content="isbn:123-456-789".
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $productID;
-
-    /**
-     * The date of production of the item, e.g. vehicle.
-     *
-     * @var Date [schema.org types: Date]
-     */
-    public $productionDate;
-
-    /**
-     * The date the item e.g. vehicle was purchased by the current owner.
-     *
-     * @var Date [schema.org types: Date]
-     */
-    public $purchaseDate;
-
-    /**
-     * The release date of a product or product model. This can be used to
-     * distinguish the exact variant of a product.
-     *
-     * @var Date [schema.org types: Date]
-     */
-    public $releaseDate;
-
-    /**
-     * A review of the item. Supersedes reviews.
-     *
-     * @var Review [schema.org types: Review]
-     */
-    public $review;
-
-    /**
-     * The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a
-     * product or service, or the product to which the offer refers.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $sku;
-
-    /**
-     * A slogan or motto associated with the item.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $slogan;
-
-    /**
-     * The weight of the product or person.
-     *
-     * @var QuantitativeValue [schema.org types: QuantitativeValue]
-     */
-    public $weight;
-
-    /**
-     * The width of the item.
-     *
-     * @var mixed|Distance|QuantitativeValue [schema.org types: Distance, QuantitativeValue]
-     */
-    public $width;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -439,7 +136,6 @@ class Product extends Thing
         'weight',
         'width'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -450,29 +146,29 @@ class Product extends Thing
         'aggregateRating' => ['AggregateRating'],
         'audience' => ['Audience'],
         'award' => ['Text'],
-        'brand' => ['Brand','Organization'],
-        'category' => ['PhysicalActivityCategory','Text','Thing'],
+        'brand' => ['Brand', 'Organization'],
+        'category' => ['PhysicalActivityCategory', 'Text', 'Thing'],
         'color' => ['Text'],
-        'depth' => ['Distance','QuantitativeValue'],
+        'depth' => ['Distance', 'QuantitativeValue'],
         'gtin' => ['Text'],
         'gtin12' => ['Text'],
         'gtin13' => ['Text'],
         'gtin14' => ['Text'],
         'gtin8' => ['Text'],
         'hasMerchantReturnPolicy' => ['MerchantReturnPolicy'],
-        'height' => ['Distance','QuantitativeValue'],
+        'height' => ['Distance', 'QuantitativeValue'],
         'isAccessoryOrSparePartFor' => ['Product'],
         'isConsumableFor' => ['Product'],
-        'isRelatedTo' => ['Product','Service'],
-        'isSimilarTo' => ['Product','Service'],
+        'isRelatedTo' => ['Product', 'Service'],
+        'isSimilarTo' => ['Product', 'Service'],
         'itemCondition' => ['OfferItemCondition'],
-        'logo' => ['ImageObject','URL'],
+        'logo' => ['ImageObject', 'URL'],
         'manufacturer' => ['Organization'],
-        'material' => ['Product','Text','URL'],
-        'model' => ['ProductModel','Text'],
+        'material' => ['Product', 'Text', 'URL'],
+        'model' => ['ProductModel', 'Text'],
         'mpn' => ['Text'],
         'nsn' => ['Text'],
-        'offers' => ['Demand','Offer'],
+        'offers' => ['Demand', 'Offer'],
         'productID' => ['Text'],
         'productionDate' => ['Date'],
         'purchaseDate' => ['Date'],
@@ -481,9 +177,8 @@ class Product extends Thing
         'sku' => ['Text'],
         'slogan' => ['Text'],
         'weight' => ['QuantitativeValue'],
-        'width' => ['Distance','QuantitativeValue']
+        'width' => ['Distance', 'QuantitativeValue']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -527,7 +222,6 @@ class Product extends Thing
         'weight' => 'The weight of the product or person.',
         'width' => 'The width of the item.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -535,7 +229,6 @@ class Product extends Thing
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -543,14 +236,280 @@ class Product extends Thing
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A property-value pair representing an additional characteristics of the
+     * entitity, e.g. a product feature or another characteristic for which there
+     * is no matching property in schema.org. Note: Publishers should be aware
+     * that applications designed to use specific schema.org properties (e.g.
+     * http://schema.org/width, http://schema.org/color, http://schema.org/gtin13,
+     * ...) will typically expect such data to be provided using those properties,
+     * rather than using the generic property/value mechanism.
+     *
+     * @var PropertyValue [schema.org types: PropertyValue]
+     */
+    public $additionalProperty;
+    /**
+     * The overall rating, based on a collection of reviews or ratings, of the
+     * item.
+     *
+     * @var AggregateRating [schema.org types: AggregateRating]
+     */
+    public $aggregateRating;
+    /**
+     * An intended audience, i.e. a group for whom something was created.
+     * Supersedes serviceAudience.
+     *
+     * @var Audience [schema.org types: Audience]
+     */
+    public $audience;
+    /**
+     * An award won by or for this item. Supersedes awards.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $award;
+    /**
+     * The brand(s) associated with a product or service, or the brand(s)
+     * maintained by an organization or business person.
+     *
+     * @var mixed|Brand|Organization [schema.org types: Brand, Organization]
+     */
+    public $brand;
+    /**
+     * A category for the item. Greater signs or slashes can be used to informally
+     * indicate a category hierarchy.
+     *
+     * @var mixed|PhysicalActivityCategory|string|Thing [schema.org types: PhysicalActivityCategory, Text, Thing]
+     */
+    public $category;
+    /**
+     * The color of the product.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $color;
+    /**
+     * The depth of the item.
+     *
+     * @var mixed|Distance|QuantitativeValue [schema.org types: Distance, QuantitativeValue]
+     */
+    public $depth;
+    /**
+     * A Global Trade Item Number (GTIN). GTINs identify trade items, including
+     * products and services, using numeric identification codes. The gtin
+     * property generalizes the earlier gtin8, gtin12, gtin13, and gtin14
+     * properties. The GS1 digital link specifications express GTINs as URLs. A
+     * correct gtin value should be a valid GTIN, which means that it should be an
+     * all-numeric string of either 8, 12, 13 or 14 digits, or a "GS1 Digital
+     * Link" URL based on such a string. The numeric component should also have a
+     * valid GS1 check digit and meet the other rules for valid GTINs. See also
+     * GS1's GTIN Summary and Wikipedia for more details. Left-padding of the gtin
+     * values is not required or encouraged.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $gtin;
+    /**
+     * The GTIN-12 code of the product, or the product to which the offer refers.
+     * The GTIN-12 is the 12-digit GS1 Identification Key composed of a U.P.C.
+     * Company Prefix, Item Reference, and Check Digit used to identify trade
+     * items. See GS1 GTIN Summary for more details.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $gtin12;
+    /**
+     * The GTIN-13 code of the product, or the product to which the offer refers.
+     * This is equivalent to 13-digit ISBN codes and EAN UCC-13. Former 12-digit
+     * UPC codes can be converted into a GTIN-13 code by simply adding a
+     * preceeding zero. See GS1 GTIN Summary for more details.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $gtin13;
+    /**
+     * The GTIN-14 code of the product, or the product to which the offer refers.
+     * See GS1 GTIN Summary for more details.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $gtin14;
+    /**
+     * The GTIN-8 code of the product, or the product to which the offer refers.
+     * This code is also known as EAN/UCC-8 or 8-digit EAN. See GS1 GTIN Summary
+     * for more details.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $gtin8;
+    /**
+     * Indicates a MerchantReturnPolicy that may be applicable. Supersedes
+     * hasProductReturnPolicy.
+     *
+     * @var MerchantReturnPolicy [schema.org types: MerchantReturnPolicy]
+     */
+    public $hasMerchantReturnPolicy;
+    /**
+     * The height of the item.
+     *
+     * @var mixed|Distance|QuantitativeValue [schema.org types: Distance, QuantitativeValue]
+     */
+    public $height;
+    /**
+     * A pointer to another product (or multiple products) for which this product
+     * is an accessory or spare part.
+     *
+     * @var Product [schema.org types: Product]
+     */
+    public $isAccessoryOrSparePartFor;
+    /**
+     * A pointer to another product (or multiple products) for which this product
+     * is a consumable.
+     *
+     * @var Product [schema.org types: Product]
+     */
+    public $isConsumableFor;
+    /**
+     * A pointer to another, somehow related product (or multiple products).
+     *
+     * @var mixed|Product|Service [schema.org types: Product, Service]
+     */
+    public $isRelatedTo;
+    /**
+     * A pointer to another, functionally similar product (or multiple products).
+     *
+     * @var mixed|Product|Service [schema.org types: Product, Service]
+     */
+    public $isSimilarTo;
+    /**
+     * A predefined value from OfferItemCondition or a textual description of the
+     * condition of the product or service, or the products or services included
+     * in the offer.
+     *
+     * @var OfferItemCondition [schema.org types: OfferItemCondition]
+     */
+    public $itemCondition;
+    /**
+     * An associated logo.
+     *
+     * @var mixed|ImageObject|string [schema.org types: ImageObject, URL]
+     */
+    public $logo;
+    /**
+     * The manufacturer of the product.
+     *
+     * @var Organization [schema.org types: Organization]
+     */
+    public $manufacturer;
+    /**
+     * A material that something is made from, e.g. leather, wool, cotton, paper.
+     *
+     * @var mixed|Product|string|string [schema.org types: Product, Text, URL]
+     */
+    public $material;
+    /**
+     * The model of the product. Use with the URL of a ProductModel or a textual
+     * representation of the model identifier. The URL of the ProductModel can be
+     * from an external source. It is recommended to additionally provide strong
+     * product identifiers via the gtin8/gtin13/gtin14 and mpn properties.
+     *
+     * @var mixed|ProductModel|string [schema.org types: ProductModel, Text]
+     */
+    public $model;
+    /**
+     * The Manufacturer Part Number (MPN) of the product, or the product to which
+     * the offer refers.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $mpn;
+    /**
+     * Indicates the NATO stock number (nsn) of a Product.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $nsn;
+    /**
+     * An offer to provide this item—for example, an offer to sell a product,
+     * rent the DVD of a movie, perform a service, or give away tickets to an
+     * event. Use businessFunction to indicate the kind of transaction offered,
+     * i.e. sell, lease, etc. This property can also be used to describe a Demand.
+     * While this property is listed as expected on a number of common types, it
+     * can be used in others. In that case, using a second type, such as Product
+     * or a subtype of Product, can clarify the nature of the offer. Inverse
+     * property: itemOffered.
+     *
+     * @var mixed|Demand|Offer [schema.org types: Demand, Offer]
+     */
+    public $offers;
+    /**
+     * The product identifier, such as ISBN. For example: meta
+     * itemprop="productID" content="isbn:123-456-789".
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $productID;
+    /**
+     * The date of production of the item, e.g. vehicle.
+     *
+     * @var Date [schema.org types: Date]
+     */
+    public $productionDate;
+    /**
+     * The date the item e.g. vehicle was purchased by the current owner.
+     *
+     * @var Date [schema.org types: Date]
+     */
+    public $purchaseDate;
+    /**
+     * The release date of a product or product model. This can be used to
+     * distinguish the exact variant of a product.
+     *
+     * @var Date [schema.org types: Date]
+     */
+    public $releaseDate;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * A review of the item. Supersedes reviews.
+     *
+     * @var Review [schema.org types: Review]
+     */
+    public $review;
+    /**
+     * The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a
+     * product or service, or the product to which the offer refers.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $sku;
+    /**
+     * A slogan or motto associated with the item.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $slogan;
+    /**
+     * The weight of the product or person.
+     *
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
+     */
+    public $weight;
+    /**
+     * The width of the item.
+     *
+     * @var mixed|Distance|QuantitativeValue [schema.org types: Distance, QuantitativeValue]
+     */
+    public $width;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -580,13 +539,13 @@ class Product extends Thing
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['additionalProperty','aggregateRating','audience','award','brand','category','color','depth','gtin','gtin12','gtin13','gtin14','gtin8','hasMerchantReturnPolicy','height','isAccessoryOrSparePartFor','isConsumableFor','isRelatedTo','isSimilarTo','itemCondition','logo','manufacturer','material','model','mpn','nsn','offers','productID','productionDate','purchaseDate','releaseDate','review','sku','slogan','weight','width'], 'validateJsonSchema'],
+            [['additionalProperty', 'aggregateRating', 'audience', 'award', 'brand', 'category', 'color', 'depth', 'gtin', 'gtin12', 'gtin13', 'gtin14', 'gtin8', 'hasMerchantReturnPolicy', 'height', 'isAccessoryOrSparePartFor', 'isConsumableFor', 'isRelatedTo', 'isSimilarTo', 'itemCondition', 'logo', 'manufacturer', 'material', 'model', 'mpn', 'nsn', 'offers', 'productID', 'productionDate', 'purchaseDate', 'releaseDate', 'review', 'sku', 'slogan', 'weight', 'width'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -93,69 +93,6 @@ class Ligament extends AnatomicalStructure
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * If applicable, a description of the pathophysiology associated with the
-     * anatomical system, including potential abnormal changes in the mechanical,
-     * physical, and biochemical functions of the system.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $associatedPathophysiology;
-
-    /**
-     * Location in the body of the anatomical structure.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $bodyLocation;
-
-    /**
-     * Other anatomical structures to which this structure is connected.
-     *
-     * @var AnatomicalStructure [schema.org types: AnatomicalStructure]
-     */
-    public $connectedTo;
-
-    /**
-     * An image containing a diagram that illustrates the structure and/or its
-     * component substructures and/or connections with other structures.
-     *
-     * @var ImageObject [schema.org types: ImageObject]
-     */
-    public $diagram;
-
-    /**
-     * The anatomical or organ system that this structure is part of.
-     *
-     * @var AnatomicalSystem [schema.org types: AnatomicalSystem]
-     */
-    public $partOfSystem;
-
-    /**
-     * A medical condition associated with this anatomy.
-     *
-     * @var MedicalCondition [schema.org types: MedicalCondition]
-     */
-    public $relatedCondition;
-
-    /**
-     * A medical therapy related to this anatomy.
-     *
-     * @var MedicalTherapy [schema.org types: MedicalTherapy]
-     */
-    public $relatedTherapy;
-
-    /**
-     * Component (sub-)structure(s) that comprise this anatomical structure.
-     *
-     * @var AnatomicalStructure [schema.org types: AnatomicalStructure]
-     */
-    public $subStructure;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -171,7 +108,6 @@ class Ligament extends AnatomicalStructure
         'relatedTherapy',
         'subStructure'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -187,7 +123,6 @@ class Ligament extends AnatomicalStructure
         'relatedTherapy' => ['MedicalTherapy'],
         'subStructure' => ['AnatomicalStructure']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -203,7 +138,6 @@ class Ligament extends AnatomicalStructure
         'relatedTherapy' => 'A medical therapy related to this anatomy.',
         'subStructure' => 'Component (sub-)structure(s) that comprise this anatomical structure.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -211,7 +145,6 @@ class Ligament extends AnatomicalStructure
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -219,14 +152,68 @@ class Ligament extends AnatomicalStructure
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * If applicable, a description of the pathophysiology associated with the
+     * anatomical system, including potential abnormal changes in the mechanical,
+     * physical, and biochemical functions of the system.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $associatedPathophysiology;
+    /**
+     * Location in the body of the anatomical structure.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $bodyLocation;
+    /**
+     * Other anatomical structures to which this structure is connected.
+     *
+     * @var AnatomicalStructure [schema.org types: AnatomicalStructure]
+     */
+    public $connectedTo;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * An image containing a diagram that illustrates the structure and/or its
+     * component substructures and/or connections with other structures.
+     *
+     * @var ImageObject [schema.org types: ImageObject]
+     */
+    public $diagram;
+    /**
+     * The anatomical or organ system that this structure is part of.
+     *
+     * @var AnatomicalSystem [schema.org types: AnatomicalSystem]
+     */
+    public $partOfSystem;
+    /**
+     * A medical condition associated with this anatomy.
+     *
+     * @var MedicalCondition [schema.org types: MedicalCondition]
+     */
+    public $relatedCondition;
+    /**
+     * A medical therapy related to this anatomy.
+     *
+     * @var MedicalTherapy [schema.org types: MedicalTherapy]
+     */
+    public $relatedTherapy;
+    /**
+     * Component (sub-)structure(s) that comprise this anatomical structure.
+     *
+     * @var AnatomicalStructure [schema.org types: AnatomicalStructure]
+     */
+    public $subStructure;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -256,13 +243,13 @@ class Ligament extends AnatomicalStructure
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['associatedPathophysiology','bodyLocation','connectedTo','diagram','partOfSystem','relatedCondition','relatedTherapy','subStructure'], 'validateJsonSchema'],
+            [['associatedPathophysiology', 'bodyLocation', 'connectedTo', 'diagram', 'partOfSystem', 'relatedCondition', 'relatedTherapy', 'subStructure'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

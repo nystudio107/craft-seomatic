@@ -92,32 +92,6 @@ class LymphaticVessel extends Vessel
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The vasculature the lymphatic structure originates, or afferents, from.
-     *
-     * @var Vessel [schema.org types: Vessel]
-     */
-    public $originatesFrom;
-
-    /**
-     * The anatomical or organ system drained by this vessel; generally refers to
-     * a specific part of an organ.
-     *
-     * @var mixed|AnatomicalStructure|AnatomicalSystem [schema.org types: AnatomicalStructure, AnatomicalSystem]
-     */
-    public $regionDrained;
-
-    /**
-     * The vasculature the lymphatic structure runs, or efferents, to.
-     *
-     * @var Vessel [schema.org types: Vessel]
-     */
-    public $runsTo;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -128,7 +102,6 @@ class LymphaticVessel extends Vessel
         'regionDrained',
         'runsTo'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -136,10 +109,9 @@ class LymphaticVessel extends Vessel
      */
     static protected $_schemaPropertyExpectedTypes = [
         'originatesFrom' => ['Vessel'],
-        'regionDrained' => ['AnatomicalStructure','AnatomicalSystem'],
+        'regionDrained' => ['AnatomicalStructure', 'AnatomicalSystem'],
         'runsTo' => ['Vessel']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -151,6 +123,8 @@ class LymphaticVessel extends Vessel
         'runsTo' => 'The vasculature the lymphatic structure runs, or efferents, to.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -158,7 +132,6 @@ class LymphaticVessel extends Vessel
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -166,14 +139,33 @@ class LymphaticVessel extends Vessel
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The vasculature the lymphatic structure originates, or afferents, from.
+     *
+     * @var Vessel [schema.org types: Vessel]
+     */
+    public $originatesFrom;
+    /**
+     * The anatomical or organ system drained by this vessel; generally refers to
+     * a specific part of an organ.
+     *
+     * @var mixed|AnatomicalStructure|AnatomicalSystem [schema.org types: AnatomicalStructure, AnatomicalSystem]
+     */
+    public $regionDrained;
+    /**
+     * The vasculature the lymphatic structure runs, or efferents, to.
+     *
+     * @var Vessel [schema.org types: Vessel]
+     */
+    public $runsTo;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -203,13 +195,13 @@ class LymphaticVessel extends Vessel
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['originatesFrom','regionDrained','runsTo'], 'validateJsonSchema'],
+            [['originatesFrom', 'regionDrained', 'runsTo'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

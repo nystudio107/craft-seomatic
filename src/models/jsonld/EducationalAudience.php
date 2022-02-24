@@ -91,17 +91,6 @@ class EducationalAudience extends Audience
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * An educationalRole of an EducationalAudience.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $educationalRole;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -111,6 +100,8 @@ class EducationalAudience extends Audience
         'educationalRole'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -119,7 +110,6 @@ class EducationalAudience extends Audience
     static protected $_schemaPropertyExpectedTypes = [
         'educationalRole' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -128,7 +118,6 @@ class EducationalAudience extends Audience
     static protected $_schemaPropertyDescriptions = [
         'educationalRole' => 'An educationalRole of an EducationalAudience.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -136,7 +125,6 @@ class EducationalAudience extends Audience
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -144,14 +132,20 @@ class EducationalAudience extends Audience
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * An educationalRole of an EducationalAudience.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $educationalRole;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -181,9 +175,9 @@ class EducationalAudience extends Audience
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

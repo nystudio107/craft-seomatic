@@ -95,17 +95,6 @@ class MedicalTrial extends MedicalStudy
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Specifics about the trial design (enumerated).
-     *
-     * @var MedicalTrialDesign [schema.org types: MedicalTrialDesign]
-     */
-    public $trialDesign;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -115,6 +104,8 @@ class MedicalTrial extends MedicalStudy
         'trialDesign'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -123,7 +114,6 @@ class MedicalTrial extends MedicalStudy
     static protected $_schemaPropertyExpectedTypes = [
         'trialDesign' => ['MedicalTrialDesign']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -132,7 +122,6 @@ class MedicalTrial extends MedicalStudy
     static protected $_schemaPropertyDescriptions = [
         'trialDesign' => 'Specifics about the trial design (enumerated).'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -140,7 +129,6 @@ class MedicalTrial extends MedicalStudy
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -148,14 +136,20 @@ class MedicalTrial extends MedicalStudy
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Specifics about the trial design (enumerated).
+     *
+     * @var MedicalTrialDesign [schema.org types: MedicalTrialDesign]
+     */
+    public $trialDesign;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -185,9 +179,9 @@ class MedicalTrial extends MedicalStudy
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

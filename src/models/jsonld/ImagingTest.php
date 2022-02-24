@@ -92,17 +92,6 @@ class ImagingTest extends MedicalTest
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Imaging technique used.
-     *
-     * @var MedicalImagingTechnique [schema.org types: MedicalImagingTechnique]
-     */
-    public $imagingTechnique;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -112,6 +101,8 @@ class ImagingTest extends MedicalTest
         'imagingTechnique'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -120,7 +111,6 @@ class ImagingTest extends MedicalTest
     static protected $_schemaPropertyExpectedTypes = [
         'imagingTechnique' => ['MedicalImagingTechnique']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -129,7 +119,6 @@ class ImagingTest extends MedicalTest
     static protected $_schemaPropertyDescriptions = [
         'imagingTechnique' => 'Imaging technique used.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -137,7 +126,6 @@ class ImagingTest extends MedicalTest
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -145,14 +133,20 @@ class ImagingTest extends MedicalTest
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Imaging technique used.
+     *
+     * @var MedicalImagingTechnique [schema.org types: MedicalImagingTechnique]
+     */
+    public $imagingTechnique;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -182,9 +176,9 @@ class ImagingTest extends MedicalTest
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

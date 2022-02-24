@@ -95,27 +95,6 @@ class TouristAttraction extends Place
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A language someone may use with or at the item, service or place. Please
-     * use one of the language codes from the IETF BCP 47 standard. See also
-     * inLanguage
-     *
-     * @var mixed|Language|string [schema.org types: Language, Text]
-     */
-    public $availableLanguage;
-
-    /**
-     * Attraction suitable for type(s) of tourist. eg. Children, visitors from a
-     * particular country, etc.
-     *
-     * @var mixed|Audience|string [schema.org types: Audience, Text]
-     */
-    public $touristType;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -125,17 +104,18 @@ class TouristAttraction extends Place
         'availableLanguage',
         'touristType'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'availableLanguage' => ['Language','Text'],
-        'touristType' => ['Audience','Text']
+        'availableLanguage' => ['Language', 'Text'],
+        'touristType' => ['Audience', 'Text']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -145,7 +125,6 @@ class TouristAttraction extends Place
         'availableLanguage' => 'A language someone may use with or at the item, service or place. Please use one of the language codes from the IETF BCP 47 standard. See also inLanguage',
         'touristType' => 'Attraction suitable for type(s) of tourist. eg. Children, visitors from a particular country, etc.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -153,7 +132,6 @@ class TouristAttraction extends Place
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -161,14 +139,29 @@ class TouristAttraction extends Place
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A language someone may use with or at the item, service or place. Please
+     * use one of the language codes from the IETF BCP 47 standard. See also
+     * inLanguage
+     *
+     * @var mixed|Language|string [schema.org types: Language, Text]
+     */
+    public $availableLanguage;
+    /**
+     * Attraction suitable for type(s) of tourist. eg. Children, visitors from a
+     * particular country, etc.
+     *
+     * @var mixed|Audience|string [schema.org types: Audience, Text]
+     */
+    public $touristType;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -198,13 +191,13 @@ class TouristAttraction extends Place
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['availableLanguage','touristType'], 'validateJsonSchema'],
+            [['availableLanguage', 'touristType'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

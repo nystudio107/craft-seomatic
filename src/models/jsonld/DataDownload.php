@@ -91,7 +91,47 @@ class DataDownload extends MediaObject
 
     // Public Properties
     // =========================================================================
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'measurementTechnique'
+    ];
 
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'measurementTechnique' => ['Text', 'URL']
+    ];
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'measurementTechnique' => 'A technique or technology used in a Dataset (or DataDownload, DataCatalog), corresponding to the method used for measuring the corresponding variable(s) (described using variableMeasured). This is oriented towards scientific and scholarly dataset publication but may have broader applicability; it is not intended as a full representation of measurement, but rather as a high level summary for dataset discovery. For example, if variableMeasured is: molecule concentration, measurementTechnique could be: "mass spectrometry" or "nmr spectroscopy" or "colorimetry" or "immunofluorescence". If the variableMeasured is "depression rating", the measurementTechnique could be "Zung Scale" or "HAM-D" or "Beck Depression Inventory". If there are several variableMeasured properties recorded for some given data object, use a PropertyValue for each variableMeasured and attach the corresponding measurementTechnique.'
+    ];
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
     /**
      * A technique or technology used in a Dataset (or DataDownload, DataCatalog),
      * corresponding to the method used for measuring the corresponding
@@ -111,59 +151,13 @@ class DataDownload extends MediaObject
      */
     public $measurementTechnique;
 
-    // Static Protected Properties
-    // =========================================================================
-
-    /**
-     * The Schema.org Property Names
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyNames = [
-        'measurementTechnique'
-    ];
-
-    /**
-     * The Schema.org Property Expected Types
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyExpectedTypes = [
-        'measurementTechnique' => ['Text','URL']
-    ];
-
-    /**
-     * The Schema.org Property Descriptions
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyDescriptions = [
-        'measurementTechnique' => 'A technique or technology used in a Dataset (or DataDownload, DataCatalog), corresponding to the method used for measuring the corresponding variable(s) (described using variableMeasured). This is oriented towards scientific and scholarly dataset publication but may have broader applicability; it is not intended as a full representation of measurement, but rather as a high level summary for dataset discovery. For example, if variableMeasured is: molecule concentration, measurementTechnique could be: "mass spectrometry" or "nmr spectroscopy" or "colorimetry" or "immunofluorescence". If the variableMeasured is "depression rating", the measurementTechnique could be "Zung Scale" or "HAM-D" or "Beck Depression Inventory". If there are several variableMeasured properties recorded for some given data object, use a PropertyValue for each variableMeasured and attach the corresponding measurementTechnique.'
-    ];
-
-    /**
-     * The Schema.org Google Required Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRequiredSchema = [
-    ];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRecommendedSchema = [
-    ];
-
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -193,9 +187,9 @@ class DataDownload extends MediaObject
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

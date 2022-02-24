@@ -93,18 +93,6 @@ class ReplyAction extends CommunicateAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A sub property of result. The Comment created or sent as a result of this
-     * action.
-     *
-     * @var Comment [schema.org types: Comment]
-     */
-    public $resultComment;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -114,6 +102,8 @@ class ReplyAction extends CommunicateAction
         'resultComment'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -122,7 +112,6 @@ class ReplyAction extends CommunicateAction
     static protected $_schemaPropertyExpectedTypes = [
         'resultComment' => ['Comment']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -131,7 +120,6 @@ class ReplyAction extends CommunicateAction
     static protected $_schemaPropertyDescriptions = [
         'resultComment' => 'A sub property of result. The Comment created or sent as a result of this action.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -139,7 +127,6 @@ class ReplyAction extends CommunicateAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -147,14 +134,21 @@ class ReplyAction extends CommunicateAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A sub property of result. The Comment created or sent as a result of this
+     * action.
+     *
+     * @var Comment [schema.org types: Comment]
+     */
+    public $resultComment;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -184,9 +178,9 @@ class ReplyAction extends CommunicateAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

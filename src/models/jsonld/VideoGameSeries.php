@@ -91,140 +91,6 @@ class VideoGameSeries extends CreativeWorkSeries
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * An actor, e.g. in tv, radio, movie, video games etc., or in an event.
-     * Actors can be associated with individual items or with a series, episode,
-     * clip. Supersedes actors.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $actor;
-
-    /**
-     * A piece of data that represents a particular aspect of a fictional
-     * character (skill, power, character points, advantage, disadvantage).
-     *
-     * @var Thing [schema.org types: Thing]
-     */
-    public $characterAttribute;
-
-    /**
-     * Cheat codes to the game.
-     *
-     * @var CreativeWork [schema.org types: CreativeWork]
-     */
-    public $cheatCode;
-
-    /**
-     * A season that is part of the media series. Supersedes season.
-     *
-     * @var CreativeWorkSeason [schema.org types: CreativeWorkSeason]
-     */
-    public $containsSeason;
-
-    /**
-     * A director of e.g. tv, radio, movie, video gaming etc. content, or of an
-     * event. Directors can be associated with individual items or with a series,
-     * episode, clip. Supersedes directors.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $director;
-
-    /**
-     * An episode of a tv, radio or game media within a series or season.
-     * Supersedes episodes.
-     *
-     * @var Episode [schema.org types: Episode]
-     */
-    public $episode;
-
-    /**
-     * An item is an object within the game world that can be collected by a
-     * player or, occasionally, a non-player character.
-     *
-     * @var Thing [schema.org types: Thing]
-     */
-    public $gameItem;
-
-    /**
-     * Real or fictional location of the game (or part of game).
-     *
-     * @var mixed|Place|PostalAddress|string [schema.org types: Place, PostalAddress, URL]
-     */
-    public $gameLocation;
-
-    /**
-     * The electronic systems used to play video games.
-     *
-     * @var mixed|string|Thing|string [schema.org types: Text, Thing, URL]
-     */
-    public $gamePlatform;
-
-    /**
-     * The composer of the soundtrack.
-     *
-     * @var mixed|MusicGroup|Person [schema.org types: MusicGroup, Person]
-     */
-    public $musicBy;
-
-    /**
-     * The number of episodes in this season or series.
-     *
-     * @var int [schema.org types: Integer]
-     */
-    public $numberOfEpisodes;
-
-    /**
-     * Indicate how many people can play this game (minimum, maximum, or range).
-     *
-     * @var QuantitativeValue [schema.org types: QuantitativeValue]
-     */
-    public $numberOfPlayers;
-
-    /**
-     * The number of seasons in this series.
-     *
-     * @var int [schema.org types: Integer]
-     */
-    public $numberOfSeasons;
-
-    /**
-     * Indicates whether this game is multi-player, co-op or single-player. The
-     * game can be marked as multi-player, co-op and single-player at the same
-     * time.
-     *
-     * @var GamePlayMode [schema.org types: GamePlayMode]
-     */
-    public $playMode;
-
-    /**
-     * The production company or studio responsible for the item e.g. series,
-     * video game, episode etc.
-     *
-     * @var Organization [schema.org types: Organization]
-     */
-    public $productionCompany;
-
-    /**
-     * The task that a player-controlled character, or group of characters may
-     * complete in order to gain a reward.
-     *
-     * @var Thing [schema.org types: Thing]
-     */
-    public $quest;
-
-    /**
-     * The trailer of a movie or tv/radio series, season, episode, etc.
-     *
-     * @var VideoObject [schema.org types: VideoObject]
-     */
-    public $trailer;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -249,7 +115,6 @@ class VideoGameSeries extends CreativeWorkSeries
         'quest',
         'trailer'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -263,9 +128,9 @@ class VideoGameSeries extends CreativeWorkSeries
         'director' => ['Person'],
         'episode' => ['Episode'],
         'gameItem' => ['Thing'],
-        'gameLocation' => ['Place','PostalAddress','URL'],
-        'gamePlatform' => ['Text','Thing','URL'],
-        'musicBy' => ['MusicGroup','Person'],
+        'gameLocation' => ['Place', 'PostalAddress', 'URL'],
+        'gamePlatform' => ['Text', 'Thing', 'URL'],
+        'musicBy' => ['MusicGroup', 'Person'],
         'numberOfEpisodes' => ['Integer'],
         'numberOfPlayers' => ['QuantitativeValue'],
         'numberOfSeasons' => ['Integer'],
@@ -274,7 +139,6 @@ class VideoGameSeries extends CreativeWorkSeries
         'quest' => ['Thing'],
         'trailer' => ['VideoObject']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -299,7 +163,6 @@ class VideoGameSeries extends CreativeWorkSeries
         'quest' => 'The task that a player-controlled character, or group of characters may complete in order to gain a reward.',
         'trailer' => 'The trailer of a movie or tv/radio series, season, episode, etc.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -307,7 +170,6 @@ class VideoGameSeries extends CreativeWorkSeries
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -315,14 +177,130 @@ class VideoGameSeries extends CreativeWorkSeries
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * An actor, e.g. in tv, radio, movie, video games etc., or in an event.
+     * Actors can be associated with individual items or with a series, episode,
+     * clip. Supersedes actors.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $actor;
+    /**
+     * A piece of data that represents a particular aspect of a fictional
+     * character (skill, power, character points, advantage, disadvantage).
+     *
+     * @var Thing [schema.org types: Thing]
+     */
+    public $characterAttribute;
+    /**
+     * Cheat codes to the game.
+     *
+     * @var CreativeWork [schema.org types: CreativeWork]
+     */
+    public $cheatCode;
+    /**
+     * A season that is part of the media series. Supersedes season.
+     *
+     * @var CreativeWorkSeason [schema.org types: CreativeWorkSeason]
+     */
+    public $containsSeason;
+    /**
+     * A director of e.g. tv, radio, movie, video gaming etc. content, or of an
+     * event. Directors can be associated with individual items or with a series,
+     * episode, clip. Supersedes directors.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $director;
+    /**
+     * An episode of a tv, radio or game media within a series or season.
+     * Supersedes episodes.
+     *
+     * @var Episode [schema.org types: Episode]
+     */
+    public $episode;
+    /**
+     * An item is an object within the game world that can be collected by a
+     * player or, occasionally, a non-player character.
+     *
+     * @var Thing [schema.org types: Thing]
+     */
+    public $gameItem;
+    /**
+     * Real or fictional location of the game (or part of game).
+     *
+     * @var mixed|Place|PostalAddress|string [schema.org types: Place, PostalAddress, URL]
+     */
+    public $gameLocation;
+    /**
+     * The electronic systems used to play video games.
+     *
+     * @var mixed|string|Thing|string [schema.org types: Text, Thing, URL]
+     */
+    public $gamePlatform;
+    /**
+     * The composer of the soundtrack.
+     *
+     * @var mixed|MusicGroup|Person [schema.org types: MusicGroup, Person]
+     */
+    public $musicBy;
+    /**
+     * The number of episodes in this season or series.
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $numberOfEpisodes;
+    /**
+     * Indicate how many people can play this game (minimum, maximum, or range).
+     *
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
+     */
+    public $numberOfPlayers;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The number of seasons in this series.
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $numberOfSeasons;
+    /**
+     * Indicates whether this game is multi-player, co-op or single-player. The
+     * game can be marked as multi-player, co-op and single-player at the same
+     * time.
+     *
+     * @var GamePlayMode [schema.org types: GamePlayMode]
+     */
+    public $playMode;
+    /**
+     * The production company or studio responsible for the item e.g. series,
+     * video game, episode etc.
+     *
+     * @var Organization [schema.org types: Organization]
+     */
+    public $productionCompany;
+    /**
+     * The task that a player-controlled character, or group of characters may
+     * complete in order to gain a reward.
+     *
+     * @var Thing [schema.org types: Thing]
+     */
+    public $quest;
+    /**
+     * The trailer of a movie or tv/radio series, season, episode, etc.
+     *
+     * @var VideoObject [schema.org types: VideoObject]
+     */
+    public $trailer;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -352,13 +330,13 @@ class VideoGameSeries extends CreativeWorkSeries
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['actor','characterAttribute','cheatCode','containsSeason','director','episode','gameItem','gameLocation','gamePlatform','musicBy','numberOfEpisodes','numberOfPlayers','numberOfSeasons','playMode','productionCompany','quest','trailer'], 'validateJsonSchema'],
+            [['actor', 'characterAttribute', 'cheatCode', 'containsSeason', 'director', 'episode', 'gameItem', 'gameLocation', 'gamePlatform', 'musicBy', 'numberOfEpisodes', 'numberOfPlayers', 'numberOfSeasons', 'playMode', 'productionCompany', 'quest', 'trailer'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

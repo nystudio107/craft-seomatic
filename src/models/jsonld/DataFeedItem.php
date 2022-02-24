@@ -91,41 +91,6 @@ class DataFeedItem extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The date on which the CreativeWork was created or the item was added to a
-     * DataFeed.
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $dateCreated;
-
-    /**
-     * The datetime the item was removed from the DataFeed.
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $dateDeleted;
-
-    /**
-     * The date on which the CreativeWork was most recently modified or when the
-     * item's entry was modified within a DataFeed.
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $dateModified;
-
-    /**
-     * An entity represented by an entry in a list or data feed (e.g. an 'artist'
-     * in a list of 'artists')’.
-     *
-     * @var Thing [schema.org types: Thing]
-     */
-    public $item;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -137,19 +102,17 @@ class DataFeedItem extends Intangible
         'dateModified',
         'item'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'dateCreated' => ['Date','DateTime'],
-        'dateDeleted' => ['Date','DateTime'],
-        'dateModified' => ['Date','DateTime'],
+        'dateCreated' => ['Date', 'DateTime'],
+        'dateDeleted' => ['Date', 'DateTime'],
+        'dateModified' => ['Date', 'DateTime'],
         'item' => ['Thing']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -161,7 +124,6 @@ class DataFeedItem extends Intangible
         'dateModified' => 'The date on which the CreativeWork was most recently modified or when the item\'s entry was modified within a DataFeed.',
         'item' => 'An entity represented by an entry in a list or data feed (e.g. an \'artist\' in a list of \'artists\')’.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -170,6 +132,8 @@ class DataFeedItem extends Intangible
     static protected $_googleRequiredSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -177,14 +141,41 @@ class DataFeedItem extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The date on which the CreativeWork was created or the item was added to a
+     * DataFeed.
+     *
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     */
+    public $dateCreated;
+    /**
+     * The datetime the item was removed from the DataFeed.
+     *
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     */
+    public $dateDeleted;
+    /**
+     * The date on which the CreativeWork was most recently modified or when the
+     * item's entry was modified within a DataFeed.
+     *
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     */
+    public $dateModified;
+    /**
+     * An entity represented by an entry in a list or data feed (e.g. an 'artist'
+     * in a list of 'artists')’.
+     *
+     * @var Thing [schema.org types: Thing]
+     */
+    public $item;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -214,13 +205,13 @@ class DataFeedItem extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['dateCreated','dateDeleted','dateModified','item'], 'validateJsonSchema'],
+            [['dateCreated', 'dateDeleted', 'dateModified', 'item'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

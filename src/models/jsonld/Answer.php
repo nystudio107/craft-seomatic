@@ -92,33 +92,6 @@ class Answer extends Comment
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The number of downvotes this question, answer or comment has received from
-     * the community.
-     *
-     * @var int [schema.org types: Integer]
-     */
-    public $downvoteCount;
-
-    /**
-     * The parent of a question, answer or item in general.
-     *
-     * @var Question [schema.org types: Question]
-     */
-    public $parentItem;
-
-    /**
-     * The number of upvotes this question, answer or comment has received from
-     * the community.
-     *
-     * @var int [schema.org types: Integer]
-     */
-    public $upvoteCount;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -129,7 +102,6 @@ class Answer extends Comment
         'parentItem',
         'upvoteCount'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -140,7 +112,6 @@ class Answer extends Comment
         'parentItem' => ['Question'],
         'upvoteCount' => ['Integer']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -152,6 +123,8 @@ class Answer extends Comment
         'upvoteCount' => 'The number of upvotes this question, answer or comment has received from the community.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -159,7 +132,6 @@ class Answer extends Comment
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -167,14 +139,34 @@ class Answer extends Comment
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The number of downvotes this question, answer or comment has received from
+     * the community.
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $downvoteCount;
+    /**
+     * The parent of a question, answer or item in general.
+     *
+     * @var Question [schema.org types: Question]
+     */
+    public $parentItem;
+    /**
+     * The number of upvotes this question, answer or comment has received from
+     * the community.
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $upvoteCount;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -204,13 +196,13 @@ class Answer extends Comment
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['downvoteCount','parentItem','upvoteCount'], 'validateJsonSchema'],
+            [['downvoteCount', 'parentItem', 'upvoteCount'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

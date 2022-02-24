@@ -91,80 +91,6 @@ class TVClip extends Clip
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * An actor, e.g. in tv, radio, movie, video games etc., or in an event.
-     * Actors can be associated with individual items or with a series, episode,
-     * clip. Supersedes actors.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $actor;
-
-    /**
-     * Position of the clip within an ordered group of clips.
-     *
-     * @var mixed|int|string [schema.org types: Integer, Text]
-     */
-    public $clipNumber;
-
-    /**
-     * A director of e.g. tv, radio, movie, video gaming etc. content, or of an
-     * event. Directors can be associated with individual items or with a series,
-     * episode, clip. Supersedes directors.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $director;
-
-    /**
-     * The end time of the clip expressed as the number of seconds from the
-     * beginning of the work.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $endOffset;
-
-    /**
-     * The composer of the soundtrack.
-     *
-     * @var mixed|MusicGroup|Person [schema.org types: MusicGroup, Person]
-     */
-    public $musicBy;
-
-    /**
-     * The episode to which this clip belongs.
-     *
-     * @var Episode [schema.org types: Episode]
-     */
-    public $partOfEpisode;
-
-    /**
-     * The season to which this episode belongs.
-     *
-     * @var CreativeWorkSeason [schema.org types: CreativeWorkSeason]
-     */
-    public $partOfSeason;
-
-    /**
-     * The series to which this episode or season belongs. Supersedes
-     * partOfTVSeries.
-     *
-     * @var CreativeWorkSeries [schema.org types: CreativeWorkSeries]
-     */
-    public $partOfSeries;
-
-    /**
-     * The start time of the clip expressed as the number of seconds from the
-     * beginning of the work.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $startOffset;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -181,7 +107,6 @@ class TVClip extends Clip
         'partOfSeries',
         'startOffset'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -189,16 +114,15 @@ class TVClip extends Clip
      */
     static protected $_schemaPropertyExpectedTypes = [
         'actor' => ['Person'],
-        'clipNumber' => ['Integer','Text'],
+        'clipNumber' => ['Integer', 'Text'],
         'director' => ['Person'],
         'endOffset' => ['Number'],
-        'musicBy' => ['MusicGroup','Person'],
+        'musicBy' => ['MusicGroup', 'Person'],
         'partOfEpisode' => ['Episode'],
         'partOfSeason' => ['CreativeWorkSeason'],
         'partOfSeries' => ['CreativeWorkSeries'],
         'startOffset' => ['Number']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -215,7 +139,6 @@ class TVClip extends Clip
         'partOfSeries' => 'The series to which this episode or season belongs. Supersedes partOfTVSeries.',
         'startOffset' => 'The start time of the clip expressed as the number of seconds from the beginning of the work.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -223,7 +146,6 @@ class TVClip extends Clip
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -231,14 +153,78 @@ class TVClip extends Clip
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * An actor, e.g. in tv, radio, movie, video games etc., or in an event.
+     * Actors can be associated with individual items or with a series, episode,
+     * clip. Supersedes actors.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $actor;
+    /**
+     * Position of the clip within an ordered group of clips.
+     *
+     * @var mixed|int|string [schema.org types: Integer, Text]
+     */
+    public $clipNumber;
+    /**
+     * A director of e.g. tv, radio, movie, video gaming etc. content, or of an
+     * event. Directors can be associated with individual items or with a series,
+     * episode, clip. Supersedes directors.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $director;
+    /**
+     * The end time of the clip expressed as the number of seconds from the
+     * beginning of the work.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $endOffset;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The composer of the soundtrack.
+     *
+     * @var mixed|MusicGroup|Person [schema.org types: MusicGroup, Person]
+     */
+    public $musicBy;
+    /**
+     * The episode to which this clip belongs.
+     *
+     * @var Episode [schema.org types: Episode]
+     */
+    public $partOfEpisode;
+    /**
+     * The season to which this episode belongs.
+     *
+     * @var CreativeWorkSeason [schema.org types: CreativeWorkSeason]
+     */
+    public $partOfSeason;
+    /**
+     * The series to which this episode or season belongs. Supersedes
+     * partOfTVSeries.
+     *
+     * @var CreativeWorkSeries [schema.org types: CreativeWorkSeries]
+     */
+    public $partOfSeries;
+    /**
+     * The start time of the clip expressed as the number of seconds from the
+     * beginning of the work.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $startOffset;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -268,13 +254,13 @@ class TVClip extends Clip
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['actor','clipNumber','director','endOffset','musicBy','partOfEpisode','partOfSeason','partOfSeries','startOffset'], 'validateJsonSchema'],
+            [['actor', 'clipNumber', 'director', 'endOffset', 'musicBy', 'partOfEpisode', 'partOfSeason', 'partOfSeries', 'startOffset'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

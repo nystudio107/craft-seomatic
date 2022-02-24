@@ -95,25 +95,6 @@ class GeoCircle extends GeoShape
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Indicates the GeoCoordinates at the centre of a GeoShape e.g. GeoCircle.
-     *
-     * @var GeoCoordinates [schema.org types: GeoCoordinates]
-     */
-    public $geoMidpoint;
-
-    /**
-     * Indicates the approximate radius of a GeoCircle (metres unless indicated
-     * otherwise via Distance notation).
-     *
-     * @var mixed|Distance|float|string [schema.org types: Distance, Number, Text]
-     */
-    public $geoRadius;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -123,7 +104,6 @@ class GeoCircle extends GeoShape
         'geoMidpoint',
         'geoRadius'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -131,9 +111,11 @@ class GeoCircle extends GeoShape
      */
     static protected $_schemaPropertyExpectedTypes = [
         'geoMidpoint' => ['GeoCoordinates'],
-        'geoRadius' => ['Distance','Number','Text']
+        'geoRadius' => ['Distance', 'Number', 'Text']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -143,7 +125,6 @@ class GeoCircle extends GeoShape
         'geoMidpoint' => 'Indicates the GeoCoordinates at the centre of a GeoShape e.g. GeoCircle.',
         'geoRadius' => 'Indicates the approximate radius of a GeoCircle (metres unless indicated otherwise via Distance notation).'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -151,7 +132,6 @@ class GeoCircle extends GeoShape
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -159,14 +139,27 @@ class GeoCircle extends GeoShape
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Indicates the GeoCoordinates at the centre of a GeoShape e.g. GeoCircle.
+     *
+     * @var GeoCoordinates [schema.org types: GeoCoordinates]
+     */
+    public $geoMidpoint;
+    /**
+     * Indicates the approximate radius of a GeoCircle (metres unless indicated
+     * otherwise via Distance notation).
+     *
+     * @var mixed|Distance|float|string [schema.org types: Distance, Number, Text]
+     */
+    public $geoRadius;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -196,13 +189,13 @@ class GeoCircle extends GeoShape
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['geoMidpoint','geoRadius'], 'validateJsonSchema'],
+            [['geoMidpoint', 'geoRadius'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

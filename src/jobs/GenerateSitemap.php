@@ -11,10 +11,9 @@
 
 namespace nystudio107\seomatic\jobs;
 
-use nystudio107\seomatic\helpers\Sitemap;
-
 use Craft;
 use craft\queue\BaseJob;
+use nystudio107\seomatic\helpers\Sitemap;
 
 /**
  * @author    nystudio107
@@ -49,7 +48,7 @@ class GenerateSitemap extends BaseJob
     /**
      * @inheritdoc
      */
-    public function execute($queue)
+    public function execute($queue): void
     {
         $params = [
             'groupId' => $this->groupId,
@@ -69,7 +68,8 @@ class GenerateSitemap extends BaseJob
      * Wrapper for `setProgress()`
      * @param float $progress
      */
-    public function updateProgress(float $progress) {
+    public function updateProgress(float $progress)
+    {
         $this->setProgress($this->queue, $progress);
     }
 

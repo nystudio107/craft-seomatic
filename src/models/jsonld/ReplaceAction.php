@@ -92,24 +92,6 @@ class ReplaceAction extends UpdateAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A sub property of object. The object that is being replaced.
-     *
-     * @var Thing [schema.org types: Thing]
-     */
-    public $replacee;
-
-    /**
-     * A sub property of object. The object that replaces.
-     *
-     * @var Thing [schema.org types: Thing]
-     */
-    public $replacer;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -119,7 +101,6 @@ class ReplaceAction extends UpdateAction
         'replacee',
         'replacer'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -130,6 +111,8 @@ class ReplaceAction extends UpdateAction
         'replacer' => ['Thing']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -139,7 +122,6 @@ class ReplaceAction extends UpdateAction
         'replacee' => 'A sub property of object. The object that is being replaced.',
         'replacer' => 'A sub property of object. The object that replaces.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -147,7 +129,6 @@ class ReplaceAction extends UpdateAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -155,14 +136,26 @@ class ReplaceAction extends UpdateAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A sub property of object. The object that is being replaced.
+     *
+     * @var Thing [schema.org types: Thing]
+     */
+    public $replacee;
+    /**
+     * A sub property of object. The object that replaces.
+     *
+     * @var Thing [schema.org types: Thing]
+     */
+    public $replacer;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -192,13 +185,13 @@ class ReplaceAction extends UpdateAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['replacee','replacer'], 'validateJsonSchema'],
+            [['replacee', 'replacer'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

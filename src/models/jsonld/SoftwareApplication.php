@@ -91,175 +91,6 @@ class SoftwareApplication extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Type of software application, e.g. 'Game, Multimedia'.
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $applicationCategory;
-
-    /**
-     * Subcategory of the application, e.g. 'Arcade Game'.
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $applicationSubCategory;
-
-    /**
-     * The name of the application suite to which the application belongs (e.g.
-     * Excel belongs to Office).
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $applicationSuite;
-
-    /**
-     * Device required to run the application. Used in cases where a specific
-     * make/model is required to run the application. Supersedes device.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $availableOnDevice;
-
-    /**
-     * Countries for which the application is not supported. You can also provide
-     * the two-letter ISO 3166-1 alpha-2 country code.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $countriesNotSupported;
-
-    /**
-     * Countries for which the application is supported. You can also provide the
-     * two-letter ISO 3166-1 alpha-2 country code.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $countriesSupported;
-
-    /**
-     * If the file can be downloaded, URL to download the binary.
-     *
-     * @var string [schema.org types: URL]
-     */
-    public $downloadUrl;
-
-    /**
-     * Features or modules provided by this application (and possibly required by
-     * other applications).
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $featureList;
-
-    /**
-     * Size of the application / package (e.g. 18MB). In the absence of a unit
-     * (MB, KB etc.), KB will be assumed.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $fileSize;
-
-    /**
-     * URL at which the app may be installed, if different from the URL of the
-     * item.
-     *
-     * @var string [schema.org types: URL]
-     */
-    public $installUrl;
-
-    /**
-     * Minimum memory requirements.
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $memoryRequirements;
-
-    /**
-     * Operating systems supported (Windows 7, OSX 10.6, Android 1.6).
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $operatingSystem;
-
-    /**
-     * Permission(s) required to run the app (for example, a mobile app may
-     * require full internet access or may run only on wifi).
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $permissions;
-
-    /**
-     * Processor architecture required to run the application (e.g. IA64).
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $processorRequirements;
-
-    /**
-     * Description of what changed in this version.
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $releaseNotes;
-
-    /**
-     * A link to a screenshot image of the app.
-     *
-     * @var mixed|ImageObject|string [schema.org types: ImageObject, URL]
-     */
-    public $screenshot;
-
-    /**
-     * Additional content for a software application.
-     *
-     * @var SoftwareApplication [schema.org types: SoftwareApplication]
-     */
-    public $softwareAddOn;
-
-    /**
-     * Software application help.
-     *
-     * @var CreativeWork [schema.org types: CreativeWork]
-     */
-    public $softwareHelp;
-
-    /**
-     * Component dependency requirements for application. This includes runtime
-     * environments and shared libraries that are not included in the application
-     * distribution package, but required to run the application (Examples:
-     * DirectX, Java or .NET runtime). Supersedes requirements.
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $softwareRequirements;
-
-    /**
-     * Version of the software instance.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $softwareVersion;
-
-    /**
-     * Storage requirements (free space required).
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $storageRequirements;
-
-    /**
-     * Supporting data for a SoftwareApplication.
-     *
-     * @var DataFeed [schema.org types: DataFeed]
-     */
-    public $supportingData;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -289,37 +120,35 @@ class SoftwareApplication extends CreativeWork
         'storageRequirements',
         'supportingData'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'applicationCategory' => ['Text','URL'],
-        'applicationSubCategory' => ['Text','URL'],
+        'applicationCategory' => ['Text', 'URL'],
+        'applicationSubCategory' => ['Text', 'URL'],
         'applicationSuite' => ['Text'],
         'availableOnDevice' => ['Text'],
         'countriesNotSupported' => ['Text'],
         'countriesSupported' => ['Text'],
         'downloadUrl' => ['URL'],
-        'featureList' => ['Text','URL'],
+        'featureList' => ['Text', 'URL'],
         'fileSize' => ['Text'],
         'installUrl' => ['URL'],
-        'memoryRequirements' => ['Text','URL'],
+        'memoryRequirements' => ['Text', 'URL'],
         'operatingSystem' => ['Text'],
         'permissions' => ['Text'],
         'processorRequirements' => ['Text'],
-        'releaseNotes' => ['Text','URL'],
-        'screenshot' => ['ImageObject','URL'],
+        'releaseNotes' => ['Text', 'URL'],
+        'screenshot' => ['ImageObject', 'URL'],
         'softwareAddOn' => ['SoftwareApplication'],
         'softwareHelp' => ['CreativeWork'],
-        'softwareRequirements' => ['Text','URL'],
+        'softwareRequirements' => ['Text', 'URL'],
         'softwareVersion' => ['Text'],
-        'storageRequirements' => ['Text','URL'],
+        'storageRequirements' => ['Text', 'URL'],
         'supportingData' => ['DataFeed']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -349,7 +178,6 @@ class SoftwareApplication extends CreativeWork
         'storageRequirements' => 'Storage requirements (free space required).',
         'supportingData' => 'Supporting data for a SoftwareApplication.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -357,7 +185,6 @@ class SoftwareApplication extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -365,14 +192,160 @@ class SoftwareApplication extends CreativeWork
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Type of software application, e.g. 'Game, Multimedia'.
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $applicationCategory;
+    /**
+     * Subcategory of the application, e.g. 'Arcade Game'.
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $applicationSubCategory;
+    /**
+     * The name of the application suite to which the application belongs (e.g.
+     * Excel belongs to Office).
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $applicationSuite;
+    /**
+     * Device required to run the application. Used in cases where a specific
+     * make/model is required to run the application. Supersedes device.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $availableOnDevice;
+    /**
+     * Countries for which the application is not supported. You can also provide
+     * the two-letter ISO 3166-1 alpha-2 country code.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $countriesNotSupported;
+    /**
+     * Countries for which the application is supported. You can also provide the
+     * two-letter ISO 3166-1 alpha-2 country code.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $countriesSupported;
+    /**
+     * If the file can be downloaded, URL to download the binary.
+     *
+     * @var string [schema.org types: URL]
+     */
+    public $downloadUrl;
+    /**
+     * Features or modules provided by this application (and possibly required by
+     * other applications).
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $featureList;
+    /**
+     * Size of the application / package (e.g. 18MB). In the absence of a unit
+     * (MB, KB etc.), KB will be assumed.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $fileSize;
+    /**
+     * URL at which the app may be installed, if different from the URL of the
+     * item.
+     *
+     * @var string [schema.org types: URL]
+     */
+    public $installUrl;
+    /**
+     * Minimum memory requirements.
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $memoryRequirements;
+    /**
+     * Operating systems supported (Windows 7, OSX 10.6, Android 1.6).
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $operatingSystem;
+    /**
+     * Permission(s) required to run the app (for example, a mobile app may
+     * require full internet access or may run only on wifi).
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $permissions;
+    /**
+     * Processor architecture required to run the application (e.g. IA64).
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $processorRequirements;
+    /**
+     * Description of what changed in this version.
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $releaseNotes;
+    /**
+     * A link to a screenshot image of the app.
+     *
+     * @var mixed|ImageObject|string [schema.org types: ImageObject, URL]
+     */
+    public $screenshot;
+    /**
+     * Additional content for a software application.
+     *
+     * @var SoftwareApplication [schema.org types: SoftwareApplication]
+     */
+    public $softwareAddOn;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * Software application help.
+     *
+     * @var CreativeWork [schema.org types: CreativeWork]
+     */
+    public $softwareHelp;
+    /**
+     * Component dependency requirements for application. This includes runtime
+     * environments and shared libraries that are not included in the application
+     * distribution package, but required to run the application (Examples:
+     * DirectX, Java or .NET runtime). Supersedes requirements.
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $softwareRequirements;
+    /**
+     * Version of the software instance.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $softwareVersion;
+    /**
+     * Storage requirements (free space required).
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $storageRequirements;
+    /**
+     * Supporting data for a SoftwareApplication.
+     *
+     * @var DataFeed [schema.org types: DataFeed]
+     */
+    public $supportingData;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -402,13 +375,13 @@ class SoftwareApplication extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['applicationCategory','applicationSubCategory','applicationSuite','availableOnDevice','countriesNotSupported','countriesSupported','downloadUrl','featureList','fileSize','installUrl','memoryRequirements','operatingSystem','permissions','processorRequirements','releaseNotes','screenshot','softwareAddOn','softwareHelp','softwareRequirements','softwareVersion','storageRequirements','supportingData'], 'validateJsonSchema'],
+            [['applicationCategory', 'applicationSubCategory', 'applicationSuite', 'availableOnDevice', 'countriesNotSupported', 'countriesSupported', 'downloadUrl', 'featureList', 'fileSize', 'installUrl', 'memoryRequirements', 'operatingSystem', 'permissions', 'processorRequirements', 'releaseNotes', 'screenshot', 'softwareAddOn', 'softwareHelp', 'softwareRequirements', 'softwareVersion', 'storageRequirements', 'supportingData'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

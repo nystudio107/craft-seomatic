@@ -92,31 +92,6 @@ class EmployerAggregateRating extends AggregateRating
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The item that is being reviewed/rated.
-     *
-     * @var Thing [schema.org types: Thing]
-     */
-    public $itemReviewed;
-
-    /**
-     * The count of total number of ratings.
-     *
-     * @var int [schema.org types: Integer]
-     */
-    public $ratingCount;
-
-    /**
-     * The count of total number of reviews.
-     *
-     * @var int [schema.org types: Integer]
-     */
-    public $reviewCount;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -127,7 +102,6 @@ class EmployerAggregateRating extends AggregateRating
         'ratingCount',
         'reviewCount'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -138,7 +112,6 @@ class EmployerAggregateRating extends AggregateRating
         'ratingCount' => ['Integer'],
         'reviewCount' => ['Integer']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -150,6 +123,8 @@ class EmployerAggregateRating extends AggregateRating
         'reviewCount' => 'The count of total number of reviews.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -157,7 +132,6 @@ class EmployerAggregateRating extends AggregateRating
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -165,14 +139,32 @@ class EmployerAggregateRating extends AggregateRating
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The item that is being reviewed/rated.
+     *
+     * @var Thing [schema.org types: Thing]
+     */
+    public $itemReviewed;
+    /**
+     * The count of total number of ratings.
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $ratingCount;
+    /**
+     * The count of total number of reviews.
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $reviewCount;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -202,13 +194,13 @@ class EmployerAggregateRating extends AggregateRating
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['itemReviewed','ratingCount','reviewCount'], 'validateJsonSchema'],
+            [['itemReviewed', 'ratingCount', 'reviewCount'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

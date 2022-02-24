@@ -91,25 +91,6 @@ class MonetaryGrant extends Grant
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The amount of money.
-     *
-     * @var mixed|MonetaryAmount|float [schema.org types: MonetaryAmount, Number]
-     */
-    public $amount;
-
-    /**
-     * A person or organization that supports (sponsors) something through some
-     * kind of financial contribution.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $funder;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -119,17 +100,18 @@ class MonetaryGrant extends Grant
         'amount',
         'funder'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'amount' => ['MonetaryAmount','Number'],
-        'funder' => ['Organization','Person']
+        'amount' => ['MonetaryAmount', 'Number'],
+        'funder' => ['Organization', 'Person']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -139,7 +121,6 @@ class MonetaryGrant extends Grant
         'amount' => 'The amount of money.',
         'funder' => 'A person or organization that supports (sponsors) something through some kind of financial contribution.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -147,7 +128,6 @@ class MonetaryGrant extends Grant
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -155,14 +135,27 @@ class MonetaryGrant extends Grant
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The amount of money.
+     *
+     * @var mixed|MonetaryAmount|float [schema.org types: MonetaryAmount, Number]
+     */
+    public $amount;
+    /**
+     * A person or organization that supports (sponsors) something through some
+     * kind of financial contribution.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $funder;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -192,13 +185,13 @@ class MonetaryGrant extends Grant
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['amount','funder'], 'validateJsonSchema'],
+            [['amount', 'funder'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

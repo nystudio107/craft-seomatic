@@ -92,69 +92,6 @@ class ServiceChannel extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A language someone may use with or at the item, service or place. Please
-     * use one of the language codes from the IETF BCP 47 standard. See also
-     * inLanguage
-     *
-     * @var mixed|Language|string [schema.org types: Language, Text]
-     */
-    public $availableLanguage;
-
-    /**
-     * Estimated processing time for the service using this channel.
-     *
-     * @var Duration [schema.org types: Duration]
-     */
-    public $processingTime;
-
-    /**
-     * The service provided by this channel.
-     *
-     * @var Service [schema.org types: Service]
-     */
-    public $providesService;
-
-    /**
-     * The location (e.g. civic structure, local business, etc.) where a person
-     * can go to access the service.
-     *
-     * @var Place [schema.org types: Place]
-     */
-    public $serviceLocation;
-
-    /**
-     * The phone number to use to access the service.
-     *
-     * @var ContactPoint [schema.org types: ContactPoint]
-     */
-    public $servicePhone;
-
-    /**
-     * The address for accessing the service by mail.
-     *
-     * @var PostalAddress [schema.org types: PostalAddress]
-     */
-    public $servicePostalAddress;
-
-    /**
-     * The number to access the service by text message.
-     *
-     * @var ContactPoint [schema.org types: ContactPoint]
-     */
-    public $serviceSmsNumber;
-
-    /**
-     * The website to access the service.
-     *
-     * @var string [schema.org types: URL]
-     */
-    public $serviceUrl;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -170,14 +107,13 @@ class ServiceChannel extends Intangible
         'serviceSmsNumber',
         'serviceUrl'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'availableLanguage' => ['Language','Text'],
+        'availableLanguage' => ['Language', 'Text'],
         'processingTime' => ['Duration'],
         'providesService' => ['Service'],
         'serviceLocation' => ['Place'],
@@ -186,7 +122,6 @@ class ServiceChannel extends Intangible
         'serviceSmsNumber' => ['ContactPoint'],
         'serviceUrl' => ['URL']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -202,7 +137,6 @@ class ServiceChannel extends Intangible
         'serviceSmsNumber' => 'The number to access the service by text message.',
         'serviceUrl' => 'The website to access the service.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -210,7 +144,6 @@ class ServiceChannel extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -218,14 +151,68 @@ class ServiceChannel extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A language someone may use with or at the item, service or place. Please
+     * use one of the language codes from the IETF BCP 47 standard. See also
+     * inLanguage
+     *
+     * @var mixed|Language|string [schema.org types: Language, Text]
+     */
+    public $availableLanguage;
+    /**
+     * Estimated processing time for the service using this channel.
+     *
+     * @var Duration [schema.org types: Duration]
+     */
+    public $processingTime;
+    /**
+     * The service provided by this channel.
+     *
+     * @var Service [schema.org types: Service]
+     */
+    public $providesService;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The location (e.g. civic structure, local business, etc.) where a person
+     * can go to access the service.
+     *
+     * @var Place [schema.org types: Place]
+     */
+    public $serviceLocation;
+    /**
+     * The phone number to use to access the service.
+     *
+     * @var ContactPoint [schema.org types: ContactPoint]
+     */
+    public $servicePhone;
+    /**
+     * The address for accessing the service by mail.
+     *
+     * @var PostalAddress [schema.org types: PostalAddress]
+     */
+    public $servicePostalAddress;
+    /**
+     * The number to access the service by text message.
+     *
+     * @var ContactPoint [schema.org types: ContactPoint]
+     */
+    public $serviceSmsNumber;
+    /**
+     * The website to access the service.
+     *
+     * @var string [schema.org types: URL]
+     */
+    public $serviceUrl;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -255,13 +242,13 @@ class ServiceChannel extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['availableLanguage','processingTime','providesService','serviceLocation','servicePhone','servicePostalAddress','serviceSmsNumber','serviceUrl'], 'validateJsonSchema'],
+            [['availableLanguage', 'processingTime', 'providesService', 'serviceLocation', 'servicePhone', 'servicePostalAddress', 'serviceSmsNumber', 'serviceUrl'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -92,26 +92,6 @@ class MortgageLoan extends LoanOrCredit
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Whether borrower is a resident of the jurisdiction where the property is
-     * located.
-     *
-     * @var bool [schema.org types: Boolean]
-     */
-    public $domiciledMortgage;
-
-    /**
-     * Amount of mortgage mandate that can be converted into a proper mortgage at
-     * a later stage.
-     *
-     * @var MonetaryAmount [schema.org types: MonetaryAmount]
-     */
-    public $loanMortgageMandateAmount;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -121,7 +101,6 @@ class MortgageLoan extends LoanOrCredit
         'domiciledMortgage',
         'loanMortgageMandateAmount'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -132,6 +111,8 @@ class MortgageLoan extends LoanOrCredit
         'loanMortgageMandateAmount' => ['MonetaryAmount']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -141,7 +122,6 @@ class MortgageLoan extends LoanOrCredit
         'domiciledMortgage' => 'Whether borrower is a resident of the jurisdiction where the property is located.',
         'loanMortgageMandateAmount' => 'Amount of mortgage mandate that can be converted into a proper mortgage at a later stage.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -149,7 +129,6 @@ class MortgageLoan extends LoanOrCredit
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -157,14 +136,28 @@ class MortgageLoan extends LoanOrCredit
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Whether borrower is a resident of the jurisdiction where the property is
+     * located.
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $domiciledMortgage;
+    /**
+     * Amount of mortgage mandate that can be converted into a proper mortgage at
+     * a later stage.
+     *
+     * @var MonetaryAmount [schema.org types: MonetaryAmount]
+     */
+    public $loanMortgageMandateAmount;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -194,13 +187,13 @@ class MortgageLoan extends LoanOrCredit
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['domiciledMortgage','loanMortgageMandateAmount'], 'validateJsonSchema'],
+            [['domiciledMortgage', 'loanMortgageMandateAmount'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

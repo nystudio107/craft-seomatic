@@ -92,17 +92,6 @@ class DataFeed extends Dataset
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * An item within in a data feed. Data feeds may have many elements.
-     *
-     * @var mixed|DataFeedItem|string|Thing [schema.org types: DataFeedItem, Text, Thing]
-     */
-    public $dataFeedElement;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -112,15 +101,16 @@ class DataFeed extends Dataset
         'dataFeedElement'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'dataFeedElement' => ['DataFeedItem','Text','Thing']
+        'dataFeedElement' => ['DataFeedItem', 'Text', 'Thing']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -129,7 +119,6 @@ class DataFeed extends Dataset
     static protected $_schemaPropertyDescriptions = [
         'dataFeedElement' => 'An item within in a data feed. Data feeds may have many elements.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -137,7 +126,6 @@ class DataFeed extends Dataset
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -145,14 +133,20 @@ class DataFeed extends Dataset
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * An item within in a data feed. Data feeds may have many elements.
+     *
+     * @var mixed|DataFeedItem|string|Thing [schema.org types: DataFeedItem, Text, Thing]
+     */
+    public $dataFeedElement;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -182,9 +176,9 @@ class DataFeed extends Dataset
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

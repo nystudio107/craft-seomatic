@@ -91,87 +91,6 @@ class CreativeWorkSeason extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * An actor, e.g. in tv, radio, movie, video games etc., or in an event.
-     * Actors can be associated with individual items or with a series, episode,
-     * clip. Supersedes actors.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $actor;
-
-    /**
-     * A director of e.g. tv, radio, movie, video gaming etc. content, or of an
-     * event. Directors can be associated with individual items or with a series,
-     * episode, clip. Supersedes directors.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $director;
-
-    /**
-     * The end date and time of the item (in ISO 8601 date format).
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $endDate;
-
-    /**
-     * An episode of a tv, radio or game media within a series or season.
-     * Supersedes episodes.
-     *
-     * @var Episode [schema.org types: Episode]
-     */
-    public $episode;
-
-    /**
-     * The number of episodes in this season or series.
-     *
-     * @var int [schema.org types: Integer]
-     */
-    public $numberOfEpisodes;
-
-    /**
-     * The series to which this episode or season belongs. Supersedes
-     * partOfTVSeries.
-     *
-     * @var CreativeWorkSeries [schema.org types: CreativeWorkSeries]
-     */
-    public $partOfSeries;
-
-    /**
-     * The production company or studio responsible for the item e.g. series,
-     * video game, episode etc.
-     *
-     * @var Organization [schema.org types: Organization]
-     */
-    public $productionCompany;
-
-    /**
-     * Position of the season within an ordered group of seasons.
-     *
-     * @var mixed|int|string [schema.org types: Integer, Text]
-     */
-    public $seasonNumber;
-
-    /**
-     * The start date and time of the item (in ISO 8601 date format).
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $startDate;
-
-    /**
-     * The trailer of a movie or tv/radio series, season, episode, etc.
-     *
-     * @var VideoObject [schema.org types: VideoObject]
-     */
-    public $trailer;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -189,7 +108,6 @@ class CreativeWorkSeason extends CreativeWork
         'startDate',
         'trailer'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -198,16 +116,15 @@ class CreativeWorkSeason extends CreativeWork
     static protected $_schemaPropertyExpectedTypes = [
         'actor' => ['Person'],
         'director' => ['Person'],
-        'endDate' => ['Date','DateTime'],
+        'endDate' => ['Date', 'DateTime'],
         'episode' => ['Episode'],
         'numberOfEpisodes' => ['Integer'],
         'partOfSeries' => ['CreativeWorkSeries'],
         'productionCompany' => ['Organization'],
-        'seasonNumber' => ['Integer','Text'],
-        'startDate' => ['Date','DateTime'],
+        'seasonNumber' => ['Integer', 'Text'],
+        'startDate' => ['Date', 'DateTime'],
         'trailer' => ['VideoObject']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -225,7 +142,6 @@ class CreativeWorkSeason extends CreativeWork
         'startDate' => 'The start date and time of the item (in ISO 8601 date format).',
         'trailer' => 'The trailer of a movie or tv/radio series, season, episode, etc.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -233,7 +149,6 @@ class CreativeWorkSeason extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -241,14 +156,84 @@ class CreativeWorkSeason extends CreativeWork
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * An actor, e.g. in tv, radio, movie, video games etc., or in an event.
+     * Actors can be associated with individual items or with a series, episode,
+     * clip. Supersedes actors.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $actor;
+    /**
+     * A director of e.g. tv, radio, movie, video gaming etc. content, or of an
+     * event. Directors can be associated with individual items or with a series,
+     * episode, clip. Supersedes directors.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $director;
+    /**
+     * The end date and time of the item (in ISO 8601 date format).
+     *
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     */
+    public $endDate;
+    /**
+     * An episode of a tv, radio or game media within a series or season.
+     * Supersedes episodes.
+     *
+     * @var Episode [schema.org types: Episode]
+     */
+    public $episode;
+    /**
+     * The number of episodes in this season or series.
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $numberOfEpisodes;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The series to which this episode or season belongs. Supersedes
+     * partOfTVSeries.
+     *
+     * @var CreativeWorkSeries [schema.org types: CreativeWorkSeries]
+     */
+    public $partOfSeries;
+    /**
+     * The production company or studio responsible for the item e.g. series,
+     * video game, episode etc.
+     *
+     * @var Organization [schema.org types: Organization]
+     */
+    public $productionCompany;
+    /**
+     * Position of the season within an ordered group of seasons.
+     *
+     * @var mixed|int|string [schema.org types: Integer, Text]
+     */
+    public $seasonNumber;
+    /**
+     * The start date and time of the item (in ISO 8601 date format).
+     *
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     */
+    public $startDate;
+    /**
+     * The trailer of a movie or tv/radio series, season, episode, etc.
+     *
+     * @var VideoObject [schema.org types: VideoObject]
+     */
+    public $trailer;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -278,13 +263,13 @@ class CreativeWorkSeason extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['actor','director','endDate','episode','numberOfEpisodes','partOfSeries','productionCompany','seasonNumber','startDate','trailer'], 'validateJsonSchema'],
+            [['actor', 'director', 'endDate', 'episode', 'numberOfEpisodes', 'partOfSeries', 'productionCompany', 'seasonNumber', 'startDate', 'trailer'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -97,19 +97,6 @@ class HealthTopicContent extends WebContent
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Indicates the aspect or aspects specifically addressed in some
-     * HealthTopicContent. For example, that the content is an overview, or that
-     * it talks about treatment, self-care, treatments or their side-effects.
-     *
-     * @var HealthAspectEnumeration [schema.org types: HealthAspectEnumeration]
-     */
-    public $hasHealthAspect;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -119,6 +106,8 @@ class HealthTopicContent extends WebContent
         'hasHealthAspect'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -127,7 +116,6 @@ class HealthTopicContent extends WebContent
     static protected $_schemaPropertyExpectedTypes = [
         'hasHealthAspect' => ['HealthAspectEnumeration']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -136,7 +124,6 @@ class HealthTopicContent extends WebContent
     static protected $_schemaPropertyDescriptions = [
         'hasHealthAspect' => 'Indicates the aspect or aspects specifically addressed in some HealthTopicContent. For example, that the content is an overview, or that it talks about treatment, self-care, treatments or their side-effects.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -144,7 +131,6 @@ class HealthTopicContent extends WebContent
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -152,14 +138,22 @@ class HealthTopicContent extends WebContent
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Indicates the aspect or aspects specifically addressed in some
+     * HealthTopicContent. For example, that the content is an overview, or that
+     * it talks about treatment, self-care, treatments or their side-effects.
+     *
+     * @var HealthAspectEnumeration [schema.org types: HealthAspectEnumeration]
+     */
+    public $hasHealthAspect;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -189,9 +183,9 @@ class HealthTopicContent extends WebContent
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

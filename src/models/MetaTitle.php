@@ -11,11 +11,10 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\helpers\Text as TextHelper;
-
+use nystudio107\seomatic\Seomatic;
 use yii\helpers\Html;
 
 /**
@@ -33,6 +32,25 @@ class MetaTitle extends MetaItem
 
     // Static Methods
     // =========================================================================
+    /**
+     * @var string
+     */
+    public $title;
+
+    // Public Properties
+    // =========================================================================
+    /**
+     * @var string
+     */
+    public $siteName;
+    /**
+     * @var string
+     */
+    public $siteNamePosition;
+    /**
+     * @var string
+     */
+    public $separatorChar;
 
     /**
      * @param array $config
@@ -44,36 +62,13 @@ class MetaTitle extends MetaItem
         return new MetaTitle($config);
     }
 
-    // Public Properties
-    // =========================================================================
-
-    /**
-     * @var string
-     */
-    public $title;
-
-    /**
-     * @var string
-     */
-    public $siteName;
-
-    /**
-     * @var string
-     */
-    public $siteNamePosition;
-
-    /**
-     * @var string
-     */
-    public $separatorChar;
-
     // Public Methods
     // =========================================================================
 
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
 
@@ -84,7 +79,7 @@ class MetaTitle extends MetaItem
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
@@ -98,7 +93,7 @@ class MetaTitle extends MetaItem
     /**
      * @inheritdoc
      */
-    public function fields()
+    public function fields(): array
     {
         $fields = parent::fields();
         switch ($this->scenario) {
@@ -148,16 +143,16 @@ class MetaTitle extends MetaItem
                     break;
             }
             // Handle the case of empty titles
-            if ($prefix === (' '.$separator.' ')) {
+            if ($prefix === (' ' . $separator . ' ')) {
                 $prefix = '';
             }
-            if ($suffix === (' '.$separator)) {
+            if ($suffix === (' ' . $separator)) {
                 $suffix = '';
             }
             // Remove potential double spaces
-            $prefix = preg_replace('/\s+/', ' ', $prefix);;
-            $suffix = preg_replace('/\s+/', ' ', $suffix);;
-            $lengthAdjust = mb_strlen($prefix.$suffix);
+            $prefix = preg_replace('/\s+/', ' ', $prefix);
+            $suffix = preg_replace('/\s+/', ' ', $suffix);
+            $lengthAdjust = mb_strlen($prefix . $suffix);
             // Parse the data
             $scenario = $this->scenario;
             $this->setScenario('render');
@@ -176,7 +171,7 @@ class MetaTitle extends MetaItem
                         '…'
                     );
                 }
-                $data = $prefix.$data.$suffix;
+                $data = $prefix . $data . $suffix;
             } else {
                 // If no title is provided, just use the site name
                 $data = MetaValueHelper::parseString($this->siteName);
@@ -195,7 +190,7 @@ class MetaTitle extends MetaItem
     /**
      * @inheritdoc
      */
-    public function render(array $params = []):string
+    public function render(array $params = []): string
     {
         $html = '';
         $title = $this->title;

@@ -92,17 +92,6 @@ class AskAction extends CommunicateAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A sub property of object. A question.
-     *
-     * @var Question [schema.org types: Question]
-     */
-    public $question;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -112,6 +101,8 @@ class AskAction extends CommunicateAction
         'question'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -120,7 +111,6 @@ class AskAction extends CommunicateAction
     static protected $_schemaPropertyExpectedTypes = [
         'question' => ['Question']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -129,7 +119,6 @@ class AskAction extends CommunicateAction
     static protected $_schemaPropertyDescriptions = [
         'question' => 'A sub property of object. A question.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -137,7 +126,6 @@ class AskAction extends CommunicateAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -145,14 +133,20 @@ class AskAction extends CommunicateAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A sub property of object. A question.
+     *
+     * @var Question [schema.org types: Question]
+     */
+    public $question;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -182,9 +176,9 @@ class AskAction extends CommunicateAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

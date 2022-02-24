@@ -91,18 +91,6 @@ class SpokenWordAlbum extends MusicAlbumProductionType
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Relates a term (i.e. a property, class or enumeration) to one that
-     * supersedes it.
-     *
-     * @var mixed|Class|Enumeration|Property [schema.org types: Class, Enumeration, Property]
-     */
-    public $supersededBy;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -112,15 +100,16 @@ class SpokenWordAlbum extends MusicAlbumProductionType
         'supersededBy'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'supersededBy' => ['Class','Enumeration','Property']
+        'supersededBy' => ['Class', 'Enumeration', 'Property']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -129,7 +118,6 @@ class SpokenWordAlbum extends MusicAlbumProductionType
     static protected $_schemaPropertyDescriptions = [
         'supersededBy' => 'Relates a term (i.e. a property, class or enumeration) to one that supersedes it.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -137,7 +125,6 @@ class SpokenWordAlbum extends MusicAlbumProductionType
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -145,14 +132,21 @@ class SpokenWordAlbum extends MusicAlbumProductionType
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Relates a term (i.e. a property, class or enumeration) to one that
+     * supersedes it.
+     *
+     * @var mixed|Class|Enumeration|Property [schema.org types: Class, Enumeration, Property]
+     */
+    public $supersededBy;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -182,9 +176,9 @@ class SpokenWordAlbum extends MusicAlbumProductionType
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

@@ -92,24 +92,6 @@ class MedicalSign extends MedicalSignOrSymptom
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A physical examination that can identify this sign.
-     *
-     * @var PhysicalExam [schema.org types: PhysicalExam]
-     */
-    public $identifyingExam;
-
-    /**
-     * A diagnostic test that can identify this sign.
-     *
-     * @var MedicalTest [schema.org types: MedicalTest]
-     */
-    public $identifyingTest;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -119,7 +101,6 @@ class MedicalSign extends MedicalSignOrSymptom
         'identifyingExam',
         'identifyingTest'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -130,6 +111,8 @@ class MedicalSign extends MedicalSignOrSymptom
         'identifyingTest' => ['MedicalTest']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -139,7 +122,6 @@ class MedicalSign extends MedicalSignOrSymptom
         'identifyingExam' => 'A physical examination that can identify this sign.',
         'identifyingTest' => 'A diagnostic test that can identify this sign.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -147,7 +129,6 @@ class MedicalSign extends MedicalSignOrSymptom
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -155,14 +136,26 @@ class MedicalSign extends MedicalSignOrSymptom
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A physical examination that can identify this sign.
+     *
+     * @var PhysicalExam [schema.org types: PhysicalExam]
+     */
+    public $identifyingExam;
+    /**
+     * A diagnostic test that can identify this sign.
+     *
+     * @var MedicalTest [schema.org types: MedicalTest]
+     */
+    public $identifyingTest;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -192,13 +185,13 @@ class MedicalSign extends MedicalSignOrSymptom
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['identifyingExam','identifyingTest'], 'validateJsonSchema'],
+            [['identifyingExam', 'identifyingTest'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

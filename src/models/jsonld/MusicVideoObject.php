@@ -91,157 +91,6 @@ class MusicVideoObject extends MediaObject
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A NewsArticle associated with the Media Object.
-     *
-     * @var NewsArticle [schema.org types: NewsArticle]
-     */
-    public $associatedArticle;
-
-    /**
-     * The bitrate of the media object.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $bitrate;
-
-    /**
-     * File size in (mega/kilo) bytes.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $contentSize;
-
-    /**
-     * Actual bytes of the media object, for example the image file or video file.
-     *
-     * @var string [schema.org types: URL]
-     */
-    public $contentUrl;
-
-    /**
-     * The duration of the item (movie, audio recording, event, etc.) in ISO 8601
-     * date format.
-     *
-     * @var Duration [schema.org types: Duration]
-     */
-    public $duration;
-
-    /**
-     * A URL pointing to a player for a specific video. In general, this is the
-     * information in the src element of an embed tag and should not be the same
-     * as the content of the loc tag.
-     *
-     * @var string [schema.org types: URL]
-     */
-    public $embedUrl;
-
-    /**
-     * The CreativeWork encoded by this media object. Inverse property: encoding.
-     *
-     * @var CreativeWork [schema.org types: CreativeWork]
-     */
-    public $encodesCreativeWork;
-
-    /**
-     * Media type typically expressed using a MIME format (see IANA site and MDN
-     * reference) e.g. application/zip for a SoftwareApplication binary,
-     * audio/mpeg for .mp3 etc.). In cases where a CreativeWork has several media
-     * type representations, encoding can be used to indicate each MediaObject
-     * alongside particular encodingFormat information. Unregistered or niche
-     * encoding and file formats can be indicated instead via the most appropriate
-     * URL, e.g. defining Web page or a Wikipedia/Wikidata entry. Supersedes
-     * fileFormat.
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $encodingFormat;
-
-    /**
-     * The endTime of something. For a reserved event or service (e.g.
-     * FoodEstablishmentReservation), the time that it is expected to end. For
-     * actions that span a period of time, when the action was performed. e.g.
-     * John wrote a book from January to December. For media, including audio and
-     * video, it's the time offset of the end of a clip within a larger file. Note
-     * that Event uses startDate/endDate instead of startTime/endTime, even when
-     * describing dates with times. This situation may be clarified in future
-     * revisions.
-     *
-     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
-     */
-    public $endTime;
-
-    /**
-     * The height of the item. The height of the item.
-     *
-     * @var mixed|Distance|QuantitativeValue [schema.org types: Distance, QuantitativeValue]
-     */
-    public $height;
-
-    /**
-     * Player type required—for example, Flash or Silverlight.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $playerType;
-
-    /**
-     * The production company or studio responsible for the item e.g. series,
-     * video game, episode etc.
-     *
-     * @var Organization [schema.org types: Organization]
-     */
-    public $productionCompany;
-
-    /**
-     * The regions where the media is allowed. If not specified, then it's assumed
-     * to be allowed everywhere. Specify the countries in ISO 3166 format.
-     *
-     * @var Place [schema.org types: Place]
-     */
-    public $regionsAllowed;
-
-    /**
-     * Indicates if use of the media require a subscription (either paid or free).
-     * Allowed values are true or false (note that an earlier version had 'yes',
-     * 'no').
-     *
-     * @var mixed|bool|MediaSubscription [schema.org types: Boolean, MediaSubscription]
-     */
-    public $requiresSubscription;
-
-    /**
-     * The startTime of something. For a reserved event or service (e.g.
-     * FoodEstablishmentReservation), the time that it is expected to start. For
-     * actions that span a period of time, when the action was performed. e.g.
-     * John wrote a book from January to December. For media, including audio and
-     * video, it's the time offset of the start of a clip within a larger file.
-     * Note that Event uses startDate/endDate instead of startTime/endTime, even
-     * when describing dates with times. This situation may be clarified in future
-     * revisions.
-     *
-     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
-     */
-    public $startTime;
-
-    /**
-     * Date when this media object was uploaded to this site.
-     *
-     * @var Date [schema.org types: Date]
-     */
-    public $uploadDate;
-
-    /**
-     * The width of the item.
-     *
-     * @var mixed|Distance|QuantitativeValue [schema.org types: Distance, QuantitativeValue]
-     */
-    public $width;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -266,7 +115,6 @@ class MusicVideoObject extends MediaObject
         'uploadDate',
         'width'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -280,18 +128,17 @@ class MusicVideoObject extends MediaObject
         'duration' => ['Duration'],
         'embedUrl' => ['URL'],
         'encodesCreativeWork' => ['CreativeWork'],
-        'encodingFormat' => ['Text','URL'],
-        'endTime' => ['DateTime','Time'],
-        'height' => ['Distance','QuantitativeValue'],
+        'encodingFormat' => ['Text', 'URL'],
+        'endTime' => ['DateTime', 'Time'],
+        'height' => ['Distance', 'QuantitativeValue'],
         'playerType' => ['Text'],
         'productionCompany' => ['Organization'],
         'regionsAllowed' => ['Place'],
-        'requiresSubscription' => ['Boolean','MediaSubscription'],
-        'startTime' => ['DateTime','Time'],
+        'requiresSubscription' => ['Boolean', 'MediaSubscription'],
+        'startTime' => ['DateTime', 'Time'],
         'uploadDate' => ['Date'],
-        'width' => ['Distance','QuantitativeValue']
+        'width' => ['Distance', 'QuantitativeValue']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -316,7 +163,6 @@ class MusicVideoObject extends MediaObject
         'uploadDate' => 'Date when this media object was uploaded to this site.',
         'width' => 'The width of the item.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -324,7 +170,6 @@ class MusicVideoObject extends MediaObject
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -332,14 +177,147 @@ class MusicVideoObject extends MediaObject
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A NewsArticle associated with the Media Object.
+     *
+     * @var NewsArticle [schema.org types: NewsArticle]
+     */
+    public $associatedArticle;
+    /**
+     * The bitrate of the media object.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $bitrate;
+    /**
+     * File size in (mega/kilo) bytes.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $contentSize;
+    /**
+     * Actual bytes of the media object, for example the image file or video file.
+     *
+     * @var string [schema.org types: URL]
+     */
+    public $contentUrl;
+    /**
+     * The duration of the item (movie, audio recording, event, etc.) in ISO 8601
+     * date format.
+     *
+     * @var Duration [schema.org types: Duration]
+     */
+    public $duration;
+    /**
+     * A URL pointing to a player for a specific video. In general, this is the
+     * information in the src element of an embed tag and should not be the same
+     * as the content of the loc tag.
+     *
+     * @var string [schema.org types: URL]
+     */
+    public $embedUrl;
+    /**
+     * The CreativeWork encoded by this media object. Inverse property: encoding.
+     *
+     * @var CreativeWork [schema.org types: CreativeWork]
+     */
+    public $encodesCreativeWork;
+    /**
+     * Media type typically expressed using a MIME format (see IANA site and MDN
+     * reference) e.g. application/zip for a SoftwareApplication binary,
+     * audio/mpeg for .mp3 etc.). In cases where a CreativeWork has several media
+     * type representations, encoding can be used to indicate each MediaObject
+     * alongside particular encodingFormat information. Unregistered or niche
+     * encoding and file formats can be indicated instead via the most appropriate
+     * URL, e.g. defining Web page or a Wikipedia/Wikidata entry. Supersedes
+     * fileFormat.
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $encodingFormat;
+    /**
+     * The endTime of something. For a reserved event or service (e.g.
+     * FoodEstablishmentReservation), the time that it is expected to end. For
+     * actions that span a period of time, when the action was performed. e.g.
+     * John wrote a book from January to December. For media, including audio and
+     * video, it's the time offset of the end of a clip within a larger file. Note
+     * that Event uses startDate/endDate instead of startTime/endTime, even when
+     * describing dates with times. This situation may be clarified in future
+     * revisions.
+     *
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
+     */
+    public $endTime;
+    /**
+     * The height of the item. The height of the item.
+     *
+     * @var mixed|Distance|QuantitativeValue [schema.org types: Distance, QuantitativeValue]
+     */
+    public $height;
+    /**
+     * Player type required—for example, Flash or Silverlight.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $playerType;
+    /**
+     * The production company or studio responsible for the item e.g. series,
+     * video game, episode etc.
+     *
+     * @var Organization [schema.org types: Organization]
+     */
+    public $productionCompany;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The regions where the media is allowed. If not specified, then it's assumed
+     * to be allowed everywhere. Specify the countries in ISO 3166 format.
+     *
+     * @var Place [schema.org types: Place]
+     */
+    public $regionsAllowed;
+    /**
+     * Indicates if use of the media require a subscription (either paid or free).
+     * Allowed values are true or false (note that an earlier version had 'yes',
+     * 'no').
+     *
+     * @var mixed|bool|MediaSubscription [schema.org types: Boolean, MediaSubscription]
+     */
+    public $requiresSubscription;
+    /**
+     * The startTime of something. For a reserved event or service (e.g.
+     * FoodEstablishmentReservation), the time that it is expected to start. For
+     * actions that span a period of time, when the action was performed. e.g.
+     * John wrote a book from January to December. For media, including audio and
+     * video, it's the time offset of the start of a clip within a larger file.
+     * Note that Event uses startDate/endDate instead of startTime/endTime, even
+     * when describing dates with times. This situation may be clarified in future
+     * revisions.
+     *
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
+     */
+    public $startTime;
+    /**
+     * Date when this media object was uploaded to this site.
+     *
+     * @var Date [schema.org types: Date]
+     */
+    public $uploadDate;
+    /**
+     * The width of the item.
+     *
+     * @var mixed|Distance|QuantitativeValue [schema.org types: Distance, QuantitativeValue]
+     */
+    public $width;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -369,13 +347,13 @@ class MusicVideoObject extends MediaObject
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['associatedArticle','bitrate','contentSize','contentUrl','duration','embedUrl','encodesCreativeWork','encodingFormat','endTime','height','playerType','productionCompany','regionsAllowed','requiresSubscription','startTime','uploadDate','width'], 'validateJsonSchema'],
+            [['associatedArticle', 'bitrate', 'contentSize', 'contentUrl', 'duration', 'embedUrl', 'encodesCreativeWork', 'encodingFormat', 'endTime', 'height', 'playerType', 'productionCompany', 'regionsAllowed', 'requiresSubscription', 'startTime', 'uploadDate', 'width'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

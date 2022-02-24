@@ -93,40 +93,6 @@ class PublicationVolume extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The page on which the work ends; for example "138" or "xvi".
-     *
-     * @var mixed|int|string [schema.org types: Integer, Text]
-     */
-    public $pageEnd;
-
-    /**
-     * The page on which the work starts; for example "135" or "xiii".
-     *
-     * @var mixed|int|string [schema.org types: Integer, Text]
-     */
-    public $pageStart;
-
-    /**
-     * Any description of pages that is not separated into pageStart and pageEnd;
-     * for example, "1-6, 9, 55" or "10-12, 46-49".
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $pagination;
-
-    /**
-     * Identifies the volume of publication or multi-part work; for example, "iii"
-     * or "2".
-     *
-     * @var mixed|int|string [schema.org types: Integer, Text]
-     */
-    public $volumeNumber;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -138,19 +104,17 @@ class PublicationVolume extends CreativeWork
         'pagination',
         'volumeNumber'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'pageEnd' => ['Integer','Text'],
-        'pageStart' => ['Integer','Text'],
+        'pageEnd' => ['Integer', 'Text'],
+        'pageStart' => ['Integer', 'Text'],
         'pagination' => ['Text'],
-        'volumeNumber' => ['Integer','Text']
+        'volumeNumber' => ['Integer', 'Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -162,7 +126,6 @@ class PublicationVolume extends CreativeWork
         'pagination' => 'Any description of pages that is not separated into pageStart and pageEnd; for example, "1-6, 9, 55" or "10-12, 46-49".',
         'volumeNumber' => 'Identifies the volume of publication or multi-part work; for example, "iii" or "2".'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -171,6 +134,8 @@ class PublicationVolume extends CreativeWork
     static protected $_googleRequiredSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -178,14 +143,40 @@ class PublicationVolume extends CreativeWork
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The page on which the work ends; for example "138" or "xvi".
+     *
+     * @var mixed|int|string [schema.org types: Integer, Text]
+     */
+    public $pageEnd;
+    /**
+     * The page on which the work starts; for example "135" or "xiii".
+     *
+     * @var mixed|int|string [schema.org types: Integer, Text]
+     */
+    public $pageStart;
+    /**
+     * Any description of pages that is not separated into pageStart and pageEnd;
+     * for example, "1-6, 9, 55" or "10-12, 46-49".
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $pagination;
+    /**
+     * Identifies the volume of publication or multi-part work; for example, "iii"
+     * or "2".
+     *
+     * @var mixed|int|string [schema.org types: Integer, Text]
+     */
+    public $volumeNumber;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -215,13 +206,13 @@ class PublicationVolume extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['pageEnd','pageStart','pagination','volumeNumber'], 'validateJsonSchema'],
+            [['pageEnd', 'pageStart', 'pagination', 'volumeNumber'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

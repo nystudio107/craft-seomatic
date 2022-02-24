@@ -91,52 +91,6 @@ class Book extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Indicates whether the book is an abridged edition.
-     *
-     * @var bool [schema.org types: Boolean]
-     */
-    public $abridged;
-
-    /**
-     * The edition of the book.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $bookEdition;
-
-    /**
-     * The format of the book.
-     *
-     * @var BookFormatType [schema.org types: BookFormatType]
-     */
-    public $bookFormat;
-
-    /**
-     * The illustrator of the book.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $illustrator;
-
-    /**
-     * The ISBN of the book.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $isbn;
-
-    /**
-     * The number of pages in the book.
-     *
-     * @var int [schema.org types: Integer]
-     */
-    public $numberOfPages;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -150,7 +104,6 @@ class Book extends CreativeWork
         'isbn',
         'numberOfPages'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -164,7 +117,6 @@ class Book extends CreativeWork
         'isbn' => ['Text'],
         'numberOfPages' => ['Integer']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -178,7 +130,6 @@ class Book extends CreativeWork
         'isbn' => 'The ISBN of the book.',
         'numberOfPages' => 'The number of pages in the book.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -186,7 +137,6 @@ class Book extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -194,14 +144,53 @@ class Book extends CreativeWork
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Indicates whether the book is an abridged edition.
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $abridged;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The edition of the book.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $bookEdition;
+    /**
+     * The format of the book.
+     *
+     * @var BookFormatType [schema.org types: BookFormatType]
+     */
+    public $bookFormat;
+    /**
+     * The illustrator of the book.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $illustrator;
+    /**
+     * The ISBN of the book.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $isbn;
+    /**
+     * The number of pages in the book.
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $numberOfPages;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -231,13 +220,13 @@ class Book extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['abridged','bookEdition','bookFormat','illustrator','isbn','numberOfPages'], 'validateJsonSchema'],
+            [['abridged', 'bookEdition', 'bookFormat', 'illustrator', 'isbn', 'numberOfPages'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

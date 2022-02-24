@@ -92,19 +92,6 @@ class WebSite extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The International Standard Serial Number (ISSN) that identifies this serial
-     * publication. You can repeat this property to identify different formats of,
-     * or the linking ISSN (ISSN-L) for, this serial publication.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $issn;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -114,6 +101,8 @@ class WebSite extends CreativeWork
         'issn'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -122,7 +111,6 @@ class WebSite extends CreativeWork
     static protected $_schemaPropertyExpectedTypes = [
         'issn' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -131,7 +119,6 @@ class WebSite extends CreativeWork
     static protected $_schemaPropertyDescriptions = [
         'issn' => 'The International Standard Serial Number (ISSN) that identifies this serial publication. You can repeat this property to identify different formats of, or the linking ISSN (ISSN-L) for, this serial publication.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -139,7 +126,6 @@ class WebSite extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -147,14 +133,22 @@ class WebSite extends CreativeWork
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The International Standard Serial Number (ISSN) that identifies this serial
+     * publication. You can repeat this property to identify different formats of,
+     * or the linking ISSN (ISSN-L) for, this serial publication.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $issn;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -184,9 +178,9 @@ class WebSite extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

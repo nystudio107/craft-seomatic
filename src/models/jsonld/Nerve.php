@@ -92,32 +92,6 @@ class Nerve extends AnatomicalStructure
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The neurological pathway extension that involves muscle control.
-     *
-     * @var Muscle [schema.org types: Muscle]
-     */
-    public $nerveMotor;
-
-    /**
-     * The neurological pathway extension that inputs and sends information to the
-     * brain or spinal cord.
-     *
-     * @var mixed|AnatomicalStructure|SuperficialAnatomy [schema.org types: AnatomicalStructure, SuperficialAnatomy]
-     */
-    public $sensoryUnit;
-
-    /**
-     * The neurological pathway that originates the neurons.
-     *
-     * @var BrainStructure [schema.org types: BrainStructure]
-     */
-    public $sourcedFrom;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -128,7 +102,6 @@ class Nerve extends AnatomicalStructure
         'sensoryUnit',
         'sourcedFrom'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -136,10 +109,9 @@ class Nerve extends AnatomicalStructure
      */
     static protected $_schemaPropertyExpectedTypes = [
         'nerveMotor' => ['Muscle'],
-        'sensoryUnit' => ['AnatomicalStructure','SuperficialAnatomy'],
+        'sensoryUnit' => ['AnatomicalStructure', 'SuperficialAnatomy'],
         'sourcedFrom' => ['BrainStructure']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -151,6 +123,8 @@ class Nerve extends AnatomicalStructure
         'sourcedFrom' => 'The neurological pathway that originates the neurons.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -158,7 +132,6 @@ class Nerve extends AnatomicalStructure
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -166,14 +139,33 @@ class Nerve extends AnatomicalStructure
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The neurological pathway extension that involves muscle control.
+     *
+     * @var Muscle [schema.org types: Muscle]
+     */
+    public $nerveMotor;
+    /**
+     * The neurological pathway extension that inputs and sends information to the
+     * brain or spinal cord.
+     *
+     * @var mixed|AnatomicalStructure|SuperficialAnatomy [schema.org types: AnatomicalStructure, SuperficialAnatomy]
+     */
+    public $sensoryUnit;
+    /**
+     * The neurological pathway that originates the neurons.
+     *
+     * @var BrainStructure [schema.org types: BrainStructure]
+     */
+    public $sourcedFrom;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -203,13 +195,13 @@ class Nerve extends AnatomicalStructure
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['nerveMotor','sensoryUnit','sourcedFrom'], 'validateJsonSchema'],
+            [['nerveMotor', 'sensoryUnit', 'sourcedFrom'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

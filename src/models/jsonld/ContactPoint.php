@@ -92,82 +92,6 @@ class ContactPoint extends StructuredValue
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The geographic area where a service or offered item is provided. Supersedes
-     * serviceArea.
-     *
-     * @var mixed|AdministrativeArea|GeoShape|Place|string [schema.org types: AdministrativeArea, GeoShape, Place, Text]
-     */
-    public $areaServed;
-
-    /**
-     * A language someone may use with or at the item, service or place. Please
-     * use one of the language codes from the IETF BCP 47 standard. See also
-     * inLanguage
-     *
-     * @var mixed|Language|string [schema.org types: Language, Text]
-     */
-    public $availableLanguage;
-
-    /**
-     * An option available on this contact point (e.g. a toll-free number or
-     * support for hearing-impaired callers).
-     *
-     * @var ContactPointOption [schema.org types: ContactPointOption]
-     */
-    public $contactOption;
-
-    /**
-     * A person or organization can have different contact points, for different
-     * purposes. For example, a sales contact point, a PR contact point and so on.
-     * This property is used to specify the kind of contact point.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $contactType;
-
-    /**
-     * Email address.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $email;
-
-    /**
-     * The fax number.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $faxNumber;
-
-    /**
-     * The hours during which this service or contact is available.
-     *
-     * @var OpeningHoursSpecification [schema.org types: OpeningHoursSpecification]
-     */
-    public $hoursAvailable;
-
-    /**
-     * The product or service this support contact point is related to (such as
-     * product support for a particular product line). This can be a specific
-     * product or product line (e.g. "iPhone") or a general category of products
-     * or services (e.g. "smartphones").
-     *
-     * @var mixed|Product|string [schema.org types: Product, Text]
-     */
-    public $productSupported;
-
-    /**
-     * The telephone number.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $telephone;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -184,24 +108,22 @@ class ContactPoint extends StructuredValue
         'productSupported',
         'telephone'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'areaServed' => ['AdministrativeArea','GeoShape','Place','Text'],
-        'availableLanguage' => ['Language','Text'],
+        'areaServed' => ['AdministrativeArea', 'GeoShape', 'Place', 'Text'],
+        'availableLanguage' => ['Language', 'Text'],
         'contactOption' => ['ContactPointOption'],
         'contactType' => ['Text'],
         'email' => ['Text'],
         'faxNumber' => ['Text'],
         'hoursAvailable' => ['OpeningHoursSpecification'],
-        'productSupported' => ['Product','Text'],
+        'productSupported' => ['Product', 'Text'],
         'telephone' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -218,7 +140,6 @@ class ContactPoint extends StructuredValue
         'productSupported' => 'The product or service this support contact point is related to (such as product support for a particular product line). This can be a specific product or product line (e.g. "iPhone") or a general category of products or services (e.g. "smartphones").',
         'telephone' => 'The telephone number.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -226,7 +147,6 @@ class ContactPoint extends StructuredValue
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -234,14 +154,80 @@ class ContactPoint extends StructuredValue
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The geographic area where a service or offered item is provided. Supersedes
+     * serviceArea.
+     *
+     * @var mixed|AdministrativeArea|GeoShape|Place|string [schema.org types: AdministrativeArea, GeoShape, Place, Text]
+     */
+    public $areaServed;
+    /**
+     * A language someone may use with or at the item, service or place. Please
+     * use one of the language codes from the IETF BCP 47 standard. See also
+     * inLanguage
+     *
+     * @var mixed|Language|string [schema.org types: Language, Text]
+     */
+    public $availableLanguage;
+    /**
+     * An option available on this contact point (e.g. a toll-free number or
+     * support for hearing-impaired callers).
+     *
+     * @var ContactPointOption [schema.org types: ContactPointOption]
+     */
+    public $contactOption;
+    /**
+     * A person or organization can have different contact points, for different
+     * purposes. For example, a sales contact point, a PR contact point and so on.
+     * This property is used to specify the kind of contact point.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $contactType;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * Email address.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $email;
+    /**
+     * The fax number.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $faxNumber;
+    /**
+     * The hours during which this service or contact is available.
+     *
+     * @var OpeningHoursSpecification [schema.org types: OpeningHoursSpecification]
+     */
+    public $hoursAvailable;
+    /**
+     * The product or service this support contact point is related to (such as
+     * product support for a particular product line). This can be a specific
+     * product or product line (e.g. "iPhone") or a general category of products
+     * or services (e.g. "smartphones").
+     *
+     * @var mixed|Product|string [schema.org types: Product, Text]
+     */
+    public $productSupported;
+    /**
+     * The telephone number.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $telephone;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -271,13 +257,13 @@ class ContactPoint extends StructuredValue
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['areaServed','availableLanguage','contactOption','contactType','email','faxNumber','hoursAvailable','productSupported','telephone'], 'validateJsonSchema'],
+            [['areaServed', 'availableLanguage', 'contactOption', 'contactType', 'email', 'faxNumber', 'hoursAvailable', 'productSupported', 'telephone'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -91,39 +91,6 @@ class MusicAlbum extends MusicPlaylist
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Classification of the album by it's type of content: soundtrack, live
-     * album, studio album, etc.
-     *
-     * @var MusicAlbumProductionType [schema.org types: MusicAlbumProductionType]
-     */
-    public $albumProductionType;
-
-    /**
-     * A release of this album. Inverse property: releaseOf.
-     *
-     * @var MusicRelease [schema.org types: MusicRelease]
-     */
-    public $albumRelease;
-
-    /**
-     * The kind of release which this album is: single, EP or album.
-     *
-     * @var MusicAlbumReleaseType [schema.org types: MusicAlbumReleaseType]
-     */
-    public $albumReleaseType;
-
-    /**
-     * The artist that performed this album or recording.
-     *
-     * @var mixed|MusicGroup|Person [schema.org types: MusicGroup, Person]
-     */
-    public $byArtist;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -135,7 +102,6 @@ class MusicAlbum extends MusicPlaylist
         'albumReleaseType',
         'byArtist'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -145,9 +111,8 @@ class MusicAlbum extends MusicPlaylist
         'albumProductionType' => ['MusicAlbumProductionType'],
         'albumRelease' => ['MusicRelease'],
         'albumReleaseType' => ['MusicAlbumReleaseType'],
-        'byArtist' => ['MusicGroup','Person']
+        'byArtist' => ['MusicGroup', 'Person']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -159,7 +124,6 @@ class MusicAlbum extends MusicPlaylist
         'albumReleaseType' => 'The kind of release which this album is: single, EP or album.',
         'byArtist' => 'The artist that performed this album or recording.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -168,6 +132,8 @@ class MusicAlbum extends MusicPlaylist
     static protected $_googleRequiredSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -175,14 +141,39 @@ class MusicAlbum extends MusicPlaylist
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Classification of the album by it's type of content: soundtrack, live
+     * album, studio album, etc.
+     *
+     * @var MusicAlbumProductionType [schema.org types: MusicAlbumProductionType]
+     */
+    public $albumProductionType;
+    /**
+     * A release of this album. Inverse property: releaseOf.
+     *
+     * @var MusicRelease [schema.org types: MusicRelease]
+     */
+    public $albumRelease;
+    /**
+     * The kind of release which this album is: single, EP or album.
+     *
+     * @var MusicAlbumReleaseType [schema.org types: MusicAlbumReleaseType]
+     */
+    public $albumReleaseType;
+    /**
+     * The artist that performed this album or recording.
+     *
+     * @var mixed|MusicGroup|Person [schema.org types: MusicGroup, Person]
+     */
+    public $byArtist;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -212,13 +203,13 @@ class MusicAlbum extends MusicPlaylist
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['albumProductionType','albumRelease','albumReleaseType','byArtist'], 'validateJsonSchema'],
+            [['albumProductionType', 'albumRelease', 'albumReleaseType', 'byArtist'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -92,24 +92,6 @@ class Artery extends Vessel
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The branches that comprise the arterial structure. Supersedes branch.
-     *
-     * @var AnatomicalStructure [schema.org types: AnatomicalStructure]
-     */
-    public $arterialBranch;
-
-    /**
-     * The area to which the artery supplies blood.
-     *
-     * @var AnatomicalStructure [schema.org types: AnatomicalStructure]
-     */
-    public $supplyTo;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -119,7 +101,6 @@ class Artery extends Vessel
         'arterialBranch',
         'supplyTo'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -130,6 +111,8 @@ class Artery extends Vessel
         'supplyTo' => ['AnatomicalStructure']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -139,7 +122,6 @@ class Artery extends Vessel
         'arterialBranch' => 'The branches that comprise the arterial structure. Supersedes branch.',
         'supplyTo' => 'The area to which the artery supplies blood.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -147,7 +129,6 @@ class Artery extends Vessel
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -155,14 +136,26 @@ class Artery extends Vessel
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The branches that comprise the arterial structure. Supersedes branch.
+     *
+     * @var AnatomicalStructure [schema.org types: AnatomicalStructure]
+     */
+    public $arterialBranch;
+    /**
+     * The area to which the artery supplies blood.
+     *
+     * @var AnatomicalStructure [schema.org types: AnatomicalStructure]
+     */
+    public $supplyTo;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -192,13 +185,13 @@ class Artery extends Vessel
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['arterialBranch','supplyTo'], 'validateJsonSchema'],
+            [['arterialBranch', 'supplyTo'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

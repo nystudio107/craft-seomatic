@@ -91,27 +91,6 @@ class UseAction extends ConsumeAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A set of requirements that a must be fulfilled in order to perform an
-     * Action. If more than one value is specied, fulfilling one set of
-     * requirements will allow the Action to be performed.
-     *
-     * @var ActionAccessSpecification [schema.org types: ActionAccessSpecification]
-     */
-    public $actionAccessibilityRequirement;
-
-    /**
-     * An Offer which must be accepted before the user can perform the Action. For
-     * example, the user may need to buy a movie before being able to watch it.
-     *
-     * @var Offer [schema.org types: Offer]
-     */
-    public $expectsAcceptanceOf;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -121,7 +100,6 @@ class UseAction extends ConsumeAction
         'actionAccessibilityRequirement',
         'expectsAcceptanceOf'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -132,6 +110,8 @@ class UseAction extends ConsumeAction
         'expectsAcceptanceOf' => ['Offer']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -141,7 +121,6 @@ class UseAction extends ConsumeAction
         'actionAccessibilityRequirement' => 'A set of requirements that a must be fulfilled in order to perform an Action. If more than one value is specied, fulfilling one set of requirements will allow the Action to be performed.',
         'expectsAcceptanceOf' => 'An Offer which must be accepted before the user can perform the Action. For example, the user may need to buy a movie before being able to watch it.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -149,7 +128,6 @@ class UseAction extends ConsumeAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -157,14 +135,29 @@ class UseAction extends ConsumeAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A set of requirements that a must be fulfilled in order to perform an
+     * Action. If more than one value is specied, fulfilling one set of
+     * requirements will allow the Action to be performed.
+     *
+     * @var ActionAccessSpecification [schema.org types: ActionAccessSpecification]
+     */
+    public $actionAccessibilityRequirement;
+    /**
+     * An Offer which must be accepted before the user can perform the Action. For
+     * example, the user may need to buy a movie before being able to watch it.
+     *
+     * @var Offer [schema.org types: Offer]
+     */
+    public $expectsAcceptanceOf;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -194,13 +187,13 @@ class UseAction extends ConsumeAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['actionAccessibilityRequirement','expectsAcceptanceOf'], 'validateJsonSchema'],
+            [['actionAccessibilityRequirement', 'expectsAcceptanceOf'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

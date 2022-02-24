@@ -91,19 +91,6 @@ class WriteAction extends CreateAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The language of the content or performance or used in an action. Please use
-     * one of the language codes from the IETF BCP 47 standard. See also
-     * availableLanguage. Supersedes language.
-     *
-     * @var mixed|Language|string [schema.org types: Language, Text]
-     */
-    public $inLanguage;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -113,15 +100,16 @@ class WriteAction extends CreateAction
         'inLanguage'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'inLanguage' => ['Language','Text']
+        'inLanguage' => ['Language', 'Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -130,7 +118,6 @@ class WriteAction extends CreateAction
     static protected $_schemaPropertyDescriptions = [
         'inLanguage' => 'The language of the content or performance or used in an action. Please use one of the language codes from the IETF BCP 47 standard. See also availableLanguage. Supersedes language.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -138,7 +125,6 @@ class WriteAction extends CreateAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -146,14 +132,22 @@ class WriteAction extends CreateAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The language of the content or performance or used in an action. Please use
+     * one of the language codes from the IETF BCP 47 standard. See also
+     * availableLanguage. Supersedes language.
+     *
+     * @var mixed|Language|string [schema.org types: Language, Text]
+     */
+    public $inLanguage;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -183,9 +177,9 @@ class WriteAction extends CreateAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

@@ -11,19 +11,20 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\base\MetaContainer;
-use nystudio107\seomatic\helpers\ArrayHelper;
-use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
-use nystudio107\seomatic\base\FluentModel;
-use nystudio107\seomatic\variables\SeomaticVariable;
-
 use craft\behaviors\EnvAttributeParserBehavior;
 use craft\helpers\Json as JsonHelper;
 use craft\validators\ArrayValidator;
 use craft\validators\DateTimeValidator;
-
+use DateTime;
+use nystudio107\seomatic\base\FluentModel;
+use nystudio107\seomatic\base\MetaContainer;
+use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
+use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\variables\SeomaticVariable;
 use yii\behaviors\AttributeTypecastBehavior;
+use function is_array;
+use function is_string;
 
 /**
  * @author    nystudio107
@@ -86,7 +87,7 @@ class MetaBundle extends FluentModel
     public $sourceAltSiteSettings = [];
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
     public $sourceDateUpdated;
 
@@ -132,7 +133,7 @@ class MetaBundle extends FluentModel
      * Create a new meta bundle
      *
      * @param array $config
-     * @param bool $parse    Whether the resulting metabundle should be parsed
+     * @param bool $parse Whether the resulting metabundle should be parsed
      *
      * @return null|MetaBundle
      */
@@ -153,36 +154,36 @@ class MetaBundle extends FluentModel
      * This is called after meta bundle data is loaded, to allow it to be
      * parsed, models instantiated, etc.
      *
-     * @param bool $parse    Whether the resulting metabundle should be parsed
+     * @param bool $parse Whether the resulting metabundle should be parsed
      */
     public function normalizeMetaBundleData(bool $parse = true)
     {
         // Decode any JSON data
         $properties = $this->getAttributes();
         foreach ($properties as $property => $value) {
-            if (!empty($value) && \is_string($value)) {
+            if (!empty($value) && is_string($value)) {
                 $this->$property = JsonHelper::decodeIfJson($value);
             }
         }
 
         // Meta global variables
-        if ($this->metaGlobalVars !== null && \is_array($this->metaGlobalVars)) {
+        if ($this->metaGlobalVars !== null && is_array($this->metaGlobalVars)) {
             $this->metaGlobalVars = MetaGlobalVars::create($this->metaGlobalVars);
         }
         // Meta site variables
-        if ($this->metaSiteVars !== null && \is_array($this->metaSiteVars)) {
+        if ($this->metaSiteVars !== null && is_array($this->metaSiteVars)) {
             $this->metaSiteVars = MetaSiteVars::create($this->metaSiteVars);
         }
         // Meta sitemap variables
-        if ($this->metaSitemapVars !== null && \is_array($this->metaSitemapVars)) {
+        if ($this->metaSitemapVars !== null && is_array($this->metaSitemapVars)) {
             $this->metaSitemapVars = MetaSitemapVars::create($this->metaSitemapVars);
         }
         // Meta bundle settings
-        if ($this->metaBundleSettings !== null && \is_array($this->metaBundleSettings)) {
+        if ($this->metaBundleSettings !== null && is_array($this->metaBundleSettings)) {
             $this->metaBundleSettings = MetaBundleSettings::create($this->metaBundleSettings);
         }
         // Frontend templates
-        if ($this->frontendTemplatesContainer !== null && \is_array($this->frontendTemplatesContainer)) {
+        if ($this->frontendTemplatesContainer !== null && is_array($this->frontendTemplatesContainer)) {
             $this->frontendTemplatesContainer = FrontendTemplateContainer::create($this->frontendTemplatesContainer);
         }
         // Create our variable so that meta containers can be parsed based on dynamic values
@@ -313,7 +314,7 @@ class MetaBundle extends FluentModel
     /**
      * @return array
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         $craft31Behaviors = [];
         if (Seomatic::$craft31) {

@@ -14,6 +14,7 @@ namespace nystudio107\seomatic;
 use Craft;
 use craft\base\Element;
 use craft\base\ElementInterface;
+use craft\base\Model;
 use craft\base\Plugin;
 use craft\elements\Entry;
 use craft\elements\User;
@@ -127,117 +128,117 @@ class Seomatic extends Plugin
     // =========================================================================
 
     /**
-     * @var Seomatic
+     * @var null|Seomatic
      */
-    public static $plugin;
+    public static ?Seomatic $plugin;
 
     /**
-     * @var SeomaticVariable
+     * @var null|SeomaticVariable
      */
-    public static $seomaticVariable;
+    public static ?SeomaticVariable $seomaticVariable = null;
 
     /**
-     * @var Settings
+     * @var null|Settings
      */
-    public static $settings;
+    public static ?Settings $settings = null;
 
     /**
-     * @var ElementInterface
+     * @var null|ElementInterface
      */
-    public static $matchedElement;
+    public static ?ElementInterface $matchedElement = null;
 
     /**
      * @var bool
      */
-    public static $devMode;
+    public static bool $devMode;
 
     /**
-     * @var View
+     * @var null|View
      */
-    public static $view;
-
-    /**
-     * @var string
-     */
-    public static $language;
+    public static ?View $view = null;
 
     /**
      * @var string
      */
-    public static $environment;
+    public static string $language = '';
+
+    /**
+     * @var string
+     */
+    public static string $environment = '';
 
     /**
      * @var int
      */
-    public static $cacheDuration;
+    public static int $cacheDuration = 0;
 
     /**
      * @var bool
      */
-    public static $previewingMetaContainers = false;
+    public static bool $previewingMetaContainers = false;
 
     /**
      * @var bool
      */
-    public static $loadingMetaContainers = false;
+    public static bool $loadingMetaContainers = false;
 
     /**
      * @var bool
      */
-    public static $savingSettings = false;
+    public static bool $savingSettings = false;
 
     /**
      * @var bool
      */
-    public static $headlessRequest = false;
+    public static bool $headlessRequest = false;
 
     /**
      * @var bool
      */
-    public static $craft31 = false;
+    public static bool $craft31 = false;
 
     /**
      * @var bool
      */
-    public static $craft32 = false;
+    public static bool $craft32 = false;
 
     /**
      * @var bool
      */
-    public static $craft33 = false;
+    public static bool $craft33 = false;
 
     /**
      * @var bool
      */
-    public static $craft34 = false;
+    public static bool $craft34 = false;
 
     /**
      * @var bool
      */
-    public static $craft35 = false;
+    public static bool $craft35 = false;
 
     /**
      * @var bool
      */
-    public static $craft37 = false;
-
-    // Static Methods
-    // =========================================================================
-    /**
-     * @var string
-     */
-    public $schemaVersion = '3.0.11';
-    /**
-     * @var bool
-     */
-    public $hasCpSection = true;
+    public static bool $craft37 = false;
 
     // Public Properties
     // =========================================================================
+
+    /**
+     * @var string
+     */
+    public string $schemaVersion = '3.0.11';
+
     /**
      * @var bool
      */
-    public $hasCpSettings = true;
+    public bool $hasCpSection = true;
+
+    /**
+     * @var bool
+     */
+    public bool $hasCpSettings = true;
 
     /**
      * @inheritdoc
@@ -273,7 +274,7 @@ class Seomatic extends Plugin
      *
      * @param $element null|ElementInterface
      */
-    public static function setMatchedElement($element)
+    public static function setMatchedElement(?ElementInterface $element): void
     {
         self::$matchedElement = $element;
         /** @var  $element Element */
@@ -291,7 +292,7 @@ class Seomatic extends Plugin
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
         self::$plugin = $this;
@@ -334,9 +335,10 @@ class Seomatic extends Plugin
     /**
      * @inheritdoc
      */
-    public function getSettings()
+    public function getSettings(): ?Settings
     {
         // For all the emojis
+        /* @var Settings $settingsModel */
         $settingsModel = parent::getSettings();
         if ($settingsModel !== null && !self::$savingSettings) {
             $attributes = $settingsModel->attributes();
@@ -358,9 +360,131 @@ class Seomatic extends Plugin
     }
 
     /**
+     * Determine whether our table schema exists or not; this is needed because
+     * migrations such as the install migration and base_install migration may
+     * not have been run by the time our init() method has been called
+     *
+     * @return bool
+     */
+    public function migrationsAndSchemaReady(): bool
+    {
+        $pluginsService = Craft::$app->getPlugins();
+        if ($pluginsService->isPluginUpdatePending(self::$plugin)) {
+            return false;
+        }
+        if (Craft::$app->db->schema->getTableSchema('{{%seomatic_metabundles}}') === null) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Clear all the caches!
+     */
+    public function clearAllCaches(): void
+    {
+        // Clear all of SEOmatic's caches
+        self::$plugin->frontendTemplates->invalidateCaches();
+        self::$plugin->metaContainers->invalidateCaches();
+        self::$plugin->sitemaps->invalidateCaches();
+        // If they are using Craft 3.3 or later, clear the GraphQL caches too
+        if (self::$craft33) {
+            $gql = Craft::$app->getGql();
+            if (method_exists($gql, 'invalidateCaches')) {
+                $gql->invalidateCaches();
+            }
+        }
+        // If the FastCGI Cache Bust plugin is installed, clear its caches too
+        $plugin = Craft::$app->getPlugins()->getPlugin('fastcgi-cache-bust');
+        if ($plugin !== null) {
+            FastcgiCacheBust::$plugin->cache->clearAll();
+        }
+    }
+
+    // Protected Methods
+    // =========================================================================
+
+    /**
+     * @inheritdoc
+     */
+    public function getSettingsResponse()
+    {
+        // Just redirect to the plugin settings page
+        Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('seomatic/plugin'));
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getCpNavItem(): ?array
+    {
+        $subNavs = [];
+        $navItem = parent::getCpNavItem();
+        /** @var User $currentUser */
+        $request = Craft::$app->getRequest();
+        $siteSuffix = '';
+        if ($request->getSegment(1) === 'seomatic') {
+            $segments = $request->getSegments();
+            $lastSegment = end($segments);
+            $site = Craft::$app->getSites()->getSiteByHandle($lastSegment);
+            if ($site !== null) {
+                $siteSuffix = '/' . $lastSegment;
+            }
+        }
+        $currentUser = Craft::$app->getUser()->getIdentity();
+        // Only show sub-navs the user has permission to view
+        if ($currentUser->can('seomatic:dashboard')) {
+            $subNavs['dashboard'] = [
+                'label' => Craft::t('seomatic', 'Dashboard'),
+                'url' => 'seomatic/dashboard' . $siteSuffix,
+            ];
+        }
+        if ($currentUser->can('seomatic:global-meta')) {
+            $subNavs['global'] = [
+                'label' => Craft::t('seomatic', 'Global SEO'),
+                'url' => 'seomatic/global/general' . $siteSuffix,
+            ];
+        }
+        if ($currentUser->can('seomatic:content-meta')) {
+            $subNavs['content'] = [
+                'label' => Craft::t('seomatic', 'Content SEO'),
+                'url' => 'seomatic/content' . $siteSuffix,
+            ];
+        }
+        if ($currentUser->can('seomatic:site-settings')) {
+            $subNavs['site'] = [
+                'label' => Craft::t('seomatic', 'Site Settings'),
+                'url' => 'seomatic/site/identity' . $siteSuffix,
+            ];
+        }
+        if ($currentUser->can('seomatic:tracking-scripts')) {
+            $subNavs['tracking'] = [
+                'label' => Craft::t('seomatic', 'Tracking Scripts'),
+                'url' => 'seomatic/tracking/gtag' . $siteSuffix,
+            ];
+        }
+        $editableSettings = true;
+        $general = Craft::$app->getConfig()->getGeneral();
+        if (self::$craft31 && !$general->allowAdminChanges) {
+            $editableSettings = false;
+        }
+        if ($editableSettings && $currentUser->can('seomatic:plugin-settings')) {
+            $subNavs['plugin'] = [
+                'label' => Craft::t('seomatic', 'Plugin Settings'),
+                'url' => 'seomatic/plugin',
+            ];
+        }
+
+        return array_merge($navItem, [
+            'subnav' => $subNavs,
+        ]);
+    }
+
+    /**
      * Install our event listeners.
      */
-    protected function installEventListeners()
+    protected function installEventListeners(): void
     {
         // Install our event listeners only if our table schema exists
         if ($this->migrationsAndSchemaReady()) {
@@ -441,32 +565,9 @@ class Seomatic extends Plugin
     }
 
     /**
-     * Determine whether our table schema exists or not; this is needed because
-     * migrations such as the install migration and base_install migration may
-     * not have been run by the time our init() method has been called
-     *
-     * @return bool
-     */
-    public function migrationsAndSchemaReady(): bool
-    {
-        $pluginsService = Craft::$app->getPlugins();
-        if ($pluginsService->doesPluginRequireDatabaseUpdate(self::$plugin)) {
-            return false;
-        }
-        if (Craft::$app->db->schema->getTableSchema('{{%seomatic_metabundles}}') === null) {
-            return false;
-        }
-
-        return true;
-    }
-
-    // Protected Methods
-    // =========================================================================
-
-    /**
      * Install global event listeners for all request types
      */
-    protected function installGlobalEventListeners()
+    protected function installGlobalEventListeners(): void
     {
         // Handler: Plugins::EVENT_AFTER_LOAD_PLUGINS
         Event::on(
@@ -493,7 +594,7 @@ class Seomatic extends Plugin
         Event::on(
             Fields::class,
             Fields::EVENT_REGISTER_FIELD_TYPES,
-            function (RegisterComponentTypesEvent $event) {
+            static function (RegisterComponentTypesEvent $event) {
                 $event->types[] = SeoSettingsField::class;
                 $event->types[] = Seomatic_MetaField::class;
             }
@@ -502,7 +603,7 @@ class Seomatic extends Plugin
         Event::on(
             Elements::class,
             Elements::EVENT_AFTER_SAVE_ELEMENT,
-            function (ElementEvent $event) {
+            static function (ElementEvent $event) {
                 Craft::debug(
                     'Elements::EVENT_AFTER_SAVE_ELEMENT',
                     __METHOD__
@@ -522,7 +623,7 @@ class Seomatic extends Plugin
         Event::on(
             Elements::class,
             Elements::EVENT_AFTER_DELETE_ELEMENT,
-            function (ElementEvent $event) {
+            static function (ElementEvent $event) {
                 Craft::debug(
                     'Elements::EVENT_AFTER_DELETE_ELEMENT',
                     __METHOD__
@@ -541,7 +642,7 @@ class Seomatic extends Plugin
             Event::on(
                 Entry::class,
                 Entry::EVENT_REGISTER_PREVIEW_TARGETS,
-                function (RegisterPreviewTargetsEvent $e) {
+                static function (RegisterPreviewTargetsEvent $e) {
                     /** @var Element $element */
                     $element = $e->sender;
                     if ($element->uri !== null) {
@@ -572,7 +673,7 @@ class Seomatic extends Plugin
                 }
             );
         }
-        $updateMetaBundles = function ($message) {
+        $updateMetaBundles = static function ($message) {
             Craft::debug(
                 $message,
                 __METHOD__
@@ -591,7 +692,7 @@ class Seomatic extends Plugin
         Event::on(
             SitesService::class,
             SitesService::EVENT_AFTER_SAVE_SITE,
-            function() use ($updateMetaBundles) {
+            static function () use ($updateMetaBundles) {
                 $updateMetaBundles('SitesService::EVENT_AFTER_SAVE_SITE');
             }
         );
@@ -600,7 +701,7 @@ class Seomatic extends Plugin
         Event::on(
             SitesService::class,
             SitesService::EVENT_AFTER_DELETE_SITE,
-            function() use ($updateMetaBundles) {
+            static function () use ($updateMetaBundles) {
                 $updateMetaBundles('SitesService::EVENT_AFTER_DELETE_SITE');
             }
         );
@@ -611,7 +712,7 @@ class Seomatic extends Plugin
      *
      * @return void
      */
-    protected function installGqlHandlers()
+    protected function installGqlHandlers(): void
     {
         // Add native GraphQL support on Craft 3.3 or later
         if (self::$craft33) {
@@ -619,7 +720,7 @@ class Seomatic extends Plugin
             Event::on(
                 Gql::class,
                 Gql::EVENT_REGISTER_GQL_TYPES,
-                function (RegisterGqlTypesEvent $event) {
+                static function (RegisterGqlTypesEvent $event) {
                     Craft::debug(
                         'Gql::EVENT_REGISTER_GQL_TYPES',
                         __METHOD__
@@ -632,7 +733,7 @@ class Seomatic extends Plugin
             Event::on(
                 Gql::class,
                 Gql::EVENT_REGISTER_GQL_QUERIES,
-                function (RegisterGqlQueriesEvent $event) {
+                static function (RegisterGqlQueriesEvent $event) {
                     Craft::debug(
                         'Gql::EVENT_REGISTER_GQL_QUERIES',
                         __METHOD__
@@ -648,7 +749,7 @@ class Seomatic extends Plugin
                 Event::on(
                     Gql::class,
                     Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS,
-                    function (RegisterGqlSchemaComponentsEvent $event) {
+                    static function (RegisterGqlSchemaComponentsEvent $event) {
                         Craft::debug(
                             'Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS',
                             __METHOD__
@@ -666,7 +767,7 @@ class Seomatic extends Plugin
             Event::on(
                 TypeManager::class,
                 TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS,
-                function (DefineGqlTypeFieldsEvent $event) use ($knownInterfaceNames) {
+                static function (DefineGqlTypeFieldsEvent $event) use ($knownInterfaceNames) {
                     if (in_array($event->typeName, $knownInterfaceNames, true)) {
                         Craft::debug(
                             'TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS',
@@ -701,13 +802,13 @@ class Seomatic extends Plugin
      * EVENT_AFTER_LOAD_PLUGINS so that any pending db migrations can be run
      * before our event listeners kick in
      */
-    protected function handleSiteRequest()
+    protected function handleSiteRequest(): void
     {
         // Handler: View::EVENT_BEGIN_BODY
         Event::on(
             View::class,
             View::EVENT_BEGIN_BODY,
-            function () {
+            static function () {
                 Craft::debug(
                     'View::EVENT_BEGIN_BODY',
                     __METHOD__
@@ -722,7 +823,7 @@ class Seomatic extends Plugin
         Event::on(
             View::class,
             View::EVENT_END_BODY,
-            function () {
+            static function () {
                 Craft::debug(
                     'View::EVENT_END_BODY',
                     __METHOD__
@@ -737,7 +838,7 @@ class Seomatic extends Plugin
         Event::on(
             View::class,
             View::EVENT_END_PAGE,
-            function () {
+            static function () {
                 Craft::debug(
                     'View::EVENT_END_PAGE',
                     __METHOD__
@@ -755,7 +856,7 @@ class Seomatic extends Plugin
      * EVENT_AFTER_LOAD_PLUGINS so that any pending db migrations can be run
      * before our event listeners kick in
      */
-    protected function handleAdminCpRequest()
+    protected function handleAdminCpRequest(): void
     {
         // Don't cache Control Panel requests
         self::$cacheDuration = 1;
@@ -772,7 +873,7 @@ class Seomatic extends Plugin
     /**
      * Install site event listeners for site requests only
      */
-    protected function installSiteEventListeners()
+    protected function installSiteEventListeners(): void
     {
         // Load the sitemap containers
         self::$plugin->sitemaps->loadSitemapContainers();
@@ -816,7 +917,7 @@ class Seomatic extends Plugin
     /**
      * Install site event listeners for Control Panel requests only
      */
-    protected function installCpEventListeners()
+    protected function installCpEventListeners(): void
     {
         // Load the frontend template containers
         self::$plugin->frontendTemplates->loadFrontendTemplateContainers();
@@ -1014,29 +1115,6 @@ class Seomatic extends Plugin
     }
 
     /**
-     * Clear all the caches!
-     */
-    public function clearAllCaches()
-    {
-        // Clear all of SEOmatic's caches
-        self::$plugin->frontendTemplates->invalidateCaches();
-        self::$plugin->metaContainers->invalidateCaches();
-        self::$plugin->sitemaps->invalidateCaches();
-        // If they are using Craft 3.3 or later, clear the GraphQL caches too
-        if (self::$craft33) {
-            $gql = Craft::$app->getGql();
-            if (method_exists($gql, 'invalidateCaches')) {
-                $gql->invalidateCaches();
-            }
-        }
-        // If the FastCGI Cache Bust plugin is installed, clear its caches too
-        $plugin = Craft::$app->getPlugins()->getPlugin('fastcgi-cache-bust');
-        if ($plugin !== null) {
-            FastcgiCacheBust::$plugin->cache->clearAll();
-        }
-    }
-
-    /**
      * Returns the custom Control Panel cache options.
      *
      * @return array
@@ -1068,84 +1146,7 @@ class Seomatic extends Plugin
     /**
      * @inheritdoc
      */
-    public function getSettingsResponse()
-    {
-        // Just redirect to the plugin settings page
-        Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('seomatic/plugin'));
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getCpNavItem()
-    {
-        $subNavs = [];
-        $navItem = parent::getCpNavItem();
-        /** @var User $currentUser */
-        $request = Craft::$app->getRequest();
-        $siteSuffix = '';
-        if ($request->getSegment(1) === 'seomatic') {
-            $segments = $request->getSegments();
-            $lastSegment = end($segments);
-            $site = Craft::$app->getSites()->getSiteByHandle($lastSegment);
-            if ($site !== null) {
-                $siteSuffix = '/' . $lastSegment;
-            }
-        }
-        $currentUser = Craft::$app->getUser()->getIdentity();
-        // Only show sub-navs the user has permission to view
-        if ($currentUser->can('seomatic:dashboard')) {
-            $subNavs['dashboard'] = [
-                'label' => Craft::t('seomatic', 'Dashboard'),
-                'url' => 'seomatic/dashboard' . $siteSuffix,
-            ];
-        }
-        if ($currentUser->can('seomatic:global-meta')) {
-            $subNavs['global'] = [
-                'label' => Craft::t('seomatic', 'Global SEO'),
-                'url' => 'seomatic/global/general' . $siteSuffix,
-            ];
-        }
-        if ($currentUser->can('seomatic:content-meta')) {
-            $subNavs['content'] = [
-                'label' => Craft::t('seomatic', 'Content SEO'),
-                'url' => 'seomatic/content' . $siteSuffix,
-            ];
-        }
-        if ($currentUser->can('seomatic:site-settings')) {
-            $subNavs['site'] = [
-                'label' => Craft::t('seomatic', 'Site Settings'),
-                'url' => 'seomatic/site/identity' . $siteSuffix,
-            ];
-        }
-        if ($currentUser->can('seomatic:tracking-scripts')) {
-            $subNavs['tracking'] = [
-                'label' => Craft::t('seomatic', 'Tracking Scripts'),
-                'url' => 'seomatic/tracking/gtag' . $siteSuffix,
-            ];
-        }
-        $editableSettings = true;
-        $general = Craft::$app->getConfig()->getGeneral();
-        if (self::$craft31 && !$general->allowAdminChanges) {
-            $editableSettings = false;
-        }
-        if ($currentUser->can('seomatic:plugin-settings') && $editableSettings) {
-            $subNavs['plugin'] = [
-                'label' => Craft::t('seomatic', 'Plugin Settings'),
-                'url' => 'seomatic/plugin',
-            ];
-        }
-        $navItem = array_merge($navItem, [
-            'subnav' => $subNavs,
-        ]);
-
-        return $navItem;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    protected function createSettingsModel()
+    protected function createSettingsModel(): ?Model
     {
         return new Settings();
     }

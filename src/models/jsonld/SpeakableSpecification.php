@@ -94,28 +94,6 @@ class SpeakableSpecification extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A CSS selector, e.g. of a SpeakableSpecification or WebPageElement. In the
-     * latter case, multiple matches within a page can constitute a single
-     * conceptual "Web page element".
-     *
-     * @var CssSelectorType [schema.org types: CssSelectorType]
-     */
-    public $cssSelector;
-
-    /**
-     * An XPath, e.g. of a SpeakableSpecification or WebPageElement. In the latter
-     * case, multiple matches within a page can constitute a single conceptual
-     * "Web page element".
-     *
-     * @var XPathType [schema.org types: XPathType]
-     */
-    public $xpath;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -125,7 +103,6 @@ class SpeakableSpecification extends Intangible
         'cssSelector',
         'xpath'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -136,6 +113,8 @@ class SpeakableSpecification extends Intangible
         'xpath' => ['XPathType']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -145,7 +124,6 @@ class SpeakableSpecification extends Intangible
         'cssSelector' => 'A CSS selector, e.g. of a SpeakableSpecification or WebPageElement. In the latter case, multiple matches within a page can constitute a single conceptual "Web page element".',
         'xpath' => 'An XPath, e.g. of a SpeakableSpecification or WebPageElement. In the latter case, multiple matches within a page can constitute a single conceptual "Web page element".'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -153,7 +131,6 @@ class SpeakableSpecification extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -161,14 +138,30 @@ class SpeakableSpecification extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A CSS selector, e.g. of a SpeakableSpecification or WebPageElement. In the
+     * latter case, multiple matches within a page can constitute a single
+     * conceptual "Web page element".
+     *
+     * @var CssSelectorType [schema.org types: CssSelectorType]
+     */
+    public $cssSelector;
+    /**
+     * An XPath, e.g. of a SpeakableSpecification or WebPageElement. In the latter
+     * case, multiple matches within a page can constitute a single conceptual
+     * "Web page element".
+     *
+     * @var XPathType [schema.org types: XPathType]
+     */
+    public $xpath;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -198,13 +191,13 @@ class SpeakableSpecification extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['cssSelector','xpath'], 'validateJsonSchema'],
+            [['cssSelector', 'xpath'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

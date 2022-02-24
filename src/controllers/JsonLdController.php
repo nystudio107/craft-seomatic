@@ -11,11 +11,10 @@
 
 namespace nystudio107\seomatic\controllers;
 
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\helpers\Schema as SchemaHelper;
-
 use craft\web\Controller;
-
+use Exception;
+use nystudio107\seomatic\helpers\Schema as SchemaHelper;
+use nystudio107\seomatic\Seomatic;
 use yii\web\Response;
 
 /**
@@ -46,7 +45,7 @@ class JsonLdController extends Controller
     /**
      * @inheritDoc
      */
-    public function beforeAction($action)
+    public function beforeAction($action): bool
     {
         if (!Seomatic::$settings->enableJsonLdEndpoint) {
             $this->allowAnonymous = false;
@@ -90,7 +89,7 @@ class JsonLdController extends Controller
     {
         try {
             $schemaArray = SchemaHelper::getSchemaArray($path);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $schemaArray = [];
         }
 

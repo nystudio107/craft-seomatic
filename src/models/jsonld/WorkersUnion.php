@@ -94,453 +94,6 @@ class WorkersUnion extends Organization
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * For a NewsMediaOrganization or other news-related Organization, a statement
-     * about public engagement activities (for news media, the newsroom’s),
-     * including involving the public - digitally or otherwise -- in coverage
-     * decisions, reporting and activities after publication.
-     *
-     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
-     */
-    public $actionableFeedbackPolicy;
-
-    /**
-     * Physical address of the item.
-     *
-     * @var mixed|PostalAddress|string [schema.org types: PostalAddress, Text]
-     */
-    public $address;
-
-    /**
-     * The overall rating, based on a collection of reviews or ratings, of the
-     * item.
-     *
-     * @var AggregateRating [schema.org types: AggregateRating]
-     */
-    public $aggregateRating;
-
-    /**
-     * Alumni of an organization. Inverse property: alumniOf.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $alumni;
-
-    /**
-     * The geographic area where a service or offered item is provided. Supersedes
-     * serviceArea.
-     *
-     * @var mixed|AdministrativeArea|GeoShape|Place|string [schema.org types: AdministrativeArea, GeoShape, Place, Text]
-     */
-    public $areaServed;
-
-    /**
-     * An award won by or for this item. Supersedes awards.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $award;
-
-    /**
-     * The brand(s) associated with a product or service, or the brand(s)
-     * maintained by an organization or business person.
-     *
-     * @var mixed|Brand|Organization [schema.org types: Brand, Organization]
-     */
-    public $brand;
-
-    /**
-     * A contact point for a person or organization. Supersedes contactPoints.
-     *
-     * @var ContactPoint [schema.org types: ContactPoint]
-     */
-    public $contactPoint;
-
-    /**
-     * For an Organization (e.g. NewsMediaOrganization), a statement describing
-     * (in news media, the newsroom’s) disclosure and correction policy for
-     * errors.
-     *
-     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
-     */
-    public $correctionsPolicy;
-
-    /**
-     * A relationship between an organization and a department of that
-     * organization, also described as an organization (allowing different urls,
-     * logos, opening hours). For example: a store with a pharmacy, or a bakery
-     * with a cafe.
-     *
-     * @var Organization [schema.org types: Organization]
-     */
-    public $department;
-
-    /**
-     * The date that this organization was dissolved.
-     *
-     * @var Date [schema.org types: Date]
-     */
-    public $dissolutionDate;
-
-    /**
-     * Statement on diversity policy by an Organization e.g. a
-     * NewsMediaOrganization. For a NewsMediaOrganization, a statement describing
-     * the newsroom’s diversity policy on both staffing and sources, typically
-     * providing staffing data.
-     *
-     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
-     */
-    public $diversityPolicy;
-
-    /**
-     * For an Organization (often but not necessarily a NewsMediaOrganization), a
-     * report on staffing diversity issues. In a news context this might be for
-     * example ASNE or RTDNA (US) reports, or self-reported.
-     *
-     * @var mixed|Article|string [schema.org types: Article, URL]
-     */
-    public $diversityStaffingReport;
-
-    /**
-     * The Dun & Bradstreet DUNS number for identifying an organization or
-     * business person.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $duns;
-
-    /**
-     * Email address.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $email;
-
-    /**
-     * Someone working for this organization. Supersedes employees.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $employee;
-
-    /**
-     * Statement about ethics policy, e.g. of a NewsMediaOrganization regarding
-     * journalistic and publishing practices, or of a Restaurant, a page
-     * describing food source policies. In the case of a NewsMediaOrganization, an
-     * ethicsPolicy is typically a statement describing the personal,
-     * organizational, and corporate standards of behavior expected by the
-     * organization.
-     *
-     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
-     */
-    public $ethicsPolicy;
-
-    /**
-     * Upcoming or past event associated with this place, organization, or action.
-     * Supersedes events.
-     *
-     * @var Event [schema.org types: Event]
-     */
-    public $event;
-
-    /**
-     * The fax number.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $faxNumber;
-
-    /**
-     * A person who founded this organization. Supersedes founders.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $founder;
-
-    /**
-     * The date that this organization was founded.
-     *
-     * @var Date [schema.org types: Date]
-     */
-    public $foundingDate;
-
-    /**
-     * The place where the Organization was founded.
-     *
-     * @var Place [schema.org types: Place]
-     */
-    public $foundingLocation;
-
-    /**
-     * A person or organization that supports (sponsors) something through some
-     * kind of financial contribution.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $funder;
-
-    /**
-     * The Global Location Number (GLN, sometimes also referred to as
-     * International Location Number or ILN) of the respective organization,
-     * person, or place. The GLN is a 13-digit number used to identify parties and
-     * physical locations.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $globalLocationNumber;
-
-    /**
-     * A credential awarded to the Person or Organization.
-     *
-     * @var EducationalOccupationalCredential [schema.org types: EducationalOccupationalCredential]
-     */
-    public $hasCredential;
-
-    /**
-     * Indicates a MerchantReturnPolicy that may be applicable. Supersedes
-     * hasProductReturnPolicy.
-     *
-     * @var MerchantReturnPolicy [schema.org types: MerchantReturnPolicy]
-     */
-    public $hasMerchantReturnPolicy;
-
-    /**
-     * Indicates an OfferCatalog listing for this Organization, Person, or
-     * Service.
-     *
-     * @var OfferCatalog [schema.org types: OfferCatalog]
-     */
-    public $hasOfferCatalog;
-
-    /**
-     * Points-of-Sales operated by the organization or person.
-     *
-     * @var Place [schema.org types: Place]
-     */
-    public $hasPOS;
-
-    /**
-     * The number of interactions for the CreativeWork using the WebSite or
-     * SoftwareApplication. The most specific child type of InteractionCounter
-     * should be used. Supersedes interactionCount.
-     *
-     * @var InteractionCounter [schema.org types: InteractionCounter]
-     */
-    public $interactionStatistic;
-
-    /**
-     * The International Standard of Industrial Classification of All Economic
-     * Activities (ISIC), Revision 4 code for a particular organization, business
-     * person, or place.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $isicV4;
-
-    /**
-     * Of a Person, and less typically of an Organization, to indicate a topic
-     * that is known about - suggesting possible expertise but not implying it. We
-     * do not distinguish skill levels here, or relate this to educational
-     * content, events, objectives or JobPosting descriptions.
-     *
-     * @var mixed|string|Thing|string [schema.org types: Text, Thing, URL]
-     */
-    public $knowsAbout;
-
-    /**
-     * Of a Person, and less typically of an Organization, to indicate a known
-     * language. We do not distinguish skill levels or
-     * reading/writing/speaking/signing here. Use language codes from the IETF BCP
-     * 47 standard.
-     *
-     * @var mixed|Language|string [schema.org types: Language, Text]
-     */
-    public $knowsLanguage;
-
-    /**
-     * The official name of the organization, e.g. the registered company name.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $legalName;
-
-    /**
-     * An organization identifier that uniquely identifies a legal entity as
-     * defined in ISO 17442.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $leiCode;
-
-    /**
-     * The location of for example where the event is happening, an organization
-     * is located, or where an action takes place.
-     *
-     * @var mixed|Place|PostalAddress|string|VirtualLocation [schema.org types: Place, PostalAddress, Text, VirtualLocation]
-     */
-    public $location;
-
-    /**
-     * An associated logo.
-     *
-     * @var mixed|ImageObject|string [schema.org types: ImageObject, URL]
-     */
-    public $logo;
-
-    /**
-     * A pointer to products or services offered by the organization or person.
-     * Inverse property: offeredBy.
-     *
-     * @var Offer [schema.org types: Offer]
-     */
-    public $makesOffer;
-
-    /**
-     * A member of an Organization or a ProgramMembership. Organizations can be
-     * members of organizations; ProgramMembership is typically for individuals.
-     * Supersedes members, musicGroupMember. Inverse property: memberOf.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $member;
-
-    /**
-     * An Organization (or ProgramMembership) to which this Person or Organization
-     * belongs. Inverse property: member.
-     *
-     * @var mixed|Organization|ProgramMembership [schema.org types: Organization, ProgramMembership]
-     */
-    public $memberOf;
-
-    /**
-     * The North American Industry Classification System (NAICS) code for a
-     * particular organization or business person.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $naics;
-
-    /**
-     * The number of employees in an organization e.g. business.
-     *
-     * @var QuantitativeValue [schema.org types: QuantitativeValue]
-     */
-    public $numberOfEmployees;
-
-    /**
-     * For an Organization (often but not necessarily a NewsMediaOrganization), a
-     * description of organizational ownership structure; funding and grants. In a
-     * news/media setting, this is with particular reference to editorial
-     * independence. Note that the funder is also available and can be used to
-     * make basic funder information machine-readable.
-     *
-     * @var mixed|AboutPage|CreativeWork|string|string [schema.org types: AboutPage, CreativeWork, Text, URL]
-     */
-    public $ownershipFundingInfo;
-
-    /**
-     * Products owned by the organization or person.
-     *
-     * @var mixed|OwnershipInfo|Product [schema.org types: OwnershipInfo, Product]
-     */
-    public $owns;
-
-    /**
-     * The larger organization that this organization is a subOrganization of, if
-     * any. Supersedes branchOf. Inverse property: subOrganization.
-     *
-     * @var Organization [schema.org types: Organization]
-     */
-    public $parentOrganization;
-
-    /**
-     * The publishingPrinciples property indicates (typically via URL) a document
-     * describing the editorial principles of an Organization (or individual e.g.
-     * a Person writing a blog) that relate to their activities as a publisher,
-     * e.g. ethics or diversity policies. When applied to a CreativeWork (e.g.
-     * NewsArticle) the principles are those of the party primarily responsible
-     * for the creation of the CreativeWork. While such policies are most
-     * typically expressed in natural language, sometimes related information
-     * (e.g. indicating a funder) can be expressed using schema.org terminology.
-     *
-     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
-     */
-    public $publishingPrinciples;
-
-    /**
-     * A review of the item. Supersedes reviews.
-     *
-     * @var Review [schema.org types: Review]
-     */
-    public $review;
-
-    /**
-     * A pointer to products or services sought by the organization or person
-     * (demand).
-     *
-     * @var Demand [schema.org types: Demand]
-     */
-    public $seeks;
-
-    /**
-     * A slogan or motto associated with the item.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $slogan;
-
-    /**
-     * A person or organization that supports a thing through a pledge, promise,
-     * or financial contribution. e.g. a sponsor of a Medical Study or a corporate
-     * sponsor of an event.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $sponsor;
-
-    /**
-     * A relationship between two organizations where the first includes the
-     * second, e.g., as a subsidiary. See also: the more specific 'department'
-     * property. Inverse property: parentOrganization.
-     *
-     * @var Organization [schema.org types: Organization]
-     */
-    public $subOrganization;
-
-    /**
-     * The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US
-     * or the CIF/NIF in Spain.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $taxID;
-
-    /**
-     * The telephone number.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $telephone;
-
-    /**
-     * For an Organization (typically a NewsMediaOrganization), a statement about
-     * policy on use of unnamed sources and the decision process required.
-     *
-     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
-     */
-    public $unnamedSourcesPolicy;
-
-    /**
-     * The Value-added Tax ID of the organization or person.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $vatID;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -602,36 +155,35 @@ class WorkersUnion extends Organization
         'unnamedSourcesPolicy',
         'vatID'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'actionableFeedbackPolicy' => ['CreativeWork','URL'],
-        'address' => ['PostalAddress','Text'],
+        'actionableFeedbackPolicy' => ['CreativeWork', 'URL'],
+        'address' => ['PostalAddress', 'Text'],
         'aggregateRating' => ['AggregateRating'],
         'alumni' => ['Person'],
-        'areaServed' => ['AdministrativeArea','GeoShape','Place','Text'],
+        'areaServed' => ['AdministrativeArea', 'GeoShape', 'Place', 'Text'],
         'award' => ['Text'],
-        'brand' => ['Brand','Organization'],
+        'brand' => ['Brand', 'Organization'],
         'contactPoint' => ['ContactPoint'],
-        'correctionsPolicy' => ['CreativeWork','URL'],
+        'correctionsPolicy' => ['CreativeWork', 'URL'],
         'department' => ['Organization'],
         'dissolutionDate' => ['Date'],
-        'diversityPolicy' => ['CreativeWork','URL'],
-        'diversityStaffingReport' => ['Article','URL'],
+        'diversityPolicy' => ['CreativeWork', 'URL'],
+        'diversityStaffingReport' => ['Article', 'URL'],
         'duns' => ['Text'],
         'email' => ['Text'],
         'employee' => ['Person'],
-        'ethicsPolicy' => ['CreativeWork','URL'],
+        'ethicsPolicy' => ['CreativeWork', 'URL'],
         'event' => ['Event'],
         'faxNumber' => ['Text'],
         'founder' => ['Person'],
         'foundingDate' => ['Date'],
         'foundingLocation' => ['Place'],
-        'funder' => ['Organization','Person'],
+        'funder' => ['Organization', 'Person'],
         'globalLocationNumber' => ['Text'],
         'hasCredential' => ['EducationalOccupationalCredential'],
         'hasMerchantReturnPolicy' => ['MerchantReturnPolicy'],
@@ -639,32 +191,31 @@ class WorkersUnion extends Organization
         'hasPOS' => ['Place'],
         'interactionStatistic' => ['InteractionCounter'],
         'isicV4' => ['Text'],
-        'knowsAbout' => ['Text','Thing','URL'],
-        'knowsLanguage' => ['Language','Text'],
+        'knowsAbout' => ['Text', 'Thing', 'URL'],
+        'knowsLanguage' => ['Language', 'Text'],
         'legalName' => ['Text'],
         'leiCode' => ['Text'],
-        'location' => ['Place','PostalAddress','Text','VirtualLocation'],
-        'logo' => ['ImageObject','URL'],
+        'location' => ['Place', 'PostalAddress', 'Text', 'VirtualLocation'],
+        'logo' => ['ImageObject', 'URL'],
         'makesOffer' => ['Offer'],
-        'member' => ['Organization','Person'],
-        'memberOf' => ['Organization','ProgramMembership'],
+        'member' => ['Organization', 'Person'],
+        'memberOf' => ['Organization', 'ProgramMembership'],
         'naics' => ['Text'],
         'numberOfEmployees' => ['QuantitativeValue'],
-        'ownershipFundingInfo' => ['AboutPage','CreativeWork','Text','URL'],
-        'owns' => ['OwnershipInfo','Product'],
+        'ownershipFundingInfo' => ['AboutPage', 'CreativeWork', 'Text', 'URL'],
+        'owns' => ['OwnershipInfo', 'Product'],
         'parentOrganization' => ['Organization'],
-        'publishingPrinciples' => ['CreativeWork','URL'],
+        'publishingPrinciples' => ['CreativeWork', 'URL'],
         'review' => ['Review'],
         'seeks' => ['Demand'],
         'slogan' => ['Text'],
-        'sponsor' => ['Organization','Person'],
+        'sponsor' => ['Organization', 'Person'],
         'subOrganization' => ['Organization'],
         'taxID' => ['Text'],
         'telephone' => ['Text'],
-        'unnamedSourcesPolicy' => ['CreativeWork','URL'],
+        'unnamedSourcesPolicy' => ['CreativeWork', 'URL'],
         'vatID' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -726,7 +277,6 @@ class WorkersUnion extends Organization
         'unnamedSourcesPolicy' => 'For an Organization (typically a NewsMediaOrganization), a statement about policy on use of unnamed sources and the decision process required.',
         'vatID' => 'The Value-added Tax ID of the organization or person.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -734,7 +284,6 @@ class WorkersUnion extends Organization
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -742,14 +291,406 @@ class WorkersUnion extends Organization
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * For a NewsMediaOrganization or other news-related Organization, a statement
+     * about public engagement activities (for news media, the newsroom’s),
+     * including involving the public - digitally or otherwise -- in coverage
+     * decisions, reporting and activities after publication.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
+     */
+    public $actionableFeedbackPolicy;
+    /**
+     * Physical address of the item.
+     *
+     * @var mixed|PostalAddress|string [schema.org types: PostalAddress, Text]
+     */
+    public $address;
+    /**
+     * The overall rating, based on a collection of reviews or ratings, of the
+     * item.
+     *
+     * @var AggregateRating [schema.org types: AggregateRating]
+     */
+    public $aggregateRating;
+    /**
+     * Alumni of an organization. Inverse property: alumniOf.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $alumni;
+    /**
+     * The geographic area where a service or offered item is provided. Supersedes
+     * serviceArea.
+     *
+     * @var mixed|AdministrativeArea|GeoShape|Place|string [schema.org types: AdministrativeArea, GeoShape, Place, Text]
+     */
+    public $areaServed;
+    /**
+     * An award won by or for this item. Supersedes awards.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $award;
+    /**
+     * The brand(s) associated with a product or service, or the brand(s)
+     * maintained by an organization or business person.
+     *
+     * @var mixed|Brand|Organization [schema.org types: Brand, Organization]
+     */
+    public $brand;
+    /**
+     * A contact point for a person or organization. Supersedes contactPoints.
+     *
+     * @var ContactPoint [schema.org types: ContactPoint]
+     */
+    public $contactPoint;
+    /**
+     * For an Organization (e.g. NewsMediaOrganization), a statement describing
+     * (in news media, the newsroom’s) disclosure and correction policy for
+     * errors.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
+     */
+    public $correctionsPolicy;
+    /**
+     * A relationship between an organization and a department of that
+     * organization, also described as an organization (allowing different urls,
+     * logos, opening hours). For example: a store with a pharmacy, or a bakery
+     * with a cafe.
+     *
+     * @var Organization [schema.org types: Organization]
+     */
+    public $department;
+    /**
+     * The date that this organization was dissolved.
+     *
+     * @var Date [schema.org types: Date]
+     */
+    public $dissolutionDate;
+    /**
+     * Statement on diversity policy by an Organization e.g. a
+     * NewsMediaOrganization. For a NewsMediaOrganization, a statement describing
+     * the newsroom’s diversity policy on both staffing and sources, typically
+     * providing staffing data.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
+     */
+    public $diversityPolicy;
+    /**
+     * For an Organization (often but not necessarily a NewsMediaOrganization), a
+     * report on staffing diversity issues. In a news context this might be for
+     * example ASNE or RTDNA (US) reports, or self-reported.
+     *
+     * @var mixed|Article|string [schema.org types: Article, URL]
+     */
+    public $diversityStaffingReport;
+    /**
+     * The Dun & Bradstreet DUNS number for identifying an organization or
+     * business person.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $duns;
+    /**
+     * Email address.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $email;
+    /**
+     * Someone working for this organization. Supersedes employees.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $employee;
+    /**
+     * Statement about ethics policy, e.g. of a NewsMediaOrganization regarding
+     * journalistic and publishing practices, or of a Restaurant, a page
+     * describing food source policies. In the case of a NewsMediaOrganization, an
+     * ethicsPolicy is typically a statement describing the personal,
+     * organizational, and corporate standards of behavior expected by the
+     * organization.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
+     */
+    public $ethicsPolicy;
+    /**
+     * Upcoming or past event associated with this place, organization, or action.
+     * Supersedes events.
+     *
+     * @var Event [schema.org types: Event]
+     */
+    public $event;
+    /**
+     * The fax number.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $faxNumber;
+    /**
+     * A person who founded this organization. Supersedes founders.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $founder;
+    /**
+     * The date that this organization was founded.
+     *
+     * @var Date [schema.org types: Date]
+     */
+    public $foundingDate;
+    /**
+     * The place where the Organization was founded.
+     *
+     * @var Place [schema.org types: Place]
+     */
+    public $foundingLocation;
+    /**
+     * A person or organization that supports (sponsors) something through some
+     * kind of financial contribution.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $funder;
+    /**
+     * The Global Location Number (GLN, sometimes also referred to as
+     * International Location Number or ILN) of the respective organization,
+     * person, or place. The GLN is a 13-digit number used to identify parties and
+     * physical locations.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $globalLocationNumber;
+    /**
+     * A credential awarded to the Person or Organization.
+     *
+     * @var EducationalOccupationalCredential [schema.org types: EducationalOccupationalCredential]
+     */
+    public $hasCredential;
+    /**
+     * Indicates a MerchantReturnPolicy that may be applicable. Supersedes
+     * hasProductReturnPolicy.
+     *
+     * @var MerchantReturnPolicy [schema.org types: MerchantReturnPolicy]
+     */
+    public $hasMerchantReturnPolicy;
+    /**
+     * Indicates an OfferCatalog listing for this Organization, Person, or
+     * Service.
+     *
+     * @var OfferCatalog [schema.org types: OfferCatalog]
+     */
+    public $hasOfferCatalog;
+    /**
+     * Points-of-Sales operated by the organization or person.
+     *
+     * @var Place [schema.org types: Place]
+     */
+    public $hasPOS;
+    /**
+     * The number of interactions for the CreativeWork using the WebSite or
+     * SoftwareApplication. The most specific child type of InteractionCounter
+     * should be used. Supersedes interactionCount.
+     *
+     * @var InteractionCounter [schema.org types: InteractionCounter]
+     */
+    public $interactionStatistic;
+    /**
+     * The International Standard of Industrial Classification of All Economic
+     * Activities (ISIC), Revision 4 code for a particular organization, business
+     * person, or place.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $isicV4;
+    /**
+     * Of a Person, and less typically of an Organization, to indicate a topic
+     * that is known about - suggesting possible expertise but not implying it. We
+     * do not distinguish skill levels here, or relate this to educational
+     * content, events, objectives or JobPosting descriptions.
+     *
+     * @var mixed|string|Thing|string [schema.org types: Text, Thing, URL]
+     */
+    public $knowsAbout;
+    /**
+     * Of a Person, and less typically of an Organization, to indicate a known
+     * language. We do not distinguish skill levels or
+     * reading/writing/speaking/signing here. Use language codes from the IETF BCP
+     * 47 standard.
+     *
+     * @var mixed|Language|string [schema.org types: Language, Text]
+     */
+    public $knowsLanguage;
+    /**
+     * The official name of the organization, e.g. the registered company name.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $legalName;
+    /**
+     * An organization identifier that uniquely identifies a legal entity as
+     * defined in ISO 17442.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $leiCode;
+    /**
+     * The location of for example where the event is happening, an organization
+     * is located, or where an action takes place.
+     *
+     * @var mixed|Place|PostalAddress|string|VirtualLocation [schema.org types: Place, PostalAddress, Text, VirtualLocation]
+     */
+    public $location;
+    /**
+     * An associated logo.
+     *
+     * @var mixed|ImageObject|string [schema.org types: ImageObject, URL]
+     */
+    public $logo;
+    /**
+     * A pointer to products or services offered by the organization or person.
+     * Inverse property: offeredBy.
+     *
+     * @var Offer [schema.org types: Offer]
+     */
+    public $makesOffer;
+    /**
+     * A member of an Organization or a ProgramMembership. Organizations can be
+     * members of organizations; ProgramMembership is typically for individuals.
+     * Supersedes members, musicGroupMember. Inverse property: memberOf.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $member;
+    /**
+     * An Organization (or ProgramMembership) to which this Person or Organization
+     * belongs. Inverse property: member.
+     *
+     * @var mixed|Organization|ProgramMembership [schema.org types: Organization, ProgramMembership]
+     */
+    public $memberOf;
+    /**
+     * The North American Industry Classification System (NAICS) code for a
+     * particular organization or business person.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $naics;
+    /**
+     * The number of employees in an organization e.g. business.
+     *
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
+     */
+    public $numberOfEmployees;
+    /**
+     * For an Organization (often but not necessarily a NewsMediaOrganization), a
+     * description of organizational ownership structure; funding and grants. In a
+     * news/media setting, this is with particular reference to editorial
+     * independence. Note that the funder is also available and can be used to
+     * make basic funder information machine-readable.
+     *
+     * @var mixed|AboutPage|CreativeWork|string|string [schema.org types: AboutPage, CreativeWork, Text, URL]
+     */
+    public $ownershipFundingInfo;
+    /**
+     * Products owned by the organization or person.
+     *
+     * @var mixed|OwnershipInfo|Product [schema.org types: OwnershipInfo, Product]
+     */
+    public $owns;
+    /**
+     * The larger organization that this organization is a subOrganization of, if
+     * any. Supersedes branchOf. Inverse property: subOrganization.
+     *
+     * @var Organization [schema.org types: Organization]
+     */
+    public $parentOrganization;
+    /**
+     * The publishingPrinciples property indicates (typically via URL) a document
+     * describing the editorial principles of an Organization (or individual e.g.
+     * a Person writing a blog) that relate to their activities as a publisher,
+     * e.g. ethics or diversity policies. When applied to a CreativeWork (e.g.
+     * NewsArticle) the principles are those of the party primarily responsible
+     * for the creation of the CreativeWork. While such policies are most
+     * typically expressed in natural language, sometimes related information
+     * (e.g. indicating a funder) can be expressed using schema.org terminology.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
+     */
+    public $publishingPrinciples;
+    /**
+     * A review of the item. Supersedes reviews.
+     *
+     * @var Review [schema.org types: Review]
+     */
+    public $review;
+    /**
+     * A pointer to products or services sought by the organization or person
+     * (demand).
+     *
+     * @var Demand [schema.org types: Demand]
+     */
+    public $seeks;
+    /**
+     * A slogan or motto associated with the item.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $slogan;
+    /**
+     * A person or organization that supports a thing through a pledge, promise,
+     * or financial contribution. e.g. a sponsor of a Medical Study or a corporate
+     * sponsor of an event.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $sponsor;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * A relationship between two organizations where the first includes the
+     * second, e.g., as a subsidiary. See also: the more specific 'department'
+     * property. Inverse property: parentOrganization.
+     *
+     * @var Organization [schema.org types: Organization]
+     */
+    public $subOrganization;
+    /**
+     * The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US
+     * or the CIF/NIF in Spain.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $taxID;
+    /**
+     * The telephone number.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $telephone;
+    /**
+     * For an Organization (typically a NewsMediaOrganization), a statement about
+     * policy on use of unnamed sources and the decision process required.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
+     */
+    public $unnamedSourcesPolicy;
+    /**
+     * The Value-added Tax ID of the organization or person.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $vatID;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -779,13 +720,13 @@ class WorkersUnion extends Organization
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['actionableFeedbackPolicy','address','aggregateRating','alumni','areaServed','award','brand','contactPoint','correctionsPolicy','department','dissolutionDate','diversityPolicy','diversityStaffingReport','duns','email','employee','ethicsPolicy','event','faxNumber','founder','foundingDate','foundingLocation','funder','globalLocationNumber','hasCredential','hasMerchantReturnPolicy','hasOfferCatalog','hasPOS','interactionStatistic','isicV4','knowsAbout','knowsLanguage','legalName','leiCode','location','logo','makesOffer','member','memberOf','naics','numberOfEmployees','ownershipFundingInfo','owns','parentOrganization','publishingPrinciples','review','seeks','slogan','sponsor','subOrganization','taxID','telephone','unnamedSourcesPolicy','vatID'], 'validateJsonSchema'],
+            [['actionableFeedbackPolicy', 'address', 'aggregateRating', 'alumni', 'areaServed', 'award', 'brand', 'contactPoint', 'correctionsPolicy', 'department', 'dissolutionDate', 'diversityPolicy', 'diversityStaffingReport', 'duns', 'email', 'employee', 'ethicsPolicy', 'event', 'faxNumber', 'founder', 'foundingDate', 'foundingLocation', 'funder', 'globalLocationNumber', 'hasCredential', 'hasMerchantReturnPolicy', 'hasOfferCatalog', 'hasPOS', 'interactionStatistic', 'isicV4', 'knowsAbout', 'knowsLanguage', 'legalName', 'leiCode', 'location', 'logo', 'makesOffer', 'member', 'memberOf', 'naics', 'numberOfEmployees', 'ownershipFundingInfo', 'owns', 'parentOrganization', 'publishingPrinciples', 'review', 'seeks', 'slogan', 'sponsor', 'subOrganization', 'taxID', 'telephone', 'unnamedSourcesPolicy', 'vatID'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

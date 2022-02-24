@@ -92,111 +92,6 @@ class NewsMediaOrganization extends Organization
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * For a NewsMediaOrganization or other news-related Organization, a statement
-     * about public engagement activities (for news media, the newsroom’s),
-     * including involving the public - digitally or otherwise -- in coverage
-     * decisions, reporting and activities after publication.
-     *
-     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
-     */
-    public $actionableFeedbackPolicy;
-
-    /**
-     * For an Organization (e.g. NewsMediaOrganization), a statement describing
-     * (in news media, the newsroom’s) disclosure and correction policy for
-     * errors.
-     *
-     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
-     */
-    public $correctionsPolicy;
-
-    /**
-     * Statement on diversity policy by an Organization e.g. a
-     * NewsMediaOrganization. For a NewsMediaOrganization, a statement describing
-     * the newsroom’s diversity policy on both staffing and sources, typically
-     * providing staffing data.
-     *
-     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
-     */
-    public $diversityPolicy;
-
-    /**
-     * For an Organization (often but not necessarily a NewsMediaOrganization), a
-     * report on staffing diversity issues. In a news context this might be for
-     * example ASNE or RTDNA (US) reports, or self-reported.
-     *
-     * @var mixed|Article|string [schema.org types: Article, URL]
-     */
-    public $diversityStaffingReport;
-
-    /**
-     * Statement about ethics policy, e.g. of a NewsMediaOrganization regarding
-     * journalistic and publishing practices, or of a Restaurant, a page
-     * describing food source policies. In the case of a NewsMediaOrganization, an
-     * ethicsPolicy is typically a statement describing the personal,
-     * organizational, and corporate standards of behavior expected by the
-     * organization.
-     *
-     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
-     */
-    public $ethicsPolicy;
-
-    /**
-     * For a NewsMediaOrganization, a link to the masthead page or a page listing
-     * top editorial management.
-     *
-     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
-     */
-    public $masthead;
-
-    /**
-     * For a NewsMediaOrganization, a statement on coverage priorities, including
-     * any public agenda or stance on issues.
-     *
-     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
-     */
-    public $missionCoveragePrioritiesPolicy;
-
-    /**
-     * For a NewsMediaOrganization or other news-related Organization, a statement
-     * explaining when authors of articles are not named in bylines.
-     *
-     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
-     */
-    public $noBylinesPolicy;
-
-    /**
-     * For an Organization (often but not necessarily a NewsMediaOrganization), a
-     * description of organizational ownership structure; funding and grants. In a
-     * news/media setting, this is with particular reference to editorial
-     * independence. Note that the funder is also available and can be used to
-     * make basic funder information machine-readable.
-     *
-     * @var mixed|AboutPage|CreativeWork|string|string [schema.org types: AboutPage, CreativeWork, Text, URL]
-     */
-    public $ownershipFundingInfo;
-
-    /**
-     * For an Organization (typically a NewsMediaOrganization), a statement about
-     * policy on use of unnamed sources and the decision process required.
-     *
-     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
-     */
-    public $unnamedSourcesPolicy;
-
-    /**
-     * Disclosure about verification and fact-checking processes for a
-     * NewsMediaOrganization or other fact-checking Organization.
-     *
-     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
-     */
-    public $verificationFactCheckingPolicy;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -215,26 +110,24 @@ class NewsMediaOrganization extends Organization
         'unnamedSourcesPolicy',
         'verificationFactCheckingPolicy'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'actionableFeedbackPolicy' => ['CreativeWork','URL'],
-        'correctionsPolicy' => ['CreativeWork','URL'],
-        'diversityPolicy' => ['CreativeWork','URL'],
-        'diversityStaffingReport' => ['Article','URL'],
-        'ethicsPolicy' => ['CreativeWork','URL'],
-        'masthead' => ['CreativeWork','URL'],
-        'missionCoveragePrioritiesPolicy' => ['CreativeWork','URL'],
-        'noBylinesPolicy' => ['CreativeWork','URL'],
-        'ownershipFundingInfo' => ['AboutPage','CreativeWork','Text','URL'],
-        'unnamedSourcesPolicy' => ['CreativeWork','URL'],
-        'verificationFactCheckingPolicy' => ['CreativeWork','URL']
+        'actionableFeedbackPolicy' => ['CreativeWork', 'URL'],
+        'correctionsPolicy' => ['CreativeWork', 'URL'],
+        'diversityPolicy' => ['CreativeWork', 'URL'],
+        'diversityStaffingReport' => ['Article', 'URL'],
+        'ethicsPolicy' => ['CreativeWork', 'URL'],
+        'masthead' => ['CreativeWork', 'URL'],
+        'missionCoveragePrioritiesPolicy' => ['CreativeWork', 'URL'],
+        'noBylinesPolicy' => ['CreativeWork', 'URL'],
+        'ownershipFundingInfo' => ['AboutPage', 'CreativeWork', 'Text', 'URL'],
+        'unnamedSourcesPolicy' => ['CreativeWork', 'URL'],
+        'verificationFactCheckingPolicy' => ['CreativeWork', 'URL']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -253,7 +146,6 @@ class NewsMediaOrganization extends Organization
         'unnamedSourcesPolicy' => 'For an Organization (typically a NewsMediaOrganization), a statement about policy on use of unnamed sources and the decision process required.',
         'verificationFactCheckingPolicy' => 'Disclosure about verification and fact-checking processes for a NewsMediaOrganization or other fact-checking Organization.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -261,7 +153,6 @@ class NewsMediaOrganization extends Organization
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -269,14 +160,107 @@ class NewsMediaOrganization extends Organization
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * For a NewsMediaOrganization or other news-related Organization, a statement
+     * about public engagement activities (for news media, the newsroom’s),
+     * including involving the public - digitally or otherwise -- in coverage
+     * decisions, reporting and activities after publication.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
+     */
+    public $actionableFeedbackPolicy;
+    /**
+     * For an Organization (e.g. NewsMediaOrganization), a statement describing
+     * (in news media, the newsroom’s) disclosure and correction policy for
+     * errors.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
+     */
+    public $correctionsPolicy;
+    /**
+     * Statement on diversity policy by an Organization e.g. a
+     * NewsMediaOrganization. For a NewsMediaOrganization, a statement describing
+     * the newsroom’s diversity policy on both staffing and sources, typically
+     * providing staffing data.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
+     */
+    public $diversityPolicy;
+    /**
+     * For an Organization (often but not necessarily a NewsMediaOrganization), a
+     * report on staffing diversity issues. In a news context this might be for
+     * example ASNE or RTDNA (US) reports, or self-reported.
+     *
+     * @var mixed|Article|string [schema.org types: Article, URL]
+     */
+    public $diversityStaffingReport;
+    /**
+     * Statement about ethics policy, e.g. of a NewsMediaOrganization regarding
+     * journalistic and publishing practices, or of a Restaurant, a page
+     * describing food source policies. In the case of a NewsMediaOrganization, an
+     * ethicsPolicy is typically a statement describing the personal,
+     * organizational, and corporate standards of behavior expected by the
+     * organization.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
+     */
+    public $ethicsPolicy;
+    /**
+     * For a NewsMediaOrganization, a link to the masthead page or a page listing
+     * top editorial management.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
+     */
+    public $masthead;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * For a NewsMediaOrganization, a statement on coverage priorities, including
+     * any public agenda or stance on issues.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
+     */
+    public $missionCoveragePrioritiesPolicy;
+    /**
+     * For a NewsMediaOrganization or other news-related Organization, a statement
+     * explaining when authors of articles are not named in bylines.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
+     */
+    public $noBylinesPolicy;
+    /**
+     * For an Organization (often but not necessarily a NewsMediaOrganization), a
+     * description of organizational ownership structure; funding and grants. In a
+     * news/media setting, this is with particular reference to editorial
+     * independence. Note that the funder is also available and can be used to
+     * make basic funder information machine-readable.
+     *
+     * @var mixed|AboutPage|CreativeWork|string|string [schema.org types: AboutPage, CreativeWork, Text, URL]
+     */
+    public $ownershipFundingInfo;
+    /**
+     * For an Organization (typically a NewsMediaOrganization), a statement about
+     * policy on use of unnamed sources and the decision process required.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
+     */
+    public $unnamedSourcesPolicy;
+    /**
+     * Disclosure about verification and fact-checking processes for a
+     * NewsMediaOrganization or other fact-checking Organization.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
+     */
+    public $verificationFactCheckingPolicy;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -306,13 +290,13 @@ class NewsMediaOrganization extends Organization
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['actionableFeedbackPolicy','correctionsPolicy','diversityPolicy','diversityStaffingReport','ethicsPolicy','masthead','missionCoveragePrioritiesPolicy','noBylinesPolicy','ownershipFundingInfo','unnamedSourcesPolicy','verificationFactCheckingPolicy'], 'validateJsonSchema'],
+            [['actionableFeedbackPolicy', 'correctionsPolicy', 'diversityPolicy', 'diversityStaffingReport', 'ethicsPolicy', 'masthead', 'missionCoveragePrioritiesPolicy', 'noBylinesPolicy', 'ownershipFundingInfo', 'unnamedSourcesPolicy', 'verificationFactCheckingPolicy'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

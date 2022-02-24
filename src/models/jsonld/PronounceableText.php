@@ -91,41 +91,6 @@ class PronounceableText extends Text
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The language of the content or performance or used in an action. Please use
-     * one of the language codes from the IETF BCP 47 standard. See also
-     * availableLanguage. Supersedes language.
-     *
-     * @var mixed|Language|string [schema.org types: Language, Text]
-     */
-    public $inLanguage;
-
-    /**
-     * Representation of a text textValue using the specified speechToTextMarkup.
-     * For example the city name of Houston in IPA: /ˈhjuːstən/.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $phoneticText;
-
-    /**
-     * Form of markup used. eg. SSML or IPA.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $speechToTextMarkup;
-
-    /**
-     * Text value being annotated.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $textValue;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -137,19 +102,17 @@ class PronounceableText extends Text
         'speechToTextMarkup',
         'textValue'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'inLanguage' => ['Language','Text'],
+        'inLanguage' => ['Language', 'Text'],
         'phoneticText' => ['Text'],
         'speechToTextMarkup' => ['Text'],
         'textValue' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -161,7 +124,6 @@ class PronounceableText extends Text
         'speechToTextMarkup' => 'Form of markup used. eg. SSML or IPA.',
         'textValue' => 'Text value being annotated.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -170,6 +132,8 @@ class PronounceableText extends Text
     static protected $_googleRequiredSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -177,14 +141,41 @@ class PronounceableText extends Text
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The language of the content or performance or used in an action. Please use
+     * one of the language codes from the IETF BCP 47 standard. See also
+     * availableLanguage. Supersedes language.
+     *
+     * @var mixed|Language|string [schema.org types: Language, Text]
+     */
+    public $inLanguage;
+    /**
+     * Representation of a text textValue using the specified speechToTextMarkup.
+     * For example the city name of Houston in IPA: /ˈhjuːstən/.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $phoneticText;
+    /**
+     * Form of markup used. eg. SSML or IPA.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $speechToTextMarkup;
+    /**
+     * Text value being annotated.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $textValue;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -214,13 +205,13 @@ class PronounceableText extends Text
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['inLanguage','phoneticText','speechToTextMarkup','textValue'], 'validateJsonSchema'],
+            [['inLanguage', 'phoneticText', 'speechToTextMarkup', 'textValue'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

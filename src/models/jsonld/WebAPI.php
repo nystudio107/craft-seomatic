@@ -92,17 +92,6 @@ class WebAPI extends Service
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Further documentation describing the Web API in more detail.
-     *
-     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
-     */
-    public $documentation;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -112,15 +101,16 @@ class WebAPI extends Service
         'documentation'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'documentation' => ['CreativeWork','URL']
+        'documentation' => ['CreativeWork', 'URL']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -129,7 +119,6 @@ class WebAPI extends Service
     static protected $_schemaPropertyDescriptions = [
         'documentation' => 'Further documentation describing the Web API in more detail.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -137,7 +126,6 @@ class WebAPI extends Service
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -145,14 +133,20 @@ class WebAPI extends Service
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Further documentation describing the Web API in more detail.
+     *
+     * @var mixed|CreativeWork|string [schema.org types: CreativeWork, URL]
+     */
+    public $documentation;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -182,9 +176,9 @@ class WebAPI extends Service
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

@@ -92,107 +92,6 @@ class GeospatialGeometry extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Represents a relationship between two geometries (or the places they
-     * represent), relating a containing geometry to a contained geometry. "a
-     * contains b iff no points of b lie in the exterior of a, and at least one
-     * point of the interior of b lies in the interior of a". As defined in
-     * DE-9IM.
-     *
-     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
-     */
-    public $geoContains;
-
-    /**
-     * Represents a relationship between two geometries (or the places they
-     * represent), relating a geometry to another that covers it. As defined in
-     * DE-9IM.
-     *
-     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
-     */
-    public $geoCoveredBy;
-
-    /**
-     * Represents a relationship between two geometries (or the places they
-     * represent), relating a covering geometry to a covered geometry. "Every
-     * point of b is a point of (the interior or boundary of) a". As defined in
-     * DE-9IM.
-     *
-     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
-     */
-    public $geoCovers;
-
-    /**
-     * Represents a relationship between two geometries (or the places they
-     * represent), relating a geometry to another that crosses it: "a crosses b:
-     * they have some but not all interior points in common, and the dimension of
-     * the intersection is less than that of at least one of them". As defined in
-     * DE-9IM.
-     *
-     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
-     */
-    public $geoCrosses;
-
-    /**
-     * Represents spatial relations in which two geometries (or the places they
-     * represent) are topologically disjoint: they have no point in common. They
-     * form a set of disconnected geometries." (a symmetric relationship, as
-     * defined in DE-9IM)
-     *
-     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
-     */
-    public $geoDisjoint;
-
-    /**
-     * Represents spatial relations in which two geometries (or the places they
-     * represent) are topologically equal, as defined in DE-9IM. "Two geometries
-     * are topologically equal if their interiors intersect and no part of the
-     * interior or boundary of one geometry intersects the exterior of the other"
-     * (a symmetric relationship)
-     *
-     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
-     */
-    public $geoEquals;
-
-    /**
-     * Represents spatial relations in which two geometries (or the places they
-     * represent) have at least one point in common. As defined in DE-9IM.
-     *
-     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
-     */
-    public $geoIntersects;
-
-    /**
-     * Represents a relationship between two geometries (or the places they
-     * represent), relating a geometry to another that geospatially overlaps it,
-     * i.e. they have some but not all points in common. As defined in DE-9IM.
-     *
-     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
-     */
-    public $geoOverlaps;
-
-    /**
-     * Represents spatial relations in which two geometries (or the places they
-     * represent) touch: they have at least one boundary point in common, but no
-     * interior points." (a symmetric relationship, as defined in DE-9IM )
-     *
-     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
-     */
-    public $geoTouches;
-
-    /**
-     * Represents a relationship between two geometries (or the places they
-     * represent), relating a geometry to one that contains it, i.e. it is inside
-     * (i.e. within) its interior. As defined in DE-9IM.
-     *
-     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
-     */
-    public $geoWithin;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -210,25 +109,23 @@ class GeospatialGeometry extends Intangible
         'geoTouches',
         'geoWithin'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'geoContains' => ['GeospatialGeometry','Place'],
-        'geoCoveredBy' => ['GeospatialGeometry','Place'],
-        'geoCovers' => ['GeospatialGeometry','Place'],
-        'geoCrosses' => ['GeospatialGeometry','Place'],
-        'geoDisjoint' => ['GeospatialGeometry','Place'],
-        'geoEquals' => ['GeospatialGeometry','Place'],
-        'geoIntersects' => ['GeospatialGeometry','Place'],
-        'geoOverlaps' => ['GeospatialGeometry','Place'],
-        'geoTouches' => ['GeospatialGeometry','Place'],
-        'geoWithin' => ['GeospatialGeometry','Place']
+        'geoContains' => ['GeospatialGeometry', 'Place'],
+        'geoCoveredBy' => ['GeospatialGeometry', 'Place'],
+        'geoCovers' => ['GeospatialGeometry', 'Place'],
+        'geoCrosses' => ['GeospatialGeometry', 'Place'],
+        'geoDisjoint' => ['GeospatialGeometry', 'Place'],
+        'geoEquals' => ['GeospatialGeometry', 'Place'],
+        'geoIntersects' => ['GeospatialGeometry', 'Place'],
+        'geoOverlaps' => ['GeospatialGeometry', 'Place'],
+        'geoTouches' => ['GeospatialGeometry', 'Place'],
+        'geoWithin' => ['GeospatialGeometry', 'Place']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -246,7 +143,6 @@ class GeospatialGeometry extends Intangible
         'geoTouches' => 'Represents spatial relations in which two geometries (or the places they represent) touch: they have at least one boundary point in common, but no interior points." (a symmetric relationship, as defined in DE-9IM )',
         'geoWithin' => 'Represents a relationship between two geometries (or the places they represent), relating a geometry to one that contains it, i.e. it is inside (i.e. within) its interior. As defined in DE-9IM.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -254,7 +150,6 @@ class GeospatialGeometry extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -262,14 +157,104 @@ class GeospatialGeometry extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Represents a relationship between two geometries (or the places they
+     * represent), relating a containing geometry to a contained geometry. "a
+     * contains b iff no points of b lie in the exterior of a, and at least one
+     * point of the interior of b lies in the interior of a". As defined in
+     * DE-9IM.
+     *
+     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
+     */
+    public $geoContains;
+    /**
+     * Represents a relationship between two geometries (or the places they
+     * represent), relating a geometry to another that covers it. As defined in
+     * DE-9IM.
+     *
+     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
+     */
+    public $geoCoveredBy;
+    /**
+     * Represents a relationship between two geometries (or the places they
+     * represent), relating a covering geometry to a covered geometry. "Every
+     * point of b is a point of (the interior or boundary of) a". As defined in
+     * DE-9IM.
+     *
+     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
+     */
+    public $geoCovers;
+    /**
+     * Represents a relationship between two geometries (or the places they
+     * represent), relating a geometry to another that crosses it: "a crosses b:
+     * they have some but not all interior points in common, and the dimension of
+     * the intersection is less than that of at least one of them". As defined in
+     * DE-9IM.
+     *
+     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
+     */
+    public $geoCrosses;
+    /**
+     * Represents spatial relations in which two geometries (or the places they
+     * represent) are topologically disjoint: they have no point in common. They
+     * form a set of disconnected geometries." (a symmetric relationship, as
+     * defined in DE-9IM)
+     *
+     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
+     */
+    public $geoDisjoint;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * Represents spatial relations in which two geometries (or the places they
+     * represent) are topologically equal, as defined in DE-9IM. "Two geometries
+     * are topologically equal if their interiors intersect and no part of the
+     * interior or boundary of one geometry intersects the exterior of the other"
+     * (a symmetric relationship)
+     *
+     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
+     */
+    public $geoEquals;
+    /**
+     * Represents spatial relations in which two geometries (or the places they
+     * represent) have at least one point in common. As defined in DE-9IM.
+     *
+     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
+     */
+    public $geoIntersects;
+    /**
+     * Represents a relationship between two geometries (or the places they
+     * represent), relating a geometry to another that geospatially overlaps it,
+     * i.e. they have some but not all points in common. As defined in DE-9IM.
+     *
+     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
+     */
+    public $geoOverlaps;
+    /**
+     * Represents spatial relations in which two geometries (or the places they
+     * represent) touch: they have at least one boundary point in common, but no
+     * interior points." (a symmetric relationship, as defined in DE-9IM )
+     *
+     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
+     */
+    public $geoTouches;
+    /**
+     * Represents a relationship between two geometries (or the places they
+     * represent), relating a geometry to one that contains it, i.e. it is inside
+     * (i.e. within) its interior. As defined in DE-9IM.
+     *
+     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
+     */
+    public $geoWithin;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -299,13 +284,13 @@ class GeospatialGeometry extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['geoContains','geoCoveredBy','geoCovers','geoCrosses','geoDisjoint','geoEquals','geoIntersects','geoOverlaps','geoTouches','geoWithin'], 'validateJsonSchema'],
+            [['geoContains', 'geoCoveredBy', 'geoCovers', 'geoCrosses', 'geoDisjoint', 'geoEquals', 'geoIntersects', 'geoOverlaps', 'geoTouches', 'geoWithin'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

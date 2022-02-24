@@ -91,18 +91,6 @@ class PerformAction extends PlayAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A sub property of location. The entertainment business where the action
-     * occurred.
-     *
-     * @var EntertainmentBusiness [schema.org types: EntertainmentBusiness]
-     */
-    public $entertainmentBusiness;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -112,6 +100,8 @@ class PerformAction extends PlayAction
         'entertainmentBusiness'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -120,7 +110,6 @@ class PerformAction extends PlayAction
     static protected $_schemaPropertyExpectedTypes = [
         'entertainmentBusiness' => ['EntertainmentBusiness']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -129,7 +118,6 @@ class PerformAction extends PlayAction
     static protected $_schemaPropertyDescriptions = [
         'entertainmentBusiness' => 'A sub property of location. The entertainment business where the action occurred.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -137,7 +125,6 @@ class PerformAction extends PlayAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -145,14 +132,21 @@ class PerformAction extends PlayAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A sub property of location. The entertainment business where the action
+     * occurred.
+     *
+     * @var EntertainmentBusiness [schema.org types: EntertainmentBusiness]
+     */
+    public $entertainmentBusiness;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -182,9 +176,9 @@ class PerformAction extends PlayAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

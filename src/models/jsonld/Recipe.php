@@ -93,77 +93,6 @@ class Recipe extends HowTo
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The time it takes to actually cook the dish, in ISO 8601 duration format.
-     *
-     * @var Duration [schema.org types: Duration]
-     */
-    public $cookTime;
-
-    /**
-     * The method of cooking, such as Frying, Steaming, ...
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $cookingMethod;
-
-    /**
-     * Nutrition information about the recipe or menu item.
-     *
-     * @var NutritionInformation [schema.org types: NutritionInformation]
-     */
-    public $nutrition;
-
-    /**
-     * The category of the recipe—for example, appetizer, entree, etc.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $recipeCategory;
-
-    /**
-     * The cuisine of the recipe (for example, French or Ethiopian).
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $recipeCuisine;
-
-    /**
-     * A single ingredient used in the recipe, e.g. sugar, flour or garlic.
-     * Supersedes ingredients.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $recipeIngredient;
-
-    /**
-     * A step in making the recipe, in the form of a single item (document, video,
-     * etc.) or an ordered list with HowToStep and/or HowToSection items.
-     *
-     * @var mixed|CreativeWork|ItemList|string [schema.org types: CreativeWork, ItemList, Text]
-     */
-    public $recipeInstructions;
-
-    /**
-     * The quantity produced by the recipe (for example, number of people served,
-     * number of servings, etc).
-     *
-     * @var mixed|QuantitativeValue|string [schema.org types: QuantitativeValue, Text]
-     */
-    public $recipeYield;
-
-    /**
-     * Indicates a dietary restriction or guideline for which this recipe or menu
-     * item is suitable, e.g. diabetic, halal etc.
-     *
-     * @var RestrictedDiet [schema.org types: RestrictedDiet]
-     */
-    public $suitableForDiet;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -180,7 +109,6 @@ class Recipe extends HowTo
         'recipeYield',
         'suitableForDiet'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -193,11 +121,10 @@ class Recipe extends HowTo
         'recipeCategory' => ['Text'],
         'recipeCuisine' => ['Text'],
         'recipeIngredient' => ['Text'],
-        'recipeInstructions' => ['CreativeWork','ItemList','Text'],
-        'recipeYield' => ['QuantitativeValue','Text'],
+        'recipeInstructions' => ['CreativeWork', 'ItemList', 'Text'],
+        'recipeYield' => ['QuantitativeValue', 'Text'],
         'suitableForDiet' => ['RestrictedDiet']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -214,7 +141,6 @@ class Recipe extends HowTo
         'recipeYield' => 'The quantity produced by the recipe (for example, number of people served, number of servings, etc).',
         'suitableForDiet' => 'Indicates a dietary restriction or guideline for which this recipe or menu item is suitable, e.g. diabetic, halal etc.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -222,7 +148,6 @@ class Recipe extends HowTo
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -230,14 +155,75 @@ class Recipe extends HowTo
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The time it takes to actually cook the dish, in ISO 8601 duration format.
+     *
+     * @var Duration [schema.org types: Duration]
+     */
+    public $cookTime;
+    /**
+     * The method of cooking, such as Frying, Steaming, ...
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $cookingMethod;
+    /**
+     * Nutrition information about the recipe or menu item.
+     *
+     * @var NutritionInformation [schema.org types: NutritionInformation]
+     */
+    public $nutrition;
+    /**
+     * The category of the recipe—for example, appetizer, entree, etc.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $recipeCategory;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The cuisine of the recipe (for example, French or Ethiopian).
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $recipeCuisine;
+    /**
+     * A single ingredient used in the recipe, e.g. sugar, flour or garlic.
+     * Supersedes ingredients.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $recipeIngredient;
+    /**
+     * A step in making the recipe, in the form of a single item (document, video,
+     * etc.) or an ordered list with HowToStep and/or HowToSection items.
+     *
+     * @var mixed|CreativeWork|ItemList|string [schema.org types: CreativeWork, ItemList, Text]
+     */
+    public $recipeInstructions;
+    /**
+     * The quantity produced by the recipe (for example, number of people served,
+     * number of servings, etc).
+     *
+     * @var mixed|QuantitativeValue|string [schema.org types: QuantitativeValue, Text]
+     */
+    public $recipeYield;
+    /**
+     * Indicates a dietary restriction or guideline for which this recipe or menu
+     * item is suitable, e.g. diabetic, halal etc.
+     *
+     * @var RestrictedDiet [schema.org types: RestrictedDiet]
+     */
+    public $suitableForDiet;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -267,13 +253,13 @@ class Recipe extends HowTo
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['cookTime','cookingMethod','nutrition','recipeCategory','recipeCuisine','recipeIngredient','recipeInstructions','recipeYield','suitableForDiet'], 'validateJsonSchema'],
+            [['cookTime', 'cookingMethod', 'nutrition', 'recipeCategory', 'recipeCuisine', 'recipeIngredient', 'recipeInstructions', 'recipeYield', 'suitableForDiet'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

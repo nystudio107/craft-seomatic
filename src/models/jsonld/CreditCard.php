@@ -99,18 +99,6 @@ class CreditCard extends PaymentCard
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The minimum payment is the lowest amount of money that one is required to
-     * pay on a credit card statement each month.
-     *
-     * @var mixed|MonetaryAmount|float [schema.org types: MonetaryAmount, Number]
-     */
-    public $monthlyMinimumRepaymentAmount;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -120,15 +108,16 @@ class CreditCard extends PaymentCard
         'monthlyMinimumRepaymentAmount'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'monthlyMinimumRepaymentAmount' => ['MonetaryAmount','Number']
+        'monthlyMinimumRepaymentAmount' => ['MonetaryAmount', 'Number']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -137,7 +126,6 @@ class CreditCard extends PaymentCard
     static protected $_schemaPropertyDescriptions = [
         'monthlyMinimumRepaymentAmount' => 'The minimum payment is the lowest amount of money that one is required to pay on a credit card statement each month.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -145,7 +133,6 @@ class CreditCard extends PaymentCard
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -153,14 +140,21 @@ class CreditCard extends PaymentCard
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The minimum payment is the lowest amount of money that one is required to
+     * pay on a credit card statement each month.
+     *
+     * @var mixed|MonetaryAmount|float [schema.org types: MonetaryAmount, Number]
+     */
+    public $monthlyMinimumRepaymentAmount;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -190,9 +184,9 @@ class CreditCard extends PaymentCard
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

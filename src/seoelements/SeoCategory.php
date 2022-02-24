@@ -11,26 +11,26 @@
 
 namespace nystudio107\seomatic\seoelements;
 
+use Craft;
+use craft\base\ElementInterface;
+use craft\base\Model;
+use craft\elements\Category;
+use craft\elements\db\ElementQueryInterface;
+use craft\events\CategoryGroupEvent;
+use craft\events\DefineHtmlEvent;
 use craft\gql\interfaces\elements\Category as CategoryInterface;
-use nystudio107\seomatic\base\GqlSeoElementInterface;
-use nystudio107\seomatic\Seomatic;
+use craft\models\CategoryGroup;
+use craft\models\Site;
+use craft\services\Categories;
+use Exception;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
+use nystudio107\seomatic\base\GqlSeoElementInterface;
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
 use nystudio107\seomatic\helpers\PluginTemplate;
 use nystudio107\seomatic\models\MetaBundle;
-
-use Craft;
-use craft\base\ElementInterface;
-use craft\base\Model;
-use craft\elements\db\ElementQueryInterface;
-use craft\elements\Category;
-use craft\events\CategoryGroupEvent;
-use craft\models\CategoryGroup;
-use craft\models\Site;
-use craft\services\Categories;
-
+use nystudio107\seomatic\Seomatic;
 use yii\base\Event;
 use yii\base\InvalidConfigException;
 
@@ -106,7 +106,7 @@ class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
         Event::on(
             Categories::class,
             Categories::EVENT_AFTER_SAVE_GROUP,
-            function(CategoryGroupEvent $event) {
+            function (CategoryGroupEvent $event) {
                 Craft::debug(
                     'Categories::EVENT_AFTER_SAVE_GROUP',
                     __METHOD__
@@ -117,7 +117,7 @@ class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
         Event::on(
             Categories::class,
             Categories::EVENT_AFTER_DELETE_GROUP,
-            function(CategoryGroupEvent $event) {
+            function (CategoryGroupEvent $event) {
                 Craft::debug(
                     'Categories::EVENT_AFTER_DELETE_GROUP',
                     __METHOD__
@@ -180,14 +180,19 @@ class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
         if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
         }
 
-        // Install only for non-console Control Panel requests
-        if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
-            // Category Groups sidebar
-            Seomatic::$view->hook('cp.categories.edit.details', function (&$context) {
+        // Handler: Category::EVENT_DEFINE_SIDEBAR_HTML
+        Event::on(
+            Category::class,
+            Category::EVENT_DEFINE_SIDEBAR_HTML,
+            static function (DefineHtmlEvent $event) {
+                Craft::debug(
+                    'Category::EVENT_DEFINE_SIDEBAR_HTML',
+                    __METHOD__
+                );
                 $html = '';
                 Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
                 /** @var  $category Category */
-                $category = $context[self::getElementRefHandle()] ?? null;
+                $category = $event->sender ?? null;
                 if ($category !== null && $category->uri !== null) {
                     Seomatic::$plugin->metaContainers->previewMetaContainers($category->uri, $category->siteId, true);
                     // Render our preview sidebar template
@@ -200,10 +205,9 @@ class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
 //                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/category-analysis.twig');
 //                }
                 }
-
-                return $html;
-            });
-        }
+                $event->html .= $html;
+            }
+        );
     }
 
     /**
@@ -218,10 +222,9 @@ class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
         $query = Category::find()
             ->group($metaBundle->sourceHandle)
             ->siteId($metaBundle->sourceSiteId)
-            ->limit($metaBundle->metaSitemapVars->sitemapLimit)
-            ;
+            ->limit($metaBundle->metaSitemapVars->sitemapLimit);
         if (!empty($metaBundle->metaSitemapVars->structureDepth)) {
-            $query->level($metaBundle->metaSitemapVars->structureDepth.'<=');
+            $query->level($metaBundle->metaSitemapVars->structureDepth . '<=');
         }
 
         return $query;
@@ -232,30 +235,30 @@ class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
      * and Element ID
      *
      * @param MetaBundle $metaBundle
-     * @param int        $elementId
-     * @param int        $siteId
+     * @param int $elementId
+     * @param int $siteId
      *
      * @return null|ElementInterface
      */
     public static function sitemapAltElement(
         MetaBundle $metaBundle,
-        int $elementId,
-        int $siteId
-    ) {
+        int        $elementId,
+        int        $siteId
+    )
+    {
         return Category::find()
             ->id($elementId)
             ->siteId($siteId)
             ->limit(1)
-            ->one()
-            ;
+            ->one();
     }
 
     /**
      * Return a preview URI for a given $sourceHandle and $siteId
      * This just returns the first element
      *
-     * @param string    $sourceHandle
-     * @param int|null  $siteId
+     * @param string $sourceHandle
+     * @param int|null $siteId
      *
      * @return string|null
      */
@@ -265,8 +268,7 @@ class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
         $element = Category::find()
             ->group($sourceHandle)
             ->siteId($siteId)
-            ->one()
-        ;
+            ->one();
         if ($element) {
             $uri = $element->uri;
         }
@@ -290,7 +292,7 @@ class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
             if ($categoryGroup) {
                 $layoutId = $categoryGroup->getFieldLayoutId();
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $layoutId = null;
         }
         if ($layoutId) {
@@ -340,7 +342,7 @@ class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
      * Return the most recently updated Element from a given source model
      *
      * @param Model $sourceModel
-     * @param int   $sourceSiteId
+     * @param int $sourceSiteId
      *
      * @return null|ElementInterface
      */
@@ -352,8 +354,7 @@ class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
             ->siteId($sourceSiteId)
             ->limit(1)
             ->orderBy(['elements.dateUpdated' => SORT_DESC])
-            ->one()
-            ;
+            ->one();
     }
 
     /**

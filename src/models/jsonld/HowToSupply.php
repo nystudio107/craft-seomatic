@@ -92,18 +92,6 @@ class HowToSupply extends HowToItem
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The estimated cost of the supply or supplies consumed when performing
-     * instructions.
-     *
-     * @var mixed|MonetaryAmount|string [schema.org types: MonetaryAmount, Text]
-     */
-    public $estimatedCost;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -113,15 +101,16 @@ class HowToSupply extends HowToItem
         'estimatedCost'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'estimatedCost' => ['MonetaryAmount','Text']
+        'estimatedCost' => ['MonetaryAmount', 'Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -130,7 +119,6 @@ class HowToSupply extends HowToItem
     static protected $_schemaPropertyDescriptions = [
         'estimatedCost' => 'The estimated cost of the supply or supplies consumed when performing instructions.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -138,7 +126,6 @@ class HowToSupply extends HowToItem
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -146,14 +133,21 @@ class HowToSupply extends HowToItem
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The estimated cost of the supply or supplies consumed when performing
+     * instructions.
+     *
+     * @var mixed|MonetaryAmount|string [schema.org types: MonetaryAmount, Text]
+     */
+    public $estimatedCost;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -183,9 +177,9 @@ class HowToSupply extends HowToItem
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

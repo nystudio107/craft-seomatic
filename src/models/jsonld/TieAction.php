@@ -91,107 +91,6 @@ class TieAction extends AchieveAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Indicates the current disposition of the Action.
-     *
-     * @var ActionStatusType [schema.org types: ActionStatusType]
-     */
-    public $actionStatus;
-
-    /**
-     * The direct performer or driver of the action (animate or inanimate). e.g.
-     * John wrote a book.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $agent;
-
-    /**
-     * The endTime of something. For a reserved event or service (e.g.
-     * FoodEstablishmentReservation), the time that it is expected to end. For
-     * actions that span a period of time, when the action was performed. e.g.
-     * John wrote a book from January to December. For media, including audio and
-     * video, it's the time offset of the end of a clip within a larger file. Note
-     * that Event uses startDate/endDate instead of startTime/endTime, even when
-     * describing dates with times. This situation may be clarified in future
-     * revisions.
-     *
-     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
-     */
-    public $endTime;
-
-    /**
-     * For failed actions, more information on the cause of the failure.
-     *
-     * @var Thing [schema.org types: Thing]
-     */
-    public $error;
-
-    /**
-     * The object that helped the agent perform the action. e.g. John wrote a book
-     * with a pen.
-     *
-     * @var Thing [schema.org types: Thing]
-     */
-    public $instrument;
-
-    /**
-     * The location of for example where the event is happening, an organization
-     * is located, or where an action takes place.
-     *
-     * @var mixed|Place|PostalAddress|string|VirtualLocation [schema.org types: Place, PostalAddress, Text, VirtualLocation]
-     */
-    public $location;
-
-    /**
-     * The object upon which the action is carried out, whose state is kept intact
-     * or changed. Also known as the semantic roles patient, affected or undergoer
-     * (which change their state) or theme (which doesn't). e.g. John read a book.
-     *
-     * @var Thing [schema.org types: Thing]
-     */
-    public $object;
-
-    /**
-     * Other co-agents that participated in the action indirectly. e.g. John wrote
-     * a book with Steve.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $participant;
-
-    /**
-     * The result produced in the action. e.g. John wrote a book.
-     *
-     * @var Thing [schema.org types: Thing]
-     */
-    public $result;
-
-    /**
-     * The startTime of something. For a reserved event or service (e.g.
-     * FoodEstablishmentReservation), the time that it is expected to start. For
-     * actions that span a period of time, when the action was performed. e.g.
-     * John wrote a book from January to December. For media, including audio and
-     * video, it's the time offset of the start of a clip within a larger file.
-     * Note that Event uses startDate/endDate instead of startTime/endTime, even
-     * when describing dates with times. This situation may be clarified in future
-     * revisions.
-     *
-     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
-     */
-    public $startTime;
-
-    /**
-     * Indicates a target EntryPoint for an Action.
-     *
-     * @var EntryPoint [schema.org types: EntryPoint]
-     */
-    public $target;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -210,7 +109,6 @@ class TieAction extends AchieveAction
         'startTime',
         'target'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -218,18 +116,17 @@ class TieAction extends AchieveAction
      */
     static protected $_schemaPropertyExpectedTypes = [
         'actionStatus' => ['ActionStatusType'],
-        'agent' => ['Organization','Person'],
-        'endTime' => ['DateTime','Time'],
+        'agent' => ['Organization', 'Person'],
+        'endTime' => ['DateTime', 'Time'],
         'error' => ['Thing'],
         'instrument' => ['Thing'],
-        'location' => ['Place','PostalAddress','Text','VirtualLocation'],
+        'location' => ['Place', 'PostalAddress', 'Text', 'VirtualLocation'],
         'object' => ['Thing'],
-        'participant' => ['Organization','Person'],
+        'participant' => ['Organization', 'Person'],
         'result' => ['Thing'],
-        'startTime' => ['DateTime','Time'],
+        'startTime' => ['DateTime', 'Time'],
         'target' => ['EntryPoint']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -248,7 +145,6 @@ class TieAction extends AchieveAction
         'startTime' => 'The startTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to start. For actions that span a period of time, when the action was performed. e.g. John wrote a book from January to December. For media, including audio and video, it\'s the time offset of the start of a clip within a larger file. Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.',
         'target' => 'Indicates a target EntryPoint for an Action.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -256,7 +152,6 @@ class TieAction extends AchieveAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -264,14 +159,103 @@ class TieAction extends AchieveAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Indicates the current disposition of the Action.
+     *
+     * @var ActionStatusType [schema.org types: ActionStatusType]
+     */
+    public $actionStatus;
+    /**
+     * The direct performer or driver of the action (animate or inanimate). e.g.
+     * John wrote a book.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $agent;
+    /**
+     * The endTime of something. For a reserved event or service (e.g.
+     * FoodEstablishmentReservation), the time that it is expected to end. For
+     * actions that span a period of time, when the action was performed. e.g.
+     * John wrote a book from January to December. For media, including audio and
+     * video, it's the time offset of the end of a clip within a larger file. Note
+     * that Event uses startDate/endDate instead of startTime/endTime, even when
+     * describing dates with times. This situation may be clarified in future
+     * revisions.
+     *
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
+     */
+    public $endTime;
+    /**
+     * For failed actions, more information on the cause of the failure.
+     *
+     * @var Thing [schema.org types: Thing]
+     */
+    public $error;
+    /**
+     * The object that helped the agent perform the action. e.g. John wrote a book
+     * with a pen.
+     *
+     * @var Thing [schema.org types: Thing]
+     */
+    public $instrument;
+    /**
+     * The location of for example where the event is happening, an organization
+     * is located, or where an action takes place.
+     *
+     * @var mixed|Place|PostalAddress|string|VirtualLocation [schema.org types: Place, PostalAddress, Text, VirtualLocation]
+     */
+    public $location;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The object upon which the action is carried out, whose state is kept intact
+     * or changed. Also known as the semantic roles patient, affected or undergoer
+     * (which change their state) or theme (which doesn't). e.g. John read a book.
+     *
+     * @var Thing [schema.org types: Thing]
+     */
+    public $object;
+    /**
+     * Other co-agents that participated in the action indirectly. e.g. John wrote
+     * a book with Steve.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $participant;
+    /**
+     * The result produced in the action. e.g. John wrote a book.
+     *
+     * @var Thing [schema.org types: Thing]
+     */
+    public $result;
+    /**
+     * The startTime of something. For a reserved event or service (e.g.
+     * FoodEstablishmentReservation), the time that it is expected to start. For
+     * actions that span a period of time, when the action was performed. e.g.
+     * John wrote a book from January to December. For media, including audio and
+     * video, it's the time offset of the start of a clip within a larger file.
+     * Note that Event uses startDate/endDate instead of startTime/endTime, even
+     * when describing dates with times. This situation may be clarified in future
+     * revisions.
+     *
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
+     */
+    public $startTime;
+    /**
+     * Indicates a target EntryPoint for an Action.
+     *
+     * @var EntryPoint [schema.org types: EntryPoint]
+     */
+    public $target;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -301,13 +285,13 @@ class TieAction extends AchieveAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['actionStatus','agent','endTime','error','instrument','location','object','participant','result','startTime','target'], 'validateJsonSchema'],
+            [['actionStatus', 'agent', 'endTime', 'error', 'instrument', 'location', 'object', 'participant', 'result', 'startTime', 'target'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

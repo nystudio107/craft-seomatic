@@ -93,18 +93,6 @@ class ConfirmAction extends InformAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Upcoming or past event associated with this place, organization, or action.
-     * Supersedes events.
-     *
-     * @var Event [schema.org types: Event]
-     */
-    public $event;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -114,6 +102,8 @@ class ConfirmAction extends InformAction
         'event'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -122,7 +112,6 @@ class ConfirmAction extends InformAction
     static protected $_schemaPropertyExpectedTypes = [
         'event' => ['Event']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -131,7 +120,6 @@ class ConfirmAction extends InformAction
     static protected $_schemaPropertyDescriptions = [
         'event' => 'Upcoming or past event associated with this place, organization, or action. Supersedes events.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -139,7 +127,6 @@ class ConfirmAction extends InformAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -147,14 +134,21 @@ class ConfirmAction extends InformAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Upcoming or past event associated with this place, organization, or action.
+     * Supersedes events.
+     *
+     * @var Event [schema.org types: Event]
+     */
+    public $event;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -184,9 +178,9 @@ class ConfirmAction extends InformAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

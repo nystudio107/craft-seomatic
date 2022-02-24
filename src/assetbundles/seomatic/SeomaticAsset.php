@@ -28,7 +28,7 @@ class SeomaticAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         $this->sourcePath = '@nystudio107/seomatic/assetbundles/seomatic/dist';
 

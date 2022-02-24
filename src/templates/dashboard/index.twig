@@ -19,26 +19,26 @@
 {% endblock %}
 
 {%- macro setupGradeColor(setupGrades, score) -%}
-    {% spaceless %}
-    {% set color = setupGrades[0].color %}
-    {% set values = [
-        30,
-        60,
-        90,
-        100
-    ] %}
-    {% for setupGrade in setupGrades | reverse %}
-        {% if score >= values[loop.index0] %}
-            {% set color = setupGrade.color %}
-        {% endif %}
-    {% endfor %}
-    {{ "'#{color}'" }}
-    {% endspaceless %}
+    {% apply spaceless %}
+        {% set color = setupGrades[0].color %}
+        {% set values = [
+            30,
+            60,
+            90,
+            100
+        ] %}
+        {% for setupGrade in setupGrades | reverse %}
+            {% if score >= values[loop.index0] %}
+                {% set color = setupGrade.color %}
+            {% endif %}
+        {% endfor %}
+        {{ "'#{color}'" }}
+    {% endapply %}
 {%- endmacro -%}
 {% from _self import setupGradeColor %}
 
 {%- macro setupGradeLabel(setupGrades, score) -%}
-    {% spaceless %}
+    {% apply spaceless %}
         {% set grade = setupGrades[0].name %}
         {% set values = [
             30,
@@ -52,7 +52,7 @@
             {% endif %}
         {% endfor %}
         {{ "'#{grade}'" }}
-    {% endspaceless %}
+    {% endapply %}
 {%- endmacro -%}
 {% from _self import setupGradeLabel %}
 
@@ -66,49 +66,52 @@
     {% include "seomatic/settings/_includes/environment-warning.twig" %}
     <div id="cp-nav-content">
         <div class="field readable">
-                {% if showWelcome %}
-                    <confetti></confetti>
-                    <div class="readable" style="text-align:center; margin:0 auto; padding: 5% 10%;">
-                        <img src="{{ baseAssetsUrl ~ '/img/Seomatic-icon.svg' }}"
-                             width="30%" height="auto"/>
-                        <h2>Thanks for using SEOmatic!</h2>
-                        <p>SEOmatic facilitates modern SEO best practices & implementation for Craft CMS 3. It is a turnkey SEO system that is comprehensive, powerful, and flexible.</p>
-                        <p>We hope you love it! For more information, please <a href="{{ docsUrl }}" target="_blank" rel="noopener">see the documentation</a>.</p>
-                    </div>
-                {% endif %}
+            {% if showWelcome %}
+                <confetti></confetti>
+                <div class="readable" style="text-align:center; margin:0 auto; padding: 5% 10%;">
+                    <img src="{{ baseAssetsUrl ~ '/img/Seomatic-icon.svg' }}"
+                         width="30%" height="auto"/>
+                    <h2>Thanks for using SEOmatic!</h2>
+                    <p>SEOmatic facilitates modern SEO best practices & implementation for Craft CMS 3. It is a turnkey
+                        SEO system that is comprehensive, powerful, and flexible.</p>
+                    <p>We hope you love it! For more information, please <a href="{{ docsUrl }}" target="_blank"
+                                                                            rel="noopener">see the documentation</a>.
+                    </p>
+                </div>
+            {% endif %}
             <div class="flex" style="align-items: flex-start; text-align:center; margin:0 auto; padding: 5% 0;">
                 <div class="flex-grow">
                     {% if globalSetupStat is defined and globalSetupStat | length %}
-                    {% set checklistLink = cpUrl('seomatic/global/general/' ~ currentSiteHandle) %}
-                    <h2 class="centeralign" style="font-weight: 200;">Global SEO Setup</h2>
-                    <div id="GlobalSEOChart" style="width: 300px; margin: 0 auto;">
-                        {% set colors = [
-                            setupGradeColor(setupGrades, globalSetupStat),
-                        ] %}
-                        {% set grades = [
-                            setupGradeLabel(setupGrades, globalSetupStat),
-                        ] %}
-                        <dashboard-radial-chart :series="[{{ globalSetupStat }}]"
-                                                :colors="[{{ colors | join(',') | raw }}]"
-                                                :labels="[{{ grades | join(',') | raw }}]"
-                                                :url="'{{ checklistLink | raw }}'"
-                        >
+                        {% set checklistLink = cpUrl('seomatic/global/general/' ~ currentSiteHandle) %}
+                        <h2 class="centeralign" style="font-weight: 200;">Global SEO Setup</h2>
+                        <div id="GlobalSEOChart" style="width: 300px; margin: 0 auto;">
+                            {% set colors = [
+                                setupGradeColor(setupGrades, globalSetupStat),
+                            ] %}
+                            {% set grades = [
+                                setupGradeLabel(setupGrades, globalSetupStat),
+                            ] %}
+                            <dashboard-radial-chart :series="[{{ globalSetupStat }}]"
+                                                    :colors="[{{ colors | join(',') | raw }}]"
+                                                    :labels="[{{ grades | join(',') | raw }}]"
+                                                    :url="'{{ checklistLink | raw }}'"
+                            >
 
-                        </dashboard-radial-chart>
-                    </div>
-                    <div style="text-align: left; margin: 0 auto; display: inline-block; padding-top: 10px;">
-                        <h4>Global SEO Setup Checklist:</h4>
-                        <ul class="checkboxChecklist">
-                            {% for item in globalSetupChecklist %}
-                                <li class="checkboxChecklist {% if item.value %}checked{% endif %}">
-                                    <label></label>
-                                    <a href="{{ checklistLink }}">
-                                        {{ item.label }}
-                                    </a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
+                            </dashboard-radial-chart>
+                        </div>
+                        <div style="text-align: left; margin: 0 auto; display: inline-block; padding-top: 10px;">
+                            <h4>Global SEO Setup Checklist:</h4>
+                            <ul class="checkboxChecklist">
+                                {% for item in globalSetupChecklist %}
+                                    <li class="checkboxChecklist {% if item.value %}checked{% endif %}">
+                                        <label></label>
+                                        <a href="{{ checklistLink }}">
+                                            {{ item.label }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     {% else %}
                         <div class="field readable" style="text-align:center; margin:0 auto; padding: 0 10%;">
                             <p class="warning">No data to display.</p>
@@ -117,47 +120,47 @@
                 </div>
                 <div class="flex-grow">
                     {% if contentSetupStats is defined and contentSetupStats | length %}
-                    {% set checklistLink = cpUrl('seomatic/content/' ~ currentSiteHandle) %}
-                    <h2 class="centeralign" style="font-weight: 200;">Content SEO Setup</h2>
-                    <div id="ContentSEOChart" style="width: 300px; margin: 0 auto;">
-                        {% set colors = [
-                            setupGradeColor(setupGrades, 100),
-                            setupGradeColor(setupGrades, 90),
-                            setupGradeColor(setupGrades, 60),
-                            setupGradeColor(setupGrades, 30),
-                        ] %}
-                        {% set contentStats = [] %}
-                        {% set totalStats = 0 %}
-                        {% for contentSetupStat in contentSetupStats %}
-                            {% set totalStats = totalStats + contentSetupStat %}
-                        {% endfor %}
-                        {% if totalStats %}
+                        {% set checklistLink = cpUrl('seomatic/content/' ~ currentSiteHandle) %}
+                        <h2 class="centeralign" style="font-weight: 200;">Content SEO Setup</h2>
+                        <div id="ContentSEOChart" style="width: 300px; margin: 0 auto;">
+                            {% set colors = [
+                                setupGradeColor(setupGrades, 100),
+                                setupGradeColor(setupGrades, 90),
+                                setupGradeColor(setupGrades, 60),
+                                setupGradeColor(setupGrades, 30),
+                            ] %}
+                            {% set contentStats = [] %}
+                            {% set totalStats = 0 %}
                             {% for contentSetupStat in contentSetupStats %}
-                                {% set percentage = (contentSetupStat * 100.0) / totalStats %}
-                                {% set contentStats = contentStats | merge([percentage | number_format(2)]) %}
+                                {% set totalStats = totalStats + contentSetupStat %}
                             {% endfor %}
-                        {% endif %}
-                        <dashboard-multi-radial-chart :series="[{{ contentStats | join(',')  }}]"
-                                                      :colors="[{{ colors | join(',') | raw }}]"
-                                                      :labels="['A', 'B', 'C', 'D']"
-                                                      :url="'{{ checklistLink | raw }}'"
-                        >
+                            {% if totalStats %}
+                                {% for contentSetupStat in contentSetupStats %}
+                                    {% set percentage = (contentSetupStat * 100.0) / totalStats %}
+                                    {% set contentStats = contentStats | merge([percentage | number_format(2)]) %}
+                                {% endfor %}
+                            {% endif %}
+                            <dashboard-multi-radial-chart :series="[{{ contentStats | join(',') }}]"
+                                                          :colors="[{{ colors | join(',') | raw }}]"
+                                                          :labels="['A', 'B', 'C', 'D']"
+                                                          :url="'{{ checklistLink | raw }}'"
+                            >
 
-                        </dashboard-multi-radial-chart>
-                    </div>
-                    <div style="text-align: left; margin: 0 auto; display: inline-block;">
-                        <h4>Content SEO Setup Checklist:</h4>
-                        <ul class="checkboxChecklist">
-                            {% for item in contentSetupChecklist %}
-                                <li class="checkboxChecklist {% if item.value > contentSetupChecklistCutoff %}checked{% endif %}">
-                                    <label></label>
-                                    <a href="{{ checklistLink }}">
-                                        {{ item.label }}
-                                    </a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
+                            </dashboard-multi-radial-chart>
+                        </div>
+                        <div style="text-align: left; margin: 0 auto; display: inline-block;">
+                            <h4>Content SEO Setup Checklist:</h4>
+                            <ul class="checkboxChecklist">
+                                {% for item in contentSetupChecklist %}
+                                    <li class="checkboxChecklist {% if item.value > contentSetupChecklistCutoff %}checked{% endif %}">
+                                        <label></label>
+                                        <a href="{{ checklistLink }}">
+                                            {{ item.label }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     {% else %}
                         <div class="field readable" style="text-align:center; margin:0 auto; padding: 0 10%;">
                             <p class="warning">No data to display.</p>
@@ -166,41 +169,41 @@
                 </div>
                 <div class="flex-grow">
                     {% if siteSetupStat is defined and siteSetupStat | length %}
-                    {% set checklistLink = cpUrl('seomatic/site/identity/' ~ currentSiteHandle) %}
-                    {% set checklistSocialLink = cpUrl('seomatic/site/social/' ~ currentSiteHandle) %}
-                    <h2 class="centeralign" style="font-weight: 200;">Site Settings Setup</h2>
-                    <div id="SiteSettingsChart" style="width: 300px; margin: 0 auto;">
-                        {% set colors = [
-                            setupGradeColor(setupGrades, siteSetupStat),
-                        ] %}
-                        {% set grades = [
-                            setupGradeLabel(setupGrades, siteSetupStat),
-                        ] %}
-                        <dashboard-radial-chart :series="[{{ siteSetupStat }}]"
-                                                :colors="[{{ colors | join(',') | raw }}]"
-                                                :labels="[{{ grades | join(',') | raw }}]"
-                                                :url="'{{ checklistLink | raw }}'"
-                        >
+                        {% set checklistLink = cpUrl('seomatic/site/identity/' ~ currentSiteHandle) %}
+                        {% set checklistSocialLink = cpUrl('seomatic/site/social/' ~ currentSiteHandle) %}
+                        <h2 class="centeralign" style="font-weight: 200;">Site Settings Setup</h2>
+                        <div id="SiteSettingsChart" style="width: 300px; margin: 0 auto;">
+                            {% set colors = [
+                                setupGradeColor(setupGrades, siteSetupStat),
+                            ] %}
+                            {% set grades = [
+                                setupGradeLabel(setupGrades, siteSetupStat),
+                            ] %}
+                            <dashboard-radial-chart :series="[{{ siteSetupStat }}]"
+                                                    :colors="[{{ colors | join(',') | raw }}]"
+                                                    :labels="[{{ grades | join(',') | raw }}]"
+                                                    :url="'{{ checklistLink | raw }}'"
+                            >
 
-                        </dashboard-radial-chart>
-                    </div>
-                    <div style="text-align: left; margin: 0 auto; display: inline-block; padding-top: 10px;">
-                        <h4>Site Settings Setup Checklist:</h4>
-                        <ul class="checkboxChecklist">
-                            {% for key,item in siteSetupChecklist %}
-                                {% set thisLink = checklistLink %}
-                                {% if key == "twitterHandle" or key == "facebookProfileId" %}
-                                    {% set thisLink = checklistSocialLink %}
-                                {% endif %}
-                                <li class="checkboxChecklist {% if item.value %}checked{% endif %}">
-                                    <label></label>
-                                    <a href="{{ thisLink }}">
-                                        {{ item.label }}
-                                    </a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
+                            </dashboard-radial-chart>
+                        </div>
+                        <div style="text-align: left; margin: 0 auto; display: inline-block; padding-top: 10px;">
+                            <h4>Site Settings Setup Checklist:</h4>
+                            <ul class="checkboxChecklist">
+                                {% for key,item in siteSetupChecklist %}
+                                    {% set thisLink = checklistLink %}
+                                    {% if key == "twitterHandle" or key == "facebookProfileId" %}
+                                        {% set thisLink = checklistSocialLink %}
+                                    {% endif %}
+                                    <li class="checkboxChecklist {% if item.value %}checked{% endif %}">
+                                        <label></label>
+                                        <a href="{{ thisLink }}">
+                                            {{ item.label }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     {% else %}
                         <div class="field readable" style="text-align:center; margin:0 auto; padding: 0 10%;">
                             <p class="warning">No data to display.</p>
@@ -210,7 +213,9 @@
             </div>
             <div class="field readable" style="text-align:center; margin:0 auto; padding: 0 10%;">
                 <div class="heading">
-                    <p class="instructions" style="font-size: 1rem;">This Dashboard shows you how set up your SEO implementation is. <br />You can click on any part of the graphs to go to the settings that need your attention.</p>
+                    <p class="instructions" style="font-size: 1rem;">This Dashboard shows you how set up your SEO
+                        implementation is. <br/>You can click on any part of the graphs to go to the settings that need
+                        your attention.</p>
                 </div>
             </div>
         </div>

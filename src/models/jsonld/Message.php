@@ -92,77 +92,6 @@ class Message extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A sub property of recipient. The recipient blind copied on a message.
-     *
-     * @var mixed|ContactPoint|Organization|Person [schema.org types: ContactPoint, Organization, Person]
-     */
-    public $bccRecipient;
-
-    /**
-     * A sub property of recipient. The recipient copied on a message.
-     *
-     * @var mixed|ContactPoint|Organization|Person [schema.org types: ContactPoint, Organization, Person]
-     */
-    public $ccRecipient;
-
-    /**
-     * The date/time at which the message has been read by the recipient if a
-     * single recipient exists.
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $dateRead;
-
-    /**
-     * The date/time the message was received if a single recipient exists.
-     *
-     * @var DateTime [schema.org types: DateTime]
-     */
-    public $dateReceived;
-
-    /**
-     * The date/time at which the message was sent.
-     *
-     * @var DateTime [schema.org types: DateTime]
-     */
-    public $dateSent;
-
-    /**
-     * A CreativeWork attached to the message.
-     *
-     * @var CreativeWork [schema.org types: CreativeWork]
-     */
-    public $messageAttachment;
-
-    /**
-     * A sub property of participant. The participant who is at the receiving end
-     * of the action.
-     *
-     * @var mixed|Audience|ContactPoint|Organization|Person [schema.org types: Audience, ContactPoint, Organization, Person]
-     */
-    public $recipient;
-
-    /**
-     * A sub property of participant. The participant who is at the sending end of
-     * the action.
-     *
-     * @var mixed|Audience|Organization|Person [schema.org types: Audience, Organization, Person]
-     */
-    public $sender;
-
-    /**
-     * A sub property of recipient. The recipient who was directly sent the
-     * message.
-     *
-     * @var mixed|Audience|ContactPoint|Organization|Person [schema.org types: Audience, ContactPoint, Organization, Person]
-     */
-    public $toRecipient;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -179,24 +108,22 @@ class Message extends CreativeWork
         'sender',
         'toRecipient'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'bccRecipient' => ['ContactPoint','Organization','Person'],
-        'ccRecipient' => ['ContactPoint','Organization','Person'],
-        'dateRead' => ['Date','DateTime'],
+        'bccRecipient' => ['ContactPoint', 'Organization', 'Person'],
+        'ccRecipient' => ['ContactPoint', 'Organization', 'Person'],
+        'dateRead' => ['Date', 'DateTime'],
         'dateReceived' => ['DateTime'],
         'dateSent' => ['DateTime'],
         'messageAttachment' => ['CreativeWork'],
-        'recipient' => ['Audience','ContactPoint','Organization','Person'],
-        'sender' => ['Audience','Organization','Person'],
-        'toRecipient' => ['Audience','ContactPoint','Organization','Person']
+        'recipient' => ['Audience', 'ContactPoint', 'Organization', 'Person'],
+        'sender' => ['Audience', 'Organization', 'Person'],
+        'toRecipient' => ['Audience', 'ContactPoint', 'Organization', 'Person']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -213,7 +140,6 @@ class Message extends CreativeWork
         'sender' => 'A sub property of participant. The participant who is at the sending end of the action.',
         'toRecipient' => 'A sub property of recipient. The recipient who was directly sent the message.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -221,7 +147,6 @@ class Message extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -229,14 +154,75 @@ class Message extends CreativeWork
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A sub property of recipient. The recipient blind copied on a message.
+     *
+     * @var mixed|ContactPoint|Organization|Person [schema.org types: ContactPoint, Organization, Person]
+     */
+    public $bccRecipient;
+    /**
+     * A sub property of recipient. The recipient copied on a message.
+     *
+     * @var mixed|ContactPoint|Organization|Person [schema.org types: ContactPoint, Organization, Person]
+     */
+    public $ccRecipient;
+    /**
+     * The date/time at which the message has been read by the recipient if a
+     * single recipient exists.
+     *
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     */
+    public $dateRead;
+    /**
+     * The date/time the message was received if a single recipient exists.
+     *
+     * @var DateTime [schema.org types: DateTime]
+     */
+    public $dateReceived;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The date/time at which the message was sent.
+     *
+     * @var DateTime [schema.org types: DateTime]
+     */
+    public $dateSent;
+    /**
+     * A CreativeWork attached to the message.
+     *
+     * @var CreativeWork [schema.org types: CreativeWork]
+     */
+    public $messageAttachment;
+    /**
+     * A sub property of participant. The participant who is at the receiving end
+     * of the action.
+     *
+     * @var mixed|Audience|ContactPoint|Organization|Person [schema.org types: Audience, ContactPoint, Organization, Person]
+     */
+    public $recipient;
+    /**
+     * A sub property of participant. The participant who is at the sending end of
+     * the action.
+     *
+     * @var mixed|Audience|Organization|Person [schema.org types: Audience, Organization, Person]
+     */
+    public $sender;
+    /**
+     * A sub property of recipient. The recipient who was directly sent the
+     * message.
+     *
+     * @var mixed|Audience|ContactPoint|Organization|Person [schema.org types: Audience, ContactPoint, Organization, Person]
+     */
+    public $toRecipient;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -266,13 +252,13 @@ class Message extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['bccRecipient','ccRecipient','dateRead','dateReceived','dateSent','messageAttachment','recipient','sender','toRecipient'], 'validateJsonSchema'],
+            [['bccRecipient', 'ccRecipient', 'dateRead', 'dateReceived', 'dateSent', 'messageAttachment', 'recipient', 'sender', 'toRecipient'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

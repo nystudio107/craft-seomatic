@@ -91,33 +91,6 @@ class Patient extends Person
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * One or more alternative conditions considered in the differential diagnosis
-     * process as output of a diagnosis process.
-     *
-     * @var MedicalCondition [schema.org types: MedicalCondition]
-     */
-    public $diagnosis;
-
-    /**
-     * Specifying a drug or medicine used in a medication procedure
-     *
-     * @var Drug [schema.org types: Drug]
-     */
-    public $drug;
-
-    /**
-     * Specifying the health condition(s) of a patient, medical study, or other
-     * target audience.
-     *
-     * @var MedicalCondition [schema.org types: MedicalCondition]
-     */
-    public $healthCondition;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -128,7 +101,6 @@ class Patient extends Person
         'drug',
         'healthCondition'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -139,7 +111,6 @@ class Patient extends Person
         'drug' => ['Drug'],
         'healthCondition' => ['MedicalCondition']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -151,6 +122,8 @@ class Patient extends Person
         'healthCondition' => 'Specifying the health condition(s) of a patient, medical study, or other target audience.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -158,7 +131,6 @@ class Patient extends Person
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -166,14 +138,34 @@ class Patient extends Person
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * One or more alternative conditions considered in the differential diagnosis
+     * process as output of a diagnosis process.
+     *
+     * @var MedicalCondition [schema.org types: MedicalCondition]
+     */
+    public $diagnosis;
+    /**
+     * Specifying a drug or medicine used in a medication procedure
+     *
+     * @var Drug [schema.org types: Drug]
+     */
+    public $drug;
+    /**
+     * Specifying the health condition(s) of a patient, medical study, or other
+     * target audience.
+     *
+     * @var MedicalCondition [schema.org types: MedicalCondition]
+     */
+    public $healthCondition;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -203,13 +195,13 @@ class Patient extends Person
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['diagnosis','drug','healthCondition'], 'validateJsonSchema'],
+            [['diagnosis', 'drug', 'healthCondition'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

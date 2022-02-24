@@ -95,18 +95,6 @@ class Quotation extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The (e.g. fictional) character, Person or Organization to whom the
-     * quotation is attributed within the containing CreativeWork.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $spokenByCharacter;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -116,15 +104,16 @@ class Quotation extends CreativeWork
         'spokenByCharacter'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'spokenByCharacter' => ['Organization','Person']
+        'spokenByCharacter' => ['Organization', 'Person']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -133,7 +122,6 @@ class Quotation extends CreativeWork
     static protected $_schemaPropertyDescriptions = [
         'spokenByCharacter' => 'The (e.g. fictional) character, Person or Organization to whom the quotation is attributed within the containing CreativeWork.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -141,7 +129,6 @@ class Quotation extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -149,14 +136,21 @@ class Quotation extends CreativeWork
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The (e.g. fictional) character, Person or Organization to whom the
+     * quotation is attributed within the containing CreativeWork.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $spokenByCharacter;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -186,9 +180,9 @@ class Quotation extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

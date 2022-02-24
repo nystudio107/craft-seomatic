@@ -91,72 +91,6 @@ class Trip extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The expected arrival time.
-     *
-     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
-     */
-    public $arrivalTime;
-
-    /**
-     * The expected departure time.
-     *
-     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
-     */
-    public $departureTime;
-
-    /**
-     * Destination(s) ( Place ) that make up a trip. For a trip where destination
-     * order is important use ItemList to specify that order (see examples).
-     *
-     * @var mixed|ItemList|Place [schema.org types: ItemList, Place]
-     */
-    public $itinerary;
-
-    /**
-     * An offer to provide this item—for example, an offer to sell a product,
-     * rent the DVD of a movie, perform a service, or give away tickets to an
-     * event. Use businessFunction to indicate the kind of transaction offered,
-     * i.e. sell, lease, etc. This property can also be used to describe a Demand.
-     * While this property is listed as expected on a number of common types, it
-     * can be used in others. In that case, using a second type, such as Product
-     * or a subtype of Product, can clarify the nature of the offer. Inverse
-     * property: itemOffered.
-     *
-     * @var mixed|Demand|Offer [schema.org types: Demand, Offer]
-     */
-    public $offers;
-
-    /**
-     * Identifies that this Trip is a subTrip of another Trip. For example Day 1,
-     * Day 2, etc. of a multi-day trip. Inverse property: subTrip.
-     *
-     * @var Trip [schema.org types: Trip]
-     */
-    public $partOfTrip;
-
-    /**
-     * The service provider, service operator, or service performer; the goods
-     * producer. Another party (a seller) may offer those services or goods on
-     * behalf of the provider. A provider may also serve as the seller. Supersedes
-     * carrier.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $provider;
-
-    /**
-     * Identifies a Trip that is a subTrip of this Trip. For example Day 1, Day 2,
-     * etc. of a multi-day trip. Inverse property: partOfTrip.
-     *
-     * @var Trip [schema.org types: Trip]
-     */
-    public $subTrip;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -171,22 +105,20 @@ class Trip extends Intangible
         'provider',
         'subTrip'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'arrivalTime' => ['DateTime','Time'],
-        'departureTime' => ['DateTime','Time'],
-        'itinerary' => ['ItemList','Place'],
-        'offers' => ['Demand','Offer'],
+        'arrivalTime' => ['DateTime', 'Time'],
+        'departureTime' => ['DateTime', 'Time'],
+        'itinerary' => ['ItemList', 'Place'],
+        'offers' => ['Demand', 'Offer'],
         'partOfTrip' => ['Trip'],
-        'provider' => ['Organization','Person'],
+        'provider' => ['Organization', 'Person'],
         'subTrip' => ['Trip']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -201,7 +133,6 @@ class Trip extends Intangible
         'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller. Supersedes carrier.',
         'subTrip' => 'Identifies a Trip that is a subTrip of this Trip. For example Day 1, Day 2, etc. of a multi-day trip. Inverse property: partOfTrip.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -209,7 +140,6 @@ class Trip extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -217,14 +147,72 @@ class Trip extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The expected arrival time.
+     *
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
+     */
+    public $arrivalTime;
+    /**
+     * The expected departure time.
+     *
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
+     */
+    public $departureTime;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * Destination(s) ( Place ) that make up a trip. For a trip where destination
+     * order is important use ItemList to specify that order (see examples).
+     *
+     * @var mixed|ItemList|Place [schema.org types: ItemList, Place]
+     */
+    public $itinerary;
+    /**
+     * An offer to provide this item—for example, an offer to sell a product,
+     * rent the DVD of a movie, perform a service, or give away tickets to an
+     * event. Use businessFunction to indicate the kind of transaction offered,
+     * i.e. sell, lease, etc. This property can also be used to describe a Demand.
+     * While this property is listed as expected on a number of common types, it
+     * can be used in others. In that case, using a second type, such as Product
+     * or a subtype of Product, can clarify the nature of the offer. Inverse
+     * property: itemOffered.
+     *
+     * @var mixed|Demand|Offer [schema.org types: Demand, Offer]
+     */
+    public $offers;
+    /**
+     * Identifies that this Trip is a subTrip of another Trip. For example Day 1,
+     * Day 2, etc. of a multi-day trip. Inverse property: subTrip.
+     *
+     * @var Trip [schema.org types: Trip]
+     */
+    public $partOfTrip;
+    /**
+     * The service provider, service operator, or service performer; the goods
+     * producer. Another party (a seller) may offer those services or goods on
+     * behalf of the provider. A provider may also serve as the seller. Supersedes
+     * carrier.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $provider;
+    /**
+     * Identifies a Trip that is a subTrip of this Trip. For example Day 1, Day 2,
+     * etc. of a multi-day trip. Inverse property: partOfTrip.
+     *
+     * @var Trip [schema.org types: Trip]
+     */
+    public $subTrip;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -254,13 +242,13 @@ class Trip extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['arrivalTime','departureTime','itinerary','offers','partOfTrip','provider','subTrip'], 'validateJsonSchema'],
+            [['arrivalTime', 'departureTime', 'itinerary', 'offers', 'partOfTrip', 'provider', 'subTrip'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

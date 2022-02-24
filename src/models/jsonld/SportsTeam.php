@@ -91,7 +91,53 @@ class SportsTeam extends SportsOrganization
 
     // Public Properties
     // =========================================================================
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'athlete',
+        'coach',
+        'gender'
+    ];
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'athlete' => ['Person'],
+        'coach' => ['Person'],
+        'gender' => ['GenderType', 'Text']
+    ];
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'athlete' => 'A person that acts as performing member of a sports team; a player as opposed to a coach.',
+        'coach' => 'A person that acts in a coaching role for a sports team.',
+        'gender' => 'Gender of something, typically a Person, but possibly also fictional characters, animals, etc. While http://schema.org/Male and http://schema.org/Female may be used, text strings are also acceptable for people who do not identify as a binary gender. The gender property can also be used in an extended sense to cover e.g. the gender of sports teams. As with the gender of individuals, we do not try to enumerate all possibilities. A mixed-gender SportsTeam can be indicated with a text value of "Mixed".'
+    ];
 
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
     /**
      * A person that acts as performing member of a sports team; a player as
      * opposed to a coach.
@@ -99,14 +145,12 @@ class SportsTeam extends SportsOrganization
      * @var Person [schema.org types: Person]
      */
     public $athlete;
-
     /**
      * A person that acts in a coaching role for a sports team.
      *
      * @var Person [schema.org types: Person]
      */
     public $coach;
-
     /**
      * Gender of something, typically a Person, but possibly also fictional
      * characters, animals, etc. While http://schema.org/Male and
@@ -121,65 +165,13 @@ class SportsTeam extends SportsOrganization
      */
     public $gender;
 
-    // Static Protected Properties
-    // =========================================================================
-
-    /**
-     * The Schema.org Property Names
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyNames = [
-        'athlete',
-        'coach',
-        'gender'
-    ];
-
-    /**
-     * The Schema.org Property Expected Types
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyExpectedTypes = [
-        'athlete' => ['Person'],
-        'coach' => ['Person'],
-        'gender' => ['GenderType','Text']
-    ];
-
-    /**
-     * The Schema.org Property Descriptions
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyDescriptions = [
-        'athlete' => 'A person that acts as performing member of a sports team; a player as opposed to a coach.',
-        'coach' => 'A person that acts in a coaching role for a sports team.',
-        'gender' => 'Gender of something, typically a Person, but possibly also fictional characters, animals, etc. While http://schema.org/Male and http://schema.org/Female may be used, text strings are also acceptable for people who do not identify as a binary gender. The gender property can also be used in an extended sense to cover e.g. the gender of sports teams. As with the gender of individuals, we do not try to enumerate all possibilities. A mixed-gender SportsTeam can be indicated with a text value of "Mixed".'
-    ];
-
-    /**
-     * The Schema.org Google Required Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRequiredSchema = [
-    ];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRecommendedSchema = [
-    ];
-
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -209,13 +201,13 @@ class SportsTeam extends SportsOrganization
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['athlete','coach','gender'], 'validateJsonSchema'],
+            [['athlete', 'coach', 'gender'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

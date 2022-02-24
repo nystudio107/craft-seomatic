@@ -92,18 +92,6 @@ class Report extends Article
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The number or other unique designator assigned to a Report by the
-     * publishing organization.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $reportNumber;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -113,6 +101,8 @@ class Report extends Article
         'reportNumber'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -121,7 +111,6 @@ class Report extends Article
     static protected $_schemaPropertyExpectedTypes = [
         'reportNumber' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -130,7 +119,6 @@ class Report extends Article
     static protected $_schemaPropertyDescriptions = [
         'reportNumber' => 'The number or other unique designator assigned to a Report by the publishing organization.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -138,7 +126,6 @@ class Report extends Article
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -146,14 +133,21 @@ class Report extends Article
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The number or other unique designator assigned to a Report by the
+     * publishing organization.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $reportNumber;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -183,9 +177,9 @@ class Report extends Article
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

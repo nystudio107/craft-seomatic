@@ -103,17 +103,6 @@ class FollowAction extends InteractAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A sub property of object. The person or organization being followed.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $followee;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -123,15 +112,16 @@ class FollowAction extends InteractAction
         'followee'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'followee' => ['Organization','Person']
+        'followee' => ['Organization', 'Person']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -140,7 +130,6 @@ class FollowAction extends InteractAction
     static protected $_schemaPropertyDescriptions = [
         'followee' => 'A sub property of object. The person or organization being followed.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -148,7 +137,6 @@ class FollowAction extends InteractAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -156,14 +144,20 @@ class FollowAction extends InteractAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A sub property of object. The person or organization being followed.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $followee;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -193,9 +187,9 @@ class FollowAction extends InteractAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

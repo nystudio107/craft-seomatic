@@ -91,38 +91,6 @@ class DeliveryEvent extends Event
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Password, PIN, or access code needed for delivery (e.g. from a locker).
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $accessCode;
-
-    /**
-     * When the item is available for pickup from the store, locker, etc.
-     *
-     * @var DateTime [schema.org types: DateTime]
-     */
-    public $availableFrom;
-
-    /**
-     * After this date, the item will no longer be available for pickup.
-     *
-     * @var DateTime [schema.org types: DateTime]
-     */
-    public $availableThrough;
-
-    /**
-     * Method used for delivery or shipping.
-     *
-     * @var DeliveryMethod [schema.org types: DeliveryMethod]
-     */
-    public $hasDeliveryMethod;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -134,7 +102,6 @@ class DeliveryEvent extends Event
         'availableThrough',
         'hasDeliveryMethod'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -146,7 +113,6 @@ class DeliveryEvent extends Event
         'availableThrough' => ['DateTime'],
         'hasDeliveryMethod' => ['DeliveryMethod']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -158,7 +124,6 @@ class DeliveryEvent extends Event
         'availableThrough' => 'After this date, the item will no longer be available for pickup.',
         'hasDeliveryMethod' => 'Method used for delivery or shipping.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -167,6 +132,8 @@ class DeliveryEvent extends Event
     static protected $_googleRequiredSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -174,14 +141,38 @@ class DeliveryEvent extends Event
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Password, PIN, or access code needed for delivery (e.g. from a locker).
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $accessCode;
+    /**
+     * When the item is available for pickup from the store, locker, etc.
+     *
+     * @var DateTime [schema.org types: DateTime]
+     */
+    public $availableFrom;
+    /**
+     * After this date, the item will no longer be available for pickup.
+     *
+     * @var DateTime [schema.org types: DateTime]
+     */
+    public $availableThrough;
+    /**
+     * Method used for delivery or shipping.
+     *
+     * @var DeliveryMethod [schema.org types: DeliveryMethod]
+     */
+    public $hasDeliveryMethod;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -211,13 +202,13 @@ class DeliveryEvent extends Event
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['accessCode','availableFrom','availableThrough','hasDeliveryMethod'], 'validateJsonSchema'],
+            [['accessCode', 'availableFrom', 'availableThrough', 'hasDeliveryMethod'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

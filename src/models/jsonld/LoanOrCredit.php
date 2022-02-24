@@ -92,83 +92,6 @@ class LoanOrCredit extends FinancialProduct
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The amount of money.
-     *
-     * @var mixed|MonetaryAmount|float [schema.org types: MonetaryAmount, Number]
-     */
-    public $amount;
-
-    /**
-     * The currency in which the monetary amount is expressed. Use standard
-     * formats: ISO 4217 currency format e.g. "USD"; Ticker symbol for
-     * cryptocurrencies e.g. "BTC"; well known names for Local Exchange Tradings
-     * Systems (LETS) and other currency types e.g. "Ithaca HOUR".
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $currency;
-
-    /**
-     * The period of time after any due date that the borrower has to fulfil its
-     * obligations before a default (failure to pay) is deemed to have occurred.
-     *
-     * @var Duration [schema.org types: Duration]
-     */
-    public $gracePeriod;
-
-    /**
-     * A form of paying back money previously borrowed from a lender. Repayment
-     * usually takes the form of periodic payments that normally include part
-     * principal plus interest in each payment.
-     *
-     * @var RepaymentSpecification [schema.org types: RepaymentSpecification]
-     */
-    public $loanRepaymentForm;
-
-    /**
-     * The duration of the loan or credit agreement.
-     *
-     * @var QuantitativeValue [schema.org types: QuantitativeValue]
-     */
-    public $loanTerm;
-
-    /**
-     * The type of a loan or credit.
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $loanType;
-
-    /**
-     * The only way you get the money back in the event of default is the
-     * security. Recourse is where you still have the opportunity to go back to
-     * the borrower for the rest of the money.
-     *
-     * @var bool [schema.org types: Boolean]
-     */
-    public $recourseLoan;
-
-    /**
-     * Whether the terms for payment of interest can be renegotiated during the
-     * life of the loan.
-     *
-     * @var bool [schema.org types: Boolean]
-     */
-    public $renegotiableLoan;
-
-    /**
-     * Assets required to secure loan or credit repayments. It may take form of
-     * third party pledge, goods, financial instruments (cash, securities, etc.)
-     *
-     * @var mixed|string|Thing [schema.org types: Text, Thing]
-     */
-    public $requiredCollateral;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -185,24 +108,22 @@ class LoanOrCredit extends FinancialProduct
         'renegotiableLoan',
         'requiredCollateral'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'amount' => ['MonetaryAmount','Number'],
+        'amount' => ['MonetaryAmount', 'Number'],
         'currency' => ['Text'],
         'gracePeriod' => ['Duration'],
         'loanRepaymentForm' => ['RepaymentSpecification'],
         'loanTerm' => ['QuantitativeValue'],
-        'loanType' => ['Text','URL'],
+        'loanType' => ['Text', 'URL'],
         'recourseLoan' => ['Boolean'],
         'renegotiableLoan' => ['Boolean'],
-        'requiredCollateral' => ['Text','Thing']
+        'requiredCollateral' => ['Text', 'Thing']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -219,7 +140,6 @@ class LoanOrCredit extends FinancialProduct
         'renegotiableLoan' => 'Whether the terms for payment of interest can be renegotiated during the life of the loan.',
         'requiredCollateral' => 'Assets required to secure loan or credit repayments. It may take form of third party pledge, goods, financial instruments (cash, securities, etc.)'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -227,7 +147,6 @@ class LoanOrCredit extends FinancialProduct
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -235,14 +154,81 @@ class LoanOrCredit extends FinancialProduct
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The amount of money.
+     *
+     * @var mixed|MonetaryAmount|float [schema.org types: MonetaryAmount, Number]
+     */
+    public $amount;
+    /**
+     * The currency in which the monetary amount is expressed. Use standard
+     * formats: ISO 4217 currency format e.g. "USD"; Ticker symbol for
+     * cryptocurrencies e.g. "BTC"; well known names for Local Exchange Tradings
+     * Systems (LETS) and other currency types e.g. "Ithaca HOUR".
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $currency;
+    /**
+     * The period of time after any due date that the borrower has to fulfil its
+     * obligations before a default (failure to pay) is deemed to have occurred.
+     *
+     * @var Duration [schema.org types: Duration]
+     */
+    public $gracePeriod;
+    /**
+     * A form of paying back money previously borrowed from a lender. Repayment
+     * usually takes the form of periodic payments that normally include part
+     * principal plus interest in each payment.
+     *
+     * @var RepaymentSpecification [schema.org types: RepaymentSpecification]
+     */
+    public $loanRepaymentForm;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The duration of the loan or credit agreement.
+     *
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
+     */
+    public $loanTerm;
+    /**
+     * The type of a loan or credit.
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $loanType;
+    /**
+     * The only way you get the money back in the event of default is the
+     * security. Recourse is where you still have the opportunity to go back to
+     * the borrower for the rest of the money.
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $recourseLoan;
+    /**
+     * Whether the terms for payment of interest can be renegotiated during the
+     * life of the loan.
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $renegotiableLoan;
+    /**
+     * Assets required to secure loan or credit repayments. It may take form of
+     * third party pledge, goods, financial instruments (cash, securities, etc.)
+     *
+     * @var mixed|string|Thing [schema.org types: Text, Thing]
+     */
+    public $requiredCollateral;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -272,13 +258,13 @@ class LoanOrCredit extends FinancialProduct
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['amount','currency','gracePeriod','loanRepaymentForm','loanTerm','loanType','recourseLoan','renegotiableLoan','requiredCollateral'], 'validateJsonSchema'],
+            [['amount', 'currency', 'gracePeriod', 'loanRepaymentForm', 'loanTerm', 'loanType', 'recourseLoan', 'renegotiableLoan', 'requiredCollateral'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

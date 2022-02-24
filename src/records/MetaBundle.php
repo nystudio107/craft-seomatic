@@ -14,6 +14,7 @@ namespace nystudio107\seomatic\records;
 use Craft;
 use craft\db\ActiveRecord;
 use craft\helpers\StringHelper;
+use function is_string;
 
 /**
  * @author    nystudio107
@@ -36,14 +37,14 @@ class MetaBundle extends ActiveRecord
     /**
      * @inheritdoc
      */
-    public function beforeSave($insert)
+    public function beforeSave($insert): bool
     {
 
         $result = parent::beforeSave($insert);
 
         if (!Craft::$app->getDb()->getSupportsMb4()) {
             foreach ($this->fields() as $attribute) {
-                if (\is_string($this->$attribute)) {
+                if (is_string($this->$attribute)) {
                     // Encode any 4-byte UTF-8 characters.
                     $this->$attribute = StringHelper::encodeMb4($this->$attribute);
                 }

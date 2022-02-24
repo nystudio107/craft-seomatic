@@ -65,14 +65,6 @@ class Sitemaps extends Component implements SitemapInterface
     // =========================================================================
 
     /**
-     *
-     */
-    public function init()
-    {
-        parent::init();
-    }
-
-    /**
      * Load in the sitemap frontend template containers
      */
     public function loadSitemapContainers()

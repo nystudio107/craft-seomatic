@@ -91,7 +91,56 @@ class MenuItem extends Intangible
 
     // Public Properties
     // =========================================================================
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'menuAddOn',
+        'nutrition',
+        'offers',
+        'suitableForDiet'
+    ];
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'menuAddOn' => ['MenuItem', 'MenuSection'],
+        'nutrition' => ['NutritionInformation'],
+        'offers' => ['Demand', 'Offer'],
+        'suitableForDiet' => ['RestrictedDiet']
+    ];
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'menuAddOn' => 'Additional menu item(s) such as a side dish of salad or side order of fries that can be added to this menu item. Additionally it can be a menu section containing allowed add-on menu items for this menu item.',
+        'nutrition' => 'Nutrition information about the recipe or menu item.',
+        'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use businessFunction to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a Demand. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer. Inverse property: itemOffered.',
+        'suitableForDiet' => 'Indicates a dietary restriction or guideline for which this recipe or menu item is suitable, e.g. diabetic, halal etc.'
+    ];
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
 
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
     /**
      * Additional menu item(s) such as a side dish of salad or side order of fries
      * that can be added to this menu item. Additionally it can be a menu section
@@ -100,14 +149,12 @@ class MenuItem extends Intangible
      * @var mixed|MenuItem|MenuSection [schema.org types: MenuItem, MenuSection]
      */
     public $menuAddOn;
-
     /**
      * Nutrition information about the recipe or menu item.
      *
      * @var NutritionInformation [schema.org types: NutritionInformation]
      */
     public $nutrition;
-
     /**
      * An offer to provide this item—for example, an offer to sell a product,
      * rent the DVD of a movie, perform a service, or give away tickets to an
@@ -121,7 +168,6 @@ class MenuItem extends Intangible
      * @var mixed|Demand|Offer [schema.org types: Demand, Offer]
      */
     public $offers;
-
     /**
      * Indicates a dietary restriction or guideline for which this recipe or menu
      * item is suitable, e.g. diabetic, halal etc.
@@ -130,68 +176,13 @@ class MenuItem extends Intangible
      */
     public $suitableForDiet;
 
-    // Static Protected Properties
-    // =========================================================================
-
-    /**
-     * The Schema.org Property Names
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyNames = [
-        'menuAddOn',
-        'nutrition',
-        'offers',
-        'suitableForDiet'
-    ];
-
-    /**
-     * The Schema.org Property Expected Types
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyExpectedTypes = [
-        'menuAddOn' => ['MenuItem','MenuSection'],
-        'nutrition' => ['NutritionInformation'],
-        'offers' => ['Demand','Offer'],
-        'suitableForDiet' => ['RestrictedDiet']
-    ];
-
-    /**
-     * The Schema.org Property Descriptions
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyDescriptions = [
-        'menuAddOn' => 'Additional menu item(s) such as a side dish of salad or side order of fries that can be added to this menu item. Additionally it can be a menu section containing allowed add-on menu items for this menu item.',
-        'nutrition' => 'Nutrition information about the recipe or menu item.',
-        'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use businessFunction to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a Demand. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer. Inverse property: itemOffered.',
-        'suitableForDiet' => 'Indicates a dietary restriction or guideline for which this recipe or menu item is suitable, e.g. diabetic, halal etc.'
-    ];
-
-    /**
-     * The Schema.org Google Required Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRequiredSchema = [
-    ];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRecommendedSchema = [
-    ];
-
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -221,13 +212,13 @@ class MenuItem extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['menuAddOn','nutrition','offers','suitableForDiet'], 'validateJsonSchema'],
+            [['menuAddOn', 'nutrition', 'offers', 'suitableForDiet'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

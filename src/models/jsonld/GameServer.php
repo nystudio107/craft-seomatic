@@ -91,31 +91,6 @@ class GameServer extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Video game which is played on this server. Inverse property: gameServer.
-     *
-     * @var VideoGame [schema.org types: VideoGame]
-     */
-    public $game;
-
-    /**
-     * Number of players on the server.
-     *
-     * @var int [schema.org types: Integer]
-     */
-    public $playersOnline;
-
-    /**
-     * Status of a game server.
-     *
-     * @var GameServerStatus [schema.org types: GameServerStatus]
-     */
-    public $serverStatus;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -126,7 +101,6 @@ class GameServer extends Intangible
         'playersOnline',
         'serverStatus'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -137,7 +111,6 @@ class GameServer extends Intangible
         'playersOnline' => ['Integer'],
         'serverStatus' => ['GameServerStatus']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -149,6 +122,8 @@ class GameServer extends Intangible
         'serverStatus' => 'Status of a game server.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -156,7 +131,6 @@ class GameServer extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -164,14 +138,32 @@ class GameServer extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Video game which is played on this server. Inverse property: gameServer.
+     *
+     * @var VideoGame [schema.org types: VideoGame]
+     */
+    public $game;
+    /**
+     * Number of players on the server.
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $playersOnline;
+    /**
+     * Status of a game server.
+     *
+     * @var GameServerStatus [schema.org types: GameServerStatus]
+     */
+    public $serverStatus;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -201,13 +193,13 @@ class GameServer extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['game','playersOnline','serverStatus'], 'validateJsonSchema'],
+            [['game', 'playersOnline', 'serverStatus'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

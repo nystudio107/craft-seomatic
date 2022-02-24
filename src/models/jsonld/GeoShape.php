@@ -95,77 +95,6 @@ class GeoShape extends StructuredValue
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Physical address of the item.
-     *
-     * @var mixed|PostalAddress|string [schema.org types: PostalAddress, Text]
-     */
-    public $address;
-
-    /**
-     * The country. For example, USA. You can also provide the two-letter ISO
-     * 3166-1 alpha-2 country code.
-     *
-     * @var mixed|Country|string [schema.org types: Country, Text]
-     */
-    public $addressCountry;
-
-    /**
-     * A box is the area enclosed by the rectangle formed by two points. The first
-     * point is the lower corner, the second point is the upper corner. A box is
-     * expressed as two points separated by a space character.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $box;
-
-    /**
-     * A circle is the circular region of a specified radius centered at a
-     * specified latitude and longitude. A circle is expressed as a pair followed
-     * by a radius in meters.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $circle;
-
-    /**
-     * The elevation of a location (WGS 84). Values may be of the form 'NUMBER
-     * UNITOFMEASUREMENT' (e.g., '1,000 m', '3,200 ft') while numbers alone should
-     * be assumed to be a value in meters.
-     *
-     * @var mixed|float|string [schema.org types: Number, Text]
-     */
-    public $elevation;
-
-    /**
-     * A line is a point-to-point path consisting of two or more points. A line is
-     * expressed as a series of two or more point objects separated by space.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $line;
-
-    /**
-     * A polygon is the area enclosed by a point-to-point path for which the
-     * starting and ending points are the same. A polygon is expressed as a series
-     * of four or more space delimited points where the first and final points are
-     * identical.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $polygon;
-
-    /**
-     * The postal code. For example, 94043.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $postalCode;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -181,23 +110,21 @@ class GeoShape extends StructuredValue
         'polygon',
         'postalCode'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'address' => ['PostalAddress','Text'],
-        'addressCountry' => ['Country','Text'],
+        'address' => ['PostalAddress', 'Text'],
+        'addressCountry' => ['Country', 'Text'],
         'box' => ['Text'],
         'circle' => ['Text'],
-        'elevation' => ['Number','Text'],
+        'elevation' => ['Number', 'Text'],
         'line' => ['Text'],
         'polygon' => ['Text'],
         'postalCode' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -213,7 +140,6 @@ class GeoShape extends StructuredValue
         'polygon' => 'A polygon is the area enclosed by a point-to-point path for which the starting and ending points are the same. A polygon is expressed as a series of four or more space delimited points where the first and final points are identical.',
         'postalCode' => 'The postal code. For example, 94043.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -221,7 +147,6 @@ class GeoShape extends StructuredValue
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -229,14 +154,76 @@ class GeoShape extends StructuredValue
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Physical address of the item.
+     *
+     * @var mixed|PostalAddress|string [schema.org types: PostalAddress, Text]
+     */
+    public $address;
+    /**
+     * The country. For example, USA. You can also provide the two-letter ISO
+     * 3166-1 alpha-2 country code.
+     *
+     * @var mixed|Country|string [schema.org types: Country, Text]
+     */
+    public $addressCountry;
+    /**
+     * A box is the area enclosed by the rectangle formed by two points. The first
+     * point is the lower corner, the second point is the upper corner. A box is
+     * expressed as two points separated by a space character.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $box;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * A circle is the circular region of a specified radius centered at a
+     * specified latitude and longitude. A circle is expressed as a pair followed
+     * by a radius in meters.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $circle;
+    /**
+     * The elevation of a location (WGS 84). Values may be of the form 'NUMBER
+     * UNITOFMEASUREMENT' (e.g., '1,000 m', '3,200 ft') while numbers alone should
+     * be assumed to be a value in meters.
+     *
+     * @var mixed|float|string [schema.org types: Number, Text]
+     */
+    public $elevation;
+    /**
+     * A line is a point-to-point path consisting of two or more points. A line is
+     * expressed as a series of two or more point objects separated by space.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $line;
+    /**
+     * A polygon is the area enclosed by a point-to-point path for which the
+     * starting and ending points are the same. A polygon is expressed as a series
+     * of four or more space delimited points where the first and final points are
+     * identical.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $polygon;
+    /**
+     * The postal code. For example, 94043.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $postalCode;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -266,13 +253,13 @@ class GeoShape extends StructuredValue
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['address','addressCountry','box','circle','elevation','line','polygon','postalCode'], 'validateJsonSchema'],
+            [['address', 'addressCountry', 'box', 'circle', 'elevation', 'line', 'polygon', 'postalCode'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

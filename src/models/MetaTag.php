@@ -11,15 +11,15 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\Seomatic;
+use Craft;
 use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
-
-use Craft;
-
+use nystudio107\seomatic\Seomatic;
 use yii\helpers\Html;
 use yii\helpers\Inflector;
+use function count;
+use function in_array;
 
 /**
  * @author    nystudio107
@@ -39,6 +39,29 @@ class MetaTag extends MetaItem
 
     // Static Methods
     // =========================================================================
+    /**
+     * @var string
+     */
+    public $charset;
+
+    // Public Properties
+    // =========================================================================
+    /**
+     * @var string|array
+     */
+    public $content;
+    /**
+     * @var string
+     */
+    public $httpEquiv;
+    /**
+     * @var string
+     */
+    public $name;
+    /**
+     * @var string
+     */
+    public $property;
 
     /**
      * @param null|string $tagType
@@ -66,41 +89,13 @@ class MetaTag extends MetaItem
         return new $className($config);
     }
 
-    // Public Properties
-    // =========================================================================
-
-    /**
-     * @var string
-     */
-    public $charset;
-
-    /**
-     * @var string|array
-     */
-    public $content;
-
-    /**
-     * @var string
-     */
-    public $httpEquiv;
-
-    /**
-     * @var string
-     */
-    public $name;
-
-    /**
-     * @var string
-     */
-    public $property;
-
     // Public Methods
     // =========================================================================
 
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
 
@@ -113,7 +108,7 @@ class MetaTag extends MetaItem
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
@@ -128,7 +123,7 @@ class MetaTag extends MetaItem
     /**
      * @inheritdoc
      */
-    public function fields()
+    public function fields(): array
     {
         $fields = parent::fields();
         if ($this->scenario === 'default') {
@@ -146,13 +141,13 @@ class MetaTag extends MetaItem
         if ($shouldRender) {
             // MetaValueHelper::parseArray by default resolves aliases
             $shouldResolveAliases = true;
-            if (\in_array($data['name'] ?? $data['property'] ?? '', MetaValueHelper::NO_ALIASES, true)) {
+            if (in_array($data['name'] ?? $data['property'] ?? '', MetaValueHelper::NO_ALIASES, true)) {
                 // Most tags use `name`-property, Facebook uses `property`-property
                 $shouldResolveAliases = false;
             }
             MetaValueHelper::parseArray($data, $shouldResolveAliases);
             // Only render if there's more than one attribute
-            if (\count($data) > 1) {
+            if (count($data) > 1) {
                 // devMode
                 if (Seomatic::$devMode) {
                 }
@@ -160,10 +155,10 @@ class MetaTag extends MetaItem
                 if (Seomatic::$devMode) {
                     $error = Craft::t(
                         'seomatic',
-                        '{tagtype} tag `{key}` did not render because it is missing attributes. '.print_r($data, true),
+                        '{tagtype} tag `{key}` did not render because it is missing attributes. ' . print_r($data, true),
                         ['tagtype' => 'Meta', 'key' => $this->key]
                     );
-                    Craft::info('WARNING - '.$error, __METHOD__);
+                    Craft::info('WARNING - ' . $error, __METHOD__);
                 }
                 $shouldRender = false;
             }
@@ -203,7 +198,7 @@ class MetaTag extends MetaItem
                 $attributes[] = $config;
             }
         }
-        if (\count($attributes) === 1) {
+        if (count($attributes) === 1) {
             $attributes = $attributes[0];
         }
 

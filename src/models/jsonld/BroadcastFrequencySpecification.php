@@ -92,31 +92,6 @@ class BroadcastFrequencySpecification extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The frequency in MHz for a particular broadcast.
-     *
-     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
-     */
-    public $broadcastFrequencyValue;
-
-    /**
-     * The modulation (e.g. FM, AM, etc) used by a particular broadcast service
-     *
-     * @var mixed|QualitativeValue|string [schema.org types: QualitativeValue, Text]
-     */
-    public $broadcastSignalModulation;
-
-    /**
-     * The subchannel used for the broadcast.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $broadcastSubChannel;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -127,18 +102,16 @@ class BroadcastFrequencySpecification extends Intangible
         'broadcastSignalModulation',
         'broadcastSubChannel'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'broadcastFrequencyValue' => ['Number','QuantitativeValue'],
-        'broadcastSignalModulation' => ['QualitativeValue','Text'],
+        'broadcastFrequencyValue' => ['Number', 'QuantitativeValue'],
+        'broadcastSignalModulation' => ['QualitativeValue', 'Text'],
         'broadcastSubChannel' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -150,6 +123,8 @@ class BroadcastFrequencySpecification extends Intangible
         'broadcastSubChannel' => 'The subchannel used for the broadcast.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -157,7 +132,6 @@ class BroadcastFrequencySpecification extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -165,14 +139,32 @@ class BroadcastFrequencySpecification extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The frequency in MHz for a particular broadcast.
+     *
+     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
+     */
+    public $broadcastFrequencyValue;
+    /**
+     * The modulation (e.g. FM, AM, etc) used by a particular broadcast service
+     *
+     * @var mixed|QualitativeValue|string [schema.org types: QualitativeValue, Text]
+     */
+    public $broadcastSignalModulation;
+    /**
+     * The subchannel used for the broadcast.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $broadcastSubChannel;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -202,13 +194,13 @@ class BroadcastFrequencySpecification extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['broadcastFrequencyValue','broadcastSignalModulation','broadcastSubChannel'], 'validateJsonSchema'],
+            [['broadcastFrequencyValue', 'broadcastSignalModulation', 'broadcastSubChannel'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

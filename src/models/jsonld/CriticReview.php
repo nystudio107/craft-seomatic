@@ -99,41 +99,6 @@ class CriticReview extends Review
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The item that is being reviewed/rated.
-     *
-     * @var Thing [schema.org types: Thing]
-     */
-    public $itemReviewed;
-
-    /**
-     * This Review or Rating is relevant to this part or facet of the
-     * itemReviewed.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $reviewAspect;
-
-    /**
-     * The actual body of the review.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $reviewBody;
-
-    /**
-     * The rating given in this review. Note that reviews can themselves be rated.
-     * The reviewRating applies to rating given by the review. The aggregateRating
-     * property applies to the review itself, as a creative work.
-     *
-     * @var Rating [schema.org types: Rating]
-     */
-    public $reviewRating;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -145,7 +110,6 @@ class CriticReview extends Review
         'reviewBody',
         'reviewRating'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -157,7 +121,6 @@ class CriticReview extends Review
         'reviewBody' => ['Text'],
         'reviewRating' => ['Rating']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -169,7 +132,6 @@ class CriticReview extends Review
         'reviewBody' => 'The actual body of the review.',
         'reviewRating' => 'The rating given in this review. Note that reviews can themselves be rated. The reviewRating applies to rating given by the review. The aggregateRating property applies to the review itself, as a creative work.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -178,6 +140,8 @@ class CriticReview extends Review
     static protected $_googleRequiredSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -185,14 +149,41 @@ class CriticReview extends Review
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The item that is being reviewed/rated.
+     *
+     * @var Thing [schema.org types: Thing]
+     */
+    public $itemReviewed;
+    /**
+     * This Review or Rating is relevant to this part or facet of the
+     * itemReviewed.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $reviewAspect;
+    /**
+     * The actual body of the review.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $reviewBody;
+    /**
+     * The rating given in this review. Note that reviews can themselves be rated.
+     * The reviewRating applies to rating given by the review. The aggregateRating
+     * property applies to the review itself, as a creative work.
+     *
+     * @var Rating [schema.org types: Rating]
+     */
+    public $reviewRating;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -222,13 +213,13 @@ class CriticReview extends Review
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['itemReviewed','reviewAspect','reviewBody','reviewRating'], 'validateJsonSchema'],
+            [['itemReviewed', 'reviewAspect', 'reviewBody', 'reviewRating'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

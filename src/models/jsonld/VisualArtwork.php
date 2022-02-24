@@ -91,104 +91,6 @@ class VisualArtwork extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The number of copies when multiple copies of a piece of artwork are
-     * produced - e.g. for a limited edition of 20 prints, 'artEdition' refers to
-     * the total number of copies (in this example "20").
-     *
-     * @var mixed|int|string [schema.org types: Integer, Text]
-     */
-    public $artEdition;
-
-    /**
-     * The material used. (e.g. Oil, Watercolour, Acrylic, Linoprint, Marble,
-     * Cyanotype, Digital, Lithograph, DryPoint, Intaglio, Pastel, Woodcut,
-     * Pencil, Mixed Media, etc.)
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $artMedium;
-
-    /**
-     * e.g. Painting, Drawing, Sculpture, Print, Photograph, Assemblage, Collage,
-     * etc.
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $artform;
-
-    /**
-     * The primary artist for a work in a medium other than pencils or digital
-     * line art--for example, if the primary artwork is done in watercolors or
-     * digital paints.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $artist;
-
-    /**
-     * The supporting materials for the artwork, e.g. Canvas, Paper, Wood, Board,
-     * etc. Supersedes surface.
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $artworkSurface;
-
-    /**
-     * The individual who adds color to inked drawings.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $colorist;
-
-    /**
-     * The depth of the item.
-     *
-     * @var mixed|Distance|QuantitativeValue [schema.org types: Distance, QuantitativeValue]
-     */
-    public $depth;
-
-    /**
-     * The height of the item.
-     *
-     * @var mixed|Distance|QuantitativeValue [schema.org types: Distance, QuantitativeValue]
-     */
-    public $height;
-
-    /**
-     * The individual who traces over the pencil drawings in ink after pencils are
-     * complete.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $inker;
-
-    /**
-     * The individual who adds lettering, including speech balloons and sound
-     * effects, to artwork.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $letterer;
-
-    /**
-     * The individual who draws the primary narrative artwork.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $penciler;
-
-    /**
-     * The width of the item.
-     *
-     * @var mixed|Distance|QuantitativeValue [schema.org types: Distance, QuantitativeValue]
-     */
-    public $width;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -208,27 +110,25 @@ class VisualArtwork extends CreativeWork
         'penciler',
         'width'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'artEdition' => ['Integer','Text'],
-        'artMedium' => ['Text','URL'],
-        'artform' => ['Text','URL'],
+        'artEdition' => ['Integer', 'Text'],
+        'artMedium' => ['Text', 'URL'],
+        'artform' => ['Text', 'URL'],
         'artist' => ['Person'],
-        'artworkSurface' => ['Text','URL'],
+        'artworkSurface' => ['Text', 'URL'],
         'colorist' => ['Person'],
-        'depth' => ['Distance','QuantitativeValue'],
-        'height' => ['Distance','QuantitativeValue'],
+        'depth' => ['Distance', 'QuantitativeValue'],
+        'height' => ['Distance', 'QuantitativeValue'],
         'inker' => ['Person'],
         'letterer' => ['Person'],
         'penciler' => ['Person'],
-        'width' => ['Distance','QuantitativeValue']
+        'width' => ['Distance', 'QuantitativeValue']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -248,7 +148,6 @@ class VisualArtwork extends CreativeWork
         'penciler' => 'The individual who draws the primary narrative artwork.',
         'width' => 'The width of the item.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -256,7 +155,6 @@ class VisualArtwork extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -264,14 +162,99 @@ class VisualArtwork extends CreativeWork
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The number of copies when multiple copies of a piece of artwork are
+     * produced - e.g. for a limited edition of 20 prints, 'artEdition' refers to
+     * the total number of copies (in this example "20").
+     *
+     * @var mixed|int|string [schema.org types: Integer, Text]
+     */
+    public $artEdition;
+    /**
+     * The material used. (e.g. Oil, Watercolour, Acrylic, Linoprint, Marble,
+     * Cyanotype, Digital, Lithograph, DryPoint, Intaglio, Pastel, Woodcut,
+     * Pencil, Mixed Media, etc.)
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $artMedium;
+    /**
+     * e.g. Painting, Drawing, Sculpture, Print, Photograph, Assemblage, Collage,
+     * etc.
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $artform;
+    /**
+     * The primary artist for a work in a medium other than pencils or digital
+     * line art--for example, if the primary artwork is done in watercolors or
+     * digital paints.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $artist;
+    /**
+     * The supporting materials for the artwork, e.g. Canvas, Paper, Wood, Board,
+     * etc. Supersedes surface.
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $artworkSurface;
+    /**
+     * The individual who adds color to inked drawings.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $colorist;
+    /**
+     * The depth of the item.
+     *
+     * @var mixed|Distance|QuantitativeValue [schema.org types: Distance, QuantitativeValue]
+     */
+    public $depth;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The height of the item.
+     *
+     * @var mixed|Distance|QuantitativeValue [schema.org types: Distance, QuantitativeValue]
+     */
+    public $height;
+    /**
+     * The individual who traces over the pencil drawings in ink after pencils are
+     * complete.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $inker;
+    /**
+     * The individual who adds lettering, including speech balloons and sound
+     * effects, to artwork.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $letterer;
+    /**
+     * The individual who draws the primary narrative artwork.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $penciler;
+    /**
+     * The width of the item.
+     *
+     * @var mixed|Distance|QuantitativeValue [schema.org types: Distance, QuantitativeValue]
+     */
+    public $width;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -301,13 +284,13 @@ class VisualArtwork extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['artEdition','artMedium','artform','artist','artworkSurface','colorist','depth','height','inker','letterer','penciler','width'], 'validateJsonSchema'],
+            [['artEdition', 'artMedium', 'artform', 'artist', 'artworkSurface', 'colorist', 'depth', 'height', 'inker', 'letterer', 'penciler', 'width'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

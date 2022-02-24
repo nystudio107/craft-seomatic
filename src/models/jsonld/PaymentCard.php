@@ -92,34 +92,6 @@ class PaymentCard extends FinancialProduct
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A cardholder benefit that pays the cardholder a small percentage of their
-     * net expenditures.
-     *
-     * @var mixed|bool|float [schema.org types: Boolean, Number]
-     */
-    public $cashBack;
-
-    /**
-     * A secure method for consumers to purchase products or services via debit,
-     * credit or smartcards by using RFID or NFC technology.
-     *
-     * @var bool [schema.org types: Boolean]
-     */
-    public $contactlessPayment;
-
-    /**
-     * A floor limit is the amount of money above which credit card transactions
-     * must be authorized.
-     *
-     * @var MonetaryAmount [schema.org types: MonetaryAmount]
-     */
-    public $floorLimit;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -130,18 +102,16 @@ class PaymentCard extends FinancialProduct
         'contactlessPayment',
         'floorLimit'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'cashBack' => ['Boolean','Number'],
+        'cashBack' => ['Boolean', 'Number'],
         'contactlessPayment' => ['Boolean'],
         'floorLimit' => ['MonetaryAmount']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -153,6 +123,8 @@ class PaymentCard extends FinancialProduct
         'floorLimit' => 'A floor limit is the amount of money above which credit card transactions must be authorized.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -160,7 +132,6 @@ class PaymentCard extends FinancialProduct
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -168,14 +139,35 @@ class PaymentCard extends FinancialProduct
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A cardholder benefit that pays the cardholder a small percentage of their
+     * net expenditures.
+     *
+     * @var mixed|bool|float [schema.org types: Boolean, Number]
+     */
+    public $cashBack;
+    /**
+     * A secure method for consumers to purchase products or services via debit,
+     * credit or smartcards by using RFID or NFC technology.
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $contactlessPayment;
+    /**
+     * A floor limit is the amount of money above which credit card transactions
+     * must be authorized.
+     *
+     * @var MonetaryAmount [schema.org types: MonetaryAmount]
+     */
+    public $floorLimit;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -205,13 +197,13 @@ class PaymentCard extends FinancialProduct
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['cashBack','contactlessPayment','floorLimit'], 'validateJsonSchema'],
+            [['cashBack', 'contactlessPayment', 'floorLimit'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -39,7 +39,7 @@ class DescriptionTag extends MetaTag
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
     }
@@ -47,7 +47,7 @@ class DescriptionTag extends MetaTag
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

@@ -92,19 +92,6 @@ class PresentationDigitalDocument extends DigitalDocument
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A permission related to the access to this document (e.g. permission to
-     * read or write an electronic document). For a public document, specify a
-     * grantee with an Audience with audienceType equal to "public".
-     *
-     * @var DigitalDocumentPermission [schema.org types: DigitalDocumentPermission]
-     */
-    public $hasDigitalDocumentPermission;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -114,6 +101,8 @@ class PresentationDigitalDocument extends DigitalDocument
         'hasDigitalDocumentPermission'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -122,7 +111,6 @@ class PresentationDigitalDocument extends DigitalDocument
     static protected $_schemaPropertyExpectedTypes = [
         'hasDigitalDocumentPermission' => ['DigitalDocumentPermission']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -131,7 +119,6 @@ class PresentationDigitalDocument extends DigitalDocument
     static protected $_schemaPropertyDescriptions = [
         'hasDigitalDocumentPermission' => 'A permission related to the access to this document (e.g. permission to read or write an electronic document). For a public document, specify a grantee with an Audience with audienceType equal to "public".'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -139,7 +126,6 @@ class PresentationDigitalDocument extends DigitalDocument
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -147,14 +133,22 @@ class PresentationDigitalDocument extends DigitalDocument
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A permission related to the access to this document (e.g. permission to
+     * read or write an electronic document). For a public document, specify a
+     * grantee with an Audience with audienceType equal to "public".
+     *
+     * @var DigitalDocumentPermission [schema.org types: DigitalDocumentPermission]
+     */
+    public $hasDigitalDocumentPermission;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -184,9 +178,9 @@ class PresentationDigitalDocument extends DigitalDocument
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

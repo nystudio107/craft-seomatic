@@ -92,18 +92,6 @@ class ReservationPackage extends Reservation
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The individual reservations included in the package. Typically a repeated
-     * property.
-     *
-     * @var Reservation [schema.org types: Reservation]
-     */
-    public $subReservation;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -113,6 +101,8 @@ class ReservationPackage extends Reservation
         'subReservation'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -121,7 +111,6 @@ class ReservationPackage extends Reservation
     static protected $_schemaPropertyExpectedTypes = [
         'subReservation' => ['Reservation']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -130,7 +119,6 @@ class ReservationPackage extends Reservation
     static protected $_schemaPropertyDescriptions = [
         'subReservation' => 'The individual reservations included in the package. Typically a repeated property.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -138,7 +126,6 @@ class ReservationPackage extends Reservation
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -146,14 +133,21 @@ class ReservationPackage extends Reservation
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The individual reservations included in the package. Typically a repeated
+     * property.
+     *
+     * @var Reservation [schema.org types: Reservation]
+     */
+    public $subReservation;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -183,9 +177,9 @@ class ReservationPackage extends Reservation
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

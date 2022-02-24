@@ -92,17 +92,6 @@ class VoteAction extends ChooseAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A sub property of object. The candidate subject of this action.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $candidate;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -112,6 +101,8 @@ class VoteAction extends ChooseAction
         'candidate'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -120,7 +111,6 @@ class VoteAction extends ChooseAction
     static protected $_schemaPropertyExpectedTypes = [
         'candidate' => ['Person']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -129,7 +119,6 @@ class VoteAction extends ChooseAction
     static protected $_schemaPropertyDescriptions = [
         'candidate' => 'A sub property of object. The candidate subject of this action.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -137,7 +126,6 @@ class VoteAction extends ChooseAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -145,14 +133,20 @@ class VoteAction extends ChooseAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A sub property of object. The candidate subject of this action.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $candidate;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -182,9 +176,9 @@ class VoteAction extends ChooseAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

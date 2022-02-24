@@ -91,34 +91,6 @@ class CookAction extends CreateAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A sub property of location. The specific food establishment where the
-     * action occurred.
-     *
-     * @var mixed|FoodEstablishment|Place [schema.org types: FoodEstablishment, Place]
-     */
-    public $foodEstablishment;
-
-    /**
-     * A sub property of location. The specific food event where the action
-     * occurred.
-     *
-     * @var FoodEvent [schema.org types: FoodEvent]
-     */
-    public $foodEvent;
-
-    /**
-     * A sub property of instrument. The recipe/instructions used to perform the
-     * action.
-     *
-     * @var Recipe [schema.org types: Recipe]
-     */
-    public $recipe;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -129,18 +101,16 @@ class CookAction extends CreateAction
         'foodEvent',
         'recipe'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'foodEstablishment' => ['FoodEstablishment','Place'],
+        'foodEstablishment' => ['FoodEstablishment', 'Place'],
         'foodEvent' => ['FoodEvent'],
         'recipe' => ['Recipe']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -152,6 +122,8 @@ class CookAction extends CreateAction
         'recipe' => 'A sub property of instrument. The recipe/instructions used to perform the action.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -159,7 +131,6 @@ class CookAction extends CreateAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -167,14 +138,35 @@ class CookAction extends CreateAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A sub property of location. The specific food establishment where the
+     * action occurred.
+     *
+     * @var mixed|FoodEstablishment|Place [schema.org types: FoodEstablishment, Place]
+     */
+    public $foodEstablishment;
+    /**
+     * A sub property of location. The specific food event where the action
+     * occurred.
+     *
+     * @var FoodEvent [schema.org types: FoodEvent]
+     */
+    public $foodEvent;
+    /**
+     * A sub property of instrument. The recipe/instructions used to perform the
+     * action.
+     *
+     * @var Recipe [schema.org types: Recipe]
+     */
+    public $recipe;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -204,13 +196,13 @@ class CookAction extends CreateAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['foodEstablishment','foodEvent','recipe'], 'validateJsonSchema'],
+            [['foodEstablishment', 'foodEvent', 'recipe'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

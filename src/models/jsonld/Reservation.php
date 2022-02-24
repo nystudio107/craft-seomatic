@@ -95,111 +95,6 @@ class Reservation extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The date and time the reservation was booked.
-     *
-     * @var DateTime [schema.org types: DateTime]
-     */
-    public $bookingTime;
-
-    /**
-     * An entity that arranges for an exchange between a buyer and a seller. In
-     * most cases a broker never acquires or releases ownership of a product or
-     * service involved in an exchange. If it is not clear whether an entity is a
-     * broker, seller, or buyer, the latter two terms are preferred. Supersedes
-     * bookingAgent.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $broker;
-
-    /**
-     * The date and time the reservation was modified.
-     *
-     * @var DateTime [schema.org types: DateTime]
-     */
-    public $modifiedTime;
-
-    /**
-     * The currency of the price, or a price component when attached to
-     * PriceSpecification and its subtypes. Use standard formats: ISO 4217
-     * currency format e.g. "USD"; Ticker symbol for cryptocurrencies e.g. "BTC";
-     * well known names for Local Exchange Tradings Systems (LETS) and other
-     * currency types e.g. "Ithaca HOUR".
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $priceCurrency;
-
-    /**
-     * Any membership in a frequent flyer, hotel loyalty program, etc. being
-     * applied to the reservation.
-     *
-     * @var ProgramMembership [schema.org types: ProgramMembership]
-     */
-    public $programMembershipUsed;
-
-    /**
-     * The service provider, service operator, or service performer; the goods
-     * producer. Another party (a seller) may offer those services or goods on
-     * behalf of the provider. A provider may also serve as the seller. Supersedes
-     * carrier.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $provider;
-
-    /**
-     * The thing -- flight, event, restaurant,etc. being reserved.
-     *
-     * @var Thing [schema.org types: Thing]
-     */
-    public $reservationFor;
-
-    /**
-     * A unique identifier for the reservation.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $reservationId;
-
-    /**
-     * The current status of the reservation.
-     *
-     * @var ReservationStatusType [schema.org types: ReservationStatusType]
-     */
-    public $reservationStatus;
-
-    /**
-     * A ticket associated with the reservation.
-     *
-     * @var Ticket [schema.org types: Ticket]
-     */
-    public $reservedTicket;
-
-    /**
-     * The total price for the reservation or ticket, including applicable taxes,
-     * shipping, etc. Usage guidelines: Use values from 0123456789 (Unicode 'DIGIT
-     * ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially similiar
-     * Unicode symbols. Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to
-     * indicate a decimal point. Avoid using these symbols as a readability
-     * separator.
-     *
-     * @var mixed|float|PriceSpecification|string [schema.org types: Number, PriceSpecification, Text]
-     */
-    public $totalPrice;
-
-    /**
-     * The person or organization the reservation or ticket is for.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $underName;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -219,7 +114,6 @@ class Reservation extends Intangible
         'totalPrice',
         'underName'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -227,19 +121,18 @@ class Reservation extends Intangible
      */
     static protected $_schemaPropertyExpectedTypes = [
         'bookingTime' => ['DateTime'],
-        'broker' => ['Organization','Person'],
+        'broker' => ['Organization', 'Person'],
         'modifiedTime' => ['DateTime'],
         'priceCurrency' => ['Text'],
         'programMembershipUsed' => ['ProgramMembership'],
-        'provider' => ['Organization','Person'],
+        'provider' => ['Organization', 'Person'],
         'reservationFor' => ['Thing'],
         'reservationId' => ['Text'],
         'reservationStatus' => ['ReservationStatusType'],
         'reservedTicket' => ['Ticket'],
-        'totalPrice' => ['Number','PriceSpecification','Text'],
-        'underName' => ['Organization','Person']
+        'totalPrice' => ['Number', 'PriceSpecification', 'Text'],
+        'underName' => ['Organization', 'Person']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -259,7 +152,6 @@ class Reservation extends Intangible
         'totalPrice' => 'The total price for the reservation or ticket, including applicable taxes, shipping, etc. Usage guidelines: Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.',
         'underName' => 'The person or organization the reservation or ticket is for.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -267,7 +159,6 @@ class Reservation extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -275,14 +166,106 @@ class Reservation extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The date and time the reservation was booked.
+     *
+     * @var DateTime [schema.org types: DateTime]
+     */
+    public $bookingTime;
+    /**
+     * An entity that arranges for an exchange between a buyer and a seller. In
+     * most cases a broker never acquires or releases ownership of a product or
+     * service involved in an exchange. If it is not clear whether an entity is a
+     * broker, seller, or buyer, the latter two terms are preferred. Supersedes
+     * bookingAgent.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $broker;
+    /**
+     * The date and time the reservation was modified.
+     *
+     * @var DateTime [schema.org types: DateTime]
+     */
+    public $modifiedTime;
+    /**
+     * The currency of the price, or a price component when attached to
+     * PriceSpecification and its subtypes. Use standard formats: ISO 4217
+     * currency format e.g. "USD"; Ticker symbol for cryptocurrencies e.g. "BTC";
+     * well known names for Local Exchange Tradings Systems (LETS) and other
+     * currency types e.g. "Ithaca HOUR".
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $priceCurrency;
+    /**
+     * Any membership in a frequent flyer, hotel loyalty program, etc. being
+     * applied to the reservation.
+     *
+     * @var ProgramMembership [schema.org types: ProgramMembership]
+     */
+    public $programMembershipUsed;
+    /**
+     * The service provider, service operator, or service performer; the goods
+     * producer. Another party (a seller) may offer those services or goods on
+     * behalf of the provider. A provider may also serve as the seller. Supersedes
+     * carrier.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $provider;
+    /**
+     * The thing -- flight, event, restaurant,etc. being reserved.
+     *
+     * @var Thing [schema.org types: Thing]
+     */
+    public $reservationFor;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * A unique identifier for the reservation.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $reservationId;
+    /**
+     * The current status of the reservation.
+     *
+     * @var ReservationStatusType [schema.org types: ReservationStatusType]
+     */
+    public $reservationStatus;
+    /**
+     * A ticket associated with the reservation.
+     *
+     * @var Ticket [schema.org types: Ticket]
+     */
+    public $reservedTicket;
+    /**
+     * The total price for the reservation or ticket, including applicable taxes,
+     * shipping, etc. Usage guidelines: Use values from 0123456789 (Unicode 'DIGIT
+     * ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially similiar
+     * Unicode symbols. Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to
+     * indicate a decimal point. Avoid using these symbols as a readability
+     * separator.
+     *
+     * @var mixed|float|PriceSpecification|string [schema.org types: Number, PriceSpecification, Text]
+     */
+    public $totalPrice;
+    /**
+     * The person or organization the reservation or ticket is for.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $underName;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -312,13 +295,13 @@ class Reservation extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['bookingTime','broker','modifiedTime','priceCurrency','programMembershipUsed','provider','reservationFor','reservationId','reservationStatus','reservedTicket','totalPrice','underName'], 'validateJsonSchema'],
+            [['bookingTime', 'broker', 'modifiedTime', 'priceCurrency', 'programMembershipUsed', 'provider', 'reservationFor', 'reservationId', 'reservationStatus', 'reservedTicket', 'totalPrice', 'underName'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

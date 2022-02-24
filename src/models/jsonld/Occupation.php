@@ -92,78 +92,6 @@ class Occupation extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Educational background needed for the position or Occupation.
-     *
-     * @var mixed|EducationalOccupationalCredential|string [schema.org types: EducationalOccupationalCredential, Text]
-     */
-    public $educationRequirements;
-
-    /**
-     * An estimated salary for a job posting or occupation, based on a variety of
-     * variables including, but not limited to industry, job title, and location.
-     * Estimated salaries are often computed by outside organizations rather than
-     * the hiring organization, who may not have committed to the estimated value.
-     *
-     * @var mixed|MonetaryAmount|MonetaryAmountDistribution|float [schema.org types: MonetaryAmount, MonetaryAmountDistribution, Number]
-     */
-    public $estimatedSalary;
-
-    /**
-     * Description of skills and experience needed for the position or Occupation.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $experienceRequirements;
-
-    /**
-     * The region/country for which this occupational description is appropriate.
-     * Note that educational requirements and qualifications can vary between
-     * jurisdictions.
-     *
-     * @var AdministrativeArea [schema.org types: AdministrativeArea]
-     */
-    public $occupationLocation;
-
-    /**
-     * A category describing the job, preferably using a term from a taxonomy such
-     * as BLS O*NET-SOC, ISCO-08 or similar, with the property repeated for each
-     * applicable value. Ideally the taxonomy should be identified, and both the
-     * textual label and formal code for the category should be provided. Note:
-     * for historical reasons, any textual label and formal code provided as a
-     * literal may be assumed to be from O*NET-SOC.
-     *
-     * @var mixed|CategoryCode|string [schema.org types: CategoryCode, Text]
-     */
-    public $occupationalCategory;
-
-    /**
-     * Specific qualifications required for this role or Occupation.
-     *
-     * @var mixed|EducationalOccupationalCredential|string [schema.org types: EducationalOccupationalCredential, Text]
-     */
-    public $qualifications;
-
-    /**
-     * Responsibilities associated with this role or Occupation.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $responsibilities;
-
-    /**
-     * A statement of knowledge, skill, ability, task or any other assertion
-     * expressing a competency that is desired or required to fulfill this role or
-     * to work in this occupation.
-     *
-     * @var mixed|DefinedTerm|string [schema.org types: DefinedTerm, Text]
-     */
-    public $skills;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -179,23 +107,21 @@ class Occupation extends Intangible
         'responsibilities',
         'skills'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'educationRequirements' => ['EducationalOccupationalCredential','Text'],
-        'estimatedSalary' => ['MonetaryAmount','MonetaryAmountDistribution','Number'],
+        'educationRequirements' => ['EducationalOccupationalCredential', 'Text'],
+        'estimatedSalary' => ['MonetaryAmount', 'MonetaryAmountDistribution', 'Number'],
         'experienceRequirements' => ['Text'],
         'occupationLocation' => ['AdministrativeArea'],
-        'occupationalCategory' => ['CategoryCode','Text'],
-        'qualifications' => ['EducationalOccupationalCredential','Text'],
+        'occupationalCategory' => ['CategoryCode', 'Text'],
+        'qualifications' => ['EducationalOccupationalCredential', 'Text'],
         'responsibilities' => ['Text'],
-        'skills' => ['DefinedTerm','Text']
+        'skills' => ['DefinedTerm', 'Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -211,7 +137,6 @@ class Occupation extends Intangible
         'responsibilities' => 'Responsibilities associated with this role or Occupation.',
         'skills' => 'A statement of knowledge, skill, ability, task or any other assertion expressing a competency that is desired or required to fulfill this role or to work in this occupation.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -219,7 +144,6 @@ class Occupation extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -227,14 +151,77 @@ class Occupation extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Educational background needed for the position or Occupation.
+     *
+     * @var mixed|EducationalOccupationalCredential|string [schema.org types: EducationalOccupationalCredential, Text]
+     */
+    public $educationRequirements;
+    /**
+     * An estimated salary for a job posting or occupation, based on a variety of
+     * variables including, but not limited to industry, job title, and location.
+     * Estimated salaries are often computed by outside organizations rather than
+     * the hiring organization, who may not have committed to the estimated value.
+     *
+     * @var mixed|MonetaryAmount|MonetaryAmountDistribution|float [schema.org types: MonetaryAmount, MonetaryAmountDistribution, Number]
+     */
+    public $estimatedSalary;
+    /**
+     * Description of skills and experience needed for the position or Occupation.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $experienceRequirements;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The region/country for which this occupational description is appropriate.
+     * Note that educational requirements and qualifications can vary between
+     * jurisdictions.
+     *
+     * @var AdministrativeArea [schema.org types: AdministrativeArea]
+     */
+    public $occupationLocation;
+    /**
+     * A category describing the job, preferably using a term from a taxonomy such
+     * as BLS O*NET-SOC, ISCO-08 or similar, with the property repeated for each
+     * applicable value. Ideally the taxonomy should be identified, and both the
+     * textual label and formal code for the category should be provided. Note:
+     * for historical reasons, any textual label and formal code provided as a
+     * literal may be assumed to be from O*NET-SOC.
+     *
+     * @var mixed|CategoryCode|string [schema.org types: CategoryCode, Text]
+     */
+    public $occupationalCategory;
+    /**
+     * Specific qualifications required for this role or Occupation.
+     *
+     * @var mixed|EducationalOccupationalCredential|string [schema.org types: EducationalOccupationalCredential, Text]
+     */
+    public $qualifications;
+    /**
+     * Responsibilities associated with this role or Occupation.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $responsibilities;
+    /**
+     * A statement of knowledge, skill, ability, task or any other assertion
+     * expressing a competency that is desired or required to fulfill this role or
+     * to work in this occupation.
+     *
+     * @var mixed|DefinedTerm|string [schema.org types: DefinedTerm, Text]
+     */
+    public $skills;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -264,13 +251,13 @@ class Occupation extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['educationRequirements','estimatedSalary','experienceRequirements','occupationLocation','occupationalCategory','qualifications','responsibilities','skills'], 'validateJsonSchema'],
+            [['educationRequirements', 'estimatedSalary', 'experienceRequirements', 'occupationLocation', 'occupationalCategory', 'qualifications', 'responsibilities', 'skills'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

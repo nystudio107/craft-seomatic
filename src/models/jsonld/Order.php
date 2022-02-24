@@ -93,160 +93,6 @@ class Order extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The offer(s) -- e.g., product, quantity and price combinations -- included
-     * in the order.
-     *
-     * @var Offer [schema.org types: Offer]
-     */
-    public $acceptedOffer;
-
-    /**
-     * The billing address for the order.
-     *
-     * @var PostalAddress [schema.org types: PostalAddress]
-     */
-    public $billingAddress;
-
-    /**
-     * An entity that arranges for an exchange between a buyer and a seller. In
-     * most cases a broker never acquires or releases ownership of a product or
-     * service involved in an exchange. If it is not clear whether an entity is a
-     * broker, seller, or buyer, the latter two terms are preferred. Supersedes
-     * bookingAgent.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $broker;
-
-    /**
-     * A number that confirms the given order or payment has been received.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $confirmationNumber;
-
-    /**
-     * Party placing the order or paying the invoice.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $customer;
-
-    /**
-     * Any discount applied (to an Order).
-     *
-     * @var mixed|float|string [schema.org types: Number, Text]
-     */
-    public $discount;
-
-    /**
-     * Code used to redeem a discount.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $discountCode;
-
-    /**
-     * The currency of the discount. Use standard formats: ISO 4217 currency
-     * format e.g. "USD"; Ticker symbol for cryptocurrencies e.g. "BTC"; well
-     * known names for Local Exchange Tradings Systems (LETS) and other currency
-     * types e.g. "Ithaca HOUR".
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $discountCurrency;
-
-    /**
-     * Was the offer accepted as a gift for someone other than the buyer.
-     *
-     * @var bool [schema.org types: Boolean]
-     */
-    public $isGift;
-
-    /**
-     * Date order was placed.
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $orderDate;
-
-    /**
-     * The delivery of the parcel related to this order or order item.
-     *
-     * @var ParcelDelivery [schema.org types: ParcelDelivery]
-     */
-    public $orderDelivery;
-
-    /**
-     * The identifier of the transaction.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $orderNumber;
-
-    /**
-     * The current status of the order.
-     *
-     * @var OrderStatus [schema.org types: OrderStatus]
-     */
-    public $orderStatus;
-
-    /**
-     * The item ordered.
-     *
-     * @var mixed|OrderItem|Product|Service [schema.org types: OrderItem, Product, Service]
-     */
-    public $orderedItem;
-
-    /**
-     * The order is being paid as part of the referenced Invoice.
-     *
-     * @var Invoice [schema.org types: Invoice]
-     */
-    public $partOfInvoice;
-
-    /**
-     * The date that payment is due. Supersedes paymentDue.
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $paymentDueDate;
-
-    /**
-     * The name of the credit card or other method of payment for the order.
-     *
-     * @var PaymentMethod [schema.org types: PaymentMethod]
-     */
-    public $paymentMethod;
-
-    /**
-     * An identifier for the method of payment used (e.g. the last 4 digits of the
-     * credit card).
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $paymentMethodId;
-
-    /**
-     * The URL for sending a payment.
-     *
-     * @var string [schema.org types: URL]
-     */
-    public $paymentUrl;
-
-    /**
-     * An entity which offers (sells / leases / lends / loans) the services /
-     * goods. A seller may also be a provider. Supersedes merchant, vendor.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $seller;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -274,7 +120,6 @@ class Order extends Intangible
         'paymentUrl',
         'seller'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -283,26 +128,25 @@ class Order extends Intangible
     static protected $_schemaPropertyExpectedTypes = [
         'acceptedOffer' => ['Offer'],
         'billingAddress' => ['PostalAddress'],
-        'broker' => ['Organization','Person'],
+        'broker' => ['Organization', 'Person'],
         'confirmationNumber' => ['Text'],
-        'customer' => ['Organization','Person'],
-        'discount' => ['Number','Text'],
+        'customer' => ['Organization', 'Person'],
+        'discount' => ['Number', 'Text'],
         'discountCode' => ['Text'],
         'discountCurrency' => ['Text'],
         'isGift' => ['Boolean'],
-        'orderDate' => ['Date','DateTime'],
+        'orderDate' => ['Date', 'DateTime'],
         'orderDelivery' => ['ParcelDelivery'],
         'orderNumber' => ['Text'],
         'orderStatus' => ['OrderStatus'],
-        'orderedItem' => ['OrderItem','Product','Service'],
+        'orderedItem' => ['OrderItem', 'Product', 'Service'],
         'partOfInvoice' => ['Invoice'],
-        'paymentDueDate' => ['Date','DateTime'],
+        'paymentDueDate' => ['Date', 'DateTime'],
         'paymentMethod' => ['PaymentMethod'],
         'paymentMethodId' => ['Text'],
         'paymentUrl' => ['URL'],
-        'seller' => ['Organization','Person']
+        'seller' => ['Organization', 'Person']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -330,7 +174,6 @@ class Order extends Intangible
         'paymentUrl' => 'The URL for sending a payment.',
         'seller' => 'An entity which offers (sells / leases / lends / loans) the services / goods. A seller may also be a provider. Supersedes merchant, vendor.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -338,7 +181,6 @@ class Order extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -346,14 +188,147 @@ class Order extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The offer(s) -- e.g., product, quantity and price combinations -- included
+     * in the order.
+     *
+     * @var Offer [schema.org types: Offer]
+     */
+    public $acceptedOffer;
+    /**
+     * The billing address for the order.
+     *
+     * @var PostalAddress [schema.org types: PostalAddress]
+     */
+    public $billingAddress;
+    /**
+     * An entity that arranges for an exchange between a buyer and a seller. In
+     * most cases a broker never acquires or releases ownership of a product or
+     * service involved in an exchange. If it is not clear whether an entity is a
+     * broker, seller, or buyer, the latter two terms are preferred. Supersedes
+     * bookingAgent.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $broker;
+    /**
+     * A number that confirms the given order or payment has been received.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $confirmationNumber;
+    /**
+     * Party placing the order or paying the invoice.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $customer;
+    /**
+     * Any discount applied (to an Order).
+     *
+     * @var mixed|float|string [schema.org types: Number, Text]
+     */
+    public $discount;
+    /**
+     * Code used to redeem a discount.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $discountCode;
+    /**
+     * The currency of the discount. Use standard formats: ISO 4217 currency
+     * format e.g. "USD"; Ticker symbol for cryptocurrencies e.g. "BTC"; well
+     * known names for Local Exchange Tradings Systems (LETS) and other currency
+     * types e.g. "Ithaca HOUR".
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $discountCurrency;
+    /**
+     * Was the offer accepted as a gift for someone other than the buyer.
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $isGift;
+    /**
+     * Date order was placed.
+     *
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     */
+    public $orderDate;
+    /**
+     * The delivery of the parcel related to this order or order item.
+     *
+     * @var ParcelDelivery [schema.org types: ParcelDelivery]
+     */
+    public $orderDelivery;
+    /**
+     * The identifier of the transaction.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $orderNumber;
+    /**
+     * The current status of the order.
+     *
+     * @var OrderStatus [schema.org types: OrderStatus]
+     */
+    public $orderStatus;
+    /**
+     * The item ordered.
+     *
+     * @var mixed|OrderItem|Product|Service [schema.org types: OrderItem, Product, Service]
+     */
+    public $orderedItem;
+    /**
+     * The order is being paid as part of the referenced Invoice.
+     *
+     * @var Invoice [schema.org types: Invoice]
+     */
+    public $partOfInvoice;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The date that payment is due. Supersedes paymentDue.
+     *
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     */
+    public $paymentDueDate;
+    /**
+     * The name of the credit card or other method of payment for the order.
+     *
+     * @var PaymentMethod [schema.org types: PaymentMethod]
+     */
+    public $paymentMethod;
+    /**
+     * An identifier for the method of payment used (e.g. the last 4 digits of the
+     * credit card).
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $paymentMethodId;
+    /**
+     * The URL for sending a payment.
+     *
+     * @var string [schema.org types: URL]
+     */
+    public $paymentUrl;
+    /**
+     * An entity which offers (sells / leases / lends / loans) the services /
+     * goods. A seller may also be a provider. Supersedes merchant, vendor.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $seller;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -383,13 +358,13 @@ class Order extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['acceptedOffer','billingAddress','broker','confirmationNumber','customer','discount','discountCode','discountCurrency','isGift','orderDate','orderDelivery','orderNumber','orderStatus','orderedItem','partOfInvoice','paymentDueDate','paymentMethod','paymentMethodId','paymentUrl','seller'], 'validateJsonSchema'],
+            [['acceptedOffer', 'billingAddress', 'broker', 'confirmationNumber', 'customer', 'discount', 'discountCode', 'discountCurrency', 'isGift', 'orderDate', 'orderDelivery', 'orderNumber', 'orderStatus', 'orderedItem', 'partOfInvoice', 'paymentDueDate', 'paymentMethod', 'paymentMethodId', 'paymentUrl', 'seller'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

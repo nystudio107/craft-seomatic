@@ -92,49 +92,6 @@ class SoftwareSourceCode extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Link to the repository where the un-compiled, human readable code and
-     * related code is located (SVN, github, CodePlex).
-     *
-     * @var string [schema.org types: URL]
-     */
-    public $codeRepository;
-
-    /**
-     * What type of code sample: full (compile ready) solution, code snippet,
-     * inline code, scripts, template. Supersedes sampleType.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $codeSampleType;
-
-    /**
-     * The computer programming language.
-     *
-     * @var mixed|ComputerLanguage|string [schema.org types: ComputerLanguage, Text]
-     */
-    public $programmingLanguage;
-
-    /**
-     * Runtime platform or script interpreter dependencies (Example - Java v1,
-     * Python2.3, .Net Framework 3.0). Supersedes runtime.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $runtimePlatform;
-
-    /**
-     * Target Operating System / Product to which the code applies. If applies to
-     * several versions, just the product name can be used.
-     *
-     * @var SoftwareApplication [schema.org types: SoftwareApplication]
-     */
-    public $targetProduct;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -147,7 +104,6 @@ class SoftwareSourceCode extends CreativeWork
         'runtimePlatform',
         'targetProduct'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -156,11 +112,10 @@ class SoftwareSourceCode extends CreativeWork
     static protected $_schemaPropertyExpectedTypes = [
         'codeRepository' => ['URL'],
         'codeSampleType' => ['Text'],
-        'programmingLanguage' => ['ComputerLanguage','Text'],
+        'programmingLanguage' => ['ComputerLanguage', 'Text'],
         'runtimePlatform' => ['Text'],
         'targetProduct' => ['SoftwareApplication']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -173,7 +128,6 @@ class SoftwareSourceCode extends CreativeWork
         'runtimePlatform' => 'Runtime platform or script interpreter dependencies (Example - Java v1, Python2.3, .Net Framework 3.0). Supersedes runtime.',
         'targetProduct' => 'Target Operating System / Product to which the code applies. If applies to several versions, just the product name can be used.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -181,7 +135,6 @@ class SoftwareSourceCode extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -190,13 +143,50 @@ class SoftwareSourceCode extends CreativeWork
     static protected $_googleRecommendedSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * Link to the repository where the un-compiled, human readable code and
+     * related code is located (SVN, github, CodePlex).
+     *
+     * @var string [schema.org types: URL]
+     */
+    public $codeRepository;
+    /**
+     * What type of code sample: full (compile ready) solution, code snippet,
+     * inline code, scripts, template. Supersedes sampleType.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $codeSampleType;
+    /**
+     * The computer programming language.
+     *
+     * @var mixed|ComputerLanguage|string [schema.org types: ComputerLanguage, Text]
+     */
+    public $programmingLanguage;
+    /**
+     * Runtime platform or script interpreter dependencies (Example - Java v1,
+     * Python2.3, .Net Framework 3.0). Supersedes runtime.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $runtimePlatform;
+    /**
+     * Target Operating System / Product to which the code applies. If applies to
+     * several versions, just the product name can be used.
+     *
+     * @var SoftwareApplication [schema.org types: SoftwareApplication]
+     */
+    public $targetProduct;
+
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -226,13 +216,13 @@ class SoftwareSourceCode extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['codeRepository','codeSampleType','programmingLanguage','runtimePlatform','targetProduct'], 'validateJsonSchema'],
+            [['codeRepository', 'codeSampleType', 'programmingLanguage', 'runtimePlatform', 'targetProduct'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

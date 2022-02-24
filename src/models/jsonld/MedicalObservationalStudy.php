@@ -98,17 +98,6 @@ class MedicalObservationalStudy extends MedicalStudy
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Specifics about the observational study design (enumerated).
-     *
-     * @var MedicalObservationalStudyDesign [schema.org types: MedicalObservationalStudyDesign]
-     */
-    public $studyDesign;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -118,6 +107,8 @@ class MedicalObservationalStudy extends MedicalStudy
         'studyDesign'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -126,7 +117,6 @@ class MedicalObservationalStudy extends MedicalStudy
     static protected $_schemaPropertyExpectedTypes = [
         'studyDesign' => ['MedicalObservationalStudyDesign']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -135,7 +125,6 @@ class MedicalObservationalStudy extends MedicalStudy
     static protected $_schemaPropertyDescriptions = [
         'studyDesign' => 'Specifics about the observational study design (enumerated).'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -143,7 +132,6 @@ class MedicalObservationalStudy extends MedicalStudy
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -151,14 +139,20 @@ class MedicalObservationalStudy extends MedicalStudy
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Specifics about the observational study design (enumerated).
+     *
+     * @var MedicalObservationalStudyDesign [schema.org types: MedicalObservationalStudyDesign]
+     */
+    public $studyDesign;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -188,9 +182,9 @@ class MedicalObservationalStudy extends MedicalStudy
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

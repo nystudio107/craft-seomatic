@@ -92,36 +92,6 @@ class TherapeuticProcedure extends MedicalProcedure
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A possible complication and/or side effect of this therapy. If it is known
-     * that an adverse outcome is serious (resulting in death, disability, or
-     * permanent damage; requiring hospitalization; or is otherwise
-     * life-threatening or requires immediate medical attention), tag it as a
-     * seriouseAdverseOutcome instead.
-     *
-     * @var MedicalEntity [schema.org types: MedicalEntity]
-     */
-    public $adverseOutcome;
-
-    /**
-     * A dosing schedule for the drug for a given population, either observed,
-     * recommended, or maximum dose based on the type used.
-     *
-     * @var DoseSchedule [schema.org types: DoseSchedule]
-     */
-    public $doseSchedule;
-
-    /**
-     * Specifying a drug or medicine used in a medication procedure
-     *
-     * @var Drug [schema.org types: Drug]
-     */
-    public $drug;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -132,7 +102,6 @@ class TherapeuticProcedure extends MedicalProcedure
         'doseSchedule',
         'drug'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -143,7 +112,6 @@ class TherapeuticProcedure extends MedicalProcedure
         'doseSchedule' => ['DoseSchedule'],
         'drug' => ['Drug']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -155,6 +123,8 @@ class TherapeuticProcedure extends MedicalProcedure
         'drug' => 'Specifying a drug or medicine used in a medication procedure'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -162,7 +132,6 @@ class TherapeuticProcedure extends MedicalProcedure
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -170,14 +139,37 @@ class TherapeuticProcedure extends MedicalProcedure
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A possible complication and/or side effect of this therapy. If it is known
+     * that an adverse outcome is serious (resulting in death, disability, or
+     * permanent damage; requiring hospitalization; or is otherwise
+     * life-threatening or requires immediate medical attention), tag it as a
+     * seriouseAdverseOutcome instead.
+     *
+     * @var MedicalEntity [schema.org types: MedicalEntity]
+     */
+    public $adverseOutcome;
+    /**
+     * A dosing schedule for the drug for a given population, either observed,
+     * recommended, or maximum dose based on the type used.
+     *
+     * @var DoseSchedule [schema.org types: DoseSchedule]
+     */
+    public $doseSchedule;
+    /**
+     * Specifying a drug or medicine used in a medication procedure
+     *
+     * @var Drug [schema.org types: Drug]
+     */
+    public $drug;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -207,13 +199,13 @@ class TherapeuticProcedure extends MedicalProcedure
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['adverseOutcome','doseSchedule','drug'], 'validateJsonSchema'],
+            [['adverseOutcome', 'doseSchedule', 'drug'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

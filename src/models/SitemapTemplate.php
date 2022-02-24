@@ -11,16 +11,14 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\helpers\SiteHelper;
-use nystudio107\seomatic\helpers\Sitemap;
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\base\FrontendTemplate;
-use nystudio107\seomatic\base\SitemapInterface;
-use nystudio107\seomatic\jobs\GenerateSitemap;
-
 use Craft;
 use craft\queue\QueueInterface;
-
+use nystudio107\seomatic\base\FrontendTemplate;
+use nystudio107\seomatic\base\SitemapInterface;
+use nystudio107\seomatic\helpers\SiteHelper;
+use nystudio107\seomatic\helpers\Sitemap;
+use nystudio107\seomatic\jobs\GenerateSitemap;
+use nystudio107\seomatic\Seomatic;
 use yii\caching\TagDependency;
 use yii\web\NotFoundHttpException;
 
@@ -112,7 +110,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         $request = Craft::$app->getRequest();
         $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle($type, $handle, $siteId);
         // If it doesn't exist, throw a 404
-        if ($metaBundle === null ) {
+        if ($metaBundle === null) {
             if ($request->isCpRequest || $request->isConsoleRequest) {
                 return '';
             }
@@ -146,9 +144,9 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         }
 
         $cache = Craft::$app->getCache();
-        $uniqueKey = $groupId.$type.$handle.$siteId;
-        $cacheKey = self::CACHE_KEY.$uniqueKey;
-        $queueJobCacheKey = self::QUEUE_JOB_CACHE_KEY.$uniqueKey;
+        $uniqueKey = $groupId . $type . $handle . $siteId;
+        $cacheKey = self::CACHE_KEY . $uniqueKey;
+        $queueJobCacheKey = self::QUEUE_JOB_CACHE_KEY . $uniqueKey;
         $result = $cache->get($cacheKey);
         // If the sitemap isn't cached, start a job to create it
         if ($result === false) {
@@ -185,7 +183,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 $dependency = new TagDependency([
                     'tags' => [
                         self::GLOBAL_SITEMAP_CACHE_TAG,
-                        self::CACHE_KEY.$uniqueKey,
+                        self::CACHE_KEY . $uniqueKey,
                     ],
                 ]);
                 $cache->set($queueJobCacheKey, $jobId, $cacheDuration, $dependency);
@@ -237,14 +235,14 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
      * Invalidate a sitemap cache
      *
      * @param string $handle
-     * @param int    $siteId
+     * @param int $siteId
      */
     public function invalidateCache(string $handle, int $siteId)
     {
         $cache = Craft::$app->getCache();
-        TagDependency::invalidate($cache, self::SITEMAP_CACHE_TAG.$handle.$siteId);
+        TagDependency::invalidate($cache, self::SITEMAP_CACHE_TAG . $handle . $siteId);
         Craft::info(
-            'Sitemap cache cleared: '.$handle,
+            'Sitemap cache cleared: ' . $handle,
             __METHOD__
         );
     }

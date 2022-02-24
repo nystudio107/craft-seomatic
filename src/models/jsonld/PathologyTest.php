@@ -92,17 +92,6 @@ class PathologyTest extends MedicalTest
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The type of tissue sample required for the test.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $tissueSample;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -112,6 +101,8 @@ class PathologyTest extends MedicalTest
         'tissueSample'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -120,7 +111,6 @@ class PathologyTest extends MedicalTest
     static protected $_schemaPropertyExpectedTypes = [
         'tissueSample' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -129,7 +119,6 @@ class PathologyTest extends MedicalTest
     static protected $_schemaPropertyDescriptions = [
         'tissueSample' => 'The type of tissue sample required for the test.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -137,7 +126,6 @@ class PathologyTest extends MedicalTest
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -145,14 +133,20 @@ class PathologyTest extends MedicalTest
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The type of tissue sample required for the test.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $tissueSample;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -182,9 +176,9 @@ class PathologyTest extends MedicalTest
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

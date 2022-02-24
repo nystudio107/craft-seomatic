@@ -92,47 +92,6 @@ class DrugStrength extends MedicalIntangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * An active ingredient, typically chemical compounds and/or biologic
-     * substances.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $activeIngredient;
-
-    /**
-     * The location in which the strength is available.
-     *
-     * @var AdministrativeArea [schema.org types: AdministrativeArea]
-     */
-    public $availableIn;
-
-    /**
-     * Recommended intake of this supplement for a given population as defined by
-     * a specific recommending authority.
-     *
-     * @var MaximumDoseSchedule [schema.org types: MaximumDoseSchedule]
-     */
-    public $maximumIntake;
-
-    /**
-     * The units of an active ingredient's strength, e.g. mg.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $strengthUnit;
-
-    /**
-     * The value of an active ingredient's strength, e.g. 325.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $strengthValue;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -145,7 +104,6 @@ class DrugStrength extends MedicalIntangible
         'strengthUnit',
         'strengthValue'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -158,7 +116,6 @@ class DrugStrength extends MedicalIntangible
         'strengthUnit' => ['Text'],
         'strengthValue' => ['Number']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -171,7 +128,6 @@ class DrugStrength extends MedicalIntangible
         'strengthUnit' => 'The units of an active ingredient\'s strength, e.g. mg.',
         'strengthValue' => 'The value of an active ingredient\'s strength, e.g. 325.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -179,7 +135,6 @@ class DrugStrength extends MedicalIntangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -188,13 +143,48 @@ class DrugStrength extends MedicalIntangible
     static protected $_googleRecommendedSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * An active ingredient, typically chemical compounds and/or biologic
+     * substances.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $activeIngredient;
+    /**
+     * The location in which the strength is available.
+     *
+     * @var AdministrativeArea [schema.org types: AdministrativeArea]
+     */
+    public $availableIn;
+    /**
+     * Recommended intake of this supplement for a given population as defined by
+     * a specific recommending authority.
+     *
+     * @var MaximumDoseSchedule [schema.org types: MaximumDoseSchedule]
+     */
+    public $maximumIntake;
+    /**
+     * The units of an active ingredient's strength, e.g. mg.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $strengthUnit;
+    /**
+     * The value of an active ingredient's strength, e.g. 325.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $strengthValue;
+
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -224,13 +214,13 @@ class DrugStrength extends MedicalIntangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['activeIngredient','availableIn','maximumIntake','strengthUnit','strengthValue'], 'validateJsonSchema'],
+            [['activeIngredient', 'availableIn', 'maximumIntake', 'strengthUnit', 'strengthValue'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

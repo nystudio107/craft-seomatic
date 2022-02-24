@@ -11,15 +11,16 @@
 
 namespace nystudio107\seomatic\models;
 
-use craft\helpers\DateTimeHelper;
-use nystudio107\seomatic\base\VarsModel;
-use nystudio107\seomatic\helpers\Json as JsonHelper;
-
 use Craft;
+use craft\helpers\DateTimeHelper;
 use craft\validators\ArrayValidator;
 use craft\validators\DateTimeValidator;
-
+use DateTime;
+use nystudio107\seomatic\base\VarsModel;
+use nystudio107\seomatic\helpers\Json as JsonHelper;
 use yii\web\ServerErrorHttpException;
+use function is_array;
+use function is_string;
 
 /**
  * @inheritdoc
@@ -37,6 +38,77 @@ class MetaSiteVars extends VarsModel
 
     // Static Methods
     // =========================================================================
+    /**
+     * @var string The name of the website
+     */
+    public $siteName = '';
+
+    // Public Properties
+    // =========================================================================
+    /**
+     * @var Entity
+     */
+    public $identity;
+    /**
+     * @var Entity
+     */
+    public $creator;
+    /**
+     * @var string The Twitter handle
+     */
+    public $twitterHandle = '';
+    /**
+     * @var string The Facebook profile ID
+     */
+    public $facebookProfileId = '';
+    /**
+     * @var string The Facebook app ID
+     */
+    public $facebookAppId = '';
+    /**
+     * @var string The Google Site Verification code
+     */
+    public $googleSiteVerification = '';
+    /**
+     * @var string The Bing Site Verification code
+     */
+    public $bingSiteVerification = '';
+    /**
+     * @var string The Pinterest Site Verification code
+     */
+    public $pinterestSiteVerification = '';
+    /**
+     * @var string The Facebook Site Verification code
+     */
+    public $facebookSiteVerification = '';
+    /**
+     * @var array Array of links for Same As... sites, indexed by the handle
+     */
+    public $sameAsLinks = [];
+    /**
+     * @var array Google Site Links search target
+     */
+    public $siteLinksSearchTarget = '';
+    /**
+     * @var string Google Site Links query input
+     */
+    public $siteLinksQueryInput = '';
+    /**
+     * @var string Default referrer tag setting
+     */
+    public $referrer = 'no-referrer-when-downgrade';
+    /**
+     * @var array Array of additional custom sitemap URLs
+     */
+    public $additionalSitemapUrls = [];
+    /**
+     * @var DateTime
+     */
+    public $additionalSitemapUrlsDateUpdated;
+    /**
+     * @var array Array of additional sitemaps
+     */
+    public $additionalSitemaps = [];
 
     /**
      * @param array $config
@@ -51,101 +123,13 @@ class MetaSiteVars extends VarsModel
         return $model;
     }
 
-    // Public Properties
-    // =========================================================================
-
-    /**
-     * @var string The name of the website
-     */
-    public $siteName = '';
-
-    /**
-     * @var Entity
-     */
-    public $identity;
-
-    /**
-     * @var Entity
-     */
-    public $creator;
-
-    /**
-     * @var string The Twitter handle
-     */
-    public $twitterHandle = '';
-
-    /**
-     * @var string The Facebook profile ID
-     */
-    public $facebookProfileId = '';
-
-    /**
-     * @var string The Facebook app ID
-     */
-    public $facebookAppId = '';
-
-    /**
-     * @var string The Google Site Verification code
-     */
-    public $googleSiteVerification = '';
-
-    /**
-     * @var string The Bing Site Verification code
-     */
-    public $bingSiteVerification = '';
-
-    /**
-     * @var string The Pinterest Site Verification code
-     */
-    public $pinterestSiteVerification = '';
-
-    /**
-     * @var string The Facebook Site Verification code
-     */
-    public $facebookSiteVerification = '';
-
-    /**
-     * @var array Array of links for Same As... sites, indexed by the handle
-     */
-    public $sameAsLinks = [];
-
-    /**
-     * @var array Google Site Links search target
-     */
-    public $siteLinksSearchTarget = '';
-
-    /**
-     * @var string Google Site Links query input
-     */
-    public $siteLinksQueryInput = '';
-
-    /**
-     * @var string Default referrer tag setting
-     */
-    public $referrer = 'no-referrer-when-downgrade';
-
-    /**
-     * @var array Array of additional custom sitemap URLs
-     */
-    public $additionalSitemapUrls = [];
-
-    /**
-     * @var \DateTime
-     */
-    public $additionalSitemapUrlsDateUpdated;
-
-    /**
-     * @var array Array of additional sitemaps
-     */
-    public $additionalSitemaps = [];
-
     // Public Methods
     // =========================================================================
 
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
 
@@ -156,8 +140,9 @@ class MetaSiteVars extends VarsModel
             } catch (ServerErrorHttpException $e) {
                 $info = null;
             }
-            $siteName = Craft::$app->config->general->siteName;
-            if (\is_array($siteName)) {
+            $currentSite = Craft::$app->getSites()->getCurrentSite();
+            $siteName = Craft::t('site', $currentSite->getName());
+            if (is_array($siteName)) {
                 $siteName = reset($siteName);
             }
             $this->siteName = $siteName ?? $info->name;
@@ -225,7 +210,7 @@ class MetaSiteVars extends VarsModel
         // Decode any JSON data
         $properties = $this->getAttributes();
         foreach ($properties as $property => $value) {
-            if (!empty($value) && \is_string($value)) {
+            if (!empty($value) && is_string($value)) {
                 $this->$property = JsonHelper::decodeIfJson($value);
             }
         }
@@ -246,11 +231,11 @@ class MetaSiteVars extends VarsModel
             $this->facebookAppId = (string)$this->facebookAppId;
         }
         // Identity
-        if ($this->identity !== null && \is_array($this->identity)) {
+        if ($this->identity !== null && is_array($this->identity)) {
             $this->identity = new Entity($this->identity);
         }
         // Creator
-        if ($this->creator !== null && \is_array($this->creator)) {
+        if ($this->creator !== null && is_array($this->creator)) {
             $this->creator = new Entity($this->creator);
         }
     }

@@ -94,41 +94,6 @@ class PhysicalActivity extends LifestyleModification
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The anatomy of the underlying organ system or structures associated with
-     * this entity.
-     *
-     * @var mixed|AnatomicalStructure|AnatomicalSystem|SuperficialAnatomy [schema.org types: AnatomicalStructure, AnatomicalSystem, SuperficialAnatomy]
-     */
-    public $associatedAnatomy;
-
-    /**
-     * A category for the item. Greater signs or slashes can be used to informally
-     * indicate a category hierarchy.
-     *
-     * @var mixed|PhysicalActivityCategory|string|Thing [schema.org types: PhysicalActivityCategory, Text, Thing]
-     */
-    public $category;
-
-    /**
-     * The characteristics of associated patients, such as age, gender, race etc.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $epidemiology;
-
-    /**
-     * Changes in the normal mechanical, physical, and biochemical functions that
-     * are associated with this activity or condition.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $pathophysiology;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -140,19 +105,17 @@ class PhysicalActivity extends LifestyleModification
         'epidemiology',
         'pathophysiology'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'associatedAnatomy' => ['AnatomicalStructure','AnatomicalSystem','SuperficialAnatomy'],
-        'category' => ['PhysicalActivityCategory','Text','Thing'],
+        'associatedAnatomy' => ['AnatomicalStructure', 'AnatomicalSystem', 'SuperficialAnatomy'],
+        'category' => ['PhysicalActivityCategory', 'Text', 'Thing'],
         'epidemiology' => ['Text'],
         'pathophysiology' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -164,7 +127,6 @@ class PhysicalActivity extends LifestyleModification
         'epidemiology' => 'The characteristics of associated patients, such as age, gender, race etc.',
         'pathophysiology' => 'Changes in the normal mechanical, physical, and biochemical functions that are associated with this activity or condition.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -173,6 +135,8 @@ class PhysicalActivity extends LifestyleModification
     static protected $_googleRequiredSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -180,14 +144,41 @@ class PhysicalActivity extends LifestyleModification
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The anatomy of the underlying organ system or structures associated with
+     * this entity.
+     *
+     * @var mixed|AnatomicalStructure|AnatomicalSystem|SuperficialAnatomy [schema.org types: AnatomicalStructure, AnatomicalSystem, SuperficialAnatomy]
+     */
+    public $associatedAnatomy;
+    /**
+     * A category for the item. Greater signs or slashes can be used to informally
+     * indicate a category hierarchy.
+     *
+     * @var mixed|PhysicalActivityCategory|string|Thing [schema.org types: PhysicalActivityCategory, Text, Thing]
+     */
+    public $category;
+    /**
+     * The characteristics of associated patients, such as age, gender, race etc.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $epidemiology;
+    /**
+     * Changes in the normal mechanical, physical, and biochemical functions that
+     * are associated with this activity or condition.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $pathophysiology;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -217,13 +208,13 @@ class PhysicalActivity extends LifestyleModification
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['associatedAnatomy','category','epidemiology','pathophysiology'], 'validateJsonSchema'],
+            [['associatedAnatomy', 'category', 'epidemiology', 'pathophysiology'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

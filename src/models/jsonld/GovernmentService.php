@@ -92,19 +92,6 @@ class GovernmentService extends Service
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The operating organization, if different from the provider. This enables
-     * the representation of services that are provided by an organization, but
-     * operated by another organization like a subcontractor.
-     *
-     * @var Organization [schema.org types: Organization]
-     */
-    public $serviceOperator;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -114,6 +101,8 @@ class GovernmentService extends Service
         'serviceOperator'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -122,7 +111,6 @@ class GovernmentService extends Service
     static protected $_schemaPropertyExpectedTypes = [
         'serviceOperator' => ['Organization']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -131,7 +119,6 @@ class GovernmentService extends Service
     static protected $_schemaPropertyDescriptions = [
         'serviceOperator' => 'The operating organization, if different from the provider. This enables the representation of services that are provided by an organization, but operated by another organization like a subcontractor.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -139,7 +126,6 @@ class GovernmentService extends Service
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -147,14 +133,22 @@ class GovernmentService extends Service
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The operating organization, if different from the provider. This enables
+     * the representation of services that are provided by an organization, but
+     * operated by another organization like a subcontractor.
+     *
+     * @var Organization [schema.org types: Organization]
+     */
+    public $serviceOperator;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -184,9 +178,9 @@ class GovernmentService extends Service
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

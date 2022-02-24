@@ -92,21 +92,65 @@ class PhysicalTherapy extends MedicalTherapy
 
     // Public Properties
     // =========================================================================
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'contraindication',
+        'duplicateTherapy',
+        'seriousAdverseOutcome'
+    ];
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'contraindication' => ['MedicalContraindication', 'Text'],
+        'duplicateTherapy' => ['MedicalTherapy'],
+        'seriousAdverseOutcome' => ['MedicalEntity']
+    ];
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'contraindication' => 'A contraindication for this therapy.',
+        'duplicateTherapy' => 'A therapy that duplicates or overlaps this one.',
+        'seriousAdverseOutcome' => 'A possible serious complication and/or serious side effect of this therapy. Serious adverse outcomes include those that are life-threatening; result in death, disability, or permanent damage; require hospitalization or prolong existing hospitalization; cause congenital anomalies or birth defects; or jeopardize the patient and may require medical or surgical intervention to prevent one of the outcomes in this definition.'
+    ];
 
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
     /**
      * A contraindication for this therapy.
      *
      * @var mixed|MedicalContraindication|string [schema.org types: MedicalContraindication, Text]
      */
     public $contraindication;
-
     /**
      * A therapy that duplicates or overlaps this one.
      *
      * @var MedicalTherapy [schema.org types: MedicalTherapy]
      */
     public $duplicateTherapy;
-
     /**
      * A possible serious complication and/or serious side effect of this therapy.
      * Serious adverse outcomes include those that are life-threatening; result in
@@ -119,65 +163,13 @@ class PhysicalTherapy extends MedicalTherapy
      */
     public $seriousAdverseOutcome;
 
-    // Static Protected Properties
-    // =========================================================================
-
-    /**
-     * The Schema.org Property Names
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyNames = [
-        'contraindication',
-        'duplicateTherapy',
-        'seriousAdverseOutcome'
-    ];
-
-    /**
-     * The Schema.org Property Expected Types
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyExpectedTypes = [
-        'contraindication' => ['MedicalContraindication','Text'],
-        'duplicateTherapy' => ['MedicalTherapy'],
-        'seriousAdverseOutcome' => ['MedicalEntity']
-    ];
-
-    /**
-     * The Schema.org Property Descriptions
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyDescriptions = [
-        'contraindication' => 'A contraindication for this therapy.',
-        'duplicateTherapy' => 'A therapy that duplicates or overlaps this one.',
-        'seriousAdverseOutcome' => 'A possible serious complication and/or serious side effect of this therapy. Serious adverse outcomes include those that are life-threatening; result in death, disability, or permanent damage; require hospitalization or prolong existing hospitalization; cause congenital anomalies or birth defects; or jeopardize the patient and may require medical or surgical intervention to prevent one of the outcomes in this definition.'
-    ];
-
-    /**
-     * The Schema.org Google Required Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRequiredSchema = [
-    ];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRecommendedSchema = [
-    ];
-
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -207,13 +199,13 @@ class PhysicalTherapy extends MedicalTherapy
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['contraindication','duplicateTherapy','seriousAdverseOutcome'], 'validateJsonSchema'],
+            [['contraindication', 'duplicateTherapy', 'seriousAdverseOutcome'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

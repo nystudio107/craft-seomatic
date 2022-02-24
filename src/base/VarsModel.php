@@ -11,9 +11,9 @@
 
 namespace nystudio107\seomatic\base;
 
-use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
-
 use Craft;
+use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
+use function is_string;
 
 /**
  * @author    nystudio107
@@ -25,19 +25,20 @@ abstract class VarsModel extends FluentModel
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
         // For all the emojis
         $attributes = $this->attributes();
         if ($attributes !== null) {
             foreach ($attributes as $attribute) {
-                if (\is_string($this->$attribute)) {
+                if (is_string($this->$attribute)) {
                     $this->$attribute = html_entity_decode($this->$attribute, ENT_NOQUOTES, 'UTF-8');
                 }
             }
         }
     }
+
     /**
      * Return the parsed value of a single property
      *
@@ -55,6 +56,7 @@ abstract class VarsModel extends FluentModel
 
         return $result;
     }
+
     /**
      * Parse the model properties
      */

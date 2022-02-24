@@ -92,38 +92,6 @@ class APIReference extends TechArticle
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Associated product/technology version. e.g., .NET Framework 4.5.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $assemblyVersion;
-
-    /**
-     * Library file name e.g., mscorlib.dll, system.web.dll. Supersedes assembly.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $executableLibraryName;
-
-    /**
-     * Indicates whether API is managed or unmanaged.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $programmingModel;
-
-    /**
-     * Type of app development: phone, Metro style, desktop, XBox, etc.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $targetPlatform;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -135,7 +103,6 @@ class APIReference extends TechArticle
         'programmingModel',
         'targetPlatform'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -147,7 +114,6 @@ class APIReference extends TechArticle
         'programmingModel' => ['Text'],
         'targetPlatform' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -159,7 +125,6 @@ class APIReference extends TechArticle
         'programmingModel' => 'Indicates whether API is managed or unmanaged.',
         'targetPlatform' => 'Type of app development: phone, Metro style, desktop, XBox, etc.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -168,6 +133,8 @@ class APIReference extends TechArticle
     static protected $_googleRequiredSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -175,14 +142,38 @@ class APIReference extends TechArticle
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Associated product/technology version. e.g., .NET Framework 4.5.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $assemblyVersion;
+    /**
+     * Library file name e.g., mscorlib.dll, system.web.dll. Supersedes assembly.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $executableLibraryName;
+    /**
+     * Indicates whether API is managed or unmanaged.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $programmingModel;
+    /**
+     * Type of app development: phone, Metro style, desktop, XBox, etc.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $targetPlatform;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -212,13 +203,13 @@ class APIReference extends TechArticle
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['assemblyVersion','executableLibraryName','programmingModel','targetPlatform'], 'validateJsonSchema'],
+            [['assemblyVersion', 'executableLibraryName', 'programmingModel', 'targetPlatform'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -93,41 +93,6 @@ class MedicalGuidelineContraindication extends MedicalGuideline
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Strength of evidence of the data used to formulate the guideline
-     * (enumerated).
-     *
-     * @var MedicalEvidenceLevel [schema.org types: MedicalEvidenceLevel]
-     */
-    public $evidenceLevel;
-
-    /**
-     * Source of the data used to formulate the guidance, e.g. RCT, consensus
-     * opinion, etc.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $evidenceOrigin;
-
-    /**
-     * Date on which this guideline's recommendation was made.
-     *
-     * @var Date [schema.org types: Date]
-     */
-    public $guidelineDate;
-
-    /**
-     * The medical conditions, treatments, etc. that are the subject of the
-     * guideline.
-     *
-     * @var MedicalEntity [schema.org types: MedicalEntity]
-     */
-    public $guidelineSubject;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -139,7 +104,6 @@ class MedicalGuidelineContraindication extends MedicalGuideline
         'guidelineDate',
         'guidelineSubject'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -151,7 +115,6 @@ class MedicalGuidelineContraindication extends MedicalGuideline
         'guidelineDate' => ['Date'],
         'guidelineSubject' => ['MedicalEntity']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -163,7 +126,6 @@ class MedicalGuidelineContraindication extends MedicalGuideline
         'guidelineDate' => 'Date on which this guideline\'s recommendation was made.',
         'guidelineSubject' => 'The medical conditions, treatments, etc. that are the subject of the guideline.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -172,6 +134,8 @@ class MedicalGuidelineContraindication extends MedicalGuideline
     static protected $_googleRequiredSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -179,14 +143,41 @@ class MedicalGuidelineContraindication extends MedicalGuideline
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Strength of evidence of the data used to formulate the guideline
+     * (enumerated).
+     *
+     * @var MedicalEvidenceLevel [schema.org types: MedicalEvidenceLevel]
+     */
+    public $evidenceLevel;
+    /**
+     * Source of the data used to formulate the guidance, e.g. RCT, consensus
+     * opinion, etc.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $evidenceOrigin;
+    /**
+     * Date on which this guideline's recommendation was made.
+     *
+     * @var Date [schema.org types: Date]
+     */
+    public $guidelineDate;
+    /**
+     * The medical conditions, treatments, etc. that are the subject of the
+     * guideline.
+     *
+     * @var MedicalEntity [schema.org types: MedicalEntity]
+     */
+    public $guidelineSubject;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -216,13 +207,13 @@ class MedicalGuidelineContraindication extends MedicalGuideline
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['evidenceLevel','evidenceOrigin','guidelineDate','guidelineSubject'], 'validateJsonSchema'],
+            [['evidenceLevel', 'evidenceOrigin', 'guidelineDate', 'guidelineSubject'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

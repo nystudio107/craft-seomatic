@@ -91,39 +91,6 @@ class ListItem extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * An entity represented by an entry in a list or data feed (e.g. an 'artist'
-     * in a list of 'artists')’.
-     *
-     * @var Thing [schema.org types: Thing]
-     */
-    public $item;
-
-    /**
-     * A link to the ListItem that follows the current one.
-     *
-     * @var ListItem [schema.org types: ListItem]
-     */
-    public $nextItem;
-
-    /**
-     * The position of an item in a series or sequence of items.
-     *
-     * @var mixed|int|string [schema.org types: Integer, Text]
-     */
-    public $position;
-
-    /**
-     * A link to the ListItem that preceeds the current one.
-     *
-     * @var ListItem [schema.org types: ListItem]
-     */
-    public $previousItem;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -135,7 +102,6 @@ class ListItem extends Intangible
         'position',
         'previousItem'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -144,10 +110,9 @@ class ListItem extends Intangible
     static protected $_schemaPropertyExpectedTypes = [
         'item' => ['Thing'],
         'nextItem' => ['ListItem'],
-        'position' => ['Integer','Text'],
+        'position' => ['Integer', 'Text'],
         'previousItem' => ['ListItem']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -159,7 +124,6 @@ class ListItem extends Intangible
         'position' => 'The position of an item in a series or sequence of items.',
         'previousItem' => 'A link to the ListItem that preceeds the current one.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -168,6 +132,8 @@ class ListItem extends Intangible
     static protected $_googleRequiredSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -175,14 +141,39 @@ class ListItem extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * An entity represented by an entry in a list or data feed (e.g. an 'artist'
+     * in a list of 'artists')’.
+     *
+     * @var Thing [schema.org types: Thing]
+     */
+    public $item;
+    /**
+     * A link to the ListItem that follows the current one.
+     *
+     * @var ListItem [schema.org types: ListItem]
+     */
+    public $nextItem;
+    /**
+     * The position of an item in a series or sequence of items.
+     *
+     * @var mixed|int|string [schema.org types: Integer, Text]
+     */
+    public $position;
+    /**
+     * A link to the ListItem that preceeds the current one.
+     *
+     * @var ListItem [schema.org types: ListItem]
+     */
+    public $previousItem;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -212,13 +203,13 @@ class ListItem extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['item','nextItem','position','previousItem'], 'validateJsonSchema'],
+            [['item', 'nextItem', 'position', 'previousItem'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

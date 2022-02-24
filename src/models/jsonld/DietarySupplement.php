@@ -94,96 +94,6 @@ class DietarySupplement extends Substance
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * An active ingredient, typically chemical compounds and/or biologic
-     * substances.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $activeIngredient;
-
-    /**
-     * True if this item's name is a proprietary/brand name (vs. generic name).
-     *
-     * @var bool [schema.org types: Boolean]
-     */
-    public $isProprietary;
-
-    /**
-     * The drug or supplement's legal status, including any controlled substance
-     * schedules that apply.
-     *
-     * @var mixed|DrugLegalStatus|MedicalEnumeration|string [schema.org types: DrugLegalStatus, MedicalEnumeration, Text]
-     */
-    public $legalStatus;
-
-    /**
-     * The manufacturer of the product.
-     *
-     * @var Organization [schema.org types: Organization]
-     */
-    public $manufacturer;
-
-    /**
-     * Recommended intake of this supplement for a given population as defined by
-     * a specific recommending authority.
-     *
-     * @var MaximumDoseSchedule [schema.org types: MaximumDoseSchedule]
-     */
-    public $maximumIntake;
-
-    /**
-     * The specific biochemical interaction through which this drug or supplement
-     * produces its pharmacological effect.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $mechanismOfAction;
-
-    /**
-     * The generic name of this drug or supplement.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $nonProprietaryName;
-
-    /**
-     * Proprietary name given to the diet plan, typically by its originator or
-     * creator.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $proprietaryName;
-
-    /**
-     * Recommended intake of this supplement for a given population as defined by
-     * a specific recommending authority.
-     *
-     * @var RecommendedDoseSchedule [schema.org types: RecommendedDoseSchedule]
-     */
-    public $recommendedIntake;
-
-    /**
-     * Any potential safety concern associated with the supplement. May include
-     * interactions with other drugs and foods, pregnancy, breastfeeding, known
-     * adverse reactions, and documented efficacy of the supplement.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $safetyConsideration;
-
-    /**
-     * Characteristics of the population for which this is intended, or which
-     * typically uses it, e.g. 'adults'.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $targetPopulation;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -202,7 +112,6 @@ class DietarySupplement extends Substance
         'safetyConsideration',
         'targetPopulation'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -211,7 +120,7 @@ class DietarySupplement extends Substance
     static protected $_schemaPropertyExpectedTypes = [
         'activeIngredient' => ['Text'],
         'isProprietary' => ['Boolean'],
-        'legalStatus' => ['DrugLegalStatus','MedicalEnumeration','Text'],
+        'legalStatus' => ['DrugLegalStatus', 'MedicalEnumeration', 'Text'],
         'manufacturer' => ['Organization'],
         'maximumIntake' => ['MaximumDoseSchedule'],
         'mechanismOfAction' => ['Text'],
@@ -221,7 +130,6 @@ class DietarySupplement extends Substance
         'safetyConsideration' => ['Text'],
         'targetPopulation' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -240,7 +148,6 @@ class DietarySupplement extends Substance
         'safetyConsideration' => 'Any potential safety concern associated with the supplement. May include interactions with other drugs and foods, pregnancy, breastfeeding, known adverse reactions, and documented efficacy of the supplement.',
         'targetPopulation' => 'Characteristics of the population for which this is intended, or which typically uses it, e.g. \'adults\'.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -248,7 +155,6 @@ class DietarySupplement extends Substance
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -256,14 +162,92 @@ class DietarySupplement extends Substance
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * An active ingredient, typically chemical compounds and/or biologic
+     * substances.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $activeIngredient;
+    /**
+     * True if this item's name is a proprietary/brand name (vs. generic name).
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $isProprietary;
+    /**
+     * The drug or supplement's legal status, including any controlled substance
+     * schedules that apply.
+     *
+     * @var mixed|DrugLegalStatus|MedicalEnumeration|string [schema.org types: DrugLegalStatus, MedicalEnumeration, Text]
+     */
+    public $legalStatus;
+    /**
+     * The manufacturer of the product.
+     *
+     * @var Organization [schema.org types: Organization]
+     */
+    public $manufacturer;
+    /**
+     * Recommended intake of this supplement for a given population as defined by
+     * a specific recommending authority.
+     *
+     * @var MaximumDoseSchedule [schema.org types: MaximumDoseSchedule]
+     */
+    public $maximumIntake;
+    /**
+     * The specific biochemical interaction through which this drug or supplement
+     * produces its pharmacological effect.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $mechanismOfAction;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The generic name of this drug or supplement.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $nonProprietaryName;
+    /**
+     * Proprietary name given to the diet plan, typically by its originator or
+     * creator.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $proprietaryName;
+    /**
+     * Recommended intake of this supplement for a given population as defined by
+     * a specific recommending authority.
+     *
+     * @var RecommendedDoseSchedule [schema.org types: RecommendedDoseSchedule]
+     */
+    public $recommendedIntake;
+    /**
+     * Any potential safety concern associated with the supplement. May include
+     * interactions with other drugs and foods, pregnancy, breastfeeding, known
+     * adverse reactions, and documented efficacy of the supplement.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $safetyConsideration;
+    /**
+     * Characteristics of the population for which this is intended, or which
+     * typically uses it, e.g. 'adults'.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $targetPopulation;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -293,13 +277,13 @@ class DietarySupplement extends Substance
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['activeIngredient','isProprietary','legalStatus','manufacturer','maximumIntake','mechanismOfAction','nonProprietaryName','proprietaryName','recommendedIntake','safetyConsideration','targetPopulation'], 'validateJsonSchema'],
+            [['activeIngredient', 'isProprietary', 'legalStatus', 'manufacturer', 'maximumIntake', 'mechanismOfAction', 'nonProprietaryName', 'proprietaryName', 'recommendedIntake', 'safetyConsideration', 'targetPopulation'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

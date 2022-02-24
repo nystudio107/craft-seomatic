@@ -91,18 +91,6 @@ class AppendAction extends InsertAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A sub property of location. The final location of the object or the agent
-     * after the action.
-     *
-     * @var Place [schema.org types: Place]
-     */
-    public $toLocation;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -112,6 +100,8 @@ class AppendAction extends InsertAction
         'toLocation'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -120,7 +110,6 @@ class AppendAction extends InsertAction
     static protected $_schemaPropertyExpectedTypes = [
         'toLocation' => ['Place']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -129,7 +118,6 @@ class AppendAction extends InsertAction
     static protected $_schemaPropertyDescriptions = [
         'toLocation' => 'A sub property of location. The final location of the object or the agent after the action.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -137,7 +125,6 @@ class AppendAction extends InsertAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -145,14 +132,21 @@ class AppendAction extends InsertAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A sub property of location. The final location of the object or the agent
+     * after the action.
+     *
+     * @var Place [schema.org types: Place]
+     */
+    public $toLocation;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -182,9 +176,9 @@ class AppendAction extends InsertAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

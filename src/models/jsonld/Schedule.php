@@ -98,96 +98,6 @@ class Schedule extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Defines the day(s) of the week on which a recurring Event takes place. May
-     * be specified using either DayOfWeek, or alternatively Text conforming to
-     * iCal's syntax for byDay recurrence rules
-     *
-     * @var mixed|DayOfWeek|string [schema.org types: DayOfWeek, Text]
-     */
-    public $byDay;
-
-    /**
-     * Defines the month(s) of the year on which a recurring Event takes place.
-     * Specified as an Integer between 1-12. January is 1.
-     *
-     * @var int [schema.org types: Integer]
-     */
-    public $byMonth;
-
-    /**
-     * Defines the day(s) of the month on which a recurring Event takes place.
-     * Specified as an Integer between 1-31.
-     *
-     * @var int [schema.org types: Integer]
-     */
-    public $byMonthDay;
-
-    /**
-     * The duration of the item (movie, audio recording, event, etc.) in ISO 8601
-     * date format.
-     *
-     * @var Duration [schema.org types: Duration]
-     */
-    public $duration;
-
-    /**
-     * The end date and time of the item (in ISO 8601 date format).
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $endDate;
-
-    /**
-     * Defines a Date or DateTime during which a scheduled Event will not take
-     * place. The property allows exceptions to a Schedule to be specified. If an
-     * exception is specified as a DateTime then only the event that would have
-     * started at that specific date and time should be excluded from the
-     * schedule. If an exception is specified as a Date then any event that is
-     * scheduled for that 24 hour period should be excluded from the schedule.
-     * This allows a whole day to be excluded from the schedule without having to
-     * itemise every scheduled event.
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $exceptDate;
-
-    /**
-     * Defines the number of times a recurring Event will take place
-     *
-     * @var int [schema.org types: Integer]
-     */
-    public $repeatCount;
-
-    /**
-     * Defines the frequency at which Events will occur according to a schedule
-     * Schedule. The intervals between events should be defined as a Duration of
-     * time.
-     *
-     * @var mixed|Duration|string [schema.org types: Duration, Text]
-     */
-    public $repeatFrequency;
-
-    /**
-     * Indicates the timezone for which the time(s) indicated in the Schedule are
-     * given. The value provided should be among those listed in the IANA Time
-     * Zone Database.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $scheduleTimezone;
-
-    /**
-     * The start date and time of the item (in ISO 8601 date format).
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $startDate;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -205,25 +115,23 @@ class Schedule extends Intangible
         'scheduleTimezone',
         'startDate'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'byDay' => ['DayOfWeek','Text'],
+        'byDay' => ['DayOfWeek', 'Text'],
         'byMonth' => ['Integer'],
         'byMonthDay' => ['Integer'],
         'duration' => ['Duration'],
-        'endDate' => ['Date','DateTime'],
-        'exceptDate' => ['Date','DateTime'],
+        'endDate' => ['Date', 'DateTime'],
+        'exceptDate' => ['Date', 'DateTime'],
         'repeatCount' => ['Integer'],
-        'repeatFrequency' => ['Duration','Text'],
+        'repeatFrequency' => ['Duration', 'Text'],
         'scheduleTimezone' => ['Text'],
-        'startDate' => ['Date','DateTime']
+        'startDate' => ['Date', 'DateTime']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -241,7 +149,6 @@ class Schedule extends Intangible
         'scheduleTimezone' => 'Indicates the timezone for which the time(s) indicated in the Schedule are given. The value provided should be among those listed in the IANA Time Zone Database.',
         'startDate' => 'The start date and time of the item (in ISO 8601 date format).'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -249,7 +156,6 @@ class Schedule extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -257,14 +163,93 @@ class Schedule extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Defines the day(s) of the week on which a recurring Event takes place. May
+     * be specified using either DayOfWeek, or alternatively Text conforming to
+     * iCal's syntax for byDay recurrence rules
+     *
+     * @var mixed|DayOfWeek|string [schema.org types: DayOfWeek, Text]
+     */
+    public $byDay;
+    /**
+     * Defines the month(s) of the year on which a recurring Event takes place.
+     * Specified as an Integer between 1-12. January is 1.
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $byMonth;
+    /**
+     * Defines the day(s) of the month on which a recurring Event takes place.
+     * Specified as an Integer between 1-31.
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $byMonthDay;
+    /**
+     * The duration of the item (movie, audio recording, event, etc.) in ISO 8601
+     * date format.
+     *
+     * @var Duration [schema.org types: Duration]
+     */
+    public $duration;
+    /**
+     * The end date and time of the item (in ISO 8601 date format).
+     *
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     */
+    public $endDate;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * Defines a Date or DateTime during which a scheduled Event will not take
+     * place. The property allows exceptions to a Schedule to be specified. If an
+     * exception is specified as a DateTime then only the event that would have
+     * started at that specific date and time should be excluded from the
+     * schedule. If an exception is specified as a Date then any event that is
+     * scheduled for that 24 hour period should be excluded from the schedule.
+     * This allows a whole day to be excluded from the schedule without having to
+     * itemise every scheduled event.
+     *
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     */
+    public $exceptDate;
+    /**
+     * Defines the number of times a recurring Event will take place
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $repeatCount;
+    /**
+     * Defines the frequency at which Events will occur according to a schedule
+     * Schedule. The intervals between events should be defined as a Duration of
+     * time.
+     *
+     * @var mixed|Duration|string [schema.org types: Duration, Text]
+     */
+    public $repeatFrequency;
+    /**
+     * Indicates the timezone for which the time(s) indicated in the Schedule are
+     * given. The value provided should be among those listed in the IANA Time
+     * Zone Database.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $scheduleTimezone;
+    /**
+     * The start date and time of the item (in ISO 8601 date format).
+     *
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     */
+    public $startDate;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -294,13 +279,13 @@ class Schedule extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['byDay','byMonth','byMonthDay','duration','endDate','exceptDate','repeatCount','repeatFrequency','scheduleTimezone','startDate'], 'validateJsonSchema'],
+            [['byDay', 'byMonth', 'byMonthDay', 'duration', 'endDate', 'exceptDate', 'repeatCount', 'repeatFrequency', 'scheduleTimezone', 'startDate'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

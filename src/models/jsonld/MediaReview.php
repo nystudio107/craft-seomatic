@@ -96,18 +96,6 @@ class MediaReview extends Review
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Indicates a MediaManipulationRatingEnumeration classification of a media
-     * object (in the context of how it was published or shared).
-     *
-     * @var MediaManipulationRatingEnumeration [schema.org types: MediaManipulationRatingEnumeration]
-     */
-    public $mediaAuthenticityCategory;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -117,6 +105,8 @@ class MediaReview extends Review
         'mediaAuthenticityCategory'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -125,7 +115,6 @@ class MediaReview extends Review
     static protected $_schemaPropertyExpectedTypes = [
         'mediaAuthenticityCategory' => ['MediaManipulationRatingEnumeration']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -134,7 +123,6 @@ class MediaReview extends Review
     static protected $_schemaPropertyDescriptions = [
         'mediaAuthenticityCategory' => 'Indicates a MediaManipulationRatingEnumeration classification of a media object (in the context of how it was published or shared).'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -142,7 +130,6 @@ class MediaReview extends Review
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -150,14 +137,21 @@ class MediaReview extends Review
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Indicates a MediaManipulationRatingEnumeration classification of a media
+     * object (in the context of how it was published or shared).
+     *
+     * @var MediaManipulationRatingEnumeration [schema.org types: MediaManipulationRatingEnumeration]
+     */
+    public $mediaAuthenticityCategory;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -187,9 +181,9 @@ class MediaReview extends Review
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

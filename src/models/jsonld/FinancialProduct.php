@@ -94,36 +94,6 @@ class FinancialProduct extends Service
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The annual rate that is charged for borrowing (or made by investing),
-     * expressed as a single percentage number that represents the actual yearly
-     * cost of funds over the term of a loan. This includes any fees or additional
-     * costs associated with the transaction.
-     *
-     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
-     */
-    public $annualPercentageRate;
-
-    /**
-     * Description of fees, commissions, and other terms applied either to a class
-     * of financial product, or by a financial service organization.
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $feesAndCommissionsSpecification;
-
-    /**
-     * The interest rate, charged or paid, applicable to the financial product.
-     * Note: This is different from the calculated annualPercentageRate.
-     *
-     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
-     */
-    public $interestRate;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -134,18 +104,16 @@ class FinancialProduct extends Service
         'feesAndCommissionsSpecification',
         'interestRate'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'annualPercentageRate' => ['Number','QuantitativeValue'],
-        'feesAndCommissionsSpecification' => ['Text','URL'],
-        'interestRate' => ['Number','QuantitativeValue']
+        'annualPercentageRate' => ['Number', 'QuantitativeValue'],
+        'feesAndCommissionsSpecification' => ['Text', 'URL'],
+        'interestRate' => ['Number', 'QuantitativeValue']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -157,6 +125,8 @@ class FinancialProduct extends Service
         'interestRate' => 'The interest rate, charged or paid, applicable to the financial product. Note: This is different from the calculated annualPercentageRate.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -164,7 +134,6 @@ class FinancialProduct extends Service
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -172,14 +141,37 @@ class FinancialProduct extends Service
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The annual rate that is charged for borrowing (or made by investing),
+     * expressed as a single percentage number that represents the actual yearly
+     * cost of funds over the term of a loan. This includes any fees or additional
+     * costs associated with the transaction.
+     *
+     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
+     */
+    public $annualPercentageRate;
+    /**
+     * Description of fees, commissions, and other terms applied either to a class
+     * of financial product, or by a financial service organization.
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $feesAndCommissionsSpecification;
+    /**
+     * The interest rate, charged or paid, applicable to the financial product.
+     * Note: This is different from the calculated annualPercentageRate.
+     *
+     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
+     */
+    public $interestRate;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -209,13 +201,13 @@ class FinancialProduct extends Service
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['annualPercentageRate','feesAndCommissionsSpecification','interestRate'], 'validateJsonSchema'],
+            [['annualPercentageRate', 'feesAndCommissionsSpecification', 'interestRate'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

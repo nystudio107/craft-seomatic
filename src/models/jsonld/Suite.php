@@ -96,41 +96,6 @@ class Suite extends Accommodation
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The type of bed or beds included in the accommodation. For the single case
-     * of just one bed of a certain type, you use bed directly with a text. If you
-     * want to indicate the quantity of a certain kind of bed, use an instance of
-     * BedDetails. For more detailed information, use the amenityFeature property.
-     *
-     * @var mixed|BedDetails|BedType|string [schema.org types: BedDetails, BedType, Text]
-     */
-    public $bed;
-
-    /**
-     * The number of rooms (excluding bathrooms and closets) of the accommodation
-     * or lodging business. Typical unit code(s): ROM for room or C62 for no unit.
-     * The type of room can be put in the unitText property of the
-     * QuantitativeValue.
-     *
-     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
-     */
-    public $numberOfRooms;
-
-    /**
-     * The allowed total occupancy for the accommodation in persons (including
-     * infants etc). For individual accommodations, this is not necessarily the
-     * legal maximum but defines the permitted usage as per the contractual
-     * agreement (e.g. a double room used by a single person). Typical unit
-     * code(s): C62 for person
-     *
-     * @var QuantitativeValue [schema.org types: QuantitativeValue]
-     */
-    public $occupancy;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -141,18 +106,16 @@ class Suite extends Accommodation
         'numberOfRooms',
         'occupancy'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'bed' => ['BedDetails','BedType','Text'],
-        'numberOfRooms' => ['Number','QuantitativeValue'],
+        'bed' => ['BedDetails', 'BedType', 'Text'],
+        'numberOfRooms' => ['Number', 'QuantitativeValue'],
         'occupancy' => ['QuantitativeValue']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -164,6 +127,8 @@ class Suite extends Accommodation
         'occupancy' => 'The allowed total occupancy for the accommodation in persons (including infants etc). For individual accommodations, this is not necessarily the legal maximum but defines the permitted usage as per the contractual agreement (e.g. a double room used by a single person). Typical unit code(s): C62 for person'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -171,7 +136,6 @@ class Suite extends Accommodation
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -179,14 +143,42 @@ class Suite extends Accommodation
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The type of bed or beds included in the accommodation. For the single case
+     * of just one bed of a certain type, you use bed directly with a text. If you
+     * want to indicate the quantity of a certain kind of bed, use an instance of
+     * BedDetails. For more detailed information, use the amenityFeature property.
+     *
+     * @var mixed|BedDetails|BedType|string [schema.org types: BedDetails, BedType, Text]
+     */
+    public $bed;
+    /**
+     * The number of rooms (excluding bathrooms and closets) of the accommodation
+     * or lodging business. Typical unit code(s): ROM for room or C62 for no unit.
+     * The type of room can be put in the unitText property of the
+     * QuantitativeValue.
+     *
+     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
+     */
+    public $numberOfRooms;
+    /**
+     * The allowed total occupancy for the accommodation in persons (including
+     * infants etc). For individual accommodations, this is not necessarily the
+     * legal maximum but defines the permitted usage as per the contractual
+     * agreement (e.g. a double room used by a single person). Typical unit
+     * code(s): C62 for person
+     *
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
+     */
+    public $occupancy;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -216,13 +208,13 @@ class Suite extends Accommodation
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['bed','numberOfRooms','occupancy'], 'validateJsonSchema'],
+            [['bed', 'numberOfRooms', 'occupancy'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -93,39 +93,6 @@ class CourseInstance extends Event
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The medium or means of delivery of the course instance or the mode of
-     * study, either as a text label (e.g. "online", "onsite" or "blended";
-     * "synchronous" or "asynchronous"; "full-time" or "part-time") or as a URL
-     * reference to a term from a controlled vocabulary (e.g.
-     * https://ceds.ed.gov/element/001311#Asynchronous ).
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $courseMode;
-
-    /**
-     * The amount of work expected of students taking the course, often provided
-     * as a figure per week or per month, and may be broken down by type. For
-     * example, "2 hours of lectures, 1 hour of lab work and 3 hours of
-     * independent study per week".
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $courseWorkload;
-
-    /**
-     * A person assigned to instruct or provide instructional assistance for the
-     * CourseInstance.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $instructor;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -136,18 +103,16 @@ class CourseInstance extends Event
         'courseWorkload',
         'instructor'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'courseMode' => ['Text','URL'],
+        'courseMode' => ['Text', 'URL'],
         'courseWorkload' => ['Text'],
         'instructor' => ['Person']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -159,6 +124,8 @@ class CourseInstance extends Event
         'instructor' => 'A person assigned to instruct or provide instructional assistance for the CourseInstance.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -166,7 +133,6 @@ class CourseInstance extends Event
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -174,14 +140,40 @@ class CourseInstance extends Event
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The medium or means of delivery of the course instance or the mode of
+     * study, either as a text label (e.g. "online", "onsite" or "blended";
+     * "synchronous" or "asynchronous"; "full-time" or "part-time") or as a URL
+     * reference to a term from a controlled vocabulary (e.g.
+     * https://ceds.ed.gov/element/001311#Asynchronous ).
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $courseMode;
+    /**
+     * The amount of work expected of students taking the course, often provided
+     * as a figure per week or per month, and may be broken down by type. For
+     * example, "2 hours of lectures, 1 hour of lab work and 3 hours of
+     * independent study per week".
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $courseWorkload;
+    /**
+     * A person assigned to instruct or provide instructional assistance for the
+     * CourseInstance.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $instructor;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -211,13 +203,13 @@ class CourseInstance extends Event
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['courseMode','courseWorkload','instructor'], 'validateJsonSchema'],
+            [['courseMode', 'courseWorkload', 'instructor'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

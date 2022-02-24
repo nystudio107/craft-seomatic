@@ -91,40 +91,6 @@ class BroadcastEvent extends PublicationEvent
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The event being broadcast such as a sporting event or awards ceremony.
-     *
-     * @var Event [schema.org types: Event]
-     */
-    public $broadcastOfEvent;
-
-    /**
-     * True is the broadcast is of a live event.
-     *
-     * @var bool [schema.org types: Boolean]
-     */
-    public $isLiveBroadcast;
-
-    /**
-     * Languages in which subtitles/captions are available, in IETF BCP 47
-     * standard format.
-     *
-     * @var mixed|Language|string [schema.org types: Language, Text]
-     */
-    public $subtitleLanguage;
-
-    /**
-     * The type of screening or video broadcast used (e.g. IMAX, 3D, SD, HD,
-     * etc.).
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $videoFormat;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -136,7 +102,6 @@ class BroadcastEvent extends PublicationEvent
         'subtitleLanguage',
         'videoFormat'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -145,10 +110,9 @@ class BroadcastEvent extends PublicationEvent
     static protected $_schemaPropertyExpectedTypes = [
         'broadcastOfEvent' => ['Event'],
         'isLiveBroadcast' => ['Boolean'],
-        'subtitleLanguage' => ['Language','Text'],
+        'subtitleLanguage' => ['Language', 'Text'],
         'videoFormat' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -160,7 +124,6 @@ class BroadcastEvent extends PublicationEvent
         'subtitleLanguage' => 'Languages in which subtitles/captions are available, in IETF BCP 47 standard format.',
         'videoFormat' => 'The type of screening or video broadcast used (e.g. IMAX, 3D, SD, HD, etc.).'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -169,6 +132,8 @@ class BroadcastEvent extends PublicationEvent
     static protected $_googleRequiredSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -176,14 +141,40 @@ class BroadcastEvent extends PublicationEvent
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The event being broadcast such as a sporting event or awards ceremony.
+     *
+     * @var Event [schema.org types: Event]
+     */
+    public $broadcastOfEvent;
+    /**
+     * True is the broadcast is of a live event.
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $isLiveBroadcast;
+    /**
+     * Languages in which subtitles/captions are available, in IETF BCP 47
+     * standard format.
+     *
+     * @var mixed|Language|string [schema.org types: Language, Text]
+     */
+    public $subtitleLanguage;
+    /**
+     * The type of screening or video broadcast used (e.g. IMAX, 3D, SD, HD,
+     * etc.).
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $videoFormat;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -213,13 +204,13 @@ class BroadcastEvent extends PublicationEvent
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['broadcastOfEvent','isLiveBroadcast','subtitleLanguage','videoFormat'], 'validateJsonSchema'],
+            [['broadcastOfEvent', 'isLiveBroadcast', 'subtitleLanguage', 'videoFormat'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -98,47 +98,6 @@ class Observation extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A marginOfError for an Observation.
-     *
-     * @var DateTime [schema.org types: DateTime]
-     */
-    public $marginOfError;
-
-    /**
-     * The measuredProperty of an Observation, either a schema.org property, a
-     * property from other RDF-compatible systems e.g. W3C RDF Data Cube, or
-     * schema.org extensions such as GS1's.
-     *
-     * @var Property [schema.org types: Property]
-     */
-    public $measuredProperty;
-
-    /**
-     * The measuredValue of an Observation.
-     *
-     * @var DataType [schema.org types: DataType]
-     */
-    public $measuredValue;
-
-    /**
-     * The observationDate of an Observation.
-     *
-     * @var DateTime [schema.org types: DateTime]
-     */
-    public $observationDate;
-
-    /**
-     * The observedNode of an Observation, often a StatisticalPopulation.
-     *
-     * @var StatisticalPopulation [schema.org types: StatisticalPopulation]
-     */
-    public $observedNode;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -151,7 +110,6 @@ class Observation extends Intangible
         'observationDate',
         'observedNode'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -164,7 +122,6 @@ class Observation extends Intangible
         'observationDate' => ['DateTime'],
         'observedNode' => ['StatisticalPopulation']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -177,7 +134,6 @@ class Observation extends Intangible
         'observationDate' => 'The observationDate of an Observation.',
         'observedNode' => 'The observedNode of an Observation, often a StatisticalPopulation.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -185,7 +141,6 @@ class Observation extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -194,13 +149,48 @@ class Observation extends Intangible
     static protected $_googleRecommendedSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * A marginOfError for an Observation.
+     *
+     * @var DateTime [schema.org types: DateTime]
+     */
+    public $marginOfError;
+    /**
+     * The measuredProperty of an Observation, either a schema.org property, a
+     * property from other RDF-compatible systems e.g. W3C RDF Data Cube, or
+     * schema.org extensions such as GS1's.
+     *
+     * @var Property [schema.org types: Property]
+     */
+    public $measuredProperty;
+    /**
+     * The measuredValue of an Observation.
+     *
+     * @var DataType [schema.org types: DataType]
+     */
+    public $measuredValue;
+    /**
+     * The observationDate of an Observation.
+     *
+     * @var DateTime [schema.org types: DateTime]
+     */
+    public $observationDate;
+    /**
+     * The observedNode of an Observation, often a StatisticalPopulation.
+     *
+     * @var StatisticalPopulation [schema.org types: StatisticalPopulation]
+     */
+    public $observedNode;
+
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -230,13 +220,13 @@ class Observation extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['marginOfError','measuredProperty','measuredValue','observationDate','observedNode'], 'validateJsonSchema'],
+            [['marginOfError', 'measuredProperty', 'measuredValue', 'observationDate', 'observedNode'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

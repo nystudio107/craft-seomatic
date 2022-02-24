@@ -92,17 +92,6 @@ class DefinedTermSet extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A Defined Term contained in this term set.
-     *
-     * @var DefinedTerm [schema.org types: DefinedTerm]
-     */
-    public $hasDefinedTerm;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -112,6 +101,8 @@ class DefinedTermSet extends CreativeWork
         'hasDefinedTerm'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -120,7 +111,6 @@ class DefinedTermSet extends CreativeWork
     static protected $_schemaPropertyExpectedTypes = [
         'hasDefinedTerm' => ['DefinedTerm']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -129,7 +119,6 @@ class DefinedTermSet extends CreativeWork
     static protected $_schemaPropertyDescriptions = [
         'hasDefinedTerm' => 'A Defined Term contained in this term set.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -137,7 +126,6 @@ class DefinedTermSet extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -145,14 +133,20 @@ class DefinedTermSet extends CreativeWork
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A Defined Term contained in this term set.
+     *
+     * @var DefinedTerm [schema.org types: DefinedTerm]
+     */
+    public $hasDefinedTerm;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -182,9 +176,9 @@ class DefinedTermSet extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

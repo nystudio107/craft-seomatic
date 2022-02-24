@@ -92,48 +92,6 @@ class Diet extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Nutritional information specific to the dietary plan. May include dietary
-     * recommendations on what foods to avoid, what foods to consume, and specific
-     * alterations/deviations from the USDA or other regulatory body's approved
-     * dietary guidelines.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $dietFeatures;
-
-    /**
-     * People or organizations that endorse the plan.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $endorsers;
-
-    /**
-     * Medical expert advice related to the plan.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $expertConsiderations;
-
-    /**
-     * Specific physiologic benefits associated to the plan.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $physiologicalBenefits;
-
-    /**
-     * Specific physiologic risks associated to the diet plan.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $risks;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -146,7 +104,6 @@ class Diet extends CreativeWork
         'physiologicalBenefits',
         'risks'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -154,12 +111,11 @@ class Diet extends CreativeWork
      */
     static protected $_schemaPropertyExpectedTypes = [
         'dietFeatures' => ['Text'],
-        'endorsers' => ['Organization','Person'],
+        'endorsers' => ['Organization', 'Person'],
         'expertConsiderations' => ['Text'],
         'physiologicalBenefits' => ['Text'],
         'risks' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -172,7 +128,6 @@ class Diet extends CreativeWork
         'physiologicalBenefits' => 'Specific physiologic benefits associated to the plan.',
         'risks' => 'Specific physiologic risks associated to the diet plan.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -180,7 +135,6 @@ class Diet extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -189,13 +143,49 @@ class Diet extends CreativeWork
     static protected $_googleRecommendedSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * Nutritional information specific to the dietary plan. May include dietary
+     * recommendations on what foods to avoid, what foods to consume, and specific
+     * alterations/deviations from the USDA or other regulatory body's approved
+     * dietary guidelines.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $dietFeatures;
+    /**
+     * People or organizations that endorse the plan.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $endorsers;
+    /**
+     * Medical expert advice related to the plan.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $expertConsiderations;
+    /**
+     * Specific physiologic benefits associated to the plan.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $physiologicalBenefits;
+    /**
+     * Specific physiologic risks associated to the diet plan.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $risks;
+
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -225,13 +215,13 @@ class Diet extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['dietFeatures','endorsers','expertConsiderations','physiologicalBenefits','risks'], 'validateJsonSchema'],
+            [['dietFeatures', 'endorsers', 'expertConsiderations', 'physiologicalBenefits', 'risks'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

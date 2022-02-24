@@ -109,49 +109,6 @@ class SuperficialAnatomy extends MedicalEntity
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * If applicable, a description of the pathophysiology associated with the
-     * anatomical system, including potential abnormal changes in the mechanical,
-     * physical, and biochemical functions of the system.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $associatedPathophysiology;
-
-    /**
-     * Anatomical systems or structures that relate to the superficial anatomy.
-     *
-     * @var mixed|AnatomicalStructure|AnatomicalSystem [schema.org types: AnatomicalStructure, AnatomicalSystem]
-     */
-    public $relatedAnatomy;
-
-    /**
-     * A medical condition associated with this anatomy.
-     *
-     * @var MedicalCondition [schema.org types: MedicalCondition]
-     */
-    public $relatedCondition;
-
-    /**
-     * A medical therapy related to this anatomy.
-     *
-     * @var MedicalTherapy [schema.org types: MedicalTherapy]
-     */
-    public $relatedTherapy;
-
-    /**
-     * The significance associated with the superficial anatomy; as an example,
-     * how characteristics of the superficial anatomy can suggest underlying
-     * medical conditions or courses of treatment.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $significance;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -164,7 +121,6 @@ class SuperficialAnatomy extends MedicalEntity
         'relatedTherapy',
         'significance'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -172,12 +128,11 @@ class SuperficialAnatomy extends MedicalEntity
      */
     static protected $_schemaPropertyExpectedTypes = [
         'associatedPathophysiology' => ['Text'],
-        'relatedAnatomy' => ['AnatomicalStructure','AnatomicalSystem'],
+        'relatedAnatomy' => ['AnatomicalStructure', 'AnatomicalSystem'],
         'relatedCondition' => ['MedicalCondition'],
         'relatedTherapy' => ['MedicalTherapy'],
         'significance' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -190,7 +145,6 @@ class SuperficialAnatomy extends MedicalEntity
         'relatedTherapy' => 'A medical therapy related to this anatomy.',
         'significance' => 'The significance associated with the superficial anatomy; as an example, how characteristics of the superficial anatomy can suggest underlying medical conditions or courses of treatment.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -198,7 +152,6 @@ class SuperficialAnatomy extends MedicalEntity
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -207,13 +160,50 @@ class SuperficialAnatomy extends MedicalEntity
     static protected $_googleRecommendedSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * If applicable, a description of the pathophysiology associated with the
+     * anatomical system, including potential abnormal changes in the mechanical,
+     * physical, and biochemical functions of the system.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $associatedPathophysiology;
+    /**
+     * Anatomical systems or structures that relate to the superficial anatomy.
+     *
+     * @var mixed|AnatomicalStructure|AnatomicalSystem [schema.org types: AnatomicalStructure, AnatomicalSystem]
+     */
+    public $relatedAnatomy;
+    /**
+     * A medical condition associated with this anatomy.
+     *
+     * @var MedicalCondition [schema.org types: MedicalCondition]
+     */
+    public $relatedCondition;
+    /**
+     * A medical therapy related to this anatomy.
+     *
+     * @var MedicalTherapy [schema.org types: MedicalTherapy]
+     */
+    public $relatedTherapy;
+    /**
+     * The significance associated with the superficial anatomy; as an example,
+     * how characteristics of the superficial anatomy can suggest underlying
+     * medical conditions or courses of treatment.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $significance;
+
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -243,13 +233,13 @@ class SuperficialAnatomy extends MedicalEntity
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['associatedPathophysiology','relatedAnatomy','relatedCondition','relatedTherapy','significance'], 'validateJsonSchema'],
+            [['associatedPathophysiology', 'relatedAnatomy', 'relatedCondition', 'relatedTherapy', 'significance'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

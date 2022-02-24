@@ -92,24 +92,6 @@ class ParentAudience extends PeopleAudience
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Maximal age of the child.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $childMaxAge;
-
-    /**
-     * Minimal age of the child.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $childMinAge;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -119,7 +101,6 @@ class ParentAudience extends PeopleAudience
         'childMaxAge',
         'childMinAge'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -130,6 +111,8 @@ class ParentAudience extends PeopleAudience
         'childMinAge' => ['Number']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -139,7 +122,6 @@ class ParentAudience extends PeopleAudience
         'childMaxAge' => 'Maximal age of the child.',
         'childMinAge' => 'Minimal age of the child.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -147,7 +129,6 @@ class ParentAudience extends PeopleAudience
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -155,14 +136,26 @@ class ParentAudience extends PeopleAudience
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Maximal age of the child.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $childMaxAge;
+    /**
+     * Minimal age of the child.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $childMinAge;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -192,13 +185,13 @@ class ParentAudience extends PeopleAudience
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['childMaxAge','childMinAge'], 'validateJsonSchema'],
+            [['childMaxAge', 'childMinAge'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

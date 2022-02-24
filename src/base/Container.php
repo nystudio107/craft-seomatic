@@ -11,10 +11,9 @@
 
 namespace nystudio107\seomatic\base;
 
-use nystudio107\seomatic\helpers\Dependency;
-use nystudio107\seomatic\events\IncludeContainerEvent;
-
 use craft\validators\ArrayValidator;
+use nystudio107\seomatic\events\IncludeContainerEvent;
+use nystudio107\seomatic\helpers\Dependency;
 
 /**
  * @author    nystudio107
@@ -112,7 +111,7 @@ abstract class Container extends FluentModel implements ContainerInterface
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

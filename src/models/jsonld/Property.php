@@ -92,45 +92,6 @@ class Property extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Relates a property to a class that is (one of) the type(s) the property is
-     * expected to be used on.
-     *
-     * @var Class [schema.org types: Class]
-     */
-    public $domainIncludes;
-
-    /**
-     * Relates a property to a property that is its inverse. Inverse properties
-     * relate the same pairs of items to each other, but in reversed direction.
-     * For example, the 'alumni' and 'alumniOf' properties are inverseOf each
-     * other. Some properties don't have explicit inverses; in these situations
-     * RDFa and JSON-LD syntax for reverse properties can be used.
-     *
-     * @var Property [schema.org types: Property]
-     */
-    public $inverseOf;
-
-    /**
-     * Relates a property to a class that constitutes (one of) the expected
-     * type(s) for values of the property.
-     *
-     * @var Class [schema.org types: Class]
-     */
-    public $rangeIncludes;
-
-    /**
-     * Relates a term (i.e. a property, class or enumeration) to one that
-     * supersedes it.
-     *
-     * @var mixed|Class|Enumeration|Property [schema.org types: Class, Enumeration, Property]
-     */
-    public $supersededBy;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -142,7 +103,6 @@ class Property extends Intangible
         'rangeIncludes',
         'supersededBy'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -152,9 +112,8 @@ class Property extends Intangible
         'domainIncludes' => ['Class'],
         'inverseOf' => ['Property'],
         'rangeIncludes' => ['Class'],
-        'supersededBy' => ['Class','Enumeration','Property']
+        'supersededBy' => ['Class', 'Enumeration', 'Property']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -166,7 +125,6 @@ class Property extends Intangible
         'rangeIncludes' => 'Relates a property to a class that constitutes (one of) the expected type(s) for values of the property.',
         'supersededBy' => 'Relates a term (i.e. a property, class or enumeration) to one that supersedes it.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -175,6 +133,8 @@ class Property extends Intangible
     static protected $_googleRequiredSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -182,14 +142,45 @@ class Property extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Relates a property to a class that is (one of) the type(s) the property is
+     * expected to be used on.
+     *
+     * @var Class [schema.org types: Class]
+     */
+    public $domainIncludes;
+    /**
+     * Relates a property to a property that is its inverse. Inverse properties
+     * relate the same pairs of items to each other, but in reversed direction.
+     * For example, the 'alumni' and 'alumniOf' properties are inverseOf each
+     * other. Some properties don't have explicit inverses; in these situations
+     * RDFa and JSON-LD syntax for reverse properties can be used.
+     *
+     * @var Property [schema.org types: Property]
+     */
+    public $inverseOf;
+    /**
+     * Relates a property to a class that constitutes (one of) the expected
+     * type(s) for values of the property.
+     *
+     * @var Class [schema.org types: Class]
+     */
+    public $rangeIncludes;
+    /**
+     * Relates a term (i.e. a property, class or enumeration) to one that
+     * supersedes it.
+     *
+     * @var mixed|Class|Enumeration|Property [schema.org types: Class, Enumeration, Property]
+     */
+    public $supersededBy;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -219,13 +210,13 @@ class Property extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['domainIncludes','inverseOf','rangeIncludes','supersededBy'], 'validateJsonSchema'],
+            [['domainIncludes', 'inverseOf', 'rangeIncludes', 'supersededBy'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

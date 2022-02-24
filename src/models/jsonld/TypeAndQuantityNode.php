@@ -92,50 +92,6 @@ class TypeAndQuantityNode extends StructuredValue
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The quantity of the goods included in the offer.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $amountOfThisGood;
-
-    /**
-     * The business function (e.g. sell, lease, repair, dispose) of the offer or
-     * component of a bundle (TypeAndQuantityNode). The default is
-     * http://purl.org/goodrelations/v1#Sell.
-     *
-     * @var BusinessFunction [schema.org types: BusinessFunction]
-     */
-    public $businessFunction;
-
-    /**
-     * The product that this structured value is referring to.
-     *
-     * @var mixed|Product|Service [schema.org types: Product, Service]
-     */
-    public $typeOfGood;
-
-    /**
-     * The unit of measurement given using the UN/CEFACT Common Code (3
-     * characters) or a URL. Other codes than the UN/CEFACT Common Code may be
-     * used with a prefix followed by a colon.
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $unitCode;
-
-    /**
-     * A string or text indicating the unit of measurement. Useful if you cannot
-     * provide a standard unit code for unitCode.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $unitText;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -148,7 +104,6 @@ class TypeAndQuantityNode extends StructuredValue
         'unitCode',
         'unitText'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -157,11 +112,10 @@ class TypeAndQuantityNode extends StructuredValue
     static protected $_schemaPropertyExpectedTypes = [
         'amountOfThisGood' => ['Number'],
         'businessFunction' => ['BusinessFunction'],
-        'typeOfGood' => ['Product','Service'],
-        'unitCode' => ['Text','URL'],
+        'typeOfGood' => ['Product', 'Service'],
+        'unitCode' => ['Text', 'URL'],
         'unitText' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -174,7 +128,6 @@ class TypeAndQuantityNode extends StructuredValue
         'unitCode' => 'The unit of measurement given using the UN/CEFACT Common Code (3 characters) or a URL. Other codes than the UN/CEFACT Common Code may be used with a prefix followed by a colon.',
         'unitText' => 'A string or text indicating the unit of measurement. Useful if you cannot provide a standard unit code for unitCode.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -182,7 +135,6 @@ class TypeAndQuantityNode extends StructuredValue
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -191,13 +143,51 @@ class TypeAndQuantityNode extends StructuredValue
     static protected $_googleRecommendedSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The quantity of the goods included in the offer.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $amountOfThisGood;
+    /**
+     * The business function (e.g. sell, lease, repair, dispose) of the offer or
+     * component of a bundle (TypeAndQuantityNode). The default is
+     * http://purl.org/goodrelations/v1#Sell.
+     *
+     * @var BusinessFunction [schema.org types: BusinessFunction]
+     */
+    public $businessFunction;
+    /**
+     * The product that this structured value is referring to.
+     *
+     * @var mixed|Product|Service [schema.org types: Product, Service]
+     */
+    public $typeOfGood;
+    /**
+     * The unit of measurement given using the UN/CEFACT Common Code (3
+     * characters) or a URL. Other codes than the UN/CEFACT Common Code may be
+     * used with a prefix followed by a colon.
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $unitCode;
+    /**
+     * A string or text indicating the unit of measurement. Useful if you cannot
+     * provide a standard unit code for unitCode.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $unitText;
+
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -227,13 +217,13 @@ class TypeAndQuantityNode extends StructuredValue
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['amountOfThisGood','businessFunction','typeOfGood','unitCode','unitText'], 'validateJsonSchema'],
+            [['amountOfThisGood', 'businessFunction', 'typeOfGood', 'unitCode', 'unitText'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

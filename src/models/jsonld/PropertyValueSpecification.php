@@ -91,96 +91,6 @@ class PropertyValueSpecification extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The default value of the input. For properties that expect a literal, the
-     * default is a literal value, for properties that expect an object, it's an
-     * ID reference to one of the current values.
-     *
-     * @var mixed|string|Thing [schema.org types: Text, Thing]
-     */
-    public $defaultValue;
-
-    /**
-     * The upper value of some characteristic or property.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $maxValue;
-
-    /**
-     * The lower value of some characteristic or property.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $minValue;
-
-    /**
-     * Whether multiple values are allowed for the property. Default is false.
-     *
-     * @var bool [schema.org types: Boolean]
-     */
-    public $multipleValues;
-
-    /**
-     * Whether or not a property is mutable. Default is false. Specifying this for
-     * a property that also has a value makes it act similar to a "hidden" input
-     * in an HTML form.
-     *
-     * @var bool [schema.org types: Boolean]
-     */
-    public $readonlyValue;
-
-    /**
-     * The stepValue attribute indicates the granularity that is expected (and
-     * required) of the value in a PropertyValueSpecification.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $stepValue;
-
-    /**
-     * Specifies the allowed range for number of characters in a literal value.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $valueMaxLength;
-
-    /**
-     * Specifies the minimum allowed range for number of characters in a literal
-     * value.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $valueMinLength;
-
-    /**
-     * Indicates the name of the PropertyValueSpecification to be used in URL
-     * templates and form encoding in a manner analogous to HTML's input@name.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $valueName;
-
-    /**
-     * Specifies a regular expression for testing literal values according to the
-     * HTML spec.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $valuePattern;
-
-    /**
-     * Whether the property must be filled in to complete the action. Default is
-     * false.
-     *
-     * @var bool [schema.org types: Boolean]
-     */
-    public $valueRequired;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -199,14 +109,13 @@ class PropertyValueSpecification extends Intangible
         'valuePattern',
         'valueRequired'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'defaultValue' => ['Text','Thing'],
+        'defaultValue' => ['Text', 'Thing'],
         'maxValue' => ['Number'],
         'minValue' => ['Number'],
         'multipleValues' => ['Boolean'],
@@ -218,7 +127,6 @@ class PropertyValueSpecification extends Intangible
         'valuePattern' => ['Text'],
         'valueRequired' => ['Boolean']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -237,7 +145,6 @@ class PropertyValueSpecification extends Intangible
         'valuePattern' => 'Specifies a regular expression for testing literal values according to the HTML spec.',
         'valueRequired' => 'Whether the property must be filled in to complete the action. Default is false.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -245,7 +152,6 @@ class PropertyValueSpecification extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -253,14 +159,92 @@ class PropertyValueSpecification extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The default value of the input. For properties that expect a literal, the
+     * default is a literal value, for properties that expect an object, it's an
+     * ID reference to one of the current values.
+     *
+     * @var mixed|string|Thing [schema.org types: Text, Thing]
+     */
+    public $defaultValue;
+    /**
+     * The upper value of some characteristic or property.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $maxValue;
+    /**
+     * The lower value of some characteristic or property.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $minValue;
+    /**
+     * Whether multiple values are allowed for the property. Default is false.
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $multipleValues;
+    /**
+     * Whether or not a property is mutable. Default is false. Specifying this for
+     * a property that also has a value makes it act similar to a "hidden" input
+     * in an HTML form.
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $readonlyValue;
+    /**
+     * The stepValue attribute indicates the granularity that is expected (and
+     * required) of the value in a PropertyValueSpecification.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $stepValue;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * Specifies the allowed range for number of characters in a literal value.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $valueMaxLength;
+    /**
+     * Specifies the minimum allowed range for number of characters in a literal
+     * value.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $valueMinLength;
+    /**
+     * Indicates the name of the PropertyValueSpecification to be used in URL
+     * templates and form encoding in a manner analogous to HTML's input@name.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $valueName;
+    /**
+     * Specifies a regular expression for testing literal values according to the
+     * HTML spec.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $valuePattern;
+    /**
+     * Whether the property must be filled in to complete the action. Default is
+     * false.
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $valueRequired;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -290,13 +274,13 @@ class PropertyValueSpecification extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['defaultValue','maxValue','minValue','multipleValues','readonlyValue','stepValue','valueMaxLength','valueMinLength','valueName','valuePattern','valueRequired'], 'validateJsonSchema'],
+            [['defaultValue', 'maxValue', 'minValue', 'multipleValues', 'readonlyValue', 'stepValue', 'valueMaxLength', 'valueMinLength', 'valueName', 'valuePattern', 'valueRequired'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

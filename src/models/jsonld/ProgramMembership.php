@@ -93,50 +93,6 @@ class ProgramMembership extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The organization (airline, travelers' club, etc.) the membership is made
-     * with.
-     *
-     * @var Organization [schema.org types: Organization]
-     */
-    public $hostingOrganization;
-
-    /**
-     * A member of an Organization or a ProgramMembership. Organizations can be
-     * members of organizations; ProgramMembership is typically for individuals.
-     * Supersedes members, musicGroupMember. Inverse property: memberOf.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $member;
-
-    /**
-     * A unique identifier for the membership.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $membershipNumber;
-
-    /**
-     * The number of membership points earned by the member. If necessary, the
-     * unitText can be used to express the units the points are issued in. (e.g.
-     * stars, miles, etc.)
-     *
-     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
-     */
-    public $membershipPointsEarned;
-
-    /**
-     * The program providing the membership.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $programName;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -149,7 +105,6 @@ class ProgramMembership extends Intangible
         'membershipPointsEarned',
         'programName'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -157,12 +112,11 @@ class ProgramMembership extends Intangible
      */
     static protected $_schemaPropertyExpectedTypes = [
         'hostingOrganization' => ['Organization'],
-        'member' => ['Organization','Person'],
+        'member' => ['Organization', 'Person'],
         'membershipNumber' => ['Text'],
-        'membershipPointsEarned' => ['Number','QuantitativeValue'],
+        'membershipPointsEarned' => ['Number', 'QuantitativeValue'],
         'programName' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -175,7 +129,6 @@ class ProgramMembership extends Intangible
         'membershipPointsEarned' => 'The number of membership points earned by the member. If necessary, the unitText can be used to express the units the points are issued in. (e.g. stars, miles, etc.)',
         'programName' => 'The program providing the membership.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -183,7 +136,6 @@ class ProgramMembership extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -192,13 +144,51 @@ class ProgramMembership extends Intangible
     static protected $_googleRecommendedSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The organization (airline, travelers' club, etc.) the membership is made
+     * with.
+     *
+     * @var Organization [schema.org types: Organization]
+     */
+    public $hostingOrganization;
+    /**
+     * A member of an Organization or a ProgramMembership. Organizations can be
+     * members of organizations; ProgramMembership is typically for individuals.
+     * Supersedes members, musicGroupMember. Inverse property: memberOf.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $member;
+    /**
+     * A unique identifier for the membership.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $membershipNumber;
+    /**
+     * The number of membership points earned by the member. If necessary, the
+     * unitText can be used to express the units the points are issued in. (e.g.
+     * stars, miles, etc.)
+     *
+     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
+     */
+    public $membershipPointsEarned;
+    /**
+     * The program providing the membership.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $programName;
+
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -228,13 +218,13 @@ class ProgramMembership extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['hostingOrganization','member','membershipNumber','membershipPointsEarned','programName'], 'validateJsonSchema'],
+            [['hostingOrganization', 'member', 'membershipNumber', 'membershipPointsEarned', 'programName'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

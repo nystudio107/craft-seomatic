@@ -11,13 +11,11 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\base\SeoElementInterface;
-use nystudio107\seomatic\base\VarsModel;
-
 use craft\behaviors\EnvAttributeParserBehavior;
 use craft\validators\ArrayValidator;
-
+use nystudio107\seomatic\base\SeoElementInterface;
+use nystudio107\seomatic\base\VarsModel;
+use nystudio107\seomatic\Seomatic;
 use yii\behaviors\AttributeTypecastBehavior;
 
 /**
@@ -315,7 +313,7 @@ class Settings extends VarsModel
     /**
      * @inheritdoc
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         // Keep any parent behaviors
         $behaviors = parent::behaviors();

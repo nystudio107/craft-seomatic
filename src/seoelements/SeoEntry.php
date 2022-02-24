@@ -11,28 +11,27 @@
 
 namespace nystudio107\seomatic\seoelements;
 
-use craft\gql\interfaces\elements\Entry as EntryInterface;
-use nystudio107\seomatic\base\GqlSeoElementInterface;
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
-use nystudio107\seomatic\base\SeoElementInterface;
-use nystudio107\seomatic\helpers\ArrayHelper;
-use nystudio107\seomatic\helpers\Config as ConfigHelper;
-use nystudio107\seomatic\helpers\PluginTemplate;
-use nystudio107\seomatic\models\MetaBundle;
-
 use Craft;
 use craft\base\ElementInterface;
 use craft\base\Model;
 use craft\elements\db\ElementQueryInterface;
 use craft\elements\Entry;
+use craft\events\DefineHtmlEvent;
 use craft\events\SectionEvent;
+use craft\gql\interfaces\elements\Entry as EntryInterface;
 use craft\models\EntryDraft;
 use craft\models\EntryVersion;
 use craft\models\Section;
 use craft\models\Site;
 use craft\services\Sections;
-
+use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
+use nystudio107\seomatic\base\GqlSeoElementInterface;
+use nystudio107\seomatic\base\SeoElementInterface;
+use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\helpers\Config as ConfigHelper;
+use nystudio107\seomatic\helpers\PluginTemplate;
+use nystudio107\seomatic\models\MetaBundle;
+use nystudio107\seomatic\Seomatic;
 use yii\base\Event;
 use yii\base\InvalidConfigException;
 
@@ -109,7 +108,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
         Event::on(
             Sections::class,
             Sections::EVENT_AFTER_SAVE_SECTION,
-            function(SectionEvent $event) {
+            function (SectionEvent $event) {
                 Craft::debug(
                     'Sections::EVENT_AFTER_SAVE_SECTION',
                     __METHOD__
@@ -120,7 +119,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
         Event::on(
             Sections::class,
             Sections::EVENT_AFTER_DELETE_SECTION,
-            function(SectionEvent $event) {
+            function (SectionEvent $event) {
                 Craft::debug(
                     'Sections::EVENT_AFTER_DELETE_SECTION',
                     __METHOD__
@@ -183,14 +182,19 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
         if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
         }
 
-        // Install only for non-console Control Panel requests
-        if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
-            // Entries sidebar
-            Seomatic::$view->hook('cp.entries.edit.details', function (&$context) {
+        // Handler: Entry::EVENT_DEFINE_SIDEBAR_HTML
+        Event::on(
+            Entry::class,
+            Entry::EVENT_DEFINE_SIDEBAR_HTML,
+            static function (DefineHtmlEvent $event) {
+                Craft::debug(
+                    'Entry::EVENT_DEFINE_SIDEBAR_HTML',
+                    __METHOD__
+                );
                 $html = '';
                 Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
                 /** @var  $entry Entry */
-                $entry = $context[self::getElementRefHandle()] ?? null;
+                $entry = $event->sender ?? null;
                 if ($entry !== null && $entry->uri !== null) {
                     Seomatic::$plugin->metaContainers->previewMetaContainers($entry->uri, $entry->siteId, true);
                     // Render our preview sidebar template
@@ -203,10 +207,9 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
 //                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/entry-analysis.twig');
 //                }
                 }
-
-                return $html;
-            });
-        }
+                $event->html .= $html;
+            }
+        );
     }
 
     /**
@@ -221,11 +224,10 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
         $query = Entry::find()
             ->section($metaBundle->sourceHandle)
             ->siteId($metaBundle->sourceSiteId)
-            ->limit($metaBundle->metaSitemapVars->sitemapLimit)
-        ;
+            ->limit($metaBundle->metaSitemapVars->sitemapLimit);
         if ($metaBundle->sourceType === 'structure'
             && !empty($metaBundle->metaSitemapVars->structureDepth)) {
-            $query->level($metaBundle->metaSitemapVars->structureDepth.'<=');
+            $query->level($metaBundle->metaSitemapVars->structureDepth . '<=');
         }
 
         return $query;
@@ -236,31 +238,31 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
      * and Element ID
      *
      * @param MetaBundle $metaBundle
-     * @param int        $elementId
-     * @param int        $siteId
+     * @param int $elementId
+     * @param int $siteId
      *
      * @return null|ElementInterface
      */
     public static function sitemapAltElement(
         MetaBundle $metaBundle,
-        int $elementId,
-        int $siteId
-    ) {
+        int        $elementId,
+        int        $siteId
+    )
+    {
         return Entry::find()
             ->section($metaBundle->sourceHandle)
             ->id($elementId)
             ->siteId($siteId)
             ->limit(1)
-            ->one()
-            ;
+            ->one();
     }
 
     /**
      * Return a preview URI for a given $sourceHandle and $siteId
      * This just returns the first element
      *
-     * @param string    $sourceHandle
-     * @param int|null  $siteId
+     * @param string $sourceHandle
+     * @param int|null $siteId
      *
      * @return string|null
      */
@@ -270,8 +272,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
         $element = Entry::find()
             ->section($sourceHandle)
             ->siteId($siteId)
-            ->one()
-        ;
+            ->one();
         if ($element) {
             $uri = $element->uri;
         }
@@ -355,7 +356,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
      * Return the most recently updated Element from a given source model
      *
      * @param Model $sourceModel
-     * @param int   $sourceSiteId
+     * @param int $sourceSiteId
      *
      * @return null|ElementInterface
      */
@@ -367,8 +368,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
             ->siteId($sourceSiteId)
             ->limit(1)
             ->orderBy(['elements.dateUpdated' => SORT_DESC])
-            ->one()
-            ;
+            ->one();
     }
 
     /**

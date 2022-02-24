@@ -99,49 +99,6 @@ class MedicalStudy extends MedicalEntity
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Specifying the health condition(s) of a patient, medical study, or other
-     * target audience.
-     *
-     * @var MedicalCondition [schema.org types: MedicalCondition]
-     */
-    public $healthCondition;
-
-    /**
-     * A person or organization that supports a thing through a pledge, promise,
-     * or financial contribution. e.g. a sponsor of a Medical Study or a corporate
-     * sponsor of an event.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $sponsor;
-
-    /**
-     * The status of the study (enumerated).
-     *
-     * @var mixed|EventStatusType|MedicalStudyStatus|string [schema.org types: EventStatusType, MedicalStudyStatus, Text]
-     */
-    public $status;
-
-    /**
-     * The location in which the study is taking/took place.
-     *
-     * @var AdministrativeArea [schema.org types: AdministrativeArea]
-     */
-    public $studyLocation;
-
-    /**
-     * A subject of the study, i.e. one of the medical conditions, therapies,
-     * devices, drugs, etc. investigated by the study.
-     *
-     * @var MedicalEntity [schema.org types: MedicalEntity]
-     */
-    public $studySubject;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -154,7 +111,6 @@ class MedicalStudy extends MedicalEntity
         'studyLocation',
         'studySubject'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -162,12 +118,11 @@ class MedicalStudy extends MedicalEntity
      */
     static protected $_schemaPropertyExpectedTypes = [
         'healthCondition' => ['MedicalCondition'],
-        'sponsor' => ['Organization','Person'],
-        'status' => ['EventStatusType','MedicalStudyStatus','Text'],
+        'sponsor' => ['Organization', 'Person'],
+        'status' => ['EventStatusType', 'MedicalStudyStatus', 'Text'],
         'studyLocation' => ['AdministrativeArea'],
         'studySubject' => ['MedicalEntity']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -180,7 +135,6 @@ class MedicalStudy extends MedicalEntity
         'studyLocation' => 'The location in which the study is taking/took place.',
         'studySubject' => 'A subject of the study, i.e. one of the medical conditions, therapies, devices, drugs, etc. investigated by the study.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -188,7 +142,6 @@ class MedicalStudy extends MedicalEntity
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -197,13 +150,50 @@ class MedicalStudy extends MedicalEntity
     static protected $_googleRecommendedSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * Specifying the health condition(s) of a patient, medical study, or other
+     * target audience.
+     *
+     * @var MedicalCondition [schema.org types: MedicalCondition]
+     */
+    public $healthCondition;
+    /**
+     * A person or organization that supports a thing through a pledge, promise,
+     * or financial contribution. e.g. a sponsor of a Medical Study or a corporate
+     * sponsor of an event.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $sponsor;
+    /**
+     * The status of the study (enumerated).
+     *
+     * @var mixed|EventStatusType|MedicalStudyStatus|string [schema.org types: EventStatusType, MedicalStudyStatus, Text]
+     */
+    public $status;
+    /**
+     * The location in which the study is taking/took place.
+     *
+     * @var AdministrativeArea [schema.org types: AdministrativeArea]
+     */
+    public $studyLocation;
+    /**
+     * A subject of the study, i.e. one of the medical conditions, therapies,
+     * devices, drugs, etc. investigated by the study.
+     *
+     * @var MedicalEntity [schema.org types: MedicalEntity]
+     */
+    public $studySubject;
+
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -233,13 +223,13 @@ class MedicalStudy extends MedicalEntity
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['healthCondition','sponsor','status','studyLocation','studySubject'], 'validateJsonSchema'],
+            [['healthCondition', 'sponsor', 'status', 'studyLocation', 'studySubject'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

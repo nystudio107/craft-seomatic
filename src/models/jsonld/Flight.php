@@ -91,112 +91,6 @@ class Flight extends Trip
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The kind of aircraft (e.g., "Boeing 747").
-     *
-     * @var mixed|string|Vehicle [schema.org types: Text, Vehicle]
-     */
-    public $aircraft;
-
-    /**
-     * The airport where the flight terminates.
-     *
-     * @var Airport [schema.org types: Airport]
-     */
-    public $arrivalAirport;
-
-    /**
-     * Identifier of the flight's arrival gate.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $arrivalGate;
-
-    /**
-     * Identifier of the flight's arrival terminal.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $arrivalTerminal;
-
-    /**
-     * The type of boarding policy used by the airline (e.g. zone-based or
-     * group-based).
-     *
-     * @var BoardingPolicyType [schema.org types: BoardingPolicyType]
-     */
-    public $boardingPolicy;
-
-    /**
-     * The airport where the flight originates.
-     *
-     * @var Airport [schema.org types: Airport]
-     */
-    public $departureAirport;
-
-    /**
-     * Identifier of the flight's departure gate.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $departureGate;
-
-    /**
-     * Identifier of the flight's departure terminal.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $departureTerminal;
-
-    /**
-     * The estimated time the flight will take.
-     *
-     * @var mixed|Duration|string [schema.org types: Duration, Text]
-     */
-    public $estimatedFlightDuration;
-
-    /**
-     * The distance of the flight.
-     *
-     * @var mixed|Distance|string [schema.org types: Distance, Text]
-     */
-    public $flightDistance;
-
-    /**
-     * The unique identifier for a flight including the airline IATA code. For
-     * example, if describing United flight 110, where the IATA code for United is
-     * 'UA', the flightNumber is 'UA110'.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $flightNumber;
-
-    /**
-     * Description of the meals that will be provided or available for purchase.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $mealService;
-
-    /**
-     * An entity which offers (sells / leases / lends / loans) the services /
-     * goods. A seller may also be a provider. Supersedes merchant, vendor.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $seller;
-
-    /**
-     * The time when a passenger can check into the flight online.
-     *
-     * @var DateTime [schema.org types: DateTime]
-     */
-    public $webCheckinTime;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -218,14 +112,13 @@ class Flight extends Trip
         'seller',
         'webCheckinTime'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'aircraft' => ['Text','Vehicle'],
+        'aircraft' => ['Text', 'Vehicle'],
         'arrivalAirport' => ['Airport'],
         'arrivalGate' => ['Text'],
         'arrivalTerminal' => ['Text'],
@@ -233,14 +126,13 @@ class Flight extends Trip
         'departureAirport' => ['Airport'],
         'departureGate' => ['Text'],
         'departureTerminal' => ['Text'],
-        'estimatedFlightDuration' => ['Duration','Text'],
-        'flightDistance' => ['Distance','Text'],
+        'estimatedFlightDuration' => ['Duration', 'Text'],
+        'flightDistance' => ['Distance', 'Text'],
         'flightNumber' => ['Text'],
         'mealService' => ['Text'],
-        'seller' => ['Organization','Person'],
+        'seller' => ['Organization', 'Person'],
         'webCheckinTime' => ['DateTime']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -262,7 +154,6 @@ class Flight extends Trip
         'seller' => 'An entity which offers (sells / leases / lends / loans) the services / goods. A seller may also be a provider. Supersedes merchant, vendor.',
         'webCheckinTime' => 'The time when a passenger can check into the flight online.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -270,7 +161,6 @@ class Flight extends Trip
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -278,14 +168,105 @@ class Flight extends Trip
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The kind of aircraft (e.g., "Boeing 747").
+     *
+     * @var mixed|string|Vehicle [schema.org types: Text, Vehicle]
+     */
+    public $aircraft;
+    /**
+     * The airport where the flight terminates.
+     *
+     * @var Airport [schema.org types: Airport]
+     */
+    public $arrivalAirport;
+    /**
+     * Identifier of the flight's arrival gate.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $arrivalGate;
+    /**
+     * Identifier of the flight's arrival terminal.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $arrivalTerminal;
+    /**
+     * The type of boarding policy used by the airline (e.g. zone-based or
+     * group-based).
+     *
+     * @var BoardingPolicyType [schema.org types: BoardingPolicyType]
+     */
+    public $boardingPolicy;
+    /**
+     * The airport where the flight originates.
+     *
+     * @var Airport [schema.org types: Airport]
+     */
+    public $departureAirport;
+    /**
+     * Identifier of the flight's departure gate.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $departureGate;
+    /**
+     * Identifier of the flight's departure terminal.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $departureTerminal;
+    /**
+     * The estimated time the flight will take.
+     *
+     * @var mixed|Duration|string [schema.org types: Duration, Text]
+     */
+    public $estimatedFlightDuration;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The distance of the flight.
+     *
+     * @var mixed|Distance|string [schema.org types: Distance, Text]
+     */
+    public $flightDistance;
+    /**
+     * The unique identifier for a flight including the airline IATA code. For
+     * example, if describing United flight 110, where the IATA code for United is
+     * 'UA', the flightNumber is 'UA110'.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $flightNumber;
+    /**
+     * Description of the meals that will be provided or available for purchase.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $mealService;
+    /**
+     * An entity which offers (sells / leases / lends / loans) the services /
+     * goods. A seller may also be a provider. Supersedes merchant, vendor.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $seller;
+    /**
+     * The time when a passenger can check into the flight online.
+     *
+     * @var DateTime [schema.org types: DateTime]
+     */
+    public $webCheckinTime;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -315,13 +296,13 @@ class Flight extends Trip
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['aircraft','arrivalAirport','arrivalGate','arrivalTerminal','boardingPolicy','departureAirport','departureGate','departureTerminal','estimatedFlightDuration','flightDistance','flightNumber','mealService','seller','webCheckinTime'], 'validateJsonSchema'],
+            [['aircraft', 'arrivalAirport', 'arrivalGate', 'arrivalTerminal', 'boardingPolicy', 'departureAirport', 'departureGate', 'departureTerminal', 'estimatedFlightDuration', 'flightDistance', 'flightNumber', 'mealService', 'seller', 'webCheckinTime'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

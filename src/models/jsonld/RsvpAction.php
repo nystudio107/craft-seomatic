@@ -92,32 +92,6 @@ class RsvpAction extends InformAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * If responding yes, the number of guests who will attend in addition to the
-     * invitee.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $additionalNumberOfGuests;
-
-    /**
-     * Comments, typically from users.
-     *
-     * @var Comment [schema.org types: Comment]
-     */
-    public $comment;
-
-    /**
-     * The response (yes, no, maybe) to the RSVP.
-     *
-     * @var RsvpResponseType [schema.org types: RsvpResponseType]
-     */
-    public $rsvpResponse;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -128,7 +102,6 @@ class RsvpAction extends InformAction
         'comment',
         'rsvpResponse'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -139,7 +112,6 @@ class RsvpAction extends InformAction
         'comment' => ['Comment'],
         'rsvpResponse' => ['RsvpResponseType']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -151,6 +123,8 @@ class RsvpAction extends InformAction
         'rsvpResponse' => 'The response (yes, no, maybe) to the RSVP.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -158,7 +132,6 @@ class RsvpAction extends InformAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -166,14 +139,33 @@ class RsvpAction extends InformAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * If responding yes, the number of guests who will attend in addition to the
+     * invitee.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $additionalNumberOfGuests;
+    /**
+     * Comments, typically from users.
+     *
+     * @var Comment [schema.org types: Comment]
+     */
+    public $comment;
+    /**
+     * The response (yes, no, maybe) to the RSVP.
+     *
+     * @var RsvpResponseType [schema.org types: RsvpResponseType]
+     */
+    public $rsvpResponse;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -203,13 +195,13 @@ class RsvpAction extends InformAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['additionalNumberOfGuests','comment','rsvpResponse'], 'validateJsonSchema'],
+            [['additionalNumberOfGuests', 'comment', 'rsvpResponse'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

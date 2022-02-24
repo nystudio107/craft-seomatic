@@ -91,25 +91,6 @@ class Airline extends Organization
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The type of boarding policy used by the airline (e.g. zone-based or
-     * group-based).
-     *
-     * @var BoardingPolicyType [schema.org types: BoardingPolicyType]
-     */
-    public $boardingPolicy;
-
-    /**
-     * IATA identifier for an airline or airport.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $iataCode;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -119,7 +100,6 @@ class Airline extends Organization
         'boardingPolicy',
         'iataCode'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -130,6 +110,8 @@ class Airline extends Organization
         'iataCode' => ['Text']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -139,7 +121,6 @@ class Airline extends Organization
         'boardingPolicy' => 'The type of boarding policy used by the airline (e.g. zone-based or group-based).',
         'iataCode' => 'IATA identifier for an airline or airport.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -147,7 +128,6 @@ class Airline extends Organization
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -155,14 +135,27 @@ class Airline extends Organization
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The type of boarding policy used by the airline (e.g. zone-based or
+     * group-based).
+     *
+     * @var BoardingPolicyType [schema.org types: BoardingPolicyType]
+     */
+    public $boardingPolicy;
+    /**
+     * IATA identifier for an airline or airport.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $iataCode;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -192,13 +185,13 @@ class Airline extends Organization
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['boardingPolicy','iataCode'], 'validateJsonSchema'],
+            [['boardingPolicy', 'iataCode'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

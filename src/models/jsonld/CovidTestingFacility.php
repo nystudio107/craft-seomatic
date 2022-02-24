@@ -97,24 +97,6 @@ class CovidTestingFacility extends MedicalClinic
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A medical service available from this provider.
-     *
-     * @var mixed|MedicalProcedure|MedicalTest|MedicalTherapy [schema.org types: MedicalProcedure, MedicalTest, MedicalTherapy]
-     */
-    public $availableService;
-
-    /**
-     * A medical specialty of the provider.
-     *
-     * @var MedicalSpecialty [schema.org types: MedicalSpecialty]
-     */
-    public $medicalSpecialty;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -124,17 +106,18 @@ class CovidTestingFacility extends MedicalClinic
         'availableService',
         'medicalSpecialty'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'availableService' => ['MedicalProcedure','MedicalTest','MedicalTherapy'],
+        'availableService' => ['MedicalProcedure', 'MedicalTest', 'MedicalTherapy'],
         'medicalSpecialty' => ['MedicalSpecialty']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -144,7 +127,6 @@ class CovidTestingFacility extends MedicalClinic
         'availableService' => 'A medical service available from this provider.',
         'medicalSpecialty' => 'A medical specialty of the provider.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -152,7 +134,6 @@ class CovidTestingFacility extends MedicalClinic
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -160,14 +141,26 @@ class CovidTestingFacility extends MedicalClinic
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A medical service available from this provider.
+     *
+     * @var mixed|MedicalProcedure|MedicalTest|MedicalTherapy [schema.org types: MedicalProcedure, MedicalTest, MedicalTherapy]
+     */
+    public $availableService;
+    /**
+     * A medical specialty of the provider.
+     *
+     * @var MedicalSpecialty [schema.org types: MedicalSpecialty]
+     */
+    public $medicalSpecialty;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -197,13 +190,13 @@ class CovidTestingFacility extends MedicalClinic
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['availableService','medicalSpecialty'], 'validateJsonSchema'],
+            [['availableService', 'medicalSpecialty'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

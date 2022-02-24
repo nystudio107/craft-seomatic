@@ -91,31 +91,6 @@ class Joint extends AnatomicalStructure
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The biomechanical properties of the bone.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $biomechnicalClass;
-
-    /**
-     * The degree of mobility the joint allows.
-     *
-     * @var mixed|MedicalEntity|string [schema.org types: MedicalEntity, Text]
-     */
-    public $functionalClass;
-
-    /**
-     * The name given to how bone physically connects to each other.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $structuralClass;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -126,7 +101,6 @@ class Joint extends AnatomicalStructure
         'functionalClass',
         'structuralClass'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -134,10 +108,9 @@ class Joint extends AnatomicalStructure
      */
     static protected $_schemaPropertyExpectedTypes = [
         'biomechnicalClass' => ['Text'],
-        'functionalClass' => ['MedicalEntity','Text'],
+        'functionalClass' => ['MedicalEntity', 'Text'],
         'structuralClass' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -149,6 +122,8 @@ class Joint extends AnatomicalStructure
         'structuralClass' => 'The name given to how bone physically connects to each other.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -156,7 +131,6 @@ class Joint extends AnatomicalStructure
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -164,14 +138,32 @@ class Joint extends AnatomicalStructure
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The biomechanical properties of the bone.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $biomechnicalClass;
+    /**
+     * The degree of mobility the joint allows.
+     *
+     * @var mixed|MedicalEntity|string [schema.org types: MedicalEntity, Text]
+     */
+    public $functionalClass;
+    /**
+     * The name given to how bone physically connects to each other.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $structuralClass;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -201,13 +193,13 @@ class Joint extends AnatomicalStructure
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['biomechnicalClass','functionalClass','structuralClass'], 'validateJsonSchema'],
+            [['biomechnicalClass', 'functionalClass', 'structuralClass'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

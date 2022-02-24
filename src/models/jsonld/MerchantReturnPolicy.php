@@ -92,57 +92,6 @@ class MerchantReturnPolicy extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Are in-store returns offered?
-     *
-     * @var bool [schema.org types: Boolean]
-     */
-    public $inStoreReturnsOffered;
-
-    /**
-     * The merchantReturnDays property indicates the number of days (from
-     * purchase) within which relevant merchant return policy is applicable.
-     * Supersedes productReturnDays.
-     *
-     * @var int [schema.org types: Integer]
-     */
-    public $merchantReturnDays;
-
-    /**
-     * Indicates a Web page or service by URL, for product return. Supersedes
-     * productReturnLink.
-     *
-     * @var string [schema.org types: URL]
-     */
-    public $merchantReturnLink;
-
-    /**
-     * A refundType, from an enumerated list.
-     *
-     * @var RefundTypeEnumeration [schema.org types: RefundTypeEnumeration]
-     */
-    public $refundType;
-
-    /**
-     * Indicates (via enumerated options) the return fees policy for a
-     * MerchantReturnPolicy
-     *
-     * @var ReturnFeesEnumeration [schema.org types: ReturnFeesEnumeration]
-     */
-    public $returnFees;
-
-    /**
-     * A returnPolicyCategory expresses at most one of several enumerated kinds of
-     * return.
-     *
-     * @var MerchantReturnEnumeration [schema.org types: MerchantReturnEnumeration]
-     */
-    public $returnPolicyCategory;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -156,7 +105,6 @@ class MerchantReturnPolicy extends Intangible
         'returnFees',
         'returnPolicyCategory'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -170,7 +118,6 @@ class MerchantReturnPolicy extends Intangible
         'returnFees' => ['ReturnFeesEnumeration'],
         'returnPolicyCategory' => ['MerchantReturnEnumeration']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -184,7 +131,6 @@ class MerchantReturnPolicy extends Intangible
         'returnFees' => 'Indicates (via enumerated options) the return fees policy for a MerchantReturnPolicy',
         'returnPolicyCategory' => 'A returnPolicyCategory expresses at most one of several enumerated kinds of return.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -192,7 +138,6 @@ class MerchantReturnPolicy extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -200,14 +145,58 @@ class MerchantReturnPolicy extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Are in-store returns offered?
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $inStoreReturnsOffered;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The merchantReturnDays property indicates the number of days (from
+     * purchase) within which relevant merchant return policy is applicable.
+     * Supersedes productReturnDays.
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $merchantReturnDays;
+    /**
+     * Indicates a Web page or service by URL, for product return. Supersedes
+     * productReturnLink.
+     *
+     * @var string [schema.org types: URL]
+     */
+    public $merchantReturnLink;
+    /**
+     * A refundType, from an enumerated list.
+     *
+     * @var RefundTypeEnumeration [schema.org types: RefundTypeEnumeration]
+     */
+    public $refundType;
+    /**
+     * Indicates (via enumerated options) the return fees policy for a
+     * MerchantReturnPolicy
+     *
+     * @var ReturnFeesEnumeration [schema.org types: ReturnFeesEnumeration]
+     */
+    public $returnFees;
+    /**
+     * A returnPolicyCategory expresses at most one of several enumerated kinds of
+     * return.
+     *
+     * @var MerchantReturnEnumeration [schema.org types: MerchantReturnEnumeration]
+     */
+    public $returnPolicyCategory;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -237,13 +226,13 @@ class MerchantReturnPolicy extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['inStoreReturnsOffered','merchantReturnDays','merchantReturnLink','refundType','returnFees','returnPolicyCategory'], 'validateJsonSchema'],
+            [['inStoreReturnsOffered', 'merchantReturnDays', 'merchantReturnLink', 'refundType', 'returnFees', 'returnPolicyCategory'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

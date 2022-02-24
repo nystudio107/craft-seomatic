@@ -92,18 +92,6 @@ class UpdateAction extends Action
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A sub property of object. The collection target of the action. Supersedes
-     * collection.
-     *
-     * @var Thing [schema.org types: Thing]
-     */
-    public $targetCollection;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -113,6 +101,8 @@ class UpdateAction extends Action
         'targetCollection'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -121,7 +111,6 @@ class UpdateAction extends Action
     static protected $_schemaPropertyExpectedTypes = [
         'targetCollection' => ['Thing']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -130,7 +119,6 @@ class UpdateAction extends Action
     static protected $_schemaPropertyDescriptions = [
         'targetCollection' => 'A sub property of object. The collection target of the action. Supersedes collection.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -138,7 +126,6 @@ class UpdateAction extends Action
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -146,14 +133,21 @@ class UpdateAction extends Action
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A sub property of object. The collection target of the action. Supersedes
+     * collection.
+     *
+     * @var Thing [schema.org types: Thing]
+     */
+    public $targetCollection;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -183,9 +177,9 @@ class UpdateAction extends Action
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

@@ -93,34 +93,6 @@ class InteractionCounter extends StructuredValue
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The WebSite or SoftwareApplication where the interactions took place.
-     *
-     * @var mixed|SoftwareApplication|WebSite [schema.org types: SoftwareApplication, WebSite]
-     */
-    public $interactionService;
-
-    /**
-     * The Action representing the type of interaction. For up votes, +1s, etc.
-     * use LikeAction. For down votes use DislikeAction. Otherwise, use the most
-     * specific Action.
-     *
-     * @var Action [schema.org types: Action]
-     */
-    public $interactionType;
-
-    /**
-     * The number of interactions for the CreativeWork using the WebSite or
-     * SoftwareApplication.
-     *
-     * @var int [schema.org types: Integer]
-     */
-    public $userInteractionCount;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -131,18 +103,16 @@ class InteractionCounter extends StructuredValue
         'interactionType',
         'userInteractionCount'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'interactionService' => ['SoftwareApplication','WebSite'],
+        'interactionService' => ['SoftwareApplication', 'WebSite'],
         'interactionType' => ['Action'],
         'userInteractionCount' => ['Integer']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -154,6 +124,8 @@ class InteractionCounter extends StructuredValue
         'userInteractionCount' => 'The number of interactions for the CreativeWork using the WebSite or SoftwareApplication.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -161,7 +133,6 @@ class InteractionCounter extends StructuredValue
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -169,14 +140,35 @@ class InteractionCounter extends StructuredValue
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The WebSite or SoftwareApplication where the interactions took place.
+     *
+     * @var mixed|SoftwareApplication|WebSite [schema.org types: SoftwareApplication, WebSite]
+     */
+    public $interactionService;
+    /**
+     * The Action representing the type of interaction. For up votes, +1s, etc.
+     * use LikeAction. For down votes use DislikeAction. Otherwise, use the most
+     * specific Action.
+     *
+     * @var Action [schema.org types: Action]
+     */
+    public $interactionType;
+    /**
+     * The number of interactions for the CreativeWork using the WebSite or
+     * SoftwareApplication.
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $userInteractionCount;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -206,13 +198,13 @@ class InteractionCounter extends StructuredValue
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['interactionService','interactionType','userInteractionCount'], 'validateJsonSchema'],
+            [['interactionService', 'interactionType', 'userInteractionCount'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

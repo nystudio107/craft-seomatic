@@ -91,18 +91,6 @@ class TVSeason extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The country of the principal offices of the production company or
-     * individual responsible for the movie or program.
-     *
-     * @var Country [schema.org types: Country]
-     */
-    public $countryOfOrigin;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -112,6 +100,8 @@ class TVSeason extends CreativeWork
         'countryOfOrigin'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -120,7 +110,6 @@ class TVSeason extends CreativeWork
     static protected $_schemaPropertyExpectedTypes = [
         'countryOfOrigin' => ['Country']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -129,7 +118,6 @@ class TVSeason extends CreativeWork
     static protected $_schemaPropertyDescriptions = [
         'countryOfOrigin' => 'The country of the principal offices of the production company or individual responsible for the movie or program.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -137,7 +125,6 @@ class TVSeason extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -145,14 +132,21 @@ class TVSeason extends CreativeWork
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The country of the principal offices of the production company or
+     * individual responsible for the movie or program.
+     *
+     * @var Country [schema.org types: Country]
+     */
+    public $countryOfOrigin;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -182,9 +176,9 @@ class TVSeason extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

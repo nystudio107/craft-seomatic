@@ -92,17 +92,6 @@ class PlanAction extends OrganizeAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The time the object is scheduled to.
-     *
-     * @var DateTime [schema.org types: DateTime]
-     */
-    public $scheduledTime;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -112,6 +101,8 @@ class PlanAction extends OrganizeAction
         'scheduledTime'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -120,7 +111,6 @@ class PlanAction extends OrganizeAction
     static protected $_schemaPropertyExpectedTypes = [
         'scheduledTime' => ['DateTime']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -129,7 +119,6 @@ class PlanAction extends OrganizeAction
     static protected $_schemaPropertyDescriptions = [
         'scheduledTime' => 'The time the object is scheduled to.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -137,7 +126,6 @@ class PlanAction extends OrganizeAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -145,14 +133,20 @@ class PlanAction extends OrganizeAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The time the object is scheduled to.
+     *
+     * @var DateTime [schema.org types: DateTime]
+     */
+    public $scheduledTime;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -182,9 +176,9 @@ class PlanAction extends OrganizeAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

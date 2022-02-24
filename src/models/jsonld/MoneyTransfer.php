@@ -92,26 +92,6 @@ class MoneyTransfer extends TransferAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The amount of money.
-     *
-     * @var mixed|MonetaryAmount|float [schema.org types: MonetaryAmount, Number]
-     */
-    public $amount;
-
-    /**
-     * A bank or bank’s branch, financial institution or international financial
-     * institution operating the beneficiary’s bank account or releasing funds
-     * for the beneficiary
-     *
-     * @var mixed|BankOrCreditUnion|string [schema.org types: BankOrCreditUnion, Text]
-     */
-    public $beneficiaryBank;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -121,17 +101,18 @@ class MoneyTransfer extends TransferAction
         'amount',
         'beneficiaryBank'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'amount' => ['MonetaryAmount','Number'],
-        'beneficiaryBank' => ['BankOrCreditUnion','Text']
+        'amount' => ['MonetaryAmount', 'Number'],
+        'beneficiaryBank' => ['BankOrCreditUnion', 'Text']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -141,7 +122,6 @@ class MoneyTransfer extends TransferAction
         'amount' => 'The amount of money.',
         'beneficiaryBank' => 'A bank or bank’s branch, financial institution or international financial institution operating the beneficiary’s bank account or releasing funds for the beneficiary'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -149,7 +129,6 @@ class MoneyTransfer extends TransferAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -157,14 +136,28 @@ class MoneyTransfer extends TransferAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The amount of money.
+     *
+     * @var mixed|MonetaryAmount|float [schema.org types: MonetaryAmount, Number]
+     */
+    public $amount;
+    /**
+     * A bank or bank’s branch, financial institution or international financial
+     * institution operating the beneficiary’s bank account or releasing funds
+     * for the beneficiary
+     *
+     * @var mixed|BankOrCreditUnion|string [schema.org types: BankOrCreditUnion, Text]
+     */
+    public $beneficiaryBank;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -194,13 +187,13 @@ class MoneyTransfer extends TransferAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['amount','beneficiaryBank'], 'validateJsonSchema'],
+            [['amount', 'beneficiaryBank'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

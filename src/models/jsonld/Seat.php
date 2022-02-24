@@ -92,38 +92,6 @@ class Seat extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The location of the reserved seat (e.g., 27).
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $seatNumber;
-
-    /**
-     * The row location of the reserved seat (e.g., B).
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $seatRow;
-
-    /**
-     * The section location of the reserved seat (e.g. Orchestra).
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $seatSection;
-
-    /**
-     * The type/class of the seat.
-     *
-     * @var mixed|QualitativeValue|string [schema.org types: QualitativeValue, Text]
-     */
-    public $seatingType;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -135,7 +103,6 @@ class Seat extends Intangible
         'seatSection',
         'seatingType'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -145,9 +112,8 @@ class Seat extends Intangible
         'seatNumber' => ['Text'],
         'seatRow' => ['Text'],
         'seatSection' => ['Text'],
-        'seatingType' => ['QualitativeValue','Text']
+        'seatingType' => ['QualitativeValue', 'Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -159,7 +125,6 @@ class Seat extends Intangible
         'seatSection' => 'The section location of the reserved seat (e.g. Orchestra).',
         'seatingType' => 'The type/class of the seat.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -168,6 +133,8 @@ class Seat extends Intangible
     static protected $_googleRequiredSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -175,14 +142,38 @@ class Seat extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The location of the reserved seat (e.g., 27).
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $seatNumber;
+    /**
+     * The row location of the reserved seat (e.g., B).
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $seatRow;
+    /**
+     * The section location of the reserved seat (e.g. Orchestra).
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $seatSection;
+    /**
+     * The type/class of the seat.
+     *
+     * @var mixed|QualitativeValue|string [schema.org types: QualitativeValue, Text]
+     */
+    public $seatingType;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -212,13 +203,13 @@ class Seat extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['seatNumber','seatRow','seatSection','seatingType'], 'validateJsonSchema'],
+            [['seatNumber', 'seatRow', 'seatSection', 'seatingType'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

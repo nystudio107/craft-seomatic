@@ -97,54 +97,6 @@ class DrugCost extends MedicalEnumeration
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The location in which the status applies.
-     *
-     * @var AdministrativeArea [schema.org types: AdministrativeArea]
-     */
-    public $applicableLocation;
-
-    /**
-     * The category of cost, such as wholesale, retail, reimbursement cap, etc.
-     *
-     * @var DrugCostCategory [schema.org types: DrugCostCategory]
-     */
-    public $costCategory;
-
-    /**
-     * The currency (in 3-letter of the drug cost. See:
-     * http://en.wikipedia.org/wiki/ISO_4217
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $costCurrency;
-
-    /**
-     * Additional details to capture the origin of the cost data. For example,
-     * 'Medicare Part B'.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $costOrigin;
-
-    /**
-     * The cost per unit of the drug.
-     *
-     * @var mixed|float|QualitativeValue|string [schema.org types: Number, QualitativeValue, Text]
-     */
-    public $costPerUnit;
-
-    /**
-     * The unit in which the drug is measured, e.g. '5 mg tablet'.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $drugUnit;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -158,7 +110,6 @@ class DrugCost extends MedicalEnumeration
         'costPerUnit',
         'drugUnit'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -169,10 +120,9 @@ class DrugCost extends MedicalEnumeration
         'costCategory' => ['DrugCostCategory'],
         'costCurrency' => ['Text'],
         'costOrigin' => ['Text'],
-        'costPerUnit' => ['Number','QualitativeValue','Text'],
+        'costPerUnit' => ['Number', 'QualitativeValue', 'Text'],
         'drugUnit' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -186,7 +136,6 @@ class DrugCost extends MedicalEnumeration
         'costPerUnit' => 'The cost per unit of the drug.',
         'drugUnit' => 'The unit in which the drug is measured, e.g. \'5 mg tablet\'.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -194,7 +143,6 @@ class DrugCost extends MedicalEnumeration
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -202,14 +150,55 @@ class DrugCost extends MedicalEnumeration
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The location in which the status applies.
+     *
+     * @var AdministrativeArea [schema.org types: AdministrativeArea]
+     */
+    public $applicableLocation;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The category of cost, such as wholesale, retail, reimbursement cap, etc.
+     *
+     * @var DrugCostCategory [schema.org types: DrugCostCategory]
+     */
+    public $costCategory;
+    /**
+     * The currency (in 3-letter of the drug cost. See:
+     * http://en.wikipedia.org/wiki/ISO_4217
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $costCurrency;
+    /**
+     * Additional details to capture the origin of the cost data. For example,
+     * 'Medicare Part B'.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $costOrigin;
+    /**
+     * The cost per unit of the drug.
+     *
+     * @var mixed|float|QualitativeValue|string [schema.org types: Number, QualitativeValue, Text]
+     */
+    public $costPerUnit;
+    /**
+     * The unit in which the drug is measured, e.g. '5 mg tablet'.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $drugUnit;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -239,13 +228,13 @@ class DrugCost extends MedicalEnumeration
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['applicableLocation','costCategory','costCurrency','costOrigin','costPerUnit','drugUnit'], 'validateJsonSchema'],
+            [['applicableLocation', 'costCategory', 'costCurrency', 'costOrigin', 'costPerUnit', 'drugUnit'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

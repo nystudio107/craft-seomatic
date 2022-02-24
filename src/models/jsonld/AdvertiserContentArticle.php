@@ -93,14 +93,71 @@ class AdvertiserContentArticle extends Article
 
     // Public Properties
     // =========================================================================
-
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'articleBody',
+        'articleSection',
+        'backstory',
+        'pageEnd',
+        'pageStart',
+        'pagination',
+        'speakable',
+        'wordCount'
+    ];
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'articleBody' => ['Text'],
+        'articleSection' => ['Text'],
+        'backstory' => ['CreativeWork', 'Text'],
+        'pageEnd' => ['Integer', 'Text'],
+        'pageStart' => ['Integer', 'Text'],
+        'pagination' => ['Text'],
+        'speakable' => ['SpeakableSpecification', 'URL'],
+        'wordCount' => ['Integer']
+    ];
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'articleBody' => 'The actual body of the article.',
+        'articleSection' => 'Articles may belong to one or more \'sections\' in a magazine or newspaper, such as Sports, Lifestyle, etc.',
+        'backstory' => 'For an Article, typically a NewsArticle, the backstory property provides a textual summary giving a brief explanation of why and how an article was created. In a journalistic setting this could include information about reporting process, methods, interviews, data sources, etc.',
+        'pageEnd' => 'The page on which the work ends; for example "138" or "xvi".',
+        'pageStart' => 'The page on which the work starts; for example "135" or "xiii".',
+        'pagination' => 'Any description of pages that is not separated into pageStart and pageEnd; for example, "1-6, 9, 55" or "10-12, 46-49".',
+        'speakable' => 'Indicates sections of a Web page that are particularly \'speakable\' in the sense of being highlighted as being especially appropriate for text-to-speech conversion. Other sections of a page may also be usefully spoken in particular circumstances; the \'speakable\' property serves to indicate the parts most likely to be generally useful for speech. The speakable property can be repeated an arbitrary number of times, with three kinds of possible \'content-locator\' values: 1.) id-value URL references - uses id-value of an element in the page being annotated. The simplest use of speakable has (potentially relative) URL values, referencing identified sections of the document concerned. 2.) CSS Selectors - addresses content in the annotated page, eg. via class attribute. Use the cssSelector property. 3.) XPaths - addresses content via XPaths (assuming an XML view of the content). Use the xpath property. For more sophisticated markup of speakable sections beyond simple ID references, either CSS selectors or XPath expressions to pick out document section(s) as speakable. For this we define a supporting type, SpeakableSpecification which is defined to be a possible value of the speakable property.',
+        'wordCount' => 'The number of words in the text of the Article.'
+    ];
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
     /**
      * The actual body of the article.
      *
      * @var string [schema.org types: Text]
      */
     public $articleBody;
-
     /**
      * Articles may belong to one or more 'sections' in a magazine or newspaper,
      * such as Sports, Lifestyle, etc.
@@ -108,7 +165,6 @@ class AdvertiserContentArticle extends Article
      * @var string [schema.org types: Text]
      */
     public $articleSection;
-
     /**
      * For an Article, typically a NewsArticle, the backstory property provides a
      * textual summary giving a brief explanation of why and how an article was
@@ -119,20 +175,20 @@ class AdvertiserContentArticle extends Article
      */
     public $backstory;
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The page on which the work ends; for example "138" or "xvi".
      *
      * @var mixed|int|string [schema.org types: Integer, Text]
      */
     public $pageEnd;
-
     /**
      * The page on which the work starts; for example "135" or "xiii".
      *
      * @var mixed|int|string [schema.org types: Integer, Text]
      */
     public $pageStart;
-
     /**
      * Any description of pages that is not separated into pageStart and pageEnd;
      * for example, "1-6, 9, 55" or "10-12, 46-49".
@@ -140,7 +196,6 @@ class AdvertiserContentArticle extends Article
      * @var string [schema.org types: Text]
      */
     public $pagination;
-
     /**
      * Indicates sections of a Web page that are particularly 'speakable' in the
      * sense of being highlighted as being especially appropriate for
@@ -163,7 +218,6 @@ class AdvertiserContentArticle extends Article
      * @var mixed|SpeakableSpecification|string [schema.org types: SpeakableSpecification, URL]
      */
     public $speakable;
-
     /**
      * The number of words in the text of the Article.
      *
@@ -171,80 +225,13 @@ class AdvertiserContentArticle extends Article
      */
     public $wordCount;
 
-    // Static Protected Properties
-    // =========================================================================
-
-    /**
-     * The Schema.org Property Names
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyNames = [
-        'articleBody',
-        'articleSection',
-        'backstory',
-        'pageEnd',
-        'pageStart',
-        'pagination',
-        'speakable',
-        'wordCount'
-    ];
-
-    /**
-     * The Schema.org Property Expected Types
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyExpectedTypes = [
-        'articleBody' => ['Text'],
-        'articleSection' => ['Text'],
-        'backstory' => ['CreativeWork','Text'],
-        'pageEnd' => ['Integer','Text'],
-        'pageStart' => ['Integer','Text'],
-        'pagination' => ['Text'],
-        'speakable' => ['SpeakableSpecification','URL'],
-        'wordCount' => ['Integer']
-    ];
-
-    /**
-     * The Schema.org Property Descriptions
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyDescriptions = [
-        'articleBody' => 'The actual body of the article.',
-        'articleSection' => 'Articles may belong to one or more \'sections\' in a magazine or newspaper, such as Sports, Lifestyle, etc.',
-        'backstory' => 'For an Article, typically a NewsArticle, the backstory property provides a textual summary giving a brief explanation of why and how an article was created. In a journalistic setting this could include information about reporting process, methods, interviews, data sources, etc.',
-        'pageEnd' => 'The page on which the work ends; for example "138" or "xvi".',
-        'pageStart' => 'The page on which the work starts; for example "135" or "xiii".',
-        'pagination' => 'Any description of pages that is not separated into pageStart and pageEnd; for example, "1-6, 9, 55" or "10-12, 46-49".',
-        'speakable' => 'Indicates sections of a Web page that are particularly \'speakable\' in the sense of being highlighted as being especially appropriate for text-to-speech conversion. Other sections of a page may also be usefully spoken in particular circumstances; the \'speakable\' property serves to indicate the parts most likely to be generally useful for speech. The speakable property can be repeated an arbitrary number of times, with three kinds of possible \'content-locator\' values: 1.) id-value URL references - uses id-value of an element in the page being annotated. The simplest use of speakable has (potentially relative) URL values, referencing identified sections of the document concerned. 2.) CSS Selectors - addresses content in the annotated page, eg. via class attribute. Use the cssSelector property. 3.) XPaths - addresses content via XPaths (assuming an XML view of the content). Use the xpath property. For more sophisticated markup of speakable sections beyond simple ID references, either CSS selectors or XPath expressions to pick out document section(s) as speakable. For this we define a supporting type, SpeakableSpecification which is defined to be a possible value of the speakable property.',
-        'wordCount' => 'The number of words in the text of the Article.'
-    ];
-
-    /**
-     * The Schema.org Google Required Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRequiredSchema = [
-    ];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRecommendedSchema = [
-    ];
-
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -274,13 +261,13 @@ class AdvertiserContentArticle extends Article
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['articleBody','articleSection','backstory','pageEnd','pageStart','pagination','speakable','wordCount'], 'validateJsonSchema'],
+            [['articleBody', 'articleSection', 'backstory', 'pageEnd', 'pageStart', 'pagination', 'speakable', 'wordCount'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

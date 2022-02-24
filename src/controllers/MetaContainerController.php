@@ -9,21 +9,19 @@
 
 namespace nystudio107\seomatic\controllers;
 
-use nystudio107\seomatic\Seomatic;
+use Craft;
+use craft\web\Controller;
 use nystudio107\seomatic\helpers\Container as ContainerHelper;
 use nystudio107\seomatic\models\FrontendTemplateContainer;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 use nystudio107\seomatic\models\MetaLinkContainer;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\MetaSiteVars;
-use nystudio107\seomatic\models\MetaTitleContainer;
 use nystudio107\seomatic\models\MetaTagContainer;
-
-use Craft;
-use craft\web\Controller;
-
-use yii\web\Response;
+use nystudio107\seomatic\models\MetaTitleContainer;
+use nystudio107\seomatic\Seomatic;
 use yii\web\JsonResponseFormatter;
+use yii\web\Response;
 
 /**
  * @author    nystudio107
@@ -55,7 +53,7 @@ class MetaContainerController extends Controller
     /**
      * @inheritDoc
      */
-    public function beforeAction($action)
+    public function beforeAction($action): bool
     {
         if (!Seomatic::$settings->enableMetaContainerEndpoint) {
             $this->allowAnonymous = false;
@@ -69,8 +67,8 @@ class MetaContainerController extends Controller
      * URI: /actions/seomatic/meta-container/all-meta-containers?uri=/
      *
      * @param string $uri
-     * @param int    $siteId
-     * @param bool   $asArray
+     * @param int $siteId
+     * @param bool $asArray
      *
      * @return Response
      */
@@ -86,7 +84,7 @@ class MetaContainerController extends Controller
                 MetaSiteVars::CONTAINER_TYPE,
                 MetaSiteVars::CONTAINER_TYPE,
                 FrontendTemplateContainer::CONTAINER_TYPE,
-                ],
+            ],
             $uri,
             $siteId,
             $asArray
@@ -105,8 +103,8 @@ class MetaContainerController extends Controller
      * URI: /actions/seomatic/meta-container/meta-title-container?uri=/
      *
      * @param string $uri
-     * @param int    $siteId
-     * @param bool   $asArray
+     * @param int $siteId
+     * @param bool $asArray
      *
      * @return Response
      */
@@ -134,8 +132,8 @@ class MetaContainerController extends Controller
      * URI: /actions/seomatic/meta-container/meta-tag-container?uri=/
      *
      * @param string $uri
-     * @param int    $siteId
-     * @param bool   $asArray
+     * @param int $siteId
+     * @param bool $asArray
      *
      * @return Response
      */
@@ -163,8 +161,8 @@ class MetaContainerController extends Controller
      * URI: /actions/seomatic/meta-container/meta-link-container?uri=/
      *
      * @param string $uri
-     * @param int    $siteId
-     * @param bool   $asArray
+     * @param int $siteId
+     * @param bool $asArray
      *
      * @return Response
      */
@@ -192,8 +190,8 @@ class MetaContainerController extends Controller
      * URI: /actions/seomatic/meta-container/meta-script-container?uri=/
      *
      * @param string $uri
-     * @param int    $siteId
-     * @param bool   $asArray
+     * @param int $siteId
+     * @param bool $asArray
      *
      * @return Response
      */
@@ -221,8 +219,8 @@ class MetaContainerController extends Controller
      * URI: /actions/seomatic/meta-container/meta-json-ld-container?uri=/
      *
      * @param string $uri
-     * @param int    $siteId
-     * @param bool   $asArray
+     * @param int $siteId
+     * @param bool $asArray
      *
      * @return Response
      */
@@ -250,8 +248,8 @@ class MetaContainerController extends Controller
      * URI: /actions/seomatic/meta-container/meta-site-vars-container?uri=/
      *
      * @param string $uri
-     * @param int    $siteId
-     * @param bool   $asArray
+     * @param int $siteId
+     * @param bool $asArray
      *
      * @return Response
      */
@@ -279,8 +277,8 @@ class MetaContainerController extends Controller
      * URI: /actions/seomatic/meta-container/frontend-template-container?uri=/
      *
      * @param string $uri
-     * @param int    $siteId
-     * @param bool   $asArray
+     * @param int $siteId
+     * @param bool $asArray
      *
      * @return Response
      */

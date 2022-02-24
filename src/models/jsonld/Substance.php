@@ -92,26 +92,6 @@ class Substance extends MedicalEntity
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * An active ingredient, typically chemical compounds and/or biologic
-     * substances.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $activeIngredient;
-
-    /**
-     * Recommended intake of this supplement for a given population as defined by
-     * a specific recommending authority.
-     *
-     * @var MaximumDoseSchedule [schema.org types: MaximumDoseSchedule]
-     */
-    public $maximumIntake;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -121,7 +101,6 @@ class Substance extends MedicalEntity
         'activeIngredient',
         'maximumIntake'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -132,6 +111,8 @@ class Substance extends MedicalEntity
         'maximumIntake' => ['MaximumDoseSchedule']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -141,7 +122,6 @@ class Substance extends MedicalEntity
         'activeIngredient' => 'An active ingredient, typically chemical compounds and/or biologic substances.',
         'maximumIntake' => 'Recommended intake of this supplement for a given population as defined by a specific recommending authority.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -149,7 +129,6 @@ class Substance extends MedicalEntity
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -157,14 +136,28 @@ class Substance extends MedicalEntity
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * An active ingredient, typically chemical compounds and/or biologic
+     * substances.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $activeIngredient;
+    /**
+     * Recommended intake of this supplement for a given population as defined by
+     * a specific recommending authority.
+     *
+     * @var MaximumDoseSchedule [schema.org types: MaximumDoseSchedule]
+     */
+    public $maximumIntake;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -194,13 +187,13 @@ class Substance extends MedicalEntity
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['activeIngredient','maximumIntake'], 'validateJsonSchema'],
+            [['activeIngredient', 'maximumIntake'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

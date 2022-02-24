@@ -92,64 +92,6 @@ class MedicalDevice extends MedicalEntity
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A possible complication and/or side effect of this therapy. If it is known
-     * that an adverse outcome is serious (resulting in death, disability, or
-     * permanent damage; requiring hospitalization; or is otherwise
-     * life-threatening or requires immediate medical attention), tag it as a
-     * seriouseAdverseOutcome instead.
-     *
-     * @var MedicalEntity [schema.org types: MedicalEntity]
-     */
-    public $adverseOutcome;
-
-    /**
-     * A contraindication for this therapy.
-     *
-     * @var mixed|MedicalContraindication|string [schema.org types: MedicalContraindication, Text]
-     */
-    public $contraindication;
-
-    /**
-     * A description of the postoperative procedures, care, and/or followups for
-     * this device.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $postOp;
-
-    /**
-     * A description of the workup, testing, and other preparations required
-     * before implanting this device.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $preOp;
-
-    /**
-     * A description of the procedure involved in setting up, using, and/or
-     * installing the device.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $procedure;
-
-    /**
-     * A possible serious complication and/or serious side effect of this therapy.
-     * Serious adverse outcomes include those that are life-threatening; result in
-     * death, disability, or permanent damage; require hospitalization or prolong
-     * existing hospitalization; cause congenital anomalies or birth defects; or
-     * jeopardize the patient and may require medical or surgical intervention to
-     * prevent one of the outcomes in this definition.
-     *
-     * @var MedicalEntity [schema.org types: MedicalEntity]
-     */
-    public $seriousAdverseOutcome;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -163,7 +105,6 @@ class MedicalDevice extends MedicalEntity
         'procedure',
         'seriousAdverseOutcome'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -171,13 +112,12 @@ class MedicalDevice extends MedicalEntity
      */
     static protected $_schemaPropertyExpectedTypes = [
         'adverseOutcome' => ['MedicalEntity'],
-        'contraindication' => ['MedicalContraindication','Text'],
+        'contraindication' => ['MedicalContraindication', 'Text'],
         'postOp' => ['Text'],
         'preOp' => ['Text'],
         'procedure' => ['Text'],
         'seriousAdverseOutcome' => ['MedicalEntity']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -191,7 +131,6 @@ class MedicalDevice extends MedicalEntity
         'procedure' => 'A description of the procedure involved in setting up, using, and/or installing the device.',
         'seriousAdverseOutcome' => 'A possible serious complication and/or serious side effect of this therapy. Serious adverse outcomes include those that are life-threatening; result in death, disability, or permanent damage; require hospitalization or prolong existing hospitalization; cause congenital anomalies or birth defects; or jeopardize the patient and may require medical or surgical intervention to prevent one of the outcomes in this definition.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -199,7 +138,6 @@ class MedicalDevice extends MedicalEntity
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -207,14 +145,65 @@ class MedicalDevice extends MedicalEntity
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A possible complication and/or side effect of this therapy. If it is known
+     * that an adverse outcome is serious (resulting in death, disability, or
+     * permanent damage; requiring hospitalization; or is otherwise
+     * life-threatening or requires immediate medical attention), tag it as a
+     * seriouseAdverseOutcome instead.
+     *
+     * @var MedicalEntity [schema.org types: MedicalEntity]
+     */
+    public $adverseOutcome;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * A contraindication for this therapy.
+     *
+     * @var mixed|MedicalContraindication|string [schema.org types: MedicalContraindication, Text]
+     */
+    public $contraindication;
+    /**
+     * A description of the postoperative procedures, care, and/or followups for
+     * this device.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $postOp;
+    /**
+     * A description of the workup, testing, and other preparations required
+     * before implanting this device.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $preOp;
+    /**
+     * A description of the procedure involved in setting up, using, and/or
+     * installing the device.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $procedure;
+    /**
+     * A possible serious complication and/or serious side effect of this therapy.
+     * Serious adverse outcomes include those that are life-threatening; result in
+     * death, disability, or permanent damage; require hospitalization or prolong
+     * existing hospitalization; cause congenital anomalies or birth defects; or
+     * jeopardize the patient and may require medical or surgical intervention to
+     * prevent one of the outcomes in this definition.
+     *
+     * @var MedicalEntity [schema.org types: MedicalEntity]
+     */
+    public $seriousAdverseOutcome;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -244,13 +233,13 @@ class MedicalDevice extends MedicalEntity
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['adverseOutcome','contraindication','postOp','preOp','procedure','seriousAdverseOutcome'], 'validateJsonSchema'],
+            [['adverseOutcome', 'contraindication', 'postOp', 'preOp', 'procedure', 'seriousAdverseOutcome'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -91,18 +91,6 @@ class WebApplication extends SoftwareApplication
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Specifies browser requirements in human-readable text. For example,
-     * 'requires HTML5 support'.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $browserRequirements;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -112,6 +100,8 @@ class WebApplication extends SoftwareApplication
         'browserRequirements'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -120,7 +110,6 @@ class WebApplication extends SoftwareApplication
     static protected $_schemaPropertyExpectedTypes = [
         'browserRequirements' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -129,7 +118,6 @@ class WebApplication extends SoftwareApplication
     static protected $_schemaPropertyDescriptions = [
         'browserRequirements' => 'Specifies browser requirements in human-readable text. For example, \'requires HTML5 support\'.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -137,7 +125,6 @@ class WebApplication extends SoftwareApplication
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -145,14 +132,21 @@ class WebApplication extends SoftwareApplication
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Specifies browser requirements in human-readable text. For example,
+     * 'requires HTML5 support'.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $browserRequirements;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -182,9 +176,9 @@ class WebApplication extends SoftwareApplication
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

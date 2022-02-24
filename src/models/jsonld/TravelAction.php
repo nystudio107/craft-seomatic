@@ -92,17 +92,6 @@ class TravelAction extends MoveAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The distance travelled, e.g. exercising or travelling.
-     *
-     * @var Distance [schema.org types: Distance]
-     */
-    public $distance;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -112,6 +101,8 @@ class TravelAction extends MoveAction
         'distance'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -120,7 +111,6 @@ class TravelAction extends MoveAction
     static protected $_schemaPropertyExpectedTypes = [
         'distance' => ['Distance']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -129,7 +119,6 @@ class TravelAction extends MoveAction
     static protected $_schemaPropertyDescriptions = [
         'distance' => 'The distance travelled, e.g. exercising or travelling.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -137,7 +126,6 @@ class TravelAction extends MoveAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -145,14 +133,20 @@ class TravelAction extends MoveAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The distance travelled, e.g. exercising or travelling.
+     *
+     * @var Distance [schema.org types: Distance]
+     */
+    public $distance;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -182,9 +176,9 @@ class TravelAction extends MoveAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

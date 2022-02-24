@@ -94,24 +94,6 @@ class MenuSection extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A food or drink item contained in a menu or menu section.
-     *
-     * @var MenuItem [schema.org types: MenuItem]
-     */
-    public $hasMenuItem;
-
-    /**
-     * A subgrouping of the menu (by dishes, course, serving time period, etc.).
-     *
-     * @var MenuSection [schema.org types: MenuSection]
-     */
-    public $hasMenuSection;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -121,7 +103,6 @@ class MenuSection extends CreativeWork
         'hasMenuItem',
         'hasMenuSection'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -132,6 +113,8 @@ class MenuSection extends CreativeWork
         'hasMenuSection' => ['MenuSection']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -141,7 +124,6 @@ class MenuSection extends CreativeWork
         'hasMenuItem' => 'A food or drink item contained in a menu or menu section.',
         'hasMenuSection' => 'A subgrouping of the menu (by dishes, course, serving time period, etc.).'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -149,7 +131,6 @@ class MenuSection extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -157,14 +138,26 @@ class MenuSection extends CreativeWork
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A food or drink item contained in a menu or menu section.
+     *
+     * @var MenuItem [schema.org types: MenuItem]
+     */
+    public $hasMenuItem;
+    /**
+     * A subgrouping of the menu (by dishes, course, serving time period, etc.).
+     *
+     * @var MenuSection [schema.org types: MenuSection]
+     */
+    public $hasMenuSection;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -194,13 +187,13 @@ class MenuSection extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['hasMenuItem','hasMenuSection'], 'validateJsonSchema'],
+            [['hasMenuItem', 'hasMenuSection'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

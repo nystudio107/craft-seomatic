@@ -91,76 +91,6 @@ class Ticket extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The date the ticket was issued.
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $dateIssued;
-
-    /**
-     * The organization issuing the ticket or permit.
-     *
-     * @var Organization [schema.org types: Organization]
-     */
-    public $issuedBy;
-
-    /**
-     * The currency of the price, or a price component when attached to
-     * PriceSpecification and its subtypes. Use standard formats: ISO 4217
-     * currency format e.g. "USD"; Ticker symbol for cryptocurrencies e.g. "BTC";
-     * well known names for Local Exchange Tradings Systems (LETS) and other
-     * currency types e.g. "Ithaca HOUR".
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $priceCurrency;
-
-    /**
-     * The unique identifier for the ticket.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $ticketNumber;
-
-    /**
-     * Reference to an asset (e.g., Barcode, QR code image or PDF) usable for
-     * entrance.
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $ticketToken;
-
-    /**
-     * The seat associated with the ticket.
-     *
-     * @var Seat [schema.org types: Seat]
-     */
-    public $ticketedSeat;
-
-    /**
-     * The total price for the reservation or ticket, including applicable taxes,
-     * shipping, etc. Usage guidelines: Use values from 0123456789 (Unicode 'DIGIT
-     * ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially similiar
-     * Unicode symbols. Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to
-     * indicate a decimal point. Avoid using these symbols as a readability
-     * separator.
-     *
-     * @var mixed|float|PriceSpecification|string [schema.org types: Number, PriceSpecification, Text]
-     */
-    public $totalPrice;
-
-    /**
-     * The person or organization the reservation or ticket is for.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $underName;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -176,23 +106,21 @@ class Ticket extends Intangible
         'totalPrice',
         'underName'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'dateIssued' => ['Date','DateTime'],
+        'dateIssued' => ['Date', 'DateTime'],
         'issuedBy' => ['Organization'],
         'priceCurrency' => ['Text'],
         'ticketNumber' => ['Text'],
-        'ticketToken' => ['Text','URL'],
+        'ticketToken' => ['Text', 'URL'],
         'ticketedSeat' => ['Seat'],
-        'totalPrice' => ['Number','PriceSpecification','Text'],
-        'underName' => ['Organization','Person']
+        'totalPrice' => ['Number', 'PriceSpecification', 'Text'],
+        'underName' => ['Organization', 'Person']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -208,7 +136,6 @@ class Ticket extends Intangible
         'totalPrice' => 'The total price for the reservation or ticket, including applicable taxes, shipping, etc. Usage guidelines: Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.',
         'underName' => 'The person or organization the reservation or ticket is for.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -216,7 +143,6 @@ class Ticket extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -224,14 +150,75 @@ class Ticket extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The date the ticket was issued.
+     *
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     */
+    public $dateIssued;
+    /**
+     * The organization issuing the ticket or permit.
+     *
+     * @var Organization [schema.org types: Organization]
+     */
+    public $issuedBy;
+    /**
+     * The currency of the price, or a price component when attached to
+     * PriceSpecification and its subtypes. Use standard formats: ISO 4217
+     * currency format e.g. "USD"; Ticker symbol for cryptocurrencies e.g. "BTC";
+     * well known names for Local Exchange Tradings Systems (LETS) and other
+     * currency types e.g. "Ithaca HOUR".
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $priceCurrency;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The unique identifier for the ticket.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $ticketNumber;
+    /**
+     * Reference to an asset (e.g., Barcode, QR code image or PDF) usable for
+     * entrance.
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $ticketToken;
+    /**
+     * The seat associated with the ticket.
+     *
+     * @var Seat [schema.org types: Seat]
+     */
+    public $ticketedSeat;
+    /**
+     * The total price for the reservation or ticket, including applicable taxes,
+     * shipping, etc. Usage guidelines: Use values from 0123456789 (Unicode 'DIGIT
+     * ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially similiar
+     * Unicode symbols. Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to
+     * indicate a decimal point. Avoid using these symbols as a readability
+     * separator.
+     *
+     * @var mixed|float|PriceSpecification|string [schema.org types: Number, PriceSpecification, Text]
+     */
+    public $totalPrice;
+    /**
+     * The person or organization the reservation or ticket is for.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $underName;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -261,13 +248,13 @@ class Ticket extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['dateIssued','issuedBy','priceCurrency','ticketNumber','ticketToken','ticketedSeat','totalPrice','underName'], 'validateJsonSchema'],
+            [['dateIssued', 'issuedBy', 'priceCurrency', 'ticketNumber', 'ticketToken', 'ticketedSeat', 'totalPrice', 'underName'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

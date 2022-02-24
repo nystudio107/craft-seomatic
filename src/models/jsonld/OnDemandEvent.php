@@ -92,32 +92,6 @@ class OnDemandEvent extends PublicationEvent
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A flag to signal that the item, event, or place is accessible for free.
-     * Supersedes free.
-     *
-     * @var bool [schema.org types: Boolean]
-     */
-    public $isAccessibleForFree;
-
-    /**
-     * An agent associated with the publication event.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $publishedBy;
-
-    /**
-     * A broadcast service associated with the publication event.
-     *
-     * @var BroadcastService [schema.org types: BroadcastService]
-     */
-    public $publishedOn;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -128,7 +102,6 @@ class OnDemandEvent extends PublicationEvent
         'publishedBy',
         'publishedOn'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -136,10 +109,9 @@ class OnDemandEvent extends PublicationEvent
      */
     static protected $_schemaPropertyExpectedTypes = [
         'isAccessibleForFree' => ['Boolean'],
-        'publishedBy' => ['Organization','Person'],
+        'publishedBy' => ['Organization', 'Person'],
         'publishedOn' => ['BroadcastService']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -151,6 +123,8 @@ class OnDemandEvent extends PublicationEvent
         'publishedOn' => 'A broadcast service associated with the publication event.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -158,7 +132,6 @@ class OnDemandEvent extends PublicationEvent
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -166,14 +139,33 @@ class OnDemandEvent extends PublicationEvent
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A flag to signal that the item, event, or place is accessible for free.
+     * Supersedes free.
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $isAccessibleForFree;
+    /**
+     * An agent associated with the publication event.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $publishedBy;
+    /**
+     * A broadcast service associated with the publication event.
+     *
+     * @var BroadcastService [schema.org types: BroadcastService]
+     */
+    public $publishedOn;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -203,13 +195,13 @@ class OnDemandEvent extends PublicationEvent
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['isAccessibleForFree','publishedBy','publishedOn'], 'validateJsonSchema'],
+            [['isAccessibleForFree', 'publishedBy', 'publishedOn'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

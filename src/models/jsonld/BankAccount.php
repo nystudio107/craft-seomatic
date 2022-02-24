@@ -92,34 +92,6 @@ class BankAccount extends FinancialProduct
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A minimum amount that has to be paid in every month.
-     *
-     * @var MonetaryAmount [schema.org types: MonetaryAmount]
-     */
-    public $accountMinimumInflow;
-
-    /**
-     * An overdraft is an extension of credit from a lending institution when an
-     * account reaches zero. An overdraft allows the individual to continue
-     * withdrawing money even if the account has no funds in it. Basically the
-     * bank allows people to borrow a set amount of money.
-     *
-     * @var MonetaryAmount [schema.org types: MonetaryAmount]
-     */
-    public $accountOverdraftLimit;
-
-    /**
-     * The type of a bank account.
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $bankAccountType;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -130,7 +102,6 @@ class BankAccount extends FinancialProduct
         'accountOverdraftLimit',
         'bankAccountType'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -139,9 +110,8 @@ class BankAccount extends FinancialProduct
     static protected $_schemaPropertyExpectedTypes = [
         'accountMinimumInflow' => ['MonetaryAmount'],
         'accountOverdraftLimit' => ['MonetaryAmount'],
-        'bankAccountType' => ['Text','URL']
+        'bankAccountType' => ['Text', 'URL']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -153,6 +123,8 @@ class BankAccount extends FinancialProduct
         'bankAccountType' => 'The type of a bank account.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -160,7 +132,6 @@ class BankAccount extends FinancialProduct
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -168,14 +139,35 @@ class BankAccount extends FinancialProduct
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A minimum amount that has to be paid in every month.
+     *
+     * @var MonetaryAmount [schema.org types: MonetaryAmount]
+     */
+    public $accountMinimumInflow;
+    /**
+     * An overdraft is an extension of credit from a lending institution when an
+     * account reaches zero. An overdraft allows the individual to continue
+     * withdrawing money even if the account has no funds in it. Basically the
+     * bank allows people to borrow a set amount of money.
+     *
+     * @var MonetaryAmount [schema.org types: MonetaryAmount]
+     */
+    public $accountOverdraftLimit;
+    /**
+     * The type of a bank account.
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $bankAccountType;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -205,13 +197,13 @@ class BankAccount extends FinancialProduct
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['accountMinimumInflow','accountOverdraftLimit','bankAccountType'], 'validateJsonSchema'],
+            [['accountMinimumInflow', 'accountOverdraftLimit', 'bankAccountType'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

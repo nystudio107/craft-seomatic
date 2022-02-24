@@ -94,25 +94,6 @@ class RealEstateListing extends WebPage
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Publication date of an online listing.
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $datePosted;
-
-    /**
-     * Length of the lease for some Accommodation, either particular to some Offer
-     * or in some cases intrinsic to the property.
-     *
-     * @var mixed|Duration|QuantitativeValue [schema.org types: Duration, QuantitativeValue]
-     */
-    public $leaseLength;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -122,17 +103,18 @@ class RealEstateListing extends WebPage
         'datePosted',
         'leaseLength'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'datePosted' => ['Date','DateTime'],
-        'leaseLength' => ['Duration','QuantitativeValue']
+        'datePosted' => ['Date', 'DateTime'],
+        'leaseLength' => ['Duration', 'QuantitativeValue']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -142,7 +124,6 @@ class RealEstateListing extends WebPage
         'datePosted' => 'Publication date of an online listing.',
         'leaseLength' => 'Length of the lease for some Accommodation, either particular to some Offer or in some cases intrinsic to the property.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -150,7 +131,6 @@ class RealEstateListing extends WebPage
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -158,14 +138,27 @@ class RealEstateListing extends WebPage
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Publication date of an online listing.
+     *
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     */
+    public $datePosted;
+    /**
+     * Length of the lease for some Accommodation, either particular to some Offer
+     * or in some cases intrinsic to the property.
+     *
+     * @var mixed|Duration|QuantitativeValue [schema.org types: Duration, QuantitativeValue]
+     */
+    public $leaseLength;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -195,13 +188,13 @@ class RealEstateListing extends WebPage
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['datePosted','leaseLength'], 'validateJsonSchema'],
+            [['datePosted', 'leaseLength'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

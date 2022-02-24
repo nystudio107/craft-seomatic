@@ -92,18 +92,6 @@ class InviteAction extends CommunicateAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Upcoming or past event associated with this place, organization, or action.
-     * Supersedes events.
-     *
-     * @var Event [schema.org types: Event]
-     */
-    public $event;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -113,6 +101,8 @@ class InviteAction extends CommunicateAction
         'event'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -121,7 +111,6 @@ class InviteAction extends CommunicateAction
     static protected $_schemaPropertyExpectedTypes = [
         'event' => ['Event']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -130,7 +119,6 @@ class InviteAction extends CommunicateAction
     static protected $_schemaPropertyDescriptions = [
         'event' => 'Upcoming or past event associated with this place, organization, or action. Supersedes events.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -138,7 +126,6 @@ class InviteAction extends CommunicateAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -146,14 +133,21 @@ class InviteAction extends CommunicateAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Upcoming or past event associated with this place, organization, or action.
+     * Supersedes events.
+     *
+     * @var Event [schema.org types: Event]
+     */
+    public $event;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -183,9 +177,9 @@ class InviteAction extends CommunicateAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

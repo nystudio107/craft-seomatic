@@ -95,24 +95,6 @@ class DefinedTerm extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A DefinedTermSet that contains this term.
-     *
-     * @var mixed|DefinedTermSet|string [schema.org types: DefinedTermSet, URL]
-     */
-    public $inDefinedTermSet;
-
-    /**
-     * A code that identifies this DefinedTerm within a DefinedTermSet
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $termCode;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -122,17 +104,18 @@ class DefinedTerm extends Intangible
         'inDefinedTermSet',
         'termCode'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'inDefinedTermSet' => ['DefinedTermSet','URL'],
+        'inDefinedTermSet' => ['DefinedTermSet', 'URL'],
         'termCode' => ['Text']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -142,7 +125,6 @@ class DefinedTerm extends Intangible
         'inDefinedTermSet' => 'A DefinedTermSet that contains this term.',
         'termCode' => 'A code that identifies this DefinedTerm within a DefinedTermSet'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -150,7 +132,6 @@ class DefinedTerm extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -158,14 +139,26 @@ class DefinedTerm extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A DefinedTermSet that contains this term.
+     *
+     * @var mixed|DefinedTermSet|string [schema.org types: DefinedTermSet, URL]
+     */
+    public $inDefinedTermSet;
+    /**
+     * A code that identifies this DefinedTerm within a DefinedTermSet
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $termCode;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -195,13 +188,13 @@ class DefinedTerm extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['inDefinedTermSet','termCode'], 'validateJsonSchema'],
+            [['inDefinedTermSet', 'termCode'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

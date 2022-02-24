@@ -94,26 +94,6 @@ class TakeAction extends TransferAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A sub property of location. The original location of the object or the
-     * agent before the action.
-     *
-     * @var Place [schema.org types: Place]
-     */
-    public $fromLocation;
-
-    /**
-     * A sub property of location. The final location of the object or the agent
-     * after the action.
-     *
-     * @var Place [schema.org types: Place]
-     */
-    public $toLocation;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -123,7 +103,6 @@ class TakeAction extends TransferAction
         'fromLocation',
         'toLocation'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -134,6 +113,8 @@ class TakeAction extends TransferAction
         'toLocation' => ['Place']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -143,7 +124,6 @@ class TakeAction extends TransferAction
         'fromLocation' => 'A sub property of location. The original location of the object or the agent before the action.',
         'toLocation' => 'A sub property of location. The final location of the object or the agent after the action.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -151,7 +131,6 @@ class TakeAction extends TransferAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -159,14 +138,28 @@ class TakeAction extends TransferAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A sub property of location. The original location of the object or the
+     * agent before the action.
+     *
+     * @var Place [schema.org types: Place]
+     */
+    public $fromLocation;
+    /**
+     * A sub property of location. The final location of the object or the agent
+     * after the action.
+     *
+     * @var Place [schema.org types: Place]
+     */
+    public $toLocation;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -196,13 +189,13 @@ class TakeAction extends TransferAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['fromLocation','toLocation'], 'validateJsonSchema'],
+            [['fromLocation', 'toLocation'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -92,70 +92,6 @@ class ActionAccessSpecification extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The end of the availability of the product or service included in the
-     * offer.
-     *
-     * @var mixed|Date|DateTime|Time [schema.org types: Date, DateTime, Time]
-     */
-    public $availabilityEnds;
-
-    /**
-     * The beginning of the availability of the product or service included in the
-     * offer.
-     *
-     * @var mixed|Date|DateTime|Time [schema.org types: Date, DateTime, Time]
-     */
-    public $availabilityStarts;
-
-    /**
-     * A category for the item. Greater signs or slashes can be used to informally
-     * indicate a category hierarchy.
-     *
-     * @var mixed|PhysicalActivityCategory|string|Thing [schema.org types: PhysicalActivityCategory, Text, Thing]
-     */
-    public $category;
-
-    /**
-     * The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the
-     * GeoShape for the geo-political region(s) for which the offer or delivery
-     * charge specification is valid. See also ineligibleRegion.
-     *
-     * @var mixed|GeoShape|Place|string [schema.org types: GeoShape, Place, Text]
-     */
-    public $eligibleRegion;
-
-    /**
-     * An Offer which must be accepted before the user can perform the Action. For
-     * example, the user may need to buy a movie before being able to watch it.
-     *
-     * @var Offer [schema.org types: Offer]
-     */
-    public $expectsAcceptanceOf;
-
-    /**
-     * The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the
-     * GeoShape for the geo-political region(s) for which the offer or delivery
-     * charge specification is not valid, e.g. a region where the transaction is
-     * not allowed. See also eligibleRegion.
-     *
-     * @var mixed|GeoShape|Place|string [schema.org types: GeoShape, Place, Text]
-     */
-    public $ineligibleRegion;
-
-    /**
-     * Indicates if use of the media require a subscription (either paid or free).
-     * Allowed values are true or false (note that an earlier version had 'yes',
-     * 'no').
-     *
-     * @var mixed|bool|MediaSubscription [schema.org types: Boolean, MediaSubscription]
-     */
-    public $requiresSubscription;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -170,22 +106,20 @@ class ActionAccessSpecification extends Intangible
         'ineligibleRegion',
         'requiresSubscription'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'availabilityEnds' => ['Date','DateTime','Time'],
-        'availabilityStarts' => ['Date','DateTime','Time'],
-        'category' => ['PhysicalActivityCategory','Text','Thing'],
-        'eligibleRegion' => ['GeoShape','Place','Text'],
+        'availabilityEnds' => ['Date', 'DateTime', 'Time'],
+        'availabilityStarts' => ['Date', 'DateTime', 'Time'],
+        'category' => ['PhysicalActivityCategory', 'Text', 'Thing'],
+        'eligibleRegion' => ['GeoShape', 'Place', 'Text'],
         'expectsAcceptanceOf' => ['Offer'],
-        'ineligibleRegion' => ['GeoShape','Place','Text'],
-        'requiresSubscription' => ['Boolean','MediaSubscription']
+        'ineligibleRegion' => ['GeoShape', 'Place', 'Text'],
+        'requiresSubscription' => ['Boolean', 'MediaSubscription']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -200,7 +134,6 @@ class ActionAccessSpecification extends Intangible
         'ineligibleRegion' => 'The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the GeoShape for the geo-political region(s) for which the offer or delivery charge specification is not valid, e.g. a region where the transaction is not allowed. See also eligibleRegion.',
         'requiresSubscription' => 'Indicates if use of the media require a subscription (either paid or free). Allowed values are true or false (note that an earlier version had \'yes\', \'no\').'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -208,7 +141,6 @@ class ActionAccessSpecification extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -216,14 +148,70 @@ class ActionAccessSpecification extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The end of the availability of the product or service included in the
+     * offer.
+     *
+     * @var mixed|Date|DateTime|Time [schema.org types: Date, DateTime, Time]
+     */
+    public $availabilityEnds;
+    /**
+     * The beginning of the availability of the product or service included in the
+     * offer.
+     *
+     * @var mixed|Date|DateTime|Time [schema.org types: Date, DateTime, Time]
+     */
+    public $availabilityStarts;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * A category for the item. Greater signs or slashes can be used to informally
+     * indicate a category hierarchy.
+     *
+     * @var mixed|PhysicalActivityCategory|string|Thing [schema.org types: PhysicalActivityCategory, Text, Thing]
+     */
+    public $category;
+    /**
+     * The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the
+     * GeoShape for the geo-political region(s) for which the offer or delivery
+     * charge specification is valid. See also ineligibleRegion.
+     *
+     * @var mixed|GeoShape|Place|string [schema.org types: GeoShape, Place, Text]
+     */
+    public $eligibleRegion;
+    /**
+     * An Offer which must be accepted before the user can perform the Action. For
+     * example, the user may need to buy a movie before being able to watch it.
+     *
+     * @var Offer [schema.org types: Offer]
+     */
+    public $expectsAcceptanceOf;
+    /**
+     * The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the
+     * GeoShape for the geo-political region(s) for which the offer or delivery
+     * charge specification is not valid, e.g. a region where the transaction is
+     * not allowed. See also eligibleRegion.
+     *
+     * @var mixed|GeoShape|Place|string [schema.org types: GeoShape, Place, Text]
+     */
+    public $ineligibleRegion;
+    /**
+     * Indicates if use of the media require a subscription (either paid or free).
+     * Allowed values are true or false (note that an earlier version had 'yes',
+     * 'no').
+     *
+     * @var mixed|bool|MediaSubscription [schema.org types: Boolean, MediaSubscription]
+     */
+    public $requiresSubscription;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -253,13 +241,13 @@ class ActionAccessSpecification extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['availabilityEnds','availabilityStarts','category','eligibleRegion','expectsAcceptanceOf','ineligibleRegion','requiresSubscription'], 'validateJsonSchema'],
+            [['availabilityEnds', 'availabilityStarts', 'category', 'eligibleRegion', 'expectsAcceptanceOf', 'ineligibleRegion', 'requiresSubscription'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

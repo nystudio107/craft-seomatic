@@ -91,18 +91,6 @@ class MedicalScholarlyArticle extends ScholarlyArticle
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The type of the medical article, taken from the US NLM MeSH publication
-     * type catalog. See also MeSH documentation.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $publicationType;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -112,6 +100,8 @@ class MedicalScholarlyArticle extends ScholarlyArticle
         'publicationType'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -120,7 +110,6 @@ class MedicalScholarlyArticle extends ScholarlyArticle
     static protected $_schemaPropertyExpectedTypes = [
         'publicationType' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -129,7 +118,6 @@ class MedicalScholarlyArticle extends ScholarlyArticle
     static protected $_schemaPropertyDescriptions = [
         'publicationType' => 'The type of the medical article, taken from the US NLM MeSH publication type catalog. See also MeSH documentation.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -137,7 +125,6 @@ class MedicalScholarlyArticle extends ScholarlyArticle
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -145,14 +132,21 @@ class MedicalScholarlyArticle extends ScholarlyArticle
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The type of the medical article, taken from the US NLM MeSH publication
+     * type catalog. See also MeSH documentation.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $publicationType;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -182,9 +176,9 @@ class MedicalScholarlyArticle extends ScholarlyArticle
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

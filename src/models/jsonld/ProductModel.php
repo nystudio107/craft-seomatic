@@ -92,35 +92,6 @@ class ProductModel extends Product
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A pointer to a base product from which this product is a variant. It is
-     * safe to infer that the variant inherits all product features from the base
-     * model, unless defined locally. This is not transitive.
-     *
-     * @var ProductModel [schema.org types: ProductModel]
-     */
-    public $isVariantOf;
-
-    /**
-     * A pointer from a previous, often discontinued variant of the product to its
-     * newer variant.
-     *
-     * @var ProductModel [schema.org types: ProductModel]
-     */
-    public $predecessorOf;
-
-    /**
-     * A pointer from a newer variant of a product to its previous, often
-     * discontinued predecessor.
-     *
-     * @var ProductModel [schema.org types: ProductModel]
-     */
-    public $successorOf;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -131,7 +102,6 @@ class ProductModel extends Product
         'predecessorOf',
         'successorOf'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -142,7 +112,6 @@ class ProductModel extends Product
         'predecessorOf' => ['ProductModel'],
         'successorOf' => ['ProductModel']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -154,6 +123,8 @@ class ProductModel extends Product
         'successorOf' => 'A pointer from a newer variant of a product to its previous, often discontinued predecessor.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -161,7 +132,6 @@ class ProductModel extends Product
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -169,14 +139,36 @@ class ProductModel extends Product
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A pointer to a base product from which this product is a variant. It is
+     * safe to infer that the variant inherits all product features from the base
+     * model, unless defined locally. This is not transitive.
+     *
+     * @var ProductModel [schema.org types: ProductModel]
+     */
+    public $isVariantOf;
+    /**
+     * A pointer from a previous, often discontinued variant of the product to its
+     * newer variant.
+     *
+     * @var ProductModel [schema.org types: ProductModel]
+     */
+    public $predecessorOf;
+    /**
+     * A pointer from a newer variant of a product to its previous, often
+     * discontinued predecessor.
+     *
+     * @var ProductModel [schema.org types: ProductModel]
+     */
+    public $successorOf;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -206,13 +198,13 @@ class ProductModel extends Product
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['isVariantOf','predecessorOf','successorOf'], 'validateJsonSchema'],
+            [['isVariantOf', 'predecessorOf', 'successorOf'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

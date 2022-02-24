@@ -92,25 +92,6 @@ class PaymentChargeSpecification extends PriceSpecification
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The delivery method(s) to which the delivery charge or payment charge
-     * specification applies.
-     *
-     * @var DeliveryMethod [schema.org types: DeliveryMethod]
-     */
-    public $appliesToDeliveryMethod;
-
-    /**
-     * The payment method(s) to which the payment charge specification applies.
-     *
-     * @var PaymentMethod [schema.org types: PaymentMethod]
-     */
-    public $appliesToPaymentMethod;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -120,7 +101,6 @@ class PaymentChargeSpecification extends PriceSpecification
         'appliesToDeliveryMethod',
         'appliesToPaymentMethod'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -131,6 +111,8 @@ class PaymentChargeSpecification extends PriceSpecification
         'appliesToPaymentMethod' => ['PaymentMethod']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -140,7 +122,6 @@ class PaymentChargeSpecification extends PriceSpecification
         'appliesToDeliveryMethod' => 'The delivery method(s) to which the delivery charge or payment charge specification applies.',
         'appliesToPaymentMethod' => 'The payment method(s) to which the payment charge specification applies.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -148,7 +129,6 @@ class PaymentChargeSpecification extends PriceSpecification
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -156,14 +136,27 @@ class PaymentChargeSpecification extends PriceSpecification
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The delivery method(s) to which the delivery charge or payment charge
+     * specification applies.
+     *
+     * @var DeliveryMethod [schema.org types: DeliveryMethod]
+     */
+    public $appliesToDeliveryMethod;
+    /**
+     * The payment method(s) to which the payment charge specification applies.
+     *
+     * @var PaymentMethod [schema.org types: PaymentMethod]
+     */
+    public $appliesToPaymentMethod;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -193,13 +186,13 @@ class PaymentChargeSpecification extends PriceSpecification
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['appliesToDeliveryMethod','appliesToPaymentMethod'], 'validateJsonSchema'],
+            [['appliesToDeliveryMethod', 'appliesToPaymentMethod'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

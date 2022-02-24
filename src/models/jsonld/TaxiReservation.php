@@ -94,31 +94,6 @@ class TaxiReservation extends Reservation
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Number of people the reservation should accommodate.
-     *
-     * @var mixed|int|QuantitativeValue [schema.org types: Integer, QuantitativeValue]
-     */
-    public $partySize;
-
-    /**
-     * Where a taxi will pick up a passenger or a rental car can be picked up.
-     *
-     * @var Place [schema.org types: Place]
-     */
-    public $pickupLocation;
-
-    /**
-     * When a taxi will pickup a passenger or a rental car can be picked up.
-     *
-     * @var DateTime [schema.org types: DateTime]
-     */
-    public $pickupTime;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -129,18 +104,16 @@ class TaxiReservation extends Reservation
         'pickupLocation',
         'pickupTime'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'partySize' => ['Integer','QuantitativeValue'],
+        'partySize' => ['Integer', 'QuantitativeValue'],
         'pickupLocation' => ['Place'],
         'pickupTime' => ['DateTime']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -152,6 +125,8 @@ class TaxiReservation extends Reservation
         'pickupTime' => 'When a taxi will pickup a passenger or a rental car can be picked up.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -159,7 +134,6 @@ class TaxiReservation extends Reservation
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -167,14 +141,32 @@ class TaxiReservation extends Reservation
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Number of people the reservation should accommodate.
+     *
+     * @var mixed|int|QuantitativeValue [schema.org types: Integer, QuantitativeValue]
+     */
+    public $partySize;
+    /**
+     * Where a taxi will pick up a passenger or a rental car can be picked up.
+     *
+     * @var Place [schema.org types: Place]
+     */
+    public $pickupLocation;
+    /**
+     * When a taxi will pickup a passenger or a rental car can be picked up.
+     *
+     * @var DateTime [schema.org types: DateTime]
+     */
+    public $pickupTime;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -204,13 +196,13 @@ class TaxiReservation extends Reservation
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['partySize','pickupLocation','pickupTime'], 'validateJsonSchema'],
+            [['partySize', 'pickupLocation', 'pickupTime'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

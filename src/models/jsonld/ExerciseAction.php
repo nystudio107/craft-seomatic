@@ -92,100 +92,6 @@ class ExerciseAction extends PlayAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A sub property of instrument. The diet used in this action.
-     *
-     * @var Diet [schema.org types: Diet]
-     */
-    public $diet;
-
-    /**
-     * The distance travelled, e.g. exercising or travelling.
-     *
-     * @var Distance [schema.org types: Distance]
-     */
-    public $distance;
-
-    /**
-     * A sub property of location. The course where this action was taken.
-     * Supersedes course.
-     *
-     * @var Place [schema.org types: Place]
-     */
-    public $exerciseCourse;
-
-    /**
-     * A sub property of instrument. The exercise plan used on this action.
-     *
-     * @var ExercisePlan [schema.org types: ExercisePlan]
-     */
-    public $exercisePlan;
-
-    /**
-     * A sub property of instrument. The diet used in this action.
-     *
-     * @var Diet [schema.org types: Diet]
-     */
-    public $exerciseRelatedDiet;
-
-    /**
-     * Type(s) of exercise or activity, such as strength training, flexibility
-     * training, aerobics, cardiac rehabilitation, etc.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $exerciseType;
-
-    /**
-     * A sub property of location. The original location of the object or the
-     * agent before the action.
-     *
-     * @var Place [schema.org types: Place]
-     */
-    public $fromLocation;
-
-    /**
-     * A sub property of participant. The opponent on this action.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $opponent;
-
-    /**
-     * A sub property of location. The sports activity location where this action
-     * occurred.
-     *
-     * @var SportsActivityLocation [schema.org types: SportsActivityLocation]
-     */
-    public $sportsActivityLocation;
-
-    /**
-     * A sub property of location. The sports event where this action occurred.
-     *
-     * @var SportsEvent [schema.org types: SportsEvent]
-     */
-    public $sportsEvent;
-
-    /**
-     * A sub property of participant. The sports team that participated on this
-     * action.
-     *
-     * @var SportsTeam [schema.org types: SportsTeam]
-     */
-    public $sportsTeam;
-
-    /**
-     * A sub property of location. The final location of the object or the agent
-     * after the action.
-     *
-     * @var Place [schema.org types: Place]
-     */
-    public $toLocation;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -205,7 +111,6 @@ class ExerciseAction extends PlayAction
         'sportsTeam',
         'toLocation'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -225,7 +130,6 @@ class ExerciseAction extends PlayAction
         'sportsTeam' => ['SportsTeam'],
         'toLocation' => ['Place']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -245,7 +149,6 @@ class ExerciseAction extends PlayAction
         'sportsTeam' => 'A sub property of participant. The sports team that participated on this action.',
         'toLocation' => 'A sub property of location. The final location of the object or the agent after the action.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -253,7 +156,6 @@ class ExerciseAction extends PlayAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -261,14 +163,95 @@ class ExerciseAction extends PlayAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A sub property of instrument. The diet used in this action.
+     *
+     * @var Diet [schema.org types: Diet]
+     */
+    public $diet;
+    /**
+     * The distance travelled, e.g. exercising or travelling.
+     *
+     * @var Distance [schema.org types: Distance]
+     */
+    public $distance;
+    /**
+     * A sub property of location. The course where this action was taken.
+     * Supersedes course.
+     *
+     * @var Place [schema.org types: Place]
+     */
+    public $exerciseCourse;
+    /**
+     * A sub property of instrument. The exercise plan used on this action.
+     *
+     * @var ExercisePlan [schema.org types: ExercisePlan]
+     */
+    public $exercisePlan;
+    /**
+     * A sub property of instrument. The diet used in this action.
+     *
+     * @var Diet [schema.org types: Diet]
+     */
+    public $exerciseRelatedDiet;
+    /**
+     * Type(s) of exercise or activity, such as strength training, flexibility
+     * training, aerobics, cardiac rehabilitation, etc.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $exerciseType;
+    /**
+     * A sub property of location. The original location of the object or the
+     * agent before the action.
+     *
+     * @var Place [schema.org types: Place]
+     */
+    public $fromLocation;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * A sub property of participant. The opponent on this action.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $opponent;
+    /**
+     * A sub property of location. The sports activity location where this action
+     * occurred.
+     *
+     * @var SportsActivityLocation [schema.org types: SportsActivityLocation]
+     */
+    public $sportsActivityLocation;
+    /**
+     * A sub property of location. The sports event where this action occurred.
+     *
+     * @var SportsEvent [schema.org types: SportsEvent]
+     */
+    public $sportsEvent;
+    /**
+     * A sub property of participant. The sports team that participated on this
+     * action.
+     *
+     * @var SportsTeam [schema.org types: SportsTeam]
+     */
+    public $sportsTeam;
+    /**
+     * A sub property of location. The final location of the object or the agent
+     * after the action.
+     *
+     * @var Place [schema.org types: Place]
+     */
+    public $toLocation;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -298,13 +281,13 @@ class ExerciseAction extends PlayAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['diet','distance','exerciseCourse','exercisePlan','exerciseRelatedDiet','exerciseType','fromLocation','opponent','sportsActivityLocation','sportsEvent','sportsTeam','toLocation'], 'validateJsonSchema'],
+            [['diet', 'distance', 'exerciseCourse', 'exercisePlan', 'exerciseRelatedDiet', 'exerciseType', 'fromLocation', 'opponent', 'sportsActivityLocation', 'sportsEvent', 'sportsTeam', 'toLocation'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

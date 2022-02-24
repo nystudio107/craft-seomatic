@@ -96,18 +96,6 @@ class Recommendation extends Review
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A category for the item. Greater signs or slashes can be used to informally
-     * indicate a category hierarchy.
-     *
-     * @var mixed|PhysicalActivityCategory|string|Thing [schema.org types: PhysicalActivityCategory, Text, Thing]
-     */
-    public $category;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -117,15 +105,16 @@ class Recommendation extends Review
         'category'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'category' => ['PhysicalActivityCategory','Text','Thing']
+        'category' => ['PhysicalActivityCategory', 'Text', 'Thing']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -134,7 +123,6 @@ class Recommendation extends Review
     static protected $_schemaPropertyDescriptions = [
         'category' => 'A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -142,7 +130,6 @@ class Recommendation extends Review
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -150,14 +137,21 @@ class Recommendation extends Review
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A category for the item. Greater signs or slashes can be used to informally
+     * indicate a category hierarchy.
+     *
+     * @var mixed|PhysicalActivityCategory|string|Thing [schema.org types: PhysicalActivityCategory, Text, Thing]
+     */
+    public $category;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -187,9 +181,9 @@ class Recommendation extends Review
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

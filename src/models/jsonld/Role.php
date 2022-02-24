@@ -97,34 +97,6 @@ class Role extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The end date and time of the item (in ISO 8601 date format).
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $endDate;
-
-    /**
-     * A role played, performed or filled by a person or organization. For
-     * example, the team of creators for a comic book might fill the roles named
-     * 'inker', 'penciller', and 'letterer'; or an athlete in a SportsTeam might
-     * play in the position named 'Quarterback'. Supersedes namedPosition.
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $roleName;
-
-    /**
-     * The start date and time of the item (in ISO 8601 date format).
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $startDate;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -135,18 +107,16 @@ class Role extends Intangible
         'roleName',
         'startDate'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'endDate' => ['Date','DateTime'],
-        'roleName' => ['Text','URL'],
-        'startDate' => ['Date','DateTime']
+        'endDate' => ['Date', 'DateTime'],
+        'roleName' => ['Text', 'URL'],
+        'startDate' => ['Date', 'DateTime']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -158,6 +128,8 @@ class Role extends Intangible
         'startDate' => 'The start date and time of the item (in ISO 8601 date format).'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -165,7 +137,6 @@ class Role extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -173,14 +144,35 @@ class Role extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The end date and time of the item (in ISO 8601 date format).
+     *
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     */
+    public $endDate;
+    /**
+     * A role played, performed or filled by a person or organization. For
+     * example, the team of creators for a comic book might fill the roles named
+     * 'inker', 'penciller', and 'letterer'; or an athlete in a SportsTeam might
+     * play in the position named 'Quarterback'. Supersedes namedPosition.
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $roleName;
+    /**
+     * The start date and time of the item (in ISO 8601 date format).
+     *
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     */
+    public $startDate;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -210,13 +202,13 @@ class Role extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['endDate','roleName','startDate'], 'validateJsonSchema'],
+            [['endDate', 'roleName', 'startDate'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

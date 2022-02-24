@@ -98,34 +98,6 @@ class CheckOutAction extends CommunicateAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The subject matter of the content. Inverse property: subjectOf.
-     *
-     * @var Thing [schema.org types: Thing]
-     */
-    public $about;
-
-    /**
-     * The language of the content or performance or used in an action. Please use
-     * one of the language codes from the IETF BCP 47 standard. See also
-     * availableLanguage. Supersedes language.
-     *
-     * @var mixed|Language|string [schema.org types: Language, Text]
-     */
-    public $inLanguage;
-
-    /**
-     * A sub property of participant. The participant who is at the receiving end
-     * of the action.
-     *
-     * @var mixed|Audience|ContactPoint|Organization|Person [schema.org types: Audience, ContactPoint, Organization, Person]
-     */
-    public $recipient;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -136,7 +108,6 @@ class CheckOutAction extends CommunicateAction
         'inLanguage',
         'recipient'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -144,10 +115,9 @@ class CheckOutAction extends CommunicateAction
      */
     static protected $_schemaPropertyExpectedTypes = [
         'about' => ['Thing'],
-        'inLanguage' => ['Language','Text'],
-        'recipient' => ['Audience','ContactPoint','Organization','Person']
+        'inLanguage' => ['Language', 'Text'],
+        'recipient' => ['Audience', 'ContactPoint', 'Organization', 'Person']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -159,6 +129,8 @@ class CheckOutAction extends CommunicateAction
         'recipient' => 'A sub property of participant. The participant who is at the receiving end of the action.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -166,7 +138,6 @@ class CheckOutAction extends CommunicateAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -174,14 +145,35 @@ class CheckOutAction extends CommunicateAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The subject matter of the content. Inverse property: subjectOf.
+     *
+     * @var Thing [schema.org types: Thing]
+     */
+    public $about;
+    /**
+     * The language of the content or performance or used in an action. Please use
+     * one of the language codes from the IETF BCP 47 standard. See also
+     * availableLanguage. Supersedes language.
+     *
+     * @var mixed|Language|string [schema.org types: Language, Text]
+     */
+    public $inLanguage;
+    /**
+     * A sub property of participant. The participant who is at the receiving end
+     * of the action.
+     *
+     * @var mixed|Audience|ContactPoint|Organization|Person [schema.org types: Audience, ContactPoint, Organization, Person]
+     */
+    public $recipient;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -211,13 +203,13 @@ class CheckOutAction extends CommunicateAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['about','inLanguage','recipient'], 'validateJsonSchema'],
+            [['about', 'inLanguage', 'recipient'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

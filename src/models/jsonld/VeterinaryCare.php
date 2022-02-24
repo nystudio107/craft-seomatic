@@ -91,32 +91,6 @@ class VeterinaryCare extends MedicalOrganization
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Name or unique ID of network. (Networks are often reused across different
-     * insurance plans).
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $healthPlanNetworkId;
-
-    /**
-     * Whether the provider is accepting new patients.
-     *
-     * @var bool [schema.org types: Boolean]
-     */
-    public $isAcceptingNewPatients;
-
-    /**
-     * A medical specialty of the provider.
-     *
-     * @var MedicalSpecialty [schema.org types: MedicalSpecialty]
-     */
-    public $medicalSpecialty;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -127,7 +101,6 @@ class VeterinaryCare extends MedicalOrganization
         'isAcceptingNewPatients',
         'medicalSpecialty'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -138,7 +111,6 @@ class VeterinaryCare extends MedicalOrganization
         'isAcceptingNewPatients' => ['Boolean'],
         'medicalSpecialty' => ['MedicalSpecialty']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -150,6 +122,8 @@ class VeterinaryCare extends MedicalOrganization
         'medicalSpecialty' => 'A medical specialty of the provider.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -157,7 +131,6 @@ class VeterinaryCare extends MedicalOrganization
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -165,14 +138,33 @@ class VeterinaryCare extends MedicalOrganization
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Name or unique ID of network. (Networks are often reused across different
+     * insurance plans).
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $healthPlanNetworkId;
+    /**
+     * Whether the provider is accepting new patients.
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $isAcceptingNewPatients;
+    /**
+     * A medical specialty of the provider.
+     *
+     * @var MedicalSpecialty [schema.org types: MedicalSpecialty]
+     */
+    public $medicalSpecialty;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -202,13 +194,13 @@ class VeterinaryCare extends MedicalOrganization
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['healthPlanNetworkId','isAcceptingNewPatients','medicalSpecialty'], 'validateJsonSchema'],
+            [['healthPlanNetworkId', 'isAcceptingNewPatients', 'medicalSpecialty'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

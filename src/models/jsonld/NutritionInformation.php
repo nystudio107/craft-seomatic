@@ -91,94 +91,6 @@ class NutritionInformation extends StructuredValue
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The number of calories.
-     *
-     * @var Energy [schema.org types: Energy]
-     */
-    public $calories;
-
-    /**
-     * The number of grams of carbohydrates.
-     *
-     * @var Mass [schema.org types: Mass]
-     */
-    public $carbohydrateContent;
-
-    /**
-     * The number of milligrams of cholesterol.
-     *
-     * @var Mass [schema.org types: Mass]
-     */
-    public $cholesterolContent;
-
-    /**
-     * The number of grams of fat.
-     *
-     * @var Mass [schema.org types: Mass]
-     */
-    public $fatContent;
-
-    /**
-     * The number of grams of fiber.
-     *
-     * @var Mass [schema.org types: Mass]
-     */
-    public $fiberContent;
-
-    /**
-     * The number of grams of protein.
-     *
-     * @var Mass [schema.org types: Mass]
-     */
-    public $proteinContent;
-
-    /**
-     * The number of grams of saturated fat.
-     *
-     * @var Mass [schema.org types: Mass]
-     */
-    public $saturatedFatContent;
-
-    /**
-     * The serving size, in terms of the number of volume or mass.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $servingSize;
-
-    /**
-     * The number of milligrams of sodium.
-     *
-     * @var Mass [schema.org types: Mass]
-     */
-    public $sodiumContent;
-
-    /**
-     * The number of grams of sugar.
-     *
-     * @var Mass [schema.org types: Mass]
-     */
-    public $sugarContent;
-
-    /**
-     * The number of grams of trans fat.
-     *
-     * @var Mass [schema.org types: Mass]
-     */
-    public $transFatContent;
-
-    /**
-     * The number of grams of unsaturated fat.
-     *
-     * @var Mass [schema.org types: Mass]
-     */
-    public $unsaturatedFatContent;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -198,7 +110,6 @@ class NutritionInformation extends StructuredValue
         'transFatContent',
         'unsaturatedFatContent'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -218,7 +129,6 @@ class NutritionInformation extends StructuredValue
         'transFatContent' => ['Mass'],
         'unsaturatedFatContent' => ['Mass']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -238,7 +148,6 @@ class NutritionInformation extends StructuredValue
         'transFatContent' => 'The number of grams of trans fat.',
         'unsaturatedFatContent' => 'The number of grams of unsaturated fat.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -246,7 +155,6 @@ class NutritionInformation extends StructuredValue
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -254,14 +162,89 @@ class NutritionInformation extends StructuredValue
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The number of calories.
+     *
+     * @var Energy [schema.org types: Energy]
+     */
+    public $calories;
+    /**
+     * The number of grams of carbohydrates.
+     *
+     * @var Mass [schema.org types: Mass]
+     */
+    public $carbohydrateContent;
+    /**
+     * The number of milligrams of cholesterol.
+     *
+     * @var Mass [schema.org types: Mass]
+     */
+    public $cholesterolContent;
+    /**
+     * The number of grams of fat.
+     *
+     * @var Mass [schema.org types: Mass]
+     */
+    public $fatContent;
+    /**
+     * The number of grams of fiber.
+     *
+     * @var Mass [schema.org types: Mass]
+     */
+    public $fiberContent;
+    /**
+     * The number of grams of protein.
+     *
+     * @var Mass [schema.org types: Mass]
+     */
+    public $proteinContent;
+    /**
+     * The number of grams of saturated fat.
+     *
+     * @var Mass [schema.org types: Mass]
+     */
+    public $saturatedFatContent;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The serving size, in terms of the number of volume or mass.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $servingSize;
+    /**
+     * The number of milligrams of sodium.
+     *
+     * @var Mass [schema.org types: Mass]
+     */
+    public $sodiumContent;
+    /**
+     * The number of grams of sugar.
+     *
+     * @var Mass [schema.org types: Mass]
+     */
+    public $sugarContent;
+    /**
+     * The number of grams of trans fat.
+     *
+     * @var Mass [schema.org types: Mass]
+     */
+    public $transFatContent;
+    /**
+     * The number of grams of unsaturated fat.
+     *
+     * @var Mass [schema.org types: Mass]
+     */
+    public $unsaturatedFatContent;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -291,13 +274,13 @@ class NutritionInformation extends StructuredValue
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['calories','carbohydrateContent','cholesterolContent','fatContent','fiberContent','proteinContent','saturatedFatContent','servingSize','sodiumContent','sugarContent','transFatContent','unsaturatedFatContent'], 'validateJsonSchema'],
+            [['calories', 'carbohydrateContent', 'cholesterolContent', 'fatContent', 'fiberContent', 'proteinContent', 'saturatedFatContent', 'servingSize', 'sodiumContent', 'sugarContent', 'transFatContent', 'unsaturatedFatContent'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

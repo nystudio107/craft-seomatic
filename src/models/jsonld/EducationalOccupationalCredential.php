@@ -94,58 +94,6 @@ class EducationalOccupationalCredential extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Knowledge, skill, ability or personal attribute that must be demonstrated
-     * by a person or other entity.
-     *
-     * @var mixed|DefinedTerm|string|string [schema.org types: DefinedTerm, Text, URL]
-     */
-    public $competencyRequired;
-
-    /**
-     * The category or type of credential being described, for example "degree”,
-     * “certificate”, “badge”, or more specific term.
-     *
-     * @var mixed|DefinedTerm|string|string [schema.org types: DefinedTerm, Text, URL]
-     */
-    public $credentialCategory;
-
-    /**
-     * The level in terms of progression through an educational or training
-     * context. Examples of educational levels include 'beginner', 'intermediate'
-     * or 'advanced', and formal sets of level indicators.
-     *
-     * @var mixed|DefinedTerm|string|string [schema.org types: DefinedTerm, Text, URL]
-     */
-    public $educationalLevel;
-
-    /**
-     * An organization that acknowledges the validity, value or utility of a
-     * credential. Note: recognition may include a process of quality assurance or
-     * accreditation.
-     *
-     * @var Organization [schema.org types: Organization]
-     */
-    public $recognizedBy;
-
-    /**
-     * The duration of validity of a permit or similar thing.
-     *
-     * @var Duration [schema.org types: Duration]
-     */
-    public $validFor;
-
-    /**
-     * The geographic area where a permit or similar thing is valid.
-     *
-     * @var AdministrativeArea [schema.org types: AdministrativeArea]
-     */
-    public $validIn;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -159,21 +107,19 @@ class EducationalOccupationalCredential extends CreativeWork
         'validFor',
         'validIn'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'competencyRequired' => ['DefinedTerm','Text','URL'],
-        'credentialCategory' => ['DefinedTerm','Text','URL'],
-        'educationalLevel' => ['DefinedTerm','Text','URL'],
+        'competencyRequired' => ['DefinedTerm', 'Text', 'URL'],
+        'credentialCategory' => ['DefinedTerm', 'Text', 'URL'],
+        'educationalLevel' => ['DefinedTerm', 'Text', 'URL'],
         'recognizedBy' => ['Organization'],
         'validFor' => ['Duration'],
         'validIn' => ['AdministrativeArea']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -187,7 +133,6 @@ class EducationalOccupationalCredential extends CreativeWork
         'validFor' => 'The duration of validity of a permit or similar thing.',
         'validIn' => 'The geographic area where a permit or similar thing is valid.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -195,7 +140,6 @@ class EducationalOccupationalCredential extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -203,14 +147,59 @@ class EducationalOccupationalCredential extends CreativeWork
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Knowledge, skill, ability or personal attribute that must be demonstrated
+     * by a person or other entity.
+     *
+     * @var mixed|DefinedTerm|string|string [schema.org types: DefinedTerm, Text, URL]
+     */
+    public $competencyRequired;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The category or type of credential being described, for example "degree”,
+     * “certificate”, “badge”, or more specific term.
+     *
+     * @var mixed|DefinedTerm|string|string [schema.org types: DefinedTerm, Text, URL]
+     */
+    public $credentialCategory;
+    /**
+     * The level in terms of progression through an educational or training
+     * context. Examples of educational levels include 'beginner', 'intermediate'
+     * or 'advanced', and formal sets of level indicators.
+     *
+     * @var mixed|DefinedTerm|string|string [schema.org types: DefinedTerm, Text, URL]
+     */
+    public $educationalLevel;
+    /**
+     * An organization that acknowledges the validity, value or utility of a
+     * credential. Note: recognition may include a process of quality assurance or
+     * accreditation.
+     *
+     * @var Organization [schema.org types: Organization]
+     */
+    public $recognizedBy;
+    /**
+     * The duration of validity of a permit or similar thing.
+     *
+     * @var Duration [schema.org types: Duration]
+     */
+    public $validFor;
+    /**
+     * The geographic area where a permit or similar thing is valid.
+     *
+     * @var AdministrativeArea [schema.org types: AdministrativeArea]
+     */
+    public $validIn;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -240,13 +229,13 @@ class EducationalOccupationalCredential extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['competencyRequired','credentialCategory','educationalLevel','recognizedBy','validFor','validIn'], 'validateJsonSchema'],
+            [['competencyRequired', 'credentialCategory', 'educationalLevel', 'recognizedBy', 'validFor', 'validIn'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

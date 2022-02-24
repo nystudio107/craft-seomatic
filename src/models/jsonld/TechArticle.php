@@ -92,24 +92,6 @@ class TechArticle extends Article
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Prerequisites needed to fulfill steps in article.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $dependencies;
-
-    /**
-     * Proficiency needed for this content; expected values: 'Beginner', 'Expert'.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $proficiencyLevel;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -119,7 +101,6 @@ class TechArticle extends Article
         'dependencies',
         'proficiencyLevel'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -130,6 +111,8 @@ class TechArticle extends Article
         'proficiencyLevel' => ['Text']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -139,7 +122,6 @@ class TechArticle extends Article
         'dependencies' => 'Prerequisites needed to fulfill steps in article.',
         'proficiencyLevel' => 'Proficiency needed for this content; expected values: \'Beginner\', \'Expert\'.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -147,7 +129,6 @@ class TechArticle extends Article
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -155,14 +136,26 @@ class TechArticle extends Article
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Prerequisites needed to fulfill steps in article.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $dependencies;
+    /**
+     * Proficiency needed for this content; expected values: 'Beginner', 'Expert'.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $proficiencyLevel;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -192,13 +185,13 @@ class TechArticle extends Article
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['dependencies','proficiencyLevel'], 'validateJsonSchema'],
+            [['dependencies', 'proficiencyLevel'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

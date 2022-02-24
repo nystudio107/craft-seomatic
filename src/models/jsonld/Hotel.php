@@ -94,79 +94,6 @@ class Hotel extends LodgingBusiness
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * An amenity feature (e.g. a characteristic or service) of the Accommodation.
-     * This generic property does not make a statement about whether the feature
-     * is included in an offer for the main accommodation or available at extra
-     * costs.
-     *
-     * @var LocationFeatureSpecification [schema.org types: LocationFeatureSpecification]
-     */
-    public $amenityFeature;
-
-    /**
-     * An intended audience, i.e. a group for whom something was created.
-     * Supersedes serviceAudience.
-     *
-     * @var Audience [schema.org types: Audience]
-     */
-    public $audience;
-
-    /**
-     * A language someone may use with or at the item, service or place. Please
-     * use one of the language codes from the IETF BCP 47 standard. See also
-     * inLanguage
-     *
-     * @var mixed|Language|string [schema.org types: Language, Text]
-     */
-    public $availableLanguage;
-
-    /**
-     * The earliest someone may check into a lodging establishment.
-     *
-     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
-     */
-    public $checkinTime;
-
-    /**
-     * The latest someone may check out of a lodging establishment.
-     *
-     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
-     */
-    public $checkoutTime;
-
-    /**
-     * The number of rooms (excluding bathrooms and closets) of the accommodation
-     * or lodging business. Typical unit code(s): ROM for room or C62 for no unit.
-     * The type of room can be put in the unitText property of the
-     * QuantitativeValue.
-     *
-     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
-     */
-    public $numberOfRooms;
-
-    /**
-     * Indicates whether pets are allowed to enter the accommodation or lodging
-     * business. More detailed information can be put in a text value.
-     *
-     * @var mixed|bool|string [schema.org types: Boolean, Text]
-     */
-    public $petsAllowed;
-
-    /**
-     * An official rating for a lodging business or food establishment, e.g. from
-     * national associations or standards bodies. Use the author property to
-     * indicate the rating organization, e.g. as an Organization with name such as
-     * (e.g. HOTREC, DEHOGA, WHR, or Hotelstars).
-     *
-     * @var Rating [schema.org types: Rating]
-     */
-    public $starRating;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -182,7 +109,6 @@ class Hotel extends LodgingBusiness
         'petsAllowed',
         'starRating'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -191,14 +117,13 @@ class Hotel extends LodgingBusiness
     static protected $_schemaPropertyExpectedTypes = [
         'amenityFeature' => ['LocationFeatureSpecification'],
         'audience' => ['Audience'],
-        'availableLanguage' => ['Language','Text'],
-        'checkinTime' => ['DateTime','Time'],
-        'checkoutTime' => ['DateTime','Time'],
-        'numberOfRooms' => ['Number','QuantitativeValue'],
-        'petsAllowed' => ['Boolean','Text'],
+        'availableLanguage' => ['Language', 'Text'],
+        'checkinTime' => ['DateTime', 'Time'],
+        'checkoutTime' => ['DateTime', 'Time'],
+        'numberOfRooms' => ['Number', 'QuantitativeValue'],
+        'petsAllowed' => ['Boolean', 'Text'],
         'starRating' => ['Rating']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -214,7 +139,6 @@ class Hotel extends LodgingBusiness
         'petsAllowed' => 'Indicates whether pets are allowed to enter the accommodation or lodging business. More detailed information can be put in a text value.',
         'starRating' => 'An official rating for a lodging business or food establishment, e.g. from national associations or standards bodies. Use the author property to indicate the rating organization, e.g. as an Organization with name such as (e.g. HOTREC, DEHOGA, WHR, or Hotelstars).'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -222,7 +146,6 @@ class Hotel extends LodgingBusiness
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -230,14 +153,78 @@ class Hotel extends LodgingBusiness
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * An amenity feature (e.g. a characteristic or service) of the Accommodation.
+     * This generic property does not make a statement about whether the feature
+     * is included in an offer for the main accommodation or available at extra
+     * costs.
+     *
+     * @var LocationFeatureSpecification [schema.org types: LocationFeatureSpecification]
+     */
+    public $amenityFeature;
+    /**
+     * An intended audience, i.e. a group for whom something was created.
+     * Supersedes serviceAudience.
+     *
+     * @var Audience [schema.org types: Audience]
+     */
+    public $audience;
+    /**
+     * A language someone may use with or at the item, service or place. Please
+     * use one of the language codes from the IETF BCP 47 standard. See also
+     * inLanguage
+     *
+     * @var mixed|Language|string [schema.org types: Language, Text]
+     */
+    public $availableLanguage;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The earliest someone may check into a lodging establishment.
+     *
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
+     */
+    public $checkinTime;
+    /**
+     * The latest someone may check out of a lodging establishment.
+     *
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
+     */
+    public $checkoutTime;
+    /**
+     * The number of rooms (excluding bathrooms and closets) of the accommodation
+     * or lodging business. Typical unit code(s): ROM for room or C62 for no unit.
+     * The type of room can be put in the unitText property of the
+     * QuantitativeValue.
+     *
+     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
+     */
+    public $numberOfRooms;
+    /**
+     * Indicates whether pets are allowed to enter the accommodation or lodging
+     * business. More detailed information can be put in a text value.
+     *
+     * @var mixed|bool|string [schema.org types: Boolean, Text]
+     */
+    public $petsAllowed;
+    /**
+     * An official rating for a lodging business or food establishment, e.g. from
+     * national associations or standards bodies. Use the author property to
+     * indicate the rating organization, e.g. as an Organization with name such as
+     * (e.g. HOTREC, DEHOGA, WHR, or Hotelstars).
+     *
+     * @var Rating [schema.org types: Rating]
+     */
+    public $starRating;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -267,13 +254,13 @@ class Hotel extends LodgingBusiness
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['amenityFeature','audience','availableLanguage','checkinTime','checkoutTime','numberOfRooms','petsAllowed','starRating'], 'validateJsonSchema'],
+            [['amenityFeature', 'audience', 'availableLanguage', 'checkinTime', 'checkoutTime', 'numberOfRooms', 'petsAllowed', 'starRating'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

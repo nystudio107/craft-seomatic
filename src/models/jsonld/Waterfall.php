@@ -91,338 +91,6 @@ class Waterfall extends BodyOfWater
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A property-value pair representing an additional characteristics of the
-     * entitity, e.g. a product feature or another characteristic for which there
-     * is no matching property in schema.org. Note: Publishers should be aware
-     * that applications designed to use specific schema.org properties (e.g.
-     * http://schema.org/width, http://schema.org/color, http://schema.org/gtin13,
-     * ...) will typically expect such data to be provided using those properties,
-     * rather than using the generic property/value mechanism.
-     *
-     * @var PropertyValue [schema.org types: PropertyValue]
-     */
-    public $additionalProperty;
-
-    /**
-     * Physical address of the item.
-     *
-     * @var mixed|PostalAddress|string [schema.org types: PostalAddress, Text]
-     */
-    public $address;
-
-    /**
-     * The overall rating, based on a collection of reviews or ratings, of the
-     * item.
-     *
-     * @var AggregateRating [schema.org types: AggregateRating]
-     */
-    public $aggregateRating;
-
-    /**
-     * An amenity feature (e.g. a characteristic or service) of the Accommodation.
-     * This generic property does not make a statement about whether the feature
-     * is included in an offer for the main accommodation or available at extra
-     * costs.
-     *
-     * @var LocationFeatureSpecification [schema.org types: LocationFeatureSpecification]
-     */
-    public $amenityFeature;
-
-    /**
-     * A short textual code (also called "store code") that uniquely identifies a
-     * place of business. The code is typically assigned by the parentOrganization
-     * and used in structured URLs. For example, in the URL
-     * http://www.starbucks.co.uk/store-locator/etc/detail/3047 the code "3047" is
-     * a branchCode for a particular branch.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $branchCode;
-
-    /**
-     * The basic containment relation between a place and one that contains it.
-     * Supersedes containedIn. Inverse property: containsPlace.
-     *
-     * @var Place [schema.org types: Place]
-     */
-    public $containedInPlace;
-
-    /**
-     * The basic containment relation between a place and another that it
-     * contains. Inverse property: containedInPlace.
-     *
-     * @var Place [schema.org types: Place]
-     */
-    public $containsPlace;
-
-    /**
-     * Upcoming or past event associated with this place, organization, or action.
-     * Supersedes events.
-     *
-     * @var Event [schema.org types: Event]
-     */
-    public $event;
-
-    /**
-     * The fax number.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $faxNumber;
-
-    /**
-     * The geo coordinates of the place.
-     *
-     * @var mixed|GeoCoordinates|GeoShape [schema.org types: GeoCoordinates, GeoShape]
-     */
-    public $geo;
-
-    /**
-     * Represents a relationship between two geometries (or the places they
-     * represent), relating a containing geometry to a contained geometry. "a
-     * contains b iff no points of b lie in the exterior of a, and at least one
-     * point of the interior of b lies in the interior of a". As defined in
-     * DE-9IM.
-     *
-     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
-     */
-    public $geoContains;
-
-    /**
-     * Represents a relationship between two geometries (or the places they
-     * represent), relating a geometry to another that covers it. As defined in
-     * DE-9IM.
-     *
-     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
-     */
-    public $geoCoveredBy;
-
-    /**
-     * Represents a relationship between two geometries (or the places they
-     * represent), relating a covering geometry to a covered geometry. "Every
-     * point of b is a point of (the interior or boundary of) a". As defined in
-     * DE-9IM.
-     *
-     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
-     */
-    public $geoCovers;
-
-    /**
-     * Represents a relationship between two geometries (or the places they
-     * represent), relating a geometry to another that crosses it: "a crosses b:
-     * they have some but not all interior points in common, and the dimension of
-     * the intersection is less than that of at least one of them". As defined in
-     * DE-9IM.
-     *
-     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
-     */
-    public $geoCrosses;
-
-    /**
-     * Represents spatial relations in which two geometries (or the places they
-     * represent) are topologically disjoint: they have no point in common. They
-     * form a set of disconnected geometries." (a symmetric relationship, as
-     * defined in DE-9IM)
-     *
-     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
-     */
-    public $geoDisjoint;
-
-    /**
-     * Represents spatial relations in which two geometries (or the places they
-     * represent) are topologically equal, as defined in DE-9IM. "Two geometries
-     * are topologically equal if their interiors intersect and no part of the
-     * interior or boundary of one geometry intersects the exterior of the other"
-     * (a symmetric relationship)
-     *
-     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
-     */
-    public $geoEquals;
-
-    /**
-     * Represents spatial relations in which two geometries (or the places they
-     * represent) have at least one point in common. As defined in DE-9IM.
-     *
-     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
-     */
-    public $geoIntersects;
-
-    /**
-     * Represents a relationship between two geometries (or the places they
-     * represent), relating a geometry to another that geospatially overlaps it,
-     * i.e. they have some but not all points in common. As defined in DE-9IM.
-     *
-     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
-     */
-    public $geoOverlaps;
-
-    /**
-     * Represents spatial relations in which two geometries (or the places they
-     * represent) touch: they have at least one boundary point in common, but no
-     * interior points." (a symmetric relationship, as defined in DE-9IM )
-     *
-     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
-     */
-    public $geoTouches;
-
-    /**
-     * Represents a relationship between two geometries (or the places they
-     * represent), relating a geometry to one that contains it, i.e. it is inside
-     * (i.e. within) its interior. As defined in DE-9IM.
-     *
-     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
-     */
-    public $geoWithin;
-
-    /**
-     * The Global Location Number (GLN, sometimes also referred to as
-     * International Location Number or ILN) of the respective organization,
-     * person, or place. The GLN is a 13-digit number used to identify parties and
-     * physical locations.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $globalLocationNumber;
-
-    /**
-     * Indicates whether some facility (e.g. FoodEstablishment,
-     * CovidTestingFacility) offers a service that can be used by driving through
-     * in a car. In the case of CovidTestingFacility such facilities could
-     * potentially help with social distancing from other potentially-infected
-     * users.
-     *
-     * @var bool [schema.org types: Boolean]
-     */
-    public $hasDriveThroughService;
-
-    /**
-     * A URL to a map of the place. Supersedes map, maps.
-     *
-     * @var mixed|Map|string [schema.org types: Map, URL]
-     */
-    public $hasMap;
-
-    /**
-     * A flag to signal that the item, event, or place is accessible for free.
-     * Supersedes free.
-     *
-     * @var bool [schema.org types: Boolean]
-     */
-    public $isAccessibleForFree;
-
-    /**
-     * The International Standard of Industrial Classification of All Economic
-     * Activities (ISIC), Revision 4 code for a particular organization, business
-     * person, or place. The International Standard of Industrial Classification
-     * of All Economic Activities (ISIC), Revision 4 code for a particular
-     * organization, business person, or place.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $isicV4;
-
-    /**
-     * The latitude of a location. For example 37.42242 (WGS 84).
-     *
-     * @var mixed|float|string [schema.org types: Number, Text]
-     */
-    public $latitude;
-
-    /**
-     * An associated logo.
-     *
-     * @var mixed|ImageObject|string [schema.org types: ImageObject, URL]
-     */
-    public $logo;
-
-    /**
-     * The longitude of a location. For example -122.08585 (WGS 84).
-     *
-     * @var mixed|float|string [schema.org types: Number, Text]
-     */
-    public $longitude;
-
-    /**
-     * The total number of individuals that may attend an event or venue.
-     *
-     * @var int [schema.org types: Integer]
-     */
-    public $maximumAttendeeCapacity;
-
-    /**
-     * The opening hours of a certain place.
-     *
-     * @var OpeningHoursSpecification [schema.org types: OpeningHoursSpecification]
-     */
-    public $openingHoursSpecification;
-
-    /**
-     * A photograph of this place. Supersedes photos.
-     *
-     * @var mixed|ImageObject|Photograph [schema.org types: ImageObject, Photograph]
-     */
-    public $photo;
-
-    /**
-     * A flag to signal that the Place is open to public visitors. If this
-     * property is omitted there is no assumed default boolean value
-     *
-     * @var bool [schema.org types: Boolean]
-     */
-    public $publicAccess;
-
-    /**
-     * A review of the item. Supersedes reviews.
-     *
-     * @var Review [schema.org types: Review]
-     */
-    public $review;
-
-    /**
-     * A slogan or motto associated with the item.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $slogan;
-
-    /**
-     * Indicates whether it is allowed to smoke in the place, e.g. in the
-     * restaurant, hotel or hotel room.
-     *
-     * @var bool [schema.org types: Boolean]
-     */
-    public $smokingAllowed;
-
-    /**
-     * The special opening hours of a certain place. Use this to explicitly
-     * override general opening hours brought in scope by
-     * openingHoursSpecification or openingHours.
-     *
-     * @var OpeningHoursSpecification [schema.org types: OpeningHoursSpecification]
-     */
-    public $specialOpeningHoursSpecification;
-
-    /**
-     * The telephone number. The telephone number.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $telephone;
-
-    /**
-     * A page providing information on how to book a tour of some Place, such as
-     * an Accommodation or ApartmentComplex in a real estate setting, as well as
-     * other kinds of tours as appropriate.
-     *
-     * @var string [schema.org types: URL]
-     */
-    public $tourBookingPage;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -468,7 +136,6 @@ class Waterfall extends BodyOfWater
         'telephone',
         'tourBookingPage'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -476,7 +143,7 @@ class Waterfall extends BodyOfWater
      */
     static protected $_schemaPropertyExpectedTypes = [
         'additionalProperty' => ['PropertyValue'],
-        'address' => ['PostalAddress','Text'],
+        'address' => ['PostalAddress', 'Text'],
         'aggregateRating' => ['AggregateRating'],
         'amenityFeature' => ['LocationFeatureSpecification'],
         'branchCode' => ['Text'],
@@ -484,28 +151,28 @@ class Waterfall extends BodyOfWater
         'containsPlace' => ['Place'],
         'event' => ['Event'],
         'faxNumber' => ['Text'],
-        'geo' => ['GeoCoordinates','GeoShape'],
-        'geoContains' => ['GeospatialGeometry','Place'],
-        'geoCoveredBy' => ['GeospatialGeometry','Place'],
-        'geoCovers' => ['GeospatialGeometry','Place'],
-        'geoCrosses' => ['GeospatialGeometry','Place'],
-        'geoDisjoint' => ['GeospatialGeometry','Place'],
-        'geoEquals' => ['GeospatialGeometry','Place'],
-        'geoIntersects' => ['GeospatialGeometry','Place'],
-        'geoOverlaps' => ['GeospatialGeometry','Place'],
-        'geoTouches' => ['GeospatialGeometry','Place'],
-        'geoWithin' => ['GeospatialGeometry','Place'],
+        'geo' => ['GeoCoordinates', 'GeoShape'],
+        'geoContains' => ['GeospatialGeometry', 'Place'],
+        'geoCoveredBy' => ['GeospatialGeometry', 'Place'],
+        'geoCovers' => ['GeospatialGeometry', 'Place'],
+        'geoCrosses' => ['GeospatialGeometry', 'Place'],
+        'geoDisjoint' => ['GeospatialGeometry', 'Place'],
+        'geoEquals' => ['GeospatialGeometry', 'Place'],
+        'geoIntersects' => ['GeospatialGeometry', 'Place'],
+        'geoOverlaps' => ['GeospatialGeometry', 'Place'],
+        'geoTouches' => ['GeospatialGeometry', 'Place'],
+        'geoWithin' => ['GeospatialGeometry', 'Place'],
         'globalLocationNumber' => ['Text'],
         'hasDriveThroughService' => ['Boolean'],
-        'hasMap' => ['Map','URL'],
+        'hasMap' => ['Map', 'URL'],
         'isAccessibleForFree' => ['Boolean'],
         'isicV4' => ['Text'],
-        'latitude' => ['Number','Text'],
-        'logo' => ['ImageObject','URL'],
-        'longitude' => ['Number','Text'],
+        'latitude' => ['Number', 'Text'],
+        'logo' => ['ImageObject', 'URL'],
+        'longitude' => ['Number', 'Text'],
         'maximumAttendeeCapacity' => ['Integer'],
         'openingHoursSpecification' => ['OpeningHoursSpecification'],
-        'photo' => ['ImageObject','Photograph'],
+        'photo' => ['ImageObject', 'Photograph'],
         'publicAccess' => ['Boolean'],
         'review' => ['Review'],
         'slogan' => ['Text'],
@@ -514,7 +181,6 @@ class Waterfall extends BodyOfWater
         'telephone' => ['Text'],
         'tourBookingPage' => ['URL']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -560,7 +226,6 @@ class Waterfall extends BodyOfWater
         'telephone' => 'The telephone number. The telephone number.',
         'tourBookingPage' => 'A page providing information on how to book a tour of some Place, such as an Accommodation or ApartmentComplex in a real estate setting, as well as other kinds of tours as appropriate.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -568,7 +233,6 @@ class Waterfall extends BodyOfWater
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -576,14 +240,307 @@ class Waterfall extends BodyOfWater
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A property-value pair representing an additional characteristics of the
+     * entitity, e.g. a product feature or another characteristic for which there
+     * is no matching property in schema.org. Note: Publishers should be aware
+     * that applications designed to use specific schema.org properties (e.g.
+     * http://schema.org/width, http://schema.org/color, http://schema.org/gtin13,
+     * ...) will typically expect such data to be provided using those properties,
+     * rather than using the generic property/value mechanism.
+     *
+     * @var PropertyValue [schema.org types: PropertyValue]
+     */
+    public $additionalProperty;
+    /**
+     * Physical address of the item.
+     *
+     * @var mixed|PostalAddress|string [schema.org types: PostalAddress, Text]
+     */
+    public $address;
+    /**
+     * The overall rating, based on a collection of reviews or ratings, of the
+     * item.
+     *
+     * @var AggregateRating [schema.org types: AggregateRating]
+     */
+    public $aggregateRating;
+    /**
+     * An amenity feature (e.g. a characteristic or service) of the Accommodation.
+     * This generic property does not make a statement about whether the feature
+     * is included in an offer for the main accommodation or available at extra
+     * costs.
+     *
+     * @var LocationFeatureSpecification [schema.org types: LocationFeatureSpecification]
+     */
+    public $amenityFeature;
+    /**
+     * A short textual code (also called "store code") that uniquely identifies a
+     * place of business. The code is typically assigned by the parentOrganization
+     * and used in structured URLs. For example, in the URL
+     * http://www.starbucks.co.uk/store-locator/etc/detail/3047 the code "3047" is
+     * a branchCode for a particular branch.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $branchCode;
+    /**
+     * The basic containment relation between a place and one that contains it.
+     * Supersedes containedIn. Inverse property: containsPlace.
+     *
+     * @var Place [schema.org types: Place]
+     */
+    public $containedInPlace;
+    /**
+     * The basic containment relation between a place and another that it
+     * contains. Inverse property: containedInPlace.
+     *
+     * @var Place [schema.org types: Place]
+     */
+    public $containsPlace;
+    /**
+     * Upcoming or past event associated with this place, organization, or action.
+     * Supersedes events.
+     *
+     * @var Event [schema.org types: Event]
+     */
+    public $event;
+    /**
+     * The fax number.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $faxNumber;
+    /**
+     * The geo coordinates of the place.
+     *
+     * @var mixed|GeoCoordinates|GeoShape [schema.org types: GeoCoordinates, GeoShape]
+     */
+    public $geo;
+    /**
+     * Represents a relationship between two geometries (or the places they
+     * represent), relating a containing geometry to a contained geometry. "a
+     * contains b iff no points of b lie in the exterior of a, and at least one
+     * point of the interior of b lies in the interior of a". As defined in
+     * DE-9IM.
+     *
+     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
+     */
+    public $geoContains;
+    /**
+     * Represents a relationship between two geometries (or the places they
+     * represent), relating a geometry to another that covers it. As defined in
+     * DE-9IM.
+     *
+     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
+     */
+    public $geoCoveredBy;
+    /**
+     * Represents a relationship between two geometries (or the places they
+     * represent), relating a covering geometry to a covered geometry. "Every
+     * point of b is a point of (the interior or boundary of) a". As defined in
+     * DE-9IM.
+     *
+     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
+     */
+    public $geoCovers;
+    /**
+     * Represents a relationship between two geometries (or the places they
+     * represent), relating a geometry to another that crosses it: "a crosses b:
+     * they have some but not all interior points in common, and the dimension of
+     * the intersection is less than that of at least one of them". As defined in
+     * DE-9IM.
+     *
+     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
+     */
+    public $geoCrosses;
+    /**
+     * Represents spatial relations in which two geometries (or the places they
+     * represent) are topologically disjoint: they have no point in common. They
+     * form a set of disconnected geometries." (a symmetric relationship, as
+     * defined in DE-9IM)
+     *
+     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
+     */
+    public $geoDisjoint;
+    /**
+     * Represents spatial relations in which two geometries (or the places they
+     * represent) are topologically equal, as defined in DE-9IM. "Two geometries
+     * are topologically equal if their interiors intersect and no part of the
+     * interior or boundary of one geometry intersects the exterior of the other"
+     * (a symmetric relationship)
+     *
+     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
+     */
+    public $geoEquals;
+    /**
+     * Represents spatial relations in which two geometries (or the places they
+     * represent) have at least one point in common. As defined in DE-9IM.
+     *
+     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
+     */
+    public $geoIntersects;
+    /**
+     * Represents a relationship between two geometries (or the places they
+     * represent), relating a geometry to another that geospatially overlaps it,
+     * i.e. they have some but not all points in common. As defined in DE-9IM.
+     *
+     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
+     */
+    public $geoOverlaps;
+    /**
+     * Represents spatial relations in which two geometries (or the places they
+     * represent) touch: they have at least one boundary point in common, but no
+     * interior points." (a symmetric relationship, as defined in DE-9IM )
+     *
+     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
+     */
+    public $geoTouches;
+    /**
+     * Represents a relationship between two geometries (or the places they
+     * represent), relating a geometry to one that contains it, i.e. it is inside
+     * (i.e. within) its interior. As defined in DE-9IM.
+     *
+     * @var mixed|GeospatialGeometry|Place [schema.org types: GeospatialGeometry, Place]
+     */
+    public $geoWithin;
+    /**
+     * The Global Location Number (GLN, sometimes also referred to as
+     * International Location Number or ILN) of the respective organization,
+     * person, or place. The GLN is a 13-digit number used to identify parties and
+     * physical locations.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $globalLocationNumber;
+    /**
+     * Indicates whether some facility (e.g. FoodEstablishment,
+     * CovidTestingFacility) offers a service that can be used by driving through
+     * in a car. In the case of CovidTestingFacility such facilities could
+     * potentially help with social distancing from other potentially-infected
+     * users.
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $hasDriveThroughService;
+    /**
+     * A URL to a map of the place. Supersedes map, maps.
+     *
+     * @var mixed|Map|string [schema.org types: Map, URL]
+     */
+    public $hasMap;
+    /**
+     * A flag to signal that the item, event, or place is accessible for free.
+     * Supersedes free.
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $isAccessibleForFree;
+    /**
+     * The International Standard of Industrial Classification of All Economic
+     * Activities (ISIC), Revision 4 code for a particular organization, business
+     * person, or place. The International Standard of Industrial Classification
+     * of All Economic Activities (ISIC), Revision 4 code for a particular
+     * organization, business person, or place.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $isicV4;
+    /**
+     * The latitude of a location. For example 37.42242 (WGS 84).
+     *
+     * @var mixed|float|string [schema.org types: Number, Text]
+     */
+    public $latitude;
+    /**
+     * An associated logo.
+     *
+     * @var mixed|ImageObject|string [schema.org types: ImageObject, URL]
+     */
+    public $logo;
+    /**
+     * The longitude of a location. For example -122.08585 (WGS 84).
+     *
+     * @var mixed|float|string [schema.org types: Number, Text]
+     */
+    public $longitude;
+    /**
+     * The total number of individuals that may attend an event or venue.
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $maximumAttendeeCapacity;
+    /**
+     * The opening hours of a certain place.
+     *
+     * @var OpeningHoursSpecification [schema.org types: OpeningHoursSpecification]
+     */
+    public $openingHoursSpecification;
+    /**
+     * A photograph of this place. Supersedes photos.
+     *
+     * @var mixed|ImageObject|Photograph [schema.org types: ImageObject, Photograph]
+     */
+    public $photo;
+    /**
+     * A flag to signal that the Place is open to public visitors. If this
+     * property is omitted there is no assumed default boolean value
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $publicAccess;
+    /**
+     * A review of the item. Supersedes reviews.
+     *
+     * @var Review [schema.org types: Review]
+     */
+    public $review;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * A slogan or motto associated with the item.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $slogan;
+    /**
+     * Indicates whether it is allowed to smoke in the place, e.g. in the
+     * restaurant, hotel or hotel room.
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $smokingAllowed;
+    /**
+     * The special opening hours of a certain place. Use this to explicitly
+     * override general opening hours brought in scope by
+     * openingHoursSpecification or openingHours.
+     *
+     * @var OpeningHoursSpecification [schema.org types: OpeningHoursSpecification]
+     */
+    public $specialOpeningHoursSpecification;
+    /**
+     * The telephone number. The telephone number.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $telephone;
+    /**
+     * A page providing information on how to book a tour of some Place, such as
+     * an Accommodation or ApartmentComplex in a real estate setting, as well as
+     * other kinds of tours as appropriate.
+     *
+     * @var string [schema.org types: URL]
+     */
+    public $tourBookingPage;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -613,13 +570,13 @@ class Waterfall extends BodyOfWater
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['additionalProperty','address','aggregateRating','amenityFeature','branchCode','containedInPlace','containsPlace','event','faxNumber','geo','geoContains','geoCoveredBy','geoCovers','geoCrosses','geoDisjoint','geoEquals','geoIntersects','geoOverlaps','geoTouches','geoWithin','globalLocationNumber','hasDriveThroughService','hasMap','isAccessibleForFree','isicV4','latitude','logo','longitude','maximumAttendeeCapacity','openingHoursSpecification','photo','publicAccess','review','slogan','smokingAllowed','specialOpeningHoursSpecification','telephone','tourBookingPage'], 'validateJsonSchema'],
+            [['additionalProperty', 'address', 'aggregateRating', 'amenityFeature', 'branchCode', 'containedInPlace', 'containsPlace', 'event', 'faxNumber', 'geo', 'geoContains', 'geoCoveredBy', 'geoCovers', 'geoCrosses', 'geoDisjoint', 'geoEquals', 'geoIntersects', 'geoOverlaps', 'geoTouches', 'geoWithin', 'globalLocationNumber', 'hasDriveThroughService', 'hasMap', 'isAccessibleForFree', 'isicV4', 'latitude', 'logo', 'longitude', 'maximumAttendeeCapacity', 'openingHoursSpecification', 'photo', 'publicAccess', 'review', 'slogan', 'smokingAllowed', 'specialOpeningHoursSpecification', 'telephone', 'tourBookingPage'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

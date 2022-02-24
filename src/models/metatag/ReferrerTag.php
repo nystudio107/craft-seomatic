@@ -37,7 +37,7 @@ class ReferrerTag extends MetaTag
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
     }
@@ -45,7 +45,7 @@ class ReferrerTag extends MetaTag
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
@@ -57,7 +57,7 @@ class ReferrerTag extends MetaTag
                 'no-referrer-when-downgrade',
                 'origin-when-crossorigin',
                 'unsafe-URL',
-                ], 'on' => ['warning'],
+            ], 'on' => ['warning'],
             ],
         ]);
 

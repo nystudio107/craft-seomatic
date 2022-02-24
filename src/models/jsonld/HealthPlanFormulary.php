@@ -92,32 +92,6 @@ class HealthPlanFormulary extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Whether The costs to the patient for services under this network or
-     * formulary.
-     *
-     * @var bool [schema.org types: Boolean]
-     */
-    public $healthPlanCostSharing;
-
-    /**
-     * The tier(s) of drugs offered by this formulary or insurance plan.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $healthPlanDrugTier;
-
-    /**
-     * Whether prescriptions can be delivered by mail.
-     *
-     * @var bool [schema.org types: Boolean]
-     */
-    public $offersPrescriptionByMail;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -128,7 +102,6 @@ class HealthPlanFormulary extends Intangible
         'healthPlanDrugTier',
         'offersPrescriptionByMail'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -139,7 +112,6 @@ class HealthPlanFormulary extends Intangible
         'healthPlanDrugTier' => ['Text'],
         'offersPrescriptionByMail' => ['Boolean']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -151,6 +123,8 @@ class HealthPlanFormulary extends Intangible
         'offersPrescriptionByMail' => 'Whether prescriptions can be delivered by mail.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -158,7 +132,6 @@ class HealthPlanFormulary extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -166,14 +139,33 @@ class HealthPlanFormulary extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Whether The costs to the patient for services under this network or
+     * formulary.
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $healthPlanCostSharing;
+    /**
+     * The tier(s) of drugs offered by this formulary or insurance plan.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $healthPlanDrugTier;
+    /**
+     * Whether prescriptions can be delivered by mail.
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $offersPrescriptionByMail;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -203,13 +195,13 @@ class HealthPlanFormulary extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['healthPlanCostSharing','healthPlanDrugTier','offersPrescriptionByMail'], 'validateJsonSchema'],
+            [['healthPlanCostSharing', 'healthPlanDrugTier', 'offersPrescriptionByMail'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

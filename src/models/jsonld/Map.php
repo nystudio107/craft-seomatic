@@ -91,17 +91,6 @@ class Map extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Indicates the kind of Map, from the MapCategoryType Enumeration.
-     *
-     * @var MapCategoryType [schema.org types: MapCategoryType]
-     */
-    public $mapType;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -111,6 +100,8 @@ class Map extends CreativeWork
         'mapType'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -119,7 +110,6 @@ class Map extends CreativeWork
     static protected $_schemaPropertyExpectedTypes = [
         'mapType' => ['MapCategoryType']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -128,7 +118,6 @@ class Map extends CreativeWork
     static protected $_schemaPropertyDescriptions = [
         'mapType' => 'Indicates the kind of Map, from the MapCategoryType Enumeration.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -136,7 +125,6 @@ class Map extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -144,14 +132,20 @@ class Map extends CreativeWork
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Indicates the kind of Map, from the MapCategoryType Enumeration.
+     *
+     * @var MapCategoryType [schema.org types: MapCategoryType]
+     */
+    public $mapType;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -181,9 +175,9 @@ class Map extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

@@ -11,15 +11,14 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\Seomatic;
+use Craft;
 use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
-
-use Craft;
-
+use nystudio107\seomatic\Seomatic;
 use yii\helpers\Html;
 use yii\helpers\Inflector;
+use function count;
 
 /**
  * @author    nystudio107
@@ -39,6 +38,37 @@ class MetaLink extends MetaItem
 
     // Static Methods
     // =========================================================================
+    /**
+     * @var string
+     */
+    public $crossorigin;
+
+    // Public Properties
+    // =========================================================================
+    /**
+     * @var string|array
+     */
+    public $href;
+    /**
+     * @var string
+     */
+    public $hreflang;
+    /**
+     * @var string
+     */
+    public $media;
+    /**
+     * @var string
+     */
+    public $rel;
+    /**
+     * @var string
+     */
+    public $sizes;
+    /**
+     * @var string
+     */
+    public $type;
 
     /**
      * @param null|string $tagType
@@ -65,51 +95,13 @@ class MetaLink extends MetaItem
         return new $className($config);
     }
 
-    // Public Properties
-    // =========================================================================
-
-    /**
-     * @var string
-     */
-    public $crossorigin;
-
-    /**
-     * @var string|array
-     */
-    public $href;
-
-    /**
-     * @var string
-     */
-    public $hreflang;
-
-    /**
-     * @var string
-     */
-    public $media;
-
-    /**
-     * @var string
-     */
-    public $rel;
-
-    /**
-     * @var string
-     */
-    public $sizes;
-
-    /**
-     * @var string
-     */
-    public $type;
-
     // Public Methods
     // =========================================================================
 
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
 
@@ -120,7 +112,7 @@ class MetaLink extends MetaItem
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
@@ -160,7 +152,7 @@ class MetaLink extends MetaItem
     /**
      * @inheritdoc
      */
-    public function fields()
+    public function fields(): array
     {
         $fields = parent::fields();
         if ($this->scenario === 'default') {
@@ -178,7 +170,7 @@ class MetaLink extends MetaItem
         if ($shouldRender) {
             MetaValueHelper::parseArray($data);
             // Only render if there's more than one attribute
-            if (\count($data) > 1) {
+            if (count($data) > 1) {
                 // Special-case scenarios
                 if (Seomatic::$devMode) {
                 }
@@ -189,7 +181,7 @@ class MetaLink extends MetaItem
                         '{tagtype} tag `{key}` did not render because it is missing attributes.',
                         ['tagtype' => 'Link', 'key' => $this->key]
                     );
-                    Craft::info('WARNING - '.$error, __METHOD__);
+                    Craft::info('WARNING - ' . $error, __METHOD__);
                 }
                 $shouldRender = false;
             }
@@ -201,7 +193,7 @@ class MetaLink extends MetaItem
     /**
      * @inheritdoc
      */
-    public function render(array $params = []):string
+    public function render(array $params = []): string
     {
         $html = '';
         $configs = $this->tagAttributesArray();
@@ -229,7 +221,7 @@ class MetaLink extends MetaItem
                 $attributes[] = $config;
             }
         }
-        if (\count($attributes) === 1) {
+        if (count($attributes) === 1) {
             $attributes = $attributes[0];
         }
 

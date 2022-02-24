@@ -92,17 +92,6 @@ class SomeProducts extends Product
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The current approximate inventory level for the item or items.
-     *
-     * @var QuantitativeValue [schema.org types: QuantitativeValue]
-     */
-    public $inventoryLevel;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -112,6 +101,8 @@ class SomeProducts extends Product
         'inventoryLevel'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -120,7 +111,6 @@ class SomeProducts extends Product
     static protected $_schemaPropertyExpectedTypes = [
         'inventoryLevel' => ['QuantitativeValue']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -129,7 +119,6 @@ class SomeProducts extends Product
     static protected $_schemaPropertyDescriptions = [
         'inventoryLevel' => 'The current approximate inventory level for the item or items.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -137,7 +126,6 @@ class SomeProducts extends Product
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -145,14 +133,20 @@ class SomeProducts extends Product
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The current approximate inventory level for the item or items.
+     *
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
+     */
+    public $inventoryLevel;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -182,9 +176,9 @@ class SomeProducts extends Product
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

@@ -91,32 +91,6 @@ class Hospital extends CivicStructure
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A medical service available from this provider.
-     *
-     * @var mixed|MedicalProcedure|MedicalTest|MedicalTherapy [schema.org types: MedicalProcedure, MedicalTest, MedicalTherapy]
-     */
-    public $availableService;
-
-    /**
-     * Indicates data describing a hospital, e.g. a CDC CDCPMDRecord or as some
-     * kind of Dataset.
-     *
-     * @var mixed|CDCPMDRecord|Dataset [schema.org types: CDCPMDRecord, Dataset]
-     */
-    public $healthcareReportingData;
-
-    /**
-     * A medical specialty of the provider.
-     *
-     * @var MedicalSpecialty [schema.org types: MedicalSpecialty]
-     */
-    public $medicalSpecialty;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -127,18 +101,16 @@ class Hospital extends CivicStructure
         'healthcareReportingData',
         'medicalSpecialty'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'availableService' => ['MedicalProcedure','MedicalTest','MedicalTherapy'],
-        'healthcareReportingData' => ['CDCPMDRecord','Dataset'],
+        'availableService' => ['MedicalProcedure', 'MedicalTest', 'MedicalTherapy'],
+        'healthcareReportingData' => ['CDCPMDRecord', 'Dataset'],
         'medicalSpecialty' => ['MedicalSpecialty']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -150,6 +122,8 @@ class Hospital extends CivicStructure
         'medicalSpecialty' => 'A medical specialty of the provider.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -157,7 +131,6 @@ class Hospital extends CivicStructure
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -165,14 +138,33 @@ class Hospital extends CivicStructure
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A medical service available from this provider.
+     *
+     * @var mixed|MedicalProcedure|MedicalTest|MedicalTherapy [schema.org types: MedicalProcedure, MedicalTest, MedicalTherapy]
+     */
+    public $availableService;
+    /**
+     * Indicates data describing a hospital, e.g. a CDC CDCPMDRecord or as some
+     * kind of Dataset.
+     *
+     * @var mixed|CDCPMDRecord|Dataset [schema.org types: CDCPMDRecord, Dataset]
+     */
+    public $healthcareReportingData;
+    /**
+     * A medical specialty of the provider.
+     *
+     * @var MedicalSpecialty [schema.org types: MedicalSpecialty]
+     */
+    public $medicalSpecialty;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -202,13 +194,13 @@ class Hospital extends CivicStructure
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['availableService','healthcareReportingData','medicalSpecialty'], 'validateJsonSchema'],
+            [['availableService', 'healthcareReportingData', 'medicalSpecialty'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

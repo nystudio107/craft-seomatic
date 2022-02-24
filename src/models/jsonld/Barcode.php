@@ -92,39 +92,6 @@ class Barcode extends ImageObject
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The caption for this object. For downloadable machine formats (closed
-     * caption, subtitles etc.) use MediaObject and indicate the encodingFormat.
-     *
-     * @var mixed|MediaObject|string [schema.org types: MediaObject, Text]
-     */
-    public $caption;
-
-    /**
-     * exif data for this object.
-     *
-     * @var mixed|PropertyValue|string [schema.org types: PropertyValue, Text]
-     */
-    public $exifData;
-
-    /**
-     * Indicates whether this image is representative of the content of the page.
-     *
-     * @var bool [schema.org types: Boolean]
-     */
-    public $representativeOfPage;
-
-    /**
-     * Thumbnail image for an image or video.
-     *
-     * @var ImageObject [schema.org types: ImageObject]
-     */
-    public $thumbnail;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -136,19 +103,17 @@ class Barcode extends ImageObject
         'representativeOfPage',
         'thumbnail'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'caption' => ['MediaObject','Text'],
-        'exifData' => ['PropertyValue','Text'],
+        'caption' => ['MediaObject', 'Text'],
+        'exifData' => ['PropertyValue', 'Text'],
         'representativeOfPage' => ['Boolean'],
         'thumbnail' => ['ImageObject']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -160,7 +125,6 @@ class Barcode extends ImageObject
         'representativeOfPage' => 'Indicates whether this image is representative of the content of the page.',
         'thumbnail' => 'Thumbnail image for an image or video.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -169,6 +133,8 @@ class Barcode extends ImageObject
     static protected $_googleRequiredSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -176,14 +142,39 @@ class Barcode extends ImageObject
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The caption for this object. For downloadable machine formats (closed
+     * caption, subtitles etc.) use MediaObject and indicate the encodingFormat.
+     *
+     * @var mixed|MediaObject|string [schema.org types: MediaObject, Text]
+     */
+    public $caption;
+    /**
+     * exif data for this object.
+     *
+     * @var mixed|PropertyValue|string [schema.org types: PropertyValue, Text]
+     */
+    public $exifData;
+    /**
+     * Indicates whether this image is representative of the content of the page.
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $representativeOfPage;
+    /**
+     * Thumbnail image for an image or video.
+     *
+     * @var ImageObject [schema.org types: ImageObject]
+     */
+    public $thumbnail;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -213,13 +204,13 @@ class Barcode extends ImageObject
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['caption','exifData','representativeOfPage','thumbnail'], 'validateJsonSchema'],
+            [['caption', 'exifData', 'representativeOfPage', 'thumbnail'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

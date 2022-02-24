@@ -92,79 +92,6 @@ class RadioSeries extends CreativeWorkSeries
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * An actor, e.g. in tv, radio, movie, video games etc., or in an event.
-     * Actors can be associated with individual items or with a series, episode,
-     * clip. Supersedes actors.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $actor;
-
-    /**
-     * A season that is part of the media series. Supersedes season.
-     *
-     * @var CreativeWorkSeason [schema.org types: CreativeWorkSeason]
-     */
-    public $containsSeason;
-
-    /**
-     * A director of e.g. tv, radio, movie, video gaming etc. content, or of an
-     * event. Directors can be associated with individual items or with a series,
-     * episode, clip. Supersedes directors.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $director;
-
-    /**
-     * An episode of a tv, radio or game media within a series or season.
-     * Supersedes episodes.
-     *
-     * @var Episode [schema.org types: Episode]
-     */
-    public $episode;
-
-    /**
-     * The composer of the soundtrack.
-     *
-     * @var mixed|MusicGroup|Person [schema.org types: MusicGroup, Person]
-     */
-    public $musicBy;
-
-    /**
-     * The number of episodes in this season or series.
-     *
-     * @var int [schema.org types: Integer]
-     */
-    public $numberOfEpisodes;
-
-    /**
-     * The number of seasons in this series.
-     *
-     * @var int [schema.org types: Integer]
-     */
-    public $numberOfSeasons;
-
-    /**
-     * The production company or studio responsible for the item e.g. series,
-     * video game, episode etc.
-     *
-     * @var Organization [schema.org types: Organization]
-     */
-    public $productionCompany;
-
-    /**
-     * The trailer of a movie or tv/radio series, season, episode, etc.
-     *
-     * @var VideoObject [schema.org types: VideoObject]
-     */
-    public $trailer;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -181,7 +108,6 @@ class RadioSeries extends CreativeWorkSeries
         'productionCompany',
         'trailer'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -192,13 +118,12 @@ class RadioSeries extends CreativeWorkSeries
         'containsSeason' => ['CreativeWorkSeason'],
         'director' => ['Person'],
         'episode' => ['Episode'],
-        'musicBy' => ['MusicGroup','Person'],
+        'musicBy' => ['MusicGroup', 'Person'],
         'numberOfEpisodes' => ['Integer'],
         'numberOfSeasons' => ['Integer'],
         'productionCompany' => ['Organization'],
         'trailer' => ['VideoObject']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -215,7 +140,6 @@ class RadioSeries extends CreativeWorkSeries
         'productionCompany' => 'The production company or studio responsible for the item e.g. series, video game, episode etc.',
         'trailer' => 'The trailer of a movie or tv/radio series, season, episode, etc.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -223,7 +147,6 @@ class RadioSeries extends CreativeWorkSeries
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -231,14 +154,77 @@ class RadioSeries extends CreativeWorkSeries
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * An actor, e.g. in tv, radio, movie, video games etc., or in an event.
+     * Actors can be associated with individual items or with a series, episode,
+     * clip. Supersedes actors.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $actor;
+    /**
+     * A season that is part of the media series. Supersedes season.
+     *
+     * @var CreativeWorkSeason [schema.org types: CreativeWorkSeason]
+     */
+    public $containsSeason;
+    /**
+     * A director of e.g. tv, radio, movie, video gaming etc. content, or of an
+     * event. Directors can be associated with individual items or with a series,
+     * episode, clip. Supersedes directors.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $director;
+    /**
+     * An episode of a tv, radio or game media within a series or season.
+     * Supersedes episodes.
+     *
+     * @var Episode [schema.org types: Episode]
+     */
+    public $episode;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The composer of the soundtrack.
+     *
+     * @var mixed|MusicGroup|Person [schema.org types: MusicGroup, Person]
+     */
+    public $musicBy;
+    /**
+     * The number of episodes in this season or series.
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $numberOfEpisodes;
+    /**
+     * The number of seasons in this series.
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $numberOfSeasons;
+    /**
+     * The production company or studio responsible for the item e.g. series,
+     * video game, episode etc.
+     *
+     * @var Organization [schema.org types: Organization]
+     */
+    public $productionCompany;
+    /**
+     * The trailer of a movie or tv/radio series, season, episode, etc.
+     *
+     * @var VideoObject [schema.org types: VideoObject]
+     */
+    public $trailer;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -268,13 +254,13 @@ class RadioSeries extends CreativeWorkSeries
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['actor','containsSeason','director','episode','musicBy','numberOfEpisodes','numberOfSeasons','productionCompany','trailer'], 'validateJsonSchema'],
+            [['actor', 'containsSeason', 'director', 'episode', 'musicBy', 'numberOfEpisodes', 'numberOfSeasons', 'productionCompany', 'trailer'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -91,25 +91,6 @@ class MusicPlaylist extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The number of tracks in this album or playlist.
-     *
-     * @var int [schema.org types: Integer]
-     */
-    public $numTracks;
-
-    /**
-     * A music recording (track)—usually a single song. If an ItemList is given,
-     * the list should contain items of type MusicRecording. Supersedes tracks.
-     *
-     * @var mixed|ItemList|MusicRecording [schema.org types: ItemList, MusicRecording]
-     */
-    public $track;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -119,7 +100,6 @@ class MusicPlaylist extends CreativeWork
         'numTracks',
         'track'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -127,9 +107,11 @@ class MusicPlaylist extends CreativeWork
      */
     static protected $_schemaPropertyExpectedTypes = [
         'numTracks' => ['Integer'],
-        'track' => ['ItemList','MusicRecording']
+        'track' => ['ItemList', 'MusicRecording']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -139,7 +121,6 @@ class MusicPlaylist extends CreativeWork
         'numTracks' => 'The number of tracks in this album or playlist.',
         'track' => 'A music recording (track)—usually a single song. If an ItemList is given, the list should contain items of type MusicRecording. Supersedes tracks.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -147,7 +128,6 @@ class MusicPlaylist extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -155,14 +135,27 @@ class MusicPlaylist extends CreativeWork
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The number of tracks in this album or playlist.
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $numTracks;
+    /**
+     * A music recording (track)—usually a single song. If an ItemList is given,
+     * the list should contain items of type MusicRecording. Supersedes tracks.
+     *
+     * @var mixed|ItemList|MusicRecording [schema.org types: ItemList, MusicRecording]
+     */
+    public $track;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -192,13 +185,13 @@ class MusicPlaylist extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['numTracks','track'], 'validateJsonSchema'],
+            [['numTracks', 'track'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

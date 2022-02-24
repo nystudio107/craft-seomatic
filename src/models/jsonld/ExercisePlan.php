@@ -93,73 +93,6 @@ class ExercisePlan extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Length of time to engage in the activity.
-     *
-     * @var mixed|Duration|QualitativeValue [schema.org types: Duration, QualitativeValue]
-     */
-    public $activityDuration;
-
-    /**
-     * How often one should engage in the activity.
-     *
-     * @var mixed|QualitativeValue|string [schema.org types: QualitativeValue, Text]
-     */
-    public $activityFrequency;
-
-    /**
-     * Any additional component of the exercise prescription that may need to be
-     * articulated to the patient. This may include the order of exercises, the
-     * number of repetitions of movement, quantitative distance, progressions over
-     * time, etc.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $additionalVariable;
-
-    /**
-     * Type(s) of exercise or activity, such as strength training, flexibility
-     * training, aerobics, cardiac rehabilitation, etc.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $exerciseType;
-
-    /**
-     * Quantitative measure gauging the degree of force involved in the exercise,
-     * for example, heartbeats per minute. May include the velocity of the
-     * movement.
-     *
-     * @var mixed|QualitativeValue|string [schema.org types: QualitativeValue, Text]
-     */
-    public $intensity;
-
-    /**
-     * Number of times one should repeat the activity.
-     *
-     * @var mixed|float|QualitativeValue [schema.org types: Number, QualitativeValue]
-     */
-    public $repetitions;
-
-    /**
-     * How often one should break from the activity.
-     *
-     * @var mixed|QualitativeValue|string [schema.org types: QualitativeValue, Text]
-     */
-    public $restPeriods;
-
-    /**
-     * Quantitative measure of the physiologic output of the exercise; also
-     * referred to as energy expenditure.
-     *
-     * @var mixed|Energy|QualitativeValue [schema.org types: Energy, QualitativeValue]
-     */
-    public $workload;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -175,23 +108,21 @@ class ExercisePlan extends CreativeWork
         'restPeriods',
         'workload'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'activityDuration' => ['Duration','QualitativeValue'],
-        'activityFrequency' => ['QualitativeValue','Text'],
+        'activityDuration' => ['Duration', 'QualitativeValue'],
+        'activityFrequency' => ['QualitativeValue', 'Text'],
         'additionalVariable' => ['Text'],
         'exerciseType' => ['Text'],
-        'intensity' => ['QualitativeValue','Text'],
-        'repetitions' => ['Number','QualitativeValue'],
-        'restPeriods' => ['QualitativeValue','Text'],
-        'workload' => ['Energy','QualitativeValue']
+        'intensity' => ['QualitativeValue', 'Text'],
+        'repetitions' => ['Number', 'QualitativeValue'],
+        'restPeriods' => ['QualitativeValue', 'Text'],
+        'workload' => ['Energy', 'QualitativeValue']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -207,7 +138,6 @@ class ExercisePlan extends CreativeWork
         'restPeriods' => 'How often one should break from the activity.',
         'workload' => 'Quantitative measure of the physiologic output of the exercise; also referred to as energy expenditure.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -215,7 +145,6 @@ class ExercisePlan extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -223,14 +152,72 @@ class ExercisePlan extends CreativeWork
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Length of time to engage in the activity.
+     *
+     * @var mixed|Duration|QualitativeValue [schema.org types: Duration, QualitativeValue]
+     */
+    public $activityDuration;
+    /**
+     * How often one should engage in the activity.
+     *
+     * @var mixed|QualitativeValue|string [schema.org types: QualitativeValue, Text]
+     */
+    public $activityFrequency;
+    /**
+     * Any additional component of the exercise prescription that may need to be
+     * articulated to the patient. This may include the order of exercises, the
+     * number of repetitions of movement, quantitative distance, progressions over
+     * time, etc.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $additionalVariable;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * Type(s) of exercise or activity, such as strength training, flexibility
+     * training, aerobics, cardiac rehabilitation, etc.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $exerciseType;
+    /**
+     * Quantitative measure gauging the degree of force involved in the exercise,
+     * for example, heartbeats per minute. May include the velocity of the
+     * movement.
+     *
+     * @var mixed|QualitativeValue|string [schema.org types: QualitativeValue, Text]
+     */
+    public $intensity;
+    /**
+     * Number of times one should repeat the activity.
+     *
+     * @var mixed|float|QualitativeValue [schema.org types: Number, QualitativeValue]
+     */
+    public $repetitions;
+    /**
+     * How often one should break from the activity.
+     *
+     * @var mixed|QualitativeValue|string [schema.org types: QualitativeValue, Text]
+     */
+    public $restPeriods;
+    /**
+     * Quantitative measure of the physiologic output of the exercise; also
+     * referred to as energy expenditure.
+     *
+     * @var mixed|Energy|QualitativeValue [schema.org types: Energy, QualitativeValue]
+     */
+    public $workload;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -260,13 +247,13 @@ class ExercisePlan extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['activityDuration','activityFrequency','additionalVariable','exerciseType','intensity','repetitions','restPeriods','workload'], 'validateJsonSchema'],
+            [['activityDuration', 'activityFrequency', 'additionalVariable', 'exerciseType', 'intensity', 'repetitions', 'restPeriods', 'workload'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

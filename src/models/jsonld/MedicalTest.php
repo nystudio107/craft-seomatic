@@ -92,45 +92,6 @@ class MedicalTest extends MedicalEntity
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Drugs that affect the test's results.
-     *
-     * @var Drug [schema.org types: Drug]
-     */
-    public $affectedBy;
-
-    /**
-     * Range of acceptable values for a typical patient, when applicable.
-     *
-     * @var mixed|MedicalEnumeration|string [schema.org types: MedicalEnumeration, Text]
-     */
-    public $normalRange;
-
-    /**
-     * A sign detected by the test.
-     *
-     * @var MedicalSign [schema.org types: MedicalSign]
-     */
-    public $signDetected;
-
-    /**
-     * A condition the test is used to diagnose.
-     *
-     * @var MedicalCondition [schema.org types: MedicalCondition]
-     */
-    public $usedToDiagnose;
-
-    /**
-     * Device used to perform the test.
-     *
-     * @var MedicalDevice [schema.org types: MedicalDevice]
-     */
-    public $usesDevice;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -143,7 +104,6 @@ class MedicalTest extends MedicalEntity
         'usedToDiagnose',
         'usesDevice'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -151,12 +111,11 @@ class MedicalTest extends MedicalEntity
      */
     static protected $_schemaPropertyExpectedTypes = [
         'affectedBy' => ['Drug'],
-        'normalRange' => ['MedicalEnumeration','Text'],
+        'normalRange' => ['MedicalEnumeration', 'Text'],
         'signDetected' => ['MedicalSign'],
         'usedToDiagnose' => ['MedicalCondition'],
         'usesDevice' => ['MedicalDevice']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -169,7 +128,6 @@ class MedicalTest extends MedicalEntity
         'usedToDiagnose' => 'A condition the test is used to diagnose.',
         'usesDevice' => 'Device used to perform the test.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -177,7 +135,6 @@ class MedicalTest extends MedicalEntity
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -186,13 +143,46 @@ class MedicalTest extends MedicalEntity
     static protected $_googleRecommendedSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * Drugs that affect the test's results.
+     *
+     * @var Drug [schema.org types: Drug]
+     */
+    public $affectedBy;
+    /**
+     * Range of acceptable values for a typical patient, when applicable.
+     *
+     * @var mixed|MedicalEnumeration|string [schema.org types: MedicalEnumeration, Text]
+     */
+    public $normalRange;
+    /**
+     * A sign detected by the test.
+     *
+     * @var MedicalSign [schema.org types: MedicalSign]
+     */
+    public $signDetected;
+    /**
+     * A condition the test is used to diagnose.
+     *
+     * @var MedicalCondition [schema.org types: MedicalCondition]
+     */
+    public $usedToDiagnose;
+    /**
+     * Device used to perform the test.
+     *
+     * @var MedicalDevice [schema.org types: MedicalDevice]
+     */
+    public $usesDevice;
+
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -222,13 +212,13 @@ class MedicalTest extends MedicalEntity
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['affectedBy','normalRange','signDetected','usedToDiagnose','usesDevice'], 'validateJsonSchema'],
+            [['affectedBy', 'normalRange', 'signDetected', 'usedToDiagnose', 'usesDevice'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

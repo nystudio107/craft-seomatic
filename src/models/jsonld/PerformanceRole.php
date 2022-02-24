@@ -92,18 +92,6 @@ class PerformanceRole extends Role
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The name of a character played in some acting or performing role, i.e. in a
-     * PerformanceRole.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $characterName;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -113,6 +101,8 @@ class PerformanceRole extends Role
         'characterName'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -121,7 +111,6 @@ class PerformanceRole extends Role
     static protected $_schemaPropertyExpectedTypes = [
         'characterName' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -130,7 +119,6 @@ class PerformanceRole extends Role
     static protected $_schemaPropertyDescriptions = [
         'characterName' => 'The name of a character played in some acting or performing role, i.e. in a PerformanceRole.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -138,7 +126,6 @@ class PerformanceRole extends Role
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -146,14 +133,21 @@ class PerformanceRole extends Role
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The name of a character played in some acting or performing role, i.e. in a
+     * PerformanceRole.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $characterName;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -183,9 +177,9 @@ class PerformanceRole extends Role
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

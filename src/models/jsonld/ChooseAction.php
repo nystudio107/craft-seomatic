@@ -92,18 +92,6 @@ class ChooseAction extends AssessAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A sub property of object. The options subject to this action. Supersedes
-     * option.
-     *
-     * @var mixed|string|Thing [schema.org types: Text, Thing]
-     */
-    public $actionOption;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -113,15 +101,16 @@ class ChooseAction extends AssessAction
         'actionOption'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'actionOption' => ['Text','Thing']
+        'actionOption' => ['Text', 'Thing']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -130,7 +119,6 @@ class ChooseAction extends AssessAction
     static protected $_schemaPropertyDescriptions = [
         'actionOption' => 'A sub property of object. The options subject to this action. Supersedes option.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -138,7 +126,6 @@ class ChooseAction extends AssessAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -146,14 +133,21 @@ class ChooseAction extends AssessAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A sub property of object. The options subject to this action. Supersedes
+     * option.
+     *
+     * @var mixed|string|Thing [schema.org types: Text, Thing]
+     */
+    public $actionOption;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -183,9 +177,9 @@ class ChooseAction extends AssessAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

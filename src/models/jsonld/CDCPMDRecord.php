@@ -94,132 +94,6 @@ class CDCPMDRecord extends StructuredValue
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * collectiondate - Date for which patient counts are reported.
-     *
-     * @var mixed|DateTime|string [schema.org types: DateTime, Text]
-     */
-    public $cvdCollectionDate;
-
-    /**
-     * numbeds - HOSPITAL INPATIENT BEDS: Inpatient beds, including all staffed,
-     * licensed, and overflow (surge) beds used for inpatients.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $cvdNumBeds;
-
-    /**
-     * numbedsocc - HOSPITAL INPATIENT BED OCCUPANCY: Total number of staffed
-     * inpatient beds that are occupied.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $cvdNumBedsOcc;
-
-    /**
-     * numc19died - DEATHS: Patients with suspected or confirmed COVID-19 who died
-     * in the hospital, ED, or any overflow location.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $cvdNumC19Died;
-
-    /**
-     * numc19hopats - HOSPITAL ONSET: Patients hospitalized in an NHSN inpatient
-     * care location with onset of suspected or confirmed COVID-19 14 or more days
-     * after hospitalization.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $cvdNumC19HOPats;
-
-    /**
-     * numc19hosppats - HOSPITALIZED: Patients currently hospitalized in an
-     * inpatient care location who have suspected or confirmed COVID-19.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $cvdNumC19HospPats;
-
-    /**
-     * numc19mechventpats - HOSPITALIZED and VENTILATED: Patients hospitalized in
-     * an NHSN inpatient care location who have suspected or confirmed COVID-19
-     * and are on a mechanical ventilator.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $cvdNumC19MechVentPats;
-
-    /**
-     * numc19ofmechventpats - ED/OVERFLOW and VENTILATED: Patients with suspected
-     * or confirmed COVID-19 who are in the ED or any overflow location awaiting
-     * an inpatient bed and on a mechanical ventilator.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $cvdNumC19OFMechVentPats;
-
-    /**
-     * numc19overflowpats - ED/OVERFLOW: Patients with suspected or confirmed
-     * COVID-19 who are in the ED or any overflow location awaiting an inpatient
-     * bed.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $cvdNumC19OverflowPats;
-
-    /**
-     * numicubeds - ICU BEDS: Total number of staffed inpatient intensive care
-     * unit (ICU) beds.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $cvdNumICUBeds;
-
-    /**
-     * numicubedsocc - ICU BED OCCUPANCY: Total number of staffed inpatient ICU
-     * beds that are occupied.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $cvdNumICUBedsOcc;
-
-    /**
-     * numtotbeds - ALL HOSPITAL BEDS: Total number of all Inpatient and
-     * outpatient beds, including all staffed,ICU, licensed, and overflow (surge)
-     * beds used for inpatients or outpatients.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $cvdNumTotBeds;
-
-    /**
-     * numvent - MECHANICAL VENTILATORS: Total number of ventilators available.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $cvdNumVent;
-
-    /**
-     * numventuse - MECHANICAL VENTILATORS IN USE: Total number of ventilators in
-     * use.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $cvdNumVentUse;
-
-    /**
-     * Publication date of an online listing.
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $datePosted;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -242,14 +116,13 @@ class CDCPMDRecord extends StructuredValue
         'cvdNumVentUse',
         'datePosted'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'cvdCollectionDate' => ['DateTime','Text'],
+        'cvdCollectionDate' => ['DateTime', 'Text'],
         'cvdNumBeds' => ['Number'],
         'cvdNumBedsOcc' => ['Number'],
         'cvdNumC19Died' => ['Number'],
@@ -263,9 +136,8 @@ class CDCPMDRecord extends StructuredValue
         'cvdNumTotBeds' => ['Number'],
         'cvdNumVent' => ['Number'],
         'cvdNumVentUse' => ['Number'],
-        'datePosted' => ['Date','DateTime']
+        'datePosted' => ['Date', 'DateTime']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -288,7 +160,6 @@ class CDCPMDRecord extends StructuredValue
         'cvdNumVentUse' => 'numventuse - MECHANICAL VENTILATORS IN USE: Total number of ventilators in use.',
         'datePosted' => 'Publication date of an online listing.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -296,7 +167,6 @@ class CDCPMDRecord extends StructuredValue
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -304,14 +174,124 @@ class CDCPMDRecord extends StructuredValue
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * collectiondate - Date for which patient counts are reported.
+     *
+     * @var mixed|DateTime|string [schema.org types: DateTime, Text]
+     */
+    public $cvdCollectionDate;
+    /**
+     * numbeds - HOSPITAL INPATIENT BEDS: Inpatient beds, including all staffed,
+     * licensed, and overflow (surge) beds used for inpatients.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $cvdNumBeds;
+    /**
+     * numbedsocc - HOSPITAL INPATIENT BED OCCUPANCY: Total number of staffed
+     * inpatient beds that are occupied.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $cvdNumBedsOcc;
+    /**
+     * numc19died - DEATHS: Patients with suspected or confirmed COVID-19 who died
+     * in the hospital, ED, or any overflow location.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $cvdNumC19Died;
+    /**
+     * numc19hopats - HOSPITAL ONSET: Patients hospitalized in an NHSN inpatient
+     * care location with onset of suspected or confirmed COVID-19 14 or more days
+     * after hospitalization.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $cvdNumC19HOPats;
+    /**
+     * numc19hosppats - HOSPITALIZED: Patients currently hospitalized in an
+     * inpatient care location who have suspected or confirmed COVID-19.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $cvdNumC19HospPats;
+    /**
+     * numc19mechventpats - HOSPITALIZED and VENTILATED: Patients hospitalized in
+     * an NHSN inpatient care location who have suspected or confirmed COVID-19
+     * and are on a mechanical ventilator.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $cvdNumC19MechVentPats;
+    /**
+     * numc19ofmechventpats - ED/OVERFLOW and VENTILATED: Patients with suspected
+     * or confirmed COVID-19 who are in the ED or any overflow location awaiting
+     * an inpatient bed and on a mechanical ventilator.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $cvdNumC19OFMechVentPats;
+    /**
+     * numc19overflowpats - ED/OVERFLOW: Patients with suspected or confirmed
+     * COVID-19 who are in the ED or any overflow location awaiting an inpatient
+     * bed.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $cvdNumC19OverflowPats;
+    /**
+     * numicubeds - ICU BEDS: Total number of staffed inpatient intensive care
+     * unit (ICU) beds.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $cvdNumICUBeds;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * numicubedsocc - ICU BED OCCUPANCY: Total number of staffed inpatient ICU
+     * beds that are occupied.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $cvdNumICUBedsOcc;
+    /**
+     * numtotbeds - ALL HOSPITAL BEDS: Total number of all Inpatient and
+     * outpatient beds, including all staffed,ICU, licensed, and overflow (surge)
+     * beds used for inpatients or outpatients.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $cvdNumTotBeds;
+    /**
+     * numvent - MECHANICAL VENTILATORS: Total number of ventilators available.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $cvdNumVent;
+    /**
+     * numventuse - MECHANICAL VENTILATORS IN USE: Total number of ventilators in
+     * use.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $cvdNumVentUse;
+    /**
+     * Publication date of an online listing.
+     *
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     */
+    public $datePosted;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -341,13 +321,13 @@ class CDCPMDRecord extends StructuredValue
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['cvdCollectionDate','cvdNumBeds','cvdNumBedsOcc','cvdNumC19Died','cvdNumC19HOPats','cvdNumC19HospPats','cvdNumC19MechVentPats','cvdNumC19OFMechVentPats','cvdNumC19OverflowPats','cvdNumICUBeds','cvdNumICUBedsOcc','cvdNumTotBeds','cvdNumVent','cvdNumVentUse','datePosted'], 'validateJsonSchema'],
+            [['cvdCollectionDate', 'cvdNumBeds', 'cvdNumBedsOcc', 'cvdNumC19Died', 'cvdNumC19HOPats', 'cvdNumC19HospPats', 'cvdNumC19MechVentPats', 'cvdNumC19OFMechVentPats', 'cvdNumC19OverflowPats', 'cvdNumICUBeds', 'cvdNumICUBedsOcc', 'cvdNumTotBeds', 'cvdNumVent', 'cvdNumVentUse', 'datePosted'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

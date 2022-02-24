@@ -1,5 +1,11 @@
 # SEOmatic Changelog
 
+## 4.0.0-beta.1 - 2022.02.24
+
+### Added
+
+* Initial Craft CMS 4 compatibility
+
 ## 3.4.26 - 2022.02.21
 
 ### Changed

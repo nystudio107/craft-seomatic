@@ -96,61 +96,6 @@ class Course extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The identifier for the Course used by the course provider (e.g. CS101 or
-     * 6.001).
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $courseCode;
-
-    /**
-     * Requirements for taking the Course. May be completion of another Course or
-     * a textual description like "permission of instructor". Requirements may be
-     * a pre-requisite competency, referenced using AlignmentObject.
-     *
-     * @var mixed|AlignmentObject|Course|string [schema.org types: AlignmentObject, Course, Text]
-     */
-    public $coursePrerequisites;
-
-    /**
-     * A description of the qualification, award, certificate, diploma or other
-     * educational credential awarded as a consequence of successful completion of
-     * this course or program.
-     *
-     * @var mixed|EducationalOccupationalCredential|string|string [schema.org types: EducationalOccupationalCredential, Text, URL]
-     */
-    public $educationalCredentialAwarded;
-
-    /**
-     * An offering of the course at a specific time and place or through specific
-     * media or mode of study or to a specific section of students.
-     *
-     * @var CourseInstance [schema.org types: CourseInstance]
-     */
-    public $hasCourseInstance;
-
-    /**
-     * The number of credits or units awarded by a Course or required to complete
-     * an EducationalOccupationalProgram.
-     *
-     * @var mixed|int|StructuredValue [schema.org types: Integer, StructuredValue]
-     */
-    public $numberOfCredits;
-
-    /**
-     * A description of the qualification, award, certificate, diploma or other
-     * occupational credential awarded as a consequence of successful completion
-     * of this course or program.
-     *
-     * @var mixed|EducationalOccupationalCredential|string|string [schema.org types: EducationalOccupationalCredential, Text, URL]
-     */
-    public $occupationalCredentialAwarded;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -164,7 +109,6 @@ class Course extends CreativeWork
         'numberOfCredits',
         'occupationalCredentialAwarded'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -172,13 +116,12 @@ class Course extends CreativeWork
      */
     static protected $_schemaPropertyExpectedTypes = [
         'courseCode' => ['Text'],
-        'coursePrerequisites' => ['AlignmentObject','Course','Text'],
-        'educationalCredentialAwarded' => ['EducationalOccupationalCredential','Text','URL'],
+        'coursePrerequisites' => ['AlignmentObject', 'Course', 'Text'],
+        'educationalCredentialAwarded' => ['EducationalOccupationalCredential', 'Text', 'URL'],
         'hasCourseInstance' => ['CourseInstance'],
-        'numberOfCredits' => ['Integer','StructuredValue'],
-        'occupationalCredentialAwarded' => ['EducationalOccupationalCredential','Text','URL']
+        'numberOfCredits' => ['Integer', 'StructuredValue'],
+        'occupationalCredentialAwarded' => ['EducationalOccupationalCredential', 'Text', 'URL']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -192,7 +135,6 @@ class Course extends CreativeWork
         'numberOfCredits' => 'The number of credits or units awarded by a Course or required to complete an EducationalOccupationalProgram.',
         'occupationalCredentialAwarded' => 'A description of the qualification, award, certificate, diploma or other occupational credential awarded as a consequence of successful completion of this course or program.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -200,7 +142,6 @@ class Course extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -208,14 +149,62 @@ class Course extends CreativeWork
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The identifier for the Course used by the course provider (e.g. CS101 or
+     * 6.001).
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $courseCode;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * Requirements for taking the Course. May be completion of another Course or
+     * a textual description like "permission of instructor". Requirements may be
+     * a pre-requisite competency, referenced using AlignmentObject.
+     *
+     * @var mixed|AlignmentObject|Course|string [schema.org types: AlignmentObject, Course, Text]
+     */
+    public $coursePrerequisites;
+    /**
+     * A description of the qualification, award, certificate, diploma or other
+     * educational credential awarded as a consequence of successful completion of
+     * this course or program.
+     *
+     * @var mixed|EducationalOccupationalCredential|string|string [schema.org types: EducationalOccupationalCredential, Text, URL]
+     */
+    public $educationalCredentialAwarded;
+    /**
+     * An offering of the course at a specific time and place or through specific
+     * media or mode of study or to a specific section of students.
+     *
+     * @var CourseInstance [schema.org types: CourseInstance]
+     */
+    public $hasCourseInstance;
+    /**
+     * The number of credits or units awarded by a Course or required to complete
+     * an EducationalOccupationalProgram.
+     *
+     * @var mixed|int|StructuredValue [schema.org types: Integer, StructuredValue]
+     */
+    public $numberOfCredits;
+    /**
+     * A description of the qualification, award, certificate, diploma or other
+     * occupational credential awarded as a consequence of successful completion
+     * of this course or program.
+     *
+     * @var mixed|EducationalOccupationalCredential|string|string [schema.org types: EducationalOccupationalCredential, Text, URL]
+     */
+    public $occupationalCredentialAwarded;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -245,13 +234,13 @@ class Course extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['courseCode','coursePrerequisites','educationalCredentialAwarded','hasCourseInstance','numberOfCredits','occupationalCredentialAwarded'], 'validateJsonSchema'],
+            [['courseCode', 'coursePrerequisites', 'educationalCredentialAwarded', 'hasCourseInstance', 'numberOfCredits', 'occupationalCredentialAwarded'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

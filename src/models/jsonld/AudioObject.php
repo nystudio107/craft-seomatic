@@ -91,26 +91,6 @@ class AudioObject extends MediaObject
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The caption for this object. For downloadable machine formats (closed
-     * caption, subtitles etc.) use MediaObject and indicate the encodingFormat.
-     *
-     * @var mixed|MediaObject|string [schema.org types: MediaObject, Text]
-     */
-    public $caption;
-
-    /**
-     * If this MediaObject is an AudioObject or VideoObject, the transcript of
-     * that object.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $transcript;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -120,17 +100,18 @@ class AudioObject extends MediaObject
         'caption',
         'transcript'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'caption' => ['MediaObject','Text'],
+        'caption' => ['MediaObject', 'Text'],
         'transcript' => ['Text']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -140,7 +121,6 @@ class AudioObject extends MediaObject
         'caption' => 'The caption for this object. For downloadable machine formats (closed caption, subtitles etc.) use MediaObject and indicate the encodingFormat.',
         'transcript' => 'If this MediaObject is an AudioObject or VideoObject, the transcript of that object.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -148,7 +128,6 @@ class AudioObject extends MediaObject
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -156,14 +135,28 @@ class AudioObject extends MediaObject
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The caption for this object. For downloadable machine formats (closed
+     * caption, subtitles etc.) use MediaObject and indicate the encodingFormat.
+     *
+     * @var mixed|MediaObject|string [schema.org types: MediaObject, Text]
+     */
+    public $caption;
+    /**
+     * If this MediaObject is an AudioObject or VideoObject, the transcript of
+     * that object.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $transcript;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -193,13 +186,13 @@ class AudioObject extends MediaObject
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['caption','transcript'], 'validateJsonSchema'],
+            [['caption', 'transcript'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

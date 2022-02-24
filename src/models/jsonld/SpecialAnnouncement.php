@@ -141,105 +141,6 @@ class SpecialAnnouncement extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Indicates a specific CivicStructure or LocalBusiness associated with the
-     * SpecialAnnouncement. For example, a specific testing facility or business
-     * with special opening hours. For a larger geographic region like a
-     * quarantine of an entire region, use spatialCoverage.
-     *
-     * @var mixed|CivicStructure|LocalBusiness [schema.org types: CivicStructure, LocalBusiness]
-     */
-    public $announcementLocation;
-
-    /**
-     * A category for the item. Greater signs or slashes can be used to informally
-     * indicate a category hierarchy.
-     *
-     * @var mixed|PhysicalActivityCategory|string|Thing [schema.org types: PhysicalActivityCategory, Text, Thing]
-     */
-    public $category;
-
-    /**
-     * Publication date of an online listing.
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $datePosted;
-
-    /**
-     * Information about disease prevention.
-     *
-     * @var mixed|string|WebContent [schema.org types: URL, WebContent]
-     */
-    public $diseasePreventionInfo;
-
-    /**
-     * Statistical information about the spread of a disease, either as
-     * WebContent, or described directly as a Dataset, or the specific
-     * Observations in the dataset. When a WebContent URL is provided, the page
-     * indicated might also contain more such markup.
-     *
-     * @var mixed|Dataset|Observation|string|WebContent [schema.org types: Dataset, Observation, URL, WebContent]
-     */
-    public $diseaseSpreadStatistics;
-
-    /**
-     * Information about getting tested (for a MedicalCondition), e.g. in the
-     * context of a pandemic.
-     *
-     * @var mixed|string|WebContent [schema.org types: URL, WebContent]
-     */
-    public $gettingTestedInfo;
-
-    /**
-     * Indicates a page with news updates and guidelines. This could often be (but
-     * is not required to be) the main page containing SpecialAnnouncement markup
-     * on a site.
-     *
-     * @var mixed|string|WebContent [schema.org types: URL, WebContent]
-     */
-    public $newsUpdatesAndGuidelines;
-
-    /**
-     * Information about public transport closures.
-     *
-     * @var mixed|string|WebContent [schema.org types: URL, WebContent]
-     */
-    public $publicTransportClosuresInfo;
-
-    /**
-     * Guidelines about quarantine rules, e.g. in the context of a pandemic.
-     *
-     * @var mixed|string|WebContent [schema.org types: URL, WebContent]
-     */
-    public $quarantineGuidelines;
-
-    /**
-     * Information about school closures.
-     *
-     * @var mixed|string|WebContent [schema.org types: URL, WebContent]
-     */
-    public $schoolClosuresInfo;
-
-    /**
-     * Information about travel bans, e.g. in the context of a pandemic.
-     *
-     * @var mixed|string|WebContent [schema.org types: URL, WebContent]
-     */
-    public $travelBans;
-
-    /**
-     * The URL for a feed, e.g. associated with a podcast series, blog, or series
-     * of date-stamped updates. This is usually RSS or Atom.
-     *
-     * @var mixed|DataFeed|string [schema.org types: DataFeed, URL]
-     */
-    public $webFeed;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -259,27 +160,25 @@ class SpecialAnnouncement extends CreativeWork
         'travelBans',
         'webFeed'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'announcementLocation' => ['CivicStructure','LocalBusiness'],
-        'category' => ['PhysicalActivityCategory','Text','Thing'],
-        'datePosted' => ['Date','DateTime'],
-        'diseasePreventionInfo' => ['URL','WebContent'],
-        'diseaseSpreadStatistics' => ['Dataset','Observation','URL','WebContent'],
-        'gettingTestedInfo' => ['URL','WebContent'],
-        'newsUpdatesAndGuidelines' => ['URL','WebContent'],
-        'publicTransportClosuresInfo' => ['URL','WebContent'],
-        'quarantineGuidelines' => ['URL','WebContent'],
-        'schoolClosuresInfo' => ['URL','WebContent'],
-        'travelBans' => ['URL','WebContent'],
-        'webFeed' => ['DataFeed','URL']
+        'announcementLocation' => ['CivicStructure', 'LocalBusiness'],
+        'category' => ['PhysicalActivityCategory', 'Text', 'Thing'],
+        'datePosted' => ['Date', 'DateTime'],
+        'diseasePreventionInfo' => ['URL', 'WebContent'],
+        'diseaseSpreadStatistics' => ['Dataset', 'Observation', 'URL', 'WebContent'],
+        'gettingTestedInfo' => ['URL', 'WebContent'],
+        'newsUpdatesAndGuidelines' => ['URL', 'WebContent'],
+        'publicTransportClosuresInfo' => ['URL', 'WebContent'],
+        'quarantineGuidelines' => ['URL', 'WebContent'],
+        'schoolClosuresInfo' => ['URL', 'WebContent'],
+        'travelBans' => ['URL', 'WebContent'],
+        'webFeed' => ['DataFeed', 'URL']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -299,7 +198,6 @@ class SpecialAnnouncement extends CreativeWork
         'travelBans' => 'Information about travel bans, e.g. in the context of a pandemic.',
         'webFeed' => 'The URL for a feed, e.g. associated with a podcast series, blog, or series of date-stamped updates. This is usually RSS or Atom.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -307,7 +205,6 @@ class SpecialAnnouncement extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -315,14 +212,100 @@ class SpecialAnnouncement extends CreativeWork
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Indicates a specific CivicStructure or LocalBusiness associated with the
+     * SpecialAnnouncement. For example, a specific testing facility or business
+     * with special opening hours. For a larger geographic region like a
+     * quarantine of an entire region, use spatialCoverage.
+     *
+     * @var mixed|CivicStructure|LocalBusiness [schema.org types: CivicStructure, LocalBusiness]
+     */
+    public $announcementLocation;
+    /**
+     * A category for the item. Greater signs or slashes can be used to informally
+     * indicate a category hierarchy.
+     *
+     * @var mixed|PhysicalActivityCategory|string|Thing [schema.org types: PhysicalActivityCategory, Text, Thing]
+     */
+    public $category;
+    /**
+     * Publication date of an online listing.
+     *
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     */
+    public $datePosted;
+    /**
+     * Information about disease prevention.
+     *
+     * @var mixed|string|WebContent [schema.org types: URL, WebContent]
+     */
+    public $diseasePreventionInfo;
+    /**
+     * Statistical information about the spread of a disease, either as
+     * WebContent, or described directly as a Dataset, or the specific
+     * Observations in the dataset. When a WebContent URL is provided, the page
+     * indicated might also contain more such markup.
+     *
+     * @var mixed|Dataset|Observation|string|WebContent [schema.org types: Dataset, Observation, URL, WebContent]
+     */
+    public $diseaseSpreadStatistics;
+    /**
+     * Information about getting tested (for a MedicalCondition), e.g. in the
+     * context of a pandemic.
+     *
+     * @var mixed|string|WebContent [schema.org types: URL, WebContent]
+     */
+    public $gettingTestedInfo;
+    /**
+     * Indicates a page with news updates and guidelines. This could often be (but
+     * is not required to be) the main page containing SpecialAnnouncement markup
+     * on a site.
+     *
+     * @var mixed|string|WebContent [schema.org types: URL, WebContent]
+     */
+    public $newsUpdatesAndGuidelines;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * Information about public transport closures.
+     *
+     * @var mixed|string|WebContent [schema.org types: URL, WebContent]
+     */
+    public $publicTransportClosuresInfo;
+    /**
+     * Guidelines about quarantine rules, e.g. in the context of a pandemic.
+     *
+     * @var mixed|string|WebContent [schema.org types: URL, WebContent]
+     */
+    public $quarantineGuidelines;
+    /**
+     * Information about school closures.
+     *
+     * @var mixed|string|WebContent [schema.org types: URL, WebContent]
+     */
+    public $schoolClosuresInfo;
+    /**
+     * Information about travel bans, e.g. in the context of a pandemic.
+     *
+     * @var mixed|string|WebContent [schema.org types: URL, WebContent]
+     */
+    public $travelBans;
+    /**
+     * The URL for a feed, e.g. associated with a podcast series, blog, or series
+     * of date-stamped updates. This is usually RSS or Atom.
+     *
+     * @var mixed|DataFeed|string [schema.org types: DataFeed, URL]
+     */
+    public $webFeed;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -352,13 +335,13 @@ class SpecialAnnouncement extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['announcementLocation','category','datePosted','diseasePreventionInfo','diseaseSpreadStatistics','gettingTestedInfo','newsUpdatesAndGuidelines','publicTransportClosuresInfo','quarantineGuidelines','schoolClosuresInfo','travelBans','webFeed'], 'validateJsonSchema'],
+            [['announcementLocation', 'category', 'datePosted', 'diseasePreventionInfo', 'diseaseSpreadStatistics', 'gettingTestedInfo', 'newsUpdatesAndGuidelines', 'publicTransportClosuresInfo', 'quarantineGuidelines', 'schoolClosuresInfo', 'travelBans', 'webFeed'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

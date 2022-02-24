@@ -101,26 +101,6 @@ class Grant extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Indicates an item funded or sponsored through a Grant.
-     *
-     * @var Thing [schema.org types: Thing]
-     */
-    public $fundedItem;
-
-    /**
-     * A person or organization that supports a thing through a pledge, promise,
-     * or financial contribution. e.g. a sponsor of a Medical Study or a corporate
-     * sponsor of an event.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $sponsor;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -130,7 +110,6 @@ class Grant extends Intangible
         'fundedItem',
         'sponsor'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -138,9 +117,11 @@ class Grant extends Intangible
      */
     static protected $_schemaPropertyExpectedTypes = [
         'fundedItem' => ['Thing'],
-        'sponsor' => ['Organization','Person']
+        'sponsor' => ['Organization', 'Person']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -150,7 +131,6 @@ class Grant extends Intangible
         'fundedItem' => 'Indicates an item funded or sponsored through a Grant.',
         'sponsor' => 'A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -158,7 +138,6 @@ class Grant extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -166,14 +145,28 @@ class Grant extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Indicates an item funded or sponsored through a Grant.
+     *
+     * @var Thing [schema.org types: Thing]
+     */
+    public $fundedItem;
+    /**
+     * A person or organization that supports a thing through a pledge, promise,
+     * or financial contribution. e.g. a sponsor of a Medical Study or a corporate
+     * sponsor of an event.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $sponsor;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -203,13 +196,13 @@ class Grant extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['fundedItem','sponsor'], 'validateJsonSchema'],
+            [['fundedItem', 'sponsor'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

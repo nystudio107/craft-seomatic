@@ -91,59 +91,6 @@ class Permit extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The organization issuing the ticket or permit.
-     *
-     * @var Organization [schema.org types: Organization]
-     */
-    public $issuedBy;
-
-    /**
-     * The service through with the permit was granted.
-     *
-     * @var Service [schema.org types: Service]
-     */
-    public $issuedThrough;
-
-    /**
-     * The target audience for this permit.
-     *
-     * @var Audience [schema.org types: Audience]
-     */
-    public $permitAudience;
-
-    /**
-     * The duration of validity of a permit or similar thing.
-     *
-     * @var Duration [schema.org types: Duration]
-     */
-    public $validFor;
-
-    /**
-     * The date when the item becomes valid.
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $validFrom;
-
-    /**
-     * The geographic area where a permit or similar thing is valid.
-     *
-     * @var AdministrativeArea [schema.org types: AdministrativeArea]
-     */
-    public $validIn;
-
-    /**
-     * The date when the item is no longer valid.
-     *
-     * @var Date [schema.org types: Date]
-     */
-    public $validUntil;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -158,7 +105,6 @@ class Permit extends Intangible
         'validIn',
         'validUntil'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -169,11 +115,10 @@ class Permit extends Intangible
         'issuedThrough' => ['Service'],
         'permitAudience' => ['Audience'],
         'validFor' => ['Duration'],
-        'validFrom' => ['Date','DateTime'],
+        'validFrom' => ['Date', 'DateTime'],
         'validIn' => ['AdministrativeArea'],
         'validUntil' => ['Date']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -188,7 +133,6 @@ class Permit extends Intangible
         'validIn' => 'The geographic area where a permit or similar thing is valid.',
         'validUntil' => 'The date when the item is no longer valid.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -196,7 +140,6 @@ class Permit extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -204,14 +147,59 @@ class Permit extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The organization issuing the ticket or permit.
+     *
+     * @var Organization [schema.org types: Organization]
+     */
+    public $issuedBy;
+    /**
+     * The service through with the permit was granted.
+     *
+     * @var Service [schema.org types: Service]
+     */
+    public $issuedThrough;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The target audience for this permit.
+     *
+     * @var Audience [schema.org types: Audience]
+     */
+    public $permitAudience;
+    /**
+     * The duration of validity of a permit or similar thing.
+     *
+     * @var Duration [schema.org types: Duration]
+     */
+    public $validFor;
+    /**
+     * The date when the item becomes valid.
+     *
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     */
+    public $validFrom;
+    /**
+     * The geographic area where a permit or similar thing is valid.
+     *
+     * @var AdministrativeArea [schema.org types: AdministrativeArea]
+     */
+    public $validIn;
+    /**
+     * The date when the item is no longer valid.
+     *
+     * @var Date [schema.org types: Date]
+     */
+    public $validUntil;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -241,13 +229,13 @@ class Permit extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['issuedBy','issuedThrough','permitAudience','validFor','validFrom','validIn','validUntil'], 'validateJsonSchema'],
+            [['issuedBy', 'issuedThrough', 'permitAudience', 'validFor', 'validFrom', 'validIn', 'validUntil'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

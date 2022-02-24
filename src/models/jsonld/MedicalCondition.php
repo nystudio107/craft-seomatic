@@ -93,138 +93,6 @@ class MedicalCondition extends MedicalEntity
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The anatomy of the underlying organ system or structures associated with
-     * this entity.
-     *
-     * @var mixed|AnatomicalStructure|AnatomicalSystem|SuperficialAnatomy [schema.org types: AnatomicalStructure, AnatomicalSystem, SuperficialAnatomy]
-     */
-    public $associatedAnatomy;
-
-    /**
-     * One of a set of differential diagnoses for the condition. Specifically, a
-     * closely-related or competing diagnosis typically considered later in the
-     * cognitive process whereby this medical condition is distinguished from
-     * others most likely responsible for a similar collection of signs and
-     * symptoms to reach the most parsimonious diagnosis or diagnoses in a
-     * patient.
-     *
-     * @var DDxElement [schema.org types: DDxElement]
-     */
-    public $differentialDiagnosis;
-
-    /**
-     * Specifying a drug or medicine used in a medication procedure
-     *
-     * @var Drug [schema.org types: Drug]
-     */
-    public $drug;
-
-    /**
-     * The characteristics of associated patients, such as age, gender, race etc.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $epidemiology;
-
-    /**
-     * The likely outcome in either the short term or long term of the medical
-     * condition.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $expectedPrognosis;
-
-    /**
-     * The expected progression of the condition if it is not treated and allowed
-     * to progress naturally.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $naturalProgression;
-
-    /**
-     * Changes in the normal mechanical, physical, and biochemical functions that
-     * are associated with this activity or condition.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $pathophysiology;
-
-    /**
-     * A possible unexpected and unfavorable evolution of a medical condition.
-     * Complications may include worsening of the signs or symptoms of the
-     * disease, extension of the condition to other organ systems, etc.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $possibleComplication;
-
-    /**
-     * A possible treatment to address this condition, sign or symptom.
-     *
-     * @var MedicalTherapy [schema.org types: MedicalTherapy]
-     */
-    public $possibleTreatment;
-
-    /**
-     * A preventative therapy used to prevent an initial occurrence of the medical
-     * condition, such as vaccination.
-     *
-     * @var MedicalTherapy [schema.org types: MedicalTherapy]
-     */
-    public $primaryPrevention;
-
-    /**
-     * A modifiable or non-modifiable factor that increases the risk of a patient
-     * contracting this condition, e.g. age, coexisting condition.
-     *
-     * @var MedicalRiskFactor [schema.org types: MedicalRiskFactor]
-     */
-    public $riskFactor;
-
-    /**
-     * A preventative therapy used to prevent reoccurrence of the medical
-     * condition after an initial episode of the condition.
-     *
-     * @var MedicalTherapy [schema.org types: MedicalTherapy]
-     */
-    public $secondaryPrevention;
-
-    /**
-     * A sign or symptom of this condition. Signs are objective or physically
-     * observable manifestations of the medical condition while symptoms are the
-     * subjective experience of the medical condition.
-     *
-     * @var MedicalSignOrSymptom [schema.org types: MedicalSignOrSymptom]
-     */
-    public $signOrSymptom;
-
-    /**
-     * The stage of the condition, if applicable.
-     *
-     * @var MedicalConditionStage [schema.org types: MedicalConditionStage]
-     */
-    public $stage;
-
-    /**
-     * The status of the study (enumerated).
-     *
-     * @var mixed|EventStatusType|MedicalStudyStatus|string [schema.org types: EventStatusType, MedicalStudyStatus, Text]
-     */
-    public $status;
-
-    /**
-     * A medical test typically performed given this condition.
-     *
-     * @var MedicalTest [schema.org types: MedicalTest]
-     */
-    public $typicalTest;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -248,14 +116,13 @@ class MedicalCondition extends MedicalEntity
         'status',
         'typicalTest'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'associatedAnatomy' => ['AnatomicalStructure','AnatomicalSystem','SuperficialAnatomy'],
+        'associatedAnatomy' => ['AnatomicalStructure', 'AnatomicalSystem', 'SuperficialAnatomy'],
         'differentialDiagnosis' => ['DDxElement'],
         'drug' => ['Drug'],
         'epidemiology' => ['Text'],
@@ -269,10 +136,9 @@ class MedicalCondition extends MedicalEntity
         'secondaryPrevention' => ['MedicalTherapy'],
         'signOrSymptom' => ['MedicalSignOrSymptom'],
         'stage' => ['MedicalConditionStage'],
-        'status' => ['EventStatusType','MedicalStudyStatus','Text'],
+        'status' => ['EventStatusType', 'MedicalStudyStatus', 'Text'],
         'typicalTest' => ['MedicalTest']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -296,7 +162,6 @@ class MedicalCondition extends MedicalEntity
         'status' => 'The status of the study (enumerated).',
         'typicalTest' => 'A medical test typically performed given this condition.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -304,7 +169,6 @@ class MedicalCondition extends MedicalEntity
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -312,14 +176,129 @@ class MedicalCondition extends MedicalEntity
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The anatomy of the underlying organ system or structures associated with
+     * this entity.
+     *
+     * @var mixed|AnatomicalStructure|AnatomicalSystem|SuperficialAnatomy [schema.org types: AnatomicalStructure, AnatomicalSystem, SuperficialAnatomy]
+     */
+    public $associatedAnatomy;
+    /**
+     * One of a set of differential diagnoses for the condition. Specifically, a
+     * closely-related or competing diagnosis typically considered later in the
+     * cognitive process whereby this medical condition is distinguished from
+     * others most likely responsible for a similar collection of signs and
+     * symptoms to reach the most parsimonious diagnosis or diagnoses in a
+     * patient.
+     *
+     * @var DDxElement [schema.org types: DDxElement]
+     */
+    public $differentialDiagnosis;
+    /**
+     * Specifying a drug or medicine used in a medication procedure
+     *
+     * @var Drug [schema.org types: Drug]
+     */
+    public $drug;
+    /**
+     * The characteristics of associated patients, such as age, gender, race etc.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $epidemiology;
+    /**
+     * The likely outcome in either the short term or long term of the medical
+     * condition.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $expectedPrognosis;
+    /**
+     * The expected progression of the condition if it is not treated and allowed
+     * to progress naturally.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $naturalProgression;
+    /**
+     * Changes in the normal mechanical, physical, and biochemical functions that
+     * are associated with this activity or condition.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $pathophysiology;
+    /**
+     * A possible unexpected and unfavorable evolution of a medical condition.
+     * Complications may include worsening of the signs or symptoms of the
+     * disease, extension of the condition to other organ systems, etc.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $possibleComplication;
+    /**
+     * A possible treatment to address this condition, sign or symptom.
+     *
+     * @var MedicalTherapy [schema.org types: MedicalTherapy]
+     */
+    public $possibleTreatment;
+    /**
+     * A preventative therapy used to prevent an initial occurrence of the medical
+     * condition, such as vaccination.
+     *
+     * @var MedicalTherapy [schema.org types: MedicalTherapy]
+     */
+    public $primaryPrevention;
+    /**
+     * A modifiable or non-modifiable factor that increases the risk of a patient
+     * contracting this condition, e.g. age, coexisting condition.
+     *
+     * @var MedicalRiskFactor [schema.org types: MedicalRiskFactor]
+     */
+    public $riskFactor;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * A preventative therapy used to prevent reoccurrence of the medical
+     * condition after an initial episode of the condition.
+     *
+     * @var MedicalTherapy [schema.org types: MedicalTherapy]
+     */
+    public $secondaryPrevention;
+    /**
+     * A sign or symptom of this condition. Signs are objective or physically
+     * observable manifestations of the medical condition while symptoms are the
+     * subjective experience of the medical condition.
+     *
+     * @var MedicalSignOrSymptom [schema.org types: MedicalSignOrSymptom]
+     */
+    public $signOrSymptom;
+    /**
+     * The stage of the condition, if applicable.
+     *
+     * @var MedicalConditionStage [schema.org types: MedicalConditionStage]
+     */
+    public $stage;
+    /**
+     * The status of the study (enumerated).
+     *
+     * @var mixed|EventStatusType|MedicalStudyStatus|string [schema.org types: EventStatusType, MedicalStudyStatus, Text]
+     */
+    public $status;
+    /**
+     * A medical test typically performed given this condition.
+     *
+     * @var MedicalTest [schema.org types: MedicalTest]
+     */
+    public $typicalTest;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -349,13 +328,13 @@ class MedicalCondition extends MedicalEntity
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['associatedAnatomy','differentialDiagnosis','drug','epidemiology','expectedPrognosis','naturalProgression','pathophysiology','possibleComplication','possibleTreatment','primaryPrevention','riskFactor','secondaryPrevention','signOrSymptom','stage','status','typicalTest'], 'validateJsonSchema'],
+            [['associatedAnatomy', 'differentialDiagnosis', 'drug', 'epidemiology', 'expectedPrognosis', 'naturalProgression', 'pathophysiology', 'possibleComplication', 'possibleTreatment', 'primaryPrevention', 'riskFactor', 'secondaryPrevention', 'signOrSymptom', 'stage', 'status', 'typicalTest'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

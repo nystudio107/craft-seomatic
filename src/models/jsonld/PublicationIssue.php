@@ -93,39 +93,6 @@ class PublicationIssue extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Identifies the issue of publication; for example, "iii" or "2".
-     *
-     * @var mixed|int|string [schema.org types: Integer, Text]
-     */
-    public $issueNumber;
-
-    /**
-     * The page on which the work ends; for example "138" or "xvi".
-     *
-     * @var mixed|int|string [schema.org types: Integer, Text]
-     */
-    public $pageEnd;
-
-    /**
-     * The page on which the work starts; for example "135" or "xiii".
-     *
-     * @var mixed|int|string [schema.org types: Integer, Text]
-     */
-    public $pageStart;
-
-    /**
-     * Any description of pages that is not separated into pageStart and pageEnd;
-     * for example, "1-6, 9, 55" or "10-12, 46-49".
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $pagination;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -137,19 +104,17 @@ class PublicationIssue extends CreativeWork
         'pageStart',
         'pagination'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'issueNumber' => ['Integer','Text'],
-        'pageEnd' => ['Integer','Text'],
-        'pageStart' => ['Integer','Text'],
+        'issueNumber' => ['Integer', 'Text'],
+        'pageEnd' => ['Integer', 'Text'],
+        'pageStart' => ['Integer', 'Text'],
         'pagination' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -161,7 +126,6 @@ class PublicationIssue extends CreativeWork
         'pageStart' => 'The page on which the work starts; for example "135" or "xiii".',
         'pagination' => 'Any description of pages that is not separated into pageStart and pageEnd; for example, "1-6, 9, 55" or "10-12, 46-49".'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -170,6 +134,8 @@ class PublicationIssue extends CreativeWork
     static protected $_googleRequiredSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -177,14 +143,39 @@ class PublicationIssue extends CreativeWork
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Identifies the issue of publication; for example, "iii" or "2".
+     *
+     * @var mixed|int|string [schema.org types: Integer, Text]
+     */
+    public $issueNumber;
+    /**
+     * The page on which the work ends; for example "138" or "xvi".
+     *
+     * @var mixed|int|string [schema.org types: Integer, Text]
+     */
+    public $pageEnd;
+    /**
+     * The page on which the work starts; for example "135" or "xiii".
+     *
+     * @var mixed|int|string [schema.org types: Integer, Text]
+     */
+    public $pageStart;
+    /**
+     * Any description of pages that is not separated into pageStart and pageEnd;
+     * for example, "1-6, 9, 55" or "10-12, 46-49".
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $pagination;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -214,13 +205,13 @@ class PublicationIssue extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['issueNumber','pageEnd','pageStart','pagination'], 'validateJsonSchema'],
+            [['issueNumber', 'pageEnd', 'pageStart', 'pagination'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -102,24 +102,6 @@ class Claim extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Indicates an occurence of a Claim in some CreativeWork.
-     *
-     * @var CreativeWork [schema.org types: CreativeWork]
-     */
-    public $appearance;
-
-    /**
-     * Indicates the first known occurence of a Claim in some CreativeWork.
-     *
-     * @var CreativeWork [schema.org types: CreativeWork]
-     */
-    public $firstAppearance;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -129,7 +111,6 @@ class Claim extends CreativeWork
         'appearance',
         'firstAppearance'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -140,6 +121,8 @@ class Claim extends CreativeWork
         'firstAppearance' => ['CreativeWork']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -149,7 +132,6 @@ class Claim extends CreativeWork
         'appearance' => 'Indicates an occurence of a Claim in some CreativeWork.',
         'firstAppearance' => 'Indicates the first known occurence of a Claim in some CreativeWork.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -157,7 +139,6 @@ class Claim extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -165,14 +146,26 @@ class Claim extends CreativeWork
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Indicates an occurence of a Claim in some CreativeWork.
+     *
+     * @var CreativeWork [schema.org types: CreativeWork]
+     */
+    public $appearance;
+    /**
+     * Indicates the first known occurence of a Claim in some CreativeWork.
+     *
+     * @var CreativeWork [schema.org types: CreativeWork]
+     */
+    public $firstAppearance;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -202,13 +195,13 @@ class Claim extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['appearance','firstAppearance'], 'validateJsonSchema'],
+            [['appearance', 'firstAppearance'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

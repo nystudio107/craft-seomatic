@@ -92,74 +92,6 @@ class HowTo extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The estimated cost of the supply or supplies consumed when performing
-     * instructions.
-     *
-     * @var mixed|MonetaryAmount|string [schema.org types: MonetaryAmount, Text]
-     */
-    public $estimatedCost;
-
-    /**
-     * The length of time it takes to perform instructions or a direction (not
-     * including time to prepare the supplies), in ISO 8601 duration format.
-     *
-     * @var Duration [schema.org types: Duration]
-     */
-    public $performTime;
-
-    /**
-     * The length of time it takes to prepare the items to be used in instructions
-     * or a direction, in ISO 8601 duration format.
-     *
-     * @var Duration [schema.org types: Duration]
-     */
-    public $prepTime;
-
-    /**
-     * A single step item (as HowToStep, text, document, video, etc.) or a
-     * HowToSection. Supersedes steps.
-     *
-     * @var mixed|CreativeWork|HowToSection|HowToStep|string [schema.org types: CreativeWork, HowToSection, HowToStep, Text]
-     */
-    public $step;
-
-    /**
-     * A sub-property of instrument. A supply consumed when performing
-     * instructions or a direction.
-     *
-     * @var mixed|HowToSupply|string [schema.org types: HowToSupply, Text]
-     */
-    public $supply;
-
-    /**
-     * A sub property of instrument. An object used (but not consumed) when
-     * performing instructions or a direction.
-     *
-     * @var mixed|HowToTool|string [schema.org types: HowToTool, Text]
-     */
-    public $tool;
-
-    /**
-     * The total time required to perform instructions or a direction (including
-     * time to prepare the supplies), in ISO 8601 duration format.
-     *
-     * @var Duration [schema.org types: Duration]
-     */
-    public $totalTime;
-
-    /**
-     * The quantity that results by performing instructions. For example, a paper
-     * airplane, 10 personalized candles.
-     *
-     * @var mixed|QuantitativeValue|string [schema.org types: QuantitativeValue, Text]
-     */
-    public $yield;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -175,23 +107,21 @@ class HowTo extends CreativeWork
         'totalTime',
         'yield'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'estimatedCost' => ['MonetaryAmount','Text'],
+        'estimatedCost' => ['MonetaryAmount', 'Text'],
         'performTime' => ['Duration'],
         'prepTime' => ['Duration'],
-        'step' => ['CreativeWork','HowToSection','HowToStep','Text'],
-        'supply' => ['HowToSupply','Text'],
-        'tool' => ['HowToTool','Text'],
+        'step' => ['CreativeWork', 'HowToSection', 'HowToStep', 'Text'],
+        'supply' => ['HowToSupply', 'Text'],
+        'tool' => ['HowToTool', 'Text'],
         'totalTime' => ['Duration'],
-        'yield' => ['QuantitativeValue','Text']
+        'yield' => ['QuantitativeValue', 'Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -207,7 +137,6 @@ class HowTo extends CreativeWork
         'totalTime' => 'The total time required to perform instructions or a direction (including time to prepare the supplies), in ISO 8601 duration format.',
         'yield' => 'The quantity that results by performing instructions. For example, a paper airplane, 10 personalized candles.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -215,7 +144,6 @@ class HowTo extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -223,14 +151,73 @@ class HowTo extends CreativeWork
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The estimated cost of the supply or supplies consumed when performing
+     * instructions.
+     *
+     * @var mixed|MonetaryAmount|string [schema.org types: MonetaryAmount, Text]
+     */
+    public $estimatedCost;
+    /**
+     * The length of time it takes to perform instructions or a direction (not
+     * including time to prepare the supplies), in ISO 8601 duration format.
+     *
+     * @var Duration [schema.org types: Duration]
+     */
+    public $performTime;
+    /**
+     * The length of time it takes to prepare the items to be used in instructions
+     * or a direction, in ISO 8601 duration format.
+     *
+     * @var Duration [schema.org types: Duration]
+     */
+    public $prepTime;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * A single step item (as HowToStep, text, document, video, etc.) or a
+     * HowToSection. Supersedes steps.
+     *
+     * @var mixed|CreativeWork|HowToSection|HowToStep|string [schema.org types: CreativeWork, HowToSection, HowToStep, Text]
+     */
+    public $step;
+    /**
+     * A sub-property of instrument. A supply consumed when performing
+     * instructions or a direction.
+     *
+     * @var mixed|HowToSupply|string [schema.org types: HowToSupply, Text]
+     */
+    public $supply;
+    /**
+     * A sub property of instrument. An object used (but not consumed) when
+     * performing instructions or a direction.
+     *
+     * @var mixed|HowToTool|string [schema.org types: HowToTool, Text]
+     */
+    public $tool;
+    /**
+     * The total time required to perform instructions or a direction (including
+     * time to prepare the supplies), in ISO 8601 duration format.
+     *
+     * @var Duration [schema.org types: Duration]
+     */
+    public $totalTime;
+    /**
+     * The quantity that results by performing instructions. For example, a paper
+     * airplane, 10 personalized candles.
+     *
+     * @var mixed|QuantitativeValue|string [schema.org types: QuantitativeValue, Text]
+     */
+    public $yield;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -260,13 +247,13 @@ class HowTo extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['estimatedCost','performTime','prepTime','step','supply','tool','totalTime','yield'], 'validateJsonSchema'],
+            [['estimatedCost', 'performTime', 'prepTime', 'step', 'supply', 'tool', 'totalTime', 'yield'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

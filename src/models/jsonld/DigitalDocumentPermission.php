@@ -92,25 +92,6 @@ class DigitalDocumentPermission extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The person, organization, contact point, or audience that has been granted
-     * this permission.
-     *
-     * @var mixed|Audience|ContactPoint|Organization|Person [schema.org types: Audience, ContactPoint, Organization, Person]
-     */
-    public $grantee;
-
-    /**
-     * The type of permission granted the person, organization, or audience.
-     *
-     * @var DigitalDocumentPermissionType [schema.org types: DigitalDocumentPermissionType]
-     */
-    public $permissionType;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -120,17 +101,18 @@ class DigitalDocumentPermission extends Intangible
         'grantee',
         'permissionType'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'grantee' => ['Audience','ContactPoint','Organization','Person'],
+        'grantee' => ['Audience', 'ContactPoint', 'Organization', 'Person'],
         'permissionType' => ['DigitalDocumentPermissionType']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -140,7 +122,6 @@ class DigitalDocumentPermission extends Intangible
         'grantee' => 'The person, organization, contact point, or audience that has been granted this permission.',
         'permissionType' => 'The type of permission granted the person, organization, or audience.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -148,7 +129,6 @@ class DigitalDocumentPermission extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -156,14 +136,27 @@ class DigitalDocumentPermission extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The person, organization, contact point, or audience that has been granted
+     * this permission.
+     *
+     * @var mixed|Audience|ContactPoint|Organization|Person [schema.org types: Audience, ContactPoint, Organization, Person]
+     */
+    public $grantee;
+    /**
+     * The type of permission granted the person, organization, or audience.
+     *
+     * @var DigitalDocumentPermissionType [schema.org types: DigitalDocumentPermissionType]
+     */
+    public $permissionType;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -193,13 +186,13 @@ class DigitalDocumentPermission extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['grantee','permissionType'], 'validateJsonSchema'],
+            [['grantee', 'permissionType'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -92,34 +92,6 @@ class LiveBlogPosting extends BlogPosting
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The time when the live blog will stop covering the Event. Note that
-     * coverage may continue after the Event concludes.
-     *
-     * @var DateTime [schema.org types: DateTime]
-     */
-    public $coverageEndTime;
-
-    /**
-     * The time when the live blog will begin covering the Event. Note that
-     * coverage may begin before the Event's start time. The LiveBlogPosting may
-     * also be created before coverage begins.
-     *
-     * @var DateTime [schema.org types: DateTime]
-     */
-    public $coverageStartTime;
-
-    /**
-     * An update to the LiveBlog.
-     *
-     * @var BlogPosting [schema.org types: BlogPosting]
-     */
-    public $liveBlogUpdate;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -130,7 +102,6 @@ class LiveBlogPosting extends BlogPosting
         'coverageStartTime',
         'liveBlogUpdate'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -141,7 +112,6 @@ class LiveBlogPosting extends BlogPosting
         'coverageStartTime' => ['DateTime'],
         'liveBlogUpdate' => ['BlogPosting']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -153,6 +123,8 @@ class LiveBlogPosting extends BlogPosting
         'liveBlogUpdate' => 'An update to the LiveBlog.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -160,7 +132,6 @@ class LiveBlogPosting extends BlogPosting
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -170,14 +141,35 @@ class LiveBlogPosting extends BlogPosting
         'coverageEndTime',
         'coverageStartTime'
     ];
+    /**
+     * The time when the live blog will stop covering the Event. Note that
+     * coverage may continue after the Event concludes.
+     *
+     * @var DateTime [schema.org types: DateTime]
+     */
+    public $coverageEndTime;
+    /**
+     * The time when the live blog will begin covering the Event. Note that
+     * coverage may begin before the Event's start time. The LiveBlogPosting may
+     * also be created before coverage begins.
+     *
+     * @var DateTime [schema.org types: DateTime]
+     */
+    public $coverageStartTime;
+    /**
+     * An update to the LiveBlog.
+     *
+     * @var BlogPosting [schema.org types: BlogPosting]
+     */
+    public $liveBlogUpdate;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -207,13 +199,13 @@ class LiveBlogPosting extends BlogPosting
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['coverageEndTime','coverageStartTime','liveBlogUpdate'], 'validateJsonSchema'],
+            [['coverageEndTime', 'coverageStartTime', 'liveBlogUpdate'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

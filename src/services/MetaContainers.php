@@ -151,7 +151,7 @@ class MetaContainers extends Component
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
         // Get the page number of this request
@@ -463,28 +463,6 @@ class MetaContainers extends Component
     }
 
     /**
-     * Set the element that matches the $uri
-     *
-     * @param string $uri
-     * @param int|null $siteId
-     */
-    protected function setMatchedElement(string $uri, int $siteId = null)
-    {
-        if ($siteId === null) {
-            $siteId = Craft::$app->getSites()->currentSite->id
-                ?? Craft::$app->getSites()->primarySite->id
-                ?? 1;
-        }
-        $uri = trim($uri, '/');
-        /** @var Element $element */
-        $enabledOnly = !Seomatic::$previewingMetaContainers;
-        $element = Craft::$app->getElements()->getElementByUri($uri, $siteId, $enabledOnly);
-        if ($element && ($element->uri !== null)) {
-            Seomatic::setMatchedElement($element);
-        }
-    }
-
-    /**
      * Return the MetaBundle that corresponds with the Seomatic::$matchedElement
      *
      * @return null|MetaBundle
@@ -510,35 +488,6 @@ class MetaContainers extends Component
         $this->matchedMetaBundle = $metaBundle;
 
         return $metaBundle;
-    }
-
-    /**
-     * Return as key/value pairs any allowed parameters in the request
-     *
-     * @return string
-     */
-    protected function getAllowedUrlParams(): string
-    {
-        $result = '';
-        $allowedParams = Seomatic::$settings->allowedUrlParams;
-        if (Craft::$app->getPlugins()->getPlugin(SeoProduct::REQUIRED_PLUGIN_HANDLE)) {
-            $commerce = CommercePlugin::getInstance();
-            if ($commerce !== null) {
-                $allowedParams[] = 'variant';
-            }
-        }
-        // Iterate through the allowed parameters, adding the key/value pair to the $result string as found
-        $request = Craft::$app->getRequest();
-        if (!$request->isConsoleRequest) {
-            foreach ($allowedParams as $allowedParam) {
-                $value = $request->getParam($allowedParam);
-                if ($value !== null) {
-                    $result .= "{$allowedParam}={$value}";
-                }
-            }
-        }
-
-        return $result;
     }
 
     /**
@@ -568,19 +517,6 @@ class MetaContainers extends Component
             }
         }
         Craft::endProfile('MetaContainers::loadGlobalMetaContainers', __METHOD__);
-    }
-
-    /**
-     * Load the meta containers specific to the matched meta bundle
-     */
-    protected function loadContentMetaContainers()
-    {
-        Craft::beginProfile('MetaContainers::loadContentMetaContainers', __METHOD__);
-        $metaBundle = $this->getMatchedMetaBundle();
-        if ($metaBundle) {
-            $this->addMetaBundleToContainers($metaBundle);
-        }
-        Craft::endProfile('MetaContainers::loadContentMetaContainers', __METHOD__);
     }
 
     /**
@@ -635,9 +571,6 @@ class MetaContainers extends Component
         }
     }
 
-    // Protected Methods
-    // =========================================================================
-
     /**
      * Add the passed in MetaItem to the MetaContainer indexed as $key
      *
@@ -673,65 +606,6 @@ class MetaContainers extends Component
         }
 
         return $this->metaContainers[$key];
-    }
-
-    /**
-     * Load any meta containers in the current element
-     */
-    protected function loadFieldMetaContainers()
-    {
-        Craft::beginProfile('MetaContainers::loadFieldMetaContainers', __METHOD__);
-        $element = Seomatic::$matchedElement;
-        if ($element && $this->includeMatchedElement) {
-            /** @var Element $element */
-            $fieldHandles = FieldHelper::fieldsOfTypeFromElement($element, FieldHelper::SEO_SETTINGS_CLASS_KEY, true);
-            foreach ($fieldHandles as $fieldHandle) {
-                if (!empty($element->$fieldHandle)) {
-                    /** @var MetaBundle $metaBundle */
-                    $metaBundle = $element->$fieldHandle;
-                    Seomatic::$plugin->metaBundles->pruneFieldMetaBundleSettings($metaBundle, $fieldHandle);
-
-                    // See which properties have to be overridden, because the parent bundle says so.
-                    foreach (self::COMPOSITE_SETTING_LOOKUP as $settingName => $rules) {
-                        if (empty($metaBundle->metaGlobalVars->{$settingName})) {
-                            $parentBundle = Seomatic::$plugin->metaBundles->getContentMetaBundleForElement($element);
-
-                            foreach ($rules as $settingPath => $action) {
-                                list ($container, $property) = explode('.', $settingPath);
-                                list ($testValue, $sourceSetting) = explode('.', $action);
-
-                                $bundleProp = $parentBundle->{$container}->{$property} ?? null;
-                                if ($bundleProp == $testValue) {
-                                    $metaBundle->metaGlobalVars->{$settingName} = $metaBundle->metaGlobalVars->{$sourceSetting};
-                                }
-                            }
-                        }
-                    }
-
-                    // Handle re-creating the `mainEntityOfPage` so that the model injected into the
-                    // templates has the appropriate attributes
-                    $generalContainerKey = MetaJsonLdContainer::CONTAINER_TYPE . JsonLdService::GENERAL_HANDLE;
-                    $generalContainer = $this->metaContainers[$generalContainerKey];
-                    if (($generalContainer !== null) && !empty($generalContainer->data['mainEntityOfPage'])) {
-                        /** @var MetaJsonLd $jsonLdModel */
-                        $jsonLdModel = $generalContainer->data['mainEntityOfPage'];
-                        $config = $jsonLdModel->getAttributes();
-                        $schemaType = $metaBundle->metaGlobalVars->mainEntityOfPage ?? $config['type'] ?? null;
-                        // If the schemaType is '' we should fall back on whatever the mainEntityOfPage already is
-                        if (empty($schemaType)) {
-                            $schemaType = null;
-                        }
-                        if ($schemaType !== null) {
-                            $config['key'] = 'mainEntityOfPage';
-                            $schemaType = MetaValueHelper::parseString($schemaType);
-                            $generalContainer->data['mainEntityOfPage'] = MetaJsonLd::create($schemaType, $config);
-                        }
-                    }
-                    $this->addMetaBundleToContainers($metaBundle);
-                }
-            }
-        }
-        Craft::endProfile('MetaContainers::loadFieldMetaContainers', __METHOD__);
     }
 
     /**
@@ -778,6 +652,9 @@ class MetaContainers extends Component
         /** @var MetaContainer $className */
         return $container;
     }
+
+    // Protected Methods
+    // =========================================================================
 
     /**
      * Render the HTML of all MetaContainers of a specific $type
@@ -886,9 +763,6 @@ class MetaContainers extends Component
 
         return $htmlArray;
     }
-
-    // Protected Methods
-    // =========================================================================
 
     /**
      * Return a MetaItem object by $key from container $type
@@ -1007,6 +881,132 @@ class MetaContainers extends Component
         if (!Craft::$app instanceof ConsoleApplication) {
             $this->trigger(self::EVENT_INVALIDATE_CONTAINER_CACHES, $event);
         }
+    }
+
+    // Protected Methods
+    // =========================================================================
+
+    /**
+     * Set the element that matches the $uri
+     *
+     * @param string $uri
+     * @param int|null $siteId
+     */
+    protected function setMatchedElement(string $uri, int $siteId = null)
+    {
+        if ($siteId === null) {
+            $siteId = Craft::$app->getSites()->currentSite->id
+                ?? Craft::$app->getSites()->primarySite->id
+                ?? 1;
+        }
+        $uri = trim($uri, '/');
+        /** @var Element $element */
+        $enabledOnly = !Seomatic::$previewingMetaContainers;
+        $element = Craft::$app->getElements()->getElementByUri($uri, $siteId, $enabledOnly);
+        if ($element && ($element->uri !== null)) {
+            Seomatic::setMatchedElement($element);
+        }
+    }
+
+    /**
+     * Return as key/value pairs any allowed parameters in the request
+     *
+     * @return string
+     */
+    protected function getAllowedUrlParams(): string
+    {
+        $result = '';
+        $allowedParams = Seomatic::$settings->allowedUrlParams;
+        if (Craft::$app->getPlugins()->getPlugin(SeoProduct::REQUIRED_PLUGIN_HANDLE)) {
+            $commerce = CommercePlugin::getInstance();
+            if ($commerce !== null) {
+                $allowedParams[] = 'variant';
+            }
+        }
+        // Iterate through the allowed parameters, adding the key/value pair to the $result string as found
+        $request = Craft::$app->getRequest();
+        if (!$request->isConsoleRequest) {
+            foreach ($allowedParams as $allowedParam) {
+                $value = $request->getParam($allowedParam);
+                if ($value !== null) {
+                    $result .= "{$allowedParam}={$value}";
+                }
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * Load the meta containers specific to the matched meta bundle
+     */
+    protected function loadContentMetaContainers()
+    {
+        Craft::beginProfile('MetaContainers::loadContentMetaContainers', __METHOD__);
+        $metaBundle = $this->getMatchedMetaBundle();
+        if ($metaBundle) {
+            $this->addMetaBundleToContainers($metaBundle);
+        }
+        Craft::endProfile('MetaContainers::loadContentMetaContainers', __METHOD__);
+    }
+
+    /**
+     * Load any meta containers in the current element
+     */
+    protected function loadFieldMetaContainers()
+    {
+        Craft::beginProfile('MetaContainers::loadFieldMetaContainers', __METHOD__);
+        $element = Seomatic::$matchedElement;
+        if ($element && $this->includeMatchedElement) {
+            /** @var Element $element */
+            $fieldHandles = FieldHelper::fieldsOfTypeFromElement($element, FieldHelper::SEO_SETTINGS_CLASS_KEY, true);
+            foreach ($fieldHandles as $fieldHandle) {
+                if (!empty($element->$fieldHandle)) {
+                    /** @var MetaBundle $metaBundle */
+                    $metaBundle = $element->$fieldHandle;
+                    Seomatic::$plugin->metaBundles->pruneFieldMetaBundleSettings($metaBundle, $fieldHandle);
+
+                    // See which properties have to be overridden, because the parent bundle says so.
+                    foreach (self::COMPOSITE_SETTING_LOOKUP as $settingName => $rules) {
+                        if (empty($metaBundle->metaGlobalVars->{$settingName})) {
+                            $parentBundle = Seomatic::$plugin->metaBundles->getContentMetaBundleForElement($element);
+
+                            foreach ($rules as $settingPath => $action) {
+                                list ($container, $property) = explode('.', $settingPath);
+                                list ($testValue, $sourceSetting) = explode('.', $action);
+
+                                $bundleProp = $parentBundle->{$container}->{$property} ?? null;
+                                if ($bundleProp == $testValue) {
+                                    $metaBundle->metaGlobalVars->{$settingName} = $metaBundle->metaGlobalVars->{$sourceSetting};
+                                }
+                            }
+                        }
+                    }
+
+                    // Handle re-creating the `mainEntityOfPage` so that the model injected into the
+                    // templates has the appropriate attributes
+                    $generalContainerKey = MetaJsonLdContainer::CONTAINER_TYPE . JsonLdService::GENERAL_HANDLE;
+                    $generalContainer = $this->metaContainers[$generalContainerKey];
+                    if (($generalContainer !== null) && !empty($generalContainer->data['mainEntityOfPage'])) {
+                        /** @var MetaJsonLd $jsonLdModel */
+                        $jsonLdModel = $generalContainer->data['mainEntityOfPage'];
+                        $config = $jsonLdModel->getAttributes();
+                        $schemaType = $metaBundle->metaGlobalVars->mainEntityOfPage ?? $config['type'] ?? null;
+                        // If the schemaType is '' we should fall back on whatever the mainEntityOfPage already is
+                        if (empty($schemaType)) {
+                            $schemaType = null;
+                        }
+                        if ($schemaType !== null) {
+                            $config['key'] = 'mainEntityOfPage';
+                            $schemaType = MetaValueHelper::parseString($schemaType);
+                            $generalContainer->data['mainEntityOfPage'] = MetaJsonLd::create($schemaType, $config);
+                        }
+                    }
+                    $this->addMetaBundleToContainers($metaBundle);
+                }
+            }
+        }
+        Craft::endProfile('MetaContainers::loadFieldMetaContainers', __METHOD__);
     }
 
     /**

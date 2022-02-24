@@ -94,53 +94,6 @@ class LodgingReservation extends Reservation
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The earliest someone may check into a lodging establishment.
-     *
-     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
-     */
-    public $checkinTime;
-
-    /**
-     * The latest someone may check out of a lodging establishment.
-     *
-     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
-     */
-    public $checkoutTime;
-
-    /**
-     * A full description of the lodging unit.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $lodgingUnitDescription;
-
-    /**
-     * Textual description of the unit type (including suite vs. room, size of
-     * bed, etc.).
-     *
-     * @var mixed|QualitativeValue|string [schema.org types: QualitativeValue, Text]
-     */
-    public $lodgingUnitType;
-
-    /**
-     * The number of adults staying in the unit.
-     *
-     * @var mixed|int|QuantitativeValue [schema.org types: Integer, QuantitativeValue]
-     */
-    public $numAdults;
-
-    /**
-     * The number of children staying in the unit.
-     *
-     * @var mixed|int|QuantitativeValue [schema.org types: Integer, QuantitativeValue]
-     */
-    public $numChildren;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -154,21 +107,19 @@ class LodgingReservation extends Reservation
         'numAdults',
         'numChildren'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'checkinTime' => ['DateTime','Time'],
-        'checkoutTime' => ['DateTime','Time'],
+        'checkinTime' => ['DateTime', 'Time'],
+        'checkoutTime' => ['DateTime', 'Time'],
         'lodgingUnitDescription' => ['Text'],
-        'lodgingUnitType' => ['QualitativeValue','Text'],
-        'numAdults' => ['Integer','QuantitativeValue'],
-        'numChildren' => ['Integer','QuantitativeValue']
+        'lodgingUnitType' => ['QualitativeValue', 'Text'],
+        'numAdults' => ['Integer', 'QuantitativeValue'],
+        'numChildren' => ['Integer', 'QuantitativeValue']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -182,7 +133,6 @@ class LodgingReservation extends Reservation
         'numAdults' => 'The number of adults staying in the unit.',
         'numChildren' => 'The number of children staying in the unit.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -190,7 +140,6 @@ class LodgingReservation extends Reservation
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -198,14 +147,54 @@ class LodgingReservation extends Reservation
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The earliest someone may check into a lodging establishment.
+     *
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
+     */
+    public $checkinTime;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The latest someone may check out of a lodging establishment.
+     *
+     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
+     */
+    public $checkoutTime;
+    /**
+     * A full description of the lodging unit.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $lodgingUnitDescription;
+    /**
+     * Textual description of the unit type (including suite vs. room, size of
+     * bed, etc.).
+     *
+     * @var mixed|QualitativeValue|string [schema.org types: QualitativeValue, Text]
+     */
+    public $lodgingUnitType;
+    /**
+     * The number of adults staying in the unit.
+     *
+     * @var mixed|int|QuantitativeValue [schema.org types: Integer, QuantitativeValue]
+     */
+    public $numAdults;
+    /**
+     * The number of children staying in the unit.
+     *
+     * @var mixed|int|QuantitativeValue [schema.org types: Integer, QuantitativeValue]
+     */
+    public $numChildren;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -235,13 +224,13 @@ class LodgingReservation extends Reservation
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['checkinTime','checkoutTime','lodgingUnitDescription','lodgingUnitType','numAdults','numChildren'], 'validateJsonSchema'],
+            [['checkinTime', 'checkoutTime', 'lodgingUnitDescription', 'lodgingUnitType', 'numAdults', 'numChildren'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

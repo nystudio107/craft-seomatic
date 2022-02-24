@@ -91,35 +91,6 @@ class ExchangeRateSpecification extends StructuredValue
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The currency in which the monetary amount is expressed. Use standard
-     * formats: ISO 4217 currency format e.g. "USD"; Ticker symbol for
-     * cryptocurrencies e.g. "BTC"; well known names for Local Exchange Tradings
-     * Systems (LETS) and other currency types e.g. "Ithaca HOUR".
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $currency;
-
-    /**
-     * The current price of a currency.
-     *
-     * @var UnitPriceSpecification [schema.org types: UnitPriceSpecification]
-     */
-    public $currentExchangeRate;
-
-    /**
-     * The difference between the price at which a broker or other intermediary
-     * buys and sells foreign currency.
-     *
-     * @var mixed|MonetaryAmount|float [schema.org types: MonetaryAmount, Number]
-     */
-    public $exchangeRateSpread;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -130,7 +101,6 @@ class ExchangeRateSpecification extends StructuredValue
         'currentExchangeRate',
         'exchangeRateSpread'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -139,9 +109,8 @@ class ExchangeRateSpecification extends StructuredValue
     static protected $_schemaPropertyExpectedTypes = [
         'currency' => ['Text'],
         'currentExchangeRate' => ['UnitPriceSpecification'],
-        'exchangeRateSpread' => ['MonetaryAmount','Number']
+        'exchangeRateSpread' => ['MonetaryAmount', 'Number']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -153,6 +122,8 @@ class ExchangeRateSpecification extends StructuredValue
         'exchangeRateSpread' => 'The difference between the price at which a broker or other intermediary buys and sells foreign currency.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -160,7 +131,6 @@ class ExchangeRateSpecification extends StructuredValue
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -168,14 +138,36 @@ class ExchangeRateSpecification extends StructuredValue
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The currency in which the monetary amount is expressed. Use standard
+     * formats: ISO 4217 currency format e.g. "USD"; Ticker symbol for
+     * cryptocurrencies e.g. "BTC"; well known names for Local Exchange Tradings
+     * Systems (LETS) and other currency types e.g. "Ithaca HOUR".
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $currency;
+    /**
+     * The current price of a currency.
+     *
+     * @var UnitPriceSpecification [schema.org types: UnitPriceSpecification]
+     */
+    public $currentExchangeRate;
+    /**
+     * The difference between the price at which a broker or other intermediary
+     * buys and sells foreign currency.
+     *
+     * @var mixed|MonetaryAmount|float [schema.org types: MonetaryAmount, Number]
+     */
+    public $exchangeRateSpread;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -205,13 +197,13 @@ class ExchangeRateSpecification extends StructuredValue
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['currency','currentExchangeRate','exchangeRateSpread'], 'validateJsonSchema'],
+            [['currency', 'currentExchangeRate', 'exchangeRateSpread'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -93,25 +93,6 @@ class ArchiveComponent extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * ArchiveOrganization that holds, keeps or maintains the ArchiveComponent.
-     * Inverse property: archiveHeld.
-     *
-     * @var ArchiveOrganization [schema.org types: ArchiveOrganization]
-     */
-    public $holdingArchive;
-
-    /**
-     * Current location of the item.
-     *
-     * @var mixed|Place|PostalAddress|string [schema.org types: Place, PostalAddress, Text]
-     */
-    public $itemLocation;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -121,7 +102,6 @@ class ArchiveComponent extends CreativeWork
         'holdingArchive',
         'itemLocation'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -129,9 +109,11 @@ class ArchiveComponent extends CreativeWork
      */
     static protected $_schemaPropertyExpectedTypes = [
         'holdingArchive' => ['ArchiveOrganization'],
-        'itemLocation' => ['Place','PostalAddress','Text']
+        'itemLocation' => ['Place', 'PostalAddress', 'Text']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -141,7 +123,6 @@ class ArchiveComponent extends CreativeWork
         'holdingArchive' => 'ArchiveOrganization that holds, keeps or maintains the ArchiveComponent. Inverse property: archiveHeld.',
         'itemLocation' => 'Current location of the item.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -149,7 +130,6 @@ class ArchiveComponent extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -157,14 +137,27 @@ class ArchiveComponent extends CreativeWork
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * ArchiveOrganization that holds, keeps or maintains the ArchiveComponent.
+     * Inverse property: archiveHeld.
+     *
+     * @var ArchiveOrganization [schema.org types: ArchiveOrganization]
+     */
+    public $holdingArchive;
+    /**
+     * Current location of the item.
+     *
+     * @var mixed|Place|PostalAddress|string [schema.org types: Place, PostalAddress, Text]
+     */
+    public $itemLocation;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -194,13 +187,13 @@ class ArchiveComponent extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['holdingArchive','itemLocation'], 'validateJsonSchema'],
+            [['holdingArchive', 'itemLocation'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

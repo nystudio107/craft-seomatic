@@ -93,63 +93,6 @@ class LifestyleModification extends MedicalEntity
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A medical code for the entity, taken from a controlled vocabulary or
-     * ontology such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
-     *
-     * @var MedicalCode [schema.org types: MedicalCode]
-     */
-    public $code;
-
-    /**
-     * A medical guideline related to this entity.
-     *
-     * @var MedicalGuideline [schema.org types: MedicalGuideline]
-     */
-    public $guideline;
-
-    /**
-     * The drug or supplement's legal status, including any controlled substance
-     * schedules that apply.
-     *
-     * @var mixed|DrugLegalStatus|MedicalEnumeration|string [schema.org types: DrugLegalStatus, MedicalEnumeration, Text]
-     */
-    public $legalStatus;
-
-    /**
-     * The system of medicine that includes this MedicalEntity, for example
-     * 'evidence-based', 'homeopathic', 'chiropractic', etc.
-     *
-     * @var MedicineSystem [schema.org types: MedicineSystem]
-     */
-    public $medicineSystem;
-
-    /**
-     * If applicable, the organization that officially recognizes this entity as
-     * part of its endorsed system of medicine.
-     *
-     * @var Organization [schema.org types: Organization]
-     */
-    public $recognizingAuthority;
-
-    /**
-     * If applicable, a medical specialty in which this entity is relevant.
-     *
-     * @var MedicalSpecialty [schema.org types: MedicalSpecialty]
-     */
-    public $relevantSpecialty;
-
-    /**
-     * A medical study or trial related to this entity.
-     *
-     * @var MedicalStudy [schema.org types: MedicalStudy]
-     */
-    public $study;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -164,7 +107,6 @@ class LifestyleModification extends MedicalEntity
         'relevantSpecialty',
         'study'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -173,13 +115,12 @@ class LifestyleModification extends MedicalEntity
     static protected $_schemaPropertyExpectedTypes = [
         'code' => ['MedicalCode'],
         'guideline' => ['MedicalGuideline'],
-        'legalStatus' => ['DrugLegalStatus','MedicalEnumeration','Text'],
+        'legalStatus' => ['DrugLegalStatus', 'MedicalEnumeration', 'Text'],
         'medicineSystem' => ['MedicineSystem'],
         'recognizingAuthority' => ['Organization'],
         'relevantSpecialty' => ['MedicalSpecialty'],
         'study' => ['MedicalStudy']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -194,7 +135,6 @@ class LifestyleModification extends MedicalEntity
         'relevantSpecialty' => 'If applicable, a medical specialty in which this entity is relevant.',
         'study' => 'A medical study or trial related to this entity.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -202,7 +142,6 @@ class LifestyleModification extends MedicalEntity
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -210,14 +149,63 @@ class LifestyleModification extends MedicalEntity
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A medical code for the entity, taken from a controlled vocabulary or
+     * ontology such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
+     *
+     * @var MedicalCode [schema.org types: MedicalCode]
+     */
+    public $code;
+    /**
+     * A medical guideline related to this entity.
+     *
+     * @var MedicalGuideline [schema.org types: MedicalGuideline]
+     */
+    public $guideline;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The drug or supplement's legal status, including any controlled substance
+     * schedules that apply.
+     *
+     * @var mixed|DrugLegalStatus|MedicalEnumeration|string [schema.org types: DrugLegalStatus, MedicalEnumeration, Text]
+     */
+    public $legalStatus;
+    /**
+     * The system of medicine that includes this MedicalEntity, for example
+     * 'evidence-based', 'homeopathic', 'chiropractic', etc.
+     *
+     * @var MedicineSystem [schema.org types: MedicineSystem]
+     */
+    public $medicineSystem;
+    /**
+     * If applicable, the organization that officially recognizes this entity as
+     * part of its endorsed system of medicine.
+     *
+     * @var Organization [schema.org types: Organization]
+     */
+    public $recognizingAuthority;
+    /**
+     * If applicable, a medical specialty in which this entity is relevant.
+     *
+     * @var MedicalSpecialty [schema.org types: MedicalSpecialty]
+     */
+    public $relevantSpecialty;
+    /**
+     * A medical study or trial related to this entity.
+     *
+     * @var MedicalStudy [schema.org types: MedicalStudy]
+     */
+    public $study;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -247,13 +235,13 @@ class LifestyleModification extends MedicalEntity
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['code','guideline','legalStatus','medicineSystem','recognizingAuthority','relevantSpecialty','study'], 'validateJsonSchema'],
+            [['code', 'guideline', 'legalStatus', 'medicineSystem', 'recognizingAuthority', 'relevantSpecialty', 'study'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

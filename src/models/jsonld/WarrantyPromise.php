@@ -93,25 +93,6 @@ class WarrantyPromise extends StructuredValue
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The duration of the warranty promise. Common unitCode values are ANN for
-     * year, MON for months, or DAY for days.
-     *
-     * @var QuantitativeValue [schema.org types: QuantitativeValue]
-     */
-    public $durationOfWarranty;
-
-    /**
-     * The scope of the warranty promise.
-     *
-     * @var WarrantyScope [schema.org types: WarrantyScope]
-     */
-    public $warrantyScope;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -121,7 +102,6 @@ class WarrantyPromise extends StructuredValue
         'durationOfWarranty',
         'warrantyScope'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -132,6 +112,8 @@ class WarrantyPromise extends StructuredValue
         'warrantyScope' => ['WarrantyScope']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -141,7 +123,6 @@ class WarrantyPromise extends StructuredValue
         'durationOfWarranty' => 'The duration of the warranty promise. Common unitCode values are ANN for year, MON for months, or DAY for days.',
         'warrantyScope' => 'The scope of the warranty promise.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -149,7 +130,6 @@ class WarrantyPromise extends StructuredValue
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -157,14 +137,27 @@ class WarrantyPromise extends StructuredValue
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The duration of the warranty promise. Common unitCode values are ANN for
+     * year, MON for months, or DAY for days.
+     *
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
+     */
+    public $durationOfWarranty;
+    /**
+     * The scope of the warranty promise.
+     *
+     * @var WarrantyScope [schema.org types: WarrantyScope]
+     */
+    public $warrantyScope;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -194,13 +187,13 @@ class WarrantyPromise extends StructuredValue
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['durationOfWarranty','warrantyScope'], 'validateJsonSchema'],
+            [['durationOfWarranty', 'warrantyScope'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

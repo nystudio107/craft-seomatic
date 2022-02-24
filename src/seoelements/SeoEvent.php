@@ -15,7 +15,9 @@ use Craft;
 use craft\base\ElementInterface;
 use craft\base\Model;
 use craft\elements\db\ElementQueryInterface;
+use craft\events\DefineHtmlEvent;
 use craft\models\Site;
+use Exception;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\base\GqlSeoElementInterface;
 use nystudio107\seomatic\base\SeoElementInterface;
@@ -162,16 +164,21 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
         if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
         }
 
-        // Install only for non-console Control Panel requests
-        if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
-            // Events sidebar
-            Seomatic::$view->hook('cp.solspace.calendar.events.edit.details', function (&$context) {
+        // Handler: Entry::EVENT_DEFINE_SIDEBAR_HTML
+        BaseEvent::on(
+            Event::class,
+            Event::EVENT_DEFINE_SIDEBAR_HTML,
+            static function (DefineHtmlEvent $event) {
+                Craft::debug(
+                    'Entry::EVENT_DEFINE_SIDEBAR_HTML',
+                    __METHOD__
+                );
                 $html = '';
                 Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
-                /** @var Event $event */
-                $event = $context[self::getElementRefHandle()] ?? null;
-                if ($event !== null && $event->uri !== null) {
-                    Seomatic::$plugin->metaContainers->previewMetaContainers($event->uri, $event->siteId, true);
+                /** @var Event $eventElement */
+                $eventElement = $event->sender ?? null;
+                if ($eventElement !== null && $eventElement->uri !== null) {
+                    Seomatic::$plugin->metaContainers->previewMetaContainers($eventElement->uri, $eventElement->siteId, true);
                     // Render our preview sidebar template
                     if (Seomatic::$settings->displayPreviewSidebar) {
                         $html .= PluginTemplate::renderPluginTemplate('_sidebars/event-preview.twig');
@@ -182,11 +189,9 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
 //                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/event-analysis.twig');
 //                }
                 }
-
-                return $html;
-            });
-
-        }
+                $event->html .= $html;
+            }
+        );
     }
 
     /**
@@ -308,7 +313,7 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
                 if ($calendarModel) {
                     $layoutId = $calendarModel->fieldLayoutId;
                 }
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $layoutId = null;
             }
             if ($layoutId) {
@@ -455,7 +460,7 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
         /** @var Event $element */
         try {
             $sourceHandle = $element->getCalendar()->handle;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
         }
 
         return $sourceHandle;

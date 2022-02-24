@@ -92,27 +92,6 @@ class MediaSubscription extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The Organization responsible for authenticating the user's subscription.
-     * For example, many media apps require a cable/satellite provider to
-     * authenticate your subscription before playing media.
-     *
-     * @var Organization [schema.org types: Organization]
-     */
-    public $authenticator;
-
-    /**
-     * An Offer which must be accepted before the user can perform the Action. For
-     * example, the user may need to buy a movie before being able to watch it.
-     *
-     * @var Offer [schema.org types: Offer]
-     */
-    public $expectsAcceptanceOf;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -122,7 +101,6 @@ class MediaSubscription extends Intangible
         'authenticator',
         'expectsAcceptanceOf'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -133,6 +111,8 @@ class MediaSubscription extends Intangible
         'expectsAcceptanceOf' => ['Offer']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -142,7 +122,6 @@ class MediaSubscription extends Intangible
         'authenticator' => 'The Organization responsible for authenticating the user\'s subscription. For example, many media apps require a cable/satellite provider to authenticate your subscription before playing media.',
         'expectsAcceptanceOf' => 'An Offer which must be accepted before the user can perform the Action. For example, the user may need to buy a movie before being able to watch it.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -150,7 +129,6 @@ class MediaSubscription extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -158,14 +136,29 @@ class MediaSubscription extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The Organization responsible for authenticating the user's subscription.
+     * For example, many media apps require a cable/satellite provider to
+     * authenticate your subscription before playing media.
+     *
+     * @var Organization [schema.org types: Organization]
+     */
+    public $authenticator;
+    /**
+     * An Offer which must be accepted before the user can perform the Action. For
+     * example, the user may need to buy a movie before being able to watch it.
+     *
+     * @var Offer [schema.org types: Offer]
+     */
+    public $expectsAcceptanceOf;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -195,13 +188,13 @@ class MediaSubscription extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['authenticator','expectsAcceptanceOf'], 'validateJsonSchema'],
+            [['authenticator', 'expectsAcceptanceOf'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

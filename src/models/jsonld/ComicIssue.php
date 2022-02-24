@@ -96,58 +96,6 @@ class ComicIssue extends PublicationIssue
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The primary artist for a work in a medium other than pencils or digital
-     * line art--for example, if the primary artwork is done in watercolors or
-     * digital paints.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $artist;
-
-    /**
-     * The individual who adds color to inked drawings.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $colorist;
-
-    /**
-     * The individual who traces over the pencil drawings in ink after pencils are
-     * complete.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $inker;
-
-    /**
-     * The individual who adds lettering, including speech balloons and sound
-     * effects, to artwork.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $letterer;
-
-    /**
-     * The individual who draws the primary narrative artwork.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $penciler;
-
-    /**
-     * A description of the variant cover for the issue, if the issue is a variant
-     * printing. For example, "Bryan Hitch Variant Cover" or "2nd Printing
-     * Variant".
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $variantCover;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -161,7 +109,6 @@ class ComicIssue extends PublicationIssue
         'penciler',
         'variantCover'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -175,7 +122,6 @@ class ComicIssue extends PublicationIssue
         'penciler' => ['Person'],
         'variantCover' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -189,7 +135,6 @@ class ComicIssue extends PublicationIssue
         'penciler' => 'The individual who draws the primary narrative artwork.',
         'variantCover' => 'A description of the variant cover for the issue, if the issue is a variant printing. For example, "Bryan Hitch Variant Cover" or "2nd Printing Variant".'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -197,7 +142,6 @@ class ComicIssue extends PublicationIssue
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -205,14 +149,59 @@ class ComicIssue extends PublicationIssue
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The primary artist for a work in a medium other than pencils or digital
+     * line art--for example, if the primary artwork is done in watercolors or
+     * digital paints.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $artist;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The individual who adds color to inked drawings.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $colorist;
+    /**
+     * The individual who traces over the pencil drawings in ink after pencils are
+     * complete.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $inker;
+    /**
+     * The individual who adds lettering, including speech balloons and sound
+     * effects, to artwork.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $letterer;
+    /**
+     * The individual who draws the primary narrative artwork.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $penciler;
+    /**
+     * A description of the variant cover for the issue, if the issue is a variant
+     * printing. For example, "Bryan Hitch Variant Cover" or "2nd Printing
+     * Variant".
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $variantCover;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -242,13 +231,13 @@ class ComicIssue extends PublicationIssue
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['artist','colorist','inker','letterer','penciler','variantCover'], 'validateJsonSchema'],
+            [['artist', 'colorist', 'inker', 'letterer', 'penciler', 'variantCover'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

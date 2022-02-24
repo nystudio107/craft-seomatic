@@ -92,38 +92,6 @@ class OwnershipInfo extends StructuredValue
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The organization or person from which the product was acquired.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $acquiredFrom;
-
-    /**
-     * The date and time of obtaining the product.
-     *
-     * @var DateTime [schema.org types: DateTime]
-     */
-    public $ownedFrom;
-
-    /**
-     * The date and time of giving up ownership on the product.
-     *
-     * @var DateTime [schema.org types: DateTime]
-     */
-    public $ownedThrough;
-
-    /**
-     * The product that this structured value is referring to.
-     *
-     * @var mixed|Product|Service [schema.org types: Product, Service]
-     */
-    public $typeOfGood;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -135,19 +103,17 @@ class OwnershipInfo extends StructuredValue
         'ownedThrough',
         'typeOfGood'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'acquiredFrom' => ['Organization','Person'],
+        'acquiredFrom' => ['Organization', 'Person'],
         'ownedFrom' => ['DateTime'],
         'ownedThrough' => ['DateTime'],
-        'typeOfGood' => ['Product','Service']
+        'typeOfGood' => ['Product', 'Service']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -159,7 +125,6 @@ class OwnershipInfo extends StructuredValue
         'ownedThrough' => 'The date and time of giving up ownership on the product.',
         'typeOfGood' => 'The product that this structured value is referring to.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -168,6 +133,8 @@ class OwnershipInfo extends StructuredValue
     static protected $_googleRequiredSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -175,14 +142,38 @@ class OwnershipInfo extends StructuredValue
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The organization or person from which the product was acquired.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $acquiredFrom;
+    /**
+     * The date and time of obtaining the product.
+     *
+     * @var DateTime [schema.org types: DateTime]
+     */
+    public $ownedFrom;
+    /**
+     * The date and time of giving up ownership on the product.
+     *
+     * @var DateTime [schema.org types: DateTime]
+     */
+    public $ownedThrough;
+    /**
+     * The product that this structured value is referring to.
+     *
+     * @var mixed|Product|Service [schema.org types: Product, Service]
+     */
+    public $typeOfGood;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -212,13 +203,13 @@ class OwnershipInfo extends StructuredValue
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['acquiredFrom','ownedFrom','ownedThrough','typeOfGood'], 'validateJsonSchema'],
+            [['acquiredFrom', 'ownedFrom', 'ownedThrough', 'typeOfGood'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

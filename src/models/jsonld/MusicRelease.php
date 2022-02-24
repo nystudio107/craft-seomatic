@@ -91,56 +91,6 @@ class MusicRelease extends MusicPlaylist
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The catalog number for the release.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $catalogNumber;
-
-    /**
-     * The group the release is credited to if different than the byArtist. For
-     * example, Red and Blue is credited to "Stefani Germanotta Band", but by Lady
-     * Gaga.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $creditedTo;
-
-    /**
-     * The duration of the item (movie, audio recording, event, etc.) in ISO 8601
-     * date format.
-     *
-     * @var Duration [schema.org types: Duration]
-     */
-    public $duration;
-
-    /**
-     * Format of this release (the type of recording media used, ie. compact disc,
-     * digital media, LP, etc.).
-     *
-     * @var MusicReleaseFormatType [schema.org types: MusicReleaseFormatType]
-     */
-    public $musicReleaseFormat;
-
-    /**
-     * The label that issued the release.
-     *
-     * @var Organization [schema.org types: Organization]
-     */
-    public $recordLabel;
-
-    /**
-     * The album this is a release of. Inverse property: albumRelease.
-     *
-     * @var MusicAlbum [schema.org types: MusicAlbum]
-     */
-    public $releaseOf;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -154,7 +104,6 @@ class MusicRelease extends MusicPlaylist
         'recordLabel',
         'releaseOf'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -162,13 +111,12 @@ class MusicRelease extends MusicPlaylist
      */
     static protected $_schemaPropertyExpectedTypes = [
         'catalogNumber' => ['Text'],
-        'creditedTo' => ['Organization','Person'],
+        'creditedTo' => ['Organization', 'Person'],
         'duration' => ['Duration'],
         'musicReleaseFormat' => ['MusicReleaseFormatType'],
         'recordLabel' => ['Organization'],
         'releaseOf' => ['MusicAlbum']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -182,7 +130,6 @@ class MusicRelease extends MusicPlaylist
         'recordLabel' => 'The label that issued the release.',
         'releaseOf' => 'The album this is a release of. Inverse property: albumRelease.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -190,7 +137,6 @@ class MusicRelease extends MusicPlaylist
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -198,14 +144,57 @@ class MusicRelease extends MusicPlaylist
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The catalog number for the release.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $catalogNumber;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The group the release is credited to if different than the byArtist. For
+     * example, Red and Blue is credited to "Stefani Germanotta Band", but by Lady
+     * Gaga.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $creditedTo;
+    /**
+     * The duration of the item (movie, audio recording, event, etc.) in ISO 8601
+     * date format.
+     *
+     * @var Duration [schema.org types: Duration]
+     */
+    public $duration;
+    /**
+     * Format of this release (the type of recording media used, ie. compact disc,
+     * digital media, LP, etc.).
+     *
+     * @var MusicReleaseFormatType [schema.org types: MusicReleaseFormatType]
+     */
+    public $musicReleaseFormat;
+    /**
+     * The label that issued the release.
+     *
+     * @var Organization [schema.org types: Organization]
+     */
+    public $recordLabel;
+    /**
+     * The album this is a release of. Inverse property: albumRelease.
+     *
+     * @var MusicAlbum [schema.org types: MusicAlbum]
+     */
+    public $releaseOf;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -235,13 +224,13 @@ class MusicRelease extends MusicPlaylist
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['catalogNumber','creditedTo','duration','musicReleaseFormat','recordLabel','releaseOf'], 'validateJsonSchema'],
+            [['catalogNumber', 'creditedTo', 'duration', 'musicReleaseFormat', 'recordLabel', 'releaseOf'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

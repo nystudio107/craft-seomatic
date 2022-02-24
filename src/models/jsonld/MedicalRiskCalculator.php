@@ -93,25 +93,6 @@ class MedicalRiskCalculator extends MedicalRiskEstimator
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The condition, complication, or symptom whose risk is being estimated.
-     *
-     * @var MedicalEntity [schema.org types: MedicalEntity]
-     */
-    public $estimatesRiskOf;
-
-    /**
-     * A modifiable or non-modifiable risk factor included in the calculation,
-     * e.g. age, coexisting condition.
-     *
-     * @var MedicalRiskFactor [schema.org types: MedicalRiskFactor]
-     */
-    public $includedRiskFactor;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -121,7 +102,6 @@ class MedicalRiskCalculator extends MedicalRiskEstimator
         'estimatesRiskOf',
         'includedRiskFactor'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -132,6 +112,8 @@ class MedicalRiskCalculator extends MedicalRiskEstimator
         'includedRiskFactor' => ['MedicalRiskFactor']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -141,7 +123,6 @@ class MedicalRiskCalculator extends MedicalRiskEstimator
         'estimatesRiskOf' => 'The condition, complication, or symptom whose risk is being estimated.',
         'includedRiskFactor' => 'A modifiable or non-modifiable risk factor included in the calculation, e.g. age, coexisting condition.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -149,7 +130,6 @@ class MedicalRiskCalculator extends MedicalRiskEstimator
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -157,14 +137,27 @@ class MedicalRiskCalculator extends MedicalRiskEstimator
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The condition, complication, or symptom whose risk is being estimated.
+     *
+     * @var MedicalEntity [schema.org types: MedicalEntity]
+     */
+    public $estimatesRiskOf;
+    /**
+     * A modifiable or non-modifiable risk factor included in the calculation,
+     * e.g. age, coexisting condition.
+     *
+     * @var MedicalRiskFactor [schema.org types: MedicalRiskFactor]
+     */
+    public $includedRiskFactor;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -194,13 +187,13 @@ class MedicalRiskCalculator extends MedicalRiskEstimator
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['estimatesRiskOf','includedRiskFactor'], 'validateJsonSchema'],
+            [['estimatesRiskOf', 'includedRiskFactor'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

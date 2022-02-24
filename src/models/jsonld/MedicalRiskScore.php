@@ -93,17 +93,6 @@ class MedicalRiskScore extends MedicalRiskEstimator
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The algorithm or rules to follow to compute the score.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $algorithm;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -113,6 +102,8 @@ class MedicalRiskScore extends MedicalRiskEstimator
         'algorithm'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -121,7 +112,6 @@ class MedicalRiskScore extends MedicalRiskEstimator
     static protected $_schemaPropertyExpectedTypes = [
         'algorithm' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -130,7 +120,6 @@ class MedicalRiskScore extends MedicalRiskEstimator
     static protected $_schemaPropertyDescriptions = [
         'algorithm' => 'The algorithm or rules to follow to compute the score.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -138,7 +127,6 @@ class MedicalRiskScore extends MedicalRiskEstimator
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -146,14 +134,20 @@ class MedicalRiskScore extends MedicalRiskEstimator
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The algorithm or rules to follow to compute the score.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $algorithm;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -183,9 +177,9 @@ class MedicalRiskScore extends MedicalRiskEstimator
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

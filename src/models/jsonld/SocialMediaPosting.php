@@ -92,18 +92,6 @@ class SocialMediaPosting extends Article
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A CreativeWork such as an image, video, or audio clip shared as part of
-     * this posting.
-     *
-     * @var CreativeWork [schema.org types: CreativeWork]
-     */
-    public $sharedContent;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -113,6 +101,8 @@ class SocialMediaPosting extends Article
         'sharedContent'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -121,7 +111,6 @@ class SocialMediaPosting extends Article
     static protected $_schemaPropertyExpectedTypes = [
         'sharedContent' => ['CreativeWork']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -130,7 +119,6 @@ class SocialMediaPosting extends Article
     static protected $_schemaPropertyDescriptions = [
         'sharedContent' => 'A CreativeWork such as an image, video, or audio clip shared as part of this posting.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -141,7 +129,6 @@ class SocialMediaPosting extends Article
         'headline',
         'image'
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -149,14 +136,21 @@ class SocialMediaPosting extends Article
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A CreativeWork such as an image, video, or audio clip shared as part of
+     * this posting.
+     *
+     * @var CreativeWork [schema.org types: CreativeWork]
+     */
+    public $sharedContent;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -186,9 +180,9 @@ class SocialMediaPosting extends Article
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

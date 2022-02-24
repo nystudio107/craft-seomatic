@@ -91,26 +91,6 @@ class TVEpisode extends Episode
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The country of the principal offices of the production company or
-     * individual responsible for the movie or program.
-     *
-     * @var Country [schema.org types: Country]
-     */
-    public $countryOfOrigin;
-
-    /**
-     * Languages in which subtitles/captions are available, in IETF BCP 47
-     * standard format.
-     *
-     * @var mixed|Language|string [schema.org types: Language, Text]
-     */
-    public $subtitleLanguage;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -120,7 +100,6 @@ class TVEpisode extends Episode
         'countryOfOrigin',
         'subtitleLanguage'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -128,9 +107,11 @@ class TVEpisode extends Episode
      */
     static protected $_schemaPropertyExpectedTypes = [
         'countryOfOrigin' => ['Country'],
-        'subtitleLanguage' => ['Language','Text']
+        'subtitleLanguage' => ['Language', 'Text']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -140,7 +121,6 @@ class TVEpisode extends Episode
         'countryOfOrigin' => 'The country of the principal offices of the production company or individual responsible for the movie or program.',
         'subtitleLanguage' => 'Languages in which subtitles/captions are available, in IETF BCP 47 standard format.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -148,7 +128,6 @@ class TVEpisode extends Episode
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -156,14 +135,28 @@ class TVEpisode extends Episode
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The country of the principal offices of the production company or
+     * individual responsible for the movie or program.
+     *
+     * @var Country [schema.org types: Country]
+     */
+    public $countryOfOrigin;
+    /**
+     * Languages in which subtitles/captions are available, in IETF BCP 47
+     * standard format.
+     *
+     * @var mixed|Language|string [schema.org types: Language, Text]
+     */
+    public $subtitleLanguage;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -193,13 +186,13 @@ class TVEpisode extends Episode
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['countryOfOrigin','subtitleLanguage'], 'validateJsonSchema'],
+            [['countryOfOrigin', 'subtitleLanguage'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

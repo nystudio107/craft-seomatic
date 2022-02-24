@@ -105,33 +105,6 @@ class CreativeWorkSeries extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The end date and time of the item (in ISO 8601 date format).
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $endDate;
-
-    /**
-     * The International Standard Serial Number (ISSN) that identifies this serial
-     * publication. You can repeat this property to identify different formats of,
-     * or the linking ISSN (ISSN-L) for, this serial publication.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $issn;
-
-    /**
-     * The start date and time of the item (in ISO 8601 date format).
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $startDate;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -142,18 +115,16 @@ class CreativeWorkSeries extends CreativeWork
         'issn',
         'startDate'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'endDate' => ['Date','DateTime'],
+        'endDate' => ['Date', 'DateTime'],
         'issn' => ['Text'],
-        'startDate' => ['Date','DateTime']
+        'startDate' => ['Date', 'DateTime']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -165,6 +136,8 @@ class CreativeWorkSeries extends CreativeWork
         'startDate' => 'The start date and time of the item (in ISO 8601 date format).'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -172,7 +145,6 @@ class CreativeWorkSeries extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -180,14 +152,34 @@ class CreativeWorkSeries extends CreativeWork
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The end date and time of the item (in ISO 8601 date format).
+     *
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     */
+    public $endDate;
+    /**
+     * The International Standard Serial Number (ISSN) that identifies this serial
+     * publication. You can repeat this property to identify different formats of,
+     * or the linking ISSN (ISSN-L) for, this serial publication.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $issn;
+    /**
+     * The start date and time of the item (in ISO 8601 date format).
+     *
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     */
+    public $startDate;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -217,13 +209,13 @@ class CreativeWorkSeries extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['endDate','issn','startDate'], 'validateJsonSchema'],
+            [['endDate', 'issn', 'startDate'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -92,57 +92,6 @@ class TelevisionChannel extends BroadcastChannel
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The unique address by which the BroadcastService can be identified in a
-     * provider lineup. In US, this is typically a number.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $broadcastChannelId;
-
-    /**
-     * The frequency used for over-the-air broadcasts. Numeric values or simple
-     * ranges e.g. 87-99. In addition a shortcut idiom is supported for frequences
-     * of AM and FM radio channels, e.g. "87 FM".
-     *
-     * @var mixed|BroadcastFrequencySpecification|string [schema.org types: BroadcastFrequencySpecification, Text]
-     */
-    public $broadcastFrequency;
-
-    /**
-     * The type of service required to have access to the channel (e.g. Standard
-     * or Premium).
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $broadcastServiceTier;
-
-    /**
-     * Genre of the creative work, broadcast channel or group.
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $genre;
-
-    /**
-     * The CableOrSatelliteService offering the channel.
-     *
-     * @var CableOrSatelliteService [schema.org types: CableOrSatelliteService]
-     */
-    public $inBroadcastLineup;
-
-    /**
-     * The BroadcastService offered on this channel. Inverse property:
-     * hasBroadcastChannel.
-     *
-     * @var BroadcastService [schema.org types: BroadcastService]
-     */
-    public $providesBroadcastService;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -156,7 +105,6 @@ class TelevisionChannel extends BroadcastChannel
         'inBroadcastLineup',
         'providesBroadcastService'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -164,13 +112,12 @@ class TelevisionChannel extends BroadcastChannel
      */
     static protected $_schemaPropertyExpectedTypes = [
         'broadcastChannelId' => ['Text'],
-        'broadcastFrequency' => ['BroadcastFrequencySpecification','Text'],
+        'broadcastFrequency' => ['BroadcastFrequencySpecification', 'Text'],
         'broadcastServiceTier' => ['Text'],
-        'genre' => ['Text','URL'],
+        'genre' => ['Text', 'URL'],
         'inBroadcastLineup' => ['CableOrSatelliteService'],
         'providesBroadcastService' => ['BroadcastService']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -184,7 +131,6 @@ class TelevisionChannel extends BroadcastChannel
         'inBroadcastLineup' => 'The CableOrSatelliteService offering the channel.',
         'providesBroadcastService' => 'The BroadcastService offered on this channel. Inverse property: hasBroadcastChannel.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -192,7 +138,6 @@ class TelevisionChannel extends BroadcastChannel
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -200,14 +145,58 @@ class TelevisionChannel extends BroadcastChannel
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The unique address by which the BroadcastService can be identified in a
+     * provider lineup. In US, this is typically a number.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $broadcastChannelId;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The frequency used for over-the-air broadcasts. Numeric values or simple
+     * ranges e.g. 87-99. In addition a shortcut idiom is supported for frequences
+     * of AM and FM radio channels, e.g. "87 FM".
+     *
+     * @var mixed|BroadcastFrequencySpecification|string [schema.org types: BroadcastFrequencySpecification, Text]
+     */
+    public $broadcastFrequency;
+    /**
+     * The type of service required to have access to the channel (e.g. Standard
+     * or Premium).
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $broadcastServiceTier;
+    /**
+     * Genre of the creative work, broadcast channel or group.
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $genre;
+    /**
+     * The CableOrSatelliteService offering the channel.
+     *
+     * @var CableOrSatelliteService [schema.org types: CableOrSatelliteService]
+     */
+    public $inBroadcastLineup;
+    /**
+     * The BroadcastService offered on this channel. Inverse property:
+     * hasBroadcastChannel.
+     *
+     * @var BroadcastService [schema.org types: BroadcastService]
+     */
+    public $providesBroadcastService;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -237,13 +226,13 @@ class TelevisionChannel extends BroadcastChannel
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['broadcastChannelId','broadcastFrequency','broadcastServiceTier','genre','inBroadcastLineup','providesBroadcastService'], 'validateJsonSchema'],
+            [['broadcastChannelId', 'broadcastFrequency', 'broadcastServiceTier', 'genre', 'inBroadcastLineup', 'providesBroadcastService'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

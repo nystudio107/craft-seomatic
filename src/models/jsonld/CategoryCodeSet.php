@@ -91,17 +91,6 @@ class CategoryCodeSet extends DefinedTermSet
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A Category code contained in this code set.
-     *
-     * @var CategoryCode [schema.org types: CategoryCode]
-     */
-    public $hasCategoryCode;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -111,6 +100,8 @@ class CategoryCodeSet extends DefinedTermSet
         'hasCategoryCode'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -119,7 +110,6 @@ class CategoryCodeSet extends DefinedTermSet
     static protected $_schemaPropertyExpectedTypes = [
         'hasCategoryCode' => ['CategoryCode']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -128,7 +118,6 @@ class CategoryCodeSet extends DefinedTermSet
     static protected $_schemaPropertyDescriptions = [
         'hasCategoryCode' => 'A Category code contained in this code set.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -136,7 +125,6 @@ class CategoryCodeSet extends DefinedTermSet
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -144,14 +132,20 @@ class CategoryCodeSet extends DefinedTermSet
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A Category code contained in this code set.
+     *
+     * @var CategoryCode [schema.org types: CategoryCode]
+     */
+    public $hasCategoryCode;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -181,9 +175,9 @@ class CategoryCodeSet extends DefinedTermSet
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

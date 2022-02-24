@@ -11,17 +11,13 @@
 
 namespace nystudio107\seomatic\controllers;
 
+use Craft;
+use craft\helpers\FileHelper;
+use craft\web\Controller;
 use nystudio107\seomatic\helpers\UrlHelper;
 use nystudio107\seomatic\Seomatic;
-
-use Craft;
-use craft\elements\Asset;
-use craft\helpers\FileHelper;
-use craft\helpers\Assets as AssetsHelper;
-use craft\web\Controller;
-
-use yii\web\NotFoundHttpException;
 use yii\web\HttpException;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\web\ServerErrorHttpException;
 
@@ -48,7 +44,7 @@ class FileController extends Controller
     /**
      * @inheritDoc
      */
-    public function beforeAction($action)
+    public function beforeAction($action): bool
     {
         if (!Seomatic::$settings->enableSeoFileLinkEndpoint) {
             $this->allowAnonymous = false;
@@ -64,7 +60,7 @@ class FileController extends Controller
      * @param        $url
      * @param string $robots
      * @param string $canonical
-     * @param bool   $inline
+     * @param bool $inline
      * @param string $fileName
      *
      * @return Response|\yii\console\Response
@@ -87,7 +83,7 @@ class FileController extends Controller
             }
             // Add the Link header
             if (!empty($canonical)) {
-                $headerValue = '<'.$canonical.'>; rel="canonical"';
+                $headerValue = '<' . $canonical . '>; rel="canonical"';
                 $response->headers->add('Link', $headerValue);
             }
             // Ensure the file type is allowed

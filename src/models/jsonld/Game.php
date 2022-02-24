@@ -93,48 +93,6 @@ class Game extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A piece of data that represents a particular aspect of a fictional
-     * character (skill, power, character points, advantage, disadvantage).
-     *
-     * @var Thing [schema.org types: Thing]
-     */
-    public $characterAttribute;
-
-    /**
-     * An item is an object within the game world that can be collected by a
-     * player or, occasionally, a non-player character.
-     *
-     * @var Thing [schema.org types: Thing]
-     */
-    public $gameItem;
-
-    /**
-     * Real or fictional location of the game (or part of game).
-     *
-     * @var mixed|Place|PostalAddress|string [schema.org types: Place, PostalAddress, URL]
-     */
-    public $gameLocation;
-
-    /**
-     * Indicate how many people can play this game (minimum, maximum, or range).
-     *
-     * @var QuantitativeValue [schema.org types: QuantitativeValue]
-     */
-    public $numberOfPlayers;
-
-    /**
-     * The task that a player-controlled character, or group of characters may
-     * complete in order to gain a reward.
-     *
-     * @var Thing [schema.org types: Thing]
-     */
-    public $quest;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -147,7 +105,6 @@ class Game extends CreativeWork
         'numberOfPlayers',
         'quest'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -156,11 +113,10 @@ class Game extends CreativeWork
     static protected $_schemaPropertyExpectedTypes = [
         'characterAttribute' => ['Thing'],
         'gameItem' => ['Thing'],
-        'gameLocation' => ['Place','PostalAddress','URL'],
+        'gameLocation' => ['Place', 'PostalAddress', 'URL'],
         'numberOfPlayers' => ['QuantitativeValue'],
         'quest' => ['Thing']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -173,7 +129,6 @@ class Game extends CreativeWork
         'numberOfPlayers' => 'Indicate how many people can play this game (minimum, maximum, or range).',
         'quest' => 'The task that a player-controlled character, or group of characters may complete in order to gain a reward.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -181,7 +136,6 @@ class Game extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -190,13 +144,49 @@ class Game extends CreativeWork
     static protected $_googleRecommendedSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * A piece of data that represents a particular aspect of a fictional
+     * character (skill, power, character points, advantage, disadvantage).
+     *
+     * @var Thing [schema.org types: Thing]
+     */
+    public $characterAttribute;
+    /**
+     * An item is an object within the game world that can be collected by a
+     * player or, occasionally, a non-player character.
+     *
+     * @var Thing [schema.org types: Thing]
+     */
+    public $gameItem;
+    /**
+     * Real or fictional location of the game (or part of game).
+     *
+     * @var mixed|Place|PostalAddress|string [schema.org types: Place, PostalAddress, URL]
+     */
+    public $gameLocation;
+    /**
+     * Indicate how many people can play this game (minimum, maximum, or range).
+     *
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
+     */
+    public $numberOfPlayers;
+    /**
+     * The task that a player-controlled character, or group of characters may
+     * complete in order to gain a reward.
+     *
+     * @var Thing [schema.org types: Thing]
+     */
+    public $quest;
+
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -226,13 +216,13 @@ class Game extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['characterAttribute','gameItem','gameLocation','numberOfPlayers','quest'], 'validateJsonSchema'],
+            [['characterAttribute', 'gameItem', 'gameLocation', 'numberOfPlayers', 'quest'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

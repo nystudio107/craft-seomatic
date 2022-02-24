@@ -92,50 +92,6 @@ class Question extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The answer(s) that has been accepted as best, typically on a
-     * Question/Answer site. Sites vary in their selection mechanisms, e.g.
-     * drawing on community opinion and/or the view of the Question author.
-     *
-     * @var mixed|Answer|ItemList [schema.org types: Answer, ItemList]
-     */
-    public $acceptedAnswer;
-
-    /**
-     * The number of answers this question has received.
-     *
-     * @var int [schema.org types: Integer]
-     */
-    public $answerCount;
-
-    /**
-     * The number of downvotes this question, answer or comment has received from
-     * the community.
-     *
-     * @var int [schema.org types: Integer]
-     */
-    public $downvoteCount;
-
-    /**
-     * An answer (possibly one of several, possibly incorrect) to a Question, e.g.
-     * on a Question/Answer site.
-     *
-     * @var mixed|Answer|ItemList [schema.org types: Answer, ItemList]
-     */
-    public $suggestedAnswer;
-
-    /**
-     * The number of upvotes this question, answer or comment has received from
-     * the community.
-     *
-     * @var int [schema.org types: Integer]
-     */
-    public $upvoteCount;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -148,20 +104,18 @@ class Question extends CreativeWork
         'suggestedAnswer',
         'upvoteCount'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'acceptedAnswer' => ['Answer','ItemList'],
+        'acceptedAnswer' => ['Answer', 'ItemList'],
         'answerCount' => ['Integer'],
         'downvoteCount' => ['Integer'],
-        'suggestedAnswer' => ['Answer','ItemList'],
+        'suggestedAnswer' => ['Answer', 'ItemList'],
         'upvoteCount' => ['Integer']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -174,7 +128,6 @@ class Question extends CreativeWork
         'suggestedAnswer' => 'An answer (possibly one of several, possibly incorrect) to a Question, e.g. on a Question/Answer site.',
         'upvoteCount' => 'The number of upvotes this question, answer or comment has received from the community.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -182,7 +135,6 @@ class Question extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -191,13 +143,51 @@ class Question extends CreativeWork
     static protected $_googleRecommendedSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The answer(s) that has been accepted as best, typically on a
+     * Question/Answer site. Sites vary in their selection mechanisms, e.g.
+     * drawing on community opinion and/or the view of the Question author.
+     *
+     * @var mixed|Answer|ItemList [schema.org types: Answer, ItemList]
+     */
+    public $acceptedAnswer;
+    /**
+     * The number of answers this question has received.
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $answerCount;
+    /**
+     * The number of downvotes this question, answer or comment has received from
+     * the community.
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $downvoteCount;
+    /**
+     * An answer (possibly one of several, possibly incorrect) to a Question, e.g.
+     * on a Question/Answer site.
+     *
+     * @var mixed|Answer|ItemList [schema.org types: Answer, ItemList]
+     */
+    public $suggestedAnswer;
+    /**
+     * The number of upvotes this question, answer or comment has received from
+     * the community.
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $upvoteCount;
+
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -227,13 +217,13 @@ class Question extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['acceptedAnswer','answerCount','downvoteCount','suggestedAnswer','upvoteCount'], 'validateJsonSchema'],
+            [['acceptedAnswer', 'answerCount', 'downvoteCount', 'suggestedAnswer', 'upvoteCount'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

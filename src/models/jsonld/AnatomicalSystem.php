@@ -96,50 +96,6 @@ class AnatomicalSystem extends MedicalEntity
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * If applicable, a description of the pathophysiology associated with the
-     * anatomical system, including potential abnormal changes in the mechanical,
-     * physical, and biochemical functions of the system.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $associatedPathophysiology;
-
-    /**
-     * Specifying something physically contained by something else. Typically used
-     * here for the underlying anatomical structures, such as organs, that
-     * comprise the anatomical system.
-     *
-     * @var mixed|AnatomicalStructure|AnatomicalSystem [schema.org types: AnatomicalStructure, AnatomicalSystem]
-     */
-    public $comprisedOf;
-
-    /**
-     * A medical condition associated with this anatomy.
-     *
-     * @var MedicalCondition [schema.org types: MedicalCondition]
-     */
-    public $relatedCondition;
-
-    /**
-     * Related anatomical structure(s) that are not part of the system but relate
-     * or connect to it, such as vascular bundles associated with an organ system.
-     *
-     * @var AnatomicalStructure [schema.org types: AnatomicalStructure]
-     */
-    public $relatedStructure;
-
-    /**
-     * A medical therapy related to this anatomy.
-     *
-     * @var MedicalTherapy [schema.org types: MedicalTherapy]
-     */
-    public $relatedTherapy;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -152,7 +108,6 @@ class AnatomicalSystem extends MedicalEntity
         'relatedStructure',
         'relatedTherapy'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -160,12 +115,11 @@ class AnatomicalSystem extends MedicalEntity
      */
     static protected $_schemaPropertyExpectedTypes = [
         'associatedPathophysiology' => ['Text'],
-        'comprisedOf' => ['AnatomicalStructure','AnatomicalSystem'],
+        'comprisedOf' => ['AnatomicalStructure', 'AnatomicalSystem'],
         'relatedCondition' => ['MedicalCondition'],
         'relatedStructure' => ['AnatomicalStructure'],
         'relatedTherapy' => ['MedicalTherapy']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -178,7 +132,6 @@ class AnatomicalSystem extends MedicalEntity
         'relatedStructure' => 'Related anatomical structure(s) that are not part of the system but relate or connect to it, such as vascular bundles associated with an organ system.',
         'relatedTherapy' => 'A medical therapy related to this anatomy.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -186,7 +139,6 @@ class AnatomicalSystem extends MedicalEntity
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -195,13 +147,51 @@ class AnatomicalSystem extends MedicalEntity
     static protected $_googleRecommendedSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * If applicable, a description of the pathophysiology associated with the
+     * anatomical system, including potential abnormal changes in the mechanical,
+     * physical, and biochemical functions of the system.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $associatedPathophysiology;
+    /**
+     * Specifying something physically contained by something else. Typically used
+     * here for the underlying anatomical structures, such as organs, that
+     * comprise the anatomical system.
+     *
+     * @var mixed|AnatomicalStructure|AnatomicalSystem [schema.org types: AnatomicalStructure, AnatomicalSystem]
+     */
+    public $comprisedOf;
+    /**
+     * A medical condition associated with this anatomy.
+     *
+     * @var MedicalCondition [schema.org types: MedicalCondition]
+     */
+    public $relatedCondition;
+    /**
+     * Related anatomical structure(s) that are not part of the system but relate
+     * or connect to it, such as vascular bundles associated with an organ system.
+     *
+     * @var AnatomicalStructure [schema.org types: AnatomicalStructure]
+     */
+    public $relatedStructure;
+    /**
+     * A medical therapy related to this anatomy.
+     *
+     * @var MedicalTherapy [schema.org types: MedicalTherapy]
+     */
+    public $relatedTherapy;
+
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -231,13 +221,13 @@ class AnatomicalSystem extends MedicalEntity
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['associatedPathophysiology','comprisedOf','relatedCondition','relatedStructure','relatedTherapy'], 'validateJsonSchema'],
+            [['associatedPathophysiology', 'comprisedOf', 'relatedCondition', 'relatedStructure', 'relatedTherapy'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

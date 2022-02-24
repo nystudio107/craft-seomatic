@@ -92,17 +92,6 @@ class BrokerageAccount extends InvestmentOrDeposit
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The amount of money.
-     *
-     * @var mixed|MonetaryAmount|float [schema.org types: MonetaryAmount, Number]
-     */
-    public $amount;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -112,15 +101,16 @@ class BrokerageAccount extends InvestmentOrDeposit
         'amount'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'amount' => ['MonetaryAmount','Number']
+        'amount' => ['MonetaryAmount', 'Number']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -129,7 +119,6 @@ class BrokerageAccount extends InvestmentOrDeposit
     static protected $_schemaPropertyDescriptions = [
         'amount' => 'The amount of money.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -137,7 +126,6 @@ class BrokerageAccount extends InvestmentOrDeposit
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -145,14 +133,20 @@ class BrokerageAccount extends InvestmentOrDeposit
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The amount of money.
+     *
+     * @var mixed|MonetaryAmount|float [schema.org types: MonetaryAmount, Number]
+     */
+    public $amount;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -182,9 +176,9 @@ class BrokerageAccount extends InvestmentOrDeposit
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

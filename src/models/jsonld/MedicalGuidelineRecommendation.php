@@ -93,17 +93,6 @@ class MedicalGuidelineRecommendation extends MedicalGuideline
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Strength of the guideline's recommendation (e.g. 'class I').
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $recommendationStrength;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -113,6 +102,8 @@ class MedicalGuidelineRecommendation extends MedicalGuideline
         'recommendationStrength'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -121,7 +112,6 @@ class MedicalGuidelineRecommendation extends MedicalGuideline
     static protected $_schemaPropertyExpectedTypes = [
         'recommendationStrength' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -130,7 +120,6 @@ class MedicalGuidelineRecommendation extends MedicalGuideline
     static protected $_schemaPropertyDescriptions = [
         'recommendationStrength' => 'Strength of the guideline\'s recommendation (e.g. \'class I\').'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -138,7 +127,6 @@ class MedicalGuidelineRecommendation extends MedicalGuideline
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -146,14 +134,20 @@ class MedicalGuidelineRecommendation extends MedicalGuideline
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Strength of the guideline's recommendation (e.g. 'class I').
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $recommendationStrength;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -183,9 +177,9 @@ class MedicalGuidelineRecommendation extends MedicalGuideline
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

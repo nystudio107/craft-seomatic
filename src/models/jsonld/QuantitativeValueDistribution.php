@@ -91,53 +91,6 @@ class QuantitativeValueDistribution extends StructuredValue
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The duration of the item (movie, audio recording, event, etc.) in ISO 8601
-     * date format.
-     *
-     * @var Duration [schema.org types: Duration]
-     */
-    public $duration;
-
-    /**
-     * The median value.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $median;
-
-    /**
-     * The 10th percentile value.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $percentile10;
-
-    /**
-     * The 25th percentile value.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $percentile25;
-
-    /**
-     * The 75th percentile value.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $percentile75;
-
-    /**
-     * The 90th percentile value.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $percentile90;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -151,7 +104,6 @@ class QuantitativeValueDistribution extends StructuredValue
         'percentile75',
         'percentile90'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -165,7 +117,6 @@ class QuantitativeValueDistribution extends StructuredValue
         'percentile75' => ['Number'],
         'percentile90' => ['Number']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -179,7 +130,6 @@ class QuantitativeValueDistribution extends StructuredValue
         'percentile75' => 'The 75th percentile value.',
         'percentile90' => 'The 90th percentile value.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -187,7 +137,6 @@ class QuantitativeValueDistribution extends StructuredValue
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -195,14 +144,54 @@ class QuantitativeValueDistribution extends StructuredValue
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The duration of the item (movie, audio recording, event, etc.) in ISO 8601
+     * date format.
+     *
+     * @var Duration [schema.org types: Duration]
+     */
+    public $duration;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The median value.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $median;
+    /**
+     * The 10th percentile value.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $percentile10;
+    /**
+     * The 25th percentile value.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $percentile25;
+    /**
+     * The 75th percentile value.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $percentile75;
+    /**
+     * The 90th percentile value.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $percentile90;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -232,13 +221,13 @@ class QuantitativeValueDistribution extends StructuredValue
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['duration','median','percentile10','percentile25','percentile75','percentile90'], 'validateJsonSchema'],
+            [['duration', 'median', 'percentile10', 'percentile25', 'percentile75', 'percentile90'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

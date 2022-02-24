@@ -93,38 +93,6 @@ class RentalCarReservation extends Reservation
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Where a rental car can be dropped off.
-     *
-     * @var Place [schema.org types: Place]
-     */
-    public $dropoffLocation;
-
-    /**
-     * When a rental car can be dropped off.
-     *
-     * @var DateTime [schema.org types: DateTime]
-     */
-    public $dropoffTime;
-
-    /**
-     * Where a taxi will pick up a passenger or a rental car can be picked up.
-     *
-     * @var Place [schema.org types: Place]
-     */
-    public $pickupLocation;
-
-    /**
-     * When a taxi will pickup a passenger or a rental car can be picked up.
-     *
-     * @var DateTime [schema.org types: DateTime]
-     */
-    public $pickupTime;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -136,7 +104,6 @@ class RentalCarReservation extends Reservation
         'pickupLocation',
         'pickupTime'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -148,7 +115,6 @@ class RentalCarReservation extends Reservation
         'pickupLocation' => ['Place'],
         'pickupTime' => ['DateTime']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -160,7 +126,6 @@ class RentalCarReservation extends Reservation
         'pickupLocation' => 'Where a taxi will pick up a passenger or a rental car can be picked up.',
         'pickupTime' => 'When a taxi will pickup a passenger or a rental car can be picked up.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -169,6 +134,8 @@ class RentalCarReservation extends Reservation
     static protected $_googleRequiredSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -176,14 +143,38 @@ class RentalCarReservation extends Reservation
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Where a rental car can be dropped off.
+     *
+     * @var Place [schema.org types: Place]
+     */
+    public $dropoffLocation;
+    /**
+     * When a rental car can be dropped off.
+     *
+     * @var DateTime [schema.org types: DateTime]
+     */
+    public $dropoffTime;
+    /**
+     * Where a taxi will pick up a passenger or a rental car can be picked up.
+     *
+     * @var Place [schema.org types: Place]
+     */
+    public $pickupLocation;
+    /**
+     * When a taxi will pickup a passenger or a rental car can be picked up.
+     *
+     * @var DateTime [schema.org types: DateTime]
+     */
+    public $pickupTime;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -213,13 +204,13 @@ class RentalCarReservation extends Reservation
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['dropoffLocation','dropoffTime','pickupLocation','pickupTime'], 'validateJsonSchema'],
+            [['dropoffLocation', 'dropoffTime', 'pickupLocation', 'pickupTime'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -42,7 +42,7 @@ class CanonicalLink extends MetaLink
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
     }
@@ -50,7 +50,7 @@ class CanonicalLink extends MetaLink
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
@@ -68,7 +68,7 @@ class CanonicalLink extends MetaLink
         if ($shouldRender) {
             $request = Craft::$app->getRequest();
             $response = Craft::$app->getResponse();
-                // Don't render a canonical url for http status codes >= 400
+            // Don't render a canonical url for http status codes >= 400
             if (!$request->isConsoleRequest
                 && !Seomatic::$previewingMetaContainers
                 && $response->statusCode >= 400

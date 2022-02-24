@@ -11,14 +11,13 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\Seomatic;
+use Craft;
 use nystudio107\seomatic\base\NonceItem;
 use nystudio107\seomatic\helpers\PluginTemplate as PluginTemplateHelper;
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\validators\TwigExpressionValidator;
-
-use Craft;
-
 use yii\web\View;
+use function is_string;
 
 /**
  * @author    nystudio107
@@ -114,7 +113,7 @@ class MetaScript extends NonceItem
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
 
@@ -133,13 +132,13 @@ class MetaScript extends NonceItem
         $result = '';
         // Try it from our plugin directory first
         $path = Craft::getAlias('@nystudio107/seomatic/templates/')
-            .$templatePath;
+            . $templatePath;
         if (file_exists($path)) {
             $result = @file_get_contents($path);
         } else {
             // Next try it from the Craft template directory
             $path = Craft::getAlias('@templates/')
-                .$templatePath;
+                . $templatePath;
             if (file_exists($path)) {
                 $result = @file_get_contents($path);
             }
@@ -151,7 +150,7 @@ class MetaScript extends NonceItem
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
@@ -197,7 +196,7 @@ class MetaScript extends NonceItem
     /**
      * @inheritdoc
      */
-    public function fields()
+    public function fields(): array
     {
         $fields = parent::fields();
         switch ($this->scenario) {
@@ -267,7 +266,7 @@ class MetaScript extends NonceItem
         }
 
         if (empty($html) && !empty($this->templatePath)) {
-            $html = '/* '.$this->name.Craft::t('seomatic', ' script did not render').' */'.PHP_EOL;
+            $html = '/* ' . $this->name . Craft::t('seomatic', ' script did not render') . ' */' . PHP_EOL;
         }
 
         return $html;
@@ -307,7 +306,7 @@ class MetaScript extends NonceItem
         ]);
         if (Seomatic::$craft31) {
             foreach ($variables as $key => $value) {
-                if (!empty($value['value']) && \is_string($value['value'])) {
+                if (!empty($value['value']) && is_string($value['value'])) {
                     $variables[$key]['value'] = Craft::parseEnv($value['value']);
                     $variables[$key]['value'] = trim($variables[$key]['value']);
                 }

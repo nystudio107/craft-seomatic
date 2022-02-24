@@ -92,17 +92,6 @@ class ClaimReview extends Review
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A short summary of the specific claims reviewed in a ClaimReview.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $claimReviewed;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -112,6 +101,8 @@ class ClaimReview extends Review
         'claimReviewed'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -120,7 +111,6 @@ class ClaimReview extends Review
     static protected $_schemaPropertyExpectedTypes = [
         'claimReviewed' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -129,7 +119,6 @@ class ClaimReview extends Review
     static protected $_schemaPropertyDescriptions = [
         'claimReviewed' => 'A short summary of the specific claims reviewed in a ClaimReview.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -137,7 +126,6 @@ class ClaimReview extends Review
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -145,14 +133,20 @@ class ClaimReview extends Review
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A short summary of the specific claims reviewed in a ClaimReview.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $claimReviewed;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -182,9 +176,9 @@ class ClaimReview extends Review
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

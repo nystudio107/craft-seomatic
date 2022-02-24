@@ -92,17 +92,6 @@ class Thesis extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Qualification, candidature, degree, application that Thesis supports.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $inSupportOf;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -112,6 +101,8 @@ class Thesis extends CreativeWork
         'inSupportOf'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -120,7 +111,6 @@ class Thesis extends CreativeWork
     static protected $_schemaPropertyExpectedTypes = [
         'inSupportOf' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -129,7 +119,6 @@ class Thesis extends CreativeWork
     static protected $_schemaPropertyDescriptions = [
         'inSupportOf' => 'Qualification, candidature, degree, application that Thesis supports.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -137,7 +126,6 @@ class Thesis extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -145,14 +133,20 @@ class Thesis extends CreativeWork
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Qualification, candidature, degree, application that Thesis supports.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $inSupportOf;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -182,9 +176,9 @@ class Thesis extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

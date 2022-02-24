@@ -11,15 +11,14 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\Seomatic;
+use Craft;
+use DateTime;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\base\SitemapInterface;
 use nystudio107\seomatic\events\RegisterSitemapUrlsEvent;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\helpers\UrlHelper;
-
-use Craft;
-
+use nystudio107\seomatic\Seomatic;
 use yii\caching\TagDependency;
 use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
@@ -77,10 +76,10 @@ class SitemapCustomTemplate extends FrontendTemplate implements SitemapInterface
     {
         $defaults = [
             'path' => 'sitemaps-<groupId:\d+>-'
-                .self::CUSTOM_SCOPE
-                .'-'
-                .self::CUSTOM_HANDLE
-                .'-<siteId:\d+>-<file:[-\w\.*]+>',
+                . self::CUSTOM_SCOPE
+                . '-'
+                . self::CUSTOM_HANDLE
+                . '-<siteId:\d+>-<file:[-\w\.*]+>',
             'template' => '',
             'controller' => 'sitemap',
             'action' => 'sitemap-custom',
@@ -128,16 +127,16 @@ class SitemapCustomTemplate extends FrontendTemplate implements SitemapInterface
         $dependency = new TagDependency([
             'tags' => [
                 self::GLOBAL_SITEMAP_CACHE_TAG,
-                self::SITEMAP_CACHE_TAG.$handle.$siteId,
+                self::SITEMAP_CACHE_TAG . $handle . $siteId,
             ],
         ]);
 
-        return $cache->getOrSet(self::CACHE_KEY.$groupId.self::CUSTOM_SCOPE.$handle.$siteId, function () use (
+        return $cache->getOrSet(self::CACHE_KEY . $groupId . self::CUSTOM_SCOPE . $handle . $siteId, function () use (
             $handle,
             $siteId
         ) {
             Craft::info(
-                'Sitemap Custom cache miss: '.$handle.'/'.$siteId,
+                'Sitemap Custom cache miss: ' . $handle . '/' . $siteId,
                 __METHOD__
             );
             $lines = [];
@@ -178,14 +177,14 @@ class SitemapCustomTemplate extends FrontendTemplate implements SitemapInterface
                     );
                     $dateUpdated = $additionalSitemapUrl['lastmod']
                         ?? $metaBundle->metaSiteVars->additionalSitemapUrlsDateUpdated
-                        ?? new \DateTime;
+                        ?? new DateTime;
                     $lines[] = '<url>';
                     // Standard sitemap key/values
                     $lines[] = '<loc>';
                     $lines[] = Html::encode($url);
                     $lines[] = '</loc>';
                     $lines[] = '<lastmod>';
-                    $lines[] = $dateUpdated->format(\DateTime::W3C);
+                    $lines[] = $dateUpdated->format(DateTime::W3C);
                     $lines[] = '</lastmod>';
                     $lines[] = '<changefreq>';
                     $lines[] = $additionalSitemapUrl['changefreq'];
@@ -212,9 +211,9 @@ class SitemapCustomTemplate extends FrontendTemplate implements SitemapInterface
     {
         $handle = self::CUSTOM_HANDLE;
         $cache = Craft::$app->getCache();
-        TagDependency::invalidate($cache, self::SITEMAP_CACHE_TAG.$handle.$siteId);
+        TagDependency::invalidate($cache, self::SITEMAP_CACHE_TAG . $handle . $siteId);
         Craft::info(
-            'Sitemap Custom cache cleared: '.$handle,
+            'Sitemap Custom cache cleared: ' . $handle,
             __METHOD__
         );
     }

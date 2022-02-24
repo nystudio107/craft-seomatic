@@ -92,25 +92,6 @@ class EmployeeRole extends OrganizationRole
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The base salary of the job or of an employee in an EmployeeRole.
-     *
-     * @var mixed|MonetaryAmount|float|PriceSpecification [schema.org types: MonetaryAmount, Number, PriceSpecification]
-     */
-    public $baseSalary;
-
-    /**
-     * The currency (coded using ISO 4217 ) used for the main salary information
-     * in this job posting or for this employee.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $salaryCurrency;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -120,17 +101,18 @@ class EmployeeRole extends OrganizationRole
         'baseSalary',
         'salaryCurrency'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'baseSalary' => ['MonetaryAmount','Number','PriceSpecification'],
+        'baseSalary' => ['MonetaryAmount', 'Number', 'PriceSpecification'],
         'salaryCurrency' => ['Text']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -140,7 +122,6 @@ class EmployeeRole extends OrganizationRole
         'baseSalary' => 'The base salary of the job or of an employee in an EmployeeRole.',
         'salaryCurrency' => 'The currency (coded using ISO 4217 ) used for the main salary information in this job posting or for this employee.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -148,7 +129,6 @@ class EmployeeRole extends OrganizationRole
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -156,14 +136,27 @@ class EmployeeRole extends OrganizationRole
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The base salary of the job or of an employee in an EmployeeRole.
+     *
+     * @var mixed|MonetaryAmount|float|PriceSpecification [schema.org types: MonetaryAmount, Number, PriceSpecification]
+     */
+    public $baseSalary;
+    /**
+     * The currency (coded using ISO 4217 ) used for the main salary information
+     * in this job posting or for this employee.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $salaryCurrency;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -193,13 +186,13 @@ class EmployeeRole extends OrganizationRole
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['baseSalary','salaryCurrency'], 'validateJsonSchema'],
+            [['baseSalary', 'salaryCurrency'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

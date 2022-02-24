@@ -91,33 +91,6 @@ class ScreeningEvent extends Event
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Languages in which subtitles/captions are available, in IETF BCP 47
-     * standard format.
-     *
-     * @var mixed|Language|string [schema.org types: Language, Text]
-     */
-    public $subtitleLanguage;
-
-    /**
-     * The type of screening or video broadcast used (e.g. IMAX, 3D, SD, HD,
-     * etc.).
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $videoFormat;
-
-    /**
-     * The movie presented during this event.
-     *
-     * @var Movie [schema.org types: Movie]
-     */
-    public $workPresented;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -128,18 +101,16 @@ class ScreeningEvent extends Event
         'videoFormat',
         'workPresented'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'subtitleLanguage' => ['Language','Text'],
+        'subtitleLanguage' => ['Language', 'Text'],
         'videoFormat' => ['Text'],
         'workPresented' => ['Movie']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -151,6 +122,8 @@ class ScreeningEvent extends Event
         'workPresented' => 'The movie presented during this event.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -158,7 +131,6 @@ class ScreeningEvent extends Event
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -166,14 +138,34 @@ class ScreeningEvent extends Event
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Languages in which subtitles/captions are available, in IETF BCP 47
+     * standard format.
+     *
+     * @var mixed|Language|string [schema.org types: Language, Text]
+     */
+    public $subtitleLanguage;
+    /**
+     * The type of screening or video broadcast used (e.g. IMAX, 3D, SD, HD,
+     * etc.).
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $videoFormat;
+    /**
+     * The movie presented during this event.
+     *
+     * @var Movie [schema.org types: Movie]
+     */
+    public $workPresented;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -203,13 +195,13 @@ class ScreeningEvent extends Event
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['subtitleLanguage','videoFormat','workPresented'], 'validateJsonSchema'],
+            [['subtitleLanguage', 'videoFormat', 'workPresented'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -105,37 +105,6 @@ class StatisticalPopulation extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Indicates a property used as a constraint to define a StatisticalPopulation
-     * with respect to the set of entities corresponding to an indicated type (via
-     * populationType).
-     *
-     * @var int [schema.org types: Integer]
-     */
-    public $constrainingProperty;
-
-    /**
-     * Indicates the number of constraints (not counting populationType) defined
-     * for a particular StatisticalPopulation. This helps applications understand
-     * if they have access to a sufficiently complete description of a
-     * StatisticalPopulation.
-     *
-     * @var int [schema.org types: Integer]
-     */
-    public $numConstraints;
-
-    /**
-     * Indicates the populationType common to all members of a
-     * StatisticalPopulation.
-     *
-     * @var Class [schema.org types: Class]
-     */
-    public $populationType;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -146,7 +115,6 @@ class StatisticalPopulation extends Intangible
         'numConstraints',
         'populationType'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -157,7 +125,6 @@ class StatisticalPopulation extends Intangible
         'numConstraints' => ['Integer'],
         'populationType' => ['Class']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -169,6 +136,8 @@ class StatisticalPopulation extends Intangible
         'populationType' => 'Indicates the populationType common to all members of a StatisticalPopulation.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -176,7 +145,6 @@ class StatisticalPopulation extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -184,14 +152,38 @@ class StatisticalPopulation extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Indicates a property used as a constraint to define a StatisticalPopulation
+     * with respect to the set of entities corresponding to an indicated type (via
+     * populationType).
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $constrainingProperty;
+    /**
+     * Indicates the number of constraints (not counting populationType) defined
+     * for a particular StatisticalPopulation. This helps applications understand
+     * if they have access to a sufficiently complete description of a
+     * StatisticalPopulation.
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $numConstraints;
+    /**
+     * Indicates the populationType common to all members of a
+     * StatisticalPopulation.
+     *
+     * @var Class [schema.org types: Class]
+     */
+    public $populationType;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -221,13 +213,13 @@ class StatisticalPopulation extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['constrainingProperty','numConstraints','populationType'], 'validateJsonSchema'],
+            [['constrainingProperty', 'numConstraints', 'populationType'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

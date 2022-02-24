@@ -93,17 +93,6 @@ class SearchAction extends Action
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A sub property of instrument. The query used on this action.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $query;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -113,6 +102,8 @@ class SearchAction extends Action
         'query'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -121,7 +112,6 @@ class SearchAction extends Action
     static protected $_schemaPropertyExpectedTypes = [
         'query' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -130,7 +120,6 @@ class SearchAction extends Action
     static protected $_schemaPropertyDescriptions = [
         'query' => 'A sub property of instrument. The query used on this action.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -138,7 +127,6 @@ class SearchAction extends Action
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -146,14 +134,20 @@ class SearchAction extends Action
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A sub property of instrument. The query used on this action.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $query;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -183,9 +177,9 @@ class SearchAction extends Action
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

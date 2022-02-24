@@ -91,17 +91,6 @@ class WinAction extends AchieveAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A sub property of participant. The loser of the action.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $loser;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -111,6 +100,8 @@ class WinAction extends AchieveAction
         'loser'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -119,7 +110,6 @@ class WinAction extends AchieveAction
     static protected $_schemaPropertyExpectedTypes = [
         'loser' => ['Person']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -128,7 +118,6 @@ class WinAction extends AchieveAction
     static protected $_schemaPropertyDescriptions = [
         'loser' => 'A sub property of participant. The loser of the action.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -136,7 +125,6 @@ class WinAction extends AchieveAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -144,14 +132,20 @@ class WinAction extends AchieveAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A sub property of participant. The loser of the action.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $loser;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -181,9 +175,9 @@ class WinAction extends AchieveAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

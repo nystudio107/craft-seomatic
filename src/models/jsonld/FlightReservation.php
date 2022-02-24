@@ -94,39 +94,6 @@ class FlightReservation extends Reservation
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The airline-specific indicator of boarding order / preference.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $boardingGroup;
-
-    /**
-     * The priority status assigned to a passenger for security or boarding (e.g.
-     * FastTrack or Priority).
-     *
-     * @var mixed|QualitativeValue|string [schema.org types: QualitativeValue, Text]
-     */
-    public $passengerPriorityStatus;
-
-    /**
-     * The passenger's sequence number as assigned by the airline.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $passengerSequenceNumber;
-
-    /**
-     * The type of security screening the passenger is subject to.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $securityScreening;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -138,7 +105,6 @@ class FlightReservation extends Reservation
         'passengerSequenceNumber',
         'securityScreening'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -146,11 +112,10 @@ class FlightReservation extends Reservation
      */
     static protected $_schemaPropertyExpectedTypes = [
         'boardingGroup' => ['Text'],
-        'passengerPriorityStatus' => ['QualitativeValue','Text'],
+        'passengerPriorityStatus' => ['QualitativeValue', 'Text'],
         'passengerSequenceNumber' => ['Text'],
         'securityScreening' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -162,7 +127,6 @@ class FlightReservation extends Reservation
         'passengerSequenceNumber' => 'The passenger\'s sequence number as assigned by the airline.',
         'securityScreening' => 'The type of security screening the passenger is subject to.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -171,6 +135,8 @@ class FlightReservation extends Reservation
     static protected $_googleRequiredSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -178,14 +144,39 @@ class FlightReservation extends Reservation
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The airline-specific indicator of boarding order / preference.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $boardingGroup;
+    /**
+     * The priority status assigned to a passenger for security or boarding (e.g.
+     * FastTrack or Priority).
+     *
+     * @var mixed|QualitativeValue|string [schema.org types: QualitativeValue, Text]
+     */
+    public $passengerPriorityStatus;
+    /**
+     * The passenger's sequence number as assigned by the airline.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $passengerSequenceNumber;
+    /**
+     * The type of security screening the passenger is subject to.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $securityScreening;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -215,13 +206,13 @@ class FlightReservation extends Reservation
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['boardingGroup','passengerPriorityStatus','passengerSequenceNumber','securityScreening'], 'validateJsonSchema'],
+            [['boardingGroup', 'passengerPriorityStatus', 'passengerSequenceNumber', 'securityScreening'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

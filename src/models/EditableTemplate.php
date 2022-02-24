@@ -11,11 +11,10 @@
 
 namespace nystudio107\seomatic\models;
 
+use Craft;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\helpers\PluginTemplate as PluginTemplateHelper;
 use nystudio107\seomatic\validators\TwigExpressionValidator;
-
-use Craft;
 
 /**
  * @author    nystudio107
@@ -31,6 +30,25 @@ class EditableTemplate extends FrontendTemplate
 
     // Static Methods
     // =========================================================================
+    /**
+     * @var string
+     * @deprecated This is no longer used
+     */
+    public $templateVersion = '1.0.0';
+
+
+    // Public Properties
+    // =========================================================================
+    /**
+     * The template to render this FrontendTemplate
+     *
+     * @var string
+     */
+    public $templateString;
+    /**
+     * @var int
+     */
+    public $siteId;
 
     /**
      * @param array $config
@@ -47,28 +65,6 @@ class EditableTemplate extends FrontendTemplate
 
         return $model;
     }
-
-
-    // Public Properties
-    // =========================================================================
-
-    /**
-     * @var string
-     * @deprecated This is no longer used
-     */
-    public $templateVersion = '1.0.0';
-
-    /**
-     * The template to render this FrontendTemplate
-     *
-     * @var string
-     */
-    public $templateString;
-
-    /**
-     * @var int
-     */
-    public $siteId;
 
     // Public Methods
     // =========================================================================
@@ -87,7 +83,7 @@ class EditableTemplate extends FrontendTemplate
         } else {
             // Next try from our plugin directory first
             $path = Craft::getAlias('@nystudio107/seomatic/templates/')
-                .$this->template;
+                . $this->template;
             if (file_exists($path)) {
                 $this->templateString = @file_get_contents($path);
             }
@@ -112,7 +108,8 @@ class EditableTemplate extends FrontendTemplate
     /**
      * @inheritdoc
      */
-    public function render(array $params = []): string
+    public
+    function render(array $params = []): string
     {
         return PluginTemplateHelper::renderStringTemplate($this->templateString);
     }

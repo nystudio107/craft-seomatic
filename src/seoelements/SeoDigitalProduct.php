@@ -11,28 +11,27 @@
 
 namespace nystudio107\seomatic\seoelements;
 
-use nystudio107\seomatic\base\GqlSeoElementInterface;
-use nystudio107\seomatic\Seomatic;
+use Craft;
+use craft\base\ElementInterface;
+use craft\base\Model;
+use craft\digitalproducts\elements\Product;
+use craft\digitalproducts\events\ProductTypeEvent;
+use craft\digitalproducts\gql\interfaces\elements\Product as DigitalProductInterface;
+use craft\digitalproducts\models\ProductType;
+use craft\digitalproducts\Plugin as DigitalProductsPlugin;
+use craft\digitalproducts\services\ProductTypes;
+use craft\elements\db\ElementQueryInterface;
+use craft\events\DefineHtmlEvent;
+use craft\models\Site;
+use Exception;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
+use nystudio107\seomatic\base\GqlSeoElementInterface;
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
 use nystudio107\seomatic\helpers\PluginTemplate;
 use nystudio107\seomatic\models\MetaBundle;
-
-use Craft;
-use craft\base\ElementInterface;
-use craft\base\Model;
-use craft\elements\db\ElementQueryInterface;
-use craft\models\Site;
-
-use craft\digitalproducts\Plugin as DigitalProductsPlugin;
-use craft\digitalproducts\elements\Product;
-use craft\digitalproducts\gql\interfaces\elements\Product as DigitalProductInterface;
-use craft\digitalproducts\events\ProductTypeEvent;
-use craft\digitalproducts\models\ProductType;
-use craft\digitalproducts\services\ProductTypes;
-
+use nystudio107\seomatic\Seomatic;
 use yii\base\Event;
 
 /**
@@ -106,7 +105,7 @@ class SeoDigitalProduct implements SeoElementInterface, GqlSeoElementInterface
         Event::on(
             ProductTypes::class,
             ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE,
-            function(ProductTypeEvent $event) {
+            function (ProductTypeEvent $event) {
                 Craft::debug(
                     'ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE',
                     __METHOD__
@@ -141,6 +140,7 @@ class SeoDigitalProduct implements SeoElementInterface, GqlSeoElementInterface
                     }
                 }
             );
+
             /*
              * @TODO Sadly this event doesn't exist yet
             // Handler: ProductTypes::EVENT_AFTER_DELETE_PRODUCTTYPE
@@ -173,33 +173,34 @@ class SeoDigitalProduct implements SeoElementInterface, GqlSeoElementInterface
         if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
         }
 
-        // Install only for non-console Control Panel requests
-        if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
-            // Digital Product Types sidebar
-            $digitalProducts = DigitalProductsPlugin::getInstance();
-            if ($digitalProducts !== null) {
-                Seomatic::$view->hook('cp.digital-products.product.edit.details', static function (&$context) {
-                    $html = '';
-                    Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
-                    /** @var  $product Product */
-                    $product = $context[self::getElementRefHandle()] ?? null;
-                    if ($product !== null && $product->uri !== null) {
-                        Seomatic::$plugin->metaContainers->previewMetaContainers($product->uri, $product->siteId, true);
-                        // Render our preview sidebar template
-                        if (Seomatic::$settings->displayPreviewSidebar) {
-                            $html .= PluginTemplate::renderPluginTemplate('_sidebars/product-preview.twig');
-                        }
-                        // Render our analysis sidebar template
+        // Handler: Product::EVENT_DEFINE_SIDEBAR_HTML
+        Event::on(
+            Product::class,
+            Product::EVENT_DEFINE_SIDEBAR_HTML,
+            static function (DefineHtmlEvent $event) {
+                Craft::debug(
+                    'Product::EVENT_DEFINE_SIDEBAR_HTML',
+                    __METHOD__
+                );
+                $html = '';
+                Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
+                /** @var  $product Product */
+                $product = $event->sender ?? null;
+                if ($product !== null && $product->uri !== null) {
+                    Seomatic::$plugin->metaContainers->previewMetaContainers($product->uri, $product->siteId, true);
+                    // Render our preview sidebar template
+                    if (Seomatic::$settings->displayPreviewSidebar) {
+                        $html .= PluginTemplate::renderPluginTemplate('_sidebars/product-preview.twig');
+                    }
+                    // Render our analysis sidebar template
 // @TODO: This will be added an upcoming 'pro' edition
 //                if (Seomatic::$settings->displayAnalysisSidebar) {
 //                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/product-analysis.twig');
 //                }
-                    }
-
-                    return $html;
-                });
+                }
+                $event->html .= $html;
             }
-        }
+        );
     }
 
     /**
@@ -214,8 +215,7 @@ class SeoDigitalProduct implements SeoElementInterface, GqlSeoElementInterface
         $query = Product::find()
             ->type($metaBundle->sourceHandle)
             ->siteId($metaBundle->sourceSiteId)
-            ->limit($metaBundle->metaSitemapVars->sitemapLimit)
-        ;
+            ->limit($metaBundle->metaSitemapVars->sitemapLimit);
 
         return $query;
     }
@@ -225,30 +225,30 @@ class SeoDigitalProduct implements SeoElementInterface, GqlSeoElementInterface
      * and Element ID
      *
      * @param MetaBundle $metaBundle
-     * @param int        $elementId
-     * @param int        $siteId
+     * @param int $elementId
+     * @param int $siteId
      *
      * @return null|ElementInterface
      */
     public static function sitemapAltElement(
         MetaBundle $metaBundle,
-        int $elementId,
-        int $siteId
-    ) {
+        int        $elementId,
+        int        $siteId
+    )
+    {
         return Product::find()
             ->id($elementId)
             ->siteId($siteId)
             ->limit(1)
-            ->one()
-            ;
+            ->one();
     }
 
     /**
      * Return a preview URI for a given $sourceHandle and $siteId
      * This just returns the first element
      *
-     * @param string    $sourceHandle
-     * @param int|null  $siteId
+     * @param string $sourceHandle
+     * @param int|null $siteId
      *
      * @return string|null
      */
@@ -258,8 +258,7 @@ class SeoDigitalProduct implements SeoElementInterface, GqlSeoElementInterface
         $element = Product::find()
             ->type($sourceHandle)
             ->siteId($siteId)
-            ->one()
-        ;
+            ->one();
         if ($element) {
             $uri = $element->uri;
         }
@@ -285,7 +284,7 @@ class SeoDigitalProduct implements SeoElementInterface, GqlSeoElementInterface
                 if ($productType) {
                     $layoutId = $productType->getFieldLayoutId();
                 }
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $layoutId = null;
             }
             if ($layoutId) {
@@ -348,7 +347,7 @@ class SeoDigitalProduct implements SeoElementInterface, GqlSeoElementInterface
      * Return the most recently updated Element from a given source model
      *
      * @param Model $sourceModel
-     * @param int   $sourceSiteId
+     * @param int $sourceSiteId
      *
      * @return null|ElementInterface
      */
@@ -360,8 +359,7 @@ class SeoDigitalProduct implements SeoElementInterface, GqlSeoElementInterface
             ->siteId($sourceSiteId)
             ->limit(1)
             ->orderBy(['elements.dateUpdated' => SORT_DESC])
-            ->one()
-            ;
+            ->one();
     }
 
     /**
@@ -433,7 +431,7 @@ class SeoDigitalProduct implements SeoElementInterface, GqlSeoElementInterface
         /** @var Product $element */
         try {
             $sourceHandle = $element->getType()->handle;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
         }
 
         return $sourceHandle;

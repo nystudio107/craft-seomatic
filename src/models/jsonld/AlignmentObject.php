@@ -92,48 +92,6 @@ class AlignmentObject extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A category of alignment between the learning resource and the framework
-     * node. Recommended values include: 'assesses', 'teaches', 'requires',
-     * 'textComplexity', 'readingLevel', 'educationalSubject', and
-     * 'educationalLevel'.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $alignmentType;
-
-    /**
-     * The framework to which the resource being described is aligned.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $educationalFramework;
-
-    /**
-     * The description of a node in an established educational framework.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $targetDescription;
-
-    /**
-     * The name of a node in an established educational framework.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $targetName;
-
-    /**
-     * The URL of a node in an established educational framework.
-     *
-     * @var string [schema.org types: URL]
-     */
-    public $targetUrl;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -146,7 +104,6 @@ class AlignmentObject extends Intangible
         'targetName',
         'targetUrl'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -159,7 +116,6 @@ class AlignmentObject extends Intangible
         'targetName' => ['Text'],
         'targetUrl' => ['URL']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -172,7 +128,6 @@ class AlignmentObject extends Intangible
         'targetName' => 'The name of a node in an established educational framework.',
         'targetUrl' => 'The URL of a node in an established educational framework.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -180,7 +135,6 @@ class AlignmentObject extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -189,13 +143,49 @@ class AlignmentObject extends Intangible
     static protected $_googleRecommendedSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * A category of alignment between the learning resource and the framework
+     * node. Recommended values include: 'assesses', 'teaches', 'requires',
+     * 'textComplexity', 'readingLevel', 'educationalSubject', and
+     * 'educationalLevel'.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $alignmentType;
+    /**
+     * The framework to which the resource being described is aligned.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $educationalFramework;
+    /**
+     * The description of a node in an established educational framework.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $targetDescription;
+    /**
+     * The name of a node in an established educational framework.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $targetName;
+    /**
+     * The URL of a node in an established educational framework.
+     *
+     * @var string [schema.org types: URL]
+     */
+    public $targetUrl;
+
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -225,13 +215,13 @@ class AlignmentObject extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['alignmentType','educationalFramework','targetDescription','targetName','targetUrl'], 'validateJsonSchema'],
+            [['alignmentType', 'educationalFramework', 'targetDescription', 'targetName', 'targetUrl'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

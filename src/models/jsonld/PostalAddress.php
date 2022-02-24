@@ -91,56 +91,6 @@ class PostalAddress extends ContactPoint
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The country. For example, USA. You can also provide the two-letter ISO
-     * 3166-1 alpha-2 country code.
-     *
-     * @var mixed|Country|string [schema.org types: Country, Text]
-     */
-    public $addressCountry;
-
-    /**
-     * The locality in which the street address is, and which is in the region.
-     * For example, Mountain View.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $addressLocality;
-
-    /**
-     * The region in which the locality is, and which is in the country. For
-     * example, California or another appropriate first-level Administrative
-     * division
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $addressRegion;
-
-    /**
-     * The post office box number for PO box addresses.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $postOfficeBoxNumber;
-
-    /**
-     * The postal code. For example, 94043.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $postalCode;
-
-    /**
-     * The street address. For example, 1600 Amphitheatre Pkwy.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $streetAddress;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -154,21 +104,19 @@ class PostalAddress extends ContactPoint
         'postalCode',
         'streetAddress'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'addressCountry' => ['Country','Text'],
+        'addressCountry' => ['Country', 'Text'],
         'addressLocality' => ['Text'],
         'addressRegion' => ['Text'],
         'postOfficeBoxNumber' => ['Text'],
         'postalCode' => ['Text'],
         'streetAddress' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -182,7 +130,6 @@ class PostalAddress extends ContactPoint
         'postalCode' => 'The postal code. For example, 94043.',
         'streetAddress' => 'The street address. For example, 1600 Amphitheatre Pkwy.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -190,7 +137,6 @@ class PostalAddress extends ContactPoint
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -198,14 +144,57 @@ class PostalAddress extends ContactPoint
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The country. For example, USA. You can also provide the two-letter ISO
+     * 3166-1 alpha-2 country code.
+     *
+     * @var mixed|Country|string [schema.org types: Country, Text]
+     */
+    public $addressCountry;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The locality in which the street address is, and which is in the region.
+     * For example, Mountain View.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $addressLocality;
+    /**
+     * The region in which the locality is, and which is in the country. For
+     * example, California or another appropriate first-level Administrative
+     * division
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $addressRegion;
+    /**
+     * The post office box number for PO box addresses.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $postOfficeBoxNumber;
+    /**
+     * The postal code. For example, 94043.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $postalCode;
+    /**
+     * The street address. For example, 1600 Amphitheatre Pkwy.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $streetAddress;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -235,13 +224,13 @@ class PostalAddress extends ContactPoint
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['addressCountry','addressLocality','addressRegion','postOfficeBoxNumber','postalCode','streetAddress'], 'validateJsonSchema'],
+            [['addressCountry', 'addressLocality', 'addressRegion', 'postOfficeBoxNumber', 'postalCode', 'streetAddress'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

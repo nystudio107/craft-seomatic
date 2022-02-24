@@ -91,17 +91,6 @@ class MovieTheater extends CivicStructure
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The number of screens in the movie theater.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $screenCount;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -111,6 +100,8 @@ class MovieTheater extends CivicStructure
         'screenCount'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -119,7 +110,6 @@ class MovieTheater extends CivicStructure
     static protected $_schemaPropertyExpectedTypes = [
         'screenCount' => ['Number']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -128,7 +118,6 @@ class MovieTheater extends CivicStructure
     static protected $_schemaPropertyDescriptions = [
         'screenCount' => 'The number of screens in the movie theater.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -136,7 +125,6 @@ class MovieTheater extends CivicStructure
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -144,14 +132,20 @@ class MovieTheater extends CivicStructure
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The number of screens in the movie theater.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $screenCount;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -181,9 +175,9 @@ class MovieTheater extends CivicStructure
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

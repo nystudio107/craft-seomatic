@@ -27,6 +27,50 @@ class MetaSitemapVars extends InheritableSettingsModel
     // =========================================================================
 
     /**
+     * @var bool
+     */
+    public $sitemapUrls;
+
+    // Public Properties
+    // =========================================================================
+    /**
+     * @var bool
+     */
+    public $sitemapAssets;
+    /**
+     * @var bool
+     */
+    public $sitemapFiles;
+    /**
+     * @var bool
+     */
+    public $sitemapAltLinks;
+    /**
+     * @var string
+     */
+    public $sitemapChangeFreq;
+    /**
+     * @var float
+     */
+    public $sitemapPriority;
+    /**
+     * @var null|int
+     */
+    public $sitemapLimit;
+    /**
+     * @var null|int
+     */
+    public $structureDepth;
+    /**
+     * @var array
+     */
+    public $sitemapImageFieldMap = [];
+    /**
+     * @var array
+     */
+    public $sitemapVideoFieldMap = [];
+
+    /**
      * @param array $config
      *
      * @return null|MetaSitemapVars
@@ -36,66 +80,13 @@ class MetaSitemapVars extends InheritableSettingsModel
         return new MetaSitemapVars($config);
     }
 
-    // Public Properties
-    // =========================================================================
-
-    /**
-     * @var bool
-     */
-    public $sitemapUrls;
-
-    /**
-     * @var bool
-     */
-    public $sitemapAssets;
-
-    /**
-     * @var bool
-     */
-    public $sitemapFiles;
-
-    /**
-     * @var bool
-     */
-    public $sitemapAltLinks;
-
-    /**
-     * @var string
-     */
-    public $sitemapChangeFreq;
-
-    /**
-     * @var float
-     */
-    public $sitemapPriority;
-
-    /**
-     * @var null|int
-     */
-    public $sitemapLimit;
-
-    /**
-     * @var null|int
-     */
-    public $structureDepth;
-
-    /**
-     * @var array
-     */
-    public $sitemapImageFieldMap = [];
-
-    /**
-     * @var array
-     */
-    public $sitemapVideoFieldMap = [];
-
     // Public Methods
     // =========================================================================
 
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         // Enforce types
         if ($this->sitemapUrls !== null) {

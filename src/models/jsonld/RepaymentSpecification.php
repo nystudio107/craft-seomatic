@@ -91,51 +91,6 @@ class RepaymentSpecification extends StructuredValue
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * a type of payment made in cash during the onset of the purchase of an
-     * expensive good/service. The payment typically represents only a percentage
-     * of the full purchase price.
-     *
-     * @var mixed|MonetaryAmount|float [schema.org types: MonetaryAmount, Number]
-     */
-    public $downPayment;
-
-    /**
-     * The amount to be paid as a penalty in the event of early payment of the
-     * loan.
-     *
-     * @var MonetaryAmount [schema.org types: MonetaryAmount]
-     */
-    public $earlyPrepaymentPenalty;
-
-    /**
-     * The amount of money to pay in a single payment.
-     *
-     * @var MonetaryAmount [schema.org types: MonetaryAmount]
-     */
-    public $loanPaymentAmount;
-
-    /**
-     * Frequency of payments due, i.e. number of months between payments. This is
-     * defined as a frequency, i.e. the reciprocal of a period of time.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $loanPaymentFrequency;
-
-    /**
-     * The number of payments contractually required at origination to repay the
-     * loan. For monthly paying loans this is the number of months from the
-     * contractual first payment date to the maturity date.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $numberOfLoanPayments;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -148,20 +103,18 @@ class RepaymentSpecification extends StructuredValue
         'loanPaymentFrequency',
         'numberOfLoanPayments'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'downPayment' => ['MonetaryAmount','Number'],
+        'downPayment' => ['MonetaryAmount', 'Number'],
         'earlyPrepaymentPenalty' => ['MonetaryAmount'],
         'loanPaymentAmount' => ['MonetaryAmount'],
         'loanPaymentFrequency' => ['Number'],
         'numberOfLoanPayments' => ['Number']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -174,7 +127,6 @@ class RepaymentSpecification extends StructuredValue
         'loanPaymentFrequency' => 'Frequency of payments due, i.e. number of months between payments. This is defined as a frequency, i.e. the reciprocal of a period of time.',
         'numberOfLoanPayments' => 'The number of payments contractually required at origination to repay the loan. For monthly paying loans this is the number of months from the contractual first payment date to the maturity date.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -182,7 +134,6 @@ class RepaymentSpecification extends StructuredValue
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -191,13 +142,52 @@ class RepaymentSpecification extends StructuredValue
     static protected $_googleRecommendedSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * a type of payment made in cash during the onset of the purchase of an
+     * expensive good/service. The payment typically represents only a percentage
+     * of the full purchase price.
+     *
+     * @var mixed|MonetaryAmount|float [schema.org types: MonetaryAmount, Number]
+     */
+    public $downPayment;
+    /**
+     * The amount to be paid as a penalty in the event of early payment of the
+     * loan.
+     *
+     * @var MonetaryAmount [schema.org types: MonetaryAmount]
+     */
+    public $earlyPrepaymentPenalty;
+    /**
+     * The amount of money to pay in a single payment.
+     *
+     * @var MonetaryAmount [schema.org types: MonetaryAmount]
+     */
+    public $loanPaymentAmount;
+    /**
+     * Frequency of payments due, i.e. number of months between payments. This is
+     * defined as a frequency, i.e. the reciprocal of a period of time.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $loanPaymentFrequency;
+    /**
+     * The number of payments contractually required at origination to repay the
+     * loan. For monthly paying loans this is the number of months from the
+     * contractual first payment date to the maturity date.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $numberOfLoanPayments;
+
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -227,13 +217,13 @@ class RepaymentSpecification extends StructuredValue
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['downPayment','earlyPrepaymentPenalty','loanPaymentAmount','loanPaymentFrequency','numberOfLoanPayments'], 'validateJsonSchema'],
+            [['downPayment', 'earlyPrepaymentPenalty', 'loanPaymentAmount', 'loanPaymentFrequency', 'numberOfLoanPayments'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

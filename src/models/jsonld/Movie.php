@@ -91,74 +91,6 @@ class Movie extends CreativeWork
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * An actor, e.g. in tv, radio, movie, video games etc., or in an event.
-     * Actors can be associated with individual items or with a series, episode,
-     * clip. Supersedes actors.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $actor;
-
-    /**
-     * The country of the principal offices of the production company or
-     * individual responsible for the movie or program.
-     *
-     * @var Country [schema.org types: Country]
-     */
-    public $countryOfOrigin;
-
-    /**
-     * A director of e.g. tv, radio, movie, video gaming etc. content, or of an
-     * event. Directors can be associated with individual items or with a series,
-     * episode, clip. Supersedes directors.
-     *
-     * @var Person [schema.org types: Person]
-     */
-    public $director;
-
-    /**
-     * The duration of the item (movie, audio recording, event, etc.) in ISO 8601
-     * date format.
-     *
-     * @var Duration [schema.org types: Duration]
-     */
-    public $duration;
-
-    /**
-     * The composer of the soundtrack.
-     *
-     * @var mixed|MusicGroup|Person [schema.org types: MusicGroup, Person]
-     */
-    public $musicBy;
-
-    /**
-     * The production company or studio responsible for the item e.g. series,
-     * video game, episode etc.
-     *
-     * @var Organization [schema.org types: Organization]
-     */
-    public $productionCompany;
-
-    /**
-     * Languages in which subtitles/captions are available, in IETF BCP 47
-     * standard format.
-     *
-     * @var mixed|Language|string [schema.org types: Language, Text]
-     */
-    public $subtitleLanguage;
-
-    /**
-     * The trailer of a movie or tv/radio series, season, episode, etc.
-     *
-     * @var VideoObject [schema.org types: VideoObject]
-     */
-    public $trailer;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -174,7 +106,6 @@ class Movie extends CreativeWork
         'subtitleLanguage',
         'trailer'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -185,12 +116,11 @@ class Movie extends CreativeWork
         'countryOfOrigin' => ['Country'],
         'director' => ['Person'],
         'duration' => ['Duration'],
-        'musicBy' => ['MusicGroup','Person'],
+        'musicBy' => ['MusicGroup', 'Person'],
         'productionCompany' => ['Organization'],
-        'subtitleLanguage' => ['Language','Text'],
+        'subtitleLanguage' => ['Language', 'Text'],
         'trailer' => ['VideoObject']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -206,7 +136,6 @@ class Movie extends CreativeWork
         'subtitleLanguage' => 'Languages in which subtitles/captions are available, in IETF BCP 47 standard format.',
         'trailer' => 'The trailer of a movie or tv/radio series, season, episode, etc.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -214,7 +143,6 @@ class Movie extends CreativeWork
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -222,14 +150,73 @@ class Movie extends CreativeWork
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * An actor, e.g. in tv, radio, movie, video games etc., or in an event.
+     * Actors can be associated with individual items or with a series, episode,
+     * clip. Supersedes actors.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $actor;
+    /**
+     * The country of the principal offices of the production company or
+     * individual responsible for the movie or program.
+     *
+     * @var Country [schema.org types: Country]
+     */
+    public $countryOfOrigin;
+    /**
+     * A director of e.g. tv, radio, movie, video gaming etc. content, or of an
+     * event. Directors can be associated with individual items or with a series,
+     * episode, clip. Supersedes directors.
+     *
+     * @var Person [schema.org types: Person]
+     */
+    public $director;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The duration of the item (movie, audio recording, event, etc.) in ISO 8601
+     * date format.
+     *
+     * @var Duration [schema.org types: Duration]
+     */
+    public $duration;
+    /**
+     * The composer of the soundtrack.
+     *
+     * @var mixed|MusicGroup|Person [schema.org types: MusicGroup, Person]
+     */
+    public $musicBy;
+    /**
+     * The production company or studio responsible for the item e.g. series,
+     * video game, episode etc.
+     *
+     * @var Organization [schema.org types: Organization]
+     */
+    public $productionCompany;
+    /**
+     * Languages in which subtitles/captions are available, in IETF BCP 47
+     * standard format.
+     *
+     * @var mixed|Language|string [schema.org types: Language, Text]
+     */
+    public $subtitleLanguage;
+    /**
+     * The trailer of a movie or tv/radio series, season, episode, etc.
+     *
+     * @var VideoObject [schema.org types: VideoObject]
+     */
+    public $trailer;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -259,13 +246,13 @@ class Movie extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['actor','countryOfOrigin','director','duration','musicBy','productionCompany','subtitleLanguage','trailer'], 'validateJsonSchema'],
+            [['actor', 'countryOfOrigin', 'director', 'duration', 'musicBy', 'productionCompany', 'subtitleLanguage', 'trailer'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -27,167 +27,126 @@ class MetaGlobalVars extends InheritableSettingsModel
     // =========================================================================
 
     /**
-     * @param array $config
-     *
-     * @return null|MetaGlobalVars
-     */
-    public static function create(array $config = [])
-    {
-        return new MetaGlobalVars($config);
-    }
-
-    // Public Properties
-    // =========================================================================
-
-    /**
      * @var string
      */
     public $language;
 
+    // Public Properties
+    // =========================================================================
     /**
      * @var string The schema.org type representing the mainEntityOfPage
      */
     public $mainEntityOfPage = 'WebPage';
-
     /**
      * @var string The seoTitle is used in the `<title>` tag, and as a default
      *      setting for the ogTitle & twitterTitle
      */
     public $seoTitle;
-
     /**
      * @var string where the site name should be positioned in the `<title>` tag
      */
     public $siteNamePosition;
-
     /**
      * @var string The seoDescription is used for the `<meta name="description">`
      *      tag, and as a default setting for the Description & twitterDescription
      */
     public $seoDescription;
-
     /**
      * @var string The $seoKeywords are used for the `<meta name="keywords">` tag
      */
     public $seoKeywords;
-
     /**
      * @var string
      */
     public $seoImage;
-
     /**
      * @var string
      */
     public $seoImageWidth;
-
     /**
      * @var string
      */
     public $seoImageHeight;
-
     /**
      * @var string
      */
     public $seoImageDescription;
-
     /**
      * @var string
      */
     public $canonicalUrl;
-
     /**
      * @var string
      */
     public $robots;
-
     /**
      * @var string
      */
     public $ogType;
-
     /**
      * @var string
      */
     public $ogTitle;
-
     /**
      * @var string
      */
     public $ogSiteNamePosition;
-
     /**
      * @var string
      */
     public $ogDescription;
-
     /**
      * @var string
      */
     public $ogImage;
-
     /**
      * @var string
      */
     public $ogImageWidth;
-
     /**
      * @var string
      */
     public $ogImageHeight;
-
     /**
      * @var string
      */
     public $ogImageDescription;
-
     /**
      * @var string
      */
     public $twitterCard;
-
     /**
      * @var string
      */
     public $twitterCreator;
-
     /**
      * @var string
      */
     public $twitterTitle;
-
     /**
      * @var string
      */
     public $twitterSiteNamePosition;
-
     /**
      * @var string
      */
     public $twitterDescription;
-
     /**
      * @var string
      */
     public $twitterImage;
-
     /**
      * @var string
      */
     public $twitterImageWidth;
-
     /**
      * @var string
      */
     public $twitterImageHeight;
-
     /**
      * @var string
      */
     public $twitterImageDescription;
-
-    // Public Methods
-    // =========================================================================
 
     /**
      * @inheritdoc
@@ -199,10 +158,23 @@ class MetaGlobalVars extends InheritableSettingsModel
         parent::__construct($config);
     }
 
+    // Public Methods
+    // =========================================================================
+
+    /**
+     * @param array $config
+     *
+     * @return null|MetaGlobalVars
+     */
+    public static function create(array $config = [])
+    {
+        return new MetaGlobalVars($config);
+    }
+
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
         // If we have potentially unsafe Twig code, strip it out
@@ -260,26 +232,26 @@ class MetaGlobalVars extends InheritableSettingsModel
             ],
             [
                 'twitterCard', 'in', 'range' => [
-                    'summary',
-                    'summary_large_image',
-                    'app',
-                    'player',
-                ],
+                'summary',
+                'summary_large_image',
+                'app',
+                'player',
+            ],
             ],
             [
                 'robots', 'in', 'range' => [
-                    'all',
-                    'index',
-                    'noindex',
-                    'follow',
-                    'nofollow',
-                    'none',
-                    'noodp',
-                    'noarchive',
-                    'nosnippet',
-                    'noimageindex',
-                    'nocache',
-                ],
+                'all',
+                'index',
+                'noindex',
+                'follow',
+                'nofollow',
+                'none',
+                'noodp',
+                'noarchive',
+                'nosnippet',
+                'noimageindex',
+                'nocache',
+            ],
             ],
         ];
     }

@@ -91,39 +91,6 @@ class DoseSchedule extends MedicalIntangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The unit of the dose, e.g. 'mg'.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $doseUnit;
-
-    /**
-     * The value of the dose, e.g. 500.
-     *
-     * @var mixed|float|QualitativeValue [schema.org types: Number, QualitativeValue]
-     */
-    public $doseValue;
-
-    /**
-     * How often the dose is taken, e.g. 'daily'.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $frequency;
-
-    /**
-     * Characteristics of the population for which this is intended, or which
-     * typically uses it, e.g. 'adults'.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $targetPopulation;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -135,7 +102,6 @@ class DoseSchedule extends MedicalIntangible
         'frequency',
         'targetPopulation'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -143,11 +109,10 @@ class DoseSchedule extends MedicalIntangible
      */
     static protected $_schemaPropertyExpectedTypes = [
         'doseUnit' => ['Text'],
-        'doseValue' => ['Number','QualitativeValue'],
+        'doseValue' => ['Number', 'QualitativeValue'],
         'frequency' => ['Text'],
         'targetPopulation' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -159,7 +124,6 @@ class DoseSchedule extends MedicalIntangible
         'frequency' => 'How often the dose is taken, e.g. \'daily\'.',
         'targetPopulation' => 'Characteristics of the population for which this is intended, or which typically uses it, e.g. \'adults\'.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -168,6 +132,8 @@ class DoseSchedule extends MedicalIntangible
     static protected $_googleRequiredSchema = [
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -175,14 +141,39 @@ class DoseSchedule extends MedicalIntangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The unit of the dose, e.g. 'mg'.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $doseUnit;
+    /**
+     * The value of the dose, e.g. 500.
+     *
+     * @var mixed|float|QualitativeValue [schema.org types: Number, QualitativeValue]
+     */
+    public $doseValue;
+    /**
+     * How often the dose is taken, e.g. 'daily'.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $frequency;
+    /**
+     * Characteristics of the population for which this is intended, or which
+     * typically uses it, e.g. 'adults'.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $targetPopulation;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -212,13 +203,13 @@ class DoseSchedule extends MedicalIntangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['doseUnit','doseValue','frequency','targetPopulation'], 'validateJsonSchema'],
+            [['doseUnit', 'doseValue', 'frequency', 'targetPopulation'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

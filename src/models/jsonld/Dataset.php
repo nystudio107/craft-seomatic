@@ -92,7 +92,59 @@ class Dataset extends CreativeWork
 
     // Public Properties
     // =========================================================================
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'distribution',
+        'includedInDataCatalog',
+        'issn',
+        'measurementTechnique',
+        'variableMeasured'
+    ];
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'distribution' => ['DataDownload'],
+        'includedInDataCatalog' => ['DataCatalog'],
+        'issn' => ['Text'],
+        'measurementTechnique' => ['Text', 'URL'],
+        'variableMeasured' => ['PropertyValue', 'Text']
+    ];
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'distribution' => 'A downloadable form of this dataset, at a specific location, in a specific format.',
+        'includedInDataCatalog' => 'A data catalog which contains this dataset. Supersedes catalog, includedDataCatalog. Inverse property: dataset.',
+        'issn' => 'The International Standard Serial Number (ISSN) that identifies this serial publication. You can repeat this property to identify different formats of, or the linking ISSN (ISSN-L) for, this serial publication.',
+        'measurementTechnique' => 'A technique or technology used in a Dataset (or DataDownload, DataCatalog), corresponding to the method used for measuring the corresponding variable(s) (described using variableMeasured). This is oriented towards scientific and scholarly dataset publication but may have broader applicability; it is not intended as a full representation of measurement, but rather as a high level summary for dataset discovery. For example, if variableMeasured is: molecule concentration, measurementTechnique could be: "mass spectrometry" or "nmr spectroscopy" or "colorimetry" or "immunofluorescence". If the variableMeasured is "depression rating", the measurementTechnique could be "Zung Scale" or "HAM-D" or "Beck Depression Inventory". If there are several variableMeasured properties recorded for some given data object, use a PropertyValue for each variableMeasured and attach the corresponding measurementTechnique.',
+        'variableMeasured' => 'The variableMeasured property can indicate (repeated as necessary) the variables that are measured in some dataset, either described as text or as pairs of identifier and description using PropertyValue.'
+    ];
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * A downloadable form of this dataset, at a specific location, in a specific
      * format.
@@ -100,7 +152,6 @@ class Dataset extends CreativeWork
      * @var DataDownload [schema.org types: DataDownload]
      */
     public $distribution;
-
     /**
      * A data catalog which contains this dataset. Supersedes catalog,
      * includedDataCatalog. Inverse property: dataset.
@@ -108,7 +159,6 @@ class Dataset extends CreativeWork
      * @var DataCatalog [schema.org types: DataCatalog]
      */
     public $includedInDataCatalog;
-
     /**
      * The International Standard Serial Number (ISSN) that identifies this serial
      * publication. You can repeat this property to identify different formats of,
@@ -117,7 +167,6 @@ class Dataset extends CreativeWork
      * @var string [schema.org types: Text]
      */
     public $issn;
-
     /**
      * A technique or technology used in a Dataset (or DataDownload, DataCatalog),
      * corresponding to the method used for measuring the corresponding
@@ -136,7 +185,6 @@ class Dataset extends CreativeWork
      * @var mixed|string|string [schema.org types: Text, URL]
      */
     public $measurementTechnique;
-
     /**
      * The variableMeasured property can indicate (repeated as necessary) the
      * variables that are measured in some dataset, either described as text or as
@@ -146,71 +194,13 @@ class Dataset extends CreativeWork
      */
     public $variableMeasured;
 
-    // Static Protected Properties
-    // =========================================================================
-
-    /**
-     * The Schema.org Property Names
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyNames = [
-        'distribution',
-        'includedInDataCatalog',
-        'issn',
-        'measurementTechnique',
-        'variableMeasured'
-    ];
-
-    /**
-     * The Schema.org Property Expected Types
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyExpectedTypes = [
-        'distribution' => ['DataDownload'],
-        'includedInDataCatalog' => ['DataCatalog'],
-        'issn' => ['Text'],
-        'measurementTechnique' => ['Text','URL'],
-        'variableMeasured' => ['PropertyValue','Text']
-    ];
-
-    /**
-     * The Schema.org Property Descriptions
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyDescriptions = [
-        'distribution' => 'A downloadable form of this dataset, at a specific location, in a specific format.',
-        'includedInDataCatalog' => 'A data catalog which contains this dataset. Supersedes catalog, includedDataCatalog. Inverse property: dataset.',
-        'issn' => 'The International Standard Serial Number (ISSN) that identifies this serial publication. You can repeat this property to identify different formats of, or the linking ISSN (ISSN-L) for, this serial publication.',
-        'measurementTechnique' => 'A technique or technology used in a Dataset (or DataDownload, DataCatalog), corresponding to the method used for measuring the corresponding variable(s) (described using variableMeasured). This is oriented towards scientific and scholarly dataset publication but may have broader applicability; it is not intended as a full representation of measurement, but rather as a high level summary for dataset discovery. For example, if variableMeasured is: molecule concentration, measurementTechnique could be: "mass spectrometry" or "nmr spectroscopy" or "colorimetry" or "immunofluorescence". If the variableMeasured is "depression rating", the measurementTechnique could be "Zung Scale" or "HAM-D" or "Beck Depression Inventory". If there are several variableMeasured properties recorded for some given data object, use a PropertyValue for each variableMeasured and attach the corresponding measurementTechnique.',
-        'variableMeasured' => 'The variableMeasured property can indicate (repeated as necessary) the variables that are measured in some dataset, either described as text or as pairs of identifier and description using PropertyValue.'
-    ];
-
-    /**
-     * The Schema.org Google Required Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRequiredSchema = [
-    ];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRecommendedSchema = [
-    ];
-
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -240,13 +230,13 @@ class Dataset extends CreativeWork
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['distribution','includedInDataCatalog','issn','measurementTechnique','variableMeasured'], 'validateJsonSchema'],
+            [['distribution', 'includedInDataCatalog', 'issn', 'measurementTechnique', 'variableMeasured'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

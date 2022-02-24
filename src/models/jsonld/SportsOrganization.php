@@ -92,17 +92,6 @@ class SportsOrganization extends Organization
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A type of sport (e.g. Baseball).
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $sport;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -112,15 +101,16 @@ class SportsOrganization extends Organization
         'sport'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'sport' => ['Text','URL']
+        'sport' => ['Text', 'URL']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -129,7 +119,6 @@ class SportsOrganization extends Organization
     static protected $_schemaPropertyDescriptions = [
         'sport' => 'A type of sport (e.g. Baseball).'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -137,7 +126,6 @@ class SportsOrganization extends Organization
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -145,14 +133,20 @@ class SportsOrganization extends Organization
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A type of sport (e.g. Baseball).
+     *
+     * @var mixed|string|string [schema.org types: Text, URL]
+     */
+    public $sport;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -182,9 +176,9 @@ class SportsOrganization extends Organization
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

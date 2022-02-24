@@ -92,91 +92,6 @@ class ParcelDelivery extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Destination address.
-     *
-     * @var PostalAddress [schema.org types: PostalAddress]
-     */
-    public $deliveryAddress;
-
-    /**
-     * New entry added as the package passes through each leg of its journey (from
-     * shipment to final delivery).
-     *
-     * @var DeliveryEvent [schema.org types: DeliveryEvent]
-     */
-    public $deliveryStatus;
-
-    /**
-     * The earliest date the package may arrive.
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $expectedArrivalFrom;
-
-    /**
-     * The latest date the package may arrive.
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $expectedArrivalUntil;
-
-    /**
-     * Method used for delivery or shipping.
-     *
-     * @var DeliveryMethod [schema.org types: DeliveryMethod]
-     */
-    public $hasDeliveryMethod;
-
-    /**
-     * Item(s) being shipped.
-     *
-     * @var Product [schema.org types: Product]
-     */
-    public $itemShipped;
-
-    /**
-     * Shipper's address.
-     *
-     * @var PostalAddress [schema.org types: PostalAddress]
-     */
-    public $originAddress;
-
-    /**
-     * The overall order the items in this delivery were included in.
-     *
-     * @var Order [schema.org types: Order]
-     */
-    public $partOfOrder;
-
-    /**
-     * The service provider, service operator, or service performer; the goods
-     * producer. Another party (a seller) may offer those services or goods on
-     * behalf of the provider. A provider may also serve as the seller. Supersedes
-     * carrier.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $provider;
-
-    /**
-     * Shipper tracking number.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $trackingNumber;
-
-    /**
-     * Tracking url for the parcel delivery.
-     *
-     * @var string [schema.org types: URL]
-     */
-    public $trackingUrl;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -195,7 +110,6 @@ class ParcelDelivery extends Intangible
         'trackingNumber',
         'trackingUrl'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -204,17 +118,16 @@ class ParcelDelivery extends Intangible
     static protected $_schemaPropertyExpectedTypes = [
         'deliveryAddress' => ['PostalAddress'],
         'deliveryStatus' => ['DeliveryEvent'],
-        'expectedArrivalFrom' => ['Date','DateTime'],
-        'expectedArrivalUntil' => ['Date','DateTime'],
+        'expectedArrivalFrom' => ['Date', 'DateTime'],
+        'expectedArrivalUntil' => ['Date', 'DateTime'],
         'hasDeliveryMethod' => ['DeliveryMethod'],
         'itemShipped' => ['Product'],
         'originAddress' => ['PostalAddress'],
         'partOfOrder' => ['Order'],
-        'provider' => ['Organization','Person'],
+        'provider' => ['Organization', 'Person'],
         'trackingNumber' => ['Text'],
         'trackingUrl' => ['URL']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -233,7 +146,6 @@ class ParcelDelivery extends Intangible
         'trackingNumber' => 'Shipper tracking number.',
         'trackingUrl' => 'Tracking url for the parcel delivery.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -241,7 +153,6 @@ class ParcelDelivery extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -249,14 +160,87 @@ class ParcelDelivery extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Destination address.
+     *
+     * @var PostalAddress [schema.org types: PostalAddress]
+     */
+    public $deliveryAddress;
+    /**
+     * New entry added as the package passes through each leg of its journey (from
+     * shipment to final delivery).
+     *
+     * @var DeliveryEvent [schema.org types: DeliveryEvent]
+     */
+    public $deliveryStatus;
+    /**
+     * The earliest date the package may arrive.
+     *
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     */
+    public $expectedArrivalFrom;
+    /**
+     * The latest date the package may arrive.
+     *
+     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     */
+    public $expectedArrivalUntil;
+    /**
+     * Method used for delivery or shipping.
+     *
+     * @var DeliveryMethod [schema.org types: DeliveryMethod]
+     */
+    public $hasDeliveryMethod;
+    /**
+     * Item(s) being shipped.
+     *
+     * @var Product [schema.org types: Product]
+     */
+    public $itemShipped;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * Shipper's address.
+     *
+     * @var PostalAddress [schema.org types: PostalAddress]
+     */
+    public $originAddress;
+    /**
+     * The overall order the items in this delivery were included in.
+     *
+     * @var Order [schema.org types: Order]
+     */
+    public $partOfOrder;
+    /**
+     * The service provider, service operator, or service performer; the goods
+     * producer. Another party (a seller) may offer those services or goods on
+     * behalf of the provider. A provider may also serve as the seller. Supersedes
+     * carrier.
+     *
+     * @var mixed|Organization|Person [schema.org types: Organization, Person]
+     */
+    public $provider;
+    /**
+     * Shipper tracking number.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $trackingNumber;
+    /**
+     * Tracking url for the parcel delivery.
+     *
+     * @var string [schema.org types: URL]
+     */
+    public $trackingUrl;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -286,13 +270,13 @@ class ParcelDelivery extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['deliveryAddress','deliveryStatus','expectedArrivalFrom','expectedArrivalUntil','hasDeliveryMethod','itemShipped','originAddress','partOfOrder','provider','trackingNumber','trackingUrl'], 'validateJsonSchema'],
+            [['deliveryAddress', 'deliveryStatus', 'expectedArrivalFrom', 'expectedArrivalUntil', 'hasDeliveryMethod', 'itemShipped', 'originAddress', 'partOfOrder', 'provider', 'trackingNumber', 'trackingUrl'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

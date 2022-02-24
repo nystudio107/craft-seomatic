@@ -10,11 +10,11 @@
 namespace nystudio107\seomatic\fields;
 
 use Craft;
-use craft\base\Field;
 use craft\base\ElementInterface;
+use craft\base\Field;
 use craft\helpers\Json;
-
 use yii\db\Schema;
+use function is_string;
 
 /**
  * @author    nystudio107
@@ -85,7 +85,7 @@ class Seomatic_Meta extends Field
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
@@ -108,7 +108,7 @@ class Seomatic_Meta extends Field
     public function normalizeValue($value, ElementInterface $element = null)
     {
         if (!empty($value)) {
-            if (\is_string($value)) {
+            if (is_string($value)) {
                 $value = Json::decodeIfJson($value);
             }
         }
@@ -119,7 +119,7 @@ class Seomatic_Meta extends Field
     /**
      * @inheritdoc
      */
-    public function getSettingsHtml()
+    public function getSettingsHtml(): ?string
     {
         return '<p>The SEOmatic Meta field type is deprecated in Craft 3. Use the SEO Settings field instead.</p>';
     }

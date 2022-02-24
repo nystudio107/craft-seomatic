@@ -93,17 +93,6 @@ class MedicalSymptom extends MedicalSignOrSymptom
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A possible treatment to address this condition, sign or symptom.
-     *
-     * @var MedicalTherapy [schema.org types: MedicalTherapy]
-     */
-    public $possibleTreatment;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -113,6 +102,8 @@ class MedicalSymptom extends MedicalSignOrSymptom
         'possibleTreatment'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -121,7 +112,6 @@ class MedicalSymptom extends MedicalSignOrSymptom
     static protected $_schemaPropertyExpectedTypes = [
         'possibleTreatment' => ['MedicalTherapy']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -130,7 +120,6 @@ class MedicalSymptom extends MedicalSignOrSymptom
     static protected $_schemaPropertyDescriptions = [
         'possibleTreatment' => 'A possible treatment to address this condition, sign or symptom.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -138,7 +127,6 @@ class MedicalSymptom extends MedicalSignOrSymptom
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -146,14 +134,20 @@ class MedicalSymptom extends MedicalSignOrSymptom
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A possible treatment to address this condition, sign or symptom.
+     *
+     * @var MedicalTherapy [schema.org types: MedicalTherapy]
+     */
+    public $possibleTreatment;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -183,9 +177,9 @@ class MedicalSymptom extends MedicalSignOrSymptom
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

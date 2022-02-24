@@ -97,14 +97,71 @@ class PropertyValue extends StructuredValue
 
     // Public Properties
     // =========================================================================
-
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'maxValue',
+        'measurementTechnique',
+        'minValue',
+        'propertyID',
+        'unitCode',
+        'unitText',
+        'value',
+        'valueReference'
+    ];
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'maxValue' => ['Number'],
+        'measurementTechnique' => ['Text', 'URL'],
+        'minValue' => ['Number'],
+        'propertyID' => ['Text', 'URL'],
+        'unitCode' => ['Text', 'URL'],
+        'unitText' => ['Text'],
+        'value' => ['Boolean', 'Number', 'StructuredValue', 'Text'],
+        'valueReference' => ['Enumeration', 'PropertyValue', 'QualitativeValue', 'QuantitativeValue', 'StructuredValue']
+    ];
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'maxValue' => 'The upper value of some characteristic or property.',
+        'measurementTechnique' => 'A technique or technology used in a Dataset (or DataDownload, DataCatalog), corresponding to the method used for measuring the corresponding variable(s) (described using variableMeasured). This is oriented towards scientific and scholarly dataset publication but may have broader applicability; it is not intended as a full representation of measurement, but rather as a high level summary for dataset discovery. For example, if variableMeasured is: molecule concentration, measurementTechnique could be: "mass spectrometry" or "nmr spectroscopy" or "colorimetry" or "immunofluorescence". If the variableMeasured is "depression rating", the measurementTechnique could be "Zung Scale" or "HAM-D" or "Beck Depression Inventory". If there are several variableMeasured properties recorded for some given data object, use a PropertyValue for each variableMeasured and attach the corresponding measurementTechnique.',
+        'minValue' => 'The lower value of some characteristic or property.',
+        'propertyID' => 'A commonly used identifier for the characteristic represented by the property, e.g. a manufacturer or a standard code for a property. propertyID can be (1) a prefixed string, mainly meant to be used with standards for product properties; (2) a site-specific, non-prefixed string (e.g. the primary key of the property or the vendor-specific id of the property), or (3) a URL indicating the type of the property, either pointing to an external vocabulary, or a Web resource that describes the property (e.g. a glossary entry). Standards bodies should promote a standard prefix for the identifiers of properties from their standards.',
+        'unitCode' => 'The unit of measurement given using the UN/CEFACT Common Code (3 characters) or a URL. Other codes than the UN/CEFACT Common Code may be used with a prefix followed by a colon.',
+        'unitText' => 'A string or text indicating the unit of measurement. Useful if you cannot provide a standard unit code for unitCode.',
+        'value' => 'The value of the quantitative value or property value node. For QuantitativeValue and MonetaryAmount, the recommended type for values is \'Number\'. For PropertyValue, it can be \'Text;\', \'Number\', \'Boolean\', or \'StructuredValue\'. Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.',
+        'valueReference' => 'A pointer to a secondary value that provides additional information on the original value, e.g. a reference temperature.'
+    ];
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
     /**
      * The upper value of some characteristic or property.
      *
      * @var float [schema.org types: Number]
      */
     public $maxValue;
-
     /**
      * A technique or technology used in a Dataset (or DataDownload, DataCatalog),
      * corresponding to the method used for measuring the corresponding
@@ -123,7 +180,6 @@ class PropertyValue extends StructuredValue
      * @var mixed|string|string [schema.org types: Text, URL]
      */
     public $measurementTechnique;
-
     /**
      * The lower value of some characteristic or property.
      *
@@ -131,6 +187,8 @@ class PropertyValue extends StructuredValue
      */
     public $minValue;
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * A commonly used identifier for the characteristic represented by the
      * property, e.g. a manufacturer or a standard code for a property. propertyID
@@ -145,7 +203,6 @@ class PropertyValue extends StructuredValue
      * @var mixed|string|string [schema.org types: Text, URL]
      */
     public $propertyID;
-
     /**
      * The unit of measurement given using the UN/CEFACT Common Code (3
      * characters) or a URL. Other codes than the UN/CEFACT Common Code may be
@@ -154,7 +211,6 @@ class PropertyValue extends StructuredValue
      * @var mixed|string|string [schema.org types: Text, URL]
      */
     public $unitCode;
-
     /**
      * A string or text indicating the unit of measurement. Useful if you cannot
      * provide a standard unit code for unitCode.
@@ -162,7 +218,6 @@ class PropertyValue extends StructuredValue
      * @var string [schema.org types: Text]
      */
     public $unitText;
-
     /**
      * The value of the quantitative value or property value node. For
      * QuantitativeValue and MonetaryAmount, the recommended type for values is
@@ -176,7 +231,6 @@ class PropertyValue extends StructuredValue
      * @var mixed|bool|float|StructuredValue|string [schema.org types: Boolean, Number, StructuredValue, Text]
      */
     public $value;
-
     /**
      * A pointer to a secondary value that provides additional information on the
      * original value, e.g. a reference temperature.
@@ -185,80 +239,13 @@ class PropertyValue extends StructuredValue
      */
     public $valueReference;
 
-    // Static Protected Properties
-    // =========================================================================
-
-    /**
-     * The Schema.org Property Names
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyNames = [
-        'maxValue',
-        'measurementTechnique',
-        'minValue',
-        'propertyID',
-        'unitCode',
-        'unitText',
-        'value',
-        'valueReference'
-    ];
-
-    /**
-     * The Schema.org Property Expected Types
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyExpectedTypes = [
-        'maxValue' => ['Number'],
-        'measurementTechnique' => ['Text','URL'],
-        'minValue' => ['Number'],
-        'propertyID' => ['Text','URL'],
-        'unitCode' => ['Text','URL'],
-        'unitText' => ['Text'],
-        'value' => ['Boolean','Number','StructuredValue','Text'],
-        'valueReference' => ['Enumeration','PropertyValue','QualitativeValue','QuantitativeValue','StructuredValue']
-    ];
-
-    /**
-     * The Schema.org Property Descriptions
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyDescriptions = [
-        'maxValue' => 'The upper value of some characteristic or property.',
-        'measurementTechnique' => 'A technique or technology used in a Dataset (or DataDownload, DataCatalog), corresponding to the method used for measuring the corresponding variable(s) (described using variableMeasured). This is oriented towards scientific and scholarly dataset publication but may have broader applicability; it is not intended as a full representation of measurement, but rather as a high level summary for dataset discovery. For example, if variableMeasured is: molecule concentration, measurementTechnique could be: "mass spectrometry" or "nmr spectroscopy" or "colorimetry" or "immunofluorescence". If the variableMeasured is "depression rating", the measurementTechnique could be "Zung Scale" or "HAM-D" or "Beck Depression Inventory". If there are several variableMeasured properties recorded for some given data object, use a PropertyValue for each variableMeasured and attach the corresponding measurementTechnique.',
-        'minValue' => 'The lower value of some characteristic or property.',
-        'propertyID' => 'A commonly used identifier for the characteristic represented by the property, e.g. a manufacturer or a standard code for a property. propertyID can be (1) a prefixed string, mainly meant to be used with standards for product properties; (2) a site-specific, non-prefixed string (e.g. the primary key of the property or the vendor-specific id of the property), or (3) a URL indicating the type of the property, either pointing to an external vocabulary, or a Web resource that describes the property (e.g. a glossary entry). Standards bodies should promote a standard prefix for the identifiers of properties from their standards.',
-        'unitCode' => 'The unit of measurement given using the UN/CEFACT Common Code (3 characters) or a URL. Other codes than the UN/CEFACT Common Code may be used with a prefix followed by a colon.',
-        'unitText' => 'A string or text indicating the unit of measurement. Useful if you cannot provide a standard unit code for unitCode.',
-        'value' => 'The value of the quantitative value or property value node. For QuantitativeValue and MonetaryAmount, the recommended type for values is \'Number\'. For PropertyValue, it can be \'Text;\', \'Number\', \'Boolean\', or \'StructuredValue\'. Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.',
-        'valueReference' => 'A pointer to a secondary value that provides additional information on the original value, e.g. a reference temperature.'
-    ];
-
-    /**
-     * The Schema.org Google Required Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRequiredSchema = [
-    ];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRecommendedSchema = [
-    ];
-
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -288,13 +275,13 @@ class PropertyValue extends StructuredValue
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['maxValue','measurementTechnique','minValue','propertyID','unitCode','unitText','value','valueReference'], 'validateJsonSchema'],
+            [['maxValue', 'measurementTechnique', 'minValue', 'propertyID', 'unitCode', 'unitText', 'value', 'valueReference'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

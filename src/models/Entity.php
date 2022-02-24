@@ -213,7 +213,7 @@ class Entity extends VarsModel
     // Public Methods
     // =========================================================================
 
-    public function init()
+    public function init(): void
     {
         parent::init();
     }

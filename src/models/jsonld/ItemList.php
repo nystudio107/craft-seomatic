@@ -93,7 +93,53 @@ class ItemList extends Intangible
 
     // Public Properties
     // =========================================================================
+    /**
+     * The Schema.org Property Names
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyNames = [
+        'itemListElement',
+        'itemListOrder',
+        'numberOfItems'
+    ];
+    /**
+     * The Schema.org Property Expected Types
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyExpectedTypes = [
+        'itemListElement' => ['ListItem', 'Text', 'Thing'],
+        'itemListOrder' => ['ItemListOrderType', 'Text'],
+        'numberOfItems' => ['Integer']
+    ];
+    /**
+     * The Schema.org Property Descriptions
+     *
+     * @var array
+     */
+    static protected $_schemaPropertyDescriptions = [
+        'itemListElement' => 'For itemListElement values, you can use simple strings (e.g. "Peter", "Paul", "Mary"), existing entities, or use ListItem. Text values are best if the elements in the list are plain strings. Existing entities are best for a simple, unordered list of existing things in your data. ListItem is used with ordered lists when you want to provide additional context about the element in that list or when the same item might be in different places in different lists. Note: The order of elements in your mark-up is not sufficient for indicating the order or elements. Use ListItem with a \'position\' property in such cases.',
+        'itemListOrder' => 'Type of ordering (e.g. Ascending, Descending, Unordered).',
+        'numberOfItems' => 'The number of items in an ItemList. Note that some descriptions might not fully describe all items in a list (e.g., multi-page pagination); in such cases, the numberOfItems would be for the entire list.'
+    ];
 
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The Schema.org Google Required Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRequiredSchema = [
+    ];
+    /**
+     * The Schema.org composed Google Recommended Schema for this type
+     *
+     * @var array
+     */
+    static protected $_googleRecommendedSchema = [
+    ];
     /**
      * For itemListElement values, you can use simple strings (e.g. "Peter",
      * "Paul", "Mary"), existing entities, or use ListItem. Text values are best
@@ -108,14 +154,12 @@ class ItemList extends Intangible
      * @var mixed|ListItem|string|Thing [schema.org types: ListItem, Text, Thing]
      */
     public $itemListElement;
-
     /**
      * Type of ordering (e.g. Ascending, Descending, Unordered).
      *
      * @var mixed|ItemListOrderType|string [schema.org types: ItemListOrderType, Text]
      */
     public $itemListOrder;
-
     /**
      * The number of items in an ItemList. Note that some descriptions might not
      * fully describe all items in a list (e.g., multi-page pagination); in such
@@ -125,65 +169,13 @@ class ItemList extends Intangible
      */
     public $numberOfItems;
 
-    // Static Protected Properties
-    // =========================================================================
-
-    /**
-     * The Schema.org Property Names
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyNames = [
-        'itemListElement',
-        'itemListOrder',
-        'numberOfItems'
-    ];
-
-    /**
-     * The Schema.org Property Expected Types
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyExpectedTypes = [
-        'itemListElement' => ['ListItem','Text','Thing'],
-        'itemListOrder' => ['ItemListOrderType','Text'],
-        'numberOfItems' => ['Integer']
-    ];
-
-    /**
-     * The Schema.org Property Descriptions
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyDescriptions = [
-        'itemListElement' => 'For itemListElement values, you can use simple strings (e.g. "Peter", "Paul", "Mary"), existing entities, or use ListItem. Text values are best if the elements in the list are plain strings. Existing entities are best for a simple, unordered list of existing things in your data. ListItem is used with ordered lists when you want to provide additional context about the element in that list or when the same item might be in different places in different lists. Note: The order of elements in your mark-up is not sufficient for indicating the order or elements. Use ListItem with a \'position\' property in such cases.',
-        'itemListOrder' => 'Type of ordering (e.g. Ascending, Descending, Unordered).',
-        'numberOfItems' => 'The number of items in an ItemList. Note that some descriptions might not fully describe all items in a list (e.g., multi-page pagination); in such cases, the numberOfItems would be for the entire list.'
-    ];
-
-    /**
-     * The Schema.org Google Required Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRequiredSchema = [
-    ];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRecommendedSchema = [
-    ];
-
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -213,13 +205,13 @@ class ItemList extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['itemListElement','itemListOrder','numberOfItems'], 'validateJsonSchema'],
+            [['itemListElement', 'itemListOrder', 'numberOfItems'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

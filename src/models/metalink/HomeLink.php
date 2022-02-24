@@ -41,7 +41,7 @@ class HomeLink extends MetaLink
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
     }
@@ -49,7 +49,7 @@ class HomeLink extends MetaLink
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [

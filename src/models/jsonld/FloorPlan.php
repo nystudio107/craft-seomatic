@@ -98,109 +98,6 @@ class FloorPlan extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * An amenity feature (e.g. a characteristic or service) of the Accommodation.
-     * This generic property does not make a statement about whether the feature
-     * is included in an offer for the main accommodation or available at extra
-     * costs.
-     *
-     * @var LocationFeatureSpecification [schema.org types: LocationFeatureSpecification]
-     */
-    public $amenityFeature;
-
-    /**
-     * The size of the accommodation, e.g. in square meter or squarefoot. Typical
-     * unit code(s): MTK for square meter, FTK for square foot, or YDK for square
-     * yard
-     *
-     * @var QuantitativeValue [schema.org types: QuantitativeValue]
-     */
-    public $floorSize;
-
-    /**
-     * Indicates some accommodation that this floor plan describes.
-     *
-     * @var Accommodation [schema.org types: Accommodation]
-     */
-    public $isPlanForApartment;
-
-    /**
-     * Indicates the total (available plus unavailable) number of accommodation
-     * units in an ApartmentComplex, or the number of accommodation units for a
-     * specific FloorPlan (within its specific ApartmentComplex). See also
-     * numberOfAvailableAccommodationUnits.
-     *
-     * @var QuantitativeValue [schema.org types: QuantitativeValue]
-     */
-    public $numberOfAccommodationUnits;
-
-    /**
-     * Indicates the number of available accommodation units in an
-     * ApartmentComplex, or the number of accommodation units for a specific
-     * FloorPlan (within its specific ApartmentComplex). See also
-     * numberOfAccommodationUnits.
-     *
-     * @var QuantitativeValue [schema.org types: QuantitativeValue]
-     */
-    public $numberOfAvailableAccommodationUnits;
-
-    /**
-     * The total integer number of bathrooms in a some Accommodation, following
-     * real estate conventions as documented in RESO: "The simple sum of the
-     * number of bathrooms. For example for a property with two Full Bathrooms and
-     * one Half Bathroom, the Bathrooms Total Integer will be 3.". See also
-     * numberOfRooms.
-     *
-     * @var int [schema.org types: Integer]
-     */
-    public $numberOfBathroomsTotal;
-
-    /**
-     * The total integer number of bedrooms in a some Accommodation,
-     * ApartmentComplex or FloorPlan.
-     *
-     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
-     */
-    public $numberOfBedrooms;
-
-    /**
-     * Number of full bathrooms - The total number of full and ¾ bathrooms in an
-     * Accommodation. This corresponds to the BathroomsFull field in RESO.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $numberOfFullBathrooms;
-
-    /**
-     * Number of partial bathrooms - The total number of half and ¼ bathrooms in
-     * an Accommodation. This corresponds to the BathroomsPartial field in RESO.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $numberOfPartialBathrooms;
-
-    /**
-     * The number of rooms (excluding bathrooms and closets) of the accommodation
-     * or lodging business. Typical unit code(s): ROM for room or C62 for no unit.
-     * The type of room can be put in the unitText property of the
-     * QuantitativeValue.
-     *
-     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
-     */
-    public $numberOfRooms;
-
-    /**
-     * Indicates whether pets are allowed to enter the accommodation or lodging
-     * business. More detailed information can be put in a text value.
-     *
-     * @var mixed|bool|string [schema.org types: Boolean, Text]
-     */
-    public $petsAllowed;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -219,7 +116,6 @@ class FloorPlan extends Intangible
         'numberOfRooms',
         'petsAllowed'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -232,13 +128,12 @@ class FloorPlan extends Intangible
         'numberOfAccommodationUnits' => ['QuantitativeValue'],
         'numberOfAvailableAccommodationUnits' => ['QuantitativeValue'],
         'numberOfBathroomsTotal' => ['Integer'],
-        'numberOfBedrooms' => ['Number','QuantitativeValue'],
+        'numberOfBedrooms' => ['Number', 'QuantitativeValue'],
         'numberOfFullBathrooms' => ['Number'],
         'numberOfPartialBathrooms' => ['Number'],
-        'numberOfRooms' => ['Number','QuantitativeValue'],
-        'petsAllowed' => ['Boolean','Text']
+        'numberOfRooms' => ['Number', 'QuantitativeValue'],
+        'petsAllowed' => ['Boolean', 'Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -257,7 +152,6 @@ class FloorPlan extends Intangible
         'numberOfRooms' => 'The number of rooms (excluding bathrooms and closets) of the accommodation or lodging business. Typical unit code(s): ROM for room or C62 for no unit. The type of room can be put in the unitText property of the QuantitativeValue.',
         'petsAllowed' => 'Indicates whether pets are allowed to enter the accommodation or lodging business. More detailed information can be put in a text value.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -265,7 +159,6 @@ class FloorPlan extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -273,14 +166,105 @@ class FloorPlan extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * An amenity feature (e.g. a characteristic or service) of the Accommodation.
+     * This generic property does not make a statement about whether the feature
+     * is included in an offer for the main accommodation or available at extra
+     * costs.
+     *
+     * @var LocationFeatureSpecification [schema.org types: LocationFeatureSpecification]
+     */
+    public $amenityFeature;
+    /**
+     * The size of the accommodation, e.g. in square meter or squarefoot. Typical
+     * unit code(s): MTK for square meter, FTK for square foot, or YDK for square
+     * yard
+     *
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
+     */
+    public $floorSize;
+    /**
+     * Indicates some accommodation that this floor plan describes.
+     *
+     * @var Accommodation [schema.org types: Accommodation]
+     */
+    public $isPlanForApartment;
+    /**
+     * Indicates the total (available plus unavailable) number of accommodation
+     * units in an ApartmentComplex, or the number of accommodation units for a
+     * specific FloorPlan (within its specific ApartmentComplex). See also
+     * numberOfAvailableAccommodationUnits.
+     *
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
+     */
+    public $numberOfAccommodationUnits;
+    /**
+     * Indicates the number of available accommodation units in an
+     * ApartmentComplex, or the number of accommodation units for a specific
+     * FloorPlan (within its specific ApartmentComplex). See also
+     * numberOfAccommodationUnits.
+     *
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
+     */
+    public $numberOfAvailableAccommodationUnits;
+    /**
+     * The total integer number of bathrooms in a some Accommodation, following
+     * real estate conventions as documented in RESO: "The simple sum of the
+     * number of bathrooms. For example for a property with two Full Bathrooms and
+     * one Half Bathroom, the Bathrooms Total Integer will be 3.". See also
+     * numberOfRooms.
+     *
+     * @var int [schema.org types: Integer]
+     */
+    public $numberOfBathroomsTotal;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The total integer number of bedrooms in a some Accommodation,
+     * ApartmentComplex or FloorPlan.
+     *
+     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
+     */
+    public $numberOfBedrooms;
+    /**
+     * Number of full bathrooms - The total number of full and ¾ bathrooms in an
+     * Accommodation. This corresponds to the BathroomsFull field in RESO.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $numberOfFullBathrooms;
+    /**
+     * Number of partial bathrooms - The total number of half and ¼ bathrooms in
+     * an Accommodation. This corresponds to the BathroomsPartial field in RESO.
+     *
+     * @var float [schema.org types: Number]
+     */
+    public $numberOfPartialBathrooms;
+    /**
+     * The number of rooms (excluding bathrooms and closets) of the accommodation
+     * or lodging business. Typical unit code(s): ROM for room or C62 for no unit.
+     * The type of room can be put in the unitText property of the
+     * QuantitativeValue.
+     *
+     * @var mixed|float|QuantitativeValue [schema.org types: Number, QuantitativeValue]
+     */
+    public $numberOfRooms;
+    /**
+     * Indicates whether pets are allowed to enter the accommodation or lodging
+     * business. More detailed information can be put in a text value.
+     *
+     * @var mixed|bool|string [schema.org types: Boolean, Text]
+     */
+    public $petsAllowed;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -310,13 +294,13 @@ class FloorPlan extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['amenityFeature','floorSize','isPlanForApartment','numberOfAccommodationUnits','numberOfAvailableAccommodationUnits','numberOfBathroomsTotal','numberOfBedrooms','numberOfFullBathrooms','numberOfPartialBathrooms','numberOfRooms','petsAllowed'], 'validateJsonSchema'],
+            [['amenityFeature', 'floorSize', 'isPlanForApartment', 'numberOfAccommodationUnits', 'numberOfAvailableAccommodationUnits', 'numberOfBathroomsTotal', 'numberOfBedrooms', 'numberOfFullBathrooms', 'numberOfPartialBathrooms', 'numberOfRooms', 'petsAllowed'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

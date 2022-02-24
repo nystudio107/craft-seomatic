@@ -92,25 +92,6 @@ class Audience extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The target group associated with a given audience (e.g. veterans, car
-     * owners, musicians, etc.).
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $audienceType;
-
-    /**
-     * The geographic area associated with the audience.
-     *
-     * @var AdministrativeArea [schema.org types: AdministrativeArea]
-     */
-    public $geographicArea;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -120,7 +101,6 @@ class Audience extends Intangible
         'audienceType',
         'geographicArea'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -131,6 +111,8 @@ class Audience extends Intangible
         'geographicArea' => ['AdministrativeArea']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -140,7 +122,6 @@ class Audience extends Intangible
         'audienceType' => 'The target group associated with a given audience (e.g. veterans, car owners, musicians, etc.).',
         'geographicArea' => 'The geographic area associated with the audience.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -148,7 +129,6 @@ class Audience extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -156,14 +136,27 @@ class Audience extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The target group associated with a given audience (e.g. veterans, car
+     * owners, musicians, etc.).
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $audienceType;
+    /**
+     * The geographic area associated with the audience.
+     *
+     * @var AdministrativeArea [schema.org types: AdministrativeArea]
+     */
+    public $geographicArea;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -193,13 +186,13 @@ class Audience extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['audienceType','geographicArea'], 'validateJsonSchema'],
+            [['audienceType', 'geographicArea'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

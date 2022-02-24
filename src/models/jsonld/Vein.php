@@ -91,33 +91,6 @@ class Vein extends Vessel
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The vasculature that the vein drains into.
-     *
-     * @var Vessel [schema.org types: Vessel]
-     */
-    public $drainsTo;
-
-    /**
-     * The anatomical or organ system drained by this vessel; generally refers to
-     * a specific part of an organ.
-     *
-     * @var mixed|AnatomicalStructure|AnatomicalSystem [schema.org types: AnatomicalStructure, AnatomicalSystem]
-     */
-    public $regionDrained;
-
-    /**
-     * The anatomical or organ system that the vein flows into; a larger structure
-     * that the vein connects to.
-     *
-     * @var AnatomicalStructure [schema.org types: AnatomicalStructure]
-     */
-    public $tributary;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -128,7 +101,6 @@ class Vein extends Vessel
         'regionDrained',
         'tributary'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -136,10 +108,9 @@ class Vein extends Vessel
      */
     static protected $_schemaPropertyExpectedTypes = [
         'drainsTo' => ['Vessel'],
-        'regionDrained' => ['AnatomicalStructure','AnatomicalSystem'],
+        'regionDrained' => ['AnatomicalStructure', 'AnatomicalSystem'],
         'tributary' => ['AnatomicalStructure']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -151,6 +122,8 @@ class Vein extends Vessel
         'tributary' => 'The anatomical or organ system that the vein flows into; a larger structure that the vein connects to.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -158,7 +131,6 @@ class Vein extends Vessel
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -166,14 +138,34 @@ class Vein extends Vessel
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The vasculature that the vein drains into.
+     *
+     * @var Vessel [schema.org types: Vessel]
+     */
+    public $drainsTo;
+    /**
+     * The anatomical or organ system drained by this vessel; generally refers to
+     * a specific part of an organ.
+     *
+     * @var mixed|AnatomicalStructure|AnatomicalSystem [schema.org types: AnatomicalStructure, AnatomicalSystem]
+     */
+    public $regionDrained;
+    /**
+     * The anatomical or organ system that the vein flows into; a larger structure
+     * that the vein connects to.
+     *
+     * @var AnatomicalStructure [schema.org types: AnatomicalStructure]
+     */
+    public $tributary;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -203,13 +195,13 @@ class Vein extends Vessel
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['drainsTo','regionDrained','tributary'], 'validateJsonSchema'],
+            [['drainsTo', 'regionDrained', 'tributary'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

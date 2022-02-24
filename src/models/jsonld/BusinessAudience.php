@@ -92,31 +92,6 @@ class BusinessAudience extends Audience
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * The number of employees in an organization e.g. business.
-     *
-     * @var QuantitativeValue [schema.org types: QuantitativeValue]
-     */
-    public $numberOfEmployees;
-
-    /**
-     * The size of the business in annual revenue.
-     *
-     * @var QuantitativeValue [schema.org types: QuantitativeValue]
-     */
-    public $yearlyRevenue;
-
-    /**
-     * The age of the business.
-     *
-     * @var QuantitativeValue [schema.org types: QuantitativeValue]
-     */
-    public $yearsInOperation;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -127,7 +102,6 @@ class BusinessAudience extends Audience
         'yearlyRevenue',
         'yearsInOperation'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -138,7 +112,6 @@ class BusinessAudience extends Audience
         'yearlyRevenue' => ['QuantitativeValue'],
         'yearsInOperation' => ['QuantitativeValue']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -150,6 +123,8 @@ class BusinessAudience extends Audience
         'yearsInOperation' => 'The age of the business.'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -157,7 +132,6 @@ class BusinessAudience extends Audience
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -165,14 +139,32 @@ class BusinessAudience extends Audience
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * The number of employees in an organization e.g. business.
+     *
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
+     */
+    public $numberOfEmployees;
+    /**
+     * The size of the business in annual revenue.
+     *
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
+     */
+    public $yearlyRevenue;
+    /**
+     * The age of the business.
+     *
+     * @var QuantitativeValue [schema.org types: QuantitativeValue]
+     */
+    public $yearsInOperation;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -202,13 +194,13 @@ class BusinessAudience extends Audience
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['numberOfEmployees','yearlyRevenue','yearsInOperation'], 'validateJsonSchema'],
+            [['numberOfEmployees', 'yearlyRevenue', 'yearsInOperation'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

@@ -91,55 +91,6 @@ class GeoCoordinates extends StructuredValue
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Physical address of the item.
-     *
-     * @var mixed|PostalAddress|string [schema.org types: PostalAddress, Text]
-     */
-    public $address;
-
-    /**
-     * The country. For example, USA. You can also provide the two-letter ISO
-     * 3166-1 alpha-2 country code.
-     *
-     * @var mixed|Country|string [schema.org types: Country, Text]
-     */
-    public $addressCountry;
-
-    /**
-     * The elevation of a location (WGS 84). Values may be of the form 'NUMBER
-     * UNITOFMEASUREMENT' (e.g., '1,000 m', '3,200 ft') while numbers alone should
-     * be assumed to be a value in meters.
-     *
-     * @var mixed|float|string [schema.org types: Number, Text]
-     */
-    public $elevation;
-
-    /**
-     * The latitude of a location. For example 37.42242 (WGS 84).
-     *
-     * @var mixed|float|string [schema.org types: Number, Text]
-     */
-    public $latitude;
-
-    /**
-     * The longitude of a location. For example -122.08585 (WGS 84).
-     *
-     * @var mixed|float|string [schema.org types: Number, Text]
-     */
-    public $longitude;
-
-    /**
-     * The postal code. For example, 94043.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $postalCode;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -153,21 +104,19 @@ class GeoCoordinates extends StructuredValue
         'longitude',
         'postalCode'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'address' => ['PostalAddress','Text'],
-        'addressCountry' => ['Country','Text'],
-        'elevation' => ['Number','Text'],
-        'latitude' => ['Number','Text'],
-        'longitude' => ['Number','Text'],
+        'address' => ['PostalAddress', 'Text'],
+        'addressCountry' => ['Country', 'Text'],
+        'elevation' => ['Number', 'Text'],
+        'latitude' => ['Number', 'Text'],
+        'longitude' => ['Number', 'Text'],
         'postalCode' => ['Text']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -181,7 +130,6 @@ class GeoCoordinates extends StructuredValue
         'longitude' => 'The longitude of a location. For example -122.08585 (WGS 84).',
         'postalCode' => 'The postal code. For example, 94043.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -189,7 +137,6 @@ class GeoCoordinates extends StructuredValue
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -197,14 +144,56 @@ class GeoCoordinates extends StructuredValue
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Physical address of the item.
+     *
+     * @var mixed|PostalAddress|string [schema.org types: PostalAddress, Text]
+     */
+    public $address;
+
+    // Static Protected Properties
+    // =========================================================================
+    /**
+     * The country. For example, USA. You can also provide the two-letter ISO
+     * 3166-1 alpha-2 country code.
+     *
+     * @var mixed|Country|string [schema.org types: Country, Text]
+     */
+    public $addressCountry;
+    /**
+     * The elevation of a location (WGS 84). Values may be of the form 'NUMBER
+     * UNITOFMEASUREMENT' (e.g., '1,000 m', '3,200 ft') while numbers alone should
+     * be assumed to be a value in meters.
+     *
+     * @var mixed|float|string [schema.org types: Number, Text]
+     */
+    public $elevation;
+    /**
+     * The latitude of a location. For example 37.42242 (WGS 84).
+     *
+     * @var mixed|float|string [schema.org types: Number, Text]
+     */
+    public $latitude;
+    /**
+     * The longitude of a location. For example -122.08585 (WGS 84).
+     *
+     * @var mixed|float|string [schema.org types: Number, Text]
+     */
+    public $longitude;
+    /**
+     * The postal code. For example, 94043.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $postalCode;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -234,13 +223,13 @@ class GeoCoordinates extends StructuredValue
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['address','addressCountry','elevation','latitude','longitude','postalCode'], 'validateJsonSchema'],
+            [['address', 'addressCountry', 'elevation', 'latitude', 'longitude', 'postalCode'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

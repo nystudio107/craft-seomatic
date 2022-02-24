@@ -96,25 +96,6 @@ class ReceiveAction extends TransferAction
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * A sub property of instrument. The method of delivery.
-     *
-     * @var DeliveryMethod [schema.org types: DeliveryMethod]
-     */
-    public $deliveryMethod;
-
-    /**
-     * A sub property of participant. The participant who is at the sending end of
-     * the action.
-     *
-     * @var mixed|Audience|Organization|Person [schema.org types: Audience, Organization, Person]
-     */
-    public $sender;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -124,7 +105,6 @@ class ReceiveAction extends TransferAction
         'deliveryMethod',
         'sender'
     ];
-
     /**
      * The Schema.org Property Expected Types
      *
@@ -132,9 +112,11 @@ class ReceiveAction extends TransferAction
      */
     static protected $_schemaPropertyExpectedTypes = [
         'deliveryMethod' => ['DeliveryMethod'],
-        'sender' => ['Audience','Organization','Person']
+        'sender' => ['Audience', 'Organization', 'Person']
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Descriptions
      *
@@ -144,7 +126,6 @@ class ReceiveAction extends TransferAction
         'deliveryMethod' => 'A sub property of instrument. The method of delivery.',
         'sender' => 'A sub property of participant. The participant who is at the sending end of the action.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -152,7 +133,6 @@ class ReceiveAction extends TransferAction
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -160,14 +140,27 @@ class ReceiveAction extends TransferAction
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * A sub property of instrument. The method of delivery.
+     *
+     * @var DeliveryMethod [schema.org types: DeliveryMethod]
+     */
+    public $deliveryMethod;
+    /**
+     * A sub property of participant. The participant who is at the sending end of
+     * the action.
+     *
+     * @var mixed|Audience|Organization|Person [schema.org types: Audience, Organization, Person]
+     */
+    public $sender;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
-    public function init()
+     * @inheritdoc
+     */
+    public function init(): void
     {
         parent::init();
         self::$schemaPropertyNames = array_merge(
@@ -197,13 +190,13 @@ class ReceiveAction extends TransferAction
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['deliveryMethod','sender'], 'validateJsonSchema'],
+            [['deliveryMethod', 'sender'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
