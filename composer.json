@@ -18,8 +18,9 @@
     "facebook"
   ],
   "support": {
-    "docs": "https://nystudio107.com/plugins/seomatic/documentation",
-    "issues": "https://nystudio107.com/plugins/seomatic/support"
+    "docs": "https://nystudio107.com/docs/seomatic/",
+    "issues": "https://nystudio107.com/plugins/seomatic/support",
+    "source": "https://github.com/nystudio107/craft-seomatic"
   },
   "license": "proprietary",
   "authors": [
@@ -48,11 +49,7 @@
     }
   },
   "extra": {
-    "changelogUrl": "https://raw.githubusercontent.com/nystudio107/craft-seomatic/v4/CHANGELOG.md",
     "class": "nystudio107\\seomatic\\Seomatic",
-    "developer": "nystudio107",
-    "developerUrl": "https://nystudio107.com",
-    "documentationUrl": "https://nystudio107.com/docs/seomatic/",
     "handle": "seomatic",
     "name": "SEOmatic"
   }
