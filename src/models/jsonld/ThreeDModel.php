@@ -11,8 +11,6 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\MediaObject;
-
 /**
  * 3DModel - A 3D model represents some kind of 3D content, which may have
  * encodings in one or more MediaObjects. Many 3D formats are available (e.g.
@@ -28,7 +26,7 @@ use nystudio107\seomatic\models\jsonld\MediaObject;
  * @since     3.0.0
  * @see       http://schema.org/3DModel
  */
-class 3DModel extends MediaObject
+class ThreeDModel extends MediaObject
 {
     // Static Public Properties
     // =========================================================================
@@ -98,18 +96,6 @@ class 3DModel extends MediaObject
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Whether the 3DModel allows resizing. For example, room layout applications
-     * often do not allow 3DModel elements to be resized to reflect reality.
-     *
-     * @var bool [schema.org types: Boolean]
-     */
-    public $isResizable;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -119,6 +105,8 @@ class 3DModel extends MediaObject
         'isResizable'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
@@ -127,7 +115,6 @@ class 3DModel extends MediaObject
     static protected $_schemaPropertyExpectedTypes = [
         'isResizable' => ['Boolean']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -136,7 +123,6 @@ class 3DModel extends MediaObject
     static protected $_schemaPropertyDescriptions = [
         'isResizable' => 'Whether the 3DModel allows resizing. For example, room layout applications often do not allow 3DModel elements to be resized to reflect reality.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -144,7 +130,6 @@ class 3DModel extends MediaObject
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -152,13 +137,20 @@ class 3DModel extends MediaObject
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Whether the 3DModel allows resizing. For example, room layout applications
+     * often do not allow 3DModel elements to be resized to reflect reality.
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $isResizable;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function init(): void
     {
         parent::init();
@@ -189,8 +181,8 @@ class 3DModel extends MediaObject
     }
 
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function rules(): array
     {
         $rules = parent::rules();
