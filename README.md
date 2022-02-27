@@ -1,9 +1,9 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/quality-score.png?b=v3)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/?branch=v3) [![Build Status](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/build.png?b=v3)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/build-status/v3) 
 [![Code Intelligence Status](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/code-intelligence.svg?b=v3)](https://scrutinizer-ci.com/code-intelligence) [![Code Coverage](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/coverage.png?b=v3)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/?branch=v3)
 
-# SEOmatic plugin for Craft CMS 3.x
+# SEOmatic plugin for Craft CMS 4.x
 
-SEOmatic facilitates [modern SEO best practices](https://nystudio107.com/blog/modern-seo-snake-oil-vs-substance) & implementation for Craft CMS 3. It is a turnkey SEO system that is comprehensive, powerful, and flexible.
+SEOmatic facilitates [modern SEO best practices](https://nystudio107.com/blog/modern-seo-snake-oil-vs-substance) & implementation for Craft CMS 4. It is a turnkey SEO system that is comprehensive, powerful, and flexible.
 
 ![Screenshot](./docs/docs/resources/img/plugin-banner.jpg)
 
@@ -21,7 +21,7 @@ SEOmatic is the SEO tool that the SEO experts at [Moz.com](https://moz.com/) and
 
 ## Requirements
 
-This plugin requires Craft CMS 3.0.20 or later.
+This plugin requires Craft CMS 4.0.0 or later.
 
 ## Installation
 
@@ -39,7 +39,7 @@ To install SEOmatic, follow these steps:
 
 You can also install SEOmatic via the **Plugin Store** in the Craft Control Panel.
 
-SEOmatic works on Craft 3.x.
+SEOmatic works on Craft 4.x.
 
 ## Documentation
 
