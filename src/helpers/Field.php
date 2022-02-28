@@ -132,7 +132,7 @@ class Field
                 return self::$fieldsOfTypeFromLayoutCache[$memoKey];
             }
             $fieldClasses = self::FIELD_CLASSES[$fieldClassKey];
-            $fields = $layout->getFields();
+            $fields = $layout->getCustomFields();
             /** @var  $field BaseField */
             foreach ($fields as $field) {
                 /** @var array $fieldClasses */

@@ -41,7 +41,7 @@ class SeomaticType extends ObjectType
     /**
      * @inheritdoc
      */
-    protected function resolve($source, $arguments, $context, ResolveInfo $resolveInfo)
+    protected function resolve($source, array $arguments, $context, ResolveInfo $resolveInfo)
     {
         $fieldName = SeomaticInterface::GRAPH_QL_FIELDS[$resolveInfo->fieldName];
 

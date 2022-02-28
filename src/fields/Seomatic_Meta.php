@@ -97,7 +97,7 @@ class Seomatic_Meta extends Field
     /**
      * @inheritdoc
      */
-    public function getContentColumnType(): string
+    public function getContentColumnType(): array|string
     {
         return Schema::TYPE_TEXT;
     }
@@ -105,7 +105,7 @@ class Seomatic_Meta extends Field
     /**
      * @inheritdoc
      */
-    public function normalizeValue($value, ElementInterface $element = null)
+    public function normalizeValue($value, ?ElementInterface $element = null)
     {
         if (!empty($value)) {
             if (is_string($value)) {
@@ -127,7 +127,7 @@ class Seomatic_Meta extends Field
     /**
      * @inheritdoc
      */
-    public function getInputHtml($value, ElementInterface $element = null): string
+    public function getInputHtml($value, ?ElementInterface $element = null): string
     {
         return '';
     }

@@ -30,7 +30,7 @@ class FrontendTemplateController extends Controller
     /**
      * @inheritdoc
      */
-    protected $allowAnonymous = [
+    protected array|bool|int $allowAnonymous = [
         'humans',
         'robots',
         'ads',
