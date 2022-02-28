@@ -29,7 +29,7 @@
     }
   ],
   "require-dev": {
-    "codeception/codeception": "^3.0",
+    "codeception/codeception": "^4.0",
     "vlucas/phpdotenv": "^3.0"
   },
   "require": {
@@ -55,5 +55,13 @@
     "documentationUrl": "https://nystudio107.com/docs/seomatic/",
     "handle": "seomatic",
     "name": "SEOmatic"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "allow-plugins": {
+      "craftcms/plugin-installer": true,
+      "yiisoft/yii2-composer": true
+    }
   }
 }
