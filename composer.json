@@ -30,10 +30,12 @@
     }
   ],
   "require-dev": {
-    "codeception/codeception": "^3.0",
-    "vlucas/phpdotenv": "^3.0"
+    "codeception/codeception": "^4.0",
+    "vlucas/phpdotenv": "^3.0",
+    "craftcms/rector": "dev-main"
   },
   "require": {
+    "php": "^8.0.2",
     "craftcms/cms": "^4.0.0-alpha",
     "nystudio107/craft-plugin-manifest": "^4.0.0-beta.1",
     "php-science/textrank": "^1.0.3",
@@ -52,5 +54,13 @@
     "class": "nystudio107\\seomatic\\Seomatic",
     "handle": "seomatic",
     "name": "SEOmatic"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "allow-plugins": {
+      "craftcms/plugin-installer": true,
+      "yiisoft/yii2-composer": true
+    }
   }
 }

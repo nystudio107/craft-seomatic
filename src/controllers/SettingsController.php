@@ -89,7 +89,7 @@ class SettingsController extends Controller
     /**
      * @inheritdoc
      */
-    protected $allowAnonymous = [
+    protected array|bool|int $allowAnonymous = [
     ];
 
     // Public Methods

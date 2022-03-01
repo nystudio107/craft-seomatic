@@ -79,7 +79,7 @@ class GenerateSitemap extends BaseJob
     /**
      * @inheritdoc
      */
-    protected function defaultDescription(): string
+    protected function defaultDescription(): ?string
     {
         return Craft::t('app', 'Generating {handle} sitemap', [
             'handle' => $this->handle,

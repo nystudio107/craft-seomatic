@@ -34,7 +34,7 @@ class FileController extends Controller
     /**
      * @inheritdoc
      */
-    protected $allowAnonymous = [
+    protected array|bool|int $allowAnonymous = [
         'seo-file-link',
     ];
 
