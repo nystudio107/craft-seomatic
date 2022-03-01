@@ -12,21 +12,14 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * 3DModel - A 3D model represents some kind of 3D content, which may have
- * encodings in one or more MediaObjects. Many 3D formats are available (e.g.
- * see Wikipedia); specific encoding formats can be represented using the
- * encodingFormat property applied to the relevant MediaObject. For the case
- * of a single file published after Zip compression, the convention of
- * appending '+zip' to the encodingFormat can be used. Geospatial, AR/VR,
- * artistic/animation, gaming, engineering and scientific content can all be
- * represented using 3DModel.
+ * Class - A class, also often called a 'Type'; equivalent to rdfs:Class.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/3DModel
+ * @see       http://schema.org/Class
  */
-class ThreeDModel extends MediaObject
+class Schema_Class extends Intangible
 {
     // Static Public Properties
     // =========================================================================
@@ -36,28 +29,28 @@ class ThreeDModel extends MediaObject
      *
      * @var string
      */
-    static public $schemaTypeName = '3DModel';
+    static public $schemaTypeName = 'Class';
 
     /**
      * The Schema.org Type Scope
      *
      * @var string
      */
-    static public $schemaTypeScope = 'https://schema.org/3DModel';
+    static public $schemaTypeScope = 'https://schema.org/Class';
 
     /**
      * The Schema.org Type Description
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'A 3D model represents some kind of 3D content, which may have encodings in one or more MediaObjects. Many 3D formats are available (e.g. see Wikipedia); specific encoding formats can be represented using the encodingFormat property applied to the relevant MediaObject. For the case of a single file published after Zip compression, the convention of appending \'+zip\' to the encodingFormat can be used. Geospatial, AR/VR, artistic/animation, gaming, engineering and scientific content can all be represented using 3DModel.';
+    static public $schemaTypeDescription = 'A class, also often called a \'Type\'; equivalent to rdfs:Class.';
 
     /**
      * The Schema.org Type Extends
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'MediaObject';
+    static public $schemaTypeExtends = 'Intangible';
 
     /**
      * The Schema.org composed Property Names
@@ -102,7 +95,7 @@ class ThreeDModel extends MediaObject
      * @var array
      */
     static protected $_schemaPropertyNames = [
-        'isResizable'
+        'supersededBy'
     ];
 
     // Static Protected Properties
@@ -113,7 +106,7 @@ class ThreeDModel extends MediaObject
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'isResizable' => ['Boolean']
+        'supersededBy' => ['Class', 'Enumeration', 'Property']
     ];
     /**
      * The Schema.org Property Descriptions
@@ -121,7 +114,7 @@ class ThreeDModel extends MediaObject
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'isResizable' => 'Whether the 3DModel allows resizing. For example, room layout applications often do not allow 3DModel elements to be resized to reflect reality.'
+        'supersededBy' => 'Relates a term (i.e. a property, class or enumeration) to one that supersedes it.'
     ];
     /**
      * The Schema.org Google Required Schema for this type
@@ -138,12 +131,12 @@ class ThreeDModel extends MediaObject
     static protected $_googleRecommendedSchema = [
     ];
     /**
-     * Whether the 3DModel allows resizing. For example, room layout applications
-     * often do not allow 3DModel elements to be resized to reflect reality.
+     * Relates a term (i.e. a property, class or enumeration) to one that
+     * supersedes it.
      *
-     * @var bool [schema.org types: Boolean]
+     * @var mixed|Class|Enumeration|Property [schema.org types: Class, Enumeration, Property]
      */
-    public $isResizable;
+    public $supersededBy;
 
     // Public Methods
     // =========================================================================
@@ -187,7 +180,7 @@ class ThreeDModel extends MediaObject
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['isResizable'], 'validateJsonSchema'],
+            [['supersededBy'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);

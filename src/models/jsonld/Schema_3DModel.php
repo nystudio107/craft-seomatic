@@ -11,17 +11,22 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\Intangible;
-
 /**
- * Class - A class, also often called a 'Type'; equivalent to rdfs:Class.
+ * 3DModel - A 3D model represents some kind of 3D content, which may have
+ * encodings in one or more MediaObjects. Many 3D formats are available (e.g.
+ * see Wikipedia); specific encoding formats can be represented using the
+ * encodingFormat property applied to the relevant MediaObject. For the case
+ * of a single file published after Zip compression, the convention of
+ * appending '+zip' to the encodingFormat can be used. Geospatial, AR/VR,
+ * artistic/animation, gaming, engineering and scientific content can all be
+ * represented using 3DModel.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- * @see       http://schema.org/Class
+ * @see       http://schema.org/3DModel
  */
-class Class extends Intangible
+class Schema_3DModel extends MediaObject
 {
     // Static Public Properties
     // =========================================================================
@@ -31,28 +36,28 @@ class Class extends Intangible
      *
      * @var string
      */
-    static public $schemaTypeName = 'Class';
+    static public $schemaTypeName = '3DModel';
 
     /**
      * The Schema.org Type Scope
      *
      * @var string
      */
-    static public $schemaTypeScope = 'https://schema.org/Class';
+    static public $schemaTypeScope = 'https://schema.org/3DModel';
 
     /**
      * The Schema.org Type Description
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'A class, also often called a \'Type\'; equivalent to rdfs:Class.';
+    static public $schemaTypeDescription = 'A 3D model represents some kind of 3D content, which may have encodings in one or more MediaObjects. Many 3D formats are available (e.g. see Wikipedia); specific encoding formats can be represented using the encodingFormat property applied to the relevant MediaObject. For the case of a single file published after Zip compression, the convention of appending \'+zip\' to the encodingFormat can be used. Geospatial, AR/VR, artistic/animation, gaming, engineering and scientific content can all be represented using 3DModel.';
 
     /**
      * The Schema.org Type Extends
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'Intangible';
+    static public $schemaTypeExtends = 'MediaObject';
 
     /**
      * The Schema.org composed Property Names
@@ -91,45 +96,33 @@ class Class extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Relates a term (i.e. a property, class or enumeration) to one that
-     * supersedes it.
-     *
-     * @var mixed|Class|Enumeration|Property [schema.org types: Class, Enumeration, Property]
-     */
-    public $supersededBy;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
      * @var array
      */
     static protected $_schemaPropertyNames = [
-        'supersededBy'
+        'isResizable'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'supersededBy' => ['Class','Enumeration','Property']
+        'isResizable' => ['Boolean']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
      * @var array
      */
     static protected $_schemaPropertyDescriptions = [
-        'supersededBy' => 'Relates a term (i.e. a property, class or enumeration) to one that supersedes it.'
+        'isResizable' => 'Whether the 3DModel allows resizing. For example, room layout applications often do not allow 3DModel elements to be resized to reflect reality.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -137,7 +130,6 @@ class Class extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -145,13 +137,20 @@ class Class extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Whether the 3DModel allows resizing. For example, room layout applications
+     * often do not allow 3DModel elements to be resized to reflect reality.
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $isResizable;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function init(): void
     {
         parent::init();
@@ -182,13 +181,13 @@ class Class extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, [
-            [['supersededBy'], 'validateJsonSchema'],
+            [['isResizable'], 'validateJsonSchema'],
             [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
             [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
