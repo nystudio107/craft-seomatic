@@ -38,7 +38,7 @@ class SeomaticResolver extends Resolver
     /**
      * @inheritDoc
      */
-    public static function resolve($source, array $arguments, $context, ResolveInfo $resolveInfo)
+    public static function resolve(mixed $source, array $arguments, mixed $context, ResolveInfo $resolveInfo): mixed
     {
         // If our source is an Element, extract the URI and siteId from it
         if ($source instanceof Element) {

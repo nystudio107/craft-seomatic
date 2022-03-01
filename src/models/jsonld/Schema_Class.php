@@ -11,8 +11,6 @@
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\Intangible;
-
 /**
  * Class - A class, also often called a 'Type'; equivalent to rdfs:Class.
  *
@@ -21,7 +19,7 @@ use nystudio107\seomatic\models\jsonld\Intangible;
  * @since     3.0.0
  * @see       http://schema.org/Class
  */
-class Class extends Intangible
+class Schema_Class extends Intangible
 {
     // Static Public Properties
     // =========================================================================
@@ -91,18 +89,6 @@ class Class extends Intangible
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * Relates a term (i.e. a property, class or enumeration) to one that
-     * supersedes it.
-     *
-     * @var mixed|Class|Enumeration|Property [schema.org types: Class, Enumeration, Property]
-     */
-    public $supersededBy;
-
-    // Static Protected Properties
-    // =========================================================================
-
     /**
      * The Schema.org Property Names
      *
@@ -112,15 +98,16 @@ class Class extends Intangible
         'supersededBy'
     ];
 
+    // Static Protected Properties
+    // =========================================================================
     /**
      * The Schema.org Property Expected Types
      *
      * @var array
      */
     static protected $_schemaPropertyExpectedTypes = [
-        'supersededBy' => ['Class','Enumeration','Property']
+        'supersededBy' => ['Class', 'Enumeration', 'Property']
     ];
-
     /**
      * The Schema.org Property Descriptions
      *
@@ -129,7 +116,6 @@ class Class extends Intangible
     static protected $_schemaPropertyDescriptions = [
         'supersededBy' => 'Relates a term (i.e. a property, class or enumeration) to one that supersedes it.'
     ];
-
     /**
      * The Schema.org Google Required Schema for this type
      *
@@ -137,7 +123,6 @@ class Class extends Intangible
      */
     static protected $_googleRequiredSchema = [
     ];
-
     /**
      * The Schema.org composed Google Recommended Schema for this type
      *
@@ -145,13 +130,20 @@ class Class extends Intangible
      */
     static protected $_googleRecommendedSchema = [
     ];
+    /**
+     * Relates a term (i.e. a property, class or enumeration) to one that
+     * supersedes it.
+     *
+     * @var mixed|Class|Enumeration|Property [schema.org types: Class, Enumeration, Property]
+     */
+    public $supersededBy;
 
     // Public Methods
     // =========================================================================
 
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function init(): void
     {
         parent::init();
@@ -182,8 +174,8 @@ class Class extends Intangible
     }
 
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function rules(): array
     {
         $rules = parent::rules();

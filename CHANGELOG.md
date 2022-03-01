@@ -1,5 +1,17 @@
 # SEOmatic Changelog
 
+## 4.0.0-beta.2 - 2022.03.01
+
+### Changed
+
+* `MetaJsonLd::create()` now also looks for class names prefixed with `Schema_`
+* Updated types for Craft 4
+* Don’t exclude `/src/models/jsonld` from rector config
+
+### Fixed
+
+* Fixed generated JSON-LD classes with invalid class names
+
 ## 4.0.0-beta.1 - 2022.02.24
 
 ### Added
