@@ -36,7 +36,10 @@ class MetaJsonLd extends NonceItem
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'MetaJsonLd';
+    public const ITEM_TYPE = 'MetaJsonLd';
+
+    protected const SCHEMA_NAMESPACE_PREFIX = 'nystudio107\\seomatic\\models\\jsonld\\';
+    protected const SCHEMA_NAME_PREFIX = 'Schema_';
 
     // Static Properties
     // =========================================================================
@@ -191,19 +194,26 @@ class MetaJsonLd extends NonceItem
      */
     public static function create($schemaType, array $config = []): MetaJsonLd
     {
-        $model = null;
-
-        $className = 'nystudio107\\seomatic\\models\\jsonld\\' . $schemaType;
+        // Try the passed in $schemaType
+        $className = self::SCHEMA_NAMESPACE_PREFIX . $schemaType;
         /** @var $model MetaJsonLd */
         if (class_exists($className)) {
             self::cleanProperties($className, $config);
-            $model = new $className($config);
-        } else {
-            self::cleanProperties(__CLASS__, $config);
-            $model = new MetaJsonLd($config);
-        }
 
-        return $model;
+            return new $className($config);
+        }
+        // Try the prefixed $schemaType
+        $className = self::SCHEMA_NAMESPACE_PREFIX . self::SCHEMA_NAME_PREFIX . $schemaType;
+        /** @var $model MetaJsonLd */
+        if (class_exists($className)) {
+            self::cleanProperties($className, $config);
+
+            return new $className($config);
+        }
+        // Fall back on returning a generic schema.org type
+        self::cleanProperties(__CLASS__, $config);
+
+        return new MetaJsonLd($config);
     }
 
     // Public Methods
