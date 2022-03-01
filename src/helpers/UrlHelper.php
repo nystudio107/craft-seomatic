@@ -35,7 +35,7 @@ class UrlHelper extends CraftUrlHelper
     /**
      * @inheritDoc
      */
-    public static function siteUrl(string $path = '', $params = null, ?string $scheme = null, ?int $siteId = null): string
+    public static function siteUrl(string $path = '', $params = null, string $scheme = null, int $siteId = null): string
     {
         $siteUrl = Seomatic::$settings->siteUrlOverride;
         if (!empty($siteUrl)) {

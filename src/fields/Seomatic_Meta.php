@@ -105,7 +105,7 @@ class Seomatic_Meta extends Field
     /**
      * @inheritdoc
      */
-    public function normalizeValue($value, ?ElementInterface $element = null)
+    public function normalizeValue(mixed $value, ElementInterface $element = null): mixed
     {
         if (!empty($value)) {
             if (is_string($value)) {
@@ -127,7 +127,7 @@ class Seomatic_Meta extends Field
     /**
      * @inheritdoc
      */
-    public function getInputHtml($value, ?ElementInterface $element = null): string
+    public function getInputHtml(mixed $value, ElementInterface $element = null): string
     {
         return '';
     }

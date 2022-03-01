@@ -408,7 +408,7 @@ class Seomatic extends Plugin
     /**
      * @inheritdoc
      */
-    public function getSettingsResponse()
+    public function getSettingsResponse(): mixed
     {
         // Just redirect to the plugin settings page
         Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('seomatic/plugin'));
