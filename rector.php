@@ -6,7 +6,7 @@ use Rector\Core\Configuration\Option;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    // Skip integrations and generated JSONLD classes
+    // Optional directories to skip
     $parameters = $containerConfigurator->parameters();
     $parameters->set(Option::SKIP, [
         __DIR__ . '/src/integrations',
