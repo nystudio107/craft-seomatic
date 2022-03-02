@@ -31,8 +31,7 @@
   ],
   "require-dev": {
     "codeception/codeception": "^4.0",
-    "vlucas/phpdotenv": "^3.0",
-    "craftcms/rector": "dev-main"
+    "vlucas/phpdotenv": "^3.0"
   },
   "require": {
     "php": "^8.0.2",
@@ -54,7 +53,5 @@
     "class": "nystudio107\\seomatic\\Seomatic",
     "handle": "seomatic",
     "name": "SEOmatic"
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+  }
 }
