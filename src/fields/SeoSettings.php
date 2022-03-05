@@ -177,7 +177,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function normalizeValue(mixed $value, ElementInterface $element = null): mixed
+    public function normalizeValue(mixed $value, ?ElementInterface $element = null): mixed
     {
         $config = [];
         // Handle incoming values potentially being JSON, an array, or an object
@@ -252,7 +252,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function serializeValue(mixed $value, ElementInterface $element = null): mixed
+    public function serializeValue(mixed $value, ?ElementInterface $element = null): mixed
     {
         $value = parent::serializeValue($value, $element);
         if (!Craft::$app->getDb()->getSupportsMb4()) {
@@ -318,7 +318,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function getInputHtml(mixed $value, ElementInterface $element = null): string
+    public function getInputHtml(mixed $value, ?ElementInterface $element = null): string
     {
         $variables = [];
         // JS/CSS modules

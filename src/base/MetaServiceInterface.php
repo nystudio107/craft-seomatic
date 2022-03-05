@@ -11,6 +11,8 @@
 
 namespace nystudio107\seomatic\base;
 
+use Twig\Markup;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -54,7 +56,7 @@ interface MetaServiceInterface
     /**
      * Render all of the MetaItems in this container
      *
-     * @return \Twig_Markup|null
+     * @return Markup|null
      */
     public function render();
 
