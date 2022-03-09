@@ -335,7 +335,7 @@ class Seomatic extends Plugin
     /**
      * @inheritdoc
      */
-    public function getSettings(): ?Settings
+    public function getSettings(): ?Model
     {
         // For all the emojis
         /* @var Settings $settingsModel */
@@ -411,7 +411,7 @@ class Seomatic extends Plugin
     public function getSettingsResponse(): mixed
     {
         // Just redirect to the plugin settings page
-        Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('seomatic/plugin'));
+        return Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('seomatic/plugin'));
     }
 
     /**

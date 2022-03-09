@@ -1,5 +1,11 @@
 # SEOmatic Changelog
 
+## 4.0.0-beta.3 - 2022.03.04
+
+### Fixed
+
+* Updated types for Craft CMS `4.0.0-alpha.1` via Rector
+
 ## 4.0.0-beta.2 - 2022.03.01
 
 ### Changed
