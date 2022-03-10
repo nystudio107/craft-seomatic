@@ -7,6 +7,7 @@
 
 ### Fixed
 * Fix issues with editable table fields, due to the change in default values for Craft 4
+* Ensure that the `metaCacheDuration` is normalized to `0` if set to `null` or `'null'`
 
 ## 4.0.0-beta.3 - 2022.03.04
 
