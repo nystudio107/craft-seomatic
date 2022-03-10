@@ -38,51 +38,52 @@
                 <h2>{{ subSectionTitle ~ " Settings"|t("seomatic") }}</h2>
                 {% namespace "scripts[#{scriptHandle}]" %}
                     <div class="field seomatic-script-lightswitch">
-                    {{ forms.lightswitchField({
-                        label: "#{scriptData.name} Enabled"|t("seomatic"),
-                        instructions: "#{scriptData.description}"|t("seomatic"),
-                        id: "include",
-                        name: "include",
-                        on: scriptData.include,
-                        warning: false,
-                        errors: scriptData.getErrors("include"),
-                    }) }}
+                        {{ forms.lightswitchField({
+                            label: "#{scriptData.name} Enabled"|t("seomatic"),
+                            instructions: "#{scriptData.description}"|t("seomatic"),
+                            id: "include",
+                            name: "include",
+                            on: scriptData.include,
+                            warning: false,
+                            errors: scriptData.getErrors("include"),
+                        }) }}
                     </div>
-                    <div class="seomatic-script-container" {% if not scriptData.include %}style="display: none;"{% endif %}>
+                    <div class="seomatic-script-container"
+                         {% if not scriptData.include %}style="display: none;"{% endif %}>
                         {% for varHandle,varData in scriptData.vars %}
                             {% switch varData.type %}
-                                {% case "bool" %}
-                                    {{ forms.lightswitchField({
+                            {% case "bool" %}
+                                {{ forms.lightswitchField({
+                                    label: "#{varData.title}"|t("seomatic"),
+                                    instructions: "#{varData.instructions}"|t("seomatic"),
+                                    id: "vars-#{varHandle}",
+                                    name: "vars[#{varHandle}]",
+                                    on: varData.value,
+                                    warning: false,
+                                }) }}
+
+                            {% case "string" %}
+                                {% if seomatic.helper.craft31 %}
+                                    {{ forms.autosuggestField({
+                                        label: "#{varData.title}"|t("seomatic"),
+                                        instructions: "#{varData.instructions}"|t("seomatic"),
+                                        suggestEnvVars: true,
+                                        id: "vars-#{varHandle}",
+                                        name: "vars[#{varHandle}]",
+                                        value: varData.value ?? "",
+                                        warning: false,
+                                    }) }}
+                                {% else %}
+                                    {{ forms.textField({
                                         label: "#{varData.title}"|t("seomatic"),
                                         instructions: "#{varData.instructions}"|t("seomatic"),
                                         id: "vars-#{varHandle}",
                                         name: "vars[#{varHandle}]",
-                                        on: varData.value,
+                                        value: varData.value ?? "",
                                         warning: false,
                                     }) }}
-
-                                {% case "string" %}
-                                    {% if seomatic.helper.craft31 %}
-                                        {{ forms.autosuggestField({
-                                            label: "#{varData.title}"|t("seomatic"),
-                                            instructions: "#{varData.instructions}"|t("seomatic"),
-                                            suggestEnvVars: true,
-                                            id: "vars-#{varHandle}",
-                                            name: "vars[#{varHandle}]",
-                                            value: varData.value ?? "",
-                                            warning: false,
-                                        }) }}
-                                    {% else %}
-                                        {{ forms.textField({
-                                            label: "#{varData.title}"|t("seomatic"),
-                                            instructions: "#{varData.instructions}"|t("seomatic"),
-                                            id: "vars-#{varHandle}",
-                                            name: "vars[#{varHandle}]",
-                                            value: varData.value ?? "",
-                                            warning: false,
-                                        }) }}
-                                    {% endif %}
-                                {% default %}
+                                {% endif %}
+                            {% default %}
 
                             {% endswitch %}
                         {% endfor %}
@@ -93,6 +94,9 @@
                                 instructions: "Additional attributes to add to the `<script>` tag"|t("seomatic"),
                                 id: 'tagAttrs',
                                 name: 'tagAttrs',
+                                allowAdd: true,
+                                allowDelete: true,
+                                allowReorder: true,
                                 required: false,
                                 defaultValues: {
                                     name: "",
@@ -127,7 +131,7 @@
                                 errors: scriptData.getErrors("templateString"),
                             }) }}
                             {% js %}
-                                makeMonacoEditor("{{ "templateString"|namespaceInputId }}", "{{ scriptData.name }}");
+                            makeMonacoEditor("{{ "templateString"|namespaceInputId }}", "{{ scriptData.name }}");
                             {% endjs %}
                             {{ forms.selectField({
                                 label: "Script Render Location"|t("seomatic"),
@@ -156,7 +160,7 @@
                                 errors: scriptData.getErrors("bodyTemplateString"),
                             }) }}
                             {% js %}
-                                makeMonacoEditor("{{ "bodyTemplateString"|namespaceInputId }}");
+                            makeMonacoEditor("{{ "bodyTemplateString"|namespaceInputId }}");
                             {% endjs %}
 
                             {{ forms.selectField({

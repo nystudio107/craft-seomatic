@@ -2,154 +2,163 @@
 {% import "_includes/forms" as forms %}
 
 <fieldset>
-{% if pageContext != "field" %}
-<div class="flex">
-    <div class="flex-grow"></div>
-    <a href="{{ seomatic.helper.sitemapIndexForSiteId(currentSiteId) }}" class="btn livepreviewbtn" rel="noopener" target="_blank">{{ 'View Sitemap Index'|t("seomatic") }}</a>
-    <a href="{{ seomatic.helper.sitemapUrlForBundle(currentSourceBundleType, currentSourceHandle, currentSiteId) }}" class="btn livepreviewbtn" rel="noopener" target="_blank">{{ "View #{currentSourceBundleType |capitalize} Sitemap"|t("seomatic") }}</a>
-</div>
-{% endif %}
-
-{% if parentBundles is not defined %}
-    {% set parentBundles = [] %}
-{% endif %}
-
-{############### Sitemap Enabled ###############}
-
-{% if field is not defined or 'sitemapUrls' in field.sitemapEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_sitemapUrls.twig" %}
-{% endif %}
-
-{############### Sitemap Assets ###############}
-
-{% if field is not defined or 'sitemapUrls' in field.sitemapEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_sitemapAssets.twig" %}
-{% endif %}
-
-{############### Sitemap Files ###############}
-
-{% if field is not defined or 'sitemapFiles' in field.sitemapEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_sitemapFiles.twig" %}
-{% endif %}
-
-{############### Sitemap Alt URLS ###############}
-
-{% if field is not defined or 'sitemapAltLinks' in field.sitemapEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_sitemapAltLinks.twig" %}
-{% endif %}
-
-{############### Sitemap Change Frequency ###############}
-
-{% if field is not defined or 'sitemapChangeFreq' in field.sitemapEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_sitemapChangeFreq.twig" %}
-{% endif %}
-
-{############### Sitemap Priority ###############}
-
-{% if field is not defined or 'sitemapPriority' in field.sitemapEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_sitemapPriority.twig" %}
-{% endif %}
-
-{############### Sitemap Limit ###############}
-
-{% if field is not defined or 'sitemapLimit' in field.sitemapEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_sitemapLimit.twig" %}
-{% endif %}
-
-{% namespace "metaSitemapVars" %}
-    {% if (field is not defined or 'structureDepth' in field.sitemapEnabledFields) and sourceType == 'structure' %}
-        {{ forms.selectField({
-            label: "Structure Depth"|t("seomatic"),
-            instructions: "Controls a how deep to go into a Structure when adding URLs into the sitemap."|t("seomatic"),
-            id: "structureDepth",
-            name: "structureDepth",
-            options: {
-                "": "All",
-                "5": "5",
-                "4": "4",
-                "3": "3",
-                "2": "2",
-                "1": "1",
-            },
-            value: metaSitemapVars.structureDepth,
-            errors: metaSitemapVars.getErrors("structureDepth"),
-        }) }}
+    {% if pageContext != "field" %}
+        <div class="flex">
+            <div class="flex-grow"></div>
+            <a href="{{ seomatic.helper.sitemapIndexForSiteId(currentSiteId) }}" class="btn livepreviewbtn"
+               rel="noopener" target="_blank">{{ 'View Sitemap Index'|t("seomatic") }}</a>
+            <a href="{{ seomatic.helper.sitemapUrlForBundle(currentSourceBundleType, currentSourceHandle, currentSiteId) }}"
+               class="btn livepreviewbtn" rel="noopener"
+               target="_blank">{{ "View #{currentSourceBundleType |capitalize} Sitemap"|t("seomatic") }}</a>
+        </div>
     {% endif %}
 
-    {% if (field is not defined or 'structureDepth' in field.sitemapEnabledFields) and sourceType == 'category' %}
-        {{ forms.selectField({
-            label: "Category Depth"|t("seomatic"),
-            instructions: "Controls a how deep to go into a Category when adding URLs into the sitemap."|t("seomatic"),
-            id: "structureDepth",
-            name: "structureDepth",
-            options: {
-                "": "All",
-                "5": "5",
-                "4": "4",
-                "3": "3",
-                "2": "2",
-                "1": "1",
-            },
-            value: metaSitemapVars.structureDepth,
-            errors: metaSitemapVars.getErrors("structureDepth"),
-        }) }}
+    {% if parentBundles is not defined %}
+        {% set parentBundles = [] %}
     {% endif %}
 
-    {% if field is not defined or 'sitemapImageFieldMap' in field.sitemapEnabledFields %}
-        {{ forms.editableTableField({
-            label: "Image Sitemap Fields"|t("seomatic"),
-            instructions: "Choose what source fields from your Asset Volume field layouts to map to the image sitemap properties. [Learn more](https://support.google.com/webmasters/answer/178636?hl=en)"|t("seomatic"),
-            id: 'sitemapImageFieldMap',
-            name: 'sitemapImageFieldMap',
-            required: false,
-            cols: {
-                property: {
-                    heading: "Image Sitemap Property"|t("seomatic"),
-                    type: "singleline",
-                    width: "30%",
-                },
-                field: {
-                    heading: "Source Field"|t("seomatic"),
-                    type: "select",
-                    width: "70%",
-                    options: assetVolumeTextFieldSources,
-                },
-            },
-            rows: metaSitemapVars.sitemapImageFieldMap,
-            errors: metaSitemapVars.getErrors("sitemapImageFieldMap"),
-        }) }}
+    {# ############## Sitemap Enabled ############## #}
+
+    {% if field is not defined or 'sitemapUrls' in field.sitemapEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_sitemapUrls.twig" %}
     {% endif %}
 
-    {% if field is not defined or 'sitemapVideoFieldMap' in field.sitemapEnabledFields %}
-        {{ forms.editableTableField({
-            label: "Video Sitemap Fields"|t("seomatic"),
-            instructions: "Choose what source fields from your Asset Volume field layouts to map to the image sitemap properties. [Learn more](https://developers.google.com/webmasters/videosearch/sitemaps)"|t("seomatic"),
-            id: 'sitemapVideoFieldMap',
-            name: 'sitemapVideoFieldMap',
-            required: false,
-            cols: {
-                property: {
-                    heading: "Video Sitemap Property"|t("seomatic"),
-                    type: "singleline",
-                    width: "30%",
-                },
-                field: {
-                    heading: "Field"|t("seomatic"),
-                    type: "select",
-                    width: "70%",
-                    options: assetVolumeTextFieldSources,
-                },
-            },
-            rows: metaSitemapVars.sitemapVideoFieldMap,
-            errors: metaSitemapVars.getErrors("sitemapVideoFieldMap"),
-        }) }}
-    {% endif %}
-{% endnamespace %}
+    {# ############## Sitemap Assets ############## #}
 
-{% include "seomatic/_includes/footer-message.twig" with {
-    message: "Sitemap Indexes are automatically submitted to search engines whenever a new Section/Category Group is added."
-} %}
-{% include "seomatic/_includes/footer-message.twig" with {
-    message: "#{currentSourceBundleType |capitalize} Sitemaps are automatically submitted to search engines whenever a new Element in that Section/Category Group is added."
-} %}
+    {% if field is not defined or 'sitemapUrls' in field.sitemapEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_sitemapAssets.twig" %}
+    {% endif %}
+
+    {# ############## Sitemap Files ############## #}
+
+    {% if field is not defined or 'sitemapFiles' in field.sitemapEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_sitemapFiles.twig" %}
+    {% endif %}
+
+    {# ############## Sitemap Alt URLS ############## #}
+
+    {% if field is not defined or 'sitemapAltLinks' in field.sitemapEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_sitemapAltLinks.twig" %}
+    {% endif %}
+
+    {# ############## Sitemap Change Frequency ############## #}
+
+    {% if field is not defined or 'sitemapChangeFreq' in field.sitemapEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_sitemapChangeFreq.twig" %}
+    {% endif %}
+
+    {# ############## Sitemap Priority ############## #}
+
+    {% if field is not defined or 'sitemapPriority' in field.sitemapEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_sitemapPriority.twig" %}
+    {% endif %}
+
+    {# ############## Sitemap Limit ############## #}
+
+    {% if field is not defined or 'sitemapLimit' in field.sitemapEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_sitemapLimit.twig" %}
+    {% endif %}
+
+    {% namespace "metaSitemapVars" %}
+        {% if (field is not defined or 'structureDepth' in field.sitemapEnabledFields) and sourceType == 'structure' %}
+            {{ forms.selectField({
+                label: "Structure Depth"|t("seomatic"),
+                instructions: "Controls a how deep to go into a Structure when adding URLs into the sitemap."|t("seomatic"),
+                id: "structureDepth",
+                name: "structureDepth",
+                options: {
+                    "": "All",
+                    "5": "5",
+                    "4": "4",
+                    "3": "3",
+                    "2": "2",
+                    "1": "1",
+                },
+                value: metaSitemapVars.structureDepth,
+                errors: metaSitemapVars.getErrors("structureDepth"),
+            }) }}
+        {% endif %}
+
+        {% if (field is not defined or 'structureDepth' in field.sitemapEnabledFields) and sourceType == 'category' %}
+            {{ forms.selectField({
+                label: "Category Depth"|t("seomatic"),
+                instructions: "Controls a how deep to go into a Category when adding URLs into the sitemap."|t("seomatic"),
+                id: "structureDepth",
+                name: "structureDepth",
+                options: {
+                    "": "All",
+                    "5": "5",
+                    "4": "4",
+                    "3": "3",
+                    "2": "2",
+                    "1": "1",
+                },
+                value: metaSitemapVars.structureDepth,
+                errors: metaSitemapVars.getErrors("structureDepth"),
+            }) }}
+        {% endif %}
+
+        {% if field is not defined or 'sitemapImageFieldMap' in field.sitemapEnabledFields %}
+            {{ forms.editableTableField({
+                label: "Image Sitemap Fields"|t("seomatic"),
+                instructions: "Choose what source fields from your Asset Volume field layouts to map to the image sitemap properties. [Learn more](https://support.google.com/webmasters/answer/178636?hl=en)"|t("seomatic"),
+                id: 'sitemapImageFieldMap',
+                name: 'sitemapImageFieldMap',
+                allowAdd: true,
+                allowDelete: true,
+                allowReorder: true,
+                required: false,
+                cols: {
+                    property: {
+                        heading: "Image Sitemap Property"|t("seomatic"),
+                        type: "singleline",
+                        width: "30%",
+                    },
+                    field: {
+                        heading: "Source Field"|t("seomatic"),
+                        type: "select",
+                        width: "70%",
+                        options: assetVolumeTextFieldSources,
+                    },
+                },
+                rows: metaSitemapVars.sitemapImageFieldMap,
+                errors: metaSitemapVars.getErrors("sitemapImageFieldMap"),
+            }) }}
+        {% endif %}
+
+        {% if field is not defined or 'sitemapVideoFieldMap' in field.sitemapEnabledFields %}
+            {{ forms.editableTableField({
+                label: "Video Sitemap Fields"|t("seomatic"),
+                instructions: "Choose what source fields from your Asset Volume field layouts to map to the image sitemap properties. [Learn more](https://developers.google.com/webmasters/videosearch/sitemaps)"|t("seomatic"),
+                id: 'sitemapVideoFieldMap',
+                name: 'sitemapVideoFieldMap',
+                allowAdd: true,
+                allowDelete: true,
+                allowReorder: true,
+                required: false,
+                cols: {
+                    property: {
+                        heading: "Video Sitemap Property"|t("seomatic"),
+                        type: "singleline",
+                        width: "30%",
+                    },
+                    field: {
+                        heading: "Field"|t("seomatic"),
+                        type: "select",
+                        width: "70%",
+                        options: assetVolumeTextFieldSources,
+                    },
+                },
+                rows: metaSitemapVars.sitemapVideoFieldMap,
+                errors: metaSitemapVars.getErrors("sitemapVideoFieldMap"),
+            }) }}
+        {% endif %}
+    {% endnamespace %}
+
+    {% include "seomatic/_includes/footer-message.twig" with {
+        message: "Sitemap Indexes are automatically submitted to search engines whenever a new Section/Category Group is added."
+    } %}
+    {% include "seomatic/_includes/footer-message.twig" with {
+        message: "#{currentSourceBundleType |capitalize} Sitemaps are automatically submitted to search engines whenever a new Element in that Section/Category Group is added."
+    } %}
 </fieldset>
