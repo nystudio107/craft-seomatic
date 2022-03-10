@@ -206,11 +206,11 @@ class Settings extends VarsModel
     public $siteUrlOverride = '';
 
     /**
-     * @var int|null
+     * @var int
      * The duration of the SEOmatic meta cache in seconds.  Null means always cached until explicitly broken
      * If devMode is on, caches last 30 seconds.
      */
-    public $metaCacheDuration = null;
+    public $metaCacheDuration = 0;
 
     /**
      * @var bool Determines whether the meta container endpoint should be enabled for anonymous frontend access
@@ -241,6 +241,17 @@ class Settings extends VarsModel
 
     // Public Methods
     // =========================================================================
+
+    /**
+     * @inerhitdoc
+     */
+    public function init(): void
+    {
+        // Normalize the metaCacheDuration to an integer
+        if ($this->metaCacheDuration === null || $this->metaCacheDuration === 'null') {
+            $this->metaCacheDuration = 0;
+        }
+    }
 
     /**
      * @inheritdoc
@@ -306,7 +317,7 @@ class Settings extends VarsModel
                 ],
                 ArrayValidator::class,
             ],
-            ['metaCacheDuration', 'default', 'value' => null],
+            ['metaCacheDuration', 'default', 'value' => 0],
             ['metaCacheDuration', 'integer'],
         ];
     }
