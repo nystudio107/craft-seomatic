@@ -5,6 +5,9 @@
 ### Changed
 * Added validation rules for `metaCacheDuration` property on the `Settings` model
 
+### Fixed
+* Ensure that the `metaCacheDuration` is normalized to `0` if set to `null` or `'null'`
+
 ## 3.4.26 - 2022.02.21
 
 ### Changed
