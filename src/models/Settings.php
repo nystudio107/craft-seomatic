@@ -306,7 +306,8 @@ class Settings extends VarsModel
                 ],
                 ArrayValidator::class,
             ],
-
+            ['metaCacheDuration', 'default', 'value' => null],
+            ['metaCacheDuration', 'integer'],
         ];
     }
 
