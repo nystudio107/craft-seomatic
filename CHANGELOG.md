@@ -4,6 +4,7 @@
 
 ### Changed
 * Added validation rules for `metaCacheDuration` property on the `Settings` model
+* Change the default email address in `security.txt` to the placeholder `user@example.com`
 
 ### Fixed
 * Fix issues with editable table fields, due to the change in default values for Craft 4
