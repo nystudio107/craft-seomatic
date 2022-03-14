@@ -11,13 +11,11 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\base\SeoElementInterface;
-use nystudio107\seomatic\base\VarsModel;
-
 use craft\behaviors\EnvAttributeParserBehavior;
 use craft\validators\ArrayValidator;
-
+use nystudio107\seomatic\base\SeoElementInterface;
+use nystudio107\seomatic\base\VarsModel;
+use nystudio107\seomatic\Seomatic;
 use yii\behaviors\AttributeTypecastBehavior;
 
 /**
@@ -208,11 +206,11 @@ class Settings extends VarsModel
     public $siteUrlOverride = '';
 
     /**
-     * @var int|null
+     * @var int
      * The duration of the SEOmatic meta cache in seconds.  Null means always cached until explicitly broken
      * If devMode is on, caches last 30 seconds.
      */
-    public $metaCacheDuration = null;
+    public $metaCacheDuration = 0;
 
     /**
      * @var bool Determines whether the meta container endpoint should be enabled for anonymous frontend access
@@ -243,6 +241,17 @@ class Settings extends VarsModel
 
     // Public Methods
     // =========================================================================
+
+    /**
+     * @inerhitdoc
+     */
+    public function init()
+    {
+        // Normalize the metaCacheDuration to an integer
+        if ($this->metaCacheDuration === null || $this->metaCacheDuration === 'null') {
+            $this->metaCacheDuration = 0;
+        }
+    }
 
     /**
      * @inheritdoc
@@ -308,7 +317,8 @@ class Settings extends VarsModel
                 ],
                 ArrayValidator::class,
             ],
-
+            ['metaCacheDuration', 'default', 'value' => 0],
+            ['metaCacheDuration', 'integer'],
         ];
     }
 

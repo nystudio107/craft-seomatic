@@ -1,6 +1,6 @@
 # security.txt file for {{ siteUrl }} - more info: https://securitytxt.org/
 # (required) Contact email address for security issues
-Contact: {% set adminUser = craft.app.getUsers().userById(1) %}{{ adminUser.email ?? 'user@example.com' }}
+Contact: user@example.com
 
 # (required) Expiration date for the security information herein
 Expiration: {{ date('1year')|atom }}
