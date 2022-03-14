@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 4.0.0-beta.4 - UNRELEASED
+## 4.0.0-beta.4 - 2022.03.13
 
 ### Changed
 * Added validation rules for `metaCacheDuration` property on the `Settings` model
