@@ -39,12 +39,6 @@
     "davechild/textstatistics": "1.0.2",
     "sunra/php-simple-html-dom-parser": "^1.5.2"
   },
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://asset-packagist.org"
-    }
-  ],
   "scripts": {
     "test": "codecept run unit --coverage-xml"
   },
