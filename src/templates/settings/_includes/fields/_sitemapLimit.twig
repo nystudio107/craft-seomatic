@@ -19,19 +19,19 @@
 
         {% import "_includes/forms" as forms %}
         {% namespace "metaSitemapVars" %}
-        {{ forms.selectField({
-            id: "sitemapLimit" ~ suffix,
-            name: "sitemapLimit",
-            options: sitemapLimitOptions,
-            value: metaSitemapVars.sitemapLimit,
-            errors: metaSitemapVars.getErrors("sitemapLimit"),
-        }) }}
+            {{ forms.selectField({
+                id: "sitemapLimit" ~ suffix,
+                name: "sitemapLimit",
+                options: sitemapLimitOptions,
+                value: metaSitemapVars.sitemapLimit,
+                errors: metaSitemapVars.getErrors("sitemapLimit"),
+            }) }}
 
         {% endnamespace %}
     {% endmacro %}
 
     {% set sitemapLimitOptions = {
-        null: "None",
+        (null): "None",
         "1000": "1000",
         "500": "500",
         "200": "200",
