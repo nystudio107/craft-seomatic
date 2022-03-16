@@ -5,6 +5,7 @@
 ### Fixed
 
 * Fixed an issue in the `TwigExpressionValidator` class that prevented you from accessing the `seomatic.` variable in some circumstances ([#1076](https://github.com/nystudio107/craft-seomatic/issues/1076))
+* Fix AssetTransform/Volume classes for Craft CMS 4
 
 ## 4.0.0-beta.4 - 2022.03.13
 
