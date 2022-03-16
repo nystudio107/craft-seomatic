@@ -11,13 +11,13 @@
 
 namespace nystudio107\seomatic\validators;
 
+use Craft;
+use Exception;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\variables\SeomaticVariable;
-
-use Craft;
-
 use yii\base\Model;
 use yii\validators\Validator;
+use function is_string;
 
 /**
  * @author    nystudio107
@@ -37,15 +37,17 @@ class TwigExpressionValidator extends Validator
         /** @var Model $model */
         $value = $model->$attribute;
         $error = null;
-        if (!empty($value) && \is_string($value)) {
+        if (!empty($value) && is_string($value)) {
             try {
                 if (Seomatic::$seomaticVariable === null) {
                     Seomatic::$seomaticVariable = new SeomaticVariable();
+                    Seomatic::$plugin->metaContainers->loadGlobalMetaContainers();
+                    Seomatic::$seomaticVariable->init();
                 }
                 Craft::$app->getView()->renderString($value, [
                     'seomatic' => Seomatic::$seomaticVariable
                 ]);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $error = Craft::t(
                     'seomatic',
                     'Error rendering template string -> {error}',
