@@ -63,11 +63,12 @@
     {% endblock %}
 
 
-    {############### Twitter Image Macros ###############}
+    {# ############## Twitter Image Macros ############## #}
 
     {% macro twitterImageTransformModeField(field, imageCropModes, metaBundleSettings, suffix) %}
 
-        <div class="field" {% if field is not null and 'twitterImageTransformMode' not in field.twitterEnabledFields %}style="display: none;"{% endif %}>
+        <div class="field"
+             {% if field is not null and 'twitterImageTransformMode' not in field.twitterEnabledFields %}style="display: none;"{% endif %}>
             <div class="heading">
                 <label for="metaBundleSettings-twitterImageTransformMode{{ suffix }}">
                     {{ "Twitter Image Transform Mode"|t("seomatic") }}
@@ -94,7 +95,8 @@
     {% macro twitterImageTransformField(field, metaBundleSettings, suffix) %}
         {% import "_includes/forms" as forms %}
 
-        <div class="field" {% if field is not null and 'transformTwitterImage' not in field.twitterEnabledFields %}style="display: none;"{% endif %}>
+        <div class="field"
+             {% if field is not null and 'transformTwitterImage' not in field.twitterEnabledFields %}style="display: none;"{% endif %}>
             <div class="heading">
                 <label for="metaBundleSettings-twitterImageTransform{{ suffix }}">
                     {{ "Transform Twitter Image"|t("seomatic") }}
@@ -135,7 +137,8 @@
         {% if assetFieldSources is defined and assetFieldSources |length %}
             {% namespace "metaBundleSettings" %}
                 <div class="heading seomatic-imageSourceFromField">
-                    <label for="metaBundleSettings-twitterImageField{{ suffix }}">{{ "Asset Field: "|t("seomatic") }}</label>
+                    <label
+                        for="metaBundleSettings-twitterImageField{{ suffix }}">{{ "Asset Field: "|t("seomatic") }}</label>
                     {{ forms.select({
                         id: "twitterImageField" ~ suffix,
                         name: "twitterImageField",
@@ -160,7 +163,7 @@
                     },
                     jsClass: 'Craft.AssetSelectInput',
                     selectionLabel: "Select Twitter Image"|t("seomatic"),
-                    sources: [],
+                    sources: null,
                     limit: 1,
                     warning: false,
                     errors: metaBundleSettings.getErrors("twitterImageIds"),

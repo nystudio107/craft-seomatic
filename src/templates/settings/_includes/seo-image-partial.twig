@@ -63,10 +63,11 @@
     {% endblock %}
 
 
-    {############### SEO Image Macros ###############}
+    {# ############## SEO Image Macros ############## #}
 
     {% macro seoImageTransformModeField(field, imageCropModes, metaBundleSettings, suffix) %}
-        <div class="field" {% if field is not null and 'seoImageTransformMode' not in field.generalEnabledFields %}style="display: none;"{% endif %}>
+        <div class="field"
+             {% if field is not null and 'seoImageTransformMode' not in field.generalEnabledFields %}style="display: none;"{% endif %}>
             <div class="heading">
                 <label for="metaBundleSettings-seoImageTransformMode{{ suffix }}">
                     {{ "SEO Image Transform Mode"|t("seomatic") }}
@@ -93,7 +94,8 @@
     {% macro seoImageTransformField(field, metaBundleSettings, suffix) %}
         {% import "_includes/forms" as forms %}
 
-        <div class="field" {% if field is not null and 'seoImageTransform' not in field.generalEnabledFields %}style="display: none;"{% endif %}>
+        <div class="field"
+             {% if field is not null and 'seoImageTransform' not in field.generalEnabledFields %}style="display: none;"{% endif %}>
             <div class="heading">
                 <label for="metaBundleSettings-seoImageTransform{{ suffix }}">
                     {{ "Transform SEO Image"|t("seomatic") }}
@@ -134,7 +136,8 @@
         {% if assetFieldSources is defined and assetFieldSources |length %}
             {% namespace "metaBundleSettings" %}
                 <div class="heading seomatic-imageSourceFromField">
-                    <label for="metaBundleSettings-seoImageField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
+                    <label
+                        for="metaBundleSettings-seoImageField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
                     {{ forms.select({
                         id: "seoImageField" ~ suffix,
                         name: "seoImageField",
@@ -159,7 +162,7 @@
                     },
                     jsClass: 'Craft.AssetSelectInput',
                     selectionLabel: "Select SEO Image"|t("seomatic"),
-                    sources: [],
+                    sources: null,
                     limit: 1,
                     warning: false,
                     errors: metaBundleSettings.getErrors("seoImageIds"),

@@ -62,7 +62,7 @@
         {{ _self.entireOgImageField(ogImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, "") }}
     {% endblock %}
 
-    {############### OpenGraph Image Macros ###############}
+    {# ############## OpenGraph Image Macros ############## #}
 
     {% macro ogImageTransformModeField(field, imageCropModes, metaBundleSettings, suffix) %}
         <div class="heading">
@@ -75,7 +75,8 @@
         </div>
         {% import "_includes/forms" as forms %}
 
-        <div class="field" {% if field is not null and 'ogImageTransformMode' not in field.facebookEnabledFields %}style="display: none;"{% endif %}>
+        <div class="field"
+             {% if field is not null and 'ogImageTransformMode' not in field.facebookEnabledFields %}style="display: none;"{% endif %}>
             {% namespace "metaBundleSettings" %}
                 {{ forms.selectField({
                     id: "ogImageTransformMode" ~ suffix,
@@ -92,7 +93,8 @@
     {% macro ogImageTransformField(field, metaBundleSettings, suffix) %}
         {% import "_includes/forms" as forms %}
 
-        <div class="field" {% if field is not null and 'ogImageTransform' not in field.facebookEnabledFields %}style="display: none;"{% endif %}>
+        <div class="field"
+             {% if field is not null and 'ogImageTransform' not in field.facebookEnabledFields %}style="display: none;"{% endif %}>
             <div class="heading">
                 <label for="metaBundleSettings-ogImageTransform{{ suffix }}">
                     {{ "Transform Facebook OpenGraph Image"|t("seomatic") }}
@@ -158,7 +160,7 @@
                     },
                     jsClass: 'Craft.AssetSelectInput',
                     selectionLabel: "Select Facebook OpenGraph Image"|t("seomatic"),
-                    sources: [],
+                    sources: null,
                     limit: 1,
                     warning: false,
                     errors: metaBundleSettings.getErrors("ogImageIds"),
