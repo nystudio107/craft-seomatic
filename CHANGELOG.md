@@ -1,5 +1,11 @@
 # SEOmatic Changelog
 
+## 4.0.0-beta.5 - UNRELEASED
+
+### Fixed
+
+* Fixed an issue in the `TwigExpressionValidator` class that prevented you from accessing the `seomatic.` variable in some circumstances ([#1076](https://github.com/nystudio107/craft-seomatic/issues/1076))
+
 ## 4.0.0-beta.4 - 2022.03.13
 
 ### Changed
