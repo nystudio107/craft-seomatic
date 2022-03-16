@@ -11,16 +11,17 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
-
 use Craft;
 use craft\elements\Asset;
+use craft\fs\Local;
 use craft\helpers\StringHelper;
-use craft\models\AssetTransform;
-use craft\volumes\Local;
-
+use craft\models\ImageTransform as ImageTransformModel;
+use Exception;
+use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
+use nystudio107\seomatic\Seomatic;
 use yii\base\InvalidConfigException;
+use function in_array;
+use function is_array;
 
 /**
  * @author    nystudio107
@@ -32,14 +33,14 @@ class ImageTransform
     // Constants
     // =========================================================================
 
-    const SOCIAL_TRANSFORM_QUALITY = 82;
+    public const SOCIAL_TRANSFORM_QUALITY = 82;
 
-    const ALLOWED_SOCIAL_MIME_TYPES = [
+    public const ALLOWED_SOCIAL_MIME_TYPES = [
         'image/jpeg',
         'image/png',
     ];
 
-    const DEFAULT_SOCIAL_FORMAT = 'jpg';
+    public const DEFAULT_SOCIAL_FORMAT = 'jpg';
 
     // Static Public Properties
     // =========================================================================
@@ -89,10 +90,10 @@ class ImageTransform
      * Transform the $asset for social media sites in $transformName and
      * optional $siteId
      *
-     * @param int|Asset $asset         the Asset or Asset ID
-     * @param string    $transformName the name of the transform to apply
-     * @param int|null  $siteId
-     * @param string    $transformMode
+     * @param int|Asset $asset the Asset or Asset ID
+     * @param string $transformName the name of the transform to apply
+     * @param int|null $siteId
+     * @param string $transformMode
      *
      * @return string URL to the transformed image
      */
@@ -101,7 +102,8 @@ class ImageTransform
         $transformName = '',
         $siteId = null,
         $transformMode = null
-    ): string {
+    ): string
+    {
         $url = '';
         $transform = self::createSocialTransform($transformName);
         // Let them override the mode
@@ -115,7 +117,7 @@ class ImageTransform
         if (($asset !== null) && ($asset instanceof Asset)) {
             // Make sure the format is an allowed format, otherwise explicitly change it
             $mimeType = $asset->getMimeType();
-            if (!\in_array($mimeType, self::ALLOWED_SOCIAL_MIME_TYPES, false)) {
+            if (!in_array($mimeType, self::ALLOWED_SOCIAL_MIME_TYPES, false)) {
                 $transform->format = self::DEFAULT_SOCIAL_FORMAT;
             }
             // Generate a transformed image
@@ -143,7 +145,7 @@ class ImageTransform
             }
             try {
                 $url = $assets->getAssetUrl($asset, $transform, $generateNow);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $url = $asset->getUrl();
             }
             if ($url === null) {
@@ -165,10 +167,10 @@ class ImageTransform
     }
 
     /**
-     * @param int|Asset $asset         the Asset or Asset ID
-     * @param string    $transformName the name of the transform to apply
-     * @param int|null  $siteId
-     * @param string    $transformMode
+     * @param int|Asset $asset the Asset or Asset ID
+     * @param string $transformName the name of the transform to apply
+     * @param int|null $siteId
+     * @param string $transformMode
      *
      * @return string width of the transformed image
      */
@@ -177,7 +179,8 @@ class ImageTransform
         $transformName = '',
         $siteId = null,
         $transformMode = null
-    ): string {
+    ): string
+    {
         $width = '';
         $transform = self::createSocialTransform($transformName);
         // Let them override the mode
@@ -196,10 +199,10 @@ class ImageTransform
     }
 
     /**
-     * @param int|Asset $asset         the Asset or Asset ID
-     * @param string    $transformName the name of the transform to apply
-     * @param int|null  $siteId
-     * @param string    $transformMode
+     * @param int|Asset $asset the Asset or Asset ID
+     * @param string $transformName the name of the transform to apply
+     * @param int|null $siteId
+     * @param string $transformMode
      *
      * @return string width of the transformed image
      */
@@ -208,7 +211,8 @@ class ImageTransform
         $transformName = '',
         $siteId = null,
         $transformMode = null
-    ): string {
+    ): string
+    {
         $height = '';
         $transform = self::createSocialTransform($transformName);
         // Let them override the mode
@@ -230,7 +234,7 @@ class ImageTransform
      * Return an array of Asset elements from an array of element IDs
      *
      * @param array|string $assetIds
-     * @param int|null     $siteId
+     * @param int|null $siteId
      *
      * @return array
      */
@@ -239,7 +243,7 @@ class ImageTransform
         $elements = Craft::$app->getElements();
         $assets = [];
         if (!empty($assetIds)) {
-            if (\is_array($assetIds)) {
+            if (is_array($assetIds)) {
                 foreach ($assetIds as $assetId) {
                     if (!empty($assetId)) {
                         $assets[] = $elements->getElementById((int)$assetId, Asset::class, $siteId);
@@ -262,8 +266,8 @@ class ImageTransform
     /**
      * Return an asset from either an id or an asset
      *
-     * @param int|Asset $asset         the Asset or Asset ID
-     * @param int|null  $siteId
+     * @param int|Asset $asset the Asset or Asset ID
+     * @param int|null $siteId
      *
      * @return Asset|null
      */
@@ -292,9 +296,9 @@ class ImageTransform
     /**
      * Create a transform from the passed in $transformName
      *
-     * @param string    $transformName the name of the transform to apply
+     * @param string $transformName the name of the transform to apply
      *
-     * @return AssetTransform|null
+     * @return ImageTransformModel|null
      */
     protected static function createSocialTransform($transformName = 'base')
     {
@@ -304,7 +308,7 @@ class ImageTransform
                 self::$transforms['base'],
                 self::$transforms[$transformName] ?? self::$transforms['base']
             );
-            $transform = new AssetTransform($config);
+            $transform = new ImageTransformModel($config);
         }
 
         return $transform;
