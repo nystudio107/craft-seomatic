@@ -947,7 +947,10 @@ class Seomatic extends Plugin
                     __METHOD__
                 );
                 // Register our custom permissions
-                $event->permissions[Craft::t('seomatic', 'SEOmatic')] = $this->customAdminCpPermissions();
+                $event->permissions[] = [
+                    'heading' => Craft::t('seomatic', 'SEOmatic'),
+                    'permissions' => $this->customAdminCpPermissions(),
+                ];
             }
         );
     }
