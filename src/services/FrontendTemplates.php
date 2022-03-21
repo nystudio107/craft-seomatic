@@ -98,6 +98,9 @@ class FrontendTemplates extends Component
         }
         // See if the path for this request is the domain root, and the request has a file extension
         $request = Craft::$app->getRequest();
+        if ($request->isConsoleRequest()) {
+            return;
+        }
         $fullPath = $request->getFullPath();
         if ((strpos($fullPath, '/') === false) && (strpos($fullPath, '.') !== false)) {
             $shouldRegister = true;
