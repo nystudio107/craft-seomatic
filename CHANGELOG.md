@@ -4,6 +4,7 @@
 
 ### Fixed
 
+* Fixed an issue that could cause an exception to be thrown during a console request ([#1080](https://github.com/nystudio107/craft-seomatic/issues/1080))
 * Fixed an issue in the `TwigExpressionValidator` class that prevented you from accessing the `seomatic.` variable in some circumstances ([#1076](https://github.com/nystudio107/craft-seomatic/issues/1076))
 
 ## 3.4.27 - 2022.03.13
