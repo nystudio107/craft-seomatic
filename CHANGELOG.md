@@ -3,7 +3,7 @@
 ## 4.0.0-beta.6 - UNRELEASED
 
 ### Fixed
-
+* Changed `MatrixBlockType::getFields()` to `getCustomFields()`
 * Fixed an issue that could cause an exception to be thrown during a console request ([#1080](https://github.com/nystudio107/craft-seomatic/issues/1080))
 
 ## 4.0.0-beta.5 - 2022.03.18
