@@ -11,28 +11,24 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use nystudio107\seomatic\helpers\Field as FieldHelper;
-
-use nystudio107\seomatic\Seomatic;
-
+use benf\neo\elements\Block as NeoBlock;
+use benf\neo\elements\db\BlockQuery as NeoBlockQuery;
 use craft\elements\db\MatrixBlockQuery;
 use craft\elements\db\TagQuery;
 use craft\elements\MatrixBlock;
 use craft\elements\Tag;
 use craft\helpers\HtmlPurifier;
-
-use yii\base\InvalidConfigException;
-
-use verbb\supertable\elements\SuperTableBlockElement as SuperTableBlock;
-use verbb\supertable\elements\db\SuperTableBlockQuery;
-
-use benf\neo\elements\db\BlockQuery as NeoBlockQuery;
-use benf\neo\elements\Block as NeoBlock;
-
-use Stringy\Stringy;
-
+use nystudio107\seomatic\helpers\Field as FieldHelper;
+use nystudio107\seomatic\Seomatic;
 use PhpScience\TextRank\TextRankFacade;
 use PhpScience\TextRank\Tool\StopWords\StopWordsAbstract;
+use Stringy\Stringy;
+use verbb\supertable\elements\db\SuperTableBlockQuery;
+use verbb\supertable\elements\SuperTableBlockElement as SuperTableBlock;
+use yii\base\InvalidConfigException;
+use function array_slice;
+use function function_exists;
+use function is_array;
 
 /**
  * @author    nystudio107
@@ -61,9 +57,9 @@ class Text
      * truncating occurs, the string is further truncated so that the substring
      * may be appended without exceeding the desired length.
      *
-     * @param  string $string    The string to truncate
-     * @param  int    $length    Desired length of the truncated string
-     * @param  string $substring The substring to append if it can fit
+     * @param string $string The string to truncate
+     * @param int $length Desired length of the truncated string
+     * @param string $substring The substring to append if it can fit
      *
      * @return string with the resulting $str after truncating
      */
@@ -86,9 +82,9 @@ class Text
      * string is further truncated so that the substring may be appended without
      * exceeding the desired length.
      *
-     * @param  string $string    The string to truncate
-     * @param  int    $length    Desired length of the truncated string
-     * @param  string $substring The substring to append if it can fit
+     * @param string $string The string to truncate
+     * @param int $length Desired length of the truncated string
+     * @param string $substring The substring to append if it can fit
      *
      * @return string with the resulting $str after truncating
      */
@@ -118,19 +114,19 @@ class Text
             return '';
         }
         if ($field instanceof MatrixBlockQuery
-            || (\is_array($field) && $field[0] instanceof MatrixBlock)) {
+            || (is_array($field) && $field[0] instanceof MatrixBlock)) {
             $result = self::extractTextFromMatrix($field);
         } elseif ($field instanceof NeoBlockQuery
-            || (\is_array($field) && $field[0] instanceof NeoBlock)) {
+            || (is_array($field) && $field[0] instanceof NeoBlock)) {
             $result = self::extractTextFromNeo($field);
         } elseif ($field instanceof SuperTableBlockQuery
-            || (\is_array($field) && $field[0] instanceof SuperTableBlock)) {
+            || (is_array($field) && $field[0] instanceof SuperTableBlock)) {
             $result = self::extractTextFromSuperTable($field);
         } elseif ($field instanceof TagQuery
-            || (\is_array($field) && $field[0] instanceof Tag)) {
+            || (is_array($field) && $field[0] instanceof Tag)) {
             $result = self::extractTextFromTags($field);
         } else {
-            if (\is_array($field)) {
+            if (is_array($field)) {
                 $result = self::smartStripTags((string)$field[0]);
             } else {
                 $result = self::smartStripTags((string)$field);
@@ -160,7 +156,7 @@ class Text
             $tags = $tags->all();
         }
         foreach ($tags as $tag) {
-            $result .= $tag->title.', ';
+            $result .= $tag->title . ', ';
         }
         $result = rtrim($result, ', ');
 
@@ -172,7 +168,7 @@ class Text
      * together.
      *
      * @param MatrixBlockQuery|MatrixBlock[] $blocks
-     * @param string                         $fieldHandle
+     * @param string $fieldHandle
      *
      * @return string
      */
@@ -195,14 +191,14 @@ class Text
             // Find any text fields inside of the matrix block
             if ($matrixBlockTypeModel) {
                 $fieldClasses = FieldHelper::FIELD_CLASSES[FieldHelper::TEXT_FIELD_CLASS_KEY];
-                $fields = $matrixBlockTypeModel->getFields();
+                $fields = $matrixBlockTypeModel->getCustomFields();
 
                 foreach ($fields as $field) {
                     /** @var array $fieldClasses */
                     foreach ($fieldClasses as $fieldClassKey) {
                         if ($field instanceof $fieldClassKey) {
                             if ($field->handle === $fieldHandle || empty($fieldHandle)) {
-                                $result .= self::extractTextFromField($block[$field->handle]).' ';
+                                $result .= self::extractTextFromField($block[$field->handle]) . ' ';
                             }
                         }
                     }
@@ -218,7 +214,7 @@ class Text
      * together.
      *
      * @param NeoBlockQuery|NeoBlock[] $blocks
-     * @param string                         $fieldHandle
+     * @param string $fieldHandle
      *
      * @return string
      */
@@ -248,7 +244,7 @@ class Text
                     foreach ($fieldClasses as $fieldClassKey) {
                         if ($field instanceof $fieldClassKey) {
                             if ($field->handle === $fieldHandle || empty($fieldHandle)) {
-                                $result .= self::extractTextFromField($block[$field->handle]).' ';
+                                $result .= self::extractTextFromField($block[$field->handle]) . ' ';
                             }
                         }
                     }
@@ -264,7 +260,7 @@ class Text
      * together.
      *
      * @param SuperTableBlockQuery|SuperTableBlock[] $blocks
-     * @param string                         $fieldHandle
+     * @param string $fieldHandle
      *
      * @return string
      */
@@ -294,7 +290,7 @@ class Text
                     foreach ($fieldClasses as $fieldClassKey) {
                         if ($field instanceof $fieldClassKey) {
                             if ($field->handle === $fieldHandle || empty($fieldHandle)) {
-                                $result .= self::extractTextFromField($block[$field->handle]).' ';
+                                $result .= self::extractTextFromField($block[$field->handle]) . ' ';
                             }
                         }
                     }
@@ -310,8 +306,8 @@ class Text
      * delimited string
      *
      * @param string $text
-     * @param int    $limit
-     * @param bool   $useStopWords
+     * @param int $limit
+     * @param bool $useStopWords
      *
      * @return string
      */
@@ -337,8 +333,8 @@ class Text
             return $text;
         }
 
-        $result = \is_array($keywords)
-            ? implode(', ', \array_slice(array_keys($keywords), 0, $limit))
+        $result = is_array($keywords)
+            ? implode(', ', array_slice(array_keys($keywords), 0, $limit))
             : (string)$keywords;
 
         return self::sanitizeUserInput($result);
@@ -349,7 +345,7 @@ class Text
      * text
      *
      * @param string $text
-     * @param bool   $useStopWords
+     * @param bool $useStopWords
      *
      * @return string
      */
@@ -375,7 +371,7 @@ class Text
             return $text;
         }
 
-        $result = \is_array($sentences)
+        $result = is_array($sentences)
             ? implode(' ', $sentences)
             : (string)$sentences;
 
@@ -443,7 +439,7 @@ class Text
             return '';
         }
         // Convert to UTF-8
-        if (\function_exists('iconv')) {
+        if (function_exists('iconv')) {
             $text = iconv(mb_detect_encoding($text, mb_detect_order(), true), 'UTF-8//IGNORE', $text);
         } else {
             ini_set('mbstring.substitute_character', 'none');
@@ -477,7 +473,7 @@ class Text
             $language = 'English';
         }
 
-        $className = 'PhpScience\\TextRank\\Tool\\StopWords\\'.ucfirst($language);
+        $className = 'PhpScience\\TextRank\\Tool\\StopWords\\' . ucfirst($language);
         if (class_exists($className)) {
             $stopWords = new $className;
         }

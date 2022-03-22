@@ -320,7 +320,7 @@ class Field
             if (!empty(self::$matrixFieldsOfTypeCache[$memoKey])) {
                 return self::$matrixFieldsOfTypeCache[$memoKey];
             }
-            $fields = $matrixBlockTypeModel->getFields();
+            $fields = $matrixBlockTypeModel->getCustomFields();
             /** @var  $field BaseField */
             foreach ($fields as $field) {
                 if ($field instanceof $fieldType) {
