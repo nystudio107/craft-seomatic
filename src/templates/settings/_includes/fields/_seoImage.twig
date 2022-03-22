@@ -32,7 +32,8 @@
         {% if assetFieldSources is defined and assetFieldSources |length %}
             {% namespace "metaBundleSettings" %}
                 <div class="heading seomatic-imageSourceFromField">
-                    <label for="metaBundleSettings-seoImageField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
+                    <label
+                        for="metaBundleSettings-seoImageField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
                     {{ forms.select({
                         id: "seoImageField" ~ suffix,
                         name: "seoImageField",
@@ -57,7 +58,7 @@
                     },
                     jsClass: 'Craft.AssetSelectInput',
                     selectionLabel: "Select SEO Image"|t("seomatic"),
-                    sources: [],
+                    sources: null,
                     limit: 1,
                     warning: false,
                     errors: metaBundleSettings.getErrors("seoImageIds"),

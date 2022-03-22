@@ -3,17 +3,17 @@
 {% import "_includes/forms" as forms %}
 
 {% switch pageContext %}
-    {% case "identity" %}
-        {% set websiteVerb = "owns" %}
+{% case "identity" %}
+    {% set websiteVerb = "owns" %}
 
-    {% case "creator" %}
-        {% set websiteVerb = "created" %}
+{% case "creator" %}
+    {% set websiteVerb = "created" %}
 
-    {% default %}
-        {% set websiteVerb = "" %}
+{% default %}
+    {% set websiteVerb = "" %}
 {% endswitch %}
 
-{############### General Info for all types ###############}
+{# ############## General Info for all types ############## #}
 
 <h2>{{ "General Info" |t("seomatic") }}</h2>
 
@@ -41,9 +41,10 @@
 
 <div class="field" id="genericDescription-field">
     <div class="heading">
-        <label for="genericDescription">{{ "Entity Description"|t("seomatic")}}</label>
+        <label for="genericDescription">{{ "Entity Description"|t("seomatic") }}</label>
     </div>
-    <div class="instructions"><p>{{ "A description of the entity that #{websiteVerb} the website" |t("seomatic") }}</p></div>
+    <div class="instructions"><p>{{ "A description of the entity that #{websiteVerb} the website" |t("seomatic") }}</p>
+    </div>
     {{ forms.textarea({
         label: "Entity Description"|t("seomatic"),
         instructions: "A description of the entity that #{websiteVerb} the website" |t("seomatic"),
@@ -97,7 +98,7 @@
     },
     jsClass: "Craft.AssetSelectInput",
     selectionLabel: "Select Brand Image"|t("seomatic"),
-    sources: [],
+    sources: null,
     limit: 1,
     warning: false,
     errors: entity.getErrors("genericImageIds"),
@@ -232,9 +233,9 @@
     </ul>
 </div>
 
-{############### Entity metaPane fields ###############}
+{# ############## Entity metaPane fields ############## #}
 
-{############### Person type specific fields ###############}
+{# ############## Person type specific fields ############## #}
 
 <div class="metaPane field Person">
     <h2>{{ "Person Info" |t("seomatic") }}</h2>
@@ -271,7 +272,7 @@
     </div>
 </div>
 
-{############### Organization type specific fields ###############}
+{# ############## Organization type specific fields ############## #}
 
 <div class="metaPane field Organization">
     <h2>{{ "Organization Info" |t("seomatic") }}</h2>
@@ -367,14 +368,14 @@
 
 </div>
 
-{############### Entity metaSubPane fields ###############}
+{# ############## Entity metaSubPane fields ############## #}
 
-{############### Airline type specific fields ###############}
+{# ############## Airline type specific fields ############## #}
 
 <div class="metaSubPane field Airline">
 </div>
 
-{############### Corporation type specific fields ###############}
+{# ############## Corporation type specific fields ############## #}
 
 <div class="metaSubPane field Corporation">
     <h2>{{ "Corporation Info" |t("seomatic") }}</h2>
@@ -390,17 +391,17 @@
     }) }}
 </div>
 
-{############### EducationalOrganization type specific fields ###############}
+{# ############## EducationalOrganization type specific fields ############## #}
 
 <div class="metaSubPane field EducationalOrganization">
 </div>
 
-{############### GovernmentOrganization type specific fields ###############}
+{# ############## GovernmentOrganization type specific fields ############## #}
 
 <div class="metaSubPane field GovernmentOrganization">
 </div>
 
-{############### LocalBusiness type specific fields ###############}
+{# ############## LocalBusiness type specific fields ############## #}
 
 <div class="metaSubPane field LocalBusiness">
     <h2>{{ "Local Business Info" |t("seomatic") }}</h2>
@@ -423,9 +424,11 @@
 
     <div class="field" id="localBusinessOpeningHours-field">
         <div class="heading">
-            <label for="localBusinessOpeningHours">{{ "Opening Hours"|t("seomatic")}}</label>
+            <label for="localBusinessOpeningHours">{{ "Opening Hours"|t("seomatic") }}</label>
         </div>
-        <div class="instructions"><p>{{ "The opening hours for this local business.  If the business is closed on a given day, just leave the hours for that day blank.  If you leave everything blank, no opening hours will be listed. [Learn More](https://developers.google.com/search/docs/data-types/local-business)" |t("seomatic") |md}}</p></div>
+        <div class="instructions">
+            <p>{{ "The opening hours for this local business.  If the business is closed on a given day, just leave the hours for that day blank.  If you leave everything blank, no opening hours will be listed. [Learn More](https://developers.google.com/search/docs/data-types/local-business)" |t("seomatic") |md }}</p>
+        </div>
 
         {% macro day(id, name, value, day) %}
             {% from "_includes/forms" import time %}
@@ -476,26 +479,27 @@
     </div>
 </div>
 
-{############### NGO type specific fields ###############}
+{# ############## NGO type specific fields ############## #}
 
 <div class="metaSubPane field NGO">
 </div>
 
-{############### PerformingGroup type specific fields ###############}
+{# ############## PerformingGroup type specific fields ############## #}
 
 <div class="metaSubPane field PerformingGroup">
 </div>
 
-{############### SportsOrganization type specific fields ###############}
+{# ############## SportsOrganization type specific fields ############## #}
 
 <div class="metaSubPane field SportsOrganization">
 </div>
 
-{############### Entity metaSpecificPane fields ###############}
+{# ############## Entity metaSpecificPane fields ############## #}
 
-{############### FoodEstablishment type specific fields ###############}
+{# ############## FoodEstablishment type specific fields ############## #}
 
-<div  class="metaSpecificPane field FoodEstablishment Bakery BarOrPub Brewery CafeOrCoffeeShop FastFoodRestaurant IceCreamShop Restaurant Winery">
+<div
+    class="metaSpecificPane field FoodEstablishment Bakery BarOrPub Brewery CafeOrCoffeeShop FastFoodRestaurant IceCreamShop Restaurant Winery">
     <h2>{{ "Food Establishment Info" |t("seomatic") }}</h2>
     {{ forms.textField({
         label: "Food Establishment Cuisine"|t("seomatic"),
@@ -532,8 +536,8 @@
 </div>
 
 {% js %}
-    // Handle looking up the lattitude/longitude
-    $('#{{ "geolookup" |namespaceInputId }}').on('click', function(e) {
+// Handle looking up the lattitude/longitude
+$('#{{ "geolookup" |namespaceInputId }}').on('click', function(e) {
         window.open('https://www.latlong.net/convert-address-to-lat-long.html','_blank');
     });
 {% endjs %}

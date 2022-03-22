@@ -11,17 +11,15 @@
 
 namespace nystudio107\seomatic\services;
 
-use nystudio107\seomatic\helpers\UrlHelper;
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\models\EditableTemplate;
-use nystudio107\seomatic\models\FrontendTemplateContainer;
-
 use Craft;
 use craft\base\Component;
 use craft\errors\SiteNotFoundException;
 use craft\events\RegisterUrlRulesEvent;
 use craft\web\UrlManager;
-
+use nystudio107\seomatic\helpers\UrlHelper;
+use nystudio107\seomatic\models\EditableTemplate;
+use nystudio107\seomatic\models\FrontendTemplateContainer;
+use nystudio107\seomatic\Seomatic;
 use yii\base\Event;
 use yii\caching\TagDependency;
 
@@ -100,6 +98,9 @@ class FrontendTemplates extends Component
         }
         // See if the path for this request is the domain root, and the request has a file extension
         $request = Craft::$app->getRequest();
+        if ($request->isConsoleRequest) {
+            return;
+        }
         $fullPath = $request->getFullPath();
         if ((strpos($fullPath, '/') === false) && (strpos($fullPath, '.') !== false)) {
             $shouldRegister = true;
@@ -151,7 +152,7 @@ class FrontendTemplates extends Component
 
     /**
      * @param string $template
-     * @param array  $params
+     * @param array $params
      *
      * @return string
      */
