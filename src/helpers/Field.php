@@ -405,7 +405,7 @@ class Field
             if (!empty(self::$superTableFieldsOfTypeCache[$memoKey])) {
                 return self::$superTableFieldsOfTypeCache[$memoKey];
             }
-            $fields = $superTableBlockTypeModel->getFields();
+            $fields = $superTableBlockTypeModel->getCustomFields();
             /** @var  $field BaseField */
             foreach ($fields as $field) {
                 if ($field instanceof $fieldType) {
