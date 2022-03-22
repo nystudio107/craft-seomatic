@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 4.0.0-beta.6 - UNRELEASED
+## 4.0.0-beta.6 - 2022.03.22
 
 ### Fixed
 * Changed `SuperTableBlockTypeModel::getFields()` to `getCustomFields()`
