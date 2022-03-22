@@ -11,33 +11,28 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
-use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
-use nystudio107\seomatic\services\MetaBundles;
-
+use benf\neo\elements\Block as NeoBlock;
+use benf\neo\Field as NeoField;
+use besteadfast\preparsefield\fields\PreparseFieldType;
 use Craft;
 use craft\base\Element;
 use craft\base\Field as BaseField;
-use craft\base\Volume;
-use craft\elements\User;
 use craft\ckeditor\Field as CKEditorField;
 use craft\elements\MatrixBlock;
+use craft\elements\User;
 use craft\fields\Assets as AssetsField;
 use craft\fields\Matrix as MatrixField;
 use craft\fields\PlainText as PlainTextField;
 use craft\fields\Tags as TagsField;
 use craft\models\FieldLayout;
+use craft\models\Volume;
 use craft\redactor\Field as RedactorField;
-
-use verbb\supertable\fields\SuperTableField;
+use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
+use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
+use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\services\MetaBundles;
 use verbb\supertable\elements\SuperTableBlockElement as SuperTableBlock;
-
-use benf\neo\Field as NeoField;
-use benf\neo\elements\Block as NeoBlock;
-
-use besteadfast\preparsefield\fields\PreparseFieldType;
-
+use verbb\supertable\fields\SuperTableField;
 use yii\base\InvalidConfigException;
 
 /**
@@ -57,7 +52,7 @@ class Field
     const OLD_SEOMATIC_META_CLASS_KEY = 'Seomatic_Meta';
 
     const FIELD_CLASSES = [
-        self::TEXT_FIELD_CLASS_KEY  => [
+        self::TEXT_FIELD_CLASS_KEY => [
             CKEditorField::class,
             PlainTextField::class,
             MatrixField::class,
@@ -113,21 +108,22 @@ class Field
      * Return all of the fields from the $layout that are of the type
      * $fieldClassKey
      *
-     * @param string      $fieldClassKey
+     * @param string $fieldClassKey
      * @param FieldLayout $layout
-     * @param bool        $keysOnly
+     * @param bool $keysOnly
      *
      * @return array
      */
     public static function fieldsOfTypeFromLayout(
-        string $fieldClassKey,
+        string      $fieldClassKey,
         FieldLayout $layout,
-        bool $keysOnly = true
-    ): array {
+        bool        $keysOnly = true
+    ): array
+    {
         $foundFields = [];
         if (!empty(self::FIELD_CLASSES[$fieldClassKey])) {
             // Cache me if you can
-            $memoKey = $fieldClassKey.$layout->id.($keysOnly ? 'keys' : 'nokeys');
+            $memoKey = $fieldClassKey . $layout->id . ($keysOnly ? 'keys' : 'nokeys');
             if (!empty(self::$fieldsOfTypeFromLayoutCache[$memoKey])) {
                 return self::$fieldsOfTypeFromLayoutCache[$memoKey];
             }
@@ -157,16 +153,17 @@ class Field
      * Return all of the fields in the $element of the type $fieldClassKey
      *
      * @param Element $element
-     * @param string  $fieldClassKey
-     * @param bool    $keysOnly
+     * @param string $fieldClassKey
+     * @param bool $keysOnly
      *
      * @return array
      */
     public static function fieldsOfTypeFromElement(
         Element $element,
-        string $fieldClassKey,
-        bool $keysOnly = true
-    ): array {
+        string  $fieldClassKey,
+        bool    $keysOnly = true
+    ): array
+    {
         $foundFields = [];
         $layout = $element->getFieldLayout();
         if ($layout !== null) {
@@ -179,8 +176,8 @@ class Field
     /**
      * Return all of the fields from Users layout of the type $fieldClassKey
      *
-     * @param string  $fieldClassKey
-     * @param bool    $keysOnly
+     * @param string $fieldClassKey
+     * @param bool $keysOnly
      *
      * @return array
      */
@@ -196,7 +193,7 @@ class Field
      * $fieldClassKey
      *
      * @param string $fieldClassKey
-     * @param bool   $keysOnly
+     * @param bool $keysOnly
      *
      * @return array
      */
@@ -228,7 +225,7 @@ class Field
      * $fieldClassKey
      *
      * @param string $fieldClassKey
-     * @param bool   $keysOnly
+     * @param bool $keysOnly
      *
      * @return array
      */
@@ -244,7 +241,7 @@ class Field
                 $prefix = $global->handle;
                 $fields = array_combine(
                     array_map(function ($key) use ($prefix) {
-                        return $prefix.'.'.$key;
+                        return $prefix . '.' . $key;
                     }, array_keys($fields)),
                     $fields
                 );
@@ -267,7 +264,7 @@ class Field
      * @param string $sourceBundleType
      * @param string $sourceHandle
      * @param string $fieldClassKey
-     * @param bool   $keysOnly
+     * @param bool $keysOnly
      *
      * @return array
      */
@@ -275,8 +272,9 @@ class Field
         string $sourceBundleType,
         string $sourceHandle,
         string $fieldClassKey,
-        bool $keysOnly = true
-    ): array {
+        bool   $keysOnly = true
+    ): array
+    {
         $foundFields = [];
         $layouts = [];
         // Get the layouts
@@ -302,8 +300,8 @@ class Field
      * Return all of the fields in the $matrixBlock of the type $fieldType class
      *
      * @param MatrixBlock $matrixBlock
-     * @param string      $fieldType
-     * @param bool        $keysOnly
+     * @param string $fieldType
+     * @param bool $keysOnly
      *
      * @return array
      */
@@ -318,7 +316,7 @@ class Field
         }
         if ($matrixBlockTypeModel) {
             // Cache me if you can
-            $memoKey = $fieldType.$matrixBlock->id.($keysOnly ? 'keys' : 'nokeys');
+            $memoKey = $fieldType . $matrixBlock->id . ($keysOnly ? 'keys' : 'nokeys');
             if (!empty(self::$matrixFieldsOfTypeCache[$memoKey])) {
                 return self::$matrixFieldsOfTypeCache[$memoKey];
             }
@@ -345,8 +343,8 @@ class Field
      * Return all of the fields in the $neoBlock of the type $fieldType class
      *
      * @param NeoBlock $neoBlock
-     * @param string   $fieldType
-     * @param bool     $keysOnly
+     * @param string $fieldType
+     * @param bool $keysOnly
      *
      * @return array
      */
@@ -361,7 +359,7 @@ class Field
         }
         if ($neoBlockTypeModel) {
             // Cache me if you can
-            $memoKey = $fieldType.$neoBlock->id.($keysOnly ? 'keys' : 'nokeys');
+            $memoKey = $fieldType . $neoBlock->id . ($keysOnly ? 'keys' : 'nokeys');
             if (!empty(self::$neoFieldsOfTypeCache[$memoKey])) {
                 return self::$neoFieldsOfTypeCache[$memoKey];
             }
@@ -387,8 +385,8 @@ class Field
      * Return all of the fields in the $superTableBlock of the type $fieldType class
      *
      * @param SuperTableBlock $superTableBlock
-     * @param string          $fieldType
-     * @param bool            $keysOnly
+     * @param string $fieldType
+     * @param bool $keysOnly
      *
      * @return array
      */
@@ -403,7 +401,7 @@ class Field
         }
         if ($superTableBlockTypeModel) {
             // Cache me if you can
-            $memoKey = $fieldType.$superTableBlock->id.($keysOnly ? 'keys' : 'nokeys');
+            $memoKey = $fieldType . $superTableBlock->id . ($keysOnly ? 'keys' : 'nokeys');
             if (!empty(self::$superTableFieldsOfTypeCache[$memoKey])) {
                 return self::$superTableFieldsOfTypeCache[$memoKey];
             }
