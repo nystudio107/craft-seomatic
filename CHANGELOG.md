@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.0.0-beta.7 - UNRELEASED
+### Fixed
+* Fixed an issue where disabled entries could appear in breadcrumbs JSON-LD ([#1088](https://github.com/nystudio107/craft-seomatic/issues/1088))
+
 ## 4.0.0-beta.6 - 2022.03.22
 
 ### Fixed
