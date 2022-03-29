@@ -125,11 +125,33 @@ class JobPosting extends Intangible
     public $datePosted;
 
     /**
+     * Indicates whether an url that is associated with a JobPosting enables
+     * direct application for the job, via the posting website. A job posting
+     * is considered to have directApply of True if an application process for
+     * the specified job can be directly initiated via the url(s) given
+     * (noting that e.g. multiple internet domains might nevertheless be
+     * involved at an implementation level). A value of False is appropriate if
+     * there is no clear path to applying directly online for the specified job,
+     * navigating directly from the JobPosting url(s) supplied..
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $directApply;
+
+    /**
      * Educational background needed for the position or Occupation.
      *
      * @var mixed|EducationalOccupationalCredential|string [schema.org types: EducationalOccupationalCredential, Text]
      */
     public $educationRequirements;
+    
+    /**
+     * The legal requirements such as citizenship, visa and other documentation
+     * required for an applicant to this job.
+     *
+     * @var string [schema.org types: Text]
+     */
+    public $eligibilityToWorkRequirement;
 
     /**
      * A description of the employer, career opportunities and work environment
@@ -164,6 +186,16 @@ class JobPosting extends Intangible
      * @var mixed|MonetaryAmount|MonetaryAmountDistribution|float [schema.org types: MonetaryAmount, MonetaryAmountDistribution, Number]
      */
     public $estimatedSalary;
+    
+    /**
+     * Indicates whether a JobPosting will accept experience (as indicated by
+     * OccupationalExperienceRequirements) in place of its formal educational
+     * qualifications (as indicated by educationRequirements). If true, indicates
+     * that satisfying one of these requirements is sufficient.
+     *
+     * @var bool [schema.org types: Boolean]
+     */
+    public $experienceInPlaceOfEducation;
 
     /**
      * Description of skills and experience needed for the position or Occupation.
@@ -361,11 +393,14 @@ class JobPosting extends Intangible
         'applicationContact',
         'baseSalary',
         'datePosted',
+        'directApply',
         'educationRequirements',
+        'eligibilityToWorkRequirement',
         'employerOverview',
         'employmentType',
         'employmentUnit',
         'estimatedSalary',
+        'experienceInPlaceOfEducation',
         'experienceRequirements',
         'hiringOrganization',
         'incentiveCompensation',
@@ -401,11 +436,14 @@ class JobPosting extends Intangible
         'applicationContact' => ['ContactPoint'],
         'baseSalary' => ['MonetaryAmount','Number','PriceSpecification'],
         'datePosted' => ['Date','DateTime'],
+        'directApply' => ['Boolean'],
         'educationRequirements' => ['EducationalOccupationalCredential','Text'],
+        'eligibilityToWorkRequirement' => ['Text'],
         'employerOverview' => ['Text'],
         'employmentType' => ['Text'],
         'employmentUnit' => ['Organization'],
         'estimatedSalary' => ['MonetaryAmount','MonetaryAmountDistribution','Number'],
+        'experienceInPlaceOfEducation' => ['Boolean'],
         'experienceRequirements' => ['Text'],
         'hiringOrganization' => ['Organization'],
         'incentiveCompensation' => ['Text'],
@@ -441,11 +479,14 @@ class JobPosting extends Intangible
         'applicationContact' => 'Contact details for further information relevant to this job posting.',
         'baseSalary' => 'The base salary of the job or of an employee in an EmployeeRole.',
         'datePosted' => 'Publication date of an online listing.',
+        'directApply' => 'Indicates whether an url that is associated with a JobPosting enables direct application for the job, via the posting website. A job posting is considered to have directApply of True if an application process for the specified job can be directly initiated via the url(s) given (noting that e.g. multiple internet domains might nevertheless be involved at an implementation level). A value of False is appropriate if there is no clear path to applying directly online for the specified job, navigating directly from the JobPosting url(s) supplied.',
         'educationRequirements' => 'Educational background needed for the position or Occupation.',
+        'eligibilityToWorkRequirement' => 'The legal requirements such as citizenship, visa and other documentation required for an applicant to this job.',
         'employerOverview' => 'A description of the employer, career opportunities and work environment for this position.',
         'employmentType' => 'Type of employment (e.g. full-time, part-time, contract, temporary, seasonal, internship).',
         'employmentUnit' => 'Indicates the department, unit and/or facility where the employee reports and/or in which the job is to be performed.',
         'estimatedSalary' => 'An estimated salary for a job posting or occupation, based on a variety of variables including, but not limited to industry, job title, and location. Estimated salaries are often computed by outside organizations rather than the hiring organization, who may not have committed to the estimated value.',
+        'experienceInPlaceOfEducation' => 'Indicates whether a JobPosting will accept experience (as indicated by OccupationalExperienceRequirements) in place of its formal educational qualifications (as indicated by educationRequirements). If true, indicates that satisfying one of these requirements is sufficient.',
         'experienceRequirements' => 'Description of skills and experience needed for the position or Occupation.',
         'hiringOrganization' => 'Organization offering the job position.',
         'incentiveCompensation' => 'Description of bonus and commission compensation aspects of the job. Supersedes incentives.',
