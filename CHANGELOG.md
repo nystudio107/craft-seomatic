@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 4.0.0-beta.7 - UNRELEASED
+### Changed
+* Only regenerate sitemaps via queue jobs if they are a result of an invalidation of the sitemap cache ([#1098](https://github.com/nystudio107/craft-seomatic/issues/1098)) ([#1097](https://github.com/nystudio107/craft-seomatic/issues/1097))
+
 ### Fixed
 * Fixed an issue where disabled entries could appear in breadcrumbs JSON-LD ([#1088](https://github.com/nystudio107/craft-seomatic/issues/1088))
 
