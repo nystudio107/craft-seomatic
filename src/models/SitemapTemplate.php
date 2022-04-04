@@ -106,7 +106,11 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         $type = $params['type'];
         $handle = $params['handle'];
         $siteId = $params['siteId'];
+        // If $throwException === false it means we're trying to regenerate the sitemap due to an invalidation
+        // rather than a request for the actual sitemap, so don't try to run the queue immediately
         $throwException = $params['throwException'] ?? true;
+        // Only regenerate the sitemap via queue job if it's via an invalidation of the sitemap cache
+        $immediately = $params['immediately'] ?? $throwException;
         $request = Craft::$app->getRequest();
         $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle($type, $handle, $siteId);
         // If it doesn't exist, throw a 404
@@ -159,8 +163,8 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 $queue->release($existingJobId);
                 $cache->delete($queueJobCacheKey);
             }
-
-            if (!empty($params['immediately'])) {
+            // See if we should regenerate this sitemap immediately, or via queue job
+            if ($immediately) {
                 Sitemap::generateSitemap([
                     'groupId' => $groupId,
                     'type' => $type,
