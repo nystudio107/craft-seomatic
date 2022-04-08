@@ -31,67 +31,67 @@ class Settings extends VarsModel
     /**
      * @var string The public-facing name of the plugin
      */
-    public $pluginName = 'SEOmatic';
+    public string $pluginName = 'SEOmatic';
 
     /**
      * @var bool Should SEOmatic render metadata?
      */
-    public $renderEnabled = true;
+    public bool $renderEnabled = true;
 
     /**
      * @var bool Should SEOmatic render frontend sitemaps?
      */
-    public $sitemapsEnabled = true;
+    public bool $sitemapsEnabled = true;
 
     /**
      * @var bool Should sitemaps be regenerated automatically?
      */
-    public $regenerateSitemapsAutomatically = true;
+    public bool $regenerateSitemapsAutomatically = true;
 
     /**
      * @var bool Should sitemaps be submitted to search engines automatically whenever there are changes?
      */
-    public $submitSitemaps = true;
+    public bool $submitSitemaps = true;
 
     /**
      * @var bool Should items where the entry URL doesn't match the canonical URL be excluded?
      */
-    public $excludeNonCanonicalUrls = false;
+    public bool $excludeNonCanonicalUrls = false;
 
     /**
      * @var bool Should the homepage be included in the generated Breadcrumbs JSON-LD?
      */
-    public $includeHomepageInBreadcrumbs = true;
+    public bool $includeHomepageInBreadcrumbs = true;
 
     /**
      * @var bool Should SEOmatic add to the http response headers?
      */
-    public $headersEnabled = true;
+    public bool $headersEnabled = true;
 
     /**
      * @var bool Whether the environment should be manually set, or automatically determined
      */
-    public $manuallySetEnvironment = false;
+    public bool $manuallySetEnvironment = false;
 
     /**
      * @var string The server environment, either `live`, `staging`, or `local`
      */
-    public $environment = 'live';
+    public string $environment = 'live';
 
     /**
      * @var bool Should SEOmatic display the SEO Preview sidebar?
      */
-    public $displayPreviewSidebar = true;
+    public bool $displayPreviewSidebar = true;
 
     /**
      * @var bool Should SEOmatic add a Social Media Preview Target?
      */
-    public $socialMediaPreviewTarget = true;
+    public bool $socialMediaPreviewTarget = true;
 
     /**
      * @var array The social media platforms that should be displayed in the SEO Preview sidebar
      */
-    public $sidebarDisplayPreviewTypes = [
+    public array $sidebarDisplayPreviewTypes = [
         'google',
         'twitter',
         'facebook'
@@ -100,67 +100,67 @@ class Settings extends VarsModel
     /**
      * @var bool Should SEOmatic display the SEO Analysis sidebar?
      */
-    public $displayAnalysisSidebar = true;
+    public bool $displayAnalysisSidebar = true;
 
     /**
      * @var string If `devMode` is on, prefix the <title> with this string
      */
-    public $devModeTitlePrefix = '&#x1f6a7; ';
+    public string $devModeTitlePrefix = '&#x1f6a7; ';
 
     /**
      * @var string Prefix the Control Panel <title> with this string
      */
-    public $cpTitlePrefix = '&#x2699; ';
+    public string $cpTitlePrefix = '&#x2699; ';
 
     /**
      * @var string If `devMode` is on, prefix the Control Panel <title> with this string
      */
-    public $devModeCpTitlePrefix = '&#x1f6a7;&#x2699; ';
+    public string $devModeCpTitlePrefix = '&#x1f6a7;&#x2699; ';
 
     /**
      * @var string The separator character to use for the `<title>` tag
      */
-    public $separatorChar = '|';
+    public string $separatorChar = '|';
 
     /**
      * @var int The max number of characters in the `<title>` tag
      */
-    public $maxTitleLength = 70;
+    public int $maxTitleLength = 70;
 
     /**
      * @var int The max number of characters in the `<meta name="description">` tag
      */
-    public $maxDescriptionLength = 155;
+    public int $maxDescriptionLength = 155;
 
     /**
-     * @var string Should Title tags be truncated at the max length, on word boundaries?
+     * @var bool Should Title tags be truncated at the max length, on word boundaries?
      */
-    public $truncateTitleTags = true;
+    public bool $truncateTitleTags = true;
 
     /**
-     * @var string Should Description tags be truncated at the max length, on word boundaries?
+     * @var bool Should Description tags be truncated at the max length, on word boundaries?
      */
-    public $truncateDescriptionTags = true;
+    public bool $truncateDescriptionTags = true;
 
     /**
      * @var bool Site Groups define logically separate sites
      */
-    public $siteGroupsSeparate = true;
+    public bool $siteGroupsSeparate = true;
 
     /**
      * @var bool Whether to dynamically include the hreflang tags
      */
-    public $addHrefLang = true;
+    public bool $addHrefLang = true;
 
     /**
      * @var bool Whether to dynamically include the `x-default` hreflang tags
      */
-    public $addXDefaultHrefLang = true;
+    public bool $addXDefaultHrefLang = true;
 
     /**
      * @var bool Whether to dynamically include hreflang tags on paginated pages
      */
-    public $addPaginatedHreflang = true;
+    public bool $addPaginatedHreflang = true;
 
     /**
      * @var string Whether to include a Content Security Policy "nonce" for inline
@@ -168,12 +168,12 @@ class Settings extends VarsModel
      *      should be included. c.f.:
      *      https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#Unsafe_inline_script
      */
-    public $cspNonce = '';
+    public string $cspNonce = '';
 
     /**
      * @var array Fixed Content Security Policies to be added before any CSP nonces
      */
-    public $cspScriptSrcPolicies = [
+    public array $cspScriptSrcPolicies = [
         0 => [
             'policy' => "'self'",
         ],
@@ -185,17 +185,17 @@ class Settings extends VarsModel
      * are to have `canonical` links not appear on pages that are not intended to be indexed. SEOmatic does
      * this for you by default, but you can override that behavior with this setting
      */
-    public $alwaysIncludeCanonicalUrls = false;
+    public bool $alwaysIncludeCanonicalUrls = false;
 
     /**
      * @var bool Should the Canonical URL be automatically lower-cased?
      */
-    public $lowercaseCanonicalUrl = true;
+    public bool $lowercaseCanonicalUrl = true;
 
     /**
      * @var bool Should the meta generator tag and X-Powered-By header be included?
      */
-    public $generatorEnabled = true;
+    public bool $generatorEnabled = true;
 
     /**
      * @var string
@@ -203,40 +203,40 @@ class Settings extends VarsModel
      * are using it in a non-standard environment, such as a headless GraphQL or
      * ElementAPI server, you can override what it uses for the `siteUrl` below.
      */
-    public $siteUrlOverride = '';
+    public string $siteUrlOverride = '';
 
     /**
      * @var int
      * The duration of the SEOmatic meta cache in seconds.  Null means always cached until explicitly broken
      * If devMode is on, caches last 30 seconds.
      */
-    public $metaCacheDuration = 0;
+    public int $metaCacheDuration = 0;
 
     /**
      * @var bool Determines whether the meta container endpoint should be enabled for anonymous frontend access
      */
-    public $enableMetaContainerEndpoint = false;
+    public bool $enableMetaContainerEndpoint = false;
 
     /**
      * @var bool Determines whether the JSON-LD endpoint should be enabled for anonymous frontend access
      */
-    public $enableJsonLdEndpoint = false;
+    public bool $enableJsonLdEndpoint = false;
 
     /**
      * @var bool Determines whether the SEO File Link endpoint should be enabled for anonymous frontend access
      */
-    public $enableSeoFileLinkEndpoint = false;
+    public bool $enableSeoFileLinkEndpoint = false;
 
     /**
      * @var SeoElementInterface[] The default SeoElement type classes
      */
-    public $defaultSeoElementTypes = [
+    public array $defaultSeoElementTypes = [
     ];
 
     /**
      * @var string[] URL params that are allowed to be considered part of the unique URL used for the metadata cache
      */
-    public $allowedUrlParams = [
+    public array $allowedUrlParams = [
     ];
 
     // Public Methods
@@ -245,12 +245,19 @@ class Settings extends VarsModel
     /**
      * @inerhitdoc
      */
-    public function init(): void
+    public function __construct($config = [])
     {
-        // Normalize the metaCacheDuration to an integer
-        if ($this->metaCacheDuration === null || $this->metaCacheDuration === 'null') {
-            $this->metaCacheDuration = 0;
+        if (!empty($config)) {
+            if (!isset($config['metaCacheDuration'])) {
+                $config['metaCacheDuration'] = 0;
+            }
+            // Normalize the metaCacheDuration to an integer
+            if ($config['metaCacheDuration'] === null || $config['metaCacheDuration'] === 'null') {
+                $config['metaCacheDuration'] = 0;
+            }
         }
+
+        parent::__construct($config);
     }
 
     /**

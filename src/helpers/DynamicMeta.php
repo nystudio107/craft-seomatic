@@ -16,6 +16,7 @@ use craft\base\Element;
 use craft\errors\SiteNotFoundException;
 use craft\helpers\DateTimeHelper;
 use craft\web\twig\variables\Paginate;
+use DateTime;
 use nystudio107\seomatic\events\AddDynamicMetaEvent;
 use nystudio107\seomatic\fields\SeoSettings;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
@@ -31,9 +32,15 @@ use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\services\Helper as SeomaticHelper;
+use RecursiveArrayIterator;
+use RecursiveIteratorIterator;
 use yii\base\Event;
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
+use function count;
+use function in_array;
+use function is_array;
+use function is_string;
 
 
 /**
@@ -147,7 +154,7 @@ class DynamicMeta
                 $content = $robotsArray['content'] ?? '';
                 if (!empty($content)) {
                     // The content property can be a string or an array
-                    if (\is_array($content)) {
+                    if (is_array($content)) {
                         $headerValue = '';
                         foreach ($content as $contentVal) {
                             $headerValue .= ($contentVal . ',');
@@ -166,7 +173,7 @@ class DynamicMeta
                 $href = $canonicalArray['href'] ?? '';
                 if (!empty($href)) {
                     // The href property can be a string or an array
-                    if (\is_array($href)) {
+                    if (is_array($href)) {
                         $headerValue = '';
                         foreach ($href as $hrefVal) {
                             $headerValue .= ('<' . $hrefVal . '>' . ',');
@@ -186,7 +193,7 @@ class DynamicMeta
                 $content = $referrerArray['content'] ?? '';
                 if (!empty($content)) {
                     // The content property can be a string or an array
-                    if (\is_array($content)) {
+                    if (is_array($content)) {
                         $headerValue = '';
                         foreach ($content as $contentVal) {
                             $headerValue .= ($contentVal . ',');
@@ -228,7 +235,7 @@ class DynamicMeta
         // Add in any fixed policies from Settings
         if (!empty(Seomatic::$settings->cspScriptSrcPolicies)) {
             $fixedCsps = Seomatic::$settings->cspScriptSrcPolicies;
-            $iterator = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($fixedCsps));
+            $iterator = new RecursiveIteratorIterator(new RecursiveArrayIterator($fixedCsps));
             foreach ($iterator as $value) {
                 $cspNonces[] = $value;
             }
@@ -338,7 +345,7 @@ class DynamicMeta
         if (Seomatic::$settings->includeHomepageInBreadcrumbs) {
             /** @var Element $element */
             $position++;
-            $element = Craft::$app->getElements()->getElementByUri('__home__', $siteId);
+            $element = Craft::$app->getElements()->getElementByUri('__home__', $siteId, true);
             if ($element) {
                 $uri = $element->uri === '__home__' ? '' : ($element->uri ?? '');
                 try {
@@ -384,7 +391,7 @@ class DynamicMeta
         foreach ($segments as $segment) {
             $uri .= $segment;
             /** @var Element $element */
-            $element = Craft::$app->getElements()->getElementByUri($uri, $siteId);
+            $element = Craft::$app->getElements()->getElementByUri($uri, $siteId, true);
             if ($element && $element->uri) {
                 $position++;
                 $uri = $element->uri === '__home__' ? '' : $element->uri;
@@ -433,7 +440,7 @@ class DynamicMeta
                 'href' => [],
             ]);
             // Add the alternate language link rel's
-            if (\count($siteLocalizedUrls) > 1) {
+            if (count($siteLocalizedUrls) > 1) {
                 foreach ($siteLocalizedUrls as $siteLocalizedUrl) {
                     $url = $siteLocalizedUrl['url'];
                     if ($siteLocalizedUrl['current']) {
@@ -452,10 +459,10 @@ class DynamicMeta
             }
             // Add in the og:locale:alternate tags
             $ogLocaleAlternate = Seomatic::$plugin->tag->get('og:locale:alternate');
-            if (\count($siteLocalizedUrls) > 1 && $ogLocaleAlternate) {
+            if (count($siteLocalizedUrls) > 1 && $ogLocaleAlternate) {
                 $ogContentArray = [];
                 foreach ($siteLocalizedUrls as $siteLocalizedUrl) {
-                    if (!\in_array($siteLocalizedUrl['ogLanguage'], $ogContentArray, true) &&
+                    if (!in_array($siteLocalizedUrl['ogLanguage'], $ogContentArray, true) &&
                         Craft::$app->language !== $siteLocalizedUrl['language']) {
                         $ogContentArray[] = $siteLocalizedUrl['ogLanguage'];
                     }
@@ -569,7 +576,7 @@ class DynamicMeta
                             $seoSettingsField = Craft::$app->getFields()->getFieldByHandle($fieldHandle);
                             if ($fieldMetaBundle !== null && $seoSettingsField !== null && $seoSettingsField->sitemapTabEnabled) {
                                 // If sitemaps are off for this entry, don't include the URL
-                                if (\in_array('sitemapUrls', $seoSettingsField->sitemapEnabledFields, false)
+                                if (in_array('sitemapUrls', $seoSettingsField->sitemapEnabledFields, false)
                                     && !$fieldMetaBundle->metaSitemapVars->sitemapUrls
                                     && !Seomatic::$plugin->helper->isInherited($fieldMetaBundle->metaSitemapVars, 'sitemapUrls')
                                 ) {
@@ -706,7 +713,7 @@ class DynamicMeta
                 $openTime = '';
                 $closeTime = '';
                 if (!empty($hours['open'])) {
-                    /** @var \DateTime $dateTime */
+                    /** @var DateTime $dateTime */
                     try {
                         $dateTime = DateTimeHelper::toDateTime($hours['open']['date'], false, false);
                     } catch (\Exception $e) {
@@ -717,7 +724,7 @@ class DynamicMeta
                     }
                 }
                 if (!empty($hours['close'])) {
-                    /** @var \DateTime $dateTime */
+                    /** @var DateTime $dateTime */
                     try {
                         $dateTime = DateTimeHelper::toDateTime($hours['close']['date'], false, false);
                     } catch (\Exception $e) {
@@ -755,7 +762,7 @@ class DynamicMeta
         if ($jsonLd instanceof Organization && $entity !== null) {
             /** @var Organization $jsonLd */
             $contactPoints = [];
-            if ($entity->organizationContactPoints !== null && \is_array($entity->organizationContactPoints)) {
+            if ($entity->organizationContactPoints !== null && is_array($entity->organizationContactPoints)) {
                 foreach ($entity->organizationContactPoints as $contacts) {
                     /** @var ContactPoint $contact */
                     $contact = Seomatic::$plugin->jsonLd->create([
@@ -778,7 +785,7 @@ class DynamicMeta
      */
     public static function normalizeTimes(&$value)
     {
-        if (\is_string($value)) {
+        if (is_string($value)) {
             $value = Json::decode($value);
         }
         $normalized = [];

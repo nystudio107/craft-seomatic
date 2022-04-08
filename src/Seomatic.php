@@ -307,8 +307,7 @@ class Seomatic extends Plugin
         self::$view = Craft::$app->getView();
         self::$cacheDuration = self::$devMode
             ? self::DEVMODE_CACHE_DURATION
-            : self::$settings->metaCacheDuration ?? null;
-        self::$cacheDuration = self::$cacheDuration === null ? null : (int)self::$cacheDuration;
+            : self::$settings->metaCacheDuration ?? 0;
         self::$environment = EnvironmentHelper::determineEnvironment();
         MetaValueHelper::cache();
         // Version helpers
