@@ -6,6 +6,7 @@
 
 ### Fixed
 * Fixed an issue where disabled entries could appear in breadcrumbs JSON-LD ([#1088](https://github.com/nystudio107/craft-seomatic/issues/1088))
+* Fix an issue where the cacheDuration setting could throw an exception ([#1102](https://github.com/nystudio107/craft-seomatic/issues/1102))
 
 ## 4.0.0-beta.6 - 2022.03.22
 
