@@ -1,7 +1,13 @@
 # SEOmatic Changelog
 
-## 3.4.28 - 2022.03.22
+## 3.4.29 - 2022.04.08
+### Changed
+* Only regenerate sitemaps via queue jobs if they are a result of an invalidation of the sitemap cache ([#1098](https://github.com/nystudio107/craft-seomatic/issues/1098)) ([#1097](https://github.com/nystudio107/craft-seomatic/issues/1097))
 
+### Fixed
+* Fixed an issue where disabled entries could appear in breadcrumbs JSON-LD ([#1088](https://github.com/nystudio107/craft-seomatic/issues/1088))
+
+## 3.4.28 - 2022.03.22
 ### Fixed
 
 * Fixed an issue that could cause an exception to be thrown during a console request ([#1080](https://github.com/nystudio107/craft-seomatic/issues/1080))
