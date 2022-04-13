@@ -1,7 +1,7 @@
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
 
-{% namespace "site" %}
+{% namespace "seomaticSite" %}
     {{ forms.textField({
         label: "Site Name"|t("seomatic"),
         instructions: "The public name of the website; this is appended to the page title by default."|t("seomatic"),
@@ -13,9 +13,9 @@
 {% endnamespace %}
 
 {% set entity = site.identity %}
-{% namespace "site[identity]" %}
+{% namespace "seomaticSite[identity]" %}
 
-    {############### Main Entity of Page ###############}
+    {# ############## Main Entity of Page ############## #}
 
     {% include "seomatic/settings/_includes/mainEntityOfPage-partial.twig" with {
         "mainEntityOfPage": entity,
