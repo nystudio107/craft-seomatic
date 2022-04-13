@@ -8,6 +8,7 @@
 ### Fixed
 * Fixed an issue where the `Autocomplete` helper could throw an exception if it encountered a `ReflectionUnionType`
 * Add `box-content` class on the code editors, to adjust for the new Tailwind CSS reset in v4
+* Fixed an issue where none of the Site Settings changes could be saved ([#1107](https://github.com/nystudio107/craft-seomatic/issues/1107))
 
 ## 4.0.0-beta.7 - 2022.04.08
 ### Changed
