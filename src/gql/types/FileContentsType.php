@@ -11,10 +11,9 @@
 
 namespace nystudio107\seomatic\gql\types;
 
+use Craft;
 use craft\gql\base\ObjectType;
 use craft\gql\GqlEntityRegistry;
-use craft\gql\TypeManager;
-
 use GraphQL\Type\Definition\Type;
 
 /**
@@ -86,6 +85,6 @@ class FileContentsType extends ObjectType
             ]
         ];
 
-        return TypeManager::prepareFieldDefinitions($fields, self::getName());
+        return Craft::$app->getGql()->prepareFieldDefinitions($fields, self::getName());
     }
 }
