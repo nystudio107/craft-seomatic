@@ -1,6 +1,10 @@
 # SEOmatic Changelog
 
 ## 4.0.0-beta.8 - UNRELEASED
+### Changed
+* Don’t use deprecated `TypeManager::prepareFieldDefinitions()`
+* If a meta item would in the past return an empty array `[]` for its rendered attributes, return `null` instead ([#1105](https://github.com/nystudio107/craft-seomatic/issues/1105))
+
 ### Fixed
 * Fixed an issue where the `Autocomplete` helper could throw an exception if it encountered a `ReflectionUnionType`
 * Add `box-content` class on the code editors, to adjust for the new Tailwind CSS reset in v4
