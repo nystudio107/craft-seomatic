@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.30 - UNRELEASED
+### Fixed
+* Fixed an issue where the `Autocomplete` helper could throw an exception if it encountered a `ReflectionUnionType`
+
 ## 3.4.29 - 2022.04.08
 ### Changed
 * Only regenerate sitemaps via queue jobs if they are a result of an invalidation of the sitemap cache ([#1098](https://github.com/nystudio107/craft-seomatic/issues/1098)) ([#1097](https://github.com/nystudio107/craft-seomatic/issues/1097))
