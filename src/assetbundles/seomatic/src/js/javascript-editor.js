@@ -33,7 +33,7 @@ function makeMonacoEditor(elementId, additionalCompletionsCacheKey) {
   let container = document.createElement('div');
   // Make a sibling div for the Monaco editor to live in
   container.id = elementId + '-monaco-editor';
-  container.classList.add('py-4', 'monaco-editor-background-frame', 'w-full', 'h-full');
+  container.classList.add('box-content', 'py-4', 'monaco-editor-background-frame', 'w-full', 'h-full');
   textArea.parentNode.insertBefore(container, textArea);
   textArea.style.display = 'none';
   // Create the Monaco editor
