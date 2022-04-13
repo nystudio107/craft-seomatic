@@ -3,6 +3,7 @@
 ## 4.0.0-beta.8 - UNRELEASED
 ### Fixed
 * Fixed an issue where the `Autocomplete` helper could throw an exception if it encountered a `ReflectionUnionType`
+* Add `box-content` class on the code editors, to adjust for the new Tailwind CSS reset in v4
 
 ## 4.0.0-beta.7 - 2022.04.08
 ### Changed
