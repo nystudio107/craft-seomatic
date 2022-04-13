@@ -3,6 +3,7 @@
 ## 3.4.30 - UNRELEASED
 ### Fixed
 * Fixed an issue where the `Autocomplete` helper could throw an exception if it encountered a `ReflectionUnionType`
+* Fixed an issue with the default `Humans.txt` implementation of `parseEnv()` ([#1109](https://github.com/nystudio107/craft-seomatic/issues/1109))
 
 ## 3.4.29 - 2022.04.08
 ### Changed
