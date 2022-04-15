@@ -19,6 +19,9 @@ use nystudio107\seomatic\helpers\Container as ContainerHelper;
 use craft\base\Element;
 use craft\gql\base\Resolver;
 use craft\helpers\Json;
+use craft\services\Sites;
+
+use yii\di\Instance;
 
 use GraphQL\Type\Definition\ResolveInfo;
 
@@ -51,6 +54,11 @@ class SeomaticResolver extends Resolver
             $siteId = GqlHelper::getSiteIdFromGqlArguments($arguments);
         }
 
+        // Set Craft's current site to the siteId we decided upon
+        $sites = Instance::ensure("sites", Sites::class);
+        $oldCurrentSite = $sites->getCurrentSite();
+        $sites->setCurrentSite($siteId);
+
         // Change the environment if we need to
         $environment = $arguments['environment'] ?? null;
         $oldEnvironment = Seomatic::$environment;
@@ -74,6 +82,9 @@ class SeomaticResolver extends Resolver
         if ($environment) {
             Seomatic::$environment = $oldEnvironment;
         }
+
+        // Restore old current site
+        $sites->setCurrentSite($oldCurrentSite);
 
         return $result;
     }
