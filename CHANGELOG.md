@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.4.30 - UNRELEASED
+### Changed
+* Ensure that the `currentSite` is set to the requested one when processing headless requests via API endpoint or GraphQL, to ensure things like `siteUrl()` etc. resolve correctly ([#1111](https://github.com/nystudio107/craft-seomatic/issues/1111))
+
 ### Fixed
 * Fixed an issue where the `Autocomplete` helper could throw an exception if it encountered a `ReflectionUnionType`
 * Fixed an issue with the default `Humans.txt` implementation of `parseEnv()` ([#1109](https://github.com/nystudio107/craft-seomatic/issues/1109))
