@@ -3,6 +3,8 @@
 ## 4.0.0-beta.8 - UNRELEASED
 ### Changed
 * Don’t use deprecated `TypeManager::prepareFieldDefinitions()`
+* Pass through all `siteUrl()` parameters in the Helper service ([#1114](https://github.com/nystudio107/craft-seomatic/pull/1114))
+* Ensure that the `currentSite` is set to the requested one when processing headless requests via API endpoint or GraphQL, to ensure things like `siteUrl()` etc. resolve correctly ([#1111](https://github.com/nystudio107/craft-seomatic/issues/1111))
 
 ### Fixed
 * Fixed an issue where the `Autocomplete` helper could throw an exception if it encountered a `ReflectionUnionType`
