@@ -76,6 +76,8 @@ use nystudio107\seomatic\services\Title as TitleService;
 use nystudio107\seomatic\twigextensions\SeomaticTwigExtension;
 use nystudio107\seomatic\variables\SeomaticVariable;
 use yii\base\Event;
+use yii\base\View as BaseView;
+use yii\web\View as YiiView;
 
 /** @noinspection MissingPropertyAnnotationsInspection */
 
@@ -104,21 +106,15 @@ class Seomatic extends Plugin
     // Constants
     // =========================================================================
 
-    const SEOMATIC_HANDLE = 'Seomatic';
+    public const SEOMATIC_HANDLE = 'Seomatic';
 
-    const DEVMODE_CACHE_DURATION = 30;
+    public const DEVMODE_CACHE_DURATION = 30;
 
-    const FRONTEND_SEO_FILE_LINK = 'seomatic/seo-file-link/<url:[^\/]+>/<robots:[^\/]+>/<canonical:[^\/]+>/<inline:\d+>/<fileName:[-\w\.*]+>';
+    protected const FRONTEND_SEO_FILE_LINK = 'seomatic/seo-file-link/<url:[^\/]+>/<robots:[^\/]+>/<canonical:[^\/]+>/<inline:\d+>/<fileName:[-\w\.*]+>';
 
-    const FRONTEND_PREVIEW_PATH = 'seomatic/preview-social-media';
+    protected const FRONTEND_PREVIEW_PATH = 'seomatic/preview-social-media';
 
-    const SEOMATIC_PREVIEW_AUTHORIZATION_KEY = 'seomaticPreviewAuthorizationKey';
-
-    const GQL_ELEMENT_INTERFACES = [
-        'EntryInterface',
-        'CategoryInterface',
-        'ProductInterface',
-    ];
+    protected const SEOMATIC_PREVIEW_AUTHORIZATION_KEY = 'seomaticPreviewAuthorizationKey';
 
     // Static Properties
     // =========================================================================
@@ -593,11 +589,11 @@ class Seomatic extends Plugin
             }
         );
         // Add social media preview targets on Craft 3.2 or later
-        if (Seomatic::$settings->socialMediaPreviewTarget) {
+        if (self::$settings->socialMediaPreviewTarget) {
             // Handler: Entry::EVENT_REGISTER_PREVIEW_TARGETS
             Event::on(
                 Entry::class,
-                Entry::EVENT_REGISTER_PREVIEW_TARGETS,
+                Element::EVENT_REGISTER_PREVIEW_TARGETS,
                 static function (RegisterPreviewTargetsEvent $e) {
                     /** @var Element $element */
                     $element = $e->sender;
@@ -620,7 +616,7 @@ class Seomatic extends Plugin
             Event::on(
                 FeedMeFields::class,
                 FeedMeFields::EVENT_REGISTER_FEED_ME_FIELDS,
-                function (RegisterFeedMeFieldsEvent $e) {
+                static function (RegisterFeedMeFieldsEvent $e) {
                     Craft::debug(
                         'FeedMeFields::EVENT_REGISTER_FEED_ME_FIELDS',
                         __METHOD__
@@ -748,7 +744,7 @@ class Seomatic extends Plugin
         // Handler: View::EVENT_BEGIN_BODY
         Event::on(
             View::class,
-            View::EVENT_BEGIN_BODY,
+            YiiView::EVENT_BEGIN_BODY,
             static function () {
                 Craft::debug(
                     'View::EVENT_BEGIN_BODY',
@@ -756,14 +752,14 @@ class Seomatic extends Plugin
                 );
                 // The <body> placeholder tag has just rendered, include any script HTML
                 if (self::$settings->renderEnabled && self::$seomaticVariable) {
-                    self::$plugin->metaContainers->includeScriptBodyHtml(View::POS_BEGIN);
+                    self::$plugin->metaContainers->includeScriptBodyHtml(YiiView::POS_BEGIN);
                 }
             }
         );
         // Handler: View::EVENT_END_BODY
         Event::on(
             View::class,
-            View::EVENT_END_BODY,
+            YiiView::EVENT_END_BODY,
             static function () {
                 Craft::debug(
                     'View::EVENT_END_BODY',
@@ -771,14 +767,14 @@ class Seomatic extends Plugin
                 );
                 // The </body> placeholder tag is about to be rendered, include any script HTML
                 if (self::$settings->renderEnabled && self::$seomaticVariable) {
-                    self::$plugin->metaContainers->includeScriptBodyHtml(View::POS_END);
+                    self::$plugin->metaContainers->includeScriptBodyHtml(YiiView::POS_END);
                 }
             }
         );
         // Handler: View::EVENT_END_PAGE
         Event::on(
             View::class,
-            View::EVENT_END_PAGE,
+            BaseView::EVENT_END_PAGE,
             static function () {
                 Craft::debug(
                     'View::EVENT_END_PAGE',
@@ -957,6 +953,7 @@ class Seomatic extends Plugin
      * Returns the custom Control Panel user permissions.
      *
      * @return array
+     * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
      */
     protected function customAdminCpPermissions(): array
     {
@@ -965,6 +962,7 @@ class Seomatic extends Plugin
             $currentSiteId = Craft::$app->getSites()->getCurrentSite()->id ?? 1;
         } catch (SiteNotFoundException $e) {
             $currentSiteId = 1;
+            Craft::error($e->getMessage(), __METHOD__);
         }
         // Dynamic permissions for the scripts
         $metaBundle = self::$plugin->metaBundles->getGlobalMetaBundle($currentSiteId);
@@ -975,7 +973,7 @@ class Seomatic extends Plugin
                 MetaScriptContainer::CONTAINER_TYPE
             );
             foreach ($scripts as $scriptHandle => $scriptData) {
-                $scriptsPerms["seomatic:tracking-scripts:${scriptHandle}"] = [
+                $scriptsPerms["seomatic:tracking-scripts:$scriptHandle"] = [
                     'label' => Craft::t('seomatic', $scriptData->name),
                 ];
             }
