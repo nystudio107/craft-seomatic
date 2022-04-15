@@ -9,6 +9,7 @@
 * Add `box-content` class on the code editors, to adjust for the new Tailwind CSS reset in v4
 * Fixed an issue where none of the Site Settings changes could be saved ([#1107](https://github.com/nystudio107/craft-seomatic/issues/1107))
 * Fixed an issue with the default `Humans.txt` implementation of `parseEnv()` ([#1109](https://github.com/nystudio107/craft-seomatic/issues/1109))
+* Fixed a validation issue due to incorrect typing that caused the Plugin Settings to be unable to be saved ([#1112](https://github.com/nystudio107/craft-seomatic/issues/1112))
 
 ## 4.0.0-beta.7 - 2022.04.08
 ### Changed
