@@ -11,8 +11,6 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use nystudio107\seomatic\Seomatic;
-
 use Craft;
 
 /**
@@ -37,11 +35,7 @@ class SiteHelper
     public static function siteEnabledWithUrls($siteId): bool
     {
         $result = false;
-        if (Seomatic::$craft35) {
-            $site = Craft::$app->getSites()->getSiteById($siteId, false);
-        } else {
-            $site = Craft::$app->getSites()->getSiteById($siteId);
-        }
+        $site = Craft::$app->getSites()->getSiteById($siteId, false);
         if ($site) {
             $result = $site->hasUrls;
         }

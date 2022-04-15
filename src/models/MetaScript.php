@@ -14,7 +14,6 @@ namespace nystudio107\seomatic\models;
 use Craft;
 use nystudio107\seomatic\base\NonceItem;
 use nystudio107\seomatic\helpers\PluginTemplate as PluginTemplateHelper;
-use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\validators\TwigExpressionValidator;
 use yii\web\View;
 use function is_string;
@@ -304,12 +303,10 @@ class MetaScript extends NonceItem
         $variables = array_merge($this->vars, [
             'dataLayer' => $this->dataLayer,
         ]);
-        if (Seomatic::$craft31) {
-            foreach ($variables as $key => $value) {
-                if (!empty($value['value']) && is_string($value['value'])) {
-                    $variables[$key]['value'] = Craft::parseEnv($value['value']);
-                    $variables[$key]['value'] = trim($variables[$key]['value']);
-                }
+        foreach ($variables as $key => $value) {
+            if (!empty($value['value']) && is_string($value['value'])) {
+                $variables[$key]['value'] = Craft::parseEnv($value['value']);
+                $variables[$key]['value'] = trim($variables[$key]['value']);
             }
         }
 

@@ -251,54 +251,6 @@ class MetaBundles extends Component
     }
 
     /**
-     * Preserve user settings from the meta bundle when updating it from the
-     * config
-     *
-     * @param MetaBundle $metaBundle The new meta bundle
-     * @param MetaBundle $baseConfig The existing meta bundle to preserve
-     *                               settings from
-     */
-    protected function mergeMetaBundleSettings(MetaBundle $metaBundle, MetaBundle $baseConfig)
-    {
-        // Preserve the metaGlobalVars
-        $attributes = $baseConfig->metaGlobalVars->getAttributes();
-        $metaBundle->metaGlobalVars->setAttributes($attributes);
-        // Preserve the metaSiteVars
-        if ($baseConfig->metaSiteVars !== null) {
-            $attributes = $baseConfig->metaSiteVars->getAttributes();
-            $metaBundle->metaSiteVars->setAttributes($attributes);
-            if ($baseConfig->metaSiteVars->identity !== null) {
-                $attributes = $baseConfig->metaSiteVars->identity->getAttributes();
-                $metaBundle->metaSiteVars->identity->setAttributes($attributes);
-            }
-            if ($baseConfig->metaSiteVars->creator !== null) {
-                $attributes = $baseConfig->metaSiteVars->creator->getAttributes();
-                $metaBundle->metaSiteVars->creator->setAttributes($attributes);
-            }
-        }
-        // Preserve the Frontend Templates, but add in any new containers
-        foreach ($baseConfig->frontendTemplatesContainer->data as $key => $value) {
-            $metaBundle->frontendTemplatesContainer->data[$key] = $value;
-        }
-        // Preserve the metaSitemapVars
-        $attributes = $baseConfig->metaSitemapVars->getAttributes();
-        $metaBundle->metaSitemapVars->setAttributes($attributes);
-        // Preserve the metaBundleSettings
-        $attributes = $baseConfig->metaBundleSettings->getAttributes();
-        $metaBundle->metaBundleSettings->setAttributes($attributes);
-        // Preserve the Script containers, but add in any new containers
-        foreach ($baseConfig->metaContainers as $baseMetaContainerName => $baseMetaContainer) {
-            if ($baseMetaContainer::CONTAINER_TYPE === MetaScriptContainer::CONTAINER_TYPE) {
-                foreach ($baseMetaContainer->data as $key => $value) {
-                    if (!empty($metaBundle->metaContainers[$baseMetaContainerName])) {
-                        $metaBundle->metaContainers[$baseMetaContainerName]->data[$key] = $value;
-                    }
-                }
-            }
-        }
-    }
-
-    /**
      * @param MetaBundle $metaBundle
      * @param int $siteId
      */
@@ -681,10 +633,8 @@ class MetaBundles extends Component
     {
         $metaBundleInvalidated = false;
         $invalidateMetaBundle = true;
-        if (Seomatic::$craft32) {
-            if ($element->getIsDraft() || $element->getIsRevision()) {
-                $invalidateMetaBundle = false;
-            }
+        if ($element->getIsDraft() || $element->getIsRevision()) {
+            $invalidateMetaBundle = false;
         }
         if ($element && $invalidateMetaBundle) {
             $uri = $element->uri ?? '';
@@ -1049,9 +999,6 @@ class MetaBundles extends Component
         }
     }
 
-    // Protected Methods
-    // =========================================================================
-
     /**
      * Create the default global meta bundles
      */
@@ -1060,6 +1007,57 @@ class MetaBundles extends Component
         $sites = Craft::$app->getSites()->getAllSites();
         foreach ($sites as $site) {
             $this->createGlobalMetaBundleForSite($site->id);
+        }
+    }
+
+    // Protected Methods
+    // =========================================================================
+
+    /**
+     * Preserve user settings from the meta bundle when updating it from the
+     * config
+     *
+     * @param MetaBundle $metaBundle The new meta bundle
+     * @param MetaBundle $baseConfig The existing meta bundle to preserve
+     *                               settings from
+     */
+    protected function mergeMetaBundleSettings(MetaBundle $metaBundle, MetaBundle $baseConfig)
+    {
+        // Preserve the metaGlobalVars
+        $attributes = $baseConfig->metaGlobalVars->getAttributes();
+        $metaBundle->metaGlobalVars->setAttributes($attributes);
+        // Preserve the metaSiteVars
+        if ($baseConfig->metaSiteVars !== null) {
+            $attributes = $baseConfig->metaSiteVars->getAttributes();
+            $metaBundle->metaSiteVars->setAttributes($attributes);
+            if ($baseConfig->metaSiteVars->identity !== null) {
+                $attributes = $baseConfig->metaSiteVars->identity->getAttributes();
+                $metaBundle->metaSiteVars->identity->setAttributes($attributes);
+            }
+            if ($baseConfig->metaSiteVars->creator !== null) {
+                $attributes = $baseConfig->metaSiteVars->creator->getAttributes();
+                $metaBundle->metaSiteVars->creator->setAttributes($attributes);
+            }
+        }
+        // Preserve the Frontend Templates, but add in any new containers
+        foreach ($baseConfig->frontendTemplatesContainer->data as $key => $value) {
+            $metaBundle->frontendTemplatesContainer->data[$key] = $value;
+        }
+        // Preserve the metaSitemapVars
+        $attributes = $baseConfig->metaSitemapVars->getAttributes();
+        $metaBundle->metaSitemapVars->setAttributes($attributes);
+        // Preserve the metaBundleSettings
+        $attributes = $baseConfig->metaBundleSettings->getAttributes();
+        $metaBundle->metaBundleSettings->setAttributes($attributes);
+        // Preserve the Script containers, but add in any new containers
+        foreach ($baseConfig->metaContainers as $baseMetaContainerName => $baseMetaContainer) {
+            if ($baseMetaContainer::CONTAINER_TYPE === MetaScriptContainer::CONTAINER_TYPE) {
+                foreach ($baseMetaContainer->data as $key => $value) {
+                    if (!empty($metaBundle->metaContainers[$baseMetaContainerName])) {
+                        $metaBundle->metaContainers[$baseMetaContainerName]->data[$key] = $value;
+                    }
+                }
+            }
         }
     }
 }

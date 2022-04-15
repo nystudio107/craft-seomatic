@@ -59,31 +59,18 @@
     }) }}
 </div>
 
-{% if seomatic.helper.craft31 %}
-    {{ forms.autosuggestField({
-        label: "Entity URL"|t("seomatic"),
-        instructions: "A URL for the entity that #{websiteVerb} the website" |t("seomatic"),
-        suggestEnvVars: true,
-        suggestAliases: true,
-        id: "genericUrl",
-        class: "nicetext",
-        name: "genericUrl",
-        value: entity.genericUrl,
-        required: false,
-        errors: entity.getErrors("genericUrl"),
-    }) }}
-{% else %}
-    {{ forms.textField({
-        label: "Entity URL"|t("seomatic"),
-        instructions: "A URL for the entity that #{websiteVerb} the website" |t("seomatic"),
-        id: "genericUrl",
-        class: "nicetext",
-        name: "genericUrl",
-        value: entity.genericUrl,
-        required: false,
-        errors: entity.getErrors("genericUrl"),
-    }) }}
-{% endif %}
+{{ forms.autosuggestField({
+    label: "Entity URL"|t("seomatic"),
+    instructions: "A URL for the entity that #{websiteVerb} the website" |t("seomatic"),
+    suggestEnvVars: true,
+    suggestAliases: true,
+    id: "genericUrl",
+    class: "nicetext",
+    name: "genericUrl",
+    value: entity.genericUrl,
+    required: false,
+    errors: entity.getErrors("genericUrl"),
+}) }}
 
 {{ forms.elementSelectfield({
     label: "Entity Brand"|t("seomatic"),
