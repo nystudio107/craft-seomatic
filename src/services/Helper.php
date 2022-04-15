@@ -164,7 +164,7 @@ class Helper extends Component
      */
     public static function siteUrl(string $path = '', $params = null, string $scheme = null, int $siteId = null): string
     {
-        return UrlHelper::siteUrl($path);
+        return UrlHelper::siteUrl($path, $params, $scheme, $siteId);
     }
 
     /**
