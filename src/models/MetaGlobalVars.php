@@ -23,16 +23,26 @@ use nystudio107\seomatic\base\InheritableSettingsModel;
  */
 class MetaGlobalVars extends InheritableSettingsModel
 {
-    // Static Methods
+    // Constants
     // =========================================================================
+    protected const ADJUST_QUERY_ACCESS_FIELDS = [
+        'seoImage',
+        'seoImageWidth',
+        'seoImageHeight',
+        'ogImage',
+        'ogImageWidth',
+        'ogImageHeight',
+        'twitterImage',
+        'twitterImageWidth',
+        'twitterImageHeight',
+    ];
 
+    // Public Properties
+    // =========================================================================
     /**
      * @var string
      */
     public $language;
-
-    // Public Properties
-    // =========================================================================
     /**
      * @var string The schema.org type representing the mainEntityOfPage
      */
@@ -186,6 +196,13 @@ class MetaGlobalVars extends InheritableSettingsModel
             } else {
                 // Ensure that `canonicalUrl` is always a string
                 $this->canonicalUrl = '{seomatic.helper.safeCanonicalUrl()}';
+            }
+        }
+        // Find any instances of image-related fields that contain Twig code, and access assets
+        // using the old `[0]` array syntax with `.one()`
+        foreach (self::ADJUST_QUERY_ACCESS_FIELDS as $queryField) {
+            if (!empty($this->$queryField) && str_contains($this->$queryField, '{')) {
+                $this->$queryField = str_replace('[0]', '.collect()[0]', $this->$queryField);
             }
         }
     }
