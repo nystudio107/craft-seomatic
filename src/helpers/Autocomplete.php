@@ -12,15 +12,14 @@ namespace nystudio107\seomatic\helpers;
 use Craft;
 use craft\base\Element;
 use craft\helpers\ArrayHelper;
-
+use phpDocumentor\Reflection\DocBlockFactory;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionNamedType;
+use ReflectionUnionType;
 use yii\base\Behavior;
 use yii\base\InvalidConfigException;
 use yii\di\ServiceLocator;
-
-use phpDocumentor\Reflection\DocBlockFactory;
 
 /**
  * @author    nystudio107
@@ -401,7 +400,18 @@ class Autocomplete
                 $paramList = [];
                 foreach ($params as $param) {
                     if ($param->hasType()) {
-                        $paramList[] = $param->getType()->getName() . ': ' . '$' . $param->getName();
+                        $reflectionType = $param->getType();
+                        if ($reflectionType instanceof ReflectionUnionType) {
+                            $unionTypes = $reflectionType->getTypes();
+                            $typeName = '';
+                            foreach ($unionTypes as $unionType) {
+                                $typeName .= '|' . $unionType->getName();
+                            }
+                            $typeName = trim($typeName, '|');
+                            $paramList[] = $typeName . ': ' . '$' . $param->getName();
+                        } else {
+                            $paramList[] = $param->getType()->getName() . ': ' . '$' . $param->getName();
+                        }
                     } else {
                         $paramList[] = '$' . $param->getName();
                     }
@@ -416,7 +426,7 @@ class Autocomplete
                     if ($tags) {
                         $docsPreamble = "Parameters:\n\n";
                         foreach ($tags as $tag) {
-                            $docsPreamble .= $tag. "\n";
+                            $docsPreamble .= $tag . "\n";
                         }
                         $docsPreamble .= "\n";
                     }
@@ -481,7 +491,7 @@ class Autocomplete
      */
     private static function overrideValues(): array
     {
-        return  [
+        return [
             // Set the nonce to a blank string, as it changes on every request
             'nonce' => '',
         ];

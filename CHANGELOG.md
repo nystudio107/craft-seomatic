@@ -1,5 +1,14 @@
 # SEOmatic Changelog
 
+## 3.4.30 - 2022.04.18
+### Changed
+* Ensure that the `currentSite` is set to the requested one when processing headless requests via API endpoint or GraphQL, to ensure things like `siteUrl()` etc. resolve correctly ([#1111](https://github.com/nystudio107/craft-seomatic/issues/1111))
+* Use the native `str_contains()` over `StringHelper::contains()` (which is slower, and allocated objects, etc.)
+
+### Fixed
+* Fixed an issue where the `Autocomplete` helper could throw an exception if it encountered a `ReflectionUnionType`
+* Fixed an issue with the default `Humans.txt` implementation of `parseEnv()` ([#1109](https://github.com/nystudio107/craft-seomatic/issues/1109))
+
 ## 3.4.29 - 2022.04.08
 ### Changed
 * Only regenerate sitemaps via queue jobs if they are a result of an invalidation of the sitemap cache ([#1098](https://github.com/nystudio107/craft-seomatic/issues/1098)) ([#1097](https://github.com/nystudio107/craft-seomatic/issues/1097))
