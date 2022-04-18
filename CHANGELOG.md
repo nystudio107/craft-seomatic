@@ -1,5 +1,22 @@
 # SEOmatic Changelog
 
+## 4.0.0-beta.8 - 2022.04.18
+### Changed
+* Don’t use deprecated `TypeManager::prepareFieldDefinitions()`
+* Pass through all `siteUrl()` parameters in the Helper service ([#1114](https://github.com/nystudio107/craft-seomatic/pull/1114))
+* Ensure that the `currentSite` is set to the requested one when processing headless requests via API endpoint or GraphQL, to ensure things like `siteUrl()` etc. resolve correctly ([#1111](https://github.com/nystudio107/craft-seomatic/issues/1111))
+* Remove all `::craft3*` version static variables, and the conditional code they depend on
+* Use the native `str_contains()` over `StringHelper::contains()` (which is slower, and allocated objects, etc.)
+
+### Fixed
+* Fixed an issue where the `Autocomplete` helper could throw an exception if it encountered a `ReflectionUnionType`
+* Add `box-content` class on the code editors, to adjust for the new Tailwind CSS reset in v4
+* Fixed an issue where none of the Site Settings changes could be saved ([#1107](https://github.com/nystudio107/craft-seomatic/issues/1107))
+* Fixed an issue with the default `Humans.txt` implementation of `parseEnv()` ([#1109](https://github.com/nystudio107/craft-seomatic/issues/1109))
+* Fixed a validation issue due to incorrect typing that caused the Plugin Settings to be unable to be saved ([#1112](https://github.com/nystudio107/craft-seomatic/issues/1112))
+* Dynamically change `[0]` to `.collect()[0]` in certain MetaGlobalVars fields so Asset Query accesses will work with Craft 4
+* Change `[0]` to `.collect()[0]` so Asset Query accesses will work with Craft 4
+
 ## 4.0.0-beta.7 - 2022.04.08
 ### Changed
 * Only regenerate sitemaps via queue jobs if they are a result of an invalidation of the sitemap cache ([#1098](https://github.com/nystudio107/craft-seomatic/issues/1098)) ([#1097](https://github.com/nystudio107/craft-seomatic/issues/1097))

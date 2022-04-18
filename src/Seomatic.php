@@ -45,9 +45,6 @@ use craft\services\UserPermissions;
 use craft\utilities\ClearCaches;
 use craft\web\UrlManager;
 use craft\web\View;
-use markhuot\CraftQL\Builders\Schema;
-use markhuot\CraftQL\CraftQL;
-use markhuot\CraftQL\Events\AlterSchemaFields;
 use nystudio107\fastcgicachebust\FastcgiCacheBust;
 use nystudio107\pluginmanifest\services\ManifestService;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
@@ -63,7 +60,6 @@ use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
 use nystudio107\seomatic\helpers\Gql as GqlHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\integrations\feedme\SeoSettings as SeoSettingsFeedMe;
-use nystudio107\seomatic\listeners\GetCraftQLSchema;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\Settings;
 use nystudio107\seomatic\services\FrontendTemplates as FrontendTemplatesService;
@@ -80,6 +76,8 @@ use nystudio107\seomatic\services\Title as TitleService;
 use nystudio107\seomatic\twigextensions\SeomaticTwigExtension;
 use nystudio107\seomatic\variables\SeomaticVariable;
 use yii\base\Event;
+use yii\base\View as BaseView;
+use yii\web\View as YiiView;
 
 /** @noinspection MissingPropertyAnnotationsInspection */
 
@@ -108,21 +106,15 @@ class Seomatic extends Plugin
     // Constants
     // =========================================================================
 
-    const SEOMATIC_HANDLE = 'Seomatic';
+    public const SEOMATIC_HANDLE = 'Seomatic';
 
-    const DEVMODE_CACHE_DURATION = 30;
+    public const DEVMODE_CACHE_DURATION = 30;
 
-    const FRONTEND_SEO_FILE_LINK = 'seomatic/seo-file-link/<url:[^\/]+>/<robots:[^\/]+>/<canonical:[^\/]+>/<inline:\d+>/<fileName:[-\w\.*]+>';
+    protected const FRONTEND_SEO_FILE_LINK = 'seomatic/seo-file-link/<url:[^\/]+>/<robots:[^\/]+>/<canonical:[^\/]+>/<inline:\d+>/<fileName:[-\w\.*]+>';
 
-    const FRONTEND_PREVIEW_PATH = 'seomatic/preview-social-media';
+    protected const FRONTEND_PREVIEW_PATH = 'seomatic/preview-social-media';
 
-    const SEOMATIC_PREVIEW_AUTHORIZATION_KEY = 'seomaticPreviewAuthorizationKey';
-
-    const GQL_ELEMENT_INTERFACES = [
-        'EntryInterface',
-        'CategoryInterface',
-        'ProductInterface',
-    ];
+    protected const SEOMATIC_PREVIEW_AUTHORIZATION_KEY = 'seomaticPreviewAuthorizationKey';
 
     // Static Properties
     // =========================================================================
@@ -191,36 +183,6 @@ class Seomatic extends Plugin
      * @var bool
      */
     public static bool $headlessRequest = false;
-
-    /**
-     * @var bool
-     */
-    public static bool $craft31 = false;
-
-    /**
-     * @var bool
-     */
-    public static bool $craft32 = false;
-
-    /**
-     * @var bool
-     */
-    public static bool $craft33 = false;
-
-    /**
-     * @var bool
-     */
-    public static bool $craft34 = false;
-
-    /**
-     * @var bool
-     */
-    public static bool $craft35 = false;
-
-    /**
-     * @var bool
-     */
-    public static bool $craft37 = false;
 
     // Public Properties
     // =========================================================================
@@ -310,13 +272,6 @@ class Seomatic extends Plugin
             : self::$settings->metaCacheDuration ?? 0;
         self::$environment = EnvironmentHelper::determineEnvironment();
         MetaValueHelper::cache();
-        // Version helpers
-        self::$craft31 = version_compare(Craft::$app->getVersion(), '3.1', '>=');
-        self::$craft32 = version_compare(Craft::$app->getVersion(), '3.2', '>=');
-        self::$craft33 = version_compare(Craft::$app->getVersion(), '3.3', '>=');
-        self::$craft34 = version_compare(Craft::$app->getVersion(), '3.4', '>=');
-        self::$craft35 = version_compare(Craft::$app->getVersion(), '3.5', '>=');
-        self::$craft37 = version_compare(Craft::$app->getVersion(), '3.7', '>=');
         $this->name = self::$settings->pluginName;
         // Install our event listeners
         $this->installEventListeners();
@@ -387,12 +342,10 @@ class Seomatic extends Plugin
         self::$plugin->frontendTemplates->invalidateCaches();
         self::$plugin->metaContainers->invalidateCaches();
         self::$plugin->sitemaps->invalidateCaches();
-        // If they are using Craft 3.3 or later, clear the GraphQL caches too
-        if (self::$craft33) {
-            $gql = Craft::$app->getGql();
-            if (method_exists($gql, 'invalidateCaches')) {
-                $gql->invalidateCaches();
-            }
+        // Clear the GraphQL caches too
+        $gql = Craft::$app->getGql();
+        if (method_exists($gql, 'invalidateCaches')) {
+            $gql->invalidateCaches();
         }
         // If the FastCGI Cache Bust plugin is installed, clear its caches too
         $plugin = Craft::$app->getPlugins()->getPlugin('fastcgi-cache-bust');
@@ -465,7 +418,7 @@ class Seomatic extends Plugin
         }
         $editableSettings = true;
         $general = Craft::$app->getConfig()->getGeneral();
-        if (self::$craft31 && !$general->allowAdminChanges) {
+        if (!$general->allowAdminChanges) {
             $editableSettings = false;
         }
         if ($editableSettings && $currentUser->can('seomatic:plugin-settings')) {
@@ -636,11 +589,11 @@ class Seomatic extends Plugin
             }
         );
         // Add social media preview targets on Craft 3.2 or later
-        if (self::$craft32 && Seomatic::$settings->socialMediaPreviewTarget) {
+        if (self::$settings->socialMediaPreviewTarget) {
             // Handler: Entry::EVENT_REGISTER_PREVIEW_TARGETS
             Event::on(
                 Entry::class,
-                Entry::EVENT_REGISTER_PREVIEW_TARGETS,
+                Element::EVENT_REGISTER_PREVIEW_TARGETS,
                 static function (RegisterPreviewTargetsEvent $e) {
                     /** @var Element $element */
                     $element = $e->sender;
@@ -663,7 +616,7 @@ class Seomatic extends Plugin
             Event::on(
                 FeedMeFields::class,
                 FeedMeFields::EVENT_REGISTER_FEED_ME_FIELDS,
-                function (RegisterFeedMeFieldsEvent $e) {
+                static function (RegisterFeedMeFieldsEvent $e) {
                     Craft::debug(
                         'FeedMeFields::EVENT_REGISTER_FEED_ME_FIELDS',
                         __METHOD__
@@ -713,87 +666,72 @@ class Seomatic extends Plugin
      */
     protected function installGqlHandlers(): void
     {
-        // Add native GraphQL support on Craft 3.3 or later
-        if (self::$craft33) {
-            // Handler: Gql::EVENT_REGISTER_GQL_TYPES
-            Event::on(
-                Gql::class,
-                Gql::EVENT_REGISTER_GQL_TYPES,
-                static function (RegisterGqlTypesEvent $event) {
-                    Craft::debug(
-                        'Gql::EVENT_REGISTER_GQL_TYPES',
-                        __METHOD__
-                    );
-                    $event->types[] = SeomaticInterface::class;
-                    $event->types[] = SeomaticEnvironmentType::class;
-                }
-            );
-            // Handler: Gql::EVENT_REGISTER_GQL_QUERIES
-            Event::on(
-                Gql::class,
-                Gql::EVENT_REGISTER_GQL_QUERIES,
-                static function (RegisterGqlQueriesEvent $event) {
-                    Craft::debug(
-                        'Gql::EVENT_REGISTER_GQL_QUERIES',
-                        __METHOD__
-                    );
-                    $queries = SeomaticQuery::getQueries();
-                    foreach ($queries as $key => $value) {
-                        $event->queries[$key] = $value;
-                    }
-                }
-            );
-            if (self::$craft35) {
-                // Handler: Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS
-                Event::on(
-                    Gql::class,
-                    Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS,
-                    static function (RegisterGqlSchemaComponentsEvent $event) {
-                        Craft::debug(
-                            'Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS',
-                            __METHOD__
-                        );
-                        $label = Craft::t('seomatic', 'Seomatic');
-                        $event->queries[$label]['seomatic.all:read'] = ['label' => Craft::t('seomatic', 'Query Seomatic data')];
-                    }
+        // Handler: Gql::EVENT_REGISTER_GQL_TYPES
+        Event::on(
+            Gql::class,
+            Gql::EVENT_REGISTER_GQL_TYPES,
+            static function (RegisterGqlTypesEvent $event) {
+                Craft::debug(
+                    'Gql::EVENT_REGISTER_GQL_TYPES',
+                    __METHOD__
                 );
+                $event->types[] = SeomaticInterface::class;
+                $event->types[] = SeomaticEnvironmentType::class;
             }
-        }
+        );
+        // Handler: Gql::EVENT_REGISTER_GQL_QUERIES
+        Event::on(
+            Gql::class,
+            Gql::EVENT_REGISTER_GQL_QUERIES,
+            static function (RegisterGqlQueriesEvent $event) {
+                Craft::debug(
+                    'Gql::EVENT_REGISTER_GQL_QUERIES',
+                    __METHOD__
+                );
+                $queries = SeomaticQuery::getQueries();
+                foreach ($queries as $key => $value) {
+                    $event->queries[$key] = $value;
+                }
+            }
+        );
+        // Handler: Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS
+        Event::on(
+            Gql::class,
+            Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS,
+            static function (RegisterGqlSchemaComponentsEvent $event) {
+                Craft::debug(
+                    'Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS',
+                    __METHOD__
+                );
+                $label = Craft::t('seomatic', 'Seomatic');
+                $event->queries[$label]['seomatic.all:read'] = ['label' => Craft::t('seomatic', 'Query Seomatic data')];
+            }
+        );
         // Add support for querying for SEOmatic metadata inside of element queries
-        if (self::$craft34) {
-            // Handler: TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS
-            $knownInterfaceNames = self::$plugin->seoElements->getAllSeoElementGqlInterfaceNames();
-            Event::on(
-                TypeManager::class,
-                TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS,
-                static function (DefineGqlTypeFieldsEvent $event) use ($knownInterfaceNames) {
-                    if (in_array($event->typeName, $knownInterfaceNames, true)) {
-                        Craft::debug(
-                            'TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS',
-                            __METHOD__
-                        );
+        // Handler: TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS
+        $knownInterfaceNames = self::$plugin->seoElements->getAllSeoElementGqlInterfaceNames();
+        Event::on(
+            TypeManager::class,
+            TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS,
+            static function (DefineGqlTypeFieldsEvent $event) use ($knownInterfaceNames) {
+                if (in_array($event->typeName, $knownInterfaceNames, true)) {
+                    Craft::debug(
+                        'TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS',
+                        __METHOD__
+                    );
 
-                        if (GqlHelper::canQuerySeo()) {
-                            // Make Seomatic tags available to all entries.
-                            $event->fields['seomatic'] = [
-                                'name' => 'seomatic',
-                                'type' => SeomaticInterface::getType(),
-                                'args' => SeomaticArguments::getArguments(),
-                                'resolve' => SeomaticResolver::class . '::resolve',
-                                'description' => Craft::t('seomatic', 'This query is used to query for SEOmatic meta data.')
-                            ];
-                        }
+                    if (GqlHelper::canQuerySeo()) {
+                        // Make Seomatic tags available to all entries.
+                        $event->fields['seomatic'] = [
+                            'name' => 'seomatic',
+                            'type' => SeomaticInterface::getType(),
+                            'args' => SeomaticArguments::getArguments(),
+                            'resolve' => SeomaticResolver::class . '::resolve',
+                            'description' => Craft::t('seomatic', 'This query is used to query for SEOmatic meta data.')
+                        ];
                     }
-                });
-        }
-        // CraftQL Support
-        if (class_exists(CraftQL::class)) {
-            Event::on(
-                Schema::class,
-                AlterSchemaFields::EVENT,
-                [GetCraftQLSchema::class, 'handle']
-            );
-        }
+                }
+            });
     }
 
     /**
@@ -806,7 +744,7 @@ class Seomatic extends Plugin
         // Handler: View::EVENT_BEGIN_BODY
         Event::on(
             View::class,
-            View::EVENT_BEGIN_BODY,
+            YiiView::EVENT_BEGIN_BODY,
             static function () {
                 Craft::debug(
                     'View::EVENT_BEGIN_BODY',
@@ -814,14 +752,14 @@ class Seomatic extends Plugin
                 );
                 // The <body> placeholder tag has just rendered, include any script HTML
                 if (self::$settings->renderEnabled && self::$seomaticVariable) {
-                    self::$plugin->metaContainers->includeScriptBodyHtml(View::POS_BEGIN);
+                    self::$plugin->metaContainers->includeScriptBodyHtml(YiiView::POS_BEGIN);
                 }
             }
         );
         // Handler: View::EVENT_END_BODY
         Event::on(
             View::class,
-            View::EVENT_END_BODY,
+            YiiView::EVENT_END_BODY,
             static function () {
                 Craft::debug(
                     'View::EVENT_END_BODY',
@@ -829,14 +767,14 @@ class Seomatic extends Plugin
                 );
                 // The </body> placeholder tag is about to be rendered, include any script HTML
                 if (self::$settings->renderEnabled && self::$seomaticVariable) {
-                    self::$plugin->metaContainers->includeScriptBodyHtml(View::POS_END);
+                    self::$plugin->metaContainers->includeScriptBodyHtml(YiiView::POS_END);
                 }
             }
         );
         // Handler: View::EVENT_END_PAGE
         Event::on(
             View::class,
-            View::EVENT_END_PAGE,
+            BaseView::EVENT_END_PAGE,
             static function () {
                 Craft::debug(
                     'View::EVENT_END_PAGE',
@@ -1015,6 +953,7 @@ class Seomatic extends Plugin
      * Returns the custom Control Panel user permissions.
      *
      * @return array
+     * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
      */
     protected function customAdminCpPermissions(): array
     {
@@ -1023,6 +962,7 @@ class Seomatic extends Plugin
             $currentSiteId = Craft::$app->getSites()->getCurrentSite()->id ?? 1;
         } catch (SiteNotFoundException $e) {
             $currentSiteId = 1;
+            Craft::error($e->getMessage(), __METHOD__);
         }
         // Dynamic permissions for the scripts
         $metaBundle = self::$plugin->metaBundles->getGlobalMetaBundle($currentSiteId);
@@ -1033,7 +973,7 @@ class Seomatic extends Plugin
                 MetaScriptContainer::CONTAINER_TYPE
             );
             foreach ($scripts as $scriptHandle => $scriptData) {
-                $scriptsPerms["seomatic:tracking-scripts:${scriptHandle}"] = [
+                $scriptsPerms["seomatic:tracking-scripts:$scriptHandle"] = [
                     'label' => Craft::t('seomatic', $scriptData->name),
                 ];
             }

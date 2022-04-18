@@ -11,9 +11,8 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use nystudio107\seomatic\Seomatic;
-
 use Craft;
+use nystudio107\seomatic\Seomatic;
 
 /**
  * @author    nystudio107
@@ -68,9 +67,7 @@ class Environment
     {
         // Default to whatever they have the environment set to
         $env = Seomatic::$settings->environment;
-        if (Seomatic::$craft31) {
-            $env = Craft::parseEnv($env);
-        }
+        $env = Craft::parseEnv($env);
         // If they've manually overridden the environment, just return it
         if (self::environmentOverriddenByConfig()) {
             return $env;

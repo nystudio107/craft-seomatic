@@ -11,18 +11,23 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use nystudio107\seomatic\Seomatic;
-
 use Craft;
 use craft\base\Element;
 use craft\elements\Asset;
 use craft\errors\SiteNotFoundException;
-use craft\helpers\StringHelper;
 use craft\web\View;
-
+use nystudio107\seomatic\Seomatic;
+use ReflectionClass;
+use ReflectionException;
+use Throwable;
+use Twig\Error\LoaderError;
+use Twig\Error\SyntaxError;
 use Twig\Markup;
-
 use yii\base\Exception;
+use yii\base\ExitException;
+use function in_array;
+use function is_object;
+use function is_string;
 
 /**
  * @author    nystudio107
@@ -75,11 +80,11 @@ class MetaValue
 
     /**
      * @param string $metaValue
-     * @param bool   $resolveAliases Whether @ aliases should be resolved in
+     * @param bool $resolveAliases Whether @ aliases should be resolved in
      *                               this string
-     * @param bool   $parseAsTwig    Whether items should be parsed as a Twig
+     * @param bool $parseAsTwig Whether items should be parsed as a Twig
      *                               template in this string
-     * @param int    $tries          The number of times to parse the string
+     * @param int $tries The number of times to parse the string
      *
      * @return string
      */
@@ -88,9 +93,10 @@ class MetaValue
         bool $resolveAliases = true,
         bool $parseAsTwig = true,
         $tries = self::MAX_PARSE_TRIES
-    ) {
+    )
+    {
         // If it's a string, and there are no dynamic tags, just return the template
-        if (\is_string($metaValue) && !StringHelper::contains($metaValue, '{')) {
+        if (is_string($metaValue) && !str_contains($metaValue, '{')) {
             return self::parseMetaString($metaValue, $resolveAliases, $parseAsTwig) ?? $metaValue;
         }
         // Parse it repeatedly until it doesn't change
@@ -106,9 +112,9 @@ class MetaValue
 
     /**
      * @param array $metaArray
-     * @param bool  $resolveAliases Whether @ aliases should be resolved in
+     * @param bool $resolveAliases Whether @ aliases should be resolved in
      *                              this array
-     * @param bool  $parseAsTwig    Whether items should be parsed as a Twig
+     * @param bool $parseAsTwig Whether items should be parsed as a Twig
      *                              template in this array
      */
     public static function parseArray(array &$metaArray, bool $resolveAliases = true, bool $parseAsTwig = true)
@@ -128,13 +134,13 @@ class MetaValue
             $shouldParse = $parseAsTwig;
             $shouldAlias = $resolveAliases;
             $tries = self::MAX_PARSE_TRIES;
-            if (\in_array($key, self::NO_ALIASES, true)) {
+            if (in_array($key, self::NO_ALIASES, true)) {
                 $shouldAlias = false;
             }
-            if (\in_array($key, self::NO_PARSING, true)) {
+            if (in_array($key, self::NO_PARSING, true)) {
                 $shouldParse = false;
             }
-            if (\in_array($key, self::PARSE_ONCE, true)) {
+            if (in_array($key, self::PARSE_ONCE, true)) {
                 $tries = 1;
                 if (is_string($value) && $value[0] !== '{') {
                     $shouldParse = false;
@@ -204,8 +210,8 @@ class MetaValue
             $refHandle = null;
             // Get a fallback from the element's root class name
             try {
-                $reflector = new \ReflectionClass($element);
-            } catch (\ReflectionException $e) {
+                $reflector = new ReflectionClass($element);
+            } catch (ReflectionException $e) {
                 $reflector = null;
                 Craft::error($e->getMessage(), __METHOD__);
             }
@@ -230,9 +236,9 @@ class MetaValue
 
     /**
      * @param string|Asset $metaValue
-     * @param bool         $resolveAliases Whether @ aliases should be resolved
+     * @param bool $resolveAliases Whether @ aliases should be resolved
      *                                     in this string
-     * @param bool         $parseAsTwig    Whether items should be parsed as a
+     * @param bool $parseAsTwig Whether items should be parsed as a
      *                                     Twig template in this string
      *
      * @return null|string
@@ -240,23 +246,15 @@ class MetaValue
     protected static function parseMetaString($metaValue, bool $resolveAliases = true, bool $parseAsTwig = true)
     {
         // Handle being passed in a string
-        if (\is_string($metaValue)) {
+        if (is_string($metaValue)) {
             if ($resolveAliases) {
                 // Resolve it as an alias
-                if (Seomatic::$craft31) {
-                    try {
-                        $alias = Craft::parseEnv($metaValue);
-                    } catch (\Exception $e) {
-                        $alias = false;
-                    }
-                } else {
-                    try {
-                        $alias = Craft::getAlias($metaValue, false);
-                    } catch (\Exception $e) {
-                        $alias = false;
-                    }
+                try {
+                    $alias = Craft::parseEnv($metaValue);
+                } catch (\Exception $e) {
+                    $alias = false;
                 }
-                if (\is_string($alias)) {
+                if (is_string($alias)) {
                     $metaValue = $alias;
                 }
             }
@@ -265,7 +263,7 @@ class MetaValue
                 $metaValue = mb_substr($metaValue, 0, self::MAX_TEMPLATE_LENGTH);
             }
             // If there are no dynamic tags, just return the template
-            if (!$parseAsTwig || !StringHelper::contains($metaValue, '{')) {
+            if (!$parseAsTwig || !str_contains($metaValue, '{')) {
                 return trim(html_entity_decode($metaValue, ENT_NOQUOTES, 'UTF-8'));
             }
             $oldTemplateMode = self::$view->getTemplateMode();
@@ -284,11 +282,11 @@ class MetaValue
                 if ($oldTemplateMode !== self::$view::TEMPLATE_MODE_SITE) {
                     self::$view->setTemplateMode($oldTemplateMode);
                 }
-            } catch (\Throwable $e) {
+            } catch (Throwable $e) {
                 $metaValue = Craft::t(
                     'seomatic',
                     'Error rendering `{template}` -> {error}',
-                    ['template' => $metaValue, 'error' => $e->getMessage().' - '.print_r($metaValue, true)]
+                    ['template' => $metaValue, 'error' => $e->getMessage() . ' - ' . print_r($metaValue, true)]
                 );
                 Craft::error($metaValue, __METHOD__);
                 Craft::$app->getErrorHandler()->logException($e);
@@ -305,7 +303,7 @@ class MetaValue
             }
         }
         // Handle being passed in an object
-        if (\is_object($metaValue)) {
+        if (is_object($metaValue)) {
             if ($metaValue instanceof Markup) {
                 return trim(html_entity_decode((string)$metaValue, ENT_NOQUOTES, 'UTF-8'));
             }
@@ -324,9 +322,9 @@ class MetaValue
      * @param string $template
      * @param array $variables
      * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\SyntaxError
-     * @throws \yii\base\ExitException
+     * @throws LoaderError
+     * @throws SyntaxError
+     * @throws ExitException
      */
     protected static function internalRenderObjectTemplate(string $template, array $variables = []): string
     {

@@ -22,7 +22,6 @@ use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\variables\SeomaticVariable;
-use yii\behaviors\AttributeTypecastBehavior;
 use function is_array;
 use function is_string;
 
@@ -316,22 +315,14 @@ class MetaBundle extends FluentModel
      */
     public function behaviors(): array
     {
-        $craft31Behaviors = [];
-        if (Seomatic::$craft31) {
-            $craft31Behaviors = [
-                'parser' => [
-                    'class' => EnvAttributeParserBehavior::class,
-                    'attributes' => [
-                    ],
-                ]
-            ];
-        }
+        $behaviors = parent::behaviors();
 
-        return array_merge($craft31Behaviors, [
-            'typecast' => [
-                'class' => AttributeTypecastBehavior::class,
-                // 'attributeTypes' will be composed automatically according to `rules()`
-            ],
+        return array_merge($behaviors, [
+            'parser' => [
+                'class' => EnvAttributeParserBehavior::class,
+                'attributes' => [
+                ],
+            ]
         ]);
     }
 }

@@ -34,29 +34,17 @@
             errors: settings.getErrors("lowercaseCanonicalUrl"),
         }) }}
 
-        {% if seomatic.helper.craft31 %}
-            {{ forms.autosuggestField({
-                label: "Site URL Override"|t("seomatic"),
-                instructions: "SEOmatic uses the Craft `siteUrl` to generate the external URLs.  If you are using it in a non-standard environment, such as a headless GraphQL or ElementAPI server, you can override what it uses for the `siteUrl` below."|t("seomatic"),
-                suggestEnvVars: true,
-                suggestAliases: true,
-                id: "siteUrlOverride",
-                name: "siteUrlOverride",
-                value: settings.siteUrlOverride,
-                warning: configWarning("siteUrlOverride", "seomatic"),
-                errors: settings.getErrors("siteUrlOverride"),
-            }) }}
-        {% else %}
-            {{ forms.textField({
-                label: "Site URL Override"|t("seomatic"),
-                instructions: "SEOmatic uses the Craft `siteUrl` to generate the external URLs.  If you are using it in a non-standard environment, such as a headless GraphQL or ElementAPI server, you can override what it uses for the `siteUrl` below."|t("seomatic"),
-                id: "siteUrlOverride",
-                name: "siteUrlOverride",
-                value: settings.siteUrlOverride,
-                warning: configWarning("siteUrlOverride", "seomatic"),
-                errors: settings.getErrors("siteUrlOverride"),
-            }) }}
-        {% endif %}
+        {{ forms.autosuggestField({
+            label: "Site URL Override"|t("seomatic"),
+            instructions: "SEOmatic uses the Craft `siteUrl` to generate the external URLs.  If you are using it in a non-standard environment, such as a headless GraphQL or ElementAPI server, you can override what it uses for the `siteUrl` below."|t("seomatic"),
+            suggestEnvVars: true,
+            suggestAliases: true,
+            id: "siteUrlOverride",
+            name: "siteUrlOverride",
+            value: settings.siteUrlOverride,
+            warning: configWarning("siteUrlOverride", "seomatic"),
+            errors: settings.getErrors("siteUrlOverride"),
+        }) }}
 
         {{ forms.selectField({
             label: "Meta Cache Duration"|t("seomatic"),

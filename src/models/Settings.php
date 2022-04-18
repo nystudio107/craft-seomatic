@@ -15,8 +15,6 @@ use craft\behaviors\EnvAttributeParserBehavior;
 use craft\validators\ArrayValidator;
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\base\VarsModel;
-use nystudio107\seomatic\Seomatic;
-use yii\behaviors\AttributeTypecastBehavior;
 
 /**
  * @author    nystudio107
@@ -303,10 +301,12 @@ class Settings extends VarsModel
                     'enableSeoFileLinkEndpoint',
                     'alwaysIncludeCanonicalUrls',
                     'lowercaseCanonicalUrl',
+                    'truncateTitleTags',
+                    'truncateDescriptionTags',
                 ],
                 'boolean'
             ],
-            [['devModeTitlePrefix', 'cpTitlePrefix', 'devModeCpTitlePrefix', 'truncateTitleTags', 'truncateDescriptionTags'], 'string'],
+            [['devModeTitlePrefix', 'cpTitlePrefix', 'devModeCpTitlePrefix'], 'string'],
             ['separatorChar', 'string'],
             ['separatorChar', 'default', 'value' => '|'],
             ['maxTitleLength', 'integer', 'min' => 10],
@@ -336,21 +336,14 @@ class Settings extends VarsModel
     {
         // Keep any parent behaviors
         $behaviors = parent::behaviors();
-        // Add in the AttributeTypecastBehavior
-        $behaviors['typecast'] = [
-            'class' => AttributeTypecastBehavior::class,
-            // 'attributeTypes' will be composed automatically according to `rules()`
-        ];
-        // If we're running Craft 3.1 or later, add in the EnvAttributeParserBehavior
-        if (Seomatic::$craft31) {
-            $behaviors['parser'] = [
+
+        return array_merge($behaviors, [
+            'parser' => [
                 'class' => EnvAttributeParserBehavior::class,
                 'attributes' => [
                     'environment',
                 ],
-            ];
-        }
-
-        return $behaviors;
+            ]
+        ]);
     }
 }
