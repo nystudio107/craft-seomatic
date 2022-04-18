@@ -15,7 +15,6 @@ use Craft;
 use craft\base\Element;
 use craft\elements\Asset;
 use craft\errors\SiteNotFoundException;
-use craft\helpers\StringHelper;
 use craft\web\View;
 use nystudio107\seomatic\Seomatic;
 use ReflectionClass;
@@ -97,7 +96,7 @@ class MetaValue
     )
     {
         // If it's a string, and there are no dynamic tags, just return the template
-        if (is_string($metaValue) && !StringHelper::contains($metaValue, '{')) {
+        if (is_string($metaValue) && !str_contains($metaValue, '{')) {
             return self::parseMetaString($metaValue, $resolveAliases, $parseAsTwig) ?? $metaValue;
         }
         // Parse it repeatedly until it doesn't change
@@ -264,7 +263,7 @@ class MetaValue
                 $metaValue = mb_substr($metaValue, 0, self::MAX_TEMPLATE_LENGTH);
             }
             // If there are no dynamic tags, just return the template
-            if (!$parseAsTwig || !StringHelper::contains($metaValue, '{')) {
+            if (!$parseAsTwig || !str_contains($metaValue, '{')) {
                 return trim(html_entity_decode($metaValue, ENT_NOQUOTES, 'UTF-8'));
             }
             $oldTemplateMode = self::$view->getTemplateMode();
