@@ -202,7 +202,7 @@ class MetaGlobalVars extends InheritableSettingsModel
         // using the old `[0]` array syntax with `.one()`
         foreach (self::ADJUST_QUERY_ACCESS_FIELDS as $queryField) {
             if (!empty($this->$queryField) && str_contains($this->$queryField, '{')) {
-                $this->$queryField = str_replace('[0]', '.collect()[0]', $this->$queryField);
+                $this->$queryField = preg_replace('/(?<!\))\[0]/', '.collect()[0]', $this->$queryField);
             }
         }
     }
