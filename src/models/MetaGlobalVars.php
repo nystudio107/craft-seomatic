@@ -190,16 +190,16 @@ class MetaGlobalVars extends InheritableSettingsModel
         // If we have potentially unsafe Twig code, strip it out
         if (!empty($this->canonicalUrl)) {
             if (is_string($this->canonicalUrl)) {
-                if (strpos($this->canonicalUrl, 'craft.app.request.pathInfo') !== false) {
-                    $this->canonicalUrl = '{seomatic.helper.safeCanonicalUrl()}';
+                if (str_contains($this->canonicalUrl, 'craft.app.request.pathInfo')) {
+                    $this->canonicalUrl = '{{ seomatic.helper.safeCanonicalUrl() }}';
                 }
             } else {
                 // Ensure that `canonicalUrl` is always a string
-                $this->canonicalUrl = '{seomatic.helper.safeCanonicalUrl()}';
+                $this->canonicalUrl = '{{ seomatic.helper.safeCanonicalUrl() }}';
             }
         }
         // Find any instances of image-related fields that contain Twig code, and access assets
-        // using the old `[0]` array syntax with `.one()`
+        // using the old `[0]` array syntax with `.collect()[0]`
         foreach (self::ADJUST_QUERY_ACCESS_FIELDS as $queryField) {
             if (!empty($this->$queryField) && str_contains($this->$queryField, '{')) {
                 $this->$queryField = preg_replace('/(?<!\))\[0]/', '.collect()[0]', $this->$queryField);
