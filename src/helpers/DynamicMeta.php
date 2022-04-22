@@ -327,7 +327,7 @@ class DynamicMeta
         try {
             $siteUrl = SiteHelper::siteEnabledWithUrls($siteId) ? $site->baseUrl : Craft::$app->getSites()->getPrimarySite()->baseUrl;
         } catch (SiteNotFoundException $e) {
-            $siteUrl = Craft::$app->getConfig()->general->siteUrl;
+            $siteUrl = Craft::$app->getConfig()->getGeneral()->siteUrl;
             Craft::error($e->getMessage(), __METHOD__);
         }
         if (!empty(Seomatic::$settings->siteUrlOverride)) {
