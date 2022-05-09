@@ -21,65 +21,69 @@
 {% set metaBundleSettings = value.metaBundleSettings %}
 {% set metaSitemapVars = value.metaSitemapVars %}
 {% namespace name %}
-<div id="{{ id }}" class="field seomatic-field">
-    <nav id="{{ id ~ "tabs" }}" class="seomatic-tabs">
-        <ul>
-            {% set selClass="sel" %}
-            {% if field.generalTabEnabled %}
-                <li><a id="{{ id ~ "-tabs-general" }}" class="seomatic-tab-links tab {{ selClass }}" href="#{{ nameSpacedId ~ '-tab-general' }}"  tabindex="0">General</a></li>
-                {% set selClass="" %}
-            {% endif %}
-            {% if field.twitterTabEnabled %}
-                <li><a id="{{ id ~ "-tabs-twitter" }}" class="seomatic-tab-links tab {{ selClass }}" href="#{{ nameSpacedId ~ '-tab-twitter' }}"  tabindex="0">Twitter</a></li>
-                {% set selClass="" %}
-            {% endif %}
-            {% if field.facebookTabEnabled %}
-                <li><a id="{{ id ~ "-tabs-facebook" }}" class="seomatic-tab-links tab {{ selClass }}" href="#{{ nameSpacedId ~ '-tab-facebook' }}"  tabindex="0">Facebook</a></li>
-                {% set selClass="" %}
-            {% endif %}
-            {% if field.sitemapTabEnabled %}
-                <li><a id="{{ id ~ "-tabs-sitemap" }}" class="seomatic-tab-links tab {{ selClass }}" href="#{{ nameSpacedId ~ '-tab-sitemap' }}"  tabindex="0">Sitemap</a></li>
-                {% set selClass="" %}
-            {% endif %}
-        </ul>
-    </nav>
+    <div id="{{ id }}" class="field seomatic-field">
+        <nav id="{{ id ~ "tabs" }}" class="seomatic-tabs">
+            <ul>
+                {% set selClass="sel" %}
+                {% if field.generalTabEnabled %}
+                    <li><a id="{{ id ~ "-tabs-general" }}" class="seomatic-tab-links tab {{ selClass }}"
+                           href="#{{ nameSpacedId ~ '-tab-general' }}" tabindex="0">General</a></li>
+                    {% set selClass="" %}
+                {% endif %}
+                {% if field.twitterTabEnabled %}
+                    <li><a id="{{ id ~ "-tabs-twitter" }}" class="seomatic-tab-links tab {{ selClass }}"
+                           href="#{{ nameSpacedId ~ '-tab-twitter' }}" tabindex="0">Twitter</a></li>
+                    {% set selClass="" %}
+                {% endif %}
+                {% if field.facebookTabEnabled %}
+                    <li><a id="{{ id ~ "-tabs-facebook" }}" class="seomatic-tab-links tab {{ selClass }}"
+                           href="#{{ nameSpacedId ~ '-tab-facebook' }}" tabindex="0">Facebook</a></li>
+                    {% set selClass="" %}
+                {% endif %}
+                {% if field.sitemapTabEnabled %}
+                    <li><a id="{{ id ~ "-tabs-sitemap" }}" class="seomatic-tab-links tab {{ selClass }}"
+                           href="#{{ nameSpacedId ~ '-tab-sitemap' }}" tabindex="0">Sitemap</a></li>
+                    {% set selClass="" %}
+                {% endif %}
+            </ul>
+        </nav>
 
-    {############### General tab settings ###############}
-    
-    {% set hiddenClass="" %}
-    {% if field.generalTabEnabled %}
-        <div id="{{ "tab-general" }}" class="seomatic-tab-content {{ hiddenClass }}">
-            {% include "seomatic/settings/_includes/tab-general.twig" with {"pageContext": "field"} %}
-        </div>
-        {% set hiddenClass="hidden" %}
-    {% endif %}
+        {# ############## General tab settings ############## #}
 
-    {############### Twitter tab settings ###############}
+        {% set hiddenClass="" %}
+        {% if field.generalTabEnabled %}
+            <div id="{{ nameSpacedId ~ "-tab-general" }}" class="seomatic-tab-content {{ hiddenClass }}">
+                {% include "seomatic/settings/_includes/tab-general.twig" with {"pageContext": "field"} %}
+            </div>
+            {% set hiddenClass="hidden" %}
+        {% endif %}
 
-    {% if field.twitterTabEnabled %}
-        <div id="{{ "tab-twitter" }}" class="seomatic-tab-content {{ hiddenClass }}">
-            {% include "seomatic/settings/_includes/tab-twitter.twig" with {"pageContext": "field"} %}
-        </div>
-        {% set hiddenClass="hidden" %}
-    {% endif %}
+        {# ############## Twitter tab settings ############## #}
 
-    {############### Facebook tab settings ###############}
+        {% if field.twitterTabEnabled %}
+            <div id="{{ nameSpacedId ~ "-tab-twitter" }}" class="seomatic-tab-content {{ hiddenClass }}">
+                {% include "seomatic/settings/_includes/tab-twitter.twig" with {"pageContext": "field"} %}
+            </div>
+            {% set hiddenClass="hidden" %}
+        {% endif %}
 
-    {% if field.facebookTabEnabled %}
-        <div id="{{ "tab-facebook" }}" class="seomatic-tab-content {{ hiddenClass }}">
-            {% include "seomatic/settings/_includes/tab-facebook.twig" with {"pageContext": "field"} %}
-        </div>
-        {% set hiddenClass="hidden" %}
-    {% endif %}
+        {# ############## Facebook tab settings ############## #}
 
-    {############### Sitemap tab settings ###############}
+        {% if field.facebookTabEnabled %}
+            <div id="{{ nameSpacedId ~ "-tab-facebook" }}" class="seomatic-tab-content {{ hiddenClass }}">
+                {% include "seomatic/settings/_includes/tab-facebook.twig" with {"pageContext": "field"} %}
+            </div>
+            {% set hiddenClass="hidden" %}
+        {% endif %}
 
-    {% if field.sitemapTabEnabled %}
-        <div id="{{ "tab-sitemap" }}" class="seomatic-tab-content {{ hiddenClass }}">
-            {% include "seomatic/settings/_includes/tab-sitemap.twig" with {"pageContext": "field"} %}
-        </div>
-        {% set hiddenClass="hidden" %}
-    {% endif %}
+        {# ############## Sitemap tab settings ############## #}
 
-</div>
+        {% if field.sitemapTabEnabled %}
+            <div id="{{ nameSpacedId ~ "-tab-sitemap" }}" class="seomatic-tab-content {{ hiddenClass }}">
+                {% include "seomatic/settings/_includes/tab-sitemap.twig" with {"pageContext": "field"} %}
+            </div>
+            {% set hiddenClass="hidden" %}
+        {% endif %}
+
+    </div>
 {% endnamespace %}
