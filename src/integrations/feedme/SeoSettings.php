@@ -9,22 +9,17 @@
 
 namespace nystudio107\seomatic\integrations\feedme;
 
-use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
-
-use Craft;
+use Cake\Utility\Hash;
 use craft\db\Query;
 use craft\db\Table;
 use craft\elements\Asset as AssetElement;
-use craft\helpers\ArrayHelper;
-use craft\helpers\Db;
-use craft\helpers\UrlHelper;
-
 use craft\feedme\base\Field as FeedMeField;
 use craft\feedme\base\FieldInterface as FeedMeFieldInterface;
 use craft\feedme\helpers\AssetHelper;
 use craft\feedme\helpers\DataHelper;
-
-use Cake\Utility\Hash;
+use craft\helpers\ArrayHelper;
+use craft\helpers\UrlHelper;
+use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
 
 /**
  * @author    nystudio107
@@ -45,7 +40,7 @@ class SeoSettings extends FeedMeField implements FeedMeFieldInterface
     /**
      * @inheritDoc
      */
-    public function getMappingTemplate()
+    public function getMappingTemplate(): string
     {
         return 'seomatic/_includes/integrations/feedme/seo-settings';
     }
@@ -53,7 +48,7 @@ class SeoSettings extends FeedMeField implements FeedMeFieldInterface
     /**
      * @inheritDoc
      */
-    public function parseField()
+    public function parseField(): mixed
     {
         $preppedData = [];
 
@@ -106,7 +101,7 @@ class SeoSettings extends FeedMeField implements FeedMeFieldInterface
      * @return int|mixed|string|null
      * @throws \yii\base\Exception
      */
-    protected function parseImage($value, $fieldInfo)
+    protected function parseImage($value, $fieldInfo): mixed
     {
         $upload = Hash::get($fieldInfo, 'options.upload');
         $conflict = Hash::get($fieldInfo, 'options.conflict');
@@ -155,5 +150,7 @@ class SeoSettings extends FeedMeField implements FeedMeFieldInterface
 
             return AssetHelper::fetchRemoteImage([$urlToUpload], $fieldInfo, $this->feed, null, $this->element, $folderId);
         }
+
+        return null;
     }
 }
