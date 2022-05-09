@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.0.0-beta.9 - 2022.05.09
+### Fixed
+* Fixed an issue that would throw an exception if using Feed Me with SEOmatic ([#1125](https://github.com/nystudio107/craft-seomatic/issues/1125))
+
 ## 4.0.0-beta.8 - 2022.04.18
 ### Changed
 * Don’t use deprecated `TypeManager::prepareFieldDefinitions()`
