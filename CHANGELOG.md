@@ -3,6 +3,7 @@
 ## 4.0.0-beta.9 - 2022.05.09
 ### Fixed
 * Fixed an issue that would throw an exception if using Feed Me with SEOmatic ([#1125](https://github.com/nystudio107/craft-seomatic/issues/1125))
+* Fixed an issue where incorrectly namespaced tab `id`s caused the tabs to not function in SEO Settings fields ([#1131](https://github.com/nystudio107/craft-seomatic/issues/1131))
 
 ## 4.0.0-beta.8 - 2022.04.18
 ### Changed
