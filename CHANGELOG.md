@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
-## 4.0.0-beta.9 - 2022.05.09
+## 4.0.0 - 2022.05.16
+### Added
+* Initial Craft CMS 4 release
+
 ### Fixed
 * Fixed an issue that would throw an exception if using Feed Me with SEOmatic ([#1125](https://github.com/nystudio107/craft-seomatic/issues/1125))
 * Fixed an issue where incorrectly namespaced tab `id`s caused the tabs to not function in SEO Settings fields ([#1131](https://github.com/nystudio107/craft-seomatic/issues/1131))
