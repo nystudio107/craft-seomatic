@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.31 - UNRELEASED
+### Added
+* Added Schema.org v14 JSON-LD models, generated via [SchemaGen](https://github.com/nystudio107/schemagen) ([#1092](https://github.com/nystudio107/craft-seomatic/issues/1092))
+
 ## 3.4.30 - 2022.04.18
 ### Changed
 * Ensure that the `currentSite` is set to the requested one when processing headless requests via API endpoint or GraphQL, to ensure things like `siteUrl()` etc. resolve correctly ([#1111](https://github.com/nystudio107/craft-seomatic/issues/1111))
