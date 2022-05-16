@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.0.1 - UNRELEASED
+### Added
+* Added Schema.org v14 JSON-LD models, generated via [SchemaGen](https://github.com/nystudio107/schemagen) ([#1092](https://github.com/nystudio107/craft-seomatic/issues/1092))
+
 ## 4.0.0 - 2022.05.16
 ### Added
 * Initial Craft CMS 4 release
