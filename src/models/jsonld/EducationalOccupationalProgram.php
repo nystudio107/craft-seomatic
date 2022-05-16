@@ -1,33 +1,32 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2017 nystudio107
+ * @copyright Copyright (c) 2022 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\Intangible;
+use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * EducationalOccupationalProgram - A program offered by an institution which
- * determines the learning progress to achieve an outcome, usually a
- * credential like a degree or certificate. This would define a discrete set
- * of opportunities (e.g., job, courses) that together constitute a program
- * with a clear start, end, set of requirements, and transition to a new
- * occupational opportunity (e.g., a job), or sometimes a higher educational
- * opportunity (e.g., an advanced degree).
+ * schema.org version: v14.0-release
+ * EducationalOccupationalProgram - A program offered by an institution which determines the learning progress
+ * to achieve an outcome, usually a credential like a degree or certificate.
+ * This would define a discrete set of opportunities (e.g., job, courses) that
+ * together constitute a program with a clear start, end, set of requirements,
+ * and transition to a new occupational opportunity (e.g., a job), or
+ * sometimes a higher educational opportunity (e.g., an advanced degree).
  *
  * @author    nystudio107
  * @package   Seomatic
- * @since     3.0.0
- * @see       http://schema.org/EducationalOccupationalProgram
+ * @see       https://schema.org/EducationalOccupationalProgram
  */
-class EducationalOccupationalProgram extends Intangible
+class EducationalOccupationalProgram extends MetaJsonLd implements EducationalOccupationalProgramInterface, IntangibleInterface, ThingInterface
 {
     // Static Public Properties
     // =========================================================================
@@ -37,391 +36,155 @@ class EducationalOccupationalProgram extends Intangible
      *
      * @var string
      */
-    static public $schemaTypeName = 'EducationalOccupationalProgram';
+    static public string $schemaTypeName = 'EducationalOccupationalProgram';
 
     /**
      * The Schema.org Type Scope
      *
      * @var string
      */
-    static public $schemaTypeScope = 'https://schema.org/EducationalOccupationalProgram';
+    static public string $schemaTypeScope = 'https://schema.org/EducationalOccupationalProgram';
 
     /**
      * The Schema.org Type Description
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'A program offered by an institution which determines the learning progress to achieve an outcome, usually a credential like a degree or certificate. This would define a discrete set of opportunities (e.g., job, courses) that together constitute a program with a clear start, end, set of requirements, and transition to a new occupational opportunity (e.g., a job), or sometimes a higher educational opportunity (e.g., an advanced degree).';
+    static public string $schemaTypeDescription = <<<SCHEMADESC
+A program offered by an institution which determines the learning progress to achieve an outcome, usually a credential like a degree or certificate. This would define a discrete set of opportunities (e.g., job, courses) that together constitute a program with a clear start, end, set of requirements, and transition to a new occupational opportunity (e.g., a job), or sometimes a higher educational opportunity (e.g., an advanced degree).
+SCHEMADESC;
 
-    /**
-     * The Schema.org Type Extends
-     *
-     * @var string
-     */
-    static public $schemaTypeExtends = 'Intangible';
+    use EducationalOccupationalProgramTrait;
+    use IntangibleTrait;
+    use ThingTrait;
 
-    /**
-     * The Schema.org composed Property Names
-     *
-     * @var array
-     */
-    static public $schemaPropertyNames = [];
-
-    /**
-     * The Schema.org composed Property Expected Types
-     *
-     * @var array
-     */
-    static public $schemaPropertyExpectedTypes = [];
-
-    /**
-     * The Schema.org composed Property Descriptions
-     *
-     * @var array
-     */
-    static public $schemaPropertyDescriptions = [];
-
-    /**
-     * The Schema.org composed Google Required Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRequiredSchema = [];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRecommendedSchema = [];
-
-    // Public Properties
-    // =========================================================================
-    /**
-     * The Schema.org Property Names
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyNames = [
-        'applicationDeadline',
-        'applicationStartDate',
-        'dayOfWeek',
-        'educationalCredentialAwarded',
-        'educationalProgramMode',
-        'endDate',
-        'financialAidEligible',
-        'maximumEnrollment',
-        'numberOfCredits',
-        'occupationalCategory',
-        'occupationalCredentialAwarded',
-        'offers',
-        'programPrerequisites',
-        'programType',
-        'provider',
-        'salaryUponCompletion',
-        'startDate',
-        'termDuration',
-        'termsPerYear',
-        'timeOfDay',
-        'timeToComplete',
-        'trainingSalary',
-        'typicalCreditsPerTerm'
-    ];
-    /**
-     * The Schema.org Property Expected Types
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyExpectedTypes = [
-        'applicationDeadline' => ['Date'],
-        'applicationStartDate' => ['Date'],
-        'dayOfWeek' => ['DayOfWeek'],
-        'educationalCredentialAwarded' => ['EducationalOccupationalCredential', 'Text', 'URL'],
-        'educationalProgramMode' => ['Text', 'URL'],
-        'endDate' => ['Date', 'DateTime'],
-        'financialAidEligible' => ['DefinedTerm', 'Text'],
-        'maximumEnrollment' => ['Integer'],
-        'numberOfCredits' => ['Integer', 'StructuredValue'],
-        'occupationalCategory' => ['CategoryCode', 'Text'],
-        'occupationalCredentialAwarded' => ['EducationalOccupationalCredential', 'Text', 'URL'],
-        'offers' => ['Demand', 'Offer'],
-        'programPrerequisites' => ['AlignmentObject', 'Course', 'EducationalOccupationalCredential', 'Text'],
-        'programType' => ['DefinedTerm', 'Text'],
-        'provider' => ['Organization', 'Person'],
-        'salaryUponCompletion' => ['MonetaryAmountDistribution'],
-        'startDate' => ['Date', 'DateTime'],
-        'termDuration' => ['Duration'],
-        'termsPerYear' => ['Number'],
-        'timeOfDay' => ['Text'],
-        'timeToComplete' => ['Duration'],
-        'trainingSalary' => ['MonetaryAmountDistribution'],
-        'typicalCreditsPerTerm' => ['Integer', 'StructuredValue']
-    ];
-    /**
-     * The Schema.org Property Descriptions
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyDescriptions = [
-        'applicationDeadline' => 'The date at which the program stops collecting applications for the next enrollment cycle.',
-        'applicationStartDate' => 'The date at which the program begins collecting applications for the next enrollment cycle.',
-        'dayOfWeek' => 'The day of the week for which these opening hours are valid.',
-        'educationalCredentialAwarded' => 'A description of the qualification, award, certificate, diploma or other educational credential awarded as a consequence of successful completion of this course or program.',
-        'educationalProgramMode' => 'Similar to courseMode, The medium or means of delivery of the program as a whole. The value may either be a text label (e.g. "online", "onsite" or "blended"; "synchronous" or "asynchronous"; "full-time" or "part-time") or a URL reference to a term from a controlled vocabulary (e.g. https://ceds.ed.gov/element/001311#Asynchronous ).',
-        'endDate' => 'The end date and time of the item (in ISO 8601 date format).',
-        'financialAidEligible' => 'A financial aid type or program which students may use to pay for tuition or fees associated with the program.',
-        'maximumEnrollment' => 'The maximum number of students who may be enrolled in the program.',
-        'numberOfCredits' => 'The number of credits or units awarded by a Course or required to complete an EducationalOccupationalProgram.',
-        'occupationalCategory' => 'A category describing the job, preferably using a term from a taxonomy such as BLS O*NET-SOC, ISCO-08 or similar, with the property repeated for each applicable value. Ideally the taxonomy should be identified, and both the textual label and formal code for the category should be provided. Note: for historical reasons, any textual label and formal code provided as a literal may be assumed to be from O*NET-SOC.',
-        'occupationalCredentialAwarded' => 'A description of the qualification, award, certificate, diploma or other occupational credential awarded as a consequence of successful completion of this course or program.',
-        'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use businessFunction to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a Demand. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer. Inverse property: itemOffered.',
-        'programPrerequisites' => 'Prerequisites for enrolling in the program.',
-        'programType' => 'The type of educational or occupational program. For example, classroom, internship, alternance, etc..',
-        'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller. Supersedes carrier.',
-        'salaryUponCompletion' => 'The expected salary upon completing the training.',
-        'startDate' => 'The start date and time of the item (in ISO 8601 date format).',
-        'termDuration' => 'The amount of time in a term as defined by the institution. A term is a length of time where students take one or more classes. Semesters and quarters are common units for term.',
-        'termsPerYear' => 'The number of times terms of study are offered per year. Semesters and quarters are common units for term. For example, if the student can only take 2 semesters for the program in one year, then termsPerYear should be 2.',
-        'timeOfDay' => 'The time of day the program normally runs. For example, "evenings".',
-        'timeToComplete' => 'The expected length of time to complete the program if attending full-time.',
-        'trainingSalary' => 'The estimated salary earned while in the program.',
-        'typicalCreditsPerTerm' => 'The number of credits or units a full-time student would be expected to take in 1 term however \'term\' is defined by the institution.'
-    ];
-    /**
-     * The Schema.org Google Required Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRequiredSchema = [
-    ];
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRecommendedSchema = [
-    ];
-    /**
-     * The date at which the program stops collecting applications for the next
-     * enrollment cycle.
-     *
-     * @var Date [schema.org types: Date]
-     */
-    public $applicationDeadline;
-    /**
-     * The date at which the program begins collecting applications for the next
-     * enrollment cycle.
-     *
-     * @var Date [schema.org types: Date]
-     */
-    public $applicationStartDate;
-    /**
-     * The day of the week for which these opening hours are valid.
-     *
-     * @var DayOfWeek [schema.org types: DayOfWeek]
-     */
-    public $dayOfWeek;
-    /**
-     * A description of the qualification, award, certificate, diploma or other
-     * educational credential awarded as a consequence of successful completion of
-     * this course or program.
-     *
-     * @var mixed|EducationalOccupationalCredential|string|string [schema.org types: EducationalOccupationalCredential, Text, URL]
-     */
-    public $educationalCredentialAwarded;
-    /**
-     * Similar to courseMode, The medium or means of delivery of the program as a
-     * whole. The value may either be a text label (e.g. "online", "onsite" or
-     * "blended"; "synchronous" or "asynchronous"; "full-time" or "part-time") or
-     * a URL reference to a term from a controlled vocabulary (e.g.
-     * https://ceds.ed.gov/element/001311#Asynchronous ).
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $educationalProgramMode;
-    /**
-     * The end date and time of the item (in ISO 8601 date format).
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $endDate;
-    /**
-     * A financial aid type or program which students may use to pay for tuition
-     * or fees associated with the program.
-     *
-     * @var mixed|DefinedTerm|string [schema.org types: DefinedTerm, Text]
-     */
-    public $financialAidEligible;
-    /**
-     * The maximum number of students who may be enrolled in the program.
-     *
-     * @var int [schema.org types: Integer]
-     */
-    public $maximumEnrollment;
-    /**
-     * The number of credits or units awarded by a Course or required to complete
-     * an EducationalOccupationalProgram.
-     *
-     * @var mixed|int|StructuredValue [schema.org types: Integer, StructuredValue]
-     */
-    public $numberOfCredits;
-    /**
-     * A category describing the job, preferably using a term from a taxonomy such
-     * as BLS O*NET-SOC, ISCO-08 or similar, with the property repeated for each
-     * applicable value. Ideally the taxonomy should be identified, and both the
-     * textual label and formal code for the category should be provided. Note:
-     * for historical reasons, any textual label and formal code provided as a
-     * literal may be assumed to be from O*NET-SOC.
-     *
-     * @var mixed|CategoryCode|string [schema.org types: CategoryCode, Text]
-     */
-    public $occupationalCategory;
-    /**
-     * A description of the qualification, award, certificate, diploma or other
-     * occupational credential awarded as a consequence of successful completion
-     * of this course or program.
-     *
-     * @var mixed|EducationalOccupationalCredential|string|string [schema.org types: EducationalOccupationalCredential, Text, URL]
-     */
-    public $occupationalCredentialAwarded;
-    /**
-     * An offer to provide this item—for example, an offer to sell a product,
-     * rent the DVD of a movie, perform a service, or give away tickets to an
-     * event. Use businessFunction to indicate the kind of transaction offered,
-     * i.e. sell, lease, etc. This property can also be used to describe a Demand.
-     * While this property is listed as expected on a number of common types, it
-     * can be used in others. In that case, using a second type, such as Product
-     * or a subtype of Product, can clarify the nature of the offer. Inverse
-     * property: itemOffered.
-     *
-     * @var mixed|Demand|Offer [schema.org types: Demand, Offer]
-     */
-    public $offers;
-    /**
-     * Prerequisites for enrolling in the program.
-     *
-     * @var mixed|AlignmentObject|Course|EducationalOccupationalCredential|string [schema.org types: AlignmentObject, Course, EducationalOccupationalCredential, Text]
-     */
-    public $programPrerequisites;
-    /**
-     * The type of educational or occupational program. For example, classroom,
-     * internship, alternance, etc..
-     *
-     * @var mixed|DefinedTerm|string [schema.org types: DefinedTerm, Text]
-     */
-    public $programType;
-    /**
-     * The service provider, service operator, or service performer; the goods
-     * producer. Another party (a seller) may offer those services or goods on
-     * behalf of the provider. A provider may also serve as the seller. Supersedes
-     * carrier.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $provider;
-    /**
-     * The expected salary upon completing the training.
-     *
-     * @var MonetaryAmountDistribution [schema.org types: MonetaryAmountDistribution]
-     */
-    public $salaryUponCompletion;
-    /**
-     * The start date and time of the item (in ISO 8601 date format).
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $startDate;
-    /**
-     * The amount of time in a term as defined by the institution. A term is a
-     * length of time where students take one or more classes. Semesters and
-     * quarters are common units for term.
-     *
-     * @var Duration [schema.org types: Duration]
-     */
-    public $termDuration;
-
-    // Static Protected Properties
-    // =========================================================================
-    /**
-     * The number of times terms of study are offered per year. Semesters and
-     * quarters are common units for term. For example, if the student can only
-     * take 2 semesters for the program in one year, then termsPerYear should be
-     * 2.
-     *
-     * @var float [schema.org types: Number]
-     */
-    public $termsPerYear;
-    /**
-     * The time of day the program normally runs. For example, "evenings".
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $timeOfDay;
-    /**
-     * The expected length of time to complete the program if attending full-time.
-     *
-     * @var Duration [schema.org types: Duration]
-     */
-    public $timeToComplete;
-    /**
-     * The estimated salary earned while in the program.
-     *
-     * @var MonetaryAmountDistribution [schema.org types: MonetaryAmountDistribution]
-     */
-    public $trainingSalary;
-    /**
-     * The number of credits or units a full-time student would be expected to
-     * take in 1 term however 'term' is defined by the institution.
-     *
-     * @var mixed|int|StructuredValue [schema.org types: Integer, StructuredValue]
-     */
-    public $typicalCreditsPerTerm;
-
-    // Public Methods
+    // Public methods
     // =========================================================================
 
     /**
      * @inheritdoc
      */
-    public function init(): void
+    public function getSchemaPropertyNames(): array
     {
-        parent::init();
-        self::$schemaPropertyNames = array_merge(
-            parent::$schemaPropertyNames,
-            self::$_schemaPropertyNames
-        );
-
-        self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$schemaPropertyExpectedTypes,
-            self::$_schemaPropertyExpectedTypes
-        );
-
-        self::$schemaPropertyDescriptions = array_merge(
-            parent::$schemaPropertyDescriptions,
-            self::$_schemaPropertyDescriptions
-        );
-
-        self::$googleRequiredSchema = array_merge(
-            parent::$googleRequiredSchema,
-            self::$_googleRequiredSchema
-        );
-
-        self::$googleRecommendedSchema = array_merge(
-            parent::$googleRecommendedSchema,
-            self::$_googleRecommendedSchema
-        );
+        return array_keys($this->getSchemaPropertyExpectedTypes());
     }
 
     /**
      * @inheritdoc
      */
-    public function rules(): array
+    public function getSchemaPropertyExpectedTypes(): array
     {
-        $rules = parent::rules();
+        return [
+            'additionalType' => ['URL'],
+            'alternateName' => ['Text'],
+            'applicationDeadline' => ['Date'],
+            'applicationStartDate' => ['Date'],
+            'dayOfWeek' => ['DayOfWeek'],
+            'description' => ['Text'],
+            'disambiguatingDescription' => ['Text'],
+            'educationalCredentialAwarded' => ['URL', 'EducationalOccupationalCredential', 'Text'],
+            'educationalProgramMode' => ['URL', 'Text'],
+            'endDate' => ['Date', 'DateTime'],
+            'financialAidEligible' => ['Text', 'DefinedTerm'],
+            'hasCourse' => ['Course'],
+            'identifier' => ['URL', 'Text', 'PropertyValue'],
+            'image' => ['URL', 'ImageObject'],
+            'mainEntityOfPage' => ['CreativeWork', 'URL'],
+            'maximumEnrollment' => ['Integer'],
+            'name' => ['Text'],
+            'numberOfCredits' => ['Integer', 'StructuredValue'],
+            'occupationalCategory' => ['CategoryCode', 'Text'],
+            'occupationalCredentialAwarded' => ['EducationalOccupationalCredential', 'Text', 'URL'],
+            'offers' => ['Offer', 'Demand'],
+            'potentialAction' => ['Action'],
+            'programPrerequisites' => ['AlignmentObject', 'Course', 'EducationalOccupationalCredential', 'Text'],
+            'programType' => ['Text', 'DefinedTerm'],
+            'provider' => ['Organization', 'Person'],
+            'salaryUponCompletion' => ['MonetaryAmountDistribution'],
+            'sameAs' => ['URL'],
+            'startDate' => ['DateTime', 'Date'],
+            'subjectOf' => ['Event', 'CreativeWork'],
+            'termDuration' => ['Duration'],
+            'termsPerYear' => ['Number'],
+            'timeOfDay' => ['Text'],
+            'timeToComplete' => ['Duration'],
+            'trainingSalary' => ['MonetaryAmountDistribution'],
+            'typicalCreditsPerTerm' => ['Integer', 'StructuredValue'],
+            'url' => ['URL']
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSchemaPropertyDescriptions(): array
+    {
+        return [
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'alternateName' => 'An alias for the item.',
+            'applicationDeadline' => 'The date at which the program stops collecting applications for the next enrollment cycle.',
+            'applicationStartDate' => 'The date at which the program begins collecting applications for the next enrollment cycle.',
+            'dayOfWeek' => 'The day of the week for which these opening hours are valid.',
+            'description' => 'A description of the item.',
+            'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
+            'educationalCredentialAwarded' => 'A description of the qualification, award, certificate, diploma or other educational credential awarded as a consequence of successful completion of this course or program.',
+            'educationalProgramMode' => 'Similar to courseMode, The medium or means of delivery of the program as a whole. The value may either be a text label (e.g. "online", "onsite" or "blended"; "synchronous" or "asynchronous"; "full-time" or "part-time") or a URL reference to a term from a controlled vocabulary (e.g. https://ceds.ed.gov/element/001311#Asynchronous ).',
+            'endDate' => 'The end date and time of the item (in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601)).',
+            'financialAidEligible' => 'A financial aid type or program which students may use to pay for tuition or fees associated with the program.',
+            'hasCourse' => 'A course or class that is one of the learning opportunities that constitute an educational / occupational program. No information is implied about whether the course is mandatory or optional; no guarantee is implied about whether the course will be available to everyone on the program.',
+            'identifier' => 'The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.         ',
+            'image' => 'An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].',
+            'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
+            'maximumEnrollment' => 'The maximum number of students who may be enrolled in the program.',
+            'name' => 'The name of the item.',
+            'numberOfCredits' => 'The number of credits or units awarded by a Course or required to complete an EducationalOccupationalProgram.',
+            'occupationalCategory' => 'A category describing the job, preferably using a term from a taxonomy such as [BLS O*NET-SOC](http://www.onetcenter.org/taxonomy.html), [ISCO-08](https://www.ilo.org/public/english/bureau/stat/isco/isco08/) or similar, with the property repeated for each applicable value. Ideally the taxonomy should be identified, and both the textual label and formal code for the category should be provided.  Note: for historical reasons, any textual label and formal code provided as a literal may be assumed to be from O*NET-SOC.',
+            'occupationalCredentialAwarded' => 'A description of the qualification, award, certificate, diploma or other occupational credential awarded as a consequence of successful completion of this course or program.',
+            'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.       ',
+            'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
+            'programPrerequisites' => 'Prerequisites for enrolling in the program.',
+            'programType' => 'The type of educational or occupational program. For example, classroom, internship, alternance, etc..',
+            'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.',
+            'salaryUponCompletion' => 'The expected salary upon completing the training.',
+            'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
+            'startDate' => 'The start date and time of the item (in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601)).',
+            'subjectOf' => 'A CreativeWork or Event about this Thing.',
+            'termDuration' => 'The amount of time in a term as defined by the institution. A term is a length of time where students take one or more classes. Semesters and quarters are common units for term.',
+            'termsPerYear' => 'The number of times terms of study are offered per year. Semesters and quarters are common units for term. For example, if the student can only take 2 semesters for the program in one year, then termsPerYear should be 2.',
+            'timeOfDay' => 'The time of day the program normally runs. For example, "evenings".',
+            'timeToComplete' => 'The expected length of time to complete the program if attending full-time.',
+            'trainingSalary' => 'The estimated salary earned while in the program.',
+            'typicalCreditsPerTerm' => 'The number of credits or units a full-time student would be expected to take in 1 term however \'term\' is defined by the institution.',
+            'url' => 'URL of the item.'
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRequiredSchema(): array
+    {
+        return ['description', 'name'];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRecommendedSchema(): array
+    {
+        return ['image', 'url'];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function defineRules(): array
+    {
+        $rules = parent::defineRules();
         $rules = array_merge($rules, [
-            [['applicationDeadline', 'applicationStartDate', 'dayOfWeek', 'educationalCredentialAwarded', 'educationalProgramMode', 'endDate', 'financialAidEligible', 'maximumEnrollment', 'numberOfCredits', 'occupationalCategory', 'occupationalCredentialAwarded', 'offers', 'programPrerequisites', 'programType', 'provider', 'salaryUponCompletion', 'startDate', 'termDuration', 'termsPerYear', 'timeOfDay', 'timeToComplete', 'trainingSalary', 'typicalCreditsPerTerm'], 'validateJsonSchema'],
-            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
-            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
+            [$this->getSchemaPropertyNames(), 'validateJsonSchema'],
+            [$this->getGoogleRequiredSchema(), 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [$this->getGoogleRecommendedSchema(), 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

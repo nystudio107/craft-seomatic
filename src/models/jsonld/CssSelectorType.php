@@ -1,27 +1,27 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2017 nystudio107
+ * @copyright Copyright (c) 2022 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\Text;
+use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
+ * schema.org version: v14.0-release
  * CssSelectorType - Text representing a CSS selector.
  *
  * @author    nystudio107
  * @package   Seomatic
- * @since     3.0.0
- * @see       http://schema.org/CssSelectorType
+ * @see       https://schema.org/CssSelectorType
  */
-class CssSelectorType extends Text
+class CssSelectorType extends MetaJsonLd implements CssSelectorTypeInterface, TextInterface
 {
     // Static Public Properties
     // =========================================================================
@@ -31,158 +31,84 @@ class CssSelectorType extends Text
      *
      * @var string
      */
-    static public $schemaTypeName = 'CssSelectorType';
+    static public string $schemaTypeName = 'CssSelectorType';
 
     /**
      * The Schema.org Type Scope
      *
      * @var string
      */
-    static public $schemaTypeScope = 'https://schema.org/CssSelectorType';
+    static public string $schemaTypeScope = 'https://schema.org/CssSelectorType';
 
     /**
      * The Schema.org Type Description
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'Text representing a CSS selector.';
+    static public string $schemaTypeDescription = <<<SCHEMADESC
+Text representing a CSS selector.
+SCHEMADESC;
 
-    /**
-     * The Schema.org Type Extends
-     *
-     * @var string
-     */
-    static public $schemaTypeExtends = 'Text';
+    use CssSelectorTypeTrait;
+    use TextTrait;
 
-    /**
-     * The Schema.org composed Property Names
-     *
-     * @var array
-     */
-    static public $schemaPropertyNames = [];
-
-    /**
-     * The Schema.org composed Property Expected Types
-     *
-     * @var array
-     */
-    static public $schemaPropertyExpectedTypes = [];
-
-    /**
-     * The Schema.org composed Property Descriptions
-     *
-     * @var array
-     */
-    static public $schemaPropertyDescriptions = [];
-
-    /**
-     * The Schema.org composed Google Required Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRequiredSchema = [];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRecommendedSchema = [];
-
-    // Public Properties
-    // =========================================================================
-
-    // Static Protected Properties
-    // =========================================================================
-
-    /**
-     * The Schema.org Property Names
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyNames = [
-
-    ];
-
-    /**
-     * The Schema.org Property Expected Types
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyExpectedTypes = [
-
-    ];
-
-    /**
-     * The Schema.org Property Descriptions
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyDescriptions = [
-
-    ];
-
-    /**
-     * The Schema.org Google Required Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRequiredSchema = [
-    ];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRecommendedSchema = [
-    ];
-
-    // Public Methods
+    // Public methods
     // =========================================================================
 
     /**
      * @inheritdoc
      */
-    public function init(): void
+    public function getSchemaPropertyNames(): array
     {
-        parent::init();
-        self::$schemaPropertyNames = array_merge(
-            parent::$schemaPropertyNames,
-            self::$_schemaPropertyNames
-        );
-
-        self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$schemaPropertyExpectedTypes,
-            self::$_schemaPropertyExpectedTypes
-        );
-
-        self::$schemaPropertyDescriptions = array_merge(
-            parent::$schemaPropertyDescriptions,
-            self::$_schemaPropertyDescriptions
-        );
-
-        self::$googleRequiredSchema = array_merge(
-            parent::$googleRequiredSchema,
-            self::$_googleRequiredSchema
-        );
-
-        self::$googleRecommendedSchema = array_merge(
-            parent::$googleRecommendedSchema,
-            self::$_googleRecommendedSchema
-        );
+        return array_keys($this->getSchemaPropertyExpectedTypes());
     }
 
     /**
      * @inheritdoc
      */
-    public function rules(): array
+    public function getSchemaPropertyExpectedTypes(): array
     {
-        $rules = parent::rules();
+        return [
+
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSchemaPropertyDescriptions(): array
+    {
+        return [
+
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRequiredSchema(): array
+    {
+        return [];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRecommendedSchema(): array
+    {
+        return [];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function defineRules(): array
+    {
+        $rules = parent::defineRules();
         $rules = array_merge($rules, [
-            [[], 'validateJsonSchema'],
-            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
-            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
+            [$this->getSchemaPropertyNames(), 'validateJsonSchema'],
+            [$this->getGoogleRequiredSchema(), 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [$this->getGoogleRecommendedSchema(), 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;
