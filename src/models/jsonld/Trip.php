@@ -1,27 +1,27 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS 3
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2017 nystudio107
+ * @copyright Copyright (c) 2022 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\Intangible;
+use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
+ * schema.org version: v14.0-release
  * Trip - A trip or journey. An itinerary of visits to one or more places.
  *
  * @author    nystudio107
  * @package   Seomatic
- * @since     3.0.0
- * @see       http://schema.org/Trip
+ * @see       https://schema.org/Trip
  */
-class Trip extends Intangible
+class Trip extends MetaJsonLd implements TripInterface, IntangibleInterface, ThingInterface
 {
     // Static Public Properties
     // =========================================================================
@@ -45,224 +45,107 @@ class Trip extends Intangible
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'A trip or journey. An itinerary of visits to one or more places.';
+    static public $schemaTypeDescription = <<<SCHEMADESC
+A trip or journey. An itinerary of visits to one or more places.
+SCHEMADESC;
 
-    /**
-     * The Schema.org Type Extends
-     *
-     * @var string
-     */
-    static public $schemaTypeExtends = 'Intangible';
+    use TripTrait;
+    use IntangibleTrait;
+    use ThingTrait;
 
-    /**
-     * The Schema.org composed Property Names
-     *
-     * @var array
-     */
-    static public $schemaPropertyNames = [];
-
-    /**
-     * The Schema.org composed Property Expected Types
-     *
-     * @var array
-     */
-    static public $schemaPropertyExpectedTypes = [];
-
-    /**
-     * The Schema.org composed Property Descriptions
-     *
-     * @var array
-     */
-    static public $schemaPropertyDescriptions = [];
-
-    /**
-     * The Schema.org composed Google Required Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRequiredSchema = [];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRecommendedSchema = [];
-
-    // Public Properties
+    // Public methods
     // =========================================================================
 
     /**
-     * The expected arrival time.
-     *
-     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
+     * @inheritdoc
      */
-    public $arrivalTime;
-
-    /**
-     * The expected departure time.
-     *
-     * @var mixed|DateTime|Time [schema.org types: DateTime, Time]
-     */
-    public $departureTime;
-
-    /**
-     * Destination(s) ( Place ) that make up a trip. For a trip where destination
-     * order is important use ItemList to specify that order (see examples).
-     *
-     * @var mixed|ItemList|Place [schema.org types: ItemList, Place]
-     */
-    public $itinerary;
-
-    /**
-     * An offer to provide this item—for example, an offer to sell a product,
-     * rent the DVD of a movie, perform a service, or give away tickets to an
-     * event. Use businessFunction to indicate the kind of transaction offered,
-     * i.e. sell, lease, etc. This property can also be used to describe a Demand.
-     * While this property is listed as expected on a number of common types, it
-     * can be used in others. In that case, using a second type, such as Product
-     * or a subtype of Product, can clarify the nature of the offer. Inverse
-     * property: itemOffered.
-     *
-     * @var mixed|Demand|Offer [schema.org types: Demand, Offer]
-     */
-    public $offers;
-
-    /**
-     * Identifies that this Trip is a subTrip of another Trip. For example Day 1,
-     * Day 2, etc. of a multi-day trip. Inverse property: subTrip.
-     *
-     * @var Trip [schema.org types: Trip]
-     */
-    public $partOfTrip;
-
-    /**
-     * The service provider, service operator, or service performer; the goods
-     * producer. Another party (a seller) may offer those services or goods on
-     * behalf of the provider. A provider may also serve as the seller. Supersedes
-     * carrier.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $provider;
-
-    /**
-     * Identifies a Trip that is a subTrip of this Trip. For example Day 1, Day 2,
-     * etc. of a multi-day trip. Inverse property: partOfTrip.
-     *
-     * @var Trip [schema.org types: Trip]
-     */
-    public $subTrip;
-
-    // Static Protected Properties
-    // =========================================================================
-
-    /**
-     * The Schema.org Property Names
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyNames = [
-        'arrivalTime',
-        'departureTime',
-        'itinerary',
-        'offers',
-        'partOfTrip',
-        'provider',
-        'subTrip'
-    ];
-
-    /**
-     * The Schema.org Property Expected Types
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyExpectedTypes = [
-        'arrivalTime' => ['DateTime','Time'],
-        'departureTime' => ['DateTime','Time'],
-        'itinerary' => ['ItemList','Place'],
-        'offers' => ['Demand','Offer'],
-        'partOfTrip' => ['Trip'],
-        'provider' => ['Organization','Person'],
-        'subTrip' => ['Trip']
-    ];
-
-    /**
-     * The Schema.org Property Descriptions
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyDescriptions = [
-        'arrivalTime' => 'The expected arrival time.',
-        'departureTime' => 'The expected departure time.',
-        'itinerary' => 'Destination(s) ( Place ) that make up a trip. For a trip where destination order is important use ItemList to specify that order (see examples).',
-        'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use businessFunction to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a Demand. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer. Inverse property: itemOffered.',
-        'partOfTrip' => 'Identifies that this Trip is a subTrip of another Trip. For example Day 1, Day 2, etc. of a multi-day trip. Inverse property: subTrip.',
-        'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller. Supersedes carrier.',
-        'subTrip' => 'Identifies a Trip that is a subTrip of this Trip. For example Day 1, Day 2, etc. of a multi-day trip. Inverse property: partOfTrip.'
-    ];
-
-    /**
-     * The Schema.org Google Required Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRequiredSchema = [
-    ];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRecommendedSchema = [
-    ];
-
-    // Public Methods
-    // =========================================================================
-
-    /**
-    * @inheritdoc
-    */
-    public function init()
+    public function getSchemaPropertyNames(): array
     {
-        parent::init();
-        self::$schemaPropertyNames = array_merge(
-            parent::$schemaPropertyNames,
-            self::$_schemaPropertyNames
-        );
-
-        self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$schemaPropertyExpectedTypes,
-            self::$_schemaPropertyExpectedTypes
-        );
-
-        self::$schemaPropertyDescriptions = array_merge(
-            parent::$schemaPropertyDescriptions,
-            self::$_schemaPropertyDescriptions
-        );
-
-        self::$googleRequiredSchema = array_merge(
-            parent::$googleRequiredSchema,
-            self::$_googleRequiredSchema
-        );
-
-        self::$googleRecommendedSchema = array_merge(
-            parent::$googleRecommendedSchema,
-            self::$_googleRecommendedSchema
-        );
+        return array_keys($this->getSchemaPropertyExpectedTypes());
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function getSchemaPropertyExpectedTypes(): array
     {
-        $rules = parent::rules();
+        return [
+            'additionalType' => ['URL'],
+            'alternateName' => ['Text'],
+            'arrivalTime' => ['Time', 'DateTime'],
+            'departureTime' => ['Time', 'DateTime'],
+            'description' => ['Text'],
+            'disambiguatingDescription' => ['Text'],
+            'identifier' => ['URL', 'Text', 'PropertyValue'],
+            'image' => ['URL', 'ImageObject'],
+            'itinerary' => ['ItemList', 'Place'],
+            'mainEntityOfPage' => ['CreativeWork', 'URL'],
+            'name' => ['Text'],
+            'offers' => ['Offer', 'Demand'],
+            'partOfTrip' => ['Trip'],
+            'potentialAction' => ['Action'],
+            'provider' => ['Organization', 'Person'],
+            'sameAs' => ['URL'],
+            'subTrip' => ['Trip'],
+            'subjectOf' => ['Event', 'CreativeWork'],
+            'url' => ['URL']
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSchemaPropertyDescriptions(): array
+    {
+        return [
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'alternateName' => 'An alias for the item.',
+            'arrivalTime' => 'The expected arrival time.',
+            'departureTime' => 'The expected departure time.',
+            'description' => 'A description of the item.',
+            'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
+            'identifier' => 'The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.         ',
+            'image' => 'An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].',
+            'itinerary' => 'Destination(s) ( [[Place]] ) that make up a trip. For a trip where destination order is important use [[ItemList]] to specify that order (see examples).',
+            'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
+            'name' => 'The name of the item.',
+            'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.       ',
+            'partOfTrip' => 'Identifies that this [[Trip]] is a subTrip of another Trip.  For example Day 1, Day 2, etc. of a multi-day trip.',
+            'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
+            'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.',
+            'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
+            'subTrip' => 'Identifies a [[Trip]] that is a subTrip of this Trip.  For example Day 1, Day 2, etc. of a multi-day trip.',
+            'subjectOf' => 'A CreativeWork or Event about this Thing.',
+            'url' => 'URL of the item.'
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRequiredSchema(): array
+    {
+        return ['description', 'name'];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRecommendedSchema(): array
+    {
+        return ['image', 'url'];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function defineRules(): array
+    {
+        $rules = parent::defineRules();
         $rules = array_merge($rules, [
-            [['arrivalTime','departureTime','itinerary','offers','partOfTrip','provider','subTrip'], 'validateJsonSchema'],
-            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
-            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
+            [$this->getSchemaPropertyNames(), 'validateJsonSchema'],
+            [$this->getGoogleRequiredSchema(), 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [$this->getGoogleRecommendedSchema(), 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

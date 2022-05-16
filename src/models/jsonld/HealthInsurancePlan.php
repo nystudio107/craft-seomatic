@@ -1,28 +1,27 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS 3
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2017 nystudio107
+ * @copyright Copyright (c) 2022 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\Intangible;
+use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * HealthInsurancePlan - A US-style health insurance plan, including PPOs,
- * EPOs, and HMOs.
+ * schema.org version: v14.0-release
+ * HealthInsurancePlan - A US-style health insurance plan, including PPOs, EPOs, and HMOs. 
  *
  * @author    nystudio107
  * @package   Seomatic
- * @since     3.0.0
- * @see       http://schema.org/HealthInsurancePlan
+ * @see       https://schema.org/HealthInsurancePlan
  */
-class HealthInsurancePlan extends Intangible
+class HealthInsurancePlan extends MetaJsonLd implements HealthInsurancePlanInterface, IntangibleInterface, ThingInterface
 {
     // Static Public Properties
     // =========================================================================
@@ -46,235 +45,111 @@ class HealthInsurancePlan extends Intangible
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'A US-style health insurance plan, including PPOs, EPOs, and HMOs.';
+    static public $schemaTypeDescription = <<<SCHEMADESC
+A US-style health insurance plan, including PPOs, EPOs, and HMOs. 
+SCHEMADESC;
 
-    /**
-     * The Schema.org Type Extends
-     *
-     * @var string
-     */
-    static public $schemaTypeExtends = 'Intangible';
+    use HealthInsurancePlanTrait;
+    use IntangibleTrait;
+    use ThingTrait;
 
-    /**
-     * The Schema.org composed Property Names
-     *
-     * @var array
-     */
-    static public $schemaPropertyNames = [];
-
-    /**
-     * The Schema.org composed Property Expected Types
-     *
-     * @var array
-     */
-    static public $schemaPropertyExpectedTypes = [];
-
-    /**
-     * The Schema.org composed Property Descriptions
-     *
-     * @var array
-     */
-    static public $schemaPropertyDescriptions = [];
-
-    /**
-     * The Schema.org composed Google Required Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRequiredSchema = [];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRecommendedSchema = [];
-
-    // Public Properties
+    // Public methods
     // =========================================================================
 
     /**
-     * The URL that goes directly to the summary of benefits and coverage for the
-     * specific standard plan or plan variation.
-     *
-     * @var string [schema.org types: URL]
+     * @inheritdoc
      */
-    public $benefitsSummaryUrl;
-
-    /**
-     * A contact point for a person or organization. Supersedes contactPoints.
-     *
-     * @var ContactPoint [schema.org types: ContactPoint]
-     */
-    public $contactPoint;
-
-    /**
-     * TODO.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $healthPlanDrugOption;
-
-    /**
-     * The tier(s) of drugs offered by this formulary or insurance plan.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $healthPlanDrugTier;
-
-    /**
-     * The 14-character, HIOS-generated Plan ID number. (Plan IDs must be unique,
-     * even across different markets.)
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $healthPlanId;
-
-    /**
-     * The URL that goes directly to the plan brochure for the specific standard
-     * plan or plan variation.
-     *
-     * @var string [schema.org types: URL]
-     */
-    public $healthPlanMarketingUrl;
-
-    /**
-     * Formularies covered by this plan.
-     *
-     * @var HealthPlanFormulary [schema.org types: HealthPlanFormulary]
-     */
-    public $includesHealthPlanFormulary;
-
-    /**
-     * Networks covered by this plan.
-     *
-     * @var HealthPlanNetwork [schema.org types: HealthPlanNetwork]
-     */
-    public $includesHealthPlanNetwork;
-
-    /**
-     * The standard for interpreting thePlan ID. The preferred is "HIOS". See the
-     * Centers for Medicare & Medicaid Services for more details.
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $usesHealthPlanIdStandard;
-
-    // Static Protected Properties
-    // =========================================================================
-
-    /**
-     * The Schema.org Property Names
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyNames = [
-        'benefitsSummaryUrl',
-        'contactPoint',
-        'healthPlanDrugOption',
-        'healthPlanDrugTier',
-        'healthPlanId',
-        'healthPlanMarketingUrl',
-        'includesHealthPlanFormulary',
-        'includesHealthPlanNetwork',
-        'usesHealthPlanIdStandard'
-    ];
-
-    /**
-     * The Schema.org Property Expected Types
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyExpectedTypes = [
-        'benefitsSummaryUrl' => ['URL'],
-        'contactPoint' => ['ContactPoint'],
-        'healthPlanDrugOption' => ['Text'],
-        'healthPlanDrugTier' => ['Text'],
-        'healthPlanId' => ['Text'],
-        'healthPlanMarketingUrl' => ['URL'],
-        'includesHealthPlanFormulary' => ['HealthPlanFormulary'],
-        'includesHealthPlanNetwork' => ['HealthPlanNetwork'],
-        'usesHealthPlanIdStandard' => ['Text','URL']
-    ];
-
-    /**
-     * The Schema.org Property Descriptions
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyDescriptions = [
-        'benefitsSummaryUrl' => 'The URL that goes directly to the summary of benefits and coverage for the specific standard plan or plan variation.',
-        'contactPoint' => 'A contact point for a person or organization. Supersedes contactPoints.',
-        'healthPlanDrugOption' => 'TODO.',
-        'healthPlanDrugTier' => 'The tier(s) of drugs offered by this formulary or insurance plan.',
-        'healthPlanId' => 'The 14-character, HIOS-generated Plan ID number. (Plan IDs must be unique, even across different markets.)',
-        'healthPlanMarketingUrl' => 'The URL that goes directly to the plan brochure for the specific standard plan or plan variation.',
-        'includesHealthPlanFormulary' => 'Formularies covered by this plan.',
-        'includesHealthPlanNetwork' => 'Networks covered by this plan.',
-        'usesHealthPlanIdStandard' => 'The standard for interpreting thePlan ID. The preferred is "HIOS". See the Centers for Medicare & Medicaid Services for more details.'
-    ];
-
-    /**
-     * The Schema.org Google Required Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRequiredSchema = [
-    ];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRecommendedSchema = [
-    ];
-
-    // Public Methods
-    // =========================================================================
-
-    /**
-    * @inheritdoc
-    */
-    public function init()
+    public function getSchemaPropertyNames(): array
     {
-        parent::init();
-        self::$schemaPropertyNames = array_merge(
-            parent::$schemaPropertyNames,
-            self::$_schemaPropertyNames
-        );
-
-        self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$schemaPropertyExpectedTypes,
-            self::$_schemaPropertyExpectedTypes
-        );
-
-        self::$schemaPropertyDescriptions = array_merge(
-            parent::$schemaPropertyDescriptions,
-            self::$_schemaPropertyDescriptions
-        );
-
-        self::$googleRequiredSchema = array_merge(
-            parent::$googleRequiredSchema,
-            self::$_googleRequiredSchema
-        );
-
-        self::$googleRecommendedSchema = array_merge(
-            parent::$googleRecommendedSchema,
-            self::$_googleRecommendedSchema
-        );
+        return array_keys($this->getSchemaPropertyExpectedTypes());
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function getSchemaPropertyExpectedTypes(): array
     {
-        $rules = parent::rules();
+        return [
+            'additionalType' => ['URL'],
+            'alternateName' => ['Text'],
+            'benefitsSummaryUrl' => ['URL'],
+            'contactPoint' => ['ContactPoint'],
+            'description' => ['Text'],
+            'disambiguatingDescription' => ['Text'],
+            'healthPlanDrugOption' => ['Text'],
+            'healthPlanDrugTier' => ['Text'],
+            'healthPlanId' => ['Text'],
+            'healthPlanMarketingUrl' => ['URL'],
+            'identifier' => ['URL', 'Text', 'PropertyValue'],
+            'image' => ['URL', 'ImageObject'],
+            'includesHealthPlanFormulary' => ['HealthPlanFormulary'],
+            'includesHealthPlanNetwork' => ['HealthPlanNetwork'],
+            'mainEntityOfPage' => ['CreativeWork', 'URL'],
+            'name' => ['Text'],
+            'potentialAction' => ['Action'],
+            'sameAs' => ['URL'],
+            'subjectOf' => ['Event', 'CreativeWork'],
+            'url' => ['URL'],
+            'usesHealthPlanIdStandard' => ['URL', 'Text']
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSchemaPropertyDescriptions(): array
+    {
+        return [
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'alternateName' => 'An alias for the item.',
+            'benefitsSummaryUrl' => 'The URL that goes directly to the summary of benefits and coverage for the specific standard plan or plan variation.',
+            'contactPoint' => 'A contact point for a person or organization.',
+            'description' => 'A description of the item.',
+            'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
+            'healthPlanDrugOption' => 'TODO.',
+            'healthPlanDrugTier' => 'The tier(s) of drugs offered by this formulary or insurance plan.',
+            'healthPlanId' => 'The 14-character, HIOS-generated Plan ID number. (Plan IDs must be unique, even across different markets.)',
+            'healthPlanMarketingUrl' => 'The URL that goes directly to the plan brochure for the specific standard plan or plan variation.',
+            'identifier' => 'The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.         ',
+            'image' => 'An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].',
+            'includesHealthPlanFormulary' => 'Formularies covered by this plan.',
+            'includesHealthPlanNetwork' => 'Networks covered by this plan.',
+            'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
+            'name' => 'The name of the item.',
+            'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
+            'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
+            'subjectOf' => 'A CreativeWork or Event about this Thing.',
+            'url' => 'URL of the item.',
+            'usesHealthPlanIdStandard' => 'The standard for interpreting thePlan ID. The preferred is "HIOS". See the Centers for Medicare & Medicaid Services for more details.'
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRequiredSchema(): array
+    {
+        return ['description', 'name'];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRecommendedSchema(): array
+    {
+        return ['image', 'url'];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function defineRules(): array
+    {
+        $rules = parent::defineRules();
         $rules = array_merge($rules, [
-            [['benefitsSummaryUrl','contactPoint','healthPlanDrugOption','healthPlanDrugTier','healthPlanId','healthPlanMarketingUrl','includesHealthPlanFormulary','includesHealthPlanNetwork','usesHealthPlanIdStandard'], 'validateJsonSchema'],
-            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
-            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
+            [$this->getSchemaPropertyNames(), 'validateJsonSchema'],
+            [$this->getGoogleRequiredSchema(), 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [$this->getGoogleRecommendedSchema(), 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

@@ -1,29 +1,29 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS 3
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2017 nystudio107
+ * @copyright Copyright (c) 2022 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\MedicalEntity;
+use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * MedicalCondition - Any condition of the human body that affects the normal
- * functioning of a person, whether physically or mentally. Includes diseases,
- * injuries, disabilities, disorders, syndromes, etc.
+ * schema.org version: v14.0-release
+ * MedicalCondition - Any condition of the human body that affects the normal functioning of a
+ * person, whether physically or mentally. Includes diseases, injuries,
+ * disabilities, disorders, syndromes, etc.
  *
  * @author    nystudio107
  * @package   Seomatic
- * @since     3.0.0
- * @see       http://schema.org/MedicalCondition
+ * @see       https://schema.org/MedicalCondition
  */
-class MedicalCondition extends MedicalEntity
+class MedicalCondition extends MetaJsonLd implements MedicalConditionInterface, MedicalEntityInterface, ThingInterface
 {
     // Static Public Properties
     // =========================================================================
@@ -47,317 +47,141 @@ class MedicalCondition extends MedicalEntity
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'Any condition of the human body that affects the normal functioning of a person, whether physically or mentally. Includes diseases, injuries, disabilities, disorders, syndromes, etc.';
+    static public $schemaTypeDescription = <<<SCHEMADESC
+Any condition of the human body that affects the normal functioning of a person, whether physically or mentally. Includes diseases, injuries, disabilities, disorders, syndromes, etc.
+SCHEMADESC;
 
-    /**
-     * The Schema.org Type Extends
-     *
-     * @var string
-     */
-    static public $schemaTypeExtends = 'MedicalEntity';
+    use MedicalConditionTrait;
+    use MedicalEntityTrait;
+    use ThingTrait;
 
-    /**
-     * The Schema.org composed Property Names
-     *
-     * @var array
-     */
-    static public $schemaPropertyNames = [];
-
-    /**
-     * The Schema.org composed Property Expected Types
-     *
-     * @var array
-     */
-    static public $schemaPropertyExpectedTypes = [];
-
-    /**
-     * The Schema.org composed Property Descriptions
-     *
-     * @var array
-     */
-    static public $schemaPropertyDescriptions = [];
-
-    /**
-     * The Schema.org composed Google Required Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRequiredSchema = [];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRecommendedSchema = [];
-
-    // Public Properties
+    // Public methods
     // =========================================================================
 
     /**
-     * The anatomy of the underlying organ system or structures associated with
-     * this entity.
-     *
-     * @var mixed|AnatomicalStructure|AnatomicalSystem|SuperficialAnatomy [schema.org types: AnatomicalStructure, AnatomicalSystem, SuperficialAnatomy]
+     * @inheritdoc
      */
-    public $associatedAnatomy;
-
-    /**
-     * One of a set of differential diagnoses for the condition. Specifically, a
-     * closely-related or competing diagnosis typically considered later in the
-     * cognitive process whereby this medical condition is distinguished from
-     * others most likely responsible for a similar collection of signs and
-     * symptoms to reach the most parsimonious diagnosis or diagnoses in a
-     * patient.
-     *
-     * @var DDxElement [schema.org types: DDxElement]
-     */
-    public $differentialDiagnosis;
-
-    /**
-     * Specifying a drug or medicine used in a medication procedure
-     *
-     * @var Drug [schema.org types: Drug]
-     */
-    public $drug;
-
-    /**
-     * The characteristics of associated patients, such as age, gender, race etc.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $epidemiology;
-
-    /**
-     * The likely outcome in either the short term or long term of the medical
-     * condition.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $expectedPrognosis;
-
-    /**
-     * The expected progression of the condition if it is not treated and allowed
-     * to progress naturally.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $naturalProgression;
-
-    /**
-     * Changes in the normal mechanical, physical, and biochemical functions that
-     * are associated with this activity or condition.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $pathophysiology;
-
-    /**
-     * A possible unexpected and unfavorable evolution of a medical condition.
-     * Complications may include worsening of the signs or symptoms of the
-     * disease, extension of the condition to other organ systems, etc.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $possibleComplication;
-
-    /**
-     * A possible treatment to address this condition, sign or symptom.
-     *
-     * @var MedicalTherapy [schema.org types: MedicalTherapy]
-     */
-    public $possibleTreatment;
-
-    /**
-     * A preventative therapy used to prevent an initial occurrence of the medical
-     * condition, such as vaccination.
-     *
-     * @var MedicalTherapy [schema.org types: MedicalTherapy]
-     */
-    public $primaryPrevention;
-
-    /**
-     * A modifiable or non-modifiable factor that increases the risk of a patient
-     * contracting this condition, e.g. age, coexisting condition.
-     *
-     * @var MedicalRiskFactor [schema.org types: MedicalRiskFactor]
-     */
-    public $riskFactor;
-
-    /**
-     * A preventative therapy used to prevent reoccurrence of the medical
-     * condition after an initial episode of the condition.
-     *
-     * @var MedicalTherapy [schema.org types: MedicalTherapy]
-     */
-    public $secondaryPrevention;
-
-    /**
-     * A sign or symptom of this condition. Signs are objective or physically
-     * observable manifestations of the medical condition while symptoms are the
-     * subjective experience of the medical condition.
-     *
-     * @var MedicalSignOrSymptom [schema.org types: MedicalSignOrSymptom]
-     */
-    public $signOrSymptom;
-
-    /**
-     * The stage of the condition, if applicable.
-     *
-     * @var MedicalConditionStage [schema.org types: MedicalConditionStage]
-     */
-    public $stage;
-
-    /**
-     * The status of the study (enumerated).
-     *
-     * @var mixed|EventStatusType|MedicalStudyStatus|string [schema.org types: EventStatusType, MedicalStudyStatus, Text]
-     */
-    public $status;
-
-    /**
-     * A medical test typically performed given this condition.
-     *
-     * @var MedicalTest [schema.org types: MedicalTest]
-     */
-    public $typicalTest;
-
-    // Static Protected Properties
-    // =========================================================================
-
-    /**
-     * The Schema.org Property Names
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyNames = [
-        'associatedAnatomy',
-        'differentialDiagnosis',
-        'drug',
-        'epidemiology',
-        'expectedPrognosis',
-        'naturalProgression',
-        'pathophysiology',
-        'possibleComplication',
-        'possibleTreatment',
-        'primaryPrevention',
-        'riskFactor',
-        'secondaryPrevention',
-        'signOrSymptom',
-        'stage',
-        'status',
-        'typicalTest'
-    ];
-
-    /**
-     * The Schema.org Property Expected Types
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyExpectedTypes = [
-        'associatedAnatomy' => ['AnatomicalStructure','AnatomicalSystem','SuperficialAnatomy'],
-        'differentialDiagnosis' => ['DDxElement'],
-        'drug' => ['Drug'],
-        'epidemiology' => ['Text'],
-        'expectedPrognosis' => ['Text'],
-        'naturalProgression' => ['Text'],
-        'pathophysiology' => ['Text'],
-        'possibleComplication' => ['Text'],
-        'possibleTreatment' => ['MedicalTherapy'],
-        'primaryPrevention' => ['MedicalTherapy'],
-        'riskFactor' => ['MedicalRiskFactor'],
-        'secondaryPrevention' => ['MedicalTherapy'],
-        'signOrSymptom' => ['MedicalSignOrSymptom'],
-        'stage' => ['MedicalConditionStage'],
-        'status' => ['EventStatusType','MedicalStudyStatus','Text'],
-        'typicalTest' => ['MedicalTest']
-    ];
-
-    /**
-     * The Schema.org Property Descriptions
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyDescriptions = [
-        'associatedAnatomy' => 'The anatomy of the underlying organ system or structures associated with this entity.',
-        'differentialDiagnosis' => 'One of a set of differential diagnoses for the condition. Specifically, a closely-related or competing diagnosis typically considered later in the cognitive process whereby this medical condition is distinguished from others most likely responsible for a similar collection of signs and symptoms to reach the most parsimonious diagnosis or diagnoses in a patient.',
-        'drug' => 'Specifying a drug or medicine used in a medication procedure',
-        'epidemiology' => 'The characteristics of associated patients, such as age, gender, race etc.',
-        'expectedPrognosis' => 'The likely outcome in either the short term or long term of the medical condition.',
-        'naturalProgression' => 'The expected progression of the condition if it is not treated and allowed to progress naturally.',
-        'pathophysiology' => 'Changes in the normal mechanical, physical, and biochemical functions that are associated with this activity or condition.',
-        'possibleComplication' => 'A possible unexpected and unfavorable evolution of a medical condition. Complications may include worsening of the signs or symptoms of the disease, extension of the condition to other organ systems, etc.',
-        'possibleTreatment' => 'A possible treatment to address this condition, sign or symptom.',
-        'primaryPrevention' => 'A preventative therapy used to prevent an initial occurrence of the medical condition, such as vaccination.',
-        'riskFactor' => 'A modifiable or non-modifiable factor that increases the risk of a patient contracting this condition, e.g. age, coexisting condition.',
-        'secondaryPrevention' => 'A preventative therapy used to prevent reoccurrence of the medical condition after an initial episode of the condition.',
-        'signOrSymptom' => 'A sign or symptom of this condition. Signs are objective or physically observable manifestations of the medical condition while symptoms are the subjective experience of the medical condition.',
-        'stage' => 'The stage of the condition, if applicable.',
-        'status' => 'The status of the study (enumerated).',
-        'typicalTest' => 'A medical test typically performed given this condition.'
-    ];
-
-    /**
-     * The Schema.org Google Required Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRequiredSchema = [
-    ];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRecommendedSchema = [
-    ];
-
-    // Public Methods
-    // =========================================================================
-
-    /**
-    * @inheritdoc
-    */
-    public function init()
+    public function getSchemaPropertyNames(): array
     {
-        parent::init();
-        self::$schemaPropertyNames = array_merge(
-            parent::$schemaPropertyNames,
-            self::$_schemaPropertyNames
-        );
-
-        self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$schemaPropertyExpectedTypes,
-            self::$_schemaPropertyExpectedTypes
-        );
-
-        self::$schemaPropertyDescriptions = array_merge(
-            parent::$schemaPropertyDescriptions,
-            self::$_schemaPropertyDescriptions
-        );
-
-        self::$googleRequiredSchema = array_merge(
-            parent::$googleRequiredSchema,
-            self::$_googleRequiredSchema
-        );
-
-        self::$googleRecommendedSchema = array_merge(
-            parent::$googleRecommendedSchema,
-            self::$_googleRecommendedSchema
-        );
+        return array_keys($this->getSchemaPropertyExpectedTypes());
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function getSchemaPropertyExpectedTypes(): array
     {
-        $rules = parent::rules();
+        return [
+            'additionalType' => ['URL'],
+            'alternateName' => ['Text'],
+            'associatedAnatomy' => ['AnatomicalStructure', 'AnatomicalSystem', 'SuperficialAnatomy'],
+            'code' => ['MedicalCode'],
+            'description' => ['Text'],
+            'differentialDiagnosis' => ['DDxElement'],
+            'disambiguatingDescription' => ['Text'],
+            'drug' => ['Drug'],
+            'epidemiology' => ['Text'],
+            'expectedPrognosis' => ['Text'],
+            'funding' => ['Grant'],
+            'guideline' => ['MedicalGuideline'],
+            'identifier' => ['URL', 'Text', 'PropertyValue'],
+            'image' => ['URL', 'ImageObject'],
+            'legalStatus' => ['DrugLegalStatus', 'Text', 'MedicalEnumeration'],
+            'mainEntityOfPage' => ['CreativeWork', 'URL'],
+            'medicineSystem' => ['MedicineSystem'],
+            'name' => ['Text'],
+            'naturalProgression' => ['Text'],
+            'pathophysiology' => ['Text'],
+            'possibleComplication' => ['Text'],
+            'possibleTreatment' => ['MedicalTherapy'],
+            'potentialAction' => ['Action'],
+            'primaryPrevention' => ['MedicalTherapy'],
+            'recognizingAuthority' => ['Organization'],
+            'relevantSpecialty' => ['MedicalSpecialty'],
+            'riskFactor' => ['MedicalRiskFactor'],
+            'sameAs' => ['URL'],
+            'secondaryPrevention' => ['MedicalTherapy'],
+            'signOrSymptom' => ['MedicalSignOrSymptom'],
+            'stage' => ['MedicalConditionStage'],
+            'status' => ['Text', 'EventStatusType', 'MedicalStudyStatus'],
+            'study' => ['MedicalStudy'],
+            'subjectOf' => ['Event', 'CreativeWork'],
+            'typicalTest' => ['MedicalTest'],
+            'url' => ['URL']
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSchemaPropertyDescriptions(): array
+    {
+        return [
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'alternateName' => 'An alias for the item.',
+            'associatedAnatomy' => 'The anatomy of the underlying organ system or structures associated with this entity.',
+            'code' => 'A medical code for the entity, taken from a controlled vocabulary or ontology such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.',
+            'description' => 'A description of the item.',
+            'differentialDiagnosis' => 'One of a set of differential diagnoses for the condition. Specifically, a closely-related or competing diagnosis typically considered later in the cognitive process whereby this medical condition is distinguished from others most likely responsible for a similar collection of signs and symptoms to reach the most parsimonious diagnosis or diagnoses in a patient.',
+            'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
+            'drug' => 'Specifying a drug or medicine used in a medication procedure.',
+            'epidemiology' => 'The characteristics of associated patients, such as age, gender, race etc.',
+            'expectedPrognosis' => 'The likely outcome in either the short term or long term of the medical condition.',
+            'funding' => 'A [[Grant]] that directly or indirectly provide funding or sponsorship for this item. See also [[ownershipFundingInfo]].',
+            'guideline' => 'A medical guideline related to this entity.',
+            'identifier' => 'The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.         ',
+            'image' => 'An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].',
+            'legalStatus' => 'The drug or supplement\'s legal status, including any controlled substance schedules that apply.',
+            'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
+            'medicineSystem' => 'The system of medicine that includes this MedicalEntity, for example \'evidence-based\', \'homeopathic\', \'chiropractic\', etc.',
+            'name' => 'The name of the item.',
+            'naturalProgression' => 'The expected progression of the condition if it is not treated and allowed to progress naturally.',
+            'pathophysiology' => 'Changes in the normal mechanical, physical, and biochemical functions that are associated with this activity or condition.',
+            'possibleComplication' => 'A possible unexpected and unfavorable evolution of a medical condition. Complications may include worsening of the signs or symptoms of the disease, extension of the condition to other organ systems, etc.',
+            'possibleTreatment' => 'A possible treatment to address this condition, sign or symptom.',
+            'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
+            'primaryPrevention' => 'A preventative therapy used to prevent an initial occurrence of the medical condition, such as vaccination.',
+            'recognizingAuthority' => 'If applicable, the organization that officially recognizes this entity as part of its endorsed system of medicine.',
+            'relevantSpecialty' => 'If applicable, a medical specialty in which this entity is relevant.',
+            'riskFactor' => 'A modifiable or non-modifiable factor that increases the risk of a patient contracting this condition, e.g. age,  coexisting condition.',
+            'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
+            'secondaryPrevention' => 'A preventative therapy used to prevent reoccurrence of the medical condition after an initial episode of the condition.',
+            'signOrSymptom' => 'A sign or symptom of this condition. Signs are objective or physically observable manifestations of the medical condition while symptoms are the subjective experience of the medical condition.',
+            'stage' => 'The stage of the condition, if applicable.',
+            'status' => 'The status of the study (enumerated).',
+            'study' => 'A medical study or trial related to this entity.',
+            'subjectOf' => 'A CreativeWork or Event about this Thing.',
+            'typicalTest' => 'A medical test typically performed given this condition.',
+            'url' => 'URL of the item.'
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRequiredSchema(): array
+    {
+        return ['description', 'name'];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRecommendedSchema(): array
+    {
+        return ['image', 'url'];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function defineRules(): array
+    {
+        $rules = parent::defineRules();
         $rules = array_merge($rules, [
-            [['associatedAnatomy','differentialDiagnosis','drug','epidemiology','expectedPrognosis','naturalProgression','pathophysiology','possibleComplication','possibleTreatment','primaryPrevention','riskFactor','secondaryPrevention','signOrSymptom','stage','status','typicalTest'], 'validateJsonSchema'],
-            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
-            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
+            [$this->getSchemaPropertyNames(), 'validateJsonSchema'],
+            [$this->getGoogleRequiredSchema(), 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [$this->getGoogleRecommendedSchema(), 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

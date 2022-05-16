@@ -1,34 +1,36 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS 3
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2017 nystudio107
+ * @copyright Copyright (c) 2022 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\Intangible;
+use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * Observation - Instances of the class Observation are used to specify
- * observations about an entity (which may or may not be an instance of a
- * StatisticalPopulation), at a particular time. The principal properties of
- * an Observation are observedNode, measuredProperty, measuredValue (or
- * median, etc.) and observationDate (measuredProperty properties can, but
- * need not always, be W3C RDF Data Cube "measure properties", as in the
- * lifeExpectancy example). See also StatisticalPopulation, and the data and
- * datasets overview for more details.
+ * schema.org version: v14.0-release
+ * Observation - Instances of the class [[Observation]] are used to specify observations
+ * about an entity (which may or may not be an instance of a
+ * [[StatisticalPopulation]]), at a particular time. The principal properties
+ * of an [[Observation]] are [[observedNode]], [[measuredProperty]],
+ * [[measuredValue]] (or [[median]], etc.) and [[observationDate]]
+ * ([[measuredProperty]] properties can, but need not always, be W3C RDF Data
+ * Cube "measure properties", as in the [lifeExpectancy
+ * example](https://www.w3.org/TR/vocab-data-cube/#dsd-example)). See also
+ * [[StatisticalPopulation]], and the [data and
+ * datasets](/docs/data-and-datasets.html) overview for more details.   
  *
  * @author    nystudio107
  * @package   Seomatic
- * @since     3.0.0
- * @see       http://schema.org/Observation
+ * @see       https://schema.org/Observation
  */
-class Observation extends Intangible
+class Observation extends MetaJsonLd implements ObservationInterface, IntangibleInterface, ThingInterface
 {
     // Static Public Properties
     // =========================================================================
@@ -52,193 +54,105 @@ class Observation extends Intangible
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'Instances of the class Observation are used to specify observations about an entity (which may or may not be an instance of a StatisticalPopulation), at a particular time. The principal properties of an Observation are observedNode, measuredProperty, measuredValue (or median, etc.) and observationDate (measuredProperty properties can, but need not always, be W3C RDF Data Cube "measure properties", as in the lifeExpectancy example). See also StatisticalPopulation, and the data and datasets overview for more details.';
+    static public $schemaTypeDescription = <<<SCHEMADESC
+Instances of the class [[Observation]] are used to specify observations about an entity (which may or may not be an instance of a [[StatisticalPopulation]]), at a particular time. The principal properties of an [[Observation]] are [[observedNode]], [[measuredProperty]], [[measuredValue]] (or [[median]], etc.) and [[observationDate]] ([[measuredProperty]] properties can, but need not always, be W3C RDF Data Cube "measure properties", as in the [lifeExpectancy example](https://www.w3.org/TR/vocab-data-cube/#dsd-example)).
+See also [[StatisticalPopulation]], and the [data and datasets](/docs/data-and-datasets.html) overview for more details.
+  
+SCHEMADESC;
 
-    /**
-     * The Schema.org Type Extends
-     *
-     * @var string
-     */
-    static public $schemaTypeExtends = 'Intangible';
+    use ObservationTrait;
+    use IntangibleTrait;
+    use ThingTrait;
 
-    /**
-     * The Schema.org composed Property Names
-     *
-     * @var array
-     */
-    static public $schemaPropertyNames = [];
-
-    /**
-     * The Schema.org composed Property Expected Types
-     *
-     * @var array
-     */
-    static public $schemaPropertyExpectedTypes = [];
-
-    /**
-     * The Schema.org composed Property Descriptions
-     *
-     * @var array
-     */
-    static public $schemaPropertyDescriptions = [];
-
-    /**
-     * The Schema.org composed Google Required Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRequiredSchema = [];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRecommendedSchema = [];
-
-    // Public Properties
+    // Public methods
     // =========================================================================
 
     /**
-     * A marginOfError for an Observation.
-     *
-     * @var DateTime [schema.org types: DateTime]
+     * @inheritdoc
      */
-    public $marginOfError;
-
-    /**
-     * The measuredProperty of an Observation, either a schema.org property, a
-     * property from other RDF-compatible systems e.g. W3C RDF Data Cube, or
-     * schema.org extensions such as GS1's.
-     *
-     * @var Property [schema.org types: Property]
-     */
-    public $measuredProperty;
-
-    /**
-     * The measuredValue of an Observation.
-     *
-     * @var DataType [schema.org types: DataType]
-     */
-    public $measuredValue;
-
-    /**
-     * The observationDate of an Observation.
-     *
-     * @var DateTime [schema.org types: DateTime]
-     */
-    public $observationDate;
-
-    /**
-     * The observedNode of an Observation, often a StatisticalPopulation.
-     *
-     * @var StatisticalPopulation [schema.org types: StatisticalPopulation]
-     */
-    public $observedNode;
-
-    // Static Protected Properties
-    // =========================================================================
-
-    /**
-     * The Schema.org Property Names
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyNames = [
-        'marginOfError',
-        'measuredProperty',
-        'measuredValue',
-        'observationDate',
-        'observedNode'
-    ];
-
-    /**
-     * The Schema.org Property Expected Types
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyExpectedTypes = [
-        'marginOfError' => ['DateTime'],
-        'measuredProperty' => ['Property'],
-        'measuredValue' => ['DataType'],
-        'observationDate' => ['DateTime'],
-        'observedNode' => ['StatisticalPopulation']
-    ];
-
-    /**
-     * The Schema.org Property Descriptions
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyDescriptions = [
-        'marginOfError' => 'A marginOfError for an Observation.',
-        'measuredProperty' => 'The measuredProperty of an Observation, either a schema.org property, a property from other RDF-compatible systems e.g. W3C RDF Data Cube, or schema.org extensions such as GS1\'s.',
-        'measuredValue' => 'The measuredValue of an Observation.',
-        'observationDate' => 'The observationDate of an Observation.',
-        'observedNode' => 'The observedNode of an Observation, often a StatisticalPopulation.'
-    ];
-
-    /**
-     * The Schema.org Google Required Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRequiredSchema = [
-    ];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRecommendedSchema = [
-    ];
-
-    // Public Methods
-    // =========================================================================
-
-    /**
-    * @inheritdoc
-    */
-    public function init()
+    public function getSchemaPropertyNames(): array
     {
-        parent::init();
-        self::$schemaPropertyNames = array_merge(
-            parent::$schemaPropertyNames,
-            self::$_schemaPropertyNames
-        );
-
-        self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$schemaPropertyExpectedTypes,
-            self::$_schemaPropertyExpectedTypes
-        );
-
-        self::$schemaPropertyDescriptions = array_merge(
-            parent::$schemaPropertyDescriptions,
-            self::$_schemaPropertyDescriptions
-        );
-
-        self::$googleRequiredSchema = array_merge(
-            parent::$googleRequiredSchema,
-            self::$_googleRequiredSchema
-        );
-
-        self::$googleRecommendedSchema = array_merge(
-            parent::$googleRecommendedSchema,
-            self::$_googleRecommendedSchema
-        );
+        return array_keys($this->getSchemaPropertyExpectedTypes());
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function getSchemaPropertyExpectedTypes(): array
     {
-        $rules = parent::rules();
+        return [
+            'additionalType' => ['URL'],
+            'alternateName' => ['Text'],
+            'description' => ['Text'],
+            'disambiguatingDescription' => ['Text'],
+            'identifier' => ['URL', 'Text', 'PropertyValue'],
+            'image' => ['URL', 'ImageObject'],
+            'mainEntityOfPage' => ['CreativeWork', 'URL'],
+            'marginOfError' => ['QuantitativeValue'],
+            'measuredProperty' => ['Property'],
+            'measuredValue' => ['DataType'],
+            'name' => ['Text'],
+            'observationDate' => ['DateTime'],
+            'observedNode' => ['StatisticalPopulation'],
+            'potentialAction' => ['Action'],
+            'sameAs' => ['URL'],
+            'subjectOf' => ['Event', 'CreativeWork'],
+            'url' => ['URL']
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSchemaPropertyDescriptions(): array
+    {
+        return [
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'alternateName' => 'An alias for the item.',
+            'description' => 'A description of the item.',
+            'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
+            'identifier' => 'The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.         ',
+            'image' => 'An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].',
+            'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
+            'marginOfError' => 'A marginOfError for an [[Observation]].',
+            'measuredProperty' => 'The measuredProperty of an [[Observation]], either a schema.org property, a property from other RDF-compatible systems e.g. W3C RDF Data Cube, or schema.org extensions such as [GS1\'s](https://www.gs1.org/voc/?show=properties).',
+            'measuredValue' => 'The measuredValue of an [[Observation]].',
+            'name' => 'The name of the item.',
+            'observationDate' => 'The observationDate of an [[Observation]].',
+            'observedNode' => 'The observedNode of an [[Observation]], often a [[StatisticalPopulation]].',
+            'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
+            'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
+            'subjectOf' => 'A CreativeWork or Event about this Thing.',
+            'url' => 'URL of the item.'
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRequiredSchema(): array
+    {
+        return ['description', 'name'];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRecommendedSchema(): array
+    {
+        return ['image', 'url'];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function defineRules(): array
+    {
+        $rules = parent::defineRules();
         $rules = array_merge($rules, [
-            [['marginOfError','measuredProperty','measuredValue','observationDate','observedNode'], 'validateJsonSchema'],
-            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
-            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
+            [$this->getSchemaPropertyNames(), 'validateJsonSchema'],
+            [$this->getGoogleRequiredSchema(), 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [$this->getGoogleRecommendedSchema(), 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

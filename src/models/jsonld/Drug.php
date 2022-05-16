@@ -1,30 +1,30 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS 3
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2017 nystudio107
+ * @copyright Copyright (c) 2022 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\Substance;
+use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * Drug - A chemical or biologic substance, used as a medical therapy, that
- * has a physiological effect on an organism. Here the term drug is used
+ * schema.org version: v14.0-release
+ * Drug - A chemical or biologic substance, used as a medical therapy, that has a
+ * physiological effect on an organism. Here the term drug is used
  * interchangeably with the term medicine although clinical knowledge make a
  * clear difference between them.
  *
  * @author    nystudio107
  * @package   Seomatic
- * @since     3.0.0
- * @see       http://schema.org/Drug
+ * @see       https://schema.org/Drug
  */
-class Drug extends Substance
+class Drug extends MetaJsonLd implements DrugInterface, SubstanceInterface, MedicalEntityInterface, ThingInterface
 {
     // Static Public Properties
     // =========================================================================
@@ -48,460 +48,170 @@ class Drug extends Substance
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'A chemical or biologic substance, used as a medical therapy, that has a physiological effect on an organism. Here the term drug is used interchangeably with the term medicine although clinical knowledge make a clear difference between them.';
+    static public $schemaTypeDescription = <<<SCHEMADESC
+A chemical or biologic substance, used as a medical therapy, that has a physiological effect on an organism. Here the term drug is used interchangeably with the term medicine although clinical knowledge make a clear difference between them.
+SCHEMADESC;
 
-    /**
-     * The Schema.org Type Extends
-     *
-     * @var string
-     */
-    static public $schemaTypeExtends = 'Substance';
+    use DrugTrait;
+    use SubstanceTrait;
+    use MedicalEntityTrait;
+    use ThingTrait;
 
-    /**
-     * The Schema.org composed Property Names
-     *
-     * @var array
-     */
-    static public $schemaPropertyNames = [];
-
-    /**
-     * The Schema.org composed Property Expected Types
-     *
-     * @var array
-     */
-    static public $schemaPropertyExpectedTypes = [];
-
-    /**
-     * The Schema.org composed Property Descriptions
-     *
-     * @var array
-     */
-    static public $schemaPropertyDescriptions = [];
-
-    /**
-     * The Schema.org composed Google Required Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRequiredSchema = [];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRecommendedSchema = [];
-
-    // Public Properties
+    // Public methods
     // =========================================================================
 
     /**
-     * An active ingredient, typically chemical compounds and/or biologic
-     * substances.
-     *
-     * @var string [schema.org types: Text]
+     * @inheritdoc
      */
-    public $activeIngredient;
-
-    /**
-     * A route by which this drug may be administered, e.g. 'oral'.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $administrationRoute;
-
-    /**
-     * Any precaution, guidance, contraindication, etc. related to consumption of
-     * alcohol while taking this drug.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $alcoholWarning;
-
-    /**
-     * An available dosage strength for the drug.
-     *
-     * @var DrugStrength [schema.org types: DrugStrength]
-     */
-    public $availableStrength;
-
-    /**
-     * Any precaution, guidance, contraindication, etc. related to this drug's use
-     * by breastfeeding mothers.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $breastfeedingWarning;
-
-    /**
-     * Description of the absorption and elimination of drugs, including their
-     * concentration (pharmacokinetics, pK) and biological effects
-     * (pharmacodynamics, pD). Supersedes clincalPharmacology.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $clinicalPharmacology;
-
-    /**
-     * A dosage form in which this drug/supplement is available, e.g. 'tablet',
-     * 'suspension', 'injection'.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $dosageForm;
-
-    /**
-     * A dosing schedule for the drug for a given population, either observed,
-     * recommended, or maximum dose based on the type used.
-     *
-     * @var DoseSchedule [schema.org types: DoseSchedule]
-     */
-    public $doseSchedule;
-
-    /**
-     * The class of drug this belongs to (e.g., statins).
-     *
-     * @var DrugClass [schema.org types: DrugClass]
-     */
-    public $drugClass;
-
-    /**
-     * The unit in which the drug is measured, e.g. '5 mg tablet'.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $drugUnit;
-
-    /**
-     * Any precaution, guidance, contraindication, etc. related to consumption of
-     * specific foods while taking this drug.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $foodWarning;
-
-    /**
-     * The insurance plans that cover this drug.
-     *
-     * @var HealthInsurancePlan [schema.org types: HealthInsurancePlan]
-     */
-    public $includedInHealthInsurancePlan;
-
-    /**
-     * Another drug that is known to interact with this drug in a way that impacts
-     * the effect of this drug or causes a risk to the patient. Note: disease
-     * interactions are typically captured as contraindications.
-     *
-     * @var Drug [schema.org types: Drug]
-     */
-    public $interactingDrug;
-
-    /**
-     * True if the drug is available in a generic form (regardless of name).
-     *
-     * @var bool [schema.org types: Boolean]
-     */
-    public $isAvailableGenerically;
-
-    /**
-     * True if this item's name is a proprietary/brand name (vs. generic name).
-     *
-     * @var bool [schema.org types: Boolean]
-     */
-    public $isProprietary;
-
-    /**
-     * Link to the drug's label details.
-     *
-     * @var string [schema.org types: URL]
-     */
-    public $labelDetails;
-
-    /**
-     * The drug or supplement's legal status, including any controlled substance
-     * schedules that apply.
-     *
-     * @var mixed|DrugLegalStatus|MedicalEnumeration|string [schema.org types: DrugLegalStatus, MedicalEnumeration, Text]
-     */
-    public $legalStatus;
-
-    /**
-     * The manufacturer of the product.
-     *
-     * @var Organization [schema.org types: Organization]
-     */
-    public $manufacturer;
-
-    /**
-     * Recommended intake of this supplement for a given population as defined by
-     * a specific recommending authority.
-     *
-     * @var MaximumDoseSchedule [schema.org types: MaximumDoseSchedule]
-     */
-    public $maximumIntake;
-
-    /**
-     * The specific biochemical interaction through which this drug or supplement
-     * produces its pharmacological effect.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $mechanismOfAction;
-
-    /**
-     * The generic name of this drug or supplement.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $nonProprietaryName;
-
-    /**
-     * Any information related to overdose on a drug, including signs or symptoms,
-     * treatments, contact information for emergency response.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $overdosage;
-
-    /**
-     * Pregnancy category of this drug.
-     *
-     * @var DrugPregnancyCategory [schema.org types: DrugPregnancyCategory]
-     */
-    public $pregnancyCategory;
-
-    /**
-     * Any precaution, guidance, contraindication, etc. related to this drug's use
-     * during pregnancy.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $pregnancyWarning;
-
-    /**
-     * Link to prescribing information for the drug.
-     *
-     * @var string [schema.org types: URL]
-     */
-    public $prescribingInfo;
-
-    /**
-     * Indicates the status of drug prescription eg. local catalogs
-     * classifications or whether the drug is available by prescription or
-     * over-the-counter, etc.
-     *
-     * @var mixed|DrugPrescriptionStatus|string [schema.org types: DrugPrescriptionStatus, Text]
-     */
-    public $prescriptionStatus;
-
-    /**
-     * Proprietary name given to the diet plan, typically by its originator or
-     * creator.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $proprietaryName;
-
-    /**
-     * Any other drug related to this one, for example commonly-prescribed
-     * alternatives.
-     *
-     * @var Drug [schema.org types: Drug]
-     */
-    public $relatedDrug;
-
-    /**
-     * The RxCUI drug identifier from RXNORM.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $rxcui;
-
-    /**
-     * Any FDA or other warnings about the drug (text or URL).
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $warning;
-
-    // Static Protected Properties
-    // =========================================================================
-
-    /**
-     * The Schema.org Property Names
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyNames = [
-        'activeIngredient',
-        'administrationRoute',
-        'alcoholWarning',
-        'availableStrength',
-        'breastfeedingWarning',
-        'clinicalPharmacology',
-        'dosageForm',
-        'doseSchedule',
-        'drugClass',
-        'drugUnit',
-        'foodWarning',
-        'includedInHealthInsurancePlan',
-        'interactingDrug',
-        'isAvailableGenerically',
-        'isProprietary',
-        'labelDetails',
-        'legalStatus',
-        'manufacturer',
-        'maximumIntake',
-        'mechanismOfAction',
-        'nonProprietaryName',
-        'overdosage',
-        'pregnancyCategory',
-        'pregnancyWarning',
-        'prescribingInfo',
-        'prescriptionStatus',
-        'proprietaryName',
-        'relatedDrug',
-        'rxcui',
-        'warning'
-    ];
-
-    /**
-     * The Schema.org Property Expected Types
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyExpectedTypes = [
-        'activeIngredient' => ['Text'],
-        'administrationRoute' => ['Text'],
-        'alcoholWarning' => ['Text'],
-        'availableStrength' => ['DrugStrength'],
-        'breastfeedingWarning' => ['Text'],
-        'clinicalPharmacology' => ['Text'],
-        'dosageForm' => ['Text'],
-        'doseSchedule' => ['DoseSchedule'],
-        'drugClass' => ['DrugClass'],
-        'drugUnit' => ['Text'],
-        'foodWarning' => ['Text'],
-        'includedInHealthInsurancePlan' => ['HealthInsurancePlan'],
-        'interactingDrug' => ['Drug'],
-        'isAvailableGenerically' => ['Boolean'],
-        'isProprietary' => ['Boolean'],
-        'labelDetails' => ['URL'],
-        'legalStatus' => ['DrugLegalStatus','MedicalEnumeration','Text'],
-        'manufacturer' => ['Organization'],
-        'maximumIntake' => ['MaximumDoseSchedule'],
-        'mechanismOfAction' => ['Text'],
-        'nonProprietaryName' => ['Text'],
-        'overdosage' => ['Text'],
-        'pregnancyCategory' => ['DrugPregnancyCategory'],
-        'pregnancyWarning' => ['Text'],
-        'prescribingInfo' => ['URL'],
-        'prescriptionStatus' => ['DrugPrescriptionStatus','Text'],
-        'proprietaryName' => ['Text'],
-        'relatedDrug' => ['Drug'],
-        'rxcui' => ['Text'],
-        'warning' => ['Text','URL']
-    ];
-
-    /**
-     * The Schema.org Property Descriptions
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyDescriptions = [
-        'activeIngredient' => 'An active ingredient, typically chemical compounds and/or biologic substances.',
-        'administrationRoute' => 'A route by which this drug may be administered, e.g. \'oral\'.',
-        'alcoholWarning' => 'Any precaution, guidance, contraindication, etc. related to consumption of alcohol while taking this drug.',
-        'availableStrength' => 'An available dosage strength for the drug.',
-        'breastfeedingWarning' => 'Any precaution, guidance, contraindication, etc. related to this drug\'s use by breastfeeding mothers.',
-        'clinicalPharmacology' => 'Description of the absorption and elimination of drugs, including their concentration (pharmacokinetics, pK) and biological effects (pharmacodynamics, pD). Supersedes clincalPharmacology.',
-        'dosageForm' => 'A dosage form in which this drug/supplement is available, e.g. \'tablet\', \'suspension\', \'injection\'.',
-        'doseSchedule' => 'A dosing schedule for the drug for a given population, either observed, recommended, or maximum dose based on the type used.',
-        'drugClass' => 'The class of drug this belongs to (e.g., statins).',
-        'drugUnit' => 'The unit in which the drug is measured, e.g. \'5 mg tablet\'.',
-        'foodWarning' => 'Any precaution, guidance, contraindication, etc. related to consumption of specific foods while taking this drug.',
-        'includedInHealthInsurancePlan' => 'The insurance plans that cover this drug.',
-        'interactingDrug' => 'Another drug that is known to interact with this drug in a way that impacts the effect of this drug or causes a risk to the patient. Note: disease interactions are typically captured as contraindications.',
-        'isAvailableGenerically' => 'True if the drug is available in a generic form (regardless of name).',
-        'isProprietary' => 'True if this item\'s name is a proprietary/brand name (vs. generic name).',
-        'labelDetails' => 'Link to the drug\'s label details.',
-        'legalStatus' => 'The drug or supplement\'s legal status, including any controlled substance schedules that apply.',
-        'manufacturer' => 'The manufacturer of the product.',
-        'maximumIntake' => 'Recommended intake of this supplement for a given population as defined by a specific recommending authority.',
-        'mechanismOfAction' => 'The specific biochemical interaction through which this drug or supplement produces its pharmacological effect.',
-        'nonProprietaryName' => 'The generic name of this drug or supplement.',
-        'overdosage' => 'Any information related to overdose on a drug, including signs or symptoms, treatments, contact information for emergency response.',
-        'pregnancyCategory' => 'Pregnancy category of this drug.',
-        'pregnancyWarning' => 'Any precaution, guidance, contraindication, etc. related to this drug\'s use during pregnancy.',
-        'prescribingInfo' => 'Link to prescribing information for the drug.',
-        'prescriptionStatus' => 'Indicates the status of drug prescription eg. local catalogs classifications or whether the drug is available by prescription or over-the-counter, etc.',
-        'proprietaryName' => 'Proprietary name given to the diet plan, typically by its originator or creator.',
-        'relatedDrug' => 'Any other drug related to this one, for example commonly-prescribed alternatives.',
-        'rxcui' => 'The RxCUI drug identifier from RXNORM.',
-        'warning' => 'Any FDA or other warnings about the drug (text or URL).'
-    ];
-
-    /**
-     * The Schema.org Google Required Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRequiredSchema = [
-    ];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRecommendedSchema = [
-    ];
-
-    // Public Methods
-    // =========================================================================
-
-    /**
-    * @inheritdoc
-    */
-    public function init()
+    public function getSchemaPropertyNames(): array
     {
-        parent::init();
-        self::$schemaPropertyNames = array_merge(
-            parent::$schemaPropertyNames,
-            self::$_schemaPropertyNames
-        );
-
-        self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$schemaPropertyExpectedTypes,
-            self::$_schemaPropertyExpectedTypes
-        );
-
-        self::$schemaPropertyDescriptions = array_merge(
-            parent::$schemaPropertyDescriptions,
-            self::$_schemaPropertyDescriptions
-        );
-
-        self::$googleRequiredSchema = array_merge(
-            parent::$googleRequiredSchema,
-            self::$_googleRequiredSchema
-        );
-
-        self::$googleRecommendedSchema = array_merge(
-            parent::$googleRecommendedSchema,
-            self::$_googleRecommendedSchema
-        );
+        return array_keys($this->getSchemaPropertyExpectedTypes());
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function getSchemaPropertyExpectedTypes(): array
     {
-        $rules = parent::rules();
+        return [
+            'activeIngredient' => ['Text'],
+            'additionalType' => ['URL'],
+            'administrationRoute' => ['Text'],
+            'alcoholWarning' => ['Text'],
+            'alternateName' => ['Text'],
+            'availableStrength' => ['DrugStrength'],
+            'breastfeedingWarning' => ['Text'],
+            'clincalPharmacology' => ['Text'],
+            'clinicalPharmacology' => ['Text'],
+            'code' => ['MedicalCode'],
+            'description' => ['Text'],
+            'disambiguatingDescription' => ['Text'],
+            'dosageForm' => ['Text'],
+            'doseSchedule' => ['DoseSchedule'],
+            'drugClass' => ['DrugClass'],
+            'drugUnit' => ['Text'],
+            'foodWarning' => ['Text'],
+            'funding' => ['Grant'],
+            'guideline' => ['MedicalGuideline'],
+            'identifier' => ['URL', 'Text', 'PropertyValue'],
+            'image' => ['URL', 'ImageObject'],
+            'includedInHealthInsurancePlan' => ['HealthInsurancePlan'],
+            'interactingDrug' => ['Drug'],
+            'isAvailableGenerically' => ['Boolean'],
+            'isProprietary' => ['Boolean'],
+            'labelDetails' => ['URL'],
+            'legalStatus' => ['DrugLegalStatus', 'Text', 'MedicalEnumeration'],
+            'mainEntityOfPage' => ['CreativeWork', 'URL'],
+            'manufacturer' => ['Organization'],
+            'maximumIntake' => ['MaximumDoseSchedule'],
+            'mechanismOfAction' => ['Text'],
+            'medicineSystem' => ['MedicineSystem'],
+            'name' => ['Text'],
+            'nonProprietaryName' => ['Text'],
+            'overdosage' => ['Text'],
+            'potentialAction' => ['Action'],
+            'pregnancyCategory' => ['DrugPregnancyCategory'],
+            'pregnancyWarning' => ['Text'],
+            'prescribingInfo' => ['URL'],
+            'prescriptionStatus' => ['DrugPrescriptionStatus', 'Text'],
+            'proprietaryName' => ['Text'],
+            'recognizingAuthority' => ['Organization'],
+            'relatedDrug' => ['Drug'],
+            'relevantSpecialty' => ['MedicalSpecialty'],
+            'rxcui' => ['Text'],
+            'sameAs' => ['URL'],
+            'study' => ['MedicalStudy'],
+            'subjectOf' => ['Event', 'CreativeWork'],
+            'url' => ['URL'],
+            'warning' => ['URL', 'Text']
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSchemaPropertyDescriptions(): array
+    {
+        return [
+            'activeIngredient' => 'An active ingredient, typically chemical compounds and/or biologic substances.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'administrationRoute' => 'A route by which this drug may be administered, e.g. \'oral\'.',
+            'alcoholWarning' => 'Any precaution, guidance, contraindication, etc. related to consumption of alcohol while taking this drug.',
+            'alternateName' => 'An alias for the item.',
+            'availableStrength' => 'An available dosage strength for the drug.',
+            'breastfeedingWarning' => 'Any precaution, guidance, contraindication, etc. related to this drug\'s use by breastfeeding mothers.',
+            'clincalPharmacology' => 'Description of the absorption and elimination of drugs, including their concentration (pharmacokinetics, pK) and biological effects (pharmacodynamics, pD).',
+            'clinicalPharmacology' => 'Description of the absorption and elimination of drugs, including their concentration (pharmacokinetics, pK) and biological effects (pharmacodynamics, pD).',
+            'code' => 'A medical code for the entity, taken from a controlled vocabulary or ontology such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.',
+            'description' => 'A description of the item.',
+            'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
+            'dosageForm' => 'A dosage form in which this drug/supplement is available, e.g. \'tablet\', \'suspension\', \'injection\'.',
+            'doseSchedule' => 'A dosing schedule for the drug for a given population, either observed, recommended, or maximum dose based on the type used.',
+            'drugClass' => 'The class of drug this belongs to (e.g., statins).',
+            'drugUnit' => 'The unit in which the drug is measured, e.g. \'5 mg tablet\'.',
+            'foodWarning' => 'Any precaution, guidance, contraindication, etc. related to consumption of specific foods while taking this drug.',
+            'funding' => 'A [[Grant]] that directly or indirectly provide funding or sponsorship for this item. See also [[ownershipFundingInfo]].',
+            'guideline' => 'A medical guideline related to this entity.',
+            'identifier' => 'The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.         ',
+            'image' => 'An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].',
+            'includedInHealthInsurancePlan' => 'The insurance plans that cover this drug.',
+            'interactingDrug' => 'Another drug that is known to interact with this drug in a way that impacts the effect of this drug or causes a risk to the patient. Note: disease interactions are typically captured as contraindications.',
+            'isAvailableGenerically' => 'True if the drug is available in a generic form (regardless of name).',
+            'isProprietary' => 'True if this item\'s name is a proprietary/brand name (vs. generic name).',
+            'labelDetails' => 'Link to the drug\'s label details.',
+            'legalStatus' => 'The drug or supplement\'s legal status, including any controlled substance schedules that apply.',
+            'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
+            'manufacturer' => 'The manufacturer of the product.',
+            'maximumIntake' => 'Recommended intake of this supplement for a given population as defined by a specific recommending authority.',
+            'mechanismOfAction' => 'The specific biochemical interaction through which this drug or supplement produces its pharmacological effect.',
+            'medicineSystem' => 'The system of medicine that includes this MedicalEntity, for example \'evidence-based\', \'homeopathic\', \'chiropractic\', etc.',
+            'name' => 'The name of the item.',
+            'nonProprietaryName' => 'The generic name of this drug or supplement.',
+            'overdosage' => 'Any information related to overdose on a drug, including signs or symptoms, treatments, contact information for emergency response.',
+            'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
+            'pregnancyCategory' => 'Pregnancy category of this drug.',
+            'pregnancyWarning' => 'Any precaution, guidance, contraindication, etc. related to this drug\'s use during pregnancy.',
+            'prescribingInfo' => 'Link to prescribing information for the drug.',
+            'prescriptionStatus' => 'Indicates the status of drug prescription eg. local catalogs classifications or whether the drug is available by prescription or over-the-counter, etc.',
+            'proprietaryName' => 'Proprietary name given to the diet plan, typically by its originator or creator.',
+            'recognizingAuthority' => 'If applicable, the organization that officially recognizes this entity as part of its endorsed system of medicine.',
+            'relatedDrug' => 'Any other drug related to this one, for example commonly-prescribed alternatives.',
+            'relevantSpecialty' => 'If applicable, a medical specialty in which this entity is relevant.',
+            'rxcui' => 'The RxCUI drug identifier from RXNORM.',
+            'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
+            'study' => 'A medical study or trial related to this entity.',
+            'subjectOf' => 'A CreativeWork or Event about this Thing.',
+            'url' => 'URL of the item.',
+            'warning' => 'Any FDA or other warnings about the drug (text or URL).'
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRequiredSchema(): array
+    {
+        return ['description', 'name'];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRecommendedSchema(): array
+    {
+        return ['image', 'url'];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function defineRules(): array
+    {
+        $rules = parent::defineRules();
         $rules = array_merge($rules, [
-            [['activeIngredient','administrationRoute','alcoholWarning','availableStrength','breastfeedingWarning','clinicalPharmacology','dosageForm','doseSchedule','drugClass','drugUnit','foodWarning','includedInHealthInsurancePlan','interactingDrug','isAvailableGenerically','isProprietary','labelDetails','legalStatus','manufacturer','maximumIntake','mechanismOfAction','nonProprietaryName','overdosage','pregnancyCategory','pregnancyWarning','prescribingInfo','prescriptionStatus','proprietaryName','relatedDrug','rxcui','warning'], 'validateJsonSchema'],
-            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
-            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
+            [$this->getSchemaPropertyNames(), 'validateJsonSchema'],
+            [$this->getGoogleRequiredSchema(), 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [$this->getGoogleRecommendedSchema(), 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;
