@@ -50,7 +50,6 @@ class Sitemaps extends Component implements SitemapInterface
 
     const SEARCH_ENGINE_SUBMISSION_URLS = [
         'google' => 'https://www.google.com/ping?sitemap=',
-        'bing' => 'https://www.bing.com/webmaster/ping.aspx?sitemap=',
     ];
 
     // Protected Properties
