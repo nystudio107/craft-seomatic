@@ -4,6 +4,9 @@
 ### Added
 * Added Schema.org v14 JSON-LD models, generated via [SchemaGen](https://github.com/nystudio107/schemagen) ([#1092](https://github.com/nystudio107/craft-seomatic/issues/1092))
 
+### Changed
+* Removed Bing from `SEARCH_ENGINE_SUBMISSION_URLS` due to it being deprecated ([#1043](https://github.com/nystudio107/craft-seomatic/issues/1043))
+
 ## 4.0.0 - 2022.05.16
 ### Added
 * Initial Craft CMS 4 release
