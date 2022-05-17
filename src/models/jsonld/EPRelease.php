@@ -41,6 +41,13 @@ class EPRelease extends MetaJsonLd implements EPReleaseInterface, MusicAlbumRele
     static public $schemaTypeScope = 'https://schema.org/EPRelease';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MusicAlbumReleaseType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

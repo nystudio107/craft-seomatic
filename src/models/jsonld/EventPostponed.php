@@ -42,6 +42,13 @@ class EventPostponed extends MetaJsonLd implements EventPostponedInterface, Even
     static public $schemaTypeScope = 'https://schema.org/EventPostponed';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'EventStatusType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

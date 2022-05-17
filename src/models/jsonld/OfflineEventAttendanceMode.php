@@ -41,6 +41,13 @@ class OfflineEventAttendanceMode extends MetaJsonLd implements OfflineEventAtten
     static public $schemaTypeScope = 'https://schema.org/OfflineEventAttendanceMode';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'EventAttendanceModeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class CleaningFee extends MetaJsonLd implements CleaningFeeInterface, PriceCompo
     static public $schemaTypeScope = 'https://schema.org/CleaningFee';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PriceComponentTypeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

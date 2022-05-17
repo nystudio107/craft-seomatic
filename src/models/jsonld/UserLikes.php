@@ -43,6 +43,13 @@ class UserLikes extends MetaJsonLd implements UserLikesInterface, UserInteractio
     static public $schemaTypeScope = 'https://schema.org/UserLikes';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'UserInteraction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class Service extends MetaJsonLd implements ServiceInterface, IntangibleInterfac
     static public $schemaTypeScope = 'https://schema.org/Service';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

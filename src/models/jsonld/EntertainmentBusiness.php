@@ -41,6 +41,13 @@ class EntertainmentBusiness extends MetaJsonLd implements EntertainmentBusinessI
     static public $schemaTypeScope = 'https://schema.org/EntertainmentBusiness';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'LocalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

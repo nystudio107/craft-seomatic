@@ -55,6 +55,13 @@ class StatisticalPopulation extends MetaJsonLd implements StatisticalPopulationI
     static public $schemaTypeScope = 'https://schema.org/StatisticalPopulation';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

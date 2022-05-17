@@ -44,6 +44,13 @@ class CompoundPriceSpecification extends MetaJsonLd implements CompoundPriceSpec
     static public $schemaTypeScope = 'https://schema.org/CompoundPriceSpecification';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PriceSpecification';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

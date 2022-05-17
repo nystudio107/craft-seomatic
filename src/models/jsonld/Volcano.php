@@ -41,6 +41,13 @@ class Volcano extends MetaJsonLd implements VolcanoInterface, LandformInterface,
     static public $schemaTypeScope = 'https://schema.org/Volcano';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Landform';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

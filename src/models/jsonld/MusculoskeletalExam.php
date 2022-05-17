@@ -41,6 +41,13 @@ class MusculoskeletalExam extends MetaJsonLd implements MusculoskeletalExamInter
     static public $schemaTypeScope = 'https://schema.org/MusculoskeletalExam';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PhysicalExam';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

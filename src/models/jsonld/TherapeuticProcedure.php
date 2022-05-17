@@ -42,6 +42,13 @@ class TherapeuticProcedure extends MetaJsonLd implements TherapeuticProcedureInt
     static public $schemaTypeScope = 'https://schema.org/TherapeuticProcedure';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalProcedure';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

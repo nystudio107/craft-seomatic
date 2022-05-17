@@ -41,6 +41,13 @@ class DataCatalog extends MetaJsonLd implements DataCatalogInterface, CreativeWo
     static public $schemaTypeScope = 'https://schema.org/DataCatalog';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

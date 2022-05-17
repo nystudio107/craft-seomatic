@@ -41,6 +41,13 @@ class Patient extends MetaJsonLd implements PatientInterface, MedicalAudienceInt
     static public $schemaTypeScope = 'https://schema.org/Patient';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalAudience';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

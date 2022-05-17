@@ -41,6 +41,13 @@ class CollegeOrUniversity extends MetaJsonLd implements CollegeOrUniversityInter
     static public $schemaTypeScope = 'https://schema.org/CollegeOrUniversity';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'EducationalOrganization';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

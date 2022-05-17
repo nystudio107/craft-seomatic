@@ -41,6 +41,13 @@ class DiagnosticLab extends MetaJsonLd implements DiagnosticLabInterface, Medica
     static public $schemaTypeScope = 'https://schema.org/DiagnosticLab';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalOrganization';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

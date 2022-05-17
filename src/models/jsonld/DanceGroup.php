@@ -41,6 +41,13 @@ class DanceGroup extends MetaJsonLd implements DanceGroupInterface, PerformingGr
     static public $schemaTypeScope = 'https://schema.org/DanceGroup';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PerformingGroup';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

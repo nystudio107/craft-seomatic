@@ -42,6 +42,13 @@ class LiquorStore extends MetaJsonLd implements LiquorStoreInterface, StoreInter
     static public $schemaTypeScope = 'https://schema.org/LiquorStore';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Store';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

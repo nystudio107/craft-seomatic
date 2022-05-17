@@ -41,6 +41,13 @@ class PaymentAutomaticallyApplied extends MetaJsonLd implements PaymentAutomatic
     static public $schemaTypeScope = 'https://schema.org/PaymentAutomaticallyApplied';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PaymentStatusType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

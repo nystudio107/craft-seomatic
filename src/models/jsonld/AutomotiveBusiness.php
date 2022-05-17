@@ -41,6 +41,13 @@ class AutomotiveBusiness extends MetaJsonLd implements AutomotiveBusinessInterfa
     static public $schemaTypeScope = 'https://schema.org/AutomotiveBusiness';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'LocalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

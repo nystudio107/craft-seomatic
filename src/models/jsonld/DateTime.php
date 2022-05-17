@@ -42,6 +42,13 @@ class DateTime extends MetaJsonLd implements DateTimeInterface
     static public $schemaTypeScope = 'https://schema.org/DateTime';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Thing';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class DanceEvent extends MetaJsonLd implements DanceEventInterface, EventInterfa
     static public $schemaTypeScope = 'https://schema.org/DanceEvent';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Event';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

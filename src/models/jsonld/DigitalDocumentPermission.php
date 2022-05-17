@@ -41,6 +41,13 @@ class DigitalDocumentPermission extends MetaJsonLd implements DigitalDocumentPer
     static public $schemaTypeScope = 'https://schema.org/DigitalDocumentPermission';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

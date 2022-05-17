@@ -41,6 +41,13 @@ class Suspended extends MetaJsonLd implements SuspendedInterface, MedicalStudySt
     static public $schemaTypeScope = 'https://schema.org/Suspended';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalStudyStatus';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

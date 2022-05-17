@@ -43,6 +43,13 @@ class StructuredValue extends MetaJsonLd implements StructuredValueInterface, In
     static public $schemaTypeScope = 'https://schema.org/StructuredValue';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -45,6 +45,13 @@ class DangerousGoodConsideration extends MetaJsonLd implements DangerousGoodCons
     static public $schemaTypeScope = 'https://schema.org/DangerousGoodConsideration';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'AdultOrientedEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

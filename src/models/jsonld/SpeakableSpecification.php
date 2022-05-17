@@ -44,6 +44,13 @@ class SpeakableSpecification extends MetaJsonLd implements SpeakableSpecificatio
     static public $schemaTypeScope = 'https://schema.org/SpeakableSpecification';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

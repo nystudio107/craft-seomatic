@@ -42,6 +42,13 @@ class ParentAudience extends MetaJsonLd implements ParentAudienceInterface, Peop
     static public $schemaTypeScope = 'https://schema.org/ParentAudience';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PeopleAudience';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

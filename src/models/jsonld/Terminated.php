@@ -41,6 +41,13 @@ class Terminated extends MetaJsonLd implements TerminatedInterface, MedicalStudy
     static public $schemaTypeScope = 'https://schema.org/Terminated';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalStudyStatus';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

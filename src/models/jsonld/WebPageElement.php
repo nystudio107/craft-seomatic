@@ -41,6 +41,13 @@ class WebPageElement extends MetaJsonLd implements WebPageElementInterface, Crea
     static public $schemaTypeScope = 'https://schema.org/WebPageElement';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

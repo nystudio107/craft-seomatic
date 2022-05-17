@@ -41,6 +41,13 @@ class SportsEvent extends MetaJsonLd implements SportsEventInterface, EventInter
     static public $schemaTypeScope = 'https://schema.org/SportsEvent';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Event';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class MedicalDevicePurpose extends MetaJsonLd implements MedicalDevicePurposeInt
     static public $schemaTypeScope = 'https://schema.org/MedicalDevicePurpose';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

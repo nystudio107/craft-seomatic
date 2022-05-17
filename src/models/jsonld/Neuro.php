@@ -41,6 +41,13 @@ class Neuro extends MetaJsonLd implements NeuroInterface, PhysicalExamInterface,
     static public $schemaTypeScope = 'https://schema.org/Neuro';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PhysicalExam';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

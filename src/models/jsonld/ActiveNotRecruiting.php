@@ -41,6 +41,13 @@ class ActiveNotRecruiting extends MetaJsonLd implements ActiveNotRecruitingInter
     static public $schemaTypeScope = 'https://schema.org/ActiveNotRecruiting';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalStudyStatus';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

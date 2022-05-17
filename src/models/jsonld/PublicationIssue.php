@@ -44,6 +44,13 @@ class PublicationIssue extends MetaJsonLd implements PublicationIssueInterface, 
     static public $schemaTypeScope = 'https://schema.org/PublicationIssue';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

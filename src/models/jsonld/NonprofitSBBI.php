@@ -42,6 +42,13 @@ class NonprofitSBBI extends MetaJsonLd implements NonprofitSBBIInterface, NLNonp
     static public $schemaTypeScope = 'https://schema.org/NonprofitSBBI';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'NLNonprofitType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

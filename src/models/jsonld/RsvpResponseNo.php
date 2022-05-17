@@ -41,6 +41,13 @@ class RsvpResponseNo extends MetaJsonLd implements RsvpResponseNoInterface, Rsvp
     static public $schemaTypeScope = 'https://schema.org/RsvpResponseNo';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'RsvpResponseType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

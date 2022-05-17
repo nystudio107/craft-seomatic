@@ -43,6 +43,13 @@ class ReserveAction extends MetaJsonLd implements ReserveActionInterface, PlanAc
     static public $schemaTypeScope = 'https://schema.org/ReserveAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PlanAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

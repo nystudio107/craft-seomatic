@@ -41,6 +41,13 @@ class Locksmith extends MetaJsonLd implements LocksmithInterface, HomeAndConstru
     static public $schemaTypeScope = 'https://schema.org/Locksmith';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'HomeAndConstructionBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

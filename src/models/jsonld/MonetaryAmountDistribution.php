@@ -41,6 +41,13 @@ class MonetaryAmountDistribution extends MetaJsonLd implements MonetaryAmountDis
     static public $schemaTypeScope = 'https://schema.org/MonetaryAmountDistribution';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'QuantitativeValueDistribution';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class Nose extends MetaJsonLd implements NoseInterface, PhysicalExamInterface, M
     static public $schemaTypeScope = 'https://schema.org/Nose';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PhysicalExam';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class RadioClip extends MetaJsonLd implements RadioClipInterface, ClipInterface,
     static public $schemaTypeScope = 'https://schema.org/RadioClip';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Clip';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

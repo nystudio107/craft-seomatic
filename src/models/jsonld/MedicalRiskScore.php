@@ -42,6 +42,13 @@ class MedicalRiskScore extends MetaJsonLd implements MedicalRiskScoreInterface, 
     static public $schemaTypeScope = 'https://schema.org/MedicalRiskScore';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalRiskEstimator';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

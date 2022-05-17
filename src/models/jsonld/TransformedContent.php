@@ -54,6 +54,13 @@ class TransformedContent extends MetaJsonLd implements TransformedContentInterfa
     static public $schemaTypeScope = 'https://schema.org/TransformedContent';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MediaManipulationRatingEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

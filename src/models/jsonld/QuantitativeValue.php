@@ -41,6 +41,13 @@ class QuantitativeValue extends MetaJsonLd implements QuantitativeValueInterface
     static public $schemaTypeScope = 'https://schema.org/QuantitativeValue';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'StructuredValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

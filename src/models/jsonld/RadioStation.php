@@ -41,6 +41,13 @@ class RadioStation extends MetaJsonLd implements RadioStationInterface, LocalBus
     static public $schemaTypeScope = 'https://schema.org/RadioStation';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'LocalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

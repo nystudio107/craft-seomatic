@@ -41,6 +41,13 @@ class PaymentPastDue extends MetaJsonLd implements PaymentPastDueInterface, Paym
     static public $schemaTypeScope = 'https://schema.org/PaymentPastDue';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PaymentStatusType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

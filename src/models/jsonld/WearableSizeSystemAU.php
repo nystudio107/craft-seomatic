@@ -41,6 +41,13 @@ class WearableSizeSystemAU extends MetaJsonLd implements WearableSizeSystemAUInt
     static public $schemaTypeScope = 'https://schema.org/WearableSizeSystemAU';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'WearableSizeSystemEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

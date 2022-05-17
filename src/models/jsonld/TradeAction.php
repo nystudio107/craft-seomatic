@@ -43,6 +43,13 @@ class TradeAction extends MetaJsonLd implements TradeActionInterface, ActionInte
     static public $schemaTypeScope = 'https://schema.org/TradeAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Action';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

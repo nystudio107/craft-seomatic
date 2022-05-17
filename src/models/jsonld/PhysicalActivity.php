@@ -44,6 +44,13 @@ class PhysicalActivity extends MetaJsonLd implements PhysicalActivityInterface, 
     static public $schemaTypeScope = 'https://schema.org/PhysicalActivity';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'LifestyleModification';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

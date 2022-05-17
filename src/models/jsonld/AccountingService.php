@@ -42,6 +42,13 @@ class AccountingService extends MetaJsonLd implements AccountingServiceInterface
     static public $schemaTypeScope = 'https://schema.org/AccountingService';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'FinancialService';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

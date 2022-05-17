@@ -42,6 +42,13 @@ class TelevisionChannel extends MetaJsonLd implements TelevisionChannelInterface
     static public $schemaTypeScope = 'https://schema.org/TelevisionChannel';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'BroadcastChannel';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

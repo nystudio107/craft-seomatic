@@ -41,6 +41,13 @@ class FilmAction extends MetaJsonLd implements FilmActionInterface, CreateAction
     static public $schemaTypeScope = 'https://schema.org/FilmAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreateAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

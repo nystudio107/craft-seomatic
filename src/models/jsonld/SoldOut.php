@@ -41,6 +41,13 @@ class SoldOut extends MetaJsonLd implements SoldOutInterface, ItemAvailabilityIn
     static public $schemaTypeScope = 'https://schema.org/SoldOut';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ItemAvailability';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

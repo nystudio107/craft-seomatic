@@ -41,6 +41,13 @@ class Wholesale extends MetaJsonLd implements WholesaleInterface, DrugCostCatego
     static public $schemaTypeScope = 'https://schema.org/Wholesale';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'DrugCostCategory';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class VideoObject extends MetaJsonLd implements VideoObjectInterface, MediaObjec
     static public $schemaTypeScope = 'https://schema.org/VideoObject';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MediaObject';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

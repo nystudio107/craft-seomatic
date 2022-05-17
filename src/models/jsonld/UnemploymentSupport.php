@@ -41,6 +41,13 @@ class UnemploymentSupport extends MetaJsonLd implements UnemploymentSupportInter
     static public $schemaTypeScope = 'https://schema.org/UnemploymentSupport';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'GovernmentBenefitsType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

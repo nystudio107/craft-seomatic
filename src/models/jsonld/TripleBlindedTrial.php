@@ -43,6 +43,13 @@ class TripleBlindedTrial extends MetaJsonLd implements TripleBlindedTrialInterfa
     static public $schemaTypeScope = 'https://schema.org/TripleBlindedTrial';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalTrialDesign';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

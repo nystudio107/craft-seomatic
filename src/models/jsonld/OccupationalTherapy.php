@@ -43,6 +43,13 @@ class OccupationalTherapy extends MetaJsonLd implements OccupationalTherapyInter
     static public $schemaTypeScope = 'https://schema.org/OccupationalTherapy';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalTherapy';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

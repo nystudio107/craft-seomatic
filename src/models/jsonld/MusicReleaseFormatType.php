@@ -42,6 +42,13 @@ class MusicReleaseFormatType extends MetaJsonLd implements MusicReleaseFormatTyp
     static public $schemaTypeScope = 'https://schema.org/MusicReleaseFormatType';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Enumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class AboutPage extends MetaJsonLd implements AboutPageInterface, WebPageInterfa
     static public $schemaTypeScope = 'https://schema.org/AboutPage';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'WebPage';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

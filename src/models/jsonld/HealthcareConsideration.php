@@ -42,6 +42,13 @@ class HealthcareConsideration extends MetaJsonLd implements HealthcareConsiderat
     static public $schemaTypeScope = 'https://schema.org/HealthcareConsideration';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'AdultOrientedEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

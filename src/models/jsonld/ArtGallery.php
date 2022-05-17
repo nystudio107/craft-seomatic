@@ -41,6 +41,13 @@ class ArtGallery extends MetaJsonLd implements ArtGalleryInterface, Entertainmen
     static public $schemaTypeScope = 'https://schema.org/ArtGallery';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'EntertainmentBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

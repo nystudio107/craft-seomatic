@@ -41,6 +41,13 @@ class Paperback extends MetaJsonLd implements PaperbackInterface, BookFormatType
     static public $schemaTypeScope = 'https://schema.org/Paperback';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'BookFormatType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

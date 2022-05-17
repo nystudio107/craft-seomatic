@@ -41,6 +41,13 @@ class OrderReturned extends MetaJsonLd implements OrderReturnedInterface, OrderS
     static public $schemaTypeScope = 'https://schema.org/OrderReturned';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'OrderStatus';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

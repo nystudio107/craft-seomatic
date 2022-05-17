@@ -41,6 +41,13 @@ class Eye extends MetaJsonLd implements EyeInterface, PhysicalExamInterface, Med
     static public $schemaTypeScope = 'https://schema.org/Eye';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PhysicalExam';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

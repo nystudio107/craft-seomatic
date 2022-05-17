@@ -41,6 +41,13 @@ class BoardingPolicyType extends MetaJsonLd implements BoardingPolicyTypeInterfa
     static public $schemaTypeScope = 'https://schema.org/BoardingPolicyType';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Enumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

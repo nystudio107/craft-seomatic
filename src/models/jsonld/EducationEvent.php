@@ -41,6 +41,13 @@ class EducationEvent extends MetaJsonLd implements EducationEventInterface, Even
     static public $schemaTypeScope = 'https://schema.org/EducationEvent';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Event';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

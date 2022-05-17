@@ -41,6 +41,13 @@ class ItemPage extends MetaJsonLd implements ItemPageInterface, WebPageInterface
     static public $schemaTypeScope = 'https://schema.org/ItemPage';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'WebPage';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

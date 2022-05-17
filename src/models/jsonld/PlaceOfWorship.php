@@ -41,6 +41,13 @@ class PlaceOfWorship extends MetaJsonLd implements PlaceOfWorshipInterface, Civi
     static public $schemaTypeScope = 'https://schema.org/PlaceOfWorship';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CivicStructure';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

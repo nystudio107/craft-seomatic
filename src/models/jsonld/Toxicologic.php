@@ -42,6 +42,13 @@ class Toxicologic extends MetaJsonLd implements ToxicologicInterface, MedicalSpe
     static public $schemaTypeScope = 'https://schema.org/Toxicologic';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalSpecialty';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

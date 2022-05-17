@@ -41,6 +41,13 @@ class MedicalConditionStage extends MetaJsonLd implements MedicalConditionStageI
     static public $schemaTypeScope = 'https://schema.org/MedicalConditionStage';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalIntangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

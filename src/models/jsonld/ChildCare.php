@@ -41,6 +41,13 @@ class ChildCare extends MetaJsonLd implements ChildCareInterface, LocalBusinessI
     static public $schemaTypeScope = 'https://schema.org/ChildCare';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'LocalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

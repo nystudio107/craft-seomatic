@@ -41,6 +41,13 @@ class GasStation extends MetaJsonLd implements GasStationInterface, AutomotiveBu
     static public $schemaTypeScope = 'https://schema.org/GasStation';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'AutomotiveBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

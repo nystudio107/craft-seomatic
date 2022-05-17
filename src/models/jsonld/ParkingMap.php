@@ -41,6 +41,13 @@ class ParkingMap extends MetaJsonLd implements ParkingMapInterface, MapCategoryT
     static public $schemaTypeScope = 'https://schema.org/ParkingMap';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MapCategoryType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

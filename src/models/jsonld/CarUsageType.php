@@ -42,6 +42,13 @@ class CarUsageType extends MetaJsonLd implements CarUsageTypeInterface, Enumerat
     static public $schemaTypeScope = 'https://schema.org/CarUsageType';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Enumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

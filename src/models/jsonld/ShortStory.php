@@ -42,6 +42,13 @@ class ShortStory extends MetaJsonLd implements ShortStoryInterface, CreativeWork
     static public $schemaTypeScope = 'https://schema.org/ShortStory';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

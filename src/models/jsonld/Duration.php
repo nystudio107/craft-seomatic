@@ -42,6 +42,13 @@ class Duration extends MetaJsonLd implements DurationInterface, QuantityInterfac
     static public $schemaTypeScope = 'https://schema.org/Duration';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Quantity';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

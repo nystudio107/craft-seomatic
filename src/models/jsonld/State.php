@@ -41,6 +41,13 @@ class State extends MetaJsonLd implements StateInterface, AdministrativeAreaInte
     static public $schemaTypeScope = 'https://schema.org/State';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'AdministrativeArea';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

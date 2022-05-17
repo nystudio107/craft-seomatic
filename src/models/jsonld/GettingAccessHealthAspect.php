@@ -42,6 +42,13 @@ class GettingAccessHealthAspect extends MetaJsonLd implements GettingAccessHealt
     static public $schemaTypeScope = 'https://schema.org/GettingAccessHealthAspect';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'HealthAspectEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

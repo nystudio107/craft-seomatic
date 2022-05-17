@@ -42,6 +42,13 @@ class FourWheelDriveConfiguration extends MetaJsonLd implements FourWheelDriveCo
     static public $schemaTypeScope = 'https://schema.org/FourWheelDriveConfiguration';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'DriveWheelConfigurationValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

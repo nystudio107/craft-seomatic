@@ -42,6 +42,13 @@ class NonprofitANBI extends MetaJsonLd implements NonprofitANBIInterface, NLNonp
     static public $schemaTypeScope = 'https://schema.org/NonprofitANBI';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'NLNonprofitType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

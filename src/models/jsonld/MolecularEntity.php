@@ -43,6 +43,13 @@ class MolecularEntity extends MetaJsonLd implements MolecularEntityInterface, Bi
     static public $schemaTypeScope = 'https://schema.org/MolecularEntity';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'BioChemEntity';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

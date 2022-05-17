@@ -41,6 +41,13 @@ class AutoBodyShop extends MetaJsonLd implements AutoBodyShopInterface, Automoti
     static public $schemaTypeScope = 'https://schema.org/AutoBodyShop';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'AutomotiveBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class LimitedByGuaranteeCharity extends MetaJsonLd implements LimitedByGuarantee
     static public $schemaTypeScope = 'https://schema.org/LimitedByGuaranteeCharity';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'UKNonprofitType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

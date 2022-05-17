@@ -41,6 +41,13 @@ class VisualArtwork extends MetaJsonLd implements VisualArtworkInterface, Creati
     static public $schemaTypeScope = 'https://schema.org/VisualArtwork';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

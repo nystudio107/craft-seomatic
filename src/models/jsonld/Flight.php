@@ -41,6 +41,13 @@ class Flight extends MetaJsonLd implements FlightInterface, TripInterface, Intan
     static public $schemaTypeScope = 'https://schema.org/Flight';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Trip';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class RentalVehicleUsage extends MetaJsonLd implements RentalVehicleUsageInterfa
     static public $schemaTypeScope = 'https://schema.org/RentalVehicleUsage';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CarUsageType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

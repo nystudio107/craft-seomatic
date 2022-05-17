@@ -44,6 +44,13 @@ class Play extends MetaJsonLd implements PlayInterface, CreativeWorkInterface, T
     static public $schemaTypeScope = 'https://schema.org/Play';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

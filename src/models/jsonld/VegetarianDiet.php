@@ -41,6 +41,13 @@ class VegetarianDiet extends MetaJsonLd implements VegetarianDietInterface, Rest
     static public $schemaTypeScope = 'https://schema.org/VegetarianDiet';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'RestrictedDiet';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

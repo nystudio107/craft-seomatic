@@ -41,6 +41,13 @@ class NewsMediaOrganization extends MetaJsonLd implements NewsMediaOrganizationI
     static public $schemaTypeScope = 'https://schema.org/NewsMediaOrganization';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Organization';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

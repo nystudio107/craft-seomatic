@@ -43,6 +43,13 @@ class InvestmentOrDeposit extends MetaJsonLd implements InvestmentOrDepositInter
     static public $schemaTypeScope = 'https://schema.org/InvestmentOrDeposit';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'FinancialProduct';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

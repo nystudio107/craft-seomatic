@@ -41,6 +41,13 @@ class BeautySalon extends MetaJsonLd implements BeautySalonInterface, HealthAndB
     static public $schemaTypeScope = 'https://schema.org/BeautySalon';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'HealthAndBeautyBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

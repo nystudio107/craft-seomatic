@@ -41,6 +41,13 @@ class Car extends MetaJsonLd implements CarInterface, VehicleInterface, ProductI
     static public $schemaTypeScope = 'https://schema.org/Car';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Vehicle';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

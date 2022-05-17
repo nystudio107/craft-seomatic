@@ -41,6 +41,13 @@ class AutoPartsStore extends MetaJsonLd implements AutoPartsStoreInterface, Stor
     static public $schemaTypeScope = 'https://schema.org/AutoPartsStore';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Store';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

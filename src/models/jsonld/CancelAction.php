@@ -43,6 +43,13 @@ class CancelAction extends MetaJsonLd implements CancelActionInterface, PlanActi
     static public $schemaTypeScope = 'https://schema.org/CancelAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PlanAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

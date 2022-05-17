@@ -44,6 +44,13 @@ class WorkersUnion extends MetaJsonLd implements WorkersUnionInterface, Organiza
     static public $schemaTypeScope = 'https://schema.org/WorkersUnion';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Organization';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

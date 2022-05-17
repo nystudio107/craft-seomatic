@@ -42,6 +42,13 @@ class PsychologicalTreatment extends MetaJsonLd implements PsychologicalTreatmen
     static public $schemaTypeScope = 'https://schema.org/PsychologicalTreatment';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'TherapeuticProcedure';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

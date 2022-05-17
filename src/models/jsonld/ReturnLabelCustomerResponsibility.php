@@ -42,6 +42,13 @@ class ReturnLabelCustomerResponsibility extends MetaJsonLd implements ReturnLabe
     static public $schemaTypeScope = 'https://schema.org/ReturnLabelCustomerResponsibility';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ReturnLabelSourceEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

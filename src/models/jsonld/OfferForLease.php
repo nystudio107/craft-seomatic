@@ -45,6 +45,13 @@ class OfferForLease extends MetaJsonLd implements OfferForLeaseInterface, OfferI
     static public $schemaTypeScope = 'https://schema.org/OfferForLease';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Offer';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

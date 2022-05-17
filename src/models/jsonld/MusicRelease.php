@@ -41,6 +41,13 @@ class MusicRelease extends MetaJsonLd implements MusicReleaseInterface, MusicPla
     static public $schemaTypeScope = 'https://schema.org/MusicRelease';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MusicPlaylist';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

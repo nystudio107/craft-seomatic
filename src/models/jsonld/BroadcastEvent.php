@@ -41,6 +41,13 @@ class BroadcastEvent extends MetaJsonLd implements BroadcastEventInterface, Publ
     static public $schemaTypeScope = 'https://schema.org/BroadcastEvent';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PublicationEvent';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

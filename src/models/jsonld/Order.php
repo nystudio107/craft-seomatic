@@ -43,6 +43,13 @@ class Order extends MetaJsonLd implements OrderInterface, IntangibleInterface, T
     static public $schemaTypeScope = 'https://schema.org/Order';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class APIReference extends MetaJsonLd implements APIReferenceInterface, TechArti
     static public $schemaTypeScope = 'https://schema.org/APIReference';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'TechArticle';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

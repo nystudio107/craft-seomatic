@@ -41,6 +41,13 @@ class DrugCostCategory extends MetaJsonLd implements DrugCostCategoryInterface, 
     static public $schemaTypeScope = 'https://schema.org/DrugCostCategory';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class Question extends MetaJsonLd implements QuestionInterface, CommentInterface
     static public $schemaTypeScope = 'https://schema.org/Question';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Comment';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class PrognosisHealthAspect extends MetaJsonLd implements PrognosisHealthAspectI
     static public $schemaTypeScope = 'https://schema.org/PrognosisHealthAspect';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'HealthAspectEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

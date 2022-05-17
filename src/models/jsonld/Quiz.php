@@ -41,6 +41,13 @@ class Quiz extends MetaJsonLd implements QuizInterface, LearningResourceInterfac
     static public $schemaTypeScope = 'https://schema.org/Quiz';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'LearningResource';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

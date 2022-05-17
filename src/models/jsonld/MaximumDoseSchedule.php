@@ -44,6 +44,13 @@ class MaximumDoseSchedule extends MetaJsonLd implements MaximumDoseScheduleInter
     static public $schemaTypeScope = 'https://schema.org/MaximumDoseSchedule';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'DoseSchedule';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class GovernmentPermit extends MetaJsonLd implements GovernmentPermitInterface, 
     static public $schemaTypeScope = 'https://schema.org/GovernmentPermit';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Permit';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

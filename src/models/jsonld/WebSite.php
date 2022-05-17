@@ -42,6 +42,13 @@ class WebSite extends MetaJsonLd implements WebSiteInterface, CreativeWorkInterf
     static public $schemaTypeScope = 'https://schema.org/WebSite';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

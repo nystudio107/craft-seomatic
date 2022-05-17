@@ -42,6 +42,13 @@ class DataFeed extends MetaJsonLd implements DataFeedInterface, DatasetInterface
     static public $schemaTypeScope = 'https://schema.org/DataFeed';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Dataset';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

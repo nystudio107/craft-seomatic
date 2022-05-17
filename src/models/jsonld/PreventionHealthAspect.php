@@ -42,6 +42,13 @@ class PreventionHealthAspect extends MetaJsonLd implements PreventionHealthAspec
     static public $schemaTypeScope = 'https://schema.org/PreventionHealthAspect';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'HealthAspectEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

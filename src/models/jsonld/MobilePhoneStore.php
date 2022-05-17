@@ -41,6 +41,13 @@ class MobilePhoneStore extends MetaJsonLd implements MobilePhoneStoreInterface, 
     static public $schemaTypeScope = 'https://schema.org/MobilePhoneStore';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Store';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

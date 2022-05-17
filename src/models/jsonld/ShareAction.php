@@ -42,6 +42,13 @@ class ShareAction extends MetaJsonLd implements ShareActionInterface, Communicat
     static public $schemaTypeScope = 'https://schema.org/ShareAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CommunicateAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

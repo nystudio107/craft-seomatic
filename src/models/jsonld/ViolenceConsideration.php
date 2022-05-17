@@ -41,6 +41,13 @@ class ViolenceConsideration extends MetaJsonLd implements ViolenceConsiderationI
     static public $schemaTypeScope = 'https://schema.org/ViolenceConsideration';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'AdultOrientedEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

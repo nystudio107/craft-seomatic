@@ -41,6 +41,13 @@ class WearableSizeGroupHusky extends MetaJsonLd implements WearableSizeGroupHusk
     static public $schemaTypeScope = 'https://schema.org/WearableSizeGroupHusky';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'WearableSizeGroupEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

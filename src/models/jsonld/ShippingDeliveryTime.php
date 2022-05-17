@@ -42,6 +42,13 @@ class ShippingDeliveryTime extends MetaJsonLd implements ShippingDeliveryTimeInt
     static public $schemaTypeScope = 'https://schema.org/ShippingDeliveryTime';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'StructuredValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

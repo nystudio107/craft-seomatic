@@ -48,6 +48,13 @@ class CheckOutAction extends MetaJsonLd implements CheckOutActionInterface, Comm
     static public $schemaTypeScope = 'https://schema.org/CheckOutAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CommunicateAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

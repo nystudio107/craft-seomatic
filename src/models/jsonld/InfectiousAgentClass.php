@@ -42,6 +42,13 @@ class InfectiousAgentClass extends MetaJsonLd implements InfectiousAgentClassInt
     static public $schemaTypeScope = 'https://schema.org/InfectiousAgentClass';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

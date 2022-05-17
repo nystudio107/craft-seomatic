@@ -41,6 +41,13 @@ class Painting extends MetaJsonLd implements PaintingInterface, CreativeWorkInte
     static public $schemaTypeScope = 'https://schema.org/Painting';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

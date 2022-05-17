@@ -41,6 +41,13 @@ class Pharmacy extends MetaJsonLd implements PharmacyInterface, MedicalOrganizat
     static public $schemaTypeScope = 'https://schema.org/Pharmacy';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalOrganization';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

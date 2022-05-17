@@ -41,6 +41,13 @@ class FinancialService extends MetaJsonLd implements FinancialServiceInterface, 
     static public $schemaTypeScope = 'https://schema.org/FinancialService';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'LocalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

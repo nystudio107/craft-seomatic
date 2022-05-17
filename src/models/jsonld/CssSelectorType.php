@@ -41,6 +41,13 @@ class CssSelectorType extends MetaJsonLd implements CssSelectorTypeInterface, Te
     static public $schemaTypeScope = 'https://schema.org/CssSelectorType';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Text';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

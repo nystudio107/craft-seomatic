@@ -41,6 +41,13 @@ class BarOrPub extends MetaJsonLd implements BarOrPubInterface, FoodEstablishmen
     static public $schemaTypeScope = 'https://schema.org/BarOrPub';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'FoodEstablishment';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

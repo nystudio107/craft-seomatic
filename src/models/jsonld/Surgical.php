@@ -42,6 +42,13 @@ class Surgical extends MetaJsonLd implements SurgicalInterface, MedicalSpecialty
     static public $schemaTypeScope = 'https://schema.org/Surgical';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalSpecialty';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

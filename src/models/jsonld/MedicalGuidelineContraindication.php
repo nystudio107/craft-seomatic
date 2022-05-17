@@ -42,6 +42,13 @@ class MedicalGuidelineContraindication extends MetaJsonLd implements MedicalGuid
     static public $schemaTypeScope = 'https://schema.org/MedicalGuidelineContraindication';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalGuideline';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

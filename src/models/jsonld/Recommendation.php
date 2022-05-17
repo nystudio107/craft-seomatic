@@ -46,6 +46,13 @@ class Recommendation extends MetaJsonLd implements RecommendationInterface, Revi
     static public $schemaTypeScope = 'https://schema.org/Recommendation';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Review';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

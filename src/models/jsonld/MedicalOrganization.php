@@ -42,6 +42,13 @@ class MedicalOrganization extends MetaJsonLd implements MedicalOrganizationInter
     static public $schemaTypeScope = 'https://schema.org/MedicalOrganization';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Organization';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

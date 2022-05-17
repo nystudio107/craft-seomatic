@@ -46,6 +46,13 @@ class FundingAgency extends MetaJsonLd implements FundingAgencyInterface, Projec
     static public $schemaTypeScope = 'https://schema.org/FundingAgency';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Project';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

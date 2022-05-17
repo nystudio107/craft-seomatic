@@ -41,6 +41,13 @@ class Invoice extends MetaJsonLd implements InvoiceInterface, IntangibleInterfac
     static public $schemaTypeScope = 'https://schema.org/Invoice';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

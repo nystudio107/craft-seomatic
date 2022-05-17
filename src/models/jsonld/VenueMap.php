@@ -41,6 +41,13 @@ class VenueMap extends MetaJsonLd implements VenueMapInterface, MapCategoryTypeI
     static public $schemaTypeScope = 'https://schema.org/VenueMap';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MapCategoryType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class ComicSeries extends MetaJsonLd implements ComicSeriesInterface, Periodical
     static public $schemaTypeScope = 'https://schema.org/ComicSeries';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Periodical';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

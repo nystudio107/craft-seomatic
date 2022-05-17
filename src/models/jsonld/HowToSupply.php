@@ -42,6 +42,13 @@ class HowToSupply extends MetaJsonLd implements HowToSupplyInterface, HowToItemI
     static public $schemaTypeScope = 'https://schema.org/HowToSupply';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'HowToItem';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class PreventionIndication extends MetaJsonLd implements PreventionIndicationInt
     static public $schemaTypeScope = 'https://schema.org/PreventionIndication';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalIndication';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

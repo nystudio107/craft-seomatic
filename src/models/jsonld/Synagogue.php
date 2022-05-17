@@ -41,6 +41,13 @@ class Synagogue extends MetaJsonLd implements SynagogueInterface, PlaceOfWorship
     static public $schemaTypeScope = 'https://schema.org/Synagogue';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PlaceOfWorship';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -44,6 +44,13 @@ class HowToTip extends MetaJsonLd implements HowToTipInterface, CreativeWorkInte
     static public $schemaTypeScope = 'https://schema.org/HowToTip';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

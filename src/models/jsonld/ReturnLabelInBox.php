@@ -42,6 +42,13 @@ class ReturnLabelInBox extends MetaJsonLd implements ReturnLabelInBoxInterface, 
     static public $schemaTypeScope = 'https://schema.org/ReturnLabelInBox';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ReturnLabelSourceEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

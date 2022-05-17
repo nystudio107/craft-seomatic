@@ -41,6 +41,13 @@ class HinduDiet extends MetaJsonLd implements HinduDietInterface, RestrictedDiet
     static public $schemaTypeScope = 'https://schema.org/HinduDiet';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'RestrictedDiet';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

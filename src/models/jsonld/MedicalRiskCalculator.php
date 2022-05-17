@@ -43,6 +43,13 @@ class MedicalRiskCalculator extends MetaJsonLd implements MedicalRiskCalculatorI
     static public $schemaTypeScope = 'https://schema.org/MedicalRiskCalculator';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalRiskEstimator';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

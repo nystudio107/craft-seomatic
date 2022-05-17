@@ -41,6 +41,13 @@ class InsuranceAgency extends MetaJsonLd implements InsuranceAgencyInterface, Fi
     static public $schemaTypeScope = 'https://schema.org/InsuranceAgency';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'FinancialService';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

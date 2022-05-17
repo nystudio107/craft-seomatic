@@ -41,6 +41,13 @@ class Joint extends MetaJsonLd implements JointInterface, AnatomicalStructureInt
     static public $schemaTypeScope = 'https://schema.org/Joint';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'AnatomicalStructure';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

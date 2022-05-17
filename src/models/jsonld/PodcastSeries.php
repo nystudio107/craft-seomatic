@@ -42,6 +42,13 @@ class PodcastSeries extends MetaJsonLd implements PodcastSeriesInterface, Creati
     static public $schemaTypeScope = 'https://schema.org/PodcastSeries';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWorkSeries';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class TypeAndQuantityNode extends MetaJsonLd implements TypeAndQuantityNodeInter
     static public $schemaTypeScope = 'https://schema.org/TypeAndQuantityNode';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'StructuredValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

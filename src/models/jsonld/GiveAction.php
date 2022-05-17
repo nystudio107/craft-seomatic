@@ -45,6 +45,13 @@ class GiveAction extends MetaJsonLd implements GiveActionInterface, TransferActi
     static public $schemaTypeScope = 'https://schema.org/GiveAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'TransferAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

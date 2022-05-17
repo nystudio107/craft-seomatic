@@ -51,6 +51,13 @@ class EndorsementRating extends MetaJsonLd implements EndorsementRatingInterface
     static public $schemaTypeScope = 'https://schema.org/EndorsementRating';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Rating';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

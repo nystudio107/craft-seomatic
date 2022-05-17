@@ -44,6 +44,13 @@ class SexualContentConsideration extends MetaJsonLd implements SexualContentCons
     static public $schemaTypeScope = 'https://schema.org/SexualContentConsideration';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'AdultOrientedEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

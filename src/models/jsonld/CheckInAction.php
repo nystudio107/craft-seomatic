@@ -49,6 +49,13 @@ class CheckInAction extends MetaJsonLd implements CheckInActionInterface, Commun
     static public $schemaTypeScope = 'https://schema.org/CheckInAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CommunicateAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

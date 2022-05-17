@@ -48,6 +48,13 @@ class ProfessionalService extends MetaJsonLd implements ProfessionalServiceInter
     static public $schemaTypeScope = 'https://schema.org/ProfessionalService';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'LocalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

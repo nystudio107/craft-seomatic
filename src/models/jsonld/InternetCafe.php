@@ -41,6 +41,13 @@ class InternetCafe extends MetaJsonLd implements InternetCafeInterface, LocalBus
     static public $schemaTypeScope = 'https://schema.org/InternetCafe';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'LocalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

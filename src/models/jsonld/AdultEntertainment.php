@@ -41,6 +41,13 @@ class AdultEntertainment extends MetaJsonLd implements AdultEntertainmentInterfa
     static public $schemaTypeScope = 'https://schema.org/AdultEntertainment';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'EntertainmentBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

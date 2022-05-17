@@ -41,6 +41,13 @@ class Dentistry extends MetaJsonLd implements DentistryInterface, MedicalSpecial
     static public $schemaTypeScope = 'https://schema.org/Dentistry';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalSpecialty';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

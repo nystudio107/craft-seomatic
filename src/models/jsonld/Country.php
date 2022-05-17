@@ -41,6 +41,13 @@ class Country extends MetaJsonLd implements CountryInterface, AdministrativeArea
     static public $schemaTypeScope = 'https://schema.org/Country';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'AdministrativeArea';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

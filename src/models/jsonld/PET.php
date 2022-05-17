@@ -41,6 +41,13 @@ class PET extends MetaJsonLd implements PETInterface, MedicalImagingTechniqueInt
     static public $schemaTypeScope = 'https://schema.org/PET';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalImagingTechnique';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

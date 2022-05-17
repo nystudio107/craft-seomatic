@@ -41,6 +41,13 @@ class SizeGroupEnumeration extends MetaJsonLd implements SizeGroupEnumerationInt
     static public $schemaTypeScope = 'https://schema.org/SizeGroupEnumeration';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Enumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

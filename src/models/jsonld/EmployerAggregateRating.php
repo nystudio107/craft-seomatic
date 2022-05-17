@@ -41,6 +41,13 @@ class EmployerAggregateRating extends MetaJsonLd implements EmployerAggregateRat
     static public $schemaTypeScope = 'https://schema.org/EmployerAggregateRating';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'AggregateRating';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

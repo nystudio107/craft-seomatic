@@ -41,6 +41,13 @@ class DeliveryChargeSpecification extends MetaJsonLd implements DeliveryChargeSp
     static public $schemaTypeScope = 'https://schema.org/DeliveryChargeSpecification';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PriceSpecification';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

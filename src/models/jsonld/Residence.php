@@ -41,6 +41,13 @@ class Residence extends MetaJsonLd implements ResidenceInterface, PlaceInterface
     static public $schemaTypeScope = 'https://schema.org/Residence';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Place';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

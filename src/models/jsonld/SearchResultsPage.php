@@ -41,6 +41,13 @@ class SearchResultsPage extends MetaJsonLd implements SearchResultsPageInterface
     static public $schemaTypeScope = 'https://schema.org/SearchResultsPage';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'WebPage';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

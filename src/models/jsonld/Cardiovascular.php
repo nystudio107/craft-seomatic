@@ -42,6 +42,13 @@ class Cardiovascular extends MetaJsonLd implements CardiovascularInterface, Medi
     static public $schemaTypeScope = 'https://schema.org/Cardiovascular';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalSpecialty';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

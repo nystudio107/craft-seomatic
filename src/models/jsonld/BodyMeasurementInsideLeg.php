@@ -42,6 +42,13 @@ class BodyMeasurementInsideLeg extends MetaJsonLd implements BodyMeasurementInsi
     static public $schemaTypeScope = 'https://schema.org/BodyMeasurementInsideLeg';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

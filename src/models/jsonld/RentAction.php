@@ -43,6 +43,13 @@ class RentAction extends MetaJsonLd implements RentActionInterface, TradeActionI
     static public $schemaTypeScope = 'https://schema.org/RentAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'TradeAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

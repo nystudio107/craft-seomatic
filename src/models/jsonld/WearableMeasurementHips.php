@@ -41,6 +41,13 @@ class WearableMeasurementHips extends MetaJsonLd implements WearableMeasurementH
     static public $schemaTypeScope = 'https://schema.org/WearableMeasurementHips';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'WearableMeasurementTypeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

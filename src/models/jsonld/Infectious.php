@@ -42,6 +42,13 @@ class Infectious extends MetaJsonLd implements InfectiousInterface, MedicalSpeci
     static public $schemaTypeScope = 'https://schema.org/Infectious';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalSpecialty';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

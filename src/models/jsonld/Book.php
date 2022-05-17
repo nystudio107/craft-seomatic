@@ -41,6 +41,13 @@ class Book extends MetaJsonLd implements BookInterface, CreativeWorkInterface, T
     static public $schemaTypeScope = 'https://schema.org/Book';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

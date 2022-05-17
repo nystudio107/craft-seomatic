@@ -42,6 +42,13 @@ class CreativeWork extends MetaJsonLd implements CreativeWorkInterface, ThingInt
     static public $schemaTypeScope = 'https://schema.org/CreativeWork';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Thing';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

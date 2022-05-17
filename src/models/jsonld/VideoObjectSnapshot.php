@@ -46,6 +46,13 @@ class VideoObjectSnapshot extends MetaJsonLd implements VideoObjectSnapshotInter
     static public $schemaTypeScope = 'https://schema.org/VideoObjectSnapshot';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'VideoObject';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -43,6 +43,13 @@ class AskPublicNewsArticle extends MetaJsonLd implements AskPublicNewsArticleInt
     static public $schemaTypeScope = 'https://schema.org/AskPublicNewsArticle';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'NewsArticle';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

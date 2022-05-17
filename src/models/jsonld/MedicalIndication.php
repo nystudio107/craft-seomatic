@@ -42,6 +42,13 @@ class MedicalIndication extends MetaJsonLd implements MedicalIndicationInterface
     static public $schemaTypeScope = 'https://schema.org/MedicalIndication';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalEntity';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

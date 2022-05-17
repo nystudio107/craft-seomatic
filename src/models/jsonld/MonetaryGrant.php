@@ -41,6 +41,13 @@ class MonetaryGrant extends MetaJsonLd implements MonetaryGrantInterface, GrantI
     static public $schemaTypeScope = 'https://schema.org/MonetaryGrant';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Grant';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

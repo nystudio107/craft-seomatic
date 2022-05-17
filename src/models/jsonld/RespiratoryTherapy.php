@@ -42,6 +42,13 @@ class RespiratoryTherapy extends MetaJsonLd implements RespiratoryTherapyInterfa
     static public $schemaTypeScope = 'https://schema.org/RespiratoryTherapy';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalTherapy';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

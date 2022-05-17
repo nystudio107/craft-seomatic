@@ -42,6 +42,13 @@ class MedicalSignOrSymptom extends MetaJsonLd implements MedicalSignOrSymptomInt
     static public $schemaTypeScope = 'https://schema.org/MedicalSignOrSymptom';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalCondition';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

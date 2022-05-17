@@ -44,6 +44,13 @@ class Article extends MetaJsonLd implements ArticleInterface, CreativeWorkInterf
     static public $schemaTypeScope = 'https://schema.org/Article';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

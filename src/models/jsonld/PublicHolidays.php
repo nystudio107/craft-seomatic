@@ -47,6 +47,13 @@ class PublicHolidays extends MetaJsonLd implements PublicHolidaysInterface, DayO
     static public $schemaTypeScope = 'https://schema.org/PublicHolidays';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'DayOfWeek';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

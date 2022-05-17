@@ -41,6 +41,13 @@ class ScholarlyArticle extends MetaJsonLd implements ScholarlyArticleInterface, 
     static public $schemaTypeScope = 'https://schema.org/ScholarlyArticle';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Article';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

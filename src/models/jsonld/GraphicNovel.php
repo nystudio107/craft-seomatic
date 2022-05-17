@@ -42,6 +42,13 @@ class GraphicNovel extends MetaJsonLd implements GraphicNovelInterface, BookForm
     static public $schemaTypeScope = 'https://schema.org/GraphicNovel';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'BookFormatType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

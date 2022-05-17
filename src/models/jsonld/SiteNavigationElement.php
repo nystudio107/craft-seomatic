@@ -41,6 +41,13 @@ class SiteNavigationElement extends MetaJsonLd implements SiteNavigationElementI
     static public $schemaTypeScope = 'https://schema.org/SiteNavigationElement';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'WebPageElement';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

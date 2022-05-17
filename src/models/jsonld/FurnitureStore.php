@@ -41,6 +41,13 @@ class FurnitureStore extends MetaJsonLd implements FurnitureStoreInterface, Stor
     static public $schemaTypeScope = 'https://schema.org/FurnitureStore';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Store';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

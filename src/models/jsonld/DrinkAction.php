@@ -41,6 +41,13 @@ class DrinkAction extends MetaJsonLd implements DrinkActionInterface, ConsumeAct
     static public $schemaTypeScope = 'https://schema.org/DrinkAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ConsumeAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

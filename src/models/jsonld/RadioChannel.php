@@ -42,6 +42,13 @@ class RadioChannel extends MetaJsonLd implements RadioChannelInterface, Broadcas
     static public $schemaTypeScope = 'https://schema.org/RadioChannel';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'BroadcastChannel';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

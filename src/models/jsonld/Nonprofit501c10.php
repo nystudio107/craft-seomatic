@@ -42,6 +42,13 @@ class Nonprofit501c10 extends MetaJsonLd implements Nonprofit501c10Interface, US
     static public $schemaTypeScope = 'https://schema.org/Nonprofit501c10';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'USNonprofitType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

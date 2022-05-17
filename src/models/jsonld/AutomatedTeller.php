@@ -41,6 +41,13 @@ class AutomatedTeller extends MetaJsonLd implements AutomatedTellerInterface, Fi
     static public $schemaTypeScope = 'https://schema.org/AutomatedTeller';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'FinancialService';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

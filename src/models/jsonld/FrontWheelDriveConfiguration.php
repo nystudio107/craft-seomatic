@@ -42,6 +42,13 @@ class FrontWheelDriveConfiguration extends MetaJsonLd implements FrontWheelDrive
     static public $schemaTypeScope = 'https://schema.org/FrontWheelDriveConfiguration';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'DriveWheelConfigurationValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

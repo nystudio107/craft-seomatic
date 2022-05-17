@@ -41,6 +41,13 @@ class SingleFamilyResidence extends MetaJsonLd implements SingleFamilyResidenceI
     static public $schemaTypeScope = 'https://schema.org/SingleFamilyResidence';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'House';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

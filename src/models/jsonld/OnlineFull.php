@@ -42,6 +42,13 @@ class OnlineFull extends MetaJsonLd implements OnlineFullInterface, GameServerSt
     static public $schemaTypeScope = 'https://schema.org/OnlineFull';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'GameServerStatus';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

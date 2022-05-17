@@ -42,6 +42,13 @@ class Intangible extends MetaJsonLd implements IntangibleInterface, ThingInterfa
     static public $schemaTypeScope = 'https://schema.org/Intangible';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Thing';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

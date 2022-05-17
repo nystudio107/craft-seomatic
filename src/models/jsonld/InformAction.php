@@ -42,6 +42,13 @@ class InformAction extends MetaJsonLd implements InformActionInterface, Communic
     static public $schemaTypeScope = 'https://schema.org/InformAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CommunicateAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class BookFormatType extends MetaJsonLd implements BookFormatTypeInterface, Enum
     static public $schemaTypeScope = 'https://schema.org/BookFormatType';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Enumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

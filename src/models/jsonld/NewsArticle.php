@@ -44,6 +44,13 @@ class NewsArticle extends MetaJsonLd implements NewsArticleInterface, ArticleInt
     static public $schemaTypeScope = 'https://schema.org/NewsArticle';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Article';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

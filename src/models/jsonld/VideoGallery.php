@@ -41,6 +41,13 @@ class VideoGallery extends MetaJsonLd implements VideoGalleryInterface, MediaGal
     static public $schemaTypeScope = 'https://schema.org/VideoGallery';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MediaGallery';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class VideoGame extends MetaJsonLd implements VideoGameInterface, SoftwareApplic
     static public $schemaTypeScope = 'https://schema.org/VideoGame';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'SoftwareApplication';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

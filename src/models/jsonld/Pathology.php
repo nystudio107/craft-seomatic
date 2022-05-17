@@ -45,6 +45,13 @@ class Pathology extends MetaJsonLd implements PathologyInterface, MedicalSpecial
     static public $schemaTypeScope = 'https://schema.org/Pathology';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalSpecialty';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

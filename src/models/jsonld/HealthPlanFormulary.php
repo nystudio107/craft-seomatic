@@ -42,6 +42,13 @@ class HealthPlanFormulary extends MetaJsonLd implements HealthPlanFormularyInter
     static public $schemaTypeScope = 'https://schema.org/HealthPlanFormulary';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

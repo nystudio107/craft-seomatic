@@ -47,6 +47,13 @@ class RegisterAction extends MetaJsonLd implements RegisterActionInterface, Inte
     static public $schemaTypeScope = 'https://schema.org/RegisterAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'InteractAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

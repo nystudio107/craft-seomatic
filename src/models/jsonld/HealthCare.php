@@ -41,6 +41,13 @@ class HealthCare extends MetaJsonLd implements HealthCareInterface, GovernmentBe
     static public $schemaTypeScope = 'https://schema.org/HealthCare';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'GovernmentBenefitsType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

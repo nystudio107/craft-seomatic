@@ -42,6 +42,13 @@ class ReturnFeesCustomerResponsibility extends MetaJsonLd implements ReturnFeesC
     static public $schemaTypeScope = 'https://schema.org/ReturnFeesCustomerResponsibility';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ReturnFeesEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

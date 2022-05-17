@@ -49,6 +49,13 @@ class StagedContent extends MetaJsonLd implements StagedContentInterface, MediaM
     static public $schemaTypeScope = 'https://schema.org/StagedContent';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MediaManipulationRatingEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

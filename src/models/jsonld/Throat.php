@@ -41,6 +41,13 @@ class Throat extends MetaJsonLd implements ThroatInterface, PhysicalExamInterfac
     static public $schemaTypeScope = 'https://schema.org/Throat';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PhysicalExam';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

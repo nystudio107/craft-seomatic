@@ -41,6 +41,13 @@ class Hospital extends MetaJsonLd implements HospitalInterface, MedicalOrganizat
     static public $schemaTypeScope = 'https://schema.org/Hospital';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalOrganization';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

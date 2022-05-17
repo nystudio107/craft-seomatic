@@ -41,6 +41,13 @@ class DrivingSchoolVehicleUsage extends MetaJsonLd implements DrivingSchoolVehic
     static public $schemaTypeScope = 'https://schema.org/DrivingSchoolVehicleUsage';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CarUsageType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

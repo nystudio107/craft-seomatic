@@ -41,6 +41,13 @@ class MerchantReturnPolicySeasonalOverride extends MetaJsonLd implements Merchan
     static public $schemaTypeScope = 'https://schema.org/MerchantReturnPolicySeasonalOverride';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

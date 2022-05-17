@@ -41,6 +41,13 @@ class PhysicalExam extends MetaJsonLd implements PhysicalExamInterface, MedicalE
     static public $schemaTypeScope = 'https://schema.org/PhysicalExam';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

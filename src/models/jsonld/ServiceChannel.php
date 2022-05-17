@@ -42,6 +42,13 @@ class ServiceChannel extends MetaJsonLd implements ServiceChannelInterface, Inta
     static public $schemaTypeScope = 'https://schema.org/ServiceChannel';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

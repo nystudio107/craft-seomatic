@@ -43,6 +43,13 @@ class PrimaryCare extends MetaJsonLd implements PrimaryCareInterface, MedicalBus
     static public $schemaTypeScope = 'https://schema.org/PrimaryCare';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

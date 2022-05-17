@@ -42,6 +42,13 @@ class Specialty extends MetaJsonLd implements SpecialtyInterface, EnumerationInt
     static public $schemaTypeScope = 'https://schema.org/Specialty';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Enumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

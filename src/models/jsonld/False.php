@@ -41,6 +41,13 @@ class False extends MetaJsonLd implements FalseInterface, BooleanInterface
     static public $schemaTypeScope = 'https://schema.org/False';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Boolean';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -46,6 +46,13 @@ class DayOfWeek extends MetaJsonLd implements DayOfWeekInterface, EnumerationInt
     static public $schemaTypeScope = 'https://schema.org/DayOfWeek';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Enumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

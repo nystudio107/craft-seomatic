@@ -41,6 +41,13 @@ class InvoicePrice extends MetaJsonLd implements InvoicePriceInterface, PriceTyp
     static public $schemaTypeScope = 'https://schema.org/InvoicePrice';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PriceTypeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

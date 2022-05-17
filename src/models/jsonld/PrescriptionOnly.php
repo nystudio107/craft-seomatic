@@ -41,6 +41,13 @@ class PrescriptionOnly extends MetaJsonLd implements PrescriptionOnlyInterface, 
     static public $schemaTypeScope = 'https://schema.org/PrescriptionOnly';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'DrugPrescriptionStatus';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

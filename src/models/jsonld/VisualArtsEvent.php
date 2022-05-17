@@ -41,6 +41,13 @@ class VisualArtsEvent extends MetaJsonLd implements VisualArtsEventInterface, Ev
     static public $schemaTypeScope = 'https://schema.org/VisualArtsEvent';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Event';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

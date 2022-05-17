@@ -41,6 +41,13 @@ class GameServer extends MetaJsonLd implements GameServerInterface, IntangibleIn
     static public $schemaTypeScope = 'https://schema.org/GameServer';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

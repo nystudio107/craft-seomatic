@@ -43,6 +43,13 @@ class SpeechPathology extends MetaJsonLd implements SpeechPathologyInterface, Me
     static public $schemaTypeScope = 'https://schema.org/SpeechPathology';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalSpecialty';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

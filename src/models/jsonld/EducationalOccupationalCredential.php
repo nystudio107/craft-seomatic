@@ -43,6 +43,13 @@ class EducationalOccupationalCredential extends MetaJsonLd implements Educationa
     static public $schemaTypeScope = 'https://schema.org/EducationalOccupationalCredential';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

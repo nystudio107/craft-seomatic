@@ -43,6 +43,13 @@ class LodgingReservation extends MetaJsonLd implements LodgingReservationInterfa
     static public $schemaTypeScope = 'https://schema.org/LodgingReservation';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Reservation';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

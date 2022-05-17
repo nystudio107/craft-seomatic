@@ -41,6 +41,13 @@ class MusicPlaylist extends MetaJsonLd implements MusicPlaylistInterface, Creati
     static public $schemaTypeScope = 'https://schema.org/MusicPlaylist';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

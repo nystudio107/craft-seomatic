@@ -42,6 +42,13 @@ class SolveMathAction extends MetaJsonLd implements SolveMathActionInterface, Ac
     static public $schemaTypeScope = 'https://schema.org/SolveMathAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Action';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

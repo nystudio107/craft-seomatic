@@ -41,6 +41,13 @@ class CardiovascularExam extends MetaJsonLd implements CardiovascularExamInterfa
     static public $schemaTypeScope = 'https://schema.org/CardiovascularExam';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PhysicalExam';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

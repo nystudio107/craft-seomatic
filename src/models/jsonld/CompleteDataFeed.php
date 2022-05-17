@@ -50,6 +50,13 @@ class CompleteDataFeed extends MetaJsonLd implements CompleteDataFeedInterface, 
     static public $schemaTypeScope = 'https://schema.org/CompleteDataFeed';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'DataFeed';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

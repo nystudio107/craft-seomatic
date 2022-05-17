@@ -52,6 +52,13 @@ class OriginalMediaContent extends MetaJsonLd implements OriginalMediaContentInt
     static public $schemaTypeScope = 'https://schema.org/OriginalMediaContent';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MediaManipulationRatingEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

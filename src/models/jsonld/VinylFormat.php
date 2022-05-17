@@ -41,6 +41,13 @@ class VinylFormat extends MetaJsonLd implements VinylFormatInterface, MusicRelea
     static public $schemaTypeScope = 'https://schema.org/VinylFormat';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MusicReleaseFormatType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

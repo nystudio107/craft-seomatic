@@ -41,6 +41,13 @@ class ReservationCancelled extends MetaJsonLd implements ReservationCancelledInt
     static public $schemaTypeScope = 'https://schema.org/ReservationCancelled';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ReservationStatusType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

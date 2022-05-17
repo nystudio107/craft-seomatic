@@ -42,6 +42,13 @@ class AmpStory extends MetaJsonLd implements AmpStoryInterface, CreativeWorkInte
     static public $schemaTypeScope = 'https://schema.org/AmpStory';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

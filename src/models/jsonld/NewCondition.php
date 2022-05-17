@@ -41,6 +41,13 @@ class NewCondition extends MetaJsonLd implements NewConditionInterface, OfferIte
     static public $schemaTypeScope = 'https://schema.org/NewCondition';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'OfferItemCondition';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

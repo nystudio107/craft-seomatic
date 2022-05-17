@@ -41,6 +41,13 @@ class TelevisionStation extends MetaJsonLd implements TelevisionStationInterface
     static public $schemaTypeScope = 'https://schema.org/TelevisionStation';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'LocalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

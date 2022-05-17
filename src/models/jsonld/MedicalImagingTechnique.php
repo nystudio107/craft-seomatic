@@ -42,6 +42,13 @@ class MedicalImagingTechnique extends MetaJsonLd implements MedicalImagingTechni
     static public $schemaTypeScope = 'https://schema.org/MedicalImagingTechnique';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

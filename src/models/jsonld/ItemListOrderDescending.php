@@ -41,6 +41,13 @@ class ItemListOrderDescending extends MetaJsonLd implements ItemListOrderDescend
     static public $schemaTypeScope = 'https://schema.org/ItemListOrderDescending';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ItemListOrderType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

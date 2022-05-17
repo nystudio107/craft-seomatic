@@ -42,6 +42,13 @@ class FDAnotEvaluated extends MetaJsonLd implements FDAnotEvaluatedInterface, Dr
     static public $schemaTypeScope = 'https://schema.org/FDAnotEvaluated';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'DrugPregnancyCategory';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class MathSolver extends MetaJsonLd implements MathSolverInterface, CreativeWork
     static public $schemaTypeScope = 'https://schema.org/MathSolver';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

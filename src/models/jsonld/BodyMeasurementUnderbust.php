@@ -42,6 +42,13 @@ class BodyMeasurementUnderbust extends MetaJsonLd implements BodyMeasurementUnde
     static public $schemaTypeScope = 'https://schema.org/BodyMeasurementUnderbust';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

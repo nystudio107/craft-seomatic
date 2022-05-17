@@ -41,6 +41,13 @@ class ResultsNotAvailable extends MetaJsonLd implements ResultsNotAvailableInter
     static public $schemaTypeScope = 'https://schema.org/ResultsNotAvailable';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalStudyStatus';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

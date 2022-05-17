@@ -41,6 +41,13 @@ class OutletStore extends MetaJsonLd implements OutletStoreInterface, StoreInter
     static public $schemaTypeScope = 'https://schema.org/OutletStore';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Store';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

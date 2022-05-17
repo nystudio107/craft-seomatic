@@ -45,6 +45,13 @@ class Landform extends MetaJsonLd implements LandformInterface, PlaceInterface, 
     static public $schemaTypeScope = 'https://schema.org/Landform';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Place';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

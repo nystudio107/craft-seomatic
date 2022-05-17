@@ -42,6 +42,13 @@ class CoOp extends MetaJsonLd implements CoOpInterface, GamePlayModeInterface, E
     static public $schemaTypeScope = 'https://schema.org/CoOp';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'GamePlayMode';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class AchieveAction extends MetaJsonLd implements AchieveActionInterface, Action
     static public $schemaTypeScope = 'https://schema.org/AchieveAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Action';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class FailedActionStatus extends MetaJsonLd implements FailedActionStatusInterfa
     static public $schemaTypeScope = 'https://schema.org/FailedActionStatus';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ActionStatusType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

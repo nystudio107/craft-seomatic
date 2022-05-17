@@ -41,6 +41,13 @@ class CommentPermission extends MetaJsonLd implements CommentPermissionInterface
     static public $schemaTypeScope = 'https://schema.org/CommentPermission';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'DigitalDocumentPermissionType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class AnatomicalStructure extends MetaJsonLd implements AnatomicalStructureInter
     static public $schemaTypeScope = 'https://schema.org/AnatomicalStructure';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalEntity';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

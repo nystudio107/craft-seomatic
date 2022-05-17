@@ -41,6 +41,13 @@ class AlcoholConsideration extends MetaJsonLd implements AlcoholConsiderationInt
     static public $schemaTypeScope = 'https://schema.org/AlcoholConsideration';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'AdultOrientedEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

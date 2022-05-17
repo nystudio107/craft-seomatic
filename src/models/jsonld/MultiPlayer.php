@@ -42,6 +42,13 @@ class MultiPlayer extends MetaJsonLd implements MultiPlayerInterface, GamePlayMo
     static public $schemaTypeScope = 'https://schema.org/MultiPlayer';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'GamePlayMode';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

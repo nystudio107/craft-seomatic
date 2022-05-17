@@ -42,6 +42,13 @@ class UnofficialLegalValue extends MetaJsonLd implements UnofficialLegalValueInt
     static public $schemaTypeScope = 'https://schema.org/UnofficialLegalValue';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'LegalValueLevel';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

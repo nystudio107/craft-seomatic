@@ -51,6 +51,13 @@ class MediaReview extends MetaJsonLd implements MediaReviewInterface, ReviewInte
     static public $schemaTypeScope = 'https://schema.org/MediaReview';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Review';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

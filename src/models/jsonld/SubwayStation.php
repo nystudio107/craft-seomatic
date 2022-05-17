@@ -41,6 +41,13 @@ class SubwayStation extends MetaJsonLd implements SubwayStationInterface, CivicS
     static public $schemaTypeScope = 'https://schema.org/SubwayStation';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CivicStructure';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

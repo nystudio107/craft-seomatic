@@ -44,6 +44,13 @@ class BefriendAction extends MetaJsonLd implements BefriendActionInterface, Inte
     static public $schemaTypeScope = 'https://schema.org/BefriendAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'InteractAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class WearableMeasurementSleeve extends MetaJsonLd implements WearableMeasuremen
     static public $schemaTypeScope = 'https://schema.org/WearableMeasurementSleeve';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'WearableMeasurementTypeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

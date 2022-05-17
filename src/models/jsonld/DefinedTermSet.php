@@ -42,6 +42,13 @@ class DefinedTermSet extends MetaJsonLd implements DefinedTermSetInterface, Crea
     static public $schemaTypeScope = 'https://schema.org/DefinedTermSet';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

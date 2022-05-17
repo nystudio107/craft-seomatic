@@ -100,6 +100,13 @@ class SpecialAnnouncement extends MetaJsonLd implements SpecialAnnouncementInter
     static public $schemaTypeScope = 'https://schema.org/SpecialAnnouncement';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

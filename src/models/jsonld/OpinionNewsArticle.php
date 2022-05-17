@@ -45,6 +45,13 @@ class OpinionNewsArticle extends MetaJsonLd implements OpinionNewsArticleInterfa
     static public $schemaTypeScope = 'https://schema.org/OpinionNewsArticle';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'NewsArticle';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

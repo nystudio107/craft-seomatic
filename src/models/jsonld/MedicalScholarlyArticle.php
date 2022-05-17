@@ -41,6 +41,13 @@ class MedicalScholarlyArticle extends MetaJsonLd implements MedicalScholarlyArti
     static public $schemaTypeScope = 'https://schema.org/MedicalScholarlyArticle';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ScholarlyArticle';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

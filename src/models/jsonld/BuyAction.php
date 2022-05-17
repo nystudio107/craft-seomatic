@@ -43,6 +43,13 @@ class BuyAction extends MetaJsonLd implements BuyActionInterface, TradeActionInt
     static public $schemaTypeScope = 'https://schema.org/BuyAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'TradeAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

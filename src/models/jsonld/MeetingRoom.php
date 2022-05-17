@@ -46,6 +46,13 @@ class MeetingRoom extends MetaJsonLd implements MeetingRoomInterface, RoomInterf
     static public $schemaTypeScope = 'https://schema.org/MeetingRoom';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Room';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

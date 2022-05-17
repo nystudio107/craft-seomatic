@@ -41,6 +41,13 @@ class EducationalAudience extends MetaJsonLd implements EducationalAudienceInter
     static public $schemaTypeScope = 'https://schema.org/EducationalAudience';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Audience';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

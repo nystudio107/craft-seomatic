@@ -41,6 +41,13 @@ class ResultsAvailable extends MetaJsonLd implements ResultsAvailableInterface, 
     static public $schemaTypeScope = 'https://schema.org/ResultsAvailable';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalStudyStatus';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

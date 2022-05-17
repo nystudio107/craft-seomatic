@@ -41,6 +41,13 @@ class SizeSystemImperial extends MetaJsonLd implements SizeSystemImperialInterfa
     static public $schemaTypeScope = 'https://schema.org/SizeSystemImperial';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'SizeSystemEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

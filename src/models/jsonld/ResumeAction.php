@@ -42,6 +42,13 @@ class ResumeAction extends MetaJsonLd implements ResumeActionInterface, ControlA
     static public $schemaTypeScope = 'https://schema.org/ResumeAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ControlAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class AcceptAction extends MetaJsonLd implements AcceptActionInterface, Allocate
     static public $schemaTypeScope = 'https://schema.org/AcceptAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'AllocateAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

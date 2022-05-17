@@ -42,6 +42,13 @@ class RestrictedDiet extends MetaJsonLd implements RestrictedDietInterface, Enum
     static public $schemaTypeScope = 'https://schema.org/RestrictedDiet';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Enumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

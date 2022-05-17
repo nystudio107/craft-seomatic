@@ -41,6 +41,13 @@ class UKTrust extends MetaJsonLd implements UKTrustInterface, UKNonprofitTypeInt
     static public $schemaTypeScope = 'https://schema.org/UKTrust';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'UKNonprofitType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

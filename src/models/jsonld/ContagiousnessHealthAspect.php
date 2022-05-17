@@ -42,6 +42,13 @@ class ContagiousnessHealthAspect extends MetaJsonLd implements ContagiousnessHea
     static public $schemaTypeScope = 'https://schema.org/ContagiousnessHealthAspect';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'HealthAspectEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

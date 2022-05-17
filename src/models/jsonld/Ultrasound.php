@@ -41,6 +41,13 @@ class Ultrasound extends MetaJsonLd implements UltrasoundInterface, MedicalImagi
     static public $schemaTypeScope = 'https://schema.org/Ultrasound';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalImagingTechnique';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

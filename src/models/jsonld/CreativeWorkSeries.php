@@ -55,6 +55,13 @@ class CreativeWorkSeries extends MetaJsonLd implements CreativeWorkSeriesInterfa
     static public $schemaTypeScope = 'https://schema.org/CreativeWorkSeries';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

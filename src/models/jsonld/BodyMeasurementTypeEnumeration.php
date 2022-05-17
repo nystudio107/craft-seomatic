@@ -42,6 +42,13 @@ class BodyMeasurementTypeEnumeration extends MetaJsonLd implements BodyMeasureme
     static public $schemaTypeScope = 'https://schema.org/BodyMeasurementTypeEnumeration';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MeasurementTypeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

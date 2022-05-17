@@ -43,6 +43,13 @@ class UserPlays extends MetaJsonLd implements UserPlaysInterface, UserInteractio
     static public $schemaTypeScope = 'https://schema.org/UserPlays';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'UserInteraction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

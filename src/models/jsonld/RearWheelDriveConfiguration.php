@@ -42,6 +42,13 @@ class RearWheelDriveConfiguration extends MetaJsonLd implements RearWheelDriveCo
     static public $schemaTypeScope = 'https://schema.org/RearWheelDriveConfiguration';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'DriveWheelConfigurationValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

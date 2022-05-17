@@ -42,6 +42,13 @@ class BodyMeasurementWaist extends MetaJsonLd implements BodyMeasurementWaistInt
     static public $schemaTypeScope = 'https://schema.org/BodyMeasurementWaist';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

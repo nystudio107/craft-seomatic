@@ -41,6 +41,13 @@ class EvidenceLevelB extends MetaJsonLd implements EvidenceLevelBInterface, Medi
     static public $schemaTypeScope = 'https://schema.org/EvidenceLevelB';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalEvidenceLevel';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

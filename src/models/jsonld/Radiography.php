@@ -43,6 +43,13 @@ class Radiography extends MetaJsonLd implements RadiographyInterface
     static public $schemaTypeScope = 'https://schema.org/Radiography';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Thing';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

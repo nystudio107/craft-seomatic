@@ -41,6 +41,13 @@ class DaySpa extends MetaJsonLd implements DaySpaInterface, HealthAndBeautyBusin
     static public $schemaTypeScope = 'https://schema.org/DaySpa';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'HealthAndBeautyBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

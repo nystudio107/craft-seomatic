@@ -42,6 +42,13 @@ class MinimumAdvertisedPrice extends MetaJsonLd implements MinimumAdvertisedPric
     static public $schemaTypeScope = 'https://schema.org/MinimumAdvertisedPrice';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PriceTypeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

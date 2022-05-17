@@ -41,6 +41,13 @@ class WearableMeasurementCup extends MetaJsonLd implements WearableMeasurementCu
     static public $schemaTypeScope = 'https://schema.org/WearableMeasurementCup';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'WearableMeasurementTypeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -43,6 +43,13 @@ class MedicalCondition extends MetaJsonLd implements MedicalConditionInterface, 
     static public $schemaTypeScope = 'https://schema.org/MedicalCondition';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalEntity';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

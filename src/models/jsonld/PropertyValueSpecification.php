@@ -41,6 +41,13 @@ class PropertyValueSpecification extends MetaJsonLd implements PropertyValueSpec
     static public $schemaTypeScope = 'https://schema.org/PropertyValueSpecification';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

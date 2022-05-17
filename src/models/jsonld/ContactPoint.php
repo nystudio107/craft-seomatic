@@ -41,6 +41,13 @@ class ContactPoint extends MetaJsonLd implements ContactPointInterface, Structur
     static public $schemaTypeScope = 'https://schema.org/ContactPoint';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'StructuredValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

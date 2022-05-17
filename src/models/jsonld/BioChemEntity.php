@@ -42,6 +42,13 @@ class BioChemEntity extends MetaJsonLd implements BioChemEntityInterface, ThingI
     static public $schemaTypeScope = 'https://schema.org/BioChemEntity';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Thing';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

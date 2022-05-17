@@ -41,6 +41,13 @@ class ExchangeRefund extends MetaJsonLd implements ExchangeRefundInterface, Refu
     static public $schemaTypeScope = 'https://schema.org/ExchangeRefund';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'RefundTypeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class Musculoskeletal extends MetaJsonLd implements MusculoskeletalInterface, Me
     static public $schemaTypeScope = 'https://schema.org/Musculoskeletal';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalSpecialty';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

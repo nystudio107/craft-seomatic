@@ -42,6 +42,13 @@ class Brand extends MetaJsonLd implements BrandInterface, IntangibleInterface, T
     static public $schemaTypeScope = 'https://schema.org/Brand';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class Prion extends MetaJsonLd implements PrionInterface, InfectiousAgentClassIn
     static public $schemaTypeScope = 'https://schema.org/Prion';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'InfectiousAgentClass';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

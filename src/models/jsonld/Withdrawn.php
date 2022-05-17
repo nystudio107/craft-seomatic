@@ -41,6 +41,13 @@ class Withdrawn extends MetaJsonLd implements WithdrawnInterface, MedicalStudySt
     static public $schemaTypeScope = 'https://schema.org/Withdrawn';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalStudyStatus';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

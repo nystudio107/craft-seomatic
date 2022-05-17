@@ -41,6 +41,13 @@ class SaleEvent extends MetaJsonLd implements SaleEventInterface, EventInterface
     static public $schemaTypeScope = 'https://schema.org/SaleEvent';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Event';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -44,6 +44,13 @@ class ScheduleAction extends MetaJsonLd implements ScheduleActionInterface, Plan
     static public $schemaTypeScope = 'https://schema.org/ScheduleAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PlanAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

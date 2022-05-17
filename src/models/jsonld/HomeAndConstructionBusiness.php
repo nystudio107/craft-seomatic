@@ -44,6 +44,13 @@ class HomeAndConstructionBusiness extends MetaJsonLd implements HomeAndConstruct
     static public $schemaTypeScope = 'https://schema.org/HomeAndConstructionBusiness';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'LocalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

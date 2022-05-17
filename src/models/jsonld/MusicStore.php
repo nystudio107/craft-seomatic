@@ -41,6 +41,13 @@ class MusicStore extends MetaJsonLd implements MusicStoreInterface, StoreInterfa
     static public $schemaTypeScope = 'https://schema.org/MusicStore';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Store';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

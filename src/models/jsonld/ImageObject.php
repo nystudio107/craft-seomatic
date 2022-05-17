@@ -41,6 +41,13 @@ class ImageObject extends MetaJsonLd implements ImageObjectInterface, MediaObjec
     static public $schemaTypeScope = 'https://schema.org/ImageObject';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MediaObject';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

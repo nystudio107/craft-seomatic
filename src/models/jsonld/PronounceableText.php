@@ -41,6 +41,13 @@ class PronounceableText extends MetaJsonLd implements PronounceableTextInterface
     static public $schemaTypeScope = 'https://schema.org/PronounceableText';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Text';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

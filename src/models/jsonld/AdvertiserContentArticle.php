@@ -44,6 +44,13 @@ class AdvertiserContentArticle extends MetaJsonLd implements AdvertiserContentAr
     static public $schemaTypeScope = 'https://schema.org/AdvertiserContentArticle';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Article';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

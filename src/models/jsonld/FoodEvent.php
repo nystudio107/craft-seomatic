@@ -41,6 +41,13 @@ class FoodEvent extends MetaJsonLd implements FoodEventInterface, EventInterface
     static public $schemaTypeScope = 'https://schema.org/FoodEvent';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Event';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

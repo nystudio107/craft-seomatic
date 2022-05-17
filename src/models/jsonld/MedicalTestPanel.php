@@ -41,6 +41,13 @@ class MedicalTestPanel extends MetaJsonLd implements MedicalTestPanelInterface, 
     static public $schemaTypeScope = 'https://schema.org/MedicalTestPanel';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalTest';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

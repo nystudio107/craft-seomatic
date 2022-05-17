@@ -41,6 +41,13 @@ class DemoAlbum extends MetaJsonLd implements DemoAlbumInterface, MusicAlbumProd
     static public $schemaTypeScope = 'https://schema.org/DemoAlbum';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MusicAlbumProductionType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

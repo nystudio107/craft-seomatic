@@ -41,6 +41,13 @@ class SelfStorage extends MetaJsonLd implements SelfStorageInterface, LocalBusin
     static public $schemaTypeScope = 'https://schema.org/SelfStorage';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'LocalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

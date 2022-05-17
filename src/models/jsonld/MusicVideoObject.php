@@ -41,6 +41,13 @@ class MusicVideoObject extends MetaJsonLd implements MusicVideoObjectInterface, 
     static public $schemaTypeScope = 'https://schema.org/MusicVideoObject';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MediaObject';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

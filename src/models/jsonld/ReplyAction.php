@@ -43,6 +43,13 @@ class ReplyAction extends MetaJsonLd implements ReplyActionInterface, Communicat
     static public $schemaTypeScope = 'https://schema.org/ReplyAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CommunicateAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

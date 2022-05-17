@@ -42,6 +42,13 @@ class Distance extends MetaJsonLd implements DistanceInterface, QuantityInterfac
     static public $schemaTypeScope = 'https://schema.org/Distance';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Quantity';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

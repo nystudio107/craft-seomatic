@@ -42,6 +42,13 @@ class ReservationHold extends MetaJsonLd implements ReservationHoldInterface, Re
     static public $schemaTypeScope = 'https://schema.org/ReservationHold';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ReservationStatusType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

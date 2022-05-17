@@ -42,6 +42,13 @@ class Muscle extends MetaJsonLd implements MuscleInterface, AnatomicalStructureI
     static public $schemaTypeScope = 'https://schema.org/Muscle';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'AnatomicalStructure';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

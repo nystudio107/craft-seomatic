@@ -41,6 +41,13 @@ class ParentalSupport extends MetaJsonLd implements ParentalSupportInterface, Go
     static public $schemaTypeScope = 'https://schema.org/ParentalSupport';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'GovernmentBenefitsType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

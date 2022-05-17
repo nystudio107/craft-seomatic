@@ -42,6 +42,13 @@ class BookSeries extends MetaJsonLd implements BookSeriesInterface, CreativeWork
     static public $schemaTypeScope = 'https://schema.org/BookSeries';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWorkSeries';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

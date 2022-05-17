@@ -41,6 +41,13 @@ class MerchantReturnUnspecified extends MetaJsonLd implements MerchantReturnUnsp
     static public $schemaTypeScope = 'https://schema.org/MerchantReturnUnspecified';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MerchantReturnEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

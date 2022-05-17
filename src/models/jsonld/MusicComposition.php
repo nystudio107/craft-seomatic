@@ -41,6 +41,13 @@ class MusicComposition extends MetaJsonLd implements MusicCompositionInterface, 
     static public $schemaTypeScope = 'https://schema.org/MusicComposition';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

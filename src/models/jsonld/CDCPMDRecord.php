@@ -45,6 +45,13 @@ class CDCPMDRecord extends MetaJsonLd implements CDCPMDRecordInterface, Structur
     static public $schemaTypeScope = 'https://schema.org/CDCPMDRecord';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'StructuredValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

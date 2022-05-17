@@ -41,6 +41,13 @@ class DVDFormat extends MetaJsonLd implements DVDFormatInterface, MusicReleaseFo
     static public $schemaTypeScope = 'https://schema.org/DVDFormat';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MusicReleaseFormatType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

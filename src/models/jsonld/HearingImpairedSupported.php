@@ -41,6 +41,13 @@ class HearingImpairedSupported extends MetaJsonLd implements HearingImpairedSupp
     static public $schemaTypeScope = 'https://schema.org/HearingImpairedSupported';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ContactPointOption';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class DrawAction extends MetaJsonLd implements DrawActionInterface, CreateAction
     static public $schemaTypeScope = 'https://schema.org/DrawAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreateAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

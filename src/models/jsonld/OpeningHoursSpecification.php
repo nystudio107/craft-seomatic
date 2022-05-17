@@ -45,6 +45,13 @@ class OpeningHoursSpecification extends MetaJsonLd implements OpeningHoursSpecif
     static public $schemaTypeScope = 'https://schema.org/OpeningHoursSpecification';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'StructuredValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

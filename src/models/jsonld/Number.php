@@ -45,6 +45,13 @@ class Number extends MetaJsonLd implements NumberInterface
     static public $schemaTypeScope = 'https://schema.org/Number';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Thing';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

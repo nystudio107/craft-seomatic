@@ -42,6 +42,13 @@ class Anesthesia extends MetaJsonLd implements AnesthesiaInterface, MedicalSpeci
     static public $schemaTypeScope = 'https://schema.org/Anesthesia';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalSpecialty';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

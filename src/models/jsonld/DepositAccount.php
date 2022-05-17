@@ -42,6 +42,13 @@ class DepositAccount extends MetaJsonLd implements DepositAccountInterface, Inve
     static public $schemaTypeScope = 'https://schema.org/DepositAccount';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'InvestmentOrDeposit';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

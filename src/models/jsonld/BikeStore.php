@@ -41,6 +41,13 @@ class BikeStore extends MetaJsonLd implements BikeStoreInterface, StoreInterface
     static public $schemaTypeScope = 'https://schema.org/BikeStore';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Store';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

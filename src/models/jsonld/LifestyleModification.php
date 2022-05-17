@@ -42,6 +42,13 @@ class LifestyleModification extends MetaJsonLd implements LifestyleModificationI
     static public $schemaTypeScope = 'https://schema.org/LifestyleModification';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalEntity';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

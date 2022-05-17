@@ -41,6 +41,13 @@ class Report extends MetaJsonLd implements ReportInterface, ArticleInterface, Cr
     static public $schemaTypeScope = 'https://schema.org/Report';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Article';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

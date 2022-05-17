@@ -41,6 +41,13 @@ class MotorcycleRepair extends MetaJsonLd implements MotorcycleRepairInterface, 
     static public $schemaTypeScope = 'https://schema.org/MotorcycleRepair';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'AutomotiveBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

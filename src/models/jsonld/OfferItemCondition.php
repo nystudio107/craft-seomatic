@@ -41,6 +41,13 @@ class OfferItemCondition extends MetaJsonLd implements OfferItemConditionInterfa
     static public $schemaTypeScope = 'https://schema.org/OfferItemCondition';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Enumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

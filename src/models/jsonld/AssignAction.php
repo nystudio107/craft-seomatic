@@ -42,6 +42,13 @@ class AssignAction extends MetaJsonLd implements AssignActionInterface, Allocate
     static public $schemaTypeScope = 'https://schema.org/AssignAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'AllocateAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

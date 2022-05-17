@@ -41,6 +41,13 @@ class LibrarySystem extends MetaJsonLd implements LibrarySystemInterface, Organi
     static public $schemaTypeScope = 'https://schema.org/LibrarySystem';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Organization';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

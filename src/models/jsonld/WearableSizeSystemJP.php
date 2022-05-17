@@ -41,6 +41,13 @@ class WearableSizeSystemJP extends MetaJsonLd implements WearableSizeSystemJPInt
     static public $schemaTypeScope = 'https://schema.org/WearableSizeSystemJP';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'WearableSizeSystemEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -44,6 +44,13 @@ class DietarySupplement extends MetaJsonLd implements DietarySupplementInterface
     static public $schemaTypeScope = 'https://schema.org/DietarySupplement';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Substance';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class MedicineSystem extends MetaJsonLd implements MedicineSystemInterface, Medi
     static public $schemaTypeScope = 'https://schema.org/MedicineSystem';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

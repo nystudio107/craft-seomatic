@@ -44,6 +44,13 @@ class TraditionalChinese extends MetaJsonLd implements TraditionalChineseInterfa
     static public $schemaTypeScope = 'https://schema.org/TraditionalChinese';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicineSystem';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

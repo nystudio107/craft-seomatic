@@ -41,6 +41,13 @@ class Balance extends MetaJsonLd implements BalanceInterface, PhysicalActivityCa
     static public $schemaTypeScope = 'https://schema.org/Balance';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PhysicalActivityCategory';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

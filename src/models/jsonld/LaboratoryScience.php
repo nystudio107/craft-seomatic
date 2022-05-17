@@ -42,6 +42,13 @@ class LaboratoryScience extends MetaJsonLd implements LaboratoryScienceInterface
     static public $schemaTypeScope = 'https://schema.org/LaboratoryScience';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalSpecialty';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

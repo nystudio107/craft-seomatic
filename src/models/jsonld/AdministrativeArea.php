@@ -42,6 +42,13 @@ class AdministrativeArea extends MetaJsonLd implements AdministrativeAreaInterfa
     static public $schemaTypeScope = 'https://schema.org/AdministrativeArea';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Place';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

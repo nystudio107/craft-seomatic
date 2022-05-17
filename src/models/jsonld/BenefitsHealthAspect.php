@@ -41,6 +41,13 @@ class BenefitsHealthAspect extends MetaJsonLd implements BenefitsHealthAspectInt
     static public $schemaTypeScope = 'https://schema.org/BenefitsHealthAspect';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'HealthAspectEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

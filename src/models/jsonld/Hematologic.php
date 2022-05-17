@@ -42,6 +42,13 @@ class Hematologic extends MetaJsonLd implements HematologicInterface, MedicalSpe
     static public $schemaTypeScope = 'https://schema.org/Hematologic';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalSpecialty';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

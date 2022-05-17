@@ -41,6 +41,13 @@ class Aquarium extends MetaJsonLd implements AquariumInterface, CivicStructureIn
     static public $schemaTypeScope = 'https://schema.org/Aquarium';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CivicStructure';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

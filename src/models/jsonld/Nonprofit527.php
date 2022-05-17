@@ -41,6 +41,13 @@ class Nonprofit527 extends MetaJsonLd implements Nonprofit527Interface, USNonpro
     static public $schemaTypeScope = 'https://schema.org/Nonprofit527';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'USNonprofitType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

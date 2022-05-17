@@ -42,6 +42,13 @@ class RejectAction extends MetaJsonLd implements RejectActionInterface, Allocate
     static public $schemaTypeScope = 'https://schema.org/RejectAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'AllocateAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

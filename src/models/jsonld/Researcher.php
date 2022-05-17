@@ -41,6 +41,13 @@ class Researcher extends MetaJsonLd implements ResearcherInterface, AudienceInte
     static public $schemaTypeScope = 'https://schema.org/Researcher';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Audience';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

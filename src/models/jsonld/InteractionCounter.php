@@ -43,6 +43,13 @@ class InteractionCounter extends MetaJsonLd implements InteractionCounterInterfa
     static public $schemaTypeScope = 'https://schema.org/InteractionCounter';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'StructuredValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

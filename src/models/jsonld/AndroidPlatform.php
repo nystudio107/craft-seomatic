@@ -41,6 +41,13 @@ class AndroidPlatform extends MetaJsonLd implements AndroidPlatformInterface, Di
     static public $schemaTypeScope = 'https://schema.org/AndroidPlatform';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'DigitalPlatformEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

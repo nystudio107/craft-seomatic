@@ -41,6 +41,13 @@ class LiveAlbum extends MetaJsonLd implements LiveAlbumInterface, MusicAlbumProd
     static public $schemaTypeScope = 'https://schema.org/LiveAlbum';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MusicAlbumProductionType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

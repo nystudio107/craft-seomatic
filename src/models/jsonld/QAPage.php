@@ -43,6 +43,13 @@ class QAPage extends MetaJsonLd implements QAPageInterface, WebPageInterface, Cr
     static public $schemaTypeScope = 'https://schema.org/QAPage';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'WebPage';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

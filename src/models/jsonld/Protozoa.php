@@ -41,6 +41,13 @@ class Protozoa extends MetaJsonLd implements ProtozoaInterface, InfectiousAgentC
     static public $schemaTypeScope = 'https://schema.org/Protozoa';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'InfectiousAgentClass';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

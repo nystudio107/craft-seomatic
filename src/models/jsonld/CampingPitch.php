@@ -52,6 +52,13 @@ class CampingPitch extends MetaJsonLd implements CampingPitchInterface, Accommod
     static public $schemaTypeScope = 'https://schema.org/CampingPitch';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Accommodation';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

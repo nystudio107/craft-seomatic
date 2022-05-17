@@ -42,6 +42,13 @@ class AllWheelDriveConfiguration extends MetaJsonLd implements AllWheelDriveConf
     static public $schemaTypeScope = 'https://schema.org/AllWheelDriveConfiguration';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'DriveWheelConfigurationValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

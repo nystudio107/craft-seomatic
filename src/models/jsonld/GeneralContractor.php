@@ -41,6 +41,13 @@ class GeneralContractor extends MetaJsonLd implements GeneralContractorInterface
     static public $schemaTypeScope = 'https://schema.org/GeneralContractor';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'HomeAndConstructionBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

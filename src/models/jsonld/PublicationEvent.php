@@ -43,6 +43,13 @@ class PublicationEvent extends MetaJsonLd implements PublicationEventInterface, 
     static public $schemaTypeScope = 'https://schema.org/PublicationEvent';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Event';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

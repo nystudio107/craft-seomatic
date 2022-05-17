@@ -41,6 +41,13 @@ class ImagingTest extends MetaJsonLd implements ImagingTestInterface, MedicalTes
     static public $schemaTypeScope = 'https://schema.org/ImagingTest';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalTest';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -43,6 +43,13 @@ class RentalCarReservation extends MetaJsonLd implements RentalCarReservationInt
     static public $schemaTypeScope = 'https://schema.org/RentalCarReservation';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Reservation';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

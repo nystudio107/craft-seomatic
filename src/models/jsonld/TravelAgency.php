@@ -41,6 +41,13 @@ class TravelAgency extends MetaJsonLd implements TravelAgencyInterface, LocalBus
     static public $schemaTypeScope = 'https://schema.org/TravelAgency';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'LocalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -45,6 +45,13 @@ class GeoCircle extends MetaJsonLd implements GeoCircleInterface, GeoShapeInterf
     static public $schemaTypeScope = 'https://schema.org/GeoCircle';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'GeoShape';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class ChildrensEvent extends MetaJsonLd implements ChildrensEventInterface, Even
     static public $schemaTypeScope = 'https://schema.org/ChildrensEvent';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Event';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

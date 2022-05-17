@@ -41,6 +41,13 @@ class Park extends MetaJsonLd implements ParkInterface, CivicStructureInterface,
     static public $schemaTypeScope = 'https://schema.org/Park';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CivicStructure';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

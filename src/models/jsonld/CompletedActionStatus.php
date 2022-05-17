@@ -41,6 +41,13 @@ class CompletedActionStatus extends MetaJsonLd implements CompletedActionStatusI
     static public $schemaTypeScope = 'https://schema.org/CompletedActionStatus';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ActionStatusType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

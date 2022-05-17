@@ -42,6 +42,13 @@ class ArchiveComponent extends MetaJsonLd implements ArchiveComponentInterface, 
     static public $schemaTypeScope = 'https://schema.org/ArchiveComponent';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

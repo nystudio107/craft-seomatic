@@ -45,6 +45,13 @@ class OfficialLegalValue extends MetaJsonLd implements OfficialLegalValueInterfa
     static public $schemaTypeScope = 'https://schema.org/OfficialLegalValue';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'LegalValueLevel';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

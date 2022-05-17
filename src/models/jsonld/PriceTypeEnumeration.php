@@ -42,6 +42,13 @@ class PriceTypeEnumeration extends MetaJsonLd implements PriceTypeEnumerationInt
     static public $schemaTypeScope = 'https://schema.org/PriceTypeEnumeration';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Enumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

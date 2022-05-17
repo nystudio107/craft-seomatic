@@ -43,6 +43,13 @@ class MedicalProcedure extends MetaJsonLd implements MedicalProcedureInterface, 
     static public $schemaTypeScope = 'https://schema.org/MedicalProcedure';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalEntity';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

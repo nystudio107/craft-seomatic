@@ -41,6 +41,13 @@ class MarryAction extends MetaJsonLd implements MarryActionInterface, InteractAc
     static public $schemaTypeScope = 'https://schema.org/MarryAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'InteractAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

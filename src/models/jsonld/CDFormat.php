@@ -41,6 +41,13 @@ class CDFormat extends MetaJsonLd implements CDFormatInterface, MusicReleaseForm
     static public $schemaTypeScope = 'https://schema.org/CDFormat';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MusicReleaseFormatType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

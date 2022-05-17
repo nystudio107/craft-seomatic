@@ -42,6 +42,13 @@ class TobaccoNicotineConsideration extends MetaJsonLd implements TobaccoNicotine
     static public $schemaTypeScope = 'https://schema.org/TobaccoNicotineConsideration';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'AdultOrientedEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

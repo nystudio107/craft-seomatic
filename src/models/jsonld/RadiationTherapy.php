@@ -41,6 +41,13 @@ class RadiationTherapy extends MetaJsonLd implements RadiationTherapyInterface, 
     static public $schemaTypeScope = 'https://schema.org/RadiationTherapy';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalTherapy';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

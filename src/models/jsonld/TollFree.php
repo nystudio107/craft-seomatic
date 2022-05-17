@@ -41,6 +41,13 @@ class TollFree extends MetaJsonLd implements TollFreeInterface, ContactPointOpti
     static public $schemaTypeScope = 'https://schema.org/TollFree';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ContactPointOption';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

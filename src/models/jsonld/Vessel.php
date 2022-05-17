@@ -42,6 +42,13 @@ class Vessel extends MetaJsonLd implements VesselInterface, AnatomicalStructureI
     static public $schemaTypeScope = 'https://schema.org/Vessel';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'AnatomicalStructure';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

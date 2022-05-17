@@ -42,6 +42,13 @@ class BusinessAudience extends MetaJsonLd implements BusinessAudienceInterface, 
     static public $schemaTypeScope = 'https://schema.org/BusinessAudience';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Audience';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

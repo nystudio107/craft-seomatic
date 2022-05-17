@@ -41,6 +41,13 @@ class ReturnInStore extends MetaJsonLd implements ReturnInStoreInterface, Return
     static public $schemaTypeScope = 'https://schema.org/ReturnInStore';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ReturnMethodEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class Motorcycle extends MetaJsonLd implements MotorcycleInterface, VehicleInter
     static public $schemaTypeScope = 'https://schema.org/Motorcycle';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Vehicle';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

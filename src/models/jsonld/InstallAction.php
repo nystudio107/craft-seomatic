@@ -41,6 +41,13 @@ class InstallAction extends MetaJsonLd implements InstallActionInterface, Consum
     static public $schemaTypeScope = 'https://schema.org/InstallAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ConsumeAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

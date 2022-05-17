@@ -41,6 +41,13 @@ class True extends MetaJsonLd implements TrueInterface, BooleanInterface
     static public $schemaTypeScope = 'https://schema.org/True';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Boolean';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class OfflinePermanently extends MetaJsonLd implements OfflinePermanentlyInterfa
     static public $schemaTypeScope = 'https://schema.org/OfflinePermanently';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'GameServerStatus';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

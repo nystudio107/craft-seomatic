@@ -42,6 +42,13 @@ class LeisureTimeActivity extends MetaJsonLd implements LeisureTimeActivityInter
     static public $schemaTypeScope = 'https://schema.org/LeisureTimeActivity';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PhysicalActivityCategory';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

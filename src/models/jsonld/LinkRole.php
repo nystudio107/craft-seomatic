@@ -45,6 +45,13 @@ class LinkRole extends MetaJsonLd implements LinkRoleInterface, RoleInterface, I
     static public $schemaTypeScope = 'https://schema.org/LinkRole';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Role';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

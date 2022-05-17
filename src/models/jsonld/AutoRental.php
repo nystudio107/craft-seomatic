@@ -41,6 +41,13 @@ class AutoRental extends MetaJsonLd implements AutoRentalInterface, AutomotiveBu
     static public $schemaTypeScope = 'https://schema.org/AutoRental';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'AutomotiveBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

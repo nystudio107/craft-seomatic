@@ -41,6 +41,13 @@ class WearableMeasurementHeight extends MetaJsonLd implements WearableMeasuremen
     static public $schemaTypeScope = 'https://schema.org/WearableMeasurementHeight';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'WearableMeasurementTypeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

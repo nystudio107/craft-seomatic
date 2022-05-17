@@ -41,6 +41,13 @@ class Distillery extends MetaJsonLd implements DistilleryInterface, FoodEstablis
     static public $schemaTypeScope = 'https://schema.org/Distillery';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'FoodEstablishment';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

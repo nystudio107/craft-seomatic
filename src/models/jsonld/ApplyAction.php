@@ -43,6 +43,13 @@ class ApplyAction extends MetaJsonLd implements ApplyActionInterface, OrganizeAc
     static public $schemaTypeScope = 'https://schema.org/ApplyAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'OrganizeAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

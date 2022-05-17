@@ -41,6 +41,13 @@ class BusinessSupport extends MetaJsonLd implements BusinessSupportInterface, Go
     static public $schemaTypeScope = 'https://schema.org/BusinessSupport';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'GovernmentBenefitsType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

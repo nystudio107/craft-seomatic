@@ -41,6 +41,13 @@ class ResearchOrganization extends MetaJsonLd implements ResearchOrganizationInt
     static public $schemaTypeScope = 'https://schema.org/ResearchOrganization';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Organization';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

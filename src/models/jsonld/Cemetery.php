@@ -41,6 +41,13 @@ class Cemetery extends MetaJsonLd implements CemeteryInterface, CivicStructureIn
     static public $schemaTypeScope = 'https://schema.org/Cemetery';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CivicStructure';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

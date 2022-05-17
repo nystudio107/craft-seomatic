@@ -41,6 +41,13 @@ class TennisComplex extends MetaJsonLd implements TennisComplexInterface, Sports
     static public $schemaTypeScope = 'https://schema.org/TennisComplex';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'SportsActivityLocation';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

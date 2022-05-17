@@ -42,6 +42,13 @@ class BodyMeasurementFoot extends MetaJsonLd implements BodyMeasurementFootInter
     static public $schemaTypeScope = 'https://schema.org/BodyMeasurementFoot';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

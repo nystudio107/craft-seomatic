@@ -41,6 +41,13 @@ class ReadAction extends MetaJsonLd implements ReadActionInterface, ConsumeActio
     static public $schemaTypeScope = 'https://schema.org/ReadAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ConsumeAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -43,6 +43,13 @@ class OccupationalActivity extends MetaJsonLd implements OccupationalActivityInt
     static public $schemaTypeScope = 'https://schema.org/OccupationalActivity';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PhysicalActivityCategory';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

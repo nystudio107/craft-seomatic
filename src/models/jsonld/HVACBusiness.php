@@ -41,6 +41,13 @@ class HVACBusiness extends MetaJsonLd implements HVACBusinessInterface, HomeAndC
     static public $schemaTypeScope = 'https://schema.org/HVACBusiness';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'HomeAndConstructionBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

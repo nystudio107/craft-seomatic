@@ -41,6 +41,13 @@ class SRP extends MetaJsonLd implements SRPInterface, PriceTypeEnumerationInterf
     static public $schemaTypeScope = 'https://schema.org/SRP';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PriceTypeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

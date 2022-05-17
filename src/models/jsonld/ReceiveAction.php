@@ -46,6 +46,13 @@ class ReceiveAction extends MetaJsonLd implements ReceiveActionInterface, Transf
     static public $schemaTypeScope = 'https://schema.org/ReceiveAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'TransferAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

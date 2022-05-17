@@ -41,6 +41,13 @@ class DriveWheelConfigurationValue extends MetaJsonLd implements DriveWheelConfi
     static public $schemaTypeScope = 'https://schema.org/DriveWheelConfigurationValue';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'QualitativeValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

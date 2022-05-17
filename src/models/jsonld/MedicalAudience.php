@@ -41,6 +41,13 @@ class MedicalAudience extends MetaJsonLd implements MedicalAudienceInterface, Au
     static public $schemaTypeScope = 'https://schema.org/MedicalAudience';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Audience';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

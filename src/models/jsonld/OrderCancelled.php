@@ -41,6 +41,13 @@ class OrderCancelled extends MetaJsonLd implements OrderCancelledInterface, Orde
     static public $schemaTypeScope = 'https://schema.org/OrderCancelled';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'OrderStatus';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

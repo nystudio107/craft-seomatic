@@ -43,6 +43,13 @@ class LegalService extends MetaJsonLd implements LegalServiceInterface, LocalBus
     static public $schemaTypeScope = 'https://schema.org/LegalService';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'LocalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

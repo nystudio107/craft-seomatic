@@ -41,6 +41,13 @@ class EnrollingByInvitation extends MetaJsonLd implements EnrollingByInvitationI
     static public $schemaTypeScope = 'https://schema.org/EnrollingByInvitation';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalStudyStatus';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

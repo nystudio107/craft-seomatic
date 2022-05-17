@@ -42,6 +42,13 @@ class Optician extends MetaJsonLd implements OpticianInterface, MedicalBusinessI
     static public $schemaTypeScope = 'https://schema.org/Optician';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

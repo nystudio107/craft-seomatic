@@ -41,6 +41,13 @@ class DiscoverAction extends MetaJsonLd implements DiscoverActionInterface, Find
     static public $schemaTypeScope = 'https://schema.org/DiscoverAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'FindAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

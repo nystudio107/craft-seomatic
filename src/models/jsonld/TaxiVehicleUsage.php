@@ -41,6 +41,13 @@ class TaxiVehicleUsage extends MetaJsonLd implements TaxiVehicleUsageInterface, 
     static public $schemaTypeScope = 'https://schema.org/TaxiVehicleUsage';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CarUsageType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

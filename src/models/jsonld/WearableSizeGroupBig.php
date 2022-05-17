@@ -41,6 +41,13 @@ class WearableSizeGroupBig extends MetaJsonLd implements WearableSizeGroupBigInt
     static public $schemaTypeScope = 'https://schema.org/WearableSizeGroupBig';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'WearableSizeGroupEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

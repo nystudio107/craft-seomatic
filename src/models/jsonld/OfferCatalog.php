@@ -42,6 +42,13 @@ class OfferCatalog extends MetaJsonLd implements OfferCatalogInterface, ItemList
     static public $schemaTypeScope = 'https://schema.org/OfferCatalog';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ItemList';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

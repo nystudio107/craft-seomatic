@@ -49,6 +49,13 @@ class CriticReview extends MetaJsonLd implements CriticReviewInterface, ReviewIn
     static public $schemaTypeScope = 'https://schema.org/CriticReview';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Review';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

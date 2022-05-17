@@ -42,6 +42,13 @@ class BroadcastService extends MetaJsonLd implements BroadcastServiceInterface, 
     static public $schemaTypeScope = 'https://schema.org/BroadcastService';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Service';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

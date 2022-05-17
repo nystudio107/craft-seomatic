@@ -41,6 +41,13 @@ class InternationalTrial extends MetaJsonLd implements InternationalTrialInterfa
     static public $schemaTypeScope = 'https://schema.org/InternationalTrial';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalTrialDesign';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

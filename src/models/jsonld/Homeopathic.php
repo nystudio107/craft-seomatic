@@ -42,6 +42,13 @@ class Homeopathic extends MetaJsonLd implements HomeopathicInterface, MedicineSy
     static public $schemaTypeScope = 'https://schema.org/Homeopathic';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicineSystem';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

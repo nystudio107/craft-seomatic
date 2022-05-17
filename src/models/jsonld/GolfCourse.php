@@ -41,6 +41,13 @@ class GolfCourse extends MetaJsonLd implements GolfCourseInterface, SportsActivi
     static public $schemaTypeScope = 'https://schema.org/GolfCourse';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'SportsActivityLocation';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

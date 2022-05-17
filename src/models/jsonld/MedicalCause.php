@@ -56,6 +56,13 @@ class MedicalCause extends MetaJsonLd implements MedicalCauseInterface, MedicalE
     static public $schemaTypeScope = 'https://schema.org/MedicalCause';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalEntity';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class RadioSeason extends MetaJsonLd implements RadioSeasonInterface, CreativeWo
     static public $schemaTypeScope = 'https://schema.org/RadioSeason';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWorkSeason';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

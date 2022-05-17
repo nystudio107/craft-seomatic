@@ -41,6 +41,13 @@ class UseAction extends MetaJsonLd implements UseActionInterface, ConsumeActionI
     static public $schemaTypeScope = 'https://schema.org/UseAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ConsumeAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

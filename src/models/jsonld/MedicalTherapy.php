@@ -46,6 +46,13 @@ class MedicalTherapy extends MetaJsonLd implements MedicalTherapyInterface, Ther
     static public $schemaTypeScope = 'https://schema.org/MedicalTherapy';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'TherapeuticProcedure';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

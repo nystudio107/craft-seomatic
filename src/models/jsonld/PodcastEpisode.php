@@ -41,6 +41,13 @@ class PodcastEpisode extends MetaJsonLd implements PodcastEpisodeInterface, Epis
     static public $schemaTypeScope = 'https://schema.org/PodcastEpisode';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Episode';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class GameAvailabilityEnumeration extends MetaJsonLd implements GameAvailability
     static public $schemaTypeScope = 'https://schema.org/GameAvailabilityEnumeration';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Enumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class SuspendAction extends MetaJsonLd implements SuspendActionInterface, Contro
     static public $schemaTypeScope = 'https://schema.org/SuspendAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ControlAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

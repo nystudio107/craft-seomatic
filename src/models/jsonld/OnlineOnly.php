@@ -41,6 +41,13 @@ class OnlineOnly extends MetaJsonLd implements OnlineOnlyInterface, ItemAvailabi
     static public $schemaTypeScope = 'https://schema.org/OnlineOnly';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ItemAvailability';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

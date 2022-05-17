@@ -41,6 +41,13 @@ class HealthPlanNetwork extends MetaJsonLd implements HealthPlanNetworkInterface
     static public $schemaTypeScope = 'https://schema.org/HealthPlanNetwork';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

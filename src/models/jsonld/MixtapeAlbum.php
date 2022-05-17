@@ -41,6 +41,13 @@ class MixtapeAlbum extends MetaJsonLd implements MixtapeAlbumInterface, MusicAlb
     static public $schemaTypeScope = 'https://schema.org/MixtapeAlbum';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MusicAlbumProductionType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -44,6 +44,13 @@ class BedDetails extends MetaJsonLd implements BedDetailsInterface, IntangibleIn
     static public $schemaTypeScope = 'https://schema.org/BedDetails';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

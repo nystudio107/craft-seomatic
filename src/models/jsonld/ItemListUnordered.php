@@ -41,6 +41,13 @@ class ItemListUnordered extends MetaJsonLd implements ItemListUnorderedInterface
     static public $schemaTypeScope = 'https://schema.org/ItemListUnordered';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ItemListOrderType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

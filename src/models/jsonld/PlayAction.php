@@ -47,6 +47,13 @@ class PlayAction extends MetaJsonLd implements PlayActionInterface, ActionInterf
     static public $schemaTypeScope = 'https://schema.org/PlayAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Action';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class RsvpResponseMaybe extends MetaJsonLd implements RsvpResponseMaybeInterface
     static public $schemaTypeScope = 'https://schema.org/RsvpResponseMaybe';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'RsvpResponseType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

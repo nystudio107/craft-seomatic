@@ -43,6 +43,13 @@ class ExercisePlan extends MetaJsonLd implements ExercisePlanInterface, Creative
     static public $schemaTypeScope = 'https://schema.org/ExercisePlan';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class CollectionPage extends MetaJsonLd implements CollectionPageInterface, WebP
     static public $schemaTypeScope = 'https://schema.org/CollectionPage';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'WebPage';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

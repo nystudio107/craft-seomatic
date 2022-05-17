@@ -50,6 +50,13 @@ class CohortStudy extends MetaJsonLd implements CohortStudyInterface, MedicalObs
     static public $schemaTypeScope = 'https://schema.org/CohortStudy';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalObservationalStudyDesign';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

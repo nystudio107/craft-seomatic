@@ -41,6 +41,13 @@ class ContactPage extends MetaJsonLd implements ContactPageInterface, WebPageInt
     static public $schemaTypeScope = 'https://schema.org/ContactPage';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'WebPage';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

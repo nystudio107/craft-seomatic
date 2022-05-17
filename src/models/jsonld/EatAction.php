@@ -41,6 +41,13 @@ class EatAction extends MetaJsonLd implements EatActionInterface, ConsumeActionI
     static public $schemaTypeScope = 'https://schema.org/EatAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ConsumeAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

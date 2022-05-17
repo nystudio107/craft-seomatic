@@ -44,6 +44,13 @@ class MedicalSpecialty extends MetaJsonLd implements MedicalSpecialtyInterface, 
     static public $schemaTypeScope = 'https://schema.org/MedicalSpecialty';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Specialty';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

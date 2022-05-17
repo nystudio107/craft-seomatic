@@ -41,6 +41,13 @@ class Festival extends MetaJsonLd implements FestivalInterface, EventInterface, 
     static public $schemaTypeScope = 'https://schema.org/Festival';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Event';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

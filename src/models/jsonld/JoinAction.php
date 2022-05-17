@@ -46,6 +46,13 @@ class JoinAction extends MetaJsonLd implements JoinActionInterface, InteractActi
     static public $schemaTypeScope = 'https://schema.org/JoinAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'InteractAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -43,6 +43,13 @@ class SelfCareHealthAspect extends MetaJsonLd implements SelfCareHealthAspectInt
     static public $schemaTypeScope = 'https://schema.org/SelfCareHealthAspect';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'HealthAspectEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

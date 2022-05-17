@@ -41,6 +41,13 @@ class Abdomen extends MetaJsonLd implements AbdomenInterface, PhysicalExamInterf
     static public $schemaTypeScope = 'https://schema.org/Abdomen';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PhysicalExam';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

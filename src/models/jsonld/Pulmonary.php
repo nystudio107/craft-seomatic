@@ -42,6 +42,13 @@ class Pulmonary extends MetaJsonLd implements PulmonaryInterface, MedicalSpecial
     static public $schemaTypeScope = 'https://schema.org/Pulmonary';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalSpecialty';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

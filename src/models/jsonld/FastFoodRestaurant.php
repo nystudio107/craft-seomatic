@@ -41,6 +41,13 @@ class FastFoodRestaurant extends MetaJsonLd implements FastFoodRestaurantInterfa
     static public $schemaTypeScope = 'https://schema.org/FastFoodRestaurant';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'FoodEstablishment';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

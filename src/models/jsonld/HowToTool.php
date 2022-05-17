@@ -42,6 +42,13 @@ class HowToTool extends MetaJsonLd implements HowToToolInterface, HowToItemInter
     static public $schemaTypeScope = 'https://schema.org/HowToTool';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'HowToItem';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

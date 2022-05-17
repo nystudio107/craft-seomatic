@@ -42,6 +42,13 @@ class Chiropractic extends MetaJsonLd implements ChiropracticInterface, Medicine
     static public $schemaTypeScope = 'https://schema.org/Chiropractic';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicineSystem';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class WinAction extends MetaJsonLd implements WinActionInterface, AchieveActionI
     static public $schemaTypeScope = 'https://schema.org/WinAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'AchieveAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

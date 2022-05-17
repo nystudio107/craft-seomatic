@@ -41,6 +41,13 @@ class Organization extends MetaJsonLd implements OrganizationInterface, ThingInt
     static public $schemaTypeScope = 'https://schema.org/Organization';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Thing';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

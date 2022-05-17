@@ -42,6 +42,13 @@ class ReturnShippingFees extends MetaJsonLd implements ReturnShippingFeesInterfa
     static public $schemaTypeScope = 'https://schema.org/ReturnShippingFees';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ReturnFeesEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

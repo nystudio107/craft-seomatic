@@ -41,6 +41,13 @@ class PaymentComplete extends MetaJsonLd implements PaymentCompleteInterface, Pa
     static public $schemaTypeScope = 'https://schema.org/PaymentComplete';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PaymentStatusType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

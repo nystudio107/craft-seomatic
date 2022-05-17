@@ -44,6 +44,13 @@ class House extends MetaJsonLd implements HouseInterface, AccommodationInterface
     static public $schemaTypeScope = 'https://schema.org/House';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Accommodation';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

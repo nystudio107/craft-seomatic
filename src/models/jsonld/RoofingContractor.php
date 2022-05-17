@@ -41,6 +41,13 @@ class RoofingContractor extends MetaJsonLd implements RoofingContractorInterface
     static public $schemaTypeScope = 'https://schema.org/RoofingContractor';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'HomeAndConstructionBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

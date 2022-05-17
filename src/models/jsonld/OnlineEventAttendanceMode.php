@@ -41,6 +41,13 @@ class OnlineEventAttendanceMode extends MetaJsonLd implements OnlineEventAttenda
     static public $schemaTypeScope = 'https://schema.org/OnlineEventAttendanceMode';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'EventAttendanceModeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class Ticket extends MetaJsonLd implements TicketInterface, IntangibleInterface,
     static public $schemaTypeScope = 'https://schema.org/Ticket';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

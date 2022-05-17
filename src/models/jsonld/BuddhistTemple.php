@@ -41,6 +41,13 @@ class BuddhistTemple extends MetaJsonLd implements BuddhistTempleInterface, Plac
     static public $schemaTypeScope = 'https://schema.org/BuddhistTemple';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PlaceOfWorship';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

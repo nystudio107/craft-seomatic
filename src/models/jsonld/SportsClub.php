@@ -41,6 +41,13 @@ class SportsClub extends MetaJsonLd implements SportsClubInterface, SportsActivi
     static public $schemaTypeScope = 'https://schema.org/SportsClub';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'SportsActivityLocation';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

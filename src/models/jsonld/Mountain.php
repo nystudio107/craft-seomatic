@@ -41,6 +41,13 @@ class Mountain extends MetaJsonLd implements MountainInterface, LandformInterfac
     static public $schemaTypeScope = 'https://schema.org/Mountain';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Landform';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

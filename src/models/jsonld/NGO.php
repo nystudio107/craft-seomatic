@@ -41,6 +41,13 @@ class NGO extends MetaJsonLd implements NGOInterface, OrganizationInterface, Thi
     static public $schemaTypeScope = 'https://schema.org/NGO';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Organization';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

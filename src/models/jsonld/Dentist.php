@@ -41,6 +41,13 @@ class Dentist extends MetaJsonLd implements DentistInterface, MedicalOrganizatio
     static public $schemaTypeScope = 'https://schema.org/Dentist';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalOrganization';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

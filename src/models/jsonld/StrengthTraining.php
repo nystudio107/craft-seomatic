@@ -42,6 +42,13 @@ class StrengthTraining extends MetaJsonLd implements StrengthTrainingInterface, 
     static public $schemaTypeScope = 'https://schema.org/StrengthTraining';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PhysicalActivityCategory';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

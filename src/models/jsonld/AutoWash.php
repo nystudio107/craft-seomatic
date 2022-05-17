@@ -41,6 +41,13 @@ class AutoWash extends MetaJsonLd implements AutoWashInterface, AutomotiveBusine
     static public $schemaTypeScope = 'https://schema.org/AutoWash';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'AutomotiveBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

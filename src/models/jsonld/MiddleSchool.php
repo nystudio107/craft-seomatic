@@ -42,6 +42,13 @@ class MiddleSchool extends MetaJsonLd implements MiddleSchoolInterface, Educatio
     static public $schemaTypeScope = 'https://schema.org/MiddleSchool';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'EducationalOrganization';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

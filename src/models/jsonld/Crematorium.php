@@ -41,6 +41,13 @@ class Crematorium extends MetaJsonLd implements CrematoriumInterface, CivicStruc
     static public $schemaTypeScope = 'https://schema.org/Crematorium';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CivicStructure';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

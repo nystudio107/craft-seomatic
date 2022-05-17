@@ -41,6 +41,13 @@ class ProfilePage extends MetaJsonLd implements ProfilePageInterface, WebPageInt
     static public $schemaTypeScope = 'https://schema.org/ProfilePage';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'WebPage';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

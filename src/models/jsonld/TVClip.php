@@ -41,6 +41,13 @@ class TVClip extends MetaJsonLd implements TVClipInterface, ClipInterface, Creat
     static public $schemaTypeScope = 'https://schema.org/TVClip';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Clip';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

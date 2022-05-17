@@ -41,6 +41,13 @@ class Pond extends MetaJsonLd implements PondInterface, BodyOfWaterInterface, La
     static public $schemaTypeScope = 'https://schema.org/Pond';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'BodyOfWater';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

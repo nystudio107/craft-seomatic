@@ -42,6 +42,13 @@ class MobileApplication extends MetaJsonLd implements MobileApplicationInterface
     static public $schemaTypeScope = 'https://schema.org/MobileApplication';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'SoftwareApplication';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

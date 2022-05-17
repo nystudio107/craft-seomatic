@@ -41,6 +41,13 @@ class MedicalEvidenceLevel extends MetaJsonLd implements MedicalEvidenceLevelInt
     static public $schemaTypeScope = 'https://schema.org/MedicalEvidenceLevel';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

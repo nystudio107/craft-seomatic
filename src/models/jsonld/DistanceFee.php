@@ -42,6 +42,13 @@ class DistanceFee extends MetaJsonLd implements DistanceFeeInterface, PriceCompo
     static public $schemaTypeScope = 'https://schema.org/DistanceFee';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PriceComponentTypeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

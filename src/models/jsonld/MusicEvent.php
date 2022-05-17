@@ -41,6 +41,13 @@ class MusicEvent extends MetaJsonLd implements MusicEventInterface, EventInterfa
     static public $schemaTypeScope = 'https://schema.org/MusicEvent';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Event';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

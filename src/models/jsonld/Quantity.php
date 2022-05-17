@@ -42,6 +42,13 @@ class Quantity extends MetaJsonLd implements QuantityInterface, IntangibleInterf
     static public $schemaTypeScope = 'https://schema.org/Quantity';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

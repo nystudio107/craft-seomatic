@@ -58,6 +58,13 @@ class SatireOrParodyContent extends MetaJsonLd implements SatireOrParodyContentI
     static public $schemaTypeScope = 'https://schema.org/SatireOrParodyContent';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MediaManipulationRatingEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

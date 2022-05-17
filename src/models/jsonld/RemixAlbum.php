@@ -41,6 +41,13 @@ class RemixAlbum extends MetaJsonLd implements RemixAlbumInterface, MusicAlbumPr
     static public $schemaTypeScope = 'https://schema.org/RemixAlbum';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MusicAlbumProductionType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

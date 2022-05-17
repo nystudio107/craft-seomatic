@@ -41,6 +41,13 @@ class RelatedTopicsHealthAspect extends MetaJsonLd implements RelatedTopicsHealt
     static public $schemaTypeScope = 'https://schema.org/RelatedTopicsHealthAspect';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'HealthAspectEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

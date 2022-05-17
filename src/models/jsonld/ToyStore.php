@@ -41,6 +41,13 @@ class ToyStore extends MetaJsonLd implements ToyStoreInterface, StoreInterface, 
     static public $schemaTypeScope = 'https://schema.org/ToyStore';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Store';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

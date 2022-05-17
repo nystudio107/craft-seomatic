@@ -41,6 +41,13 @@ class Boolean extends MetaJsonLd implements BooleanInterface
     static public $schemaTypeScope = 'https://schema.org/Boolean';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Thing';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

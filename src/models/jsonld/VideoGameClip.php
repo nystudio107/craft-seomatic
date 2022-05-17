@@ -41,6 +41,13 @@ class VideoGameClip extends MetaJsonLd implements VideoGameClipInterface, ClipIn
     static public $schemaTypeScope = 'https://schema.org/VideoGameClip';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Clip';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

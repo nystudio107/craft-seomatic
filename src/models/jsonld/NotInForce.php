@@ -41,6 +41,13 @@ class NotInForce extends MetaJsonLd implements NotInForceInterface, LegalForceSt
     static public $schemaTypeScope = 'https://schema.org/NotInForce';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'LegalForceStatus';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

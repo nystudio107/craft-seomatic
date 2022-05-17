@@ -41,6 +41,13 @@ class MedicalProcedureType extends MetaJsonLd implements MedicalProcedureTypeInt
     static public $schemaTypeScope = 'https://schema.org/MedicalProcedureType';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

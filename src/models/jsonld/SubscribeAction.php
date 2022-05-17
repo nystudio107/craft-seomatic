@@ -49,6 +49,13 @@ class SubscribeAction extends MetaJsonLd implements SubscribeActionInterface, In
     static public $schemaTypeScope = 'https://schema.org/SubscribeAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'InteractAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

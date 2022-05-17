@@ -41,6 +41,13 @@ class SomeProducts extends MetaJsonLd implements SomeProductsInterface, ProductI
     static public $schemaTypeScope = 'https://schema.org/SomeProducts';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Product';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class AutoDealer extends MetaJsonLd implements AutoDealerInterface, AutomotiveBu
     static public $schemaTypeScope = 'https://schema.org/AutoDealer';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'AutomotiveBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

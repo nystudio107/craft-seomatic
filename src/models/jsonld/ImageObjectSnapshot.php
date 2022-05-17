@@ -46,6 +46,13 @@ class ImageObjectSnapshot extends MetaJsonLd implements ImageObjectSnapshotInter
     static public $schemaTypeScope = 'https://schema.org/ImageObjectSnapshot';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ImageObject';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -43,6 +43,13 @@ class Newspaper extends MetaJsonLd implements NewspaperInterface, PeriodicalInte
     static public $schemaTypeScope = 'https://schema.org/Newspaper';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Periodical';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class MisconceptionsHealthAspect extends MetaJsonLd implements MisconceptionsHea
     static public $schemaTypeScope = 'https://schema.org/MisconceptionsHealthAspect';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'HealthAspectEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

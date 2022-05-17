@@ -41,6 +41,13 @@ class DigitalAudioTapeFormat extends MetaJsonLd implements DigitalAudioTapeForma
     static public $schemaTypeScope = 'https://schema.org/DigitalAudioTapeFormat';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MusicReleaseFormatType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class NoteDigitalDocument extends MetaJsonLd implements NoteDigitalDocumentInter
     static public $schemaTypeScope = 'https://schema.org/NoteDigitalDocument';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'DigitalDocument';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

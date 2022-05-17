@@ -41,6 +41,13 @@ class RefurbishedCondition extends MetaJsonLd implements RefurbishedConditionInt
     static public $schemaTypeScope = 'https://schema.org/RefurbishedCondition';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'OfferItemCondition';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

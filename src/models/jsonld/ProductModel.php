@@ -42,6 +42,13 @@ class ProductModel extends MetaJsonLd implements ProductModelInterface, ProductI
     static public $schemaTypeScope = 'https://schema.org/ProductModel';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Product';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

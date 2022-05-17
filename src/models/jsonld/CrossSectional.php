@@ -43,6 +43,13 @@ class CrossSectional extends MetaJsonLd implements CrossSectionalInterface, Medi
     static public $schemaTypeScope = 'https://schema.org/CrossSectional';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalObservationalStudyDesign';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

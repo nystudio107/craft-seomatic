@@ -44,6 +44,13 @@ class OnlineBusiness extends MetaJsonLd implements OnlineBusinessInterface, Orga
     static public $schemaTypeScope = 'https://schema.org/OnlineBusiness';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Organization';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

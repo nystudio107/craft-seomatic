@@ -44,6 +44,13 @@ class LeaveAction extends MetaJsonLd implements LeaveActionInterface, InteractAc
     static public $schemaTypeScope = 'https://schema.org/LeaveAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'InteractAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

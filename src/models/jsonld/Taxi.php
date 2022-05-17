@@ -41,6 +41,13 @@ class Taxi extends MetaJsonLd implements TaxiInterface, ServiceInterface, Intang
     static public $schemaTypeScope = 'https://schema.org/Taxi';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Service';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

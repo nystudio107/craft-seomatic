@@ -42,6 +42,13 @@ class ExhibitionEvent extends MetaJsonLd implements ExhibitionEventInterface, Ev
     static public $schemaTypeScope = 'https://schema.org/ExhibitionEvent';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Event';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -45,6 +45,13 @@ class UnRegisterAction extends MetaJsonLd implements UnRegisterActionInterface, 
     static public $schemaTypeScope = 'https://schema.org/UnRegisterAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'InteractAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

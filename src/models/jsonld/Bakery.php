@@ -41,6 +41,13 @@ class Bakery extends MetaJsonLd implements BakeryInterface, FoodEstablishmentInt
     static public $schemaTypeScope = 'https://schema.org/Bakery';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'FoodEstablishment';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

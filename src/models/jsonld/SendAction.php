@@ -45,6 +45,13 @@ class SendAction extends MetaJsonLd implements SendActionInterface, TransferActi
     static public $schemaTypeScope = 'https://schema.org/SendAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'TransferAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

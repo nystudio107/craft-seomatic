@@ -41,6 +41,13 @@ class Airline extends MetaJsonLd implements AirlineInterface, OrganizationInterf
     static public $schemaTypeScope = 'https://schema.org/Airline';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Organization';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

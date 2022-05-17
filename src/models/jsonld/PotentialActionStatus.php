@@ -41,6 +41,13 @@ class PotentialActionStatus extends MetaJsonLd implements PotentialActionStatusI
     static public $schemaTypeScope = 'https://schema.org/PotentialActionStatus';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ActionStatusType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

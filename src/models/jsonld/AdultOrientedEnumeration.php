@@ -42,6 +42,13 @@ class AdultOrientedEnumeration extends MetaJsonLd implements AdultOrientedEnumer
     static public $schemaTypeScope = 'https://schema.org/AdultOrientedEnumeration';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Enumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

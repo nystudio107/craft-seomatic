@@ -41,6 +41,13 @@ class DamagedCondition extends MetaJsonLd implements DamagedConditionInterface, 
     static public $schemaTypeScope = 'https://schema.org/DamagedCondition';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'OfferItemCondition';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

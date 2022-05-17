@@ -44,6 +44,13 @@ class Project extends MetaJsonLd implements ProjectInterface, OrganizationInterf
     static public $schemaTypeScope = 'https://schema.org/Project';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Organization';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

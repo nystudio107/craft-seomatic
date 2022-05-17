@@ -49,6 +49,13 @@ class FundingScheme extends MetaJsonLd implements FundingSchemeInterface, Organi
     static public $schemaTypeScope = 'https://schema.org/FundingScheme';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Organization';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

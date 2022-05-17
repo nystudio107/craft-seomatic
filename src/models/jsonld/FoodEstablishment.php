@@ -41,6 +41,13 @@ class FoodEstablishment extends MetaJsonLd implements FoodEstablishmentInterface
     static public $schemaTypeScope = 'https://schema.org/FoodEstablishment';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'LocalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

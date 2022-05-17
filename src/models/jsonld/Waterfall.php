@@ -41,6 +41,13 @@ class Waterfall extends MetaJsonLd implements WaterfallInterface, BodyOfWaterInt
     static public $schemaTypeScope = 'https://schema.org/Waterfall';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'BodyOfWater';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class PreSale extends MetaJsonLd implements PreSaleInterface, ItemAvailabilityIn
     static public $schemaTypeScope = 'https://schema.org/PreSale';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ItemAvailability';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

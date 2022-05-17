@@ -41,6 +41,13 @@ class LivingWithHealthAspect extends MetaJsonLd implements LivingWithHealthAspec
     static public $schemaTypeScope = 'https://schema.org/LivingWithHealthAspect';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'HealthAspectEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class Drawing extends MetaJsonLd implements DrawingInterface, CreativeWorkInterf
     static public $schemaTypeScope = 'https://schema.org/Drawing';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

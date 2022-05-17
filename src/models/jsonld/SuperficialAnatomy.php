@@ -58,6 +58,13 @@ class SuperficialAnatomy extends MetaJsonLd implements SuperficialAnatomyInterfa
     static public $schemaTypeScope = 'https://schema.org/SuperficialAnatomy';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalEntity';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

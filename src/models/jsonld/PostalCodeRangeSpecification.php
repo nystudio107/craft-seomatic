@@ -42,6 +42,13 @@ class PostalCodeRangeSpecification extends MetaJsonLd implements PostalCodeRange
     static public $schemaTypeScope = 'https://schema.org/PostalCodeRangeSpecification';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'StructuredValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

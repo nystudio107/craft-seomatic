@@ -41,6 +41,13 @@ class BloodTest extends MetaJsonLd implements BloodTestInterface, MedicalTestInt
     static public $schemaTypeScope = 'https://schema.org/BloodTest';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalTest';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class OutOfStock extends MetaJsonLd implements OutOfStockInterface, ItemAvailabi
     static public $schemaTypeScope = 'https://schema.org/OutOfStock';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ItemAvailability';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

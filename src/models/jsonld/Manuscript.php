@@ -42,6 +42,13 @@ class Manuscript extends MetaJsonLd implements ManuscriptInterface, CreativeWork
     static public $schemaTypeScope = 'https://schema.org/Manuscript';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

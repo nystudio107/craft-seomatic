@@ -41,6 +41,13 @@ class PerformAction extends MetaJsonLd implements PerformActionInterface, PlayAc
     static public $schemaTypeScope = 'https://schema.org/PerformAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PlayAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

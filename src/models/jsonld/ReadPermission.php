@@ -41,6 +41,13 @@ class ReadPermission extends MetaJsonLd implements ReadPermissionInterface, Digi
     static public $schemaTypeScope = 'https://schema.org/ReadPermission';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'DigitalDocumentPermissionType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

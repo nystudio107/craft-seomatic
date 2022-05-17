@@ -41,6 +41,13 @@ class GroceryStore extends MetaJsonLd implements GroceryStoreInterface, StoreInt
     static public $schemaTypeScope = 'https://schema.org/GroceryStore';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Store';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class Diagnostic extends MetaJsonLd implements DiagnosticInterface, MedicalDevic
     static public $schemaTypeScope = 'https://schema.org/Diagnostic';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalDevicePurpose';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

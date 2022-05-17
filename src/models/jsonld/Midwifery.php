@@ -43,6 +43,13 @@ class Midwifery extends MetaJsonLd implements MidwiferyInterface, MedicalBusines
     static public $schemaTypeScope = 'https://schema.org/Midwifery';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

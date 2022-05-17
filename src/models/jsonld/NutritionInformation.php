@@ -41,6 +41,13 @@ class NutritionInformation extends MetaJsonLd implements NutritionInformationInt
     static public $schemaTypeScope = 'https://schema.org/NutritionInformation';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'StructuredValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

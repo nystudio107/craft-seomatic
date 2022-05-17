@@ -41,6 +41,13 @@ class PrependAction extends MetaJsonLd implements PrependActionInterface, Insert
     static public $schemaTypeScope = 'https://schema.org/PrependAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'InsertAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

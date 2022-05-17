@@ -42,6 +42,13 @@ class EngineSpecification extends MetaJsonLd implements EngineSpecificationInter
     static public $schemaTypeScope = 'https://schema.org/EngineSpecification';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'StructuredValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

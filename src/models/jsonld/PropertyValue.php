@@ -47,6 +47,13 @@ class PropertyValue extends MetaJsonLd implements PropertyValueInterface, Struct
     static public $schemaTypeScope = 'https://schema.org/PropertyValue';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'StructuredValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

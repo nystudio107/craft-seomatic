@@ -43,6 +43,13 @@ class MedicalClinic extends MetaJsonLd implements MedicalClinicInterface, Medica
     static public $schemaTypeScope = 'https://schema.org/MedicalClinic';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalOrganization';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

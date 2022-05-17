@@ -41,6 +41,13 @@ class MedicalTrialDesign extends MetaJsonLd implements MedicalTrialDesignInterfa
     static public $schemaTypeScope = 'https://schema.org/MedicalTrialDesign';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class ElementarySchool extends MetaJsonLd implements ElementarySchoolInterface, 
     static public $schemaTypeScope = 'https://schema.org/ElementarySchool';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'EducationalOrganization';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

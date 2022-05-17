@@ -42,6 +42,13 @@ class BodyMeasurementHips extends MetaJsonLd implements BodyMeasurementHipsInter
     static public $schemaTypeScope = 'https://schema.org/BodyMeasurementHips';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

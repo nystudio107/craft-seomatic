@@ -41,6 +41,13 @@ class LockerDelivery extends MetaJsonLd implements LockerDeliveryInterface, Deli
     static public $schemaTypeScope = 'https://schema.org/LockerDelivery';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'DeliveryMethod';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

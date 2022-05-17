@@ -41,6 +41,13 @@ class PaymentDue extends MetaJsonLd implements PaymentDueInterface, PaymentStatu
     static public $schemaTypeScope = 'https://schema.org/PaymentDue';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PaymentStatusType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

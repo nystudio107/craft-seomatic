@@ -41,6 +41,13 @@ class TieAction extends MetaJsonLd implements TieActionInterface, AchieveActionI
     static public $schemaTypeScope = 'https://schema.org/TieAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'AchieveAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

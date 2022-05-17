@@ -41,6 +41,13 @@ class MerchantReturnEnumeration extends MetaJsonLd implements MerchantReturnEnum
     static public $schemaTypeScope = 'https://schema.org/MerchantReturnEnumeration';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Enumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

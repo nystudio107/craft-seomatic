@@ -41,6 +41,13 @@ class Online extends MetaJsonLd implements OnlineInterface, GameServerStatusInte
     static public $schemaTypeScope = 'https://schema.org/Online';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'GameServerStatus';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

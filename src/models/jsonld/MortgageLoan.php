@@ -42,6 +42,13 @@ class MortgageLoan extends MetaJsonLd implements MortgageLoanInterface, LoanOrCr
     static public $schemaTypeScope = 'https://schema.org/MortgageLoan';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'LoanOrCredit';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

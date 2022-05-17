@@ -41,6 +41,13 @@ class ConvenienceStore extends MetaJsonLd implements ConvenienceStoreInterface, 
     static public $schemaTypeScope = 'https://schema.org/ConvenienceStore';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Store';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

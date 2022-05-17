@@ -42,6 +42,13 @@ class EventScheduled extends MetaJsonLd implements EventScheduledInterface, Even
     static public $schemaTypeScope = 'https://schema.org/EventScheduled';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'EventStatusType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

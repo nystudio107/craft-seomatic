@@ -45,6 +45,13 @@ class TouristTrip extends MetaJsonLd implements TouristTripInterface, TripInterf
     static public $schemaTypeScope = 'https://schema.org/TouristTrip';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Trip';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

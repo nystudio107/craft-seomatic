@@ -41,6 +41,13 @@ class MedicalWebPage extends MetaJsonLd implements MedicalWebPageInterface, WebP
     static public $schemaTypeScope = 'https://schema.org/MedicalWebPage';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'WebPage';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

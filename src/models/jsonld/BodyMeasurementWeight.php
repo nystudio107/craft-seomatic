@@ -41,6 +41,13 @@ class BodyMeasurementWeight extends MetaJsonLd implements BodyMeasurementWeightI
     static public $schemaTypeScope = 'https://schema.org/BodyMeasurementWeight';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

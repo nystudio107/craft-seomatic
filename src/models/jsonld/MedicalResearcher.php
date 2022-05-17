@@ -41,6 +41,13 @@ class MedicalResearcher extends MetaJsonLd implements MedicalResearcherInterface
     static public $schemaTypeScope = 'https://schema.org/MedicalResearcher';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalAudienceType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

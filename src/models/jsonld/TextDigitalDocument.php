@@ -41,6 +41,13 @@ class TextDigitalDocument extends MetaJsonLd implements TextDigitalDocumentInter
     static public $schemaTypeScope = 'https://schema.org/TextDigitalDocument';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'DigitalDocument';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

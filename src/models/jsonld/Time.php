@@ -43,6 +43,13 @@ class Time extends MetaJsonLd implements TimeInterface
     static public $schemaTypeScope = 'https://schema.org/Time';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Thing';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

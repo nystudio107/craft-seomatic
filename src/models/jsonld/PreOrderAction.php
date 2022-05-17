@@ -42,6 +42,13 @@ class PreOrderAction extends MetaJsonLd implements PreOrderActionInterface, Trad
     static public $schemaTypeScope = 'https://schema.org/PreOrderAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'TradeAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

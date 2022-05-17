@@ -41,6 +41,13 @@ class DeleteAction extends MetaJsonLd implements DeleteActionInterface, UpdateAc
     static public $schemaTypeScope = 'https://schema.org/DeleteAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'UpdateAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

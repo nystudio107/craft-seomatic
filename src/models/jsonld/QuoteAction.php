@@ -42,6 +42,13 @@ class QuoteAction extends MetaJsonLd implements QuoteActionInterface, TradeActio
     static public $schemaTypeScope = 'https://schema.org/QuoteAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'TradeAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

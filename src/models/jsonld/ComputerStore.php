@@ -41,6 +41,13 @@ class ComputerStore extends MetaJsonLd implements ComputerStoreInterface, StoreI
     static public $schemaTypeScope = 'https://schema.org/ComputerStore';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Store';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

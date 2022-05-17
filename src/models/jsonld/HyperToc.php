@@ -46,6 +46,13 @@ class HyperToc extends MetaJsonLd implements HyperTocInterface, CreativeWorkInte
     static public $schemaTypeScope = 'https://schema.org/HyperToc';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

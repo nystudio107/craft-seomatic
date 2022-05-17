@@ -42,6 +42,13 @@ class Obstetric extends MetaJsonLd implements ObstetricInterface, MedicalBusines
     static public $schemaTypeScope = 'https://schema.org/Obstetric';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

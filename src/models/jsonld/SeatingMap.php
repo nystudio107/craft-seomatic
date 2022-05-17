@@ -41,6 +41,13 @@ class SeatingMap extends MetaJsonLd implements SeatingMapInterface, MapCategoryT
     static public $schemaTypeScope = 'https://schema.org/SeatingMap';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MapCategoryType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

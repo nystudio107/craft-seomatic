@@ -42,6 +42,13 @@ class Consortium extends MetaJsonLd implements ConsortiumInterface, Organization
     static public $schemaTypeScope = 'https://schema.org/Consortium';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Organization';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class Mass extends MetaJsonLd implements MassInterface, QuantityInterface, Intan
     static public $schemaTypeScope = 'https://schema.org/Mass';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Quantity';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

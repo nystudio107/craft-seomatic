@@ -41,6 +41,13 @@ class WearableSizeSystemContinental extends MetaJsonLd implements WearableSizeSy
     static public $schemaTypeScope = 'https://schema.org/WearableSizeSystemContinental';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'WearableSizeSystemEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class BroadcastFrequencySpecification extends MetaJsonLd implements BroadcastFre
     static public $schemaTypeScope = 'https://schema.org/BroadcastFrequencySpecification';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

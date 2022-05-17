@@ -41,6 +41,13 @@ class Mosque extends MetaJsonLd implements MosqueInterface, PlaceOfWorshipInterf
     static public $schemaTypeScope = 'https://schema.org/Mosque';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PlaceOfWorship';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

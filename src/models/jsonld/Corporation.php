@@ -41,6 +41,13 @@ class Corporation extends MetaJsonLd implements CorporationInterface, Organizati
     static public $schemaTypeScope = 'https://schema.org/Corporation';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Organization';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

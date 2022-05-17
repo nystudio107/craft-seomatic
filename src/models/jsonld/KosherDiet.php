@@ -41,6 +41,13 @@ class KosherDiet extends MetaJsonLd implements KosherDietInterface, RestrictedDi
     static public $schemaTypeScope = 'https://schema.org/KosherDiet';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'RestrictedDiet';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class StudioAlbum extends MetaJsonLd implements StudioAlbumInterface, MusicAlbum
     static public $schemaTypeScope = 'https://schema.org/StudioAlbum';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MusicAlbumProductionType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

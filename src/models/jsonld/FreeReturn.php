@@ -41,6 +41,13 @@ class FreeReturn extends MetaJsonLd implements FreeReturnInterface, ReturnFeesEn
     static public $schemaTypeScope = 'https://schema.org/FreeReturn';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'ReturnFeesEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

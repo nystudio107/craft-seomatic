@@ -41,6 +41,13 @@ class TrainStation extends MetaJsonLd implements TrainStationInterface, CivicStr
     static public $schemaTypeScope = 'https://schema.org/TrainStation';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CivicStructure';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

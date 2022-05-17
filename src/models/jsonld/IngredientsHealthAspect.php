@@ -41,6 +41,13 @@ class IngredientsHealthAspect extends MetaJsonLd implements IngredientsHealthAsp
     static public $schemaTypeScope = 'https://schema.org/IngredientsHealthAspect';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'HealthAspectEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

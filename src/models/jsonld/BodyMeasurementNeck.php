@@ -41,6 +41,13 @@ class BodyMeasurementNeck extends MetaJsonLd implements BodyMeasurementNeckInter
     static public $schemaTypeScope = 'https://schema.org/BodyMeasurementNeck';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

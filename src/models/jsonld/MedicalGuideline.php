@@ -47,6 +47,13 @@ class MedicalGuideline extends MetaJsonLd implements MedicalGuidelineInterface, 
     static public $schemaTypeScope = 'https://schema.org/MedicalGuideline';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalEntity';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

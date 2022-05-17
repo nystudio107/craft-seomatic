@@ -42,6 +42,13 @@ class MusicAlbumProductionType extends MetaJsonLd implements MusicAlbumProductio
     static public $schemaTypeScope = 'https://schema.org/MusicAlbumProductionType';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Enumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

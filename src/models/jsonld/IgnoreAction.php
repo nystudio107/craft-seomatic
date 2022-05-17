@@ -42,6 +42,13 @@ class IgnoreAction extends MetaJsonLd implements IgnoreActionInterface, AssessAc
     static public $schemaTypeScope = 'https://schema.org/IgnoreAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'AssessAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

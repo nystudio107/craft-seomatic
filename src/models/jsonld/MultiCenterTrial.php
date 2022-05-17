@@ -41,6 +41,13 @@ class MultiCenterTrial extends MetaJsonLd implements MultiCenterTrialInterface, 
     static public $schemaTypeScope = 'https://schema.org/MultiCenterTrial';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalTrialDesign';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class CommunicateAction extends MetaJsonLd implements CommunicateActionInterface
     static public $schemaTypeScope = 'https://schema.org/CommunicateAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'InteractAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

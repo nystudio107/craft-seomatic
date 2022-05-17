@@ -42,6 +42,13 @@ class BrokerageAccount extends MetaJsonLd implements BrokerageAccountInterface, 
     static public $schemaTypeScope = 'https://schema.org/BrokerageAccount';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'InvestmentOrDeposit';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

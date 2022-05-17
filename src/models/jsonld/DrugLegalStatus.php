@@ -41,6 +41,13 @@ class DrugLegalStatus extends MetaJsonLd implements DrugLegalStatusInterface, Me
     static public $schemaTypeScope = 'https://schema.org/DrugLegalStatus';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalIntangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

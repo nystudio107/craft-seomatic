@@ -42,6 +42,13 @@ class OwnershipInfo extends MetaJsonLd implements OwnershipInfoInterface, Struct
     static public $schemaTypeScope = 'https://schema.org/OwnershipInfo';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'StructuredValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class HealthAndBeautyBusiness extends MetaJsonLd implements HealthAndBeautyBusin
     static public $schemaTypeScope = 'https://schema.org/HealthAndBeautyBusiness';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'LocalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class PhotographAction extends MetaJsonLd implements PhotographActionInterface, 
     static public $schemaTypeScope = 'https://schema.org/PhotographAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'CreateAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

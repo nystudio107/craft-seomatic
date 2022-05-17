@@ -41,6 +41,13 @@ class Recruiting extends MetaJsonLd implements RecruitingInterface, MedicalStudy
     static public $schemaTypeScope = 'https://schema.org/Recruiting';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'MedicalStudyStatus';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

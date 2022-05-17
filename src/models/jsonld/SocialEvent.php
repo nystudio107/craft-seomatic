@@ -41,6 +41,13 @@ class SocialEvent extends MetaJsonLd implements SocialEventInterface, EventInter
     static public $schemaTypeScope = 'https://schema.org/SocialEvent';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'Event';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

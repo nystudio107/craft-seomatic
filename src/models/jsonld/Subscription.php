@@ -42,6 +42,13 @@ class Subscription extends MetaJsonLd implements SubscriptionInterface, PriceCom
     static public $schemaTypeScope = 'https://schema.org/Subscription';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PriceComponentTypeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class SalePrice extends MetaJsonLd implements SalePriceInterface, PriceTypeEnume
     static public $schemaTypeScope = 'https://schema.org/SalePrice';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public $schemaTypeExtends = 'PriceTypeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string
