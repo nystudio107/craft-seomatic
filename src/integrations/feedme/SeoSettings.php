@@ -45,7 +45,7 @@ class SeoSettings extends FeedMeField implements FeedMeFieldInterface
     /**
      * @inheritDoc
      */
-    public function getMappingTemplate()
+    public function getMappingTemplate(): string
     {
         return 'seomatic/_includes/integrations/feedme/seo-settings';
     }
@@ -53,7 +53,7 @@ class SeoSettings extends FeedMeField implements FeedMeFieldInterface
     /**
      * @inheritDoc
      */
-    public function parseField()
+    public function parseField(): mixed
     {
         $preppedData = [];
 
